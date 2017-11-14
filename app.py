@@ -22,6 +22,8 @@ from forms import *
 from models import *
 from database import init_db
 from helpers import napalm_dispatcher
+from netmiko import ConnectHandler
+
 
 # automatically tear down SQLAlchemy.
 @app.teardown_request
@@ -48,11 +50,32 @@ def home():
 def devices():
     devices = Device.query.all()
     return render_template('pages/devices.html', devices=devices)
+    
+@app.route('/add_devices')
+def add_devices():
+    return render_template('pages/add_devices.html')
 
 @app.route('/about')
 def about():
     return render_template('pages/about.html')
+    
+@app.route('/napalm')
+def napalm():
+    return render_template('pages/napalm.html')
 
+@app.route('/netmiko', methods=['GET', 'POST'])
+def netmiko():
+    form = NetmikoParametersForm(request.form)
+    if request.method == 'POST':
+        if 'save' in request.form:
+            pass
+    return render_template(
+                           'pages/netmiko.html', 
+                           variables={'script': 'aa'}, 
+                           devices={},
+                           form=form
+                           )
+                           
 @app.route('/login')
 def login():
     form = LoginForm(request.form)
@@ -95,20 +118,6 @@ def get_request(department_id):
     response = make_response(json.dumps(department_employees))
     response.content_type = 'application/json'
     return response
-    
-@app.route('/netmiko', methods=['GET', 'POST'])
-def netmiko():
-    form = NetmikoParametersForm(request.form)
-    if request.method == 'POST':
-        if 'save' in request.form:
-            pass
-    return render_template(
-                           'pages/netmiko.html', 
-                           drivers=('a', 'b'), 
-                           variables={'script': 'aa'}, 
-                           devices={},
-                           form=form
-                           )
     
 def populate_db():
     db.session.query(Device).delete()

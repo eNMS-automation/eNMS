@@ -4,7 +4,7 @@
 <title>{% block title %}{% endblock %}</title>
 
 <!-- meta -->
-<meta name="description" content="automation test regression">
+<meta name="description" content="Graphical automation">
 <meta name="author" content="Antoine Fourmy">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <!-- /meta -->
@@ -14,9 +14,6 @@
 <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-3.1.1.min.css">
 <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-theme-3.1.1.min.css" />
 <link type="text/css" rel="stylesheet" href="/static/css/layout.main.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css" />
 <!-- /styles -->
 
 <!-- scripts -->
@@ -44,6 +41,8 @@
             <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Home</a></li>
             <li {% if request.endpoint == 'about' %} class="active" {% endif %}><a href="{{ url_for('about') }}">About</a></li>
             <li {% if request.endpoint == 'devices' %} class="active" {% endif %}><a href="{{ url_for('devices') }}">Devices</a></li>
+            <li {% if request.endpoint == 'netmiko' %} class="active" {% endif %}><a href="{{ url_for('netmiko') }}">Netmiko</a></li>
+            <li {% if request.endpoint == 'napalm' %} class="active" {% endif %}><a href="{{ url_for('napalm') }}">NAPALM getters</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">Regression tests <b class="caret"></b></a>
               <ul class="dropdown-menu">

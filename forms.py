@@ -34,8 +34,8 @@ class NetmikoParametersForm(FlaskForm):
     name = TextField('Username', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
     drivers = [(driver, driver) for driver in netmiko_drivers]
-    department = SelectField('', choices=drivers)
-    department2 = RadioField('', choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
-    employee = SelectField('', choices=())
+    department = SelectField('', [optional()], choices=drivers)
+    department2 = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
+    employee = SelectField('', [optional()], choices=())
     script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField()

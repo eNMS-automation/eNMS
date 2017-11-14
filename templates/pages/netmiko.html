@@ -1,12 +1,13 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<form method="post" class="form form-group" enctype=multipart/form-data style="width:100%">
+<form action="" method="post" class="form form-group" enctype=multipart/form-data style="width:100%">
+
 <div class="col-md-3">      
     <div class="panel panel-default">
         <div class="panel-heading">Login</div>
         <div class="panel-body">
-
+    {{ form.csrf_token }}
 {{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}<br>
 {{ form.password(class_ = 'form-control last-input', placeholder = form.password.label.text, required = true) }}<br>
 {{ form.department(id="department_select", class="form-control") }}
@@ -20,8 +21,7 @@
 {{ form.file() }}
 <br><br>
 <button data-target="#preview-script" data-toggle="modal" type="button" class="btn btn-primary btn-lg btn-block">Preview script</button>
-<input type="submit" value="Send script" class="btn btn-primary btn-lg btn-block">
-
+<input type="submit" name ="test" value="Send script" class="btn btn-primary btn-lg btn-block">
 
         </div>
     </div>

@@ -1,11 +1,12 @@
+from flask import Flask, render_template, request, make_response
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
+from inspect import stack
+from os.path import abspath, dirname, join
 import json
 import logging
 import os
 import sys
-from flask import Flask, render_template, request, make_response
-from flask_sqlalchemy import SQLAlchemy
-from inspect import stack
-from os.path import abspath, dirname
 
 # prevent python from writing *.pyc files / __pycache__ folders
 sys.dont_write_bytecode = True
@@ -18,12 +19,30 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# allowed extensions depending on the webpage
+allowed_extensions = {'devices': {'xls'}, 'netmiko': {'yaml'}}
+
+# dict that maps an IP address to a Device object
+devices = {}
+# all variables used for sending script with netmiko
+variables = {}
+
+def allowed_file(name, webpage):
+    allowed_syntax = '.' in name
+    allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions[webpage]
+    return allowed_syntax and allowed_extension
+
 from forms import *
 from models import *
 from database import init_db
 from helpers import napalm_dispatcher
 from netmiko import ConnectHandler
-
+from jinja2 import Template
+from yaml import load
 
 # automatically tear down SQLAlchemy.
 @app.teardown_request
@@ -68,7 +87,17 @@ def netmiko():
     form = NetmikoParametersForm(request.form)
     print(form.errors, form.validate_on_submit(), file=sys.stderr)
     if form.validate_on_submit() and 'test' in request.form:
-        return render_template('pages/about.html')
+        print(request.files, file=sys.stderr)
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        filename = request.files['file'].filename
+        if 'file' in request.files and filename:
+            if allowed_file(filename, 'netmiko'):
+                filename = secure_filename(filename)
+                filepath = join(app.config['UPLOAD_FOLDER'], filename)
+                with open(filepath, 'r') as f:
+                    test = load(f)
+                    print(test, file=sys.stderr)
     return render_template(
                            'pages/netmiko.html', 
                            variables={'script': 'aa'}, 

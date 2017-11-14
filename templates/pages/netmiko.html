@@ -20,8 +20,8 @@
 {% endfor %}
 {{ form.file() }}
 <br><br>
-<button data-target="#preview-script" data-toggle="modal" type="button" class="btn btn-primary btn-lg btn-block">Preview script</button>
-<input type="submit" name ="test" value="Send script" class="btn btn-primary btn-lg btn-block">
+<button  data-toggle="modal" type="button" class="btn btn-primary btn-lg btn-block">Preview script</button>
+<input type="submit" name ="test" data-target="#preview-script" value="Send script" class="btn btn-primary btn-lg btn-block">
 
         </div>
     </div>
@@ -69,6 +69,9 @@
     </div>
 </div>
 
+{% if show_example_modal %}
+    <span class="example"  data-toggle="modal" data-target="#showExample" <a href="/showExample">Testing</a></span>
+{% endif %}
 <div class="bootstrap">
     <div class="modal fade" id="send-script" tabindex="-1">
         <div class="modal-dialog">

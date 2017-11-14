@@ -1,0 +1,30 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>List of all devices</h1>
+</div>
+<p class="lead">
+
+<table class="table table-striped header-fixed">
+  <thead>
+    <th>Hostname</th>
+    <th>IP address</th>
+    <th>Operating System</th>
+  </thead>
+
+  <tbody>    
+    {% for device in devices %}  
+        <tr>
+            <td>{{ device.hostname }}</td>
+            <td>{{ device.IP }}</td>
+            <td>{{ device.OS }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+
+ {{ device }} <br></p>
+
+{% endblock %}

@@ -40,8 +40,20 @@
           <ul class="nav navbar-nav">
             <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Home</a></li>
             <li {% if request.endpoint == 'about' %} class="active" {% endif %}><a href="{{ url_for('about') }}">About</a></li>
-            <li {% if request.endpoint == 'devices' %} class="active" {% endif %}><a href="{{ url_for('devices') }}">Devices</a></li>
+            
+            <!-- Devices menu -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li {% if request.endpoint == 'devices' %} class="active" {% endif %}><a href="{{ url_for('devices') }}">List of devices</a></li>
+                <li {% if request.endpoint == 'manage_devices' %} class="active" {% endif %}><a href="{{ url_for('manage_devices') }}">Manage devices</a></li>
+              </ul>
+            </li>
+            
+            <!-- Netmiko menu -->
             <li {% if request.endpoint == 'netmiko' %} class="active" {% endif %}><a href="{{ url_for('netmiko') }}">Netmiko</a></li>
+            
+            <!-- NAPALM menu -->
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">NAPALM <b class="caret"></b></a>
               <ul class="dropdown-menu">

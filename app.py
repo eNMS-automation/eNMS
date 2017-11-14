@@ -71,8 +71,8 @@ def devices():
     return render_template('pages/devices.html', devices=devices)
     
 @app.route('/add_devices')
-def add_devices():
-    return render_template('pages/add_devices.html')
+def manage_devices():
+    return render_template('pages/manage_devices.html')
 
 @app.route('/about')
 def about():
@@ -100,7 +100,8 @@ def netmiko():
                     print(test, file=sys.stderr)
     return render_template(
                            'pages/netmiko.html', 
-                           variables={'script': 'aa'}, 
+                           show_example_modal=True,
+                           variables=variables, 
                            devices={},
                            form=form
                            )

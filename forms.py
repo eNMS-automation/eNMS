@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, SelectField, TextAreaField, RadioField, FileField
 from wtforms.validators import DataRequired, EqualTo, Length, optional
+from flask_wtf.file import FileAllowed
 from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
 
 class RegisterForm(FlaskForm):
@@ -38,4 +39,4 @@ class NetmikoParametersForm(FlaskForm):
     department2 = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
     employee = SelectField('', [optional()], choices=())
     script = TextAreaField('', [optional(), Length(max=200)])
-    file = FileField()
+    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])

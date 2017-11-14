@@ -1,9 +1,9 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, SelectField, TextAreaField, RadioField, FileField
 from wtforms.validators import DataRequired, EqualTo, Length, optional
 from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
 
-class RegisterForm(Form):
+class RegisterForm(FlaskForm):
 
     length_validator = [DataRequired(), Length(min=6, max=25)]
     match_constraint = EqualTo('password', message='Passwords must match')
@@ -14,23 +14,23 @@ class RegisterForm(Form):
     password = PasswordField('Password', length_validator)
     confirm = PasswordField('Repeat Password', match_validator)
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
 
     name = TextField('Username', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
 
-class ForgotForm(Form):
+class ForgotForm(FlaskForm):
     
     email = TextField('Email', validators=[DataRequired(), Length(min=6, max=40)])
 
-class TestForm(Form):
+class TestForm(FlaskForm):
     department = SelectField('', choices=())
     employee = SelectField('', choices=())
     
 exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
 netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
     
-class NetmikoParametersForm(Form):
+class NetmikoParametersForm(FlaskForm):
     name = TextField('Username', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
     drivers = [(driver, driver) for driver in netmiko_drivers]

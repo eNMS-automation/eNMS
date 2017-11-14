@@ -1,21 +1,26 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<form method="post" class="form form-group" style="width:100%">
+<form method="post" class="form form-group" enctype=multipart/form-data style="width:100%">
 <div class="col-md-3">      
     <div class="panel panel-default">
         <div class="panel-heading">Login</div>
         <div class="panel-body">
 
 {{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}<br>
-{{ form.password(class_ = 'form-control last-input', placeholder = form.password.label.text, required = true) }}
+{{ form.password(class_ = 'form-control last-input', placeholder = form.password.label.text, required = true) }}<br>
 {{ form.department(id="department_select", class="form-control") }}
 <br>
-{{ form.employee(id="employee_select", class="form-control") }}
-{{ form.department2(id="department_select", class="form-control") }}
+{% for subfield in form.department2 %}
+<tr>
+    <td>{{ subfield }}</td>
+    <td>{{ subfield.label }}</td>
+</tr>
+{% endfor %}
 {{ form.file() }}
 <br><br>
-<input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block" disabled>
+<button data-target="#preview-script" data-toggle="modal" type="button" class="btn btn-primary btn-lg btn-block">Preview script</button>
+<input type="submit" value="Send script" class="btn btn-primary btn-lg btn-block">
 
 
         </div>
@@ -31,62 +36,6 @@
     </div>
 </div>
 
-</form>
-
-
-
-<form action="{{ url_for('netmiko') }}" enctype=multipart/form-data method="post">
-    <table style="width:100%">
-
-        <tr>
-        
-            <td style="width:20%">
-
-                <fieldset>
-                
-                    <legend><span class="number">1</span>Configure Netmiko</legend>
-                                    
-                    <label for="driver">Netmiko driver</label>
-                    <select class="form-control" id="select_driver" name="select_driver">
-                        <option value="">Choose a driver</option>
-                        {% for driver in drivers %}
-                            <option value="{{ driver }}">{{ driver }}</option>
-                        {% endfor %}
-                    </select>
-                    
-                    <label for="global_delay_factor">Global delay factor :</label>
-                    <input type="number" min="1" max="10" id="global_delay_factor" name="global_delay_factor"><br/>
-                    
-                    <label for="protocol">Protocol :</label>
-                    <input type="radio" id="SSH" value="SSH" name="protocol">
-                    <label for="SSH" class="light">SSH</label>
-                    <input type="radio" id="telnet" value="telnet" name="protocol">
-                    <label for="telnet" class="light">Telnet</label>
-                    
-                    <label>Import a YAML file for the script:</label><br><br>
-                    <input type=file name=file><br>
-                
-                </fieldset>
-                
-                <button type="submit" name="save">Save</button>
-
-            </td>
-            
-            <td style="width:80%">
-                
-                    <fieldset>
-                    
-                        <legend><span class="number">2</span>Preview</legend>
-                        <textarea id="script" name="script">{{ variables.get('raw_script') }} </textarea>
-
-                    </fieldset>
-                    
-                        <button data-target="#preview-script" data-toggle="modal" type="button">Preview</button>
-                        
-            </td>
-            
-        </tr>
-    </table>
 </form>
 
 </div>

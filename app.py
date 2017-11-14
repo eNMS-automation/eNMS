@@ -66,6 +66,8 @@ def napalm():
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():
     form = NetmikoParametersForm(request.form)
+    if form.validate_on_submit():
+        return render_template('pages/about.html')
     if request.method == 'POST':
         if 'save' in request.form:
             pass

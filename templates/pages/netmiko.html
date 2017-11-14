@@ -1,0 +1,153 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<form method="post" class="form form-group" style="width:100%">
+<div class="col-md-3">      
+    <div class="panel panel-default">
+        <div class="panel-heading">Login</div>
+        <div class="panel-body">
+
+{{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}<br>
+{{ form.password(class_ = 'form-control last-input', placeholder = form.password.label.text, required = true) }}
+{{ form.department(id="department_select", class="form-control") }}
+<br>
+{{ form.employee(id="employee_select", class="form-control") }}
+<br><br>
+<p class="pull-left"><a href="{{ url_for('forgot') }}">Forgot Password?</a></p>
+<p class="pull-right"><a href="{{ url_for('register') }}">Register</a></p>
+<input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block" disabled>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8">      
+    <div class="panel panel-default" style="height: 370px">
+        <div class="panel-heading">Script</div>
+        <div class="panel-body">
+        {{ form.script(id="script", class="form-control", rows='13') }}
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+
+<form action="{{ url_for('netmiko') }}" enctype=multipart/form-data method="post">
+    <table style="width:100%">
+
+        <tr>
+        
+            <td style="width:20%">
+
+                <fieldset>
+                
+                    <legend><span class="number">1</span>Configure Netmiko</legend>
+                                    
+                    <label for="driver">Netmiko driver</label>
+                    <select class="form-control" id="select_driver" name="select_driver">
+                        <option value="">Choose a driver</option>
+                        {% for driver in drivers %}
+                            <option value="{{ driver }}">{{ driver }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <label for="global_delay_factor">Global delay factor :</label>
+                    <input type="number" min="1" max="10" id="global_delay_factor" name="global_delay_factor"><br/>
+                    
+                    <label for="protocol">Protocol :</label>
+                    <input type="radio" id="SSH" value="SSH" name="protocol">
+                    <label for="SSH" class="light">SSH</label>
+                    <input type="radio" id="telnet" value="telnet" name="protocol">
+                    <label for="telnet" class="light">Telnet</label>
+                    
+                    <label>Import a YAML file for the script:</label><br><br>
+                    <input type=file name=file><br>
+                
+                </fieldset>
+                
+                <button type="submit" name="save">Save</button>
+
+            </td>
+            
+            <td style="width:80%">
+                
+                    <fieldset>
+                    
+                        <legend><span class="number">2</span>Preview</legend>
+                        <textarea id="script" name="script">{{ variables.get('raw_script') }} </textarea>
+
+                    </fieldset>
+                    
+                        <button data-target="#preview-script" data-toggle="modal" type="button">Preview</button>
+                        
+            </td>
+            
+        </tr>
+    </table>
+</form>
+
+</div>
+<div class="bootstrap">
+    <div class="modal fade" id="preview-script" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type=
+                    "button"><span>&times;</span></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+
+                <div class="modal-body">
+                    {% for device in devices.values() %}
+                        <input type="checkbox" name="delete" value="{{ device.ip_address }}">
+                        <label for="ip_address">
+                        {{ device.ip_address }} (user: {{ device.username }})
+                        </label><br>
+                    {% endfor %}
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type=
+                    "button">Close</button> <button class="btn btn-primary"
+                    type="button">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bootstrap">
+    <div class="modal fade" id="send-script" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type=
+                    "button"><span>&times;</span></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+
+                <div class="modal-body">
+                {% if variables.get('script') %}
+                {% for line in variables.get('script') %}
+                {{ line }}<br>
+                {% endfor %}
+                {% endif %}
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type=
+                    "button">Close</button> <button class="btn btn-primary"
+                    type="button">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

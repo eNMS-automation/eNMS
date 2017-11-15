@@ -35,21 +35,27 @@ class NetmikoParametersForm(FlaskForm):
     netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
     
     drivers = [(driver, driver) for driver in netmiko_drivers]
-    department = SelectField('', [optional()], choices=drivers)
-    department2 = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
+    driver = SelectField('', [optional()], choices=drivers)
+    protocol = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
+    global_delay_factor = FloatField('global_delay_factor', [optional()])
     employee = SelectField('', [optional()], choices=())
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     
 class NetmikoDevicesForm(FlaskForm):
-    department2 = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
-    employee = SelectField('', [optional()], choices=())
     assigned = SelectMultipleField('Assigned', choices=())
     script = TextAreaField('', [optional(), Length(max=200)])
-    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
 
-class AddOneDevice(FlaskForm):
+# devices can be added to the database either one by one via the AddDevice
+# form, or all at once by importing an Excel or a CSV file.
+class AddDevice(FlaskForm):
     hostname = TextField('Hostname', [])
     ip_address = TextField('IP address', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
     secret = PasswordField('Secret password', [])
+    
+class AddDevices(FlaskForm):
+    device_file = FileField('', validators=[FileAllowed(['xls', 'xlsx', 'csv'], 'Excel or CSV file only')])
+    
+class DeleteDevice(FlaskForm):
+    devices = SelectMultipleField('Devices', choices=())

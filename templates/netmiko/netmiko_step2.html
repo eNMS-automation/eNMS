@@ -9,8 +9,7 @@
         <div class="panel-body">
     {{ form.csrf_token }}
 
-{{ form.assigned(id="assigned", class="form-control") }}
-<br><br>
+{{ form.assigned(id="assigned", class="form-control", size='20') }}<br>
 <button data-target="#confirm" data-toggle="modal" type="button" class="btn btn-primary btn-lg btn-block">Send script</button>
 
         </div>
@@ -21,7 +20,7 @@
     <div class="panel panel-default" style="height: 500px">
         <div class="panel-heading">Script</div>
         <div class="panel-body">
-        {{ form.script(id="script", class="form-control", size='20') }}
+        {{ form.script(id="script", class="form-control", rows='20') }}
         </div>
     </div>
 </div>
@@ -38,12 +37,11 @@
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal" type=
                     "button"><span>&times;</span></button>
-
                     <h4 class="modal-title" id="myModalLabel">Confirm</h4>
                 </div>
 
                 <div class="modal-body">
-                    aaa
+                    Summary of the parameters:
                 </div>
 
                 <div class="modal-footer">

@@ -2,29 +2,52 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-<div class="page-header">
-  <h1>List of all devices</h1>
+<div class="col-md-4">
+    <form action="" method="post" class="form form-group">
+        <div class="panel panel-default" style="height: 500px">
+            <div class="panel-heading">Add a device</div>
+            <div class="panel-body">
+    <input type="submit" name ="add_device" data-target="#preview-script" value="Add device" class="btn btn-primary btn-lg btn-block">
+            </div>
+        </div>
+    </form>
 </div>
-<p class="lead">
 
-<table class="table table-striped header-fixed">
-  <thead>
-    <th>Hostname</th>
-    <th>IP address</th>
-    <th>Operating System</th>
-  </thead>
+<div class="col-md-4">  
+    <form action="" method="post" class="form form-group" enctype=multipart/form-data>    
+        <div class="panel panel-default" style="height: 500px">
+            <div class="panel-heading"><h3 class="panel-title">Add multiple devices</h3></div>
+            <div class="panel-body">
+                <legend> Format of the file :</legend>
+                
+                Multiple devices can be created at once by importing an Excel (.xls, .xlsx) or a CSV file.<br>
+                The input file must contain, in the following order:<br><br>
+                <ul class="list-group">
+                <li class="list-group-item">Hostname <span class="badge">1</span></li>
+                <li class="list-group-item">IP address <span class="badge">2</span></li>
+                <li class="list-group-item">Password <span class="badge">3</span></li>
+                <li class="list-group-item">Password <span class="badge">4</span></li>
+                </ul> 
+            
+            {{ add_devices_form.device_file() }}<br><br>
+<input type="submit" name ="add_devices" data-target="#preview-script" value="Add device" class="btn btn-primary btn-lg btn-block">
+            </div>
+        </div>
+    </form>
+</div>
 
-  <tbody>    
-    {% for device in devices %}  
-        <tr>
-            <td>{{ device.hostname }}</td>
-            <td>{{ device.IP }}</td>
-            <td>{{ device.OS }}</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table> 
-
- {{ device }} <br></p>
+<div class="col-md-4">  
+    <form action="" method="post" class="form form-group">    
+        <div class="panel panel-default" style="height: 500px">
+            <div class="panel-heading">Delete devices</div>
+            <div class="panel-body">
+            <legend> Current list of devices :</legend>
+            {{ delete_device_form.devices(id="delete_devices", class="form-control", size='17') }}<br><br>
+<input type="submit" name ="delete" data-target="#preview-script" value="Delete selection" class="btn btn-primary btn-lg btn-block">
+            </div>
+        </div>
+    </form>
+</div>
 
 {% endblock %}
+

@@ -72,7 +72,15 @@ def devices():
     
 @app.route('/add_devices')
 def manage_devices():
-    return render_template('devices/manage_devices.html')
+    add_device_form = AddDevice(request.form)
+    add_devices_form = AddDevices(request.form)
+    delete_device_form = DeleteDevice(request.form)
+    return render_template(
+                           'devices/manage_devices.html',
+                           add_device_form = add_device_form,
+                           add_devices_form = add_devices_form,
+                           delete_device_form = delete_device_form
+                           )
 
 @app.route('/about')
 def about():

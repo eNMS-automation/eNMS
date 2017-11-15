@@ -3,25 +3,28 @@
 {% block content %}
 <form action="" method="post" class="form form-group" enctype=multipart/form-data style="width:100%">
 
-
 <div class="col-md-3">      
     <div class="panel panel-default" style="height: 500px">
-        <div class="panel-heading">Login</div>
+        <div class="panel-heading">Netmiko parameters</div>
         <div class="panel-body">
     {{ form.csrf_token }}
 Select a driver :
 <br>
-{{ form.department(id="department_select", class="form-control") }}
+{{ form.driver(id="driver", class="form-control") }}
 <br>
-{% for subfield in form.department2 %}
+{% for subfield in form.protocol %}
 <tr>
     <td>{{ subfield }}</td>
     <td>{{ subfield.label }}</td>
 </tr>
-{% endfor %}
+{% endfor %}<br><br>
+Global delay factor :
+{{ form.global_delay_factor(id="global_delay_factor", class="form-control") }}<br><br>
+YAML file used for Jinja2 :
 {{ form.file() }}
 <br><br>
-<input type="submit" name ="test" data-target="#preview-script" value="Send script" class="btn btn-primary btn-lg btn-block">
+
+<input type="submit" name ="next" data-target="#preview-script" value="Next" class="btn btn-primary btn-lg btn-block">
 
         </div>
     </div>
@@ -29,7 +32,7 @@ Select a driver :
 
 <div class="col-md-9">      
     <div class="panel panel-default" style="height: 500px">
-        <div class="panel-heading">Script</div>
+        <div class="panel-heading">Script (list of commands or Jinja2 template)</div>
         <div class="panel-body">
         {{ form.raw_script(id="raw_script", class="form-control", rows='20') }}
         </div>

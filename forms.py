@@ -1,8 +1,11 @@
 from flask_wtf import FlaskForm
+from helpers import napalm_getters
 from wtforms import *
 from wtforms.validators import DataRequired, EqualTo, Length, optional
 from flask_wtf.file import FileAllowed
 from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
+
+## Form for registering / logging in 
 
 class RegisterForm(FlaskForm):
 
@@ -28,6 +31,25 @@ class TestForm(FlaskForm):
     department = SelectField('', choices=())
     employee = SelectField('', choices=())
     
+## Forms for managing devices
+    
+# devices can be added to the database either one by one via the AddDevice
+# form, or all at once by importing an Excel or a CSV file.
+class AddDevice(FlaskForm):
+    ip_address = TextField('IP address', [optional()])
+    password = PasswordField('Password', [optional()])
+    os = TextField('Operating System', [optional()])
+    hostname = TextField('Hostname', [optional()])
+    secret = PasswordField('Secret password', [optional()])
+    
+class AddDevices(FlaskForm):
+    device_file = FileField('', validators=[FileAllowed(['xls', 'xlsx', 'csv'], 'Excel or CSV file only')])
+    
+class DeleteDevice(FlaskForm):
+    devices = SelectMultipleField('Devices', choices=())
+    
+## Forms for Netmiko
+    
 class NetmikoParametersForm(FlaskForm):
     
     # exclude base driver from Netmiko available drivers
@@ -43,20 +65,14 @@ class NetmikoParametersForm(FlaskForm):
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     
 class NetmikoDevicesForm(FlaskForm):
-    assigned = SelectMultipleField('Assigned', choices=())
-    script = TextAreaField('', [optional(), Length(max=200)])
-
-# devices can be added to the database either one by one via the AddDevice
-# form, or all at once by importing an Excel or a CSV file.
-class AddDevice(FlaskForm):
-    ip_address = TextField('IP address', [DataRequired()])
-    password = PasswordField('Password', [DataRequired()])
-    os = TextField('Operating System', [DataRequired()])
-    hostname = TextField('Hostname', [])
-    secret = PasswordField('Secret password', [])
-    
-class AddDevices(FlaskForm):
-    device_file = FileField('', validators=[FileAllowed(['xls', 'xlsx', 'csv'], 'Excel or CSV file only')])
-    
-class DeleteDevice(FlaskForm):
     devices = SelectMultipleField('Devices', choices=())
+    script = TextAreaField('', [optional(), Length(max=200)])
+    
+## Forms for NAPALM
+
+class NapalmGettersForm(FlaskForm):
+    # the list of devices is updated at rendering time by querying the database
+    devices = SelectField('', [optional()], choices=())
+    function_choices = [(function, function) for function in napalm_getters]
+    functions = SelectMultipleField('Devices', choices=function_choices)
+    output = TextAreaField('', [optional()])

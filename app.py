@@ -67,14 +67,30 @@ def home():
     
 @app.route('/devices')
 def devices():
-    devices = Device.query.all()
-    return render_template('devices/devices.html', devices=devices)
+    return render_template('devices/devices.html', devices=Device.query.all())
     
-@app.route('/add_devices')
+@app.route('/manage_devices', methods=['GET', 'POST'])
 def manage_devices():
     add_device_form = AddDevice(request.form)
     add_devices_form = AddDevices(request.form)
     delete_device_form = DeleteDevice(request.form)
+    if add_device_form.validate_on_submit() and 'add_device' in request.form:
+        print(request.form, file=sys.stderr)
+        print((request.form['hostname'], request.form['ip_address']), file=sys.stderr)
+        device = Device(
+                        hostname = request.form['hostname'], 
+                        IP = request.form['ip_address'], 
+                        OS = request.form['os']
+                        )
+        db.session.add(device)
+        db.session.commit()
+        delete_device_form.devices.choices = [(d, d) for d in Device.query.all()]
+        return render_template(
+                               'devices/manage_devices.html',
+                               add_device_form = add_device_form,
+                               add_devices_form = add_devices_form,
+                               delete_device_form = delete_device_form
+                               )
     return render_template(
                            'devices/manage_devices.html',
                            add_device_form = add_device_form,
@@ -86,9 +102,22 @@ def manage_devices():
 def about():
     return render_template('other/about.html')
     
-@app.route('/napalm')
-def napalm():
-    return render_template('napalm/napalm.html')
+@app.route('/napalm_getters')
+def napalm_getters():
+    napalm_getters_form = NapalmGettersForm(request.form)
+    napalm_getters_form.devices.choices = [(d, d) for d in Device.query.all()]
+    return render_template(
+                           'napalm/napalm_getters.html',
+                           form = napalm_getters_form
+                           )
+                           
+@app.route('/napalm_configuration')
+def napalm_configuration():
+    return render_template('napalm/napalm_configuration.html')
+                           
+@app.route('/napalm_daemon')
+def napalm_daemon():
+    return render_template('napalm/napalm_daemon.html')
 
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():
@@ -115,8 +144,7 @@ def netmiko():
             variables['script'] = raw_script
         # before rendering the second step, update the list of available
         # devices by querying the database, and the script
-        all_devices = Device.query.all()
-        device_selection_form.assigned.choices = [(d, d) for d in all_devices]
+        device_selection_form.devices.choices = [(d, d) for d in Device.query.all()]
         device_selection_form.script.data = variables['script']
         return render_template(
                                'netmiko/netmiko_step2.html',

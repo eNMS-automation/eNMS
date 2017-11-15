@@ -7,17 +7,18 @@
         <div class="panel panel-default" style="height: 500px">
             <div class="panel-heading">Add a device</div>
             <div class="panel-body">
+                {{ add_device_form.csrf_token }}
                 <legend> Expected input data :</legend>
                 
                 To create a device, two parameters are mandatories: IP address and password.
                 The secret password is considered optional, although it may be required to change the configuration of a device.<br><br>
                 
-    {{ add_device_form.hostname(class="form-control first-input", placeholder=add_device_form.hostname.label.text) }}
-    {{ add_device_form.ip_address(class='form-control last-input', placeholder=add_device_form.ip_address.label.text, required=true) }}
-    {{ add_device_form.os(class='form-control last-input', placeholder=add_device_form.os.label.text, required=true) }}
-    {{ add_device_form.password(class='form-control last-input', placeholder=add_device_form.password.label.text, required=true) }}
-    {{ add_device_form.secret(class='form-control last-input', placeholder=add_device_form.secret.label.text) }}<hr style="height:5px; visibility:hidden;" />
-        <input type="submit" name ="add_device" data-target="#preview-script" value="Add device" class="btn btn-primary btn-lg btn-block">
+                {{ add_device_form.ip_address(class='form-control last-input', placeholder=add_device_form.ip_address.label.text, required=true) }}
+                {{ add_device_form.os(class='form-control last-input', placeholder=add_device_form.os.label.text, required=true) }}
+                {{ add_device_form.password(class='form-control last-input', placeholder=add_device_form.password.label.text, required=true) }}
+                {{ add_device_form.hostname(class="form-control first-input", placeholder=add_device_form.hostname.label.text) }}
+                {{ add_device_form.secret(class='form-control last-input', placeholder=add_device_form.secret.label.text) }}<hr style="height:5px; visibility:hidden;" />
+                <input type="submit" name="add_device" value="Add device" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
     </form>
@@ -40,7 +41,7 @@
                 </ul> 
             
             {{ add_devices_form.device_file() }}<hr style="height:16px; visibility:hidden;" />
-<input type="submit" name ="add_devices" data-target="#preview-script" value="Add multiple devices" class="btn btn-primary btn-lg btn-block">
+            <input type="submit" name ="add_devices" value="Add multiple devices" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
     </form>
@@ -53,7 +54,7 @@
             <div class="panel-body">
             <legend> Current list of devices :</legend>
             {{ delete_device_form.devices(id="delete_devices", class="form-control", size='17') }}<hr style="height:8px; visibility:hidden;" />
-<input type="submit" name ="delete" data-target="#preview-script" value="Delete selection" class="btn btn-primary btn-lg btn-block">
+<input type="submit" name ="delete" value="Delete selection" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
     </form>

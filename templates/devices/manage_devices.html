@@ -7,7 +7,17 @@
         <div class="panel panel-default" style="height: 500px">
             <div class="panel-heading">Add a device</div>
             <div class="panel-body">
-    <input type="submit" name ="add_device" data-target="#preview-script" value="Add device" class="btn btn-primary btn-lg btn-block">
+                <legend> Expected input data :</legend>
+                
+                To create a device, two parameters are mandatories: IP address and password.
+                The secret password is considered optional, although it may be required to change the configuration of a device.<br><br>
+                
+    {{ add_device_form.hostname(class="form-control first-input", placeholder=add_device_form.hostname.label.text) }}
+    {{ add_device_form.ip_address(class='form-control last-input', placeholder=add_device_form.ip_address.label.text, required=true) }}
+    {{ add_device_form.os(class='form-control last-input', placeholder=add_device_form.os.label.text, required=true) }}
+    {{ add_device_form.password(class='form-control last-input', placeholder=add_device_form.password.label.text, required=true) }}
+    {{ add_device_form.secret(class='form-control last-input', placeholder=add_device_form.secret.label.text) }}<hr style="height:5px; visibility:hidden;" />
+        <input type="submit" name ="add_device" data-target="#preview-script" value="Add device" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
     </form>
@@ -18,19 +28,19 @@
         <div class="panel panel-default" style="height: 500px">
             <div class="panel-heading"><h3 class="panel-title">Add multiple devices</h3></div>
             <div class="panel-body">
-                <legend> Format of the file :</legend>
-                
-                Multiple devices can be created at once by importing an Excel (.xls, .xlsx) or a CSV file.<br>
+
+                Multiple devices can be created at once by importing an Excel (.xls, .xlsx) or a CSV file. (.csv)<br>
                 The input file must contain, in the following order:<br><br>
                 <ul class="list-group">
-                <li class="list-group-item">Hostname <span class="badge">1</span></li>
-                <li class="list-group-item">IP address <span class="badge">2</span></li>
-                <li class="list-group-item">Password <span class="badge">3</span></li>
-                <li class="list-group-item">Password <span class="badge">4</span></li>
+                <li class="list-group-item">IP address <span class="badge">1</span></li>
+                <li class="list-group-item">Password <span class="badge">2</span></li>
+                <li class="list-group-item">Operating System<span class="badge">3</span></li>
+                <li class="list-group-item">Hostname (optional)<span class="badge">4</span></li>
+                <li class="list-group-item">Secret (optional) <span class="badge">5</span></li>
                 </ul> 
             
-            {{ add_devices_form.device_file() }}<br><br>
-<input type="submit" name ="add_devices" data-target="#preview-script" value="Add device" class="btn btn-primary btn-lg btn-block">
+            {{ add_devices_form.device_file() }}<hr style="height:16px; visibility:hidden;" />
+<input type="submit" name ="add_devices" data-target="#preview-script" value="Add multiple devices" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
     </form>
@@ -42,7 +52,7 @@
             <div class="panel-heading">Delete devices</div>
             <div class="panel-body">
             <legend> Current list of devices :</legend>
-            {{ delete_device_form.devices(id="delete_devices", class="form-control", size='17') }}<br><br>
+            {{ delete_device_form.devices(id="delete_devices", class="form-control", size='17') }}<hr style="height:8px; visibility:hidden;" />
 <input type="submit" name ="delete" data-target="#preview-script" value="Delete selection" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>

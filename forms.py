@@ -49,9 +49,10 @@ class NetmikoDevicesForm(FlaskForm):
 # devices can be added to the database either one by one via the AddDevice
 # form, or all at once by importing an Excel or a CSV file.
 class AddDevice(FlaskForm):
-    hostname = TextField('Hostname', [])
     ip_address = TextField('IP address', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
+    os = TextField('Operating System', [DataRequired()])
+    hostname = TextField('Hostname', [])
     secret = PasswordField('Secret password', [])
     
 class AddDevices(FlaskForm):

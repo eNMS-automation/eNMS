@@ -58,9 +58,9 @@
               <a class="dropdown-toggle" data-toggle="dropdown">NAPALM <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li {% if request.endpoint == 'napalm' %} class="active" {% endif %}><a href="{{ url_for('napalm') }}">NAPALM getters</a></li>
+                <li {% if request.endpoint == 'napalm' %} class="active" {% endif %}><a href="{{ url_for('napalm') }}">NAPALM configuration</a></li>
                 <li class="divider"></li>
-                <li class="dropdown-header">Other type of test</li>
-                <li><a>Test</a></li>
+                <li><a>NAPALM daemon</a></li>
               </ul>
             </li>
           </ul>

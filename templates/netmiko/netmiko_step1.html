@@ -8,8 +8,6 @@
         <div class="panel-heading">Login</div>
         <div class="panel-body">
     {{ form.csrf_token }}
-{{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}<br>
-{{ form.password(class_ = 'form-control last-input', placeholder = form.password.label.text, required = true) }}<br>
 {{ form.department(id="department_select", class="form-control") }}
 <br>
 {% for subfield in form.department2 %}
@@ -20,7 +18,6 @@
 {% endfor %}
 {{ form.file() }}
 <br><br>
-<button  data-toggle="modal" type="button" class="btn btn-primary btn-lg btn-block">Preview script</button>
 <input type="submit" name ="test" data-target="#preview-script" value="Send script" class="btn btn-primary btn-lg btn-block">
 
         </div>
@@ -69,9 +66,6 @@
     </div>
 </div>
 
-{% if show_example_modal %}
-    <span class="example"  data-toggle="modal" data-target="#showExample" <a href="/showExample">Testing</a></span>
-{% endif %}
 <div class="bootstrap">
     <div class="modal fade" id="send-script" tabindex="-1">
         <div class="modal-dialog">

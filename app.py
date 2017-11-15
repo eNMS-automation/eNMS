@@ -63,31 +63,30 @@ def login_required(test):
 
 @app.route('/')
 def home():
-    return render_template('pages/home.html')
+    return render_template('other/home.html')
     
 @app.route('/devices')
 def devices():
     devices = Device.query.all()
-    return render_template('pages/devices.html', devices=devices)
+    return render_template('devices/devices.html', devices=devices)
     
 @app.route('/add_devices')
 def manage_devices():
-    return render_template('pages/manage_devices.html')
+    return render_template('devices/manage_devices.html')
 
 @app.route('/about')
 def about():
-    return render_template('pages/about.html')
+    return render_template('other/about.html')
     
 @app.route('/napalm')
 def napalm():
-    return render_template('pages/napalm.html')
+    return render_template('napalm/napalm.html')
 
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():
-    form = NetmikoParametersForm(request.form)
-    print(form.errors, form.validate_on_submit(), file=sys.stderr)
-    if form.validate_on_submit() and 'test' in request.form:
-        print(request.files, file=sys.stderr)
+    parameters_form = NetmikoParametersForm(request.form)
+    device_selection_form = NetmikoDevicesForm(request.form)
+    if parameters_form.validate_on_submit():
         # if user does not select file, browser also
         # submit a empty part without filename
         filename = request.files['file'].filename
@@ -97,13 +96,21 @@ def netmiko():
                 filepath = join(app.config['UPLOAD_FOLDER'], filename)
                 with open(filepath, 'r') as f:
                     test = load(f)
-                    print(test, file=sys.stderr)
+        # before rendering the second step, update the list of available
+        # devices
+        all_devices = Device.query.all()
+        device_selection_form.assigned.choices = [(d, d) for d in all_devices]
+        return render_template(
+                               'netmiko/netmiko_step2.html',
+                               variables=variables, 
+                               devices={},
+                               form=device_selection_form
+                               )
     return render_template(
-                           'pages/netmiko.html', 
-                           show_example_modal=True,
+                           'netmiko/netmiko_step1.html',
                            variables=variables, 
                            devices={},
-                           form=form
+                           form=parameters_form
                            )
                            
 @app.route('/login')

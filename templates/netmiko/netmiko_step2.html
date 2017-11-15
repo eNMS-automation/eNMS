@@ -1,0 +1,91 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<form action="" method="post" class="form form-group" enctype=multipart/form-data style="width:100%">
+
+<div class="col-md-3">      
+    <div class="panel panel-default">
+        <div class="panel-heading">Select devices</div>
+        <div class="panel-body">
+    {{ form.csrf_token }}
+{{ form.assigned(id="assigned", class="form-control") }}
+<br><br>
+<input type="submit" name ="test" data-target="#preview-script" value="Send script" class="btn btn-primary btn-lg btn-block">
+
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8">      
+    <div class="panel panel-default" style="height: 370px">
+        <div class="panel-heading">Script</div>
+        <div class="panel-body">
+        {{ form.script(id="script", class="form-control", rows='13') }}
+        </div>
+    </div>
+</div>
+
+</form>
+
+</div>
+<div class="bootstrap">
+    <div class="modal fade" id="preview-script" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type=
+                    "button"><span>&times;</span></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+
+                <div class="modal-body">
+                    {% for device in devices.values() %}
+                        <input type="checkbox" name="delete" value="{{ device.ip_address }}">
+                        <label for="ip_address">
+                        {{ device.ip_address }} (user: {{ device.username }})
+                        </label><br>
+                    {% endfor %}
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type=
+                    "button">Close</button> <button class="btn btn-primary"
+                    type="button">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bootstrap">
+    <div class="modal fade" id="send-script" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type=
+                    "button"><span>&times;</span></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+
+                <div class="modal-body">
+                {% if variables.get('script') %}
+                {% for line in variables.get('script') %}
+                {{ line }}<br>
+                {% endfor %}
+                {% endif %}
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type=
+                    "button">Close</button> <button class="btn btn-primary"
+                    type="button">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

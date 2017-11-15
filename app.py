@@ -90,16 +90,26 @@ def netmiko():
         # if user does not select file, browser also
         # submit a empty part without filename
         filename = request.files['file'].filename
+        # retrieve the raw script: we will use it as-is or update it depending
+        # on whether a Jinja2 template was uploaded by the user or not
+        raw_script = request.form['raw_script']
         if 'file' in request.files and filename:
             if allowed_file(filename, 'netmiko'):
                 filename = secure_filename(filename)
                 filepath = join(app.config['UPLOAD_FOLDER'], filename)
                 with open(filepath, 'r') as f:
-                    test = load(f)
+                    parameters = load(f)
+                template = Template(raw_script)
+                variable['script'] = template.render(**parameters)
+            else:
+                print('file not allowed')
+        else:
+            variables['script'] = raw_script
         # before rendering the second step, update the list of available
-        # devices
+        # devices by querying the database, and the script
         all_devices = Device.query.all()
         device_selection_form.assigned.choices = [(d, d) for d in all_devices]
+        device_selection_form.script.data = variables['script']
         return render_template(
                                'netmiko/netmiko_step2.html',
                                variables=variables, 

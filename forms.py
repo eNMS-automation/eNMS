@@ -38,7 +38,7 @@ class NetmikoParametersForm(FlaskForm):
     department = SelectField('', [optional()], choices=drivers)
     department2 = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
     employee = SelectField('', [optional()], choices=())
-    script = TextAreaField('', [optional(), Length(max=200)])
+    raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     
 class NetmikoDevicesForm(FlaskForm):

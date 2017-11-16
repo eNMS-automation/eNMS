@@ -39,6 +39,7 @@ def allowed_file(name, webpage):
 from forms import *
 from models import *
 from helpers import napalm_getters as getters_mapping
+from helpers import str_dict
 from database import init_db, clear_db
 from netmiko import ConnectHandler
 from jinja2 import Template
@@ -111,19 +112,58 @@ def napalm_getters():
     napalm_getters_form.devices.choices = [(d, d) for d in Device.query.all()]
     print(napalm_getters_form.validate_on_submit(), file=sys.stderr)
     if 'napalm_query' in request.form:
+        napalm_output = []
         device_ip = napalm_getters_form.data['devices']
         device_object = db.session.query(Device).filter_by(IP=device_ip).first()
         napalm_device = device_object.napalm_connection() 
         for getter in napalm_getters_form.data['functions']:
-            print(getattr(napalm_device, getters_mapping[getter])())
+            output = str_dict(getattr(napalm_device, getters_mapping[getter])())
+            napalm_output.append(output)
+        napalm_getters_form.output.data = '\n\n'.join(napalm_output)
     return render_template(
                            'napalm/napalm_getters.html',
                            form = napalm_getters_form
                            )
                            
-@app.route('/napalm_configuration')
+@app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():
-    return render_template('napalm/napalm_configuration.html')
+    parameters_form = NapalmParametersForm(request.form)
+    device_selection_form = NapalmDevicesForm(request.form)
+    if parameters_form.validate_on_submit():
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        filename = request.files['file'].filename
+        # retrieve the raw script: we will use it as-is or update it depending
+        # on whether a Jinja2 template was uploaded by the user or not
+        raw_script = request.form['raw_script']
+        if 'file' in request.files and filename:
+            if allowed_file(filename, 'netmiko'):
+                filename = secure_filename(filename)
+                filepath = join(app.config['UPLOAD_FOLDER'], filename)
+                with open(filepath, 'r') as f:
+                    parameters = load(f)
+                template = Template(raw_script)
+                variable['script'] = template.render(**parameters)
+            else:
+                print('file not allowed')
+        else:
+            variables['script'] = raw_script
+        # before rendering the second step, update the list of available
+        # devices by querying the database, and the script
+        device_selection_form.devices.choices = [(d, d) for d in Device.query.all()]
+        device_selection_form.script.data = variables['script']
+        return render_template(
+                               'napalm/napalm_step2.html',
+                               variables=variables, 
+                               devices={},
+                               form=device_selection_form
+                               )
+    return render_template(
+                           'napalm/napalm_step1.html',
+                           variables=variables, 
+                           devices={},
+                           form=parameters_form
+                           )
                            
 @app.route('/napalm_daemon')
 def napalm_daemon():
@@ -190,7 +230,6 @@ def department():
     departments = Department.query.all()
     form.department.choices = [('', 'Select a department')] + [
         (department.id, department.name) for department in departments]
-    print(departments, file=sys.stderr)
     chosen_department = None
     chosen_employee = None
     

@@ -6,7 +6,7 @@
     <div class="col-md-3">      
         <div class="panel panel-default" style="height: 500px">
         
-            <div class="panel-heading">NAPALM getters query</div>
+            <div class="panel-heading">NAPALM query</div>
             <div class="panel-body">
             {{ form.csrf_token }}
             Select a device :
@@ -23,7 +23,7 @@
 
     <div class="col-md-9">
         <div class="panel panel-default" style="height: 500px">
-            <div class="panel-heading">Result of the NAPALM query</div>
+            <div class="panel-heading">Output of the query</div>
             <div class="panel-body">
             {{ form.output(id="output", class="form-control", rows='20') }}
             </div>

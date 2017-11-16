@@ -76,3 +76,21 @@ class NapalmGettersForm(FlaskForm):
     function_choices = [(function, function) for function in napalm_getters]
     functions = SelectMultipleField('Devices', choices=function_choices)
     output = TextAreaField('', [optional()])
+
+class NapalmParametersForm(FlaskForm):
+    
+    # exclude base driver from Netmiko available drivers
+    exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
+    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
+    
+    drivers = [(driver, driver) for driver in netmiko_drivers]
+    driver = SelectField('', [optional()], choices=drivers)
+    protocol = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
+    global_delay_factor = FloatField('global_delay_factor', [optional()])
+    employee = SelectField('', [optional()], choices=())
+    raw_script = TextAreaField('', [optional(), Length(max=200)])
+    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
+    
+class NapalmDevicesForm(FlaskForm):
+    devices = SelectMultipleField('Devices', choices=())
+    script = TextAreaField('', [optional(), Length(max=200)])

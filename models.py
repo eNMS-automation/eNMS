@@ -1,3 +1,4 @@
+from napalm_base import get_network_driver
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from app import db
@@ -27,6 +28,8 @@ class Device(Base):
     hostname = db.Column(db.String(120))
     IP = db.Column(db.String(120))
     OS = db.Column(db.String(120))
+    username = db.Column(db.String(120))
+    password = db.Column(db.String(120))
 
     def __init__(self, hostname=None, IP=None, OS=None):
         self.hostname = hostname
@@ -35,13 +38,18 @@ class Device(Base):
         self.username = 'afourmy'
         self.password = 'welcome59'
         
+    def napalm_connection(self):
+        driver = get_network_driver(self.OS)
+        device = driver(
+                        hostname = self.IP, 
+                        username = self.username,
+                        password = self.password, 
+                        )
+        device.open()
+        return device
+        
     def __repr__(self):
         return self.IP
-
-    # used for querying the database based on the __repr__ of a device
-    @property
-    def device(self):
-        return str(self)
 
 class Department(Base):
     

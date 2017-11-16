@@ -5,16 +5,17 @@
 <form action="" method="post" class="form form-group" style="width:100%">
     <div class="col-md-3">      
         <div class="panel panel-default" style="height: 500px">
+        
             <div class="panel-heading">NAPALM getters query</div>
             <div class="panel-body">
-        {{ form.csrf_token }}
-    Select a device :
-    <br>
-    {{ form.devices(id="devices", class="form-control") }}
-    <br>
-    {{ form.functions(id="assigned", class="form-control", size='16') }}<br>
-    
-    <input type="submit" name ="next" data-target="#preview-script" value="Start" class="btn btn-primary btn-lg btn-block">
+            {{ form.csrf_token }}
+            Select a device :
+            <br>
+            {{ form.devices(id="devices", class="form-control") }}
+            <br>
+            {{ form.functions(id="assigned", class="form-control", size='16') }}<br>
+            
+            <input type="submit" name="napalm_query" value="Start" class="btn btn-primary btn-lg btn-block">
     
             </div>
         </div>

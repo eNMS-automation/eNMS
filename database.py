@@ -16,7 +16,6 @@ def clear_db():
     import models
     models.Device.query.delete()
     db.session.commit()
-    
 
 def init_db():
     # import all modules here that might define models so that

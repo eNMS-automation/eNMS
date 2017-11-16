@@ -38,6 +38,7 @@ def allowed_file(name, webpage):
 
 from forms import *
 from models import *
+from helpers import napalm_getters as getters_mapping
 from database import init_db, clear_db
 from netmiko import ConnectHandler
 from jinja2 import Template
@@ -104,10 +105,17 @@ def manage_devices():
 def about():
     return render_template('other/about.html')
     
-@app.route('/napalm_getters')
+@app.route('/napalm_getters', methods=['GET', 'POST'])
 def napalm_getters():
     napalm_getters_form = NapalmGettersForm(request.form)
     napalm_getters_form.devices.choices = [(d, d) for d in Device.query.all()]
+    print(napalm_getters_form.validate_on_submit(), file=sys.stderr)
+    if 'napalm_query' in request.form:
+        device_ip = napalm_getters_form.data['devices']
+        device_object = db.session.query(Device).filter_by(IP=device_ip).first()
+        napalm_device = device_object.napalm_connection() 
+        for getter in napalm_getters_form.data['functions']:
+            print(getattr(napalm_device, getters_mapping[getter])())
     return render_template(
                            'napalm/napalm_getters.html',
                            form = napalm_getters_form

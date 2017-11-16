@@ -36,7 +36,12 @@ class Device(Base):
         self.password = 'welcome59'
         
     def __repr__(self):
-        return self.hostname
+        return self.IP
+
+    # used for querying the database based on the __repr__ of a device
+    @property
+    def device(self):
+        return str(self)
 
 class Department(Base):
     

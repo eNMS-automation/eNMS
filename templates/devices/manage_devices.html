@@ -29,6 +29,7 @@
         <div class="panel panel-default" style="height: 500px">
             <div class="panel-heading"><h3 class="panel-title">Add multiple devices</h3></div>
             <div class="panel-body">
+                {{ add_devices_form.csrf_token }}
 
                 Multiple devices can be created at once by importing an Excel (.xls, .xlsx) or a CSV file. (.csv)<br>
                 The input file must contain, in the following order:<br><br>
@@ -48,13 +49,15 @@
 </div>
 
 <div class="col-md-4">  
-    <form action="" method="post" class="form form-group">    
+    <form action="" method="post" class="form form-group">   
         <div class="panel panel-default" style="height: 500px">
             <div class="panel-heading">Delete devices</div>
             <div class="panel-body">
-            <legend> Current list of devices :</legend>
-            {{ delete_device_form.devices(id="delete_devices", class="form-control", size='17') }}<hr style="height:8px; visibility:hidden;" />
-<input type="submit" name ="delete" value="Delete selection" class="btn btn-primary btn-lg btn-block">
+                {{ delete_device_form.csrf_token }}
+                <legend> Current list of devices :</legend>
+                {{ delete_device_form.devices(id="delete_devices", class="form-control", size='17') }}
+                <hr style="height:8px; visibility:hidden;" />
+                <input type="submit" name ="delete" value="Delete selection" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
     </form>

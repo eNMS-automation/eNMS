@@ -74,22 +74,25 @@ def manage_devices():
     add_devices_form = AddDevices(request.form)
     delete_device_form = DeleteDevice(request.form)
     if add_device_form.validate_on_submit() and 'add_device' in request.form:
-        print(request.form, file=sys.stderr)
-        print((request.form['hostname'], request.form['ip_address']), file=sys.stderr)
         device = Device(
                         hostname = request.form['hostname'], 
                         IP = request.form['ip_address'], 
                         OS = request.form['os']
                         )
         db.session.add(device)
+    elif 'delete' in request.form:
+        selection = delete_device_form.data['devices']
+        db.session.query(Device).filter(Device.IP.in_(selection))\
+        .delete(synchronize_session='fetch')
+    if request.method == 'POST':
         db.session.commit()
-        delete_device_form.devices.choices = [(d, d) for d in Device.query.all()]
+        delete_device_form.devices.choices = [(str(d), str(d)) for d in Device.query.all()]
         return render_template(
-                               'devices/manage_devices.html',
-                               add_device_form = add_device_form,
-                               add_devices_form = add_devices_form,
-                               delete_device_form = delete_device_form
-                               )
+                                'devices/manage_devices.html',
+                                add_device_form = add_device_form,
+                                add_devices_form = add_devices_form,
+                                delete_device_form = delete_device_form
+                                )
     return render_template(
                            'devices/manage_devices.html',
                            add_device_form = add_device_form,

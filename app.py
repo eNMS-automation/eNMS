@@ -38,8 +38,7 @@ def allowed_file(name, webpage):
 
 from forms import *
 from models import *
-from database import init_db
-from helpers import napalm_dispatcher
+from database import init_db, clear_db
 from netmiko import ConnectHandler
 from jinja2 import Template
 from yaml import load
@@ -201,24 +200,6 @@ def get_request(department_id):
     response = make_response(json.dumps(department_employees))
     response.content_type = 'application/json'
     return response
-    
-def populate_db():
-    db.session.query(Device).delete()
-    db.session.query(Department).delete()
-    db.session.query(Employee).delete()
-    db.session.commit()
-    for hostname, (IP, OS) in napalm_dispatcher.items():
-        device = Device(hostname, IP, OS)
-        db.session.add(device)
-    db.session.commit()
-    for dep, employees in {'a': ('1', '2'), 'b': ('3', '4'), 'c': ('i',)}.items():
-        department = Department(dep)
-        db.session.add(department)
-        db.session.flush()
-        for employee in employees:
-            e = Employee(employee, department.id)
-            db.session.add(e)
-    db.session.commit()
 
 ## Error handlers.
 
@@ -243,7 +224,7 @@ if not app.debug:
 
 if __name__ == '__main__':
     init_db()
-    populate_db()
+    # clear_db()
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, use_reloader=False)

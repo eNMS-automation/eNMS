@@ -1,0 +1,16 @@
+subinterfaces:
+  420:
+    aire: 262
+    dot1Q: 420
+    address: 10.124.33.250
+    cost: 320
+  418:
+    aire: 252
+    dot1Q: 418
+    address: 10.124.33.234
+    cost: 520
+  419:
+    aire: 261
+    dot1Q: 419
+    address: 10.124.33.242
+    cost: 620

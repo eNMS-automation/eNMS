@@ -58,9 +58,9 @@ class NetmikoParametersForm(FlaskForm):
     
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', [optional()], choices=drivers)
-    protocol = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
+    protocol_choices = (('Telnet',)*2, ('SSH',)*2)
+    protocol = RadioField('', [optional()], choices=protocol_choices)
     global_delay_factor = FloatField('global_delay_factor', [optional()])
-    employee = SelectField('', [optional()], choices=())
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     
@@ -78,19 +78,10 @@ class NapalmGettersForm(FlaskForm):
     output = TextAreaField('', [optional()])
 
 class NapalmParametersForm(FlaskForm):
-    
-    # exclude base driver from Netmiko available drivers
-    exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
-    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
-    
-    drivers = [(driver, driver) for driver in netmiko_drivers]
-    driver = SelectField('', [optional()], choices=drivers)
-    protocol = RadioField('', [optional()], choices=(('Telnet', 'Telnet'), ('SSH', 'SSH')))
-    global_delay_factor = FloatField('global_delay_factor', [optional()])
-    employee = SelectField('', [optional()], choices=())
+    protocol_choices = (('Telnet',)*2, ('SSH',)*2)
+    protocol = RadioField('', [optional()], choices=protocol_choices)
+    operation_choices = (('Commit merge',)*2, ('Commit replace',)*2)
+    operation = RadioField('', [optional()], choices=operation_choices)
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
-    
-class NapalmDevicesForm(FlaskForm):
     devices = SelectMultipleField('Devices', choices=())
-    script = TextAreaField('', [optional(), Length(max=200)])

@@ -128,7 +128,6 @@ def napalm_getters():
 @app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():
     parameters_form = NapalmParametersForm(request.form)
-    device_selection_form = NapalmDevicesForm(request.form)
     if parameters_form.validate_on_submit():
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -153,7 +152,7 @@ def napalm_configuration():
         device_selection_form.devices.choices = [(d, d) for d in Device.query.all()]
         device_selection_form.script.data = variables['script']
         return render_template(
-                               'napalm/napalm_step2.html',
+                               'napalm/napalm_step1.html',
                                variables=variables, 
                                devices={},
                                form=device_selection_form

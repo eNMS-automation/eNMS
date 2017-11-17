@@ -151,14 +151,8 @@ def napalm_configuration():
         # devices by querying the database, and the script
         device_selection_form.devices.choices = [(d, d) for d in Device.query.all()]
         device_selection_form.script.data = variables['script']
-        return render_template(
-                               'napalm/napalm_step1.html',
-                               variables=variables, 
-                               devices={},
-                               form=device_selection_form
-                               )
     return render_template(
-                           'napalm/napalm_step1.html',
+                           'napalm/napalm_configuration.html',
                            variables=variables, 
                            devices={},
                            form=parameters_form
@@ -170,9 +164,8 @@ def napalm_daemon():
 
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():
-    parameters_form = NetmikoParametersForm(request.form)
-    device_selection_form = NetmikoDevicesForm(request.form)
-    if parameters_form.validate_on_submit():
+    netmiko_form = NetmikoForm(request.form)
+    if netmiko_form.validate_on_submit():
         # if user does not select file, browser also
         # submit a empty part without filename
         filename = request.files['file'].filename
@@ -195,17 +188,11 @@ def netmiko():
         # devices by querying the database, and the script
         device_selection_form.devices.choices = [(d, d) for d in Device.query.all()]
         device_selection_form.script.data = variables['script']
-        return render_template(
-                               'netmiko/netmiko_step2.html',
-                               variables=variables, 
-                               devices={},
-                               form=device_selection_form
-                               )
     return render_template(
-                           'netmiko/netmiko_step1.html',
+                           'netmiko/netmiko.html',
                            variables=variables, 
                            devices={},
-                           form=parameters_form
+                           form=netmiko_form
                            )
                            
 @app.route('/login')

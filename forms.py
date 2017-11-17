@@ -50,7 +50,7 @@ class DeleteDevice(FlaskForm):
     
 ## Forms for Netmiko
     
-class NetmikoParametersForm(FlaskForm):
+class NetmikoForm(FlaskForm):
     
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
@@ -63,10 +63,7 @@ class NetmikoParametersForm(FlaskForm):
     global_delay_factor = FloatField('global_delay_factor', [optional()])
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
-    
-class NetmikoDevicesForm(FlaskForm):
     devices = SelectMultipleField('Devices', choices=())
-    script = TextAreaField('', [optional(), Length(max=200)])
     
 ## Forms for NAPALM
 

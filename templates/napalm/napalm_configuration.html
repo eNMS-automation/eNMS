@@ -8,9 +8,6 @@
         <div class="panel-heading">Netmiko parameters</div>
         <div class="panel-body">
             {{ form.csrf_token }}
-        
-            Select a driver :<br>
-            {{ form.driver(id="driver", class="form-control") }}
             
             <br>{% for subfield in form.protocol %}
             <tr>
@@ -18,23 +15,27 @@
                 <td>{{ subfield.label }}</td>
             </tr>
             {% endfor %}<br><br>
-            
-            Global delay factor :
-            {{ form.global_delay_factor(id="global_delay_factor", class="form-control") }}<br><br>
-            YAML file used for Jinja2 :
-            {{ form.file() }}<br><br>
-            
-            <input type="submit" name="next" value="Next" class="btn btn-primary btn-lg btn-block">
 
         </div>
     </div>
 </div>
 
-<div class="col-md-9">
+<div class="col-md-6">
     <div class="panel panel-default" style="height: 500px">
         <div class="panel-heading">Script (list of commands or Jinja2 template)</div>
         <div class="panel-body">
         {{ form.raw_script(id="raw_script", class="form-control", rows='20') }}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">      
+    <div class="panel panel-default" style="height: 500px">
+        <div class="panel-heading">Select devices</div>
+        <div class="panel-body">
+            {{ form.csrf_token }}
+            {{ form.devices(id="Devices", class="form-control", size='20') }}<br>
+            <button data-target="#confirm" data-toggle="modal" type="button" class="btn btn-primary btn-lg btn-block">Send script</button>
         </div>
     </div>
 </div>

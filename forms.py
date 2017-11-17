@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from helpers import napalm_getters
+from helpers import getters_mapping
 from wtforms import *
 from wtforms.validators import DataRequired, EqualTo, Length, optional
 from flask_wtf.file import FileAllowed
@@ -70,7 +70,7 @@ class NetmikoForm(FlaskForm):
 class NapalmGettersForm(FlaskForm):
     # the list of devices is updated at rendering time by querying the database
     devices = SelectField('', [optional()], choices=())
-    function_choices = [(function, function) for function in napalm_getters]
+    function_choices = [(function, function) for function in getters_mapping]
     functions = SelectMultipleField('Devices', choices=function_choices)
     output = TextAreaField('', [optional()])
 

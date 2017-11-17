@@ -31,15 +31,9 @@ devices = {}
 # all variables used for sending script with netmiko
 variables = {}
 
-def allowed_file(name, webpage):
-    allowed_syntax = '.' in name
-    allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions[webpage]
-    return allowed_syntax and allowed_extension
-
 from forms import *
 from models import *
-from helpers import napalm_getters as getters_mapping
-from helpers import str_dict
+from helpers import *
 from database import init_db, clear_db
 from netmiko import ConnectHandler
 from jinja2 import Template
@@ -75,6 +69,7 @@ def manage_devices():
     add_device_form = AddDevice(request.form)
     add_devices_form = AddDevices(request.form)
     delete_device_form = DeleteDevice(request.form)
+    delete_device_form.devices.choices = [(str(d), str(d)) for d in Device.query.all()]
     if add_device_form.validate_on_submit() and 'add_device' in request.form:
         device = Device(
                         hostname = request.form['hostname'], 
@@ -88,13 +83,6 @@ def manage_devices():
         .delete(synchronize_session='fetch')
     if request.method == 'POST':
         db.session.commit()
-        delete_device_form.devices.choices = [(str(d), str(d)) for d in Device.query.all()]
-        return render_template(
-                                'devices/manage_devices.html',
-                                add_device_form = add_device_form,
-                                add_devices_form = add_devices_form,
-                                delete_device_form = delete_device_form
-                                )
     return render_template(
                            'devices/manage_devices.html',
                            add_device_form = add_device_form,
@@ -110,14 +98,16 @@ def about():
 def napalm_getters():
     napalm_getters_form = NapalmGettersForm(request.form)
     napalm_getters_form.devices.choices = [(d, d) for d in Device.query.all()]
-    print(napalm_getters_form.validate_on_submit(), file=sys.stderr)
     if 'napalm_query' in request.form:
         napalm_output = []
         device_ip = napalm_getters_form.data['devices']
         device_object = db.session.query(Device).filter_by(IP=device_ip).first()
         napalm_device = device_object.napalm_connection() 
         for getter in napalm_getters_form.data['functions']:
-            output = str_dict(getattr(napalm_device, getters_mapping[getter])())
+            try:
+                output = str_dict(getattr(napalm_device, getters_mapping[getter])())
+            except Exception as e:
+                flash('{} could not be retrieve because of {}'.format(getter, e))
             napalm_output.append(output)
         napalm_getters_form.output.data = '\n\n'.join(napalm_output)
     return render_template(
@@ -128,6 +118,8 @@ def napalm_getters():
 @app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():
     parameters_form = NapalmParametersForm(request.form)
+    # update the list of available devices by querying the database
+    parameters_form.devices.choices = [(d, d) for d in Device.query.all()]
     if parameters_form.validate_on_submit():
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -144,13 +136,9 @@ def napalm_configuration():
                 template = Template(raw_script)
                 variable['script'] = template.render(**parameters)
             else:
-                print('file not allowed')
+                flash('file {}: format not allowed'.format(filename))
         else:
             variables['script'] = raw_script
-        # before rendering the second step, update the list of available
-        # devices by querying the database, and the script
-        device_selection_form.devices.choices = [(d, d) for d in Device.query.all()]
-        device_selection_form.script.data = variables['script']
     return render_template(
                            'napalm/napalm_configuration.html',
                            variables=variables, 
@@ -165,6 +153,8 @@ def napalm_daemon():
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():
     netmiko_form = NetmikoForm(request.form)
+    # update the list of available devices by querying the database
+    netmiko_form.devices.choices = [(d, d) for d in Device.query.all()]
     if netmiko_form.validate_on_submit():
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -181,13 +171,9 @@ def netmiko():
                 template = Template(raw_script)
                 variable['script'] = template.render(**parameters)
             else:
-                print('file not allowed')
+                flash('file {}: format not allowed'.format(filename))
         else:
             variables['script'] = raw_script
-        # before rendering the second step, update the list of available
-        # devices by querying the database, and the script
-        device_selection_form.devices.choices = [(d, d) for d in Device.query.all()]
-        device_selection_form.script.data = variables['script']
     return render_template(
                            'netmiko/netmiko.html',
                            variables=variables, 

@@ -38,7 +38,7 @@ napalm_dispatcher = {
                     'BNET-N1': ('192.168.243.134', 'nx-os'),
                     }
                     
-napalm_getters = OrderedDict([
+getters_mapping = OrderedDict([
 ('ARP table', 'get_arp_table'),
 ('Interfaces counters', 'get_interfaces_counters'),
 ('Facts', 'get_facts'),
@@ -75,3 +75,8 @@ def str_dict(input, depth=0):
         return result
     else:
         return str(input)
+        
+def allowed_file(name, webpage):
+    allowed_syntax = '.' in name
+    allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions[webpage]
+    return allowed_syntax and allowed_extension

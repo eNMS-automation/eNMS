@@ -17,7 +17,7 @@
                 {{ add_device_form.os(class='form-control last-input', placeholder=add_device_form.os.label.text, required=true) }}
                 {{ add_device_form.password(class='form-control last-input', placeholder=add_device_form.password.label.text, required=true) }}
                 {{ add_device_form.hostname(class="form-control first-input", placeholder=add_device_form.hostname.label.text) }}
-                {{ add_device_form.secret(class='form-control last-input', placeholder=add_device_form.secret.label.text) }}<hr style="height:5px; visibility:hidden;" />
+                {{ add_device_form.secret(class='form-control last-input', placeholder=add_device_form.secret.label.text) }}<hr style="height:1px; visibility:hidden;" />
                 <input type="submit" name="add_device" value="Add device" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
@@ -55,8 +55,8 @@
             <div class="panel-body">
                 {{ delete_device_form.csrf_token }}
                 <legend> Current list of devices :</legend>
-                {{ delete_device_form.devices(id="delete_devices", class="form-control", size='17') }}
-                <hr style="height:8px; visibility:hidden;" />
+                {{ delete_device_form.devices(id="delete_devices", class="form-control", size='15') }}
+                <hr style="height:10px; visibility:hidden;" />
                 <input type="submit" name ="delete" value="Delete selection" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>

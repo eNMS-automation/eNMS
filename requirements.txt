@@ -1,0 +1,9 @@
+jinja2
+pyYAML
+netmiko
+napalm
+flask
+flask_sqlalchemy
+flask_apscheduler
+xlrd
+

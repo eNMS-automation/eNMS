@@ -13,7 +13,7 @@ In order to start the website, you need to run `app.py`
 python app.py
 ```
 
-You can then access the website at http://IP:5100 where IP is the IP of the server (or http://127.0.0.1:5100 if you are running it locally).
+You can then access the website at http://IP:5100 where IP is the IP address of the server (or http://127.0.0.1:5100 if you are running it locally).
 
 # How to
 
@@ -69,7 +69,7 @@ eNAPALM relies on the following libraries:
 * jinja2
 * pyYAML
 * flask
-* SQLAlchemy
+* flask_sqlalchemy
 * flask_apscheduler
 * xlrd
 
@@ -80,6 +80,12 @@ pip install napalm (dependencies: netmiko, jinja2, and pyYAML)
 pip install flask_sqlalchemy (dependencies: flask)
 pip install flask_apscheduler
 pip install xlrd
+```
+
+or 
+
+```
+pip install -r requirements.txt
 ```
 
 # Credits

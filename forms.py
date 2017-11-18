@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from helpers import getters_mapping
+from helpers import getters_mapping, napalm_actions
 from wtforms import *
 from wtforms.validators import DataRequired, EqualTo, Length, optional
 from flask_wtf.file import FileAllowed
@@ -86,8 +86,8 @@ class NapalmParametersForm(FlaskForm):
     
     protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
     protocol = RadioField('', [optional()], choices=protocol_choices)
-    operation_choices = (('Commit merge',)*2, ('Commit replace',)*2)
-    operation = RadioField('', [optional()], choices=operation_choices)
+    action_choices = [(action, action) for action in napalm_actions]
+    actions = SelectField('Actions', [optional()], choices=action_choices)
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     devices = SelectMultipleField('Devices', choices=())

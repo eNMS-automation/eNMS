@@ -61,6 +61,14 @@ getters_mapping = OrderedDict([
 ('IPv6', 'get_ipv6_neighbors_table'),
 ])
 
+napalm_actions = OrderedDict([
+('Load merge', 'load_merge_candidate'),
+('Load replace', 'load_replace_candidate'),
+('Commit', 'commit_config'),
+('Discard', 'discard_config'),
+('Rollback', 'rollback'),
+])
+
 def str_dict(input, depth=0):
     tab = '\t'*depth
     if isinstance(input, list):

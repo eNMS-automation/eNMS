@@ -142,9 +142,7 @@ def netmiko():
             netmiko_handler.send_config_set(script.splitlines())
     return render_template(
                            'netmiko/netmiko.html',
-                           variables=variables, 
-                           devices={},
-                           form=netmiko_form
+                           form = netmiko_form
                            )
 
 @app.route('/about')
@@ -160,17 +158,17 @@ def napalm_getters():
         hostname = napalm_getters_form.data['devices']
         device_object = db.session.query(Device).filter_by(hostname=hostname).first()
         napalm_device = device_object.napalm_connection(
-                username = netmiko_form.data['username'],
-                password = netmiko_form.data['password'],
-                secret = netmiko_form.data['secret'],
-                port = netmiko_form.data['port'],
-                transport = netmiko_form.data['protocol'].lower(),
+                username = napalm_getters_form.data['username'],
+                password = napalm_getters_form.data['password'],
+                secret = napalm_getters_form.data['secret'],
+                port = napalm_getters_form.data['port'],
+                transport = napalm_getters_form.data['protocol'].lower(),
                 ) 
         for getter in napalm_getters_form.data['functions']:
             try:
                 output = str_dict(getattr(napalm_device, getters_mapping[getter])())
             except Exception as e:
-                flash('{} could not be retrieve because of {}'.format(getter, e))
+                output = '{} could not be retrieve because of {}'.format(getter, e)
             napalm_output.append(output)
         napalm_getters_form.output.data = '\n\n'.join(napalm_output)
     return render_template(
@@ -183,7 +181,7 @@ def napalm_configuration():
     parameters_form = NapalmParametersForm(request.form)
     # update the list of available devices by querying the database
     parameters_form.devices.choices = [(d, d) for d in Device.query.all()]
-    if parameters_form.validate_on_submit():
+    if 'send' in request.form:
         # if user does not select file, browser also
         # submit a empty part without filename
         filename = request.files['file'].filename
@@ -197,16 +195,28 @@ def napalm_configuration():
                 with open(filepath, 'r') as f:
                     parameters = load(f)
                 template = Template(raw_script)
-                variable['script'] = template.render(**parameters)
+                script = template.render(**parameters)
             else:
                 flash('file {}: format not allowed'.format(filename))
         else:
-            variables['script'] = raw_script
+            script = raw_script
+        selected_devices = parameters_form.data['devices']
+        action = napalm_actions[parameters_form.data['actions']]
+        for device in selected_devices:
+            device_object = db.session.query(Device)\
+                            .filter_by(hostname=device)\
+                            .first()
+            napalm_device = device_object.napalm_connection(
+                    username = parameters_form.data['username'],
+                    password = parameters_form.data['password'],
+                    secret = parameters_form.data['secret'],
+                    port = parameters_form.data['port'],
+                    transport = parameters_form.data['protocol'].lower(),
+                    )
+            getattr(napalm_device, action)()
     return render_template(
                            'napalm/napalm_configuration.html',
-                           variables=variables, 
-                           devices={},
-                           form=parameters_form
+                           form = parameters_form
                            )
                            
 @app.route('/napalm_daemon')
@@ -269,8 +279,7 @@ def not_found_error(error):
 if not app.debug:
     file_handler = logging.FileHandler('error.log')
     file_handler.setlogging.Formatter(
-        logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
-    )
+    logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
     app.logger.setLevel(logging.INFO)
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response
 from flask_sqlalchemy import SQLAlchemy
+from flask_apscheduler import APScheduler
 from werkzeug.utils import secure_filename
 from inspect import stack
 from os.path import abspath, dirname, join
@@ -24,17 +25,14 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# dict that maps an IP address to a Device object
-devices = {}
-# all variables used for sending script with netmiko
-variables = {}
-
 from forms import *
 from models import *
 from helpers import *
 from database import init_db, clear_db
 from jinja2 import Template
 from yaml import load
+
+db = SQLAlchemy()
 
 # automatically tear down SQLAlchemy.
 @app.teardown_request
@@ -277,17 +275,21 @@ def not_found_error(error):
     return render_template('errors/404.html'), 404
 
 if not app.debug:
-    file_handler = logging.FileHandler('error.log')
-    file_handler.setlogging.Formatter(
-    logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-    app.logger.setLevel(logging.INFO)
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
-    app.logger.info('errors')
+    import logging
+    logging.basicConfig(filename='error.log',level=logging.DEBUG)
 
 if __name__ == '__main__':
     init_db()
     # clear_db()
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
+    
+    # db.app = app
+    # db.init_app(app)
+
+    # app.config.from_object(Config())
+    scheduler = APScheduler()
+    scheduler.init_app(app)
+    scheduler.start()
+    
     app.run(host='0.0.0.0', port=port, use_reloader=False)

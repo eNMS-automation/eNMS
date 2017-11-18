@@ -19,7 +19,20 @@ You can then access the website at http://IP:5100 where IP is the IP of the serv
 
 ## Device management
 
+The first step is to create "devices". 
+A device is defined by its hostname, IP address and operating system.
+The left-side panel allows creating devices one by one by entering those parameters manually. Devices can also be created by importing an Excel file (.xls or .xlsx), or a CSV file.
+
 ![Device management](https://github.com/afourmy/e-napalm/blob/master/readme/manage_devices.png)
+
+The device tab also includes a summary of all devices that have been created so far:
+    
+![List of all devices](https://github.com/afourmy/e-napalm/blob/master/readme/list_devices.png)
+
+## Netmiko
+
+The netmiko page provides an interface to Netmiko.
+The user enter
 
 # Contact
 

@@ -131,12 +131,14 @@ def netmiko():
                             .filter_by(hostname=device)\
                             .first()
             netmiko_handler = device_object.netmiko_connection(
-                                netmiko_form.data['driver'],
-                                netmiko_form.data['username'],
-                                netmiko_form.data['password'],
-                                netmiko_form.data['secret'],
-                                netmiko_form.data['global_delay_factor'],
-                                )
+                host = device,
+                device_type = netmiko_form.data['driver'],
+                username = netmiko_form.data['username'],
+                password = netmiko_form.data['password'],
+                secret = netmiko_form.data['secret'],
+                global_delay_factor = netmiko_form.data['global_delay_factor'],
+                port = netmiko_form.data['port'],
+                )
             netmiko_handler.send_config_set(script.splitlines())
     return render_template(
                            'netmiko/netmiko.html',
@@ -157,7 +159,13 @@ def napalm_getters():
         napalm_output = []
         hostname = napalm_getters_form.data['devices']
         device_object = db.session.query(Device).filter_by(hostname=hostname).first()
-        napalm_device = device_object.napalm_connection() 
+        napalm_device = device_object.napalm_connection(
+                username = netmiko_form.data['username'],
+                password = netmiko_form.data['password'],
+                secret = netmiko_form.data['secret'],
+                port = netmiko_form.data['port'],
+                transport = netmiko_form.data['protocol'].lower(),
+                ) 
         for getter in napalm_getters_form.data['functions']:
             try:
                 output = str_dict(getattr(napalm_device, getters_mapping[getter])())

@@ -21,15 +21,19 @@
             Port:
             {{ form.port(id="port", class="form-control", required=true) }}<br>
             
-            {{ form.functions(id="assigned", class="form-control", size='5') }}<br>
-            
-            <input type="submit" name="napalm_query" value="Start" class="btn btn-primary btn-lg btn-block">
+            Transport protocol:<br>
+            {% for subfield in form.protocol %}
+            <tr>
+                <td>{{ subfield }}</td>
+                <td>{{ subfield.label }}</td>
+            <br></tr>
+            {% endfor %}<br><br>
     
             </div>
         </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-6">
         <div class="panel panel-default" style="height: 500px">
             <div class="panel-heading">Output of the query</div>
             <div class="panel-body">
@@ -37,6 +41,19 @@
             </div>
         </div>
     </div>
+    
+    <div class="col-md-3">   
+        <div class="panel panel-default" style="height: 500px">
+            <div class="panel-heading">Select getters</div>
+            <div class="panel-body">
+                {{ form.csrf_token }}
+                {{ form.functions(id="assigned", class="form-control", size='20') }}<br>
+                <input type="submit" name="napalm_query" value="Start" class="btn btn-primary btn-lg btn-block">
+
+            </div>
+        </div>
+    </div>
+
 </form>
 
 {% endblock %}

@@ -71,7 +71,8 @@ class NapalmGettersForm(FlaskForm):
     secret = PasswordField('Secret password', [optional()])
     port = IntegerField('Port', [optional()], default=8022)
     
-    # the list of devices is updated at rendering time by querying the database
+    protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
+    protocol = RadioField('', [optional()], choices=protocol_choices)
     devices = SelectField('', [optional()], choices=())
     function_choices = [(function, function) for function in getters_mapping]
     functions = SelectMultipleField('Devices', choices=function_choices)
@@ -83,7 +84,7 @@ class NapalmParametersForm(FlaskForm):
     secret = PasswordField('Secret password', [optional()])
     port = IntegerField('Port', [optional()], default=8022)
     
-    protocol_choices = (('Telnet',)*2, ('SSH',)*2)
+    protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
     protocol = RadioField('', [optional()], choices=protocol_choices)
     operation_choices = (('Commit merge',)*2, ('Commit replace',)*2)
     operation = RadioField('', [optional()], choices=operation_choices)

@@ -35,25 +35,22 @@ class Device(Base):
         self.IP = IP
         self.OS = OS
         
-    def napalm_connection(self):
+    def napalm_connection(self, username, password, secret, port, transport):
         driver = get_network_driver(self.OS)
         device = driver(
                         hostname = self.IP, 
-                        username = 'afourmy',
-                        password = 'welcome59', 
+                        username = username,
+                        password = password, 
+                        optional_args = {
+                                         'secret': secret, 
+                                         'port': port, 
+                                         'transport': transport
+                                         }
                         )
         device.open()
         return device
         
-    def netmiko_connection(self, driver, username, password, secret, gdb):
-        parameters = {
-                      'device_type': driver,
-                      'ip': self.IP,
-                      'username': username,
-                      'password': password,
-                      'secret': secret,
-                      'global_delay_factor': gdb
-                      }
+    def netmiko_connection(self, **parameters):
         return ConnectHandler(**parameters)
         
     def __repr__(self):
@@ -68,7 +65,6 @@ class Department(Base):
 
     def __init__(self, name):
         self.name = name
-
 
 class Employee(Base):
     

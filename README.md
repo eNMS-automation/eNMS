@@ -32,7 +32,19 @@ The device tab also includes a summary of all devices that have been created so 
 ## Netmiko
 
 The netmiko page provides an interface to Netmiko.
-The user enter
+The user select a driver and target devices, enters its credentials (username, password and secret password if needed), and sets the port and the global delay factor (default: 8022, 1).
+The script can be a Jinja2 template, in which case a YAML file has to be imported.
+
+![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/netmiko.png)
+
+## NAPALM Configuration
+
+The NAPALM configuration webpage allows the user to change the configuration of one or several devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
+See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_steps_config.html "NAPALM tutorial") for more information.
+
+![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
+
+## NAPALM Getters
 
 # Contact
 

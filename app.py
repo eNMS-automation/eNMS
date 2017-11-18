@@ -284,10 +284,6 @@ if __name__ == '__main__':
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
     
-    # db.app = app
-    # db.init_app(app)
-
-    # app.config.from_object(Config())
     scheduler = APScheduler()
     scheduler.init_app(app)
     scheduler.start()

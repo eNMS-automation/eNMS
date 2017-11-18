@@ -2,7 +2,7 @@
 
 eNAPALM is a web interface to netmiko and NAPALM.
 It allows to send scripts (plain text script or Jinja2 templates along with a YAML file) to one or more devices using netmiko or NAPALM, and to retrieve and store the output of NAPALM getters.
-It also includes a daemon for the user to run specific actions (retrieve the getters, send a script) on a regular basis.
+It also includes a daemon, implemented with APScheduler, for the user to run specific actions (retrieve the getters, send a script) on a regular basis.
 
 ![eNAPALM](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
 
@@ -39,12 +39,16 @@ The script can be a Jinja2 template, in which case a YAML file has to be importe
 
 ## NAPALM Configuration
 
-The NAPALM configuration webpage allows the user to change the configuration of one or several devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
+The NAPALM configuration webpage allows the user to change the configuration of one or more devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
 See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_steps_config.html "NAPALM tutorial") for more information.
 
 ![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
 
 ## NAPALM Getters
+
+The user can choose a device and a set of getters. The query will be sent to the device and the output displayed in the middle panel.
+
+![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_getters.png)
 
 # Contact
 
@@ -66,6 +70,7 @@ eNAPALM relies on the following libraries:
 * pyYAML
 * flask
 * SQLAlchemy
+* flask_apscheduler
 * xlrd
 
 Before using eNAPALM, you must make sure all these libraries are properly installed:
@@ -73,13 +78,22 @@ Before using eNAPALM, you must make sure all these libraries are properly instal
 ```
 pip install napalm (dependencies: netmiko, jinja2, and pyYAML)
 pip install flask_sqlalchemy (dependencies: flask)
+pip install flask_apscheduler
 pip install xlrd
 ```
 
 # Credits
 
+[NAPALM](https://github.com/napalm-automation/napalm "NAPALM"): A library that implements a set of functions to interact with different network device Operating Systems using a unified API.
+
 [Netmiko](https://github.com/ktbyers/netmiko "Netmiko"): A multi-vendor library to simplify Paramiko SSH connections to network devices.
 
 [Jinja2](https://github.com/pallets/jinja "Jinja2"): A modern and designer-friendly templating language for Python.
 
-[NAPALM](https://github.com/napalm-automation/napalm "NAPALM"): A library that implements a set of functions to interact with different network device Operating Systems using a unified API.
+[xlrd](https://github.com/python-excel/xlrd) Library to extract data from Microsoft Excel (tm) spreadsheet files
+
+[Flask](http://flask.pocoo.org) Micro webdevelopment framework for Python.
+
+[SQLAlchemy](https://www.sqlalchemy.org) Python SQL toolkit and Object Relational Mapper
+
+[flask_apscheduler](https://github.com/viniciuschiele/flask-apscheduler) Adds APScheduler (Advanced Python Scheduler) support to Flask

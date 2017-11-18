@@ -155,8 +155,8 @@ def napalm_getters():
     napalm_getters_form.devices.choices = [(d, d) for d in Device.query.all()]
     if 'napalm_query' in request.form:
         napalm_output = []
-        device_hostname = napalm_getters_form.data['devices']
-        device_object = db.session.query(Device).filter_by(hostname=device_hostname).first()
+        hostname = napalm_getters_form.data['devices']
+        device_object = db.session.query(Device).filter_by(hostname=hostname).first()
         napalm_device = device_object.napalm_connection() 
         for getter in napalm_getters_form.data['functions']:
             try:

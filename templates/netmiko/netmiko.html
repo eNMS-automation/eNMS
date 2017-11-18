@@ -17,8 +17,11 @@
             {{ form.password(id="password", class="form-control", placeholder=form.password.label.text, required=true) }}
             {{ form.secret(id="secret", class="form-control", placeholder=form.secret.label.text) }}<br>
             
+            Port:
+            {{ form.port(id="port", class="form-control", required=true) }}<br>
+            
             Global delay factor :
-            {{ form.global_delay_factor(id="global_delay_factor", class="form-control") }}<br>
+            {{ form.global_delay_factor(id="global_delay_factor", class="form-control", required=true) }}<br>
             
             YAML file used for Jinja2 :
             {{ form.file() }}

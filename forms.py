@@ -50,6 +50,7 @@ class NetmikoForm(FlaskForm):
     username = TextField('Username', [optional()])
     password = PasswordField('Password', [optional()])
     secret = PasswordField('Secret password', [optional()])
+    port = IntegerField('Port', [optional()], default=8022)
     
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
@@ -68,6 +69,7 @@ class NapalmGettersForm(FlaskForm):
     username = TextField('Username', [optional()])
     password = PasswordField('Password', [optional()])
     secret = PasswordField('Secret password', [optional()])
+    port = IntegerField('Port', [optional()], default=8022)
     
     # the list of devices is updated at rendering time by querying the database
     devices = SelectField('', [optional()], choices=())
@@ -79,6 +81,7 @@ class NapalmParametersForm(FlaskForm):
     username = TextField('Username', [optional()])
     password = PasswordField('Password', [optional()])
     secret = PasswordField('Secret password', [optional()])
+    port = IntegerField('Port', [optional()], default=8022)
     
     protocol_choices = (('Telnet',)*2, ('SSH',)*2)
     protocol = RadioField('', [optional()], choices=protocol_choices)

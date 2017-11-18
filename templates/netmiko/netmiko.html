@@ -12,14 +12,10 @@
             Select a driver :<br>
             {{ form.driver(id="driver", class="form-control") }}<br>
             
-            Username :<br>
-            {{ form.username(id="username", class="form-control") }}<br>
-            
-            Password :<br>
-            {{ form.password(id="password", class="form-control") }}<br>
-            
-            Secret password (optional):<br>
-            {{ form.secret(id="secret", class="form-control") }}<br>
+            {{ form.username(id="username", class="form-control", placeholder=form.username
+            .label.text, required=true) }}
+            {{ form.password(id="password", class="form-control", placeholder=form.password.label.text, required=true) }}
+            {{ form.secret(id="secret", class="form-control", placeholder=form.secret.label.text) }}<br>
             
             Global delay factor :
             {{ form.global_delay_factor(id="global_delay_factor", class="form-control") }}<br>

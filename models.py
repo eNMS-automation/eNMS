@@ -1,4 +1,5 @@
 from napalm_base import get_network_driver
+from netmiko import ConnectHandler
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from app import db
@@ -43,6 +44,17 @@ class Device(Base):
                         )
         device.open()
         return device
+        
+    def netmiko_connection(self, driver, username, password, secret, gdb):
+        parameters = {
+                      'device_type': driver,
+                      'ip': self.IP,
+                      'username': username,
+                      'password': password,
+                      'secret': secret,
+                      'global_delay_factor': gdb
+                      }
+        return ConnectHandler(**parameters)
         
     def __repr__(self):
         return self.hostname

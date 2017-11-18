@@ -54,10 +54,10 @@ class NetmikoForm(FlaskForm):
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
     netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
-    
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', [optional()], choices=drivers)
-    global_delay_factor = FloatField('global_delay_factor', [optional()])
+    
+    global_delay_factor = FloatField('global_delay_factor', [optional()], default=1.)
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     devices = SelectMultipleField('Devices', choices=())

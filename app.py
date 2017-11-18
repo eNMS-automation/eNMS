@@ -33,7 +33,6 @@ from forms import *
 from models import *
 from helpers import *
 from database import init_db, clear_db
-from netmiko import ConnectHandler
 from jinja2 import Template
 from yaml import load
 
@@ -101,6 +100,50 @@ def manage_devices():
                            add_devices_form = add_devices_form,
                            delete_device_form = delete_device_form
                            )
+                           
+@app.route('/netmiko', methods=['GET', 'POST'])
+def netmiko():
+    netmiko_form = NetmikoForm(request.form)
+    # update the list of available devices by querying the database
+    netmiko_form.devices.choices = [(d, d) for d in Device.query.all()]
+    if 'send' in request.form:
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        filename = request.files['file'].filename
+        # retrieve the raw script: we will use it as-is or update it depending
+        # on whether a Jinja2 template was uploaded by the user or not
+        raw_script = request.form['raw_script']
+        if 'file' in request.files and filename:
+            if allowed_file(filename, 'netmiko'):
+                filename = secure_filename(filename)
+                filepath = join(app.config['UPLOAD_FOLDER'], filename)
+                with open(filepath, 'r') as f:
+                    parameters = load(f)
+                template = Template(raw_script)
+                script = template.render(**parameters)
+            else:
+                flash('file {}: format not allowed'.format(filename))
+        else:
+            script = raw_script
+        selected_devices = netmiko_form.data['devices']
+        for device in selected_devices:
+            device_object = db.session.query(Device)\
+                            .filter_by(hostname=device)\
+                            .first()
+            netmiko_handler = device_object.netmiko_connection(
+                                netmiko_form.data['driver'],
+                                netmiko_form.data['username'],
+                                netmiko_form.data['password'],
+                                netmiko_form.data['secret'],
+                                netmiko_form.data['global_delay_factor'],
+                                )
+            netmiko_handler.send_config_set(script.splitlines())
+    return render_template(
+                           'netmiko/netmiko.html',
+                           variables=variables, 
+                           devices={},
+                           form=netmiko_form
+                           )
 
 @app.route('/about')
 def about():
@@ -112,8 +155,8 @@ def napalm_getters():
     napalm_getters_form.devices.choices = [(d, d) for d in Device.query.all()]
     if 'napalm_query' in request.form:
         napalm_output = []
-        device_ip = napalm_getters_form.data['devices']
-        device_object = db.session.query(Device).filter_by(IP=device_ip).first()
+        device_hostname = napalm_getters_form.data['devices']
+        device_object = db.session.query(Device).filter_by(hostname=device_hostname).first()
         napalm_device = device_object.napalm_connection() 
         for getter in napalm_getters_form.data['functions']:
             try:
@@ -161,37 +204,6 @@ def napalm_configuration():
 @app.route('/napalm_daemon')
 def napalm_daemon():
     return render_template('napalm/napalm_daemon.html')
-
-@app.route('/netmiko', methods=['GET', 'POST'])
-def netmiko():
-    netmiko_form = NetmikoForm(request.form)
-    # update the list of available devices by querying the database
-    netmiko_form.devices.choices = [(d, d) for d in Device.query.all()]
-    if netmiko_form.validate_on_submit():
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        filename = request.files['file'].filename
-        # retrieve the raw script: we will use it as-is or update it depending
-        # on whether a Jinja2 template was uploaded by the user or not
-        raw_script = request.form['raw_script']
-        if 'file' in request.files and filename:
-            if allowed_file(filename, 'netmiko'):
-                filename = secure_filename(filename)
-                filepath = join(app.config['UPLOAD_FOLDER'], filename)
-                with open(filepath, 'r') as f:
-                    parameters = load(f)
-                template = Template(raw_script)
-                variable['script'] = template.render(**parameters)
-            else:
-                flash('file {}: format not allowed'.format(filename))
-        else:
-            variables['script'] = raw_script
-    return render_template(
-                           'netmiko/netmiko.html',
-                           variables=variables, 
-                           devices={},
-                           form=netmiko_form
-                           )
                            
 @app.route('/login')
 def login():

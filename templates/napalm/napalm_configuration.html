@@ -9,6 +9,11 @@
         <div class="panel-body">
             {{ form.csrf_token }}
             
+            {{ form.username(id="username", class="form-control", placeholder=form.username
+            .label.text, required=true) }}
+            {{ form.password(id="password", class="form-control", placeholder=form.password.label.text, required=true) }}
+            {{ form.secret(id="secret", class="form-control", placeholder=form.secret.label.text) }}<br>
+            
             <br>{% for subfield in form.protocol %}
             <tr>
                 <td>{{ subfield }}</td>

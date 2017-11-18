@@ -1,7 +1,7 @@
 # Introduction
 
-eNAPALM is a web interface to the two most widely used libraries for network automation: Netmiko and NAPALM.
-It allows to send scripts (plain text script or Jinja2 templates) to one or more devices using Netmiko or NAPALM, and to retrieve and store the output of NAPALM getters.
+eNAPALM is a web interface to netmiko and NAPALM.
+It allows to send scripts (plain text script or Jinja2 templates along with a YAML file) to one or more devices using netmiko or NAPALM, and to retrieve and store the output of NAPALM getters.
 It also includes a daemon for the user to run specific actions (retrieve the getters, send a script) on a regular basis.
 
 ![eNAPALM](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
@@ -13,7 +13,7 @@ In order to start the website, you need to run `app.py`
 python app.py
 ```
 
-You can then access the website at http://IP:5100 where IP is the IP of the server (or 127.0.0.1 if you are running it locally).
+You can then access the website at http://IP:5100 where IP is the IP of the server (or http://127.0.0.1:5100 if you are running it locally).
 
 # How to
 
@@ -33,21 +33,28 @@ or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to
 
 # eNAPALM dependencies
 
-For the website, eNAPALM uses Flask, Bootstrap, SQLAlchemy and jQuery.
-PyGIS relies on the following libraries:
+eNAPALM relies on the following libraries:
 
-* NAPALM.
+* NAPALM
 * netmiko
 * jinja2
 * pyYAML
+* flask
+* SQLAlchemy
+* xlrd
 
-
-Before using PyGISS, you must make sure all these libraries are properly installed:
+Before using eNAPALM, you must make sure all these libraries are properly installed:
 
 ```
-pip install napalm
+pip install napalm (dependencies: netmiko, jinja2, and pyYAML)
+pip install flask_sqlalchemy (dependencies: flask)
+pip install xlrd
 ```
 
 # Credits
 
-[NAPALM](https://github.com/napalm-automation): Network Automation and Programmability Abstraction Layer with Multivendor support. A Python library that implements a set of functions to interact with different router vendor devices using a unified API.
+[Netmiko](https://github.com/ktbyers/netmiko "Netmiko"): A multi-vendor library to simplify Paramiko SSH connections to network devices.
+
+[Jinja2](https://github.com/pallets/jinja "Jinja2"): A modern and designer-friendly templating language for Python.
+
+[NAPALM](https://github.com/napalm-automation/napalm "NAPALM"): A library that implements a set of functions to interact with different network device Operating Systems using a unified API.

@@ -12,10 +12,20 @@
             Select a driver :<br>
             {{ form.driver(id="driver", class="form-control") }}<br>
             
+            Username :<br>
+            {{ form.username(id="username", class="form-control") }}<br>
+            
+            Password :<br>
+            {{ form.password(id="password", class="form-control") }}<br>
+            
+            Secret password (optional):<br>
+            {{ form.secret(id="secret", class="form-control") }}<br>
+            
             Global delay factor :
-            {{ form.global_delay_factor(id="global_delay_factor", class="form-control") }}<br><br>
+            {{ form.global_delay_factor(id="global_delay_factor", class="form-control") }}<br>
+            
             YAML file used for Jinja2 :
-            {{ form.file() }}<br><br>
+            {{ form.file() }}
 
         </div>
     </div>

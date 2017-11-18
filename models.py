@@ -28,28 +28,24 @@ class Device(Base):
     hostname = db.Column(db.String(120))
     IP = db.Column(db.String(120))
     OS = db.Column(db.String(120))
-    username = db.Column(db.String(120))
-    password = db.Column(db.String(120))
 
-    def __init__(self, hostname=None, IP=None, OS=None):
+    def __init__(self, hostname, IP, OS):
         self.hostname = hostname
         self.IP = IP
         self.OS = OS
-        self.username = 'afourmy'
-        self.password = 'welcome59'
         
     def napalm_connection(self):
         driver = get_network_driver(self.OS)
         device = driver(
                         hostname = self.IP, 
-                        username = self.username,
-                        password = self.password, 
+                        username = 'afourmy',
+                        password = 'welcome59', 
                         )
         device.open()
         return device
         
     def __repr__(self):
-        return self.IP
+        return self.hostname
 
 class Department(Base):
     

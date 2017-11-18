@@ -10,14 +10,14 @@
                 {{ add_device_form.csrf_token }}
                 <legend> Expected input data :</legend>
                 
-                To create a device, two parameters are mandatories: IP address and password.
-                The secret password is considered optional, although it may be required to change the configuration of a device.<br><br>
+                To create a device, you must enter three parameters: the
+                hostname, the IP address and the operating system.<br><br>
                 
+                {{ add_device_form.hostname(class="form-control first-input", placeholder=add_device_form.hostname.label.text) }}
                 {{ add_device_form.ip_address(class='form-control last-input', placeholder=add_device_form.ip_address.label.text, required=true) }}
                 {{ add_device_form.os(class='form-control last-input', placeholder=add_device_form.os.label.text, required=true) }}
-                {{ add_device_form.password(class='form-control last-input', placeholder=add_device_form.password.label.text, required=true) }}
-                {{ add_device_form.hostname(class="form-control first-input", placeholder=add_device_form.hostname.label.text) }}
-                {{ add_device_form.secret(class='form-control last-input', placeholder=add_device_form.secret.label.text) }}<hr style="height:1px; visibility:hidden;" />
+
+                <hr style="height:102px; visibility:hidden;" />
                 <input type="submit" name="add_device" value="Add device" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
@@ -34,14 +34,12 @@
                 Multiple devices can be created at once by importing an Excel (.xls, .xlsx) or a CSV file. (.csv)<br>
                 The input file must contain, in the following order:<br><br>
                 <ul class="list-group">
-                <li class="list-group-item">IP address <span class="badge">1</span></li>
-                <li class="list-group-item">Password <span class="badge">2</span></li>
-                <li class="list-group-item">Operating System<span class="badge">3</span></li>
                 <li class="list-group-item">Hostname (optional)<span class="badge">4</span></li>
-                <li class="list-group-item">Secret (optional) <span class="badge">5</span></li>
+                <li class="list-group-item">IP address <span class="badge">1</span></li>
+                <li class="list-group-item">Operating System<span class="badge">3</span></li>
                 </ul> 
             
-            {{ add_devices_form.file() }}<hr style="height:16px; visibility:hidden;" />
+            {{ add_devices_form.file() }}<hr style="height:93px; visibility:hidden;" />
             <input type="submit" name ="add_devices" value="Add multiple devices" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>

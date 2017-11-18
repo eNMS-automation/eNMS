@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import sys
+import xlrd
 
 # prevent python from writing *.pyc files / __pycache__ folders
 sys.dont_write_bytecode = True
@@ -80,11 +81,12 @@ def manage_devices():
             filename = secure_filename(filename)
             filepath = join(app.config['UPLOAD_FOLDER'], filename)
             request.files['file'].save(filepath)
-            # print(filepath, file=sys.stderr)
-            with open(filepath, 'r') as f:
-                pass
-            # # else:
-            #     flash('no file submitted')
+            book = xlrd.open_workbook(filepath)
+            sheet = book.sheet_by_index(0)
+            for row_index in range(1, sheet.nrows):
+                db.session.add(Device(*sheet.row_values(row_index)))
+        else:
+            flash('no file submitted')
     elif 'delete' in request.form:
         selection = delete_device_form.data['devices']
         db.session.query(Device).filter(Device.IP.in_(selection))\

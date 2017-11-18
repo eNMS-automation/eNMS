@@ -23,9 +23,6 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# allowed extensions depending on the webpage
-allowed_extensions = {'devices': {'xls'}, 'netmiko': {'yaml'}}
-
 # dict that maps an IP address to a Device object
 devices = {}
 # all variables used for sending script with netmiko
@@ -69,7 +66,6 @@ def manage_devices():
     add_device_form = AddDevice(request.form)
     add_devices_form = AddDevices(request.form)
     delete_device_form = DeleteDevice(request.form)
-    delete_device_form.devices.choices = [(str(d), str(d)) for d in Device.query.all()]
     if add_device_form.validate_on_submit() and 'add_device' in request.form:
         device = Device(
                         hostname = request.form['hostname'], 
@@ -77,12 +73,26 @@ def manage_devices():
                         OS = request.form['os']
                         )
         db.session.add(device)
+    elif 'add_devices' in request.form:
+        print(request.files, file=sys.stderr)
+        filename = request.files['file'].filename
+        if 'file' in request.files and allowed_file(filename, 'devices'):  
+            filename = secure_filename(filename)
+            filepath = join(app.config['UPLOAD_FOLDER'], filename)
+            request.files['file'].save(filepath)
+            # print(filepath, file=sys.stderr)
+            with open(filepath, 'r') as f:
+                pass
+            # # else:
+            #     flash('no file submitted')
     elif 'delete' in request.form:
         selection = delete_device_form.data['devices']
         db.session.query(Device).filter(Device.IP.in_(selection))\
         .delete(synchronize_session='fetch')
     if request.method == 'POST':
         db.session.commit()
+    # before rendering the page, we update the list of all devices 
+    delete_device_form.devices.choices = [(d, d) for d in Device.query.all()]
     return render_template(
                            'devices/manage_devices.html',
                            add_device_form = add_device_form,

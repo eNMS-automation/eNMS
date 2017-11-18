@@ -43,7 +43,7 @@ class AddDevice(FlaskForm):
     secret = PasswordField('Secret password', [optional()])
     
 class AddDevices(FlaskForm):
-    device_file = FileField('', validators=[FileAllowed(['xls', 'xlsx', 'csv'], 'Excel or CSV file only')])
+    file = FileField('', validators=[FileAllowed(['xls', 'xlsx', 'csv'], 'Excel or CSV file only')])
     
 class DeleteDevice(FlaskForm):
     devices = SelectMultipleField('Devices', choices=())
@@ -58,8 +58,6 @@ class NetmikoForm(FlaskForm):
     
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', [optional()], choices=drivers)
-    protocol_choices = (('Telnet',)*2, ('SSH',)*2)
-    protocol = RadioField('', [optional()], choices=protocol_choices)
     global_delay_factor = FloatField('global_delay_factor', [optional()])
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])

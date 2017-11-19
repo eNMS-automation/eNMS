@@ -53,8 +53,6 @@
               <ul class="dropdown-menu">
                 <li {% if request.endpoint == 'napalm' %} class="active" {% endif %}><a href="{{ url_for('napalm_getters') }}">NAPALM getters</a></li>
                 <li {% if request.endpoint == 'napalm' %} class="active" {% endif %}><a href="{{ url_for('napalm_configuration') }}">NAPALM configuration</a></li>
-                <li class="divider"></li>
-                <li {% if request.endpoint == 'napalm' %} class="active" {% endif %}><a href="{{ url_for('napalm_scheduler') }}">NAPALM scheduler</a></li>
               </ul>
             </li>
           </ul>

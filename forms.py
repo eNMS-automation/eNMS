@@ -91,21 +91,5 @@ class NapalmParametersForm(FlaskForm):
     raw_script = TextAreaField('', [optional(), Length(max=200)])
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     devices = SelectMultipleField('Devices', choices=())
-    
-class NapalmSchedulerForm(FlaskForm):
-    username = TextField('Username', [optional()])
-    password = PasswordField('Password', [optional()])
-    secret = PasswordField('Secret password', [optional()])
-    port = IntegerField('Port', [optional()], default=8022)
-    
-    protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
-    protocol = RadioField('', [optional()], choices=protocol_choices)
-    function_choices = [(function, function) for function in getters_mapping]
-    functions = SelectMultipleField('Devices', choices=function_choices)
-    action_choices = [(action, action) for action in napalm_actions]
-    actions = SelectField('Actions', [optional()], choices=action_choices)
-    raw_script = TextAreaField('', [optional(), Length(max=200)])
-    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
-    devices = SelectMultipleField('Devices', choices=())
-    scheduler_options = [(option, option) for option in scheduler_choices]
-    scheduler = SelectField('Actions', choices=scheduler_options)
+    format = 'Format: 2009-11-06 16:30:05'
+    scheduler = TextField(format, [optional()])

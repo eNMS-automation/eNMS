@@ -4,6 +4,7 @@ from flask_apscheduler import APScheduler
 from werkzeug.utils import secure_filename
 from inspect import stack
 from os.path import abspath, dirname, join
+from datetime import datetime
 import json
 import logging
 import os
@@ -29,7 +30,8 @@ scheduler.init_app(app)
 scheduler.start()
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
+UPLOAD_FOLDER = join(APP_ROOT, 'uploads')
+GETTERS_FOLDER = join(APP_ROOT, 'getters')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 from forms import *
@@ -170,6 +172,15 @@ def retrieve_napalm_getters(getters, devices, *credentials):
             output = 'could not be retrieve because of {}'.format(e)
             napalm_output.append(output)
     return napalm_output
+    
+def retrieve_and_store_napalm_getters(getters, devices, *credentials):
+    # create folder with the current timestamp
+    current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    folder = join(GETTERS_FOLDER, current_time)
+    os.makedirs(folder)
+    output = retrieve_napalm_getters(getters, devices, *credentials)
+    with open(join(folder, 'output.txt'), 'w') as f:
+        print('\n\n'.join(output), file=f)
 
 @app.route('/napalm_getters', methods=['GET', 'POST'])
 def napalm_getters():
@@ -182,7 +193,7 @@ def napalm_getters():
         if scheduler_interval:
             scheduler.add_job(
                             id = ''.join(selected_devices) + scheduler_interval,
-                            func = retrieve_napalm_getters,
+                            func = retrieve_and_store_napalm_getters,
                             args = [                            
                                     getters,
                                     selected_devices,
@@ -193,7 +204,8 @@ def napalm_getters():
                                     form.data['protocol'].lower()
                                     ],
                             trigger = 'interval',
-                            seconds = scheduler_choices[scheduler_interval]
+                            seconds = scheduler_choices[scheduler_interval],
+                            replace_existing = True
                             )
         else:
             napalm_output = retrieve_napalm_getters(

@@ -33,13 +33,3 @@ def init_db():
         device = models.Device(hostname, IP, OS)
         db.session.add(device)
     db.session.commit()
-    
-    # employee for jquery test
-    for dep, employees in {'a': ('1', '2'), 'b': ('3', '4'), 'c': ('i',)}.items():
-        department = models.Department(dep)
-        db.session.add(department)
-        db.session.flush()
-        for employee in employees:
-            e = models.Employee(employee, department.id)
-            db.session.add(e)
-    db.session.commit()

@@ -71,7 +71,7 @@ napalm_actions = OrderedDict([
 
 scheduler_choices = OrderedDict([
 ('', None),
-('Every hour', 10),
+('Every hour', 60*60),
 ('Once a day', 60*60*24),
 ('Once a week', 60*60*24*7),
 ('Once a month', 60*60*24*30),

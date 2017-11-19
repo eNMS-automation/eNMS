@@ -49,7 +49,7 @@ See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_st
 
 The user can choose a device and a set of getters. The query will be sent to the device and the output displayed in the middle panel. 
 
-The getters output can also be retrieved and stored on the server periodically, by selecting a frequency in the right-side panel. The output will be stored in the 'getters' folder of the application.
+The getters output can also be retrieved and stored on the server periodically, by selecting a frequency in the right-side panel. The output will be stored in the 'getters' folder of the application. If left blank, the getters will be retrieved immediately and the ouput display in the panel in the middle.
 
 ![NAPALM Getters](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_getters.png)
 

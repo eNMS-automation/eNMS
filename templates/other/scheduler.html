@@ -1,0 +1,64 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<form action="" method="post" class="form form-group" enctype=multipart/form-data style="width:100%">
+
+<div class="col-md-3">      
+    <div class="panel panel-default" style="height: 500px">
+        <div class="panel-heading">Napalm parameters</div>
+        <div class="panel-body">
+            {{ form.csrf_token }}
+            
+            {{ form.actions(class="form-control", required=true) }}<br>
+            
+            {{ form.username(id="username", class="form-control", placeholder=form.username
+            .label.text, required=true) }}
+            {{ form.password(id="password", class="form-control", placeholder=form.password.label.text, required=true) }}
+            {{ form.secret(id="secret", class="form-control", placeholder=form.secret.label.text) }}<br>
+            
+            Port:
+            {{ form.port(id="port", class="form-control", required=true) }}<br>
+            
+            Transport protocol:<br>
+            {% for subfield in form.protocol %}
+            <tr>
+                <td>{{ subfield }}</td>
+                <td>{{ subfield.label }}</td>
+            <br></tr>
+            {% endfor %}
+            
+            YAML file used for Jinja2 :
+            {{ form.file() }}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">      
+    <div class="panel panel-default" style="height: 500px">
+        <div class="panel-heading">Select devices</div>
+        <div class="panel-body">
+            {{ form.csrf_token }}
+            {{ form.devices(id="Devices", class="form-control", size='9') }}<br>
+            {{ form.functions(id="Actions", class="form-control", size='10') }}<br>
+            {{ form.scheduler(id="Scheduler", class="form-control", required=true) }}<br>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-6">
+    <div class="panel panel-default" style="height: 500px">
+        <div class="panel-heading">Script (list of commands or Jinja2 template)</div>
+        <div class="panel-body">
+        {{ form.actions(id="Actions", class="form-control") }}<br>
+        {{ form.raw_script(id="raw_script", class="form-control", rows='14') }}<br>
+        <input type="submit" name="send" value="send" class="btn btn-primary btn-lg btn-block">
+        </div>
+    </div>
+</div>
+
+
+</form>
+
+{% endblock %}
+

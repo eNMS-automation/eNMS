@@ -217,9 +217,48 @@ def napalm_configuration():
                            form = parameters_form
                            )
                            
-@app.route('/napalm_daemon')
-def napalm_daemon():
-    return render_template('napalm/napalm_daemon.html')
+@app.route('/napalm_scheduler')
+def napalm_scheduler():
+    form = NapalmSchedulerForm(request.form)
+    # update the list of available devices by querying the database
+    form.devices.choices = [(d, d) for d in Device.query.all()]
+    if 'send' in request.form:
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        filename = request.files['file'].filename
+        # retrieve the raw script: we will use it as-is or update it depending
+        # on whether a Jinja2 template was uploaded by the user or not
+        raw_script = request.form['raw_script']
+        if 'file' in request.files and filename:
+            if allowed_file(filename, 'netmiko'):
+                filename = secure_filename(filename)
+                filepath = join(app.config['UPLOAD_FOLDER'], filename)
+                with open(filepath, 'r') as f:
+                    parameters = load(f)
+                template = Template(raw_script)
+                script = template.render(**parameters)
+            else:
+                flash('file {}: format not allowed'.format(filename))
+        else:
+            script = raw_script
+        selected_devices = form.data['devices']
+        action = napalm_actions[form.data['actions']]
+        for device in selected_devices:
+            device_object = db.session.query(Device)\
+                            .filter_by(hostname=device)\
+                            .first()
+            napalm_device = device_object.napalm_connection(
+                    username = form.data['username'],
+                    password = form.data['password'],
+                    secret = form.data['secret'],
+                    port = form.data['port'],
+                    transport = form.data['protocol'].lower(),
+                    )
+            getattr(napalm_device, action)()
+    return render_template(
+                           'other/scheduler.html',
+                           form = form
+                           )
                            
 @app.route('/login')
 def login():

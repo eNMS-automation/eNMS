@@ -69,6 +69,13 @@ napalm_actions = OrderedDict([
 ('Rollback', 'rollback'),
 ])
 
+scheduler_choices = OrderedDict([
+('Every hour', 60*60),
+('Once a day', 60*60*24),
+('Once a week', 60*60*24*7),
+('Once a month', 60*60*24*7*30),
+])
+
 def str_dict(input, depth=0):
     tab = '\t'*depth
     if isinstance(input, list):

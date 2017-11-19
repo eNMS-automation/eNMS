@@ -1,3 +1,4 @@
+from __future__ import print_function
 from flask import Flask, render_template, request, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_apscheduler import APScheduler
@@ -79,7 +80,6 @@ def manage_devices():
                         )
         db.session.add(device)
     elif 'add_devices' in request.form:
-        print(request.files, file=sys.stderr)
         filename = request.files['file'].filename
         if 'file' in request.files and allowed_file(filename, 'devices'):  
             filename = secure_filename(filename)
@@ -223,6 +223,7 @@ def napalm_getters():
                            )
                            
 def send_napalm_script(script, action, devices, *credentials):
+    napalm_output = []
     for device in devices:
         device_object = db.session.query(Device)\
                         .filter_by(hostname=device)\
@@ -235,6 +236,8 @@ def send_napalm_script(script, action, devices, *credentials):
                 getattr(napalm_device, action)()
         except Exception as e:
             output = 'exception {}'.format(e)
+            napalm_output.append(output)
+    return '\n\n'.join(napalm_output)
                            
 @app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():
@@ -281,16 +284,16 @@ def napalm_configuration():
                             run_date = scheduler_date
                             )
         else:
-            send_napalm_script(
-                            script,
-                            action,
-                            selected_devices,
-                            form.data['username'],
-                            form.data['password'],
-                            form.data['secret'],
-                            form.data['port'],
-                            form.data['protocol'].lower()
-                            )
+            form.raw_script.data = send_napalm_script(
+                                        script,
+                                        action,
+                                        selected_devices,
+                                        form.data['username'],
+                                        form.data['password'],
+                                        form.data['secret'],
+                                        form.data['port'],
+                                        form.data['protocol'].lower()
+                                        )
     return render_template(
                            'napalm/napalm_configuration.html',
                            form = form

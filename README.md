@@ -2,7 +2,10 @@
 
 eNAPALM is a web interface for NAPALM and Netmiko.
 It allows to send scripts (plain text script or Jinja2 templates along with a YAML file) to one or more devices using netmiko or NAPALM, and to retrieve and store the output of NAPALM getters.
-It also includes a daemon, implemented with APScheduler, for the user to run specific actions (retrieve the getters, send a script) on a regular basis.
+
+It also includes a daemon, implemented with APScheduler, for the user to retrieve NAPALM getters on a regular basis (every hour, every day, etc) or to send a script at a given point in time.
+
+eNAPALM is implemented with Flask, Bootstrap, jQuery, SQL Alchemy (database) and AP Scheduler (crontab-like functionnalities).
 
 ![eNAPALM](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
 
@@ -33,9 +36,10 @@ The device tab also includes a summary of all devices that have been created so 
 
 The NAPALM configuration webpage allows the user to change the configuration of one or more devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
 The user has to select a port (default port: 8022) and a transport protocol.
-The script can also be a Jinja2 template, in which case a YAML file has to be imported.
+The script can also be a Jinja2 template, in which case a YAML file has to be imported to turn the J2 template into a real script.
 
-In the right-side panel, it is possible to schedule the time when the script will be sent to the device(s). If left blank, the script will be sent immediately.
+In the right-side panel, it is possible to schedule the time when the script will be sent to the device(s). 
+If left blank, the script will be sent immediately.
 
 ![NAPALM Configuration](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
 
@@ -45,7 +49,7 @@ See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_st
 
 The user can choose a device and a set of getters. The query will be sent to the device and the output displayed in the middle panel. 
 
-The getters output can also be retrieved and store on the server periodically, by selecting a frequency in the right-side panel.
+The getters output can also be retrieved and stored on the server periodically, by selecting a frequency in the right-side panel. The output will be stored in the 'getters' folder of the application.
 
 ![NAPALM Getters](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_getters.png)
 

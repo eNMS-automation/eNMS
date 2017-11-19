@@ -54,25 +54,3 @@ class Device(Base):
         
     def __repr__(self):
         return self.hostname
-
-class Department(Base):
-    
-    __tablename__ = 'departments'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-
-    def __init__(self, name):
-        self.name = name
-
-class Employee(Base):
-    
-    __tablename__ = 'employees'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-    department_id = db.Column(db.Integer, db.ForeignKey('departments.id'))
-
-    def __init__(self, name, department_id):
-        self.name = name
-        self.department_id = department_id

@@ -313,33 +313,6 @@ def register():
 def forgot():
     form = ForgotForm(request.form)
     return render_template('forms/forgot.html', form=form)
-    
-@app.route("/department", methods=["GET", "POST"])
-def department():
-    form = TestForm(request.form)
-    departments = Department.query.all()
-    form.department.choices = [('', 'Select a department')] + [
-        (department.id, department.name) for department in departments]
-    chosen_department = None
-    chosen_employee = None
-    
-    return render_template('forms/department.html', form=form)
-
-@app.route("/department/<int:department_id>/", methods=["GET"])
-def get_request(department_id):
-    """
-    Handle GET request to - /<department_id>/
-    Return a list of tuples - (<employee id>, <employee name>)
-    """
-    employees = Employee.query.all()
-
-    department_employees = [
-                            (employee.id, employee.name) for employee in employees
-                            if employee.department_id == department_id
-                            ]
-    response = make_response(json.dumps(department_employees))
-    response.content_type = 'application/json'
-    return response
 
 ## Error handlers.
 

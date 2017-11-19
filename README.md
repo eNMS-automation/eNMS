@@ -1,6 +1,6 @@
 # Introduction
 
-eNAPALM is a web interface to netmiko and NAPALM.
+eNAPALM is a web interface for NAPALM and Netmiko.
 It allows to send scripts (plain text script or Jinja2 templates along with a YAML file) to one or more devices using netmiko or NAPALM, and to retrieve and store the output of NAPALM getters.
 It also includes a daemon, implemented with APScheduler, for the user to run specific actions (retrieve the getters, send a script) on a regular basis.
 
@@ -29,26 +29,28 @@ The device tab also includes a summary of all devices that have been created so 
     
 ![List of all devices](https://github.com/afourmy/e-napalm/blob/master/readme/list_devices.png)
 
+## NAPALM Configuration
+
+The NAPALM configuration webpage allows the user to change the configuration of one or more devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
+The user has to select a port (default port: 8022) and a transport protocol.
+The script can also be a Jinja2 template, in which case a YAML file has to be imported.
+See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_steps_config.html "NAPALM tutorial") for more information about those functions.
+
+![NAPALM Configuration](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
+
+## NAPALM Getters
+
+The user can choose a device and a set of getters. The query will be sent to the device and the output displayed in the middle panel. More information about getters in [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/base.html "NAPALM tutorial")
+
+![NAPALM Getters](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_getters.png)
+
 ## Netmiko
 
 The netmiko page provides an interface to Netmiko.
 The user select a driver and target devices, enters its credentials (username, password and secret password if needed), and sets the port and the global delay factor (default: 8022, 1).
-The script can be a Jinja2 template, in which case a YAML file has to be imported.
+Just like for NAPALM, the script can be a Jinja2 template (YAML file to be imported).
 
 ![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/netmiko.png)
-
-## NAPALM Configuration
-
-The NAPALM configuration webpage allows the user to change the configuration of one or more devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
-See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_steps_config.html "NAPALM tutorial") for more information.
-
-![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
-
-## NAPALM Getters
-
-The user can choose a device and a set of getters. The query will be sent to the device and the output displayed in the middle panel.
-
-![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_getters.png)
 
 # Contact
 

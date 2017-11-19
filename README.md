@@ -52,16 +52,6 @@ Just like for NAPALM, the script can be a Jinja2 template (YAML file to be impor
 
 ![Netmiko](https://github.com/afourmy/e-napalm/blob/master/readme/netmiko.png)
 
-# Contact
-
-You can contact me at my personal email address:
-```
-''.join(map(chr, (97, 110, 116, 111, 105, 110, 101, 46, 102, 111, 
-117, 114, 109, 121, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109)))
-```
-
-or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"). (@minto)
-
 # eNAPALM dependencies
 
 eNAPALM relies on the following libraries:

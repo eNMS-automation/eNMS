@@ -45,7 +45,7 @@
             <div class="panel-heading">Select getters</div>
             <div class="panel-body">
                 {{ form.csrf_token }}
-                {{ form.scheduler(class="form-control", placeholder=form.scheduler.label.text) }}<br>
+                {{ form.scheduler(class="form-control") }}<br>
                 {{ form.functions(id="assigned", class="form-control", size='17') }}<br>
                 <input type="submit" name="napalm_query" value="Start" class="btn btn-primary btn-lg btn-block">
 

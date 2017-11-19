@@ -159,12 +159,15 @@ def retrieve_napalm_getters(getters, devices, *credentials):
         device_object = db.session.query(Device)\
                         .filter_by(hostname=device)\
                         .first()
-        napalm_device = device_object.napalm_connection(*credentials)
-        for getter in getters:
-            try:
-                output = str_dict(getattr(napalm_device, getters_mapping[getter])())
-            except Exception as e:
-                output = '{} could not be retrieve because of {}'.format(getter, e)
+        try:
+            napalm_device = device_object.napalm_connection(*credentials)
+            for getter in getters:
+                try:
+                    output = str_dict(getattr(napalm_device, getters_mapping[getter])())
+                except Exception as e:
+                    output = '{} could not be retrieve because of {}'.format(getter, e)
+        except Exception as e:
+            output = 'could not be retrieve because of {}'.format(e)
             napalm_output.append(output)
     return napalm_output
 
@@ -175,16 +178,34 @@ def napalm_getters():
     if 'napalm_query' in request.form:
         selected_devices = form.data['devices']
         getters = form.data['functions']
-        retrieve_napalm_getters(
-                                getters,
-                                selected_devices,
-                                form.data['username'],
-                                form.data['password'],
-                                form.data['secret'],
-                                form.data['port'],
-                                form.data['protocol'].lower()
-                                )
-        form.output.data = '\n\n'.join(napalm_output)
+        scheduler_interval = form.data['scheduler']
+        if scheduler_interval:
+            scheduler.add_job(
+                            id = ''.join(selected_devices) + scheduler_interval,
+                            func = retrieve_napalm_getters,
+                            args = [                            
+                                    getters,
+                                    selected_devices,
+                                    form.data['username'],
+                                    form.data['password'],
+                                    form.data['secret'],
+                                    form.data['port'],
+                                    form.data['protocol'].lower()
+                                    ],
+                            trigger = 'interval',
+                            seconds = scheduler_choices[scheduler_interval]
+                            )
+        else:
+            napalm_output = retrieve_napalm_getters(
+                                    getters,
+                                    selected_devices,
+                                    form.data['username'],
+                                    form.data['password'],
+                                    form.data['secret'],
+                                    form.data['port'],
+                                    form.data['protocol'].lower()
+                                    )
+            form.output.data = '\n\n'.join(napalm_output)
     return render_template(
                            'napalm/napalm_getters.html',
                            form = form
@@ -195,11 +216,14 @@ def send_napalm_script(script, action, devices, *credentials):
         device_object = db.session.query(Device)\
                         .filter_by(hostname=device)\
                         .first()
-        napalm_device = device_object.napalm_connection(*credentials)
-        if action in ('load_merge_candidate', 'load_replace_candidate'):
-            getattr(napalm_device, action)(config=script)
-        else:
-            getattr(napalm_device, action)()
+        try:
+            napalm_device = device_object.napalm_connection(*credentials)
+            if action in ('load_merge_candidate', 'load_replace_candidate'):
+                getattr(napalm_device, action)(config=script)
+            else:
+                getattr(napalm_device, action)()
+        except Exception as e:
+            output = 'exception {}'.format(e)
                            
 @app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():

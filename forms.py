@@ -95,3 +95,4 @@ class NapalmParametersForm(FlaskForm):
     devices = SelectMultipleField('Devices', choices=())
     format = 'Format: 2009-11-06 16:30:05'
     scheduler = TextField(format, [optional()])
+    

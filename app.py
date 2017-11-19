@@ -21,6 +21,10 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
+scheduler = APScheduler()
+scheduler.init_app(app)
+scheduler.start()
+
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -31,8 +35,6 @@ from helpers import *
 from database import init_db, clear_db
 from jinja2 import Template
 from yaml import load
-
-db = SQLAlchemy()
 
 # automatically tear down SQLAlchemy.
 @app.teardown_request
@@ -174,6 +176,17 @@ def napalm_getters():
                            form = napalm_getters_form
                            )
                            
+def send_napalm_script(script, action, devices, *credentials):
+    for device in devices:
+        device_object = db.session.query(Device)\
+                        .filter_by(hostname=device)\
+                        .first()
+        napalm_device = device_object.napalm_connection(*credentials)
+        if action in ('load_merge_candidate', 'load_replace_candidate'):
+            getattr(napalm_device, action)(config=script)
+        else:
+            getattr(napalm_device, action)()
+                           
 @app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():
     parameters_form = NapalmParametersForm(request.form)
@@ -200,18 +213,35 @@ def napalm_configuration():
             script = raw_script
         selected_devices = parameters_form.data['devices']
         action = napalm_actions[parameters_form.data['actions']]
-        for device in selected_devices:
-            device_object = db.session.query(Device)\
-                            .filter_by(hostname=device)\
-                            .first()
-            napalm_device = device_object.napalm_connection(
-                    username = parameters_form.data['username'],
-                    password = parameters_form.data['password'],
-                    secret = parameters_form.data['secret'],
-                    port = parameters_form.data['port'],
-                    transport = parameters_form.data['protocol'].lower(),
-                    )
-            getattr(napalm_device, action)()
+        scheduler_date = parameters_form.data['scheduler']
+        if scheduler_date:
+            scheduler.add_job(
+                            id = script + scheduler_date,
+                            func = send_napalm_script,
+                            args = [                            
+                                    script,
+                                    action,
+                                    selected_devices,
+                                    parameters_form.data['username'],
+                                    parameters_form.data['password'],
+                                    parameters_form.data['secret'],
+                                    parameters_form.data['port'],
+                                    parameters_form.data['protocol'].lower()
+                                    ],
+                            trigger = 'date',
+                            run_date = scheduler_date
+                            )
+        else:
+            send_napalm_script(
+                            script,
+                            action,
+                            selected_devices,
+                            parameters_form.data['username'],
+                            parameters_form.data['password'],
+                            parameters_form.data['secret'],
+                            parameters_form.data['port'],
+                            parameters_form.data['protocol'].lower()
+                            )
     return render_template(
                            'napalm/napalm_configuration.html',
                            form = parameters_form
@@ -219,6 +249,12 @@ def napalm_configuration():
                            
 @app.route('/login')
 def login():
+    from jobs import show_devices
+    scheduler.add_job(id='job10',
+                      func=show_devices,
+                      trigger='interval',
+                      seconds=10,
+                      replace_existing=True)
     form = LoginForm(request.form)
     return render_template('forms/login.html', form=form)
 
@@ -279,9 +315,5 @@ if __name__ == '__main__':
     # clear_db()
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
-    
-    scheduler = APScheduler()
-    scheduler.init_app(app)
-    scheduler.start()
     
     app.run(host='0.0.0.0', port=port, use_reloader=False)

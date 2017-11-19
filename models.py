@@ -43,7 +43,6 @@ class Device(Base):
                         password = password, 
                         optional_args = {
                                          'secret': secret, 
-                                         'port': port, 
                                          'transport': transport
                                          }
                         )

@@ -141,8 +141,7 @@ def netmiko():
                 username = netmiko_form.data['username'],
                 password = netmiko_form.data['password'],
                 secret = netmiko_form.data['secret'],
-                global_delay_factor = netmiko_form.data['global_delay_factor'],
-                port = netmiko_form.data['port'],
+                global_delay_factor = netmiko_form.data['global_delay_factor']
                 )
             netmiko_handler.send_config_set(script.splitlines())
     return render_template(

@@ -34,15 +34,20 @@ The device tab also includes a summary of all devices that have been created so 
 The NAPALM configuration webpage allows the user to change the configuration of one or more devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
 The user has to select a port (default port: 8022) and a transport protocol.
 The script can also be a Jinja2 template, in which case a YAML file has to be imported.
-See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_steps_config.html "NAPALM tutorial") for more information about those functions.
+In the right-side panel, it is possible to schedule the time when the script will be sent to the device(s). If left blank, the script will be sent immediately.
 
 ![NAPALM Configuration](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_configuration.png)
 
+See [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/tutorials/first_steps_config.html "NAPALM tutorial") for more information about those functions.
+
 ## NAPALM Getters
 
-The user can choose a device and a set of getters. The query will be sent to the device and the output displayed in the middle panel. More information about getters in [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/base.html "NAPALM tutorial")
+The user can choose a device and a set of getters. The query will be sent to the device and the output displayed in the middle panel. 
+The getters output can also be retrieved and store on the server periodically, by selecting a frequency in the right-side panel.
 
 ![NAPALM Getters](https://github.com/afourmy/e-napalm/blob/master/readme/napalm_getters.png)
+
+More information about getters in [NAPALM tutorial](https://napalm.readthedocs.io/en/latest/base.html "NAPALM tutorial")
 
 ## Netmiko
 

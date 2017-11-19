@@ -26,8 +26,6 @@ def init_db():
     
     # add all devices to the database
     db.session.query(models.Device).delete()
-    db.session.query(models.Department).delete()
-    db.session.query(models.Employee).delete()
     db.session.commit()
     for hostname, (IP, OS) in napalm_dispatcher.items():
         device = models.Device(hostname, IP, OS)

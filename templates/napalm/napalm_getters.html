@@ -9,8 +9,6 @@
             <div class="panel-heading">NAPALM query</div>
             <div class="panel-body">
             {{ form.csrf_token }}
-            
-            Select a device :<br>
             {{ form.devices(id="devices", class="form-control") }}<br>
             
             {{ form.username(id="username", class="form-control", placeholder=form.username
@@ -47,7 +45,8 @@
             <div class="panel-heading">Select getters</div>
             <div class="panel-body">
                 {{ form.csrf_token }}
-                {{ form.functions(id="assigned", class="form-control", size='20') }}<br>
+                {{ form.scheduler(class="form-control", placeholder=form.scheduler.label.text) }}<br>
+                {{ form.functions(id="assigned", class="form-control", size='17') }}<br>
                 <input type="submit" name="napalm_query" value="Start" class="btn btn-primary btn-lg btn-block">
 
             </div>

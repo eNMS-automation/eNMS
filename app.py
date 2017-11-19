@@ -19,8 +19,11 @@ if path_app not in sys.path:
 
 app = Flask(__name__)
 app.config.from_object('config')
+
+# start the database
 db = SQLAlchemy(app)
 
+# start the scheduler
 scheduler = APScheduler()
 scheduler.init_app(app)
 scheduler.start()
@@ -149,31 +152,42 @@ def netmiko():
 def about():
     return render_template('other/about.html')
     
-@app.route('/napalm_getters', methods=['GET', 'POST'])
-def napalm_getters():
-    napalm_getters_form = NapalmGettersForm(request.form)
-    napalm_getters_form.devices.choices = [(d, d) for d in Device.query.all()]
-    if 'napalm_query' in request.form:
-        napalm_output = []
-        hostname = napalm_getters_form.data['devices']
-        device_object = db.session.query(Device).filter_by(hostname=hostname).first()
-        napalm_device = device_object.napalm_connection(
-                username = napalm_getters_form.data['username'],
-                password = napalm_getters_form.data['password'],
-                secret = napalm_getters_form.data['secret'],
-                port = napalm_getters_form.data['port'],
-                transport = napalm_getters_form.data['protocol'].lower(),
-                ) 
-        for getter in napalm_getters_form.data['functions']:
+def retrieve_napalm_getters(getters, devices, *credentials):
+    napalm_output = []
+    for device in devices:
+        napalm_output.append('\n{}\n'.format(device))
+        device_object = db.session.query(Device)\
+                        .filter_by(hostname=device)\
+                        .first()
+        napalm_device = device_object.napalm_connection(*credentials)
+        for getter in getters:
             try:
                 output = str_dict(getattr(napalm_device, getters_mapping[getter])())
             except Exception as e:
                 output = '{} could not be retrieve because of {}'.format(getter, e)
             napalm_output.append(output)
-        napalm_getters_form.output.data = '\n\n'.join(napalm_output)
+    return napalm_output
+
+@app.route('/napalm_getters', methods=['GET', 'POST'])
+def napalm_getters():
+    form = NapalmGettersForm(request.form)
+    form.devices.choices = [(d, d) for d in Device.query.all()]
+    if 'napalm_query' in request.form:
+        selected_devices = form.data['devices']
+        getters = form.data['functions']
+        retrieve_napalm_getters(
+                                getters,
+                                selected_devices,
+                                form.data['username'],
+                                form.data['password'],
+                                form.data['secret'],
+                                form.data['port'],
+                                form.data['protocol'].lower()
+                                )
+        form.output.data = '\n\n'.join(napalm_output)
     return render_template(
                            'napalm/napalm_getters.html',
-                           form = napalm_getters_form
+                           form = form
                            )
                            
 def send_napalm_script(script, action, devices, *credentials):
@@ -189,9 +203,9 @@ def send_napalm_script(script, action, devices, *credentials):
                            
 @app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():
-    parameters_form = NapalmParametersForm(request.form)
+    form = NapalmParametersForm(request.form)
     # update the list of available devices by querying the database
-    parameters_form.devices.choices = [(d, d) for d in Device.query.all()]
+    form.devices.choices = [(d, d) for d in Device.query.all()]
     if 'send' in request.form:
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -211,9 +225,9 @@ def napalm_configuration():
                 flash('file {}: format not allowed'.format(filename))
         else:
             script = raw_script
-        selected_devices = parameters_form.data['devices']
-        action = napalm_actions[parameters_form.data['actions']]
-        scheduler_date = parameters_form.data['scheduler']
+        selected_devices = form.data['devices']
+        action = napalm_actions[form.data['actions']]
+        scheduler_date = form.data['scheduler']
         if scheduler_date:
             scheduler.add_job(
                             id = script + scheduler_date,
@@ -222,11 +236,11 @@ def napalm_configuration():
                                     script,
                                     action,
                                     selected_devices,
-                                    parameters_form.data['username'],
-                                    parameters_form.data['password'],
-                                    parameters_form.data['secret'],
-                                    parameters_form.data['port'],
-                                    parameters_form.data['protocol'].lower()
+                                    form.data['username'],
+                                    form.data['password'],
+                                    form.data['secret'],
+                                    form.data['port'],
+                                    form.data['protocol'].lower()
                                     ],
                             trigger = 'date',
                             run_date = scheduler_date
@@ -236,25 +250,19 @@ def napalm_configuration():
                             script,
                             action,
                             selected_devices,
-                            parameters_form.data['username'],
-                            parameters_form.data['password'],
-                            parameters_form.data['secret'],
-                            parameters_form.data['port'],
-                            parameters_form.data['protocol'].lower()
+                            form.data['username'],
+                            form.data['password'],
+                            form.data['secret'],
+                            form.data['port'],
+                            form.data['protocol'].lower()
                             )
     return render_template(
                            'napalm/napalm_configuration.html',
-                           form = parameters_form
+                           form = form
                            )
                            
 @app.route('/login')
 def login():
-    from jobs import show_devices
-    scheduler.add_job(id='job10',
-                      func=show_devices,
-                      trigger='interval',
-                      seconds=10,
-                      replace_existing=True)
     form = LoginForm(request.form)
     return render_template('forms/login.html', form=form)
 

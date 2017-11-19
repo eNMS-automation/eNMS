@@ -73,9 +73,11 @@ class NapalmGettersForm(FlaskForm):
     
     protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
     protocol = RadioField('', [optional()], choices=protocol_choices)
-    devices = SelectField('', [optional()], choices=())
+    devices = SelectMultipleField('', [optional()], choices=())
     function_choices = [(function, function) for function in getters_mapping]
     functions = SelectMultipleField('Devices', choices=function_choices)
+    scheduler_intervals = [(option, option) for option in scheduler_choices]
+    scheduler = SelectField('', [optional()], choices=scheduler_intervals)
     output = TextAreaField('', [optional()])
 
 class NapalmParametersForm(FlaskForm):

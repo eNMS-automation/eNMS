@@ -167,6 +167,7 @@ def retrieve_napalm_getters(getters, devices, *credentials):
                     output = str_dict(getattr(napalm_device, getters_mapping[getter])())
                 except Exception as e:
                     output = '{} could not be retrieve because of {}'.format(getter, e)
+                napalm_output.append(output)
         except Exception as e:
             output = 'could not be retrieve because of {}'.format(e)
             napalm_output.append(output)
@@ -331,7 +332,7 @@ if not app.debug:
 
 if __name__ == '__main__':
     init_db()
-    # clear_db()
+
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
     

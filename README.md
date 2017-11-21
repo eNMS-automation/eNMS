@@ -24,7 +24,7 @@ You can then access the website at http://IP:5100 where IP is the IP address of 
 
 The first step is to create "devices". 
 A device is defined by its hostname, IP address and operating system.
-The left-side panel allows creating devices one by one by entering those parameters manually. Devices can also be created by importing an Excel file (.xls or .xlsx), or a CSV file.
+The left-side panel allows creating devices one by one by entering those parameters manually. Devices can also be created by importing an Excel file (.xls or .xlsx) (CSV import will be implemented later).
 
 ![Device management](https://github.com/afourmy/e-napalm/blob/master/readme/manage_devices.png)
 
@@ -35,7 +35,7 @@ The device tab also includes a summary of all devices that have been created so 
 ## NAPALM Configuration
 
 The NAPALM configuration webpage allows the user to change the configuration of one or more devices by using NAPALM functions: load_merge, load_replace, commit, discard and rollback.
-The user has to select a port (default port: 8022) and a transport protocol.
+The user has to select a transport protocol and enters its credentials (username, password and secret password if needed).
 The script can also be a Jinja2 template, in which case a YAML file has to be imported to turn the J2 template into a real script.
 
 In the right-side panel, it is possible to schedule the time when the script will be sent to the device(s). 
@@ -99,10 +99,10 @@ pip install -r requirements.txt
 
 [Jinja2](https://github.com/pallets/jinja "Jinja2"): A modern and designer-friendly templating language for Python.
 
-[xlrd](https://github.com/python-excel/xlrd) Library to extract data from Microsoft Excel (tm) spreadsheet files
+[xlrd](https://github.com/python-excel/xlrd): Library to extract data from Microsoft Excel (tm) spreadsheet files
 
-[Flask](http://flask.pocoo.org) Micro webdevelopment framework for Python.
+[Flask](http://flask.pocoo.org): Micro webdevelopment framework for Python.
 
-[SQLAlchemy](https://www.sqlalchemy.org) Python SQL toolkit and Object Relational Mapper
+[SQLAlchemy](https://www.sqlalchemy.org): Python SQL toolkit and Object Relational Mapper
 
-[flask_apscheduler](https://github.com/viniciuschiele/flask-apscheduler) Adds APScheduler (Advanced Python Scheduler) support to Flask
+[flask_apscheduler](https://github.com/viniciuschiele/flask-apscheduler): Adds APScheduler (Advanced Python Scheduler) support to Flask

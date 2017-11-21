@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'gentelella.urls'
+ROOT_URLCONF = 'ngNMS.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gentelella.wsgi.application'
+WSGI_APPLICATION = 'ngNMS.wsgi.application'
 
 
 # Database

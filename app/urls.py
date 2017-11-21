@@ -2,6 +2,8 @@ from django.conf.urls import url
 from app import views
 
 urlpatterns = [
+
+    url(r'^create_devices\.html', views.get_name),
     # Matches any html file - to be used for gentella
     # Avoid using your .html in your resources.
     # Or create a separate django app.

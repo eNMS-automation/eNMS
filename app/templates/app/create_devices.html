@@ -46,13 +46,12 @@
             </div>
             <div class="x_content">
               <br />
-              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="/hostname/">
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hostname">Hostname <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                    {{ form.hostname }}
                   </div>
                 </div>
                 
@@ -89,7 +88,17 @@
             </div>
           </div>
         </div>
-
+        
+        <div class="col-md-6 col-xs-12">
+          <div class="x_panel">
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+        
         <div class="col-md-6 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
@@ -118,7 +127,9 @@
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Default Input</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" placeholder="Default Input">
+                    {% csrf_token %}
+                    {{ form.file }}
+                    <input type="submit" name="file" value="Submit" />
                   </div>
                 </div>
 

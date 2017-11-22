@@ -26,6 +26,9 @@ class DeviceCreationForm(BootstrapForm):
         super().__init__(*args, **kwargs)
         # self.fields['hostname'].widget.attrs.update({'placeholder': 'Enter a name'})
     
-    def yield_values(self):
-        for value in ('hostname', 'ip_address', 'vendor'):
-            yield value
+    @property
+    def values(self):
+        return {
+                value: self.cleaned_data[value] 
+                for value in ('hostname', 'ip_address', 'vendor')
+                }

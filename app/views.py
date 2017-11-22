@@ -3,6 +3,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import DeviceUploadForm, DeviceCreationForm
 from .functions import handle_uploaded_file
+from .models import Device
 
 def index(request):
     context = {}
@@ -20,20 +21,24 @@ def gentella_html(request):
     template = loader.get_template('app/' + load_template)
     return HttpResponse(template.render(context, request))
     
+def devices(request):
+    fields = Device._meta.get_fields()[1:]
+    devices = Device.objects.all()
+    return render(
+                  request, 
+                  'app/devices.html', 
+                  {'fields': fields, 'devices': devices}
+                  )
+    
 def create_devices(request):
-    print(request.method)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         device_creation_form = DeviceCreationForm(request.POST)
         device_upload_form = DeviceUploadForm(request.POST, request.FILES)
-        # check whether it's valid:
-        print(device_creation_form.is_valid(), device_upload_form.is_valid())
         if device_creation_form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            Device.objects.create(**device_creation_form.values)
+            return HttpResponseRedirect('devices.html')
         elif device_upload_form.is_valid():
             handle_uploaded_file(request.FILES['file'])
             return HttpResponseRedirect('devices.html')

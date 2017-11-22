@@ -47,33 +47,16 @@
             <div class="x_content">
               <br />
               <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="/hostname/">
+
+              {% for field in device_creation_form %}
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hostname">Hostname <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hostname">{{ field.label }} <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    {{ form.hostname }}
+                    {{ field }}
                   </div>
                 </div>
-                
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ip-address">IP address <span class="required">*</span>
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Vendor</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control">
-                      <option>Cisco</option>
-                      <option>Juniper</option>
-                      <option>Arista</option>
-                      <option>Nokia</option>
-                    </select>
-                  </div>
-                </div>
+              {% endfor %}
 
                 <div class="ln_solid"></div>
                 <div class="form-group">
@@ -88,17 +71,7 @@
             </div>
           </div>
         </div>
-        
-        <div class="col-md-6 col-xs-12">
-          <div class="x_panel">
-            <form method="post">
-                {% csrf_token %}
-                {{ form }}
-                <input type="submit" value="Submit" />
-            </form>
-          </div>
-        </div>
-        
+
         <div class="col-md-6 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
@@ -122,14 +95,22 @@
             </div>
             <div class="x_content">
               <br />
-              <form class="form-horizontal form-label-left">
+              <form method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Default Input</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Select a file</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     {% csrf_token %}
-                    {{ form.file }}
-                    <input type="submit" name="file" value="Submit" />
+                    {{ device_upload_form.file }}
+                    <div class="ln_solid"></div>
+                  </div>
+                </div>
+                
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                   </div>
                 </div>
 

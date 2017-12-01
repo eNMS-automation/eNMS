@@ -1,4 +1,4 @@
-from napalm_base import get_network_driver
+from napalm import get_network_driver
 from netmiko import ConnectHandler
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String

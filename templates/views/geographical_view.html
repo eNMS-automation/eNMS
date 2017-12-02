@@ -34,7 +34,7 @@
           var greenIcon = L.icon({
               iconUrl: 'static/images/default_router.gif',
               iconSize:     [18, 12], // size of the icon
-              iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+              iconAnchor:   [9, 6], // point of the icon which will correspond to marker's location
               popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
           });
           
@@ -65,7 +65,7 @@
               return false
           }
           
-          {% for device, properties in table.items() %}
+          {% for device, properties in device_table.items() %}
           var marker = L.marker([{{ device.latitude }}, {{ device.longitude }}], {icon: greenIcon}).addTo(mymap);
           
           marker.bindPopup("{% for property_name, property in properties.items() %}\
@@ -75,7 +75,7 @@
           <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
           {% endfor %}
           
-          {% for link in links %}
+          {% for link, properties in link_table.items() %}
             var pointA = new L.LatLng({{ link['source']['latitude'] }}, {{ link['source']['longitude'] }});
             var pointB = new L.LatLng({{ link['destination']['latitude'] }}, {{ link['destination']['longitude'] }});
             var pointList = [pointA, pointB];
@@ -87,6 +87,9 @@
                 smoothFactor: 1
             });
             firstpolyline.addTo(mymap);
+            
+          firstpolyline.bindPopup("{% for property_name, property in properties.items() %}\
+          <b>{{property_name}}</b>: {{property}}<br>{% endfor %}");
 
           {% endfor %}
           

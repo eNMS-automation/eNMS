@@ -33,7 +33,7 @@
           
 
           var greenIcon = L.icon({
-              iconUrl: 'https://github.com/afourmy/ngNMS/blob/master/app/static/images/default_router.gif',
+              iconUrl: 'static/images/default_router.gif',
               iconSize:     [18, 12], // size of the icon
               iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
               popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
@@ -59,8 +59,8 @@
           
               req.open('POST', '/ajax_connection_to_device')
               req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-              var un = document.getElementById('scname').value
-              var postVars = 'username='+un
+              var ip = document.getElementById('ip_address').value
+              var postVars = 'ip_address='+ip
               req.send(postVars)
               
               return false
@@ -72,7 +72,7 @@
           marker.bindPopup("{% for property_name, property in properties.items() %}\
           <b>{{property_name}}</b>: {{property}}<br>{% endfor %}<br>\
           <form action='' method='POST' id='#form'>\
-          <input type='hidden' name='scname' id='scname' value={{ device.ip_address }}>\
+          <input type='hidden' name='ip_address' id='ip_address' value={{ device.ip_address }}>\
           <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
           {% endfor %}
           

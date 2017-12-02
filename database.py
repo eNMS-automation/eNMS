@@ -24,11 +24,11 @@ def init_db():
     import models
     Base.metadata.create_all(bind=engine)
     
-    # add all devices to the database
-    db.session.query(models.Device).delete()
-    db.session.commit()
-    for hostname, (IP, OS) in napalm_dispatcher.items():
-        values = {'hostname': hostname, 'ip_address': IP, 'operating_system': OS}
-        device = models.Device(**values)
-        db.session.add(device)
-    db.session.commit()
+    # # add all devices to the database
+    # db.session.query(models.Device).delete()
+    # db.session.commit()
+    # for hostname, (IP, OS) in napalm_dispatcher.items():
+    #     values = {'hostname': hostname, 'ip_address': IP, 'operating_system': OS}
+    #     device = models.Device(**values)
+    #     db.session.add(device)
+    # db.session.commit()

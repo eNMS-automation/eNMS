@@ -176,6 +176,7 @@ def netmiko():
     netmiko_form = NetmikoForm(request.form)
     # update the list of available devices by querying the database
     netmiko_form.devices.choices = [(d, d) for d in Device.query.all()]
+    netmiko_form.user.choices = [(u, u) for u in User.query.all()]
     if 'send' in request.form:
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -196,18 +197,16 @@ def netmiko():
         else:
             script = raw_script
         selected_devices = netmiko_form.data['devices']
+        user = db.session.query(User).filter_by(username=netmiko_form.data['user']).first()
         for device in selected_devices:
             device_object = db.session.query(Device)\
                             .filter_by(hostname=device)\
                             .first()
             netmiko_handler = device_object.netmiko_connection(
-                host = device,
-                device_type = netmiko_form.data['driver'],
-                username = netmiko_form.data['username'],
-                password = netmiko_form.data['password'],
-                secret = netmiko_form.data['secret'],
-                global_delay_factor = netmiko_form.data['global_delay_factor']
-                )
+                                                               device, 
+                                                               user, 
+                                                               netmiko_form
+                                                               )
             netmiko_handler.send_config_set(script.splitlines())
     return render_template(
                            'automation/netmiko.html',

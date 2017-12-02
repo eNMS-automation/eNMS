@@ -60,8 +60,15 @@ class Device(CustomBase):
         device.open()
         return device
         
-    def netmiko_connection(self, **parameters):
-        return ConnectHandler(**parameters)
+    def netmiko_connection(self, device, user, netmiko_form):
+        return ConnectHandler(                
+                host = device,
+                device_type = netmiko_form.data['driver'],
+                username = user.username,
+                password = user.password,
+                secret = user.secret,
+                global_delay_factor = netmiko_form.data['global_delay_factor']
+                )
         
     def __repr__(self):
         return self.hostname

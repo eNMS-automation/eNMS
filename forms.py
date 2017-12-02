@@ -46,10 +46,8 @@ class AddLink(FlaskForm):
 ## Forms for Netmiko
     
 class NetmikoForm(FlaskForm):
-    username = TextField('Username', [optional()])
-    password = PasswordField('Password', [optional()])
-    secret = PasswordField('Secret password', [optional()])
-    port = IntegerField('Port', [optional()], default=8022)
+    
+    user = SelectField('User', choices=())
     
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
@@ -58,40 +56,47 @@ class NetmikoForm(FlaskForm):
     driver = SelectField('', [optional()], choices=drivers)
     
     global_delay_factor = FloatField('global_delay_factor', [optional()], default=1.)
+    
     raw_script = TextAreaField('', [optional(), Length(max=200)])
+    
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
+    
     devices = SelectMultipleField('Devices', choices=())
     
 ## Forms for NAPALM
 
 class NapalmGettersForm(FlaskForm):
-    username = TextField('Username', [optional()])
-    password = PasswordField('Password', [optional()])
-    secret = PasswordField('Secret password', [optional()])
-    port = IntegerField('Port', [optional()], default=8022)
+    
+    user = SelectField('User', choices=())
     
     protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
     protocol = RadioField('', [optional()], choices=protocol_choices)
+    
     devices = SelectMultipleField('', [optional()], choices=())
+    
     function_choices = [(function, function) for function in getters_mapping]
     functions = SelectMultipleField('Devices', choices=function_choices)
+    
     scheduler_intervals = [(option, option) for option in scheduler_choices]
     scheduler = SelectField('', [optional()], choices=scheduler_intervals)
+    
     output = TextAreaField('', [optional()])
 
 class NapalmParametersForm(FlaskForm):
-    username = TextField('Username', [optional()])
-    password = PasswordField('Password', [optional()])
-    secret = PasswordField('Secret password', [optional()])
-    port = IntegerField('Port', [optional()], default=8022)
+    
+    user = SelectField('User', choices=())
     
     protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
     protocol = RadioField('', [optional()], choices=protocol_choices)
+    
     action_choices = [(action, action) for action in napalm_actions]
     actions = SelectField('Actions', [optional()], choices=action_choices)
+    
     raw_script = TextAreaField('', [optional(), Length(max=200)])
+    
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
+    
     devices = SelectMultipleField('Devices', choices=())
-    format = 'Format: 2009-11-06 16:30:05'
-    scheduler = TextField(format, [optional()])
+    
+    scheduler = TextField('Format: 2009-11-06 16:30:05', [optional()])
     

@@ -170,49 +170,6 @@ def geographical_view():
 @app.route('/logical_view')
 def logical_view():
     return render_template('views/logical_view.html')
-    
-# @app.route('/manage_devices', methods=['GET', 'POST'])
-# def manage_devices():
-#     add_device_form = AddDevice(request.form)
-#     add_devices_form = AddDevices(request.form)
-#     add_link_form = AddLink(request.form)
-    # delete_device_form = DeleteDevice(request.form)
-#     if add_device_form.validate_on_submit() and 'add_device' in request.form:
-#         device = Device(
-#                         hostname = request.form['hostname'], 
-#                         IP = request.form['ip_address'], 
-#                         OS = request.form['os']
-#                         )
-#         db.session.add(device)
-#     elif 'add_devices' in request.form:
-#         filename = request.files['file'].filename
-#         if 'file' in request.files and allowed_file(filename, 'devices'):  
-#             filename = secure_filename(filename)
-#             filepath = join(app.config['UPLOAD_FOLDER'], filename)
-#             request.files['file'].save(filepath)
-#             book = xlrd.open_workbook(filepath)
-#             sheet = book.sheet_by_index(0)
-#             for row_index in range(1, sheet.nrows):
-#                 db.session.add(Device(*sheet.row_values(row_index)))
-#         else:
-#             flash('no file submitted')
-#     elif 'delete' in request.form:
-        # selection = delete_device_form.data['devices']
-        # db.session.query(Device).filter(Device.IP.in_(selection))\
-        # .delete(synchronize_session='fetch')
-#     if request.method == 'POST':
-#         db.session.commit()
-#     # before rendering the page, we update the list of all devices 
-    # all_devices = [(d, d) for d in Device.query.all()]
-    # delete_device_form.devices.choices = all_devices
-#     add_link_form.source.choices = add_link_form.destination.choices = all_devices
-#     return render_template(
-#                            'devices/manage_devices.html',
-#                            add_device_form = add_device_form,
-#                            add_devices_form = add_devices_form,
-#                            add_link_form = add_link_form,
-#                            delete_device_form = delete_device_form
-#                            )
                            
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():

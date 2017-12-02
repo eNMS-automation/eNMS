@@ -36,6 +36,10 @@ class AddDevices(FlaskForm):
 class DeleteDevice(FlaskForm):
     devices = SelectMultipleField('Devices', choices=())
     
+class AddLink(FlaskForm):
+    source = SelectField('Source', choices=())
+    destination = SelectField('Destination', choices=())
+    
 ## Forms for Netmiko
     
 class NetmikoForm(FlaskForm):

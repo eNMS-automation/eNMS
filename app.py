@@ -48,9 +48,9 @@ def index():
     
 @app.route('/ajax_connection_to_device', methods = ['POST'])
 def ajax_request():
-    username = request.form['username']
-    print(username)
-    return jsonify(username=username)
+    ip_address = request.form['ip_address']
+    print(ip_address)
+    return jsonify(ip_address=ip_address)
     
 ## Users
 
@@ -90,11 +90,7 @@ def create_devices():
     add_device_form = AddDevice(request.form)
     add_devices_form = AddDevices(request.form)
     if 'add_device' in request.form:
-        device = Device(
-                        hostname = request.form['hostname'], 
-                        ip_address = request.form['ip_address'], 
-                        operating_system = request.form['operating_system']
-                        )
+        device = Device(**request.form)
         db.session.add(device)
     elif 'add_devices' in request.form:
         filename = request.files['file'].filename
@@ -104,8 +100,10 @@ def create_devices():
             request.files['file'].save(filepath)
             book = xlrd.open_workbook(filepath)
             sheet = book.sheet_by_index(0)
+            properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
-                db.session.add(Device(*sheet.row_values(row_index)))
+                kwargs = dict(zip(properties, sheet.row_values(row_index)))
+                db.session.add(Device(**kwargs))
         else:
             flash('no file submitted')
     if request.method == 'POST':

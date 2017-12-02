@@ -137,20 +137,29 @@ def create_devices():
                            
 @app.route('/geographical_view')
 def geographical_view():
-    fields = tuple(Device.__table__.columns._data)
+    device_fields = tuple(Device.__table__.columns._data)
     devices = Device.query.all()
-    table = {}
+    device_table = {}
     for device in devices:
-        lines = {field: getattr(device, field) for field in fields}
-        table[device] = lines
+        lines = {field: getattr(device, field) for field in device_fields}
+        device_table[device] = lines
+    link_fields = tuple(Link.__table__.columns._data)
     links = Link.query.all()
+    link_table = {}
+    for link in links:
+        lines = {field: getattr(link, field) for field in link_fields}
+        link_table[link] = lines
     for link in links:
         print(link.source.longitude, link.source.latitude, link.destination.latitude, link.destination.longitude)
     return render_template(
                            'views/geographical_view.html', 
-                           table = table,
-                           links = Link.query.all()
+                           device_table = device_table,
+                           link_table = link_table
                            )
+                           
+@app.route('/logical_view')
+def logical_view():
+    return render_template('views/logical_view.html')
     
 # @app.route('/manage_devices', methods=['GET', 'POST'])
 # def manage_devices():

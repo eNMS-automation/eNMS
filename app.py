@@ -83,10 +83,14 @@ def create_users():
     
 @app.route('/devices')
 def devices():
+    links = Link.query.all()
+    print(links)
     return render_template(
                            'devices/overview.html', 
-                           fields = Device.__table__.columns._data, 
-                           devices = Device.query.all()
+                           device_fields = Device.__table__.columns._data, 
+                           devices = Device.query.all(),
+                           link_fields = Link.__table__.columns._data, 
+                           links = Link.query.all()
                            )
                            
 @app.route('/device_creation', methods=['GET', 'POST'])
@@ -111,6 +115,15 @@ def create_devices():
                 db.session.add(Device(**kwargs))
         else:
             flash('no file submitted')
+    elif 'add_link' in request.form:
+        source = db.session.query(Device)\
+                 .filter_by(hostname=request.form['source'])\
+                 .first()
+        destination = db.session.query(Device)\
+                      .filter_by(hostname=request.form['destination'])\
+                      .first()
+        new_link = Link(source_id=source.id, destination_id=destination.id, source=source, destination=destination)
+        db.session.add(new_link)
     if request.method == 'POST':
         db.session.commit()
     all_devices = [(d, d) for d in Device.query.all()]
@@ -130,9 +143,13 @@ def geographical_view():
     for device in devices:
         lines = {field: getattr(device, field) for field in fields}
         table[device] = lines
+    links = Link.query.all()
+    for link in links:
+        print(link.source.longitude, link.source.latitude, link.destination.latitude, link.destination.longitude)
     return render_template(
                            'views/geographical_view.html', 
-                           table = table
+                           table = table,
+                           links = Link.query.all()
                            )
     
 # @app.route('/manage_devices', methods=['GET', 'POST'])

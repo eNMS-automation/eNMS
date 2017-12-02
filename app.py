@@ -67,16 +67,26 @@ def users():
                            )
                            
 @app.route('/manage_users', methods=['GET', 'POST'])
-def create_users():
-    add_user_form = AddUser()
+def manage_users():
+    add_user_form = AddUser(request.form)
+    delete_user_form = DeleteUser(request.form)
     if 'add_user' in request.form:
         user = User(**request.form)
         db.session.add(user)
+    elif 'delete_user' in request.form:
+        selection = delete_user_form.data['users']
+        print(selection)
+        db.session.query(User).filter(User.username.in_(selection))\
+        .delete(synchronize_session='fetch')
     if request.method == 'POST':
         db.session.commit()
+    all_users = [(u, u) for u in User.query.all()]
+    delete_user_form.users.choices = all_users
+    print(all_users)
     return render_template(
-                           'users/create_user.html',
+                           'users/manage_users.html',
                            add_user_form = add_user_form,
+                           delete_user_form = delete_user_form
                            )
                            
 ## Devices
@@ -166,7 +176,7 @@ def logical_view():
 #     add_device_form = AddDevice(request.form)
 #     add_devices_form = AddDevices(request.form)
 #     add_link_form = AddLink(request.form)
-#     delete_device_form = DeleteDevice(request.form)
+    # delete_device_form = DeleteDevice(request.form)
 #     if add_device_form.validate_on_submit() and 'add_device' in request.form:
 #         device = Device(
 #                         hostname = request.form['hostname'], 
@@ -187,14 +197,14 @@ def logical_view():
 #         else:
 #             flash('no file submitted')
 #     elif 'delete' in request.form:
-#         selection = delete_device_form.data['devices']
-#         db.session.query(Device).filter(Device.IP.in_(selection))\
-#         .delete(synchronize_session='fetch')
+        # selection = delete_device_form.data['devices']
+        # db.session.query(Device).filter(Device.IP.in_(selection))\
+        # .delete(synchronize_session='fetch')
 #     if request.method == 'POST':
 #         db.session.commit()
 #     # before rendering the page, we update the list of all devices 
-#     all_devices = [(d, d) for d in Device.query.all()]
-#     delete_device_form.devices.choices = all_devices
+    # all_devices = [(d, d) for d in Device.query.all()]
+    # delete_device_form.devices.choices = all_devices
 #     add_link_form.source.choices = add_link_form.destination.choices = all_devices
 #     return render_template(
 #                            'devices/manage_devices.html',

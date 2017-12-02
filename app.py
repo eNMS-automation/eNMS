@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from inspect import stack
 from os.path import abspath, dirname, join
 from datetime import datetime
+from subprocess import Popen
 import json
 import logging
 import os
@@ -25,6 +26,7 @@ db = SQLAlchemy(app)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = join(APP_ROOT, 'uploads')
 GETTERS_FOLDER = join(APP_ROOT, 'getters')
+APPS_FOLDER = join(APP_ROOT, 'applications')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 from forms import *
@@ -49,7 +51,10 @@ def index():
 @app.route('/ajax_connection_to_device', methods = ['POST'])
 def ajax_request():
     ip_address = request.form['ip_address']
-    print(ip_address)
+    path_putty = join(APPS_FOLDER, 'putty.exe')
+    print(path_putty)
+    ssh_connection = '{} -ssh {}'.format(path_putty, ip_address)
+    connect = Popen(ssh_connection.split())
     return jsonify(ip_address=ip_address)
     
 ## Users

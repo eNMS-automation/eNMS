@@ -210,7 +210,7 @@ def netmiko():
                 )
             netmiko_handler.send_config_set(script.splitlines())
     return render_template(
-                           'netmiko/netmiko.html',
+                           'automation/netmiko.html',
                            form = netmiko_form
                            )
     

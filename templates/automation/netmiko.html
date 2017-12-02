@@ -1,0 +1,70 @@
+{% extends "base_site.html" %}
+
+{% block title %} Dashboard 1 {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Create devices</h3>
+        </div>
+      </div>
+
+      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Parameters</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+  
+                Select a driver :<br>
+                {{ form.driver(id="driver", class="form-control") }}<br>
+                
+                Select a driver :<br>
+                {{ form.user(id="user", class="form-control", placeholder=form.user.label.text, required=true) }}<br>
+                
+                Global delay factor :
+                {{ form.global_delay_factor(id="global_delay_factor", class="form-control", required=true) }}<br>
+                
+                YAML file used for Jinja2 :
+                {{ form.file() }}<br>
+                
+                Devices :
+                {{ form.devices(id="Devices", class="form-control", size='10') }}<br>
+                
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-8 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Script (plain text or Jinja2 template)</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+  
+                {{ form.raw_script(id="raw_script", class="form-control", rows='24') }}
+
+              </div>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+{% endblock javascripts %}

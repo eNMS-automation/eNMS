@@ -31,7 +31,7 @@ class User(CustomBase):
     secret_password = db.Column(db.String(30))
         
     def __repr__(self):
-        return self.username
+        return str(self.username)
         
 class Device(CustomBase):
     

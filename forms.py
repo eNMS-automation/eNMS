@@ -15,6 +15,9 @@ class AddUser(FlaskForm):
     password = PasswordField('Password')
     secret_password = PasswordField('Secret password')
     
+class DeleteUser(FlaskForm):
+    users = SelectMultipleField('Users', choices=())
+    
 ## Forms for managing devices
     
 # devices can be added to the database either one by one via the AddDevice

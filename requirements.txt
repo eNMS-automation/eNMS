@@ -1,0 +1,9 @@
+flask
+flask_wtf
+flask_sqlalchemy
+napalm
+netmiko
+jinja2
+wtforms
+xlrd
+yaml

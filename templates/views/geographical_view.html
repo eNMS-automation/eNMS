@@ -31,7 +31,6 @@
           var mymap = L.map('mapid').setView([48, 2], 5);
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
           
-
           var greenIcon = L.icon({
               iconUrl: 'static/images/default_router.gif',
               iconSize:     [18, 12], // size of the icon
@@ -74,6 +73,21 @@
           <form action='' method='POST' id='#form'>\
           <input type='hidden' name='ip_address' id='ip_address' value={{ device.ip_address }}>\
           <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
+          {% endfor %}
+          
+          {% for link in links %}
+            var pointA = new L.LatLng({{ link['source']['latitude'] }}, {{ link['source']['longitude'] }});
+            var pointB = new L.LatLng({{ link['destination']['latitude'] }}, {{ link['destination']['longitude'] }});
+            var pointList = [pointA, pointB];
+            
+            var firstpolyline = new L.Polyline(pointList, {
+                color: 'red',
+                weight: 3,
+                opacity: 1,
+                smoothFactor: 1
+            });
+            firstpolyline.addTo(mymap);
+
           {% endfor %}
           
           </script>

@@ -52,7 +52,6 @@ def index():
 def ajax_request():
     ip_address = request.form['ip_address']
     path_putty = join(APPS_FOLDER, 'putty.exe')
-    print(path_putty)
     ssh_connection = '{} -ssh {}'.format(path_putty, ip_address)
     connect = Popen(ssh_connection.split())
     return jsonify(ip_address=ip_address)
@@ -94,6 +93,7 @@ def devices():
 def create_devices():
     add_device_form = AddDevice(request.form)
     add_devices_form = AddDevices(request.form)
+    add_link_form = AddLink(request.form)
     if 'add_device' in request.form:
         device = Device(**request.form)
         db.session.add(device)
@@ -113,10 +113,13 @@ def create_devices():
             flash('no file submitted')
     if request.method == 'POST':
         db.session.commit()
+    all_devices = [(d, d) for d in Device.query.all()]
+    add_link_form.source.choices = add_link_form.destination.choices = all_devices
     return render_template(
                            'devices/create_device.html',
                            add_device_form = add_device_form,
-                           add_devices_form = add_devices_form
+                           add_devices_form = add_devices_form,
+                           add_link_form = add_link_form
                            )
                            
 @app.route('/geographical_view')
@@ -132,44 +135,48 @@ def geographical_view():
                            table = table
                            )
     
-@app.route('/manage_devices', methods=['GET', 'POST'])
-def manage_devices():
-    add_device_form = AddDevice(request.form)
-    add_devices_form = AddDevices(request.form)
-    delete_device_form = DeleteDevice(request.form)
-    if add_device_form.validate_on_submit() and 'add_device' in request.form:
-        device = Device(
-                        hostname = request.form['hostname'], 
-                        IP = request.form['ip_address'], 
-                        OS = request.form['os']
-                        )
-        db.session.add(device)
-    elif 'add_devices' in request.form:
-        filename = request.files['file'].filename
-        if 'file' in request.files and allowed_file(filename, 'devices'):  
-            filename = secure_filename(filename)
-            filepath = join(app.config['UPLOAD_FOLDER'], filename)
-            request.files['file'].save(filepath)
-            book = xlrd.open_workbook(filepath)
-            sheet = book.sheet_by_index(0)
-            for row_index in range(1, sheet.nrows):
-                db.session.add(Device(*sheet.row_values(row_index)))
-        else:
-            flash('no file submitted')
-    elif 'delete' in request.form:
-        selection = delete_device_form.data['devices']
-        db.session.query(Device).filter(Device.IP.in_(selection))\
-        .delete(synchronize_session='fetch')
-    if request.method == 'POST':
-        db.session.commit()
-    # before rendering the page, we update the list of all devices 
-    delete_device_form.devices.choices = [(d, d) for d in Device.query.all()]
-    return render_template(
-                           'devices/manage_devices.html',
-                           add_device_form = add_device_form,
-                           add_devices_form = add_devices_form,
-                           delete_device_form = delete_device_form
-                           )
+# @app.route('/manage_devices', methods=['GET', 'POST'])
+# def manage_devices():
+#     add_device_form = AddDevice(request.form)
+#     add_devices_form = AddDevices(request.form)
+#     add_link_form = AddLink(request.form)
+#     delete_device_form = DeleteDevice(request.form)
+#     if add_device_form.validate_on_submit() and 'add_device' in request.form:
+#         device = Device(
+#                         hostname = request.form['hostname'], 
+#                         IP = request.form['ip_address'], 
+#                         OS = request.form['os']
+#                         )
+#         db.session.add(device)
+#     elif 'add_devices' in request.form:
+#         filename = request.files['file'].filename
+#         if 'file' in request.files and allowed_file(filename, 'devices'):  
+#             filename = secure_filename(filename)
+#             filepath = join(app.config['UPLOAD_FOLDER'], filename)
+#             request.files['file'].save(filepath)
+#             book = xlrd.open_workbook(filepath)
+#             sheet = book.sheet_by_index(0)
+#             for row_index in range(1, sheet.nrows):
+#                 db.session.add(Device(*sheet.row_values(row_index)))
+#         else:
+#             flash('no file submitted')
+#     elif 'delete' in request.form:
+#         selection = delete_device_form.data['devices']
+#         db.session.query(Device).filter(Device.IP.in_(selection))\
+#         .delete(synchronize_session='fetch')
+#     if request.method == 'POST':
+#         db.session.commit()
+#     # before rendering the page, we update the list of all devices 
+#     all_devices = [(d, d) for d in Device.query.all()]
+#     delete_device_form.devices.choices = all_devices
+#     add_link_form.source.choices = add_link_form.destination.choices = all_devices
+#     return render_template(
+#                            'devices/manage_devices.html',
+#                            add_device_form = add_device_form,
+#                            add_devices_form = add_devices_form,
+#                            add_link_form = add_link_form,
+#                            delete_device_form = delete_device_form
+#                            )
                            
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():

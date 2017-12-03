@@ -63,13 +63,15 @@
               <br />
               <form method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
               
-                Multiple devices can be created at once by importing an Excel (.xls, .xlsx) or a CSV file. (.csv)<br>
-                The first line of the file must contain the name of the imported parameters in any order.<br><br>
-                
+                <blockquote>
+                <span class="label label-info">Info</span>
+                  <p>Multiple devices can be created at once by importing an Excel (.xls, .xlsx) or a CSV file. (.csv)<br>
+                The first line of the file must contain the name of the imported parameters in any order.<br> Available parameters: "hostname", "ip_address", "vendor", "operating_system", "os_version", "longitude", and "latitude".<br><br></p>
+
+                </blockquote>
+              
                 {{ add_devices_form.file() }}<br><br>
                 
-                Available parameters: "hostname", "ip_address", "vendor", "operating_system", "os_version", "longitude", and "latitude".<br><br>
-
                 <div class="ln_solid"></div>
                 <div class="form-group">
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">

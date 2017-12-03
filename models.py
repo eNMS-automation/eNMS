@@ -33,6 +33,18 @@ class User(CustomBase):
     def __repr__(self):
         return str(self.username)
         
+class Task(CustomBase):
+    
+    __tablename__ = 'Task'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=True)
+    script = db.Column(db.String)
+    time = db.Column(db.DateTime)
+        
+    def __repr__(self):
+        return str(self.name)
+        
 class Device(CustomBase):
     
     __tablename__ = 'Device'

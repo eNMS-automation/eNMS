@@ -100,3 +100,9 @@ class NapalmParametersForm(FlaskForm):
     
     scheduler = TextField('Format: 2009-11-06 16:30:05', [optional()])
     
+## Forms for the scheduler
+
+class TaskCreationForm(Form):
+    
+    hostname = TextField('Hostname')
+    datetime = DateTimeField('Pick a Date', format='%Y-%m-%d %H:%M:%S')

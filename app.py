@@ -329,6 +329,14 @@ def napalm_configuration():
 
 ## Scheduler 
 
+@app.route('/task_creation')
+def task_creation():
+    task_creation_form = TaskCreationForm(request.form)
+    return render_template(
+                           'scheduler/task_creation.html',
+                           task_creation_form = task_creation_form
+                           )
+    
 @app.route('/task_management')
 def task_management():
     return render_template('scheduler/task_management.html')

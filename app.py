@@ -323,9 +323,15 @@ def napalm_configuration():
                            form = form
                            )
 
+@app.route('/project')
+def project():
+    return render_template('about/project.html')
+    
 @app.route('/<template>')
 def route_template(template):
     return render_template(template)
+    
+
     
 ## 
 

@@ -40,7 +40,7 @@
 
           {% block sidebar %}
             <div class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}">
-              {% include "sidebar.html" %}
+              {% include "template/sidebar.html" %}
             </div>
           {% endblock sidebar %}
 
@@ -48,6 +48,11 @@
             <!-- {{ content }} -->
           {% endblock content %}
 
+          {% block footer %}
+            <footer>
+              {% include "template/footer.html" %}
+            </footer>
+          {% endblock footer %}
 
         </div>
       </div>

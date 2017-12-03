@@ -323,15 +323,21 @@ def napalm_configuration():
                            form = form
                            )
 
+## Scheduler 
+
+@app.route('/task_management')
+def task_management():
+    return render_template('scheduler/task_management.html')
+    
 @app.route('/project')
 def project():
     return render_template('about/project.html')
     
+
+    
 @app.route('/<template>')
 def route_template(template):
     return render_template(template)
-    
-
     
 ## 
 

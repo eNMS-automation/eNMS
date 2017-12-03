@@ -46,7 +46,7 @@ def shutdown_session(exception=None):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home/index.html')
     
 @app.route('/ajax_connection_to_device', methods = ['POST'])
 def ajax_request():
@@ -328,6 +328,10 @@ def napalm_configuration():
 @app.route('/task_management')
 def task_management():
     return render_template('scheduler/task_management.html')
+    
+@app.route('/calendar')
+def calendar():
+    return render_template('scheduler/calendar.html')
     
 @app.route('/project')
 def project():

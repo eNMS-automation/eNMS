@@ -48,6 +48,10 @@ def shutdown_session(exception=None):
 def index():
     return render_template('home/index.html')
     
+@app.route('/dashboard')
+def dashboard():
+    return render_template('home/index.html')
+    
 @app.route('/ajax_connection_to_device', methods = ['POST'])
 def ajax_request():
     ip_address = request.form['ip_address']

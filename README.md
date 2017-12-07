@@ -74,6 +74,7 @@ eNAPALM relies on the following libraries:
 * flask
 * flask_sqlalchemy
 * flask_apscheduler
+* flask-wtf
 * xlrd
 
 Before using eNAPALM, you must make sure all these libraries are properly installed:

@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Dashboard 1 {% endblock title %}
+{% block title %} User management {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -11,7 +11,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Maanage users</h3>
+          <h3>Manage users</h3>
         </div>
       </div>
 
@@ -26,7 +26,7 @@
               <br />
               <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
               
-                    <div class="form-group">
+                    <div class="form-group" style="height: 300px">
 
                       {% for field in add_user_form if field.widget.input_type != 'hidden'  %}
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}
@@ -42,7 +42,7 @@
                 <div class="form-group">
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
                     <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success" name="add_user">Submit</button>
+                    <button type="submit" class="btn btn-success" name="add_user">Create user</button>
                   </div>
                 </div>
 
@@ -61,7 +61,7 @@
               <br />
               <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
               
-                    <div class="form-group">
+                    <div class="form-group" style="height: 300px">
 
                       {% for field in delete_user_form if field.widget.input_type != 'hidden'  %}
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}
@@ -77,7 +77,7 @@
                 <div class="form-group">
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
                     <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success" name="delete_user">Submit</button>
+                    <button type="submit" class="btn btn-success" name="delete_user">Delete selection</button>
                   </div>
                 </div>
 

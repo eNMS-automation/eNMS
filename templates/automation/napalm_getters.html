@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Netmiko {% endblock title %}
+{% block title %} NAPALM getters {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -11,11 +11,11 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Netmiko</h3>
+          <h3>NAPALM getters</h3>
         </div>
       </div>
 
-      <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+      <form name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <div class="x_panel">
@@ -26,22 +26,16 @@
               <div class="x_content">
               
                 <div class="form-group" style="height: 550px">
-  
-                  Select a driver :<br>
-                  {{ form.driver(id="driver", class="form-control") }}
-                  
-                  Select a user :<br>
-                  {{ form.user(id="user", class="form-control", placeholder=form.user.label.text, required=true) }}
-                  
-                  Global delay factor :
-                  {{ form.global_delay_factor(id="global_delay_factor", class="form-control", required=true) }}
-                  
-                  YAML file used for Jinja2 :
-                  {{ form.file() }}<br>
-                  
-                  Devices :
-                  {{ form.devices(id="Devices", class="form-control", size='10') }}
                 
+                  Select a user :<br>
+                  {{ form.user(id="user", class="form-control", placeholder=form.user.label.text, required=true) }}<br>
+
+                  Devices :
+                  {{ form.devices(id="Devices", class="form-control", size='9') }}<br>
+                  
+                  Getters :
+                  {{ form.getters(id="getters", class="form-control", size='9') }}<br>
+                  
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-1">
@@ -81,7 +75,7 @@
                             <div class="modal-footer">
                               <button class="btn btn-default" style="display: none;"></button>
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary" name="create_task">Create</button>
+                              <button type="button" class="btn btn-primary">Create</button>
                             </div>
           
                           </div>
@@ -92,6 +86,7 @@
                       
                     </div>
                   </div>
+                  
                 </div>
                 
               </div>
@@ -107,10 +102,11 @@
               <div class="x_content">
               
                 <div class="form-group" style="height: 550px">
+                
+                  {{ form.output(id="output", class="form-control", rows='26') }}
   
-                  {{ form.raw_script(id="raw_script", class="form-control", rows='26') }}
-                  
                 </div>
+                
               </div>
             </div>
           </div>
@@ -124,16 +120,4 @@
 
 {% block javascripts %}
   {{ super()}}
-    <!-- Initialize datetimepicker -->
-  <script src="{{ url_for('static', filename='vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
-<script>
-    $('#scheduled_date').datetimepicker({
-        format: 'DD/MM/YYYY HH:mm:ss',
-        useCurrent: false,
-    });
-    var today = new Date()
-    $('#scheduled_date').data("DateTimePicker").minDate(today);
-
-
-</script>
 {% endblock javascripts %}

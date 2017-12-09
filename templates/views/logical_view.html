@@ -24,32 +24,29 @@
               <script src="{{ url_for('static', filename='vendors/vis/vis.js') }}"></script>
           <div id="mynetwork" style="height: 500px"></div>
           <script>
-  // create an array with nodes
-  var nodes = new vis.DataSet([
-    {id: 1, label: 'Node 1', image: 'static/images/default_router.gif', shape: 'image', title: 'test'},
-    {id: 2, label: 'Node 2', image: 'static/images/default_router.gif', shape: 'image'},
-    {id: 3, label: 'Node 3', image: 'static/images/default_router.gif', shape: 'image'},
-    {id: 4, label: 'Node 4', image: 'static/images/default_router.gif', shape: 'image'},
-    {id: 5, label: 'Node 5', image: 'static/images/default_router.gif', shape: 'image'}
-  ]);
-
-  // create an array with edges
-  var edges = new vis.DataSet([
-    {from: 1, to: 3, label: 'test'},
-    {from: 1, to: 2},
-    {from: 2, to: 4},
-    {from: 2, to: 5},
-    {from: 3, to: 3}
-  ]);
-
-  // create a network
-  var container = document.getElementById('mynetwork');
-  var data = {
-    nodes: nodes,
-    edges: edges
-  };
-  var options = {};
-  var network = new vis.Network(container, data, options);
+            // create an array with nodes
+            var nodes = new vis.DataSet([
+            {% for device, properties in device_table.items() %}
+            {id: {{ device.id }}, label: {{ device.id }}, image: 'static/images/default_router.gif', shape: 'image', title: 'test'},
+          
+            {% endfor %}
+            ]);
+          
+            // create an array with edges
+            var edges = new vis.DataSet([
+            {% for link, properties in link_table.items() %}
+            { from: {{ link['source']['id'] }}, to: {{ link['destination']['id'] }} },
+            {% endfor %}
+            ]);
+          
+            // create a network
+            var container = document.getElementById('mynetwork');
+            var data = {
+              nodes: nodes,
+              edges: edges
+            };
+            var options = {};
+            var network = new vis.Network(container, data, options);
           </script>
           
 

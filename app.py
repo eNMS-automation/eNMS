@@ -1,5 +1,6 @@
 from __future__ import print_function
 from flask import Flask, render_template, request, make_response, jsonify
+from flask_apscheduler import APScheduler
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from inspect import stack
@@ -30,11 +31,16 @@ APPS_FOLDER = join(APP_ROOT, 'applications')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 from forms import *
-from models import *
 from helpers import *
-from database import init_db, clear_db
+from models import *
+from database import *
 from jinja2 import Template
 from yaml import load
+
+# start the scheduler
+scheduler = APScheduler()
+scheduler.init_app(app)
+scheduler.start()
 
 ## Tear down SQLAlchemy 
 
@@ -163,8 +169,6 @@ def geographical_view():
     for link in links:
         lines = {field: getattr(link, field) for field in link_fields}
         link_table[link] = lines
-    for link in links:
-        print(link.source.longitude, link.source.latitude, link.destination.latitude, link.destination.longitude)
     return render_template(
                            'views/geographical_view.html', 
                            device_table = device_table,
@@ -173,15 +177,31 @@ def geographical_view():
                            
 @app.route('/logical_view')
 def logical_view():
-    return render_template('views/logical_view.html')
+    device_fields = tuple(Device.__table__.columns._data)
+    devices = Device.query.all()
+    device_table = {}
+    for device in devices:
+        lines = {field: getattr(device, field) for field in device_fields}
+        device_table[device] = lines
+    link_fields = tuple(Link.__table__.columns._data)
+    links = Link.query.all()
+    link_table = {}
+    for link in links:
+        lines = {field: getattr(link, field) for field in link_fields}
+        link_table[link] = lines
+    return render_template(
+                           'views/logical_view.html', 
+                           device_table = device_table,
+                           link_table = link_table
+                           )
                            
 @app.route('/netmiko', methods=['GET', 'POST'])
 def netmiko():
-    netmiko_form = NetmikoForm(request.form)
+    form = NetmikoForm(request.form)
     # update the list of available devices by querying the database
-    netmiko_form.devices.choices = [(d, d) for d in Device.query.all()]
-    netmiko_form.user.choices = [(u, u) for u in User.query.all()]
-    if 'send' in request.form:
+    form.devices.choices = [(d, d) for d in Device.query.all()]
+    form.user.choices = [(u, u) for u in User.query.all()]
+    if 'send' in request.form or 'create_task' in request.form:
         # if user does not select file, browser also
         # submit a empty part without filename
         filename = request.files['file'].filename
@@ -200,23 +220,22 @@ def netmiko():
                 flash('file {}: format not allowed'.format(filename))
         else:
             script = raw_script
-        selected_devices = netmiko_form.data['devices']
-        user = db.session.query(User).filter_by(username=netmiko_form.data['user']).first()
-        for device in selected_devices:
-            device_object = db.session.query(Device)\
-                            .filter_by(hostname=device)\
-                            .first()
-            netmiko_handler = device_object.netmiko_connection(
-                                                               device, 
-                                                               user, 
-                                                               netmiko_form
-                                                               )
-            netmiko_handler.send_config_set(script.splitlines())
+        if 'send' in request.form:
+            for device in form.data['devices']:
+                    device_object = db.session.query(Device)\
+                                    .filter_by(hostname=device)\
+                                    .first()
+                    device_object.start_netmiko_job(script, **form.data)
+        else:
+            new_task = Task(script, **form.data)
+            db.session.add(new_task)
+            db.session.commit()
+            
     return render_template(
                            'automation/netmiko.html',
-                           form = netmiko_form
+                           form = form
                            )
-    
+
 def retrieve_napalm_getters(getters, devices, *credentials):
     napalm_output = []
     for device in devices:
@@ -249,10 +268,12 @@ def retrieve_and_store_napalm_getters(getters, devices, *credentials):
 @app.route('/napalm_getters', methods=['GET', 'POST'])
 def napalm_getters():
     form = NapalmGettersForm(request.form)
+    # update the list of available users / devices by querying the database
     form.devices.choices = [(d, d) for d in Device.query.all()]
+    form.user.choices = [(u, u) for u in User.query.all()]
     if 'napalm_query' in request.form:
         selected_devices = form.data['devices']
-        getters = form.data['functions']
+        getters = form.data['getters']
         scheduler_interval = form.data['scheduler']
         napalm_output = retrieve_napalm_getters(
                                 getters,
@@ -264,7 +285,7 @@ def napalm_getters():
                                 )
         form.output.data = '\n\n'.join(napalm_output)
     return render_template(
-                           'napalm/napalm_getters.html',
+                           'automation/napalm_getters.html',
                            form = form
                            )
                            
@@ -287,9 +308,10 @@ def send_napalm_script(script, action, devices, *credentials):
                            
 @app.route('/napalm_configuration', methods=['GET', 'POST'])
 def napalm_configuration():
-    form = NapalmParametersForm(request.form)
-    # update the list of available devices by querying the database
+    form = NapalmConfigurationForm(request.form)
+    # update the list of available users / devices by querying the database
     form.devices.choices = [(d, d) for d in Device.query.all()]
+    form.user.choices = [(u, u) for u in User.query.all()]
     if 'send' in request.form:
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -323,7 +345,7 @@ def napalm_configuration():
                                     form.data['protocol'].lower()
                                     )
     return render_template(
-                           'napalm/napalm_configuration.html',
+                           'automation/napalm_configuration.html',
                            form = form
                            )
 
@@ -339,7 +361,10 @@ def task_creation():
     
 @app.route('/task_management')
 def task_management():
-    return render_template('scheduler/task_management.html')
+    return render_template(
+                           'scheduler/task_management.html',
+                           tasks = Task.query.all()
+                           )
     
 @app.route('/calendar')
 def calendar():
@@ -348,12 +373,6 @@ def calendar():
 @app.route('/project')
 def project():
     return render_template('about/project.html')
-    
-
-    
-@app.route('/<template>')
-def route_template(template):
-    return render_template(template)
     
 ## 
 

@@ -20,6 +20,30 @@
         </div>
       </div>
 
+      <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <h4>Text in a modal</h4>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
@@ -28,6 +52,29 @@
               <script src="{{ url_for('static', filename='vendors/leaflet/leaflet.js') }}"></script>
           
           <script>
+          var ourCustomControl = L.Control.extend({
+          
+          options: {
+              position: 'topleft' 
+              //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+          },
+          
+          onAdd: function (mymap) {
+              var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+          
+              container.style.backgroundColor = 'white';
+              container.style.height = '30px';
+              container.type="button";
+              container.value = "Filters";
+          
+              container.onclick = function(){
+                $('#filters').modal('show');
+
+              }
+              return container;
+            }
+          })
+          
           var mymap = L.map('mapid').setView([48, 2], 5);
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
           
@@ -37,6 +84,9 @@
               iconAnchor:   [9, 6], // point of the icon which will correspond to marker's location
               popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
           });
+          
+
+          mymap.addControl(new ourCustomControl());
           
           function loadXMLDoc()
           {

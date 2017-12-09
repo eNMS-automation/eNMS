@@ -1,9 +1,10 @@
+from datetime import datetime
 from napalm import get_network_driver
 from netmiko import ConnectHandler
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
-from app import db
+from app import db, scheduler
 from database import Base
 
 class CustomBase(Base):
@@ -33,18 +34,36 @@ class User(CustomBase):
     def __repr__(self):
         return str(self.username)
         
-class Task(CustomBase):
+class Task(Base):
     
     __tablename__ = 'Task'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True)
+    creation_time = db.Column(db.Integer)
+    
+    # scheduling parameters
+    frequency = db.Column(db.String(120))
+    scheduled_date = db.Column(db.String)
+    
+    # script parameters
     script = db.Column(db.String)
-    time = db.Column(db.DateTime)
+    creator = db.Column(db.String)
+    
+    def __init__(self, script, **data):
+        self.name = data['name']
+        self.frequency = data['frequency']
+        self.scheduled_date = data['scheduled_date']
+        self.creation_time = str(datetime.now())
+        self.creator = data['user']
+        self.script = script
+        # by default, a task is active but it can be deactivated
+        self.is_active = True
         
     def __repr__(self):
         return str(self.name)
-        
+
+
 class Device(CustomBase):
     
     __tablename__ = 'Device'
@@ -58,29 +77,47 @@ class Device(CustomBase):
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
         
-    def napalm_connection(self, username, password, secret, transport):
-        driver = get_network_driver(self.operating_system)
+    def napalm_connection(self, user, driver, transport):
+        driver = get_network_driver(driver)
         device = driver(
                         hostname = self.ip_address, 
-                        username = username,
-                        password = password, 
+                        username = user.username,
+                        password = user.password, 
                         optional_args = {
-                                         'secret': secret, 
+                                         'secret': user.secret, 
                                          'transport': transport
                                          }
                         )
         device.open()
         return device
         
-    def netmiko_connection(self, device, user, netmiko_form):
-        return ConnectHandler(                
-                host = device,
-                device_type = netmiko_form.data['driver'],
-                username = user.username,
-                password = user.password,
-                secret = user.secret,
-                global_delay_factor = netmiko_form.data['global_delay_factor']
-                )
+    def netmiko_scheduler(self, script, **data):
+        # execute the job immediately: 1-second interval job
+        scheduler.add_job(
+                        id = ''.join(selected_devices) + scheduler_interval,
+                        func = netmiko_job,
+                        args = [                            
+                                script,
+                                data['username'],
+                                data['driver'],
+                                data['global_delay_factor']
+                                ],
+                        trigger = 'interval',
+                        seconds = 1,
+                        replace_existing = True
+                        )
+                
+    def netmiko_job(self, script, username, driver, global_delay_factor):
+        user = db.session.query(User).filter_by(username=username).first()
+        netmiko_handler = ConnectHandler(                
+                                        host = self.hostname,
+                                        device_type = driver,
+                                        username = user.username,
+                                        password = user.password,
+                                        secret = user.secret,
+                                        global_delay_factor = global_delay_factor
+                                        )
+        netmiko_handler.send_config_set(script.splitlines())
         
     def __repr__(self):
         return self.hostname

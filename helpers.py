@@ -61,6 +61,15 @@ getters_mapping = OrderedDict([
 ('IPv6', 'get_ipv6_neighbors_table'),
 ])
 
+napalm_drivers = napalm_actions = OrderedDict([
+('IOS', 'ios'),
+('IOS-XR', 'iosxr'),
+('NX-OS', 'nxos'),
+('NX-OS SSH', 'nxos_ssh'),
+('Junos', 'junos'),
+('EOS', 'eos')
+])
+
 napalm_actions = OrderedDict([
 ('Load merge', 'load_merge_candidate'),
 ('Load replace', 'load_replace_candidate'),

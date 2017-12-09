@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from helpers import getters_mapping, napalm_actions, scheduler_choices
+from helpers import *
 from wtforms import *
 from wtforms.validators import DataRequired, EqualTo, Length, optional
 from flask_wtf.file import FileAllowed
@@ -43,9 +43,25 @@ class AddLink(FlaskForm):
     source = SelectField('Source', choices=())
     destination = SelectField('Destination', choices=())
     
+class SchedulingForm(FlaskForm):
+
+    name = TextField('Name')
+    
+    scheduled_date = TextField('Datetime')
+    
+    frequency_choices = OrderedDict([
+    ('Once', None),
+    ('Every hour', 60*60),
+    ('Once a day', 60*60*24),
+    ('Once a week', 60*60*24*7),
+    ('Once a month', 60*60*24*30),
+    ])
+    frequency_intervals = [(option, option) for option in frequency_choices]
+    frequency = SelectField('', [optional()], choices=frequency_intervals)
+    
 ## Forms for Netmiko
     
-class NetmikoForm(FlaskForm):
+class NetmikoForm(SchedulingForm):
     
     user = SelectField('User', choices=())
     
@@ -65,44 +81,27 @@ class NetmikoForm(FlaskForm):
     
 ## Forms for NAPALM
 
-class NapalmGettersForm(FlaskForm):
+class NapalmGettersForm(SchedulingForm):
     
     user = SelectField('User', choices=())
-    
-    protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
-    protocol = RadioField('', [optional()], choices=protocol_choices)
-    
+
     devices = SelectMultipleField('', [optional()], choices=())
     
-    function_choices = [(function, function) for function in getters_mapping]
-    functions = SelectMultipleField('Devices', choices=function_choices)
-    
-    scheduler_intervals = [(option, option) for option in scheduler_choices]
-    scheduler = SelectField('', [optional()], choices=scheduler_intervals)
+    getters_choices = [(getter, getter) for getter in getters_mapping]
+    getters = SelectMultipleField('Devices', choices=getters_choices)
     
     output = TextAreaField('', [optional()])
 
-class NapalmParametersForm(FlaskForm):
+class NapalmConfigurationForm(SchedulingForm):
     
     user = SelectField('User', choices=())
     
-    protocol_choices = (('Telnet',)*2, ('SSH',)*2, ('HTTP',)*2, ('HTTPS',)*2)
-    protocol = RadioField('', [optional()], choices=protocol_choices)
-    
     action_choices = [(action, action) for action in napalm_actions]
     actions = SelectField('Actions', [optional()], choices=action_choices)
-    
-    raw_script = TextAreaField('', [optional(), Length(max=200)])
     
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     
     devices = SelectMultipleField('Devices', choices=())
     
-    scheduler = TextField('Format: 2009-11-06 16:30:05', [optional()])
+    raw_script = TextAreaField('', [optional(), Length(max=200)])
     
-## Forms for the scheduler
-
-class TaskCreationForm(Form):
-    
-    hostname = TextField('Hostname')
-    datetime = DateTimeField('Pick a Date', format='%Y-%m-%d %H:%M:%S')

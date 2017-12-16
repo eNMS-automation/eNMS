@@ -57,11 +57,14 @@
                 <thead>
                   <tr>
                     <th style="width: 1%">ID</th>
-                    <th style="width: 20%">Project Name</th>
+                    <th style="width: 15%">Task name</th>
                     <th>Creator</th>
-                    <th style="width: 20%">Time before next run</th>
+                    <th style="width: 10%">Time before next run</th>
                     <th>Status</th>
+                    <th style="width: 10%">View</th>
                     <th style="width: 20%">Edit</th>
+                    <th style="width: 20%">Delete</th>
+                    <th style="width: 20%">Pause / Resume</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,8 +90,28 @@
                     </td>
                     <td>
                       <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                    </td>
+                    <td>
                       <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                      <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                    </td>
+                    <td>
+                      <form action="/delete_task" method='post'>
+                      <input type="hidden" name="task_name" value={{ task.name }} />
+                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+                      </form>
+                    </td>
+                    <td>
+                      {% if task.status == 'Active' %}
+                      <form action="/pause_task" method='post'>
+                      <input type="hidden" name="task_name" value={{ task.name }} />
+                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>
+                      </form>
+                      {% else %}
+                      <form action="/resume_task" method='post'>
+                      <input type="hidden" name="task_name" value={{ task.name }} />
+                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Resume</button>
+                      </form>
+                      {% endif %}
                     </td>
                   </tr>
                   {% endfor %}

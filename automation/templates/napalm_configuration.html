@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Netmiko {% endblock title %}
+{% block title %} NAPALM configuration {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -11,11 +11,13 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Netmiko</h3>
+          <h3>NAPALM configuration</h3>
         </div>
       </div>
+      
+      <div class="clearfix"></div>
 
-      <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+      <form name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <div class="x_panel">
@@ -26,22 +28,16 @@
               <div class="x_content">
               
                 <div class="form-group" style="height: 550px">
-  
-                  Select a driver :<br>
-                  {{ form.driver(id="driver", class="form-control") }}
-                  
+                
                   Select a user :<br>
-                  {{ form.user(id="user", class="form-control", placeholder=form.user.label.text, required=true) }}
-                  
-                  Global delay factor :
-                  {{ form.global_delay_factor(id="global_delay_factor", class="form-control", required=true) }}
+                  {{ form.user(id="user", class="form-control", placeholder=form.user.label.text, required=true) }}<br>
                   
                   YAML file used for Jinja2 :
                   {{ form.file() }}<br>
                   
                   Devices :
-                  {{ form.devices(id="Devices", class="form-control", size='10') }}
-                
+                  {{ form.devices(id="Devices", class="form-control", size='18') }}
+                  
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-1">
@@ -92,6 +88,7 @@
                       
                     </div>
                   </div>
+                
                 </div>
                 
               </div>
@@ -111,6 +108,7 @@
                   {{ form.raw_script(id="raw_script", class="form-control", rows='26') }}
                   
                 </div>
+
               </div>
             </div>
           </div>
@@ -133,7 +131,5 @@
     });
     var today = new Date()
     $('#scheduled_date').data("DateTimePicker").minDate(today);
-
-
 </script>
 {% endblock javascripts %}

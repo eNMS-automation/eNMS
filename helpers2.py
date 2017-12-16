@@ -38,29 +38,6 @@ napalm_dispatcher = {
                     'BNET-N1': ('192.168.243.134', 'nx-os'),
                     }
                     
-getters_mapping = OrderedDict([
-('ARP table', 'get_arp_table'),
-('Interfaces counters', 'get_interfaces_counters'),
-('Facts', 'get_facts'),
-('Environment', 'get_environment'),
-('Configuration', 'get_config'),
-('Interfaces', 'get_interfaces'),
-('Interface IP', 'get_interfaces_ip'),
-('LLDP neighbors', 'get_lldp_neighbors'),
-('LLDP neighbors detail', 'get_lldp_neighbors_detail'),
-('MAC address', 'get_mac_address_table'),
-('NTP servers', 'get_ntp_servers'),
-('NTP statistics', 'get_ntp_stats'),
-('Transceivers', 'get_optics'),
-('SNMP', 'get_snmp_information'),
-('Users', 'get_users'),
-('Network instances (VRF)', 'get_network_instances'),
-('NTP peers', 'get_ntp_peers'),
-('BGP configuration', 'get_bgp_config'),
-('BGP neighbors', 'get_bgp_neighbors'),
-('IPv6', 'get_ipv6_neighbors_table'),
-])
-
 napalm_drivers = napalm_actions = OrderedDict([
 ('IOS', 'ios'),
 ('IOS-XR', 'iosxr'),
@@ -68,14 +45,6 @@ napalm_drivers = napalm_actions = OrderedDict([
 ('NX-OS SSH', 'nxos_ssh'),
 ('Junos', 'junos'),
 ('EOS', 'eos')
-])
-
-napalm_actions = OrderedDict([
-('Load merge', 'load_merge_candidate'),
-('Load replace', 'load_replace_candidate'),
-('Commit', 'commit_config'),
-('Discard', 'discard_config'),
-('Rollback', 'rollback'),
 ])
 
 scheduler_choices = OrderedDict([
@@ -100,10 +69,3 @@ def str_dict(input, depth=0):
         return result
     else:
         return str(input)
-        
-def allowed_file(name, webpage):
-    # allowed extensions depending on the webpage
-    allowed_extensions = {'devices': {'xls', 'xlsx'}, 'netmiko': {'yaml'}}
-    allowed_syntax = '.' in name
-    allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions[webpage]
-    return allowed_syntax and allowed_extension

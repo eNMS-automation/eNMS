@@ -3,7 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
-from app import db, scheduler
+from main import db, scheduler
 from database import Base
 
 class CustomBase(Base):

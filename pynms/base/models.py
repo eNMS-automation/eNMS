@@ -1,3 +1,4 @@
+from main import db
 from database import Base
 
 class CustomBase(Base):

@@ -51,3 +51,19 @@ def logical_view():
         node_table = node_table,
         link_table = link_table
         )
+
+@blueprint.route('/ajax_connection_to_node2', methods = ['POST'])
+@login_required
+def ajax_request2():
+    id = request.form['id']
+    print(id)
+    return jsonify(id=id)
+
+@blueprint.route('/ajax_connection_to_node', methods = ['POST'])
+@login_required
+def ajax_request():
+    ip_address = request.form['ip_address']
+    path_putty = join(APPS_FOLDER, 'putty.exe')
+    ssh_connection = '{} -ssh {}'.format(path_putty, ip_address)
+    connect = Popen(ssh_connection.split())
+    return jsonify(ip_address=ip_address)

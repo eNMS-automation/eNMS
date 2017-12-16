@@ -96,3 +96,18 @@ def dashboard():
         node_counters = node_counters,
         link_counters = link_counters
         )
+
+## Errors
+
+@blueprint.errorhandler(403)
+def not_found_error(error):
+    return render_template('errors/page_403.html'), 403
+
+@blueprint.errorhandler(404)
+def not_found_error(error):
+    return render_template('errors/page_404.html'), 404
+
+@blueprint.errorhandler(500)
+def internal_error(error):
+    return render_template('errors/page_500.html'), 500
+

@@ -1,12 +1,23 @@
 from __future__ import print_function
-from flask import Flask, render_template, request, make_response, jsonify
+from collections import Counter
+from datetime import datetime
+from flask import (
+    Flask, 
+    render_template, 
+    request, 
+    make_response, 
+    jsonify, 
+    redirect, 
+    url_for
+    )
 from flask_apscheduler import APScheduler
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.utils import secure_filename
 from inspect import stack
+from jinja2 import Template
 from os.path import abspath, dirname, join
-from datetime import datetime
 from subprocess import Popen
+from yaml import load
+import flask_login
 import json
 import logging
 import os
@@ -23,6 +34,7 @@ if path_app not in sys.path:
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
+app.database = db
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = join(APP_ROOT, 'uploads')
@@ -34,347 +46,149 @@ from forms import *
 from helpers import *
 from models import *
 from database import *
-from jinja2 import Template
-from yaml import load
+from users.models import *
+from objects.models import *
 
 # start the scheduler
 scheduler = APScheduler()
 scheduler.init_app(app)
 scheduler.start()
 
+# start the login system
+login_manager = flask_login.LoginManager()
+login_manager.init_app(app)
+
+for name in ('users', 'objects', 'views', 'automation', 'scheduling'):
+    module = __import__(name + '.routes', globals(), locals(), [''])
+    app.register_blueprint(module.blueprint)
+
+# mod = __import__('users.routes', globals(), locals(), [''])
+# from users.routes import users_blueprint
+# from objects.routes import objects_blueprint
+# from views.routes import views_blueprint
+# from automation.routes import automation_blueprint
+# from scheduling.routes import scheduling_blueprint
+# 
+# app.register_blueprint(mod.blueprint)
+# app.register_blueprint(objects_blueprint)
+# app.register_blueprint(views_blueprint)
+# app.register_blueprint(automation_blueprint)
+# app.register_blueprint(scheduling_blueprint)
+
+# modified template rendering that includes the username as an argument
+# it is used by the sidebar as well as the top navigation 
+def _render_template(*args, **kwargs):
+    try: 
+        kwargs['user'] = flask_login.current_user.username
+    except AttributeError:
+        # 'AnonymousUserMixin' object has no attribute 'username'
+        pass
+    return render_template(*args, **kwargs)
+    
+app.render_template = _render_template
+    
 ## Tear down SQLAlchemy 
 
 @app.teardown_request
 def shutdown_session(exception=None):
     db.session.remove()
+    
+## Login / registration
 
-## Route to any template
+@app.route('/create_account', methods=['GET', 'POST'])
+def create_account():
+    if request.method == 'GET':
+        form = CreateAccountForm(request.form)
+        return _render_template('login/create_account.html', form=form)
+    else:
+        login_form = LoginForm(request.form)
+        user = User(**request.form)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('login'))
 
-@app.route('/')
-def index():
-    return render_template('home/index.html')
+@login_manager.user_loader
+def user_loader(id):
+    return db.session.query(User).filter_by(id=id).first()
+
+@login_manager.request_loader
+def request_loader(request):
+    username = request.form.get('username')
+    user = db.session.query(User).filter_by(username=username).first()
+    return user if user else None
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        user = db.session.query(User).filter_by(username=username).first()
+        if user and request.form['password'] == user.password:
+            flask_login.login_user(user)
+            return redirect(url_for('dashboard'))
+        return render_template('errors/page_403.html')
+    if not flask_login.current_user.is_authenticated:
+        login_form = LoginForm(request.form)
+        return _render_template('login/login.html', login_form=login_form)
+    return redirect(url_for('dashboard'))
+        
+@app.route('/logout')
+def logout():
+    flask_login.logout_user()
+    return 'Logged out'
+    
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return render_template('errors/page_403.html')
+
+## Dashboard
     
 @app.route('/dashboard')
+@flask_login.login_required
 def dashboard():
-    return render_template('home/index.html')
+    # nodes properties
+    node_counters = {
+        property: 
+            Counter(
+                map(
+                    lambda o: str(getattr(o, property)), 
+                    Node.query.all()
+                    )
+                )
+        for property in ('vendor', 'operating_system', 'os_version')
+        }
+    # link properties
+    link_counters = {
+        property: 
+            Counter(
+                map(
+                    lambda o: str(getattr(o, property)), 
+                    Link.query.all()
+                    )
+                )
+        for property in ('type',)
+        }
+    return _render_template(
+        'home/index.html', 
+        node_counters = node_counters,
+        link_counters = link_counters
+        )
     
-@app.route('/ajax_connection_to_device', methods = ['POST'])
+@app.route('/ajax_connection_to_node2', methods = ['POST'])
+@flask_login.login_required
+def ajax_request2():
+    id = request.form['id']
+    print(id)
+    return jsonify(id=id)
+
+@app.route('/ajax_connection_to_node', methods = ['POST'])
+@flask_login.login_required
 def ajax_request():
     ip_address = request.form['ip_address']
     path_putty = join(APPS_FOLDER, 'putty.exe')
     ssh_connection = '{} -ssh {}'.format(path_putty, ip_address)
     connect = Popen(ssh_connection.split())
     return jsonify(ip_address=ip_address)
-    
-## Users
 
-@app.route('/users')
-def users():
-    return render_template(
-                           'users/overview.html', 
-                           fields = User.__table__.columns._data, 
-                           users = User.query.all()
-                           )
-                           
-@app.route('/manage_users', methods=['GET', 'POST'])
-def manage_users():
-    add_user_form = AddUser(request.form)
-    delete_user_form = DeleteUser(request.form)
-    if 'add_user' in request.form:
-        user = User(**request.form)
-        db.session.add(user)
-    elif 'delete_user' in request.form:
-        selection = delete_user_form.data['users']
-        print(selection)
-        db.session.query(User).filter(User.username.in_(selection))\
-        .delete(synchronize_session='fetch')
-    if request.method == 'POST':
-        db.session.commit()
-    all_users = [(u, u) for u in User.query.all()]
-    delete_user_form.users.choices = all_users
-    print(all_users)
-    return render_template(
-                           'users/manage_users.html',
-                           add_user_form = add_user_form,
-                           delete_user_form = delete_user_form
-                           )
-                           
-## Devices
-    
-@app.route('/devices')
-def devices():
-    links = Link.query.all()
-    print(links)
-    return render_template(
-                           'devices/overview.html', 
-                           device_fields = Device.__table__.columns._data, 
-                           devices = Device.query.all(),
-                           link_fields = Link.__table__.columns._data, 
-                           links = Link.query.all()
-                           )
-                           
-@app.route('/device_creation', methods=['GET', 'POST'])
-def create_devices():
-    add_device_form = AddDevice(request.form)
-    add_devices_form = AddDevices(request.form)
-    add_link_form = AddLink(request.form)
-    if 'add_device' in request.form:
-        device = Device(**request.form)
-        db.session.add(device)
-    elif 'add_devices' in request.form:
-        filename = request.files['file'].filename
-        if 'file' in request.files and allowed_file(filename, 'devices'):  
-            filename = secure_filename(filename)
-            filepath = join(app.config['UPLOAD_FOLDER'], filename)
-            request.files['file'].save(filepath)
-            book = xlrd.open_workbook(filepath)
-            sheet = book.sheet_by_index(0)
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                kwargs = dict(zip(properties, sheet.row_values(row_index)))
-                db.session.add(Device(**kwargs))
-        else:
-            flash('no file submitted')
-    elif 'add_link' in request.form:
-        source = db.session.query(Device)\
-                 .filter_by(hostname=request.form['source'])\
-                 .first()
-        destination = db.session.query(Device)\
-                      .filter_by(hostname=request.form['destination'])\
-                      .first()
-        new_link = Link(source_id=source.id, destination_id=destination.id, source=source, destination=destination)
-        db.session.add(new_link)
-    if request.method == 'POST':
-        db.session.commit()
-    all_devices = [(d, d) for d in Device.query.all()]
-    add_link_form.source.choices = add_link_form.destination.choices = all_devices
-    return render_template(
-                           'devices/create_device.html',
-                           add_device_form = add_device_form,
-                           add_devices_form = add_devices_form,
-                           add_link_form = add_link_form
-                           )
-                           
-@app.route('/geographical_view')
-def geographical_view():
-    device_fields = tuple(Device.__table__.columns._data)
-    devices = Device.query.all()
-    device_table = {}
-    for device in devices:
-        lines = {field: getattr(device, field) for field in device_fields}
-        device_table[device] = lines
-    link_fields = tuple(Link.__table__.columns._data)
-    links = Link.query.all()
-    link_table = {}
-    for link in links:
-        lines = {field: getattr(link, field) for field in link_fields}
-        link_table[link] = lines
-    return render_template(
-                           'views/geographical_view.html', 
-                           device_table = device_table,
-                           link_table = link_table
-                           )
-                           
-@app.route('/logical_view')
-def logical_view():
-    device_fields = tuple(Device.__table__.columns._data)
-    devices = Device.query.all()
-    device_table = {}
-    for device in devices:
-        lines = {field: getattr(device, field) for field in device_fields}
-        device_table[device] = lines
-    link_fields = tuple(Link.__table__.columns._data)
-    links = Link.query.all()
-    link_table = {}
-    for link in links:
-        lines = {field: getattr(link, field) for field in link_fields}
-        link_table[link] = lines
-    return render_template(
-                           'views/logical_view.html', 
-                           device_table = device_table,
-                           link_table = link_table
-                           )
-                           
-@app.route('/netmiko', methods=['GET', 'POST'])
-def netmiko():
-    form = NetmikoForm(request.form)
-    # update the list of available devices by querying the database
-    form.devices.choices = [(d, d) for d in Device.query.all()]
-    form.user.choices = [(u, u) for u in User.query.all()]
-    if 'send' in request.form or 'create_task' in request.form:
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        filename = request.files['file'].filename
-        # retrieve the raw script: we will use it as-is or update it depending
-        # on whether a Jinja2 template was uploaded by the user or not
-        raw_script = request.form['raw_script']
-        if 'file' in request.files and filename:
-            if allowed_file(filename, 'netmiko'):
-                filename = secure_filename(filename)
-                filepath = join(app.config['UPLOAD_FOLDER'], filename)
-                with open(filepath, 'r') as f:
-                    parameters = load(f)
-                template = Template(raw_script)
-                script = template.render(**parameters)
-            else:
-                flash('file {}: format not allowed'.format(filename))
-        else:
-            script = raw_script
-        if 'send' in request.form:
-            for device in form.data['devices']:
-                    device_object = db.session.query(Device)\
-                                    .filter_by(hostname=device)\
-                                    .first()
-                    device_object.start_netmiko_job(script, **form.data)
-        else:
-            new_task = Task(script, **form.data)
-            db.session.add(new_task)
-            db.session.commit()
-            
-    return render_template(
-                           'automation/netmiko.html',
-                           form = form
-                           )
-
-def retrieve_napalm_getters(getters, devices, *credentials):
-    napalm_output = []
-    for device in devices:
-        napalm_output.append('\n{}\n'.format(device))
-        device_object = db.session.query(Device)\
-                        .filter_by(hostname=device)\
-                        .first()
-        try:
-            napalm_device = device_object.napalm_connection(*credentials)
-            for getter in getters:
-                try:
-                    output = str_dict(getattr(napalm_device, getters_mapping[getter])())
-                except Exception as e:
-                    output = '{} could not be retrieve because of {}'.format(getter, e)
-                napalm_output.append(output)
-        except Exception as e:
-            output = 'could not be retrieve because of {}'.format(e)
-            napalm_output.append(output)
-    return napalm_output
-    
-def retrieve_and_store_napalm_getters(getters, devices, *credentials):
-    # create folder with the current timestamp
-    current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    folder = join(GETTERS_FOLDER, current_time)
-    os.makedirs(folder)
-    output = retrieve_napalm_getters(getters, devices, *credentials)
-    with open(join(folder, 'output.txt'), 'w') as f:
-        print('\n\n'.join(output), file=f)
-
-@app.route('/napalm_getters', methods=['GET', 'POST'])
-def napalm_getters():
-    form = NapalmGettersForm(request.form)
-    # update the list of available users / devices by querying the database
-    form.devices.choices = [(d, d) for d in Device.query.all()]
-    form.user.choices = [(u, u) for u in User.query.all()]
-    if 'napalm_query' in request.form:
-        selected_devices = form.data['devices']
-        getters = form.data['getters']
-        scheduler_interval = form.data['scheduler']
-        napalm_output = retrieve_napalm_getters(
-                                getters,
-                                selected_devices,
-                                form.data['username'],
-                                form.data['password'],
-                                form.data['secret'],
-                                form.data['protocol'].lower()
-                                )
-        form.output.data = '\n\n'.join(napalm_output)
-    return render_template(
-                           'automation/napalm_getters.html',
-                           form = form
-                           )
-                           
-def send_napalm_script(script, action, devices, *credentials):
-    napalm_output = []
-    for device in devices:
-        device_object = db.session.query(Device)\
-                        .filter_by(hostname=device)\
-                        .first()
-        try:
-            napalm_device = device_object.napalm_connection(*credentials)
-            if action in ('load_merge_candidate', 'load_replace_candidate'):
-                getattr(napalm_device, action)(config=script)
-            else:
-                getattr(napalm_device, action)()
-        except Exception as e:
-            output = 'exception {}'.format(e)
-            napalm_output.append(output)
-    return '\n\n'.join(napalm_output)
-                           
-@app.route('/napalm_configuration', methods=['GET', 'POST'])
-def napalm_configuration():
-    form = NapalmConfigurationForm(request.form)
-    # update the list of available users / devices by querying the database
-    form.devices.choices = [(d, d) for d in Device.query.all()]
-    form.user.choices = [(u, u) for u in User.query.all()]
-    if 'send' in request.form:
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        filename = request.files['file'].filename
-        # retrieve the raw script: we will use it as-is or update it depending
-        # on whether a Jinja2 template was uploaded by the user or not
-        raw_script = request.form['raw_script']
-        if 'file' in request.files and filename:
-            if allowed_file(filename, 'netmiko'):
-                filename = secure_filename(filename)
-                filepath = join(app.config['UPLOAD_FOLDER'], filename)
-                with open(filepath, 'r') as f:
-                    parameters = load(f)
-                template = Template(raw_script)
-                script = template.render(**parameters)
-            else:
-                flash('file {}: format not allowed'.format(filename))
-        else:
-            script = raw_script
-        selected_devices = form.data['devices']
-        action = napalm_actions[form.data['actions']]
-        scheduler_date = form.data['scheduler']
-        form.raw_script.data = send_napalm_script(
-                                    script,
-                                    action,
-                                    selected_devices,
-                                    form.data['username'],
-                                    form.data['password'],
-                                    form.data['secret'],
-                                    form.data['port'],
-                                    form.data['protocol'].lower()
-                                    )
-    return render_template(
-                           'automation/napalm_configuration.html',
-                           form = form
-                           )
-
-## Scheduler 
-
-@app.route('/task_creation')
-def task_creation():
-    task_creation_form = TaskCreationForm(request.form)
-    return render_template(
-                           'scheduler/task_creation.html',
-                           task_creation_form = task_creation_form
-                           )
-    
-@app.route('/task_management')
-def task_management():
-    return render_template(
-                           'scheduler/task_management.html',
-                           tasks = Task.query.all()
-                           )
-    
-@app.route('/calendar')
-def calendar():
-    return render_template('scheduler/calendar.html')
-    
-@app.route('/project')
-def project():
-    return render_template('about/project.html')
-    
-## 
 
 ## Errors
 
@@ -401,4 +215,4 @@ if __name__ == '__main__':
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
     
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, threaded=True)

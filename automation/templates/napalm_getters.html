@@ -14,6 +14,8 @@
           <h3>NAPALM getters</h3>
         </div>
       </div>
+      
+      <div class="clearfix"></div>
 
       <form name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
         <div class="row">
@@ -75,7 +77,7 @@
                             <div class="modal-footer">
                               <button class="btn btn-default" style="display: none;"></button>
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Create</button>
+                              <button type="submit" class="btn btn-primary" name="create_task">Create</button>
                             </div>
           
                           </div>
@@ -120,4 +122,14 @@
 
 {% block javascripts %}
   {{ super()}}
+    <!-- Initialize datetimepicker -->
+  <script src="{{ url_for('static', filename='vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script>
+    $('#scheduled_date').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    var today = new Date()
+    $('#scheduled_date').data("DateTimePicker").minDate(today);
+</script>
 {% endblock javascripts %}

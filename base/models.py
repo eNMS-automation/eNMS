@@ -1,9 +1,3 @@
-from collections import OrderedDict
-from datetime import datetime
-from flask_login import UserMixin
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey
-from app import db, scheduler
 from database import Base
 
 class CustomBase(Base):
@@ -23,5 +17,4 @@ class CustomBase(Base):
     # simplifies the syntax for flask forms
     @classmethod
     def choices(cls):
-        print(cls)
         return [(obj, obj) for obj in cls.query.all()]

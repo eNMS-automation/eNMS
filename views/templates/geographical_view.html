@@ -16,7 +16,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Overview of all devices</small></h3>
+          <h3>Overview of all nodes</small></h3>
         </div>
       </div>
 
@@ -79,12 +79,11 @@
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
           
           var greenIcon = L.icon({
-              iconUrl: 'static/images/default_router.gif',
+              iconUrl: 'static/images/default/default_router.gif',
               iconSize:     [18, 12], // size of the icon
               iconAnchor:   [9, 6], // point of the icon which will correspond to marker's location
               popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
           });
-          
 
           mymap.addControl(new ourCustomControl());
           
@@ -106,7 +105,7 @@
                   }
               }
           
-              req.open('POST', '/ajax_connection_to_device')
+              req.open('POST', '/ajax_connection_to_node')
               req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
               var ip = document.getElementById('ip_address').value
               var postVars = 'ip_address='+ip
@@ -115,13 +114,13 @@
               return false
           }
           
-          {% for device, properties in device_table.items() %}
-          var marker = L.marker([{{ device.latitude }}, {{ device.longitude }}], {icon: greenIcon}).addTo(mymap);
+          {% for node, properties in node_table.items() %}
+          var marker = L.marker([{{ node.latitude }}, {{ node.longitude }}], {icon: greenIcon}).addTo(mymap);
           
           marker.bindPopup("{% for property_name, property in properties.items() %}\
           <b>{{property_name}}</b>: {{property}}<br>{% endfor %}<br>\
           <form action='' method='POST' id='#form'>\
-          <input type='hidden' name='ip_address' id='ip_address' value={{ device.ip_address }}>\
+          <input type='hidden' name='ip_address' id='ip_address' value={{ node.ip_address }}>\
           <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
           {% endfor %}
           

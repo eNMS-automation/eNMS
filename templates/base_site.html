@@ -43,6 +43,12 @@
               {% include "template/sidebar.html" %}
             </div>
           {% endblock sidebar %}
+          
+          {% block top_navigation %}
+            <div class="top_nav">
+              {% include "template/top_navigation.html" %}
+            </div>
+          {% endblock top_navigation %}
 
           {% block content %}
             <!-- {{ content }} -->

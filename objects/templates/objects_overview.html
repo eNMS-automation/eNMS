@@ -16,7 +16,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Overview of all devices</small></h3>
+          <h3>Overview of all objects</small></h3>
         </div>
       </div>
 
@@ -30,16 +30,16 @@
               <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    {% for field in device_fields %}
-                    <th>{{ field }}</th>
+                    {% for field, pretty_field in node_fields.items() %}
+                    <th>{{ pretty_field }}</th>
                     {% endfor %}
                   </tr>
                 </thead>
                 <tbody>
-                  {% for device in devices %}
+                  {% for node in nodes %}
                   <tr>
-                    {% for field in device_fields %}
-                        <td>{{ device[field] }}</td>
+                    {% for field in node_fields %}
+                        <td>{{ node[field] }}</td>
                     {% endfor %}
                   </tr>
                   {% endfor %}
@@ -59,8 +59,8 @@
               <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    {% for field in link_fields %}
-                    <th>{{ field }}</th>
+                    {% for field, pretty_field in link_fields.items() %}
+                    <th>{{ pretty_field }}</th>
                     {% endfor %}
                   </tr>
                 </thead>

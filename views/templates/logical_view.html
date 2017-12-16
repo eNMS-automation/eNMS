@@ -1,0 +1,114 @@
+{% extends "base_site.html" %}
+
+{% block title %} Dashboard 1 {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="{{ url_for('static', filename='vendors/vis/vis-network.min.css') }}" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Overview of all nodes</small></h3>
+        </div>
+      </div>
+      
+      <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <h4>Text in a modal</h4>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+              <script src="{{ url_for('static', filename='vendors/vis/vis.js') }}"></script>
+          <div id="mynetwork" style="height: 500px"></div>
+          <script>
+            // create an array with nodes
+            var nodes = new vis.DataSet([
+            {% for node, properties in node_table.items() %}
+            {id: {{ node.id }}, label: {{ node.id }}, image: 'static/images/default/default_router.gif', shape: 'image', title: 'test'},
+          
+            {% endfor %}
+            ]);
+          
+            // create an array with edges
+            var edges = new vis.DataSet([
+            {% for link, properties in link_table.items() %}
+            { from: {{ link['source']['id'] }}, to: {{ link['destination']['id'] }} },
+            {% endfor %}
+            ]);
+          
+            // create a network
+            var container = document.getElementById('mynetwork');
+            var data = {
+              nodes: nodes,
+              edges: edges
+            };
+            var options = {};
+            var network = new vis.Network(container, data, options);
+            
+            // get id of the click nodes
+            network.on( 'click', function(properties) {
+              var req = new XMLHttpRequest()
+              req.onreadystatechange = function()
+              {
+                  if (req.readyState == 4)
+                  {
+                      if (req.status != 200)
+                      {
+                          //error handling code here
+                      }
+                      else
+                      {
+                          var response = JSON.parse(req.responseText)
+                      }
+                  }
+              }
+          
+              req.open('POST', '/ajax_connection_to_node2')
+              req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+              var ids = properties.nodes;
+              var clickedNodes = nodes.get(ids);
+              var postVars = 'id='+ids;
+              req.send(postVars)
+              
+              return false
+            });
+          </script>
+          
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+{% endblock javascripts %}

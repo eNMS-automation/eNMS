@@ -1,4 +1,5 @@
-from flask import Blueprint, current_app, request
+from base.routes import _render_template
+from flask import Blueprint, request
 from flask_login import login_required
 from .models import Task
 
@@ -12,8 +13,10 @@ blueprint = Blueprint(
 @blueprint.route('/task_management')
 @login_required
 def task_management():
-    return current_app.render_template(
-        'scheduler/task_management.html',
+    for task in Task.query.all():
+        print(task.__dict__)
+    return _render_template(
+        'task_management.html',
         tasks = Task.query.all()
         )
         
@@ -41,9 +44,4 @@ def resume_task():
 @blueprint.route('/calendar')
 @login_required
 def calendar():
-    return current_app.render_template('scheduler/calendar.html')
-    
-@blueprint.route('/project')
-@login_required
-def project():
-    return current_app.render_template('about/project.html')
+    return _render_template('calendar.html')

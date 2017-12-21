@@ -1,6 +1,6 @@
+from base.routes import _render_template
 from flask import Blueprint, current_app, request
 from flask_login import login_required
-from helpers.allowed import allowed_file
 from os.path import join
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -14,11 +14,18 @@ blueprint = Blueprint(
     template_folder = 'templates'
     )
 
+def allowed_file(name, webpage):
+    # allowed extensions depending on the webpage
+    allowed_extensions = {'nodes': {'xls', 'xlsx'}, 'netmiko': {'yaml'}}
+    allowed_syntax = '.' in name
+    allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions[webpage]
+    return allowed_syntax and allowed_extension
+
 @blueprint.route('/objects')
 @login_required
 def objects():
     links = Link.query.all()
-    return current_app.render_template(
+    return _render_template(
         'objects_overview.html', 
         node_fields = Node.get_properties(), 
         nodes = Node.query.all(),
@@ -69,7 +76,7 @@ def create_objects():
         current_app.database.session.commit()
     all_nodes = Node.choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
-    return current_app.render_template(
+    return _render_template(
         'create_object.html',
         add_node_form = add_node_form,
         add_nodes_form = add_nodes_form,

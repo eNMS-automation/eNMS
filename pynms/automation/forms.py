@@ -39,8 +39,7 @@ napalm_actions = OrderedDict([
 ## Forms for Netmiko
     
 class NetmikoForm(SchedulingForm):
-    devices = SelectMultipleField('', [optional()], choices=())
-    user = SelectField('User', choices=())
+    nodes = SelectMultipleField('', [optional()], choices=())
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
     netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
@@ -54,16 +53,14 @@ class NetmikoForm(SchedulingForm):
 ## Forms for NAPALM
 
 class NapalmGettersForm(SchedulingForm):
-    devices = SelectMultipleField('', [optional()], choices=())
-    user = SelectField('User', choices=())
+    nodes = SelectMultipleField('', [optional()], choices=())
     nodes = SelectMultipleField('', [optional()], choices=())
     getters_choices = [(getter, getter) for getter in getters_mapping]
     getters = SelectMultipleField('Nodes', choices=getters_choices)
     output = TextAreaField('', [optional()])
 
 class NapalmConfigurationForm(SchedulingForm):
-    devices = SelectMultipleField('', [optional()], choices=())
-    user = SelectField('User', choices=())
+    nodes = SelectMultipleField('', [optional()], choices=())
     action_choices = [(action, action) for action in napalm_actions]
     actions = SelectField('Actions', [optional()], choices=action_choices)
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])

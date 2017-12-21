@@ -1,6 +1,4 @@
 from collections import OrderedDict
-from napalm import get_network_driver
-from netmiko import ConnectHandler
 from sqlalchemy import Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import relationship
 from base.models import CustomBase
@@ -53,11 +51,16 @@ class Node(Object):
         ])
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Node, self).__init__(**kwargs)
         
     @classmethod
     def get_properties(cls):
-        return dict(list(super().properties.items()) + list(cls.properties.items()))
+        return dict(
+            list(
+                # https://stackoverflow.com/questions/17575074
+                super(Node).__get__(cls, None).properties.items())
+                + list(cls.properties.items())
+            )
         
     def napalm_connection(self, user, driver, transport):
         driver = get_network_driver(driver)
@@ -72,36 +75,7 @@ class Node(Object):
                         )
         node.open()
         return node
-        
-    def netmiko_scheduler(self, script, **data):
-        # execute the job immediately: 1-second interval job
-        scheduler.add_job(
-                        id = ''.join(selected_nodes) + scheduler_interval,
-                        func = netmiko_job,
-                        args = [                            
-                                script,
-                                data['username'],
-                                data['driver'],
-                                data['global_delay_factor']
-                                ],
-                        trigger = 'interval',
-                        seconds = 1,
-                        replace_existing = True
-                        )
-                
-    def netmiko_job(self, script, username, driver, global_delay_factor):
-        user = db.session.query(User).filter_by(username=username).first()
-        netmiko_handler = ConnectHandler(                
-                                        host = self.hostname,
-                                        node_type = driver,
-                                        username = user.username,
-                                        password = user.password,
-                                        secret = user.secret,
-                                        global_delay_factor = global_delay_factor
-                                        )
-        netmiko_handler.send_config_set(script.splitlines())
-        
-    
+
     def __repr__(self):
         return str(self.name)
         
@@ -181,7 +155,7 @@ class Router(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Router, self).__init__(**kwargs)
 
 class Server(Node):
     
@@ -249,7 +223,12 @@ class Link(Object):
 
     @classmethod
     def get_properties(cls):
-        return dict(list(super().properties.items()) + list(cls.properties.items()))
+        return dict(
+            list(
+                # https://stackoverflow.com/questions/17575074
+                super(Link).__get__(cls, None).properties.items())
+                + list(cls.properties.items())
+            )
 
 class BgpPeering(Link):
     
@@ -327,7 +306,7 @@ class PseudoWire(Link):
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(PseudoWire, self).__init__(**kwargs)
     
 ## Dispatchers
 

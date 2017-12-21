@@ -1,8 +1,11 @@
-from flask import Blueprint, current_app, request
-from flask_login import login_required
+from __future__ import print_function
+from base.routes import _render_template
+from flask import Blueprint, current_app, redirect, request, url_for
+from flask_login import login_required, current_user
 from .forms import *
 from objects.models import Node
 from users.models import User
+from scheduling.models import NetmikoTask
 
 blueprint = Blueprint(
     'automation_blueprint', 
@@ -17,7 +20,6 @@ def netmiko():
     form = NetmikoForm(request.form)
     # update the list of available nodes by querying the database
     form.nodes.choices = Node.choices()
-    form.user.choices = User.choices()
     if 'send' in request.form or 'create_task' in request.form:
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -37,18 +39,11 @@ def netmiko():
                 flash('file {}: format not allowed'.format(filename))
         else:
             script = raw_script
-        if 'send' in request.form:
-            for node in form.data['nodes']:
-                    node_object = current_app.database.session.query(Node)\
-                        .filter_by(name=node)\
-                        .first()
-                    node_object.start_netmiko_job(script, **form.data)
-        else:
-            new_task = Task(script, **form.data)
-            current_app.database.session.add(new_task)
-            current_app.database.session.commit()
-            return redirect(url_for('task_management'))
-    return current_app.render_template(
+        netmiko_task = NetmikoTask(script, current_user, **form.data)
+        current_app.database.session.add(netmiko_task)
+        current_app.database.session.commit()
+        return redirect(url_for('scheduling_blueprint.task_management'))
+    return _render_template(
         'netmiko.html',
         form = form
         )
@@ -88,7 +83,6 @@ def napalm_getters():
     form = NapalmGettersForm(request.form)
     # update the list of available users / nodes by querying the database
     form.nodes.choices = Node.choices()
-    form.user.choices = User.choices()
     if 'napalm_query' in request.form:
         selected_nodes = form.data['nodes']
         getters = form.data['getters']
@@ -102,7 +96,7 @@ def napalm_getters():
             form.data['protocol'].lower()
             )
         form.output.data = '\n\n'.join(napalm_output)
-    return current_app.render_template(
+    return _render_template(
         'napalm_getters.html',
         form = form
         )
@@ -162,7 +156,7 @@ def napalm_configuration():
             form.data['port'],
             form.data['protocol'].lower()
             )
-    return current_app.render_template(
+    return _render_template(
         'napalm_configuration.html',
         form = form
         )

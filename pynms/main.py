@@ -26,7 +26,7 @@ GETTERS_FOLDER = join(APP_ROOT, 'getters')
 APPS_FOLDER = join(APP_ROOT, 'applications')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-from helpers import *
+# from helpers import *
 from models import *
 from database import *
 from users.models import User
@@ -35,6 +35,7 @@ from users.models import User
 scheduler = APScheduler()
 scheduler.init_app(app)
 scheduler.start()
+app.scheduler = scheduler
 
 # start the login system
 login_manager = flask_login.LoginManager()
@@ -61,6 +62,11 @@ if not app.debug:
 
 if __name__ == '__main__':
     init_db()
+    
+    # returns logger
+    logger = logging.getLogger()
+    logger.addHandler(logging.StreamHandler())
+
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
     app.run(host='0.0.0.0', port=port, threaded=True)

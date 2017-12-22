@@ -1,7 +1,8 @@
-from collections import OrderedDict
+from base.models import CustomBase
+from .properties import *
 from sqlalchemy import Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import relationship
-from base.models import CustomBase
+
 
 class Object(CustomBase):
     
@@ -15,19 +16,12 @@ class Object(CustomBase):
         'polymorphic_on': type
     }
     
-    properties = OrderedDict([
-        ('name', 'Name'),
-        ('type', 'Type'),
-        ('vendor', 'Vendor')
-        ])
+    properties = object_common_properties
     
     __tablename__ = 'Object'
     
     def __init__(self, **kwargs):
         super(Object, self).__init__(**kwargs)
-        # for kw, value in kwargs.items():
-        #     setattr(self, kw, value)
-        # print(self.__dict__)
 
 class Node(Object):
     
@@ -44,13 +38,7 @@ class Node(Object):
         'polymorphic_identity':'Node',
     }
     
-    properties = OrderedDict([
-        ('operating_system', 'Operating System'),
-        ('os_version', 'OS version'),
-        ('ip_address', 'IP address'),
-        ('longitude', 'Longitude'),
-        ('latitude', 'Latitude')
-        ])
+    properties = node_common_properties
     
     def __init__(self, **kwargs):
         super(Node, self).__init__(**kwargs)
@@ -122,10 +110,10 @@ class Host(Node):
 
 class OpticalSwitch(Node):
     
-    __tablename__ = 'OpticalSwitch'
+    __tablename__ = 'Optical Switch'
 
     __mapper_args__ = {
-        'polymorphic_identity': 'OpticalSwitch',
+        'polymorphic_identity': 'Optical Switch',
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
@@ -313,14 +301,14 @@ class PseudoWire(Link):
 ## Dispatchers
 
 node_class = OrderedDict([
-('antenna', Antenna),
-('firewall', Firewall),
-('host', Host),
-('optical switch', OpticalSwitch),
-('regenerator', Regenerator),
-('router', Router),
-('switch', Switch),
-('server', Server),
+('Antenna', Antenna),
+('Firewall', Firewall),
+('Host', Host),
+('Optical Switch', OpticalSwitch),
+('Regenerator', Regenerator),
+('Router', Router),
+('Switch', Switch),
+('Server', Server),
 ])
 
 link_class = OrderedDict([

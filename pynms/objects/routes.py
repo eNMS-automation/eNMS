@@ -1,6 +1,7 @@
 from base.routes import _render_template
 from flask import Blueprint, current_app, request
 from flask_login import login_required
+from objects.models import node_class
 from os.path import join
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -40,7 +41,8 @@ def create_objects():
     add_nodes_form = AddNodes(request.form)
     add_link_form = AddLink(request.form)
     if 'add_node' in request.form:
-        node = Node(**request.form)
+        # print(request.form, request.form['type'])
+        node = node_class[request.form['type']](**request.form)
         current_app.database.session.add(node)
     elif 'add_nodes' in request.form:
         filename = request.files['file'].filename

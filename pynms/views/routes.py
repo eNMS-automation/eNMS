@@ -1,4 +1,5 @@
-from flask import Blueprint, current_app, request
+from base.routes import _render_template
+from flask import Blueprint, request
 from flask_login import login_required
 from objects.models import Node, Link
 
@@ -25,7 +26,7 @@ def geographical_view():
     for link in links:
         lines = {field: getattr(link, field) for field in link_fields}
         link_table[link] = lines
-    return current_app.render_template(
+    return _render_template(
         'geographical_view.html', 
         node_table = node_table,
         link_table = link_table
@@ -46,7 +47,7 @@ def logical_view():
     for link in links:
         lines = {field: getattr(link, field) for field in link_fields}
         link_table[link] = lines
-    return current_app.render_template(
+    return _render_template(
         'logical_view.html', 
         node_table = node_table,
         link_table = link_table

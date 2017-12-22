@@ -24,8 +24,10 @@ class Object(CustomBase):
     __tablename__ = 'Object'
     
     def __init__(self, **kwargs):
-        for kw, value in kwargs.items():
-            setattr(self, kw, value)
+        super(Object, self).__init__(**kwargs)
+        # for kw, value in kwargs.items():
+        #     setattr(self, kw, value)
+        # print(self.__dict__)
 
 class Node(Object):
     
@@ -90,7 +92,7 @@ class Antenna(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Antenna, self).__init__(**kwargs)
 
 class Firewall(Node):
     
@@ -103,7 +105,7 @@ class Firewall(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Firewall, self).__init__(**kwargs)
 
 class Host(Node):
     
@@ -116,7 +118,7 @@ class Host(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Host, self).__init__(**kwargs)
 
 class OpticalSwitch(Node):
     
@@ -129,7 +131,7 @@ class OpticalSwitch(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(OpticalSwitch, self).__init__(**kwargs)
 
 class Regenerator(Node):
     
@@ -142,7 +144,7 @@ class Regenerator(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Regenerator, self).__init__(**kwargs)
 
 class Router(Node):
     
@@ -168,7 +170,7 @@ class Server(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Server, self).__init__(**kwargs)
 
 class Switch(Node):
     
@@ -181,7 +183,7 @@ class Switch(Node):
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Switch, self).__init__(**kwargs)
 
 class Link(Object):
     
@@ -219,7 +221,7 @@ class Link(Object):
         ])
         
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Link, self).__init__(**kwargs)
 
     @classmethod
     def get_properties(cls):
@@ -241,7 +243,7 @@ class BgpPeering(Link):
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(BgpPeering, self).__init__(**kwargs)
 
 class EtherChannel(Link):
     
@@ -254,7 +256,7 @@ class EtherChannel(Link):
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(EtherChannel, self).__init__(**kwargs)
 
 class EthernetLink(Link):
     
@@ -267,7 +269,7 @@ class EthernetLink(Link):
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(EthernetLink, self).__init__(**kwargs)
 
 class OpticalLink(Link):
     
@@ -280,7 +282,7 @@ class OpticalLink(Link):
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(OpticalLink, self).__init__(**kwargs)
 
 class OpticalChannel(Link):
     
@@ -293,7 +295,7 @@ class OpticalChannel(Link):
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(OpticalChannel, self).__init__(**kwargs)
 
 class PseudoWire(Link):
     

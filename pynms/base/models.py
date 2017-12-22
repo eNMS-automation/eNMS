@@ -1,5 +1,6 @@
 from main import db
 from database import Base
+from objects.properties import public_properties
 
 class CustomBase(Base):
     
@@ -7,7 +8,8 @@ class CustomBase(Base):
     
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
-            if property in self.__table__.columns._data:
+            print(property, value, property in public_properties)
+            if property in public_properties:
                 # depending on whether value is an iterable or not, we must
                 # unpack it's value (when **kwargs is request.form, some values
                 # will be a 1-element list)

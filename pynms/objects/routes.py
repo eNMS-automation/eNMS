@@ -1,12 +1,13 @@
 from base.routes import _render_template
 from flask import Blueprint, current_app, request
 from flask_login import login_required
+from .forms import *
+from .models import *
 from objects.models import node_class
 from os.path import join
+from .properties import *
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
-from .models import *
-from .forms import *
 
 blueprint = Blueprint(
     'objects_blueprint', 
@@ -28,9 +29,9 @@ def objects():
     links = Link.query.all()
     return _render_template(
         'objects_overview.html', 
-        node_fields = Node.get_properties(), 
+        node_fields = node_public_properties, 
         nodes = Node.query.all(),
-        link_fields = Link.get_properties(), 
+        link_fields = link_public_properties, 
         links = Link.query.all()
         )
 

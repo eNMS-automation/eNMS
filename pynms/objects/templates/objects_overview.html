@@ -30,8 +30,8 @@
               <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    {% for field, pretty_field in node_fields.items() %}
-                    <th>{{ pretty_field }}</th>
+                    {% for field in node_fields %}
+                    <th>{{ field }}</th>
                     {% endfor %}
                   </tr>
                 </thead>
@@ -59,8 +59,8 @@
               <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    {% for field, pretty_field in link_fields.items() %}
-                    <th>{{ pretty_field }}</th>
+                    {% for field in link_fields %}
+                    <th>{{ field }}</th>
                     {% endfor %}
                   </tr>
                 </thead>

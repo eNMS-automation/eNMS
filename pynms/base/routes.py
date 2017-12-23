@@ -28,6 +28,7 @@ def _render_template(*args, **kwargs):
     except AttributeError:
         # 'AnonymousUserMixin' object has no attribute 'username'
         pass
+    # add the mapping to pretty names for properties
     kwargs['names'] = pretty_names
     return render_template(*args, **kwargs)
 
@@ -75,10 +76,6 @@ def login():
 def logout():
     flask_login.logout_user()
     return 'Logged out'
-    
-@login_manager.unauthorized_handler
-def unauthorized_handler():
-    return render_template('errors/page_403.html')
 
 @blueprint.route('/dashboard')
 @flask_login.login_required
@@ -118,7 +115,16 @@ def dashboard():
         counters = counters
         )
 
+@blueprint.route('/project')
+@flask_login.login_required
+def project():
+    return _render_template('about/project.html')
+        
 ## Errors
+
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return render_template('errors/page_403.html')
 
 @blueprint.errorhandler(403)
 def not_found_error(error):
@@ -131,4 +137,3 @@ def not_found_error(error):
 @blueprint.errorhandler(500)
 def internal_error(error):
     return render_template('errors/page_500.html'), 500
-

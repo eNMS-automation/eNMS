@@ -1,37 +1,37 @@
 from collections import OrderedDict
 
-object_common_properties = OrderedDict([
-    ('name', 'Name'),
-    ('type', 'Type'),
-    ('vendor', 'Vendor')
-    ])
+object_common_properties = (
+    'name',
+    'type',
+    'vendor'
+    )
 
-node_common_properties = OrderedDict([
-    ('operating_system', 'Operating System'),
-    ('os_version', 'OS version'),
-    ('ip_address', 'IP address'),
-    ('longitude', 'Longitude'),
-    ('latitude', 'Latitude')
-    ])
+node_common_properties = (
+    'operating_system',
+    'os_version',
+    'ip_address',
+    'longitude',
+    'latitude'
+    )
 
-link_common_properties = OrderedDict([
-    ('source', 'Source'),
-    ('destination', 'Destination')
-    ])
+link_common_properties = (
+    'source',
+    'destination',
+    )
 
 node_public_properties = (
-tuple(object_common_properties) + 
-tuple(node_common_properties)
+object_common_properties +
+node_common_properties
 )
 
 link_public_properties = (
-tuple(object_common_properties) + 
-tuple(link_common_properties)
+object_common_properties + 
+link_common_properties
 )
 
 public_properties = (
-tuple(node_public_properties) + 
-tuple(link_public_properties)
+node_public_properties + 
+link_public_properties
 )
 
 type_to_public_properties = OrderedDict([

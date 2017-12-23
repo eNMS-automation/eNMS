@@ -19,8 +19,8 @@ def geographical_view(view_type):
         '{}_view.html'.format(view_type), 
         table = {
             obj: {
-                property_name: getattr(obj, property) 
-                for property, property_name in type_to_public_properties[obj.type].items()
+                property: getattr(obj, property) 
+                for property in type_to_public_properties[obj.type]
             }
             for obj in Object.query.all()
         })

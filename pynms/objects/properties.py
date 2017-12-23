@@ -14,7 +14,10 @@ node_common_properties = OrderedDict([
     ('latitude', 'Latitude')
     ])
 
-link_common_properties = {}
+link_common_properties = OrderedDict([
+    ('source', 'Source'),
+    ('destination', 'Destination')
+    ])
 
 node_public_properties = (
 tuple(object_common_properties) + 
@@ -31,4 +34,8 @@ tuple(node_public_properties) +
 tuple(link_public_properties)
 )
 
-# pretty_names = {
+type_to_public_properties = OrderedDict([
+    ('Router', node_common_properties),
+    ('Optical switch', node_common_properties),
+    ('Optical link', link_common_properties)
+    ])

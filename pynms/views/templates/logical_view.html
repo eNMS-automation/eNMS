@@ -49,16 +49,17 @@
           <script>
             // create an array with nodes
             var nodes = new vis.DataSet([
-            {% for node, properties in node_table.items() %}
-            {id: {{ node.id }}, label: {{ node.id }}, image: 'static/images/default/default_router.gif', shape: 'image', title: 'test'},
-          
+            {% for node, properties in table.items() if node.class_type == 'node' %}  
+              {id: {{ node.id }}, label: {{ node.id }}, image: 'static/images/default/default_router.gif', shape: 'image', title: "{% for property_name, property in properties.items() %}\
+                <b>{{property_name}}</b>: {{property}}<br>{% endfor %}"},
+            
             {% endfor %}
             ]);
           
             // create an array with edges
             var edges = new vis.DataSet([
-            {% for link, properties in link_table.items() %}
-            { from: {{ link['source']['id'] }}, to: {{ link['destination']['id'] }} },
+            {% for link, properties in table.items() if link.class_type == 'link' %}  
+              { from: {{ link['source']['id'] }}, to: {{ link['destination']['id'] }} },
             {% endfor %}
             ]);
           

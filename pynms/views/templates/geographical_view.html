@@ -113,8 +113,8 @@
               {% if obj.class_type == 'node' %}
                 var marker = L.marker([{{ obj.latitude }}, {{ obj.longitude }}], {icon: greenIcon}).addTo(mymap);
                 
-                marker.bindPopup("{% for property_name, property in properties.items() %}\
-                <b>{{property_name}}</b>: {{property}}<br>{% endfor %}<br>\
+                marker.bindPopup("{% for property in properties %}\
+                <b>{{ names[property] }}</b>: {{property}}<br>{% endfor %}<br>\
                 <form action='' method='POST' id='#form'>\
                 <input type='hidden' name='ip_address' id='ip_address' value={{ obj.ip_address }}>\
                 <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
@@ -131,8 +131,8 @@
                 });
                 firstpolyline.addTo(mymap);
                 
-              firstpolyline.bindPopup("{% for property_name, property in properties.items() %}\
-              <b>{{property_name}}</b>: {{property}}<br>{% endfor %}");
+              firstpolyline.bindPopup("{% for property in properties %}\
+              <b>{{ names[property] }}</b>: {{property}}<br>{% endfor %}");
               {% endif %}
             {% endfor %}
             

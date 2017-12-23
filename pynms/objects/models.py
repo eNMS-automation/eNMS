@@ -39,6 +39,7 @@ class Node(Object):
     }
     
     properties = node_common_properties
+    class_type = 'node'
     
     def __init__(self, **kwargs):
         super(Node, self).__init__(**kwargs)
@@ -110,10 +111,10 @@ class Host(Node):
 
 class OpticalSwitch(Node):
     
-    __tablename__ = 'Optical Switch'
+    __tablename__ = 'Optical switch'
 
     __mapper_args__ = {
-        'polymorphic_identity': 'Optical Switch',
+        'polymorphic_identity': 'Optical switch',
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
@@ -208,6 +209,9 @@ class Link(Object):
         ('destination', 'Destination')
         ])
         
+    properties = link_common_properties
+    class_type = 'link'
+        
     def __init__(self, **kwargs):
         super(Link, self).__init__(**kwargs)
 
@@ -222,10 +226,10 @@ class Link(Object):
 
 class BgpPeering(Link):
     
-    __tablename__ = 'BgpPeering'
+    __tablename__ = 'BGP peering'
     
     __mapper_args__ = {
-        'polymorphic_identity':'BgpPeering',
+        'polymorphic_identity':'BGP peering',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -233,12 +237,12 @@ class BgpPeering(Link):
     def __init__(self, **kwargs):
         super(BgpPeering, self).__init__(**kwargs)
 
-class EtherChannel(Link):
+class Etherchannel(Link):
     
-    __tablename__ = 'EtherChannel'
+    __tablename__ = 'Etherchannel'
     
     __mapper_args__ = {
-        'polymorphic_identity':'EtherChannel',
+        'polymorphic_identity':'Etherchannel',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -248,10 +252,10 @@ class EtherChannel(Link):
 
 class EthernetLink(Link):
     
-    __tablename__ = 'EthernetLink'
+    __tablename__ = 'Ethernet link'
     
     __mapper_args__ = {
-        'polymorphic_identity':'EthernetLink',
+        'polymorphic_identity':'Ethernet link',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -261,10 +265,10 @@ class EthernetLink(Link):
 
 class OpticalLink(Link):
     
-    __tablename__ = 'OpticalLink'
+    __tablename__ = 'Optical link'
     
     __mapper_args__ = {
-        'polymorphic_identity':'OpticalLink',
+        'polymorphic_identity':'Optical link',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -274,10 +278,10 @@ class OpticalLink(Link):
 
 class OpticalChannel(Link):
     
-    __tablename__ = 'OpticalChannel'
+    __tablename__ = 'Optical channel'
     
     __mapper_args__ = {
-        'polymorphic_identity':'OpticalChannel',
+        'polymorphic_identity':'Optical channel',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -285,12 +289,12 @@ class OpticalChannel(Link):
     def __init__(self, **kwargs):
         super(OpticalChannel, self).__init__(**kwargs)
 
-class PseudoWire(Link):
+class Pseudowire(Link):
     
-    __tablename__ = 'PseudoWire'
+    __tablename__ = 'Pseudowire'
     
     __mapper_args__ = {
-        'polymorphic_identity':'PseudoWire',
+        'polymorphic_identity':'Pseudowire',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -304,7 +308,7 @@ node_class = OrderedDict([
 ('Antenna', Antenna),
 ('Firewall', Firewall),
 ('Host', Host),
-('Optical Switch', OpticalSwitch),
+('Optical switch', OpticalSwitch),
 ('Regenerator', Regenerator),
 ('Router', Router),
 ('Switch', Switch),
@@ -313,9 +317,14 @@ node_class = OrderedDict([
 
 link_class = OrderedDict([
 ('BGP peering', BgpPeering),
-('etherchannel', EtherChannel),
-('ethernet link', EthernetLink),
-('optical channel', OpticalChannel),
-('optical link', OpticalLink),
-('pseudowire', PseudoWire)
+('Etherchannel', Etherchannel),
+('Ethernet link', EthernetLink),
+('Optical channel', OpticalChannel),
+('Optical link', OpticalLink),
+('Pseudowire', Pseudowire)
 ])
+
+object_class = OrderedDict()
+for cls_dict in (node_class, link_class):
+    object_class.update(cls_dict)
+print(object_class)

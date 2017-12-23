@@ -2,7 +2,7 @@ from flask import Flask
 from flask_apscheduler import APScheduler
 from flask_sqlalchemy import SQLAlchemy
 from inspect import stack
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname, join, pardir
 import flask_login
 import logging
 import os
@@ -20,11 +20,11 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 app.database = db
 
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = join(APP_ROOT, 'uploads')
-GETTERS_FOLDER = join(APP_ROOT, 'getters')
-APPS_FOLDER = join(APP_ROOT, 'applications')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+path_pynms = os.path.dirname(os.path.abspath(__file__))
+path_parent = abspath(join(path_pynms, pardir))
+path_upload = join(path_parent, 'uploads')
+path_apps = join(path_parent, 'applications')
+app.config['UPLOAD_FOLDER'] = path_upload
 
 # from helpers import *
 from models import *

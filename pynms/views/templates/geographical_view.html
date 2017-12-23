@@ -49,100 +49,99 @@
           <div class="x_panel">
             <div class="x_content">
               <div id="mapid"></div>
-              <script src="{{ url_for('static', filename='vendors/leaflet/leaflet.js') }}"></script>
-          
-          <script>
-          var ourCustomControl = L.Control.extend({
-          
-          options: {
-              position: 'topleft' 
-              //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
-          },
-          
-          onAdd: function (mymap) {
-              var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
-          
-              container.style.backgroundColor = 'white';
-              container.style.height = '30px';
-              container.type="button";
-              container.value = "Filters";
-          
-              container.onclick = function(){
-                $('#filters').modal('show');
-
-              }
-              return container;
-            }
-          })
-          
-          var mymap = L.map('mapid').setView([48, 2], 5);
-          L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
-          
-          var greenIcon = L.icon({
-              iconUrl: 'static/images/default/default_router.gif',
-              iconSize:     [18, 12], // size of the icon
-              iconAnchor:   [9, 6], // point of the icon which will correspond to marker's location
-              popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
-          });
-
-          mymap.addControl(new ourCustomControl());
-          
-          function loadXMLDoc()
-          {
-              var req = new XMLHttpRequest()
-              req.onreadystatechange = function()
-              {
-                  if (req.readyState == 4)
-                  {
-                      if (req.status != 200)
-                      {
-                          //error handling code here
-                      }
-                      else
-                      {
-                          var response = JSON.parse(req.responseText)
-                      }
-                  }
-              }
-          
-              req.open('POST', '/ajax_connection_to_node')
-              req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-              var ip = document.getElementById('ip_address').value
-              var postVars = 'ip_address='+ip
-              req.send(postVars)
-              
-              return false
-          }
-          
-          {% for node, properties in node_table.items() %}
-          var marker = L.marker([{{ node.latitude }}, {{ node.longitude }}], {icon: greenIcon}).addTo(mymap);
-          
-          marker.bindPopup("{% for property_name, property in properties.items() %}\
-          <b>{{property_name}}</b>: {{property}}<br>{% endfor %}<br>\
-          <form action='' method='POST' id='#form'>\
-          <input type='hidden' name='ip_address' id='ip_address' value={{ node.ip_address }}>\
-          <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
-          {% endfor %}
-          
-          {% for link, properties in link_table.items() %}
-            var pointA = new L.LatLng({{ link['source']['latitude'] }}, {{ link['source']['longitude'] }});
-            var pointB = new L.LatLng({{ link['destination']['latitude'] }}, {{ link['destination']['longitude'] }});
-            var pointList = [pointA, pointB];
+                <script src="{{ url_for('static', filename='vendors/leaflet/leaflet.js') }}"></script>
             
-            var firstpolyline = new L.Polyline(pointList, {
-                color: 'red',
-                weight: 3,
-                opacity: 1,
-                smoothFactor: 1
+            <script>
+            var ourCustomControl = L.Control.extend({
+            
+            options: {
+                position: 'topleft' 
+                //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+            },
+            
+            onAdd: function (mymap) {
+                var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+            
+                container.style.backgroundColor = 'white';
+                container.style.height = '30px';
+                container.type="button";
+                container.value = "Filters";
+            
+                container.onclick = function(){
+                  $('#filters').modal('show');
+  
+                }
+                return container;
+              }
+            })
+            
+            var mymap = L.map('mapid').setView([48, 2], 5);
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
+            
+            var greenIcon = L.icon({
+                iconUrl: 'static/images/default/default_router.gif',
+                iconSize:     [18, 12], // size of the icon
+                iconAnchor:   [9, 6], // point of the icon which will correspond to marker's location
+                popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
             });
-            firstpolyline.addTo(mymap);
+  
+            mymap.addControl(new ourCustomControl());
             
-          firstpolyline.bindPopup("{% for property_name, property in properties.items() %}\
-          <b>{{property_name}}</b>: {{property}}<br>{% endfor %}");
-
-          {% endfor %}
-          
-          </script>
+            function loadXMLDoc()
+            {
+                var req = new XMLHttpRequest()
+                req.onreadystatechange = function()
+                {
+                    if (req.readyState == 4)
+                    {
+                        if (req.status != 200)
+                        {
+                            //error handling code here
+                        }
+                        else
+                        {
+                            var response = JSON.parse(req.responseText)
+                        }
+                    }
+                }
+            
+                req.open('POST', '/ajax_connection_to_node')
+                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+                var ip = document.getElementById('ip_address').value
+                var postVars = 'ip_address='+ip
+                req.send(postVars)
+                
+                return false
+            }
+            
+            {% for obj, properties in table.items() %}  
+              {% if obj.class_type == 'node' %}
+                var marker = L.marker([{{ obj.latitude }}, {{ obj.longitude }}], {icon: greenIcon}).addTo(mymap);
+                
+                marker.bindPopup("{% for property_name, property in properties.items() %}\
+                <b>{{property_name}}</b>: {{property}}<br>{% endfor %}<br>\
+                <form action='' method='POST' id='#form'>\
+                <input type='hidden' name='ip_address' id='ip_address' value={{ obj.ip_address }}>\
+                <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
+              {% else %}
+                var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
+                var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
+                var pointList = [pointA, pointB];
+                
+                var firstpolyline = new L.Polyline(pointList, {
+                    color: 'red',
+                    weight: 3,
+                    opacity: 1,
+                    smoothFactor: 1
+                });
+                firstpolyline.addTo(mymap);
+                
+              firstpolyline.bindPopup("{% for property_name, property in properties.items() %}\
+              <b>{{property_name}}</b>: {{property}}<br>{% endfor %}");
+              {% endif %}
+            {% endfor %}
+            
+            </script>
             </div>
           </div>
         </div>

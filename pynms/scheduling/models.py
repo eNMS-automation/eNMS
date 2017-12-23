@@ -51,7 +51,7 @@ class Task(CustomBase):
 
     def datetime_conversion(self, scheduled_date):
         dt = datetime.strptime(scheduled_date, '%d/%m/%Y %H:%M:%S')
-        return datetime.datetime.strftime(dt, '%Y-%m-%d %H:%M:%S')
+        return datetime.strftime(dt, '%Y-%m-%d %H:%M:%S')
                 
     def pause_task(self):
         scheduler.pause_job(self.name)

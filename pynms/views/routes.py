@@ -1,7 +1,8 @@
 from base.routes import _render_template
 from flask import Blueprint, request
 from flask_login import login_required
-from objects.models import Node, Link
+from objects.models import Object
+from objects.properties import *
 
 blueprint = Blueprint(
     'views_blueprint', 
@@ -11,47 +12,18 @@ blueprint = Blueprint(
     static_folder='static'
     )
 
-@blueprint.route('/geographical_view')
+@blueprint.route('/<view_type>_view')
 @login_required
-def geographical_view():
-    node_fields = tuple(Node.__table__.columns._data)
-    nodes = Node.query.all()
-    node_table = {}
-    for node in nodes:
-        lines = {field: getattr(node, field) for field in node_fields}
-        node_table[node] = lines
-    link_fields = tuple(Link.__table__.columns._data)
-    links = Link.query.all()
-    link_table = {}
-    for link in links:
-        lines = {field: getattr(link, field) for field in link_fields}
-        link_table[link] = lines
+def geographical_view(view_type):
     return _render_template(
-        'geographical_view.html', 
-        node_table = node_table,
-        link_table = link_table
-        )
-                           
-@blueprint.route('/logical_view')
-@login_required
-def logical_view():
-    node_fields = tuple(Node.__table__.columns._data)
-    nodes = Node.query.all()
-    node_table = {}
-    for node in nodes:
-        lines = {field: getattr(node, field) for field in node_fields}
-        node_table[node] = lines
-    link_fields = tuple(Link.__table__.columns._data)
-    links = Link.query.all()
-    link_table = {}
-    for link in links:
-        lines = {field: getattr(link, field) for field in link_fields}
-        link_table[link] = lines
-    return _render_template(
-        'logical_view.html', 
-        node_table = node_table,
-        link_table = link_table
-        )
+        '{}_view.html'.format(view_type), 
+        table = {
+            obj: {
+                property_name: getattr(obj, property) 
+                for property, property_name in type_to_public_properties[obj.type].items()
+            }
+            for obj in Object.query.all()
+        })
 
 @blueprint.route('/ajax_connection_to_node2', methods = ['POST'])
 @login_required
@@ -63,6 +35,7 @@ def ajax_request2():
 @blueprint.route('/ajax_connection_to_node', methods = ['POST'])
 @login_required
 def ajax_request():
+    print(t*100000)
     ip_address = request.form['ip_address']
     path_putty = join(APPS_FOLDER, 'putty.exe')
     ssh_connection = '{} -ssh {}'.format(path_putty, ip_address)

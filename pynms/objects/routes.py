@@ -8,6 +8,7 @@ from os.path import join
 from .properties import *
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
+from xlrd.biffh import XLRDError
 
 blueprint = Blueprint(
     'objects_blueprint', 
@@ -52,13 +53,33 @@ def create_objects():
             filepath = join(current_app.config['UPLOAD_FOLDER'], filename)
             request.files['file'].save(filepath)
             book = open_workbook(filepath)
-            sheet = book.sheet_by_index(0)
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                kwargs = dict(zip(properties, sheet.row_values(row_index)))
-                node_type = kwargs.pop('type')
-                new_node = node_class[node_type](**kwargs)
-                current_app.database.session.add(new_node)
+            for obj_type, cls in object_class.items():
+                try:
+                    sheet = book.sheet_by_name(obj_type)
+                # if the sheet cannot be found, there's nothing to import
+                except XLRDError:
+                    continue
+                properties = sheet.row_values(0)
+                for row_index in range(1, sheet.nrows):
+                    print(obj_type)
+                    kwargs = dict(zip(properties, sheet.row_values(row_index)))
+                    if obj_type in link_class:
+                        print(kwargs['source'], kwargs['destination'])
+                        source = current_app.database.session.query(Node)\
+                            .filter_by(name=kwargs['source'])\
+                            .first()
+                        destination = current_app.database.session.query(Node)\
+                            .filter_by(name=kwargs['destination'])\
+                            .first()
+                        new_obj = link_class[obj_type](
+                            source_id = source.id, 
+                            destination_id = destination.id, 
+                            source = source, 
+                            destination = destination
+                            )
+                    else:
+                        new_obj = node_class[obj_type](**kwargs)
+                    current_app.database.session.add(new_obj)
         else:
             flash('no file submitted')
     elif 'add_link' in request.form:

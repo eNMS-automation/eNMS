@@ -3,6 +3,7 @@ from collections import Counter
 from flask import Blueprint, redirect, render_template, request, url_for
 from main import db, login_manager
 from objects.models import Node, Link
+from objects.properties import pretty_names
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import *
 from users.models import User
@@ -27,6 +28,7 @@ def _render_template(*args, **kwargs):
     except AttributeError:
         # 'AnonymousUserMixin' object has no attribute 'username'
         pass
+    kwargs['names'] = pretty_names
     return render_template(*args, **kwargs)
 
 ## Tear down SQLAlchemy 
@@ -103,10 +105,17 @@ def dashboard():
                 )
         for property in ('type',)
         }
+    # total number of nodes / links / users
+    counters = {
+    'nodes': len(Node.query.all()),
+    'links': len(Link.query.all()),
+    'users': len(User.query.all())
+    }
     return _render_template(
-        'home/index.html', 
+        'home/dashboard.html', 
         node_counters = node_counters,
-        link_counters = link_counters
+        link_counters = link_counters,
+        counters = counters
         )
 
 ## Errors

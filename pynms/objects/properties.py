@@ -39,3 +39,16 @@ type_to_public_properties = OrderedDict([
     ('Optical switch', node_common_properties),
     ('Optical link', link_common_properties)
     ])
+
+pretty_names = OrderedDict([
+    ('name', 'Name'),
+    ('type', 'Type'),
+    ('vendor', 'Vendor'),
+    ('operating_system', 'Operating System'),
+    ('os_version', 'OS version'),
+    ('ip_address', 'IP address'),
+    ('longitude', 'Longitude'),
+    ('latitude', 'Latitude'),
+    ('source', 'Source'),
+    ('destination', 'Destination')
+    ])

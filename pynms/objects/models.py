@@ -21,7 +21,14 @@ class Object(CustomBase):
     __tablename__ = 'Object'
     
     def __init__(self, **kwargs):
-        super(Object, self).__init__(**kwargs)
+        for property, value in kwargs.items():
+            if property in public_properties:
+                # depending on whether value is an iterable or not, we must
+                # unpack it's value (when **kwargs is request.form, some values
+                # will be a 1-element list)
+                if hasattr(value, '__iter__') and not isinstance(value, str):
+                    value ,= value
+                setattr(self, property, value)
 
 class Node(Object):
     

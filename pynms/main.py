@@ -15,7 +15,7 @@ path_app = dirname(abspath(stack()[0][1]))
 if path_app not in sys.path:
     sys.path.append(path_app)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='base/static')
 app.config.from_object('config')
 db = SQLAlchemy(app)
 app.database = db

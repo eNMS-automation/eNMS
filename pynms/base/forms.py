@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import *
 from objects.properties import *
+from .properties import pretty_names
 
 ## Login and registration
 

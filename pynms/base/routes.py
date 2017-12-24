@@ -4,7 +4,7 @@ from collections import Counter
 from flask import Blueprint, redirect, render_template, request, url_for
 from main import db, login_manager
 from objects.models import Node, Link
-from objects.properties import pretty_names
+from .properties import pretty_names
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import *
 from users.models import User

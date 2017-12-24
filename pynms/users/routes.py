@@ -1,8 +1,9 @@
 from base.routes import _render_template
 from flask import Blueprint, current_app, request
 from flask_login import login_required
-from .models import User
 from .forms import *
+from .models import User
+from .properties import user_search_properties
 
 blueprint = Blueprint(
     'users_blueprint', 
@@ -16,7 +17,7 @@ blueprint = Blueprint(
 def users():
     return _render_template(
         'users_overview.html', 
-        fields = User.__table__.columns._data, 
+        fields = user_search_properties, 
         users = User.query.all()
         )
                            

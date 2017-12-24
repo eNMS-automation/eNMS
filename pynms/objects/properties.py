@@ -53,16 +53,3 @@ link_diagram_properties = (
     'type',
     'vendor'
     )
-
-pretty_names = OrderedDict([
-    ('name', 'Name'),
-    ('type', 'Type'),
-    ('vendor', 'Vendor'),
-    ('operating_system', 'Operating System'),
-    ('os_version', 'OS version'),
-    ('ip_address', 'IP address'),
-    ('longitude', 'Longitude'),
-    ('latitude', 'Latitude'),
-    ('source', 'Source'),
-    ('destination', 'Destination')
-    ])

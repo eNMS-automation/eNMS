@@ -5,20 +5,12 @@
 {% block stylesheets %}
   {{ super() }}
   <link href="{{ url_for('static', filename='vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
   <div class="right_col" role="main">
     <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Overview of all users</small></h3>
-        </div>
-      </div>
 
       <div class="clearfix"></div>
 
@@ -31,7 +23,7 @@
                 <thead>
                   <tr>
                     {% for field in fields %}
-                    <th>{{ field }}</th>
+                    <th>{{ names[field] }}</th>
                     {% endfor %}
                   </tr>
                 </thead>
@@ -61,12 +53,9 @@
   <script src="{{ url_for('static', filename='vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+
 {% endblock javascripts %}

@@ -64,7 +64,6 @@ def create_objects():
                     print(obj_type)
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
                     if obj_type in link_class:
-                        print(kwargs['source'], kwargs['destination'])
                         source = current_app.database.session.query(Node)\
                             .filter_by(name=kwargs['source'])\
                             .first()

@@ -1,3 +1,4 @@
+from ast import literal_eval
 from .forms import *
 from collections import Counter
 from flask import Blueprint, redirect, render_template, request, url_for
@@ -90,7 +91,7 @@ def dashboard():
                     Node.query.all()
                     )
                 )
-        for property in ('vendor', 'operating_system', 'os_version')
+        for property in literal_eval(flask_login.current_user.dashboard_node_properties)
         }
     # link properties
     link_counters = {
@@ -101,7 +102,7 @@ def dashboard():
                     Link.query.all()
                     )
                 )
-        for property in ('type',)
+        for property in literal_eval(flask_login.current_user.dashboard_link_properties)
         }
     # total number of nodes / links / users
     counters = {
@@ -119,12 +120,17 @@ def dashboard():
 @blueprint.route('/dashboard_control', methods=['GET', 'POST'])
 @flask_login.login_required
 def dashboard_control():
+    diagram_properties_form = DiagramPropertiesForm(request.form)
     if request.method == 'POST':
-        print(request.form['node_properties'])
+        user = db.session.query(User)\
+        .filter_by(username=flask_login.current_user.username)\
+        .first()
+        user.dashboard_node_properties = str(diagram_properties_form.data['node_properties'])
+        user.dashboard_link_properties = str(diagram_properties_form.data['link_properties'])
+        db.session.commit()
     return _render_template(
         'home/dashboard_control.html',
-        node_properties_form = NodePropertiesForm(request.form),
-        link_properties_form = LinkPropertiesForm(request.form)
+        diagram_properties_form = diagram_properties_form,
         )
 
 @blueprint.route('/project')

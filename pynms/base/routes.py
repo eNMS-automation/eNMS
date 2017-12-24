@@ -42,12 +42,14 @@ def shutdown_session(exception=None):
 
 @blueprint.route('/create_account', methods=['GET', 'POST'])
 def create_account():
+    print('o'*1000, request.method)
     if request.method == 'GET':
         form = CreateAccountForm(request.form)
         return _render_template('login/create_account.html', form=form)
     else:
         login_form = LoginForm(request.form)
         user = User(**request.form)
+        print(user, user.__dict__, request.form)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('base_blueprint.login'))

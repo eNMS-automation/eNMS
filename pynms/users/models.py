@@ -12,6 +12,15 @@ class User(CustomBase, UserMixin):
     access_rights = Column(String(120))
     password = Column(String(30))
     secret_password = Column(String(30))
+
+    def __init__(self, **kwargs):
+        for property, value in kwargs.items():
+            # depending on whether value is an iterable or not, we must
+            # unpack it's value (when **kwargs is request.form, some values
+            # will be a 1-element list)
+            if hasattr(value, '__iter__') and not isinstance(value, str):
+                value ,= value
+            setattr(self, property, value)
         
     def __repr__(self):
         return str(self.username)

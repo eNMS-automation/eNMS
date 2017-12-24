@@ -166,7 +166,7 @@
                 var marker = L.marker([{{ obj.latitude }}, {{ obj.longitude }}], {icon: greenIcon}).addTo(mymap);
                 
                 marker.bindPopup("{% for property in properties %}\
-                <b>{{ names[property] }}</b>: {{property}}<br>{% endfor %}<br>\
+                <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                 <form action='' method='POST' id='#form'>\
                 <input type='hidden' name='ip_address' id='ip_address' value={{ obj.ip_address }}>\
                 <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");

@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship
 
 class Object(CustomBase):
     
+    __tablename__ = 'Object'
+
     id = Column(Integer, primary_key=True)
     name = Column(String(120))
     vendor = Column(String(120))
@@ -18,8 +20,6 @@ class Object(CustomBase):
     
     properties = object_common_properties
     
-    __tablename__ = 'Object'
-    
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
             if property in public_properties:
@@ -29,6 +29,9 @@ class Object(CustomBase):
                 if hasattr(value, '__iter__') and not isinstance(value, str):
                     value ,= value
                 setattr(self, property, value)
+
+    def __repr__(self):
+        return str(self.name)
 
 class Node(Object):
     
@@ -73,9 +76,6 @@ class Node(Object):
                         )
         node.open()
         return node
-
-    def __repr__(self):
-        return str(self.name)
         
 class Antenna(Node):
     
@@ -184,6 +184,10 @@ class Switch(Node):
 class Link(Object):
     
     __tablename__ = 'Link'
+    
+    __mapper_args__ = {
+        'polymorphic_identity': 'Link',
+    }
 
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     
@@ -236,7 +240,7 @@ class BgpPeering(Link):
     __tablename__ = 'BGP peering'
     
     __mapper_args__ = {
-        'polymorphic_identity':'BGP peering',
+        'polymorphic_identity': 'BGP peering',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -249,20 +253,20 @@ class Etherchannel(Link):
     __tablename__ = 'Etherchannel'
     
     __mapper_args__ = {
-        'polymorphic_identity':'Etherchannel',
+        'polymorphic_identity': 'Etherchannel',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super(EtherChannel, self).__init__(**kwargs)
+        super(Etherchannel, self).__init__(**kwargs)
 
 class EthernetLink(Link):
     
     __tablename__ = 'Ethernet link'
     
     __mapper_args__ = {
-        'polymorphic_identity':'Ethernet link',
+        'polymorphic_identity': 'Ethernet link',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -275,7 +279,7 @@ class OpticalLink(Link):
     __tablename__ = 'Optical link'
     
     __mapper_args__ = {
-        'polymorphic_identity':'Optical link',
+        'polymorphic_identity': 'Optical link',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -288,7 +292,7 @@ class OpticalChannel(Link):
     __tablename__ = 'Optical channel'
     
     __mapper_args__ = {
-        'polymorphic_identity':'Optical channel',
+        'polymorphic_identity': 'Optical channel',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
@@ -301,13 +305,13 @@ class Pseudowire(Link):
     __tablename__ = 'Pseudowire'
     
     __mapper_args__ = {
-        'polymorphic_identity':'Pseudowire',
+        'polymorphic_identity': 'Pseudowire',
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     
     def __init__(self, **kwargs):
-        super(PseudoWire, self).__init__(**kwargs)
+        super(Pseudowire, self).__init__(**kwargs)
     
 ## Dispatchers
 

@@ -23,6 +23,8 @@ class User(CustomBase, UserMixin):
             if hasattr(value, '__iter__') and not isinstance(value, str):
                 value ,= value
             setattr(self, property, value)
+        self.dashboard_node_properties = str(['type'])
+        self.dashboard_link_properties = str(['type'])
         
     def __repr__(self):
         return str(self.username)

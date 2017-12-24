@@ -3,13 +3,17 @@ from objects.properties import node_public_properties, link_public_properties
 from wtforms import TextField, BooleanField
 from wtforms.validators import optional
 
-def apply_defaults(cls):
-    cls.node_public_properties = node_public_properties
+def configure_form(cls):
+    cls.node_properties = node_public_properties
+    cls.link_properties = link_public_properties
     for property in node_public_properties:
-        setattr(cls, property, TextField(property))
-        setattr(cls, property + 'regex', BooleanField('Regex'))
+        setattr(cls, 'node' + property, TextField(property))
+        setattr(cls, 'node' + property + 'regex', BooleanField('Regex'))
+    for property in link_public_properties:
+        setattr(cls, 'link' + property, TextField(property))
+        setattr(cls, 'link' + property + 'regex', BooleanField('Regex'))
     return cls
     
-@apply_defaults
-class NodeFilteringForm(FlaskForm):
+@configure_form
+class FilteringForm(FlaskForm):
     pass

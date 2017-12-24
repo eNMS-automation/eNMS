@@ -31,7 +31,7 @@
                 <thead>
                   <tr>
                     {% for field in node_fields %}
-                    <th>{{ field }}</th>
+                    <th>{{ names[field] }}</th>
                     {% endfor %}
                   </tr>
                 </thead>
@@ -60,7 +60,7 @@
                 <thead>
                   <tr>
                     {% for field in link_fields %}
-                    <th>{{ field }}</th>
+                    <th>{{ names[field] }}</th>
                     {% endfor %}
                   </tr>
                 </thead>

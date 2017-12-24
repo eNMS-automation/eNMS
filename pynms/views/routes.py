@@ -2,7 +2,7 @@ from base.routes import _render_template
 from flask import Blueprint, request
 from flask_login import login_required
 from .forms import *
-from objects.models import Object
+from objects.models import Object, Node
 from objects.properties import *
 
 blueprint = Blueprint(
@@ -13,19 +13,43 @@ blueprint = Blueprint(
     static_folder='static'
     )
 
-@blueprint.route('/<view_type>_view')
+@blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
+    view_filter = lambda _: True
+    if request.method == 'POST':
+        def view_filter(obj):
+            # print(obj, obj.__dict__, request.form)
+            if obj.class_type == 'node':
+                # print('tttt'*1000)
+                # for property, value in obj.__dict__.items():
+                #     print(property in node_public_properties)
+                #     if property in node_public_properties:
+                #         print(str(value), request.form['node' + property])
+                return all(
+                    str(value) == request.form['node' + property]
+                    for property, value in obj.__dict__.items()
+                    if property in node_public_properties 
+                    and request.form['node' + property]
+                    )
+            elif obj.class_type == 'link':
+                return all(
+                    str(value) == request.form['link' + property]
+                    for property, value in obj.__dict__.items()
+                    if property in link_public_properties 
+                    and request.form['link' + property]
+                    )
+    table = {
+        obj: {
+            property: getattr(obj, property) 
+            for property in type_to_public_properties[obj.type]
+        }
+        for obj in filter(view_filter, Object.query.all())
+    }
     return _render_template(
         '{}_view.html'.format(view_type), 
-        table = {
-            obj: {
-                property: getattr(obj, property) 
-                for property in type_to_public_properties[obj.type]
-            }
-            for obj in Object.query.all()
-        },
-        form = FilteringForm(request.form)
+        form = FilteringForm(request.form),
+        table = table
         )
 
 @blueprint.route('/ajax_connection_to_node2', methods = ['POST'])

@@ -61,20 +61,20 @@ def create_objects():
                     continue
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
-                    print(obj_type)
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
                     if obj_type in link_class:
                         source = current_app.database.session.query(Node)\
-                            .filter_by(name=kwargs['source'])\
+                            .filter_by(name=kwargs.pop('source'))\
                             .first()
                         destination = current_app.database.session.query(Node)\
-                            .filter_by(name=kwargs['destination'])\
+                            .filter_by(name=kwargs.pop('destination'))\
                             .first()
                         new_obj = link_class[obj_type](
                             source_id = source.id, 
                             destination_id = destination.id, 
                             source = source, 
-                            destination = destination
+                            destination = destination,
+                            **kwargs
                             )
                     else:
                         new_obj = node_class[obj_type](**kwargs)

@@ -26,8 +26,44 @@
             </div>
             <div class="modal-body">
               <h4>Text in a modal</h4>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+
+              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+              
+                    <div class="form-group">
+                    
+                      <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                            <th>Regex</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for property in form.node_public_properties %}
+                          <tr>
+                              <td>{{ names[property] }}</td>
+                              <td>{{ form[property](class="form-control") }}</td>
+                              <td>{{ form[property + 'regex'](class="form-control") }}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    
+            
+                      
+                    </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                    <button type="submit" class="btn btn-success" name="add_node">Submit</button>
+                  </div>
+                </div>
+
+              </form>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

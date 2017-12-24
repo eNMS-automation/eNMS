@@ -1,4 +1,4 @@
-from base.forms import LoginForm, CreateAccountForm
+from .forms import *
 from collections import Counter
 from flask import Blueprint, redirect, render_template, request, url_for
 from main import db, login_manager
@@ -42,7 +42,6 @@ def shutdown_session(exception=None):
 
 @blueprint.route('/create_account', methods=['GET', 'POST'])
 def create_account():
-    print('o'*1000, request.method)
     if request.method == 'GET':
         form = CreateAccountForm(request.form)
         return _render_template('login/create_account.html', form=form)
@@ -115,6 +114,15 @@ def dashboard():
         node_counters = node_counters,
         link_counters = link_counters,
         counters = counters
+        )
+
+@blueprint.route('/dashboard_control')
+@flask_login.login_required
+def dashboard_control():
+    return _render_template(
+        'home/dashboard_control.html',
+        node_properties_form = NodePropertiesForm(request.form),
+        link_properties_form = LinkPropertiesForm(request.form)
         )
 
 @blueprint.route('/project')

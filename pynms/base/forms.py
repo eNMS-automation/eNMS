@@ -13,10 +13,8 @@ class CreateAccountForm(FlaskForm):
     email = TextField('Email')
     password = PasswordField('Password')
 
-class NodePropertiesForm(FlaskForm):
-    choices = [(p, pretty_names[p]) for p in node_diagram_properties]
-    node_properties = SelectMultipleField('Node properties', choices=choices)
-
-class LinkPropertiesForm(FlaskForm):
-    choices = [(p, pretty_names[p]) for p in link_diagram_properties]
-    link_properties = SelectMultipleField('Link properties', choices=choices)
+class DiagramPropertiesForm(FlaskForm):
+    node_choices = [(p, pretty_names[p]) for p in node_diagram_properties]
+    node_properties = SelectMultipleField('Node properties', choices=node_choices)
+    link_choices = [(p, pretty_names[p]) for p in link_diagram_properties]
+    link_properties = SelectMultipleField('Link properties', choices=link_choices)

@@ -116,9 +116,11 @@ def dashboard():
         counters = counters
         )
 
-@blueprint.route('/dashboard_control')
+@blueprint.route('/dashboard_control', methods=['GET', 'POST'])
 @flask_login.login_required
 def dashboard_control():
+    if request.method == 'POST':
+        print(request.form['node_properties'])
     return _render_template(
         'home/dashboard_control.html',
         node_properties_form = NodePropertiesForm(request.form),

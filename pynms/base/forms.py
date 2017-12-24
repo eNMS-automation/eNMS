@@ -14,9 +14,9 @@ class CreateAccountForm(FlaskForm):
     password = PasswordField('Password')
 
 class NodePropertiesForm(FlaskForm):
-    property_choices = [(p, pretty_names[p]) for p in node_public_properties]
-    properties = SelectMultipleField('Node properties', choices=property_choices)
+    choices = [(p, pretty_names[p]) for p in node_diagram_properties]
+    node_properties = SelectMultipleField('Node properties', choices=choices)
 
 class LinkPropertiesForm(FlaskForm):
-    property_choices = [(p, pretty_names[p]) for p in link_public_properties]
-    properties = SelectMultipleField('Link properties', choices=property_choices)
+    choices = [(p, pretty_names[p]) for p in link_diagram_properties]
+    link_properties = SelectMultipleField('Link properties', choices=choices)

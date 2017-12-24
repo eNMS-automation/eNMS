@@ -12,6 +12,8 @@ class User(CustomBase, UserMixin):
     access_rights = Column(String(120))
     password = Column(String(30))
     secret_password = Column(String(30))
+    dashboard_node_properties = Column(String())
+    dashboard_link_properties = Column(String())
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():

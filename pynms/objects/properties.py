@@ -40,6 +40,20 @@ type_to_public_properties = OrderedDict([
     ('Optical link', link_common_properties)
     ])
 
+## Diagram properties (for the dashboard)
+
+node_diagram_properties = (
+    'type',
+    'vendor',
+    'operating_system',
+    'os_version'
+    )
+
+link_diagram_properties = (
+    'type',
+    'vendor'
+    )
+
 pretty_names = OrderedDict([
     ('name', 'Name'),
     ('type', 'Type'),

@@ -15,10 +15,7 @@ blueprint = Blueprint(
 
 @blueprint.route('/<view_type>_view')
 @login_required
-def geographical_view(view_type):
-    # node_filtering_form = 
-    # for field in node_filtering_form:
-    #     print(field, field.__dict__)
+def view(view_type):
     return _render_template(
         '{}_view.html'.format(view_type), 
         table = {
@@ -28,7 +25,7 @@ def geographical_view(view_type):
             }
             for obj in Object.query.all()
         },
-        form = NodeFilteringForm(request.form)
+        form = FilteringForm(request.form)
         )
 
 @blueprint.route('/ajax_connection_to_node2', methods = ['POST'])

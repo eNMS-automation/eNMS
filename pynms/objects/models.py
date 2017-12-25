@@ -64,12 +64,7 @@ class Node(Object):
         
     @classmethod
     def get_properties(cls):
-        return dict(
-            list(
-                # https://stackoverflow.com/questions/17575074
-                super(Node).__get__(cls, None).properties.items())
-                + list(cls.properties.items())
-            )
+        return super(Node).__get__(cls, None).properties + cls.properties
         
     def napalm_connection(self, user, driver, transport):
         driver = get_network_driver(driver)
@@ -244,12 +239,7 @@ class Link(Object):
 
     @classmethod
     def get_properties(cls):
-        return dict(
-            list(
-                # https://stackoverflow.com/questions/17575074
-                super(Link).__get__(cls, None).properties.items())
-                + list(cls.properties.items())
-            )
+        return super(Link).__get__(cls, None).properties + cls.properties
 
 class BgpPeering(Link):
     

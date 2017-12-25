@@ -4,6 +4,7 @@ from flask_login import login_required
 from .forms import *
 from objects.models import Node, Link
 from objects.properties import *
+from re import search
 
 blueprint = Blueprint(
     'views_blueprint', 
@@ -19,20 +20,22 @@ def view(view_type):
     view_filter = lambda _: True
     if request.method == 'POST':
         def view_filter(obj):
-            if obj.class_type == 'node':
-                return all(
-                    str(value) == request.form['node' + property]
-                    for property, value in obj.__dict__.items()
-                    if property in node_public_properties 
-                    and request.form['node' + property]
-                    )
-            elif obj.class_type == 'link':
-                return all(
-                    str(value) == request.form['link' + property]
-                    for property, value in obj.__dict__.items()
-                    if property in link_public_properties
-                    and request.form['link' + property]
-                    )
+            # if the property field is not empty in the form, and the 
+            # property is a public property, we check that the value of 
+            # the object matches the user input for all properties
+            return all(
+                # if the node-regex property is not in the request, the
+                # regex box is unticked and we only check that the values
+                # are equal.
+                str(value) == request.form[obj.class_type + property]
+                if not obj.class_type + property + 'regex' in request.form
+                # if it is ticked, we use re.search to check that the value
+                # of the node property matches the regular expression.
+                else search(request.form[obj.class_type + property], str(value))
+                for property, value in obj.__dict__.items()
+                if property in obj.get_properties()
+                and request.form[obj.class_type + property]
+                )
     return _render_template(
         '{}_view.html'.format(view_type), 
         form = FilteringForm(request.form),

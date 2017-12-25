@@ -178,7 +178,7 @@
                 firstpolyline.addTo(mymap);
                 
               firstpolyline.bindPopup("{% for property in properties %}\
-              <b>{{ names[property] }}</b>: {{ property }}<br>{% endfor %}");
+              <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
             {% endfor %}
             
             </script>

@@ -70,21 +70,15 @@
                       
                     </div>
 
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success" name="add_node">Submit</button>
-                  </div>
-                </div>
-
-              </form>
-
+              
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="add_node">Submit</button>
             </div>
+
+            </form>
 
           </div>
         </div>
@@ -184,7 +178,7 @@
                 firstpolyline.addTo(mymap);
                 
               firstpolyline.bindPopup("{% for property in properties %}\
-              <b>{{ names[property] }}</b>: {{property}}<br>{% endfor %}");
+              <b>{{ names[property] }}</b>: {{ property }}<br>{% endfor %}");
             {% endfor %}
             
             </script>

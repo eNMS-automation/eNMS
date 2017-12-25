@@ -11,7 +11,9 @@
 
   <div class="right_col" role="main">
     <div class="">
-
+    
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+    
       <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -19,17 +21,63 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              <h4 class="modal-title" id="myModalLabel">Filter the view</h4>
             </div>
             <div class="modal-body">
-              <h4>Text in a modal</h4>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            
+              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+              
+                    <div class="form-group">
+                    
+                      <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                            <th>Regex</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for property in form.node_properties %}
+                          <tr>
+                              <td>{{ names[property] }}</td>
+                              <td>{{ form['node' + property](class="form-control") }}</td>
+                              <td>{{ form['node' + property + 'regex'](class="form-control") }}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    
+                      <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                            <th>Regex</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for property in form.link_properties %}
+                          <tr>
+                              <td>{{ names[property] }}</td>
+                              <td>{{ form['link' + property](class="form-control") }}</td>
+                              <td>{{ form['link' + property + 'regex'](class="form-control") }}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      
+                    </div>
+
+              
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="add_node">Submit</button>
             </div>
+
+            </form>
 
           </div>
         </div>
@@ -44,16 +92,16 @@
           <script>
             // create an array with nodes
             var nodes = new vis.DataSet([
-            {% for node, properties in table.items() if node.class_type == 'node' %}  
+            {% for node, properties in node_table.items() %}  
               {id: {{ node.id }}, label: {{ node.id }}, image: 'static/images/default/default_router.gif', shape: 'image', title: "{% for property in properties %}\
-                <b>{{names[property]}}</b>: {{property}}<br>{% endfor %}"},
+                <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"},
             
             {% endfor %}
             ]);
           
             // create an array with edges
             var edges = new vis.DataSet([
-            {% for link, properties in table.items() if link.class_type == 'link' %}  
+            {% for link, properties in link_table.items() %}  
               { from: {{ link['source']['id'] }}, to: {{ link['destination']['id'] }} },
             {% endfor %}
             ]);

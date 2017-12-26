@@ -42,3 +42,11 @@ def manage_users():
         add_user_form = add_user_form,
         delete_user_form = delete_user_form
         )
+
+@blueprint.route('/tacacs_server')
+@login_required
+def tacacs_server():
+    return _render_template(
+        'tacacs_server.html', 
+        form = TacacsServer(request.form)
+        )

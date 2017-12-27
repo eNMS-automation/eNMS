@@ -26,11 +26,6 @@ path_upload = join(path_parent, 'uploads')
 path_apps = join(path_parent, 'applications')
 app.config['UPLOAD_FOLDER'] = path_upload
 
-# from helpers import *
-from models import *
-from database import *
-from users.models import User
-
 # start the scheduler
 scheduler = APScheduler()
 scheduler.init_app(app)
@@ -40,20 +35,18 @@ app.scheduler = scheduler
 # start the login system
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
-
-@login_manager.user_loader
-def user_loader(id):
-    return db.session.query(User).filter_by(id=id).first()
-
-@login_manager.request_loader
-def request_loader(request):
-    username = request.form.get('username')
-    user = db.session.query(User).filter_by(username=username).first()
-    return user if user else None
+app.login_manager = login_manager
 
 for name in ('base', 'users', 'objects', 'views', 'automation', 'scheduling'):
     module = __import__(name + '.routes', globals(), locals(), [''])
     app.register_blueprint(module.blueprint)
+
+from base.database import init_db
+from users.models import User
+
+@login_manager.user_loader
+def user_loader(id):
+    return db.session.query(User).filter_by(id=id).first()
 
 ## Logs
 

@@ -62,7 +62,7 @@ def init_db():
 
     # import all modules here that might define models so that
     # they will be registered properly on the metadata.
-    import models
+    # import models
     Base.metadata.create_all(bind=engine)
     
     from objects.models import Router

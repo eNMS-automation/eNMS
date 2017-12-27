@@ -2,10 +2,9 @@ from ast import literal_eval
 from .forms import *
 from collections import Counter
 from flask import Blueprint, render_template, redirect, request, url_for
-from main import db, login_manager
-from objects.models import Node, Link
+
 from .properties import pretty_names
-from users.models import User
+
 import flask_login
 
 blueprint = Blueprint(
@@ -28,6 +27,10 @@ def _render_template(*args, **kwargs):
     # add the mapping to pretty names for properties
     kwargs['names'] = pretty_names
     return render_template(*args, **kwargs)
+
+from main import app, db
+from objects.models import Node, Link
+from users.models import User
 
 ## tear down SQLAlchemy 
 
@@ -104,7 +107,7 @@ def project():
         
 ## Errors
 
-@login_manager.unauthorized_handler
+@app.login_manager.unauthorized_handler
 def unauthorized_handler():
     return render_template('errors/page_403.html')
 

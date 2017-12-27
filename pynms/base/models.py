@@ -1,5 +1,4 @@
-from main import db
-from database import Base
+from .database import *
 from objects.properties import public_properties
 
 class CustomBase(Base):

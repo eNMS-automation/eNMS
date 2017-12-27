@@ -28,5 +28,5 @@ class DeleteUser(FlaskForm):
 class TacacsServer(FlaskForm):
     ip_address = TextField('IP address')
     password = TextField('Password')
-    port = TextField('Port')
-    timeout = TextField('Timeout')
+    port = TextField('Port', default=49)
+    timeout = TextField('Timeout', default=10)

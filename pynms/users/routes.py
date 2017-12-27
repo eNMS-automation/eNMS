@@ -2,6 +2,7 @@ from base.routes import _render_template
 from flask import Blueprint, current_app, redirect, request, url_for
 from flask_login import login_required
 from .forms import *
+from main import db
 from .models import User
 from .properties import user_search_properties
 from tacacs_plus.client import TACACSClient
@@ -60,7 +61,7 @@ def create_account():
         user = User(**request.form)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('base_blueprint.login'))
+        return redirect(url_for('users_blueprint.login'))
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():

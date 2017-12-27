@@ -88,9 +88,16 @@ def logout():
     flask_login.logout_user()
     return 'Logged out'
 
-@blueprint.route('/tacacs_server')
+@blueprint.route('/tacacs_server', methods=['GET', 'POST'])
 @login_required
 def tacacs_server():
+    if request.method == 'POST':
+        tacacs_client = TACACSClient(
+            request.form['ip_address'],
+            request.form['port'],
+            request.form['password'],
+            request.form['timeout']
+            )
     return _render_template(
         'tacacs_server.html', 
         form = TacacsServer(request.form)

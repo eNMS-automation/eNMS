@@ -1,9 +1,6 @@
-from base.routes import _render_template
 from flask import Blueprint, current_app, redirect, request, url_for
 from flask_login import login_required
 from .forms import *
-from main import db
-from .models import User
 from .properties import user_search_properties
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import *
@@ -16,7 +13,17 @@ blueprint = Blueprint(
     template_folder = 'templates'
     )
 
+from main import app, db
+from base.routes import _render_template
+from .models import User
+
 tacacs_client = TACACSClient('10.253.60.125', 49, 'bts2007', timeout=10)
+
+@app.login_manager.request_loader
+def request_loader(request):
+    username = request.form.get('username')
+    user = db.session.query(User).filter_by(username=username).first()
+    return user if user else None
 
 @blueprint.route('/overview')
 @login_required

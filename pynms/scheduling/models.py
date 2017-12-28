@@ -25,27 +25,21 @@ def netmiko_job(script, username, password, ips, driver, global_delay_factor):
             )
         netmiko_handler.send_config_set(script.splitlines())
 
-def napalm_job(script, username, password, ips, driver):
+def napalm_job(script, username, password, nodes_info, action):
     napalm_output = []
-    for ip in ips:
-        driver = get_network_driver(driver)
-        napalm_driver = driver(
-            hostname = ip, 
-            username = username,
-            password = password, 
-            optional_args = {
-                            'secret': user.secret, 
-                            'transport': transport
-                            }
-            )
-        napalm_driver.open()
-        return node
+    for ip_address, driver in nodes_info:
         try:
-            napalm_node = node_object.napalm_connection(*credentials)
+            driver = get_network_driver(driver)
+            napalm_driver = driver(
+                hostname = ip, 
+                username = username,
+                password = password
+                )
+            napalm_driver.open()
             if action in ('load_merge_candidate', 'load_replace_candidate'):
-                getattr(napalm_node, action)(config=script)
+                getattr(napalm_driver, action)(config=script)
             else:
-                getattr(napalm_node, action)()
+                getattr(napalm_driver, action)()
         except Exception as e:
             output = 'exception {}'.format(e)
             napalm_output.append(output)
@@ -131,11 +125,11 @@ class NapalmTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
-    def __init__(self, script, user, ips, **data):
+    def __init__(self, script, user, nodes_info, **data):
         super(Napalm, self).__init__(user, **data)
         self.script = script
         self.user = user
-        self.ips = ips
+        self.nodes_info = nodes_info
         self.data = data
         if not data['scheduled_date']:
             self.instant_scheduling()
@@ -144,14 +138,13 @@ class NapalmTask(Task):
         # execute the job immediately: 1-second interval job
         id = current_app.scheduler.add_job(
             id = self.creation_time,
-            func = netmiko_job,
+            func = napalm_job,
             args = [
                 self.script,
                 self.user.username,
                 self.user.password,
-                self.ips,
-                self.data['driver'],
-                self.data['global_delay_factor'],
+                self.self.nodes_info,
+                self.data['actions']
                 ],
             trigger = 'interval',
             seconds = 5,

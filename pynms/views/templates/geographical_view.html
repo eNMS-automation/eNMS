@@ -146,10 +146,10 @@
                     }
                 }
             
-                req.open('POST', '/ajax_connection_to_node')
+                req.open('POST', '/views/putty_connection')
                 req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-                var ip = document.getElementById('ip_address').value
-                var postVars = 'ip_address='+ip
+                var id = document.getElementById('id').value
+                var postVars = 'id='+id
                 req.send(postVars)
                 
                 return false
@@ -161,7 +161,7 @@
                 marker.bindPopup("{% for property in properties %}\
                 <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                 <form action='' method='POST' id='#form'>\
-                <input type='hidden' name='ip_address' id='ip_address' value={{ obj.ip_address }}>\
+                <input type='hidden' name='id' id='id' value={{ obj.id }}>\
                 <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
               {% endfor %}
               {% for obj, properties in link_table.items() %}

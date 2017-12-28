@@ -22,9 +22,9 @@ app.database = db
 
 path_pynms = os.path.dirname(os.path.abspath(__file__))
 path_parent = abspath(join(path_pynms, pardir))
-path_upload = join(path_parent, 'uploads')
-path_apps = join(path_parent, 'applications')
-app.config['UPLOAD_FOLDER'] = path_upload
+app.path_upload = join(path_parent, 'uploads')
+app.path_apps = join(path_parent, 'applications')
+app.config['UPLOAD_FOLDER'] = app.path_upload
 
 # start the scheduler
 scheduler = APScheduler()

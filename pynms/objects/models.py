@@ -66,20 +66,6 @@ class Node(Object):
     def get_properties(cls):
         return super(Node).__get__(cls, None).properties + cls.properties
         
-    def napalm_connection(self, user, driver, transport):
-        driver = get_network_driver(driver)
-        node = driver(
-                        hostname = self.ip_address, 
-                        username = user.username,
-                        password = user.password, 
-                        optional_args = {
-                                         'secret': user.secret, 
-                                         'transport': transport
-                                         }
-                        )
-        node.open()
-        return node
-        
 class Antenna(Node):
     
     __tablename__ = 'Antenna'

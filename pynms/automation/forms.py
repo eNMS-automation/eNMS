@@ -54,7 +54,6 @@ class NetmikoForm(SchedulingForm):
 
 class NapalmGettersForm(SchedulingForm):
     nodes = SelectMultipleField('', [optional()], choices=())
-    nodes = SelectMultipleField('', [optional()], choices=())
     getters_choices = [(getter, getter) for getter in getters_mapping]
     getters = SelectMultipleField('Nodes', choices=getters_choices)
     output = TextAreaField('', [optional()])

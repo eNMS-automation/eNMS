@@ -3,7 +3,7 @@ from base.routes import _render_template
 from flask import Blueprint, current_app, redirect, request, url_for
 from flask_login import login_required, current_user
 from .forms import *
-from objects.models import Node, switch_properties
+from objects.models import get_obj, Node, switch_properties
 from users.models import User
 from scheduling.models import NetmikoTask
 
@@ -110,24 +110,7 @@ def napalm_getters():
         'napalm_getters.html',
         form = form
         )
-                           
-def send_napalm_script(script, action, nodes, *credentials):
-    napalm_output = []
-    for node in nodes:
-        node_object = current_app.database.session.query(Node)\
-            .filter_by(name=node)\
-            .first()
-        try:
-            napalm_node = node_object.napalm_connection(*credentials)
-            if action in ('load_merge_candidate', 'load_replace_candidate'):
-                getattr(napalm_node, action)(config=script)
-            else:
-                getattr(napalm_node, action)()
-        except Exception as e:
-            output = 'exception {}'.format(e)
-            napalm_output.append(output)
-    return '\n\n'.join(napalm_output)
-                           
+
 @blueprint.route('/napalm_configuration', methods=['GET', 'POST'])
 @login_required
 def napalm_configuration():
@@ -153,19 +136,11 @@ def napalm_configuration():
                 flash('file {}: format not allowed'.format(filename))
         else:
             script = raw_script
-        selected_nodes = form.data['nodes']
         action = napalm_actions[form.data['actions']]
-        scheduler_date = form.data['scheduler']
-        form.raw_script.data = send_napalm_script(
-            script,
-            action,
-            selected_nodes,
-            form.data['username'],
-            form.data['password'],
-            form.data['secret'],
-            form.data['port'],
-            form.data['protocol'].lower()
-            )
+        napalm_task = NapalmTask(script, current_user, **form.data)
+        current_app.database.session.add(napalm_task)
+        current_app.database.session.commit()
+        return redirect(url_for('scheduling_blueprint.task_management'))
     return _render_template(
         'napalm_configuration.html',
         form = form

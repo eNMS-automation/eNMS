@@ -68,4 +68,4 @@ def putty_connection():
     path_putty = join(current_app.path_apps, 'putty.exe')
     ssh_connection = '{} -ssh {}'.format(path_putty, node.ip_address)
     connect = Popen(ssh_connection.split())
-    return jsonify(id=id)
+    return jsonify(id=request.form['id'])

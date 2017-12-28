@@ -116,7 +116,7 @@
             var network = new vis.Network(container, data, options);
             
             // get id of the click nodes
-            network.on( 'click', function(properties) {
+            network.on( 'doubleClick', function(properties) {
               var req = new XMLHttpRequest()
               req.onreadystatechange = function()
               {

@@ -27,13 +27,15 @@ def netmiko_job(script, username, password, ips, driver, global_delay_factor):
 
 def napalm_job(script, username, password, nodes_info, action):
     napalm_output = []
+    # print('napalm'*1000)
     for ip_address, driver in nodes_info:
         try:
             driver = get_network_driver(driver)
             napalm_driver = driver(
-                hostname = ip, 
+                hostname = ip_address, 
                 username = username,
-                password = password
+                password = password,
+                optional_args = {'secret': 'cisco'}
                 )
             napalm_driver.open()
             if action in ('load_merge_candidate', 'load_replace_candidate'):
@@ -43,6 +45,7 @@ def napalm_job(script, username, password, nodes_info, action):
         except Exception as e:
             output = 'exception {}'.format(e)
             napalm_output.append(output)
+            print(e)
     return '\n\n'.join(napalm_output)
 
 ## Tasks
@@ -118,7 +121,7 @@ class NetmikoTask(Task):
             replace_existing = True
             )
 
-class NapalmTask(Task):
+class NapalmConfigTask(Task):
     
     __tablename__ = 'NapalmTask'
     
@@ -126,7 +129,7 @@ class NapalmTask(Task):
     script = Column(String)
     
     def __init__(self, script, user, nodes_info, **data):
-        super(Napalm, self).__init__(user, **data)
+        super(NapalmConfigTask, self).__init__(user, **data)
         self.script = script
         self.user = user
         self.nodes_info = nodes_info
@@ -143,7 +146,7 @@ class NapalmTask(Task):
                 self.script,
                 self.user.username,
                 self.user.password,
-                self.self.nodes_info,
+                self.nodes_info,
                 self.data['actions']
                 ],
             trigger = 'interval',

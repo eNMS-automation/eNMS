@@ -35,9 +35,9 @@ link_public_properties
 )
 
 type_to_public_properties = OrderedDict([
-    ('Router', node_common_properties),
-    ('Optical switch', node_common_properties),
-    ('Optical link', link_common_properties)
+    ('Router', node_public_properties),
+    ('Optical switch', node_public_properties),
+    ('Optical link', link_public_properties)
     ])
 
 ## Diagram properties (for the dashboard)

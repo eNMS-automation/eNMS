@@ -1,4 +1,5 @@
 from base.routes import _render_template
+from collections import OrderedDict
 from flask import Blueprint, current_app, jsonify, request
 from flask_login import login_required
 from .forms import *
@@ -45,17 +46,17 @@ def view(view_type):
         '{}_view.html'.format(view_type), 
         form = FilteringForm(request.form),
         node_table = {
-            obj: {
-                property: getattr(obj, property) 
+            obj: OrderedDict([
+                (property, getattr(obj, property)) 
                 for property in type_to_public_properties[obj.type]
-            }
+            ])
             for obj in filter(view_filter, Node.query.all())
         },
         link_table = {
-            obj: {
-                property: getattr(obj, property) 
+            obj: OrderedDict([
+                (property, getattr(obj, property)) 
                 for property in type_to_public_properties[obj.type]
-            }
+            ])
             for obj in filter(view_filter, Link.query.all())
         })
 

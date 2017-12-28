@@ -103,8 +103,8 @@ class NetmikoTask(Task):
         if not data['scheduled_date']:
             self.instant_scheduling()
 
-    def instant_scheduling(self):
-        # execute the job immediately: 1-second interval job
+    def recurrent_scheduling(self):
+        # execute the job immediately with a date-type job
         id = current_app.scheduler.add_job(
             id = self.creation_time,
             func = netmiko_job,
@@ -119,6 +119,22 @@ class NetmikoTask(Task):
             trigger = 'interval',
             seconds = 5,
             replace_existing = True
+            )
+
+    def instant_scheduling(self):
+        # execute the job immediately with a date-type job
+        id = current_app.scheduler.add_job(
+            id = self.creation_time,
+            func = netmiko_job,
+            args = [
+                self.script,
+                self.user.username,
+                self.user.password,
+                self.ips,
+                self.data['driver'],
+                self.data['global_delay_factor'],
+                ],
+            trigger = 'date',
             )
 
 class NapalmConfigTask(Task):

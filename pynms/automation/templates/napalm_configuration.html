@@ -9,15 +9,10 @@
 {% block content %}
   <div class="right_col" role="main">
     <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>NAPALM configuration</h3>
-        </div>
-      </div>
       
       <div class="clearfix"></div>
 
-      <form name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
+        <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <div class="x_panel">
@@ -60,12 +55,12 @@
 
                                 <label>Name</label>
                                 <div class='form-group'>
-                                    {{ form.name(class="form-control", required=true, size=50) }}
+                                    {{ form.name(class="form-control", size=50) }}
                                 </div>
                                 
                                 <label>Date</label>
                                 <div class='form-group'>
-                                    {{ form.scheduled_date(class="form-control", required=true) }}
+                                    {{ form.scheduled_date(class="form-control") }}
                                 </div>
                                 
                                 <label>Frequency</label>

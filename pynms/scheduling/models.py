@@ -12,11 +12,11 @@ except ImportError:
 
 ## Job functions
 
-def netmiko_job(script, username, password, nodes, driver, global_delay_factor):
-    print(script, username, password, nodes, driver, global_delay_factor)
-    for hostname in nodes:
+def netmiko_job(script, username, password, ips, driver, global_delay_factor):
+    for ip_address in ips:
+        print(ip_address, driver, username, password, global_delay_factor)
         netmiko_handler = ConnectHandler(                
-            host = hostname,
+            ip = ip_address,
             device_type = driver,
             username = username,
             password = password,
@@ -68,16 +68,18 @@ class NetmikoTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
-    def __init__(self, script, user, **data):
+    def __init__(self, script, user, ips, **data):
         super(NetmikoTask, self).__init__(user, **data)
         self.script = script
         self.user = user
+        self.ips = ips
         self.data = data
         if not data['scheduled_date']:
             self.instant_scheduling()
 
     def instant_scheduling(self):
         # execute the job immediately: 1-second interval job
+        print(self.ips*1000)
         id = current_app.scheduler.add_job(
             id = self.creation_time,
             func = netmiko_job,
@@ -85,12 +87,12 @@ class NetmikoTask(Task):
                 self.script,
                 self.user.username,
                 self.user.password,
-                self.data['nodes'],
+                self.ips,
                 self.data['driver'],
                 self.data['global_delay_factor'],
                 ],
             trigger = 'interval',
-            seconds = 60,
+            seconds = 5,
             replace_existing = True
             )
         print(str(id)*100)

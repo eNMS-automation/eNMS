@@ -2,6 +2,7 @@ from base.models import CustomBase
 from datetime import datetime
 from flask import current_app
 from netmiko import ConnectHandler
+from objects.models import get_obj
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 # napalm pre and post-reunification compatibility
@@ -10,7 +11,7 @@ try:
 except ImportError:
     from napalm_base import get_network_driver
 
-## Job functions
+## Jobs
 
 def netmiko_job(script, username, password, ips, driver, global_delay_factor):
     for ip_address in ips:
@@ -23,6 +24,34 @@ def netmiko_job(script, username, password, ips, driver, global_delay_factor):
             global_delay_factor = global_delay_factor
             )
         netmiko_handler.send_config_set(script.splitlines())
+
+def napalm_job(script, username, password, ips, driver):
+    napalm_output = []
+    for ip in ips:
+        driver = get_network_driver(driver)
+        napalm_driver = driver(
+            hostname = ip, 
+            username = username,
+            password = password, 
+            optional_args = {
+                            'secret': user.secret, 
+                            'transport': transport
+                            }
+            )
+        napalm_driver.open()
+        return node
+        try:
+            napalm_node = node_object.napalm_connection(*credentials)
+            if action in ('load_merge_candidate', 'load_replace_candidate'):
+                getattr(napalm_node, action)(config=script)
+            else:
+                getattr(napalm_node, action)()
+        except Exception as e:
+            output = 'exception {}'.format(e)
+            napalm_output.append(output)
+    return '\n\n'.join(napalm_output)
+
+## Tasks
 
 class Task(CustomBase):
     
@@ -79,7 +108,6 @@ class NetmikoTask(Task):
 
     def instant_scheduling(self):
         # execute the job immediately: 1-second interval job
-        print(self.ips*1000)
         id = current_app.scheduler.add_job(
             id = self.creation_time,
             func = netmiko_job,
@@ -95,4 +123,37 @@ class NetmikoTask(Task):
             seconds = 5,
             replace_existing = True
             )
-        print(str(id)*100)
+
+class NapalmTask(Task):
+    
+    __tablename__ = 'NapalmTask'
+    
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
+    script = Column(String)
+    
+    def __init__(self, script, user, ips, **data):
+        super(Napalm, self).__init__(user, **data)
+        self.script = script
+        self.user = user
+        self.ips = ips
+        self.data = data
+        if not data['scheduled_date']:
+            self.instant_scheduling()
+
+    def instant_scheduling(self):
+        # execute the job immediately: 1-second interval job
+        id = current_app.scheduler.add_job(
+            id = self.creation_time,
+            func = netmiko_job,
+            args = [
+                self.script,
+                self.user.username,
+                self.user.password,
+                self.ips,
+                self.data['driver'],
+                self.data['global_delay_factor'],
+                ],
+            trigger = 'interval',
+            seconds = 5,
+            replace_existing = True
+            )

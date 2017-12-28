@@ -3,7 +3,7 @@ from base.routes import _render_template
 from flask import Blueprint, current_app, redirect, request, url_for
 from flask_login import login_required, current_user
 from .forms import *
-from objects.models import Node
+from objects.models import Node, switch_properties
 from users.models import User
 from scheduling.models import NetmikoTask
 
@@ -39,7 +39,17 @@ def netmiko():
                 flash('file {}: format not allowed'.format(filename))
         else:
             script = raw_script
-        netmiko_task = NetmikoTask(script, current_user, **form.data)
+        # we have a list of hostnames, we convert it to a list of IP addresses
+        # note: we have to use list of strings as we cannot pass actual objects
+        # to an AP Scheduler job.
+        node_ips = switch_properties(
+            current_app,
+            Node,
+            form.data['nodes'],
+            'name',
+            'ip_address'
+            )
+        netmiko_task = NetmikoTask(script, current_user, node_ips, **form.data)
         current_app.database.session.add(netmiko_task)
         current_app.database.session.commit()
         return redirect(url_for('scheduling_blueprint.task_management'))

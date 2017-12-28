@@ -136,8 +136,11 @@ def napalm_configuration():
                 flash('file {}: format not allowed'.format(filename))
         else:
             script = raw_script
-        action = napalm_actions[form.data['actions']]
-        napalm_task = NapalmTask(script, current_user, **form.data)
+        nodes_info = []
+        for name in form.data['nodes']:
+            obj = get_obj(app, model, name=name)
+            nodes_parameters.append((obj.ip_address, obj.operating_system))
+        napalm_task = NapalmTask(script, current_user, nodes_info, **form.data)
         current_app.database.session.add(napalm_task)
         current_app.database.session.commit()
         return redirect(url_for('scheduling_blueprint.task_management'))

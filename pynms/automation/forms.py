@@ -60,7 +60,7 @@ class NapalmGettersForm(SchedulingForm):
 
 class NapalmConfigurationForm(SchedulingForm):
     nodes = SelectMultipleField('', [optional()], choices=())
-    action_choices = [(action, action) for action in napalm_actions]
+    action_choices = [(v, k) for k, v in napalm_actions.items()]
     actions = SelectField('Actions', [optional()], choices=action_choices)
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     nodes = SelectMultipleField('Nodes', choices=())

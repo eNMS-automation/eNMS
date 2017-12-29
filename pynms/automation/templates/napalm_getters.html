@@ -57,12 +57,12 @@
 
                                 <label>Name</label>
                                 <div class='form-group'>
-                                    {{ form.name(class="form-control", required=true, size=50) }}
+                                    {{ form.name(class="form-control", size=50) }}
                                 </div>
                                 
                                 <label>Date</label>
                                 <div class='form-group'>
-                                    {{ form.scheduled_date(class="form-control", required=true) }}
+                                    {{ form.scheduled_date(class="form-control") }}
                                 </div>
                                 
                                 <label>Frequency</label>
@@ -81,7 +81,7 @@
                         </div>
                       </div>
 
-                      <button type="submit" class="btn btn-success" name="send">Send</button>
+                      <button type="submit" class="btn btn-success" name="query">Send</button>
                       
                     </div>
                   </div>

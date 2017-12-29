@@ -64,20 +64,18 @@ def napalm_getters():
     form = NapalmGettersForm(request.form)
     # update the list of available users / nodes by querying the database
     form.nodes.choices = Node.choices()
-    if 'napalm_query' in request.form:
+    if 'query' in request.form:
+        nodes_info = []
         for name in form.data['nodes']:
             obj = get_obj(current_app, Node, name=name)
             nodes_info.append((obj.ip_address, obj.operating_system.lower()))
         napalm_task = NapalmGettersTask(
-            form.data['getters'],
             current_user,
             nodes_info,
             **form.data
             )
         current_app.database.session.add(napalm_task)
         current_app.database.session.commit()
-        napalm_output = retrieve_napalm_getters
-        form.output.data = '\n\n'.join(napalm_output)
     return _render_template(
         'napalm_getters.html',
         form = form

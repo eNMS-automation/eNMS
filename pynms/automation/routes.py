@@ -58,35 +58,6 @@ def netmiko():
         form = form
         )
 
-def retrieve_napalm_getters(getters, nodes, *credentials):
-    napalm_output = []
-    for node in nodes:
-        napalm_output.append('\n{}\n'.format(node))
-        node_object = current_app.database.session.query(Node)\
-            .filter_by(name=node)\
-            .first()
-        try:
-            napalm_node = node_object.napalm_connection(*credentials)
-            for getter in getters:
-                try:
-                    output = str_dict(getattr(napalm_node, getters_mapping[getter])())
-                except Exception as e:
-                    output = '{} could not be retrieve because of {}'.format(getter, e)
-                napalm_output.append(output)
-        except Exception as e:
-            output = 'could not be retrieve because of {}'.format(e)
-            napalm_output.append(output)
-    return napalm_output
-    
-def retrieve_and_store_napalm_getters(getters, nodes, *credentials):
-    # create folder with the current timestamp
-    current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    folder = join(GETTERS_FOLDER, current_time)
-    os.makedirs(folder)
-    output = retrieve_napalm_getters(getters, nodes, *credentials)
-    with open(join(folder, 'output.txt'), 'w') as f:
-        print('\n\n'.join(output), file=f)
-
 @blueprint.route('/napalm_getters', methods=['GET', 'POST'])
 @login_required
 def napalm_getters():
@@ -114,7 +85,6 @@ def napalm_getters():
 @blueprint.route('/napalm_configuration', methods=['GET', 'POST'])
 @login_required
 def napalm_configuration():
-    # print(t)
     form = NapalmConfigurationForm(request.form)
     # update the list of available users / nodes by querying the database
     form.nodes.choices = Node.choices()

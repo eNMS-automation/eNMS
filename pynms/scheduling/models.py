@@ -85,6 +85,9 @@ class Task(CustomBase):
         self.is_active = True
         if data['scheduled_date']:
             self.scheduled_date = self.datetime_conversion(data['scheduled_date'])
+            self.recurrent_scheduling()
+        else:
+            self.instant_scheduling()
 
     def datetime_conversion(self, scheduled_date):
         dt = datetime.strptime(scheduled_date, '%d/%m/%Y %H:%M:%S')
@@ -128,7 +131,7 @@ class NetmikoTask(Task):
     script = Column(String)
     
     def __init__(self, script, user, ips, **data):
-        super(NetmikoTask, self).__init__(user, **data)
+        
         self.script = script
         self.user = user
         self.ips = ips
@@ -142,10 +145,7 @@ class NetmikoTask(Task):
             self.data['driver'],
             self.data['global_delay_factor'],
             ]
-        if not data['scheduled_date']:
-            self.instant_scheduling()
-        else:
-            self.recurrent_scheduling()
+        super(NetmikoTask, self).__init__(user, **data)
 
 class NapalmConfigTask(Task):
     
@@ -168,5 +168,3 @@ class NapalmConfigTask(Task):
             self.nodes_info,
             self.data['actions']
             ]
-        if not data['scheduled_date']:
-            self.instant_scheduling()

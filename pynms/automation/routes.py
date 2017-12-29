@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 from .forms import *
 from objects.models import get_obj, Node, switch_properties
 from users.models import User
-from scheduling.models import NetmikoTask, NapalmConfigTask
+from scheduling.models import *
 
 blueprint = Blueprint(
     'automation_blueprint', 
@@ -66,16 +66,18 @@ def napalm_getters():
     form.nodes.choices = Node.choices()
     if 'napalm_query' in request.form:
         selected_nodes = form.data['nodes']
-        getters = form.data['getters']
-        scheduler_interval = form.data['scheduler']
-        napalm_output = retrieve_napalm_getters(
-            getters,
-            selected_nodes,
-            form.data['username'],
-            form.data['password'],
-            form.data['secret'],
-            form.data['protocol'].lower()
+        for name in form.data['nodes']:
+            obj = get_obj(current_app, Node, name=name)
+            nodes_info.append((obj.ip_address, obj.operating_system.lower()))
+        napalm_task = NapalmGettersTask(
+            form.data['getters'],
+            current_user,
+            nodes_info,
+            **form.data
             )
+        current_app.database.session.add(napalm_task)
+        current_app.database.session.commit()
+        napalm_output = retrieve_napalm_getters
         form.output.data = '\n\n'.join(napalm_output)
     return _render_template(
         'napalm_getters.html',

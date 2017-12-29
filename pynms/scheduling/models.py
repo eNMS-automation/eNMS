@@ -41,16 +41,20 @@ def napalm_config_job(script, username, password, nodes_info, action):
 
 def napalm_getters_job(getters, nodes, *credentials):
     napalm_output = []
-    for node in nodes:
-        napalm_output.append('\n{}\n'.format(node))
-        node_object = current_app.database.session.query(Node)\
-            .filter_by(name=node)\
-            .first()
+    for ip_address, driver in nodes_info:
         try:
-            napalm_node = node_object.napalm_connection(*credentials)
+            driver = get_network_driver(driver)
+            napalm_driver = driver(
+                hostname = ip_address, 
+                username = username,
+                password = password,
+                optional_args = {'secret': 'cisco'}
+                )
+            napalm_driver.open()
+            napalm_output.append('\n{}\n'.format(ip_address))
             for getter in getters:
                 try:
-                    output = str_dict(getattr(napalm_node, getters_mapping[getter])())
+                    output = str_dict(getattr(napalm_driver, getter)())
                 except Exception as e:
                     output = '{} could not be retrieve because of {}'.format(getter, e)
                 napalm_output.append(output)

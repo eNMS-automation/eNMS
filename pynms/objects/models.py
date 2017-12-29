@@ -341,5 +341,4 @@ def switch_properties(app, model, values, source_property, destination_property)
     for value in values:
         obj = get_obj(app, model, **{source_property: value})
         new_values.append(getattr(obj, destination_property))
-    print(new_values*100)
     return new_values

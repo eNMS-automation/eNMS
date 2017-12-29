@@ -15,7 +15,6 @@ except ImportError:
 
 def netmiko_job(script, username, password, ips, driver, global_delay_factor):
     for ip_address in ips:
-        print(ip_address, driver, username, password, global_delay_factor)
         netmiko_handler = ConnectHandler(                
             ip = ip_address,
             device_type = driver,
@@ -25,28 +24,40 @@ def netmiko_job(script, username, password, ips, driver, global_delay_factor):
             )
         netmiko_handler.send_config_set(script.splitlines())
 
-def napalm_job(script, username, password, nodes_info, action):
-    napalm_output = []
-    # print('napalm'*1000)
+def napalm_config_job(script, username, password, nodes_info, action):
     for ip_address, driver in nodes_info:
+        driver = get_network_driver(driver)
+        napalm_driver = driver(
+            hostname = ip_address, 
+            username = username,
+            password = password,
+            optional_args = {'secret': 'cisco'}
+            )
+        napalm_driver.open()
+        if action in ('load_merge_candidate', 'load_replace_candidate'):
+            getattr(napalm_driver, action)(config=script)
+        else:
+            getattr(napalm_driver, action)()
+
+def napalm_getters_job(getters, nodes, *credentials):
+    napalm_output = []
+    for node in nodes:
+        napalm_output.append('\n{}\n'.format(node))
+        node_object = current_app.database.session.query(Node)\
+            .filter_by(name=node)\
+            .first()
         try:
-            driver = get_network_driver(driver)
-            napalm_driver = driver(
-                hostname = ip_address, 
-                username = username,
-                password = password,
-                optional_args = {'secret': 'cisco'}
-                )
-            napalm_driver.open()
-            if action in ('load_merge_candidate', 'load_replace_candidate'):
-                getattr(napalm_driver, action)(config=script)
-            else:
-                getattr(napalm_driver, action)()
+            napalm_node = node_object.napalm_connection(*credentials)
+            for getter in getters:
+                try:
+                    output = str_dict(getattr(napalm_node, getters_mapping[getter])())
+                except Exception as e:
+                    output = '{} could not be retrieve because of {}'.format(getter, e)
+                napalm_output.append(output)
         except Exception as e:
-            output = 'exception {}'.format(e)
+            output = 'could not be retrieve because of {}'.format(e)
             napalm_output.append(output)
-            print(e)
-    return '\n\n'.join(napalm_output)
+    return napalm_output
 
 ## Tasks
 

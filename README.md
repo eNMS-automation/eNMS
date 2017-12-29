@@ -77,7 +77,7 @@ You can contact me at my personal email address:
 117, 114, 109, 121, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109)))
 ```
 
-or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"). (@minto, channel #eNMS)
+or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"). (@minto, channel #pyNMS)
 
 # Credits
 

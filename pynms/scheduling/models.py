@@ -25,23 +25,24 @@ def netmiko_job(script, username, password, ips, driver, global_delay_factor):
             )
         netmiko_handler.send_config_set(script.splitlines())
 
-def napalm_connection(ip_address, username, password, driver, **optional_args):
-    napalm_driver = driver(
+def napalm_connection(ip_address, username, password, driver, optional_args):
+    napalm_driver = get_network_driver(driver)
+    connection = napalm_driver(
         hostname = ip_address, 
         username = username,
         password = password,
-        optional_args = {'secret': 'cisco'}
+        optional_args = optional_args
         )
-    napalm_driver.open()
-    return napalm_driver
+    connection.open()
+    return connection
 
 def napalm_config_job(script, username, password, nodes_info, action):
     for ip_address, driver in nodes_info:
-        driver = get_network_driver(driver)
         napalm_driver = napalm_connection(
             ip_address, 
             username,
             password,
+            driver,
             {'secret': 'cisco'}
             )
         if action in ('load_merge_candidate', 'load_replace_candidate'):
@@ -53,11 +54,11 @@ def napalm_getters_job(getters, username, password, nodes_info):
     napalm_output = []
     for ip_address, driver in nodes_info:
         try:
-            driver = get_network_driver(driver)
             napalm_driver = napalm_connection(
                 ip_address, 
                 username,
                 password,
+                driver,
                 {'secret': 'cisco'}
                 )
             napalm_output.append('\n{}\n'.format(ip_address))

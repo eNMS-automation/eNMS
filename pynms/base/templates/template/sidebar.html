@@ -1,0 +1,83 @@
+<div class="left_col scroll-view">
+  <div class="navbar nav_title" style="border: 0;">
+    <a href="" class="site_title"><i class="fa fa-spinner"></i> <span>pyNMS</span></a>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <!-- menu profile quick info -->
+  <div class="profile clearfix">
+    <div class="profile_pic">
+      <img src="/static/images/user.png" alt="..." class="img-circle profile_img">
+    </div>
+    <div class="profile_info">
+      <span>Welcome,</span>
+      <h2>{{ user }}</h2>
+    </div>
+  </div>
+  <!-- /menu profile quick info -->
+
+  <br />
+
+  <!-- sidebar menu -->
+  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+      <h3>General</h3>
+      <ul class="nav side-menu">
+        <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/dashboard_control">Dashboard control</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="/users/overview">Overview</a></li>
+            <li><a href="/users/manage_users">Manage users</a></li>
+            <li><a href="/users/tacacs_server">Configure TACACS server</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-sitemap"></i> Devices <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="/objects/objects">Overview</a></li>
+            <li><a href="/objects/object_creation">Object creation</a></li>
+            <li><a href="/objects/object_deletion.html">Object deletion</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-map-marker"></i> Views <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="/views/geographical_view">Geographical view</a></li>
+            <li><a href="/views/logical_view">Logical view</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-keyboard-o"></i> Automation <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+              <li><a href="/automation/netmiko">Netmiko</a>
+              <li><a>Napalm<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li class="sub_menu"><a href="/automation/napalm_configuration">Configuration</a>
+                  </li>
+                  <li><a href="/automation/napalm_getters">Getters</a>
+                  </li>
+                  <li><a href="/automation/napalm_ping_traceroute">Ping & Traceroute</a>
+                  </li>
+                </ul>
+              </li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-clock-o"></i> Scheduler <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="/scheduling/task_management">Task management</a></li>
+            <li><a href="/scheduling/calendar">Calendar</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-copyright"></i> About <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="/project">Project</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /sidebar menu -->
+</div>

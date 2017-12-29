@@ -21,7 +21,13 @@ blueprint = Blueprint(
 @login_required
 def view(view_type):
     view_filter = lambda _: True
+    labels = {'node': 'name', 'link': 'name'}
     if request.method == 'POST':
+        # retrieve labels
+        labels = {
+            'node': request.form['node_label'],
+            'link': request.form['link_label']
+            }
         def view_filter(obj):
             # if the property field is not empty in the form, and the 
             # property is a public property, we check that the value of 
@@ -45,6 +51,7 @@ def view(view_type):
     return _render_template(
         '{}_view.html'.format(view_type), 
         form = FilteringForm(request.form),
+        labels = labels,
         node_table = {
             obj: OrderedDict([
                 (property, getattr(obj, property)) 

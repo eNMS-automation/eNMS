@@ -29,6 +29,15 @@
               <form data-parsley-validate class="form-horizontal form-label-left" method="post">
               
                     <div class="form-group">
+                      <h5 class="modal-title">Labels</h5><br>
+                      
+                      {{ form.node_label(id="node_label", class="form-control") }}<br>
+
+                      {{ form.link_label(id="link_label", class="form-control") }}
+                      
+                    </div>
+              
+                    <div class="form-group">
                     
                       <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                         <thead>

@@ -1,0 +1,137 @@
+{% extends "base_site.html" %}
+
+{% block title %} Netmiko {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h2>Netmiko</h2>
+        </div>
+      </div>
+      
+      <div class="clearfix"></div>
+      
+      <div class="row">
+        <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+        
+          <div class="col-md-4 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h3>Parameters</h3>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+              
+                <div class="form-group" style="height: 550px">
+  
+                  Select a driver :<br>
+                  {{ form.driver(id="driver", class="form-control") }}
+
+                  Global delay factor :
+                  {{ form.global_delay_factor(id="global_delay_factor", class="form-control", required=true) }}
+                  
+                  YAML file used for Jinja2 :
+                  {{ form.file() }}<br>
+                  
+                  Devices :
+                  {{ form.nodes(id="Nodes", class="form-control", size='10') }}
+                
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-1">
+                    
+                      <button class="btn btn-primary" type="reset">Reset</button>
+
+                      <!-- Small modal -->
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Create task</button>
+        
+                      <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+          
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                              </button>
+                              <h4 class="modal-title" id="myModalLabel2">Task parameters</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <label>Name</label>
+                                <div class='form-group'>
+                                    {{ form.name(class="form-control", size=50) }}
+                                </div>
+                                
+                                <label>Date</label>
+                                <div class='form-group'>
+                                    {{ form.scheduled_date(class="form-control") }}
+                                </div>
+                                
+                                <label>Frequency</label>
+                                <div class='form-group'>
+                                    {{ form.frequency(class="form-control", style="width: 270px;") }}
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-default" style="display: none;"></button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" name="create_task">Create</button>
+                            </div>
+          
+                          </div>
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-success" name="send">Send</button>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-8 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h3>Script (plain text or Jinja2 template)</h3>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+              
+                <div class="form-group" style="height: 550px">
+  
+                  {{ form.raw_script(id="raw_script", class="form-control", rows='26') }}
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+    <!-- Initialize datetimepicker -->
+  <script src="{{ url_for('static', filename='vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script>
+    $('#scheduled_date').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    var today = new Date()
+    $('#scheduled_date').data("DateTimePicker").minDate(today);
+</script>
+{% endblock javascripts %}

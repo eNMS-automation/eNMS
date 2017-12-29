@@ -149,13 +149,12 @@ class NetmikoTask(Task):
 
 class NapalmConfigTask(Task):
     
-    __tablename__ = 'NapalmTask'
+    __tablename__ = 'NapalmConfigTask'
     
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
     def __init__(self, script, user, nodes_info, **data):
-        super(NapalmConfigTask, self).__init__(user, **data)
         self.script = script
         self.user = user
         self.nodes_info = nodes_info
@@ -168,3 +167,26 @@ class NapalmConfigTask(Task):
             self.nodes_info,
             self.data['actions']
             ]
+        super(NapalmConfigTask, self).__init__(user, **data)
+
+class NapalmGettersTask(Task):
+    
+    __tablename__ = 'NapalmGettersTask'
+    
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
+    script = Column(String)
+    
+    def __init__(self, script, user, nodes_info, **data):
+        self.script = script
+        self.user = user
+        self.nodes_info = nodes_info
+        self.data = data
+        self.job = napalm_config_job
+        self.args = [
+            self.script,
+            self.user.username,
+            self.user.password,
+            self.nodes_info,
+            self.data['actions']
+            ]
+        super(NapalmGettersTask, self).__init__(user, **data)

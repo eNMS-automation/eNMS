@@ -65,7 +65,6 @@ def napalm_getters():
     # update the list of available users / nodes by querying the database
     form.nodes.choices = Node.choices()
     if 'napalm_query' in request.form:
-        selected_nodes = form.data['nodes']
         for name in form.data['nodes']:
             obj = get_obj(current_app, Node, name=name)
             nodes_info.append((obj.ip_address, obj.operating_system.lower()))

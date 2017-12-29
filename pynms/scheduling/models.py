@@ -1,3 +1,4 @@
+from base.helpers import str_dict
 from base.models import CustomBase
 from datetime import datetime
 from flask import current_app
@@ -39,7 +40,7 @@ def napalm_config_job(script, username, password, nodes_info, action):
         else:
             getattr(napalm_driver, action)()
 
-def napalm_getters_job(getters, nodes, *credentials):
+def napalm_getters_job(getters, username, password, nodes_info):
     napalm_output = []
     for ip_address, driver in nodes_info:
         try:
@@ -55,12 +56,15 @@ def napalm_getters_job(getters, nodes, *credentials):
             for getter in getters:
                 try:
                     output = str_dict(getattr(napalm_driver, getter)())
+                    print(output)
                 except Exception as e:
                     output = '{} could not be retrieve because of {}'.format(getter, e)
+                    print(output)
                 napalm_output.append(output)
         except Exception as e:
             output = 'could not be retrieve because of {}'.format(e)
             napalm_output.append(output)
+            print(output)
     return napalm_output
 
 ## Tasks
@@ -180,17 +184,15 @@ class NapalmGettersTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
-    def __init__(self, script, user, nodes_info, **data):
-        self.script = script
+    def __init__(self, user, nodes_info, **data):
         self.user = user
         self.nodes_info = nodes_info
         self.data = data
-        self.job = napalm_config_job
+        self.job = napalm_getters_job
         self.args = [
-            self.script,
+            data['getters'],
             self.user.username,
             self.user.password,
-            self.nodes_info,
-            self.data['actions']
+            self.nodes_info
             ]
         super(NapalmGettersTask, self).__init__(user, **data)

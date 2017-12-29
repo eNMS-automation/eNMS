@@ -14,7 +14,7 @@ blueprint = Blueprint(
     __name__, 
     url_prefix = '/views', 
     template_folder = 'templates',
-    static_folder='static'
+    static_folder = 'static'
     )
 
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])

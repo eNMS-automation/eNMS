@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('static', filename='vendors/leaflet/leaflet.css') }}" rel="stylesheet">
+  <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
   <style>
       #mapid { height: 550px; }
   </style>
@@ -27,15 +27,6 @@
             <div class="modal-body">
             
               <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-              
-                    <div class="form-group">
-                      <h5 class="modal-title">Labels</h5><br>
-                      
-                      {{ form.node_label(id="node_label", class="form-control") }}<br>
-
-                      {{ form.link_label(id="link_label", class="form-control") }}
-                      
-                    </div>
               
                     <div class="form-group">
                     
@@ -99,7 +90,7 @@
           <div class="x_panel">
             <div class="x_content">
               <div id="mapid"></div>
-                <script src="{{ url_for('static', filename='vendors/leaflet/leaflet.js') }}"></script>
+                <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
             
             <script>
             var ourCustomControl = L.Control.extend({
@@ -201,6 +192,4 @@
 
 {% block javascripts %}
   {{ super()}}
-  <!-- Datatables -->
-  <script src="{{ url_for('static', filename='vendors/leaflet/leaflet.js') }}"></script>
 {% endblock javascripts %}

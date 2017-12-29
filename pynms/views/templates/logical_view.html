@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('static', filename='vendors/vis/vis-network.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('views_blueprint.static', filename='js/vis/vis-network.min.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -98,7 +98,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
-              <script src="{{ url_for('static', filename='vendors/vis/vis.js') }}"></script>
+              <script src="{{ url_for('views_blueprint.static', filename='js/vis/vis.js') }}"></script>
           <div id="mynetwork" style="height: 500px"></div>
           <script>
             // create an array with nodes

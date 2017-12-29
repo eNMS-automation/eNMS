@@ -93,7 +93,7 @@
             // create an array with nodes
             var nodes = new vis.DataSet([
             {% for node, properties in node_table.items() %}  
-              {id: {{ node.id }}, label: {{ node.id }}, image: 'static/images/default/default_router.gif', shape: 'image', title: "{% for property in properties %}\
+              {id: {{ node.id }}, label: '{{ node.name }}', image: 'static/images/default/default_router.gif', shape: 'image', title: "{% for property in properties %}\
                 <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"},
             
             {% endfor %}
@@ -102,7 +102,7 @@
             // create an array with edges
             var edges = new vis.DataSet([
             {% for link, properties in link_table.items() %}  
-              { from: {{ link['source']['id'] }}, to: {{ link['destination']['id'] }} },
+              { from: {{ link['source']['id'] }}, to: {{ link['destination']['id'] }}, label: '{{ link.name }}'},
             {% endfor %}
             ]);
           

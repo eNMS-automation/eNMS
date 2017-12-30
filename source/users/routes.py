@@ -13,7 +13,7 @@ blueprint = Blueprint(
     template_folder = 'templates'
     )
 
-from main import app, db
+from main import app
 from base.routes import _render_template
 from .models import User
 
@@ -22,7 +22,7 @@ tacacs_client = TACACSClient('10.253.60.125', 49, 'bts2007', timeout=10)
 @app.login_manager.request_loader
 def request_loader(request):
     username = request.form.get('username')
-    user = db.session.query(User).filter_by(username=username).first()
+    user = current_app.database.session.query(User).filter_by(username=username).first()
     return user if user else None
 
 @blueprint.route('/overview')
@@ -66,22 +66,22 @@ def create_account():
     else:
         login_form = LoginForm(request.form)
         user = User(**request.form)
-        db.session.add(user)
-        db.session.commit()
+        current_app.database.session.add(user)
+        current_app.database.session.commit()
         return redirect(url_for('users_blueprint.login'))
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username, password = str(request.form['username']), str(request.form['password'])
-        user = db.session.query(User).filter_by(username=username).first()
+        user = current_app.database.session.query(User).filter_by(username=username).first()
         if user and password == user.password:
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
         elif tacacs_client.authenticate(username, password, TAC_PLUS_AUTHEN_TYPE_ASCII).valid:
             user = User(username=username, password=password)
-            db.session.add(user)
-            db.session.commit()
+            current_app.database.session.add(user)
+            current_app.database.session.commit()
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
         return render_template('errors/page_403.html')

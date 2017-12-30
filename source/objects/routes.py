@@ -1,3 +1,4 @@
+from base.database import db
 from base.routes import _render_template
 from flask import Blueprint, current_app, request
 from flask_login import login_required
@@ -45,7 +46,7 @@ def create_objects():
     if 'add_node' in request.form:
         # print(request.form, request.form['type'])
         node = node_class[request.form['type']](**request.form)
-        current_app.database.session.add(node)
+        db.session.add(node)
     elif 'add_nodes' in request.form:
         filename = request.files['file'].filename
         if 'file' in request.files and allowed_file(filename, 'nodes'):  
@@ -63,10 +64,10 @@ def create_objects():
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
                     if obj_type in link_class:
-                        source = current_app.database.session.query(Node)\
+                        source = db.session.query(Node)\
                             .filter_by(name=kwargs.pop('source'))\
                             .first()
-                        destination = current_app.database.session.query(Node)\
+                        destination = db.session.query(Node)\
                             .filter_by(name=kwargs.pop('destination'))\
                             .first()
                         new_obj = link_class[obj_type](
@@ -78,14 +79,14 @@ def create_objects():
                             )
                     else:
                         new_obj = node_class[obj_type](**kwargs)
-                    current_app.database.session.add(new_obj)
+                    db.session.add(new_obj)
         else:
             flash('no file submitted')
     elif 'add_link' in request.form:
-        source = current_app.database.session.query(Node)\
+        source = db.session.query(Node)\
             .filter_by(name=request.form['source'])\
             .first()
-        destination = current_app.database.session.query(Node)\
+        destination = db.session.query(Node)\
             .filter_by(name=request.form['destination'])\
             .first()
         new_link = EthernetLink(
@@ -94,9 +95,9 @@ def create_objects():
             source = source, 
             destination = destination
             )
-        current_app.database.session.add(new_link)
+        db.session.add(new_link)
     if request.method == 'POST':
-        current_app.database.session.commit()
+        db.session.commit()
     all_nodes = Node.choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     return _render_template(

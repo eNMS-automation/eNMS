@@ -28,15 +28,10 @@ def _render_template(*args, **kwargs):
     kwargs['names'] = pretty_names
     return render_template(*args, **kwargs)
 
-from main import app, db
+# from .database import db
+from main import app
 from objects.models import Node, Link
 from users.models import User
-
-## tear down SQLAlchemy 
-
-@blueprint.teardown_request
-def shutdown_session(exception=None):
-    db.session.remove()
 
 ## root of the site
 

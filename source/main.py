@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_apscheduler import APScheduler
-from flask_sqlalchemy import SQLAlchemy
 from inspect import stack
 from os.path import abspath, dirname, join, pardir
 import flask_login
@@ -17,8 +16,6 @@ if path_app not in sys.path:
 
 app = Flask(__name__, static_folder='base/static')
 app.config.from_object('config')
-db = SQLAlchemy(app)
-app.database = db
 
 path_pynms = os.path.dirname(os.path.abspath(__file__))
 path_parent = abspath(join(path_pynms, pardir))
@@ -30,23 +27,33 @@ app.config['UPLOAD_FOLDER'] = app.path_upload
 scheduler = APScheduler()
 scheduler.init_app(app)
 scheduler.start()
-app.scheduler = scheduler
+
 
 # start the login system
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
-app.login_manager = login_manager
+
 
 for name in ('base', 'users', 'objects', 'views', 'automation', 'scheduling'):
     module = __import__(name + '.routes', globals(), locals(), [''])
     app.register_blueprint(module.blueprint)
 
-from base.database import init_db
+from base.database import db, init_db
 from users.models import User
+
+app.database = db
+app.login_manager = login_manager
+app.scheduler = scheduler
 
 @login_manager.user_loader
 def user_loader(id):
     return db.session.query(User).filter_by(id=id).first()
+
+## tear down SQLAlchemy 
+
+@app.teardown_request
+def shutdown_session(exception=None):
+    app.database.session.remove()
 
 ## Logs
 

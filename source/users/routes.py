@@ -17,6 +17,7 @@ blueprint = Blueprint(
     )
 
 from base.routes import _render_template
+from base.database import db
 from .models import User
 
 tacacs_client = TACACSClient('10.253.60.125', 49, 'bts2007', timeout=10)
@@ -39,13 +40,13 @@ def manage_users():
     delete_user_form = DeleteUser(request.form)
     if 'add_user' in request.form:
         user = User(**request.form)
-        current_app.database.session.add(user)
+        db.session.add(user)
     elif 'delete_user' in request.form:
         selection = delete_user_form.data['users']
-        current_app.database.session.query(User).filter(User.username.in_(selection))\
+        db.session.query(User).filter(User.username.in_(selection))\
         .delete(synchronize_session='fetch')
     if request.method == 'POST':
-        current_app.database.session.commit()
+        db.session.commit()
     all_users = User.choices()
     delete_user_form.users.choices = all_users
     return _render_template(
@@ -64,22 +65,22 @@ def create_account():
     else:
         login_form = LoginForm(request.form)
         user = User(**request.form)
-        current_app.database.session.add(user)
-        current_app.database.session.commit()
+        db.session.add(user)
+        db.session.commit()
         return redirect(url_for('users_blueprint.login'))
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username, password = str(request.form['username']), str(request.form['password'])
-        user = current_app.database.session.query(User).filter_by(username=username).first()
+        user = db.session.query(User).filter_by(username=username).first()
         if user and password == user.password:
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
         elif tacacs_client.authenticate(username, password, TAC_PLUS_AUTHEN_TYPE_ASCII).valid:
             user = User(username=username, password=password)
-            current_app.database.session.add(user)
-            current_app.database.session.commit()
+            db.session.add(user)
+            db.session.commit()
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
         return render_template('errors/page_403.html')

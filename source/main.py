@@ -34,8 +34,6 @@ def start_scheduler(app):
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
-    app.database = db
-    app.login_manager = login_manager
 
 def register_blueprints(app):
     for name in ('base', 'users', 'objects', 'views', 'automation', 'scheduling'):
@@ -71,7 +69,7 @@ def request_loader(request):
 
 @app.teardown_request
 def shutdown_session(exception=None):
-    app.database.session.remove()
+    db.session.remove()
 
 ## Logs
 

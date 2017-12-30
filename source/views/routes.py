@@ -1,3 +1,4 @@
+from base.database import db
 from base.routes import _render_template
 from collections import OrderedDict
 from flask import Blueprint, current_app, jsonify, request
@@ -70,7 +71,7 @@ def view(view_type):
 @blueprint.route('/putty_connection', methods = ['POST'])
 @login_required
 def putty_connection():
-    node = current_app.database.session.query(Node)\
+    node = db.session.query(Node)\
         .filter_by(id=request.form['id'])\
         .first()
     path_putty = join(current_app.path_apps, 'putty.exe')

@@ -1,40 +1,21 @@
 # Introduction
 
-eNMS is a network visualization, ninventory ad automation web platform.
+eNMS is a network visualization, inventory and automation web platform.
 
 ![eNMS](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
-
-# Getting started
-
-The following modules are used in eNMS:
-```
-flask (mandatory: web framework)
-xlrd, yaml (desirable: used for saving projects)
-netmiko, jinja2, NAPALM (optional: used for network automation)
-numpy, cvxopt (optional: used for linear programming)
-simplekml (optional: used for exporting project to Google Earth)
-```
-
-In order to use eNMS, you need to run **main.py**.
-```
-python main.py
-```
 
 # Features
 
 ## Network GIS visualization
 
-Maps can be displayed in eNMS to draw all network
-devices at their exact location (longitude and latitude),
-using the mercator or azimuthal orthographic projections.
+Maps can be displayed in eNMS to draw all network devices at their exact location (longitude and latitude) with leaflet.js.
 
 ![Network GIS visualization](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
 
 ## Network algorithmic visualization
 
 GIS visualization can only be done if we have all GPS coordinates: it is not always the case.
-Another way to visualize a network is use graph drawing algorithms to display the network.
-The video below shows that the network converges within a few milliseconds to a visually pleasing shape (ring, tree, hypercube). 
+eNMS uses vis.js to visualize the network in an aesthetically pleasing way, with a force-based algorithm.
 
 ![Network force-based visualization](https://github.com/afourmy/eNMS/blob/master/readme/logical_view.png)
 
@@ -44,11 +25,11 @@ Networks can be exported as a .KML file to be displayed on Google Earth, with th
 
 ## Saving and import/export
 
-Projects can be imported from an Excel file. 
+Projects (nodes and links with all properties) can be imported from an Excel file. 
 
 ## Embedded SSH client
 
-eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device (router, switch, server, etc).
+eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device (router, switch, server, etc), from the web interface.
 
 ## Send Jinja2 scripts to any SSH-enabled device
 
@@ -68,6 +49,22 @@ NAPALM is an automation framework that provides a set of functions to interact w
 With the search function, the user can select a type of object and search a value for any property: all matching objects will be highlighted.
 Regular expressions allows for specific search like an IP subnet.
 The user can select which type of device is displayed, use labels to display any property, and create graphical items like rectangles, ellipses or texts.
+
+# Getting started
+
+The following modules are used in eNMS:
+```
+flask (mandatory: web framework)
+xlrd, yaml (desirable: used for saving projects)
+netmiko, jinja2, NAPALM (optional: used for network automation)
+numpy, cvxopt (optional: used for linear programming)
+simplekml (optional: used for exporting project to Google Earth)
+```
+
+In order to use eNMS, you need to run **/source/main.py**.
+```
+python main.py
+```
 
 # Contact
 

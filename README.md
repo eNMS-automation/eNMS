@@ -31,14 +31,16 @@ Projects (nodes and links with all properties) can be imported from an Excel fil
 
 eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device (router, switch, server, etc), from the web interface.
 
-## Send Jinja2 scripts to any SSH-enabled device
+## Automation with Netmiko and NAPALM
 
-eNMS uses Netmiko to send Jinja2 scripts to any device that supports SSH. 
+### Netmiko support
+
+eNMS uses Netmiko to send scripts to any device that supports SSH. 
 Variables can be imported in a YAML file, and a script can be sent graphically to multiple devices at once with multithreading.
 
 ![Send jinja2 script via SSH with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko.png)
 
-## Interface to NAPALM
+### NAPALM support
 
 NAPALM is an automation framework that provides a set of functions to interact with different network device Operating Systems using a unified API. NAPALM can be used from within eNMS to retrieve information about a device, and change the configuration.
 
@@ -46,9 +48,10 @@ NAPALM is an automation framework that provides a set of functions to interact w
 
 ## Display control
 
-With the search function, the user can select a type of object and search a value for any property: all matching objects will be highlighted.
-Regular expressions allows for specific search like an IP subnet.
-The user can select which type of device is displayed, use labels to display any property, and create graphical items like rectangles, ellipses or texts.
+In both the geographical and logical views, the user can filter the view by searching for specific value for each property. Regular expressions allows for specific search like an IP subnet.
+The user can also control which property is displayed as a label for nodes and links.
+
+(video: TODO)
 
 # Getting started
 

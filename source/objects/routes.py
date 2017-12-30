@@ -44,7 +44,6 @@ def create_objects():
     add_nodes_form = AddNodes(request.form)
     add_link_form = AddLink(request.form)
     if 'add_node' in request.form:
-        # print(request.form, request.form['type'])
         node = node_class[request.form['type']](**request.form)
         db.session.add(node)
     elif 'add_nodes' in request.form:

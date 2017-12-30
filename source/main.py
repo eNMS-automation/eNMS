@@ -40,6 +40,32 @@ def register_blueprints(app):
         module = __import__(name + '.routes', globals(), locals(), [''])
         app.register_blueprint(module.blueprint)
 
+def configure_login_manager(app, User):
+    @login_manager.user_loader
+    def user_loader(id):
+        return db.session.query(User).filter_by(id=id).first()
+    
+    @login_manager.request_loader
+    def request_loader(request):
+        username = request.form.get('username')
+        user = db.session.query(User).filter_by(username=username).first()
+        return user if user else None
+
+def configure_database(app):
+
+    @app.teardown_request
+    def shutdown_session(exception=None):
+        db.session.remove()
+    
+    init_db()
+
+def configure_logs(app):
+    if not app.debug:
+        logging.basicConfig(filename='error.log',level=logging.DEBUG)
+
+    logger = logging.getLogger()
+    logger.addHandler(logging.StreamHandler())
+
 def create_app(config='config'):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object('config')
@@ -48,41 +74,18 @@ def create_app(config='config'):
     app.scheduler = start_scheduler(app)
     register_extensions(app)
     register_blueprints(app)
+    
+    from users.models import User
+    configure_login_manager(app, User)
+    
+    configure_database(app)
+    configure_logs(app)
 
     return app
 
 app = create_app()
 
-from users.models import User
-
-@login_manager.user_loader
-def user_loader(id):
-    return db.session.query(User).filter_by(id=id).first()
-
-@login_manager.request_loader
-def request_loader(request):
-    username = request.form.get('username')
-    user = db.session.query(User).filter_by(username=username).first()
-    return user if user else None
-
-## tear down SQLAlchemy 
-
-@app.teardown_request
-def shutdown_session(exception=None):
-    db.session.remove()
-
-## Logs
-
-if not app.debug:
-    logging.basicConfig(filename='error.log',level=logging.DEBUG)
-
 if __name__ == '__main__':
-    init_db()
-    
-    # returns logger
-    logger = logging.getLogger()
-    logger.addHandler(logging.StreamHandler())
-
     # run flask on port 5100
     port = int(os.environ.get('PORT', 5100))
     app.run(host='0.0.0.0', port=port, threaded=True)

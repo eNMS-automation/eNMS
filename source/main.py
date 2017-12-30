@@ -14,19 +14,34 @@ path_app = dirname(abspath(stack()[0][1]))
 if path_app not in sys.path:
     sys.path.append(path_app)
 
-app = Flask(__name__, static_folder='base/static')
-app.config.from_object('config')
+def initialize_paths(app):
+    path_source = os.path.dirname(os.path.abspath(__file__))
+    path_parent = abspath(join(path_source, pardir))
+    app.path_upload = join(path_parent, 'uploads')
+    app.path_apps = join(path_parent, 'applications')
+    app.config['UPLOAD_FOLDER'] = app.path_upload
 
-path_pynms = os.path.dirname(os.path.abspath(__file__))
-path_parent = abspath(join(path_pynms, pardir))
-app.path_upload = join(path_parent, 'uploads')
-app.path_apps = join(path_parent, 'applications')
-app.config['UPLOAD_FOLDER'] = app.path_upload
+def start_scheduler(app):
+    # start the scheduler
+    scheduler = APScheduler()
+    scheduler.init_app(app)
+    scheduler.start()
+    return scheduler
+    
 
-# start the scheduler
-scheduler = APScheduler()
-scheduler.init_app(app)
-scheduler.start()
+def create_app(config='config'):
+    app = Flask(__name__, static_folder='base/static')
+    app.config.from_object('config')
+    
+    initialize_paths(app)
+    app.scheduler = start_scheduler(app)
+    return app
+
+app = create_app()
+
+
+
+
 
 
 # start the login system
@@ -43,7 +58,6 @@ from users.models import User
 
 app.database = db
 app.login_manager = login_manager
-app.scheduler = scheduler
 
 @login_manager.user_loader
 def user_loader(id):

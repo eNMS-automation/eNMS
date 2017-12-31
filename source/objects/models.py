@@ -245,6 +245,7 @@ class BgpPeering(Link):
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     subtype = 'bgp_peering'
+    color = '#77ebca'
     
     def __init__(self, **kwargs):
         super(BgpPeering, self).__init__(**kwargs)
@@ -259,6 +260,7 @@ class Etherchannel(Link):
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     subtype = 'Etherchannel'
+    color = '#cf228a'
     
     def __init__(self, **kwargs):
         super(Etherchannel, self).__init__(**kwargs)
@@ -273,6 +275,7 @@ class EthernetLink(Link):
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     subtype = 'ethernet_link'
+    color = '#0000ff'
     
     def __init__(self, **kwargs):
         super(EthernetLink, self).__init__(**kwargs)
@@ -287,6 +290,7 @@ class OpticalLink(Link):
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     subtype = 'optical_link'
+    color = '#d4222a'
     
     def __init__(self, **kwargs):
         super(OpticalLink, self).__init__(**kwargs)
@@ -301,6 +305,7 @@ class OpticalChannel(Link):
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     subtype = 'optical_channel'
+    color = '#ff8247'
     
     def __init__(self, **kwargs):
         super(OpticalChannel, self).__init__(**kwargs)
@@ -315,6 +320,7 @@ class Pseudowire(Link):
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
     subtype = 'Pseudowire'
+    color = '#902bec'
     
     def __init__(self, **kwargs):
         super(Pseudowire, self).__init__(**kwargs)

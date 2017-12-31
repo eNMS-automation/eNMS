@@ -128,12 +128,14 @@
             var mymap = L.map('mapid').setView([48, 2], 5);
             L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
             
-            var greenIcon = L.icon({
-                iconUrl: 'static/images/default/default_router.gif',
+            {% for subtype in subtypes %}
+            var icon_{{ subtype }} = L.icon({
+                iconUrl: 'static/images/default/{{ subtype }}.gif',
                 iconSize:     [18, 12], // size of the icon
                 iconAnchor:   [9, 6], // point of the icon which will correspond to marker's location
                 popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
             });
+            {% endfor %}
   
             mymap.addControl(new ourCustomControl());
             
@@ -165,7 +167,10 @@
             }
             
             {% for obj, properties in node_table.items() %}  
-                var marker = L.marker([{{ obj.latitude }}, {{ obj.longitude }}], {icon: greenIcon}).addTo(mymap);
+                var marker = L.marker([
+                {{ obj.latitude }}, 
+                {{ obj.longitude }}], 
+                {icon: icon_{{ obj.subtype }}}).addTo(mymap);
                 
                 marker.bindPopup("{% for property in properties %}\
                 <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\

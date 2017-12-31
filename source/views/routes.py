@@ -4,7 +4,7 @@ from collections import OrderedDict
 from flask import Blueprint, current_app, jsonify, request
 from flask_login import login_required
 from .forms import *
-from objects.models import Node, Link
+from objects.models import Node, Link, node_subtypes
 from objects.properties import *
 from os.path import join
 from re import search
@@ -53,6 +53,7 @@ def view(view_type):
         '{}_view.html'.format(view_type), 
         form = FilteringForm(request.form),
         labels = labels,
+        subtypes = node_subtypes,
         node_table = {
             obj: OrderedDict([
                 (property, getattr(obj, property)) 

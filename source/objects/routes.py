@@ -46,6 +46,7 @@ def create_objects():
     if 'add_node' in request.form:
         node = node_class[request.form['type']](**request.form)
         db.session.add(node)
+        db.session.commit()
     elif 'add_nodes' in request.form:
         filename = request.files['file'].filename
         if 'file' in request.files and allowed_file(filename, 'nodes'):  
@@ -53,12 +54,14 @@ def create_objects():
             filepath = join(current_app.config['UPLOAD_FOLDER'], filename)
             request.files['file'].save(filepath)
             book = open_workbook(filepath)
+            print(object_class)
             for obj_type, cls in object_class.items():
                 try:
                     sheet = book.sheet_by_name(obj_type)
                 # if the sheet cannot be found, there's nothing to import
                 except XLRDError:
                     continue
+                print(obj_type, sheet.row_values(0))
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
@@ -79,6 +82,7 @@ def create_objects():
                     else:
                         new_obj = node_class[obj_type](**kwargs)
                     db.session.add(new_obj)
+                db.session.commit()
         else:
             flash('no file submitted')
     elif 'add_link' in request.form:
@@ -95,7 +99,6 @@ def create_objects():
             destination = destination
             )
         db.session.add(new_link)
-    if request.method == 'POST':
         db.session.commit()
     all_nodes = Node.choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes

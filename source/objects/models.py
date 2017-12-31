@@ -75,7 +75,7 @@ class Antenna(Node):
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Antenna'
+    subtype = 'antenna'
     
     @initialize_properties
     def __init__(self, **kwargs):
@@ -90,7 +90,7 @@ class Firewall(Node):
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Firewall'
+    subtype = 'firewall'
     
     @initialize_properties
     def __init__(self, **kwargs):
@@ -105,7 +105,7 @@ class Host(Node):
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Host'
+    subtype = 'host'
     
     @initialize_properties
     def __init__(self, **kwargs):
@@ -120,7 +120,7 @@ class OpticalSwitch(Node):
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Optical switch'
+    subtype = 'optical_switch'
     
     @initialize_properties
     def __init__(self, **kwargs):
@@ -135,7 +135,7 @@ class Regenerator(Node):
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Regenerator'
+    subtype = 'regenerator'
     
     @initialize_properties
     def __init__(self, **kwargs):
@@ -150,7 +150,7 @@ class Router(Node):
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Router'
+    subtype = 'router'
     
     @initialize_properties
     def __init__(self, **kwargs):
@@ -165,7 +165,7 @@ class Server(Node):
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Server'
+    subtype = 'server'
     
     @initialize_properties
     def __init__(self, **kwargs):
@@ -176,7 +176,7 @@ class Switch(Node):
     __tablename__ = 'Switch'
     
     __mapper_args__ = {
-        'polymorphic_identity':'Switch',
+        'polymorphic_identity':'switch',
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
@@ -244,7 +244,7 @@ class BgpPeering(Link):
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'BGP peering'
+    subtype = 'bgp_peering'
     
     def __init__(self, **kwargs):
         super(BgpPeering, self).__init__(**kwargs)
@@ -272,7 +272,7 @@ class EthernetLink(Link):
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'Ethernet link'
+    subtype = 'ethernet_link'
     
     def __init__(self, **kwargs):
         super(EthernetLink, self).__init__(**kwargs)
@@ -286,7 +286,7 @@ class OpticalLink(Link):
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'Optical link'
+    subtype = 'optical_link'
     
     def __init__(self, **kwargs):
         super(OpticalLink, self).__init__(**kwargs)
@@ -300,7 +300,7 @@ class OpticalChannel(Link):
     }
     
     id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'Optical channel'
+    subtype = 'optical_channel'
     
     def __init__(self, **kwargs):
         super(OpticalChannel, self).__init__(**kwargs)
@@ -331,6 +331,17 @@ node_class = OrderedDict([
 ('Switch', Switch),
 ('Server', Server),
 ])
+
+node_subtypes = (
+'antenna',
+'firewall',
+'host',
+'optical_switch',
+'regenerator',
+'router',
+'server',
+'switch'
+)
 
 link_class = OrderedDict([
 ('BGP peering', BgpPeering),

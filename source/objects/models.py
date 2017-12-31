@@ -1,3 +1,4 @@
+from base.database import db
 from base.models import CustomBase
 from .properties import *
 from sqlalchemy import Column, ForeignKey, Integer, String, Float
@@ -332,7 +333,7 @@ for cls_dict in (node_class, link_class):
     object_class.update(cls_dict)
 
 def get_obj(app, model, **kwargs):
-    return app.database.session.query(model).filter_by(**kwargs).first()
+    return db.session.query(model).filter_by(**kwargs).first()
 
 # takes a list of values of a property for a given model [v1, v2, ..., vn]
 # and convert it to a list of values for another property for the same model

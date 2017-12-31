@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_apscheduler import APScheduler
 from inspect import stack
 from os.path import abspath, dirname, join, pardir
 import flask_login
@@ -15,6 +14,7 @@ if path_app not in sys.path:
     sys.path.append(path_app)
 
 from base.database import db, init_db
+from scheduling.models import scheduler
 from users.routes import login_manager
 
 def initialize_paths(app):
@@ -24,16 +24,16 @@ def initialize_paths(app):
     app.path_apps = join(path_parent, 'applications')
     app.config['UPLOAD_FOLDER'] = app.path_upload
 
-def start_scheduler(app):
-    # start the scheduler
-    scheduler = APScheduler()
-    scheduler.init_app(app)
-    scheduler.start()
-    return scheduler
+# def start_scheduler(app):
+#     # start the scheduler
+#     
+#     
+#     return scheduler
 
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
+    # scheduler.init_app(app)
 
 def register_blueprints(app):
     for name in ('base', 'users', 'objects', 'views', 'automation', 'scheduling'):
@@ -71,13 +71,12 @@ def create_app(config='config'):
     app.config.from_object('config')
     
     initialize_paths(app)
-    app.scheduler = start_scheduler(app)
+    # app.scheduler = start_scheduler(app)
     register_extensions(app)
     register_blueprints(app)
     
     from users.models import User
     configure_login_manager(app, User)
-    
     configure_database(app)
     configure_logs(app)
 

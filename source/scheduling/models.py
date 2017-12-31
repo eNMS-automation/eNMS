@@ -2,6 +2,7 @@ from base.helpers import str_dict
 from base.models import CustomBase
 from datetime import datetime
 from flask import current_app
+from flask_apscheduler import APScheduler
 from netmiko import ConnectHandler
 from objects.models import get_obj
 from sqlalchemy import Column, ForeignKey, Integer, String
@@ -11,6 +12,9 @@ try:
     from napalm import get_network_driver
 except ImportError:
     from napalm_base import get_network_driver
+
+scheduler = APScheduler()
+scheduler.start()
 
 ## Jobs
 
@@ -120,7 +124,7 @@ class Task(CustomBase):
 
     def recurrent_scheduling(self):
         # run the job on a regular basis with an interval trigger
-        id = current_app.scheduler.add_job(
+        id = scheduler.add_job(
             id = self.creation_time,
             func = self.job,
             args = self.args,
@@ -133,7 +137,7 @@ class Task(CustomBase):
         # execute the job immediately with a date-type job
         # when date is used as a trigger and run_date is left undetermined, 
         # the job is executed immediately.
-        id = current_app.scheduler.add_job(
+        id = scheduler.add_job(
             id = self.creation_time,
             func = self.job,
             args = self.args,

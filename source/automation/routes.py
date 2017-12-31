@@ -1,4 +1,5 @@
 from __future__ import print_function
+from base.database import db
 from base.routes import _render_template
 from flask import Blueprint, current_app, redirect, request, url_for
 from flask_login import login_required, current_user
@@ -50,8 +51,8 @@ def netmiko():
             'ip_address'
             )
         netmiko_task = NetmikoTask(script, current_user, node_ips, **form.data)
-        current_app.database.session.add(netmiko_task)
-        current_app.database.session.commit()
+        db.session.add(netmiko_task)
+        db.session.commit()
         return redirect(url_for('scheduling_blueprint.task_management'))
     return _render_template(
         'netmiko.html',
@@ -74,8 +75,8 @@ def napalm_getters():
             nodes_info,
             **form.data
             )
-        current_app.database.session.add(napalm_task)
-        current_app.database.session.commit()
+        db.session.add(napalm_task)
+        db.session.commit()
     return _render_template(
         'napalm_getters.html',
         form = form
@@ -111,8 +112,8 @@ def napalm_configuration():
             obj = get_obj(current_app, Node, name=name)
             nodes_info.append((obj.ip_address, obj.operating_system.lower()))
         napalm_task = NapalmConfigTask(script, current_user, nodes_info, **form.data)
-        current_app.database.session.add(napalm_task)
-        current_app.database.session.commit()
+        db.session.add(napalm_task)
+        db.session.commit()
         return redirect(url_for('scheduling_blueprint.task_management'))
     return _render_template(
         'napalm_configuration.html',

@@ -35,9 +35,20 @@ link_public_properties
 )
 
 type_to_public_properties = OrderedDict([
-    ('Router', node_public_properties),
+    ('Antenna', node_public_properties),
+    ('Firewall', node_public_properties),
+    ('Host', node_public_properties),
     ('Optical switch', node_public_properties),
-    ('Optical link', link_public_properties)
+    ('Regenerator', node_public_properties),
+    ('Router', node_public_properties),
+    ('Switch', node_public_properties),
+    ('Server', node_public_properties),
+    ('BGP peering', link_public_properties),
+    ('Etherchannel', link_public_properties),
+    ('Ethernet link', link_public_properties),
+    ('Optical channel', link_public_properties),
+    ('Optical link', link_public_properties),
+    ('Pseudowire', link_public_properties)
     ])
 
 ## Diagram properties (for the dashboard)

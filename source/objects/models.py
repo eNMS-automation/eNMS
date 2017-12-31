@@ -176,11 +176,11 @@ class Switch(Node):
     __tablename__ = 'Switch'
     
     __mapper_args__ = {
-        'polymorphic_identity':'switch',
+        'polymorphic_identity':'Switch',
     }
     
     id = Column(Integer, ForeignKey('Node.id'), primary_key=True)
-    subtype = 'Switch'
+    subtype = 'switch'
     
     @initialize_properties
     def __init__(self, **kwargs):

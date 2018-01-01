@@ -84,7 +84,40 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success" name="add_node">Submit</button>
+              <button type="submit" class="btn btn-success" name="filter">Submit</button>
+            </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    
+      <div id="google_earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Export to Google Earth</h4>
+            </div>
+            <div class="modal-body">
+            
+              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+              
+                    <div class="form-group">
+                      <h5 class="modal-title">Export to Google Earth</h5><br>
+                      </div>
+                      
+
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="google_earth_export">Submit</button>
             </div>
 
             </form>
@@ -102,6 +135,7 @@
                 <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
             
             <script>
+            
             var ourCustomControl = L.Control.extend({
             
             options: {
@@ -125,6 +159,29 @@
               }
             })
             
+            var ourCustomControl2 = L.Control.extend({
+            
+            options: {
+                position: 'topleft' 
+                //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+            },
+            
+            onAdd: function (mymap) {
+                var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+            
+                container.style.backgroundColor = 'white';
+                container.style.height = '30px';
+                container.type="button";
+                container.value = "Export to Google Earth";
+            
+                container.onclick = function(){
+                  $('#google_earth').modal('show');
+  
+                }
+                return container;
+              }
+            })
+            
             var mymap = L.map('mapid').setView([48, 2], 5);
             L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
             
@@ -138,6 +195,7 @@
             {% endfor %}
   
             mymap.addControl(new ourCustomControl());
+            mymap.addControl(new ourCustomControl2());
             
             function loadXMLDoc()
             {

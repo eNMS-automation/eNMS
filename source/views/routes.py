@@ -5,7 +5,7 @@ from flask import Blueprint, current_app, jsonify, request, send_file
 from flask_login import login_required
 from .forms import *
 from functools import partial
-from objects.models import Node, Link, node_subtypes
+from objects.models import Node, Link, Object, node_subtypes
 from objects.properties import *
 from os.path import join
 from re import search
@@ -20,39 +20,56 @@ blueprint = Blueprint(
     static_folder = 'static'
     )
 
-def filtering_function(obj, request):
-    # if the property field is not empty in the form, and the 
-    # property is a public property, we check that the value of 
-    # the object matches the user input for all properties
-    return all(
-        # if the node-regex property is not in the request, the
-        # regex box is unticked and we only check that the values
-        # are equal.
-        str(value) == request.form[obj.class_type + property]
-        if not obj.class_type + property + 'regex' in request.form
-        # if it is ticked, we use re.search to check that the value
-        # of the node property matches the regular expression.
-        else search(request.form[obj.class_type + property], str(value))
-        for property, value in obj.__dict__.items()
-        # we consider only public properties
-        if property in obj.get_properties()
-        # providing that the property field in the form is not empty
-        # (empty field <==> property ignored)
-        and request.form[obj.class_type + property]
-        )
+# def filtering_function(obj, request):
+#     # if the property field is not empty in the form, and the 
+#     # property is a public property, we check that the value of 
+#     # the object matches the user input for all properties
+#     return all(
+#         # if the node-regex property is not in the request, the
+#         # regex box is unticked and we only check that the values
+#         # are equal.
+#         str(value) == request.form[obj.class_type + property]
+#         if not obj.class_type + property + 'regex' in request.form
+#         # if it is ticked, we use re.search to check that the value
+#         # of the node property matches the regular expression.
+#         else search(request.form[obj.class_type + property], str(value))
+#         for property, value in obj.__dict__.items()
+#         # we consider only public properties
+#         if property in obj.get_properties()
+#         # providing that the property field in the form is not empty
+#         # (empty field <==> property ignored)
+#         and request.form[obj.class_type + property]
+#         )
                 
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
-    view_filter = lambda _: True
+    view_filter = lambda obj: obj.visible
     labels = {'node': 'name', 'link': 'name'}
     if request.method == 'POST':
-        view_filter = partial(filtering_function, request=request)
+        # view_filter = partial(filtering_function, request=request)
         # retrieve labels
         labels = {
             'node': request.form['node_label'],
             'link': request.form['link_label']
             }
+        for obj in Node.query.all() + Link.query.all():
+            obj.visible = all(
+            # if the node-regex property is not in the request, the
+            # regex box is unticked and we only check that the values
+            # are equal.
+            str(value) == request.form[obj.class_type + property]
+            if not obj.class_type + property + 'regex' in request.form
+            # if it is ticked, we use re.search to check that the value
+            # of the node property matches the regular expression.
+            else search(request.form[obj.class_type + property], str(value))
+            for property, value in obj.__dict__.items()
+            # we consider only public properties
+            if property in obj.get_properties()
+            # providing that the property field in the form is not empty
+            # (empty field <==> property ignored)
+            and request.form[obj.class_type + property]
+            )
     return _render_template(
         '{}_view.html'.format(view_type), 
         form = FilteringForm(request.form),
@@ -88,11 +105,8 @@ def putty_connection():
 @login_required
 def export():
     kml_file = Kml()
-    view_filter = partial(filtering_function, request=request)
+    # view_filter = partial(filtering_function, request=request)
     
-    for i in range(10):
-        print(request)
-    print(view_filter, Node.query.all())
     for node in Node.query.all():
         point = kml_file.newpoint(name=node.name)
         point.coords = [(node.longitude, node.latitude)]

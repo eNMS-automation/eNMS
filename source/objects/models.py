@@ -1,7 +1,7 @@
 from base.database import db
 from base.models import CustomBase
 from .properties import *
-from sqlalchemy import Column, ForeignKey, Integer, String, Float
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import relationship
 
 def initialize_properties(function):
@@ -25,6 +25,7 @@ class Object(CustomBase):
     name = Column(String(120))
     vendor = Column(String(120))
     type = Column(String(50))
+    visible = Column(Boolean, default=True)
     
     __mapper_args__ = {
         'polymorphic_identity':'Object',

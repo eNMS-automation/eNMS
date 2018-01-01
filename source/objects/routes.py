@@ -4,7 +4,7 @@ from flask import Blueprint, current_app, request
 from flask_login import login_required
 from .forms import *
 from .models import *
-from objects.models import node_class
+from objects.models import node_class, Node, Link
 from os.path import join
 from .properties import *
 from werkzeug.utils import secure_filename
@@ -54,7 +54,6 @@ def create_objects():
             filepath = join(current_app.config['UPLOAD_FOLDER'], filename)
             request.files['file'].save(filepath)
             book = open_workbook(filepath)
-            print(object_class)
             for obj_type, cls in object_class.items():
                 try:
                     sheet = book.sheet_by_name(obj_type)
@@ -116,11 +115,11 @@ def delete_objects():
     if request.method == 'POST':
         # delete nodes
         node_selection = delete_objects_form.data['nodes']
-        db.session.query(Node).filter(Node.name.in_(node_selection))\
+        db.session.query(Object).filter(Object.name.in_(node_selection))\
         .delete(synchronize_session='fetch')
         # delete links
         link_selection = delete_objects_form.data['links']
-        db.session.query(Link).filter(Link.name.in_(link_selection))\
+        db.session.query(Object).filter(Object.name.in_(link_selection))\
         .delete(synchronize_session='fetch')
         db.session.commit()
     delete_objects_form.nodes.choices = Node.visible_objects()

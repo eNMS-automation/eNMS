@@ -8,6 +8,7 @@ from objects.models import Node, Link, node_subtypes
 from objects.properties import *
 from os.path import join
 from re import search
+from simplekml import Color, Kml, Style
 from subprocess import Popen
 
 blueprint = Blueprint(
@@ -23,7 +24,7 @@ blueprint = Blueprint(
 def view(view_type):
     view_filter = lambda _: True
     labels = {'node': 'name', 'link': 'name'}
-    if request.method == 'POST':
+    if 'filter' in request.form:
         # retrieve labels
         labels = {
             'node': request.form['node_label'],
@@ -49,6 +50,8 @@ def view(view_type):
                 # (empty field <==> property ignored)
                 and request.form[obj.class_type + property]
                 )
+    elif 'google_earth_export' in request.form:
+        pass
     return _render_template(
         '{}_view.html'.format(view_type), 
         form = FilteringForm(request.form),

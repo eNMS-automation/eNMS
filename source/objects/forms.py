@@ -4,6 +4,8 @@ from objects.models import node_class
 from wtforms import *
 from wtforms.validators import optional
 
+## Object creation
+
 # nodes can be added to the database either one by one via the AddNode
 # form, or all at once by importing an Excel or a CSV file.
 class AddNode(FlaskForm):
@@ -22,9 +24,12 @@ class AddNodes(FlaskForm):
     validators = [FileAllowed(['xls', 'xlsx', 'csv'], 'Excel or CSV file only')]
     file = FileField('', validators=validators)
     
-class DeleteNode(FlaskForm):
-    nodes = SelectMultipleField('Nodes', choices=())
-    
 class AddLink(FlaskForm):
     source = SelectField('Source', choices=())
     destination = SelectField('Destination', choices=())
+
+## Object deletion
+
+class DeleteObjects(FlaskForm):
+    nodes = SelectMultipleField('Nodes', choices=())
+    links = SelectMultipleField('Links', choices=())

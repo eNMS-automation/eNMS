@@ -20,7 +20,7 @@ from users.routes import login_manager
 def initialize_paths(app):
     path_source = os.path.dirname(os.path.abspath(__file__))
     path_parent = abspath(join(path_source, pardir))
-    app.path_upload = join(path_parent, 'uploads')
+    app.path_upload = join(path_parent, 'projects')
     app.path_apps = join(path_parent, 'applications')
     app.kmz_path = join(path_parent, 'kmz')
     app.config['UPLOAD_FOLDER'] = app.path_upload

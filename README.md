@@ -6,6 +6,14 @@ eNMS is a network visualization, inventory and automation web platform.
 
 # Features
 
+## Object creation
+
+Nodes and links can be created in two ways: 
+- one by one by specifying all properties manually, in the "Object creation" webpage
+- by importing an Excel file with one sheet per type of object
+
+![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.png)
+
 ## Network GIS visualization
 
 Maps can be displayed in eNMS to draw all network devices at their exact location (longitude and latitude) with leaflet.js.
@@ -24,10 +32,6 @@ eNMS uses vis.js to visualize the network in an aesthetically pleasing way, with
 Networks can be exported as a .KML file to be displayed on Google Earth, with the same icons and link colors as in eNMS.
 
 ![Export to Google Earth](https://github.com/afourmy/eNMS/blob/master/readme/google_earth_export.png)
-
-## Saving and import/export
-
-Projects (nodes and links with all properties) can be imported from an Excel file. 
 
 ## Embedded SSH client
 

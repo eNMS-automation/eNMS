@@ -84,7 +84,7 @@ def putty_connection():
 ## Export to Google Earth
 
 styles = {}
-for subtype in node_class:
+for subtype in node_subtypes:
     point_style = Style()
     point_style.labelstyle.color = Color.blue
     path_icon = join(path_source, 'views', 'static', 'images', 'default', '{}.gif'.format(subtype))
@@ -96,7 +96,6 @@ for subtype, cls in link_class.items():
     # we convert the RGB color to a KML color, 
     # i.e #RRGGBB to #AABBGGRR
     kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
-    print(kml_color)
     line_style.linestyle.color = kml_color
     styles[subtype] = line_style
 
@@ -108,8 +107,8 @@ def export():
     for node in filter(lambda obj: obj.visible, Node.query.all()):
         point = kml_file.newpoint(name=node.name)
         point.coords = [(node.longitude, node.latitude)]
-        point.style = styles[node.type]
-        point.style.labelstyle.scale = 2
+        point.style = styles[node.subtype]
+        point.style.labelstyle.scale = 0
         
     for link in filter(lambda obj: obj.visible, Link.query.all()):
         line = kml_file.newlinestring(name=link.name) 
@@ -118,7 +117,7 @@ def export():
             (link.destination.longitude, link.destination.latitude)
             ]
         line.style = styles[link.type]
-        line.style.linestyle.width = 2
+        line.style.linestyle.width = 1
     
     filepath = join(current_app.kmz_path, 'test.kmz')
     kml_file.save(filepath)

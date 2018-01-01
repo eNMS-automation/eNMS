@@ -13,13 +13,14 @@ path_app = dirname(abspath(stack()[0][1]))
 if path_app not in sys.path:
     sys.path.append(path_app)
 
+path_source = os.path.dirname(os.path.abspath(__file__))
+path_parent = abspath(join(path_source, pardir))
+
 from base.database import db, init_db
 from scheduling.models import scheduler
 from users.routes import login_manager
 
 def initialize_paths(app):
-    path_source = os.path.dirname(os.path.abspath(__file__))
-    path_parent = abspath(join(path_source, pardir))
     app.path_upload = join(path_parent, 'projects')
     app.path_apps = join(path_parent, 'applications')
     app.kmz_path = join(path_parent, 'kmz')

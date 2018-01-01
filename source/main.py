@@ -22,13 +22,8 @@ def initialize_paths(app):
     path_parent = abspath(join(path_source, pardir))
     app.path_upload = join(path_parent, 'uploads')
     app.path_apps = join(path_parent, 'applications')
+    app.kmz_path = join(path_parent, 'kmz')
     app.config['UPLOAD_FOLDER'] = app.path_upload
-
-# def start_scheduler(app):
-#     # start the scheduler
-#     
-#     
-#     return scheduler
 
 def register_extensions(app):
     db.init_app(app)

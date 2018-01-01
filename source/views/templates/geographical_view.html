@@ -105,22 +105,52 @@
             </div>
             <div class="modal-body">
             
-              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+              
               
                     <div class="form-group">
-                      <h5 class="modal-title">Export to Google Earth</h5><br>
-                      </div>
-                      
+                      <h5 class="modal-title">Labels</h5><br>
+
+                    </div>
+              
+                    <div class="form-group">
+                    
+
+                    </div>
 
               
             </div>
+            <script>
+            function loadXMLDoc2()
+            {
+                var req = new XMLHttpRequest()
+                req.onreadystatechange = function()
+                {
+                    if (req.readyState == 4)
+                    {
+                        if (req.status != 200)
+                        {
+                            //error handling code here
+                        }
+                        else
+                        {
+                            var response = JSON.parse(req.responseText)
+                        }
+                    }
+                }
+            
+                req.open('POST', '/views/export')
+                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+                var id = document.getElementById('id').value
+                var postVars = 'id='+id
+                req.send(postVars)
+                
+                return false
+            }
+            </script>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success" name="google_earth_export">Submit</button>
+                <input type='hidden' name='id' id='id' value='a'>
+                <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc2()'/>
             </div>
-
-            </form>
 
           </div>
         </div>
@@ -232,7 +262,6 @@
                 
                 marker.bindPopup("{% for property in properties %}\
                 <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
-                <form action='' method='POST' id='#form'>\
                 <input type='hidden' name='id' id='id' value={{ obj.id }}>\
                 <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
                 

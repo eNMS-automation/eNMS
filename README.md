@@ -14,13 +14,15 @@ Nodes and links can be created in two ways:
 
 ![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.png)
 
-## Network GIS visualization
+## Network visualization
+
+### With a map
 
 Maps can be displayed in eNMS to draw all network devices at their exact location (longitude and latitude) with leaflet.js.
 
 ![Network GIS visualization](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
 
-## Network algorithmic visualization
+### With a graph-drawing algorithm
 
 GIS visualization can only be done if we have all GPS coordinates: it is not always the case.
 eNMS uses vis.js to visualize the network in an aesthetically pleasing way, with a force-based algorithm.

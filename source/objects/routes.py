@@ -108,3 +108,24 @@ def create_objects():
         add_nodes_form = add_nodes_form,
         add_link_form = add_link_form
         )
+
+@blueprint.route('/object_deletion', methods=['GET', 'POST'])
+@login_required
+def delete_objects():
+    delete_objects_form = DeleteObjects(request.form)
+    if request.method == 'POST':
+        # delete nodes
+        node_selection = delete_objects_form.data['nodes']
+        db.session.query(Node).filter(Node.name.in_(node_selection))\
+        .delete(synchronize_session='fetch')
+        # delete links
+        link_selection = delete_objects_form.data['links']
+        db.session.query(Link).filter(Link.name.in_(link_selection))\
+        .delete(synchronize_session='fetch')
+        db.session.commit()
+    delete_objects_form.nodes.choices = Node.visible_objects()
+    delete_objects_form.links.choices = Link.visible_objects()
+    return _render_template(
+        'object_deletion.html',
+        form = delete_objects_form
+        )

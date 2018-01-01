@@ -38,6 +38,10 @@ class Object(CustomBase):
     def __init__(self, **kwargs):
         pass
 
+    @classmethod
+    def visible_objects(cls):
+        return [(obj, obj) for obj in cls.query.all() if obj.visible]
+
     def __repr__(self):
         return str(self.name)
 

@@ -21,7 +21,9 @@ eNMS uses vis.js to visualize the network in an aesthetically pleasing way, with
 
 ## Export to Google Earth
 
-Networks can be exported as a .KML file to be displayed on Google Earth, with the same icons and link colors as in eNMS. (TODO)
+Networks can be exported as a .KML file to be displayed on Google Earth, with the same icons and link colors as in eNMS.
+
+![Export to Google Earth](https://github.com/afourmy/eNMS/blob/master/readme/google_earth_export.png)
 
 ## Saving and import/export
 

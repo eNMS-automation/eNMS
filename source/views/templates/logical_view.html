@@ -107,7 +107,7 @@
               {
                 id: {{ node.id }}, 
                 label: '{{ node[labels['node']] }}', 
-                image: 'static/images/default/default_router.gif', 
+                image: 'static/images/default/{{ node.subtype }}.gif', 
                 shape: 'image', 
                 title: "{% for property in properties %}\
                 <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"
@@ -122,7 +122,8 @@
               { 
                 from: {{ link['source']['id'] }}, 
                 to: {{ link['destination']['id'] }}, 
-                label: '{{ link[labels['link']] }}'
+                label: '{{ link[labels['link']] }}',
+                color: {color: '{{ link.color }}'},
               },
             {% endfor %}
             ]);

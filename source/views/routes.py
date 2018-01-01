@@ -95,7 +95,8 @@ for subtype, cls in link_class.items():
     line_style = Style()
     # we convert the RGB color to a KML color, 
     # i.e #RRGGBB to #AABBGGRR
-    kml_color = "#ff" + cls.color[-2:] + cls.color[2:4] + cls.color[:2]
+    kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
+    print(kml_color)
     line_style.linestyle.color = kml_color
     styles[subtype] = line_style
 
@@ -112,8 +113,10 @@ def export():
         
     for link in filter(lambda obj: obj.visible, Link.query.all()):
         line = kml_file.newlinestring(name=link.name) 
-        line.coords = [(link.source.longitude, link.source.latitude),
-                    (link.destination.longitude, link.destination.latitude)]
+        line.coords = [
+            (link.source.longitude, link.source.latitude),
+            (link.destination.longitude, link.destination.latitude)
+            ]
         line.style = styles[link.type]
         line.style.linestyle.width = 2
     

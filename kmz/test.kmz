@@ -18,35 +18,35 @@
         </Style>
         <Style id="stylesel_8">
             <LineStyle id="substyle_16">
-                <color>#ffca7e#7</color>
+                <color>#ffcaeb77</color>
                 <colorMode>normal</colorMode>
                 <width>2</width>
             </LineStyle>
         </Style>
         <Style id="stylesel_9">
             <LineStyle id="substyle_17">
-                <color>#ff8af2#c</color>
+                <color>#ff8a22cf</color>
                 <colorMode>normal</colorMode>
                 <width>2</width>
             </LineStyle>
         </Style>
         <Style id="stylesel_10">
             <LineStyle id="substyle_18">
-                <color>#ffff00#0</color>
+                <color>#ffff0000</color>
                 <colorMode>normal</colorMode>
                 <width>2</width>
             </LineStyle>
         </Style>
         <Style id="stylesel_11">
             <LineStyle id="substyle_19">
-                <color>#ff47f8#f</color>
+                <color>#ff4782ff</color>
                 <colorMode>normal</colorMode>
                 <width>2</width>
             </LineStyle>
         </Style>
         <Style id="stylesel_12">
             <LineStyle id="substyle_20">
-                <color>#ff2a42#d</color>
+                <color>#ff2a22d4</color>
                 <colorMode>normal</colorMode>
                 <width>2</width>
             </LineStyle>

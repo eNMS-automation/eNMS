@@ -1,3 +1,4 @@
+from base.database import db
 from ast import literal_eval
 from .forms import *
 from collections import Counter

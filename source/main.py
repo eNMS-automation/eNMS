@@ -67,12 +67,12 @@ def create_app(config='config'):
     app.config.from_object('config')
     
     initialize_paths(app)
-    # app.scheduler = start_scheduler(app)
     register_extensions(app)
     register_blueprints(app)
     
     from users.models import User
     configure_login_manager(app, User)
+    
     configure_database(app)
     configure_logs(app)
 
@@ -81,6 +81,6 @@ def create_app(config='config'):
 app = create_app()
 
 if __name__ == '__main__':
-    # run flask on port 5100
+    # run website on port 5100
     port = int(os.environ.get('PORT', 5100))
     app.run(host='0.0.0.0', port=port, threaded=True)

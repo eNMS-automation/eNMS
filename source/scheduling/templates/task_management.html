@@ -27,10 +27,10 @@
                     <th style="width: 1%">ID</th>
                     <th style="width: 15%">Task name</th>
                     <th>Creator</th>
-                    <th style="width: 10%">Time before next run</th>
+                    <th style="width: 10%">Next run</th>
                     <th>Status</th>
-                    <th style="width: 10%">View</th>
                     <th style="width: 20%">Edit</th>
+                    <th style="width: 10%">Logs</th>
                     <th style="width: 20%">Delete</th>
                     <th style="width: 20%">Pause / Resume</th>
                   </tr>
@@ -54,28 +54,87 @@
                       <button type="button" class="btn btn-success btn-xs">Active</button>
                     </td>
                     <td>
-                      <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                      <form>
+                        <div class="modal fade {{ task.name }}" tabindex="-1" role="dialog" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Logs</h4>
+                              </div>
+                              
+                              
+                              <div class="modal-body">
+                              {% if task.type == 'napalm_getters' %}
+                                <div class="row">
+                                
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>First node</label>
+                                    {{ form_per_task[task.name].first_node(class="form-control") }}
+                                  </div>
+                                  
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>Second node</label>
+                                    {{ form_per_task[task.name].second_node(class="form-control") }}
+                                  </div>
+                                </div>
+                                
+                                <div class="row">
+                                  
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>First version</label>
+                                    {{ form_per_task[task.name].first_version(class="form-control") }}
+                                  </div>
+                                  
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>Second version</label>
+                                    {{ form_per_task[task.name].second_version(class="form-control") }}
+                                  </div>
+                                </div>
+                              {% else %}
+                              {{ task.logs }}
+                              {% endif %}
+                              
+                              </div>
+                              
+                            <div class="modal-footer">
+                              <button class="btn btn-default" style="display: none;"></button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" name="create_task">Compare</button>
+                            </div>
+  
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".{{ task.name }}"><i class="fa fa-pencil"></i> Logs </a></button>
+
                     </td>
                     <td>
                       <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     </td>
                     <td>
-                      <form action="/delete_task" method='post'>
+                      <form action="/scheduling/delete_task" method='post'>
                       <input type="hidden" name="task_name" value={{ task.name }} />
                       <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
                       </form>
                     </td>
                     <td>
-                      {% if task.status == 'Active' %}
-                      <form action="/pause_task" method='post'>
-                      <input type="hidden" name="task_name" value={{ task.name }} />
-                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>
-                      </form>
-                      {% else %}
-                      <form action="/resume_task" method='post'>
-                      <input type="hidden" name="task_name" value={{ task.name }} />
-                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Resume</button>
-                      </form>
+                      {% if task.frequency %}
+                        {% if task.status == 'Active' %}
+                        <form action="/scheduling/pause_task" method='post'>
+                        <input type="hidden" name="task_name" value={{ task.name }} />
+                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>
+                        </form>
+                        {% else %}
+                        <form action="/scheduling/resume_task" method='post'>
+                        <input type="hidden" name="task_name" value={{ task.name }} />
+                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Resume</button>
+                        </form>
+                        {% endif %}
                       {% endif %}
                     </td>
                   </tr>

@@ -1,11 +1,14 @@
+from base.database import db
 from base.helpers import str_dict
 from base.models import CustomBase
 from datetime import datetime
 from flask import current_app
 from flask_apscheduler import APScheduler
+from automation.models import Script
 from netmiko import ConnectHandler
 from objects.models import get_obj
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, PickleType
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 # napalm pre and post-reunification compatibility
 try:
@@ -18,8 +21,11 @@ scheduler.start()
 
 ## Jobs
 
-def netmiko_job(script, username, password, ips, driver, global_delay_factor):
-    for ip_address in ips:
+def netmiko_job(name, script_name, username, password, ips, driver, global_delay_factor):
+    script = db.session.query(Script)\
+        .filter_by(name=script_name)\
+        .first()
+    for name, ip_address, _ in ips:
         netmiko_handler = ConnectHandler(                
             ip = ip_address,
             device_type = driver,
@@ -27,7 +33,7 @@ def netmiko_job(script, username, password, ips, driver, global_delay_factor):
             password = password,
             global_delay_factor = global_delay_factor
             )
-        netmiko_handler.send_config_set(script.splitlines())
+        netmiko_handler.send_config_set(script.content.splitlines())
 
 def napalm_connection(ip_address, username, password, driver, optional_args):
     napalm_driver = get_network_driver(driver)
@@ -40,8 +46,11 @@ def napalm_connection(ip_address, username, password, driver, optional_args):
     connection.open()
     return connection
 
-def napalm_config_job(script, username, password, nodes_info, action):
-    for ip_address, driver in nodes_info:
+def napalm_config_job(name, script_name, username, password, nodes_info, action):
+    script = db.session.query(Script)\
+        .filter_by(name=script_name)\
+        .first()
+    for name, ip_address, driver in nodes_info:
         napalm_driver = napalm_connection(
             ip_address, 
             username,
@@ -50,13 +59,18 @@ def napalm_config_job(script, username, password, nodes_info, action):
             {'secret': 'cisco'}
             )
         if action in ('load_merge_candidate', 'load_replace_candidate'):
-            getattr(napalm_driver, action)(config=script)
+            getattr(napalm_driver, action)(config=script.content)
+            napalm_driver.commit_config()
         else:
             getattr(napalm_driver, action)()
 
-def napalm_getters_job(getters, username, password, nodes_info):
-    napalm_output = []
-    for ip_address, driver in nodes_info:
+def napalm_getters_job(name, getters, username, password, nodes_info):
+    job_time = str(datetime.now())
+    task = db.session.query(Task)\
+        .filter_by(name=name)\
+        .first()
+    task.logs[job_time] = {}
+    for name, ip_address, driver in nodes_info:
         try:
             napalm_driver = napalm_connection(
                 ip_address, 
@@ -65,20 +79,17 @@ def napalm_getters_job(getters, username, password, nodes_info):
                 driver,
                 {'secret': 'cisco'}
                 )
-            napalm_output.append('\n{}\n'.format(ip_address))
             for getter in getters:
                 try:
-                    output = str_dict(getattr(napalm_driver, getter)())
-                    print(output)
+                    result = str_dict(getattr(napalm_driver, getter)())
                 except Exception as e:
-                    output = '{} could not be retrieve because of {}'.format(getter, e)
-                    print(output)
-                napalm_output.append(output)
+                    result = '{} could not be retrieve because of {}'.format(getter, e)
         except Exception as e:
-            output = 'could not be retrieve because of {}'.format(e)
-            napalm_output.append(output)
-            print(output)
-    return napalm_output
+            result = 'could not be retrieve because of {}'.format(e)
+        task.logs[job_time][name] = result
+    print(task.logs)
+    db.session.commit()
+
 
 ## Tasks
 
@@ -87,8 +98,11 @@ class Task(CustomBase):
     __tablename__ = 'Task'
     
     id = Column(Integer, primary_key=True)
-    name = Column(String(120))
+    type = Column(String)
+    name = Column(String(120), unique=True)
     creation_time = Column(Integer)
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    nodes = Column(MutableList.as_mutable(PickleType), default=[])
     
     # scheduling parameters
     frequency = Column(String(120))
@@ -125,11 +139,11 @@ class Task(CustomBase):
     def recurrent_scheduling(self):
         # run the job on a regular basis with an interval trigger
         id = scheduler.add_job(
-            id = self.creation_time,
+            id = self.name,
             func = self.job,
             args = self.args,
             trigger = 'interval',
-            seconds = 5,
+            seconds = 30,
             replace_existing = True
             )
 
@@ -138,7 +152,7 @@ class Task(CustomBase):
         # when date is used as a trigger and run_date is left undetermined, 
         # the job is executed immediately.
         id = scheduler.add_job(
-            id = self.creation_time,
+            id = self.name,
             func = self.job,
             args = self.args,
             trigger = 'date',
@@ -151,20 +165,21 @@ class NetmikoTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
-    def __init__(self, script, user, ips, **data):
-        
-        self.script = script
+    def __init__(self, user, targets, **data):
+        self.type = 'netmiko'
+        self.script_name = data['script']
         self.user = user
-        self.ips = ips
+        self.nodes = targets
         self.data = data
         self.job = netmiko_job
         self.args = [
-            self.script,
+            data['name'],
+            self.script_name,
             self.user.username,
             self.user.password,
-            self.ips,
-            self.data['driver'],
-            self.data['global_delay_factor'],
+            targets,
+            data['driver'],
+            data['global_delay_factor'],
             ]
         super(NetmikoTask, self).__init__(user, **data)
 
@@ -175,18 +190,20 @@ class NapalmConfigTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
-    def __init__(self, script, user, nodes_info, **data):
-        self.script = script
+    def __init__(self, user, targets, **data):
+        self.type = 'napalm_config'
+        self.script_name = data['script']
         self.user = user
-        self.nodes_info = nodes_info
+        self.nodes = targets
         self.data = data
         self.job = napalm_config_job
         self.args = [
-            self.script,
+            data['name'],
+            self.script_name,
             self.user.username,
             self.user.password,
-            self.nodes_info,
-            self.data['actions']
+            targets,
+            data['actions']
             ]
         super(NapalmConfigTask, self).__init__(user, **data)
 
@@ -197,15 +214,17 @@ class NapalmGettersTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
-    def __init__(self, user, nodes_info, **data):
+    def __init__(self, user, targets, **data):
+        self.type = 'napalm_getters'
         self.user = user
-        self.nodes_info = nodes_info
+        self.nodes = targets
         self.data = data
         self.job = napalm_getters_job
         self.args = [
+            data['name'],
             data['getters'],
             self.user.username,
             self.user.password,
-            self.nodes_info
+            targets
             ]
         super(NapalmGettersTask, self).__init__(user, **data)

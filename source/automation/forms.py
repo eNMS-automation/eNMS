@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
 from scheduling.forms import SchedulingForm
@@ -31,14 +32,28 @@ getters_mapping = OrderedDict([
 napalm_actions = OrderedDict([
 ('Load merge', 'load_merge_candidate'),
 ('Load replace', 'load_replace_candidate'),
-('Commit', 'commit_config'),
+# ('Commit', 'commit_config'),
 ('Discard', 'discard_config'),
 ('Rollback', 'rollback'),
 ])
 
+## Script creation
+
+class ScriptCreationForm(FlaskForm):
+    name = TextField('Name')
+    type_choices = (
+        ('simple', 'Simple'),
+        ('j2_template', 'Jinja2 template'),
+        ('per_device_j2', 'Per-device Jinja2 template')
+        )
+    type = SelectField('', [optional()], choices=type_choices)
+    text = TextAreaField('', [optional(), Length(max=200)])
+    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
+
 ## Forms for Netmiko
     
 class NetmikoForm(SchedulingForm):
+    script = SelectField('', [optional()], choices=())
     nodes = SelectMultipleField('', [optional()], choices=())
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
@@ -46,8 +61,6 @@ class NetmikoForm(SchedulingForm):
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', [optional()], choices=drivers)
     global_delay_factor = FloatField('global_delay_factor', [optional()], default=1.)
-    raw_script = TextAreaField('', [optional(), Length(max=200)])
-    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     nodes = SelectMultipleField('Nodes', choices=())
     
 ## Forms for NAPALM
@@ -59,10 +72,9 @@ class NapalmGettersForm(SchedulingForm):
     output = TextAreaField('', [optional()])
 
 class NapalmConfigurationForm(SchedulingForm):
+    script = SelectField('', [optional()], choices=())
     nodes = SelectMultipleField('', [optional()], choices=())
     action_choices = [(v, k) for k, v in napalm_actions.items()]
     actions = SelectField('Actions', [optional()], choices=action_choices)
-    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     nodes = SelectMultipleField('Nodes', choices=())
-    raw_script = TextAreaField('', [optional(), Length(max=200)])
     

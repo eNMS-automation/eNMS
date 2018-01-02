@@ -1,6 +1,6 @@
 from base.database import db
-from base.routes import _render_template
-from flask import Blueprint, current_app, request
+from base.properties import pretty_names
+from flask import Blueprint, current_app, render_template, request
 from flask_login import login_required
 from .forms import *
 from .models import *
@@ -29,8 +29,9 @@ def allowed_file(name, webpage):
 @login_required
 def objects():
     links = Link.query.all()
-    return _render_template(
-        'objects_overview.html', 
+    return render_template(
+        'objects_overview.html',
+        names = pretty_names,
         node_fields = node_public_properties, 
         nodes = Node.query.all(),
         link_fields = link_public_properties, 
@@ -101,7 +102,7 @@ def create_objects():
         db.session.commit()
     all_nodes = Node.choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
-    return _render_template(
+    return render_template(
         'create_object.html',
         add_node_form = add_node_form,
         add_nodes_form = add_nodes_form,
@@ -124,7 +125,7 @@ def delete_objects():
         db.session.commit()
     delete_objects_form.nodes.choices = Node.visible_objects()
     delete_objects_form.links.choices = Link.visible_objects()
-    return _render_template(
+    return render_template(
         'object_deletion.html',
         form = delete_objects_form
         )

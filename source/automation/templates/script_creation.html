@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} NAPALM getters {% endblock title %}
+{% block title %} Netmiko {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -11,13 +11,14 @@
     <div class="">
       
       <div class="clearfix"></div>
-
+      
+      <div class="row">
         <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
-        <div class="row">
-          <div class="col-md-6 col-xs-12">
+        
+          <div class="col-md-4 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h3>Task parameters</h3>
+                <h3>Parameters</h3>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
@@ -26,77 +27,56 @@
                 
                   <label>Name</label>
                   <div class='form-group'>
-                      {{ form.name(class="form-control") }}
+                      {{ form.name(class="form-control", required=true) }}
                   </div>
-
-                  <label>Devices</label>
+                  
+                  <label>Type</label>
                   <div class='form-group'>
-                      {{ form.nodes(class="form-control", size=9, required=true) }}
+                      {{ form.type(class="form-control") }}
                   </div>
-
-                  <label>Getters</label>
+                  
+                  <label>YAML file</label>
                   <div class='form-group'>
-                      {{ form.getters(class="form-control", size=9, required=true) }}
+                      {{ form.file() }}
                   </div>
                   
                   <div class="ln_solid"></div>
                   <div class="form-group">
-                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-4">
-                    
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                       <button class="btn btn-primary" type="reset">Reset</button>
-                      <button type="submit" class="btn btn-success" name="create_task">Create task</button>
-                      
+                      <button type="submit" class="btn btn-success" name="create_script">Create</button>
                     </div>
                   </div>
-                  
                 </div>
                 
               </div>
             </div>
           </div>
-          
-          <div class="col-md-6 col-xs-12">
+  
+          <div class="col-md-8 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h3>Scheduling</h3>
+                <h3>Script</h3>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
               
                 <div class="form-group" style="height: 550px">
-
-                  <label>Date</label>
-                  <div class='form-group'>
-                      {{ form.scheduled_date(class="form-control") }}
-                  </div>
+  
+                  {{ form.text(class="form-control", rows='26') }}
                   
-                  <label>Frequency (seconds)</label>
-                  <div class='form-group'>
-                      {{ form.frequency(class="form-control") }}
-                  </div>
-
                 </div>
               </div>
             </div>
           </div>
-          
+
         </form>
       </div>
-
+      
     </div>
   </div>
 {% endblock content %}
 
 {% block javascripts %}
   {{ super()}}
-    <!-- Initialize datetimepicker -->
-  <script src="{{ url_for('static', filename='vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
-<script>
-    $('#scheduled_date').datetimepicker({
-        format: 'DD/MM/YYYY HH:mm:ss',
-        useCurrent: false,
-    });
-    var today = new Date()
-    $('#scheduled_date').data("DateTimePicker").minDate(today);
-</script>
 {% endblock javascripts %}

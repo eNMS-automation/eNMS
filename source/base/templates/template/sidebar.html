@@ -12,7 +12,7 @@
     </div>
     <div class="profile_info">
       <span>Welcome,</span>
-      <h2>{{ user }}</h2>
+      <h2>{{ current_user.username }}</h2>
     </div>
   </div>
   <!-- /menu profile quick info -->
@@ -52,6 +52,7 @@
         </li>
         <li><a><i class="fa fa-keyboard-o"></i> Automation <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
+              <li><a href="/automation/script_creation">Script creation</a>
               <li><a href="/automation/netmiko">Netmiko</a>
               <li><a>Napalm<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">

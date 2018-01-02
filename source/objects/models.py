@@ -367,14 +367,5 @@ object_class = OrderedDict()
 for cls_dict in (node_class, link_class):
     object_class.update(cls_dict)
 
-def get_obj(app, model, **kwargs):
+def get_obj(db, model, **kwargs):
     return db.session.query(model).filter_by(**kwargs).first()
-
-# takes a list of values of a property for a given model [v1, v2, ..., vn]
-# and convert it to a list of values for another property for the same model
-def switch_properties(app, model, values, source_property, destination_property):
-    new_values = []
-    for value in values:
-        obj = get_obj(app, model, **{source_property: value})
-        new_values.append(getattr(obj, destination_property))
-    return new_values

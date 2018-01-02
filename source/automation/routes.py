@@ -1,10 +1,17 @@
 from __future__ import print_function
 from base.database import db
-from base.routes import _render_template
-from flask import Blueprint, current_app, redirect, request, url_for
+from flask import (
+    Blueprint,
+    current_app,
+    redirect,
+    render_template,
+    request,
+    url_for
+    )
 from flask_login import login_required, current_user
 from .forms import *
-from objects.models import get_obj, Node, switch_properties
+from .models import Script
+from objects.models import get_obj, Node
 from users.models import User
 from scheduling.models import *
 
@@ -15,46 +22,62 @@ blueprint = Blueprint(
     template_folder = 'templates'
     )
 
+def get_targets(nodes):
+    targets = []
+    print(nodes)
+    for name in nodes:
+        print(name)
+        obj = get_obj(db, Node, name=name)
+        targets.append((
+            name,
+            obj.ip_address, 
+            obj.operating_system.lower()
+            ))
+    return targets
+
+@blueprint.route('/script_creation', methods=['GET', 'POST'])
+@login_required
+def script_creation():
+    form = ScriptCreationForm(request.form)
+    if 'create_script' in request.form:
+        # retrieve the raw script: we will use it as-is or update it depending
+        # on the type of script (jinja2-enabled template or not)
+        content = request.form['text']
+        if form.data['type'] != 'simple':
+            filename = request.files['file'].filename
+            if 'file' in request.files and filename:
+                if allowed_file(filename, 'netmiko'):
+                    filename = secure_filename(filename)
+                    filepath = join(app.config['UPLOAD_FOLDER'], filename)
+                    with open(filepath, 'r') as f:
+                        parameters = load(f)
+                    template = Template(content)
+                    content = template.render(**parameters)
+                else:
+                    flash('file {}: format not allowed'.format(filename))
+        print(content)
+        script = Script(content, **request.form)
+        db.session.add(script)
+        db.session.commit()
+    return render_template(
+        'script_creation.html',
+        form = form
+        )
+
 @blueprint.route('/netmiko', methods=['GET', 'POST'])
 @login_required
 def netmiko():
     form = NetmikoForm(request.form)
-    # update the list of available nodes by querying the database
+    # update the list of available nodes / script by querying the database
     form.nodes.choices = Node.choices()
+    form.script.choices = Script.choices()
     if 'send' in request.form or 'create_task' in request.form:
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        filename = request.files['file'].filename
-        # retrieve the raw script: we will use it as-is or update it depending
-        # on whether a Jinja2 template was uploaded by the user or not
-        raw_script = request.form['raw_script']
-        if 'file' in request.files and filename:
-            if allowed_file(filename, 'netmiko'):
-                filename = secure_filename(filename)
-                filepath = join(app.config['UPLOAD_FOLDER'], filename)
-                with open(filepath, 'r') as f:
-                    parameters = load(f)
-                template = Template(raw_script)
-                script = template.render(**parameters)
-            else:
-                flash('file {}: format not allowed'.format(filename))
-        else:
-            script = raw_script
-        # we have a list of hostnames, we convert it to a list of IP addresses
-        # note: we have to use list of strings as we cannot pass actual objects
-        # to an AP Scheduler job.
-        node_ips = switch_properties(
-            current_app,
-            Node,
-            form.data['nodes'],
-            'name',
-            'ip_address'
-            )
-        netmiko_task = NetmikoTask(script, current_user, node_ips, **form.data)
-        db.session.add(netmiko_task)
+        targets = get_targets(form.data['nodes'])
+        task = NetmikoTask(current_user, targets, **form.data)
+        db.session.add(task)
         db.session.commit()
         return redirect(url_for('scheduling_blueprint.task_management'))
-    return _render_template(
+    return render_template(
         'netmiko.html',
         form = form
         )
@@ -63,21 +86,18 @@ def netmiko():
 @login_required
 def napalm_getters():
     form = NapalmGettersForm(request.form)
-    # update the list of available users / nodes by querying the database
+    # update the list of available nodes by querying the database
     form.nodes.choices = Node.choices()
-    if 'query' in request.form:
-        nodes_info = []
-        for name in form.data['nodes']:
-            obj = get_obj(current_app, Node, name=name)
-            nodes_info.append((obj.ip_address, obj.operating_system.lower()))
+    if 'create_task' in request.form:
+        targets = get_targets(form.data['nodes'])
         napalm_task = NapalmGettersTask(
             current_user,
-            nodes_info,
+            targets,
             **form.data
             )
         db.session.add(napalm_task)
         db.session.commit()
-    return _render_template(
+    return render_template(
         'napalm_getters.html',
         form = form
         )
@@ -86,36 +106,16 @@ def napalm_getters():
 @login_required
 def napalm_configuration():
     form = NapalmConfigurationForm(request.form)
-    # update the list of available users / nodes by querying the database
+    # update the list of available nodes / script by querying the database
     form.nodes.choices = Node.choices()
-    if 'send' in request.form:
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        filename = request.files['file'].filename
-        # retrieve the raw script: we will use it as-is or update it depending
-        # on whether a Jinja2 template was uploaded by the user or not
-        raw_script = request.form['raw_script']
-        if 'file' in request.files and filename:
-            if allowed_file(filename, 'netmiko'):
-                filename = secure_filename(filename)
-                filepath = join(app.config['UPLOAD_FOLDER'], filename)
-                with open(filepath, 'r') as f:
-                    parameters = load(f)
-                template = Template(raw_script)
-                script = template.render(**parameters)
-            else:
-                flash('file {}: format not allowed'.format(filename))
-        else:
-            script = raw_script
-        nodes_info = []
-        for name in form.data['nodes']:
-            obj = get_obj(current_app, Node, name=name)
-            nodes_info.append((obj.ip_address, obj.operating_system.lower()))
-        napalm_task = NapalmConfigTask(script, current_user, nodes_info, **form.data)
-        db.session.add(napalm_task)
+    form.script.choices = Script.choices()
+    if 'create_task' in request.form:
+        targets = get_targets(form.data['nodes'])
+        task = NapalmConfigTask(current_user, targets, **form.data)
+        db.session.add(task)
         db.session.commit()
         return redirect(url_for('scheduling_blueprint.task_management'))
-    return _render_template(
+    return render_template(
         'napalm_configuration.html',
         form = form
         )

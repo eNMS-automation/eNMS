@@ -1,4 +1,5 @@
-from flask import Blueprint, current_app, redirect, request, url_for
+from base.properties import pretty_names
+from flask import Blueprint, current_app, redirect, render_template, request, url_for
 from flask_login import login_required
 from .forms import *
 from .properties import user_search_properties
@@ -16,21 +17,18 @@ blueprint = Blueprint(
     template_folder = 'templates'
     )
 
-from base.routes import _render_template
 from base.database import db
 from .models import User
 
 tacacs_client = TACACSClient('10.253.60.125', 49, 'bts2007', timeout=10)
 
-
-
-
 @blueprint.route('/overview')
 @login_required
 def users():
-    return _render_template(
+    return render_template(
         'users_overview.html', 
-        fields = user_search_properties, 
+        fields = user_search_properties,
+        names = pretty_names, 
         users = User.query.all()
         )
 
@@ -50,7 +48,7 @@ def manage_users():
         db.session.commit()
     all_users = User.choices()
     delete_user_form.users.choices = all_users
-    return _render_template(
+    return render_template(
         'manage_users.html',
         add_user_form = add_user_form,
         delete_user_form = delete_user_form
@@ -62,7 +60,7 @@ def manage_users():
 def create_account():
     if request.method == 'GET':
         form = CreateAccountForm(request.form)
-        return _render_template('login/create_account.html', form=form)
+        return render_template('login/create_account.html', form=form)
     else:
         login_form = LoginForm(request.form)
         user = User(**request.form)
@@ -87,7 +85,7 @@ def login():
         return render_template('errors/page_403.html')
     if not flask_login.current_user.is_authenticated:
         login_form = LoginForm(request.form)
-        return _render_template('login/login.html', login_form=login_form)
+        return render_template('login/login.html', login_form=login_form)
     return redirect(url_for('base_blueprint.dashboard'))
 
 @blueprint.route('/logout')
@@ -105,7 +103,7 @@ def tacacs_server():
             request.form['password'],
             request.form['timeout']
             )
-    return _render_template(
+    return render_template(
         'tacacs_server.html', 
         form = TacacsServer(request.form)
         )

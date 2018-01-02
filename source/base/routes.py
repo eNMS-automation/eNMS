@@ -3,7 +3,6 @@ from ast import literal_eval
 from .forms import *
 from collections import Counter
 from flask import Blueprint, render_template, redirect, request, url_for
-
 from .properties import pretty_names
 
 import flask_login
@@ -14,20 +13,6 @@ blueprint = Blueprint(
     url_prefix = '', 
     template_folder = 'templates'
     )
-
-## custom template rendering
-
-# modified template rendering that includes the username as an argument
-# it is used by the sidebar as well as the top navigation 
-def _render_template(*args, **kwargs):
-    try: 
-        kwargs['user'] = flask_login.current_user.username
-    except AttributeError:
-        # 'AnonymousUserMixin' object has no attribute 'username'
-        pass
-    # add the mapping to pretty names for properties
-    kwargs['names'] = pretty_names
-    return render_template(*args, **kwargs)
 
 # from .database import db
 from main import app
@@ -73,8 +58,9 @@ def dashboard():
     'links': len(Link.query.all()),
     'users': len(User.query.all())
     }
-    return _render_template(
-        'home/dashboard.html', 
+    return render_template(
+        'home/dashboard.html',
+        names = pretty_names,
         node_counters = node_counters,
         link_counters = link_counters,
         counters = counters
@@ -91,7 +77,7 @@ def dashboard_control():
         user.dashboard_node_properties = str(diagram_properties_form.data['node_properties'])
         user.dashboard_link_properties = str(diagram_properties_form.data['link_properties'])
         db.session.commit()
-    return _render_template(
+    return render_template(
         'home/dashboard_control.html',
         diagram_properties_form = diagram_properties_form,
         )
@@ -99,7 +85,7 @@ def dashboard_control():
 @blueprint.route('/project')
 @flask_login.login_required
 def project():
-    return _render_template('about/project.html')
+    return render_template('about/project.html')
         
 ## Errors
 

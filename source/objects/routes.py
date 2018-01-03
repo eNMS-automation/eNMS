@@ -7,6 +7,7 @@ from .models import *
 from objects.models import node_class, Node, Link
 from os.path import join
 from .properties import *
+from re import search
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError

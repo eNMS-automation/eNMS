@@ -40,7 +40,11 @@ class Object(CustomBase):
 
     @classmethod
     def visible_objects(cls):
-        return [(obj, obj) for obj in cls.query.all() if obj.visible]
+        return (obj for obj in cls.query.all() if obj.visible)
+        
+    @classmethod
+    def visible_choices(cls):
+        return [(obj, obj) for obj in cls.visible_objects()]
 
     def __repr__(self):
         return str(self.name)

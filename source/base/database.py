@@ -68,9 +68,9 @@ def init_db():
     # import models
     Base.metadata.create_all(bind=engine)
     
-    from objects.models import Router
-    for hostname, (ip_address, operating_system) in napalm_dispatcher.items():
-        values = {'name': hostname, 'ip_address': ip_address, 'operating_system': operating_system}
-        device = Router(**values)
-        db.session.add(device)
-    db.session.commit()
+    # from objects.models import Router
+    # for hostname, (ip_address, operating_system) in napalm_dispatcher.items():
+    #     values = {'name': hostname, 'ip_address': ip_address, 'operating_system': operating_system}
+    #     device = Router(**values)
+    #     db.session.add(device)
+    # db.session.commit()

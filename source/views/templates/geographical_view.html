@@ -110,15 +110,15 @@
             
                 req.open('POST', '/views/export')
                 req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-                var id = document.getElementById('id').value
-                var postVars = 'id='+id
+                var ida = document.getElementById('ida').value
+                var postVars = 'id='+ida
                 req.send(postVars)
                 
                 return false
             }
             </script>
             <div class="modal-footer">
-                <input type='hidden' name='id' id='id' value='a'>
+                <input type='hidden' name='ida' id='ida' value='a'>
                 <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc2()'/>
             </div>
 

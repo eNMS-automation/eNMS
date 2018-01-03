@@ -24,6 +24,7 @@ blueprint = Blueprint(
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
+    form = ViewOptionsForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
     if request.method == 'POST':
         # retrieve labels
@@ -31,28 +32,9 @@ def view(view_type):
             'node': request.form['node_label'],
             'link': request.form['link_label']
             }
-        for obj in Node.query.all() + Link.query.all():
-            obj.visible = all(
-            # if the node-regex property is not in the request, the
-            # regex box is unticked and we only check that the values
-            # are equal.
-            str(value) == request.form[obj.class_type + property]
-            if not obj.class_type + property + 'regex' in request.form
-            # if it is ticked, we use re.search to check that the value
-            # of the node property matches the regular expression.
-            else search(request.form[obj.class_type + property], str(value))
-            for property, value in obj.__dict__.items()
-            # we consider only public properties
-            if property in obj.get_properties()
-            # providing that the property field in the form is not empty
-            # (empty field <==> property ignored)
-            and request.form[obj.class_type + property]
-            )
-    # the visible status was updated, we need to commit the change
-    db.session.commit()
     return render_template(
         '{}_view.html'.format(view_type), 
-        form = FilteringForm(request.form),
+        form = form,
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,

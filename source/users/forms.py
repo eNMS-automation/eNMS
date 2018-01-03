@@ -25,8 +25,8 @@ class AddUser(FlaskForm):
 class DeleteUser(FlaskForm):
     users = SelectMultipleField('Users', choices=())
 
-class TacacsServer(FlaskForm):
+class TacacsServerForm(FlaskForm):
     ip_address = TextField('IP address')
-    password = TextField('Password')
-    port = TextField('Port', default=49)
-    timeout = TextField('Timeout', default=10)
+    password = PasswordField('Password')
+    port = IntegerField('Port', default=49)
+    timeout = IntegerField('Timeout', default=10)

@@ -10,7 +10,7 @@ from objects.models import *
 from objects.properties import *
 from os.path import join
 from re import search
-# from simplekml import Color, Kml, Style
+from simplekml import Color, Kml, Style
 from subprocess import Popen
 
 blueprint = Blueprint(
@@ -56,31 +56,33 @@ def view(view_type):
 @blueprint.route('/putty_connection', methods = ['POST'])
 @login_required
 def putty_connection():
+    print(request.form)
     node = db.session.query(Node)\
         .filter_by(id=request.form['id'])\
         .first()
+    print(node)
     path_putty = join(current_app.path_apps, 'putty.exe')
     ssh_connection = '{} -ssh {}'.format(path_putty, node.ip_address)
     connect = Popen(ssh_connection.split())
     return jsonify(id=request.form['id'])
 
 ## Export to Google Earth
-# 
-# styles = {}
-# for subtype in node_subtypes:
-#     point_style = Style()
-#     point_style.labelstyle.color = Color.blue
-#     path_icon = join(path_source, 'views', 'static', 'images', 'default', '{}.gif'.format(subtype))
-#     point_style.iconstyle.icon.href = path_icon
-#     styles[subtype] = point_style
-#     
-# for subtype, cls in link_class.items():
-#     line_style = Style()
-#     # we convert the RGB color to a KML color, 
-#     # i.e #RRGGBB to #AABBGGRR
-#     kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
-#     line_style.linestyle.color = kml_color
-#     styles[subtype] = line_style
+
+styles = {}
+for subtype in node_subtypes:
+    point_style = Style()
+    point_style.labelstyle.color = Color.blue
+    path_icon = join(path_source, 'views', 'static', 'images', 'default', '{}.gif'.format(subtype))
+    point_style.iconstyle.icon.href = path_icon
+    styles[subtype] = point_style
+    
+for subtype, cls in link_class.items():
+    line_style = Style()
+    # we convert the RGB color to a KML color, 
+    # i.e #RRGGBB to #AABBGGRR
+    kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
+    line_style.linestyle.color = kml_color
+    styles[subtype] = line_style
 
 @blueprint.route('/export', methods = ['POST'])
 @login_required

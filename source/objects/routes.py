@@ -123,8 +123,8 @@ def delete_objects():
         db.session.query(Object).filter(Object.name.in_(link_selection))\
         .delete(synchronize_session='fetch')
         db.session.commit()
-    delete_objects_form.nodes.choices = Node.visible_objects()
-    delete_objects_form.links.choices = Link.visible_objects()
+    delete_objects_form.nodes.choices = Node.visible_choices()
+    delete_objects_form.links.choices = Link.visible_choices()
     return render_template(
         'object_deletion.html',
         form = delete_objects_form

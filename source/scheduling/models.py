@@ -1,7 +1,8 @@
 from base.database import db
 from base.helpers import str_dict
 from base.models import CustomBase
-from datetime import datetime
+from collections import defaultdict
+from datetime import datetime, timedelta
 from flask import current_app
 from flask_apscheduler import APScheduler
 from automation.models import Script
@@ -22,18 +23,32 @@ scheduler.start()
 ## Jobs
 
 def netmiko_job(name, script_name, username, password, ips, driver, global_delay_factor):
+    
+    job_time = str(datetime.now())
+    # print('u'*1000, name, Task.query.all())
+    task = db.session.query(Task)\
+        .filter_by(name=name)\
+        .first()
     script = db.session.query(Script)\
         .filter_by(name=script_name)\
         .first()
+    # task.logs = defaultdict(dict)
     for name, ip_address, _ in ips:
-        netmiko_handler = ConnectHandler(                
-            ip = ip_address,
-            device_type = driver,
-            username = username,
-            password = password,
-            global_delay_factor = global_delay_factor
-            )
-        netmiko_handler.send_config_set(script.content.splitlines())
+        try:
+            netmiko_handler = ConnectHandler(                
+                ip = ip_address,
+                device_type = driver,
+                username = username,
+                password = password,
+                global_delay_factor = global_delay_factor
+                )
+            netmiko_handler.send_config_set(script.content.splitlines())
+        except Exception as e:
+            result = 'netmiko config did not work because of {}'.format(e)
+        else:
+            result = 'configuration OK'
+        task.logs[job_time][name] = result
+    db.session.commit()
 
 def napalm_connection(ip_address, username, password, driver, optional_args):
     napalm_driver = get_network_driver(driver)
@@ -47,29 +62,44 @@ def napalm_connection(ip_address, username, password, driver, optional_args):
     return connection
 
 def napalm_config_job(name, script_name, username, password, nodes_info, action):
-    script = db.session.query(Script)\
-        .filter_by(name=script_name)\
-        .first()
-    for name, ip_address, driver in nodes_info:
-        napalm_driver = napalm_connection(
-            ip_address, 
-            username,
-            password,
-            driver,
-            {'secret': 'cisco'}
-            )
-        if action in ('load_merge_candidate', 'load_replace_candidate'):
-            getattr(napalm_driver, action)(config=script.content)
-            napalm_driver.commit_config()
-        else:
-            getattr(napalm_driver, action)()
-
-def napalm_getters_job(name, getters, username, password, nodes_info):
+    
     job_time = str(datetime.now())
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    task.logs[job_time] = {}
+    script = db.session.query(Script)\
+        .filter_by(name=script_name)\
+        .first()
+    task.logs = defaultdict(dict)
+    for name, ip_address, driver in nodes_info:
+        try:
+            napalm_driver = napalm_connection(
+                ip_address, 
+                username,
+                password,
+                driver,
+                {'secret': 'cisco'}
+                )
+            if action in ('load_merge_candidate', 'load_replace_candidate'):
+                getattr(napalm_driver, action)(config=script.content)
+                napalm_driver.commit_config()
+            else:
+                getattr(napalm_driver, action)()
+        except Exception as e:
+            result = 'netmiko config did not work because of {}'.format(e)
+        else:
+            result = 'configuration OK'
+        task.logs[job_time][name] = result
+    db.session.commit()
+
+
+def napalm_getters_job(name, getters, username, password, nodes_info):
+    
+    job_time = str(datetime.now())
+    task = db.session.query(Task)\
+        .filter_by(name=name)\
+        .first()
+    task.logs = defaultdict(dict)
     for name, ip_address, driver in nodes_info:
         try:
             napalm_driver = napalm_connection(
@@ -87,7 +117,6 @@ def napalm_getters_job(name, getters, username, password, nodes_info):
         except Exception as e:
             result = 'could not be retrieve because of {}'.format(e)
         task.logs[job_time][name] = result
-    print(task.logs)
     db.session.commit()
 
 
@@ -101,7 +130,7 @@ class Task(CustomBase):
     type = Column(String)
     name = Column(String(120), unique=True)
     creation_time = Column(Integer)
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    logs = Column(MutableDict.as_mutable(PickleType), default=defaultdict(dict))
     nodes = Column(MutableList.as_mutable(PickleType), default=[])
     
     # scheduling parameters
@@ -112,6 +141,7 @@ class Task(CustomBase):
     creator = Column(String)
     
     def __init__(self, user, **data):
+        print('s'*1000, data['name'])
         self.name = data['name']
         self.frequency = data['frequency']
         self.creation_time = str(datetime.now())
@@ -143,7 +173,7 @@ class Task(CustomBase):
             func = self.job,
             args = self.args,
             trigger = 'interval',
-            seconds = 30,
+            seconds = 40,
             replace_existing = True
             )
 
@@ -153,6 +183,13 @@ class Task(CustomBase):
         # the job is executed immediately.
         id = scheduler.add_job(
             id = self.name,
+            # when the job is scheduled to run immediately, it may happen that
+            # the job is run even before the task is created, in which case
+            # it fails because it cannot be retrieve from the Task column of 
+            # the database: we introduce a delta of 2 seconds.
+            # other situation: the server is too slow and the job cannot be
+            # run at all: 'job was missed by 0:00:09.465684'
+            run_date = datetime.now() + timedelta(seconds=30),
             func = self.job,
             args = self.args,
             trigger = 'date',
@@ -172,6 +209,7 @@ class NetmikoTask(Task):
         self.nodes = targets
         self.data = data
         self.job = netmiko_job
+        print('t'*1000, data['name'])
         self.args = [
             data['name'],
             self.script_name,

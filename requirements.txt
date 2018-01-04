@@ -10,4 +10,4 @@ simplekml
 tacacs_plus
 wtforms
 xlrd
-yaml
+pyyaml

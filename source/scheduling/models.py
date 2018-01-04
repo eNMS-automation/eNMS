@@ -23,16 +23,14 @@ scheduler.start()
 ## Jobs
 
 def netmiko_job(name, script_name, username, password, ips, driver, global_delay_factor):
-    
     job_time = str(datetime.now())
-    # print('u'*1000, name, Task.query.all())
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
     script = db.session.query(Script)\
         .filter_by(name=script_name)\
         .first()
-    # task.logs = defaultdict(dict)
+    task.logs[job_time] = {}
     for name, ip_address, _ in ips:
         try:
             netmiko_handler = ConnectHandler(                
@@ -56,13 +54,12 @@ def napalm_connection(ip_address, username, password, driver, optional_args):
         hostname = ip_address, 
         username = username,
         password = password,
-        optional_args = optional_args
+        optional_args = {'secret': 'cisco'}
         )
     connection.open()
     return connection
 
 def napalm_config_job(name, script_name, username, password, nodes_info, action):
-    
     job_time = str(datetime.now())
     task = db.session.query(Task)\
         .filter_by(name=name)\
@@ -70,7 +67,7 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
     script = db.session.query(Script)\
         .filter_by(name=script_name)\
         .first()
-    task.logs = defaultdict(dict)
+    task.logs[job_time] = {}
     for name, ip_address, driver in nodes_info:
         try:
             napalm_driver = napalm_connection(
@@ -92,14 +89,12 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
         task.logs[job_time][name] = result
     db.session.commit()
 
-
 def napalm_getters_job(name, getters, username, password, nodes_info):
-    
     job_time = str(datetime.now())
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    task.logs = defaultdict(dict)
+    task.logs[job_time] = {}
     for name, ip_address, driver in nodes_info:
         try:
             napalm_driver = napalm_connection(
@@ -130,7 +125,7 @@ class Task(CustomBase):
     type = Column(String)
     name = Column(String(120), unique=True)
     creation_time = Column(Integer)
-    logs = Column(MutableDict.as_mutable(PickleType), default=defaultdict(dict))
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
     nodes = Column(MutableList.as_mutable(PickleType), default=[])
     
     # scheduling parameters
@@ -189,7 +184,7 @@ class Task(CustomBase):
             # the database: we introduce a delta of 2 seconds.
             # other situation: the server is too slow and the job cannot be
             # run at all: 'job was missed by 0:00:09.465684'
-            run_date = datetime.now() + timedelta(seconds=30),
+            run_date = datetime.now() + timedelta(seconds=2),
             func = self.job,
             args = self.args,
             trigger = 'date',

@@ -1,9 +1,13 @@
 flask
-flask_wtf
+flask_apscheduler
+flask_login
 flask_sqlalchemy
+flask_wtf
 napalm
 netmiko
 jinja2
+simplekml
+tacacs_plus
 wtforms
 xlrd
 yaml

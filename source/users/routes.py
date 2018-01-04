@@ -1,5 +1,5 @@
 from base.properties import pretty_names
-from flask import Blueprint, current_app, redirect, render_template, request, url_for
+from flask import Blueprint, current_app, redirect, render_template, request, session, url_for
 from flask_login import login_required
 from .forms import *
 from .properties import user_search_properties
@@ -19,8 +19,6 @@ blueprint = Blueprint(
 
 from base.database import db
 from .models import User
-
-tacacs_client = TACACSClient('10.253.60.125', 49, 'bts2007', timeout=10)
 
 @blueprint.route('/overview')
 @login_required
@@ -54,7 +52,7 @@ def manage_users():
         delete_user_form = delete_user_form
         )
 
-## login / registration
+## Login & Registration
 
 @blueprint.route('/create_account', methods=['GET', 'POST'])
 def create_account():
@@ -71,17 +69,37 @@ def create_account():
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username, password = str(request.form['username']), str(request.form['password'])
+        username = str(request.form['username'])
+        password = str(request.form['password'])
         user = db.session.query(User).filter_by(username=username).first()
         if user and password == user.password:
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
-        elif tacacs_client.authenticate(username, password, TAC_PLUS_AUTHEN_TYPE_ASCII).valid:
-            user = User(username=username, password=password)
-            db.session.add(user)
-            db.session.commit()
-            flask_login.login_user(user)
-            return redirect(url_for('base_blueprint.dashboard'))
+        else:
+            try:
+                # tacacs_plus does not support py2 unicode, hence the 
+                # conversion to string. 
+                # TACACSClient cannot be saved directly to session
+                # as it is not serializable: this temporary fixes will create
+                # a new instance of TACACSClient at each TACACS connection 
+                # attemp: clearly suboptimal, to be improved later.
+                tacacs_client = TACACSClient(
+                    str(session['ip_address']),
+                    int(session['port']),
+                    str(session['password'])
+                    )
+                if tacacs_client.authenticate(
+                    username,
+                    password,
+                    TAC_PLUS_AUTHEN_TYPE_ASCII
+                    ).valid:
+                    user = User(username=username, password=password)
+                    db.session.add(user)
+                    db.session.commit()
+                    flask_login.login_user(user)
+                    return redirect(url_for('base_blueprint.dashboard'))
+            except KeyError:
+                pass
         return render_template('errors/page_403.html')
     if not flask_login.current_user.is_authenticated:
         login_form = LoginForm(request.form)
@@ -97,13 +115,10 @@ def logout():
 @login_required
 def tacacs_server():
     if request.method == 'POST':
-        tacacs_client = TACACSClient(
-            request.form['ip_address'],
-            request.form['port'],
-            request.form['password'],
-            request.form['timeout']
-            )
+        session['ip_address'] = request.form['ip_address']
+        session['port'] = int(request.form['port'])
+        session['password'] = request.form['password']
     return render_template(
         'tacacs_server.html', 
-        form = TacacsServer(request.form)
+        form = TacacsServerForm(request.form)
         )

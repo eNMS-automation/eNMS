@@ -15,7 +15,7 @@ blueprint = Blueprint(
     )
 
 # from .database import db
-from main import app
+from flask_app import app
 from objects.models import Node, Link
 from users.models import User
 

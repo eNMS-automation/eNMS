@@ -5,7 +5,7 @@ from flask import Blueprint, current_app, jsonify, render_template, request, sen
 from flask_login import login_required
 from .forms import *
 from functools import partial
-from main import path_source
+from flask_app import path_source
 from objects.models import *
 from objects.properties import *
 from os.path import join

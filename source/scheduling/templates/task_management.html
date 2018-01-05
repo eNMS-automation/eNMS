@@ -24,34 +24,58 @@
               <table class="table table-striped projects">
                 <thead>
                   <tr>
-                    <th style="width: 1%">ID</th>
-                    <th style="width: 15%">Task name</th>
+                    <th style="width: 1%">Name</th>
+                    <th style="width: 15%">Creation time</th>
+                    <th style="width: 1%">Type</th>
                     <th>Creator</th>
-                    <th style="width: 10%">Next run</th>
-                    <th>Status</th>
-                    <th style="width: 20%">Edit</th>
-                    <th style="width: 10%">Logs</th>
-                    <th style="width: 20%">Delete</th>
-                    <th style="width: 20%">Pause / Resume</th>
+                    <th style="width: 10%">Status</th>
+                    <th style="width: 15%">Logs</th>
+                    <th style="width: 15%">Compare</th>
+                    <th style="width: 15%">Edit</th>
+                    <th style="width: 15%">Delete</th>
+                    <th style="width: 30%">Pause / Resume</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for task in tasks %}
                   <tr>
-                    <td>{{ task.id }}</td>
                     <td>
                       <a>{{ task.name }}</a>
-                      <br />
-                      <small>Created {{ task.creation_time }}</small>
+                    </td>
+                    <td>{{ task.creation_time }}</td>
+                    <td>
+                      {{ task.type }}
                     </td>
                     <td>
-                      <img src="/static/images/user.png" title="{{ task.creator }}" class="avatar" alt="Avatar">
-                    </td>
-                    <td>
-                      <small>57% Complete</small>
+                      {{ task.creator }}
                     </td>
                     <td>
                       <button type="button" class="btn btn-success btn-xs">Active</button>
+                    </td>
+                    <td>
+                      <div class="modal fade logs-{{ task.name }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+              
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                              </button>
+                              <h4 class="modal-title" id="myModalLabel">Logs</h4>
+                            </div>
+                            
+                            
+                            <div class="modal-body">
+
+                            {{ task.logs }}
+
+                            
+                            </div>
+                          
+
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".logs-{{ task.name }}"><i class="fa fa-pencil"></i> Logs </a></button>
                     </td>
                     <td>
                       <form>
@@ -93,8 +117,7 @@
                                     {{ form_per_task[task.name].second_version(class="form-control") }}
                                   </div>
                                 </div>
-                              {% else %}
-                              {{ task.logs }}
+                                {{ task.logs }}
                               {% endif %}
                               
                               </div>
@@ -114,7 +137,7 @@
 
                     </td>
                     <td>
-                      <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                      <a href="" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     </td>
                     <td>
                       <form action="/scheduling/delete_task" method='post'>
@@ -124,7 +147,7 @@
                     </td>
                     <td>
                       {% if task.frequency %}
-                        {% if task.status == 'Active' %}
+                        {% if task.status == 'active' %}
                         <form action="/scheduling/pause_task" method='post'>
                         <input type="hidden" name="task_name" value={{ task.name }} />
                         <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>

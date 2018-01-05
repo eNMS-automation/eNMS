@@ -31,9 +31,9 @@
                     <div class="form-group">
                       <h5 class="modal-title">Labels</h5><br>
                       
-                      {{ form.node_label(id="node_label", class="form-control") }}<br>
+                      {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
 
-                      {{ form.link_label(id="link_label", class="form-control") }}
+                      {{ view_options_form.link_label(id="link_label", class="form-control") }}
                       
                     </div>
 
@@ -54,7 +54,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success" name="filter">Submit</button>
+              <button type="submit" class="btn btn-success" name="view_options">Submit</button>
             </div>
 
             </form>
@@ -75,57 +75,43 @@
             </div>
             <div class="modal-body">
             
-              
-              
-                    <div class="form-group">
-                      <h5 class="modal-title">Labels</h5><br>
+              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
 
-                    </div>
-              
-                    <div class="form-group">
-                    
-
-                    </div>
-
-              
-            </div>
-            <script>
-            function loadXMLDoc2()
-            {
-                var req = new XMLHttpRequest()
-                req.onreadystatechange = function()
-                {
-                    if (req.readyState == 4)
-                    {
-                        if (req.status != 200)
-                        {
-                            //error handling code here
-                        }
-                        else
-                        {
-                            var response = JSON.parse(req.responseText)
-                        }
-                    }
-                }
-            
-                req.open('POST', '/views/export')
-                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-                var ida = document.getElementById('ida').value
-                var postVars = 'id='+ida
-                req.send(postVars)
+                <div class="form-group">
                 
-                return false
-            }
-            </script>
-            <div class="modal-footer">
-                <input type='hidden' name='ida' id='ida' value='a'>
-                <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc2()'/>
+                  <label>Project name</label>
+                  <div class='form-group'>
+                    {{ google_earth_form.name(class="form-control", required=true) }}
+                  </div>
+
+                  <label>Label size:</label>
+                  <div class='form-group'>
+                    {{ google_earth_form.label_size(class="form-control", required=true) }}
+                  </div>
+
+                  <label>Line width:</label>
+                  <div class='form-group'>
+                    {{ google_earth_form.line_width(class="form-control", required=true) }}
+                  </div>
+
+                </div>
+                
+              
+
+              
             </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="google_earth">Submit</button>
+            </div>
+            
+            </form>
 
           </div>
         </div>
       </div>
-
 
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">

@@ -38,7 +38,9 @@ def netmiko_job(name, script_name, username, password, ips, driver, global_delay
                 device_type = driver,
                 username = username,
                 password = password,
-                global_delay_factor = global_delay_factor
+                global_delay_factor = global_delay_factor,
+                timeout = 200,
+                session_timeout = 200
                 )
             netmiko_handler.send_config_set(script.content.splitlines())
         except Exception as e:
@@ -141,13 +143,18 @@ class Task(CustomBase):
         self.frequency = data['frequency']
         self.creation_time = str(datetime.now())
         self.creator = user.username
-        # by default, a task is active but it can be pause
-        self.is_active = True
+        # if the scheduled date is left empty, we turn the empty string into
+        # None as this is what AP Scheduler is expecting
         if data['scheduled_date']:
+            self.scheduled_date = self.datetime_conversion(data['scheduled_date'])
+        else:
+            self.scheduled_date = None
+        self.is_active = True
+        if data['frequency']:
             self.scheduled_date = self.datetime_conversion(data['scheduled_date'])
             self.recurrent_scheduling()
         else:
-            self.instant_scheduling()
+            self.one_time_scheduling()
 
     def datetime_conversion(self, scheduled_date):
         dt = datetime.strptime(scheduled_date, '%d/%m/%Y %H:%M:%S')
@@ -162,17 +169,22 @@ class Task(CustomBase):
         self.status = "Active"
 
     def recurrent_scheduling(self):
+        if not self.scheduled_date:
+            self.scheduled_date = datetime.now() + timedelta(seconds=40)
         # run the job on a regular basis with an interval trigger
         id = scheduler.add_job(
             id = self.name,
             func = self.job,
             args = self.args,
             trigger = 'interval',
-            seconds = 40,
+            start_date = self.scheduled_date,
+            seconds = int(self.frequency),
             replace_existing = True
             )
 
-    def instant_scheduling(self):
+    def one_time_scheduling(self):
+        if not self.scheduled_date:
+            self.scheduled_date = datetime.now() + timedelta(seconds=40)
         # execute the job immediately with a date-type job
         # when date is used as a trigger and run_date is left undetermined, 
         # the job is executed immediately.
@@ -184,17 +196,17 @@ class Task(CustomBase):
             # the database: we introduce a delta of 2 seconds.
             # other situation: the server is too slow and the job cannot be
             # run at all: 'job was missed by 0:00:09.465684'
-            run_date = datetime.now() + timedelta(seconds=2),
+            run_date = self.scheduled_date,
             func = self.job,
             args = self.args,
-            trigger = 'date',
+            trigger = 'date'
             )
 
 class NetmikoTask(Task):
     
     __tablename__ = 'NetmikoTask'
     
-    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True, autoincrement=True)
     script = Column(String)
     
     def __init__(self, user, targets, **data):

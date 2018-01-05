@@ -137,22 +137,31 @@ def filter_objects():
     form = FilteringForm(request.form)
     if request.method == 'POST':
         for obj in Node.query.all() + Link.query.all():
+            # source and destination do not belong to a link __dict__, because
+            # they are SQLalchemy relationships and not columns
+            # we update __dict__ with these properties for the filtering
+            # system to work
+            if obj.class_type == 'link':
+                obj.__dict__.update({
+                    'source': obj.source,
+                    'destination': obj.destination
+                    })
             obj.visible = all(
-            # if the node-regex property is not in the request, the
-            # regex box is unticked and we only check that the values
-            # are equal.
-            str(value) == request.form[obj.class_type + property]
-            if not obj.class_type + property + 'regex' in request.form
-            # if it is ticked, we use re.search to check that the value
-            # of the node property matches the regular expression.
-            else search(request.form[obj.class_type + property], str(value))
-            for property, value in obj.__dict__.items()
-            # we consider only public properties
-            if property in obj.get_properties()
-            # providing that the property field in the form is not empty
-            # (empty field <==> property ignored)
-            and request.form[obj.class_type + property]
-            )
+                # if the node-regex property is not in the request, the
+                # regex box is unticked and we only check that the values
+                # are equal.
+                str(value) == request.form[obj.class_type + property]
+                if not obj.class_type + property + 'regex' in request.form
+                # if it is ticked, we use re.search to check that the value
+                # of the node property matches the regular expression.
+                else search(request.form[obj.class_type + property], str(value))
+                for property, value in obj.__dict__.items()
+                # we consider only public properties
+                if property in obj.get_properties()
+                # providing that the property field in the form is not empty
+                # (empty field <==> property ignored)
+                and request.form[obj.class_type + property]
+                )
     # the visible status was updated, we need to commit the change
     db.session.commit()
     return render_template(

@@ -16,7 +16,7 @@ if path_app not in sys.path:
 path_source = os.path.dirname(os.path.abspath(__file__))
 path_parent = abspath(join(path_source, pardir))
 
-from base.database import db, init_db
+from base.database import db, create_database
 from scheduling.models import scheduler
 from users.routes import login_manager
 
@@ -29,7 +29,6 @@ def initialize_paths(app):
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
-    # scheduler.init_app(app)
 
 def register_blueprints(app):
     for name in ('base', 'users', 'objects', 'views', 'automation', 'scheduling'):
@@ -48,12 +47,11 @@ def configure_login_manager(app, User):
         return user if user else None
 
 def configure_database(app):
-
+    create_database()
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
-    
-    init_db()
+
 
 def configure_logs(app):
     if not app.debug:

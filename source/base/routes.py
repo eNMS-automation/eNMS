@@ -14,10 +14,9 @@ blueprint = Blueprint(
     template_folder = 'templates'
     )
 
-# from .database import db
-from flask_app import app
 from objects.models import Node, Link
 from users.models import User
+from users.routes import login_manager
 
 ## root of the site
 
@@ -89,7 +88,7 @@ def project():
         
 ## Errors
 
-@app.login_manager.unauthorized_handler
+@login_manager.unauthorized_handler
 def unauthorized_handler():
     return render_template('errors/page_403.html')
 

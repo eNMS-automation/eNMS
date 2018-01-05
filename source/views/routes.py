@@ -5,7 +5,6 @@ from flask import Blueprint, current_app, jsonify, render_template, request, sen
 from flask_login import login_required
 from .forms import *
 from functools import partial
-from flask_app import path_source
 from objects.models import *
 from objects.properties import *
 from os.path import join
@@ -20,20 +19,65 @@ blueprint = Blueprint(
     static_folder = 'static'
     )
 
+# styles = {}
+# for subtype in node_subtypes:
+#     point_style = Style()
+#     point_style.labelstyle.color = Color.blue
+#     path_icon = join(
+#         blueprint.root_path,
+#         'static',
+#         'images',
+#         'default',
+#         '{}.gif'.format(subtype)
+#         )
+#     point_style.iconstyle.icon.href = path_icon
+#     styles[subtype] = point_style
+#     
+# for subtype, cls in link_class.items():
+#     line_style = Style()
+#     # we convert the RGB color to a KML color, 
+#     # i.e #RRGGBB to #AABBGGRR
+#     kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
+#     line_style.linestyle.color = kml_color
+#     styles[subtype] = line_style
+
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
-    form = ViewOptionsForm(request.form)
+    view_options_form = ViewOptionsForm(request.form)
+    google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
-    if request.method == 'POST':
+    if 'view_options' in request.form:
         # retrieve labels
         labels = {
             'node': request.form['node_label'],
             'link': request.form['link_label']
             }
+    elif 'google_earth' in request.form:
+        kml_file = Kml()
+        
+        for node in filter(lambda obj: obj.visible, Node.query.all()):
+            point = kml_file.newpoint(name=node.name)
+            point.coords = [(node.longitude, node.latitude)]
+            point.style = styles[node.subtype]
+            point.style.labelstyle.scale = request.form['label_size']
+            
+        for link in filter(lambda obj: obj.visible, Link.query.all()):
+            line = kml_file.newlinestring(name=link.name) 
+            line.coords = [
+                (link.source.longitude, link.source.latitude),
+                (link.destination.longitude, link.destination.latitude)
+                ]
+            line.style = styles[link.type]
+            line.style.linestyle.width = request.form['line_width']
+        
+        filepath = join(current_app.kmz_path, request.form['name'] + '.kmz')
+        kml_file.save(filepath)
+        
     return render_template(
         '{}_view.html'.format(view_type), 
-        form = form,
+        view_options_form = view_options_form,
+        google_earth_form = google_earth_form,
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,
@@ -59,50 +103,7 @@ def putty_connection():
     node = db.session.query(Node)\
         .filter_by(id=request.form['id'])\
         .first()
-    print(node)
     path_putty = join(current_app.path_apps, 'putty.exe')
     ssh_connection = '{} -ssh {}'.format(path_putty, node.ip_address)
     connect = Popen(ssh_connection.split())
-    return jsonify(id=request.form['id'])
-
-## Export to Google Earth
-
-# styles = {}
-# for subtype in node_subtypes:
-#     point_style = Style()
-#     point_style.labelstyle.color = Color.blue
-#     path_icon = join(path_source, 'views', 'static', 'images', 'default', '{}.gif'.format(subtype))
-#     point_style.iconstyle.icon.href = path_icon
-#     styles[subtype] = point_style
-#     
-# for subtype, cls in link_class.items():
-#     line_style = Style()
-#     # we convert the RGB color to a KML color, 
-#     # i.e #RRGGBB to #AABBGGRR
-#     kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
-#     line_style.linestyle.color = kml_color
-#     styles[subtype] = line_style
-
-@blueprint.route('/export', methods = ['POST'])
-@login_required
-def export():
-    kml_file = Kml()
-    
-    for node in filter(lambda obj: obj.visible, Node.query.all()):
-        point = kml_file.newpoint(name=node.name)
-        point.coords = [(node.longitude, node.latitude)]
-        point.style = styles[node.subtype]
-        point.style.labelstyle.scale = 0
-        
-    for link in filter(lambda obj: obj.visible, Link.query.all()):
-        line = kml_file.newlinestring(name=link.name) 
-        line.coords = [
-            (link.source.longitude, link.source.latitude),
-            (link.destination.longitude, link.destination.latitude)
-            ]
-        line.style = styles[link.type]
-        line.style.linestyle.width = 1
-    
-    filepath = join(current_app.kmz_path, 'test.kmz')
-    kml_file.save(filepath)
     return jsonify(id=request.form['id'])

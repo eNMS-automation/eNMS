@@ -43,6 +43,7 @@ def netmiko_job(name, script_name, username, password, ips, driver, global_delay
                 session_timeout = 200
                 )
             netmiko_handler.send_config_set(script.content.splitlines())
+            netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
         else:
@@ -84,6 +85,7 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
                 napalm_driver.commit_config()
             else:
                 getattr(napalm_driver, action)()
+            napalm_driver.close()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
         else:
@@ -126,6 +128,7 @@ class Task(CustomBase):
     id = Column(Integer, primary_key=True)
     type = Column(String)
     name = Column(String(120), unique=True)
+    status = Column(String)
     creation_time = Column(Integer)
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     nodes = Column(MutableList.as_mutable(PickleType), default=[])
@@ -143,6 +146,7 @@ class Task(CustomBase):
         self.frequency = data['frequency']
         self.creation_time = str(datetime.now())
         self.creator = user.username
+        self.status = 'active'
         # if the scheduled date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting
         if data['scheduled_date']:
@@ -151,7 +155,6 @@ class Task(CustomBase):
             self.scheduled_date = None
         self.is_active = True
         if data['frequency']:
-            self.scheduled_date = self.datetime_conversion(data['scheduled_date'])
             self.recurrent_scheduling()
         else:
             self.one_time_scheduling()
@@ -162,11 +165,13 @@ class Task(CustomBase):
                 
     def pause_task(self):
         scheduler.pause_job(self.name)
-        self.status = 'Suspended'
+        self.status = 'suspended'
+        db.session.commit()
         
     def resume_task(self):
         scheduler.resume_job(self.name)
-        self.status = "Active"
+        self.status = "active"
+        db.session.commit()
 
     def recurrent_scheduling(self):
         if not self.scheduled_date:
@@ -181,6 +186,7 @@ class Task(CustomBase):
             seconds = int(self.frequency),
             replace_existing = True
             )
+        print(id)
 
     def one_time_scheduling(self):
         if not self.scheduled_date:
@@ -216,7 +222,6 @@ class NetmikoTask(Task):
         self.nodes = targets
         self.data = data
         self.job = netmiko_job
-        print('t'*1000, data['name'])
         self.args = [
             data['name'],
             self.script_name,

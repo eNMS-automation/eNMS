@@ -2,7 +2,7 @@ from base.database import db
 from flask import Blueprint, render_template, request
 from flask_login import login_required
 from .forms import CompareGettersForm
-from .models import Task
+from .models import Task, scheduler
 
 blueprint = Blueprint(
     'scheduling_blueprint', 

@@ -14,7 +14,8 @@ blueprint = Blueprint(
     'users_blueprint', 
     __name__, 
     url_prefix = '/users', 
-    template_folder = 'templates'
+    template_folder = 'templates',
+    static_folder = 'static'
     )
 
 from base.database import db
@@ -109,7 +110,7 @@ def login():
 @blueprint.route('/logout')
 def logout():
     flask_login.logout_user()
-    return 'Logged out'
+    return redirect(url_for('users_blueprint.login'))
 
 @blueprint.route('/tacacs_server', methods=['GET', 'POST'])
 @login_required

@@ -220,13 +220,13 @@ class Link(Object):
     source = relationship(
         Node,
         primaryjoin = source_id == Node.id,
-        backref = 'sources'
+        backref = 'source'
         )
 
     destination = relationship(
         Node,
         primaryjoin = destination_id == Node.id,
-        backref = 'destinations'
+        backref = 'destination'
         )
         
     properties = OrderedDict([

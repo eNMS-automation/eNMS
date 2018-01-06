@@ -324,25 +324,10 @@ if (typeof NProgress != 'undefined') {
 				});
 				
 			};
-	   
-		/* DATA TABLES */
-			
-			function init_DataTables() {
-				
-				console.log('run_datatables');
-				
-				if( typeof ($.fn.DataTable) === 'undefined'){ return; }
-				console.log('init_DataTables');
-
-				$('#datatable-node-responsive').DataTable();
-				$('#datatable-link-responsive').DataTable();
-
-			};
 
 	$(document).ready(function() {
 		init_sidebar();
 		init_parsley();
-		init_DataTables();
 		init_calendar();
 	});	
 	

@@ -79,4 +79,8 @@
   <!-- Datatables -->
   <script src="{{ url_for('objects_blueprint.static', filename='datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ url_for('objects_blueprint.static', filename='datatables/dataTables.bootstrap.min.js') }}"></script>
+  <script>
+    $('#datatable-node-responsive').DataTable();
+    $('#datatable-link-responsive').DataTable();
+	</script>
 {% endblock javascripts %}

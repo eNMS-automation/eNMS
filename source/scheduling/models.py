@@ -8,7 +8,7 @@ from flask_apscheduler import APScheduler
 from automation.models import Script
 from netmiko import ConnectHandler
 from objects.models import get_obj
-from sqlalchemy import Column, ForeignKey, Integer, String, PickleType
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 # napalm pre and post-reunification compatibility
@@ -50,7 +50,7 @@ def netmiko_job(name, type, script_name, username, password, ips,
             else:
                 outputs = []
                 for show_command in script.content.splitlines():
-                    outputs.append(netmiko_handler.send_commad(show_command))
+                    outputs.append(netmiko_handler.send_command(show_command))
                 result = '\n\n'.join(outputs)
             netmiko_handler.disconnect()
         except Exception as e:
@@ -134,6 +134,7 @@ class Task(CustomBase):
     
     id = Column(Integer, primary_key=True)
     type = Column(String)
+    recurrent = Column(Boolean, default=False)
     name = Column(String(120), unique=True)
     status = Column(String)
     creation_time = Column(Integer)
@@ -148,9 +149,9 @@ class Task(CustomBase):
     creator = Column(String)
     
     def __init__(self, user, **data):
-        print('s'*1000, data['name'])
         self.name = data['name']
         self.frequency = data['frequency']
+        self.recurrent = bool(data['frequency'])
         self.creation_time = str(datetime.now())
         self.creator = user.username
         self.status = 'active'
@@ -197,18 +198,19 @@ class Task(CustomBase):
 
     def one_time_scheduling(self):
         if not self.scheduled_date:
-            self.scheduled_date = datetime.now() + timedelta(seconds=40)
-        # execute the job immediately with a date-type job
-        # when date is used as a trigger and run_date is left undetermined, 
-        # the job is executed immediately.
-        id = scheduler.add_job(
-            id = self.name,
             # when the job is scheduled to run immediately, it may happen that
             # the job is run even before the task is created, in which case
             # it fails because it cannot be retrieve from the Task column of 
             # the database: we introduce a delta of 2 seconds.
             # other situation: the server is too slow and the job cannot be
-            # run at all: 'job was missed by 0:00:09.465684'
+            # run at all, eg 'job was missed by 0:00:09.465684'
+            self.scheduled_date = datetime.now() + timedelta(seconds=5)
+        # execute the job immediately with a date-type job
+        # when date is used as a trigger and run_date is left undetermined, 
+        # the job is executed immediately.
+        id = scheduler.add_job(
+            id = self.name,
+
             run_date = self.scheduled_date,
             func = self.job,
             args = self.args,

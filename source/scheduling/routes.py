@@ -1,7 +1,8 @@
 from base.database import db
+from base.helpers import str_dict
 from flask import Blueprint, render_template, request
 from flask_login import login_required
-from .forms import CompareGettersForm
+from .forms import CompareForm
 from .models import Task, scheduler
 
 blueprint = Blueprint(
@@ -12,19 +13,27 @@ blueprint = Blueprint(
     static_folder = 'static'
     )
 
-@blueprint.route('/task_management')
+@blueprint.route('/task_management', methods=['GET', 'POST'])
 @login_required
 def task_management():
+    if 'compare' in request.form:
+        pass
     tasks = Task.query.all()
     form_per_task = {}
-    for task in tasks:
-        form = CompareGettersForm(request.form)
-        form.first_node.choices = [(i, i) for (i, _, _) in task.nodes]
+    for task in filter(lambda t: t.recurrent, tasks):
+        form = CompareForm(request.form)
+        form.first_node.choices = [(i, i) for (i, _, _, _) in task.nodes]
         form.second_node.choices = form.first_node.choices
+        versions = [(v, v) for v in tuple(task.logs)]
+        form.first_version.choices = form.second_version.choices = versions
         form_per_task[task.name] = form
+    # task.logs is a dictionnary and we need to keep that way, but for properly
+    # outputtng it's content, we will use str_dict
+    log_per_task = {task.name: str_dict(task.logs) for task in tasks}
     return render_template(
         'task_management.html',
         tasks = tasks,
+        log_per_task = log_per_task,
         form_per_task = form_per_task
         )
         

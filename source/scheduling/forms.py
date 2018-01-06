@@ -12,7 +12,7 @@ class SchedulingForm(FlaskForm):
 
 ## Compare getters history
 
-class CompareGettersForm(FlaskForm):
+class CompareForm(FlaskForm):
     first_node = SelectField('', [optional()], choices=())
     second_node = SelectField('', [optional()], choices=())
     first_version = SelectField('', [optional()], choices=())

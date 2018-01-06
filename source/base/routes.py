@@ -58,7 +58,7 @@ def dashboard():
     'users': len(User.query.all())
     }
     return render_template(
-        'home/dashboard.html',
+        'dashboard/dashboard.html',
         names = pretty_names,
         node_counters = node_counters,
         link_counters = link_counters,
@@ -77,7 +77,7 @@ def dashboard_control():
         user.dashboard_link_properties = str(diagram_properties_form.data['link_properties'])
         db.session.commit()
     return render_template(
-        'home/dashboard_control.html',
+        'dashboard/dashboard_control.html',
         diagram_properties_form = diagram_properties_form,
         )
 

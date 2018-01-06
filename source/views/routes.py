@@ -2,7 +2,7 @@ from base.database import db
 from base.properties import pretty_names
 from collections import OrderedDict
 from flask import Blueprint, current_app, jsonify, render_template, request, send_file
-from flask_login import login_required
+from flask_login import current_user, login_required
 from .forms import *
 from functools import partial
 from objects.models import *
@@ -104,6 +104,11 @@ def putty_connection():
         .filter_by(id=request.form['id'])\
         .first()
     path_putty = join(current_app.path_apps, 'putty.exe')
-    ssh_connection = '{} -ssh {}'.format(path_putty, node.ip_address)
+    ssh_connection = '{} -ssh {}@{} -pw {}'.format(
+        path_putty,
+        current_user.username,
+        node.ip_address,
+        current_user.password
+        )
     connect = Popen(ssh_connection.split())
     return jsonify(id=request.form['id'])

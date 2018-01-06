@@ -2,10 +2,6 @@
 
 {% block title %} Page 403 {% endblock title %}
 
-{% block stylesheets %}
-  {{ super() }}
-{% endblock stylesheets %}
-
 {% block sidebar %}{% endblock sidebar %}
 
 {% block top_navigation %}{% endblock top_navigation %}
@@ -16,15 +12,10 @@
       <div class="text-center text-center">
         <h1 class="error-number">403</h1>
         <h2>Access Denied</h2>
-         <p>Full authentication is required to access this resource. <a href="#">Report this?</a>
-        </p>
+         <p>Full authentication is required to access this resource.</p>
       </div>
     </div>
   </div>
 {% endblock content %}
 
 {% block footer %}{% endblock footer %}
-
-{% block javascripts %}
-  {{ super() }}
-{% endblock javascripts %}

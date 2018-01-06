@@ -93,7 +93,7 @@ def unauthorized_handler():
     return render_template('errors/page_403.html')
 
 @blueprint.errorhandler(403)
-def not_found_error(error):
+def authorization_required(error):
     return render_template('errors/page_403.html'), 403
 
 @blueprint.errorhandler(404)

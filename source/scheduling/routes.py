@@ -8,7 +8,8 @@ blueprint = Blueprint(
     'scheduling_blueprint', 
     __name__, 
     url_prefix = '/scheduling', 
-    template_folder = 'templates'
+    template_folder = 'templates',
+    static_folder = 'static'
     )
 
 @blueprint.route('/task_management')

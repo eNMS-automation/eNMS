@@ -21,8 +21,8 @@ class AddNode(AddObjectForm):
     ip_address = TextField('IP address', [optional()])
     operating_system = TextField('Operating System', [optional()])
     os_version = TextField('OS version', [optional()])
-    longitude = FloatField('Longitude', [optional()])
-    latitude = FloatField('Latitude', [optional()])
+    longitude = FloatField('Longitude', default=0.)
+    latitude = FloatField('Latitude', default=0.)
     secret_password = PasswordField('Secret password')
 
 class AddNodes(FlaskForm):

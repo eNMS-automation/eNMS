@@ -55,7 +55,6 @@ def script_creation():
                     content = template.render(**parameters)
                 else:
                     flash('file {}: format not allowed'.format(filename))
-        print(content)
         script = Script(content, **request.form)
         db.session.add(script)
         db.session.commit()

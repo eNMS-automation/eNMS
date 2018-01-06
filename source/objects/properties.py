@@ -2,6 +2,8 @@ from collections import OrderedDict
 
 object_common_properties = (
     'name',
+    'description',
+    'location',
     'type',
     'vendor'
     )
@@ -53,14 +55,19 @@ type_to_public_properties = OrderedDict([
 
 ## Diagram properties (for the dashboard)
 
-node_diagram_properties = (
+object_diagram_properties = (
+    'description',
+    'location',
+    )
+
+node_diagram_properties = object_diagram_properties + (
     'type',
     'vendor',
     'operating_system',
     'os_version'
     )
 
-link_diagram_properties = (
+link_diagram_properties = object_diagram_properties + (
     'type',
     'vendor'
     )

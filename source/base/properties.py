@@ -8,6 +8,8 @@ pretty_names = OrderedDict([
     ('longitude', 'Longitude'),
     ('latitude', 'Latitude'),
     ('name', 'Name'),
+    ('description', 'Description'),
+    ('location', 'Location'),
     ('operating_system', 'Operating System'),
     ('os_version', 'OS version'),
     ('source', 'Source'),

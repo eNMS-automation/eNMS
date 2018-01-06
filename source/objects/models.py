@@ -23,6 +23,8 @@ class Object(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(120))
+    description = Column(String)
+    location = Column(String)
     vendor = Column(String(120))
     type = Column(String(50))
     visible = Column(Boolean, default=True)

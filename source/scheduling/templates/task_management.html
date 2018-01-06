@@ -29,10 +29,10 @@
                     <th style="width: 1%">Type</th>
                     <th>Creator</th>
                     <th style="width: 10%">Status</th>
-                    <th style="width: 15%">Logs</th>
-                    <th style="width: 15%">Compare</th>
-                    <th style="width: 15%">Edit</th>
-                    <th style="width: 15%">Delete</th>
+                    <th style="width: 10%">Logs</th>
+                    <th style="width: 10%">Compare</th>
+                    <th style="width: 10%">Edit</th>
+                    <th style="width: 10%">Delete</th>
                     <th style="width: 30%">Pause / Resume</th>
                   </tr>
                 </thead>
@@ -53,7 +53,7 @@
                       <button type="button" class="btn btn-success btn-xs">Active</button>
                     </td>
                     <td>
-                      <div class="modal fade logs-{{ task.name }}" tabindex="-1" role="dialog" aria-hidden="true">
+                      <div class="modal fade logs-{{ task.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                           <div class="modal-content">
               
@@ -63,11 +63,9 @@
                               <h4 class="modal-title" id="myModalLabel">Logs</h4>
                             </div>
                             
-                            
                             <div class="modal-body">
 
-                            {{ task.logs }}
-
+                            <pre>{{ log_per_task[task.name] }}</pre>
                             
                             </div>
                           
@@ -75,23 +73,23 @@
                           </div>
                         </div>
                       </div>
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".logs-{{ task.name }}"><i class="fa fa-pencil"></i> Logs </a></button>
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".logs-{{ task.id }}"><i class="fa fa-pencil"></i> Logs </a></button>
                     </td>
                     <td>
-                      <form>
-                        <div class="modal fade {{ task.name }}" tabindex="-1" role="dialog" aria-hidden="true">
+                    {% if task.recurrent %}
+                      <form name="compare" method="post">
+                        <div class="modal fade compare-{{ task.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                 
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                 </button>
-                                <h4 class="modal-title" id="myModalLabel">Logs</h4>
+                                <h4 class="modal-title" id="myModalLabel"> Compare </h4>
                               </div>
                               
                               
                               <div class="modal-body">
-                              {% if task.type == 'napalm_getters' %}
                                 <div class="row">
                                 
                                   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -117,8 +115,6 @@
                                     {{ form_per_task[task.name].second_version(class="form-control") }}
                                   </div>
                                 </div>
-                                {{ task.logs }}
-                              {% endif %}
                               
                               </div>
                               
@@ -133,7 +129,8 @@
                         </div>
                       </form>
 
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".{{ task.name }}"><i class="fa fa-pencil"></i> Logs </a></button>
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".compare-{{ task.id }}"><i class="fa fa-pencil"></i> Compare </a></button>
+                      {% endif %}
 
                     </td>
                     <td>

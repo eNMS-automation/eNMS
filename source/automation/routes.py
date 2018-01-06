@@ -25,14 +25,13 @@ blueprint = Blueprint(
 
 def get_targets(nodes):
     targets = []
-    print(nodes)
     for name in nodes:
-        print(name)
         obj = get_obj(db, Node, name=name)
         targets.append((
             name,
             obj.ip_address, 
-            obj.operating_system.lower()
+            obj.operating_system.lower(),
+            obj.secret_password
             ))
     return targets
 

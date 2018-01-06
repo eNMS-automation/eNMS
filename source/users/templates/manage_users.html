@@ -8,79 +8,87 @@
 
 {% block content %}
   <div class="right_col" role="main">
+  
+    <!-- begin row -->
+    <div class="row">
 
-      <div class="row">
-        <div class="col-md-6 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h3>Add a new user</h3>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <br />
-              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-              
-                    <div class="form-group" style="height: 300px">
-
-                      {% for field in add_user_form if field.widget.input_type != 'hidden'  %}
-                        <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}
-                        </label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                            {{ field(class="form-control", placeholder=field.label.text) }}
-                        </div><br><br>
-                      {% endfor %}
-                      
-                    </div>
-
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success" name="add_user">Create user</button>
-                  </div>
-                </div>
-
-              </form>
-            </div>
+      <!-- begin column -->
+      <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h3>Add a new user</h3>
+            <div class="clearfix"></div>
           </div>
-        </div>
+          <div class="x_content">
+            <br />
+            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+            
+              <div class="form-group" style="height: 350px">
 
-        <div class="col-md-6 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h3>Delete users</h3>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <br />
-              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-              
-                    <div class="form-group" style="height: 300px">
+                {% for field in add_user_form if field.widget.input_type != 'hidden'  %}
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}
+                  </label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    {{ field(class="form-control", placeholder=field.label.text) }}
+                  </div><br><br><br>
+                {% endfor %}
+                
+              </div>
 
-                      {% for field in delete_user_form if field.widget.input_type != 'hidden'  %}
-                        <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}
-                        </label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                            {{ field(class="form-control", placeholder=field.label.text, size=10) }}
-                        </div><br><br>
-                      {% endfor %}
-                      
-                    </div>
-
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success" name="delete_user">Delete selection</button>
-                  </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success" name="add_user">Create user</button>
                 </div>
+              </div>
 
-              </form>
-            </div>
+            </form>
           </div>
         </div>
       </div>
+      <!-- end column -->
+
+      <!-- begin column -->
+      <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h3>Delete users</h3>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+            
+              <div class="form-group" style="height: 350px">
+
+                {% for field in delete_user_form if field.widget.input_type != 'hidden'  %}
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}
+                  </label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    {{ field(class="form-control", placeholder=field.label.text, size=10) }}
+                  </div><br><br>
+                {% endfor %}
+                
+              </div>
+
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success" name="delete_user">Delete selection</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- end column -->
+
     </div>
+    <!-- end row -->
+
   </div>
 {% endblock content %}
 

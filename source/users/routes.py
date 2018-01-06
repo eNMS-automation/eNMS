@@ -103,8 +103,8 @@ def login():
                 pass
         return render_template('errors/page_403.html')
     if not flask_login.current_user.is_authenticated:
-        login_form = LoginForm(request.form)
-        return render_template('login/login.html', login_form=login_form)
+        form = LoginForm(request.form)
+        return render_template('login/login.html', form=form)
     return redirect(url_for('base_blueprint.dashboard'))
 
 @blueprint.route('/logout')

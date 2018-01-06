@@ -13,7 +13,8 @@ node_common_properties = (
     'os_version',
     'ip_address',
     'longitude',
-    'latitude'
+    'latitude',
+    'secret_password'
     )
 
 link_common_properties = (
@@ -23,7 +24,7 @@ link_common_properties = (
 
 node_public_properties = (
 object_common_properties +
-node_common_properties
+node_common_properties[:-1]
 )
 
 link_public_properties = (

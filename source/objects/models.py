@@ -61,6 +61,7 @@ class Node(Object):
     ip_address = Column(String(120))
     longitude = Column(Float)
     latitude = Column(Float)
+    secret_password = Column(String)
     
     __mapper_args__ = {
         'polymorphic_identity':'Node',

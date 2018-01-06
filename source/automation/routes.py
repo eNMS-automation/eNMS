@@ -19,7 +19,8 @@ blueprint = Blueprint(
     'automation_blueprint', 
     __name__, 
     url_prefix = '/automation', 
-    template_folder = 'templates'
+    template_folder = 'templates',
+    static_folder = 'static'
     )
 
 def get_targets(nodes):

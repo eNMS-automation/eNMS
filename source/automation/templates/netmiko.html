@@ -101,7 +101,7 @@
 {% block javascripts %}
   {{ super()}}
     <!-- Initialize datetimepicker -->
-  <script src="{{ url_for('static', filename='vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
 <script>
     $('#scheduled_date').datetimepicker({
         format: 'DD/MM/YYYY HH:mm:ss',

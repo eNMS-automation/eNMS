@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
   {{ super() }}
-
 {% endblock stylesheets %}
 
 {% block content %}
@@ -78,6 +77,6 @@
 {% block javascripts %}
   {{ super()}}
   <!-- Datatables -->
-  <script src="{{ url_for('static', filename='vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('objects_blueprint.static', filename='datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('objects_blueprint.static', filename='datatables/dataTables.bootstrap.min.js') }}"></script>
 {% endblock javascripts %}

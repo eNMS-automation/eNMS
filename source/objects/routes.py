@@ -16,7 +16,8 @@ blueprint = Blueprint(
     'objects_blueprint', 
     __name__, 
     url_prefix = '/objects', 
-    template_folder = 'templates'
+    template_folder = 'templates',
+    static_folder = 'static'
     )
 
 def allowed_file(name, webpage):

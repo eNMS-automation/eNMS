@@ -21,7 +21,7 @@
         <link href="{{ url_for('static', filename='vendors/nprogress/nprogress.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
       <!-- Custom Theme Style -->
-      <link href="{{ url_for('static', filename='build/css/custom.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', filename='custom/custom.min.css') }}" rel="stylesheet">
     {% endblock head %}
   </head>
 
@@ -68,7 +68,7 @@
         <script src="{{ url_for('static', filename='vendors/parsleyjs/parsley.min.js') }}"></script>
       {% endblock %}
       <!-- Custom Theme Scripts -->
-      <script src="{{ url_for('static', filename='build/js/custom.js') }}"></script>
+      <script src="{{ url_for('static', filename='custom/custom.js') }}"></script>
     {% endblock body %}
   </body>
 </html>

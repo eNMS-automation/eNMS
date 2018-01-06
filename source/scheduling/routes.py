@@ -1,9 +1,11 @@
 from base.database import db
 from base.helpers import str_dict
+from difflib import ndiff, unified_diff
 from flask import Blueprint, render_template, request
 from flask_login import login_required
 from .forms import CompareForm
 from .models import Task, scheduler
+from objects.models import get_obj
 
 blueprint = Blueprint(
     'scheduling_blueprint', 
@@ -17,7 +19,18 @@ blueprint = Blueprint(
 @login_required
 def task_management():
     if 'compare' in request.form:
-        pass
+        n1, n2 = request.form['first_node'], request.form['second_node']
+        t1, t2 = request.form['first_version'], request.form['second_version']
+        task = get_obj(db, Task, name=request.form['task_name'])
+        # get the two versions of the logs
+        v1 = str_dict(task.logs[t1][n1]).splitlines()
+        v2 = str_dict(task.logs[t2][n2]).splitlines()
+        print(v1, v2)
+        return render_template(
+            'compare.html',
+            ndiff = '\n'.join(ndiff(v1, v2)),
+            unified_diff = '\n'.join(unified_diff(v1, v2)),
+            )
     tasks = Task.query.all()
     form_per_task = {}
     for task in filter(lambda t: t.recurrent, tasks):

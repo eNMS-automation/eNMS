@@ -22,7 +22,8 @@ scheduler.start()
 
 ## Jobs
 
-def netmiko_job(name, script_name, username, password, ips, driver, global_delay_factor):
+def netmiko_job(name, type, script_name, username, password, ips, 
+                    driver, global_delay_factor):
     job_time = str(datetime.now())
     task = db.session.query(Task)\
         .filter_by(name=name)\
@@ -31,33 +32,39 @@ def netmiko_job(name, script_name, username, password, ips, driver, global_delay
         .filter_by(name=script_name)\
         .first()
     task.logs[job_time] = {}
-    for name, ip_address, _ in ips:
+    for name, ip_address, _, secret in ips:
         try:
             netmiko_handler = ConnectHandler(                
                 ip = ip_address,
                 device_type = driver,
                 username = username,
                 password = password,
+                secret = secret,
                 global_delay_factor = global_delay_factor,
                 timeout = 200,
                 session_timeout = 200
                 )
-            netmiko_handler.send_config_set(script.content.splitlines())
+            if type == 'configuration':
+                netmiko_handler.send_config_set(script.content.splitlines())
+                result = 'configuration OK'
+            else:
+                outputs = []
+                for show_command in script.content.splitlines():
+                    outputs.append(netmiko_handler.send_commad(show_command))
+                result = '\n\n'.join(outputs)
             netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
-        else:
-            result = 'configuration OK'
         task.logs[job_time][name] = result
     db.session.commit()
 
-def napalm_connection(ip_address, username, password, driver, optional_args):
+def napalm_connection(ip_address, username, password, driver, secret):
     napalm_driver = get_network_driver(driver)
     connection = napalm_driver(
         hostname = ip_address, 
         username = username,
         password = password,
-        optional_args = {'secret': 'cisco'}
+        optional_args = {'secret': secret}
         )
     connection.open()
     return connection
@@ -71,14 +78,14 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
         .filter_by(name=script_name)\
         .first()
     task.logs[job_time] = {}
-    for name, ip_address, driver in nodes_info:
+    for name, ip_address, driver, secret in nodes_info:
         try:
             napalm_driver = napalm_connection(
                 ip_address, 
                 username,
                 password,
                 driver,
-                {'secret': 'cisco'}
+                secret
                 )
             if action in ('load_merge_candidate', 'load_replace_candidate'):
                 getattr(napalm_driver, action)(config=script.content)
@@ -106,7 +113,7 @@ def napalm_getters_job(name, getters, username, password, nodes_info):
                 username,
                 password,
                 driver,
-                {'secret': 'cisco'}
+                secret
                 )
             for getter in getters:
                 try:
@@ -216,7 +223,7 @@ class NetmikoTask(Task):
     script = Column(String)
     
     def __init__(self, user, targets, **data):
-        self.type = 'netmiko'
+        self.type = data['type']
         self.script_name = data['script']
         self.user = user
         self.nodes = targets
@@ -224,6 +231,7 @@ class NetmikoTask(Task):
         self.job = netmiko_job
         self.args = [
             data['name'],
+            data['type'],
             self.script_name,
             self.user.username,
             self.user.password,

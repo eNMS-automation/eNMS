@@ -32,7 +32,6 @@ getters_mapping = OrderedDict([
 napalm_actions = OrderedDict([
 ('Load merge', 'load_merge_candidate'),
 ('Load replace', 'load_replace_candidate'),
-# ('Commit', 'commit_config'),
 ('Discard', 'discard_config'),
 ('Rollback', 'rollback'),
 ])
@@ -55,6 +54,11 @@ class ScriptCreationForm(FlaskForm):
 class NetmikoForm(SchedulingForm):
     script = SelectField('', [optional()], choices=())
     nodes = SelectMultipleField('', [optional()], choices=())
+    type_choices = (
+        ('show_commands', 'Show commands'),
+        ('configuration', 'Configuration')
+        )
+    type = SelectField('', choices=type_choices)
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
     netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))

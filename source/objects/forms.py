@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from objects.models import node_class
+from objects.models import link_class, node_class
 from objects.properties import node_public_properties, link_public_properties
 from wtforms import *
 from wtforms.validators import optional
@@ -30,6 +30,8 @@ class AddNodes(FlaskForm):
     file = FileField('', validators=validators)
     
 class AddLink(AddObjectForm):
+    link_type = [(t, t) for t in link_class]
+    type = SelectField('Type', choices=link_type)
     source = SelectField('Source', choices=())
     destination = SelectField('Destination', choices=())
 

@@ -68,7 +68,6 @@
 {% block javascripts %}
   {{ super() }}
   <!-- FullCalendar -->
-  <script src="{{ url_for('static', filename='vendors/moment/min/moment.min.js') }}"></script>
   <script src="{{ url_for('scheduling_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
   <script>
       function  init_calendar() {
@@ -141,7 +140,9 @@
         calendar.fullCalendar('unselect');
         },
         editable: true,
-        events: [{
+        events: [
+        /*
+        {
         title: 'All Day Event',
         start: new Date(y, m, 1)
         }, {
@@ -167,7 +168,9 @@
         start: new Date(y, m, 28),
         end: new Date(y, m, 29),
         url: 'http://google.com/'
-        }]
+        }
+        */
+        ]
       });
       
     };

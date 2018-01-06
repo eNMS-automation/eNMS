@@ -26,25 +26,24 @@
     </div>
     <!-- /top tiles -->
 
-      <div class="row">
-      
-        {% for property in node_counters %}
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>{{ names[property] }}</h2>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <div id="{{ property }}" style="height:350px;"></div>
-              </div>
+    <div class="row">
+    
+      {% for property in node_counters %}
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>{{ names[property] }}</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div id="{{ property }}" style="height:350px;"></div>
             </div>
           </div>
-        {% endfor %}
-        
-      </div>
+        </div>
+      {% endfor %}
       
     </div>
+      
   </div>
 {% endblock content %}
 

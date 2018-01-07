@@ -1,5 +1,6 @@
 from __future__ import print_function
 from base.database import db
+from base.helpers import allowed_file
 from flask import (
     Blueprint,
     current_app,
@@ -46,7 +47,7 @@ def script_creation():
         if form.data['type'] != 'simple':
             filename = request.files['file'].filename
             if 'file' in request.files and filename:
-                if allowed_file(filename, 'netmiko'):
+                if allowed_file(filename, {'yaml'}):
                     filename = secure_filename(filename)
                     filepath = join(app.config['UPLOAD_FOLDER'], filename)
                     with open(filepath, 'r') as f:

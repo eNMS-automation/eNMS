@@ -53,6 +53,9 @@ def task_management():
 @blueprint.route('/delete_task', methods=['POST'])
 @login_required
 def delete_task():
+    #TODO remove the job from the scheduler...
+    task = Task.query.filter_by(name=request.form['task_name']).first()
+    print(task)
     Task.query.filter_by(name=request.form['task_name']).delete()
     db.session.commit()
     return task_management()

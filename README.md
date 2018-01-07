@@ -14,52 +14,58 @@ Nodes and links can be created in two ways:
 
 ![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.png)
 
+## Dashboard
+
+![Dashboard](https://github.com/afourmy/eNMS/blob/master/readme/dashboard.png)
+
 ## Network visualization
 
-### With a map
-
 Maps can be displayed in eNMS to draw all network devices at their exact location (longitude and latitude) with leaflet.js.
-
-![Network GIS visualization](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
-
-### With a graph-drawing algorithm
-
 GIS visualization can only be done if we have all GPS coordinates: it is not always the case.
 eNMS uses vis.js to visualize the network in an aesthetically pleasing way, with a force-based algorithm.
 
-![Network force-based visualization](https://github.com/afourmy/eNMS/blob/master/readme/logical_view.png)
+![Network GIS visualization](https://github.com/afourmy/eNMS/blob/master/readme/views.gif)
 
 ## Export to Google Earth
 
 Networks can be exported as a .KML file to be displayed on Google Earth, with the same icons and link colors as in eNMS.
 
-![Export to Google Earth](https://github.com/afourmy/eNMS/blob/master/readme/google_earth_export.png)
+![Export to Google Earth](https://github.com/afourmy/eNMS/blob/master/readme/google_earth.gif)
 
 ## Embedded SSH client
 
 eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device (router, switch, server, etc), from the web interface.
+
+![SSH connection](https://github.com/afourmy/eNMS/blob/master/readme/ssh_connection.gif)
 
 ## Automation with Netmiko and NAPALM
 
 ### Netmiko support
 
 eNMS uses Netmiko to send scripts to any device that supports SSH. 
+
+![Simple script with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_simple.gif)
+
 Variables can be imported in a YAML file, and a script can be sent graphically to multiple devices at once with multithreading.
 
-![Send jinja2 script via SSH with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko.png)
+![Send jinja2 script via SSH with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_j2.gif)
 
 ### NAPALM support
 
 NAPALM is an automation framework that provides a set of functions to interact with different network device Operating Systems using a unified API. NAPALM can be used from within eNMS to retrieve information about a device, and change the configuration.
 
-[![Configuration automation with NAPALM and Jinja2 scripting](https://github.com/afourmy/eNMS/blob/master/readme/napalm_configuration.png)]
+[![Configuration automation with NAPALM and Jinja2 scripting](https://github.com/afourmy/eNMS/blob/master/readme/napalm_getters.gif)]
+
+### Comparison
+
+[![Comparison](https://github.com/afourmy/eNMS/blob/master/readme/comparison.gif)]
 
 ## Display control
 
 In both the geographical and logical views, the user can filter the view by searching for specific value for each property. Regular expressions allows for specific search like an IP subnet.
 The user can also control which property is displayed as a label for nodes and links.
 
-(video: TODO)
+[![Object filtering](https://github.com/afourmy/eNMS/blob/master/readme/object_filtering.gif)]
 
 ## Add a new property
 

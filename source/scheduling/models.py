@@ -45,6 +45,7 @@ def netmiko_job(name, type, script_name, username, password, ips,
                 session_timeout = 200
                 )
             if type == 'configuration':
+                print(script.content.splitlines())
                 netmiko_handler.send_config_set(script.content.splitlines())
                 result = 'configuration OK'
             else:

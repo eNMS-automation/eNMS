@@ -11,10 +11,14 @@ from flask import (
     )
 from flask_login import login_required, current_user
 from .forms import *
+from jinja2 import Template
 from .models import Script
 from objects.models import get_obj, Node
+from os.path import join
 from users.models import User
 from scheduling.models import *
+from yaml import load
+from werkzeug.utils import secure_filename
 
 blueprint = Blueprint(
     'automation_blueprint', 
@@ -49,11 +53,13 @@ def script_creation():
             if 'file' in request.files and filename:
                 if allowed_file(filename, {'yaml'}):
                     filename = secure_filename(filename)
-                    filepath = join(app.config['UPLOAD_FOLDER'], filename)
+                    filepath = join(current_app.config['UPLOAD_FOLDER'], filename)
                     with open(filepath, 'r') as f:
                         parameters = load(f)
                     template = Template(content)
                     content = template.render(**parameters)
+                    print(content)
+                #TODO properly display that error in the GUI
                 else:
                     flash('file {}: format not allowed'.format(filename))
         script = Script(content, **request.form)

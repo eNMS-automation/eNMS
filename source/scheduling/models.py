@@ -106,7 +106,7 @@ def napalm_getters_job(name, getters, username, password, nodes_info):
         .filter_by(name=name)\
         .first()
     task.logs[job_time] = {}
-    for name, ip_address, driver in nodes_info:
+    for name, ip_address, driver, secret in nodes_info:
         try:
             napalm_driver = napalm_connection(
                 ip_address, 
@@ -124,7 +124,6 @@ def napalm_getters_job(name, getters, username, password, nodes_info):
             result = 'could not be retrieve because of {}'.format(e)
         task.logs[job_time][name] = result
     db.session.commit()
-
 
 ## Tasks
 
@@ -172,12 +171,12 @@ class Task(CustomBase):
         return datetime.strftime(dt, '%Y-%m-%d %H:%M:%S')
                 
     def pause_task(self):
-        scheduler.pause_job(self.name)
+        scheduler.pause_job(self.creation_time)
         self.status = 'suspended'
         db.session.commit()
         
     def resume_task(self):
-        scheduler.resume_job(self.name)
+        scheduler.resume_job(self.creation_time)
         self.status = "active"
         db.session.commit()
 
@@ -186,7 +185,7 @@ class Task(CustomBase):
             self.scheduled_date = datetime.now() + timedelta(seconds=40)
         # run the job on a regular basis with an interval trigger
         id = scheduler.add_job(
-            id = self.name,
+            id = self.creation_time,
             func = self.job,
             args = self.args,
             trigger = 'interval',
@@ -194,7 +193,6 @@ class Task(CustomBase):
             seconds = int(self.frequency),
             replace_existing = True
             )
-        print(id)
 
     def one_time_scheduling(self):
         if not self.scheduled_date:
@@ -209,8 +207,7 @@ class Task(CustomBase):
         # when date is used as a trigger and run_date is left undetermined, 
         # the job is executed immediately.
         id = scheduler.add_job(
-            id = self.name,
-
+            id = self.creation_time,
             run_date = self.scheduled_date,
             func = self.job,
             args = self.args,
@@ -221,7 +218,7 @@ class NetmikoTask(Task):
     
     __tablename__ = 'NetmikoTask'
     
-    id = Column(Integer, ForeignKey('Task.id'), primary_key=True, autoincrement=True)
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
     def __init__(self, user, targets, **data):

@@ -1,4 +1,5 @@
 from base.database import db
+from base.helpers import allowed_file
 from base.properties import pretty_names
 from flask import Blueprint, current_app, render_template, request
 from flask_login import login_required
@@ -19,13 +20,6 @@ blueprint = Blueprint(
     template_folder = 'templates',
     static_folder = 'static'
     )
-
-def allowed_file(name, webpage):
-    # allowed extensions depending on the webpage
-    allowed_extensions = {'nodes': {'xls', 'xlsx'}, 'netmiko': {'yaml'}}
-    allowed_syntax = '.' in name
-    allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions[webpage]
-    return allowed_syntax and allowed_extension
 
 @blueprint.route('/objects')
 @login_required
@@ -52,7 +46,7 @@ def create_objects():
         db.session.commit()
     elif 'add_nodes' in request.form:
         filename = request.files['file'].filename
-        if 'file' in request.files and allowed_file(filename, 'nodes'):  
+        if 'file' in request.files and allowed_file(filename, {'xls', 'xlsx'}):  
             filename = secure_filename(filename)
             filepath = join(current_app.config['UPLOAD_FOLDER'], filename)
             request.files['file'].save(filepath)

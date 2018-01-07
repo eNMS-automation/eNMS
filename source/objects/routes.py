@@ -137,7 +137,10 @@ def delete_objects():
 def filter_objects():
     form = FilteringForm(request.form)
     if request.method == 'POST':
+        # value = 
+        print(request.form)
         for obj in Node.query.all() + Link.query.all():
+            print(obj.__dict__, request.form)
             # source and destination do not belong to a link __dict__, because
             # they are SQLalchemy relationships and not columns
             # we update __dict__ with these properties for the filtering
@@ -157,8 +160,8 @@ def filter_objects():
                 # of the node property matches the regular expression.
                 else search(request.form[obj.class_type + property], str(value))
                 for property, value in obj.__dict__.items()
-                # we consider only public properties
-                if property in obj.get_properties()
+                # we consider only the properties in the form 
+                if obj.class_type + property in request.form
                 # providing that the property field in the form is not empty
                 # (empty field <==> property ignored)
                 and request.form[obj.class_type + property]

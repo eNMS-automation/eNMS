@@ -12,11 +12,11 @@ Nodes and links can be created in two ways:
 - one by one by specifying all properties manually, in the "Object creation" webpage
 - by importing an Excel file with one sheet per type of object
 
-![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.png)
+![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.gif)
 
 ## Dashboard
 
-![Dashboard](https://github.com/afourmy/eNMS/blob/master/readme/dashboard.png)
+![Dashboard](https://github.com/afourmy/eNMS/blob/master/readme/dashboard.gif)
 
 ## Network visualization
 

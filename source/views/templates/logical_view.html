@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Dashboard 1 {% endblock title %}
+{% block title %} Logical view {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -10,119 +10,105 @@
 {% block content %}
 
   <div class="right_col" role="main">
-    <div class="">
-    
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">View parameters</button>
-    
-      <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">View parameters</button>
 
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title" id="myModalLabel">View parameters</h4>
-            </div>
+    <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">View options</h4>
+          </div>
+
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
             <div class="modal-body">
-            
-              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-              
-                    <div class="form-group">
-                      <h5 class="modal-title">Labels</h5><br>
-                      
-                      {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
-
-                      {{ view_options_form.link_label(id="link_label", class="form-control") }}
-                      
-                    </div>
-              
+              <div class="form-group">
+                <h5 class="modal-title">Labels</h5><br>
+                {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
+                {{ view_options_form.link_label(id="link_label", class="form-control") }}
+              </div>
             </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success" name="add_node">Submit</button>
+              <button type="submit" class="btn btn-success">Submit</button>
             </div>
 
-            </form>
+          </form>
 
-          </div>
         </div>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_content">
-              <script src="{{ url_for('views_blueprint.static', filename='js/vis/vis.js') }}"></script>
-          <div id="mynetwork" style="height: 500px"></div>
-          <script>
-            // create an array with nodes
-            var nodes = new vis.DataSet([
-            {% for node, properties in node_table.items() %}  
-              {
-                id: {{ node.id }}, 
-                label: '{{ node[labels['node']] }}', 
-                image: 'static/images/default/{{ node.subtype }}.gif', 
-                shape: 'image', 
-                title: "{% for property in properties %}\
-                <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"
-              },
-            
-            {% endfor %}
-            ]);
-          
-            // create an array with edges
-            var edges = new vis.DataSet([
-            {% for link, properties in link_table.items() %}  
-              { 
-                from: {{ link['source']['id'] }}, 
-                to: {{ link['destination']['id'] }}, 
-                label: '{{ link[labels['link']] }}',
-                color: {color: '{{ link.color }}'},
-              },
-            {% endfor %}
-            ]);
-          
-            // create a network
-            var container = document.getElementById('mynetwork');
-            var data = {
-              nodes: nodes,
-              edges: edges
-            };
-            var options = {};
-            var network = new vis.Network(container, data, options);
-            
-            // get id of the click nodes
-            network.on( 'doubleClick', function(properties) {
-              var req = new XMLHttpRequest()
-              req.onreadystatechange = function()
-              {
-                  if (req.readyState == 4)
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <script src="{{ url_for('views_blueprint.static', filename='js/vis/vis.js') }}"></script>
+            <div id="mynetwork" style="height: 500px"></div>
+            <script>
+              // create an array with nodes
+              var nodes = new vis.DataSet([
+                {% for node, properties in node_table.items() %}  
                   {
-                      if (req.status != 200)
-                      {
-                          //error handling code here
-                      }
-                      else
-                      {
-                          var response = JSON.parse(req.responseText)
-                      }
-                  }
-              }
-          
-              req.open('POST', '/views/putty_connection')
-              req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-              var ids = properties.nodes;
-              var clickedNodes = nodes.get(ids);
-              var postVars = 'id='+ids;
-              req.send(postVars)
+                    id: {{ node.id }}, 
+                    label: '{{ node[labels['node']] }}', 
+                    image: 'static/images/default/{{ node.subtype }}.gif', 
+                    shape: 'image', 
+                    title: "{% for property in properties %}\
+                    <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"
+                  },
+                {% endfor %}
+                ]);
+            
+              // create an array with edges
+              var edges = new vis.DataSet([
+                {% for link, properties in link_table.items() %}  
+                  { 
+                    from: {{ link['source']['id'] }}, 
+                    to: {{ link['destination']['id'] }}, 
+                    label: '{{ link[labels['link']] }}',
+                    color: {color: '{{ link.color }}'},
+                  },
+                {% endfor %}
+                ]);
+            
+              // create a network
+              var container = document.getElementById('mynetwork');
+              var data = {
+                nodes: nodes,
+                edges: edges
+                };
+              var options = {};
+              var network = new vis.Network(container, data, options);
               
-              return false
-            });
-          </script>
-          
-
-            </div>
+              // get id of the click nodes
+              network.on( 'doubleClick', function(properties) {
+                var req = new XMLHttpRequest()
+                req.onreadystatechange = function() {
+                    if (req.readyState == 4) {
+                      if (req.status != 200) {
+                          //error handling code here
+                        }
+                      else {
+                        var response = JSON.parse(req.responseText)
+                      }
+                    }
+                  }
+                req.open('POST', '/views/putty_connection')
+                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+                var ids = properties.nodes;
+                var clickedNodes = nodes.get(ids);
+                var postVars = 'id='+ids;
+                req.send(postVars)
+                return false
+                });
+            </script>
           </div>
         </div>
       </div>

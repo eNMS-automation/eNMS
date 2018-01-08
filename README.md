@@ -2,8 +2,6 @@
 
 eNMS is a network visualization, inventory and automation web platform.
 
-**Find a demo of eNMS on this [website](http://afourmy.pythonanywhere.com/) !**
-
 ![eNMS](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
 
 # Features

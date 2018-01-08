@@ -25,25 +25,23 @@
             <h4 class="modal-title" id="myModalLabel">View options</h4>
           </div>
 
-          <div class="modal-body">
-          
-            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-            
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
               <div class="form-group">
                 <h5 class="modal-title">Labels</h5><br>
                 {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
                 {{ view_options_form.link_label(id="link_label", class="form-control") }}
               </div>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="view_options">Submit</button>
+            </div>
 
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="submit" class="btn btn-success" name="view_options">Submit</button>
-              </div>
-
-            </form>
-
-          </div>
+          </form>
 
         </div>
       </div>
@@ -59,9 +57,10 @@
             </button>
             <h4 class="modal-title" id="myModalLabel">Export to Google Earth</h4>
           </div>
-          <div class="modal-body">
           
-            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
 
               <div class="form-group">
               
@@ -82,15 +81,16 @@
 
               </div>
 
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="submit" class="btn btn-success" name="google_earth">Submit</button>
-              </div>
-          
-            </form>
+            </div>
 
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="google_earth">Submit</button>
+            </div>
+
+          </form>
+
         </div>
       </div>
     </div>

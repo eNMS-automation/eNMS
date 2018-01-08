@@ -125,3 +125,8 @@ def napalm_configuration():
         'napalm_configuration.html',
         form = form
         )
+
+@blueprint.route('/napalm_ping_traceroute', methods=['GET', 'POST'])
+@login_required
+def napalm_ping_traceroute():
+    return render_template('napalm_ping_traceroute.html')

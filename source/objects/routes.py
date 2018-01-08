@@ -5,7 +5,6 @@ from flask import Blueprint, current_app, render_template, request
 from flask_login import login_required
 from .forms import *
 from .models import *
-from objects.models import node_class, Node, Link
 from os.path import join
 from .properties import *
 from re import search
@@ -57,17 +56,12 @@ def create_objects():
                 # if the sheet cannot be found, there's nothing to import
                 except XLRDError:
                     continue
-                print(obj_type, sheet.row_values(0))
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
                     if obj_type in link_class:
-                        source = db.session.query(Node)\
-                            .filter_by(name=kwargs.pop('source'))\
-                            .first()
-                        destination = db.session.query(Node)\
-                            .filter_by(name=kwargs.pop('destination'))\
-                            .first()
+                        source = get_obj(db, Node, name=kwargs.pop('source'))
+                        destination = get_obj(db, Node, name=kwargs.pop('destination'))
                         new_obj = link_class[obj_type](
                             source_id = source.id, 
                             destination_id = destination.id, 

@@ -1,261 +1,233 @@
 {% extends "base_site.html" %}
 
-{% block title %} Dashboard 1 {% endblock title %}
+{% block title %} Geographical view {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
   <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
   <style>
-      #mapid { height: 550px; }
+    #mapid { height: 550px; }
   </style>
 {% endblock stylesheets %}
 
 {% block content %}
 
   <div class="right_col" role="main">
-    <div class="">
-    
-      <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+  
+    <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
 
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title" id="myModalLabel">Filter the view</h4>
-            </div>
-            <div class="modal-body">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">View options</h4>
+          </div>
+
+          <div class="modal-body">
+          
+            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
             
-              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-              
-                    <div class="form-group">
-                      <h5 class="modal-title">Labels</h5><br>
-                      
-                      {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
+              <div class="form-group">
+                <h5 class="modal-title">Labels</h5><br>
+                {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
+                {{ view_options_form.link_label(id="link_label", class="form-control") }}
+              </div>
 
-                      {{ view_options_form.link_label(id="link_label", class="form-control") }}
-                      
-                    </div>
-
-            TODO: https://github.com/afourmy/eNMS/issues/16<br>
-            
-
-                if one end of a link is not displayed because of the node filter: deactivate the link<br>
-                if there is a match, choose between highlight or undisplay rest<br>
-                choose whether to display a label or not<br>
-                choose whether the label is display with javascript leaflet mode permanent: true or permanent: false<br>
-
-                display the objects that matches everything<br>
-                display when any of the field matches<br>
-                display the unmatched obj<br>
-
-
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success" name="view_options">Submit</button>
-            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="reset">Reset</button>
+                <button type="submit" class="btn btn-success" name="view_options">Submit</button>
+              </div>
 
             </form>
 
           </div>
+
         </div>
       </div>
+    </div>
 
-    
-      <div id="google_earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+    <div id="google_earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
 
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title" id="myModalLabel">Export to Google Earth</h4>
-            </div>
-            <div class="modal-body">
-            
-              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Export to Google Earth</h4>
+          </div>
+          <div class="modal-body">
+          
+            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
 
-                <div class="form-group">
-                
-                  <label>Project name</label>
-                  <div class='form-group'>
-                    {{ google_earth_form.name(class="form-control", required=true) }}
-                  </div>
-
-                  <label>Label size:</label>
-                  <div class='form-group'>
-                    {{ google_earth_form.label_size(class="form-control", required=true) }}
-                  </div>
-
-                  <label>Line width:</label>
-                  <div class='form-group'>
-                    {{ google_earth_form.line_width(class="form-control", required=true) }}
-                  </div>
-
+              <div class="form-group">
+              
+                <label>Project name</label>
+                <div class='form-group'>
+                  {{ google_earth_form.name(class="form-control", required=true) }}
                 </div>
-                
-              
 
-              
-            </div>
-            
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success" name="google_earth">Submit</button>
-            </div>
-            
+                <label>Label size:</label>
+                <div class='form-group'>
+                  {{ google_earth_form.label_size(class="form-control", required=true) }}
+                </div>
+
+                <label>Line width:</label>
+                <div class='form-group'>
+                  {{ google_earth_form.line_width(class="form-control", required=true) }}
+                </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="reset">Reset</button>
+                <button type="submit" class="btn btn-success" name="google_earth">Submit</button>
+              </div>
+          
             </form>
 
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_content">
-              <div id="mapid"></div>
-                <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
-            
-            <script>
-            
-            var ourCustomControl = L.Control.extend({
-            
-            options: {
-                position: 'topleft' 
-                //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
-            },
-            
-            onAdd: function (mymap) {
-                var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
-            
-                container.style.backgroundColor = 'white';
-                container.style.height = '30px';
-                container.type="button";
-                container.value = "Filters";
-            
-                container.onclick = function(){
-                  $('#filters').modal('show');
-  
-                }
-                return container;
-              }
-            })
-            
-            var ourCustomControl2 = L.Control.extend({
-            
-            options: {
-                position: 'topleft' 
-                //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
-            },
-            
-            onAdd: function (mymap) {
-                var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
-            
-                container.style.backgroundColor = 'white';
-                container.style.height = '30px';
-                container.type="button";
-                container.value = "Export to Google Earth";
-            
-                container.onclick = function(){
-                  $('#google_earth').modal('show');
-  
-                }
-                return container;
-              }
-            })
-            
-            var mymap = L.map('mapid').setView([48, 2], 5);
-            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
-            
-            {% for subtype in subtypes %}
-            var icon_{{ subtype }} = L.icon({
-                iconUrl: 'static/images/default/{{ subtype }}.gif',
-                iconSize:     [18, 12], // size of the icon
-                iconAnchor:   [9, 6], // point of the icon which will correspond to marker's location
-                popupAnchor:  [8, -5] // point from which the popup should open relative to the iconAnchor
-            });
-            {% endfor %}
-  
-            mymap.addControl(new ourCustomControl());
-            mymap.addControl(new ourCustomControl2());
-            
-            function loadXMLDoc()
-            {
-                var req = new XMLHttpRequest()
-                req.onreadystatechange = function()
-                {
-                    if (req.readyState == 4)
-                    {
-                        if (req.status != 200)
-                        {
-                            //error handling code here
-                        }
-                        else
-                        {
-                            var response = JSON.parse(req.responseText)
-                        }
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div id="mapid"></div>
+              <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
+          
+              <script>
+                var viewOptionsControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+              
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create(
+                      'input',
+                      'leaflet-bar leaflet-control leaflet-control-custom'
+                      );
+                
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.type="button";
+                    container.value = "Filters";
+                
+                    container.onclick = function(){
+                      $('#filters').modal('show');
+                      }
+                      return container;
                     }
-                }
-            
-                req.open('POST', '/views/putty_connection')
-                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-                var id = document.getElementById('id').value
-                var postVars = 'id='+id
-                req.send(postVars)
+                  })
+
+                var googleEarthControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.type="button";
+                    container.value = "Export to Google Earth";
                 
-                return false
-            }
-            
-            {% for obj, properties in node_table.items() %}  
-                var marker = L.marker([
-                {{ obj.latitude }}, 
-                {{ obj.longitude }}], 
-                {icon: icon_{{ obj.subtype }}}).addTo(mymap);
+                    container.onclick = function(){
+                      $('#google_earth').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+              
+                var mymap = L.map('mapid').setView([48, 2], 5);
+                L.tileLayer(
+                  'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                  {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
                 
-                marker.bindPopup("{% for property in properties %}\
-                <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
-                <input type='hidden' name='id' id='id' value={{ obj.id }}>\
-                <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
-                
-                marker.bindTooltip("{{ obj[labels['node']] }}", 
-                  {
-                    permanent: false, 
+                {% for subtype in subtypes %}
+                  var icon_{{ subtype }} = L.icon({
+                    iconUrl: 'static/images/default/{{ subtype }}.gif',
+                    iconSize: [18, 12], // size of the icon
+                    iconAnchor: [9, 6], // point of the icon which will correspond to marker's location
+                    popupAnchor: [8, -5] // point from which the popup should open relative to the iconAnchor
+                    });
+                {% endfor %}
+      
+                mymap.addControl(new viewOptionsControl());
+                mymap.addControl(new googleEarthControl());
+  
+                function loadXMLDoc() {
+                  var req = new XMLHttpRequest()
+                  req.onreadystatechange = function() {
+                    if (req.readyState == 4) {
+                      if (req.status != 200) {
+                        //error handling code here
+                        }
+                      else {
+                        var response = JSON.parse(req.responseText)
+                        }
+                      }
+                    }
+                  req.open('POST', '/views/putty_connection')
+                  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+                  var id = document.getElementById('id').value
+                  var postVars = 'id='+id
+                  req.send(postVars)
+                  return false
                   }
-                );
-            {% endfor %}
-              {% for obj, properties in link_table.items() %}
-                var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
-                var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
-                var pointList = [pointA, pointB];
-                
-                var firstpolyline = new L.Polyline(pointList, {
+              
+                {% for obj, properties in node_table.items() %}  
+                  var marker = L.marker([
+                  {{ obj.latitude }}, 
+                  {{ obj.longitude }}], 
+                  {icon: icon_{{ obj.subtype }}}).addTo(mymap);
+                  marker.bindPopup("{% for property in properties %}\
+                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
+                  <input type='hidden' name='id' id='id' value={{ obj.id }}>\
+                  <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
+                  marker.bindTooltip("{{ obj[labels['node']] }}", {
+                    permanent: false, 
+                    }
+                  );
+                {% endfor %}
+
+                {% for obj, properties in link_table.items() %}
+                  var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
+                  var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
+                  var pointList = [pointA, pointB];
+                  
+                  var firstpolyline = new L.Polyline(pointList, {
                     color: '{{ obj.color }}',
                     weight: 3,
                     opacity: 1,
                     smoothFactor: 1
-                });
-                firstpolyline.addTo(mymap);
-                
-                firstpolyline.bindPopup("{% for property in properties %}\
-                <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
-            
-                firstpolyline.bindTooltip("{{ obj[labels['link']] }}", 
-                  {
+                    });
+                  firstpolyline.addTo(mymap);
+                  
+                  firstpolyline.bindPopup("{% for property in properties %}\
+                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
+              
+                  firstpolyline.bindTooltip("{{ obj[labels['link']] }}", {
                     permanent: false, 
-                  }
-                );
-              {% endfor %}
-            
-            </script>
+                    });
+                {% endfor %}
+              
+              </script>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 {% endblock content %}
 

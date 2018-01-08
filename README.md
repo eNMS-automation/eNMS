@@ -82,11 +82,15 @@ Example: description = Column(String) in the Object class.
 
 The following modules are used in eNMS:
 ```
-flask (mandatory: web framework)
-xlrd, yaml (desirable: used for saving projects)
-netmiko, jinja2, NAPALM (optional: used for network automation)
-numpy, cvxopt (optional: used for linear programming)
-simplekml (optional: used for exporting project to Google Earth)
+flask (web framework)
+flask_wtf (forms)
+flask_sqlalchemy (database)
+flask_login (login system)
+tacacs_plus (used for enabling TACACS+ authentication)
+xlrd (used for creating objects from an Excel file)
+netmiko, NAPALM (used for network automation)
+jinja2, pyyaml (used for sending complex template-based scripts)
+simplekml (used for exporting project to Google Earth)
 ```
 
 In order to use eNMS, you need to run **/source/flask_app.py**.
@@ -106,10 +110,28 @@ or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to
 
 # Credits
 
-[Netmiko](https://github.com/ktbyers/netmiko "Netmiko"): A multi-vendor library to simplify Paramiko SSH connections to network devices.
+[Bootstrap](https://getbootstrap.com/ "Bootstrap"): Front-end HTML/CSS framework.
+
+[eCharts](https://github.com/ecomfe/echarts "eCharts"): Interactive charting and visualization javascript library.
+
+[Flask](http://flask.pocoo.org/ "Flask"): A microframework based on the Werkzeug toolkit and Jinja2 template engine.
+
+[Flask WTForms](https://github.com/lepture/flask-wtf "Flask WTForms"): Simple integration of Flask and WTForms, including CSRF, file upload, and reCAPTCHA.
+
+[Flask SQLAlchemy](http://flask-sqlalchemy.pocoo.org/ "Flask SQLAlchemy"): Adds support for SQLAlchemy to Flask.
+
+[Flask Login](https://flask-login.readthedocs.io/en/latest/ "Flask Login"): Provides user session management for Flask.
 
 [Jinja2](https://github.com/pallets/jinja "Jinja2"): A modern and designer-friendly templating language for Python.
 
+[TACACS+](https://github.com/ansible/tacacs_plus/ "TACACS+"): A TACACS+ client that supports authentication, authorization and accounting.
+
 [NAPALM](https://github.com/napalm-automation/napalm "NAPALM"): A library that implements a set of functions to interact with different network device Operating Systems using a unified API.
 
-[simplekml](http://simplekml.readthedocs.io/en/latest/): Library to generate KML files (Google Earth)
+[Netmiko](https://github.com/ktbyers/netmiko "Netmiko"): A multi-vendor library to simplify Paramiko SSH connections to network devices.
+
+[pyYAML](https://github.com/yaml/pyyaml "pyYAML"): YAML parser and emitter for Python.
+
+[simplekml](http://simplekml.readthedocs.io/en/latest/ "SimpleKML"): Library to generate KML files (Google Earth).
+
+[xlrd](https://github.com/python-excel/xlrd): Library to extract data from Microsoft Excel (tm) spreadsheet files.

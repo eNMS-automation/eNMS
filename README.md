@@ -89,9 +89,9 @@ numpy, cvxopt (optional: used for linear programming)
 simplekml (optional: used for exporting project to Google Earth)
 ```
 
-In order to use eNMS, you need to run **/source/main.py**.
+In order to use eNMS, you need to run **/source/flask_app.py**.
 ```
-python main.py
+python flask_app.py
 ```
 
 # Contact
@@ -102,7 +102,7 @@ You can contact me at my personal email address:
 117, 114, 109, 121, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109)))
 ```
 
-or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"). (@minto, channel #pyNMS)
+or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"). (@minto, channel #enms)
 
 # Credits
 

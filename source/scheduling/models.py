@@ -89,8 +89,10 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
                 secret
                 )
             if action in ('load_merge_candidate', 'load_replace_candidate'):
+                print(script.content)
                 getattr(napalm_driver, action)(config=script.content)
                 napalm_driver.commit_config()
+                print('commit OK')
             else:
                 getattr(napalm_driver, action)()
             napalm_driver.close()

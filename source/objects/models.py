@@ -2,7 +2,7 @@ from base.database import db
 from base.models import CustomBase
 from .properties import *
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 
 def initialize_properties(function):
     def wrapper(self, **kwargs):
@@ -210,26 +210,26 @@ class Link(Object):
     
     source_id = Column(
         Integer,
-        ForeignKey('Node.id'),
+        ForeignKey('Node.id', ondelete='CASCADE'),
         primary_key=True
         )
 
     destination_id = Column(
         Integer,
-        ForeignKey('Node.id'),
+        ForeignKey('Node.id', ondelete='CASCADE'),
         primary_key=True
         )
         
     source = relationship(
         Node,
         primaryjoin = source_id == Node.id,
-        backref = 'source'
+        backref=backref('source', passive_deletes=True)
         )
 
     destination = relationship(
         Node,
         primaryjoin = destination_id == Node.id,
-        backref = 'destination'
+        backref=backref('destination', passive_deletes=True)
         )
         
     properties = OrderedDict([

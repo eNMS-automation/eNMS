@@ -106,12 +106,17 @@ def delete_objects():
     if request.method == 'POST':
         # delete nodes
         node_selection = delete_objects_form.data['nodes']
-        db.session.query(Object).filter(Object.name.in_(node_selection))\
-        .delete(synchronize_session='fetch')
+        for node in node_selection:
+            node = db.session.query(Object).filter_by(name=node).first()
+            db.session.delete(node)
+        # note: a Query.delete() bypasses cascade deletes: we musn't do it
+        # db.session.query(Object).filter(Object.name.in_(node_selection))\
+        # .delete(synchronize_session='fetch')
         # delete links
         link_selection = delete_objects_form.data['links']
-        db.session.query(Object).filter(Object.name.in_(link_selection))\
-        .delete(synchronize_session='fetch')
+        for link in link_selection:
+            link = db.session.query(Object).filter_by(name=link).first()
+            db.session.delete(link)
         db.session.commit()
     delete_objects_form.nodes.choices = Node.visible_choices()
     delete_objects_form.links.choices = Link.visible_choices()

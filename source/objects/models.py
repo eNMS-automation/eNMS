@@ -210,26 +210,26 @@ class Link(Object):
     
     source_id = Column(
         Integer,
-        ForeignKey('Node.id', ondelete='CASCADE'),
+        ForeignKey('Node.id'),
         primary_key=True
         )
 
     destination_id = Column(
         Integer,
-        ForeignKey('Node.id', ondelete='CASCADE'),
+        ForeignKey('Node.id'),
         primary_key=True
         )
         
     source = relationship(
         Node,
         primaryjoin = source_id == Node.id,
-        backref=backref('source', passive_deletes=True)
+        backref=backref('source', cascade="all, delete-orphan")
         )
 
     destination = relationship(
         Node,
         primaryjoin = destination_id == Node.id,
-        backref=backref('destination', passive_deletes=True)
+        backref=backref('destination', cascade="all, delete-orphan")
         )
         
     properties = OrderedDict([

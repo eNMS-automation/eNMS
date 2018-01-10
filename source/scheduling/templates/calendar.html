@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Form Advanced {% endblock title %}
+{% block title %} Calendar {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -11,7 +11,6 @@
 
 {% block content %}
   <div class="right_col" role="main">
-
     <div class="row">
       <div class="col-md-12">
         <div class="x_panel">
@@ -26,13 +25,12 @@
     <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
           </div>
-          <div class="modal-body">
 
+          <div class="modal-body">
             <div id="testmodal2" style="padding: 5px 20px;">
               <form id="antoform2" class="form-horizontal calender" role="form">
                 <div class="form-group">
@@ -47,7 +45,6 @@
                     <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
                   </div>
                 </div>
-
               </form>
             </div>
           </div>
@@ -60,7 +57,6 @@
     </div>
 
     <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-    
   </div>
 {% endblock content %}
 

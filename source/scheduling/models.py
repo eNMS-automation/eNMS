@@ -40,9 +40,7 @@ def netmiko_job(name, type, script_name, username, password, ips,
                 username = username,
                 password = password,
                 secret = secret,
-                global_delay_factor = global_delay_factor,
-                timeout = 200,
-                session_timeout = 200
+                global_delay_factor = global_delay_factor
                 )
             if type == 'configuration':
                 print(script.content.splitlines())
@@ -53,9 +51,9 @@ def netmiko_job(name, type, script_name, username, password, ips,
                 for show_command in script.content.splitlines():
                     outputs.append(netmiko_handler.send_command(show_command))
                 result = '\n\n'.join(outputs)
-            netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
+        netmiko_handler.disconnect()
         task.logs[job_time][name] = result
     db.session.commit()
 

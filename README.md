@@ -2,7 +2,7 @@
 
 eNMS is a network visualization, inventory and automation web platform.
 
-**You can find a demo of eNMS _![here](http://afourmy.pythonanywhere.com/)_ !**
+**You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !**
 
 ![eNMS](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
 
@@ -11,10 +11,10 @@ eNMS is a network visualization, inventory and automation web platform.
 ## Object creation
 
 Nodes and links can be created in two ways: 
-- one by one by specifying all properties manually, in the "Object creation" page.
+- one by one by specifying all properties manually, in the _Object creation_ page.
 - by importing an Excel file with one sheet per type of object.
 Examples of such Excel files are available in the **_/project folder_**.
-Once your objects have been created, you can go to the "Overview" page.
+Once your objects have been created, you can go to the _Overview_ page.
 All objects are displayed in a sortable and searchable table.
 
 ![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.gif)
@@ -30,8 +30,8 @@ which properties are displayed as pie charts in the dashboard.
 
 Network visualization is of paramount importance for quickly understanding the network topology.
 There are two ways of visualizing the network in eNMS:
-- Geographical view: eNMS uses Open Street Map to draw all network devices at their exact location GPS location.
-- Logical view: the geographical view only makes sense if we have all GPS coordinates: it is not always the case. The logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way.
+- **Geographical view**: eNMS uses Open Street Map to draw all network devices at their exact location GPS location.
+- **Logical view**: the geographical view only makes sense if we have all GPS coordinates: it is not always the case. The logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way.
 
 ![Network GIS visualization](https://github.com/afourmy/eNMS/blob/master/readme/views.gif)
 
@@ -51,29 +51,29 @@ Your credentials are automatically provided to PuTTY for faster login.
 ## Network automation
 
 There are four types of task in eNMS:
-- **Netmiko _configuration_ task**: you write a script (plain text or Jinja2 template) which is sent with _netmiko_config_set_ function.
-- **Netmiko _show commands_ task**: the script is a list of “show commands” which output will be displayed in the task logs.
-- **NAPALM _configuration_ task**: you write a script (plain text or Jinja2 template); the script is sent with _load_merge_candidate_ or _load_replace_candidate_ functions.
-- **NAPALM _getters_**: the user choose a list of getters which output are displayed in the task logs.
-For each task, you can select a list of target devices. All tasks are multithreaded.
+- **Netmiko _configuration_ task**: list of commands to configure the device (plain text or Jinja2 template).
+- **Netmiko _show commands_ task**: list of “show commands” which output will be displayed in the task logs.
+- **NAPALM _configuration_ task**: partial or full configuration (plain text or Jinja2 template).
+- **NAPALM _getters_**: list of getters which output will be displayed in the task logs.
+
+For each task, you can select a list of target devices. All tasks are _multithreaded_.
 
 eNMS also provides some scheduling functions:
 - **Start date**: instead of running the task immediately, the task will start at a specific time.
-- **Frequency**: the task will be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko show commands task / NAPALM getters task.
+- **Frequency**: the task will be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko **_show commands_** / **_NAPALM getters_** tasks.
 
 ### Simple configuration script with Netmiko
 
-eNMS uses Netmiko to send scripts to any SSH-enabled device. 
-You must first create a script in the "Script creation" webpage, then go to the 
-"Netmiko" webpage and select the script parameters (netmiko driver, global delay factor, target devices, etc).
-The script will be sent to all devices in a separate thread.
+- Create a script in the _Script creation_ page.
+- Set the script parameters (netmiko driver, global delay factor, target devices).
 
 ![Simple script with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_simple.gif)
 
 ### Template-based configuration
 
-For complex script, it is best to use Jinja2 templating language. In the "Script creation" webpage, you can write a Jinja2
-template, and import a YAML file that contains all associated variables.
+For complex script, it is best to use Jinja2 templating language:
+- Write a Jinja2 template in the _Script creation_ page.
+- Import a YAML file that contains all associated variables.
 eNMS will take care of converting the template to a real text-based script.
 
 ![Send jinja2 script via SSH with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_j2.gif)
@@ -86,6 +86,8 @@ NAPALM can be used to change the configuration (merge or replace), either via a 
 ![Use NAPALM to configure static routes](https://github.com/afourmy/eNMS/blob/master/readme/napalm_config.gif)
 
 ### Netmiko "show commands" periodic retrieval
+
+![Netmiko show](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_show.gif)
 
 ### NAPALM getters periodic retrieval
 

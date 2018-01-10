@@ -147,6 +147,11 @@ simplekml (used for exporting project to Google Earth)
 
 In order to use eNMS, you need to:
     
+- clone eNMS (or download as a zip archive from github)
+```
+pip clone https://github.com/afourmy/eNMS.git
+```
+    
 - install the requirements
 ```
 pip install -r requirements.txt
@@ -154,6 +159,7 @@ pip install -r requirements.txt
 
 - run **/source/flask_app.py**.
 ```
+cd eNMS/source/
 python flask_app.py
 ```
 

@@ -98,11 +98,12 @@ You can find the task results in the task logs, in the "Task management" webpage
 
 ### Comparison
 
-For all periodic tasks (Netmiko show commands or NAPALM getters), you can compare the results
+For all periodic tasks, you can compare the results
 between two devices, at two different times.
+
 The comparison result is displayed with two methods:
-    - A unified diff: show just the lines that have changed plus a few lines of context, in an inline style. (method used on Github)
-    - A ndiff: list every line and highlights interline changes.
+- A **_unified diff_**: show just the lines that have changed plus a few lines of context, in an inline style. (method used on Github)
+- A **_ndiff_**: list every line and highlights interline changes.
 
 ![Comparison](https://github.com/afourmy/eNMS/blob/master/readme/comparison.gif)
 
@@ -111,8 +112,8 @@ The comparison result is displayed with two methods:
 The user can filter the objects available in the GUI by searching for specific value for each property. 
 For each property, the select can choose to use a regular expression instead of a hardcoded value:
 regexes allows for specific search like a location or an IP subnet.
-In the following example, we use the regexes [france|spain] for location to filter all objects that are not in France or in Spain, 
-as well as the regex [Router|Switch] for type to filter all nodes that are neither a router, nor a switch.
+
+In the following example, we use the regexes [france|spain] for location to filter all objects that are not in France or in Spain, as well as the regex [Router|Switch] for type to filter all nodes that are neither a router, nor a switch.
 
 ![Object filtering](https://github.com/afourmy/eNMS/blob/master/readme/object_filtering.gif)
 

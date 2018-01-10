@@ -94,7 +94,7 @@ NAPALM can be used to change the configuration (merge or replace), either via a 
 NAPALM can be used from within eNMS to retrieve detailed information about a device.
 You can find the task results in the task logs, in the "Task management" webpage.
 
-[![Configuration automation with NAPALM and Jinja2 scripting](https://github.com/afourmy/eNMS/blob/master/readme/napalm_getters.gif)]
+[![Configuration automation with NAPALM and Jinja2 scripting](https://github.com/afourmy/eNMS/blob/master/readme/napalm_getters.gif)
 
 ### Comparison
 
@@ -104,7 +104,7 @@ The comparison result is displayed with two methods:
     - A unified diff: show just the lines that have changed plus a few lines of context, in an inline style. (method used on Github)
     - A ndiff: list every line and highlights interline changes.
 
-[![Comparison](https://github.com/afourmy/eNMS/blob/master/readme/comparison.gif)]
+[![Comparison](https://github.com/afourmy/eNMS/blob/master/readme/comparison.gif)
 
 ## Display control
 
@@ -114,7 +114,7 @@ regexes allows for specific search like a location or an IP subnet.
 In the following example, we use the regexes [france|spain] for location to filter all objects that are not in France or in Spain, 
 as well as the regex [Router|Switch] for type to filter all nodes that are neither a router, nor a switch.
 
-[![Object filtering](https://github.com/afourmy/eNMS/blob/master/readme/object_filtering.gif)]
+[![Object filtering](https://github.com/afourmy/eNMS/blob/master/readme/object_filtering.gif)
 
 Note that filters apply to everything in eNMS that uses objects: dashboard, object deletion,
 geographical and logical views, task scheduling, etc. You can use them to visualize or send to script

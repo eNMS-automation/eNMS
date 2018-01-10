@@ -1,6 +1,7 @@
 # Introduction
 
 eNMS is a network visualization, inventory and automation web platform.
+You can find a demo of eNMS ![here](http://afourmy.pythonanywhere.com/)
 
 ![eNMS](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
 
@@ -9,19 +10,18 @@ eNMS is a network visualization, inventory and automation web platform.
 ## Object creation
 
 Nodes and links can be created in two ways: 
-- one by one by specifying all properties manually, in the "Object creation" webpage.
+- one by one by specifying all properties manually, in the "Object creation" page.
 - by importing an Excel file with one sheet per type of object.
-Examples of such Excel files are available in the /project folder.
-Once your objects have been created, you can go to the "Overview" webpage to have them displayed 
-in a sortable table.
-A "Search" field can be entered to filter the table: the filter applies to all properties of an object.
+Examples of such Excel files are available in the **_/project folder_**.
+Once your objects have been created, you can go to the "Overview" page.
+All objects are displayed in a sortable and searchable table.
 
 ![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.gif)
 
 ## Dashboard
 
 The dashboard displays pie charts for any property. You can select, for both nodes and links,
-which properties are to be displayed as pie charts in the dashboard.
+which properties are displayed as pie charts in the dashboard.
 
 ![Dashboard](https://github.com/afourmy/eNMS/blob/master/readme/dashboard.gif)
 
@@ -29,9 +29,8 @@ which properties are to be displayed as pie charts in the dashboard.
 
 Network visualization is of paramount importance for quickly understanding the network topology.
 There are two ways of visualizing the network in eNMS:
-    - Geographical view: eNMS uses Open Street Map to draw all network devices at their exact location (longitude and latitude).
-    - Logical view: the geographical view only makes sense if we have all GPS coordinates: it is not always the case. 
-The logical view uses a force-based graph-drawing algorithm to display the network in an aesthetically pleasing way.
+- Geographical view: eNMS uses Open Street Map to draw all network devices at their exact location GPS location.
+- Logical view: the geographical view only makes sense if we have all GPS coordinates: it is not always the case. The logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way.
 
 ![Network GIS visualization](https://github.com/afourmy/eNMS/blob/master/readme/views.gif)
 

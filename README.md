@@ -154,12 +154,13 @@ pip clone https://github.com/afourmy/eNMS.git
     
 - install the requirements
 ```
+cd eNMS
 pip install -r requirements.txt
 ```
 
 - run **/source/flask_app.py**.
 ```
-cd eNMS/source/
+cd source
 python flask_app.py
 ```
 

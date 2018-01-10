@@ -85,24 +85,24 @@ NAPALM can be used to change the configuration (merge or replace), either via a 
 
 ![Use NAPALM to configure static routes](https://github.com/afourmy/eNMS/blob/master/readme/napalm_config.gif)
 
-### Netmiko "show commands" periodic retrieval
+### Netmiko _show commands_ periodic retrieval
+
+You can schedule a task to retrieve the output of a list of commands (show, ping, traceroute, etc) periodically. The result is stored in the database and displayed in the logs of the task, in the _Task management_ page.
 
 ![Netmiko show](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_show.gif)
 
-### NAPALM getters periodic retrieval
+### NAPALM _getters_ periodic retrieval
 
-NAPALM can be used from within eNMS to retrieve detailed information about a device.
-You can find the task results in the task logs, in the "Task management" webpage.
+You can also schedule a task to retrieve a NAPALM getter periodically.
 
 ![Configuration automation with NAPALM and Jinja2 scripting](https://github.com/afourmy/eNMS/blob/master/readme/napalm_getters.gif)
 
 ### Comparison
 
-For all periodic tasks, you can compare the results
-between two devices, at two different times.
+For all periodic tasks, you can compare the results between any two devices, at two different times.
 
 The comparison result is displayed with two methods:
-- A **_unified diff_**: show just the lines that have changed plus a few lines of context, in an inline style. (method used on Github)
+- A **_unified diff_**: show just the lines that have changed plus a few lines of context, in an inline style. (like Git)
 - A **_ndiff_**: list every line and highlights interline changes.
 
 ![Comparison](https://github.com/afourmy/eNMS/blob/master/readme/comparison.gif)
@@ -145,7 +145,14 @@ jinja2, pyyaml (used for sending complex template-based scripts)
 simplekml (used for exporting project to Google Earth)
 ```
 
-In order to use eNMS, you need to run **/source/flask_app.py**.
+In order to use eNMS, you need to:
+    
+- install the requirements
+```
+pip install -r requirements.txt
+```
+
+- run **/source/flask_app.py**.
 ```
 python flask_app.py
 ```

@@ -1,7 +1,8 @@
 # Introduction
 
 eNMS is a network visualization, inventory and automation web platform.
-You can find a demo of eNMS ![here](http://afourmy.pythonanywhere.com/)
+
+**You can find a demo of eNMS _![here](http://afourmy.pythonanywhere.com/)_ !**
 
 ![eNMS](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
 
@@ -36,16 +37,13 @@ There are two ways of visualizing the network in eNMS:
 
 ## Export to Google Earth
 
-Networks can be exported as a .kmz file to be displayed on Google Earth.
-The nodes icons and links colors in Google Earth are the same as in eNMS.
-A project can be exported to Google Earth from the geographical view:
-the resulting file is stored in the /kmz folder.
+Networks can be exported on Google Earth from the geographical view: the resulting file is stored in the **_/kmz_** folder.
 
 ![Export to Google Earth](https://github.com/afourmy/eNMS/blob/master/readme/google_earth.gif)
 
 ## Embedded SSH client
 
-eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device (router, switch, server, etc), from the web interface.
+eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device from the web interface.
 Your credentials are automatically provided to PuTTY for faster login.
 
 ![SSH connection](https://github.com/afourmy/eNMS/blob/master/readme/ssh_connection.gif)
@@ -53,15 +51,15 @@ Your credentials are automatically provided to PuTTY for faster login.
 ## Network automation
 
 There are four types of task in eNMS:
-Netmiko configuration task: you write a script (plain text or Jinja2 template); the script is sent with netmiko_config_set function.
-Netmiko show commands task: the script is a list of “show commands” which output will be displayed in the task logs.
-NAPALM configuration task: you write a script (plain text or Jinja2 template); the script is sent with load_merge_candidate or load_replace_candidate functions.
-NAPALM getters: the user choose a list of getters which output are displayed in the task logs.
+- **Netmiko _configuration_ task**: you write a script (plain text or Jinja2 template) which is sent with _netmiko_config_set_ function.
+- **Netmiko _show commands_ task**: the script is a list of “show commands” which output will be displayed in the task logs.
+- **NAPALM _configuration_ task**: you write a script (plain text or Jinja2 template); the script is sent with _load_merge_candidate_ or _load_replace_candidate_ functions.
+- **NAPALM _getters_**: the user choose a list of getters which output are displayed in the task logs.
 For each task, you can select a list of target devices. All tasks are multithreaded.
 
 eNMS also provides some scheduling functions:
-Start date: instead of running the task immediately, the task will start at a specific time.
-Frequency: the task will be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko show commands task / NAPALM getters task.
+- **Start date**: instead of running the task immediately, the task will start at a specific time.
+- **Frequency**: the task will be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko show commands task / NAPALM getters task.
 
 ### Simple configuration script with Netmiko
 

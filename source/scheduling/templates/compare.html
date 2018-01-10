@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Projects {% endblock title %}
+{% block title %} Comparison {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -8,7 +8,6 @@
 
 {% block content %}
   <div class="right_col" role="main">
-
     <div class="row">
       <div class="col-md-12">
         <div class="x_panel">
@@ -16,16 +15,16 @@
             <h2>Comparison of the output</h2>
             <div class="clearfix"></div>
           </div>
+
           <div class="x_content">
-          <h2> Unified diff </h2>
-          <pre> {{ unified_diff }} </pre><br>
-          <h2> Ndiff </h2>
-          <pre> {{ ndiff }} </pre>
+            <h2> Unified diff </h2>
+            <pre> {{ unified_diff }} </pre><br>
+            <h2> Ndiff </h2>
+            <pre> {{ ndiff }} </pre>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 {% endblock content %}
 

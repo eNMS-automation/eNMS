@@ -51,7 +51,18 @@ Your credentials are automatically provided to PuTTY for faster login.
 
 ![SSH connection](https://github.com/afourmy/eNMS/blob/master/readme/ssh_connection.gif)
 
-## Network automaton
+## Network automation
+
+There are four types of task in eNMS:
+Netmiko configuration task: you write a script (plain text or Jinja2 template); the script is sent with netmiko_config_set function.
+Netmiko show commands task: the script is a list of “show commands” which output will be displayed in the task logs.
+NAPALM configuration task: you write a script (plain text or Jinja2 template); the script is sent with load_merge_candidate or load_replace_candidate functions.
+NAPALM getters: the user choose a list of getters which output are displayed in the task logs.
+For each task, you can select a list of target devices. All tasks are multithreaded.
+
+eNMS also provides some scheduling functions:
+Start date: instead of running the task immediately, the task will start at a specific time.
+Frequency: the task will be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko show commands task / NAPALM getters task.
 
 ### Simple configuration script with Netmiko
 
@@ -70,13 +81,18 @@ eNMS will take care of converting the template to a real text-based script.
 
 ![Send jinja2 script via SSH with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_j2.gif)
 
-### NAPALM getters periodic retrieval
+### NAPALM configuration
 
 NAPALM is an automation framework that provides a set of functions to interact with different network device Operating Systems using a unified API.
+NAPALM can be used to change the configuration (merge or replace), either via a plain text script or a Jinja2-enabled template.
+
+![Use NAPALM to configure static routes](https://github.com/afourmy/eNMS/blob/master/readme/napalm_config.gif)
+
+### Netmiko "show commands" periodic retrieval
+
+### NAPALM getters periodic retrieval
+
 NAPALM can be used from within eNMS to retrieve detailed information about a device.
-eNMS scheduling functions let you define:
-    - A start date, when the task is activated.
-    - A frequency, for the task to be triggered every "x" seconds
 You can find the task results in the task logs, in the "Task management" webpage.
 
 [![Configuration automation with NAPALM and Jinja2 scripting](https://github.com/afourmy/eNMS/blob/master/readme/napalm_getters.gif)]

@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Projects {% endblock title %}
+{% block title %} Task management {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -8,47 +8,37 @@
 
 {% block content %}
   <div class="right_col" role="main">
-    <div class="">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Tasks scheduling</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped projects">
+              <thead>
+                <tr>
+                  <th style="width: 1%">Name</th>
+                  <th style="width: 15%">Creation time</th>
+                  <th style="width: 1%">Type</th>
+                  <th>Creator</th>
+                  <th style="width: 10%">Status</th>
+                  <th style="width: 10%">Logs</th>
+                  <th style="width: 10%">Compare</th>
+                  <th style="width: 10%">Edit</th>
+                  <th style="width: 10%">Delete</th>
+                  <th style="width: 30%">Pause / Resume</th>
+                </tr>
+              </thead>
 
-      <div class="clearfix"></div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Tasks scheduling</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-
-              <table class="table table-striped projects">
-                <thead>
+              <tbody>
+                {% for task in tasks %}
                   <tr>
-                    <th style="width: 1%">Name</th>
-                    <th style="width: 15%">Creation time</th>
-                    <th style="width: 1%">Type</th>
-                    <th>Creator</th>
-                    <th style="width: 10%">Status</th>
-                    <th style="width: 10%">Logs</th>
-                    <th style="width: 10%">Compare</th>
-                    <th style="width: 10%">Edit</th>
-                    <th style="width: 10%">Delete</th>
-                    <th style="width: 30%">Pause / Resume</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for task in tasks %}
-                  <tr>
-                    <td>
-                      <a>{{ task.name }}</a>
-                    </td>
+                    <td><a>{{ task.name }}</a></td>
                     <td>{{ task.creation_time }}</td>
-                    <td>
-                      {{ task.type }}
-                    </td>
-                    <td>
-                      {{ task.creator }}
-                    </td>
+                    <td>{{ task.type }}</td>
+                    <td>{{ task.creator }}</td>
                     <td>
                       <button type="button" class="btn btn-success btn-xs">Active</button>
                     </td>
@@ -56,115 +46,106 @@
                       <div class="modal fade logs-{{ task.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                           <div class="modal-content">
-              
                             <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                              <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">×</span>
                               </button>
                               <h4 class="modal-title" id="myModalLabel">Logs</h4>
                             </div>
-                            
+
                             <div class="modal-body">
-
-                            <pre>{{ log_per_task[task.name] }}</pre>
-                            
+                              <pre> {{ log_per_task[task.name] }} </pre>
                             </div>
-                          
-
                           </div>
                         </div>
                       </div>
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".logs-{{ task.id }}"><i class="fa fa-pencil"></i> Logs </a></button>
+
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".logs-{{ task.id }}"><i class="fa fa-pencil">
+                        </i> Logs </a>
+                      </button>
                     </td>
                     <td>
-                    {% if task.recurrent %}
-                      <form name="compare" method="post">
-                        <div class="modal fade compare-{{ task.id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel"> Compare </h4>
-                              </div>
-                              
-                              
-                              <div class="modal-body">
-                                <div class="row">
-                                
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>First node</label>
-                                    {{ form_per_task[task.name].first_node(class="form-control") }}
+                      {% if task.recurrent %}
+                        <form name="compare" method="post">
+                          <div class="modal fade compare-{{ task.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span>
+                                  </button>
+                                  <h4 class="modal-title" id="myModalLabel"> Compare </h4>
+                                </div>
+
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <label>First node</label>
+                                      {{ form_per_task[task.name].first_node(class="form-control") }}
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <label>Second node</label>
+                                      {{ form_per_task[task.name].second_node(class="form-control") }}
+                                    </div>
                                   </div>
-                                  
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>Second node</label>
-                                    {{ form_per_task[task.name].second_node(class="form-control") }}
+
+                                  <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <label>First version</label>
+                                      {{ form_per_task[task.name].first_version(class="form-control") }}
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <label>Second version</label>
+                                      {{ form_per_task[task.name].second_version(class="form-control") }}
+                                    </div>
                                   </div>
                                 </div>
                                 
-                                <div class="row">
-                                  
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>First version</label>
-                                    {{ form_per_task[task.name].first_version(class="form-control") }}
-                                  </div>
-                                  
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>Second version</label>
-                                    {{ form_per_task[task.name].second_version(class="form-control") }}
-                                  </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-default" style="display: none;"></button>
+                                  <input type="hidden" name="task_name" value={{ task.name }} />
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary" name="compare">Compare</button>
                                 </div>
-                              
                               </div>
-                              
-                            <div class="modal-footer">
-                              <button class="btn btn-default" style="display: none;"></button>
-                              <input type="hidden" name="task_name" value={{ task.name }} />
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary" name="compare">Compare</button>
-                            </div>
-  
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".compare-{{ task.id }}"><i class="fa fa-pencil"></i> Compare </a></button>
+                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".compare-{{ task.id }}"><i class="fa fa-pencil"></i> Compare </a></button>
                       {% endif %}
-
                     </td>
                     <td>
                       <a href="" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     </td>
                     <td>
                       <form action="/scheduling/delete_task" method='post'>
-                      <input type="hidden" name="task_name" value={{ task.name }} />
-                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+                        <input type="hidden" name="task_name" value={{ task.name }} />
+                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
                       </form>
                     </td>
                     <td>
                       {% if task.frequency %}
                         {% if task.status == 'active' %}
-                        <form action="/scheduling/pause_task" method='post'>
-                        <input type="hidden" name="task_name" value={{ task.name }} />
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>
-                        </form>
+                          <form action="/scheduling/pause_task" method='post'>
+                            <input type="hidden" name="task_name" value={{ task.name }} />
+                            <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>
+                          </form>
                         {% else %}
-                        <form action="/scheduling/resume_task" method='post'>
-                        <input type="hidden" name="task_name" value={{ task.name }} />
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Resume</button>
-                        </form>
+                          <form action="/scheduling/resume_task" method='post'>
+                            <input type="hidden" name="task_name" value={{ task.name }} />
+                            <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Resume</button>
+                          </form>
                         {% endif %}
                       {% endif %}
                     </td>
                   </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-              <!-- end project list -->
-              
-            </div>
+                {% endfor %}
+              </tbody>
+            </table>
+            <!-- end project list -->
           </div>
         </div>
       </div>

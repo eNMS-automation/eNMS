@@ -8,87 +8,77 @@
 
 {% block content %}
   <div class="right_col" role="main">
-    <div class="">
-      
-      <div class="clearfix"></div>
-
-        <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
-        <div class="row">
-          <div class="col-md-6 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h3>Parameters</h3>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-              
-                <div class="form-group" style="height: 550px">
-                
-                  <label>Name</label>
-                  <div class='form-group'>
-                      {{ form.name(class="form-control") }}
-                  </div>
-                  
-                  <label>Script</label>
-                  <div class='form-group'>
-                      {{ form.script(class="form-control", required=true) }}
-                  </div>
-
-                  <label>Devices</label>
-                  <div class='form-group'>
-                      {{ form.nodes(class="form-control", size='10', size=15, required=true) }}
-                  </div>
-                  
-                  <label>Actions</label>
-                  <div class='form-group'>
-                      {{ form.actions(class="form-control", required=true) }}
-                  </div>
-                  
-                  <div class="ln_solid"></div>
-                  <div class="form-group">
-                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-4">
-                    
-                      <button class="btn btn-primary" type="reset">Reset</button>
-                      <button type="submit" class="btn btn-success" name="create_task">Send</button>
-                      
-                    </div>
-                  </div>
-                
-                </div>
-                
-              </div>
+    <form name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
+      <!-- begin row -->
+      <div class="row">
+        <!-- begin column -->
+        <div class="col-md-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h3>Parameters</h3>
+              <div class="clearfix"></div>
             </div>
-          </div>
-  
-          <div class="col-md-6 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h3>Scheduling</h3>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-              
-                <div class="form-group" style="height: 550px">
-  
-                  <label>Date</label>
-                  <div class='form-group'>
-                      {{ form.scheduled_date(class="form-control") }}
-                  </div>
-                  
-                  <label>Frequency (seconds)</label>
-                  <div class='form-group'>
-                      {{ form.frequency(class="form-control") }}
-                  </div>
 
+            <div class="x_content">
+              <div class="form-group" style="height: 550px">
+                <label>Name</label>
+                <div class='form-group'>
+                  {{ form.name(class="form-control") }}
+                </div>
+
+                <label>Script</label>
+                <div class='form-group'>
+                  {{ form.script(class="form-control", required=true) }}
+                </div>
+
+                <label>Devices</label>
+                <div class='form-group'>
+                  {{ form.nodes(class="form-control", size='10', size=15, required=true) }}
+                </div>
+
+                <label>Actions</label>
+                <div class='form-group'>
+                  {{ form.actions(class="form-control", required=true) }}
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-4">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success" name="create_task">Send</button>
                 </div>
               </div>
             </div>
           </div>
-          
-        </form>
+        </div>
+        <!-- end column -->
+
+        <!-- begin column -->
+        <div class="col-md-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h3>Scheduling</h3>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+              <div class="form-group" style="height: 550px">
+                <label>Date</label>
+                <div class='form-group'>
+                  {{ form.scheduled_date(class="form-control") }}
+                </div>
+
+                <label>Frequency (seconds)</label>
+                <div class='form-group'>
+                  {{ form.frequency(class="form-control") }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end column -->
       </div>
-
-    </div>
+      <!-- end row -->
+    </form>
   </div>
 {% endblock content %}
 

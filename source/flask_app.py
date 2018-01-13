@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from importlib import import_module
 from inspect import stack
 from os.path import abspath, dirname, join, pardir
@@ -32,8 +33,16 @@ def register_extensions(app):
     login_manager.init_app(app)
 
 def register_blueprints(app):
-    for module_name in next(os.walk(path_source))[1]:
-        module = import_module('{}.routes'.format(module_name))
+    blueprints = (
+        'base',
+        'objects',
+        'users',
+        'views',
+        'automation',
+        'scheduling'
+        )
+    for blueprint in blueprints:
+        module = import_module('{}.routes'.format(blueprint))
         app.register_blueprint(module.blueprint)
 
 def configure_login_manager(app, User):
@@ -52,6 +61,7 @@ def configure_database(app):
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
+    migrate = Migrate(app, db)
 
 def configure_logs(app):
     if not app.debug:

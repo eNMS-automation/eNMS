@@ -17,7 +17,7 @@ Examples of such Excel files are available in the **_/project folder_**.
 Once your objects have been created, you can go to the _Overview_ page.
 All objects are displayed in a sortable and searchable table.
 
-![Object creation](https://github.com/afourmy/eNMS/blob/master/readme/object_creation.gif)
+![Object creation](readme/object_creation.gif)
 
 ## Dashboard
 

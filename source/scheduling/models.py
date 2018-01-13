@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from flask import current_app
 from flask_apscheduler import APScheduler
 from automation.models import Script
+from multiprocessing.pool import ThreadPool
 from netmiko import ConnectHandler
 from objects.models import get_obj
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
@@ -20,7 +21,27 @@ except ImportError:
 scheduler = APScheduler()
 scheduler.start()
 
-## Jobs
+## Netmiko process and job
+
+def netmiko_process(kwargs):
+    results = kwargs.pop('results')
+    script, name = kwargs.pop('script'), kwargs.pop('name')
+    try:
+        print('i'*50)
+        netmiko_handler = ConnectHandler(**kwargs)
+        print('j'*50)
+        if type == 'configuration':
+            netmiko_handler.send_config_set(script.splitlines())
+            result = 'configuration OK'
+        else:
+            outputs = []
+            for show_command in script.splitlines():
+                outputs.append(netmiko_handler.send_command(show_command))
+            result = '\n\n'.join(outputs)
+    except Exception as e:
+        result = 'netmiko config did not work because of {}'.format(e)
+    results[name] = result
+    netmiko_handler.disconnect()
 
 def netmiko_job(name, type, script_name, username, password, ips, 
                     driver, global_delay_factor):
@@ -30,43 +51,48 @@ def netmiko_job(name, type, script_name, username, password, ips,
         .first()
     script = db.session.query(Script)\
         .filter_by(name=script_name)\
-        .first()
-    task.logs[job_time] = {}
-    for name, ip_address, _, secret in ips:
-        try:
-            netmiko_handler = ConnectHandler(                
-                ip = ip_address,
-                device_type = driver,
-                username = username,
-                password = password,
-                secret = secret,
-                global_delay_factor = global_delay_factor
-                )
-            if type == 'configuration':
-                print(script.content.splitlines())
-                netmiko_handler.send_config_set(script.content.splitlines())
-                result = 'configuration OK'
-            else:
-                outputs = []
-                for show_command in script.content.splitlines():
-                    outputs.append(netmiko_handler.send_command(show_command))
-                result = '\n\n'.join(outputs)
-        except Exception as e:
-            result = 'netmiko config did not work because of {}'.format(e)
-        netmiko_handler.disconnect()
-        task.logs[job_time][name] = result
+        .first() 
+    pool = ThreadPool(processes=100)
+    results = {}
+    kwargs = [({
+        'ip': ip_address,
+        'device_type': driver,
+        'username': username,
+        'password': password,
+        'secret': secret,
+        'global_delay_factor': global_delay_factor,
+        'name': device_name,
+        'script': script.content,
+        'results': results
+        }) for device_name, ip_address, _, secret in ips]
+    pool.map(netmiko_process, kwargs)
+    task.logs[job_time] = results
     db.session.commit()
 
-def napalm_connection(ip_address, username, password, driver, secret):
-    napalm_driver = get_network_driver(driver)
-    connection = napalm_driver(
-        hostname = ip_address, 
-        username = username,
-        password = password,
-        optional_args = {'secret': secret}
-        )
-    connection.open()
-    return connection
+## Napalm processes and jobs
+
+def napalm_config_process(kwargs):
+    try:
+        driver = get_network_driver(kwargs['driver'])
+        napalm_driver = driver(
+            hostname = kwargs['ip_address'], 
+            username = kwargs['username'],
+            password = kwargs['password'],
+            optional_args = {'secret': kwargs['secret']}
+            )
+        napalm_driver.open()
+        if kwargs['action'] in ('load_merge_candidate', 'load_replace_candidate'):
+            getattr(napalm_driver, kwargs['action'])(config=kwargs['script'])
+            napalm_driver.commit_config()
+            print('commit OK')
+        else:
+            getattr(napalm_driver, kwargs['action'])()
+        napalm_driver.close()
+    except Exception as e:
+        result = 'napalm config did not work because of {}'.format(e)
+    else:
+        result = 'configuration OK'
+    kwargs['results'][kwargs['name']] = result
 
 def napalm_config_job(name, script_name, username, password, nodes_info, action):
     job_time = str(datetime.now())
@@ -76,54 +102,62 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
     script = db.session.query(Script)\
         .filter_by(name=script_name)\
         .first()
-    task.logs[job_time] = {}
-    for name, ip_address, driver, secret in nodes_info:
-        try:
-            napalm_driver = napalm_connection(
-                ip_address, 
-                username,
-                password,
-                driver,
-                secret
-                )
-            if action in ('load_merge_candidate', 'load_replace_candidate'):
-                print(script.content)
-                getattr(napalm_driver, action)(config=script.content)
-                napalm_driver.commit_config()
-                print('commit OK')
-            else:
-                getattr(napalm_driver, action)()
-            napalm_driver.close()
-        except Exception as e:
-            result = 'netmiko config did not work because of {}'.format(e)
-        else:
-            result = 'configuration OK'
-        task.logs[job_time][name] = result
+    pool = ThreadPool(processes=100)
+    results = {}
+    kwargs = [({
+        'action': action,
+        'ip_address': ip_address,
+        'driver': driver,
+        'username': username,
+        'password': password,
+        'secret': secret,
+        'name': device_name,
+        'script': script.content,
+        'results': results
+        }) for device_name, ip_address, driver, secret in nodes_info]
+    pool.map(napalm_config_process, kwargs)
+    task.logs[job_time] = results
     db.session.commit()
+
+def napalm_getters_process(kwargs):
+    try:
+        driver = get_network_driver(kwargs['driver'])
+        napalm_driver = driver(
+            hostname = kwargs['ip_address'], 
+            username = kwargs['username'],
+            password = kwargs['password'],
+            optional_args = {'secret': kwargs['secret']}
+            )
+        napalm_driver.open()
+        for getter in kwargs['getters']:
+            try:
+                result = str_dict(getattr(napalm_driver, getter)())
+            except Exception as e:
+                result = '{} could not be retrieve because of {}'.format(getter, e)
+        napalm_driver.close()
+    except Exception as e:
+        result = 'getters process did not work because of {}'.format(e)
+    kwargs['results'][kwargs['name']] = result
 
 def napalm_getters_job(name, getters, username, password, nodes_info):
     job_time = str(datetime.now())
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    task.logs[job_time] = {}
-    for name, ip_address, driver, secret in nodes_info:
-        try:
-            napalm_driver = napalm_connection(
-                ip_address, 
-                username,
-                password,
-                driver,
-                secret
-                )
-            for getter in getters:
-                try:
-                    result = str_dict(getattr(napalm_driver, getter)())
-                except Exception as e:
-                    result = '{} could not be retrieve because of {}'.format(getter, e)
-        except Exception as e:
-            result = 'could not be retrieve because of {}'.format(e)
-        task.logs[job_time][name] = result
+    pool = ThreadPool(processes=100)
+    results = {}
+    kwargs = [({
+        'ip_address': ip_address,
+        'driver': driver,
+        'username': username,
+        'password': password,
+        'secret': secret,
+        'name': device_name,
+        'getters': getters,
+        'results': results
+        }) for device_name, ip_address, driver, secret in nodes_info]
+    pool.map(napalm_getters_process, kwargs)
+    task.logs[job_time] = results
     db.session.commit()
 
 ## Tasks
@@ -183,7 +217,7 @@ class Task(CustomBase):
 
     def recurrent_scheduling(self):
         if not self.scheduled_date:
-            self.scheduled_date = datetime.now() + timedelta(seconds=40)
+            self.scheduled_date = datetime.now() + timedelta(seconds=15)
         # run the job on a regular basis with an interval trigger
         id = scheduler.add_job(
             id = self.creation_time,

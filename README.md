@@ -4,7 +4,7 @@ eNMS is a network visualization, inventory and automation web platform.
 
 **You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !**
 
-![eNMS](https://github.com/afourmy/eNMS/blob/master/readme/eNMS.png)
+![eNMS](readme/eNMS.png)
 
 # Features
 
@@ -24,7 +24,7 @@ All objects are displayed in a sortable and searchable table.
 The dashboard displays pie charts for any property. You can select, for both nodes and links,
 which properties are displayed as pie charts in the dashboard.
 
-![Dashboard](https://github.com/afourmy/eNMS/blob/master/readme/dashboard.gif)
+![Dashboard](readme/dashboard.gif)
 
 ## Network visualization
 
@@ -33,20 +33,20 @@ There are two ways of visualizing the network in eNMS:
 - **Geographical view**: eNMS uses Open Street Map to draw all network devices at their exact location GPS location.
 - **Logical view**: the geographical view only makes sense if we have all GPS coordinates: it is not always the case. The logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way.
 
-![Network GIS visualization](https://github.com/afourmy/eNMS/blob/master/readme/views.gif)
+![Network GIS visualization](readme/views.gif)
 
 ## Export to Google Earth
 
 Networks can be exported on Google Earth from the geographical view: the resulting file is stored in the **_/kmz_** folder.
 
-![Export to Google Earth](https://github.com/afourmy/eNMS/blob/master/readme/google_earth.gif)
+![Export to Google Earth](readme/google_earth.gif)
 
 ## Embedded SSH client
 
 eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device from the web interface.
 Your credentials are automatically provided to PuTTY for faster login.
 
-![SSH connection](https://github.com/afourmy/eNMS/blob/master/readme/ssh_connection.gif)
+![SSH connection](readme/ssh_connection.gif)
 
 ## Network automation
 
@@ -67,7 +67,7 @@ eNMS also provides some scheduling functions:
 - Create a script in the _Script creation_ page.
 - Set the script parameters (netmiko driver, global delay factor, target devices).
 
-![Simple script with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_simple.gif)
+![Simple script with netmiko](readme/netmiko_simple.gif)
 
 ### Template-based configuration
 

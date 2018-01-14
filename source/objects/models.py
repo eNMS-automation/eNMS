@@ -223,13 +223,13 @@ class Link(Object):
     source = relationship(
         Node,
         primaryjoin = source_id == Node.id,
-        backref=backref('source', cascade="all, delete-orphan")
+        backref = backref('source', cascade="all, delete-orphan")
         )
 
     destination = relationship(
         Node,
         primaryjoin = destination_id == Node.id,
-        backref=backref('destination', cascade="all, delete-orphan")
+        backref = backref('destination', cascade="all, delete-orphan")
         )
         
     properties = OrderedDict([

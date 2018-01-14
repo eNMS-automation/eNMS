@@ -4,7 +4,6 @@ from collections import OrderedDict
 from flask import Blueprint, current_app, jsonify, render_template, request, send_file
 from flask_login import current_user, login_required
 from .forms import *
-from functools import partial
 from objects.models import *
 from objects.properties import *
 from os.path import join

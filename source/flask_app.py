@@ -3,7 +3,6 @@ from flask_migrate import Migrate
 from importlib import import_module
 from inspect import stack
 from os.path import abspath, dirname, join, pardir
-import flask_login
 import logging
 import os
 import sys

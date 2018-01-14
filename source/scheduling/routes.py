@@ -4,7 +4,7 @@ from difflib import ndiff, unified_diff
 from flask import Blueprint, render_template, request
 from flask_login import login_required
 from .forms import CompareForm
-from .models import Task, scheduler
+from .models import Task
 from objects.models import get_obj
 
 blueprint = Blueprint(

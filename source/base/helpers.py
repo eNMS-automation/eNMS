@@ -1,5 +1,3 @@
-from collections import OrderedDict
-
 def str_dict(input, depth=0):
     tab = '\t'*depth
     if isinstance(input, list):

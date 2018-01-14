@@ -1,6 +1,5 @@
-from collections import OrderedDict
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, TextField, SelectField
+from wtforms import TextField, SelectField
 from wtforms.validators import optional
 
 class SchedulingForm(FlaskForm):

@@ -1,4 +1,3 @@
-from __future__ import print_function
 from base.database import db
 from base.helpers import allowed_file
 from flask import (
@@ -15,7 +14,6 @@ from jinja2 import Template
 from .models import Script
 from objects.models import get_obj, Node
 from os.path import join
-from users.models import User
 from scheduling.models import *
 from yaml import load
 from werkzeug.utils import secure_filename

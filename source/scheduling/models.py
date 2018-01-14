@@ -8,7 +8,6 @@ from flask_apscheduler import APScheduler
 from automation.models import Script
 from multiprocessing.pool import ThreadPool
 from netmiko import ConnectHandler
-from objects.models import get_obj
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
@@ -27,9 +26,7 @@ def netmiko_process(kwargs):
     results = kwargs.pop('results')
     script, name = kwargs.pop('script'), kwargs.pop('name')
     try:
-        print('i'*50)
         netmiko_handler = ConnectHandler(**kwargs)
-        print('j'*50)
         if type == 'configuration':
             netmiko_handler.send_config_set(script.splitlines())
             result = 'configuration OK'

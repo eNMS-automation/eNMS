@@ -6,6 +6,11 @@ eNMS is a network visualization, inventory and automation web platform.
 
 ![eNMS](readme/eNMS.png)
 
+```
+username: cisco
+password: cisco
+```
+
 # Features
 
 ## Object creation
@@ -108,17 +113,17 @@ The comparison result is displayed with two methods:
 
 ![Comparison](readme/comparison.gif)
 
-## Display control
+## Display control with filters
 
 The user can filter the objects available in the GUI by searching for specific value for each property. 
-For each property, the select can choose to use a regular expression instead of a hardcoded value:
+For each property, the select can choose to use a _regular expression_ instead of a hardcoded value:
 regexes allows for specific search like a location or an IP subnet.
 
-In the following example, we use the regexes [france|spain] for location to filter all objects that are not in France or in Spain, as well as the regex [Router|Switch] for type to filter all nodes that are neither a router, nor a switch.
+In the following example, we use the regexes `[france|spain]` for `location` to filter all objects that are not in France or in Spain, as well as the regex `[Router|Switch]` for `type` to filter all nodes that are neither a router, nor a switch.
 
 ![Object filtering](readme/object_filtering.gif)
 
-Note that filters apply to everything in eNMS that uses objects: dashboard, object deletion,
+Note that _filters apply to everything_ in eNMS that uses objects: dashboard, object deletion,
 geographical and logical views, task scheduling, etc. You can use them to visualize or send to script
 to a specific subset of devices.
 
@@ -133,9 +138,9 @@ The first step will be to filters the nodes:
 - tick the regex box for the "OS version" parameter
 - apply the filter
 
-After that, in the netmiko / napalm scheduling page, only the devices that match those criteria will be displayed: all devices in the multiple selection box can be selected as target devices.
+After that, in the netmiko / napalm scheduling page, _only the devices that match those criteria will be displayed_: all devices in the multiple selection box can therefore be selected as target devices.
 
-## TACACS+-based authentication
+## TACACS+ authentication
 
 It is possible to configure a TACACS+ server in eNMS: upon authentication, a request will be sent to the server to check the credentials and log in the user.
 

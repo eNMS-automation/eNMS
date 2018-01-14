@@ -14,6 +14,7 @@ Nodes and links can be created in two ways:
 - one by one by specifying all properties manually, in the _Object creation_ page.
 - by importing an Excel file with one sheet per type of object.
 Examples of such Excel files are available in the **_/project folder_**.
+
 Once your objects have been created, you can go to the _Overview_ page.
 All objects are displayed in a sortable and searchable table.
 
@@ -148,6 +149,9 @@ simplekml (used for exporting project to Google Earth)
 
 In order to use eNMS, you need to:
     
+- (optional) set up a virtual environment.
+[Python official doc on virtual environments](https://docs.python.org/3/library/venv.html) 
+    
 - clone eNMS (or download as a zip archive from github)
 ```
 pip clone https://github.com/afourmy/eNMS.git
@@ -164,6 +168,10 @@ pip install -r requirements.txt
 cd source
 python flask_app.py
 ```
+
+- go the http://127.0.0.1:5100/.
+
+- create an account and log in.
 
 # Contact
 

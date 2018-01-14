@@ -122,6 +122,19 @@ Note that filters apply to everything in eNMS that uses objects: dashboard, obje
 geographical and logical views, task scheduling, etc. You can use them to visualize or send to script
 to a specific subset of devices.
 
+### Filtering use case
+
+Let's imagine that you want to send a script to all routers with IOS 12.4(24)T or IOS 12.4(11)T. By default, all devices will be displayed in the netmiko / napalm script scheduling page.
+
+The first step will be to filters the nodes:
+- go to the "Object filtering" page
+- set the "Operating System" to "IOS"
+- set the "OS version" to 12.4\((24|11)\)T
+- tick the regex box for the "OS version" parameter
+- apply the filter
+
+After that, in the netmiko / napalm scheduling page, only the devices that match those criteria will be displayed: all devices in the multiple selection box can be selected as target devices.
+
 ## TACACS+-based authentication
 
 It is possible to configure a TACACS+ server in eNMS: upon authentication, a request will be sent to the server to check the credentials and log in the user.

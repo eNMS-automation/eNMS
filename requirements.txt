@@ -1,6 +1,7 @@
 flask
 flask_apscheduler
 flask_login
+flask_migrate
 flask_sqlalchemy
 flask_wtf
 napalm

@@ -123,22 +123,22 @@ In the following example, we use the regexes `[france|spain]` for `location` to 
 
 ![Object filtering](readme/object_filtering.gif)
 
-Note that _filters apply to everything_ in eNMS that uses objects: dashboard, object deletion,
+Note that **_filters apply to everything_** in eNMS that uses objects: dashboard, object deletion,
 geographical and logical views, task scheduling, etc. You can use them to visualize or send to script
 to a specific subset of devices.
 
 ### Filtering use case
 
-Let's imagine that you want to send a script to all routers with IOS 12.4(24)T or IOS 12.4(11)T. By default, all devices will be displayed in the netmiko / napalm script scheduling page.
+Let's imagine that you want to send a script to all routers with IOS 12.4(24)T or IOS 12.4(11)T. By default, all devices will be displayed in the _netmiko / napalm script scheduling_ page.
 
 The first step will be to filters the nodes:
-- go to the "Object filtering" page
+- go to the _Object filtering_ page
 - set the "Operating System" to `IOS`
 - set the "OS version" to `12.4\((24|11)\)T`
 - tick the regex box for the "OS version" parameter
 - apply the filter
 
-After that, in the netmiko / napalm scheduling page, _only the devices that match those criteria will be displayed_: all devices in the multiple selection box can therefore be selected as target devices.
+After that, in the netmiko / napalm scheduling page, **_only the devices that match those criteria will be displayed_**: all devices in the multiple selection box can therefore be selected as target devices.
 
 ## TACACS+ authentication
 
@@ -219,13 +219,15 @@ or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to
 
 [Flask](http://flask.pocoo.org/ "Flask"): A microframework based on the Werkzeug toolkit and Jinja2 template engine.
 
-[Flask WTForms](https://github.com/lepture/flask-wtf "Flask WTForms"): Simple integration of Flask and WTForms, including CSRF, file upload, and reCAPTCHA.
-
-[Flask SQLAlchemy](http://flask-sqlalchemy.pocoo.org/ "Flask SQLAlchemy"): Adds support for SQLAlchemy to Flask.
+[Flask Gentelella](https://github.com/afourmy/flask-gentelella "Flask Gentelella"): Gentelella template powered by Flask.
 
 [Flask Login](https://flask-login.readthedocs.io/en/latest/ "Flask Login"): Provides user session management for Flask.
 
 [Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/ "Flask Migrate"): Handles SQLAlchemy database migrations for Flask applications using Alembic.
+
+[Flask SQLAlchemy](http://flask-sqlalchemy.pocoo.org/ "Flask SQLAlchemy"): Adds support for SQLAlchemy to Flask.
+
+[Flask WTForms](https://github.com/lepture/flask-wtf "Flask WTForms"): Simple integration of Flask and WTForms, including CSRF, file upload, and reCAPTCHA.
 
 [Font awesome](http://fontawesome.io/ "Font awesome"): Font and CSS toolkit.
 

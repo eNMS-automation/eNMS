@@ -124,9 +124,9 @@ to a specific subset of devices.
 
 ## TACACS+-based authentication
 
-It is possible to configure a TACACS+ server in eNMS: upon authentication, a request will be sent to the server to check the credentials.
+It is possible to configure a TACACS+ server in eNMS: upon authentication, a request will be sent to the server to check the credentials and log in the user.
 
-![Object filtering](readme/object_filtering.gif)
+![Object filtering](readme/tacacs_authentication)
 
 ## Add a new property
 

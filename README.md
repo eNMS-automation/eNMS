@@ -63,6 +63,7 @@ There are four types of task in eNMS:
 - **NAPALM _getters_**: list of getters which output will be displayed in the task logs.
 
 For each task, you can select a list of target devices. A script is sent to all target devices at the same time, with multiple processes (`multiprocessing` library).
+**Note**: netmiko has a _linux_ driver, which means that eNMS can also be used on Unix servers.
 
 eNMS also provides some scheduling functions:
 - **Start date**: instead of running the task immediately, the task will start at a specific time.

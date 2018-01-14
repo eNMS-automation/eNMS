@@ -90,7 +90,7 @@ def create_objects():
             )
         db.session.add(new_link)
         db.session.commit()
-    all_nodes = Node.choices()
+    all_nodes = Node.visible_choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     return render_template(
         'create_object.html',
@@ -130,10 +130,7 @@ def delete_objects():
 def filter_objects():
     form = FilteringForm(request.form)
     if request.method == 'POST':
-        # value = 
-        print(request.form)
         for obj in Node.query.all() + Link.query.all():
-            print(obj.__dict__, request.form)
             # source and destination do not belong to a link __dict__, because
             # they are SQLalchemy relationships and not columns
             # we update __dict__ with these properties for the filtering

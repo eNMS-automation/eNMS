@@ -75,7 +75,7 @@ def script_creation():
 def netmiko():
     form = NetmikoForm(request.form)
     # update the list of available nodes / script by querying the database
-    form.nodes.choices = Node.choices()
+    form.nodes.choices = Node.visible_choices()
     form.script.choices = Script.choices()
     if 'send' in request.form or 'create_task' in request.form:
         targets = get_targets(form.data['nodes'])
@@ -93,7 +93,7 @@ def netmiko():
 def napalm_getters():
     form = NapalmGettersForm(request.form)
     # update the list of available nodes by querying the database
-    form.nodes.choices = Node.choices()
+    form.nodes.choices = Node.visible_choices()
     if 'create_task' in request.form:
         targets = get_targets(form.data['nodes'])
         napalm_task = NapalmGettersTask(
@@ -113,7 +113,7 @@ def napalm_getters():
 def napalm_configuration():
     form = NapalmConfigurationForm(request.form)
     # update the list of available nodes / script by querying the database
-    form.nodes.choices = Node.choices()
+    form.nodes.choices = Node.visible_choices()
     form.script.choices = Script.choices()
     if 'create_task' in request.form:
         targets = get_targets(form.data['nodes'])

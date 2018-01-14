@@ -135,6 +135,7 @@ Example: description = Column(String) in the Object class.
 The following modules are used in eNMS:
 ```
 flask (web framework)
+flask_migrate (database migration)
 flask_wtf (forms)
 flask_sqlalchemy (database)
 flask_login (login system)
@@ -191,6 +192,8 @@ or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to
 [Flask SQLAlchemy](http://flask-sqlalchemy.pocoo.org/ "Flask SQLAlchemy"): Adds support for SQLAlchemy to Flask.
 
 [Flask Login](https://flask-login.readthedocs.io/en/latest/ "Flask Login"): Provides user session management for Flask.
+
+[Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/ "Flask Migrate"): Handles SQLAlchemy database migrations for Flask applications using Alembic.
 
 [Font awesome](http://fontawesome.io/ "Font awesome"): Font and CSS toolkit.
 

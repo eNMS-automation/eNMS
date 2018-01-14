@@ -2,7 +2,7 @@
 
 eNMS is a network visualization, inventory and automation web platform.
 
-**You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !**
+**You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !** (most functionalities are disabled)
 
 ```
 username: cisco
@@ -63,6 +63,7 @@ There are four types of task in eNMS:
 - **NAPALM _getters_**: list of getters which output will be displayed in the task logs.
 
 For each task, you can select a list of target devices. A script is sent to all target devices at the same time, with multiple processes (`multiprocessing` library).
+
 **Note**: netmiko has a _linux_ driver, which means that eNMS can also be used on Unix servers.
 
 eNMS also provides some scheduling functions:
@@ -89,6 +90,9 @@ eNMS will take care of converting the template to a real text-based script.
 
 NAPALM is an automation framework that provides a set of functions to interact with different network device Operating Systems using a unified API.
 NAPALM can be used to change the configuration (merge or replace), either via a plain text script or a Jinja2-enabled template.
+
+**Note**: the NAPALM driver used by eNMS is the one you configure in the "Operating System" property of a node.
+For NAPALM to work, you should respect NAPALM drivers syntax: `ios, iosxr, nxos, junos, eos`
 
 ![Use NAPALM to configure static routes](readme/napalm_config.gif)
 

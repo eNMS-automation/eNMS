@@ -77,26 +77,26 @@ For complex script, it is best to use Jinja2 templating language:
 - Import a YAML file that contains all associated variables.
 eNMS will take care of converting the template to a real text-based script.
 
-![Send jinja2 script via SSH with netmiko](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_j2.gif)
+![Send jinja2 script via SSH with netmiko](readme/netmiko_j2.gif)
 
 ### NAPALM configuration
 
 NAPALM is an automation framework that provides a set of functions to interact with different network device Operating Systems using a unified API.
 NAPALM can be used to change the configuration (merge or replace), either via a plain text script or a Jinja2-enabled template.
 
-![Use NAPALM to configure static routes](https://github.com/afourmy/eNMS/blob/master/readme/napalm_config.gif)
+![Use NAPALM to configure static routes](readme/napalm_config.gif)
 
 ### Netmiko _show commands_ periodic retrieval
 
 You can schedule a task to retrieve the output of a list of commands (show, ping, traceroute, etc) periodically. The result is stored in the database and displayed in the logs of the task, in the _Task management_ page.
 
-![Netmiko show](https://github.com/afourmy/eNMS/blob/master/readme/netmiko_show.gif)
+![Netmiko show](readme/netmiko_show.gif)
 
 ### NAPALM _getters_ periodic retrieval
 
 You can also schedule a task to retrieve a NAPALM getter periodically.
 
-![Configuration automation with NAPALM and Jinja2 scripting](https://github.com/afourmy/eNMS/blob/master/readme/napalm_getters.gif)
+![Configuration automation with NAPALM and Jinja2 scripting](readme/napalm_getters.gif)
 
 ### Comparison
 
@@ -106,7 +106,7 @@ The comparison result is displayed with two methods:
 - A **_unified diff_**: show just the lines that have changed plus a few lines of context, in an inline style. (like Git)
 - A **_ndiff_**: list every line and highlights interline changes.
 
-![Comparison](https://github.com/afourmy/eNMS/blob/master/readme/comparison.gif)
+![Comparison](readme/comparison.gif)
 
 ## Display control
 
@@ -116,11 +116,17 @@ regexes allows for specific search like a location or an IP subnet.
 
 In the following example, we use the regexes [france|spain] for location to filter all objects that are not in France or in Spain, as well as the regex [Router|Switch] for type to filter all nodes that are neither a router, nor a switch.
 
-![Object filtering](https://github.com/afourmy/eNMS/blob/master/readme/object_filtering.gif)
+![Object filtering](readme/object_filtering.gif)
 
 Note that filters apply to everything in eNMS that uses objects: dashboard, object deletion,
 geographical and logical views, task scheduling, etc. You can use them to visualize or send to script
 to a specific subset of devices.
+
+## TACACS+-based authentication
+
+It is possible to configure a TACACS+ server in eNMS: upon authentication, a request will be sent to the server to check the credentials.
+
+![Object filtering](readme/object_filtering.gif)
 
 ## Add a new property
 

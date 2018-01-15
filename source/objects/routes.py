@@ -69,6 +69,7 @@ def create_objects():
                             )
                         db.session.add(new_link)
                     else:
+                        kwargs['type'] = obj_type
                         object_factory(db, Node, **kwargs)
                 db.session.commit()
         else:

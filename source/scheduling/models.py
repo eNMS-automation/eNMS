@@ -80,8 +80,6 @@ def napalm_config_process(kwargs):
         napalm_driver.open()
         if kwargs['action'] in ('load_merge_candidate', 'load_replace_candidate'):
             getattr(napalm_driver, kwargs['action'])(config=kwargs['script'])
-            napalm_driver.commit_config()
-            print('commit OK')
         else:
             getattr(napalm_driver, kwargs['action'])()
         napalm_driver.close()

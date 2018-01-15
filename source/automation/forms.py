@@ -32,6 +32,7 @@ getters_mapping = OrderedDict([
 napalm_actions = OrderedDict([
 ('Load merge', 'load_merge_candidate'),
 ('Load replace', 'load_replace_candidate'),
+('Commit', 'commit_config'),
 ('Discard', 'discard_config'),
 ('Rollback', 'rollback'),
 ])

@@ -40,9 +40,7 @@ def create_objects():
     add_nodes_form = AddNodes(request.form)
     add_link_form = AddLink(request.form)
     if 'add_node' in request.form:
-        node = node_class[request.form['type']](**request.form)
-        db.session.add(node)
-        db.session.commit()
+        object_factory(db, Node, **request.form.to_dict())
     elif 'add_nodes' in request.form:
         filename = request.files['file'].filename
         if 'file' in request.files and allowed_file(filename, {'xls', 'xlsx'}):  
@@ -62,16 +60,16 @@ def create_objects():
                     if obj_type in link_class:
                         source = get_obj(db, Node, name=kwargs.pop('source'))
                         destination = get_obj(db, Node, name=kwargs.pop('destination'))
-                        new_obj = link_class[obj_type](
+                        new_link = link_class[obj_type](
                             source_id = source.id, 
                             destination_id = destination.id, 
                             source = source, 
                             destination = destination,
                             **kwargs
                             )
+                        db.session.add(new_link)
                     else:
-                        new_obj = node_class[obj_type](**kwargs)
-                    db.session.add(new_obj)
+                        object_factory(db, Node, **kwargs)
                 db.session.commit()
         else:
             flash('no file submitted')

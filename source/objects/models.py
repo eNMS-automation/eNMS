@@ -22,7 +22,7 @@ class Object(CustomBase):
     __tablename__ = 'Object'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(120))
+    name = Column(String(120), unique=True)
     description = Column(String)
     location = Column(String)
     vendor = Column(String(120))
@@ -376,3 +376,14 @@ for cls_dict in (node_class, link_class):
 
 def get_obj(db, model, **kwargs):
     return db.session.query(model).filter_by(**kwargs).first()
+
+def object_factory(db, cls, **kwargs):
+    obj = get_obj(db, cls, name=kwargs['name'])
+    if obj:
+        for property, value in kwargs.items():
+            if property in obj.__dict__:
+                setattr(obj, property, value)
+    else:
+        node = node_class[kwargs['type']](**kwargs)
+        db.session.add(node)
+    db.session.commit()

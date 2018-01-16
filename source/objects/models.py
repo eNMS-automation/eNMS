@@ -210,14 +210,12 @@ class Link(Object):
     
     source_id = Column(
         Integer,
-        ForeignKey('Node.id'),
-        primary_key=True
+        ForeignKey('Node.id')
         )
 
     destination_id = Column(
         Integer,
-        ForeignKey('Node.id'),
-        primary_key=True
+        ForeignKey('Node.id')
         )
         
     source = relationship(

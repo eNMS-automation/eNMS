@@ -118,7 +118,6 @@ def delete_objects():
         # delete links
         link_selection = delete_objects_form.data['links']
         for link in link_selection:
-            print(link)
             link = db.session.query(Object).filter_by(name=link).first()
             db.session.delete(link)
         db.session.commit()

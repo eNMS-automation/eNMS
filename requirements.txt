@@ -12,3 +12,4 @@ tacacs_plus
 wtforms
 xlrd
 pyyaml
+passlib

@@ -75,21 +75,16 @@ def create_objects():
         else:
             flash('no file submitted')
     elif 'add_link' in request.form:
-        link_form = request.form.to_dict()
-        form_source = link_form.pop('source')
-        source = db.session.query(Node)\
-            .filter_by(name=form_source)\
-            .first()
-        form_destination = link_form.pop('destination')
-        destination = db.session.query(Node)\
-            .filter_by(name=form_destination)\
-            .first()
-        new_link = EthernetLink(
+        kwargs = request.form.to_dict()
+        obj_type = kwargs.pop('type')
+        source = get_obj(db, Node, name=kwargs.pop('source'))
+        destination = get_obj(db, Node, name=kwargs.pop('destination'))
+        new_link = link_class[obj_type](
             source_id = source.id, 
             destination_id = destination.id, 
             source = source, 
             destination = destination,
-            **link_form
+            **kwargs
             )
         db.session.add(new_link)
         db.session.commit()

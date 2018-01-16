@@ -79,7 +79,7 @@ eNMS also provides some scheduling functions:
 
 ### Template-based configuration
 
-For complex script, it is best to use Jinja2 templating language:
+For complex scripts, it is best to use Jinja2 templating language:
 - Write a Jinja2 template in the _Script creation_ page.
 - Import a YAML file that contains all associated variables.
 eNMS will take care of converting the template to a real text-based script.
@@ -121,7 +121,7 @@ The comparison result is displayed with two methods:
 ## Display control with filters
 
 The user can filter the objects available in the GUI by searching for specific value for each property. 
-For each property, the select can choose to use a _regular expression_ instead of a hardcoded value:
+For each property, the user can choose to use a _regular expression_ instead of a hardcoded value:
 regexes allows for specific search like a location or an IP subnet.
 
 In the following example, we use the regexes `[france|spain]` for `location` to filter all objects that are not in France or in Spain, as well as the regex `[Router|Switch]` for `type` to filter all nodes that are neither a router, nor a switch.

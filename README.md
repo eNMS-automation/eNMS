@@ -169,11 +169,12 @@ flask_migrate (database migration)
 flask_wtf (forms)
 flask_sqlalchemy (database)
 flask_login (login system)
+jinja2, pyyaml (used for sending complex template-based scripts)
+netmiko, NAPALM (used for network automation)
+passlib (used for hashing passwords)
+simplekml (used for exporting project to Google Earth)
 tacacs_plus (used for enabling TACACS+ authentication)
 xlrd (used for creating objects from an Excel file)
-netmiko, NAPALM (used for network automation)
-jinja2, pyyaml (used for sending complex template-based scripts)
-simplekml (used for exporting project to Google Earth)
 ```
 
 In order to use eNMS, you need to:
@@ -255,6 +256,8 @@ or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to
 [OpenStreetMap](https://www.openstreetmap.org/ "OpenStreetMap"): Collaborative project to create a free editable map of the world.
 
 [Parsley](http://parsleyjs.org/ "Parsley"): JavaScript form validation library.
+
+[Passlib](https://passlib.readthedocs.io/en/stable/ "Passlib"): Password hashing library for Python 2 & 3.
 
 [pyYAML](https://github.com/yaml/pyyaml "pyYAML"): YAML parser and emitter for Python.
 

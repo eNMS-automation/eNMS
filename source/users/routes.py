@@ -2,6 +2,7 @@ from base.properties import pretty_names
 from flask import Blueprint, current_app, redirect, render_template, request, session, url_for
 from flask_login import login_required
 from .forms import *
+from passlib.hash import pbkdf2_sha256
 from .properties import user_search_properties
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import *
@@ -37,7 +38,10 @@ def manage_users():
     add_user_form = AddUser(request.form)
     delete_user_form = DeleteUser(request.form)
     if 'add_user' in request.form:
-        user = User(**request.form)
+        kwargs = request.form.to_dict()
+        password = kwargs.pop('password')
+        kwargs['password'] = pbkdf2_sha256.hash(password)
+        user = User(**kwargs)
         db.session.add(user)
     elif 'delete_user' in request.form:
         selection = delete_user_form.data['users']
@@ -62,7 +66,11 @@ def create_account():
         return render_template('login/create_account.html', form=form)
     else:
         login_form = LoginForm(request.form)
-        user = User(**request.form)
+        kwargs = request.form.to_dict()
+        password = kwargs.pop('password')
+        kwargs['password'] = pbkdf2_sha256.hash(password)
+        print(kwargs)
+        user = User(**kwargs)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('users_blueprint.login'))
@@ -72,8 +80,9 @@ def login():
     if request.method == 'POST':
         username = str(request.form['username'])
         password = str(request.form['password'])
+        print(request.form, pbkdf2_sha256.hash(password))
         user = db.session.query(User).filter_by(username=username).first()
-        if user and password == user.password:
+        if user and pbkdf2_sha256.verify(password, user.password):
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
         else:

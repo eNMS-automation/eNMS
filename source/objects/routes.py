@@ -75,17 +75,21 @@ def create_objects():
         else:
             flash('no file submitted')
     elif 'add_link' in request.form:
+        link_form = request.form.to_dict()
+        form_source = link_form.pop('source')
         source = db.session.query(Node)\
-            .filter_by(name=request.form['source'])\
+            .filter_by(name=form_source)\
             .first()
+        form_destination = link_form.pop('destination')
         destination = db.session.query(Node)\
-            .filter_by(name=request.form['destination'])\
+            .filter_by(name=form_destination)\
             .first()
         new_link = EthernetLink(
             source_id = source.id, 
             destination_id = destination.id, 
             source = source, 
-            destination = destination
+            destination = destination,
+            **link_form
             )
         db.session.add(new_link)
         db.session.commit()
@@ -114,6 +118,7 @@ def delete_objects():
         # delete links
         link_selection = delete_objects_form.data['links']
         for link in link_selection:
+            print(link)
             link = db.session.query(Object).filter_by(name=link).first()
             db.session.delete(link)
         db.session.commit()

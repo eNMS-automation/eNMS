@@ -80,7 +80,6 @@ def login():
     if request.method == 'POST':
         username = str(request.form['username'])
         password = str(request.form['password'])
-        print(request.form, pbkdf2_sha256.hash(password))
         user = db.session.query(User).filter_by(username=username).first()
         if user and pbkdf2_sha256.verify(password, user.password):
             flask_login.login_user(user)
@@ -93,6 +92,7 @@ def login():
                 # as it is not serializable: this temporary fixes will create
                 # a new instance of TACACSClient at each TACACS connection 
                 # attemp: clearly suboptimal, to be improved later.
+                hashed_password = pbkdf2_sha256.hash(password)
                 tacacs_client = TACACSClient(
                     str(session['ip_address']),
                     int(session['port']),
@@ -103,7 +103,7 @@ def login():
                     password,
                     TAC_PLUS_AUTHEN_TYPE_ASCII
                     ).valid:
-                    user = User(username=username, password=password)
+                    user = User(username=username, password=hashed_password)
                     db.session.add(user)
                     db.session.commit()
                     flask_login.login_user(user)

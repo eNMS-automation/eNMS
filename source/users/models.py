@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String
 from base.models import CustomBase
+from passlib.hash import cisco_type7
 
 class User(CustomBase, UserMixin):
     
@@ -25,6 +26,23 @@ class User(CustomBase, UserMixin):
             setattr(self, property, value)
         self.dashboard_node_properties = str(['type'])
         self.dashboard_link_properties = str(['type'])
-        
+
     def __repr__(self):
         return str(self.username)
+
+class TacacsServer(CustomBase):
+    
+    __tablename__ = 'TacacsServer'
+    
+    id = Column(Integer, primary_key=True)
+    ip_address = Column(String(120), unique=True)
+    password = Column(String(120), unique=True)
+    port = Column(Integer)
+    
+    def __init__(self, **kwargs):
+        self.ip_address = str(kwargs['ip_address'][0])
+        self.password = str(cisco_type7.hash(''.join(kwargs['password'])))
+        self.port = int(''.join(kwargs['port']))
+        
+    def __repr__(self):
+        return self.ip_address

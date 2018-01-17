@@ -39,8 +39,8 @@ def create_objects():
     add_node_form = AddNode(request.form)
     add_nodes_form = AddNodes(request.form)
     add_link_form = AddLink(request.form)
-    if 'add_node' in request.form:
-        object_factory(db, Node, **request.form.to_dict())
+    if 'add_node' in request.form or 'add_link' in request.form:
+        object_factory(db, **request.form.to_dict())
     elif 'add_nodes' in request.form:
         filename = request.files['file'].filename
         if 'file' in request.files and allowed_file(filename, {'xls', 'xlsx'}):  
@@ -57,37 +57,11 @@ def create_objects():
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
-                    if obj_type in link_class:
-                        source = get_obj(db, Node, name=kwargs.pop('source'))
-                        destination = get_obj(db, Node, name=kwargs.pop('destination'))
-                        new_link = link_class[obj_type](
-                            source_id = source.id, 
-                            destination_id = destination.id, 
-                            source = source, 
-                            destination = destination,
-                            **kwargs
-                            )
-                        db.session.add(new_link)
-                    else:
-                        kwargs['type'] = obj_type
-                        object_factory(db, Node, **kwargs)
+                    kwargs['type'] = obj_type
+                    object_factory(db, **kwargs)
                 db.session.commit()
         else:
             flash('no file submitted')
-    elif 'add_link' in request.form:
-        kwargs = request.form.to_dict()
-        obj_type = kwargs.pop('type')
-        source = get_obj(db, Node, name=kwargs.pop('source'))
-        destination = get_obj(db, Node, name=kwargs.pop('destination'))
-        new_link = link_class[obj_type](
-            source_id = source.id, 
-            destination_id = destination.id, 
-            source = source, 
-            destination = destination,
-            **kwargs
-            )
-        db.session.add(new_link)
-        db.session.commit()
     all_nodes = Node.visible_choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     return render_template(

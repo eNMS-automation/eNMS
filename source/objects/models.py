@@ -375,13 +375,26 @@ for cls_dict in (node_class, link_class):
 def get_obj(db, model, **kwargs):
     return db.session.query(model).filter_by(**kwargs).first()
 
-def object_factory(db, cls, **kwargs):
+#todo if the type is not the same, delete the object and recreate it
+def object_factory(db, **kwargs):
+    obj_type = kwargs['type']
+    cls = Node if obj_type in node_class else Link
     obj = get_obj(db, cls, name=kwargs['name'])
     if obj:
         for property, value in kwargs.items():
             if property in obj.__dict__:
                 setattr(obj, property, value)
+    elif obj_type in link_class:
+        source = get_obj(db, Node, name=kwargs.pop('source'))
+        destination = get_obj(db, Node, name=kwargs.pop('destination'))
+        obj = link_class[obj_type](
+            source_id = source.id, 
+            destination_id = destination.id, 
+            source = source, 
+            destination = destination,
+            **kwargs
+            )
     else:
-        node = node_class[kwargs['type']](**kwargs)
-        db.session.add(node)
+        obj = object_class[obj_type](**kwargs)
+    db.session.add(obj)
     db.session.commit()

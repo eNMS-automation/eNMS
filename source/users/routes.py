@@ -2,8 +2,9 @@ from base.properties import pretty_names
 from flask import Blueprint, current_app, redirect, render_template, request, session, url_for
 from flask_login import login_required
 from .forms import *
-from passlib.hash import pbkdf2_sha256
+from passlib.hash import cisco_type7
 from .properties import user_search_properties
+from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import *
 import flask_login
@@ -20,7 +21,7 @@ blueprint = Blueprint(
     )
 
 from base.database import db
-from .models import User
+from .models import User, TacacsServer
 
 @blueprint.route('/overview')
 @login_required
@@ -40,7 +41,7 @@ def manage_users():
     if 'add_user' in request.form:
         kwargs = request.form.to_dict()
         password = kwargs.pop('password')
-        kwargs['password'] = pbkdf2_sha256.hash(password)
+        kwargs['password'] = cisco_type7.hash(password)
         user = User(**kwargs)
         db.session.add(user)
     elif 'delete_user' in request.form:
@@ -68,8 +69,7 @@ def create_account():
         login_form = LoginForm(request.form)
         kwargs = request.form.to_dict()
         password = kwargs.pop('password')
-        kwargs['password'] = pbkdf2_sha256.hash(password)
-        print(kwargs)
+        kwargs['password'] = cisco_type7.hash(password)
         user = User(**kwargs)
         db.session.add(user)
         db.session.commit()
@@ -81,7 +81,7 @@ def login():
         username = str(request.form['username'])
         password = str(request.form['password'])
         user = db.session.query(User).filter_by(username=username).first()
-        if user and pbkdf2_sha256.verify(password, user.password):
+        if user and cisco_type7.verify(password, user.password):
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
         else:
@@ -92,23 +92,24 @@ def login():
                 # as it is not serializable: this temporary fixes will create
                 # a new instance of TACACSClient at each TACACS connection 
                 # attemp: clearly suboptimal, to be improved later.
-                hashed_password = pbkdf2_sha256.hash(password)
+                encrypted_password = cisco_type7.hash(password)
+                tacacs_server = db.session.query(TacacsServer).one()
                 tacacs_client = TACACSClient(
-                    str(session['ip_address']),
-                    int(session['port']),
-                    str(session['password'])
+                    str(tacacs_server.ip_address),
+                    int(tacacs_server.port),
+                    str(cisco_type7.decode(str(tacacs_server.password)))
                     )
                 if tacacs_client.authenticate(
                     username,
                     password,
                     TAC_PLUS_AUTHEN_TYPE_ASCII
                     ).valid:
-                    user = User(username=username, password=hashed_password)
+                    user = User(username=username, password=encrypted_password)
                     db.session.add(user)
                     db.session.commit()
                     flask_login.login_user(user)
                     return redirect(url_for('base_blueprint.dashboard'))
-            except KeyError:
+            except NoResultFound:
                 pass
         return render_template('errors/page_403.html')
     if not flask_login.current_user.is_authenticated:
@@ -125,9 +126,9 @@ def logout():
 @login_required
 def tacacs_server():
     if request.method == 'POST':
-        session['ip_address'] = request.form['ip_address']
-        session['port'] = int(request.form['port'])
-        session['password'] = request.form['password']
+        tacacs_server = TacacsServer(**request.form)
+        db.session.add(tacacs_server)
+        db.session.commit()
     return render_template(
         'tacacs_server.html', 
         form = TacacsServerForm(request.form)

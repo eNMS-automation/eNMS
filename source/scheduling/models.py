@@ -260,6 +260,7 @@ class NetmikoTask(Task):
         self.nodes = targets
         self.data = data
         self.job = netmiko_job
+        print(self.user.password)
         self.args = [
             data['name'],
             data['type'],

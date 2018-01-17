@@ -8,6 +8,7 @@ from flask_apscheduler import APScheduler
 from automation.models import Script
 from multiprocessing.pool import ThreadPool
 from netmiko import ConnectHandler
+from passlib.hash import cisco_type7
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
@@ -264,7 +265,7 @@ class NetmikoTask(Task):
             data['type'],
             self.script_name,
             self.user.username,
-            self.user.password,
+            cisco_type7.decode(self.user.password),
             targets,
             data['driver'],
             data['global_delay_factor'],
@@ -289,7 +290,7 @@ class NapalmConfigTask(Task):
             data['name'],
             self.script_name,
             self.user.username,
-            self.user.password,
+            cisco_type7.decode(self.user.password),
             targets,
             data['actions']
             ]
@@ -312,7 +313,7 @@ class NapalmGettersTask(Task):
             data['name'],
             data['getters'],
             self.user.username,
-            self.user.password,
+            cisco_type7.decode(self.user.password),
             targets
             ]
         super(NapalmGettersTask, self).__init__(user, **data)

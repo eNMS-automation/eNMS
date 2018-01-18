@@ -51,10 +51,9 @@ def view(view_type):
     google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
     # update the list of available nodes / script by querying the database
-    netmiko_form.nodes.choices = Node.visible_choices()
     netmiko_form.script.choices = Script.choices()
     if 'send' in request.form or 'create_task' in request.form:
-        targets = get_targets(netmiko_form.data['nodes'])
+        targets = session['selection']
         task = NetmikoTask(current_user, targets, **netmiko_form.data)
         db.session.add(task)
         db.session.commit()

@@ -22,7 +22,7 @@
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true"> × </span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">View options</h4>
+            <h4 class="modal-title">View options</h4>
           </div>
 
           <form data-parsley-validate class="form-horizontal form-label-left" method="post">
@@ -55,7 +55,7 @@
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true"> × </span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Export to Google Earth</h4>
+            <h4 class="modal-title">Google Earth</h4>
           </div>
           
           <form data-parsley-validate class="form-horizontal form-label-left" method="post">
@@ -79,6 +79,67 @@
                   {{ google_earth_form.line_width(class="form-control", required=true) }}
                 </div>
 
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="google_earth">Submit</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+    
+    <div id="netmiko" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">Netmiko script</h4>
+          </div>
+          
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
+
+              <div class="form-group">
+                <label>Name</label>
+                <div class='form-group'>
+                  {{ netmiko_form.name(class="form-control", required=true) }}
+                </div>
+  
+                <label>Type</label>
+                <div class='form-group'>
+                  {{ netmiko_form.type(class="form-control") }}
+                </div>
+  
+                <label>Script</label>
+                <div class='form-group'>
+                  {{ netmiko_form.script(class="form-control", required=true) }}
+                </div>
+    
+                <label>Driver</label>
+                <div class='form-group'>
+                  {{ netmiko_form.driver(class="form-control", required=true) }}
+                </div>
+  
+                <label>Global delay factor</label>
+                <div class='form-group'>
+                  {{ netmiko_form.global_delay_factor(class="form-control", required=true) }}
+                </div>
+    
+                <label>Devices</label>
+                <div class='form-group'>
+                    {{ netmiko_form.nodes(class="form-control", size='10', required=true) }}
+                </div>
               </div>
 
             </div>
@@ -139,10 +200,31 @@
                     container.style.backgroundColor = 'white';
                     container.style.height = '30px';
                     container.type="button";
-                    container.value = "Export to Google Earth";
+                    container.value = "Google Earth";
                 
                     container.onclick = function(){
                       $('#google_earth').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+                  
+                var netmikoControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.type="button";
+                    container.value = "Netmiko script";
+                
+                    container.onclick = function(){
+                      $('#netmiko').modal('show');
                       }
                     return container;
                     }
@@ -164,6 +246,7 @@
       
                 mymap.addControl(new viewOptionsControl());
                 mymap.addControl(new googleEarthControl());
+                mymap.addControl(new netmikoControl());
   
                 function loadXMLDoc() {
                   var req = new XMLHttpRequest()

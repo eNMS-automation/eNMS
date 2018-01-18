@@ -8,6 +8,7 @@ from json import dumps
 from objects.models import *
 from objects.properties import *
 from os.path import join
+from scheduling.models import *
 from simplekml import Color, Kml, Style
 from subprocess import Popen
 
@@ -45,9 +46,19 @@ for subtype, cls in link_class.items():
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
+    netmiko_form = NetmikoForm(request.form)
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
+    # update the list of available nodes / script by querying the database
+    netmiko_form.nodes.choices = Node.visible_choices()
+    netmiko_form.script.choices = Script.choices()
+    if 'send' in request.form or 'create_task' in request.form:
+        targets = get_targets(netmiko_form.data['nodes'])
+        task = NetmikoTask(current_user, targets, **netmiko_form.data)
+        db.session.add(task)
+        db.session.commit()
+        return redirect(url_for('scheduling_blueprint.task_management'))
     if 'view_options' in request.form:
         # retrieve labels
         labels = {
@@ -74,11 +85,11 @@ def view(view_type):
         
         filepath = join(current_app.kmz_path, request.form['name'] + '.kmz')
         kml_file.save(filepath)
-        
     return render_template(
         '{}_view.html'.format(view_type), 
         view_options_form = view_options_form,
         google_earth_form = google_earth_form,
+        netmiko_form = netmiko_form,
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,

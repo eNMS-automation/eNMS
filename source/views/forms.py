@@ -68,7 +68,6 @@ class NetmikoForm(SchedulingForm):
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', [optional()], choices=drivers)
     global_delay_factor = FloatField('global_delay_factor', [optional()], default=1.)
-    nodes = SelectMultipleField('Nodes', choices=())
 
 ## NAPALM automation
 

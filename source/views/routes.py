@@ -1,9 +1,10 @@
 from base.database import db
 from base.properties import pretty_names
 from collections import OrderedDict
-from flask import Blueprint, current_app, jsonify, render_template, request, send_file
+from flask import Blueprint, current_app, jsonify, render_template, request, session
 from flask_login import current_user, login_required
 from .forms import *
+from json import dumps
 from objects.models import *
 from objects.properties import *
 from os.path import join
@@ -99,7 +100,6 @@ def view(view_type):
 @blueprint.route('/putty_connection', methods = ['POST'])
 @login_required
 def putty_connection():
-    print(request.form)
     node = db.session.query(Node)\
         .filter_by(id=request.form['id'])\
         .first()
@@ -111,4 +111,10 @@ def putty_connection():
         current_user.password
         )
     connect = Popen(ssh_connection.split())
-    return jsonify(id=request.form['id'])
+    return dumps({'success': True}), 200, {'ContentType': 'application/json'} 
+
+@blueprint.route('/selection', methods = ['POST'])
+@login_required
+def selection():
+    session['selection'] = request.form.getlist('selection[]')
+    return dumps({'success': True}), 200, {'ContentType': 'application/json'} 

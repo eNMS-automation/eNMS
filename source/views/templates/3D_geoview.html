@@ -8,7 +8,7 @@
   <style>
     html, body{padding: 0; margin: 0; background-color: black;}
     #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
-  </style>
+  </style> 
 {% endblock stylesheets %}
 
 {% block content %}
@@ -30,8 +30,21 @@
   {{ super()}}
   <!-- jQuery Smart Wizard -->
           <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
-             
 <script>
+  
+  function connect_to_device() {
+      var id = document.getElementById('id').value
+      $.ajax({
+        type: "POST",
+        url: "/views/putty_connection",
+        dataType: "json",
+        data: { id: id },
+        success: function(msg){
+            $('.answer').html(msg);
+        }
+      });
+    }
+                  
   var earth = new WE.map('earth_div');
   WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
 
@@ -41,11 +54,15 @@
     [
     {{ obj.latitude }}, 
     {{ obj.longitude }}
-    ]
-
+    ],
     ).addTo(earth);
-
+    marker.bindPopup("{% for property in properties %}\
+    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
+    <input type='hidden' name='id' id='id' value={{ obj.id }}>\
+    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
     marker.node_id = {{ obj.id }};
+    console.log(marker)
+    marker.element.childNodes["0"].style.backgroundImage = 'static/images/selected/{{ obj.subtype }}.gif';
     markers.push(marker);
   {% endfor %}
 

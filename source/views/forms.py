@@ -55,6 +55,7 @@ napalm_actions = OrderedDict([
 ## Netmiko automation
 
 class NetmikoForm(SchedulingForm):
+    scheduled_date = TextField('Datetime')
     script = SelectField('', choices=())
     type_choices = (
         ('show_commands', 'Show commands'),
@@ -71,11 +72,13 @@ class NetmikoForm(SchedulingForm):
 ## NAPALM automation
 
 class NapalmGettersForm(SchedulingForm):
+    scheduled_date2 = TextField('Datetime')
     getters_choices = [(v, k) for k, v in getters_mapping.items()]
     getters = SelectMultipleField('Nodes', choices=getters_choices)
     output = TextAreaField('')
 
 class NapalmConfigurationForm(SchedulingForm):
+    scheduled_date1 = TextField('Datetime')
     script = SelectField('', choices=())
     action_choices = [(v, k) for k, v in napalm_actions.items()]
     actions = SelectField('Actions', choices=action_choices)

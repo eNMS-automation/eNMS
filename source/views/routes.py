@@ -1,7 +1,7 @@
 from base.database import db
 from base.properties import pretty_names
 from collections import OrderedDict
-from flask import Blueprint, current_app, jsonify, render_template, redirect, request, session
+from flask import Blueprint, current_app, jsonify, render_template, redirect, request, session, url_for
 from flask_login import current_user, login_required
 from .forms import *
 from json import dumps
@@ -43,6 +43,19 @@ for subtype, cls in link_class.items():
     line_style.linestyle.color = kml_color
     styles[subtype] = line_style
 
+def get_targets(nodes):
+    targets = []
+    for id in nodes:
+        obj = get_obj(db, Node, id=int(id))
+        print(obj, obj.name, obj.ip_address, obj.secret_password)
+        targets.append((
+            obj.name,
+            obj.ip_address, 
+            obj.operating_system.lower(),
+            obj.secret_password
+            ))
+    return targets
+
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
@@ -54,9 +67,8 @@ def view(view_type):
     labels = {'node': 'name', 'link': 'name'}
     # update the list of available nodes / script by querying the database
     netmiko_form.script.choices = Script.choices()
-    print(request.form)
     if 'netmiko_script' in request.form:
-        targets = session['selection']
+        targets = get_targets(session['selection'])
         task = NetmikoTask(current_user, targets, **netmiko_form.data)
         db.session.add(task)
         db.session.commit()
@@ -132,4 +144,65 @@ def putty_connection():
 @login_required
 def selection():
     session['selection'] = request.form.getlist('selection[]')
-    return dumps({'success': True}), 200, {'ContentType': 'application/json'} 
+    return dumps({'success': True}), 200, {'ContentType': 'application/json'}
+
+@blueprint.route('/netmiko', methods=['GET', 'POST'])
+@login_required
+def netmiko():
+    form = NetmikoForm(request.form)
+    # update the list of available nodes / script by querying the database
+    form.nodes.choices = Node.visible_choices()
+    form.script.choices = Script.choices()
+    if 'send' in request.form or 'create_task' in request.form:
+        targets = get_targets(form.data['nodes'])
+        task = NetmikoTask(current_user, targets, **form.data)
+        db.session.add(task)
+        db.session.commit()
+        return redirect(url_for('scheduling_blueprint.task_management'))
+    return render_template(
+        'netmiko.html',
+        form = form
+        )
+
+@blueprint.route('/napalm_getters', methods=['GET', 'POST'])
+@login_required
+def napalm_getters():
+    form = NapalmGettersForm(request.form)
+    # update the list of available nodes by querying the database
+    form.nodes.choices = Node.visible_choices()
+    if 'create_task' in request.form:
+        targets = get_targets(form.data['nodes'])
+        napalm_task = NapalmGettersTask(
+            current_user,
+            targets,
+            **form.data
+            )
+        db.session.add(napalm_task)
+        db.session.commit()
+    return render_template(
+        'napalm_getters.html',
+        form = form
+        )
+
+@blueprint.route('/napalm_configuration', methods=['GET', 'POST'])
+@login_required
+def napalm_configuration():
+    form = NapalmConfigurationForm(request.form)
+    # update the list of available nodes / script by querying the database
+    form.nodes.choices = Node.visible_choices()
+    form.script.choices = Script.choices()
+    if 'create_task' in request.form:
+        targets = get_targets(form.data['nodes'])
+        task = NapalmConfigTask(current_user, targets, **form.data)
+        db.session.add(task)
+        db.session.commit()
+        return redirect(url_for('scheduling_blueprint.task_management'))
+    return render_template(
+        'napalm_configuration.html',
+        form = form
+        )
+
+@blueprint.route('/napalm_ping_traceroute', methods=['GET', 'POST'])
+@login_required
+def napalm_ping_traceroute():
+    return render_template('napalm_ping_traceroute.html')

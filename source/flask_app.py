@@ -63,9 +63,8 @@ def configure_database(app):
     migrate = Migrate(app, db)
 
 def configure_logs(app):
-    if not app.debug:
-        logging.basicConfig(filename='error.log',level=logging.DEBUG)
-    logger = logging.getLogger()
+    logging.basicConfig(filename='error.log',level=logging.DEBUG)
+    logger = logging.getLogger('netmiko')
     logger.addHandler(logging.StreamHandler())
 
 def create_app(config='config'):

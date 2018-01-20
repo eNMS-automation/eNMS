@@ -6,7 +6,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
 from scheduling.forms import SchedulingForm
 from objects.properties import node_public_properties, link_public_properties
 from wtforms import *
-from wtforms.validators import Length, optional
+from wtforms.validators import Length
 
 class ViewOptionsForm(FlaskForm):
     node_label_choices = [(p, pretty_names[p]) for p in node_public_properties]
@@ -55,8 +55,7 @@ napalm_actions = OrderedDict([
 ## Netmiko automation
 
 class NetmikoForm(SchedulingForm):
-    script = SelectField('', [optional()], choices=())
-    nodes = SelectMultipleField('', [optional()], choices=())
+    script = SelectField('', choices=())
     type_choices = (
         ('show_commands', 'Show commands'),
         ('configuration', 'Configuration')
@@ -66,20 +65,17 @@ class NetmikoForm(SchedulingForm):
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
     netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
     drivers = [(driver, driver) for driver in netmiko_drivers]
-    driver = SelectField('', [optional()], choices=drivers)
-    global_delay_factor = FloatField('global_delay_factor', [optional()], default=1.)
+    driver = SelectField('', choices=drivers)
+    global_delay_factor = FloatField('global_delay_factor', default=1.)
 
 ## NAPALM automation
 
 class NapalmGettersForm(SchedulingForm):
-    nodes = SelectMultipleField('', [optional()], choices=())
     getters_choices = [(v, k) for k, v in getters_mapping.items()]
     getters = SelectMultipleField('Nodes', choices=getters_choices)
-    output = TextAreaField('', [optional()])
+    output = TextAreaField('')
 
 class NapalmConfigurationForm(SchedulingForm):
-    script = SelectField('', [optional()], choices=())
-    nodes = SelectMultipleField('', [optional()], choices=())
+    script = SelectField('', choices=())
     action_choices = [(v, k) for k, v in napalm_actions.items()]
-    actions = SelectField('Actions', [optional()], choices=action_choices)
-    nodes = SelectMultipleField('Nodes', choices=())
+    actions = SelectField('Actions', choices=action_choices)

@@ -59,9 +59,7 @@
           </div>
           
           <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-
             <div class="modal-body">
-
               <div class="form-group">
               
                 <label>Project name</label>
@@ -78,15 +76,13 @@
                 <div class='form-group'>
                   {{ google_earth_form.line_width(class="form-control", required=true) }}
                 </div>
-
               </div>
-
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success" name="google_earth">Submit</button>
+              <button type="submit" class="btn btn-success" name="netmiko_script">Submit</button>
             </div>
 
           </form>
@@ -139,15 +135,6 @@
                                     </span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#step-4">
-                      <span class="step_no">4</span>
-                      <span class="step_descr">
-                                        Step 4<br />
-                                        <small>Step 4 description</small>
-                                    </span>
-                    </a>
-                  </li>
                 </ul>
                 
                 <div id="step-1">
@@ -161,11 +148,6 @@
                     <label>Type</label>
                     <div class='form-group'>
                       {{ netmiko_form.type(class="form-control") }}
-                    </div>
-      
-                    <label>Script</label>
-                    <div class='form-group'>
-                      {{ netmiko_form.script(class="form-control", required=true) }}
                     </div>
         
                     <label>Driver</label>
@@ -181,16 +163,164 @@
                 </div>
                 
                 <div id="step-2">
-                dzqdqdzdq
+                  <label>Script</label>
+                  <div class='form-group'>
+                    {{ netmiko_form.script(class="form-control", required=true) }}
+                  </div>
                 </div>
 
                 <div id="step-3">
-                dzqdz
+                  <input type='hidden' name='netmiko_script'>
                 </div>
 
-                <div id="step-4">
-dqzdqzd
+              </div>
+              <!-- End SmartWizard Content -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div id="napalm-configuration" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard1()">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">Napalm configuration script</h4>
+          </div>
+          
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
+              <!-- Smart Wizard -->
+              <div id="wizard1" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                  <li>
+                    <a href="#step-11">
+                      <span class="step_no">1</span>
+                      <span class="step_descr">
+                                        Step 1<br />
+                                        <small>Napalm parameters</small>
+                                    </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-12">
+                      <span class="step_no">2</span>
+                      <span class="step_descr">
+                                        Step 2<br />
+                                        <small>Task scheduling</small>
+                                    </span>
+                    </a>
+                  </li>
+                </ul>
+                
+                <div id="step-11">
+                  <h2 class="StepTitle">Napalm parameters</h2>
+                  <div class="form-group">
+                    <label>Name</label>
+                    <div class='form-group'>
+                      {{ napalm_configuration_form.name(class="form-control") }}
+                    </div>
+    
+                    <label>Script</label>
+                    <div class='form-group'>
+                      {{ napalm_configuration_form.script(class="form-control", required=true) }}
+                    </div>
+
+                    <label>Actions</label>
+                    <div class='form-group'>
+                      {{ napalm_configuration_form.actions(class="form-control", required=true) }}
+                    </div>
+                  </div>
                 </div>
+
+                <div id="step-12">
+                  <label>Date</label>
+                  <div class='form-group'>
+                    {{ napalm_configuration_form.scheduled_date(class="form-control") }}
+                  </div>
+  
+                  <label>Frequency (seconds)</label>
+                  <div class='form-group'>
+                    {{ napalm_configuration_form.frequency(class="form-control") }}
+                  </div>
+                  <input type='hidden' name='napalm_configuration'>
+                </div>
+
+              </div>
+              <!-- End SmartWizard Content -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div id="napalm-getters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard2()">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">Netmiko script</h4>
+          </div>
+          
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
+              <!-- Smart Wizard -->
+              <div id="wizard2" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                  <li>
+                    <a href="#step-21">
+                      <span class="step_no">1</span>
+                      <span class="step_descr">
+                                        Step 1<br />
+                                        <small>Netmiko parameters</small>
+                                    </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-22">
+                      <span class="step_no">2</span>
+                      <span class="step_descr">
+                                        Step 2<br />
+                                        <small>Step 2 description</small>
+                                    </span>
+                    </a>
+                  </li>
+                </ul>
+                
+                <div id="step-21">
+                  <label>Name</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.name(class="form-control") }}
+                  </div>
+  
+                  <label>Getters</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.getters(class="form-control", size=9, required=true) }}
+                  </div>
+                </div>
+                
+                <div id="step-22">
+                  <label>Date</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.scheduled_date(class="form-control") }}
+                  </div>
+  
+                  <label>Frequency (seconds)</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.frequency(class="form-control") }}
+                  </div>
+                  <input type='hidden' name='napalm_getters'>
+                </div>
+
               </div>
               <!-- End SmartWizard Content -->
             </div>
@@ -221,8 +351,9 @@ dqzdqzd
                 
                     container.style.backgroundColor = 'white';
                     container.style.height = '30px';
+                    container.style.width = '150px';
                     container.type="button";
-                    container.value = "Filters";
+                    container.value = "View parameters";
                 
                     container.onclick = function(){
                       $('#filters').modal('show');
@@ -242,10 +373,11 @@ dqzdqzd
 
                     container.style.backgroundColor = 'white';
                     container.style.height = '30px';
+                    container.style.width = '150px';
                     container.type="button";
                     container.value = "Google Earth";
                 
-                    container.onclick = function(){
+                    container.onclick = function() {
                       $('#google_earth').modal('show');
                       }
                     return container;
@@ -263,11 +395,56 @@ dqzdqzd
 
                     container.style.backgroundColor = 'white';
                     container.style.height = '30px';
+                    container.style.width = '150px';
                     container.type="button";
                     container.value = "Netmiko script";
                 
                     container.onclick = function(){
                       $('#netmiko').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+                  
+                var napalmConfigurationControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "Napalm configuration";
+                
+                    container.onclick = function(){
+                      $('#napalm-configuration').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+                  
+                var napalmGettersControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "Napalm getters";
+                
+                    container.onclick = function(){
+                      $('#napalm-getters').modal('show');
                       }
                     return container;
                     }
@@ -290,6 +467,8 @@ dqzdqzd
                 mymap.addControl(new viewOptionsControl());
                 mymap.addControl(new googleEarthControl());
                 mymap.addControl(new netmikoControl());
+                mymap.addControl(new napalmConfigurationControl());
+                mymap.addControl(new napalmGettersControl());
   
                 function loadXMLDoc() {
                   var req = new XMLHttpRequest()
@@ -391,6 +570,18 @@ dqzdqzd
 
     function call_wizard(){
       $('#wizard').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    function call_wizard1(){
+      $('#wizard1').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    function call_wizard2(){
+      $('#wizard2').smartWizard();
       $('.buttonNext').addClass('btn btn-success');
       $('.buttonPrevious').addClass('btn btn-primary');
       $('.buttonFinish').addClass('btn btn-default');

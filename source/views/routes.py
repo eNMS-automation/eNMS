@@ -8,7 +8,7 @@ from json import dumps
 from objects.models import *
 from objects.properties import *
 from os.path import join
-from scheduling.models import *
+from tasks.models import *
 from simplekml import Color, Kml, Style
 from subprocess import Popen
 
@@ -72,7 +72,7 @@ def view(view_type):
         task = NetmikoTask(current_user, targets, **netmiko_form.data)
         db.session.add(task)
         db.session.commit()
-        return redirect(url_for('scheduling_blueprint.task_management'))
+        return redirect(url_for('tasks_blueprint.task_management'))
     if 'view_options' in request.form:
         # retrieve labels
         labels = {
@@ -158,7 +158,7 @@ def netmiko():
         task = NetmikoTask(current_user, targets, **form.data)
         db.session.add(task)
         db.session.commit()
-        return redirect(url_for('scheduling_blueprint.task_management'))
+        return redirect(url_for('tasks_blueprint.task_management'))
     return render_template(
         'netmiko.html',
         form = form
@@ -196,7 +196,7 @@ def napalm_configuration():
         task = NapalmConfigTask(current_user, targets, **form.data)
         db.session.add(task)
         db.session.commit()
-        return redirect(url_for('scheduling_blueprint.task_management'))
+        return redirect(url_for('tasks_blueprint.task_management'))
     return render_template(
         'napalm_configuration.html',
         form = form

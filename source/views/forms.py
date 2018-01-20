@@ -3,7 +3,7 @@ from collections import OrderedDict
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
-from scheduling.forms import SchedulingForm
+from tasks.forms import SchedulingForm
 from objects.properties import node_public_properties, link_public_properties
 from wtforms import *
 from wtforms.validators import Length

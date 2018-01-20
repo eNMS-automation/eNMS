@@ -5,7 +5,6 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from flask import current_app
 from flask_apscheduler import APScheduler
-from automation.models import Script
 from multiprocessing.pool import ThreadPool
 from netmiko import ConnectHandler
 from passlib.hash import cisco_type7
@@ -20,6 +19,23 @@ except ImportError:
 
 scheduler = APScheduler()
 scheduler.start()
+
+class Script(CustomBase):
+    
+    __tablename__ = 'Script'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(120))
+    type = Column(String(50))
+    content = Column(String)
+    
+    def __init__(self, content, **data):
+        self.name ,= data['name']
+        self.type ,= data['type']
+        self.content = ''.join(content)
+        
+    def __repr__(self):
+        return str(self.name)
 
 ## Netmiko process and job
 

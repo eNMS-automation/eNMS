@@ -18,7 +18,7 @@ path_source = os.path.dirname(os.path.abspath(__file__))
 path_parent = abspath(join(path_source, pardir))
 
 from base.database import db, create_database
-from scheduling.models import scheduler
+from tasks.models import scheduler
 from users.routes import login_manager
 
 def initialize_paths(app):
@@ -37,8 +37,7 @@ def register_blueprints(app):
         'objects',
         'users',
         'views',
-        'automation',
-        'scheduling'
+        'tasks'
         )
     for blueprint in blueprints:
         module = import_module('{}.routes'.format(blueprint))

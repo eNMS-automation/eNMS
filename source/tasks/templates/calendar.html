@@ -5,8 +5,8 @@
 {% block stylesheets %}
   {{ super() }}
   <!-- FullCalendar -->
-  <link href="{{ url_for('scheduling_blueprint.static', filename='fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('scheduling_blueprint.static', filename='fullcalendar/fullcalendar.print.css') }}" rel="stylesheet" media="print">
+  <link href="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.print.css') }}" rel="stylesheet" media="print">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -64,7 +64,7 @@
 {% block javascripts %}
   {{ super() }}
   <!-- FullCalendar -->
-  <script src="{{ url_for('scheduling_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
   <script>
       function  init_calendar() {
         

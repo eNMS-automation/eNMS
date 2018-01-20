@@ -41,9 +41,10 @@
     [
     {{ obj.latitude }}, 
     {{ obj.longitude }}
-    ],
+    ]
+
     ).addTo(earth);
-    marker.style.backgroundImage = 'url(' + 'static/images/default/{{ obj.subtype }}.png' + ')';
+
     marker.node_id = {{ obj.id }};
     markers.push(marker);
   {% endfor %}

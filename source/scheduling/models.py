@@ -26,9 +26,11 @@ scheduler.start()
 def netmiko_process(kwargs):
     results = kwargs.pop('results')
     script, name = kwargs.pop('script'), kwargs.pop('name')
+    script_type = kwargs.pop('type')
     try:
         netmiko_handler = ConnectHandler(**kwargs)
-        if type == 'configuration':
+        print(script_type*100)
+        if script_type == 'configuration':
             netmiko_handler.send_config_set(script.splitlines())
             result = 'configuration OK'
         else:
@@ -61,7 +63,8 @@ def netmiko_job(name, type, script_name, username, password, ips,
         'global_delay_factor': global_delay_factor,
         'name': device_name,
         'script': script.content,
-        'results': results
+        'results': results,
+        'type': type
         }) for device_name, ip_address, _, secret in ips]
     pool.map(netmiko_process, kwargs)
     task.logs[job_time] = results
@@ -260,7 +263,6 @@ class NetmikoTask(Task):
         self.nodes = targets
         self.data = data
         self.job = netmiko_job
-        print(self.user.password)
         self.args = [
             data['name'],
             data['type'],

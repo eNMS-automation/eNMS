@@ -8,13 +8,12 @@ def initialize_properties(function):
     def wrapper(self, **kwargs):
         function(self, **kwargs)
         for property, value in kwargs.items():
-            if property in public_properties:
-                # depending on whether value is an iterable or not, we must
-                # unpack it's value (when **kwargs is request.form, some values
-                # will be a 1-element list)
-                if hasattr(value, '__iter__') and not isinstance(value, str):
-                    value ,= value
-                setattr(self, property, value)
+            # depending on whether value is an iterable or not, we must
+            # unpack it's value (when **kwargs is request.form, some values
+            # will be a 1-element list)
+            if hasattr(value, '__iter__') and not isinstance(value, str):
+                value ,= value
+            setattr(self, property, value)
     return wrapper
 
 class Object(CustomBase):

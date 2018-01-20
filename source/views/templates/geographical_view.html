@@ -111,28 +111,17 @@
                   <li>
                     <a href="#step-1">
                       <span class="step_no">1</span>
-                      <span class="step_descr">
-                                        Step 1<br />
-                                        <small>Netmiko parameters</small>
-                                    </span>
+                      <span class="step_descr"> Step 1 <br/>
+                        <small>Parameters</small>
+                      </span>
                     </a>
                   </li>
                   <li>
                     <a href="#step-2">
                       <span class="step_no">2</span>
-                      <span class="step_descr">
-                                        Step 2<br />
-                                        <small>Step 2 description</small>
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#step-3">
-                      <span class="step_no">3</span>
-                      <span class="step_descr">
-                                        Step 3<br />
-                                        <small>Step 3 description</small>
-                                    </span>
+                      <span class="step_descr"> Step 2 <br/>
+                        <small>Scheduling</small>
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -144,6 +133,11 @@
                     <div class='form-group'>
                       {{ netmiko_form.name(class="form-control", required=true) }}
                     </div>
+                    
+                  <label>Script</label>
+                  <div class='form-group'>
+                    {{ netmiko_form.script(class="form-control", required=true) }}
+                  </div>
       
                     <label>Type</label>
                     <div class='form-group'>
@@ -162,14 +156,16 @@
                   </div>
                 </div>
                 
-                <div id="step-2">
-                  <label>Script</label>
+                <div id="step-2" style="min-height: 300px">
+                  <label>Date</label>
                   <div class='form-group'>
-                    {{ netmiko_form.script(class="form-control", required=true) }}
+                    {{ netmiko_form.scheduled_date(class="form-control") }}
                   </div>
-                </div>
-
-                <div id="step-3">
+  
+                  <label>Frequency (seconds)</label>
+                  <div class='form-group'>
+                    {{ netmiko_form.frequency(class="form-control") }}
+                  </div>
                   <input type='hidden' name='netmiko_script'>
                 </div>
 
@@ -201,19 +197,17 @@
                   <li>
                     <a href="#step-11">
                       <span class="step_no">1</span>
-                      <span class="step_descr">
-                                        Step 1<br />
-                                        <small>Napalm parameters</small>
-                                    </span>
+                      <span class="step_descr"> Step 1 <br/>
+                        <small>Parameters</small>
+                      </span>
                     </a>
                   </li>
                   <li>
                     <a href="#step-12">
                       <span class="step_no">2</span>
-                      <span class="step_descr">
-                                        Step 2<br />
-                                        <small>Task scheduling</small>
-                                    </span>
+                      <span class="step_descr"> Step 2 <br/>
+                        <small>Scheduling</small>
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -238,10 +232,10 @@
                   </div>
                 </div>
 
-                <div id="step-12">
+                <div id="step-12" style="min-height: 300px">
                   <label>Date</label>
                   <div class='form-group'>
-                    {{ napalm_configuration_form.scheduled_date(class="form-control") }}
+                    {{ napalm_configuration_form.scheduled_date1(class="form-control") }}
                   </div>
   
                   <label>Frequency (seconds)</label>
@@ -279,19 +273,17 @@
                   <li>
                     <a href="#step-21">
                       <span class="step_no">1</span>
-                      <span class="step_descr">
-                                        Step 1<br />
-                                        <small>Netmiko parameters</small>
-                                    </span>
+                      <span class="step_descr"> Step 1 <br/>
+                        <small>Parameters</small>
+                      </span>
                     </a>
                   </li>
                   <li>
                     <a href="#step-22">
                       <span class="step_no">2</span>
-                      <span class="step_descr">
-                                        Step 2<br />
-                                        <small>Step 2 description</small>
-                                    </span>
+                      <span class="step_descr"> Step 2 <br/>
+                        <small>Scheduling</small>
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -308,10 +300,10 @@
                   </div>
                 </div>
                 
-                <div id="step-22">
+                <div id="step-22" style="min-height: 300px">
                   <label>Date</label>
                   <div class='form-group'>
-                    {{ napalm_getters_form.scheduled_date(class="form-control") }}
+                    {{ napalm_getters_form.scheduled_date2(class="form-control") }}
                   </div>
   
                   <label>Frequency (seconds)</label>
@@ -462,6 +454,12 @@
                     iconAnchor: [9, 6], // point of the icon which will correspond to marker's location
                     popupAnchor: [8, -5] // point from which the popup should open relative to the iconAnchor
                     });
+                  var icon_selected_{{ subtype }} = L.icon({
+                    iconUrl: 'static/images/selected/{{ subtype }}.gif',
+                    iconSize: [18, 12], // size of the icon
+                    iconAnchor: [9, 6], // point of the icon which will correspond to marker's location
+                    popupAnchor: [8, -5] // point from which the popup should open relative to the iconAnchor
+                    });
                 {% endfor %}
       
                 mymap.addControl(new viewOptionsControl());
@@ -505,13 +503,16 @@
                     }
                   );
                   marker.node_id = {{ obj.id }};
-                  markers.push(marker)
+                  marker.selected_icon = icon_selected_{{ obj.subtype }};
+                  markers.push(marker);
                 {% endfor %}
                 
                 mymap.on("boxzoomend", function(e) {
                 var selection = [];
                 for (var i = 0; i < markers.length; i++) {
                   if (e.boxZoomBounds.contains(markers[i].getLatLng())) {
+                    markers[i].setIcon(markers[i].selected_icon);
+                    console.log(markers[i])
                     selection.push(markers[i].node_id);
                     console.log(selection);
                   }
@@ -567,7 +568,7 @@
   <!-- jQuery Smart Wizard -->
   <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
   <script>
-
+    <!-- Initialize Smart wizard -->
     function call_wizard(){
       $('#wizard').smartWizard();
       $('.buttonNext').addClass('btn btn-success');
@@ -586,5 +587,23 @@
       $('.buttonPrevious').addClass('btn btn-primary');
       $('.buttonFinish').addClass('btn btn-default');
     }
+    </script>
+    <!-- Initialize datetimepicker -->
+  <script src="{{ url_for('automation_blueprint.static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+<script>
+    $('#scheduled_date').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    $('#scheduled_date1').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    $('#scheduled_date2').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    var today = new Date()
+    $('#scheduled_date').data("DateTimePicker").minDate(today);
   </script>
 {% endblock javascripts %}

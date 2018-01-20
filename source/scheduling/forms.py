@@ -3,9 +3,7 @@ from wtforms import TextField, SelectField
 from wtforms.validators import optional
 
 class SchedulingForm(FlaskForm):
-
     name = TextField('Name')
-    scheduled_date = TextField('Datetime')
     script = SelectField('', choices=())
     frequency = TextField('Frequency')
 

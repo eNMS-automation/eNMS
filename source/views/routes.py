@@ -1,7 +1,7 @@
 from base.database import db
 from base.properties import pretty_names
 from collections import OrderedDict
-from flask import Blueprint, current_app, jsonify, render_template, request, session
+from flask import Blueprint, current_app, jsonify, render_template, redirect, request, session
 from flask_login import current_user, login_required
 from .forms import *
 from json import dumps
@@ -46,13 +46,16 @@ for subtype, cls in link_class.items():
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
+    napalm_configuration_form = NapalmConfigurationForm(request.form)
+    napalm_getters_form = NapalmGettersForm(request.form)
     netmiko_form = NetmikoForm(request.form)
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
     # update the list of available nodes / script by querying the database
     netmiko_form.script.choices = Script.choices()
-    if 'send' in request.form or 'create_task' in request.form:
+    print(request.form)
+    if 'netmiko_script' in request.form:
         targets = session['selection']
         task = NetmikoTask(current_user, targets, **netmiko_form.data)
         db.session.add(task)
@@ -85,10 +88,12 @@ def view(view_type):
         filepath = join(current_app.kmz_path, request.form['name'] + '.kmz')
         kml_file.save(filepath)
     return render_template(
-        '{}_view.html'.format(view_type), 
+        '{}_view.html'.format(view_type),
+        napalm_configuration_form = napalm_configuration_form,
+        napalm_getters_form = napalm_getters_form,
+        netmiko_form = netmiko_form,
         view_options_form = view_options_form,
         google_earth_form = google_earth_form,
-        netmiko_form = netmiko_form,
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,

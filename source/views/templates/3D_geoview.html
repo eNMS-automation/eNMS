@@ -1,0 +1,54 @@
+{% extends "base_site.html" %}
+
+{% block title %} 3D Geographical view {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
+  <style>
+    html, body{padding: 0; margin: 0; background-color: black;}
+    #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div id="earth_div" style="width:600px;height:400px;border:1px solid gray; padding:2px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <!-- jQuery Smart Wizard -->
+          <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
+             
+<script>
+  var earth = new WE.map('earth_div');
+  WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
+
+  var markers = [];
+  {% for obj, properties in node_table.items() %}  
+    var marker = WE.marker(
+    [
+    {{ obj.latitude }}, 
+    {{ obj.longitude }}
+    ],
+    ).addTo(earth);
+    marker.style.backgroundImage = 'url(' + 'static/images/default/{{ obj.subtype }}.png' + ')';
+    marker.node_id = {{ obj.id }};
+    markers.push(marker);
+  {% endfor %}
+
+</script>
+
+
+{% endblock javascripts %}

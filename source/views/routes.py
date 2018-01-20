@@ -56,7 +56,7 @@ def get_targets(nodes):
             ))
     return targets
 
-@blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
+@blueprint.route('/<view_type>view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
     napalm_configuration_form = NapalmConfigurationForm(request.form)
@@ -100,7 +100,7 @@ def view(view_type):
         filepath = join(current_app.kmz_path, request.form['name'] + '.kmz')
         kml_file.save(filepath)
     return render_template(
-        '{}_view.html'.format(view_type),
+        '{}view.html'.format(view_type),
         napalm_configuration_form = napalm_configuration_form,
         napalm_getters_form = napalm_getters_form,
         netmiko_form = netmiko_form,

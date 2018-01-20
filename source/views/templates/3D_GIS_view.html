@@ -1,0 +1,609 @@
+{% extends "base_site.html" %}
+
+{% block title %} Geographical view {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
+  <style>
+    #mapid { height:90vh; }
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="right_col" role="main">
+  
+    <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">View options</h4>
+          </div>
+
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
+              <div class="form-group">
+                <h5 class="modal-title">Labels</h5><br>
+                {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
+                {{ view_options_form.link_label(id="link_label", class="form-control") }}
+              </div>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="view_options">Submit</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="google_earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">Google Earth</h4>
+          </div>
+          
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <div class="modal-body">
+              <div class="form-group">
+              
+                <label>Project name</label>
+                <div class='form-group'>
+                  {{ google_earth_form.name(class="form-control", required=true) }}
+                </div>
+
+                <label>Label size:</label>
+                <div class='form-group'>
+                  {{ google_earth_form.label_size(class="form-control", required=true) }}
+                </div>
+
+                <label>Line width:</label>
+                <div class='form-group'>
+                  {{ google_earth_form.line_width(class="form-control", required=true) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success" name="netmiko_script">Submit</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+    
+    <div id="netmiko" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard()">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">Netmiko script</h4>
+          </div>
+          
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
+              <!-- Smart Wizard -->
+              <div id="wizard" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                  <li>
+                    <a href="#step-1">
+                      <span class="step_no">1</span>
+                      <span class="step_descr"> Step 1 <br/>
+                        <small>Parameters</small>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-2">
+                      <span class="step_no">2</span>
+                      <span class="step_descr"> Step 2 <br/>
+                        <small>Scheduling</small>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                
+                <div id="step-1">
+                  <h2 class="StepTitle">Step 4 Content</h2>
+                  <div class="form-group">
+                    <label>Name</label>
+                    <div class='form-group'>
+                      {{ netmiko_form.name(class="form-control", required=true) }}
+                    </div>
+                    
+                  <label>Script</label>
+                  <div class='form-group'>
+                    {{ netmiko_form.script(class="form-control", required=true) }}
+                  </div>
+      
+                    <label>Type</label>
+                    <div class='form-group'>
+                      {{ netmiko_form.type(class="form-control") }}
+                    </div>
+        
+                    <label>Driver</label>
+                    <div class='form-group'>
+                      {{ netmiko_form.driver(class="form-control", required=true) }}
+                    </div>
+      
+                    <label>Global delay factor</label>
+                    <div class='form-group'>
+                      {{ netmiko_form.global_delay_factor(class="form-control", required=true) }}
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="step-2" style="min-height: 300px">
+                  <label>Date</label>
+                  <div class='form-group'>
+                    {{ netmiko_form.scheduled_date(class="form-control") }}
+                  </div>
+  
+                  <label>Frequency (seconds)</label>
+                  <div class='form-group'>
+                    {{ netmiko_form.frequency(class="form-control") }}
+                  </div>
+                  <input type='hidden' name='netmiko_script'>
+                </div>
+
+              </div>
+              <!-- End SmartWizard Content -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div id="napalm-configuration" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard1()">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">Napalm configuration script</h4>
+          </div>
+          
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
+              <!-- Smart Wizard -->
+              <div id="wizard1" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                  <li>
+                    <a href="#step-11">
+                      <span class="step_no">1</span>
+                      <span class="step_descr"> Step 1 <br/>
+                        <small>Parameters</small>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-12">
+                      <span class="step_no">2</span>
+                      <span class="step_descr"> Step 2 <br/>
+                        <small>Scheduling</small>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                
+                <div id="step-11">
+                  <h2 class="StepTitle">Napalm parameters</h2>
+                  <div class="form-group">
+                    <label>Name</label>
+                    <div class='form-group'>
+                      {{ napalm_configuration_form.name(class="form-control") }}
+                    </div>
+    
+                    <label>Script</label>
+                    <div class='form-group'>
+                      {{ napalm_configuration_form.script(class="form-control", required=true) }}
+                    </div>
+
+                    <label>Actions</label>
+                    <div class='form-group'>
+                      {{ napalm_configuration_form.actions(class="form-control", required=true) }}
+                    </div>
+                  </div>
+                </div>
+
+                <div id="step-12" style="min-height: 300px">
+                  <label>Date</label>
+                  <div class='form-group'>
+                    {{ napalm_configuration_form.scheduled_date1(class="form-control") }}
+                  </div>
+  
+                  <label>Frequency (seconds)</label>
+                  <div class='form-group'>
+                    {{ napalm_configuration_form.frequency(class="form-control") }}
+                  </div>
+                  <input type='hidden' name='napalm_configuration'>
+                </div>
+
+              </div>
+              <!-- End SmartWizard Content -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div id="napalm-getters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard2()">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true"> × </span>
+            </button>
+            <h4 class="modal-title">Netmiko script</h4>
+          </div>
+          
+          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+            <div class="modal-body">
+              <!-- Smart Wizard -->
+              <div id="wizard2" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                  <li>
+                    <a href="#step-21">
+                      <span class="step_no">1</span>
+                      <span class="step_descr"> Step 1 <br/>
+                        <small>Parameters</small>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-22">
+                      <span class="step_no">2</span>
+                      <span class="step_descr"> Step 2 <br/>
+                        <small>Scheduling</small>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                
+                <div id="step-21">
+                  <label>Name</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.name(class="form-control") }}
+                  </div>
+  
+                  <label>Getters</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.getters(class="form-control", size=9, required=true) }}
+                  </div>
+                </div>
+                
+                <div id="step-22" style="min-height: 300px">
+                  <label>Date</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.scheduled_date2(class="form-control") }}
+                  </div>
+  
+                  <label>Frequency (seconds)</label>
+                  <div class='form-group'>
+                    {{ napalm_getters_form.frequency(class="form-control") }}
+                  </div>
+                  <input type='hidden' name='napalm_getters'>
+                </div>
+
+              </div>
+              <!-- End SmartWizard Content -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div id="mapid"></div>
+              <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
+          
+              <script>
+                var viewOptionsControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+              
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create(
+                      'input',
+                      'leaflet-bar leaflet-control leaflet-control-custom'
+                      );
+                
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "View parameters";
+                
+                    container.onclick = function(){
+                      $('#filters').modal('show');
+                      }
+                      return container;
+                    }
+                  })
+
+                var googleEarthControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "Google Earth";
+                
+                    container.onclick = function() {
+                      $('#google_earth').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+                  
+                var netmikoControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "Netmiko script";
+                
+                    container.onclick = function(){
+                      $('#netmiko').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+                  
+                var napalmConfigurationControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "Napalm configuration";
+                
+                    container.onclick = function(){
+                      $('#napalm-configuration').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+                  
+                var napalmGettersControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "Napalm getters";
+                
+                    container.onclick = function(){
+                      $('#napalm-getters').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+              
+                var mymap = L.map('mapid').setView([48, 2], 5);
+                L.tileLayer(
+                  'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                  {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
+                
+                {% for subtype in subtypes %}
+                  var icon_{{ subtype }} = L.icon({
+                    iconUrl: 'static/images/default/{{ subtype }}.gif',
+                    iconSize: [18, 12], // size of the icon
+                    iconAnchor: [9, 6], // point of the icon which will correspond to marker's location
+                    popupAnchor: [8, -5] // point from which the popup should open relative to the iconAnchor
+                    });
+                  var icon_selected_{{ subtype }} = L.icon({
+                    iconUrl: 'static/images/selected/{{ subtype }}.gif',
+                    iconSize: [18, 12], // size of the icon
+                    iconAnchor: [9, 6], // point of the icon which will correspond to marker's location
+                    popupAnchor: [8, -5] // point from which the popup should open relative to the iconAnchor
+                    });
+                {% endfor %}
+      
+                mymap.addControl(new viewOptionsControl());
+                mymap.addControl(new googleEarthControl());
+                mymap.addControl(new netmikoControl());
+                mymap.addControl(new napalmConfigurationControl());
+                mymap.addControl(new napalmGettersControl());
+  
+                function loadXMLDoc() {
+                  var req = new XMLHttpRequest()
+                  req.onreadystatechange = function() {
+                    if (req.readyState == 4) {
+                      if (req.status != 200) {
+                        //error handling code here
+                        }
+                      else {
+                        var response = JSON.parse(req.responseText)
+                        }
+                      }
+                    }
+                  req.open('POST', '/views/putty_connection')
+                  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+                  var id = document.getElementById('id').value
+                  var postVars = 'id='+id
+                  req.send(postVars)
+                  return false
+                  }
+              
+                var markers = [];
+                {% for obj, properties in node_table.items() %}  
+                  var marker = L.marker([
+                  {{ obj.latitude }}, 
+                  {{ obj.longitude }}], 
+                  {icon: icon_{{ obj.subtype }}}).addTo(mymap);
+                  marker.bindPopup("{% for property in properties %}\
+                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
+                  <input type='hidden' name='id' id='id' value={{ obj.id }}>\
+                  <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
+                  marker.bindTooltip("{{ obj[labels['node']] }}", {
+                    permanent: false, 
+                    }
+                  );
+                  marker.node_id = {{ obj.id }};
+                  marker.selected_icon = icon_selected_{{ obj.subtype }};
+                  markers.push(marker);
+                {% endfor %}
+                
+                mymap.on("boxzoomend", function(e) {
+                var selection = [];
+                for (var i = 0; i < markers.length; i++) {
+                  if (e.boxZoomBounds.contains(markers[i].getLatLng())) {
+                    markers[i].setIcon(markers[i].selected_icon);
+                    console.log(markers[i])
+                    selection.push(markers[i].node_id);
+                    console.log(selection);
+                  }
+                }
+
+                $.ajax({
+                  type: "POST",
+                  url: "/views/selection",
+                  dataType: "json",
+                  data: { selection: selection },
+                  success: function(msg){
+                      $('.answer').html(msg);
+                  }
+                });
+
+                });
+
+                {% for obj, properties in link_table.items() %}
+                  var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
+                  var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
+                  var pointList = [pointA, pointB];
+                  
+                  var firstpolyline = new L.Polyline(pointList, {
+                    color: '{{ obj.color }}',
+                    weight: 3,
+                    opacity: 1,
+                    smoothFactor: 1
+                    });
+                  firstpolyline.addTo(mymap);
+                  
+                  firstpolyline.bindPopup("{% for property in properties %}\
+                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
+              
+                  firstpolyline.bindTooltip("{{ obj[labels['link']] }}", {
+                    permanent: false, 
+                    });
+                    
+                
+                {% endfor %}
+              
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <!-- jQuery Smart Wizard -->
+  <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
+  <script>
+    <!-- Initialize Smart wizard -->
+    function call_wizard(){
+      $('#wizard').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    function call_wizard1(){
+      $('#wizard1').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    function call_wizard2(){
+      $('#wizard2').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    </script>
+    <!-- Initialize datetimepicker -->
+  <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+<script>
+    $('#scheduled_date').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    $('#scheduled_date1').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    $('#scheduled_date2').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        useCurrent: false,
+    });
+    var today = new Date()
+    $('#scheduled_date').data("DateTimePicker").minDate(today);
+  </script>
+{% endblock javascripts %}

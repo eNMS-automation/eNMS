@@ -658,22 +658,22 @@
     attribution: 'NASA'
   }).addTo(earth);
 
-  var markers = [];
+  var amarkers = [];
   {% for obj, properties in node_table.items() %}  
-    var marker = WE.marker(
+    var amarker = WE.marker(
     [
     {{ obj.latitude }}, 
     {{ obj.longitude }}
     ],
     ).addTo(earth);
-    marker.bindPopup("{% for property in properties %}\
+    amarker.bindPopup("{% for property in properties %}\
     <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
     <input type='hidden' name='id' id='id' value={{ obj.id }}>\
     <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
-    marker.node_id = {{ obj.id }};
-    console.log(marker)
-    marker.element.childNodes["0"].style.backgroundImage = 'static/images/selected/{{ obj.subtype }}.gif';
-    markers.push(marker);
+    amarker.node_id = {{ obj.id }};
+    console.log(amarker)
+    amarker.element.childNodes["0"].style.backgroundImage = 'static/images/selected/{{ obj.subtype }}.gif';
+    amarkers.push(amarker);
   {% endfor %}
   
   function switch_2D() {

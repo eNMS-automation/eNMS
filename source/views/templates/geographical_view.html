@@ -537,7 +537,7 @@
                   var marker = L.marker([
                   {{ obj.latitude }}, 
                   {{ obj.longitude }}], 
-                  {icon: icon_{{ obj.subtype }}}).addTo(mymap);
+                  {icon: icon_{{ obj.subtype }}});
                   marker.bindPopup("{% for property in properties %}\
                   <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                   <input type='hidden' name='id' id='id' value={{ obj.id }}>\
@@ -551,12 +551,16 @@
                   markers_array.push(marker);
                   
                   {% if clusterize %}
-                  markers.addLayer(marker)
-                  
+                    markers.addLayer(marker);
+                  {% else %}
+                    marker.addTo(mymap);
                   {% endif %}
                 {% endfor %}
                 
-                console.log(markers)
+                {% if clusterize %}
+                  mymap.addLayer(markers);
+                {% endif %}
+
                 mymap.on("boxzoomend", function(e) {
                 var selection = [];
                 for (var i = 0; i < markers_array.length; i++) {

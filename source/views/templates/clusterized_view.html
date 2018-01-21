@@ -471,10 +471,11 @@
                     }
                   })
               
-                var mymap = L.map('mapid').setView([48, 2], 5);
-                L.tileLayer(
+                var tiles = L.tileLayer(
                   'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-                  {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
+                  {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+                var mymap = L.map('mapid', {layers: [tiles]}).setView([48, 2], 5);
+                var markers = L.markerClusterGroup();
                 
                 {% for subtype in subtypes %}
                   var icon_{{ subtype }} = L.icon({
@@ -517,13 +518,14 @@
                   req.send(postVars)
                   return false
                   }
-              
-                var markers = [];
+                
+                var markers = L.markerClusterGroup();
+                var markers_array = [];
                 {% for obj, properties in node_table.items() %}  
                   var marker = L.marker([
                   {{ obj.latitude }}, 
                   {{ obj.longitude }}], 
-                  {icon: icon_{{ obj.subtype }}}).addTo(mymap);
+                  {icon: icon_{{ obj.subtype }}});
                   marker.bindPopup("{% for property in properties %}\
                   <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                   <input type='hidden' name='id' id='id' value={{ obj.id }}>\
@@ -534,19 +536,22 @@
                   );
                   marker.node_id = {{ obj.id }};
                   marker.selected_icon = icon_selected_{{ obj.subtype }};
-                  markers.push(marker);
+                  markers.addLayer(marker)
+                  markers_array.push(marker);
                 {% endfor %}
+                
+                mymap.addLayer(markers);
                 
                 mymap.on("boxzoomend", function(e) {
                 var selection = [];
-                for (var i = 0; i < markers.length; i++) {
-                  if (e.boxZoomBounds.contains(markers[i].getLatLng())) {
-                    markers[i].setIcon(markers[i].selected_icon);
-                    console.log(markers[i])
-                    selection.push(markers[i].node_id);
-                    console.log(selection);
+                for (var i = 0; i < markers_array.length; i++) {
+                  if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
+                    markers_array[i].setIcon(markers_array[i].selected_icon);
+                    selection.push(markers_array[i].node_id);
                   }
                 }
+                
+                
 
                 $.ajax({
                   type: "POST",
@@ -637,52 +642,5 @@
     $('#scheduled_date').data("DateTimePicker").minDate(today);
   </script>
           <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
-<script>
-  
-  function connect_to_device() {
-      var id = document.getElementById('id').value
-      $.ajax({
-        type: "POST",
-        url: "/views/putty_connection",
-        dataType: "json",
-        data: { id: id },
-        success: function(msg){
-            $('.answer').html(msg);
-        }
-      });
-    }
-  
-  var options = {sky:true, atmosphere: true};
-  var earth = new WE.map('earth_div', options);
-  //WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
-  WE.tileLayer('http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
-    minZoom: 0,
-    maxZoom: 5,
-    attribution: 'NASA'
-  }).addTo(earth);
 
-  var amarkers = [];
-  {% for obj, properties in node_table.items() %}  
-    var amarker = WE.marker(
-    [
-    {{ obj.latitude }}, 
-    {{ obj.longitude }}
-    ],
-    ).addTo(earth);
-    amarker.bindPopup("{% for property in properties %}\
-    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
-    <input type='hidden' name='id' id='id' value={{ obj.id }}>\
-    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
-    amarker.node_id = {{ obj.id }};
-    console.log(amarker)
-    amarker.element.childNodes["0"].style.backgroundImage = 'static/images/selected/{{ obj.subtype }}.gif';
-    amarkers.push(amarker);
-  {% endfor %}
-  
-  function switch_2D() {
-    $('#earth_div').hide();
-    $('#mapid').show();
-    }
-    $('#earth_div').hide();
-</script>
 {% endblock javascripts %}

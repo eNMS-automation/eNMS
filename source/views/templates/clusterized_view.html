@@ -332,7 +332,9 @@
             </div>
             <div id="mapid"></div>
               <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
+              {% if clusterize %}
               <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
+              {% endif %}
           
               <script>
                 var viewOptionsControl = L.Control.extend({
@@ -519,7 +521,8 @@
                   return false
                   }
                 
-                var markers = L.markerClusterGroup();
+                
+
                 var markers_array = [];
                 {% for obj, properties in node_table.items() %}  
                   var marker = L.marker([

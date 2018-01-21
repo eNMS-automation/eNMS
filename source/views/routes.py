@@ -126,6 +126,7 @@ def view(view_type):
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,
+        clusterize = True,
         node_table = {
             obj: OrderedDict([
                 (property, getattr(obj, property)) 

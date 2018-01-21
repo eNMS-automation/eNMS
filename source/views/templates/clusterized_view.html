@@ -539,8 +539,8 @@
                   markers.addLayer(marker)
                   markers_array.push(marker);
                 {% endfor %}
-                
                 mymap.addLayer(markers);
+                
                 
                 mymap.on("boxzoomend", function(e) {
                 var selection = [];
@@ -550,8 +550,6 @@
                     selection.push(markers_array[i].node_id);
                   }
                 }
-                
-                
 
                 $.ajax({
                   type: "POST",
@@ -565,29 +563,6 @@
 
                 });
 
-                {% for obj, properties in link_table.items() %}
-                  var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
-                  var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
-                  var pointList = [pointA, pointB];
-                  
-                  var firstpolyline = new L.Polyline(pointList, {
-                    color: '{{ obj.color }}',
-                    weight: 3,
-                    opacity: 1,
-                    smoothFactor: 1
-                    });
-                  firstpolyline.addTo(mymap);
-                  
-                  firstpolyline.bindPopup("{% for property in properties %}\
-                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
-              
-                  firstpolyline.bindTooltip("{{ obj[labels['link']] }}", {
-                    permanent: false, 
-                    });
-                    
-                
-                {% endfor %}
-              
               </script>
             </div>
           </div>

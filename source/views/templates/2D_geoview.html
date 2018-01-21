@@ -325,6 +325,9 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            <div id="earth_div" style="width:80vw;height:80vh;padding:2px;">
+            <button type="button" class="btn btn-primary" style="position: absolute; top: 10px; left:10px;" onclick='return switch_2D()'>2D view</button>
+            </div>
             <div id="mapid"></div>
               <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
           
@@ -371,6 +374,29 @@
                 
                     container.onclick = function() {
                       $('#google_earth').modal('show');
+                      }
+                    return container;
+                    }
+                  })
+                
+                var viewTypeControl = L.Control.extend({
+                  options: {
+                      position: 'topleft' 
+                      //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                    },
+
+                  onAdd: function (mymap) {
+                    var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                    container.style.backgroundColor = 'white';
+                    container.style.height = '30px';
+                    container.style.width = '150px';
+                    container.type="button";
+                    container.value = "Switch view";
+                
+                    container.onclick = function() {
+                      $('#mapid').hide();
+                      $('#earth_div').show();
                       }
                     return container;
                     }
@@ -467,6 +493,7 @@
                 mymap.addControl(new netmikoControl());
                 mymap.addControl(new napalmConfigurationControl());
                 mymap.addControl(new napalmGettersControl());
+                mymap.addControl(new viewTypeControl());
   
                 function loadXMLDoc() {
                   var req = new XMLHttpRequest()
@@ -606,4 +633,53 @@
     var today = new Date()
     $('#scheduled_date').data("DateTimePicker").minDate(today);
   </script>
+          <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
+<script>
+  
+  function connect_to_device() {
+      var id = document.getElementById('id').value
+      $.ajax({
+        type: "POST",
+        url: "/views/putty_connection",
+        dataType: "json",
+        data: { id: id },
+        success: function(msg){
+            $('.answer').html(msg);
+        }
+      });
+    }
+  
+  var options = {sky:true, atmosphere: true};
+  var earth = new WE.map('earth_div', options);
+  //WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
+  WE.tileLayer('http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
+    minZoom: 0,
+    maxZoom: 5,
+    attribution: 'NASA'
+  }).addTo(earth);
+
+  var markers = [];
+  {% for obj, properties in node_table.items() %}  
+    var marker = WE.marker(
+    [
+    {{ obj.latitude }}, 
+    {{ obj.longitude }}
+    ],
+    ).addTo(earth);
+    marker.bindPopup("{% for property in properties %}\
+    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
+    <input type='hidden' name='id' id='id' value={{ obj.id }}>\
+    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
+    marker.node_id = {{ obj.id }};
+    console.log(marker)
+    marker.element.childNodes["0"].style.backgroundImage = 'static/images/selected/{{ obj.subtype }}.gif';
+    markers.push(marker);
+  {% endfor %}
+  
+  function switch_2D() {
+    $('#earth_div').hide();
+    $('#mapid').show();
+    }
+    $('#earth_div').hide();
+</script>
 {% endblock javascripts %}

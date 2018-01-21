@@ -3,7 +3,6 @@ from collections import OrderedDict
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
-from tasks.forms import SchedulingForm
 from objects.properties import node_public_properties, link_public_properties
 from wtforms import *
 from wtforms.validators import Length
@@ -52,10 +51,15 @@ napalm_actions = OrderedDict([
 ('Rollback', 'rollback'),
 ])
 
+class SchedulingForm(FlaskForm):
+    scheduled_date = TextField('Datetime')
+    name = TextField('Name')
+    script = SelectField('', choices=())
+    frequency = TextField('Frequency')
+
 ## Netmiko automation
 
 class NetmikoForm(SchedulingForm):
-    scheduled_date = TextField('Datetime')
     script = SelectField('', choices=())
     type_choices = (
         ('show_commands', 'Show commands'),
@@ -72,13 +76,11 @@ class NetmikoForm(SchedulingForm):
 ## NAPALM automation
 
 class NapalmGettersForm(SchedulingForm):
-    scheduled_date2 = TextField('Datetime')
     getters_choices = [(v, k) for k, v in getters_mapping.items()]
     getters = SelectMultipleField('Nodes', choices=getters_choices)
     output = TextAreaField('')
 
 class NapalmConfigurationForm(SchedulingForm):
-    scheduled_date1 = TextField('Datetime')
     script = SelectField('', choices=())
     action_choices = [(v, k) for k, v in napalm_actions.items()]
     actions = SelectField('Actions', choices=action_choices)

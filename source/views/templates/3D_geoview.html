@@ -16,13 +16,7 @@
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="btn-group-vertical" style="z-index:100;">
-          <button type="button" class="btn btn-primary">Apple</button>
-          <button type="button" class="btn btn-primary">Samsung</button>
-          <button type="button" class="btn btn-primary">Sony</button>
-        </div>
         <div id="earth_div" style="width:80vw;height:80vh;padding:2px;"></div>
-
       </div>
     </div>
   </div>
@@ -46,8 +40,9 @@
         }
       });
     }
-                  
-  var earth = new WE.map('earth_div');
+  
+  var options = {sky:true, atmosphere: true};
+  var earth = new WE.map('earth_div', options);
   //WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
   WE.tileLayer('http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
     minZoom: 0,

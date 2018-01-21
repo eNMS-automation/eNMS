@@ -50,6 +50,13 @@
         <div class="x_panel">
           <div class="x_content">
             <script src="{{ url_for('views_blueprint.static', filename='js/vis/vis.js') }}"></script>
+            
+            <div class="btn-group-vertical" style="z-index:10;">
+            <button type="button" class="btn btn-primary">Netmiko</button>
+            <button type="button" class="btn btn-primary">Napalm configuration</button>
+            <button type="button" class="btn btn-primary">Napalm getters</button>
+            </div>
+        
             <div id="mynetwork" style="height: 500px"></div>
             <script>
               // create an array with nodes

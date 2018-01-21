@@ -16,13 +16,6 @@ class ScriptCreationForm(FlaskForm):
     text = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
 
-## Scheduling form used by both netmiko and napalm forms
-
-class SchedulingForm(FlaskForm):
-    name = TextField('Name')
-    script = SelectField('', choices=())
-    frequency = TextField('Frequency')
-
 ## Compare getters history
 
 class CompareForm(FlaskForm):

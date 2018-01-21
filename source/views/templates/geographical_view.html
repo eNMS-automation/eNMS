@@ -5,8 +5,10 @@
 {% block stylesheets %}
   {{ super() }}
   <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
-  <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.css') }}" rel="stylesheet">
-  <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.Default.css') }}" rel="stylesheet">
+  {% if clusterize %}
+    <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.Default.css') }}" rel="stylesheet">
+  {% endif %}
   <style>
     #mapid { height:90vh; }
   </style>
@@ -327,12 +329,16 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            {% if not clusterize %}
             <div id="earth_div" style="width:80vw;height:80vh;padding:2px;">
             <button type="button" class="btn btn-primary" style="position: absolute; top: 10px; left:10px;" onclick='return switch_2D()'>2D view</button>
             </div>
+            {% endif %}
             <div id="mapid"></div>
               <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
+              {% if clusterize %}
               <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
+              {% endif %}
           
               <script>
                 var viewOptionsControl = L.Control.extend({
@@ -471,10 +477,18 @@
                     }
                   })
               
+                {% if clusterize %}
+                var tiles = L.tileLayer(
+                  'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                  {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+                var mymap = L.map('mapid', {layers: [tiles]}).setView([48, 2], 5);
+                var markers = L.markerClusterGroup();
+                {% else %}
                 var mymap = L.map('mapid').setView([48, 2], 5);
                 L.tileLayer(
                   'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                   {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(mymap);
+                {% endif %}
                 
                 {% for subtype in subtypes %}
                   var icon_{{ subtype }} = L.icon({
@@ -517,8 +531,8 @@
                   req.send(postVars)
                   return false
                   }
-              
-                var markers = [];
+                
+                var markers_array = [];
                 {% for obj, properties in node_table.items() %}  
                   var marker = L.marker([
                   {{ obj.latitude }}, 
@@ -534,17 +548,21 @@
                   );
                   marker.node_id = {{ obj.id }};
                   marker.selected_icon = icon_selected_{{ obj.subtype }};
-                  markers.push(marker);
+                  markers_array.push(marker);
+                  
+                  {% if clusterize %}
+                  markers.addLayer(marker)
+                  
+                  {% endif %}
                 {% endfor %}
                 
+                console.log(markers)
                 mymap.on("boxzoomend", function(e) {
                 var selection = [];
-                for (var i = 0; i < markers.length; i++) {
-                  if (e.boxZoomBounds.contains(markers[i].getLatLng())) {
-                    markers[i].setIcon(markers[i].selected_icon);
-                    console.log(markers[i])
-                    selection.push(markers[i].node_id);
-                    console.log(selection);
+                for (var i = 0; i < markers_array.length; i++) {
+                  if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
+                    markers_array[i].setIcon(markers_array[i].selected_icon);
+                    selection.push(markers_array[i].node_id);
                   }
                 }
 
@@ -559,29 +577,30 @@
                 });
 
                 });
-
-                {% for obj, properties in link_table.items() %}
-                  var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
-                  var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
-                  var pointList = [pointA, pointB];
-                  
-                  var firstpolyline = new L.Polyline(pointList, {
-                    color: '{{ obj.color }}',
-                    weight: 3,
-                    opacity: 1,
-                    smoothFactor: 1
-                    });
-                  firstpolyline.addTo(mymap);
-                  
-                  firstpolyline.bindPopup("{% for property in properties %}\
-                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
-              
-                  firstpolyline.bindTooltip("{{ obj[labels['link']] }}", {
-                    permanent: false, 
-                    });
-                    
                 
-                {% endfor %}
+                {% if not clusterize %}
+                  {% for obj, properties in link_table.items() %}
+                    var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
+                    var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
+                    var pointList = [pointA, pointB];
+                    
+                    var firstpolyline = new L.Polyline(pointList, {
+                      color: '{{ obj.color }}',
+                      weight: 3,
+                      opacity: 1,
+                      smoothFactor: 1
+                      });
+                    firstpolyline.addTo(mymap);
+                    
+                    firstpolyline.bindPopup("{% for property in properties %}\
+                    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
+                
+                    firstpolyline.bindTooltip("{{ obj[labels['link']] }}", {
+                      permanent: false, 
+                      });
+
+                  {% endfor %}
+                {% endif %}
               
               </script>
             </div>
@@ -652,6 +671,7 @@
       });
     }
   
+  {% if not clusterize %}
   var options = {sky:true, atmosphere: true};
   var earth = new WE.map('earth_div', options);
   //WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
@@ -674,7 +694,6 @@
     <input type='hidden' name='id' id='id' value={{ obj.id }}>\
     <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
     amarker.node_id = {{ obj.id }};
-    console.log(amarker)
     amarker.element.childNodes["0"].style.backgroundImage = 'static/images/selected/{{ obj.subtype }}.gif';
     amarkers.push(amarker);
   {% endfor %}
@@ -684,5 +703,6 @@
     $('#mapid').show();
     }
     $('#earth_div').hide();
+  {% endif %}
 </script>
 {% endblock javascripts %}

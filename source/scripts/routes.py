@@ -26,19 +26,16 @@ def script_creation():
         # on the type of script (jinja2-enabled template or not)
         content = request.form['text']
         if form.data['type'] != 'simple':
-            filename = request.files['file'].filename
-            if 'file' in request.files and filename:
-                if allowed_file(filename, {'yaml'}):
-                    filename = secure_filename(filename)
-                    filepath = join(current_app.config['UPLOAD_FOLDER'], filename)
-                    with open(filepath, 'r') as f:
-                        parameters = load(f)
+            try:
+                file = request.files['file']
+                if allowed_file(file.filename, {'yaml'}):
+                    filename = secure_filename(file.filename)
+                    parameters = load(file.read())
                     template = Template(content)
                     content = template.render(**parameters)
-                    print(content)
-                #TODO properly display that error in the GUI
-                else:
-                    flash('file {}: format not allowed'.format(filename))
+            except Exception as e:
+                #TODO beautiful warning with the exception
+                print(e)
         script = Script(content, **request.form)
         db.session.add(script)
         db.session.commit()

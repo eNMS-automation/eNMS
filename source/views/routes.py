@@ -8,7 +8,7 @@ from json import dumps
 from objects.models import *
 from objects.properties import *
 from os.path import join
-from tasks.models import *
+from scripts.models import *
 from simplekml import Color, Kml, Style
 from subprocess import Popen
 

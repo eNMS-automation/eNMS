@@ -35,9 +35,10 @@ def register_blueprints(app):
     blueprints = (
         'base',
         'objects',
+        'scripts',
+        'tasks',
         'users',
         'views',
-        'tasks'
         )
     for blueprint in blueprints:
         module = import_module('{}.routes'.format(blueprint))

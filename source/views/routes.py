@@ -47,7 +47,6 @@ def get_targets(nodes):
     targets = []
     for id in nodes:
         obj = get_obj(db, Node, id=int(id))
-        print(obj, obj.name, obj.ip_address, obj.secret_password)
         targets.append((
             obj.name,
             obj.ip_address, 
@@ -55,6 +54,13 @@ def get_targets(nodes):
             obj.secret_password
             ))
     return targets
+
+def schedule_task(cls, form):
+    targets = get_targets(session['selection'])
+    task = cls(current_user, targets, **form.data)
+    db.session.add(task)
+    db.session.commit()
+    return redirect(url_for('tasks_blueprint.task_management'))
 
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
@@ -66,58 +72,29 @@ def view(view_type):
     google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
     # update the list of available nodes / script by querying the database
-    netmiko_form.script.choices = Script.choices()
-    napalm_configuration_form.script.choices = Script.choices()
-    if 'netmiko_script' in request.form:
-        targets = get_targets(session['selection'])
-        task = NetmikoTask(current_user, targets, **netmiko_form.data)
-        db.session.add(task)
-        db.session.commit()
-        return redirect(url_for('tasks_blueprint.task_management'))
-    elif 'napalm_configuration' in request.form:
-        targets = get_targets(session['selection'])
-        task = NapalmConfigTask(current_user, targets, **napalm_configuration_form.data)
-        db.session.add(task)
-        db.session.commit()
-        return redirect(url_for('tasks_blueprint.task_management'))
-    elif 'napalm_getters' in request.form:
-        targets = get_targets(session['selection'])
-        napalm_task = NapalmGettersTask(
-            current_user,
-            targets,
-            **napalm_getters_form.data
-            )
-        db.session.add(napalm_task)
-        db.session.commit()
-        return redirect(url_for('tasks_blueprint.task_management'))
+    netmiko_form.script.choices = ClassicScript.choices()
+    napalm_configuration_form.script.choices = ClassicScript.choices()
+    if 'script' in request.form:
+        task_class, form = {
+        'netmiko': (NetmikoTask, netmiko_form),
+        'napalm_configuration': (NapalmConfigTask, napalm_configuration_form),
+        'napalm_getters': (NapalmGettersTask, napalm_getters_form)
+        }[request.form['script']]
+        schedule_task(task_class, form)
     elif 'view_options' in request.form:
         # retrieve labels
         labels = {
             'node': request.form['node_label'],
             'link': request.form['link_label']
             }
-    elif 'google_earth' in request.form:
-        kml_file = Kml()
-        
-        for node in filter(lambda obj: obj.visible, Node.query.all()):
-            point = kml_file.newpoint(name=node.name)
-            point.coords = [(node.longitude, node.latitude)]
-            point.style = styles[node.subtype]
-            point.style.labelstyle.scale = request.form['label_size']
-            
-        for link in filter(lambda obj: obj.visible, Link.query.all()):
-            line = kml_file.newlinestring(name=link.name) 
-            line.coords = [
-                (link.source.longitude, link.source.latitude),
-                (link.destination.longitude, link.destination.latitude)
-                ]
-            line.style = styles[link.type]
-            line.style.linestyle.width = request.form['line_width']
-        
-        filepath = join(current_app.kmz_path, request.form['name'] + '.kmz')
-        kml_file.save(filepath)
+    # for the sake of better performances, the view defaults to markercluster
+    # if there are more than 2000 nodes
+    view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
+    if request.method == 'POST':
+        view = request.form['view']
     return render_template(
         '{}_view.html'.format(view_type),
+        view = view,
         napalm_configuration_form = napalm_configuration_form,
         napalm_getters_form = napalm_getters_form,
         netmiko_form = netmiko_form,
@@ -126,7 +103,6 @@ def view(view_type):
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,
-        clusterize = len(Node.query.all()) > 2000,
         node_table = {
             obj: OrderedDict([
                 (property, getattr(obj, property)) 
@@ -141,6 +117,33 @@ def view(view_type):
             ])
             for obj in filter(lambda obj: obj.visible, Link.query.all())
         })
+
+@blueprint.route('/google_earth_export', methods = ['GET', 'POST'])
+@login_required
+def google_earth_export():
+    form = GoogleEarthForm(request.form)
+    if 'POST' in request.method:
+        kml_file = Kml()
+        for node in filter(lambda obj: obj.visible, Node.query.all()):
+            point = kml_file.newpoint(name=node.name)
+            point.coords = [(node.longitude, node.latitude)]
+            point.style = styles[node.subtype]
+            point.style.labelstyle.scale = request.form['label_size']
+            
+        for link in filter(lambda obj: obj.visible, Link.query.all()):
+            line = kml_file.newlinestring(name=link.name) 
+            line.coords = [
+                (link.source.longitude, link.source.latitude),
+                (link.destination.longitude, link.destination.latitude)
+                ]
+            line.style = styles[link.type]
+            line.style.linestyle.width = request.form['line_width']
+        filepath = join(current_app.kmz_path, request.form['name'] + '.kmz')
+        kml_file.save(filepath)
+    return render_template(
+        'google_earth_export.html',
+        form = form
+        )
 
 @blueprint.route('/putty_connection', methods = ['POST'])
 @login_required

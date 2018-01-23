@@ -1,0 +1,262 @@
+<div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">View options</h4>
+        </div>
+
+        <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+        <div class="modal-body">
+            <div class="form-group">
+            <h5 class="modal-title">Labels</h5><br>
+            {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
+            {{ view_options_form.link_label(id="link_label", class="form-control") }}
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+
+        </form>
+
+    </div>
+    </div>
+</div>
+
+<div id="netmiko" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard()">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h4 class="modal-title">Netmiko script</h4>
+        </div>
+        
+        <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+        <div class="modal-body">
+            <!-- Smart Wizard -->
+            <div id="wizard" class="form_wizard wizard_horizontal">
+            <ul class="wizard_steps">
+                <li>
+                <a href="#step-1">
+                    <span class="step_no">1</span>
+                    <span class="step_descr"> Step 1 <br/>
+                    <small>Parameters</small>
+                    </span>
+                </a>
+                </li>
+                <li>
+                <a href="#step-2">
+                    <span class="step_no">2</span>
+                    <span class="step_descr"> Step 2 <br/>
+                    <small>Scheduling</small>
+                    </span>
+                </a>
+                </li>
+            </ul>
+            
+            <div id="step-1">
+                <h2 class="StepTitle">Step 4 Content</h2>
+                <div class="form-group">
+                <label>Name</label>
+                <div class='form-group'>
+                    {{ netmiko_form.name(class="form-control", required=true) }}
+                </div>
+                
+                <label>Script</label>
+                <div class='form-group'>
+                {{ netmiko_form.script(class="form-control", required=true) }}
+                </div>
+    
+                <label>Type</label>
+                <div class='form-group'>
+                    {{ netmiko_form.type(class="form-control") }}
+                </div>
+    
+                <label>Driver</label>
+                <div class='form-group'>
+                    {{ netmiko_form.driver(class="form-control", required=true) }}
+                </div>
+    
+                <label>Global delay factor</label>
+                <div class='form-group'>
+                    {{ netmiko_form.global_delay_factor(class="form-control", required=true) }}
+                </div>
+                </div>
+            </div>
+            
+            <div id="step-2" style="min-height: 300px">
+                <label>Date</label>
+                <div class='form-group'>
+                {{ netmiko_form.scheduled_date(class="form-control") }}
+                </div>
+
+                <label>Frequency (seconds)</label>
+                <div class='form-group'>
+                {{ netmiko_form.frequency(class="form-control") }}
+                </div>
+                <input type='hidden' name='script' value="netmiko">
+            </div>
+
+            </div>
+            <!-- End SmartWizard Content -->
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+
+<div id="napalm-configuration" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard1()">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h4 class="modal-title">Napalm configuration script</h4>
+        </div>
+        
+        <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+        <div class="modal-body">
+            <!-- Smart Wizard -->
+            <div id="wizard1" class="form_wizard wizard_horizontal">
+            <ul class="wizard_steps">
+                <li>
+                <a href="#step-11">
+                    <span class="step_no">1</span>
+                    <span class="step_descr"> Step 1 <br/>
+                    <small>Parameters</small>
+                    </span>
+                </a>
+                </li>
+                <li>
+                <a href="#step-12">
+                    <span class="step_no">2</span>
+                    <span class="step_descr"> Step 2 <br/>
+                    <small>Scheduling</small>
+                    </span>
+                </a>
+                </li>
+            </ul>
+            
+            <div id="step-11">
+                <h2 class="StepTitle">Napalm parameters</h2>
+                <div class="form-group">
+                <label>Name</label>
+                <div class='form-group'>
+                    {{ napalm_configuration_form.name(class="form-control") }}
+                </div>
+
+                <label>Script</label>
+                <div class='form-group'>
+                    {{ napalm_configuration_form.script(class="form-control", required=true) }}
+                </div>
+
+                <label>Actions</label>
+                <div class='form-group'>
+                    {{ napalm_configuration_form.actions(class="form-control", required=true) }}
+                </div>
+                </div>
+            </div>
+
+            <div id="step-12" style="min-height: 300px">
+                <label>Date</label>
+                <div class='form-group'>
+                {{ napalm_configuration_form.scheduled_date(class="form-control") }}
+                </div>
+
+                <label>Frequency (seconds)</label>
+                <div class='form-group'>
+                {{ napalm_configuration_form.frequency(class="form-control") }}
+                </div>
+                <input type='hidden' name='script' value="napalm_configuration">
+            </div>
+
+            </div>
+            <!-- End SmartWizard Content -->
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+
+<div id="napalm-getters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard2()">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h4 class="modal-title">Netmiko script</h4>
+        </div>
+        
+        <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+        <div class="modal-body">
+            <!-- Smart Wizard -->
+            <div id="wizard2" class="form_wizard wizard_horizontal">
+            <ul class="wizard_steps">
+                <li>
+                <a href="#step-21">
+                    <span class="step_no">1</span>
+                    <span class="step_descr"> Step 1 <br/>
+                    <small>Parameters</small>
+                    </span>
+                </a>
+                </li>
+                <li>
+                <a href="#step-22">
+                    <span class="step_no">2</span>
+                    <span class="step_descr"> Step 2 <br/>
+                    <small>Scheduling</small>
+                    </span>
+                </a>
+                </li>
+            </ul>
+            
+            <div id="step-21">
+                <label>Name</label>
+                <div class='form-group'>
+                {{ napalm_getters_form.name(class="form-control") }}
+                </div>
+
+                <label>Getters</label>
+                <div class='form-group'>
+                {{ napalm_getters_form.getters(class="form-control", size=9, required=true) }}
+                </div>
+            </div>
+            
+            <div id="step-22" style="min-height: 300px">
+                <label>Date</label>
+                <div class='form-group'>
+                {{ napalm_getters_form.scheduled_date(class="form-control") }}
+                </div>
+
+                <label>Frequency (seconds)</label>
+                <div class='form-group'>
+                {{ napalm_getters_form.frequency(class="form-control") }}
+                </div>
+                <input type='hidden' name='script' value="napalm_getters">
+            </div>
+
+            </div>
+            <!-- End SmartWizard Content -->
+        </div>
+        </form>
+    </div>
+    </div>
+</div>

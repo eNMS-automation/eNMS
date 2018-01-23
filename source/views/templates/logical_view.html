@@ -9,56 +9,25 @@
 
 {% block content %}
 
+{% include 'modals.html' %}
   <div class="right_col" role="main">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">View parameters</button>
-
-    <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true"> × </span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">View options</h4>
-          </div>
-
-          <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-
-            <div class="modal-body">
-              <div class="form-group">
-                <h5 class="modal-title">Labels</h5><br>
-                {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
-                {{ view_options_form.link_label(id="link_label", class="form-control") }}
-              </div>
-            </div>
-            
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-
-          </form>
-
-        </div>
-      </div>
-    </div>
-
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            <!-- jQuery -->
+            <script src="{{ url_for('static', filename='vendors/jquery/jquery.min.js') }}"></script>
+            <!-- Vis -->
             <script src="{{ url_for('views_blueprint.static', filename='js/vis/vis.js') }}"></script>
-            
-            <div class="btn-group-vertical" style="z-index:10;">
-            <button type="button" class="btn btn-primary">Netmiko</button>
-            <button type="button" class="btn btn-primary">Napalm configuration</button>
-            <button type="button" class="btn btn-primary">Napalm getters</button>
-            </div>
+
+
         
-            <div id="mynetwork" style="height: 500px"></div>
+            <div id="network" style="height: 500px"></div>
             <script>
+            
+            function show_modal(modal_name){
+              $(`#${modal_name}`).modal('show');
+              }
               // create an array with nodes
               var nodes = new vis.DataSet([
                 {% for node, properties in node_table.items() %}  
@@ -85,14 +54,109 @@
                 {% endfor %}
                 ]);
             
+            const makeMeMultiSelect = (container, network, nodes) => {
+                const NO_CLICK = 0;
+                const RIGHT_CLICK = 3;
+                
+                // Disable default right-click dropdown menu
+                container[0].oncontextmenu = () => false;
+                
+                // State
+                
+                let drag = false, DOMRect = {};
+            
+                // Selector
+                
+                const canvasify = (DOMx, DOMy) => {
+                    const { x, y } = network.DOMtoCanvas({ x: DOMx - 20, y: DOMy - 80 });
+                    return [x, y];
+                };
+                
+                const correctRange = (start, end) =>
+                    start < end ? [start, end] : [end, start];
+            
+                const selectFromDOMRect = () => {
+                    const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
+                    const [eX, eY] = canvasify(DOMRect.endX, DOMRect.endY);
+                    const [startX, endX] = correctRange(sX, eX);
+                    const [startY, endY] = correctRange(sY, eY);
+            
+                    network.selectNodes(nodes.get().reduce(
+                        (selected, { id }) => {
+                            const { x, y } = network.getPositions(id)[id];
+                            return (startX <= x && x <= endX && startY <= y && y <= endY) ?
+                                selected.concat(id) : selected;
+                        }, []
+                    ));
+                }
+            
+                // Listeners
+            
+                container.on("mousedown", function({ which, pageX, pageY }) {
+                    // When mousedown, save the initial rectangle state
+                    if(which === RIGHT_CLICK) {
+                        Object.assign(DOMRect, {
+                            startX: pageX - this.offsetLeft,
+                            startY: pageY - this.offsetTop,
+                            endX: pageX - this.offsetLeft,
+                            endY: pageY - this.offsetTop
+                        });
+                        drag = true;
+                    }
+                });
+            
+                container.on("mousemove", function({ which, pageX, pageY }) {
+                    // Make selection rectangle disappear when accidently mouseupped outside 'container'
+                    if(which === NO_CLICK && drag) {
+                        drag = false;
+                        network.redraw();
+                    }
+                    // When mousemove, update the rectangle state
+                    else if(drag) {
+                        Object.assign(DOMRect, {
+                            endX: pageX - this.offsetLeft,
+                            endY: pageY - this.offsetTop
+                        });
+                        network.redraw();
+                    }
+                });
+            
+                container.on("mouseup", function({ which }) {
+                    // When mouseup, select the nodes in the rectangle
+                    if(which === RIGHT_CLICK) {
+                        drag = false;
+                        network.redraw();
+                        selectFromDOMRect();
+                    }
+                });
+            
+                // Drawer
+            
+                network.on('afterDrawing', ctx => {
+                    if(drag) {
+                        const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
+                        const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
+            
+                        ctx.setLineDash([5]);
+                        ctx.strokeStyle = 'rgba(78, 146, 237, 0.75)';
+                        ctx.strokeRect(startX, startY, endX - startX, endY - startY);
+                        ctx.setLineDash([]);
+                        ctx.fillStyle = 'rgba(151, 194, 252, 0.45)';
+                        ctx.fillRect(startX, startY, endX - startX, endY - startY);
+                    }
+                });
+            }; // end makeMeMultiSelect
+
               // create a network
-              var container = document.getElementById('mynetwork');
+              const container = $("#network");
+              
               var data = {
                 nodes: nodes,
                 edges: edges
                 };
               var options = {};
-              var network = new vis.Network(container, data, options);
+              const network = new vis.Network(container[0], data, options);
+              makeMeMultiSelect(container, network, nodes);
               
               // get id of the click nodes
               network.on( 'doubleClick', function(properties) {

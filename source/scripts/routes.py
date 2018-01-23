@@ -43,3 +43,16 @@ def script_creation():
         'script_creation.html',
         form = form
         )
+
+@blueprint.route('/ansible_script', methods=['GET', 'POST'])
+@login_required
+def ansible_script():
+    form = AnsibleScriptForm(request.form)
+    if request.method == 'POST':
+        script = AnsibleScript(**request.form)
+        db.session.add(script)
+        db.session.commit()
+    return render_template(
+        'ansible_script.html',
+        form = form
+        )

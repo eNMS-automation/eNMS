@@ -28,7 +28,6 @@ def netmiko_process(kwargs):
     script_type = kwargs.pop('type')
     try:
         netmiko_handler = ConnectHandler(**kwargs)
-        print(script_type*100)
         if script_type == 'configuration':
             netmiko_handler.send_config_set(script.splitlines())
             result = 'configuration OK'
@@ -84,7 +83,6 @@ def napalm_config_process(kwargs):
         if kwargs['action'] in ('load_merge_candidate', 'load_replace_candidate'):
             getattr(napalm_driver, kwargs['action'])(config=kwargs['script'])
         else:
-            print(kwargs['action'])
             getattr(napalm_driver, kwargs['action'])()
         napalm_driver.close()
     except Exception as e:

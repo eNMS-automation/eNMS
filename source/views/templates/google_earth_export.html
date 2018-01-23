@@ -1,0 +1,56 @@
+{% extends "base_site.html" %}
+
+{% block title %} Google Earth export {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <br />
+              <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+                <div class="modal-body">
+                <div class="form-group">
+                
+                    <label>Project name</label>
+                    <div class='form-group'>
+                    {{ form.name(class="form-control", required=true) }}
+                    </div>
+    
+                    <label>Label size:</label>
+                    <div class='form-group'>
+                    {{ form.label_size(class="form-control", required=true) }}
+                    </div>
+    
+                    <label>Line width:</label>
+                    <div class='form-group'>
+                    {{ form.line_width(class="form-control", required=true) }}
+                    </div>
+                </div>
+                </div>
+    
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success" name="netmiko_script">Submit</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+{% endblock javascripts %}

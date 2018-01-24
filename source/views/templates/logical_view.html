@@ -20,7 +20,22 @@
             <!-- Vis -->
             <script src="{{ url_for('views_blueprint.static', filename='js/vis/vis.js') }}"></script>
 
+            <form method="post">
+              <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+                <button type="button" class="btn btn-primary" onclick="show_modal('filters')">Parameters</button>
 
+                <div class="btn-group">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Automation
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a onclick="show_modal('netmiko')"> Netmiko </a></li>
+                    <li><a onclick="show_modal('napalm-getters')">NAPALM getters</a></li>
+                    <li><a onclick="show_modal('napalm-configuration')">NAPALM configuration</a></li>
+                </ul>
+                </div> 
+              </div>
+            </form>
         
             <div id="network" style="height: 500px"></div>
             <script>
@@ -59,6 +74,7 @@
                 const RIGHT_CLICK = 3;
                 
                 // Disable default right-click dropdown menu
+                var offset = $("#network").offset();
                 container[0].oncontextmenu = () => false;
                 
                 // State
@@ -68,7 +84,7 @@
                 // Selector
                 
                 const canvasify = (DOMx, DOMy) => {
-                    const { x, y } = network.DOMtoCanvas({ x: DOMx - 20, y: DOMy - 80 });
+                    const { x, y } = network.DOMtoCanvas({ x: DOMx - offset.left, y: DOMy - offset.top });
                     return [x, y];
                 };
                 
@@ -88,7 +104,17 @@
                                 selected.concat(id) : selected;
                         }, []
                     ));
-                }
+                    
+                    $.ajax({
+                      type: "POST",
+                      url: "/views/selection",
+                      dataType: "json",
+                      data: { selection: network.getSelectedNodes() },
+                      success: function(msg){
+                          $('.answer').html(msg);
+                      }
+                    });
+                  }
             
                 // Listeners
             
@@ -189,4 +215,27 @@
 
 {% block javascripts %}
   {{ super()}}
+  <!-- jQuery Smart Wizard -->
+  <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
+  <script>
+    <!-- Initialize Smart wizard -->
+    function call_wizard(){
+      $('#wizard').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    function call_wizard1(){
+      $('#wizard1').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    function call_wizard2(){
+      $('#wizard2').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    </script>
 {% endblock javascripts %}

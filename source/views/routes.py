@@ -9,8 +9,9 @@ from objects.models import *
 from objects.properties import *
 from os.path import join
 from scripts.models import *
-from simplekml import Color, Kml, Style
+# from simplekml import Color, Kml, Style
 from subprocess import Popen
+from tasks.models import *
 
 blueprint = Blueprint(
     'views_blueprint', 
@@ -21,27 +22,27 @@ blueprint = Blueprint(
     )
 
 styles = {}
-
-for subtype in node_subtypes:
-    point_style = Style()
-    point_style.labelstyle.color = Color.blue
-    path_icon = join(
-        blueprint.root_path,
-        'static',
-        'images',
-        'default',
-        '{}.gif'.format(subtype)
-        )
-    point_style.iconstyle.icon.href = path_icon
-    styles[subtype] = point_style
-    
-for subtype, cls in link_class.items():
-    line_style = Style()
-    # we convert the RGB color to a KML color, 
-    # i.e #RRGGBB to #AABBGGRR
-    kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
-    line_style.linestyle.color = kml_color
-    styles[subtype] = line_style
+# 
+# for subtype in node_subtypes:
+#     point_style = Style()
+#     point_style.labelstyle.color = Color.blue
+#     path_icon = join(
+#         blueprint.root_path,
+#         'static',
+#         'images',
+#         'default',
+#         '{}.gif'.format(subtype)
+#         )
+#     point_style.iconstyle.icon.href = path_icon
+#     styles[subtype] = point_style
+#     
+# for subtype, cls in link_class.items():
+#     line_style = Style()
+#     # we convert the RGB color to a KML color, 
+#     # i.e #RRGGBB to #AABBGGRR
+#     kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
+#     line_style.linestyle.color = kml_color
+#     styles[subtype] = line_style
 
 def get_targets(nodes):
     targets = []
@@ -55,12 +56,11 @@ def get_targets(nodes):
             ))
     return targets
 
-def schedule_task(cls, form):
+def schedule_task(cls, **data):
     targets = get_targets(session['selection'])
-    task = cls(current_user, targets, **form.data)
+    task = cls(current_user, targets, **data)
     db.session.add(task)
     db.session.commit()
-    return redirect(url_for('tasks_blueprint.task_management'))
 
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
@@ -74,13 +74,14 @@ def view(view_type):
     # update the list of available nodes / script by querying the database
     netmiko_form.script.choices = ClassicScript.choices()
     napalm_configuration_form.script.choices = ClassicScript.choices()
-    if 'script' in request.form:
+    if 'script_type' in request.form:
         task_class, form = {
         'netmiko': (NetmikoTask, netmiko_form),
         'napalm_configuration': (NapalmConfigTask, napalm_configuration_form),
         'napalm_getters': (NapalmGettersTask, napalm_getters_form)
-        }[request.form['script']]
-        schedule_task(task_class, form)
+        }[request.form['script_type']]
+        schedule_task(task_class, **form.data)
+        return redirect(url_for('tasks_blueprint.task_management'))
     elif 'view_options' in request.form:
         # retrieve labels
         labels = {
@@ -92,6 +93,9 @@ def view(view_type):
     view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
     if request.method == 'POST':
         view = request.form['view']
+    selected_nodes = []
+    if 'selection' in session:
+        selected_nodes = [int(node_id) for node_id in session['selection']]
     return render_template(
         '{}_view.html'.format(view_type),
         view = view,
@@ -103,6 +107,7 @@ def view(view_type):
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,
+        selected_nodes = selected_nodes,
         node_table = {
             obj: OrderedDict([
                 (property, getattr(obj, property)) 
@@ -165,4 +170,5 @@ def putty_connection():
 @login_required
 def selection():
     session['selection'] = request.form.getlist('selection[]')
+    print(str(session['selection'])*10)
     return dumps({'success': True}), 200, {'ContentType': 'application/json'}

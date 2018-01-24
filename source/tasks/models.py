@@ -8,6 +8,7 @@ from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
 from netmiko import ConnectHandler
 from passlib.hash import cisco_type7
+from scripts.models import *
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
@@ -47,7 +48,7 @@ def netmiko_job(name, type, script_name, username, password, ips,
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    script = db.session.query(Script)\
+    script = db.session.query(ClassicScript)\
         .filter_by(name=script_name)\
         .first() 
     pool = ThreadPool(processes=100)
@@ -96,7 +97,7 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    script = db.session.query(Script)\
+    script = db.session.query(ClassicScript)\
         .filter_by(name=script_name)\
         .first()
     pool = ThreadPool(processes=100)
@@ -254,6 +255,7 @@ class NetmikoTask(Task):
     script = Column(String)
     
     def __init__(self, user, targets, **data):
+        print(user, targets, data)
         self.type = data['type']
         self.script_name = data['script']
         self.user = user

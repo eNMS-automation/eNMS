@@ -16,11 +16,9 @@
 
 {% set buttons %}
 <form method="post">
-  <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:10px;">
-    <button type="button" class="btn btn-primary" onclick="show_modal('filters')">View parameters</button>
-    <button type="button" class="btn btn-primary" onclick="show_modal('netmiko')">Netmiko</button>
-    <button type="button" class="btn btn-primary" onclick="show_modal('napalm-configuration')">Napalm configuration</button>
-    <button type="button" class="btn btn-primary" onclick="show_modal('napalm-getters')">Napalm getters</button>
+  <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+    <button type="button" class="btn btn-primary" onclick="show_modal('filters')">Parameters</button>
+
     {% if view == 'leaflet' %}
       <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
       <button type="submit" class="btn btn-primary" name="view" value="glearth">3D view</button>
@@ -31,8 +29,19 @@
       <button type="submit" class="btn btn-primary" name="view" value="leaflet">2D view</button>
       <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
     {% endif %}
+    
+    <div class="btn-group">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Automation
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a onclick="show_modal('netmiko')"> Netmiko </a></li>
+        <li><a onclick="show_modal('napalm-getters')">NAPALM getters</a></li>
+        <li><a onclick="show_modal('napalm-configuration')">NAPALM configuration</a></li>
+      </ul>
+    </div> 
   </div>
-<form>
+</form>
 {% endset %}
 
 {% block content %}
@@ -84,61 +93,54 @@
                   });
               {% endfor %}
             {% endif %}
-  
-                function loadXMLDoc() {
-                  var req = new XMLHttpRequest()
-                  req.onreadystatechange = function() {
-                    if (req.readyState == 4) {
-                      if (req.status != 200) {
-                        //error handling code here
-                        }
-                      else {
-                        var response = JSON.parse(req.responseText)
-                        }
-                      }
-                    }
-                  req.open('POST', '/views/putty_connection')
-                  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-                  var id = document.getElementById('id').value
-                  var postVars = 'id='+id
-                  req.send(postVars)
-                  return false
-                  }
                 
                 {% if view != 'glearth' %}
-                // Create a new vector type with getLatLng and setLatLng methods.
-                L.PolylineClusterable = L.Polyline.extend({
-                  _originalInitialize: L.Polyline.prototype.initialize,
-                  
-                  initialize: function (bounds, options) {
-                    this._originalInitialize(bounds, options);
-                    this._latlng = this.getBounds().getCenter();
-                  },
-                  
-                  getLatLng: function () {
-                    return this._latlng;
-                  },
-                  
-                  // dummy method.
-                  setLatLng: function () {}
-                });
+                  // Create a new vector type with getLatLng and setLatLng methods.
+                  L.PolylineClusterable = L.Polyline.extend({
+                    _originalInitialize: L.Polyline.prototype.initialize,
+                    
+                    initialize: function (bounds, options) {
+                      this._originalInitialize(bounds, options);
+                      this._latlng = this.getBounds().getCenter();
+                    },
+                    
+                    getLatLng: function () {
+                      return this._latlng;
+                    },
+                    
+                    // dummy method.
+                    setLatLng: function () {}
+                  });
                 
                   var markers_array = [];
                   {% for obj, properties in node_table.items() %}  
                     var marker = L.marker([
-                    {{ obj.latitude }}, 
-                    {{ obj.longitude }}], 
-                    {icon: icon_{{ obj.subtype }}});
+                      {{ obj.latitude }}, 
+                      {{ obj.longitude }}], 
+                      );
+                    
+
+                    
                     marker.bindPopup("{% for property in properties %}\
                     <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                     <input type='hidden' name='id' id='id' value={{ obj.id }}>\
-                    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return loadXMLDoc()'/>");
+                    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
+                    
                     marker.bindTooltip("{{ obj[labels['node']] }}", {
                       permanent: false, 
                       }
                     );
                     marker.node_id = {{ obj.id }};
+                    
+                    marker.icon = icon_{{ obj.subtype }};
                     marker.selected_icon = icon_selected_{{ obj.subtype }};
+                    {% if obj.id not in selected_nodes %}
+                    marker.setIcon(marker.icon), 
+                    {% else %}
+                    marker.setIcon(marker.selected_icon), 
+                    {% endif %}
+                    
+                    
                     markers_array.push(marker);
                     
                     {% if view == 'markercluster' %}
@@ -153,43 +155,68 @@
                   {% endif %}
 
                   map.on("boxzoomend", function(e) {
-                  var selection = [];
-                  for (var i = 0; i < markers_array.length; i++) {
-                    if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
-                      markers_array[i].setIcon(markers_array[i].selected_icon);
-                      selection.push(markers_array[i].node_id);
+                    var selection = [];
+                    for (var i = 0; i < markers_array.length; i++) {
+                      if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
+                        markers_array[i].setIcon(markers_array[i].selected_icon);
+                        selection.push(markers_array[i].node_id);
+                        }
                       }
-                    }
+                      
+                    $.ajax({
+                      type: "POST",
+                      url: "/views/selection",
+                      dataType: "json",
+                      data: { selection: selection },
+                      success: function(msg){
+                          $('.answer').html(msg);
+                      }
+                    });
                   });
-                {% endif %}
-
-                {% if view != 'glearth' %}
-                  {% for obj, properties in link_table.items() %}
-                    var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
-                    var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
-                    var pointList = [pointA, pointB];
+                  
+                  map.on("contextmenu", function(e) {
                     
-                    var polyline = new L.PolylineClusterable(pointList, {
-                      color: '{{ obj.color }}',
-                      weight: 3,
-                      opacity: 1,
-                      smoothFactor: 1
+                    for (var i = 0; i < markers_array.length; i++) {
+                      markers_array[i].setIcon(markers_array[i].icon);
+                      }
+                    selection = [];
+                    $.ajax({
+                      type: "POST",
+                      url: "/views/selection",
+                      dataType: "json",
+                      data: { selection: selection },
+                      success: function(msg){
+                          $('.answer').html(msg);
+                        }
                       });
-                    
-                    polyline.bindPopup("{% for property in properties %}\
-                    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
-                
-                    polyline.bindTooltip("{{ obj[labels['link']] }}", {
-                      permanent: false, 
-                      });
-                    
-                    {% if view == 'markercluster' %}
-                      markers.addLayer(polyline);
-                    {% else %}
-                      polyline.addTo(map);
-                    {% endif %}
+                    e.preventDefault();
+                    });
+                {% for obj, properties in link_table.items() %}
+                  var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
+                  var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
+                  var pointList = [pointA, pointB];
+                  
+                  var polyline = new L.PolylineClusterable(pointList, {
+                    color: '{{ obj.color }}',
+                    weight: 3,
+                    opacity: 1,
+                    smoothFactor: 1
+                    });
+                  
+                  polyline.bindPopup("{% for property in properties %}\
+                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
+              
+                  polyline.bindTooltip("{{ obj[labels['link']] }}", {
+                    permanent: false, 
+                    });
+                  
+                  {% if view == 'markercluster' %}
+                    markers.addLayer(polyline);
+                  {% else %}
+                    polyline.addTo(map);
+                  {% endif %}
 
-                  {% endfor %}
+                {% endfor %}
                 {% endif %}
                 
                 {% if view == 'glearth' %}
@@ -209,12 +236,19 @@
                   {{ obj.latitude }}, 
                   {{ obj.longitude }}
                   ],
+                  {% if obj.id not in selected_nodes %}
+                  'static/images/3D/default/router.gif', 
+                  {% else %}
+                  'static/images/3D/selection/router.gif',
+                  {% endif %}
+                  15, 10
                   ).addTo(earth);
+                  
                   marker.bindPopup("{% for property in properties %}\
                   <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                   <input type='hidden' name='id' id='id' value={{ obj.id }}>\
                   <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
-                  marker.node_id = {{ obj.id }};
+                  
                   markers.push(marker);
                 {% endfor %}
                 
@@ -235,6 +269,7 @@
                     ]
                   ], {
                   color: '{{ obj.color }}',
+                  opacity: 20
                   }
                   ).addTo(earth);
 
@@ -293,18 +328,6 @@
   function show_modal(modal_name){
     $(`#${modal_name}`).modal('show');
     }
-  
-  {% if view != 'glearth' %}
-    $.ajax({
-      type: "POST",
-      url: "/views/selection",
-      dataType: "json",
-      data: { selection: selection },
-      success: function(msg){
-          $('.answer').html(msg);
-      }
-    });
-  {% endif %}
   
   function connect_to_device() {
       var id = document.getElementById('id').value

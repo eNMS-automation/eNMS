@@ -33,10 +33,12 @@ def script_creation():
                     parameters = load(file.read())
                     template = Template(content)
                     content = template.render(**parameters)
+                else:
+                    raise Exception
             except Exception as e:
                 #TODO beautiful warning with the exception
                 print(e)
-        script = Script(content, **request.form)
+        script = ClassicScript(content, **request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(

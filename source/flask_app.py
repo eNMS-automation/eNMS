@@ -1,5 +1,5 @@
 from flask import Flask
-# from flask_migrate import Migrate
+from flask_migrate import Migrate
 from importlib import import_module
 from inspect import stack
 from os.path import abspath, dirname, join, pardir
@@ -60,7 +60,7 @@ def configure_database(app):
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
-    # migrate = Migrate(app, db)
+    migrate = Migrate(app, db)
 
 def configure_logs(app):
     logging.basicConfig(filename='error.log',level=logging.DEBUG)

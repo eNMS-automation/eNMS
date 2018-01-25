@@ -15,7 +15,7 @@
 {% endblock stylesheets %}
 
 {% set buttons %}
-<form method="post">
+<form id="aform" method="post">
   <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
     <button type="button" class="btn btn-primary" onclick="show_modal('filters')">Parameters</button>
 
@@ -29,6 +29,17 @@
       <button type="submit" class="btn btn-primary" name="view" value="leaflet">2D view</button>
       <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
     {% endif %}
+    
+    <div class="btn-group">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tile layer
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a onclick="switch_layer('osm')"> Open Street Map </a></li>
+        <li><a onclick="switch_layer('gm')"> Google Maps </a></li>
+        <li><a onclick="switch_layer('nasa')"> NASA </a></li>
+      </ul>
+    </div> 
     
     <div class="btn-group">
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Automation
@@ -67,12 +78,17 @@
             </div>
             <script>
 
+            var layers = {
+              'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+              'gm': 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga',
+              'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg'
+              };
             {% if view != 'glearth' %}
-                var tiles = L.tileLayer(
-                  'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-                  {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
-                var map = L.map('mapid', {layers: [tiles]}).setView([48, 2], 5);
-                {% if view == 'markercluster' %}
+              var map = L.map('mapid').setView([48, 2], 5);
+              var osm_layer = L.tileLayer(layers['osm']);
+              map.addLayer(osm_layer);
+              var current_layer = osm_layer;
+              {% if view == 'markercluster' %}
                 var markers = L.markerClusterGroup();
               {% endif %}
             {% endif %}
@@ -223,12 +239,9 @@
                 var options = {sky:true, atmosphere: true};
                 var earth = new WE.map('earth_div', options);
 
-                WE.tileLayer('http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga', {
-                  minZoom: 0,
-                  maxZoom: 18,
-                  attribution: 'Google map'
-                }).addTo(earth);
-              
+                var current_layer = WE.tileLayer(layers['gm']);
+                current_layer.addTo(earth);
+
                 var markers = [];
                 {% for obj, properties in node_table.items() %}  
                   var marker = WE.marker(
@@ -328,6 +341,20 @@
   function show_modal(modal_name){
     $(`#${modal_name}`).modal('show');
     }
+
+  {% if view != 'glearth' %}
+    function switch_layer(layer){
+      map.removeLayer(current_layer);
+      current_layer = L.tileLayer(layers[layer]);
+      map.addLayer(current_layer);
+      }
+  {% else %}
+    function switch_layer(layer){
+      current_layer.removeFrom(earth);
+      current_layer = WE.tileLayer(layers[layer]);
+      current_layer.addTo(earth);
+      }
+  {% endif %}
   
   function connect_to_device() {
       var id = document.getElementById('id').value

@@ -6,6 +6,7 @@ from flask_login import login_required
 from .forms import *
 from .models import *
 from objects.models import get_obj
+from re import sub
 
 blueprint = Blueprint(
     'tasks_blueprint', 
@@ -77,4 +78,14 @@ def resume_task():
 @blueprint.route('/calendar')
 @login_required
 def calendar():
-    return render_template('calendar.html')
+    tasks = {
+        task: sub(
+            r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*", r"\1, \2, \3, \4, \5",
+            task.scheduled_date
+            )
+        for task in Task.query.all()
+        }
+    return render_template(
+        'calendar.html',
+        tasks = tasks
+        )

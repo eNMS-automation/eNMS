@@ -65,6 +65,7 @@ def schedule_task(cls, **data):
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
+    print(request.form)
     napalm_configuration_form = NapalmConfigurationForm(request.form)
     napalm_getters_form = NapalmGettersForm(request.form)
     netmiko_form = NetmikoForm(request.form)
@@ -83,7 +84,7 @@ def view(view_type):
         schedule_task(task_class, **form.data)
         return redirect(url_for('tasks_blueprint.task_management'))
     elif 'view_options' in request.form:
-        # retrieve labels
+        # update labels
         labels = {
             'node': request.form['node_label'],
             'link': request.form['link_label']
@@ -91,7 +92,7 @@ def view(view_type):
     # for the sake of better performances, the view defaults to markercluster
     # if there are more than 2000 nodes
     view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
-    if request.method == 'POST':
+    if 'view' in request.form:
         view = request.form['view']
     selected_nodes = []
     if 'selection' in session:

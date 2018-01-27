@@ -10,6 +10,7 @@ class Script(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120))
     type = Column(String(50))
+    content = Column(String)
     
     def __init__(self, name):
         self.name = name
@@ -22,7 +23,6 @@ class ClassicScript(Script):
     __tablename__ = 'ClassicScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
-    content = Column(String)
     
     def __init__(self, content, **data):
         name ,= data['name']
@@ -43,4 +43,4 @@ class AnsibleScript(Script):
         for key, value in data.items():
             if key in ansible_options:
                 self.options[key] ,= value if value else None
-        self.type = 'Ansible Script'
+        self.type = 'Ansible script'

@@ -1,5 +1,6 @@
 from base.database import db
 from base.helpers import allowed_file
+from base.properties import pretty_names
 from flask import Blueprint, current_app, render_template, request
 from flask_login import login_required
 from .forms import *
@@ -16,6 +17,16 @@ blueprint = Blueprint(
     template_folder = 'templates',
     static_folder = 'static'
     )
+
+@blueprint.route('/overview')
+@login_required
+def scripts():
+    return render_template(
+        'overview.html', 
+        fields = ('name', 'type'),
+        names = pretty_names, 
+        scripts = Script.query.all()
+        )
 
 @blueprint.route('/script_creation', methods=['GET', 'POST'])
 @login_required

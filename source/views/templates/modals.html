@@ -1,34 +1,30 @@
 <div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-
         <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
+          <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true"> × </span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">View options</h4>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">View options</h4>
         </div>
 
         <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-
-        <div class="modal-body">
+          <div class="modal-body">
             <div class="form-group">
-            <h5 class="modal-title">Labels</h5><br>
-            {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
-            {{ view_options_form.link_label(id="link_label", class="form-control") }}
+              <h5 class="modal-title">Labels</h5><br>
+              {{ view_options_form.node_label(id="node_label", class="form-control") }}<br>
+              {{ view_options_form.link_label(id="link_label", class="form-control") }}
             </div>
-        </div>
-        
-        <div class="modal-footer">
+          </div>
+          
+          <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button class="btn btn-primary" type="reset">Reset</button>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </div>
-
+            <button type="submit" name="view_options" class="btn btn-success">Submit</button>
+          </div>
         </form>
-
     </div>
-    </div>
+  </div>
 </div>
 
 <div id="netmiko" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard()">

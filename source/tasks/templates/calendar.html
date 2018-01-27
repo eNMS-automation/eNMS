@@ -6,7 +6,6 @@
   {{ super() }}
   <!-- FullCalendar -->
   <link href="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.print.css') }}" rel="stylesheet" media="print">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -27,30 +26,26 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
+            <h4 class="modal-title" id="main-title">Task</h4>
           </div>
 
           <div class="modal-body">
             <div id="testmodal2" style="padding: 5px 20px;">
               <form id="antoform2" class="form-horizontal calender" role="form">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Title</label>
+                  <label class="col-sm-3 control-label">Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title2" name="title2">
+                    <input readonly type="text" class="form-control" id="title" name="title">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Description</label>
                   <div class="col-sm-9">
-                    <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
+                    <textarea readonly class="form-control" style="height:150px;" id="descr" name="descr"></textarea>
                   </div>
                 </div>
               </form>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
           </div>
         </div>
       </div>
@@ -122,12 +117,14 @@
         },
         eventClick: function(calEvent, jsEvent, view) {
         $('#fc_edit').click();
-        $('#title2').val(calEvent.title);
+        $('#title').val(calEvent.title);
+        $('#descr').val(calEvent.description);
 
         categoryClass = $("#event_type").val();
 
         $(".antosubmit2").on("click", function() {
-          calEvent.title = $("#title2").val();
+          calEvent.title = $("#title").val();
+          calEvent.description = $("#descr").val();
 
           calendar.fullCalendar('updateEvent', calEvent);
           $('.antoclose2').click();
@@ -137,35 +134,13 @@
         },
         editable: true,
         events: [
-        /*
-        {
-        title: 'All Day Event',
-        start: new Date(y, m, 1)
-        }, {
-        title: 'Long Event',
-        start: new Date(y, m, d - 5),
-        end: new Date(y, m, d - 2)
-        }, {
-        title: 'Meeting',
-        start: new Date(y, m, d, 10, 30),
-        allDay: false
-        }, {
-        title: 'Lunch',
-        start: new Date(y, m, d + 14, 12, 0),
-        end: new Date(y, m, d, 14, 0),
-        allDay: false
-        }, {
-        title: 'Birthday Party',
-        start: new Date(y, m, d + 1, 19, 0),
-        end: new Date(y, m, d + 1, 22, 30),
-        allDay: false
-        }, {
-        title: 'Click for Google',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        url: 'http://google.com/'
-        }
-        */
+        {% for task, task_time in tasks.items() %}
+          {
+          title: '{{ task.name }}',
+          description: `{{ task.description }}`,
+          start: new Date({{ task_time }})
+          }, 
+        {% endfor %}
         ]
       });
       

@@ -198,6 +198,15 @@ class Task(CustomBase):
             self.recurrent_scheduling()
         else:
             self.one_time_scheduling()
+    
+    @property
+    def description(self):
+        return '\n'.join([
+            'Name: ' + self.name,
+            'Frequency: {}s'.format(self.frequency),
+            'Creation time: ' + self.creation_time,
+            'Creator: ' + self.creator
+            ])
 
     def datetime_conversion(self, scheduled_date):
         dt = datetime.strptime(scheduled_date, '%d/%m/%Y %H:%M:%S')

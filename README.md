@@ -4,11 +4,6 @@ eNMS is a network visualization, inventory and automation web platform.
 
 **You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !** (most functionalities are disabled)
 
-```
-username: cisco
-password: cisco
-```
-
 ![eNMS](readme/eNMS.png)
 
 # Features

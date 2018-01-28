@@ -285,6 +285,26 @@
                   opacity: 20
                   }
                   ).addTo(earth);
+                  
+                  var polygon = WE.polygon(
+                  [
+                    [
+                    {{ obj['destination']['latitude'] }}, 
+                    {{ obj['destination']['longitude'] }}
+                    ],
+                    [
+                    {{ obj['source']['latitude'] }}, 
+                    {{ obj['source']['longitude'] }}
+                    ],
+                    [
+                    {{ obj['destination']['latitude'] }}, 
+                    {{ obj['destination']['longitude'] }}
+                    ]
+                  ], {
+                  color: '{{ obj.color }}',
+                  opacity: 20
+                  }
+                  ).addTo(earth);
 
                 {% endfor %}
                 

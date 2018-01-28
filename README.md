@@ -31,7 +31,7 @@ which properties are displayed as pie charts in the dashboard.
 
 Network visualization is of paramount importance for quickly understanding the network topology.
 There are two ways of visualizing the network in eNMS:
-- **Geographical view**: eNMS uses Open Street Map to draw all network devices at their exact location GPS location.
+- **Geographical view**: you can display the network in 2D or 3D, with Open Street Map or Google Map. A clusterized view is also available for large networks (> 10K nodes), for scalability.
 - **Logical view**: the geographical view only makes sense if we have all GPS coordinates: it is not always the case. The logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way.
 
 ![Network GIS visualization](readme/views.gif)

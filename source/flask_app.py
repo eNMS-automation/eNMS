@@ -1,21 +1,18 @@
 from flask import Flask
 from flask_migrate import Migrate
 from importlib import import_module
-from inspect import stack
 from os.path import abspath, dirname, join, pardir
+from sys import dont_write_bytecode, path
 import logging
 import os
-import sys
 
 # prevent python from writing *.pyc files / __pycache__ folders
-sys.dont_write_bytecode = True
+dont_write_bytecode = True
 
-path_app = dirname(abspath(stack()[0][1]))
-if path_app not in sys.path:
-    sys.path.append(path_app)
-
-path_source = os.path.dirname(os.path.abspath(__file__))
+path_source = dirname(abspath(__file__))
 path_parent = abspath(join(path_source, pardir))
+if path_source not in path:
+    path.append(path_source)
 
 from base.database import db, create_database
 from tasks.models import scheduler

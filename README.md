@@ -179,7 +179,7 @@ In order to use eNMS, you need to:
     
 - clone eNMS (or download as a zip archive from github)
 ```
-pip clone https://github.com/afourmy/eNMS.git
+git clone https://github.com/afourmy/eNMS.git
 ```
     
 - install the requirements

@@ -65,7 +65,6 @@ def schedule_task(cls, **data):
 @blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
 @login_required
 def view(view_type):
-    print(request.form)
     napalm_configuration_form = NapalmConfigurationForm(request.form)
     napalm_getters_form = NapalmGettersForm(request.form)
     netmiko_form = NetmikoForm(request.form)

@@ -180,6 +180,11 @@ class Task(CustomBase):
     # script parameters
     creator = Column(String)
     
+    __mapper_args__ = {
+        'polymorphic_identity':'Task',
+        'polymorphic_on': type
+    }
+    
     def __init__(self, user, **data):
         self.name = data['name']
         self.frequency = data['frequency']
@@ -219,11 +224,11 @@ class Task(CustomBase):
         
     def resume_task(self):
         scheduler.resume_job(self.creation_time)
-        self.status = 'active'
+        self.status = "active"
         db.session.commit()
 
     def delete_task(self):
-        scheduler.remove_job(self.creation_time)
+        scheduler.delete_job(self.creation_time)
         db.session.commit()
 
     def recurrent_scheduling(self):
@@ -267,9 +272,13 @@ class NetmikoTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
+    __mapper_args__ = {
+        'polymorphic_identity':'NetmikoTask',
+    }
+    
     def __init__(self, user, targets, **data):
         print(user, targets, data)
-        self.type = data['type']
+        self.subtype = data['type']
         self.script_name = data['script']
         self.user = user
         self.nodes = targets
@@ -294,8 +303,12 @@ class NapalmConfigTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
+    __mapper_args__ = {
+        'polymorphic_identity':'NapalmConfigTask',
+    }
+    
     def __init__(self, user, targets, **data):
-        self.type = 'napalm_config'
+        self.subtype = 'napalm_config'
         self.script_name = data['script']
         self.user = user
         self.nodes = targets
@@ -318,8 +331,12 @@ class NapalmGettersTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
     
+    __mapper_args__ = {
+        'polymorphic_identity':'NapalmGettersTask',
+    }
+    
     def __init__(self, user, targets, **data):
-        self.type = 'napalm_getters'
+        self.subtype = 'napalm_getters'
         self.user = user
         self.nodes = targets
         self.data = data

@@ -94,7 +94,7 @@ def view(view_type):
     if 'view' in request.form:
         view = request.form['view']
     # we clean the session's selected nodes
-    session.pop('selection')
+    session['selection'] = []
     return render_template(
         '{}_view.html'.format(view_type),
         view = view,

@@ -93,9 +93,8 @@ def view(view_type):
     view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
     if 'view' in request.form:
         view = request.form['view']
-    selected_nodes = []
-    if 'selection' in session:
-        selected_nodes = [int(node_id) for node_id in session['selection']]
+    # we clean the session's selected nodes
+    session.pop('selection')
     return render_template(
         '{}_view.html'.format(view_type),
         view = view,
@@ -107,7 +106,6 @@ def view(view_type):
         labels = labels,
         names = pretty_names,
         subtypes = node_subtypes,
-        selected_nodes = selected_nodes,
         node_table = {
             obj: OrderedDict([
                 (property, getattr(obj, property)) 
@@ -170,5 +168,4 @@ def putty_connection():
 @login_required
 def selection():
     session['selection'] = request.form.getlist('selection[]')
-    print(str(session['selection'])*10)
     return dumps({'success': True}), 200, {'ContentType': 'application/json'}

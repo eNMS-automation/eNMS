@@ -1,9 +1,7 @@
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
 class Config(object):
-    DEBUG = True
-    SECRET_KEY = 'key'
-    
+
     # SQL Alchemy
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -22,3 +20,11 @@ class Config(object):
             'max_workers': 500
             }
         }
+
+class ProductionConfig(Config):
+    DEBUG = False
+    SECRET_KEY = 'change-me'
+
+class DebugConfig(Config):
+    DEBUG = True
+    SECRET_KEY = 'key'

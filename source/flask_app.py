@@ -1,4 +1,4 @@
-from config import Config
+from config import DebugConfig
 from flask import Flask
 from flask_migrate import Migrate
 from importlib import import_module
@@ -71,7 +71,7 @@ def configure_scheduler(scheduler):
 
 def create_app(config='config'):
     app = Flask(__name__, static_folder='base/static')
-    app.config.from_object(Config)
+    app.config.from_object(DebugConfig)
     initialize_paths(app)
     register_extensions(app)
     register_blueprints(app)

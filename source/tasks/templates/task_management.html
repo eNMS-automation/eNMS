@@ -12,7 +12,7 @@
       <div class="col-md-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Tasks scheduling</h2>
+            <h2>Tasks</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
@@ -121,7 +121,7 @@
                       <a href="" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     </td>
                     <td>
-                      <form action="/scheduling/delete_task" method='post'>
+                      <form action="/tasks/delete_task" method='post'>
                         <input type="hidden" name="task_name" value={{ task.name }} />
                         <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
                       </form>
@@ -129,12 +129,12 @@
                     <td>
                       {% if task.frequency %}
                         {% if task.status == 'active' %}
-                          <form action="/scheduling/pause_task" method='post'>
+                          <form action="/tasks/pause_task" method='post'>
                             <input type="hidden" name="task_name" value={{ task.name }} />
                             <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>
                           </form>
                         {% else %}
-                          <form action="/scheduling/resume_task" method='post'>
+                          <form action="/tasks/resume_task" method='post'>
                             <input type="hidden" name="task_name" value={{ task.name }} />
                             <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Resume</button>
                           </form>

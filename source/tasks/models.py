@@ -219,7 +219,11 @@ class Task(CustomBase):
         
     def resume_task(self):
         scheduler.resume_job(self.creation_time)
-        self.status = "active"
+        self.status = 'active'
+        db.session.commit()
+
+    def delete_task(self):
+        scheduler.remove_job(self.creation_time)
         db.session.commit()
 
     def recurrent_scheduling(self):

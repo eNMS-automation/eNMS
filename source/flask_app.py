@@ -1,3 +1,4 @@
+from config import Config
 from flask import Flask
 from flask_migrate import Migrate
 from importlib import import_module
@@ -27,6 +28,7 @@ def initialize_paths(app):
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
+    scheduler.init_app(app)
 
 def register_blueprints(app):
     blueprints = (
@@ -64,20 +66,21 @@ def configure_logs(app):
     logger = logging.getLogger('netmiko')
     logger.addHandler(logging.StreamHandler())
 
+def configure_scheduler(scheduler):
+    scheduler.start()
+
 def create_app(config='config'):
     app = Flask(__name__, static_folder='base/static')
-    app.config.from_object('config')
-    
+    app.config.from_object(Config)
     initialize_paths(app)
     register_extensions(app)
     register_blueprints(app)
-    
     from users.models import User
     configure_login_manager(app, User)
-    
     configure_database(app)
+    from tasks.models import scheduler
+    configure_scheduler(scheduler)
     configure_logs(app)
-
     return app
 
 app = create_app()

@@ -19,7 +19,6 @@ except ImportError:
     from napalm_base import get_network_driver
 
 scheduler = APScheduler()
-scheduler.start()
 
 ## Netmiko process and job
 

@@ -54,11 +54,11 @@ def task_management():
 @blueprint.route('/delete_task', methods=['POST'])
 @login_required
 def delete_task():
-    
+    # link = db.session.query(Object).filter_by(name=link).first()
     task = Task.query.filter_by(name=request.form['task_name']).first()
-    # task.delete_task()
-    # task.delete()
-    Task.query.filter_by(name=request.form['task_name']).delete()
+    task.delete_task()
+    db.session.delete(task)
+    # Task.query.filter_by(name=request.form['task_name']).delete()
     db.session.commit()
     return task_management()
     

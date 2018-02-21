@@ -30,8 +30,9 @@ RUN conda create -y -n $MY_CONDA_PY3ENV python=3.4
 RUN conda update --quiet --yes conda
 RUN echo "alma101" # invalidate the cache
 # Setup for ssh onto github
-#
-ADD ../requirements.txt /requirements.txt
+
+WORKDIR /app/eNMS
+ADD requirements.txt /requirements.txt
 RUN /bin/bash -c "$CONDA_ACTIVATE && pip install -r /requirements.txt"
 
 #ENTRYPOINT [ "/usr/bin/tini", "--" ]

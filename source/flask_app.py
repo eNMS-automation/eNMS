@@ -16,6 +16,7 @@ if path_source not in path:
     path.append(path_source)
 
 from base.database import db, create_database
+from logs.models import SyslogServer
 from tasks.models import scheduler
 from users.routes import login_manager
 
@@ -38,6 +39,7 @@ def register_blueprints(app):
         'tasks',
         'users',
         'views',
+        'logs',
         )
     for blueprint in blueprints:
         module = import_module('{}.routes'.format(blueprint))
@@ -61,6 +63,13 @@ def configure_database(app):
         db.session.remove()
     migrate = Migrate(app, db)
 
+def configure_syslog():
+    try:
+        syslog_server = db.session.query(SyslogServer).one()
+        syslog_server.start()
+    except:
+        pass
+
 def configure_logs(app):
     logging.basicConfig(filename='error.log',level=logging.DEBUG)
     logger = logging.getLogger('netmiko')
@@ -80,6 +89,7 @@ def create_app(config='config'):
     configure_database(app)
     from tasks.models import scheduler
     configure_scheduler(scheduler)
+    configure_syslog()
     configure_logs(app)
     return app
 

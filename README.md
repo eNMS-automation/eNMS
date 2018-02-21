@@ -1,6 +1,7 @@
 # Introduction
 
-eNMS is a network visualization, inventory and automation web platform.
+eNMS is a network visualization, inventory and automation web platform. Please note that it is still in beta version and the master branch is undergoing major changes, which are not yet reflected in the readme.
+Join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel #enms for the latest updates !
 
 **You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !** (most functionalities are disabled)
 

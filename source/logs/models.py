@@ -3,7 +3,7 @@ from base.models import CustomBase
 from sqlalchemy import Column, Integer, String
 try:
     from SocketServer import BaseRequestHandler, UDPServer
-except (ModuleNotFoundError, ImportError):
+except:
     from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 

@@ -13,3 +13,7 @@ venv
 # other
 .DS_Store
 
+# sphinx docs 
+_build
+_static
+_templates

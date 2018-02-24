@@ -263,4 +263,6 @@ or on the [Network to Code slack](http://networktocode.herokuapp.com "Network to
 
 [Vis](http://visjs.org/ "Vis"): JavaScript visualization library to display dynamic, automatically organised network views.
 
+[WebGL Earth](http://www.webglearth.org "WebGL Earth"): 3D digital globe for web and mobile devices.
+
 [xlrd](https://github.com/python-excel/xlrd): Library to extract data from Microsoft Excel (tm) spreadsheet files.

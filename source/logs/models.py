@@ -1,6 +1,6 @@
 from base.database import db
 from base.models import CustomBase
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String
 try:
     from SocketServer import BaseRequestHandler, UDPServer
 except:
@@ -15,6 +15,7 @@ class Log(CustomBase):
     id = Column(Integer, primary_key=True)
     source = Column(String)
     content = Column(String)
+    visible = Column(Boolean, default=True)
 
     def __init__(self, source, content):
         self.source = source

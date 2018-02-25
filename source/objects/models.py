@@ -38,10 +38,6 @@ class Object(CustomBase):
     @initialize_properties
     def __init__(self, **kwargs):
         pass
-
-    @classmethod
-    def visible_objects(cls):
-        return (obj for obj in cls.query.all() if obj.visible)
         
     @classmethod
     def visible_choices(cls):

@@ -6,11 +6,12 @@ class SyslogServerForm(FlaskForm):
     port = IntegerField('Port', default=514)
 
 def configure_form(cls):
+    cls.properties = ('source', 'content')
     for property in ('source', 'content'):
         setattr(cls, property, TextField(property))
         setattr(cls, property + 'regex', BooleanField('Regex'))
     return cls
 
 @configure_form
-class LogFiltering(FlaskForm):
+class LogFilteringForm(FlaskForm):
     pass

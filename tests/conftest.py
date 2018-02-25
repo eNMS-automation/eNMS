@@ -1,6 +1,7 @@
-from os import close, unlink
+from os import remove
 from os.path import abspath, dirname, join, pardir
 from sys import dont_write_bytecode, path
+from werkzeug.datastructures import ImmutableMultiDict
 import pytest
 import tempfile
 
@@ -13,11 +14,18 @@ if path_app not in path:
 from flask_app import create_app
 
 @pytest.fixture
-def client():
+def base_client():
     app = create_app(test=True)
     yield app.test_client()
+    remove(join(path_source, 'database.db'))
 
 @pytest.fixture
-def client():
+def user_client():
     app = create_app(test=True)
-    yield app.test_client()
+    client = app.test_client()
+    create = ImmutableMultiDict([('username', 'cisco'), ('password', 'cisco'), ('create_account', '')])
+    login = ImmutableMultiDict([('username', 'cisco'), ('password', 'cisco'), ('login', '')])
+    r = client.post('/users/create_account', data=create)
+    client.post('/users/login', data=login)
+    yield client
+    remove(join(path_source, 'database.db'))

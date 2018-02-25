@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # tests
-.pytest_cache
+*.pytest_cache
 
 # database & logs
 *.db

@@ -90,7 +90,7 @@ def project():
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
-    return render_template('errors/page_403.html')
+    return render_template('errors/page_403.html'), 403
 
 @blueprint.errorhandler(403)
 def authorization_required(error):

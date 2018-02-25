@@ -66,7 +66,6 @@ def create_account():
         form = CreateAccountForm(request.form)
         return render_template('login/create_account.html', form=form)
     else:
-        login_form = LoginForm(request.form)
         kwargs = request.form.to_dict()
         password = kwargs.pop('password')
         kwargs['password'] = cisco_type7.hash(password)
@@ -78,6 +77,7 @@ def create_account():
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        print(request.form)
         username = str(request.form['username'])
         password = str(request.form['password'])
         user = db.session.query(User).filter_by(username=username).first()
@@ -118,6 +118,7 @@ def login():
     return redirect(url_for('base_blueprint.dashboard'))
 
 @blueprint.route('/logout')
+@login_required
 def logout():
     flask_login.logout_user()
     return redirect(url_for('users_blueprint.login'))

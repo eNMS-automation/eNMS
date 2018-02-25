@@ -11,7 +11,7 @@ before_script:
   cd tests/
 
 script:
-  - coverage run -m pytest
+  - coverage run --source=../source -m pytest
 
 after_success:
   - coveralls

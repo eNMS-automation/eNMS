@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 pretty_names = OrderedDict([
     ('access_rights', 'Access_rights'),
+    ('content', 'Content'),
     ('description', 'Description'),
     ('destination', 'Destination'),
     ('email', 'Email'),

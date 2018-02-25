@@ -26,10 +26,11 @@ def initialize_paths(app):
     app.kmz_path = join(path_parent, 'kmz')
     app.config['UPLOAD_FOLDER'] = app.path_upload
 
-def register_extensions(app):
+def register_extensions(app, test):
     db.init_app(app)
     login_manager.init_app(app)
-    scheduler.init_app(app)
+    if not test:
+        scheduler.init_app(app)
 
 def register_blueprints(app):
     blueprints = (
@@ -78,17 +79,18 @@ def configure_logs(app):
 def configure_scheduler(scheduler):
     scheduler.start()
 
-def create_app(config='config'):
+def create_app(test=False):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(DebugConfig)
     initialize_paths(app)
-    register_extensions(app)
+    register_extensions(app, test)
     register_blueprints(app)
     from users.models import User
     configure_login_manager(app, User)
     configure_database(app)
-    from tasks.models import scheduler
-    configure_scheduler(scheduler)
+    if not test:
+        from tasks.models import scheduler
+        configure_scheduler(scheduler)
     configure_syslog()
     configure_logs(app)
     return app

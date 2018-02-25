@@ -36,6 +36,7 @@ def objects():
 @blueprint.route('/object_creation', methods=['GET', 'POST'])
 @login_required
 def create_objects():
+    print(request.form)
     add_node_form = AddNode(request.form)
     add_nodes_form = AddNodes(request.form)
     add_link_form = AddLink(request.form)

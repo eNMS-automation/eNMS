@@ -11,7 +11,7 @@ before_script:
   cd tests/
 
 script:
-  - pytest
+  - coverage run pytest
 
 after_success:
   - coveralls

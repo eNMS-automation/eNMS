@@ -1,69 +1,8 @@
-from werkzeug.datastructures import ImmutableMultiDict
+from test_base import check_blueprints
+from conftest import path_projects
 from objects.models import *
-
-urls = {
-    '/': (
-        '',
-        'dashboard',
-        'dashboard_control',
-        'project'
-        ),
-    '/users/': (
-        'overview',
-        'manage_users',
-        'login',
-        'create_account',
-        'tacacs_server'
-        ),
-    '/objects/': (
-        'objects',
-        'object_creation',
-        'object_deletion',
-        'object_filtering'
-        ),
-    '/views/': (
-        'geographical_view',
-        'logical_view',
-        'google_earth_export'
-        ),
-    '/scripts/': (
-        'overview',
-        'script_creation',
-        'ansible_script'
-        ),
-    '/tasks/': (
-        'task_management',
-        'calendar'
-        ),
-    '/logs/': (
-        'overview',
-        'syslog_server'
-        )
-    }
-
-free_access = {'/', '/users/login', '/users/create_account'}
-
-## Base test
-# test the login system: login, user creation, logout
-# test that all pages respond with HTTP 403 if not logged in, 200 otherwise
-
-def test_authentication(base_client):
-    for blueprint, pages in urls.items():
-        for page in pages:
-            page_url = blueprint + page
-            expected_code = 200 if page_url in free_access else 403
-            r = base_client.get(page_url, follow_redirects=True)
-            assert r.status_code == expected_code
-
-def test_urls(user_client):
-    for blueprint, pages in urls.items():
-        for page in pages:
-            page_url = blueprint + page
-            r = user_client.get(page_url, follow_redirects=True)
-            assert r.status_code == 200
-    # logout and test that we cannot access anything anymore
-    r = user_client.get('/users/logout', follow_redirects=True)
-    test_authentication(user_client)
+from os.path import join
+from werkzeug.datastructures import ImmutableMultiDict
 
 ## Objects 
 # test the creation of objects, manual and via excel import
@@ -124,3 +63,46 @@ def test_manual_object_creation(user_client):
         assert(len(cls.query.all()) == 9)
     # - exactly 6*9 = 54 links in total
     assert len(Link.query.all()) == 54
+
+def create_from_file(client, file):
+    with open(join(path_projects, file), 'rb') as f:
+        data = dict(add_nodes='', file=f)
+        res = client.post('/objects/object_creation', data=data)
+
+@check_blueprints('/', '/objects/', '/views/')
+def test_object_creation_europe(user_client):
+    create_from_file(user_client, 'europe.xls')
+    assert len(Node.query.all()) == 33
+    assert len(Link.query.all()) == 49
+
+@check_blueprints('/', '/objects/', '/views/')
+def test_object_creation_type(user_client):
+    create_from_file(user_client, 'node_counters.xls')
+    assert len(Node.query.all()) == 27
+    assert not Link.query.all()
+
+@check_blueprints('/', '/objects/', '/views/')
+def test_object_creation_all_type(user_client):
+    create_from_file(user_client, 'all_types.xls')
+    number_per_subtype = {
+        Antenna: 20,
+        Firewall: 38,
+        Host: 40,
+        OpticalSwitch: 32,
+        Regenerator: 38,
+        Router: 81,
+        Switch: 40,
+        Server: 60,
+        BgpPeering: 13,
+        Etherchannel: 155,
+        EthernetLink: 103,
+        OpticalChannel: 42,
+        OpticalLink: 14,
+        Pseudowire: 22
+        }
+    for cls, number in number_per_subtype.items():
+        assert len(cls.query.all()) == number
+
+@check_blueprints('/objects/')
+def test_object_deletion_europe(user_client):
+    create_from_file(user_client, 'europe.xls')

@@ -8,6 +8,7 @@ import tempfile
 path_source = dirname(abspath(__file__))
 path_parent = abspath(join(path_source, pardir))
 path_app = join(path_parent, 'source')
+path_projects = join(path_parent, 'projects')
 if path_app not in path:
     path.append(path_app)
 

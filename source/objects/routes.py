@@ -36,19 +36,15 @@ def objects():
 @blueprint.route('/object_creation', methods=['GET', 'POST'])
 @login_required
 def create_objects():
-    print(request.form)
     add_node_form = AddNode(request.form)
     add_nodes_form = AddNodes(request.form)
     add_link_form = AddLink(request.form)
     if 'add_node' in request.form or 'add_link' in request.form:
         object_factory(db, **request.form.to_dict())
     elif 'add_nodes' in request.form:
-        filename = request.files['file'].filename
-        if 'file' in request.files and allowed_file(filename, {'xls', 'xlsx'}):  
-            filename = secure_filename(filename)
-            filepath = join(current_app.config['UPLOAD_FOLDER'], filename)
-            request.files['file'].save(filepath)
-            book = open_workbook(filepath)
+        file = request.files['file']
+        if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):  
+            book = open_workbook(file_contents=file.read())
             for obj_type, cls in object_class.items():
                 try:
                     sheet = book.sheet_by_name(obj_type)
@@ -61,8 +57,6 @@ def create_objects():
                     kwargs['type'] = obj_type
                     object_factory(db, **kwargs)
                 db.session.commit()
-        else:
-            flash('no file submitted')
     all_nodes = Node.visible_choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     return render_template(

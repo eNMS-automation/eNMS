@@ -1,0 +1,23 @@
+---
+- name: save running-config
+  hosts: ios_devices
+  gather_facts: no
+  connection: local
+
+  vars:
+    provider:
+      host: "{{ inventory_hostname }}" 
+      username: "cisco"
+      password: "cisco"
+      authorize: yes
+      auth_pass: cisco
+
+  tasks:
+    - ios_command:
+        provider: "{{ provider }}"
+        commands: show running-config
+      register: output
+
+    - copy: 
+        content: "{{ output.stdout[0] }}"
+        dest: "./output.txt"

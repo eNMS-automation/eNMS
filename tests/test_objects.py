@@ -4,10 +4,11 @@ from objects.models import *
 from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
 
-## Objects 
 # test the creation of objects, manual and via excel import
 # test the deletion of objects
 # test the filtering system
+
+## Object creation
 
 def define_node(subtype, description):
     return ImmutableMultiDict([
@@ -103,19 +104,46 @@ def test_object_creation_all_type(user_client):
     for cls, number in number_per_subtype.items():
         assert len(cls.query.all()) == number
 
+## Object deletion
+
 nodes = ImmutableMultiDict([('nodes', 'router' + str(i)) for i in range(5, 20)])
 links = ImmutableMultiDict([('links', 'link' + str(i)) for i in range(4, 15)])
 
-@check_blueprints('/objects/', '/views/')
+@check_blueprints('/', '/objects/', '/views/')
 def test_node_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     res = user_client.post('/objects/object_deletion', data=nodes)
     assert len(Node.query.all()) == 18
     assert len(Link.query.all()) == 18
 
-@check_blueprints('/objects/', '/views/')
+@check_blueprints('/', '/objects/', '/views/')
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     res = user_client.post('/objects/object_deletion', data=links)
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 38
+
+## Object filtering
+
+filter_objects1 = ImmutableMultiDict([
+    ('nodelocation', 'france|spain'),
+    ('nodelocationregex', 'y'),
+    ('linkname', 'link[1|2].'),
+    ('linknameregex', 'y'),
+    ])
+
+filter_objects2 = ImmutableMultiDict([
+    ('nodelocation', 'france'),
+    ('linkname', 'l.*k\\S3'),
+    ('linknameregex', 'y'),
+    ])
+
+@check_blueprints('/', '/objects/', '/views/')
+def test_object_filtering(user_client):
+    create_from_file(user_client, 'europe.xls')
+    res = user_client.post('/objects/object_filtering', data=filter_objects1)
+    assert len(Node.visible_choices()) == 21
+    assert len(Link.visible_choices()) == 20
+    res = user_client.post('/objects/object_filtering', data=filter_objects2)
+    assert len(Node.visible_choices()) == 12
+    assert len(Link.visible_choices()) == 4

@@ -69,7 +69,6 @@ def create_objects():
 @blueprint.route('/object_deletion', methods=['GET', 'POST'])
 @login_required
 def delete_objects():
-    print(request.form)
     delete_objects_form = DeleteObjects(request.form)
     if request.method == 'POST':
         # delete nodes

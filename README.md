@@ -6,7 +6,7 @@
 eNMS is a network visualization, inventory and automation web platform. Please note that it is still in beta version and the master branch is undergoing major changes, which are not yet reflected in the readme.
 Join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel #enms for the latest updates !
 
-**You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !** (most functionalities are disabled)
+**You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !**
 
 ![eNMS](readme/eNMS.png)
 
@@ -40,11 +40,7 @@ There are two ways of visualizing the network in eNMS:
 
 ![Network GIS visualization](readme/views.gif)
 
-## Export to Google Earth
-
 Networks can be exported on Google Earth from the geographical view: the resulting file is stored in the **_/kmz_** folder.
-
-![Export to Google Earth](readme/google_earth.gif)
 
 ## Embedded SSH client
 

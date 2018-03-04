@@ -1,0 +1,19 @@
+---
+- name: change hostname
+  hosts: ios_devices
+  gather_facts: no
+  connection: local
+    
+  vars:
+    provider:
+      host: "{{ inventory_hostname }}" 
+      username: "cisco"
+      password: "cisco"
+      authorize: yes
+      auth_pass: cisco
+
+  tasks:
+    - ios_config:
+        provider: "{{ provider }}"
+        lines: 
+          - hostname paris

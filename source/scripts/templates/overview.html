@@ -21,7 +21,7 @@
                 <tr>
                   <th style="width: 33%">Name</th>
                   <th style="width: 33%">Type</th>
-                  <th style="width: 33%">Content</th>
+                  <th style="width: 33%">Edit</th>
                 </tr>
               </thead>
 
@@ -38,11 +38,15 @@
                               <button type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">×</span>
                               </button>
-                              <h4 class="modal-title" id="myModalLabel">Content</h4>
+                              <h4 class="modal-title" id="myModalLabel">Edit properties</h4>
                             </div>
 
                             <div class="modal-body">
-                              <pre> {{ script.content }} </pre>
+                              {% if script.type == 'AnsibleScript' %}
+                                Playbook path: {{ script.playbook_path }}
+                              {% else %}
+                                <pre> {{ script.content }} </pre>
+                              {% endif %}
                             </div>
                           </div>
                         </div>

@@ -84,3 +84,6 @@ class NapalmConfigurationForm(SchedulingForm):
     script = SelectField('', choices=())
     action_choices = [(v, k) for k, v in napalm_actions.items()]
     actions = SelectField('Actions', choices=action_choices)
+
+class AnsibleForm(SchedulingForm):
+    pass

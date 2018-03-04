@@ -49,6 +49,7 @@
         <li><a onclick="show_modal('netmiko')"> Netmiko </a></li>
         <li><a onclick="show_modal('napalm-getters')">NAPALM getters</a></li>
         <li><a onclick="show_modal('napalm-configuration')">NAPALM configuration</a></li>
+        <li><a onclick="show_modal('ansible')">Ansible</a></li>
       </ul>
     </div> 
   </div>
@@ -340,6 +341,12 @@
     }
     function call_wizard2(){
       $('#wizard2').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+    function call_wizard3(){
+      $('#wizard3').smartWizard();
       $('.buttonNext').addClass('btn btn-success');
       $('.buttonPrevious').addClass('btn btn-primary');
       $('.buttonFinish').addClass('btn btn-default');

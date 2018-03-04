@@ -39,7 +39,7 @@ def script_creation():
         if form.data['type'] != 'simple':
             try:
                 file = request.files['file']
-                if allowed_file(file.filename, {'yaml'}):
+                if allowed_file(file.filename, {'yaml', 'yml'}):
                     filename = secure_filename(file.filename)
                     parameters = load(file.read())
                     template = Template(content)
@@ -62,7 +62,12 @@ def script_creation():
 def ansible_script():
     form = AnsibleScriptForm(request.form)
     if request.method == 'POST':
-        script = AnsibleScript(**request.form)
+        filename = request.files['file'].filename
+        if allowed_file(filename, {'yaml', 'yml'}):  
+            filename = secure_filename(filename)
+            playbook_path = join(current_app.config['UPLOAD_FOLDER'], filename)
+            request.files['file'].save(playbook_path)
+        script = AnsibleScript(playbook_path, **request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(

@@ -1,7 +1,8 @@
+from tempfile import NamedTemporaryFile
 from base.database import db
 from base.helpers import str_dict
 from base.models import CustomBase
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 from datetime import datetime, timedelta
 from flask import current_app
 from flask_apscheduler import APScheduler
@@ -17,6 +18,15 @@ try:
     from napalm import get_network_driver
 except ImportError:
     from napalm_base import get_network_driver
+
+try:
+    from ansible.parsing.dataloader import DataLoader
+    from ansible.vars.manager import VariableManager
+    from ansible.inventory.manager import InventoryManager
+    from ansible.executor.playbook_executor import PlaybookExecutor
+except:
+    import warnings
+    warnings.warn('ansible import failed: ansible feature deactivated')
 
 scheduler = APScheduler()
 
@@ -157,6 +167,64 @@ def napalm_getters_job(name, getters, username, password, nodes_info):
     task.logs[job_time] = results
     db.session.commit()
 
+def ansible_job(name, script_name, username, password, nodes_info):
+    job_time = str(datetime.now())
+    task = db.session.query(Task)\
+        .filter_by(name=name)\
+        .first()
+    script = db.session.query(AnsibleScript)\
+        .filter_by(name=script_name)\
+        .first()
+
+    loader = DataLoader()
+    
+    hosts = [info[1] for info in nodes_info]
+    temporary_file = NamedTemporaryFile(delete=False)
+    temporary_file.write('\n'.join(hosts))
+    temporary_file.close()
+    
+    # sources is a list of paths to inventory files"
+    inventory = InventoryManager(loader=loader, sources=temporary_file.name)
+    variable_manager = VariableManager(loader=loader, inventory=inventory)
+    playbook_path = script.playbook_path
+
+    options_dict = {
+        'listtags': False,
+        'listtasks': False,
+        'listhosts': False,
+        'syntax': False,
+        'connection': 'ssh',
+        'module_path': None,
+        'forks': 100,
+        'remote_user': None,
+        'private_key_file': None,
+        'ssh_common_args': None,
+        'ssh_extra_args': None,
+        'sftp_extra_args': None,
+        'scp_extra_args': None,
+        'become': False,
+        'become_method': None,
+        'become_user': None,
+        'verbosity': None,
+        'check': False,
+        'diff': False
+        }
+    
+    Options = namedtuple('Options', list(options_dict))
+    passwords = {}
+    playbook_executor = PlaybookExecutor(
+        playbooks = [playbook_path],
+        inventory = inventory,
+        variable_manager = variable_manager,
+        loader = loader,
+        options = Options(**options_dict),
+        passwords = passwords
+        )
+    
+    results = playbook_executor.run()
+    task.logs[job_time] = results
+    db.session.commit()
+
 ## Tasks
 
 class Task(CustomBase):
@@ -276,7 +344,6 @@ class NetmikoTask(Task):
     }
     
     def __init__(self, user, targets, **data):
-        print(user, targets, data)
         self.subtype = data['type']
         self.script_name = data['script']
         self.user = user
@@ -348,3 +415,30 @@ class NapalmGettersTask(Task):
             targets
             ]
         super(NapalmGettersTask, self).__init__(user, **data)
+
+class AnsibleTask(Task):
+    
+    __tablename__ = 'AnsibleTask'
+    
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
+    script = Column(String)
+    
+    __mapper_args__ = {
+        'polymorphic_identity':'AnsibleTask',
+    }
+    
+    def __init__(self, user, targets, **data):
+        self.subtype = 'ansible'
+        self.script_name = data['script']
+        self.user = user
+        self.nodes = targets
+        self.data = data
+        self.job = ansible_job
+        self.args = [
+            data['name'],
+            self.script_name,
+            self.user.username,
+            cisco_type7.decode(self.user.password),
+            targets
+            ]
+        super(AnsibleTask, self).__init__(user, **data)

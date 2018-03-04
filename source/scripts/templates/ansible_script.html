@@ -15,14 +15,23 @@
         <div class="x_panel">
           <div class="x_content">
             <br />
-            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-            
-              <div class="form-group" style="height: 450px">
+            <form data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 
+              <div style="padding-bottom:5px;">
+                <label class="btn btn-default btn-file" style="width:100%;">Choose a playbook
+                  <input id="file" name="file" style="visibility:hidden; display:none" type="file" required=True>
+                </label>
+              </div>
+
+              <div class="form-group" style="height: 450px">
                 {% for field in form if field.widget.input_type != 'hidden'  %}
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
                   <div class="col-md-3 col-sm-3 col-xs-12">
-                    {{ field(class="form-control", placeholder=field.label.text) }}
+                    {% if field.label.text == 'Name' %}
+                      {{ field(class="form-control", placeholder=field.label.text, required=True) }}
+                    {% else %}
+                      {{ field(class="form-control", placeholder=field.label.text) }}
+                    {% endif %}
                   </div>
                 {% endfor %}
               </div>

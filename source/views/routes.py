@@ -68,17 +68,20 @@ def view(view_type):
     napalm_configuration_form = NapalmConfigurationForm(request.form)
     napalm_getters_form = NapalmGettersForm(request.form)
     netmiko_form = NetmikoForm(request.form)
+    ansible_form = AnsibleForm(request.form)
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
     # update the list of available nodes / script by querying the database
     netmiko_form.script.choices = ClassicScript.choices()
     napalm_configuration_form.script.choices = ClassicScript.choices()
+    ansible_form.script.choices = AnsibleScript.choices()
     if 'script_type' in request.form:
         task_class, form = {
         'netmiko': (NetmikoTask, netmiko_form),
         'napalm_configuration': (NapalmConfigTask, napalm_configuration_form),
-        'napalm_getters': (NapalmGettersTask, napalm_getters_form)
+        'napalm_getters': (NapalmGettersTask, napalm_getters_form),
+        'ansible': (AnsibleTask, ansible_form)
         }[request.form['script_type']]
         schedule_task(task_class, **form.data)
         return redirect(url_for('tasks_blueprint.task_management'))
@@ -101,6 +104,7 @@ def view(view_type):
         napalm_configuration_form = napalm_configuration_form,
         napalm_getters_form = napalm_getters_form,
         netmiko_form = netmiko_form,
+        ansible_form = ansible_form,
         view_options_form = view_options_form,
         google_earth_form = google_earth_form,
         labels = labels,

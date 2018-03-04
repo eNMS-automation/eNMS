@@ -3,7 +3,6 @@ from flask_wtf.file import FileAllowed
 from wtforms import TextField, SelectField, TextAreaField, FileField
 
 ansible_options = {
-    'playbook_path': ('Path to playbook', None),
     'listtags': ('List of tags', False),
     'listtasks': ('List of tasks', False),
     'listhosts': ('List of hosts', False),
@@ -46,4 +45,3 @@ def configure_form(cls):
 @configure_form
 class AnsibleScriptForm(FlaskForm):
     name = TextField('Name')
-    

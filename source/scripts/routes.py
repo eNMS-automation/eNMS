@@ -31,7 +31,6 @@ def scripts():
 @blueprint.route('/script_creation', methods=['GET', 'POST'])
 @login_required
 def script_creation():
-    print('ttt'*100, request.form)
     form = ScriptCreationForm(request.form)
     if 'create_script' in request.form:
         # retrieve the raw script: we will use it as-is or update it depending

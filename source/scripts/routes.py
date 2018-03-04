@@ -31,24 +31,19 @@ def scripts():
 @blueprint.route('/script_creation', methods=['GET', 'POST'])
 @login_required
 def script_creation():
+    print('ttt'*100, request.form)
     form = ScriptCreationForm(request.form)
     if 'create_script' in request.form:
         # retrieve the raw script: we will use it as-is or update it depending
         # on the type of script (jinja2-enabled template or not)
         content = request.form['text']
         if form.data['type'] != 'simple':
-            try:
-                file = request.files['file']
-                if allowed_file(file.filename, {'yaml', 'yml'}):
-                    filename = secure_filename(file.filename)
-                    parameters = load(file.read())
-                    template = Template(content)
-                    content = template.render(**parameters)
-                else:
-                    raise Exception
-            except Exception as e:
-                #TODO beautiful warning with the exception
-                print(e)
+            file = request.files['file']
+            if allowed_file(file.filename, {'yaml', 'yml'}):
+                filename = secure_filename(file.filename)
+                parameters = load(file.read())
+                template = Template(content)
+                content = template.render(**parameters)
         script = ClassicScript(content, **request.form)
         db.session.add(script)
         db.session.commit()

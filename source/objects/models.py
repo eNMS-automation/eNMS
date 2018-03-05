@@ -44,7 +44,7 @@ class Object(CustomBase):
         return [(obj, obj) for obj in cls.visible_objects()]
 
     def __repr__(self):
-        return str(self.name)
+        return self.name
 
 class Node(Object):
     

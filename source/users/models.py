@@ -28,7 +28,7 @@ class User(CustomBase, UserMixin):
         self.dashboard_link_properties = str(['type'])
 
     def __repr__(self):
-        return str(self.username)
+        return self.username
 
 class TacacsServer(CustomBase):
     

@@ -30,25 +30,25 @@ ip ospf cost {{ properties.cost }}
 
 result = '''
 interface FastEthernet0/0.420
- description 262
- encapsulation dot1Q 420
- ip address 10.124.33.250 255.255.255.248
- no ip redirects
- ip ospf cost 320
+description 262
+encapsulation dot1Q 420
+ip address 10.124.33.250 255.255.255.248
+no ip redirects
+ip ospf cost 320
 
 interface FastEthernet0/0.418
- description 252
- encapsulation dot1Q 418
- ip address 10.124.33.234 255.255.255.248
- no ip redirects
- ip ospf cost 520
+description 252
+encapsulation dot1Q 418
+ip address 10.124.33.234 255.255.255.248
+no ip redirects
+ip ospf cost 520
 
 interface FastEthernet0/0.419
- description 261
- encapsulation dot1Q 419
- ip address 10.124.33.242 255.255.255.248
- no ip redirects
- ip ospf cost 620
+description 261
+encapsulation dot1Q 419
+ip address 10.124.33.242 255.255.255.248
+no ip redirects
+ip ospf cost 620
 '''
 
 jinja2_script = dict([
@@ -68,4 +68,4 @@ def test_simple_script(user_client):
         res = user_client.post('/scripts/script_creation', data=jinja2_script)
     assert len(ClassicScript.query.all()) == 2
     j2_script = db.session.query(Script).filter_by(name='subif').first()
-    assert ''.join(j2_script.content.split()) == ''.join(result.split())
+    assert set(j2_script.content.split('\n')) == set(result.split('\n'))

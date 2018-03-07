@@ -68,4 +68,6 @@ def test_simple_script(user_client):
         res = user_client.post('/scripts/script_creation', data=jinja2_script)
     assert len(ClassicScript.query.all()) == 2
     j2_script = db.session.query(Script).filter_by(name='subif').first()
+    # simply removing the space does not work as yaml relies on dict, which
+    # are not ordered, we use set instead for the test to pass on python 2 and 3
     assert set(j2_script.content.split('\n')) == set(result.split('\n'))

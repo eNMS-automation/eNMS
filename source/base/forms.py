@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import *
-from objects.properties import *
+from wtforms import SelectMultipleField
+from objects.properties import node_diagram_properties, link_diagram_properties
 from .properties import pretty_names
+
 
 class DiagramPropertiesForm(FlaskForm):
     node_choices = [(p, pretty_names[p]) for p in node_diagram_properties]

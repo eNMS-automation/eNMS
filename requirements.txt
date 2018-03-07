@@ -13,5 +13,4 @@ tacacs_plus
 wtforms
 xlrd
 pyyaml
-pytest
 passlib

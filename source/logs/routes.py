@@ -1,21 +1,22 @@
 from base.properties import pretty_names
 from flask import Blueprint, render_template, request
 from flask_login import login_required
-from .forms import *
-from .models import *
+from .forms import LogFilteringForm, SyslogServerForm
+from .models import Log, SyslogServer
 from re import search
 
 blueprint = Blueprint(
-    'logs_blueprint', 
-    __name__, 
-    url_prefix = '/logs', 
-    template_folder = 'templates',
-    static_folder = 'static'
-    )
+    'logs_blueprint',
+    __name__,
+    url_prefix='/logs',
+    template_folder='templates',
+    static_folder='static'
+)
 
 from base.database import db
 
-@blueprint.route('/overview', methods = ['GET', 'POST'])
+
+@blueprint.route('/overview', methods=['GET', 'POST'])
 @login_required
 def logs():
     form = LogFilteringForm(request.form)
@@ -31,20 +32,20 @@ def logs():
                 # of the node property matches the regular expression.
                 else search(request.form[property], str(value))
                 for property, value in log.__dict__.items()
-                # we consider only the properties in the form 
+                # we consider only the properties in the form
                 # providing that the property field in the form is not empty
                 # (empty field <==> property ignored)
                 if property in request.form and request.form[property]
-                )
+            )
     # the visible status was updated, we need to commit the change
     db.session.commit()
-    print(form)
     return render_template(
         'logs_overview.html',
         form=form,
-        names=pretty_names,  
+        names=pretty_names,
         logs=Log.visible_objects(),
-        )
+    )
+
 
 @blueprint.route('/syslog_server', methods=['GET', 'POST'])
 @login_required
@@ -54,6 +55,6 @@ def syslog_server():
         db.session.add(syslog_server)
         db.session.commit()
     return render_template(
-        'syslog_server.html', 
-        form = SyslogServerForm(request.form)
-        )
+        'syslog_server.html',
+        form=SyslogServerForm(request.form)
+    )

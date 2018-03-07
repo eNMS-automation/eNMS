@@ -7,13 +7,11 @@ python:
   - 3.6
 
 install:
-  - pip install coveralls
   - pip install -r requirements.txt
-
-before_script:
-  cd tests/
+  - pip install -r requirements_dev.txt
 
 script:
+  - flake8
   - coverage run --source=../source -m pytest
 
 after_success:

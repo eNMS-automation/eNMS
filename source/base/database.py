@@ -6,22 +6,23 @@ from sqlalchemy.ext.declarative import declarative_base
 db = SQLAlchemy()
 
 engine = create_engine(
-    'sqlite:///database.db', 
-    connect_args = {'check_same_thread': False},
-    convert_unicode = True, 
-    echo = True
-    )
+    'sqlite:///database.db',
+    connect_args={'check_same_thread': False},
+    convert_unicode=True,
+    echo=True
+)
 
 db.session = scoped_session(
     sessionmaker(
-        autocommit = False,
-        autoflush = False,
-        bind = engine
-        )
+        autocommit=False,
+        autoflush=False,
+        bind=engine
     )
+)
 
 Base = declarative_base()
 Base.query = db.session.query_property()
+
 
 def create_database():
     # import all modules here that might define models so that

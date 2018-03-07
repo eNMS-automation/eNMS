@@ -1,5 +1,5 @@
 def str_dict(input, depth=0):
-    tab = '\t'*depth
+    tab = '\t' * depth
     if isinstance(input, list):
         result = '\n'
         for element in input:
@@ -12,6 +12,7 @@ def str_dict(input, depth=0):
         return result
     else:
         return str(input)
+
 
 def allowed_file(name, allowed_extensions):
     allowed_syntax = '.' in name

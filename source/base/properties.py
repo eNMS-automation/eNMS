@@ -18,4 +18,4 @@ pretty_names = OrderedDict([
     ('type', 'Type'),
     ('username', 'Username'),
     ('vendor', 'Vendor'),
-    ])
+])

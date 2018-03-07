@@ -1,37 +1,43 @@
 from base.database import db
 from base.helpers import allowed_file
 from base.properties import pretty_names
-from flask import Blueprint, current_app, render_template, request
+from flask import Blueprint, render_template, request
 from flask_login import login_required
-from .forms import *
-from .models import *
-from os.path import join
-from .properties import *
+from .forms import (
+    AddNode,
+    AddNodes,
+    AddLink,
+    DeleteObjects,
+    FilteringForm
+)
+from .models import Link, Node, Object, object_class, object_factory
+from .properties import link_public_properties, node_public_properties
 from re import search
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
 blueprint = Blueprint(
-    'objects_blueprint', 
-    __name__, 
-    url_prefix = '/objects', 
-    template_folder = 'templates',
-    static_folder = 'static'
-    )
+    'objects_blueprint',
+    __name__,
+    url_prefix='/objects',
+    template_folder='templates',
+    static_folder='static'
+)
+
 
 @blueprint.route('/objects')
 @login_required
 def objects():
-    links = Link.query.all()
     return render_template(
         'objects_overview.html',
-        names = pretty_names,
-        node_fields = node_public_properties, 
-        nodes = Node.visible_objects(),
-        link_fields = link_public_properties, 
-        links = Link.visible_objects()
-        )
+        names=pretty_names,
+        node_fields=node_public_properties,
+        nodes=Node.visible_objects(),
+        link_fields=link_public_properties,
+        links=Link.visible_objects()
+    )
+
 
 @blueprint.route('/object_creation', methods=['GET', 'POST'])
 @login_required
@@ -43,7 +49,7 @@ def create_objects():
         object_factory(db, **request.form.to_dict())
     elif 'add_nodes' in request.form:
         file = request.files['file']
-        if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):  
+        if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
             book = open_workbook(file_contents=file.read())
             for obj_type, cls in object_class.items():
                 try:
@@ -61,10 +67,11 @@ def create_objects():
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     return render_template(
         'create_object.html',
-        add_node_form = add_node_form,
-        add_nodes_form = add_nodes_form,
-        add_link_form = add_link_form
-        )
+        add_node_form=add_node_form,
+        add_nodes_form=add_nodes_form,
+        add_link_form=add_link_form
+    )
+
 
 @blueprint.route('/object_deletion', methods=['GET', 'POST'])
 @login_required
@@ -89,8 +96,9 @@ def delete_objects():
     delete_objects_form.links.choices = Link.visible_choices()
     return render_template(
         'object_deletion.html',
-        form = delete_objects_form
-        )
+        form=delete_objects_form
+    )
+
 
 @blueprint.route('/object_filtering', methods=['GET', 'POST'])
 @login_required
@@ -106,7 +114,7 @@ def filter_objects():
                 obj.__dict__.update({
                     'source': obj.source,
                     'destination': obj.destination
-                    })
+                })
             obj.visible = all(
                 # if the node-regex property is not in the request, the
                 # regex box is unticked and we only check that the values
@@ -117,16 +125,16 @@ def filter_objects():
                 # of the node property matches the regular expression.
                 else search(request.form[obj.class_type + property], str(value))
                 for property, value in obj.__dict__.items()
-                # we consider only the properties in the form 
-                if obj.class_type + property in request.form
+                # we consider only the properties in the form
+                if obj.class_type + property in request.form and
                 # providing that the property field in the form is not empty
                 # (empty field <==> property ignored)
-                and request.form[obj.class_type + property]
-                )
+                request.form[obj.class_type + property]
+            )
     # the visible status was updated, we need to commit the change
     db.session.commit()
     return render_template(
         'object_filtering.html',
-        form = form,
-        names = pretty_names
-        )
+        form=form,
+        names=pretty_names
+    )

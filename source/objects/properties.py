@@ -6,7 +6,7 @@ object_common_properties = (
     'location',
     'type',
     'vendor'
-    )
+)
 
 node_common_properties = (
     'operating_system',
@@ -15,26 +15,26 @@ node_common_properties = (
     'longitude',
     'latitude',
     'secret_password'
-    )
+)
 
 link_common_properties = (
     'source',
     'destination',
-    )
+)
 
 node_public_properties = (
-object_common_properties +
-node_common_properties[:-1]
+    object_common_properties +
+    node_common_properties[:-1]
 )
 
 link_public_properties = (
-object_common_properties + 
-link_common_properties
+    object_common_properties +
+    link_common_properties
 )
 
 public_properties = (
-node_public_properties + 
-link_public_properties
+    node_public_properties +
+    link_public_properties
 )
 
 type_to_public_properties = OrderedDict([
@@ -52,23 +52,23 @@ type_to_public_properties = OrderedDict([
     ('Optical channel', link_public_properties),
     ('Optical link', link_public_properties),
     ('Pseudowire', link_public_properties)
-    ])
+])
 
 ## Diagram properties (for the dashboard)
 
 object_diagram_properties = (
     'description',
     'location',
-    )
+)
 
 node_diagram_properties = object_diagram_properties + (
     'type',
     'vendor',
     'operating_system',
     'os_version'
-    )
+)
 
 link_diagram_properties = object_diagram_properties + (
     'type',
     'vendor'
-    )
+)

@@ -1,25 +1,37 @@
 from base.database import db
 from base.properties import pretty_names
 from collections import OrderedDict
-from flask import Blueprint, current_app, jsonify, render_template, redirect, request, session, url_for
+from flask import Blueprint, current_app, render_template, redirect, request, session, url_for
 from flask_login import current_user, login_required
-from .forms import *
+from .forms import (
+    AnsibleForm,
+    GoogleEarthForm,
+    NapalmConfigurationForm,
+    NapalmGettersForm,
+    NetmikoForm,
+    ViewOptionsForm
+)
 from json import dumps
-from objects.models import *
-from objects.properties import *
+from objects.models import get_obj, Node, node_subtypes, Link, link_class
+from objects.properties import type_to_public_properties
 from os.path import join
-from scripts.models import *
+from scripts.models import AnsibleScript, ClassicScript
 from simplekml import Color, Kml, Style
 from subprocess import Popen
-from tasks.models import *
+from tasks.models import (
+    AnsibleTask,
+    NapalmConfigTask,
+    NapalmGettersTask,
+    NetmikoTask
+)
 
 blueprint = Blueprint(
-    'views_blueprint', 
-    __name__, 
-    url_prefix = '/views', 
-    template_folder = 'templates',
-    static_folder = 'static'
-    )
+    'views_blueprint',
+    __name__,
+    url_prefix='/views',
+    template_folder='templates',
+    static_folder='static'
+)
 
 styles = {}
 
@@ -32,17 +44,18 @@ for subtype in node_subtypes:
         'images',
         'default',
         '{}.gif'.format(subtype)
-        )
+    )
     point_style.iconstyle.icon.href = path_icon
     styles[subtype] = point_style
-    
+
 for subtype, cls in link_class.items():
     line_style = Style()
-    # we convert the RGB color to a KML color, 
+    # we convert the RGB color to a KML color,
     # i.e #RRGGBB to #AABBGGRR
     kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
     line_style.linestyle.color = kml_color
     styles[subtype] = line_style
+
 
 def get_targets(nodes):
     targets = []
@@ -50,11 +63,12 @@ def get_targets(nodes):
         obj = get_obj(db, Node, id=int(id))
         targets.append((
             obj.name,
-            obj.ip_address, 
+            obj.ip_address,
             obj.operating_system.lower(),
             obj.secret_password
-            ))
+        ))
     return targets
+
 
 def schedule_task(cls, **data):
     targets = get_targets(session['selection'])
@@ -62,7 +76,8 @@ def schedule_task(cls, **data):
     db.session.add(task)
     db.session.commit()
 
-@blueprint.route('/<view_type>_view', methods = ['GET', 'POST'])
+
+@blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
     napalm_configuration_form = NapalmConfigurationForm(request.form)
@@ -78,10 +93,10 @@ def view(view_type):
     ansible_form.script.choices = AnsibleScript.choices()
     if 'script_type' in request.form:
         task_class, form = {
-        'netmiko': (NetmikoTask, netmiko_form),
-        'napalm_configuration': (NapalmConfigTask, napalm_configuration_form),
-        'napalm_getters': (NapalmGettersTask, napalm_getters_form),
-        'ansible': (AnsibleTask, ansible_form)
+            'netmiko': (NetmikoTask, netmiko_form),
+            'napalm_configuration': (NapalmConfigTask, napalm_configuration_form),
+            'napalm_getters': (NapalmGettersTask, napalm_getters_form),
+            'ansible': (AnsibleTask, ansible_form)
         }[request.form['script_type']]
         schedule_task(task_class, **form.data)
         return redirect(url_for('tasks_blueprint.task_management'))
@@ -90,7 +105,7 @@ def view(view_type):
         labels = {
             'node': request.form['node_label'],
             'link': request.form['link_label']
-            }
+        }
     # for the sake of better performances, the view defaults to markercluster
     # if there are more than 2000 nodes
     view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
@@ -100,32 +115,33 @@ def view(view_type):
     session['selection'] = []
     return render_template(
         '{}_view.html'.format(view_type),
-        view = view,
-        napalm_configuration_form = napalm_configuration_form,
-        napalm_getters_form = napalm_getters_form,
-        netmiko_form = netmiko_form,
-        ansible_form = ansible_form,
-        view_options_form = view_options_form,
-        google_earth_form = google_earth_form,
-        labels = labels,
-        names = pretty_names,
-        subtypes = node_subtypes,
-        node_table = {
+        view=view,
+        napalm_configuration_form=napalm_configuration_form,
+        napalm_getters_form=napalm_getters_form,
+        netmiko_form=netmiko_form,
+        ansible_form=ansible_form,
+        view_options_form=view_options_form,
+        google_earth_form=google_earth_form,
+        labels=labels,
+        names=pretty_names,
+        subtypes=node_subtypes,
+        node_table={
             obj: OrderedDict([
-                (property, getattr(obj, property)) 
+                (property, getattr(obj, property))
                 for property in type_to_public_properties[obj.type]
             ])
             for obj in filter(lambda obj: obj.visible, Node.query.all())
         },
-        link_table = {
+        link_table={
             obj: OrderedDict([
-                (property, getattr(obj, property)) 
+                (property, getattr(obj, property))
                 for property in type_to_public_properties[obj.type]
             ])
             for obj in filter(lambda obj: obj.visible, Link.query.all())
         })
 
-@blueprint.route('/google_earth_export', methods = ['GET', 'POST'])
+
+@blueprint.route('/google_earth_export', methods=['GET', 'POST'])
 @login_required
 def google_earth_export():
     form = GoogleEarthForm(request.form)
@@ -136,23 +152,24 @@ def google_earth_export():
             point.coords = [(node.longitude, node.latitude)]
             point.style = styles[node.subtype]
             point.style.labelstyle.scale = request.form['label_size']
-            
+
         for link in filter(lambda obj: obj.visible, Link.query.all()):
-            line = kml_file.newlinestring(name=link.name) 
+            line = kml_file.newlinestring(name=link.name)
             line.coords = [
                 (link.source.longitude, link.source.latitude),
                 (link.destination.longitude, link.destination.latitude)
-                ]
+            ]
             line.style = styles[link.type]
             line.style.linestyle.width = request.form['line_width']
         filepath = join(current_app.kmz_path, request.form['name'] + '.kmz')
         kml_file.save(filepath)
     return render_template(
         'google_earth_export.html',
-        form = form
-        )
+        form=form
+    )
 
-@blueprint.route('/putty_connection', methods = ['POST'])
+
+@blueprint.route('/putty_connection', methods=['POST'])
 @login_required
 def putty_connection():
     node = db.session.query(Node)\
@@ -164,11 +181,12 @@ def putty_connection():
         current_user.username,
         node.ip_address,
         current_user.password
-        )
-    connect = Popen(ssh_connection.split())
-    return dumps({'success': True}), 200, {'ContentType': 'application/json'} 
+    )
+    Popen(ssh_connection.split())
+    return dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
-@blueprint.route('/selection', methods = ['POST'])
+
+@blueprint.route('/selection', methods=['POST'])
 @login_required
 def selection():
     session['selection'] = request.form.getlist('selection[]')

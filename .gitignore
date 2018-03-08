@@ -8,6 +8,7 @@ __pycache__/
 
 # database & logs
 *.db
+*.db-journal
 *.log
 
 # venv

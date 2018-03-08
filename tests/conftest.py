@@ -28,7 +28,7 @@ def user_client():
     create = {'username': '', 'password': '', 'create_account': ''}
     login = {'username': '', 'password': '', 'login': ''}
     with app.app_context():
-        r = client.post('/users/create_account', data=create)
+        client.post('/users/create_account', data=create)
         client.post('/users/login', data=login)
         yield client
     remove(join(path_source, 'database.db'))

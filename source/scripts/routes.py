@@ -3,30 +3,32 @@ from base.helpers import allowed_file
 from base.properties import pretty_names
 from flask import Blueprint, current_app, render_template, request
 from flask_login import login_required
-from .forms import *
+from .forms import AnsibleScriptForm, ScriptCreationForm
 from jinja2 import Template
 from yaml import load
-from .models import *
+from .models import AnsibleScript, ClassicScript, Script
 from os.path import join
 from werkzeug import secure_filename
 
 blueprint = Blueprint(
-    'scripts_blueprint', 
-    __name__, 
-    url_prefix = '/scripts',
-    template_folder = 'templates',
-    static_folder = 'static'
-    )
+    'scripts_blueprint',
+    __name__,
+    url_prefix='/scripts',
+    template_folder='templates',
+    static_folder='static'
+)
+
 
 @blueprint.route('/overview')
 @login_required
 def scripts():
     return render_template(
-        'overview.html', 
-        fields = ('name', 'type'),
-        names = pretty_names, 
-        scripts = Script.query.all()
-        )
+        'overview.html',
+        fields=('name', 'type'),
+        names=pretty_names,
+        scripts=Script.query.all()
+    )
+
 
 @blueprint.route('/script_creation', methods=['GET', 'POST'])
 @login_required
@@ -38,8 +40,8 @@ def script_creation():
         content = request.form['text']
         if form.data['type'] != 'simple':
             file = request.files['file']
-            if allowed_file(file.filename, {'yaml', 'yml'}):
-                filename = secure_filename(file.filename)
+            filename = secure_filename(file.filename)
+            if allowed_file(filename, {'yaml', 'yml'}):
                 parameters = load(file.read())
                 template = Template(content)
                 content = template.render(**parameters)
@@ -48,17 +50,17 @@ def script_creation():
         db.session.commit()
     return render_template(
         'script_creation.html',
-        form = form
-        )
+        form=form
+    )
+
 
 @blueprint.route('/ansible_script', methods=['GET', 'POST'])
 @login_required
 def ansible_script():
     form = AnsibleScriptForm(request.form)
     if request.method == 'POST':
-        filename = request.files['file'].filename
-        if allowed_file(filename, {'yaml', 'yml'}):  
-            filename = secure_filename(filename)
+        filename = secure_filename(request.files['file'].filename)
+        if allowed_file(filename, {'yaml', 'yml'}):
             playbook_path = join(current_app.config['UPLOAD_FOLDER'], filename)
             request.files['file'].save(playbook_path)
         script = AnsibleScript(playbook_path, **request.form)
@@ -66,5 +68,5 @@ def ansible_script():
         db.session.commit()
     return render_template(
         'ansible_script.html',
-        form = form
-        )
+        form=form
+    )

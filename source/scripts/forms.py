@@ -22,9 +22,10 @@ ansible_options = {
     'verbosity': ('Verbosity', None),
     'check': ('Check', False),
     'diff': ('Diff', False)
-    }
+}
 
 ## Script creation
+
 
 class ScriptCreationForm(FlaskForm):
     name = TextField('Name')
@@ -32,15 +33,17 @@ class ScriptCreationForm(FlaskForm):
         ('simple', 'Simple'),
         ('j2_template', 'Jinja2 template'),
         ('per_device_j2', 'Per-device Jinja2 template')
-        )
+    )
     type = SelectField('', choices=type_choices)
     text = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
+
 
 def configure_form(cls):
     for option, (pretty_name, default_value) in ansible_options.items():
         setattr(cls, option, TextField(pretty_name, default=default_value))
     return cls
+
 
 @configure_form
 class AnsibleScriptForm(FlaskForm):

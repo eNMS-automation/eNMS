@@ -1,7 +1,7 @@
 from base.database import db
 from conftest import path_scripts
 from os.path import join
-from scripts.models import *
+from scripts.models import ClassicScript, Script
 from test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -15,8 +15,8 @@ simple_script = ImmutableMultiDict([
     ('type', 'simple'),
     ('create_script', ''),
     ('text', 'ping 1.1.1.1')
-    ])
-    
+])
+
 template = '''
 {% for interface, properties in subinterfaces.items() %}
 interface FastEthernet0/0.{{ interface }}
@@ -52,20 +52,21 @@ ip ospf cost 620
 '''
 
 jinja2_script = dict([
-    ('name', 'subif'), 
+    ('name', 'subif'),
     ('type', 'j2_template'),
     ('create_script', ''),
     ('text', template)
-    ])
+])
+
 
 @check_blueprints('/scripts/')
 def test_simple_script(user_client):
-    res = user_client.post('/scripts/script_creation', data=simple_script)
+    user_client.post('/scripts/script_creation', data=simple_script)
     assert len(ClassicScript.query.all()) == 1
     path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         jinja2_script['file'] = f
-        res = user_client.post('/scripts/script_creation', data=jinja2_script)
+        user_client.post('/scripts/script_creation', data=jinja2_script)
     assert len(ClassicScript.query.all()) == 2
     j2_script = db.session.query(Script).filter_by(name='subif').first()
     # simply removing the space does not work as yaml relies on dict, which

@@ -3,6 +3,7 @@ from wtforms import SelectField
 
 ## Compare getters history
 
+
 class CompareForm(FlaskForm):
     first_node = SelectField('', choices=())
     second_node = SelectField('', choices=())

@@ -3,8 +3,9 @@ from sqlalchemy import Column, Integer, String
 from base.models import CustomBase
 from passlib.hash import cisco_type7
 
+
 class User(CustomBase, UserMixin):
-    
+
     __tablename__ = 'User'
 
     id = Column(Integer, primary_key=True)
@@ -22,7 +23,7 @@ class User(CustomBase, UserMixin):
             # unpack it's value (when **kwargs is request.form, some values
             # will be a 1-element list)
             if hasattr(value, '__iter__') and not isinstance(value, str):
-                value ,= value
+                value = value[0]
             setattr(self, property, value)
         self.dashboard_node_properties = str(['type'])
         self.dashboard_link_properties = str(['type'])
@@ -30,19 +31,20 @@ class User(CustomBase, UserMixin):
     def __repr__(self):
         return self.username
 
+
 class TacacsServer(CustomBase):
-    
+
     __tablename__ = 'TacacsServer'
-    
+
     id = Column(Integer, primary_key=True)
     ip_address = Column(String(120), unique=True)
     password = Column(String(120), unique=True)
     port = Column(Integer)
-    
+
     def __init__(self, **kwargs):
         self.ip_address = str(kwargs['ip_address'][0])
         self.password = str(cisco_type7.hash(''.join(kwargs['password'])))
         self.port = int(''.join(kwargs['port']))
-        
+
     def __repr__(self):
         return self.ip_address

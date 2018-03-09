@@ -14,3 +14,4 @@ wtforms
 xlrd
 pyyaml
 passlib
+gunicorn

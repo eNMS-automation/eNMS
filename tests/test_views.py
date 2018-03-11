@@ -25,6 +25,7 @@ getters_recurrent = ImmutableMultiDict([
     ('script_type', 'napalm_getters')
 ])
 
+
 @check_blueprints('/', '/views/', '/tasks/')
 def test_getters(user_client):
     create_from_file(user_client, 'europe.xls')

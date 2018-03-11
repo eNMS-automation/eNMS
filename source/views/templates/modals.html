@@ -168,71 +168,64 @@
 </div>
 
 <div id="napalm-getters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard2()">
-    <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-
-        <div class="modal-header">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true"> × </span>
+          <span aria-hidden="true"> × </span>
         </button>
         <h4 class="modal-title">Netmiko script</h4>
-        </div>
-        
-        <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-
+      </div>
+      <form data-parsley-validate class="form-horizontal form-label-left" method="post">
         <div class="modal-body">
-            <!-- Smart Wizard -->
-            <div id="wizard2" class="form_wizard wizard_horizontal">
+          <!-- Smart Wizard -->
+          <div id="wizard2" class="form_wizard wizard_horizontal">
             <ul class="wizard_steps">
-                <li>
+              <li>
                 <a href="#step-21">
                     <span class="step_no">1</span>
                     <span class="step_descr"> Step 1 <br/>
                     <small>Parameters</small>
                     </span>
                 </a>
-                </li>
-                <li>
+              </li>
+              <li>
                 <a href="#step-22">
                     <span class="step_no">2</span>
                     <span class="step_descr"> Step 2 <br/>
                     <small>Scheduling</small>
                     </span>
                 </a>
-                </li>
+              </li>
             </ul>
-            
             <div id="step-21">
-                <label>Name</label>
-                <div class='form-group'>
+              <label>Name</label>
+              <div class='form-group'>
                 {{ napalm_getters_form.name(class="form-control") }}
-                </div>
+              </div>
 
-                <label>Getters</label>
-                <div class='form-group'>
+              <label>Getters</label>
+              <div class='form-group'>
                 {{ napalm_getters_form.getters(class="form-control", size=9, required=true) }}
-                </div>
+              </div>
             </div>
-            
             <div id="step-22" style="min-height: 300px">
-                <label>Date</label>
-                <div class='form-group'>
+              <label>Date</label>
+              <div class='form-group'>
                 {{ napalm_getters_form.scheduled_date(class="form-control") }}
-                </div>
-
-                <label>Frequency (seconds)</label>
-                <div class='form-group'>
+              </div>
+              <label>Frequency (seconds)</label>
+              <div class='form-group'>
                 {{ napalm_getters_form.frequency(class="form-control") }}
-                </div>
-                <input type='hidden' name='script_type' value="napalm_getters">
+              </div>
+              <input type='hidden' name='script_type' value="napalm_getters">
             </div>
-
-            </div>
-            <!-- End SmartWizard Content -->
+          </div>
+          <!-- End SmartWizard Content -->
         </div>
-        </form>
+      </form>
     </div>
-    </div>
+  </div>
 </div>
 
 <div id="ansible" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  onmouseenter="call_wizard3()">

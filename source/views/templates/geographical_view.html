@@ -355,12 +355,14 @@
     <!-- Initialize datetimepicker -->
   <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
   <script>
-    $('#scheduled_date').datetimepicker({
-        format: 'DD/MM/YYYY HH:mm:ss',
-        useCurrent: false,
-    });
-    var today = new Date()
-    $('#scheduled_date').data("DateTimePicker").minDate(today);
+    for (n=1; n<5; n++) {
+      $('#scheduled_date' + n).datetimepicker({
+          format: 'DD/MM/YYYY HH:mm:ss',
+          useCurrent: false,
+      });
+      var today = new Date()
+      $('#scheduled_date' + n).data("DateTimePicker").minDate(today);
+    }
   </script>
 
   <script>

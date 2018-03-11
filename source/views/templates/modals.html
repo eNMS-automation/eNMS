@@ -57,7 +57,6 @@
               </li>
             </ul>
             <div id="step-1">
-              <h2 class="StepTitle">Step 4 Content</h2>
               <div class="form-group">
                 <label>Name</label>
                 <div class='form-group'>
@@ -81,16 +80,18 @@
                 </div>
               </div>
             </div>
-            <div id="step-2" style="min-height: 300px">
-              <label>Date</label>
-              <div class='form-group'>
-                {{ netmiko_form.scheduled_date(class="form-control") }}
+            <div id="step-2">
+              <div class="form-group" style="min-height: 350px">
+                <label>Date</label>
+                <div class='form-group'>
+                  {{ netmiko_form.scheduled_date(id="scheduled_date1", class="form-control") }}
+                </div>
+                <label>Frequency (seconds)</label>
+                <div class='form-group'>
+                  {{ netmiko_form.frequency(class="form-control") }}
+                </div>
+                <input type='hidden' name='script_type' value="netmiko">
               </div>
-              <label>Frequency (seconds)</label>
-              <div class='form-group'>
-                {{ netmiko_form.frequency(class="form-control") }}
-              </div>
-              <input type='hidden' name='script_type' value="netmiko">
             </div>
           </div>
           <!-- End SmartWizard Content -->
@@ -148,16 +149,18 @@
                 </div>
               </div>
             </div>
-            <div id="step-12" style="min-height: 300px">
-              <label>Date</label>
-              <div class='form-group'>
-                {{ napalm_configuration_form.scheduled_date(class="form-control") }}
+            <div id="step-12">
+              <div class="form-group" style="min-height: 350px">
+                <label>Date</label>
+                <div class='form-group'>
+                  {{ napalm_configuration_form.scheduled_date(id="scheduled_date2", class="form-control") }}
+                </div>
+                <label>Frequency (seconds)</label>
+                <div class='form-group'>
+                  {{ napalm_configuration_form.frequency(class="form-control") }}
+                </div>
+                <input type='hidden' name='script_type' value="napalm_configuration">
               </div>
-              <label>Frequency (seconds)</label>
-              <div class='form-group'>
-                {{ napalm_configuration_form.frequency(class="form-control") }}
-              </div>
-              <input type='hidden' name='script_type' value="napalm_configuration">
             </div>
           </div>
           <!-- End SmartWizard Content -->
@@ -212,7 +215,7 @@
             <div id="step-22" style="min-height: 300px">
               <label>Date</label>
               <div class='form-group'>
-                {{ napalm_getters_form.scheduled_date(class="form-control") }}
+                {{ napalm_getters_form.scheduled_date(id="scheduled_date3", class="form-control") }}
               </div>
               <label>Frequency (seconds)</label>
               <div class='form-group'>
@@ -275,7 +278,7 @@
             <div id="step-32" style="min-height: 300px">
               <label>Date</label>
               <div class='form-group'>
-                {{ ansible_form.scheduled_date(class="form-control") }}
+                {{ ansible_form.scheduled_date(id="scheduled_date4", class="form-control") }}
               </div>
               <label>Frequency (seconds)</label>
               <div class='form-group'>

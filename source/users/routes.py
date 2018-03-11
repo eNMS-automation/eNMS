@@ -46,7 +46,6 @@ def users():
 def manage_users():
     add_user_form = AddUser(request.form)
     delete_user_form = DeleteUser(request.form)
-    print('ttt'*100, request.form)
     if 'add_user' in request.form:
         kwargs = request.form.to_dict()
         password = kwargs.pop('password')
@@ -72,7 +71,6 @@ def manage_users():
 
 @blueprint.route('/create_account', methods=['GET', 'POST'])
 def create_account():
-    print('ttt'*100, request.form)
     if request.method == 'GET':
         form = CreateAccountForm(request.form)
         return render_template('login/create_account.html', form=form)
@@ -88,7 +86,6 @@ def create_account():
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    print('ttt'*100, request.form)
     if request.method == 'POST':
         username = str(request.form['username'])
         password = str(request.form['password'])
@@ -140,7 +137,6 @@ def logout():
 @blueprint.route('/tacacs_server', methods=['GET', 'POST'])
 @login_required
 def tacacs_server():
-    print('ttt'*100, request.form)
     if request.method == 'POST':
         tacacs_server = TacacsServer(**request.form)
         db.session.add(tacacs_server)

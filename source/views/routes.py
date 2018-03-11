@@ -80,6 +80,7 @@ def schedule_task(cls, **data):
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
+    print('ttt'*100, request.form, session)
     napalm_configuration_form = NapalmConfigurationForm(request.form)
     napalm_getters_form = NapalmGettersForm(request.form)
     netmiko_form = NetmikoForm(request.form)
@@ -144,6 +145,7 @@ def view(view_type):
 @blueprint.route('/google_earth_export', methods=['GET', 'POST'])
 @login_required
 def google_earth_export():
+    print('ttt'*100, request.form)
     form = GoogleEarthForm(request.form)
     if 'POST' in request.method:
         kml_file = Kml()

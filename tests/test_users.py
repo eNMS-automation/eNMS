@@ -1,4 +1,4 @@
-from users.models import User
+from users.models import TacacsServer, User
 from test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -27,3 +27,15 @@ def test_user_management(user_client):
     ])
     user_client.post('/users/manage_users', data=delete_users_2_3)
     assert len(User.query.all()) == 1
+
+
+@check_blueprints('/', '/users/')
+def test_tacacs_configuration(user_client):
+    tacacs_server = {
+        'ip_address': '192.168.1.2',
+        'password': 'test',
+        'port': '49',
+        'timeout': '10'
+    }
+    user_client.post('/users/tacacs_server', data=tacacs_server)
+    assert len(TacacsServer.query.all()) == 1

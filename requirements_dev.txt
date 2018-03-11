@@ -1,3 +1,4 @@
+coveralls
 coverage
 pytest
 flake8

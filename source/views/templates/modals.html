@@ -34,74 +34,64 @@
         </button>
         <h4 class="modal-title">Netmiko script</h4>
       </div>
-
       <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-
-      <div class="modal-body">
+        <div class="modal-body">
           <!-- Smart Wizard -->
           <div id="wizard" class="form_wizard wizard_horizontal">
-          <ul class="wizard_steps">
+            <ul class="wizard_steps">
               <li>
-              <a href="#step-1">
+                <a href="#step-1">
                   <span class="step_no">1</span>
                   <span class="step_descr"> Step 1 <br/>
                   <small>Parameters</small>
                   </span>
-              </a>
+                </a>
               </li>
               <li>
-              <a href="#step-2">
+                <a href="#step-2">
                   <span class="step_no">2</span>
                   <span class="step_descr"> Step 2 <br/>
                   <small>Scheduling</small>
                   </span>
-              </a>
+                </a>
               </li>
-          </ul>
-          
-          <div id="step-1">
+            </ul>
+            <div id="step-1">
               <h2 class="StepTitle">Step 4 Content</h2>
               <div class="form-group">
-              <label>Name</label>
-              <div class='form-group'>
+                <label>Name</label>
+                <div class='form-group'>
                   {{ netmiko_form.name(class="form-control", required=true) }}
-              </div>
-              
-              <label>Script</label>
-              <div class='form-group'>
-              {{ netmiko_form.script(class="form-control", required=true) }}
-              </div>
-  
-              <label>Type</label>
-              <div class='form-group'>
+                </div>
+                <label>Script</label>
+                <div class='form-group'>
+                  {{ netmiko_form.script(class="form-control", required=true) }}
+                </div>
+                <label>Type</label>
+                <div class='form-group'>
                   {{ netmiko_form.type(class="form-control") }}
-              </div>
-  
-              <label>Driver</label>
-              <div class='form-group'>
+                </div>
+                <label>Driver</label>
+                <div class='form-group'>
                   {{ netmiko_form.driver(class="form-control", required=true) }}
-              </div>
-  
-              <label>Global delay factor</label>
-              <div class='form-group'>
+                </div>
+                <label>Global delay factor</label>
+                <div class='form-group'>
                   {{ netmiko_form.global_delay_factor(class="form-control", required=true) }}
+                </div>
               </div>
-              </div>
-          </div>
-          
-          <div id="step-2" style="min-height: 300px">
+            </div>
+            <div id="step-2" style="min-height: 300px">
               <label>Date</label>
               <div class='form-group'>
-              {{ netmiko_form.scheduled_date(class="form-control") }}
+                {{ netmiko_form.scheduled_date(class="form-control") }}
               </div>
-
               <label>Frequency (seconds)</label>
               <div class='form-group'>
-              {{ netmiko_form.frequency(class="form-control") }}
+                {{ netmiko_form.frequency(class="form-control") }}
               </div>
               <input type='hidden' name='script_type' value="netmiko">
-          </div>
-
+            </div>
           </div>
           <!-- End SmartWizard Content -->
         </div>

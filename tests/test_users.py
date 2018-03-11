@@ -2,12 +2,9 @@ from users.models import User
 from test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
-# ImmutableMultiDict([('username', 'test'), ('email', 'test@test.com'), ('access_rights', 'Read-only'), ('password', 'test'), ('add_user', '')])
-
-# ImmutableMultiDict([('users', 'dqzdqzdqz'), ('users', 'dqzdqzdqzdqzdq'), ('delete_user', '')])
 
 @check_blueprints('/', '/users/')
-def test_user_creation(user_client):
+def test_user_management(user_client):
     for user in ('user1', 'user2', 'user3'):
         dict_user = {
             'username': user,
@@ -18,12 +15,15 @@ def test_user_creation(user_client):
         }
         user_client.post('/users/manage_users', data=dict_user)
     assert len(User.query.all()) == 4
-
-# 
-# @check_blueprints('/', '/users/')
-# def test_user_deletion(user_client):
-#     # single user deletion
-#     create_from_file(user_client, 'europe.xls')
-#     user_client.post('/objects/object_deletion', data=links)
-#     assert len(Node.query.all()) == 33
-#     assert len(Link.query.all()) == 38
+    # single user deletion
+    delete_user1 = {'users': 'user1', 'delete_user': ''}
+    user_client.post('/users/manage_users', data=delete_user1)
+    assert len(User.query.all()) == 3
+    # multiple user deletion
+    delete_users_2_3 = ImmutableMultiDict([
+        ('users', 'user2'),
+        ('users', 'user3'),
+        ('delete_user', '')
+    ])
+    user_client.post('/users/manage_users', data=delete_users_2_3)
+    assert len(User.query.all()) == 1

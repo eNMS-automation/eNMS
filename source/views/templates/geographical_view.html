@@ -356,12 +356,26 @@
   <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
   <script>
     for (n=1; n<5; n++) {
-      $('#scheduled_date' + n).datetimepicker({
+      $('#start_date' + n).datetimepicker({
           format: 'DD/MM/YYYY HH:mm:ss',
+          widgetPositioning: {
+              horizontal: 'left',
+              vertical: 'bottom'
+          },
           useCurrent: false,
       });
       var today = new Date()
-      $('#scheduled_date' + n).data("DateTimePicker").minDate(today);
+      $('#start_date' + n).data("DateTimePicker").minDate(today);
+      $('#end_date' + n).datetimepicker({
+          format: 'DD/MM/YYYY HH:mm:ss',
+          widgetPositioning: {
+              horizontal: 'left',
+              vertical: 'bottom'
+          },
+          useCurrent: false,
+      });
+      var today = new Date()
+      $('#end_date' + n).data("DateTimePicker").minDate(today);
     }
   </script>
 

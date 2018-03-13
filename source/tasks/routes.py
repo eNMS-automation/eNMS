@@ -86,7 +86,7 @@ def calendar():
     tasks = {
         task: sub(
             r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*", r"\1, \2, \3, \4, \5",
-            task.scheduled_date
+            task.start_date
         )
         for task in Task.query.all()
     }

@@ -82,9 +82,13 @@
             </div>
             <div id="step-2">
               <div class="form-group" style="min-height: 350px">
-                <label>Date</label>
+                <label>Start date</label>
                 <div class='form-group'>
-                  {{ netmiko_form.scheduled_date(id="scheduled_date1", class="form-control") }}
+                  {{ netmiko_form.start_date(id="start_date1", class="form-control") }}
+                </div>
+                <label>End date</label>
+                <div class='form-group'>
+                  {{ netmiko_form.end_date(id="end_date1", class="form-control") }}
                 </div>
                 <label>Frequency (seconds)</label>
                 <div class='form-group'>
@@ -151,9 +155,13 @@
             </div>
             <div id="step-12">
               <div class="form-group" style="min-height: 350px">
-                <label>Date</label>
+                <label>Start date</label>
                 <div class='form-group'>
-                  {{ napalm_configuration_form.scheduled_date(id="scheduled_date2", class="form-control") }}
+                  {{ napalm_configuration_form.start_date(id="start_date2", class="form-control") }}
+                </div>
+                <label>End date</label>
+                <div class='form-group'>
+                  {{ netmiko_form.end_date(id="end_date2", class="form-control") }}
                 </div>
                 <label>Frequency (seconds)</label>
                 <div class='form-group'>
@@ -213,10 +221,14 @@
               </div>
             </div>
             <div id="step-22" style="min-height: 300px">
-              <label>Date</label>
+              <label>Start date</label>
               <div class='form-group'>
-                {{ napalm_getters_form.scheduled_date(id="scheduled_date3", class="form-control") }}
+                {{ napalm_getters_form.start_date(id="start_date3", class="form-control") }}
               </div>
+                <label>End date</label>
+                <div class='form-group'>
+                  {{ netmiko_form.end_date(id="end_date3", class="form-control") }}
+                </div>
               <label>Frequency (seconds)</label>
               <div class='form-group'>
                 {{ napalm_getters_form.frequency(class="form-control") }}
@@ -276,10 +288,14 @@
               </div>
             </div>
             <div id="step-32" style="min-height: 300px">
-              <label>Date</label>
+              <label>Start date</label>
               <div class='form-group'>
-                {{ ansible_form.scheduled_date(id="scheduled_date4", class="form-control") }}
+                {{ ansible_form.start_date(id="start_date4", class="form-control") }}
               </div>
+                <label>End date</label>
+                <div class='form-group'>
+                  {{ netmiko_form.end_date(id="end_date4", class="form-control") }}
+                </div>
               <label>Frequency (seconds)</label>
               <div class='form-group'>
                 {{ ansible_form.frequency(class="form-control") }}

@@ -247,7 +247,8 @@ class Task(CustomBase):
 
     # scheduling parameters
     frequency = Column(String(120))
-    scheduled_date = Column(String)
+    start_date = Column(String)
+    end_date = Column(String)
 
     # script parameters
     creator = Column(String)
@@ -264,12 +265,11 @@ class Task(CustomBase):
         self.creation_time = str(datetime.now())
         self.creator = user.username
         self.status = 'active'
-        # if the scheduled date is left empty, we turn the empty string into
+        # if the start date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting
-        if data['scheduled_date']:
-            self.scheduled_date = self.datetime_conversion(data['scheduled_date'])
-        else:
-            self.scheduled_date = None
+        for date in ('start_date', 'end_date'):
+            value = self.datetime_conversion(data[date]) if data[date] else None
+            setattr(self, date, value)
         self.is_active = True
         if data['frequency']:
             self.recurrent_scheduling()
@@ -285,8 +285,8 @@ class Task(CustomBase):
             'Creator: ' + self.creator
         ])
 
-    def datetime_conversion(self, scheduled_date):
-        dt = datetime.strptime(scheduled_date, '%d/%m/%Y %H:%M:%S')
+    def datetime_conversion(self, date):
+        dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
         return datetime.strftime(dt, '%Y-%m-%d %H:%M:%S')
 
     def pause_task(self):
@@ -304,34 +304,35 @@ class Task(CustomBase):
         db.session.commit()
 
     def recurrent_scheduling(self):
-        if not self.scheduled_date:
-            self.scheduled_date = datetime.now() + timedelta(seconds=15)
+        if not self.start_date:
+            self.start_date = datetime.now() + timedelta(seconds=15)
         # run the job on a regular basis with an interval trigger
         scheduler.add_job(
             id=self.creation_time,
             func=self.job,
             args=self.args,
             trigger='interval',
-            start_date=self.scheduled_date,
+            start_date=self.start_date,
+            end_date=self.end_date,
             seconds=int(self.frequency),
             replace_existing=True
         )
 
     def one_time_scheduling(self):
-        if not self.scheduled_date:
+        if not self.start_date:
             # when the job is scheduled to run immediately, it may happen that
             # the job is run even before the task is created, in which case
             # it fails because it cannot be retrieve from the Task column of
-            # the database: we introduce a delta of 2 seconds.
+            # the database: we introduce a delta of 5 seconds.
             # other situation: the server is too slow and the job cannot be
             # run at all, eg 'job was missed by 0:00:09.465684'
-            self.scheduled_date = datetime.now() + timedelta(seconds=5)
+            self.start_date = datetime.now() + timedelta(seconds=5)
         # execute the job immediately with a date-type job
         # when date is used as a trigger and run_date is left undetermined,
         # the job is executed immediately.
         scheduler.add_job(
             id=self.creation_time,
-            run_date=self.scheduled_date,
+            run_date=self.start_date,
             func=self.job,
             args=self.args,
             trigger='date'

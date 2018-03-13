@@ -61,7 +61,8 @@ napalm_actions = OrderedDict([
 
 
 class SchedulingForm(FlaskForm):
-    scheduled_date = TextField('Datetime')
+    start_date = TextField('Start date')
+    end_date =  TextField('End date')
     name = TextField('Name')
     script = SelectField('', choices=())
     frequency = TextField('Frequency')

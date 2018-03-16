@@ -26,23 +26,22 @@
 
                 <div class="btn-group">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Automation
-                    <span class="caret"></span>
+                  <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a onclick="show_modal('netmiko')"> Netmiko </a></li>
-                    <li><a onclick="show_modal('napalm-getters')">NAPALM getters</a></li>
-                    <li><a onclick="show_modal('napalm-configuration')">NAPALM configuration</a></li>
+                  <li><a onclick="show_modal('netmiko')"> Netmiko </a></li>
+                  <li><a onclick="show_modal('napalm-getters')">NAPALM getters</a></li>
+                  <li><a onclick="show_modal('napalm-configuration')">NAPALM configuration</a></li>
                 </ul>
                 </div> 
               </div>
             </form>
-        
+
             <div id="network" style="height: 500px"></div>
             <script>
-            
-            function show_modal(modal_name){
-              $(`#${modal_name}`).modal('show');
-              }
+              function show_modal(modal_name){
+                $(`#${modal_name}`).modal('show');
+                }
               // create an array with nodes
               var nodes = new vis.DataSet([
                 {% for node, properties in node_table.items() %}  
@@ -55,8 +54,8 @@
                     <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"
                   },
                 {% endfor %}
-                ]);
-            
+              ]);
+
               // create an array with edges
               var edges = new vis.DataSet([
                 {% for link, properties in link_table.items() %}  
@@ -67,9 +66,9 @@
                     color: {color: '{{ link.color }}'},
                   },
                 {% endfor %}
-                ]);
-            
-            const makeMeMultiSelect = (container, network, nodes) => {
+              ]);
+
+              const makeMeMultiSelect = (container, network, nodes) => {
                 const NO_CLICK = 0;
                 const RIGHT_CLICK = 3;
                 
@@ -84,98 +83,98 @@
                 // Selector
                 
                 const canvasify = (DOMx, DOMy) => {
-                    const { x, y } = network.DOMtoCanvas({ x: DOMx - offset.left, y: DOMy - offset.top });
-                    return [x, y];
+                  const { x, y } = network.DOMtoCanvas({ x: DOMx - offset.left, y: DOMy - offset.top });
+                  return [x, y];
                 };
                 
                 const correctRange = (start, end) =>
-                    start < end ? [start, end] : [end, start];
+                  start < end ? [start, end] : [end, start];
             
                 const selectFromDOMRect = () => {
-                    const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
-                    const [eX, eY] = canvasify(DOMRect.endX, DOMRect.endY);
-                    const [startX, endX] = correctRange(sX, eX);
-                    const [startY, endY] = correctRange(sY, eY);
-            
-                    network.selectNodes(nodes.get().reduce(
-                        (selected, { id }) => {
-                            const { x, y } = network.getPositions(id)[id];
-                            return (startX <= x && x <= endX && startY <= y && y <= endY) ?
-                                selected.concat(id) : selected;
-                        }, []
-                    ));
-                    
-                    $.ajax({
-                      type: "POST",
-                      url: "/views/selection",
-                      dataType: "json",
-                      data: { selection: network.getSelectedNodes() },
-                      success: function(msg){
-                          $('.answer').html(msg);
-                      }
-                    });
+                  const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
+                  const [eX, eY] = canvasify(DOMRect.endX, DOMRect.endY);
+                  const [startX, endX] = correctRange(sX, eX);
+                  const [startY, endY] = correctRange(sY, eY);
+          
+                  network.selectNodes(nodes.get().reduce(
+                    (selected, { id }) => {
+                      const { x, y } = network.getPositions(id)[id];
+                      return (startX <= x && x <= endX && startY <= y && y <= endY) ?
+                        selected.concat(id) : selected;
+                    }, []
+                  ));
+                  
+                  $.ajax({
+                    type: "POST",
+                    url: "/views/selection",
+                    dataType: "json",
+                    data: { selection: network.getSelectedNodes() },
+                    success: function(msg){
+                      $('.answer').html(msg);
+                    }
+                  });
                   }
             
                 // Listeners
             
-                container.on("mousedown", function({ which, pageX, pageY }) {
-                    // When mousedown, save the initial rectangle state
-                    if(which === RIGHT_CLICK) {
-                        Object.assign(DOMRect, {
-                            startX: pageX - this.offsetLeft,
-                            startY: pageY - this.offsetTop,
-                            endX: pageX - this.offsetLeft,
-                            endY: pageY - this.offsetTop
-                        });
-                        drag = true;
-                    }
+                container.on("mousedown", function(e) {
+                  if (!e.shiftKey) { return false; }
+                  // When mousedown, save the initial rectangle state
+
+                  Object.assign(DOMRect, {
+                    startX: event.clientX - this.offsetLeft,
+                    startY: event.clientY - this.offsetTop,
+                    endX: event.clientX - this.offsetLeft,
+                    endY: event.clientY - this.offsetTop
+                  });
+                  drag = true;
                 });
-            
+
                 container.on("mousemove", function({ which, pageX, pageY }) {
-                    // Make selection rectangle disappear when accidently mouseupped outside 'container'
-                    if(which === NO_CLICK && drag) {
-                        drag = false;
-                        network.redraw();
-                    }
-                    // When mousemove, update the rectangle state
-                    else if(drag) {
-                        Object.assign(DOMRect, {
-                            endX: pageX - this.offsetLeft,
-                            endY: pageY - this.offsetTop
-                        });
-                        network.redraw();
-                    }
+                  // Make selection rectangle disappear when accidently mouseupped outside 'container'
+                  if(which === NO_CLICK && drag) {
+                    drag = false;
+                    network.redraw();
+                  }
+                  // When mousemove, update the rectangle state
+                  else if(drag) {
+                    Object.assign(DOMRect, {
+                      endX: pageX - this.offsetLeft,
+                      endY: pageY - this.offsetTop
+                    });
+                    network.redraw();
+                  }
                 });
             
                 container.on("mouseup", function({ which }) {
-                    // When mouseup, select the nodes in the rectangle
-                    if(which === RIGHT_CLICK) {
-                        drag = false;
-                        network.redraw();
-                        selectFromDOMRect();
-                    }
+                  // When mouseup, select the nodes in the rectangle
+                  if(which === RIGHT_CLICK) {
+                    drag = false;
+                    network.redraw();
+                    selectFromDOMRect();
+                  }
                 });
-            
+
+
                 // Drawer
-            
+
                 network.on('afterDrawing', ctx => {
-                    if(drag) {
-                        const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
-                        const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
-            
-                        ctx.setLineDash([5]);
-                        ctx.strokeStyle = 'rgba(78, 146, 237, 0.75)';
-                        ctx.strokeRect(startX, startY, endX - startX, endY - startY);
-                        ctx.setLineDash([]);
-                        ctx.fillStyle = 'rgba(151, 194, 252, 0.45)';
-                        ctx.fillRect(startX, startY, endX - startX, endY - startY);
-                    }
+                  if(drag) {
+                    const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
+                    const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
+                    ctx.setLineDash([5]);
+                    ctx.strokeStyle = 'rgba(78, 146, 237, 0.75)';
+                    ctx.strokeRect(startX, startY, endX - startX, endY - startY);
+                    ctx.setLineDash([]);
+                    ctx.fillStyle = 'rgba(151, 194, 252, 0.45)';
+                    ctx.fillRect(startX, startY, endX - startX, endY - startY);
+                  }
                 });
-            }; // end makeMeMultiSelect
+              }; // end makeMeMultiSelect
 
               // create a network
               const container = $("#network");
-              
+
               var data = {
                 nodes: nodes,
                 edges: edges
@@ -197,14 +196,14 @@
                       }
                     }
                   }
-                req.open('POST', '/views/putty_connection')
-                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-                var ids = properties.nodes;
-                var clickedNodes = nodes.get(ids);
-                var postVars = 'id='+ids;
-                req.send(postVars)
-                return false
-                });
+              req.open('POST', '/views/putty_connection')
+              req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+              var ids = properties.nodes;
+              var clickedNodes = nodes.get(ids);
+              var postVars = 'id='+ids;
+              req.send(postVars)
+              return false
+              });
             </script>
           </div>
         </div>

@@ -233,21 +233,22 @@
           
               var graph = {  
                 "nodes":[
-                  {  
-                    "x":444,
-                    "y":275
-                  },
-                  {  
-                    "x":378,
-                    "y":324
-                  },
-                  ],
+                  {% for obj, properties in node_table.items() %}  
+                    {  
+                      "x": {{ obj.id }},
+                      "y": {{ obj.id }}
+                    },
+                  {% endfor %}
+                ],
                 "links":[  
-                  {  
-                    "source":1,
-                    "target":0
-                  },
-                  ]};
+                  {% for obj, properties in link_table.items() %}  
+                    {  
+                      "source": {{ obj['source']['id'] }} - 1,
+                      "target": {{ obj['destination']['id'] }} - 1
+                    },
+                  {% endfor %}
+                ]
+              };
 
                   nodeGraph = graph;
           

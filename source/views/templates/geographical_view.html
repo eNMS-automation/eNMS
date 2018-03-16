@@ -135,9 +135,7 @@
                       {{ obj.latitude }}, 
                       {{ obj.longitude }}], 
                       );
-                    
 
-                    
                     marker.bindPopup("{% for property in properties %}\
                     <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                     <input type='hidden' name='id' id='id' value={{ obj.id }}>\

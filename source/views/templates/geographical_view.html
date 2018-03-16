@@ -63,7 +63,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet-src.js') }}"></script>
+            <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
             {% if view == 'markercluster' %}
             <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
             {% elif view == 'glearth' %}
@@ -173,10 +173,8 @@
                     var selection = [];
                     for (var i = 0; i < markers_array.length; i++) {
                       if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
-                        console.log(i);
                         markers_array[i].setIcon(markers_array[i].selected_icon);
                         selection.push(markers_array[i].node_id);
-                        console.log(selection);
                         }
                       }
                       
@@ -190,11 +188,23 @@
                       }
                     });
                   });
-
+                  
                   map.on("contextmenu", function(e) {
+                    for (var i = 0; i < markers_array.length; i++) {
+                      markers_array[i].setIcon(markers_array[i].icon);
+                      }
+                    selection = [];
+                    $.ajax({
+                      type: "POST",
+                      url: "/views/selection",
+                      dataType: "json",
+                      data: { selection: selection },
+                      success: function(msg){
+                          $('.answer').html(msg);
+                        }
+                      });
                     e.preventDefault();
                     });
-
                 {% for obj, properties in link_table.items() %}
                   var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
                   var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});

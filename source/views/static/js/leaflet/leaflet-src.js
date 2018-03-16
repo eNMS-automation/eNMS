@@ -5761,7 +5761,7 @@ var Draggable = Evented.extend({
 
 		if (hasClass(this._element, 'leaflet-zoom-anim')) { return; }
 
-		if (Draggable._dragging || e.shiftKey || e.which == 3 || e.button == 2 && !e.touches) { return; }
+		if (Draggable._dragging || e.shiftKey || ((e.which !== 1) && (e.button !== 1) && !e.touches)) { return; }
 		Draggable._dragging = this;  // Prevent dragging multiple objects at once.
 
 		if (this._preventOutline) {
@@ -12814,7 +12814,7 @@ var BoxZoom = Handler.extend({
 	},
 
 	_onMouseDown: function (e) {
-		if ((e.which !== 3) && (e.button !== 2)) { return false; }
+		if (!e.shiftKey || ((e.which !== 1) && (e.button !== 1))) { return false; }
 
 		// Clear the deferred resetState if it hasn't executed yet, otherwise it
 		// will interrupt the interaction and orphan a box element in the container.
@@ -12873,7 +12873,7 @@ var BoxZoom = Handler.extend({
 	},
 
 	_onMouseUp: function (e) {
-		if ((e.which !== 3) && (e.button !== 2)) { return; }
+		if ((e.which !== 1) && (e.button !== 1)) { return; }
 
 		this._finish();
 

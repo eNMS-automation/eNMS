@@ -36,174 +36,346 @@
                 </div> 
               </div>
             </form>
-
-            <div id="network" style="height: 500px"></div>
+            <div align='center' id="d3_selectable_force_directed_graph"></div>
+            <script src="http://d3js.org/d3.v3.min.js"></script>
+            <style>
+            
+            .node {
+              stroke: #fff;
+              stroke-width: 1.5px;
+            }
+            
+            .node .selected {
+              stroke: black;
+            }
+            
+            .link {
+              stroke: #999;
+            }
+            
+            .brush .extent {
+              fill-opacity: .1;
+              stroke: #fff;
+              shape-rendering: crispEdges;
+            }
+            
+            </style>
             <script>
               function show_modal(modal_name){
                 $(`#${modal_name}`).modal('show');
                 }
-              // create an array with nodes
-              var nodes = new vis.DataSet([
-                {% for node, properties in node_table.items() %}  
-                  {
-                    id: {{ node.id }}, 
-                    label: '{{ node[labels['node']] }}', 
-                    image: 'static/images/default/{{ node.subtype }}.gif', 
-                    shape: 'image', 
-                    title: "{% for property in properties %}\
-                    <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"
-                  },
-                {% endfor %}
-              ]);
 
-              // create an array with edges
-              var edges = new vis.DataSet([
-                {% for link, properties in link_table.items() %}  
-                  { 
-                    from: {{ link['source']['id'] }}, 
-                    to: {{ link['destination']['id'] }}, 
-                    label: '{{ link[labels['link']] }}',
-                    color: {color: '{{ link.color }}'},
-                  },
-                {% endfor %}
-              ]);
-
-              const makeMeMultiSelect = (container, network, nodes) => {
-                const NO_CLICK = 0;
-                const RIGHT_CLICK = 3;
-                
-                // Disable default right-click dropdown menu
-                var offset = $("#network").offset();
-                container[0].oncontextmenu = () => false;
-                
-                // State
-                
-                let drag = false, DOMRect = {};
-            
-                // Selector
-                
-                const canvasify = (DOMx, DOMy) => {
-                  const { x, y } = network.DOMtoCanvas({ x: DOMx - offset.left, y: DOMy - offset.top });
-                  return [x, y];
-                };
-                
-                const correctRange = (start, end) =>
-                  start < end ? [start, end] : [end, start];
-            
-                const selectFromDOMRect = () => {
-                  const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
-                  const [eX, eY] = canvasify(DOMRect.endX, DOMRect.endY);
-                  const [startX, endX] = correctRange(sX, eX);
-                  const [startY, endY] = correctRange(sY, eY);
+              var width = 960,
           
-                  network.selectNodes(nodes.get().reduce(
-                    (selected, { id }) => {
-                      const { x, y } = network.getPositions(id)[id];
-                      return (startX <= x && x <= endX && startY <= y && y <= endY) ?
-                        selected.concat(id) : selected;
-                    }, []
-                  ));
-                  
-                  $.ajax({
-                    type: "POST",
-                    url: "/views/selection",
-                    dataType: "json",
-                    data: { selection: network.getSelectedNodes() },
-                    success: function(msg){
-                      $('.answer').html(msg);
-                    }
+              height = 500,
+              shiftKey, ctrlKey;
+          
+              var nodeGraph = null;
+              var xScale = d3.scale.linear()
+              .domain([0,width]).range([0,width]);
+              var yScale = d3.scale.linear()
+              .domain([0,height]).range([0, height]);
+          
+              var svg = d3.select("#d3_selectable_force_directed_graph")
+              .attr("tabindex", 1)
+              .on("keydown.brush", keydown)
+              .on("keyup.brush", keyup)
+              .each(function() { this.focus(); })
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height);
+          
+              var zoomer = d3.behavior.zoom().
+                  scaleExtent([0.1,10]).
+                  x(xScale).
+                  y(yScale).
+                  on("zoomstart", zoomstart).
+                  on("zoom", redraw);
+          
+              function zoomstart() {
+                  node.each(function(d) {
+                      d.selected = false;
+                      d.previouslySelected = false;
                   });
-                  }
-            
-                // Listeners
-            
-                container.on("mousedown", function(e) {
-                  if (!e.shiftKey) { return false; }
-                  // When mousedown, save the initial rectangle state
-
-                  Object.assign(DOMRect, {
-                    startX: event.clientX - this.offsetLeft,
-                    startY: event.clientY - this.offsetTop,
-                    endX: event.clientX - this.offsetLeft,
-                    endY: event.clientY - this.offsetTop
+                  node.classed("selected", false);
+              }
+          
+              function redraw() {
+                  vis.attr("transform",
+                          "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+              }
+          
+              var brusher = d3.svg.brush()
+              //.x(d3.scale.identity().domain([0, width]))
+              //.y(d3.scale.identity().domain([0, height]))
+              .x(xScale)
+              .y(yScale)
+              .on("brushstart", function(d) {
+                  node.each(function(d) { 
+                      d.previouslySelected = shiftKey && d.selected; });
+              })
+              .on("brush", function() {
+                  var extent = d3.event.target.extent();
+          
+                  node.classed("selected", function(d) {
+                      return d.selected = d.previouslySelected ^
+                      (extent[0][0] <= d.x && d.x < extent[1][0]
+                      && extent[0][1] <= d.y && d.y < extent[1][1]);
                   });
-                  drag = true;
-                });
-
-                container.on("mousemove", function({ which, pageX, pageY }) {
-                  // Make selection rectangle disappear when accidently mouseupped outside 'container'
-                  if(which === NO_CLICK && drag) {
-                    drag = false;
-                    network.redraw();
-                  }
-                  // When mousemove, update the rectangle state
-                  else if(drag) {
-                    Object.assign(DOMRect, {
-                      endX: pageX - this.offsetLeft,
-                      endY: pageY - this.offsetTop
-                    });
-                    network.redraw();
-                  }
-                });
-            
-                container.on("mouseup", function({ which }) {
-                  // When mouseup, select the nodes in the rectangle
-                  if(which === RIGHT_CLICK) {
-                    drag = false;
-                    network.redraw();
-                    selectFromDOMRect();
-                  }
-                });
-
-
-                // Drawer
-
-                network.on('afterDrawing', ctx => {
-                  if(drag) {
-                    const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
-                    const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
-                    ctx.setLineDash([5]);
-                    ctx.strokeStyle = 'rgba(78, 146, 237, 0.75)';
-                    ctx.strokeRect(startX, startY, endX - startX, endY - startY);
-                    ctx.setLineDash([]);
-                    ctx.fillStyle = 'rgba(151, 194, 252, 0.45)';
-                    ctx.fillRect(startX, startY, endX - startX, endY - startY);
-                  }
-                });
-              }; // end makeMeMultiSelect
-
-              // create a network
-              const container = $("#network");
-
-              var data = {
-                nodes: nodes,
-                edges: edges
-                };
-              var options = {};
-              const network = new vis.Network(container[0], data, options);
-              makeMeMultiSelect(container, network, nodes);
-              
-              // get id of the click nodes
-              network.on( 'doubleClick', function(properties) {
-                var req = new XMLHttpRequest()
-                req.onreadystatechange = function() {
-                    if (req.readyState == 4) {
-                      if (req.status != 200) {
-                          //error handling code here
-                        }
-                      else {
-                        var response = JSON.parse(req.responseText)
-                      }
-                    }
-                  }
-              req.open('POST', '/views/putty_connection')
-              req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-              var ids = properties.nodes;
-              var clickedNodes = nodes.get(ids);
-              var postVars = 'id='+ids;
-              req.send(postVars)
-              return false
+              })
+              .on("brushend", function() {
+                  d3.event.target.clear();
+                  d3.select(this).call(d3.event.target);
               });
+          
+              var svg_graph = svg.append('svg:g')
+              .call(zoomer)
+              //.call(brusher)
+          
+              var rect = svg_graph.append('svg:rect')
+              .attr('width', width)
+              .attr('height', height)
+              .attr('fill', 'transparent')
+              //.attr('opacity', 0.5)
+              .attr('stroke', 'transparent')
+              .attr('stroke-width', 1)
+              //.attr("pointer-events", "all")
+              .attr("id", "zrect")
+          
+              var brush = svg_graph.append("g")
+              .datum(function() { return {selected: false, previouslySelected: false}; })
+              .attr("class", "brush");
+          
+              var vis = svg_graph.append("svg:g");
+          
+              vis.attr('fill', 'red')
+              .attr('stroke', 'black')
+              .attr('stroke-width', 1)
+              .attr('opacity', 0.5)
+              .attr('id', 'vis')
+          
+          
+              brush.call(brusher)
+              .on("mousedown.brush", null)
+              .on("touchstart.brush", null) 
+              .on("touchmove.brush", null)
+              .on("touchend.brush", null); 
+          
+              brush.select('.background').style('cursor', 'auto');
+          
+              var link = vis.append("g")
+              .attr("class", "link")
+              .selectAll("line");
+          
+              var node = vis.append("g")
+              .attr("class", "node")
+              .selectAll("circle");
+          
+              center_view = function() {
+                  // Center the view on the molecule(s) and scale it so that everything
+                  // fits in the window
+          
+                  if (nodeGraph === null)
+                      return;
+          
+                  var nodes = nodeGraph.nodes;
+          
+                  //no molecules, nothing to do
+                  if (nodes.length === 0)
+                      return;
+          
+                  // Get the bounding box
+                  min_x = d3.min(nodes.map(function(d) {return d.x;}));
+                  min_y = d3.min(nodes.map(function(d) {return d.y;}));
+          
+                  max_x = d3.max(nodes.map(function(d) {return d.x;}));
+                  max_y = d3.max(nodes.map(function(d) {return d.y;}));
+          
+          
+                  // The width and the height of the graph
+                  mol_width = max_x - min_x;
+                  mol_height = max_y - min_y;
+          
+                  // how much larger the drawing area is than the width and the height
+                  width_ratio = width / mol_width;
+                  height_ratio = height / mol_height;
+          
+                  // we need to fit it in both directions, so we scale according to
+                  // the direction in which we need to shrink the most
+                  min_ratio = Math.min(width_ratio, height_ratio) * 0.8;
+          
+                  // the new dimensions of the molecule
+                  new_mol_width = mol_width * min_ratio;
+                  new_mol_height = mol_height * min_ratio;
+          
+                  // translate so that it's in the center of the window
+                  x_trans = -(min_x) * min_ratio + (width - new_mol_width) / 2;
+                  y_trans = -(min_y) * min_ratio + (height - new_mol_height) / 2;
+          
+          
+                  // do the actual moving
+                  vis.attr("transform",
+                          "translate(" + [x_trans, y_trans] + ")" + " scale(" + min_ratio + ")");
+          
+                          // tell the zoomer what we did so that next we zoom, it uses the
+                          // transformation we entered here
+                          zoomer.translate([x_trans, y_trans ]);
+                          zoomer.scale(min_ratio);
+          
+              };
+          
+              function dragended(d) {
+                  //d3.select(self).classed("dragging", false);
+                  node.filter(function(d) { return d.selected; })
+                  .each(function(d) { d.fixed &= ~6; })
+          
+              }
+          
+              var graph = {  
+                "nodes":[
+                  {  
+                    "x":444,
+                    "y":275
+                  },
+                  {  
+                    "x":378,
+                    "y":324
+                  },
+                  ],
+                "links":[  
+                  {  
+                    "source":1,
+                    "target":0
+                  },
+                  ]};
+
+                  nodeGraph = graph;
+          
+                  graph.links.forEach(function(d) {
+                      d.source = graph.nodes[d.source];
+                      d.target = graph.nodes[d.target];
+                  });
+          
+                  link = link.data(graph.links).enter().append("line")
+                  .attr("x1", function(d) { return d.source.x; })
+                  .attr("y1", function(d) { return d.source.y; })
+                  .attr("x2", function(d) { return d.target.x; })
+                  .attr("y2", function(d) { return d.target.y; });
+          
+          
+                  var force = d3.layout.force()
+                  .charge(-120)
+                  .linkDistance(30)
+                  .nodes(graph.nodes)
+                  .links(graph.links)
+                  .size([width, height])
+                  .start();
+          
+                  function dragstarted(d) {
+                      d3.event.sourceEvent.stopPropagation();
+                      if (!d.selected && !shiftKey) {
+                          // if this node isn't selected, then we have to unselect every other node
+                          node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; });
+                      }
+          
+                      d3.select(this).classed("selected", function(p) { d.previouslySelected = d.selected; return d.selected = true; });
+          
+                      node.filter(function(d) { return d.selected; })
+                      .each(function(d) { d.fixed |= 2; })
+                  }
+          
+                  function dragged(d) {
+                      node.filter(function(d) { return d.selected; })
+                      .each(function(d) { 
+                          d.x += d3.event.dx;
+                          d.y += d3.event.dy;
+          
+                          d.px += d3.event.dx;
+                          d.py += d3.event.dy;
+                      })
+          
+                      force.resume();
+                  }
+                  node = node.data(graph.nodes).enter().append("circle")
+                  .attr("r", 4)
+                  .attr("cx", function(d) { return d.x; })
+                  .attr("cy", function(d) { return d.y; })
+                  .on("dblclick", function(d) { d3.event.stopPropagation(); })
+                  .on("click", function(d) {
+                      if (d3.event.defaultPrevented) return;
+          
+                      if (!shiftKey) {
+                          //if the shift key isn't down, unselect everything
+                          node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; })
+                      }
+          
+                      // always select this node
+                      d3.select(this).classed("selected", d.selected = !d.previouslySelected);
+                  })
+          
+                  .on("mouseup", function(d) {
+                      //if (d.selected && shiftKey) d3.select(this).classed("selected", d.selected = false);
+                  })
+                  .call(d3.behavior.drag()
+                        .on("dragstart", dragstarted)
+                        .on("drag", dragged)
+                        .on("dragend", dragended));
+          
+                        function tick() {
+                            link.attr("x1", function(d) { return d.source.x; })
+                            .attr("y1", function(d) { return d.source.y; })
+                            .attr("x2", function(d) { return d.target.x; })
+                            .attr("y2", function(d) { return d.target.y; });
+          
+                            node.attr('cx', function(d) { return d.x; })
+                            .attr('cy', function(d) { return d.y; });
+          
+                        };
+          
+                        force.on("tick", tick);
+
+          
+          
+              function keydown() {
+                  shiftKey = d3.event.shiftKey || d3.event.metaKey;
+                  ctrlKey = d3.event.ctrlKey;
+          
+                  console.log('d3.event', d3.event)
+          
+                  if (d3.event.keyCode == 67) {   //the 'c' key
+                      center_view();
+                  }
+          
+                  if (shiftKey) {
+                      svg_graph.call(zoomer)
+                      .on("mousedown.zoom", null)
+                      .on("touchstart.zoom", null)                                                                      
+                      .on("touchmove.zoom", null)                                                                       
+                      .on("touchend.zoom", null);                                                                       
+          
+                      //svg_graph.on('zoom', null);                                                                     
+                      vis.selectAll('g.gnode')
+                      .on('mousedown.drag', null);
+          
+                      brush.select('.background').style('cursor', 'crosshair')
+                      brush.call(brusher);
+                  }
+              }
+
+              function keyup() {
+                  shiftKey = d3.event.shiftKey || d3.event.metaKey;
+                  ctrlKey = d3.event.ctrlKey;
+          
+                  brush.call(brusher)
+                  .on("mousedown.brush", null)
+                  .on("touchstart.brush", null)                                                                      
+                  .on("touchmove.brush", null)                                                                       
+                  .on("touchend.brush", null);                                                                       
+
+                  brush.select('.background').style('cursor', 'auto')
+                  svg_graph.call(zoomer);
+              }
+
             </script>
           </div>
         </div>

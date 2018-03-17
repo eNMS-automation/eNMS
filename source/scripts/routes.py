@@ -59,11 +59,7 @@ def config_script():
 def file_transfer_script():
     form = FileTransferScriptForm(request.form)
     if request.method == 'POST':
-        content = request.form['text']
-        if form.data['type'] != 'simple':
-            # save file here
-            pass
-        script = FileTransferScript(content, **request.form)
+        script = FileTransferScript(**request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(

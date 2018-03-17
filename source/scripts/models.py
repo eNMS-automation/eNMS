@@ -51,7 +51,7 @@ class FileTransferScript(Script):
         'polymorphic_identity': 'FileTransferScript',
     }
 
-    def __init__(self, content, **data):
+    def __init__(self, **data):
         name = data['name'][0]
         super(FileTransferScript, self).__init__(name)
 

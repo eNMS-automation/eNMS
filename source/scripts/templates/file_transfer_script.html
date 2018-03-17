@@ -20,19 +20,24 @@
                     {{ form.name(class="form-control", required=true) }}
                 </div>
 
+                <label>Driver</label>
+                <div class='form-group'>
+                    {{ form.driver(class="form-control") }}
+                </div>
+
                 <label>Source file</label>
                 <div class='form-group'>
-                    {{ form.source_file(class="form-control", required=True) }}
+                    {{ form.source_file(class="form-control", placeholder="path/to/source", required=True) }}
                 </div>
 
                 <label>Destination file</label>
                 <div class='form-group'>
-                    {{ form.destination_file(class="form-control", required=True) }}
+                    {{ form.destination_file(class="form-control", placeholder="path/to/destination", required=True) }}
                 </div>
 
                 <label>File system</label>
                 <div class='form-group'>
-                    {{ form.file_system(class="form-control", required=True) }}
+                    {{ form.file_system(class="form-control", placeholder="Example: flash:", required=True) }}
                 </div>
 
                 <label>Direction</label>

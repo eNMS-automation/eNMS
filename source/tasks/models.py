@@ -64,10 +64,10 @@ def netmiko_process(kwargs):
                 inline_transer=False
             )
             result = str(transfer_dict)
+        netmiko_handler.disconnect()
     except Exception as e:
         result = 'netmiko config did not work because of {}'.format(e)
     results[name] = result
-    netmiko_handler.disconnect()
 
 
 def netmiko_config_job(name, type, script_name, username, password, ips, driver,
@@ -414,7 +414,7 @@ class NetmikoConfigTask(Task):
             cisco_type7.decode(self.user.password),
             targets,
             data['driver'],
-            data['global_delay_factor'],
+            data['global_delay_factor']
         ]
         super(NetmikoConfigTask, self).__init__(user, **data)
 

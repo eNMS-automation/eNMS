@@ -94,21 +94,21 @@ def create_from_file(client, file):
         client.post('/objects/object_creation', data=data)
 
 
-@check_blueprints('/', '/objects/', '/views/')
+@check_blueprints('', '/objects', '/views')
 def test_object_creation_europe(user_client):
     create_from_file(user_client, 'europe.xls')
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 49
 
 
-@check_blueprints('/', '/objects/', '/views/')
+@check_blueprints('', '/objects', '/views')
 def test_object_creation_type(user_client):
     create_from_file(user_client, 'node_counters.xls')
     assert len(Node.query.all()) == 27
     assert not Link.query.all()
 
 
-@check_blueprints('/', '/objects/', '/views/')
+@check_blueprints('', '/objects', '/views')
 def test_object_creation_all_type(user_client):
     create_from_file(user_client, 'all_types.xls')
     number_per_subtype = {
@@ -137,7 +137,7 @@ nodes = ImmutableMultiDict([('nodes', 'router' + str(i)) for i in range(5, 20)])
 links = ImmutableMultiDict([('links', 'link' + str(i)) for i in range(4, 15)])
 
 
-@check_blueprints('/', '/objects/', '/views/')
+@check_blueprints('', '/objects', '/views')
 def test_node_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/objects/object_deletion', data=nodes)
@@ -145,7 +145,7 @@ def test_node_deletion(user_client):
     assert len(Link.query.all()) == 18
 
 
-@check_blueprints('/', '/objects/', '/views/')
+@check_blueprints('', '/objects', '/views')
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/objects/object_deletion', data=links)
@@ -169,7 +169,7 @@ filter_objects2 = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/', '/objects/', '/views/')
+@check_blueprints('', '/objects', '/views')
 def test_object_filtering(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/objects/object_filtering', data=filter_objects1)

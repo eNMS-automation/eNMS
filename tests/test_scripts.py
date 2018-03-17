@@ -59,7 +59,7 @@ jinja2_script = dict([
 ])
 
 
-@check_blueprints('/scripts/')
+@check_blueprints('/scripts')
 def test_simple_script(user_client):
     user_client.post('/scripts/configuration_script', data=simple_script)
     assert len(ConfigScript.query.all()) == 1

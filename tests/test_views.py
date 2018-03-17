@@ -26,7 +26,7 @@ getters_recurrent = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/', '/views/', '/tasks/')
+@check_blueprints('', '/views', '/tasks')
 def test_getters(user_client):
     create_from_file(user_client, 'europe.xls')
     with user_client.session_transaction() as sess:

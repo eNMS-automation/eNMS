@@ -28,7 +28,8 @@ urls = {
     ),
     '/scripts/': (
         'overview',
-        'script_creation',
+        'configuration_script',
+        'file_transfer_script',
         'ansible_script'
     ),
     '/tasks/': (

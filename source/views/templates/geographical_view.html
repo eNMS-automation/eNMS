@@ -46,7 +46,8 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a onclick="show_modal('netmiko')"> Netmiko </a></li>
+        <li><a onclick="show_modal('netmiko-configuration')"> Netmiko configuration </a></li>
+        <li><a onclick="show_modal('netmiko-file-transfer')"> Netmiko file transfer </a></li>
         <li><a onclick="show_modal('napalm-getters')">NAPALM getters</a></li>
         <li><a onclick="show_modal('napalm-configuration')">NAPALM configuration</a></li>
         <li><a onclick="show_modal('ansible')">Ansible</a></li>
@@ -325,12 +326,6 @@
   <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
   <script>
     <!-- Initialize Smart wizard -->
-    function call_wizard(){
-      $('#wizard').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
     function call_wizard1(){
       $('#wizard1').smartWizard();
       $('.buttonNext').addClass('btn btn-success');
@@ -349,11 +344,18 @@
       $('.buttonPrevious').addClass('btn btn-primary');
       $('.buttonFinish').addClass('btn btn-default');
     }
+    function call_wizard4(){
+      $('#wizard4').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+
     </script>
     <!-- Initialize datetimepicker -->
   <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
   <script>
-    for (n=1; n<5; n++) {
+    for (n=1; n<6; n++) {
       $('#start_date' + n).datetimepicker({
           format: 'DD/MM/YYYY HH:mm:ss',
           widgetPositioning: {
@@ -362,6 +364,12 @@
           },
           useCurrent: false,
       });
+      function call_wizard(n){
+      $('#wizard' + n).smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+      }
       var today = new Date()
       $('#start_date' + n).data("DateTimePicker").minDate(today);
       $('#end_date' + n).datetimepicker({

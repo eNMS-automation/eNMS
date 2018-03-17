@@ -8,21 +8,23 @@ from .forms import (
     GoogleEarthForm,
     NapalmConfigurationForm,
     NapalmGettersForm,
-    NetmikoForm,
+    NetmikoConfigForm,
+    NetmikoFileTransferForm,
     ViewOptionsForm
 )
 from json import dumps
 from objects.models import get_obj, Node, node_subtypes, Link, link_class
 from objects.properties import type_to_public_properties
 from os.path import join
-from scripts.models import AnsibleScript, ClassicScript
+from scripts.models import AnsibleScript, ConfigScript
 from simplekml import Color, Kml, Style
 from subprocess import Popen
 from tasks.models import (
     AnsibleTask,
     NapalmConfigTask,
     NapalmGettersTask,
-    NetmikoTask
+    NetmikoConfigTask,
+    NetmikoFileTransferTask
 )
 
 blueprint = Blueprint(
@@ -80,21 +82,23 @@ def schedule_task(cls, **data):
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
-    print('ttt'*100, request.form, session)
+    # print('ttt'*100, request.form, session)
     napalm_configuration_form = NapalmConfigurationForm(request.form)
     napalm_getters_form = NapalmGettersForm(request.form)
-    netmiko_form = NetmikoForm(request.form)
+    netmiko_config_form = NetmikoConfigForm(request.form)
+    netmiko_file_transfer_form = NetmikoFileTransferForm(request.form)
     ansible_form = AnsibleForm(request.form)
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
     # update the list of available nodes / script by querying the database
-    netmiko_form.script.choices = ClassicScript.choices()
-    napalm_configuration_form.script.choices = ClassicScript.choices()
+    netmiko_config_form.script.choices = ConfigScript.choices()
+    napalm_configuration_form.script.choices = ConfigScript.choices()
     ansible_form.script.choices = AnsibleScript.choices()
     if 'script_type' in request.form:
         task_class, form = {
-            'netmiko': (NetmikoTask, netmiko_form),
+            'netmiko_configuration': (NetmikoConfigTask, netmiko_config_form),
+            'netmiko_file_transfer': (NetmikoFileTransferTask, netmiko_file_transfer_form),
             'napalm_configuration': (NapalmConfigTask, napalm_configuration_form),
             'napalm_getters': (NapalmGettersTask, napalm_getters_form),
             'ansible': (AnsibleTask, ansible_form)
@@ -117,9 +121,10 @@ def view(view_type):
     return render_template(
         '{}_view.html'.format(view_type),
         view=view,
+        netmiko_config_form=netmiko_config_form,
+        netmiko_file_transfer_form=netmiko_file_transfer_form,
         napalm_configuration_form=napalm_configuration_form,
         napalm_getters_form=napalm_getters_form,
-        netmiko_form=netmiko_form,
         ansible_form=ansible_form,
         view_options_form=view_options_form,
         google_earth_form=google_earth_form,
@@ -145,7 +150,7 @@ def view(view_type):
 @blueprint.route('/google_earth_export', methods=['GET', 'POST'])
 @login_required
 def google_earth_export():
-    print('ttt'*100, request.form)
+    # print('ttt'*100, request.form)
     form = GoogleEarthForm(request.form)
     if 'POST' in request.method:
         kml_file = Kml()

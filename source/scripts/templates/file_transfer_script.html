@@ -1,0 +1,60 @@
+{% extends "base_site.html" %}
+
+{% block title %} Script creation {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+      <!-- begin row -->
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+              <div class="form-group" style="height: 650px">
+                <label>Name</label>
+                <div class='form-group'>
+                    {{ form.name(class="form-control", required=true) }}
+                </div>
+
+                <label>Source file</label>
+                <div class='form-group'>
+                    {{ form.source_file(class="form-control", required=True) }}
+                </div>
+
+                <label>Destination file</label>
+                <div class='form-group'>
+                    {{ form.destination_file(class="form-control", required=True) }}
+                </div>
+
+                <label>File system</label>
+                <div class='form-group'>
+                    {{ form.file_system(class="form-control", required=True) }}
+                </div>
+
+                <label>Direction</label>
+                <div class='form-group'>
+                    {{ form.direction(class="form-control") }}
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success" name="create_script">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+    </form>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+{% endblock javascripts %}

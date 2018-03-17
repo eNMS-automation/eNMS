@@ -1,7 +1,7 @@
 from base.database import db
 from conftest import path_scripts
 from os.path import join
-from scripts.models import ClassicScript, Script
+from scripts.models import ConfigScript, Script
 from test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -61,13 +61,13 @@ jinja2_script = dict([
 
 @check_blueprints('/scripts/')
 def test_simple_script(user_client):
-    user_client.post('/scripts/script_creation', data=simple_script)
-    assert len(ClassicScript.query.all()) == 1
+    user_client.post('/scripts/configuration_script', data=simple_script)
+    assert len(ConfigScript.query.all()) == 1
     path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         jinja2_script['file'] = f
-        user_client.post('/scripts/script_creation', data=jinja2_script)
-    assert len(ClassicScript.query.all()) == 2
+        user_client.post('/scripts/configuration_script', data=jinja2_script)
+    assert len(ConfigScript.query.all()) == 2
     j2_script = db.session.query(Script).filter_by(name='subif').first()
     # simply removing the space does not work as yaml relies on dict, which
     # are not ordered, we use set instead for the test to pass on python 2 and 3

@@ -49,7 +49,7 @@
               </div>
             </form>
 
-            <div align='center' id="d3_selectable_force_directed_graph" style="height:1000px;"></div>
+            <div align='center' id="logical_view"></div>
             <script>
               function show_modal(modal_name){
                 $(`#${modal_name}`).modal('show');
@@ -62,12 +62,12 @@
                       "x": {{ obj.id }},
                       "y": {{ obj.id }},
                       "name": "{{ obj.name }}",
-                      "img":  "http://marvel-force-chart.surge.sh/marvel_force_chart_img/top_hulk.png",
+                      "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + obj.subtype + '.gif') }}",
                     },
                   {% endfor %}
                 ],
                 "links":[  
-                  {% for obj, properties in link_table.items() %}  
+                  {% for obj, properties in link_table.items() %}
                     {  
                       "source": {{ obj['source']['id'] }} - 1,
                       "target": {{ obj['destination']['id'] }} - 1
@@ -79,7 +79,7 @@
               var width = 960,
                   height = 500
               
-              var svg = d3.select("#d3_selectable_force_directed_graph").append("svg")
+              var svg = d3.select("#logical_view").append("svg")
                   .attr("width", width)
                   .attr("height", height);
               
@@ -106,7 +106,7 @@
                   .call(force.drag);
             
               node.append("image")
-                  .attr("xlink:href", "{{ url_for('views_blueprint.static', filename='images/default/router.gif') }}")
+                  .attr("xlink:href", function(d) { return d.img; })
                   .attr("x", -8)
                   .attr("y", -8)
                   .attr("width", 16)

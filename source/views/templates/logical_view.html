@@ -81,16 +81,16 @@
               
               // selection function
               function selectNode(d) {
-                  // we stop the propagation up the DOM tree so that the 
-                  // unselectAll event bound to the canvas is not triggered
-                  d3.event.stopPropagation();
-                  // add both the HTML and graph elements in the selection array
-                  selection.push([this, d]);
-                  d3.select(this).attr("xlink:href", d.selected_img);
+                // we stop the propagation up the DOM tree so that the 
+                // unselectAll event bound to the canvas is not triggered
+                d3.event.stopPropagation();
+                // add both the HTML and graph elements in the selection array
+                selection.push([this, d]);
+                d3.select(this).attr("xlink:href", d.selected_img);
               };
               
               function unselectAll() {
-                console.log('test');
+                d3.event.preventDefault();
                 for (i = 0; i < selection.length; i++) {
                   console.log(selection[i]);
                   d3.select(selection[i][0]).attr("xlink:href", selection[i][1].img);
@@ -103,9 +103,7 @@
               var svg = d3.select("#logical_view").append("svg")
                   .attr("width", width)
                   .attr("height", height)
-                  .on("click", unselectAll);
-              
-
+                  .on("contextmenu", unselectAll);
 
               var force = d3.layout.force()
                   .gravity(0.05)

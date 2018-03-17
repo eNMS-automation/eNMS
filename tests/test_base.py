@@ -2,43 +2,43 @@ from logging import CRITICAL, disable
 disable(CRITICAL)
 
 urls = {
-    '/': (
-        '',
-        'dashboard',
-        'dashboard_control',
-        'project'
+    '': (
+        '/',
+        '/dashboard',
+        '/dashboard_control',
+        '/project'
     ),
-    '/users/': (
-        'overview',
-        'manage_users',
-        'login',
-        'create_account',
-        'tacacs_server'
+    '/users': (
+        '/overview',
+        '/manage_users',
+        '/login',
+        '/create_account',
+        '/tacacs_server'
     ),
-    '/objects/': (
-        'objects',
-        'object_creation',
-        'object_deletion',
-        'object_filtering'
+    '/objects': (
+        '/objects',
+        '/object_creation',
+        '/object_deletion',
+        '/object_filtering'
     ),
-    '/views/': (
-        'geographical_view',
-        'logical_view',
-        'google_earth_export'
+    '/views': (
+        '/geographical_view',
+        '/logical_view',
+        '/google_earth_export'
     ),
-    '/scripts/': (
-        'overview',
-        'configuration_script',
-        'file_transfer_script',
-        'ansible_script'
+    '/scripts': (
+        '/overview',
+        '/configuration_script',
+        '/file_transfer_script',
+        '/ansible_script'
     ),
-    '/tasks/': (
-        'task_management',
-        'calendar'
+    '/tasks': (
+        '/task_management',
+        '/calendar'
     ),
-    '/logs/': (
-        'overview',
-        'syslog_server'
+    '/logs': (
+        '/overview',
+        '/syslog_server'
     )
 }
 

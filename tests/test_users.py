@@ -3,7 +3,7 @@ from test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
 
-@check_blueprints('/', '/users/')
+@check_blueprints('', '/users')
 def test_user_management(user_client):
     for user in ('user1', 'user2', 'user3'):
         dict_user = {
@@ -29,7 +29,7 @@ def test_user_management(user_client):
     assert len(User.query.all()) == 1
 
 
-@check_blueprints('/', '/users/')
+@check_blueprints('', '/users')
 def test_tacacs_configuration(user_client):
     tacacs_server = {
         'ip_address': '192.168.1.2',

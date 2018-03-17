@@ -321,39 +321,10 @@
 
 {% block javascripts %}
   {{ super()}}
-  
   <!-- jQuery Smart Wizard -->
   <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
-  <script>
-    <!-- Initialize Smart wizard -->
-    function call_wizard1(){
-      $('#wizard1').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-    function call_wizard2(){
-      $('#wizard2').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-    function call_wizard3(){
-      $('#wizard3').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-    function call_wizard4(){
-      $('#wizard4').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-
-    </script>
-    <!-- Initialize datetimepicker -->
   <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+  <!-- Initialize datetimepicker and SmartWizard -->
   <script>
     for (n=1; n<6; n++) {
       $('#start_date' + n).datetimepicker({
@@ -364,12 +335,6 @@
           },
           useCurrent: false,
       });
-      function call_wizard(n){
-      $('#wizard' + n).smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-      }
       var today = new Date()
       $('#start_date' + n).data("DateTimePicker").minDate(today);
       $('#end_date' + n).datetimepicker({
@@ -382,6 +347,13 @@
       });
       var today = new Date()
       $('#end_date' + n).data("DateTimePicker").minDate(today);
+      
+      function call_wizard(n){
+        $('#wizard' + n).smartWizard();
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonFinish').addClass('btn btn-default');
+      }
     }
   </script>
 

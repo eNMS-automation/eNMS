@@ -36,23 +36,39 @@ def netmiko_process(kwargs):
     results = kwargs.pop('results')
     script, name = kwargs.pop('script'), kwargs.pop('name')
     script_type = kwargs.pop('type')
+    # source_file = kwargs.pop('source_file')
+    # dest_file = kwargs.pop('dest_file')
+    # file_system = kwargs.pop('file_system')
+    # direction = kwargs.pop('direction')
     try:
         netmiko_handler = ConnectHandler(**kwargs)
         if script_type == 'configuration':
             netmiko_handler.send_config_set(script.splitlines())
             result = 'configuration OK'
-        else:
+        elif script_type == 'show_commands':
             outputs = []
             for show_command in script.splitlines():
                 outputs.append(netmiko_handler.send_command(show_command))
             result = '\n\n'.join(outputs)
+        else:
+            transfer_dict = file_transfer(
+                netmiko_handler,
+                source_file=kwargs['source_file'],
+                dest_file=kwargs['dest_file'],
+                file_system=kwargs['file_system'],
+                direction=kwargs['direction'],
+                overwrite_file=False,
+                disable_md5=False,
+                inline_transer=False
+            )
+            result = str(transfer_dict)
     except Exception as e:
         result = 'netmiko config did not work because of {}'.format(e)
     results[name] = result
     netmiko_handler.disconnect()
 
 
-def netmiko_job(name, type, script_name, username, password, ips,
+def netmiko_config_job(name, type, script_name, username, password, ips,
                 driver, global_delay_factor):
     job_time = str(datetime.now())
     task = db.session.query(Task)\
@@ -72,6 +88,36 @@ def netmiko_job(name, type, script_name, username, password, ips,
         'global_delay_factor': global_delay_factor,
         'name': device_name,
         'script': script.content,
+        'results': results,
+        'type': type
+    }) for device_name, ip_address, _, secret in ips]
+    pool.map(netmiko_process, kwargs)
+    task.logs[job_time] = results
+    db.session.commit()
+
+def netmiko_file_transfer_job(name, type, script_name, username, password, ips,
+                                                                    driver):
+    job_time = str(datetime.now())
+    task = db.session.query(Task)\
+        .filter_by(name=name)\
+        .first()
+    script = db.session.query(ConfigScript)\
+        .filter_by(name=script_name)\
+        .first()
+    pool = ThreadPool(processes=100)
+    results = {}
+    kwargs = [({
+        'ip': ip_address,
+        'device_type': driver,
+        'username': username,
+        'password': password,
+        'secret': secret,
+        'global_delay_factor': global_delay_factor,
+        'name': device_name,
+        'source_file': script.source_file,
+        'dest_file': script.destination_file,
+        'file_system': script.file_system,
+        'direction': script.direction,
         'results': results,
         'type': type
     }) for device_name, ip_address, _, secret in ips]
@@ -356,7 +402,7 @@ class NetmikoConfigTask(Task):
         self.user = user
         self.nodes = targets
         self.data = data
-        self.job = netmiko_job
+        self.job = netmiko_config_job
         self.args = [
             data['name'],
             data['type'],
@@ -382,21 +428,19 @@ class NetmikoFileTransferTask(Task):
     }
 
     def __init__(self, user, targets, **data):
-        self.subtype = data['type']
+        self.subtype = 'file_transfer'
         self.script_name = data['script']
         self.user = user
         self.nodes = targets
         self.data = data
-        self.job = netmiko_job
+        self.job = netmiko_file_transfer_job
         self.args = [
             data['name'],
-            data['type'],
             self.script_name,
             self.user.username,
             cisco_type7.decode(self.user.password),
             targets,
             data['driver'],
-            data['global_delay_factor'],
         ]
         super(NetmikoFileTransferTask, self).__init__(user, **data)
 

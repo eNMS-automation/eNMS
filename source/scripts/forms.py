@@ -39,6 +39,14 @@ class ConfigScriptForm(FlaskForm):
 
 class FileTransferScriptForm(FlaskForm):
     name = TextField('Name')
+    driver_choices = (
+        ('cisco_ios', 'Cisco IOS'),
+        ('cisco_xe', 'Cisco IOS-XE'),
+        ('cisco_xr', 'Cisco IOS-XR'),
+        ('juniper_junos', 'Juniper'),
+        ('arista_eos', 'Arista')
+    )
+    driver = SelectField('', choices=driver_choices)
     source_file = TextField('Source file')
     destination_file = TextField('Destination file')
     file_system = TextField('File system')

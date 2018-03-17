@@ -51,6 +51,8 @@ def netmiko_process(kwargs):
                 outputs.append(netmiko_handler.send_command(show_command))
             result = '\n\n'.join(outputs)
         else:
+            # still in netmiko develop branch for now
+            file_transfer = lambda *a, **kw: 1
             transfer_dict = file_transfer(
                 netmiko_handler,
                 source_file=kwargs['source_file'],
@@ -68,8 +70,8 @@ def netmiko_process(kwargs):
     netmiko_handler.disconnect()
 
 
-def netmiko_config_job(name, type, script_name, username, password, ips,
-                driver, global_delay_factor):
+def netmiko_config_job(name, type, script_name, username, password, ips, driver,
+                       global_delay_factor):
     job_time = str(datetime.now())
     task = db.session.query(Task)\
         .filter_by(name=name)\
@@ -95,8 +97,9 @@ def netmiko_config_job(name, type, script_name, username, password, ips,
     task.logs[job_time] = results
     db.session.commit()
 
+
 def netmiko_file_transfer_job(name, type, script_name, username, password, ips,
-                                                                    driver):
+                              driver, global_delay_factor):
     job_time = str(datetime.now())
     task = db.session.query(Task)\
         .filter_by(name=name)\
@@ -441,6 +444,7 @@ class NetmikoFileTransferTask(Task):
             cisco_type7.decode(self.user.password),
             targets,
             data['driver'],
+            data['global_delay_factor']
         ]
         super(NetmikoFileTransferTask, self).__init__(user, **data)
 

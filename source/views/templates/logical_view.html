@@ -14,7 +14,19 @@
     pointer-events: none;
     font: 10px sans-serif;
   }
-  
+
+  div.tooltip {	
+      position: absolute;			
+      text-align: center;			
+      width: 50px;					
+      height: 40px;					
+      padding: 2px;				
+      font: 12px sans-serif;		
+      background: lightsteelblue;	
+      border: 2px;		
+      border-radius: 8px;			
+      pointer-events: none;			
+  }
   </style>
 {% endblock stylesheets %}
 
@@ -92,10 +104,14 @@
               function unselectAll() {
                 d3.event.preventDefault();
                 for (i = 0; i < selection.length; i++) {
-                  console.log(selection[i]);
                   d3.select(selection[i][0]).attr("xlink:href", selection[i][1].img);
                 }
+                selection = [];
               };
+              
+              // tooltip div
+              var div = d3.select("body").append("div")	
+                  .attr("class", "tooltip")				
 
               var width = 960,
                   height = 500
@@ -126,6 +142,7 @@
                 .enter().append("g")
                   .attr("class", "node")
                   .call(force.drag);
+
             
               node.append("image")
                   .attr("xlink:href", function(d) { return d.img; })
@@ -134,6 +151,21 @@
                   .attr("width", 16)
                   .attr("height", 16)
                   .on("click", selectNode);
+                  /*
+                  .on("click", function(d) {		
+                    div.transition()		
+                      .duration(200)		
+                      .style("opacity", 1);		
+                    div	.html('ok')	
+                      .style("left", (d3.event.pageX + 20) + "px")		
+                      .style("top", (d3.event.pageY - 30) + "px");	
+                    })					
+                  .on("mouseout", function(d) {		
+                      div.transition()		
+                          .duration(500)		
+                          .style("opacity", 0);	
+                  });
+                  */
             
               node.append("text")
                   .attr("dx", 12)

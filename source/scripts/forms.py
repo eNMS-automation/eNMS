@@ -24,10 +24,8 @@ ansible_options = {
     'diff': ('Diff', False)
 }
 
-## Script creation
 
-
-class ScriptCreationForm(FlaskForm):
+class ConfigScriptForm(FlaskForm):
     name = TextField('Name')
     type_choices = (
         ('simple', 'Simple'),
@@ -37,6 +35,15 @@ class ScriptCreationForm(FlaskForm):
     type = SelectField('', choices=type_choices)
     text = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
+
+
+class FileTransferScriptForm(FlaskForm):
+    name = TextField('Name')
+    source_file = TextField('Source file')
+    destination_file = TextField('Destination file')
+    file_system = TextField('File system')
+    direction_choices = (('put', 'Upload'), ('get', 'Download'))
+    direction = SelectField('', choices=direction_choices)
 
 
 def configure_form(cls):

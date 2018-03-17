@@ -3,10 +3,10 @@ from base.helpers import allowed_file
 from base.properties import pretty_names
 from flask import Blueprint, current_app, render_template, request
 from flask_login import login_required
-from .forms import AnsibleScriptForm, ScriptCreationForm
+from .forms import AnsibleScriptForm, ConfigScriptForm, FileTransferScriptForm
 from jinja2 import Template
 from yaml import load
-from .models import AnsibleScript, ClassicScript, Script
+from .models import AnsibleScript, ConfigScript, FileTransferScript, Script
 from os.path import join
 from werkzeug import secure_filename
 
@@ -30,10 +30,10 @@ def scripts():
     )
 
 
-@blueprint.route('/script_creation', methods=['GET', 'POST'])
+@blueprint.route('/configuration_script', methods=['GET', 'POST'])
 @login_required
-def script_creation():
-    form = ScriptCreationForm(request.form)
+def config_script():
+    form = ConfigScriptForm(request.form)
     if 'create_script' in request.form:
         # retrieve the raw script: we will use it as-is or update it depending
         # on the type of script (jinja2-enabled template or not)
@@ -45,11 +45,29 @@ def script_creation():
                 parameters = load(file.read())
                 template = Template(content)
                 content = template.render(**parameters)
-        script = ClassicScript(content, **request.form)
+        script = ConfigScript(content, **request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(
-        'script_creation.html',
+        'configuration_script.html',
+        form=form
+    )
+
+
+@blueprint.route('/file_transfer_script', methods=['GET', 'POST'])
+@login_required
+def file_transfer_script():
+    form = FileTransferScriptForm(request.form)
+    if request.method == 'POST':
+        content = request.form['text']
+        if form.data['type'] != 'simple':
+            # save file here
+            pass
+        script = FileTransferScript(content, **request.form)
+        db.session.add(script)
+        db.session.commit()
+    return render_template(
+        'file_transfer_script.html',
         form=form
     )
 

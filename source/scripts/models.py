@@ -25,20 +25,35 @@ class Script(CustomBase):
         return str(self.name)
 
 
-class ClassicScript(Script):
+class ConfigScript(Script):
 
-    __tablename__ = 'ClassicScript'
+    __tablename__ = 'ConfigScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'ClassicScript',
+        'polymorphic_identity': 'ConfigScript',
     }
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        super(ClassicScript, self).__init__(name)
+        super(ConfigScript, self).__init__(name)
         self.content = ''.join(content)
+
+
+class FileTransferScript(Script):
+
+    __tablename__ = 'FileTransferScript'
+
+    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'FileTransferScript',
+    }
+
+    def __init__(self, content, **data):
+        name = data['name'][0]
+        super(FileTransferScript, self).__init__(name)
 
 
 class AnsibleScript(Script):

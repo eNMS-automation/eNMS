@@ -4,6 +4,7 @@ from flask_wtf import FlaskForm
 from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
 from objects.properties import node_public_properties, link_public_properties
 from wtforms import (
+    BooleanField,
     FloatField,
     IntegerField,
     SelectField,
@@ -62,7 +63,7 @@ napalm_actions = OrderedDict([
 
 class SchedulingForm(FlaskForm):
     start_date = TextField('Start date')
-    end_date =  TextField('End date')
+    end_date = TextField('End date')
     name = TextField('Name')
     script = SelectField('', choices=())
     frequency = TextField('Frequency')
@@ -70,7 +71,7 @@ class SchedulingForm(FlaskForm):
 ## Netmiko automation
 
 
-class NetmikoForm(SchedulingForm):
+class NetmikoConfigForm(SchedulingForm):
     script = SelectField('', choices=())
     type_choices = (
         ('show_commands', 'Show commands'),
@@ -83,6 +84,14 @@ class NetmikoForm(SchedulingForm):
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', choices=drivers)
     global_delay_factor = FloatField('global_delay_factor', default=1.)
+
+
+class NetmikoFileTransferForm(SchedulingForm):
+    script = SelectField('', choices=())
+    overwrite_file = BooleanField()
+    disable_md5 = BooleanField()
+    inline_transer = BooleanField()
+
 
 ## NAPALM automation
 

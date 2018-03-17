@@ -8,7 +8,7 @@ from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
 from netmiko import ConnectHandler
 from passlib.hash import cisco_type7
-from scripts.models import AnsibleScript, ClassicScript
+from scripts.models import AnsibleScript, ConfigScript
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
@@ -58,7 +58,7 @@ def netmiko_job(name, type, script_name, username, password, ips,
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    script = db.session.query(ClassicScript)\
+    script = db.session.query(ConfigScript)\
         .filter_by(name=script_name)\
         .first()
     pool = ThreadPool(processes=100)
@@ -109,7 +109,7 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    script = db.session.query(ClassicScript)\
+    script = db.session.query(ConfigScript)\
         .filter_by(name=script_name)\
         .first()
     pool = ThreadPool(processes=100)
@@ -339,15 +339,15 @@ class Task(CustomBase):
         )
 
 
-class NetmikoTask(Task):
+class NetmikoConfigTask(Task):
 
-    __tablename__ = 'NetmikoTask'
+    __tablename__ = 'NetmikoConfigTask'
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script = Column(String)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'NetmikoTask',
+        'polymorphic_identity': 'NetmikoConfigTask',
     }
 
     def __init__(self, user, targets, **data):
@@ -367,7 +367,38 @@ class NetmikoTask(Task):
             data['driver'],
             data['global_delay_factor'],
         ]
-        super(NetmikoTask, self).__init__(user, **data)
+        super(NetmikoConfigTask, self).__init__(user, **data)
+
+
+class NetmikoFileTransferTask(Task):
+
+    __tablename__ = 'NetmikoFileTransferTask'
+
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
+    script = Column(String)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'NetmikoFileTransferTask',
+    }
+
+    def __init__(self, user, targets, **data):
+        self.subtype = data['type']
+        self.script_name = data['script']
+        self.user = user
+        self.nodes = targets
+        self.data = data
+        self.job = netmiko_job
+        self.args = [
+            data['name'],
+            data['type'],
+            self.script_name,
+            self.user.username,
+            cisco_type7.decode(self.user.password),
+            targets,
+            data['driver'],
+            data['global_delay_factor'],
+        ]
+        super(NetmikoFileTransferTask, self).__init__(user, **data)
 
 
 class NapalmConfigTask(Task):

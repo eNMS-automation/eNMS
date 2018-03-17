@@ -111,12 +111,12 @@
                 });
               })
               .on("brushend", function() {
-                  d3.event.target.clear();
-                  d3.select(this).call(d3.event.target);
+                d3.event.target.clear();
+                d3.select(this).call(d3.event.target);
               });
           
               var svg_graph = svg.append('svg:g')
-              .call(zoomer)
+                .call(zoomer)
           
               var rect = svg_graph.append('svg:rect')
                 .attr('width', width)
@@ -180,114 +180,117 @@
                 ]
               };
 
-                  nodeGraph = graph;
-          
-                  graph.links.forEach(function(d) {
-                    d.source = graph.nodes[d.source];
-                    d.target = graph.nodes[d.target];
-                  });
+              nodeGraph = graph;
+      
+              graph.links.forEach(function(d) {
+                d.source = graph.nodes[d.source];
+                d.target = graph.nodes[d.target];
+              });
 
-                  link = link.data(graph.links).enter().append("line")
-                    .attr("x1", function(d) { return d.source.x; })
+              link = link.data(graph.links).enter().append("line")
+                .attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+      
+      
+              var force = d3.layout.force()
+                .charge(-120)
+                .linkDistance(30)
+                .nodes(graph.nodes)
+                .links(graph.links)
+                .size([width, height])
+                .start();
+      
+              function dragstarted(d) {
+                d3.event.sourceEvent.stopPropagation();
+                if (!d.selected && !shiftKey) {
+                  // if this node isn't selected, then we have to unselect every other node
+                  node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; });
+                }
+                d3.select(this).classed("selected", function(p) { d.previouslySelected = d.selected; return d.selected = true; });
+                node.filter(function(d) { return d.selected; })
+                .each(function(d) { d.fixed |= 2; })
+              }
+      
+              function dragged(d) {
+                node.filter(function(d) { return d.selected; })
+                .each(function(d) { 
+                  d.x += d3.event.dx;
+                  d.y += d3.event.dy;
+                  d.px += d3.event.dx;
+                  d.py += d3.event.dy;
+                })
+                force.resume();
+              }
+              
+              var gnodes = svg.selectAll('g.gnode')
+                .data(graph.nodes)
+                .enter()
+                .append('g')
+                .classed('gnode', true);
+
+              var node = node.data(graph.nodes).enter().append("circle")
+                .attr("r", 4)
+                .attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; })
+                .on("dblclick", function(d) { d3.event.stopPropagation(); })
+                .on("click", function(d) {
+                    if (d3.event.defaultPrevented) return;
+                    if (!shiftKey) {
+                        //if the shift key isn't down, unselect everything
+                        node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; })
+                    }
+                    // always select this node
+                    d3.select(this).classed("selected", d.selected = !d.previouslySelected);
+                })
+        
+                .on("mouseup", function(d) {
+                    //if (d.selected && shiftKey) d3.select(this).classed("selected", d.selected = false);
+                })
+                .call(d3.behavior.drag()
+                      .on("dragstart", dragstarted)
+                      .on("drag", dragged)
+                      .on("dragend", dragended));
+
+                  node.append("text")
+                    .attr("dx", 12)
+                    .attr("dy", ".35em")
+                    .text(function(d) { return d.name });
+
+                  function tick() {
+                    link.attr("x1", function(d) { return d.source.x; })
                     .attr("y1", function(d) { return d.source.y; })
                     .attr("x2", function(d) { return d.target.x; })
                     .attr("y2", function(d) { return d.target.y; });
-          
-          
-                  var force = d3.layout.force()
-                    .charge(-120)
-                    .linkDistance(30)
-                    .nodes(graph.nodes)
-                    .links(graph.links)
-                    .size([width, height])
-                    .start();
-          
-                  function dragstarted(d) {
-                    d3.event.sourceEvent.stopPropagation();
-                    if (!d.selected && !shiftKey) {
-                      // if this node isn't selected, then we have to unselect every other node
-                      node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; });
-                    }
-                    d3.select(this).classed("selected", function(p) { d.previouslySelected = d.selected; return d.selected = true; });
-                    node.filter(function(d) { return d.selected; })
-                    .each(function(d) { d.fixed |= 2; })
-                  }
-          
-                  function dragged(d) {
-                    node.filter(function(d) { return d.selected; })
-                    .each(function(d) { 
-                      d.x += d3.event.dx;
-                      d.y += d3.event.dy;
-                      d.px += d3.event.dx;
-                      d.py += d3.event.dy;
-                    })
-                    force.resume();
-                  }
-
-                  var node = node.data(graph.nodes).enter().append("circle")
-                    .attr("r", 4)
-                    .attr("cx", function(d) { return d.x; })
-                    .attr("cy", function(d) { return d.y; })
-                    .on("dblclick", function(d) { d3.event.stopPropagation(); })
-                    .on("click", function(d) {
-                        if (d3.event.defaultPrevented) return;
-                        if (!shiftKey) {
-                            //if the shift key isn't down, unselect everything
-                            node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; })
-                        }
-  
-                        // always select this node
-                        d3.select(this).classed("selected", d.selected = !d.previouslySelected);
-                    })
-            
-                    .on("mouseup", function(d) {
-                        //if (d.selected && shiftKey) d3.select(this).classed("selected", d.selected = false);
-                    })
-                    .call(d3.behavior.drag()
-                          .on("dragstart", dragstarted)
-                          .on("drag", dragged)
-                          .on("dragend", dragended));
-
-                  node.append("text")
-                      .attr("dx", 12)
-                      .attr("dy", ".35em")
-                      .text(function(d) { return d.name });
-
-                  function tick() {
-                      link.attr("x1", function(d) { return d.source.x; })
-                      .attr("y1", function(d) { return d.source.y; })
-                      .attr("x2", function(d) { return d.target.x; })
-                      .attr("y2", function(d) { return d.target.y; });
-    
-                      node.attr('cx', function(d) { return d.x; })
-                      .attr('cy', function(d) { return d.y; });
+                    node.attr('cx', function(d) { return d.x; })
+                    .attr('cy', function(d) { return d.y; });
     
                   };
     
                   force.on("tick", tick);
-
-          
-              function keydown() {
+  
+                function keydown() {
                   shiftKey = d3.event.shiftKey || d3.event.metaKey;
                   ctrlKey = d3.event.ctrlKey;
           
                   if (shiftKey) {
-                      svg_graph.call(zoomer)
-                      .on("mousedown.zoom", null)
-                      .on("touchstart.zoom", null)                                                                      
-                      .on("touchmove.zoom", null)                                                                       
-                      .on("touchend.zoom", null);                                                                       
-          
-                      //svg_graph.on('zoom', null);                                                                     
-                      vis.selectAll('g.gnode')
-                      .on('mousedown.drag', null);
-          
-                      brush.select('.background').style('cursor', 'crosshair')
-                      brush.call(brusher);
+                    svg_graph.call(zoomer)
+                    .on("mousedown.zoom", null)
+                    .on("touchstart.zoom", null)                                                                      
+                    .on("touchmove.zoom", null)                                                                       
+                    .on("touchend.zoom", null);                                                                       
+        
+                    //svg_graph.on('zoom', null);                                                                     
+                    vis.selectAll('g.gnode')
+                    .on('mousedown.drag', null);
+        
+                    brush.select('.background').style('cursor', 'crosshair')
+                    brush.call(brusher);
                   }
-              }
-
-              function keyup() {
+                }
+  
+                function keyup() {
                   shiftKey = d3.event.shiftKey || d3.event.metaKey;
                   ctrlKey = d3.event.ctrlKey;
           
@@ -299,7 +302,7 @@
 
                   brush.select('.background').style('cursor', 'auto')
                   svg_graph.call(zoomer);
-              }
+                }
 
             </script>
           </div>

@@ -132,7 +132,6 @@ def test_object_creation_all_type(user_client):
 
 ## Object deletion
 
-
 nodes = ImmutableMultiDict([('nodes', 'router' + str(i)) for i in range(5, 20)])
 links = ImmutableMultiDict([('links', 'link' + str(i)) for i in range(4, 15)])
 
@@ -153,7 +152,6 @@ def test_link_deletion(user_client):
     assert len(Link.query.all()) == 38
 
 ## Object filtering
-
 
 filter_objects1 = ImmutableMultiDict([
     ('nodelocation', 'france|spain'),

@@ -323,31 +323,24 @@
   {{ super()}}
   <!-- jQuery Smart Wizard -->
   <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
+  <!-- Bootstrap Datetimepicker -->
   <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
   <!-- Initialize datetimepicker and SmartWizard -->
   <script>
     for (n=1; n<6; n++) {
-      $('#start_date' + n).datetimepicker({
+      var dates = ['start_date', 'end_date'];
+      var today = new Date();
+      for (var i=0; i<dates.length; i++) {
+        $('#' + dates[i] + n).datetimepicker({
           format: 'DD/MM/YYYY HH:mm:ss',
           widgetPositioning: {
               horizontal: 'left',
               vertical: 'bottom'
           },
           useCurrent: false,
-      });
-      var today = new Date()
-      $('#start_date' + n).data("DateTimePicker").minDate(today);
-      $('#end_date' + n).datetimepicker({
-          format: 'DD/MM/YYYY HH:mm:ss',
-          widgetPositioning: {
-              horizontal: 'left',
-              vertical: 'bottom'
-          },
-          useCurrent: false,
-      });
-      var today = new Date()
-      $('#end_date' + n).data("DateTimePicker").minDate(today);
-      
+        });
+        $('#' + dates[i] + n).data("DateTimePicker").minDate(today);
+      }  
       function call_wizard(n){
         $('#wizard' + n).smartWizard();
         $('.buttonNext').addClass('btn btn-success');

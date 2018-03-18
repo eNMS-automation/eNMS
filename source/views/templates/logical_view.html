@@ -192,25 +192,29 @@
   {{ super()}}
   <!-- jQuery Smart Wizard -->
   <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
+  <!-- Bootstrap Datetimepicker -->
+  <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
   <script>
-    <!-- Initialize Smart wizard -->
-    function call_wizard(){
-      $('#wizard').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
+    for (n=1; n<6; n++) {
+      var dates = ['start_date', 'end_date'];
+      var today = new Date();
+      for (var i=0; i<dates.length; i++) {
+        $('#' + dates[i] + n).datetimepicker({
+          format: 'DD/MM/YYYY HH:mm:ss',
+          widgetPositioning: {
+              horizontal: 'left',
+              vertical: 'bottom'
+          },
+          useCurrent: false,
+        });
+        $('#' + dates[i] + n).data("DateTimePicker").minDate(today);
+      }  
+      function call_wizard(n){
+        $('#wizard' + n).smartWizard();
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonFinish').addClass('btn btn-default');
+      }
     }
-    function call_wizard1(){
-      $('#wizard1').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-    function call_wizard2(){
-      $('#wizard2').smartWizard();
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-    </script>
+  </script>
 {% endblock javascripts %}

@@ -70,10 +70,10 @@ netmiko_task = ImmutableMultiDict([
 ])
 
 
-# @check_blueprints('/views', '/tasks')
-# def test_configuration_tasks(user_client):
-#     create_from_file(user_client, 'europe.xls')
-#     user_client.post('/scripts/configuration_script', data=simple_script)
-#     with user_client.session_transaction() as sess:
-#         sess['selection'] = ['1', '21', '22']
-#     user_client.post('views/geographical_view', data=netmiko_task)
+@check_blueprints('/views', '/tasks')
+def test_configuration_tasks(user_client):
+    create_from_file(user_client, 'europe.xls')
+    user_client.post('/scripts/configuration_script', data=simple_script)
+    with user_client.session_transaction() as sess:
+        sess['selection'] = ['1', '21', '22']
+    user_client.post('views/geographical_view', data=netmiko_task)

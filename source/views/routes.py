@@ -149,7 +149,6 @@ def view(view_type):
 @blueprint.route('/google_earth_export', methods=['GET', 'POST'])
 @login_required
 def google_earth_export():
-    print('ttt'*100, request.form)
     form = GoogleEarthForm(request.form)
     if 'POST' in request.method:
         kml_file = Kml()

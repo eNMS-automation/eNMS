@@ -1,9 +1,14 @@
+from conftest import path_scripts
+from os.path import join
 from tasks.models import (
+    NapalmConfigTask,
     NapalmGettersTask,
+    NetmikoConfigTask,
     Task
 )
 from test_base import check_blueprints
 from test_objects import create_from_file
+from test_scripts import simple_script, jinja2_script
 from werkzeug.datastructures import ImmutableMultiDict
 
 ## NAPALM getters task
@@ -50,16 +55,9 @@ def test_napalm_getters_task(user_client):
         user_client.post('tasks/delete_task', data=getter_task)
 
 
-## NAPALM and Netmiko configuration task
+## NAPALM and Netmiko show and configuration task
 
-simple_script = ImmutableMultiDict([
-    ('name', 'ping'),
-    ('type', 'simple'),
-    ('create_script', ''),
-    ('text', 'ping 1.1.1.1')
-])
-
-netmiko_task = ImmutableMultiDict([
+netmiko_show = ImmutableMultiDict([
     ('name', 'ping_task_once'),
     ('script', 'ping'),
     ('type', 'show_commands'),
@@ -73,12 +71,51 @@ netmiko_task = ImmutableMultiDict([
 
 
 @check_blueprints('/views', '/tasks')
-def test_configuration_tasks(user_client):
+def test_netmiko_show(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/scripts/configuration_script', data=simple_script)
     with user_client.session_transaction() as sess:
         sess['selection'] = ['1', '21', '22']
-    user_client.post('views/geographical_view', data=netmiko_task)
+    user_client.post('views/geographical_view', data=netmiko_show)
+
+
+netmiko_config = ImmutableMultiDict([
+    ('name', 'test_netmiko_config'),
+    ('script', 'subif'),
+    ('type', 'configuration'),
+    ('driver', 'cisco_xr_ssh'),
+    ('global_delay_factor', '1.0'),
+    ('start_date', '01/06/2090 18:59:11'),
+    ('end_date', '01/06/2099 18:59:11'),
+    ('frequency', '10000'),
+    ('script_type', 'netmiko_configuration')
+])
+
+napalm_config = ImmutableMultiDict([
+    ('name', 'test'),
+    ('script', 'subif'),
+    ('actions', 'load_merge_candidate'),
+    ('start_date', '01/06/2090 18:59:11'),
+    ('end_date', '01/06/2099 18:59:11'),
+    ('frequency', '10000'),
+    ('script_type', 'napalm_configuration')
+])
+
+
+@check_blueprints('/views', '/tasks')
+def test_netmiko_napalm_config(user_client):
+    create_from_file(user_client, 'europe.xls')
+    path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
+    with open(path_yaml, 'rb') as f:
+        jinja2_script['file'] = f
+        user_client.post('/scripts/configuration_script', data=jinja2_script)
+    with user_client.session_transaction() as sess:
+        sess['selection'] = ['1', '21', '22']
+    user_client.post('views/geographical_view', data=netmiko_config)
+    user_client.post('views/geographical_view', data=napalm_config)
+    assert len(NapalmConfigTask.query.all()) == 1
+    assert len(NetmikoConfigTask.query.all()) == 1
+    assert len(Task.query.all()) == 2
 
 
 ## Google Earth export

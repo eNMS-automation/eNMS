@@ -1,6 +1,3 @@
-from conftest import path_ge
-from os import remove
-from os.path import join
 from tasks.models import (
     NapalmGettersTask,
     Task
@@ -83,6 +80,7 @@ def test_configuration_tasks(user_client):
         sess['selection'] = ['1', '21', '22']
     user_client.post('views/geographical_view', data=netmiko_task)
 
+
 ## Google Earth export
 
 google_earth_dict = ImmutableMultiDict([
@@ -92,8 +90,8 @@ google_earth_dict = ImmutableMultiDict([
     ('netmiko_script', '')
 ])
 
+
 @check_blueprints('/views')
 def test_google_earth(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/views/google_earth_export', data=google_earth_dict)
-    remove(join(path_ge, 'test_google_earth.kmz'))

@@ -23,7 +23,7 @@ from users.routes import login_manager
 def initialize_paths(app):
     app.path_upload = join(path_parent, 'projects')
     app.path_apps = join(path_parent, 'applications')
-    app.kmz_path = join(path_parent, 'kmz')
+    app.ge_path = join(path_parent, 'google_earth')
     app.config['UPLOAD_FOLDER'] = app.path_upload
 
 

@@ -20,6 +20,7 @@ blueprint = Blueprint(
 @blueprint.route('/task_management', methods=['GET', 'POST'])
 @login_required
 def task_management():
+    print('ttt'*100, request.form)
     if 'compare' in request.form:
         n1, n2 = request.form['first_node'], request.form['second_node']
         t1, t2 = request.form['first_version'], request.form['second_version']

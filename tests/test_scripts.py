@@ -1,5 +1,6 @@
 from base.database import db
-from conftest import path_scripts, path_playbooks
+from conftest import path_playbooks, path_projects, path_scripts
+from os import remove
 from os.path import join
 from scripts.models import (
     AnsibleScript,
@@ -129,3 +130,5 @@ def test_ansible_scripts(user_client):
         user_client.post('/scripts/ansible_script', data=ansible_script)
     assert len(AnsibleScript.query.all()) == 1
     assert len(Script.query.all()) == 1
+    # the playbook is saved in /projects, we delete it at the end of the test
+    remove(join(path_projects, 'save_running_config.yml'))

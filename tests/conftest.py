@@ -33,7 +33,7 @@ def user_client():
         client.post('/users/login', data=login)
         yield client
     remove(join(path_source, 'database.db'))
-    try:
-        remove(join(path_source, 'flask_context.db'))
-    except FileNotFoundError:
-        pass
+    # try:
+    #     remove(join(path_source, 'flask_context.db'))
+    # except FileNotFoundError:
+    #     pass

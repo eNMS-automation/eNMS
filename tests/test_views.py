@@ -1,3 +1,6 @@
+from conftest import path_ge
+from os import remove
+from os.path import join
 from tasks.models import (
     NapalmGettersTask,
     Task
@@ -8,24 +11,26 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 ## NAPALM getters task
 
-getters_once_dict = ImmutableMultiDict([
-    ('name', 'getters_once'),
+getters_dict1 = ImmutableMultiDict([
+    ('name', 'getters_dict1'),
     ('getters', 'get_arp_table'),
     ('getters', 'get_interfaces_counters'),
     ('getters', 'get_interfaces'),
     ('getters', 'get_lldp_neighbors'),
-    ('scheduled_date', ''),
-    ('frequency', ''),
+    ('start_date', '15/03/2030 20:47:15'),
+    ('end_date', '15/03/2099 20:47:15'),
+    ('frequency', '160'),
     ('script_type', 'napalm_getters')
 ])
 
-getters_recurrent = ImmutableMultiDict([
-    ('name', 'getters_recurrent'),
+getters_dict2 = ImmutableMultiDict([
+    ('name', 'getters_dict2'),
     ('getters', 'get_network_instances'),
     ('getters', 'get_ntp_peers'),
     ('getters', 'get_bgp_config'),
     ('getters', 'get_bgp_neighbors'),
-    ('scheduled_date', '15/03/2020 20:47:15'),
+    ('start_date', '15/03/2030 20:47:15'),
+    ('end_date', '15/03/2099 20:47:15'),
     ('frequency', '160'),
     ('script_type', 'napalm_getters')
 ])
@@ -36,14 +41,14 @@ def test_napalm_getters_task(user_client):
     create_from_file(user_client, 'europe.xls')
     with user_client.session_transaction() as sess:
         sess['selection'] = ['1', '21', '22']
-    user_client.post('views/geographical_view', data=getters_once_dict)
+    user_client.post('views/geographical_view', data=getters_dict1)
     assert len(NapalmGettersTask.query.all()) == 1
     with user_client.session_transaction() as sess:
         sess['selection'] = ['13', '15', '17']
-    user_client.post('views/geographical_view', data=getters_recurrent)
+    user_client.post('views/geographical_view', data=getters_dict2)
     assert len(NapalmGettersTask.query.all()) == 2
     assert len(Task.query.all()) == 2
-    for task in ('getters_once', 'getters_recurrent'):
+    for task in ('getters_dict1', 'getters_dict2'):
         getter_task = ImmutableMultiDict([('task_name', task)])
         user_client.post('tasks/delete_task', data=getter_task)
 
@@ -63,9 +68,9 @@ netmiko_task = ImmutableMultiDict([
     ('type', 'show_commands'),
     ('driver', 'cisco_ios_ssh'),
     ('global_delay_factor', '1.0'),
-    ('start_date', ''),
-    ('end_date', ''),
-    ('frequency', ''),
+    ('frequency', '160'),
+    ('start_date', '15/03/2030 20:47:15'),
+    ('end_date', '15/03/2099 20:47:15'),
     ('script_type', 'netmiko_configuration')
 ])
 
@@ -77,3 +82,18 @@ def test_configuration_tasks(user_client):
     with user_client.session_transaction() as sess:
         sess['selection'] = ['1', '21', '22']
     user_client.post('views/geographical_view', data=netmiko_task)
+
+## Google Earth export
+
+google_earth_dict = ImmutableMultiDict([
+    ('name', 'test_google_earth'),
+    ('label_size', '1'),
+    ('line_width', '2'),
+    ('netmiko_script', '')
+])
+
+@check_blueprints('/views')
+def test_google_earth(user_client):
+    create_from_file(user_client, 'europe.xls')
+    user_client.post('/views/google_earth_export', data=google_earth_dict)
+    remove(join(path_ge, 'test_google_earth.kmz'))

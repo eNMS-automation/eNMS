@@ -1,7 +1,12 @@
 from base.database import db
-from conftest import path_scripts
+from conftest import path_scripts, path_playbooks
 from os.path import join
-from scripts.models import ConfigScript, FileTransferScript, Script
+from scripts.models import (
+    AnsibleScript,
+    ConfigScript,
+    FileTransferScript,
+    Script
+)
 from test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -9,7 +14,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 # test the creation of file transfer script (netmiko via SCP)
 # test the creation of ansible script
 
-## Standard scripts
+## Standard scripts (configuration, file transfer)
 
 simple_script = ImmutableMultiDict([
     ('name', 'ping'),
@@ -69,8 +74,9 @@ file_transfer_script = {
     'create_script': '',
 }
 
+
 @check_blueprints('/scripts')
-def test_scripts(user_client):
+def test_base_scripts(user_client):
     ## configuration script (simple, Jinja2)
     user_client.post('/scripts/configuration_script', data=simple_script)
     assert len(ConfigScript.query.all()) == 1
@@ -87,3 +93,39 @@ def test_scripts(user_client):
     user_client.post('scripts/file_transfer_script', data=file_transfer_script)
     assert len(FileTransferScript.query.all()) == 1
     assert len(Script.query.all()) == 3
+
+
+## Ansible script
+
+ansible_script = {
+    'name': 'ansible_test',
+    'listtags': 'False',
+    'listtasks': 'False',
+    'listhosts': 'False',
+    'syntax': 'False',
+    'connection': 'ssh',
+    'module_path': '',
+    'forks': '100',
+    'remote_user': '',
+    'private_key_file': '',
+    'ssh_common_args': '',
+    'ssh_extra_args': '',
+    'sftp_extra_args': '',
+    'scp_extra_args': '',
+    'become': 'False',
+    'become_method': '',
+    'become_user': '',
+    'verbosity': '',
+    'check': 'False',
+    'diff': 'False'
+}
+
+
+@check_blueprints('/scripts')
+def test_ansible_scripts(user_client):
+    path_yaml = join(path_playbooks, 'save_running_config.yml')
+    with open(path_yaml, 'rb') as f:
+        ansible_script['file'] = f
+        user_client.post('/scripts/ansible_script', data=ansible_script)
+    assert len(AnsibleScript.query.all()) == 1
+    assert len(Script.query.all()) == 1

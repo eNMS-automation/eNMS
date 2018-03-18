@@ -71,6 +71,7 @@ def file_transfer_script():
 @blueprint.route('/ansible_script', methods=['GET', 'POST'])
 @login_required
 def ansible_script():
+    print('ttt'*100, request.form)
     form = AnsibleScriptForm(request.form)
     if request.method == 'POST':
         filename = secure_filename(request.files['file'].filename)

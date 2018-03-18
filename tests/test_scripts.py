@@ -1,11 +1,12 @@
 from base.database import db
 from conftest import path_scripts
 from os.path import join
-from scripts.models import ConfigScript, Script
+from scripts.models import ConfigScript, FileTransferScript, Script
 from test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
-# test the creation of standard script (netmiko / napalm)
+# test the creation of configuration script (netmiko / napalm)
+# test the creation of file transfer script (netmiko via SCP)
 # test the creation of ansible script
 
 ## Standard scripts
@@ -58,9 +59,19 @@ jinja2_script = dict([
     ('text', template)
 ])
 
+file_transfer_script = {
+    'name': 'test',
+    'driver': 'cisco_ios',
+    'source_file': 'path/to/source',
+    'destination_file': 'path/to/destination',
+    'file_system': 'flash:',
+    'direction': 'put',
+    'create_script': '',
+}
 
 @check_blueprints('/scripts')
-def test_simple_script(user_client):
+def test_scripts(user_client):
+    ## configuration script (simple, Jinja2)
     user_client.post('/scripts/configuration_script', data=simple_script)
     assert len(ConfigScript.query.all()) == 1
     path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
@@ -72,3 +83,7 @@ def test_simple_script(user_client):
     # simply removing the space does not work as yaml relies on dict, which
     # are not ordered, we use set instead for the test to pass on python 2 and 3
     assert set(j2_script.content.split('\n')) == set(result.split('\n'))
+    ## file transfer script
+    user_client.post('scripts/file_transfer_script', data=file_transfer_script)
+    assert len(FileTransferScript.query.all()) == 1
+    assert len(Script.query.all()) == 3

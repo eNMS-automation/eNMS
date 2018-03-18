@@ -43,6 +43,7 @@ class FileTransferScriptForm(FlaskForm):
         ('cisco_ios', 'Cisco IOS'),
         ('cisco_xe', 'Cisco IOS-XE'),
         ('cisco_xr', 'Cisco IOS-XR'),
+        ('cisco_nxos', 'Cisco NX-OS'),
         ('juniper_junos', 'Juniper'),
         ('arista_eos', 'Arista')
     )

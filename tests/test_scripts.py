@@ -64,15 +64,15 @@ jinja2_script = dict([
     ('text', template)
 ])
 
-file_transfer_script = {
-    'name': 'test',
-    'driver': 'cisco_ios',
-    'source_file': 'path/to/source',
-    'destination_file': 'path/to/destination',
-    'file_system': 'flash:',
-    'direction': 'put',
-    'create_script': '',
-}
+file_transfer_script = ImmutableMultiDict([
+    ('name', 'test'),
+    ('driver', 'cisco_ios'),
+    ('source_file', 'path/to/source'),
+    ('destination_file', 'path/to/destination'),
+    ('file_system', 'flash:'),
+    ('direction', 'put'),
+    ('create_script', ''),
+])
 
 
 @check_blueprints('/scripts')

@@ -131,4 +131,4 @@ def test_ansible_scripts(user_client):
     assert len(AnsibleScript.query.all()) == 1
     assert len(Script.query.all()) == 1
     # the playbook is saved in /projects, we delete it at the end of the test
-    remove(join(path_projects, 'save_running_config.yml'))
+    # remove(join(path_projects, 'save_running_config.yml'))

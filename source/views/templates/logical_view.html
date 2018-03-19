@@ -77,12 +77,25 @@
                 $(`#${modal_name}`).modal('show');
                 }
 
+              function ConnectToDevice(d) {
+                  $.ajax({
+                    type: "POST",
+                    url: "/views/putty_connection",
+                    dataType: "json",
+                    data: { id: d.id },
+                    success: function(msg){
+                        $('.answer').html(msg);
+                    }
+                  });
+                }
+
               var graph = {  
                 "nodes":[
                   {% for obj, properties in node_table.items() %}  
                     {  
                       "x": {{ obj.id }},
                       "y": {{ obj.id }},
+                      "id": {{ obj.id }},
                       "name": "{{ obj.name }}",
                       "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + obj.subtype + '.gif') }}",
                       "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + obj.subtype + '.gif') }}"
@@ -103,7 +116,6 @@
               
               // selection function
               function selectNode(d) {
-                console.log(d)
                 // we stop the propagation up the DOM tree so that the 
                 // unselectAll event bound to the canvas is not triggered
                 d3.event.stopPropagation();
@@ -159,7 +171,6 @@
                 d3.selectAll('.node')  //here's how you get all the nodes
                   .each(function(d) {
                     if (start[0] <= d.x && d.x <= end[0] && start[1] <= d.y && d.y <= end[1]) {
-                      console.log(this, d);
                       selected_nodes.push([this, d]);
                       d3.select(this)
                         .select('image')
@@ -229,7 +240,8 @@
                 .enter().append("g")
                 .attr("class", "node")
                 .call(force.drag)
-                .on("click", selectNode);
+                .on("click", selectNode)
+                .on("dblclick", ConnectToDevice);
 
               node.append("image")
                 .attr("xlink:href", function(d) { return d.img; })
@@ -237,7 +249,7 @@
                 .attr("y", -8)
                 .attr("width", 16)
                 .attr("height", 16)
-                
+
                 /*
                 .on("click", function(d) {		
                   div.transition()		

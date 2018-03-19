@@ -267,42 +267,18 @@
                 {% for obj, properties in link_table.items() %}  
                   var polygon = WE.polygon(
                   [
-                    [
-                    {{ obj['source']['latitude'] }}, 
-                    {{ obj['source']['longitude'] }}
-                    ],
-                    [
-                    {{ obj['destination']['latitude'] }}, 
-                    {{ obj['destination']['longitude'] }}
-                    ],
-                    [
-                    {{ obj['source']['latitude'] }}, 
-                    {{ obj['source']['longitude'] }}
-                    ]
-                  ], {
-                  color: '{{ obj.color }}',
-                  opacity: 20
-                  }
+                    [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
+                    [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
+                    [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}]
+                  ], {color: '{{ obj.color }}', opacity: 20}
                   ).addTo(earth);
                   
                   var polygon = WE.polygon(
                   [
-                    [
-                    {{ obj['destination']['latitude'] }}, 
-                    {{ obj['destination']['longitude'] }}
-                    ],
-                    [
-                    {{ obj['source']['latitude'] }}, 
-                    {{ obj['source']['longitude'] }}
-                    ],
-                    [
-                    {{ obj['destination']['latitude'] }}, 
-                    {{ obj['destination']['longitude'] }}
-                    ]
-                  ], {
-                  color: '{{ obj.color }}',
-                  opacity: 20
-                  }
+                    [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
+                    [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
+                    [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}]
+                  ], {color: '{{ obj.color }}', opacity: 20}
                   ).addTo(earth);
 
                 {% endfor %}

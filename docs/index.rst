@@ -30,12 +30,6 @@ Administrating MoinMoin
    :maxdepth: 2
 
    admin/serve
-   admin/configure
-   admin/changes
-   admin/upgrade
-   admin/backup
-   admin/index
-   admin/password-reset
 
 Indices and Tables
 ==================

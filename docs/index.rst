@@ -22,9 +22,6 @@ Using MoinMoin
 
    user/accounts
    user/markups
-   user/search
-   user/namespaces
-   user/subscriptions
 
 Administrating MoinMoin
 =======================
@@ -32,8 +29,6 @@ Administrating MoinMoin
 .. toctree::
    :maxdepth: 2
 
-   admin/requirements
-   admin/install
    admin/serve
    admin/configure
    admin/changes

@@ -50,7 +50,7 @@
 
 [TACACS+](https://github.com/ansible/tacacs_plus/ "TACACS+"): A TACACS+ client that supports authentication, authorization and accounting.
 
-[Vis](http://visjs.org/ "Vis"): JavaScript visualization library to display dynamic, automatically organised network views.
+[D3](https://d3js.org "D3"): JavaScript library for manipulating documents based on data.
 
 [WebGL Earth](http://www.webglearth.org "WebGL Earth"): 3D digital globe for web and mobile devices.
 

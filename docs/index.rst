@@ -1,20 +1,13 @@
-.. warning::
-
-   This documentation **only** applies to **MoinMoin version 2** (aka moin2,
-   moin 2.0, mm2, MoinMoin2, etc.), except where explicitly noted otherwise.
-   Moin2 is very different from moin 1.x, so docs from one version will not
-   apply to the other.
-
-Introducing MoinMoin
+Introducing eNMS
 ====================
 
 .. toctree::
    :maxdepth: 2
 
-   intro/general
-   intro/license
+   base/general
+   
 
-Using MoinMoin
+Using eNMS
 ==============
 
 .. toctree::
@@ -23,7 +16,7 @@ Using MoinMoin
    user/accounts
    user/markups
 
-Administrating MoinMoin
+Administrating eNMS
 =======================
 
 .. toctree::
@@ -31,10 +24,16 @@ Administrating MoinMoin
 
    admin/serve
 
+License
+=======================
+
+.. toctree::
+   :maxdepth: 2
+
+   base/license
+
 Indices and Tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 * :ref:`glossary`

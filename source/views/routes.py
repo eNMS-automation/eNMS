@@ -194,5 +194,5 @@ def putty_connection():
 @blueprint.route('/selection', methods=['POST'])
 @login_required
 def selection():
-    session['selection'] = request.form.getlist('selection[]')
+    session['selection'] = list(set(request.form.getlist('selection[]')))
     return dumps({'success': True}), 200, {'ContentType': 'application/json'}

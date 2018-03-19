@@ -20,7 +20,12 @@
   }
   
   .node text {
-    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     font: 10px sans-serif;
   }
 
@@ -194,7 +199,6 @@
                 selection.attr("visibility", "hidden");
                 // select all nodes in the rectangle
                 d3.selectAll('.node')  //here's how you get all the nodes
-
                   .each(function(d) {                    
                     if (min_x <= d.x && d.x <= max_x && min_y <= d.y && d.y <= max_y) {
                       selected_nodes.push([this, d]);

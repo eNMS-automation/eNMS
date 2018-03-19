@@ -157,11 +157,16 @@
 
               var width = 960,
                   height = 500
-
+              /*
+              var zoom = d3.behavior.zoom()
+                .scaleExtent([1, 50])
+                .on("zoom", zoomed);
+              */
               var svg = d3.select("#logical_view").append("svg")
                 .attr("width", width)
                 .attr("height", height)
-                .on("contextmenu", unselectAll);
+                .on("contextmenu", unselectAll)
+                //.call(zoom)
               
               function rect(x, y, w, h) {
                 return "M"+[x,y]+" l"+[w,0]+" l"+[0,h]+" l"+[-w,0]+"z";
@@ -181,11 +186,17 @@
               };
               
               var endSelection = function(start, end) {
+                  var min_x = Math.min(start[0], end[0]);
+                      max_x = Math.max(start[0], end[0]);
+                      min_y = Math.min(start[1], end[1]);
+                      max_y = Math.max(start[1], end[1]);
+                  console.log(start, end, min_x, max_x, min_y, max_y);
                 selection.attr("visibility", "hidden");
                 // select all nodes in the rectangle
                 d3.selectAll('.node')  //here's how you get all the nodes
-                  .each(function(d) {
-                    if (start[0] <= d.x && d.x <= end[0] && start[1] <= d.y && d.y <= end[1]) {
+
+                  .each(function(d) {                    
+                    if (min_x <= d.x && d.x <= max_x && min_y <= d.y && d.y <= max_y) {
                       selected_nodes.push([this, d]);
                       d3.select(this)
                         .select('image')
@@ -196,6 +207,11 @@
               };
               
               svg.on("mousedown", function() {
+                // same binding as leaflet: shift + left-click button for selection
+                if (!d3.event.shiftKey || ((d3.event.which !== 1) && (d3.event.button !== 1))) {
+                  return false;
+                }
+                
                 var subject = d3.select(window);
                     parent = this.parentNode;
                     start = d3.mouse(parent);
@@ -236,8 +252,8 @@
               });
 
               var force = d3.layout.force()
-                .gravity(0.05)
-                .distance(100)
+                .gravity(0.2)
+                .distance(10)
                 .charge(-100)
                 .size([width, height]);
 
@@ -245,21 +261,28 @@
                 .nodes(graph.nodes)
                 .links(graph.links)
                 .start();
+              
+              var container = svg.append("g");
             
-              var link = svg.selectAll(".link")
+              var link = container.selectAll(".link")
                 .data(graph.links)
                 .enter().append("line")
                 .attr("class", "link");
             
-              var node = svg.selectAll(".node")
+              var node = container.selectAll(".node")
                 .data(graph.nodes)
                 .enter().append("g")
                 .attr("class", "node")
                 .call(force.drag)
                 .on("click", selectNode)
                 .on("dblclick", connectToDevice);
-
-              node.append("image")
+              
+              /*
+              function zoomed() {
+                container.attr("transform", "scale(" + d3.event.scale + ")");
+              }
+              */
+              var images = node.append("image")
                 .attr("xlink:href", function(d) { return d.img; })
                 .attr("x", -8)
                 .attr("y", -8)
@@ -288,7 +311,8 @@
                 .text(function(d) { return d.name });
 
               force.on("tick", function() {
-                link.attr("x1", function(d) { return d.source.x; })
+                link
+                  .attr("x1", function(d) { return d.source.x; })
                   .attr("y1", function(d) { return d.source.y; })
                   .attr("x2", function(d) { return d.target.x; })
                   .attr("y2", function(d) { return d.target.y; });

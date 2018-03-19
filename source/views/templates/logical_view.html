@@ -99,24 +99,29 @@
                 ]
               };
               
-              var selection = [];
+              var selected_nodes = [];
               
               // selection function
               function selectNode(d) {
+                console.log(d)
                 // we stop the propagation up the DOM tree so that the 
                 // unselectAll event bound to the canvas is not triggered
                 d3.event.stopPropagation();
-                // add both the HTML and graph elements in the selection array
-                selection.push([this, d]);
-                d3.select(this).attr("xlink:href", d.selected_img);
+                // add both the HTML and graph elements in the selected_nodes array
+                selected_nodes.push([this, d]);
+                d3.select(this)
+                  .select('image')
+                  .attr("xlink:href", d.selected_img);
               };
               
               function unselectAll() {
                 d3.event.preventDefault();
-                for (i = 0; i < selection.length; i++) {
-                  d3.select(selection[i][0]).attr("xlink:href", selection[i][1].img);
+                for (i = 0; i < selected_nodes.length; i++) {
+                  d3.select(selected_nodes[i][0])
+                    .select('image')
+                    .attr("xlink:href", selected_nodes[i][1].img);
                 }
-                selection = [];
+                selected_nodes = [];
               };
               
               // tooltip div
@@ -124,7 +129,7 @@
                 .attr("class", "tooltip")				
 
               var width = 960,
-                height = 500
+                  height = 500
 
               var svg = d3.select("#logical_view").append("svg")
                 .attr("width", width)
@@ -150,6 +155,17 @@
               
               var endSelection = function(start, end) {
                 selection.attr("visibility", "hidden");
+                // select all nodes in the rectangle
+                d3.selectAll('.node')  //here's how you get all the nodes
+                  .each(function(d) {
+                    if (start[0] <= d.x && d.x <= end[0] && start[1] <= d.y && d.y <= end[1]) {
+                      console.log(this, d);
+                      selected_nodes.push([this, d]);
+                      d3.select(this)
+                        .select('image')
+                        .attr("xlink:href", d.selected_img);
+                    }
+                  });
               };
               
               svg.on("mousedown", function() {
@@ -212,7 +228,8 @@
                 .data(graph.nodes)
                 .enter().append("g")
                 .attr("class", "node")
-                .call(force.drag);
+                .call(force.drag)
+                .on("click", selectNode);
 
               node.append("image")
                 .attr("xlink:href", function(d) { return d.img; })
@@ -220,7 +237,7 @@
                 .attr("y", -8)
                 .attr("width", 16)
                 .attr("height", 16)
-                .on("click", selectNode);
+                
                 /*
                 .on("click", function(d) {		
                   div.transition()		

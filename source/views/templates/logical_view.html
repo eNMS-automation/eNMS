@@ -10,6 +10,15 @@
     stroke: #ccc;
   }
   
+  .selection {
+    fill: #ADD8E6;
+    stroke: #ADD8E6;
+    fill-opacity: 0.3;
+    stroke-opacity: 0.7;
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+  }
+  
   .node text {
     pointer-events: none;
     font: 10px sans-serif;
@@ -27,6 +36,7 @@
       border-radius: 8px;			
       pointer-events: none;			
   }
+  
   </style>
 {% endblock stylesheets %}
 
@@ -120,6 +130,67 @@
                 .attr("width", width)
                 .attr("height", height)
                 .on("contextmenu", unselectAll);
+              
+              function rect(x, y, w, h) {
+                return "M"+[x,y]+" l"+[w,0]+" l"+[0,h]+" l"+[-w,0]+"z";
+              }
+              
+              var selection = svg.append("path")
+                .attr("class", "selection")
+                .attr("visibility", "hidden");
+              
+              var startSelection = function(start) {
+                selection.attr("d", rect(start[0], start[0], 0, 0))
+                  .attr("visibility", "visible");
+              };
+              
+              var moveSelection = function(start, moved) {
+                selection.attr("d", rect(start[0], start[1], moved[0] - start[0], moved[1] - start[1]));
+              };
+              
+              var endSelection = function(start, end) {
+                selection.attr("visibility", "hidden");
+              };
+              
+              svg.on("mousedown", function() {
+                var subject = d3.select(window);
+                    parent = this.parentNode;
+                    start = d3.mouse(parent);
+                startSelection(start);
+                subject
+                  .on("mousemove.selection", function() {
+                    moveSelection(start, d3.mouse(parent));
+                  })
+                  .on("mouseup.selection", function() {
+                    endSelection(start, d3.mouse(parent));
+                    subject
+                      .on("mousemove.selection", null)
+                      .on("mouseup.selection", null);
+                  });
+              });
+              
+              svg.on("touchstart", function() {
+                var subject = d3.select(this);
+                    parent = this.parentNode;
+                    id = d3.event.changedTouches[0].identifier;
+                    start = d3.touch(parent, id)
+                    pos;
+                  startSelection(start);
+                  subject
+                    .on("touchmove."+id, function() {
+                      if (pos = d3.touch(parent, id)) {
+                        moveSelection(start, pos);
+                      }
+                    })
+                    .on("touchend."+id, function() {
+                      if (pos = d3.touch(parent, id)) {
+                        endSelection(start, pos);
+                        subject
+                          .on("touchmove."+id, null)
+                          .on("touchend."+id, null);
+                      }
+                    });
+              });
 
               var force = d3.layout.force()
                 .gravity(0.05)

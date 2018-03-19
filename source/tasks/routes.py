@@ -6,7 +6,7 @@ from flask_login import login_required
 from .forms import CompareForm
 from .models import Task
 from objects.models import get_obj
-from re import sub
+from re import search, sub
 
 blueprint = Blueprint(
     'tasks_blueprint',
@@ -55,11 +55,9 @@ def task_management():
 @blueprint.route('/delete_task', methods=['POST'])
 @login_required
 def delete_task():
-    # link = db.session.query(Object).filter_by(name=link).first()
     task = Task.query.filter_by(name=request.form['task_name']).first()
     task.delete_task()
     db.session.delete(task)
-    # Task.query.filter_by(name=request.form['task_name']).delete()
     db.session.commit()
     return task_management()
 
@@ -83,13 +81,18 @@ def resume_task():
 @blueprint.route('/calendar')
 @login_required
 def calendar():
-    tasks = {
-        task: sub(
-            r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*", r"\1, \2, \3, \4, \5",
+    tasks = {}
+    for task in Task.query.all():
+        # javascript dates range from 0 to 11, we must account for that by
+        # substracting 1 to the month for the date to be properly displayed in
+        # the calendar
+        python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
+        month = '{:02}'.format((int(python_month) - 1) % 12)
+        tasks[task] = sub(
+            r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
+            r"\1, " + month + r", \3, \4, \5",
             task.start_date
         )
-        for task in Task.query.all()
-    }
     return render_template(
         'calendar.html',
         tasks=tasks

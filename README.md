@@ -146,47 +146,34 @@ It is possible to configure a TACACS+ server in eNMS: upon authentication, a req
 
 # Getting started
 
-The following modules are used in eNMS:
-```
-flask (web framework)
-flask_migrate (database migration)
-flask_wtf (forms)
-flask_sqlalchemy (database)
-flask_login (login system)
-jinja2, pyyaml (used for sending complex template-based scripts)
-netmiko, NAPALM (used for network automation)
-passlib (used for hashing passwords)
-simplekml (used for exporting project to Google Earth)
-tacacs_plus (used for enabling TACACS+ authentication)
-xlrd (used for creating objects from an Excel file)
-```
+### (Optional) Set up a [virtual environment](https://docs.python.org/3/library/venv.html) 
 
-In order to use eNMS, you need to:
-    
-- (optional) set up a virtual environment.
-[Python official doc on virtual environments](https://docs.python.org/3/library/venv.html) 
-    
-- clone eNMS (or download as a zip archive from github)
-```
-git clone https://github.com/afourmy/eNMS.git
-```
-    
-- install the requirements
-```
-cd eNMS
-pip install -r requirements.txt
-```
+### 1. Get the code
+    git clone https://github.com/afourmy/eNMS.git
+    cd eNMS
 
-- run **/source/flask_app.py**.
-```
-cd source
-python flask_app.py
-```
+### 2. Install requirements 
+    pip install -r requirements.txt
 
-- go the http://127.0.0.1:5100/.
+### 3. Run the code
+    cd source
+    python flask_app.py
 
-- create an account and log in.
+### 4. Go the http://127.0.0.1:5100/
+
+### 5. Create an account and log in
+
+# Run eNMS in a docker container
+
+### 1. Fetch the image on dockerhub
+    docker pull afourmy/enms
+
+### 2. Find the name of the docker image
+    docker images
+
+### 3. Run the image on port 5100
+    docker run -p 5100:5100 image_name
 
 # Contact
 
-For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack") (channel #enms, @minto)
+For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack") (channel #enms)

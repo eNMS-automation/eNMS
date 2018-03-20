@@ -12,7 +12,6 @@ Using eNMS
 .. toctree::
    :maxdepth: 2
 
-   user/accounts
    user/markups
 
 Administrating eNMS

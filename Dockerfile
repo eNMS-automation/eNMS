@@ -8,6 +8,6 @@ COPY gunicorn_config.py .
 
 COPY source /app
 
-EXPOSE 5000
+EXPOSE 5100
 
 CMD ["gunicorn", "--chdir", "app", "--config", "./gunicorn_config.py", "flask_app:app"]

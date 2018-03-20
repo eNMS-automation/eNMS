@@ -5,6 +5,7 @@ Introducing eNMS
    :maxdepth: 2
 
    base/general
+   base/installation
 
 Using eNMS
 ==============

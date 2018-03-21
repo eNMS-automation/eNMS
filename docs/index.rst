@@ -33,16 +33,8 @@ Automation
    automation/script_scheduling
    automation/tasks
 
-Using eNMS
-==============
-
-.. toctree::
-   :maxdepth: 2
-
-   user/markups
-
 License
-=======================
+=======
 
 .. toctree::
    :maxdepth: 2

@@ -17,6 +17,24 @@ by the Docutils parser are not included here.
 
 See the the Docutils Restructured Text documentation for more information.
 
+Using the built-in server for production
+----------------------------------------
+
+.. caution:: Using the built-in server for public wikis is not recommended. Should you
+ wish to do so, turn off the werkzeug debugger and auto reloader by passing the
+ -d and -r flags. The wikiconfig.py settings of `DEBUG = False` and `TESTING = False` are
+ ignored by the built-in server. You must use the -d and -r flags.
+ See Werkzeug docs for more information.::
+
+ ./m run --host 0.0.0.0 --port 80 -d -r
+
+
+External Web Server (advanced)
+==============================
+
+.. tip:: Check contents of /contrib/wsgi/ for sample wsgi files for your server.
+
+
 Headings
 ========
 

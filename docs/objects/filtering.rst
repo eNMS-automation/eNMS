@@ -73,4 +73,35 @@ This result in the following view:
 .. image:: /_static/objects/filtering/network_filter1.png
    :alt: test
    :align: center    
-    
+
+Filter all nodes outside of France or Spain
+*******************************************
+
+The second filter will aim at excluding all nodes that are located outside of France or spain:
+
+.. image:: /_static/objects/filtering/filter_location.png
+   :alt: test
+   :align: center
+
+This result in the following view:
+
+.. image:: /_static/objects/filtering/network_filter2.png
+   :alt: test
+   :align: center    
+
+Restrict to nodes with IOS-XE or IOS-XR
+***************************************
+
+Finally, out of the remaining nodes, we exclude all nodes which operating system is not IOS-XE or IOS-XR:
+
+.. image:: /_static/objects/filtering/filter_os.png
+   :alt: test
+   :align: center
+
+This result in the following view:
+
+.. image:: /_static/objects/filtering/network_filter3.png
+   :alt: test
+   :align: center 
+
+.. note:: Using the filtering system is important because network automation in eNMS is done graphically, by selecting nodes in the graphical view. See the :guilabel:`automation` documentation for more information.

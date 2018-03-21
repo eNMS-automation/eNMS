@@ -15,6 +15,25 @@ Objects
 
    objects/index
 
+View 
+====
+
+.. toctree::
+   :maxdepth: 2
+
+   view/geographical_view
+   view/logical_view
+
+Automation 
+==========
+
+.. toctree::
+   :maxdepth: 2
+
+   automation/scripts_creation
+   automation/script_scheduling
+   automation/tasks
+
 Using eNMS
 ==============
 

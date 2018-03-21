@@ -11,7 +11,6 @@ It encompasses the following aspects of network automation:
 * **Ansible support**: sending and managing ansible playbooks.
 * **Scheduling**: any task can be scheduled to run at a specific time, periodically or not.
 
-
 Design philosophy
 -----------------
 

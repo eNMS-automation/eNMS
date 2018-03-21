@@ -15,14 +15,6 @@ Using eNMS
 
    user/markups
 
-Administrating eNMS
-=======================
-
-.. toctree::
-   :maxdepth: 2
-
-   admin/serve
-
 License
 =======================
 

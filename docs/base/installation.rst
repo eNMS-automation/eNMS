@@ -48,3 +48,6 @@ Start eNMS as a docker container (even better)
 
  # run the image on port 5100
  docker run -p 5100:5100 image_name
+
+Once eNMS is running, go to http://127.0.0.1:5100
+-------------------------------------------------

@@ -15,14 +15,13 @@ Objects
 
    objects/index
 
-View 
-====
+Views
+=====
 
 .. toctree::
    :maxdepth: 2
 
-   view/geographical_view
-   view/logical_view
+   views/index
 
 Automation 
 ==========

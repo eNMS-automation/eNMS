@@ -29,9 +29,7 @@ Automation
 .. toctree::
    :maxdepth: 2
 
-   automation/scripts_creation
-   automation/script_scheduling
-   automation/tasks
+   automation/index
 
 License
 =======

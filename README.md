@@ -3,12 +3,24 @@
 
 # Introduction
 
-eNMS is a network visualization, inventory and automation web platform. Please note that it is still in beta version and the master branch is undergoing major changes, which are not yet reflected in the readme.
+eNMS is an open source web application designed to help automate networks.
+
+It encompasses the following aspects of network automation:
+- **Configuration management**: commit/rollback of a configuration via NAPALM.
+- **Netmiko scripting**: using netmiko to push a configuration, or display the result of a set of commands.
+- **Ansible support**: sending and managing ansible playbooks.
+- **Scheduling**: any task can be scheduled to run at a specific time, periodically or not.
+
+While network automation traditionally requires scripting skills, eNMS provides a way to automate networks graphically, in a few simple steps: 
+- **Creation** of the network (e.g by importing a spreadsheet describing the network topology)
+- **Visualization** of the network on a world map, or via a force-based algorithm.
+- **Selection** of the target devices, on the graphical view.
+- **Scheduling** of the script.
+
+Please note that it is still in beta version and the master branch is undergoing major changes, which are not yet reflected in the readme. _[Read the docs for more up-to-date information](http://enms.readthedocs.io/en/latest/base/general.html)_
 Join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel #enms for the latest updates !
 
 **You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !**
-
-_[Read the docs for more information](http://enms.readthedocs.io/en/latest/base/general.html)_
 
 ![eNMS](readme/eNMS.png)
 

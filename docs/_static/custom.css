@@ -1,0 +1,44 @@
+/* Custom CSS for Sphinx */
+
+/* Import the sphinx_rtd_theme's CSS file */
+@import "css/theme.css";
+
+.bolditalic {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.sub {
+    vertical-align: sub;
+    font-size: 50%;
+}
+
+.sup {
+    vertical-align: super;
+    font-size: 50%;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.smaller {
+    font-size: .8em;
+}
+
+.larger {
+    font-size: 1.2em;
+}
+
+/* We need borders around each cell to clearly demonstrate table boundaries
+ * in markup documentation */
+table.docutils th,
+table.docutils td {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E1E4E5;
+}

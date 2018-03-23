@@ -8,6 +8,8 @@ Join us on the [Network to Code slack](http://networktocode.herokuapp.com "Netwo
 
 **You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !**
 
+_[Read the docs for more information](http://enms.readthedocs.io/en/latest/base/general.html)_
+
 ![eNMS](readme/eNMS.png)
 
 # Features

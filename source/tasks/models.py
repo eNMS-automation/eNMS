@@ -79,7 +79,7 @@ def netmiko_config_job(name, type, script_name, username, password, ips, driver,
     script = db.session.query(ConfigScript)\
         .filter_by(name=script_name)\
         .first()
-    pool = ThreadPool(processes=100)
+    pool = ThreadPool(processes=10)
     results = {}
     kwargs = [({
         'ip': ip_address,
@@ -94,6 +94,8 @@ def netmiko_config_job(name, type, script_name, username, password, ips, driver,
         'type': type
     }) for device_name, ip_address, _, secret in ips]
     pool.map(netmiko_process, kwargs)
+    pool.close()
+    pool.join()
     task.logs[job_time] = results
     db.session.commit()
 
@@ -107,7 +109,7 @@ def netmiko_file_transfer_job(name, type, script_name, username, password, ips,
     script = db.session.query(ConfigScript)\
         .filter_by(name=script_name)\
         .first()
-    pool = ThreadPool(processes=100)
+    pool = ThreadPool(processes=10)
     results = {}
     kwargs = [({
         'ip': ip_address,
@@ -125,6 +127,8 @@ def netmiko_file_transfer_job(name, type, script_name, username, password, ips,
         'type': type
     }) for device_name, ip_address, _, secret in ips]
     pool.map(netmiko_process, kwargs)
+    pool.close()
+    pool.join()
     task.logs[job_time] = results
     db.session.commit()
 
@@ -161,7 +165,7 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
     script = db.session.query(ConfigScript)\
         .filter_by(name=script_name)\
         .first()
-    pool = ThreadPool(processes=100)
+    pool = ThreadPool(processes=10)
     results = {}
     kwargs = [({
         'action': action,
@@ -175,6 +179,8 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
         'results': results
     }) for device_name, ip_address, driver, secret in nodes_info]
     pool.map(napalm_config_process, kwargs)
+    pool.close()
+    pool.join()
     task.logs[job_time] = results
     db.session.commit()
 
@@ -205,7 +211,7 @@ def napalm_getters_job(name, getters, username, password, nodes_info):
     task = db.session.query(Task)\
         .filter_by(name=name)\
         .first()
-    pool = ThreadPool(processes=100)
+    pool = ThreadPool(processes=10)
     results = {}
     kwargs = [({
         'ip_address': ip_address,
@@ -218,6 +224,8 @@ def napalm_getters_job(name, getters, username, password, nodes_info):
         'results': results
     }) for device_name, ip_address, driver, secret in nodes_info]
     pool.map(napalm_getters_process, kwargs)
+    pool.close()
+    pool.join()
     task.logs[job_time] = results
     db.session.commit()
 

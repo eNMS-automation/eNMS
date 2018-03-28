@@ -17,7 +17,7 @@
       <div class="col-md-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <div id="mynetwork"></div>
+            <div id="network" style="height:600px; width:100%;></div>
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
@@ -32,13 +32,13 @@
     <!-- end row -->
   </div>
   <script>
-    var container = document.getElementById('mynetwork');
+    var container = document.getElementById('network');
     var dsoptions = {
       manipulation: {
         enabled: false,
         addNode: function (data, callback) {
           // filling in the popup DOM elements
-          console.log('add', data);
+          console.log(data);
         },
         editNode: function (data, callback) {
           // filling in the popup DOM elements
@@ -60,50 +60,47 @@
         }
     }};
 
-    var o_nodes = [{
+    var o_nodes = [
+      {
         id: 1,
-        label: 'Node 1'
-    }, {
+        label: 'Start'
+      },
+      {
         id: 2,
-        label: 'Node 2'
-    }, {
-        id: 3,
-        label: 'Node 3'
-    }, {
-        id: 4,
-        label: 'Node 4'
-    }, {
-        id: 5,
-        label: 'Node 5'
-    }];
+        label: 'End'
+      }
+    ];
 
     var nodes = new vis.DataSet(o_nodes);
 
     // create an array with edges
     var edges = [{
         from: 1,
-        to: 2
-    }, {
-        from: 1,
-        to: 3
-    }, {
-        from: 2,
-        to: 4
-    }, {
-        from: 2,
-        to: 5
-    }];
+        to: 2,
+        arrows:{
+          to: {
+            enabled: true,
+          }
+        }
+      }];
 
     // Create a DataSet with data (enables two way data binding)
     var data = {
-        nodes: nodes,
-        edges: edges
+      nodes: nodes,
+      edges: edges
     };
     var options = {};
     var network = new vis.Network(container, data, dsoptions);
     
     // here you init the addEdge mode
       network.addEdgeMode();
+      
+    network.on('click', function() {
+      nodes.add({
+        label: 'Node 65'
+      })
+      network.addEdgeMode();
+    });
     </script>
 {% endblock content %}
 

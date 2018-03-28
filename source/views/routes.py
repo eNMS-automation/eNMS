@@ -16,7 +16,13 @@ from json import dumps
 from objects.models import get_obj, Node, node_subtypes, Link, link_class
 from objects.properties import type_to_public_properties
 from os.path import join
-from scripts.models import AnsibleScript, ConfigScript
+from scripts.models import (
+    AnsibleScript,
+    FileTransferScript,
+    NapalmConfigScript,
+    NapalmGettersScript,
+    NetmikoConfigScript
+)
 from simplekml import Color, Kml, Style
 from subprocess import Popen
 from tasks.models import (

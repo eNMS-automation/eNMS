@@ -6,7 +6,14 @@ from flask_login import login_required
 from .forms import AnsibleScriptForm, ConfigScriptForm, FileTransferScriptForm
 from jinja2 import Template
 from yaml import load
-from .models import AnsibleScript, ConfigScript, FileTransferScript, Script
+from scripts.models import (
+    AnsibleScript,
+    FileTransferScript,
+    NapalmConfigScript,
+    NapalmGettersScript,
+    NetmikoConfigScript,
+    Script
+)
 from os.path import join
 from werkzeug import secure_filename
 

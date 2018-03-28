@@ -64,3 +64,10 @@ def configure_form(cls):
 @configure_form
 class AnsibleScriptForm(FlaskForm):
     name = TextField('Name')
+
+
+class WorkflowCreationForm(FlaskForm):
+    name = TextField('Name')
+    netmiko_scripts = SelectField('', choices=())
+    napalm_scripts = SelectField('', choices=())
+    ansible_scripts = SelectField('', choices=())

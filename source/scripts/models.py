@@ -1,5 +1,6 @@
 from base.models import CustomBase
 from .forms import ansible_options
+from netmiko import ConnectHandler
 from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
@@ -39,6 +40,39 @@ class ConfigScript(Script):
         name = data['name'][0]
         super(ConfigScript, self).__init__(name)
         self.content = ''.join(content)
+
+    def netmiko_process(self, kwargs):
+        results = kwargs.pop('results')
+        name = kwargs.pop('name')
+        script_type = kwargs.pop('type')
+        try:
+            netmiko_handler = ConnectHandler(**kwargs)
+            if script_type == 'configuration':
+                netmiko_handler.send_config_set(self.content.splitlines())
+                result = 'configuration OK'
+            elif script_type == 'show_commands':
+                outputs = []
+                for show_command in self.content.splitlines():
+                    outputs.append(netmiko_handler.send_command(show_command))
+                result = '\n\n'.join(outputs)
+            else:
+                # still in netmiko develop branch for now
+                file_transfer = lambda *a, **kw: 1
+                transfer_dict = file_transfer(
+                    netmiko_handler,
+                    source_file=kwargs['source_file'],
+                    dest_file=kwargs['dest_file'],
+                    file_system=kwargs['file_system'],
+                    direction=kwargs['direction'],
+                    overwrite_file=False,
+                    disable_md5=False,
+                    inline_transer=False
+                )
+                result = str(transfer_dict)
+            netmiko_handler.disconnect()
+        except Exception as e:
+            result = 'netmiko config did not work because of {}'.format(e)
+        results[name] = result
 
 
 class FileTransferScript(Script):

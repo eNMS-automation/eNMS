@@ -7,11 +7,10 @@ from .forms import (
     AddNode,
     AddNodes,
     AddLink,
-    EditNode,
     DeleteObjects,
     FilteringForm
 )
-from .models import Link, Node, Object, object_class, object_factory,get_obj,edit_obj
+from .models import Link, Node, Object, object_class, object_factory, get_obj
 from .properties import link_public_properties, node_public_properties
 from re import search
 from werkzeug.utils import secure_filename
@@ -73,27 +72,29 @@ def create_objects():
         add_link_form=add_link_form
     )
 
+
 @blueprint.route('/object_edit/<object_name>', methods=['GET', 'POST'])
 @login_required
 def edit_objects(object_name):
-    edit_node_form = EditNode(request.form)
-    node = get_obj(db=db, model=Node,name = object_name)
-    if request.method == 'POST' and 'edit_node' in request.form:
-        edit_obj(db, object_name, **request.form.to_dict())
-        return  redirect('/objects/objects')
-
+    form = AddNode(request.form)
+    node = get_obj(db, Node, name=object_name)
+    object_properties = request.form.to_dict()
+    object_properties['name'] = object_name
+    if request.method == 'POST':
+        object_factory(db, **object_properties)
+        return redirect('/objects/objects')
     elif request.method == 'GET':
         return render_template(
             'edit_object.html',
-            object_name=object_name,
-            edit_node_form=edit_node_form,
+            form=form,
             node=node
         )
+
 
 @blueprint.route('/object_delete/<object_name>', methods=['GET'])
 @login_required
 def delete_object(object_name):
-    node = get_obj(db=db, model=Node,name = object_name)
+    node = get_obj(db, Node, name=object_name)
     db.session.delete(node)
     db.session.commit()
     return redirect('/objects/objects')

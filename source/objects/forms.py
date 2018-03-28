@@ -55,25 +55,6 @@ class DeleteObjects(FlaskForm):
     nodes = SelectMultipleField('Nodes', choices=())
     links = SelectMultipleField('Links', choices=())
 
-## Object
-
-
-class EditObjectForm(FlaskForm):
-    description = TextField('Description')
-    location = TextField('Location')
-    vendor = TextField('Vendor')
-
-class EditNode(EditObjectForm):
-    node_type = [(t, t) for t in node_class]
-    type = SelectField('Type', choices=node_type)
-    ip_address = TextField('IP address', [optional()])
-    operating_system = TextField('Operating System', [optional()])
-    os_version = TextField('OS version', [optional()])
-    longitude = FloatField('Longitude', [optional()])
-    latitude = FloatField('Latitude', [optional()])
-    secret_password = PasswordField('Secret password')
-
-
 ## Object filtering
 
 

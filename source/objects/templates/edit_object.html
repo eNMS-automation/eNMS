@@ -8,10 +8,8 @@
 
 {% block content %}
   <div class="right_col" role="main">
-  
     <!-- begin row -->
     <div class="row">
-
       <!-- begin column -->
       <div class="col-md-6 col-xs-12">
         <div class="x_panel">
@@ -22,16 +20,14 @@
           <div class="x_content">
             <br/>
             <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-            
               <div class="form-group" style="height: 450px">
-                {% for field in edit_node_form if field.widget.input_type != 'hidden'  %}
+                {% for field in form if field.widget.input_type != 'hidden'  %}
                   <label class="control-label col-md-4 col-sm-4 col-xs-12"> {{ field.label }}</label>
                   <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control", placeholder=node[field.name]) }}
+                    {{ field(class="form-control", value=node[field.name]) }}
                   </div><br><br>
                 {% endfor %}
               </div>
-
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
@@ -39,18 +35,13 @@
                   <button type="submit" class="btn btn-success" name="edit_node">Submit</button>
                 </div>
               </div>
-
             </form>
           </div>
         </div>
       </div>
       <!-- end column -->
-
-
-
     </div>
     <!-- end row -->
-
   </div>
 {% endblock content %}
 

@@ -6,26 +6,16 @@ from collections import namedtuple
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
-from netmiko import ConnectHandler
 from passlib.hash import cisco_type7
-from scripts.models import AnsibleScript, ConfigScript
+from scripts.models import (
+    AnsibleScript,
+    FileTransferScript,
+    NapalmConfigScript,
+    NapalmGettersScript,
+    NetmikoConfigScript
+)
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-
-# napalm pre and post-reunification compatibility
-try:
-    from napalm import get_network_driver
-except ImportError:
-    from napalm_base import get_network_driver
-
-try:
-    from ansible.parsing.dataloader import DataLoader
-    from ansible.vars.manager import VariableManager
-    from ansible.inventory.manager import InventoryManager
-    from ansible.executor.playbook_executor import PlaybookExecutor
-except Exception:
-    import warnings
-    warnings.warn('ansible import failed: ansible feature deactivated')
 
 scheduler = APScheduler()
 
@@ -92,28 +82,6 @@ def netmiko_file_transfer_job(name, type, script_name, username, password, ips,
 ## Napalm processes and jobs
 
 
-def napalm_config_process(kwargs):
-    try:
-        driver = get_network_driver(kwargs['driver'])
-        napalm_driver = driver(
-            hostname=kwargs['ip_address'],
-            username=kwargs['username'],
-            password=kwargs['password'],
-            optional_args={'secret': kwargs['secret']}
-        )
-        napalm_driver.open()
-        if kwargs['action'] in ('load_merge_candidate', 'load_replace_candidate'):
-            getattr(napalm_driver, kwargs['action'])(config=kwargs['script'])
-        else:
-            getattr(napalm_driver, kwargs['action'])()
-        napalm_driver.close()
-    except Exception as e:
-        result = 'napalm config did not work because of {}'.format(e)
-    else:
-        result = 'configuration OK'
-    kwargs['results'][kwargs['name']] = result
-
-
 def napalm_config_job(name, script_name, username, password, nodes_info, action):
     job_time = str(datetime.now())
     task = db.session.query(Task)\
@@ -140,27 +108,6 @@ def napalm_config_job(name, script_name, username, password, nodes_info, action)
     pool.join()
     task.logs[job_time] = results
     db.session.commit()
-
-
-def napalm_getters_process(kwargs):
-    try:
-        driver = get_network_driver(kwargs['driver'])
-        napalm_driver = driver(
-            hostname=kwargs['ip_address'],
-            username=kwargs['username'],
-            password=kwargs['password'],
-            optional_args={'secret': kwargs['secret']}
-        )
-        napalm_driver.open()
-        for getter in kwargs['getters']:
-            try:
-                result = str_dict(getattr(napalm_driver, getter)())
-            except Exception as e:
-                result = '{} could not be retrieve because of {}'.format(getter, e)
-        napalm_driver.close()
-    except Exception as e:
-        result = 'getters process did not work because of {}'.format(e)
-    kwargs['results'][kwargs['name']] = result
 
 
 def napalm_getters_job(name, getters, username, password, nodes_info):
@@ -195,51 +142,7 @@ def ansible_job(name, script_name, username, password, nodes_info):
     script = db.session.query(AnsibleScript)\
         .filter_by(name=script_name)\
         .first()
-    loader = DataLoader()
-    hosts = [info[1] for info in nodes_info]
-    temporary_file = NamedTemporaryFile(delete=False)
-    temporary_file.write('\n'.join(hosts))
-    temporary_file.close()
-
-    # sources is a list of paths to inventory files"
-    inventory = InventoryManager(loader=loader, sources=temporary_file.name)
-    variable_manager = VariableManager(loader=loader, inventory=inventory)
-    playbook_path = script.playbook_path
-
-    options_dict = {
-        'listtags': False,
-        'listtasks': False,
-        'listhosts': False,
-        'syntax': False,
-        'connection': 'ssh',
-        'module_path': None,
-        'forks': 100,
-        'remote_user': None,
-        'private_key_file': None,
-        'ssh_common_args': None,
-        'ssh_extra_args': None,
-        'sftp_extra_args': None,
-        'scp_extra_args': None,
-        'become': False,
-        'become_method': None,
-        'become_user': None,
-        'verbosity': None,
-        'check': False,
-        'diff': False
-    }
-
-    Options = namedtuple('Options', list(options_dict))
-    passwords = {}
-    playbook_executor = PlaybookExecutor(
-        playbooks=[playbook_path],
-        inventory=inventory,
-        variable_manager=variable_manager,
-        loader=loader,
-        options=Options(**options_dict),
-        passwords=passwords
-    )
-
-    results = playbook_executor.run()
+    script.job(nodes_info)
     task.logs[job_time] = results
     db.session.commit()
 

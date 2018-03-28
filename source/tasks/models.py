@@ -32,44 +32,6 @@ scheduler = APScheduler()
 ## Netmiko process and job
 
 
-def netmiko_process(kwargs):
-    results = kwargs.pop('results')
-    script, name = kwargs.pop('script'), kwargs.pop('name')
-    script_type = kwargs.pop('type')
-    # source_file = kwargs.pop('source_file')
-    # dest_file = kwargs.pop('dest_file')
-    # file_system = kwargs.pop('file_system')
-    # direction = kwargs.pop('direction')
-    try:
-        netmiko_handler = ConnectHandler(**kwargs)
-        if script_type == 'configuration':
-            netmiko_handler.send_config_set(script.splitlines())
-            result = 'configuration OK'
-        elif script_type == 'show_commands':
-            outputs = []
-            for show_command in script.splitlines():
-                outputs.append(netmiko_handler.send_command(show_command))
-            result = '\n\n'.join(outputs)
-        else:
-            # still in netmiko develop branch for now
-            file_transfer = lambda *a, **kw: 1
-            transfer_dict = file_transfer(
-                netmiko_handler,
-                source_file=kwargs['source_file'],
-                dest_file=kwargs['dest_file'],
-                file_system=kwargs['file_system'],
-                direction=kwargs['direction'],
-                overwrite_file=False,
-                disable_md5=False,
-                inline_transer=False
-            )
-            result = str(transfer_dict)
-        netmiko_handler.disconnect()
-    except Exception as e:
-        result = 'netmiko config did not work because of {}'.format(e)
-    results[name] = result
-
-
 def netmiko_config_job(name, type, script_name, username, password, ips, driver,
                        global_delay_factor):
     job_time = str(datetime.now())
@@ -89,11 +51,10 @@ def netmiko_config_job(name, type, script_name, username, password, ips, driver,
         'secret': secret,
         'global_delay_factor': global_delay_factor,
         'name': device_name,
-        'script': script.content,
         'results': results,
         'type': type
     }) for device_name, ip_address, _, secret in ips]
-    pool.map(netmiko_process, kwargs)
+    pool.map(script.netmiko_process, kwargs)
     pool.close()
     pool.join()
     task.logs[job_time] = results

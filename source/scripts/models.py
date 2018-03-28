@@ -41,7 +41,7 @@ class ConfigScript(Script):
         super(ConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
-    def netmiko_process(self, kwargs):
+    def job(self, kwargs):
         results = kwargs.pop('results')
         name = kwargs.pop('name')
         script_type = kwargs.pop('type')
@@ -50,25 +50,12 @@ class ConfigScript(Script):
             if script_type == 'configuration':
                 netmiko_handler.send_config_set(self.content.splitlines())
                 result = 'configuration OK'
-            elif script_type == 'show_commands':
+            else: 
+                # script_type is 'show_commands':
                 outputs = []
                 for show_command in self.content.splitlines():
                     outputs.append(netmiko_handler.send_command(show_command))
                 result = '\n\n'.join(outputs)
-            else:
-                # still in netmiko develop branch for now
-                file_transfer = lambda *a, **kw: 1
-                transfer_dict = file_transfer(
-                    netmiko_handler,
-                    source_file=kwargs['source_file'],
-                    dest_file=kwargs['dest_file'],
-                    file_system=kwargs['file_system'],
-                    direction=kwargs['direction'],
-                    overwrite_file=False,
-                    disable_md5=False,
-                    inline_transer=False
-                )
-                result = str(transfer_dict)
             netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
@@ -87,8 +74,35 @@ class FileTransferScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
+        self.source_file = data['source_file'][0]
+        self.destination_file = data['destination_file'][0]
+        self.file_system = data['file_system'][0]
+        self.direction = data['direction'][0]
         super(FileTransferScript, self).__init__(name)
 
+    def job(self, kwargs):
+        results = kwargs.pop('results')
+        name = kwargs.pop('name')
+        script_type = kwargs.pop('type')
+        try:
+            netmiko_handler = ConnectHandler(**kwargs)
+            # still in netmiko develop branch for now
+            file_transfer = lambda *a, **kw: 1
+            transfer_dict = file_transfer(
+                netmiko_handler,
+                source_file=self.source_file,
+                dest_file=self.dest_file,
+                file_system=self.file_system,
+                direction=self.direction,
+                overwrite_file=False,
+                disable_md5=False,
+                inline_transer=False
+            )
+            result = str(transfer_dict)
+            netmiko_handler.disconnect()
+        except Exception as e:
+            result = 'netmiko config did not work because of {}'.format(e)
+        results[name] = result
 
 class AnsibleScript(Script):
 

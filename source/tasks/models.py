@@ -54,7 +54,7 @@ def netmiko_config_job(name, type, script_name, username, password, ips, driver,
         'results': results,
         'type': type
     }) for device_name, ip_address, _, secret in ips]
-    pool.map(script.netmiko_process, kwargs)
+    pool.map(script.job, kwargs)
     pool.close()
     pool.join()
     task.logs[job_time] = results
@@ -80,14 +80,10 @@ def netmiko_file_transfer_job(name, type, script_name, username, password, ips,
         'secret': secret,
         'global_delay_factor': global_delay_factor,
         'name': device_name,
-        'source_file': script.source_file,
-        'dest_file': script.destination_file,
-        'file_system': script.file_system,
-        'direction': script.direction,
         'results': results,
         'type': type
     }) for device_name, ip_address, _, secret in ips]
-    pool.map(netmiko_process, kwargs)
+    pool.map(script.job, kwargs)
     pool.close()
     pool.join()
     task.logs[job_time] = results

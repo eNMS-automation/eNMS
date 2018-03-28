@@ -84,3 +84,10 @@ def ansible_script():
         'ansible_script.html',
         form=form
     )
+
+@blueprint.route('/workflow_creation', methods=['GET', 'POST'])
+@login_required
+def workflow_creation():
+    return render_template(
+        'workflow.html',
+    )

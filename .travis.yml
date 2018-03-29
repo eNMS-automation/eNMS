@@ -5,6 +5,10 @@ python:
   - 3.5
   - 3.6
 
+branches:
+  only:
+  - master
+
 install:
   - pip install -r requirements_dev.txt
 

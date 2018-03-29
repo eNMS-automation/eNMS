@@ -3,15 +3,7 @@ from base.properties import pretty_names
 from collections import OrderedDict
 from flask import Blueprint, current_app, render_template, redirect, request, session, url_for
 from flask_login import current_user, login_required
-from .forms import (
-    AnsibleForm,
-    GoogleEarthForm,
-    NapalmConfigurationForm,
-    NapalmGettersForm,
-    NetmikoConfigForm,
-    NetmikoFileTransferForm,
-    ViewOptionsForm
-)
+from .forms import GoogleEarthForm, ViewOptionsForm
 from json import dumps
 from objects.models import get_obj, Node, node_subtypes, Link, link_class
 from objects.properties import type_to_public_properties
@@ -88,26 +80,10 @@ def schedule_task(cls, **data):
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
-    napalm_configuration_form = NapalmConfigurationForm(request.form)
-    napalm_getters_form = NapalmGettersForm(request.form)
-    netmiko_config_form = NetmikoConfigForm(request.form)
-    netmiko_file_transfer_form = NetmikoFileTransferForm(request.form)
-    ansible_form = AnsibleForm(request.form)
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
-    # update the list of available nodes / script by querying the database
-    netmiko_config_form.script.choices = ConfigScript.choices()
-    napalm_configuration_form.script.choices = ConfigScript.choices()
-    ansible_form.script.choices = AnsibleScript.choices()
     if 'script_type' in request.form:
-        task_class, form = {
-            'netmiko_configuration': (NetmikoConfigTask, netmiko_config_form),
-            'netmiko_file_transfer': (NetmikoFileTransferTask, netmiko_file_transfer_form),
-            'napalm_configuration': (NapalmConfigTask, napalm_configuration_form),
-            'napalm_getters': (NapalmGettersTask, napalm_getters_form),
-            'ansible': (AnsibleTask, ansible_form)
-        }[request.form['script_type']]
         schedule_task(task_class, **form.data)
         return redirect(url_for('tasks_blueprint.task_management'))
     elif 'view_options' in request.form:
@@ -126,11 +102,6 @@ def view(view_type):
     return render_template(
         '{}_view.html'.format(view_type),
         view=view,
-        netmiko_config_form=netmiko_config_form,
-        netmiko_file_transfer_form=netmiko_file_transfer_form,
-        napalm_configuration_form=napalm_configuration_form,
-        napalm_getters_form=napalm_getters_form,
-        ansible_form=ansible_form,
         view_options_form=view_options_form,
         google_earth_form=google_earth_form,
         labels=labels,

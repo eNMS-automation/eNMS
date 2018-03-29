@@ -47,7 +47,7 @@ class NetmikoConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        super(ConfigScript, self).__init__(name)
+        super(NetmikoConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
     def job(self, kwargs):
@@ -126,7 +126,7 @@ class NapalmConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        super(ConfigScript, self).__init__(name)
+        super(NapalmConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
     def job(self, kwargs):

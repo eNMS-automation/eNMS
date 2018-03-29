@@ -27,10 +27,13 @@ scheduler = APScheduler()
 def job_multiprocessing(name):
     job_time = str(datetime.now())
     task = get_obj(db, Task, name=name)
-    pool = ThreadPool(processes=10)
-    pool.map(task.script.job, task.name)
-    pool.close()
-    pool.join()
+    results = {}
+    for script in task.scripts:
+        pool = ThreadPool(processes=len(task.nodes))
+        args = [(task, script, node, results) for node in task.nodes]
+        pool.map(script.job, args)
+        pool.close()
+        pool.join()
     task.logs[job_time] = results
     db.session.commit()
 

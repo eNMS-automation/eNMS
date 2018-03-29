@@ -39,6 +39,7 @@ def register_blueprints(app):
         'base',
         'objects',
         'scripts',
+        'workflows',
         'tasks',
         'users',
         'views',

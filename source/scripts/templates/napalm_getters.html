@@ -23,7 +23,7 @@
                 {% for field in form if field.widget.input_type != 'hidden'  %}                  
                   <label>{{ field.name }}</label>
                   <div class='form-group'>
-                    {{ field(class="form-control", placeholder=field.label.text) }}
+                    {{ field(class="form-control", placeholder=field.label.text, size=20) }}
                   </div>
                 {% endfor %}
                 

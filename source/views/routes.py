@@ -65,7 +65,6 @@ def view(view_type):
         selection = map(int, session['selection'])
         scripts = request.form.getlist('scripts')
         data['scripts'] = [get_obj(db, Script, name=name) for name in scripts]
-        print(data, request.form)
         data['nodes'] = [get_obj(db, Node, id=id) for id in selection]
         data['user'] = current_user
         task = Task(**data)

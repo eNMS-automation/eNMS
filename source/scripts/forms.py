@@ -101,7 +101,7 @@ class NapalmConfigScriptForm(ConfigScriptForm):
     actions = SelectField('Actions', choices=action_choices)
 
 
-class NapalmGettersForm(FlaskForm):
+class NapalmGettersForm(ScriptForm):
     getters_choices = [(v, k) for k, v in getters_mapping.items()]
     getters = SelectMultipleField('Nodes', choices=getters_choices)
 

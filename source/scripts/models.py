@@ -189,7 +189,6 @@ class NapalmGettersScript(Script):
     def __init__(self, **data):
         name = data['name'][0]
         self.getters = data['getters']
-        print(self.getters)
         super(NapalmGettersScript, self).__init__(name)
 
     def job(self, args):
@@ -235,9 +234,9 @@ class AnsibleScript(Script):
             if key in ansible_options:
                 self.options[key] = value[0] if value else None
 
-    def job(self, nodes_info):
+    def job(self, task):
         loader = DataLoader()
-        hosts = [info[1] for info in nodes_info]
+        hosts = [node.ip_address for node in task.nodes]
         temporary_file = NamedTemporaryFile(delete=False)
         temporary_file.write('\n'.join(hosts))
         temporary_file.close()
@@ -245,7 +244,6 @@ class AnsibleScript(Script):
         # sources is a list of paths to inventory files"
         inventory = InventoryManager(loader=loader, sources=temporary_file.name)
         variable_manager = VariableManager(loader=loader, inventory=inventory)
-        playbook_path = script.playbook_path
     
         options_dict = {
             'listtags': False,
@@ -272,12 +270,13 @@ class AnsibleScript(Script):
         Options = namedtuple('Options', list(options_dict))
         passwords = {}
         playbook_executor = PlaybookExecutor(
-            playbooks=[playbook_path],
+            playbooks=[self.playbook_path],
             inventory=inventory,
             variable_manager=variable_manager,
             loader=loader,
             options=Options(**options_dict),
             passwords=passwords
         )
-    
+
         results = playbook_executor.run()
+        return results

@@ -29,11 +29,14 @@ def job_multiprocessing(name):
     task = get_obj(db, Task, name=name)
     results = {}
     for script in task.scripts:
-        pool = ThreadPool(processes=len(task.nodes))
-        args = [(task, node, results) for node in task.nodes]
-        pool.map(script.job, args)
-        pool.close()
-        pool.join()
+        if script.type == 'AnsibleScript':
+            results = script.job(task)
+        else:
+            pool = ThreadPool(processes=len(task.nodes))
+            args = [(task, node, results) for node in task.nodes]
+            pool.map(script.job, args)
+            pool.close()
+            pool.join()
     task.logs[job_time] = results
     db.session.commit()
 

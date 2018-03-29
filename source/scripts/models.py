@@ -1,7 +1,7 @@
 from base.models import task_script_table, CustomBase
 from .forms import ansible_options
 from netmiko import ConnectHandler
-from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 from napalm import get_network_driver
@@ -46,6 +46,9 @@ class NetmikoConfigScript(Script):
     __tablename__ = 'NetmikoConfigScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    driver = Column(String)
+    global_delay_factor = Column(Float)
+    netmiko_type = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'NetmikoConfigScript',
@@ -53,30 +56,32 @@ class NetmikoConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
+        self.driver ,= data['name']
+        self.global_delay_factor ,= data['global_delay_factor']
+        self.netmiko_type ,= data['netmiko_type']
         super(NetmikoConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
     def job(self, args):
-        task, script, node, results = args
+        task, node, results = args
         try:
             netmiko_handler = ConnectHandler(
-                device_type= script.driver,
-                ip= node.ip_address,
-                username= task.user.username,
-                password= task.user.password,
-                secret= node.secret_password
+                device_type=self.driver,
+                ip=node.ip_address,
+                username=task.user.username,
+                password=task.user.password,
+                secret=node.secret_password
             )
-            result = "wesh ok"
-        #     if script_type == 'configuration':
-        #         netmiko_handler.send_config_set(self.content.splitlines())
-        #         result = 'configuration OK'
-        #     else: 
-        #         # script_type is 'show_commands':
-        #         outputs = []
-        #         for show_command in self.content.splitlines():
-        #             outputs.append(netmiko_handler.send_command(show_command))
-        #         result = '\n\n'.join(outputs)
-        #     netmiko_handler.disconnect()
+            if self.netmiko_type == 'Configuration':
+                netmiko_handler.send_config_set(self.content.splitlines())
+                result = 'configuration OK'
+            else: 
+                # script_type is 'show_commands':
+                outputs = []
+                for show_command in self.content.splitlines():
+                    outputs.append(netmiko_handler.send_command(show_command))
+                result = '\n\n'.join(outputs)
+            netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
         results[task.name] = result

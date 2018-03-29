@@ -81,14 +81,13 @@ class ConfigScriptForm(ScriptForm):
 
 
 class NetmikoConfigScriptForm(ConfigScriptForm):
-
     text = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
-    type_choices = (
+    netmiko_type_choices = (
         ('show_commands', 'Show commands'),
         ('configuration', 'Configuration')
     )
-    type = SelectField('', choices=type_choices)
+    netmiko_type = SelectField('', choices=netmiko_type_choices)
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
     netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))

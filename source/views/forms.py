@@ -33,3 +33,7 @@ class SchedulingForm(FlaskForm):
     name = TextField('Name')
     scripts = SelectMultipleField('', choices=())
     frequency = TextField('Frequency')
+
+
+class WorkflowForm(FlaskForm):
+    scripts = SelectField('', choices=())

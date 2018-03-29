@@ -17,6 +17,12 @@
       <div class="col-md-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+              <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="edgeMode()">Create edge</button>
+            </div>
+            <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; left:30px;">
+              <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="showModal('addScript')">Add script</button>
+            </div>
             <div id="network" style="height:600px; width:100%;></div>
             <div class="ln_solid"></div>
             <div class="form-group">
@@ -32,6 +38,10 @@
     <!-- end row -->
   </div>
   <script>
+    function showModal(modal_name){
+      $(`#${modal_name}`).modal('show');
+      }
+  
     var container = document.getElementById('network');
     var dsoptions = {
       manipulation: {
@@ -92,14 +102,23 @@
     var options = {};
     var network = new vis.Network(container, data, dsoptions);
     
+    function edgeMode() {
+      if ($('#edge_mode').text() == "Create edge") {
+        $('#edge_mode').text("Move node");
+        network.addEdgeMode();
+      } else {
+        $('#edge_mode').text("Create edge")
+        network.addNodeMode();
+      }
+    }
     // here you init the addEdge mode
-      network.addEdgeMode();
-      
+    //network.addEdgeMode();
+
     network.on('click', function() {
       nodes.add({
         label: 'Node 65'
       })
-      network.addEdgeMode();
+      //network.addEdgeMode();
     });
     </script>
 {% endblock content %}

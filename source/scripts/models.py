@@ -22,7 +22,6 @@ class Script(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120))
     type = Column(String(50))
-    content = Column(String)
     tasks = relationship(
         "Task",
         secondary=task_script_table,
@@ -46,6 +45,7 @@ class NetmikoConfigScript(Script):
     __tablename__ = 'NetmikoConfigScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    content = Column(String)
     driver = Column(String)
     global_delay_factor = Column(Float)
     netmiko_type = Column(String)
@@ -56,7 +56,7 @@ class NetmikoConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        self.driver ,= data['name']
+        self.driver ,= data['driver']
         self.global_delay_factor ,= data['global_delay_factor']
         self.netmiko_type ,= data['netmiko_type']
         super(NetmikoConfigScript, self).__init__(name)
@@ -84,7 +84,7 @@ class NetmikoConfigScript(Script):
             netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
-        results[task.name] = result
+        results[node.name] = result
 
 
 class FileTransferScript(Script):
@@ -105,12 +105,16 @@ class FileTransferScript(Script):
         self.direction = data['direction'][0]
         super(FileTransferScript, self).__init__(name)
 
-    def job(self, kwargs):
-        results = kwargs.pop('results')
-        name = kwargs.pop('name')
-        script_type = kwargs.pop('type')
+    def job(self, args):
+        task, node, results = args
         try:
-            netmiko_handler = ConnectHandler(**kwargs)
+            netmiko_handler = ConnectHandler(
+                device_type=self.driver,
+                ip=node.ip_address,
+                username=task.user.username,
+                password=task.user.password,
+                secret=node.secret_password
+            )
             # still in netmiko develop branch for now
             file_transfer = lambda *a, **kw: 1
             transfer_dict = file_transfer(
@@ -127,7 +131,7 @@ class FileTransferScript(Script):
             netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
-        results[name] = result
+        results[node.name] = result
 
 
 class NapalmConfigScript(Script):
@@ -135,6 +139,8 @@ class NapalmConfigScript(Script):
     __tablename__ = 'NapalmConfigScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    action = Column(String)
+    content = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'NapalmConfigScript',
@@ -142,29 +148,31 @@ class NapalmConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
+        self.action = data['action']
         super(NapalmConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
-    def job(self, kwargs):
+    def job(self, args):
+        task, node, results = args
         try:
-            driver = get_network_driver(kwargs['driver'])
+            driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
-                hostname=kwargs['ip_address'],
-                username=kwargs['username'],
-                password=kwargs['password'],
-                optional_args={'secret': kwargs['secret']}
+                hostname=node.ip_address,
+                username=user.username,
+                password=user.password,
+                optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
-            if kwargs['action'] in ('load_merge_candidate', 'load_replace_candidate'):
-                getattr(napalm_driver, kwargs['action'])(config=kwargs['script'])
+            if self.action in ('load_merge_candidate', 'load_replace_candidate'):
+                getattr(napalm_driver, self.action)(config=self.content)
             else:
-                getattr(napalm_driver, kwargs['action'])()
+                getattr(napalm_driver, self.action)()
             napalm_driver.close()
         except Exception as e:
             result = 'napalm config did not work because of {}'.format(e)
         else:
             result = 'configuration OK'
-        kwargs['results'][kwargs['name']] = result
+        results[node.name] = result
 
 
 class NapalmGettersScript(Script):
@@ -177,22 +185,23 @@ class NapalmGettersScript(Script):
         'polymorphic_identity': 'NapalmGettersScript',
     }
 
-    def __init__(self, content, **data):
+    def __init__(self, **data):
         name = data['name'][0]
+        self.getters = data.getlist('getters')
         super(NapalmGettersScript, self).__init__(name)
-        self.content = ''.join(content)
 
-    def job(self, kwargs):
+    def job(self, args):
+        task, node, results = args
         try:
-            driver = get_network_driver(kwargs['driver'])
+            driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
-                hostname=kwargs['ip_address'],
-                username=kwargs['username'],
-                password=kwargs['password'],
-                optional_args={'secret': kwargs['secret']}
+                hostname=node.ip_address,
+                username=user.username,
+                password=user.password,
+                optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
-            for getter in kwargs['getters']:
+            for getter in self.getters:
                 try:
                     result = str_dict(getattr(napalm_driver, getter)())
                 except Exception as e:

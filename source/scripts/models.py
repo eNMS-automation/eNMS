@@ -163,7 +163,7 @@ class NapalmGettersScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        super(ConfigScript, self).__init__(name)
+        super(NapalmGettersScript, self).__init__(name)
         self.content = ''.join(content)
 
     def job(self, kwargs):

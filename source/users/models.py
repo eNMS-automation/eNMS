@@ -1,5 +1,6 @@
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 from base.models import CustomBase
 from passlib.hash import cisco_type7
 
@@ -14,6 +15,8 @@ class User(CustomBase, UserMixin):
     access_rights = Column(String(120))
     password = Column(String(30))
     secret_password = Column(String(30))
+    task_id = Column(Integer, ForeignKey('Task.id'))
+    tasks = relationship("Task")
     dashboard_node_properties = Column(String())
     dashboard_link_properties = Column(String())
 

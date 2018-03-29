@@ -1,4 +1,5 @@
 from .database import Base
+from sqlalchemy import Column, ForeignKey, Integer, Table
 
 
 class CustomBase(Base):
@@ -17,3 +18,11 @@ class CustomBase(Base):
     @classmethod
     def visible_objects(cls):
         return (obj for obj in cls.query.all() if obj.visible)
+
+
+association_table = Table(
+    'association',
+    CustomBase.metadata,
+    Column('node_id', Integer, ForeignKey('Node.id')),
+    Column('task_id', Integer, ForeignKey('Task.id'))
+)

@@ -46,11 +46,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a onclick="show_modal('netmiko-configuration')"> Netmiko configuration </a></li>
-        <li><a onclick="show_modal('netmiko-file-transfer')"> Netmiko file transfer </a></li>
-        <li><a onclick="show_modal('napalm-getters')">NAPALM getters</a></li>
-        <li><a onclick="show_modal('napalm-configuration')">NAPALM configuration</a></li>
-        <li><a onclick="show_modal('ansible')">Ansible</a></li>
+        <li><a onclick="show_modal('scheduling')">Schedule a script</a></li>
       </ul>
     </div> 
   </div>
@@ -303,26 +299,24 @@
   <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
   <!-- Initialize datetimepicker and SmartWizard -->
   <script>
-    for (n=1; n<6; n++) {
-      var dates = ['start_date', 'end_date'];
-      var today = new Date();
-      for (var i=0; i<dates.length; i++) {
-        $('#' + dates[i] + n).datetimepicker({
-          format: 'DD/MM/YYYY HH:mm:ss',
-          widgetPositioning: {
-              horizontal: 'left',
-              vertical: 'bottom'
-          },
-          useCurrent: false,
-        });
-        $('#' + dates[i] + n).data("DateTimePicker").minDate(today);
-      }  
-      function call_wizard(n){
-        $('#wizard' + n).smartWizard();
-        $('.buttonNext').addClass('btn btn-success');
-        $('.buttonPrevious').addClass('btn btn-primary');
-        $('.buttonFinish').addClass('btn btn-default');
-      }
+    var dates = ['start_date', 'end_date'];
+    var today = new Date();
+    for (var i = 0; i < dates.length; i++) {
+      $('#' + dates[i] + n).datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        widgetPositioning: {
+            horizontal: 'left',
+            vertical: 'bottom'
+        },
+        useCurrent: false,
+      });
+      $('#' + dates[i]).data("DateTimePicker").minDate(today);
+    }
+    function schedule(){
+      $('#wizard').smartWizard();
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
     }
   </script>
 

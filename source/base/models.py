@@ -20,9 +20,16 @@ class CustomBase(Base):
         return (obj for obj in cls.query.all() if obj.visible)
 
 
-association_table = Table(
-    'association',
+task_node_table = Table(
+    'task_node_association',
     CustomBase.metadata,
     Column('node_id', Integer, ForeignKey('Node.id')),
+    Column('task_id', Integer, ForeignKey('Task.id'))
+)
+
+task_script_table = Table(
+    'task_script_association',
+    CustomBase.metadata,
+    Column('script_id', Integer, ForeignKey('Script.id')),
     Column('task_id', Integer, ForeignKey('Task.id'))
 )

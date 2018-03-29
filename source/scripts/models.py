@@ -1,8 +1,9 @@
-from base.models import CustomBase
+from base.models import task_script_table, CustomBase
 from .forms import ansible_options
 from netmiko import ConnectHandler
 from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.orm import relationship
 from napalm import get_network_driver
 try:
     from ansible.parsing.dataloader import DataLoader
@@ -22,6 +23,11 @@ class Script(CustomBase):
     name = Column(String(120))
     type = Column(String(50))
     content = Column(String)
+    tasks = relationship(
+        "Task",
+        secondary=task_script_table,
+        back_populates="scripts"
+    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'Script',

@@ -1,7 +1,7 @@
 from tempfile import NamedTemporaryFile
 from base.database import db
 from base.helpers import str_dict
-from base.models import association_table, CustomBase
+from base.models import task_node_table, task_script_table, CustomBase
 from collections import namedtuple
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
@@ -30,8 +30,8 @@ def job_multiprocessing(name):
     print(task.__dict__)
     print(task.user)
     print(task.user.__dict__)
-    print(task.script)
-    print(task.script.__dict__)
+    print(task.scripts)
+    print(task.scripts.__dict__)
     # pool = ThreadPool(processes=10)
     # results = {}
     # kwargs = [({
@@ -68,10 +68,14 @@ class Task(CustomBase):
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     nodes = relationship(
         "Node",
-        secondary=association_table,
+        secondary=task_node_table,
         back_populates="tasks"
     )
-    job = relationship('Job', back_populates='tasks', uselist=False)
+    scripts = relationship(
+        "Script",
+        secondary=task_script_table,
+        back_populates="tasks"
+    )
     user = relationship('User', back_populates='tasks', uselist=False)
 
     # scheduling parameters
@@ -90,9 +94,9 @@ class Task(CustomBase):
     def __init__(self, **data):
         self.data = data
         self.name ,= data['name']
-        print(data)
         self.nodes = data['nodes']
         self.user = data['user']
+        self.scripts = data['scripts']
         self.frequency ,= data['frequency']
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())

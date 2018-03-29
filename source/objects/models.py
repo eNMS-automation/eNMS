@@ -1,4 +1,4 @@
-from base.models import association_table, CustomBase
+from base.models import task_node_table, CustomBase
 from collections import OrderedDict
 from .properties import (
     link_common_properties,
@@ -66,7 +66,7 @@ class Node(Object):
     secret_password = Column(String)
     tasks = relationship(
         "Task",
-        secondary=association_table,
+        secondary=task_node_table,
         back_populates="nodes"
     )
 

@@ -31,5 +31,5 @@ class SchedulingForm(FlaskForm):
     start_date = TextField('Start date')
     end_date = TextField('End date')
     name = TextField('Name')
-    script = SelectField('', choices=())
+    scripts = SelectMultipleField('', choices=())
     frequency = TextField('Frequency')

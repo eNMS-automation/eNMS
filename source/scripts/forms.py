@@ -26,13 +26,27 @@ ansible_options = {
 
 
 class ConfigScriptForm(FlaskForm):
-    name = TextField('Name')
+
+    vendor_choices = (
+        ('cisco', 'Cisco'),
+        ('juniper', 'Juniper')
+    )
+    operating_system_choices = (
+        ('ios','ios'),
+        ('ios-xr','ios-xr'),
+        ('junos', 'junos')
+    )
     type_choices = (
         ('simple', 'Simple'),
         ('j2_template', 'Jinja2 template'),
         ('per_device_j2', 'Per-device Jinja2 template')
     )
+
+    name = TextField('Name')
+    vendor = SelectField('',choices=vendor_choices)
+    operating_system = SelectField('',choices=operating_system_choices)
     type = SelectField('', choices=type_choices)
+
     text = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
 

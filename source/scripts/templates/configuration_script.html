@@ -24,7 +24,14 @@
                 <div class='form-group'>
                     {{ form.name(class="form-control", required=true) }}
                 </div>
-
+                <label>Vendor</label>
+                <div class='form-group'>
+                    {{ form.vendor(class="form-control") }}
+                </div>
+                <label>Operating System</label>
+                <div class='form-group'>
+                    {{ form.operating_system(class="form-control") }}
+                </div>
                 <label>Type</label>
                 <div class='form-group'>
                     {{ form.type(class="form-control") }}

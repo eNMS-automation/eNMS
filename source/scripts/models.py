@@ -11,6 +11,8 @@ class Script(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120))
     type = Column(String(50))
+    vendor = Column(String(50))
+    operating_system = Column(String(50))
     content = Column(String)
 
     __mapper_args__ = {
@@ -18,8 +20,10 @@ class Script(CustomBase):
         'polymorphic_on': type
     }
 
-    def __init__(self, name):
+    def __init__(self, name, operating_system,vendor):
         self.name = name
+        self.vendor = vendor
+        self.operating_system = operating_system
 
     def __repr__(self):
         return str(self.name)
@@ -37,8 +41,14 @@ class ConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        super(ConfigScript, self).__init__(name)
+        vendor = data['vendor'][0]
+        operating_system = data['operating_system'][0]
+
+        super(ConfigScript, self).__init__(name,vendor,operating_system)
+
+
         self.content = ''.join(content)
+
 
 
 class FileTransferScript(Script):

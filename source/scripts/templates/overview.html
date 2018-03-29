@@ -19,9 +19,11 @@
             <table class="table table-striped projects">
               <thead>
                 <tr>
-                  <th style="width: 33%">Name</th>
-                  <th style="width: 33%">Type</th>
-                  <th style="width: 33%">Edit</th>
+                  <th style="width: 20%">Name</th>
+                  <th style="width: 20%">Vendor</th>
+                  <th style="width: 20%">OS</th>
+                  <th style="width: 20%">Type</th>
+                  <th style="width: 20%">Edit</th>
                 </tr>
               </thead>
 
@@ -29,6 +31,8 @@
                 {% for script in scripts %}
                   <tr>
                     <td><a>{{ script.name }}</a></td>
+                    <td><a>{{ script.vendor }}</a></td>
+                    <td><a>{{ script.operating_system }}</a></td>
                     <td>{{ script.type }}</td>
                     <td>
                       <div class="modal fade content-{{ script.id }}" tabindex="-1" role="dialog" aria-hidden="true">

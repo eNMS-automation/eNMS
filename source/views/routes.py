@@ -3,7 +3,7 @@ from base.properties import pretty_names
 from collections import OrderedDict
 from flask import Blueprint, current_app, render_template, redirect, request, session, url_for
 from flask_login import current_user, login_required
-from .forms import GoogleEarthForm, ViewOptionsForm
+from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
 from json import dumps
 from objects.models import get_obj, Node, node_subtypes, Link, link_class
 from objects.properties import type_to_public_properties
@@ -82,6 +82,7 @@ def schedule_task(cls, **data):
 def view(view_type):
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
+    scheduling_form = SchedulingForm(request.form)
     labels = {'node': 'name', 'link': 'name'}
     if 'script_type' in request.form:
         schedule_task(task_class, **form.data)
@@ -102,6 +103,7 @@ def view(view_type):
     return render_template(
         '{}_view.html'.format(view_type),
         view=view,
+        scheduling_form=scheduling_form,
         view_options_form=view_options_form,
         google_earth_form=google_earth_form,
         labels=labels,

@@ -24,7 +24,7 @@ blueprint = Blueprint(
 def scripts():
     return render_template(
         'overview.html',
-        fields=('name', 'type'),
+        fields=('name', 'vendor','operating_system','type'),
         names=pretty_names,
         scripts=Script.query.all()
     )
@@ -38,6 +38,8 @@ def config_script():
         # retrieve the raw script: we will use it as-is or update it depending
         # on the type of script (jinja2-enabled template or not)
         content = request.form['text']
+        operating_system = form.data['operating_system']
+        vendor = form.data['vendor']
         if form.data['type'] != 'simple':
             file = request.files['file']
             filename = secure_filename(file.filename)
@@ -45,7 +47,7 @@ def config_script():
                 parameters = load(file.read())
                 template = Template(content)
                 content = template.render(**parameters)
-        script = ConfigScript(content, **request.form)
+        script = ConfigScript(content,**request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(

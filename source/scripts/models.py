@@ -2,7 +2,7 @@ from base.models import task_script_table, CustomBase
 from .forms import ansible_options
 from netmiko import ConnectHandler
 from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from napalm import get_network_driver
 try:
@@ -158,8 +158,8 @@ class NapalmConfigScript(Script):
             driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
                 hostname=node.ip_address,
-                username=user.username,
-                password=user.password,
+                username=task.user.username,
+                password=task.user.password,
                 optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
@@ -180,6 +180,7 @@ class NapalmGettersScript(Script):
     __tablename__ = 'NapalmGettersScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    getters = Column(MutableList.as_mutable(PickleType), default=[])
 
     __mapper_args__ = {
         'polymorphic_identity': 'NapalmGettersScript',
@@ -187,7 +188,8 @@ class NapalmGettersScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
-        self.getters = data.getlist('getters')
+        self.getters = data['getters']
+        print(self.getters)
         super(NapalmGettersScript, self).__init__(name)
 
     def job(self, args):
@@ -196,8 +198,8 @@ class NapalmGettersScript(Script):
             driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
                 hostname=node.ip_address,
-                username=user.username,
-                password=user.password,
+                username=task.user.username,
+                password=task.user.password,
                 optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
@@ -209,7 +211,7 @@ class NapalmGettersScript(Script):
             napalm_driver.close()
         except Exception as e:
             result = 'getters process did not work because of {}'.format(e)
-        kwargs['results'][kwargs['name']] = result
+        results[node.name] = result
 
 
 class AnsibleScript(Script):

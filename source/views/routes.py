@@ -13,17 +13,12 @@ from scripts.models import (
     FileTransferScript,
     NapalmConfigScript,
     NapalmGettersScript,
-    NetmikoConfigScript
+    NetmikoConfigScript,
+    Script
 )
 from simplekml import Color, Kml, Style
 from subprocess import Popen
-from tasks.models import (
-    AnsibleTask,
-    NapalmConfigTask,
-    NapalmGettersTask,
-    NetmikoConfigTask,
-    NetmikoFileTransferTask
-)
+from tasks.models import Task
 
 blueprint = Blueprint(
     'views_blueprint',
@@ -57,35 +52,22 @@ for subtype, cls in link_class.items():
     styles[subtype] = line_style
 
 
-def get_targets(nodes):
-    targets = []
-    for id in nodes:
-        obj = get_obj(db, Node, id=int(id))
-        targets.append((
-            obj.name,
-            obj.ip_address,
-            obj.operating_system.lower(),
-            obj.secret_password
-        ))
-    return targets
-
-
-def schedule_task(cls, **data):
-    targets = get_targets(session['selection'])
-    task = cls(current_user, targets, **data)
-    db.session.add(task)
-    db.session.commit()
-
-
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
+    scheduling_form.script.choices = Script.choices()
     labels = {'node': 'name', 'link': 'name'}
-    if 'script_type' in request.form:
-        schedule_task(task_class, **form.data)
+    if 'script' in request.form:
+        data = dict(request.form)
+        selection = map(int, session['selection'])
+        data['nodes'] = [get_obj(db, Node, id=id) for id in selection]
+        data['user'] = current_user
+        task = Task(**data)
+        db.session.add(task)
+        db.session.commit()
         return redirect(url_for('tasks_blueprint.task_management'))
     elif 'view_options' in request.form:
         # update labels

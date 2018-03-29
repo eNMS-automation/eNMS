@@ -1,4 +1,4 @@
-from base.models import CustomBase
+from base.models import association_table, CustomBase
 from collections import OrderedDict
 from .properties import (
     link_common_properties,
@@ -64,6 +64,11 @@ class Node(Object):
     longitude = Column(Float)
     latitude = Column(Float)
     secret_password = Column(String)
+    tasks = relationship(
+        "Task",
+        secondary=association_table,
+        back_populates="nodes"
+    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'Node',

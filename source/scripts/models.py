@@ -56,13 +56,17 @@ class NetmikoConfigScript(Script):
         super(NetmikoConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
-    def job(self, name):
-        print(name)
-        # results = kwargs.pop('results')
-        # name = kwargs.pop('name')
-        # script_type = kwargs.pop('type')
-        # try:
-        #     netmiko_handler = ConnectHandler(**kwargs)
+    def job(self, args):
+        task, script, node, results = args
+        try:
+            netmiko_handler = ConnectHandler(
+                device_type= script.driver,
+                ip= node.ip_address,
+                username= task.user.username,
+                password= task.user.password,
+                secret= node.secret_password
+            )
+            result = "wesh ok"
         #     if script_type == 'configuration':
         #         netmiko_handler.send_config_set(self.content.splitlines())
         #         result = 'configuration OK'
@@ -73,10 +77,9 @@ class NetmikoConfigScript(Script):
         #             outputs.append(netmiko_handler.send_command(show_command))
         #         result = '\n\n'.join(outputs)
         #     netmiko_handler.disconnect()
-        # except Exception as e:
-        #     result = 'netmiko config did not work because of {}'.format(e)
-        # results[name] = name
-        # results[name] = result
+        except Exception as e:
+            result = 'netmiko config did not work because of {}'.format(e)
+        results[task.name] = result
 
 
 class FileTransferScript(Script):

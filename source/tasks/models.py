@@ -30,7 +30,7 @@ def job_multiprocessing(name):
     results = {}
     for script in task.scripts:
         pool = ThreadPool(processes=len(task.nodes))
-        args = [(task, script, node, results) for node in task.nodes]
+        args = [(task, node, results) for node in task.nodes]
         pool.map(script.job, args)
         pool.close()
         pool.join()

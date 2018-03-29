@@ -136,10 +136,3 @@ def configure_form(cls):
 @configure_form
 class AnsibleScriptForm(ScriptForm):
     name = TextField('Name')
-
-
-class WorkflowCreationForm(ScriptForm):
-    name = TextField('Name')
-    netmiko_scripts = SelectField('', choices=())
-    napalm_scripts = SelectField('', choices=())
-    ansible_scripts = SelectField('', choices=())

@@ -56,25 +56,27 @@ class NetmikoConfigScript(Script):
         super(NetmikoConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
-    def job(self, kwargs):
-        results = kwargs.pop('results')
-        name = kwargs.pop('name')
-        script_type = kwargs.pop('type')
-        try:
-            netmiko_handler = ConnectHandler(**kwargs)
-            if script_type == 'configuration':
-                netmiko_handler.send_config_set(self.content.splitlines())
-                result = 'configuration OK'
-            else: 
-                # script_type is 'show_commands':
-                outputs = []
-                for show_command in self.content.splitlines():
-                    outputs.append(netmiko_handler.send_command(show_command))
-                result = '\n\n'.join(outputs)
-            netmiko_handler.disconnect()
-        except Exception as e:
-            result = 'netmiko config did not work because of {}'.format(e)
-        results[name] = result
+    def job(self, name):
+        print(name)
+        # results = kwargs.pop('results')
+        # name = kwargs.pop('name')
+        # script_type = kwargs.pop('type')
+        # try:
+        #     netmiko_handler = ConnectHandler(**kwargs)
+        #     if script_type == 'configuration':
+        #         netmiko_handler.send_config_set(self.content.splitlines())
+        #         result = 'configuration OK'
+        #     else: 
+        #         # script_type is 'show_commands':
+        #         outputs = []
+        #         for show_command in self.content.splitlines():
+        #             outputs.append(netmiko_handler.send_command(show_command))
+        #         result = '\n\n'.join(outputs)
+        #     netmiko_handler.disconnect()
+        # except Exception as e:
+        #     result = 'netmiko config did not work because of {}'.format(e)
+        # results[name] = name
+        # results[name] = result
 
 
 class FileTransferScript(Script):

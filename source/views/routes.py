@@ -58,11 +58,14 @@ def view(view_type):
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.script.choices = Script.choices()
+    scheduling_form.scripts.choices = Script.choices()
     labels = {'node': 'name', 'link': 'name'}
     if 'script' in request.form:
         data = dict(request.form)
         selection = map(int, session['selection'])
+        scripts = request.form.getlist('scripts')
+        data['scripts'] = [get_obj(db, Script, name=name) for name in scripts]
+        print(data, request.form)
         data['nodes'] = [get_obj(db, Node, id=id) for id in selection]
         data['user'] = current_user
         task = Task(**data)

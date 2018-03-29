@@ -27,27 +27,10 @@ scheduler = APScheduler()
 def job_multiprocessing(name):
     job_time = str(datetime.now())
     task = get_obj(db, Task, name=name)
-    print(task.__dict__)
-    print(task.user)
-    print(task.user.__dict__)
-    print(task.scripts)
-    print(task.scripts.__dict__)
-    # pool = ThreadPool(processes=10)
-    # results = {}
-    # kwargs = [({
-    #     'ip': ip_address,
-    #     'device_type': driver,
-    #     'username': username,
-    #     'password': password,
-    #     'secret': secret,
-    #     'global_delay_factor': global_delay_factor,
-    #     'name': device_name,
-    #     'results': results,
-    #     'type': type
-    # }) for device_name, ip_address, _, secret in ips]
-    # pool.map(script.job, kwargs)
-    # pool.close()
-    # pool.join()
+    pool = ThreadPool(processes=10)
+    pool.map(task.script.job, task.name)
+    pool.close()
+    pool.join()
     task.logs[job_time] = results
     db.session.commit()
 

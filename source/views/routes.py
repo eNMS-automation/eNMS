@@ -48,7 +48,6 @@ for subtype, cls in link_class.items():
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
-    print('ttt'*100, request.form)
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)

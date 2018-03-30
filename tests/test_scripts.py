@@ -4,6 +4,7 @@ from os.path import join
 from scripts.models import (
     AnsibleScript,
     NapalmConfigScript,
+    NapalmGettersScript,
     NetmikoConfigScript,
     FileTransferScript,
     Script
@@ -93,7 +94,6 @@ file_transfer_script = ImmutableMultiDict([
 
 @check_blueprints('/scripts')
 def test_base_scripts(user_client):
-    # ping with netmiko
     user_client.post('/scripts/netmiko_configuration', data=netmiko_ping)
     assert len(NetmikoConfigScript.query.all()) == 1
     path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
@@ -115,6 +115,20 @@ def test_base_scripts(user_client):
     assert len(FileTransferScript.query.all()) == 1
     assert len(Script.query.all()) == 4
 
+## NAPALM getters
+
+getters_dict = ImmutableMultiDict([
+    ('name', 'napalm_getters_script'),
+    ('getters', 'get_interfaces'),
+    ('getters', 'get_interfaces_ip'),
+    ('getters', 'get_lldp_neighbors'),
+    ('create_script', '')
+])
+
+@check_blueprints('/scripts')
+def test_getters_script(user_client):
+    user_client.post('/scripts/getters', data=getters_dict)
+    assert len(NapalmGettersScript.query.all()) == 1
 
 ## Ansible script
 

@@ -103,6 +103,7 @@ def test_base_scripts(user_client):
     with open(path_yaml, 'rb') as f:
         napalm_jinja2_script['file'] = f
         user_client.post('/scripts/napalm_configuration', data=napalm_jinja2_script)
+    assert len(NapalmConfigScript.query.all()) == 1
     assert len(Script.query.all()) == 3
     netmiko_j2_script = db.session.query(Script).filter_by(name='netmiko_subif').first()
     napalm_j2_script = db.session.query(Script).filter_by(name='napalm_subif').first()
@@ -117,6 +118,7 @@ def test_base_scripts(user_client):
 
 ## NAPALM getters
 
+
 getters_dict = ImmutableMultiDict([
     ('name', 'napalm_getters_script'),
     ('getters', 'get_interfaces'),
@@ -125,10 +127,12 @@ getters_dict = ImmutableMultiDict([
     ('create_script', '')
 ])
 
+
 @check_blueprints('/scripts')
 def test_getters_script(user_client):
     user_client.post('/scripts/getters', data=getters_dict)
     assert len(NapalmGettersScript.query.all()) == 1
+
 
 ## Ansible script
 

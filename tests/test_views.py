@@ -28,8 +28,6 @@ scheduled_task = ImmutableMultiDict([
 ])
 
 
-
-
 @check_blueprints('/views', '/tasks')
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')

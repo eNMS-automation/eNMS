@@ -58,19 +58,7 @@
             <form method="post">
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
                 <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
-
-                <div class="btn-group">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Automation
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a onclick="showModal('netmiko-configuration')"> Netmiko configuration </a></li>
-                  <li><a onclick="showModal('netmiko-file-transfer')"> Netmiko file transfer </a></li>
-                  <li><a onclick="showModal('napalm-getters')">NAPALM getters</a></li>
-                  <li><a onclick="showModal('napalm-configuration')">NAPALM configuration</a></li>
-                  <li><a onclick="showModal('ansible')">Ansible</a></li>
-                </ul>
-                </div>
+                <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Send script</button>
               </div>
             </form>
 

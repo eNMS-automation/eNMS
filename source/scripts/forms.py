@@ -98,7 +98,7 @@ class NetmikoConfigScriptForm(ConfigScriptForm):
 
 class NapalmConfigScriptForm(ConfigScriptForm):
     action_choices = [(v, k) for k, v in napalm_actions.items()]
-    actions = SelectField('Actions', choices=action_choices)
+    action = SelectField('Actions', choices=action_choices)
 
 
 class NapalmGettersForm(ScriptForm):

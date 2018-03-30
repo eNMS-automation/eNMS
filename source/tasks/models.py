@@ -16,8 +16,9 @@ scheduler = APScheduler()
 def job_multiprocessing(name):
     job_time = str(datetime.now())
     task = get_obj(db, Task, name=name)
-    results = {}
+    task.logs[job_time] = {}
     for script in task.scripts:
+        results = {}
         if script.type == 'AnsibleScript':
             results = script.job(task)
         else:
@@ -26,7 +27,7 @@ def job_multiprocessing(name):
             pool.map(script.job, args)
             pool.close()
             pool.join()
-    task.logs[job_time] = results
+        task.logs[job_time][script.name] = results
     db.session.commit()
 
 

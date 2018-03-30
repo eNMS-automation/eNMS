@@ -15,6 +15,7 @@ class ScriptEdge(CustomBase):
         self.source = source
         self.destination = destination
 
+
 class Workflow(CustomBase):
 
     __tablename__ = 'Workflow'

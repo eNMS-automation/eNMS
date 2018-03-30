@@ -1,17 +1,7 @@
 from base.properties import pretty_names
-from collections import OrderedDict
 from flask_wtf import FlaskForm
-from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
 from objects.properties import node_public_properties, link_public_properties
-from wtforms import (
-    BooleanField,
-    FloatField,
-    IntegerField,
-    SelectField,
-    SelectMultipleField,
-    TextAreaField,
-    TextField
-)
+from wtforms import IntegerField, SelectField, SelectMultipleField, TextField
 
 
 class ViewOptionsForm(FlaskForm):

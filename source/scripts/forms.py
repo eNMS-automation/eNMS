@@ -6,7 +6,6 @@ from wtforms import (
     BooleanField,
     FileField,
     FloatField,
-    IntegerField,
     SelectField,
     SelectMultipleField,
     TextAreaField,
@@ -65,6 +64,7 @@ ansible_options = {
     'check': ('Check', False),
     'diff': ('Diff', False)
 }
+
 
 class ScriptForm(FlaskForm):
     name = TextField('Name')

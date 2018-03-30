@@ -1,22 +1,11 @@
-from tempfile import NamedTemporaryFile
 from base.database import db
-from base.helpers import str_dict
 from base.models import task_node_table, task_script_table, CustomBase
-from collections import namedtuple
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
 from objects.models import get_obj
-from passlib.hash import cisco_type7
-from scripts.models import (
-    AnsibleScript,
-    FileTransferScript,
-    NapalmConfigScript,
-    NapalmGettersScript,
-    NetmikoConfigScript
-)
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
-from sqlalchemy.ext.mutable import MutableDict, MutableList
+from sqlalchemy import Boolean, Column, Integer, String, PickleType
+from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
 scheduler = APScheduler()
@@ -82,11 +71,11 @@ class Task(CustomBase):
 
     def __init__(self, **data):
         self.data = data
-        self.name ,= data['name']
+        self.name = data['name'][0]
         self.nodes = data['nodes']
         self.user = data['user']
         self.scripts = data['scripts']
-        self.frequency ,= data['frequency']
+        self.frequency = data['frequency'][0]
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
         self.creator = data['user'].username
@@ -94,7 +83,7 @@ class Task(CustomBase):
         # if the start date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting
         for date in ('start_date', 'end_date'):
-            date ,= data[date]
+            date = data[date][0]
             value = self.datetime_conversion(date) if date else None
             setattr(self, date, value)
         self.is_active = True

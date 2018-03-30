@@ -8,6 +8,7 @@ except Exception:
     warnings.warn('ansible import failed: ansible feature deactivated')
 from base.helpers import str_dict
 from base.models import task_script_table, CustomBase
+from collections import namedtuple
 from .forms import ansible_options
 from napalm import get_network_driver
 from netmiko import ConnectHandler
@@ -59,9 +60,9 @@ class NetmikoConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        self.driver ,= data['driver']
-        self.global_delay_factor ,= data['global_delay_factor']
-        self.netmiko_type ,= data['netmiko_type']
+        self.driver = data['driver'][0]
+        self.global_delay_factor = data['global_delay_factor'][0]
+        self.netmiko_type = data['netmiko_type'][0]
         print(self.netmiko_type)
         super(NetmikoConfigScript, self).__init__(name)
         self.content = ''.join(content)
@@ -79,7 +80,7 @@ class NetmikoConfigScript(Script):
             if self.netmiko_type == 'configuration':
                 netmiko_handler.send_config_set(self.content.splitlines())
                 result = 'configuration OK'
-            else: 
+            else:
                 # script_type is 'show_commands':
                 outputs = []
                 for show_command in self.content.splitlines():
@@ -155,7 +156,7 @@ class NapalmConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        self.action ,= data['action']
+        self.action = data['action'][0]
         super(NapalmConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
@@ -247,11 +248,11 @@ class AnsibleScript(Script):
         temporary_file = NamedTemporaryFile(delete=False)
         temporary_file.write('\n'.join(hosts))
         temporary_file.close()
-    
+
         # sources is a list of paths to inventory files"
         inventory = InventoryManager(loader=loader, sources=temporary_file.name)
         variable_manager = VariableManager(loader=loader, inventory=inventory)
-    
+
         options_dict = {
             'listtags': False,
             'listtasks': False,
@@ -273,7 +274,7 @@ class AnsibleScript(Script):
             'check': False,
             'diff': False
         }
-    
+
         Options = namedtuple('Options', list(options_dict))
         passwords = {}
         playbook_executor = PlaybookExecutor(

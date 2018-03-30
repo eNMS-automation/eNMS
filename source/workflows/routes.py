@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required
+from .forms import AddScriptForm
 from .models import Workflow
 from scripts.models import Script
 
 blueprint = Blueprint(
-    'workflow_blueprint',
+    'workflows_blueprint',
     __name__,
     url_prefix='/workflow',
     template_folder='templates',
@@ -45,7 +46,9 @@ def configuration(script_type):
 @blueprint.route('/workflow_creation', methods=['GET', 'POST'])
 @login_required
 def workflow_creation():
-    # form = 
+    form = AddScriptForm(request.form)
+    form.scripts.choices = Script.choices()
     return render_template(
         'workflow.html',
+        form=form
     )

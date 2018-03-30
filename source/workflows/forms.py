@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, TextField
+from wtforms import SelectMultipleField, TextField
 
 
-class WorkflowCreationForm(FlaskForm):
+class AddScriptForm(FlaskForm):
     name = TextField('Name')
-    scripts = SelectField('', choices=())
+    scripts = SelectMultipleField('', choices=())

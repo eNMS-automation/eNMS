@@ -1,4 +1,5 @@
 from .database import Base
+from sqlalchemy import Column, ForeignKey, Integer, Table
 
 
 class CustomBase(Base):
@@ -17,3 +18,18 @@ class CustomBase(Base):
     @classmethod
     def visible_objects(cls):
         return (obj for obj in cls.query.all() if obj.visible)
+
+
+task_node_table = Table(
+    'task_node_association',
+    CustomBase.metadata,
+    Column('node_id', Integer, ForeignKey('Node.id')),
+    Column('task_id', Integer, ForeignKey('Task.id'))
+)
+
+task_script_table = Table(
+    'task_script_association',
+    CustomBase.metadata,
+    Column('script_id', Integer, ForeignKey('Script.id')),
+    Column('task_id', Integer, ForeignKey('Task.id'))
+)

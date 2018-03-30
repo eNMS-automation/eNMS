@@ -1,0 +1,66 @@
+{% extends "base_site.html" %}
+
+{% block title %} Script creation {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+      <!-- begin row -->
+      <div class="row">
+        <!-- begin column -->
+        <div class="col-md-4 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h3>Parameters</h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="form-group" style="height: 550px">
+                {% for field in form if field.widget.input_type != 'hidden'  %}                  
+                  <label>{{ field.name }}</label>
+                  {% if field.name != 'text' %}
+                    <div class='form-group'>
+                      {{ field(class="form-control", placeholder=field.label.text) }}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+                
+                <div class="ln_solid"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success" name="create_script">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end column -->
+
+        <!-- begin column -->
+        <div class="col-md-8 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h3>Script</h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="form-group" style="height: 550px">
+                {{ form.text(class="form-control", rows='26') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end column -->
+      </div>
+      <!-- end row -->
+    </form>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+{% endblock javascripts %}

@@ -20,20 +20,14 @@
             </div>
             <div class="x_content">
               <div class="form-group" style="height: 550px">
-                <label>Name</label>
-                <div class='form-group'>
-                    {{ form.name(class="form-control", required=true) }}
-                </div>
-
-                <label>Type</label>
-                <div class='form-group'>
-                    {{ form.type(class="form-control") }}
-                </div>
-
-                <label>YAML file</label>
-                <div class='form-group'>
-                    {{ form.file() }}
-                </div>
+                {% for field in form if field.widget.input_type != 'hidden'  %}                  
+                  <label>{{ field.name }}</label>
+                  {% if field.name != 'text' %}
+                    <div class='form-group'>
+                      {{ field(class="form-control", placeholder=field.label.text) }}
+                    </div>
+                  {% endif %}
+                {% endfor %}
                 
                 <div class="ln_solid"></div>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">

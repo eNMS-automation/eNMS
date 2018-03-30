@@ -28,9 +28,11 @@ urls = {
     ),
     '/scripts': (
         '/overview',
-        '/configuration_script',
-        '/file_transfer_script',
-        '/ansible_script'
+        '/netmiko_configuration',
+        '/napalm_configuration',
+        '/getters',
+        '/file_transfer',
+        '/ansible'
     ),
     '/tasks': (
         '/task_management',

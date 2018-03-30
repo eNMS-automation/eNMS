@@ -7,30 +7,41 @@ from test_scripts import netmiko_ping, napalm_jinja2_script
 from werkzeug.datastructures import ImmutableMultiDict
 
 
-scheduler_dict = ImmutableMultiDict([
-    ('name', 'scheduler_test'),
-    ('scripts', 'sfes'),
-    ('scripts', 'napalm_getters_script'),
+instant_task = ImmutableMultiDict([
+    ('name', 'instant_task'),
+    ('scripts', 'napalm_subif'),
+    ('scripts', 'netmiko_ping'),
     ('start_date', ''),
     ('end_date', ''),
     ('frequency', ''),
     ('script', '')
 ])
 
+scheduled_task = ImmutableMultiDict([
+    ('name', 'scheduled_task'),
+    ('scripts', 'napalm_subif'),
+    ('scripts', 'netmiko_ping'),
+    ('start_date', '30/03/2018 19:10:13'),
+    ('end_date', '06/04/2018 19:10:13'),
+    ('frequency', '3600'),
+    ('script', '')
+])
+
+
+
 
 @check_blueprints('/views', '/tasks')
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
+    user_client.post('/scripts/netmiko_configuration', data=netmiko_ping)
     path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
-        jinja2_script['file'] = f
-        user_client.post('/scripts/configuration_script', data=jinja2_script)
+        napalm_jinja2_script['file'] = f
+        user_client.post('/scripts/napalm_configuration', data=napalm_jinja2_script)
     with user_client.session_transaction() as sess:
         sess['selection'] = ['1', '21', '22']
-    user_client.post('views/geographical_view', data=netmiko_config)
-    user_client.post('views/geographical_view', data=napalm_config)
-    assert len(NapalmConfigTask.query.all()) == 1
-    assert len(NetmikoConfigTask.query.all()) == 1
+    user_client.post('views/geographical_view', data=instant_task)
+    user_client.post('views/geographical_view', data=scheduled_task)
     assert len(Task.query.all()) == 2
 
 

@@ -1,10 +1,3 @@
-from base.models import task_script_table, CustomBase
-from .forms import ansible_options
-from netmiko import ConnectHandler
-from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import relationship
-from napalm import get_network_driver
 try:
     from ansible.parsing.dataloader import DataLoader
     from ansible.vars.manager import VariableManager
@@ -13,6 +6,16 @@ try:
 except Exception:
     import warnings
     warnings.warn('ansible import failed: ansible feature deactivated')
+from base.helpers import str_dict
+from base.models import task_script_table, CustomBase
+from .forms import ansible_options
+from napalm import get_network_driver
+from netmiko import ConnectHandler
+from passlib.hash import cisco_type7
+from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
+from sqlalchemy.ext.mutable import MutableDict, MutableList
+from sqlalchemy.orm import relationship
+from tempfile import NamedTemporaryFile
 
 
 class Script(CustomBase):
@@ -59,6 +62,7 @@ class NetmikoConfigScript(Script):
         self.driver ,= data['driver']
         self.global_delay_factor ,= data['global_delay_factor']
         self.netmiko_type ,= data['netmiko_type']
+        print(self.netmiko_type)
         super(NetmikoConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
@@ -69,10 +73,10 @@ class NetmikoConfigScript(Script):
                 device_type=self.driver,
                 ip=node.ip_address,
                 username=task.user.username,
-                password=task.user.password,
+                password=cisco_type7.decode(task.user.password),
                 secret=node.secret_password
             )
-            if self.netmiko_type == 'Configuration':
+            if self.netmiko_type == 'configuration':
                 netmiko_handler.send_config_set(self.content.splitlines())
                 result = 'configuration OK'
             else: 
@@ -81,9 +85,12 @@ class NetmikoConfigScript(Script):
                 for show_command in self.content.splitlines():
                     outputs.append(netmiko_handler.send_command(show_command))
                 result = '\n\n'.join(outputs)
-            netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
+        try:
+            netmiko_handler.disconnect()
+        except Exception:
+            pass
         results[node.name] = result
 
 
@@ -112,7 +119,7 @@ class FileTransferScript(Script):
                 device_type=self.driver,
                 ip=node.ip_address,
                 username=task.user.username,
-                password=task.user.password,
+                password=cisco_type7.decode(task.user.password),
                 secret=node.secret_password
             )
             # still in netmiko develop branch for now
@@ -148,7 +155,7 @@ class NapalmConfigScript(Script):
 
     def __init__(self, content, **data):
         name = data['name'][0]
-        self.action = data['action']
+        self.action ,= data['action']
         super(NapalmConfigScript, self).__init__(name)
         self.content = ''.join(content)
 
@@ -159,7 +166,7 @@ class NapalmConfigScript(Script):
             napalm_driver = driver(
                 hostname=node.ip_address,
                 username=task.user.username,
-                password=task.user.password,
+                password=cisco_type7.decode(task.user.password),
                 optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
@@ -198,7 +205,7 @@ class NapalmGettersScript(Script):
             napalm_driver = driver(
                 hostname=node.ip_address,
                 username=task.user.username,
-                password=task.user.password,
+                password=cisco_type7.decode(task.user.password),
                 optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()

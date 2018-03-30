@@ -17,7 +17,7 @@
 {% set buttons %}
 <form id="aform" method="post">
   <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
-    <button type="button" class="btn btn-primary" onclick="show_modal('filters')">Parameters</button>
+    <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
 
     {% if view == 'leaflet' %}
       <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
@@ -41,14 +41,8 @@
       </ul>
     </div> 
     
-    <div class="btn-group">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Automation
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a onclick="show_modal('scheduling')">Schedule a script</a></li>
-      </ul>
-    </div> 
+    <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Send script</button>
+
   </div>
 </form>
 {% endset %}
@@ -321,7 +315,7 @@
   </script>
 
   <script>
-  function show_modal(modal_name){
+  function showModal(modal_name){
     $(`#${modal_name}`).modal('show');
     }
 

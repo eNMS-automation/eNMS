@@ -46,7 +46,6 @@ def scripts():
 @blueprint.route('/<script_type>_configuration', methods=['GET', 'POST'])
 @login_required
 def configuration(script_type):
-    print('ttt'*100, request.form)
     form = {
         'netmiko': NetmikoConfigScriptForm,
         'napalm': NapalmConfigScriptForm
@@ -77,7 +76,6 @@ def configuration(script_type):
 @blueprint.route('/getters', methods=['GET', 'POST'])
 @login_required
 def napalm_getters():
-    print('ttt'*100, request.form)
     form = NapalmGettersForm(request.form)
     if 'create_script' in request.form:
         script = NapalmGettersScript(**request.form)
@@ -92,7 +90,6 @@ def napalm_getters():
 @blueprint.route('/file_transfer', methods=['GET', 'POST'])
 @login_required
 def file_transfer_script():
-    print('ttt'*100, request.form)
     form = FileTransferScriptForm(request.form)
     if request.method == 'POST':
         script = FileTransferScript(**request.form)

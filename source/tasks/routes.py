@@ -36,7 +36,7 @@ def task_management():
     form_per_task = {}
     for task in filter(lambda t: t.recurrent, tasks):
         form = CompareForm(request.form)
-        form.first_node.choices = [(i, i) for (i, _, _, _) in task.nodes]
+        form.first_node.choices = [(i, i) for i in task.nodes]
         form.second_node.choices = form.first_node.choices
         versions = [(v, v) for v in tuple(task.logs)]
         form.first_version.choices = form.second_version.choices = versions

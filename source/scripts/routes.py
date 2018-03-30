@@ -3,10 +3,23 @@ from base.helpers import allowed_file
 from base.properties import pretty_names
 from flask import Blueprint, current_app, render_template, request
 from flask_login import login_required
-from .forms import AnsibleScriptForm, ConfigScriptForm, FileTransferScriptForm
+from .forms import (
+    AnsibleScriptForm,
+    NapalmConfigScriptForm,
+    NapalmGettersForm,
+    NetmikoConfigScriptForm,
+    FileTransferScriptForm
+)
 from jinja2 import Template
 from yaml import load
-from .models import AnsibleScript, ConfigScript, FileTransferScript, Script
+from scripts.models import (
+    AnsibleScript,
+    FileTransferScript,
+    NapalmConfigScript,
+    NapalmGettersScript,
+    NetmikoConfigScript,
+    Script
+)
 from os.path import join
 from werkzeug import secure_filename
 
@@ -30,31 +43,51 @@ def scripts():
     )
 
 
-@blueprint.route('/configuration_script', methods=['GET', 'POST'])
+@blueprint.route('/<script_type>_configuration', methods=['GET', 'POST'])
 @login_required
-def config_script():
-    form = ConfigScriptForm(request.form)
+def configuration(script_type):
+    form = {
+        'netmiko': NetmikoConfigScriptForm,
+        'napalm': NapalmConfigScriptForm
+    }[script_type](request.form)
     if 'create_script' in request.form:
         # retrieve the raw script: we will use it as-is or update it depending
         # on the type of script (jinja2-enabled template or not)
         content = request.form['text']
-        if form.data['type'] != 'simple':
+        if form.data['content_type'] != 'simple':
             file = request.files['file']
             filename = secure_filename(file.filename)
             if allowed_file(filename, {'yaml', 'yml'}):
                 parameters = load(file.read())
                 template = Template(content)
                 content = template.render(**parameters)
-        script = ConfigScript(content, **request.form)
+        script = {
+            'netmiko': NetmikoConfigScript,
+            'napalm': NapalmConfigScript
+        }[script_type](content, **request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(
-        'configuration_script.html',
+        script_type + '_configuration.html',
         form=form
     )
 
 
-@blueprint.route('/file_transfer_script', methods=['GET', 'POST'])
+@blueprint.route('/getters', methods=['GET', 'POST'])
+@login_required
+def napalm_getters():
+    form = NapalmGettersForm(request.form)
+    if 'create_script' in request.form:
+        script = NapalmGettersScript(**request.form)
+        db.session.add(script)
+        db.session.commit()
+    return render_template(
+        'napalm_getters.html',
+        form=form
+    )
+
+
+@blueprint.route('/file_transfer', methods=['GET', 'POST'])
 @login_required
 def file_transfer_script():
     form = FileTransferScriptForm(request.form)
@@ -63,12 +96,12 @@ def file_transfer_script():
         db.session.add(script)
         db.session.commit()
     return render_template(
-        'file_transfer_script.html',
+        'file_transfer.html',
         form=form
     )
 
 
-@blueprint.route('/ansible_script', methods=['GET', 'POST'])
+@blueprint.route('/ansible', methods=['GET', 'POST'])
 @login_required
 def ansible_script():
     form = AnsibleScriptForm(request.form)
@@ -81,13 +114,6 @@ def ansible_script():
         db.session.add(script)
         db.session.commit()
     return render_template(
-        'ansible_script.html',
+        'ansible.html',
         form=form
-    )
-
-@blueprint.route('/workflow_creation', methods=['GET', 'POST'])
-@login_required
-def workflow_creation():
-    return render_template(
-        'workflow.html',
     )

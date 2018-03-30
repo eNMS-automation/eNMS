@@ -1,0 +1,149 @@
+{% extends "base_site.html" %}
+
+{% block title %} User management {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+ <!-- Vis CSS -->
+  <link href="{{ url_for('workflows_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
+  <!-- Vis JS -->
+  <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
+{% endblock stylesheets %}
+
+{% block content %}
+  <div id="add-script" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Add script</h4>
+        </div>
+          <div class="modal-body">
+            <div class="form-group">
+            {{ form.scripts(id="scripts", class="form-control", size=15)}}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="submit" name="view_options" class="btn btn-success" onclick="addNodes()">Submit</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="right_col" role="main">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; left:30px;">
+              <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="edgeMode()">Create edge</button>
+              <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="deleteSelection()">Delete selection</button>
+              <button type="button" class="btn btn-primary" onclick="showModal('add-script')">Add script</button>
+            </div> 
+            <div id="network" style="height:600px; width:100%;></div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
+                <button class="btn btn-primary" type="reset">Reset</button>
+                <button type="submit" class="btn btn-success">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <script>
+    function showModal(modal_name){
+      $(`#${modal_name}`).modal('show');
+      }
+  
+    var container = document.getElementById('network');
+    var dsoptions = {
+      manipulation: {
+        enabled: false,
+        addNode: function (data, callback) {
+          // filling in the popup DOM elements
+          console.log(data);
+        },
+        editNode: function (data, callback) {
+          // filling in the popup DOM elements
+          console.log('edit', data);
+        },
+        addEdge: function (data, callback) {
+          console.log('add edge', data);
+          data.arrows = {to: {enabled: true}};
+          if (data.from == data.to) {
+              var r = confirm("Do you want to connect the node to itself?");
+              if (r === true) {
+                  callback(data);
+              }
+          }
+          else {
+              callback(data);
+          }
+          // after each adding you will be back to addEdge mode
+          network.addEdgeMode();
+        }
+    }};
+
+    var o_nodes = [
+      {
+        id: 1,
+        label: 'Start'
+      },
+      {
+        id: 2,
+        label: 'End'
+      }
+    ];
+
+    var nodes = new vis.DataSet(o_nodes);
+
+    // Create a DataSet with data (enables two way data binding)
+    var data = {nodes: nodes};
+    var options = {};
+    var network = new vis.Network(container, data, dsoptions);
+
+    function addNodes() {
+      var scripts = $('#scripts').val();
+      for (var i = 0; i < scripts.length; i++) {
+        nodes.add({
+          id: scripts[i],
+          label: scripts[i]
+        })
+        $('#add-script').modal('hide');
+      }
+    }
+
+    function deleteSelection() {
+      network.deleteSelected()
+    }
+
+    function edgeMode() {
+      if ($('#edge_mode').text() == "Create edge") {
+        $('#edge_mode').text("Move node");
+        network.addEdgeMode()
+      } else {
+        $('#edge_mode').text("Create edge")
+        network.addNodeMode();
+      }
+    }
+    // here you init the addEdge mode
+    //network.addEdgeMode();
+
+    network.on('click', function() {
+
+      //network.addEdgeMode();
+    });
+    </script>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+{% endblock javascripts %}

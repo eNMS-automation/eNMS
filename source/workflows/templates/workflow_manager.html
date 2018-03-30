@@ -119,10 +119,19 @@
         })
         $('#add-script').modal('hide');
       }
+      updateMode();
     }
 
     function deleteSelection() {
       network.deleteSelected()
+    }
+
+    function updateMode() {
+      if ($('#edge_mode').text() == "Create edge") {
+        network.addNodeMode()
+      } else {
+        network.addEdgeMode();
+      }
     }
 
     function edgeMode() {
@@ -134,13 +143,8 @@
         network.addNodeMode();
       }
     }
-    // here you init the addEdge mode
-    //network.addEdgeMode();
 
-    network.on('click', function() {
 
-      //network.addEdgeMode();
-    });
     </script>
 {% endblock content %}
 

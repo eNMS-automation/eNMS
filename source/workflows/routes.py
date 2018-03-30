@@ -1,3 +1,4 @@
+from base.database import db
 from base.properties import pretty_names
 from flask import Blueprint, render_template, request
 from flask_login import login_required
@@ -30,7 +31,7 @@ def workflows():
 def workflow_creation():
     form = WorkflowCreationForm(request.form)
     if request.method == 'POST':
-        workflow = Workflow(**request.form)
+        workflow = Workflow(**request.form.to_dict())
         db.session.add(workflow)
         db.session.commit()
     return render_template(

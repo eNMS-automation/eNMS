@@ -46,10 +46,11 @@ def scripts():
 @blueprint.route('/<script_type>_configuration', methods=['GET', 'POST'])
 @login_required
 def configuration(script_type):
+    print('ttt'*100, request.form)
     form = {
         'netmiko': NetmikoConfigScriptForm,
         'napalm': NapalmConfigScriptForm
-        }[script_type](request.form)
+    }[script_type](request.form)
     if 'create_script' in request.form:
         # retrieve the raw script: we will use it as-is or update it depending
         # on the type of script (jinja2-enabled template or not)
@@ -64,7 +65,7 @@ def configuration(script_type):
         script = {
             'netmiko': NetmikoConfigScript,
             'napalm': NapalmConfigScript
-            }[script_type](content, **request.form)
+        }[script_type](content, **request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(
@@ -76,6 +77,7 @@ def configuration(script_type):
 @blueprint.route('/getters', methods=['GET', 'POST'])
 @login_required
 def napalm_getters():
+    print('ttt'*100, request.form)
     form = NapalmGettersForm(request.form)
     if 'create_script' in request.form:
         script = NapalmGettersScript(**request.form)
@@ -90,6 +92,7 @@ def napalm_getters():
 @blueprint.route('/file_transfer', methods=['GET', 'POST'])
 @login_required
 def file_transfer_script():
+    print('ttt'*100, request.form)
     form = FileTransferScriptForm(request.form)
     if request.method == 'POST':
         script = FileTransferScript(**request.form)

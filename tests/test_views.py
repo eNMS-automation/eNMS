@@ -82,9 +82,6 @@ def test_netmiko_show(user_client):
 netmiko_config = ImmutableMultiDict([
     ('name', 'test_netmiko_config'),
     ('script', 'subif'),
-    ('type', 'configuration'),
-    ('driver', 'cisco_xr_ssh'),
-    ('global_delay_factor', '1.0'),
     ('start_date', '01/06/2090 18:59:11'),
     ('end_date', '01/06/2099 18:59:11'),
     ('frequency', '10000'),
@@ -94,11 +91,9 @@ netmiko_config = ImmutableMultiDict([
 napalm_config = ImmutableMultiDict([
     ('name', 'test'),
     ('script', 'subif'),
-    ('actions', 'load_merge_candidate'),
     ('start_date', '01/06/2090 18:59:11'),
     ('end_date', '01/06/2099 18:59:11'),
     ('frequency', '10000'),
-    ('script_type', 'napalm_configuration')
 ])
 
 

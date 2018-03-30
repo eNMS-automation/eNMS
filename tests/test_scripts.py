@@ -3,7 +3,8 @@ from conftest import path_playbooks, path_scripts
 from os.path import join
 from scripts.models import (
     AnsibleScript,
-    ConfigScript,
+    NapalmConfigScript,
+    NetmikoConfigScript,
     FileTransferScript,
     Script
 )
@@ -14,13 +15,16 @@ from werkzeug.datastructures import ImmutableMultiDict
 # test the creation of file transfer script (netmiko via SCP)
 # test the creation of ansible script
 
-## Standard scripts (configuration, file transfer)
+## Netmiko configuration
 
-simple_script = ImmutableMultiDict([
-    ('name', 'ping'),
-    ('type', 'simple'),
+netmiko_ping = ImmutableMultiDict([
+    ('name', 'netmiko_ping'),
+    ('content_type', 'simple'),
     ('create_script', ''),
-    ('text', 'ping 1.1.1.1')
+    ('text', 'ping 1.1.1.1'),
+    ('netmiko_type', 'show_commands'),
+    ('driver', 'cisco_xr_ssh'),
+    ('global_delay_factor', '1.0'),
 ])
 
 template = '''
@@ -57,11 +61,23 @@ no ip redirects
 ip ospf cost 620
 '''
 
-jinja2_script = dict([
-    ('name', 'subif'),
-    ('type', 'j2_template'),
+netmiko_jinja2_script = dict([
+    ('name', 'netmiko_subif'),
+    ('content_type', 'j2_template'),
     ('create_script', ''),
-    ('text', template)
+    ('text', template),
+    ('netmiko_type', 'configuration'),
+    ('driver', 'cisco_xr_ssh'),
+    ('global_delay_factor', '1.0'),
+])
+
+napalm_jinja2_script = dict([
+    ('name', 'napalm_subif'),
+    ('content_type', 'j2_template'),
+    ('create_script', ''),
+    ('text', template),
+    ('script_type', 'napalm_configuration'),
+    ('action', 'load_merge_candidate')
 ])
 
 file_transfer_script = ImmutableMultiDict([
@@ -77,22 +93,27 @@ file_transfer_script = ImmutableMultiDict([
 
 @check_blueprints('/scripts')
 def test_base_scripts(user_client):
-    ## configuration script (simple, Jinja2)
-    user_client.post('/scripts/configuration_script', data=simple_script)
-    assert len(ConfigScript.query.all()) == 1
+    # ping with netmiko
+    user_client.post('/scripts/netmiko_configuration', data=netmiko_ping)
+    assert len(NetmikoConfigScript.query.all()) == 1
     path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
-        jinja2_script['file'] = f
-        user_client.post('/scripts/configuration_script', data=jinja2_script)
-    assert len(ConfigScript.query.all()) == 2
-    j2_script = db.session.query(Script).filter_by(name='subif').first()
+        netmiko_jinja2_script['file'] = f
+        user_client.post('/scripts/netmiko_configuration', data=netmiko_jinja2_script)
+    with open(path_yaml, 'rb') as f:
+        napalm_jinja2_script['file'] = f
+        user_client.post('/scripts/napalm_configuration', data=napalm_jinja2_script)
+    assert len(Script.query.all()) == 3
+    netmiko_j2_script = db.session.query(Script).filter_by(name='netmiko_subif').first()
+    napalm_j2_script = db.session.query(Script).filter_by(name='napalm_subif').first()
     # simply removing the space does not work as yaml relies on dict, which
     # are not ordered, we use set instead for the test to pass on python 2 and 3
-    assert set(j2_script.content.split('\n')) == set(result.split('\n'))
+    assert set(netmiko_j2_script.content.split('\n')) == set(result.split('\n'))
+    assert set(napalm_j2_script.content.split('\n')) == set(result.split('\n'))
     ## file transfer script
-    user_client.post('scripts/file_transfer_script', data=file_transfer_script)
+    user_client.post('scripts/file_transfer', data=file_transfer_script)
     assert len(FileTransferScript.query.all()) == 1
-    assert len(Script.query.all()) == 3
+    assert len(Script.query.all()) == 4
 
 
 ## Ansible script
@@ -126,6 +147,6 @@ def test_ansible_scripts(user_client):
     path_yaml = join(path_playbooks, 'save_running_config.yml')
     with open(path_yaml, 'rb') as f:
         ansible_script['file'] = f
-        user_client.post('/scripts/ansible_script', data=ansible_script)
+        user_client.post('/scripts/ansible', data=ansible_script)
     assert len(AnsibleScript.query.all()) == 1
     assert len(Script.query.all()) == 1

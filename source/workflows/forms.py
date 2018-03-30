@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectMultipleField, TextField
+from wtforms import SelectMultipleField
 
 
 class AddScriptForm(FlaskForm):

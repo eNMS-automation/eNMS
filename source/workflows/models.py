@@ -21,8 +21,10 @@ class Workflow(CustomBase):
     __tablename__ = 'Workflow'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(120))
+    name = Column(String)
+    description = Column(String)
     edges = relationship('ScriptEdge')
 
-    def __init__(self):
-        pass
+    def __init__(self, **kwargs):
+        self.name = kwargs['name']
+        self.description = kwargs['description']

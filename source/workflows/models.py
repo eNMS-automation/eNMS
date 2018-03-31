@@ -10,9 +10,16 @@ class ScriptEdge(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     source_id = Column(Integer, ForeignKey('Script.id'))
-    source = relationship('Script', primaryjoin="Script.id == ScriptEdge.source_id")
+    source = relationship(
+        'Script',
+        primaryjoin="Script.id == ScriptEdge.source_id",
+        backref='destinations'
+    )
     destination_id = Column(Integer, ForeignKey('Script.id'))
-    destination = relationship('Script', primaryjoin="Script.id == ScriptEdge.destination_id")
+    destination = relationship(
+        'Script',
+        primaryjoin="Script.id == ScriptEdge.destination_id"
+    )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='edges')
 
@@ -33,6 +40,11 @@ class Workflow(CustomBase):
         'Script',
         secondary=script_workflow_table,
         back_populates='workflows'
+    )
+    start_script_id = Column(Integer, ForeignKey('Script.id'))
+    start_script = relationship(
+        'Script',
+        primaryjoin="Script.id == Workflow.start_script_id"
     )
     edges = relationship('ScriptEdge', back_populates='workflow')
 

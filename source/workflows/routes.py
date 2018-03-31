@@ -78,12 +78,3 @@ def save_workflow(workflow):
         workflow.start_script = get_obj(db, Script, id=start_id)
     db.session.commit()
     return jsonify({})
-
-
-@blueprint.route('/run_<workflow>', methods=['POST'])
-@login_required
-def run_workflow(workflow):
-    workflow = get_obj(db, Workflow, name=workflow)
-    for script in workflow.start_script.script_neighbors(workflow):
-        print('ttt' * 200, workflow.start_script, script)
-    return jsonify({})

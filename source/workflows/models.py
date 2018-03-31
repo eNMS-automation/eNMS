@@ -1,4 +1,4 @@
-from base.models import script_workflow_table, CustomBase
+from base.models import script_workflow_table, task_workflow_table, CustomBase
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -36,10 +36,16 @@ class Workflow(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(String)
+    type = Column(String)
     scripts = relationship(
         'Script',
         secondary=script_workflow_table,
         back_populates='workflows'
+    )
+    tasks = relationship(
+        "Task",
+        secondary=task_workflow_table,
+        back_populates="workflows"
     )
     start_script_id = Column(Integer, ForeignKey('Script.id'))
     start_script = relationship(
@@ -51,3 +57,17 @@ class Workflow(CustomBase):
     def __init__(self, **kwargs):
         self.name = kwargs['name']
         self.description = kwargs['description']
+
+    def job(self, args):
+        task, node, results = args
+        layer, visited = {self.start_script}, set()
+        print('test')
+        while layer:
+            new_layer = set()
+            for script in layer:
+                visited.add(script)
+                for neighbor in script.script_neighbors(self):
+                    if neighbor not in visited:
+                        new_layer.add(neighbor)
+                        results[script.name] = neighbor.name
+            layer = new_layer

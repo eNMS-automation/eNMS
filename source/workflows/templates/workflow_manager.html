@@ -43,6 +43,7 @@
               <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="edgeMode()">Create edge</button>
               <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="deleteSelection()">Delete selection</button>
               <button type="button" class="btn btn-primary" onclick="showModal('add-script')">Add script</button>
+              <button type="button" class="btn btn-success" onclick="saveWorkflow()">Save changes</button>
             </div> 
             <div id="network" style="height:600px; width:100%;></div>
             <div class="ln_solid"></div>
@@ -78,35 +79,37 @@
         addEdge: function (data, callback) {
           console.log('add edge', data);
           data.arrows = {to: {enabled: true}};
-          if (data.from == data.to) {
-              var r = confirm("Do you want to connect the node to itself?");
-              if (r === true) {
-                  callback(data);
-              }
-          }
-          else {
-              callback(data);
+          if (data.from != data.to) {
+            edges.add(data);
           }
           // after each adding you will be back to addEdge mode
           network.addEdgeMode();
         }
     }};
 
-    var o_nodes = [
-      {
-        id: 1,
-        label: 'Start'
-      },
-      {
-        id: 2,
-        label: 'End'
-      }
+    var workflow_nodes = [
+      {% for node in workflow.scripts %}
+        {
+          id: '{{ node.id }}',
+          label: '{{ node.name }}'
+        },
+      {% endfor %}
     ];
 
-    var nodes = new vis.DataSet(o_nodes);
+    var workflow_edges = [
+      {% for edge in workflow.edges %}
+        {
+          from: '{{ edge['source']['id'] }}',
+          to: '{{ edge['destination']['id'] }}'
+        },
+      {% endfor %}
+    ];
+
+    var nodes = new vis.DataSet(workflow_nodes);
+    var edges = new vis.DataSet(workflow_edges);
 
     // Create a DataSet with data (enables two way data binding)
-    var data = {nodes: nodes};
+    var data = {nodes: nodes, edges: edges};
     var options = {};
     var network = new vis.Network(container, data, dsoptions);
 
@@ -144,6 +147,21 @@
       }
     }
 
+    function saveWorkflow() {
+      ajax_data = {
+        'nodes':  nodes.get({fields: ['id', 'label']}),
+        'edges': edges.get({fields: ['to', 'from']})
+      }
+      $.ajax({
+        type: "POST",
+        url: "/workflows/save_" + "{{ workflow.name }}",
+        contentType: 'application/json;charset=UTF-8',
+        data: JSON.stringify(ajax_data, null, '\t'),
+        success: function(msg){
+            $('.answer').html(msg);
+        }
+      });
+    }
 
     </script>
 {% endblock content %}

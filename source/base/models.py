@@ -33,3 +33,10 @@ task_script_table = Table(
     Column('script_id', Integer, ForeignKey('Script.id')),
     Column('task_id', Integer, ForeignKey('Task.id'))
 )
+
+script_workflow_table = Table(
+    'script_workflow_association',
+    CustomBase.metadata,
+    Column('script_id', Integer, ForeignKey('Script.id')),
+    Column('workflow_id', Integer, ForeignKey('Workflow.id'))
+)

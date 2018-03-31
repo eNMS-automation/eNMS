@@ -151,5 +151,4 @@ def putty_connection():
 @login_required
 def selection():
     session['selection'] = list(set(request.form.getlist('selection[]')))
-    print(session['selection'])
     return dumps({'success': True}), 200, {'ContentType': 'application/json'}

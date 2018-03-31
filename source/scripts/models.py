@@ -7,7 +7,7 @@ except Exception:
     import warnings
     warnings.warn('ansible import failed: ansible feature deactivated')
 from base.helpers import str_dict
-from base.models import task_script_table, CustomBase
+from base.models import script_workflow_table, task_script_table, CustomBase
 from collections import namedtuple
 from .forms import ansible_options
 from napalm import get_network_driver
@@ -29,6 +29,11 @@ class Script(CustomBase):
     tasks = relationship(
         "Task",
         secondary=task_script_table,
+        back_populates="scripts"
+    )
+    workflows = relationship(
+        "Workflow",
+        secondary=script_workflow_table,
         back_populates="scripts"
     )
 
@@ -63,7 +68,6 @@ class NetmikoConfigScript(Script):
         self.driver = data['driver'][0]
         self.global_delay_factor = data['global_delay_factor'][0]
         self.netmiko_type = data['netmiko_type'][0]
-        print(self.netmiko_type)
         super(NetmikoConfigScript, self).__init__(name)
         self.content = ''.join(content)
 

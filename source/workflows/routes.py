@@ -72,6 +72,18 @@ def save_workflow(workflow):
         script_edge = ScriptEdge(source, destination)
         db.session.add(script_edge)
         db.session.commit()
-        workflow.edges.append(script_edge)    
+        workflow.edges.append(script_edge)
+    if request.json['start']:
+        start_id = request.json['start']['id']
+        workflow.start_script = get_obj(db, Script, id=start_id)
     db.session.commit()
+    return jsonify({})
+
+
+@blueprint.route('/run_<workflow>', methods=['POST'])
+@login_required
+def run_workflow(workflow):
+    workflow = get_obj(db, Workflow, name=workflow)
+    for script in workflow.start_script.script_neighbors(workflow):
+        print('ttt' * 200, workflow.start_script, script)
     return jsonify({})

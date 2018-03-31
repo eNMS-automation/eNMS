@@ -48,6 +48,9 @@ class Script(CustomBase):
     def __repr__(self):
         return str(self.name)
 
+    def script_neighbors(self, workflow):
+        return [x.destination for x in self.destinations if x.workflow == workflow]
+
 
 class NetmikoConfigScript(Script):
 

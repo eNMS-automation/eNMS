@@ -43,7 +43,9 @@
               <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="edgeMode()">Create edge</button>
               <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="deleteSelection()">Delete selection</button>
               <button type="button" class="btn btn-primary" onclick="showModal('add-script')">Add script</button>
+              <button type="button" class="btn btn-primary" onclick="startScript()">Set as start</button>
               <button type="button" class="btn btn-success" onclick="saveWorkflow()">Save changes</button>
+              <button type="button" class="btn btn-danger" onclick="runWorkflow()">Run workflow</button>
             </div> 
             <div id="network" style="height:600px; width:100%;></div>
             <div class="ln_solid"></div>
@@ -63,7 +65,7 @@
     function showModal(modal_name){
       $(`#${modal_name}`).modal('show');
       }
-  
+
     var container = document.getElementById('network');
     var dsoptions = {
       manipulation: {
@@ -91,7 +93,10 @@
       {% for node in workflow.scripts %}
         {
           id: '{{ node.id }}',
-          label: '{{ node.name }}'
+          label: '{{ node.name }}',
+          {% if workflow.start_script == node %}
+            color: 'green',
+          {% endif %}
         },
       {% endfor %}
     ];
@@ -100,7 +105,8 @@
       {% for edge in workflow.edges %}
         {
           from: '{{ edge['source']['id'] }}',
-          to: '{{ edge['destination']['id'] }}'
+          to: '{{ edge['destination']['id'] }}',
+          arrows: {to: {enabled: true}}
         },
       {% endfor %}
     ];
@@ -110,7 +116,6 @@
 
     // Create a DataSet with data (enables two way data binding)
     var data = {nodes: nodes, edges: edges};
-    var options = {};
     var network = new vis.Network(container, data, dsoptions);
 
     function addNodes() {
@@ -147,10 +152,17 @@
       }
     }
 
+    var start = null;
+    function startScript() {
+      start = nodes.get(network.getSelectedNodes()[0]);
+      nodes.update({id: start.id, color: "green"});
+    }
+
     function saveWorkflow() {
       ajax_data = {
         'nodes':  nodes.get({fields: ['id', 'label']}),
-        'edges': edges.get({fields: ['to', 'from']})
+        'edges': edges.get({fields: ['to', 'from']}),
+        'start': start
       }
       $.ajax({
         type: "POST",
@@ -163,6 +175,16 @@
       });
     }
 
+    function runWorkflow() {
+      $.ajax({
+        type: "POST",
+        url: "/workflows/run_" + "{{ workflow.name }}",
+        contentType: 'application/json;charset=UTF-8',
+        success: function(msg){
+            $('.answer').html(msg);
+        }
+      });
+    }
     </script>
 {% endblock content %}
 

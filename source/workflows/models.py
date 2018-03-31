@@ -61,13 +61,16 @@ class Workflow(CustomBase):
     def job(self, args):
         task, node, results = args
         layer, visited = {self.start_script}, set()
-        print('test')
         while layer:
             new_layer = set()
             for script in layer:
                 visited.add(script)
+                script_results = {}
+                script.job([task, node, script_results])
+                results[script.name] = script_results
                 for neighbor in script.script_neighbors(self):
+                    print(layer, script, neighbor, visited)
                     if neighbor not in visited:
                         new_layer.add(neighbor)
-                        results[script.name] = neighbor.name
+
             layer = new_layer

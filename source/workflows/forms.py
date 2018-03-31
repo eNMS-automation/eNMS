@@ -9,3 +9,4 @@ class AddScriptForm(FlaskForm):
 class WorkflowCreationForm(FlaskForm):
     name = TextField('Name')
     description = TextField('Description')
+    type = TextField('Type')

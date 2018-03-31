@@ -12,6 +12,7 @@ from scripts.models import Script
 from simplekml import Color, Kml, Style
 from subprocess import Popen
 from tasks.models import Task
+from workflows.models import Workflow
 
 blueprint = Blueprint(
     'views_blueprint',
@@ -52,12 +53,15 @@ def view(view_type):
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.workflows.choices = Workflow.choices()
     labels = {'node': 'name', 'link': 'name'}
     if 'script' in request.form:
         data = dict(request.form)
         selection = map(int, session['selection'])
         scripts = request.form.getlist('scripts')
+        workflows = request.form.getlist('workflows')
         data['scripts'] = [get_obj(db, Script, name=name) for name in scripts]
+        data['workflows'] = [get_obj(db, Workflow, name=name) for name in workflows]
         data['nodes'] = [get_obj(db, Node, id=id) for id in selection]
         data['user'] = current_user
         task = Task(**data)

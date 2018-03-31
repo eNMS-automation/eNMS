@@ -1,5 +1,10 @@
 from base.database import db
-from base.models import task_node_table, task_script_table, CustomBase
+from base.models import (
+    task_node_table,
+    task_script_table,
+    task_workflow_table,
+    CustomBase
+)
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
@@ -17,17 +22,18 @@ def job_multiprocessing(name):
     job_time = str(datetime.now())
     task = get_obj(db, Task, name=name)
     task.logs[job_time] = {}
-    for script in task.scripts:
+    print(task.scripts + task.workflows)
+    for task_job in task.scripts + task.workflows:
         results = {}
-        if script.type == 'AnsibleScript':
-            results = script.job(task)
+        if task_job.type == 'AnsibleScript':
+            results = task_job.job(task)
         else:
             pool = ThreadPool(processes=len(task.nodes))
             args = [(task, node, results) for node in task.nodes]
-            pool.map(script.job, args)
+            pool.map(task_job.job, args)
             pool.close()
             pool.join()
-        task.logs[job_time][script.name] = results
+        task.logs[job_time][task_job.name] = results
     db.session.commit()
 
 
@@ -55,6 +61,11 @@ class Task(CustomBase):
         secondary=task_script_table,
         back_populates="tasks"
     )
+    workflows = relationship(
+        "Workflow",
+        secondary=task_workflow_table,
+        back_populates="tasks"
+    )
     user = relationship('User', back_populates='tasks', uselist=False)
 
     # scheduling parameters
@@ -76,6 +87,7 @@ class Task(CustomBase):
         self.nodes = data['nodes']
         self.user = data['user']
         self.scripts = data['scripts']
+        self.workflows = data['workflows']
         self.frequency = data['frequency'][0]
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())

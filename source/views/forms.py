@@ -22,4 +22,5 @@ class SchedulingForm(FlaskForm):
     end_date = TextField('End date')
     name = TextField('Name')
     scripts = SelectMultipleField('', choices=())
+    workflows = SelectMultipleField('', choices=())
     frequency = TextField('Frequency')

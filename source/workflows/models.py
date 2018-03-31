@@ -9,6 +9,7 @@ class ScriptEdge(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    type = Column(String)
     source_id = Column(Integer, ForeignKey('Script.id'))
     source = relationship(
         'Script',
@@ -23,7 +24,8 @@ class ScriptEdge(CustomBase):
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='edges')
 
-    def __init__(self, source, destination):
+    def __init__(self, type, source, destination):
+        self.type = type
         self.source = source
         self.destination = destination
         self.name = '{} -> {}'.format(self.source.name, self.destination.name)
@@ -69,8 +71,6 @@ class Workflow(CustomBase):
                 script.job([task, node, script_results])
                 results[script.name] = script_results
                 for neighbor in script.script_neighbors(self):
-                    print(layer, script, neighbor, visited)
                     if neighbor not in visited:
                         new_layer.add(neighbor)
-
             layer = new_layer

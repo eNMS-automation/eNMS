@@ -39,20 +39,35 @@
       <div class="col-md-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; left:30px;">
-              <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="edgeMode()">Create edge</button>
-              <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="deleteSelection()">Delete selection</button>
-              <button type="button" class="btn btn-primary" onclick="showModal('add-script')">Add script</button>
-              <button type="button" class="btn btn-primary" onclick="startScript()">Set as start</button>
-              <button type="button" class="btn btn-success" onclick="saveWorkflow()">Save changes</button>
-              <button type="button" class="btn btn-danger" onclick="runWorkflow()">Run workflow</button>
-            </div> 
+            <div class="panel-group" style="z-index:500; position: absolute; top: 10px; right:10px;">
+              <div class="panel panel-primary panel-transparent">
+                <div class="panel-heading">Modes</div>
+                <div class="panel-body">
+                  <div class="btn-group-vertical btn-block" >
+                    <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="switchMode('success')">Success edge</button>
+                    <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="switchMode('failure')">Failure edge</button>
+                    <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="switchMode('node')">Move node</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10px;">
+              <div class="panel panel-primary panel-transparent">
+                <div class="panel-heading">Edit Workflow</div>
+                <div class="panel-body">
+                  <div class="btn-group-vertical btn-block" >
+                    <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="deleteSelection()">Delete selection</button>
+                    <button type="button" class="btn btn-primary" onclick="showModal('add-script')">Add script</button>
+                    <button type="button" class="btn btn-primary" onclick="startScript()">Set as start</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div id="network" style="height:600px; width:100%;></div>
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
-                <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="submit" class="btn btn-success">Save changes</button>
+                <button type="button" class="btn btn-success" onclick="saveWorkflow()">Save changes</button>
               </div>
             </div>
           </div>
@@ -68,6 +83,19 @@
 
     var container = document.getElementById('network');
     var dsoptions = {
+      edges: {
+        font: {
+          size: 12
+        }
+      },
+      nodes: {
+        shape: 'box',
+        font: {
+          bold: {
+            color: '#0077aa'
+          }
+        }
+      },
       manipulation: {
         enabled: false,
         addNode: function (data, callback) {
@@ -81,13 +109,16 @@
         addEdge: function (data, callback) {
           console.log('add edge', data);
           data.arrows = {to: {enabled: true}};
+          data.type = edge_type;
+          color = edge_type == 'success' ? 'green' : 'red'
+          data.color = { color: color }
           if (data.from != data.to) {
             edges.add(data);
           }
-          // after each adding you will be back to addEdge mode
           network.addEdgeMode();
         }
-    }};
+      }
+    };
 
     var workflow_nodes = [
       {% for node in workflow.scripts %}
@@ -101,11 +132,13 @@
       {% endfor %}
     ];
 
+    var edge_type = 'success';
     var workflow_edges = [
       {% for edge in workflow.edges %}
         {
           from: '{{ edge['source']['id'] }}',
           to: '{{ edge['destination']['id'] }}',
+          type: '{{ edge['type'] }}'
           arrows: {to: {enabled: true}}
         },
       {% endfor %}
@@ -127,27 +160,18 @@
         })
         $('#add-script').modal('hide');
       }
-      updateMode();
     }
 
     function deleteSelection() {
       network.deleteSelected()
     }
 
-    function updateMode() {
-      if ($('#edge_mode').text() == "Create edge") {
-        network.addNodeMode()
-      } else {
+    function switchMode(mode) {
+      if (mode == "success" || mode == "failure") {
+        console.log(mode)
+        edge_type = mode;
         network.addEdgeMode();
-      }
-    }
-
-    function edgeMode() {
-      if ($('#edge_mode').text() == "Create edge") {
-        $('#edge_mode').text("Move node");
-        network.addEdgeMode()
       } else {
-        $('#edge_mode').text("Create edge")
         network.addNodeMode();
       }
     }
@@ -161,7 +185,7 @@
     function saveWorkflow() {
       ajax_data = {
         'nodes':  nodes.get({fields: ['id', 'label']}),
-        'edges': edges.get({fields: ['to', 'from']}),
+        'edges': edges.get({fields: ['to', 'from', 'type']}),
         'start': start
       }
       $.ajax({

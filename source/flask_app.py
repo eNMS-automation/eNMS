@@ -3,6 +3,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from importlib import import_module
 from os.path import abspath, dirname, join, pardir
+from sqlalchemy import exc
 import sys
 import logging
 
@@ -16,6 +17,7 @@ if path_source not in sys.path:
 
 from base.database import db, create_database
 from logs.models import SyslogServer
+from scripts.models import NapalmActionScript
 from tasks.models import scheduler
 from users.routes import login_manager
 
@@ -69,6 +71,18 @@ def configure_database(app):
     def shutdown_session(exception=None):
         db.session.remove()
     Migrate(app, db)
+
+    for name, action in (
+        ('NAPALM Commit', 'commit_config'),
+        ('NAPALM Discard', 'discard_config'),
+        ('NAPALM Rollback', 'rollback')
+    ):
+        try:
+            script = NapalmActionScript(name, action)
+            db.session.add(script)
+            db.session.commit()
+        except exc.IntegrityError as e:
+            db.session.rollback()
 
 
 def configure_syslog():

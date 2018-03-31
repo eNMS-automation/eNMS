@@ -69,7 +69,7 @@ def save_workflow(workflow):
     for edge in request.json['edges']:
         source = get_obj(db, Script, name=id_to_script[edge['from']])
         destination = get_obj(db, Script, name=id_to_script[edge['to']])
-        script_edge = ScriptEdge(source, destination)
+        script_edge = ScriptEdge(edge['type'], source, destination)
         db.session.add(script_edge)
         db.session.commit()
         workflow.edges.append(script_edge)

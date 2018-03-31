@@ -24,7 +24,7 @@ class Script(CustomBase):
     __tablename__ = 'Script'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(120))
+    name = Column(String(120), unique=True)
     type = Column(String(50))
     tasks = relationship(
         "Task",
@@ -187,6 +187,41 @@ class NapalmConfigScript(Script):
             result = 'napalm config did not work because of {}'.format(e)
         else:
             result = 'configuration OK'
+        results[node.name] = result
+
+
+class NapalmActionScript(Script):
+
+    __tablename__ = 'NapalmActionScript'
+
+    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    action = Column(String, unique=True)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'NapalmActionScript',
+    }
+
+    def __init__(self, name, action):
+        self.action = action
+        super(NapalmActionScript, self).__init__(name)
+
+    def job(self, args):
+        task, node, results = args
+        try:
+            driver = get_network_driver(node.operating_system)
+            napalm_driver = driver(
+                hostname=node.ip_address,
+                username=task.user.username,
+                password=cisco_type7.decode(task.user.password),
+                optional_args={'secret': node.secret_password}
+            )
+            napalm_driver.open()
+            getattr(napalm_driver, self.action)()
+            napalm_driver.close()
+        except Exception as e:
+            result = 'napalm {} did not work because of {}'.format(self.action, e)
+        else:
+            result = self.action + ' OK'
         results[node.name] = result
 
 

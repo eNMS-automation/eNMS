@@ -27,14 +27,10 @@ def base_client():
 def user_client():
     app = create_app(test=True)
     client = app.test_client()
-    create = {'username': '', 'password': '', 'create_account': ''}
-    login = {'username': '', 'password': '', 'login': ''}
+    create = {'name': 'test', 'password': '', 'create_account': ''}
+    login = {'name': 'test', 'password': '', 'login': ''}
     with app.app_context():
         client.post('/users/create_account', data=create)
         client.post('/users/login', data=login)
         yield client
     remove(join(path_source, 'database.db'))
-    # try:
-    #     remove(join(path_source, 'flask_context.db'))
-    # except FileNotFoundError:
-    #     pass

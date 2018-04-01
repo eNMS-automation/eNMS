@@ -91,7 +91,7 @@ class Task(CustomBase):
         self.frequency = data['frequency'][0]
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
-        self.creator = data['user'].username
+        self.creator = data['user'].name
         self.status = 'active'
         # if the start date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting

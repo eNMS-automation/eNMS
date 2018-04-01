@@ -33,11 +33,13 @@ from .models import User, TacacsServer
 @blueprint.route('/overview')
 @login_required
 def users():
+    add_user_form = AddUser(request.form)
     return render_template(
         'users_overview.html',
         fields=user_search_properties,
         names=pretty_names,
-        users=User.query.all()
+        users=User.query.all(),
+        form=form
     )
 
 

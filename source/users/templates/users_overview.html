@@ -7,6 +7,35 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  <div id="edit" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Edit user</h4>
+        </div>
+        <form id="edit-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <div class="modal-body">
+            <div class="form-group" style="height: 450px">
+              {% for field in form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(id=field.name, class="form-control") }}
+                </div><br><br>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="button" class="btn btn-success" onclick="editUser()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="right_col" role="main">
     <!-- begin row -->
     <div class="row">
@@ -19,6 +48,8 @@
                   {% for field in fields %}
                     <th>{{ names[field] }}</th>
                   {% endfor %}
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,6 +58,12 @@
                     {% for field in fields %}
                       <td>{{ user[field] }}</td>
                     {% endfor %}
+                  <td>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showUserModal('{{ user['name'] }}')">Edit</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteUser('{{ user['name'] }}')">Delete</button>
+                  </td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -47,7 +84,7 @@
   <script>
     $('#datatable-responsive').DataTable();
 
-    function showObjectModal(type, name) {
+    function showUserModal(type, name) {
       $.ajax({
         type: "POST",
         url: `/users/get_${name}`,
@@ -57,50 +94,44 @@
           }
         }
       });
-      $(`#edit-${type}`).modal('show');
+      $('#edit').modal('show');
     }
   
-    function editObject(type) {
-      var values = [];
-      var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
-      var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
-      var fields = type == 'node' ? node_fields : link_fields
-      // get a hashtable: form field -> form value
-      // we cannot rely on serializeArray being ordered
+    function editUser(type) {
       var result = {};
-      $.each($(`#edit-${type}-form`).serializeArray(), function() {
+      $.each($('#edit').serializeArray(), function() {
         result[this.name] = this.value;
       });
-      console.log(result)
       var name = result.name;
+      var values = [];
       for (i = 0; i < fields.length; i++) {
         values.push(`<td>${result[fields[i]]}</td>`);
       }
       values.push(`<td>
-      <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${name}')">Edit</button>
+      <button type="button" class="btn btn-info btn-xs" onclick="showUserModal('${name}')">Edit</button>
       </td>
       <td>
-      <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${name}')">Delete</button>
+      <button type="button" class="btn btn-danger btn-xs" onclick="deleteUser('${name}')">Delete</button>
       </td>`);
       $(`#${type}-${name}`).html(values.join(''));
   
       $.ajax({
         type: "POST",
-        url: "/objects/edit_object",
+        url: "/users/edit_user",
         dataType: "json",
         data: $(`#edit-${type}-form`).serialize(),
         success: function(msg){
           $('.answer').html(msg);
         }
       });
-      $(`#edit-${type}`).modal('hide');
+      $('#edit').modal('hide');
     }
   
-    function deleteObject(type, name) {
-      $(`#${type}-${name}`).remove();
+    function deleteUser(name) {
+      $(`#${name}`).remove();
       $.ajax({
         type: "POST",
-        url: `/objects/delete_${type}_${name}`,
+        url: `/users/delete_${name}`,
         success: function(msg){
           $('.answer').html(msg);
         }

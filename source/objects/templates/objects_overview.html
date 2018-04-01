@@ -146,13 +146,11 @@
     }
   
     function editObject(type) {
-      var values = [];
       var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
       var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
       var fields = type == 'node' ? node_fields : link_fields
-      // get a hashtable: form field -> form value
-      // we cannot rely on serializeArray being ordered
       var result = {};
+      var values = [];
       $.each($(`#edit-${type}-form`).serializeArray(), function() {
         result[this.name] = this.value;
       });

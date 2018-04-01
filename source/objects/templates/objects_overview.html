@@ -138,25 +138,25 @@
   function editObject(type) {
     var values = [];
     var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
+    var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
+    var fields = type == 'node' ? node_fields : link_fields
     // get a hashtable: form field -> form value
     // we cannot rely on serializeArray being ordered
     var result = {};
-    $.each($('#edit-node-form').serializeArray(), function() {
-        result[this.name] = this.value;
+    $.each($(`#edit-${type}-form`).serializeArray(), function() {
+      result[this.name] = this.value;
     });
     var name = result.name;
-    for (i = 0; i < node_fields.length; i++) {
-      values.push(`<td>${result[node_fields[i]]}</td>`);
+    for (i = 0; i < fields.length; i++) {
+      values.push(`<td>${result[fields[i]]}</td>`);
     }
-    console.log(values);
-    /*values.push(`<td>
-    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '${name}')">Edit</button>
+    values.push(`<td>
+    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${name}')">Edit</button>
     </td>
     <td>
-    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('node', '${name}')">Delete</button>
-    </td>`);*/
-    console.log(values.join(''));
-    $(`#node-${name}`).html(values.join(''));
+    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${name}')">Delete</button>
+    </td>`);
+    $(`#${type}-${name}`).html(values.join(''));
 
     $.ajax({
       type: "POST",

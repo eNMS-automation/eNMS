@@ -68,10 +68,10 @@ class Workflow(CustomBase):
             for script in layer:
                 visited.add(script)
                 script_results = {}
-                script.job([task, node, script_results])
-                # if success, we loop through the red arrow, else through the green arrow
+                success = script.job([task, node, script_results])
+                edge_type = 'success' if success else 'failure'
                 results[script.name] = script_results
-                for neighbor in script.script_neighbors(self):
+                for neighbor in script.script_neighbors(self, edge_type):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
             layer = new_layer

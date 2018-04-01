@@ -1,5 +1,12 @@
 from base.properties import pretty_names
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import (
+    Blueprint,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    url_for
+)
 from flask_login import login_required
 from .forms import (
     AddUser,
@@ -8,8 +15,9 @@ from .forms import (
     LoginForm,
     TacacsServerForm
 )
+from objects.models import get_obj
 from passlib.hash import cisco_type7
-from .properties import user_search_properties
+from .properties import user_properties, user_search_properties
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
@@ -33,7 +41,7 @@ from .models import User, TacacsServer
 @blueprint.route('/overview')
 @login_required
 def users():
-    add_user_form = AddUser(request.form)
+    form = AddUser(request.form)
     return render_template(
         'users_overview.html',
         fields=user_search_properties,
@@ -67,6 +75,32 @@ def manage_users():
         add_user_form=add_user_form,
         delete_user_form=delete_user_form
     )
+
+
+@blueprint.route('/get_<name>', methods=['POST'])
+@login_required
+def get_user(name):
+    user = get_obj(db, User, name=name)
+    properties = {
+        property: str(getattr(obj, property))
+        for property in user_properties
+    }
+    return jsonify(properties)
+
+
+@blueprint.route('/edit_user', methods=['POST'])
+@login_required
+def edit_user():
+    return jsonify({})
+
+
+@blueprint.route('/delete_<name>', methods=['POST'])
+@login_required
+def delete_user(name):
+    user = get_obj(db, User, name=name)
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({})
 
 ## Login & Registration
 

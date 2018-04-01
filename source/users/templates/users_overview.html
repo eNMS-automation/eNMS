@@ -99,6 +99,7 @@
   
     function editUser(type) {
       var result = {};
+      var fields = [{% for field in fields %} '{{ field }}', {% endfor %}];
       $.each($('#edit').serializeArray(), function() {
         result[this.name] = this.value;
       });
@@ -113,13 +114,13 @@
       <td>
       <button type="button" class="btn btn-danger btn-xs" onclick="deleteUser('${name}')">Delete</button>
       </td>`);
-      $(`#${type}-${name}`).html(values.join(''));
+      $(`#${name}`).html(values.join(''));
   
       $.ajax({
         type: "POST",
         url: "/users/edit_user",
         dataType: "json",
-        data: $(`#edit-${type}-form`).serialize(),
+        data: $('#edit').serialize(),
         success: function(msg){
           $('.answer').html(msg);
         }

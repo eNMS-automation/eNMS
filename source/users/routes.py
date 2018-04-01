@@ -64,7 +64,7 @@ def manage_users():
         db.session.add(user)
     elif 'delete_user' in request.form:
         selection = delete_user_form.data['users']
-        db.session.query(User).filter(User.username.in_(selection))\
+        db.session.query(User).filter(User.name.in_(selection))\
             .delete(synchronize_session='fetch')
     if request.method == 'POST':
         db.session.commit()
@@ -82,7 +82,7 @@ def manage_users():
 def get_user(name):
     user = get_obj(db, User, name=name)
     properties = {
-        property: str(getattr(obj, property))
+        property: str(getattr(user, property))
         for property in user_properties
     }
     return jsonify(properties)
@@ -123,9 +123,9 @@ def create_account():
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = str(request.form['username'])
+        name = str(request.form['name'])
         password = str(request.form['password'])
-        user = db.session.query(User).filter_by(username=username).first()
+        user = db.session.query(User).filter_by(name=name).first()
         if user and cisco_type7.verify(password, user.password):
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
@@ -145,11 +145,11 @@ def login():
                     str(cisco_type7.decode(str(tacacs_server.password)))
                 )
                 if tacacs_client.authenticate(
-                    username,
+                    name,
                     password,
                     TAC_PLUS_AUTHEN_TYPE_ASCII
                 ).valid:
-                    user = User(username=username, password=encrypted_password)
+                    user = User(name=name, password=encrypted_password)
                     db.session.add(user)
                     db.session.commit()
                     flask_login.login_user(user)

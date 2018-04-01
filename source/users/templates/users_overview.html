@@ -84,7 +84,7 @@
   <script>
     $('#datatable-responsive').DataTable();
 
-    function showUserModal(type, name) {
+    function showUserModal(name) {
       $.ajax({
         type: "POST",
         url: `/users/get_${name}`,
@@ -97,7 +97,7 @@
       $('#edit').modal('show');
     }
   
-    function editUser(type) {
+    function editUser(name) {
       var result = {};
       var fields = [{% for field in fields %} '{{ field }}', {% endfor %}];
       $.each($('#edit').serializeArray(), function() {

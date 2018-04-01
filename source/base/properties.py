@@ -16,6 +16,5 @@ pretty_names = OrderedDict([
     ('secret_password', 'Secret password'),
     ('source', 'Source'),
     ('type', 'Type'),
-    ('username', 'Username'),
     ('vendor', 'Vendor'),
 ])

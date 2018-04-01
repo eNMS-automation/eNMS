@@ -59,8 +59,8 @@ def configure_login_manager(app, User):
 
     @login_manager.request_loader
     def request_loader(request):
-        username = request.form.get('username')
-        user = db.session.query(User).filter_by(username=username).first()
+        name = request.form.get('name')
+        user = db.session.query(User).filter_by(name=name).first()
         return user if user else None
 
 

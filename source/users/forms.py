@@ -11,12 +11,12 @@ from wtforms import (
 
 
 class LoginForm(FlaskForm):
-    username = TextField('Username')
+    name = TextField('Username')
     password = PasswordField('Password')
 
 
 class CreateAccountForm(FlaskForm):
-    username = TextField('Username')
+    name = TextField('Username')
     email = TextField('Email')
     password = PasswordField('Password')
 
@@ -24,7 +24,7 @@ class CreateAccountForm(FlaskForm):
 
 
 class AddUser(FlaskForm):
-    username = TextField('Username')
+    name = TextField('Username')
     email = TextField('Email')
     access_right_choices = (('Read-only',) * 2, ('Read-write',) * 2)
     access_rights = SelectField('Access rights', choices=access_right_choices)

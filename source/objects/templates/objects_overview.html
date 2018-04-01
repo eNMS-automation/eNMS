@@ -7,6 +7,35 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  <div id="edit-node" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Edit node</h4>
+        </div>
+        <form id="edit-node-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <div class="modal-body">
+            <div class="form-group" style="height: 450px">
+              {% for field in add_node_form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-4 col-sm-4 col-xs-12"> {{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(id=field.name, class="form-control") }}
+                </div><br><br>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="button" class="btn btn-success" onclick="editObject('edit-node')">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="right_col" role="main">
     <!-- begin row -->
     <div class="row" style="height: 350px">
@@ -26,7 +55,7 @@
               </thead>
               <tbody>
                 {% for node in nodes %}
-                <tr>
+                <tr id="node-" + "{{ node.name }}">
                   {% for field in node_fields %}
                     {% if field not in  ('longitude', 'latitude') %}
                       <td>{{ node[field] }}</td>
@@ -35,9 +64,7 @@
                     {% endif %}
                   {% endfor %}
                   <td>
-                    <a href="/objects/object_edit/{{node['name']}}" class="btn btn-info btn-xs">
-                        <i class="fa fa-pencil"></i>Edit
-                    </a>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('edit-node', { {% for field in node_fields %} '{{ field }}': '{{ node[field] }}', {% endfor %} })">Edit</button>
                   </td>
                   <td>
                     <a href="/objects/object_delete/{{node['name']}}" class="btn btn-danger btn-xs">
@@ -98,4 +125,32 @@
     $('#datatable-node-responsive').DataTable();
     $('#datatable-link-responsive').DataTable();
 	</script>
+  <script>
+  function showObjectModal(modal_name, properties) {
+  for (const [property, value] of Object.entries(properties)) {
+    $('#' + property).val(value);
+  }
+    $(`#${modal_name}`).modal('show');
+  }
+
+  function editObject(modal_name) {
+  
+    var values = {};
+    $.each($('#edit-node-form').serializeArray(), function(i, field) {
+        values[field.name] = field.value;
+    });
+
+    $.ajax({
+      type: "POST",
+      url: "/objects/edit_object",
+      dataType: "json",
+      data: $('#edit-node-form').serialize(),
+      success: function(msg){
+          $('.answer').html(msg);
+      }
+    });
+    $(`#${modal_name}`).modal('hide');
+
+  }
+  </script>
 {% endblock javascripts %}

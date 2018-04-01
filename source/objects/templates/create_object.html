@@ -8,10 +8,8 @@
 
 {% block content %}
   <div class="right_col" role="main">
-  
     <!-- begin row -->
     <div class="row">
-
       <!-- begin column -->
       <div class="col-md-6 col-xs-12">
         <div class="x_panel">
@@ -22,7 +20,6 @@
           <div class="x_content">
             <br/>
             <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-            
               <div class="form-group" style="height: 450px">
                 {% for field in add_node_form if field.widget.input_type != 'hidden'  %}
                   <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
@@ -39,13 +36,11 @@
                   <button type="submit" class="btn btn-success" name="add_node">Submit</button>
                 </div>
               </div>
-
             </form>
           </div>
         </div>
       </div>
       <!-- end column -->
-
       <!-- begin column -->
       <div class="col-md-6 col-xs-12">
         <div class="x_panel">
@@ -56,7 +51,6 @@
           <div class="x_content">
             <br/>
             <form data-parsley-validate class="form-horizontal form-label-left" method="post">
-            
               <div class="form-group" style="height: 450px">
                 {% for field in add_link_form if field.widget.input_type != 'hidden'  %}
                   <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
@@ -65,7 +59,6 @@
                   </div><br><br>
                 {% endfor %}
               </div>
-
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
@@ -73,13 +66,11 @@
                   <button type="submit" class="btn btn-success" name="add_link">Submit</button>
                 </div>
               </div>
-
             </form>
           </div>
         </div>
       </div>
       <!-- end column -->
-
       <!-- begin column -->
       <div class="col-md-6 col-xs-12">
         <div class="x_panel">
@@ -90,7 +81,6 @@
           <div class="x_content">
             <br/>
             <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" >
-            
               <blockquote>
               <span class="label label-info">Info</span>
                 <p>
@@ -98,9 +88,7 @@
                   Examples can be found in the eNMS/projects.
                 </p>
               </blockquote>
-            
               {{ add_nodes_form.file() }}<br><br>
-              
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
@@ -108,16 +96,13 @@
                   <button type="submit" class="btn btn-success" name="add_nodes">Submit</button>
                 </div>
               </div>
-
             </form>
           </div>
         </div>
       </div>
       <!-- end column -->
-
     </div>
     <!-- end row -->
-
   </div>
 {% endblock content %}
 

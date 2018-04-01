@@ -1,7 +1,7 @@
 from base.database import db
 from base.helpers import allowed_file
 from base.properties import pretty_names
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, jsonify, render_template, request, redirect
 from flask_login import login_required
 from .forms import (
     AddNode,
@@ -29,13 +29,15 @@ blueprint = Blueprint(
 @blueprint.route('/objects')
 @login_required
 def objects():
+    add_node_form = AddNode(request.form)
     return render_template(
         'objects_overview.html',
         names=pretty_names,
         node_fields=node_public_properties,
         nodes=Node.visible_objects(),
         link_fields=link_public_properties,
-        links=Link.visible_objects()
+        links=Link.visible_objects(),
+        add_node_form=add_node_form
     )
 
 
@@ -73,22 +75,11 @@ def create_objects():
     )
 
 
-@blueprint.route('/object_edit/<object_name>', methods=['GET', 'POST'])
+@blueprint.route('/edit_object', methods=['POST'])
 @login_required
-def edit_objects(object_name):
-    form = AddNode(request.form)
-    node = get_obj(db, Node, name=object_name)
-    object_properties = request.form.to_dict()
-    object_properties['name'] = object_name
-    if request.method == 'POST':
-        object_factory(db, **object_properties)
-        return redirect('/objects/objects')
-    elif request.method == 'GET':
-        return render_template(
-            'edit_object.html',
-            form=form,
-            node=node
-        )
+def edit_object():
+    object_factory(db, **request.form.to_dict())
+    return jsonify({})
 
 
 @blueprint.route('/object_delete/<object_name>', methods=['GET'])

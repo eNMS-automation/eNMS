@@ -75,6 +75,19 @@ def create_objects():
     )
 
 
+@blueprint.route('/get_<obj_type>_<name>', methods=['POST'])
+@login_required
+def get_object(obj_type, name):
+    cls = Node if obj_type == 'node' else Link
+    properties = node_public_properties if cls == Node else link_public_properties
+    obj = get_obj(db, cls, name=name)
+    obj_properties = {
+        property: str(getattr(obj, property))
+        for property in properties
+    }
+    return jsonify(obj_properties)
+
+
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():

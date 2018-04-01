@@ -31,6 +31,8 @@ blueprint = Blueprint(
 def objects():
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
+    all_nodes = Node.visible_choices()
+    add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     return render_template(
         'objects_overview.html',
         names=pretty_names,

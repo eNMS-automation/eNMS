@@ -30,7 +30,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button class="btn btn-primary" type="reset">Reset</button>
-            <button type="button" class="btn btn-success" onclick="editObject('edit-node')">Submit</button>
+            <button type="button" class="btn btn-success" onclick="editObject('node')">Submit</button>
           </div>
         </form>
       </div>
@@ -55,7 +55,7 @@
               </thead>
               <tbody>
                 {% for node in nodes %}
-                <tr id="node-" + "{{ node.name }}">
+                <tr id="{{ node.name }}">
                   {% for field in node_fields %}
                     {% if field not in  ('longitude', 'latitude') %}
                       <td>{{ node[field] }}</td>
@@ -64,7 +64,7 @@
                     {% endif %}
                   {% endfor %}
                   <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('edit-node', { {% for field in node_fields %} '{{ field }}': '{{ node[field] }}', {% endfor %} })">Edit</button>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node['name'] }}')">Edit</button>
                   </td>
                   <td>
                     <a href="/objects/object_delete/{{node['name']}}" class="btn btn-danger btn-xs">
@@ -126,31 +126,52 @@
     $('#datatable-link-responsive').DataTable();
 	</script>
   <script>
-  function showObjectModal(modal_name, properties) {
-  for (const [property, value] of Object.entries(properties)) {
-    $('#' + property).val(value);
-  }
-    $(`#${modal_name}`).modal('show');
+  function showObjectModal(type, name) {
+    $.ajax({
+      type: "POST",
+      url: `/objects/get_${type}_${name}`,
+      success: function(properties){
+        for (const [property, value] of Object.entries(properties)) {
+          $('#' + property).val(value);
+        }
+      }
+    });
+    $(`#edit-${type}`).modal('show');
   }
 
-  function editObject(modal_name) {
-  
-    var values = {};
-    $.each($('#edit-node-form').serializeArray(), function(i, field) {
-        values[field.name] = field.value;
+  function editObject(type) {
+    var values = [];
+    formValues = $('#edit-node-form').serializeArray()
+    $.each(formValues, function(i, field) {
+      values.push(`<td>${field.value}</td>`);
     });
+    var new_row = values.join('');
+    var name = formValues[0].value;
+    console.log(new_row, name, `#node-${name}`);
+    $(`#${name}`).html(new_row);
+    
+    //row.replaceWith();
 
     $.ajax({
       type: "POST",
       url: "/objects/edit_object",
       dataType: "json",
-      data: $('#edit-node-form').serialize(),
+      data: $(`#edit-${type}-form`).serialize(),
       success: function(msg){
-          $('.answer').html(msg);
+        $('.answer').html(msg);
       }
     });
-    $(`#${modal_name}`).modal('hide');
-
+    $(`#edit-${type}`).modal('hide');
+    $
+/*
+$('table').find('tbody').append([
+'<tr>',
+    '<td>My Item 1</td>',
+    '<td>My Item 2</td>',
+    '<td>My Item 3</td>',
+    '<td>My Item 4</td>',
+'</tr>'
+].join(''));*/
   }
   </script>
 {% endblock javascripts %}

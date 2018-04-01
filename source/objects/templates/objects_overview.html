@@ -55,7 +55,7 @@
               </thead>
               <tbody>
                 {% for node in nodes %}
-                <tr id="{{ node.name }}">
+                <tr id="node-{{ node.name }}">
                   {% for field in node_fields %}
                     {% if field not in  ('longitude', 'latitude') %}
                       <td>{{ node[field] }}</td>
@@ -79,14 +79,12 @@
       <!-- end column -->
     </div>
     <!-- end row -->
-
     <!-- begin row -->
     <div class="row" style="height: 350px">
       <!-- begin column -->
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-
             <table id="datatable-link-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -139,11 +137,26 @@
 
   function editObject(type) {
     var values = [];
-    formValues = $('#edit-node-form').serializeArray()
-    $.each(formValues, function(i, field) {
-      values.push(`<td>${field.value}</td>`);
+    var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
+    // get a hashtable: form field -> form value
+    // we cannot rely on serializeArray being ordered
+    var result = {};
+    $.each($('#edit-node-form').serializeArray(), function() {
+        result[this.name] = this.value;
     });
-    $(`#${formValues[0].value}`).html(values.join(''));
+    var name = result.name;
+    for (i = 0; i < node_fields.length; i++) {
+      values.push(`<td>${result[node_fields[i]]}</td>`);
+    }
+    console.log(values);
+    /*values.push(`<td>
+    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '${name}')">Edit</button>
+    </td>
+    <td>
+    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('node', '${name}')">Delete</button>
+    </td>`);*/
+    console.log(values.join(''));
+    $(`#node-${name}`).html(values.join(''));
 
     $.ajax({
       type: "POST",
@@ -158,7 +171,7 @@
   }
 
   function deleteObject(type, name) {
-    $(`#${name}`).remove();
+    $(`#node-${name}`).remove();
     $.ajax({
       type: "POST",
       url: `/objects/delete_${type}_${name}`,

@@ -7,7 +7,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 def test_user_management(user_client):
     for user in ('user1', 'user2', 'user3'):
         dict_user = {
-            'username': user,
+            'name': user,
             'email': '{}@test.com'.format(user),
             'access_rights': 'Read-only',
             'password': user,

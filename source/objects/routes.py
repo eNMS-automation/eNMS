@@ -1,7 +1,7 @@
 from base.database import db
 from base.helpers import allowed_file
 from base.properties import pretty_names
-from flask import Blueprint, jsonify, render_template, request, redirect
+from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from .forms import (
     AddNode,

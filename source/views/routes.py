@@ -143,7 +143,7 @@ def putty_connection():
     path_putty = join(current_app.path_apps, 'putty.exe')
     ssh_connection = '{} -ssh {}@{} -pw {}'.format(
         path_putty,
-        current_user.username,
+        current_user.name,
         node.ip_address,
         current_user.password
     )

@@ -1,12 +1,8 @@
 user_properties = (
-    'username',
+    'name',
     'email',
     'access_rights',
     'password'
 )
 
-user_search_properties = (
-    'username',
-    'email',
-    'access_rights'
-)
+user_search_properties = user_properties[:3]

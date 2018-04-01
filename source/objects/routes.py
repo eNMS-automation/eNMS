@@ -95,13 +95,14 @@ def edit_object():
     return jsonify({})
 
 
-@blueprint.route('/object_delete/<object_name>', methods=['GET'])
+@blueprint.route('/delete_<obj_type>_<name>', methods=['POST'])
 @login_required
-def delete_object(object_name):
-    node = get_obj(db, Node, name=object_name)
-    db.session.delete(node)
+def delete_object(obj_type, name):
+    cls = Node if obj_type == 'node' else Link
+    obj = get_obj(db, cls, name=name)
+    db.session.delete(obj)
     db.session.commit()
-    return redirect('/objects/objects')
+    return jsonify({})
 
 
 @blueprint.route('/object_deletion', methods=['GET', 'POST'])

@@ -67,9 +67,7 @@
                     <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node['name'] }}')">Edit</button>
                   </td>
                   <td>
-                    <a href="/objects/object_delete/{{node['name']}}" class="btn btn-danger btn-xs">
-                      <i class="fa fa-trash-o"></i>Delete
-                    </a>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('node', '{{ node['name'] }}')">Delete</button>
                   </td>
                 </tr>
                 {% endfor %}
@@ -145,12 +143,7 @@
     $.each(formValues, function(i, field) {
       values.push(`<td>${field.value}</td>`);
     });
-    var new_row = values.join('');
-    var name = formValues[0].value;
-    console.log(new_row, name, `#node-${name}`);
-    $(`#${name}`).html(new_row);
-    
-    //row.replaceWith();
+    $(`#${formValues[0].value}`).html(values.join(''));
 
     $.ajax({
       type: "POST",
@@ -162,16 +155,17 @@
       }
     });
     $(`#edit-${type}`).modal('hide');
-    $
-/*
-$('table').find('tbody').append([
-'<tr>',
-    '<td>My Item 1</td>',
-    '<td>My Item 2</td>',
-    '<td>My Item 3</td>',
-    '<td>My Item 4</td>',
-'</tr>'
-].join(''));*/
+  }
+
+  function deleteObject(type, name) {
+    $(`#${name}`).remove();
+    $.ajax({
+      type: "POST",
+      url: `/objects/delete_${type}_${name}`,
+      success: function(msg){
+        $('.answer').html(msg);
+      }
+    });
   }
   </script>
 {% endblock javascripts %}

@@ -104,7 +104,7 @@ def test_base_scripts(user_client):
         napalm_jinja2_script['file'] = f
         user_client.post('/scripts/napalm_configuration', data=napalm_jinja2_script)
     assert len(NapalmConfigScript.query.all()) == 1
-    assert len(Script.query.all()) == 3
+    assert len(Script.query.all()) == 6
     netmiko_j2_script = db.session.query(Script).filter_by(name='netmiko_subif').first()
     napalm_j2_script = db.session.query(Script).filter_by(name='napalm_subif').first()
     # simply removing the space does not work as yaml relies on dict, which
@@ -114,7 +114,7 @@ def test_base_scripts(user_client):
     ## file transfer script
     user_client.post('scripts/file_transfer', data=file_transfer_script)
     assert len(FileTransferScript.query.all()) == 1
-    assert len(Script.query.all()) == 4
+    assert len(Script.query.all()) == 7
 
 ## NAPALM getters
 
@@ -167,4 +167,4 @@ def test_ansible_scripts(user_client):
         ansible_script['file'] = f
         user_client.post('/scripts/ansible', data=ansible_script)
     assert len(AnsibleScript.query.all()) == 1
-    assert len(Script.query.all()) == 1
+    assert len(Script.query.all()) == 4

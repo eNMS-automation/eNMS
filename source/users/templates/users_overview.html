@@ -13,7 +13,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content" style="height:550px;">
-            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   {% for field in fields %}
@@ -41,4 +41,70 @@
 
 {% block javascripts %}
   {{ super()}}
+  <!-- Datatables -->
+  <script src="{{ url_for('static', filename='vendors/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/datatables/dataTables.bootstrap.min.js') }}"></script>
+  <script>
+    $('#datatable-responsive').DataTable();
+
+    function showObjectModal(type, name) {
+      $.ajax({
+        type: "POST",
+        url: `/users/get_${name}`,
+        success: function(properties){
+          for (const [property, value] of Object.entries(properties)) {
+            $(`#${property}`).val(value);
+          }
+        }
+      });
+      $(`#edit-${type}`).modal('show');
+    }
+  
+    function editObject(type) {
+      var values = [];
+      var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
+      var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
+      var fields = type == 'node' ? node_fields : link_fields
+      // get a hashtable: form field -> form value
+      // we cannot rely on serializeArray being ordered
+      var result = {};
+      $.each($(`#edit-${type}-form`).serializeArray(), function() {
+        result[this.name] = this.value;
+      });
+      console.log(result)
+      var name = result.name;
+      for (i = 0; i < fields.length; i++) {
+        values.push(`<td>${result[fields[i]]}</td>`);
+      }
+      values.push(`<td>
+      <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${name}')">Edit</button>
+      </td>
+      <td>
+      <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${name}')">Delete</button>
+      </td>`);
+      $(`#${type}-${name}`).html(values.join(''));
+  
+      $.ajax({
+        type: "POST",
+        url: "/objects/edit_object",
+        dataType: "json",
+        data: $(`#edit-${type}-form`).serialize(),
+        success: function(msg){
+          $('.answer').html(msg);
+        }
+      });
+      $(`#edit-${type}`).modal('hide');
+    }
+  
+    function deleteObject(type, name) {
+      $(`#${type}-${name}`).remove();
+      $.ajax({
+        type: "POST",
+        url: `/objects/delete_${type}_${name}`,
+        success: function(msg){
+          $('.answer').html(msg);
+        }
+      });
+    }
+  </script>
 {% endblock javascripts %}

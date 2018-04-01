@@ -138,7 +138,8 @@
         {
           from: '{{ edge['source']['id'] }}',
           to: '{{ edge['destination']['id'] }}',
-          type: '{{ edge['type'] }}'
+          type: '{{ edge['type'] }}',
+          color: { color: '{{ edge['type'] }}' == 'success' ? 'green' : 'red' },
           arrows: {to: {enabled: true}}
         },
       {% endfor %}

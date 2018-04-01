@@ -59,6 +59,7 @@ def workflow_manager(workflow):
 def save_workflow(workflow):
     id_to_script = {}
     workflow = get_obj(db, Workflow, name=workflow)
+    workflow.scripts = []
     for edge in workflow.edges:
         db.session.delete(edge)
     db.session.commit()

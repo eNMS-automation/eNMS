@@ -48,8 +48,11 @@ class Script(CustomBase):
     def __repr__(self):
         return str(self.name)
 
-    def script_neighbors(self, workflow):
-        return [x.destination for x in self.destinations if x.workflow == workflow]
+    def script_neighbors(self, workflow, type):
+        return [
+            x.destination for x in self.destinations
+            if x.workflow == workflow and x.type == type
+        ]
 
 
 class NetmikoConfigScript(Script):
@@ -185,9 +188,12 @@ class NapalmConfigScript(Script):
             napalm_driver.close()
         except Exception as e:
             result = 'napalm config did not work because of {}'.format(e)
+            success = False
         else:
             result = 'configuration OK'
+            success = True
         results[node.name] = result
+        return success
 
 
 class NapalmActionScript(Script):
@@ -220,9 +226,12 @@ class NapalmActionScript(Script):
             napalm_driver.close()
         except Exception as e:
             result = 'napalm {} did not work because of {}'.format(self.action, e)
+            success = False
         else:
             result = self.action + ' OK'
+            success = True
         results[node.name] = result
+        return success
 
 
 class NapalmGettersScript(Script):
@@ -260,7 +269,11 @@ class NapalmGettersScript(Script):
             napalm_driver.close()
         except Exception as e:
             result = 'getters process did not work because of {}'.format(e)
-        results[node.name] = result
+            success = False
+        else:
+            success = True
+            results[node.name] = result
+        return success
 
 
 class AnsibleScript(Script):

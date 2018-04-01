@@ -30,6 +30,7 @@ blueprint = Blueprint(
 @login_required
 def objects():
     add_node_form = AddNode(request.form)
+    add_link_form = AddLink(request.form)
     return render_template(
         'objects_overview.html',
         names=pretty_names,
@@ -37,7 +38,8 @@ def objects():
         nodes=Node.visible_objects(),
         link_fields=link_public_properties,
         links=Link.visible_objects(),
-        add_node_form=add_node_form
+        add_node_form=add_node_form,
+        add_link_form=add_link_form
     )
 
 

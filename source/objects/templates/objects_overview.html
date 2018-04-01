@@ -36,6 +36,35 @@
       </div>
     </div>
   </div>
+  <div id="edit-link" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Edit Link</h4>
+        </div>
+        <form id="edit-link-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <div class="modal-body">
+            <div class="form-group" style="height: 450px">
+              {% for field in add_link_form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-4 col-sm-4 col-xs-12"> {{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(id=field.name, class="form-control") }}
+                </div><br><br>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="button" class="btn btn-success" onclick="editObject('link')">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="right_col" role="main">
     <!-- begin row -->
     <div class="row" style="height: 350px">
@@ -95,10 +124,16 @@
               </thead>
               <tbody>
                 {% for link in links %}
-                <tr>
+                <tr id="link-{{ link.name }}">
                   {% for field in link_fields %}
                     <td>{{ link[field] }}</td>
                   {% endfor %}
+                  <td>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('link', '{{ link['name'] }}')">Edit</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('link', '{{ link['name'] }}')">Delete</button>
+                  </td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -171,7 +206,7 @@
   }
 
   function deleteObject(type, name) {
-    $(`#node-${name}`).remove();
+    $(`#${type}-${name}`).remove();
     $.ajax({
       type: "POST",
       url: `/objects/delete_${type}_${name}`,

@@ -51,3 +51,16 @@ class TacacsServer(CustomBase):
 
     def __repr__(self):
         return self.ip_address
+
+def user_factory(db, **kwargs):
+    obj = get_obj(db, User, name=kwargs['name'])
+    password = kwargs.pop('password')
+    kwargs['password'] = cisco_type7.hash(password)
+    if obj:
+        for property, value in kwargs.items():
+            if property in obj.__dict__:
+                setattr(obj, property, value)
+    else:
+        obj = User(**kwargs)
+    db.session.add(obj)
+    db.session.commit()

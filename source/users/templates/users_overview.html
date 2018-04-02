@@ -110,8 +110,9 @@
       $('#edit').modal('show');
     }
   
-    function processData(name) {
+    function processData() {
       var result = {};
+      var mode = $('#title').text() == 'Edit user properties' ? 'edit' : 'add'
       var fields = [{% for field in fields %} '{{ field }}', {% endfor %}];
       $.each($('#edit-form').serializeArray(), function() {
         result[this.name] = this.value;
@@ -128,7 +129,7 @@
       <button type="button" class="btn btn-danger btn-xs" onclick="deleteUser('${name}')">Delete</button>
       </td>`);
 
-      if ($('#title').text() == 'Edit user properties') {
+      if (mode == 'edit') {
         $(`#${name}`).html(values.join(''));
       } else {
         values.unshift(`<tr id="${name}">`);
@@ -138,7 +139,7 @@
 
       $.ajax({
         type: "POST",
-        url: "/users/edit_user",
+        url: `/users/process_user`,
         dataType: "json",
         data: $('#edit-form').serialize(),
         success: function(msg){

@@ -16,7 +16,6 @@ from .forms import (
     TacacsServerForm
 )
 from objects.models import get_obj
-from passlib.hash import cisco_type7
 from .properties import user_properties, user_search_properties
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
@@ -35,7 +34,7 @@ blueprint = Blueprint(
 )
 
 from base.database import db
-from .models import User, TacacsServer
+from .models import User, user_factory, TacacsServer
 
 
 @blueprint.route('/overview')
@@ -58,8 +57,7 @@ def manage_users():
     delete_user_form = DeleteUser(request.form)
     if 'add_user' in request.form:
         kwargs = request.form.to_dict()
-        password = kwargs.pop('password')
-        kwargs['password'] = cisco_type7.hash(password)
+
         user = User(**kwargs)
         db.session.add(user)
     elif 'delete_user' in request.form:
@@ -88,9 +86,10 @@ def get_user(name):
     return jsonify(properties)
 
 
-@blueprint.route('/edit_user', methods=['POST'])
+@blueprint.route('/process_user', methods=['POST'])
 @login_required
-def edit_user():
+def process_user():
+    user_factory(db, **request.form.to_dict())
     return jsonify({})
 
 

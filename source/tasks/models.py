@@ -1,4 +1,4 @@
-from base.database import db
+from base.database import db, get_obj
 from base.models import (
     task_node_table,
     task_script_table,
@@ -8,7 +8,6 @@ from base.models import (
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
-from objects.models import get_obj
 from sqlalchemy import Boolean, Column, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
@@ -20,7 +19,7 @@ scheduler = APScheduler()
 
 def job_multiprocessing(name):
     job_time = str(datetime.now())
-    task = get_obj(db, Task, name=name)
+    task = get_obj(Task, name=name)
     task.logs[job_time] = {}
     print(task.scripts + task.workflows)
     for task_job in task.scripts + task.workflows:

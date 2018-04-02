@@ -1,3 +1,4 @@
+from base.database import db, get_obj
 from flask_login import UserMixin
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
@@ -52,8 +53,9 @@ class TacacsServer(CustomBase):
     def __repr__(self):
         return self.ip_address
 
-def user_factory(db, **kwargs):
-    obj = get_obj(db, User, name=kwargs['name'])
+
+def user_factory(**kwargs):
+    obj = get_obj(User, name=kwargs['name'])
     password = kwargs.pop('password')
     kwargs['password'] = cisco_type7.hash(password)
     if obj:

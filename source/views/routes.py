@@ -1,11 +1,11 @@
-from base.database import db
+from base.database import db, get_obj
 from base.properties import pretty_names
 from collections import OrderedDict
 from flask import Blueprint, current_app, render_template, redirect, request, session, url_for
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
 from json import dumps
-from objects.models import get_obj, Node, node_subtypes, Link, link_class
+from objects.models import Node, node_subtypes, Link, link_class
 from objects.properties import type_to_public_properties
 from os.path import join
 from scripts.models import Script
@@ -60,9 +60,9 @@ def view(view_type):
         selection = map(int, session['selection'])
         scripts = request.form.getlist('scripts')
         workflows = request.form.getlist('workflows')
-        data['scripts'] = [get_obj(db, Script, name=name) for name in scripts]
-        data['workflows'] = [get_obj(db, Workflow, name=name) for name in workflows]
-        data['nodes'] = [get_obj(db, Node, id=id) for id in selection]
+        data['scripts'] = [get_obj(Script, name=name) for name in scripts]
+        data['workflows'] = [get_obj(Workflow, name=name) for name in workflows]
+        data['nodes'] = [get_obj(Node, id=id) for id in selection]
         data['user'] = current_user
         task = Task(**data)
         db.session.add(task)

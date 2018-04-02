@@ -28,3 +28,7 @@ def create_database():
     # import all modules here that might define models so that
     # they will be registered properly on the metadata.
     Base.metadata.create_all(bind=engine)
+
+
+def get_obj(model, **kwargs):
+    return db.session.query(model).filter_by(**kwargs).first()

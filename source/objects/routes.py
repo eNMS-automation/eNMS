@@ -1,4 +1,4 @@
-from base.database import db
+from base.database import db, get_obj
 from base.helpers import allowed_file
 from base.properties import pretty_names
 from flask import Blueprint, jsonify, render_template, request
@@ -9,7 +9,7 @@ from .forms import (
     AddLink,
     FilteringForm
 )
-from .models import Link, Node, object_class, object_factory, get_obj
+from .models import Link, Node, object_class, object_factory
 from .properties import link_public_properties, node_public_properties
 from re import search
 from werkzeug.utils import secure_filename
@@ -83,7 +83,7 @@ def create_objects():
 def get_object(obj_type, name):
     cls = Node if obj_type == 'node' else Link
     properties = node_public_properties if cls == Node else link_public_properties
-    obj = get_obj(db, cls, name=name)
+    obj = get_obj(cls, name=name)
     obj_properties = {
         property: str(getattr(obj, property))
         for property in properties
@@ -102,7 +102,7 @@ def edit_object():
 @login_required
 def delete_object(obj_type, name):
     cls = Node if obj_type == 'node' else Link
-    obj = get_obj(db, cls, name=name)
+    obj = get_obj(cls, name=name)
     db.session.delete(obj)
     db.session.commit()
     return jsonify({})

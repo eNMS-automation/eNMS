@@ -16,9 +16,9 @@
         <div class="x_panel">
           <div class="x_content">
             <div class="x_title">
-              {{ form['filters'](class="form-control", placeholder="Name") }}
+              {{ form['filters'](id="filters", class="form-control", placeholder="Name") }}
             </div>
-            <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <form id="filter-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div class="form-group">
                 {{ form['name'](class="form-control", placeholder="Name") }}<br>
                 <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -66,7 +66,7 @@
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                   <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="submit" class="btn btn-success">Filter</button>
+                  <button type="button" class="btn btn-success" onclick="processData()">Save</button>
                 </div>
               </div>
             </form>
@@ -81,4 +81,40 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    function processData() {
+      var result = {};
+      var fields = [{% for field in fields %} '{{ field }}', {% endfor %}];
+      $.each($('#filter-form').serializeArray(), function() {
+        result[this.name] = this.value;
+      });
+      var name = result.name;
+
+      $.ajax({
+        type: "POST",
+        url: `/objects/process_filter`,
+        dataType: "json",
+        data: $('#filter-form').serialize(),
+        success: function(){
+          updateFilters();
+        }
+      });
+    }
+
+    function updateFilters() {
+      $.ajax({
+        type: "POST",
+        url: `/objects/get_filters`,
+        dataType: "json",
+        success: function(filters){
+          console.log(filters);
+          $("#filters").empty();
+          $.each(filters, function(key, value) {
+            $("#filters").append($("<option></option>")
+              .attr("value", value).text(value));
+          });
+        }
+      });
+    }
+  </script>
 {% endblock javascripts %}

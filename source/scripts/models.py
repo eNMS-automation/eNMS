@@ -25,7 +25,9 @@ class Script(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
-    type = Column(String(50))
+    type = Column(String)
+    vendor = Column(String)
+    operating_system = Column(String)
     tasks = relationship(
         "Task",
         secondary=task_script_table,

@@ -9,7 +9,7 @@ from .forms import (
     AddLink,
     FilteringForm
 )
-from .models import filter_factory, Link, Node, object_class, object_factory
+from .models import filter_factory, Filter, Link, Node, object_class, object_factory
 from .properties import link_public_properties, node_public_properties
 from re import search
 from werkzeug.utils import secure_filename
@@ -108,13 +108,24 @@ def delete_object(obj_type, name):
     return jsonify({})
 
 
+@blueprint.route('/process_filter', methods=['POST'])
+@login_required
+def process_filter():
+    filter_factory(**request.form.to_dict())
+    return jsonify({})
+
+
+@blueprint.route('/get_filters', methods=['POST'])
+@login_required
+def get_filters():
+    return jsonify([f.name for f in Filter.query.all()])
+
+
 @blueprint.route('/object_filtering', methods=['GET', 'POST'])
 @login_required
 def filter_objects():
     form = FilteringForm(request.form)
     if request.method == 'POST':
-        filter = filter_factory(**request.form.to_dict())
-        print(filter)
         for obj in Node.query.all() + Link.query.all():
             # source and destination do not belong to a link __dict__, because
             # they are SQLalchemy relationships and not columns

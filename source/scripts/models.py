@@ -85,7 +85,7 @@ class NetmikoConfigScript(Script):
             netmiko_handler = ConnectHandler(
                 device_type=self.driver,
                 ip=node.ip_address,
-                username=task.user.username,
+                username=task.user.name,
                 password=cisco_type7.decode(task.user.password),
                 secret=node.secret_password
             )
@@ -131,7 +131,7 @@ class FileTransferScript(Script):
             netmiko_handler = ConnectHandler(
                 device_type=self.driver,
                 ip=node.ip_address,
-                username=task.user.username,
+                username=task.user.name,
                 password=cisco_type7.decode(task.user.password),
                 secret=node.secret_password
             )
@@ -178,7 +178,7 @@ class NapalmConfigScript(Script):
             driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
                 hostname=node.ip_address,
-                username=task.user.username,
+                username=task.user.name,
                 password=cisco_type7.decode(task.user.password),
                 optional_args={'secret': node.secret_password}
             )
@@ -219,7 +219,7 @@ class NapalmActionScript(Script):
             driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
                 hostname=node.ip_address,
-                username=task.user.username,
+                username=task.user.name,
                 password=cisco_type7.decode(task.user.password),
                 optional_args={'secret': node.secret_password}
             )
@@ -258,7 +258,7 @@ class NapalmGettersScript(Script):
             driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
                 hostname=node.ip_address,
-                username=task.user.username,
+                username=task.user.name,
                 password=cisco_type7.decode(task.user.password),
                 optional_args={'secret': node.secret_password}
             )

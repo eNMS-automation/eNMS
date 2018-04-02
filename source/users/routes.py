@@ -12,7 +12,6 @@ from flask_login import login_required
 from .forms import (
     AddUser,
     CreateAccountForm,
-    DeleteUser,
     LoginForm,
     TacacsServerForm
 )

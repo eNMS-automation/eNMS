@@ -65,6 +65,8 @@ ansible_options = {
 
 class ScriptForm(FlaskForm):
     name = TextField('Name')
+    vendor = TextField('Vendor')
+    operating_system = TextField('Operating system')
 
 
 class ConfigScriptForm(ScriptForm):

@@ -1,4 +1,4 @@
-from base.database import get_obj
+from base.database import db, get_obj
 from base.models import task_node_table, CustomBase
 from collections import OrderedDict
 from .properties import (
@@ -398,7 +398,7 @@ for cls_dict in (node_class, link_class):
 
 
 # todo if the type is not the same, delete the object and recreate it
-def object_factory(db, **kwargs):
+def object_factory(**kwargs):
     obj_type = kwargs['type']
     cls = Node if obj_type in node_class else Link
     obj = get_obj(cls, name=kwargs['name'])
@@ -418,5 +418,59 @@ def object_factory(db, **kwargs):
         )
     else:
         obj = object_class[obj_type](**kwargs)
+    db.session.add(obj)
+    db.session.commit()
+
+
+class Filter(CustomBase):
+
+    __tablename__ = 'Filter'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)
+    node_name = Column(String)
+    node_name_regex = Column(String)
+    node_description = Column(String)
+    node_description_regex = Column(String)
+    node_location = Column(String)
+    node_location_regex = Column(String)
+    node_type = Column(String)
+    node_type_regex = Column(String)
+    node_vendor = Column(String)
+    node_vendor_regex = Column(String)
+    node_operating_system = Column(String)
+    node_operating_system
+    node_os_version = Column(String)
+    node_os_version_regex = Column(String)
+    node_ip_address = Column(String)
+    node_ip_address_regex = Column(String)
+    node_longitude = Column(String)
+    node_longitude_regex = Column(String)
+    node_latitude = Column(String)
+    node_latitude_regex = Column(String)
+    link_name = Column(String)
+    link_name_regex = Column(String)
+    link_description = Column(String)
+    link_description_regex = Column(String)
+    link_location = Column(String)
+    link_location_regex = Column(String)
+    link_type = Column(String)
+    link_type_regex = Column(String)
+    link_vendor = Column(String)
+    link_vendor_regex = Column(String)
+    link_source = Column(String)
+    link_source_regex = Column(String)
+    link_destination = Column(String)
+    link_destination_regex = Column(String)
+
+
+def filter_factory(**kwargs):
+    obj = get_obj(Filter, name=kwargs['name'])
+    if obj:
+        for property, value in kwargs.items():
+            if property in obj.__dict__:
+                setattr(obj, property, value)
+    else:
+        obj = Filter(**kwargs)
     db.session.add(obj)
     db.session.commit()

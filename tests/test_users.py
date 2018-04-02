@@ -11,22 +11,12 @@ def test_user_management(user_client):
             'email': '{}@test.com'.format(user),
             'access_rights': 'Read-only',
             'password': user,
-            'add_user': ''
         }
-        user_client.post('/users/manage_users', data=dict_user)
+        user_client.post('/users/process_user', data=dict_user)
     assert len(User.query.all()) == 4
-    # single user deletion
-    delete_user1 = {'users': 'user1', 'delete_user': ''}
-    user_client.post('/users/manage_users', data=delete_user1)
+    # user deletion
+    user_client.post('/users/delete_user1')
     assert len(User.query.all()) == 3
-    # multiple user deletion
-    delete_users_2_3 = ImmutableMultiDict([
-        ('users', 'user2'),
-        ('users', 'user3'),
-        ('delete_user', '')
-    ])
-    user_client.post('/users/manage_users', data=delete_users_2_3)
-    assert len(User.query.all()) == 1
 
 
 @check_blueprints('', '/users')

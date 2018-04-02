@@ -10,7 +10,6 @@ urls = {
     ),
     '/users': (
         '/overview',
-        '/manage_users',
         '/login',
         '/create_account',
         '/tacacs_server'

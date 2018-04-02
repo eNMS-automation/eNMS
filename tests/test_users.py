@@ -1,6 +1,5 @@
 from users.models import TacacsServer, User
 from test_base import check_blueprints
-from werkzeug.datastructures import ImmutableMultiDict
 
 
 @check_blueprints('', '/users')

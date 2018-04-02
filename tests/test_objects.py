@@ -156,16 +156,18 @@ def test_object_creation_all_type(user_client):
 
 
 filter_objects1 = ImmutableMultiDict([
-    ('nodelocation', 'france|spain'),
-    ('nodelocationregex', 'y'),
-    ('linkname', 'link[1|2].'),
-    ('linknameregex', 'y'),
+    ('name', 'test_filter1'),
+    ('node_location', 'france|spain'),
+    ('node_location_regex', 'y'),
+    ('link_name', 'link[1|2].'),
+    ('link_name_regex', 'y'),
 ])
 
 filter_objects2 = ImmutableMultiDict([
-    ('nodelocation', 'france'),
-    ('linkname', 'l.*k\\S3'),
-    ('linknameregex', 'y'),
+    ('name', 'test_filter2'),
+    ('node_location', 'france'),
+    ('link_name', 'l.*k\\S3'),
+    ('link_name_regex', 'y'),
 ])
 
 

@@ -9,7 +9,7 @@ from .forms import (
     AddLink,
     FilteringForm
 )
-from .models import Link, Node, object_class, object_factory
+from .models import filter_factory, Link, Node, object_class, object_factory
 from .properties import link_public_properties, node_public_properties
 from re import search
 from werkzeug.utils import secure_filename
@@ -51,7 +51,7 @@ def create_objects():
     add_nodes_form = AddNodes(request.form)
     add_link_form = AddLink(request.form)
     if 'add_node' in request.form or 'add_link' in request.form:
-        object_factory(db, **request.form.to_dict())
+        object_factory(**request.form.to_dict())
     elif 'add_nodes' in request.form:
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
@@ -66,7 +66,7 @@ def create_objects():
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
                     kwargs['type'] = obj_type
-                    object_factory(db, **kwargs)
+                    object_factory(**kwargs)
                 db.session.commit()
     all_nodes = Node.visible_choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
@@ -94,7 +94,7 @@ def get_object(obj_type, name):
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():
-    object_factory(db, **request.form.to_dict())
+    object_factory(**request.form.to_dict())
     return jsonify({})
 
 
@@ -113,6 +113,8 @@ def delete_object(obj_type, name):
 def filter_objects():
     form = FilteringForm(request.form)
     if request.method == 'POST':
+        filter = filter_factory(**request.form.to_dict())
+        print(filter)
         for obj in Node.query.all() + Link.query.all():
             # source and destination do not belong to a link __dict__, because
             # they are SQLalchemy relationships and not columns
@@ -127,17 +129,17 @@ def filter_objects():
                 # if the node-regex property is not in the request, the
                 # regex box is unticked and we only check that the values
                 # are equal.
-                str(value) == request.form[obj.class_type + property]
-                if not obj.class_type + property + 'regex' in request.form
+                str(value) == request.form[obj.class_type + '_' + property]
+                if not '{}_{}_regex'.format(obj.class_type, property) in request.form
                 # if it is ticked, we use re.search to check that the value
                 # of the node property matches the regular expression.
-                else search(request.form[obj.class_type + property], str(value))
+                else search(request.form[obj.class_type + '_' + property], str(value))
                 for property, value in obj.__dict__.items()
                 # we consider only the properties in the form
-                if obj.class_type + property in request.form and
+                if '{}_{}'.format(obj.class_type, property) in request.form and
                 # providing that the property field in the form is not empty
                 # (empty field <==> property ignored)
-                request.form[obj.class_type + property]
+                request.form[obj.class_type + '_' + property]
             )
     # the visible status was updated, we need to commit the change
     db.session.commit()

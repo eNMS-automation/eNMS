@@ -54,14 +54,15 @@ def configure_form(cls):
     cls.node_properties = node_public_properties
     cls.link_properties = link_public_properties
     for property in node_public_properties:
-        setattr(cls, 'node' + property, TextField(property))
-        setattr(cls, 'node' + property + 'regex', BooleanField('Regex'))
+        setattr(cls, 'node_' + property, TextField(property))
+        setattr(cls, 'node_' + property + '_regex', BooleanField('Regex'))
     for property in link_public_properties:
-        setattr(cls, 'link' + property, TextField(property))
-        setattr(cls, 'link' + property + 'regex', BooleanField('Regex'))
+        setattr(cls, 'link_' + property, TextField(property))
+        setattr(cls, 'link_' + property + '_regex', BooleanField('Regex'))
     return cls
 
 
 @configure_form
 class FilteringForm(FlaskForm):
-    pass
+    filters = SelectField('Filters', choices=())
+    name = TextField('Name')

@@ -18,7 +18,6 @@ urls = {
     '/objects': (
         '/objects',
         '/object_creation',
-        '/object_deletion',
         '/object_filtering'
     ),
     '/views': (

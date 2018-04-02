@@ -8,7 +8,6 @@ from wtforms import (
     FloatField,
     PasswordField,
     SelectField,
-    SelectMultipleField,
     TextField
 )
 from wtforms.validators import optional
@@ -47,13 +46,6 @@ class AddLink(AddObjectForm):
     type = SelectField('Type', choices=link_type)
     source = SelectField('Source', choices=())
     destination = SelectField('Destination', choices=())
-
-## Object deletion
-
-
-class DeleteObjects(FlaskForm):
-    nodes = SelectMultipleField('Nodes', choices=())
-    links = SelectMultipleField('Links', choices=())
 
 ## Object filtering
 

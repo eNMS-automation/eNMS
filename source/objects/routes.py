@@ -7,10 +7,9 @@ from .forms import (
     AddNode,
     AddNodes,
     AddLink,
-    DeleteObjects,
     FilteringForm
 )
-from .models import Link, Node, Object, object_class, object_factory, get_obj
+from .models import Link, Node, object_class, object_factory, get_obj
 from .properties import link_public_properties, node_public_properties
 from re import search
 from werkzeug.utils import secure_filename
@@ -107,33 +106,6 @@ def delete_object(obj_type, name):
     db.session.delete(obj)
     db.session.commit()
     return jsonify({})
-
-
-@blueprint.route('/object_deletion', methods=['GET', 'POST'])
-@login_required
-def delete_objects():
-    delete_objects_form = DeleteObjects(request.form)
-    if request.method == 'POST':
-        # delete nodes
-        node_selection = delete_objects_form.data['nodes']
-        for node in node_selection:
-            node = db.session.query(Object).filter_by(name=node).first()
-            db.session.delete(node)
-        # note: a Query.delete() bypasses cascade deletes: we musn't do it
-        # db.session.query(Object).filter(Object.name.in_(node_selection))\
-        # .delete(synchronize_session='fetch')
-        # delete links
-        link_selection = delete_objects_form.data['links']
-        for link in link_selection:
-            link = db.session.query(Object).filter_by(name=link).first()
-            db.session.delete(link)
-        db.session.commit()
-    delete_objects_form.nodes.choices = Node.visible_choices()
-    delete_objects_form.links.choices = Link.visible_choices()
-    return render_template(
-        'object_deletion.html',
-        form=delete_objects_form
-    )
 
 
 @blueprint.route('/object_filtering', methods=['GET', 'POST'])

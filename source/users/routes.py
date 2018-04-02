@@ -1,3 +1,4 @@
+from base.database import get_obj
 from base.properties import pretty_names
 from flask import (
     Blueprint,
@@ -15,7 +16,7 @@ from .forms import (
     LoginForm,
     TacacsServerForm
 )
-from objects.models import get_obj
+from passlib.hash import cisco_type7
 from .properties import user_properties, user_search_properties
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
@@ -78,7 +79,7 @@ def manage_users():
 @blueprint.route('/get_<name>', methods=['POST'])
 @login_required
 def get_user(name):
-    user = get_obj(db, User, name=name)
+    user = get_obj(User, name=name)
     properties = {
         property: str(getattr(user, property))
         for property in user_properties
@@ -89,14 +90,14 @@ def get_user(name):
 @blueprint.route('/process_user', methods=['POST'])
 @login_required
 def process_user():
-    user_factory(db, **request.form.to_dict())
+    user_factory(**request.form.to_dict())
     return jsonify({})
 
 
 @blueprint.route('/delete_<name>', methods=['POST'])
 @login_required
 def delete_user(name):
-    user = get_obj(db, User, name=name)
+    user = get_obj(User, name=name)
     db.session.delete(user)
     db.session.commit()
     return jsonify({})

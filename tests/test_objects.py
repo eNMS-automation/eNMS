@@ -135,16 +135,16 @@ def test_object_creation_all_type(user_client):
 
 # nodes = ImmutableMultiDict([('nodes', 'router' + str(i)) for i in range(5, 20)])
 # links = ImmutableMultiDict([('links', 'link' + str(i)) for i in range(4, 15)])
-# 
-# 
+#
+#
 # @check_blueprints('', '/objects', '/views')
 # def test_node_deletion(user_client):
 #     create_from_file(user_client, 'europe.xls')
 #     user_client.post('/objects/object_deletion', data=nodes)
 #     assert len(Node.query.all()) == 18
 #     assert len(Link.query.all()) == 18
-# 
-# 
+#
+#
 # @check_blueprints('', '/objects', '/views')
 # def test_link_deletion(user_client):
 #     create_from_file(user_client, 'europe.xls')

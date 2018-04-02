@@ -1,10 +1,9 @@
-from base.database import db
+from base.database import db, get_obj
 from base.properties import pretty_names
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from .forms import AddScriptForm, WorkflowCreationForm
 from .models import ScriptEdge, Workflow
-from objects.models import get_obj
 from scripts.models import Script
 
 blueprint = Blueprint(
@@ -46,7 +45,7 @@ def workflow_creation():
 def workflow_manager(workflow):
     form = AddScriptForm(request.form)
     form.scripts.choices = Script.choices()
-    workflow = get_obj(db, Workflow, name=workflow)
+    workflow = get_obj(Workflow, name=workflow)
     return render_template(
         'workflow_manager.html',
         form=form,
@@ -58,24 +57,24 @@ def workflow_manager(workflow):
 @login_required
 def save_workflow(workflow):
     id_to_script = {}
-    workflow = get_obj(db, Workflow, name=workflow)
+    workflow = get_obj(Workflow, name=workflow)
     workflow.scripts = []
     for edge in workflow.edges:
         db.session.delete(edge)
     db.session.commit()
     for node in request.json['nodes']:
-        script = get_obj(db, Script, name=node['label'])
+        script = get_obj(Script, name=node['label'])
         id_to_script[node['id']] = node['label']
         workflow.scripts.append(script)
     for edge in request.json['edges']:
-        source = get_obj(db, Script, name=id_to_script[edge['from']])
-        destination = get_obj(db, Script, name=id_to_script[edge['to']])
+        source = get_obj(Script, name=id_to_script[edge['from']])
+        destination = get_obj(Script, name=id_to_script[edge['to']])
         script_edge = ScriptEdge(edge['type'], source, destination)
         db.session.add(script_edge)
         db.session.commit()
         workflow.edges.append(script_edge)
     if request.json['start']:
         start_id = request.json['start']['id']
-        workflow.start_script = get_obj(db, Script, id=start_id)
+        workflow.start_script = get_obj(Script, id=start_id)
     db.session.commit()
     return jsonify({})

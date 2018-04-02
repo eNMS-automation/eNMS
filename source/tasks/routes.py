@@ -1,11 +1,10 @@
-from base.database import db
+from base.database import db, get_obj
 from base.helpers import str_dict
 from difflib import ndiff, unified_diff
 from flask import Blueprint, render_template, request
 from flask_login import login_required
 from .forms import CompareForm
 from .models import Task
-from objects.models import get_obj
 from re import search, sub
 
 blueprint = Blueprint(
@@ -23,7 +22,7 @@ def task_management():
     if 'compare' in request.form:
         n1, n2 = request.form['first_node'], request.form['second_node']
         t1, t2 = request.form['first_version'], request.form['second_version']
-        task = get_obj(db, Task, name=request.form['task_name'])
+        task = get_obj(Task, name=request.form['task_name'])
         # get the two versions of the logs
         v1 = str_dict(task.logs[t1][n1]).splitlines()
         v2 = str_dict(task.logs[t2][n2]).splitlines()

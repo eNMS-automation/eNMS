@@ -74,7 +74,7 @@ def dashboard_control():
     diagram_properties_form = DiagramPropertiesForm(request.form)
     if request.method == 'POST':
         user = db.session.query(User)\
-            .filter_by(username=flask_login.current_user.username)\
+            .filter_by(name=flask_login.current_user.name)\
             .first()
         user.dashboard_node_properties = str(diagram_properties_form.data['node_properties'])
         user.dashboard_link_properties = str(diagram_properties_form.data['link_properties'])

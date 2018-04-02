@@ -51,31 +51,6 @@ def users():
     )
 
 
-@blueprint.route('/manage_users', methods=['GET', 'POST'])
-@login_required
-def manage_users():
-    add_user_form = AddUser(request.form)
-    delete_user_form = DeleteUser(request.form)
-    if 'add_user' in request.form:
-        kwargs = request.form.to_dict()
-
-        user = User(**kwargs)
-        db.session.add(user)
-    elif 'delete_user' in request.form:
-        selection = delete_user_form.data['users']
-        db.session.query(User).filter(User.name.in_(selection))\
-            .delete(synchronize_session='fetch')
-    if request.method == 'POST':
-        db.session.commit()
-    all_users = User.choices()
-    delete_user_form.users.choices = all_users
-    return render_template(
-        'manage_users.html',
-        add_user_form=add_user_form,
-        delete_user_form=delete_user_form
-    )
-
-
 @blueprint.route('/get_<name>', methods=['POST'])
 @login_required
 def get_user(name):

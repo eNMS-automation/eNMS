@@ -479,7 +479,7 @@ class Filter(CustomBase):
             for property in 'node_{p} node_{p}_regex'.format(p=p).split():
                 result[property] = getattr(self, property)
         return result
-        
+
     def object_match(self, obj):
         return all(
             # if the node-regex property is not in the request, the

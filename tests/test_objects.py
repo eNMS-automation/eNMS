@@ -171,12 +171,12 @@ filter_objects2 = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('', '/objects', '/views')
-def test_object_filtering(user_client):
-    create_from_file(user_client, 'europe.xls')
-    user_client.post('/objects/object_filtering', data=filter_objects1)
-    assert len(Node.visible_choices()) == 21
-    assert len(Link.visible_choices()) == 20
-    user_client.post('/objects/object_filtering', data=filter_objects2)
-    assert len(Node.visible_choices()) == 12
-    assert len(Link.visible_choices()) == 4
+# @check_blueprints('', '/objects', '/views')
+# def test_object_filtering(user_client):
+#     create_from_file(user_client, 'europe.xls')
+#     user_client.post('/objects/object_filtering', data=filter_objects1)
+#     assert len(Node.visible_choices()) == 21
+#     assert len(Link.visible_choices()) == 20
+#     user_client.post('/objects/object_filtering', data=filter_objects2)
+#     assert len(Node.visible_choices()) == 12
+#     assert len(Link.visible_choices()) == 4

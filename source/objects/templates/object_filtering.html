@@ -81,6 +81,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+
     function processData() {
       var result = {};
       var fields = [{% for field in fields %} '{{ field }}', {% endfor %}];
@@ -100,6 +101,19 @@
       });
     }
 
+    // when a filter is selected, apply it
+    $('#filters').on('change', function() {
+      $.ajax({
+        type: "POST",
+        url: `/objects/filter_${this.value}`,
+        success: function(properties){
+          for (const [property, value] of Object.entries(properties)) {
+            $(`#${property}`).val(value);
+          }
+        }
+      });
+    });
+
     function updateFilters() {
       $.ajax({
         type: "POST",
@@ -115,5 +129,6 @@
         }
       });
     }
+    updateFilters()
   </script>
 {% endblock javascripts %}

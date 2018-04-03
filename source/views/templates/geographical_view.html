@@ -17,6 +17,13 @@
 {% set buttons %}
 <form id="aform" method="post">
   <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+    <div class="form-group">
+      <select id="select-filters" class="form-control">
+        {% for filter in filters %}
+          <option>{{ filter.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
     <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
 
     {% if view == 'leaflet' %}
@@ -50,10 +57,12 @@
 {% block content %}
 {% include 'modals.html' %}
   <div class="right_col" role="main">
+
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            <script src="{{ url_for('static', filename='vendors/jquery/jquery.min.js') }}"></script>
             <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
             {% if view == 'markercluster' %}
             <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
@@ -106,49 +115,37 @@
                   // Create a new vector type with getLatLng and setLatLng methods.
                   L.PolylineClusterable = L.Polyline.extend({
                     _originalInitialize: L.Polyline.prototype.initialize,
-                    
                     initialize: function (bounds, options) {
                       this._originalInitialize(bounds, options);
                       this._latlng = this.getBounds().getCenter();
                     },
-                    
-                    getLatLng: function () {
-                      return this._latlng;
-                    },
-                    
-                    // dummy method.
+                    getLatLng: function () { return this._latlng; },
                     setLatLng: function () {}
                   });
-                
+
                   var markers_array = [];
                   {% for obj, properties in node_table.items() %}  
                     var marker = L.marker([
                       {{ obj.latitude }}, 
                       {{ obj.longitude }}], 
                       );
-
                     marker.bindPopup("{% for property in properties %}\
                     <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                     <input type='hidden' name='id' id='id' value={{ obj.id }}>\
                     <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
-                    
                     marker.bindTooltip("{{ obj[labels['node']] }}", {
                       permanent: false, 
                       }
                     );
                     marker.node_id = {{ obj.id }};
-                    
                     marker.icon = icon_{{ obj.subtype }};
                     marker.selected_icon = icon_selected_{{ obj.subtype }};
                     {% if obj.id not in selected_nodes %}
-                    marker.setIcon(marker.icon), 
+                      marker.setIcon(marker.icon), 
                     {% else %}
-                    marker.setIcon(marker.selected_icon), 
+                      marker.setIcon(marker.selected_icon), 
                     {% endif %}
-                    
-                    
                     markers_array.push(marker);
-                    
                     {% if view == 'markercluster' %}
                       markers.addLayer(marker);
                     {% else %}
@@ -168,7 +165,6 @@
                         selection.push(markers_array[i].node_id);
                         }
                       }
-                      
                     $.ajax({
                       type: "POST",
                       url: "/views/selection",
@@ -200,7 +196,7 @@
                   var pointA = new L.LatLng({{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }});
                   var pointB = new L.LatLng({{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }});
                   var pointList = [pointA, pointB];
-                  
+
                   var polyline = new L.PolylineClusterable(pointList, {
                     color: '{{ obj.color }}',
                     weight: 3,
@@ -223,58 +219,66 @@
 
                 {% endfor %}
                 {% endif %}
-                
+
                 {% if view == 'glearth' %}
-                var options = {sky:true, atmosphere: true};
-                var earth = new WE.map('earth_div', options);
-
-                var current_layer = WE.tileLayer(layers['gm']);
-                current_layer.addTo(earth);
-
-                var markers = [];
-                {% for obj, properties in node_table.items() %}  
-                  var marker = WE.marker(
-                  [
-                  {{ obj.latitude }}, 
-                  {{ obj.longitude }}
-                  ],
-                  {% if obj.id not in selected_nodes %}
-                  'static/images/3D/default/router.gif', 
-                  {% else %}
-                  'static/images/3D/selection/router.gif',
-                  {% endif %}
-                  15, 10
-                  ).addTo(earth);
-                  
-                  marker.bindPopup("{% for property in properties %}\
-                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
-                  <input type='hidden' name='id' id='id' value={{ obj.id }}>\
-                  <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
-                  
-                  markers.push(marker);
-                {% endfor %}
-                
-                {% for obj, properties in link_table.items() %}  
-                  var polygon = WE.polygon(
-                  [
-                    [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
-                    [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
-                    [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}]
-                  ], {color: '{{ obj.color }}', opacity: 20}
-                  ).addTo(earth);
-                  
-                  var polygon = WE.polygon(
-                  [
-                    [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
-                    [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
-                    [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}]
-                  ], {color: '{{ obj.color }}', opacity: 20}
-                  ).addTo(earth);
-
-                {% endfor %}
-                
+                  var options = {sky:true, atmosphere: true};
+                  var earth = new WE.map('earth_div', options);
+                  var current_layer = WE.tileLayer(layers['gm']);
+                  current_layer.addTo(earth);
+                  var markers = [];
+                  {% for obj, properties in node_table.items() %}  
+                    var marker = WE.marker(
+                    [{{ obj.latitude }}, {{ obj.longitude }}],
+                    {% if obj.id not in selected_nodes %}
+                    'static/images/3D/default/router.gif', 
+                    {% else %}
+                    'static/images/3D/selection/router.gif',
+                    {% endif %}
+                    15, 10
+                    ).addTo(earth);
+                    marker.bindPopup("{% for property in properties %}\
+                    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
+                    <input type='hidden' name='id' id='id' value={{ obj.id }}>\
+                    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
+                    markers.push(marker);
+                  {% endfor %}
+                  {% for obj, properties in link_table.items() %}  
+                    var polygon = WE.polygon(
+                    [
+                      [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
+                      [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
+                      [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}]
+                    ], {color: '{{ obj.color }}', opacity: 20}
+                    ).addTo(earth);
+                    var polygon = WE.polygon(
+                    [
+                      [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
+                      [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
+                      [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}]
+                    ], {color: '{{ obj.color }}', opacity: 20}
+                    ).addTo(earth);
+                  {% endfor %}
                 {% endif %}
-              
+
+                // when a filter is selected, apply it
+                $('#select-filters').on('change', function() {
+                  $.ajax({
+                    type: "POST",
+                    url: `/objects/${this.value}_filter_objects`,
+                    dataType: "json",
+                    success: function(objects){
+                      console.log(objects, markers_array);
+                      for (i = 0; i < markers_array.length; i++) {
+                        console.log(markers_array[i].node_id, objects['nodes'])
+                        if (objects['nodes'].includes(markers_array[i].node_id)) {
+                          markers_array[i].addTo(map);
+                        } else {
+                          markers_array[i].removeFrom(map);
+                        }
+                      }
+                    }
+                  });
+                });
               </script>
             </div>
           </div>
@@ -312,9 +316,7 @@
       $('.buttonPrevious').addClass('btn btn-primary');
       $('.buttonFinish').addClass('btn btn-default');
     }
-  </script>
 
-  <script>
   function showModal(modal_name){
     $(`#${modal_name}`).modal('show');
     }

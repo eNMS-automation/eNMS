@@ -11,7 +11,6 @@ from .forms import (
 )
 from .models import filter_factory, Filter, Link, Node, object_class, object_factory
 from .properties import link_public_properties, node_public_properties
-from re import search
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -111,7 +110,14 @@ def delete_object(obj_type, name):
 @blueprint.route('/process_filter', methods=['POST'])
 @login_required
 def process_filter():
-    filter_factory(**request.form.to_dict())
+    filter_properties = request.form.to_dict()
+    for property in node_public_properties:
+        regex_property = 'node_{}_regex'.format(property)
+        filter_properties[regex_property] = regex_property in filter_properties
+    for property in link_public_properties:
+        regex_property = 'link_{}_regex'.format(property)
+        filter_properties[regex_property] = regex_property in filter_properties
+    filter_factory(**filter_properties)
     return jsonify({})
 
 
@@ -121,39 +127,18 @@ def get_filters():
     return jsonify([f.name for f in Filter.query.all()])
 
 
-@blueprint.route('/object_filtering', methods=['GET', 'POST'])
+@blueprint.route('/<name>_filter_objects', methods=['POST'])
+@login_required
+def get_filtered_objects(name):
+    filter = get_obj(Filter, name=name)
+    objects = filter.filter_objects()
+    return jsonify(objects)
+
+
+@blueprint.route('/object_filtering')
 @login_required
 def filter_objects():
     form = FilteringForm(request.form)
-    if request.method == 'POST':
-        for obj in Node.query.all() + Link.query.all():
-            # source and destination do not belong to a link __dict__, because
-            # they are SQLalchemy relationships and not columns
-            # we update __dict__ with these properties for the filtering
-            # system to work
-            if obj.class_type == 'link':
-                obj.__dict__.update({
-                    'source': obj.source,
-                    'destination': obj.destination
-                })
-            obj.visible = all(
-                # if the node-regex property is not in the request, the
-                # regex box is unticked and we only check that the values
-                # are equal.
-                str(value) == request.form[obj.class_type + '_' + property]
-                if not '{}_{}_regex'.format(obj.class_type, property) in request.form
-                # if it is ticked, we use re.search to check that the value
-                # of the node property matches the regular expression.
-                else search(request.form[obj.class_type + '_' + property], str(value))
-                for property, value in obj.__dict__.items()
-                # we consider only the properties in the form
-                if '{}_{}'.format(obj.class_type, property) in request.form and
-                # providing that the property field in the form is not empty
-                # (empty field <==> property ignored)
-                request.form[obj.class_type + '_' + property]
-            )
-    # the visible status was updated, we need to commit the change
-    db.session.commit()
     return render_template(
         'object_filtering.html',
         form=form,

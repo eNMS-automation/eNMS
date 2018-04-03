@@ -15,7 +15,7 @@
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Edit {{ type }}</h4>
+            <h4 class="modal-title" id="title"></h4>
           </div>
           {% set form = add_node_form if type == 'node' else add_link_form %}
           <form id="edit-{{ type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
@@ -44,8 +44,20 @@
     <div class="row" style="height: 350px">
       <!-- begin column -->
       <div class="col-md-12 col-sm-12 col-xs-12">
+        <div style="padding-bottom:5px;">
+          <button class="btn btn-default btn-file" onclick="showModal('link')" style="width:100%;">
+            Import a network topology (Excel spreadsheet)
+          </button>
+        </div>
         <div class="x_panel">
           <div class="x_content">
+            <div class="panel-group" >
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-default btn-file" onclick="showModal('node')" style="width:100%;">
+                  Add a new node
+                </button>
+              </div>
+            </div>
             <table id="datatable-node-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -88,6 +100,13 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            <div class="panel-group" >
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-default btn-file" onclick="showModal('link')" style="width:100%;">
+                  Add a new link
+                </button>
+              </div>
+            </div>
             <table id="datatable-link-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -132,7 +151,13 @@
     $('#datatable-node-responsive').DataTable();
     $('#datatable-link-responsive').DataTable();
 
+    function showModal(type) {
+      $('#title').text(`Add a new ${type}`);
+      $(`#edit-${type}`).modal('show');
+    }
+
     function showObjectModal(type, name) {
+      $('#title').text('Edit user properties');
       $.ajax({
         type: "POST",
         url: `/objects/get_${type}_${name}`,

@@ -222,10 +222,10 @@
 
                 {% if view == 'glearth' %}
                   var options = {sky:true, atmosphere: true};
-                  var earth = new WE.map('earth_div', options);
+                  var map = new WE.map('earth_div', options);
                   var current_layer = WE.tileLayer(layers['gm']);
-                  current_layer.addTo(earth);
-                  var markers = [];
+                  current_layer.addTo(map);
+                  var markers_array = [];
                   {% for obj, properties in node_table.items() %}  
                     var marker = WE.marker(
                     [{{ obj.latitude }}, {{ obj.longitude }}],
@@ -235,12 +235,13 @@
                     'static/images/3D/selection/router.gif',
                     {% endif %}
                     15, 10
-                    ).addTo(earth);
+                    ).addTo(map);
                     marker.bindPopup("{% for property in properties %}\
                     <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
                     <input type='hidden' name='id' id='id' value={{ obj.id }}>\
                     <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
-                    markers.push(marker);
+                    marker.node_id = {{ obj.id }};
+                    markers_array.push(marker);
                   {% endfor %}
                   {% for obj, properties in link_table.items() %}  
                     var polygon = WE.polygon(
@@ -249,14 +250,14 @@
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
                       [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}]
                     ], {color: '{{ obj.color }}', opacity: 20}
-                    ).addTo(earth);
+                    ).addTo(map);
                     var polygon = WE.polygon(
                     [
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
                       [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}]
                     ], {color: '{{ obj.color }}', opacity: 20}
-                    ).addTo(earth);
+                    ).addTo(map);
                   {% endfor %}
                 {% endif %}
 
@@ -269,7 +270,6 @@
                     success: function(objects){
                       console.log(objects, markers_array);
                       for (i = 0; i < markers_array.length; i++) {
-                        console.log(markers_array[i].node_id, objects['nodes'])
                         if (objects['nodes'].includes(markers_array[i].node_id)) {
                           markers_array[i].addTo(map);
                         } else {
@@ -329,9 +329,9 @@
       }
   {% else %}
     function switch_layer(layer){
-      current_layer.removeFrom(earth);
+      current_layer.removeFrom(map);
       current_layer = WE.tileLayer(layers[layer]);
-      current_layer.addTo(earth);
+      current_layer.addTo(map);
       }
   {% endif %}
   

@@ -3,7 +3,9 @@ from base.models import task_node_table, CustomBase
 from collections import OrderedDict
 from .properties import (
     link_common_properties,
+    link_public_properties,
     node_common_properties,
+    node_public_properties,
     object_common_properties
 )
 from re import search
@@ -468,6 +470,16 @@ class Filter(CustomBase):
     def __init__(self, **kwargs):
         pass
 
+    def get_properties(self):
+        result = {}
+        for p in link_public_properties:
+            for property in 'link_{p} link_{p}_regex'.format(p=p).split():
+                result[property] = getattr(self, property)
+        for p in node_public_properties:
+            for property in 'node_{p} node_{p}_regex'.format(p=p).split():
+                result[property] = getattr(self, property)
+        return result
+        
     def object_match(self, obj):
         return all(
             # if the node-regex property is not in the request, the

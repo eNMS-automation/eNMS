@@ -124,10 +124,6 @@ def process_filter():
 @blueprint.route('/filter_<name>', methods=['POST'])
 @login_required
 def get_filter(name):
-    print('test')
-    a = get_obj(Filter, name=name)
-    print(a)
-    print(a.__dict__)
     return jsonify(get_obj(Filter, name=name).get_properties())
 
 

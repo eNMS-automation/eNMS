@@ -480,10 +480,10 @@ class Filter(CustomBase):
             else search(getattr(self, obj.class_type + '_' + property), str(value))
             for property, value in obj.__dict__.items()
             # we consider only the properties in the form
-            if '{}_{}'.format(obj.class_type, property) in self.__dict__
+            if '{}_{}'.format(obj.class_type, property) in self.__dict__ and
             # providing that the property field in the form is not empty
             # (empty field <==> property ignored)
-            and getattr(self, obj.class_type + '_' + property)
+            getattr(self, obj.class_type + '_' + property)
         )
 
     def filter_objects(self):
@@ -503,7 +503,6 @@ class Filter(CustomBase):
 
 
 def filter_factory(**kwargs):
-    print(kwargs)
     obj = get_obj(Filter, name=kwargs['name'])
     if obj:
         for property, value in kwargs.items():

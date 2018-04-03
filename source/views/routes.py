@@ -5,7 +5,7 @@ from flask import Blueprint, current_app, render_template, redirect, request, se
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
 from json import dumps
-from objects.models import Node, node_subtypes, Link, link_class
+from objects.models import Filter, Node, node_subtypes, Link, link_class
 from objects.properties import type_to_public_properties
 from os.path import join
 from scripts.models import Script
@@ -83,6 +83,7 @@ def view(view_type):
     session['selection'] = []
     return render_template(
         '{}_view.html'.format(view_type),
+        filters=Filter.query.all(),
         view=view,
         scheduling_form=scheduling_form,
         view_options_form=view_options_form,

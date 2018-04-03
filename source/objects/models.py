@@ -6,6 +6,7 @@ from .properties import (
     node_common_properties,
     object_common_properties
 )
+from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
 
@@ -429,42 +430,80 @@ class Filter(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     node_name = Column(String)
-    node_name_regex = Column(String)
+    node_name_regex = Column(Boolean)
     node_description = Column(String)
-    node_description_regex = Column(String)
+    node_description_regex = Column(Boolean)
     node_location = Column(String)
-    node_location_regex = Column(String)
+    node_location_regex = Column(Boolean)
     node_type = Column(String)
-    node_type_regex = Column(String)
+    node_type_regex = Column(Boolean)
     node_vendor = Column(String)
-    node_vendor_regex = Column(String)
+    node_vendor_regex = Column(Boolean)
     node_operating_system = Column(String)
-    node_operating_system
+    node_operating_system_regex = Column(Boolean)
     node_os_version = Column(String)
-    node_os_version_regex = Column(String)
+    node_os_version_regex = Column(Boolean)
     node_ip_address = Column(String)
-    node_ip_address_regex = Column(String)
+    node_ip_address_regex = Column(Boolean)
     node_longitude = Column(String)
-    node_longitude_regex = Column(String)
+    node_longitude_regex = Column(Boolean)
     node_latitude = Column(String)
-    node_latitude_regex = Column(String)
+    node_latitude_regex = Column(Boolean)
     link_name = Column(String)
-    link_name_regex = Column(String)
+    link_name_regex = Column(Boolean)
     link_description = Column(String)
-    link_description_regex = Column(String)
+    link_description_regex = Column(Boolean)
     link_location = Column(String)
-    link_location_regex = Column(String)
+    link_location_regex = Column(Boolean)
     link_type = Column(String)
-    link_type_regex = Column(String)
+    link_type_regex = Column(Boolean)
     link_vendor = Column(String)
-    link_vendor_regex = Column(String)
+    link_vendor_regex = Column(Boolean)
     link_source = Column(String)
-    link_source_regex = Column(String)
+    link_source_regex = Column(Boolean)
     link_destination = Column(String)
-    link_destination_regex = Column(String)
+    link_destination_regex = Column(Boolean)
+
+    @initialize_properties
+    def __init__(self, **kwargs):
+        pass
+
+    def object_match(self, obj):
+        return all(
+            # if the node-regex property is not in the request, the
+            # regex box is unticked and we only check that the values
+            # are equal.
+            str(value) == getattr(self, obj.class_type + '_' + property)
+            if not getattr(self, '{}_{}_regex'.format(obj.class_type, property))
+            # if it is ticked, we use re.search to check that the value
+            # of the node property matches the regular expression.
+            else search(getattr(self, obj.class_type + '_' + property), str(value))
+            for property, value in obj.__dict__.items()
+            # we consider only the properties in the form
+            if '{}_{}'.format(obj.class_type, property) in self.__dict__
+            # providing that the property field in the form is not empty
+            # (empty field <==> property ignored)
+            and getattr(self, obj.class_type + '_' + property)
+        )
+
+    def filter_objects(self):
+        nodes, links = filter(self.object_match, Node.query.all()), []
+        for link in Link.query.all():
+            # source and destination do not belong to a link __dict__, because
+            # they are SQLalchemy relationships and not columns
+            # we update __dict__ with these properties for the filtering
+            # system to work
+            link.__dict__.update({
+                'source': link.source,
+                'destination': link.destination
+            })
+            if self.object_match(link):
+                links.append(link.id)
+        return {'nodes': [node.id for node in nodes], 'links': links}
 
 
 def filter_factory(**kwargs):
+    print(kwargs)
     obj = get_obj(Filter, name=kwargs['name'])
     if obj:
         for property, value in kwargs.items():

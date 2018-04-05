@@ -55,14 +55,38 @@
   <!-- ECharts graph -->
   <script>
     var theme = {
-      color: ['#26B99A', '#34495E', '#BDC3C7', '#3498DB', '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'],
-      title: {itemGap: 8, textStyle: {fontWeight: 'normal', color: '#408829'}},
-      dataRange: {color: ['#1f610a', '#97b58d']},
-      toolbox: {color: ['#408829', '#408829', '#408829', '#408829']},
+      color: [
+        '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+        '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+      ],
+      title: {
+        itemGap: 8,
+        textStyle: {
+          fontWeight: 'normal',
+          color: '#408829'
+        }
+      },
+      dataRange: {
+        color: ['#1f610a', '#97b58d']
+      },
+      toolbox: {
+        color: ['#408829', '#408829', '#408829', '#408829']
+      },
       tooltip: {
         backgroundColor: 'rgba(0,0,0,0.5)',
-        axisPointer: {type: 'line', lineStyle: {color: '#408829', type: 'dashed'},
-        crossStyle: {color: '#408829'}, shadowStyle: {color: 'rgba(200,200,200,0.3)'}}
+        axisPointer: {
+          type: 'line',
+          lineStyle: {
+            color: '#408829',
+            type: 'dashed'
+          },
+          crossStyle: {
+            color: '#408829'
+          },
+          shadowStyle: {
+            color: 'rgba(200,200,200,0.3)'
+          }
+        }
       },
       dataZoom: {
         dataBackgroundColor: '#eee',
@@ -238,6 +262,7 @@
       }
     };
 
+
   $('#node-properties').on('change', function() {
     $.ajax({
       type: "POST",
@@ -322,5 +347,88 @@
     });
   });
 
+  $('#link-properties').on('change', function() {
+    $.ajax({
+      type: "POST",
+      url: `/${this.value}_link`,
+      dataType: "json",
+      success: function(objects){
+        legend = [];
+        data = [];
+        for (const [key, value] of Object.entries(objects)) {
+          legend.push(key);
+          data.push({
+          value: value,
+          name: key
+          });
+        }
+        console.log(legend, data, link);
+        var link = echarts.init(document.getElementById('link'), theme);
+      link.setOption({
+      tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      calculable: true,
+      legend: {
+          x: 'center',
+          y: 'bottom',
+          data: legend
+      },
+      toolbox: {
+          show: true,
+          feature: {
+          magicType: {
+              show: true,
+              type: ['pie', 'funnel'],
+              option: {
+              funnel: {
+                  x: '25%',
+                  width: '50%',
+                  funnelAlign: 'center',
+                  max: 1548
+              }
+              }
+          },
+          restore: {
+              show: true,
+              title: "Restore"
+          },
+          saveAsImage: {
+              show: true,
+              title: "Save Image"
+          }
+          }
+      },
+      series: [{
+          name: 'link',
+          type: 'pie',
+          radius: ['35%', '55%'],
+          itemStyle: {
+          normal: {
+              label: {
+              show: true
+              },
+              labelLine: {
+              show: true
+              }
+          },
+          emphasis: {
+              label: {
+              show: true,
+              position: 'center',
+              textStyle: {
+                  fontSize: '14',
+                  fontWeight: 'normal'
+              }
+            }
+          }
+          },
+          data: data
+      }]
+      });
+        }
+    });
+  });
   </script>
 {% endblock javascripts %}

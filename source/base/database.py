@@ -14,6 +14,7 @@ engine = create_engine(
 
 db.session = scoped_session(
     sessionmaker(
+        expire_on_commit=False,
         autocommit=False,
         autoflush=False,
         bind=engine

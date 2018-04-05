@@ -11,12 +11,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="x_panel">
-          <div class="x_title">
-            <h2>Tasks scheduling</h2>
-            <div class="clearfix"></div>
-          </div>
           <div class="x_content">
-            <table class="table table-striped projects">
+            <table id="script-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th style="width: 33%">Name</th>
@@ -24,7 +20,6 @@
                   <th style="width: 33%">Edit</th>
                 </tr>
               </thead>
-
               <tbody>
                 {% for script in scripts %}
                   <tr>
@@ -40,7 +35,6 @@
                               </button>
                               <h4 class="modal-title" id="myModalLabel">Edit properties</h4>
                             </div>
-
                             <div class="modal-body">
                               {% if script.type == 'AnsibleScript' %}
                                 Playbook path: {{ script.playbook_path }}
@@ -69,5 +63,8 @@
 {% endblock content %}
 
 {% block javascripts %}
-  {{ super()}}
+  {{ super() }}
+  <script>
+    $('#script-table').DataTable();
+  </script>
 {% endblock javascripts %}

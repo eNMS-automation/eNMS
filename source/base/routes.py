@@ -2,7 +2,7 @@ from base.database import db
 from ast import literal_eval
 from .forms import DiagramPropertiesForm
 from collections import Counter
-from flask import Blueprint, render_template, redirect, request, url_for
+from flask import Blueprint, jsonify, render_template, redirect, request, url_for
 from .properties import pretty_names
 
 import flask_login
@@ -15,6 +15,7 @@ blueprint = Blueprint(
 )
 
 from objects.models import Node, Link
+from objects.properties import node_public_properties, link_public_properties
 from users.models import User
 from users.routes import login_manager
 
@@ -64,8 +65,17 @@ def dashboard():
         names=pretty_names,
         node_counters=node_counters,
         link_counters=link_counters,
+        node_properties=node_public_properties,
+        link_properties=link_public_properties,
         counters=counters
     )
+
+
+@blueprint.route('/get_<type>_<property>', methods=['POST'])
+@flask_login.login_required
+def get_counters(type, property):
+    objects = Node.query.all() if type == 'node' else Link.query.all()
+    return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 
 @blueprint.route('/dashboard_control', methods=['GET', 'POST'])

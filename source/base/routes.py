@@ -1,7 +1,5 @@
-from base.database import db
-from .forms import DiagramPropertiesForm
 from collections import Counter
-from flask import Blueprint, jsonify, render_template, redirect, request, url_for
+from flask import Blueprint, jsonify, render_template, redirect, url_for
 from .properties import pretty_names
 
 import flask_login
@@ -52,23 +50,6 @@ def get_counters(property, type):
     print(type, property)
     objects = Node.query.all() if type == 'node' else Link.query.all()
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
-
-
-@blueprint.route('/dashboard_control', methods=['GET', 'POST'])
-@flask_login.login_required
-def dashboard_control():
-    diagram_properties_form = DiagramPropertiesForm(request.form)
-    if request.method == 'POST':
-        user = db.session.query(User)\
-            .filter_by(name=flask_login.current_user.name)\
-            .first()
-        user.dashboard_node_properties = str(diagram_properties_form.data['node_properties'])
-        user.dashboard_link_properties = str(diagram_properties_form.data['link_properties'])
-        db.session.commit()
-    return render_template(
-        'dashboard/dashboard_control.html',
-        diagram_properties_form=diagram_properties_form,
-    )
 
 
 @blueprint.route('/project')

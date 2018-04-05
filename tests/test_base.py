@@ -5,7 +5,6 @@ urls = {
     '': (
         '/',
         '/dashboard',
-        '/dashboard_control',
         '/project'
     ),
     '/users': (

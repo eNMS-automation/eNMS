@@ -18,8 +18,6 @@ class User(CustomBase, UserMixin):
     secret_password = Column(String(30))
     task_id = Column(Integer, ForeignKey('Task.id'))
     tasks = relationship("Task")
-    dashboard_node_properties = Column(String())
-    dashboard_link_properties = Column(String())
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
@@ -29,8 +27,6 @@ class User(CustomBase, UserMixin):
             if hasattr(value, '__iter__') and not isinstance(value, str):
                 value = value[0]
             setattr(self, property, value)
-        self.dashboard_node_properties = str(['type'])
-        self.dashboard_link_properties = str(['type'])
 
     def __repr__(self):
         return self.name

@@ -32,28 +32,6 @@ def site_root():
 @blueprint.route('/dashboard')
 @flask_login.login_required
 def dashboard():
-    # nodes properties
-    node_counters = {
-        property:
-            Counter(
-                map(
-                    lambda o: str(getattr(o, property)),
-                    Node.query.all()
-                )
-            )
-        for property in literal_eval(flask_login.current_user.dashboard_node_properties)
-    }
-    # link properties
-    link_counters = {
-        property:
-            Counter(
-                map(
-                    lambda o: str(getattr(o, property)),
-                    Link.query.all()
-                )
-            )
-        for property in literal_eval(flask_login.current_user.dashboard_link_properties)
-    }
     # total number of nodes / links / users
     counters = {
         'nodes': len(Node.query.all()),
@@ -63,17 +41,16 @@ def dashboard():
     return render_template(
         'dashboard/dashboard.html',
         names=pretty_names,
-        node_counters=node_counters,
-        link_counters=link_counters,
         node_properties=node_public_properties,
         link_properties=link_public_properties,
         counters=counters
     )
 
 
-@blueprint.route('/get_<type>_<property>', methods=['POST'])
+@blueprint.route('/<property>_<type>', methods=['POST'])
 @flask_login.login_required
-def get_counters(type, property):
+def get_counters(property, type):
+    print(type, property)
     objects = Node.query.all() if type == 'node' else Link.query.all()
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 

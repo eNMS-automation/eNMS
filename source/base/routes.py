@@ -1,5 +1,4 @@
 from base.database import db
-from ast import literal_eval
 from .forms import DiagramPropertiesForm
 from collections import Counter
 from flask import Blueprint, jsonify, render_template, redirect, request, url_for

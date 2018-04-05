@@ -96,14 +96,14 @@ def view(view_type):
                 (property, getattr(obj, property))
                 for property in type_to_public_properties[obj.type]
             ])
-            for obj in filter(lambda obj: obj.visible, Node.query.all())
+            for obj in Node.query.all()
         },
         link_table={
             obj: OrderedDict([
                 (property, getattr(obj, property))
                 for property in type_to_public_properties[obj.type]
             ])
-            for obj in filter(lambda obj: obj.visible, Link.query.all())
+            for obj in Link.query.all()
         })
 
 
@@ -113,13 +113,13 @@ def google_earth_export():
     form = GoogleEarthForm(request.form)
     if 'POST' in request.method:
         kml_file = Kml()
-        for node in filter(lambda obj: obj.visible, Node.query.all()):
+        for node in Node.query.all():
             point = kml_file.newpoint(name=node.name)
             point.coords = [(node.longitude, node.latitude)]
             point.style = styles[node.subtype]
             point.style.labelstyle.scale = request.form['label_size']
 
-        for link in filter(lambda obj: obj.visible, Link.query.all()):
+        for link in Link.query.all():
             line = kml_file.newlinestring(name=link.name)
             line.coords = [
                 (link.source.longitude, link.source.latitude),

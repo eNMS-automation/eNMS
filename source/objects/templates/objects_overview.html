@@ -45,20 +45,22 @@
       <!-- begin column -->
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div style="padding-bottom:5px;">
-          <button class="btn btn-default btn-file" onclick="showModal('link')" style="width:100%;">
-            Import a network topology (Excel spreadsheet)
-          </button>
+          <form id="form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" >
+            <label class="btn btn-default btn-file" style="width:100%;">Import a network topology
+              <input id="file" name="file" style="visibility:hidden; display:none" type="file">
+            </label>
+          </form>
         </div>
         <div class="x_panel">
           <div class="x_content">
-            <div class="panel-group" >
+            <div class="panel-group">
               <div style="padding-bottom:5px;">
                 <button class="btn btn-default btn-file" onclick="showModal('node')" style="width:100%;">
                   Add a new node
                 </button>
               </div>
             </div>
-            <table id="datatable-node-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <table id="node-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   {% for field in node_fields %}
@@ -72,11 +74,7 @@
                 {% for node in nodes %}
                 <tr id="node-{{ node.name }}">
                   {% for field in node_fields %}
-                    {% if field not in  ('longitude', 'latitude') %}
-                      <td>{{ node[field] }}</td>
-                    {% else %}
-                      <td>{{ node[field]|round(3) }}</td>
-                    {% endif %}
+                    <td>{{ node[field] }}</td>
                   {% endfor %}
                   <td>
                     <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node['name'] }}')">Edit</button>
@@ -100,14 +98,14 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <div class="panel-group" >
+            <div class="panel-group">
               <div style="padding-bottom:5px;">
                 <button class="btn btn-default btn-file" onclick="showModal('link')" style="width:100%;">
                   Add a new link
                 </button>
               </div>
             </div>
-            <table id="datatable-link-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <table id="link-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   {% for field in link_fields %}
@@ -144,12 +142,13 @@
 
 {% block javascripts %}
   {{ super()}}
-  <!-- Datatables -->
-  <script src="{{ url_for('static', filename='vendors/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendors/datatables/dataTables.bootstrap.min.js') }}"></script>
   <script>
-    $('#datatable-node-responsive').DataTable();
-    $('#datatable-link-responsive').DataTable();
+    $('#node-table').DataTable();
+    $('#link-table').DataTable();
+
+      document.getElementById("file").onchange = function() {
+        $("#form").submit();
+      };
 
     function showModal(type) {
       $('#title').text(`Add a new ${type}`);
@@ -157,7 +156,7 @@
     }
 
     function showObjectModal(type, name) {
-      $('#title').text('Edit user properties');
+      $('#title').text(`Edit ${type} properties`);
       $.ajax({
         type: "POST",
         url: `/objects/get_${type}_${name}`,
@@ -174,12 +173,13 @@
       var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
       var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
       var fields = type == 'node' ? node_fields : link_fields
+      var mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add'
       var result = {};
       var values = [];
       $.each($(`#edit-${type}-form`).serializeArray(), function() {
         result[this.name] = this.value;
       });
-      console.log(result)
+
       var name = result.name;
       for (i = 0; i < fields.length; i++) {
         values.push(`<td>${result[fields[i]]}</td>`);
@@ -190,8 +190,15 @@
       <td>
       <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${name}')">Delete</button>
       </td>`);
-      $(`#${type}-${name}`).html(values.join(''));
-  
+      
+      if (mode == 'edit') {
+        $(`#${type}-${name}`).html(values.join(''));
+      } else {
+        values.unshift(`<tr id="${name}">`);
+        values.push('</tr>');
+        $(`#${type}-table tbody`).append(values.join(''));
+      }
+
       $.ajax({
         type: "POST",
         url: "/objects/edit_object",

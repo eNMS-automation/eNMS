@@ -16,12 +16,11 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <table class="table table-striped projects">
+            <table id="task-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th style="width: 1%">Name</th>
                   <th style="width: 15%">Creation time</th>
-                  <th style="width: 1%">Type</th>
                   <th>Creator</th>
                   <th style="width: 10%">Status</th>
                   <th style="width: 10%">Logs</th>
@@ -31,13 +30,11 @@
                   <th style="width: 30%">Pause / Resume</th>
                 </tr>
               </thead>
-
               <tbody>
                 {% for task in tasks %}
                   <tr>
                     <td><a>{{ task.name }}</a></td>
                     <td>{{ task.creation_time }}</td>
-                    <td>{{ task.type }}</td>
                     <td>{{ task.creator }}</td>
                     <td>
                       <button type="button" class="btn btn-success btn-xs">Active</button>
@@ -52,14 +49,12 @@
                               </button>
                               <h4 class="modal-title" id="myModalLabel">Logs</h4>
                             </div>
-
                             <div class="modal-body">
                               <pre> {{ log_per_task[task.name] }} </pre>
                             </div>
                           </div>
                         </div>
                       </div>
-
                       <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".logs-{{ task.id }}"><i class="fa fa-pencil">
                         </i> Logs </a>
                       </button>
@@ -76,33 +71,28 @@
                                   </button>
                                   <h4 class="modal-title" id="myModalLabel"> Compare </h4>
                                 </div>
-
                                 <div class="modal-body">
                                   <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                       <label>First node</label>
                                       {{ form_per_task[task.name].first_node(class="form-control") }}
                                     </div>
-
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                       <label>Second node</label>
                                       {{ form_per_task[task.name].second_node(class="form-control") }}
                                     </div>
                                   </div>
-
                                   <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                       <label>First version</label>
                                       {{ form_per_task[task.name].first_version(class="form-control") }}
                                     </div>
-
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                       <label>Second version</label>
                                       {{ form_per_task[task.name].second_version(class="form-control") }}
                                     </div>
                                   </div>
                                 </div>
-                                
                                 <div class="modal-footer">
                                   <button class="btn btn-default" style="display: none;"></button>
                                   <input type="hidden" name="task_name" value={{ task.name }} />
@@ -113,7 +103,6 @@
                             </div>
                           </div>
                         </form>
-
                         <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".compare-{{ task.id }}"><i class="fa fa-pencil"></i> Compare </a></button>
                       {% endif %}
                     </td>
@@ -155,4 +144,8 @@
 
 {% block javascripts %}
   {{ super() }}
+  {{ super() }}
+  <script>
+    $('#task-table').DataTable();
+  </script>
 {% endblock javascripts %}

@@ -85,9 +85,6 @@
 
 {% block javascripts %}
   {{ super()}}
-  <!-- Datatables -->
-  <script src="{{ url_for('static', filename='vendors/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendors/datatables/dataTables.bootstrap.min.js') }}"></script>
   <script>
     $('#user-table').DataTable();
 

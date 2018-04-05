@@ -24,34 +24,14 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route('/objects')
+@blueprint.route('/objects', methods=['GET', 'POST'])
 @login_required
 def objects():
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
-    all_nodes = Node.visible_choices()
+    all_nodes = Node.choices()
     add_link_form.source.choices = add_link_form.destination.choices = all_nodes
-    return render_template(
-        'objects_overview.html',
-        names=pretty_names,
-        node_fields=node_public_properties,
-        nodes=Node.visible_objects(),
-        link_fields=link_public_properties,
-        links=Link.visible_objects(),
-        add_node_form=add_node_form,
-        add_link_form=add_link_form
-    )
-
-
-@blueprint.route('/object_creation', methods=['GET', 'POST'])
-@login_required
-def create_objects():
-    add_node_form = AddNode(request.form)
-    add_nodes_form = AddNodes(request.form)
-    add_link_form = AddLink(request.form)
-    if 'add_node' in request.form or 'add_link' in request.form:
-        object_factory(**request.form.to_dict())
-    elif 'add_nodes' in request.form:
+    if request.method == 'POST':
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
             book = open_workbook(file_contents=file.read())
@@ -67,12 +47,14 @@ def create_objects():
                     kwargs['type'] = obj_type
                     object_factory(**kwargs)
                 db.session.commit()
-    all_nodes = Node.visible_choices()
-    add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     return render_template(
-        'create_object.html',
+        'objects_overview.html',
+        names=pretty_names,
+        node_fields=node_public_properties,
+        nodes=Node.visible_objects(),
+        link_fields=link_public_properties,
+        links=Link.visible_objects(),
         add_node_form=add_node_form,
-        add_nodes_form=add_nodes_form,
         add_link_form=add_link_form
     )
 
@@ -90,10 +72,11 @@ def get_object(obj_type, name):
     return jsonify(obj_properties)
 
 
-@blueprint.route('/edit_object', methods=['POST'])
+@blueprint.route('/edit_object', methods=['GET', 'POST'])
 @login_required
 def edit_object():
     object_factory(**request.form.to_dict())
+    db.session.commit()
     return jsonify({})
 
 

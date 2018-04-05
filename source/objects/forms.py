@@ -1,10 +1,8 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileAllowed
 from objects.models import link_class, node_class
 from objects.properties import node_public_properties, link_public_properties
 from wtforms import (
     BooleanField,
-    FileField,
     FloatField,
     PasswordField,
     SelectField,
@@ -34,11 +32,6 @@ class AddNode(AddObjectForm):
     longitude = FloatField('Longitude', default=0.)
     latitude = FloatField('Latitude', default=0.)
     secret_password = PasswordField('Secret password')
-
-
-class AddNodes(FlaskForm):
-    validators = [FileAllowed(['xls', 'xlsx', 'csv'], 'Excel or CSV file only')]
-    file = FileField('', validators=validators)
 
 
 class AddLink(AddObjectForm):

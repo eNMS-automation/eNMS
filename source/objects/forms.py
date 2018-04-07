@@ -1,6 +1,6 @@
+from base.properties import node_public_properties, link_public_properties
 from flask_wtf import FlaskForm
 from objects.models import link_class, node_class
-from objects.properties import node_public_properties, link_public_properties
 from wtforms import (
     BooleanField,
     FloatField,

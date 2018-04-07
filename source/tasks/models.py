@@ -21,7 +21,6 @@ def job_multiprocessing(name):
     job_time = str(datetime.now())
     task = get_obj(Task, name=name)
     task.logs[job_time] = {}
-    print(task.scripts + task.workflows)
     for task_job in task.scripts + task.workflows:
         results = {}
         if task_job.type == 'AnsibleScript':

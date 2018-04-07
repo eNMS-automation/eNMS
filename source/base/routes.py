@@ -12,7 +12,7 @@ blueprint = Blueprint(
 )
 
 from objects.models import Node, Link
-from objects.properties import node_diagram_properties, link_diagram_properties
+from .properties import type_to_diagram_properties
 from scripts.models import Script
 from tasks.models import Task
 from users.models import User
@@ -34,15 +34,6 @@ types = {
     'Task': Task
 }
 
-type_to_properties = {
-    'Node': node_diagram_properties,
-    'Link': link_diagram_properties,
-    'User': User,
-    'Script': Script,
-    'Workflow': Workflow,
-    'Task': Task
-}
-
 
 @blueprint.route('/dashboard')
 @flask_login.login_required
@@ -51,7 +42,7 @@ def dashboard():
     return render_template(
         'dashboard/dashboard.html',
         names=pretty_names,
-        properties=type_to_properties,
+        properties=type_to_diagram_properties,
         counters=counters
     )
 

@@ -1,6 +1,9 @@
-from base.properties import pretty_names
+from base.properties import (
+    pretty_names,
+    node_public_properties,
+    link_public_properties
+)
 from flask_wtf import FlaskForm
-from objects.properties import node_public_properties, link_public_properties
 from wtforms import IntegerField, SelectField, SelectMultipleField, TextField
 
 

@@ -101,7 +101,7 @@
                     {  
                       "x": {{ obj.id }},
                       "y": {{ obj.id }},
-                      "id": {{ obj.id }},
+                      "id": {{ name_to_id[obj.name] }},
                       "name": "{{ obj.name }}",
                       "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + obj.subtype + '.gif') }}",
                       "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + obj.subtype + '.gif') }}"
@@ -111,8 +111,8 @@
                 "links":[  
                   {% for obj, properties in link_table.items() %}
                     {  
-                      "source": {{ obj['source']['id'] }} - 1,
-                      "target": {{ obj['destination']['id'] }} - 1
+                      "source": {{ name_to_id[obj['source']['name']] }},
+                      "target": {{ name_to_id[obj['destination']['name']] }}
                     },
                   {% endfor %}
                 ]

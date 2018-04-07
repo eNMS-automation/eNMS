@@ -1,12 +1,11 @@
 from base.database import db, get_obj
-from base.properties import pretty_names
+from base.properties import pretty_names, type_to_public_properties
 from collections import OrderedDict
 from flask import Blueprint, current_app, render_template, redirect, request, session, url_for
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
 from json import dumps
 from objects.models import Filter, Node, node_subtypes, Link, link_class
-from objects.properties import type_to_public_properties
 from os.path import join
 from scripts.models import Script
 from simplekml import Color, Kml, Style
@@ -81,6 +80,8 @@ def view(view_type):
         view = request.form['view']
     # we clean the session's selected nodes
     session['selection'] = []
+    # name to id
+    name_to_id = {node.name: id for id, node in enumerate(Node.query.all())}
     return render_template(
         '{}_view.html'.format(view_type),
         filters=Filter.query.all(),
@@ -91,6 +92,7 @@ def view(view_type):
         labels=labels,
         names=pretty_names,
         subtypes=node_subtypes,
+        name_to_id=name_to_id,
         node_table={
             obj: OrderedDict([
                 (property, getattr(obj, property))

@@ -1,13 +1,13 @@
 from base.database import db, get_obj
 from base.models import task_node_table, CustomBase
-from collections import OrderedDict
-from .properties import (
+from base.properties import (
     link_common_properties,
     link_public_properties,
     node_common_properties,
     node_public_properties,
     object_common_properties
 )
+from collections import OrderedDict
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship

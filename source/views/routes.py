@@ -62,6 +62,24 @@ def view(view_type):
             'node': request.form['node_label'],
             'link': request.form['link_label']
         }
+    elif 'google earth' in request.form:
+        kml_file = Kml()
+        for node in Node.query.all():
+            point = kml_file.newpoint(name=node.name)
+            point.coords = [(node.longitude, node.latitude)]
+            point.style = styles[node.subtype]
+            point.style.labelstyle.scale = request.form['label_size']
+
+        for link in Link.query.all():
+            line = kml_file.newlinestring(name=link.name)
+            line.coords = [
+                (link.source.longitude, link.source.latitude),
+                (link.destination.longitude, link.destination.latitude)
+            ]
+            line.style = styles[link.type]
+            line.style.linestyle.width = request.form['line_width']
+        filepath = join(current_app.ge_path, request.form['name'] + '.kmz')
+        kml_file.save(filepath)
     # for the sake of better performances, the view defaults to markercluster
     # if there are more than 2000 nodes
     view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
@@ -96,34 +114,6 @@ def view(view_type):
             ])
             for obj in Link.query.all()
         })
-
-
-@blueprint.route('/google_earth_export', methods=['GET', 'POST'])
-@login_required
-def google_earth_export():
-    google_earth_form = GoogleEarthForm(request.form)
-    if 'POST' in request.method:
-        kml_file = Kml()
-        for node in Node.query.all():
-            point = kml_file.newpoint(name=node.name)
-            point.coords = [(node.longitude, node.latitude)]
-            point.style = styles[node.subtype]
-            point.style.labelstyle.scale = request.form['label_size']
-
-        for link in Link.query.all():
-            line = kml_file.newlinestring(name=link.name)
-            line.coords = [
-                (link.source.longitude, link.source.latitude),
-                (link.destination.longitude, link.destination.latitude)
-            ]
-            line.style = styles[link.type]
-            line.style.linestyle.width = request.form['line_width']
-        filepath = join(current_app.ge_path, request.form['name'] + '.kmz')
-        kml_file.save(filepath)
-    return render_template(
-        'google_earth_export.html',
-        form=form
-    )
 
 
 @blueprint.route('/putty_connection', methods=['POST'])

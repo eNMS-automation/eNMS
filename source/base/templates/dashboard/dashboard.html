@@ -25,7 +25,7 @@
     </div>
     <!-- /top tiles -->
     <div class="row">
-      {% for type in ('node', 'link') %}
+      {% for type in counters %}
         {% set properties = node_properties if type == 'node' else link_properties %}
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="x_panel">
@@ -262,7 +262,7 @@
       }
     };
 
-  {% for type in ('node', 'link') %}
+  {% for type in counters %}
     $('#{{ type }}-properties').on('change', function() {
       $.ajax({
         type: "POST",

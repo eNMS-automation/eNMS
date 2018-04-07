@@ -12,34 +12,46 @@ blueprint = Blueprint(
 )
 
 from objects.models import Node, Link
-from objects.properties import node_public_properties, link_public_properties
+from objects.properties import node_diagram_properties, link_diagram_properties
+from scripts.models import Script
+from tasks.models import Task
 from users.models import User
 from users.routes import login_manager
-
-## root of the site
+from workflows.models import Workflow
 
 
 @blueprint.route('/')
 def site_root():
     return redirect(url_for('users_blueprint.login'))
 
-## dashboard
+
+types = {
+    'Node': Node,
+    'Link': Link,
+    'User': User,
+    'Script': Script,
+    'Workflow': Workflow,
+    'Task': Task
+}
+
+type_to_properties = {
+    'Node': node_diagram_properties,
+    'Link': link_diagram_properties,
+    'User': User,
+    'Script': Script,
+    'Workflow': Workflow,
+    'Task': Task
+}
 
 
 @blueprint.route('/dashboard')
 @flask_login.login_required
 def dashboard():
-    # total number of nodes / links / users
-    counters = {
-        'nodes': len(Node.query.all()),
-        'links': len(Link.query.all()),
-        'users': len(User.query.all())
-    }
+    counters = {name: len(cls.query.all()) for name, cls in types.items()}
     return render_template(
         'dashboard/dashboard.html',
         names=pretty_names,
-        node_properties=node_public_properties,
-        link_properties=link_public_properties,
+        properties=type_to_properties,
         counters=counters
     )
 
@@ -47,8 +59,7 @@ def dashboard():
 @blueprint.route('/<property>_<type>', methods=['POST'])
 @flask_login.login_required
 def get_counters(property, type):
-    print(type, property)
-    objects = Node.query.all() if type == 'node' else Link.query.all()
+    objects = types[type].query.all()
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 

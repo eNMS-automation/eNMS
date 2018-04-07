@@ -1,11 +1,14 @@
 from base.database import db, get_obj
 from base.helpers import allowed_file
-from base.properties import pretty_names
+from base.properties import (
+    pretty_names,
+    link_public_properties,
+    node_public_properties
+)
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from .forms import AddNode, AddLink, FilteringForm
 from .models import filter_factory, Filter, Link, Node, object_class, object_factory
-from .properties import link_public_properties, node_public_properties
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError

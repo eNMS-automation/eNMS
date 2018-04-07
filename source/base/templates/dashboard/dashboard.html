@@ -25,14 +25,14 @@
     </div>
     <!-- /top tiles -->
     <div class="row">
-      {% for type in counters %}
+      {% for type, type_properties in properties.items() %}
         {% set properties = node_properties if type == 'node' else link_properties %}
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
               <div class="form-group">
                 <select id="{{ type }}-properties" class="form-control">
-                  {% for property in properties %}
+                  {% for property in type_properties %}
                     <option>{{ property }}</option>
                   {% endfor %}
                 </select>

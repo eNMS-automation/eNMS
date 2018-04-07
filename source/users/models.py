@@ -11,6 +11,7 @@ class User(CustomBase, UserMixin):
     __tablename__ = 'User'
 
     id = Column(Integer, primary_key=True)
+    type = Column(String, default='admin')
     name = Column(String(120), unique=True)
     email = Column(String(120), unique=True)
     access_rights = Column(String(120))

@@ -74,6 +74,7 @@ link_diagram_properties = object_diagram_properties + (
 )
 
 user_diagram_properties = (
+    'type',
     'access_rights',
 )
 
@@ -90,20 +91,21 @@ script_diagram_properties = (
 )
 
 task_diagram_properties = (
+    'type',
     'recurrent',
 )
 
 type_to_diagram_properties = {
-    'Node': node_diagram_properties,
-    'Link': link_diagram_properties,
-    'User': user_diagram_properties,
-    'Script': script_diagram_properties,
-    'Workflow': workflow_diagram_properties,
-    'Task': task_diagram_properties
+    'node': node_diagram_properties,
+    'link': link_diagram_properties,
+    'user': user_diagram_properties,
+    'script': script_diagram_properties,
+    'workflow': workflow_diagram_properties,
+    'task': task_diagram_properties
 }
 
 pretty_names = OrderedDict([
-    ('access_rights', 'Access_rights'),
+    ('access_rights', 'Access rights'),
     ('content', 'Content'),
     ('description', 'Description'),
     ('destination', 'Destination'),
@@ -120,3 +122,5 @@ pretty_names = OrderedDict([
     ('type', 'Type'),
     ('vendor', 'Vendor'),
 ])
+
+reverse_pretty_names = {v: k for k, v in pretty_names.items()}

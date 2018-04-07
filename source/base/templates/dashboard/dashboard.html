@@ -33,7 +33,11 @@
               <div class="form-group">
                 <select id="{{ type }}-properties" class="form-control">
                   {% for property in type_properties %}
-                    <option>{{ property }}</option>
+                    {% if property == 'type' %}
+                      <option selected="selected">Type</option>
+                    {% else %}
+                      <option>{{ names[property] }}</option>
+                    {% endif %}
                   {% endfor %}
                 </select>
               </div>
@@ -262,6 +266,92 @@
       }
     };
 
+  function draw_diagrams(objects, type) {
+    var legend = [];
+        data = [];
+    for (const [key, value] of Object.entries(objects)) {
+      legend.push(key);
+      data.push({
+      value: value,
+      name: key
+      });
+    }
+    var link = echarts.init(document.getElementById(type), theme);
+  link.setOption({
+  tooltip: {
+      trigger: 'item',
+      formatter: "{a} <br/>{b} : {c} ({d}%)"
+  },
+  calculable: true,
+  legend: {
+      x: 'center',
+      y: 'bottom',
+      data: legend
+  },
+  toolbox: {
+      show: true,
+      feature: {
+      magicType: {
+          show: true,
+          type: ['pie', 'funnel'],
+          option: {
+          funnel: {
+              x: '25%',
+              width: '50%',
+              funnelAlign: 'center',
+              max: 1548
+          }
+          }
+      },
+      restore: {
+          show: true,
+          title: "Restore"
+      },
+      saveAsImage: {
+          show: true,
+          title: "Save Image"
+      }
+      }
+  },
+  series: [{
+      name: type,
+      type: 'pie',
+      radius: ['35%', '55%'],
+      itemStyle: {
+      normal: {
+          label: {
+          show: true
+          },
+          labelLine: {
+          show: true
+          }
+      },
+      emphasis: {
+          label: {
+          show: true,
+          position: 'center',
+          textStyle: {
+              fontSize: '14',
+              fontWeight: 'normal'
+          }
+        }
+      }
+      },
+      data: data
+  }]
+  });
+    }
+
+  {% for type, property in default_properties.items() %}
+    $.ajax({
+      type: "POST",
+      url: '/{{ names[property] }}_{{ type }}',
+      dataType: "json",
+      success: function(objects){
+        draw_diagrams(objects, '{{ type }}');
+      }
+    });
+  {% endfor %}
   {% for type in counters %}
     $('#{{ type }}-properties').on('change', function() {
       $.ajax({
@@ -269,81 +359,8 @@
         url: `/${this.value}_{{ type }}`,
         dataType: "json",
         success: function(objects){
-          legend = [];
-          data = [];
-          for (const [key, value] of Object.entries(objects)) {
-            legend.push(key);
-            data.push({
-            value: value,
-            name: key
-            });
-          }
-          console.log(legend, data, link);
-          var link = echarts.init(document.getElementById('{{ type }}'), theme);
-        link.setOption({
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        calculable: true,
-        legend: {
-            x: 'center',
-            y: 'bottom',
-            data: legend
-        },
-        toolbox: {
-            show: true,
-            feature: {
-            magicType: {
-                show: true,
-                type: ['pie', 'funnel'],
-                option: {
-                funnel: {
-                    x: '25%',
-                    width: '50%',
-                    funnelAlign: 'center',
-                    max: 1548
-                }
-                }
-            },
-            restore: {
-                show: true,
-                title: "Restore"
-            },
-            saveAsImage: {
-                show: true,
-                title: "Save Image"
-            }
-            }
-        },
-        series: [{
-            name: '{{ type }}',
-            type: 'pie',
-            radius: ['35%', '55%'],
-            itemStyle: {
-            normal: {
-                label: {
-                show: true
-                },
-                labelLine: {
-                show: true
-                }
-            },
-            emphasis: {
-                label: {
-                show: true,
-                position: 'center',
-                textStyle: {
-                    fontSize: '14',
-                    fontWeight: 'normal'
-                }
-              }
-            }
-            },
-            data: data
-        }]
-        });
-          }
+          draw_diagrams(objects, '{{ type }}');
+        }
       });
     });
   {% endfor %}

@@ -1,6 +1,6 @@
 from collections import Counter
 from flask import Blueprint, jsonify, render_template, redirect, url_for
-from .properties import pretty_names
+from .properties import pretty_names, reverse_pretty_names
 
 import flask_login
 
@@ -26,31 +26,31 @@ def site_root():
 
 
 types = {
-    'Node': Node,
-    'Link': Link,
-    'User': User,
-    'Script': Script,
-    'Workflow': Workflow,
-    'Task': Task
+    'node': Node,
+    'link': Link,
+    'user': User,
+    'script': Script,
+    'workflow': Workflow,
+    'task': Task
 }
 
 
 @blueprint.route('/dashboard')
 @flask_login.login_required
 def dashboard():
-    counters = {name: len(cls.query.all()) for name, cls in types.items()}
     return render_template(
         'dashboard/dashboard.html',
         names=pretty_names,
         properties=type_to_diagram_properties,
-        counters=counters
+        default_properties=dict.fromkeys(types, 'type'),
+        counters={name: len(cls.query.all()) for name, cls in types.items()}
     )
 
 
 @blueprint.route('/<property>_<type>', methods=['POST'])
 @flask_login.login_required
 def get_counters(property, type):
-    objects = types[type].query.all()
+    objects, property = types[type].query.all(), reverse_pretty_names[property]
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 

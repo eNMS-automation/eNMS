@@ -46,6 +46,7 @@ def test_netmiko_napalm_config(user_client):
 ## Google Earth export
 
 google_earth_dict = ImmutableMultiDict([
+    ('google earth', ''),
     ('name', 'test_google_earth'),
     ('label_size', '1'),
     ('line_width', '2'),
@@ -56,4 +57,4 @@ google_earth_dict = ImmutableMultiDict([
 @check_blueprints('/views')
 def test_google_earth(user_client):
     create_from_file(user_client, 'europe.xls')
-    user_client.post('/views/google_earth_export', data=google_earth_dict)
+    user_client.post('/views/geographical_view', data=google_earth_dict)

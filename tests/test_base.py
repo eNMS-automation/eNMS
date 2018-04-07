@@ -4,8 +4,7 @@ disable(CRITICAL)
 urls = {
     '': (
         '/',
-        '/dashboard',
-        '/project'
+        '/dashboard'
     ),
     '/users': (
         '/overview',

@@ -19,7 +19,6 @@ urls = {
     '/views': (
         '/geographical_view',
         '/logical_view',
-        '/google_earth_export'
     ),
     '/scripts': (
         '/overview',

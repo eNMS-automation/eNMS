@@ -13,7 +13,6 @@ from flask import (
 )
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
-from json import dumps
 from objects.models import Filter, Node, node_subtypes, Link
 from os.path import join
 from scripts.models import Script

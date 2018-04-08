@@ -21,7 +21,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 netmiko_ping = ImmutableMultiDict([
     ('name', 'netmiko_ping'),
     ('content_type', 'simple'),
-    ('create_script', ''),
+    ('create_script', 'netmiko_config'),
     ('text', 'ping 1.1.1.1'),
     ('netmiko_type', 'show_commands'),
     ('driver', 'cisco_xr_ssh'),
@@ -65,7 +65,7 @@ ip ospf cost 620
 netmiko_jinja2_script = dict([
     ('name', 'netmiko_subif'),
     ('content_type', 'j2_template'),
-    ('create_script', ''),
+    ('create_script', 'netmiko_config'),
     ('text', template),
     ('netmiko_type', 'configuration'),
     ('driver', 'cisco_xr_ssh'),
@@ -75,7 +75,7 @@ netmiko_jinja2_script = dict([
 napalm_jinja2_script = dict([
     ('name', 'napalm_subif'),
     ('content_type', 'j2_template'),
-    ('create_script', ''),
+    ('create_script', 'napalm_config'),
     ('text', template),
     ('script_type', 'napalm_configuration'),
     ('action', 'load_merge_candidate')
@@ -88,21 +88,21 @@ file_transfer_script = ImmutableMultiDict([
     ('destination_file', 'path/to/destination'),
     ('file_system', 'flash:'),
     ('direction', 'put'),
-    ('create_script', ''),
+    ('create_script', 'file_transfer'),
 ])
 
 
 @check_blueprints('/scripts')
 def test_base_scripts(user_client):
-    user_client.post('/scripts/netmiko_configuration', data=netmiko_ping)
+    user_client.post('/scripts/script_creation', data=netmiko_ping)
     assert len(NetmikoConfigScript.query.all()) == 1
-    path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
+    path_yaml = join(path_scripts, 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         netmiko_jinja2_script['file'] = f
-        user_client.post('/scripts/netmiko_configuration', data=netmiko_jinja2_script)
+        user_client.post('/scripts/script_creation', data=netmiko_jinja2_script)
     with open(path_yaml, 'rb') as f:
         napalm_jinja2_script['file'] = f
-        user_client.post('/scripts/napalm_configuration', data=napalm_jinja2_script)
+        user_client.post('/scripts/script_creation', data=napalm_jinja2_script)
     assert len(NapalmConfigScript.query.all()) == 1
     assert len(Script.query.all()) == 6
     netmiko_j2_script = db.session.query(Script).filter_by(name='netmiko_subif').first()
@@ -112,7 +112,7 @@ def test_base_scripts(user_client):
     assert set(netmiko_j2_script.content.split('\n')) == set(result.split('\n'))
     assert set(napalm_j2_script.content.split('\n')) == set(result.split('\n'))
     ## file transfer script
-    user_client.post('scripts/file_transfer', data=file_transfer_script)
+    user_client.post('scripts/script_creation', data=file_transfer_script)
     assert len(FileTransferScript.query.all()) == 1
     assert len(Script.query.all()) == 7
 
@@ -124,19 +124,20 @@ getters_dict = ImmutableMultiDict([
     ('getters', 'get_interfaces'),
     ('getters', 'get_interfaces_ip'),
     ('getters', 'get_lldp_neighbors'),
-    ('create_script', '')
+    ('create_script', 'napalm_getters')
 ])
 
 
 @check_blueprints('/scripts')
 def test_getters_script(user_client):
-    user_client.post('/scripts/getters', data=getters_dict)
+    user_client.post('/scripts/script_creation', data=getters_dict)
     assert len(NapalmGettersScript.query.all()) == 1
 
 
 ## Ansible script
 
 ansible_script = {
+    'create_script': 'ansible_playbook',
     'name': 'ansible_test',
     'listtags': 'False',
     'listtasks': 'False',
@@ -165,6 +166,6 @@ def test_ansible_scripts(user_client):
     path_yaml = join(path_playbooks, 'save_running_config.yml')
     with open(path_yaml, 'rb') as f:
         ansible_script['file'] = f
-        user_client.post('/scripts/ansible', data=ansible_script)
+        user_client.post('/scripts/script_creation', data=ansible_script)
     assert len(AnsibleScript.query.all()) == 1
     assert len(Script.query.all()) == 4

@@ -31,11 +31,11 @@ scheduled_task = ImmutableMultiDict([
 @check_blueprints('/views', '/tasks')
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
-    user_client.post('/scripts/netmiko_configuration', data=netmiko_ping)
-    path_yaml = join(path_scripts, 'cisco', 'interfaces', 'parameters.yaml')
+    user_client.post('/scripts/script_creation', data=netmiko_ping)
+    path_yaml = join(path_scripts, 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         napalm_jinja2_script['file'] = f
-        user_client.post('/scripts/napalm_configuration', data=napalm_jinja2_script)
+        user_client.post('/scripts/script_creation', data=napalm_jinja2_script)
     with user_client.session_transaction() as sess:
         sess['selection'] = ['1', '21', '22']
     user_client.post('views/geographical_view', data=instant_task)

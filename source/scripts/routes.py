@@ -82,7 +82,7 @@ def configuration():
             script = {
                 'napalm_getters': NapalmGettersScript,
                 'file_transfer': FileTransferScript,
-                }[script_type](**request.form)
+            }[script_type](**request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(

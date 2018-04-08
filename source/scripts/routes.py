@@ -43,77 +43,53 @@ def scripts():
     )
 
 
-@blueprint.route('/<script_type>_configuration', methods=['GET', 'POST'])
+@blueprint.route('/script_creation', methods=['GET', 'POST'])
 @login_required
-def configuration(script_type):
-    form = {
-        'netmiko': NetmikoConfigScriptForm,
-        'napalm': NapalmConfigScriptForm
-    }[script_type](request.form)
-    if 'create_script' in request.form:
-        # retrieve the raw script: we will use it as-is or update it depending
-        # on the type of script (jinja2-enabled template or not)
-        content = request.form['text']
-        if form.data['content_type'] != 'simple':
-            file = request.files['file']
-            filename = secure_filename(file.filename)
+def configuration():
+    netmiko_config_form = NetmikoConfigScriptForm(request.form)
+    napalm_config_form = NapalmConfigScriptForm(request.form)
+    napalm_getters_form = NapalmGettersForm(request.form)
+    file_transfer_form = FileTransferScriptForm(request.form)
+    ansible_form = AnsibleScriptForm(request.form)
+    if request.method == 'POST':
+        script_type = request.form['create_script']
+        if script_type in ('netmiko_config', 'napalm_config'):
+            form = {
+                'netmiko_config': netmiko_config_form,
+                'napalm_config': napalm_config_form
+            }[script_type]
+            # retrieve the raw script: we will use it as-is or update it
+            # depending on the type of script (jinja2-enabled template or not)
+            content = request.form['text']
+            if form.data['content_type'] != 'simple':
+                file = request.files['file']
+                filename = secure_filename(file.filename)
+                if allowed_file(filename, {'yaml', 'yml'}):
+                    parameters = load(file.read())
+                    template = Template(content)
+                    content = template.render(**parameters)
+            script = {
+                'netmiko_config': NetmikoConfigScript,
+                'napalm_config': NapalmConfigScript
+            }[script_type](content, **request.form)
+        elif script_type == 'ansible_playbook':
+            filename = secure_filename(request.files['file'].filename)
             if allowed_file(filename, {'yaml', 'yml'}):
-                parameters = load(file.read())
-                template = Template(content)
-                content = template.render(**parameters)
-        script = {
-            'netmiko': NetmikoConfigScript,
-            'napalm': NapalmConfigScript
-        }[script_type](content, **request.form)
+                playbook_path = join(current_app.config['UPLOAD_FOLDER'], filename)
+                request.files['file'].save(playbook_path)
+            script = AnsibleScript(playbook_path, **request.form)
+        else:
+            script = {
+                'napalm_getters': NapalmGettersScript,
+                'file_transfer': FileTransferScript,
+                }[script_type](**request.form)
         db.session.add(script)
         db.session.commit()
     return render_template(
-        script_type + '_configuration.html',
-        form=form
-    )
-
-
-@blueprint.route('/getters', methods=['GET', 'POST'])
-@login_required
-def napalm_getters():
-    form = NapalmGettersForm(request.form)
-    if 'create_script' in request.form:
-        script = NapalmGettersScript(**request.form)
-        db.session.add(script)
-        db.session.commit()
-    return render_template(
-        'napalm_getters.html',
-        form=form
-    )
-
-
-@blueprint.route('/file_transfer', methods=['GET', 'POST'])
-@login_required
-def file_transfer_script():
-    form = FileTransferScriptForm(request.form)
-    if request.method == 'POST':
-        script = FileTransferScript(**request.form)
-        db.session.add(script)
-        db.session.commit()
-    return render_template(
-        'file_transfer.html',
-        form=form
-    )
-
-
-@blueprint.route('/ansible', methods=['GET', 'POST'])
-@login_required
-def ansible_script():
-    form = AnsibleScriptForm(request.form)
-    if request.method == 'POST':
-        filename = secure_filename(request.files['file'].filename)
-        if allowed_file(filename, {'yaml', 'yml'}):
-            playbook_path = join(current_app.config['UPLOAD_FOLDER'], filename)
-            request.files['file'].save(playbook_path)
-        script = AnsibleScript(playbook_path, **request.form)
-        db.session.add(script)
-        db.session.commit()
-    return render_template(
-        'ansible.html',
-        form=form
+        'script_creation.html',
+        netmiko_config_form=netmiko_config_form,
+        napalm_config_form=napalm_config_form,
+        napalm_getters_form=napalm_getters_form,
+        file_transfer_form=file_transfer_form,
+        ansible_form=ansible_form
     )

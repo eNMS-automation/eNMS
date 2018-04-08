@@ -57,6 +57,38 @@
 
 {% block content %}
 {% include 'modals.html' %}
+{% for type in ('node', 'link') %}
+<div id="edit-{{ type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="title"></h4>
+        </div>
+        {% set form = add_node_form if type == 'node' else add_link_form %}
+        <form id="edit-{{ type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+        <div class="modal-body">
+            <div class="form-group" style="height: 450px">
+            {% for field in form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                {{ field(id= type + '-' + field.name, class="form-control") }}
+                </div><br><br>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="button" class="btn btn-success" onclick="editObject('{{ type }}')">Submit</button>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endfor %}
   <div class="right_col" role="main">
 
     <div class="row">
@@ -130,10 +162,10 @@
                       {{ obj.latitude }}, 
                       {{ obj.longitude }}], 
                       );
-                    marker.bindPopup("{% for property in properties %}\
-                    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
-                    <input type='hidden' name='id' id='id' value={{ obj.id }}>\
-                    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
+
+                    marker.on("click", function (e) {
+                      showObjectModal('node', '{{ obj['name'] }}');
+                    });
                     marker.bindTooltip("{{ obj[labels['node']] }}", {
                       permanent: false, 
                       }
@@ -204,9 +236,10 @@
                     opacity: 1,
                     smoothFactor: 1
                     });
-                  
-                  polyline.bindPopup("{% for property in properties %}\
-                  <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}");
+
+                  polyline.on("click", function (e) {
+                    showObjectModal('link', '{{ obj['name'] }}');
+                  });
               
                   polyline.bindTooltip("{{ obj[labels['link']] }}", {
                     permanent: false, 
@@ -237,28 +270,32 @@
                     {% endif %}
                     15, 10
                     ).addTo(map);
-                    marker.bindPopup("{% for property in properties %}\
-                    <b>{{ names[property] }}</b>: {{ obj[property] }}<br>{% endfor %}<br>\
-                    <input type='hidden' name='id' id='id' value={{ obj.id }}>\
-                    <input type='button' value='Connect' class='btn btn-round btn-danger' onclick='return connect_to_device()'/>");
+
+                    marker.on("click", function (e) {
+                      showObjectModal('node', '{{ obj['name'] }}');
+                    });
                     marker.node_id = {{ obj.id }};
                     markers_array.push(marker);
                   {% endfor %}
                   {% for obj, properties in link_table.items() %}  
-                    var polygon = WE.polygon(
+                    var polygonSD = WE.polygon(
                     [
                       [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
                       [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}]
                     ], {color: '{{ obj.color }}', opacity: 20}
-                    ).addTo(map);
-                    var polygon = WE.polygon(
+                    )
+                    var polygonDS = WE.polygon(
                     [
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
                       [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}]
                     ], {color: '{{ obj.color }}', opacity: 20}
-                    ).addTo(map);
+                    )
+
+                    polygonSD.addTo(map);
+                    polygonDS.addTo(map);
+
                   {% endfor %}
                 {% endif %}
 
@@ -347,6 +384,62 @@
             $('.answer').html(msg);
         }
       });
+    }
+
+    function showObjectModal(type, name) {
+      $('#title').text(`Edit ${type} properties`);
+      $.ajax({
+        type: "POST",
+        url: `/objects/get_${type}_${name}`,
+        success: function(properties){
+          for (const [property, value] of Object.entries(properties)) {
+            $(`#${type}-${property}`).val(value);
+          }
+        }
+      });
+      $(`#edit-${type}`).modal('show');
+    }
+  
+    function editObject(type) {
+      var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
+      var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
+      var fields = type == 'node' ? node_fields : link_fields
+      var mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add'
+      var result = {};
+      var values = [];
+      $.each($(`#edit-${type}-form`).serializeArray(), function() {
+        result[this.name] = this.value;
+      });
+
+      var name = result.name;
+      for (i = 0; i < fields.length; i++) {
+        values.push(`<td>${result[fields[i]]}</td>`);
+      }
+      values.push(`<td>
+      <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${name}')">Edit</button>
+      </td>
+      <td>
+      <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${name}')">Delete</button>
+      </td>`);
+      
+      if (mode == 'edit') {
+        $(`#${type}-${name}`).html(values.join(''));
+      } else {
+        values.unshift(`<tr id="${name}">`);
+        values.push('</tr>');
+        $(`#${type}-table tbody`).append(values.join(''));
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/objects/edit_object",
+        dataType: "json",
+        data: $(`#edit-${type}-form`).serialize(),
+        success: function(msg){
+          $('.answer').html(msg);
+        }
+      });
+      $(`#edit-${type}`).modal('hide');
     }
 </script>
 {% endblock javascripts %}

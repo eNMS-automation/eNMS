@@ -13,6 +13,7 @@ from flask import (
 )
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
+from objects.forms import AddNode, AddLink
 from objects.models import Filter, Node, node_subtypes, Link
 from os.path import join
 from scripts.models import Script
@@ -36,6 +37,8 @@ styles = create_styles(blueprint.root_path)
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
+    add_node_form = AddNode(request.form)
+    add_link_form = AddLink(request.form)
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
@@ -95,6 +98,8 @@ def view(view_type):
         scheduling_form=scheduling_form,
         view_options_form=view_options_form,
         google_earth_form=google_earth_form,
+        add_node_form=add_node_form,
+        add_link_form=add_link_form,
         labels=labels,
         names=pretty_names,
         subtypes=node_subtypes,

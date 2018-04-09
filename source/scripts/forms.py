@@ -81,7 +81,7 @@ class ConfigScriptForm(ScriptForm):
 
 class NetmikoConfigScriptForm(ConfigScriptForm):
     text = TextAreaField('')
-    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
+    file = FileField('File', validators=[FileAllowed(['yaml'], 'YAML only')])
     netmiko_type_choices = (
         ('show_commands', 'Show commands'),
         ('configuration', 'Configuration')

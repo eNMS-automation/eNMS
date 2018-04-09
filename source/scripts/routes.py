@@ -87,6 +87,7 @@ def configuration():
         db.session.commit()
     return render_template(
         'script_creation.html',
+        names=pretty_names,
         netmiko_config_form=netmiko_config_form,
         napalm_config_form=napalm_config_form,
         napalm_getters_form=napalm_getters_form,

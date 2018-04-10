@@ -7,6 +7,37 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  {% for script_type, script_form in type_to_form.items() %}
+    <div id="edit-{{ script_type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="title"></h4>
+          </div>
+          <form id="edit-{{ script_type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <div class="modal-body">
+              <div class="form-group" style="height: 450px">
+                {% for field in script_form if field.widget.input_type != 'hidden'  %}
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    {{ field(id= script_type + '-' + field.name, class="form-control") }}
+                  </div><br><br>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="button" class="btn btn-success" onclick="editObject('{{ script_type }}')">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12">
@@ -17,39 +48,21 @@
                 <tr>
                   <th style="width: 33%">Name</th>
                   <th style="width: 33%">Type</th>
-                  <th style="width: 33%">Edit</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
                 {% for script in scripts %}
-                  <tr>
+                  <tr id="{{ script.name }}">
                     <td><a>{{ script.name }}</a></td>
                     <td>{{ script.type }}</td>
-                    <td>
-                      <div class="modal fade content-{{ script.id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">
-                                <span aria-hidden="true">×</span>
-                              </button>
-                              <h4 class="modal-title" id="myModalLabel">Edit properties</h4>
-                            </div>
-                            <div class="modal-body">
-                              {% if script.type == 'AnsibleScript' %}
-                                Playbook path: {{ script.playbook_path }}
-                              {% else %}
-                                <pre> {{ script.content }} </pre>
-                              {% endif %}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".content-{{ script.id }}"><i class="fa fa-pencil">
-                        </i> Content </a>
-                      </button>
-                    </td>
+                  <td>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ script['type'] }}', '{{ script['name'] }}')">Edit</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ script['name'] }}')">Delete</button>
+                  </td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -66,5 +79,49 @@
   {{ super() }}
   <script>
     $('#script-table').DataTable();
+
+    function showObjectModal(type, name) {
+      $('#title').text(`Edit ${name} properties`);
+      $.ajax({
+        type: "POST",
+        url: `/scripts/get_${type}_${name}`,
+        success: function(properties){
+          for (const [property, value] of Object.entries(properties)) {
+            $(`#${type}-${property}`).val(value);
+          }
+        }
+      });
+      $(`#edit-${type}`).modal('show');
+    }
+
+    var type_to_fields = {
+      {% for script_type, script_form in type_to_form.items() %}
+        '{{ script_type }}': [{% for field in script_form %} '{{ field }}', {% endfor %}],
+      {% endfor %}
+    }
+
+    function editObject(type) {
+      $.ajax({
+        type: "POST",
+        url: `/scripts/edit_${type}`,
+        dataType: "json",
+        data: $(`#edit-${type}-form`).serialize(),
+        success: function(msg){
+          $('.answer').html(msg);
+        }
+      });
+      $(`#edit-${type}`).modal('hide');
+    }
+
+    function deleteObject(name) {
+      $(`#${name}`).remove();
+      $.ajax({
+        type: "POST",
+        url: `/scripts/delete_${name}`,
+        success: function(msg){
+          $('.answer').html(msg);
+        }
+      });
+    }
   </script>
 {% endblock javascripts %}

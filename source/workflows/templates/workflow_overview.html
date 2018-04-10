@@ -7,6 +7,35 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  <div id="edit" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="title"></h4>
+        </div>
+        <form id="edit-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <div class="modal-body">
+            <div class="form-group" style="height: 450px">
+              {% for field in form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(id=field.name, class="form-control") }}
+                </div><br><br>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="button" class="btn btn-success" onclick="editObject()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="right_col" role="main">
     <!-- begin row -->
     <div class="row" style="height: 350px">
@@ -14,25 +43,40 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <table id="datatable-workflow-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <div class="panel-group">
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-default btn-file" onclick="showModal()" style="width:100%;">
+                  Add a new workflow
+                </button>
+              </div>
+            </div>
+            <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  {% for field in fields %}
-                    <th>{{ names[field] }}</th>
+                  {% for field in form if field.widget.input_type != 'hidden'  %}
+                    <th>{{ names[field.name] }}</th>
                   {% endfor %}
                   <th>Edit</th>
+                  <th>Manage</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
                 {% for workflow in workflows %}
-                <tr>
-                  {% for field in fields %}
-                    <td>{{ workflow[field] }}</td>
+                <tr id="{{ workflow.name }}">
+                  {% for field in form if field.widget.input_type != 'hidden'  %}
+                    <td>{{ workflow[field.name] }}</td>
                   {% endfor %}
+                  <td>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ workflow['name'] }}')">Edit</button>
+                  </td>
                   <td>
                     <a href="/workflows/manage_{{workflow['name']}}" class="btn btn-info btn-xs">
                       <i class="fa fa-pencil"></i>Edit
                     </a>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ workflow['name'] }}')">Delete</button>
                   </td>
                 </tr>
                 {% endfor %}
@@ -54,5 +98,82 @@
   <script src="{{ url_for('objects_blueprint.static', filename='datatables/dataTables.bootstrap.min.js') }}"></script>
   <script>
     $('#datatable-workflow-responsive').DataTable();
+    $('#script-table').DataTable();
+
+    function showModal(type) {
+      $('#title').text("Add a new workflow");
+      $('#edit-form').trigger("reset");
+      $('#edit').modal('show');
+    }
+
+    function showObjectModal(name) {
+      $('#title').text(`Edit properties`);
+      $.ajax({
+        type: "POST",
+        url: `/workflows/get_${name}`,
+        success: function(properties){
+          for (const [property, value] of Object.entries(properties)) {
+            $(`#${property}`).val(value);
+          }
+        }
+      });
+      $(`#edit`).modal('show');
+    }
+
+    var fields = [{% for field in form if field.widget.input_type != 'hidden'  %} '{{ field.name }}', {% endfor %}];
+    function editObject() {
+      var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add'
+      var result = {};
+      var values = [];
+      $.each($("#edit-form").serializeArray(), function() {
+        result[this.name] = this.value;
+      });
+
+      var name = result.name;
+      for (i = 0; i < fields.length; i++) {
+        values.push(`<td>${result[fields[i]]}</td>`);
+      }
+      values.push(`<td>
+      <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${name}')">Edit</button>
+      </td>
+      <td>
+        <a href="/workflows/manage_${name}" class="btn btn-info btn-xs">
+          <i class="fa fa-pencil"></i>Edit
+        </a>
+      </td>
+      <td>
+      <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${name}')">Delete</button>
+      </td>`);
+      
+      if (mode == 'edit') {
+        $(`#${name}`).html(values.join(''));
+      } else {
+        values.unshift(`<tr id="${name}">`);
+        values.push('</tr>');
+        $("#table tbody").append(values.join(''));
+      }
+
+      $.ajax({
+        type: "POST",
+        url: `/workflows/edit_workflow`,
+        dataType: "json",
+        data: $("#edit-form").serialize(),
+        success: function(msg){
+          $('.answer').html(msg);
+        }
+      });
+      $(`#edit`).modal('hide');
+    }
+
+    function deleteObject(name) {
+      $(`#${name}`).remove();
+      $.ajax({
+        type: "POST",
+        url: `/workflows/delete_${name}`,
+        success: function(msg){
+          $('.answer').html(msg);
+        }
+      });
+    }
 	</script>
 {% endblock javascripts %}

@@ -38,9 +38,9 @@
                         </div>
                           <div class="x_content">
                           <div class="form-group" style="height: 550px">
-                            {% for field in netmiko_config_form if field.widget.input_type != 'hidden'  %}                  
-                              <label>{{ names[field.name] }}</label>
-                              {% if field.name != 'text' %}
+                            {% for field in netmiko_config_form if field.widget.input_type != 'hidden'  %}       
+                              {% if field.name != 'content' %}
+                                <label>{{ names[field.name] }}</label>
                                 <div class='form-group'>
                                   {{ field(class="form-control", placeholder=field.label.text) }}
                                 </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="x_content">
                           <div class="form-group" style="height: 550px">
-                            {{ netmiko_config_form.text(class="form-control", rows='26') }}
+                            {{ netmiko_config_form.content(class="form-control", rows='26') }}
                           </div>
                         </div>
                       </div>
@@ -82,9 +82,9 @@
                         </div>
                         <div class="x_content">
                           <div class="form-group" style="height: 550px">
-                            {% for field in napalm_config_form if field.widget.input_type != 'hidden'  %}                  
-                              <label>{{ names[field.name] }}</label>
-                              {% if field.name != 'text' %}
+                            {% for field in napalm_config_form if field.widget.input_type != 'hidden'  %} 
+                              {% if field.name != 'content' %}
+                                <label>{{ names[field.name] }}</label>
                                 <div class='form-group'>
                                   {{ field(class="form-control", placeholder=field.label.text) }}
                                 </div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="x_content">
                           <div class="form-group" style="height: 550px">
-                            {{ napalm_config_form.text(class="form-control", rows='26') }}
+                            {{ napalm_config_form.content(class="form-control", rows='26') }}
                           </div>
                         </div>
                       </div>

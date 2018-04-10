@@ -152,6 +152,7 @@
 
     function showModal(type) {
       $('#title').text(`Add a new ${type}`);
+      $(`#edit-${type}-form`).trigger("reset");
       $(`#edit-${type}`).modal('show');
     }
 
@@ -168,10 +169,10 @@
       });
       $(`#edit-${type}`).modal('show');
     }
-  
+
+    var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
+    var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
     function editObject(type) {
-      var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
-      var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
       var fields = type == 'node' ? node_fields : link_fields
       var mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add'
       var result = {};

@@ -1,7 +1,7 @@
-from base.database import db
+from base.database import db, get_obj
 from base.helpers import allowed_file
 from base.properties import pretty_names
-from flask import Blueprint, current_app, render_template, request
+from flask import Blueprint, current_app, jsonify, render_template, request
 from flask_login import login_required
 from .forms import (
     AnsibleScriptForm,
@@ -11,17 +11,19 @@ from .forms import (
     FileTransferScriptForm
 )
 from jinja2 import Template
-from yaml import load
-from scripts.models import (
+from os.path import join
+from .properties import type_to_properties
+from .models import (
     AnsibleScript,
     FileTransferScript,
     NapalmConfigScript,
     NapalmGettersScript,
     NetmikoConfigScript,
-    Script
+    Script,
+    script_factory
 )
-from os.path import join
 from werkzeug import secure_filename
+from yaml import load
 
 blueprint = Blueprint(
     'scripts_blueprint',
@@ -35,12 +37,52 @@ blueprint = Blueprint(
 @blueprint.route('/overview')
 @login_required
 def scripts():
+    type_to_form = {
+        'netmiko_config': NetmikoConfigScriptForm(request.form),
+        'napalm_config': NapalmConfigScriptForm(request.form),
+        'napalm_getters': NapalmGettersForm(request.form),
+        'file_transfer': FileTransferScriptForm(request.form),
+        'ansible_playbook': AnsibleScriptForm(request.form)
+    }
     return render_template(
         'overview.html',
         fields=('name', 'type'),
+        type_to_form=type_to_form,
         names=pretty_names,
         scripts=Script.query.all()
     )
+
+
+@blueprint.route('/get_<script_type>_<name>', methods=['POST'])
+@login_required
+def get_script(script_type, name):
+    print(script_type, name)
+    script = get_obj(Script, name=name)
+    properties = type_to_properties[script_type]
+    script_properties = {
+        property: str(getattr(script, property))
+        for property in properties
+    }
+    return jsonify(script_properties)
+
+
+@blueprint.route('/edit_<script_type>', methods=['POST'])
+@login_required
+def edit_object(script_type):
+    properties = request.form.to_dict()
+    properties['type'] = script_type
+    script_factory(**properties)
+    db.session.commit()
+    return jsonify({})
+
+
+@blueprint.route('/delete_<name>', methods=['POST'])
+@login_required
+def delete_object(name):
+    script = get_obj(Script, name=name)
+    db.session.delete(script)
+    db.session.commit()
+    return jsonify({})
 
 
 @blueprint.route('/script_creation', methods=['GET', 'POST'])
@@ -60,18 +102,19 @@ def configuration():
             }[script_type]
             # retrieve the raw script: we will use it as-is or update it
             # depending on the type of script (jinja2-enabled template or not)
-            content = request.form['text']
+            real_content = request.form['content']
             if form.data['content_type'] != 'simple':
                 file = request.files['file']
                 filename = secure_filename(file.filename)
                 if allowed_file(filename, {'yaml', 'yml'}):
                     parameters = load(file.read())
-                    template = Template(content)
-                    content = template.render(**parameters)
+                    template = Template(real_content)
+                    real_content = template.render(**parameters)
+            print(request.form)
             script = {
                 'netmiko_config': NetmikoConfigScript,
                 'napalm_config': NapalmConfigScript
-            }[script_type](content, **request.form)
+            }[script_type](real_content, **request.form)
         elif script_type == 'ansible_playbook':
             filename = secure_filename(request.files['file'].filename)
             if allowed_file(filename, {'yaml', 'yml'}):

@@ -3,7 +3,7 @@ from base.properties import pretty_names
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from .forms import AddScriptForm, WorkflowCreationForm
-from .models import ScriptEdge, Workflow
+from .models import ScriptEdge, Workflow, workflow_factory
 from scripts.models import Script
 
 blueprint = Blueprint(
@@ -18,26 +18,43 @@ blueprint = Blueprint(
 @blueprint.route('/overview', methods=['GET', 'POST'])
 @login_required
 def workflows():
+    form = WorkflowCreationForm(request.form)
     return render_template(
         'workflow_overview.html',
         names=pretty_names,
         fields=('name', 'description'),
         workflows=Workflow.query.all(),
-    )
-
-
-@blueprint.route('/workflow_creation', methods=['GET', 'POST'])
-@login_required
-def workflow_creation():
-    form = WorkflowCreationForm(request.form)
-    if request.method == 'POST':
-        workflow = Workflow(**request.form.to_dict())
-        db.session.add(workflow)
-        db.session.commit()
-    return render_template(
-        'workflow_creation.html',
         form=form
     )
+
+
+@blueprint.route('/get_<name>', methods=['POST'])
+@login_required
+def get_workflow(name):
+    workflow = get_obj(Workflow, name=name)
+    properties = ('name', 'description', 'type')
+    workflow_properties = {
+        property: str(getattr(workflow, property))
+        for property in properties
+    }
+    return jsonify(workflow_properties)
+
+
+@blueprint.route('/edit_workflow', methods=['POST'])
+@login_required
+def edit_workflow():
+    workflow_factory(**request.form.to_dict())
+    db.session.commit()
+    return jsonify({})
+
+
+@blueprint.route('/delete_<name>', methods=['POST'])
+@login_required
+def delete_workflow(name):
+    workflow = get_obj(Workflow, name=name)
+    db.session.delete(workflow)
+    db.session.commit()
+    return jsonify({})
 
 
 @blueprint.route('/manage_<workflow>', methods=['GET', 'POST'])

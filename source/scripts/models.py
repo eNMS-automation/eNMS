@@ -354,6 +354,7 @@ type_to_class = {
     'ansible_playbook': AnsibleScript
 }
 
+
 def script_factory(**kwargs):
     cls = type_to_class[kwargs['type']]
     script = get_obj(cls, name=kwargs['name'])

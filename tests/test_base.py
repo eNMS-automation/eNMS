@@ -24,6 +24,9 @@ urls = {
         '/overview',
         '/script_creation',
     ),
+    '/workflows': (
+        '/overview',
+    ),
     '/tasks': (
         '/task_management',
         '/calendar'

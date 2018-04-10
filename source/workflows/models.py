@@ -1,3 +1,4 @@
+from base.database import db, get_obj
 from base.models import script_workflow_table, task_workflow_table, CustomBase
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
@@ -75,3 +76,15 @@ class Workflow(CustomBase):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
             layer = new_layer
+
+
+def workflow_factory(**kwargs):
+    workflow = get_obj(Workflow, name=kwargs['name'])
+    if workflow:
+        for property, value in kwargs.items():
+            if property in workflow.__dict__:
+                setattr(workflow, property, value)
+    else:
+        workflow = Workflow(**kwargs)
+    db.session.add(workflow)
+    db.session.commit()

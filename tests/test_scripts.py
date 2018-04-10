@@ -22,7 +22,7 @@ netmiko_ping = ImmutableMultiDict([
     ('name', 'netmiko_ping'),
     ('content_type', 'simple'),
     ('create_script', 'netmiko_config'),
-    ('text', 'ping 1.1.1.1'),
+    ('content', 'ping 1.1.1.1'),
     ('netmiko_type', 'show_commands'),
     ('driver', 'cisco_xr_ssh'),
     ('global_delay_factor', '1.0'),
@@ -66,7 +66,7 @@ netmiko_jinja2_script = dict([
     ('name', 'netmiko_subif'),
     ('content_type', 'j2_template'),
     ('create_script', 'netmiko_config'),
-    ('text', template),
+    ('content', template),
     ('netmiko_type', 'configuration'),
     ('driver', 'cisco_xr_ssh'),
     ('global_delay_factor', '1.0'),
@@ -76,7 +76,7 @@ napalm_jinja2_script = dict([
     ('name', 'napalm_subif'),
     ('content_type', 'j2_template'),
     ('create_script', 'napalm_config'),
-    ('text', template),
+    ('content', template),
     ('script_type', 'napalm_configuration'),
     ('action', 'load_merge_candidate')
 ])

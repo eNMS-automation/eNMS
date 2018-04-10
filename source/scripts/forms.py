@@ -70,7 +70,7 @@ class ScriptForm(FlaskForm):
 
 
 class ConfigScriptForm(ScriptForm):
-    text = TextAreaField('')
+    content = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     content_type_choices = (
         ('simple', 'Simple'),
@@ -80,7 +80,6 @@ class ConfigScriptForm(ScriptForm):
 
 
 class NetmikoConfigScriptForm(ConfigScriptForm):
-    text = TextAreaField('')
     file = FileField('File', validators=[FileAllowed(['yaml'], 'YAML only')])
     netmiko_type_choices = (
         ('show_commands', 'Show commands'),

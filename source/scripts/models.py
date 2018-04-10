@@ -6,6 +6,7 @@ try:
 except Exception:
     import warnings
     warnings.warn('ansible import failed: ansible feature deactivated')
+from base.database import db, get_obj
 from base.helpers import str_dict
 from base.models import script_workflow_table, task_script_table, CustomBase
 from collections import namedtuple
@@ -68,16 +69,16 @@ class NetmikoConfigScript(Script):
     netmiko_type = Column(String)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'NetmikoConfigScript',
+        'polymorphic_identity': 'netmiko_config',
     }
 
-    def __init__(self, content, **data):
+    def __init__(self, real_content, **data):
         name = data['name'][0]
         self.driver = data['driver'][0]
         self.global_delay_factor = data['global_delay_factor'][0]
         self.netmiko_type = data['netmiko_type'][0]
         super(NetmikoConfigScript, self).__init__(name)
-        self.content = ''.join(content)
+        self.content = ''.join(real_content)
 
     def job(self, args):
         task, node, results = args
@@ -114,7 +115,7 @@ class FileTransferScript(Script):
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'FileTransferScript',
+        'polymorphic_identity': 'file_transfer',
     }
 
     def __init__(self, **data):
@@ -159,18 +160,16 @@ class NapalmConfigScript(Script):
     __tablename__ = 'NapalmConfigScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
-    action = Column(String)
     content = Column(String)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'NapalmConfigScript',
+        'polymorphic_identity': 'napalm_config',
     }
 
-    def __init__(self, content, **data):
+    def __init__(self, real_content, **data):
         name = data['name'][0]
-        self.action = data['action'][0]
         super(NapalmConfigScript, self).__init__(name)
-        self.content = ''.join(content)
+        self.content = ''.join(real_content)
 
     def job(self, args):
         task, node, results = args
@@ -206,7 +205,7 @@ class NapalmActionScript(Script):
     action = Column(String, unique=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'NapalmActionScript',
+        'polymorphic_identity': 'napalm_action',
     }
 
     def __init__(self, name, action):
@@ -244,7 +243,7 @@ class NapalmGettersScript(Script):
     getters = Column(MutableList.as_mutable(PickleType), default=[])
 
     __mapper_args__ = {
-        'polymorphic_identity': 'NapalmGettersScript',
+        'polymorphic_identity': 'napalm_getters',
     }
 
     def __init__(self, **data):
@@ -287,7 +286,7 @@ class AnsibleScript(Script):
     options = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
-        'polymorphic_identity': 'AnsibleScript',
+        'polymorphic_identity': 'ansible_playbook',
     }
 
     def __init__(self, playbook_path, **data):
@@ -345,3 +344,21 @@ class AnsibleScript(Script):
 
         results = playbook_executor.run()
         return results
+
+
+type_to_class = {
+    'netmiko_config': NetmikoConfigScript,
+    'napalm_config': NapalmConfigScript,
+    'file_transfer': FileTransferScript,
+    'napalm_getters': NapalmGettersScript,
+    'ansible_playbook': AnsibleScript
+}
+
+def script_factory(**kwargs):
+    cls = type_to_class[kwargs['type']]
+    script = get_obj(cls, name=kwargs['name'])
+    for property, value in kwargs.items():
+        if property in script.__dict__:
+            setattr(script, property, value)
+    db.session.add(script)
+    db.session.commit()

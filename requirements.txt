@@ -4,7 +4,6 @@ flask_login
 flask_migrate
 flask_sqlalchemy
 flask_wtf
-ansible
 napalm
 netmiko
 jinja2

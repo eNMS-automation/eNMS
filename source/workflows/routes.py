@@ -20,7 +20,7 @@ blueprint = Blueprint(
 def workflows():
     form = WorkflowCreationForm(request.form)
     return render_template(
-        'workflow_overview.html',
+        'workflow_management.html',
         names=pretty_names,
         fields=('name', 'description'),
         workflows=Workflow.query.all(),
@@ -64,7 +64,7 @@ def workflow_manager(workflow):
     form.scripts.choices = Script.choices()
     workflow = get_obj(Workflow, name=workflow)
     return render_template(
-        'workflow_manager.html',
+        'workflow_editor.html',
         form=form,
         workflow=workflow
     )

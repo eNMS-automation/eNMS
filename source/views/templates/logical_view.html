@@ -46,8 +46,8 @@
 {% endblock stylesheets %}
 
 {% block content %}
-
-{% include 'modals.html' %}
+{% include 'gis_modals.html' %}
+{% include 'scheduling_modal.html' %}
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -338,10 +338,25 @@
       $('#' + dates[i]).data("DateTimePicker").minDate(today);
     }
     function schedule(){
-      $('#wizard').smartWizard();
+      $('#wizard').smartWizard({
+        onFinish: scheduleScript
+      });
       $('.buttonNext').addClass('btn btn-success');
       $('.buttonPrevious').addClass('btn btn-primary');
       $('.buttonFinish').addClass('btn btn-default');
+    }
+
+    function scheduleScript() {
+      $.ajax({
+        type: "POST",
+        url: "/tasks/scheduler",
+        dataType: "json",
+        data: $("#scheduling-form").serialize(),
+        success: function() {
+          alertify.notify('Task scheduled', 'success', 5);
+        }
+      });
+      $("#scheduling").modal('hide');
     }
   </script>
 {% endblock javascripts %}

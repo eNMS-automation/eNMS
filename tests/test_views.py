@@ -31,15 +31,15 @@ scheduled_task = ImmutableMultiDict([
 @check_blueprints('/views', '/tasks')
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
-    user_client.post('/scripts/script_creation', data=netmiko_ping)
+    user_client.post('/scripts/create_script_netmiko_config', data=netmiko_ping)
     path_yaml = join(path_scripts, 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         napalm_jinja2_script['file'] = f
-        user_client.post('/scripts/script_creation', data=napalm_jinja2_script)
+        user_client.post('/scripts/create_script_napalm_config', data=napalm_jinja2_script)
     with user_client.session_transaction() as sess:
         sess['selection'] = ['1', '21', '22']
-    user_client.post('views/geographical_view', data=instant_task)
-    user_client.post('views/geographical_view', data=scheduled_task)
+    user_client.post('tasks/scheduler', data=instant_task)
+    user_client.post('tasks/scheduler', data=scheduled_task)
     assert len(Task.query.all()) == 2
 
 
@@ -54,7 +54,7 @@ google_earth_dict = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/views')
-def test_google_earth(user_client):
-    create_from_file(user_client, 'europe.xls')
-    user_client.post('/views/geographical_view', data=google_earth_dict)
+# @check_blueprints('/views')
+# def test_google_earth(user_client):
+#     create_from_file(user_client, 'europe.xls')
+#     user_client.post('/views/export_to_google_earth', data=google_earth_dict)

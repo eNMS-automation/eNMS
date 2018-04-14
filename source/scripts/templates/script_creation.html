@@ -29,7 +29,7 @@
               </ul>
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
-                  <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+                  <form id="netmiko_config-form" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
                     <div class="col-md-4 col-xs-12">
                       <div class="x_panel">
                         <div class="x_title">
@@ -49,7 +49,7 @@
                             <div class="ln_solid"></div>
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                               <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="submit" class="btn btn-success" name="create_script" value="netmiko_config">Create</button>
+                              <button type="button" class="btn btn-success" onclick="createScript('netmiko_config')">Create</button>
                             </div>
                           </div>
                         </div>
@@ -72,7 +72,7 @@
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="napalm-config">
-                  <form name="send" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+                  <form id="napalm_config-form"  data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
                     <!-- begin column -->
                     <div class="col-md-4 col-xs-12">
                       <div class="x_panel">
@@ -94,7 +94,7 @@
                             <div class="ln_solid"></div>
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                               <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="submit" class="btn btn-success" name="create_script" value="napalm_config">Create</button>
+                              <button type="button" class="btn btn-success" onclick="createScript('napalm_config')">Create</button>
                             </div>
                           </div>
                         </div>
@@ -120,7 +120,7 @@
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="napalm-getters">
-                  <form name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                  <form id="napalm_getters-form"  data-parsley-validate class="form-horizontal form-label-left" method="post">
                     <!-- begin column -->
                     <div class="col-md-12 col-xs-12">
                       <div class="x_panel">
@@ -140,7 +140,7 @@
                             <div class="ln_solid"></div>
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
                               <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="submit" class="btn btn-success" name="create_script" value="napalm_getters">Create</button>
+                              <button type="button" class="btn btn-success" onclick="createScript('napalm_getters')">Create</button>
                             </div>
                           </div>
                         </div>
@@ -150,7 +150,7 @@
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="netmiko-file-transfer">
-                  <form name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                  <form id="file_transfer-form" name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
                     <div class="col-md-12 col-xs-12">
                       <div class="x_panel">
                         <div class="x_content">
@@ -188,7 +188,7 @@
                             <div class="ln_solid"></div>
                             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
                               <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="submit" class="btn btn-success" name="create_script" value="file_transfer">Create</button>
+                              <button type="button" class="btn btn-success" onclick="createScript('file_transfer')">Create</button>
                             </div>
                           </div>
                         </div>
@@ -197,35 +197,27 @@
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="ansible">
-                  <form data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+                  <form id="ansible_playbook-form" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
                     <div class="col-md-12 col-xs-12">
                       <div class="x_panel">
                         <div class="x_content">
                         <br />
-                          <div style="padding-bottom:5px;">
-                            <label class="btn btn-default btn-file" style="width:100%;">Choose a playbook
-                              <input id="file" name="file" style="visibility:hidden; display:none" type="file" required=True>
-                            </label>
-                          </div>
 
-                          <div class="form-group" style="height: 450px">
-                            {% for field in ansible_form if field.widget.input_type != 'hidden'  %}
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
-                              <div class="col-md-3 col-sm-3 col-xs-12">
-                                {% if field.label.text == 'Name' %}
-                                  {{ field(class="form-control", placeholder=field.label.text, required=True) }}
-                                {% else %}
-                                  {{ field(class="form-control", placeholder=field.label.text) }}
-                                {% endif %}
-                              </div>
-                            {% endfor %}
-                          </div>
+                            <label>Name</label>
+                            <div class='form-group'>
+                              {{ ansible_form.name(class="form-control", required=True) }}
+                            </div>
+
+                            <label>Playbook name</label>
+                            <div class='form-group'>
+                              {{ ansible_form.playbook_name(class="form-control", required=True) }}
+                            </div>
 
                           <div class="ln_solid"></div>
                           <div class="form-group">
                             <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                               <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="submit" class="btn btn-success" name="create_script" value="ansible_playbook">Save changes</button>
+                              <button type="button" class="btn btn-success" onclick="createScript('ansible_playbook')">Create</button>
                             </div>
                           </div>
                         </div>
@@ -246,4 +238,17 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+  function createScript(type) {
+    $.ajax({
+      type: "POST",
+      url: `/scripts/create_script_${type}`,
+      dataType: "json",
+      data: $(`#${type}-form`).serialize(),
+      success: function() {
+        alertify.notify("Script created", 'success', 5);
+      }
+    });
+  }
+  </script>
 {% endblock javascripts %}

@@ -474,6 +474,7 @@ class Filter(CustomBase):
         for p in node_public_properties:
             for property in 'node_{p} node_{p}_regex'.format(p=p).split():
                 result[property] = getattr(self, property)
+        result['name'] = self.name
         return result
 
     def object_match(self, obj):
@@ -512,6 +513,7 @@ class Filter(CustomBase):
 
 def filter_factory(**kwargs):
     obj = get_obj(Filter, name=kwargs['name'])
+    mode = 'update' if obj else 'creation'
     if obj:
         for property, value in kwargs.items():
             if property in obj.__dict__:
@@ -520,3 +522,4 @@ def filter_factory(**kwargs):
         obj = Filter(**kwargs)
     db.session.add(obj)
     db.session.commit()
+    return mode

@@ -57,9 +57,15 @@ class Workflow(CustomBase):
     )
     edges = relationship('ScriptEdge', back_populates='workflow')
 
+    properties = (
+        'name',
+        'description',
+        'type'
+    )
+
     def __init__(self, **kwargs):
-        self.name = kwargs['name']
-        self.description = kwargs['description']
+        for property in self.properties:
+            setattr(self, property, kwargs[property])
 
     def job(self, args):
         task, node, results = args

@@ -1,6 +1,6 @@
 ---
 - name: save running-config
-  hosts: ios_devices
+  hosts: all
   gather_facts: no
   connection: local
 
@@ -9,8 +9,7 @@
       host: "{{ inventory_hostname }}" 
       username: "cisco"
       password: "cisco"
-      authorize: yes
-      auth_pass: cisco
+
 
   tasks:
     - ios_command:

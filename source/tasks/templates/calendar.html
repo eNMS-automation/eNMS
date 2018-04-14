@@ -9,63 +9,55 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  <div class="right_col" role="main">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="x_panel">
-          <div class="x_content">
-            <div id='calendar'></div>
-          </div>
+{% include 'scheduling_modal.html' %}
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_content">
+          <div id='calendar'></div>
         </div>
       </div>
     </div>
-
-    <!-- calendar modal -->
-    <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="main-title">Task</h4>
-          </div>
-
-          <div class="modal-body">
-            <div id="testmodal2" style="padding: 5px 20px;">
-              <form id="antoform2" class="form-horizontal calender" role="form">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Name</label>
-                  <div class="col-sm-9">
-                    <input readonly type="text" class="form-control" id="title" name="title">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Description</label>
-                  <div class="col-sm-9">
-                    <textarea readonly class="form-control" style="height:150px;" id="descr" name="descr"></textarea>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
   </div>
 {% endblock content %}
-
 
 {% block javascripts %}
   {{ super() }}
   <!-- FullCalendar -->
   <script src="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
+  <!-- jQuery Smart Wizard -->
+  <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
+  <!-- Bootstrap Datetimepicker -->
+  <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+  <!-- Initialize datetimepicker and SmartWizard -->
   <script>
-      function  init_calendar() {
-        
+    var dates = ['start_date', 'end_date'];
+    var today = new Date();
+    for (var i = 0; i < dates.length; i++) {
+      $('#' + dates[i]).datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        widgetPositioning: {
+            horizontal: 'left',
+            vertical: 'bottom'
+        },
+        useCurrent: false,
+      });
+      $('#' + dates[i]).data("DateTimePicker").minDate(today);
+    }
+
+    function schedule(){
+      $('#wizard').smartWizard({
+        onFinish: scheduleScript
+      });
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+
+    function  init_calendar() {
       if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
-      console.log('init_calendar');
-        
+
       var date = new Date(),
         d = date.getDate(),
         m = date.getMonth(),
@@ -81,56 +73,19 @@
         },
         selectable: true,
         selectHelper: true,
-        select: function(start, end, allDay) {
-        $('#fc_create').click();
-
-        started = start;
-        ended = end;
-
-        $(".antosubmit").on("click", function() {
-          var title = $("#title").val();
-          if (end) {
-          ended = end;
-          }
-
-          categoryClass = $("#event_type").val();
-
-          if (title) {
-          calendar.fullCalendar('renderEvent', {
-            title: title,
-            start: started,
-            end: end,
-            allDay: allDay
-            },
-            true // make the event "stick"
-          );
-          }
-
-          $('#title').val('');
-
-          calendar.fullCalendar('unselect');
-
-          $('.antoclose').click();
-
-          return false;
-        });
-        },
         eventClick: function(calEvent, jsEvent, view) {
-        $('#fc_edit').click();
-        $('#title').val(calEvent.title);
-        $('#descr').val(calEvent.description);
+          $.ajax({
+            type: "POST",
+            url: `/tasks/get_${calEvent.title}`,
+            dataType: 'json',
+            success: function(properties){
+              for (const [property, value] of Object.entries(properties)) {
+                $(`#${property}`).val(value);
+              }
+            }
+          });
+          $('#scheduling').modal('show');
 
-        categoryClass = $("#event_type").val();
-
-        $(".antosubmit2").on("click", function() {
-          calEvent.title = $("#title").val();
-          calEvent.description = $("#descr").val();
-
-          calendar.fullCalendar('updateEvent', calEvent);
-          $('.antoclose2').click();
-        });
-
-        calendar.fullCalendar('unselect');
         },
         editable: true,
         events: [
@@ -143,8 +98,20 @@
         {% endfor %}
         ]
       });
-      
     };
+
+    function scheduleScript() {
+      $.ajax({
+        type: "POST",
+        url: "/tasks/scheduler",
+        dataType: "json",
+        data: $("#scheduling-form").serialize(),
+        success: function() {
+          alertify.notify('Task edited', 'success', 5);
+        }
+      });
+      $("#scheduling").modal('hide');
+    }
     $(document).ready(function() {
       init_calendar();
     });

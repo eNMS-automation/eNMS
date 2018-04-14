@@ -56,9 +56,9 @@
                   {% for field in form if field.widget.input_type != 'hidden'  %}
                     <th>{{ names[field.name] }}</th>
                   {% endfor %}
-                  <th>Edit</th>
-                  <th>Manage</th>
-                  <th>Delete</th>
+                  <th style="width: 10%">Edit</th>
+                  <th style="width: 10%">Manage</th>
+                  <th style="width: 10%">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -72,7 +72,7 @@
                   </td>
                   <td>
                     <a href="/workflows/manage_{{workflow['name']}}" class="btn btn-info btn-xs">
-                      <i class="fa fa-pencil"></i>Edit
+                      <i class="fa fa-pencil"></i>Manage
                     </a>
                   </td>
                   <td>
@@ -159,7 +159,7 @@
         dataType: "json",
         data: $("#edit-form").serialize(),
         success: function(msg){
-          $('.answer').html(msg);
+          alertify.notify(`Workflow ${name} edited`, 'success', 5);
         }
       });
       $(`#edit`).modal('hide');
@@ -171,7 +171,7 @@
         type: "POST",
         url: `/workflows/delete_${name}`,
         success: function(msg){
-          $('.answer').html(msg);
+          alertify.notify(`Workflow ${name} deleted`, 'error', 5);
         }
       });
     }

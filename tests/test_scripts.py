@@ -1,5 +1,5 @@
 from base.database import db
-from conftest import path_playbooks, path_scripts
+from conftest import path_scripts
 from os.path import join
 from scripts.models import (
     AnsibleScript,
@@ -136,36 +136,14 @@ def test_getters_script(user_client):
 
 ## Ansible script
 
-ansible_script = {
-    'create_script': 'ansible_playbook',
-    'name': 'ansible_test',
-    'listtags': 'False',
-    'listtasks': 'False',
-    'listhosts': 'False',
-    'syntax': 'False',
-    'connection': 'ssh',
-    'module_path': '',
-    'forks': '100',
-    'remote_user': '',
-    'private_key_file': '',
-    'ssh_common_args': '',
-    'ssh_extra_args': '',
-    'sftp_extra_args': '',
-    'scp_extra_args': '',
-    'become': 'False',
-    'become_method': '',
-    'become_user': '',
-    'verbosity': '',
-    'check': 'False',
-    'diff': 'False'
-}
+ansible_script = ImmutableMultiDict([
+    ('name', 'testttt'),
+    ('playbook_name', 'testtt')
+])
 
 
 @check_blueprints('/scripts')
 def test_ansible_scripts(user_client):
-    path_yaml = join(path_playbooks, 'save_running_config.yml')
-    with open(path_yaml, 'rb') as f:
-        ansible_script['file'] = f
-        user_client.post('/scripts/create_script_ansible_playbook', data=ansible_script)
+    user_client.post('/scripts/create_script_ansible_playbook', data=ansible_script)
     assert len(AnsibleScript.query.all()) == 1
     assert len(Script.query.all()) == 4

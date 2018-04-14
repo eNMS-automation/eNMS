@@ -1,4 +1,4 @@
-from base.database import db, get_obj
+from base.database import get_obj
 from base.properties import pretty_names, type_to_public_properties
 from collections import OrderedDict
 from flask import (

@@ -10,13 +10,13 @@ from base.database import db, get_obj
 from base.helpers import str_dict
 from base.models import script_workflow_table, task_script_table, CustomBase
 from collections import namedtuple
-from .forms import ansible_options
 from napalm import get_network_driver
 from netmiko import ConnectHandler
 from passlib.hash import cisco_type7
 from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
+from subprocess import check_output
 from tempfile import NamedTemporaryFile
 
 
@@ -293,57 +293,13 @@ class AnsibleScript(Script):
         name = data['name'][0]
         super(AnsibleScript, self).__init__(name)
         self.playbook_path = playbook_path
-        self.options = {}
-        for key, value in data.items():
-            if key in ansible_options:
-                self.options[key] = value[0] if value else None
 
-    def job(self, task):
-        loader = DataLoader()
-        hosts = [node.ip_address for node in task.nodes]
-        temporary_file = NamedTemporaryFile(delete=False)
-        temporary_file.write('\n'.join(hosts))
-        temporary_file.close()
-
-        # sources is a list of paths to inventory files"
-        inventory = InventoryManager(loader=loader, sources=temporary_file.name)
-        variable_manager = VariableManager(loader=loader, inventory=inventory)
-
-        options_dict = {
-            'listtags': False,
-            'listtasks': False,
-            'listhosts': False,
-            'syntax': False,
-            'connection': 'ssh',
-            'module_path': None,
-            'forks': 100,
-            'remote_user': None,
-            'private_key_file': None,
-            'ssh_common_args': None,
-            'ssh_extra_args': None,
-            'sftp_extra_args': None,
-            'scp_extra_args': None,
-            'become': False,
-            'become_method': None,
-            'become_user': None,
-            'verbosity': None,
-            'check': False,
-            'diff': False
-        }
-
-        Options = namedtuple('Options', list(options_dict))
-        passwords = {}
-        playbook_executor = PlaybookExecutor(
-            playbooks=[self.playbook_path],
-            inventory=inventory,
-            variable_manager=variable_manager,
-            loader=loader,
-            options=Options(**options_dict),
-            passwords=passwords
-        )
-
-        results = playbook_executor.run()
-        return results
+    def job(self, args):
+        _, node, results = args
+        print(self.playbook_path)
+        command = ['ansible-playbook', '-i', node.ip_address + ",", self.playbook_path]
+        results[node.name] = check_output(command)
+        return True
 
 
 type_to_class = {

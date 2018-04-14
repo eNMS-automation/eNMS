@@ -21,6 +21,8 @@ class User(CustomBase, UserMixin):
     tasks = relationship("Task")
 
     def __init__(self, **kwargs):
+        password = kwargs.pop('password')
+        kwargs['password'] = cisco_type7.hash(password)
         for property, value in kwargs.items():
             # depending on whether value is an iterable or not, we must
             # unpack it's value (when **kwargs is request.form, some values
@@ -52,14 +54,12 @@ class TacacsServer(CustomBase):
 
 
 def user_factory(**kwargs):
-    obj = get_obj(User, name=kwargs['name'])
-    password = kwargs.pop('password')
-    kwargs['password'] = cisco_type7.hash(password)
-    if obj:
+    user = get_obj(User, name=kwargs['name'])
+    if user:
         for property, value in kwargs.items():
-            if property in obj.__dict__:
-                setattr(obj, property, value)
+            if property in user.__dict__:
+                setattr(user, property, value)
     else:
-        obj = User(**kwargs)
-    db.session.add(obj)
+        user = User(**kwargs)
+        db.session.add(user)
     db.session.commit()

@@ -23,14 +23,11 @@ def job_multiprocessing(name):
     task.logs[job_time] = {}
     for task_job in task.scripts + task.workflows:
         results = {}
-        if task_job.type == 'AnsibleScript':
-            results = task_job.job(task)
-        else:
-            pool = ThreadPool(processes=len(task.nodes))
-            args = [(task, node, results) for node in task.nodes]
-            pool.map(task_job.job, args)
-            pool.close()
-            pool.join()
+        pool = ThreadPool(processes=len(task.nodes))
+        args = [(task, node, results) for node in task.nodes]
+        pool.map(task_job.job, args)
+        pool.close()
+        pool.join()
         task.logs[job_time][task_job.name] = results
     db.session.commit()
 
@@ -43,7 +40,6 @@ class Task(CustomBase):
     __tablename__ = 'Task'
 
     id = Column(Integer, primary_key=True)
-    type = Column(String)
     recurrent = Column(Boolean, default=False)
     name = Column(String(120), unique=True)
     status = Column(String)
@@ -66,27 +62,28 @@ class Task(CustomBase):
     )
     user = relationship('User', back_populates='tasks', uselist=False)
 
-    # scheduling parameters
     frequency = Column(String(120))
     start_date = Column(String)
     end_date = Column(String)
-
-    # script parameters
     creator = Column(String)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'Task',
-        'polymorphic_on': type
-    }
+    properties = (
+        'name',
+        'start_date',
+        'end_date',
+        'frequency',
+        'scripts',
+        'workflows'
+    )
 
     def __init__(self, **data):
         self.data = data
-        self.name = data['name'][0]
+        self.name = data['name']
         self.nodes = data['nodes']
         self.user = data['user']
         self.scripts = data['scripts']
         self.workflows = data['workflows']
-        self.frequency = data['frequency'][0]
+        self.frequency = data['frequency']
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
         self.creator = data['user'].name
@@ -94,7 +91,7 @@ class Task(CustomBase):
         # if the start date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting
         for date in ('start_date', 'end_date'):
-            date = data[date][0]
+            date = data[date]
             value = self.datetime_conversion(date) if date else None
             setattr(self, date, value)
         self.is_active = True
@@ -164,3 +161,14 @@ class Task(CustomBase):
             args=[self.name],
             trigger='date'
         )
+
+
+def task_factory(**kwargs):
+    task = get_obj(Task, name=kwargs['name'])
+    if task:
+        for property, value in kwargs.items():
+            setattr(task, property, value)
+    else:
+        task = Task(**kwargs)
+        db.session.add(task)
+    db.session.commit()

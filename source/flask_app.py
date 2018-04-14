@@ -26,6 +26,7 @@ def initialize_paths(app):
     app.path_upload = join(path_parent, 'projects')
     app.path_apps = join(path_parent, 'applications')
     app.ge_path = join(path_parent, 'google_earth')
+    app.path_playbooks = join(path_parent, 'playbooks')
     app.config['UPLOAD_FOLDER'] = app.path_upload
 
 

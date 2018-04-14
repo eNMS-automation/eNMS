@@ -56,41 +56,41 @@
 {% endset %}
 
 {% block content %}
-{% include 'modals.html' %}
+{% include 'gis_modals.html' %}
+{% include 'scheduling_modal.html' %}
 {% for type in ('node', 'link') %}
-<div id="edit-{{ type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="title"></h4>
-        </div>
-        {% set form = add_node_form if type == 'node' else add_link_form %}
-        <form id="edit-{{ type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-        <div class="modal-body">
-            <div class="form-group" style="height: 450px">
-            {% for field in form if field.widget.input_type != 'hidden'  %}
-                <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                {{ field(id= type + '-' + field.name, class="form-control") }}
-                </div><br><br>
-            {% endfor %}
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button class="btn btn-primary" type="reset">Reset</button>
-            <button type="button" class="btn btn-success" onclick="editObject('{{ type }}')">Submit</button>
-        </div>
-        </form>
-    </div>
-    </div>
-</div>
+  <div id="edit-{{ type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="title"></h4>
+          </div>
+          {% set form = add_node_form if type == 'node' else add_link_form %}
+          <form id="edit-{{ type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <div class="modal-body">
+              <div class="form-group" style="height: 450px">
+              {% for field in form if field.widget.input_type != 'hidden'  %}
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(id= type + '-' + field.name, class="form-control") }}
+                  </div><br><br>
+              {% endfor %}
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
+              <button type="button" class="btn btn-success" onclick="editObject('{{ type }}')">Submit</button>
+          </div>
+          </form>
+      </div>
+      </div>
+  </div>
 {% endfor %}
   <div class="right_col" role="main">
-
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -102,7 +102,7 @@
             {% elif view == 'glearth' %}
             <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
             {% endif %}
-          
+
             {% if view == 'glearth' %}
             <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;">
             {% else %}
@@ -349,7 +349,9 @@
       $('#' + dates[i]).data("DateTimePicker").minDate(today);
     }
     function schedule(){
-      $('#wizard').smartWizard();
+      $('#wizard').smartWizard({
+        onFinish: scheduleScript
+      });
       $('.buttonNext').addClass('btn btn-success');
       $('.buttonPrevious').addClass('btn btn-primary');
       $('.buttonFinish').addClass('btn btn-default');
@@ -373,17 +375,42 @@
       }
   {% endif %}
   
-  function connect_to_device() {
-      var id = document.getElementById('id').value
+    function connectToDevice(name) {
+      var name = $(`#node-name`).val();
       $.ajax({
         type: "POST",
-        url: "/views/putty_connection",
-        dataType: "json",
-        data: { id: id },
+        url: `/views/connect_to_${name}`,
         success: function(msg){
-            $('.answer').html(msg);
+          alertify.notify(`Connection to ${name}`, 'success', 5);
         }
       });
+    }
+
+    function scheduleScript() {
+      $.ajax({
+        type: "POST",
+        url: "/tasks/scheduler",
+        dataType: "json",
+        data: $("#scheduling-form").serialize(),
+        success: function() {
+          alertify.notify('Task scheduled', 'success', 5);
+        }
+      });
+      $("#scheduling").modal('hide');
+    }
+
+    function exportToGoogleEarth() {
+      console.log("test");
+      $.ajax({
+        type: "POST",
+        url: "/views/export_to_google_earth",
+        dataType: "json",
+        data: $("#google-earth-form").serialize(),
+        success: function() {
+          alertify.notify(`Project exported to Google Earth`, 'success', 5);
+        }
+      });
+      $("#google-earth").modal('hide');
     }
 
     function showObjectModal(type, name) {
@@ -399,44 +426,20 @@
       });
       $(`#edit-${type}`).modal('show');
     }
-  
+
+    var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
+    var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
+
     function editObject(type) {
-      var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
-      var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
       var fields = type == 'node' ? node_fields : link_fields
-      var mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add'
-      var result = {};
-      var values = [];
-      $.each($(`#edit-${type}-form`).serializeArray(), function() {
-        result[this.name] = this.value;
-      });
-
-      var name = result.name;
-      for (i = 0; i < fields.length; i++) {
-        values.push(`<td>${result[fields[i]]}</td>`);
-      }
-      values.push(`<td>
-      <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${name}')">Edit</button>
-      </td>
-      <td>
-      <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${name}')">Delete</button>
-      </td>`);
-      
-      if (mode == 'edit') {
-        $(`#${type}-${name}`).html(values.join(''));
-      } else {
-        values.unshift(`<tr id="${name}">`);
-        values.push('</tr>');
-        $(`#${type}-table tbody`).append(values.join(''));
-      }
-
       $.ajax({
         type: "POST",
         url: "/objects/edit_object",
         dataType: "json",
         data: $(`#edit-${type}-form`).serialize(),
         success: function(msg){
-          $('.answer').html(msg);
+          var name = $(`#${type}-name`).val();
+          alertify.notify(`Object ${name} edited !`, 'success', 5);
         }
       });
       $(`#edit-${type}`).modal('hide');

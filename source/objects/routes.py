@@ -98,20 +98,14 @@ def process_filter():
     for property in link_public_properties:
         regex_property = 'link_{}_regex'.format(property)
         filter_properties[regex_property] = regex_property in filter_properties
-    filter_factory(**filter_properties)
-    return jsonify({})
+    mode = filter_factory(**filter_properties)
+    return jsonify(mode)
 
 
 @blueprint.route('/filter_<name>', methods=['POST'])
 @login_required
 def get_filter(name):
     return jsonify(get_obj(Filter, name=name).get_properties())
-
-
-@blueprint.route('/get_filters', methods=['POST'])
-@login_required
-def get_filters():
-    return jsonify([f.name for f in Filter.query.all()])
 
 
 @blueprint.route('/<name>_filter_objects', methods=['POST'])
@@ -129,5 +123,6 @@ def filter_objects():
     return render_template(
         'object_filtering.html',
         form=form,
-        names=pretty_names
+        names=pretty_names,
+        filters=[f.name for f in Filter.query.all()]
     )

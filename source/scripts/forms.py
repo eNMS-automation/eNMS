@@ -40,28 +40,6 @@ napalm_actions = OrderedDict([
     ('Load replace', 'load_replace_candidate'),
 ])
 
-ansible_options = {
-    'listtags': ('List of tags', False),
-    'listtasks': ('List of tasks', False),
-    'listhosts': ('List of hosts', False),
-    'syntax': ('Syntax', False),
-    'connection': ('Connection', 'ssh'),
-    'module_path': ('Module path', None),
-    'forks': ('Number of forks', 100),
-    'remote_user': ('Remote user', None),
-    'private_key_file': ('Private key file', None),
-    'ssh_common_args': ('SSH common arguments', None),
-    'ssh_extra_args': ('SSH extra arguments', None),
-    'sftp_extra_args': ('SFTP extra arguments', None),
-    'scp_extra_args': ('SCP extra arguments', None),
-    'become': ('Become', False),
-    'become_method': ('Become method', None),
-    'become_user': ('Become user', None),
-    'verbosity': ('Verbosity', None),
-    'check': ('Check', False),
-    'diff': ('Diff', False)
-}
-
 
 class ScriptForm(FlaskForm):
     name = TextField('Name')
@@ -125,12 +103,6 @@ class FileTransferScriptForm(ScriptForm):
     inline_transer = BooleanField()
 
 
-def configure_form(cls):
-    for option, (pretty_name, default_value) in ansible_options.items():
-        setattr(cls, option, TextField(pretty_name, default=default_value))
-    return cls
-
-
-@configure_form
 class AnsibleScriptForm(ScriptForm):
     name = TextField('Name')
+    playbook_name = TextField('Playbook name')

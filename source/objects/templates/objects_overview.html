@@ -205,8 +205,9 @@
         url: "/objects/edit_object",
         dataType: "json",
         data: $(`#edit-${type}-form`).serialize(),
-        success: function(msg){
-          $('.answer').html(msg);
+        success: function(msg) {
+          message = `Object ${name} ` + (mode == 'edit' ? 'edited !' : 'created !')
+          alertify.notify(message, 'success', 5);
         }
       });
       $(`#edit-${type}`).modal('hide');
@@ -218,7 +219,7 @@
         type: "POST",
         url: `/objects/delete_${type}_${name}`,
         success: function(msg){
-          $('.answer').html(msg);
+          alertify.notify(`Object ${name} deleted`, 'error', 5);
         }
       });
     }

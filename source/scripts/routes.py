@@ -93,41 +93,6 @@ def configuration():
     napalm_getters_form = NapalmGettersForm(request.form)
     file_transfer_form = FileTransferScriptForm(request.form)
     ansible_form = AnsibleScriptForm(request.form)
-    if request.method == 'POST':
-        script_type = request.form['create_script']
-        if script_type in ('netmiko_config', 'napalm_config'):
-            form = {
-                'netmiko_config': netmiko_config_form,
-                'napalm_config': napalm_config_form
-            }[script_type]
-            # retrieve the raw script: we will use it as-is or update it
-            # depending on the type of script (jinja2-enabled template or not)
-            real_content = request.form['content']
-            if form.data['content_type'] != 'simple':
-                file = request.files['file']
-                filename = secure_filename(file.filename)
-                if allowed_file(filename, {'yaml', 'yml'}):
-                    parameters = load(file.read())
-                    template = Template(real_content)
-                    real_content = template.render(**parameters)
-            print(request.form)
-            script = {
-                'netmiko_config': NetmikoConfigScript,
-                'napalm_config': NapalmConfigScript
-            }[script_type](real_content, **request.form)
-        elif script_type == 'ansible_playbook':
-            filename = secure_filename(request.files['file'].filename)
-            if allowed_file(filename, {'yaml', 'yml'}):
-                playbook_path = join(current_app.config['UPLOAD_FOLDER'], filename)
-                request.files['file'].save(playbook_path)
-            script = AnsibleScript(playbook_path, **request.form)
-        else:
-            script = {
-                'napalm_getters': NapalmGettersScript,
-                'file_transfer': FileTransferScript,
-            }[script_type](**request.form)
-        db.session.add(script)
-        db.session.commit()
     return render_template(
         'script_creation.html',
         names=pretty_names,
@@ -137,3 +102,35 @@ def configuration():
         file_transfer_form=file_transfer_form,
         ansible_form=ansible_form
     )
+
+
+@blueprint.route('/create_script_<script_type>', methods=['POST'])
+@login_required
+def create_script(script_type):
+    if script_type in ('netmiko_config', 'napalm_config'):
+        # retrieve the raw script: we will use it as-is or update it
+        # depending on the type of script (jinja2-enabled template or not)
+        real_content = request.form['content']
+        if request.form['content_type'] != 'simple':
+            file = request.files['file']
+            filename = secure_filename(file.filename)
+            if allowed_file(filename, {'yaml', 'yml'}):
+                parameters = load(file.read())
+                template = Template(real_content)
+                real_content = template.render(**parameters)
+        script = {
+            'netmiko_config': NetmikoConfigScript,
+            'napalm_config': NapalmConfigScript
+        }[script_type](real_content, **request.form)
+    elif script_type == 'ansible_playbook':
+        playbook_name = request.form['playbook_name']
+        playbook_path = join(current_app.path_playbooks, playbook_name)
+        script = AnsibleScript(playbook_path, **request.form)
+    else:
+        script = {
+            'napalm_getters': NapalmGettersScript,
+            'file_transfer': FileTransferScript,
+        }[script_type](**request.form)
+    db.session.add(script)
+    db.session.commit()
+    return jsonify({})

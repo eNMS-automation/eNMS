@@ -17,6 +17,7 @@ from .forms import (
 )
 from passlib.hash import cisco_type7
 from .properties import user_properties, user_search_properties
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
@@ -64,8 +65,11 @@ def get_user(name):
 @blueprint.route('/process_user', methods=['POST'])
 @login_required
 def process_user():
-    user_factory(**request.form.to_dict())
-    return jsonify({})
+    try:
+        user_factory(**request.form.to_dict())
+        return jsonify('success')
+    except IntegrityError:
+        return jsonify('duplicate')
 
 
 @blueprint.route('/delete_<name>', methods=['POST'])
@@ -86,8 +90,6 @@ def create_account():
         return render_template('login/create_account.html', form=form)
     else:
         kwargs = request.form.to_dict()
-        password = kwargs.pop('password')
-        kwargs['password'] = cisco_type7.hash(password)
         user = User(**kwargs)
         db.session.add(user)
         db.session.commit()

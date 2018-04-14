@@ -3,7 +3,10 @@
 {% block title %} Object filtering {% endblock title %}
 
 {% block stylesheets %}
-  {{ super() }}
+    {{ super() }}
+    <style>
+
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -65,7 +68,7 @@
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                   <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="processData()">Save</button>
+                  <button type="button" class="btn btn-success" onclick="saveFilter()">Save</button>
                 </div>
               </div>
             </form>
@@ -82,7 +85,7 @@
   {{ super()}}
   <script>
 
-    function processData() {
+    function saveFilter() {
       var result = {};
       var fields = [{% for field in fields %} '{{ field }}', {% endfor %}];
       $.each($('#filter-form').serializeArray(), function() {
@@ -95,8 +98,14 @@
         url: `/objects/process_filter`,
         dataType: "json",
         data: $('#filter-form').serialize(),
-        success: function(){
-          updateFilters();
+        success: function(mode){
+          notification = mode == 'update' ? 'updated' : 'created'
+          if (mode == 'creation') {
+            $("#filters").append($("<option></option>")
+              .attr("value", name).text(name));
+            $("#filters").val(name);
+          }
+          alertify.notify(`Filter ${name} ${notification} !`, 'success', 5);
         }
       });
     }
@@ -108,27 +117,21 @@
         url: `/objects/filter_${this.value}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
-            $(`#${property}`).val(value);
+            if (property.includes("regex")) {
+              $(`#${property}`).prop('checked', value);
+            } else {
+              $(`#${property}`).val(value);
+            }
           }
         }
       });
     });
 
-    function updateFilters() {
-      $.ajax({
-        type: "POST",
-        url: `/objects/get_filters`,
-        dataType: "json",
-        success: function(filters){
-          console.log(filters);
-          $("#filters").empty();
-          $.each(filters, function(key, value) {
-            $("#filters").append($("<option></option>")
-              .attr("value", value).text(value));
-          });
-        }
-      });
-    }
-    updateFilters()
+    $("#filters").empty();
+    $.each({{filters|tojson|safe}}, function(key, value) {
+      $("#filters").append($("<option></option>")
+        .attr("value", value).text(value));
+    });
+
   </script>
 {% endblock javascripts %}

@@ -1,11 +1,15 @@
 from base.database import db, get_obj
 from base.helpers import str_dict
 from difflib import ndiff, unified_diff
-from flask import Blueprint, render_template, request
-from flask_login import login_required
+from flask import Blueprint, jsonify, render_template, request, session
+from flask_login import current_user, login_required
 from .forms import CompareForm
-from .models import Task
+from .models import Task, task_factory
+from objects.models import Node
+from scripts.models import Script
 from re import search, sub
+from views.forms import SchedulingForm
+from workflows.models import Workflow
 
 blueprint = Blueprint(
     'tasks_blueprint',
@@ -19,6 +23,9 @@ blueprint = Blueprint(
 @blueprint.route('/task_management', methods=['GET', 'POST'])
 @login_required
 def task_management():
+    scheduling_form = SchedulingForm(request.form)
+    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.workflows.choices = Workflow.choices()
     if 'compare' in request.form:
         n1, n2 = request.form['first_node'], request.form['second_node']
         t1, t2 = request.form['first_version'], request.form['second_version']
@@ -47,8 +54,38 @@ def task_management():
         'task_management.html',
         tasks=tasks,
         log_per_task=log_per_task,
-        form_per_task=form_per_task
+        form_per_task=form_per_task,
+        scheduling_form=scheduling_form
     )
+
+
+@blueprint.route('/scheduler', methods=['POST'])
+@login_required
+def scheduler():
+    data = request.form.to_dict()
+    selection = map(int, session['selection'])
+    scripts = request.form.getlist('scripts')
+    workflows = request.form.getlist('workflows')
+    data['scripts'] = [get_obj(Script, name=name) for name in scripts]
+    data['workflows'] = [get_obj(Workflow, name=name) for name in workflows]
+    data['nodes'] = [get_obj(Node, id=id) for id in selection]
+    data['user'] = current_user
+    task_factory(**data)
+    return jsonify({})
+
+
+@blueprint.route('/get_<name>', methods=['POST'])
+@login_required
+def get_task(name):
+    task = get_obj(Task, name=name)
+    task_properties = {
+        property: str(getattr(task, property))
+        for property in Task.properties
+    }
+    # prepare the data for javascript
+    for p in ('scripts', 'workflows'):
+        task_properties[p] = task_properties[p].replace(', ', ',')[1:-1].split(',')
+    return jsonify(task_properties)
 
 
 @blueprint.route('/delete_task', methods=['POST'])
@@ -80,6 +117,9 @@ def resume_task():
 @blueprint.route('/calendar')
 @login_required
 def calendar():
+    scheduling_form = SchedulingForm(request.form)
+    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.workflows.choices = Workflow.choices()
     tasks = {}
     for task in Task.query.all():
         # javascript dates range from 0 to 11, we must account for that by
@@ -94,5 +134,6 @@ def calendar():
         )
     return render_template(
         'calendar.html',
-        tasks=tasks
+        tasks=tasks,
+        scheduling_form=scheduling_form
     )

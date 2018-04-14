@@ -107,7 +107,7 @@
         dataType: "json",
         data: $(`#edit-${type}-form`).serialize(),
         success: function(msg){
-          $('.answer').html(msg);
+          alertify.notify('Script edited', 'success', 5);
         }
       });
       $(`#edit-${type}`).modal('hide');
@@ -119,7 +119,7 @@
         type: "POST",
         url: `/scripts/delete_${name}`,
         success: function(msg){
-          $('.answer').html(msg);
+          alertify.notify(`Script ${name} deleted`, 'error', 5);
         }
       });
     }

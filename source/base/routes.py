@@ -54,11 +54,6 @@ def get_counters(property, type):
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 
-@blueprint.route('/project')
-@flask_login.login_required
-def project():
-    return render_template('about/project.html')
-
 ## Errors
 
 

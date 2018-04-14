@@ -8,7 +8,7 @@
   <!-- menu profile quick info -->
   <div class="profile clearfix">
     <div class="profile_pic">
-      <img src="{{ url_for('users_blueprint.static', filename='images/afourmy.jpg') }}" alt="..." class="img-circle profile_img">
+      <img src="{{ url_for('admin_blueprint.static', filename='images/afourmy.jpg') }}" alt="..." class="img-circle profile_img">
     </div>
     <div class="profile_info">
       <span> Welcome, </span>
@@ -28,13 +28,15 @@
         <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logs">Logs</a></li>
           </ul>
         </li>
         
         <li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="/users/overview">Overview</a></li>
-            <li><a href="/users/tacacs_server">Configure TACACS server</a></li>
+            <li><a href="/admin/overview">Overview</a></li>
+            <li><a href="/admin/tacacs_server">Configure TACACS server</a></li>
+            <li><a href="/admin/syslog_server">Configure Syslog server</a></li>
           </ul>
         </li>
         
@@ -71,14 +73,7 @@
             <li><a href="/tasks/calendar">Calendar</a></li>
           </ul>
         </li>
-        
-        <li><a><i class="fa fa-users"></i> Logs <span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="/logs/overview">Overview</a></li>
-            <li><a href="/logs/syslog_server">Configure Syslog server</a></li>
-          </ul>
-        </li>
-        
+
       </ul>
     </div>
   </div>

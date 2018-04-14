@@ -4,13 +4,15 @@ disable(CRITICAL)
 urls = {
     '': (
         '/',
-        '/dashboard'
+        '/dashboard',
+        '/logs'
     ),
-    '/users': (
+    '/admin': (
         '/overview',
         '/login',
         '/create_account',
-        '/tacacs_server'
+        '/tacacs_server',
+        '/syslog_server'
     ),
     '/objects': (
         '/objects',
@@ -31,13 +33,9 @@ urls = {
         '/task_management',
         '/calendar'
     ),
-    '/logs': (
-        '/overview',
-        '/syslog_server'
-    )
 }
 
-free_access = {'/', '/users/login', '/users/create_account'}
+free_access = {'/', '/admin/login', '/admin/create_account'}
 
 
 def check_pages(*pages):
@@ -84,5 +82,5 @@ def test_urls(user_client):
             r = user_client.get(page_url, follow_redirects=True)
             assert r.status_code == 200
     # logout and test that we cannot access anything anymore
-    r = user_client.get('/users/logout', follow_redirects=True)
+    r = user_client.get('/admin/logout', follow_redirects=True)
     test_authentication(user_client)

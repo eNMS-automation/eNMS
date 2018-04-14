@@ -40,3 +40,8 @@ class TacacsServerForm(FlaskForm):
     password = PasswordField('Password')
     port = IntegerField('Port', default=49)
     timeout = IntegerField('Timeout', default=10)
+
+
+class SyslogServerForm(FlaskForm):
+    ip_address = TextField('IP address', default='0.0.0.0')
+    port = IntegerField('Port', default=514)

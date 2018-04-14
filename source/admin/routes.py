@@ -13,8 +13,10 @@ from .forms import (
     AddUser,
     CreateAccountForm,
     LoginForm,
-    TacacsServerForm
+    SyslogServerForm,
+    TacacsServerForm,
 )
+from .models import SyslogServer
 from passlib.hash import cisco_type7
 from .properties import user_properties, user_search_properties
 from sqlalchemy.exc import IntegrityError
@@ -27,9 +29,9 @@ import flask_login
 login_manager = flask_login.LoginManager()
 
 blueprint = Blueprint(
-    'users_blueprint',
+    'admin_blueprint',
     __name__,
-    url_prefix='/users',
+    url_prefix='/admin',
     template_folder='templates',
     static_folder='static'
 )
@@ -93,7 +95,7 @@ def create_account():
         user = User(**kwargs)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('users_blueprint.login'))
+        return redirect(url_for('admin_blueprint.login'))
 
 
 @blueprint.route('/login', methods=['GET', 'POST'])
@@ -143,7 +145,7 @@ def login():
 @login_required
 def logout():
     flask_login.logout_user()
-    return redirect(url_for('users_blueprint.login'))
+    return redirect(url_for('admin_blueprint.login'))
 
 
 @blueprint.route('/tacacs_server', methods=['GET', 'POST'])
@@ -156,4 +158,17 @@ def tacacs_server():
     return render_template(
         'tacacs_server.html',
         form=TacacsServerForm(request.form)
+    )
+
+
+@blueprint.route('/syslog_server', methods=['GET', 'POST'])
+@login_required
+def syslog_server():
+    if request.method == 'POST':
+        syslog_server = SyslogServer(**request.form)
+        db.session.add(syslog_server)
+        db.session.commit()
+    return render_template(
+        'syslog_server.html',
+        form=SyslogServerForm(request.form)
     )

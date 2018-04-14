@@ -15,11 +15,11 @@ path_parent = abspath(join(path_source, pardir))
 if path_source not in sys.path:
     sys.path.append(path_source)
 
+from admin.models import SyslogServer
 from base.database import db, create_database
-from logs.models import SyslogServer
 from scripts.models import NapalmActionScript
 from tasks.models import scheduler
-from users.routes import login_manager
+from admin.routes import login_manager
 
 
 def initialize_paths(app):
@@ -44,9 +44,8 @@ def register_blueprints(app):
         'scripts',
         'workflows',
         'tasks',
-        'users',
+        'admin',
         'views',
-        'logs',
     )
     for blueprint in blueprints:
         module = import_module('{}.routes'.format(blueprint))
@@ -110,7 +109,7 @@ def create_app(test=False):
     initialize_paths(app)
     register_extensions(app, test)
     register_blueprints(app)
-    from users.models import User
+    from admin.models import User
     configure_login_manager(app, User)
     configure_database(app)
     if not test:

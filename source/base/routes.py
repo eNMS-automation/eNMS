@@ -1,5 +1,13 @@
 from collections import Counter
-from flask import Blueprint, jsonify, render_template, redirect, url_for
+from flask import (
+    Blueprint,
+    jsonify,
+    render_template,
+    redirect,
+    request,
+    url_for
+)
+from flask_login import login_required
 from .properties import pretty_names, reverse_pretty_names
 
 import flask_login
@@ -11,18 +19,22 @@ blueprint = Blueprint(
     template_folder='templates'
 )
 
+from .database import db
+from .forms import LogFilteringForm
+from .models import Log
 from objects.models import Node, Link
 from .properties import type_to_diagram_properties
+from re import search
 from scripts.models import Script
 from tasks.models import Task
-from users.models import User
-from users.routes import login_manager
+from admin.models import User
+from admin.routes import login_manager
 from workflows.models import Workflow
 
 
 @blueprint.route('/')
 def site_root():
-    return redirect(url_for('users_blueprint.login'))
+    return redirect(url_for('admin_blueprint.login'))
 
 
 types = {
@@ -39,11 +51,42 @@ types = {
 @flask_login.login_required
 def dashboard():
     return render_template(
-        'dashboard/dashboard.html',
+        'template/dashboard.html',
         names=pretty_names,
         properties=type_to_diagram_properties,
         default_properties=dict.fromkeys(types, 'type'),
         counters={name: len(cls.query.all()) for name, cls in types.items()}
+    )
+
+
+@blueprint.route('/logs', methods=['GET', 'POST'])
+@login_required
+def logs():
+    form = LogFilteringForm(request.form)
+    if request.method == 'POST':
+        for log in Log.query.all():
+            log.visible = all(
+                # if the node-regex property is not in the request, the
+                # regex box is unticked and we only check that the values
+                # are equal.
+                str(value) == request.form[property]
+                if not property + 'regex' in request.form
+                # if it is ticked, we use re.search to check that the value
+                # of the node property matches the regular expression.
+                else search(request.form[property], str(value))
+                for property, value in log.__dict__.items()
+                # we consider only the properties in the form
+                # providing that the property field in the form is not empty
+                # (empty field <==> property ignored)
+                if property in request.form and request.form[property]
+            )
+    # the visible status was updated, we need to commit the change
+    db.session.commit()
+    return render_template(
+        'template/logs_overview.html',
+        form=form,
+        names=pretty_names,
+        logs=Log.visible_objects(),
     )
 
 

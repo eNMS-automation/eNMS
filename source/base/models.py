@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, ForeignKey, Integer, Table
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table
 
 
 class CustomBase(Base):
@@ -18,6 +18,20 @@ class CustomBase(Base):
     @classmethod
     def visible_objects(cls):
         return (obj for obj in cls.query.all() if obj.visible)
+
+
+class Log(CustomBase):
+
+    __tablename__ = 'Log'
+
+    id = Column(Integer, primary_key=True)
+    source = Column(String)
+    content = Column(String)
+    visible = Column(Boolean, default=True)
+
+    def __init__(self, source, content):
+        self.source = source
+        self.content = content
 
 
 task_node_table = Table(

@@ -1,10 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, IntegerField, TextField
-
-
-class SyslogServerForm(FlaskForm):
-    ip_address = TextField('IP address', default='0.0.0.0')
-    port = IntegerField('Port', default=514)
+from wtforms import BooleanField, TextField
 
 
 def configure_form(cls):

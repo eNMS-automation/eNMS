@@ -107,6 +107,7 @@ def configuration():
 @blueprint.route('/create_script_<script_type>', methods=['POST'])
 @login_required
 def create_script(script_type):
+    print(request.form)
     if script_type in ('netmiko_config', 'napalm_config'):
         # retrieve the raw script: we will use it as-is or update it
         # depending on the type of script (jinja2-enabled template or not)

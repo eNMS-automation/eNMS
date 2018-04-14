@@ -1,15 +1,6 @@
-try:
-    from ansible.parsing.dataloader import DataLoader
-    from ansible.vars.manager import VariableManager
-    from ansible.inventory.manager import InventoryManager
-    from ansible.executor.playbook_executor import PlaybookExecutor
-except Exception:
-    import warnings
-    warnings.warn('ansible import failed: ansible feature deactivated')
 from base.database import db, get_obj
 from base.helpers import str_dict
 from base.models import script_workflow_table, task_script_table, CustomBase
-from collections import namedtuple
 from napalm import get_network_driver
 from netmiko import ConnectHandler
 from passlib.hash import cisco_type7
@@ -17,7 +8,6 @@ from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from subprocess import check_output
-from tempfile import NamedTemporaryFile
 
 
 class Script(CustomBase):

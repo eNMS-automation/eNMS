@@ -59,35 +59,38 @@ def dashboard():
     )
 
 
-@blueprint.route('/logs', methods=['GET', 'POST'])
+@blueprint.route('/logs')
 @login_required
 def logs():
     form = LogFilteringForm(request.form)
-    if request.method == 'POST':
-        for log in Log.query.all():
-            log.visible = all(
-                # if the node-regex property is not in the request, the
-                # regex box is unticked and we only check that the values
-                # are equal.
-                str(value) == request.form[property]
-                if not property + 'regex' in request.form
-                # if it is ticked, we use re.search to check that the value
-                # of the node property matches the regular expression.
-                else search(request.form[property], str(value))
-                for property, value in log.__dict__.items()
-                # we consider only the properties in the form
-                # providing that the property field in the form is not empty
-                # (empty field <==> property ignored)
-                if property in request.form and request.form[property]
-            )
-    # the visible status was updated, we need to commit the change
-    db.session.commit()
     return render_template(
         'template/logs_overview.html',
         form=form,
         names=pretty_names,
-        logs=Log.visible_objects(),
+        logs=Log.query.all(),
     )
+
+
+@blueprint.route('/filter_logs', methods=['POST'])
+@flask_login.login_required
+def filter_logs():
+    logs = [log.get_properties() for log in Log.query.all() if all(
+        # if the node-regex property is not in the request, the
+        # regex box is unticked and we only check that the values
+        # are equal.
+        str(value) == request.form[property]
+        if not property + 'regex' in request.form
+        # if it is ticked, we use re.search to check that the value
+        # of the node property matches the regular expression.
+        else search(request.form[property], str(value))
+        for property, value in log.__dict__.items()
+        # we consider only the properties in the form
+        # providing that the property field in the form is not empty
+        # (empty field <==> property ignored)
+        if property in request.form and request.form[property]
+    )]
+    print(logs)
+    return jsonify(logs)
 
 
 @blueprint.route('/<property>_<type>', methods=['POST'])

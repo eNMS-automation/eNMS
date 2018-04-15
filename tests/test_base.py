@@ -8,7 +8,7 @@ urls = {
         '/logs'
     ),
     '/admin': (
-        '/overview',
+        '/user_management',
         '/login',
         '/create_account',
         '/tacacs_server',

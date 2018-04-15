@@ -90,8 +90,7 @@ def configure_syslog():
         syslog_server = db.session.query(SyslogServer).one()
         syslog_server.start()
     except Exception as e:
-        import warnings
-        warnings.warn(str(e))
+        pass
 
 
 def configure_logs(app):

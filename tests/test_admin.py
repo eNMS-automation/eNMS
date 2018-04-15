@@ -26,5 +26,5 @@ def test_tacacs_configuration(user_client):
         'port': '49',
         'timeout': '10'
     }
-    user_client.post('/admin/tacacs_server', data=tacacs_server)
+    user_client.post('/admin/save_tacacs_server', data=tacacs_server)
     assert len(TacacsServer.query.all()) == 1

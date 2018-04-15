@@ -116,6 +116,7 @@
             edges.add(data);
           }
           network.addEdgeMode();
+          saveWorkflow()
         }
       }
     };
@@ -161,26 +162,34 @@
         })
         $('#add-script').modal('hide');
       }
+      saveWorkflow()
+      alertify.notify("Scripts successfully added to the workflow", 'success', 5);
     }
 
     function deleteSelection() {
       network.deleteSelected()
+      saveWorkflow()
+      alertify.notify("Selected objects deleted", 'success', 5);
     }
 
     function switchMode(mode) {
       if (mode == "success" || mode == "failure") {
-        console.log(mode)
         edge_type = mode;
         network.addEdgeMode();
+        alertify.notify(`Mode: creation of ${mode} edge`, 'success', 5);
       } else {
         network.addNodeMode();
+        alertify.notify("Mode: node motion", 'success', 5);
       }
     }
+
 
     var start = null;
     function startScript() {
       start = nodes.get(network.getSelectedNodes()[0]);
       nodes.update({id: start.id, color: "green"});
+      alertify.notify(`Script ${start.label} set as start`, 'success', 5);
+      saveWorkflow()
     }
 
     function saveWorkflow() {
@@ -195,7 +204,7 @@
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify(ajax_data, null, '\t'),
         success: function(msg){
-            $('.answer').html(msg);
+          alertify.notify("Workflow saved", 'success', 5);
         }
       });
     }
@@ -205,8 +214,8 @@
         type: "POST",
         url: "/workflows/run_" + "{{ workflow.name }}",
         contentType: 'application/json;charset=UTF-8',
-        success: function(msg){
-            $('.answer').html(msg);
+        success: function(){
+          alertify.notify("Workflow successfully started", 'success', 5);
         }
       });
     }

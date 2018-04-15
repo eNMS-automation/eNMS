@@ -35,6 +35,7 @@ def workflow_manager(workflow):
     form = AddScriptForm(request.form)
     form.scripts.choices = Script.choices()
     workflow = get_obj(Workflow, name=workflow)
+    print(workflow.__dict__)
     return render_template(
         'workflow_editor.html',
         form=form,

@@ -62,10 +62,9 @@ def objects():
 @blueprint.route('/object_filtering')
 @login_required
 def filter_objects():
-    form = FilteringForm(request.form)
     return render_template(
         'object_filtering.html',
-        form=form,
+        form=FilteringForm(request.form),
         names=pretty_names,
         filters=[f.name for f in Filter.query.all()]
     )

@@ -34,6 +34,8 @@ blueprint = Blueprint(
 
 styles = create_styles(blueprint.root_path)
 
+## Template rendering
+
 
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
@@ -88,6 +90,9 @@ def view(view_type):
             ])
             for obj in Link.query.all()
         })
+
+
+## AJAX calls
 
 
 @blueprint.route('/connect_to_<name>', methods=['POST'])

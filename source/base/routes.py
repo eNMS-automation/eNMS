@@ -30,12 +30,6 @@ from admin.models import User
 from admin.routes import login_manager
 from workflows.models import Workflow
 
-
-@blueprint.route('/')
-def site_root():
-    return redirect(url_for('admin_blueprint.login'))
-
-
 types = {
     'node': Node,
     'link': Link,
@@ -44,6 +38,13 @@ types = {
     'workflow': Workflow,
     'task': Task
 }
+
+## Template rendering
+
+
+@blueprint.route('/')
+def site_root():
+    return redirect(url_for('admin_blueprint.login'))
 
 
 @blueprint.route('/dashboard')
@@ -68,6 +69,9 @@ def logs():
         names=pretty_names,
         logs=Log.query.all(),
     )
+
+
+## AJAX calls
 
 
 @blueprint.route('/filter_logs', methods=['POST'])

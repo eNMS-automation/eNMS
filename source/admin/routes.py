@@ -145,7 +145,7 @@ def syslog_server():
     )
 
 
-## AJAX call
+## AJAX calls
 
 
 @blueprint.route('/get_<name>', methods=['POST'])

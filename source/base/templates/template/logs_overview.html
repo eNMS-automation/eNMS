@@ -13,7 +13,6 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content" style="height:550px;">
-          
             <div role="tabpanel" data-example-id="togglable-tabs">
               <ul class="nav nav-tabs bar_tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#logs" role="tab" data-toggle="tab" aria-expanded="true">Logs</a>
@@ -23,7 +22,7 @@
               </ul>
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade active in" id="logs">
-                  <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <table id="log-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
                         {% for property in form.properties %}
@@ -83,4 +82,7 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+  $('#log-table').DataTable();
+  </script>
 {% endblock javascripts %}

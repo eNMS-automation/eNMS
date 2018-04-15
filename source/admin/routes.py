@@ -38,8 +38,10 @@ blueprint = Blueprint(
 from base.database import db
 from .models import User, user_factory, TacacsServer
 
+## Template rendering
 
-@blueprint.route('/overview')
+
+@blueprint.route('/user_management')
 @login_required
 def users():
     form = AddUser(request.form)
@@ -50,36 +52,6 @@ def users():
         users=User.query.all(),
         form=form
     )
-
-
-@blueprint.route('/get_<name>', methods=['POST'])
-@login_required
-def get_user(name):
-    user = get_obj(User, name=name)
-    properties = {
-        property: str(getattr(user, property))
-        for property in user_properties
-    }
-    return jsonify(properties)
-
-
-@blueprint.route('/process_user', methods=['POST'])
-@login_required
-def process_user():
-    try:
-        user_factory(**request.form.to_dict())
-        return jsonify('success')
-    except IntegrityError:
-        return jsonify('duplicate')
-
-
-@blueprint.route('/delete_<name>', methods=['POST'])
-@login_required
-def delete_user(name):
-    user = get_obj(User, name=name)
-    db.session.delete(user)
-    db.session.commit()
-    return jsonify({})
 
 
 @blueprint.route('/create_account', methods=['GET', 'POST'])
@@ -154,15 +126,6 @@ def tacacs_server():
     )
 
 
-@blueprint.route('/save_tacacs_server', methods=['POST'])
-@login_required
-def save_tacacs_server():
-    tacacs_server = TacacsServer(**request.form)
-    db.session.add(tacacs_server)
-    db.session.commit()
-    return jsonify({})
-
-
 @blueprint.route('/syslog_server')
 @login_required
 def syslog_server():
@@ -170,6 +133,48 @@ def syslog_server():
         'syslog_server.html',
         form=SyslogServerForm(request.form)
     )
+
+
+## AJAX call
+
+
+@blueprint.route('/get_<name>', methods=['POST'])
+@login_required
+def get_user(name):
+    user = get_obj(User, name=name)
+    properties = {
+        property: str(getattr(user, property))
+        for property in user_properties
+    }
+    return jsonify(properties)
+
+
+@blueprint.route('/process_user', methods=['POST'])
+@login_required
+def process_user():
+    try:
+        user_factory(**request.form.to_dict())
+        return jsonify('success')
+    except IntegrityError:
+        return jsonify('duplicate')
+
+
+@blueprint.route('/delete_<name>', methods=['POST'])
+@login_required
+def delete_user(name):
+    user = get_obj(User, name=name)
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({})
+
+
+@blueprint.route('/save_tacacs_server', methods=['POST'])
+@login_required
+def save_tacacs_server():
+    tacacs_server = TacacsServer(**request.form)
+    db.session.add(tacacs_server)
+    db.session.commit()
+    return jsonify({})
 
 
 @blueprint.route('/save_syslog_server', methods=['POST'])

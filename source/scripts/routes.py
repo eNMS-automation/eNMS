@@ -34,7 +34,7 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route('/overview')
+@blueprint.route('/script_management')
 @login_required
 def scripts():
     type_to_form = {
@@ -45,7 +45,7 @@ def scripts():
         'ansible_playbook': AnsibleScriptForm(request.form)
     }
     return render_template(
-        'overview.html',
+        'script_management.html',
         fields=('name', 'type'),
         type_to_form=type_to_form,
         names=pretty_names,

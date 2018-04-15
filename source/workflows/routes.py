@@ -15,7 +15,7 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route('/overview', methods=['GET', 'POST'])
+@blueprint.route('/workflow_management', methods=['GET', 'POST'])
 @login_required
 def workflows():
     form = WorkflowCreationForm(request.form)

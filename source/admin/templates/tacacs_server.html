@@ -33,7 +33,7 @@
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                   <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="submit" class="btn btn-success">Save changes</button>
+                  <button type="button" class="btn btn-success" onclick="saveServer()">Save changes</button>
                 </div>
               </div>
 
@@ -49,4 +49,17 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+  function saveServer() {
+    $.ajax({
+      type: "POST",
+      url: "/admin/save_tacacs_server",
+      dataType: "json",
+      data: $('#edit-form').serialize(),
+      success: function() {
+        alertify.notify(`Tacacs server saved`, 'success', 5);
+      }
+    });
+  }
+  </script>
 {% endblock javascripts %}

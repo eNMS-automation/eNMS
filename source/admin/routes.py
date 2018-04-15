@@ -25,7 +25,6 @@ from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 import flask_login
 
-# start the login system
 login_manager = flask_login.LoginManager()
 
 blueprint = Blueprint(
@@ -81,8 +80,6 @@ def delete_user(name):
     db.session.delete(user)
     db.session.commit()
     return jsonify({})
-
-## Login & Registration
 
 
 @blueprint.route('/create_account', methods=['GET', 'POST'])
@@ -148,17 +145,22 @@ def logout():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@blueprint.route('/tacacs_server', methods=['GET', 'POST'])
+@blueprint.route('/tacacs_server')
 @login_required
 def tacacs_server():
-    if request.method == 'POST':
-        tacacs_server = TacacsServer(**request.form)
-        db.session.add(tacacs_server)
-        db.session.commit()
     return render_template(
         'tacacs_server.html',
         form=TacacsServerForm(request.form)
     )
+
+
+@blueprint.route('/save_tacacs_server', methods=['POST'])
+@login_required
+def save_tacacs_server():
+    tacacs_server = TacacsServer(**request.form)
+    db.session.add(tacacs_server)
+    db.session.commit()
+    return jsonify({})
 
 
 @blueprint.route('/syslog_server', methods=['GET', 'POST'])

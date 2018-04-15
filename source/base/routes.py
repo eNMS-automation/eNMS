@@ -19,7 +19,6 @@ blueprint = Blueprint(
     template_folder='templates'
 )
 
-from .database import db
 from .forms import LogFilteringForm
 from .models import Log
 from objects.models import Node, Link

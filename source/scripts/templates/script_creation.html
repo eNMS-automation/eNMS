@@ -32,11 +32,7 @@
                   <form id="netmiko_config-form" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
                     <div class="col-md-4 col-xs-12">
                       <div class="x_panel">
-                        <div class="x_title">
-                          <h3>Parameters</h3>
-                          <div class="clearfix"></div>
-                        </div>
-                          <div class="x_content">
+                        <div class="x_content">
                           <div class="form-group" style="height: 550px">
                             {% for field in netmiko_config_form if field.widget.input_type != 'hidden'  %}       
                               {% if field.name != 'content' %}
@@ -58,10 +54,6 @@
                     <!-- begin column -->
                     <div class="col-md-8 col-xs-12">
                       <div class="x_panel">
-                        <div class="x_title">
-                          <h3>Script</h3>
-                          <div class="clearfix"></div>
-                        </div>
                         <div class="x_content">
                           <div class="form-group" style="height: 550px">
                             {{ netmiko_config_form.content(class="form-control", rows='26') }}
@@ -76,10 +68,6 @@
                     <!-- begin column -->
                     <div class="col-md-4 col-xs-12">
                       <div class="x_panel">
-                        <div class="x_title">
-                          <h3>Parameters</h3>
-                          <div class="clearfix"></div>
-                        </div>
                         <div class="x_content">
                           <div class="form-group" style="height: 550px">
                             {% for field in napalm_config_form if field.widget.input_type != 'hidden'  %} 
@@ -105,10 +93,6 @@
                     <!-- begin column -->
                     <div class="col-md-8 col-xs-12">
                       <div class="x_panel">
-                        <div class="x_title">
-                          <h3>Script</h3>
-                          <div class="clearfix"></div>
-                        </div>
                         <div class="x_content">
                           <div class="form-group" style="height: 550px">
                             {{ napalm_config_form.content(class="form-control", rows='26') }}
@@ -124,10 +108,6 @@
                     <!-- begin column -->
                     <div class="col-md-12 col-xs-12">
                       <div class="x_panel">
-                        <div class="x_title">
-                          <h3>Parameters</h3>
-                          <div class="clearfix"></div>
-                        </div>
                         <div class="x_content">
                           <div class="form-group" style="height: 550px">
                             {% for field in napalm_getters_form if field.widget.input_type != 'hidden'  %}                  

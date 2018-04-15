@@ -22,7 +22,7 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route('/objects', methods=['GET', 'POST'])
+@blueprint.route('/object_management', methods=['GET', 'POST'])
 @login_required
 def objects():
     add_node_form = AddNode(request.form)
@@ -46,7 +46,7 @@ def objects():
                     object_factory(**kwargs)
                 db.session.commit()
     return render_template(
-        'objects_overview.html',
+        'object_management.html',
         names=pretty_names,
         node_fields=node_public_properties,
         nodes=Node.visible_objects(),

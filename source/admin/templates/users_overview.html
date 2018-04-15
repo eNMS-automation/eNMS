@@ -97,7 +97,7 @@
       $('#title').text('Edit user properties');
       $.ajax({
         type: "POST",
-        url: `/users/get_${name}`,
+        url: `/admin/get_${name}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
             $(`#${property}`).val(value);
@@ -129,7 +129,7 @@
 
       $.ajax({
         type: "POST",
-        url: `/users/process_user`,
+        url: `/admin/process_user`,
         dataType: "json",
         data: $('#edit-form').serialize(),
         success: function(result) {
@@ -153,7 +153,7 @@
       $(`#${name}`).remove();
       $.ajax({
         type: "POST",
-        url: `/users/delete_${name}`,
+        url: `/admin/delete_${name}`,
         success: function() {
           alertify.notify(`User ${name} deleted`, 'error', 5);
         }

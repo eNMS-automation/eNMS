@@ -75,6 +75,7 @@ class SyslogUDPHandler(BaseRequestHandler):
 
     def handle(self):
         data = bytes.decode(self.request[0].strip())
+        print(data)
         source, _ = self.client_address
         log = Log(source, str(data))
         db.session.add(log)

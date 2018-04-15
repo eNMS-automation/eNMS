@@ -163,14 +163,19 @@ def save_tacacs_server():
     return jsonify({})
 
 
-@blueprint.route('/syslog_server', methods=['GET', 'POST'])
+@blueprint.route('/syslog_server')
 @login_required
 def syslog_server():
-    if request.method == 'POST':
-        syslog_server = SyslogServer(**request.form)
-        db.session.add(syslog_server)
-        db.session.commit()
     return render_template(
         'syslog_server.html',
         form=SyslogServerForm(request.form)
     )
+
+
+@blueprint.route('/save_syslog_server', methods=['POST'])
+@login_required
+def save_syslog_server():
+    syslog_server = SyslogServer(**request.form)
+    db.session.add(syslog_server)
+    db.session.commit()
+    return jsonify({})

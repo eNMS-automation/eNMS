@@ -19,6 +19,8 @@ blueprint = Blueprint(
     static_folder='static'
 )
 
+## Template rendering
+
 
 @blueprint.route('/task_management', methods=['GET', 'POST'])
 @login_required
@@ -57,6 +59,34 @@ def task_management():
         form_per_task=form_per_task,
         scheduling_form=scheduling_form
     )
+
+
+@blueprint.route('/calendar')
+@login_required
+def calendar():
+    scheduling_form = SchedulingForm(request.form)
+    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.workflows.choices = Workflow.choices()
+    tasks = {}
+    for task in Task.query.all():
+        # javascript dates range from 0 to 11, we must account for that by
+        # substracting 1 to the month for the date to be properly displayed in
+        # the calendar
+        python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
+        month = '{:02}'.format((int(python_month) - 1) % 12)
+        tasks[task] = sub(
+            r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
+            r"\1, " + month + r", \3, \4, \5",
+            task.start_date
+        )
+    return render_template(
+        'calendar.html',
+        tasks=tasks,
+        scheduling_form=scheduling_form
+    )
+
+
+## AJAX calls
 
 
 @blueprint.route('/scheduler', methods=['POST'])
@@ -112,28 +142,3 @@ def resume_task():
     task = Task.query.filter_by(name=request.form['task_name']).first()
     task.resume_task()
     return task_management()
-
-
-@blueprint.route('/calendar')
-@login_required
-def calendar():
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.scripts.choices = Script.choices()
-    scheduling_form.workflows.choices = Workflow.choices()
-    tasks = {}
-    for task in Task.query.all():
-        # javascript dates range from 0 to 11, we must account for that by
-        # substracting 1 to the month for the date to be properly displayed in
-        # the calendar
-        python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
-        month = '{:02}'.format((int(python_month) - 1) % 12)
-        tasks[task] = sub(
-            r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
-            r"\1, " + month + r", \3, \4, \5",
-            task.start_date
-        )
-    return render_template(
-        'calendar.html',
-        tasks=tasks,
-        scheduling_form=scheduling_form
-    )

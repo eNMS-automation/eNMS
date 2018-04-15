@@ -33,6 +33,8 @@ blueprint = Blueprint(
     static_folder='static'
 )
 
+## Template rendering
+
 
 @blueprint.route('/script_management')
 @login_required
@@ -51,6 +53,23 @@ def scripts():
         names=pretty_names,
         scripts=Script.query.all()
     )
+
+
+@blueprint.route('/script_creation')
+@login_required
+def configuration():
+    return render_template(
+        'script_creation.html',
+        names=pretty_names,
+        netmiko_config_form=NetmikoConfigScriptForm(request.form),
+        napalm_config_form=NapalmConfigScriptForm(request.form),
+        napalm_getters_form=NapalmGettersForm(request.form),
+        file_transfer_form=FileTransferScriptForm(request.form),
+        ansible_form=AnsibleScriptForm(request.form)
+    )
+
+
+## AJAX calls
 
 
 @blueprint.route('/get_<script_type>_<name>', methods=['POST'])
@@ -83,25 +102,6 @@ def delete_object(name):
     db.session.delete(script)
     db.session.commit()
     return jsonify({})
-
-
-@blueprint.route('/script_creation', methods=['GET', 'POST'])
-@login_required
-def configuration():
-    netmiko_config_form = NetmikoConfigScriptForm(request.form)
-    napalm_config_form = NapalmConfigScriptForm(request.form)
-    napalm_getters_form = NapalmGettersForm(request.form)
-    file_transfer_form = FileTransferScriptForm(request.form)
-    ansible_form = AnsibleScriptForm(request.form)
-    return render_template(
-        'script_creation.html',
-        names=pretty_names,
-        netmiko_config_form=netmiko_config_form,
-        napalm_config_form=napalm_config_form,
-        napalm_getters_form=napalm_getters_form,
-        file_transfer_form=file_transfer_form,
-        ansible_form=ansible_form
-    )
 
 
 @blueprint.route('/create_script_<script_type>', methods=['POST'])

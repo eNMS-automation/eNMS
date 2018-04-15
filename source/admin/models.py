@@ -49,11 +49,13 @@ class TacacsServer(CustomBase):
     ip_address = Column(String(120), unique=True)
     password = Column(String(120), unique=True)
     port = Column(Integer)
+    timeout = Column(Integer)
 
     def __init__(self, **kwargs):
-        self.ip_address = str(kwargs['ip_address'][0])
-        self.password = str(cisco_type7.hash(''.join(kwargs['password'])))
-        self.port = int(''.join(kwargs['port']))
+        self.ip_address =kwargs['ip_address']
+        self.password = cisco_type7.hash(kwargs['password'])
+        self.port = int(kwargs['port'])
+        self.timeout = int(kwargs['timeout'])
 
     def __repr__(self):
         return self.ip_address
@@ -75,7 +77,6 @@ class SyslogUDPHandler(BaseRequestHandler):
 
     def handle(self):
         data = bytes.decode(self.request[0].strip())
-        print(data)
         source, _ = self.client_address
         log = Log(source, str(data))
         db.session.add(log)
@@ -91,8 +92,8 @@ class SyslogServer(CustomBase):
     port = Column(Integer)
 
     def __init__(self, **kwargs):
-        self.ip_address = str(kwargs['ip_address'][0])
-        self.port = int(''.join(kwargs['port']))
+        self.ip_address = kwargs['ip_address']
+        self.port = int(kwargs['port'])
         self.start()
 
     def __repr__(self):

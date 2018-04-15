@@ -52,7 +52,7 @@ class TacacsServer(CustomBase):
     timeout = Column(Integer)
 
     def __init__(self, **kwargs):
-        self.ip_address =kwargs['ip_address']
+        self.ip_address = kwargs['ip_address']
         self.password = cisco_type7.hash(kwargs['password'])
         self.port = int(kwargs['port'])
         self.timeout = int(kwargs['timeout'])

@@ -15,7 +15,7 @@ urls = {
         '/syslog_server'
     ),
     '/objects': (
-        '/objects',
+        '/object_management',
         '/object_filtering'
     ),
     '/views': (
@@ -23,11 +23,11 @@ urls = {
         '/logical_view',
     ),
     '/scripts': (
-        '/overview',
+        '/script_management',
         '/script_creation',
     ),
     '/workflows': (
-        '/overview',
+        '/workflow_management',
     ),
     '/tasks': (
         '/task_management',

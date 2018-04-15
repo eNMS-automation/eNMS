@@ -92,7 +92,7 @@ def test_manual_object_creation(user_client):
 def create_from_file(client, file):
     with open(join(path_projects, file), 'rb') as f:
         data = dict(add_nodes='', file=f)
-        client.post('/objects/objects', data=data)
+        client.post('/objects/object_management', data=data)
 
 
 @check_blueprints('', '/objects', '/views')

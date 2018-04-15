@@ -14,18 +14,35 @@ blueprint = Blueprint(
     static_folder='static'
 )
 
+## Template rendering
 
-@blueprint.route('/workflow_management', methods=['GET', 'POST'])
+
+@blueprint.route('/workflow_management')
 @login_required
 def workflows():
-    form = WorkflowCreationForm(request.form)
     return render_template(
         'workflow_management.html',
         names=pretty_names,
         fields=('name', 'description'),
         workflows=Workflow.query.all(),
-        form=form
+        form=WorkflowCreationForm(request.form)
     )
+
+
+@blueprint.route('/manage_<workflow>', methods=['GET', 'POST'])
+@login_required
+def workflow_manager(workflow):
+    form = AddScriptForm(request.form)
+    form.scripts.choices = Script.choices()
+    workflow = get_obj(Workflow, name=workflow)
+    return render_template(
+        'workflow_editor.html',
+        form=form,
+        workflow=workflow
+    )
+
+
+## AJAX calls
 
 
 @blueprint.route('/get_<name>', methods=['POST'])
@@ -55,19 +72,6 @@ def delete_workflow(name):
     db.session.delete(workflow)
     db.session.commit()
     return jsonify({})
-
-
-@blueprint.route('/manage_<workflow>', methods=['GET', 'POST'])
-@login_required
-def workflow_manager(workflow):
-    form = AddScriptForm(request.form)
-    form.scripts.choices = Script.choices()
-    workflow = get_obj(Workflow, name=workflow)
-    return render_template(
-        'workflow_editor.html',
-        form=form,
-        workflow=workflow
-    )
 
 
 @blueprint.route('/save_<workflow>', methods=['POST'])

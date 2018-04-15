@@ -21,6 +21,8 @@ blueprint = Blueprint(
     static_folder='static'
 )
 
+## Template rendering
+
 
 @blueprint.route('/object_management', methods=['GET', 'POST'])
 @login_required
@@ -55,6 +57,21 @@ def objects():
         add_node_form=add_node_form,
         add_link_form=add_link_form
     )
+
+
+@blueprint.route('/object_filtering')
+@login_required
+def filter_objects():
+    form = FilteringForm(request.form)
+    return render_template(
+        'object_filtering.html',
+        form=form,
+        names=pretty_names,
+        filters=[f.name for f in Filter.query.all()]
+    )
+
+
+## AJAX calls
 
 
 @blueprint.route('/get_<obj_type>_<name>', methods=['POST'])
@@ -114,15 +131,3 @@ def get_filtered_objects(name):
     filter = get_obj(Filter, name=name)
     objects = filter.filter_objects()
     return jsonify(objects)
-
-
-@blueprint.route('/object_filtering')
-@login_required
-def filter_objects():
-    form = FilteringForm(request.form)
-    return render_template(
-        'object_filtering.html',
-        form=form,
-        names=pretty_names,
-        filters=[f.name for f in Filter.query.all()]
-    )

@@ -22,7 +22,7 @@
               </ul>
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade active in" id="logs">
-                  <table id="log-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
                         {% for property in form.properties %}
@@ -30,7 +30,7 @@
                         {% endfor %}
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="log-body">
                       {% for log in logs %}
                         <tr>
                           {% for property in form.properties %}
@@ -42,13 +42,14 @@
                   </table>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="docs">
-                  <form data-parsley-validate class="form-horizontal form-label-left" method="post">
+                  <form id="form" data-parsley-validate class="form-horizontal form-label-left" method="post">
                     <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
                           {% for property in form.properties %}
                             <th>{{ names[property] }}</th>
                           {% endfor %}
+                          <th>Regex</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -65,7 +66,7 @@
                     <div class="form-group">
                       <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                         <button class="btn btn-primary" type="reset">Reset</button>
-                        <button type="submit" class="btn btn-success">Filter</button>
+                        <button type="button" class="btn btn-success" onclick="filterLogs()">Filter</button>
                       </div>
                     </div>
                   </form>
@@ -84,5 +85,25 @@
   {{ super()}}
   <script>
   $('#log-table').DataTable();
+
+  function filterLogs() {
+    $.ajax({
+      type: "POST",
+      url: "/filter_logs",
+      data: $('#form').serialize(),
+      success: function(logs) {
+        $("#log-body").empty();
+        for (i = 0; i < logs.length; i++) {
+          log = ['<tr>'];
+          for (j = 0; j < logs[i].length; j++) {
+            log.push(`<td>${logs[i][j]}</td>`);
+          }
+          log.push('</tr>');
+          $("#log-body").append(log.join(''));
+        }
+        alertify.notify(`Logs successfully filtered !`, 'success', 5);
+      }
+    });
+  }
   </script>
 {% endblock javascripts %}

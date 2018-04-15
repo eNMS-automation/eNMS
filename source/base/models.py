@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table
+from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
 
 class CustomBase(Base):

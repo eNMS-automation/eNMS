@@ -20,7 +20,11 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    {{ field(class="form-control", placeholder=field.label.text) }}
+                    {% if server %}
+                      {{ field(class="form-control", value=server[field.name]) }}
+                    {% else %}
+                      {{ field(class="form-control", placeholder=field.label.text) }}
+                    {% endif %}
                   </div><br><br><br>
                 {% endfor %}
               </div>

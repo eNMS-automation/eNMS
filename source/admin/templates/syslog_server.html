@@ -20,7 +20,11 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    {{ field(class="form-control", placeholder=field.label.text) }}
+                    {% if server %}
+                      {{ field(class="form-control", value=server[field.name]) }}
+                    {% else %}
+                      {{ field(class="form-control", placeholder=field.label.text) }}
+                    {% endif %}
                   </div><br><br><br>
                 {% endfor %}
               </div>
@@ -28,7 +32,7 @@
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                   <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="submit" class="btn btn-success">Save changes</button>
+                  <button type="button" class="btn btn-success" onclick="saveServer()">Save changes</button>
                 </div>
               </div>
             </form>
@@ -46,10 +50,10 @@
   function saveServer() {
     $.ajax({
       type: "POST",
-      url: "/admin/save_tacacs_server",
+      url: "/admin/save_syslog_server",
       data: $('#form').serialize(),
       success: function() {
-        alertify.notify(`Tacacs server saved`, 'success', 5);
+        alertify.notify(`Syslog server saved`, 'success', 5);
       }
     });
   }

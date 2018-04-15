@@ -120,18 +120,28 @@ def logout():
 @blueprint.route('/tacacs_server')
 @login_required
 def tacacs_server():
+    try:
+        server = db.session.query(TacacsServer).one()
+    except NoResultFound:
+        server = None
     return render_template(
         'tacacs_server.html',
-        form=TacacsServerForm(request.form)
+        form=TacacsServerForm(request.form),
+        server=server
     )
 
 
 @blueprint.route('/syslog_server')
 @login_required
 def syslog_server():
+    try:
+        server = db.session.query(SyslogServer).one()
+    except NoResultFound:
+        server = None
     return render_template(
         'syslog_server.html',
-        form=SyslogServerForm(request.form)
+        form=SyslogServerForm(request.form),
+        server=server
     )
 
 
@@ -171,7 +181,8 @@ def delete_user(name):
 @blueprint.route('/save_tacacs_server', methods=['POST'])
 @login_required
 def save_tacacs_server():
-    tacacs_server = TacacsServer(**request.form)
+    TacacsServer.query.delete()
+    tacacs_server = TacacsServer(**request.form.to_dict())
     db.session.add(tacacs_server)
     db.session.commit()
     return jsonify({})
@@ -180,7 +191,8 @@ def save_tacacs_server():
 @blueprint.route('/save_syslog_server', methods=['POST'])
 @login_required
 def save_syslog_server():
-    syslog_server = SyslogServer(**request.form)
+    SyslogServer.query.delete()
+    syslog_server = SyslogServer(**request.form.to_dict())
     db.session.add(syslog_server)
     db.session.commit()
     return jsonify({})

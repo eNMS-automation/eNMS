@@ -6,5 +6,4 @@ Objects
    :maxdepth: 1
 
    creation
-   deletion
    filtering

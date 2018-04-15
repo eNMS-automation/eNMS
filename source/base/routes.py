@@ -92,7 +92,6 @@ def filter_logs():
         # (empty field <==> property ignored)
         if property in request.form and request.form[property]
     )]
-    print(logs)
     return jsonify(logs)
 
 

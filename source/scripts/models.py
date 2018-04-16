@@ -145,6 +145,65 @@ class FileTransferScript(Script):
         results[node.name] = result
 
 
+class NetmikoValidationScript(Script):
+
+    __tablename__ = 'NetmikoValidationScript'
+
+    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    driver = Column(String)
+    command1 = Column(String)
+    command2 = Column(String)
+    command3 = Column(String)
+    pattern1 = Column(String)
+    pattern2 = Column(String)
+    pattern3 = Column(String)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'netmiko_validation',
+    }
+
+    def __init__(self, **data):
+        print(data)
+        name = data['name'][0]
+        self.driver = data['driver'][0]
+        for i in range(1, 4):
+            for property in ('command', 'pattern'):
+                setattr(self, property + str(i), data[property + str(i)][0])
+        super(NetmikoValidationScript, self).__init__(name)
+
+    def job(self, args):
+        task, node, results = args
+        success, outputs = True, {}
+        try:
+            netmiko_handler = ConnectHandler(
+                device_type=self.driver,
+                ip=node.ip_address,
+                username=task.user.name,
+                password=cisco_type7.decode(task.user.password),
+                secret=node.secret_password
+            )
+            print(netmiko_handler)
+            for i in range(1, 4):
+                command = getattr(self, 'command' + str(i))
+                if not command:
+                    continue
+                output = netmiko_handler.send_command(command)
+                pattern = getattr(self, 'pattern' + str(i))
+                result = 'Output: {}\n\nExpected pattern: {}'.format(output, pattern)
+                outputs[command] = result
+                if pattern not in output:
+                    success = False
+        except Exception as e:
+            results[node.name] = 'netmiko did not work because of {}'.format(e)
+            success = False
+        try:
+            netmiko_handler.disconnect()
+        except Exception:
+            pass
+        results[node.name] = str_dict(outputs)
+        return success
+
+
 class NapalmConfigScript(Script):
 
     __tablename__ = 'NapalmConfigScript'

@@ -103,6 +103,19 @@ class FileTransferScriptForm(ScriptForm):
     inline_transer = BooleanField()
 
 
+class NetmikoValidationForm(ScriptForm):
+    exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
+    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
+    drivers = [(driver, driver) for driver in netmiko_drivers]
+    driver = SelectField('Driver', choices=drivers)
+    command1 = TextField('Command 1')
+    command2 = TextField('Command 2')
+    command3 = TextField('Command 3')
+    pattern1 = TextField('Pattern 1')
+    pattern2 = TextField('Pattern 2')
+    pattern3 = TextField('Pattern 3')
+
+
 class AnsibleScriptForm(ScriptForm):
     name = TextField('Name')
     playbook_name = TextField('Playbook name')

@@ -23,6 +23,15 @@ file_transfer_properties = script_properties + (
     'direction'
 )
 
+netmiko_validation_properties = script_properties + (
+    'command1',
+    'command2',
+    'command3',
+    'pattern1',
+    'pattern2',
+    'pattern3'
+)
+
 napalm_getters_properties = script_properties + (
     'getters',
 )
@@ -35,6 +44,7 @@ type_to_properties = {
     'netmiko_config': netmiko_config_properties,
     'napalm_config': napalm_config_properties,
     'file_transfer': file_transfer_properties,
+    'netmiko_validation': netmiko_validation_properties,
     'napalm_getters': napalm_getters_properties,
     'ansible_playbook': ansible_playbook_properties
 }

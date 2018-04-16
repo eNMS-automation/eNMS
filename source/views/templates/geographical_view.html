@@ -58,38 +58,76 @@
 {% block content %}
 {% include 'gis_modals.html' %}
 {% include 'scheduling_modal.html' %}
-{% for type in ('node', 'link') %}
-  <div id="edit-{{ type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+
+  <div id="edit-link" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
-          <div class="modal-header">
+        <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
+            <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="title"></h4>
-          </div>
-          {% set form = add_node_form if type == 'node' else add_link_form %}
-          <form id="edit-{{ type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <h4 class="modal-title" id="title">Edit link properties</h4>
+        </div>
+        <form id="edit-link-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
           <div class="modal-body">
-              <div class="form-group" style="height: 450px">
-              {% for field in form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                  {{ field(id= type + '-' + field.name, class="form-control") }}
-                  </div><br><br>
-              {% endfor %}
-              </div>
+            <div class="form-group" style="height: 450px">
+            {% for field in add_link_form if field.widget.input_type != 'hidden'  %}
+              <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+              {{ field(id= 'link-' + field.name, class="form-control") }}
+              </div><br><br>
+            {% endfor %}
+            </div>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
-              <button type="button" class="btn btn-success" onclick="editObject('{{ type }}')">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
+            <button type="button" class="btn btn-success" onclick="editObject('link')">Submit</button>
           </div>
-          </form>
+        </form>
       </div>
-      </div>
+    </div>
   </div>
-{% endfor %}
+  <div id="edit-node" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div role="tabpanel" data-example-id="togglable-tabs">
+            <ul class="nav nav-tabs bar_tabs" role="tablist">
+              <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Node properties</a>
+              </li>
+              <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">Logs</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
+                <form id="edit-node-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                  <div class="modal-body">
+                    <div class="form-group" style="height: 450px">
+                    {% for field in add_node_form if field.widget.input_type != 'hidden'  %}
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                      {{ field(id= 'node-' + field.name, class="form-control") }}
+                      </div><br><br>
+                    {% endfor %}
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
+                    <button type="button" class="btn btn-success" onclick="editObject('node')">Submit</button>
+                  </div>
+                </form>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="napalm-config">
+                <pre id="logs"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -400,7 +438,6 @@
     }
 
     function exportToGoogleEarth() {
-      console.log("test");
       $.ajax({
         type: "POST",
         url: "/views/export_to_google_earth",
@@ -414,7 +451,6 @@
     }
 
     function showObjectModal(type, name) {
-      $('#title').text(`Edit ${type} properties`);
       $.ajax({
         type: "POST",
         url: `/objects/get_${type}_${name}`,
@@ -424,6 +460,16 @@
           }
         }
       });
+      if (type == "node") {
+        $.ajax({
+          type: "POST",
+          url: `/views/get_logs_${name}`,
+          success: function(logs){
+            console.log(logs);
+            $("#logs").text(logs);
+          }
+        });
+      }
       $(`#edit-${type}`).modal('show');
     }
 
@@ -444,5 +490,6 @@
       });
       $(`#edit-${type}`).modal('hide');
     }
+
 </script>
 {% endblock javascripts %}

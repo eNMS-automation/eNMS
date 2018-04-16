@@ -8,7 +8,8 @@ from .forms import (
     NapalmConfigScriptForm,
     NapalmGettersForm,
     NetmikoConfigScriptForm,
-    FileTransferScriptForm
+    FileTransferScriptForm,
+    NetmikoValidationForm
 )
 from jinja2 import Template
 from os.path import join
@@ -19,6 +20,7 @@ from .models import (
     NapalmConfigScript,
     NapalmGettersScript,
     NetmikoConfigScript,
+    NetmikoValidationScript,
     Script,
     script_factory
 )
@@ -44,6 +46,7 @@ def scripts():
         'napalm_config': NapalmConfigScriptForm(request.form),
         'napalm_getters': NapalmGettersForm(request.form),
         'file_transfer': FileTransferScriptForm(request.form),
+        'netmiko_validation': NetmikoValidationForm(request.form),
         'ansible_playbook': AnsibleScriptForm(request.form)
     }
     return render_template(
@@ -64,6 +67,7 @@ def configuration():
         netmiko_config_form=NetmikoConfigScriptForm(request.form),
         napalm_config_form=NapalmConfigScriptForm(request.form),
         napalm_getters_form=NapalmGettersForm(request.form),
+        netmiko_validation_form=NetmikoValidationForm(request.form),
         file_transfer_form=FileTransferScriptForm(request.form),
         ansible_form=AnsibleScriptForm(request.form)
     )
@@ -75,7 +79,6 @@ def configuration():
 @blueprint.route('/get_<script_type>_<name>', methods=['POST'])
 @login_required
 def get_script(script_type, name):
-    print(script_type, name)
     script = get_obj(Script, name=name)
     properties = type_to_properties[script_type]
     script_properties = {
@@ -131,6 +134,7 @@ def create_script(script_type):
         script = {
             'napalm_getters': NapalmGettersScript,
             'file_transfer': FileTransferScript,
+            'netmiko_validation': NetmikoValidationScript
         }[script_type](**request.form)
     db.session.add(script)
     db.session.commit()

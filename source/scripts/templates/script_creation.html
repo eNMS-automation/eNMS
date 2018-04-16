@@ -16,13 +16,15 @@
           <div class="x_content">
             <div role="tabpanel" data-example-id="togglable-tabs">
               <ul class="nav nav-tabs bar_tabs" role="tablist">
-                <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Netmiko Configuration</a>
+                <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Netmiko Config</a>
                 </li>
-                <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">NAPALM Configuration</a>
+                <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">NAPALM Config</a>
                 </li>
                 <li role="napalm-getters" class=""><a href="#napalm-getters" role="tab" data-toggle="tab" aria-expanded="false">NAPALM Getters</a>
                 </li>
                 <li role="netmiko-file-transfer" class=""><a href="#netmiko-file-transfer" role="tab" data-toggle="tab" aria-expanded="false">Netmiko File Transfer</a>
+                </li>
+                <li role="netmiko-validation" class=""><a href="#netmiko-validation" role="tab" data-toggle="tab" aria-expanded="false">Netmiko Validation</a>
                 </li>
                 <li role="ansible" class=""><a href="#ansible" role="tab" data-toggle="tab" aria-expanded="false">Ansible playbook</a>
                 </li>
@@ -127,6 +129,29 @@
                       </div>
                     </div>
                     <!-- end column -->
+                  </form>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="netmiko-validation">
+                  <form id="netmiko_validation-form" name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                    <div class="col-md-12 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_content">
+                          <div class="form-group" style="height: 650px">
+                            {% for field in netmiko_validation_form if field.widget.input_type != 'hidden'  %}                  
+                              <label>{{ field.label.text }}</label>
+                              <div class='form-group'>
+                                {{ field(class="form-control", placeholder=field.label.text) }}
+                              </div>
+                            {% endfor %}
+                            <div class="ln_solid"></div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                              <button class="btn btn-primary" type="reset">Reset</button>
+                              <button type="button" class="btn btn-success" onclick="createScript('netmiko_validation')">Create</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="netmiko-file-transfer">

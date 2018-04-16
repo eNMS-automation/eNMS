@@ -1,4 +1,5 @@
 from base.database import get_obj
+from base.models import Log
 from base.properties import pretty_names, type_to_public_properties
 from collections import OrderedDict
 from flask import (
@@ -147,3 +148,11 @@ def export_to_google_earth():
 def selection():
     session['selection'] = list(set(request.form.getlist('selection[]')))
     return jsonify({})
+
+
+@blueprint.route('/get_logs_<name>', methods=['POST'])
+@login_required
+def get_logs(name):
+    node = get_obj(Node, name=name)
+    node_logs = [l.content for l in Log.query.all() if l.source == node.ip_address]
+    return jsonify('\n'.join(node_logs))

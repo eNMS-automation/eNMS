@@ -4,106 +4,37 @@
 
 {% block stylesheets %}
   {{ super() }}
-
-<style>
-
-.node {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
-
-.node .selected {
-  stroke: black;
-}
-
-.link {
-  stroke: #999;
-}
-
-.brush .extent {
-  fill-opacity: .1;
-  stroke: #fff;
-  shape-rendering: crispEdges;
-}
-
-
+  <style>
   
+  .link {
+    stroke: #ccc;
+  }
+  
+  .selection {
+    fill: #ADD8E6;
+    stroke: #ADD8E6;
+    fill-opacity: 0.3;
+    stroke-opacity: 0.7;
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+  }
+  
+  .node text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font: 10px sans-serif;
+  }
+
   </style>
 {% endblock stylesheets %}
 
 {% block content %}
 {% include 'gis_modals.html' %}
 {% include 'scheduling_modal.html' %}
-
-  <div id="edit-link" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title" id="title">Edit link properties</h4>
-        </div>
-        <form id="edit-link-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-          <div class="modal-body">
-            <div class="form-group" style="height: 450px">
-            {% for field in add_link_form if field.widget.input_type != 'hidden'  %}
-              <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-              <div class="col-md-8 col-sm-8 col-xs-12">
-              {{ field(id= 'link-' + field.name, class="form-control") }}
-              </div><br><br>
-            {% endfor %}
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
-            <button type="button" class="btn btn-success" onclick="editObject('link')">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div id="edit-node" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div role="tabpanel" data-example-id="togglable-tabs">
-            <ul class="nav nav-tabs bar_tabs" role="tablist">
-              <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Node properties</a>
-              </li>
-              <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">Logs</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
-                <form id="edit-node-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-                  <div class="modal-body">
-                    <div class="form-group" style="height: 450px">
-                    {% for field in add_node_form if field.widget.input_type != 'hidden'  %}
-                      <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                      <div class="col-md-8 col-sm-8 col-xs-12">
-                      {{ field(id= 'node-' + field.name, class="form-control") }}
-                      </div><br><br>
-                    {% endfor %}
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
-                    <button type="button" class="btn btn-success" onclick="editObject('node')">Submit</button>
-                  </div>
-                </form>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="napalm-config">
-                <pre id="logs"></pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -174,236 +105,181 @@
                 ]
               };
 
-    var width = 960,
+              // selection function
+              function selectNode(d) {
+                // we stop the propagation up the DOM tree so that the 
+                // unselectAll event bound to the canvas is not triggered
+                d3.event.stopPropagation();
+                // add both the HTML and graph elements in the selected_nodes array
+                selected_nodes.push([this, d]);
+                d3.select(this)
+                  .select('image')
+                  .attr("xlink:href", d.selected_img);
+                sendSelection();
+              };
+              
+              function unselectAll() {
+                d3.event.preventDefault();
+                for (i = 0; i < selected_nodes.length; i++) {
+                  d3.select(selected_nodes[i][0])
+                    .select('image')
+                    .attr("xlink:href", selected_nodes[i][1].img);
+                }
+                selected_nodes = [];
+                sendSelection();
+              };
 
-    height = 500,
-    shiftKey, ctrlKey;
+              var div = d3.select("body").append("div")	
+                .attr("class", "tooltip")				
 
-    var nodeGraph = null;
-    var xScale = d3.scale.linear()
-    .domain([0,width]).range([0,width]);
-    var yScale = d3.scale.linear()
-    .domain([0,height]).range([0, height]);
+              var width = 960,
+                  height = 500
+              
+              var zoom = d3.behavior.zoom()
+                .scaleExtent([1, 50])
+                .on("zoom", zoomed);
+              
+              var svg = d3.select("#logical_view").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .on("contextmenu", unselectAll)
+                .call(zoom)
+                .on("mousedown.zoom", null);
 
-    var svg = d3.select("#logical_view")
-    .attr("tabindex", 1)
-    .on("keydown.brush", keydown)
-    .on("keyup.brush", keyup)
-    .each(function() { this.focus(); })
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+              
+              function rect(x, y, w, h) {
+                return "M"+[x,y]+" l"+[w,0]+" l"+[0,h]+" l"+[-w,0]+"z";
+              }
+              
+              var selection = svg.append("path")
+                .attr("class", "selection")
+                .attr("visibility", "hidden");
+              
+              var startSelection = function(start) {
+                selection.attr("d", rect(start[0], start[0], 0, 0))
+                  .attr("visibility", "visible");
+              };
+              
+              var moveSelection = function(start, moved) {
+                selection.attr("d", rect(start[0], start[1], moved[0] - start[0], moved[1] - start[1]));
+              };
+              
+              var endSelection = function(start, end) {
+                  var min_x = Math.min(start[0], end[0]);
+                      max_x = Math.max(start[0], end[0]);
+                      min_y = Math.min(start[1], end[1]);
+                      max_y = Math.max(start[1], end[1]);
+                  console.log(start, end, min_x, max_x, min_y, max_y);
+                selection.attr("visibility", "hidden");
+                // select all nodes in the rectangle
+                d3.selectAll('.node')  //here's how you get all the nodes
+                  .each(function(d) {                    
+                    if (min_x <= d.x && d.x <= max_x && min_y <= d.y && d.y <= max_y) {
+                      selected_nodes.push([this, d]);
+                      d3.select(this)
+                        .select('image')
+                        .attr("xlink:href", d.selected_img);
+                    }
+                  });
+                sendSelection();
+              };
+              
+              svg.on("mousedown", function() {
+                // same binding as leaflet: shift + left-click button for selection
+                if (!d3.event.shiftKey || ((d3.event.which !== 1) && (d3.event.button !== 1))) {
+                  return false;
+                }
+                
+                var subject = d3.select(window);
+                    parent = this.parentNode;
+                    start = d3.mouse(parent);
+                startSelection(start);
+                subject
+                  .on("mousemove.selection", function() {
+                    moveSelection(start, d3.mouse(parent));
+                  })
+                  .on("mouseup.selection", function() {
+                    endSelection(start, d3.mouse(parent));
+                    subject
+                      .on("mousemove.selection", null)
+                      .on("mouseup.selection", null);
+                  });
+              });
+              
+              svg.on("touchstart", function() {
+                var subject = d3.select(this);
+                    parent = this.parentNode;
+                    id = d3.event.changedTouches[0].identifier;
+                    start = d3.touch(parent, id)
+                    pos;
+                  startSelection(start);
+                  subject
+                    .on("touchmove."+id, function() {
+                      if (pos = d3.touch(parent, id)) {
+                        moveSelection(start, pos);
+                      }
+                    })
+                    .on("touchend."+id, function() {
+                      if (pos = d3.touch(parent, id)) {
+                        endSelection(start, pos);
+                        subject
+                          .on("touchmove."+id, null)
+                          .on("touchend."+id, null);
+                      }
+                    });
+              });
 
-    var zoomer = d3.behavior.zoom().
-        scaleExtent([0.1,10]).
-        x(xScale).
-        y(yScale).
-        on("zoom", redraw);
+              var force = d3.layout.force()
+                .gravity(0.2)
+                .distance(10)
+                .charge(-100)
+                .size([width, height]);
 
-    function redraw() {
-        vis.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
-    }
-
-    var brusher = d3.svg.brush()
-    .x(xScale)
-    .y(yScale)
-    .on("brushstart", function(d) {
-        node.each(function(d) { 
-            d.previouslySelected = shiftKey && d.selected; });
-    })
-    .on("brush", function() {
-        var extent = d3.event.target.extent();
-
-        node.classed("selected", function(d) {
-            return d.selected = d.previouslySelected ^
-            (extent[0][0] <= d.x && d.x < extent[1][0]
-             && extent[0][1] <= d.y && d.y < extent[1][1]);
-        });
-    })
-    .on("brushend", function() {
-        d3.event.target.clear();
-        d3.select(this).call(d3.event.target);
-    });
-
-    var svg_graph = svg.append('svg:g')
-    .call(zoomer)
-    //.call(brusher)
-
-    var rect = svg_graph.append('svg:rect')
-    .attr('width', width)
-    .attr('height', height)
-    .attr('fill', 'transparent')
-    //.attr('opacity', 0.5)
-    .attr('stroke', 'transparent')
-    .attr('stroke-width', 1)
-    //.attr("pointer-events", "all")
-    .attr("id", "zrect")
-
-    var brush = svg_graph.append("g")
-    .datum(function() { return {selected: false, previouslySelected: false}; })
-    .attr("class", "brush");
-
-    var vis = svg_graph.append("svg:g");
-
-    vis.attr('fill', 'red')
-    .attr('stroke', 'black')
-    .attr('stroke-width', 1)
-    .attr('opacity', 0.5)
-    .attr('id', 'vis')
-
-
-    brush.call(brusher)
-    .on("mousedown.brush", null)
-    .on("touchstart.brush", null) 
-    .on("touchmove.brush", null)
-    .on("touchend.brush", null); 
-
-    brush.select('.background').style('cursor', 'auto');
-
-    var link = vis.append("g")
-    .attr("class", "link")
-    .selectAll("line");
-
-    var node = vis.append("g")
-    .attr("class", "node")
-    .selectAll("circle");
-
-    function dragended(d) {
-        //d3.select(self).classed("dragging", false);
-        node.filter(function(d) { return d.selected; })
-        .each(function(d) { d.fixed &= ~6; })
-
-    }
-
-
-        nodeGraph = graph;
-
-        graph.links.forEach(function(d) {
-            d.source = graph.nodes[d.source];
-            d.target = graph.nodes[d.target];
-        });
-
-        link = link.data(graph.links).enter().append("line")
-        .attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-
-        var force = d3.layout.force()
-        .charge(-120)
-        .linkDistance(30)
-        .nodes(graph.nodes)
-        .links(graph.links)
-        .size([width, height])
-        .start();
-
-        function dragstarted(d) {
-            d3.event.sourceEvent.stopPropagation();
-            if (!d.selected && !shiftKey) {
-                // if this node isn't selected, then we have to unselect every other node
-                node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; });
-            }
-
-            d3.select(this).classed("selected", function(p) { d.previouslySelected = d.selected; return d.selected = true; });
-
-            node.filter(function(d) { return d.selected; })
-            .each(function(d) { d.fixed |= 2; })
-        }
-
-        function dragged(d) {
-            node.filter(function(d) { return d.selected; })
-            .each(function(d) { 
-                d.x += d3.event.dx;
-                d.y += d3.event.dy;
-
-                d.px += d3.event.dx;
-                d.py += d3.event.dy;
-            })
-
-            force.resume();
-        }
-        node = node.data(graph.nodes).enter().append("circle")
-        .attr("r", 4)
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .on("dblclick", function(d) { d3.event.stopPropagation(); })
-        .on("click", function(d) {
-            if (d3.event.defaultPrevented) return;
-
-            if (!shiftKey) {
-                //if the shift key isn't down, unselect everything
-                node.classed("selected", function(p) { return p.selected =  p.previouslySelected = false; })
-            }
-
-            // always select this node
-            d3.select(this).classed("selected", d.selected = !d.previouslySelected);
+              force
+                .nodes(graph.nodes)
+                .links(graph.links)
+                .start();
+              
+              var container = svg.append("g");
             
-            showObjectModal('node', d.name);
-        })
-        .on("mouseup", function(d) {
-            //if (d.selected && shiftKey) d3.select(this).classed("selected", d.selected = false);
-        })
-        .call(d3.behavior.drag()
-              .on("dragstart", dragstarted)
-              .on("drag", dragged)
-              .on("dragend", dragended))
+              var link = container.selectAll(".link")
+                .data(graph.links)
+                .enter().append("line")
+                .attr("class", "link");
+            
+              var node = container.selectAll(".node")
+                .data(graph.nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .call(force.drag)
+                .on("click", selectNode)
+                .on("dblclick", connectToDevice);
 
-        node.data(graph.nodes).enter().append("text")
-          .attr("dx", 12)
-          .attr("dy", ".35em")
-          .text(function(d) { return d.name });
+              function zoomed() {
+                container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+              }
+              
+              var images = node.append("image")
+                .attr("xlink:href", function(d) { return d.img; })
+                .attr("x", -8)
+                .attr("y", -8)
+                .attr("width", 16)
+                .attr("height", 16)
 
+              node.append("text")
+                .attr("dx", 12)
+                .attr("dy", ".35em")
+                .text(function(d) { return d.name });
 
-              function tick() {
-                  link.attr("x1", function(d) { return d.source.x; })
+              force.on("tick", function() {
+                link
+                  .attr("x1", function(d) { return d.source.x; })
                   .attr("y1", function(d) { return d.source.y; })
                   .attr("x2", function(d) { return d.target.x; })
                   .attr("y2", function(d) { return d.target.y; });
+                node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-                  node.attr('cx', function(d) { return d.x; })
-                  .attr('cy', function(d) { return d.y; });
-              };
-
-              force.on("tick", tick);
-
-
-
-
-    function keydown() {
-        shiftKey = d3.event.shiftKey || d3.event.metaKey;
-        ctrlKey = d3.event.ctrlKey;
-
-
-        if (shiftKey) {
-            svg_graph.call(zoomer)
-            .on("mousedown.zoom", null)
-            .on("touchstart.zoom", null)                                                                      
-            .on("touchmove.zoom", null)                                                                       
-            .on("touchend.zoom", null);                                                                       
-
-            //svg_graph.on('zoom', null);                                                                     
-            vis.selectAll('g.gnode')
-            .on('mousedown.drag', null);
-
-            brush.select('.background').style('cursor', 'crosshair')
-            brush.call(brusher);
-        }
-    }
-
-    function keyup() {
-        shiftKey = d3.event.shiftKey || d3.event.metaKey;
-        ctrlKey = d3.event.ctrlKey;
-
-        brush.call(brusher)
-        .on("mousedown.brush", null)
-        .on("touchstart.brush", null)                                                                      
-        .on("touchmove.brush", null)                                                                       
-        .on("touchend.brush", null);                                                                       
-
-        brush.select('.background').style('cursor', 'auto')
-        svg_graph.call(zoomer);
-        }
-        
+              });
 
             </script>
           </div>
@@ -442,21 +318,6 @@
       $('.buttonFinish').addClass('btn btn-default');
     }
 
-  function showModal(modal_name){
-    $(`#${modal_name}`).modal('show');
-    }
-
-    function connectToDevice(name) {
-      var name = $(`#node-name`).val();
-      $.ajax({
-        type: "POST",
-        url: `/views/connect_to_${name}`,
-        success: function(msg){
-          alertify.notify(`Connection to ${name}`, 'success', 5);
-        }
-      });
-    }
-
     function scheduleScript() {
       $.ajax({
         type: "POST",
@@ -468,47 +329,6 @@
         }
       });
       $("#scheduling").modal('hide');
-    }
-
-    function showObjectModal(type, name) {
-      $.ajax({
-        type: "POST",
-        url: `/objects/get_${type}_${name}`,
-        success: function(properties){
-          for (const [property, value] of Object.entries(properties)) {
-            $(`#${type}-${property}`).val(value);
-          }
-        }
-      });
-      if (type == "node") {
-        $.ajax({
-          type: "POST",
-          url: `/views/get_logs_${name}`,
-          success: function(logs){
-            console.log(logs);
-            $("#logs").text(logs);
-          }
-        });
-      }
-      $(`#edit-${type}`).modal('show');
-    }
-
-    var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
-    var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
-
-    function editObject(type) {
-      var fields = type == 'node' ? node_fields : link_fields
-      $.ajax({
-        type: "POST",
-        url: "/objects/edit_object",
-        dataType: "json",
-        data: $(`#edit-${type}-form`).serialize(),
-        success: function(msg){
-          var name = $(`#${type}-name`).val();
-          alertify.notify(`Object ${name} edited !`, 'success', 5);
-        }
-      });
-      $(`#edit-${type}`).modal('hide');
     }
   </script>
 {% endblock javascripts %}

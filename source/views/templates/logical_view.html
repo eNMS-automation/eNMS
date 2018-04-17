@@ -35,6 +35,76 @@
 {% block content %}
 {% include 'gis_modals.html' %}
 {% include 'scheduling_modal.html' %}
+
+  <div id="edit-link" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="title">Edit link properties</h4>
+        </div>
+        <form id="edit-link-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <div class="modal-body">
+            <div class="form-group" style="height: 450px">
+            {% for field in add_link_form if field.widget.input_type != 'hidden'  %}
+              <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+              {{ field(id= 'link-' + field.name, class="form-control") }}
+              </div><br><br>
+            {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
+            <button type="button" class="btn btn-success" onclick="editObject('link')">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="edit-node" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div role="tabpanel" data-example-id="togglable-tabs">
+            <ul class="nav nav-tabs bar_tabs" role="tablist">
+              <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Node properties</a>
+              </li>
+              <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">Logs</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
+                <form id="edit-node-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                  <div class="modal-body">
+                    <div class="form-group" style="height: 450px">
+                    {% for field in add_node_form if field.widget.input_type != 'hidden'  %}
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                      {{ field(id= 'node-' + field.name, class="form-control") }}
+                      </div><br><br>
+                    {% endfor %}
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="connectToDevice()">Connect</button>
+                    <button type="button" class="btn btn-success" onclick="editObject('node')">Submit</button>
+                  </div>
+                </form>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="napalm-config">
+                <pre id="logs"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -116,6 +186,7 @@
                   .select('image')
                   .attr("xlink:href", d.selected_img);
                 sendSelection();
+                showObjectModal('node', d.name);
               };
               
               function unselectAll() {
@@ -318,6 +389,21 @@
       $('.buttonFinish').addClass('btn btn-default');
     }
 
+  function showModal(modal_name){
+    $(`#${modal_name}`).modal('show');
+    }
+
+    function connectToDevice(name) {
+      var name = $(`#node-name`).val();
+      $.ajax({
+        type: "POST",
+        url: `/views/connect_to_${name}`,
+        success: function(msg){
+          alertify.notify(`Connection to ${name}`, 'success', 5);
+        }
+      });
+    }
+
     function scheduleScript() {
       $.ajax({
         type: "POST",
@@ -330,5 +416,47 @@
       });
       $("#scheduling").modal('hide');
     }
+
+    function showObjectModal(type, name) {
+      $.ajax({
+        type: "POST",
+        url: `/objects/get_${type}_${name}`,
+        success: function(properties){
+          for (const [property, value] of Object.entries(properties)) {
+            $(`#${type}-${property}`).val(value);
+          }
+        }
+      });
+      if (type == "node") {
+        $.ajax({
+          type: "POST",
+          url: `/views/get_logs_${name}`,
+          success: function(logs){
+            console.log(logs);
+            $("#logs").text(logs);
+          }
+        });
+      }
+      $(`#edit-${type}`).modal('show');
+    }
+
+    var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
+    var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
+
+    function editObject(type) {
+      var fields = type == 'node' ? node_fields : link_fields
+      $.ajax({
+        type: "POST",
+        url: "/objects/edit_object",
+        dataType: "json",
+        data: $(`#edit-${type}-form`).serialize(),
+        success: function(msg){
+          var name = $(`#${type}-name`).val();
+          alertify.notify(`Object ${name} edited !`, 'success', 5);
+        }
+      });
+      $(`#edit-${type}`).modal('hide');
+    }
+
   </script>
 {% endblock javascripts %}

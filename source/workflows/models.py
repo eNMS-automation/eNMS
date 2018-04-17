@@ -40,6 +40,8 @@ class Workflow(CustomBase):
     name = Column(String)
     description = Column(String)
     type = Column(String)
+    vendor = Column(String)
+    operating_system = Column(String)
     scripts = relationship(
         'Script',
         secondary=script_workflow_table,

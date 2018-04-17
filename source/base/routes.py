@@ -39,6 +39,15 @@ types = {
     'task': Task
 }
 
+default_properties = {
+    'node': 'vendor',
+    'link': 'location',
+    'user': 'access_rights',
+    'script': 'type',
+    'workflow': 'vendor',
+    'task': 'type'
+}
+
 ## Template rendering
 
 
@@ -54,7 +63,7 @@ def dashboard():
         'template/dashboard.html',
         names=pretty_names,
         properties=type_to_diagram_properties,
-        default_properties=dict.fromkeys(types, 'type'),
+        default_properties=default_properties,
         counters={name: len(cls.query.all()) for name, cls in types.items()}
     )
 

@@ -1,3 +1,16 @@
+from base.database import db
+from sqlalchemy import exc
+
+
+def integrity_rollback(function):
+    def wrapper(*a, **kw):
+        try:
+            function(*a, **kw)
+        except exc.IntegrityError as e:
+            db.session.rollback()
+    return wrapper
+
+
 def str_dict(input, depth=0):
     tab = '\t' * depth
     if isinstance(input, list):

@@ -179,4 +179,4 @@ def test_object_filtering(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/objects/process_filter', data=filter1)
     user_client.post('/objects/process_filter', data=filter2)
-    assert len(Filter.query.all()) == 2
+    assert len(Filter.query.all()) == 5

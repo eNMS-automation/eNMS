@@ -1,5 +1,5 @@
 from base.database import db, get_obj
-from base.helpers import str_dict
+from base.helpers import integrity_rollback, str_dict
 from base.models import script_workflow_table, task_script_table, CustomBase
 from napalm import get_network_driver
 from netmiko import ConnectHandler
@@ -368,3 +368,18 @@ def script_factory(**kwargs):
             setattr(script, property, value)
     db.session.add(script)
     db.session.commit()
+
+
+default_scripts = (
+    ('NAPALM Commit', 'commit_config'),
+    ('NAPALM Discard', 'discard_config'),
+    ('NAPALM Rollback', 'rollback')
+)
+
+
+@integrity_rollback
+def create_default_scripts():
+    for name, action in default_scripts:
+        script = NapalmActionScript(name, action)
+        db.session.add(script)
+        db.session.commit()

@@ -1,4 +1,5 @@
 from base.database import db, get_obj
+from base.helpers import integrity_rollback
 from base.models import task_node_table, CustomBase
 from base.properties import (
     link_common_properties,
@@ -464,7 +465,7 @@ class Filter(CustomBase):
 
     @initialize_properties
     def __init__(self, **kwargs):
-        pass
+        print(kwargs)
 
     def get_properties(self):
         result = {}
@@ -523,3 +524,16 @@ def filter_factory(**kwargs):
     db.session.add(obj)
     db.session.commit()
     return mode
+
+
+default_filters = (
+    {'name': 'All objects'},
+    {'name': 'Nodes only', 'link_name': '^$', 'link_name_regex': True},
+    {'name': 'Links only', 'node_name': '^$', 'node_name_regex': True}
+)
+
+
+@integrity_rollback
+def create_default_filters():
+    for filter in default_filters:
+        filter_factory(**filter)

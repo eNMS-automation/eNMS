@@ -167,6 +167,8 @@ def task_factory(**kwargs):
     task = get_obj(Task, name=kwargs['name'])
     if task:
         for property, value in kwargs.items():
+            if property in ('start_date', 'end_date'):
+                value = task.datetime_conversion(value)
             setattr(task, property, value)
     else:
         task = Task(**kwargs)

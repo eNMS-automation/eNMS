@@ -8,6 +8,72 @@
 
 {% block content %}
 {% include 'scheduling_modal.html' %}
+<div id="show-logs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="title"></h4>
+      </div>
+      <div class="modal-body">
+        <pre id="logs"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="compare-logs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Compare results</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <label>First node</label>
+            {{ compare_form.first_node(class="form-control") }}
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <label>First script</label>
+            {{ compare_form.first_script(class="form-control") }}
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <label>First version</label>
+            {{ compare_form.first_version(class="form-control") }}
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <label>Second node</label>
+            {{ compare_form.second_node(class="form-control") }}
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <label>Second script</label>
+            {{ compare_form.second_script(class="form-control") }}
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <label>Second version</label>
+            {{ compare_form.second_version(class="form-control") }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h2> Unified diff </h2>
+            {{ compare_form.unified_diff(class="form-control", rows=10) }}
+            <h2> Ndiff </h2>
+            {{ compare_form.ndiff(class="form-control", rows=10) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="right_col" role="main">
   <div class="row">
     <div class="col-md-12">
@@ -33,7 +99,7 @@
             </thead>
             <tbody>
               {% for task in tasks %}
-                <tr>
+                <tr id="{{ task.name }}">
                   <td><a>{{ task.name }}</a></td>
                   <td>{{ task.creation_time }}</td>
                   <td>{{ task.creator }}</td>
@@ -41,93 +107,29 @@
                     <button type="button" class="btn btn-success btn-xs">Active</button>
                   </td>
                   <td>
-                    <div class="modal fade logs-{{ task.id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                              <span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">Logs</h4>
-                          </div>
-                          <div class="modal-body">
-                            <pre> {{ log_per_task[task.name] }} </pre>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".logs-{{ task.id }}"><i class="fa fa-pencil">
-                      </i> Logs </a>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showTaskLogs('{{ task.name }}')">
+                      </i>Logs</a>
                     </button>
                   </td>
                   <td>
                     {% if task.recurrent %}
-                      <form name="compare" method="post">
-                        <div class="modal fade compare-{{ task.id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                  <span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel"> Compare </h4>
-                              </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>First node</label>
-                                    {{ form_per_task[task.name].first_node(class="form-control") }}
-                                  </div>
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>Second node</label>
-                                    {{ form_per_task[task.name].second_node(class="form-control") }}
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>First version</label>
-                                    {{ form_per_task[task.name].first_version(class="form-control") }}
-                                  </div>
-                                  <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label>Second version</label>
-                                    {{ form_per_task[task.name].second_version(class="form-control") }}
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button class="btn btn-default" style="display: none;"></button>
-                                <input type="hidden" name="task_name" value={{ task.name }} />
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" name="compare">Compare</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".compare-{{ task.id }}"><i class="fa fa-pencil"></i> Compare </a></button>
+                      <button type="button" class="btn btn-info btn-xs" onclick="compareTaskLogs('{{ task.name }}')">
+                        </i>Compare</a>
+                      </button>
                     {% endif %}
                   </td>
                   <td>
                     <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ task.name }}')">Edit</button>
                   </td>
                   <td>
-                    <form action="/tasks/delete_task" method='post'>
-                      <input type="hidden" name="task_name" value={{ task.name }} />
-                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
-                    </form>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteTask('{{ task.name }}')">Delete</button>
                   </td>
                   <td>
                     {% if task.frequency %}
                       {% if task.status == 'active' %}
-                        <form action="/tasks/pause_task" method='post'>
-                          <input type="hidden" name="task_name" value={{ task.name }} />
-                          <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Pause</button>
-                        </form>
+                        <button id="pause-resume" type="button" class="btn btn-danger btn-xs" onclick="pauseTask('{{ task.name }}')">Pause</button>
                       {% else %}
-                        <form action="/tasks/resume_task" method='post'>
-                          <input type="hidden" name="task_name" value={{ task.name }} />
-                          <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Resume</button>
-                        </form>
+                        <button id="pause-resume" type="button" class="btn btn-danger btn-xs" onclick="resumeTask('{{ task.name }}')">Resume</button>
                       {% endif %}
                     {% endif %}
                   </td>
@@ -190,6 +192,65 @@
       $('#scheduling').modal('show');
     }
 
+    function showTaskLogs(name) {
+      $.ajax({
+        type: "POST",
+        url: `/tasks/show_logs_${name}`,
+        dataType: 'json',
+        success: function(logs){
+          $("#logs").text(logs);
+        }
+      });
+      $(`#show-logs-modal`).modal('show');
+    }
+
+    function compareTaskLogs(name) {
+      $.ajax({
+        type: "POST",
+        url: `/tasks/compare_logs_${name}`,
+        dataType: 'json',
+        success: function(results){
+          window.task = name;
+          $("#first_version,#second_version,#first_node,#second_node,#first_script,#second_script").empty();
+          for (i = 0; i < results.versions.length; i++) {
+            value = results.versions[i];
+            $("#first_version,#second_version").append($("<option></option>")
+              .attr("value", value).text(value));
+          }
+          for (i = 0; i < results.nodes.length; i++) {
+            value = results.nodes[i];
+            $("#first_node,#second_node").append($("<option></option>")
+              .attr("value", value).text(value));
+          }
+          for (i = 0; i < results.scripts.length; i++) {
+            value = results.scripts[i];
+            $("#first_script,#second_script").append($("<option></option>")
+              .attr("value", value).text(value));
+          }
+        }
+      });
+      $('#compare-logs-modal').modal('show');
+    }
+
+    $("#first_version,#second_version,#first_node,#second_node,#first_script,#second_script").on('change', function() {
+      var v1 = $("#first_version").val()
+          v2 = $("#second_version").val()
+          n1 = $("#first_node").val()
+          n2 = $("#second_node").val();
+          s1 = $("#first_script").val()
+          s2 = $("#second_script").val();
+      $.ajax({
+        type: "POST",
+        url: `/tasks/get_compare_${window.task}_${v1}_${v2}_${n1}_${n2}_${s1}_${s2}`,
+        dataType: 'json',
+        success: function(diff){
+          //console.log(ndiff, unified_diff);
+          $("#ndiff").text(diff[0]);
+          $("#unified_diff").text(diff[1]);
+        }
+      });
+    });
+
     function scheduleScript() {
       $.ajax({
         type: "POST",
@@ -201,6 +262,39 @@
         }
       });
       $("#scheduling").modal('hide');
+    }
+
+    function deleteTask(name) {
+      $.ajax({
+        type: "POST",
+        url: `/tasks/delete_task_${name}`,
+        success: function() {
+          $(`#${name}`).remove();
+          alertify.notify('Task successfully deleted !', 'success', 5);
+        }
+      });
+    }
+
+    function pauseTask(name) {
+      $.ajax({
+        type: "POST",
+        url: `/tasks/pause_task_${name}`,
+        success: function() {
+          $("#pause-resume").attr("onclick", `resumeTask('${name}')`).text('Resume');
+          alertify.notify('Task paused !', 'success', 5);
+        }
+      });
+    }
+
+    function resumeTask(name) {
+      $.ajax({
+        type: "POST",
+        url: `/tasks/resume_task_${name}`,
+        success: function() {
+          $("#pause-resume").attr("onclick", `pauseTask('${name}')`).text('Pause');
+          alertify.notify('Task resumed !', 'success', 5);
+        }
+      });
     }
   </script>
 {% endblock javascripts %}

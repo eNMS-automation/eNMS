@@ -22,41 +22,17 @@ blueprint = Blueprint(
 ## Template rendering
 
 
-@blueprint.route('/task_management', methods=['GET', 'POST'])
+@blueprint.route('/task_management')
 @login_required
 def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.scripts.choices = Script.choices()
     scheduling_form.workflows.choices = Workflow.choices()
-    if 'compare' in request.form:
-        n1, n2 = request.form['first_node'], request.form['second_node']
-        t1, t2 = request.form['first_version'], request.form['second_version']
-        task = get_obj(Task, name=request.form['task_name'])
-        # get the two versions of the logs
-        v1 = str_dict(task.logs[t1][n1]).splitlines()
-        v2 = str_dict(task.logs[t2][n2]).splitlines()
-        return render_template(
-            'compare.html',
-            ndiff='\n'.join(ndiff(v1, v2)),
-            unified_diff='\n'.join(unified_diff(v1, v2)),
-        )
     tasks = Task.query.all()
-    form_per_task = {}
-    for task in filter(lambda t: t.recurrent, tasks):
-        form = CompareForm(request.form)
-        form.first_node.choices = [(i, i) for i in task.nodes]
-        form.second_node.choices = form.first_node.choices
-        versions = [(v, v) for v in tuple(task.logs)]
-        form.first_version.choices = form.second_version.choices = versions
-        form_per_task[task.name] = form
-    # task.logs is a dictionnary and we need to keep that way, but for properly
-    # outputtng it's content, we will use str_dict
-    log_per_task = {task.name: str_dict(task.logs) for task in tasks}
     return render_template(
         'task_management.html',
         tasks=tasks,
-        log_per_task=log_per_task,
-        form_per_task=form_per_task,
+        compare_form=CompareForm(request.form),
         scheduling_form=scheduling_form
     )
 
@@ -72,6 +48,7 @@ def calendar():
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar
+        print(task.start_date)
         python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
         month = '{:02}'.format((int(python_month) - 1) % 12)
         tasks[task] = sub(
@@ -118,27 +95,55 @@ def get_task(name):
     return jsonify(task_properties)
 
 
-@blueprint.route('/delete_task', methods=['POST'])
+@blueprint.route('/show_logs_<name>', methods=['POST'])
 @login_required
-def delete_task():
-    task = Task.query.filter_by(name=request.form['task_name']).first()
+def show_logs(name):
+    task = get_obj(Task, name=name)
+    return jsonify(str_dict(task.logs))
+
+
+@blueprint.route('/get_compare_<name>_<v1>_<v2>_<n1>_<n2>_<s1>_<s2>', methods=['POST'])
+@login_required
+def get_compare(name, v1, v2, n1, n2, s1, s2):
+    task = get_obj(Task, name=name)
+    res1 = str_dict(task.logs[v1][s1][n1]).splitlines()
+    res2 = str_dict(task.logs[v2][s2][n2]).splitlines()
+    return jsonify('\n'.join(ndiff(res1, res2)), '\n'.join(unified_diff(res1, res2)))
+
+
+@blueprint.route('/compare_logs_<name>', methods=['POST'])
+@login_required
+def compare_logs(name):
+    task = get_obj(Task, name=name)
+    results = {
+        'nodes': [node.name for node in task.nodes],
+        'scripts': [script.name for script in task.scripts],
+        'versions': list(task.logs)
+    }
+    return jsonify(results)
+
+
+@blueprint.route('/delete_task_<name>', methods=['POST'])
+@login_required
+def delete_task(name):
+    task = Task.query.filter_by(name=name).first()
     task.delete_task()
     db.session.delete(task)
     db.session.commit()
     return task_management()
 
 
-@blueprint.route('/pause_task', methods=['POST'])
+@blueprint.route('/pause_task_<name>', methods=['POST'])
 @login_required
-def pause_task():
-    task = Task.query.filter_by(name=request.form['task_name']).first()
+def pause_task(name):
+    task = Task.query.filter_by(name=name).first()
     task.pause_task()
     return task_management()
 
 
-@blueprint.route('/resume_task', methods=['POST'])
+@blueprint.route('/resume_task_<name>', methods=['POST'])
 @login_required
-def resume_task():
-    task = Task.query.filter_by(name=request.form['task_name']).first()
+def resume_task(name):
+    task = Task.query.filter_by(name=name).first()
     task.resume_task()
     return task_management()

@@ -114,6 +114,13 @@
 
             <form method="post">
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+                <div class="form-group">
+                  <select id="select-filters" class="form-control">
+                    {% for filter in filters %}
+                      <option>{{ filter.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
                 <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
                 <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Send script</button>
               </div>
@@ -159,6 +166,7 @@
                       "x": {{ obj.id }},
                       "y": {{ obj.id }},
                       "id": {{ name_to_id[obj.name] }},
+                      "real_id": {{ obj.id }},
                       "name": "{{ obj.name }}",
                       "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + obj.subtype + '.gif') }}",
                       "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + obj.subtype + '.gif') }}"
@@ -167,7 +175,8 @@
                 ],
                 "links":[  
                   {% for obj, properties in link_table.items() %}
-                    {  
+                    {
+                      "real_id": {{ obj.id }},
                       "source": {{ name_to_id[obj['source']['name']] }},
                       "target": {{ name_to_id[obj['destination']['name']] }}
                     },
@@ -389,6 +398,25 @@
       $('.buttonFinish').addClass('btn btn-default');
     }
 
+    // when a filter is selected, apply it
+    $('#select-filters').on('change', function() {
+      var filterName = this.value;
+      $.ajax({
+        type: "POST",
+        url: `/objects/${this.value}_filter_objects`,
+        dataType: "json",
+        success: function(objects){
+          node.style("visibility", function(d) {          
+              return objects['nodes'].includes(d.real_id) ? "visible" : "hidden";
+          });
+          link.style("visibility", function(d) {          
+              return objects['links'].includes(d.real_id) ? "visible" : "hidden";
+          });
+          alertify.notify(`Filter '${filterName}' applied`, 'success', 5);
+        }
+      });
+    });
+              
   function showModal(modal_name){
     $(`#${modal_name}`).modal('show');
     }
@@ -457,6 +485,5 @@
       });
       $(`#edit-${type}`).modal('hide');
     }
-
   </script>
 {% endblock javascripts %}

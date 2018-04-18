@@ -339,12 +339,12 @@
 
                 // when a filter is selected, apply it
                 $('#select-filters').on('change', function() {
+                  var filterName = this.value;
                   $.ajax({
                     type: "POST",
                     url: `/objects/${this.value}_filter_objects`,
                     dataType: "json",
                     success: function(objects){
-                      console.log(objects, markers_array);
                       for (i = 0; i < markers_array.length; i++) {
                         if (objects['nodes'].includes(markers_array[i].node_id)) {
                           markers_array[i].addTo(map);
@@ -352,6 +352,7 @@
                           markers_array[i].removeFrom(map);
                         }
                       }
+                      alertify.notify(`Filter '${filterName}' applied`, 'success', 5);
                     }
                   });
                 });

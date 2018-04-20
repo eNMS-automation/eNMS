@@ -43,11 +43,11 @@ napalm_actions = OrderedDict([
 
 class ScriptForm(FlaskForm):
     name = TextField('Name')
-    vendor = TextField('Vendor')
-    operating_system = TextField('Operating system')
 
 
 class ConfigScriptForm(ScriptForm):
+    vendor = TextField('Vendor')
+    operating_system = TextField('Operating system')
     content = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
     content_type_choices = (
@@ -83,7 +83,8 @@ class NapalmGettersForm(ScriptForm):
 
 
 class FileTransferScriptForm(ScriptForm):
-    name = TextField('Name')
+    vendor = TextField('Vendor')
+    operating_system = TextField('Operating system')
     driver_choices = (
         ('cisco_ios', 'Cisco IOS'),
         ('cisco_xe', 'Cisco IOS-XE'),
@@ -104,6 +105,8 @@ class FileTransferScriptForm(ScriptForm):
 
 
 class NetmikoValidationForm(ScriptForm):
+    vendor = TextField('Vendor')
+    operating_system = TextField('Operating system')
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
     netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
     drivers = [(driver, driver) for driver in netmiko_drivers]
@@ -117,5 +120,6 @@ class NetmikoValidationForm(ScriptForm):
 
 
 class AnsibleScriptForm(ScriptForm):
-    name = TextField('Name')
+    vendor = TextField('Vendor')
+    operating_system = TextField('Operating system')
     playbook_name = TextField('Playbook name')

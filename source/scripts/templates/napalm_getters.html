@@ -1,0 +1,24 @@
+<form id="napalm_getters-form"  data-parsley-validate class="form-horizontal form-label-left" method="post">
+  <!-- begin column -->
+  <div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <div class="form-group" style="height: 550px">
+          {% for field in form if field.widget.input_type != 'hidden'  %}                  
+            <label>{{ names[field.name] }}</label>
+            <div class='form-group'>
+              {{ field(id="napalm_getters-" + field.name, class="form-control required", placeholder=field.label.text, size=20) }}
+            </div>
+          {% endfor %}
+          
+          <div class="ln_solid"></div>
+          <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button id="napalm_getters-button" type="button" class="btn btn-success" onclick="createScript('napalm_getters')">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end column -->
+</form>

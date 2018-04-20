@@ -8,7 +8,6 @@
 
 {% block content %}
   <div class="right_col" role="main">
-
     <!-- begin row -->
     <div class="row">
       <div class="col-md-12 col-xs-12">
@@ -16,220 +15,21 @@
           <div class="x_content">
             <div role="tabpanel" data-example-id="togglable-tabs">
               <ul class="nav nav-tabs bar_tabs" role="tablist">
-                <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Netmiko Config</a>
-                </li>
-                <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">NAPALM Config</a>
-                </li>
-                <li role="napalm-getters" class=""><a href="#napalm-getters" role="tab" data-toggle="tab" aria-expanded="false">NAPALM Getters</a>
-                </li>
-                <li role="netmiko-file-transfer" class=""><a href="#netmiko-file-transfer" role="tab" data-toggle="tab" aria-expanded="false">Netmiko File Transfer</a>
-                </li>
-                <li role="netmiko-validation" class=""><a href="#netmiko-validation" role="tab" data-toggle="tab" aria-expanded="false">Netmiko Validation</a>
-                </li>
-                <li role="ansible" class=""><a href="#ansible" role="tab" data-toggle="tab" aria-expanded="false">Ansible playbook</a>
-                </li>
+                {% for script_type, script_name in type_to_name.items() %}
+                  {% set expanded = "true" if script_type == "netmiko_config" else "false" %}
+                  {% set active = "active" if script_type == "netmiko_config" else "" %}
+                  <li role="{{ script_type }}" class="{{ active }}"><a href="#{{ script_type }}" role="tab" data-toggle="tab" aria-expanded="{{ expanded }}">{{ script_name }}</a>
+                  </li>
+                {% endfor %}
               </ul>
               <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
-                  <form id="netmiko_config-form" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
-                    <div class="col-md-4 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                          <div class="form-group" style="height: 550px">
-                            {% for field in netmiko_config_form if field.widget.input_type != 'hidden'  %}       
-                              {% if field.name != 'content' %}
-                                <label>{{ names[field.name] }}</label>
-                                <div class='form-group'>
-                                  {{ field(class="form-control", placeholder=field.label.text) }}
-                                </div>
-                              {% endif %}
-                            {% endfor %}
-                            <div class="ln_solid"></div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
-                              <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="button" class="btn btn-success" onclick="createScript('netmiko_config')">Create</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- begin column -->
-                    <div class="col-md-8 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                          <div class="form-group" style="height: 550px">
-                            {{ netmiko_config_form.content(class="form-control", rows='26') }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="napalm-config">
-                  <form id="napalm_config-form"  data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
-                    <!-- begin column -->
-                    <div class="col-md-4 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                          <div class="form-group" style="height: 550px">
-                            {% for field in napalm_config_form if field.widget.input_type != 'hidden'  %} 
-                              {% if field.name != 'content' %}
-                                <label>{{ names[field.name] }}</label>
-                                <div class='form-group'>
-                                  {{ field(class="form-control", placeholder=field.label.text) }}
-                                </div>
-                              {% endif %}
-                            {% endfor %}
-                            
-                            <div class="ln_solid"></div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
-                              <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="button" class="btn btn-success" onclick="createScript('napalm_config')">Create</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- end column -->
-            
-                    <!-- begin column -->
-                    <div class="col-md-8 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                          <div class="form-group" style="height: 550px">
-                            {{ napalm_config_form.content(class="form-control", rows='26') }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- end column -->
-                  </form>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="napalm-getters">
-                  <form id="napalm_getters-form"  data-parsley-validate class="form-horizontal form-label-left" method="post">
-                    <!-- begin column -->
-                    <div class="col-md-12 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                          <div class="form-group" style="height: 550px">
-                            {% for field in napalm_getters_form if field.widget.input_type != 'hidden'  %}                  
-                              <label>{{ names[field.name] }}</label>
-                              <div class='form-group'>
-                                {{ field(class="form-control", placeholder=field.label.text, size=20) }}
-                              </div>
-                            {% endfor %}
-                            
-                            <div class="ln_solid"></div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
-                              <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="button" class="btn btn-success" onclick="createScript('napalm_getters')">Create</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- end column -->
-                  </form>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="netmiko-validation">
-                  <form id="netmiko_validation-form" name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
-                    <div class="col-md-12 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                          <div class="form-group" style="height: 650px">
-                            {% for field in netmiko_validation_form if field.widget.input_type != 'hidden'  %}                  
-                              <label>{{ field.label.text }}</label>
-                              <div class='form-group'>
-                                {{ field(class="form-control", placeholder=field.label.text) }}
-                              </div>
-                            {% endfor %}
-                            <div class="ln_solid"></div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                              <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="button" class="btn btn-success" onclick="createScript('netmiko_validation')">Create</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="netmiko-file-transfer">
-                  <form id="file_transfer-form" name="send" data-parsley-validate class="form-horizontal form-label-left" method="post">
-                    <div class="col-md-12 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                          <div class="form-group" style="height: 650px">
-                            <label>Name</label>
-                            <div class='form-group'>
-                                {{ file_transfer_form.name(class="form-control", required=true) }}
-                            </div>
-            
-                            <label>Driver</label>
-                            <div class='form-group'>
-                                {{ file_transfer_form.driver(class="form-control") }}
-                            </div>
-            
-                            <label>Source file</label>
-                            <div class='form-group'>
-                                {{ file_transfer_form.source_file(class="form-control", placeholder="path/to/source", required=True) }}
-                            </div>
-            
-                            <label>Destination file</label>
-                            <div class='form-group'>
-                                {{ file_transfer_form.destination_file(class="form-control", placeholder="path/to/destination", required=True) }}
-                            </div>
-            
-                            <label>File system</label>
-                            <div class='form-group'>
-                                {{ file_transfer_form.file_system(class="form-control", placeholder="Example: flash:", required=True) }}
-                            </div>
-            
-                            <label>Direction</label>
-                            <div class='form-group'>
-                                {{ file_transfer_form.direction(class="form-control") }}
-                            </div>
-            
-                            <div class="ln_solid"></div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                              <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="button" class="btn btn-success" onclick="createScript('file_transfer')">Create</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="ansible">
-                  <form id="ansible_playbook-form" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
-                    <div class="col-md-12 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_content">
-                        <br />
-
-                            <label>Name</label>
-                            <div class='form-group'>
-                              {{ ansible_form.name(class="form-control", required=True) }}
-                            </div>
-
-                            <label>Playbook name</label>
-                            <div class='form-group'>
-                              {{ ansible_form.playbook_name(class="form-control", required=True) }}
-                            </div>
-
-                          <div class="ln_solid"></div>
-                          <div class="form-group">
-                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
-                              <button class="btn btn-primary" type="reset">Reset</button>
-                              <button type="button" class="btn btn-success" onclick="createScript('ansible_playbook')">Create</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+                {% for script_type, script_form in type_to_form.items() %}
+                  {% set class = "tab-pane fade active in" if script_type == "netmiko_config" else "tab-pane fade" %}
+                  <div role="tabpanel" class="{{ class }}" id="{{ script_type }}">
+                    {% set form = script_form %}
+                    {% include script_type + '.html' %}
+                  </div>
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -237,7 +37,6 @@
       </div>
     </div>
     <!-- end row -->
-
   </div>
 {% endblock content %}
 
@@ -245,15 +44,17 @@
   {{ super()}}
   <script>
   function createScript(type) {
-    $.ajax({
+    if ($(`#${type}-form`).parsley().validate() ) {
+      $.ajax({
       type: "POST",
       url: `/scripts/create_script_${type}`,
       dataType: "json",
       data: $(`#${type}-form`).serialize(),
       success: function() {
-        alertify.notify("Script created", 'success', 5);
+          alertify.notify("Script created", 'success', 5);
       }
-    });
+      });
+    }
   }
   </script>
 {% endblock javascripts %}

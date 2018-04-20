@@ -4,7 +4,8 @@ from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from .forms import AddScriptForm, WorkflowCreationForm
 from .models import ScriptEdge, Workflow, workflow_factory
-from scripts.models import Script
+from scripts.models import default_scripts, Script
+from scripts.routes import type_to_form
 
 blueprint = Blueprint(
     'workflows_blueprint',
@@ -31,14 +32,15 @@ def workflows():
 
 @blueprint.route('/manage_<workflow>', methods=['GET', 'POST'])
 @login_required
-def workflow_manager(workflow):
+def workflow_editor(workflow):
     form = AddScriptForm(request.form)
-    form.scripts.choices = Script.choices()
+    form.scripts.choices = [(s[0], s[0]) for s in default_scripts]
     workflow = get_obj(Workflow, name=workflow)
-    print(workflow.__dict__)
     return render_template(
         'workflow_editor.html',
+        type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         form=form,
+        names=pretty_names,
         workflow=workflow
     )
 

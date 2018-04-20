@@ -11,6 +11,22 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  {% for script_type, script_form in type_to_form.items() %}
+    <div id="edit-{{ script_type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="title"></h4>
+          </div>
+          {% set form = script_form %}
+          {% include script_type + '.html' %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
   <div id="add-script" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -21,6 +37,9 @@
           <h4 class="modal-title" id="myModalLabel">Add script</h4>
         </div>
           <div class="modal-body">
+            <div class="form-group">
+            {{ form.script_type(class="form-control")}}
+            </div>
             <div class="form-group">
             {{ form.scripts(id="scripts", class="form-control", size=15)}}
             </div>
@@ -126,6 +145,7 @@
         {
           id: '{{ node.id }}',
           label: '{{ node.name }}',
+          type: '{{ node.type }}',
           {% if workflow.start_script == node %}
             color: 'green',
           {% endif %}
@@ -153,12 +173,21 @@
     var data = {nodes: nodes, edges: edges};
     var network = new vis.Network(container, data, dsoptions);
 
+    network.on( 'click', function(properties) {
+        var ids = properties.nodes;
+        var node = nodes.get(ids)[0];
+        if(typeof node !== "undefined") {
+          showObjectModal(node.type, node.label);
+        }
+    });
+
     function addNodes() {
       var scripts = $('#scripts').val();
       for (var i = 0; i < scripts.length; i++) {
         nodes.add({
           id: scripts[i],
-          label: scripts[i]
+          label: scripts[i],
+          type: $("#script_type").val()
         })
         $('#add-script').modal('hide');
       }
@@ -182,7 +211,6 @@
         alertify.notify("Mode: node motion", 'success', 5);
       }
     }
-
 
     var start = null;
     function startScript() {
@@ -224,4 +252,59 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    // when a filter is selected, apply it
+    $('#script_type').on('change', function() {
+      $.ajax({
+        type: "POST",
+        url: `/scripts/script_type_${this.value}`,
+        dataType: "json",
+        success: function(scripts){
+          $("#scripts").empty();
+          $.each(scripts, function(_, s) {
+            $("#scripts").append(`<option value="${s}">${s}</option>`);
+          });
+        }
+      });
+    });
+
+    function showObjectModal(type, name) {
+      $('#title').text(`Edit ${name} properties`);
+      $.ajax({
+        type: "POST",
+        url: `/scripts/get_${type}_${name}`,
+        success: function(properties){
+          for (const [property, value] of Object.entries(properties)) {
+            $(`#${type}-${property}`).val(value);
+          }
+        }
+      });
+      $(`#edit-${type}`).modal('show');
+    }
+
+    function createScript(type) {
+      $.ajax({
+        type: "POST",
+        url: `/scripts/create_script_${type}`,
+        dataType: "json",
+        data: $(`#${type}-form`).serialize(),
+        success: function() {
+          alertify.notify("Script created", 'success', 5);
+        }
+      });
+    }
+
+    function editObject(type) {
+      $.ajax({
+        type: "POST",
+        url: `/scripts/edit_${type}`,
+        dataType: "json",
+        data: $(`#${type}-form`).serialize(),
+        success: function(msg){
+          alertify.notify('Script edited', 'success', 5);
+        }
+      });
+      $(`#edit-${type}`).modal('hide');
+    }
+  </script>
 {% endblock javascripts %}

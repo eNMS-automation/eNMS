@@ -497,7 +497,8 @@ class Filter(CustomBase):
         )
 
     def filter_objects(self):
-        nodes, links = filter(self.object_match, Node.query.all()), []
+        nodes = filter(self.object_match, Node.query.all())
+        links_id, links_coords = [], []
         for link in Link.query.all():
             # source and destination do not belong to a link __dict__, because
             # they are SQLalchemy relationships and not columns
@@ -508,8 +509,18 @@ class Filter(CustomBase):
                 'destination': link.destination
             })
             if self.object_match(link):
-                links.append(link.id)
-        return {'nodes': [node.id for node in nodes], 'links': links}
+                links_id.append(link.id)
+                links_coords.append([
+                    link.source.latitude,
+                    link.source.longitude,
+                    link.destination.latitude,
+                    link.destination.longitude,
+                    link.color
+                ])
+        return {
+            'nodes': [node.id for node in nodes],
+            'links': (links_id, links_coords)
+        }
 
 
 def filter_factory(**kwargs):

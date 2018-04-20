@@ -29,7 +29,7 @@ def user_client():
     create = {'name': 'test', 'password': '', 'create_account': ''}
     login = {'name': 'test', 'password': '', 'login': ''}
     with app.app_context():
-        client.post('/admin/create_account', data=create)
+        client.post('/admin/process_user', data=create)
         client.post('/admin/login', data=login)
         yield client
     remove(join(path_source, 'database.db'))

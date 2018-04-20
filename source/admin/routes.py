@@ -54,19 +54,6 @@ def users():
     )
 
 
-@blueprint.route('/create_account', methods=['GET', 'POST'])
-def create_account():
-    if request.method == 'GET':
-        form = CreateAccountForm(request.form)
-        return render_template('login/create_account.html', form=form)
-    else:
-        kwargs = request.form.to_dict()
-        user = User(**kwargs)
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('admin_blueprint.login'))
-
-
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -105,8 +92,11 @@ def login():
                 pass
         return render_template('errors/page_403.html')
     if not flask_login.current_user.is_authenticated:
-        form = LoginForm(request.form)
-        return render_template('login/login.html', form=form)
+        return render_template(
+            'login.html',
+            login_form=LoginForm(request.form),
+            create_account_form=CreateAccountForm(request.form)
+        )
     return redirect(url_for('base_blueprint.dashboard'))
 
 
@@ -148,25 +138,24 @@ def syslog_server():
 ## AJAX calls
 
 
-@blueprint.route('/get_<name>', methods=['POST'])
-@login_required
-def get_user(name):
-    user = get_obj(User, name=name)
-    properties = {
-        property: str(getattr(user, property))
-        for property in user_properties
-    }
-    return jsonify(properties)
-
-
 @blueprint.route('/process_user', methods=['POST'])
-@login_required
 def process_user():
     try:
         user_factory(**request.form.to_dict())
         return jsonify('success')
     except IntegrityError:
         return jsonify('duplicate')
+
+
+@blueprint.route('/get_<name>', methods=['POST'])
+@login_required
+def get_user(name):
+    user = get_obj(User, name=name)
+    properties = {
+        property: str(getattr(user, property))
+        for property in user_properties if property != 'password'
+    }
+    return jsonify(properties)
 
 
 @blueprint.route('/delete_<name>', methods=['POST'])

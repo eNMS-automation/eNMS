@@ -1,0 +1,22 @@
+<form id="ansible_playbook-form" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+  <div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        {% for field in form if field.widget.input_type != 'hidden'  %}
+          {% set validate = " required" if field.name in ("name", "playbook_name") else "" %}
+          <label>{{ field.label.text }}</label>
+          <div class='form-group'>
+            {{ field(id="ansible_playbook-" + field.name, class="form-control" + validate, placeholder=field.label.text) }}
+          </div>
+        {% endfor %}
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button id="ansible_playbook-button" type="button" class="btn btn-success" onclick="createScript('ansible_playbook')">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

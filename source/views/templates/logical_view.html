@@ -407,10 +407,11 @@
         dataType: "json",
         success: function(objects){
           node.style("visibility", function(d) {          
-              return objects['nodes'].includes(d.real_id) ? "visible" : "hidden";
+            return objects['nodes'].includes(d.real_id) ? "visible" : "hidden";
           });
-          link.style("visibility", function(d) {          
-              return objects['links'].includes(d.real_id) ? "visible" : "hidden";
+          link.style("visibility", function(d) {  
+            console.log(d, objects['links'], d.real_id);
+            return objects['links'][0].includes(d.real_id) ? "visible" : "hidden";
           });
           alertify.notify(`Filter '${filterName}' applied`, 'success', 5);
         }

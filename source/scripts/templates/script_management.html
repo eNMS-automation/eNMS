@@ -17,23 +17,8 @@
             </button>
             <h4 class="modal-title" id="title"></h4>
           </div>
-          <form id="edit-{{ script_type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-            <div class="modal-body">
-              <div class="form-group" style="height: 450px">
-                {% for field in script_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(id= script_type + '-' + field.name, class="form-control") }}
-                  </div><br><br>
-                {% endfor %}
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="button" class="btn btn-success" onclick="editObject('{{ script_type }}')">Submit</button>
-            </div>
-          </form>
+          {% set form = script_form %}
+          {% include script_type + '.html' %}
         </div>
       </div>
     </div>
@@ -79,6 +64,10 @@
   {{ super() }}
   <script>
     $('#script-table').DataTable();
+    var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
+    for (i = 0; i < types.length; i++) {
+      $(`#${types[i]}-button`).text("Update");
+    }
 
     function showObjectModal(type, name) {
       $('#title').text(`Edit ${name} properties`);
@@ -86,6 +75,7 @@
         type: "POST",
         url: `/scripts/get_${type}_${name}`,
         success: function(properties){
+          console.log(properties);
           for (const [property, value] of Object.entries(properties)) {
             $(`#${type}-${property}`).val(value);
           }
@@ -94,23 +84,24 @@
       $(`#edit-${type}`).modal('show');
     }
 
+    function createScript(type) {
+      if ($(`#${type}-form`).parsley().validate() ) {
+        $.ajax({
+          type: "POST",
+          url: `/scripts/create_script_${type}`,
+          dataType: "json",
+          data: $(`#${type}-form`).serialize(),
+          success: function() {
+            alertify.notify("Script created", 'success', 5);
+          }
+        });
+      }
+    }
+
     var type_to_fields = {
       {% for script_type, script_form in type_to_form.items() %}
         '{{ script_type }}': [{% for field in script_form %} '{{ field }}', {% endfor %}],
       {% endfor %}
-    }
-
-    function editObject(type) {
-      $.ajax({
-        type: "POST",
-        url: `/scripts/edit_${type}`,
-        dataType: "json",
-        data: $(`#edit-${type}-form`).serialize(),
-        success: function(msg){
-          alertify.notify('Script edited', 'success', 5);
-        }
-      });
-      $(`#edit-${type}`).modal('hide');
     }
 
     function deleteObject(name) {

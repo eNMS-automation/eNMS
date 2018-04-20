@@ -60,7 +60,7 @@ def site_root():
 @flask_login.login_required
 def dashboard():
     return render_template(
-        'template/dashboard.html',
+        'dashboard.html',
         names=pretty_names,
         properties=type_to_diagram_properties,
         default_properties=default_properties,
@@ -73,7 +73,7 @@ def dashboard():
 def logs():
     form = LogFilteringForm(request.form)
     return render_template(
-        'template/logs_overview.html',
+        'logs_overview.html',
         form=form,
         names=pretty_names,
         logs=Log.query.all(),

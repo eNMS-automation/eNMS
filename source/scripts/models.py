@@ -17,8 +17,6 @@ class Script(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     type = Column(String)
-    vendor = Column(String)
-    operating_system = Column(String)
     tasks = relationship(
         "Task",
         secondary=task_script_table,
@@ -53,6 +51,8 @@ class NetmikoConfigScript(Script):
     __tablename__ = 'NetmikoConfigScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
     content = Column(String)
     driver = Column(String)
     global_delay_factor = Column(Float)
@@ -103,6 +103,8 @@ class FileTransferScript(Script):
     __tablename__ = 'FileTransferScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'file_transfer',
@@ -150,6 +152,8 @@ class NetmikoValidationScript(Script):
     __tablename__ = 'NetmikoValidationScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
     driver = Column(String)
     command1 = Column(String)
     command2 = Column(String)
@@ -163,7 +167,6 @@ class NetmikoValidationScript(Script):
     }
 
     def __init__(self, **data):
-        print(data)
         name = data['name'][0]
         self.driver = data['driver'][0]
         for i in range(1, 4):
@@ -182,7 +185,6 @@ class NetmikoValidationScript(Script):
                 password=cisco_type7.decode(task.user.password),
                 secret=node.secret_password
             )
-            print(netmiko_handler)
             for i in range(1, 4):
                 command = getattr(self, 'command' + str(i))
                 if not command:
@@ -209,6 +211,8 @@ class NapalmConfigScript(Script):
     __tablename__ = 'NapalmConfigScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
     content = Column(String)
 
     __mapper_args__ = {
@@ -331,6 +335,8 @@ class AnsibleScript(Script):
     __tablename__ = 'AnsibleScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
     playbook_path = Column(String)
     options = Column(MutableDict.as_mutable(PickleType), default={})
 
@@ -345,13 +351,13 @@ class AnsibleScript(Script):
 
     def job(self, args):
         _, node, results = args
-        print(self.playbook_path)
         command = ['ansible-playbook', '-i', node.ip_address + ",", self.playbook_path]
         results[node.name] = check_output(command)
         return True
 
 
 type_to_class = {
+    'napalm_action': NapalmActionScript,
     'netmiko_config': NetmikoConfigScript,
     'napalm_config': NapalmConfigScript,
     'file_transfer': FileTransferScript,

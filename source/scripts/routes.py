@@ -22,7 +22,8 @@ from .models import (
     NetmikoConfigScript,
     NetmikoValidationScript,
     Script,
-    script_factory
+    script_factory,
+    type_to_class
 )
 from werkzeug import secure_filename
 from yaml import load
@@ -37,22 +38,32 @@ blueprint = Blueprint(
 
 ## Template rendering
 
+type_to_form = {
+    'netmiko_config': NetmikoConfigScriptForm,
+    'napalm_config': NapalmConfigScriptForm,
+    'napalm_getters': NapalmGettersForm,
+    'file_transfer': FileTransferScriptForm,
+    'netmiko_validation': NetmikoValidationForm,
+    'ansible_playbook': AnsibleScriptForm
+}
+
+type_to_name = {
+    'netmiko_config': 'Netmiko Config',
+    'napalm_config': 'NAPALM Config',
+    'napalm_getters': 'NAPALM Getters',
+    'file_transfer': 'File Transfer',
+    'netmiko_validation': 'Validation',
+    'ansible_playbook': 'Ansible playbook'
+}
+
 
 @blueprint.route('/script_management')
 @login_required
 def scripts():
-    type_to_form = {
-        'netmiko_config': NetmikoConfigScriptForm(request.form),
-        'napalm_config': NapalmConfigScriptForm(request.form),
-        'napalm_getters': NapalmGettersForm(request.form),
-        'file_transfer': FileTransferScriptForm(request.form),
-        'netmiko_validation': NetmikoValidationForm(request.form),
-        'ansible_playbook': AnsibleScriptForm(request.form)
-    }
     return render_template(
         'script_management.html',
         fields=('name', 'type'),
-        type_to_form=type_to_form,
+        type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         names=pretty_names,
         scripts=Script.query.all()
     )
@@ -64,12 +75,8 @@ def configuration():
     return render_template(
         'script_creation.html',
         names=pretty_names,
-        netmiko_config_form=NetmikoConfigScriptForm(request.form),
-        napalm_config_form=NapalmConfigScriptForm(request.form),
-        napalm_getters_form=NapalmGettersForm(request.form),
-        netmiko_validation_form=NetmikoValidationForm(request.form),
-        file_transfer_form=FileTransferScriptForm(request.form),
-        ansible_form=AnsibleScriptForm(request.form)
+        type_to_form={t: s(request.form) for t, s in type_to_form.items()},
+        type_to_name=type_to_name
     )
 
 
@@ -88,14 +95,10 @@ def get_script(script_type, name):
     return jsonify(script_properties)
 
 
-@blueprint.route('/edit_<script_type>', methods=['POST'])
+@blueprint.route('/script_type_<script_type>', methods=['POST'])
 @login_required
-def edit_object(script_type):
-    properties = request.form.to_dict()
-    properties['type'] = script_type
-    script_factory(**properties)
-    db.session.commit()
-    return jsonify({})
+def get_script_per_type(script_type):
+    return jsonify([s.name for s in type_to_class[script_type].query.all()])
 
 
 @blueprint.route('/delete_<name>', methods=['POST'])
@@ -110,8 +113,13 @@ def delete_object(name):
 @blueprint.route('/create_script_<script_type>', methods=['POST'])
 @login_required
 def create_script(script_type):
-    print(request.form)
-    if script_type in ('netmiko_config', 'napalm_config'):
+    properties = request.form.to_dict()
+    script = get_obj(Script, name=properties['name'])
+    if script:
+        properties['type'] = script_type
+        script_factory(**properties)
+        db.session.commit()
+    elif script_type in ('netmiko_config', 'napalm_config'):
         # retrieve the raw script: we will use it as-is or update it
         # depending on the type of script (jinja2-enabled template or not)
         real_content = request.form['content']

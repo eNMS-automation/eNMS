@@ -1,0 +1,38 @@
+<form id="napalm_config-form"  data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left" method="post">
+  <!-- begin column -->
+  <div class="col-md-4 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <div class="form-group" style="height: 550px">
+          {% for field in form if field.widget.input_type != 'hidden'  %} 
+            {% if field.name != 'content' %}
+              {% set validate = " required" if field.name == "name" else "" %}
+              <label>{{ names[field.name] }}</label>
+              <div class='form-group'>
+                {{ field(id="napalm_config-" + field.name, class="form-control" + validate, placeholder=field.label.text) }}
+              </div>
+            {% endif %}
+          {% endfor %}
+          
+          <div class="ln_solid"></div>
+          <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button id="napalm_config-button" type="button" class="btn btn-success" onclick="createScript('napalm_config')">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end column -->
+  <!-- begin column -->
+  <div class="col-md-8 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <div class="form-group" style="height: 550px">
+          {{ form.content(id="napalm_config-content", class="form-control required", rows='26') }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end column -->
+</form>

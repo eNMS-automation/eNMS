@@ -26,7 +26,6 @@
     </div>
     <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
     <button type="button" class="btn btn-primary" onclick="showModal('google-earth')">Google Earth</button>
-
     {% if view == 'leaflet' %}
       <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
       <button type="submit" class="btn btn-primary" name="view" value="glearth">3D view</button>
@@ -37,7 +36,6 @@
       <button type="submit" class="btn btn-primary" name="view" value="leaflet">2D view</button>
       <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
     {% endif %}
-    
     <div class="btn-group">
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tile layer
         <span class="caret"></span>
@@ -48,9 +46,7 @@
         <li><a onclick="switch_layer('nasa')"> NASA </a></li>
       </ul>
     </div> 
-    
     <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Send script</button>
-
   </div>
 </form>
 {% endset %}
@@ -182,6 +178,8 @@
               {% endfor %}
             {% endif %}
                 
+                var markers_array = [];
+                var polyline_array = [];
                 {% if view != 'glearth' %}
                   // Create a new vector type with getLatLng and setLatLng methods.
                   L.PolylineClusterable = L.Polyline.extend({
@@ -194,7 +192,6 @@
                     setLatLng: function () {}
                   });
 
-                  var markers_array = [];
                   {% for obj, properties in node_table.items() %}  
                     var marker = L.marker([
                       {{ obj.latitude }}, 
@@ -275,6 +272,9 @@
                     smoothFactor: 1
                     });
 
+                  polyline_array.push(polyline);
+                  polyline.link_id = {{ obj.id }};
+
                   polyline.on("click", function (e) {
                     showObjectModal('link', '{{ obj['name'] }}');
                   });
@@ -297,7 +297,6 @@
                   var map = new WE.map('earth_div', options);
                   var current_layer = WE.tileLayer(layers['gm']);
                   current_layer.addTo(map);
-                  var markers_array = [];
                   {% for obj, properties in node_table.items() %}  
                     var marker = WE.marker(
                     [{{ obj.latitude }}, {{ obj.longitude }}],
@@ -322,17 +321,17 @@
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
                       [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}]
                     ], {color: '{{ obj.color }}', opacity: 20}
-                    )
+                    ).addTo(map);
                     var polygonDS = WE.polygon(
                     [
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}],
                       [{{ obj['source']['latitude'] }}, {{ obj['source']['longitude'] }}],
                       [{{ obj['destination']['latitude'] }}, {{ obj['destination']['longitude'] }}]
                     ], {color: '{{ obj.color }}', opacity: 20}
-                    )
+                    ).addTo(map);
 
-                    polygonSD.addTo(map);
-                    polygonDS.addTo(map);
+                    polygonSD.link_id = polygonDS.link_id = {{ obj.id }};
+                    polyline_array.push(polygonSD, polygonDS);
 
                   {% endfor %}
                 {% endif %}
@@ -352,6 +351,45 @@
                           markers_array[i].removeFrom(map);
                         }
                       }
+                      {% if view == 'glearth' %}
+                        for (i = 0; i < polyline_array.length; i++) {
+                          try { polyline_array[i].destroy(); }
+                          catch(err) {};
+                        }
+                        polyline_array = [];
+                        for (i = 0; i < objects['links'][1].length; i++) {
+                          var source_latitude = objects['links'][1][i][0],
+                              source_longitude = objects['links'][1][i][1],
+                              destination_latitude = objects['links'][1][i][2],
+                              destination_longitude = objects['links'][1][i][3],
+                              color = objects['links'][1][i][4],
+                              obj_id = objects['links'][0][i];
+                          var polygonSD = WE.polygon(
+                          [
+                            [source_latitude, source_longitude],
+                            [destination_latitude, destination_longitude],
+                            [source_latitude, source_longitude]
+                          ], {color: color, opacity: 20}
+                          ).addTo(map);
+                          var polygonDS = WE.polygon(
+                          [
+                            [destination_latitude, destination_longitude],
+                            [source_latitude, source_longitude],
+                            [destination_latitude, destination_longitude]
+                          ], {color: color, opacity: 20}
+                          ).addTo(map);
+                          polygonSD.link_id = polygonDS.link_id = obj_id;
+                          polyline_array.push(polygonSD, polygonDS);
+                        }
+                      {% else %}
+                        for (i = 0; i < polyline_array.length; i++) {
+                            if (objects['links'][0].includes(polyline_array[i].link_id)) {
+                              polyline_array[i].addTo(map);
+                            } else {
+                              polyline_array[i].removeFrom(map);
+                            }
+                      }
+                      {% endif %}
                       alertify.notify(`Filter '${filterName}' applied`, 'success', 5);
                     }
                   });
@@ -466,7 +504,6 @@
           type: "POST",
           url: `/views/get_logs_${name}`,
           success: function(logs){
-            console.log(logs);
             $("#logs").text(logs);
           }
         });

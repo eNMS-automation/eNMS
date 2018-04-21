@@ -93,21 +93,23 @@
       });
       var name = result.name;
 
-      $.ajax({
-        type: "POST",
-        url: `/objects/process_filter`,
-        dataType: "json",
-        data: $('#filter-form').serialize(),
-        success: function(mode){
-          notification = mode == 'update' ? 'updated' : 'created'
-          if (mode == 'creation') {
-            $("#filters").append($("<option></option>")
-              .attr("value", name).text(name));
-            $("#filters").val(name);
+      if ($('#filter-form').parsley().validate()) {
+        $.ajax({
+          type: "POST",
+          url: `/objects/process_filter`,
+          dataType: "json",
+          data: $('#filter-form').serialize(),
+          success: function(mode){
+            notification = mode == 'update' ? 'updated' : 'created'
+            if (mode == 'creation') {
+              $("#filters").append($("<option></option>")
+                .attr("value", name).text(name));
+              $("#filters").val(name);
+            }
+            alertify.notify(`Filter ${name} ${notification} !`, 'success', 5);
           }
-          alertify.notify(`Filter ${name} ${notification} !`, 'success', 5);
-        }
-      });
+        });
+      }
     }
 
     // when a filter is selected, apply it

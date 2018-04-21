@@ -44,6 +44,7 @@ napalm_actions = OrderedDict([
 
 class ScriptForm(FlaskForm):
     name = TextField('Name')
+    description = TextField('Description')
     waiting_time = IntegerField('Waiting time', default=0)
 
 
@@ -103,7 +104,7 @@ class FileTransferScriptForm(ScriptForm):
     direction = SelectField('', choices=direction_choices)
     overwrite_file = BooleanField()
     disable_md5 = BooleanField()
-    inline_transer = BooleanField()
+    inline_transfer = BooleanField()
 
 
 class NetmikoValidationForm(ScriptForm):

@@ -252,16 +252,18 @@
     });
 
     function scheduleScript() {
-      $.ajax({
-        type: "POST",
-        url: "/tasks/scheduler",
-        dataType: "json",
-        data: $("#scheduling-form").serialize(),
-        success: function() {
-          alertify.notify('Task edited', 'success', 5);
-        }
-      });
-      $("#scheduling").modal('hide');
+      if ($("#scheduling-form").parsley().validate()) {
+        $.ajax({
+          type: "POST",
+          url: "/tasks/scheduler",
+          dataType: "json",
+          data: $("#scheduling-form").serialize(),
+          success: function() {
+            alertify.notify('Task edited', 'success', 5);
+          }
+        });
+        $("#scheduling").modal('hide');
+      }
     }
 
     function deleteTask(name) {

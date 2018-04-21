@@ -16,9 +16,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="reset">Reset</button>
-          <button type="submit" name="view_options" class="btn btn-success">Submit</button>
+          <div class="text-center">
+            <button type="submit" name="view_options" class="btn btn-success">Submit</button>
+          </div>
         </div>
       </form>
     </div>
@@ -32,32 +32,29 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">View options</h4>
+        <h4 class="modal-title" id="myModalLabel">Export to Google Earth</h4>
       </div>
       <form id="google-earth-form" data-parsley-validate class="form-horizontal form-label-left">
         <div class="modal-body">
           <div class="form-group">
-            <h5 class="modal-title">Labels</h5><br>
               <label>Project name</label>
               <div class='form-group'>
-                {{ google_earth_form.name(class="form-control", required=true) }}
+                {{ google_earth_form.name(class="form-control required") }}
               </div>
-
               <label>Label size:</label>
               <div class='form-group'>
-                {{ google_earth_form.label_size(class="form-control", required=true) }}
+                {{ google_earth_form.label_size(class="form-control required") }}
               </div>
-
               <label>Line width:</label>
               <div class='form-group'>
-                {{ google_earth_form.line_width(class="form-control", required=true) }}
+                {{ google_earth_form.line_width(class="form-control required") }}
               </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="reset">Reset</button>
-          <button type="button" onclick="exportToGoogleEarth()" class="btn btn-success">Submit</button>
+          <div class="text-center">
+            <button type="button" onclick="exportToGoogleEarth()" class="btn btn-success">Submit</button>
+          </div>
         </div>
       </form>
     </div>

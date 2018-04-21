@@ -464,29 +464,35 @@
     }
 
     function scheduleScript() {
-      $.ajax({
-        type: "POST",
-        url: "/tasks/scheduler",
-        dataType: "json",
-        data: $("#scheduling-form").serialize(),
-        success: function() {
-          alertify.notify('Task scheduled', 'success', 5);
-        }
-      });
-      $("#scheduling").modal('hide');
+      if ($("#scheduling-form").parsley().validate()) {
+        $.ajax({
+          type: "POST",
+          url: "/tasks/scheduler",
+          dataType: "json",
+          data: $("#scheduling-form").serialize(),
+          success: function() {
+            alertify.notify('Task scheduled', 'success', 5);
+          }
+        });
+        $("#scheduling").modal('hide');
+      } else {
+        alertify.notify('Some fields are missing', 'error', 5);
+      }
     }
 
     function exportToGoogleEarth() {
-      $.ajax({
-        type: "POST",
-        url: "/views/export_to_google_earth",
-        dataType: "json",
-        data: $("#google-earth-form").serialize(),
-        success: function() {
-          alertify.notify(`Project exported to Google Earth`, 'success', 5);
-        }
-      });
-      $("#google-earth").modal('hide');
+      if ($("#google-earth-form").parsley().validate()) {
+        $.ajax({
+          type: "POST",
+          url: "/views/export_to_google_earth",
+          dataType: "json",
+          data: $("#google-earth-form").serialize(),
+          success: function() {
+            alertify.notify(`Project exported to Google Earth`, 'success', 5);
+          }
+        });
+        $("#google-earth").modal('hide');
+      }
     }
 
     function showObjectModal(type, name) {

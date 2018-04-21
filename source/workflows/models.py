@@ -2,6 +2,7 @@ from base.database import db, get_obj
 from base.models import script_workflow_table, task_workflow_table, CustomBase
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
+from time import sleep
 
 
 class ScriptEdge(CustomBase):
@@ -83,6 +84,7 @@ class Workflow(CustomBase):
                 for neighbor in script.script_neighbors(self, edge_type):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
+                sleep(script.waiting_time)
             layer = new_layer
 
 

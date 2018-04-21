@@ -16,6 +16,8 @@ class Script(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
+    description = Column(String)
+    waiting_time = Column(Integer)
     type = Column(String)
     tasks = relationship(
         "Task",

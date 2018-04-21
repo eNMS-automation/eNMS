@@ -7,7 +7,7 @@ script_properties = (
 
 netmiko_config_properties = script_properties + (
     'vendor',
-    'operating_system'
+    'operating_system',
     'content',
     'driver',
     'global_delay_factor',
@@ -16,13 +16,13 @@ netmiko_config_properties = script_properties + (
 
 napalm_config_properties = script_properties + (
     'vendor',
-    'operating_system'
+    'operating_system',
     'content',
 )
 
 file_transfer_properties = script_properties + (
     'vendor',
-    'operating_system'
+    'operating_system',
     'source_file',
     'destination_file',
     'file_system',
@@ -31,7 +31,7 @@ file_transfer_properties = script_properties + (
 
 netmiko_validation_properties = script_properties + (
     'vendor',
-    'operating_system'
+    'operating_system',
     'command1',
     'command2',
     'command3',
@@ -46,7 +46,7 @@ napalm_getters_properties = script_properties + (
 
 ansible_playbook_properties = script_properties + (
     'vendor',
-    'operating_system'
+    'operating_system',
     'playbook_path',
 )
 

@@ -128,6 +128,7 @@ pretty_names = OrderedDict([
     ('text file', 'File'),
     ('type', 'Type'),
     ('vendor', 'Vendor'),
+    ('waiting_time', 'Waiting time')
 ])
 
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}

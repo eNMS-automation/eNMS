@@ -6,6 +6,7 @@ from wtforms import (
     BooleanField,
     FileField,
     FloatField,
+    IntegerField,
     SelectField,
     SelectMultipleField,
     TextAreaField,
@@ -43,6 +44,7 @@ napalm_actions = OrderedDict([
 
 class ScriptForm(FlaskForm):
     name = TextField('Name')
+    waiting_time = IntegerField('Waiting time', default=0)
 
 
 class ConfigScriptForm(ScriptForm):

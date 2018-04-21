@@ -1,6 +1,7 @@
 script_properties = (
     'name',
     'type',
+    'description',
     'waiting_time',
 )
 

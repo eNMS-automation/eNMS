@@ -3,36 +3,15 @@
     <div class="x_panel">
       <div class="x_content">
         <div class="form-group" style="height: 650px">
-          <label>Name</label>
-          <div class='form-group'>
-              {{ form.name(id="file_transfer-name", class="form-control", required=true) }}
-          </div>
-
-          <label>Driver</label>
-          <div class='form-group'>
-              {{ form.driver(id="file_transfer-driver", class="form-control") }}
-          </div>
-
-          <label>Source file</label>
-          <div class='form-group'>
-              {{ form.source_file(id="file_transfer-source_file", class="form-control", placeholder="path/to/source", required=True) }}
-          </div>
-
-          <label>Destination file</label>
-          <div class='form-group'>
-              {{ form.destination_file(id="file_transfer-destination_file", class="form-control", placeholder="path/to/destination", required=True) }}
-          </div>
-
-          <label>File system</label>
-          <div class='form-group'>
-              {{ form.file_system(id="file_transfer-file_system", class="form-control", placeholder="Example: flash:", required=True) }}
-          </div>
-
-          <label>Direction</label>
-          <div class='form-group'>
-              {{ form.direction(id="file_transfer-direction", class="form-control") }}
-          </div>
-
+          {% for field in form if field.widget.input_type != 'hidden'  %}
+            {% if field.name not in ("overwrite_file", "disable_md5", "inline_transfer") %}
+              {% set validate = "" if field.name == "description" else " required" %}
+              <label>{{ names[field.name] }}</label>
+              <div class='form-group'>
+                {{ field(id="file_transfer-" + field.name, class="form-control" + validate, placeholder=field.label.text) }}
+              </div>
+            {% endif %}
+          {% endfor %}
           <div class="ln_solid"></div>
           <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
             <button class="btn btn-primary" type="reset">Reset</button>

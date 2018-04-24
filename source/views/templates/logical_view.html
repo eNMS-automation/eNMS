@@ -147,7 +147,7 @@
               var selected_nodes = [];
 
               function sendSelection() {
-                selected_id = selected_nodes.map(s => s[1].id);
+                selected_id = selected_nodes.map(s => s[1].real_id);
                 $.ajax({
                   type: "POST",
                   url: "/views/selection",

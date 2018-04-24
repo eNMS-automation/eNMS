@@ -35,8 +35,9 @@ class Script(CustomBase):
         'polymorphic_on': type
     }
 
-    def __init__(self, name):
+    def __init__(self, name, waiting_time=0):
         self.name = name
+        self.waiting_time = waiting_time
 
     def __repr__(self):
         return str(self.name)
@@ -66,10 +67,11 @@ class NetmikoConfigScript(Script):
 
     def __init__(self, real_content, **data):
         name = data['name'][0]
+        waiting_time = data['waiting_time'][0]
         self.driver = data['driver'][0]
         self.global_delay_factor = data['global_delay_factor'][0]
         self.netmiko_type = data['netmiko_type'][0]
-        super(NetmikoConfigScript, self).__init__(name)
+        super(NetmikoConfigScript, self).__init__(name, waiting_time)
         self.content = ''.join(real_content)
 
     def job(self, args):
@@ -91,13 +93,16 @@ class NetmikoConfigScript(Script):
                 for show_command in self.content.splitlines():
                     outputs.append(netmiko_handler.send_command(show_command))
                 result = '\n\n'.join(outputs)
+            success = True
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
+            success = False
         try:
             netmiko_handler.disconnect()
         except Exception:
             pass
         results[node.name] = result
+        return success
 
 
 class FileTransferScript(Script):
@@ -114,11 +119,12 @@ class FileTransferScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
+        waiting_time = data['waiting_time'][0]
         self.source_file = data['source_file'][0]
         self.destination_file = data['destination_file'][0]
         self.file_system = data['file_system'][0]
         self.direction = data['direction'][0]
-        super(FileTransferScript, self).__init__(name)
+        super(FileTransferScript, self).__init__(name, waiting_time)
 
     def job(self, args):
         task, node, results = args
@@ -144,9 +150,12 @@ class FileTransferScript(Script):
             )
             result = str(transfer_dict)
             netmiko_handler.disconnect()
+            success = True
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
+            success = False
         results[node.name] = result
+        return success
 
 
 class NetmikoValidationScript(Script):
@@ -170,11 +179,12 @@ class NetmikoValidationScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
+        waiting_time = data['waiting_time'][0]
         self.driver = data['driver'][0]
         for i in range(1, 4):
             for property in ('command', 'pattern'):
                 setattr(self, property + str(i), data[property + str(i)][0])
-        super(NetmikoValidationScript, self).__init__(name)
+        super(NetmikoValidationScript, self).__init__(name, waiting_time)
 
     def job(self, args):
         task, node, results = args
@@ -197,14 +207,16 @@ class NetmikoValidationScript(Script):
                 outputs[command] = result
                 if pattern not in output:
                     success = False
+                
         except Exception as e:
             results[node.name] = 'netmiko did not work because of {}'.format(e)
             success = False
+        results[node.name] = str_dict(outputs)
+        print(outputs, success)
         try:
             netmiko_handler.disconnect()
         except Exception:
             pass
-        results[node.name] = str_dict(outputs)
         return success
 
 
@@ -215,6 +227,7 @@ class NapalmConfigScript(Script):
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
+    action = Column(String)
     content = Column(String)
 
     __mapper_args__ = {
@@ -223,8 +236,10 @@ class NapalmConfigScript(Script):
 
     def __init__(self, real_content, **data):
         name = data['name'][0]
-        super(NapalmConfigScript, self).__init__(name)
+        waiting_time = data['waiting_time'][0]
+        super(NapalmConfigScript, self).__init__(name, waiting_time)
         self.content = ''.join(real_content)
+        self.action = data['action'][0]
 
     def job(self, args):
         task, node, results = args
@@ -303,8 +318,9 @@ class NapalmGettersScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
+        waiting_time = data['waiting_time'][0]
         self.getters = data['getters']
-        super(NapalmGettersScript, self).__init__(name)
+        super(NapalmGettersScript, self).__init__(name, waiting_time)
 
     def job(self, args):
         task, node, results = args
@@ -348,7 +364,8 @@ class AnsibleScript(Script):
 
     def __init__(self, playbook_path, **data):
         name = data['name'][0]
-        super(AnsibleScript, self).__init__(name)
+        waiting_time = data['waiting_time'][0]
+        super(AnsibleScript, self).__init__(name, waiting_time)
         self.playbook_path = playbook_path
 
     def job(self, args):

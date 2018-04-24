@@ -195,9 +195,13 @@
                   .select('image')
                   .attr("xlink:href", d.selected_img);
                 sendSelection();
+              };
+
+              // selection function
+              function showProperties(d) {
                 showObjectModal('node', d.name);
               };
-              
+
               function unselectAll() {
                 d3.event.preventDefault();
                 for (i = 0; i < selected_nodes.length; i++) {
@@ -217,7 +221,7 @@
               
               var zoom = d3.behavior.zoom()
                 .scaleExtent([1, 50])
-                .on("zoom", zoomed);
+                //.on("zoom", zoomed);
               
               var svg = d3.select("#logical_view").append("svg")
                 .attr("width", width)
@@ -333,7 +337,7 @@
                 .attr("class", "node")
                 .call(force.drag)
                 .on("click", selectNode)
-                .on("dblclick", connectToDevice);
+                .on("dblclick", showProperties);
 
               function zoomed() {
                 container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");

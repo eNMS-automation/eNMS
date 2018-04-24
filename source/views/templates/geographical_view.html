@@ -198,7 +198,7 @@
                       {{ obj.longitude }}], 
                       );
 
-                    marker.on("click", function (e) {
+                    marker.on("dblclick", function (e) {
                       showObjectModal('node', '{{ obj['name'] }}');
                     });
                     marker.bindTooltip("{{ obj[labels['node']] }}", {

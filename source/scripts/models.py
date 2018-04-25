@@ -378,6 +378,7 @@ class AnsibleScript(Script):
 type_to_class = {
     'napalm_action': NapalmActionScript,
     'netmiko_config': NetmikoConfigScript,
+    'netmiko_validation': NetmikoValidationScript,
     'napalm_config': NapalmConfigScript,
     'file_transfer': FileTransferScript,
     'napalm_getters': NapalmGettersScript,
@@ -391,7 +392,6 @@ def script_factory(**kwargs):
     for property, value in kwargs.items():
         if property in script.__dict__:
             setattr(script, property, value)
-    db.session.add(script)
     db.session.commit()
 
 

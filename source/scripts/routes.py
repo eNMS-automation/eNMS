@@ -116,6 +116,7 @@ def create_script(script_type):
     properties = request.form.to_dict()
     script = get_obj(Script, name=properties['name'])
     if script:
+        print(properties)
         properties['type'] = script_type
         script_factory(**properties)
         db.session.commit()

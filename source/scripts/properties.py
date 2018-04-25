@@ -32,6 +32,7 @@ file_transfer_properties = script_properties + (
 netmiko_validation_properties = script_properties + (
     'vendor',
     'operating_system',
+    'driver',
     'command1',
     'command2',
     'command3',

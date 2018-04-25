@@ -173,7 +173,7 @@
     var data = {nodes: nodes, edges: edges};
     var network = new vis.Network(container, data, dsoptions);
 
-    network.on( 'click', function(properties) {
+    network.on( 'doubleClick', function(properties) {
         var ids = properties.nodes;
         var node = nodes.get(ids)[0];
         if(typeof node !== "undefined") {
@@ -253,6 +253,11 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+    var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
+    for (i = 0; i < types.length; i++) {
+      $(`#${types[i]}-button`).text("Update");
+    }
+
     // when a filter is selected, apply it
     $('#script_type').on('change', function() {
       $.ajax({
@@ -289,7 +294,7 @@
         dataType: "json",
         data: $(`#${type}-form`).serialize(),
         success: function() {
-          alertify.notify("Script created", 'success', 5);
+          alertify.notify("Script updated", 'success', 5);
         }
       });
     }

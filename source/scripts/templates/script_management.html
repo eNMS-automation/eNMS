@@ -31,8 +31,11 @@
             <table id="script-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th style="width: 33%">Name</th>
-                  <th style="width: 33%">Type</th>
+                  <th style="width: 20%">Name</th>
+                  <th style="width: 20%">Type</th>
+                  <th style="width: 15%">Vendor</th>
+                  <th style="width: 15%">Operating system</th>
+                  <th style="width: 15%">Waiting time</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -42,6 +45,9 @@
                   <tr id="{{ script.name }}">
                     <td><a>{{ script.name }}</a></td>
                     <td>{{ script.type }}</td>
+                    <td><a>{{ script.vendor }}</a></td>
+                    <td><a>{{ script.operating_system }}</a></td>
+                    <td><a>{{ script.waiting_time }}</a></td>
                   <td>
                     <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ script['type'] }}', '{{ script['name'] }}')">Edit</button>
                   </td>
@@ -75,7 +81,6 @@
         type: "POST",
         url: `/scripts/get_${type}_${name}`,
         success: function(properties){
-          console.log(properties);
           for (const [property, value] of Object.entries(properties)) {
             $(`#${type}-${property}`).val(value);
           }

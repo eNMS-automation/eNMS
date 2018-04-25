@@ -5,5 +5,6 @@ Automation
 .. toctree::
    :maxdepth: 1
 
-   create
-   send
+   scripts
+   workflows
+   scheduling

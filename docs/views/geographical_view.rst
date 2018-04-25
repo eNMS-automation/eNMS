@@ -17,10 +17,10 @@ There are three types of geographical displayed available.
 The classic 2D map is based on the :guilabel:`Leaflet` JavaScript library.
 All nodes and links are displayed on a 2D representation of the Earth, based on the ``Google Mercator (EPSG:3857)`` projection.
 
-The classic 2D map works well for small networks (less than 5000 nodes), with no colocated nodes (colocated nodes are indistinguishable from one another).
+The classic 2D map works well for small networks (less than 5000 nodes), when there are no colocated nodes (colocated nodes cannot be distinguished from one another).
 
 .. image:: /_static/views/2D_map.png
-   :alt: test
+   :alt: Classic 2D map
    :align: center
 
 Clusterized 2D map
@@ -33,7 +33,7 @@ The clusterized map works well for large networks (until 50000 nodes), and it su
 Clicking on a group of colocated nodes will expand the group.
 
 .. image:: /_static/views/clusterized_map.png
-   :alt: test
+   :alt: Clusterized 2D map
    :align: center
 
 3D map
@@ -42,17 +42,34 @@ Clicking on a group of colocated nodes will expand the group.
 The 3D map is based on the :guilabel:`WebGL-Earth` JavaScript library (which itself uses :guilabel:`Cesium`)
 All nodes and links are displayed on a 3D representation of the Earth.
 
-The classic 2D map works well for small networks (less than 500 nodes) with no colocated nodes.
+The 3D map works well for small networks (less than 500 nodes) with no colocated nodes.
 
 .. image:: /_static/views/3D_map.png
-   :alt: test
+   :alt: 3D map
    :align: center
 
 Tile layers
 -----------
 
-There are three types of tile available for the geographical display.
+There are three types of tile layer available for the geographical display.
 
 OpenStreetMap tiles
 *******************
 
+.. image:: /_static/views/osm_layer.png
+   :alt: Open Street Map
+   :align: center
+
+Google Map tiles
+****************
+
+.. image:: /_static/views/google_map_layer.png
+   :alt: Google Map
+   :align: center
+
+NASA tiles
+**********
+
+.. image:: /_static/views/nasa_layer.png
+   :alt: NASA
+   :align: center

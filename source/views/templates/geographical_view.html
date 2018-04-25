@@ -180,6 +180,7 @@
                 
                 var markers_array = [];
                 var polyline_array = [];
+                var selection = [];
                 {% if view != 'glearth' %}
                   // Create a new vector type with getLatLng and setLatLng methods.
                   L.PolylineClusterable = L.Polyline.extend({
@@ -200,6 +201,20 @@
 
                     marker.on("dblclick", function (e) {
                       showObjectModal('node', '{{ obj['name'] }}');
+                    });
+
+                    marker.on("click", function (e) {
+                      e.target.setIcon(e.target.selected_icon);
+                      selection.push({{ obj.id }});
+                      $.ajax({
+                        type: "POST",
+                        url: "/views/selection",
+                        dataType: "json",
+                        data: { selection: selection },
+                        success: function(msg){
+                            $('.answer').html(msg);
+                        }
+                      });
                     });
                     marker.bindTooltip("{{ obj[labels['node']] }}", {
                       permanent: false, 
@@ -226,7 +241,7 @@
                   {% endif %}
 
                   map.on("boxzoomend", function(e) {
-                    var selection = [];
+                    selection = [];
                     for (var i = 0; i < markers_array.length; i++) {
                       if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
                         markers_array[i].setIcon(markers_array[i].selected_icon);
@@ -308,7 +323,7 @@
                     15, 10
                     ).addTo(map);
 
-                    marker.on("click", function (e) {
+                    marker.on("dblclick", function (e) {
                       showObjectModal('node', '{{ obj['name'] }}');
                     });
                     marker.node_id = {{ obj.id }};

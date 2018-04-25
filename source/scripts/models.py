@@ -207,7 +207,7 @@ class NetmikoValidationScript(Script):
                 outputs[command] = result
                 if pattern not in output:
                     success = False
-                
+
         except Exception as e:
             results[node.name] = 'netmiko did not work because of {}'.format(e)
             success = False

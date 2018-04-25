@@ -20,6 +20,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 netmiko_ping = ImmutableMultiDict([
     ('name', 'netmiko_ping'),
+    ('waiting_time', '0'),
     ('content_type', 'simple'),
     ('create_script', 'netmiko_config'),
     ('content', 'ping 1.1.1.1'),
@@ -64,6 +65,7 @@ ip ospf cost 620
 
 netmiko_jinja2_script = dict([
     ('name', 'netmiko_subif'),
+    ('waiting_time', '0'),
     ('content_type', 'j2_template'),
     ('create_script', 'netmiko_config'),
     ('content', template),
@@ -74,6 +76,7 @@ netmiko_jinja2_script = dict([
 
 napalm_jinja2_script = dict([
     ('name', 'napalm_subif'),
+    ('waiting_time', '0'),
     ('content_type', 'j2_template'),
     ('create_script', 'napalm_config'),
     ('content', template),
@@ -83,6 +86,7 @@ napalm_jinja2_script = dict([
 
 file_transfer_script = ImmutableMultiDict([
     ('name', 'test'),
+    ('waiting_time', '0'),
     ('driver', 'cisco_ios'),
     ('source_file', 'path/to/source'),
     ('destination_file', 'path/to/destination'),
@@ -121,6 +125,7 @@ def test_base_scripts(user_client):
 
 getters_dict = ImmutableMultiDict([
     ('name', 'napalm_getters_script'),
+    ('waiting_time', '0'),
     ('getters', 'get_interfaces'),
     ('getters', 'get_interfaces_ip'),
     ('getters', 'get_lldp_neighbors'),
@@ -138,6 +143,7 @@ def test_getters_script(user_client):
 
 ansible_script = ImmutableMultiDict([
     ('name', 'testttt'),
+    ('waiting_time', '0'),
     ('playbook_name', 'testtt')
 ])
 

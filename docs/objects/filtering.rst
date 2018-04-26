@@ -38,6 +38,16 @@ This filter enforces the following conditions:
 
 In summary, all Ethernet links starting from the node ``bnet6`` will be considered, all others ignored. 
 
+Apply a filter
+--------------
+
+Filters are applied from the geographical or logical view.
+You can switch between filters with the drop-down list in the top-right corner of the screen (framed in red below).
+
+.. image:: /_static/objects/filtering/apply_filter.png
+   :alt: Apply a filter
+   :align: center
+
 Example
 -------
 

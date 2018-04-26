@@ -1,3 +1,4 @@
+from apscheduler.jobstores.base import JobLookupError
 from base.database import db, get_obj
 from base.models import (
     task_node_table,
@@ -124,7 +125,10 @@ class Task(CustomBase):
         db.session.commit()
 
     def delete_task(self):
-        scheduler.delete_job(self.creation_time)
+        try:
+            scheduler.delete_job(self.creation_time)
+        except JobLookupError:
+            pass
         db.session.commit()
 
     def recurrent_scheduling(self):

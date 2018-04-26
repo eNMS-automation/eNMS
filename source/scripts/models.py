@@ -2,7 +2,7 @@ from base.database import db, get_obj
 from base.helpers import integrity_rollback, str_dict
 from base.models import script_workflow_table, task_script_table, CustomBase
 from napalm import get_network_driver
-from netmiko import ConnectHandler
+from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
 from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -35,9 +35,10 @@ class Script(CustomBase):
         'polymorphic_on': type
     }
 
-    def __init__(self, name, waiting_time=0):
+    def __init__(self, name, waiting_time=0, description=''):
         self.name = name
         self.waiting_time = waiting_time
+        self.description = description
 
     def __repr__(self):
         return str(self.name)
@@ -68,10 +69,13 @@ class NetmikoConfigScript(Script):
     def __init__(self, real_content, **data):
         name = data['name'][0]
         waiting_time = data['waiting_time'][0]
+        description = data['description'][0]
+        self.vendor = data['vendor'][0]
+        self.operating_system = data['operating_system'][0]
         self.driver = data['driver'][0]
         self.global_delay_factor = data['global_delay_factor'][0]
         self.netmiko_type = data['netmiko_type'][0]
-        super(NetmikoConfigScript, self).__init__(name, waiting_time)
+        super(NetmikoConfigScript, self).__init__(name, waiting_time, description)
         self.content = ''.join(real_content)
 
     def job(self, args):
@@ -112,19 +116,28 @@ class FileTransferScript(Script):
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
+    driver = Column(String)
+    source_file = Column(String)
+    dest_file = Column(String)
+    file_system = Column(String)
+    direction = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'file_transfer',
     }
 
-    def __init__(self, **data):
+    def __init__(self, source_file_path, **data):
         name = data['name'][0]
         waiting_time = data['waiting_time'][0]
-        self.source_file = data['source_file'][0]
-        self.destination_file = data['destination_file'][0]
+        description = data['description'][0]
+        self.vendor = data['vendor'][0]
+        self.operating_system = data['operating_system'][0]
+        self.source_file = source_file_path
+        self.driver = data['driver'][0]
+        self.dest_file = data['dest_file'][0]
         self.file_system = data['file_system'][0]
         self.direction = data['direction'][0]
-        super(FileTransferScript, self).__init__(name, waiting_time)
+        super(FileTransferScript, self).__init__(name, waiting_time, description)
 
     def job(self, args):
         task, node, results = args
@@ -136,8 +149,6 @@ class FileTransferScript(Script):
                 password=cisco_type7.decode(task.user.password),
                 secret=node.secret_password
             )
-            # still in netmiko develop branch for now
-            file_transfer = lambda *a, **kw: 1
             transfer_dict = file_transfer(
                 netmiko_handler,
                 source_file=self.source_file,
@@ -146,11 +157,11 @@ class FileTransferScript(Script):
                 direction=self.direction,
                 overwrite_file=False,
                 disable_md5=False,
-                inline_transer=False
+                inline_transfer=False
             )
             result = str(transfer_dict)
-            netmiko_handler.disconnect()
             success = True
+            netmiko_handler.disconnect()
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
             success = False
@@ -180,11 +191,14 @@ class NetmikoValidationScript(Script):
     def __init__(self, **data):
         name = data['name'][0]
         waiting_time = data['waiting_time'][0]
+        description = data['description'][0]
+        self.vendor = data['vendor'][0]
+        self.operating_system = data['operating_system'][0]
         self.driver = data['driver'][0]
         for i in range(1, 4):
             for property in ('command', 'pattern'):
                 setattr(self, property + str(i), data[property + str(i)][0])
-        super(NetmikoValidationScript, self).__init__(name, waiting_time)
+        super(NetmikoValidationScript, self).__init__(name, waiting_time, description)
 
     def job(self, args):
         task, node, results = args
@@ -237,7 +251,10 @@ class NapalmConfigScript(Script):
     def __init__(self, real_content, **data):
         name = data['name'][0]
         waiting_time = data['waiting_time'][0]
-        super(NapalmConfigScript, self).__init__(name, waiting_time)
+        description = data['description'][0]
+        super(NapalmConfigScript, self).__init__(name, waiting_time, description)
+        self.vendor = data['vendor'][0]
+        self.operating_system = data['operating_system'][0]
         self.content = ''.join(real_content)
         self.action = data['action'][0]
 
@@ -319,8 +336,9 @@ class NapalmGettersScript(Script):
     def __init__(self, **data):
         name = data['name'][0]
         waiting_time = data['waiting_time'][0]
+        description = data['description'][0]
         self.getters = data['getters']
-        super(NapalmGettersScript, self).__init__(name, waiting_time)
+        super(NapalmGettersScript, self).__init__(name, waiting_time, description)
 
     def job(self, args):
         task, node, results = args
@@ -365,7 +383,10 @@ class AnsibleScript(Script):
     def __init__(self, playbook_path, **data):
         name = data['name'][0]
         waiting_time = data['waiting_time'][0]
-        super(AnsibleScript, self).__init__(name, waiting_time)
+        description = data['description'][0]
+        self.vendor = data['vendor'][0]
+        self.operating_system = data['operating_system'][0]
+        super(AnsibleScript, self).__init__(name, waiting_time, description)
         self.playbook_path = playbook_path
 
     def job(self, args):

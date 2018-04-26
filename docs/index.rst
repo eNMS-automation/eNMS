@@ -31,6 +31,14 @@ Automation
 
    automation/index
 
+Tasks
+=====
+
+.. toctree::
+   :maxdepth: 2
+
+   tasks/index
+
 License
 =======
 

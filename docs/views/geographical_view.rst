@@ -19,7 +19,7 @@ All nodes and links are displayed on a 2D representation of the Earth, based on 
 
 The classic 2D map works well for small networks (less than 5000 nodes), when there are no colocated nodes (colocated nodes cannot be distinguished from one another).
 
-.. image:: /_static/views/2D_map.png
+.. image:: /_static/views/geographical_view/2D_map.png
    :alt: Classic 2D map
    :align: center
 
@@ -32,7 +32,7 @@ Nodes and links are displayed as clusters, which size depends on the zoom level.
 The clusterized map works well for large networks (until 50000 nodes), and it supports colocated nodes.
 Clicking on a group of colocated nodes will expand the group.
 
-.. image:: /_static/views/clusterized_map.png
+.. image:: /_static/views/geographical_view/clusterized_map.png
    :alt: Clusterized 2D map
    :align: center
 
@@ -44,7 +44,7 @@ All nodes and links are displayed on a 3D representation of the Earth.
 
 The 3D map works well for small networks (less than 500 nodes) with no colocated nodes.
 
-.. image:: /_static/views/3D_map.png
+.. image:: /_static/views/geographical_view/3D_map.png
    :alt: 3D map
    :align: center
 
@@ -56,20 +56,20 @@ There are three types of tile layer available for the geographical display.
 OpenStreetMap tiles
 *******************
 
-.. image:: /_static/views/osm_layer.png
+.. image:: /_static/views/geographical_view/osm_layer.png
    :alt: Open Street Map
    :align: center
 
 Google Map tiles
 ****************
 
-.. image:: /_static/views/google_map_layer.png
+.. image:: /_static/views/geographical_view/google_map_layer.png
    :alt: Google Map
    :align: center
 
 NASA tiles
 **********
 
-.. image:: /_static/views/nasa_layer.png
+.. image:: /_static/views/geographical_view/nasa_layer.png
    :alt: NASA
    :align: center

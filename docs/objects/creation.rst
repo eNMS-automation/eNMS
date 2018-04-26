@@ -12,8 +12,8 @@ There are different types of nodes and links available in eNMS.
 
 Each type of node (resp. link) has a specific icon (resp. color) when displayed graphically:
     
-.. image:: /_static/objects/object_types.png
-   :alt: test
+.. image:: /_static/objects/management/object_types.png
+   :alt: Different types of objects
    :align: center
 
 Creation
@@ -29,14 +29,14 @@ Manual creation
 
 Clicking on the ``Add a new node`` or ``Add a new link`` buttons will open a form with the list of all properties of the object.
 
-.. image:: /_static/objects/object_creation1.png
-   :alt: test
+.. image:: /_static/objects/management/object_creation1.png
+   :alt: Node and link creation
    :align: center
 
 Fill the form and click on the `Submit` button.
 
-.. image:: /_static/objects/object_creation2.png
-   :alt: test
+.. image:: /_static/objects/management/object_creation2.png
+   :alt: Node and link creation forms
    :align: center
 
 Creation via import
@@ -45,8 +45,14 @@ Creation via import
 All objects can be created at once by importing an Excel file. Each spreadsheet corresponds to a type of object.
 The first line of a spreadsheet contains the properties, the following lines define the objects, as demonstrated in the example below.
 
-.. image:: /_static/objects/import.png
-   :alt: test
+.. image:: /_static/objects/management/import.png
+   :alt: Example of excel spreadsheet for import
+   :align: center
+
+For eNMS to let you choose an Excel spreadsheet to import, click on the ``Import a network topology`` button in the ``object_management`` page.
+
+.. image:: /_static/objects/management/import_button.png
+   :alt: Excel import button
    :align: center
 
 .. note:: You can find examples of such spreadsheets in :guilabel:`eNMS/projects`.

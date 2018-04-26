@@ -28,6 +28,8 @@ Netmiko File transfer script
 A file transfer script sends a file to a device, or retrieve a file from a device.
 It relies on Netmiko file transfer functions.
 
+If you want to send a file to a device, you must place the file in the ``eNMS/file_transfer`` folder.
+
 .. image:: /_static/automation/scripts/file_transfer_script.png
    :alt: Netmiko file transfer script
    :align: center
@@ -35,7 +37,12 @@ It relies on Netmiko file transfer functions.
 .. caution:: File-transfer scripts only works for IOS, IOS-XE, IOS-XR, NX-OS and Junos.
 
 Netmiko validation script
-----------------------------
+-------------------------
+
+A ``Netmiko validation`` script is used to check the state of a device, in a workflow (see the ``Workflow`` section for examples about how it is used).
+
+There are 3 ``command`` field and 3 ``pattern`` field. For each couple of command/pattern field, eNMS will check if the expected pattern can be found in the output of the command.
+If the result is positive for all 3 couples, the script will return ``True`` (allowing the workflow to go forward, following the ``success`` edges), else it will return ``False``.
 
 .. image:: /_static/automation/scripts/netmiko_validation_script.png
    :alt: Netmiko validation script
@@ -56,10 +63,10 @@ Just like with the ``Netmiko configuration`` script, a configuration can be eith
    :alt: NAPALM configuration script
    :align: center
 
-.. note:: the NAPALM driver used by eNMS is the one you configure in the "Operating System" property of a node.
+.. note:: The NAPALM driver used by eNMS is the one you configure in the "Operating System" property of a node.
 The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
 
-.. note:: this script does not by itself commit the configuration. To do so, a ``NAPALM action`` script must be used (see below).
+.. note:: This script does not by itself commit the configuration. To do so, a ``NAPALM action`` script must be used (see below).
 
 NAPALM action script
 --------------------
@@ -79,10 +86,15 @@ A ``NAPALM getters`` script is a list of getters which output is displayed in th
    :alt: NAPALM getters script
    :align: center
 
-.. note:: just like with the ``NAPALM configuration`` scripts, the NAPALM driver used by eNMS is the one configured in the "Operating System" property of a node.
-The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
+.. note:: just like with the ``NAPALM configuration`` scripts, the NAPALM driver used by eNMS is the one configured in the "Operating System" property of a node. The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
 
-Ansible script
---------------
+Ansible playbook script
+-----------------------
 
-work in progress
+An ``Ansible playbook`` script sends an ansible playbook to the devices.
+The playbook file must be placed in the ``eNMS/playbooks`` folder, along with the Ansible configuration file (``ansible.cfg``).
+To create an ``Ansible playbook`` script, simply enter the name of the playbook (example: ``the_playbook.yml``) in the ``Playbook name`` field of the form.
+
+.. image:: /_static/automation/scripts/ansible_playbook_script.png
+   :alt: Ansible script
+   :align: center

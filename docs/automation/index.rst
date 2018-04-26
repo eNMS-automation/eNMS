@@ -5,6 +5,6 @@ Automation
 .. toctree::
    :maxdepth: 1
 
+   credentials
    scripts
    workflows
-   scheduling

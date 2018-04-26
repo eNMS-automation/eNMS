@@ -63,8 +63,8 @@
                 <div class="panel-heading">Modes</div>
                 <div class="panel-body">
                   <div class="btn-group-vertical btn-block" >
-                    <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="switchMode('success')">Success edge</button>
-                    <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="switchMode('failure')">Failure edge</button>
+                    <button id="edge_mode" type="button" class="btn btn-success" style="width:150px;" onclick="switchMode('success')">Success edge</button>
+                    <button id="edge_mode" type="button" class="btn btn-danger" style="width:150px;" onclick="switchMode('failure')">Failure edge</button>
                     <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="switchMode('node')">Move node</button>
                   </div>
                 </div>
@@ -85,9 +85,6 @@
             <div id="network" style="height:600px; width:100%;></div>
             <div class="ln_solid"></div>
             <div class="form-group">
-              <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
-                <button type="button" class="btn btn-success" onclick="saveWorkflow()">Save changes</button>
-              </div>
             </div>
           </div>
         </div>
@@ -126,9 +123,9 @@
           console.log('edit', data);
         },
         addEdge: function (data, callback) {
-          console.log('add edge', data);
           data.arrows = {to: {enabled: true}};
           data.type = edge_type;
+          data.label = edge_type;
           color = edge_type == 'success' ? 'green' : 'red'
           data.color = { color: color }
           if (data.from != data.to) {
@@ -160,6 +157,7 @@
           from: '{{ edge['source']['id'] }}',
           to: '{{ edge['destination']['id'] }}',
           type: '{{ edge['type'] }}',
+          label: '{{ edge['type'] }}',
           color: { color: '{{ edge['type'] }}' == 'success' ? 'green' : 'red' },
           arrows: {to: {enabled: true}}
         },
@@ -179,6 +177,11 @@
         if(typeof node !== "undefined") {
           showObjectModal(node.type, node.label);
         }
+    });
+
+    // use force-based algorithm upon loading the graph, stop after it has stabilized
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions( { physics: false } );
     });
 
     function addNodes() {

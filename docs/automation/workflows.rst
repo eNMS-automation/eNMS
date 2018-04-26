@@ -1,9 +1,10 @@
-========
-Workflow
-========
+=========
+Workflows
+=========
 
-Scripts are created from the :guilabel:`scripts/script_creation` page. 
-There are different types of script available in eNMS:
+Workflows are created and managed from the :guilabel:`workflows/workflow_management` page. 
 
-Configuration script
---------------------
+Creation of a workflow
+----------------------
+
+Click on the 

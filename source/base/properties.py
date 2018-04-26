@@ -111,7 +111,7 @@ pretty_names = OrderedDict([
     ('content_type', 'Content type'),
     ('description', 'Description'),
     ('destination', 'Destination'),
-    ('destination_file', 'Destination file'),
+    ('dest_file', 'Destination file'),
     ('direction', 'Direction'),
     ('driver', 'Driver'),
     ('email', 'Email'),

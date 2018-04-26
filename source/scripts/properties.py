@@ -24,7 +24,7 @@ file_transfer_properties = script_properties + (
     'vendor',
     'operating_system',
     'source_file',
-    'destination_file',
+    'dest_file',
     'file_system',
     'direction'
 )

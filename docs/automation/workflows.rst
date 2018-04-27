@@ -90,3 +90,35 @@ Specifically, we are checking that the output of ``show ip bgp neighbors 1.1.1.1
 .. image:: /_static/automation/workflows/example2.png
    :alt: Workflow builder
    :align: center
+
+Creation of the workflow
+------------------------
+
+In the :guilabel:`workflows/workflow_management` page, click on the button ``Add a new workflow`` and fill the workflow creation form.
+
+.. image:: /_static/automation/workflows/example3.png
+   :alt: Workflow builder
+   :align: center
+
+Building the workflow
+---------------------
+
+In the :guilabel:`workflows/workflow_management` page, click on the button ``Manage`` of the newly created workflow. This opens the ``Workflow builder``.
+
+Click on the ``Add script`` button, and add all 4 scripts: ``configurebgp``, ``validatebgp``, ``NAPALM Commit`` and ``NAPALM Rollback``.
+
+.. image:: /_static/automation/workflows/example4.png
+   :alt: Workflow builder
+   :align: center
+
+Finally, create:
+
+- a ``success edge`` from ``configurebgp`` to ``NAPALM Commit``.
+- a ``success edge`` from ``NAPALM Commit`` to ``validatebgp``.
+- a ``failure edge`` from ``validatebgp`` to ``NAPALM Rollback``.
+
+The workflow is done and ready to be executed:
+
+.. image:: /_static/automation/workflows/example5.png
+   :alt: Workflow builder
+   :align: center

@@ -6,3 +6,4 @@ Tasks
    :maxdepth: 1
 
    scheduling
+   management

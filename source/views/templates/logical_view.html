@@ -177,6 +177,7 @@
                   {% for obj, properties in link_table.items() %}
                     {
                       "real_id": {{ obj.id }},
+                      "name": "{{ obj.name }}",
                       "source": {{ name_to_id[obj['source']['name']] }},
                       "target": {{ name_to_id[obj['destination']['name']] }}
                     },
@@ -198,8 +199,12 @@
               };
 
               // selection function
-              function showProperties(d) {
+              function showNodeProperties(d) {
                 showObjectModal('node', d.name);
+              };
+
+              function showLinkProperties(d) {
+                showObjectModal('link', d.name);
               };
 
               function unselectAll() {
@@ -329,7 +334,8 @@
               var link = container.selectAll(".link")
                 .data(graph.links)
                 .enter().append("line")
-                .attr("class", "link");
+                .attr("class", "link")
+                .on("dblclick", showLinkProperties);
             
               var node = container.selectAll(".node")
                 .data(graph.nodes)
@@ -337,7 +343,7 @@
                 .attr("class", "node")
                 .call(force.drag)
                 .on("click", selectNode)
-                .on("dblclick", showProperties);
+                .on("dblclick", showNodeProperties);
 
               function zoomed() {
                 container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");

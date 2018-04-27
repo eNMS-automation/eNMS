@@ -290,7 +290,7 @@
                   polyline_array.push(polyline);
                   polyline.link_id = {{ obj.id }};
 
-                  polyline.on("click", function (e) {
+                  polyline.on("dblclick", function (e) {
                     showObjectModal('link', '{{ obj['name'] }}');
                   });
               
@@ -326,6 +326,7 @@
                     marker.on("dblclick", function (e) {
                       showObjectModal('node', '{{ obj['name'] }}');
                     });
+
                     marker.node_id = {{ obj.id }};
                     markers_array.push(marker);
                   {% endfor %}

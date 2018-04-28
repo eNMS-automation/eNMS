@@ -8,3 +8,4 @@ Automation
    credentials
    scripts
    workflows
+   os_upgrade

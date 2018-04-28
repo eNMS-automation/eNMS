@@ -1,6 +1,6 @@
-===================
-OS upgrade workflow
-===================
+==========
+OS upgrade
+==========
 
 We consider a Cisco router with IOS ``12.4(13r)T`` and the IOS image ``c1841-spservicesk9-mz.124-8.bin``.
 Let's create a workflow to upgrade to ``c1841-adventerprisek9-mz.124-8a.bin``.
@@ -31,11 +31,41 @@ We place the ``c1841-adventerprisek9-mz.124-8a.bin`` in the :guilabel:`eNMS/file
 and we create the file transfer script:
 
 .. image:: /_static/automation/os_upgrade/transfer_new_image.png
-   :alt: Pre-check version
+   :alt: Transfer new IOS image
    :align: center
 
-3. Reload the device
-********************
+3. Preconfigure the router for the upgrade
+******************************************
+
+We need to upgrade the configuration register to ``0x2102``, and tell the router to boot from the IOS image that we've uploaded in the last step.
+
+We create a ``Netmiko configuration`` script of type ``configuration`` with the following commands:
+
+.. image:: /_static/automation/os_upgrade/preconfiguration.png
+   :alt: Preconfiguration
+   :align: center
+
+4. Save and reload
+******************
+
+We use a ``Netmiko configuration`` of type ``"show" commands`` to save the latest changes and reload the device.
+
+Each script has a ``Waiting time`` parameter (seconds) that tells eNMS how much time it must wait before proceeding to the next script in the workflow.
+
+After sending the script, we have to wait a bit for the device to reload and be available again: we set the ``waiting time`` of the script to ``120`` (2 minutes).
+
+.. image:: /_static/automation/os_upgrade/save_and_reload.png
+   :alt: Save configuration and reload the device
+   :align: center
+
+5. Post-reload version check
+****************************
+
+We create a ``Netmiko validation`` script similar to the one used in the first step to check that the IOS image used by the router is indeed the new one.
+
+.. image:: /_static/automation/os_upgrade/version_check_after_reload.png
+   :alt: Post-check version
+   :align: center
 
 2. Delete the old IOS image
 ***************************
@@ -46,41 +76,7 @@ We do not need to enter the configuration mode to type this command and delete t
 
 
 
-* :guilabel:`Add script`: open a window to select which script you want to add to the workflow.
-* :guilabel:`Delete selection`: delete the selected script or edge.
-* :guilabel:`Set as start`: the selected script is set as the beginning of the workflow. It will be highlighted in green.
-* :guilabel:`Success edge`: switch to the ``success edge`` creation mode, allowing you to draw ``success edge`` between scripts.
-* :guilabel:`Failure edge`: same as ``success edge``.
-* :guilabel:`Move node`: switch to the motion node, allowing you to drag the scripts on the canvas to better visualize the workflow.
 
-.. note:: You can double-click on a script to update its properties.
-
-Create a workflow step by step
-******************************
-
-Let's create the BGP workflow discussed in the first paragraph.
-
-Creation of the validatebgp script
-----------------------------------
-
-In the :guilabel:`scripts/script_creation` page, we create a ``NAPALM configuration`` script to configure the BGP neighbor on the device.
-
-Configuration:
-
-.. image:: /_static/automation/workflows/example1.png
-   :alt: Workflow builder
-   :align: center
-
-Creation of the validatebgp script
-----------------------------------
-
-In the :guilabel:`scripts/script_creation` page, we create a ``Netmiko validation`` script to check that 1.1.1.1 is indeed considered a BGP neighbor on the device.
-
-Specifically, we are checking that the output of ``show ip bgp neighbors 1.1.1.1`` contains the line ``BGP neighbor is 1.1.1.1``.
-
-.. image:: /_static/automation/workflows/example2.png
-   :alt: Workflow builder
-   :align: center
 
 Creation of the workflow
 ------------------------

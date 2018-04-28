@@ -117,6 +117,8 @@ Finally, create:
 - a ``success edge`` from ``NAPALM Commit`` to ``validatebgp``.
 - a ``failure edge`` from ``validatebgp`` to ``NAPALM Rollback``.
 
+Select ``configurebgp`` and click on the ``Set as start`` button to tell eNMS that this is where the workflow begins.
+
 The workflow is done and ready to be executed:
 
 .. image:: /_static/automation/workflows/example5.png

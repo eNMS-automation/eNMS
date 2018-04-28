@@ -103,20 +103,15 @@ Click on the ``Add script`` button, and add all 6 scripts:
 
 - ``version-check-before-reload``
 - ``preconfiguration``
-- ``transfer-new-image`` and ``NAPALM Rollback``.
+- ``transfer-new-image``
+- ``save-and-reload``
+- ``version-check-after-reload``
+- ``delete-old-image``
 
-.. image:: /_static/automation/workflows/example4.png
-   :alt: Workflow builder
-   :align: center
-
-Finally, create:
-
-- a ``success edge`` from ``configurebgp`` to ``NAPALM Commit``.
-- a ``success edge`` from ``NAPALM Commit`` to ``validatebgp``.
-- a ``failure edge`` from ``validatebgp`` to ``NAPALM Rollback``.
+Between each consecutive pair of scripts, we create a success edge, and we set ``version-check-before-reload`` as the beginning of the workflow.
 
 The workflow is done and ready to be executed:
 
-.. image:: /_static/automation/workflows/example5.png
-   :alt: Workflow builder
+.. image:: /_static/automation/os_upgrade/reload_workflow.png
+   :alt: Reload workflow
    :align: center

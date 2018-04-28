@@ -2,13 +2,11 @@
   <div class="navbar nav_title" style="border: 0;">
     <a href="" class="site_title"><i class="fa fa-spinner"></i> <span> eNMS </span></a>
   </div>
-
   <div class="clearfix"></div>
-
   <!-- menu profile quick info -->
   <div class="profile clearfix">
     <div class="profile_pic">
-      <img src="{{ url_for('admin_blueprint.static', filename='images/afourmy.jpg') }}" alt="..." class="img-circle profile_img">
+      <img src="{{ url_for('admin_blueprint.static', filename='images/user.png') }}" alt="..." class="img-circle profile_img">
     </div>
     <div class="profile_info">
       <span> Welcome, </span>
@@ -16,22 +14,18 @@
     </div>
   </div>
   <!-- /menu profile quick info -->
-
   <br />
-
   <!-- sidebar menu -->
   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
       <h3>General</h3>
       <ul class="nav side-menu">
-      
         <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/logs">Logs</a></li>
           </ul>
         </li>
-        
         <li><a><i class="fa fa-users"></i> Admin <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/admin/user_management">User management</a></li>
@@ -39,44 +33,37 @@
             <li><a href="/admin/syslog_server">Configure Syslog server</a></li>
           </ul>
         </li>
-        
         <li><a><i class="fa fa-sitemap"></i> Objects <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/objects/object_management">Object management</a></li>
             <li><a href="/objects/object_filtering">Object filtering</a></li>
           </ul>
         </li>
-        
         <li><a><i class="fa fa-map-marker"></i> Views <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/views/geographical_view">Geographical view</a></li>
             <li><a href="/views/logical_view">Logical view</a></li>
           </ul>
         </li>
-        
         <li><a><i class="fa fa-clock-o"></i> Scripts <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/scripts/script_management">Script management</a></li>
             <li><a href="/scripts/script_creation">Script creation</a></li>
           </ul>
         </li>
-
         <li><a><i class="fa fa-clock-o"></i> Workflows <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/workflows/workflow_management">Workflow management</a></li>
           </ul>
         </li>
-
         <li><a><i class="fa fa-clock-o"></i> Tasks <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/tasks/task_management">Task management</a></li>
             <li><a href="/tasks/calendar">Calendar</a></li>
           </ul>
         </li>
-
       </ul>
     </div>
   </div>
   <!-- /sidebar menu -->
-
 </div>

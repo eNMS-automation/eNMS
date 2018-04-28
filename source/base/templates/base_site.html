@@ -10,9 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
       {% endblock meta %}
-
       <title>eNMS | {% block title %}{% endblock %}</title>
-
       {% block stylesheets %}
         <!-- Bootstrap -->
         <link href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}" rel="stylesheet">
@@ -28,37 +26,30 @@
       <link href="{{ url_for('static', filename='enms/enms.min.css') }}" rel="stylesheet">
     {% endblock head %}
   </head>
-
   <body class="{% block body_class %}nav-md {% endblock body_class %}">
     {% block body %}
       <div class="container body">
         <div class="main_container">
-
           {% block sidebar %}
             <div class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}">
               {% include "structure/sidebar.html" %}
             </div>
           {% endblock sidebar %}
-          
           {% block top_navigation %}
             <div class="top_nav">
               {% include "structure/top_navigation.html" %}
             </div>
           {% endblock top_navigation %}
-
           {% block content %}
             <!-- {{ content }} -->
           {% endblock content %}
-
           {% block footer %}
             <footer>
               {% include "structure/footer.html" %}
             </footer>
           {% endblock footer %}
-
         </div>
       </div>
-
       {% block javascripts %}
         <!-- jQuery -->
         <script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>

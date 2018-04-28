@@ -186,12 +186,17 @@
 
     function addNodes() {
       var scripts = $('#scripts').val();
+      console.log(nodes.map(s => s.label));
       for (var i = 0; i < scripts.length; i++) {
-        nodes.add({
-          id: scripts[i],
-          label: scripts[i],
-          type: $("#script_type").val()
-        })
+        if (!nodes.map(s => s.label).includes(scripts[i])) {
+          nodes.add({
+            id: scripts[i],
+            label: scripts[i],
+            type: $("#script_type").val()
+          })
+        } else {
+          alertify.notify(`Cannot add ${scripts[i]}: already in the workflow`, 'error', 5);
+        }
         $('#add-script').modal('hide');
       }
       saveWorkflow()

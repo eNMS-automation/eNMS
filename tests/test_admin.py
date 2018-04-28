@@ -1,5 +1,6 @@
-from admin.models import TacacsServer, User
+from admin.models import SyslogServer, TacacsServer, User
 from test_base import check_blueprints
+from werkzeug.datastructures import ImmutableMultiDict
 
 
 @check_blueprints('', '/admin')
@@ -28,3 +29,18 @@ def test_tacacs_configuration(user_client):
     }
     user_client.post('/admin/save_tacacs_server', data=tacacs_server)
     assert len(TacacsServer.query.all()) == 1
+
+
+@check_blueprints('', '/admin')
+def test_syslog_server(user_client):
+    syslog_server = ImmutableMultiDict([
+        ('ip_address', '0.0.0.0'),
+        ('port', '514')
+    ])
+    user_client.post('/admin/save_syslog_server', data=syslog_server)
+    assert len(SyslogServer.query.all()) == 1
+    syslog_server2 = ImmutableMultiDict([
+        ('ip_address', '1.1.1.1'),
+        ('port', '514')
+    ])
+    assert len(SyslogServer.query.all()) == 1

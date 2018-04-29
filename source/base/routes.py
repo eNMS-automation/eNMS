@@ -107,7 +107,7 @@ def filter_logs():
 @blueprint.route('/<property>_<type>', methods=['POST'])
 @flask_login.login_required
 def get_counters(property, type):
-    objects, property = types[type].query.all(), reverse_pretty_names[property]
+    objects = types[type].query.all()
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 

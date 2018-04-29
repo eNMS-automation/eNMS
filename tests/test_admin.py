@@ -40,7 +40,7 @@ def test_syslog_server(user_client):
     user_client.post('/admin/save_syslog_server', data=syslog_server)
     assert len(SyslogServer.query.all()) == 1
     syslog_server2 = ImmutableMultiDict([
-        ('ip_address', '127.0.0.1'),
+        ('ip_address', '0.0.0.0'),
         ('port', '514')
     ])
     user_client.post('/admin/save_syslog_server', data=syslog_server2)

@@ -180,7 +180,6 @@ def save_tacacs_server():
 @blueprint.route('/save_syslog_server', methods=['POST'])
 @login_required
 def save_syslog_server():
-    print(request.form)
     SyslogServer.query.delete()
     syslog_server = SyslogServer(**request.form.to_dict())
     db.session.add(syslog_server)

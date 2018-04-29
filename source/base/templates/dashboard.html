@@ -281,7 +281,7 @@
     };
 
   function draw_diagrams(objects, type) {
-    var legend = [];
+    var legend = []
         data = [];
     for (const [key, value] of Object.entries(objects)) {
       legend.push(key);
@@ -356,16 +356,20 @@
   });
     }
 
-  {% for type, property in default_properties.items() %}
+  var default_properties = {{default_properties|tojson|safe}};
+  var counters = {{counters|tojson|safe}};
+  $.each(default_properties, function(type, property) {
     $.ajax({
       type: "POST",
-      url: '/{{ names[property] }}_{{ type }}',
+      url: `/${property}_${type}`,
       dataType: "json",
       success: function(objects){
-        draw_diagrams(objects, '{{ type }}');
+        draw_diagrams(objects, type);
       }
     });
-  {% endfor %}
+  });
+
+  
   {% for type in counters %}
     $('#{{ type }}-properties').on('change', function() {
       $.ajax({

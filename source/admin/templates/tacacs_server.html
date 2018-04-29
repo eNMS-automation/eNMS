@@ -45,18 +45,5 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-  function saveServer() {
-    if ($('#form').parsley().validate()) {
-      $.ajax({
-        type: "POST",
-        url: "/admin/save_tacacs_server",
-        data: $('#form').serialize(),
-        success: function() {
-          alertify.notify(`Tacacs server saved`, 'success', 5);
-        }
-      });
-    }
-  }
-  </script>
+  <script src="{{ url_for('admin_blueprint.static', filename='js/tacacs_server.js') }}"></script>
 {% endblock javascripts %}

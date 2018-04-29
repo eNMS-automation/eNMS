@@ -43,4 +43,5 @@ def test_syslog_server(user_client):
         ('ip_address', '1.1.1.1'),
         ('port', '514')
     ])
+    user_client.post('/admin/save_syslog_server', data=syslog_server2)
     assert len(SyslogServer.query.all()) == 1

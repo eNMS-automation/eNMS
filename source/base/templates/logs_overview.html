@@ -28,14 +28,18 @@
                         {% for property in form.properties %}
                           <th>{{ names[property] }}</th>
                         {% endfor %}
+                        <th>Delete</th>
                       </tr>
                     </thead>
                     <tbody id="log-body">
                       {% for log in logs %}
-                        <tr>
+                        <tr id="{{ log['source'] }}-{{ log['content'] }}">
                           {% for property in form.properties %}
                             <td>{{ log[property] }}</td>
                           {% endfor %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ log['source'] }}', '{{ log['content'] }}')">Delete</button>
+                          </td>
                         </tr>
                       {% endfor %}
                     </tbody>
@@ -84,26 +88,37 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-  $('#log-table').DataTable();
+    $('#log-table').DataTable();
 
-  function filterLogs() {
-    $.ajax({
-      type: "POST",
-      url: "/filter_logs",
-      data: $('#form').serialize(),
-      success: function(logs) {
-        $("#log-body").empty();
-        for (i = 0; i < logs.length; i++) {
-          log = ['<tr>'];
-          for (j = 0; j < logs[i].length; j++) {
-            log.push(`<td>${logs[i][j]}</td>`);
+    function filterLogs() {
+      $.ajax({
+        type: "POST",
+        url: "/filter_logs",
+        data: $('#form').serialize(),
+        success: function(logs) {
+          $("#log-body").empty();
+          for (i = 0; i < logs.length; i++) {
+            log = ['<tr>'];
+            for (j = 0; j < logs[i].length; j++) {
+              log.push(`<td>${logs[i][j]}</td>`);
+            }
+            log.push('</tr>');
+            $("#log-body").append(log.join(''));
           }
-          log.push('</tr>');
-          $("#log-body").append(log.join(''));
+          alertify.notify(`Logs successfully filtered !`, 'success', 5);
         }
-        alertify.notify(`Logs successfully filtered !`, 'success', 5);
-      }
-    });
-  }
+      });
+    }
+
+    function deleteLog(source, content) {
+      $(`#${source}-${content}`).remove();
+      $.ajax({
+        type: "POST",
+        url: `/delete_log_${source}_${content}`,
+        success: function(msg){
+          alertify.notify("Log deleted", 'error', 5);
+        }
+      });
+    }
   </script>
 {% endblock javascripts %}

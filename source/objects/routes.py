@@ -73,7 +73,7 @@ def filter_objects():
 ## AJAX calls
 
 
-@blueprint.route('/get_<obj_type>_<name>', methods=['POST'])
+@blueprint.route('/get/<obj_type>/<name>', methods=['POST'])
 @login_required
 def get_object(obj_type, name):
     cls = Node if obj_type == 'node' else Link
@@ -94,7 +94,7 @@ def edit_object():
     return jsonify({})
 
 
-@blueprint.route('/delete_<obj_type>_<name>', methods=['POST'])
+@blueprint.route('/delete/<obj_type>/<name>', methods=['POST'])
 @login_required
 def delete_object(obj_type, name):
     cls = Node if obj_type == 'node' else Link

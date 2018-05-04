@@ -160,7 +160,7 @@
       $('#title').text(`Edit ${type} properties`);
       $.ajax({
         type: "POST",
-        url: `/objects/get_${type}_${name}`,
+        url: `/objects/get/${type}/${name}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
             $(`#${type}-${property}`).val(value);
@@ -219,7 +219,7 @@
       $(`#${type}-${name}`).remove();
       $.ajax({
         type: "POST",
-        url: `/objects/delete_${type}_${name}`,
+        url: `/objects/delete/${type}/${name}`,
         success: function(msg){
           alertify.notify(`Object ${name} deleted`, 'error', 5);
         }

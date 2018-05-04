@@ -238,7 +238,7 @@
           s2 = $("#second_script").val();
       $.ajax({
         type: "POST",
-        url: `/tasks/get_compare_${window.task}_${v1}_${v2}_${n1}_${n2}_${s1}_${s2}`,
+        url: `/tasks/get_compare/${window.task}/${v1}/${v2}/${n1}/${n2}/${s1}/${s2}`,
         dataType: 'json',
         success: function(diff){
           //console.log(ndiff, unified_diff);

@@ -142,7 +142,7 @@ links = ['link' + str(i) for i in range(4, 15)]
 def test_node_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for node in nodes:
-        user_client.post('/objects/delete_node_' + node)
+        user_client.post('/objects/delete/node/' + node)
     assert len(Node.query.all()) == 18
     assert len(Link.query.all()) == 18
 
@@ -151,7 +151,7 @@ def test_node_deletion(user_client):
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for link in links:
-        user_client.post('/objects/delete_link_' + link)
+        user_client.post('/objects/delete/link/' + link)
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 38
 

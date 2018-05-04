@@ -285,7 +285,7 @@ gauge: {
 $.each(default_properties, function(type, property) {
   $.ajax({
     type: "POST",
-    url: `/${property}_${type}`,
+    url: `/counters/${property}/${type}`,
     dataType: "json",
     success: function(objects){
       draw_diagrams(objects, type);
@@ -297,7 +297,7 @@ $.each(counters, function(type, _) {
   $(`#${type}-properties`).on('change', function() {
     $.ajax({
       type: "POST",
-      url: `/${this.value}_${type}`,
+      url: `/counters/${this.value}/${type}`,
       dataType: "json",
       success: function(objects){
         draw_diagrams(objects, type);

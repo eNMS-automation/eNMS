@@ -83,7 +83,7 @@ def configuration():
 ## AJAX calls
 
 
-@blueprint.route('/get_<script_type>_<name>', methods=['POST'])
+@blueprint.route('/get/<script_type>/<name>', methods=['POST'])
 @login_required
 def get_script(script_type, name):
     script = get_obj(Script, name=name)

@@ -48,7 +48,6 @@ def calendar():
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar
-        print(task.start_date)
         python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
         month = '{:02}'.format((int(python_month) - 1) % 12)
         tasks[task] = sub(
@@ -102,7 +101,7 @@ def show_logs(name):
     return jsonify(str_dict(task.logs))
 
 
-@blueprint.route('/get_compare_<name>_<v1>_<v2>_<n1>_<n2>_<s1>_<s2>', methods=['POST'])
+@blueprint.route('/get_compare/<name>/<v1>/<v2>/<n1>/<n2>/<s1>/<s2>', methods=['POST'])
 @login_required
 def get_compare(name, v1, v2, n1, n2, s1, s2):
     task = get_obj(Task, name=name)

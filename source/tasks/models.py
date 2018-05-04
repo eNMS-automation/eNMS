@@ -78,6 +78,7 @@ class Task(CustomBase):
     )
 
     def __init__(self, **data):
+        print(data)
         self.data = data
         self.name = data['name']
         self.nodes = data['nodes']
@@ -92,8 +93,8 @@ class Task(CustomBase):
         # if the start date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting
         for date in ('start_date', 'end_date'):
-            date = data[date]
-            value = self.datetime_conversion(date) if date else None
+            js_date = data[date]
+            value = self.datetime_conversion(js_date) if js_date else None
             setattr(self, date, value)
         self.is_active = True
         if self.frequency:

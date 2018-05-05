@@ -33,7 +33,7 @@ def test_tacacs_configuration(user_client):
 
 log1 = ('<189>19: *May  5 05:26:27.523: %LINEPROTO-5-UPDOWN: Line protocol on'
         'Interface FastEthernet0/0, changed state to up')
-log2 = ('<189>20: *May  5 05:26:30.275: %LINEPROTO-5-UPDOWN: Line protocol on' 
+log2 = ('<189>20: *May  5 05:26:30.275: %LINEPROTO-5-UPDOWN: Line protocol on'
         'Interface FastEthernet0/0, changed state to down')
 
 

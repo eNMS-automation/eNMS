@@ -43,6 +43,8 @@ styles = create_styles(blueprint.root_path)
 def view(view_type):
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
+    all_nodes = Node.choices()
+    add_link_form.source.choices = add_link_form.destination.choices = all_nodes
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)

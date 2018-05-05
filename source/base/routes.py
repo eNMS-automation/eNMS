@@ -1,3 +1,4 @@
+from base.database import db, get_obj
 from collections import Counter
 from flask import (
     Blueprint,
@@ -112,6 +113,14 @@ def get_counters(property, type):
         property = reverse_pretty_names[property]
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
+
+@blueprint.route('/delete_log/<log_id>', methods=['POST'])
+@login_required
+def delete_log(log_id):
+    log = get_obj(Log, id=log_id)
+    db.session.delete(log)
+    db.session.commit()
+    return jsonify({})
 
 ## Errors
 

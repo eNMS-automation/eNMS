@@ -462,7 +462,7 @@
     function showObjectModal(type, name) {
       $.ajax({
         type: "POST",
-        url: `/objects/get_${type}_${name}`,
+        url: `/objects/get/${type}/${name}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
             $(`#${type}-${property}`).val(value);

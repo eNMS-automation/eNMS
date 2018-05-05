@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-          <div class="x_content" style="height:550px;">
+          <div class="x_content" style="height:650px;">
             <div role="tabpanel" data-example-id="togglable-tabs">
               <ul class="nav nav-tabs bar_tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#logs" role="tab" data-toggle="tab" aria-expanded="true">Logs</a>
@@ -22,7 +22,7 @@
               </ul>
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade active in" id="logs">
-                  <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <table id="log-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
                         {% for property in form.properties %}
@@ -33,12 +33,12 @@
                     </thead>
                     <tbody id="log-body">
                       {% for log in logs %}
-                        <tr id="{{ log['source'] }}-{{ log['content'] }}">
+                        <tr id="{{ log.id }}">
                           {% for property in form.properties %}
                             <td>{{ log[property] }}</td>
                           {% endfor %}
                           <td>
-                            <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ log['source'] }}', '{{ log['content'] }}')">Delete</button>
+                            <button type="button" class="btn btn-danger btn-xs" onclick="deleteLog('{{ log.id }}')">Delete</button>
                           </td>
                         </tr>
                       {% endfor %}
@@ -110,11 +110,11 @@
       });
     }
 
-    function deleteLog(source, content) {
-      $(`#${source}-${content}`).remove();
+    function deleteLog(id) {
+      $(`#${id}`).remove();
       $.ajax({
         type: "POST",
-        url: `/delete_log_${source}_${content}`,
+        url: `/delete_log/${id}`,
         success: function(msg){
           alertify.notify("Log deleted", 'error', 5);
         }

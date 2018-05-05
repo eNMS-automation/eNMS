@@ -285,7 +285,7 @@
       $('#title').text(`Edit ${name} properties`);
       $.ajax({
         type: "POST",
-        url: `/scripts/get_${type}_${name}`,
+        url: `/scripts/get/${type}/${name}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
             $(`#${type}-${property}`).val(value);

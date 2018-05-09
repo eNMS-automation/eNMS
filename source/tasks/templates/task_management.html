@@ -4,6 +4,50 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <link href="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+  <style type="text/css">
+    body {
+      font-size: 12px;
+      font-family: Sans-Serif;
+    }
+    
+    h2 {
+      margin: 0.5em 0 0.1em;
+      text-align: center;
+    }
+    
+    .top {
+      text-align: center;
+    }
+    
+    .textInput {
+      display: block;
+      width: 49%;
+      float: left;
+    }
+    
+    textarea {
+      width:100%;
+      height:300px;
+    }
+    
+    label:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    
+    .spacer {
+      margin-left: 10px;
+    }
+    
+    .viewType {
+      width: 100%;
+      font-size: 16px;
+      clear: both;
+      text-align: center;
+      padding: 1em;
+    }
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -63,11 +107,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <h2> Unified diff </h2>
-            {{ compare_form.unified_diff(class="form-control", rows=10) }}
-            <h2> Ndiff </h2>
-            {{ compare_form.ndiff(class="form-control", rows=10) }}
+          <div id="view" class="col-md-12 col-sm-12 col-xs-12">
           </div>
         </div>
       </div>
@@ -147,6 +187,9 @@
   <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
   <!-- Bootstrap Datetimepicker -->
   <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+  <!-- Difflib -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='difflib/difflib.js') }}"></script>
   <!-- Initialize datetimepicker and SmartWizard -->
   <script>
     $('#task-table').DataTable();
@@ -230,6 +273,7 @@
     }
 
     $("#first_version,#second_version,#first_node,#second_node,#first_script,#second_script").on('change', function() {
+      $("#view").empty();
       var v1 = $("#first_version").val()
           v2 = $("#second_version").val()
           n1 = $("#first_node").val()
@@ -238,12 +282,18 @@
           s2 = $("#second_script").val();
       $.ajax({
         type: "POST",
-        url: `/tasks/get_compare/${window.task}/${v1}/${v2}/${n1}/${n2}/${s1}/${s2}`,
+        url: `/tasks/get_diff/${window.task}/${v1}/${v2}/${n1}/${n2}/${s1}/${s2}`,
         dataType: 'json',
-        success: function(diff){
-          //console.log(ndiff, unified_diff);
-          $("#ndiff").text(diff[0]);
-          $("#unified_diff").text(diff[1]);
+        success: function(data){
+          $("#view").append(diffview.buildView({
+            baseTextLines: data.first,
+            newTextLines: data.second,
+            opcodes: data.opcodes,
+            baseTextName: `${n1} - ${s1} - ${v1}`,
+            newTextName: `${n2} - ${s2} - ${v2}`,
+            contextSize: null,
+            viewType: 0
+          }));
         }
       });
     });

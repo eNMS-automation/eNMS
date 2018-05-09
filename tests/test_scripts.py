@@ -160,7 +160,8 @@ ansible_script = ImmutableMultiDict([
     ('description', ''),
     ('vendor', ''),
     ('operating_system', ''),
-    ('playbook_name', 'testtt')
+    ('playbook_path', 'test.yml'),
+    ('arguments', '--ask-vault')
 ])
 
 

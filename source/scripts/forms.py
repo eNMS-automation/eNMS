@@ -125,4 +125,5 @@ class NetmikoValidationForm(ScriptForm):
 class AnsibleScriptForm(ScriptForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
-    playbook_name = TextField('Playbook name')
+    playbook_path = TextField('Path to playbook')
+    arguments = TextField('Optional arguments')

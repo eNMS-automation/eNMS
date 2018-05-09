@@ -374,25 +374,33 @@ class AnsibleScript(Script):
     vendor = Column(String)
     operating_system = Column(String)
     playbook_path = Column(String)
+    arguments = Column(String)
     options = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
         'polymorphic_identity': 'ansible_playbook',
     }
 
-    def __init__(self, playbook_path, **data):
+    def __init__(self, **data):
         name = data['name'][0]
         waiting_time = data['waiting_time'][0]
         description = data['description'][0]
         self.vendor = data['vendor'][0]
         self.operating_system = data['operating_system'][0]
+        self.playbook_path = data['playbook_path'][0]
+        self.arguments = data['arguments'][0]
         super(AnsibleScript, self).__init__(name, waiting_time, description)
-        self.playbook_path = playbook_path
 
     def job(self, args):
         _, node, results = args
-        command = ['ansible-playbook', '-i', node.ip_address + ",", self.playbook_path]
-        results[node.name] = check_output(command)
+        arguments = self.arguments.split()
+        command = [
+            'ansible-playbook',
+            '-i',
+            node.ip_address + ",",
+            self.playbook_path,
+        ]
+        results[node.name] = check_output(command + arguments)
         return True
 
 

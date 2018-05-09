@@ -5,12 +5,19 @@
 {% block stylesheets %}
   {{ super() }}
   <link href="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+  <style>
+    @media (min-width: 992px) {
+      .modal-lg {
+        width: 1200px;
+      }
+    }
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}
 {% include 'scheduling_modal.html' %}
 <div id="show-logs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="width:1250px;">
+  <div class="modal-dialog modal-lg" style="width:100%;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">

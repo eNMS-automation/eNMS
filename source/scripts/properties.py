@@ -49,6 +49,7 @@ ansible_playbook_properties = script_properties + (
     'vendor',
     'operating_system',
     'playbook_path',
+    'arguments',
 )
 
 type_to_properties = {

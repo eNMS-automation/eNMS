@@ -134,16 +134,13 @@ def create_script(script_type):
             'netmiko_config': NetmikoConfigScript,
             'napalm_config': NapalmConfigScript
         }[script_type](real_content, **request.form)
-    elif script_type == 'ansible_playbook':
-        playbook_name = request.form['playbook_name']
-        playbook_path = join(current_app.path_playbooks, playbook_name)
-        script = AnsibleScript(playbook_path, **request.form)
     elif script_type == 'file_transfer':
         source_file_name = request.form['source_file']
         source_file_path = join(current_app.path_file_transfer, source_file_name)
         script = FileTransferScript(source_file_path, **request.form)
     else:
         script = {
+            'ansible_playbook': AnsibleScript,
             'napalm_getters': NapalmGettersScript,
             'netmiko_validation': NetmikoValidationScript
         }[script_type](**request.form)

@@ -1,6 +1,6 @@
 from base.database import db, get_obj
 from base.helpers import str_dict
-from difflib import ndiff, unified_diff
+from difflib import SequenceMatcher
 from flask import Blueprint, jsonify, render_template, request, session
 from flask_login import current_user, login_required
 from .forms import CompareForm
@@ -101,13 +101,18 @@ def show_logs(name):
     return jsonify(str_dict(task.logs))
 
 
-@blueprint.route('/get_compare/<name>/<v1>/<v2>/<n1>/<n2>/<s1>/<s2>', methods=['POST'])
+@blueprint.route('/get_diff/<name>/<v1>/<v2>/<n1>/<n2>/<s1>/<s2>', methods=['POST'])
 @login_required
-def get_compare(name, v1, v2, n1, n2, s1, s2):
+def get_diff(name, v1, v2, n1, n2, s1, s2):
     task = get_obj(Task, name=name)
-    res1 = str_dict(task.logs[v1][s1][n1]).splitlines()
-    res2 = str_dict(task.logs[v2][s2][n2]).splitlines()
-    return jsonify('\n'.join(ndiff(res1, res2)), '\n'.join(unified_diff(res1, res2)))
+    first = str_dict(task.logs[v1][s1][n1]).splitlines()
+    second = str_dict(task.logs[v2][s2][n2]).splitlines()
+    opcodes = SequenceMatcher(None, first, second).get_opcodes()
+    return jsonify({
+        'first': first,
+        'second': second,
+        'opcodes': opcodes,
+    })
 
 
 @blueprint.route('/compare_logs_<name>', methods=['POST'])

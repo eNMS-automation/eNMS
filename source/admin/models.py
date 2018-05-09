@@ -66,6 +66,8 @@ def user_factory(**kwargs):
     if user:
         for property, value in kwargs.items():
             if property in user.__dict__:
+                if property == 'password':
+                    value = cisco_type7.hash(value)
                 setattr(user, property, value)
     else:
         user = User(**kwargs)

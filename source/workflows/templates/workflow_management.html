@@ -20,9 +20,10 @@
           <div class="modal-body">
             <div class="form-group" style="height: 450px">
               {% for field in form if field.widget.input_type != 'hidden'  %}
+                {% set validate = " required" if field.name == "name" else "" %}
                 <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                  {{ field(id=field.name, class="form-control") }}
+                  {{ field(id=field.name, class="form-control" + validate) }}
                 </div><br><br>
               {% endfor %}
             </div>
@@ -144,25 +145,27 @@
       <td>
       <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${name}')">Delete</button>
       </td>`);
-      
-      if (mode == 'edit') {
-        $(`#${name}`).html(values.join(''));
-      } else {
-        values.unshift(`<tr id="${name}">`);
-        values.push('</tr>');
-        $("#table tbody").append(values.join(''));
-      }
 
-      $.ajax({
-        type: "POST",
-        url: `/workflows/edit_workflow`,
-        dataType: "json",
-        data: $("#edit-form").serialize(),
-        success: function(msg){
-          alertify.notify(`Workflow ${name} edited`, 'success', 5);
-        }
-      });
-      $(`#edit`).modal('hide');
+      if ($("#edit-form").parsley().validate() ) {
+        $.ajax({
+          type: "POST",
+          url: `/workflows/edit_workflow`,
+          dataType: "json",
+          data: $("#edit-form").serialize(),
+          success: function(msg){
+            if (mode == 'edit') {
+              $(`#${name}`).html(values.join(''));
+            } else {
+              values.unshift(`<tr id="${name}">`);
+              values.push('</tr>');
+              $("#table tbody").append(values.join(''));
+            }
+            message = `Workflow ${name} ` + (mode == 'edit' ? 'edited !' : 'created !')
+            alertify.notify(message, 'success', 5);
+          }
+        });
+        $(`#edit`).modal('hide');
+      }
     }
 
     function deleteObject(name) {

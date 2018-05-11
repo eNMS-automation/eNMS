@@ -4,8 +4,9 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <link href="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
   <style>
-  
+    #logical_view { height:90vh; }
   .link {
     stroke: #ccc;
   }
@@ -33,9 +34,8 @@
 {% endblock stylesheets %}
 
 {% block content %}
-{% include 'gis_modals.html' %}
-{% include 'scheduling_modal.html' %}
-
+  {% include 'gis_modals.html' %}
+  {% include 'scheduling_modal.html' %}
   <div id="edit-link" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -413,7 +413,7 @@
       var filterName = this.value;
       $.ajax({
         type: "POST",
-        url: `/objects/${this.value}_filter_objects`,
+        url: `/objects/${this.value}/filter_objects`,
         dataType: "json",
         success: function(objects){
           node.style("visibility", function(d) {          

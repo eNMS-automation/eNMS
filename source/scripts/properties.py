@@ -26,7 +26,10 @@ file_transfer_properties = script_properties + (
     'source_file',
     'dest_file',
     'file_system',
-    'direction'
+    'direction',
+    'overwrite_file',
+    'disable_md5',
+    'inline_transfer'
 )
 
 netmiko_validation_properties = script_properties + (
@@ -50,6 +53,7 @@ ansible_playbook_properties = script_properties + (
     'operating_system',
     'playbook_path',
     'arguments',
+    'graphical_inventory'
 )
 
 type_to_properties = {

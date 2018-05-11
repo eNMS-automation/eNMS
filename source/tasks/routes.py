@@ -80,7 +80,7 @@ def scheduler():
     return jsonify({})
 
 
-@blueprint.route('/get_<name>', methods=['POST'])
+@blueprint.route('/get/<name>', methods=['POST'])
 @login_required
 def get_task(name):
     task = get_obj(Task, name=name)
@@ -94,7 +94,7 @@ def get_task(name):
     return jsonify(task_properties)
 
 
-@blueprint.route('/show_logs_<name>', methods=['POST'])
+@blueprint.route('/show_logs/<name>', methods=['POST'])
 @login_required
 def show_logs(name):
     task = get_obj(Task, name=name)
@@ -115,7 +115,7 @@ def get_diff(name, v1, v2, n1, n2, s1, s2):
     })
 
 
-@blueprint.route('/compare_logs_<name>', methods=['POST'])
+@blueprint.route('/compare_logs/<name>', methods=['POST'])
 @login_required
 def compare_logs(name):
     task = get_obj(Task, name=name)
@@ -127,7 +127,7 @@ def compare_logs(name):
     return jsonify(results)
 
 
-@blueprint.route('/delete_task_<name>', methods=['POST'])
+@blueprint.route('/delete_task/<name>', methods=['POST'])
 @login_required
 def delete_task(name):
     task = Task.query.filter_by(name=name).first()
@@ -137,7 +137,7 @@ def delete_task(name):
     return task_management()
 
 
-@blueprint.route('/pause_task_<name>', methods=['POST'])
+@blueprint.route('/pause_task/<name>', methods=['POST'])
 @login_required
 def pause_task(name):
     task = Task.query.filter_by(name=name).first()
@@ -145,7 +145,7 @@ def pause_task(name):
     return task_management()
 
 
-@blueprint.route('/resume_task_<name>', methods=['POST'])
+@blueprint.route('/resume_task/<name>', methods=['POST'])
 @login_required
 def resume_task(name):
     task = Task.query.filter_by(name=name).first()

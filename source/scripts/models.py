@@ -4,7 +4,16 @@ from base.models import script_workflow_table, task_script_table, CustomBase
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
-from sqlalchemy import Column, Float, ForeignKey, Integer, PickleType, String
+from .properties import type_to_properties
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType, 
+    String
+)
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from subprocess import check_output
@@ -121,6 +130,9 @@ class FileTransferScript(Script):
     dest_file = Column(String)
     file_system = Column(String)
     direction = Column(String)
+    overwrite_file = Column(Boolean)
+    disable_md5 = Column(Boolean)
+    inline_transfer = Column(Boolean)
 
     __mapper_args__ = {
         'polymorphic_identity': 'file_transfer',
@@ -137,6 +149,8 @@ class FileTransferScript(Script):
         self.dest_file = data['dest_file'][0]
         self.file_system = data['file_system'][0]
         self.direction = data['direction'][0]
+        for property in ('overwrite_file', 'disable_md5', 'inline_transfer'):
+            setattr(self, property, property in data)
         super(FileTransferScript, self).__init__(name, waiting_time, description)
 
     def job(self, args):
@@ -155,9 +169,9 @@ class FileTransferScript(Script):
                 dest_file=self.dest_file,
                 file_system=self.file_system,
                 direction=self.direction,
-                overwrite_file=False,
-                disable_md5=False,
-                inline_transfer=False
+                overwrite_file=self.overwrite_file,
+                disable_md5=self.disable_md5,
+                inline_transfer=self.inline_transfer
             )
             result = str(transfer_dict)
             success = True
@@ -375,6 +389,7 @@ class AnsibleScript(Script):
     operating_system = Column(String)
     playbook_path = Column(String)
     arguments = Column(String)
+    graphical_inventory = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
@@ -389,17 +404,16 @@ class AnsibleScript(Script):
         self.operating_system = data['operating_system'][0]
         self.playbook_path = data['playbook_path'][0]
         self.arguments = data['arguments'][0]
+        self.graphical_inventory = 'graphical_inventory' in data
         super(AnsibleScript, self).__init__(name, waiting_time, description)
 
     def job(self, args):
         _, node, results = args
         arguments = self.arguments.split()
-        command = [
-            'ansible-playbook',
-            '-i',
-            node.ip_address + ",",
-            self.playbook_path,
-        ]
+        command = ['ansible-playbook']
+        if self.graphical_inventory:
+            command.extend(['-i', node.ip_address + ","])
+        command.append(self.playbook_path)
         results[node.name] = check_output(command + arguments)
         return True
 
@@ -418,9 +432,11 @@ type_to_class = {
 def script_factory(**kwargs):
     cls = type_to_class[kwargs['type']]
     script = get_obj(cls, name=kwargs['name'])
-    for property, value in kwargs.items():
-        if property in script.__dict__:
-            setattr(script, property, value)
+    for property in type_to_properties[script.type]:
+        # unchecked tickbox do not yield any value when posting a form, and 
+        # they yield "y" if checked
+        value = kwargs.get(property, False)
+        setattr(script, property, True if value == "y" else value)
     db.session.commit()
 
 

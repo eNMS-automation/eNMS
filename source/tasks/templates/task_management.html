@@ -6,9 +6,9 @@
   {{ super() }}
   <link href="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
   <style>
-    @media (min-width: 992px) {
+    @media (min-width: 1000px) {
       .modal-lg {
-        width: 1000px;
+        width: 1200px;
       }
     }
   </style>
@@ -17,7 +17,7 @@
 {% block content %}
 {% include 'scheduling_modal.html' %}
 <div id="show-logs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="width:100%;">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
@@ -185,7 +185,7 @@
     function showObjectModal(name) {
       $.ajax({
         type: "POST",
-        url: `/tasks/get_${name}`,
+        url: `/tasks/get/${name}`,
         dataType: 'json',
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
@@ -200,7 +200,7 @@
     function showTaskLogs(name) {
       $.ajax({
         type: "POST",
-        url: `/tasks/show_logs_${name}`,
+        url: `/tasks/show_logs/${name}`,
         dataType: 'json',
         success: function(logs){
           $("#logs").text(logs);
@@ -212,7 +212,7 @@
     function compareTaskLogs(name) {
       $.ajax({
         type: "POST",
-        url: `/tasks/compare_logs_${name}`,
+        url: `/tasks/compare_logs/${name}`,
         dataType: 'json',
         success: function(results){
           window.task = name;
@@ -281,7 +281,7 @@
     function deleteTask(name) {
       $.ajax({
         type: "POST",
-        url: `/tasks/delete_task_${name}`,
+        url: `/tasks/delete_task/${name}`,
         success: function() {
           $(`#${name}`).remove();
           alertify.notify('Task successfully deleted !', 'success', 5);
@@ -292,7 +292,7 @@
     function pauseTask(name) {
       $.ajax({
         type: "POST",
-        url: `/tasks/pause_task_${name}`,
+        url: `/tasks/pause_task/${name}`,
         success: function() {
           $(`#pause-resume-${name}`).attr("onclick", `resumeTask('${name}')`).text('Resume');
           alertify.notify('Task paused !', 'success', 5);
@@ -303,7 +303,7 @@
     function resumeTask(name) {
       $.ajax({
         type: "POST",
-        url: `/tasks/resume_task_${name}`,
+        url: `/tasks/resume_task/${name}`,
         success: function() {
           $(`#pause-resume-${name}`).attr("onclick", `pauseTask('${name}')`).text('Pause');
           alertify.notify('Task resumed !', 'success', 5);

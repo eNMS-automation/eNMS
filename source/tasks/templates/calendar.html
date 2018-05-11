@@ -76,7 +76,7 @@
         eventClick: function(calEvent, jsEvent, view) {
           $.ajax({
             type: "POST",
-            url: `/tasks/get_${calEvent.title}`,
+            url: `/tasks/get/${calEvent.title}`,
             dataType: 'json',
             success: function(properties){
               for (const [property, value] of Object.entries(properties)) {

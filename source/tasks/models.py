@@ -22,10 +22,11 @@ def job_multiprocessing(name):
     job_time = str(datetime.now())
     task = get_obj(Task, name=name)
     task.logs[job_time] = {}
+    nodes = task.nodes if task.nodes else ['dummy']
     for task_job in task.scripts + task.workflows:
         results = {}
-        pool = ThreadPool(processes=len(task.nodes))
-        args = [(task, node, results) for node in task.nodes]
+        pool = ThreadPool(processes=len(nodes))
+        args = [(task, node, results) for node in nodes]
         pool.map(task_job.job, args)
         pool.close()
         pool.join()

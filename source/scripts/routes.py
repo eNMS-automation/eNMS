@@ -113,11 +113,10 @@ def delete_object(name):
 @blueprint.route('/create_script_<script_type>', methods=['POST'])
 @login_required
 def create_script(script_type):
-    properties = request.form.to_dict()
-    script = get_obj(Script, name=properties['name'])
+    script = get_obj(Script, name=request.form['name'])
+    print(script_type, script, request.form)
     if script:
-        properties['type'] = script_type
-        script_factory(**properties)
+        script_factory(script_type, **request.form)
         db.session.commit()
     elif script_type in ('netmiko_config', 'napalm_config'):
         # retrieve the raw script: we will use it as-is or update it

@@ -56,6 +56,17 @@ ansible_playbook_properties = script_properties + (
     'graphical_inventory'
 )
 
+list_properties = (
+    'getters',
+)
+
+boolean_properties = (
+    'overwrite_file',
+    'disable_md5',
+    'inline_transfer',
+    'graphical_inventory'
+)
+
 type_to_properties = {
     'netmiko_config': netmiko_config_properties,
     'napalm_config': napalm_config_properties,

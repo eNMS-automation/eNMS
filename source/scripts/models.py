@@ -4,7 +4,7 @@ from base.models import script_workflow_table, task_script_table, CustomBase
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
-from .properties import type_to_properties
+from .properties import type_to_properties, list_properties, boolean_properties
 from sqlalchemy import (
     Boolean,
     Column,
@@ -365,18 +365,19 @@ class NapalmGettersScript(Script):
                 optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
+            dict_result = {}
             for getter in self.getters:
                 try:
-                    result = str_dict(getattr(napalm_driver, getter)())
+                    dict_result[getter] = str_dict(getattr(napalm_driver, getter)())
                 except Exception as e:
-                    result = '{} could not be retrieve because of {}'.format(getter, e)
+                    dict_result[getter] = '{} could not be retrieve because of {}'.format(getter, e)
             napalm_driver.close()
         except Exception as e:
-            result = 'getters process did not work because of {}'.format(e)
+            dict_result['error'] = 'getters process did not work because of {}'.format(e)
             success = False
         else:
             success = True
-            results[node.name] = result
+            results[node.name] = dict_result
         return success
 
 
@@ -429,14 +430,25 @@ type_to_class = {
 }
 
 
-def script_factory(**kwargs):
-    cls = type_to_class[kwargs['type']]
-    script = get_obj(cls, name=kwargs['name'])
-    for property in type_to_properties[script.type]:
+def script_factory(type, **kwargs):
+    print(type, kwargs)
+    cls = type_to_class[type]
+    script = get_obj(cls, name=kwargs['name'][0])
+    for property in type_to_properties[type]:
+        # type is not in kwargs, we leave it unchanged
+        if property not in kwargs:
+            continue
         # unchecked tickbox do not yield any value when posting a form, and 
         # they yield "y" if checked
-        value = kwargs.get(property, False)
-        setattr(script, property, True if value == "y" else value)
+        if property in boolean_properties:
+            value = property in kwargs
+        # if the property is not a list, we unpack it as it is returned
+        # as a singleton in the ImmutableMultiDict
+        elif property not in list_properties:
+            value, = kwargs[property]
+        else:
+            value = kwargs[property]
+        setattr(script, property, value)
     db.session.commit()
 
 

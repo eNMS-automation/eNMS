@@ -81,8 +81,13 @@
         type: "POST",
         url: `/scripts/get/${type}/${name}`,
         success: function(properties){
+          console.log(properties);
           for (const [property, value] of Object.entries(properties)) {
-            $(`#${type}-${property}`).val(value);
+            if(typeof(value) === "boolean") {
+              $(`#${type}-${property}`).prop('checked', value);
+            } else {
+              $(`#${type}-${property}`).val(value);
+            }
           }
         }
       });

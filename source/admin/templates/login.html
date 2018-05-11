@@ -33,6 +33,7 @@
               alertify.notify("Cannot create new user: duplicate entry", 'error', 5);
             } else {
               alertify.notify("New user created !", 'success', 5);
+              document.getElementById('login-button').click();
             }
           }
         });
@@ -80,7 +81,7 @@
             <div class="clearfix"></div>
             <div class="separator">
               <p class="change_link">Already a member ?
-                <a href="#signin" class="to_register"> Log in </a>
+                <a href="#signin" id="login-button" class="to_register"> Log in </a>
               </p>
             </div>
           </form>

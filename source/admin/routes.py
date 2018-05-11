@@ -107,31 +107,23 @@ def logout():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@blueprint.route('/tacacs_server')
+@blueprint.route('/administration')
 @login_required
-def tacacs_server():
+def admninistration():
     try:
-        server = db.session.query(TacacsServer).one()
+        tacacs_server = db.session.query(TacacsServer).one()
     except NoResultFound:
-        server = None
-    return render_template(
-        'tacacs_server.html',
-        form=TacacsServerForm(request.form),
-        server=server
-    )
-
-
-@blueprint.route('/syslog_server')
-@login_required
-def syslog_server():
+        tacacs_server = None
     try:
-        server = db.session.query(SyslogServer).one()
+        syslog_server = db.session.query(SyslogServer).one()
     except NoResultFound:
-        server = None
+        syslog_server = None
     return render_template(
-        'syslog_server.html',
-        form=SyslogServerForm(request.form),
-        server=server
+        'administration.html',
+        tacacs_form=TacacsServerForm(request.form),
+        syslog_form=SyslogServerForm(request.form),
+        tacacs_server=tacacs_server,
+        syslog_server=syslog_server
     )
 
 

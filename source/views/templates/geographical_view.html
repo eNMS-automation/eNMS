@@ -5,6 +5,7 @@
 {% block stylesheets %}
   {{ super() }}
   <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
+  <link href="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
   {% if view == 'markercluster' %}
     <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.css') }}" rel="stylesheet">
     <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.Default.css') }}" rel="stylesheet">
@@ -357,7 +358,7 @@
                   var filterName = this.value;
                   $.ajax({
                     type: "POST",
-                    url: `/objects/${this.value}_filter_objects`,
+                    url: `/objects/${this.value}/filter_objects`,
                     dataType: "json",
                     success: function(objects){
                       for (i = 0; i < markers_array.length; i++) {

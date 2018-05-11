@@ -127,3 +127,4 @@ class AnsibleScriptForm(ScriptForm):
     operating_system = TextField('Operating system')
     playbook_path = TextField('Path to playbook')
     arguments = TextField('Optional arguments')
+    graphical_inventory = BooleanField('Build inventory from graphical selection')

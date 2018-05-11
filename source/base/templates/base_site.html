@@ -13,7 +13,7 @@
       <title>eNMS | {% block title %}{% endblock %}</title>
       {% block stylesheets %}
         <!-- Bootstrap -->
-        <link href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <!-- NProgress -->
@@ -21,9 +21,10 @@
         <!-- Alertify -->
         <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="{{ url_for('static', filename='enms/enms.min.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
-      <!-- Custom Theme Style -->
-      <link href="{{ url_for('static', filename='enms/enms.min.css') }}" rel="stylesheet">
+
     {% endblock head %}
   </head>
   <body class="{% block body_class %}nav-md {% endblock body_class %}">

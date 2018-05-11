@@ -10,8 +10,7 @@ urls = {
     '/admin': (
         '/user_management',
         '/login',
-        '/tacacs_server',
-        '/syslog_server'
+        '/administration'
     ),
     '/objects': (
         '/object_management',

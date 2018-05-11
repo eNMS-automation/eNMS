@@ -118,13 +118,13 @@ def process_filter():
     return jsonify(mode)
 
 
-@blueprint.route('/filter_<name>', methods=['POST'])
+@blueprint.route('/get/<name>', methods=['POST'])
 @login_required
 def get_filter(name):
     return jsonify(get_obj(Filter, name=name).get_properties())
 
 
-@blueprint.route('/<name>_filter_objects', methods=['POST'])
+@blueprint.route('/<name>/filter_objects', methods=['POST'])
 @login_required
 def get_filtered_objects(name):
     filter = get_obj(Filter, name=name)

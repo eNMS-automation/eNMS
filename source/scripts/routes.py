@@ -89,7 +89,7 @@ def get_script(script_type, name):
     script = get_obj(Script, name=name)
     properties = type_to_properties[script_type]
     script_properties = {
-        property: str(getattr(script, property))
+        property: getattr(script, property)
         for property in properties
     }
     return jsonify(script_properties)

@@ -240,7 +240,6 @@ class NetmikoValidationScript(Script):
             results[node.name] = 'netmiko did not work because of {}'.format(e)
             success = False
         results[node.name] = str_dict(outputs)
-        print(outputs, success)
         try:
             netmiko_handler.disconnect()
         except Exception:

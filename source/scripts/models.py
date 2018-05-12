@@ -11,7 +11,7 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Integer,
-    PickleType, 
+    PickleType,
     String
 )
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -438,7 +438,7 @@ def script_factory(type, **kwargs):
         # type is not in kwargs, we leave it unchanged
         if property not in kwargs:
             continue
-        # unchecked tickbox do not yield any value when posting a form, and 
+        # unchecked tickbox do not yield any value when posting a form, and
         # they yield "y" if checked
         if property in boolean_properties:
             value = property in kwargs

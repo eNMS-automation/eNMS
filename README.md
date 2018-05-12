@@ -39,9 +39,13 @@ Views can be filtered to display only a subset of the network. A filter is a com
 You can display the property of an object from both views, and start an SSH session to a device.
 Networks can also be exported to Google Earth.
 
-![Network GIS visualization](readme/views.gif)
+![Network GIS visualization](readme/network-visualization.gif)
 
-Relevant parts of the doc: _[Object creation](http://enms.readthedocs.io/en/latest/objects/creation.html)_
+Relevant parts of the doc:
+- _[Geographical view](http://enms.readthedocs.io/en/latest/views/geographical_view.html)_
+- _[Logical view](http://enms.readthedocs.io/en/latest/views/logical_view.html)_
+- _[Filters](http://enms.readthedocs.io/en/latest/objects/filtering.html)_
+- _[Bindings](http://enms.readthedocs.io/en/latest/views/bindings.html)_
 Check it out for yourself: 
 
 ## Network automation

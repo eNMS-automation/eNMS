@@ -39,6 +39,8 @@ Views can be filtered to display only a subset of the network. A filter is a com
 You can display the property of an object from both views, and start an SSH session to a device.
 Networks can also be exported to Google Earth.
 
+In the following example, we use the regexes `france|spain` for `location` to filter all _objects_ that are not in France or in Spain, as well as the value `IOS-XR` for `Operating System` to filter all _nodes_ that do not have the `IOS-XR` operating system.
+
 ![Network GIS visualization](readme/network-visualization.gif)
 
 Relevant parts of the doc:
@@ -111,33 +113,6 @@ The comparison result is displayed with two methods:
 - A **_ndiff_**: list every line and highlights interline changes.
 
 ![Comparison](readme/comparison.gif)
-
-## Display control with filters
-
-The user can filter the objects available in the GUI by searching for specific value for each property. 
-For each property, the user can choose to use a _regular expression_ instead of a hardcoded value:
-regexes allows for specific search like a location or an IP subnet.
-
-In the following example, we use the regexes `[france|spain]` for `location` to filter all objects that are not in France or in Spain, as well as the regex `[Router|Switch]` for `type` to filter all nodes that are neither a router, nor a switch.
-
-![Object filtering](readme/object_filtering.gif)
-
-Note that **_filters apply to everything_** in eNMS that uses objects: dashboard, object deletion,
-geographical and logical views, task scheduling, etc. You can use them to visualize or send to script
-to a specific subset of devices.
-
-### Filtering use case
-
-Let's imagine that you want to send a script to all routers with IOS 12.4(24)T or IOS 12.4(11)T. By default, all devices will be displayed in the _netmiko / napalm script scheduling_ page.
-
-The first step will be to filters the nodes:
-- go to the _Object filtering_ page
-- set the "Operating System" to `IOS`
-- set the "OS version" to `12.4\((24|11)\)T`
-- tick the regex box for the "OS version" parameter
-- apply the filter
-
-After that, in the netmiko / napalm scheduling page, **_only the devices that match those criteria will be displayed_**: all devices in the multiple selection box can therefore be selected as target devices.
 
 ## TACACS+ authentication
 

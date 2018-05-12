@@ -42,6 +42,7 @@ class Task(CustomBase):
     __tablename__ = 'Task'
 
     id = Column(Integer, primary_key=True)
+    type = Column(String)
     recurrent = Column(Boolean, default=False)
     name = Column(String(120), unique=True)
     status = Column(String)
@@ -79,8 +80,8 @@ class Task(CustomBase):
     )
 
     def __init__(self, **data):
-        print(data)
         self.data = data
+        self.type = "type"
         self.name = data['name']
         self.nodes = data['nodes']
         self.user = data['user']

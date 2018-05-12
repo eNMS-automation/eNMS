@@ -149,7 +149,6 @@ def export_to_google_earth():
 @login_required
 def selection():
     session['selection'] = list(set(request.form.getlist('selection[]')))
-    print(session['selection'])
     return jsonify({})
 
 

@@ -114,7 +114,6 @@ def delete_object(name):
 @login_required
 def create_script(script_type):
     script = get_obj(Script, name=request.form['name'])
-    print(script_type, script, request.form)
     if script:
         script_factory(script_type, **request.form)
         db.session.commit()

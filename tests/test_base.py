@@ -76,7 +76,6 @@ def test_urls(user_client):
     for blueprint, pages in urls.items():
         for page in pages:
             page_url = blueprint + page
-            print(page_url)
             r = user_client.get(page_url, follow_redirects=True)
             assert r.status_code == 200
     # logout and test that we cannot access anything anymore

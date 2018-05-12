@@ -19,34 +19,18 @@ While network automation traditionally requires scripting skills, eNMS provides 
 - **Selection** of the target devices, on the graphical view.
 - **Scheduling** of the script.
 
-Please note that it is still in beta version and the master branch is undergoing major changes, which are not yet reflected in the readme. 
-
-_[Read the docs for more up-to-date information](http://enms.readthedocs.io/en/latest/base/general.html)_
-
 Join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel #enms for the latest updates !
 
-**You can find a demo of eNMS _[here](http://afourmy.pythonanywhere.com/)_ !**
+# 1. Network creation
 
-# Features
+Nodes and links can be created either one by one by specifying all properties manually, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
+The dashboard provides a graphical overview of all objects with dynamic charts.
 
-## Object creation
+![Object creation](readme/network-creation.gif)
 
-Nodes and links can be created in two ways: 
-- one by one by specifying all properties manually, in the _Object creation_ page.
-- by importing an Excel file with one sheet per type of object.
-Examples of such Excel files are available in the **_/project folder_**.
+Relevant parts of the doc: _[Object creation](http://enms.readthedocs.io/en/latest/objects/creation.html)_
+Check it out for yourself: 
 
-Once your objects have been created, you can go to the _Overview_ page.
-All objects are displayed in a sortable and searchable table.
-
-![Object creation](readme/object_creation.gif)
-
-## Dashboard
-
-The dashboard displays pie charts for any property. You can select, for both nodes and links,
-which properties are displayed as pie charts in the dashboard.
-
-![Dashboard](readme/dashboard.gif)
 
 ## Network visualization
 

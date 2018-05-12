@@ -3,7 +3,7 @@
 
 # Introduction
 
-eNMS is an open source web application designed to help automate networks.
+eNMS is an open source web application designed to help automate networks graphically.
 
 ![eNMS](readme/eNMS.png)
 

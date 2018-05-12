@@ -31,24 +31,18 @@ The dashboard provides a graphical overview of all objects with dynamic charts.
 Relevant parts of the doc: _[Object creation](http://enms.readthedocs.io/en/latest/objects/creation.html)_
 Check it out for yourself: 
 
-
 ## Network visualization
 
-Network visualization is of paramount importance for quickly understanding the network topology.
-There are two ways of visualizing the network in eNMS:
-- **Geographical view**: you can display the network in 2D or 3D, with Open Street Map or Google Map. A clusterized view is also available for large networks (> 10K nodes), for scalability.
-- **Logical view**: the geographical view only makes sense if we have all GPS coordinates: it is not always the case. The logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way.
+- **Geographical view**: you can display the network in 2D or 3D, with Open Street Map or Google Map (with `leaflet.js`)
+- **Logical view**: the logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way (with `d3.js`)
+Views can be filtered to display only a subset of the network. A filter is a combination of values (or regular expressions) for each property: it defines whether an object should be displayed or not.
+You can display the property of an object from both views, and start an SSH session to a device.
+Networks can also be exported to Google Earth.
 
 ![Network GIS visualization](readme/views.gif)
 
-Networks can be exported on Google Earth from the geographical view: the resulting file is stored in the **_/kmz_** folder.
-
-## Embedded SSH client
-
-eNMS uses PuTTY to automatically establish an SSH connection to any SSH-enabled device from the web interface.
-Your credentials are automatically provided to PuTTY for faster login.
-
-![SSH connection](readme/ssh_connection.gif)
+Relevant parts of the doc: _[Object creation](http://enms.readthedocs.io/en/latest/objects/creation.html)_
+Check it out for yourself: 
 
 ## Network automation
 

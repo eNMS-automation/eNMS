@@ -240,10 +240,10 @@ class NetmikoValidationScript(Script):
             results[node.name] = 'netmiko did not work because of {}'.format(e)
             success = False
         results[node.name] = str_dict(outputs)
-        try:
-            netmiko_handler.disconnect()
-        except Exception:
-            pass
+        # try:
+        netmiko_handler.disconnect()
+        # except Exception:
+            # pass
         return success
 
 
@@ -355,6 +355,7 @@ class NapalmGettersScript(Script):
 
     def job(self, args):
         task, node, results = args
+        dict_result = {}
         try:
             driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
@@ -364,7 +365,6 @@ class NapalmGettersScript(Script):
                 optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
-            dict_result = {}
             for getter in self.getters:
                 try:
                     dict_result[getter] = str_dict(getattr(napalm_driver, getter)())

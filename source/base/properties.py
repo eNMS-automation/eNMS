@@ -127,6 +127,7 @@ pretty_names = OrderedDict([
     ('netmiko_type', 'Netmiko type'),
     ('operating_system', 'Operating System'),
     ('os_version', 'OS version'),
+    ('recurrent', 'Recurrent'),
     ('secret_password', 'Secret password'),
     ('source', 'Source'),
     ('source_file', 'Source file'),

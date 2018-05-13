@@ -16,30 +16,35 @@ It encompasses the following aspects of network automation:
 While network automation traditionally requires scripting skills, eNMS provides a way to automate networks graphically, in a few simple steps: 
 - **Creation** of the network (e.g by importing a spreadsheet describing the network topology)
 - **Visualization** of the network on a world map, or via a force-based algorithm.
-- **Selection** of the target devices, on the graphical view.
-- **Scheduling** of the script.
+- **Creation** of a script or a workflow.
+- **Scheduling**: **Selection** of the target devices from the graphical view, and scheduling of the script or the workflow.
 
 Join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel #enms for the latest updates !
 
 # 1. Network creation
 
 Nodes and links can be created either one by one by specifying all properties manually, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
+
 The dashboard provides a graphical overview of all objects with dynamic charts.
 
 ![Object creation](readme/network-creation.gif)
 
 Relevant parts of the doc: _[Object creation](http://enms.readthedocs.io/en/latest/objects/creation.html)_
-Check it out for yourself: 
 
-## Network visualization
+Check it out yourself: 
 
-- **Geographical view**: you can display the network in 2D or 3D, with Open Street Map or Google Map (with `leaflet.js`)
-- **Logical view**: the logical view uses a graph-drawing algorithm to display the network in an aesthetically pleasing way (with `d3.js`)
+# 2. Network visualization
+
+- **Geographical view**: you can display the network in 2D or 3D, with Open Street Map or Google Map (with `leaflet.js`).
+- **Logical view**: the logical view uses a graph-drawing algorithm to create an optimal display (with `d3.js`).
+
 Views can be filtered to display only a subset of the network. A filter is a combination of values (or regular expressions) for each property: it defines whether an object should be displayed or not.
+
 You can display the property of an object from both views, and start an SSH session to a device.
+
 Networks can also be exported to Google Earth.
 
-In the following example, we use the regexes `france|spain` for `location` to filter all _objects_ that are not in France or in Spain, as well as the value `IOS-XR` for `Operating System` to filter all _nodes_ that do not have the `IOS-XR` operating system.
+In the following example, we create a first filter with the regular expression `france|spain` for `location` to filter all _objects_ that are not in France or in Spain, and a second filter with the value `IOS-XR` for `Operating System` to filter all _nodes_ that do not have the `IOS-XR` operating system.
 
 ![Network GIS visualization](readme/network-visualization.gif)
 
@@ -48,19 +53,21 @@ Relevant parts of the doc:
 - _[Logical view](http://enms.readthedocs.io/en/latest/views/logical_view.html)_
 - _[Filters](http://enms.readthedocs.io/en/latest/objects/filtering.html)_
 - _[Bindings](http://enms.readthedocs.io/en/latest/views/bindings.html)_
-Check it out for yourself: 
 
-## Network automation
+Check it out yourself: 
 
-There are four types of task in eNMS:
-- **Netmiko _configuration_ task**: list of commands to configure the device (plain text or Jinja2 template).
-- **Netmiko _show commands_ task**: list of “show commands” which output will be displayed in the task logs.
-- **NAPALM _configuration_ task**: partial or full configuration (plain text or Jinja2 template).
+# 3. Creation of scripts and workflows
+
+The following types of script can be created:
+- **Netmiko _configuration_**: list of commands to configure the device (plain text or Jinja2 template).
+- **Netmiko _show commands_**: list of “show commands” which output will be displayed in the task logs.
+- **Netmiko _validation_**: list of command which output must contain a specific pattern (used in workflows).
+- **NAPALM _configuration_ task**: partial or full configuration (plain text or Jinja2 template) with `Load merge` or `Load replace`.
 - **NAPALM _getters_**: list of getters which output will be displayed in the task logs.
+- **Ansible playbook**: send an ansible playbook.
 
-For each task, you can select a list of target devices. A script is sent to all target devices at the same time, with multiple processes (`multiprocessing` library).
 
-**Note**: netmiko has a _linux_ driver, which means that eNMS can also be used on Unix servers.
+# 4. Scheduling
 
 eNMS also provides some scheduling functions:
 - **Start date**: instead of running the task immediately, the task will start at a specific time.

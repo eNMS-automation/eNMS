@@ -100,6 +100,7 @@ class Task(CustomBase):
             setattr(self, date, value)
         self.is_active = True
         if self.frequency:
+            self.recurrent = True
             self.recurrent_scheduling()
         else:
             self.one_time_scheduling()

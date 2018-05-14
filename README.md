@@ -71,17 +71,15 @@ Scripts can be combined to form a **workflow**. A workflow is a directed graph w
 # 4. Scheduling
 
 eNMS also provides some scheduling functions:
+    - **Frequency**: a task can be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko **_show commands_** / **_NAPALM getters_** tasks.
 - **Start date**: instead of running the task immediately, the task will start at a specific time.
-- **Frequency**: the task will be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko **_show commands_** / **_NAPALM getters_** tasks.
+- **End date**: used for a periodic task to stop at a specific time.
 
+![Workflow creation](readme/scheduling.gif)
 
-### Comparison
+# 5. Results
 
-For all periodic tasks, you can compare the results between any two devices, at two different times.
-
-
-
-![Comparison](readme/comparison.gif)
+todo
 
 # Miscellaneous
 

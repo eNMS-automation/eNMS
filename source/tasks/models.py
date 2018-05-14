@@ -9,7 +9,7 @@ from base.models import (
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
-from sqlalchemy import Boolean, Column, Integer, String, PickleType
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
@@ -63,7 +63,8 @@ class Task(CustomBase):
         secondary=task_workflow_table,
         back_populates="tasks"
     )
-    user = relationship('User', back_populates='tasks', uselist=False)
+    user_id = Column(Integer, ForeignKey('User.id'))
+    user = relationship('User', back_populates='tasks')
 
     frequency = Column(String(120))
     start_date = Column(String)

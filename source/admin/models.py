@@ -1,7 +1,7 @@
 from base.database import db, get_obj
 from base.models import Log
 from flask_login import UserMixin
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from base.models import CustomBase
 from passlib.hash import cisco_type7
@@ -23,8 +23,7 @@ class User(CustomBase, UserMixin):
     access_rights = Column(String(120))
     password = Column(String(30))
     secret_password = Column(String(30))
-    task_id = Column(Integer, ForeignKey('Task.id'))
-    tasks = relationship("Task")
+    tasks = relationship('Task', back_populates='user')
 
     def __init__(self, **kwargs):
         password = kwargs.pop('password')

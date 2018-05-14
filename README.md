@@ -74,43 +74,6 @@ eNMS also provides some scheduling functions:
 - **Start date**: instead of running the task immediately, the task will start at a specific time.
 - **Frequency**: the task will be run periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko **_show commands_** / **_NAPALM getters_** tasks.
 
-### Simple configuration script with Netmiko
-
-- Create a script in the _Script creation_ page.
-- Set the script parameters (netmiko driver, global delay factor, target devices).
-
-![Simple script with netmiko](readme/netmiko_simple.gif)
-
-### Template-based configuration
-
-For complex scripts, it is best to use Jinja2 templating language:
-- Write a Jinja2 template in the _Script creation_ page.
-- Import a YAML file that contains all associated variables.
-eNMS will take care of converting the template to a real text-based script.
-
-![Send jinja2 script via SSH with netmiko](readme/netmiko_j2.gif)
-
-### NAPALM configuration
-
-NAPALM is an automation framework that provides a set of functions to interact with different network device Operating Systems using a unified API.
-NAPALM can be used to change the configuration (merge or replace), either via a plain text script or a Jinja2-enabled template.
-
-**Note**: the NAPALM driver used by eNMS is the one you configure in the "Operating System" property of a node.
-For NAPALM to work, you should respect NAPALM drivers syntax: `ios, iosxr, nxos, junos, eos`
-
-![Use NAPALM to configure static routes](readme/napalm_config.gif)
-
-### Netmiko _show commands_ periodic retrieval
-
-You can schedule a task to retrieve the output of a list of commands (show, ping, traceroute, etc) periodically. The result is stored in the database and displayed in the logs of the task, in the _Task management_ page.
-
-![Netmiko show](readme/netmiko_show.gif)
-
-### NAPALM _getters_ periodic retrieval
-
-You can also schedule a task to retrieve a NAPALM getter periodically.
-
-![Configuration automation with NAPALM and Jinja2 scripting](readme/napalm_getters.gif)
 
 ### Comparison
 

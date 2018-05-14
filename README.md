@@ -42,8 +42,6 @@ Views can be filtered to display only a subset of the network. A filter is a com
 
 You can display the property of an object from both views, and start an SSH session to a device.
 
-Networks can also be exported to Google Earth.
-
 In the following example, we create a first filter with the regular expression `france|spain` for `location` to filter all _objects_ that are not in France or in Spain, and a second filter with the value `IOS-XR` for `Operating System` to filter all _nodes_ that do not have the `IOS-XR` operating system.
 
 ![Network GIS visualization](readme/network-visualization.gif)
@@ -66,6 +64,9 @@ The following types of script can be created:
 - **NAPALM _getters_**: list of getters which output will be displayed in the task logs.
 - **Ansible playbook**: send an ansible playbook.
 
+Scripts can be combined to form a **workflow**. A workflow is a directed graph which nodes are scripts. There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge indicates where to move in the graph if the source script was executed with success, while the failure edge does the same thing in case of failure.
+
+![Workflow creation](readme/workflow-creation.gif)
 
 # 4. Scheduling
 
@@ -115,15 +116,15 @@ You can also schedule a task to retrieve a NAPALM getter periodically.
 
 For all periodic tasks, you can compare the results between any two devices, at two different times.
 
-The comparison result is displayed with two methods:
-- A **_unified diff_**: show just the lines that have changed plus a few lines of context, in an inline style. (like Git)
-- A **_ndiff_**: list every line and highlights interline changes.
+
 
 ![Comparison](readme/comparison.gif)
 
-## TACACS+ authentication
+# Miscellaneous
 
-It is possible to configure a TACACS+ server in eNMS: upon authentication, a request will be sent to the server to check the credentials and log in the user.
+- eNMS can act as a TACACS+ authentication server: upon authentication, a request will be sent to the server to check the credentials and log in the user.
+- eNMS can act as a Syslog server: all logs are stored in the database, and can be filtered with regular expressions. Eventually, the idea is to use the logs for event-driven automation, i.e trigger the execution of a script upon received a specific log.
+- A network can be exported to Google Earth (as a `.kmz` file).
 
 # Getting started
 

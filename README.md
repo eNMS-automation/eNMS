@@ -104,6 +104,8 @@ In the following example, we schedule two periodic tasks:
 - a NAPALM getter task that will periodically retrieve the output of NAPALM `get_interfaces_counters` getter.
 We can see in the comparison how counters increase through time for both tasks.
 
+![Workflow creation](readme/comparison.gif)
+
 Try it out yourself: task management
 Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/tasks/management.html)_
 

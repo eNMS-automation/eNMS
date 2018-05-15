@@ -31,6 +31,7 @@ The dashboard provides a graphical overview of all objects with dynamic charts.
 ![Object creation](readme/network-creation.gif)
 
 Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/objects/object_management)_, _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_
+
 Relevant part of the doc: _[Object creation](http://enms.readthedocs.io/en/latest/objects/creation.html)_
 
 # 2. Network visualization
@@ -49,6 +50,7 @@ We use these filters on both views, then start an SSH session to one of the rout
 ![Network GIS visualization](readme/network-visualization.gif)
 
 Try it out yourself: _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Filters](http://afourmy.pythonanywhere.com/objects/object_filtering)_
+
 Relevant parts of the doc: _[Geographical view](http://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical view](http://enms.readthedocs.io/en/latest/views/logical_view.html)_, _[Filters](http://enms.readthedocs.io/en/latest/objects/filtering.html)_, _[Bindings](http://enms.readthedocs.io/en/latest/views/bindings.html)_
 
 # 3. Creation of scripts and workflows
@@ -73,6 +75,7 @@ In the following example, we create a workflow to configure a VRF on Cisco IOS. 
 ![Workflow creation](readme/workflow-creation.gif)
 
 Try it out yourself: _[Script management](http://afourmy.pythonanywhere.com/scripts/script_management)_, _[VRF configuration workflow](http://afourmy.pythonanywhere.com/workflows/manage_configure_vrf)_ (double-click on a script for details)
+
 Relevant parts of the doc: _[Scripts](http://enms.readthedocs.io/en/latest/automation/scripts.html)_, _[Workflows](http://enms.readthedocs.io/en/latest/automation/workflows.html)_, _[OS upgrade workflow](http://enms.readthedocs.io/en/latest/automation/os_upgrade.html)_, 
 
 # 4. Scheduling
@@ -92,6 +95,7 @@ The scripts of the workflow are executed one by one, except for `NAPALM Rollback
 ![Workflow creation](readme/scheduling.gif)
 
 Try it out yourself (`Scheduling` button): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Calendar](http://afourmy.pythonanywhere.com/tasks/calendar)_
+
 Relevant part of the doc: _[Scheduling](http://enms.readthedocs.io/en/latest/tasks/scheduling.html)_
 
 # 5. Comparison of the results
@@ -107,6 +111,7 @@ We can see in the comparison how counters increase through time for both tasks.
 ![Workflow creation](readme/comparison.gif)
 
 Try it out yourself: _[Task management](http://afourmy.pythonanywhere.com/tasks/task_management)_
+
 Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/tasks/management.html)_
 
 # Miscellaneous

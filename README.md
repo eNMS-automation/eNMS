@@ -100,7 +100,7 @@ The results of a periodic task can be compared between two different times, devi
 eNMS displays a dynamic line-by-line diff of the outputs.
 
 In the following example, we schedule two periodic tasks:
-- a `show-interfaces` task that will periodically run `show interfaces` on a router with Netmiko.
+- a task that will periodically run `show interfaces` on a router with Netmiko.
 - a NAPALM getter task that will periodically retrieve the output of NAPALM `get_interfaces_counters` getter.
 We can see in the comparison how counters increase through time for both tasks.
 

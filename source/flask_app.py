@@ -1,13 +1,22 @@
-from config import DebugConfig
+from config import DebugConfig, ProductionConfig
 from flask import Flask
 from flask_migrate import Migrate
 from importlib import import_module
+from os import environ
 from os.path import abspath, dirname, join, pardir
 import sys
 import logging
 
 # prevent python from writing *.pyc files / __pycache__ folders
 sys.dont_write_bytecode = True
+
+get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
+format_config_mode = "".join([get_config_mode.capitalize(), "Config"])
+
+try:
+    config_mode = getattr(sys.modules[__name__], format_config_mode)
+except AttributeError:
+    sys.exit('Error: Invalid ENMS_CONFIG_MODE environment variable entry.')
 
 path_source = dirname(abspath(__file__))
 path_parent = abspath(join(path_source, pardir))
@@ -99,7 +108,7 @@ def configure_scheduler(scheduler):
 
 def create_app(test=False):
     app = Flask(__name__, static_folder='base/static')
-    app.config.from_object(DebugConfig)
+    app.config.from_object(config_mode)
     initialize_paths(app)
     register_extensions(app, test)
     register_blueprints(app)

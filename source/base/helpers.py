@@ -6,7 +6,7 @@ def integrity_rollback(function):
     def wrapper(*a, **kw):
         try:
             function(*a, **kw)
-        except exc.IntegrityError as e:
+        except exc.IntegrityError:
             db.session.rollback()
     return wrapper
 

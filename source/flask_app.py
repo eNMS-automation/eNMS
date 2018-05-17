@@ -1,4 +1,4 @@
-from config import DebugConfig, ProductionConfig
+from config import config_dict
 from flask import Flask
 from flask_migrate import Migrate
 from importlib import import_module
@@ -11,12 +11,10 @@ import logging
 sys.dont_write_bytecode = True
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
-format_config_mode = "".join([get_config_mode.capitalize(), "Config"])
 
 try:
-    print(sys.modules[__name__].__dict__)
-    config_mode = getattr(sys.modules[__name__], format_config_mode)
-except AttributeError:
+    config_mode = config_dict[get_config_mode.capitalize()]
+except KeyError:
     sys.exit('Error: Invalid ENMS_CONFIG_MODE environment variable entry.')
 
 path_source = dirname(abspath(__file__))

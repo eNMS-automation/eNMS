@@ -27,3 +27,9 @@ class ProductionConfig(Config):
 class DebugConfig(Config):
     DEBUG = True
     SECRET_KEY = 'key'
+
+
+config_dict = {
+    'Production': ProductionConfig,
+    'Debug': DebugConfig
+}

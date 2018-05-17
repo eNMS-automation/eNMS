@@ -6,6 +6,7 @@ branches:
 
 python:
   - 2.7
+  - 3.4
   - 3.5
   - 3.6
 
@@ -16,11 +17,9 @@ branches:
 install:
   - pip install -r requirements_dev.txt
 
-before_script:
-  cd tests/
-
 script:
   - flake8
+  - cd tests/
   - coverage run --source=../source -m pytest
 
 after_success:

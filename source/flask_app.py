@@ -14,6 +14,7 @@ get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
 format_config_mode = "".join([get_config_mode.capitalize(), "Config"])
 
 try:
+    print(sys.modules[__name__].__dict__)
     config_mode = getattr(sys.modules[__name__], format_config_mode)
 except AttributeError:
     sys.exit('Error: Invalid ENMS_CONFIG_MODE environment variable entry.')

@@ -75,7 +75,11 @@
                 {% for node in nodes %}
                 <tr id="node-{{ node.name }}">
                   {% for field in node_fields %}
-                    <td>{{ node[field] }}</td>
+                    {% if field in ("longitude", "latitude") %}
+                      <td>{{ node[field]|round(2) }}</td>
+                    {% else %}
+                      <td>{{ node[field] }}</td>
+                    {% endif %}
                   {% endfor %}
                   <td>
                     <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node['name'] }}')">Edit</button>
@@ -185,7 +189,9 @@
 
       var name = result.name;
       for (i = 0; i < fields.length; i++) {
-        values.push(`<td>${result[fields[i]]}</td>`);
+        var truncate = ["longitude", "latitude"].includes(fields[i]);
+        value = truncate ? parseFloat(result[fields[i]]).toFixed(2) : result[fields[i]]
+        values.push(`<td>${value}</td>`);
       }
       values.push(`<td>
       <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${name}')">Edit</button>

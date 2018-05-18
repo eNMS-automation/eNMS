@@ -141,10 +141,14 @@ Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/t
 
 # Run eNMS in a docker container
 
-### 1. Download & run the container
-    docker run -d -p 5100:5100 --name enms --restart always afourmy/enms
+### 1. Fetch the image on dockerhub
+    docker pull afourmy/enms
 
-### 2. Once eNMS is running, go to http://127.0.0.1:5100
+### 2. Find the name of the docker image
+    docker images
+
+### 3. Run the image on port 5100
+    docker run -p 5100:5100 image_name
 
 # Contact
 

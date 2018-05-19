@@ -33,7 +33,7 @@ Clicking on the ``Add a new node`` or ``Add a new link`` buttons will open a for
    :alt: Node and link creation
    :align: center
 
-Fill the form and click on the `Submit` button.
+Fill the form and click on the ``Submit`` button.
 
 .. image:: /_static/objects/management/object_creation2.png
    :alt: Node and link creation forms

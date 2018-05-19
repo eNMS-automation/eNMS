@@ -47,6 +47,14 @@ License
 
    base/license
 
+Contributing
+============
+
+.. toctree::
+   :maxdepth: 2
+
+   base/contributing
+
 Indices and Tables
 ==================
 

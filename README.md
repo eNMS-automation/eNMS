@@ -11,16 +11,14 @@ It encompasses the following aspects of network automation:
 - **Configuration management**: commit/rollback of a configuration via NAPALM.
 - **Netmiko scripting**: using netmiko to push a configuration, or display the result of a set of commands.
 - **Ansible support**: sending and managing ansible playbooks.
-- **Workflows**: Netmiko, NAPALM and Ansible scripts can be combined together graphically to define a workflow (see below).
+- **Workflows**: Netmiko, NAPALM and Ansible scripts can be combined together graphically to define a workflow.
 - **Scheduling**: any task can be scheduled to start and end at specific times, periodically or not.
 
-While network automation traditionally requires scripting skills, eNMS provides a way to automate networks graphically, in a few simple steps: 
-- **Creation** of the network (e.g by importing a spreadsheet describing the network topology)
+While network automation traditionally requires scripting skills, eNMS provides a way to automate networks graphically, in a few simple steps:
+- **Creation** of the network.
 - **Visualization** of the network on a world map (geographical view), or via a force-based algorithm (logical view).
-- **Creation** of a script / workflow.
+- **Creation** of scripts and workflows.
 - **Scheduling** of the task from the geographical or logical view.
-
-Join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel #enms for the latest updates !
 
 # 1. Network creation
 
@@ -37,8 +35,8 @@ Relevant part of the doc: _[Object creation](http://enms.readthedocs.io/en/lates
 # 2. Network visualization
 
 Two visualizations are proposed:
-- **Geographical view**: display the network on a world map in 2D or 3D, with Open Street Map or Google Map (with `leaflet.js`).
-- **Logical view**: display the network in an aesthetically-pleasing way via a force-based algorithm (with `d3.js`).
+- **Geographical view**: display the network on a world map in 2D or 3D, with Open Street Map or Google Map.
+- **Logical view**: display the network in an aesthetically-pleasing way via a force-based algorithm.
 
 Views can be filtered to display only a subset of the network. A filter is a combination of values (or regular expressions) for each property: it defines whether an object should be displayed or not.
 
@@ -63,11 +61,11 @@ The following types of script can be created:
 - **NAPALM _getters_**: list of getters which output is displayed in the task logs.
 - **Ansible playbook**: send an ansible playbook with optional arguments.
 
-Scripts can be combined to form a **workflow**. A workflow is a directed graph which nodes are scripts.
-There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates where to move in the graph if the source script was successfully executed (resp. failed).
+Scripts can be combined to form a **workflow**. A workflow is a directed graph which vertices are scripts.
+There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).
 
 In the following example, we create a workflow to configure a VRF on Cisco IOS. Our workflow is made of 4 scripts:
-- `create_vrf`: uses NAPALM to configure a new VRF on the router (via `Load merge`)
+- `create_vrf`: uses NAPALM to configure a new VRF on the router (via `Load merge`).
 - `NAPALM Commit`: commits the newly configured VRF.
 - `validate_vrf`: uses Netmiko to verify that the state of the router is consistent with what is expected.
 - `NAPALM Rollback`: use NAPALM to rollback the configuration if the previous validation fails (`validate_vrf` script).
@@ -106,6 +104,7 @@ eNMS displays a dynamic line-by-line diff of the outputs.
 In the following example, we schedule two periodic tasks:
 - a task that will periodically run `show interfaces` on a router with Netmiko.
 - a NAPALM getter task that will periodically retrieve the output of NAPALM `get_interfaces_counters` getter.
+
 We can see in the comparison how counters increase through time for both tasks.
 
 ![Workflow creation](readme/comparison.gif)
@@ -117,8 +116,8 @@ Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/t
 # Miscellaneous
 
 - eNMS can act as a TACACS+ authentication server: upon authentication, a request will be sent to the server to check the credentials and log in the user.
-- eNMS can act as a Syslog server: all logs are stored in the database, and can be filtered with regular expressions. Eventually, the idea is to use the logs for event-driven automation, i.e trigger the execution of a script upon received a specific log.
-- A network can be exported to Google Earth (as a `.kmz` file).
+- eNMS can act as a Syslog server: all logs are stored in the database, and can be filtered with regular expressions. Eventually, the idea is to use the logs for event-driven automation, i.e trigger the execution of a script upon receiving a specific type of log.
+- From the geographical view, networks can be displayed on the earth with a 3D map. They can also be exported to Google Earth.
 
 # Getting started
 

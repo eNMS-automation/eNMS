@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (
+    FloatField,
     IntegerField,
     TextField,
     PasswordField,
@@ -34,6 +35,8 @@ class AddUser(FlaskForm):
 class DeleteUser(FlaskForm):
     users = SelectMultipleField('Users', choices=())
 
+## administration
+
 
 class TacacsServerForm(FlaskForm):
     ip_address = TextField('IP address')
@@ -45,3 +48,11 @@ class TacacsServerForm(FlaskForm):
 class SyslogServerForm(FlaskForm):
     ip_address = TextField('IP address', default='0.0.0.0')
     port = IntegerField('Port', default=514)
+
+## parameters
+
+
+class GeographicalParametersForm(FlaskForm):
+    default_longitude = FloatField('Default longitude')
+    default_latitude = FloatField('Default latitude')
+    default_zoom_level = IntegerField('Default zoom level')

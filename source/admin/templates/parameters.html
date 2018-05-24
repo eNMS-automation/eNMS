@@ -1,0 +1,48 @@
+{% extends "base_site.html" %}
+
+{% block title %} User management {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h4 class="text-center">Geographical parameters</h4>
+          </div>
+          <div class="x_content">
+            <br />
+            <form id="geographical_parameters_form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+              <div class="form-group" style="height: 450px">
+                {% for field in geographical_parameters_form if field.widget.input_type != 'hidden'  %}
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    {{ field(class="form-control required", value=parameters[field.name]) }}
+                  </div><br><br><br>
+                {% endfor %}
+              </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="button" class="btn btn-success" onclick="saveGeographicalParameters()">Save changes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script src="{{ url_for('admin_blueprint.static', filename='parameters.js') }}"></script>
+{% endblock javascripts %}

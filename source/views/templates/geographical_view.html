@@ -153,7 +153,7 @@
               'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg'
               };
             {% if view != 'glearth' %}
-              var map = L.map('mapid').setView([48, 2], 5);
+              var map = L.map('mapid').setView([{{ parameters.default_latitude }}, {{ parameters.default_longitude }}], {{ parameters.default_zoom_level }});
               var osm_layer = L.tileLayer(layers['osm']);
               map.addLayer(osm_layer);
               var current_layer = osm_layer;

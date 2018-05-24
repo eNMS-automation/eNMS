@@ -13,10 +13,11 @@ from .forms import (
     AddUser,
     CreateAccountForm,
     LoginForm,
+    GeographicalParametersForm,
     SyslogServerForm,
     TacacsServerForm,
 )
-from .models import SyslogServer
+from .models import Parameters, SyslogServer
 from passlib.hash import cisco_type7
 from .properties import user_properties, user_search_properties
 from sqlalchemy.exc import IntegrityError
@@ -127,6 +128,16 @@ def admninistration():
     )
 
 
+@blueprint.route('/parameters')
+@login_required
+def parameters():
+    return render_template(
+        'parameters.html',
+        geographical_parameters_form=GeographicalParametersForm(request.form),
+        parameters=db.session.query(Parameters).one()
+    )
+
+
 ## AJAX calls
 
 
@@ -175,5 +186,14 @@ def save_syslog_server():
     SyslogServer.query.delete()
     syslog_server = SyslogServer(**request.form.to_dict())
     db.session.add(syslog_server)
+    db.session.commit()
+    return jsonify({})
+
+
+@blueprint.route('/save_geographical_parameters', methods=['POST'])
+@login_required
+def save_parameters():
+    parameters = db.session.query(Parameters).one()
+    parameters.update(**request.form.to_dict())
     db.session.commit()
     return jsonify({})

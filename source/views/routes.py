@@ -1,3 +1,4 @@
+from admin.models import Parameters
 from base.database import get_obj
 from base.models import Log
 from base.properties import pretty_names, type_to_public_properties
@@ -69,6 +70,7 @@ def view(view_type):
     return render_template(
         '{}_view.html'.format(view_type),
         filters=Filter.query.all(),
+        parameters=Parameters.query.one(),
         view=view,
         scheduling_form=scheduling_form,
         view_options_form=view_options_form,

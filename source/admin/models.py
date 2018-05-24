@@ -1,7 +1,8 @@
 from base.database import db, get_obj
+from base.helpers import integrity_rollback
 from base.models import Log
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Float, Integer, String
 from sqlalchemy.orm import relationship
 from base.models import CustomBase
 from passlib.hash import cisco_type7
@@ -106,3 +107,25 @@ class SyslogServer(CustomBase):
         th = Thread(target=self.server.serve_forever)
         th.daemon = True
         th.start()
+
+
+class Parameters(CustomBase):
+
+    __tablename__ = 'Parameters'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, default='default', unique=True)
+    default_longitude = Column(Float, default=0.)
+    default_latitude = Column(Float, default=0.)
+    default_zoom_level = Column(Integer, default=5)
+
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+
+@integrity_rollback
+def create_default_parameters():
+    parameters = Parameters()
+    db.session.add(parameters)
+    db.session.commit()

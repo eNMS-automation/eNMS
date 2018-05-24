@@ -22,7 +22,7 @@ path_parent = abspath(join(path_source, pardir))
 if path_source not in sys.path:
     sys.path.append(path_source)
 
-from admin.models import SyslogServer
+from admin.models import create_default_parameters, SyslogServer
 from base.database import db, create_database
 from objects.models import create_default_filters
 from scripts.models import create_default_scripts
@@ -83,6 +83,7 @@ def configure_database(app):
 
     @app.before_first_request
     def create_default():
+        create_default_parameters()
         create_default_scripts()
         create_default_filters()
 

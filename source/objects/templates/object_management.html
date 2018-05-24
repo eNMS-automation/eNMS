@@ -75,11 +75,7 @@
                 {% for node in nodes %}
                 <tr id="node-{{ node.name }}">
                   {% for field in node_fields %}
-                    {% if field in ("longitude", "latitude") %}
-                      <td>{{ node[field]|round(2) }}</td>
-                    {% else %}
-                      <td>{{ node[field] }}</td>
-                    {% endif %}
+                    <td>{{ node[field] }}</td>
                   {% endfor %}
                   <td>
                     <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node['name'] }}')">Edit</button>

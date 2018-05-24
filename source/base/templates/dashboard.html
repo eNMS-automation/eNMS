@@ -48,7 +48,7 @@
               <div class="form-group">
                 <select id="{{ type }}-properties" class="form-control">
                   {% for property in type_properties %}
-                    {% if property == 'type' %}
+                    {% if property == default_properties[property] %}
                       <option selected="selected">Type</option>
                     {% else %}
                       <option>{{ names[property] }}</option>

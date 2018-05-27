@@ -97,6 +97,7 @@ class Task(CustomBase):
         # None as this is what AP Scheduler is expecting
         for date in ('start_date', 'end_date'):
             js_date = data[date]
+            print(js_date, bool(js_date))
             value = self.datetime_conversion(js_date) if js_date else None
             setattr(self, date, value)
         self.is_active = True

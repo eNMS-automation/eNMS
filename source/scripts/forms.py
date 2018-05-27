@@ -128,3 +128,12 @@ class AnsibleScriptForm(ScriptForm):
     playbook_path = TextField('Path to playbook')
     arguments = TextField('Optional arguments')
     graphical_inventory = BooleanField('Build inventory from graphical selection')
+
+
+class SchedulingForm(FlaskForm):
+    start_date = TextField('Start date')
+    end_date = TextField('End date')
+    name = TextField('Name')
+    nodes = SelectMultipleField('', choices=())
+    filters = SelectMultipleField('', choices=())
+    frequency = TextField('Frequency')

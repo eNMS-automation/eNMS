@@ -65,7 +65,7 @@ def calendar():
 ## AJAX calls
 
 
-@blueprint.route('/scheduler', methods=['POST'])
+@blueprint.route('/view_scheduler', methods=['POST'])
 @login_required
 def scheduler():
     data = request.form.to_dict()

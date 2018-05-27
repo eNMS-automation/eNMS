@@ -480,7 +480,7 @@
       if ($("#scheduling-form").parsley().validate()) {
         $.ajax({
           type: "POST",
-          url: "/tasks/scheduler",
+          url: "/tasks/view_scheduler",
           dataType: "json",
           data: $("#scheduling-form").serialize(),
           success: function() {

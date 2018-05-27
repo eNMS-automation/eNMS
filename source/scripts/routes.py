@@ -9,7 +9,8 @@ from .forms import (
     NapalmGettersForm,
     NetmikoConfigScriptForm,
     FileTransferScriptForm,
-    NetmikoValidationForm
+    NetmikoValidationForm,
+    SchedulingForm
 )
 from jinja2 import Template
 from os.path import join
@@ -25,6 +26,7 @@ from .models import (
     script_factory,
     type_to_class
 )
+from objects.models import Node, Filter
 from werkzeug import secure_filename
 from yaml import load
 
@@ -61,11 +63,15 @@ type_to_name = {
 @blueprint.route('/script_management')
 @login_required
 def scripts():
+    scheduling_form = SchedulingForm(request.form)
+    scheduling_form.nodes.choices = Node.choices()
+    scheduling_form.filters.choices = Filter.choices()
     return render_template(
         'script_management.html',
         fields=('name', 'type'),
         type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         names=pretty_names,
+        scheduling_form=scheduling_form,
         scripts=Script.query.all()
     )
 

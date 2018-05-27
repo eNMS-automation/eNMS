@@ -103,29 +103,17 @@ Custom script
 -------------
 
 eNMS also gives you the option to create your own script. Once created, a custom script is automatically added to the web interface and can be used like any other script.
-To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py`` and reuse the template script called ``CustomScriptExample``.
+To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py`` and start by adding a new job in the ``JobStore`` class (``job_example`` is an example of job that doesn't do anything).
 
 ::
 
-  class CustomScriptExample(CustomScript):
-
-      __tablename__ = 'CustomScriptExample'
-    
-      id = Column(Integer, ForeignKey('CustomScript.id'), primary_key=True)
-    
-      __mapper_args__ = {
-          'polymorphic_identity': 'custom_script_example',
-      }
-    
-      def __init__(self):
-          name = 'custom_script_example'
-          waiting_time = 0
-          description = 'script_description'
-          self.vendor = 'a vendor'
-          self.operating_system = 'an operating system'
-          super(CustomScriptExample, self).__init__(name, waiting_time, description)
-    
-      def job(self, args):
+  class JobStore(Base):
+      
+      __tablename__ = 'JobStore'
+  
+      id = Column(Integer, primary_key=True)
+  
+      def job_example(self, args):
           task, node, results = args
           # add your own logic here
           # results is a dictionnary that contains the logs of the script
@@ -133,20 +121,39 @@ To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py
           # a script returns a boolean value used in workflows (see the workflow section)
           return True if 'a condition for success' else False
 
-Once you've created a new script, you must also the update the ``create_custom_scripts`` function at the bottom of the file:
+Then, create a dictionnary that contains the parameters of your new script, and an key ``job_name`` which value is the name of the job function you added in ``JobStore`` previously.
+
+::
+
+  example_parameters = {
+      'name': 'script that does nothing',
+      'waiting_time': 0,
+      'description': 'does nothing',
+      'vendor': 'none',
+      'operating_system': 'all',
+      'job_name': 'job_example'
+  }
+  
+You must also the update the ``create_custom_scripts`` function at the bottom of the file:
 
 ::
   
-  @integrity_rollback
   def create_custom_scripts():
-      for custom_script in (
-          CustomScriptExample,
-          TheScriptYouCreatedYourself,
-          NornirPingScript
+      job_store = JobStore()
+      db.session.add(job_store)
+      db.session.commit()
+      for parameters in (
+          example_parameters,
+          the_parameters_of_your_new_script,
+          nornir_ping_parameters
       ):
-          db.session.add(custom_script())
-          db.session.commit()
+          try:
+              custom_script = CustomScript(**parameters)
+              db.session.add(custom_script)
+              db.session.commit()
+          except exc.IntegrityError:
+              db.session.rollback()
+
+Finally, restart the application.
 
 You can take a look at the other scripts for inspiration. ``custom_scripts.py`` contains a script called ``NornirPingScript`` that uses the Nornir automation framework to ping a device on ports 23 and 443.
-
-Finally, you will need to migrate the database (if you are testing the application with a SQLite database, delete the database and restart the application).

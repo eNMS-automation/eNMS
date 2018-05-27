@@ -491,8 +491,11 @@ class Filter(CustomBase):
 
     @initialize_properties
     def __init__(self, **kwargs):
-        print('test'*1000)
+        self.compute_pool()
+
+    def compute_pool(self):
         self.nodes = list(filter(self.object_match, Node.query.all()))
+        self.links = []
         for link in Link.query.all():
             # source and destination do not belong to a link __dict__, because
             # they are SQLalchemy relationships and not columns
@@ -505,7 +508,6 @@ class Filter(CustomBase):
             if self.object_match(link):
                 self.links.append(link)
         print(self.nodes, self.links)
-        print('test'*1000)
 
     def get_properties(self):
         result = {}
@@ -555,15 +557,18 @@ class Filter(CustomBase):
 
 
 def filter_factory(**kwargs):
-    obj = get_obj(Filter, name=kwargs['name'])
-    mode = 'update' if obj else 'creation'
-    if obj:
+    filter = get_obj(Filter, name=kwargs['name'])
+    mode = 'update' if filter else 'creation'
+    if filter:
         for property, value in kwargs.items():
-            if property in obj.__dict__:
-                setattr(obj, property, value)
+            if property in filter.__dict__:
+                setattr(filter, property, value)
+        print('test'*1000)
+        print(filter.__dict__)
+        filter.compute_pool()
     else:
-        obj = Filter(**kwargs)
-    db.session.add(obj)
+        filter = Filter(**kwargs)
+        db.session.add(filter)
     db.session.commit()
     return mode
 

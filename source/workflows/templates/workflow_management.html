@@ -79,7 +79,7 @@
                     </a>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('{{ script['name'] }}')">Run</button>
+                    <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('{{ workflow['name'] }}')">Run</button>
                   </td>
                   <td>
                     <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ workflow['name'] }}')">Delete</button>
@@ -99,9 +99,6 @@
 
 {% block javascripts %}
   {{ super()}}
-  <!-- Datatables -->
-  <script src="{{ url_for('objects_blueprint.static', filename='datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ url_for('objects_blueprint.static', filename='datatables/dataTables.bootstrap.min.js') }}"></script>
   <script>
     var dates = ['start_date', 'end_date'];
     var today = new Date();
@@ -125,9 +122,9 @@
       $('.buttonFinish').addClass('btn btn-default');
     }
 
-    var script = null;
-    function showSchedulingModal(scriptName){
-      script = scriptName;
+    var workflow = null;
+    function showSchedulingModal(workflowName){
+      workflow = scriptName;
       $("#scheduling").modal('show');
     }
 
@@ -135,7 +132,7 @@
       if ($("#scheduling-form").parsley().validate()) {
         $.ajax({
           type: "POST",
-          url: `/tasks/job_scheduler/workflow/${script}`,
+          url: `/tasks/job_scheduler/workflow/${workflow}`,
           dataType: "json",
           data: $("#scheduling-form").serialize(),
           success: function() {
@@ -192,7 +189,9 @@
           <i class="fa fa-pencil"></i>Manage
         </a>
       </td>
-
+      <td>
+        <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${name}')">Run</button>
+      </td>
       <td>
       <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${name}')">Delete</button>
       </td>`);

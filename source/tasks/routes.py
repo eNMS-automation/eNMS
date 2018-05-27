@@ -83,7 +83,6 @@ def view_scheduler():
 @blueprint.route('/job_scheduler/<type>/<name>', methods=['POST'])
 @login_required
 def job_scheduler(type, name):
-    print(type, name)
     cls = Script if type == 'script' else Workflow
     job = get_obj(cls, name=name)
     data = request.form.to_dict()
@@ -93,7 +92,6 @@ def job_scheduler(type, name):
     for filter in request.form.getlist('filters'):
         data['nodes'].extend(get_obj(Filter, name=filter).nodes)
     data['user'] = current_user
-    print(data)
     task_factory(**data)
     return jsonify({})
 

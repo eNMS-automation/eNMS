@@ -1,6 +1,11 @@
 from base.database import db, get_obj
 from base.helpers import integrity_rollback
-from base.models import task_node_table, CustomBase
+from base.models import (
+    filter_node_table,
+    filter_link_table,
+    task_node_table,
+    CustomBase
+)
 from base.properties import (
     link_common_properties,
     link_public_properties,
@@ -16,7 +21,6 @@ from sqlalchemy.orm import backref, relationship
 
 def initialize_properties(function):
     def wrapper(self, **kwargs):
-        function(self, **kwargs)
         for property, value in kwargs.items():
             # depending on whether value is an iterable or not, we must
             # unpack it's value (when **kwargs is request.form, some values
@@ -24,6 +28,7 @@ def initialize_properties(function):
             if hasattr(value, '__iter__') and not isinstance(value, str):
                 value = value[0]
             setattr(self, property, value)
+        function(self)
     return wrapper
 
 
@@ -69,6 +74,11 @@ class Node(Object):
         "Task",
         secondary=task_node_table,
         back_populates="nodes"
+    )
+    filters = relationship(
+        'Filter',
+        secondary=filter_node_table,
+        back_populates='nodes'
     )
 
     __mapper_args__ = {
@@ -245,6 +255,12 @@ class Link(Object):
         Node,
         primaryjoin=destination_id == Node.id,
         backref=backref('destination', cascade="all, delete-orphan")
+    )
+
+    filters = relationship(
+        'Filter',
+        secondary=filter_link_table,
+        back_populates='links'
     )
 
     properties = OrderedDict([
@@ -428,6 +444,16 @@ class Filter(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
+    nodes = relationship(
+        'Node',
+        secondary=filter_node_table,
+        back_populates='filters'
+    )
+    links = relationship(
+        'Link',
+        secondary=filter_link_table,
+        back_populates='filters'
+    )
     node_name = Column(String)
     node_name_regex = Column(Boolean)
     node_description = Column(String)
@@ -465,7 +491,21 @@ class Filter(CustomBase):
 
     @initialize_properties
     def __init__(self, **kwargs):
-        print(kwargs)
+        print('test'*1000)
+        self.nodes = list(filter(self.object_match, Node.query.all()))
+        for link in Link.query.all():
+            # source and destination do not belong to a link __dict__, because
+            # they are SQLalchemy relationships and not columns
+            # we update __dict__ with these properties for the filtering
+            # system to include them
+            link.__dict__.update({
+                'source': link.source,
+                'destination': link.destination
+            })
+            if self.object_match(link):
+                self.links.append(link)
+        print(self.nodes, self.links)
+        print('test'*1000)
 
     def get_properties(self):
         result = {}
@@ -497,28 +537,19 @@ class Filter(CustomBase):
         )
 
     def filter_objects(self):
-        nodes = filter(self.object_match, Node.query.all())
+        # prepare data for visualization
         links_id, links_coords = [], []
-        for link in Link.query.all():
-            # source and destination do not belong to a link __dict__, because
-            # they are SQLalchemy relationships and not columns
-            # we update __dict__ with these properties for the filtering
-            # system to work
-            link.__dict__.update({
-                'source': link.source,
-                'destination': link.destination
-            })
-            if self.object_match(link):
-                links_id.append(link.id)
-                links_coords.append([
-                    link.source.latitude,
-                    link.source.longitude,
-                    link.destination.latitude,
-                    link.destination.longitude,
-                    link.color
-                ])
+        for link in self.links:
+            links_id.append(link.id)
+            links_coords.append([
+                link.source.latitude,
+                link.source.longitude,
+                link.destination.latitude,
+                link.destination.longitude,
+                link.color
+            ])
         return {
-            'nodes': [node.id for node in nodes],
+            'nodes': [node.id for node in self.nodes],
             'links': (links_id, links_coords)
         }
 

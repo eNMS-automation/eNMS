@@ -100,15 +100,14 @@
     var script = null;
     function showSchedulingModal(scriptName){
       script = scriptName;
-      console.log(script);
-      $("scheduling").modal('show');
+      $("#scheduling").modal('show');
     }
 
-    function runScript() {
+    function scheduleScript() {
       if ($("#scheduling-form").parsley().validate()) {
         $.ajax({
           type: "POST",
-          url: "/tasks/job_scheduler",
+          url: `/tasks/job_scheduler/script/${script}`,
           dataType: "json",
           data: $("#scheduling-form").serialize(),
           success: function() {
@@ -126,7 +125,6 @@
     for (i = 0; i < types.length; i++) {
       $(`#${types[i]}-button`).text("Update");
     }
-
 
     function showObjectModal(type, name) {
       $('#title').text(`Edit ${name} properties`);

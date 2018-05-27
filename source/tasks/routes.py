@@ -5,7 +5,7 @@ from flask import Blueprint, jsonify, render_template, request, session
 from flask_login import current_user, login_required
 from .forms import CompareForm
 from .models import Task, task_factory
-from objects.models import Node
+from objects.models import Filter, Node
 from scripts.models import Script
 from re import search, sub
 from views.forms import SchedulingForm
@@ -67,7 +67,7 @@ def calendar():
 
 @blueprint.route('/view_scheduler', methods=['POST'])
 @login_required
-def scheduler():
+def view_scheduler():
     data = request.form.to_dict()
     selection = map(int, session['selection'])
     scripts = request.form.getlist('scripts')
@@ -76,6 +76,24 @@ def scheduler():
     data['workflows'] = [get_obj(Workflow, name=name) for name in workflows]
     data['nodes'] = [get_obj(Node, id=id) for id in selection]
     data['user'] = current_user
+    task_factory(**data)
+    return jsonify({})
+
+
+@blueprint.route('/job_scheduler/<type>/<name>', methods=['POST'])
+@login_required
+def job_scheduler(type, name):
+    print(type, name)
+    cls = Script if type == 'script' else Workflow
+    job = get_obj(cls, name=name)
+    data = request.form.to_dict()
+    data['scripts'] = [get_obj(cls, name=name)] if type == 'script' else []
+    data['workflows'] = [get_obj(cls, name=name)] if type == 'workflow' else []
+    data['nodes'] = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
+    for filter in request.form.getlist('filters'):
+        data['nodes'].extend(get_obj(Filter, name=filter).nodes)
+    data['user'] = current_user
+    print(data)
     task_factory(**data)
     return jsonify({})
 

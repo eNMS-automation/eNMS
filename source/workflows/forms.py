@@ -10,7 +10,8 @@ class AddScriptForm(FlaskForm):
         ('napalm_getters', 'NAPALM getters'),
         ('file_transfer', 'File transfer'),
         ('netmiko_validation', 'Netmiko validation'),
-        ('ansible_playbook', 'Ansible playbook')
+        ('ansible_playbook', 'Ansible playbook'),
+        ('custom_script', 'Custom scripts')
     )
     script_type = SelectField('Type of script', choices=script_type_choices)
     scripts = SelectMultipleField('', choices=())

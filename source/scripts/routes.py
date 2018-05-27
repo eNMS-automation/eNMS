@@ -53,7 +53,8 @@ type_to_name = {
     'napalm_getters': 'NAPALM Getters',
     'file_transfer': 'File Transfer',
     'netmiko_validation': 'Validation',
-    'ansible_playbook': 'Ansible playbook'
+    'ansible_playbook': 'Ansible playbook',
+    'custom_script': 'Custom script'
 }
 
 

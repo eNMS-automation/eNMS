@@ -24,6 +24,7 @@ if path_source not in sys.path:
 
 from admin.models import create_default_parameters, SyslogServer
 from base.database import db, create_database
+from scripts.custom_scripts import create_custom_scripts
 from objects.models import create_default_filters
 from scripts.models import create_default_scripts
 from tasks.models import scheduler
@@ -86,6 +87,7 @@ def configure_database(app):
         create_default_parameters()
         create_default_scripts()
         create_default_filters()
+        create_custom_scripts()
 
 
 def configure_syslog():

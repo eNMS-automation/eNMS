@@ -56,6 +56,11 @@ ansible_playbook_properties = script_properties + (
     'graphical_inventory'
 )
 
+custom_properties = script_properties + (
+    'vendor',
+    'operating_system'
+)
+
 list_properties = (
     'getters',
 )
@@ -73,5 +78,6 @@ type_to_properties = {
     'file_transfer': file_transfer_properties,
     'netmiko_validation': netmiko_validation_properties,
     'napalm_getters': napalm_getters_properties,
-    'ansible_playbook': ansible_playbook_properties
+    'ansible_playbook': ansible_playbook_properties,
+    'custom_script': custom_properties
 }

@@ -425,12 +425,11 @@ type_to_class = {
     'napalm_config': NapalmConfigScript,
     'file_transfer': FileTransferScript,
     'napalm_getters': NapalmGettersScript,
-    'ansible_playbook': AnsibleScript
+    'ansible_playbook': AnsibleScript,
 }
 
 
 def script_factory(type, **kwargs):
-    print(type, kwargs)
     cls = type_to_class[type]
     script = get_obj(cls, name=kwargs['name'][0])
     for property in type_to_properties[type]:

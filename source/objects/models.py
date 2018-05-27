@@ -507,7 +507,6 @@ class Filter(CustomBase):
             })
             if self.object_match(link):
                 self.links.append(link)
-        print(self.nodes, self.links)
 
     def get_properties(self):
         result = {}
@@ -563,8 +562,6 @@ def filter_factory(**kwargs):
         for property, value in kwargs.items():
             if property in filter.__dict__:
                 setattr(filter, property, value)
-        print('test'*1000)
-        print(filter.__dict__)
         filter.compute_pool()
     else:
         filter = Filter(**kwargs)

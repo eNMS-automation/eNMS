@@ -80,6 +80,7 @@ nornir_ping_parameters = {
 
 
 def create_custom_scripts():
+    JobStore.query.delete()
     job_store = JobStore()
     db.session.add(job_store)
     db.session.commit()

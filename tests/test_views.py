@@ -38,8 +38,8 @@ def test_netmiko_napalm_config(user_client):
         user_client.post('/scripts/create_script_napalm_config', data=napalm_jinja2_script)
     with user_client.session_transaction() as sess:
         sess['selection'] = ['1', '21', '22']
-    user_client.post('tasks/scheduler', data=instant_task)
-    user_client.post('tasks/scheduler', data=scheduled_task)
+    user_client.post('tasks/view_scheduler', data=instant_task)
+    user_client.post('tasks/view_scheduler', data=scheduled_task)
     assert len(Task.query.all()) == 2
 
 

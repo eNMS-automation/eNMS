@@ -84,7 +84,6 @@ def view_scheduler():
 @login_required
 def job_scheduler(type, name):
     cls = Script if type == 'script' else Workflow
-    job = get_obj(cls, name=name)
     data = request.form.to_dict()
     data['scripts'] = [get_obj(cls, name=name)] if type == 'script' else []
     data['workflows'] = [get_obj(cls, name=name)] if type == 'workflow' else []

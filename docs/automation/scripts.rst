@@ -148,3 +148,5 @@ Once you've created a new script, you must also the update the ``create_custom_s
           db.session.commit()
 
 You can take a look at the other scripts for inspiration. ``custom_scripts.py`` contains a script called ``NornirPingScript`` that uses the Nornir automation framework to ping a device on ports 23 and 443.
+
+Finally, you will need to migrate the database (if you are testing the application with a SQLite database, delete the database and restart the application).

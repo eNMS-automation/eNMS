@@ -10,7 +10,8 @@ urls = {
     '/admin': (
         '/user_management',
         '/login',
-        '/administration'
+        '/administration',
+        '/parameters'
     ),
     '/objects': (
         '/object_management',

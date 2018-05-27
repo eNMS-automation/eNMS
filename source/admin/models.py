@@ -115,8 +115,8 @@ class Parameters(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, default='default', unique=True)
-    default_longitude = Column(Float, default=0.)
-    default_latitude = Column(Float, default=0.)
+    default_longitude = Column(Float, default=2.)
+    default_latitude = Column(Float, default=48.)
     default_zoom_level = Column(Integer, default=5)
 
     def update(self, **kwargs):

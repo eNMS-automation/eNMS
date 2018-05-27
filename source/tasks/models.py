@@ -97,7 +97,6 @@ class Task(CustomBase):
         # None as this is what AP Scheduler is expecting
         for date in ('start_date', 'end_date'):
             js_date = data[date]
-            print(js_date, bool(js_date))
             value = self.datetime_conversion(js_date) if js_date else None
             setattr(self, date, value)
         self.is_active = True
@@ -177,7 +176,7 @@ def task_factory(**kwargs):
     task = get_obj(Task, name=kwargs['name'])
     if task:
         for property, value in kwargs.items():
-            if property in ('start_date', 'end_date'):
+            if property in ('start_date', 'end_date') and value:
                 value = task.datetime_conversion(value)
             setattr(task, property, value)
     else:

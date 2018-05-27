@@ -4,6 +4,8 @@ from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 from .forms import AddScriptForm, WorkflowCreationForm
 from .models import ScriptEdge, Workflow, workflow_factory
+from objects.models import Node, Filter
+from scripts.forms import SchedulingForm
 from scripts.models import default_scripts, Script
 from scripts.routes import type_to_form
 
@@ -21,12 +23,16 @@ blueprint = Blueprint(
 @blueprint.route('/workflow_management')
 @login_required
 def workflows():
+    scheduling_form = SchedulingForm(request.form)
+    scheduling_form.nodes.choices = Node.choices()
+    scheduling_form.filters.choices = Filter.choices()
     return render_template(
         'workflow_management.html',
         names=pretty_names,
         fields=('name', 'description'),
         workflows=Workflow.query.all(),
-        form=WorkflowCreationForm(request.form)
+        form=WorkflowCreationForm(request.form),
+        scheduling_form=scheduling_form
     )
 
 

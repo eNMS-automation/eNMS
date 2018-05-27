@@ -7,6 +7,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  {% include 'script_scheduling.html' %}
   <div id="edit" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -59,6 +60,7 @@
                   {% endfor %}
                   <th style="width: 10%">Edit</th>
                   <th style="width: 10%">Manage</th>
+                  <th style="width: 10%">Run</th>
                   <th style="width: 10%">Delete</th>
                 </tr>
               </thead>
@@ -75,6 +77,9 @@
                     <a href="/workflows/manage_{{workflow['name']}}" class="btn btn-info btn-xs">
                       <i class="fa fa-pencil"></i>Manage
                     </a>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('{{ script['name'] }}')">Run</button>
                   </td>
                   <td>
                     <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ workflow['name'] }}')">Delete</button>
@@ -98,6 +103,51 @@
   <script src="{{ url_for('objects_blueprint.static', filename='datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ url_for('objects_blueprint.static', filename='datatables/dataTables.bootstrap.min.js') }}"></script>
   <script>
+    var dates = ['start_date', 'end_date'];
+    var today = new Date();
+    for (var i = 0; i < dates.length; i++) {
+      $('#' + dates[i]).datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
+        widgetPositioning: {
+            horizontal: 'left',
+            vertical: 'bottom'
+        },
+        useCurrent: false,
+      });
+      $('#' + dates[i]).data("DateTimePicker").minDate(today);
+    }
+    function schedule(){
+      $('#wizard').smartWizard({
+        onFinish: scheduleScript
+      });
+      $('.buttonNext').addClass('btn btn-success');
+      $('.buttonPrevious').addClass('btn btn-primary');
+      $('.buttonFinish').addClass('btn btn-default');
+    }
+
+    var script = null;
+    function showSchedulingModal(scriptName){
+      script = scriptName;
+      $("#scheduling").modal('show');
+    }
+
+    function scheduleScript() {
+      if ($("#scheduling-form").parsley().validate()) {
+        $.ajax({
+          type: "POST",
+          url: `/tasks/job_scheduler/workflow/${script}`,
+          dataType: "json",
+          data: $("#scheduling-form").serialize(),
+          success: function() {
+            alertify.notify('Task scheduled', 'success', 5);
+          }
+        });
+        $("#scheduling").modal('hide');
+      } else {
+        alertify.notify('Some fields are missing', 'error', 5);
+      }
+    }
+
     $('#datatable-workflow-responsive').DataTable();
     $('#table').DataTable();
 
@@ -142,6 +192,7 @@
           <i class="fa fa-pencil"></i>Manage
         </a>
       </td>
+
       <td>
       <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${name}')">Delete</button>
       </td>`);

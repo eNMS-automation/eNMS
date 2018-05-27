@@ -23,28 +23,31 @@ class CustomScript(Script):
 type_to_class['custom_script'] = CustomScript
 
 
-class CustomNetmikoScript(CustomScript):
+class CustomScriptExample(CustomScript):
 
-    __tablename__ = 'CustomNetmikoScript'
+    __tablename__ = 'CustomScriptExample'
 
     id = Column(Integer, ForeignKey('CustomScript.id'), primary_key=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'custom_netmiko_script',
+        'polymorphic_identity': 'custom_script_example',
     }
 
     def __init__(self):
-        name = 'netmiko_custom_script'
+        name = 'custom_script_example'
         waiting_time = 0
         description = 'script_description'
         self.vendor = 'a vendor'
         self.operating_system = 'an operating system'
-        super(CustomNetmikoScript, self).__init__(name, waiting_time, description)
+        super(CustomScriptExample, self).__init__(name, waiting_time, description)
 
     def job(self, args):
         task, node, results = args
+        # add your own logic here
+        # results is a dictionnary that contains the logs of the script
         results[node.name] = 'what will be displayed in the logs'
-        return 'success' if 'a condition for success' else False
+        # a script returns a boolean value used in workflows (see the workflow section)
+        return True if 'a condition for success' else False
 
 
 class NornirPingScript(CustomScript):
@@ -77,7 +80,7 @@ class NornirPingScript(CustomScript):
 @integrity_rollback
 def create_custom_scripts():
     for custom_script in (
-        CustomNetmikoScript,
+        CustomScriptExample,
         NornirPingScript
     ):
         db.session.add(custom_script())

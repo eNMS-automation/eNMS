@@ -98,3 +98,53 @@ To create an ``Ansible playbook`` script, simply enter the name of the playbook 
 .. image:: /_static/automation/scripts/ansible_playbook_script.png
    :alt: Ansible script
    :align: center
+
+Custom script
+-------------
+
+eNMS also gives you the option to create your own script. Once created, a custom script is automatically added to the web interface and can be used like any other script.
+To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py`` and reuse the template script called ``CustomScriptExample``.
+
+::
+
+  class CustomScriptExample(CustomScript):
+
+      __tablename__ = 'CustomScriptExample'
+    
+      id = Column(Integer, ForeignKey('CustomScript.id'), primary_key=True)
+    
+      __mapper_args__ = {
+          'polymorphic_identity': 'custom_script_example',
+      }
+    
+      def __init__(self):
+          name = 'custom_script_example'
+          waiting_time = 0
+          description = 'script_description'
+          self.vendor = 'a vendor'
+          self.operating_system = 'an operating system'
+          super(CustomScriptExample, self).__init__(name, waiting_time, description)
+    
+      def job(self, args):
+          task, node, results = args
+          # add your own logic here
+          # results is a dictionnary that contains the logs of the script
+          results[node.name] = 'what will be displayed in the logs'
+          # a script returns a boolean value used in workflows (see the workflow section)
+          return True if 'a condition for success' else False
+
+Once you've created a new script, you must also the update the ``create_custom_scripts`` function at the bottom of the file:
+
+::
+  
+  @integrity_rollback
+  def create_custom_scripts():
+      for custom_script in (
+          CustomScriptExample,
+          TheScriptYouCreatedYourself,
+          NornirPingScript
+      ):
+          db.session.add(custom_script())
+          db.session.commit()
+
+You can take a look at the other scripts for inspiration. ``custom_scripts.py`` contains a script called ``NornirPingScript`` that uses the Nornir automation framework to ping a device on ports 23 and 443.

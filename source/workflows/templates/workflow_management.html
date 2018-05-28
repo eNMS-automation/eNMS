@@ -99,28 +99,8 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <script>
-    var dates = ['start_date', 'end_date'];
-    var today = new Date();
-    for (var i = 0; i < dates.length; i++) {
-      $('#' + dates[i]).datetimepicker({
-        format: 'DD/MM/YYYY HH:mm:ss',
-        widgetPositioning: {
-            horizontal: 'left',
-            vertical: 'bottom'
-        },
-        useCurrent: false,
-      });
-      $('#' + dates[i]).data("DateTimePicker").minDate(today);
-    }
-    function schedule(){
-      $('#wizard').smartWizard({
-        onFinish: scheduleScript
-      });
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
 
     var workflow = null;
     function showSchedulingModal(workflowName){
@@ -168,7 +148,7 @@
       $(`#edit`).modal('show');
     }
 
-    var fields = [{% for field in form if field.widget.input_type != 'hidden'  %} '{{ field.name }}', {% endfor %}];
+    var fields = ['name', 'description', 'type'];
     function editObject() {
       var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add'
       var result = {};

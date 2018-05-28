@@ -1,6 +1,9 @@
-var workflow = null;
-function showSchedulingModal(workflowName){
-  workflow = workflowName;
+var workflowId = null
+    table = $('#table').DataTable()
+    fields = ['name', 'description', 'type'];
+
+function showSchedulingModal(id){
+  workflowId = id;
   $("#scheduling").modal('show');
 }
 
@@ -21,29 +24,28 @@ function scheduleScript() {
   }
 }
 
-var table = $('#table').DataTable();
-
 function showModal(type) {
   $('#title').text("Add a new workflow");
   $('#edit-form').trigger("reset");
   $('#edit').modal('show');
 }
 
-function showObjectModal(name) {
+function showWorkflowModal(id) {
+  workflowId = id;
   $('#title').text(`Edit properties`);
   $.ajax({
     type: "POST",
-    url: `/workflows/get_${name}`,
+    url: `/workflows/get_${workflowId}`,
     success: function(properties){
       for (const [property, value] of Object.entries(properties)) {
-        $(`#${property}`).val(value);
+        console.log(property, value);
+        $(`#property-${property}`).val(value);
       }
     }
   });
   $(`#edit`).modal('show');
 }
 
-var fields = ['name', 'description', 'type'];
 function editObject() {
   var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add'
   var result = {}
@@ -52,18 +54,17 @@ function editObject() {
     result[this.name] = this.value;
   });
 
-  var name = result.name;
   for (i = 0; i < fields.length; i++) {
     values.push(`${result[fields[i]]}`);
   }
 
   values.push(
-    `<button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${name}')">Edit</button>`,
-    `<a href="/workflows/manage_${name}" class="btn btn-info btn-xs">
+    `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${workflowId}')">Edit</button>`,
+    `<a href="/workflows/manage_${workflowId}" class="btn btn-info btn-xs">
       <i class="fa fa-pencil"></i>Manage
     </a>`,
-    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${name}')">Run</button>`,
-    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${name}')">Delete</button>`,
+    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${workflowId}')">Run</button>`,
+    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${workflowId}')">Delete</button>`,
   );
 
   if ($("#edit-form").parsley().validate() ) {
@@ -72,9 +73,9 @@ function editObject() {
       url: `/workflows/edit_workflow`,
       dataType: "json",
       data: $("#edit-form").serialize(),
-      success: function(msg){
+      success: function(name){
         if (mode == 'edit') {
-          $(`#${name}`).html(values.join(''));
+          table.row($(`#${workflowId}`)).data(values);
         } else {
           table.row.add(values).draw(false);
         }
@@ -86,12 +87,12 @@ function editObject() {
   }
 }
 
-function deleteObject(name) {
-  table.row($(`#${name}`)).remove().draw(false);
+function deleteObject(id) {
+  table.row($(`#${id}`)).remove().draw(false);
   $.ajax({
     type: "POST",
-    url: `/workflows/delete_${name}`,
-    success: function(msg){
+    url: `/workflows/delete_${id}`,
+    success: function(name){
       alertify.notify(`Workflow ${name} deleted`, 'error', 5);
     }
   });

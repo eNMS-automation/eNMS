@@ -98,3 +98,4 @@ def workflow_factory(**kwargs):
         workflow = Workflow(**kwargs)
     db.session.add(workflow)
     db.session.commit()
+    return workflow

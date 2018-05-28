@@ -54,10 +54,10 @@ def workflow_editor(workflow):
 ## AJAX calls
 
 
-@blueprint.route('/get_<name>', methods=['POST'])
+@blueprint.route('/get_<workflow_id>', methods=['POST'])
 @login_required
-def get_workflow(name):
-    workflow = get_obj(Workflow, name=name)
+def get_workflow(workflow_id):
+    workflow = get_obj(Workflow, id=workflow_id)
     properties = ('name', 'description', 'type')
     workflow_properties = {
         property: str(getattr(workflow, property))
@@ -69,25 +69,25 @@ def get_workflow(name):
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
 def edit_workflow():
-    workflow_factory(**request.form.to_dict())
+    workflow = workflow_factory(**request.form.to_dict())
     db.session.commit()
-    return jsonify({})
+    return jsonify(workflow.name)
 
 
-@blueprint.route('/delete_<name>', methods=['POST'])
+@blueprint.route('/delete_<workflow_id>', methods=['POST'])
 @login_required
-def delete_workflow(name):
-    workflow = get_obj(Workflow, name=name)
+def delete_workflow(workflow_id):
+    workflow = get_obj(Workflow, id=workflow_id)
     db.session.delete(workflow)
     db.session.commit()
-    return jsonify({})
+    return jsonify(workflow.name)
 
 
-@blueprint.route('/save_<workflow>', methods=['POST'])
+@blueprint.route('/save_<workflow_id>', methods=['POST'])
 @login_required
-def save_workflow(workflow):
+def save_workflow(workflow_id):
     id_to_script = {}
-    workflow = get_obj(Workflow, name=workflow)
+    workflow = get_obj(Workflow, id=workflow_id)
     workflow.scripts = []
     for edge in workflow.edges:
         db.session.delete(edge)

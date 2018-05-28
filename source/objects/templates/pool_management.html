@@ -94,17 +94,16 @@
                   <div class="form-group">
                     <label>Nodes</label>
                     <div class='form-group'>
-                      {{ pool_object_form.nodes(class="form-control", size=8) }}
+                      {{ pool_object_form.nodes(class="form-control", size=10) }}
                     </div>
-                    <label>nodes</label>
+                    <label>Links</label>
                     <div class='form-group'>
-                      {{ pool_object_form.links(class="form-control", size=8) }}
+                      {{ pool_object_form.links(class="form-control", size=10) }}
                     </div>
                   </div>
                   <div class="ln_solid"></div>
-                  <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <button id="napalm_getters-button" type="button" class="btn btn-success" onclick="createScript('napalm_getters')">Create</button>
+                  <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-4">
+                    <button type="button" class="btn btn-success" onclick="savePoolObjects('napalm_getters')">Save</button>
                   </div>
                 </div>
               </div>
@@ -200,7 +199,9 @@
       $("#edit").modal('show');
     }
 
+    var poolName = null;
     function showPoolObjects(name) {
+      poolName = name;
       $.ajax({
         type: "POST",
         url: `/objects/get_pool_objects/${name}`,
@@ -211,6 +212,19 @@
         }
       });
       $("#edit-pool-objects").modal('show');
+    }
+
+    function savePoolObjects() {
+      $.ajax({
+        type: "POST",
+        url: `/objects/save_pool_objects/${poolName}`,
+        dataType: "json",
+        data: $('#pool-objects-form').serialize(),
+        success: function(){
+          alertify.notify('Changed saved', 'success', 5);
+        }
+      });
+      $("#edit-pool-objects").modal('hide');
     }
 
     function savePool() {

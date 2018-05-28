@@ -137,6 +137,17 @@ def get_pool_objects(name):
     return jsonify({'nodes': nodes, 'links':links})
 
 
+@blueprint.route('/save_pool_objects/<name>', methods=['POST'])
+@login_required
+def save_pool_objects(name):
+    pool = get_obj(Pool, name=name)
+    pool.nodes = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
+    pool.links = [get_obj(Link, name=n) for n in request.form.getlist('links')]
+    print(request.form)
+    db.session.commit()
+    return jsonify()
+
+
 @blueprint.route('/pool_objects/<name>', methods=['POST'])
 @login_required
 def filter_pool_objects(name):

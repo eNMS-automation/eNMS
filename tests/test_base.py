@@ -15,7 +15,7 @@ urls = {
     ),
     '/objects': (
         '/object_management',
-        '/object_filtering'
+        '/pool_management'
     ),
     '/views': (
         '/geographical_view',

@@ -61,6 +61,7 @@ class AddPoolForm(FlaskForm):
     name = TextField('Name')
     description = TextField('Description')
 
+
 class PoolObjectsForm(FlaskForm):
     nodes = SelectMultipleField('Nodes', choices=())
     links = SelectMultipleField('Links', choices=())

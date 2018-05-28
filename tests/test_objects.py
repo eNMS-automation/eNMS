@@ -2,7 +2,7 @@ from test_base import check_blueprints
 from conftest import path_projects
 from objects.models import (
     Antenna,
-    Filter,
+    Pool,
     Firewall,
     Host,
     OpticalSwitch,
@@ -26,7 +26,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 # test the creation of objects, manual and via excel import
 # test the deletion of objects
-# test the filtering system
+# test the pool system
 
 ## Object creation
 
@@ -155,19 +155,19 @@ def test_link_deletion(user_client):
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 38
 
-## Object filtering
+## Pool management
 
 
-filter1 = ImmutableMultiDict([
-    ('name', 'filter1'),
+pool1 = ImmutableMultiDict([
+    ('name', 'pool1'),
     ('node_location', 'france|spain'),
     ('node_location_regex', 'y'),
     ('link_name', 'link[1|2].'),
     ('link_name_regex', 'y'),
 ])
 
-filter2 = ImmutableMultiDict([
-    ('name', 'filter2'),
+pool2 = ImmutableMultiDict([
+    ('name', 'pool2'),
     ('node_location', 'france'),
     ('link_name', 'l.*k\\S3'),
     ('link_name_regex', 'y'),
@@ -175,8 +175,8 @@ filter2 = ImmutableMultiDict([
 
 
 @check_blueprints('', '/objects', '/views')
-def test_object_filtering(user_client):
+def test_pool_management(user_client):
     create_from_file(user_client, 'europe.xls')
-    user_client.post('/objects/process_filter', data=filter1)
-    user_client.post('/objects/process_filter', data=filter2)
-    assert len(Filter.query.all()) == 5
+    user_client.post('/objects/process_pool', data=pool1)
+    user_client.post('/objects/process_pool', data=pool2)
+    assert len(Pool.query.all()) == 5

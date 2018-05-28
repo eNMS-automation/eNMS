@@ -134,7 +134,7 @@ def get_pool_objects(name):
     pool = get_obj(Pool, name=name)
     nodes = str(pool.nodes).replace(', ', ',')[1:-1].split(',')
     links = str(pool.links).replace(', ', ',')[1:-1].split(',')
-    return jsonify({'nodes': nodes, 'links':links})
+    return jsonify({'nodes': nodes, 'links': links})
 
 
 @blueprint.route('/save_pool_objects/<name>', methods=['POST'])

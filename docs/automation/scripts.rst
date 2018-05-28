@@ -103,28 +103,22 @@ Custom script
 -------------
 
 eNMS also gives you the option to create your own script. Once created, a custom script is automatically added to the web interface and can be used like any other script.
-To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py`` and start by adding a new job in the ``JobStore`` class (``job_example`` is an example of job that doesn't do anything).
+To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py`` and use the following template:
+
+- a function that contains the code of the script
+- a dictionnary that contains the parameters of your new script, and an key ``job_name`` which value is the name of the job function.
 
 ::
 
-  class JobStore(Base):
-      
-      __tablename__ = 'JobStore'
+  def job_example(args):
+      task, node, results = args
+      # add your own logic here
+      # results is a dictionnary that contains the logs of the script
+      results[node.name] = 'what will be displayed in the logs'
+      # a script returns a boolean value used in workflows (see the workflow section)
+      return True if 'a condition for success' else False
   
-      id = Column(Integer, primary_key=True)
   
-      def job_example(self, args):
-          task, node, results = args
-          # add your own logic here
-          # results is a dictionnary that contains the logs of the script
-          results[node.name] = 'what will be displayed in the logs'
-          # a script returns a boolean value used in workflows (see the workflow section)
-          return True if 'a condition for success' else False
-
-Then, create a dictionnary that contains the parameters of your new script, and an key ``job_name`` which value is the name of the job function you added in ``JobStore`` previously.
-
-::
-
   example_parameters = {
       'name': 'script that does nothing',
       'waiting_time': 0,
@@ -133,19 +127,15 @@ Then, create a dictionnary that contains the parameters of your new script, and 
       'operating_system': 'all',
       'job_name': 'job_example'
   }
-  
+
 You must also the update the ``create_custom_scripts`` function at the bottom of the file:
 
 ::
   
   def create_custom_scripts():
-      job_store = JobStore()
-      db.session.add(job_store)
-      db.session.commit()
       for parameters in (
           example_parameters,
-          the_parameters_of_your_new_script,
-          nornir_ping_parameters
+          the_parameters_of_the_script_you_created
       ):
           try:
               custom_script = CustomScript(**parameters)
@@ -156,4 +146,4 @@ You must also the update the ``create_custom_scripts`` function at the bottom of
 
 Finally, restart the application.
 
-You can take a look at the other scripts for inspiration. ``custom_scripts.py`` contains a script called ``NornirPingScript`` that uses the Nornir automation framework to ping a device on ports 23 and 443.
+You can take a look at the other scripts for inspiration (in ``eNMS/source/scripts/models.py``). ``custom_scripts.py`` also contains a script called ``NornirPingScript`` that shows how to use the Nornir automation framework to ping a device on ports 23 and 443.

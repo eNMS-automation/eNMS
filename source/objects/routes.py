@@ -7,8 +7,8 @@ from base.properties import (
 )
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
-from .forms import AddNode, AddLink, FilteringForm
-from .models import filter_factory, Filter, Link, Node, object_class, object_factory
+from .forms import AddNode, AddLink, AddPoolForm
+from .models import pool_factory, Pool, Link, Node, object_class, object_factory
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -26,7 +26,7 @@ blueprint = Blueprint(
 
 @blueprint.route('/object_management', methods=['GET', 'POST'])
 @login_required
-def objects():
+def objects_management():
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
     all_nodes = Node.choices()
@@ -59,14 +59,14 @@ def objects():
     )
 
 
-@blueprint.route('/object_filtering')
+@blueprint.route('/pool_management')
 @login_required
-def filter_objects():
+def pool_management():
     return render_template(
-        'object_filtering.html',
-        form=FilteringForm(request.form),
+        'pool_management.html',
+        form=AddPoolForm(request.form),
         names=pretty_names,
-        filters=[f.name for f in Filter.query.all()]
+        pools=Pool.query.all()
     )
 
 
@@ -104,29 +104,38 @@ def delete_object(obj_type, name):
     return jsonify({})
 
 
-@blueprint.route('/process_filter', methods=['POST'])
+@blueprint.route('/process_pool', methods=['POST'])
 @login_required
-def process_filter():
-    filter_properties = request.form.to_dict()
+def process_pool():
+    pool_properties = request.form.to_dict()
     for property in node_public_properties:
         regex_property = 'node_{}_regex'.format(property)
-        filter_properties[regex_property] = regex_property in filter_properties
+        pool_properties[regex_property] = regex_property in pool_properties
     for property in link_public_properties:
         regex_property = 'link_{}_regex'.format(property)
-        filter_properties[regex_property] = regex_property in filter_properties
-    mode = filter_factory(**filter_properties)
-    return jsonify(mode)
+        pool_properties[regex_property] = regex_property in pool_properties
+    pool_factory(**pool_properties)
+    return jsonify()
 
 
-@blueprint.route('/get/<name>', methods=['POST'])
+@blueprint.route('/get_pool/<name>', methods=['POST'])
 @login_required
-def get_filter(name):
-    return jsonify(get_obj(Filter, name=name).get_properties())
+def get_pool(name):
+    return jsonify(get_obj(Pool, name=name).get_properties())
 
 
-@blueprint.route('/<name>/filter_objects', methods=['POST'])
+@blueprint.route('/pool_objects/<name>', methods=['POST'])
 @login_required
-def get_filtered_objects(name):
-    filter = get_obj(Filter, name=name)
-    objects = filter.filter_objects()
+def get_pool_objects(name):
+    pool = get_obj(Pool, name=name)
+    objects = pool.filter_objects()
     return jsonify(objects)
+
+
+@blueprint.route('/delete_pool/<name>', methods=['POST'])
+@login_required
+def delete_pool(name):
+    pool = get_obj(Pool, name=name)
+    db.session.delete(pool)
+    db.session.commit()
+    return jsonify({})

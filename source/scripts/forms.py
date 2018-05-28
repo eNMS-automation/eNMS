@@ -135,5 +135,5 @@ class SchedulingForm(FlaskForm):
     end_date = TextField('End date')
     name = TextField('Name')
     nodes = SelectMultipleField('', choices=())
-    filters = SelectMultipleField('', choices=())
+    pools = SelectMultipleField('', choices=())
     frequency = TextField('Frequency')

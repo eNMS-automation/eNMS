@@ -26,7 +26,7 @@ from .models import (
     script_factory,
     type_to_class
 )
-from objects.models import Node, Filter
+from objects.models import Node, Pool
 from werkzeug import secure_filename
 from yaml import load
 
@@ -65,7 +65,7 @@ type_to_name = {
 def scripts():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.nodes.choices = Node.choices()
-    scheduling_form.filters.choices = Filter.choices()
+    scheduling_form.pools.choices = Pool.choices()
     return render_template(
         'script_management.html',
         fields=('name', 'type'),

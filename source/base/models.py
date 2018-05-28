@@ -72,16 +72,16 @@ script_workflow_table = Table(
     Column('workflow_id', Integer, ForeignKey('Workflow.id'))
 )
 
-filter_node_table = Table(
-    'filter_node_association',
+pool_node_table = Table(
+    'pool_node_association',
     CustomBase.metadata,
-    Column('filter_id', Integer, ForeignKey('Filter.id')),
+    Column('pool_id', Integer, ForeignKey('Pool.id')),
     Column('node_id', Integer, ForeignKey('Node.id'))
 )
 
-filter_link_table = Table(
-    'filter_link_association',
+pool_link_table = Table(
+    'pool_link_association',
     CustomBase.metadata,
-    Column('filter_id', Integer, ForeignKey('Filter.id')),
+    Column('pool_id', Integer, ForeignKey('Pool.id')),
     Column('link_id', Integer, ForeignKey('Link.id'))
 )

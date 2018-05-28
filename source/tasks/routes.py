@@ -5,7 +5,7 @@ from flask import Blueprint, jsonify, render_template, request, session
 from flask_login import current_user, login_required
 from .forms import CompareForm
 from .models import Task, task_factory
-from objects.models import Filter, Node
+from objects.models import Pool, Node
 from scripts.models import Script
 from re import search, sub
 from views.forms import SchedulingForm
@@ -88,8 +88,8 @@ def job_scheduler(type, name):
     data['scripts'] = [get_obj(cls, name=name)] if type == 'script' else []
     data['workflows'] = [get_obj(cls, name=name)] if type == 'workflow' else []
     data['nodes'] = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
-    for filter in request.form.getlist('filters'):
-        data['nodes'].extend(get_obj(Filter, name=filter).nodes)
+    for pool in request.form.getlist('pools'):
+        data['nodes'].extend(get_obj(Pool, name=pool).nodes)
     data['user'] = current_user
     task_factory(**data)
     return jsonify({})

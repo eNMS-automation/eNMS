@@ -14,7 +14,7 @@ from flask import (
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
 from objects.forms import AddNode, AddLink
-from objects.models import Filter, Node, node_subtypes, Link
+from objects.models import Pool, Node, node_subtypes, Link
 from os.path import join
 from passlib.hash import cisco_type7
 from scripts.models import Script
@@ -69,7 +69,7 @@ def view(view_type):
     name_to_id = {node.name: id for id, node in enumerate(Node.query.all())}
     return render_template(
         '{}_view.html'.format(view_type),
-        filters=Filter.query.all(),
+        pools=Pool.query.all(),
         parameters=Parameters.query.one(),
         view=view,
         scheduling_form=scheduling_form,

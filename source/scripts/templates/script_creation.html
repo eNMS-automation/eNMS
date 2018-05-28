@@ -16,10 +16,12 @@
             <div role="tabpanel" data-example-id="togglable-tabs">
               <ul class="nav nav-tabs bar_tabs" role="tablist">
                 {% for script_type, script_name in type_to_name.items() %}
-                  {% set expanded = "true" if script_type == "netmiko_config" else "false" %}
-                  {% set active = "active" if script_type == "netmiko_config" else "" %}
-                  <li role="{{ script_type }}" class="{{ active }}"><a href="#{{ script_type }}" role="tab" data-toggle="tab" aria-expanded="{{ expanded }}">{{ script_name }}</a>
-                  </li>
+                  {% if script_type != "custom_script" %}
+                    {% set expanded = "true" if script_type == "netmiko_config" else "false" %}
+                    {% set active = "active" if script_type == "netmiko_config" else "" %}
+                    <li role="{{ script_type }}" class="{{ active }}"><a href="#{{ script_type }}" role="tab" data-toggle="tab" aria-expanded="{{ expanded }}">{{ script_name }}</a>
+                    </li>
+                  {% endif %}
                 {% endfor %}
               </ul>
               <div class="tab-content">

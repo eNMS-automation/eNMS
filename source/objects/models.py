@@ -1,8 +1,8 @@
 from base.database import db, get_obj
 from base.helpers import integrity_rollback
 from base.models import (
-    filter_node_table,
-    filter_link_table,
+    pool_node_table,
+    pool_link_table,
     task_node_table,
     CustomBase
 )
@@ -75,9 +75,9 @@ class Node(Object):
         secondary=task_node_table,
         back_populates="nodes"
     )
-    filters = relationship(
-        'Filter',
-        secondary=filter_node_table,
+    pools = relationship(
+        'Pool',
+        secondary=pool_node_table,
         back_populates='nodes'
     )
 
@@ -257,9 +257,9 @@ class Link(Object):
         backref=backref('destination', cascade="all, delete-orphan")
     )
 
-    filters = relationship(
-        'Filter',
-        secondary=filter_link_table,
+    pools = relationship(
+        'Pool',
+        secondary=pool_link_table,
         back_populates='links'
     )
 
@@ -438,21 +438,22 @@ def object_factory(**kwargs):
     db.session.commit()
 
 
-class Filter(CustomBase):
+class Pool(CustomBase):
 
-    __tablename__ = 'Filter'
+    __tablename__ = 'Pool'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
+    description = Column(String)
     nodes = relationship(
         'Node',
-        secondary=filter_node_table,
-        back_populates='filters'
+        secondary=pool_node_table,
+        back_populates='pools'
     )
     links = relationship(
         'Link',
-        secondary=filter_link_table,
-        back_populates='filters'
+        secondary=pool_link_table,
+        back_populates='pools'
     )
     node_name = Column(String)
     node_name_regex = Column(Boolean)
@@ -516,7 +517,7 @@ class Filter(CustomBase):
         for p in node_public_properties:
             for property in 'node_{p} node_{p}_regex'.format(p=p).split():
                 result[property] = getattr(self, property)
-        result['name'] = self.name
+        result['name'], result['description'] = self.name, self.description
         return result
 
     def object_match(self, obj):
@@ -555,22 +556,22 @@ class Filter(CustomBase):
         }
 
 
-def filter_factory(**kwargs):
-    filter = get_obj(Filter, name=kwargs['name'])
-    mode = 'update' if filter else 'creation'
-    if filter:
+def pool_factory(**kwargs):
+    pool = get_obj(Pool, name=kwargs['name'])
+    mode = 'update' if pool else 'creation'
+    if pool:
         for property, value in kwargs.items():
-            if property in filter.__dict__:
-                setattr(filter, property, value)
-        filter.compute_pool()
+            if property in pool.__dict__:
+                setattr(pool, property, value)
+        pool.compute_pool()
     else:
-        filter = Filter(**kwargs)
-        db.session.add(filter)
+        pool = Pool(**kwargs)
+        db.session.add(pool)
     db.session.commit()
     return mode
 
 
-default_filters = (
+default_pools = (
     {'name': 'All objects'},
     {'name': 'Nodes only', 'link_name': '^$', 'link_name_regex': True},
     {'name': 'Links only', 'node_name': '^$', 'node_name_regex': True}
@@ -578,6 +579,6 @@ default_filters = (
 
 
 @integrity_rollback
-def create_default_filters():
-    for filter in default_filters:
-        filter_factory(**filter)
+def create_default_pools():
+    for pool in default_pools:
+        pool_factory(**pool)

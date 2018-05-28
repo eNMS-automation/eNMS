@@ -56,6 +56,6 @@ def configure_form(cls):
 
 
 @configure_form
-class FilteringForm(FlaskForm):
-    filters = SelectField('Filters', choices=())
+class AddPoolForm(FlaskForm):
     name = TextField('Name')
+    description = TextField('Description')

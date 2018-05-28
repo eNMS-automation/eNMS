@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
   <style>
     #logical_view { height:90vh; }
   .link {
@@ -116,8 +115,8 @@
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
                 <div class="form-group">
                   <select id="select-filters" class="form-control">
-                    {% for filter in filters %}
-                      <option>{{ filter.name }}</option>
+                    {% for pool in pools %}
+                      <option>{{ pool.name }}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -381,10 +380,6 @@
 
 {% block javascripts %}
   {{ super()}}
-  <!-- jQuery Smart Wizard -->
-  <script src="{{ url_for('views_blueprint.static', filename='js/smart-wizard/js/jquery.smartWizard.js') }}"></script>
-  <!-- Bootstrap Datetimepicker -->
-  <script src="{{ url_for('views_blueprint.static', filename='js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
   <script>
     var dates = ['start_date', 'end_date'];
     var today = new Date();
@@ -413,7 +408,7 @@
       var filterName = this.value;
       $.ajax({
         type: "POST",
-        url: `/objects/${this.value}/filter_objects`,
+        url: `/objects/pool_objects/${this.value}`,
         dataType: "json",
         success: function(objects){
           node.style("visibility", function(d) {          

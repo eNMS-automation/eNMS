@@ -117,8 +117,7 @@ To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py
       results[node.name] = 'what will be displayed in the logs'
       # a script returns a boolean value used in workflows (see the workflow section)
       return True if 'a condition for success' else False
-  
-  
+
   example_parameters = {
       'name': 'script that does nothing',
       'waiting_time': 0,

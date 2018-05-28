@@ -4,6 +4,7 @@ from objects.models import link_class, node_class
 from wtforms import (
     BooleanField,
     FloatField,
+    SelectMultipleField,
     PasswordField,
     SelectField,
     TextField
@@ -59,3 +60,7 @@ def configure_form(cls):
 class AddPoolForm(FlaskForm):
     name = TextField('Name')
     description = TextField('Description')
+
+class PoolObjectsForm(FlaskForm):
+    nodes = SelectMultipleField('Nodes', choices=())
+    links = SelectMultipleField('Links', choices=())

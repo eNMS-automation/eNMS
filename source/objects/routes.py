@@ -7,7 +7,7 @@ from base.properties import (
 )
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
-from .forms import AddNode, AddLink, AddPoolForm
+from .forms import AddNode, AddLink, AddPoolForm, PoolObjectsForm
 from .models import pool_factory, Pool, Link, Node, object_class, object_factory
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -62,9 +62,13 @@ def objects_management():
 @blueprint.route('/pool_management')
 @login_required
 def pool_management():
+    pool_object_form = PoolObjectsForm(request.form)
+    pool_object_form.nodes.choices = Node.choices()
+    pool_object_form.links.choices = Link.choices()
     return render_template(
         'pool_management.html',
         form=AddPoolForm(request.form),
+        pool_object_form=pool_object_form,
         names=pretty_names,
         pools=Pool.query.all()
     )
@@ -124,9 +128,18 @@ def get_pool(name):
     return jsonify(get_obj(Pool, name=name).get_properties())
 
 
-@blueprint.route('/pool_objects/<name>', methods=['POST'])
+@blueprint.route('/get_pool_objects/<name>', methods=['POST'])
 @login_required
 def get_pool_objects(name):
+    pool = get_obj(Pool, name=name)
+    nodes = str(pool.nodes).replace(', ', ',')[1:-1].split(',')
+    links = str(pool.links).replace(', ', ',')[1:-1].split(',')
+    return jsonify({'nodes': nodes, 'links':links})
+
+
+@blueprint.route('/pool_objects/<name>', methods=['POST'])
+@login_required
+def filter_pool_objects(name):
     pool = get_obj(Pool, name=name)
     objects = pool.filter_objects()
     return jsonify(objects)

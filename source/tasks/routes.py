@@ -149,7 +149,7 @@ def delete_task(task_id):
     task.delete_task()
     db.session.delete(task)
     db.session.commit()
-    return task_management()
+    return jsonify(task.name)
 
 
 @blueprint.route('/pause_task/<task_id>', methods=['POST'])

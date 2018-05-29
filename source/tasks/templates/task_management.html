@@ -187,10 +187,10 @@
       }
     }
 
-    function showTaskLogs(name) {
+    function showTaskLogs(id) {
       $.ajax({
         type: "POST",
-        url: `/tasks/show_logs/${name}`,
+        url: `/tasks/show_logs/${id}`,
         dataType: 'json',
         success: function(logs){
           $("#logs").text(logs);
@@ -199,13 +199,13 @@
       $(`#show-logs-modal`).modal('show');
     }
 
-    function compareTaskLogs(name) {
+    function compareTaskLogs(id) {
+      taskId = id;
       $.ajax({
         type: "POST",
-        url: `/tasks/compare_logs/${name}`,
+        url: `/tasks/compare_logs/${id}`,
         dataType: 'json',
         success: function(results){
-          window.task = name;
           $("#first_version,#second_version,#first_node,#second_node,#first_script,#second_script").empty();
           for (i = 0; i < results.versions.length; i++) {
             value = results.versions[i];
@@ -237,7 +237,7 @@
           s2 = $("#second_script").val();
       $.ajax({
         type: "POST",
-        url: `/tasks/get_diff/${window.task}/${v1}/${v2}/${n1}/${n2}/${s1}/${s2}`,
+        url: `/tasks/get_diff/${taskId}/${v1}/${v2}/${n1}/${n2}/${s1}/${s2}`,
         dataType: 'json',
         success: function(data){
           $("#view").append(diffview.buildView({
@@ -253,36 +253,34 @@
       });
     });
 
-
-
-    function deleteTask(name) {
+    function deleteTask(id) {
       $.ajax({
         type: "POST",
-        url: `/tasks/delete_task/${name}`,
+        url: `/tasks/delete_task/${id}`,
         success: function() {
-          $(`#${name}`).remove();
+          $(`#${id}`).remove();
           alertify.notify('Task successfully deleted !', 'success', 5);
         }
       });
     }
 
-    function pauseTask(name) {
+    function pauseTask(id) {
       $.ajax({
         type: "POST",
-        url: `/tasks/pause_task/${name}`,
+        url: `/tasks/pause_task/${id}`,
         success: function() {
-          $(`#pause-resume-${name}`).attr("onclick", `resumeTask('${name}')`).text('Resume');
+          $(`#pause-resume-${id}`).attr("onclick", `resumeTask('${id}')`).text('Resume');
           alertify.notify('Task paused !', 'success', 5);
         }
       });
     }
 
-    function resumeTask(name) {
+    function resumeTask(id) {
       $.ajax({
         type: "POST",
-        url: `/tasks/resume_task/${name}`,
+        url: `/tasks/resume_task/${id}`,
         success: function() {
-          $(`#pause-resume-${name}`).attr("onclick", `pauseTask('${name}')`).text('Pause');
+          $(`#pause-resume-${id}`).attr("onclick", `pauseTask('${id}')`).text('Pause');
           alertify.notify('Task resumed !', 'success', 5);
         }
       });

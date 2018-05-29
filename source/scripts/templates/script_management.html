@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} User overview {% endblock title %}
+{% block title %} Script management {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -75,65 +75,6 @@
   {{ super() }}
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
-  <script>
-
-    var scriptId = null
-        table = $('#table').DataTable();
-
-    function showSchedulingModal(id){
-      scriptId = id;
-      $("#scheduling").modal('show');
-    }
-
-    function scheduleScript() {
-      if ($("#scheduling-form").parsley().validate()) {
-        $.ajax({
-          type: "POST",
-          url: `/tasks/job_scheduler/script/${scriptId}`,
-          dataType: "json",
-          data: $("#scheduling-form").serialize(),
-          success: function() {
-            alertify.notify('Task scheduled', 'success', 5);
-          }
-        });
-        $("#scheduling").modal('hide');
-      } else {
-        alertify.notify('Some fields are missing', 'error', 5);
-      }
-    }
-
-    var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
-    for (i = 0; i < types.length; i++) {
-      $(`#${types[i]}-button`).text("Update");
-    }
-
-    function showObjectModal(type, id) {
-      $.ajax({
-        type: "POST",
-        url: `/scripts/get/${type}/${id}`,
-        success: function(properties){
-          $('#title').text(`Edit ${properties.name} properties`);
-          for (const [property, value] of Object.entries(properties)) {
-            if(typeof(value) === "boolean") {
-              $(`#${type}-${property}`).prop('checked', value);
-            } else {
-              $(`#${type}-${property}`).val(value);
-            }
-          }
-        }
-      });
-      $(`#edit-${type}`).modal('show');
-    }
-
-    function deleteObject(id) {
-      $.ajax({
-        type: "POST",
-        url: `/scripts/delete_${id}`,
-        success: function(scriptName){
-          table.row($(`#${id}`)).remove().draw(false);
-          alertify.notify(`Script ${scriptName} deleted`, 'error', 5);
-        }
-      });
-    }
-  </script>
+  <script> var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}]; </script>
+  <script src="{{ url_for('scripts_blueprint.static', filename='script_management.js') }}"></script>
 {% endblock javascripts %}

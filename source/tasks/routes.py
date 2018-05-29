@@ -85,13 +85,13 @@ def view_scheduler():
     return jsonify({})
 
 
-@blueprint.route('/job_scheduler/<type>/<name>', methods=['POST'])
+@blueprint.route('/job_scheduler/<type>/<job_id>', methods=['POST'])
 @login_required
-def job_scheduler(type, name):
+def job_scheduler(type, job_id):
     cls = Script if type == 'script' else Workflow
     data = request.form.to_dict()
-    data['scripts'] = [get_obj(cls, name=name)] if type == 'script' else []
-    data['workflows'] = [get_obj(cls, name=name)] if type == 'workflow' else []
+    data['scripts'] = [get_obj(cls, id=job_id)] if type == 'script' else []
+    data['workflows'] = [get_obj(cls, id=job_id)] if type == 'workflow' else []
     data['nodes'] = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
     for pool in request.form.getlist('pools'):
         data['nodes'].extend(get_obj(Pool, name=pool).nodes)

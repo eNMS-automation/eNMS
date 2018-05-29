@@ -26,90 +26,11 @@
   {{ super() }}
   <!-- FullCalendar -->
   <script src="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
-  <!-- Initialize datetimepicker and SmartWizard -->
-  <script>
-    var dates = ['start_date', 'end_date'];
-    var today = new Date();
-    for (var i = 0; i < dates.length; i++) {
-      $('#' + dates[i]).datetimepicker({
-        format: 'DD/MM/YYYY HH:mm:ss',
-        widgetPositioning: {
-            horizontal: 'left',
-            vertical: 'bottom'
-        },
-        useCurrent: false,
-      });
-      $('#' + dates[i]).data("DateTimePicker").minDate(today);
-    }
-
-    function schedule(){
-      $('#wizard').smartWizard({
-        onFinish: scheduleScript
-      });
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-
-    function  init_calendar() {
-      if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
-
-      var date = new Date(),
-        d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear(),
-        started,
-        categoryClass;
-
-      var calendar = $('#calendar').fullCalendar({
-        header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,listMonth'
-        },
-        selectable: true,
-        selectHelper: true,
-        eventClick: function(calEvent, jsEvent, view) {
-          $.ajax({
-            type: "POST",
-            url: `/tasks/get/${calEvent.title}`,
-            dataType: 'json',
-            success: function(properties){
-              for (const [property, value] of Object.entries(properties)) {
-                $(`#${property}`).val(value);
-              }
-            }
-          });
-          $('#scheduling').modal('show');
-
-        },
-        editable: true,
-        events: [
-        {% for task, task_time in tasks.items() %}
-          {
-          title: '{{ task.name }}',
-          description: `{{ task.description }}`,
-          start: new Date({{ task_time }})
-          }, 
-        {% endfor %}
-        ]
-      });
-    };
-
-    function scheduleScript() {
-      $.ajax({
-        type: "POST",
-        url: "/tasks/scheduler",
-        dataType: "json",
-        data: $("#scheduling-form").serialize(),
-        success: function() {
-          alertify.notify('Task edited', 'success', 5);
-        }
-      });
-      $("#scheduling").modal('hide');
-    }
-    $(document).ready(function() {
-      init_calendar();
-    });
-  </script>
+  <!-- Scheduling: wizard / bootstrap datetimepicker -->
+  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <!-- Task management -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='task_management.js') }}"></script>
+  <script> var tasks = {{ tasks|tojson|safe }}; </script>
+  <!-- Calendar -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='calendar.js') }}"></script>
 {% endblock javascripts %}

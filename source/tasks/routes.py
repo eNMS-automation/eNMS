@@ -50,11 +50,16 @@ def calendar():
         # the calendar
         python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
         month = '{:02}'.format((int(python_month) - 1) % 12)
-        tasks[task] = sub(
+        js_date = [int(i) for i in sub(
             r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
-            r"\1, " + month + r", \3, \4, \5",
+            r"\1," + month + r",\3,\4,\5",
             task.start_date
-        )
+        ).split(',')]
+        print(js_date)
+        tasks[task.name] = {
+            'date': js_date,
+            'description': task.description
+        }
     return render_template(
         'calendar.html',
         tasks=tasks,

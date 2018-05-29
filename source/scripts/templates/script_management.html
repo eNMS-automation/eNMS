@@ -29,7 +29,7 @@
       <div class="col-md-12">
         <div class="x_panel">
           <div class="x_content">
-            <table id="script-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th style="width: 20%">Name</th>
@@ -44,20 +44,20 @@
               </thead>
               <tbody>
                 {% for script in scripts %}
-                  <tr id="{{ script.name }}">
+                  <tr id="{{ script.id }}">
                     <td><a>{{ script.name }}</a></td>
                     <td>{{ script.type }}</td>
                     <td><a>{{ script.vendor }}</a></td>
                     <td><a>{{ script.operating_system }}</a></td>
                     <td><a>{{ script.waiting_time }}</a></td>
                   <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ script['type'] }}', '{{ script['name'] }}')">Edit</button>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ script['type'] }}', '{{ script.id }}')">Edit</button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('{{ script['name'] }}')">Run</button>
+                    <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('{{ script.id }}')">Run</button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ script['name'] }}')">Delete</button>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ script.id }}')">Delete</button>
                   </td>
                   </tr>
                 {% endfor %}
@@ -73,33 +73,15 @@
 
 {% block javascripts %}
   {{ super() }}
-  <!-- Initialize datetimepicker and SmartWizard -->
+  <!-- Scheduling: wizard / bootstrap datetimepicker -->
+  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <script>
-    var dates = ['start_date', 'end_date'];
-    var today = new Date();
-    for (var i = 0; i < dates.length; i++) {
-      $('#' + dates[i]).datetimepicker({
-        format: 'DD/MM/YYYY HH:mm:ss',
-        widgetPositioning: {
-            horizontal: 'left',
-            vertical: 'bottom'
-        },
-        useCurrent: false,
-      });
-      $('#' + dates[i]).data("DateTimePicker").minDate(today);
-    }
-    function schedule(){
-      $('#wizard').smartWizard({
-        onFinish: scheduleScript
-      });
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
 
-    var script = null;
-    function showSchedulingModal(scriptName){
-      script = scriptName;
+    var scriptId = null
+        table = $('#table').DataTable();
+
+    function showSchedulingModal(id){
+      scriptId = id;
       $("#scheduling").modal('show');
     }
 
@@ -107,7 +89,7 @@
       if ($("#scheduling-form").parsley().validate()) {
         $.ajax({
           type: "POST",
-          url: `/tasks/job_scheduler/script/${script}`,
+          url: `/tasks/job_scheduler/script/${scriptId}`,
           dataType: "json",
           data: $("#scheduling-form").serialize(),
           success: function() {
@@ -120,19 +102,17 @@
       }
     }
 
-    $('#script-table').DataTable();
     var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
     for (i = 0; i < types.length; i++) {
       $(`#${types[i]}-button`).text("Update");
     }
 
-    function showObjectModal(type, name) {
-      $('#title').text(`Edit ${name} properties`);
+    function showObjectModal(type, id) {
       $.ajax({
         type: "POST",
-        url: `/scripts/get/${type}/${name}`,
+        url: `/scripts/get/${type}/${id}`,
         success: function(properties){
-          console.log(properties);
+          $('#title').text(`Edit ${properties.name} properties`);
           for (const [property, value] of Object.entries(properties)) {
             if(typeof(value) === "boolean") {
               $(`#${type}-${property}`).prop('checked', value);
@@ -145,34 +125,13 @@
       $(`#edit-${type}`).modal('show');
     }
 
-    function createScript(type) {
-      if ($(`#${type}-form`).parsley().validate() ) {
-        $.ajax({
-          type: "POST",
-          url: `/scripts/create_script_${type}`,
-          dataType: "json",
-          data: $(`#${type}-form`).serialize(),
-          success: function() {
-            alertify.notify("Script updated", 'success', 5);
-          }
-        });
-        $(`#edit-${type}`).modal('hide');
-      }
-    }
-
-    var type_to_fields = {
-      {% for script_type, script_form in type_to_form.items() %}
-        '{{ script_type }}': [{% for field in script_form %} '{{ field }}', {% endfor %}],
-      {% endfor %}
-    }
-
-    function deleteObject(name) {
-      $(`#${name}`).remove();
+    function deleteObject(id) {
       $.ajax({
         type: "POST",
-        url: `/scripts/delete_${name}`,
-        success: function(msg){
-          alertify.notify(`Script ${name} deleted`, 'error', 5);
+        url: `/scripts/delete_${id}`,
+        success: function(scriptName){
+          table.row($(`#${id}`)).remove().draw(false);
+          alertify.notify(`Script ${scriptName} deleted`, 'error', 5);
         }
       });
     }

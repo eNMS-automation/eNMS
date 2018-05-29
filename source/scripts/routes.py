@@ -90,10 +90,10 @@ def configuration():
 ## AJAX calls
 
 
-@blueprint.route('/get/<script_type>/<name>', methods=['POST'])
+@blueprint.route('/get/<script_type>/<script_id>', methods=['POST'])
 @login_required
-def get_script(script_type, name):
-    script = get_obj(Script, name=name)
+def get_script(script_type, script_id):
+    script = get_obj(Script, id=script_id)
     properties = type_to_properties[script_type]
     script_properties = {
         property: getattr(script, property)
@@ -108,13 +108,13 @@ def get_script_per_type(script_type):
     return jsonify([s.name for s in type_to_class[script_type].query.all()])
 
 
-@blueprint.route('/delete_<name>', methods=['POST'])
+@blueprint.route('/delete_<script_id>', methods=['POST'])
 @login_required
-def delete_object(name):
-    script = get_obj(Script, name=name)
+def delete_object(script_id):
+    script = get_obj(Script, id=script_id)
     db.session.delete(script)
     db.session.commit()
-    return jsonify({})
+    return jsonify(script.name)
 
 
 @blueprint.route('/create_script_<script_type>', methods=['POST'])

@@ -95,10 +95,10 @@ def job_scheduler(type, name):
     return jsonify({})
 
 
-@blueprint.route('/get/<name>', methods=['POST'])
+@blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
-def get_task(name):
-    task = get_obj(Task, name=name)
+def get_task(task_id):
+    task = get_obj(Task, id=task_id)
     task_properties = {
         property: str(getattr(task, property))
         for property in Task.properties
@@ -109,17 +109,17 @@ def get_task(name):
     return jsonify(task_properties)
 
 
-@blueprint.route('/show_logs/<name>', methods=['POST'])
+@blueprint.route('/show_logs/<task_id>', methods=['POST'])
 @login_required
-def show_logs(name):
-    task = get_obj(Task, name=name)
+def show_logs(task_id):
+    task = get_obj(Task, id=task_id)
     return jsonify(str_dict(task.logs))
 
 
-@blueprint.route('/get_diff/<name>/<v1>/<v2>/<n1>/<n2>/<s1>/<s2>', methods=['POST'])
+@blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>/<s1>/<s2>', methods=['POST'])
 @login_required
-def get_diff(name, v1, v2, n1, n2, s1, s2):
-    task = get_obj(Task, name=name)
+def get_diff(task_id, v1, v2, n1, n2, s1, s2):
+    task = get_obj(Task, id=task_id)
     first = str_dict(task.logs[v1][s1][n1]).splitlines()
     second = str_dict(task.logs[v2][s2][n2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -130,10 +130,10 @@ def get_diff(name, v1, v2, n1, n2, s1, s2):
     })
 
 
-@blueprint.route('/compare_logs/<name>', methods=['POST'])
+@blueprint.route('/compare_logs/<task_id>', methods=['POST'])
 @login_required
-def compare_logs(name):
-    task = get_obj(Task, name=name)
+def compare_logs(task_id):
+    task = get_obj(Task, id=task_id)
     results = {
         'nodes': [node.name for node in task.nodes],
         'scripts': [script.name for script in task.scripts],
@@ -142,27 +142,27 @@ def compare_logs(name):
     return jsonify(results)
 
 
-@blueprint.route('/delete_task/<name>', methods=['POST'])
+@blueprint.route('/delete_task/<task_id>', methods=['POST'])
 @login_required
-def delete_task(name):
-    task = Task.query.filter_by(name=name).first()
+def delete_task(task_id):
+    task = Task.query.filter_by(id=task_id).first()
     task.delete_task()
     db.session.delete(task)
     db.session.commit()
     return task_management()
 
 
-@blueprint.route('/pause_task/<name>', methods=['POST'])
+@blueprint.route('/pause_task/<task_id>', methods=['POST'])
 @login_required
-def pause_task(name):
-    task = Task.query.filter_by(name=name).first()
+def pause_task(task_id):
+    task = Task.query.filter_by(id=task_id).first()
     task.pause_task()
     return task_management()
 
 
-@blueprint.route('/resume_task/<name>', methods=['POST'])
+@blueprint.route('/resume_task/<task_id>', methods=['POST'])
 @login_required
-def resume_task(name):
-    task = Task.query.filter_by(name=name).first()
+def resume_task(task_id):
+    task = Task.query.filter_by(id=task_id).first()
     task.resume_task()
     return task_management()

@@ -101,7 +101,7 @@
             </thead>
             <tbody>
               {% for task in tasks %}
-                <tr id="{{ task.name }}">
+                <tr id="{{ task.id }}">
                   <td><a>{{ task.name }}</a></td>
                   <td>{{ task.creation_time }}</td>
                   <td>{{ task.creator }}</td>
@@ -109,29 +109,29 @@
                     <button type="button" class="btn btn-success btn-xs">Active</button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showTaskLogs('{{ task.name }}')">
+                    <button type="button" class="btn btn-info btn-xs" onclick="showTaskLogs('{{ task.id }}')">
                       </i>Logs</a>
                     </button>
                   </td>
                   <td>
                     {% if task.recurrent %}
-                      <button type="button" class="btn btn-info btn-xs" onclick="compareTaskLogs('{{ task.name }}')">
+                      <button type="button" class="btn btn-info btn-xs" onclick="compareTaskLogs('{{ task.id }}')">
                         </i>Compare</a>
                       </button>
                     {% endif %}
                   </td>
                   <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ task.name }}')">Edit</button>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showTaskModal('{{ task.id }}')">Edit</button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteTask('{{ task.name }}')">Delete</button>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteTask('{{ task.id }}')">Delete</button>
                   </td>
                   <td>
                     {% if task.frequency %}
                       {% if task.status == 'active' %}
-                        <button id="pause-resume-{{ task.name }}" type="button" class="btn btn-danger btn-xs" onclick="pauseTask('{{ task.name }}')">Pause</button>
+                        <button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="pauseTask('{{ task.id }}')">Pause</button>
                       {% else %}
-                        <button id="pause-resume-{{ task.name }}" type="button" class="btn btn-danger btn-xs" onclick="resumeTask('{{ task.name }}')">Resume</button>
+                        <button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="resumeTask('{{ task.id }}')">Resume</button>
                       {% endif %}
                     {% endif %}
                   </td>
@@ -151,46 +151,40 @@
   {{ super() }}
   <!-- Difflib -->
   <script src="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.js') }}"></script>
-  <!-- Initialize datetimepicker and SmartWizard -->
+  <!-- Scheduling: wizard / bootstrap datetimepicker -->
+  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <script>
-    $('#task-table').DataTable();
+    var taskId = null
+        table = $('#table').DataTable();
 
-    var dates = ['start_date', 'end_date'];
-    var today = new Date();
-    for (var i = 0; i < dates.length; i++) {
-      $('#' + dates[i]).datetimepicker({
-        format: 'DD/MM/YYYY HH:mm:ss',
-        widgetPositioning: {
-            horizontal: 'left',
-            vertical: 'bottom'
-        },
-        useCurrent: false,
-      });
-      $('#' + dates[i]).data("DateTimePicker").minDate(today);
-    }
-
-    function schedule(){
-      $('#wizard').smartWizard({
-        onFinish: scheduleScript
-      });
-      $('.buttonNext').addClass('btn btn-success');
-      $('.buttonPrevious').addClass('btn btn-primary');
-      $('.buttonFinish').addClass('btn btn-default');
-    }
-
-    function showObjectModal(name) {
+    function showTaskModal(id) {
+      taskId = id;
       $.ajax({
         type: "POST",
-        url: `/tasks/get/${name}`,
+        url: `/tasks/get/${id}`,
         dataType: 'json',
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
-            console.log(property, value);
             $(`#${property}`).val(value);
           }
         }
       });
       $('#scheduling').modal('show');
+    }
+
+    function scheduleScript() {
+      if ($("#scheduling-form").parsley().validate()) {
+        $.ajax({
+          type: "POST",
+          url: "/tasks/view_scheduler",
+          dataType: "json",
+          data: $("#scheduling-form").serialize(),
+          success: function() {
+            alertify.notify('Task edited', 'success', 5);
+          }
+        });
+        $("#scheduling").modal('hide');
+      }
     }
 
     function showTaskLogs(name) {
@@ -259,20 +253,7 @@
       });
     });
 
-    function scheduleScript() {
-      if ($("#scheduling-form").parsley().validate()) {
-        $.ajax({
-          type: "POST",
-          url: "/tasks/scheduler",
-          dataType: "json",
-          data: $("#scheduling-form").serialize(),
-          success: function() {
-            alertify.notify('Task edited', 'success', 5);
-          }
-        });
-        $("#scheduling").modal('hide');
-      }
-    }
+
 
     function deleteTask(name) {
       $.ajax({

@@ -99,6 +99,7 @@
 
 {% block javascripts %}
   {{ super()}}
+  <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <script src="{{ url_for('workflows_blueprint.static', filename='workflow_management.js') }}"></script>
 {% endblock javascripts %}

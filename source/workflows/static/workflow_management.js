@@ -2,6 +2,8 @@ var workflowId = null
     table = $('#table').DataTable()
     fields = ['name', 'description', 'type'];
 
+// Scheduling: run a workflow
+
 function showSchedulingModal(id){
   workflowId = id;
   $("#scheduling").modal('show');
@@ -11,7 +13,7 @@ function scheduleScript() {
   if ($("#scheduling-form").parsley().validate()) {
     $.ajax({
       type: "POST",
-      url: `/tasks/job_scheduler/workflow/${workflow}`,
+      url: `/tasks/job_scheduler/workflow/${workflowId}`,
       dataType: "json",
       data: $("#scheduling-form").serialize(),
       success: function() {
@@ -24,12 +26,16 @@ function scheduleScript() {
   }
 }
 
+// Properties modal: add or edit a workflow
+
+// open modal to add a new workflow
 function showModal(type) {
   $('#title').text("Add a new workflow");
   $('#edit-form').trigger("reset");
   $('#edit').modal('show');
 }
 
+// open modal to edit an existing workflow
 function showWorkflowModal(id) {
   workflowId = id;
   $('#title').text(`Edit properties`);
@@ -87,6 +93,7 @@ function editObject() {
   }
 }
 
+// delete a workflow
 function deleteObject(id) {
   table.row($(`#${id}`)).remove().draw(false);
   $.ajax({

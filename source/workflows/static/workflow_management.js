@@ -95,11 +95,11 @@ function editObject() {
 
 // delete a workflow
 function deleteObject(id) {
-  table.row($(`#${id}`)).remove().draw(false);
   $.ajax({
     type: "POST",
     url: `/workflows/delete_${id}`,
     success: function(name){
+      table.row($(`#${id}`)).remove().draw(false);
       alertify.notify(`Workflow ${name} deleted`, 'error', 5);
     }
   });

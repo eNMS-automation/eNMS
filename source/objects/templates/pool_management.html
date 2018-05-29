@@ -168,12 +168,8 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    $('#table').DataTable();
-
-    function showModal() {
-      $(`#edit-form`).trigger("reset");
-      $("#edit").modal('show');
-    }
+    var poolId = null
+        table = $('#table').DataTable()
 
     function showModal() {
       $("#title").text("Add a new pool");
@@ -181,11 +177,11 @@
       $("#edit").modal("show");
     }
 
-    function showPoolModal(name) {
+    function showPoolModal(id) {
       $('#title').text(`Edit pool properties`);
       $.ajax({
         type: "POST",
-        url: `/objects/get_pool/${name}`,
+        url: `/objects/get_pool/${id}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
             if (property.includes("regex")) {
@@ -199,12 +195,11 @@
       $("#edit").modal('show');
     }
 
-    var poolName = null;
-    function showPoolObjects(name) {
-      poolName = name;
+    function showPoolObjects(id) {
+      poolId = id;
       $.ajax({
         type: "POST",
-        url: `/objects/get_pool_objects/${name}`,
+        url: `/objects/get_pool_objects/${id}`,
         success: function(properties){
           console.log(properties);
           $('#nodes').val(properties.nodes);
@@ -217,11 +212,11 @@
     function savePoolObjects() {
       $.ajax({
         type: "POST",
-        url: `/objects/save_pool_objects/${poolName}`,
+        url: `/objects/save_pool_objects/${poolId}`,
         dataType: "json",
         data: $('#pool-objects-form').serialize(),
         success: function(){
-          alertify.notify('Changed saved', 'success', 5);
+          alertify.notify('Changes saved', 'success', 5);
         }
       });
       $("#edit-pool-objects").modal('hide');
@@ -229,24 +224,20 @@
 
     function savePool() {
       var mode = $('#title').text() == 'Edit pool properties' ? 'edit' : 'add'
-      var result = {};
-      var values = [];
 
+      var result = {}
+          values = [];
       $.each($('#edit-form').serializeArray(), function() {
         result[this.name] = this.value;
         if (["name", "description"].includes(this.name)) {
-          values.push(`<td>${this.value}</td>`);
+          values.push(`${this.value}`);
         }
       });
-      var name = result.name;
-      values.push(`
-      <td>
-        <button type="button" class="btn btn-info btn-xs" onclick="showPoolModal('${name}')">Edit</button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-danger btn-xs" onclick="deletePool('${name}')">Delete</button>
-      </td>
-      `);
+
+      values.push(
+        `<button type="button" class="btn btn-info btn-xs" onclick="showPoolModal('${poolId}')">Edit</button>`,
+        `<button type="button" class="btn btn-danger btn-xs" onclick="deletePool('${poolId}')">Delete</button>`
+      );
 
       if ($('#edit-form').parsley().validate()) {
         $.ajax({
@@ -254,13 +245,11 @@
           url: `/objects/process_pool`,
           dataType: "json",
           data: $('#edit-form').serialize(),
-          success: function(){
+          success: function(name){
             if (mode == 'edit') {
-              $(`#${name}`).html(values.join(''));
+              table.row($(`#${poolId}`)).data(values);
             } else {
-              values.unshift(`<tr id="${name}">`);
-              values.push('</tr>');
-              $(`#table tbody`).append(values.join(''));
+              table.row.add(values).draw(false);
             }
             message = `Pool ${name} ` + (mode == 'edit' ? 'edited !' : 'created !')
             alertify.notify(message, 'success', 5);
@@ -270,12 +259,13 @@
       }
     }
 
-    function deletePool(name) {
-      $(`#${name}`).remove();
+    function deletePool(id) {
+      $(`#${id}`).remove();
       $.ajax({
         type: "POST",
-        url: `/objects/delete_pool/${name}`,
-        success: function(msg){
+        url: `/objects/delete_pool/${id}`,
+        success: function(name){
+          table.row($(`#${id}`)).remove().draw(false);
           alertify.notify(`Pool ${name} deleted`, 'error', 5);
         }
       });

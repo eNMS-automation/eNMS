@@ -122,25 +122,25 @@ def process_pool():
     return jsonify()
 
 
-@blueprint.route('/get_pool/<name>', methods=['POST'])
+@blueprint.route('/get_pool/<pool_id>', methods=['POST'])
 @login_required
-def get_pool(name):
-    return jsonify(get_obj(Pool, name=name).get_properties())
+def get_pool(pool_id):
+    return jsonify(get_obj(Pool, id=pool_id).get_properties())
 
 
-@blueprint.route('/get_pool_objects/<name>', methods=['POST'])
+@blueprint.route('/get_pool_objects/<pool_id>', methods=['POST'])
 @login_required
-def get_pool_objects(name):
-    pool = get_obj(Pool, name=name)
+def get_pool_objects(pool_id):
+    pool = get_obj(Pool, id=pool_id)
     nodes = str(pool.nodes).replace(', ', ',')[1:-1].split(',')
     links = str(pool.links).replace(', ', ',')[1:-1].split(',')
     return jsonify({'nodes': nodes, 'links': links})
 
 
-@blueprint.route('/save_pool_objects/<name>', methods=['POST'])
+@blueprint.route('/save_pool_objects/<pool_id>', methods=['POST'])
 @login_required
-def save_pool_objects(name):
-    pool = get_obj(Pool, name=name)
+def save_pool_objects(pool_id):
+    pool = get_obj(Pool, id=pool_id)
     pool.nodes = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
     pool.links = [get_obj(Link, name=n) for n in request.form.getlist('links')]
     print(request.form)
@@ -148,18 +148,18 @@ def save_pool_objects(name):
     return jsonify()
 
 
-@blueprint.route('/pool_objects/<name>', methods=['POST'])
+@blueprint.route('/pool_objects/<pool_id>', methods=['POST'])
 @login_required
-def filter_pool_objects(name):
-    pool = get_obj(Pool, name=name)
+def filter_pool_objects(pool_id):
+    pool = get_obj(Pool, id=pool_id)
     objects = pool.filter_objects()
     return jsonify(objects)
 
 
-@blueprint.route('/delete_pool/<name>', methods=['POST'])
+@blueprint.route('/delete_pool/<pool_id>', methods=['POST'])
 @login_required
-def delete_pool(name):
-    pool = get_obj(Pool, name=name)
+def delete_pool(pool_id):
+    pool = get_obj(Pool, id=pool_id)
     db.session.delete(pool)
     db.session.commit()
     return jsonify({})

@@ -52,9 +52,9 @@ def objects_management():
         'object_management.html',
         names=pretty_names,
         node_fields=node_public_properties,
-        nodes=Node.query.all(),
+        nodes=Node.serialize(),
         link_fields=link_public_properties,
-        links=Link.query.all(),
+        links=Link.serialize(),
         add_node_form=add_node_form,
         add_link_form=add_link_form
     )
@@ -96,7 +96,7 @@ def get_object(obj_type, obj_id):
 @login_required
 def edit_object():
     obj = object_factory(**request.form.to_dict())
-    return jsonify({'name': obj.name, 'id': obj.id})
+    return jsonify(obj.serialized)
 
 
 @blueprint.route('/delete/<obj_type>/<obj_id>', methods=['POST'])

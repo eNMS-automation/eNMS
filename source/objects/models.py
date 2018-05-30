@@ -7,6 +7,7 @@ from base.models import (
     CustomBase
 )
 from base.properties import (
+    cls_to_properties,
     link_common_properties,
     link_public_properties,
     node_common_properties,
@@ -91,6 +92,10 @@ class Node(Object):
     @initialize_properties
     def __init__(self, **kwargs):
         super(Node, self).__init__(**kwargs)
+
+    @property
+    def serialized(self):
+        return {p: getattr(self, p) for p in cls_to_properties['Node']}
 
     @classmethod
     def get_properties(cls):
@@ -273,6 +278,10 @@ class Link(Object):
 
     def __init__(self, **kwargs):
         super(Link, self).__init__(**kwargs)
+
+    @property
+    def serialized(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['Link']}
 
     @classmethod
     def get_properties(cls):

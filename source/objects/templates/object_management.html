@@ -71,21 +71,7 @@
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
-                {% for node in nodes %}
-                <tr id="node-{{ node.id }}">
-                  {% for field in node_fields %}
-                    <td>{{ node[field] }}</td>
-                  {% endfor %}
-                  <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node.id }}')">Edit</button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('node', '{{ node.id }}')">Delete</button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
@@ -116,21 +102,7 @@
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
-                {% for link in links %}
-                <tr id="link-{{ link.id }}">
-                  {% for field in link_fields %}
-                    <td>{{ link[field] }}</td>
-                  {% endfor %}
-                  <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('link', '{{ link.id }}')">Edit</button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('link', '{{ link.id }}')">Delete</button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
@@ -144,8 +116,10 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var node_fields = {{ node_fields|tojson|safe }}
-        link_fields = {{ link_fields|tojson|safe }};
+    var node_fields = {{ node_fields|tojson|safe }};
+    var link_fields = {{ link_fields|tojson|safe }};
+    var nodes = {{ nodes|tojson|safe }};
+    var links = {{ links|tojson|safe }};
   </script>
   <script src="{{ url_for('objects_blueprint.static', filename='object_management.js') }}"></script>
 {% endblock javascripts %}

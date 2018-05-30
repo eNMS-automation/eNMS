@@ -1,5 +1,35 @@
-var nodeTable = $('#node-table').DataTable()
-    linkTable = $('#link-table').DataTable()
+var nodeTable = $('#node-table').DataTable();
+var linkTable = $('#link-table').DataTable();
+
+function addObject(mode, type, properties) {
+  var values = [];
+  var table = type == 'node' ? nodeTable : linkTable;
+  var fields = type == 'node' ? node_fields : link_fields
+  for (j = 0; j < fields.length; j++) {
+    var truncate = ["longitude", "latitude"].includes(fields[j]);
+    value = truncate ? parseFloat(properties[fields[j]]).toFixed(2) : properties[fields[j]]
+    values.push(`${value}`);
+  }
+  values.push(
+    `<button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`,
+  );
+  if (mode == 'edit') {
+    table.row($(`#${type}-${properties.id}`)).data(values);
+  } else {
+    var rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr("id", `${type}-${properties.id}`);
+  }
+}
+
+(function() {
+  for (i = 0; i < nodes.length; i++) {
+    addObject('create', 'node', nodes[i]);
+  }
+  for (i = 0; i < links.length; i++) {
+    addObject('create', 'type', links[i]);
+  }
+})();
 
 document.getElementById("file").onchange = function() {
   $("#form").submit();
@@ -33,32 +63,9 @@ function editObject(type) {
       dataType: "json",
       data: $(`#edit-${type}-form`).serialize(),
       success: function(properties) {
-        var fields = type == 'node' ? node_fields : link_fields
-            table = type == 'node' ? nodeTable : linkTable
-            mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add'
-            result = {}
-            values = [];
-        console.log(table)
-        $.each($(`#edit-${type}-form`).serializeArray(), function() {
-          result[this.name] = this.value;
-        });
-        var name = result.name;
-        for (i = 0; i < fields.length; i++) {
-          var truncate = ["longitude", "latitude"].includes(fields[i]);
-          value = truncate ? parseFloat(result[fields[i]]).toFixed(2) : result[fields[i]]
-          values.push(`${value}`);
-        }
-        values.push(
-          `<button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${properties.id}')">Edit</button>`,
-          `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`,
-        );
-        if (mode == 'edit') {
-          table.row($(`#${type}-${properties.id}`)).data(values);
-        } else {
-          var rowNode = table.row.add(values).draw(false).node();
-          $(rowNode).attr("id", `${type}-${properties.id}`);
-        }
-        message = `Object ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !')
+        mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add';
+        addObject(mode, type, properties);
+        message = `Object ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
         alertify.notify(message, 'success', 5);
       }
     });

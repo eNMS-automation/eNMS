@@ -41,6 +41,8 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            
+
             <form method="post">
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
                 <div class="form-group">
@@ -92,80 +94,12 @@
       ]
     };
   </script>
-  <script src="{{ url_for('views_blueprint.static', filename='logical_view.js') }}"></script>
   <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <script src="{{ url_for('static', filename='views.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='logical_view.js') }}"></script>
   <script>
-
-  function showModal(modal_name){
-    $(`#${modal_name}`).modal('show');
-    }
-
-    function connectToDevice(name) {
-      var name = $(`#node-name`).val();
-      $.ajax({
-        type: "POST",
-        url: `/views/connect_to_${name}`,
-        success: function(msg){
-          alertify.notify(`Connection to ${name}`, 'success', 5);
-        }
-      });
-    }
-
-    function scheduleScript() {
-      if ($("#scheduling-form").parsley().validate()) {
-        $.ajax({
-          type: "POST",
-          url: "/tasks/view_scheduler",
-          dataType: "json",
-          data: $("#scheduling-form").serialize(),
-          success: function() {
-            alertify.notify('Task scheduled', 'success', 5);
-          }
-        });
-        $("#scheduling").modal('hide');
-      } else {
-        alertify.notify('Some fields are missing', 'error', 5);
-      }
-    }
-
-    function showObjectModal(type, name) {
-      $.ajax({
-        type: "POST",
-        url: `/objects/get/${type}/${name}`,
-        success: function(properties){
-          for (const [property, value] of Object.entries(properties)) {
-            $(`#${type}-${property}`).val(value);
-          }
-        }
-      });
-      if (type == "node") {
-        $.ajax({
-          type: "POST",
-          url: `/views/get_logs_${name}`,
-          success: function(logs){
-            console.log(logs);
-            $("#logs").text(logs);
-          }
-        });
-      }
-      $(`#edit-${type}`).modal('show');
-    }
-
-    var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
-    var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
-
-    function editObject(type) {
-      var fields = type == 'node' ? node_fields : link_fields
-      $.ajax({
-        type: "POST",
-        url: "/objects/edit_object",
-        dataType: "json",
-        data: $(`#edit-${type}-form`).serialize(),
-        success: function(properties){
-          alertify.notify(`Object ${properties.name} edited !`, 'success', 5);
-        }
-      });
-      $(`#edit-${type}`).modal('hide');
-    }
+    var node_fields = {{ node_fields|tojson|safe }};
+    var link_fields = {{ link_fields|tojson|safe }};
   </script>
+  <script src="{{ url_for('objects_blueprint.static', filename='object_management.js') }}"></script>
 {% endblock javascripts %}

@@ -1,7 +1,12 @@
 from admin.models import Parameters
 from base.database import get_obj
 from base.models import Log
-from base.properties import pretty_names, type_to_public_properties
+from base.properties import (
+    pretty_names,
+    link_public_properties,
+    node_public_properties,
+    type_to_public_properties
+)
 from collections import OrderedDict
 from flask import (
     Blueprint,
@@ -77,6 +82,8 @@ def view(view_type):
         google_earth_form=google_earth_form,
         add_node_form=add_node_form,
         add_link_form=add_link_form,
+        node_fields=node_public_properties,
+        link_fields=link_public_properties,
         labels=labels,
         names=pretty_names,
         subtypes=node_subtypes,

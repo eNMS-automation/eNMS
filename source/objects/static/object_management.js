@@ -27,7 +27,7 @@ function addObject(mode, type, properties) {
     addObject('create', 'node', nodes[i]);
   }
   for (i = 0; i < links.length; i++) {
-    addObject('create', 'type', links[i]);
+    addObject('create', 'link', links[i]);
   }
 })();
 
@@ -52,6 +52,15 @@ function showObjectModal(type, id) {
       }
     }
   });
+  if (type == "node") {
+    $.ajax({
+      type: "POST",
+      url: `/views/get_logs_${name}`,
+      success: function(logs){
+      $("#logs").text(logs);
+      }
+    });
+  }
   $(`#edit-${type}`).modal('show');
 }
 

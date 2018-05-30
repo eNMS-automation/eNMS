@@ -148,10 +148,10 @@ def save_pool_objects(pool_id):
     return jsonify(pool.name)
 
 
-@blueprint.route('/pool_objects/<pool_id>', methods=['POST'])
+@blueprint.route('/pool_objects/<pool_name>', methods=['POST'])
 @login_required
-def filter_pool_objects(pool_id):
-    pool = get_obj(Pool, id=pool_id)
+def filter_pool_objects(pool_name):
+    pool = get_obj(Pool, name=pool_name)
     objects = pool.filter_objects()
     return jsonify(objects)
 

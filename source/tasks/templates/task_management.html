@@ -15,7 +15,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-{% include 'scheduling_modal.html' %}
+  {% include 'scheduling_modal.html' %}
 <div id="show-logs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -91,12 +91,13 @@
                 <th style="width: 20%">Name</th>
                 <th style="width: 10%">Creation time</th>
                 <th>Creator</th>
+                <th>Frequency</th>
                 <th style="width: 10%">Status</th>
                 <th style="width: 10%">Logs</th>
                 <th style="width: 10%">Compare</th>
                 <th style="width: 10%">Edit</th>
+                <th style="width: 10%">Action</th>
                 <th style="width: 10%">Delete</th>
-                <th style="width: 10%">Pause / Resume</th>
               </tr>
             </thead>
             <tbody></tbody>

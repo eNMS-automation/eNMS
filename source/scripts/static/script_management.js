@@ -1,11 +1,5 @@
-(function() {
-  var scriptId = null
-  var table = $('#table').DataTable()
-
-  for (i = 0; i < scripts.length; i++) {
-    addScript('create', scripts[i]);
-  }
-})();
+var scriptId = null
+var table = $('#table').DataTable()
 
 function addScript(mode, properties) {
   values = [];
@@ -24,6 +18,12 @@ function addScript(mode, properties) {
     $(rowNode).attr("id", `${properties.id}`);
   }
 }
+
+(function() {
+  for (i = 0; i < scripts.length; i++) {
+    addScript('create', scripts[i]);
+  }
+})();
 
 // replace the button value of all script forms with "Update"
 for (i = 0; i < types.length; i++) {

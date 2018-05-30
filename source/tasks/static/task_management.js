@@ -1,30 +1,26 @@
-(function() {
-  var taskId = null;
-  var table = $('#table').DataTable();
-
-  for (i = 0; i < tasks.length; i++) {
-    addTask('create', tasks[i]);
-  }
-})();
+var taskId = null;
+var table = $('#table').DataTable();
 
 function addTask(mode, properties) {
   values = [];
   for (j = 0; j < fields.length; j++) {
-    values.push(`${properties[fields[j]]}`);
+    if (fields[j] != 'recurrent') {
+      values.push(`${properties[fields[j]]}`);
+    }
+  }
+  if (properties.status == "active") {
+    var status = `<button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="pauseTask('${properties.id}')">Pause</button>`
+  } else {
+  var status = `<button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="resumeTask('${properties.id}')">Resume</button>`
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showTaskLogs('${properties.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs" onclick="compareTaskLogs('${properties.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-info btn-xs" onclick="showTaskModal('${properties.id}')">Edit</button>`,
+    status,
     `<button type="button" class="btn btn-danger btn-xs" onclick="deleteTask('${properties.id}')">Delete</button>`
   );
-  if (properties.frequency) {
-    if (properties.status == "active") {
-      values.push(`<button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="pauseTask('${properties.id}')">Pause</button>`)
-    } else {
-    values.push(`<button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="resumeTask('${properties.id}')">Resume</button>`)
-    }
-  }
+
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
   } else {
@@ -32,6 +28,12 @@ function addTask(mode, properties) {
     $(rowNode).attr("id", `${properties.id}`);
   }
 }
+
+(function() {
+  for (i = 0; i < tasks.length; i++) {
+    addTask('create', tasks[i]);
+  }
+})();
 
 function showTaskModal(id) {
   taskId = id;

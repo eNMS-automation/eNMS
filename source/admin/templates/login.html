@@ -20,26 +20,7 @@
   <script src="{{ url_for('static', filename='alertifyjs/alertify.min.js') }}"></script>
   <!-- Parsley -->
   <script src="{{ url_for('static', filename='parsleyjs/parsley.min.js') }}"></script>
-  <script>
-    function signup() {
-      if ($('#create-user-form').parsley().validate()) {
-        $.ajax({
-          type: "POST",
-          url: "/admin/process_user",
-          dataType: "json",
-          data: $('#create-user-form').serialize(),
-          success: function(result) {
-            if (result == 'duplicate') {
-              alertify.notify("Cannot create new user: duplicate entry", 'error', 5);
-            } else {
-              alertify.notify("New user created !", 'success', 5);
-              document.getElementById('login-button').click();
-            }
-          }
-        });
-      };
-    }
-  </script>
+  <script src="{{ url_for('admin_blueprint.static', filename='login.js') }}"></script>
   <div>
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>

@@ -1,5 +1,29 @@
-var scriptId = null
-    table = $('#table').DataTable();
+(function() {
+  var scriptId = null
+      table = $('#table').DataTable()
+
+  for (i = 0; i < scripts.length; i++) {
+    addScript('create', scripts[i]);
+  }
+})();
+
+function addScript(mode, properties) {
+  values = [];
+  for (j = 0; j < fields.length; j++) {
+    values.push(`${properties[fields[j]]}`);
+  }
+  values.push(
+    `<button type="button" class="btn btn-info btn-xs" onclick="showScriptModal('${properties.type}', '${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Run</button>`,
+    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteScript('${properties.id}')">Delete</button>`
+  );
+  if (mode == 'edit') {
+    table.row($(`#${properties.id}`)).data(values);
+  } else {
+    var rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr("id", `${properties.id}`);
+  }
+}
 
 // replace the button value of all script forms with "Update"
 for (i = 0; i < types.length; i++) {
@@ -28,7 +52,7 @@ function scheduleScript() {
   }
 }
 
-function showObjectModal(type, id) {
+function showScriptModal(type, id) {
   $.ajax({
     type: "POST",
     url: `/scripts/get/${type}/${id}`,
@@ -61,7 +85,7 @@ function createScript(type) {
   }
 }
 
-function deleteObject(id) {
+function deleteScript(id) {
   $.ajax({
     type: "POST",
     url: `/scripts/delete_${id}`,

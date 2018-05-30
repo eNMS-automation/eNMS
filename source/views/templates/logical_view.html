@@ -199,11 +199,11 @@
 
               // selection function
               function showNodeProperties(d) {
-                showObjectModal('node', d.name);
+                showObjectModal('node', d.real_id);
               };
 
               function showLinkProperties(d) {
-                showObjectModal('link', d.name);
+                showObjectModal('link', d.real_id);
               };
 
               function unselectAll() {
@@ -487,9 +487,8 @@
         url: "/objects/edit_object",
         dataType: "json",
         data: $(`#edit-${type}-form`).serialize(),
-        success: function(msg){
-          var name = $(`#${type}-name`).val();
-          alertify.notify(`Object ${name} edited !`, 'success', 5);
+        success: function(properties){
+          alertify.notify(`Object ${properties.name} edited !`, 'success', 5);
         }
       });
       $(`#edit-${type}`).modal('hide');

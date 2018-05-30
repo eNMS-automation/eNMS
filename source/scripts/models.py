@@ -1,6 +1,7 @@
 from base.database import db, get_obj
 from base.helpers import integrity_rollback, str_dict
 from base.models import script_workflow_table, task_script_table, CustomBase
+from base.properties import cls_to_properties
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
@@ -49,8 +50,9 @@ class Script(CustomBase):
         self.waiting_time = waiting_time
         self.description = description
 
-    def __repr__(self):
-        return str(self.name)
+    @property
+    def serialized(self):
+        return {p: getattr(self, p) for p in cls_to_properties['Script']}
 
     def script_neighbors(self, workflow, type):
         return [
@@ -302,6 +304,8 @@ class NapalmActionScript(Script):
     __tablename__ = 'NapalmActionScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
     action = Column(String, unique=True)
 
     __mapper_args__ = {
@@ -340,6 +344,8 @@ class NapalmGettersScript(Script):
     __tablename__ = 'NapalmGettersScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
 
     __mapper_args__ = {

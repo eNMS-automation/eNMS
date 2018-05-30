@@ -73,15 +73,15 @@
               </thead>
               <tbody>
                 {% for node in nodes %}
-                <tr id="node-{{ node.name }}">
+                <tr id="node-{{ node.id }}">
                   {% for field in node_fields %}
                     <td>{{ node[field] }}</td>
                   {% endfor %}
                   <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node['name'] }}')">Edit</button>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('node', '{{ node.id }}')">Edit</button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('node', '{{ node['name'] }}')">Delete</button>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('node', '{{ node.id }}')">Delete</button>
                   </td>
                 </tr>
                 {% endfor %}
@@ -118,15 +118,15 @@
               </thead>
               <tbody>
                 {% for link in links %}
-                <tr id="link-{{ link.name }}">
+                <tr id="link-{{ link.id }}">
                   {% for field in link_fields %}
                     <td>{{ link[field] }}</td>
                   {% endfor %}
                   <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('link', '{{ link['name'] }}')">Edit</button>
+                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('link', '{{ link.id }}')">Edit</button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('link', '{{ link['name'] }}')">Delete</button>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('link', '{{ link.id }}')">Delete</button>
                   </td>
                 </tr>
                 {% endfor %}
@@ -144,89 +144,8 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    $('#node-table').DataTable();
-    $('#link-table').DataTable();
-
-      document.getElementById("file").onchange = function() {
-        $("#form").submit();
-      };
-
-    function showModal(type) {
-      $('#title').text(`Add a new ${type}`);
-      $(`#edit-${type}-form`).trigger("reset");
-      $(`#edit-${type}`).modal('show');
-    }
-
-    function showObjectModal(type, name) {
-      $('#title').text(`Edit ${type} properties`);
-      $.ajax({
-        type: "POST",
-        url: `/objects/get/${type}/${name}`,
-        success: function(properties){
-          for (const [property, value] of Object.entries(properties)) {
-            $(`#${type}-${property}`).val(value);
-          }
-        }
-      });
-      $(`#edit-${type}`).modal('show');
-    }
-
-    var node_fields = [{% for field in node_fields %} '{{ field }}', {% endfor %}];
-    var link_fields = [{% for field in link_fields %} '{{ field }}', {% endfor %}];
-
-    function editObject(type) {
-      var fields = type == 'node' ? node_fields : link_fields
-      var mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add'
-      var result = {};
-      var values = [];
-      $.each($(`#edit-${type}-form`).serializeArray(), function() {
-        result[this.name] = this.value;
-      });
-
-      var name = result.name;
-      for (i = 0; i < fields.length; i++) {
-        var truncate = ["longitude", "latitude"].includes(fields[i]);
-        value = truncate ? parseFloat(result[fields[i]]).toFixed(2) : result[fields[i]]
-        values.push(`<td>${value}</td>`);
-      }
-      values.push(`<td>
-      <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${name}')">Edit</button>
-      </td>
-      <td>
-      <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${name}')">Delete</button>
-      </td>`);
-
-      if ($(`#edit-${type}-form`).parsley().validate()) {
-        $.ajax({
-          type: "POST",
-          url: "/objects/edit_object",
-          dataType: "json",
-          data: $(`#edit-${type}-form`).serialize(),
-          success: function(msg) {
-            if (mode == 'edit') {
-              $(`#${type}-${name}`).html(values.join(''));
-            } else {
-              values.unshift(`<tr id="${name}">`);
-              values.push('</tr>');
-              $(`#${type}-table tbody`).append(values.join(''));
-            }
-            message = `Object ${name} ` + (mode == 'edit' ? 'edited !' : 'created !')
-            alertify.notify(message, 'success', 5);
-          }
-        });
-        $(`#edit-${type}`).modal('hide');
-      }
-    }
-  
-    function deleteObject(type, name) {
-      $(`#${type}-${name}`).remove();
-      $.ajax({
-        type: "POST",
-        url: `/objects/delete/${type}/${name}`,
-        success: function(msg){
-          alertify.notify(`Object ${name} deleted`, 'error', 5);
-        }
-      });
-    }
+    var node_fields = {{ node_fields|tojson|safe }}
+        link_fields = {{ link_fields|tojson|safe }};
   </script>
+  <script src="{{ url_for('objects_blueprint.static', filename='object_management.js') }}"></script>
 {% endblock javascripts %}

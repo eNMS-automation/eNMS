@@ -1,4 +1,5 @@
 from .database import Base
+from .properties import cls_to_properties
 from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
 
@@ -14,11 +15,16 @@ class CustomBase(Base):
     def __repr__(self):
         return self.name
 
-    # the visible classmethod is here because it can apply to both objects and logs
-    @classmethod
-    def visible_objects(cls):
-        return (obj for obj in cls.query.all() if obj.visible)
+    def __lt__(self, other):
+        return True
 
+    @property
+    def serialized(self):
+        return {p: getattr(self, p) for p in cls_to_properties[self.__tablename__]}
+
+    @classmethod
+    def serialize(cls):
+        return [obj.serialized for obj in cls.query.all()]
 
 class Log(CustomBase):
 

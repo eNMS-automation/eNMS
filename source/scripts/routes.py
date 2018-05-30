@@ -1,6 +1,6 @@
 from base.database import db, get_obj
 from base.helpers import allowed_file
-from base.properties import pretty_names
+from base.properties import pretty_names, script_public_properties
 from flask import Blueprint, current_app, jsonify, render_template, request
 from flask_login import login_required
 from .forms import (
@@ -68,11 +68,11 @@ def scripts():
     scheduling_form.pools.choices = Pool.choices()
     return render_template(
         'script_management.html',
-        fields=('name', 'type'),
+        fields=script_public_properties,
         type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         names=pretty_names,
         scheduling_form=scheduling_form,
-        scripts=Script.query.all()
+        scripts=Script.serialize()
     )
 
 

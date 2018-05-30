@@ -70,19 +70,19 @@ def pool_management():
         form=AddPoolForm(request.form),
         pool_object_form=pool_object_form,
         names=pretty_names,
-        pools=Pool.query.all()
+        pools=Pool.serialize()
     )
 
 
 ## AJAX calls
 
 
-@blueprint.route('/get/<obj_type>/<name>', methods=['POST'])
+@blueprint.route('/get/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
-def get_object(obj_type, name):
+def get_object(obj_type, obj_id):
     cls = Node if obj_type == 'node' else Link
     properties = node_public_properties if cls == Node else link_public_properties
-    obj = get_obj(cls, name=name)
+    obj = get_obj(cls, id=obj_id)
     obj_properties = {
         property: str(getattr(obj, property))
         for property in properties
@@ -93,19 +93,18 @@ def get_object(obj_type, name):
 @blueprint.route('/edit_object', methods=['GET', 'POST'])
 @login_required
 def edit_object():
-    object_factory(**request.form.to_dict())
-    db.session.commit()
-    return jsonify({})
+    obj = object_factory(**request.form.to_dict())
+    return jsonify({'name': obj.name, 'id': obj.id})
 
 
-@blueprint.route('/delete/<obj_type>/<name>', methods=['POST'])
+@blueprint.route('/delete/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
-def delete_object(obj_type, name):
+def delete_object(obj_type, obj_id):
     cls = Node if obj_type == 'node' else Link
-    obj = get_obj(cls, name=name)
+    obj = get_obj(cls, id=obj_id)
     db.session.delete(obj)
     db.session.commit()
-    return jsonify({})
+    return jsonify({'name': obj.name})
 
 
 @blueprint.route('/process_pool', methods=['POST'])
@@ -118,8 +117,8 @@ def process_pool():
     for property in link_public_properties:
         regex_property = 'link_{}_regex'.format(property)
         pool_properties[regex_property] = regex_property in pool_properties
-    pool_factory(**pool_properties)
-    return jsonify()
+    pool = pool_factory(**pool_properties)
+    return jsonify(pool.serialized)
 
 
 @blueprint.route('/get_pool/<pool_id>', methods=['POST'])
@@ -143,9 +142,8 @@ def save_pool_objects(pool_id):
     pool = get_obj(Pool, id=pool_id)
     pool.nodes = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
     pool.links = [get_obj(Link, name=n) for n in request.form.getlist('links')]
-    print(request.form)
     db.session.commit()
-    return jsonify()
+    return jsonify(pool.name)
 
 
 @blueprint.route('/pool_objects/<pool_id>', methods=['POST'])
@@ -156,10 +154,19 @@ def filter_pool_objects(pool_id):
     return jsonify(objects)
 
 
+@blueprint.route('/update_pools', methods=['POST'])
+@login_required
+def update_pools():
+    for pool in Pool.query.all():
+        pool.compute_pool()
+    db.session.commit()
+    return jsonify({})
+
+
 @blueprint.route('/delete_pool/<pool_id>', methods=['POST'])
 @login_required
 def delete_pool(pool_id):
     pool = get_obj(Pool, id=pool_id)
     db.session.delete(pool)
     db.session.commit()
-    return jsonify({})
+    return jsonify(pool.name)

@@ -33,35 +33,17 @@
               <thead>
                 <tr>
                   <th style="width: 20%">Name</th>
-                  <th style="width: 20%">Type</th>
-                  <th style="width: 15%">Vendor</th>
-                  <th style="width: 15%">Operating system</th>
-                  <th style="width: 15%">Waiting time</th>
+                  <th style="width: 15%">Type</th>
+                  <th style="width: 20%">Description</th>
+                  <th style="width: 10%">Vendor</th>
+                  <th style="width: 10%">Operating system</th>
+                  <th style="width: 5%">Waiting time</th>
                   <th>Edit</th>
                   <th>Run</th>
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
-                {% for script in scripts %}
-                  <tr id="{{ script.id }}">
-                    <td><a>{{ script.name }}</a></td>
-                    <td>{{ script.type }}</td>
-                    <td><a>{{ script.vendor }}</a></td>
-                    <td><a>{{ script.operating_system }}</a></td>
-                    <td><a>{{ script.waiting_time }}</a></td>
-                  <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('{{ script['type'] }}', '{{ script.id }}')">Edit</button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('{{ script.id }}')">Run</button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ script.id }}')">Delete</button>
-                  </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
+              <tbody></tbody>
             </table>
             <!-- end project list -->
           </div>
@@ -75,6 +57,10 @@
   {{ super() }}
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
-  <script> var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}]; </script>
+  <script>
+    var fields = {{ fields|tojson|safe }}
+        scripts = {{ scripts|tojson|safe }}
+        types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
+  </script>
   <script src="{{ url_for('scripts_blueprint.static', filename='script_management.js') }}"></script>
 {% endblock javascripts %}

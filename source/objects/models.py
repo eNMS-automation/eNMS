@@ -436,6 +436,7 @@ def object_factory(**kwargs):
         obj = object_class[obj_type](**kwargs)
     db.session.add(obj)
     db.session.commit()
+    return obj
 
 
 class Pool(CustomBase):
@@ -558,7 +559,6 @@ class Pool(CustomBase):
 
 def pool_factory(**kwargs):
     pool = get_obj(Pool, name=kwargs['name'])
-    mode = 'update' if pool else 'creation'
     if pool:
         for property, value in kwargs.items():
             if property in pool.__dict__:
@@ -568,7 +568,7 @@ def pool_factory(**kwargs):
         pool = Pool(**kwargs)
         db.session.add(pool)
     db.session.commit()
-    return mode
+    return pool
 
 
 default_pools = (

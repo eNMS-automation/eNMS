@@ -200,7 +200,7 @@
                       );
 
                     marker.on("dblclick", function (e) {
-                      showObjectModal('node', '{{ obj['name'] }}');
+                      showObjectModal('node', '{{ obj['id'] }}');
                     });
 
                     marker.on("click", function (e) {
@@ -291,7 +291,7 @@
                   polyline.link_id = {{ obj.id }};
 
                   polyline.on("dblclick", function (e) {
-                    showObjectModal('link', '{{ obj['name'] }}');
+                    showObjectModal('link', '{{ obj['id'] }}');
                   });
               
                   polyline.bindTooltip("{{ obj[labels['link']] }}", {
@@ -324,7 +324,7 @@
                     ).addTo(map);
 
                     marker.on("dblclick", function (e) {
-                      showObjectModal('node', '{{ obj['name'] }}');
+                      showObjectModal('node', '{{ obj['id'] }}');
                     });
 
                     marker.node_id = {{ obj.id }};
@@ -507,10 +507,10 @@
       }
     }
 
-    function showObjectModal(type, name) {
+    function showObjectModal(type, id) {
       $.ajax({
         type: "POST",
-        url: `/objects/get/${type}/${name}`,
+        url: `/objects/get/${type}/${id}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
             $(`#${type}-${property}`).val(value);
@@ -539,9 +539,8 @@
         url: "/objects/edit_object",
         dataType: "json",
         data: $(`#edit-${type}-form`).serialize(),
-        success: function(msg){
-          var name = $(`#${type}-name`).val();
-          alertify.notify(`Object ${name} edited !`, 'success', 5);
+        success: function(properties){
+          alertify.notify(`Object ${properties.name} edited !`, 'success', 5);
         }
       });
       $(`#edit-${type}`).modal('hide');

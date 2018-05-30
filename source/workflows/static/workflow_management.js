@@ -1,6 +1,8 @@
-var workflowId = null
-    table = $('#table').DataTable()
-    fields = ['name', 'description', 'type'];
+/*jshint esversion: 6 */
+
+var workflowId = null;
+var table = $('#table').DataTable();
+var fields = ['name', 'description', 'type'];
 
 // Scheduling: run a workflow
 
@@ -53,39 +55,37 @@ function showWorkflowModal(id) {
 }
 
 function editObject() {
-  var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add'
-  var result = {}
-      values = [];
-  $.each($("#edit-form").serializeArray(), function() {
-    result[this.name] = this.value;
-  });
-
-  for (i = 0; i < fields.length; i++) {
-    values.push(`${result[fields[i]]}`);
-  }
-
-  values.push(
-    `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${workflowId}')">Edit</button>`,
-    `<a href="/workflows/manage_${workflowId}" class="btn btn-info btn-xs">
-      <i class="fa fa-pencil"></i>Manage
-    </a>`,
-    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${workflowId}')">Run</button>`,
-    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${workflowId}')">Delete</button>`,
-  );
-
   if ($("#edit-form").parsley().validate() ) {
     $.ajax({
       type: "POST",
       url: `/workflows/edit_workflow`,
       dataType: "json",
       data: $("#edit-form").serialize(),
-      success: function(name){
-        if (mode == 'edit') {
-          table.row($(`#${workflowId}`)).data(values);
-        } else {
-          table.row.add(values).draw(false);
+      success: function(properties){
+        var result = {};
+        var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
+        var values = [];
+        $.each($("#edit-form").serializeArray(), function() {
+          result[this.name] = this.value;
+        });
+        for (i = 0; i < fields.length; i++) {
+          values.push(`${result[fields[i]]}`);
         }
-        message = `Workflow ${name} ` + (mode == 'edit' ? 'edited !' : 'created !')
+        values.push(
+          `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
+          `<a href="/workflows/manage_${properties.id}" class="btn btn-info btn-xs">
+            <i class="fa fa-pencil"></i>Manage
+          </a>`,
+          `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Run</button>`,
+          `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${properties.id}')">Delete</button>`
+        );
+        if (mode == 'edit') {
+          table.row($(`#${properties.id}`)).data(values);
+        } else {
+          table.row.add(values).draw(false).node();
+          $(rowNode).attr("id", `${properties.id}`);
+        }
+        message = `Workflow ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
         alertify.notify(message, 'success', 5);
       }
     });

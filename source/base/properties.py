@@ -32,10 +32,38 @@ link_public_properties = (
     link_common_properties
 )
 
+pool_public_properties = (
+    'name',
+    'description'
+)
+
+task_public_properties = (
+    'name',
+    'description'
+)
+
+script_public_properties = (
+    'name',
+    'type',
+    'description',
+    'vendor',
+    'operating_system',
+    'waiting_time'
+)
+
+
 public_properties = (
     node_public_properties +
     link_public_properties
 )
+
+cls_to_properties = {
+    'Node': ('id',) + node_public_properties,
+    'Link': ('id',) + link_public_properties,
+    'Pool': ('id',) + pool_public_properties,
+    'Task': ('id',) + task_public_properties,
+    'Script': ('id',) + script_public_properties,
+}
 
 type_to_public_properties = OrderedDict([
     ('Antenna', node_public_properties),

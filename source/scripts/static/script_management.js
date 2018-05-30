@@ -1,6 +1,6 @@
 (function() {
   var scriptId = null
-      table = $('#table').DataTable()
+  var table = $('#table').DataTable()
 
   for (i = 0; i < scripts.length; i++) {
     addScript('create', scripts[i]);

@@ -1,12 +1,5 @@
-(function() {
-  var poolId = null
-      table = $('#table').DataTable()
-      fields = ['name', 'description'];
-
-  for (i = 0; i < pools.length; i++) {
-    addPool('create', pools[i]);
-  }
-})();
+var poolId = null;
+var table = $('#table').DataTable();
 
 function addPool(mode, properties) {
   values = [];
@@ -25,6 +18,12 @@ function addPool(mode, properties) {
     $(rowNode).attr("id", `${properties.id}`);
   }
 }
+
+(function() {
+  for (i = 0; i < pools.length; i++) {
+    addPool('create', pools[i]);
+  }
+})();
 
 function showModal() {
   $("#title").text("Add a new pool");
@@ -84,9 +83,9 @@ function savePool() {
       dataType: "json",
       data: $('#edit-form').serialize(),
       success: function(pool){
-        mode = $('#title').text() == 'Edit pool properties' ? 'edit' : 'add'
+        var mode = $('#title').text() == 'Edit pool properties' ? 'edit' : 'add';
         addPool(mode, pool)
-        message = `Pool ${pool.name} ` + (mode == 'edit' ? 'edited !' : 'created !')
+        message = `Pool ${pool.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
         alertify.notify(message, 'success', 5);
       }
     });

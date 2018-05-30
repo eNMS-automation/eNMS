@@ -1,5 +1,6 @@
 from base.database import db, get_obj
 from base.helpers import str_dict
+from base.properties import task_public_properties
 from difflib import SequenceMatcher
 from flask import Blueprint, jsonify, render_template, request, session
 from flask_login import current_user, login_required
@@ -28,10 +29,10 @@ def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.scripts.choices = Script.choices()
     scheduling_form.workflows.choices = Workflow.choices()
-    tasks = Task.query.all()
     return render_template(
         'task_management.html',
-        tasks=tasks,
+        fields=task_public_properties,
+        tasks=Task.serialize(),
         compare_form=CompareForm(request.form),
         scheduling_form=scheduling_form
     )

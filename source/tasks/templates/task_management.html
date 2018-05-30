@@ -99,45 +99,7 @@
                 <th style="width: 10%">Pause / Resume</th>
               </tr>
             </thead>
-            <tbody>
-              {% for task in tasks %}
-                <tr id="{{ task.id }}">
-                  <td><a>{{ task.name }}</a></td>
-                  <td>{{ task.creation_time }}</td>
-                  <td>{{ task.creator }}</td>
-                  <td>
-                    <button type="button" class="btn btn-success btn-xs">Active</button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showTaskLogs('{{ task.id }}')">
-                      </i>Logs</a>
-                    </button>
-                  </td>
-                  <td>
-                    {% if task.recurrent %}
-                      <button type="button" class="btn btn-info btn-xs" onclick="compareTaskLogs('{{ task.id }}')">
-                        </i>Compare</a>
-                      </button>
-                    {% endif %}
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="showTaskModal('{{ task.id }}')">Edit</button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger btn-xs" onclick="deleteTask('{{ task.id }}')">Delete</button>
-                  </td>
-                  <td>
-                    {% if task.frequency %}
-                      {% if task.status == 'active' %}
-                        <button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="pauseTask('{{ task.id }}')">Pause</button>
-                      {% else %}
-                        <button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="resumeTask('{{ task.id }}')">Resume</button>
-                      {% endif %}
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
-            </tbody>
+            <tbody></tbody>
           </table>
           <!-- end project list -->
         </div>
@@ -154,5 +116,9 @@
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <!-- Task management -->
+  <script>
+    var fields = {{ fields|tojson|safe }}
+    var tasks = {{ tasks|tojson|safe }}
+  </script>
   <script src="{{ url_for('tasks_blueprint.static', filename='task_management.js') }}"></script>
 {% endblock javascripts %}

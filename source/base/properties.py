@@ -39,7 +39,11 @@ pool_public_properties = (
 
 task_public_properties = (
     'name',
-    'description'
+    'creation_time',
+    'creator',
+    'recurrent',
+    'frequency',
+    'status'
 )
 
 script_public_properties = (

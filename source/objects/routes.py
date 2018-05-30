@@ -3,7 +3,8 @@ from base.helpers import allowed_file
 from base.properties import (
     pretty_names,
     link_public_properties,
-    node_public_properties
+    node_public_properties,
+    pool_public_properties
 )
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
@@ -51,9 +52,9 @@ def objects_management():
         'object_management.html',
         names=pretty_names,
         node_fields=node_public_properties,
-        nodes=Node.visible_objects(),
+        nodes=Node.query.all(),
         link_fields=link_public_properties,
-        links=Link.visible_objects(),
+        links=Link.query.all(),
         add_node_form=add_node_form,
         add_link_form=add_link_form
     )
@@ -70,6 +71,7 @@ def pool_management():
         form=AddPoolForm(request.form),
         pool_object_form=pool_object_form,
         names=pretty_names,
+        fields=pool_public_properties,
         pools=Pool.serialize()
     )
 

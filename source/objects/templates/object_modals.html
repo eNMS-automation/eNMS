@@ -27,6 +27,11 @@
             <button type="button" class="btn btn-success" onclick="editObject('{{ type }}')">Submit</button>
           </div>
         </form>
+        {% if type == "node" %}
+          <div role="tabpanel" class="tab-pane fade" id="napalm-config">
+            <pre id="logs"></pre>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -1,3 +1,15 @@
+var layers = {
+  'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+  'gm': 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga',
+  'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg'
+  };
+
+
+
+var markers_array = [];
+var polyline_array = [];
+var selection = [];
+
 function exportToGoogleEarth() {
   if ($("#google-earth-form").parsley().validate()) {
     $.ajax({

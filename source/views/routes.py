@@ -75,7 +75,7 @@ def view(view_type):
     return render_template(
         '{}_view.html'.format(view_type),
         pools=Pool.query.all(),
-        parameters=Parameters.query.one(),
+        parameters=Parameters.query.one().serialized,
         view=view,
         scheduling_form=scheduling_form,
         view_options_form=view_options_form,

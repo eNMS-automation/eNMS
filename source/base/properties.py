@@ -56,6 +56,13 @@ script_public_properties = (
 )
 
 
+parameters_public_properties = (
+    'default_longitude',
+    'default_latitude',
+    'default_zoom_level'
+)
+
+
 public_properties = (
     node_public_properties +
     link_public_properties
@@ -67,6 +74,7 @@ cls_to_properties = {
     'Pool': ('id',) + pool_public_properties,
     'Task': ('id',) + task_public_properties,
     'Script': ('id',) + script_public_properties,
+    'Parameters': parameters_public_properties
 }
 
 type_to_public_properties = OrderedDict([

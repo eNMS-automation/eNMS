@@ -45,20 +45,26 @@ for (i = 0; i < nodes.length; i++) {
     node.longitude
   ]);
 
+  marker.node_id = node.id;
+  marker.icon = window[`icon_${node.type}`];
+  marker.selected_icon = window[`icon_selected_${node.type}`];
+  marker.setIcon(marker.icon);
+  markers_array.push(marker);
+
   marker.on("dblclick", function (e) {
-    showObjectModal('node', '${node.id}');
+    showObjectModal('node', this.node_id);
   });
 
   marker.on("click", function (e) {
     e.target.setIcon(e.target.selected_icon);
-    selection.push(node.id);
+    selection.push(this.node_id);
     $.ajax({
       type: "POST",
       url: "/views/selection",
       dataType: "json",
       data: { selection: selection },
       success: function(msg){
-          $('.answer').html(msg);
+        $('.answer').html(msg);
       }
     });
   });
@@ -68,12 +74,6 @@ for (i = 0; i < nodes.length; i++) {
     }
   );
 
-  marker.node_id = node.id;
-  console.log(window, `icon_${node.type}`);
-  marker.icon = window[`icon_${node.type}`];
-  marker.selected_icon = window[`icon_selected_${node.type}`];
-  marker.setIcon(marker.icon);
-  markers_array.push(marker);
   if (view == 'leaflet') {
     marker.addTo(map);
   } else {
@@ -99,7 +99,7 @@ for (i = 0; i < links.length; i++) {
   polyline.link_id = link.id;
 
   polyline.on("dblclick", function (e) {
-    showObjectModal('link', `${link.id}`);
+    showObjectModal('link', this.link_id);
   });
 
   polyline.bindTooltip(link[labels.link], {

@@ -75,18 +75,17 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <script>
     var node_fields = {{ node_fields|tojson|safe }};
     var link_fields = {{ link_fields|tojson|safe }};
     var nodes = {{ nodes|tojson|safe }};
     var links = {{ links|tojson|safe }};
     var labels = {{ labels|tojson|safe }};
-    console.log(nodes, links);
     var subtypes = {{ subtypes|tojson|safe }};
     var parameters = {{ parameters|tojson|safe }};
     var view = '{{ view }}';
   </script>
+  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <script src="{{ url_for('objects_blueprint.static', filename='object_functions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='views.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='geographical_view.js') }}"></script>

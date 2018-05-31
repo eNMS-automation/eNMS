@@ -17,11 +17,11 @@ for (i = 0; i < nodes.length; i++) {
   15, 10
   ).addTo(map);
 
+  marker.node_id = node.id;
   marker.on("dblclick", function (e) {
-    showObjectModal('node', '${node.id}');
+    showObjectModal('node', this.node_id);
   });
 
-  marker.node_id = node.id;
   markers_array.push(marker);
 }
 

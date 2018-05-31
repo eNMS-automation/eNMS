@@ -19,7 +19,7 @@ from flask import (
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
 from objects.forms import AddNode, AddLink
-from objects.models import Pool, Node, node_subtypes, Link
+from objects.models import Pool, Node, node_class, Link
 from os.path import join
 from passlib.hash import cisco_type7
 from scripts.models import Script
@@ -86,22 +86,11 @@ def view(view_type):
         link_fields=link_public_properties,
         labels=labels,
         names=pretty_names,
-        subtypes=node_subtypes,
+        subtypes=list(node_class),
         name_to_id=name_to_id,
-        node_table={
-            obj: OrderedDict([
-                (property, getattr(obj, property))
-                for property in type_to_public_properties[obj.type]
-            ])
-            for obj in Node.query.all()
-        },
-        link_table={
-            obj: OrderedDict([
-                (property, getattr(obj, property))
-                for property in type_to_public_properties[obj.type]
-            ])
-            for obj in Link.query.all()
-        })
+        nodes=Node.serialize(),
+        links=Link.serialize()
+    )
 
 
 ## AJAX calls

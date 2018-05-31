@@ -281,7 +281,10 @@ class Link(Object):
 
     @property
     def serialized(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['Link']}
+        properties = {p: str(getattr(self, p)) for p in cls_to_properties['Link']}
+        for node in ('source', 'destination'):
+            properties[node + '_properties'] = getattr(self, node).serialized
+        return properties
 
     @classmethod
     def get_properties(cls):

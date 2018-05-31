@@ -70,7 +70,7 @@ public_properties = (
 
 cls_to_properties = {
     'Node': ('id',) + node_public_properties,
-    'Link': ('id',) + link_public_properties,
+    'Link': ('id', 'color') + link_public_properties,
     'Pool': ('id',) + pool_public_properties,
     'Task': ('id',) + task_public_properties,
     'Script': ('id',) + script_public_properties,

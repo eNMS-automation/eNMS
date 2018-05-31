@@ -4,8 +4,6 @@ var layers = {
   'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg'
   };
 
-
-
 var markers_array = [];
 var polyline_array = [];
 var selection = [];

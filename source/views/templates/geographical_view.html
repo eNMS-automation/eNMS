@@ -61,13 +61,8 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
-            <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
-            {% if view == 'markercluster' %}
-            <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
-            {% elif view == 'glearth' %}
-            <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
-            {% endif %}
+
+
 
             {% if view == 'glearth' %}
             <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;">
@@ -77,6 +72,39 @@
               {{ buttons }}
             </div>
             <script>
+
+
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <script>
+    var node_fields = {{ node_fields|tojson|safe }};
+    var link_fields = {{ link_fields|tojson|safe }};
+  </script>
+  <script src="{{ url_for('objects_blueprint.static', filename='object_functions.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='views.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='geographical_view.js') }}"></script>
+  {% if view == 'glearth' %}
+    <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
+    <script src="{{ url_for('views_blueprint.static', filename='3d_view.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
+    {% if view == 'markercluster' %}
+      <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
+    {% endif %}
+    <script src="{{ url_for('views_blueprint.static', filename='2d_view.js') }}"></script>
+  {% endif %}
+  <script>
 
             var layers = {
               'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
@@ -342,29 +370,6 @@
                     }
                   });
                 });
-              </script>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-{% endblock content %}
-
-{% block javascripts %}
-  {{ super()}}
-  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
-  <script src="{{ url_for('views_blueprint.static', filename='views.js') }}"></script>
-  <script>
-    var node_fields = {{ node_fields|tojson|safe }};
-    var link_fields = {{ link_fields|tojson|safe }};
-  </script>
-  <script src="{{ url_for('objects_blueprint.static', filename='object_functions.js') }}"></script>
-  <script src="{{ url_for('views_blueprint.static', filename='geographical_view.js') }}"></script>
-  <script>
-
-
   {% if view != 'glearth' %}
     function switch_layer(layer){
       map.removeLayer(current_layer);

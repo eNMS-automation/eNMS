@@ -68,25 +68,25 @@
   <script>
     var graph = {  
       "nodes":[
-        {% for obj, properties in node_table.items() %}  
+        {% for node in nodes %}  
           {  
-            "x": {{ obj.id }},
-            "y": {{ obj.id }},
-            "id": {{ name_to_id[obj.name] }},
-            "real_id": {{ obj.id }},
-            "name": "{{ obj.name }}",
-            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + obj.subtype + '.gif') }}",
-            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + obj.subtype + '.gif') }}"
+            "x": {{ node.id }},
+            "y": {{ node.id }},
+            "id": {{ name_to_id[node.name] }},
+            "real_id": {{ node.id }},
+            "name": "{{ node.name }}",
+            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + node.type + '.gif') }}",
+            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + node.type + '.gif') }}"
           },
         {% endfor %}
       ],
       "links":[  
-        {% for obj, properties in link_table.items() %}
+        {% for link in links %}  
           {
-            "real_id": {{ obj.id }},
-            "name": "{{ obj.name }}",
-            "source": {{ name_to_id[obj['source']['name']] }},
-            "target": {{ name_to_id[obj['destination']['name']] }}
+            "real_id": {{ link.id }},
+            "name": "{{ link.name }}",
+            "source": {{ name_to_id[link.source_properties['name']] }},
+            "target": {{ name_to_id[link.destination_properties['name']] }}
           },
         {% endfor %}
       ]

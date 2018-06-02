@@ -73,6 +73,7 @@ def user_factory(**kwargs):
         user = User(**kwargs)
         db.session.add(user)
     db.session.commit()
+    return user
 
 
 class SyslogUDPHandler(BaseRequestHandler):

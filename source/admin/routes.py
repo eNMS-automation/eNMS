@@ -143,22 +143,14 @@ def parameters():
 
 @blueprint.route('/process_user', methods=['POST'])
 def process_user():
-    try:
-        user_factory(**request.form.to_dict())
-        return jsonify('success')
-    except IntegrityError:
-        return jsonify('duplicate')
+    return jsonify(user_factory(**request.form.to_dict()).serialized)
 
 
 @blueprint.route('/get_<user_id>', methods=['POST'])
 @login_required
 def get_user(user_id):
     user = get_obj(User, id=user_id)
-    properties = {
-        property: str(getattr(user, property))
-        for property in user_properties if property != 'password'
-    }
-    return jsonify(properties)
+    return jsonify(user.serialized)
 
 
 @blueprint.route('/delete_<user_id>', methods=['POST'])

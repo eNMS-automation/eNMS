@@ -49,7 +49,7 @@
                 </button>
               </div>
             </div>
-            <table id="user-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   {% for field in fields %}
@@ -86,7 +86,35 @@
 {% block javascripts %}
   {{ super() }}
   <script>
-    $('#user-table').DataTable();
+    var users = {{ users|tojson|safe }}
+  </script>
+  <script>
+    $('#table').DataTable();
+
+
+
+function addUser(mode, properties) {
+  values = [];
+  for (var i = 0; i < fields.length; i++) {
+    values.push(`${properties[fields[i]]}`);
+  }
+  values.push(
+    `<button type="button" class="btn btn-info btn-xs" onclick="showUserModal('${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteUser('${properties.id}')">Delete</button>`
+  );
+  if (mode == 'edit') {
+    table.row($(`#${properties.id}`)).data(values);
+  } else {
+    var rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr("id", `${properties.id}`);
+  }
+}
+
+(function() {
+  for (var i = 0; i < users.length; i++) {
+    addUser('create', users[i]);
+  }
+})();
 
     function showModal() {
       $('#title').text('Add a new user');
@@ -121,10 +149,10 @@
         values.push(`<td>${result[fields[i]]}</td>`);
       }
       values.push(`<td>
-      <button type="button" class="btn btn-info btn-xs" onclick="showUserModal('${name}')">Edit</button>
+      
       </td>
       <td>
-      <button type="button" class="btn btn-danger btn-xs" onclick="deleteUser('${name}')">Delete</button>
+      
       </td>`);
 
       if ($('#edit-form').parsley().validate()) {

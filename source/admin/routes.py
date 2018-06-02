@@ -50,7 +50,7 @@ def users():
         'users_overview.html',
         fields=user_search_properties,
         names=pretty_names,
-        users=User.query.all(),
+        users=User.serialize(),
         form=form
     )
 
@@ -150,10 +150,10 @@ def process_user():
         return jsonify('duplicate')
 
 
-@blueprint.route('/get_<name>', methods=['POST'])
+@blueprint.route('/get_<user_id>', methods=['POST'])
 @login_required
-def get_user(name):
-    user = get_obj(User, name=name)
+def get_user(user_id):
+    user = get_obj(User, id=user_id)
     properties = {
         property: str(getattr(user, property))
         for property in user_properties if property != 'password'
@@ -161,10 +161,10 @@ def get_user(name):
     return jsonify(properties)
 
 
-@blueprint.route('/delete_<name>', methods=['POST'])
+@blueprint.route('/delete_<user_id>', methods=['POST'])
 @login_required
-def delete_user(name):
-    user = get_obj(User, name=name)
+def delete_user(user_id):
+    user = get_obj(User, id=user_id)
     db.session.delete(user)
     db.session.commit()
     return jsonify({})

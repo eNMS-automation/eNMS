@@ -40,7 +40,6 @@ def workflows():
 @login_required
 def workflow_editor(workflow):
     form = AddScriptForm(request.form)
-    form.scripts.choices = [(s[0], s[0]) for s in default_scripts]
     workflow = get_obj(Workflow, name=workflow)
     return render_template(
         'workflow_editor.html',

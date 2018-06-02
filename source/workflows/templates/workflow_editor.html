@@ -6,8 +6,6 @@
   {{ super() }}
  <!-- Vis CSS -->
   <link href="{{ url_for('workflows_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
-  <!-- Vis JS -->
-  <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -52,6 +50,19 @@
     </div>
     <!-- end row -->
   </div>
+  <script>
+
+    </script>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script>
+    var workflow = {{ workflow|tojson|safe }};
+    console.log(workflow);
+  </script>
+  <!-- Vis JS -->
+  <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
   <script>
     function showModal(modal_name){
       $(`#${modal_name}`).modal('show');
@@ -146,7 +157,7 @@
 
     function addNodes() {
       var scripts = $('#scripts').val();
-      console.log(nodes.map(s => s.label));
+      console.log(scripts);
       for (var i = 0; i < scripts.length; i++) {
         if (!nodes.map(s => s.label).includes(scripts[i])) {
           nodes.add({
@@ -194,7 +205,6 @@
         'edges': edges.get({fields: ['to', 'from', 'type']}),
         'start': start
       }
-      console.log("{{ workflow.id }}");
       $.ajax({
         type: "POST",
         url: "/workflows/save_" + "{{ workflow.id }}",
@@ -216,16 +226,6 @@
         }
       });
     }
-    </script>
-{% endblock content %}
-
-{% block javascripts %}
-  {{ super()}}
-  <script>
-    var workflow = {{ workflow|tojson|safe }};
-    console.log(workflow);
-  </script>
-  <script>
     var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
     for (i = 0; i < types.length; i++) {
       $(`#${types[i]}-button`).text("Update");

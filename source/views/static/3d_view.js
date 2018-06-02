@@ -19,7 +19,8 @@ for (i = 0; i < nodes.length; i++) {
 
   marker.node_id = node.id;
   marker.on("dblclick", function (e) {
-    showObjectModal('node', this.node_id);
+    console.log(this);
+    showObjectModal('node', nodeId);
   });
 
   markers_array.push(marker);

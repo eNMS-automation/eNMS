@@ -6,6 +6,7 @@
   {{ super() }}
   <link href="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
   <style>
+    #main { height:90vh; }
     @media (min-width: 1000px) {
       .modal-lg {
         width: 1200px;
@@ -22,14 +23,14 @@
 
 {% block javascripts %}
   {{ super() }}
-  <!-- Difflib -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.js') }}"></script>
-  <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
-  <!-- Task management -->
   <script>
     var fields = {{ fields|tojson|safe }}
     var tasks = {{ tasks|tojson|safe }}
   </script>
+  <!-- Scheduling: wizard / bootstrap datetimepicker -->
+  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <!-- Task management -->
   <script src="{{ url_for('tasks_blueprint.static', filename='task_management.js') }}"></script>
+  <!-- Difflib -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.js') }}"></script>
 {% endblock javascripts %}

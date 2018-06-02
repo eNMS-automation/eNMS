@@ -82,7 +82,7 @@ function editObject() {
         if (mode == 'edit') {
           table.row($(`#${properties.id}`)).data(values);
         } else {
-          table.row.add(values).draw(false).node();
+          var rowNode = table.row.add(values).draw(false).node();
           $(rowNode).attr("id", `${properties.id}`);
         }
         message = `Workflow ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !');

@@ -52,6 +52,7 @@ for (i = 0; i < nodes.length; i++) {
   markers_array.push(marker);
 
   marker.on("dblclick", function (e) {
+    console.log(this.node_id);
     showObjectModal('node', this.node_id);
   });
 

@@ -1,5 +1,6 @@
 from base.database import db, get_obj
 from base.models import script_workflow_table, task_workflow_table, CustomBase
+from base.properties import cls_to_properties
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from time import sleep
@@ -32,6 +33,15 @@ class ScriptEdge(CustomBase):
         self.destination = destination
         self.name = '{} -> {}'.format(self.source.name, self.destination.name)
 
+    @property
+    def serialized(self):
+        properties = {
+            'name': self.name,
+            'type': self.type,
+            'source': source.serialized,
+            'destination': destination.serialized
+        }
+        return properties
 
 class Workflow(CustomBase):
 
@@ -69,6 +79,13 @@ class Workflow(CustomBase):
     def __init__(self, **kwargs):
         for property in self.properties:
             setattr(self, property, kwargs[property])
+
+    @property
+    def serialized(self):
+        properties = {p: str(getattr(self, p)) for p in cls_to_properties['Workflow']}
+        properties['scripts'] = [script.serialized for script in self.scripts]
+        properties['edges'] = [edge.serialized for edge in self.edges]
+        return properties
 
     def job(self, args):
         task, node, results = args

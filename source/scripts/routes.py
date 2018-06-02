@@ -105,7 +105,10 @@ def get_script(script_type, script_id):
 @blueprint.route('/script_type_<script_type>', methods=['POST'])
 @login_required
 def get_script_per_type(script_type):
-    return jsonify([s.name for s in type_to_class[script_type].query.all()])
+    return jsonify([{
+        'id': s.id,
+        'name': s.name
+    } for s in type_to_class[script_type].query.all()])
 
 
 @blueprint.route('/delete_<script_id>', methods=['POST'])

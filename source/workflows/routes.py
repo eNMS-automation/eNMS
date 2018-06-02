@@ -47,7 +47,7 @@ def workflow_editor(workflow):
         type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         form=form,
         names=pretty_names,
-        workflow=workflow
+        workflow=workflow.serialized
     )
 
 
@@ -92,9 +92,9 @@ def save_workflow(workflow_id):
     for edge in workflow.edges:
         db.session.delete(edge)
     db.session.commit()
+    print(request.json)
     for node in request.json['nodes']:
-        script = get_obj(Script, name=node['label'])
-        id_to_script[node['id']] = node['label']
+        script = get_obj(Script, id=node['id'])
         workflow.scripts.append(script)
     for edge in request.json['edges']:
         source = get_obj(Script, name=id_to_script[edge['from']])

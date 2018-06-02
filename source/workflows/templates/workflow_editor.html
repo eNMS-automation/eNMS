@@ -11,47 +11,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  {% for script_type, script_form in type_to_form.items() %}
-    <div id="edit-{{ script_type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="title"></h4>
-          </div>
-          {% set form = script_form %}
-          {% include script_type + '.html' %}
-        </div>
-      </div>
-    </div>
-  {% endfor %}
-  <div id="add-script" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Add script</h4>
-        </div>
-          <div class="modal-body">
-            <div class="form-group">
-            {{ form.script_type(class="form-control")}}
-            </div>
-            <div class="form-group">
-            {{ form.scripts(id="scripts", class="form-control", size=15)}}
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button class="btn btn-primary" type="reset">Reset</button>
-            <button type="submit" name="view_options" class="btn btn-success" onclick="addNodes()">Submit</button>
-          </div>
-      </div>
-    </div>
-  </div>
+  {% include 'editor_modals.html' %}
   <div class="right_col" role="main">
     <!-- begin row -->
     <div class="row">
@@ -234,9 +194,10 @@
         'edges': edges.get({fields: ['to', 'from', 'type']}),
         'start': start
       }
+      console.log("{{ workflow.id }}");
       $.ajax({
         type: "POST",
-        url: "/workflows/save_" + "{{ workflow.name }}",
+        url: "/workflows/save_" + "{{ workflow.id }}",
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify(ajax_data, null, '\t'),
         success: function(msg){
@@ -248,7 +209,7 @@
     function runWorkflow() {
       $.ajax({
         type: "POST",
-        url: "/workflows/run_" + "{{ workflow.name }}",
+        url: "/workflows/run_" + "{{ workflow.id }}",
         contentType: 'application/json;charset=UTF-8',
         success: function(){
           alertify.notify("Workflow successfully started", 'success', 5);
@@ -260,6 +221,10 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    var workflow = {{ workflow|tojson|safe }};
+    console.log(workflow);
+  </script>
   <script>
     var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
     for (i = 0; i < types.length; i++) {
@@ -275,17 +240,17 @@
         success: function(scripts){
           $("#scripts").empty();
           $.each(scripts, function(_, s) {
-            $("#scripts").append(`<option value="${s}">${s}</option>`);
+            $("#scripts").append(`<option value="${s.id}">${s.name}</option>`);
           });
         }
       });
     });
 
-    function showObjectModal(type, name) {
-      $('#title').text(`Edit ${name} properties`);
+    function showObjectModal(type, id) {
+      $('#title').text(`Edit properties`);
       $.ajax({
         type: "POST",
-        url: `/scripts/get/${type}/${name}`,
+        url: `/scripts/get/${type}/${id}`,
         success: function(properties){
           for (const [property, value] of Object.entries(properties)) {
             $(`#${type}-${property}`).val(value);

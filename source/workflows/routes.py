@@ -29,8 +29,8 @@ def workflows():
     return render_template(
         'workflow_management.html',
         names=pretty_names,
-        fields=('name', 'description'),
-        workflows=Workflow.query.all(),
+        fields=('name', 'description', 'type'),
+        workflows=Workflow.serialize(),
         form=WorkflowCreationForm(request.form),
         scheduling_form=scheduling_form
     )

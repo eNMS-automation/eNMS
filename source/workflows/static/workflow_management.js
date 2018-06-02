@@ -2,7 +2,31 @@
 
 var workflowId = null;
 var table = $('#table').DataTable();
-var fields = ['name', 'description', 'type'];
+
+function addWorkflow(mode, properties) {
+  var values = [];
+  for (i = 0; i < fields.length; i++) {
+    values.push(`${properties[fields[i]]}`);
+  }
+  values.push(
+    `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
+    `<a href="/workflows/manage_${properties.id}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Manage</a>`,
+    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Run</button>`,
+    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${properties.id}')">Delete</button>`
+  );
+  if (mode == 'edit') {
+    table.row($(`#${properties.id}`)).data(values);
+  } else {
+    var rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr("id", `${properties.id}`);
+  }
+}
+
+(function() {
+  for (var j = 0; j < workflows.length; j++) {
+    addWorkflow('create', workflows[j]);
+  }
+})();
 
 // Scheduling: run a workflow
 
@@ -62,29 +86,8 @@ function editObject() {
       dataType: "json",
       data: $("#edit-form").serialize(),
       success: function(properties){
-        var result = {};
         var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
-        var values = [];
-        $.each($("#edit-form").serializeArray(), function() {
-          result[this.name] = this.value;
-        });
-        for (i = 0; i < fields.length; i++) {
-          values.push(`${result[fields[i]]}`);
-        }
-        values.push(
-          `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
-          `<a href="/workflows/manage_${properties.id}" class="btn btn-info btn-xs">
-            <i class="fa fa-pencil"></i>Manage
-          </a>`,
-          `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Run</button>`,
-          `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${properties.id}')">Delete</button>`
-        );
-        if (mode == 'edit') {
-          table.row($(`#${properties.id}`)).data(values);
-        } else {
-          var rowNode = table.row.add(values).draw(false).node();
-          $(rowNode).attr("id", `${properties.id}`);
-        }
+        addWorkflow(mode, properties);
         message = `Workflow ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
         alertify.notify(message, 'success', 5);
       }

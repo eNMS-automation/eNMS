@@ -8,16 +8,13 @@ function addTask(mode, properties) {
       values.push(`${properties[fields[j]]}`);
     }
   }
-  if (properties.status == "active") {
-    var status = `<button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="pauseTask('${properties.id}')">Pause</button>`
-  } else {
-  var status = `<button id="pause-resume-{{ task.id }}" type="button" class="btn btn-danger btn-xs" onclick="resumeTask('${properties.id}')">Resume</button>`
-  }
+
+  var status = properties.status == "active" ? 'pause' : 'resume';
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showTaskLogs('${properties.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs" onclick="compareTaskLogs('${properties.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-info btn-xs" onclick="showTaskModal('${properties.id}')">Edit</button>`,
-    status,
+    `<button id="pause-resume-${properties.id}" type="button" class="btn btn-danger btn-xs" onclick="${status}Task('${properties.id}')">${status.charAt(0).toUpperCase() + status.substr(1)}</button>`,   
     `<button type="button" class="btn btn-danger btn-xs" onclick="deleteTask('${properties.id}')">Delete</button>`
   );
 

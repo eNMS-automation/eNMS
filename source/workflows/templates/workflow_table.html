@@ -1,6 +1,6 @@
 <div class="right_col" role="main">
   <!-- begin row -->
-  <div class="row" style="height: 350px">
+  <div class="row">
     <!-- begin column -->
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
@@ -24,29 +24,7 @@
                 <th style="width: 10%">Delete</th>
               </tr>
             </thead>
-            <tbody>
-              {% for workflow in workflows %}
-              <tr id="{{ workflow.id }}">
-                {% for field in form if field.widget.input_type != 'hidden'  %}
-                  <td>{{ workflow[field.name] }}</td>
-                {% endfor %}
-                <td>
-                  <button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('{{ workflow.id }}')">Edit</button>
-                </td>
-                <td>
-                  <a href="/workflows/manage_{{ workflow.id }}" class="btn btn-info btn-xs">
-                    <i class="fa fa-pencil"></i>Manage
-                  </a>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('{{ workflow.id }}')">Run</button>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('{{ workflow.id }}')">Delete</button>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
       </div>

@@ -14,6 +14,10 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    var fields = {{ fields|tojson|safe }};
+    var workflows = {{ workflows|tojson|safe }};
+  </script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <script src="{{ url_for('workflows_blueprint.static', filename='workflow_management.js') }}"></script>

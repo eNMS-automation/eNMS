@@ -9,7 +9,7 @@ function switch_layer(layer) {
   current_layer.addTo(map);
 }
 
-for (i = 0; i < nodes.length; i++) { 
+for (var i = 0; i < nodes.length; i++) { 
   var node = nodes[i]
   var marker = WE.marker(
   [node.latitude, node.longitude],
@@ -26,7 +26,7 @@ for (i = 0; i < nodes.length; i++) {
   markers_array.push(marker);
 }
 
-for (i = 0; i < links.length; i++) {
+for (var i = 0; i < links.length; i++) {
   var link = links[i] 
   var polygonSD = WE.polygon(
   [
@@ -55,19 +55,19 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: "json",
     success: function(objects){
-      for (i = 0; i < markers_array.length; i++) {
+      for (var i = 0; i < markers_array.length; i++) {
         if (objects['nodes'].includes(markers_array[i].node_id)) {
           markers_array[i].addTo(map);
         } else {
           markers_array[i].removeFrom(map);
         }
       }
-      for (i = 0; i < polyline_array.length; i++) {
+      for (var i = 0; i < polyline_array.length; i++) {
         try { polyline_array[i].destroy(); }
         catch(err) {};
       }
       polyline_array = [];
-      for (i = 0; i < objects['links'][1].length; i++) {
+      for (var i = 0; i < objects['links'][1].length; i++) {
         var source_latitude = objects['links'][1][i][0],
             source_longitude = objects['links'][1][i][1],
             destination_latitude = objects['links'][1][i][2],

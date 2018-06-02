@@ -5,7 +5,7 @@ var table = $('#table').DataTable();
 
 function addWorkflow(mode, properties) {
   var values = [];
-  for (i = 0; i < fields.length; i++) {
+  for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
@@ -23,8 +23,8 @@ function addWorkflow(mode, properties) {
 }
 
 (function() {
-  for (var j = 0; j < workflows.length; j++) {
-    addWorkflow('create', workflows[j]);
+  for (var i = 0; i < workflows.length; i++) {
+    addWorkflow('create', workflows[i]);
   }
 })();
 
@@ -70,7 +70,6 @@ function showWorkflowModal(id) {
     url: `/workflows/get_${workflowId}`,
     success: function(properties){
       for (const [property, value] of Object.entries(properties)) {
-        console.log(property, value);
         $(`#property-${property}`).val(value);
       }
     }

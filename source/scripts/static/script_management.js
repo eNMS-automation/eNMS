@@ -3,8 +3,8 @@ var table = $('#table').DataTable()
 
 function addScript(mode, properties) {
   values = [];
-  for (j = 0; j < fields.length; j++) {
-    values.push(`${properties[fields[j]]}`);
+  for (var i = 0; i < fields.length; i++) {
+    values.push(`${properties[fields[i]]}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showScriptModal('${properties.type}', '${properties.id}')">Edit</button>`,
@@ -20,13 +20,13 @@ function addScript(mode, properties) {
 }
 
 (function() {
-  for (i = 0; i < scripts.length; i++) {
+  for (var i = 0; i < scripts.length; i++) {
     addScript('create', scripts[i]);
   }
 })();
 
 // replace the button value of all script forms with "Update"
-for (i = 0; i < types.length; i++) {
+for (var i = 0; i < types.length; i++) {
   $(`#${types[i]}-button`).text("Update");
 }
 

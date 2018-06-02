@@ -37,7 +37,7 @@ function showLinkProperties(d) {
 
 function unselectAll() {
   d3.event.preventDefault();
-  for (i = 0; i < selected_nodes.length; i++) {
+  for (var i = 0; i < selected_nodes.length; i++) {
     d3.select(selected_nodes[i][0])
       .select('image')
       .attr("xlink:href", selected_nodes[i][1].img);

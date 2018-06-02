@@ -3,9 +3,9 @@ var table = $('#table').DataTable();
 
 function addTask(mode, properties) {
   values = [];
-  for (j = 0; j < fields.length; j++) {
+  for (var i = 0; i < fields.length; i++) {
     if (fields[j] != 'recurrent') {
-      values.push(`${properties[fields[j]]}`);
+      values.push(`${properties[fields[i]]}`);
     }
   }
 
@@ -27,7 +27,7 @@ function addTask(mode, properties) {
 }
 
 (function() {
-  for (i = 0; i < tasks.length; i++) {
+  for (var i = 0; i < tasks.length; i++) {
     addTask('create', tasks[i]);
   }
 })();
@@ -82,17 +82,17 @@ function compareTaskLogs(id) {
     dataType: 'json',
     success: function(results){
       $("#first_version,#second_version,#first_node,#second_node,#first_script,#second_script").empty();
-      for (i = 0; i < results.versions.length; i++) {
+      for (var i = 0; i < results.versions.length; i++) {
         value = results.versions[i];
         $("#first_version,#second_version").append($("<option></option>")
           .attr("value", value).text(value));
       }
-      for (i = 0; i < results.nodes.length; i++) {
+      for (var i = 0; i < results.nodes.length; i++) {
         value = results.nodes[i];
         $("#first_node,#second_node").append($("<option></option>")
           .attr("value", value).text(value));
       }
-      for (i = 0; i < results.scripts.length; i++) {
+      for (var i = 0; i < results.scripts.length; i++) {
         value = results.scripts[i];
         $("#first_script,#second_script").append($("<option></option>")
           .attr("value", value).text(value));

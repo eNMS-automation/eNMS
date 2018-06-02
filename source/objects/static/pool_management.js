@@ -3,8 +3,8 @@ var table = $('#table').DataTable();
 
 function addPool(mode, properties) {
   values = [];
-  for (j = 0; j < fields.length; j++) {
-    values.push(`${properties[fields[j]]}`);
+  for (var i = 0; i < fields.length; i++) {
+    values.push(`${properties[fields[i]]}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showPoolModal('${properties.id}')">Edit properties</button>`,
@@ -20,7 +20,7 @@ function addPool(mode, properties) {
 }
 
 (function() {
-  for (i = 0; i < pools.length; i++) {
+  for (var i = 0; i < pools.length; i++) {
     addPool('create', pools[i]);
   }
 })();

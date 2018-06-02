@@ -12,7 +12,7 @@ function switch_layer(layer){
   map.addLayer(current_layer);
 }
 
-for (i = 0; i < subtypes.length; i++) {
+for (var i = 0; i < subtypes.length; i++) {
   window[`icon_${subtypes[i]}`] = L.icon({
     iconUrl: `static/images/default/${subtypes[i]}.gif`,
     iconSize: [18, 12], // size of the icon
@@ -38,7 +38,7 @@ L.PolylineClusterable = L.Polyline.extend({
   setLatLng: function () {}
 });
 
-for (i = 0; i < nodes.length; i++) {
+for (var i = 0; i < nodes.length; i++) {
   var node = nodes[i]
   var marker = L.marker([
     node.latitude, 
@@ -83,7 +83,7 @@ for (i = 0; i < nodes.length; i++) {
   }
 }
 
-for (i = 0; i < links.length; i++) {
+for (var i = 0; i < links.length; i++) {
   var link = links[i]
   var pointA = new L.LatLng(link.source_properties.latitude, link.source_properties.longitude);
   var pointB = new L.LatLng(link.destination_properties.latitude, link.destination_properties.longitude);
@@ -158,14 +158,14 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: "json",
     success: function(objects){
-      for (i = 0; i < markers_array.length; i++) {
+      for (var i = 0; i < markers_array.length; i++) {
         if (objects['nodes'].includes(markers_array[i].node_id)) {
           markers_array[i].addTo(map);
         } else {
           markers_array[i].removeFrom(map);
         }
       }
-      for (i = 0; i < polyline_array.length; i++) {
+      for (var i = 0; i < polyline_array.length; i++) {
         if (objects['links'][0].includes(polyline_array[i].link_id)) {
           polyline_array[i].addTo(map);
         } else {

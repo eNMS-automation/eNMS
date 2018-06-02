@@ -5,9 +5,9 @@ function addObject(mode, type, properties) {
   var values = [];
   var table = type == 'node' ? nodeTable : linkTable;
   var fields = type == 'node' ? node_fields : link_fields
-  for (j = 0; j < fields.length; j++) {
-    var truncate = ["longitude", "latitude"].includes(fields[j]);
-    value = truncate ? parseFloat(properties[fields[j]]).toFixed(2) : properties[fields[j]]
+  for (var i = 0; i < fields.length; i++) {
+    var truncate = ["longitude", "latitude"].includes(fields[i]);
+    value = truncate ? parseFloat(properties[fields[i]]).toFixed(2) : properties[fields[i]]
     values.push(`${value}`);
   }
   values.push(
@@ -23,10 +23,10 @@ function addObject(mode, type, properties) {
 }
 
 (function() {
-  for (i = 0; i < nodes.length; i++) {
+  for (var i = 0; i < nodes.length; i++) {
     addObject('create', 'node', nodes[i]);
   }
-  for (i = 0; i < links.length; i++) {
+  for (var i = 0; i < links.length; i++) {
     addObject('create', 'link', links[i]);
   }
 })();

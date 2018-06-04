@@ -97,7 +97,7 @@ for (var i = 0; i < links.length; i++) {
     });
 
   polyline_array.push(polyline);
-  polyline.link_id = link.id;
+  polyline.link_id = parseInt(link.id);
 
   polyline.on("dblclick", function (e) {
     showObjectModal('link', this.link_id);

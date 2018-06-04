@@ -63,13 +63,13 @@ function processData() {
   }
 }
 
-function deleteUser(name) {
-  $(`#${name}`).remove();
+function deleteUser(userId) {
+  $(`#${userId}`).remove();
   $.ajax({
     type: "POST",
-    url: `/admin/delete_${name}`,
-    success: function() {
-      alertify.notify(`User ${name} deleted`, 'error', 5);
+    url: `/admin/delete_${userId}`,
+    success: function(userName) {
+      alertify.notify(`User ${userName} deleted`, 'error', 5);
     }
   });
 }

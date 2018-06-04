@@ -12,7 +12,7 @@ function showObjectModal(type, id) {
   if (type == "node") {
     $.ajax({
       type: "POST",
-      url: `/views/get_logs_${name}`,
+      url: `/views/get_logs_${id}`,
       success: function(logs){
       $("#logs").text(logs);
       }
@@ -30,7 +30,10 @@ function editObject(type) {
       data: $(`#edit-${type}-form`).serialize(),
       success: function(properties) {
         mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add';
-        addObject(mode, type, properties);
+        // the object can be edited from the views, in which case we don't need to add it to the table
+        if (typeof table !== 'undefined') {
+          addObjectToTable(mode, type, properties);
+        }
         message = `Object ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
         alertify.notify(message, 'success', 5);
       }

@@ -1,7 +1,7 @@
 var nodeTable = $('#node-table').DataTable();
 var linkTable = $('#link-table').DataTable();
 
-function addObject(mode, type, properties) {
+function addObjectToTable(mode, type, properties) {
   var values = [];
   var table = type == 'node' ? nodeTable : linkTable;
   var fields = type == 'node' ? node_fields : link_fields
@@ -24,10 +24,10 @@ function addObject(mode, type, properties) {
 
 (function() {
   for (var i = 0; i < nodes.length; i++) {
-    addObject('create', 'node', nodes[i]);
+    addObjectToTable('create', 'node', nodes[i]);
   }
   for (var i = 0; i < links.length; i++) {
-    addObject('create', 'link', links[i]);
+    addObjectToTable('create', 'link', links[i]);
   }
 })();
 

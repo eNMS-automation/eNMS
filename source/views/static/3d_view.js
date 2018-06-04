@@ -9,20 +9,17 @@ function switch_layer(layer) {
   current_layer.addTo(map);
 }
 
-for (var i = 0; i < nodes.length; i++) { 
+for (let i = 0; i < nodes.length; i++) { 
   var node = nodes[i]
   var marker = WE.marker(
   [node.latitude, node.longitude],
   'static/images/3D/default/router.gif', 
   15, 10
   ).addTo(map);
-
   marker.node_id = node.id;
   marker.on("dblclick", function (e) {
-    console.log(this);
-    showObjectModal('node', nodeId);
+    showObjectModal('node', nodes[i].id);
   });
-
   markers_array.push(marker);
 }
 

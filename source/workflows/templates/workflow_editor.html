@@ -16,8 +16,10 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var workflow = {{ workflow|tojson|safe }};
-    console.log(workflow);
+    var workflows = {{ workflows|tojson|safe }};
+    var scripts = {{ scripts|tojson|safe }};
+    var edges = {{ edges|tojson|safe }};
+    console.log(workflows, scripts, edges);
   </script>
   <!-- Vis JS -->
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>

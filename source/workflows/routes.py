@@ -46,7 +46,9 @@ def workflow_editor(workflow):
         type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         form=form,
         names=pretty_names,
-        workflow=workflow.serialized
+        workflows=Workflow.serialize(),
+        scripts=Script.serialize(),
+        edges=ScriptEdge.serialize()        
     )
 
 
@@ -85,7 +87,6 @@ def delete_workflow(workflow_id):
 @blueprint.route('/save_<workflow_id>', methods=['POST'])
 @login_required
 def save_workflow(workflow_id):
-    id_to_script = {}
     workflow = get_obj(Workflow, id=workflow_id)
     workflow.scripts = []
     for edge in workflow.edges:
@@ -96,8 +97,8 @@ def save_workflow(workflow_id):
         script = get_obj(Script, id=node['id'])
         workflow.scripts.append(script)
     for edge in request.json['edges']:
-        source = get_obj(Script, name=id_to_script[edge['from']])
-        destination = get_obj(Script, name=id_to_script[edge['to']])
+        source = get_obj(Script, id=int(edge['from']))
+        destination = get_obj(Script, id=int(edge['to']))
         script_edge = ScriptEdge(edge['type'], source, destination)
         db.session.add(script_edge)
         db.session.commit()

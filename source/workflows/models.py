@@ -38,8 +38,8 @@ class ScriptEdge(CustomBase):
         properties = {
             'name': self.name,
             'type': self.type,
-            'source': source.serialized,
-            'destination': destination.serialized
+            'source': self.source.serialized,
+            'destination': self.destination.serialized
         }
         return properties
 

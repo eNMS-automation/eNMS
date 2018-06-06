@@ -1,4 +1,4 @@
-var table = $('#log-table').DataTable();
+table = $('#log-table').DataTable();
 
 function addLog(properties) {
   values = [];
@@ -22,7 +22,7 @@ function filterLogs() {
     url: "/filter_logs",
     data: $('#form').serialize(),
     success: function(logs) {
-      table.clear();
+      table.clear().draw();;
       for (var i = 0; i < logs.length; i++) {
         addLog(logs[i]);
       }

@@ -88,21 +88,20 @@ def logs():
 @blueprint.route('/filter_logs', methods=['POST'])
 @flask_login.login_required
 def filter_logs():
-    logs = [log.serialized for log in Log.query.all() if all(
+    print(Log.serialize())
+    logs = [log for log in Log.serialize() if all(
         # if the node-regex property is not in the request, the
         # regex box is unticked and we only check that the values
         # are equal.
-        str(value) == request.form[property]
-        if not property + 'regex' in request.form
+        str(val) == request.form[prop] if not prop + 'regex' in request.form
         # if it is ticked, we use re.search to check that the value
-        # of the node property matches the regular expression.
-        else search(request.form[property], str(value))
-        for property, value in log.__dict__.items()
-        # we consider only the properties in the form
+        # of the node property matches the regular expression,
         # providing that the property field in the form is not empty
         # (empty field <==> property ignored)
-        if property in request.form and request.form[property]
+        else search(request.form[prop], str(val)) for prop, val in log.items()
+        if prop in request.form and request.form[prop]
     )]
+    print(logs)
     return jsonify(logs)
 
 

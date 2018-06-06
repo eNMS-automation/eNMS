@@ -14,9 +14,11 @@ for (var i = 0; i < dates.length; i++) {
 
 function schedule(){
   $('#wizard').smartWizard({
-    onFinish: scheduleScript
+    onFinish: scheduleScript,
+    enableFinishButton: true,
   });
   $('.buttonNext').addClass('btn btn-success');
   $('.buttonPrevious').addClass('btn btn-primary');
   $('.buttonFinish').addClass('btn btn-default');
+  $('#wizard').smartWizard('enableFinish', true);
 }

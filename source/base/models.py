@@ -56,20 +56,6 @@ task_script_table = Table(
     Column('task_id', Integer, ForeignKey('Task.id'))
 )
 
-task_workflow_table = Table(
-    'task_workflow_association',
-    CustomBase.metadata,
-    Column('workflow_id', Integer, ForeignKey('Workflow.id')),
-    Column('task_id', Integer, ForeignKey('Task.id'))
-)
-
-script_workflow_table = Table(
-    'script_workflow_association',
-    CustomBase.metadata,
-    Column('script_id', Integer, ForeignKey('Script.id')),
-    Column('workflow_id', Integer, ForeignKey('Workflow.id'))
-)
-
 pool_node_table = Table(
     'pool_node_association',
     CustomBase.metadata,

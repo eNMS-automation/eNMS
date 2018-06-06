@@ -16,7 +16,6 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var workflows = {{ workflows|tojson|safe }};
     var scripts = {{ scripts|tojson|safe }};
     var edges = {{ edges|tojson|safe }};
     console.log(workflows, scripts, edges);

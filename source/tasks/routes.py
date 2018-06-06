@@ -78,8 +78,8 @@ def view_scheduler():
     selection = map(int, session['selection'])
     scripts = request.form.getlist('scripts')
     workflows = request.form.getlist('workflows')
-    data['scripts'] = [get_obj(Script, name=name) for name in scripts]
-    data['workflows'] = [get_obj(Workflow, name=name) for name in workflows]
+    data['scripts'] = [get_obj(Script, id=id) for id in scripts]
+    data['workflows'] = [get_obj(Workflow, id=id) for id in workflows]
     data['nodes'] = [get_obj(Node, id=id) for id in selection]
     data['user'] = current_user
     task_factory(**data)
@@ -93,9 +93,9 @@ def job_scheduler(type, job_id):
     data = request.form.to_dict()
     data['scripts'] = [get_obj(cls, id=job_id)] if type == 'script' else []
     data['workflows'] = [get_obj(cls, id=job_id)] if type == 'workflow' else []
-    data['nodes'] = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
-    for pool in request.form.getlist('pools'):
-        data['nodes'].extend(get_obj(Pool, name=pool).nodes)
+    data['nodes'] = [get_obj(Node, id=node_id) for node_id in request.form.getlist('nodes')]
+    for pool_id in request.form.getlist('pools'):
+        data['nodes'].extend(get_obj(Pool, name=pool_id).nodes)
     data['user'] = current_user
     task_factory(**data)
     return jsonify({})

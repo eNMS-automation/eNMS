@@ -36,19 +36,21 @@ def workflows():
     )
 
 
-@blueprint.route('/workflow_editor')
+@blueprint.route('/workflow_editor/')
+@blueprint.route('/workflow_editor/<workflow_id>')
 @login_required
-def workflow_editor():
+def workflow_editor(workflow_id=None):
     form = WorkflowEditorForm(request.form)
     form.workflow.choices = Workflow.choices()
+    workflow = get_obj(Workflow, id=workflow_id).serialized if workflow_id else None
     return render_template(
         'workflow_editor.html',
         type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         form=form,
         names=pretty_names,
-        workflows=Workflow.serialize(),
         scripts=Script.serialize(),
-        edges=ScriptEdge.serialize()        
+        edges=ScriptEdge.serialize(),
+        workflow=workflow 
     )
 
 

@@ -3,7 +3,6 @@ from base.database import db, get_obj
 from base.models import (
     task_node_table,
     task_script_table,
-    task_workflow_table,
     CustomBase
 )
 from datetime import datetime, timedelta
@@ -58,11 +57,8 @@ class Task(CustomBase):
         secondary=task_script_table,
         back_populates="tasks"
     )
-    workflows = relationship(
-        "Workflow",
-        secondary=task_workflow_table,
-        back_populates="tasks"
-    )
+    workflow_id = Column(Integer, ForeignKey('Workflow.id'))
+    workflow = relationship('Workflow', back_populates='tasks')
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='tasks')
 
@@ -87,7 +83,6 @@ class Task(CustomBase):
         self.nodes = data['nodes']
         self.user = data['user']
         self.scripts = data['scripts']
-        self.workflows = data['workflows']
         self.frequency = data['frequency']
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
@@ -174,6 +169,7 @@ class Task(CustomBase):
 
 def task_factory(**kwargs):
     task = get_obj(Task, name=kwargs['name'])
+    print(task, kwargs)
     if task:
         for property, value in kwargs.items():
             if property in ('start_date', 'end_date') and value:

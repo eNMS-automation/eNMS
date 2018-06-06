@@ -1,6 +1,6 @@
 from base.database import db, get_obj
 from base.helpers import integrity_rollback, str_dict
-from base.models import script_workflow_table, task_script_table, CustomBase
+from base.models import task_script_table, CustomBase
 from base.properties import cls_to_properties
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
@@ -32,11 +32,6 @@ class Script(CustomBase):
     tasks = relationship(
         "Task",
         secondary=task_script_table,
-        back_populates="scripts"
-    )
-    workflows = relationship(
-        "Workflow",
-        secondary=script_workflow_table,
         back_populates="scripts"
     )
 

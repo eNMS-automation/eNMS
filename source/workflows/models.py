@@ -1,5 +1,5 @@
 from base.database import db, get_obj
-from base.models import script_workflow_table, task_workflow_table, CustomBase
+from base.models import CustomBase
 from base.properties import cls_to_properties
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
@@ -53,21 +53,7 @@ class Workflow(CustomBase):
     type = Column(String)
     vendor = Column(String)
     operating_system = Column(String)
-    scripts = relationship(
-        'Script',
-        secondary=script_workflow_table,
-        back_populates='workflows'
-    )
-    tasks = relationship(
-        "Task",
-        secondary=task_workflow_table,
-        back_populates="workflows"
-    )
-    start_script_id = Column(Integer, ForeignKey('Script.id'))
-    start_script = relationship(
-        'Script',
-        primaryjoin="Script.id == Workflow.start_script_id"
-    )
+    tasks = relationship('Task', back_populates='workflow')
     edges = relationship('ScriptEdge', back_populates='workflow')
 
     properties = (
@@ -83,7 +69,6 @@ class Workflow(CustomBase):
     @property
     def serialized(self):
         properties = {p: str(getattr(self, p)) for p in cls_to_properties['Workflow']}
-        properties['scripts'] = [script.serialized for script in self.scripts]
         properties['edges'] = [edge.serialized for edge in self.edges]
         return properties
 

@@ -11,8 +11,7 @@ function addWorkflow(mode, properties) {
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
-    `<a href="/workflows/manage_${properties.name}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Manage</a>`,
-    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Run</button>`,
+    `<a href="/workflows/workflow_editor/${properties.id}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Manage</a>`,
     `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {

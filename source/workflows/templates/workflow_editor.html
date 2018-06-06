@@ -68,35 +68,20 @@
       }
     };
 
-    var workflow_nodes = [
-      {% for node in workflow.scripts %}
-        {
-          id: '{{ node.id }}',
-          label: '{{ node.name }}',
-          type: '{{ node.type }}',
-          {% if workflow.start_script == node %}
-            color: 'green',
-          {% endif %}
-        },
-      {% endfor %}
-    ];
-
-    var edge_type = 'success';
-    var workflow_edges = [
-      {% for edge in workflow.edges %}
-        {
-          from: '{{ edge['source']['id'] }}',
-          to: '{{ edge['destination']['id'] }}',
-          type: '{{ edge['type'] }}',
-          label: '{{ edge['type'] }}',
-          color: { color: '{{ edge['type'] }}' == 'success' ? 'green' : 'red' },
-          arrows: {to: {enabled: true}}
-        },
-      {% endfor %}
-    ];
-
-    var nodes = new vis.DataSet(workflow_nodes);
-    var edges = new vis.DataSet(workflow_edges);
+    // when a filter is selected, apply it
+    $('#workflow').on('change', function() {
+      $.ajax({
+        type: "POST",
+        url: `/workflows/get/${this.value}`,
+        dataType: "json",
+        success: function(workflow){
+        console.log(workflow);
+        alertify.notify(`Workflow '${workflow.name}' displayed`, 'success', 5);
+        }
+      });
+    });
+    var nodes = new vis.DataSet();
+    var edges = new vis.DataSet();
 
     // Create a DataSet with data (enables two way data binding)
     var data = {nodes: nodes, edges: edges};
@@ -167,7 +152,7 @@
       }
       $.ajax({
         type: "POST",
-        url: "/workflows/save_" + "{{ workflow.id }}",
+        url: `/workflows/save_${workflow.id}`,
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify(ajax_data, null, '\t'),
         success: function(msg){
@@ -179,7 +164,7 @@
     function runWorkflow() {
       $.ajax({
         type: "POST",
-        url: "/workflows/run_" + "{{ workflow.id }}",
+        url: `/workflows/run_${workflow.id}`,
         contentType: 'application/json;charset=UTF-8',
         success: function(){
           alertify.notify("Workflow successfully started", 'success', 5);

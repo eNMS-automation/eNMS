@@ -2,7 +2,7 @@ from base.database import db, get_obj
 from base.properties import pretty_names
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
-from .forms import AddScriptForm, WorkflowCreationForm
+from .forms import WorkflowEditorForm, WorkflowCreationForm
 from .models import ScriptEdge, Workflow, workflow_factory
 from objects.models import Node, Pool
 from scripts.forms import SchedulingForm
@@ -36,11 +36,11 @@ def workflows():
     )
 
 
-@blueprint.route('/manage_<workflow>', methods=['GET', 'POST'])
+@blueprint.route('/workflow_editor')
 @login_required
-def workflow_editor(workflow):
-    form = AddScriptForm(request.form)
-    workflow = get_obj(Workflow, name=workflow)
+def workflow_editor():
+    form = WorkflowEditorForm(request.form)
+    form.workflow.choices = Workflow.choices()
     return render_template(
         'workflow_editor.html',
         type_to_form={t: s(request.form) for t, s in type_to_form.items()},
@@ -55,16 +55,11 @@ def workflow_editor(workflow):
 ## AJAX calls
 
 
-@blueprint.route('/get_<workflow_id>', methods=['POST'])
+@blueprint.route('/get/<workflow_id>', methods=['POST'])
 @login_required
 def get_workflow(workflow_id):
     workflow = get_obj(Workflow, id=workflow_id)
-    properties = ('name', 'description', 'type')
-    workflow_properties = {
-        property: str(getattr(workflow, property))
-        for property in properties
-    }
-    return jsonify(workflow_properties)
+    return jsonify(workflow.serialized)
 
 
 @blueprint.route('/edit_workflow', methods=['POST'])
@@ -75,7 +70,7 @@ def edit_workflow():
     return jsonify(workflow.serialized)
 
 
-@blueprint.route('/delete_<workflow_id>', methods=['POST'])
+@blueprint.route('/delete/<workflow_id>', methods=['POST'])
 @login_required
 def delete_workflow(workflow_id):
     workflow = get_obj(Workflow, id=workflow_id)
@@ -84,7 +79,7 @@ def delete_workflow(workflow_id):
     return jsonify(workflow.name)
 
 
-@blueprint.route('/save_<workflow_id>', methods=['POST'])
+@blueprint.route('/save/<workflow_id>', methods=['POST'])
 @login_required
 def save_workflow(workflow_id):
     workflow = get_obj(Workflow, id=workflow_id)

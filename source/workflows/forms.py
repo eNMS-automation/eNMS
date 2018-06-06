@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField, SelectMultipleField, TextField
 
 
-class AddScriptForm(FlaskForm):
+class WorkflowEditorForm(FlaskForm):
+    workflow = SelectField('Workflow', choices=())
     script_type_choices = (
         ('napalm_action', 'NAPALM action'),
         ('netmiko_config', 'Netmiko configuration'),

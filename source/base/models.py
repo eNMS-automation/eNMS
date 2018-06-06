@@ -34,20 +34,12 @@ class Log(CustomBase):
     source = Column(String)
     content = Column(String)
 
-    properties = (
-        'source',
-        'content'
-    )
-
     def __init__(self, source, content):
         self.source = source
         self.content = content
 
     def __repr__(self):
         return self.content
-
-    def get_properties(self):
-        return [getattr(self, property) for property in self.properties]
 
 
 task_node_table = Table(

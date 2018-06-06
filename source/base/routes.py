@@ -77,6 +77,7 @@ def logs():
         'logs_overview.html',
         form=form,
         names=pretty_names,
+        fields=('source', 'content'),
         logs=Log.serialize(),
     )
 

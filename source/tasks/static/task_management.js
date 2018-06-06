@@ -4,7 +4,7 @@ var table = $('#table').DataTable();
 function addTask(mode, properties) {
   values = [];
   for (var i = 0; i < fields.length; i++) {
-    if (fields[j] != 'recurrent') {
+    if (fields[i] != 'recurrent') {
       values.push(`${properties[fields[i]]}`);
     }
   }

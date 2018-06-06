@@ -77,7 +77,7 @@ def logs():
         'logs_overview.html',
         form=form,
         names=pretty_names,
-        logs=Log.query.all(),
+        logs=Log.serialize(),
     )
 
 
@@ -87,7 +87,7 @@ def logs():
 @blueprint.route('/filter_logs', methods=['POST'])
 @flask_login.login_required
 def filter_logs():
-    logs = [log.get_properties() for log in Log.query.all() if all(
+    logs = [log.serialized for log in Log.query.all() if all(
         # if the node-regex property is not in the request, the
         # regex box is unticked and we only check that the values
         # are equal.

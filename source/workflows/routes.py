@@ -70,7 +70,7 @@ def get_workflow(workflow_id):
 def edit_workflow():
     workflow = workflow_factory(**request.form.to_dict())
     db.session.commit()
-    return jsonify({'name': workflow.name, 'id': workflow.id})
+    return jsonify(workflow.serialized)
 
 
 @blueprint.route('/delete_<workflow_id>', methods=['POST'])

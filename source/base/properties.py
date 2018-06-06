@@ -55,13 +55,11 @@ script_public_properties = (
     'waiting_time'
 )
 
-
 workflow_public_properties = (
     'name',
     'description',
     'type',
 )
-
 
 user_public_properties = (
     'name',
@@ -69,13 +67,16 @@ user_public_properties = (
     'access_rights'
 )
 
+log_public_properties = (
+    'source',
+    'content'
+)
 
 parameters_public_properties = (
     'default_longitude',
     'default_latitude',
     'default_zoom_level'
 )
-
 
 public_properties = (
     node_public_properties +
@@ -90,7 +91,8 @@ cls_to_properties = {
     'Script': ('id',) + script_public_properties,
     'Parameters': parameters_public_properties,
     'Workflow': ('id',) + workflow_public_properties,
-    'User': ('id',) + user_public_properties
+    'User': ('id',) + user_public_properties,
+    'Log': ('id',) + log_public_properties
 }
 
 type_to_public_properties = OrderedDict([

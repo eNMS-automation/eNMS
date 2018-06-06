@@ -33,7 +33,7 @@
                     </thead>
                     <tbody id="log-body">
                       {% for log in logs %}
-                        <tr id="{{ log.id }}">
+                        <tr>
                           {% for property in form.properties %}
                             <td>{{ log[property] }}</td>
                           {% endfor %}
@@ -88,7 +88,21 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    $('#log-table').DataTable();
+    var fields = {{ fields|tojson|safe }}
+    var logs = {{ logs|tojson|safe }}
+  </script>
+  <script>
+    var table = $('#log-table').DataTable();
+
+    function addPool(properties) {
+      values = [];
+      for (var i = 0; i < fields.length; i++) {
+        values.push(`${properties[fields[i]]}`);
+      }
+      values.push(`<button type="button" class="btn btn-danger btn-xs" onclick="deleteLog('${properties.id}')">Delete</button>`);
+      table.row.add(values).draw(false);
+    }
+
 
     function filterLogs() {
       $.ajax({
@@ -96,14 +110,14 @@
         url: "/filter_logs",
         data: $('#form').serialize(),
         success: function(logs) {
-          $("#log-body").empty();
-          for (i = 0; i < logs.length; i++) {
-            log = ['<tr>'];
-            for (j = 0; j < logs[i].length; j++) {
-              log.push(`<td>${logs[i][j]}</td>`);
+          table.clear();
+          for (var i = 0; i < logs.length; i++) {
+            log = [];
+            for (var j = 0; j < logs[i].length; j++) {
+              log.push(`${logs[i][j]}`);
             }
-            log.push('</tr>');
-            $("#log-body").append(log.join(''));
+            table.row.add(log).draw(false);
+
           }
           alertify.notify(`Logs successfully filtered !`, 'success', 5);
         }

@@ -69,6 +69,7 @@ class Workflow(CustomBase):
     @property
     def serialized(self):
         properties = {p: str(getattr(self, p)) for p in cls_to_properties['Workflow']}
+        properties['tasks'] = [task.serialized for task in self.tasks]
         properties['edges'] = [edge.serialized for edge in self.edges]
         return properties
 

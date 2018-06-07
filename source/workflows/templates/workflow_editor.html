@@ -16,9 +16,8 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var scripts = {{ scripts|tojson|safe }};
     var edges = {{ edges|tojson|safe }};
-    console.log(workflows, scripts, edges);
+    console.log(scripts, edges);
   </script>
   <!-- Vis JS -->
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
@@ -67,6 +66,12 @@
       }
     };
 
+    // Create a DataSet with data (enables two way data binding)
+    var nodes = new vis.DataSet([]);
+        edges = new vis.DataSet([]);
+        data = {nodes: nodes, edges: edges};
+        network = new vis.Network(container, data, dsoptions);
+
     // when a filter is selected, apply it
     $('#workflow').on('change', function() {
       $.ajax({
@@ -74,17 +79,20 @@
         url: `/workflows/get/${this.value}`,
         dataType: "json",
         success: function(workflow){
-        console.log(workflow);
+          var nodes = new vis.DataSet([]);
+          for (var i = 0; i < workflow.tasks; i++) {
+            var task = workflow[i];
+            nodes.push({
+              id: task.id,
+              label: task.name,
+            })
+          }
+          var data = {nodes: new vis.DataSet(nodes)};
+          network.setData(data);
         alertify.notify(`Workflow '${workflow.name}' displayed`, 'success', 5);
         }
       });
     });
-    var nodes = new vis.DataSet();
-    var edges = new vis.DataSet();
-
-    // Create a DataSet with data (enables two way data binding)
-    var data = {nodes: nodes, edges: edges};
-    var network = new vis.Network(container, data, dsoptions);
 
     network.on( 'doubleClick', function(properties) {
         var ids = properties.nodes;
@@ -151,7 +159,7 @@
       }
       $.ajax({
         type: "POST",
-        url: `/workflows/save_${workflow.id}`,
+        url: `/workflows/save/${workflow.id}`,
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify(ajax_data, null, '\t'),
         success: function(msg){
@@ -204,29 +212,5 @@
       $(`#edit-${type}`).modal('show');
     }
 
-    function createScript(type) {
-      $.ajax({
-        type: "POST",
-        url: `/scripts/create_script_${type}`,
-        dataType: "json",
-        data: $(`#${type}-form`).serialize(),
-        success: function() {
-          alertify.notify("Script updated", 'success', 5);
-        }
-      });
-    }
-
-    function editObject(type) {
-      $.ajax({
-        type: "POST",
-        url: `/scripts/edit_${type}`,
-        dataType: "json",
-        data: $(`#${type}-form`).serialize(),
-        success: function(msg){
-          alertify.notify('Script edited', 'success', 5);
-        }
-      });
-      $(`#edit-${type}`).modal('hide');
-    }
   </script>
 {% endblock javascripts %}

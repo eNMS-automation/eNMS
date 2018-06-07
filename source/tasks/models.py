@@ -95,11 +95,6 @@ class Task(CustomBase):
             value = self.datetime_conversion(js_date) if js_date else None
             setattr(self, date, value)
         self.is_active = True
-        if self.frequency:
-            self.recurrent = True
-            self.recurrent_scheduling()
-        else:
-            self.one_time_scheduling()
 
     @property
     def description(self):
@@ -109,6 +104,13 @@ class Task(CustomBase):
             'Creation time: ' + self.creation_time,
             'Creator: ' + self.creator
         ])
+
+    def schedule(self):
+        if self.frequency:
+            self.recurrent = True
+            self.recurrent_scheduling()
+        else:
+            self.one_time_scheduling()
 
     def datetime_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')

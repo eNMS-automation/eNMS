@@ -5,9 +5,7 @@ from flask_login import login_required
 from .forms import WorkflowEditorForm, WorkflowCreationForm
 from .models import ScriptEdge, Workflow, workflow_factory
 from objects.models import Node, Pool
-from scripts.forms import SchedulingForm
-from scripts.models import default_scripts, Script
-from scripts.routes import type_to_form
+from tasks.models import Task
 
 blueprint = Blueprint(
     'workflows_blueprint',
@@ -23,16 +21,12 @@ blueprint = Blueprint(
 @blueprint.route('/workflow_management')
 @login_required
 def workflows():
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.nodes.choices = Node.choices()
-    scheduling_form.pools.choices = Pool.choices()
     return render_template(
         'workflow_management.html',
         names=pretty_names,
         fields=('name', 'description', 'type'),
         workflows=Workflow.serialize(),
-        form=WorkflowCreationForm(request.form),
-        scheduling_form=scheduling_form
+        form=WorkflowCreationForm(request.form)
     )
 
 
@@ -45,10 +39,8 @@ def workflow_editor(workflow_id=None):
     workflow = get_obj(Workflow, id=workflow_id).serialized if workflow_id else None
     return render_template(
         'workflow_editor.html',
-        type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         form=form,
         names=pretty_names,
-        scripts=Script.serialize(),
         edges=ScriptEdge.serialize(),
         workflow=workflow 
     )
@@ -85,23 +77,23 @@ def delete_workflow(workflow_id):
 @login_required
 def save_workflow(workflow_id):
     workflow = get_obj(Workflow, id=workflow_id)
-    workflow.scripts = []
+    workflow.tasks = []
     for edge in workflow.edges:
         db.session.delete(edge)
     db.session.commit()
     print(request.json)
     for node in request.json['nodes']:
-        script = get_obj(Script, id=node['id'])
-        workflow.scripts.append(script)
+        task = get_obj(Task, id=node['id'])
+        workflow.tasks.append(task)
     for edge in request.json['edges']:
-        source = get_obj(Script, id=int(edge['from']))
-        destination = get_obj(Script, id=int(edge['to']))
+        source = get_obj(Task, id=int(edge['from']))
+        destination = get_obj(Task, id=int(edge['to']))
         script_edge = ScriptEdge(edge['type'], source, destination)
         db.session.add(script_edge)
         db.session.commit()
         workflow.edges.append(script_edge)
     if request.json['start']:
         start_id = request.json['start']['id']
-        workflow.start_script = get_obj(Script, id=start_id)
+        workflow.start_script = get_obj(Task, id=start_id)
     db.session.commit()
     return jsonify({})

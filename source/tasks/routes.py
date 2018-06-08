@@ -4,12 +4,11 @@ from base.properties import task_public_properties
 from difflib import SequenceMatcher
 from flask import Blueprint, jsonify, render_template, request, session
 from flask_login import current_user, login_required
-from .forms import CompareForm
+from .forms import CompareForm, SchedulingForm
 from .models import Task, task_factory
 from objects.models import Pool, Node
 from scripts.models import Script
 from re import search, sub
-from views.forms import SchedulingForm
 from workflows.models import Workflow
 
 blueprint = Blueprint(
@@ -71,31 +70,14 @@ def calendar():
 ## AJAX calls
 
 
-@blueprint.route('/view_scheduler', methods=['POST'])
+@blueprint.route('/scheduler', methods=['POST'])
 @login_required
 def view_scheduler():
     data = request.form.to_dict()
-    selection = map(int, session['selection'])
-    scripts = request.form.getlist('scripts')
-    workflows = request.form.getlist('workflows')
-    data['scripts'] = [get_obj(Script, id=id) for id in scripts]
-    data['workflows'] = [get_obj(Workflow, id=id) for id in workflows]
-    data['nodes'] = [get_obj(Node, id=id) for id in selection]
-    data['user'] = current_user
-    task_factory(**data)
-    return jsonify({})
-
-
-@blueprint.route('/job_scheduler/<type>/<job_id>', methods=['POST'])
-@login_required
-def job_scheduler(type, job_id):
-    cls = Script if type == 'script' else Workflow
-    data = request.form.to_dict()
-    data['scripts'] = [get_obj(cls, id=job_id)] if type == 'script' else []
-    data['workflows'] = [get_obj(cls, id=job_id)] if type == 'workflow' else []
-    data['nodes'] = [get_obj(Node, id=node_id) for node_id in request.form.getlist('nodes')]
+    data['scripts'] = [get_obj(Script, id=id) for id in request.form.getlist('scripts')]
+    data['nodes'] = [get_obj(Node, id=id) for id in request.form.getlist('scripts')]
     for pool_id in request.form.getlist('pools'):
-        data['nodes'].extend(get_obj(Pool, name=pool_id).nodes)
+        data['nodes'].extend(get_obj(Pool, id=pool_id).nodes)
     data['user'] = current_user
     task_factory(**data)
     return jsonify({})

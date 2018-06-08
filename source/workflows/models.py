@@ -6,9 +6,9 @@ from sqlalchemy.orm import relationship
 from time import sleep
 
 
-class ScriptEdge(CustomBase):
+class WorkflowEdge(CustomBase):
 
-    __tablename__ = 'ScriptEdge'
+    __tablename__ = 'WorkflowEdge'
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -16,13 +16,13 @@ class ScriptEdge(CustomBase):
     source_id = Column(Integer, ForeignKey('Script.id'))
     source = relationship(
         'Script',
-        primaryjoin="Script.id == ScriptEdge.source_id",
+        primaryjoin="Script.id == WorkflowEdge.source_id",
         backref='destinations'
     )
     destination_id = Column(Integer, ForeignKey('Script.id'))
     destination = relationship(
         'Script',
-        primaryjoin="Script.id == ScriptEdge.destination_id"
+        primaryjoin="Script.id == WorkflowEdge.destination_id"
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='edges')
@@ -54,7 +54,7 @@ class Workflow(CustomBase):
     vendor = Column(String)
     operating_system = Column(String)
     tasks = relationship('Task', back_populates='workflow')
-    edges = relationship('ScriptEdge', back_populates='workflow')
+    edges = relationship('WorkflowEdge', back_populates='workflow')
 
     properties = (
         'name',
@@ -75,7 +75,6 @@ class Workflow(CustomBase):
 
     def job(self, args):
         task, node, results = args
-        layer, visited = {self.start_script}, set()
         while layer:
             new_layer = set()
             for script in layer:

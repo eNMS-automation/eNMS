@@ -35,23 +35,6 @@ function showSchedulingModal(id){
   $("#scheduling").modal('show');
 }
 
-function scheduleScript() {
-  if ($("#scheduling-form").parsley().validate()) {
-    $.ajax({
-      type: "POST",
-      url: `/tasks/job_scheduler/workflow/${workflowId}`,
-      dataType: "json",
-      data: $("#scheduling-form").serialize(),
-      success: function() {
-        alertify.notify('Task scheduled', 'success', 5);
-      }
-    });
-    $("#scheduling").modal('hide');
-  } else {
-    alertify.notify('Some fields are missing', 'error', 5);
-  }
-}
-
 // Properties modal: add or edit a workflow
 
 // open modal to add a new workflow

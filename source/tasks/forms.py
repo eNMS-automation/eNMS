@@ -1,7 +1,27 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, TextAreaField
+from wtforms import SelectField, SelectMultipleField, TextField, TextAreaField
 
-## Compare getters history
+
+class SchedulingForm(FlaskForm):
+    start_date = TextField('Start date')
+    end_date = TextField('End date')
+    name = TextField('Name')
+    frequency = TextField('Frequency')
+    script_type_choices = (
+        ('napalm_action', 'NAPALM action'),
+        ('netmiko_config', 'Netmiko configuration'),
+        ('napalm_config', 'NAPALM configuration'),
+        ('napalm_getters', 'NAPALM getters'),
+        ('file_transfer', 'File transfer'),
+        ('netmiko_validation', 'Netmiko validation'),
+        ('ansible_playbook', 'Ansible playbook'),
+        ('custom_script', 'Custom scripts')
+    )
+    script_type = SelectField('Type of script', choices=script_type_choices)
+    nodes = SelectMultipleField('', choices=())
+    pools = SelectMultipleField('', choices=())
+    workflows = SelectMultipleField('', choices=())
+    scripts = SelectMultipleField('', choices=())
 
 
 class CompareForm(FlaskForm):

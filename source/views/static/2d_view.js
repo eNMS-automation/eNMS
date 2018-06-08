@@ -59,15 +59,7 @@ for (var i = 0; i < nodes.length; i++) {
   marker.on("click", function (e) {
     e.target.setIcon(e.target.selected_icon);
     selection.push(this.node_id);
-    $.ajax({
-      type: "POST",
-      url: "/views/selection",
-      dataType: "json",
-      data: { selection: selection },
-      success: function(msg){
-        $('.answer').html(msg);
-      }
-    });
+    $("#nodes").val(selection);
   });
 
   marker.bindTooltip(node[labels.node], {
@@ -122,15 +114,7 @@ map.on("boxzoomend", function(e) {
       selection.push(markers_array[i].node_id);
       }
     }
-  $.ajax({
-    type: "POST",
-    url: "/views/selection",
-    dataType: "json",
-    data: { selection: selection },
-    success: function(msg){
-        $('.answer').html(msg);
-    }
-  });
+  $("#nodes").val(selection);
 });
 
 map.on("contextmenu", function(e) {
@@ -138,15 +122,7 @@ map.on("contextmenu", function(e) {
     markers_array[i].setIcon(markers_array[i].icon);
     }
   selection = [];
-  $.ajax({
-    type: "POST",
-    url: "/views/selection",
-    dataType: "json",
-    data: { selection: selection },
-    success: function(msg){
-        $('.answer').html(msg);
-      }
-    });
+  $("#nodes").val(selection);
   e.preventDefault();
 });
 

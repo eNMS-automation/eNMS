@@ -4,7 +4,7 @@ from base.properties import (
     link_public_properties
 )
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, SelectField, SelectMultipleField, TextField
+from wtforms import IntegerField, SelectField, TextField
 
 
 class ViewOptionsForm(FlaskForm):
@@ -18,12 +18,3 @@ class GoogleEarthForm(FlaskForm):
     name = TextField('Project name')
     label_size = IntegerField('Label size', default=1)
     line_width = IntegerField('Line width', default=2)
-
-
-class SchedulingForm(FlaskForm):
-    start_date = TextField('Start date')
-    end_date = TextField('End date')
-    name = TextField('Name')
-    scripts = SelectMultipleField('', choices=())
-    workflows = SelectMultipleField('', choices=())
-    frequency = TextField('Frequency')

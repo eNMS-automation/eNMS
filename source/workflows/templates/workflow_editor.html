@@ -9,19 +9,37 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  {% include 'editor_modals.html' %}
+  {% include 'scheduling_modal.html' %}
   {% include 'editor_panels.html' %}
 {% endblock content %}
 
 {% block javascripts %}
   {{ super()}}
   <script>
-    var edges = {{ edges|tojson|safe }};
-    console.log(scripts, edges);
+    var workflow = {{ workflow|tojson|safe }};
   </script>
+  <!-- Task scheduling -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <!-- Vis JS -->
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
   <script>
+    function schedule() {
+      task = scheduleTask();
+      addNode(task);
+    }
+
+    if (workflow) {
+      $("#workflow").text = workflow.name
+    } else {
+      $.ajax({
+        type: "POST",
+        url: `/workflows/get/${$("#workflow-name").val()}`,
+        success: function(wf) {
+          workflow = wf;
+        }
+      });
+    }
+
     function showModal(modal_name){
       $(`#${modal_name}`).modal('show');
       }
@@ -107,27 +125,28 @@
         network.setOptions( { physics: false } );
     });
 
-    function addNodes() {
-      var scripts = $('#scripts').val();
-      console.log(scripts);
-      for (var i = 0; i < scripts.length; i++) {
-        if (!nodes.map(s => s.label).includes(scripts[i])) {
-          nodes.add({
-            id: scripts[i],
-            label: scripts[i],
-            type: $("#script_type").val()
-          })
-        } else {
-          alertify.notify(`Cannot add ${scripts[i]}: already in the workflow`, 'error', 5);
-        }
-        $('#add-script').modal('hide');
+    function addNode(task) {
+      if (workflow) {
+        nodes.add({
+          id: task.id,
+          label: task.name,
+          type: task.type
+        });
+        $.ajax({
+          type: "POST",
+          url: `/workflows/save_node/${workflow.id}/${task.id}`,
+          success: function(script){
+            alertify.notify("Scripts successfully added to the workflow", 'success', 5);
+          }
+        });
+      } else {
+        alertify.notify("You must create a workflow first", 'error', 5);
       }
-      saveWorkflow()
-      alertify.notify("Scripts successfully added to the workflow", 'success', 5);
     }
 
     function deleteSelection() {
-      network.deleteSelected()
+      console.log(getSelection());
+      network.deleteSelected();
       saveWorkflow()
       alertify.notify("Selected objects deleted", 'success', 5);
     }
@@ -143,14 +162,6 @@
       }
     }
 
-    var start = null;
-    function startScript() {
-      start = nodes.get(network.getSelectedNodes()[0]);
-      nodes.update({id: start.id, color: "green"});
-      alertify.notify(`Script ${start.label} set as start`, 'success', 5);
-      saveWorkflow()
-    }
-
     function saveWorkflow() {
       ajax_data = {
         'nodes':  nodes.get({fields: ['id', 'label']}),
@@ -159,7 +170,7 @@
       }
       $.ajax({
         type: "POST",
-        url: `/workflows/save/${workflow.id}`,
+        url: `/workflows/add_node/${workflow.id}`,
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify(ajax_data, null, '\t'),
         success: function(msg){
@@ -182,21 +193,6 @@
     for (i = 0; i < types.length; i++) {
       $(`#${types[i]}-button`).text("Update");
     }
-
-    // when a filter is selected, apply it
-    $('#script_type').on('change', function() {
-      $.ajax({
-        type: "POST",
-        url: `/scripts/script_type_${this.value}`,
-        dataType: "json",
-        success: function(scripts){
-          $("#scripts").empty();
-          $.each(scripts, function(_, s) {
-            $("#scripts").append(`<option value="${s.id}">${s.name}</option>`);
-          });
-        }
-      });
-    });
 
     function showObjectModal(type, id) {
       $('#title').text(`Edit properties`);

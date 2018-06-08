@@ -92,7 +92,7 @@
       ]
     };
   </script>
-  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script>
     var node_fields = {{ node_fields|tojson|safe }};
     var link_fields = {{ link_fields|tojson|safe }};

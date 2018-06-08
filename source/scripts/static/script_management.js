@@ -31,25 +31,8 @@ for (var i = 0; i < types.length; i++) {
 }
 
 function showSchedulingModal(id){
-  scriptId = id;
+  $("#scripts").val([id]);
   $("#scheduling").modal('show');
-}
-
-function scheduleScript() {
-  if ($("#scheduling-form").parsley().validate()) {
-    $.ajax({
-      type: "POST",
-      url: `/tasks/job_scheduler/script/${scriptId}`,
-      dataType: "json",
-      data: $("#scheduling-form").serialize(),
-      success: function() {
-        alertify.notify('Task scheduled', 'success', 5);
-      }
-    });
-    $("#scheduling").modal('hide');
-  } else {
-    alertify.notify('Some fields are missing', 'error', 5);
-  }
 }
 
 function showScriptModal(type, id) {

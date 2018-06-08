@@ -17,7 +17,7 @@ from flask import (
     session,
 )
 from flask_login import current_user, login_required
-from .forms import GoogleEarthForm, SchedulingForm, ViewOptionsForm
+from .forms import GoogleEarthForm, ViewOptionsForm
 from objects.forms import AddNode, AddLink
 from objects.models import Pool, Node, node_class, Link
 from os.path import join
@@ -25,6 +25,7 @@ from passlib.hash import cisco_type7
 from scripts.models import Script
 from simplekml import Kml
 from .styles import create_styles
+from tasks.forms import SchedulingForm
 from subprocess import Popen
 from workflows.models import Workflow
 # we use os.system and platform.system => namespace conflict
@@ -55,7 +56,8 @@ def view(view_type):
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.scripts.choices = Script.choices()
-    scheduling_form.workflows.choices = Workflow.choices()
+    scheduling_form.nodes.choices = all_nodes
+    scheduling_form.pools.choices = Pool.choices()
     labels = {'node': 'name', 'link': 'name'}
     if 'view_options' in request.form:
         # update labels
@@ -140,13 +142,6 @@ def export_to_google_earth():
         line.style.linestyle.width = request.form['line_width']
     filepath = join(current_app.ge_path, request.form['name'] + '.kmz')
     kml_file.save(filepath)
-    return jsonify({})
-
-
-@blueprint.route('/selection', methods=['POST'])
-@login_required
-def selection():
-    session['selection'] = list(set(request.form.getlist('selection[]')))
     return jsonify({})
 
 

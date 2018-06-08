@@ -67,15 +67,6 @@ class Task(CustomBase):
     end_date = Column(String)
     creator = Column(String)
 
-    properties = (
-        'name',
-        'start_date',
-        'end_date',
-        'frequency',
-        'scripts',
-        'workflows'
-    )
-
     def __init__(self, **data):
         self.data = data
         self.type = "type"

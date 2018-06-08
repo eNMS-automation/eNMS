@@ -5,7 +5,7 @@
       <div class="x_panel">
         <div class="x_content">
           <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
-            {{ form.workflow(class="form-control") }}
+            {{ workflow_editor_form.workflow(id="workflow-name", class="form-control") }}
           </div>
           <div class="panel-group" style="z-index:500; position: absolute; top: 10px; right:10px;">
             <div class="panel panel-primary panel-transparent">
@@ -25,7 +25,7 @@
               <div class="panel-body">
                 <div class="btn-group-vertical btn-block" >
                   <button id="edge_mode" type="button" class="btn btn-primary" style="width:150px;" onclick="deleteSelection()">Delete selection</button>
-                  <button type="button" class="btn btn-primary" onclick="showModal('add-script')">Add script</button>
+                  <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Add script</button>
                   <button type="button" class="btn btn-primary" onclick="startScript()">Set as start</button>
                 </div>
               </div>

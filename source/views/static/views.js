@@ -13,20 +13,3 @@ function connectToDevice(name) {
     }
   });
 }
-
-function scheduleScript() {
-  if ($("#scheduling-form").parsley().validate()) {
-    $.ajax({
-      type: "POST",
-      url: "/tasks/view_scheduler",
-      dataType: "json",
-      data: $("#scheduling-form").serialize(),
-      success: function() {
-        alertify.notify('Task scheduled', 'success', 5);
-      }
-    });
-    $("#scheduling").modal('hide');
-  } else {
-    alertify.notify('Some fields are missing', 'error', 5);
-  }
-}

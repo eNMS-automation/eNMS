@@ -7,7 +7,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  {% include 'script_scheduling.html' %}
+  {% include 'scheduling_modal.html' %}
   {% include 'script_modal.html' %}
   {% include 'script_table.html' %}
 {% endblock content %}
@@ -15,7 +15,7 @@
 {% block javascripts %}
   {{ super() }}
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script>
     var fields = {{ fields|tojson|safe }}
     var scripts = {{ scripts|tojson|safe }}

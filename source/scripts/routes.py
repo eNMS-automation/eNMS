@@ -10,7 +10,6 @@ from .forms import (
     NetmikoConfigScriptForm,
     FileTransferScriptForm,
     NetmikoValidationForm,
-    SchedulingForm
 )
 from jinja2 import Template
 from os.path import join
@@ -27,6 +26,7 @@ from .models import (
     type_to_class
 )
 from objects.models import Node, Pool
+from tasks.forms import SchedulingForm
 from werkzeug import secure_filename
 from yaml import load
 
@@ -66,6 +66,7 @@ def scripts():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.nodes.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
+    scheduling_form.scripts.choices = Script.choices()
     return render_template(
         'script_management.html',
         fields=script_public_properties,

@@ -1,16 +1,7 @@
 var selected_nodes = [];
 
 function sendSelection() {
-  selected_id = selected_nodes.map(s => s[1].real_id);
-  $.ajax({
-    type: "POST",
-    url: "/views/selection",
-    dataType: "json",
-    data: {selection: selected_id},
-    success: function(msg){
-      $('.answer').html(msg);
-    }
-  });
+  $("#nodes").val(selected_nodes.map(s => s[1].real_id));
 }
 
 // selection function

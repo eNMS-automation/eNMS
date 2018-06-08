@@ -1,4 +1,4 @@
-<div id="scheduling" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" onmouseenter="schedule()">
+<div id="scheduling" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" onmouseenter="openWizard()">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -24,6 +24,14 @@
                 <a href="#step-2">
                   <span class="step_no">2</span>
                   <span class="step_descr"> Step 2 <br/>
+                  <small>Targets</small>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#step-3">
+                  <span class="step_no">3</span>
+                  <span class="step_descr"> Step 3 <br/>
                   <small>Scheduling</small>
                   </span>
                 </a>
@@ -36,16 +44,25 @@
                   {{ scheduling_form.name(class="form-control", required=true) }}
                 </div>
                 <label>Scripts</label>
-                <div class='form-group'>
-                  {{ scheduling_form.scripts(class="form-control", size=8) }}
+                <div class="form-group">
+                  {{ scheduling_form.script_type(class="form-control")}}
                 </div>
-                <label>Workflows</label>
-                <div class='form-group'>
-                  {{ scheduling_form.workflows(class="form-control", size=8) }}
+                <div class="form-group">
+                  {{ scheduling_form.scripts(id="scripts", class="form-control", size=15)}}
                 </div>
               </div>
             </div>
             <div id="step-2">
+                <label>Nodes</label>
+                <div class='form-group'>
+                  {{ scheduling_form.nodes(class="form-control", size=8) }}
+                </div>
+                <label>Pools</label>
+                <div class='form-group'>
+                  {{ scheduling_form.pools(class="form-control", size=8) }}
+                </div>
+            </div>
+            <div id="step-3">
               <div class="form-group" style="min-height: 350px">
                 <label>Start date</label>
                 <div class='form-group'>

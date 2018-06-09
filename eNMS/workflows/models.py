@@ -56,7 +56,8 @@ class Workflow(CustomBase):
     type = Column(String)
     vendor = Column(String)
     operating_system = Column(String)
-    tasks = relationship('Task', back_populates='workflow')
+    tasks = relationship('ScheduledWorkflowTask', back_populates='workflow')
+    inner_tasks = relationship('InnerTask', back_populates='workflow')
     edges = relationship('WorkflowEdge', back_populates='workflow')
 
     properties = (

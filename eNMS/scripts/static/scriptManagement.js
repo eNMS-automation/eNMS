@@ -1,5 +1,21 @@
-var scriptId = null
-var table = $('#table').DataTable()
+var table = $('#table').DataTable();
+
+function scheduleTask() {
+  if ($("#scheduling-form").parsley().validate()) {
+    $.ajax({
+      type: "POST",
+      url: "/tasks/scheduler/task",
+      dataType: "json",
+      data: $("#scheduling-form").serialize(),
+      success: function() {
+      alertify.notify('Task scheduled', 'success', 5);
+      }
+    });
+    $("#scheduling").modal('hide');
+  } else {
+    alertify.notify('Some fields are missing', 'error', 5);
+  }
+}
 
 function addScript(mode, properties) {
   values = [];
@@ -8,7 +24,7 @@ function addScript(mode, properties) {
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showScriptModal('${properties.type}', '${properties.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Run</button>`,
+    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs" onclick="deleteScript('${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {

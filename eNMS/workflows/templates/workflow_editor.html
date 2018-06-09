@@ -9,7 +9,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  {% include 'scheduling_modal.html' %}
+  {% include 'workflow_scheduling_modal.html' %}
   {% include 'editor_panels.html' %}
 {% endblock content %}
 
@@ -23,11 +23,11 @@
   <!-- Vis JS -->
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
   <script>
-    function schedule() {
+    function scheduleTask() {
       if (workflow && $("#scheduling-form").parsley().validate()) {
           $.ajax({
             type: "POST",
-            url: `/tasks/scheduler`,
+            url: "/tasks/scheduler/workflow_task",
             dataType: "json",
             data: $("#scheduling-form").serialize(),
             success: function(task) {

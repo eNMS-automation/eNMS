@@ -31,32 +31,28 @@ def job_multiprocessing(name):
     db.session.commit()
 
 
-class Task(CustomBase):
+class ScheduledTask(CustomBase):
 
     __tablename__ = 'Task'
 
+    __mapper_args__ = {
+        'polymorphic_identity': 'ScheduledTask',
+        'polymorphic_on': type
+    }
+
     id = Column(Integer, primary_key=True)
-    type = Column(String)
     recurrent = Column(Boolean, default=False)
     name = Column(String(120), unique=True)
     status = Column(String)
     creation_time = Column(Integer)
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     nodes = relationship(
-        "Node",
+        'Node',
         secondary=task_node_table,
-        back_populates="tasks"
+        back_populates='tasks'
     )
-    scripts = relationship(
-        "Script",
-        secondary=task_script_table,
-        back_populates="tasks"
-    )
-    workflow_id = Column(Integer, ForeignKey('Workflow.id'))
-    workflow = relationship('Workflow', back_populates='tasks')
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='tasks')
-
     frequency = Column(String(120))
     start_date = Column(String)
     end_date = Column(String)
@@ -64,11 +60,9 @@ class Task(CustomBase):
 
     def __init__(self, **data):
         self.data = data
-        self.type = "type"
         self.name = data['name']
         self.nodes = data['nodes']
         self.user = data['user']
-        self.scripts = data['scripts']
         self.frequency = data['frequency']
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
@@ -81,15 +75,6 @@ class Task(CustomBase):
             value = self.datetime_conversion(js_date) if js_date else None
             setattr(self, date, value)
         self.is_active = True
-
-    @property
-    def description(self):
-        return '\n'.join([
-            'Name: ' + self.name,
-            'Frequency: {}s'.format(self.frequency),
-            'Creation time: ' + self.creation_time,
-            'Creator: ' + self.creator
-        ])
 
     def schedule(self):
         if self.frequency:
@@ -109,7 +94,7 @@ class Task(CustomBase):
 
     def resume_task(self):
         scheduler.resume_job(self.creation_time)
-        self.status = "active"
+        self.status = 'active'
         db.session.commit()
 
     def delete_task(self):
@@ -155,16 +140,74 @@ class Task(CustomBase):
         )
 
 
+class ScheduledScriptTask(ScheduledTask):
+
+    id = Column(Integer, ForeignKey('ScheduledTask.id'), primary_key=True)
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    scripts = relationship(
+        'Script',
+        secondary=task_script_table,
+        back_populates='tasks'
+    )
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'ScheduledScriptTask',
+    }
+
+    def __init__(self, **data):
+        self.scripts = data['scripts']
+        super(ScheduledScriptTask, self).__init__(**kwargs)
+
+
+class ScheduledWorkflowTask(ScheduledTask):
+
+    id = Column(Integer, ForeignKey('ScheduledTask.id'), primary_key=True)
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    workflow_id = Column(Integer, ForeignKey('Workflow.id'))
+    workflow = relationship('Workflow', back_populates='tasks')
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'ScheduledWorkflowTask',
+    }
+
+    def __init__(self, **data):
+        self.workflow = data['workflow']
+        super(ScheduledWorkflowTask, self).__init__(**kwargs)
+
+
+class InnerTask(CustomBase):
+
+    __tablename__ = 'InnerTask'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(120), unique=True)
+    status = Column(String)
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    nodes = relationship(
+        'Node',
+        secondary=task_node_table,
+        back_populates='tasks'
+    )
+    workflow_id = Column(Integer, ForeignKey('Workflow.id'))
+    workflow = relationship('Workflow', back_populates='inner_tasks')
+
+    def __init__(self, **data):
+        self.name = data['name']
+        self.nodes = data['nodes']
+        self.scripts = data['scripts']
+        self.workflow = data['workflow']
+        self.status = 'active'
+        self.is_active = True
+
 def task_factory(**kwargs):
     task = get_obj(Task, name=kwargs['name'])
-    print(task, kwargs)
     if task:
         for property, value in kwargs.items():
             if property in ('start_date', 'end_date') and value:
                 value = task.datetime_conversion(value)
             setattr(task, property, value)
     else:
-        task = Task(**kwargs)
+        task = WorkflowTask(**kwargs) if 'workflow' in kwargs else Task(**kwargs)
         db.session.add(task)
     db.session.commit()
     return task

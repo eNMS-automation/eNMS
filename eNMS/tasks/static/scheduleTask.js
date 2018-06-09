@@ -9,12 +9,14 @@ for (var i = 0; i < dates.length; i++) {
     },
     useCurrent: false,
   });
-  $('#' + dates[i]).data("DateTimePicker").minDate(today);
+  if ($('#' + dates[i]).length) {
+    $('#' + dates[i]).data("DateTimePicker").minDate(today);
+  }
 }
 
 function openWizard(){
   $('#wizard').smartWizard({
-    onFinish: schedule,
+    onFinish: scheduleTask,
     enableFinishButton: true,
   });
   $('.buttonNext').addClass('btn btn-success');
@@ -36,20 +38,3 @@ $('#script_type').on('change', function() {
     }
   });
 });
-
-function scheduleTask() {
-  if ($("#scheduling-form").parsley().validate()) {
-    $.ajax({
-      type: "POST",
-      url: `/tasks/scheduler`,
-      dataType: "json",
-      data: $("#scheduling-form").serialize(),
-      success: function() {
-      alertify.notify('Task scheduled', 'success', 5);
-      }
-    });
-    $("#scheduling").modal('hide');
-  } else {
-    alertify.notify('Some fields are missing', 'error', 5);
-  }
-}

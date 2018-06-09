@@ -1,7 +1,23 @@
 /*jshint esversion: 6 */
 
-var workflowId = null;
 var table = $('#table').DataTable();
+
+function scheduleTask() {
+  if ($("#scheduling-form").parsley().validate()) {
+    $.ajax({
+      type: "POST",
+      url: "/tasks/scheduler/workflow",
+      dataType: "json",
+      data: $("#scheduling-form").serialize(),
+      success: function() {
+      alertify.notify('Task scheduled', 'success', 5);
+      }
+    });
+    $("#scheduling").modal('hide');
+  } else {
+    alertify.notify('Some fields are missing', 'error', 5);
+  }
+}
 
 function addWorkflow(mode, properties) {
   console.log(properties)
@@ -11,6 +27,7 @@ function addWorkflow(mode, properties) {
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Schedule</button>`,
     `<a href="/workflows/workflow_editor/${properties.id}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Manage</a>`,
     `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${properties.id}')">Delete</button>`
   );
@@ -31,7 +48,7 @@ function addWorkflow(mode, properties) {
 // Scheduling: run a workflow
 
 function showSchedulingModal(id){
-  workflowId = id;
+  $("#workflow").val(id);
   $("#scheduling").modal('show');
 }
 
@@ -46,7 +63,6 @@ function showModal(type) {
 
 // open modal to edit an existing workflow
 function showWorkflowModal(id) {
-  workflowId = id;
   $('#title').text(`Edit properties`);
   $.ajax({
     type: "POST",

@@ -24,14 +24,6 @@
                 <a href="#step-2">
                   <span class="step_no">2</span>
                   <span class="step_descr"> Step 2 <br/>
-                  <small>Targets</small>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#step-3">
-                  <span class="step_no">3</span>
-                  <span class="step_descr"> Step 3 <br/>
                   <small>Scheduling</small>
                   </span>
                 </a>
@@ -43,26 +35,13 @@
                 <div class='form-group'>
                   {{ scheduling_form.name(class="form-control", required=true) }}
                 </div>
-                <label>Scripts</label>
+                <label>Workflow</label>
                 <div class="form-group">
-                  {{ scheduling_form.script_type(class="form-control")}}
-                </div>
-                <div class="form-group">
-                  {{ scheduling_form.scripts(id="scripts", class="form-control", size=15)}}
+                  {{ scheduling_form.workflows(class="form-control")}}
                 </div>
               </div>
             </div>
             <div id="step-2">
-                <label>Nodes</label>
-                <div class='form-group'>
-                  {{ scheduling_form.nodes(class="form-control", size=8) }}
-                </div>
-                <label>Pools</label>
-                <div class='form-group'>
-                  {{ scheduling_form.pools(class="form-control", size=8) }}
-                </div>
-            </div>
-            <div id="step-3">
               <div class="form-group" style="min-height: 350px">
                 <label>Start date</label>
                 <div class='form-group'>

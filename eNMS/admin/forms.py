@@ -8,8 +8,6 @@ from wtforms import (
     SelectMultipleField
 )
 
-## login and registration
-
 
 class LoginForm(FlaskForm):
     name = TextField('Username')
@@ -20,8 +18,6 @@ class CreateAccountForm(FlaskForm):
     name = TextField('Username')
     email = TextField('Email')
     password = PasswordField('Password')
-
-## users management
 
 
 class AddUser(FlaskForm):
@@ -35,8 +31,6 @@ class AddUser(FlaskForm):
 class DeleteUser(FlaskForm):
     users = SelectMultipleField('Users', choices=())
 
-## administration
-
 
 class TacacsServerForm(FlaskForm):
     ip_address = TextField('IP address')
@@ -48,8 +42,6 @@ class TacacsServerForm(FlaskForm):
 class SyslogServerForm(FlaskForm):
     ip_address = TextField('IP address', default='0.0.0.0')
     port = IntegerField('Port', default=514)
-
-## parameters
 
 
 class GeographicalParametersForm(FlaskForm):

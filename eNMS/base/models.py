@@ -1,10 +1,11 @@
-from .properties import cls_to_properties
 from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
+
 from eNMS import db
+from eNMS.base.properties import cls_to_properties
 
 
-class CustomBase(db.model):
+class CustomBase(db.Model):
 
     __abstract__ = True
 
@@ -42,6 +43,9 @@ class Log(CustomBase):
     def __repr__(self):
         return self.content
 
+
+def get_obj(model, **kwargs):
+    return db.session.query(model).filter_by(**kwargs).first()
 
 task_node_table = Table(
     'task_node_association',

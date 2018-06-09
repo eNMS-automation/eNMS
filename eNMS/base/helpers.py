@@ -1,5 +1,7 @@
-from base.database import db
 from sqlalchemy import exc
+
+
+from eNMS import db
 
 
 def integrity_rollback(function):

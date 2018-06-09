@@ -7,20 +7,17 @@ from os.path import abspath, dirname, join, pardir
 import sys
 import logging
 
+
 db = SQLAlchemy()
 login_manager = LoginManager()
 
 
-
-from eNMS.admin.models import create_default_parameters, SyslogServer
-from eNMS.base.database import db, create_database
+from eNMS.admin.models import create_default_parameters, SyslogServer, User
 from eNMS.config import config_dict
 from eNMS.objects.models import create_default_pools
 from eNMS.scripts.custom_scripts import create_custom_scripts
 from eNMS.scripts.models import create_default_scripts
 from eNMS.tasks.models import scheduler
-
-
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
 
@@ -73,12 +70,10 @@ def configure_login_manager(app, User):
 
 
 def configure_database(app):
-    create_database()
 
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
-    Migrate(app, db)
 
     @app.before_first_request
     def create_default():
@@ -112,11 +107,10 @@ def create_app(test=False):
     # initialize_paths(app)
     register_extensions(app, test)
     register_blueprints(app)
-    from admin.models import User
     configure_login_manager(app, User)
     configure_database(app)
     if not test:
-        from tasks.models import scheduler
+        
         configure_scheduler(scheduler)
     configure_syslog()
     configure_logs(app)

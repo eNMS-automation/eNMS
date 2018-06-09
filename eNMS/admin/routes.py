@@ -1,14 +1,13 @@
-from base.database import get_obj
-from base.properties import pretty_names
-from flask import (
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    url_for
-)
 from flask_login import login_required
-from .forms import (
+from passlib.hash import cisco_type7
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import NoResultFound
+from tacacs_plus.client import TACACSClient
+from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
+import flask_login
+
+
+from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
     LoginForm,
@@ -16,16 +15,17 @@ from .forms import (
     SyslogServerForm,
     TacacsServerForm,
 )
-from .models import Parameters, SyslogServer
-from passlib.hash import cisco_type7
-from .properties import user_properties, user_search_properties
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm.exc import NoResultFound
-from tacacs_plus.client import TACACSClient
-from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
-from base.database import db
-from .models import User, user_factory, TacacsServer
-import flask_login
+from eNMS.admin.models import Parameters, SyslogServer, User, user_factory, TacacsServer
+from eNMS.admin.properties import user_properties, user_search_properties
+from eNMS.base.models import get_obj
+from eNMS.base.properties import pretty_names
+from flask import (
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    url_for
+)
 
 
 ## Template rendering

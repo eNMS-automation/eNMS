@@ -1,13 +1,17 @@
-from base.database import db, get_obj
-from base.properties import pretty_names
 from flask import jsonify, render_template, request
 from flask_login import login_required
-from .forms import WorkflowEditorForm, WorkflowCreationForm
-from .models import WorkflowEdge, Workflow, workflow_factory
-from objects.models import Node, Pool
-from scripts.models import Script
-from tasks.forms import SchedulingForm
-from tasks.models import Task
+
+
+from eNMS import db
+from eNMS.base.models import get_obj
+from eNMS.base.properties import pretty_names
+from eNMS.objects.models import Node, Pool
+from eNMS.scripts.models import Script
+from eNMS.tasks.forms import SchedulingForm
+from eNMS.tasks.models import Task
+from eNMS.workflows.forms import WorkflowEditorForm, WorkflowCreationForm
+from eNMS.workflows.models import WorkflowEdge, Workflow, workflow_factory
+
 
 ## Template rendering
 

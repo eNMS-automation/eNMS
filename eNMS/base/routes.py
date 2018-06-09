@@ -1,19 +1,25 @@
-from base.database import db, get_obj
 from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import login_required
-from .properties import pretty_names, reverse_pretty_names
-from .forms import LogFilteringForm
-from .models import Log
-from objects.models import Node, Link
-from .properties import type_to_diagram_properties
 from re import search
-from scripts.models import Script
-from tasks.models import Task
-from admin.models import User
-from admin.routes import login_manager
 from workflows.models import Workflow
 import flask_login
+
+
+from eNMS import db
+from eNMS.admin.models import User
+from eNMS.admin.routes import login_manager
+from eNMS.base.forms import LogFilteringForm
+from eNMS.base.models import get_obj, Log
+from eNMS.base.properties import (
+    pretty_names,
+    reverse_pretty_names,
+    type_to_diagram_properties
+)
+from eNMS.objects.models import Node, Link
+from eNMS.scripts.models import Script
+from eNMS.tasks.models import Task
+
 
 types = {
     'node': Node,

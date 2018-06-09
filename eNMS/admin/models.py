@@ -1,17 +1,18 @@
-from eNMS import db
-from eNMS.base import get_obj
-from base.helpers import integrity_rollback
-from base.models import Log
 from flask_login import UserMixin
 from sqlalchemy import Column, Float, Integer, String
 from sqlalchemy.orm import relationship
-from base.models import CustomBase
 from passlib.hash import cisco_type7
 try:
     from SocketServer import BaseRequestHandler, UDPServer
 except Exception:
     from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
+
+
+from eNMS import db
+from eNMS.base.models import CustomBase, get_obj
+from eNMS.base.helpers import integrity_rollback
+from eNMS.base.models import Log
 
 
 class User(CustomBase, UserMixin):

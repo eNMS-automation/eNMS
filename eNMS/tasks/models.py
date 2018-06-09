@@ -20,15 +20,11 @@ from eNMS.base.properties import cls_to_properties
 
 def script_job(task_name):
     with scheduler.app.app_context():
-        print(task_name)
         job_time = str(datetime.now())
         task = get_obj(Task, name=task_name)
-        print(task)
         logs = {job_time: {}}
         nodes = task.nodes if task.nodes else ['dummy']
-        print(task.__dict__)
         for task_job in task.scripts:
-            print(task_job.__dict__)
             results = {}
             pool = ThreadPool(processes=len(nodes))
             args = [(task, node, results) for node in nodes]
@@ -36,16 +32,15 @@ def script_job(task_name):
             pool.close()
             pool.join()
             logs[job_time][task_job.name] = results
-            print(task.logs)
         task.logs = logs
-        # db.session.add(task)
         db.session.commit()
 
 
 def workflow_job(name):
-    task = get_obj(Task, name=name)
-    task.workflow.run()
-    db.session.commit()
+    with scheduler.app.app_context():
+        task = get_obj(Task, name=name)
+        task.workflow.run()
+        db.session.commit()
 
 
 class Task(CustomBase):
@@ -247,6 +242,7 @@ class InnerTask(Task):
     }
 
     def __init__(self, **data):
+        self.job = script_job
         self.nodes = data['nodes']
         self.scripts = data['scripts']
         self.workflow = data['workflow']

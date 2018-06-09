@@ -84,10 +84,8 @@ class Workflow(CustomBase):
             new_layer = set()
             for task in layer:
                 visited.add(task)
-                task_results = {}
-                success = task.job([task, node, task_results])
+                success = task.job(task.name)
                 edge_type = 'success' if success else 'failure'
-                results[task.name] = task_results
                 for neighbor in task.task_neighbors(self, edge_type):
                     if neighbor not in visited:
                         new_layer.add(neighbor)

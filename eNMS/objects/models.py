@@ -97,6 +97,7 @@ class Node(Object):
         properties = self.properties
         for prop in ('scheduled_tasks', 'inner_tasks', 'pools'):
             properties[prop] = [obj.properties for obj in getattr(self, prop)]
+        return properties
 
 
 class Antenna(Node):
@@ -503,6 +504,10 @@ class Pool(CustomBase):
     @initialize_properties
     def __init__(self, **kwargs):
         self.compute_pool()
+
+    @property
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['Pool']}
 
     def compute_pool(self):
         self.nodes = list(filter(self.object_match, Node.query.all()))

@@ -69,6 +69,7 @@ class Script(CustomBase):
         properties = self.properties
         for prop in ('tasks', 'inner_tasks'):
             properties[prop] = [obj.properties for obj in getattr(self, prop)]
+        return properties
 
 
 class NetmikoConfigScript(Script):

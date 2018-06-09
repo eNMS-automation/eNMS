@@ -98,6 +98,7 @@ class ScheduledTask(Task):
         self.schedule()
 
     def schedule(self):
+        print('ttttt'*100)
         if self.frequency:
             self.recurrent = True
             self.recurrent_scheduling()
@@ -253,7 +254,6 @@ class InnerTask(Task):
         self.job = script_job
         self.nodes = data['nodes']
         self.scripts = data['scripts']
-        print(data['workflow'].__dict__)
         self.parent_workflow = data['workflow']
         
         self.is_active = True
@@ -268,7 +268,7 @@ class InnerTask(Task):
         properties = self.properties
         for prop in ('scripts', 'nodes'):
             properties[prop] = [obj.properties for obj in getattr(self, prop)]
-        properties['parent_workflow'] = self.parent_workflow.properties
+        # properties['parent_workflow'] = self.parent_workflow.properties
         return properties
 
     def task_neighbors(self, type):

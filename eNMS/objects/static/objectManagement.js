@@ -4,7 +4,7 @@ var linkTable = $('#link-table').DataTable();
 function addObjectToTable(mode, type, properties) {
   var values = [];
   var table = type == 'node' ? nodeTable : linkTable;
-  var fields = type == 'node' ? node_fields : link_fields
+  var fields = type == 'node' ? node_fields : link_fields;
   for (var i = 0; i < fields.length; i++) {
     var truncate = ["longitude", "latitude"].includes(fields[i]);
     value = truncate ? parseFloat(properties[fields[i]]).toFixed(2) : properties[fields[i]]

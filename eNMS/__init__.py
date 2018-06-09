@@ -8,6 +8,7 @@ from os.path import abspath, dirname, join, pardir
 import sys
 import logging
 
+sys.dont_write_bytecode = True
 
 db = SQLAlchemy()
 login_manager = LoginManager()

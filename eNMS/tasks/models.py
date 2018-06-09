@@ -9,8 +9,10 @@ from sqlalchemy.orm import relationship
 from eNMS import db
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import (
-    task_node_table,
-    task_script_table,
+    inner_task_node_table,
+    scheduled_task_node_table,
+    inner_task_script_table,
+    scheduled_task_script_table,
     CustomBase
 )
 
@@ -31,43 +33,50 @@ def job_multiprocessing(name):
     db.session.commit()
 
 
-class ScheduledTask(CustomBase):
+class Task(CustomBase):
 
     __tablename__ = 'Task'
 
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)
+    status = Column(String)
+    type = Column(String)
+    user_id = Column(Integer, ForeignKey('User.id'))
+    user = relationship('User', back_populates='tasks')
+
     __mapper_args__ = {
-        'polymorphic_identity': 'ScheduledTask',
+        'polymorphic_identity': 'Task',
         'polymorphic_on': type
     }
 
-    id = Column(Integer, primary_key=True)
+    def __init__(self, data):
+        self.user = data['user']
+
+
+class ScheduledTask(Task):
+
+    __tablename__ = 'ScheduledTask'
+
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     recurrent = Column(Boolean, default=False)
-    name = Column(String(120), unique=True)
-    status = Column(String)
     creation_time = Column(Integer)
     logs = Column(MutableDict.as_mutable(PickleType), default={})
-    nodes = relationship(
-        'Node',
-        secondary=task_node_table,
-        back_populates='tasks'
-    )
-    user_id = Column(Integer, ForeignKey('User.id'))
-    user = relationship('User', back_populates='tasks')
     frequency = Column(String(120))
     start_date = Column(String)
     end_date = Column(String)
     creator = Column(String)
 
+    __mapper_args__ = {
+        'polymorphic_identity': 'ScheduledTask',
+    }
+
     def __init__(self, **data):
         self.data = data
         self.name = data['name']
-        self.nodes = data['nodes']
-        self.user = data['user']
         self.frequency = data['frequency']
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
         self.creator = data['user'].name
-        self.status = 'active'
         # if the start date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting
         for date in ('start_date', 'end_date'):
@@ -75,6 +84,7 @@ class ScheduledTask(CustomBase):
             value = self.datetime_conversion(js_date) if js_date else None
             setattr(self, date, value)
         self.is_active = True
+        super(ScheduledTask, self).__init__(**data)
 
     def schedule(self):
         if self.frequency:
@@ -142,12 +152,18 @@ class ScheduledTask(CustomBase):
 
 class ScheduledScriptTask(ScheduledTask):
 
+    __tablename__ = 'ScheduledScriptTask'
+
     id = Column(Integer, ForeignKey('ScheduledTask.id'), primary_key=True)
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
     scripts = relationship(
         'Script',
-        secondary=task_script_table,
+        secondary=scheduled_task_script_table,
         back_populates='tasks'
+    )
+    nodes = relationship(
+        'Node',
+        secondary=scheduled_task_node_table,
+        back_populates='scheduled_tasks'
     )
 
     __mapper_args__ = {
@@ -156,13 +172,15 @@ class ScheduledScriptTask(ScheduledTask):
 
     def __init__(self, **data):
         self.scripts = data['scripts']
+        self.nodes = data['nodes']
         super(ScheduledScriptTask, self).__init__(**kwargs)
 
 
 class ScheduledWorkflowTask(ScheduledTask):
 
+    __tablename__ = 'ScheduledWorkflowTask'
+
     id = Column(Integer, ForeignKey('ScheduledTask.id'), primary_key=True)
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='tasks')
 
@@ -175,21 +193,28 @@ class ScheduledWorkflowTask(ScheduledTask):
         super(ScheduledWorkflowTask, self).__init__(**kwargs)
 
 
-class InnerTask(CustomBase):
+class InnerTask(Task):
 
     __tablename__ = 'InnerTask'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(120), unique=True)
-    status = Column(String)
+    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     logs = Column(MutableDict.as_mutable(PickleType), default={})
+    scripts = relationship(
+        'Script',
+        secondary=inner_task_script_table,
+        back_populates='inner_tasks'
+    )
     nodes = relationship(
         'Node',
-        secondary=task_node_table,
-        back_populates='tasks'
+        secondary=inner_task_node_table,
+        back_populates='inner_tasks'
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='inner_tasks')
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'InnerTask',
+    }
 
     def __init__(self, **data):
         self.name = data['name']

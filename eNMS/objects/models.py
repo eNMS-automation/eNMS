@@ -10,7 +10,8 @@ from eNMS.base.models import (
     CustomBase,
     pool_node_table,
     pool_link_table,
-    task_node_table,
+    inner_task_node_table,
+    scheduled_task_node_table
 )
 from eNMS.base.properties import (
     cls_to_properties,
@@ -60,10 +61,15 @@ class Node(Object):
     longitude = Column(Float)
     latitude = Column(Float)
     secret_password = Column(String)
-    tasks = relationship(
-        "Task",
-        secondary=task_node_table,
-        back_populates="nodes"
+    scheduled_tasks = relationship(
+        'ScheduledScriptTask',
+        secondary=scheduled_task_node_table,
+        back_populates='nodes'
+    )
+    inner_tasks = relationship(
+        'InnerTask',
+        secondary=inner_task_node_table,
+        back_populates='nodes'
     )
     pools = relationship(
         'Pool',
@@ -242,13 +248,13 @@ class Link(Object):
     source = relationship(
         Node,
         primaryjoin=source_id == Node.id,
-        backref=backref('source', cascade="all, delete-orphan")
+        backref=backref('source', cascade='all, delete-orphan')
     )
 
     destination = relationship(
         Node,
         primaryjoin=destination_id == Node.id,
-        backref=backref('destination', cascade="all, delete-orphan")
+        backref=backref('destination', cascade='all, delete-orphan')
     )
 
     pools = relationship(

@@ -17,7 +17,11 @@ from subprocess import check_output
 
 from eNMS import db
 from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
-from eNMS.base.models import task_script_table, CustomBase
+from eNMS.base.models import (
+    inner_task_script_table,
+    scheduled_task_script_table,
+    CustomBase
+)
 from eNMS.base.properties import cls_to_properties
 from eNMS.scripts.properties import (
     boolean_properties,
@@ -36,8 +40,13 @@ class Script(CustomBase):
     waiting_time = Column(Integer)
     type = Column(String)
     tasks = relationship(
-        "Task",
-        secondary=task_script_table,
+        "ScheduledScriptTask",
+        secondary=scheduled_task_script_table,
+        back_populates="scripts"
+    )
+    inner_tasks = relationship(
+        "InnerTask",
+        secondary=inner_task_script_table,
         back_populates="scripts"
     )
 

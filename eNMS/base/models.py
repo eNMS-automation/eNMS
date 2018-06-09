@@ -44,18 +44,32 @@ class Log(CustomBase):
         return self.content
 
 
-task_node_table = Table(
-    'task_node_association',
+inner_task_node_table = Table(
+    'inner_task_node_association',
     CustomBase.metadata,
     Column('node_id', Integer, ForeignKey('Node.id')),
-    Column('task_id', Integer, ForeignKey('Task.id'))
+    Column('inner_task_id', Integer, ForeignKey('InnerTask.id'))
 )
 
-task_script_table = Table(
-    'task_script_association',
+scheduled_task_node_table = Table(
+    'scheduled_task_node_association',
+    CustomBase.metadata,
+    Column('node_id', Integer, ForeignKey('Node.id')),
+    Column('scheduled_script_task_id', Integer, ForeignKey('ScheduledScriptTask.id'))
+)
+
+inner_task_script_table = Table(
+    'inner_task_script_association',
     CustomBase.metadata,
     Column('script_id', Integer, ForeignKey('Script.id')),
-    Column('task_id', Integer, ForeignKey('Task.id'))
+    Column('inner_task_id', Integer, ForeignKey('InnerTask.id'))
+)
+
+scheduled_task_script_table = Table(
+    'scheduled_task_script_association',
+    CustomBase.metadata,
+    Column('script_id', Integer, ForeignKey('Script.id')),
+    Column('scheduled_script_task_id', Integer, ForeignKey('ScheduledScriptTask.id'))
 )
 
 pool_node_table = Table(

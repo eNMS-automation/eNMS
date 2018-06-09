@@ -188,10 +188,14 @@ class ScheduledScriptTask(ScheduledTask):
         super(ScheduledScriptTask, self).__init__(**data)
 
     @property
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+
+    @property
     def serialized(self):
-        properties = {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+        properties = self.properties
         for prop in ('scripts', 'nodes'):
-            properties[prop] = [obj.serialized for obj in getattr(self, prop)]
+            properties[prop] = [obj.properties for obj in getattr(self, prop)]
         return properties
 
 
@@ -201,21 +205,25 @@ class ScheduledWorkflowTask(ScheduledTask):
 
     id = Column(Integer, ForeignKey('ScheduledTask.id'), primary_key=True)
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
-    workflow = relationship('Workflow', back_populates='tasks')
+    scheduled_workflow = relationship('Workflow', back_populates='tasks')
 
     __mapper_args__ = {
         'polymorphic_identity': 'ScheduledWorkflowTask',
     }
 
     def __init__(self, **data):
-        self.workflow = data['workflow']
+        self.scheduled_workflow = data['workflow']
         self.job = workflow_job
         super(ScheduledWorkflowTask, self).__init__(**data)
 
     @property
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+
+    @property
     def serialized(self):
         properties = {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
-        properties['workflow'] = self.workflow.serialied
+        properties['scheduled_workflow'] = self.scheduled_workflow.properties
         return properties
 
 
@@ -235,7 +243,7 @@ class InnerTask(Task):
         back_populates='inner_tasks'
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
-    workflow = relationship('Workflow', back_populates='inner_tasks')
+    parent_workflow = relationship('Workflow', back_populates='inner_tasks')
 
     __mapper_args__ = {
         'polymorphic_identity': 'InnerTask',
@@ -245,16 +253,22 @@ class InnerTask(Task):
         self.job = script_job
         self.nodes = data['nodes']
         self.scripts = data['scripts']
-        self.workflow = data['workflow']
+        print(data['workflow'].__dict__)
+        self.parent_workflow = data['workflow']
+        
         self.is_active = True
         super(InnerTask, self).__init__(**data)
 
     @property
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['Task']}
+
+    @property
     def serialized(self):
-        properties = {p: str(getattr(self, p)) for p in cls_to_properties['Task']}
+        properties = self.properties
         for prop in ('scripts', 'nodes'):
-            properties[prop] = [obj.serialized for obj in getattr(self, prop)]
-        properties['workflow'] = self.workflow.serialized
+            properties[prop] = [obj.properties for obj in getattr(self, prop)]
+        properties['parent_workflow'] = self.parent_workflow.properties
         return properties
 
     def task_neighbors(self, type):

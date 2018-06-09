@@ -81,7 +81,8 @@ def delete_workflow(workflow_id):
 def add_node(workflow_id, task_id):
     workflow = get_obj(Workflow, id=workflow_id)
     task = get_obj(Task, id=task_id)
-    workflow.tasks.append(task)
+    print(workflow.__dict__)
+    workflow.inner_tasks.append(task)
     db.session.commit()
     return jsonify({})
 

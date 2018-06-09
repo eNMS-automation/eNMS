@@ -61,8 +61,14 @@ class Script(CustomBase):
         self.description = description
 
     @property
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['Script']}
+
+    @property
     def serialized(self):
-        return {p: getattr(self, p) for p in cls_to_properties['Script']}
+        properties = self.properties
+        for prop in ('tasks', 'inner_tasks'):
+            properties[prop] = [obj.properties for obj in getattr(self, prop)]
 
 
 class NetmikoConfigScript(Script):

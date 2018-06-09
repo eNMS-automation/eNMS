@@ -25,31 +25,31 @@
   <script>
     function scheduleTask() {
       if (workflow && $("#scheduling-form").parsley().validate()) {
-          $.ajax({
-            type: "POST",
-            url: "/tasks/scheduler/inner_task",
-            dataType: "json",
-            data: $("#scheduling-form").serialize(),
-            success: function(task) {
-              nodes.add({
-                id: task.id,
-                label: task.name,
-                type: task.type
-              });
-              $.ajax({
-                type: "POST",
-                url: `/workflows/add_node/${workflow.id}/${task.id}`,
-                success: function(script){
-                  alertify.notify("Task created", 'success', 5);
-                }
-              });
-              $("#scheduling").modal('hide');
-            }
-          });
-        } else {
-          alertify.notify('Some fields are missing', 'error', 5);
-        }
+        $.ajax({
+          type: "POST",
+          url: `/tasks/scheduler/inner_task/${workflow.id}`,
+          dataType: "json",
+          data: $("#scheduling-form").serialize(),
+          success: function(task) {
+            nodes.add({
+              id: task.id,
+              label: task.name,
+              type: task.type
+            });
+            $.ajax({
+              type: "POST",
+              url: `/workflows/add_node/${workflow.id}/${task.id}`,
+              success: function(script){
+                alertify.notify("Task created", 'success', 5);
+              }
+            });
+            $("#scheduling").modal('hide');
+          }
+        });
+      } else {
+        alertify.notify('Some fields are missing', 'error', 5);
       }
+    }
 
     if (workflow) {
       $("#workflow").text = workflow.name

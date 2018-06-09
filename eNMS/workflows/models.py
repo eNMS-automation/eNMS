@@ -37,12 +37,16 @@ class WorkflowEdge(CustomBase):
         self.name = '{} -> {}'.format(self.source.name, self.destination.name)
 
     @property
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in ('name', 'type')}
+
+    @property
     def serialized(self):
         properties = {
             'name': self.name,
             'type': self.type,
-            'source': self.source.serialized,
-            'destination': self.destination.serialized
+            'source': self.source.properties,
+            'destination': self.destination.properties
         }
         return properties
 
@@ -56,26 +60,30 @@ class Workflow(CustomBase):
     type = Column(String)
     vendor = Column(String)
     operating_system = Column(String)
-    tasks = relationship('ScheduledWorkflowTask', back_populates='workflow')
-    inner_tasks = relationship('InnerTask', back_populates='workflow')
+    tasks = relationship('ScheduledWorkflowTask', back_populates='scheduled_workflow')
+    inner_tasks = relationship('InnerTask', back_populates='parent_workflow')
     edges = relationship('WorkflowEdge', back_populates='workflow')
     # start_task_id = Column(Integer, ForeignKey('InnerTask.id'))
 
-    properties = (
+    default_properties = (
         'name',
         'description',
         'type'
     )
 
     def __init__(self, **kwargs):
-        for property in self.properties:
+        for property in self.default_properties:
             setattr(self, property, kwargs[property])
 
     @property
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['Workflow']}
+
+    @property
     def serialized(self):
-        properties = {p: str(getattr(self, p)) for p in cls_to_properties['Workflow']}
+        properties = self.properties
         for prop in ('tasks', 'inner_tasks', 'edges'):
-            properties[prop] = [obj.serialized for obj in getattr(self, prop)]
+            properties[prop] = [obj.properties for obj in getattr(self, prop)]
         return properties
 
     def run(self):

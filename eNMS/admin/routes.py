@@ -7,6 +7,8 @@ from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 import flask_login
 
 
+from eNMS import db
+from eNMS.admin import blueprint
 from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
@@ -17,7 +19,7 @@ from eNMS.admin.forms import (
 )
 from eNMS.admin.models import Parameters, SyslogServer, User, user_factory, TacacsServer
 from eNMS.admin.properties import user_properties, user_search_properties
-from eNMS.base.models import get_obj
+from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
 from flask import (
     jsonify,

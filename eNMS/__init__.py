@@ -13,13 +13,23 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 scheduler = APScheduler()
 
-
-from eNMS.admin.models import create_default_parameters, SyslogServer, User
+from eNMS.objects.models import *
+from eNMS.tasks.models import *
+from eNMS.workflows.models import *
+from eNMS.admin.models import *
+from eNMS.base.models import *
+from eNMS.scripts.models import *
 from eNMS.config import config_dict
-from eNMS.objects.models import create_default_pools
 from eNMS.scripts.custom_scripts import create_custom_scripts
-from eNMS.scripts.models import create_default_scripts
-from eNMS.tasks.models import scheduler
+
+types = {
+    'node': Node,
+    'link': Link,
+    'user': User,
+    'script': Script,
+    'workflow': Workflow,
+    'task': Task
+}
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
 
@@ -55,7 +65,7 @@ def register_blueprints(app):
         'views',
     )
     for blueprint in blueprints:
-        module = import_module('{}.routes'.format(blueprint))
+        module = import_module('eNMS.{}'.format(blueprint))
         app.register_blueprint(module.blueprint)
 
 
@@ -72,13 +82,14 @@ def configure_login_manager(app, User):
 
 
 def configure_database(app):
-
+    
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
 
     @app.before_first_request
     def create_default():
+        db.create_all()
         create_default_parameters()
         create_default_scripts()
         create_default_pools()

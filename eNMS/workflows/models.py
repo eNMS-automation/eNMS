@@ -4,7 +4,7 @@ from time import sleep
 
 
 from eNMS import db
-from eNMS.base.models import get_obj
+from eNMS.base.helpers import get_obj
 from eNMS.base.models import CustomBase
 from eNMS.base.properties import cls_to_properties
 

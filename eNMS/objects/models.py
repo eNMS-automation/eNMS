@@ -5,11 +5,9 @@ from sqlalchemy.orm import backref, relationship
 
 
 from eNMS import db
-from eNMS.base.models import get_obj
-from eNMS.base.helpers import integrity_rollback
+from eNMS.base.helpers import get_obj, integrity_rollback
 from eNMS.base.models import (
     CustomBase,
-    get_obj,
     pool_node_table,
     pool_link_table,
     task_node_table,

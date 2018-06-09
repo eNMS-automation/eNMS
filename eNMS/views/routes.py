@@ -22,11 +22,9 @@ from eNMS.base.properties import (
 )
 from eNMS.scripts.models import Script
 from eNMS.tasks.forms import SchedulingForm
+from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
-from eNMS.views.styles import create_styles
 from eNMS.workflows.models import Workflow
-
-styles = create_styles(blueprint.root_path)
 
 
 ## Template rendering

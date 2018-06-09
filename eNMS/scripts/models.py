@@ -16,8 +16,7 @@ from subprocess import check_output
 
 
 from eNMS import db
-from eNMS.base.models import get_obj
-from eNMS.base.helpers import integrity_rollback, str_dict
+from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
 from eNMS.base.models import task_script_table, CustomBase
 from eNMS.base.properties import cls_to_properties
 from eNMS.scripts.properties import (

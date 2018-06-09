@@ -7,10 +7,10 @@ from yaml import load
 
 
 from eNMS import db
-from eNMS.base.models import get_obj
-from eNMS.base.helpers import allowed_file
+from eNMS.base.helpers import get_obj, allowed_file
 from eNMS.base.properties import pretty_names, script_public_properties
 from eNMS.objects.models import Node, Pool
+from eNMS.scripts import blueprint
 from eNMS.scripts.forms import (
     AnsibleScriptForm,
     NapalmConfigScriptForm,

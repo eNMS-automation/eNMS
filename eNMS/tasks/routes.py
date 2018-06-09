@@ -5,9 +5,9 @@ from re import search, sub
 
 
 from eNMS import db
-from eNMS.base.helpers import str_dict
-from eNMS.base.models import get_obj
+from eNMS.base.helpers import get_obj, str_dict
 from eNMS.base.properties import task_public_properties
+from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
 from eNMS.tasks.models import Task, task_factory
 from eNMS.objects.models import Pool, Node

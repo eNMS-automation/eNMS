@@ -44,8 +44,6 @@ class Log(CustomBase):
         return self.content
 
 
-def get_obj(model, **kwargs):
-    return db.session.query(model).filter_by(**kwargs).first()
 
 task_node_table = Table(
     'task_node_association',

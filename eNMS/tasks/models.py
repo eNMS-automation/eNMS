@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 from eNMS import db
-from eNMS.base.models import get_obj
+from eNMS.base.helpers import get_obj
 from eNMS.base.models import (
     task_node_table,
     task_script_table,

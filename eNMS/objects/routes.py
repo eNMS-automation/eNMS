@@ -6,8 +6,8 @@ from xlrd.biffh import XLRDError
 
 
 from eNMS import db
-from eNMS.base.models import get_obj
-from eNMS.base.helpers import allowed_file
+from eNMS.base.helpers import allowed_file, get_obj
+from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import (
     Link,

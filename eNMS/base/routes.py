@@ -2,33 +2,25 @@ from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import login_required
 from re import search
-from workflows.models import Workflow
 import flask_login
 
 
-from eNMS import db
+from eNMS import db, login_manager
+from eNMS.base import blueprint
 from eNMS.admin.models import User
-from eNMS.admin.routes import login_manager
 from eNMS.base.forms import LogFilteringForm
-from eNMS.base.models import get_obj, Log
+from eNMS.base.models import Log
 from eNMS.base.properties import (
     pretty_names,
     reverse_pretty_names,
     type_to_diagram_properties
 )
-from eNMS.objects.models import Node, Link
 from eNMS.scripts.models import Script
 from eNMS.tasks.models import Task
+from eNMS.workflows.models import Workflow
 
 
-types = {
-    'node': Node,
-    'link': Link,
-    'user': User,
-    'script': Script,
-    'workflow': Workflow,
-    'task': Task
-}
+
 
 default_properties = {
     'node': 'vendor',

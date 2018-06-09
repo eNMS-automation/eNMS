@@ -10,7 +10,8 @@ from threading import Thread
 
 
 from eNMS import db
-from eNMS.base.models import CustomBase, get_obj
+from eNMS.base.helpers import get_obj
+from eNMS.base.models import CustomBase
 from eNMS.base.helpers import integrity_rollback
 from eNMS.base.models import Log
 

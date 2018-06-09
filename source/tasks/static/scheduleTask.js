@@ -12,9 +12,9 @@ for (var i = 0; i < dates.length; i++) {
   $('#' + dates[i]).data("DateTimePicker").minDate(today);
 }
 
-function schedule(){
+function openWizard(){
   $('#wizard').smartWizard({
-    onFinish: scheduleTask,
+    onFinish: schedule,
     enableFinishButton: true,
   });
   $('.buttonNext').addClass('btn btn-success');

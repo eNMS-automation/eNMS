@@ -79,34 +79,31 @@ def delete_workflow(workflow_id):
     return jsonify(workflow.name)
 
 
-@blueprint.route('/add_node/<workflow_id>/<script_id>', methods=['POST'])
+@blueprint.route('/add_node/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
-def add_node(workflow_id, script_id):
+def add_node(workflow_id, task_id):
     workflow = get_obj(Workflow, id=workflow_id)
-    script = get_obj(Script, id=script_id)
-    return jsonify(script.serialized)
-
-
-@blueprint.route('/save/<workflow_id>', methods=['POST'])
-@login_required
-def save_workflow(workflow_id):
-    workflow = get_obj(Workflow, id=workflow_id)
-    workflow.tasks = []
-    for edge in workflow.edges:
-        db.session.delete(edge)
+    task = get_obj(Task, id=task_id)
+    workflow.tasks.append(task)
     db.session.commit()
-    for node in request.json['nodes']:
-        task = get_obj(Task, id=node['id'])
-        workflow.tasks.append(task)
-    for edge in request.json['edges']:
-        source = get_obj(Task, id=int(edge['from']))
-        destination = get_obj(Task, id=int(edge['to']))
-        workflow_edge = WorkflowEdge(edge['type'], source, destination)
-        db.session.add(workflow_edge)
-        db.session.commit()
-        workflow.edges.append(workflow_edge)
-    if request.json['start']:
-        start_id = request.json['start']['id']
-        workflow.start_script = get_obj(Task, id=start_id)
+    return jsonify({})
+
+
+@blueprint.route('/add_edge/<workflow_id>/<type>/<source>/<dest>', methods=['POST'])
+@login_required
+def add_edge(workflow_id, type, source_id, destination_id):
+    source_task = get_obj(Task, id=source_id)
+    destination_task = get_obj(Task, id=destination_id)
+    workflow_edge = WorkflowEdge(type, source_task, destination_task)
+    db.session.add(workflow_edge)
+    workflow.edges.append(workflow_edge)
+    db.session.commit()
+    return jsonify({})
+
+
+@blueprint.route('/set_as_start/<task_id>', methods=['POST'])
+@login_required
+def set_as_start(workflow_id, type, source_id, destination_id):
+    get_obj(Workflow, id=workflow_id).start_script = get_obj(Task, id=start_id)
     db.session.commit()
     return jsonify({})

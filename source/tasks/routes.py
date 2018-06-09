@@ -72,15 +72,15 @@ def calendar():
 
 @blueprint.route('/scheduler', methods=['POST'])
 @login_required
-def view_scheduler():
+def scheduler():
     data = request.form.to_dict()
     data['scripts'] = [get_obj(Script, id=id) for id in request.form.getlist('scripts')]
     data['nodes'] = [get_obj(Node, id=id) for id in request.form.getlist('scripts')]
     for pool_id in request.form.getlist('pools'):
         data['nodes'].extend(get_obj(Pool, id=pool_id).nodes)
     data['user'] = current_user
-    task_factory(**data)
-    return jsonify({})
+    task = task_factory(**data)
+    return jsonify(task.serialized)
 
 
 @blueprint.route('/get/<task_id>', methods=['POST'])

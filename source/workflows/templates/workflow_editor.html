@@ -24,9 +24,32 @@
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
   <script>
     function schedule() {
-      task = scheduleTask();
-      addNode(task);
-    }
+      if (workflow && $("#scheduling-form").parsley().validate()) {
+          $.ajax({
+            type: "POST",
+            url: `/tasks/scheduler`,
+            dataType: "json",
+            data: $("#scheduling-form").serialize(),
+            success: function(task) {
+              nodes.add({
+                id: task.id,
+                label: task.name,
+                type: task.type
+              });
+              $.ajax({
+                type: "POST",
+                url: `/workflows/add_node/${workflow.id}/${task.id}`,
+                success: function(script){
+                  alertify.notify("Task created", 'success', 5);
+                }
+              });
+              $("#scheduling").modal('hide');
+            }
+          });
+        } else {
+          alertify.notify('Some fields are missing', 'error', 5);
+        }
+      }
 
     if (workflow) {
       $("#workflow").text = workflow.name

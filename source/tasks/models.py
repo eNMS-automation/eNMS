@@ -172,3 +172,4 @@ def task_factory(**kwargs):
         task = Task(**kwargs)
         db.session.add(task)
     db.session.commit()
+    return task

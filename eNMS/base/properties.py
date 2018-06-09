@@ -79,6 +79,19 @@ parameters_public_properties = (
     'default_zoom_level'
 )
 
+task_serialized_properties = (
+    'id',
+    'name',
+    'status'
+)
+
+scheduled_task_serialized_properties = task_serialized_properties + (
+    'start_date',
+    'end_date',
+    'frequency',
+    'creator'
+)
+
 public_properties = (
     node_public_properties +
     link_public_properties
@@ -93,7 +106,9 @@ cls_to_properties = {
     'Parameters': parameters_public_properties,
     'Workflow': ('id',) + workflow_public_properties,
     'User': ('id',) + user_public_properties,
-    'Log': ('id',) + log_public_properties
+    'Log': ('id',) + log_public_properties,
+    'Task': task_serialized_properties,
+    'ScheduledTask': scheduled_task_serialized_properties
 }
 
 type_to_public_properties = OrderedDict([

@@ -6,7 +6,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
 
-from eNMS import db
+from eNMS import db, scheduler
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import (
     inner_task_node_table,
@@ -15,21 +15,36 @@ from eNMS.base.models import (
     scheduled_task_script_table,
     CustomBase
 )
+from eNMS.base.properties import cls_to_properties
 
 
-def job_multiprocessing(name):
-    job_time = str(datetime.now())
+def script_job(task_name):
+    with scheduler.app.app_context():
+        print(task_name)
+        job_time = str(datetime.now())
+        task = get_obj(Task, name=task_name)
+        print(task)
+        logs = {job_time: {}}
+        nodes = task.nodes if task.nodes else ['dummy']
+        print(task.__dict__)
+        for task_job in task.scripts:
+            print(task_job.__dict__)
+            results = {}
+            pool = ThreadPool(processes=len(nodes))
+            args = [(task, node, results) for node in nodes]
+            pool.map(task_job.job, args)
+            pool.close()
+            pool.join()
+            logs[job_time][task_job.name] = results
+            print(task.logs)
+        task.logs = logs
+        # db.session.add(task)
+        db.session.commit()
+
+
+def workflow_job(name):
     task = get_obj(Task, name=name)
-    task.logs[job_time] = {}
-    nodes = task.nodes if task.nodes else ['dummy']
-    for task_job in task.scripts + task.workflows:
-        results = {}
-        pool = ThreadPool(processes=len(nodes))
-        args = [(task, node, results) for node in nodes]
-        pool.map(task_job.job, args)
-        pool.close()
-        pool.join()
-        task.logs[job_time][task_job.name] = results
+    task.workflow.run()
     db.session.commit()
 
 
@@ -43,13 +58,16 @@ class Task(CustomBase):
     type = Column(String)
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='tasks')
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
         'polymorphic_identity': 'Task',
         'polymorphic_on': type
     }
 
-    def __init__(self, data):
+    def __init__(self, **data):
+        self.status = 'active'
+        self.name = data['name']
         self.user = data['user']
 
 
@@ -60,7 +78,6 @@ class ScheduledTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     recurrent = Column(Boolean, default=False)
     creation_time = Column(Integer)
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
     frequency = Column(String(120))
     start_date = Column(String)
     end_date = Column(String)
@@ -71,8 +88,6 @@ class ScheduledTask(Task):
     }
 
     def __init__(self, **data):
-        self.data = data
-        self.name = data['name']
         self.frequency = data['frequency']
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
@@ -85,6 +100,7 @@ class ScheduledTask(Task):
             setattr(self, date, value)
         self.is_active = True
         super(ScheduledTask, self).__init__(**data)
+        self.schedule()
 
     def schedule(self):
         if self.frequency:
@@ -120,7 +136,7 @@ class ScheduledTask(Task):
         # run the job on a regular basis with an interval trigger
         scheduler.add_job(
             id=self.creation_time,
-            func=job_multiprocessing,
+            func=self.job,
             args=[self.name],
             trigger='interval',
             start_date=self.start_date,
@@ -144,7 +160,7 @@ class ScheduledTask(Task):
         scheduler.add_job(
             id=self.creation_time,
             run_date=self.start_date,
-            func=job_multiprocessing,
+            func=self.job,
             args=[self.name],
             trigger='date'
         )
@@ -173,7 +189,15 @@ class ScheduledScriptTask(ScheduledTask):
     def __init__(self, **data):
         self.scripts = data['scripts']
         self.nodes = data['nodes']
-        super(ScheduledScriptTask, self).__init__(**kwargs)
+        self.job = script_job
+        super(ScheduledScriptTask, self).__init__(**data)
+
+    @property
+    def serialized(self):
+        properties = {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+        for prop in ('scripts', 'nodes'):
+            properties[prop] = [obj.serialized for obj in getattr(self, prop)]
+        return properties
 
 
 class ScheduledWorkflowTask(ScheduledTask):
@@ -190,7 +214,14 @@ class ScheduledWorkflowTask(ScheduledTask):
 
     def __init__(self, **data):
         self.workflow = data['workflow']
-        super(ScheduledWorkflowTask, self).__init__(**kwargs)
+        self.job = workflow_job
+        super(ScheduledWorkflowTask, self).__init__(**data)
+
+    @property
+    def serialized(self):
+        properties = {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+        properties['workflow'] = self.workflow.serialied
+        return properties
 
 
 class InnerTask(Task):
@@ -198,7 +229,6 @@ class InnerTask(Task):
     __tablename__ = 'InnerTask'
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
     scripts = relationship(
         'Script',
         secondary=inner_task_script_table,
@@ -217,22 +247,41 @@ class InnerTask(Task):
     }
 
     def __init__(self, **data):
-        self.name = data['name']
         self.nodes = data['nodes']
         self.scripts = data['scripts']
         self.workflow = data['workflow']
-        self.status = 'active'
         self.is_active = True
+        super(InnerTask, self).__init__(**data)
 
-def task_factory(**kwargs):
-    task = get_obj(Task, name=kwargs['name'])
+    @property
+    def serialized(self):
+        properties = {p: str(getattr(self, p)) for p in cls_to_properties['Task']}
+        for prop in ('scripts', 'nodes'):
+            properties[prop] = [obj.serialized for obj in getattr(self, prop)]
+        properties['workflow'] = self.workflow.serialized
+        return properties
+
+    def task_neighbors(self, type):
+        return [x.destination for x in self.destinations if x.type == type]
+
+
+task_types = {
+    'script_task': ScheduledScriptTask,
+    'workflow_task': ScheduledWorkflowTask,
+    'inner_task': InnerTask
+}
+
+
+def task_factory(task_type, **kwargs):
+    cls = task_types[task_type]
+    task = get_obj(cls, name=kwargs['name'])
     if task:
         for property, value in kwargs.items():
             if property in ('start_date', 'end_date') and value:
                 value = task.datetime_conversion(value)
             setattr(task, property, value)
     else:
-        task = WorkflowTask(**kwargs) if 'workflow' in kwargs else Task(**kwargs)
+        task = cls(**kwargs)
         db.session.add(task)
     db.session.commit()
     return task

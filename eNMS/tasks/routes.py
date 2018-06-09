@@ -66,7 +66,7 @@ def calendar():
 ## AJAX calls
 
 
-@blueprint.route('/task_scheduler/<task_type>', methods=['POST'])
+@blueprint.route('/scheduler/<task_type>', methods=['POST'])
 @login_required
 def scheduler(task_type):
     data = request.form.to_dict()
@@ -78,9 +78,9 @@ def scheduler(task_type):
         for pool_id in request.form.getlist('pools'):
             data['nodes'].extend(get_obj(Pool, id=pool_id).nodes)
     else:
-        data['workflow'] = get_obj(Pool, id=data['workflow'])
+        data['workflow'] = get_obj(Workflow, id=data['workflow'])
     data['user'] = current_user
-    task = task_factory(**data)
+    task = task_factory(task_type, **data)
     return jsonify(task.serialized)
 
 
@@ -102,6 +102,7 @@ def get_task(task_id):
 @login_required
 def show_logs(task_id):
     task = get_obj(Task, id=task_id)
+    print(task.__dict__)
     return jsonify(str_dict(task.logs))
 
 

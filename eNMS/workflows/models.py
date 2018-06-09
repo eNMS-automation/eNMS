@@ -16,16 +16,16 @@ class WorkflowEdge(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     type = Column(String)
-    source_id = Column(Integer, ForeignKey('Script.id'))
+    source_id = Column(Integer, ForeignKey('InnerTask.id'))
     source = relationship(
-        'Script',
-        primaryjoin="Script.id == WorkflowEdge.source_id",
+        'InnerTask',
+        primaryjoin='InnerTask.id == WorkflowEdge.source_id',
         backref='destinations'
     )
-    destination_id = Column(Integer, ForeignKey('Script.id'))
+    destination_id = Column(Integer, ForeignKey('InnerTask.id'))
     destination = relationship(
-        'Script',
-        primaryjoin="Script.id == WorkflowEdge.destination_id"
+        'InnerTask',
+        primaryjoin='InnerTask.id == WorkflowEdge.destination_id'
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='edges')
@@ -59,6 +59,7 @@ class Workflow(CustomBase):
     tasks = relationship('ScheduledWorkflowTask', back_populates='workflow')
     inner_tasks = relationship('InnerTask', back_populates='workflow')
     edges = relationship('WorkflowEdge', back_populates='workflow')
+    # start_task_id = Column(Integer, ForeignKey('InnerTask.id'))
 
     properties = (
         'name',
@@ -73,24 +74,24 @@ class Workflow(CustomBase):
     @property
     def serialized(self):
         properties = {p: str(getattr(self, p)) for p in cls_to_properties['Workflow']}
-        properties['tasks'] = [task.serialized for task in self.tasks]
-        properties['edges'] = [edge.serialized for edge in self.edges]
+        for prop in ('tasks', 'inner_tasks', 'edges'):
+            properties[prop] = [obj.serialized for obj in getattr(self, prop)]
         return properties
 
-    def job(self, args):
-        task, node, results = args
+    def run(self):
+        layer, visited = {self.start_task}, set()
         while layer:
             new_layer = set()
-            for script in layer:
-                visited.add(script)
-                script_results = {}
-                success = script.job([task, node, script_results])
+            for task in layer:
+                visited.add(task)
+                task_results = {}
+                success = task.job([task, node, task_results])
                 edge_type = 'success' if success else 'failure'
-                results[script.name] = script_results
-                for neighbor in script.script_neighbors(self, edge_type):
+                results[task.name] = task_results
+                for neighbor in task.task_neighbors(self, edge_type):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
-                sleep(script.waiting_time)
+                sleep(task.waiting_time)
             layer = new_layer
 
 

@@ -3,7 +3,7 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
 class Config(object):
     # SQL Alchemy
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db?check_same_thread=False'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # AP Scheduler
     JOBS = []

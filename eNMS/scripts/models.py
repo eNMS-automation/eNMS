@@ -64,12 +64,6 @@ class Script(CustomBase):
     def serialized(self):
         return {p: getattr(self, p) for p in cls_to_properties['Script']}
 
-    def script_neighbors(self, workflow, type):
-        return [
-            x.destination for x in self.destinations
-            if x.workflow == workflow and x.type == type
-        ]
-
 
 class NetmikoConfigScript(Script):
 

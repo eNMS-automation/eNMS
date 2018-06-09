@@ -13,6 +13,7 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 scheduler = APScheduler()
 
+
 from eNMS.objects.models import *
 from eNMS.tasks.models import *
 from eNMS.workflows.models import *
@@ -22,14 +23,6 @@ from eNMS.scripts.models import *
 from eNMS.config import config_dict
 from eNMS.scripts.custom_scripts import create_custom_scripts
 
-types = {
-    'node': Node,
-    'link': Link,
-    'user': User,
-    'script': Script,
-    'workflow': Workflow,
-    'task': Task
-}
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
 

@@ -29,7 +29,7 @@
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
   <!-- Task management -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='task_management.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
   <script> var tasks = {{ tasks|tojson|safe }}; </script>
   <!-- Calendar -->
   <script src="{{ url_for('tasks_blueprint.static', filename='calendar.js') }}"></script>

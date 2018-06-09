@@ -7,29 +7,16 @@ import flask_login
 
 from eNMS import db, login_manager
 from eNMS.base import blueprint
-from eNMS.admin.models import User
 from eNMS.base.forms import LogFilteringForm
+from eNMS.base.classes import diagram_classes
 from eNMS.base.models import Log
 from eNMS.base.properties import (
+    default_diagrams_properties,
     pretty_names,
     reverse_pretty_names,
     type_to_diagram_properties
 )
-from eNMS.scripts.models import Script
-from eNMS.tasks.models import Task
-from eNMS.workflows.models import Workflow
 
-
-
-
-default_properties = {
-    'node': 'vendor',
-    'link': 'location',
-    'user': 'access_rights',
-    'script': 'type',
-    'workflow': 'vendor',
-    'task': 'type'
-}
 
 ## Template rendering
 
@@ -46,8 +33,8 @@ def dashboard():
         'dashboard.html',
         names=pretty_names,
         properties=type_to_diagram_properties,
-        default_properties=default_properties,
-        counters={name: len(cls.query.all()) for name, cls in types.items()}
+        default_properties=default_diagrams_properties,
+        counters={name: len(cls.query.all()) for name, cls in diagram_classes.items()}
     )
 
 
@@ -125,3 +112,10 @@ def not_found_error(error):
 @blueprint.errorhandler(500)
 def internal_error(error):
     return render_template('errors/page_500.html'), 500
+
+## Shutdown
+
+@blueprint.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_server()
+    return 'Server shutting down...'

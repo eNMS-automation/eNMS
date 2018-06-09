@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+
 object_common_properties = (
     'name',
     'description',
@@ -113,6 +114,15 @@ type_to_public_properties = OrderedDict([
 ])
 
 ## Diagram properties (for the dashboard)
+
+default_diagrams_properties = {
+    'node': 'vendor',
+    'link': 'location',
+    'user': 'access_rights',
+    'script': 'type',
+    'workflow': 'vendor',
+    'task': 'type'
+}
 
 object_diagram_properties = (
     'description',

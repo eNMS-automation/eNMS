@@ -10,7 +10,7 @@ from subprocess import Popen
 
 
 from eNMS.admin.models import Parameters
-from eNMS.base.models import get_obj
+from eNMS.base.helpers import get_obj
 from eNMS.base.models import Log
 from eNMS.objects.forms import AddNode, AddLink
 from eNMS.objects.models import Pool, Node, node_class, Link

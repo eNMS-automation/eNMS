@@ -31,3 +31,5 @@ for subtype, cls in link_class.items():
     kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
     line_style.linestyle.color = kml_color
     styles[subtype] = line_style
+
+from . import routes

@@ -5,7 +5,7 @@ from sqlalchemy.orm import backref, relationship
 
 
 from eNMS import db
-from eNMS.base.helpers import get_obj, integrity_rollback
+from eNMS.base.helpers import get_obj, initialize_properties, integrity_rollback
 from eNMS.base.models import (
     CustomBase,
     pool_node_table,
@@ -20,19 +20,6 @@ from eNMS.base.properties import (
     node_public_properties,
     object_common_properties
 )
-
-
-def initialize_properties(function):
-    def wrapper(self, **kwargs):
-        for property, value in kwargs.items():
-            # depending on whether value is an iterable or not, we must
-            # unpack it's value (when **kwargs is request.form, some values
-            # will be a 1-element list)
-            if hasattr(value, '__iter__') and not isinstance(value, str):
-                value = value[0]
-            setattr(self, property, value)
-        function(self)
-    return wrapper
 
 
 class Object(CustomBase):

@@ -44,7 +44,6 @@ class Log(CustomBase):
         return self.content
 
 
-
 task_node_table = Table(
     'task_node_association',
     CustomBase.metadata,

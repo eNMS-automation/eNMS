@@ -70,7 +70,7 @@ def calendar():
 @login_required
 def scheduler(task_type):
     data = request.form.to_dict()
-    if task_type in ('task', 'inner_task'):
+    if task_type in ('script_task', 'inner_task'):
         scripts = request.form.getlist('scripts')
         nodes = request.form.getlist('nodes')
         data['scripts'] = [get_obj(Script, id=id) for id in scripts]

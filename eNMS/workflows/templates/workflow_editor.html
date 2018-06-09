@@ -27,7 +27,7 @@
       if (workflow && $("#scheduling-form").parsley().validate()) {
           $.ajax({
             type: "POST",
-            url: "/tasks/scheduler/workflow_task",
+            url: "/tasks/scheduler/inner_task",
             dataType: "json",
             data: $("#scheduling-form").serialize(),
             success: function(task) {

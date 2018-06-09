@@ -6,7 +6,7 @@ function scheduleTask() {
   if ($("#scheduling-form").parsley().validate()) {
     $.ajax({
       type: "POST",
-      url: "/tasks/scheduler/workflow",
+      url: "/tasks/scheduler/workflow_task",
       dataType: "json",
       data: $("#scheduling-form").serialize(),
       success: function() {

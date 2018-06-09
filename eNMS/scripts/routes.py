@@ -1,9 +1,17 @@
-from base.database import db, get_obj
-from base.helpers import allowed_file
-from base.properties import pretty_names, script_public_properties
-from flask import Blueprint, current_app, jsonify, render_template, request
+from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
-from .forms import (
+from jinja2 import Template
+from os.path import join
+from werkzeug import secure_filename
+from yaml import load
+
+
+from eNMS import db
+from eNMS.base.models import get_obj
+from eNMS.base.helpers import allowed_file
+from eNMS.base.properties import pretty_names, script_public_properties
+from eNMS.objects.models import Node, Pool
+from eNMS.scripts.forms import (
     AnsibleScriptForm,
     NapalmConfigScriptForm,
     NapalmGettersForm,
@@ -11,10 +19,7 @@ from .forms import (
     FileTransferScriptForm,
     NetmikoValidationForm,
 )
-from jinja2 import Template
-from os.path import join
-from .properties import type_to_properties
-from .models import (
+from eNMS.scripts.models import (
     AnsibleScript,
     FileTransferScript,
     NapalmConfigScript,
@@ -25,12 +30,12 @@ from .models import (
     script_factory,
     type_to_class
 )
-from objects.models import Node, Pool
-from tasks.forms import SchedulingForm
-from werkzeug import secure_filename
-from yaml import load
+from eNMS.scripts.properties import type_to_properties
+from eNMS.tasks.forms import SchedulingForm
+
 
 ## Template rendering
+
 
 type_to_form = {
     'netmiko_config': NetmikoConfigScriptForm,

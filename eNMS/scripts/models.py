@@ -1,11 +1,6 @@
-from base.database import db, get_obj
-from base.helpers import integrity_rollback, str_dict
-from base.models import task_script_table, CustomBase
-from base.properties import cls_to_properties
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
-from .properties import type_to_properties, list_properties, boolean_properties
 from sqlalchemy import (
     Boolean,
     Column,
@@ -18,6 +13,18 @@ from sqlalchemy import (
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from subprocess import check_output
+
+
+from eNMS import db
+from eNMS.base.models import get_obj
+from eNMS.base.helpers import integrity_rollback, str_dict
+from eNMS.base.models import task_script_table, CustomBase
+from eNMS.base.properties import cls_to_properties
+from eNMS.scripts.properties import (
+    boolean_properties,
+    list_properties,
+    type_to_properties
+)
 
 
 class Script(CustomBase):

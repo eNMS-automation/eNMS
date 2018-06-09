@@ -1,9 +1,12 @@
-from base.database import db, get_obj
-from base.models import CustomBase
-from base.properties import cls_to_properties
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from time import sleep
+
+
+from eNMS import db
+from eNMS.base.models import get_obj
+from eNMS.base.models import CustomBase
+from eNMS.base.properties import cls_to_properties
 
 
 class WorkflowEdge(CustomBase):

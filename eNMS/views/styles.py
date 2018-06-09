@@ -1,4 +1,4 @@
-from objects.models import node_subtypes, link_class
+from eNMS.objects.models import node_subtypes, link_class
 from os.path import join
 from simplekml import Color, Style
 

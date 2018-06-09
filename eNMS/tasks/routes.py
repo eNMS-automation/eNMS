@@ -1,15 +1,19 @@
-from base.database import db, get_obj
-from base.helpers import str_dict
-from base.properties import task_public_properties
 from difflib import SequenceMatcher
 from flask import jsonify, render_template, request, session
 from flask_login import current_user, login_required
-from .forms import CompareForm, SchedulingForm
-from .models import Task, task_factory
-from objects.models import Pool, Node
-from scripts.models import Script
 from re import search, sub
-from workflows.models import Workflow
+
+
+from eNMS import db
+from eNMS.base.helpers import str_dict
+from eNMS.base.models import get_obj
+from eNMS.base.properties import task_public_properties
+from eNMS.tasks.forms import CompareForm, SchedulingForm
+from eNMS.tasks.models import Task, task_factory
+from eNMS.objects.models import Pool, Node
+from eNMS.scripts.models import Script
+from eNMS.workflows.models import Workflow
+
 
 ## Template rendering
 

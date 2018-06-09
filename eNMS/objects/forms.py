@@ -1,17 +1,17 @@
-from base.properties import node_public_properties, link_public_properties
 from flask_wtf import FlaskForm
-from objects.models import link_class, node_class
 from wtforms import (
     BooleanField,
     FloatField,
-    SelectMultipleField,
     PasswordField,
+    SelectMultipleField,
     SelectField,
     TextField
 )
 from wtforms.validators import optional
 
-## Object creation
+
+from eNMS.base.properties import link_public_properties, node_public_properties
+from eNMS.objects.models import link_class, node_class
 
 
 class AddObjectForm(FlaskForm):
@@ -40,8 +40,6 @@ class AddLink(AddObjectForm):
     type = SelectField('Type', choices=link_type)
     source = SelectField('Source', choices=())
     destination = SelectField('Destination', choices=())
-
-## Object filtering
 
 
 def configure_form(cls):

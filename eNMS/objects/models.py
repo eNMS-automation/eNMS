@@ -1,12 +1,20 @@
-from base.database import db, get_obj
-from base.helpers import integrity_rollback
-from base.models import (
+from collections import OrderedDict
+from re import search
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
+from sqlalchemy.orm import backref, relationship
+
+
+from eNMS import db
+from eNMS.base.models import get_obj
+from eNMS.base.helpers import integrity_rollback
+from eNMS.base.models import (
+    CustomBase,
+    get_obj,
     pool_node_table,
     pool_link_table,
     task_node_table,
-    CustomBase
 )
-from base.properties import (
+from eNMS.base.properties import (
     cls_to_properties,
     link_common_properties,
     link_public_properties,
@@ -14,10 +22,6 @@ from base.properties import (
     node_public_properties,
     object_common_properties
 )
-from collections import OrderedDict
-from re import search
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
-from sqlalchemy.orm import backref, relationship
 
 
 def initialize_properties(function):

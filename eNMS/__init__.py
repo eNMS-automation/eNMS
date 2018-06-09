@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_apscheduler import APScheduler
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
@@ -10,6 +11,7 @@ import logging
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+scheduler = APScheduler()
 
 
 from eNMS.admin.models import create_default_parameters, SyslogServer, User

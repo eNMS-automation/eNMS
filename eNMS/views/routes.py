@@ -1,31 +1,33 @@
-from admin.models import Parameters
-from base.database import get_obj
-from base.models import Log
-from base.properties import (
-    pretty_names,
-    link_public_properties,
-    node_public_properties,
-    type_to_public_properties
-)
 from collections import OrderedDict
 from flask import current_app, jsonify, render_template, request, session
 from flask_login import current_user, login_required
-from .forms import GoogleEarthForm, ViewOptionsForm
-from objects.forms import AddNode, AddLink
-from objects.models import Pool, Node, node_class, Link
+from os import system as os_system
 from os.path import join
 from passlib.hash import cisco_type7
-from scripts.models import Script
+from platform import system as platform_system
 from simplekml import Kml
-from .styles import create_styles
-from tasks.forms import SchedulingForm
 from subprocess import Popen
-from workflows.models import Workflow
-# we use os.system and platform.system => namespace conflict
-import os
-import platform
+
+
+from eNMS.admin.models import Parameters
+from eNMS.base.models import get_obj
+from eNMS.base.models import Log
+from eNMS.objects.forms import AddNode, AddLink
+from eNMS.objects.models import Pool, Node, node_class, Link
+from eNMS.base.properties import (
+    link_public_properties,
+    node_public_properties,
+    pretty_names,
+    type_to_public_properties
+)
+from eNMS.scripts.models import Script
+from eNMS.tasks.forms import SchedulingForm
+from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
+from eNMS.views.styles import create_styles
+from eNMS.workflows.models import Workflow
 
 styles = create_styles(blueprint.root_path)
+
 
 ## Template rendering
 
@@ -84,7 +86,7 @@ def view(view_type):
 @blueprint.route('/connect_to_<name>', methods=['POST'])
 @login_required
 def putty_connection(name):
-    current_os, node = platform.system(), get_obj(Node, name=name)
+    current_os, node = platform_system(), get_obj(Node, name=name)
     password = cisco_type7.decode(current_user.password)
     if current_os == 'Windows':
         path_putty = join(current_app.path_apps, 'putty.exe')
@@ -101,7 +103,7 @@ def putty_connection(name):
             current_user.name,
             node.ip_address
         )
-        os.system(arg)
+        os_system(arg)
     return jsonify({})
 
 
@@ -114,7 +116,6 @@ def export_to_google_earth():
         point.coords = [(node.longitude, node.latitude)]
         point.style = styles[node.subtype]
         point.style.labelstyle.scale = request.form['label_size']
-
     for link in Link.query.all():
         line = kml_file.newlinestring(name=link.name)
         line.coords = [

@@ -1,20 +1,18 @@
 from apscheduler.jobstores.base import JobLookupError
-from base.database import db, get_obj
-from base.models import (
-    task_node_table,
-    task_script_table,
-    CustomBase
-)
 from datetime import datetime, timedelta
-from flask_apscheduler import APScheduler
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
-scheduler = APScheduler()
 
-## Netmiko process and job
+from eNMS import db
+from eNMS.base.models import get_obj
+from eNMS.base.models import (
+    task_node_table,
+    task_script_table,
+    CustomBase
+)
 
 
 def job_multiprocessing(name):
@@ -31,9 +29,6 @@ def job_multiprocessing(name):
         pool.join()
         task.logs[job_time][task_job.name] = results
     db.session.commit()
-
-
-## Tasks
 
 
 class Task(CustomBase):

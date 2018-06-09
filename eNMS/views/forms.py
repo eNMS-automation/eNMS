@@ -1,10 +1,12 @@
-from base.properties import (
-    pretty_names,
-    node_public_properties,
-    link_public_properties
-)
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, SelectField, TextField
+
+
+from eNMS.base.properties import (
+    link_public_properties,
+    node_public_properties,
+    pretty_names
+)
 
 
 class ViewOptionsForm(FlaskForm):

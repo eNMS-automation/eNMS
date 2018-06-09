@@ -1,9 +1,11 @@
-from base.database import db
-from .models import Script, type_to_class
 from nornir.core import Nornir
 from nornir.core.inventory import Inventory
 from nornir.plugins.tasks import networking
 from sqlalchemy import Column, exc, ForeignKey, Integer, String
+
+
+from eNMS import db
+from eNMS.scripts.models import Script, type_to_class
 
 
 class CustomScript(Script):

@@ -1,9 +1,10 @@
-from .database import Base
 from .properties import cls_to_properties
 from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
+from eNMS import db
 
-class CustomBase(Base):
+
+class CustomBase(db.model):
 
     __abstract__ = True
 

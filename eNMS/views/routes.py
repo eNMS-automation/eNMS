@@ -8,14 +8,7 @@ from base.properties import (
     type_to_public_properties
 )
 from collections import OrderedDict
-from flask import (
-    Blueprint,
-    current_app,
-    jsonify,
-    render_template,
-    request,
-    session,
-)
+from flask import current_app, jsonify, render_template, request, session
 from flask_login import current_user, login_required
 from .forms import GoogleEarthForm, ViewOptionsForm
 from objects.forms import AddNode, AddLink
@@ -31,14 +24,6 @@ from workflows.models import Workflow
 # we use os.system and platform.system => namespace conflict
 import os
 import platform
-
-blueprint = Blueprint(
-    'views_blueprint',
-    __name__,
-    url_prefix='/views',
-    template_folder='templates',
-    static_folder='static'
-)
 
 styles = create_styles(blueprint.root_path)
 
@@ -70,8 +55,6 @@ def view(view_type):
     view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
     if 'view' in request.form:
         view = request.form['view']
-    # we clean the session's selected nodes
-    session['selection'] = []
     # name to id
     name_to_id = {node.name: id for id, node in enumerate(Node.query.all())}
     return render_template(

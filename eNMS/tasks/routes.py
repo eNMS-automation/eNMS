@@ -2,7 +2,7 @@ from base.database import db, get_obj
 from base.helpers import str_dict
 from base.properties import task_public_properties
 from difflib import SequenceMatcher
-from flask import Blueprint, jsonify, render_template, request, session
+from flask import jsonify, render_template, request, session
 from flask_login import current_user, login_required
 from .forms import CompareForm, SchedulingForm
 from .models import Task, task_factory
@@ -10,14 +10,6 @@ from objects.models import Pool, Node
 from scripts.models import Script
 from re import search, sub
 from workflows.models import Workflow
-
-blueprint = Blueprint(
-    'tasks_blueprint',
-    __name__,
-    url_prefix='/tasks',
-    template_folder='templates',
-    static_folder='static'
-)
 
 ## Template rendering
 

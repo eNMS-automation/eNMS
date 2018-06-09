@@ -1,22 +1,26 @@
-from config import config_dict
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from os import environ
 from os.path import abspath, dirname, join, pardir
-from admin.models import create_default_parameters, SyslogServer
-from base.database import db, create_database
-from scripts.custom_scripts import create_custom_scripts
-from objects.models import create_default_pools
-from scripts.models import create_default_scripts
-from tasks.models import scheduler
-from admin.routes import login_manager
 import sys
 import logging
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+
+
+
+from eNMS.admin.models import create_default_parameters, SyslogServer
+from eNMS.base.database import db, create_database
+from eNMS.config import config_dict
+from eNMS.objects.models import create_default_pools
+from eNMS.scripts.custom_scripts import create_custom_scripts
+from eNMS.scripts.models import create_default_scripts
+from eNMS.tasks.models import scheduler
+
+
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
 
@@ -105,7 +109,7 @@ def configure_scheduler(scheduler):
 def create_app(test=False):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config_mode)
-    initialize_paths(app)
+    # initialize_paths(app)
     register_extensions(app, test)
     register_blueprints(app)
     from admin.models import User

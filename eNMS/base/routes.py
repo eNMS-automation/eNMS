@@ -1,25 +1,8 @@
 from base.database import db, get_obj
 from collections import Counter
-from flask import (
-    Blueprint,
-    jsonify,
-    render_template,
-    redirect,
-    request,
-    url_for
-)
+from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import login_required
 from .properties import pretty_names, reverse_pretty_names
-
-import flask_login
-
-blueprint = Blueprint(
-    'base_blueprint',
-    __name__,
-    url_prefix='',
-    template_folder='templates'
-)
-
 from .forms import LogFilteringForm
 from .models import Log
 from objects.models import Node, Link
@@ -30,6 +13,7 @@ from tasks.models import Task
 from admin.models import User
 from admin.routes import login_manager
 from workflows.models import Workflow
+import flask_login
 
 types = {
     'node': Node,

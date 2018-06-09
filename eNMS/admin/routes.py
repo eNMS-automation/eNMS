@@ -1,7 +1,6 @@
 from base.database import get_obj
 from base.properties import pretty_names
 from flask import (
-    Blueprint,
     jsonify,
     redirect,
     render_template,
@@ -24,20 +23,10 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
-import flask_login
-
-login_manager = flask_login.LoginManager()
-
-blueprint = Blueprint(
-    'admin_blueprint',
-    __name__,
-    url_prefix='/admin',
-    template_folder='templates',
-    static_folder='static'
-)
-
 from base.database import db
 from .models import User, user_factory, TacacsServer
+import flask_login
+
 
 ## Template rendering
 

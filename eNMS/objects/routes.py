@@ -6,21 +6,13 @@ from base.properties import (
     node_public_properties,
     pool_public_properties
 )
-from flask import Blueprint, jsonify, render_template, request
+from flask import jsonify, render_template, request
 from flask_login import login_required
 from .forms import AddNode, AddLink, AddPoolForm, PoolObjectsForm
 from .models import pool_factory, Pool, Link, Node, object_class, object_factory
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
-
-blueprint = Blueprint(
-    'objects_blueprint',
-    __name__,
-    url_prefix='/objects',
-    template_folder='templates',
-    static_folder='static'
-)
 
 ## Template rendering
 

@@ -1,4 +1,5 @@
-from base.database import db, get_obj
+from eNMS import db
+from eNMS.base import get_obj
 from base.helpers import integrity_rollback
 from base.models import Log
 from flask_login import UserMixin

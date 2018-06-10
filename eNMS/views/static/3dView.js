@@ -51,9 +51,11 @@ $('#select-filters').on('change', function() {
     type: "POST",
     url: `/objects/pool_objects/${this.value}`,
     dataType: "json",
-    success: function(objects){
+    success: function(objects) {
+      var nodes_id = objects.nodes.map(n => n.id);
+      var links_id = objects.links.map(l => l.id);
       for (var i = 0; i < markers_array.length; i++) {
-        if (objects['nodes'].includes(markers_array[i].node_id)) {
+        if (nodes_id.includes(markers_array[i].node_id)) {
           markers_array[i].addTo(map);
         } else {
           markers_array[i].removeFrom(map);
@@ -64,13 +66,15 @@ $('#select-filters').on('change', function() {
         catch(err) {};
       }
       polyline_array = [];
-      for (var i = 0; i < objects['links'][1].length; i++) {
-        var source_latitude = objects['links'][1][i][0],
-            source_longitude = objects['links'][1][i][1],
-            destination_latitude = objects['links'][1][i][2],
-            destination_longitude = objects['links'][1][i][3],
-            color = objects['links'][1][i][4],
-            obj_id = objects['links'][0][i];
+      for (var i = 0; i < objects.links.length; i++) {
+        var link = objects.links[i];
+        var source_latitude = link.source_properties.latitude;
+        var source_longitude = link.source_properties.longitude;
+        var destination_latitude = link.destination_properties.latitude;
+        var destination_longitude = link.destination_properties.longitude;
+        var color = link.color;
+        var obj_id = link.id;
+        console.log(source_latitude, destination_longitude, color, obj_id);
         var polygonSD = WE.polygon(
         [
           [source_latitude, source_longitude],

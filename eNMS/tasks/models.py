@@ -1,4 +1,5 @@
 from apscheduler.jobstores.base import JobLookupError
+from copy import deepcopy
 from datetime import datetime, timedelta
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
@@ -22,7 +23,8 @@ def script_job(task_name):
     with scheduler.app.app_context():
         job_time = str(datetime.now())
         task = get_obj(Task, name=task_name)
-        logs = {job_time: {}}
+        logs = deepcopy(task.logs)
+        logs[job_time] = {}
         nodes = task.nodes if task.nodes else ['dummy']
         for task_job in task.scripts:
             results = {}

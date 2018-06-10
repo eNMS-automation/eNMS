@@ -137,27 +137,25 @@ def get_pool(pool_id):
 @login_required
 def get_pool_objects(pool_id):
     pool = get_obj(Pool, id=pool_id)
-    nodes = str(pool.nodes).replace(', ', ',')[1:-1].split(',')
-    links = str(pool.links).replace(', ', ',')[1:-1].split(',')
-    return jsonify({'nodes': nodes, 'links': links})
+    print(pool.serialized)
+    return jsonify(pool.serialized)
 
 
 @blueprint.route('/save_pool_objects/<pool_id>', methods=['POST'])
 @login_required
 def save_pool_objects(pool_id):
     pool = get_obj(Pool, id=pool_id)
-    pool.nodes = [get_obj(Node, name=n) for n in request.form.getlist('nodes')]
-    pool.links = [get_obj(Link, name=n) for n in request.form.getlist('links')]
+    pool.nodes = [get_obj(Node, id=id) for id in request.form.getlist('nodes')]
+    pool.links = [get_obj(Link, id=id) for id in request.form.getlist('links')]
     db.session.commit()
     return jsonify(pool.name)
 
 
-@blueprint.route('/pool_objects/<pool_name>', methods=['POST'])
+@blueprint.route('/pool_objects/<pool_id>', methods=['POST'])
 @login_required
-def filter_pool_objects(pool_name):
-    pool = get_obj(Pool, name=pool_name)
-    objects = pool.filter_objects()
-    return jsonify(objects)
+def filter_pool_objects(pool_id):
+    pool = get_obj(Pool, id=pool_id)
+    return jsonify(pool.filter_objects())
 
 
 @blueprint.route('/update_pools', methods=['POST'])

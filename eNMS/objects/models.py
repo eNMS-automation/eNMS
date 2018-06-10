@@ -271,22 +271,21 @@ class Link(Object):
         ('destination', 'Destination')
     ])
 
-    properties = link_common_properties
     class_type = 'link'
 
     def __init__(self, **kwargs):
         super(Link, self).__init__(**kwargs)
 
     @property
-    def serialized(self):
-        properties = {p: str(getattr(self, p)) for p in cls_to_properties['Link']}
-        for node in ('source', 'destination'):
-            properties[node + '_properties'] = getattr(self, node).serialized
-        return properties
+    def properties(self):
+        return {p: str(getattr(self, p)) for p in cls_to_properties['Link']}
 
-    @classmethod
-    def get_properties(cls):
-        return super(Link).__get__(cls, None).properties + cls.properties
+    @property
+    def serialized(self):
+        properties = self.properties
+        for prop in ('source', 'destination'):
+            properties[prop + '_properties'] = getattr(self, prop).serialized
+        return properties
 
 
 class BgpPeering(Link):
@@ -509,6 +508,13 @@ class Pool(CustomBase):
     def properties(self):
         return {p: str(getattr(self, p)) for p in cls_to_properties['Pool']}
 
+    @property
+    def serialized(self):
+        properties = self.properties
+        for prop in ('nodes', 'links'):
+            properties[prop] = [obj.properties for obj in getattr(self, prop)]
+        return properties
+
     def compute_pool(self):
         self.nodes = list(filter(self.object_match, Node.query.all()))
         self.links = []
@@ -554,20 +560,9 @@ class Pool(CustomBase):
         )
 
     def filter_objects(self):
-        # prepare data for visualization
-        links_id, links_coords = [], []
-        for link in self.links:
-            links_id.append(link.id)
-            links_coords.append([
-                link.source.latitude,
-                link.source.longitude,
-                link.destination.latitude,
-                link.destination.longitude,
-                link.color
-            ])
         return {
-            'nodes': [node.id for node in self.nodes],
-            'links': (links_id, links_coords)
+            'nodes': [node.serialized for node in self.nodes],
+            'links': [link.serialized for link in self.links]
         }
 
 

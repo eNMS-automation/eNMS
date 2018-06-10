@@ -89,7 +89,7 @@ for (var i = 0; i < links.length; i++) {
     });
 
   polyline_array.push(polyline);
-  polyline.link_id = parseInt(link.id);
+  polyline.link_id = link.id;
 
   polyline.on("dblclick", function (e) {
     showObjectModal('link', this.link_id);
@@ -128,27 +128,28 @@ map.on("contextmenu", function(e) {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  var filterName = this.value;
   $.ajax({
     type: "POST",
     url: `/objects/pool_objects/${this.value}`,
     dataType: "json",
-    success: function(objects){
+    success: function(objects) {
+      var nodes_id = objects.nodes.map(n => n.id);
+      var links_id = objects.links.map(l => l.id);
       for (var i = 0; i < markers_array.length; i++) {
-        if (objects['nodes'].includes(markers_array[i].node_id)) {
+        if (nodes_id.includes(markers_array[i].node_id)) {
           markers_array[i].addTo(map);
         } else {
           markers_array[i].removeFrom(map);
         }
       }
       for (var i = 0; i < polyline_array.length; i++) {
-        if (objects['links'][0].includes(polyline_array[i].link_id)) {
+        if (links_id.includes(polyline_array[i].link_id)) {
           polyline_array[i].addTo(map);
         } else {
           polyline_array[i].removeFrom(map);
         }
       }
-      alertify.notify(`Filter '${filterName}' applied`, 'success', 5);
+      alertify.notify(`Filter applied`, 'success', 5);
     }
   });
 });

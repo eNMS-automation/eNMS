@@ -20,7 +20,7 @@
     <div class="form-group">
       <select id="select-filters" class="form-control">
         {% for pool in pools %}
-          <option>{{ pool.name }}</option>
+          <option value={{ pool.id }}>{{ pool.name }}</option>
         {% endfor %}
       </select>
     </div>

@@ -127,9 +127,9 @@ def export_to_google_earth():
     return jsonify({})
 
 
-@blueprint.route('/get_logs_<name>', methods=['POST'])
+@blueprint.route('/get_logs_<node_id>', methods=['POST'])
 @login_required
-def get_logs(name):
-    node = get_obj(Node, name=name)
+def get_logs(node_id):
+    node = get_obj(Node, id=node_id)
     node_logs = [l.content for l in Log.query.all() if l.source == node.ip_address]
     return jsonify('\n'.join(node_logs))

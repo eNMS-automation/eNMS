@@ -54,8 +54,9 @@ function showPoolObjects(id) {
     type: "POST",
     url: `/objects/get_pool_objects/${id}`,
     success: function(properties){
-      $('#nodes').val(properties.nodes);
-      $('#links').val(properties.links);
+      console.log(properties);
+      $('#nodes').val(properties.nodes.map(n => n.id));
+      $('#links').val(properties.links.map(l => l.id));
       poolId = id;
     }
   });

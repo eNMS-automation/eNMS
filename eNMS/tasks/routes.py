@@ -90,21 +90,13 @@ def scheduler(task_type, workflow_id=None):
 @login_required
 def get_task(task_id):
     task = get_obj(Task, id=task_id)
-    task_properties = {
-        property: str(getattr(task, property))
-        for property in Task.properties
-    }
-    # prepare the data for javascript
-    for p in ('scripts', 'workflows'):
-        task_properties[p] = task_properties[p].replace(', ', ',')[1:-1].split(',')
-    return jsonify(task_properties)
+    return jsonify(task.serialized)
 
 
 @blueprint.route('/show_logs/<task_id>', methods=['POST'])
 @login_required
 def show_logs(task_id):
     task = get_obj(Task, id=task_id)
-    print(task.__dict__)
     return jsonify(str_dict(task.logs))
 
 

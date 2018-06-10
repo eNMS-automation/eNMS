@@ -36,13 +36,7 @@
               label: task.name,
               type: task.type
             });
-            $.ajax({
-              type: "POST",
-              url: `/workflows/add_node/${workflow.id}/${task.id}`,
-              success: function(script){
-                alertify.notify("Task created", 'success', 5);
-              }
-            });
+            saveNode(task);
             $("#scheduling").modal('hide');
           }
         });
@@ -61,6 +55,46 @@
           workflow = wf;
         }
       });
+    }
+
+    function saveNode(task) {
+      $.ajax({
+        type: "POST",
+        url: `/workflows/add_node/${workflow.id}/${task.id}`,
+        success: function(task) {
+          alertify.notify("Task added to the workflow", 'success', 5);
+        }
+      });
+    }
+
+    function saveEdge(edge) {
+      $.ajax({
+        type: "POST",
+        url: `/workflows/add_edge/${workflow.id}/${edge.type}/${edge.from}/${edge.to}`,
+        success: function(edge) {
+          alertify.notify("Edge added to the workflow", 'success', 5);
+        }
+      });
+    }
+
+    function taskToNode(task) {
+      return {
+        id: task.id,
+        label: task.name,
+        type: task.type
+      };
+    }
+
+    function edgeToEdge(edge) {
+      return {
+        id: edge.id,
+        label: edge.type,
+        type: edge.type,
+        from: edge.source.id,
+        to: edge.destination.id,
+        color: {color: edge.type == 'success' ? 'green' : 'red'},
+        arrows: {to: {enabled: true}}
+      };
     }
 
     function showModal(modal_name){
@@ -100,16 +134,17 @@
           data.color = { color: color }
           if (data.from != data.to) {
             edges.add(data);
+            network.addEdgeMode();
+            console.log(data);
+            saveEdge(data);
           }
-          network.addEdgeMode();
-          saveWorkflow()
         }
       }
     };
 
     // Create a DataSet with data (enables two way data binding)
-    var nodes = new vis.DataSet([]);
-        edges = new vis.DataSet([]);
+    var nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
+        edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
         data = {nodes: nodes, edges: edges};
         network = new vis.Network(container, data, dsoptions);
 
@@ -139,7 +174,7 @@
         var ids = properties.nodes;
         var node = nodes.get(ids)[0];
         if(typeof node !== "undefined") {
-          showObjectModal(node.type, node.label);
+          showTaskModal(node.id);
         }
     });
 
@@ -147,25 +182,6 @@
     network.on("stabilizationIterationsDone", function () {
         network.setOptions( { physics: false } );
     });
-
-    function addNode(task) {
-      if (workflow) {
-        nodes.add({
-          id: task.id,
-          label: task.name,
-          type: task.type
-        });
-        $.ajax({
-          type: "POST",
-          url: `/workflows/save_node/${workflow.id}/${task.id}`,
-          success: function(script){
-            alertify.notify("Scripts successfully added to the workflow", 'success', 5);
-          }
-        });
-      } else {
-        alertify.notify("You must create a workflow first", 'error', 5);
-      }
-    }
 
     function deleteSelection() {
       console.log(getSelection());
@@ -185,23 +201,6 @@
       }
     }
 
-    function saveWorkflow() {
-      ajax_data = {
-        'nodes':  nodes.get({fields: ['id', 'label']}),
-        'edges': edges.get({fields: ['to', 'from', 'type']}),
-        'start': start
-      }
-      $.ajax({
-        type: "POST",
-        url: `/workflows/add_node/${workflow.id}`,
-        contentType: 'application/json;charset=UTF-8',
-        data: JSON.stringify(ajax_data, null, '\t'),
-        success: function(msg){
-          alertify.notify("Workflow saved", 'success', 5);
-        }
-      });
-    }
-
     function runWorkflow() {
       $.ajax({
         type: "POST",
@@ -212,23 +211,23 @@
         }
       });
     }
-    var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
-    for (i = 0; i < types.length; i++) {
-      $(`#${types[i]}-button`).text("Update");
-    }
 
-    function showObjectModal(type, id) {
-      $('#title').text(`Edit properties`);
+    function showTaskModal(id) {
       $.ajax({
         type: "POST",
-        url: `/scripts/get/${type}/${id}`,
-        success: function(properties){
-          for (const [property, value] of Object.entries(properties)) {
-            $(`#${type}-${property}`).val(value);
+        url: `/tasks/get/${id}`,
+        success: function(task){
+          console.log(task);
+          for (var [property, value] of Object.entries(task)) {
+            if ($(`#${property}`).length) {
+              input = Array.isArray(value) ? value.map(s => s.id) : value
+              console.log(input);
+              $(`#${property}`).val(input);
+            }
           }
         }
       });
-      $(`#edit-${type}`).modal('show');
+      $('#scheduling').modal('show');
     }
 
   </script>

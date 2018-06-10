@@ -34,6 +34,7 @@ class WorkflowEdge(CustomBase):
         self.type = type
         self.source = source
         self.destination = destination
+        print(self.source)
         self.name = '{} -> {}'.format(self.source.name, self.destination.name)
 
     @property
@@ -82,8 +83,9 @@ class Workflow(CustomBase):
     @property
     def serialized(self):
         properties = self.properties
-        for prop in ('tasks', 'inner_tasks', 'edges'):
+        for prop in ('tasks', 'inner_tasks'):
             properties[prop] = [obj.properties for obj in getattr(self, prop)]
+        properties['edges'] = [edge.serialized for edge in self.edges]
         return properties
 
     def run(self):

@@ -37,7 +37,6 @@ class Script(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     description = Column(String)
-    waiting_time = Column(Integer)
     type = Column(String)
     tasks = relationship(
         "ScheduledScriptTask",
@@ -55,9 +54,8 @@ class Script(CustomBase):
         'polymorphic_on': type
     }
 
-    def __init__(self, name, waiting_time=0, description=''):
+    def __init__(self, name, description=''):
         self.name = name
-        self.waiting_time = waiting_time
         self.description = description
 
     @property
@@ -90,14 +88,13 @@ class NetmikoConfigScript(Script):
 
     def __init__(self, real_content, **data):
         name = data['name'][0]
-        waiting_time = data['waiting_time'][0]
         description = data['description'][0]
         self.vendor = data['vendor'][0]
         self.operating_system = data['operating_system'][0]
         self.driver = data['driver'][0]
         self.global_delay_factor = data['global_delay_factor'][0]
         self.netmiko_type = data['netmiko_type'][0]
-        super(NetmikoConfigScript, self).__init__(name, waiting_time, description)
+        super(NetmikoConfigScript, self).__init__(name, description)
         self.content = ''.join(real_content)
 
     def job(self, args):
@@ -153,7 +150,6 @@ class FileTransferScript(Script):
 
     def __init__(self, source_file_path, **data):
         name = data['name'][0]
-        waiting_time = data['waiting_time'][0]
         description = data['description'][0]
         self.vendor = data['vendor'][0]
         self.operating_system = data['operating_system'][0]
@@ -164,7 +160,7 @@ class FileTransferScript(Script):
         self.direction = data['direction'][0]
         for property in ('overwrite_file', 'disable_md5', 'inline_transfer'):
             setattr(self, property, property in data)
-        super(FileTransferScript, self).__init__(name, waiting_time, description)
+        super(FileTransferScript, self).__init__(name, description)
 
     def job(self, args):
         task, node, results = args
@@ -217,7 +213,6 @@ class NetmikoValidationScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
-        waiting_time = data['waiting_time'][0]
         description = data['description'][0]
         self.vendor = data['vendor'][0]
         self.operating_system = data['operating_system'][0]
@@ -225,7 +220,7 @@ class NetmikoValidationScript(Script):
         for i in range(1, 4):
             for property in ('command', 'pattern'):
                 setattr(self, property + str(i), data[property + str(i)][0])
-        super(NetmikoValidationScript, self).__init__(name, waiting_time, description)
+        super(NetmikoValidationScript, self).__init__(name, description)
 
     def job(self, args):
         task, node, results = args
@@ -276,9 +271,8 @@ class NapalmConfigScript(Script):
 
     def __init__(self, real_content, **data):
         name = data['name'][0]
-        waiting_time = data['waiting_time'][0]
         description = data['description'][0]
-        super(NapalmConfigScript, self).__init__(name, waiting_time, description)
+        super(NapalmConfigScript, self).__init__(name, description)
         self.vendor = data['vendor'][0]
         self.operating_system = data['operating_system'][0]
         self.content = ''.join(real_content)
@@ -365,7 +359,6 @@ class NapalmGettersScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
-        waiting_time = data['waiting_time'][0]
         description = data['description'][0]
         self.getters = data['getters']
         super(NapalmGettersScript, self).__init__(name, waiting_time, description)

@@ -20,7 +20,6 @@ class SchedulingForm(FlaskForm):
     script_type = SelectField('Type of script', choices=script_type_choices)
     nodes = SelectMultipleField('', choices=())
     pools = SelectMultipleField('', choices=())
-    workflows = SelectMultipleField('', choices=())
     scripts = SelectMultipleField('', choices=())
 
 

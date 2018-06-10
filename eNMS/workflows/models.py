@@ -7,6 +7,7 @@ from eNMS import db
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import CustomBase
 from eNMS.base.properties import cls_to_properties
+from eNMS.tasks.models import Task
 
 
 class WorkflowEdge(CustomBase):
@@ -85,14 +86,18 @@ class Workflow(CustomBase):
         return properties
 
     def run(self):
-        layer, visited = {get_obj(Task, id=self.start_task)}, set()
+        layer, visited = set(), set()
+        start_task = get_obj(Task, id=self.start_task)
+        if start_task:
+            layer.add(start_task)
         while layer:
             new_layer = set()
             for task in layer:
                 visited.add(task)
-                success = task.job(task.name)
+                success = task.run()
                 edge_type = 'success' if success else 'failure'
-                for neighbor in task.task_neighbors(self, edge_type):
+                for neighbor in task.task_neighbors(edge_type):
+                    print(neighbor)
                     if neighbor not in visited:
                         new_layer.add(neighbor)
                 sleep(task.waiting_time)

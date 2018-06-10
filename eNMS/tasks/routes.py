@@ -23,7 +23,6 @@ from eNMS.workflows.models import Workflow
 def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.scripts.choices = Script.choices()
-    scheduling_form.workflows.choices = Workflow.choices()
     return render_template(
         'task_management.html',
         fields=task_public_properties,
@@ -38,9 +37,8 @@ def task_management():
 def calendar():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.scripts.choices = Script.choices()
-    scheduling_form.workflows.choices = Workflow.choices()
     tasks = {}
-    for task in Task.query.all():
+    for task in ScheduledTask.query.all():
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar
@@ -51,10 +49,8 @@ def calendar():
             r"\1," + month + r",\3,\4,\5",
             task.start_date
         ).split(',')]
-        print(js_date)
         tasks[task.name] = {
             'date': js_date,
-            'description': task.description
         }
     return render_template(
         'calendar.html',
@@ -81,7 +77,6 @@ def scheduler(task_type, workflow_id=None):
     if task_type in ('workflow_task', 'inner_task'):
         data['workflow'] = get_obj(Workflow, id=workflow_id)
     data['user'] = current_user
-    print(task_type, data)
     task = task_factory(task_type, **data)
     return jsonify(task.serialized)
 

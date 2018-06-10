@@ -20,9 +20,11 @@ from eNMS.workflows.models import WorkflowEdge, Workflow, workflow_factory
 @blueprint.route('/workflow_management')
 @login_required
 def workflows():
+    scheduling_form = SchedulingForm(request.form)
     return render_template(
         'workflow_management.html',
         names=pretty_names,
+        scheduling_form=scheduling_form,
         fields=('name', 'description', 'type'),
         workflows=Workflow.serialize(),
         form=WorkflowCreationForm(request.form)

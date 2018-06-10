@@ -38,10 +38,11 @@ def script_job(task_name):
         db.session.commit()
 
 
-def workflow_job(name):
+def workflow_job(task_name):
     with scheduler.app.app_context():
-        task = get_obj(Task, name=name)
-        task.workflow.run()
+        task = get_obj(Task, name=task_name)
+        task.scheduled_workflow.run()
+        task.logs = {'result': 'go to the workflow editor to see the result'}
         db.session.commit()
 
 
@@ -100,7 +101,6 @@ class ScheduledTask(Task):
         self.schedule()
 
     def schedule(self):
-        print('ttttt'*100)
         if self.frequency:
             self.recurrent = True
             self.recurrent_scheduling()
@@ -207,7 +207,7 @@ class ScheduledWorkflowTask(ScheduledTask):
     __tablename__ = 'ScheduledWorkflowTask'
 
     id = Column(Integer, ForeignKey('ScheduledTask.id'), primary_key=True)
-    workflow_id = Column(Integer, ForeignKey('Workflow.id'))
+    scheduled_workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     scheduled_workflow = relationship('Workflow', back_populates='tasks')
 
     __mapper_args__ = {
@@ -226,7 +226,7 @@ class ScheduledWorkflowTask(ScheduledTask):
     @property
     def serialized(self):
         properties = {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
-        properties['scheduled_workflow'] = self.scheduled_workflow.properties
+        # properties['scheduled_workflow'] = self.scheduled_workflow.properties
         return properties
 
 
@@ -235,6 +235,7 @@ class InnerTask(Task):
     __tablename__ = 'InnerTask'
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
+    waiting_time = Column(Integer)
     scripts = relationship(
         'Script',
         secondary=inner_task_script_table,
@@ -257,9 +258,24 @@ class InnerTask(Task):
         self.nodes = data['nodes']
         self.scripts = data['scripts']
         self.parent_workflow = data['workflow']
-        
         self.is_active = True
         super(InnerTask, self).__init__(**data)
+
+    def run(self):
+        job_time = str(datetime.now())
+        logs = deepcopy(self.logs)
+        logs[job_time] = {}
+        nodes = self.nodes if self.nodes else ['dummy']
+        for script in self.scripts:
+            results = {}
+            pool = ThreadPool(processes=len(nodes))
+            args = [(self, node, results) for node in nodes]
+            pool.map(script.job, args)
+            pool.close()
+            pool.join()
+            logs[job_time][script.name] = results
+        self.logs = logs
+        db.session.commit()
 
     @property
     def properties(self):

@@ -6,11 +6,11 @@ function scheduleTask() {
   if ($("#scheduling-form").parsley().validate()) {
     $.ajax({
       type: "POST",
-      url: "/tasks/scheduler/workflow_task",
+      url: `/tasks/scheduler/workflow_task/${$("#scheduling").attr("workflowId")}`,
       dataType: "json",
       data: $("#scheduling-form").serialize(),
       success: function() {
-      alertify.notify('Task scheduled', 'success', 5);
+        alertify.notify('Workflow scheduled', 'success', 5);
       }
     });
     $("#scheduling").modal('hide');
@@ -20,14 +20,13 @@ function scheduleTask() {
 }
 
 function addWorkflow(mode, properties) {
-  console.log(properties)
   var values = [];
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Schedule</button>`,
+    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<a href="/workflows/workflow_editor/${properties.id}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Manage</a>`,
     `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${properties.id}')">Delete</button>`
   );
@@ -48,7 +47,7 @@ function addWorkflow(mode, properties) {
 // Scheduling: run a workflow
 
 function showSchedulingModal(id){
-  $("#workflow").val(id);
+  $('#scheduling').attr('workflowId', `${id}`);
   $("#scheduling").modal('show');
 }
 
@@ -66,7 +65,7 @@ function showWorkflowModal(id) {
   $('#title').text(`Edit properties`);
   $.ajax({
     type: "POST",
-    url: `/workflows/get_${workflowId}`,
+    url: `/workflows/get_${id}`,
     success: function(properties){
       for (const [property, value] of Object.entries(properties)) {
         $(`#property-${property}`).val(value);

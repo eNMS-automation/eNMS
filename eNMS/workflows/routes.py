@@ -101,12 +101,10 @@ def add_edge(workflow_id, type, source, dest):
     source_task = get_obj(Task, id=source)
     destination_task = get_obj(Task, id=dest)
     workflow = get_obj(Workflow, id=workflow_id)
-    print('ttt'*200, source_task, destination_task)
     workflow_edge = WorkflowEdge(type, source_task, destination_task)
     db.session.add(workflow_edge)
     workflow.edges.append(workflow_edge)
     db.session.commit()
-    print(workflow_edge.serialized)
     return jsonify(workflow_edge.serialized)
 
 
@@ -119,9 +117,10 @@ def delete_edge(workflow_id, edge_id):
     return jsonify(edge.properties)
 
 
-@blueprint.route('/set_as_start/<task_id>', methods=['POST'])
+@blueprint.route('/set_as_start/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
-def set_as_start(workflow_id, type, source_id, destination_id):
-    get_obj(Workflow, id=workflow_id).start_script = get_obj(Task, id=start_id)
+def set_as_start(workflow_id, task_id):
+    workflow = get_obj(Workflow, id=workflow_id)
+    workflow.start_task = task_id
     db.session.commit()
     return jsonify({})

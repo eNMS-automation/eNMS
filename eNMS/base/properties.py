@@ -60,6 +60,7 @@ workflow_public_properties = (
     'name',
     'description',
     'type',
+    'start_task'
 )
 
 user_public_properties = (

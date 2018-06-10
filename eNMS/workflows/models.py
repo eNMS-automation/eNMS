@@ -60,7 +60,7 @@ class Workflow(CustomBase):
     tasks = relationship('ScheduledWorkflowTask', back_populates='scheduled_workflow')
     inner_tasks = relationship('InnerTask', back_populates='parent_workflow')
     edges = relationship('WorkflowEdge', back_populates='workflow')
-    # start_task_id = Column(Integer, ForeignKey('InnerTask.id'))
+    start_task = Column(Integer)
 
     default_properties = (
         'name',
@@ -85,7 +85,7 @@ class Workflow(CustomBase):
         return properties
 
     def run(self):
-        layer, visited = {self.start_task}, set()
+        layer, visited = {get_obj(Task, id=self.start_task)}, set()
         while layer:
             new_layer = set()
             for task in layer:

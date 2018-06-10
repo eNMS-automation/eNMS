@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} User management {% endblock title %}
+{% block title %} Workflow editor {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -101,15 +101,16 @@
     }
 
     function taskToNode(task) {
+      console.log(task, workflow)
       return {
         id: task.id,
         label: task.name,
-        type: task.type
+        type: task.type,
+        color: task.id == workflow.start_task ? "green" : "#D2E5FF"
       };
     }
 
     function edgeToEdge(edge) {
-      console.log(edge);
       return {
         id: edge.id,
         label: edge.type,
@@ -123,6 +124,21 @@
 
     function showModal(modal_name){
       $(`#${modal_name}`).modal('show');
+    }
+
+    function startScript() {
+      start = nodes.get(network.getSelectedNodes()[0]);
+      nodes.update({id: workflow.start_task, color: "#D2E5FF"});
+      $.ajax({
+        type: "POST",
+        url: `/workflows/set_as_start/${workflow.id}/${start.id}`,
+        success: function() {
+          nodes.update({id: start.id, color: "green"});
+          workflow.start_task = start.id
+          alertify.notify("Start script updated", 'success', 5);
+        }
+      });
+      alertify.notify(`Script ${start.label} set as start`, 'success', 5);
     }
 
     var container = document.getElementById('network');

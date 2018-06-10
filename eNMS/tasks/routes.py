@@ -9,7 +9,7 @@ from eNMS.base.helpers import get_obj, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
-from eNMS.tasks.models import Task, task_factory
+from eNMS.tasks.models import ScheduledTask, Task, task_factory
 from eNMS.objects.models import Pool, Node
 from eNMS.scripts.models import Script
 from eNMS.workflows.models import Workflow
@@ -27,7 +27,7 @@ def task_management():
     return render_template(
         'task_management.html',
         fields=task_public_properties,
-        tasks=Task.serialize(),
+        tasks=ScheduledTask.serialize(),
         compare_form=CompareForm(request.form),
         scheduling_form=scheduling_form
     )

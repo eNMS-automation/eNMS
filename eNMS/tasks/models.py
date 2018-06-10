@@ -1,6 +1,7 @@
 from apscheduler.jobstores.base import JobLookupError
 from copy import deepcopy
 from datetime import datetime, timedelta
+from flask_restful import Api, Resource
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict
@@ -190,6 +191,22 @@ class ScheduledScriptTask(ScheduledTask):
         self.job = script_job
         super(ScheduledScriptTask, self).__init__(**data)
 
+    def run(self):
+        job_time = str(datetime.now())
+        logs = deepcopy(self.logs)
+        logs[job_time] = {}
+        nodes = self.nodes if self.nodes else ['dummy']
+        for script in self.scripts:
+            results = {}
+            pool = ThreadPool(processes=len(nodes))
+            args = [(self, node, results) for node in nodes]
+            pool.map(script.job, args)
+            pool.close()
+            pool.join()
+            logs[job_time][script.name] = results
+        self.logs = logs
+        db.session.commit()
+
     @property
     def properties(self):
         return {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
@@ -254,7 +271,7 @@ class InnerTask(Task):
     }
 
     def __init__(self, **data):
-        self.job = script_job
+        self.waiting_time = 0.
         self.nodes = data['nodes']
         self.scripts = data['scripts']
         self.parent_workflow = data['workflow']

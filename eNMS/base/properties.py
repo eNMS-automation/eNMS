@@ -53,7 +53,6 @@ script_public_properties = (
     'description',
     'vendor',
     'operating_system',
-    'waiting_time'
 )
 
 workflow_public_properties = (

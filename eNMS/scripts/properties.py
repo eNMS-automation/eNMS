@@ -2,7 +2,6 @@ script_properties = (
     'name',
     'type',
     'description',
-    'waiting_time',
 )
 
 netmiko_config_properties = script_properties + (

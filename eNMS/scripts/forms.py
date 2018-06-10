@@ -45,7 +45,6 @@ napalm_actions = OrderedDict([
 class ScriptForm(FlaskForm):
     name = TextField('Name')
     description = TextField('Description')
-    waiting_time = IntegerField('Waiting time', default=0)
 
 
 class ConfigScriptForm(ScriptForm):

@@ -361,7 +361,7 @@ class NapalmGettersScript(Script):
         name = data['name'][0]
         description = data['description'][0]
         self.getters = data['getters']
-        super(NapalmGettersScript, self).__init__(name, waiting_time, description)
+        super(NapalmGettersScript, self).__init__(name, description)
 
     def job(self, args):
         task, node, results = args
@@ -408,14 +408,13 @@ class AnsibleScript(Script):
 
     def __init__(self, **data):
         name = data['name'][0]
-        waiting_time = data['waiting_time'][0]
         description = data['description'][0]
         self.vendor = data['vendor'][0]
         self.operating_system = data['operating_system'][0]
         self.playbook_path = data['playbook_path'][0]
         self.arguments = data['arguments'][0]
         self.graphical_inventory = 'graphical_inventory' in data
-        super(AnsibleScript, self).__init__(name, waiting_time, description)
+        super(AnsibleScript, self).__init__(name, description)
 
     def job(self, args):
         _, node, results = args

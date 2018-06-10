@@ -24,9 +24,8 @@ class CustomScript(Script):
     def __init__(self, **kwargs):
         self.__dict__.update(**kwargs)
         name = kwargs['name']
-        waiting_time = kwargs['waiting_time']
         description = kwargs['description']
-        super(CustomScript, self).__init__(name, waiting_time, description)
+        super(CustomScript, self).__init__(name, description)
 
     def job(self, args):
         globals()[self.job_name](args)
@@ -48,7 +47,6 @@ def job_example(args):
 
 example_parameters = {
     'name': 'script that does nothing',
-    'waiting_time': 0,
     'description': 'does nothing',
     'vendor': 'none',
     'operating_system': 'all',
@@ -69,7 +67,6 @@ def nornir_ping_job(args):
 
 nornir_ping_parameters = {
     'name': 'nornir ping 23 443',
-    'waiting_time': 0,
     'description': 'Uses Nornir to ping',
     'vendor': 'none',
     'operating_system': 'all',

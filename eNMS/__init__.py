@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_apscheduler import APScheduler
 from flask_login import LoginManager
+
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from os import environ
@@ -13,6 +14,7 @@ sys.dont_write_bytecode = True
 db = SQLAlchemy()
 login_manager = LoginManager()
 scheduler = APScheduler()
+
 
 
 from eNMS.objects.models import *
@@ -99,6 +101,24 @@ def configure_scheduler(scheduler):
     scheduler.start()
 
 
+def configure_rest_api(app):
+    api = Api(app)
+    class RestAutomation(Resource):
+    
+        def get(self, task_name):
+            task = get_obj(Task, name=task_name)
+            task.run()
+            return {'result': task.serialized}
+            
+    
+    
+    api.add_resource(
+        RestAutomation,
+        '/execute_task/<string:task_name>'
+    )
+
+
+
 def create_app(path):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config_mode)
@@ -108,6 +128,7 @@ def create_app(path):
     configure_login_manager(app, User)
     configure_database(app)
     configure_scheduler(scheduler)
+    configure_rest_api(app)
     configure_syslog()
     configure_logs(app)
     return app

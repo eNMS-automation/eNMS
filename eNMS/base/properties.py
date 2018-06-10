@@ -105,6 +105,7 @@ cls_to_properties = {
     'Script': ('id',) + script_public_properties,
     'Parameters': parameters_public_properties,
     'Workflow': ('id',) + workflow_public_properties,
+    'WorkflowEdge': ('id', 'name', 'type'),
     'User': ('id',) + user_public_properties,
     'Log': ('id',) + log_public_properties,
     'Task': task_serialized_properties,

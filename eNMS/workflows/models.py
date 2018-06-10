@@ -34,21 +34,17 @@ class WorkflowEdge(CustomBase):
         self.type = type
         self.source = source
         self.destination = destination
-        print(self.source)
         self.name = '{} -> {}'.format(self.source.name, self.destination.name)
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in ('name', 'type')}
+        return {p: str(getattr(self, p)) for p in cls_to_properties['WorkflowEdge']}
 
     @property
     def serialized(self):
-        properties = {
-            'name': self.name,
-            'type': self.type,
-            'source': self.source.properties,
-            'destination': self.destination.properties
-        }
+        properties = self.properties
+        properties['source'] = self.source.serialized
+        properties['destination'] = self.destination.serialized
         return properties
 
 class Workflow(CustomBase):

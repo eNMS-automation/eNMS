@@ -31,13 +31,14 @@
           dataType: "json",
           data: $("#scheduling-form").serialize(),
           success: function(task) {
+            $("#scheduling").modal('hide');
             nodes.add({
               id: task.id,
               label: task.name,
               type: task.type
             });
             saveNode(task);
-            $("#scheduling").modal('hide');
+            
           }
         });
       } else {
@@ -67,12 +68,34 @@
       });
     }
 
+    function deleteNode(id) {
+      $.ajax({
+        type: "POST",
+        url: `/workflows/delete_node/${workflow.id}/${id}`,
+        success: function(task) {
+          alertify.notify("Task delete from the workflow", 'success', 5);
+        }
+      });
+    }
+
     function saveEdge(edge) {
       $.ajax({
         type: "POST",
         url: `/workflows/add_edge/${workflow.id}/${edge.type}/${edge.from}/${edge.to}`,
         success: function(edge) {
           alertify.notify("Edge added to the workflow", 'success', 5);
+          edges.add(edgeToEdge(edge));
+        }
+      });
+    }
+
+    function deleteEdge(edgeId) {
+      console.log(edgeId);
+      $.ajax({
+        type: "POST",
+        url: `/workflows/delete_edge/${workflow.id}/${edgeId}`,
+        success: function(edge) {
+          alertify.notify("Edge deleted the workflow", 'success', 5);
         }
       });
     }
@@ -86,6 +109,7 @@
     }
 
     function edgeToEdge(edge) {
+      console.log(edge);
       return {
         id: edge.id,
         label: edge.type,
@@ -99,7 +123,7 @@
 
     function showModal(modal_name){
       $(`#${modal_name}`).modal('show');
-      }
+    }
 
     var container = document.getElementById('network');
     var dsoptions = {
@@ -127,16 +151,10 @@
           console.log('edit', data);
         },
         addEdge: function (data, callback) {
-          data.arrows = {to: {enabled: true}};
-          data.type = edge_type;
-          data.label = edge_type;
-          color = edge_type == 'success' ? 'green' : 'red'
-          data.color = { color: color }
           if (data.from != data.to) {
-            edges.add(data);
-            network.addEdgeMode();
-            console.log(data);
+            data.type = edge_type;
             saveEdge(data);
+            network.addEdgeMode();
           }
         }
       }
@@ -145,6 +163,7 @@
     // Create a DataSet with data (enables two way data binding)
     var nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
         edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
+        console.log(edges);
         data = {nodes: nodes, edges: edges};
         network = new vis.Network(container, data, dsoptions);
 
@@ -161,7 +180,7 @@
             nodes.push({
               id: task.id,
               label: task.name,
-            })
+            });
           }
           var data = {nodes: new vis.DataSet(nodes)};
           network.setData(data);
@@ -184,9 +203,9 @@
     });
 
     function deleteSelection() {
-      console.log(getSelection());
+      network.getSelectedNodes().map(node => deleteNode(node));
+      network.getSelectedEdges().map(edge => deleteEdge(edge));
       network.deleteSelected();
-      saveWorkflow()
       alertify.notify("Selected objects deleted", 'success', 5);
     }
 

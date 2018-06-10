@@ -86,18 +86,37 @@ def add_node(workflow_id, task_id):
     return jsonify(task.serialized)
 
 
+@blueprint.route('/delete_node/<workflow_id>/<task_id>', methods=['POST'])
+@login_required
+def delete_node(workflow_id, task_id):
+    task = get_obj(Task, id=task_id)
+    db.session.delete(task)
+    db.session.commit()
+    return jsonify(task.properties)
+
+
 @blueprint.route('/add_edge/<workflow_id>/<type>/<source>/<dest>', methods=['POST'])
 @login_required
 def add_edge(workflow_id, type, source, dest):
     source_task = get_obj(Task, id=source)
     destination_task = get_obj(Task, id=dest)
     workflow = get_obj(Workflow, id=workflow_id)
+    print('ttt'*200, source_task, destination_task)
     workflow_edge = WorkflowEdge(type, source_task, destination_task)
     db.session.add(workflow_edge)
     workflow.edges.append(workflow_edge)
     db.session.commit()
     print(workflow_edge.serialized)
     return jsonify(workflow_edge.serialized)
+
+
+@blueprint.route('/delete_edge/<workflow_id>/<edge_id>', methods=['POST'])
+@login_required
+def delete_edge(workflow_id, edge_id):
+    edge = get_obj(WorkflowEdge, id=edge_id)
+    db.session.delete(edge)
+    db.session.commit()
+    return jsonify(edge.properties)
 
 
 @blueprint.route('/set_as_start/<task_id>', methods=['POST'])

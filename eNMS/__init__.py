@@ -32,19 +32,10 @@ try:
 except KeyError:
     sys.exit('Error: Invalid ENMS_CONFIG_MODE environment variable entry.')
 
-def initialize_paths(app):
-    app.path_upload = join(path_parent, 'projects')
-    app.path_apps = join(path_parent, 'applications')
-    app.ge_path = join(path_parent, 'google_earth')
-    app.path_playbooks = join(path_parent, 'playbooks')
-    app.path_file_transfer = join(path_parent, 'file_transfer')
-    app.config['UPLOAD_FOLDER'] = app.path_upload
 
-
-def register_extensions(app, test):
+def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
-    # if not test:
     scheduler.init_app(app)
 
 
@@ -108,15 +99,14 @@ def configure_scheduler(scheduler):
     scheduler.start()
 
 
-def create_app(test=False):
+def create_app(path):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config_mode)
-    # initialize_paths(app)
-    register_extensions(app, test)
+    app.path = path
+    register_extensions(app)
     register_blueprints(app)
     configure_login_manager(app, User)
     configure_database(app)
-    # if not test:
     configure_scheduler(scheduler)
     configure_syslog()
     configure_logs(app)

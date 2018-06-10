@@ -1,3 +1,4 @@
+from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy import Column, Float, Integer, String
 from sqlalchemy.orm import relationship
@@ -9,7 +10,7 @@ except Exception:
 from threading import Thread
 
 
-from eNMS import db
+from eNMS import db, scheduler
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import CustomBase
 from eNMS.base.helpers import integrity_rollback
@@ -82,11 +83,12 @@ def user_factory(**kwargs):
 class SyslogUDPHandler(BaseRequestHandler):
 
     def handle(self):
-        data = bytes.decode(self.request[0].strip())
-        source, _ = self.client_address
-        log = Log(source, str(data))
-        db.session.add(log)
-        db.session.commit()
+        with scheduler.app.app_context():
+            data = bytes.decode(self.request[0].strip())
+            source, _ = self.client_address
+            log = Log(source, str(data))
+            db.session.add(log)
+            db.session.commit()
 
 
 class SyslogServer(CustomBase):

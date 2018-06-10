@@ -87,7 +87,7 @@ def putty_connection(name):
     current_os, node = platform_system(), get_obj(Node, name=name)
     password = cisco_type7.decode(current_user.password)
     if current_os == 'Windows':
-        path_putty = join(current_app.path_apps, 'putty.exe')
+        path_putty = join(current_app.path, 'applications', 'putty.exe')
         ssh_connection = '{} -ssh {}@{} -pw {}'.format(
             path_putty,
             current_user.name,
@@ -122,7 +122,7 @@ def export_to_google_earth():
         ]
         line.style = styles[link.type]
         line.style.linestyle.width = request.form['line_width']
-    filepath = join(current_app.ge_path, request.form['name'] + '.kmz')
+    filepath = join(current_app, 'google_earth', request.form['name'] + '.kmz')
     kml_file.save(filepath)
     return jsonify({})
 

@@ -33,10 +33,11 @@ except KeyError:
     sys.exit('Error: Invalid ENMS_CONFIG_MODE environment variable entry.')
 
 
-def register_extensions(app):
+def register_extensions(app, test):
     db.init_app(app)
     login_manager.init_app(app)
-    scheduler.init_app(app)
+    if not test:
+        scheduler.init_app(app)
 
 
 def register_blueprints(app):
@@ -95,11 +96,11 @@ def configure_logs(app):
     logger.addHandler(logging.StreamHandler())
 
 
-def create_app(path):
+def create_app(path, test=False):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config_mode)
     app.path = path
-    register_extensions(app)
+    register_extensions(app, test)
     register_blueprints(app)
     configure_login_manager(app)
     configure_database(app)

@@ -1,7 +1,6 @@
-from base.database import db
-from conftest import path_scripts
+from eNMS import db
 from os.path import join
-from scripts.models import (
+from eNMS.scripts.models import (
     AnsibleScript,
     NapalmConfigScript,
     NapalmGettersScript,
@@ -9,7 +8,7 @@ from scripts.models import (
     FileTransferScript,
     Script
 )
-from test_base import check_blueprints
+from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
 # test the creation of configuration script (netmiko / napalm)

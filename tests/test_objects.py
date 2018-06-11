@@ -1,7 +1,7 @@
-from test_base import check_blueprints
-from conftest import path_projects
-from objects.models import (
+from tests.test_base import check_blueprints
+from eNMS.objects.models import (
     Antenna,
+    get_obj,
     Pool,
     Firewall,
     Host,
@@ -141,8 +141,9 @@ links = ['link' + str(i) for i in range(4, 15)]
 @check_blueprints('', '/objects', '/views')
 def test_node_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
-    for node in nodes:
-        user_client.post('/objects/delete/node/' + node)
+    for node_name in nodes:
+        node = get_obj(Node, name=node_name)
+        user_client.post('/objects/delete/node/{}'.format(node.id))
     assert len(Node.query.all()) == 18
     assert len(Link.query.all()) == 18
 
@@ -150,8 +151,9 @@ def test_node_deletion(user_client):
 @check_blueprints('', '/objects', '/views')
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
-    for link in links:
-        user_client.post('/objects/delete/link/' + link)
+    for link_name in links:
+        link = get_obj(Link, name=link_name)
+        user_client.post('/objects/delete/link/{}'.format(link.id))
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 38
 

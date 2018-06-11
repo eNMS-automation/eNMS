@@ -1,9 +1,8 @@
-from conftest import path_scripts
 from os.path import join
-from tasks.models import Task
-from test_base import check_blueprints
-from test_objects import create_from_file
-from test_scripts import netmiko_ping, napalm_jinja2_script
+from eNMS.tasks.models import Task
+from tests.test_base import check_blueprints
+from tests.test_objects import create_from_file
+from tests.test_scripts import netmiko_ping, napalm_jinja2_script
 from werkzeug.datastructures import ImmutableMultiDict
 
 

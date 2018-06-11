@@ -16,6 +16,7 @@ from eNMS.base.properties import (
     reverse_pretty_names,
     type_to_diagram_properties
 )
+from eNMS.objects.models import get_obj
 
 
 ## Template rendering
@@ -114,6 +115,14 @@ def internal_error(error):
     return render_template('errors/page_500.html'), 500
 
 ## Shutdown
+
+
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
 
 @blueprint.route('/shutdown', methods=['POST'])
 def shutdown():

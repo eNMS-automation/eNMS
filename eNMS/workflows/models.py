@@ -48,6 +48,7 @@ class WorkflowEdge(CustomBase):
         properties['destination'] = self.destination.serialized
         return properties
 
+
 class Workflow(CustomBase):
 
     __tablename__ = 'Workflow'

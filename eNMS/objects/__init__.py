@@ -8,4 +8,4 @@ blueprint = Blueprint(
     static_folder='static'
 )
 
-from . import routes
+import eNMS.objects.routes  # noqa: F401

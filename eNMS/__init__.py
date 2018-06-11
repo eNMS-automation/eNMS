@@ -4,7 +4,6 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from os import environ
-from os.path import abspath, dirname, join, pardir
 import sys
 import logging
 
@@ -13,7 +12,6 @@ sys.dont_write_bytecode = True
 db = SQLAlchemy()
 login_manager = LoginManager()
 scheduler = APScheduler()
-
 
 
 import eNMS.objects.models
@@ -69,7 +67,7 @@ def configure_login_manager(app):
 
 
 def configure_database(app):
-    
+
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
@@ -85,7 +83,7 @@ def configure_database(app):
 
 def configure_syslog():
     try:
-        syslog_server = db.session.query(SyslogServer).one()
+        syslog_server = db.session.query(eNMS.base.models.SyslogServer).one()
         syslog_server.start()
     except Exception:
         pass

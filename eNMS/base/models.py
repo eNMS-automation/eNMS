@@ -28,6 +28,7 @@ class CustomBase(db.Model):
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all()]
 
+
 class Log(CustomBase):
 
     __tablename__ = 'Log'

@@ -1,7 +1,6 @@
 from apscheduler.jobstores.base import JobLookupError
 from copy import deepcopy
 from datetime import datetime, timedelta
-from flask_restful import Api, Resource
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict

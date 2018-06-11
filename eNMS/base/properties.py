@@ -18,6 +18,15 @@ node_common_properties = (
     'secret_password'
 )
 
+task_public_properties = (
+    'name',
+    'creation_time',
+    'creator',
+    'recurrent',
+    'frequency',
+    'status'
+)
+
 link_common_properties = (
     'source',
     'destination',
@@ -36,15 +45,6 @@ link_public_properties = (
 pool_public_properties = (
     'name',
     'description'
-)
-
-task_public_properties = (
-    'name',
-    'creation_time',
-    'creator',
-    'recurrent',
-    'frequency',
-    'status'
 )
 
 script_public_properties = (
@@ -101,7 +101,6 @@ cls_to_properties = {
     'Node': ('id',) + node_public_properties,
     'Link': ('id', 'color') + link_public_properties,
     'Pool': ('id',) + pool_public_properties,
-    'Task': ('id',) + task_public_properties,
     'Script': ('id',) + script_public_properties,
     'Parameters': parameters_public_properties,
     'Workflow': ('id',) + workflow_public_properties,

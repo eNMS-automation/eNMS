@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, SelectMultipleField, TextField
+from wtforms import SelectField, TextField
 
 
 class WorkflowEditorForm(FlaskForm):

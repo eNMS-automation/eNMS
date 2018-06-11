@@ -32,4 +32,4 @@ for subtype, cls in link_class.items():
     line_style.linestyle.color = kml_color
     styles[subtype] = line_style
 
-from . import routes
+import eNMS.views.routes  # noqa: F401

@@ -1,9 +1,5 @@
 from flask import Blueprint
 
-
-from eNMS import db
-
-
 blueprint = Blueprint(
     'base_blueprint',
     __name__,
@@ -11,4 +7,4 @@ blueprint = Blueprint(
     template_folder='templates'
 )
 
-from . import routes
+import eNMS.base.routes  # noqa: F401

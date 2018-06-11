@@ -15,7 +15,6 @@ from eNMS.base.models import (
 )
 from eNMS.base.properties import (
     cls_to_properties,
-    link_common_properties,
     link_public_properties,
     node_common_properties,
     node_public_properties,

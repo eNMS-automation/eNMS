@@ -1,5 +1,5 @@
 from difflib import SequenceMatcher
-from flask import jsonify, render_template, request, session
+from flask import jsonify, render_template, request
 from flask_login import current_user, login_required
 from re import search, sub
 

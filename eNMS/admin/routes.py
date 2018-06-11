@@ -1,6 +1,5 @@
 from flask_login import login_required
 from passlib.hash import cisco_type7
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
@@ -18,7 +17,7 @@ from eNMS.admin.forms import (
     TacacsServerForm,
 )
 from eNMS.admin.models import Parameters, SyslogServer, User, user_factory, TacacsServer
-from eNMS.admin.properties import user_properties, user_search_properties
+from eNMS.admin.properties import user_search_properties
 from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
 from flask import (

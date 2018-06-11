@@ -1,5 +1,4 @@
-from collections import OrderedDict
-from flask import current_app, jsonify, render_template, request, session
+from flask import current_app, jsonify, render_template, request
 from flask_login import current_user, login_required
 from os import system as os_system
 from os.path import join
@@ -17,14 +16,12 @@ from eNMS.objects.models import Pool, Node, node_class, Link
 from eNMS.base.properties import (
     link_public_properties,
     node_public_properties,
-    pretty_names,
-    type_to_public_properties
+    pretty_names
 )
 from eNMS.scripts.models import Script
 from eNMS.tasks.forms import SchedulingForm
 from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
-from eNMS.workflows.models import Workflow
 
 
 ## Template rendering

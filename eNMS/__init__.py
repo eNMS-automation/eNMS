@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_apscheduler import APScheduler
 from flask_login import LoginManager
-
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from os import environ
@@ -17,12 +16,13 @@ scheduler = APScheduler()
 
 
 
-from eNMS.objects.models import *
-from eNMS.tasks.models import *
-from eNMS.workflows.models import *
-from eNMS.admin.models import *
-from eNMS.base.models import *
-from eNMS.scripts.models import *
+import eNMS.objects.models
+import eNMS.tasks.models
+import eNMS.workflows.models
+import eNMS.admin.models
+import eNMS.base.models
+import eNMS.scripts.models
+from eNMS.base.rest import configure_rest_api
 from eNMS.config import config_dict
 from eNMS.scripts.custom_scripts import create_custom_scripts
 
@@ -56,15 +56,15 @@ def register_blueprints(app):
         app.register_blueprint(module.blueprint)
 
 
-def configure_login_manager(app, User):
+def configure_login_manager(app):
     @login_manager.user_loader
     def user_loader(id):
-        return db.session.query(User).filter_by(id=id).first()
+        return db.session.query(eNMS.admin.models.User).filter_by(id=id).first()
 
     @login_manager.request_loader
     def request_loader(request):
         name = request.form.get('name')
-        user = db.session.query(User).filter_by(name=name).first()
+        user = db.session.query(eNMS.admin.models.User).filter_by(name=name).first()
         return user if user else None
 
 
@@ -77,9 +77,9 @@ def configure_database(app):
     @app.before_first_request
     def create_default():
         db.create_all()
-        create_default_parameters()
-        create_default_scripts()
-        create_default_pools()
+        eNMS.admin.models.create_default_parameters()
+        eNMS.scripts.models.create_default_scripts()
+        eNMS.objects.models.create_default_pools()
         create_custom_scripts()
 
 
@@ -97,37 +97,14 @@ def configure_logs(app):
     logger.addHandler(logging.StreamHandler())
 
 
-def configure_scheduler(scheduler):
-    scheduler.start()
-
-
-def configure_rest_api(app):
-    api = Api(app)
-    class RestAutomation(Resource):
-    
-        def get(self, task_name):
-            task = get_obj(Task, name=task_name)
-            task.run()
-            return {'result': task.serialized}
-            
-    
-    
-    api.add_resource(
-        RestAutomation,
-        '/execute_task/<string:task_name>'
-    )
-
-
-
 def create_app(path):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config_mode)
     app.path = path
     register_extensions(app)
     register_blueprints(app)
-    configure_login_manager(app, User)
+    configure_login_manager(app)
     configure_database(app)
-    configure_scheduler(scheduler)
     configure_rest_api(app)
     configure_syslog()
     configure_logs(app)

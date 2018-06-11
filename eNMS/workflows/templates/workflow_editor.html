@@ -128,7 +128,9 @@
 
     function startScript() {
       start = nodes.get(network.getSelectedNodes()[0]);
-      nodes.update({id: workflow.start_task, color: "#D2E5FF"});
+      if (workflow.start_task) {
+        nodes.update({id: workflow.start_task, color: "#D2E5FF"});
+      }
       $.ajax({
         type: "POST",
         url: `/workflows/set_as_start/${workflow.id}/${start.id}`,

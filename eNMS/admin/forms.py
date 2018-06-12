@@ -8,6 +8,7 @@ from wtforms import (
     SelectMultipleField
 )
 
+from eNMS.objects.models import node_class
 
 class LoginForm(FlaskForm):
     name = TextField('Username')
@@ -51,4 +52,9 @@ class GeographicalParametersForm(FlaskForm):
 
 
 class OpenNmsForm(FlaskForm):
-    node_query = TextField('https://demo.opennms.org/opennms/rest/nodes')
+    node_query = TextField(
+        'ReST API',
+        default='https://demo.opennms.org/opennms/rest'
+    )
+    node_type = [(t, t) for t in node_class]
+    type = SelectField('Type', choices=node_type)

@@ -23,3 +23,16 @@ function saveSyslogServer() {
     });
   }
 }
+
+function queryOpenNMS() {
+  if ($('#opennms_form').parsley().validate()) {
+    $.ajax({
+      type: "POST",
+      url: "/admin/query_opennms",
+      data: $('#opennms_form').serialize(),
+      success: function() {
+        alertify.notify(`Query sent to openNMS`, 'success', 5);
+      }
+    });
+  }
+}

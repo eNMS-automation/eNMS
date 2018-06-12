@@ -1,9 +1,17 @@
+from flask import (
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    url_for
+)
 from flask_login import login_required
 from passlib.hash import cisco_type7
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 import flask_login
+import requests
 
 
 from eNMS import db
@@ -13,6 +21,7 @@ from eNMS.admin.forms import (
     CreateAccountForm,
     LoginForm,
     GeographicalParametersForm,
+    OpenNmsForm,
     SyslogServerForm,
     TacacsServerForm,
 )
@@ -20,13 +29,8 @@ from eNMS.admin.models import Parameters, SyslogServer, User, user_factory, Taca
 from eNMS.admin.properties import user_search_properties
 from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
-from flask import (
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    url_for
-)
+from eNMS.objects.models import object_factory
+
 
 
 ## Template rendering
@@ -169,6 +173,39 @@ def save_syslog_server():
     SyslogServer.query.delete()
     syslog_server = SyslogServer(**request.form.to_dict())
     db.session.add(syslog_server)
+    db.session.commit()
+    return jsonify({})
+
+
+@blueprint.route('/query_opennms', methods=['POST'])
+@login_required
+def query_opennms():
+    json_nodes = requests.get(
+        request.form['node_query'] + '/nodes',
+        headers={'Accept': 'application/json'},
+        auth=('demo', 'demo')
+    ).json()['node']
+
+    nodes = {
+        node['id']: 
+            {
+            'longitude': node['assetRecord'].get('longitude', 0.),
+            'latitude': node['assetRecord'].get('latitude', 0.),
+            'name': node.get('sysName', node['id']),
+            'type': request.form['type']
+            } for node in json_nodes
+        }
+
+    for node in list(nodes):
+        link = requests.get(
+            request.form['node_query'] + '/nodes/' + node + '/ipinterfaces',
+            headers={'Accept': 'application/json'},
+            auth=('demo', 'demo')
+        ).json()
+        for interface in link['ipInterface']:
+            if interface['snmpPrimary'] == 'P':
+                nodes[node]['ip_address'] = interface['ipAddress']
+                object_factory(**nodes[node])
     db.session.commit()
     return jsonify({})
 

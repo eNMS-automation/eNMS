@@ -1,5 +1,5 @@
 from os import remove
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname, join, pardir
 from pytest import fixture
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -8,12 +8,14 @@ from time import sleep
 
 from eNMS import create_app, db
 
+path = abspath(join(dirname(abspath(__file__)), pardir))
+
 
 @fixture
 def base_client():
-    app = create_app(abspath(dirname(__file__)), test=True)
-    app_ctx = app.app_context()
-    app_ctx.push()
+    app = create_app(path, test=True)
+    app_context = app.app_context()
+    app_context.push()
     db.session.close()
     db.drop_all()
     yield app.test_client()
@@ -22,9 +24,9 @@ def base_client():
 
 @fixture
 def user_client():
-    app = create_app(abspath(dirname(__file__)), test=True)
-    app_ctx = app.app_context()
-    app_ctx.push()
+    app = create_app(path, test=True)
+    app_context = app.app_context()
+    app_context.push()
     db.session.close()
     db.drop_all()
     client = app.test_client()
@@ -39,7 +41,7 @@ def user_client():
 
 @fixture
 def selenium_client():
-    app = create_app(abspath(dirname(__file__)))
+    app = create_app(path, test=True)
     app_context = app.app_context()
     app_context.push()
     db.session.close()

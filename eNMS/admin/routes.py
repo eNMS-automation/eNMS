@@ -113,6 +113,7 @@ def admninistration():
         'administration.html',
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),
+        opennms_form=OpenNmsForm(request.form),
         tacacs_server=tacacs_server,
         syslog_server=syslog_server
     )

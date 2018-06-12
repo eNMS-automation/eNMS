@@ -8,11 +8,9 @@ import sys
 import logging
 
 sys.dont_write_bytecode = True
-
 db = SQLAlchemy()
 login_manager = LoginManager()
 scheduler = APScheduler()
-
 
 import eNMS.objects.models
 import eNMS.tasks.models
@@ -23,7 +21,6 @@ import eNMS.scripts.models
 from eNMS.base.rest import configure_rest_api
 from eNMS.config import config_dict
 from eNMS.scripts.custom_scripts import create_custom_scripts
-
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
 

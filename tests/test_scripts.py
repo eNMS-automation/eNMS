@@ -111,7 +111,7 @@ file_transfer_script = ImmutableMultiDict([
 def test_base_scripts(user_client):
     user_client.post('/scripts/create_script_netmiko_config', data=netmiko_ping)
     assert len(NetmikoConfigScript.query.all()) == 1
-    path_yaml = join(path_scripts, 'interfaces', 'parameters.yaml')
+    path_yaml = join(user_client.application.path, 'scripts', 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         netmiko_jinja2_script['file'] = f
         user_client.post('/scripts/create_script_netmiko_config', data=netmiko_jinja2_script)

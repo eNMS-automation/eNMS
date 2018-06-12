@@ -142,7 +142,7 @@ def create_script(script_type):
         }[script_type](real_content, **request.form)
     elif script_type == 'file_transfer':
         source_file_name = request.form['source_file']
-        source_file_path = join(current_app.path_file_transfer, source_file_name)
+        source_file_path = join(current_app.path, 'file_transfer', source_file_name)
         script = FileTransferScript(source_file_path, **request.form)
     else:
         script = {

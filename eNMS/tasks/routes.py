@@ -72,11 +72,13 @@ def scheduler(task_type, workflow_id=None):
         nodes = request.form.getlist('nodes')
         data['scripts'] = [get_obj(Script, id=id) for id in scripts]
         data['nodes'] = [get_obj(Node, id=id) for id in nodes]
+        print(request.form.getlist('pools'))
         for pool_id in request.form.getlist('pools'):
             data['nodes'].extend(get_obj(Pool, id=pool_id).nodes)
     if task_type in ('workflow_task', 'inner_task'):
         data['workflow'] = get_obj(Workflow, id=workflow_id)
     data['user'] = current_user
+    print(task_type, data)
     task = task_factory(task_type, **data)
     return jsonify(task.serialized)
 

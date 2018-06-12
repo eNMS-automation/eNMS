@@ -48,3 +48,7 @@ class GeographicalParametersForm(FlaskForm):
     default_longitude = FloatField('Default longitude')
     default_latitude = FloatField('Default latitude')
     default_zoom_level = IntegerField('Default zoom level')
+
+
+class OpenNmsForm(FlaskForm):
+    node_query = TextField('https://demo.opennms.org/opennms/rest/nodes')

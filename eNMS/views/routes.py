@@ -119,7 +119,7 @@ def export_to_google_earth():
         ]
         line.style = styles[link.type]
         line.style.linestyle.width = request.form['line_width']
-    filepath = join(current_app, 'google_earth', request.form['name'] + '.kmz')
+    filepath = join(current_app.path, 'google_earth', request.form['name'] + '.kmz')
     kml_file.save(filepath)
     return jsonify({})
 

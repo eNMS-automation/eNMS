@@ -23,6 +23,49 @@
   <!-- Vis JS -->
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
   <script>
+    var container = document.getElementById('network');
+    var dsoptions = {
+      edges: {
+        font: {
+          size: 12
+        }
+      },
+      nodes: {
+        shape: 'box',
+        font: {
+          bold: {
+            color: '#0077aa'
+          }
+        }
+      },
+      manipulation: {
+        enabled: false,
+        addNode: function (data, callback) {
+          // filling in the popup DOM elements
+          console.log(data);
+        },
+        editNode: function (data, callback) {
+          // filling in the popup DOM elements
+          console.log('edit', data);
+        },
+        addEdge: function (data, callback) {
+          if (data.from != data.to) {
+            data.type = edge_type;
+            saveEdge(data);
+            console.log('test');
+            network.addEdgeMode();
+          }
+        }
+      }
+    };
+
+    // Create a DataSet with data (enables two way data binding)
+    nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
+    edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
+    data = {nodes: nodes, edges: edges};
+    network = new vis.Network(container, data, dsoptions);
+    network.setOptions( { physics: false } );
+
     function scheduleTask() {
       if (workflow && $("#scheduling-form").parsley().validate()) {
         $.ajax({
@@ -32,13 +75,8 @@
           data: $("#scheduling-form").serialize(),
           success: function(task) {
             $("#scheduling").modal('hide');
-            nodes.add({
-              id: task.id,
-              label: task.name,
-              type: task.type
-            });
+            nodes.add(taskToNode(task));
             saveNode(task);
-            
           }
         });
       } else {
@@ -47,7 +85,7 @@
     }
 
     if (workflow) {
-      $("#workflow").text = workflow.name
+      $("#workflow-name").val(workflow.id);
     } else {
       $.ajax({
         type: "POST",
@@ -101,11 +139,12 @@
     }
 
     function taskToNode(task) {
-      console.log(task, workflow)
       return {
         id: task.id,
         label: task.name,
         type: task.type,
+        x: task.x,
+        y: task.y,
         color: task.id == workflow.start_task ? "green" : "#D2E5FF"
       };
     }
@@ -128,64 +167,27 @@
 
     function startScript() {
       start = nodes.get(network.getSelectedNodes()[0]);
-      if (workflow.start_task) {
-        nodes.update({id: workflow.start_task, color: "#D2E5FF"});
-      }
-      $.ajax({
-        type: "POST",
-        url: `/workflows/set_as_start/${workflow.id}/${start.id}`,
-        success: function() {
-          nodes.update({id: start.id, color: "green"});
-          workflow.start_task = start.id
-          alertify.notify("Start script updated", 'success', 5);
+      console.log(start, typeof(start));
+      if (start.length == 0) {
+        alertify.notify("You must select a script first.", 'error', 5);
+      } else {
+        if (workflow.start_task) {
+          nodes.update({id: workflow.start_task, color: "#D2E5FF"});
         }
-      });
-      alertify.notify(`Script ${start.label} set as start`, 'success', 5);
+        $.ajax({
+          type: "POST",
+          url: `/workflows/set_as_start/${workflow.id}/${start.id}`,
+          success: function() {
+            nodes.update({id: start.id, color: "green"});
+            workflow.start_task = start.id
+            alertify.notify("Start script updated", 'success', 5);
+          }
+        });
+        alertify.notify(`Script ${start.label} set as start`, 'success', 5);
+      }
     }
 
-    var container = document.getElementById('network');
-    var dsoptions = {
-      edges: {
-        font: {
-          size: 12
-        }
-      },
-      nodes: {
-        shape: 'box',
-        font: {
-          bold: {
-            color: '#0077aa'
-          }
-        }
-      },
-      manipulation: {
-        enabled: false,
-        addNode: function (data, callback) {
-          // filling in the popup DOM elements
-          console.log(data);
-        },
-        editNode: function (data, callback) {
-          // filling in the popup DOM elements
-          console.log('edit', data);
-        },
-        addEdge: function (data, callback) {
-          if (data.from != data.to) {
-            data.type = edge_type;
-            saveEdge(data);
-            network.addEdgeMode();
-          }
-        }
-      }
-    };
-
-    // Create a DataSet with data (enables two way data binding)
-    var nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
-        edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-        console.log(edges);
-        data = {nodes: nodes, edges: edges};
-        network = new vis.Network(container, data, dsoptions);
-
-    // when a filter is selected, apply it
+    // when a workflow is selected, apply it
     $('#workflow').on('change', function() {
       $.ajax({
         type: "POST",
@@ -215,11 +217,6 @@
         }
     });
 
-    // use force-based algorithm upon loading the graph, stop after it has stabilized
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions( { physics: false } );
-    });
-
     function deleteSelection() {
       network.getSelectedNodes().map(node => deleteNode(node));
       network.getSelectedEdges().map(edge => deleteEdge(edge));
@@ -228,6 +225,7 @@
     }
 
     function switchMode(mode) {
+      console.log(mode);
       if (mode == "success" || mode == "failure") {
         edge_type = mode;
         network.addEdgeMode();
@@ -267,5 +265,38 @@
       $('#scheduling').modal('show');
     }
 
+    // when a filter is selected, apply it
+    $('#workflow-name').on('change', function() {
+      $.ajax({
+        type: "POST",
+        url: `/workflows/get/${this.value}`,
+        dataType: "json",
+        success: function(wf) {
+          savePositions()
+          workflow = wf;
+          nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
+          edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
+          data = {nodes: nodes, edges: edges};
+          network = new vis.Network(container, data, dsoptions);
+          network.setOptions( { physics: false } );
+          nodes.map(n => network.moveNode(n.id, n.x, n.y));
+        }
+      });
+    });
+
+    function savePositions() {
+      $.ajax({
+        type: "POST",
+        url: "/workflows/save_positions",
+        dataType: "json",
+        contentType: 'application/json;charset=UTF-8',
+        data: JSON.stringify(network.getPositions(), null, '\t'),
+        success: function() { }
+      });
+    }
+
+    $(window).bind('beforeunload', function() {
+      savePositions()
+    });
   </script>
 {% endblock javascripts %}

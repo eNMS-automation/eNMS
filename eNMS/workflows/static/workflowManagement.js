@@ -28,7 +28,7 @@ function addWorkflow(mode, properties) {
     `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<a href="/workflows/workflow_editor/${properties.id}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Manage</a>`,
-    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${properties.id}')">Delete</button>`
+    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteWorkflow('${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
@@ -94,10 +94,10 @@ function editObject() {
 }
 
 // delete a workflow
-function deleteObject(id) {
+function deleteWorkflow(id) {
   $.ajax({
     type: "POST",
-    url: `/workflows/delete_${id}`,
+    url: `/workflows/delete/${id}`,
     success: function(name){
       table.row($(`#${id}`)).remove().draw(false);
       alertify.notify(`Workflow ${name} deleted`, 'error', 5);

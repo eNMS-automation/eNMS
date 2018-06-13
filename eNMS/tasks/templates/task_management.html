@@ -28,7 +28,7 @@
     var tasks = {{ tasks|tojson|safe }}
   </script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <!-- Task management -->
   <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
   <!-- Difflib -->

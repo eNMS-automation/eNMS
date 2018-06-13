@@ -92,6 +92,11 @@ scheduled_task_serialized_properties = task_serialized_properties + (
     'creator'
 )
 
+inner_task_serialized_properties = task_serialized_properties + (
+    'x',
+    'y'
+)
+
 public_properties = (
     node_public_properties +
     link_public_properties
@@ -107,8 +112,8 @@ cls_to_properties = {
     'WorkflowEdge': ('id', 'name', 'type'),
     'User': ('id',) + user_public_properties,
     'Log': ('id',) + log_public_properties,
-    'Task': task_serialized_properties,
-    'ScheduledTask': scheduled_task_serialized_properties
+    'ScheduledTask': scheduled_task_serialized_properties,
+    'InnerTask': inner_task_serialized_properties
 }
 
 type_to_public_properties = OrderedDict([

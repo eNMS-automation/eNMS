@@ -26,14 +26,14 @@ def script_job(task_name):
         logs = deepcopy(task.logs)
         logs[job_time] = {}
         nodes = task.nodes if task.nodes else ['dummy']
-        for task_job in task.scripts:
+        for script_job in task.scripts:
             results = {}
             pool = ThreadPool(processes=len(nodes))
             args = [(task, node, results) for node in nodes]
-            pool.map(task_job.job, args)
+            pool.map(script_job.job, args)
             pool.close()
             pool.join()
-            logs[job_time][task_job.name] = results
+            logs[job_time][script_job.name] = results
         task.logs = logs
         db.session.commit()
 
@@ -264,6 +264,9 @@ class InnerTask(Task):
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     parent_workflow = relationship('Workflow', back_populates='inner_tasks')
+    x = Column(Integer, default=0.)
+    y = Column(Integer, default=0.)
+
 
     __mapper_args__ = {
         'polymorphic_identity': 'InnerTask',
@@ -295,7 +298,7 @@ class InnerTask(Task):
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['Task']}
+        return {p: str(getattr(self, p)) for p in cls_to_properties['InnerTask']}
 
     @property
     def serialized(self):

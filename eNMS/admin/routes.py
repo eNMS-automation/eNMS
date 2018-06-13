@@ -180,10 +180,11 @@ def save_syslog_server():
 @blueprint.route('/query_opennms', methods=['POST'])
 @login_required
 def query_opennms():
+    login, password = request.form['login'], request.form['password']
     json_nodes = requests.get(
         request.form['node_query'] + '/nodes',
         headers={'Accept': 'application/json'},
-        auth=('demo', 'demo')
+        auth=(login, password)
     ).json()['node']
 
     nodes = {
@@ -200,7 +201,7 @@ def query_opennms():
         link = requests.get(
             request.form['node_query'] + '/nodes/' + node + '/ipinterfaces',
             headers={'Accept': 'application/json'},
-            auth=('demo', 'demo')
+            auth=(login, password)
         ).json()
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':

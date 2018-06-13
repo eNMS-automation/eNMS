@@ -58,3 +58,5 @@ class OpenNmsForm(FlaskForm):
     )
     node_type = [(t, t) for t in node_class]
     type = SelectField('Type', choices=node_type)
+    login = TextField('Login')
+    password = PasswordField('Password')

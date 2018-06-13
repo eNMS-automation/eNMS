@@ -75,7 +75,7 @@
       <div class="col-md-6 col-xs-6">
         <div class="x_panel">
           <div class="x_title">
-            <h4 class="text-center">openNMS query</h4>
+            <h4 class="text-center">OpenNMS import (ReST API)</h4>
           </div>
           <div class="x_content">
             <br />
@@ -87,6 +87,28 @@
                     {{ field(class="form-control required", placeholder=field.label.text) }}
                   </div><br><br><br>
                 {% endfor %}
+              </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="button" class="btn btn-success" onclick="queryOpenNMS()">Retrieve nodes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        <div class="x_panel">
+          <div class="x_title">
+            <h4 class="text-center">Netbox import (ReST API)</h4>
+          </div>
+          <div class="x_content">
+            <br />
+            <form id="opennms_form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+              <div class="form-group" style="height: 450px">
+                TODO
               </div>
               <div class="ln_solid"></div>
               <div class="form-group">

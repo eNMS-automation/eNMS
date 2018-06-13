@@ -124,8 +124,7 @@ class NetmikoConfigScript(Script):
             netmiko_handler.disconnect()
         except Exception:
             pass
-        results[node.name] = result
-        return success
+        results[node.name] = {'success': success, 'logs': result}
 
 
 class FileTransferScript(Script):
@@ -188,8 +187,7 @@ class FileTransferScript(Script):
         except Exception as e:
             result = 'netmiko config did not work because of {}'.format(e)
             success = False
-        results[node.name] = result
-        return success
+        results[node.name] = {'success': success, 'logs': result}
 
 
 class NetmikoValidationScript(Script):
@@ -247,12 +245,12 @@ class NetmikoValidationScript(Script):
         except Exception as e:
             results[node.name] = 'netmiko did not work because of {}'.format(e)
             success = False
-        results[node.name] = str_dict(outputs)
+        result = str_dict(outputs)
         try:
             netmiko_handler.disconnect()
         except Exception:
             pass
-        return success
+        results[node.name] = {'success': success, 'logs': result}
 
 
 class NapalmConfigScript(Script):
@@ -300,8 +298,7 @@ class NapalmConfigScript(Script):
         else:
             result = 'configuration OK'
             success = True
-        results[node.name] = result
-        return success
+        results[node.name] = {'success': success, 'logs': result}
 
 
 class NapalmActionScript(Script):
@@ -340,8 +337,7 @@ class NapalmActionScript(Script):
         else:
             result = self.action + ' OK'
             success = True
-        results[node.name] = result
-        return success
+        results[node.name] = {'success': success, 'logs': result}
 
 
 class NapalmGettersScript(Script):
@@ -386,8 +382,8 @@ class NapalmGettersScript(Script):
             success = False
         else:
             success = True
-            results[node.name] = dict_result
-        return success
+            result = dict_result
+        results[node.name] = {'success': success, 'logs': result}
 
 
 class AnsibleScript(Script):
@@ -423,8 +419,7 @@ class AnsibleScript(Script):
         if self.graphical_inventory:
             command.extend(['-i', node.ip_address + ","])
         command.append(self.playbook_path)
-        results[node.name] = check_output(command + arguments)
-        return True
+        results[node.name] = {'success': True, 'logs': check_output(command + arguments)}
 
 
 type_to_class = {

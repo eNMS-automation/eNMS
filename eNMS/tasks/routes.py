@@ -74,8 +74,8 @@ def scheduler(task_type, workflow_id=None):
         data['nodes'] = [get_obj(Node, id=id) for id in nodes]
         for pool_id in request.form.getlist('pools'):
             data['nodes'].extend(get_obj(Pool, id=pool_id).nodes)
-    if not data['nodes']:
-        return jsonify('no node')
+        if not data['nodes']:
+            return jsonify('no node')
     if task_type in ('workflow_task', 'inner_task'):
         data['workflow'] = get_obj(Workflow, id=workflow_id)
     data['user'] = current_user

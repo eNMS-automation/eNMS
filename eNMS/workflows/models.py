@@ -89,7 +89,7 @@ class Workflow(CustomBase):
     def run(self):
         layer, visited = set(), set()
         start_task = get_obj(Task, id=self.start_task)
-        print(start_task)
+        result = True
         if start_task:
             layer.add(start_task)
         while layer:
@@ -98,13 +98,15 @@ class Workflow(CustomBase):
             for task in layer:
                 visited.add(task)
                 success = task.run()
+                if not success:
+                    result = False
                 edge_type = 'success' if success else 'failure'
                 for neighbor in task.task_neighbors(edge_type):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
                 sleep(task.waiting_time)
             layer = new_layer
-
+        return result
 
 def workflow_factory(**kwargs):
     workflow = get_obj(Workflow, name=kwargs['name'])

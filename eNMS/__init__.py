@@ -35,7 +35,6 @@ def register_extensions(app, test):
     login_manager.init_app(app)
     
     if not test:
-        print('test'*400)
         scheduler.init_app(app)
         scheduler.start()
 

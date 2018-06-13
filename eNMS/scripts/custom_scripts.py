@@ -40,9 +40,7 @@ def job_example(args):
     task, node, results = args
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
-    results[node.name] = 'what will be displayed in the logs'
-    # a script returns a boolean value used in workflows (see the workflow section)
-    return True if 'a condition for success' else False
+    results[node.name] = {'result': True, 'logs': 'what will be displayed in the logs'}
 
 
 example_parameters = {

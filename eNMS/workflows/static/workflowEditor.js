@@ -48,13 +48,13 @@ function scheduleTask() {
       url: `/tasks/scheduler/inner_task/${workflow.id}`,
       dataType: "json",
       data: $("#scheduling-form").serialize(),
-      success: function(task) {
+      success: function(result) {
         if (result === 'no node') {
           alertify.notify('No nodes selected.', 'error', 5);
         } else {
           $("#scheduling").modal('hide');
-          nodes.add(taskToNode(task));
-          saveNode(task);
+          nodes.add(taskToNode(result));
+          saveNode(result);
         }
       }
     });
@@ -146,6 +146,7 @@ function showModal(modal_name){
 
 function startScript() {
   start = nodes.get(network.getSelectedNodes()[0]);
+  console.log(start, start.id, start.length);
   if (start.length == 0 || !start.id) {
     alertify.notify("You must select a script first.", 'error', 5);
   } else {

@@ -26,14 +26,20 @@ def script_job(task_name):
         logs = deepcopy(task.logs)
         logs[job_time] = {}
         nodes = task.nodes if task.nodes else ['dummy']
-        for script_job in task.scripts:
+        for script in task.scripts:
             results = {}
             pool = ThreadPool(processes=len(nodes))
             args = [(task, node, results) for node in nodes]
-            pool.map(script_job.job, args)
+            pool.map(script.job, args)
             pool.close()
             pool.join()
-            logs[job_time][script_job.name] = results
+            logs[job_time][script.name] = results
+        result = True
+        for script in task.scripts:
+            for node in task.nodes:
+                if not logs[job_time][script.name][node.name]:
+                    result = False
+        task.result = result
         task.logs = logs
         db.session.commit()
 
@@ -41,7 +47,7 @@ def script_job(task_name):
 def workflow_job(task_name):
     with scheduler.app.app_context():
         task = get_obj(Task, name=task_name)
-        task.scheduled_workflow.run()
+        task.result = task.scheduled_workflow.run()
         task.logs = {'result': 'go to the workflow editor to see the result'}
         db.session.commit()
 
@@ -53,6 +59,7 @@ class Task(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     status = Column(String)
+    result = Column(Boolean)
     type = Column(String)
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='tasks')
@@ -190,22 +197,6 @@ class ScheduledScriptTask(ScheduledTask):
         self.job = script_job
         super(ScheduledScriptTask, self).__init__(**data)
 
-    def run(self):
-        job_time = str(datetime.now())
-        logs = deepcopy(self.logs)
-        logs[job_time] = {}
-        nodes = self.nodes if self.nodes else ['dummy']
-        for script in self.scripts:
-            results = {}
-            pool = ThreadPool(processes=len(nodes))
-            args = [(self, node, results) for node in nodes]
-            pool.map(script.job, args)
-            pool.close()
-            pool.join()
-            logs[job_time][script.name] = results
-        self.logs = logs
-        db.session.commit()
-
     @property
     def properties(self):
         return {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
@@ -293,8 +284,15 @@ class InnerTask(Task):
             pool.close()
             pool.join()
             logs[job_time][script.name] = results
+        result = True
+        for script in self.scripts:
+            for node in self.nodes:
+                if not logs[job_time][script.name][node.name]:
+                    result = False
+        self.result = result
         self.logs = logs
         db.session.commit()
+        return result
 
     @property
     def properties(self):

@@ -9,7 +9,7 @@ function scheduleTask() {
       url: `/tasks/scheduler/workflow_task/${$("#scheduling").attr("workflowId")}`,
       dataType: "json",
       data: $("#scheduling-form").serialize(),
-      success: function() {
+      success: function(result) {
         if (result === 'no node') {
           alertify.notify('No nodes selected.', 'error', 5);
         } else {

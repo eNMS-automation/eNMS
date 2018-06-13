@@ -10,7 +10,11 @@ function scheduleTask() {
       dataType: "json",
       data: $("#scheduling-form").serialize(),
       success: function() {
-        alertify.notify('Workflow scheduled', 'success', 5);
+        if (result === 'no node') {
+          alertify.notify('No nodes selected.', 'error', 5);
+        } else {
+          alertify.notify(`Task ${result.name} scheduled`, 'success', 5);
+        }
       }
     });
     $("#scheduling").modal('hide');

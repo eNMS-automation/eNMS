@@ -7,8 +7,12 @@ function scheduleTask() {
       url: "/tasks/scheduler/script_task",
       dataType: "json",
       data: $("#scheduling-form").serialize(),
-      success: function() {
-      alertify.notify('Task scheduled', 'success', 5);
+      success: function(result) {
+        if (result === 'no node') {
+          alertify.notify('No nodes selected.', 'error', 5);
+        } else {
+          alertify.notify(`Task ${result.name} scheduled`, 'success', 5);
+        }
       }
     });
     $("#scheduling").modal('hide');

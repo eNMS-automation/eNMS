@@ -55,8 +55,9 @@ network.setOptions( { physics: false } );
 var selectedNode = null;
 network.on('oncontext', function(properties) {
   properties.event.preventDefault()
-  selectedNode = this.getNodeAt(properties.pointer.DOM).id;
+  node = this.getNodeAt(properties.pointer.DOM);
   if(typeof node !== "undefined") {
+    selectedNode = node;
   }
 });
 

@@ -52,25 +52,67 @@ data = {nodes: nodes, edges: edges};
 network = new vis.Network(container, data, dsoptions);
 network.setOptions( { physics: false } );
 
-var $contextMenu = $("#contextMenu");
+var selectedNode = null;
 network.on('oncontext', function(properties) {
   properties.event.preventDefault()
-  var node = this.getNodeAt(properties.pointer.DOM);
+  selectedNode = this.getNodeAt(properties.pointer.DOM).id;
   if(typeof node !== "undefined") {
-   $contextMenu.css({
-      display: "block",
-      left: properties.event.pageX,
-      top: properties.event.pageY
-   });
-   return false;
-   var $row = $(this)
-   console.log($row);
-    //showTaskModal(node.id);
   }
 });
 
-$contextMenu.on("click", "a", function() {
-  $contextMenu.hide();
+
+(function ($, window) {
+  $.fn.contextMenu = function (settings) {
+    return this.each(function () {
+      // Open context menu
+      $(this).on("contextmenu", function (e) {
+        // return native menu if pressing control
+        if (e.ctrlKey) return;
+        //open menu
+        var $menu = $(settings.menuSelector)
+          .data("invokedOn", $(e.target))
+          .show()
+          .css({
+            position: "absolute",
+            left: getMenuPosition(e.clientX, 'width', 'scrollLeft'),
+            top: getMenuPosition(e.clientY, 'height', 'scrollTop')
+          })
+          .off('click')
+          .on('click', 'a', function (e) {
+            $menu.hide();
+            var $invokedOn = $menu.data("invokedOn");
+            var $selectedMenu = $(e.target);
+            settings.menuSelected.call(this, $invokedOn, $selectedMenu);
+          });
+        return false;
+      });
+      //make sure menu closes on any click
+      $('body').click(function () {
+        $(settings.menuSelector).hide();
+      });
+    });
+
+    function getMenuPosition(mouse, direction, scrollDir) {
+      var win = $(window)[direction](),
+          scroll = $(window)[scrollDir](),
+          menu = $(settings.menuSelector)[direction](),
+          position = mouse + scroll;
+      // opening menu would pass the side of the page
+      if (mouse + menu > win && menu < mouse) 
+        position -= menu;
+        return position;
+    }    
+  };
+})(jQuery, window);
+
+$("#network").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function (invokedOn, selectedMenu) {
+      var row = selectedMenu.text();
+      if (row == 'Edit') {
+        showTaskModal(selectedNode);
+      }
+    }
 });
 
 function scheduleTask() {

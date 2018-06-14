@@ -34,12 +34,44 @@ var dsoptions = {
   }
 };
 
-// Create a DataSet with data (enables two way data binding)
+if (workflow) {
+  $("#workflow-name").val(workflow.id);
+} else {
+  $.ajax({
+    type: "POST",
+    url: `/workflows/get/${$("#workflow-name").val()}`,
+    success: function(wf) {
+      workflow = wf;
+    }
+  });
+}
+
 nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
 edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
 data = {nodes: nodes, edges: edges};
 network = new vis.Network(container, data, dsoptions);
 network.setOptions( { physics: false } );
+
+var $contextMenu = $("#contextMenu");
+network.on('oncontext', function(properties) {
+  properties.event.preventDefault()
+  var node = this.getNodeAt(properties.pointer.DOM);
+  if(typeof node !== "undefined") {
+   $contextMenu.css({
+      display: "block",
+      left: properties.event.pageX,
+      top: properties.event.pageY
+   });
+   return false;
+   var $row = $(this)
+   console.log($row);
+    //showTaskModal(node.id);
+  }
+});
+
+$contextMenu.on("click", "a", function() {
+  $contextMenu.hide();
+});
 
 function scheduleTask() {
   if (workflow && $("#scheduling-form").parsley().validate()) {
@@ -63,17 +95,6 @@ function scheduleTask() {
   }
 }
 
-if (workflow) {
-  $("#workflow-name").val(workflow.id);
-} else {
-  $.ajax({
-    type: "POST",
-    url: `/workflows/get/${$("#workflow-name").val()}`,
-    success: function(wf) {
-      workflow = wf;
-    }
-  });
-}
 
 function saveNode(task) {
   $.ajax({
@@ -187,14 +208,6 @@ $('#workflow').on('change', function() {
     alertify.notify(`Workflow '${workflow.name}' displayed`, 'success', 5);
     }
   });
-});
-
-network.on( 'doubleClick', function(properties) {
-    var ids = properties.nodes;
-    var node = nodes.get(ids)[0];
-    if(typeof node !== "undefined") {
-      showTaskModal(node.id);
-    }
 });
 
 function deleteSelection() {

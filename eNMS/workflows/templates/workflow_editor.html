@@ -6,6 +6,12 @@
   {{ super() }}
  <!-- Vis CSS -->
   <link href="{{ url_for('workflows_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
+  <style>
+#contextMenu {
+  position: absolute;
+  display:none;
+}
+    </style>
 {% endblock stylesheets %}
 
 {% block content %}

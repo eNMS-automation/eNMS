@@ -80,7 +80,8 @@ function scheduleTask() {
           alertify.notify('No nodes selected.', 'error', 5);
         } else {
           $("#scheduling").modal('hide');
-          if (!graph.findNode(result.id)) {
+          console.log(graph.findNode(result.id));
+          if (graph.findNode(result.id).length == 0) {
             nodes.add(taskToNode(result));
             saveNode(result);
             alertify.notify(`Task '${result.name}' created.`, 'success', 5);
@@ -183,7 +184,7 @@ function startScript() {
         alertify.notify("Start script updated", 'success', 5);
       }
     });
-    alertify.notify(`Script ${start.label} set as start`, 'success', 5);
+    alertify.notify(`Task ${start.label} set as start`, 'success', 5);
   }
 }
 

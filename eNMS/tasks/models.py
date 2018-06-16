@@ -112,7 +112,7 @@ class ScheduledTask(Task):
             self.recurrent = True
             self.recurrent_scheduling()
         else:
-            self.one_time_scheduling()
+            self.run()
 
     def datetime_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
@@ -150,25 +150,7 @@ class ScheduledTask(Task):
             replace_existing=True
         )
 
-    def one_time_scheduling(self):
-        if not self.start_date:
-            # when the job is scheduled to run immediately, it may happen that
-            # the job is run even before the task is created, in which case
-            # it fails because it cannot be retrieve from the Task column of
-            # the database: we introduce a delta of 5 seconds.
-            # other situation: the server is too slow and the job cannot be
-            # run at all, eg 'job was missed by 0:00:09.465684'
-            self.start_date = datetime.now() + timedelta(seconds=5)
-        # execute the job immediately with a date-type job
-        # when date is used as a trigger and run_date is left undetermined,
-        # the job is executed immediately.
-        scheduler.add_job(
-            id=self.creation_time,
-            run_date=self.start_date,
-            func=self.job,
-            args=[self.name],
-            trigger='date'
-        )
+
 
 
 class ScheduledScriptTask(ScheduledTask):
@@ -197,28 +179,27 @@ class ScheduledScriptTask(ScheduledTask):
         self.job = script_job
         super(ScheduledScriptTask, self).__init__(**data)
 
-    def run(self):
-        job_time = str(datetime.now())
-        logs = deepcopy(self.logs)
-        logs[job_time] = {}
-        nodes = self.nodes if self.nodes else ['dummy']
-        for script in self.scripts:
-            results = {}
-            pool = ThreadPool(processes=len(nodes))
-            args = [(self, node, results) for node in nodes]
-            pool.map(script.job, args)
-            pool.close()
-            pool.join()
-            logs[job_time][script.name] = results
-        result = True
-        for script in self.scripts:
-            for node in self.nodes:
-                if not logs[job_time][script.name][node.name]:
-                    result = False
-        self.result = result
-        self.logs = logs
-        db.session.commit()
-        return result
+    def run(self, run_now=True):
+        runtime = datetime.now() + timedelta(seconds=5)
+        if not run_now and not self.start_date:
+            # when the job is scheduled to run immediately, it may happen that
+            # the job is run even before the task is created, in which case
+            # it fails because it cannot be retrieve from the Task column of
+            # the database: we introduce a delta of 5 seconds.
+            # other situation: the server is too slow and the job cannot be
+            # run at all, eg 'job was missed by 0:00:09.465684'
+            self.start_date = runtime
+        # execute the job immediately with a date-type job
+        # when date is used as a trigger and run_date is left undetermined,
+        # the job is executed immediately.
+        run_date = self.start_date or runtime
+        scheduler.add_job(
+            id=self.creation_time,
+            run_date=run_date,
+            func=script_job,
+            args=[self.name],
+            trigger='date'
+        )
 
     @property
     def properties(self):
@@ -249,11 +230,27 @@ class ScheduledWorkflowTask(ScheduledTask):
         self.job = workflow_job
         super(ScheduledWorkflowTask, self).__init__(**data)
 
-    def run():
-        self.result = task.scheduled_workflow.run()
-        self.logs = {'result': 'go to the workflow editor to see the result'}
-        db.session.commit()
-        return result
+    def run(self, run_now=True):
+        runtime = datetime.now() + timedelta(seconds=5)
+        if not run_now and not self.start_date:
+            # when the job is scheduled to run immediately, it may happen that
+            # the job is run even before the task is created, in which case
+            # it fails because it cannot be retrieve from the Task column of
+            # the database: we introduce a delta of 5 seconds.
+            # other situation: the server is too slow and the job cannot be
+            # run at all, eg 'job was missed by 0:00:09.465684'
+            self.start_date = runtime
+        # execute the job immediately with a date-type job
+        # when date is used as a trigger and run_date is left undetermined,
+        # the job is executed immediately.
+        run_date = self.start_date or runtime
+        scheduler.add_job(
+            id=self.creation_time,
+            run_date=run_date,
+            func=workflow_job,
+            args=[self.name],
+            trigger='date'
+        )
 
     @property
     def properties(self):

@@ -54,6 +54,7 @@ function runTask(id) {
     url: `/tasks/run_task/${id}`,
     dataType: 'json',
     success: function(task){
+      console.log(task);
       alertify.notify(`Task ${task.name} started`, 'success', 5);
     }
   });

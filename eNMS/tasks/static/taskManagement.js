@@ -28,8 +28,10 @@ function addTask(mode, properties) {
 }
 
 (function() {
-  for (var i = 0; i < tasks.length; i++) {
-    addTask('create', tasks[i]);
+  if (typeof tasks !== 'undefined') {
+    for (var i = 0; i < tasks.length; i++) {
+      addTask('create', tasks[i]);
+    }
   }
 })();
 

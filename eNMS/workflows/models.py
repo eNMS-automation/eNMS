@@ -94,13 +94,17 @@ class Workflow(CustomBase):
             layer.add(start_task)
         while layer:
             new_layer = set()
+            print(layer)
             for task in layer:
+                print(task)
                 visited.add(task)
                 success = task.run()
+                print(success)
                 if not success:
                     result = False
                 edge_type = 'success' if success else 'failure'
                 for neighbor in task.task_neighbors(edge_type):
+                    print(neighbor, neighbor not in visited)
                     if neighbor not in visited:
                         new_layer.add(neighbor)
                 sleep(task.waiting_time)

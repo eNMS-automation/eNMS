@@ -381,7 +381,7 @@ class NapalmGettersScript(Script):
             success = False
         else:
             success = True
-            result = dict_result
+        result = dict_result
         results[node.name] = {'success': success, 'logs': result}
 
 

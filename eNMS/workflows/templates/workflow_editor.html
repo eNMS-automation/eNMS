@@ -6,11 +6,20 @@
   {{ super() }}
  <!-- Vis CSS -->
   <link href="{{ url_for('workflows_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
+  <!-- Difflib CSS -->
+  <link href="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
   <style>
-#contextMenu {
-  position: absolute;
-  display:none;
-}
+    #main { height:90vh; }
+    @media (min-width: 1000px) {
+      .modal-lg {
+        width: 1200px;
+      }
+    }
+
+    #contextMenu {
+      position: absolute;
+      display:none;
+    }
   </style>
 {% endblock stylesheets %}
 
@@ -32,4 +41,6 @@
   <!-- Vis JS -->
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
   <script src="{{ url_for('workflows_blueprint.static', filename='workflowEditor.js') }}"></script>
+  <!-- Difflib -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.js') }}"></script>
 {% endblock javascripts %}

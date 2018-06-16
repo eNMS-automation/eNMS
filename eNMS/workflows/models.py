@@ -93,7 +93,6 @@ class Workflow(CustomBase):
         if start_task:
             layer.add(start_task)
         while layer:
-            print(layer)
             new_layer = set()
             for task in layer:
                 visited.add(task)

@@ -109,7 +109,7 @@ class ScheduledTask(Task):
         super(ScheduledTask, self).__init__(**data)
         if self.run_immediately:
             self.run(run_now=True)
-        if self.start_date:
+        elif self.start_date:
             self.schedule()
 
     def schedule(self):

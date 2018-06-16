@@ -97,7 +97,8 @@ scheduled_task_serialized_properties = task_serialized_properties + (
 
 inner_task_serialized_properties = task_serialized_properties + (
     'x',
-    'y'
+    'y',
+    'waiting_time'
 )
 
 public_properties = (

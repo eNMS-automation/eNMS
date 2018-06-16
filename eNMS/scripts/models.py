@@ -287,10 +287,9 @@ class NapalmConfigScript(Script):
                 optional_args={'secret': node.secret_password}
             )
             napalm_driver.open()
-            if self.action in ('load_merge_candidate', 'load_replace_candidate'):
-                getattr(napalm_driver, self.action)(config=self.content)
-            else:
-                getattr(napalm_driver, self.action)()
+            config = '\n'.join(self.content.splitlines())
+            getattr(napalm_driver, self.action)(config=config)
+            napalm_driver.commit_config()
             napalm_driver.close()
         except Exception as e:
             result = 'napalm config did not work because of {}'.format(e)
@@ -455,9 +454,7 @@ def script_factory(type, **kwargs):
 
 
 default_scripts = (
-    ('NAPALM Commit', 'commit_config'),
-    ('NAPALM Discard', 'discard_config'),
-    ('NAPALM Rollback', 'rollback')
+    ('NAPALM Rollback', 'rollback'),
 )
 
 

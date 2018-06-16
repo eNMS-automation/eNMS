@@ -82,6 +82,7 @@ class ScheduledTask(Task):
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     recurrent = Column(Boolean, default=False)
+    schedule_task = Column(Boolean)
     creation_time = Column(Integer)
     frequency = Column(String(120))
     start_date = Column(String)
@@ -105,7 +106,8 @@ class ScheduledTask(Task):
             setattr(self, date, value)
         self.is_active = True
         super(ScheduledTask, self).__init__(**data)
-        self.schedule()
+        if self.schedule_task:
+            self.schedule()
 
     def schedule(self):
         if self.frequency:

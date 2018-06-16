@@ -167,12 +167,10 @@ function showModal(modal_name){
 
 function startScript() {
   start = nodes.get(graph.getSelectedNodes()[0]);
-  console.log(start, start.id, start.length);
   if (start.length == 0 || !start.id) {
     alertify.notify("You must select a script first.", 'error', 5);
   } else {
-    if (workflow.start_task) {
-      console.log('test');
+    if (workflow.start_task != 'None') {
       nodes.update({id: workflow.start_task, color: "#D2E5FF"});
     }
     $.ajax({

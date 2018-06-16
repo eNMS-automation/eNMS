@@ -2,7 +2,7 @@ FROM python:3.6
 
 ENV FLASK_APP enms.py
 
-COPY gentelella.py gunicorn_config.py requirements.txt ./
+COPY enms.py gunicorn.py requirements.txt ./
 COPY eNMS eNMS
 COPY migrations migrations
 

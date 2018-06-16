@@ -1,12 +1,21 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, SelectMultipleField, TextField, TextAreaField
+from wtforms import (
+    BooleanField,
+    IntegerField,
+    SelectField,
+    SelectMultipleField,
+    TextField,
+    TextAreaField
+)
 
 
 class SchedulingForm(FlaskForm):
     start_date = TextField('Start date')
     end_date = TextField('End date')
     name = TextField('Name')
+    waiting_time = IntegerField('Waiting time')
     frequency = TextField('Frequency')
+    run_immediately = BooleanField('Run immediately')
     script_type_choices = (
         ('napalm_action', 'NAPALM action'),
         ('netmiko_config', 'Netmiko configuration'),

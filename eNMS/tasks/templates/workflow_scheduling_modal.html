@@ -39,6 +39,12 @@
             </div>
             <div id="step-2">
               <div class="form-group" style="min-height: 350px">
+                <fieldset>
+                  <div class="item">
+                    {{ scheduling_form.run_immediately(class="form-control") }}
+                    <label for="run-immediately">Run immediately</label>
+                  </div>
+                </fieldset>
                 <label>Start date</label>
                 <div class='form-group'>
                   {{ scheduling_form.start_date(id="start_date", class="form-control", autocomplete="off") }}

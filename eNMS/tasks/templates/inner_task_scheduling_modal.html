@@ -35,6 +35,10 @@
                 <div class='form-group'>
                   {{ scheduling_form.name(class="form-control", required=true) }}
                 </div>
+                <label>Waiting time</label>
+                <div class='form-group'>
+                  {{ scheduling_form.waiting_time(class="form-control", required=true) }}
+                </div>
                 <label>Scripts</label>
                 <div class="form-group">
                   {{ scheduling_form.script_type(class="form-control") }}

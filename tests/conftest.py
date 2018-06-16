@@ -1,4 +1,3 @@
-from os import remove
 from os.path import abspath, dirname, join, pardir
 from pytest import fixture
 from selenium import webdriver

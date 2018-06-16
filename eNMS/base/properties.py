@@ -4,6 +4,7 @@ from collections import OrderedDict
 object_common_properties = (
     'name',
     'description',
+    'model',
     'location',
     'type',
     'vendor'
@@ -148,6 +149,7 @@ default_diagrams_properties = {
 
 object_diagram_properties = (
     'description',
+    'model',
     'location',
 )
 
@@ -213,6 +215,7 @@ pretty_names = OrderedDict([
     ('longitude', 'Longitude'),
     ('latitude', 'Latitude'),
     ('location', 'Location'),
+    ('model', 'Model'),
     ('name', 'Name'),
     ('netmiko_type', 'Netmiko type'),
     ('operating_system', 'Operating System'),

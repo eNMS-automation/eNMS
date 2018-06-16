@@ -82,7 +82,7 @@ class ScheduledTask(Task):
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     recurrent = Column(Boolean, default=False)
-    schedule_task = Column(Boolean)
+    run_immediately = Column(Boolean)
     creation_time = Column(Integer)
     frequency = Column(String(120))
     start_date = Column(String)
@@ -98,6 +98,7 @@ class ScheduledTask(Task):
         self.recurrent = bool(self.frequency)
         self.creation_time = str(datetime.now())
         self.creator = data['user'].name
+        self.run_immediately = 'run_immediately' in data
         # if the start date is left empty, we turn the empty string into
         # None as this is what AP Scheduler is expecting
         for date in ('start_date', 'end_date'):
@@ -106,7 +107,9 @@ class ScheduledTask(Task):
             setattr(self, date, value)
         self.is_active = True
         super(ScheduledTask, self).__init__(**data)
-        if self.schedule_task:
+        if self.run_immediately:
+            self.run(run_now=True)
+        if self.start_date:
             self.schedule()
 
     def schedule(self):
@@ -281,15 +284,16 @@ class InnerTask(Task):
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     parent_workflow = relationship('Workflow', back_populates='inner_tasks')
-    x = Column(Integer, default=0.)
-    y = Column(Integer, default=0.)
+    x = Column(Integer, default=0)
+    y = Column(Integer, default=0)
+    waiting_time = Column(Integer, default=0)
 
     __mapper_args__ = {
         'polymorphic_identity': 'InnerTask',
     }
 
     def __init__(self, **data):
-        self.waiting_time = 0.
+        self.waiting_time = data['waiting_time']
         self.nodes = data['nodes']
         self.scripts = data['scripts']
         self.parent_workflow = data['workflow']

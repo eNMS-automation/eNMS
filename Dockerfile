@@ -9,4 +9,4 @@ COPY migrations migrations
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
-CMD ["gunicorn", "--config", "gunicorn.py", "gentelella:eNMS"]
+CMD ["gunicorn", "--config", "gunicorn.py", "eNMS:app"]

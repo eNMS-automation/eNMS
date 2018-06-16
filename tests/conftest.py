@@ -19,7 +19,7 @@ def base_client():
     db.session.close()
     db.drop_all()
     yield app.test_client()
-    # remove(join(path_source, 'database.db'))
+    remove(join(path, 'database.db'))
 
 
 @fixture

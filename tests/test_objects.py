@@ -2,7 +2,7 @@ from tests.test_base import check_blueprints
 from eNMS.objects.models import (
     Antenna,
     get_obj,
-    Pool,
+    # Pool,
     Firewall,
     Host,
     OpticalSwitch,
@@ -17,9 +17,9 @@ from eNMS.objects.models import (
     OpticalLink,
     Pseudowire,
     Node,
-    node_class,
+    # node_class,
     Link,
-    link_class
+    # link_class
 )
 from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
@@ -96,41 +96,41 @@ def create_from_file(client, file):
         client.post('/objects/object_management', data=data)
 
 
-# @check_blueprints('', '/objects', '/views')
-# def test_object_creation_europe(user_client):
-#     create_from_file(user_client, 'europe.xls')
-#     assert len(Node.query.all()) == 33
-#     assert len(Link.query.all()) == 49
-# 
-# 
-# @check_blueprints('', '/objects', '/views')
-# def test_object_creation_type(user_client):
-#     create_from_file(user_client, 'node_counters.xls')
-#     assert len(Node.query.all()) == 27
-#     assert not Link.query.all()
+@check_blueprints('', '/objects', '/views')
+def test_object_creation_europe(user_client):
+    create_from_file(user_client, 'europe.xls')
+    assert len(Node.query.all()) == 33
+    assert len(Link.query.all()) == 49
 
 
-# @check_blueprints('', '/objects', '/views')
-# def test_object_creation_all_type(user_client):
-#     create_from_file(user_client, 'all_types.xls')
-#     number_per_subtype = {
-#         Antenna: 20,
-#         Firewall: 38,
-#         Host: 40,
-#         OpticalSwitch: 32,
-#         Regenerator: 38,
-#         Router: 81,
-#         Switch: 40,
-#         Server: 60,
-#         BgpPeering: 13,
-#         Etherchannel: 155,
-#         EthernetLink: 103,
-#         OpticalChannel: 42,
-#         OpticalLink: 14,
-#         Pseudowire: 22
-#     }
-#     for cls, number in number_per_subtype.items():
-#         assert len(cls.query.all()) == number
+@check_blueprints('', '/objects', '/views')
+def test_object_creation_type(user_client):
+    create_from_file(user_client, 'node_counters.xls')
+    assert len(Node.query.all()) == 27
+    assert not Link.query.all()
+
+
+@check_blueprints('', '/objects', '/views')
+def test_object_creation_all_type(user_client):
+    create_from_file(user_client, 'all_types.xls')
+    number_per_subtype = {
+        Antenna: 20,
+        Firewall: 38,
+        Host: 40,
+        OpticalSwitch: 32,
+        Regenerator: 38,
+        Router: 81,
+        Switch: 40,
+        Server: 60,
+        BgpPeering: 13,
+        Etherchannel: 155,
+        EthernetLink: 103,
+        OpticalChannel: 42,
+        OpticalLink: 14,
+        Pseudowire: 22
+    }
+    for cls, number in number_per_subtype.items():
+        assert len(cls.query.all()) == number
 
 ## Object deletion
 
@@ -139,24 +139,24 @@ nodes = ['router' + str(i) for i in range(5, 20)]
 links = ['link' + str(i) for i in range(4, 15)]
 
 
-# @check_blueprints('', '/objects', '/views')
-# def test_node_deletion(user_client):
-#     create_from_file(user_client, 'europe.xls')
-#     for node_name in nodes:
-#         node = get_obj(Node, name=node_name)
-#         user_client.post('/objects/delete/node/{}'.format(node.id))
-#     assert len(Node.query.all()) == 18
-#     assert len(Link.query.all()) == 18
-# 
-# 
-# @check_blueprints('', '/objects', '/views')
-# def test_link_deletion(user_client):
-#     create_from_file(user_client, 'europe.xls')
-#     for link_name in links:
-#         link = get_obj(Link, name=link_name)
-#         user_client.post('/objects/delete/link/{}'.format(link.id))
-#     assert len(Node.query.all()) == 33
-#     assert len(Link.query.all()) == 38
+@check_blueprints('', '/objects', '/views')
+def test_node_deletion(user_client):
+    create_from_file(user_client, 'europe.xls')
+    for node_name in nodes:
+        node = get_obj(Node, name=node_name)
+        user_client.post('/objects/delete/node/{}'.format(node.id))
+    assert len(Node.query.all()) == 18
+    assert len(Link.query.all()) == 18
+
+
+@check_blueprints('', '/objects', '/views')
+def test_link_deletion(user_client):
+    create_from_file(user_client, 'europe.xls')
+    for link_name in links:
+        link = get_obj(Link, name=link_name)
+        user_client.post('/objects/delete/link/{}'.format(link.id))
+    assert len(Node.query.all()) == 33
+    assert len(Link.query.all()) == 38
 
 ## Pool management
 

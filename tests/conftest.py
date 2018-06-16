@@ -19,7 +19,6 @@ def base_client():
     db.session.close()
     db.drop_all()
     yield app.test_client()
-    remove(join(path, 'database.db'))
 
 
 @fixture
@@ -36,7 +35,6 @@ def user_client():
         client.post('/admin/process_user', data=create)
         client.post('/admin/login', data=login)
         yield client
-    # remove(join(path_source, 'database.db'))
 
 
 @fixture

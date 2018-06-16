@@ -322,15 +322,18 @@ function savePositions() {
   };
 })(jQuery, window);
 
+var action = {
+  'Edit': showTaskModal,
+  'Logs': showTaskLogs,
+  'Compare': compareTaskLogs
+}
+
 $("#network").contextMenu({
-    menuSelector: "#contextMenu",
-    menuSelected: function (invokedOn, selectedMenu) {
-      var row = selectedMenu.text();
-      if (row == 'Edit') {
-        console.log(row);
-        showTaskModal(selectedNode);
-      }
-    }
+  menuSelector: "#contextMenu",
+  menuSelected: function (invokedOn, selectedMenu) {
+    var row = selectedMenu.text();
+    action[row](selectedNode);
+  }
 });
 
 $(window).bind('beforeunload', function() {

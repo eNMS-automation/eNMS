@@ -7,7 +7,7 @@ from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Node, Pool
 from eNMS.scripts.models import Script
-from eNMS.tasks.forms import SchedulingForm
+from eNMS.tasks.forms import CompareForm, SchedulingForm
 from eNMS.tasks.models import Task
 from eNMS.workflows import blueprint
 from eNMS.workflows.forms import WorkflowEditorForm, WorkflowCreationForm
@@ -47,6 +47,7 @@ def workflow_editor(workflow_id=None):
         'workflow_editor.html',
         workflow_editor_form=workflow_editor_form,
         scheduling_form=scheduling_form,
+        compare_form=CompareForm(request.form),
         names=pretty_names,
         workflow=workflow
     )

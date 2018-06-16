@@ -108,6 +108,7 @@ class Workflow(CustomBase):
             layer = new_layer
         return result
 
+
 def workflow_factory(**kwargs):
     workflow = get_obj(Workflow, name=kwargs['name'])
     if workflow:

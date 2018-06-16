@@ -10,6 +10,7 @@ from wtforms import (
 
 from eNMS.objects.models import node_class
 
+
 class LoginForm(FlaskForm):
     name = TextField('Username')
     password = PasswordField('Password')

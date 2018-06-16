@@ -151,8 +151,6 @@ class ScheduledTask(Task):
         )
 
 
-
-
 class ScheduledScriptTask(ScheduledTask):
 
     __tablename__ = 'ScheduledScriptTask'
@@ -283,7 +281,6 @@ class InnerTask(Task):
     parent_workflow = relationship('Workflow', back_populates='inner_tasks')
     x = Column(Integer, default=0.)
     y = Column(Integer, default=0.)
-
 
     __mapper_args__ = {
         'polymorphic_identity': 'InnerTask',

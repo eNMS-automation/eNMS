@@ -33,7 +33,7 @@ except KeyError:
 def register_extensions(app, test):
     db.init_app(app)
     login_manager.init_app(app)
-    
+
     if not test:
         scheduler.init_app(app)
         scheduler.start()

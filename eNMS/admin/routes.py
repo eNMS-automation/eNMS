@@ -32,7 +32,6 @@ from eNMS.base.properties import pretty_names
 from eNMS.objects.models import object_factory
 
 
-
 ## Template rendering
 
 
@@ -188,14 +187,14 @@ def query_opennms():
     ).json()['node']
 
     nodes = {
-        node['id']: 
+        node['id']:
             {
             'longitude': node['assetRecord'].get('longitude', 0.),
             'latitude': node['assetRecord'].get('latitude', 0.),
             'name': node.get('sysName', node['id']),
             'type': request.form['type']
-            } for node in json_nodes
-        }
+        } for node in json_nodes
+    }
 
     for node in list(nodes):
         link = requests.get(

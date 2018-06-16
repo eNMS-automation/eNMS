@@ -28,93 +28,43 @@ var dsoptions = {
         data.type = edge_type;
         saveEdge(data);
         console.log('test');
-        network.addEdgeMode();
+        graph.addEdgeMode();
       }
     }
   }
 };
+var selectedNode = null;
+
+function displayWorkflow(wf) {
+  nodes = new vis.DataSet(wf.inner_tasks.map(taskToNode));
+  edges = new vis.DataSet(wf.edges.map(edgeToEdge));
+  data = {nodes: nodes, edges: edges};
+  graph = new vis.Network(container, data, dsoptions);
+  graph.setOptions( { physics: false } );
+  graph.on('oncontext', function(properties) {
+    properties.event.preventDefault()
+    node = this.getNodeAt(properties.pointer.DOM);
+    if(typeof node !== "undefined") {
+      selectedNode = node;
+    }
+  });
+  return graph;
+}
 
 if (workflow) {
   $("#workflow-name").val(workflow.id);
+  displayWorkflow(workflow);
 } else {
   $.ajax({
     type: "POST",
     url: `/workflows/get/${$("#workflow-name").val()}`,
     success: function(wf) {
-      workflow = wf;
+      console.log(workflow);
+      displayWorkflow(workflow);
+      
     }
   });
 }
-
-nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
-edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-data = {nodes: nodes, edges: edges};
-network = new vis.Network(container, data, dsoptions);
-network.setOptions( { physics: false } );
-
-var selectedNode = null;
-network.on('oncontext', function(properties) {
-  properties.event.preventDefault()
-  node = this.getNodeAt(properties.pointer.DOM);
-  if(typeof node !== "undefined") {
-    selectedNode = node;
-  }
-});
-
-
-(function ($, window) {
-  $.fn.contextMenu = function (settings) {
-    return this.each(function () {
-      // Open context menu
-      $(this).on("contextmenu", function (e) {
-        // return native menu if pressing control
-        if (e.ctrlKey) return;
-        //open menu
-        var $menu = $(settings.menuSelector)
-          .data("invokedOn", $(e.target))
-          .show()
-          .css({
-            position: "absolute",
-            left: getMenuPosition(e.clientX, 'width', 'scrollLeft'),
-            top: getMenuPosition(e.clientY, 'height', 'scrollTop')
-          })
-          .off('click')
-          .on('click', 'a', function (e) {
-            $menu.hide();
-            var $invokedOn = $menu.data("invokedOn");
-            var $selectedMenu = $(e.target);
-            settings.menuSelected.call(this, $invokedOn, $selectedMenu);
-          });
-        return false;
-      });
-      //make sure menu closes on any click
-      $('body').click(function () {
-        $(settings.menuSelector).hide();
-      });
-    });
-
-    function getMenuPosition(mouse, direction, scrollDir) {
-      var win = $(window)[direction](),
-          scroll = $(window)[scrollDir](),
-          menu = $(settings.menuSelector)[direction](),
-          position = mouse + scroll;
-      // opening menu would pass the side of the page
-      if (mouse + menu > win && menu < mouse) 
-        position -= menu;
-        return position;
-    }    
-  };
-})(jQuery, window);
-
-$("#network").contextMenu({
-    menuSelector: "#contextMenu",
-    menuSelected: function (invokedOn, selectedMenu) {
-      var row = selectedMenu.text();
-      if (row == 'Edit') {
-        showTaskModal(selectedNode);
-      }
-    }
-});
 
 function scheduleTask() {
   if (workflow && $("#scheduling-form").parsley().validate()) {
@@ -209,7 +159,7 @@ function showModal(modal_name){
 }
 
 function startScript() {
-  start = nodes.get(network.getSelectedNodes()[0]);
+  start = nodes.get(graph.getSelectedNodes()[0]);
   console.log(start, start.id, start.length);
   if (start.length == 0 || !start.id) {
     alertify.notify("You must select a script first.", 'error', 5);
@@ -247,16 +197,16 @@ $('#workflow').on('change', function() {
         });
       }
       var data = {nodes: new vis.DataSet(nodes)};
-      network.setData(data);
+      graph.setData(data);
     alertify.notify(`Workflow '${workflow.name}' displayed`, 'success', 5);
     }
   });
 });
 
 function deleteSelection() {
-  network.getSelectedNodes().map(node => deleteNode(node));
-  network.getSelectedEdges().map(edge => deleteEdge(edge));
-  network.deleteSelected();
+  graph.getSelectedNodes().map(node => deleteNode(node));
+  graph.getSelectedEdges().map(edge => deleteEdge(edge));
+  graph.deleteSelected();
   alertify.notify("Selected objects deleted", 'success', 5);
 }
 
@@ -264,10 +214,10 @@ function switchMode(mode) {
   console.log(mode);
   if (mode == "success" || mode == "failure") {
     edge_type = mode;
-    network.addEdgeMode();
+    graph.addEdgeMode();
     alertify.notify(`Mode: creation of ${mode} edge`, 'success', 5);
   } else {
-    network.addNodeMode();
+    graph.addNodeMode();
     alertify.notify("Mode: node motion", 'success', 5);
   }
 }
@@ -303,33 +253,85 @@ function showTaskModal(id) {
 
 // when a filter is selected, apply it
 $('#workflow-name').on('change', function() {
+
   $.ajax({
     type: "POST",
     url: `/workflows/get/${this.value}`,
     dataType: "json",
     success: function(wf) {
-      savePositions()
       workflow = wf;
-      nodes = new vis.DataSet(workflow.inner_tasks.map(taskToNode));
-      edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-      data = {nodes: nodes, edges: edges};
-      network = new vis.Network(container, data, dsoptions);
-      network.setOptions( { physics: false } );
-      nodes.map(n => network.moveNode(n.id, n.x, n.y));
+      graph = displayWorkflow(wf)
+      nodes.map(n => graph.moveNode(n.id, n.x, n.y));
     }
   });
 });
 
 function savePositions() {
+  console.log(graph);
   $.ajax({
     type: "POST",
     url: "/workflows/save_positions",
     dataType: "json",
     contentType: 'application/json;charset=UTF-8',
-    data: JSON.stringify(network.getPositions(), null, '\t'),
+    data: JSON.stringify(graph.getPositions(), null, '\t'),
     success: function() { }
   });
 }
+
+(function ($, window) {
+  $.fn.contextMenu = function (settings) {
+    return this.each(function () {
+      // Open context menu
+      $(this).on("contextmenu", function (e) {
+        // return native menu if pressing control
+        if (e.ctrlKey) return;
+        //open menu
+        var $menu = $(settings.menuSelector)
+          .data("invokedOn", $(e.target))
+          .show()
+          .css({
+            position: "absolute",
+            left: getMenuPosition(e.clientX, 'width', 'scrollLeft'),
+            top: getMenuPosition(e.clientY, 'height', 'scrollTop')
+          })
+          .off('click')
+          .on('click', 'a', function (e) {
+            $menu.hide();
+            var $invokedOn = $menu.data("invokedOn");
+            var $selectedMenu = $(e.target);
+            settings.menuSelected.call(this, $invokedOn, $selectedMenu);
+          });
+        return false;
+      });
+      //make sure menu closes on any click
+      $('body').click(function () {
+        $(settings.menuSelector).hide();
+      });
+    });
+
+    function getMenuPosition(mouse, direction, scrollDir) {
+      var win = $(window)[direction](),
+          scroll = $(window)[scrollDir](),
+          menu = $(settings.menuSelector)[direction](),
+          position = mouse + scroll;
+      // opening menu would pass the side of the page
+      if (mouse + menu > win && menu < mouse) 
+        position -= menu;
+        return position;
+    }    
+  };
+})(jQuery, window);
+
+$("#network").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function (invokedOn, selectedMenu) {
+      var row = selectedMenu.text();
+      if (row == 'Edit') {
+        console.log(row);
+        showTaskModal(selectedNode);
+      }
+    }
+});
 
 $(window).bind('beforeunload', function() {
   savePositions()

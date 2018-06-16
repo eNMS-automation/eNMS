@@ -42,6 +42,7 @@ def workflow_editor(workflow_id=None):
     scheduling_form.scripts.choices = Script.choices()
     scheduling_form.nodes.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
+    print(workflow)
     return render_template(
         'workflow_editor.html',
         workflow_editor_form=workflow_editor_form,

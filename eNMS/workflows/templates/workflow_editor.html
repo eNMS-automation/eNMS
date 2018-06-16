@@ -11,11 +11,12 @@
   position: absolute;
   display:none;
 }
-    </style>
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}
   {% include 'inner_task_scheduling_modal.html' %}
+  {% include 'task_modals.html' %}
   {% include 'editor_panels.html' %}
 {% endblock content %}
 

@@ -197,6 +197,29 @@ class ScheduledScriptTask(ScheduledTask):
         self.job = script_job
         super(ScheduledScriptTask, self).__init__(**data)
 
+    def run(self):
+        job_time = str(datetime.now())
+        logs = deepcopy(self.logs)
+        logs[job_time] = {}
+        nodes = self.nodes if self.nodes else ['dummy']
+        for script in self.scripts:
+            results = {}
+            pool = ThreadPool(processes=len(nodes))
+            args = [(self, node, results) for node in nodes]
+            pool.map(script.job, args)
+            pool.close()
+            pool.join()
+            logs[job_time][script.name] = results
+        result = True
+        for script in self.scripts:
+            for node in self.nodes:
+                if not logs[job_time][script.name][node.name]:
+                    result = False
+        self.result = result
+        self.logs = logs
+        db.session.commit()
+        return result
+
     @property
     def properties(self):
         return {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
@@ -225,6 +248,12 @@ class ScheduledWorkflowTask(ScheduledTask):
         self.scheduled_workflow = data['workflow']
         self.job = workflow_job
         super(ScheduledWorkflowTask, self).__init__(**data)
+
+    def run():
+        self.result = task.scheduled_workflow.run()
+        self.logs = {'result': 'go to the workflow editor to see the result'}
+        db.session.commit()
+        return result
 
     @property
     def properties(self):

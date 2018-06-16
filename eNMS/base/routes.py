@@ -4,7 +4,6 @@ from flask_login import login_required
 from re import search
 import flask_login
 
-
 from eNMS import db, login_manager
 from eNMS.base import blueprint
 from eNMS.base.forms import LogFilteringForm
@@ -71,7 +70,6 @@ def filter_logs():
         else search(request.form[prop], str(val)) for prop, val in log.items()
         if prop in request.form and request.form[prop]
     )]
-    print(logs)
     return jsonify(logs)
 
 

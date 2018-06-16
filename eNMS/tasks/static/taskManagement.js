@@ -14,6 +14,7 @@ function addTask(mode, properties) {
     `<button type="button" class="btn btn-info btn-xs" onclick="showTaskLogs('${properties.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs" onclick="compareTaskLogs('${properties.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-info btn-xs" onclick="showTaskModal('${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-success btn-xs" onclick="runTask('${properties.id}')">Run</button>`,
     `<button id="pause-resume-${properties.id}" type="button" class="btn btn-danger btn-xs" onclick="${status}Task('${properties.id}')">${status.charAt(0).toUpperCase() + status.substr(1)}</button>`,   
     `<button type="button" class="btn btn-danger btn-xs" onclick="deleteTask('${properties.id}')">Delete</button>`
   );
@@ -45,6 +46,17 @@ function showTaskModal(id) {
     }
   });
   $('#scheduling').modal('show');
+}
+
+function runTask(id) {
+  $.ajax({
+    type: "POST",
+    url: `/tasks/run_task/${id}`,
+    dataType: 'json',
+    success: function(task){
+      alertify.notify(`Task ${task.name} started`, 'success', 5);
+    }
+  });
 }
 
 function scheduleScript() {

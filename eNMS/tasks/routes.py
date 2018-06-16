@@ -123,6 +123,14 @@ def compare_logs(task_id):
     return jsonify(results)
 
 
+@blueprint.route('/run_task/<task_id>', methods=['POST'])
+@login_required
+def run_task(task_id):
+    task = Task.query.filter_by(id=task_id).first()
+    task.run()
+    return jsonify(task.serialized)
+
+
 @blueprint.route('/delete_task/<task_id>', methods=['POST'])
 @login_required
 def delete_task(task_id):

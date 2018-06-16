@@ -26,11 +26,11 @@
   {{ super() }}
   <!-- FullCalendar -->
   <script src="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
+  <script> var tasks = {{ tasks|tojson|safe }}; console.log(tasks);</script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('static', filename='enms/scheduling.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <!-- Task management -->
   <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
-  <script> var tasks = {{ tasks|tojson|safe }}; </script>
   <!-- Calendar -->
   <script src="{{ url_for('tasks_blueprint.static', filename='calendar.js') }}"></script>
 {% endblock javascripts %}

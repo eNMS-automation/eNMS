@@ -133,6 +133,7 @@ def set_as_start(workflow_id, task_id):
 @blueprint.route('/save_positions', methods=['POST'])
 @login_required
 def save_positions():
+    print(request.json)
     for task_id, position in request.json.items():
         print(position)
         task = get_obj(Task, id=task_id)

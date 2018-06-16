@@ -48,6 +48,7 @@ function displayWorkflow(wf) {
       selectedNode = node;
     }
   });
+  nodes.map(n => graph.moveNode(n.id, n.x, n.y));
   return graph;
 }
 
@@ -59,8 +60,9 @@ if (workflow) {
     type: "POST",
     url: `/workflows/get/${$("#workflow-name").val()}`,
     success: function(wf) {
-      console.log(workflow);
-      displayWorkflow(workflow);
+      workflow = wf;
+      graph = displayWorkflow(wf)
+      nodes.map(n => graph.moveNode(n.id, n.x, n.y));
       
     }
   });
@@ -78,8 +80,13 @@ function scheduleTask() {
           alertify.notify('No nodes selected.', 'error', 5);
         } else {
           $("#scheduling").modal('hide');
-          nodes.add(taskToNode(result));
-          saveNode(result);
+          if (!graph.findNode(result.id)) {
+            nodes.add(taskToNode(result));
+            saveNode(result);
+            alertify.notify(`Task '${result.name}' created.`, 'success', 5);
+          } else {
+            alertify.notify(`Task '${result.name}' edited.`, 'success', 5);
+          }
         }
       }
     });
@@ -87,7 +94,6 @@ function scheduleTask() {
     alertify.notify('Some fields are missing', 'error', 5);
   }
 }
-
 
 function saveNode(task) {
   $.ajax({
@@ -181,33 +187,10 @@ function startScript() {
   }
 }
 
-// when a workflow is selected, apply it
-$('#workflow').on('change', function() {
-  $.ajax({
-    type: "POST",
-    url: `/workflows/get/${this.value}`,
-    dataType: "json",
-    success: function(workflow){
-      var nodes = new vis.DataSet([]);
-      for (var i = 0; i < workflow.tasks; i++) {
-        var task = workflow[i];
-        nodes.push({
-          id: task.id,
-          label: task.name,
-        });
-      }
-      var data = {nodes: new vis.DataSet(nodes)};
-      graph.setData(data);
-    alertify.notify(`Workflow '${workflow.name}' displayed`, 'success', 5);
-    }
-  });
-});
-
 function deleteSelection() {
   graph.getSelectedNodes().map(node => deleteNode(node));
   graph.getSelectedEdges().map(edge => deleteEdge(edge));
   graph.deleteSelected();
-  alertify.notify("Selected objects deleted", 'success', 5);
 }
 
 function switchMode(mode) {
@@ -251,17 +234,16 @@ function showTaskModal(id) {
   $('#scheduling').modal('show');
 }
 
-// when a filter is selected, apply it
 $('#workflow-name').on('change', function() {
-
+  savePositions();
   $.ajax({
     type: "POST",
     url: `/workflows/get/${this.value}`,
     dataType: "json",
     success: function(wf) {
       workflow = wf;
-      graph = displayWorkflow(wf)
-      nodes.map(n => graph.moveNode(n.id, n.x, n.y));
+      graph = displayWorkflow(wf);
+      alertify.notify(`Workflow '${workflow.name}' displayed`, 'success', 5);
     }
   });
 });

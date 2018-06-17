@@ -9,3 +9,4 @@ Automation
    scripts
    workflows
    os_upgrade
+   rest

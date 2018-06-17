@@ -1,0 +1,21 @@
+{% extends "base_site.html" %}
+
+{% block title %} Object overview {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  {% include 'pool_modals.html' %}
+  {% include 'pool_table.html' %}
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script>
+    var fields = {{ fields|tojson|safe }};
+    var pools = {{ pools|tojson|safe }};
+  </script>
+  <script src="{{ url_for('objects_blueprint.static', filename='poolManagement.js') }}"></script>
+{% endblock javascripts %}

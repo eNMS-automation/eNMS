@@ -1,0 +1,36 @@
+{% extends "base_site.html" %}
+
+{% block title %} Calendar {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <!-- FullCalendar -->
+  <link href="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+{% include 'scheduling_modal.html' %}
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_content">
+          <div id='calendar'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super() }}
+  <!-- FullCalendar -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
+  <script> var tasks = {{ tasks|tojson|safe }};</script>
+  <!-- Scheduling: wizard / bootstrap datetimepicker -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <!-- Task management -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
+  <!-- Calendar -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='calendar.js') }}"></script>
+{% endblock javascripts %}

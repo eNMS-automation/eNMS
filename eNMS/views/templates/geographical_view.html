@@ -1,0 +1,103 @@
+{% extends "base_site.html" %}
+
+{% block title %} 2D Geographical view {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
+  {% if view == 'markercluster' %}
+    <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.Default.css') }}" rel="stylesheet">
+  {% endif %}
+  <style>
+    #mapid { height:90vh; }
+  </style>
+{% endblock stylesheets %}
+
+{% set buttons %}
+<form id="aform" method="post">
+  <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+    <div class="form-group">
+      <select id="select-filters" class="form-control">
+        {% for pool in pools %}
+          <option value={{ pool.id }}>{{ pool.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
+    <button type="button" class="btn btn-primary" onclick="showModal('google-earth')">Google Earth</button>
+    {% if view == 'leaflet' %}
+      <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
+      <button type="submit" class="btn btn-primary" name="view" value="glearth">3D view</button>
+    {% elif view == 'markercluster' %}
+      <button type="submit" class="btn btn-primary" name="view" value="leaflet">2D view</button>
+      <button type="submit" class="btn btn-primary" name="view" value="glearth">3D view</button>
+    {% elif view == 'glearth' %}
+      <button type="submit" class="btn btn-primary" name="view" value="leaflet">2D view</button>
+      <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
+    {% endif %}
+    <div class="btn-group">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tile layer
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a onclick="switch_layer('osm')"> Open Street Map </a></li>
+        <li><a onclick="switch_layer('gm')"> Google Maps </a></li>
+        <li><a onclick="switch_layer('nasa')"> NASA </a></li>
+      </ul>
+    </div> 
+    <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Scheduling</button>
+  </div>
+</form>
+{% endset %}
+
+{% block content %}
+  {% include 'gis_modals.html' %}
+  {% include 'scheduling_modal.html' %}
+  {% include 'object_modals.html' %}
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            {% if view == 'glearth' %}
+              <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
+            {% else %}
+              <div id="mapid"></div>
+            {% endif %}  
+            {{ buttons }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script>
+    var node_fields = {{ node_fields|tojson|safe }};
+    var link_fields = {{ link_fields|tojson|safe }};
+    var nodes = {{ nodes|tojson|safe }};
+    var links = {{ links|tojson|safe }};
+    var labels = {{ labels|tojson|safe }};
+    var subtypes = {{ subtypes|tojson|safe }};
+    var parameters = {{ parameters|tojson|safe }};
+    var view = '{{ view }}';
+  </script>
+  <!-- Task scheduling -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script src="{{ url_for('objects_blueprint.static', filename='objectFunctions.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='views.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='geographicalView.js') }}"></script>
+  {% if view == 'glearth' %}
+    <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
+    <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
+    {% if view == 'markercluster' %}
+      <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
+    {% endif %}
+    <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
+  {% endif %}
+{% endblock javascripts %}

@@ -3,23 +3,23 @@ language: python
 branches:
   only:
     - master
+    - javascript-refactoring
 
 python:
-  - 2.7
+  - 3.4
   - 3.5
   - 3.6
-
-branches:
-  only:
-  - master
 
 install:
   - pip install -r requirements_dev.txt
 
 script:
   - flake8
-  - cd tests/
-  - coverage run --source=../source -m pytest
+  - sudo apt-get update
+  - sudo apt-get install google-chrome-stable
+  - sudo apt-get install chromium-browser
+  - sudo chmod a+x ./tests/chromedriver
+  - coverage run --source=/eNMS -m pytest
 
 after_success:
   - coveralls

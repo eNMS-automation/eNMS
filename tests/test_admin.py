@@ -1,6 +1,7 @@
-from base.database import db
-from admin.models import Log, TacacsServer, User
-from test_base import check_blueprints
+from eNMS import db
+from eNMS.admin.models import Log, TacacsServer, User
+from eNMS.objects.models import get_obj
+from tests.test_base import check_blueprints
 
 
 @check_blueprints('', '/admin')
@@ -15,7 +16,8 @@ def test_user_management(user_client):
         user_client.post('/admin/process_user', data=dict_user)
     assert len(User.query.all()) == 4
     # user deletion
-    user_client.post('/admin/delete_user1')
+    user1 = get_obj(User, name='user1')
+    user_client.post('/admin/delete_{}'.format(user1.id))
     assert len(User.query.all()) == 3
 
 

@@ -1,0 +1,21 @@
+{% extends "base_site.html" %}
+
+{% block title %} User overview {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  {% include 'user_modals.html' %}
+  {% include 'user_table.html' %}
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    var fields = {{ fields|tojson|safe }}
+    var users = {{ users|tojson|safe }}
+  </script>
+  <script src="{{ url_for('admin_blueprint.static', filename='userManagement.js') }}"></script>
+{% endblock javascripts %}

@@ -1,0 +1,48 @@
+{% extends "base_site.html" %}
+
+{% block title %} Script creation {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div role="tabpanel" data-example-id="togglable-tabs">
+              <ul class="nav nav-tabs bar_tabs" role="tablist">
+                {% for script_type, script_name in type_to_name.items() %}
+                  {% if script_type != "custom_script" %}
+                    {% set expanded = "true" if script_type == "netmiko_config" else "false" %}
+                    {% set active = "active" if script_type == "netmiko_config" else "" %}
+                    <li role="{{ script_type }}" class="{{ active }}"><a href="#{{ script_type }}" role="tab" data-toggle="tab" aria-expanded="{{ expanded }}">{{ script_name }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              <div class="tab-content">
+                {% for script_type, script_form in type_to_form.items() %}
+                  {% set class = "tab-pane fade active in" if script_type == "netmiko_config" else "tab-pane fade" %}
+                  <div role="tabpanel" class="{{ class }}" id="{{ script_type }}">
+                    {% set form = script_form %}
+                    {% include script_type + '.html' %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script src="{{ url_for('scripts_blueprint.static', filename='scriptCreation.js') }}"></script>
+{% endblock javascripts %}

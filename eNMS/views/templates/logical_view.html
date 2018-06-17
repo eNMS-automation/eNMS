@@ -1,0 +1,103 @@
+{% extends "base_site.html" %}
+
+{% block title %} Logical view {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <style>
+    #logical_view { height:90vh; }
+  .link {
+    stroke: #ccc;
+  }
+  
+  .selection {
+    fill: #ADD8E6;
+    stroke: #ADD8E6;
+    fill-opacity: 0.3;
+    stroke-opacity: 0.7;
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+  }
+  
+  .node text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font: 10px sans-serif;
+  }
+
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+  {% include 'gis_modals.html' %}
+  {% include 'scheduling_modal.html' %}
+  {% include 'object_modals.html' %}
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <form method="post">
+              <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+                <div class="form-group">
+                  <select id="select-filters" class="form-control">
+                    {% for pool in pools %}
+                      <option>{{ pool.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
+                <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Scheduling</button>
+              </div>
+            </form>
+            <div align='center' id="logical_view"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script src="{{ url_for('views_blueprint.static', filename='js/d3/d3.v3.min.js') }}"></script>
+  <script>
+    var graph = {  
+      "nodes":[
+        {% for node in nodes %}  
+          {  
+            "x": {{ node.id }},
+            "y": {{ node.id }},
+            "id": {{ name_to_id[node.name] }},
+            "real_id": {{ node.id }},
+            "name": "{{ node.name }}",
+            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + node.type.lower() + '.gif') }}",
+            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + node.type.lower() + '.gif') }}"
+          },
+        {% endfor %}
+      ],
+      "links":[  
+        {% for link in links %}  
+          {
+            "real_id": {{ link.id }},
+            "name": "{{ link.name }}",
+            "source": {{ name_to_id[link.source_properties['name']] }},
+            "target": {{ name_to_id[link.destination_properties['name']] }}
+          },
+        {% endfor %}
+      ]
+    };
+  </script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script>
+    var node_fields = {{ node_fields|tojson|safe }};
+    var link_fields = {{ link_fields|tojson|safe }};
+  </script>
+  <script src="{{ url_for('objects_blueprint.static', filename='objectFunctions.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='views.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
+{% endblock javascripts %}

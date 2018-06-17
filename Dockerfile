@@ -1,13 +1,12 @@
 FROM python:3.6
 
-COPY requirements.txt .
+ENV FLASK_APP enms.py
+
+COPY enms.py gunicorn.py requirements.txt ./
+COPY eNMS eNMS
+COPY migrations migrations
 
 RUN pip install -r requirements.txt
 
-COPY gunicorn_config.py .
-
-COPY source /app
-
-EXPOSE 5100
-
-CMD ["gunicorn", "--chdir", "app", "--config", "./gunicorn_config.py", "flask_app:app"]
+EXPOSE 5000
+CMD ["gunicorn", "--config", "gunicorn.py", "enms:app"]

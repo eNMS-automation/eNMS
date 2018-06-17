@@ -130,20 +130,25 @@ Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/t
 ### 2. Install requirements 
     pip install -r requirements.txt
 
-### 3. Run the code
-    cd source
-    python flask_app.py
+### 3. Set the FLASK_APP environment variable
+    (Windows) set FLASK_APP=gentelella.py
+    (Unix) export FLASK_APP=gentelella.py
 
-### 4. Go the http://127.0.0.1:5100/
+### 4. Run the application
+    flask run
 
-### 5. Create an account and log in
+### 5. Go the http://127.0.0.1:5000/
+
+### 6. Create an account and log in
 
 # Run eNMS in a docker container
 
 ### 1. Download & run the container
-    docker run -d -p 5100:5100 --name enms --restart always afourmy/enms
+    docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
 
-### 2. Once eNMS is running, go to http://127.0.0.1:5100
+### 2. Go to http://127.0.0.1:5000
+
+### 3. Create an account and log in
 
 # Contact
 

@@ -1,0 +1,73 @@
+{% extends "base_site.html" %}
+
+{% block title %} Login {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <!-- Animate.css -->
+  <link href="{{ url_for('admin_blueprint.static', filename='animate/animate.min.css') }}" rel="stylesheet">
+  <!-- Alertify -->
+  <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block body_class %}login{% endblock body_class %}
+
+{% block body %}
+  <!-- jQuery -->
+  <script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
+  <!-- Alertify -->
+  <script src="{{ url_for('static', filename='alertifyjs/alertify.min.js') }}"></script>
+  <!-- Parsley -->
+  <script src="{{ url_for('static', filename='parsleyjs/parsley.min.js') }}"></script>
+  <script src="{{ url_for('admin_blueprint.static', filename='login.js') }}"></script>
+  <div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <form data-parsley-validate method="post">
+            <h1>Login Form</h1>
+            {% for field in login_form if field.widget.input_type != 'hidden'  %}
+              <div>
+                {{ field(class="form-control required", placeholder=field.label.text) }}
+              </div>
+            {% endfor %}
+            <div>
+            <button type="submit" class="btn btn-default submit" name="login">Log in</button>
+            </div>
+            <div class="clearfix"></div>
+            <div class="separator">
+              <p class="change_link">New to site?
+                <a href="#signup" class="to_register"> Create Account </a>
+              </p>
+              <div class="clearfix"></div>
+            </div>
+          </form>
+        </section>
+      </div>
+      <div id="register" class="animate form registration_form">
+        <section class="login_content">
+          <form data-parsley-validate id="create-user-form" method="post">
+            <h1>Create Account</h1>
+            {% for field in create_account_form if field.widget.input_type != 'hidden'  %}
+              <div>
+                {{ field(class="form-control required", placeholder=field.label.text) }}
+              </div>
+            {% endfor %}
+            <div>
+              <button type="button" class="btn btn-default" onclick="signup()">Sign up</button>
+            </div>
+            <div class="clearfix"></div>
+            <div class="separator">
+              <p class="change_link">Already a member ?
+                <a href="#signin" id="login-button" class="to_register"> Log in </a>
+              </p>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

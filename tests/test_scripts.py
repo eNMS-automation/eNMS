@@ -1,7 +1,6 @@
-from base.database import db
-from conftest import path_scripts
+from eNMS import db
 from os.path import join
-from scripts.models import (
+from eNMS.scripts.models import (
     AnsibleScript,
     NapalmConfigScript,
     NapalmGettersScript,
@@ -9,7 +8,7 @@ from scripts.models import (
     FileTransferScript,
     Script
 )
-from test_base import check_blueprints
+from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
 # test the creation of configuration script (netmiko / napalm)
@@ -112,7 +111,7 @@ file_transfer_script = ImmutableMultiDict([
 def test_base_scripts(user_client):
     user_client.post('/scripts/create_script_netmiko_config', data=netmiko_ping)
     assert len(NetmikoConfigScript.query.all()) == 1
-    path_yaml = join(path_scripts, 'interfaces', 'parameters.yaml')
+    path_yaml = join(user_client.application.path, 'scripts', 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         netmiko_jinja2_script['file'] = f
         user_client.post('/scripts/create_script_netmiko_config', data=netmiko_jinja2_script)
@@ -120,7 +119,7 @@ def test_base_scripts(user_client):
         napalm_jinja2_script['file'] = f
         user_client.post('/scripts/create_script_napalm_config', data=napalm_jinja2_script)
     assert len(NapalmConfigScript.query.all()) == 1
-    assert len(Script.query.all()) == 8
+    assert len(Script.query.all()) == 6
     netmiko_j2_script = db.session.query(Script).filter_by(name='netmiko_subif').first()
     napalm_j2_script = db.session.query(Script).filter_by(name='napalm_subif').first()
     # simply removing the space does not work as yaml relies on dict, which
@@ -130,7 +129,7 @@ def test_base_scripts(user_client):
     ## file transfer script
     user_client.post('scripts/create_script_file_transfer', data=file_transfer_script)
     assert len(FileTransferScript.query.all()) == 1
-    assert len(Script.query.all()) == 9
+    assert len(Script.query.all()) == 7
 
 ## NAPALM getters
 
@@ -169,4 +168,4 @@ ansible_script = ImmutableMultiDict([
 def test_ansible_scripts(user_client):
     user_client.post('/scripts/create_script_ansible_playbook', data=ansible_script)
     assert len(AnsibleScript.query.all()) == 1
-    assert len(Script.query.all()) == 6
+    assert len(Script.query.all()) == 4

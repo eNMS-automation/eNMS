@@ -1,0 +1,68 @@
+<div id="scheduling" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" onmouseenter="openWizard()">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Scheduling</h4>
+      </div>
+      <form id="scheduling-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+        <div class="modal-body">
+          <!-- Smart Wizard -->
+          <div id="wizard" class="form_wizard wizard_horizontal">
+            <ul class="wizard_steps">
+              <li>
+                <a href="#step-1">
+                  <span class="step_no">1</span>
+                  <span class="step_descr"> Step 1 <br/>
+                  <small>Parameters</small>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#step-2">
+                  <span class="step_no">2</span>
+                  <span class="step_descr"> Step 2 <br/>
+                  <small>Scheduling</small>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <div id="step-1">
+              <div class="form-group">
+                <label>Name</label>
+                <div class='form-group'>
+                  {{ scheduling_form.name(class="form-control", required=true) }}
+                </div>
+              </div>
+            </div>
+            <div id="step-2">
+              <div class="form-group" style="min-height: 350px">
+                <label>Start date</label>
+                <div class='form-group'>
+                  {{ scheduling_form.start_date(id="start_date", class="form-control", autocomplete="off") }}
+                </div>
+                <label>End date</label>
+                <div class='form-group'>
+                  {{ scheduling_form.end_date(id="end_date", class="form-control", autocomplete="off") }}
+                </div>
+                <label>Frequency (seconds)</label>
+                <div class='form-group'>
+                  {{ scheduling_form.frequency(class="form-control") }}
+                </div>
+                <div class='form-group'>
+                  <div class="item">
+                    {{ scheduling_form.run_immediately(class="form-control", checked=checked) }}
+                    <label for="run-immediately">Run immediately</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End SmartWizard Content -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

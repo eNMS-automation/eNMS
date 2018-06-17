@@ -2,4 +2,5 @@ coveralls
 coverage
 pytest
 flake8
+selenium
 -r requirements.txt

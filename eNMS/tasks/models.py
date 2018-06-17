@@ -107,10 +107,10 @@ class ScheduledTask(Task):
             setattr(self, date, value)
         self.is_active = True
         super(ScheduledTask, self).__init__(**data)
-        if self.run_immediately:
-            self.run(run_now=True)
-        elif self.start_date:
+        if self.start_date or self.frequency and self.run_immediately:
             self.schedule()
+        elif self.run_immediately:
+            self.run(run_now=True)
 
     def schedule(self):
         if self.frequency:
@@ -197,7 +197,7 @@ class ScheduledScriptTask(ScheduledTask):
         # the job is executed immediately.
         run_date = self.start_date or runtime
         scheduler.add_job(
-            id=runtime,
+            id=str(runtime),
             run_date=run_date,
             func=script_job,
             args=[self.name],

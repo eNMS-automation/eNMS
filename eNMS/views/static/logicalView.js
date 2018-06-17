@@ -191,19 +191,21 @@ force.on("tick", function() {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  var filterName = this.value;
+    console.log(this.value);
   $.ajax({
     type: "POST",
     url: `/objects/pool_objects/${this.value}`,
     dataType: "json",
     success: function(objects){
-      node.style("visibility", function(d) {          
-        return objects['nodes'].includes(d.real_id) ? "visible" : "hidden";
+      var nodes_id = objects.nodes.map(n => n.id);
+      var links_id = objects.links.map(l => l.id);
+      node.style("visibility", function(d) {      
+        return nodes_id.includes(d.real_id.toString()) ? "visible" : "hidden";
       });
       link.style("visibility", function(d) {  
-        return objects['links'][0].includes(d.real_id) ? "visible" : "hidden";
+        return links_id.includes(d.real_id.toString()) ? "visible" : "hidden";
       });
-      alertify.notify(`Filter '${filterName}' applied`, 'success', 5);
+      alertify.notify(`Filter applied`, 'success', 5);
     }
   });
 });

@@ -576,10 +576,10 @@ def pool_factory(**kwargs):
         for property, value in kwargs.items():
             if property in pool.__dict__:
                 setattr(pool, property, value)
-        pool.compute_pool()
     else:
         pool = Pool(**kwargs)
         db.session.add(pool)
+    pool.compute_pool()
     db.session.commit()
     return pool
 

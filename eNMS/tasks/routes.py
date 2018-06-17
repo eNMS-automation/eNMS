@@ -42,6 +42,8 @@ def calendar():
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar
+        if not task.start_date:
+            continue
         python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
         month = '{:02}'.format((int(python_month) - 1) % 12)
         js_date = [int(i) for i in sub(

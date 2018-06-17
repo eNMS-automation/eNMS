@@ -26,6 +26,7 @@ $(function() {
     selectable: true,
     selectHelper: true,
     eventClick: function(calEvent, jsEvent, view) {
+      /*
       $.ajax({
         type: "POST",
         url: `/tasks/get/${calEvent.title}`,
@@ -37,6 +38,7 @@ $(function() {
         }
       });
       $('#scheduling').modal('show');
+      */
     },
     editable: true,
     events: events

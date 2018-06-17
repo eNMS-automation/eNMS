@@ -13,7 +13,7 @@ class SchedulingForm(FlaskForm):
     start_date = TextField('Start date')
     end_date = TextField('End date')
     name = TextField('Name')
-    waiting_time = IntegerField('Waiting time')
+    waiting_time = IntegerField('Waiting time', default=0)
     frequency = TextField('Frequency')
     run_immediately = BooleanField('Run immediately')
     script_type_choices = (

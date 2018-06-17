@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f2798198f76d
+Revision ID: 605b01a18430
 Revises: 
-Create Date: 2018-06-16 12:42:29.208785
+Create Date: 2018-06-17 15:04:36.203407
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f2798198f76d'
+revision = '605b01a18430'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,6 +28,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
+    sa.Column('model', sa.String(), nullable=True),
     sa.Column('location', sa.String(), nullable=True),
     sa.Column('vendor', sa.String(length=120), nullable=True),
     sa.Column('type', sa.String(length=50), nullable=True),
@@ -52,6 +53,8 @@ def upgrade():
     sa.Column('node_name_regex', sa.Boolean(), nullable=True),
     sa.Column('node_description', sa.String(), nullable=True),
     sa.Column('node_description_regex', sa.Boolean(), nullable=True),
+    sa.Column('node_model', sa.String(), nullable=True),
+    sa.Column('node_model_regex', sa.Boolean(), nullable=True),
     sa.Column('node_location', sa.String(), nullable=True),
     sa.Column('node_location_regex', sa.Boolean(), nullable=True),
     sa.Column('node_type', sa.String(), nullable=True),
@@ -72,6 +75,8 @@ def upgrade():
     sa.Column('link_name_regex', sa.Boolean(), nullable=True),
     sa.Column('link_description', sa.String(), nullable=True),
     sa.Column('link_description_regex', sa.Boolean(), nullable=True),
+    sa.Column('link_model', sa.String(), nullable=True),
+    sa.Column('link_model_regex', sa.Boolean(), nullable=True),
     sa.Column('link_location', sa.String(), nullable=True),
     sa.Column('link_location_regex', sa.Boolean(), nullable=True),
     sa.Column('link_type', sa.String(), nullable=True),
@@ -256,10 +261,10 @@ def upgrade():
     )
     op.create_table('InnerTask',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('waiting_time', sa.Integer(), nullable=True),
     sa.Column('workflow_id', sa.Integer(), nullable=True),
     sa.Column('x', sa.Integer(), nullable=True),
     sa.Column('y', sa.Integer(), nullable=True),
+    sa.Column('waiting_time', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['Task.id'], ),
     sa.ForeignKeyConstraint(['workflow_id'], ['Workflow.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -291,6 +296,7 @@ def upgrade():
     op.create_table('ScheduledTask',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('recurrent', sa.Boolean(), nullable=True),
+    sa.Column('run_immediately', sa.Boolean(), nullable=True),
     sa.Column('creation_time', sa.Integer(), nullable=True),
     sa.Column('frequency', sa.String(length=120), nullable=True),
     sa.Column('start_date', sa.String(), nullable=True),

@@ -19,11 +19,16 @@ Start eNMS in debugging mode
 
 ::
 
- # go to the source directory
- cd source
+ # set the FLASK_APP environment variable
+ (Windows) set FLASK_APP=gentelella.py
+ (Unix) export FLASK_APP=gentelella.py
 
- # start the server:
- python flask_app.py
+ # set the FLASK_DEBUG environment variable
+ (Windows) set FLASK_DEBUG=1
+ (Unix) export FLASK_DEBUG=1
+
+ # run the application
+ flask run
 
 
 Start eNMS with gunicorn (better)
@@ -32,7 +37,7 @@ Start eNMS with gunicorn (better)
 ::
 
  # start gunicorn
- gunicorn --chdir app --config ./gunicorn_config.py flask_app:app
+ gunicorn --config gunicorn.py enms:app
 
 
 Start eNMS as a docker container (even better)
@@ -41,7 +46,7 @@ Start eNMS as a docker container (even better)
 ::
 
  # download & run the container
- docker run -d -p 5100:5100 --name enms --restart always afourmy/enms
+ docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
 
-Once eNMS is running, go to http://127.0.0.1:5100
+Once eNMS is running, go to http://127.0.0.1:5000
 -------------------------------------------------

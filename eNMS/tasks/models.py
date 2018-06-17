@@ -197,7 +197,7 @@ class ScheduledScriptTask(ScheduledTask):
         # the job is executed immediately.
         run_date = self.start_date or runtime
         scheduler.add_job(
-            id=self.creation_time,
+            id=runtime,
             run_date=run_date,
             func=script_job,
             args=[self.name],

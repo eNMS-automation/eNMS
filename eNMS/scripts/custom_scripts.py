@@ -40,7 +40,7 @@ def job_example(args):
     task, node, results = args
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
-    results[node.name] = {'result': True, 'logs': 'what will be displayed in the logs'}
+    results[node.name] = {'success': True, 'logs': 'what will be displayed in the logs'}
 
 
 example_parameters = {
@@ -59,8 +59,10 @@ def nornir_ping_job(args):
     nornir_inventory = {node.name: {'nornir_ip': node.ip_address}}
     external = Nornir(inventory=Inventory(nornir_inventory), dry_run=True)
     ping_result = external.run(networking.tcp_ping, ports=[23, 443])
-    results[node.name] = str(ping_result[node.name].result)
-    return all(res for res in ping_result[node.name].result.keys())
+    return {
+        'success': all(res for res in ping_result[node.name].result.keys()),
+        'logs': str(ping_result[node.name].result)
+    }
 
 
 nornir_ping_parameters = {

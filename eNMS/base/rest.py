@@ -1,3 +1,4 @@
+from flask import request
 from flask_restful import Api, Resource
 
 from eNMS.base.classes import diagram_classes
@@ -7,9 +8,11 @@ from eNMS.tasks.models import Task
 
 class RestAutomation(Resource):
 
-    def get(self, task_name):
-        task = get_obj(Task, name=task_name)
-        task.run()
+    def post(self, task_name):
+        body = request.get_json(force=True, silent=True) or {};
+        run_now = body.pop('run_now', True);
+        task = get_obj(Task, name=task_name, **body)
+        task.run(run_now=run_now)
         return {'result': task.serialized}
 
 

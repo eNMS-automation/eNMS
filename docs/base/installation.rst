@@ -28,7 +28,7 @@ Start eNMS in debugging mode
  (Unix) export FLASK_DEBUG=1
 
  # run the application
- flask run
+ flask run --host=0.0.0.0
 
 
 Start eNMS with gunicorn (better)

@@ -135,7 +135,7 @@ Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/t
     (Unix) export FLASK_APP=enms.py
 
 ### 4. Run the application
-    flask run
+    flask run --host=0.0.0.0
 
 ### 5. Go the http://127.0.0.1:5000/
 

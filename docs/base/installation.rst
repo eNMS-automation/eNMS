@@ -20,8 +20,8 @@ Start eNMS in debugging mode
 ::
 
  # set the FLASK_APP environment variable
- (Windows) set FLASK_APP=gentelella.py
- (Unix) export FLASK_APP=gentelella.py
+ (Windows) set FLASK_APP=enms.py
+ (Unix) export FLASK_APP=enms.py
 
  # set the FLASK_DEBUG environment variable
  (Windows) set FLASK_DEBUG=1

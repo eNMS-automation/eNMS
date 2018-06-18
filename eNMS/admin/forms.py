@@ -53,9 +53,13 @@ class GeographicalParametersForm(FlaskForm):
 
 
 class OpenNmsForm(FlaskForm):
-    node_query = TextField(
+    rest_query = TextField(
         'ReST API',
         default='https://demo.opennms.org/opennms/rest'
+    )
+    node_query = TextField(
+        'Nodes',
+        default='https://demo.opennms.org/opennms/rest/nodes'
     )
     node_type = [(t, t) for t in node_class]
     type = SelectField('Type', choices=node_type)

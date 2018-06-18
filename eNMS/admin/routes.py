@@ -181,7 +181,7 @@ def save_syslog_server():
 def query_opennms():
     login, password = request.form['login'], request.form['password']
     json_nodes = requests.get(
-        request.form['node_query'] + '/nodes',
+        request.form['node_query'],
         headers={'Accept': 'application/json'},
         auth=(login, password)
     ).json()['node']
@@ -191,14 +191,14 @@ def query_opennms():
             {
             'longitude': node['assetRecord'].get('longitude', 0.),
             'latitude': node['assetRecord'].get('latitude', 0.),
-            'name': node.get('sysName', node['id']),
+            'name': node.get('label', node['id']),
             'type': request.form['type']
         } for node in json_nodes
     }
 
     for node in list(nodes):
         link = requests.get(
-            request.form['node_query'] + '/nodes/' + node + '/ipinterfaces',
+            request.form['rest_query'] + '/nodes/' + node + '/ipinterfaces',
             headers={'Accept': 'application/json'},
             auth=(login, password)
         ).json()

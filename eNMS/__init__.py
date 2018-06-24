@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from os import environ
 import logging
+import sys
 
 db = SQLAlchemy()
 login_manager = LoginManager()

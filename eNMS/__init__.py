@@ -4,10 +4,8 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from os import environ
-import sys
 import logging
 
-sys.dont_write_bytecode = True
 db = SQLAlchemy()
 login_manager = LoginManager()
 scheduler = APScheduler()

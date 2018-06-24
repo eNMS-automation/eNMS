@@ -9,7 +9,6 @@ from wtforms import (
 )
 from wtforms.validators import optional
 
-
 from eNMS.base.properties import link_public_properties, node_public_properties
 from eNMS.objects.models import link_class, node_class
 

@@ -8,7 +8,6 @@ except Exception:
     from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 
-
 from eNMS import db, scheduler
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import CustomBase

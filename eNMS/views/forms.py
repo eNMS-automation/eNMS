@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, SelectField, TextField
 
-
 from eNMS.base.properties import (
     link_public_properties,
     node_public_properties,

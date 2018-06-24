@@ -13,7 +13,6 @@ from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 import flask_login
 import requests
 
-
 from eNMS import db
 from eNMS.admin import blueprint
 from eNMS.admin.forms import (

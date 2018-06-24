@@ -5,7 +5,6 @@ from os.path import join
 from werkzeug import secure_filename
 from yaml import load
 
-
 from eNMS import db
 from eNMS.base.helpers import get_obj, allowed_file
 from eNMS.base.properties import pretty_names, script_public_properties

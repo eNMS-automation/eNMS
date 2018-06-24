@@ -1,6 +1,5 @@
 from sqlalchemy import exc
 
-
 from eNMS import db
 
 

@@ -7,7 +7,6 @@ from platform import system as platform_system
 from simplekml import Kml
 from subprocess import Popen
 
-
 from eNMS.admin.models import Parameters
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import Log

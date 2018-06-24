@@ -1,7 +1,6 @@
 from flask import jsonify, render_template, request
 from flask_login import login_required
 
-
 from eNMS import db
 from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names

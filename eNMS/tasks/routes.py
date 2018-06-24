@@ -3,7 +3,6 @@ from flask import jsonify, render_template, request
 from flask_login import current_user, login_required
 from re import search, sub
 
-
 from eNMS import db
 from eNMS.base.helpers import get_obj, str_dict
 from eNMS.base.properties import task_public_properties

@@ -2,7 +2,6 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from time import sleep
 
-
 from eNMS import db
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import CustomBase

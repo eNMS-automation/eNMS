@@ -1,6 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
-
 from eNMS import db
 from eNMS.base.properties import cls_to_properties
 

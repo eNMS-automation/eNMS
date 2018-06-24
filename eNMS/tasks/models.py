@@ -6,7 +6,6 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
-
 from eNMS import db, scheduler
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import (

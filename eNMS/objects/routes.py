@@ -4,7 +4,6 @@ from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
-
 from eNMS import db
 from eNMS.base.helpers import allowed_file, get_obj
 from eNMS.objects import blueprint

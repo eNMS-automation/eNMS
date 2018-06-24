@@ -4,7 +4,6 @@ from eNMS.workflows.models import Workflow
 from eNMS.admin.models import User
 from eNMS.scripts.models import Script
 
-
 diagram_classes = {
     'node': Node,
     'link': Link,

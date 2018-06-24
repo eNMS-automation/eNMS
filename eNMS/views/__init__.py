@@ -2,7 +2,6 @@ from flask import Blueprint
 from os.path import join
 from simplekml import Color, Style
 
-
 from eNMS.objects.models import node_subtypes, link_class
 
 

@@ -2,6 +2,7 @@ from flask import Flask
 from flask_apscheduler import APScheduler
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm.exc import NoResultFound
 from importlib import import_module
 from os import environ
 import logging
@@ -17,6 +18,7 @@ import eNMS.workflows.models
 import eNMS.admin.models
 import eNMS.base.models
 import eNMS.scripts.models
+from eNMS.admin.models import SyslogServer
 from eNMS.base.rest import configure_rest_api
 from eNMS.config import config_dict
 from eNMS.scripts.custom_scripts import create_custom_scripts
@@ -32,7 +34,6 @@ except KeyError:
 def register_extensions(app, test):
     db.init_app(app)
     login_manager.init_app(app)
-
     if not test:
         scheduler.init_app(app)
         scheduler.start()
@@ -66,7 +67,6 @@ def configure_login_manager(app):
 
 
 def configure_database(app):
-
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
@@ -80,12 +80,13 @@ def configure_database(app):
         create_custom_scripts()
 
 
-def configure_syslog():
-    try:
-        syslog_server = db.session.query(eNMS.base.models.SyslogServer).one()
-        syslog_server.start()
-    except Exception:
-        pass
+def configure_syslog(app):
+    with app.app_context():
+        try:
+            syslog_server = db.session.query(SyslogServer).one()
+            syslog_server.start()
+        except NoResultFound:
+            pass
 
 
 def configure_logs(app):
@@ -103,6 +104,6 @@ def create_app(path, test=False):
     configure_login_manager(app)
     configure_database(app)
     configure_rest_api(app)
-    configure_syslog()
+    configure_syslog(app)
     configure_logs(app)
     return app

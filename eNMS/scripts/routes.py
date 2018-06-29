@@ -124,4 +124,4 @@ def create_script(script_type):
         }[script_type](**request.form)
     db.session.add(script)
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})

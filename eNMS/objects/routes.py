@@ -163,7 +163,7 @@ def update_pools():
     for pool in Pool.query.all():
         pool.compute_pool()
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/delete_pool/<pool_id>', methods=['POST'])

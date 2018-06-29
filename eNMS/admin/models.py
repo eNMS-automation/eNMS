@@ -94,7 +94,7 @@ class SyslogServer(CustomBase):
     __tablename__ = 'SyslogServer'
 
     id = Column(Integer, primary_key=True)
-    ip_address = Column(String)
+    ip_address = Column(String, unique=True)
     port = Column(Integer)
 
     def __init__(self, **kwargs):

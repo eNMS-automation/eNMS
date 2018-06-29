@@ -88,7 +88,7 @@ def delete_log(log_id):
     log = get_obj(Log, id=log_id)
     db.session.delete(log)
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 ## Errors
 

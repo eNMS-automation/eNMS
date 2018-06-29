@@ -98,7 +98,7 @@ def putty_connection(name):
             node.ip_address
         )
         os_system(arg)
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/export_to_google_earth', methods=['POST'])
@@ -120,7 +120,7 @@ def export_to_google_earth():
         line.style.linestyle.width = request.form['line_width']
     filepath = join(current_app.path, 'google_earth', request.form['name'] + '.kmz')
     kml_file.save(filepath)
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/get_logs_<node_id>', methods=['POST'])

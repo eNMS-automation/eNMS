@@ -126,7 +126,7 @@ def set_as_start(workflow_id, task_id):
     workflow = get_obj(Workflow, id=workflow_id)
     workflow.start_task = task_id
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/save_positions', methods=['POST'])
@@ -138,4 +138,4 @@ def save_positions():
         task = get_obj(Task, id=task_id)
         task.x, task.y = position['x'], position['y']
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})

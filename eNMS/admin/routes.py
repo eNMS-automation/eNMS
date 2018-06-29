@@ -162,19 +162,17 @@ def save_tacacs_server():
     tacacs_server = TacacsServer(**request.form.to_dict())
     db.session.add(tacacs_server)
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/save_syslog_server', methods=['POST'])
 @login_required
 def save_syslog_server():
     SyslogServer.query.delete()
-    print(request.form.to_dict())
     syslog_server = SyslogServer(**request.form.to_dict())
-    print(syslog_server.__dict__)
     db.session.add(syslog_server)
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/query_opennms', methods=['POST'])
@@ -208,7 +206,7 @@ def query_opennms():
                 nodes[node]['ip_address'] = interface['ipAddress']
                 object_factory(**nodes[node])
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/save_geographical_parameters', methods=['POST'])
@@ -217,4 +215,4 @@ def save_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})

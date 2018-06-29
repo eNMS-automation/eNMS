@@ -10,14 +10,7 @@ from eNMS.base.helpers import get_obj, allowed_file
 from eNMS.base.properties import pretty_names, script_public_properties
 from eNMS.objects.models import Node, Pool
 from eNMS.scripts import blueprint
-from eNMS.scripts.forms import (
-    AnsibleScriptForm,
-    NapalmConfigScriptForm,
-    NapalmGettersForm,
-    NetmikoConfigScriptForm,
-    FileTransferScriptForm,
-    NetmikoValidationForm,
-)
+from eNMS.scripts.helpers import type_to_form, type_to_name
 from eNMS.scripts.models import (
     AnsibleScript,
     FileTransferScript,
@@ -34,26 +27,6 @@ from eNMS.tasks.forms import SchedulingForm
 
 
 ## Template rendering
-
-
-type_to_form = {
-    'netmiko_config': NetmikoConfigScriptForm,
-    'napalm_config': NapalmConfigScriptForm,
-    'napalm_getters': NapalmGettersForm,
-    'file_transfer': FileTransferScriptForm,
-    'netmiko_validation': NetmikoValidationForm,
-    'ansible_playbook': AnsibleScriptForm
-}
-
-type_to_name = {
-    'netmiko_config': 'Netmiko Config',
-    'napalm_config': 'NAPALM Config',
-    'napalm_getters': 'NAPALM Getters',
-    'file_transfer': 'File Transfer',
-    'netmiko_validation': 'Validation',
-    'ansible_playbook': 'Ansible playbook',
-    'custom_script': 'Custom script'
-}
 
 
 @blueprint.route('/script_management')

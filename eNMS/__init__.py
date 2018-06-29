@@ -18,10 +18,15 @@ import eNMS.workflows.models
 import eNMS.admin.models
 import eNMS.base.models
 import eNMS.scripts.models
-from eNMS.admin.models import SyslogServer
+from eNMS.admin.models import (
+    create_default_parameters,
+    create_default_syslog_server
+)
 from eNMS.base.rest import configure_rest_api
 from eNMS.config import config_dict
+from eNMS.objects.models import create_default_pools
 from eNMS.scripts.custom_scripts import create_custom_scripts
+from eNMS.scripts.models import create_default_scripts
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
 
@@ -74,19 +79,11 @@ def configure_database(app):
     @app.before_first_request
     def create_default():
         db.create_all()
-        eNMS.admin.models.create_default_parameters()
-        eNMS.scripts.models.create_default_scripts()
-        eNMS.objects.models.create_default_pools()
+        create_default_parameters()
+        create_default_scripts()
+        create_default_pools()
+        create_default_syslog_server()
         create_custom_scripts()
-
-
-def configure_syslog(app):
-    with app.app_context():
-        try:
-            syslog_server = db.session.query(SyslogServer).one()
-            syslog_server.start()
-        except NoResultFound:
-            pass
 
 
 def configure_logs(app):
@@ -104,6 +101,5 @@ def create_app(path, test=False):
     configure_login_manager(app)
     configure_database(app)
     configure_rest_api(app)
-    configure_syslog(app)
     configure_logs(app)
     return app

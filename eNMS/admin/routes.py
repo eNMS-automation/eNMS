@@ -169,7 +169,9 @@ def save_tacacs_server():
 @login_required
 def save_syslog_server():
     SyslogServer.query.delete()
+    print(request.form.to_dict())
     syslog_server = SyslogServer(**request.form.to_dict())
+    print(syslog_server.__dict__)
     db.session.add(syslog_server)
     db.session.commit()
     return jsonify({})

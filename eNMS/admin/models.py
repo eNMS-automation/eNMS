@@ -94,7 +94,7 @@ class SyslogServer(CustomBase):
     __tablename__ = 'SyslogServer'
 
     id = Column(Integer, primary_key=True)
-    ip_address = Column(String(120))
+    ip_address = Column(String)
     port = Column(Integer)
 
     def __init__(self, **kwargs):
@@ -132,4 +132,11 @@ class Parameters(CustomBase):
 def create_default_parameters():
     parameters = Parameters()
     db.session.add(parameters)
+    db.session.commit()
+
+
+@integrity_rollback
+def create_default_syslog_server():
+    syslog_server = SyslogServer(ip_address='0.0.0.0', port=514)
+    db.session.add(syslog_server)
     db.session.commit()

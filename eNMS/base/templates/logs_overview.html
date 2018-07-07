@@ -17,9 +17,9 @@
               <ul class="nav nav-tabs bar_tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#logs" role="tab" data-toggle="tab" aria-expanded="true">Logs</a>
                 </li>
-                <li role="presentation" class=""><a href="#docs" role="tab" data-toggle="tab" aria-expanded="false">Filters</a>
+                <li role="presentation" class=""><a href="#logs-filtering" role="tab" data-toggle="tab" aria-expanded="false">Filters</a>
                 </li>
-                <li role="presentation" class=""><a href="#docs" role="tab" data-toggle="tab" aria-expanded="false">Log-driven automation</a>
+                <li role="presentation" class=""><a href="#log-automation" role="tab" data-toggle="tab" aria-expanded="false">Log automation</a>
                 </li>
               </ul>
               <div class="tab-content">
@@ -27,7 +27,7 @@
                   <table id="log-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        {% for property in form.properties %}
+                        {% for property in filtering_form.properties %}
                           {% set style = "80" if property == "content" else "10" %}
                           <th style="width: {{ style }}%">{{ names[property] }}</th>
                         {% endfor %}
@@ -37,23 +37,23 @@
                     <tbody></tbody>
                   </table>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="docs">
+                <div role="tabpanel" class="tab-pane fade" id="logs-filtering">
                   <form id="filtering-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
                     <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          {% for property in form.properties %}
+                          {% for property in filtering_form.properties %}
                             <th>{{ names[property] }}</th>
                           {% endfor %}
                           <th>Regex</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {% for property in form.properties %}
+                        {% for property in filtering_form.properties %}
                           <tr>
                             <td>{{ names[property] }}</td>
-                            <td>{{ form[property](class="form-control") }}</td>
-                            <td>{{ form[property + 'regex'](class="form-control") }}</td>
+                            <td>{{ filtering_form[property](class="form-control") }}</td>
+                            <td>{{ filtering_form[property + 'regex'](class="form-control") }}</td>
                           </tr>
                         {% endfor %}
                       </tbody>
@@ -67,16 +67,27 @@
                     </div>
                   </form>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="docs">
+                <div role="tabpanel" class="tab-pane fade" id="log-automation">
                   <form id="log-automation-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-                    <div class="form-group" style="height: 450px">
-                      {% for field in log_automation_form if field.widget.input_type != 'hidden'  %}
-                        <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          {{ field(class="form-control required", value=tacacs_server[field.name]) }}
-                        </div><br><br><br>
-                      {% endfor %}
-                    </div>
+                    <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          {% for property in filtering_form.properties %}
+                            <th>{{ names[property] }}</th>
+                          {% endfor %}
+                          <th>Regex</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for property in filtering_form.properties %}
+                          <tr>
+                            <td>{{ names[property] }}</td>
+                            <td>{{ filtering_form[property](class="form-control") }}</td>
+                            <td>{{ filtering_form[property + 'regex'](class="form-control") }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">

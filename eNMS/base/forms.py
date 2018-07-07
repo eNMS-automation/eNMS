@@ -11,5 +11,5 @@ def configure_form(cls):
 
 
 @configure_form
-class LogFilteringForm(FlaskForm):
+class LogForm(FlaskForm):
     pass

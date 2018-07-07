@@ -6,7 +6,7 @@ import flask_login
 
 from eNMS import db, login_manager
 from eNMS.base import blueprint
-from eNMS.base.forms import LogFilteringForm
+from eNMS.base.forms import LogForm
 from eNMS.base.classes import diagram_classes
 from eNMS.base.models import Log
 from eNMS.base.properties import (
@@ -41,13 +41,13 @@ def dashboard():
 @blueprint.route('/logs')
 @login_required
 def logs():
-    form = LogFilteringForm(request.form)
+    filtering_form = LogForm(request.form)
     return render_template(
         'logs_overview.html',
-        form=form,
+        log_form=log_form,
         names=pretty_names,
         fields=('source', 'content'),
-        logs=Log.serialize(),
+        logs=Log.serialize()
     )
 
 

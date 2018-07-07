@@ -31,6 +31,17 @@ function filterLogs() {
   });
 }
 
+function filterLogs() {
+  $.ajax({
+    type: "POST",
+    url: '/create_log_task_rule',
+    data: $('#log-automation-form').serialize(),
+    success: function() {
+      alertify.notify(`Log rule created !`, 'success', 5);
+    }
+  });
+}
+
 function deleteLog(id) {
   $.ajax({
     type: "POST",

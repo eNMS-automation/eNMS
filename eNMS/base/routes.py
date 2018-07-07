@@ -8,7 +8,7 @@ from eNMS import db, login_manager
 from eNMS.base import blueprint
 from eNMS.base.forms import LogForm
 from eNMS.base.classes import diagram_classes
-from eNMS.base.models import Log
+from eNMS.base.models import Log, LogTriggeredTaskRule
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,
@@ -41,7 +41,7 @@ def dashboard():
 @blueprint.route('/logs')
 @login_required
 def logs():
-    filtering_form = LogForm(request.form)
+    log_form = LogForm(request.form)
     return render_template(
         'logs_overview.html',
         log_form=log_form,
@@ -57,7 +57,6 @@ def logs():
 @blueprint.route('/filter_logs', methods=['POST'])
 @flask_login.login_required
 def filter_logs():
-    print(Log.serialize())
     logs = [log for log in Log.serialize() if all(
         # if the node-regex property is not in the request, the
         # regex box is unticked and we only check that the values
@@ -71,6 +70,15 @@ def filter_logs():
         if prop in request.form and request.form[prop]
     )]
     return jsonify(logs)
+
+
+@blueprint.route('/create_log_task_rule', methods=['POST'])
+@flask_login.login_required
+def save_log_rule():
+    tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
+    log_rule = LogTriggeredTaskRule(**request.form.to_dict())
+    db.session.delete(log_rule)
+    db.session.commit()
 
 
 @blueprint.route('/counters/<property>/<type>', methods=['POST'])

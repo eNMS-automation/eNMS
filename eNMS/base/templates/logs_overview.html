@@ -27,7 +27,7 @@
                   <table id="log-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        {% for property in filtering_form.properties %}
+                        {% for property in log_form.properties %}
                           {% set style = "80" if property == "content" else "10" %}
                           <th style="width: {{ style }}%">{{ names[property] }}</th>
                         {% endfor %}
@@ -42,18 +42,18 @@
                     <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          {% for property in filtering_form.properties %}
+                          {% for property in log_form.properties %}
                             <th>{{ names[property] }}</th>
                           {% endfor %}
                           <th>Regex</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {% for property in filtering_form.properties %}
+                        {% for property in log_form.properties %}
                           <tr>
                             <td>{{ names[property] }}</td>
-                            <td>{{ filtering_form[property](class="form-control") }}</td>
-                            <td>{{ filtering_form[property + 'regex'](class="form-control") }}</td>
+                            <td>{{ log_form[property](class="form-control") }}</td>
+                            <td>{{ log_form[property + 'regex'](class="form-control") }}</td>
                           </tr>
                         {% endfor %}
                       </tbody>
@@ -72,18 +72,18 @@
                     <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          {% for property in filtering_form.properties %}
+                          {% for property in log_form.properties %}
                             <th>{{ names[property] }}</th>
                           {% endfor %}
                           <th>Regex</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {% for property in filtering_form.properties %}
+                        {% for property in log_form.properties %}
                           <tr>
                             <td>{{ names[property] }}</td>
-                            <td>{{ filtering_form[property](class="form-control") }}</td>
-                            <td>{{ filtering_form[property + 'regex'](class="form-control") }}</td>
+                            <td>{{ log_form[property](class="form-control") }}</td>
+                            <td>{{ log_form[property + 'regex'](class="form-control") }}</td>
                           </tr>
                         {% endfor %}
                       </tbody>
@@ -92,7 +92,7 @@
                     <div class="form-group">
                       <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                         <button class="btn btn-primary" type="reset">Reset</button>
-                        <button type="button" class="btn btn-success" onclick="filterLogs()">Filter</button>
+                        <button type="button" class="btn btn-success" onclick="saveLogRule()">Filter</button>
                       </div>
                     </div>
                   </form>

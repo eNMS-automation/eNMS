@@ -6,7 +6,7 @@ import flask_login
 
 from eNMS import db, login_manager
 from eNMS.base import blueprint
-from eNMS.base.forms import LogForm
+from eNMS.base.forms import LogFilteringForm, LogAutomationForm
 from eNMS.base.classes import diagram_classes
 from eNMS.base.models import Log, LogTriggeredTaskRule
 from eNMS.base.properties import (
@@ -41,10 +41,12 @@ def dashboard():
 @blueprint.route('/logs')
 @login_required
 def logs():
-    log_form = LogForm(request.form)
+    log_filtering_form = LogFilteringForm(request.form)
+    log_automation_form = LogAutomationForm(request.form)
     return render_template(
-        'logs_overview.html',
-        log_form=log_form,
+        'logs.html',
+        log_filtering_form=log_filtering_form,
+        log_automation_form=log_automation_form,
         names=pretty_names,
         fields=('source', 'content'),
         logs=Log.serialize()
@@ -77,7 +79,8 @@ def filter_logs():
 def save_log_rule():
     tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
     log_rule = LogTriggeredTaskRule(**request.form.to_dict())
-    db.session.delete(log_rule)
+    log_rule.tasks = tasks
+    db.session.add(log_rule)
     db.session.commit()
 
 

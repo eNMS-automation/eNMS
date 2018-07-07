@@ -4,14 +4,14 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
 
 from eNMS import db
-from eNMS.base.helpers import get_obj, initialize_properties, integrity_rollback
-from eNMS.base.models import (
-    CustomBase,
+from eNMS.base.associations import (
     pool_node_table,
     pool_link_table,
     inner_task_node_table,
     scheduled_task_node_table
 )
+from eNMS.base.custom_base import CustomBase
+from eNMS.base.helpers import get_obj, initialize_properties, integrity_rollback
 from eNMS.base.properties import (
     cls_to_properties,
     link_public_properties,

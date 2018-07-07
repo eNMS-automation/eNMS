@@ -15,12 +15,12 @@ from sqlalchemy.orm import relationship
 from subprocess import check_output
 
 from eNMS import db
-from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
-from eNMS.base.models import (
+from eNMS.base.associations import (
     inner_task_script_table,
-    scheduled_task_script_table,
-    CustomBase
+    scheduled_task_script_table
 )
+from eNMS.base.custom_base import CustomBase
+from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
 from eNMS.base.properties import cls_to_properties
 from eNMS.scripts.properties import (
     boolean_properties,

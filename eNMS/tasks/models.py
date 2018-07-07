@@ -7,15 +7,15 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
 from eNMS import db, scheduler
-from eNMS.base.helpers import get_obj
-from eNMS.base.models import (
+from eNMS.base.associations import (
     inner_task_node_table,
     scheduled_task_node_table,
     inner_task_script_table,
     scheduled_task_script_table,
-    scheduled_task_log_rule_table,
-    CustomBase
+    scheduled_task_log_rule_table
 )
+from eNMS.base.custom_base import CustomBase
+from eNMS.base.helpers import get_obj
 from eNMS.base.properties import cls_to_properties
 
 
@@ -89,7 +89,7 @@ class ScheduledTask(Task):
     end_date = Column(String)
     creator = Column(String)
     log_rules = relationship(
-        'LogTriggeredTaskRules',
+        'LogTriggeredTaskRule',
         secondary=scheduled_task_log_rule_table,
         back_populates='tasks'
     )

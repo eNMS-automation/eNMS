@@ -64,8 +64,7 @@ for (var i = 0; i < nodes.length; i++) {
 
   marker.bindTooltip(node[labels.node], {
     permanent: false, 
-    }
-  );
+  });
 
   if (view == 'leaflet') {
     marker.addTo(map);

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Table
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table
 
 from eNMS import db
 from eNMS.base.properties import cls_to_properties
@@ -34,7 +34,7 @@ class Log(CustomBase):
 
     id = Column(Integer, primary_key=True)
     source = Column(String)
-    content = Column(String)
+    content = Column(Boolean)
 
     def __init__(self, source, content):
         self.source = source
@@ -42,6 +42,24 @@ class Log(CustomBase):
 
     def __repr__(self):
         return self.content
+
+
+class LogTriggeredTaskRule(CustomBase):
+
+    __tablename__ = 'LogTriggeredTaskRule'
+
+    id = Column(Integer, primary_key=True)
+    content = Column(String)
+    content_regex = Column(String)
+    tasks = relationship(
+        'ScheduledTask',
+        secondary=scheduled_task_log_rule_table,
+        back_populates='log_rules'
+    )
+
+    def __init__(self, content, content_regex):
+        self.content = content
+        self.content_regex = content_regex
 
 
 inner_task_node_table = Table(
@@ -70,6 +88,13 @@ scheduled_task_script_table = Table(
     CustomBase.metadata,
     Column('script_id', Integer, ForeignKey('Script.id')),
     Column('scheduled_script_task_id', Integer, ForeignKey('ScheduledScriptTask.id'))
+)
+
+scheduled_task_log_rule_table = Table(
+    'scheduled_task_log_rule_association',
+    CustomBase.metadata,
+    Column('scheduled_task_id', Integer, ForeignKey('ScheduledTask.id')),
+    Column('log_rule_id', Integer, ForeignKey('LogTriggeredTaskRule.id'))
 )
 
 pool_node_table = Table(

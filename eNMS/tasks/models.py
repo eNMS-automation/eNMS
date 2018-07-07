@@ -13,6 +13,7 @@ from eNMS.base.models import (
     scheduled_task_node_table,
     inner_task_script_table,
     scheduled_task_script_table,
+    scheduled_task_log_rule_table,
     CustomBase
 )
 from eNMS.base.properties import cls_to_properties
@@ -87,6 +88,11 @@ class ScheduledTask(Task):
     start_date = Column(String)
     end_date = Column(String)
     creator = Column(String)
+    log_rules = relationship(
+        'LogTriggeredTaskRules',
+        secondary=scheduled_task_log_rule_table,
+        back_populates='tasks'
+    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'ScheduledTask',

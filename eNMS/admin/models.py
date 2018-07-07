@@ -113,6 +113,22 @@ class SyslogServer(CustomBase):
         th.start()
 
 
+class OpenNmsServer(CustomBase):
+
+    __tablename__ = 'OpenNmsServer'
+
+    id = Column(Integer, primary_key=True)
+    rest_query = Column(String)
+    node_query = Column(String)
+    type = Column(String)
+    login = Column(String)
+    password = Column(String)
+
+    def __init__(self, **kwargs):
+        for properties in kwargs.items():
+            setattr(self, *properties)
+
+
 class Parameters(CustomBase):
 
     __tablename__ = 'Parameters'

@@ -24,7 +24,14 @@ from eNMS.admin.forms import (
     SyslogServerForm,
     TacacsServerForm,
 )
-from eNMS.admin.models import Parameters, SyslogServer, User, user_factory, TacacsServer
+from eNMS.admin.models import (
+    OpenNmsServer,
+    Parameters,
+    SyslogServer,
+    User,
+    user_factory,
+    TacacsServer
+)
 from eNMS.admin.properties import user_search_properties
 from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
@@ -111,13 +118,18 @@ def admninistration():
         syslog_server = db.session.query(SyslogServer).one()
     except NoResultFound:
         syslog_server = None
+    try:
+        opennms_server = db.session.query(OpenNmsServer).one()
+    except NoResultFound:
+        opennms_server = None
     return render_template(
         'administration.html',
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),
         opennms_form=OpenNmsForm(request.form),
         tacacs_server=tacacs_server,
-        syslog_server=syslog_server
+        syslog_server=syslog_server,
+        opennms_server=opennms_server
     )
 
 
@@ -178,33 +190,34 @@ def save_syslog_server():
 @blueprint.route('/query_opennms', methods=['POST'])
 @login_required
 def query_opennms():
-    login, password = request.form['login'], request.form['password']
+    OpenNmsServer.query.delete()
+    opennms_server = OpenNmsServer(**request.form.to_dict())
     json_nodes = requests.get(
-        request.form['node_query'],
+        opennms_server.node_query,
         headers={'Accept': 'application/json'},
-        auth=(login, password)
+        auth=(opennms_server.login, opennms_server.password)
     ).json()['node']
-
     nodes = {
         node['id']:
             {
             'longitude': node['assetRecord'].get('longitude', 0.),
             'latitude': node['assetRecord'].get('latitude', 0.),
             'name': node.get('label', node['id']),
-            'type': request.form['type']
+            'type': opennms_server.type
         } for node in json_nodes
     }
 
     for node in list(nodes):
         link = requests.get(
-            request.form['rest_query'] + '/nodes/' + node + '/ipinterfaces',
+            opennms_server.rest_query + '/nodes/' + node + '/ipinterfaces',
             headers={'Accept': 'application/json'},
-            auth=(login, password)
+            auth=(opennms_server.login, opennms_server.password)
         ).json()
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
                 nodes[node]['ip_address'] = interface['ipAddress']
                 object_factory(**nodes[node])
+    db.session.add(opennms_server)
     db.session.commit()
     return jsonify({'success': True})
 

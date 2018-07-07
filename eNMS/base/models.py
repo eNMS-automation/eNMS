@@ -21,19 +21,19 @@ class Log(CustomBase):
         return self.content
 
 
-class LogTriggeredTaskRule(CustomBase):
+class LogRule(CustomBase):
 
-    __tablename__ = 'LogTriggeredTaskRule'
+    __tablename__ = 'LogRule'
 
     id = Column(Integer, primary_key=True)
     content = Column(String)
-    content_regex = Column(String)
+    contentregex = Column(String)
     tasks = relationship(
         'ScheduledTask',
         secondary=scheduled_task_log_rule_table,
         back_populates='log_rules'
     )
 
-    def __init__(self, content, content_regex):
-        self.content = content
-        self.content_regex = content_regex
+    def __init__(self, **kwargs):
+        self.content = kwargs['content'] 
+        self.contentregex = 'contentregex' in kwargs

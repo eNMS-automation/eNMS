@@ -31,7 +31,7 @@ function filterLogs() {
   });
 }
 
-function filterLogs() {
+function saveRule() {
   $.ajax({
     type: "POST",
     url: '/create_log_task_rule',

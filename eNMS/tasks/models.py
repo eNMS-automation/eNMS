@@ -89,7 +89,7 @@ class ScheduledTask(Task):
     end_date = Column(String)
     creator = Column(String)
     log_rules = relationship(
-        'LogTriggeredTaskRule',
+        'LogRule',
         secondary=scheduled_task_log_rule_table,
         back_populates='tasks'
     )

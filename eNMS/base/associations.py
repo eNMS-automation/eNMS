@@ -35,7 +35,7 @@ scheduled_task_log_rule_table = Table(
     'scheduled_task_log_rule_association',
     CustomBase.metadata,
     Column('scheduled_task_id', Integer, ForeignKey('ScheduledTask.id')),
-    Column('log_rule_id', Integer, ForeignKey('LogTriggeredTaskRule.id'))
+    Column('log_rule_id', Integer, ForeignKey('LogRule.id'))
 )
 
 pool_node_table = Table(

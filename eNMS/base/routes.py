@@ -8,7 +8,7 @@ from eNMS import db, login_manager
 from eNMS.base import blueprint
 from eNMS.base.forms import LogFilteringForm, LogAutomationForm
 from eNMS.base.classes import diagram_classes
-from eNMS.base.models import Log, LogTriggeredTaskRule
+from eNMS.base.models import Log, LogRule
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,
@@ -78,10 +78,11 @@ def filter_logs():
 @flask_login.login_required
 def save_log_rule():
     tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
-    log_rule = LogTriggeredTaskRule(**request.form.to_dict())
+    log_rule = LogRule(**request.form.to_dict())
     log_rule.tasks = tasks
     db.session.add(log_rule)
     db.session.commit()
+    return jsonify({'success': True})
 
 
 @blueprint.route('/counters/<property>/<type>', methods=['POST'])

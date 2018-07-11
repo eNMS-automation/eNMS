@@ -1,4 +1,4 @@
-from flask import jsonify, render_template, request, send_file, Response
+from flask import jsonify, render_template, request, send_file
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -63,6 +63,7 @@ def objects_management():
         add_node_form=add_node_form,
         add_link_form=add_link_form
     )
+
 
 @blueprint.route('/object_download', methods=['GET'])
 @login_required

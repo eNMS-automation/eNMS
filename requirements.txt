@@ -13,6 +13,7 @@ simplekml
 tacacs_plus
 wtforms
 xlrd
+xlwt
 pyyaml
 passlib
 gunicorn

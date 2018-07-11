@@ -1,9 +1,10 @@
-from flask import jsonify, render_template, request
+from flask import jsonify, render_template, request, send_file, Response
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
-
+import xlwt
+from pathlib import Path
 from eNMS import db
 from eNMS.base.helpers import allowed_file, get_obj
 from eNMS.objects import blueprint
@@ -20,7 +21,8 @@ from eNMS.base.properties import (
     link_public_properties,
     node_public_properties,
     pool_public_properties,
-    pretty_names
+    pretty_names,
+    type_to_public_properties
 )
 
 
@@ -62,6 +64,40 @@ def objects_management():
         add_link_form=add_link_form
     )
 
+@blueprint.route('/object_download', methods=['GET'])
+@login_required
+def objects_download():
+    nodes = Node.serialize()
+    ws = {}
+    wb = xlwt.Workbook()
+    style0 = xlwt.easyxf('font: name Times New Roman, color-index black, bold on',
+                         num_format_str='#,##0.00')
+    style1 = xlwt.easyxf(num_format_str='#,##0.00')
+    header_index = 0
+    # Write tabs and headers
+    for tab, header in type_to_public_properties.items():
+        column = 0
+        ws[tab] = wb.add_sheet(tab)
+        ws[tab].row_index = 1
+        for entry in header:
+            ws[tab].write(header_index, column, entry, style0)
+            column = column + 1
+    column = 0
+    for node in nodes:
+        for k, v in node.items():
+            if k is not 'id':
+                try:
+                    ws[node['type']].write(ws[node['type']].row_index, column, v, style1)
+                    column = column + 1
+                except Exception as e:
+                    continue
+        column = 0
+        ws[node['type']].row_index = ws[node['type']].row_index + 1
+    # Done writing rows
+    obj_file = Path.cwd() / 'eNMS' / 'objects' / 'objects.xls'
+    wb.save(str(obj_file))
+    sfd = send_file(filename_or_fp=str(obj_file), as_attachment=True, attachment_filename='objects.xls')
+    return sfd
 
 @blueprint.route('/pool_management')
 @login_required

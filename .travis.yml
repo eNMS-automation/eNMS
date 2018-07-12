@@ -3,7 +3,7 @@ language: python
 branches:
   only:
     - master
-    - javascript-refactoring
+    - develop
 
 python:
   - 3.4

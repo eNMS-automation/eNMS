@@ -22,7 +22,7 @@
               </ul>
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade active in" id="logs">
-                  <table id="log-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
                         {% for property in log_filtering_form.properties %}
@@ -81,5 +81,5 @@
     var fields = {{ fields|tojson|safe }};
     var logs = {{ logs|tojson|safe }};
   </script>
-  <script src="{{ url_for('static', filename='logs.js') }}"></script>
+  <script src="{{ url_for('static', filename='logManagement.js') }}"></script>
 {% endblock javascripts %}

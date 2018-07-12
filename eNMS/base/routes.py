@@ -61,7 +61,7 @@ def log_automation():
         'log_automation.html',
         log_automation_form=log_automation_form,
         names=pretty_names,
-        fields=('source', 'content'),
+        fields=('name', 'source', 'content'),
         log_rules=LogRule.serialize()
     )
 

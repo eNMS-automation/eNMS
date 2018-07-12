@@ -1,6 +1,6 @@
-table = $('#log-table').DataTable();
+table = $('#table').DataTable();
 
-function addLog(properties) {
+function addLogRule(properties) {
   values = [];
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
@@ -11,7 +11,6 @@ function addLog(properties) {
 }
 
 (function() {
-  console.log(logs);
   for (var i = 0; i < logs.length; i++) {
     addLog(logs[i]);
   }
@@ -43,13 +42,13 @@ function saveRule() {
   });
 }
 
-function deleteLog(id) {
+function deleteLogRule(id) {
   $.ajax({
     type: "POST",
-    url: `/delete_log/${id}`,
+    url: `/delete_log_rule/${id}`,
     success: function() {
       table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify("Log deleted", 'error', 5);
+      alertify.notify("Log rule deleted", 'error', 5);
     }
   });
 }

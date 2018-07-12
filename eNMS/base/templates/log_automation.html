@@ -54,13 +54,13 @@
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade active in" id="logs">
-                  <table id="rule-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        {% for property in log_filtering_form.properties %}
-                          {% set style = "80" if property == "content" else "10" %}
-                          <th style="width: {{ style }}%">{{ names[property] }}</th>
-                        {% endfor %}
+                        <th>Name</th>
+                        <th>Source</th>
+                        <th>Content</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                       </tr>
                     </thead>
@@ -79,9 +79,5 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-    var fields = {{ fields|tojson|safe }};
-    var logs = {{ logs|tojson|safe }};
-  </script>
-  <script src="{{ url_for('static', filename='logs.js') }}"></script>
+  <script src="{{ url_for('static', filename='logAutomation.js') }}"></script>
 {% endblock javascripts %}

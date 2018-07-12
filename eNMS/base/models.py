@@ -1,3 +1,4 @@
+from re import search
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -17,10 +18,15 @@ class Log(CustomBase):
         self.source = source
         self.content = content
         for log_rule in LogRule.query.all():
-            if log_rule.content in content:
+            trigger_tasks = all(
+                getattr(log_rule, prop) in getattr(self, prop)
+                if not getattr(log_rule, prop + 'regex')
+                else search(getattr(log_rule, prop), getattr(self, prop))
+                for prop in ('source', 'content') if getattr(log_rule, prop)
+            )
+            if trigger_tasks:
                 for task in log_rule.tasks:
                     task.run()
-        print(self.content)
 
     def __repr__(self):
         return self.content

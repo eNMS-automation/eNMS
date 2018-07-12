@@ -98,6 +98,7 @@ def get_object(obj_type, obj_id):
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():
+    print(request.form)
     obj = object_factory(**request.form.to_dict())
     return jsonify(obj.serialized)
 
@@ -136,7 +137,6 @@ def get_pool(pool_id):
 @login_required
 def get_pool_objects(pool_id):
     pool = get_obj(Pool, id=pool_id)
-    print(pool.serialized)
     return jsonify(pool.serialized)
 
 

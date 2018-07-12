@@ -11,6 +11,7 @@ function addLog(properties) {
 }
 
 (function() {
+  console.log(logs);
   for (var i = 0; i < logs.length; i++) {
     addLog(logs[i]);
   }

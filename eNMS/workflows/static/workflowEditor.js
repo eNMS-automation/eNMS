@@ -69,7 +69,10 @@ if (workflow) {
 }
 
 function scheduleTask() {
-  if (workflow && $("#scheduling-form").parsley().validate()) {
+  if (!workflow) {
+    alertify.notify("You must create a workflow in the 'Workflow management' page first.", 'error', 5); 
+  }
+  if ($("#scheduling-form").parsley().validate()) {
     $.ajax({
       type: "POST",
       url: `/tasks/scheduler/inner_task/${workflow.id}`,

@@ -16,4 +16,5 @@ class LogFilteringForm(FlaskForm):
 
 
 class LogAutomationForm(LogFilteringForm):
+    name = TextField('Name')
     tasks = SelectMultipleField('Tasks', choices=())

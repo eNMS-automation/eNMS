@@ -431,8 +431,8 @@ def object_factory(**kwargs):
             if property in obj.__dict__:
                 setattr(obj, property, value)
     elif obj_type in link_class:
-        source = get_obj(Node, name=kwargs.pop('source'))
-        destination = get_obj(Node, name=kwargs.pop('destination'))
+        source = get_obj(Node, id=kwargs.pop('source'))
+        destination = get_obj(Node, id=kwargs.pop('destination'))
         obj = link_class[obj_type](
             source_id=source.id,
             destination_id=destination.id,

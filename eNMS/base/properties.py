@@ -75,6 +75,10 @@ log_public_properties = (
     'content'
 )
 
+log_rule_public_properties = log_public_properties + (
+    'name',
+)
+
 parameters_public_properties = (
     'default_longitude',
     'default_latitude',
@@ -116,6 +120,7 @@ cls_to_properties = {
     'WorkflowEdge': ('id', 'name', 'type'),
     'User': ('id',) + user_public_properties,
     'Log': ('id',) + log_public_properties,
+    'LogRule': log_rule_public_properties,
     'ScheduledTask': scheduled_task_serialized_properties,
     'InnerTask': inner_task_serialized_properties
 }

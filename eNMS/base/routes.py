@@ -16,6 +16,7 @@ from eNMS.base.properties import (
     type_to_diagram_properties
 )
 from eNMS.objects.models import get_obj
+from eNMS.tasks.models import Task
 
 
 ## Template rendering
@@ -38,18 +39,30 @@ def dashboard():
     )
 
 
-@blueprint.route('/logs')
+@blueprint.route('/log_management')
 @login_required
-def logs():
+def log_management():
     log_filtering_form = LogFilteringForm(request.form)
-    log_automation_form = LogAutomationForm(request.form)
     return render_template(
-        'logs.html',
+        'log_management.html',
         log_filtering_form=log_filtering_form,
-        log_automation_form=log_automation_form,
         names=pretty_names,
         fields=('source', 'content'),
         logs=Log.serialize()
+    )
+
+
+@blueprint.route('/log_automation')
+@login_required
+def log_automation():
+    log_automation_form = LogAutomationForm(request.form)
+    log_automation_form.tasks.choices = Task.choices()
+    return render_template(
+        'log_automation.html',
+        log_automation_form=log_automation_form,
+        names=pretty_names,
+        fields=('source', 'content'),
+        log_rules=LogRule.serialize()
     )
 
 

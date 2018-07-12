@@ -11,11 +11,16 @@ class Log(CustomBase):
 
     id = Column(Integer, primary_key=True)
     source = Column(String)
-    content = Column(Boolean)
+    content = Column(String)
 
     def __init__(self, source, content):
         self.source = source
         self.content = content
+        for log_rule in LogRule.query.all():
+            if log_rule.content in content:
+                for task in log_rule.tasks:
+                    task.run()
+        print(self.content)
 
     def __repr__(self):
         return self.content
@@ -27,7 +32,7 @@ class LogRule(CustomBase):
 
     id = Column(Integer, primary_key=True)
     content = Column(String)
-    contentregex = Column(String)
+    contentregex = Column(Boolean)
     tasks = relationship(
         'ScheduledTask',
         secondary=scheduled_task_log_rule_table,
@@ -35,5 +40,11 @@ class LogRule(CustomBase):
     )
 
     def __init__(self, **kwargs):
+        self.name = kwargs['name'] 
         self.content = kwargs['content'] 
+        self.source = kwargs['source']
         self.contentregex = 'contentregex' in kwargs
+        self.sourceregex = 'sourceregex' in kwargs
+
+    def __repr__(self):
+        return self.content

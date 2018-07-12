@@ -73,10 +73,10 @@ def log_automation():
 @flask_login.login_required
 def filter_logs():
     logs = [log for log in Log.serialize() if all(
-        # if the node-regex property is not in the request, the
-        # regex box is unticked and we only check that the values
-        # are equal.
-        str(val) == request.form[prop] if not prop + 'regex' in request.form
+        # if the regex property is not in the request, the
+        # regex box is unticked and we only check that the values of the 
+        # filters are contained in the values of the log
+        request.form[prop] in str(val) if not prop + 'regex' in request.form
         # if it is ticked, we use re.search to check that the value
         # of the node property matches the regular expression,
         # providing that the property field in the form is not empty

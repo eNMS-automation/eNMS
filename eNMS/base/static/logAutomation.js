@@ -5,31 +5,17 @@ function addLogRule(properties) {
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
-  values.push(`<button type="button" class="btn btn-danger btn-xs" onclick="deleteLog('${properties.id}')">Delete</button>`);
+  values.push(`<button type="button" class="btn btn-danger btn-xs" onclick="editLogRule('${properties.id}')">Delete</button>`);
+  values.push(`<button type="button" class="btn btn-danger btn-xs" onclick="deleteLogRule('${properties.id}')">Delete</button>`);
   var rowNode = table.row.add(values).draw(false).node();
   $(rowNode).attr("id", `${properties.id}`);
 }
 
 (function() {
-  for (var i = 0; i < logs.length; i++) {
-    addLog(logs[i]);
+  for (var i = 0; i < logRules.length; i++) {
+    addLogRule(logRules[i]);
   }
 })();
-
-function filterLogs() {
-  $.ajax({
-    type: "POST",
-    url: "/filter_logs",
-    data: $('#filtering-form').serialize(),
-    success: function(logs) {
-      table.clear().draw();;
-      for (var i = 0; i < logs.length; i++) {
-        addLog(logs[i]);
-      }
-      alertify.notify(`Logs successfully filtered !`, 'success', 5);
-    }
-  });
-}
 
 function saveRule() {
   $.ajax({

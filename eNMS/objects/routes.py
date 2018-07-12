@@ -48,6 +48,7 @@ def objects_management():
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
                     kwargs['type'] = obj_type
+                    kwargs['import'] = 'excel'
                     object_factory(**kwargs)
                 db.session.commit()
     return render_template(

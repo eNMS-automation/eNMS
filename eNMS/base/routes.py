@@ -87,15 +87,15 @@ def filter_logs():
     return jsonify(logs)
 
 
-@blueprint.route('/create_log_task_rule', methods=['POST'])
+@blueprint.route('/create_log_rule', methods=['POST'])
 @flask_login.login_required
-def save_log_rule():
+def create_log_rule():
     tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
     log_rule = LogRule(**request.form.to_dict())
     log_rule.tasks = tasks
     db.session.add(log_rule)
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(log_rule.serialized)
 
 
 @blueprint.route('/counters/<property>/<type>', methods=['POST'])

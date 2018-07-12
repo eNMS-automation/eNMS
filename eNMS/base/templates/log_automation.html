@@ -15,12 +15,31 @@
           <div class="x_content" style="height:800px;">
             <div role="tabpanel" data-example-id="togglable-tabs">
               <ul class="nav nav-tabs bar_tabs" role="tablist">
-                <li role="presentation" class=""><a href="#rule-creation" role="tab" data-toggle="tab" aria-expanded="false">Rule creation</a>
+                <li role="presentation" class="active"><a href="#rule-creation" role="tab" data-toggle="tab" aria-expanded="true">Rule creation</a>
                 <li role="presentation" class=""><a href="#rule-management" role="tab" data-toggle="tab" aria-expanded="false">Rule management</a>
                 </li>
               </ul>
-                <div role="tabpanel" class="tab-pane fade" id="log-automation">
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="rule-creation">
+                  <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Source</th>
+                        <th>Content</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="rule-management">
                   <form id="log-automation-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                    <label>Name</label>
+                    <div class='form-group'>
+                      {{ log_automation_form.name(class="form-control required") }}
+                    </div>
                     <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
@@ -53,20 +72,6 @@
                     </div>
                   </form>
                 </div>
-                <div role="tabpanel" class="tab-pane fade active in" id="logs">
-                  <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Source</th>
-                        <th>Content</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
-                </div>
               </div>
             </div>
           </div>
@@ -79,5 +84,9 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    var fields = {{ fields|tojson|safe }};
+    var logRules = {{ log_rules|tojson|safe }};
+  </script>
   <script src="{{ url_for('static', filename='logAutomation.js') }}"></script>
 {% endblock javascripts %}

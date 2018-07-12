@@ -31,6 +31,9 @@ class LogRule(CustomBase):
     __tablename__ = 'LogRule'
 
     id = Column(Integer, primary_key=True)
+    name = Column(String)
+    source = Column(String)
+    sourceregex = Column(Boolean)
     content = Column(String)
     contentregex = Column(Boolean)
     tasks = relationship(

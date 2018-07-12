@@ -20,9 +20,10 @@ function addLogRule(properties) {
 function saveRule() {
   $.ajax({
     type: "POST",
-    url: '/create_log_task_rule',
+    url: '/create_log_rule',
     data: $('#log-automation-form').serialize(),
-    success: function() {
+    success: function(logRule) {
+      addLogRule(logRule);
       alertify.notify(`Log rule created !`, 'success', 5);
     }
   });

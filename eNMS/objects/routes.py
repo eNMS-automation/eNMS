@@ -90,15 +90,18 @@ def objects_download():
                 try:
                     ws[node['type']].write(ws[node['type']].row_index, column, v, style1)
                     column = column + 1
-                except Exception as e:
+                except Exception:
                     continue
         column = 0
         ws[node['type']].row_index = ws[node['type']].row_index + 1
     # Done writing rows
-    obj_file = Path.cwd() / 'eNMS' / 'objects' / 'objects.xls'
+    obj_file = Path.cwd() / 'projects' / 'objects.xls'
     wb.save(str(obj_file))
-    sfd = send_file(filename_or_fp=str(obj_file), as_attachment=True, attachment_filename='objects.xls')
+    sfd = send_file(filename_or_fp=str(obj_file),
+                    as_attachment=True,
+                    attachment_filename='objects.xls')
     return sfd
+
 
 @blueprint.route('/pool_management')
 @login_required

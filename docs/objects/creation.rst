@@ -44,12 +44,14 @@ Creation via import
 
 All objects can be created at once by importing an Excel file. Each spreadsheet corresponds to a type of object.
 The first line of a spreadsheet contains the properties, the following lines define the objects, as demonstrated in the example below.
+If you want to export the existing data out, you can now export an Excel spreadsheet with all the object data filled out
+by clicking: ``Export Network Topology``
 
 .. image:: /_static/objects/management/import.png
    :alt: Example of excel spreadsheet for import
    :align: center
 
-For eNMS to let you choose an Excel spreadsheet to import, click on the ``Import a network topology`` button in the ``object_management`` page.
+For eNMS to let you choose an Excel spreadsheet to import, click on the ``Import Network Topology`` button in the ``object_management`` page.
 
 .. image:: /_static/objects/management/import_button.png
    :alt: Excel import button

@@ -49,8 +49,8 @@ class LogRule(CustomBase):
     )
 
     def __init__(self, **kwargs):
-        self.name = kwargs['name'] 
-        self.content = kwargs['content'] 
+        self.name = kwargs['name']
+        self.content = kwargs['content']
         self.source = kwargs['source']
         self.contentregex = 'contentregex' in kwargs
         self.sourceregex = 'sourceregex' in kwargs

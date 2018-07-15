@@ -74,7 +74,7 @@ def log_automation():
 def filter_logs():
     logs = [log for log in Log.serialize() if all(
         # if the regex property is not in the request, the
-        # regex box is unticked and we only check that the values of the 
+        # regex box is unticked and we only check that the values of the
         # filters are contained in the values of the log
         request.form[prop] in str(val) if not prop + 'regex' in request.form
         # if it is ticked, we use re.search to check that the value

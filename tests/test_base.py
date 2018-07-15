@@ -5,7 +5,8 @@ urls = {
     '': (
         '/',
         '/dashboard',
-        '/logs'
+        '/log_management',
+        '/log_automation'
     ),
     '/admin': (
         '/user_management',

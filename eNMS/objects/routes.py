@@ -71,8 +71,10 @@ def objects_download():
     nodes = Node.serialize()
     ws = {}
     wb = xlwt.Workbook()
-    style0 = xlwt.easyxf('font: name Times New Roman, color-index black, bold on',
-                         num_format_str='#,##0.00')
+    style0 = xlwt.easyxf(
+        'font: name Times New Roman, color-index black, bold on',
+        num_format_str='#,##0.00'
+    )
     style1 = xlwt.easyxf(num_format_str='#,##0.00')
     header_index = 0
     # Write tabs and headers
@@ -88,7 +90,12 @@ def objects_download():
         for k, v in node.items():
             if k is not 'id':
                 try:
-                    ws[node['type']].write(ws[node['type']].row_index, column, v, style1)
+                    ws[node['type']].write(
+                        ws[node['type']].row_index,
+                        column,
+                        v,
+                        style1
+                    )
                     column = column + 1
                 except Exception:
                     continue
@@ -97,9 +104,11 @@ def objects_download():
     # Done writing rows
     obj_file = Path.cwd() / 'projects' / 'objects.xls'
     wb.save(str(obj_file))
-    sfd = send_file(filename_or_fp=str(obj_file),
-                    as_attachment=True,
-                    attachment_filename='objects.xls')
+    sfd = send_file(
+        filename_or_fp=str(obj_file),
+        as_attachment=True,
+        attachment_filename='objects.xls'
+    )
     return sfd
 
 

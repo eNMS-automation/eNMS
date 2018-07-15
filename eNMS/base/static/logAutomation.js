@@ -1,11 +1,12 @@
 table = $('#table').DataTable();
 
 function addLogRule(properties) {
+    console.log(properties);
   values = [];
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
-  values.push(`<button type="button" class="btn btn-danger btn-xs" onclick="editLogRule('${properties.id}')">Delete</button>`);
+  values.push(`<button type="button" class="btn btn-info btn-xs" onclick="showLogRuleModal('${properties.id}')">Edit</button>`);
   values.push(`<button type="button" class="btn btn-danger btn-xs" onclick="deleteLogRule('${properties.id}')">Delete</button>`);
   var rowNode = table.row.add(values).draw(false).node();
   $(rowNode).attr("id", `${properties.id}`);
@@ -21,6 +22,24 @@ function showModal() {
   $("#title").text("Add a new log rule");
   $("#edit-form").trigger("reset");
   $("#edit").modal("show");
+}
+
+function showLogRuleModal(id) {
+  $.ajax({
+    type: "POST",
+    url: `/objects/get_log_rule/${id}`,
+    success: function(logRule){
+      for (const [property, value] of Object.entries(logRule)) {
+        if (property.includes("regex")) {
+          $(`#${property}`).prop('checked', value);
+        } else {
+          $(`#${property}`).val(value);
+        }
+        $('#title').text(`Edit log rule properties`);
+      }
+    }
+  });
+  $("#edit").modal('show');
 }
 
 function saveRule() {

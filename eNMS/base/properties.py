@@ -120,7 +120,7 @@ cls_to_properties = {
     'WorkflowEdge': ('id', 'name', 'type'),
     'User': ('id',) + user_public_properties,
     'Log': ('id',) + log_public_properties,
-    'LogRule': log_rule_public_properties,
+    'LogRule': ('id',) + log_rule_public_properties,
     'ScheduledTask': scheduled_task_serialized_properties,
     'InnerTask': inner_task_serialized_properties
 }

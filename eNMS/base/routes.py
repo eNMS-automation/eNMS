@@ -87,6 +87,13 @@ def filter_logs():
     return jsonify(logs)
 
 
+@blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
+@flask_login.login_required
+def get_log_rule(log_rule_id):
+    log_rule = get_obj(LogRule, id=log_rule_id)
+    return jsonify(log_rule.serialized)
+
+
 @blueprint.route('/create_log_rule', methods=['POST'])
 @flask_login.login_required
 def create_log_rule():

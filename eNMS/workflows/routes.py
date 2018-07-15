@@ -41,7 +41,6 @@ def workflow_editor(workflow_id=None):
     scheduling_form.scripts.choices = Script.choices()
     scheduling_form.nodes.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
-    print(workflow)
     return render_template(
         'workflow_editor.html',
         workflow_editor_form=workflow_editor_form,
@@ -126,16 +125,14 @@ def set_as_start(workflow_id, task_id):
     workflow = get_obj(Workflow, id=workflow_id)
     workflow.start_task = task_id
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 
 @blueprint.route('/save_positions', methods=['POST'])
 @login_required
 def save_positions():
-    print(request.json)
     for task_id, position in request.json.items():
-        print(position)
         task = get_obj(Task, id=task_id)
         task.x, task.y = position['x'], position['y']
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})

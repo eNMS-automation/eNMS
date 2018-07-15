@@ -6,9 +6,9 @@ import flask_login
 
 from eNMS import db, login_manager
 from eNMS.base import blueprint
-from eNMS.base.forms import LogFilteringForm
+from eNMS.base.forms import LogFilteringForm, LogAutomationForm
 from eNMS.base.classes import diagram_classes
-from eNMS.base.models import Log
+from eNMS.base.models import Log, LogRule
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,
@@ -16,6 +16,7 @@ from eNMS.base.properties import (
     type_to_diagram_properties
 )
 from eNMS.objects.models import get_obj
+from eNMS.tasks.models import Task
 
 
 ## Template rendering
@@ -38,16 +39,30 @@ def dashboard():
     )
 
 
-@blueprint.route('/logs')
+@blueprint.route('/log_management')
 @login_required
-def logs():
-    form = LogFilteringForm(request.form)
+def log_management():
+    log_filtering_form = LogFilteringForm(request.form)
     return render_template(
-        'logs_overview.html',
-        form=form,
+        'log_management.html',
+        log_filtering_form=log_filtering_form,
         names=pretty_names,
         fields=('source', 'content'),
-        logs=Log.serialize(),
+        logs=Log.serialize()
+    )
+
+
+@blueprint.route('/log_automation')
+@login_required
+def log_automation():
+    log_automation_form = LogAutomationForm(request.form)
+    log_automation_form.tasks.choices = Task.choices()
+    return render_template(
+        'log_automation.html',
+        log_automation_form=log_automation_form,
+        names=pretty_names,
+        fields=('name', 'source', 'content'),
+        log_rules=LogRule.serialize()
     )
 
 
@@ -57,12 +72,11 @@ def logs():
 @blueprint.route('/filter_logs', methods=['POST'])
 @flask_login.login_required
 def filter_logs():
-    print(Log.serialize())
     logs = [log for log in Log.serialize() if all(
-        # if the node-regex property is not in the request, the
-        # regex box is unticked and we only check that the values
-        # are equal.
-        str(val) == request.form[prop] if not prop + 'regex' in request.form
+        # if the regex property is not in the request, the
+        # regex box is unticked and we only check that the values of the 
+        # filters are contained in the values of the log
+        request.form[prop] in str(val) if not prop + 'regex' in request.form
         # if it is ticked, we use re.search to check that the value
         # of the node property matches the regular expression,
         # providing that the property field in the form is not empty
@@ -71,6 +85,17 @@ def filter_logs():
         if prop in request.form and request.form[prop]
     )]
     return jsonify(logs)
+
+
+@blueprint.route('/create_log_rule', methods=['POST'])
+@flask_login.login_required
+def create_log_rule():
+    tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
+    log_rule = LogRule(**request.form.to_dict())
+    log_rule.tasks = tasks
+    db.session.add(log_rule)
+    db.session.commit()
+    return jsonify(log_rule.serialized)
 
 
 @blueprint.route('/counters/<property>/<type>', methods=['POST'])
@@ -88,7 +113,7 @@ def delete_log(log_id):
     log = get_obj(Log, id=log_id)
     db.session.delete(log)
     db.session.commit()
-    return jsonify({})
+    return jsonify({'success': True})
 
 ## Errors
 

@@ -1,31 +1,9 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Table
+from re import search
+from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy.orm import relationship
 
-from eNMS import db
-from eNMS.base.properties import cls_to_properties
-
-
-class CustomBase(db.Model):
-
-    __abstract__ = True
-
-    # simplifies the syntax for flask forms
-    @classmethod
-    def choices(cls):
-        return [(obj.id, obj.name) for obj in cls.query.all()]
-
-    def __repr__(self):
-        return self.name
-
-    def __lt__(self, other):
-        return True
-
-    @property
-    def serialized(self):
-        return {p: getattr(self, p) for p in cls_to_properties[self.__tablename__]}
-
-    @classmethod
-    def serialize(cls):
-        return [obj.serialized for obj in cls.query.all()]
+from eNMS.base.associations import scheduled_task_log_rule_table
+from eNMS.base.custom_base import CustomBase
 
 
 class Log(CustomBase):
@@ -39,49 +17,43 @@ class Log(CustomBase):
     def __init__(self, source, content):
         self.source = source
         self.content = content
+        for log_rule in LogRule.query.all():
+            trigger_tasks = all(
+                getattr(log_rule, prop) in getattr(self, prop)
+                if not getattr(log_rule, prop + 'regex')
+                else search(getattr(log_rule, prop), getattr(self, prop))
+                for prop in ('source', 'content') if getattr(log_rule, prop)
+            )
+            if trigger_tasks:
+                for task in log_rule.tasks:
+                    task.run()
 
     def __repr__(self):
         return self.content
 
 
-inner_task_node_table = Table(
-    'inner_task_node_association',
-    CustomBase.metadata,
-    Column('node_id', Integer, ForeignKey('Node.id')),
-    Column('inner_task_id', Integer, ForeignKey('InnerTask.id'))
-)
+class LogRule(CustomBase):
 
-scheduled_task_node_table = Table(
-    'scheduled_task_node_association',
-    CustomBase.metadata,
-    Column('node_id', Integer, ForeignKey('Node.id')),
-    Column('scheduled_script_task_id', Integer, ForeignKey('ScheduledScriptTask.id'))
-)
+    __tablename__ = 'LogRule'
 
-inner_task_script_table = Table(
-    'inner_task_script_association',
-    CustomBase.metadata,
-    Column('script_id', Integer, ForeignKey('Script.id')),
-    Column('inner_task_id', Integer, ForeignKey('InnerTask.id'))
-)
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    source = Column(String)
+    sourceregex = Column(Boolean)
+    content = Column(String)
+    contentregex = Column(Boolean)
+    tasks = relationship(
+        'ScheduledTask',
+        secondary=scheduled_task_log_rule_table,
+        back_populates='log_rules'
+    )
 
-scheduled_task_script_table = Table(
-    'scheduled_task_script_association',
-    CustomBase.metadata,
-    Column('script_id', Integer, ForeignKey('Script.id')),
-    Column('scheduled_script_task_id', Integer, ForeignKey('ScheduledScriptTask.id'))
-)
+    def __init__(self, **kwargs):
+        self.name = kwargs['name'] 
+        self.content = kwargs['content'] 
+        self.source = kwargs['source']
+        self.contentregex = 'contentregex' in kwargs
+        self.sourceregex = 'sourceregex' in kwargs
 
-pool_node_table = Table(
-    'pool_node_association',
-    CustomBase.metadata,
-    Column('pool_id', Integer, ForeignKey('Pool.id')),
-    Column('node_id', Integer, ForeignKey('Node.id'))
-)
-
-pool_link_table = Table(
-    'pool_link_association',
-    CustomBase.metadata,
-    Column('pool_id', Integer, ForeignKey('Pool.id')),
-    Column('link_id', Integer, ForeignKey('Link.id'))
-)
+    def __repr__(self):
+        return self.content

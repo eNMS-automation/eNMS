@@ -9,8 +9,8 @@ except Exception:
 from threading import Thread
 
 from eNMS import db, scheduler
+from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import get_obj
-from eNMS.base.models import CustomBase
 from eNMS.base.helpers import integrity_rollback
 from eNMS.base.models import Log
 
@@ -94,7 +94,7 @@ class SyslogServer(CustomBase):
     __tablename__ = 'SyslogServer'
 
     id = Column(Integer, primary_key=True)
-    ip_address = Column(String(120))
+    ip_address = Column(String, unique=True)
     port = Column(Integer)
 
     def __init__(self, **kwargs):
@@ -111,6 +111,22 @@ class SyslogServer(CustomBase):
         th = Thread(target=self.server.serve_forever)
         th.daemon = True
         th.start()
+
+
+class OpenNmsServer(CustomBase):
+
+    __tablename__ = 'OpenNmsServer'
+
+    id = Column(Integer, primary_key=True)
+    rest_query = Column(String)
+    node_query = Column(String)
+    type = Column(String)
+    login = Column(String)
+    password = Column(String)
+
+    def __init__(self, **kwargs):
+        for properties in kwargs.items():
+            setattr(self, *properties)
 
 
 class Parameters(CustomBase):
@@ -132,4 +148,11 @@ class Parameters(CustomBase):
 def create_default_parameters():
     parameters = Parameters()
     db.session.add(parameters)
+    db.session.commit()
+
+
+@integrity_rollback
+def create_default_syslog_server():
+    syslog_server = SyslogServer(ip_address='0.0.0.0', port=514)
+    db.session.add(syslog_server)
     db.session.commit()

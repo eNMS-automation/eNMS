@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, TextField
+from wtforms import BooleanField, SelectMultipleField, TextField
 
 
 def configure_form(cls):
@@ -13,3 +13,8 @@ def configure_form(cls):
 @configure_form
 class LogFilteringForm(FlaskForm):
     pass
+
+
+class LogAutomationForm(LogFilteringForm):
+    name = TextField('Name')
+    tasks = SelectMultipleField('Tasks', choices=())

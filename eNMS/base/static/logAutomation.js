@@ -17,14 +17,20 @@ function addLogRule(properties) {
   }
 })();
 
+function showModal() {
+  $("#title").text("Add a new log rule");
+  $("#edit-form").trigger("reset");
+  $("#edit").modal("show");
+}
+
 function saveRule() {
   $.ajax({
     type: "POST",
     url: '/create_log_rule',
-    data: $('#log-automation-form').serialize(),
+    data: $('#edit-form').serialize(),
     success: function(logRule) {
       addLogRule(logRule);
-      alertify.notify(`Log rule created !`, 'success', 5);
+      alertify.notify(`Log rule '${logRule.name}' created !`, 'success', 5);
     }
   });
 }

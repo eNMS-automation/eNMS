@@ -27,7 +27,7 @@ function showModal() {
 function showLogRuleModal(id) {
   $.ajax({
     type: "POST",
-    url: `/objects/get_log_rule/${id}`,
+    url: `/get_log_rule/${id}`,
     success: function(logRule){
       for (const [property, value] of Object.entries(logRule)) {
         if (property.includes("regex")) {

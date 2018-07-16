@@ -57,3 +57,17 @@ class LogRule(CustomBase):
 
     def __repr__(self):
         return self.content
+
+
+def log_rule_factory(**kwargs):
+    log_rule = get_obj(LogRule, name=kwargs['name'])
+    if log_rule:
+        print(kwargs)
+        for property, value in kwargs.items():
+            if property in log_rule.__dict__:
+                setattr(log_rule, property, value)
+    else:
+        log_rule = LogRule(**kwargs)
+        db.session.add(log_rule)
+    db.session.commit()
+    return pool

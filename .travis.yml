@@ -11,7 +11,7 @@ python:
   - 3.6
 
 install:
-  - sudo pip install -r requirements_dev.txt
+  - sudo pip3 install -r requirements_dev.txt
 
 script:
   - flake8

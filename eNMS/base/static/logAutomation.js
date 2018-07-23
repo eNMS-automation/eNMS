@@ -1,20 +1,24 @@
 table = $('#table').DataTable();
 
-function addLogRule(properties) {
-    console.log(properties);
+function addLogRule(properties, mode) {
   values = [];
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(`<button type="button" class="btn btn-info btn-xs" onclick="showLogRuleModal('${properties.id}')">Edit</button>`);
   values.push(`<button type="button" class="btn btn-danger btn-xs" onclick="deleteLogRule('${properties.id}')">Delete</button>`);
-  var rowNode = table.row.add(values).draw(false).node();
-  $(rowNode).attr("id", `${properties.id}`);
+
+  if (mode == 'edited') {
+    table.row($(`#${properties.id}`)).data(values);
+  } else {
+    var rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr("id", `${properties.id}`);
+  }
 }
 
 (function() {
   for (var i = 0; i < logRules.length; i++) {
-    addLogRule(logRules[i]);
+    addLogRule(logRules[i], 'create');
   }
 })();
 
@@ -45,11 +49,13 @@ function showLogRuleModal(id) {
 function saveRule() {
   $.ajax({
     type: "POST",
-    url: '/create_log_rule',
+    url: '/save_log_rule',
     data: $('#edit-form').serialize(),
     success: function(logRule) {
-      addLogRule(logRule);
-      alertify.notify(`Log rule '${logRule.name}' created !`, 'success', 5);
+      var mode = $('#title').text().startsWith('Edit') ? 'edited' : 'created';
+      addLogRule(logRule, mode);
+      alertify.notify(`Log rule '${logRule.name}' ${mode} !`, 'success', 5);
+      $("#edit").modal('hide');
     }
   });
 }

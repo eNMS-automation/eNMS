@@ -8,7 +8,7 @@ from eNMS import db, login_manager
 from eNMS.base import blueprint
 from eNMS.base.forms import LogFilteringForm, LogAutomationForm
 from eNMS.base.classes import diagram_classes
-from eNMS.base.models import Log, log_rule_factory
+from eNMS.base.models import Log, LogRule, log_rule_factory
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,

@@ -2,8 +2,10 @@ from re import search
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 
+from eNMS import db
 from eNMS.base.associations import scheduled_task_log_rule_table
 from eNMS.base.custom_base import CustomBase
+from eNMS.base.helpers import get_obj
 
 
 class Log(CustomBase):
@@ -70,4 +72,4 @@ def log_rule_factory(**kwargs):
         log_rule = LogRule(**kwargs)
         db.session.add(log_rule)
     db.session.commit()
-    return pool
+    return log_rule

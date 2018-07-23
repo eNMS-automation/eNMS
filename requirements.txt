@@ -16,4 +16,5 @@ xlrd
 xlwt
 pyyaml
 passlib
+pathlib
 gunicorn

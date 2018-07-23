@@ -7,7 +7,6 @@ flask_sqlalchemy
 flask_wtf
 napalm
 netmiko
-nornir
 jinja2
 simplekml
 tacacs_plus

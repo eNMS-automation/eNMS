@@ -70,7 +70,7 @@ def configure_login_manager(app):
         return user if user else None
 
 
-def configure_database(app):
+def configure_database(app, test):
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
@@ -81,7 +81,8 @@ def configure_database(app):
         create_default_parameters()
         create_default_scripts()
         create_default_pools()
-        create_default_syslog_server()
+        if not test:
+            create_default_syslog_server()
         create_custom_scripts()
 
 
@@ -98,7 +99,7 @@ def create_app(path, test=False):
     register_extensions(app, test)
     register_blueprints(app)
     configure_login_manager(app)
-    configure_database(app)
+    configure_database(app, test)
     configure_rest_api(app)
     configure_logs(app)
     return app

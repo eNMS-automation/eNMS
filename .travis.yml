@@ -1,5 +1,3 @@
-dist: "trusty"
-
 language: python
 
 branches:
@@ -7,19 +5,13 @@ branches:
     - master
     - develop
 
-addons:
-  apt:
-    packages:
-      - "python3"
-      - "python3-pip"
-
 python:
   - 3.4
   - 3.5
   - 3.6
 
 install:
-  - sudo pip3 install -r requirements_dev.txt
+  - pip install -r requirements_dev.txt
 
 script:
   - flake8
@@ -27,7 +19,7 @@ script:
   - sudo apt-get install google-chrome-stable
   - sudo apt-get install chromium-browser
   - sudo chmod a+x ./tests/chromedriver
-  - sudo coverage run --source=/eNMS -m pytest
+  - coverage run --source=/eNMS -m pytest
 
 after_success:
   - coveralls

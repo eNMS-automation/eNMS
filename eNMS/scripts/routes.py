@@ -1,9 +1,10 @@
 from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
 from jinja2 import Template
+from json import load as json_load
 from os.path import join
 from werkzeug import secure_filename
-from yaml import load
+from yaml import load as yaml_load
 
 from eNMS import db
 from eNMS.base.helpers import get_obj, allowed_file
@@ -18,6 +19,7 @@ from eNMS.scripts.models import (
     NapalmGettersScript,
     NetmikoConfigScript,
     NetmikoValidationScript,
+    RestCallScript,
     Script,
     script_factory,
     type_to_class
@@ -105,7 +107,7 @@ def create_script(script_type):
             file = request.files['file']
             filename = secure_filename(file.filename)
             if allowed_file(filename, {'yaml', 'yml'}):
-                parameters = load(file.read())
+                parameters = yaml_load(file.read())
                 template = Template(real_content)
                 real_content = template.render(**parameters)
         script = {
@@ -116,12 +118,22 @@ def create_script(script_type):
         source_file_name = request.form['source_file']
         source_file_path = join(current_app.path, 'file_transfer', source_file_name)
         script = FileTransferScript(source_file_path, **request.form)
+    elif script_type == 'rest_call':
+        payload = {}
+        if properties['call_type'] != 'GET':
+            file = request.files['file']
+            filename = secure_filename(file.filename)
+            if allowed_file(filename, {'json'}):
+                payload = json_load(file)
+        script = RestCallScript(payload, **request.form)
     else:
         script = {
             'ansible_playbook': AnsibleScript,
             'napalm_getters': NapalmGettersScript,
-            'netmiko_validation': NetmikoValidationScript
+            'netmiko_validation': NetmikoValidationScript,
+            'rest_call': RestCallScript
         }[script_type](**request.form)
     db.session.add(script)
     db.session.commit()
+    print(script.serialized)
     return jsonify({'success': True})

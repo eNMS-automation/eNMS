@@ -131,8 +131,12 @@ class AnsibleScriptForm(ScriptForm):
 class RestCallScriptForm(ScriptForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
-    call_type = TextField('Type of call (GET, POST, PATCH, PUT)')
+    choices = ('GET', 'POST', 'PATCH', 'PUT')
+    call_type = SelectField('Type', choices=tuple(zip(choices, choices)))
     url = TextField('URL')
-    payload = FileField('File', validators=[FileAllowed(['json'], 'Json only')])
+    payload = FileField(
+        'Payload (JSON files only)',
+        validators=[FileAllowed(['json'], 'Json only')]
+    )
     content = TextField('Content')
     content_regex = BooleanField()

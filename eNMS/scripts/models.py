@@ -420,7 +420,6 @@ class AnsibleScript(Script):
         results[node.name] = {'success': True, 'logs': check_output(command + arguments)}
 
 
-
 class RestCallScript(Script):
 
     __tablename__ = 'RestCallScript'

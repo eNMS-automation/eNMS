@@ -1,0 +1,22 @@
+<form data-parsley-validate id="rest_call-form" name="send" class="form-horizontal form-label-left" method="post">
+  <div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <div class="form-group" style="height: 650px">
+          {% for field in form if field.widget.input_type != 'hidden'  %}                  
+            <label>{{ field.label.text }}</label>
+            <div class='form-group'>
+              {% set validate = " required" if field.name == "name" else "" %}
+              {{ field(id="rest_call-" + field.name, class="form-control" + validate, placeholder=field.label.text) }}
+            </div>
+          {% endfor %}
+          <div class="ln_solid"></div>
+          <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button id="rest_call-button" type="button" class="btn btn-success" onclick="createScript('rest_call')">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

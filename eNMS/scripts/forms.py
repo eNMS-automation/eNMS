@@ -126,3 +126,13 @@ class AnsibleScriptForm(ScriptForm):
     playbook_path = TextField('Path to playbook')
     arguments = TextField('Optional arguments')
     graphical_inventory = BooleanField('Build inventory from graphical selection')
+
+
+class RestCallScriptForm(ScriptForm):
+    vendor = TextField('Vendor')
+    operating_system = TextField('Operating system')
+    call_type = TextField('Type of call (GET, POST, PATCH, PUT)')
+    url = TextField('URL')
+    payload = FileField('File', validators=[FileAllowed(['json'], 'Json only')])
+    content = TextField('Content')
+    content_regex = BooleanField()

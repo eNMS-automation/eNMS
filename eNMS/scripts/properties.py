@@ -55,6 +55,16 @@ ansible_playbook_properties = script_properties + (
     'graphical_inventory'
 )
 
+rest_call_properties = script_properties + (
+    'vendor',
+    'operating_system',
+    'call_type',
+    'url',
+    'payload',
+    'content',
+    'content_regex'
+)
+
 custom_properties = script_properties + (
     'vendor',
     'operating_system'
@@ -68,7 +78,8 @@ boolean_properties = (
     'overwrite_file',
     'disable_md5',
     'inline_transfer',
-    'graphical_inventory'
+    'graphical_inventory',
+    'content_regex'
 )
 
 type_to_properties = {
@@ -78,5 +89,6 @@ type_to_properties = {
     'netmiko_validation': netmiko_validation_properties,
     'napalm_getters': napalm_getters_properties,
     'ansible_playbook': ansible_playbook_properties,
+    'rest_call': rest_call_properties,
     'custom_script': custom_properties
 }

@@ -5,6 +5,7 @@ from eNMS.scripts.forms import (
     NetmikoConfigScriptForm,
     FileTransferScriptForm,
     NetmikoValidationForm,
+    RestCallScriptForm
 )
 
 type_to_form = {
@@ -13,7 +14,8 @@ type_to_form = {
     'napalm_getters': NapalmGettersForm,
     'file_transfer': FileTransferScriptForm,
     'netmiko_validation': NetmikoValidationForm,
-    'ansible_playbook': AnsibleScriptForm
+    'ansible_playbook': AnsibleScriptForm,
+    'rest_call': RestCallScriptForm
 }
 
 type_to_name = {
@@ -23,5 +25,6 @@ type_to_name = {
     'file_transfer': 'File Transfer',
     'netmiko_validation': 'Validation',
     'ansible_playbook': 'Ansible playbook',
+    'rest_call': 'ReST Call',
     'custom_script': 'Custom script'
 }

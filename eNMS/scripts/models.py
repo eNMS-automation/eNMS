@@ -420,6 +420,35 @@ class AnsibleScript(Script):
         results[node.name] = {'success': True, 'logs': check_output(command + arguments)}
 
 
+
+class RestCallScript(Script):
+
+    __tablename__ = 'RestCallScript'
+
+    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
+    call_type = Column(String)
+    url = Column(String)
+    payload = Column(MutableDict.as_mutable(PickleType), default={})
+    content = Column(String)
+    content_regex = Column(Boolean)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'rest_call',
+    }
+
+    def __init__(self, **data):
+        name = data['name'][0]
+        description = data['description'][0]
+        print(data)
+        super(RestCallScript, self).__init__(name, description)
+
+    def job(self, args):
+        _, node, results = args
+        results[node.name] = {'success': True, 'logs': 'logs'}
+
+
 type_to_class = {
     'napalm_action': NapalmActionScript,
     'netmiko_config': NetmikoConfigScript,
@@ -428,6 +457,7 @@ type_to_class = {
     'file_transfer': FileTransferScript,
     'napalm_getters': NapalmGettersScript,
     'ansible_playbook': AnsibleScript,
+    'rest_call': RestCallScript
 }
 
 

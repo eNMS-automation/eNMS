@@ -2,6 +2,7 @@ from json import loads
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
+from requests import get as rest_get
 from sqlalchemy import (
     Boolean,
     Column,
@@ -442,17 +443,27 @@ class RestCallScript(Script):
     def __init__(self, **data):
         name = data['name'][0]
         description = data['description'][0]
-        print(data)
         self.call_type = data['call_type'][0]
+        self.url = data['url'][0]
         self.content = data['content'][0]
-        self.payload = loads(data['payload'][0])
+        self.payload = loads(data['payload'][0]) if data['payload'][0] else {}
         self.content_regex = 'content_regex' in data
-        print(self.payload, self.content_regex)
         super(RestCallScript, self).__init__(name, description)
 
     def job(self, args):
         _, node, results = args
-        results[node.name] = {'success': True, 'logs': 'logs'}
+        try:
+            if self.call_type == 'GET':
+                result = rest_get(
+                    self.url,
+                    headers={'Accept': 'application/json'},
+                    auth=('demo', 'demo')
+                ).json()
+            print(result)
+        except Exception as e:
+            result = str(e)
+        print(result)
+        results[node.name] = {'success': True, 'logs': str(result)}
 
 
 type_to_class = {

@@ -11,7 +11,7 @@ function createScript(type) {
     processData: false,
     async: false,
     success: function() {
-        alertify.notify("Script created", 'success', 5);
+      alertify.notify("Script created", 'success', 5);
     }
     });
   }

@@ -134,9 +134,6 @@ class RestCallScriptForm(ScriptForm):
     choices = ('GET', 'POST', 'PATCH', 'PUT')
     call_type = SelectField('Type', choices=tuple(zip(choices, choices)))
     url = TextField('URL')
-    payload = FileField(
-        'Payload (JSON files only)',
-        validators=[FileAllowed(['json'], 'Json only')]
-    )
+    payload = TextAreaField('Payload')
     content = TextField('Content')
     content_regex = BooleanField()

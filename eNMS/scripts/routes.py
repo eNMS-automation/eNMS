@@ -118,15 +118,8 @@ def create_script(script_type):
         source_file_name = request.form['source_file']
         source_file_path = join(current_app.path, 'file_transfer', source_file_name)
         script = FileTransferScript(source_file_path, **request.form)
-    elif script_type == 'rest_call':
-        payload = {}
-        if properties['call_type'] != 'GET':
-            file = request.files['file']
-            filename = secure_filename(file.filename)
-            if allowed_file(filename, {'json'}):
-                payload = json_load(file)
-        script = RestCallScript(payload, **request.form)
     else:
+        print(request.form)
         script = {
             'ansible_playbook': AnsibleScript,
             'napalm_getters': NapalmGettersScript,

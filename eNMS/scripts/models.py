@@ -1,3 +1,4 @@
+from json import loads
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
@@ -438,13 +439,15 @@ class RestCallScript(Script):
         'polymorphic_identity': 'rest_call',
     }
 
-    def __init__(self, payload, **data):
+    def __init__(self, **data):
         name = data['name'][0]
         description = data['description'][0]
+        print(data)
         self.call_type = data['call_type'][0]
         self.content = data['content'][0]
-        self.payload = payload
+        self.payload = loads(data['payload'][0])
         self.content_regex = 'content_regex' in data
+        print(self.payload, self.content_regex)
         super(RestCallScript, self).__init__(name, description)
 
     def job(self, args):

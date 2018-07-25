@@ -22,9 +22,6 @@ class CustomScript(Script):
 
     def __init__(self, **kwargs):
         self.__dict__.update(**kwargs)
-        name = kwargs['name']
-        description = kwargs['description']
-        super(CustomScript, self).__init__(name, description)
 
     def job(self, args):
         globals()[self.job_name](args)

@@ -208,6 +208,7 @@ class ScheduledScriptTask(ScheduledTask):
             args=[self.name],
             trigger='date'
         )
+        return str(runtime)
 
     @property
     def properties(self):

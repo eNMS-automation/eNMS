@@ -52,9 +52,7 @@ pool_public_properties = (
 script_public_properties = (
     'name',
     'type',
-    'description',
-    'vendor',
-    'operating_system',
+    'description'
 )
 
 workflow_public_properties = (
@@ -89,7 +87,8 @@ task_serialized_properties = (
     'id',
     'name',
     'result',
-    'status'
+    'status',
+    'logs'
 )
 
 scheduled_task_serialized_properties = task_serialized_properties + (

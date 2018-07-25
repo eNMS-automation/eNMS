@@ -6,6 +6,7 @@ from wtforms import (
     BooleanField,
     FileField,
     FloatField,
+    PasswordField,
     SelectField,
     SelectMultipleField,
     TextAreaField,
@@ -129,11 +130,11 @@ class AnsibleScriptForm(ScriptForm):
 
 
 class RestCallScriptForm(ScriptForm):
-    vendor = TextField('Vendor')
-    operating_system = TextField('Operating system')
-    choices = ('GET', 'POST', 'PATCH', 'PUT')
+    choices = ('GET', 'POST', 'PUT', 'DELETE')
     call_type = SelectField('Type', choices=tuple(zip(choices, choices)))
     url = TextField('URL')
     payload = TextAreaField('Payload')
+    username = TextField('Username')
+    password = PasswordField('Password')
     content = TextField('Content')
     content_regex = BooleanField()

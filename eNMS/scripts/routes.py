@@ -1,7 +1,6 @@
 from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
 from jinja2 import Template
-from json import load as json_load
 from os.path import join
 from werkzeug import secure_filename
 from yaml import load as yaml_load
@@ -12,18 +11,7 @@ from eNMS.base.properties import pretty_names, script_public_properties
 from eNMS.objects.models import Node, Pool
 from eNMS.scripts import blueprint
 from eNMS.scripts.helpers import type_to_form, type_to_name
-from eNMS.scripts.models import (
-    AnsibleScript,
-    FileTransferScript,
-    NapalmConfigScript,
-    NapalmGettersScript,
-    NetmikoConfigScript,
-    NetmikoValidationScript,
-    RestCallScript,
-    Script,
-    script_factory,
-    type_to_class
-)
+from eNMS.scripts.models import Script, script_factory, type_to_class
 from eNMS.scripts.properties import type_to_properties
 from eNMS.tasks.forms import SchedulingForm
 
@@ -65,6 +53,7 @@ def configuration():
 @blueprint.route('/get/<script_type>/<script_id>', methods=['POST'])
 @login_required
 def get_script(script_type, script_id):
+    print(script_type, script_id)
     script = get_obj(Script, id=script_id)
     properties = type_to_properties[script_type]
     script_properties = {
@@ -96,37 +85,22 @@ def delete_object(script_id):
 @login_required
 def create_script(script_type):
     script = get_obj(Script, name=request.form['name'])
-    if script:
-        script_factory(script_type, **request.form)
-        db.session.commit()
-    elif script_type in ('netmiko_config', 'napalm_config'):
-        # retrieve the raw script: we will use it as-is or update it
-        # depending on the type of script (jinja2-enabled template or not)
-        real_content = request.form['content']
-        if request.form['content_type'] != 'simple':
-            file = request.files['file']
-            filename = secure_filename(file.filename)
-            if allowed_file(filename, {'yaml', 'yml'}):
-                parameters = yaml_load(file.read())
-                template = Template(real_content)
-                real_content = template.render(**parameters)
-        script = {
-            'netmiko_config': NetmikoConfigScript,
-            'napalm_config': NapalmConfigScript
-        }[script_type](real_content, **request.form)
-    elif script_type == 'file_transfer':
-        source_file_name = request.form['source_file']
-        source_file_path = join(current_app.path, 'file_transfer', source_file_name)
-        script = FileTransferScript(source_file_path, **request.form)
-    else:
-        print(request.form)
-        script = {
-            'ansible_playbook': AnsibleScript,
-            'napalm_getters': NapalmGettersScript,
-            'netmiko_validation': NetmikoValidationScript,
-            'rest_call': RestCallScript
-        }[script_type](**request.form)
+    # convert ImmutableMultiDict to an actual dictionnary
+    form = dict(request.form)
+    if not script:
+        if script_type in ('netmiko_config', 'napalm_config'):
+            if form['content_type'][0] != 'simple':
+                file = request.files['file']
+                filename = secure_filename(file.filename)
+                if allowed_file(filename, {'yaml', 'yml'}):
+                    parameters = yaml_load(file.read())
+                    template = Template(form['content'][0])
+                    form['content'] = [''.join(template.render(**parameters))]
+        elif script_type == 'file_transfer':
+            source_file_name = form['source_file'][0]
+            source_file_path = join(current_app.path, 'file_transfer', source_file_name)
+            form['source_file'] = [source_file_path]
+    script = script_factory(script_type, **form)
     db.session.add(script)
     db.session.commit()
-    print(script.serialized)
-    return jsonify({'success': True})
+    return jsonify(script.serialized)

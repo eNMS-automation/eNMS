@@ -10,8 +10,8 @@ function createScript(type) {
     cache: false,
     processData: false,
     async: false,
-    success: function() {
-      alertify.notify("Script created", 'success', 5);
+    success: function(script) {
+      alertify.notify(`Script '${script.name}' created`, 'success', 5);
     }
     });
   }

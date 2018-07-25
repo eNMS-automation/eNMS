@@ -29,9 +29,9 @@ from eNMS.base.associations import (
 )
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
-from eNMS.base.properties import cls_to_properties
 from eNMS.scripts.properties import (
     boolean_properties,
+    json_properties,
     list_properties,
     type_to_properties
 )
@@ -61,13 +61,9 @@ class Script(CustomBase):
         'polymorphic_on': type
     }
 
-    def __init__(self, name, description=''):
-        self.name = name
-        self.description = description
-
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['Script']}
+        return {p: str(getattr(self, p)) for p in type_to_properties[self.type]}
 
     @property
     def serialized(self):
@@ -92,9 +88,6 @@ class NetmikoConfigScript(Script):
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_config',
     }
-
-    def __init__(self):
-        pass
 
     def job(self, args):
         task, node, results = args
@@ -146,20 +139,6 @@ class FileTransferScript(Script):
         'polymorphic_identity': 'file_transfer',
     }
 
-    def __init__(self, source_file_path, **data):
-        name = data['name'][0]
-        description = data['description'][0]
-        self.vendor = data['vendor'][0]
-        self.operating_system = data['operating_system'][0]
-        self.source_file = source_file_path
-        self.driver = data['driver'][0]
-        self.dest_file = data['dest_file'][0]
-        self.file_system = data['file_system'][0]
-        self.direction = data['direction'][0]
-        for property in ('overwrite_file', 'disable_md5', 'inline_transfer'):
-            setattr(self, property, property in data)
-        super(FileTransferScript, self).__init__(name, description)
-
     def job(self, args):
         task, node, results = args
         try:
@@ -208,17 +187,6 @@ class NetmikoValidationScript(Script):
         'polymorphic_identity': 'netmiko_validation',
     }
 
-    def __init__(self, **data):
-        name = data['name'][0]
-        description = data['description'][0]
-        self.vendor = data['vendor'][0]
-        self.operating_system = data['operating_system'][0]
-        self.driver = data['driver'][0]
-        for i in range(1, 4):
-            for property in ('command', 'pattern'):
-                setattr(self, property + str(i), data[property + str(i)][0])
-        super(NetmikoValidationScript, self).__init__(name, description)
-
     def job(self, args):
         task, node, results = args
         success, outputs = True, {}
@@ -266,15 +234,6 @@ class NapalmConfigScript(Script):
         'polymorphic_identity': 'napalm_config',
     }
 
-    def __init__(self, real_content, **data):
-        name = data['name'][0]
-        description = data['description'][0]
-        super(NapalmConfigScript, self).__init__(name, description)
-        self.vendor = data['vendor'][0]
-        self.operating_system = data['operating_system'][0]
-        self.content = ''.join(real_content)
-        self.action = data['action'][0]
-
     def job(self, args):
         task, node, results = args
         try:
@@ -313,8 +272,8 @@ class NapalmActionScript(Script):
     }
 
     def __init__(self, name, action):
+        self.name = name
         self.action = action
-        super(NapalmActionScript, self).__init__(name)
 
     def job(self, args):
         task, node, results = args
@@ -343,19 +302,11 @@ class NapalmGettersScript(Script):
     __tablename__ = 'NapalmGettersScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_getters',
     }
-
-    def __init__(self, **data):
-        name = data['name'][0]
-        description = data['description'][0]
-        self.getters = data['getters']
-        super(NapalmGettersScript, self).__init__(name, description)
 
     def job(self, args):
         task, node, results = args
@@ -400,16 +351,6 @@ class AnsibleScript(Script):
         'polymorphic_identity': 'ansible_playbook',
     }
 
-    def __init__(self, **data):
-        name = data['name'][0]
-        description = data['description'][0]
-        self.vendor = data['vendor'][0]
-        self.operating_system = data['operating_system'][0]
-        self.playbook_path = data['playbook_path'][0]
-        self.arguments = data['arguments'][0]
-        self.graphical_inventory = 'graphical_inventory' in data
-        super(AnsibleScript, self).__init__(name, description)
-
     def job(self, args):
         _, node, results = args
         arguments = self.arguments.split()
@@ -420,14 +361,11 @@ class AnsibleScript(Script):
         results[node.name] = {'success': True, 'logs': check_output(command + arguments)}
 
 
-
 class RestCallScript(Script):
 
     __tablename__ = 'RestCallScript'
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
@@ -436,38 +374,32 @@ class RestCallScript(Script):
     username = Column(String)
     password = Column(String)
 
+    request_dict = {
+        'GET': rest_get,
+        'POST': rest_post,
+        'PUT': rest_put,
+        'DELETE': rest_delete
+    }
+
     __mapper_args__ = {
         'polymorphic_identity': 'rest_call',
     }
 
-    def __init__(self, **data):
-        name = data['name'][0]
-        description = data['description'][0]
-        self.call_type = data['call_type'][0]
-        self.url = data['url'][0]
-        self.content = data['content'][0]
-        self.payload = loads(data['payload'][0]) if data['payload'][0] else {}
-        self.content_regex = 'content_regex' in data
-        super(RestCallScript, self).__init__(name, description)
-
     def job(self, args):
         _, node, results = args
         try:
-            if self.call_type == 'GET':
-                result = rest_get(
+            if self.call_type in ('GET', 'DELETE'):
+                result = self.request_dict[self.call_type](
                     self.url,
                     headers={'Accept': 'application/json'},
                     auth=HTTPBasicAuth(self.username, self.password)
                 ).json()
             else:
-                result = loads({
-                    'POST': rest_post,
-                    'PUT': rest_put
-                }[self.call_type](
+                result = loads(self.request_dict[self.call_type](
                     self.url,
                     data=dumps(self.payload),
                     auth=HTTPBasicAuth(self.username, self.password)
-                ))
+                ).content)
             print(result)
         except Exception as e:
             result = str(e)
@@ -489,9 +421,8 @@ type_to_class = {
 
 def script_factory(type, **kwargs):
     cls = type_to_class[type]
-    script = get_obj(cls, name=kwargs['name'][0])
-    if not script:
-        script = cls()
+    script = get_obj(cls, name=kwargs['name'][0]) or cls()
+    print(kwargs)
     for property in type_to_properties[type]:
         # type is not in kwargs, we leave it unchanged
         if property not in kwargs:
@@ -500,6 +431,9 @@ def script_factory(type, **kwargs):
         # they yield "y" if checked
         if property in boolean_properties:
             value = property in kwargs
+        elif property in json_properties:
+            str_dict, = kwargs[property]
+            value = loads(str_dict) if str_dict else {}
         # if the property is not a list, we unpack it as it is returned
         # as a singleton in the ImmutableMultiDict
         elif property not in list_properties:
@@ -508,6 +442,7 @@ def script_factory(type, **kwargs):
             value = kwargs[property]
         setattr(script, property, value)
     db.session.commit()
+    return script
 
 
 default_scripts = (

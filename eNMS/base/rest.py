@@ -11,8 +11,8 @@ class RestAutomation(Resource):
 
     def get(self, task_name):
         task = get_obj(Task, name=task_name)
-        task.run(run_now=True)
-        return task.serialized
+        runtime = task.run(run_now=True)
+        return {'task': task.serialized, 'id': runtime}
 
 
 class GetObject(Resource):
@@ -26,17 +26,17 @@ class GetObject(Resource):
         db.session.commit()
         return '{} {} successfully deleted'.format(class_name, object_name)
 
+
 class UpdateObject(Resource):
 
     def post(self, class_name):
         body = request.get_json(force=True, silent=True)
-        print(body)
         factory = class_to_factory[class_name]
         obj = factory(**body)
         return obj.serialized
 
     def put(self, class_name):
-        self.post(class_name)
+        return self.post(class_name)
 
 
 def configure_rest_api(app):

@@ -1,4 +1,5 @@
 script_properties = (
+    'id',
     'name',
     'type',
     'description',
@@ -16,12 +17,14 @@ netmiko_config_properties = script_properties + (
 napalm_config_properties = script_properties + (
     'vendor',
     'operating_system',
-    'content',
+    'action',
+    'content'
 )
 
 file_transfer_properties = script_properties + (
     'vendor',
     'operating_system',
+    'driver',
     'source_file',
     'dest_file',
     'file_system',
@@ -52,17 +55,18 @@ ansible_playbook_properties = script_properties + (
     'operating_system',
     'playbook_path',
     'arguments',
-    'graphical_inventory'
+    'graphical_inventory',
+    'options'
 )
 
 rest_call_properties = script_properties + (
-    'vendor',
-    'operating_system',
     'call_type',
     'url',
     'payload',
     'content',
-    'content_regex'
+    'content_regex',
+    'username',
+    'password'
 )
 
 custom_properties = script_properties + (
@@ -72,6 +76,10 @@ custom_properties = script_properties + (
 
 list_properties = (
     'getters',
+)
+
+json_properties = (
+    'payload',
 )
 
 boolean_properties = (
@@ -84,6 +92,7 @@ boolean_properties = (
 
 type_to_properties = {
     'netmiko_config': netmiko_config_properties,
+    'napalm_action': script_properties,
     'napalm_config': napalm_config_properties,
     'file_transfer': file_transfer_properties,
     'netmiko_validation': netmiko_validation_properties,

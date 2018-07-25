@@ -101,7 +101,7 @@ class NetmikoConfigScript(Script):
             )
             if self.netmiko_type == 'configuration':
                 netmiko_handler.send_config_set(self.content.splitlines())
-                result = 'configuration OK'
+                result = 'configuration OK:\n\n{}'.format(self.content)
             else:
                 # script_type is 'show_commands':
                 outputs = []
@@ -159,7 +159,7 @@ class FileTransferScript(Script):
                 disable_md5=self.disable_md5,
                 inline_transfer=self.inline_transfer
             )
-            result = str(transfer_dict)
+            result = transfer_dict
             success = True
             netmiko_handler.disconnect()
         except Exception as e:
@@ -208,11 +208,10 @@ class NetmikoValidationScript(Script):
                 outputs[command] = result
                 if pattern not in output:
                     success = False
-
         except Exception as e:
             results[node.name] = 'netmiko did not work because of {}'.format(e)
             success = False
-        result = str_dict(outputs)
+        result = outputs
         try:
             netmiko_handler.disconnect()
         except Exception:
@@ -253,7 +252,7 @@ class NapalmConfigScript(Script):
             result = 'napalm config did not work because of {}'.format(e)
             success = False
         else:
-            result = 'configuration OK'
+            result = 'configuration OK:\n\n{}'.format(config)
             success = True
         results[node.name] = {'success': success, 'logs': result}
 
@@ -310,7 +309,7 @@ class NapalmGettersScript(Script):
 
     def job(self, args):
         task, node, results = args
-        dict_result = {}
+        result = {}
         try:
             driver = get_network_driver(node.operating_system)
             napalm_driver = driver(
@@ -322,16 +321,17 @@ class NapalmGettersScript(Script):
             napalm_driver.open()
             for getter in self.getters:
                 try:
-                    dict_result[getter] = str_dict(getattr(napalm_driver, getter)())
+                    result[getter] = getattr(napalm_driver, getter)()
+                    print(result[getter], type(result[getter]))
                 except Exception as e:
-                    dict_result[getter] = '{} could not be retrieve because of {}'.format(getter, e)
+                    result[getter] = '{} could not be retrieve because of {}'.format(getter, e)
             napalm_driver.close()
         except Exception as e:
-            dict_result['error'] = 'getters process did not work because of {}'.format(e)
+            result['error'] = 'getters process did not work because of {}'.format(e)
             success = False
         else:
             success = True
-        result = dict_result
+        print(result)
         results[node.name] = {'success': success, 'logs': result}
 
 
@@ -400,11 +400,9 @@ class RestCallScript(Script):
                     data=dumps(self.payload),
                     auth=HTTPBasicAuth(self.username, self.password)
                 ).content)
-            print(result)
         except Exception as e:
             result = str(e)
-        print(result)
-        results[node.name] = {'success': True, 'logs': str(result)}
+        results[node.name] = {'success': True, 'logs': result}
 
 
 type_to_class = {

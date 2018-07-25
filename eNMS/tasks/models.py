@@ -322,7 +322,6 @@ class InnerTask(Task):
         result = True
         for script in self.scripts:
             for node in self.nodes:
-                print(logs)
                 if not logs[job_time][script.name][node.name]['success']:
                     result = False
         self.result = result

@@ -95,6 +95,7 @@ def get_task(task_id):
 @login_required
 def show_logs(task_id):
     task = get_obj(Task, id=task_id)
+    print(task.logs)
     return jsonify(str_dict(task.logs))
 
 

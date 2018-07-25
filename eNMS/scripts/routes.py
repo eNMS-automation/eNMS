@@ -96,24 +96,24 @@ def delete_object(script_id):
 @login_required
 def create_script(script_type):
     script = get_obj(Script, name=request.form['name'])
-    if script:
+    if not script:
         script_factory(script_type, **request.form)
         db.session.commit()
     elif script_type in ('netmiko_config', 'napalm_config'):
         # retrieve the raw script: we will use it as-is or update it
         # depending on the type of script (jinja2-enabled template or not)
-        real_content = request.form['content']
+        content = request.form['content']
         if request.form['content_type'] != 'simple':
             file = request.files['file']
             filename = secure_filename(file.filename)
             if allowed_file(filename, {'yaml', 'yml'}):
                 parameters = yaml_load(file.read())
-                template = Template(real_content)
-                real_content = template.render(**parameters)
+                template = Template(content)
+                request.form['content'] = ''.join(template.render(**parameters))
         script = {
             'netmiko_config': NetmikoConfigScript,
             'napalm_config': NapalmConfigScript
-        }[script_type](real_content, **request.form)
+        }[script_type](**request.form)
     elif script_type == 'file_transfer':
         source_file_name = request.form['source_file']
         source_file_path = join(current_app.path, 'file_transfer', source_file_name)

@@ -421,7 +421,6 @@ for cls_dict in (node_class, link_class):
     object_class.update(cls_dict)
 
 
-# todo if the type is not the same, delete the object and recreate it
 def object_factory(**kwargs):
     obj_type = kwargs['type']
     cls = Node if obj_type in node_class else Link
@@ -444,9 +443,10 @@ def object_factory(**kwargs):
             destination=destination,
             **kwargs
         )
+        db.session.add(obj)
     else:
         obj = object_class[obj_type](**kwargs)
-    db.session.add(obj)
+        db.session.add(obj)
     db.session.commit()
     return obj
 

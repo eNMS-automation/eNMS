@@ -1,8 +1,14 @@
-from json import loads
+from json import dumps, loads
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
-from requests import get as rest_get
+from requests import (
+    get as rest_get,
+    post as rest_post,
+    put as rest_put,
+    delete as rest_delete
+)
+from requests.auth import HTTPBasicAuth
 from sqlalchemy import (
     Boolean,
     Column,
@@ -87,16 +93,8 @@ class NetmikoConfigScript(Script):
         'polymorphic_identity': 'netmiko_config',
     }
 
-    def __init__(self, real_content, **data):
-        name = data['name'][0]
-        description = data['description'][0]
-        self.vendor = data['vendor'][0]
-        self.operating_system = data['operating_system'][0]
-        self.driver = data['driver'][0]
-        self.global_delay_factor = data['global_delay_factor'][0]
-        self.netmiko_type = data['netmiko_type'][0]
-        super(NetmikoConfigScript, self).__init__(name, description)
-        self.content = ''.join(real_content)
+    def __init__(self):
+        pass
 
     def job(self, args):
         task, node, results = args
@@ -435,6 +433,8 @@ class RestCallScript(Script):
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     content = Column(String)
     content_regex = Column(Boolean)
+    username = Column(String)
+    password = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'rest_call',
@@ -457,8 +457,17 @@ class RestCallScript(Script):
                 result = rest_get(
                     self.url,
                     headers={'Accept': 'application/json'},
-                    auth=('demo', 'demo')
+                    auth=HTTPBasicAuth(self.username, self.password)
                 ).json()
+            else:
+                result = loads({
+                    'POST': rest_post,
+                    'PUT': rest_put
+                }[self.call_type](
+                    self.url,
+                    data=dumps(self.payload),
+                    auth=HTTPBasicAuth(self.username, self.password)
+                ))
             print(result)
         except Exception as e:
             result = str(e)
@@ -481,6 +490,8 @@ type_to_class = {
 def script_factory(type, **kwargs):
     cls = type_to_class[type]
     script = get_obj(cls, name=kwargs['name'][0])
+    if not script:
+        script = cls()
     for property in type_to_properties[type]:
         # type is not in kwargs, we leave it unchanged
         if property not in kwargs:

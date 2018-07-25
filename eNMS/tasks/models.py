@@ -338,7 +338,6 @@ class InnerTask(Task):
         properties = self.properties
         for prop in ('scripts', 'nodes'):
             properties[prop] = [obj.properties for obj in getattr(self, prop)]
-        # properties['parent_workflow'] = self.parent_workflow.properties
         return properties
 
     def task_neighbors(self, type):

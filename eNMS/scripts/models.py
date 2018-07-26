@@ -2,6 +2,7 @@ from json import dumps, loads
 from napalm import get_network_driver
 from netmiko import ConnectHandler, file_transfer
 from passlib.hash import cisco_type7
+from re import search
 from requests import (
     get as rest_get,
     post as rest_post,
@@ -400,9 +401,13 @@ class RestCallScript(Script):
                     data=dumps(self.payload),
                     auth=HTTPBasicAuth(self.username, self.password)
                 ).content)
+            if self.content_regex:
+                success = bool(search(self.content, str(result)))
+            else:
+                success = self.content in str(result)
         except Exception as e:
-            result = str(e)
-        results[node.name] = {'success': True, 'logs': result}
+            result, success = str(e), False
+        results[node.name] = {'success': success, 'logs': result}
 
 
 type_to_class = {

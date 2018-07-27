@@ -9,6 +9,7 @@ def test_selenium(selenium_client):
     for blueprint, pages in urls.items():
         for page in pages:
             selenium_client.get('http://127.0.0.1:5000' + blueprint + page)
+            print(blueprint + page, selenium_client.get_log('browser'))
             for entry in selenium_client.get_log('browser'):
                 print(entry, blueprint, page)
                 assert entry['level'] != 'SEVERE'

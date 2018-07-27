@@ -2,7 +2,7 @@ from tests.test_base import check_blueprints
 from eNMS.objects.models import (
     Antenna,
     get_obj,
-    # Pool,
+    Pool,
     Firewall,
     Host,
     OpticalSwitch,
@@ -17,9 +17,9 @@ from eNMS.objects.models import (
     OpticalLink,
     Pseudowire,
     Node,
-    # node_class,
+    node_class,
     Link,
-    # link_class
+    link_class
 )
 from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
@@ -44,7 +44,6 @@ def define_node(subtype, description):
         ('longitude', '12'),
         ('latitude', '14'),
         ('secret_password', 'secret_password'),
-        ('add_node', '')
     ])
 
 
@@ -57,37 +56,36 @@ def define_link(subtype, source, destination, name):
         ('type', subtype),
         ('source', source),
         ('destination', destination),
-        ('add_link', '')
     ])
 
 
-# def test_manual_object_creation(user_client):
-#     # we create two nodes per type
-#     for subtype in node_class:
-#         for description in ('desc1', 'desc2'):
-#             obj_dict = define_node(subtype, description)
-#             user_client.post('/objects/edit_object', data=obj_dict)
-#     # for each type of link, we select the first 3 nodes in the node row
-#     # and create a link between each pair of nodes (including loopback links)
-#     for subtype in link_class:
-#         nodes = Node.query.all()
-#         for source in nodes[:3]:
-#             for destination in nodes[:3]:
-#                 name = '{}: {} to {}'.format(subtype, source.name, destination.name)
-#                 print(source.name, destination.name)
-#                 obj_dict = define_link(subtype, source.name, destination.name, name)
-#                 user_client.post('/objects/edit_object', data=obj_dict)
-#     # there must be:
-#     for cls in node_class.values():
-#         # - two nodes per type of nodes
-#         assert(len(cls.query.all()) == 2)
-#     # - exactly 16 nodes in total
-#     assert len(Node.query.all()) == 16
-#     for cls in link_class.values():
-#         # - 9 links per type of links (all possible links between 3 nodes)
-#         assert(len(cls.query.all()) == 9)
-#     # - exactly 6*9 = 54 links in total
-#     assert len(Link.query.all()) == 54
+def test_manual_object_creation(user_client):
+    # we create two nodes per type
+    for subtype in node_class:
+        for description in ('desc1', 'desc2'):
+            obj_dict = define_node(subtype, description)
+            user_client.post('/objects/edit_object', data=obj_dict)
+    # for each type of link, we select the first 3 nodes in the node row
+    # and create a link between each pair of nodes (including loopback links)
+    for subtype in link_class:
+        nodes = Node.query.all()
+        for source in nodes[:3]:
+            for destination in nodes[:3]:
+                name = '{}: {} to {}'.format(subtype, source.name, destination.name)
+                print(source.name, destination.name)
+                obj_dict = define_link(subtype, source.id, destination.id, name)
+                user_client.post('/objects/edit_object', data=obj_dict)
+    # there must be:
+    for cls in node_class.values():
+        # - two nodes per type of nodes
+        assert(len(cls.query.all()) == 2)
+    # - exactly 16 nodes in total
+    assert len(Node.query.all()) == 16
+    for cls in link_class.values():
+        # - 9 links per type of links (all possible links between 3 nodes)
+        assert(len(cls.query.all()) == 9)
+    # - exactly 6*9 = 54 links in total
+    assert len(Link.query.all()) == 54
 
 
 def create_from_file(client, file):
@@ -177,9 +175,9 @@ pool2 = ImmutableMultiDict([
 ])
 
 
-# @check_blueprints('', '/objects', '/views')
-# def test_pool_management(user_client):
-#     create_from_file(user_client, 'europe.xls')
-#     user_client.post('/objects/process_pool', data=pool1)
-#     user_client.post('/objects/process_pool', data=pool2)
-#     assert len(Pool.query.all()) == 5
+@check_blueprints('', '/objects', '/views')
+def test_pool_management(user_client):
+    create_from_file(user_client, 'europe.xls')
+    user_client.post('/objects/process_pool', data=pool1)
+    user_client.post('/objects/process_pool', data=pool2)
+    assert len(Pool.query.all()) == 5

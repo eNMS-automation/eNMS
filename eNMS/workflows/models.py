@@ -38,7 +38,7 @@ class WorkflowEdge(CustomBase):
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['WorkflowEdge']}
+        return {p: getattr(self, p) for p in cls_to_properties['WorkflowEdge']}
 
     @property
     def serialized(self):
@@ -75,7 +75,7 @@ class Workflow(CustomBase):
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['Workflow']}
+        return {p: getattr(self, p) for p in cls_to_properties['Workflow']}
 
     @property
     def serialized(self):
@@ -88,27 +88,24 @@ class Workflow(CustomBase):
     def run(self):
         layer, visited = set(), set()
         start_task = get_obj(Task, id=self.start_task)
-        result = True
+        result, workflow_logs = True, {}
         if start_task:
             layer.add(start_task)
         while layer:
             new_layer = set()
-            print(layer)
             for task in layer:
-                print(task)
                 visited.add(task)
                 success = task.run()
-                print(success)
                 if not success:
                     result = False
                 edge_type = 'success' if success else 'failure'
                 for neighbor in task.task_neighbors(edge_type):
-                    print(neighbor, neighbor not in visited)
                     if neighbor not in visited:
                         new_layer.add(neighbor)
+                workflow_logs[task.name] = task.logs
                 sleep(task.waiting_time)
             layer = new_layer
-        return result
+        return result, workflow_logs
 
 
 def workflow_factory(**kwargs):

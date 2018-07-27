@@ -16,7 +16,7 @@ from eNMS.base.properties import (
     type_to_diagram_properties
 )
 from eNMS.objects.models import get_obj
-from eNMS.tasks.models import Task
+from eNMS.tasks.models import ScheduledTask
 
 
 ## Template rendering
@@ -56,7 +56,7 @@ def log_management():
 @login_required
 def log_automation():
     log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.tasks.choices = Task.choices()
+    log_automation_form.tasks.choices = ScheduledTask.choices()
     return render_template(
         'log_automation.html',
         log_automation_form=log_automation_form,
@@ -97,7 +97,7 @@ def get_log_rule(log_rule_id):
 @blueprint.route('/save_log_rule', methods=['POST'])
 @flask_login.login_required
 def save_log_rule():
-    tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
+    tasks = [get_obj(ScheduledTask, id=id) for id in request.form.getlist('tasks')]
     log_rule = log_rule_factory(**request.form.to_dict())
     log_rule.tasks = tasks
     db.session.commit()

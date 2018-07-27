@@ -47,8 +47,7 @@ def script_job(task_name):
 def workflow_job(task_name):
     with scheduler.app.app_context():
         task = get_obj(Task, name=task_name)
-        task.result = task.scheduled_workflow.run()
-        task.logs = {'result': 'go to the workflow editor to see the result'}
+        task.result, task.logs = task.scheduled_workflow.run()
         db.session.commit()
 
 
@@ -212,7 +211,7 @@ class ScheduledScriptTask(ScheduledTask):
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+        return {p: getattr(self, p) for p in cls_to_properties['ScheduledTask']}
 
     @property
     def serialized(self):
@@ -260,14 +259,15 @@ class ScheduledWorkflowTask(ScheduledTask):
             args=[self.name],
             trigger='date'
         )
+        return str(runtime)
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+        return {p: getattr(self, p) for p in cls_to_properties['ScheduledTask']}
 
     @property
     def serialized(self):
-        properties = {p: str(getattr(self, p)) for p in cls_to_properties['ScheduledTask']}
+        properties = {p: getattr(self, p) for p in cls_to_properties['ScheduledTask']}
         # properties['scheduled_workflow'] = self.scheduled_workflow.properties
         return properties
 
@@ -331,7 +331,7 @@ class InnerTask(Task):
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['InnerTask']}
+        return {p: getattr(self, p) for p in cls_to_properties['InnerTask']}
 
     @property
     def serialized(self):

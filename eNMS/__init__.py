@@ -7,7 +7,8 @@ from os import environ
 import logging
 import sys
 
-db = SQLAlchemy()
+# for the tests, we set expire_on_commit to false
+db = SQLAlchemy(session_options={"expire_on_commit": False})
 login_manager = LoginManager()
 scheduler = APScheduler()
 

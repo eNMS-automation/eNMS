@@ -38,7 +38,7 @@ def user_client():
 
 @fixture
 def selenium_client():
-    app = create_app(path, test=True)
+    app = create_app(path, test=True, selenium=True)
     app_context = app.app_context()
     app_context.push()
     db.session.close()

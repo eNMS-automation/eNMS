@@ -2,8 +2,6 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
 
 class Config(object):
-    TESTING = True
-    LOGIN_DISABLED = True
     # SQL Alchemy
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db?check_same_thread=False'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -31,7 +29,15 @@ class DebugConfig(Config):
     SECRET_KEY = 'key'
 
 
+class SeleniumConfig(Config):
+    DEBUG = True
+    TESTING = True
+    LOGIN_DISABLED = True
+    SECRET_KEY = 'key'
+
+
 config_dict = {
     'Production': ProductionConfig,
-    'Debug': DebugConfig
+    'Debug': DebugConfig,
+    'Selenium': SeleniumConfig
 }

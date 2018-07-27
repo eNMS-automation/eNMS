@@ -93,9 +93,12 @@ def configure_logs(app):
     logger.addHandler(logging.StreamHandler())
 
 
-def create_app(path, test=False):
+def create_app(path, test=False, selenium=False):
     app = Flask(__name__, static_folder='base/static')
-    app.config.from_object(config_mode)
+    if selenium:
+        app.config.from_object(config_dict['Selenium'])
+    else:
+        app.config.from_object(config_mode)
     app.path = path
     register_extensions(app, test)
     register_blueprints(app)

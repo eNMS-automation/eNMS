@@ -1,8 +1,6 @@
 from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.helpers import get_obj
-from eNMS.objects.models import Node
 from eNMS.scripts.models import Script
 from eNMS.tasks.models import Task
 

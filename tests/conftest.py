@@ -56,14 +56,16 @@ def selenium_client():
     # if the client cannot start, we don't want to start a Thread as the
     # test execution would be stuck
     if client:
-        Thread(
+        t = Thread(
             target=app.run,
             kwargs={
                 'host': '0.0.0.0',
                 'port': 5000,
                 'use_reloader': False
             }
-        ).start()
+        )
+        t.daemon = True
+        t.start()
         # give the server some time to start
         sleep(1)
         yield client

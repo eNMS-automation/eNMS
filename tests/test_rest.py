@@ -1,7 +1,10 @@
 from json import dumps, loads
 from requests import delete, get, post, put
+from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.objects.models import Node
+from eNMS.scripts.models import Script
+from eNMS.tasks.models import Task
 
 node = {
     "name": "router10",
@@ -68,7 +71,7 @@ updated_response = {
 }
 
 
-def test_rest_api(user_client):
+def tet_rest_api(user_client):
     # POST: object creation
     response = post('http://127.0.0.1:5000/rest/object/node', data=dumps(node))
     assert loads(response.content) == expected_response
@@ -93,3 +96,33 @@ def test_rest_api(user_client):
         headers={'Accept': 'application/json'}
     )
     assert len(Node.query.all()) == 0
+
+
+post_script = ImmutableMultiDict([
+    ('name', 'create_router10'),
+    ('description', 'POST creation'),
+    ('call_type', 'POST'),
+    ('url', 'http://127.0.0.1:5000/rest/object/node'),
+    ('payload', dumps(node)),
+    ('username', ''),
+    ('password', ''),
+    ('content', '.*15.5(\\d)M.*'),
+    ('content_regex', 'y')
+])
+
+post_script_task = ImmutableMultiDict([
+    ('name', 'task_create_router'),
+    ('script_type', 'napalm_action'),
+    ('scripts', '4'),
+    ('start_date', ''),
+    ('end_date', ''),
+    ('frequency', ''),
+    ('run_immediately', 'y')
+])
+
+
+def test_rest_script(user_client):
+    user_client.post('/scripts/create_script_rest_call', data=post_script)
+    assert len(Script.query.all()) == 4
+    user_client.post('/tasks/scheduler/script_task', data=post_script_task)
+    assert len(Task.query.all()) == 1

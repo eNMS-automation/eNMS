@@ -67,6 +67,7 @@ def calendar():
 @blueprint.route('/scheduler/<task_type>/<workflow_id>', methods=['POST'])
 @login_required
 def scheduler(task_type, workflow_id=None):
+    print(request.form)
     data = request.form.to_dict()
     if task_type in ('script_task', 'inner_task'):
         scripts = request.form.getlist('scripts')
@@ -75,7 +76,7 @@ def scheduler(task_type, workflow_id=None):
         data['nodes'] = [get_obj(Node, id=id) for id in nodes]
         for pool_id in request.form.getlist('pools'):
             data['nodes'].extend(get_obj(Pool, id=pool_id).nodes)
-        if not data['nodes']:
+        if data['nodes'] and task_type != 'rest_call':
             return jsonify('no node')
     if task_type in ('workflow_task', 'inner_task'):
         data['workflow'] = get_obj(Workflow, id=workflow_id)

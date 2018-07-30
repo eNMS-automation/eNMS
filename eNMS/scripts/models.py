@@ -64,7 +64,7 @@ class Script(CustomBase):
 
     @property
     def properties(self):
-        return {p: str(getattr(self, p)) for p in type_to_properties[self.type]}
+        return {p: getattr(self, p) for p in type_to_properties[self.type]}
 
     @property
     def serialized(self):
@@ -323,7 +323,6 @@ class NapalmGettersScript(Script):
             for getter in self.getters:
                 try:
                     result[getter] = getattr(napalm_driver, getter)()
-                    print(result[getter], type(result[getter]))
                 except Exception as e:
                     result[getter] = '{} could not be retrieve because of {}'.format(getter, e)
             napalm_driver.close()
@@ -332,7 +331,6 @@ class NapalmGettersScript(Script):
             success = False
         else:
             success = True
-        print(result)
         results[node.name] = {'success': success, 'logs': result}
 
 
@@ -345,21 +343,19 @@ class AnsibleScript(Script):
     operating_system = Column(String)
     playbook_path = Column(String)
     arguments = Column(String)
-    graphical_inventory = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
         'polymorphic_identity': 'ansible_playbook',
     }
 
-    def job(self, args):
-        _, node, results = args
+    def job(self, task, nodes, results):
         arguments = self.arguments.split()
-        command = ['ansible-playbook']
-        if self.graphical_inventory:
-            command.extend(['-i', node.ip_address + ","])
-        command.append(self.playbook_path)
-        results[node.name] = {'success': True, 'logs': check_output(command + arguments)}
+        command = ['ansible-playbook', self.playbook_path]
+        return {
+            'success': True,
+            'logs': check_output(command + arguments)
+        }
 
 
 class RestCallScript(Script):
@@ -386,8 +382,7 @@ class RestCallScript(Script):
         'polymorphic_identity': 'rest_call',
     }
 
-    def job(self, args):
-        _, node, results = args
+    def job(self, task, nodes, results):
         try:
             if self.call_type in ('GET', 'DELETE'):
                 result = self.request_dict[self.call_type](
@@ -407,7 +402,7 @@ class RestCallScript(Script):
                 success = self.content in str(result)
         except Exception as e:
             result, success = str(e), False
-        results = {'success': success, 'logs': result}
+        return {'success': success, 'logs': result}
 
 
 type_to_class = {

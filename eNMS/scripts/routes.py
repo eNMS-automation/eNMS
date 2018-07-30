@@ -53,7 +53,6 @@ def configuration():
 @blueprint.route('/get/<script_type>/<script_id>', methods=['POST'])
 @login_required
 def get_script(script_type, script_id):
-    print(script_type, script_id)
     script = get_obj(Script, id=script_id)
     properties = type_to_properties[script_type]
     script_properties = {

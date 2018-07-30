@@ -21,7 +21,6 @@ node_common_properties = (
 
 task_public_properties = (
     'name',
-    'result',
     'creation_time',
     'creator',
     'recurrent',
@@ -88,7 +87,7 @@ parameters_public_properties = (
 task_serialized_properties = (
     'id',
     'name',
-    'result',
+    'creation_time',
     'status',
     'logs'
 )

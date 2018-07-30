@@ -69,6 +69,6 @@ def selenium_client():
         # give the server some time to start
         sleep(1)
         yield client
-        client.get('http://127.0.0.1:5000/shutdown')
+        client.get('http://0.0.0.0:5000/shutdown')
         client.quit()
     app_context.pop()

@@ -19,35 +19,32 @@ from eNMS.base.helpers import get_obj
 from eNMS.base.properties import cls_to_properties
 
 
-def script_job(task_name):
+def script_job(task_name, runtime=None):
     with scheduler.app.app_context():
-        job_time = str(datetime.now())
+        job_time = runtime if runtime else str(datetime.now())
         task = get_obj(Task, name=task_name)
         logs = deepcopy(task.logs)
         logs[job_time] = {}
-        nodes = task.nodes if task.nodes else ['dummy']
         for script in task.scripts:
             results = {}
-            pool = ThreadPool(processes=len(nodes))
-            args = [(task, node, results) for node in nodes]
-            pool.map(script.job, args)
-            pool.close()
-            pool.join()
+            if task.nodes:
+                pool = ThreadPool(processes=len(task.nodes))
+                args = [(task, node, results) for node in task.nodes]
+                pool.map(script.job, args)
+                pool.close()
+                pool.join()
+            else:
+                results = script.job(task, results)
             logs[job_time][script.name] = results
-        result = True
-        for script in task.scripts:
-            for node in task.nodes:
-                if not logs[job_time][script.name][node.name]:
-                    result = False
-        task.result = result
         task.logs = logs
         db.session.commit()
 
 
-def workflow_job(task_name):
+def workflow_job(task_name, runtime=None):
     with scheduler.app.app_context():
+        job_time = runtime if runtime else str(datetime.now())
         task = get_obj(Task, name=task_name)
-        task.result, task.logs = task.scheduled_workflow.run()
+        task.result, task.logs = task.scheduled_workflow.run(job_time)
         db.session.commit()
 
 
@@ -57,8 +54,8 @@ class Task(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
+    creation_time = Column(String)
     status = Column(String)
-    result = Column(Boolean)
     type = Column(String)
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='tasks')
@@ -73,6 +70,7 @@ class Task(CustomBase):
         self.status = 'active'
         self.name = data['name']
         self.user = data['user']
+        self.creation_time = str(datetime.now())
 
 
 class ScheduledTask(Task):
@@ -82,7 +80,6 @@ class ScheduledTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     recurrent = Column(Boolean, default=False)
     run_immediately = Column(Boolean)
-    creation_time = Column(Integer)
     frequency = Column(String(120))
     start_date = Column(String)
     end_date = Column(String)
@@ -100,7 +97,6 @@ class ScheduledTask(Task):
     def __init__(self, **data):
         self.frequency = data['frequency']
         self.recurrent = bool(self.frequency)
-        self.creation_time = str(datetime.now())
         self.creator = data['user'].name
         self.run_immediately = 'run_immediately' in data
         # if the start date is left empty, we turn the empty string into
@@ -199,12 +195,12 @@ class ScheduledScriptTask(ScheduledTask):
         # execute the job immediately with a date-type job
         # when date is used as a trigger and run_date is left undetermined,
         # the job is executed immediately.
-        run_date = self.start_date or runtime
+        run_date = runtime if run_now else self.start_date
         scheduler.add_job(
             id=str(runtime),
             run_date=run_date,
             func=script_job,
-            args=[self.name],
+            args=[self.name, str(runtime)],
             trigger='date'
         )
         return str(runtime)
@@ -251,12 +247,13 @@ class ScheduledWorkflowTask(ScheduledTask):
         # execute the job immediately with a date-type job
         # when date is used as a trigger and run_date is left undetermined,
         # the job is executed immediately.
-        run_date = self.start_date or runtime
+        print(runtime, run_now)
+        run_date = runtime if run_now else self.start_date
         scheduler.add_job(
-            id=self.creation_time,
+            id=str(runtime),
             run_date=run_date,
             func=workflow_job,
-            args=[self.name],
+            args=[self.name, str(runtime)],
             trigger='date'
         )
         return str(runtime)
@@ -313,21 +310,18 @@ class InnerTask(Task):
         nodes = self.nodes if self.nodes else ['dummy']
         for script in self.scripts:
             results = {}
-            pool = ThreadPool(processes=len(nodes))
-            args = [(self, node, results) for node in nodes]
-            pool.map(script.job, args)
-            pool.close()
-            pool.join()
+            if self.nodes:
+                pool = ThreadPool(processes=len(self.nodes))
+                args = [(self, node, results) for node in self.nodes]
+                pool.map(script.job, args)
+                pool.close()
+                pool.join()
+            else:
+                results = script.job(self, self.nodes, results)
             logs[job_time][script.name] = results
-        result = True
-        for script in self.scripts:
-            for node in self.nodes:
-                if not logs[job_time][script.name][node.name]['success']:
-                    result = False
-        self.result = result
         self.logs = logs
         db.session.commit()
-        return result
+        return results
 
     @property
     def properties(self):

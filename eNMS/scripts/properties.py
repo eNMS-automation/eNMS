@@ -55,7 +55,6 @@ ansible_playbook_properties = script_properties + (
     'operating_system',
     'playbook_path',
     'arguments',
-    'graphical_inventory',
     'options'
 )
 
@@ -86,7 +85,6 @@ boolean_properties = (
     'overwrite_file',
     'disable_md5',
     'inline_transfer',
-    'graphical_inventory',
     'content_regex'
 )
 

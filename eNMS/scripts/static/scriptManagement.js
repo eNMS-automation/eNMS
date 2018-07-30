@@ -65,7 +65,8 @@ function showScriptModal(type, id) {
         if(typeof(value) === "boolean") {
           $(`#${type}-${property}`).prop('checked', value);
         } else {
-          $(`#${type}-${property}`).val(value);
+          var gValue = property == 'payload' ? JSON.stringify(value) : value;
+          $(`#${type}-${property}`).val(gValue);
         }
       }
     }

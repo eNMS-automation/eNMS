@@ -85,10 +85,10 @@ class Workflow(CustomBase):
         properties['edges'] = [edge.serialized for edge in self.edges]
         return properties
 
-    def run(self):
+    def run(self, job_time):
         layer, visited = set(), set()
         start_task = get_obj(Task, id=self.start_task)
-        result, workflow_logs = True, {}
+        result, workflow_logs = True, {job_time: {}}
         if start_task:
             layer.add(start_task)
         while layer:
@@ -102,7 +102,7 @@ class Workflow(CustomBase):
                 for neighbor in task.task_neighbors(edge_type):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
-                workflow_logs[task.name] = task.logs
+                workflow_logs[job_time][task.name] = task.logs
                 sleep(task.waiting_time)
             layer = new_layer
         return result, workflow_logs

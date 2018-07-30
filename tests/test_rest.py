@@ -72,7 +72,7 @@ updated_response = {
 }
 
 
-def tet_rest_api(user_client):
+def rest_api_test(user_client):
     # POST: object creation
     response = post('http://127.0.0.1:5000/rest/object/node', data=dumps(node))
     assert loads(response.content) == expected_response
@@ -144,26 +144,26 @@ delete_script_task = ImmutableMultiDict([
 ])
 
 
-def test_rest_script(user_client):
+def rest_script_test(user_client):
     user_client.post('/scripts/create_script_rest_call', data=post_script)
     assert len(Script.query.all()) == 4
     user_client.post('/tasks/scheduler/script_task', data=post_script_task)
-    response = get(
+    get(
         'http://127.0.0.1:5000/rest/execute_task/task_create_router',
         headers={'Accept': 'application/json'}
     )
     assert len(Task.query.all()) == 1
     # wait a bit for the task to run
-    sleep(20)
+    sleep(10)
     assert len(Node.query.all()) == 1
     user_client.post('/scripts/create_script_rest_call', data=delete_script)
     assert len(Script.query.all()) == 5
     user_client.post('/tasks/scheduler/script_task', data=delete_script_task)
     assert len(Task.query.all()) == 2
-    response = get(
+    get(
         'http://127.0.0.1:5000/rest/execute_task/task_delete_router',
         headers={'Accept': 'application/json'}
     )
     # wait a bit for the task to run
-    sleep(20)
+    sleep(10)
     assert len(Node.query.all()) == 0

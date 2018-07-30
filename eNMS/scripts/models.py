@@ -407,7 +407,7 @@ class RestCallScript(Script):
                 success = self.content in str(result)
         except Exception as e:
             result, success = str(e), False
-        results[node.name] = {'success': success, 'logs': result}
+        results = {'success': success, 'logs': result}
 
 
 type_to_class = {

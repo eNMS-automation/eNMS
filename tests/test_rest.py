@@ -92,6 +92,7 @@ def tet_rest_api(user_client):
     )
     assert loads(response.content) == updated_response
     assert len(Node.query.all()) == 1
+    # DELETE: delete an object
     delete(
         'http://127.0.0.1:5000/rest/object/node/router10',
         headers={'Accept': 'application/json'}
@@ -123,7 +124,7 @@ post_script_task = ImmutableMultiDict([
 
 delete_script = ImmutableMultiDict([
     ('name', 'delete_router10'),
-    ('description', 'POST creation'),
+    ('description', 'DELETE'),
     ('call_type', 'DELETE'),
     ('url', 'http://127.0.0.1:5000/rest/object/node/router10'),
     ('payload', ''),
@@ -142,28 +143,6 @@ delete_script_task = ImmutableMultiDict([
     ('frequency', '')
 ])
 
-get_script = ImmutableMultiDict([
-    ('name', 'create_router10'),
-    ('description', 'POST creation'),
-    ('call_type', 'POST'),
-    ('url', 'http://127.0.0.1:5000/rest/object/node'),
-    ('payload', dumps(node)),
-    ('username', ''),
-    ('password', ''),
-    ('content', '.*15.5(\\d)M.*'),
-    ('content_regex', 'y')
-])
-
-get_script_task = ImmutableMultiDict([
-    ('name', 'task_create_router'),
-    ('script_type', 'napalm_action'),
-    ('scripts', '4'),
-    ('start_date', ''),
-    ('end_date', ''),
-    ('frequency', ''),
-    ('run_immediately', 'y')
-])
-
 
 def test_rest_script(user_client):
     user_client.post('/scripts/create_script_rest_call', data=post_script)
@@ -175,9 +154,16 @@ def test_rest_script(user_client):
     )
     assert len(Task.query.all()) == 1
     # wait a bit for the task to run
-    sleep(10)
+    sleep(20)
     assert len(Node.query.all()) == 1
     user_client.post('/scripts/create_script_rest_call', data=delete_script)
     assert len(Script.query.all()) == 5
     user_client.post('/tasks/scheduler/script_task', data=delete_script_task)
     assert len(Task.query.all()) == 2
+    response = get(
+        'http://127.0.0.1:5000/rest/execute_task/task_delete_router',
+        headers={'Accept': 'application/json'}
+    )
+    # wait a bit for the task to run
+    sleep(20)
+    assert len(Node.query.all()) == 0

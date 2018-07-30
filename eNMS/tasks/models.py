@@ -307,7 +307,6 @@ class InnerTask(Task):
         job_time = str(datetime.now())
         logs = deepcopy(self.logs)
         logs[job_time] = {}
-        nodes = self.nodes if self.nodes else ['dummy']
         for script in self.scripts:
             results = {}
             if self.nodes:

@@ -22,3 +22,11 @@ function exportToGoogleEarth() {
     $("#google-earth").modal('hide');
   }
 }
+
+$('body').contextMenu({
+  menuSelector: '#contextMenu',
+  menuSelected: function (invokedOn, selectedMenu) {
+    var row = selectedMenu.text();
+    action[row]();
+  }
+});

@@ -219,3 +219,11 @@ $('#select-filters').on('change', function() {
     }
   });
 });
+
+$("#logical_view").contextMenu({
+  menuSelector: "#contextMenu",
+  menuSelected: function (invokedOn, selectedMenu) {
+    var row = selectedMenu.text();
+    action[row](selectedNode);
+  }
+});

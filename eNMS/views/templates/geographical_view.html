@@ -55,6 +55,23 @@
   {% include 'gis_modals.html' %}
   {% include 'scheduling_modal.html' %}
   {% include 'object_modals.html' %}
+  <ul id="contextMenu" class="dropdown-menu" role="menu">
+    <li class="node-selection"><a tabindex="-1" href="#">Edit</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Logs</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Compare</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Set as start</a></li>
+    <li class="global"><a tabindex="-1" href="#">Add new task</a></li>
+    <li class="global"><a tabindex="-1" href="#">Add existing task</a></li>
+    <li><a tabindex="-1" href="#">Delete selection</a></li>
+    <li class="dropdown-submenu global">
+      <a class="test" tabindex="-1" href="#">Change mode<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a tabindex="-1" href="#">Create success edge</a></li>
+        <li><a tabindex="-1" href="#">Create failure edge</a></li>
+        <li><a tabindex="-1" href="#">Move nodes</a></li>
+      </ul>
+    </li>
+  </ul>
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -85,6 +102,9 @@
     var parameters = {{ parameters|tojson|safe }};
     var view = '{{ view }}';
   </script>
+  <!-- Base -->
+  <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
+  <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <!-- Task scheduling -->
   <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>

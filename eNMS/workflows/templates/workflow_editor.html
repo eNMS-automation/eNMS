@@ -65,6 +65,9 @@
   <script>
     var workflow = {{ workflow|tojson|safe }};
   </script>
+  <!-- Base -->
+  <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
+  <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <!-- Task management -->
   <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script src="{{ url_for('tasks_blueprint.static', filename='taskCommonFunctions.js') }}"></script>

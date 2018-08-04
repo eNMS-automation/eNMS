@@ -131,7 +131,6 @@ map.on("contextmenu", function(e) {
     }
   selection = [];
   $("#nodes").val(selection);
-  e.preventDefault();
 });
 
 // when a filter is selected, apply it

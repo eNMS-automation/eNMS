@@ -83,7 +83,10 @@ def configure_database(app, test):
         create_default_scripts()
         create_default_pools()
         if not test:
-            create_default_syslog_server()
+            try:
+                create_default_syslog_server()
+            except:
+                pass
         create_custom_scripts()
 
 

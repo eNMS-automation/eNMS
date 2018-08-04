@@ -36,7 +36,8 @@ function editObject(type) {
         if (typeof nodeTable !== 'undefined') {
           addObjectToTable(mode, type, properties);
         }
-        message = `Object ${properties.name} ${mode == 'edit' ? 'edited !' : 'created !'}.`;
+        message = `Object ${properties.name}
+        ${mode == 'edit' ? 'edited' : 'created'}.`;
         alertify.notify(message, 'success', 5);
       }
     });

@@ -117,7 +117,7 @@ function addTaskToWorkflow() {
           saveNode(task);
           alertify.notify(`Task '${task.name}' created.`, 'success', 5);
         } else {
-          alertify.notify(`Task already in workflow.`, 'success', 5);
+          alertify.notify(`Task already in workflow.`, 'error', 5);
         }
       }
     });

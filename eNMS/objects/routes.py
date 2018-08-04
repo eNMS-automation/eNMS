@@ -136,7 +136,6 @@ def pool_management():
 def get_object(obj_type, obj_id):
     cls = Node if obj_type == 'node' else Link
     properties = node_public_properties if cls == Node else link_public_properties
-    print(obj_type, obj_id)
     obj = get_obj(cls, id=obj_id)
     obj_properties = {
         property: str(getattr(obj, property))

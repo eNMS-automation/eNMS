@@ -1,4 +1,5 @@
 function showObjectModal(type, id) {
+  console.log(id);
   $('#title').text(`Edit ${type} properties`);
   $.ajax({
     type: "POST",

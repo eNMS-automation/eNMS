@@ -7,8 +7,8 @@ from eNMS import db
 from eNMS.base.associations import (
     pool_node_table,
     pool_link_table,
-    inner_task_node_table,
-    scheduled_task_node_table
+    task_node_table,
+    task_pool_table
 )
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import get_obj, initialize_properties, integrity_rollback
@@ -60,14 +60,9 @@ class Node(Object):
     longitude = Column(Float)
     latitude = Column(Float)
     secret_password = Column(String)
-    scheduled_tasks = relationship(
-        'ScheduledScriptTask',
-        secondary=scheduled_task_node_table,
-        back_populates='nodes'
-    )
-    inner_tasks = relationship(
-        'InnerTask',
-        secondary=inner_task_node_table,
+    tasks = relationship(
+        'ScriptTask',
+        secondary=task_node_table,
         back_populates='nodes'
     )
     pools = relationship(
@@ -94,7 +89,7 @@ class Node(Object):
     @property
     def serialized(self):
         properties = self.properties
-        for prop in ('scheduled_tasks', 'inner_tasks', 'pools'):
+        for prop in ('tasks', 'pools'):
             properties[prop] = [obj.properties for obj in getattr(self, prop)]
         return properties
 
@@ -416,6 +411,11 @@ class Pool(CustomBase):
     links = relationship(
         'Link',
         secondary=pool_link_table,
+        back_populates='pools'
+    )
+    tasks = relationship(
+        'ScriptTask',
+        secondary=task_pool_table,
         back_populates='pools'
     )
     node_name = Column(String)

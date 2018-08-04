@@ -15,18 +15,50 @@
         width: 1200px;
       }
     }
-
-    #contextMenu {
-      position: absolute;
-      display:none;
-    }
   </style>
 {% endblock stylesheets %}
 
 {% block content %}
-  {% include 'inner_task_scheduling_modal.html' %}
+  {% include 'scheduling_modal.html' %}
   {% include 'task_modals.html' %}
-  {% include 'editor_panels.html' %}
+  {% include 'workflow_editor_modal.html' %}
+  <div class="right_col" role="main">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
+              {{ workflow_editor_form.workflow(id="workflow-name", class="form-control") }}
+            </div>
+            <div id="network" style="height:80vh; width:100%;></div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <ul id="contextMenu" class="dropdown-menu" role="menu">
+    <li class="node-selection"><a tabindex="-1" href="#">Edit</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Logs</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Compare</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Set as start</a></li>
+    <li class="global"><a tabindex="-1" href="#">Add script</a></li>
+    <li class="global"><a tabindex="-1" href="#">Add workflow</a></li>
+    <li class="global"><a tabindex="-1" href="#">Add existing task</a></li>
+    <li class="global"><a tabindex="-1" href="#">Delete selection</a></li>
+    <li class="dropdown-submenu global">
+      <a class="test" tabindex="-1" href="#">Change mode<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a tabindex="-1" href="#">Create success edge</a></li>
+        <li><a tabindex="-1" href="#">Create failure edge</a></li>
+        <li><a tabindex="-1" href="#">Move nodes</a></li>
+      </ul>
+    </li>
+  </ul>
 {% endblock content %}
 
 {% block javascripts %}
@@ -34,10 +66,9 @@
   <script>
     var workflow = {{ workflow|tojson|safe }};
   </script>
-  <!-- Task scheduling -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <!-- Task management -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='taskCommonFunctions.js') }}"></script>
   <!-- Vis JS -->
   <script src="{{ url_for('workflows_blueprint.static', filename='vis/vis.js') }}"></script>
   <script src="{{ url_for('workflows_blueprint.static', filename='workflowEditor.js') }}"></script>

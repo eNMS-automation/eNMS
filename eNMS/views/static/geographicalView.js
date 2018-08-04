@@ -16,7 +16,7 @@ function exportToGoogleEarth() {
       dataType: "json",
       data: $("#google-earth-form").serialize(),
       success: function() {
-        alertify.notify(`Project exported to Google Earth`, 'success', 5);
+        alertify.notify(`Project exported to Google Earth.`, 'success', 5);
       }
     });
     $("#google-earth").modal('hide');

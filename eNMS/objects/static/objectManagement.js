@@ -11,8 +11,10 @@ function addObjectToTable(mode, type, properties) {
     values.push(`${value}`);
   }
   values.push(
-    `<button type="button" class="btn btn-info btn-xs" onclick="showObjectModal('${type}', '${properties.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showObjectModal('${type}', '${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
+    onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`,
   );
   if (mode == 'edit') {
     table.row($(`#${type}-${properties.id}`)).data(values);

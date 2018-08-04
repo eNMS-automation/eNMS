@@ -34,8 +34,7 @@ expected_response = {
     "ip_address": "192.168.1.187",
     "longitude": "4.533886327086546",
     "latitude": "46.386212676269515",
-    "scheduled_tasks": [],
-    "inner_tasks": [],
+    "tasks": [],
     "pools": []
 }
 
@@ -66,8 +65,7 @@ updated_response = {
     "ip_address": "192.168.1.187",
     "longitude": "4.533886327086546",
     "latitude": "46.386212676269515",
-    "scheduled_tasks": [],
-    "inner_tasks": [],
+    "tasks": [],
     "pools": []
 }
 
@@ -114,8 +112,8 @@ post_script = ImmutableMultiDict([
 
 post_script_task = ImmutableMultiDict([
     ('name', 'task_create_router'),
-    ('script_type', 'napalm_action'),
-    ('scripts', '4'),
+    ('waiting_time', '0'),
+    ('job', '4'),
     ('start_date', ''),
     ('end_date', ''),
     ('frequency', ''),
@@ -136,34 +134,35 @@ delete_script = ImmutableMultiDict([
 
 delete_script_task = ImmutableMultiDict([
     ('name', 'task_delete_router'),
-    ('script_type', 'napalm_action'),
-    ('scripts', '5'),
+    ('waiting_time', '0'),
+    ('job', '5'),
     ('start_date', '30/03/2038 19:10:13'),
     ('end_date', ''),
-    ('frequency', '')
+    ('frequency', ''),
+    ('run_immediately', 'y')
 ])
 
 
 def rest_script_test(user_client):
-    user_client.post('/scripts/create_script_rest_call', data=post_script)
+    user_client.post('/scripts/create_script/rest_call', data=post_script)
     assert len(Script.query.all()) == 4
-    user_client.post('/tasks/scheduler/script_task', data=post_script_task)
+    user_client.post('/tasks/scheduler', data=post_script_task)
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_create_router',
         headers={'Accept': 'application/json'}
     )
     assert len(Task.query.all()) == 1
     # wait a bit for the task to run
-    sleep(10)
+    sleep(15)
     assert len(Node.query.all()) == 1
-    user_client.post('/scripts/create_script_rest_call', data=delete_script)
+    user_client.post('/scripts/create_script/rest_call', data=delete_script)
     assert len(Script.query.all()) == 5
-    user_client.post('/tasks/scheduler/script_task', data=delete_script_task)
+    user_client.post('/tasks/scheduler', data=delete_script_task)
     assert len(Task.query.all()) == 2
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_delete_router',
         headers={'Accept': 'application/json'}
     )
     # wait a bit for the task to run
-    sleep(10)
+    sleep(15)
     assert len(Node.query.all()) == 0

@@ -11,7 +11,7 @@ class RestAutomation(Resource):
 
     def get(self, task_name):
         task = get_obj(Task, name=task_name)
-        runtime = task.run(run_now=True)
+        runtime = task.schedule(run_now=True)
         return {'task': task.serialized, 'id': runtime}
 
 

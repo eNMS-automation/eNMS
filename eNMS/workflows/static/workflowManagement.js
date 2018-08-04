@@ -2,37 +2,18 @@
 
 var table = $('#table').DataTable();
 
-function scheduleTask() {
-  if ($("#scheduling-form").parsley().validate()) {
-    $.ajax({
-      type: "POST",
-      url: `/tasks/scheduler/workflow_task/${$("#scheduling").attr("workflowId")}`,
-      dataType: "json",
-      data: $("#scheduling-form").serialize(),
-      success: function(result) {
-        if (result === 'no node') {
-          alertify.notify('No nodes selected.', 'error', 5);
-        } else {
-          alertify.notify(`Task ${result.name} scheduled`, 'success', 5);
-        }
-      }
-    });
-    $("#scheduling").modal('hide');
-  } else {
-    alertify.notify('Some fields are missing', 'error', 5);
-  }
-}
-
 function addWorkflow(mode, properties) {
   var values = [];
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
-    `<button type="button" class="btn btn-info btn-xs" onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-primary btn-xs" onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
-    `<a href="/workflows/workflow_editor/${properties.id}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Manage</a>`,
-    `<button type="button" class="btn btn-danger btn-xs" onclick="deleteWorkflow('${properties.id}')">Delete</button>`
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-primary btn-xs"
+    onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
+    onclick="deleteWorkflow('${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
@@ -50,8 +31,9 @@ function addWorkflow(mode, properties) {
 
 // Scheduling: run a workflow
 
-function showSchedulingModal(id){
-  $('#scheduling').attr('workflowId', `${id}`);
+function showSchedulingModal(id) {
+  $("#job-div").hide()
+  $("#job").val(id);
   $("#scheduling").modal('show');
 }
 
@@ -69,7 +51,7 @@ function showWorkflowModal(id) {
   $('#title').text(`Edit properties`);
   $.ajax({
     type: "POST",
-    url: `/workflows/get_${id}`,
+    url: `/workflows/get/${id}`,
     success: function(properties){
       for (const [property, value] of Object.entries(properties)) {
         $(`#property-${property}`).val(value);
@@ -89,7 +71,8 @@ function editObject() {
       success: function(properties){
         var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
         addWorkflow(mode, properties);
-        message = `Workflow ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
+        message = `Workflow ${properties.name}
+        ${mode == 'edit' ? 'edited' : 'created'}.`;
         alertify.notify(message, 'success', 5);
       }
     });
@@ -104,7 +87,7 @@ function deleteWorkflow(id) {
     url: `/workflows/delete/${id}`,
     success: function(name){
       table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify(`Workflow ${name} deleted`, 'error', 5);
+      alertify.notify(`Workflow '${name}' deleted.`, 'error', 5);
     }
   });
 }

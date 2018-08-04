@@ -29,12 +29,13 @@ function editObject(type) {
       dataType: "json",
       data: $(`#edit-${type}-form`).serialize(),
       success: function(properties) {
-        mode = $('#title').text() == `Edit ${type} properties` ? 'edit' : 'add';
-        // the object can be edited from the views, in which case we don't need to add it to the table
+        mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+        // the object can be edited from the views,
+        // in which case we don't need to add it to the table
         if (typeof nodeTable !== 'undefined') {
           addObjectToTable(mode, type, properties);
         }
-        message = `Object ${properties.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
+        message = `Object ${properties.name} ${mode == 'edit' ? 'edited !' : 'created !'}.`;
         alertify.notify(message, 'success', 5);
       }
     });
@@ -49,7 +50,10 @@ function deleteObject(type, id) {
     success: function(properties){
       var table = type == 'node' ? nodeTable : linkTable
       table.row($(`#${type}-${id}`)).remove().draw(false);
-      alertify.notify(`Object ${properties.name} deleted`, 'error', 5);
+      alertify.notify(
+        `Object '${properties.name}' successfully deleted.`,
+        'error', 5
+    );
     }
   });
 }

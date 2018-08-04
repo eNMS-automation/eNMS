@@ -16,6 +16,7 @@ class SchedulingForm(FlaskForm):
     waiting_time = IntegerField('Waiting time', default=0)
     frequency = TextField('Frequency')
     run_immediately = BooleanField('Run immediately')
+    do_not_run = BooleanField('Do not run', default=True)
     script_type_choices = (
         ('napalm_action', 'NAPALM action'),
         ('netmiko_config', 'Netmiko configuration'),
@@ -29,7 +30,7 @@ class SchedulingForm(FlaskForm):
     script_type = SelectField('Type of script', choices=script_type_choices)
     nodes = SelectMultipleField('', choices=())
     pools = SelectMultipleField('', choices=())
-    scripts = SelectMultipleField('', choices=())
+    job = SelectField('', choices=())
 
 
 class CompareForm(FlaskForm):
@@ -37,7 +38,5 @@ class CompareForm(FlaskForm):
     second_version = SelectField('', choices=())
     first_node = SelectField('', choices=())
     second_node = SelectField('', choices=())
-    first_script = SelectField('', choices=())
-    second_script = SelectField('', choices=())
     unified_diff = TextAreaField('')
     ndiff = TextAreaField('')

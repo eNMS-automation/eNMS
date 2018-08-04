@@ -11,7 +11,7 @@ from eNMS.base.properties import pretty_names, script_public_properties
 from eNMS.objects.models import Node, Pool
 from eNMS.scripts import blueprint
 from eNMS.scripts.helpers import type_to_form, type_to_name
-from eNMS.scripts.models import Script, script_factory, type_to_class
+from eNMS.scripts.models import Job, Script, script_factory, type_to_class
 from eNMS.scripts.properties import type_to_properties
 from eNMS.tasks.forms import SchedulingForm
 
@@ -25,7 +25,7 @@ def scripts():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.nodes.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
-    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.job.choices = Job.choices()
     return render_template(
         'script_management.html',
         fields=script_public_properties,
@@ -62,7 +62,7 @@ def get_script(script_type, script_id):
     return jsonify(script_properties)
 
 
-@blueprint.route('/script_type_<script_type>', methods=['POST'])
+@blueprint.route('/script_type/<script_type>', methods=['POST'])
 @login_required
 def get_script_per_type(script_type):
     return jsonify([{
@@ -71,7 +71,7 @@ def get_script_per_type(script_type):
     } for s in type_to_class[script_type].query.all()])
 
 
-@blueprint.route('/delete_<script_id>', methods=['POST'])
+@blueprint.route('/delete/<script_id>', methods=['POST'])
 @login_required
 def delete_object(script_id):
     script = get_obj(Script, id=script_id)
@@ -80,7 +80,7 @@ def delete_object(script_id):
     return jsonify(script.name)
 
 
-@blueprint.route('/create_script_<script_type>', methods=['POST'])
+@blueprint.route('/create_script/<script_type>', methods=['POST'])
 @login_required
 def create_script(script_type):
     script = get_obj(Script, name=request.form['name'])

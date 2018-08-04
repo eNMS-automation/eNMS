@@ -1,4 +1,7 @@
-var map = L.map('mapid').setView([parameters.default_latitude, parameters.default_longitude], parameters.default_zoom_level);
+var map = L.map('mapid').setView(
+  [parameters.default_latitude, parameters.default_longitude],
+  parameters.default_zoom_level
+);
 var osm_layer = L.tileLayer(layers['osm']);
 map.addLayer(osm_layer);
 var current_layer = osm_layer;
@@ -15,15 +18,15 @@ function switch_layer(layer){
 for (var i = 0; i < subtypes.length; i++) {
   window[`icon_${subtypes[i]}`] = L.icon({
     iconUrl: `static/images/default/${subtypes[i].toLowerCase()}.gif`,
-    iconSize: [18, 12], // size of the icon
-    iconAnchor: [9, 6], // point of the icon which will correspond to marker's location
-    popupAnchor: [8, -5] // point from which the popup should open relative to the iconAnchor
+    iconSize: [18, 12],
+    iconAnchor: [9, 6],
+    popupAnchor: [8, -5]
     });
   window[`icon_selected_${subtypes[i]}`] = L.icon({
   iconUrl: `static/images/selected/${subtypes[i].toLowerCase()}.gif`,
-  iconSize: [18, 12], // size of the icon
-  iconAnchor: [9, 6], // point of the icon which will correspond to marker's location
-  popupAnchor: [8, -5] // point from which the popup should open relative to the iconAnchor
+  iconSize: [18, 12],
+  iconAnchor: [9, 6],
+  popupAnchor: [8, -5]
   });
 }
 
@@ -76,8 +79,14 @@ for (var i = 0; i < nodes.length; i++) {
 
 for (var i = 0; i < links.length; i++) {
   var link = links[i]
-  var pointA = new L.LatLng(link.source_properties.latitude, link.source_properties.longitude);
-  var pointB = new L.LatLng(link.destination_properties.latitude, link.destination_properties.longitude);
+  var pointA = new L.LatLng(
+    link.source_properties.latitude,
+    link.source_properties.longitude
+  );
+  var pointB = new L.LatLng(
+    link.destination_properties.latitude,
+    link.destination_properties.longitude
+  );
   var pointList = [pointA, pointB];
 
   var polyline = new L.PolylineClusterable(pointList, {
@@ -148,7 +157,7 @@ $('#select-filters').on('change', function() {
           polyline_array[i].removeFrom(map);
         }
       }
-      alertify.notify(`Filter applied`, 'success', 5);
+      alertify.notify('Filter applied.', 'success', 5);
     }
   });
 });

@@ -69,7 +69,12 @@ var startSelection = function(start) {
 };
 
 var moveSelection = function(start, moved) {
-  selection.attr("d", rect(start[0], start[1], moved[0] - start[0], moved[1] - start[1]));
+  selection.attr("d", rect(
+    start[0],
+    start[1],
+    moved[0] - start[0],
+    moved[1] - start[1]
+  ));
 };
 
 var endSelection = function(start, end) {
@@ -165,7 +170,10 @@ var node = container.selectAll(".node")
   .on("dblclick", showNodeProperties);
 
 function zoomed() {
-  container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  container.attr(
+    "transform",
+    "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"
+  );
 }
 
 var images = node.append("image")
@@ -186,7 +194,9 @@ force.on("tick", function() {
     .attr("y1", function(d) { return d.source.y; })
     .attr("x2", function(d) { return d.target.x; })
     .attr("y2", function(d) { return d.target.y; });
-  node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  node.attr("transform", function(d) {
+    return "translate(" + d.x + "," + d.y + ")";
+  });
 });
 
 // when a filter is selected, apply it
@@ -205,7 +215,7 @@ $('#select-filters').on('change', function() {
       link.style("visibility", function(d) {  
         return links_id.includes(d.real_id.toString()) ? "visible" : "hidden";
       });
-      alertify.notify(`Filter applied`, 'success', 5);
+      alertify.notify(`Filter applied.`, 'success', 5);
     }
   });
 });

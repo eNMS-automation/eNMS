@@ -36,7 +36,7 @@ var dsoptions = {
 var selectedNode = null;
 
 function displayWorkflow(wf) {
-  nodes = new vis.DataSet(wf.inner_tasks.map(taskToNode));
+  nodes = new vis.DataSet(wf.tasks.map(taskToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   data = {nodes: nodes, edges: edges};
   graph = new vis.Network(container, data, dsoptions);
@@ -45,7 +45,12 @@ function displayWorkflow(wf) {
     properties.event.preventDefault()
     node = this.getNodeAt(properties.pointer.DOM);
     if(typeof node !== "undefined") {
+      $('.node-selection').show();
+      $('.global').hide();
       selectedNode = node;
+    } else {
+      $('.global').show();
+      $('.node-selection').hide();
     }
   });
   nodes.map(n => graph.moveNode(n.id, n.x, n.y));
@@ -63,39 +68,61 @@ if (workflow) {
       workflow = wf;
       graph = displayWorkflow(wf)
       nodes.map(n => graph.moveNode(n.id, n.x, n.y));
-      
     }
   });
 }
 
 function scheduleTask() {
   if (!workflow) {
-    alertify.notify("You must create a workflow in the 'Workflow management' page first.", 'error', 5); 
+    alertify.notify(`You must create a workflow in the
+    'Workflow management' page first.`, 'error', 5); 
   }
   if ($("#scheduling-form").parsley().validate()) {
     $.ajax({
       type: "POST",
-      url: `/tasks/scheduler/inner_task/${workflow.id}`,
+      url: `/tasks/scheduler/${workflow.id}`,
       dataType: "json",
-      data: $("#scheduling-form").serialize(),
+      data: $('#scheduling-form').serialize(),
       success: function(result) {
-        if (result === 'no node') {
-          alertify.notify('No nodes selected.', 'error', 5);
+        $("#scheduling").modal('hide');
+        if (graph.findNode(result.id).length == 0) {
+          nodes.add(taskToNode(result));
+          saveNode(result);
+          alertify.notify(`Task '${result.name}' created.`, 'success', 5);
         } else {
-          $("#scheduling").modal('hide');
-          console.log(graph.findNode(result.id));
-          if (graph.findNode(result.id).length == 0) {
-            nodes.add(taskToNode(result));
-            saveNode(result);
-            alertify.notify(`Task '${result.name}' created.`, 'success', 5);
-          } else {
-            alertify.notify(`Task '${result.name}' edited.`, 'success', 5);
-          }
+          alertify.notify(`Task '${result.name}' edited.`, 'success', 5);
         }
       }
     });
   } else {
-    alertify.notify('Some fields are missing', 'error', 5);
+    alertify.notify('Some fields are missing.', 'error', 5);
+  }
+}
+
+function addTaskToWorkflow() {
+  if (!workflow) {
+    alertify.notify(`You must create a workflow in the
+    'Workflow management' page first.`, 'error', 5); 
+  }
+  if ($("#add-existing-task").parsley().validate()) {
+    $.ajax({
+      type: "POST",
+      url: `/tasks/add_to_workflow/${workflow.id}`,
+      dataType: "json",
+      data: $('#add-existing-task-form').serialize(),
+      success: function(task) {
+        $("#add-existing-task").modal('hide');
+        if (graph.findNode(task.id).length == 0) {
+          nodes.add(taskToNode(task));
+          saveNode(task);
+          alertify.notify(`Task '${task.name}' created.`, 'success', 5);
+        } else {
+          alertify.notify(`Task already in workflow.`, 'success', 5);
+        }
+      }
+    });
+  } else {
+    alertify.notify('Some fields are missing.', 'error', 5);
   }
 }
 
@@ -104,7 +131,7 @@ function saveNode(task) {
     type: "POST",
     url: `/workflows/add_node/${workflow.id}/${task.id}`,
     success: function(task) {
-      alertify.notify("Task added to the workflow", 'success', 5);
+      alertify.notify(`Task '${task.name}' added to the workflow.`, 'success', 5);
     }
   });
 }
@@ -114,7 +141,7 @@ function deleteNode(id) {
     type: "POST",
     url: `/workflows/delete_node/${workflow.id}/${id}`,
     success: function(task) {
-      alertify.notify("Task delete from the workflow", 'success', 5);
+      alertify.notify(`Task '${task.name}' deleted from the workflow.`, 'success', 5);
     }
   });
 }
@@ -124,7 +151,7 @@ function saveEdge(edge) {
     type: "POST",
     url: `/workflows/add_edge/${workflow.id}/${edge.type}/${edge.from}/${edge.to}`,
     success: function(edge) {
-      alertify.notify("Edge added to the workflow", 'success', 5);
+      alertify.notify('Edge added to the workflow', 'success', 5);
       edges.add(edgeToEdge(edge));
     }
   });
@@ -136,7 +163,7 @@ function deleteEdge(edgeId) {
     type: "POST",
     url: `/workflows/delete_edge/${workflow.id}/${edgeId}`,
     success: function(edge) {
-      alertify.notify("Edge deleted the workflow", 'success', 5);
+      alertify.notify('Edge deleted the workflow', 'success', 5);
     }
   });
 }
@@ -164,14 +191,14 @@ function edgeToEdge(edge) {
   };
 }
 
-function showModal(modal_name){
-  $(`#${modal_name}`).modal('show');
+function showSchedulingModal(){
+  $('#scheduling').modal('show');
 }
 
 function startScript() {
   start = nodes.get(graph.getSelectedNodes()[0]);
   if (start.length == 0 || !start.id) {
-    alertify.notify("You must select a script first.", 'error', 5);
+    alertify.notify('You must select a script first.', 'error', 5);
   } else {
     if (workflow.start_task != 'None') {
       nodes.update({id: workflow.start_task, color: "#D2E5FF"});
@@ -182,10 +209,10 @@ function startScript() {
       success: function() {
         nodes.update({id: start.id, color: "green"});
         workflow.start_task = start.id
-        alertify.notify("Start script updated", 'success', 5);
+        alertify.notify('Start script updated.', 'success', 5);
       }
     });
-    alertify.notify(`Task ${start.label} set as start`, 'success', 5);
+    alertify.notify(`Task ${start.label} set as start.`, 'success', 5);
   }
 }
 
@@ -196,15 +223,16 @@ function deleteSelection() {
 }
 
 function switchMode(mode) {
-  console.log(mode);
   if (mode == "success" || mode == "failure") {
     edge_type = mode;
     graph.addEdgeMode();
-    alertify.notify(`Mode: creation of ${mode} edge`, 'success', 5);
+    alertify.notify(`Mode: creation of ${mode} edge.`, 'success', 5);
   } else {
     graph.addNodeMode();
-    alertify.notify("Mode: node motion", 'success', 5);
+    alertify.notify('Mode: node motion.', 'success', 5);
   }
+  // close the bootstrap submenu for layers
+  $('.dropdown-submenu a.test').next('ul').toggle();
 }
 
 function runWorkflow() {
@@ -213,7 +241,7 @@ function runWorkflow() {
     url: `/workflows/run_${workflow.id}`,
     contentType: 'application/json;charset=UTF-8',
     success: function(){
-      alertify.notify("Workflow successfully started", 'success', 5);
+      alertify.notify('Workflow successfully started.', 'success', 5);
     }
   });
 }
@@ -227,7 +255,6 @@ function showTaskModal(id) {
       for (var [property, value] of Object.entries(task)) {
         if ($(`#${property}`).length) {
           input = Array.isArray(value) ? value.map(s => s.id) : value
-          console.log(input);
           $(`#${property}`).val(input);
         }
       }
@@ -245,7 +272,7 @@ $('#workflow-name').on('change', function() {
     success: function(wf) {
       workflow = wf;
       graph = displayWorkflow(wf);
-      alertify.notify(`Workflow '${workflow.name}' displayed`, 'success', 5);
+      alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
     }
   });
 });
@@ -306,11 +333,32 @@ function savePositions() {
   };
 })(jQuery, window);
 
+function partial(func) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return function() {
+    var allArguments = args.concat(Array.prototype.slice.call(arguments));
+    return func.apply(this, allArguments);
+  };
+}
+
 var action = {
   'Edit': showTaskModal,
   'Logs': showTaskLogs,
-  'Compare': compareTaskLogs
+  'Compare': compareTaskLogs,
+  'Set as start': startScript,
+  'Add new task': showSchedulingModal,
+  'Add existing task': partial(showModal, 'add-existing-task'),
+  'Delete selection': deleteSelection,
+  'Create success edge': partial(switchMode, 'success'),
+  'Create failure edge': partial(switchMode, 'failure'),
+  'Move nodes': partial(switchMode, 'node')
 }
+
+$('.dropdown-submenu a.test').on("click", function(e){
+  $(this).next('ul').toggle();
+  e.stopPropagation();
+  e.preventDefault();
+});
 
 $("#network").contextMenu({
   menuSelector: "#contextMenu",

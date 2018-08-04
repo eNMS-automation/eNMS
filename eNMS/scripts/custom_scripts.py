@@ -1,7 +1,7 @@
 from nornir.core import Nornir
 from nornir.core.inventory import Inventory
 from nornir.plugins.tasks import networking
-from sqlalchemy import Column, exc, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, exc, ForeignKey, Integer, String
 
 from eNMS import db
 from eNMS.scripts.models import Script, type_to_class
@@ -15,6 +15,7 @@ class CustomScript(Script):
     job_name = Column(String)
     vendor = Column(String)
     operating_system = Column(String)
+    node_multiprocessing = Column(Boolean, default=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'custom_script',
@@ -22,6 +23,7 @@ class CustomScript(Script):
 
     def __init__(self, **kwargs):
         self.__dict__.update(**kwargs)
+        print(self.__dict__)
 
     def job(self, args):
         globals()[self.job_name](args)
@@ -41,6 +43,7 @@ def job_example(args):
 
 example_parameters = {
     'name': 'script that does nothing',
+    'node_multiprocessing': True,
     'description': 'does nothing',
     'vendor': 'none',
     'operating_system': 'all',
@@ -63,6 +66,7 @@ def nornir_ping_job(args):
 
 nornir_ping_parameters = {
     'name': 'nornir ping 23 443',
+    'node_multiprocessing': True,
     'description': 'Uses Nornir to ping',
     'vendor': 'none',
     'operating_system': 'all',

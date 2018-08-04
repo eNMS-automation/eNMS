@@ -7,9 +7,12 @@ function addPool(mode, properties) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
-    `<button type="button" class="btn btn-info btn-xs" onclick="showPoolModal('${properties.id}')">Edit properties</button>`,
-    `<button type="button" class="btn btn-info btn-xs" onclick="showPoolObjects('${properties.id}')">Edit objects</button>`,
-    `<button type="button" class="btn btn-danger btn-xs" onclick="deletePool('${properties.id}')">Delete</button>`
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showPoolModal('${properties.id}')">Edit properties</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showPoolObjects('${properties.id}')">Edit objects</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
+    onclick="deletePool('${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
@@ -54,7 +57,6 @@ function showPoolObjects(id) {
     type: "POST",
     url: `/objects/get_pool_objects/${id}`,
     success: function(properties){
-      console.log(properties);
       $('#nodes').val(properties.nodes.map(n => n.id));
       $('#links').val(properties.links.map(l => l.id));
       poolId = id;
@@ -70,7 +72,7 @@ function savePoolObjects() {
     dataType: "json",
     data: $('#pool-objects-form').serialize(),
     success: function(){
-      alertify.notify('Changes saved', 'success', 5);
+      alertify.notify('Changes saved.', 'success', 5);
     }
   });
   $("#edit-pool-objects").modal('hide');
@@ -84,9 +86,10 @@ function savePool() {
       dataType: "json",
       data: $('#edit-form').serialize(),
       success: function(pool){
-        var mode = $('#title').text() == 'Edit pool properties' ? 'edit' : 'add';
+        var mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
         addPool(mode, pool)
-        message = `Pool ${pool.name} ` + (mode == 'edit' ? 'edited !' : 'created !');
+        message = `Pool '${pool.name}'
+        ${mode == 'edit' ? 'edited !' : 'created !'}.`;
         alertify.notify(message, 'success', 5);
       }
     });
@@ -100,7 +103,7 @@ function deletePool(id) {
     url: `/objects/delete_pool/${id}`,
     success: function(name){
       table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify(`Pool ${name} deleted`, 'error', 5);
+      alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
     }
   });
 }
@@ -110,7 +113,7 @@ function updatePools(id) {
     type: "POST",
     url: "/objects/update_pools",
     success: function(properties){
-      alertify.notify('Pools updated', 'success', 5);
+      alertify.notify('Pools successfully updated.', 'success', 5);
     }
   });
 }

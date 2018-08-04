@@ -46,7 +46,6 @@ for (var i = 0; i < links.length; i++) {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  var filterName = this.value;
   $.ajax({
     type: "POST",
     url: `/objects/pool_objects/${this.value}`,
@@ -92,7 +91,7 @@ $('#select-filters').on('change', function() {
         polygonSD.link_id = polygonDS.link_id = obj_id;
         polyline_array.push(polygonSD, polygonDS);
       }
-      alertify.notify(`Filter '${filterName}' applied`, 'success', 5);
+      alertify.notify('Filter applied.', 'success', 5);
     }
   });
 });

@@ -22,8 +22,6 @@ node_common_properties = (
 task_public_properties = (
     'name',
     'creation_time',
-    'creator',
-    'recurrent',
     'frequency',
     'status'
 )
@@ -89,20 +87,13 @@ task_serialized_properties = (
     'name',
     'creation_time',
     'status',
-    'logs'
-)
-
-scheduled_task_serialized_properties = task_serialized_properties + (
+    'logs',
     'start_date',
     'end_date',
     'frequency',
-    'creator'
-)
-
-inner_task_serialized_properties = task_serialized_properties + (
     'x',
     'y',
-    'waiting_time'
+    'waiting_time',
 )
 
 public_properties = (
@@ -121,8 +112,7 @@ cls_to_properties = {
     'User': ('id',) + user_public_properties,
     'Log': ('id',) + log_public_properties,
     'LogRule': ('id',) + log_rule_public_properties,
-    'ScheduledTask': scheduled_task_serialized_properties,
-    'InnerTask': inner_task_serialized_properties
+    'Task': task_serialized_properties
 }
 
 type_to_public_properties = OrderedDict([

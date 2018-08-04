@@ -23,7 +23,7 @@
         <!-- Alertify -->
         <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
-        <!-- Custom Theme Style -->
+        <!-- eNMS -->
         <link href="{{ url_for('static', filename='enms/enms.min.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
 
@@ -73,9 +73,11 @@
         <script src="{{ url_for('static', filename='smart-wizard/js/jquery.smartWizard.js') }}"></script>
         <!-- Bootstrap Datetimepicker -->
         <script src="{{ url_for('static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
       {% endblock %}
-      <!-- Custom Theme Scripts -->
+      <!-- eNMS -->
       <script src="{{ url_for('static', filename='enms/enms.js') }}"></script>
+      
     {% endblock body %}
   </body>
 </html>

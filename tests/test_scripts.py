@@ -109,15 +109,15 @@ file_transfer_script = ImmutableMultiDict([
 
 @check_blueprints('/scripts')
 def test_base_scripts(user_client):
-    user_client.post('/scripts/create_script_netmiko_config', data=netmiko_ping)
+    user_client.post('/scripts/create_script/netmiko_config', data=netmiko_ping)
     assert len(NetmikoConfigScript.query.all()) == 1
     path_yaml = join(user_client.application.path, 'scripts', 'interfaces', 'parameters.yaml')
     with open(path_yaml, 'rb') as f:
         netmiko_jinja2_script['file'] = f
-        user_client.post('/scripts/create_script_netmiko_config', data=netmiko_jinja2_script)
+        user_client.post('/scripts/create_script/netmiko_config', data=netmiko_jinja2_script)
     with open(path_yaml, 'rb') as f:
         napalm_jinja2_script['file'] = f
-        user_client.post('/scripts/create_script_napalm_config', data=napalm_jinja2_script)
+        user_client.post('/scripts/create_script/napalm_config', data=napalm_jinja2_script)
     assert len(NapalmConfigScript.query.all()) == 1
     assert len(Script.query.all()) == 6
     netmiko_j2_script = db.session.query(Script).filter_by(name='netmiko_subif').first()
@@ -127,7 +127,7 @@ def test_base_scripts(user_client):
     assert set(netmiko_j2_script.content.split('\n')) == set(result.split('\n'))
     assert set(napalm_j2_script.content.split('\n')) == set(result.split('\n'))
     ## file transfer script
-    user_client.post('scripts/create_script_file_transfer', data=file_transfer_script)
+    user_client.post('scripts/create_script/file_transfer', data=file_transfer_script)
     assert len(FileTransferScript.query.all()) == 1
     assert len(Script.query.all()) == 7
 
@@ -147,7 +147,7 @@ getters_dict = ImmutableMultiDict([
 
 @check_blueprints('/scripts')
 def test_getters_script(user_client):
-    user_client.post('/scripts/create_script_napalm_getters', data=getters_dict)
+    user_client.post('/scripts/create_script/napalm_getters', data=getters_dict)
     assert len(NapalmGettersScript.query.all()) == 1
 
 
@@ -166,6 +166,6 @@ ansible_script = ImmutableMultiDict([
 
 @check_blueprints('/scripts')
 def test_ansible_scripts(user_client):
-    user_client.post('/scripts/create_script_ansible_playbook', data=ansible_script)
+    user_client.post('/scripts/create_script/ansible_playbook', data=ansible_script)
     assert len(AnsibleScript.query.all()) == 1
     assert len(Script.query.all()) == 4

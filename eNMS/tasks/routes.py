@@ -8,9 +8,9 @@ from eNMS.base.helpers import get_obj, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
-from eNMS.tasks.models import ScheduledTask, Task, task_factory
+from eNMS.tasks.models import Task, task_factory
 from eNMS.objects.models import Pool, Node
-from eNMS.scripts.models import Script
+from eNMS.scripts.models import Job
 from eNMS.workflows.models import Workflow
 
 
@@ -21,11 +21,13 @@ from eNMS.workflows.models import Workflow
 @login_required
 def task_management():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.nodes.choices = Node.choices()
+    scheduling_form.pools.choices = Pool.choices()
+    scheduling_form.job.choices = Job.choices()
     return render_template(
         'task_management.html',
         fields=task_public_properties,
-        tasks=ScheduledTask.serialize(),
+        tasks=Task.serialize(),
         compare_form=CompareForm(request.form),
         scheduling_form=scheduling_form
     )
@@ -35,9 +37,9 @@ def task_management():
 @login_required
 def calendar():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.job.choices = Job.choices()
     tasks = {}
-    for task in ScheduledTask.query.all():
+    for task in Task.query.all():
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar
@@ -63,23 +65,29 @@ def calendar():
 ## AJAX calls
 
 
-@blueprint.route('/scheduler/<task_type>', methods=['POST'])
-@blueprint.route('/scheduler/<task_type>/<workflow_id>', methods=['POST'])
+@blueprint.route('/scheduler', methods=['POST'])
+@blueprint.route('/scheduler/<workflow_id>', methods=['POST'])
 @login_required
-def scheduler(task_type, workflow_id=None):
+def scheduler(workflow_id=None):
     print(request.form)
     data = request.form.to_dict()
-    if task_type in ('script_task', 'inner_task'):
-        scripts = request.form.getlist('scripts')
-        nodes = request.form.getlist('nodes')
-        data['scripts'] = [get_obj(Script, id=id) for id in scripts]
-        data['nodes'] = [get_obj(Node, id=id) for id in nodes]
-        for pool_id in request.form.getlist('pools'):
-            data['nodes'].extend(get_obj(Pool, id=pool_id).nodes)
-    if task_type in ('workflow_task', 'inner_task'):
-        data['workflow'] = get_obj(Workflow, id=workflow_id)
+    data['job'] = get_obj(Job, id=data['job'])
+    data['nodes'] = [get_obj(Node, id=id) for id in request.form.getlist('nodes')]
+    data['pools'] = [get_obj(Pool, id=id) for id in request.form.getlist('pools')]
+    data['workflow'] = get_obj(Workflow, id=workflow_id)
     data['user'] = current_user
-    task = task_factory(task_type, **data)
+    task = task_factory(**data)
+    return jsonify(task.serialized)
+
+
+@blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
+@login_required
+def add_to_workflow(workflow_id):
+    print(request.form)
+    workflow = get_obj(Workflow, id=workflow_id)
+    task = get_obj(Task, id=request.form['task'])
+    task.workflows.append(workflow)
+    db.session.commit()
     return jsonify(task.serialized)
 
 
@@ -94,22 +102,17 @@ def get_task(task_id):
 @login_required
 def show_logs(task_id):
     task = get_obj(Task, id=task_id)
-    print(task.logs)
     return jsonify(str_dict(task.logs))
 
 
-@blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>/<s1>/<s2>', methods=['POST'])
+@blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])
 @login_required
-def get_diff(task_id, v1, v2, n1, n2, s1, s2):
+def get_diff(task_id, v1, v2, n1, n2):
     task = get_obj(Task, id=task_id)
-    first = str_dict(task.logs[v1][s1][n1]).splitlines()
-    second = str_dict(task.logs[v2][s2][n2]).splitlines()
+    first = str_dict(task.logs[v1][n1]).splitlines()
+    second = str_dict(task.logs[v2][n2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
-    return jsonify({
-        'first': first,
-        'second': second,
-        'opcodes': opcodes,
-    })
+    return jsonify({'first': first, 'second': second, 'opcodes': opcodes})
 
 
 @blueprint.route('/compare_logs/<task_id>', methods=['POST'])
@@ -118,7 +121,6 @@ def compare_logs(task_id):
     task = get_obj(Task, id=task_id)
     results = {
         'nodes': [node.name for node in task.nodes],
-        'scripts': [script.name for script in task.scripts],
         'versions': list(task.logs)
     }
     return jsonify(results)
@@ -128,7 +130,7 @@ def compare_logs(task_id):
 @login_required
 def run_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
-    task.run()
+    task.schedule(run_now=True)
     return jsonify(task.serialized)
 
 

@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 
 from eNMS import db
-from eNMS.base.associations import scheduled_task_log_rule_table
+from eNMS.base.associations import task_log_rule_table
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import get_obj
 
@@ -45,8 +45,8 @@ class LogRule(CustomBase):
     content = Column(String)
     contentregex = Column(Boolean)
     tasks = relationship(
-        'ScheduledTask',
-        secondary=scheduled_task_log_rule_table,
+        'Task',
+        secondary=task_log_rule_table,
         back_populates='log_rules'
     )
 

@@ -17,7 +17,9 @@
   };
 
   // smartresize 
-  jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+  jQuery.fn[sr] = function(fn){
+    return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr);
+  };
 })(jQuery,'smartresize');
 
 var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],

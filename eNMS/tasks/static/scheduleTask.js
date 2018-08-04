@@ -14,7 +14,7 @@ for (var i = 0; i < dates.length; i++) {
   }
 }
 
-function openWizard(){
+function openWizard() {
   $('#wizard').smartWizard({
     onFinish: scheduleTask,
     enableFinishButton: true,
@@ -28,13 +28,30 @@ function openWizard(){
 $('#script_type').on('change', function() {
   $.ajax({
     type: "POST",
-    url: `/scripts/script_type_${this.value}`,
+    url: `/scripts/script_type/${this.value}`,
     dataType: "json",
     success: function(scripts){
-      $("#scripts").empty();
+      $("#script").empty();
       $.each(scripts, function(_, s) {
-        $("#scripts").append(`<option value="${s.id}">${s.name}</option>`);
+        $("#script").append(`<option value="${s.id}">${s.name}</option>`);
       });
     }
   });
 });
+
+function scheduleTask() {
+  if ($("#scheduling-form").parsley().validate()) {
+    $.ajax({
+      type: "POST",
+      url: '/tasks/scheduler',
+      dataType: "json",
+      data: $("#scheduling-form").serialize(),
+      success: function(result) {
+        alertify.notify(`Task '${result.name}' scheduled.`, 'success', 5);
+      }
+    });
+    $("#scheduling").modal('hide');
+  } else {
+    alertify.notify('Some fields are missing.', 'error', 5);
+  }
+}

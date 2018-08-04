@@ -3,7 +3,7 @@ function createScript(type) {
     var formData = new FormData($(`#${type}-form`)[0]);
     $.ajax({
     type: "POST",
-    url: `/scripts/create_script_${type}`,
+    url: `/scripts/create_script/${type}`,
     dataType: "json",
     data: formData,
     contentType: false,
@@ -11,7 +11,7 @@ function createScript(type) {
     processData: false,
     async: false,
     success: function(script) {
-      alertify.notify(`Script '${script.name}' created`, 'success', 5);
+      alertify.notify(`Script '${script.name}' created.`, 'success', 5);
     }
     });
   }

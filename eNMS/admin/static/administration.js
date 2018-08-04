@@ -5,7 +5,7 @@ function saveTacacsServer() {
       url: "/admin/save_tacacs_server",
       data: $('#tacacs_form').serialize(),
       success: function() {
-        alertify.notify(`Tacacs server saved`, 'success', 5);
+        alertify.notify(`Tacacs server saved.`, 'success', 5);
       }
     });
   }
@@ -18,7 +18,7 @@ function saveSyslogServer() {
       url: "/admin/save_syslog_server",
       data: $('#syslog_form').serialize(),
       success: function() {
-        alertify.notify(`Syslog server saved`, 'success', 5);
+        alertify.notify(`Syslog server saved.`, 'success', 5);
       }
     });
   }
@@ -31,7 +31,7 @@ function queryOpenNMS() {
       url: "/admin/query_opennms",
       data: $('#opennms_form').serialize(),
       success: function() {
-        alertify.notify(`Query sent to openNMS`, 'success', 5);
+        alertify.notify(`Query sent to openNMS.`, 'success', 5);
       }
     });
   }

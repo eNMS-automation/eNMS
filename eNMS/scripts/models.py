@@ -24,10 +24,6 @@ from sqlalchemy.orm import relationship
 from subprocess import check_output
 
 from eNMS import db
-from eNMS.base.associations import (
-    inner_task_script_table,
-    scheduled_task_script_table
-)
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import get_obj, integrity_rollback
 from eNMS.scripts.properties import (
@@ -38,28 +34,30 @@ from eNMS.scripts.properties import (
 )
 
 
-class Script(CustomBase):
+class Job(CustomBase):
 
-    __tablename__ = 'Script'
+    __tablename__ = 'Job'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     description = Column(String)
     type = Column(String)
-    tasks = relationship(
-        "ScheduledScriptTask",
-        secondary=scheduled_task_script_table,
-        back_populates="scripts"
-    )
-    inner_tasks = relationship(
-        "InnerTask",
-        secondary=inner_task_script_table,
-        back_populates="scripts"
-    )
 
     __mapper_args__ = {
-        'polymorphic_identity': 'Script',
+        'polymorphic_identity': 'Job',
         'polymorphic_on': type
+    }
+
+
+class Script(Job):
+
+    __tablename__ = 'Script'
+
+    id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
+    tasks = relationship('ScriptTask', back_populates='script')
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'script',
     }
 
     @property
@@ -69,8 +67,7 @@ class Script(CustomBase):
     @property
     def serialized(self):
         properties = self.properties
-        for prop in ('tasks', 'inner_tasks'):
-            properties[prop] = [obj.properties for obj in getattr(self, prop)]
+        properties['tasks'] = [obj.properties for obj in getattr(self, 'tasks')]
         return properties
 
 
@@ -85,6 +82,7 @@ class NetmikoConfigScript(Script):
     driver = Column(String)
     global_delay_factor = Column(Float)
     netmiko_type = Column(String)
+    node_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_config',
@@ -135,6 +133,7 @@ class FileTransferScript(Script):
     overwrite_file = Column(Boolean)
     disable_md5 = Column(Boolean)
     inline_transfer = Column(Boolean)
+    node_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'file_transfer',
@@ -183,6 +182,7 @@ class NetmikoValidationScript(Script):
     pattern1 = Column(String)
     pattern2 = Column(String)
     pattern3 = Column(String)
+    node_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_validation',
@@ -229,6 +229,7 @@ class NapalmConfigScript(Script):
     operating_system = Column(String)
     action = Column(String)
     content = Column(String)
+    node_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_config',
@@ -266,6 +267,7 @@ class NapalmActionScript(Script):
     vendor = Column(String)
     operating_system = Column(String)
     action = Column(String, unique=True)
+    node_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_action',
@@ -303,6 +305,7 @@ class NapalmGettersScript(Script):
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
+    node_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_getters',
@@ -344,6 +347,7 @@ class AnsibleScript(Script):
     playbook_path = Column(String)
     arguments = Column(String)
     options = Column(MutableDict.as_mutable(PickleType), default={})
+    node_multiprocessing = False
 
     __mapper_args__ = {
         'polymorphic_identity': 'ansible_playbook',
@@ -370,7 +374,7 @@ class RestCallScript(Script):
     content_regex = Column(Boolean)
     username = Column(String)
     password = Column(String)
-
+    node_multiprocessing = False
     request_dict = {
         'GET': rest_get,
         'POST': rest_post,
@@ -425,7 +429,7 @@ def script_factory(type, **kwargs):
         if property not in kwargs:
             continue
         # unchecked tickbox do not yield any value when posting a form, and
-        # they yield "y" if checked
+        # they yield 'y' if checked
         if property in boolean_properties:
             value = property in kwargs
         elif property in json_properties:

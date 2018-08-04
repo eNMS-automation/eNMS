@@ -1,12 +1,12 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from time import sleep
 
 from eNMS import db
+from eNMS.base.associations import task_workflow_table
 from eNMS.base.helpers import get_obj
 from eNMS.base.models import CustomBase
 from eNMS.base.properties import cls_to_properties
-from eNMS.tasks.models import Task
+from eNMS.scripts.models import Job
 
 
 class WorkflowEdge(CustomBase):
@@ -16,16 +16,16 @@ class WorkflowEdge(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     type = Column(String)
-    source_id = Column(Integer, ForeignKey('InnerTask.id'))
+    source_id = Column(Integer, ForeignKey('Task.id'))
     source = relationship(
-        'InnerTask',
-        primaryjoin='InnerTask.id == WorkflowEdge.source_id',
+        'Task',
+        primaryjoin='Task.id == WorkflowEdge.source_id',
         backref='destinations'
     )
-    destination_id = Column(Integer, ForeignKey('InnerTask.id'))
+    destination_id = Column(Integer, ForeignKey('Task.id'))
     destination = relationship(
-        'InnerTask',
-        primaryjoin='InnerTask.id == WorkflowEdge.destination_id'
+        'Task',
+        primaryjoin='Task.id == WorkflowEdge.destination_id'
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='edges')
@@ -48,26 +48,30 @@ class WorkflowEdge(CustomBase):
         return properties
 
 
-class Workflow(CustomBase):
+class Workflow(Job):
 
     __tablename__ = 'Workflow'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    description = Column(String)
-    type = Column(String)
+    id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
-    tasks = relationship('ScheduledWorkflowTask', back_populates='scheduled_workflow')
-    inner_tasks = relationship('InnerTask', back_populates='parent_workflow')
+    tasks = relationship(
+        'Task',
+        secondary=task_workflow_table,
+        back_populates='workflows'
+    )
+    task = relationship('WorkflowTask', back_populates='workflow')
     edges = relationship('WorkflowEdge', back_populates='workflow')
     start_task = Column(Integer)
 
     default_properties = (
         'name',
-        'description',
-        'type'
+        'description'
     )
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'workflow',
+    }
 
     def __init__(self, **kwargs):
         for property in self.default_properties:
@@ -80,32 +84,9 @@ class Workflow(CustomBase):
     @property
     def serialized(self):
         properties = self.properties
-        for prop in ('tasks', 'inner_tasks'):
-            properties[prop] = [obj.properties for obj in getattr(self, prop)]
+        properties['tasks'] = [obj.properties for obj in getattr(self, 'tasks')]
         properties['edges'] = [edge.serialized for edge in self.edges]
         return properties
-
-    def run(self, job_time):
-        layer, visited = set(), set()
-        start_task = get_obj(Task, id=self.start_task)
-        result, workflow_logs = True, {job_time: {}}
-        if start_task:
-            layer.add(start_task)
-        while layer:
-            new_layer = set()
-            for task in layer:
-                visited.add(task)
-                success = task.run()
-                if not success:
-                    result = False
-                edge_type = 'success' if success else 'failure'
-                for neighbor in task.task_neighbors(edge_type):
-                    if neighbor not in visited:
-                        new_layer.add(neighbor)
-                workflow_logs[job_time][task.name] = task.logs
-                sleep(task.waiting_time)
-            layer = new_layer
-        return result, workflow_logs
 
 
 def workflow_factory(**kwargs):

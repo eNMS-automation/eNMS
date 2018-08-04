@@ -5,11 +5,15 @@ from eNMS import db
 from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Node, Pool
-from eNMS.scripts.models import Script
+from eNMS.scripts.models import Job
 from eNMS.tasks.forms import CompareForm, SchedulingForm
 from eNMS.tasks.models import Task
 from eNMS.workflows import blueprint
-from eNMS.workflows.forms import WorkflowEditorForm, WorkflowCreationForm
+from eNMS.workflows.forms import (
+    AddExistingTaskForm,
+    WorkflowEditorForm,
+    WorkflowCreationForm
+)
 from eNMS.workflows.models import WorkflowEdge, Workflow, workflow_factory
 
 
@@ -20,11 +24,12 @@ from eNMS.workflows.models import WorkflowEdge, Workflow, workflow_factory
 @login_required
 def workflows():
     scheduling_form = SchedulingForm(request.form)
+    scheduling_form.job.choices = Job.choices()
     return render_template(
         'workflow_management.html',
         names=pretty_names,
         scheduling_form=scheduling_form,
-        fields=('name', 'description', 'type'),
+        fields=('name', 'description'),
         workflows=Workflow.serialize(),
         form=WorkflowCreationForm(request.form)
     )
@@ -34,20 +39,23 @@ def workflows():
 @blueprint.route('/workflow_editor/<workflow_id>')
 @login_required
 def workflow_editor(workflow_id=None):
+    add_existing_task_form = AddExistingTaskForm(request.form)
     workflow_editor_form = WorkflowEditorForm(request.form)
     workflow_editor_form.workflow.choices = Workflow.choices()
-    workflow = get_obj(Workflow, id=workflow_id).serialized if workflow_id else None
+    workflow = get_obj(Workflow, id=workflow_id)
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.job.choices = Job.choices()
     scheduling_form.nodes.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
+    add_existing_task_form.task.choices = Task.choices()
     return render_template(
         'workflow_editor.html',
+        add_existing_task_form=add_existing_task_form,
         workflow_editor_form=workflow_editor_form,
         scheduling_form=scheduling_form,
         compare_form=CompareForm(request.form),
         names=pretty_names,
-        workflow=workflow
+        workflow=workflow.serialized if workflow_id else None
     )
 
 
@@ -83,7 +91,7 @@ def delete_workflow(workflow_id):
 def add_node(workflow_id, task_id):
     workflow = get_obj(Workflow, id=workflow_id)
     task = get_obj(Task, id=task_id)
-    workflow.inner_tasks.append(task)
+    workflow.tasks.append(task)
     db.session.commit()
     return jsonify(task.serialized)
 

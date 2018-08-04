@@ -27,9 +27,9 @@
     var fields = {{ fields|tojson|safe }}
     var tasks = {{ tasks|tojson|safe }}
   </script>
-  <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <!-- Task management -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='taskCommonFunctions.js') }}"></script>
   <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
   <!-- Difflib -->
   <script src="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.js') }}"></script>

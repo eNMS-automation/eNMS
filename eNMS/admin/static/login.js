@@ -7,9 +7,9 @@ function signup() {
       data: $('#create-user-form').serialize(),
       success: function(result) {
         if (result == 'duplicate') {
-          alertify.notify("Cannot create new user: duplicate entry", 'error', 5);
+          alertify.notify("Cannot create new user: duplicate entry.", 'error', 5);
         } else {
-          alertify.notify("New user created !", 'success', 5);
+          alertify.notify("New user created.", 'success', 5);
           document.getElementById('login-button').click();
         }
       }

@@ -17,7 +17,7 @@ from eNMS.base.properties import (
     node_public_properties,
     pretty_names
 )
-from eNMS.scripts.models import Script
+from eNMS.scripts.models import Job
 from eNMS.tasks.forms import SchedulingForm
 from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
@@ -36,7 +36,7 @@ def view(view_type):
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.scripts.choices = Script.choices()
+    scheduling_form.job.choices = Job.choices()
     scheduling_form.nodes.choices = all_nodes
     scheduling_form.pools.choices = Pool.choices()
     labels = {'node': 'name', 'link': 'name'}

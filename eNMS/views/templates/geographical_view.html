@@ -55,36 +55,49 @@
   {% include 'gis_modals.html' %}
   {% include 'scheduling_modal.html' %}
   {% include 'object_modals.html' %}
-  <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li><a tabindex="-1" href="#">Add new task</a></li>
-    <li><a tabindex="-1" href="#">Parameters</a></li>
-    <li><a tabindex="-1" href="#">Export to Google Earth</a></li>
-    <li><a tabindex="-1" href="#">Delete selection</a></li>
-    <li class="dropdown-submenu global">
-      <a class="test" tabindex="-1" href="#">Tile layer<span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Open Street Map</a></li>
-        <li><a tabindex="-1" href="#">Google Maps</a></li>
-        <li><a tabindex="-1" href="#">NASA</a></li>
-      </ul>
-    </li>
-  </ul>
-  <div class="right_col" role="main">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content">
-            {% if view == 'glearth' %}
-              <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
-            {% else %}
-              <div id="mapid"></div>
-            {% endif %}  
-            {{ buttons }}
+  <form id="view-form" method="post">
+    <input id="view-type" name="view" type="hidden">
+    <ul id="contextMenu" class="dropdown-menu" role="menu">
+      {% if view == 'leaflet' %}
+        <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
+        <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
+      {% elif view == 'markercluster' %}
+        <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
+        <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
+      {% elif view == 'glearth' %}
+        <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
+        <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
+      {% endif %}
+      <li><a tabindex="-1" href="#">Add new task</a></li>
+      <li><a tabindex="-1" href="#">Parameters</a></li>
+      <li><a tabindex="-1" href="#">Export to Google Earth</a></li>
+      <li><a tabindex="-1" href="#">Delete selection</a></li>
+      <li class="dropdown-submenu global">
+        <a class="test" tabindex="-1" href="#">Tile layer<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="#">Open Street Map</a></li>
+          <li><a tabindex="-1" href="#">Google Maps</a></li>
+          <li><a tabindex="-1" href="#">NASA</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="right_col" role="main">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+              {% if view == 'glearth' %}
+                <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
+              {% else %}
+                <div id="mapid"></div>
+              {% endif %}  
+              {{ buttons }}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 {% endblock content %}
 
 {% block javascripts %}

@@ -43,9 +43,9 @@
         <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
         <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
       {% endif %}
-      <li><a tabindex="-1" href="#">Add new task</a></li>
       <li><a tabindex="-1" href="#">Export to Google Earth</a></li>
       {% if view != 'glearth' %}
+        <li><a tabindex="-1" href="#">Add new task</a></li>
         <li><a tabindex="-1" href="#">Parameters</a></li>
       {% endif %}
       <li class="dropdown-submenu global">

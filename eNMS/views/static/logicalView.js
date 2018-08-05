@@ -227,3 +227,9 @@ $("#logical_view").contextMenu({
     action[row](selectedNode);
   }
 });
+
+$('.dropdown-submenu a.test').on("click", function(e){
+  $(this).next('ul').toggle();
+  e.stopPropagation();
+  e.preventDefault();
+});

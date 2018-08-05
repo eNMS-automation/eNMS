@@ -15,40 +15,15 @@
 {% endblock stylesheets %}
 
 {% set buttons %}
-<form id="aform" method="post">
-  <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
-    <div class="form-group">
-      <select id="select-filters" class="form-control">
-        {% for pool in pools %}
-          <option value={{ pool.id }}>{{ pool.name }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
-    <button type="button" class="btn btn-primary" onclick="showModal('google-earth')">Google Earth</button>
-    {% if view == 'leaflet' %}
-      <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
-      <button type="submit" class="btn btn-primary" name="view" value="glearth">3D view</button>
-    {% elif view == 'markercluster' %}
-      <button type="submit" class="btn btn-primary" name="view" value="leaflet">2D view</button>
-      <button type="submit" class="btn btn-primary" name="view" value="glearth">3D view</button>
-    {% elif view == 'glearth' %}
-      <button type="submit" class="btn btn-primary" name="view" value="leaflet">2D view</button>
-      <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
-    {% endif %}
-    <div class="btn-group">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a onclick="switch_layer('osm')">  </a></li>
-        <li><a onclick="switch_layer('gm')">  </a></li>
-        <li><a onclick="switch_layer('nasa')">  </a></li>
-      </ul>
-    </div> 
-    <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Scheduling</button>
+<div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+  <div class="form-group">
+    <select id="select-filters" class="form-control">
+      {% for pool in pools %}
+        <option value={{ pool.id }}>{{ pool.name }}</option>
+      {% endfor %}
+    </select>
   </div>
-</form>
+</div>
 {% endset %}
 
 {% block content %}

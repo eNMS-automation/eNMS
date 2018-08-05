@@ -37,40 +37,14 @@
   {% include 'scheduling_modal.html' %}
   {% include 'object_modals.html' %}
   <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li class="node-selection"><a tabindex="-1" href="#">Edit</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Logs</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Compare</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Set as start</a></li>
-    <li class="global"><a tabindex="-1" href="#">Add new task</a></li>
-    <li class="global"><a tabindex="-1" href="#">Add existing task</a></li>
-    <li><a tabindex="-1" href="#">Delete selection</a></li>
-    <li class="dropdown-submenu global">
-      <a class="test" tabindex="-1" href="#">Change mode<span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Create success edge</a></li>
-        <li><a tabindex="-1" href="#">Create failure edge</a></li>
-        <li><a tabindex="-1" href="#">Move nodes</a></li>
-      </ul>
-    </li>
+    <li><a tabindex="-1" href="#">Add new task</a></li>
+    <li><a tabindex="-1" href="#">Parameters</a></li>
   </ul>
   <div class="right_col" role="main">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <form method="post">
-              <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
-                <div class="form-group">
-                  <select id="select-filters" class="form-control">
-                    {% for pool in pools %}
-                      <option value="{{ pool.id }}">{{ pool.name }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="showModal('filters')">Parameters</button>
-                <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Scheduling</button>
-              </div>
-            </form>
             <div align='center' id="logical_view"></div>
           </div>
         </div>

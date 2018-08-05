@@ -44,9 +44,10 @@
         <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
       {% endif %}
       <li><a tabindex="-1" href="#">Add new task</a></li>
-      <li><a tabindex="-1" href="#">Parameters</a></li>
       <li><a tabindex="-1" href="#">Export to Google Earth</a></li>
-      <li><a tabindex="-1" href="#">Delete selection</a></li>
+      {% if view != 'glearth' %}
+        <li><a tabindex="-1" href="#">Parameters</a></li>
+      {% endif %}
       <li class="dropdown-submenu global">
         <a class="test" tabindex="-1" href="#">Tile layer<span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -104,6 +105,6 @@
       <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
     {% endif %}
     <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
-    <script src="{{ url_for('views_blueprint.static', filename='2dViewMenu.js') }}"></script>
   {% endif %}
+  <script src="{{ url_for('views_blueprint.static', filename='geographicalViewMenu.js') }}"></script>
 {% endblock javascripts %}

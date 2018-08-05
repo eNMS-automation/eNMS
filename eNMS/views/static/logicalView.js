@@ -220,16 +220,15 @@ $('#select-filters').on('change', function() {
   });
 });
 
+var action = {
+  'Parameters': partial(showModal, 'filters'),
+  'Add new task': partial(showModal, 'scheduling'),
+}
+
 $("#logical_view").contextMenu({
   menuSelector: "#contextMenu",
   menuSelected: function (invokedOn, selectedMenu) {
     var row = selectedMenu.text();
-    action[row](selectedNode);
+    action[row]();
   }
-});
-
-$('.dropdown-submenu a.test').on("click", function(e){
-  $(this).next('ul').toggle();
-  e.stopPropagation();
-  e.preventDefault();
 });

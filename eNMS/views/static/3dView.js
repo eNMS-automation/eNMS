@@ -3,10 +3,11 @@ var map = new WE.map('earth_div', options);
 var current_layer = WE.tileLayer(layers['gm']);
 current_layer.addTo(map);
 
-function switch_layer(layer) {
+function switchLayer(layer) {
   current_layer.removeFrom(map);
   current_layer = WE.tileLayer(layers[layer]);
   current_layer.addTo(map);
+  $('.dropdown-submenu a.test').next('ul').toggle();
 }
 
 for (let i = 0; i < nodes.length; i++) { 

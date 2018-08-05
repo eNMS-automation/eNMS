@@ -37,13 +37,13 @@
       <button type="submit" class="btn btn-primary" name="view" value="markercluster">Clusterized view</button>
     {% endif %}
     <div class="btn-group">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tile layer
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a onclick="switch_layer('osm')"> Open Street Map </a></li>
-        <li><a onclick="switch_layer('gm')"> Google Maps </a></li>
-        <li><a onclick="switch_layer('nasa')"> NASA </a></li>
+        <li><a onclick="switch_layer('osm')">  </a></li>
+        <li><a onclick="switch_layer('gm')">  </a></li>
+        <li><a onclick="switch_layer('nasa')">  </a></li>
       </ul>
     </div> 
     <button type="button" class="btn btn-primary" onclick="showModal('scheduling')">Scheduling</button>
@@ -56,19 +56,16 @@
   {% include 'scheduling_modal.html' %}
   {% include 'object_modals.html' %}
   <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li class="node-selection"><a tabindex="-1" href="#">Edit</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Logs</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Compare</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Set as start</a></li>
-    <li class="global"><a tabindex="-1" href="#">Add new task</a></li>
-    <li class="global"><a tabindex="-1" href="#">Add existing task</a></li>
+    <li><a tabindex="-1" href="#">Add new task</a></li>
+    <li><a tabindex="-1" href="#">Parameters</a></li>
+    <li><a tabindex="-1" href="#">Export to Google Earth</a></li>
     <li><a tabindex="-1" href="#">Delete selection</a></li>
     <li class="dropdown-submenu global">
-      <a class="test" tabindex="-1" href="#">Change mode<span class="caret"></span></a>
+      <a class="test" tabindex="-1" href="#">Tile layer<span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Create success edge</a></li>
-        <li><a tabindex="-1" href="#">Create failure edge</a></li>
-        <li><a tabindex="-1" href="#">Move nodes</a></li>
+        <li><a tabindex="-1" href="#">Open Street Map</a></li>
+        <li><a tabindex="-1" href="#">Google Maps</a></li>
+        <li><a tabindex="-1" href="#">NASA</a></li>
       </ul>
     </li>
   </ul>
@@ -119,5 +116,6 @@
       <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
     {% endif %}
     <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
+    <script src="{{ url_for('views_blueprint.static', filename='2dViewMenu.js') }}"></script>
   {% endif %}
 {% endblock javascripts %}

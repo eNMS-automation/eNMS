@@ -13,6 +13,7 @@ function switch_layer(layer){
   map.removeLayer(current_layer);
   current_layer = L.tileLayer(layers[layer]);
   map.addLayer(current_layer);
+  $('.dropdown-submenu a.test').next('ul').toggle();
 }
 
 for (var i = 0; i < subtypes.length; i++) {
@@ -88,25 +89,20 @@ for (var i = 0; i < links.length; i++) {
     link.destination_properties.longitude
   );
   var pointList = [pointA, pointB];
-
   var polyline = new L.PolylineClusterable(pointList, {
     color: link.color,
     weight: 3,
     opacity: 1,
     smoothFactor: 1
     });
-
   polyline_array.push(polyline);
   polyline.link_id = link.id;
-
   polyline.on("dblclick", function (e) {
     showObjectModal('link', this.link_id);
   });
-
   polyline.bindTooltip(link[labels.link], {
     permanent: false, 
     });
-
   if (view == 'leaflet') {
     polyline.addTo(map);
   } else {

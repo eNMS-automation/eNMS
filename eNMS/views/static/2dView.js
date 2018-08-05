@@ -9,7 +9,7 @@ if (view == 'markercluster') {
   var markers = L.markerClusterGroup();
 }
 
-function switch_layer(layer){
+function switchLayer(layer){
   map.removeLayer(current_layer);
   current_layer = L.tileLayer(layers[layer]);
   map.addLayer(current_layer);
@@ -56,7 +56,6 @@ for (var i = 0; i < nodes.length; i++) {
   markers_array.push(marker);
 
   marker.on("dblclick", function (e) {
-    console.log(this.node_id);
     showObjectModal('node', this.node_id);
   });
 
@@ -64,6 +63,7 @@ for (var i = 0; i < nodes.length; i++) {
     e.target.setIcon(e.target.selected_icon);
     selection.push(this.node_id);
     $("#nodes").val(selection);
+    console.log(selection);
   });
 
   marker.bindTooltip(node[labels.node], {
@@ -110,8 +110,16 @@ for (var i = 0; i < links.length; i++) {
   }
 }
 
-map.on("boxzoomend", function(e) {
+function unselectAll() {
+  for (var i = 0; i < markers_array.length; i++) {
+    markers_array[i].setIcon(markers_array[i].icon);
+    }
   selection = [];
+  $("#nodes").val(selection);
+}
+
+map.on("boxzoomend", function(e) {
+  unselectAll();
   for (var i = 0; i < markers_array.length; i++) {
     if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
       markers_array[i].setIcon(markers_array[i].selected_icon);
@@ -121,12 +129,8 @@ map.on("boxzoomend", function(e) {
   $("#nodes").val(selection);
 });
 
-map.on("contextmenu", function(e) {
-  for (var i = 0; i < markers_array.length; i++) {
-    markers_array[i].setIcon(markers_array[i].icon);
-    }
-  selection = [];
-  $("#nodes").val(selection);
+map.on("click", function(e) {
+  unselectAll();
 });
 
 // when a filter is selected, apply it

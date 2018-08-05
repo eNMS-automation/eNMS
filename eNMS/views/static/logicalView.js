@@ -50,7 +50,7 @@ var zoom = d3.behavior.zoom()
 var svg = d3.select("#logical_view").append("svg")
   .attr("width", width)
   .attr("height", height)
-  .on("contextmenu", unselectAll)
+  .on("click", unselectAll)
   .call(zoom)
   .on("mousedown.zoom", null);
 

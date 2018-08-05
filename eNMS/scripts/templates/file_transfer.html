@@ -13,12 +13,12 @@
             {% endif %}
           {% endfor %}
           <fieldset>
-          {% for field in form if field.name in ("overwrite_file", "disable_md5", "inline_transfer")  %}
-            <div class="item">
-              {{ field(id="file_transfer-" + field.name) }}
-              <label for="file_transfer-" + field.name>{{ field.label.text }}</label>
-            </div>
-          {% endfor %}
+            {% for field in form if field.name in ('overwrite_file', 'disable_md5', 'inline_transfer')  %}
+                <div class="item">
+                {{ field(id="file_transfer-" + field.name) }}
+                <label for="file_transfer-" + field.name>{{ field.label.text }}</label>
+                </div>
+            {% endfor %}
           </fieldset>
           <div class="ln_solid"></div>
           <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">

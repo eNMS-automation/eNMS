@@ -347,6 +347,7 @@ class AnsibleScript(Script):
     playbook_path = Column(String)
     arguments = Column(String)
     options = Column(MutableDict.as_mutable(PickleType), default={})
+    inventory_from_selection = Column(Boolean)
     node_multiprocessing = False
 
     __mapper_args__ = {
@@ -355,7 +356,11 @@ class AnsibleScript(Script):
 
     def job(self, task, nodes, results):
         arguments = self.arguments.split()
-        command = ['ansible-playbook', self.playbook_path]
+        command = ['ansible-playbook']
+        if self.inventory_from_selection:
+            command.extend(['-i', ','.join(node.ip_address for node in nodes)])
+        command.append(self.playbook_path)
+        print(command)
         return {
             'success': True,
             'logs': check_output(command + arguments)

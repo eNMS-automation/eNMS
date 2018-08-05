@@ -55,7 +55,8 @@ ansible_playbook_properties = script_properties + (
     'operating_system',
     'playbook_path',
     'arguments',
-    'options'
+    'options',
+    'inventory_from_selection'
 )
 
 rest_call_properties = script_properties + (
@@ -85,7 +86,8 @@ boolean_properties = (
     'overwrite_file',
     'disable_md5',
     'inline_transfer',
-    'content_regex'
+    'content_regex',
+    'inventory_from_selection'
 )
 
 type_to_properties = {

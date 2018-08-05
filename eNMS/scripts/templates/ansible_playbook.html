@@ -3,12 +3,22 @@
     <div class="x_panel">
       <div class="x_content">
         {% for field in form if field.widget.input_type != 'hidden'  %}
-          {% set validate = " required" if field.name in ("name", "playbook_name") else "" %}
-          <label>{{ field.label.text }}</label>
-          <div class='form-group'>
-            {{ field(id="ansible_playbook-" + field.name, class="form-control" + validate, placeholder=field.label.text) }}
-          </div>
+          {% if field.name != 'inventory_from_selection' %}
+            {% set validate = " required" if field.name in ("name", "playbook_name") else "" %}
+            <label>{{ field.label.text }}</label>
+            <div class='form-group'>
+              {{ field(id="ansible_playbook-" + field.name, class="form-control" + validate, placeholder=field.label.text) }}
+            </div>
+          {% endif %}
         {% endfor %}
+        <fieldset>
+          {% for field in form if field.name in ('inventory_from_selection',)  %}
+            <div class="item">
+            {{ field(id="ansible_playbook-" + field.name) }}
+            <label for="ansible_playbook-" + field.name>{{ field.label.text }}</label>
+            </div>
+          {% endfor %}
+        </fieldset>
         <div class="ln_solid"></div>
         <div class="form-group">
           <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">

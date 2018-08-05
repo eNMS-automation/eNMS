@@ -207,6 +207,7 @@ pretty_names = OrderedDict([
     ('file_system', 'File system'),
     ('getters', 'Getters'),
     ('global_delay_factor', 'Global delay factor'),
+    ('inventory_from_selection', 'Inventory from selection'),
     ('ip_address', 'IP address'),
     ('longitude', 'Longitude'),
     ('latitude', 'Latitude'),

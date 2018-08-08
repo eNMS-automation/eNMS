@@ -363,6 +363,10 @@ class AnsibleScript(Script):
                 command.extend(['-i', node.ip_address + ','])
             command.append(self.playbook_path)
             output = check_output(command + arguments)
+            try:
+                output = output.decode('utf-8')
+            except AttributeError:
+                pass
             results[node.name] = {'success': True, 'logs': output}
         except Exception as e:
             results[node.name] = {'success': False, 'logs': str(e)}

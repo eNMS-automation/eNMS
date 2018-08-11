@@ -5,8 +5,8 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 /**
  * Add workflow to the datatable.
- * @param {mode} mode - create or edit.
- * @param {properties} properties - properties of the workflow.
+ * @param {mode} mode - Create or edit.
+ * @param {properties} properties - Properties of the workflow.
  */
 function addWorkflow(mode, properties) {
   let values = [];
@@ -37,7 +37,7 @@ function addWorkflow(mode, properties) {
 
 /**
  * Open the scheduling modal (disable job section: we schedule the workflow).
- * @param {id} id - id of the workflow to schedule.
+ * @param {id} id - Id of the workflow to schedule.
  */
 function showSchedulingModal(id) { // eslint-disable-line no-unused-vars
   $('#job-div').hide();
@@ -56,7 +56,7 @@ function showModal() { // eslint-disable-line no-unused-vars
 
 /**
  * Open the workflow modal for editing.
- * @param {id} id - id of the workflow to edit.
+ * @param {id} id - Id of the workflow to edit.
  */
 function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
   $('#title').text(`Edit properties`);
@@ -96,7 +96,7 @@ function editObject() { // eslint-disable-line no-unused-vars
 
 /**
  * Delete a workflow.
- * @param {id} id - id of the workflow to delete.
+ * @param {id} id - Id of the workflow to delete.
  */
 function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
   $.ajax({

@@ -1,5 +1,5 @@
 /* global alertify: false, vis: false */
-/* global workflow: true, graph: true, nodes: true, edges: true */
+/* global workflow: true */
 
 const container = document.getElementById('network');
 const dsoptions = {
@@ -33,9 +33,17 @@ const dsoptions = {
     },
   },
 };
-let selectedNode = null;
-let edgeType = 'success';
 
+let nodes;
+let edges;
+let graph;
+let selectedNode;
+let edgeType;
+
+/**
+ * Display a workflow.
+ * @param {wf} wf - A workflow.
+ */
 function displayWorkflow(wf) {
   nodes = new vis.DataSet(wf.tasks.map(taskToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
@@ -43,8 +51,8 @@ function displayWorkflow(wf) {
   graph.setOptions({physics: false});
   graph.on('oncontext', function(properties) {
     properties.event.preventDefault();
-    node = this.getNodeAt(properties.pointer.DOM);
-    if(typeof node !== 'undefined') {
+    const node = this.getNodeAt(properties.pointer.DOM);
+    if (typeof node !== 'undefined') {
       $('.node-selection').show();
       $('.global').hide();
       selectedNode = node;
@@ -53,7 +61,7 @@ function displayWorkflow(wf) {
       $('.node-selection').hide();
     }
   });
-  nodes.map(n => graph.moveNode(n.id, n.x, n.y));
+  nodes.map((n) => graph.moveNode(n.id, n.x, n.y));
   return graph;
 }
 
@@ -67,11 +75,14 @@ if (workflow) {
     success: function(wf) {
       workflow = wf;
       graph = displayWorkflow(wf);
-      nodes.map(n => graph.moveNode(n.id, n.x, n.y));
+      nodes.map((n) => graph.moveNode(n.id, n.x, n.y));
     },
   });
 }
 
+/**
+ * Schedule a task.
+ */
 function scheduleTask() {
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
@@ -99,6 +110,9 @@ function scheduleTask() {
   }
 }
 
+/**
+ * Add an existing task to the workflow.
+ */
 function addTaskToWorkflow() {
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
@@ -126,6 +140,10 @@ function addTaskToWorkflow() {
   }
 }
 
+/**
+ * Add task to the workflow object (back-end).
+ * @param {task} task - Task to add to the workflow.
+ */
 function saveNode(task) {
   $.ajax({
     type: 'POST',
@@ -137,6 +155,10 @@ function saveNode(task) {
   });
 }
 
+/**
+ * Delete task from the workflow (back-end).
+ * @param {id} id - Id of the task to be deleted.
+ */
 function deleteNode(id) {
   $.ajax({
     type: 'POST',
@@ -148,6 +170,10 @@ function deleteNode(id) {
   });
 }
 
+/**
+ * Add edge to the workflow object (back-end).
+ * @param {edge} edge - Edge to add to the workflow.
+ */
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.type}/${edge.from}/${edge.to}`
   $.ajax({
@@ -160,6 +186,10 @@ function saveEdge(edge) {
   });
 }
 
+/**
+ * Delete edge from the workflow (back-end).
+ * @param {edgeId} edgeId - Id of the edge to be deleted.
+ */
 function deleteEdge(edgeId) {
   console.log(edgeId);
   $.ajax({
@@ -171,6 +201,10 @@ function deleteEdge(edgeId) {
   });
 }
 
+/**
+ * Convert task object to Vis task node.
+ * @param {task} task - Task object.
+ */
 function taskToNode(task) {
   return {
     id: task.id,
@@ -182,6 +216,10 @@ function taskToNode(task) {
   };
 }
 
+/**
+ * Convert edge object to Vis task edge.
+ * @param {edge} edge - Edge object.
+ */
 function edgeToEdge(edge) {
   return {
     id: edge.id,
@@ -194,14 +232,20 @@ function edgeToEdge(edge) {
   };
 }
 
+/**
+ * Show scheduling modal.
+ */
 function showSchedulingModal(){
   $('#scheduling').modal('show');
 }
 
-function startScript() {
+/**
+ * Set a task as start of the workflow.
+ */
+function startTask() {
   let start = nodes.get(graph.getSelectedNodes()[0]);
   if (start.length == 0 || !start.id) {
-    alertify.notify('You must select a script first.', 'error', 5);
+    alertify.notify('You must select a task first.', 'error', 5);
   } else {
     if (workflow.start_task != 'None') {
       nodes.update({id: workflow.start_task, color: '#D2E5FF'});
@@ -212,19 +256,25 @@ function startScript() {
       success: function() {
         nodes.update({id: start.id, color: 'green'});
         workflow.start_task = start.id
-        alertify.notify('Start script updated.', 'success', 5);
+        alertify.notify('Start task updated.', 'success', 5);
       },
     });
     alertify.notify(`Task ${start.label} set as start.`, 'success', 5);
   }
 }
 
+/**
+ * Delete selected nodes and edges.
+ */
 function deleteSelection() {
   graph.getSelectedNodes().map(node => deleteNode(node));
   graph.getSelectedEdges().map(edge => deleteEdge(edge));
   graph.deleteSelected();
 }
 
+/**
+ * Change the mode (motion, creation of success or failure edge).
+ */
 function switchMode(mode) {
   if (mode == 'success' || mode == 'failure') {
     edgeType = mode;
@@ -238,17 +288,10 @@ function switchMode(mode) {
   $('.dropdown-submenu a.test').next('ul').toggle();
 }
 
-function runWorkflow() {
-  $.ajax({
-    type: 'POST',
-    url: `/workflows/run_${workflow.id}`,
-    contentType: 'application/json;charset=UTF-8',
-    success: function() {
-      alertify.notify('Workflow successfully started.', 'success', 5);
-    },
-  });
-}
-
+/**
+ * Show task modal for editing.
+ * @param {id} id - Id of the task to edit.
+ */
 function showTaskModal(id) {
   $.ajax({
     type: 'POST',
@@ -279,6 +322,9 @@ $('#workflow-name').on('change', function() {
   });
 });
 
+/**
+ * Save positions of the workflow nodes.
+ */
 function savePositions() {
   console.log(graph);
   $.ajax({
@@ -297,7 +343,7 @@ const action = {
   'Edit': showTaskModal,
   'Logs': showTaskLogs,
   'Compare': compareTaskLogs,
-  'Set as start': startScript,
+  'Set as start': startTask,
   'Add new task': showSchedulingModal,
   'Add existing task': partial(showModal, 'add-existing-task'),
   'Delete selection': deleteSelection,

@@ -133,8 +133,8 @@ Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/t
     pip install -r requirements.txt
 
 ### 3. Set the FLASK_APP environment variable
-    (Windows) set FLASK_APP=enms.py
-    (Unix) export FLASK_APP=enms.py
+    (Windows) set FLASK_APP=app.py
+    (Unix) export FLASK_APP=app.py
 
 ### 4. Run the application
     flask run --host=0.0.0.0

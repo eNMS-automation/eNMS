@@ -20,8 +20,8 @@ Start eNMS in debugging mode
 ::
 
  # set the FLASK_APP environment variable
- (Windows) set FLASK_APP=enms.py
- (Unix) export FLASK_APP=enms.py
+ (Windows) set FLASK_APP=app.py
+ (Unix) export FLASK_APP=app.py
 
  # set the FLASK_DEBUG environment variable
  (Windows) set FLASK_DEBUG=1
@@ -37,7 +37,7 @@ Start eNMS with gunicorn (better)
 ::
 
  # start gunicorn
- gunicorn --config gunicorn.py enms:app
+ gunicorn --config gunicorn.py app:app
 
 
 Start eNMS as a docker container (even better)

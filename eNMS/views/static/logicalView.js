@@ -62,8 +62,8 @@ let svg = d3.select('#logical_view').append('svg')
   .on('mousedown.zoom', null);
 
 function rect(x, y, w, h) {
-  return 'M'+[x, y]+' l'+[w, 0]+' l'+[0, h]+' l'+[-w, 0]+'z';
-};
+  return 'M' + [x, y] + ' l' + [w, 0] + ' l' + [0, h] + ' l' + [-w, 0] + 'z';
+}
 
 let selection = svg.append('path')
   .attr('class', 'selection')
@@ -91,8 +91,8 @@ let endSelection = function(start, end) {
   const maxY = Math.max(start[1], end[1]);
   selection.attr('visibility', 'hidden');
   // select all nodes in the rectangle
-  d3.selectAll('.node')  //here's how you get all the nodes
-    .each(function(d) {                    
+  d3.selectAll('.node')
+    .each(function(d) {
       if (minX <= d.x && d.x <= maxX && minY <= d.y && d.y <= maxY) {
         selectedNodes.push([this, d]);
         d3.select(this)
@@ -105,12 +105,15 @@ let endSelection = function(start, end) {
 
 svg.on('mousedown', function() {
   // same binding as leaflet: shift + left-click button for selection
-  if (!d3.event.shiftKey || ((d3.event.which !== 1) && (d3.event.button !== 1))) {
+  if (
+    !d3.event.shiftKey
+    || ((d3.event.which !== 1) && (d3.event.button !== 1))
+  ) {
     return false;
   }
   let subject = d3.select(window);
-      parent = this.parentNode;
-      start = d3.mouse(parent);
+  let parent = this.parentNode;
+  let start = d3.mouse(parent);
   startSelection(start);
   subject
     .on('mousemove.selection', function() {
@@ -125,11 +128,11 @@ svg.on('mousedown', function() {
 });
 
 svg.on('touchstart', function() {
-  let subject = d3.select(this);
-      parent = this.parentNode;
-      id = d3.event.changedTouches[0].identifier;
-      start = d3.touch(parent, id)
-      pos;
+    const subject = d3.select(this);
+    const parent = this.parentNode;
+    const id = d3.event.changedTouches[0].identifier;
+    const start = d3.touch(parent, id);
+    let pos;
     startSelection(start);
     subject
       .on('touchmove.'+id, function() {
@@ -181,24 +184,20 @@ function zoomed() {
   );
 }
 
-let images = node.append('image')
-  .attr('xlink:href', function(d) { return d.img; })
-  .attr('x', -8)
-  .attr('y', -8)
-  .attr('width', 16)
-  .attr('height', 16)
-
-let label = node.append('text')
-  .attr('dx', 8)
-  .attr('dy', '.35em')
-  .text(function(d) { return d.name });
-
 force.on('tick', function() {
   link
-    .attr('x1', function(d) { return d.source.x; })
-    .attr('y1', function(d) { return d.source.y; })
-    .attr('x2', function(d) { return d.target.x; })
-    .attr('y2', function(d) { return d.target.y; });
+    .attr('x1', function(d) {
+      return d.source.x;
+    })
+    .attr('y1', function(d) {
+      return d.source.y;
+    })
+    .attr('x2', function(d) {
+      return d.target.x;
+    })
+    .attr('y2', function(d) {
+      return d.target.y;
+    });
   node.attr('transform', function(d) {
     return 'translate(' + d.x + ',' + d.y + ')';
   });
@@ -206,34 +205,33 @@ force.on('tick', function() {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-    console.log(this.value);
   $.ajax({
     type: 'POST',
     url: `/objects/pool_objects/${this.value}`,
     dataType: 'json',
-    success: function(objects){
-      let nodes_id = objects.nodes.map(n => n.id);
-      let links_id = objects.links.map(l => l.id);
-      node.style('visibility', function(d) {      
-        return nodes_id.includes(d.real_id.toString()) ? 'visible' : 'hidden';
+    success: function(objects) {
+      let nodesId = objects.nodes.map((n) => n.id);
+      let linksId = objects.links.map((l) => l.id);
+      node.style('visibility', function(d) {
+        return nodesId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
       });
-      link.style('visibility', function(d) {  
-        return links_id.includes(d.real_id.toString()) ? 'visible' : 'hidden';
+      link.style('visibility', function(d) {
+        return linksId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
       });
       alertify.notify(`Filter applied.`, 'success', 5);
-    }
+    },
   });
 });
 
 let action = {
   'Parameters': partial(showModal, 'filters'),
   'Add new task': partial(showModal, 'scheduling'),
-}
+};
 
 $('#logical_view').contextMenu({
   menuSelector: '#contextMenu',
-  menuSelected: function (invokedOn, selectedMenu) {
+  menuSelected: function(invokedOn, selectedMenu) {
     let row = selectedMenu.text();
     action[row]();
-  }
+  },
 });

@@ -1,25 +1,28 @@
-language: python
-
 branches:
   only:
     - master
     - develop
 
-python:
-  - 3.4
-  - 3.5
-  - 3.6
+matrix:
+  include:
+    - language: python
+      python:
+        - 3.5
+        - 3.6
+      install:
+        - pip install -r requirements_dev.txt
+      script:
+        - flake8
+        - sudo apt-get update
+        - sudo apt-get install google-chrome-stable
+        - sudo apt-get install chromium-browser
+        - sudo chmod a+x ./tests/chromedriver
+        - coverage run --source=./eNMS -m pytest
+      after_success:
+        - coveralls
 
-install:
-  - pip install -r requirements_dev.txt
-
-script:
-  - flake8
-  - sudo apt-get update
-  - sudo apt-get install google-chrome-stable
-  - sudo apt-get install chromium-browser
-  - sudo chmod a+x ./tests/chromedriver
-  - coverage run --source=./eNMS -m pytest
-
-after_success:
-  - coveralls
+    - language: node_js
+      node_js: 
+        - "node"
+      script: 
+        - npm run lint

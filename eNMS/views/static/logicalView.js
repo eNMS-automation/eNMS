@@ -83,6 +83,7 @@ let svg = d3.select('#logical_view').append('svg')
  * @param {x} y
  * @param {w} w
  * @param {h} h
+ * @return {rectangle}
  */
 function rect(x, y, w, h) {
   return 'M' + [x, y] + ' l' + [w, 0] + ' l' + [0, h] + ' l' + [-w, 0] + 'z';

@@ -100,9 +100,9 @@
     <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
     <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
   {% else %}
-    <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.js') }}"></script>
+    <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.js') }}"></script>
     {% if view == 'markercluster' %}
-      <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster-src.js') }}"></script>
+      <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
     {% endif %}
     <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
   {% endif %}

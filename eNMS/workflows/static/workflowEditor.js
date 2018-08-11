@@ -1,12 +1,12 @@
 /*
 global
-workflow: true,
-alertify: false,
-vis: false,
-showTaskLogs: false,
-compareTaskLogs: false,
-showModal: false,
+alertify: false
+compareTaskLogs: false
 partial: false
+showModal: false
+showTaskLogs: false
+vis: false
+workflow: true
 */
 
 const container = document.getElementById('network');

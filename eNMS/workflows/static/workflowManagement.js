@@ -1,7 +1,7 @@
 /*
 global
-alertify: false,
-fields: false,
+alertify: false
+fields: false
 workflows: false
 */
 

@@ -1,7 +1,16 @@
 /*
 global
-L: false,
+alertify: false
+L: false
+layers: false
+links: false
+markersArray: true
+nodes: false
 parameters: false
+polylinesArray: true
+selection: true
+subtypes: false
+view: false
 */
 
 const map = L.map('mapid').setView(
@@ -63,7 +72,7 @@ for (let i = 0; i < nodes.length; i++) {
   marker.icon = window[`icon_${node.type}`];
   marker.selected_icon = window[`icon_selected_${node.type}`];
   marker.setIcon(marker.icon);
-  markers_array.push(marker);
+  markersArray.push(marker);
 
   marker.on('dblclick', function(e) {
     showObjectModal('node', this.node_id);
@@ -104,7 +113,7 @@ for (let i = 0; i < links.length; i++) {
     opacity: 1,
     smoothFactor: 1,
   });
-  polyline_array.push(polyline);
+  polylinesArray.push(polyline);
   polyline.link_id = link.id;
   polyline.on('dblclick', function(e) {
     showObjectModal('link', this.link_id);
@@ -120,8 +129,8 @@ for (let i = 0; i < links.length; i++) {
 }
 
 function unselectAll() {
-  for (let i = 0; i < markers_array.length; i++) {
-    markers_array[i].setIcon(markers_array[i].icon);
+  for (let i = 0; i < markersArray.length; i++) {
+    markersArray[i].setIcon(markersArray[i].icon);
   }
   selection = [];
   $('#nodes').val(selection);
@@ -129,10 +138,10 @@ function unselectAll() {
 
 map.on('boxzoomend', function(e) {
   unselectAll();
-  for (let i = 0; i < markers_array.length; i++) {
-    if (e.boxZoomBounds.contains(markers_array[i].getLatLng())) {
-      markers_array[i].setIcon(markers_array[i].selected_icon);
-      selection.push(markers_array[i].node_id);
+  for (let i = 0; i < markersArray.length; i++) {
+    if (e.boxZoomBounds.contains(markersArray[i].getLatLng())) {
+      markersArray[i].setIcon(markersArray[i].selected_icon);
+      selection.push(markersArray[i].node_id);
     }
   }
   $('#nodes').val(selection);
@@ -151,18 +160,18 @@ $('#select-filters').on('change', function() {
     success: function(objects) {
       const nodes_id = objects.nodes.map(n => n.id);
       const links_id = objects.links.map(l => l.id);
-      for (let i = 0; i < markers_array.length; i++) {
-        if (nodes_id.includes(markers_array[i].node_id)) {
-          markers_array[i].addTo(map);
+      for (let i = 0; i < markersArray.length; i++) {
+        if (nodes_id.includes(markersArray[i].node_id)) {
+          markersArray[i].addTo(map);
         } else {
-          markers_array[i].removeFrom(map);
+          markersArray[i].removeFrom(map);
         }
       }
-      for (const i = 0; i < polyline_array.length; i++) {
-        if (links_id.includes(polyline_array[i].link_id)) {
-          polyline_array[i].addTo(map);
+      for (const i = 0; i < polylinesArray.length; i++) {
+        if (links_id.includes(polylinesArray[i].link_id)) {
+          polylinesArray[i].addTo(map);
         } else {
-          polyline_array[i].removeFrom(map);
+          polylinesArray[i].removeFrom(map);
         }
       }
       alertify.notify('Filter applied.', 'success', 5);

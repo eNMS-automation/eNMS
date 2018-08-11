@@ -21,7 +21,7 @@ for (let i = 0; i < nodes.length; i++) {
   marker.on("dblclick", function (e) {
     showObjectModal('node', nodes[i].id);
   });
-  markers_array.push(marker);
+  markersArray.push(marker);
 }
 
 for (var i = 0; i < links.length; i++) {
@@ -42,7 +42,7 @@ for (var i = 0; i < links.length; i++) {
   ).addTo(map);
 
   polygonSD.link_id = polygonDS.link_id = link.id;
-  polyline_array.push(polygonSD, polygonDS);
+  polylinesArray.push(polygonSD, polygonDS);
 }
 
 // when a filter is selected, apply it
@@ -54,18 +54,18 @@ $('#select-filters').on('change', function() {
     success: function(objects) {
       var nodes_id = objects.nodes.map(n => n.id);
       var links_id = objects.links.map(l => l.id);
-      for (var i = 0; i < markers_array.length; i++) {
-        if (nodes_id.includes(markers_array[i].node_id)) {
-          markers_array[i].addTo(map);
+      for (var i = 0; i < markersArray.length; i++) {
+        if (nodes_id.includes(markersArray[i].node_id)) {
+          markersArray[i].addTo(map);
         } else {
-          markers_array[i].removeFrom(map);
+          markersArray[i].removeFrom(map);
         }
       }
-      for (var i = 0; i < polyline_array.length; i++) {
-        try { polyline_array[i].destroy(); }
+      for (var i = 0; i < polylinesArray.length; i++) {
+        try { polylinesArray[i].destroy(); }
         catch(err) {};
       }
-      polyline_array = [];
+      polylinesArray = [];
       for (var i = 0; i < objects.links.length; i++) {
         var link = objects.links[i];
         var source_latitude = link.source_properties.latitude;
@@ -90,7 +90,7 @@ $('#select-filters').on('change', function() {
         ], {color: color, opacity: 20}
         ).addTo(map);
         polygonSD.link_id = polygonDS.link_id = obj_id;
-        polyline_array.push(polygonSD, polygonDS);
+        polylinesArray.push(polygonSD, polygonDS);
       }
       alertify.notify('Filter applied.', 'success', 5);
     }

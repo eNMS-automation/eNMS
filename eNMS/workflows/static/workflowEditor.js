@@ -95,7 +95,7 @@ if (workflow) {
 function scheduleTask() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
-    'Workflow management' page first.`, 'error', 5); 
+    'Workflow management' page first.`, 'error', 5);
   }
   if ($('#scheduling-form').parsley().validate()) {
     $.ajax({
@@ -125,7 +125,7 @@ function scheduleTask() { // eslint-disable-line no-unused-vars
 function addTaskToWorkflow() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
-    'Workflow management' page first.`, 'error', 5); 
+    'Workflow management' page first.`, 'error', 5);
   }
   if ($('#add-existing-task').parsley().validate()) {
     $.ajax({
@@ -142,7 +142,7 @@ function addTaskToWorkflow() { // eslint-disable-line no-unused-vars
         } else {
           alertify.notify(`Task already in workflow.`, 'error', 5);
         }
-      }
+      },
     });
   } else {
     alertify.notify('Some fields are missing.', 'error', 5);
@@ -184,7 +184,7 @@ function deleteNode(id) {
  * @param {edge} edge - Edge to add to the workflow.
  */
 function saveEdge(edge) {
-  const param = `${workflow.id}/${edge.type}/${edge.from}/${edge.to}`
+  const param = `${workflow.id}/${edge.type}/${edge.from}/${edge.to}`;
   $.ajax({
     type: 'POST',
     url: `/workflows/add_edge/${param}`,
@@ -200,7 +200,6 @@ function saveEdge(edge) {
  * @param {edgeId} edgeId - Id of the edge to be deleted.
  */
 function deleteEdge(edgeId) {
-  console.log(edgeId);
   $.ajax({
     type: 'POST',
     url: `/workflows/delete_edge/${workflow.id}/${edgeId}`,
@@ -213,6 +212,7 @@ function deleteEdge(edgeId) {
 /**
  * Convert task object to Vis task node.
  * @param {task} task - Task object.
+ * @return {visTask}.
  */
 function taskToNode(task) {
   return {
@@ -228,6 +228,7 @@ function taskToNode(task) {
 /**
  * Convert edge object to Vis task edge.
  * @param {edge} edge - Edge object.
+ * @return {visEdge}.
  */
 function edgeToEdge(edge) {
   return {
@@ -244,7 +245,7 @@ function edgeToEdge(edge) {
 /**
  * Show scheduling modal.
  */
-function showSchedulingModal(){
+function showSchedulingModal() {
   $('#scheduling').modal('show');
 }
 
@@ -264,7 +265,7 @@ function startTask() {
       url: `/workflows/set_as_start/${workflow.id}/${start.id}`,
       success: function() {
         nodes.update({id: start.id, color: 'green'});
-        workflow.start_task = start.id
+        workflow.start_task = start.id;
         alertify.notify('Start task updated.', 'success', 5);
       },
     });
@@ -276,13 +277,14 @@ function startTask() {
  * Delete selected nodes and edges.
  */
 function deleteSelection() {
-  graph.getSelectedNodes().map(node => deleteNode(node));
-  graph.getSelectedEdges().map(edge => deleteEdge(edge));
+  graph.getSelectedNodes().map((node) => deleteNode(node));
+  graph.getSelectedEdges().map((edge) => deleteEdge(edge));
   graph.deleteSelected();
 }
 
 /**
  * Change the mode (motion, creation of success or failure edge).
+ * @param {mode} mode - Mode to switch to.
  */
 function switchMode(mode) {
   if (mode == 'success' || mode == 'failure') {
@@ -308,11 +310,11 @@ function showTaskModal(id) {
     success: function(task) {
       for (const [property, value] of Object.entries(task)) {
         if ($(`#${property}`).length) {
-          input = Array.isArray(value) ? value.map(s => s.id) : value
+          const input = Array.isArray(value) ? value.map((s) => s.id) : value;
           $(`#${property}`).val(input);
         }
       }
-    }
+    },
   });
   $('#scheduling').modal('show');
 }
@@ -327,7 +329,7 @@ $('#workflow-name').on('change', function() {
       workflow = wf;
       graph = displayWorkflow(wf);
       alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
-    }
+    },
   });
 });
 
@@ -335,7 +337,6 @@ $('#workflow-name').on('change', function() {
  * Save positions of the workflow nodes.
  */
 function savePositions() {
-  console.log(graph);
   $.ajax({
     type: 'POST',
     url: '/workflows/save_positions',
@@ -359,7 +360,7 @@ const action = {
   'Create success edge': partial(switchMode, 'success'),
   'Create failure edge': partial(switchMode, 'failure'),
   'Move nodes': partial(switchMode, 'node'),
-}
+};
 
 $('.dropdown-submenu a.test').on('click', function(e) {
   $(this).next('ul').toggle();
@@ -369,12 +370,12 @@ $('.dropdown-submenu a.test').on('click', function(e) {
 
 $('#network').contextMenu({
   menuSelector: '#contextMenu',
-  menuSelected: function (invokedOn, selectedMenu) {
+  menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
     action[row](selectedNode);
-  }
+  },
 });
 
 $(window).bind('beforeunload', function() {
-  savePositions()
+  savePositions();
 });

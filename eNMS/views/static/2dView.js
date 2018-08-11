@@ -2,16 +2,22 @@
 global
 alertify: false
 L: false
+labels: false
 layers: false
 links: false
 markersArray: true
 nodes: false
 parameters: false
+partial: false
 polylinesArray: true
+showModal: false
+showObjectModal: false
 selection: true
 subtypes: false
 view: false
 */
+
+let markers;
 
 const map = L.map('mapid').setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -21,9 +27,13 @@ const osmLayer = L.tileLayer(layers['osm']);
 map.addLayer(osmLayer);
 let currentLayer = osmLayer;
 if (view == 'markercluster') {
-  let markers = L.markerClusterGroup();
+  markers = L.markerClusterGroup();
 }
 
+/**
+ * Change the tile layer.
+ * @param {layer} layer - tile layer.
+ */
 function switchLayer(layer) {
   map.removeLayer(currentLayer);
   currentLayer = L.tileLayer(layers[layer]);
@@ -53,10 +63,10 @@ L.PolylineClusterable = L.Polyline.extend({
     this._originalInitialize(bounds, options);
     this._latlng = this.getBounds().getCenter();
   },
-  getLatLng: function () {
+  getLatLng: function() {
     return this._latlng;
   },
-  setLatLng: function () {
+  setLatLng: function() {
     // setter
   },
 });
@@ -64,7 +74,7 @@ L.PolylineClusterable = L.Polyline.extend({
 for (let i = 0; i < nodes.length; i++) {
   const node = nodes[i];
   const marker = L.marker([
-    node.latitude, 
+    node.latitude,
     node.longitude,
   ]);
 
@@ -85,7 +95,7 @@ for (let i = 0; i < nodes.length; i++) {
   });
 
   marker.bindTooltip(node[labels.node], {
-    permanent: false, 
+    permanent: false,
   });
 
   if (view == 'leaflet') {
@@ -119,7 +129,7 @@ for (let i = 0; i < links.length; i++) {
     showObjectModal('link', this.link_id);
   });
   polyline.bindTooltip(link[labels.link], {
-    permanent: false, 
+    permanent: false,
   });
   if (view == 'leaflet') {
     polyline.addTo(map);
@@ -128,6 +138,9 @@ for (let i = 0; i < links.length; i++) {
   }
 }
 
+/**
+ * Unselect all nodes.
+ */
 function unselectAll() {
   for (let i = 0; i < markersArray.length; i++) {
     markersArray[i].setIcon(markersArray[i].icon);
@@ -158,23 +171,32 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: 'json',
     success: function(objects) {
-      const nodes_id = objects.nodes.map(n => n.id);
-      const links_id = objects.links.map(l => l.id);
+      const nodesId = objects.nodes.map((n) => n.id);
+      const linksId = objects.links.map((l) => l.id);
       for (let i = 0; i < markersArray.length; i++) {
-        if (nodes_id.includes(markersArray[i].node_id)) {
+        if (nodesId.includes(markersArray[i].node_id)) {
           markersArray[i].addTo(map);
         } else {
           markersArray[i].removeFrom(map);
         }
       }
-      for (const i = 0; i < polylinesArray.length; i++) {
-        if (links_id.includes(polylinesArray[i].link_id)) {
+      for (let i = 0; i < polylinesArray.length; i++) {
+        if (linksId.includes(polylinesArray[i].link_id)) {
           polylinesArray[i].addTo(map);
         } else {
           polylinesArray[i].removeFrom(map);
         }
       }
       alertify.notify('Filter applied.', 'success', 5);
-    }
+    },
   });
 });
+
+const action = { // eslint-disable-line no-unused-vars
+  'Parameters': partial(showModal, 'filters'),
+  'Export to Google Earth': partial(showModal, 'google-earth'),
+  'Add new task': partial(showModal, 'scheduling'),
+  'Open Street Map': partial(switchLayer, 'osm'),
+  'Google Maps': partial(switchLayer, 'gm'),
+  'NASA': partial(switchLayer, 'nasa'),
+};

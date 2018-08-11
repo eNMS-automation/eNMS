@@ -1,5 +1,18 @@
-const table = $('#table').DataTable();
+/*
+global
+alertify: false
+fields: false
+types: false
+scripts: false
+*/
 
+const table = $('#table').DataTable(); // eslint-disable-line new-cap
+
+/**
+ * Add a script to the datatable.
+ * @param {mode} mode - Create or edit.
+ * @param {properties} properties - Properties of the script.
+ */
 function addScript(mode, properties) {
   let values = [];
   for (let i = 0; i < fields.length; i++) {
@@ -7,7 +20,8 @@ function addScript(mode, properties) {
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showScriptModal('${properties.type}', '${properties.id}')">Edit</button>`,
+    onclick="showScriptModal('${properties.type}',
+    '${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
@@ -32,13 +46,21 @@ for (let i = 0; i < types.length; i++) {
   $(`#${types[i]}-button`).text('Update');
 }
 
-function showSchedulingModal(id) {
-  $('#job-div').hide()
+/**
+ * Open scheduling modal for a script.
+ * @param {id} id - Id of the script to schedule.
+ */
+function showSchedulingModal(id) { // eslint-disable-line no-unused-vars
+  $('#job-div').hide();
   $('#job').val(id);
   $('#scheduling').modal('show');
 }
 
-function createScript(type) {
+/**
+ * Create a new script.
+ * @param {type} type - Type of script to create.
+ */
+function createScript(type) { // eslint-disable-line no-unused-vars
   if ($(`#${type}-form`).parsley().validate() ) {
     $.ajax({
       type: 'POST',
@@ -47,19 +69,24 @@ function createScript(type) {
       data: $(`#${type}-form`).serialize(),
       success: function() {
         alertify.notify('Script successfully updated.', 'success', 5);
-      }
+      },
     });
     $(`#edit-${type}`).modal('hide');
   }
 }
 
+/**
+ * Delete a script.
+ * @param {id} id - Id of the script to delete.
+ */
 function deleteScript(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/scripts/delete/${id}`,
-    success: function(scriptName){
+    success: function(scriptName) {
       table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify(`Script '${scriptName}' successfully deleted.`, 'error', 5);
-    }
+      const message = `Script '${scriptName}' successfully deleted.`;
+      alertify.notify(message, 'error', 5);
+    },
   });
 }

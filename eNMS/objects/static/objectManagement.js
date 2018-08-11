@@ -1,25 +1,30 @@
 /*
 global
 links: false
-link_fields: false
+linkFields: false
 nodes: false
-node_fields: false
+nodeFields: false
 */
 
 const nodeTable = $('#node-table').DataTable(); // eslint-disable-line new-cap
 const linkTable = $('#link-table').DataTable(); // eslint-disable-line new-cap
 
+/**
+ * Add object to the datatable.
+ * @param {mode} mode - Create or edit.
+ * @param {type} type - Node or link.
+ * @param {properties} properties - Properties of the object.
+ */
 function addObjectToTable(mode, type, properties) {
   let values = [];
   const table = type == 'node' ? nodeTable : linkTable;
-  const fields = type == 'node' ? node_fields : link_fields;
+  const fields = type == 'node' ? nodeFields : linkFields;
   for (let i = 0; i < fields.length; i++) {
     if (['longitude', 'latitude'].includes(fields[i])) {
-      value = parseFloat(properties[fields[i]]).toFixed(2);
+      values.push(`${parseFloat(properties[fields[i]]).toFixed(2)}`);
     } else {
-      properties[fields[i]];
+      values.push(`${properties[fields[i]]}`);
     }
-    values.push(`${value}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
@@ -30,7 +35,7 @@ function addObjectToTable(mode, type, properties) {
   if (mode == 'edit') {
     table.row($(`#${type}-${properties.id}`)).data(values);
   } else {
-    rowNode = table.row.add(values).draw(false).node();
+    const rowNode = table.row.add(values).draw(false).node();
     $(rowNode).attr('id', `${type}-${properties.id}`);
   }
 }
@@ -48,7 +53,11 @@ document.getElementById('file').onchange = function() {
   $('#form').submit();
 };
 
-function showModal(type) {
+/**
+ * Display the object modal.
+ * @param {type} type - Node or link.
+ */
+function showModal(type) { // eslint-disable-line no-unused-vars
   $('#title').text(`Add a new ${type}`);
   $(`#edit-${type}-form`).trigger('reset');
   $(`#edit-${type}`).modal('show');

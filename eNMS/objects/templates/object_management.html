@@ -14,8 +14,8 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var node_fields = {{ node_fields|tojson|safe }};
-    var link_fields = {{ link_fields|tojson|safe }};
+    var nodeFields = {{ node_fields|tojson|safe }};
+    var linkFields = {{ link_fields|tojson|safe }};
     var nodes = {{ nodes|tojson|safe }};
     var links = {{ links|tojson|safe }};
   </script>

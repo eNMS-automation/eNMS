@@ -4,10 +4,10 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.css') }}" rel="stylesheet">
+  <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.css') }}" rel="stylesheet">
   {% if view == 'markercluster' %}
-    <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.css') }}" rel="stylesheet">
-    <link href="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/MarkerCluster.Default.css') }}" rel="stylesheet">
+    <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
   {% endif %}
   <style>
     #mapid { height:90vh; }
@@ -97,12 +97,12 @@
   <script src="{{ url_for('views_blueprint.static', filename='views.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='geographicalView.js') }}"></script>
   {% if view == 'glearth' %}
-    <script src="{{ url_for('views_blueprint.static', filename='js/webgl-earth/api.js') }}"></script>
+    <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
     <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
   {% else %}
-    <script src="{{ url_for('views_blueprint.static', filename='js/leaflet/leaflet.js') }}"></script>
+    <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.js') }}"></script>
     {% if view == 'markercluster' %}
-      <script src="{{ url_for('views_blueprint.static', filename='js/leaflet-markercluster/dist/leaflet.markercluster-src.js') }}"></script>
+      <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster-src.js') }}"></script>
     {% endif %}
     <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
   {% endif %}

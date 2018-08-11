@@ -192,7 +192,7 @@ $('#select-filters').on('change', function() {
   });
 });
 
-const action = { // eslint-disable-line no-unused-vars
+const action = {
   'Parameters': partial(showModal, 'filters'),
   'Export to Google Earth': partial(showModal, 'google-earth'),
   'Add new task': partial(showModal, 'scheduling'),
@@ -200,3 +200,11 @@ const action = { // eslint-disable-line no-unused-vars
   'Google Maps': partial(switchLayer, 'gm'),
   'NASA': partial(switchLayer, 'nasa'),
 };
+
+$('body').contextMenu({
+  menuSelector: '#contextMenu',
+  menuSelected: function(invokedOn, selectedMenu) {
+    const row = selectedMenu.text();
+    action[row]();
+  },
+});

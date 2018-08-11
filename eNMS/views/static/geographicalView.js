@@ -1,37 +1,37 @@
-var layers = {
+/*
+global
+alertify: false
+*/
+
+const layers = { // eslint-disable-line no-unused-vars
   'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
   'gm': 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga',
-  'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg'
+  'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg',
 };
 
-var markersArray = [];
-var polylinesArray = [];
-var selection = [];
+let markersArray = []; // eslint-disable-line no-unused-vars
+let polylinesArray = []; // eslint-disable-line no-unused-vars
+let selection = []; // eslint-disable-line no-unused-vars
 
-function exportToGoogleEarth() {
-  if ($("#google-earth-form").parsley().validate()) {
+/**
+ * Export project to Google Earth (creation of a .kmz file).
+ */
+function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
+  if ($('#google-earth-form').parsley().validate()) {
     $.ajax({
-      type: "POST",
-      url: "/views/export_to_google_earth",
-      dataType: "json",
-      data: $("#google-earth-form").serialize(),
+      type: 'POST',
+      url: '/views/export_to_google_earth',
+      dataType: 'json',
+      data: $('#google-earth-form').serialize(),
       success: function() {
         alertify.notify(`Project exported to Google Earth.`, 'success', 5);
-      }
+      },
     });
-    $("#google-earth").modal('hide');
+    $('#google-earth').modal('hide');
   }
 }
 
-$('body').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function (invokedOn, selectedMenu) {
-    var row = selectedMenu.text();
-    action[row]();
-  }
-});
-
-$('.dropdown-submenu a.test').on("click", function(e){
+$('.dropdown-submenu a.test').on('click', function(e) {
   $(this).next('ul').toggle();
   e.stopPropagation();
   e.preventDefault();

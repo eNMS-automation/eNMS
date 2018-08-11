@@ -1,4 +1,5 @@
-/* global alertify: false, fields: false, workflows: false */
+/* global alertify: false */
+/* global fields: false, workflows: false */
 
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
 

@@ -1,43 +1,45 @@
-var container = document.getElementById('network');
-var dsoptions = {
+/* global alertify: false, vis: false */
+/* global workflow: true, graph: true, nodes: true, edges: true */
+
+const container = document.getElementById('network');
+const dsoptions = {
   edges: {
     font: {
-      size: 12
-    }
+      size: 12,
+    },
   },
   nodes: {
     shape: 'box',
     font: {
       bold: {
-        color: '#0077aa'
-      }
-    }
+        color: '#0077aa',
+      },
+    },
   },
   manipulation: {
     enabled: false,
-    addNode: function (data, callback) {
+    addNode: function(data, callback) {
       // filling in the popup DOM elements
     },
-    editNode: function (data, callback) {
+    editNode: function(data, callback) {
       // filling in the popup DOM elements
     },
-    addEdge: function (data, callback) {
+    addEdge: function(data, callback) {
       if (data.from != data.to) {
-        data.type = edge_type;
+        data.type = edgeType;
         saveEdge(data);
-        console.log('test');
         graph.addEdgeMode();
       }
-    }
-  }
+    },
+  },
 };
-var selectedNode = null;
+let selectedNode = null;
+let edgeType = 'success';
 
 function displayWorkflow(wf) {
   nodes = new vis.DataSet(wf.tasks.map(taskToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
-  data = {nodes: nodes, edges: edges};
-  graph = new vis.Network(container, data, dsoptions);
+  graph = new vis.Network(container, {nodes: nodes, edges: edges}, dsoptions);
   graph.setOptions({physics: false});
   graph.on('oncontext', function(properties) {
     properties.event.preventDefault();
@@ -197,7 +199,7 @@ function showSchedulingModal(){
 }
 
 function startScript() {
-  start = nodes.get(graph.getSelectedNodes()[0]);
+  let start = nodes.get(graph.getSelectedNodes()[0]);
   if (start.length == 0 || !start.id) {
     alertify.notify('You must select a script first.', 'error', 5);
   } else {
@@ -225,7 +227,7 @@ function deleteSelection() {
 
 function switchMode(mode) {
   if (mode == 'success' || mode == 'failure') {
-    edge_type = mode;
+    edgeType = mode;
     graph.addEdgeMode();
     alertify.notify(`Mode: creation of ${mode} edge.`, 'success', 5);
   } else {
@@ -252,7 +254,7 @@ function showTaskModal(id) {
     type: 'POST',
     url: `/tasks/get/${id}`,
     success: function(task) {
-      for (var [property, value] of Object.entries(task)) {
+      for (const [property, value] of Object.entries(task)) {
         if ($(`#${property}`).length) {
           input = Array.isArray(value) ? value.map(s => s.id) : value
           $(`#${property}`).val(input);
@@ -285,11 +287,13 @@ function savePositions() {
     dataType: 'json',
     contentType: 'application/json;charset=UTF-8',
     data: JSON.stringify(graph.getPositions(), null, '\t'),
-    success: function() { }
+    success: function() {
+      // Positions saved
+    },
   });
 }
 
-var action = {
+const action = {
   'Edit': showTaskModal,
   'Logs': showTaskLogs,
   'Compare': compareTaskLogs,
@@ -299,10 +303,10 @@ var action = {
   'Delete selection': deleteSelection,
   'Create success edge': partial(switchMode, 'success'),
   'Create failure edge': partial(switchMode, 'failure'),
-  'Move nodes': partial(switchMode, 'node')
+  'Move nodes': partial(switchMode, 'node'),
 }
 
-$('.dropdown-submenu a.test').on('click', function(e){
+$('.dropdown-submenu a.test').on('click', function(e) {
   $(this).next('ul').toggle();
   e.stopPropagation();
   e.preventDefault();
@@ -311,7 +315,7 @@ $('.dropdown-submenu a.test').on('click', function(e){
 $('#network').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function (invokedOn, selectedMenu) {
-    var row = selectedMenu.text();
+    const row = selectedMenu.text();
     action[row](selectedNode);
   }
 });

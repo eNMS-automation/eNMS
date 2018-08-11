@@ -1,7 +1,7 @@
-var table = $('#table').DataTable();
+const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 function addUser(mode, properties) {
-  values = [];
+  let values = [];
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }

@@ -5,3 +5,4 @@ eNMS/objects
 eNMS/scripts
 eNMS/tasks
 eNMS/views
+eNMS/workflows/static/vis

@@ -1,10 +1,15 @@
-/*jshint esversion: 6 */
+/* global alertify: false, fields: false, workflows: false */
 
-var table = $('#table').DataTable();
+const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
+/**
+ * Add workflow to the datatable.
+ * @param {mode} mode - create or edit.
+ * @param {properties} properties - properties of the workflow.
+ */
 function addWorkflow(mode, properties) {
-  var values = [];
-  for (var i = 0; i < fields.length; i++) {
+  let values = [];
+  for (let i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
@@ -18,76 +23,87 @@ function addWorkflow(mode, properties) {
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
   } else {
-    var rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr("id", `${properties.id}`);
+    const rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr('id', `${properties.id}`);
   }
 }
 
 (function() {
-  for (var i = 0; i < workflows.length; i++) {
+  for (let i = 0; i < workflows.length; i++) {
     addWorkflow('create', workflows[i]);
   }
 })();
 
-// Scheduling: run a workflow
-
-function showSchedulingModal(id) {
-  $("#job-div").hide()
-  $("#job").val(id);
-  $("#scheduling").modal('show');
+/**
+ * Open the scheduling modal (disable job section: we schedule the workflow).
+ * @param {id} id - id of the workflow to schedule.
+ */
+function showSchedulingModal(id) { // eslint-disable-line no-unused-vars
+  $('#job-div').hide();
+  $('#job').val(id);
+  $('#scheduling').modal('show');
 }
 
-// Properties modal: add or edit a workflow
-
-// open modal to add a new workflow
-function showModal(type) {
-  $('#title').text("Add a new workflow");
-  $('#edit-form').trigger("reset");
+/**
+ * Open the workflow modal for creation.
+ */
+function showModal() { // eslint-disable-line no-unused-vars
+  $('#title').text('Add a new workflow');
+  $('#edit-form').trigger('reset');
   $('#edit').modal('show');
 }
 
-// open modal to edit an existing workflow
-function showWorkflowModal(id) {
+/**
+ * Open the workflow modal for editing.
+ * @param {id} id - id of the workflow to edit.
+ */
+function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
   $('#title').text(`Edit properties`);
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/workflows/get/${id}`,
-    success: function(properties){
+    success: function(properties) {
       for (const [property, value] of Object.entries(properties)) {
         $(`#property-${property}`).val(value);
       }
-    }
+    },
   });
   $(`#edit`).modal('show');
 }
 
-function editObject() {
-  if ($("#edit-form").parsley().validate() ) {
+/**
+ * Edit a workflow.
+ */
+function editObject() { // eslint-disable-line no-unused-vars
+  if ($('#edit-form').parsley().validate() ) {
     $.ajax({
-      type: "POST",
+      type: 'POST',
       url: `/workflows/edit_workflow`,
-      dataType: "json",
-      data: $("#edit-form").serialize(),
-      success: function(properties){
-        var mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
+      dataType: 'json',
+      data: $('#edit-form').serialize(),
+      success: function(properties) {
+        const mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
         addWorkflow(mode, properties);
-        message = `Workflow ${properties.name}
+        const message = `Workflow ${properties.name};
         ${mode == 'edit' ? 'edited' : 'created'}.`;
         alertify.notify(message, 'success', 5);
-      }
+      },
     });
     $(`#edit`).modal('hide');
   }
 }
 
-// delete a workflow
-function deleteWorkflow(id) {
+/**
+ * Delete a workflow.
+ * @param {id} id - id of the workflow to delete.
+ */
+function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/workflows/delete/${id}`,
-    success: function(name){
+    success: function(name) {
       table.row($(`#${id}`)).remove().draw(false);
       alertify.notify(`Workflow '${name}' deleted.`, 'error', 5);
-    }
+    },
   });
 }

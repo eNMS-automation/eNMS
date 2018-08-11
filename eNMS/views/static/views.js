@@ -1,10 +1,17 @@
-function connectToDevice(name) {
-  var name = $(`#node-name`).val();
+/*
+global
+alertify: false
+*/
+
+/**
+ * Start an SSH session to the device.
+ */
+function connectToDevice() { // eslint-disable-line no-unused-vars
   $.ajax({
-    type: "POST",
-    url: `/views/connect_to_${name}`,
+    type: 'POST',
+    url: `/views/connect_to_${$(`#node-name`).val()}`,
     success: function(msg) {
       alertify.notify(`Connection to ${name}.`, 'success', 5);
-    }
+    },
   });
 }

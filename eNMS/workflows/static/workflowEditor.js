@@ -1,5 +1,13 @@
-/* global alertify: false, vis: false */
-/* global workflow: true */
+/*
+global
+workflow: true,
+alertify: false,
+vis: false,
+showTaskLogs: false,
+compareTaskLogs: false,
+showModal: false,
+partial: false
+*/
 
 const container = document.getElementById('network');
 const dsoptions = {
@@ -43,6 +51,7 @@ let edgeType;
 /**
  * Display a workflow.
  * @param {wf} wf - A workflow.
+ * @return {graph}
  */
 function displayWorkflow(wf) {
   nodes = new vis.DataSet(wf.tasks.map(taskToNode));
@@ -83,7 +92,7 @@ if (workflow) {
 /**
  * Schedule a task.
  */
-function scheduleTask() {
+function scheduleTask() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5); 
@@ -113,7 +122,7 @@ function scheduleTask() {
 /**
  * Add an existing task to the workflow.
  */
-function addTaskToWorkflow() {
+function addTaskToWorkflow() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5); 

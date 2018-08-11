@@ -1,34 +1,32 @@
+/*
+global
+tasks: false
+*/
+
 $(function() {
-  if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
-
-  var date = new Date(),
-    d = date.getDate(),
-    m = date.getMonth(),
-    y = date.getFullYear(),
-    started,
-    categoryClass;
-
-  var events = []
+  if (typeof ($.fn.fullCalendar) === 'undefined') {
+    return;
+  }
+  let events = [];
   for (const [name, properties] of Object.entries(tasks)) {
     events.push({
       title: name,
       description: properties.description,
-      start: new Date(...properties.date)
+      start: new Date(...properties.date),
     });
   }
-
-  var calendar = $('#calendar').fullCalendar({
+  $('#calendar').fullCalendar({
     header: {
-    left: 'prev,next today',
-    center: 'title',
-    right: 'month,agendaWeek,agendaDay,listMonth'
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay,listMonth',
     },
     selectable: true,
     selectHelper: true,
     eventClick: function(calEvent, jsEvent, view) {
       /*
       $.ajax({
-        type: "POST",
+        type: 'POST',
         url: `/tasks/get/${calEvent.title}`,
         dataType: 'json',
         success: function(properties){
@@ -41,6 +39,6 @@ $(function() {
       */
     },
     editable: true,
-    events: events
+    events: events,
   });
 });

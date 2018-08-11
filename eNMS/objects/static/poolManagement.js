@@ -1,9 +1,21 @@
-var poolId = null;
-var table = $('#table').DataTable();
+/*
+global
+alertify: false
+fields: false
+pools: false
+*/
 
+let poolId = null;
+const table = $('#table').DataTable(); // eslint-disable-line new-cap
+
+/**
+ * Add pool to the datatable.
+ * @param {mode} mode - Create or edit.
+ * @param {properties} properties - Properties of the pool.
+ */
 function addPool(mode, properties) {
-  values = [];
-  for (var i = 0; i < fields.length; i++) {
+  let values = [];
+  for (let i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
@@ -17,103 +29,127 @@ function addPool(mode, properties) {
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
   } else {
-    var rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr("id", `${properties.id}`);
+    const rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr('id', `${properties.id}`);
   }
 }
 
 (function() {
-  for (var i = 0; i < pools.length; i++) {
+  for (let i = 0; i < pools.length; i++) {
     addPool('create', pools[i]);
   }
 })();
 
-function showModal() {
-  $("#title").text("Add a new pool");
-  $("#edit-form").trigger("reset");
-  $("#edit").modal("show");
+/**
+ * Open pool modal for creation.
+ */
+function showModal() { // eslint-disable-line no-unused-vars
+  $('#title').text('Add a new pool');
+  $('#edit-form').trigger('reset');
+  $('#edit').modal('show');
 }
 
-function showPoolModal(id) {
+/**
+ * Display pool modal for editing.
+ * @param {id} id - Id of the pool to edit.
+ */
+function showPoolModal(id) { // eslint-disable-line no-unused-vars
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/objects/get_pool/${id}`,
-    success: function(properties){
+    success: function(properties) {
       for (const [property, value] of Object.entries(properties)) {
-        if (property.includes("regex")) {
+        if (property.includes('regex')) {
           $(`#${property}`).prop('checked', value);
         } else {
           $(`#${property}`).val(value);
         }
         $('#title').text(`Edit pool properties`);
       }
-    }
+    },
   });
-  $("#edit").modal('show');
+  $('#edit').modal('show');
 }
 
-function showPoolObjects(id) {
+/**
+ * Display pool objects for editing.
+ * @param {id} id - Id of the pool.
+ */
+function showPoolObjects(id) { // eslint-disable-line no-unused-vars
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/objects/get_pool_objects/${id}`,
-    success: function(properties){
-      $('#nodes').val(properties.nodes.map(n => n.id));
-      $('#links').val(properties.links.map(l => l.id));
+    success: function(properties) {
+      $('#nodes').val(properties.nodes.map((n) => n.id));
+      $('#links').val(properties.links.map((l) => l.id));
       poolId = id;
-    }
+    },
   });
-  $("#edit-pool-objects").modal('show');
+  $('#edit-pool-objects').modal('show');
 }
 
-function savePoolObjects() {
+/**
+ * Update pool objects.
+ */
+function savePoolObjects() { // eslint-disable-line no-unused-vars
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/objects/save_pool_objects/${poolId}`,
-    dataType: "json",
+    dataType: 'json',
     data: $('#pool-objects-form').serialize(),
-    success: function(){
+    success: function() {
       alertify.notify('Changes saved.', 'success', 5);
-    }
+    },
   });
-  $("#edit-pool-objects").modal('hide');
+  $('#edit-pool-objects').modal('hide');
 }
 
-function savePool() {
+/**
+ * Update pool properties.
+ */
+function savePool() { // eslint-disable-line no-unused-vars
   if ($('#edit-form').parsley().validate()) {
     $.ajax({
-      type: "POST",
+      type: 'POST',
       url: `/objects/process_pool`,
-      dataType: "json",
+      dataType: 'json',
       data: $('#edit-form').serialize(),
-      success: function(pool){
-        var mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-        addPool(mode, pool)
-        message = `Pool '${pool.name}'
+      success: function(pool) {
+        const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+        addPool(mode, pool);
+        const message = `Pool '${pool.name}'
         ${mode == 'edit' ? 'edited !' : 'created !'}.`;
         alertify.notify(message, 'success', 5);
-      }
+      },
     });
     $('#edit').modal('hide');
   }
 }
 
-function deletePool(id) {
+/**
+ * Delete pool.
+ * @param {id} id - Id of the pool to delete.
+ */
+function deletePool(id) { // eslint-disable-line no-unused-vars
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/objects/delete_pool/${id}`,
-    success: function(name){
+    success: function(name) {
       table.row($(`#${id}`)).remove().draw(false);
       alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
-    }
+    },
   });
 }
 
-function updatePools(id) {
+/**
+ * Update all pool objects according to pool properties.
+ */
+function updatePools() { // eslint-disable-line no-unused-vars
   $.ajax({
-    type: "POST",
-    url: "/objects/update_pools",
-    success: function(properties){
+    type: 'POST',
+    url: '/objects/update_pools',
+    success: function(properties) {
       alertify.notify('Pools successfully updated.', 'success', 5);
-    }
+    },
   });
 }

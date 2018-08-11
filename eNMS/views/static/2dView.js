@@ -24,10 +24,10 @@ for (var i = 0; i < subtypes.length; i++) {
     popupAnchor: [8, -5]
     });
   window[`icon_selected_${subtypes[i]}`] = L.icon({
-  iconUrl: `static/images/selected/${subtypes[i].toLowerCase()}.gif`,
-  iconSize: [18, 12],
-  iconAnchor: [9, 6],
-  popupAnchor: [8, -5]
+    iconUrl: `static/images/selected/${subtypes[i].toLowerCase()}.gif`,
+    iconSize: [18, 12],
+    iconAnchor: [9, 6],
+    popupAnchor: [8, -5]
   });
 }
 

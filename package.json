@@ -1,0 +1,27 @@
+{
+  "name": "eNMS",
+  "version": "2.1.0",
+  "description": "A vendor-agnostic NMS for graphical network automation",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": "8.11.3"
+  },
+  "devDependencies": {
+    "eslint": "5.0.0",
+    "eslint-config-google": "0.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afourmy/eNMS"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Antoine Fourmy",
+  "contributors": [
+    "Antoine fourmy <antoine.fourmy@gmail.com>"
+  ],
+  "license": "GPLv3"
+}

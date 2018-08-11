@@ -10,11 +10,17 @@ showObjectModal: false
 
 let selectedNodes = [];
 
+/**
+ * Select nodes in the scheduling modal.
+ */
 function sendSelection() {
   $('#nodes').val(selectedNodes.map((s) => s[1].real_id));
 }
 
-// selection function
+/**
+ * Select a node.
+ * @param {d} d - selected node.
+ */
 function selectNode(d) {
   // we stop the propagation up the DOM tree so that the
   // unselectAll event bound to the canvas is not triggered
@@ -27,15 +33,25 @@ function selectNode(d) {
   sendSelection();
 }
 
-// selection function
+/**
+ * Show node property modal.
+ * @param {d} d - selected node.
+ */
 function showNodeProperties(d) {
   showObjectModal('node', d.real_id);
 }
 
+/**
+ * Show link property modal.
+ * @param {d} d - selected link.
+ */
 function showLinkProperties(d) {
   showObjectModal('link', d.real_id);
 }
 
+/**
+ * Unselect all nodes.
+ */
 function unselectAll() {
   d3.event.preventDefault();
   for (let i = 0; i < selectedNodes.length; i++) {
@@ -61,6 +77,13 @@ let svg = d3.select('#logical_view').append('svg')
   .call(zoom)
   .on('mousedown.zoom', null);
 
+/**
+ * Rectangular selection.
+ * @param {x} x
+ * @param {x} y
+ * @param {w} w
+ * @param {h} h
+ */
 function rect(x, y, w, h) {
   return 'M' + [x, y] + ' l' + [w, 0] + ' l' + [0, h] + ' l' + [-w, 0] + 'z';
 }
@@ -177,6 +200,9 @@ let node = container.selectAll('.node')
   .on('click', selectNode)
   .on('dblclick', showNodeProperties);
 
+/**
+ * Zoom with scroll.
+ */
 function zoomed() {
   container.attr(
     'transform',

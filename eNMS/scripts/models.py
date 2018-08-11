@@ -348,28 +348,28 @@ class AnsibleScript(Script):
     arguments = Column(String)
     options = Column(MutableDict.as_mutable(PickleType), default={})
     inventory_from_selection = Column(Boolean)
-    node_multiprocessing = True
+    node_multiprocessing = False
 
     __mapper_args__ = {
         'polymorphic_identity': 'ansible_playbook',
     }
 
-    def job(self, args):
-        task, node, results = args
+    def job(self, task, results):
         try:
             arguments = self.arguments.split()
             command = ['ansible-playbook']
             if self.inventory_from_selection:
-                command.extend(['-i', node.ip_address + ','])
+                hosts = ','.join(node.ip_address for node in task.nodes)
+                command.extend(['-i', hosts + ','])
             command.append(self.playbook_path)
             output = check_output(command + arguments)
             try:
                 output = output.decode('utf-8')
             except AttributeError:
                 pass
-            results[node.name] = {'success': True, 'logs': output}
+            return {'success': True, 'logs': output}
         except Exception as e:
-            results[node.name] = {'success': False, 'logs': str(e)}
+            return {'success': False, 'logs': str(e)}
 
 
 class RestCallScript(Script):
@@ -396,7 +396,7 @@ class RestCallScript(Script):
         'polymorphic_identity': 'rest_call',
     }
 
-    def job(self, task, nodes, results):
+    def job(self, task, results):
         try:
             if self.call_type in ('GET', 'DELETE'):
                 result = self.request_dict[self.call_type](

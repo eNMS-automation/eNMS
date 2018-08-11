@@ -175,7 +175,7 @@ class ScriptTask(Task):
             pool.join()
             success = all(results[node.name]['success'] for node in targets)
         else:
-            results = self.script.job(self, self.nodes, results)
+            results = self.script.job(self, results)
             success = results['success']
         self.logs[runtime] = results
         db.session.commit()

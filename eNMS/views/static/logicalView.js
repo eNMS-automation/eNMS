@@ -8,6 +8,8 @@ showModal: false
 showObjectModal: false
 */
 
+const width = 960;
+const height = 500;
 let selectedNodes = [];
 
 /**
@@ -62,9 +64,6 @@ function unselectAll() {
   selectedNodes = [];
   sendSelection();
 }
-
-const width = 960;
-const height = 500;
 
 let zoom = d3.behavior.zoom()
   .scaleExtent([1, 50])
@@ -210,6 +209,22 @@ function zoomed() {
     'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')'
   );
 }
+
+node.append('image')
+  .attr('xlink:href', function(d) {
+    return d.img;
+  })
+  .attr('x', -8)
+  .attr('y', -8)
+  .attr('width', 16)
+  .attr('height', 16);
+
+node.append('text')
+  .attr('dx', 8)
+  .attr('dy', '.35em')
+  .text(function(d) {
+    return d.name;
+  });
 
 force.on('tick', function() {
   link

@@ -3,7 +3,6 @@ global
 alertify: false
 compareTaskLogs: false
 partial: false
-showModal: false
 showTaskLogs: false
 vis: false
 workflow: true
@@ -247,6 +246,15 @@ function edgeToEdge(edge) {
  */
 function showSchedulingModal() {
   $('#scheduling').modal('show');
+  $('.dropdown-submenu a.menu-task').next('ul').toggle();
+}
+
+/**
+ * Display modal to add an existing task.
+ */
+function showExistingTaskModal() {
+  $('#add-existing-task').modal('show');
+  $('.dropdown-submenu a.menu-task').next('ul').toggle();
 }
 
 /**
@@ -296,7 +304,7 @@ function switchMode(mode) {
     alertify.notify('Mode: node motion.', 'success', 5);
   }
   // close the bootstrap submenu for layers
-  $('.dropdown-submenu a.test').next('ul').toggle();
+  $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
 /**
@@ -355,14 +363,14 @@ const action = {
   'Compare': compareTaskLogs,
   'Set as start': startTask,
   'Add new task': showSchedulingModal,
-  'Add existing task': partial(showModal, 'add-existing-task'),
+  'Add existing task': showExistingTaskModal,
   'Delete selection': deleteSelection,
   'Create success edge': partial(switchMode, 'success'),
   'Create failure edge': partial(switchMode, 'failure'),
   'Move nodes': partial(switchMode, 'node'),
 };
 
-$('.dropdown-submenu a.test').on('click', function(e) {
+$('.dropdown-submenu a.menu-submenu').on('click', function(e) {
   $(this).next('ul').toggle();
   e.stopPropagation();
   e.preventDefault();

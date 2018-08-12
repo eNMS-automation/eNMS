@@ -1,18 +1,27 @@
-function signup() {
+/*
+global
+alertify: false
+*/
+
+/**
+ * Create a new account.
+ */
+function signup() { // eslint-disable-line no-unused-vars
   if ($('#create-user-form').parsley().validate()) {
     $.ajax({
-      type: "POST",
-      url: "/admin/process_user",
-      dataType: "json",
+      type: 'POST',
+      url: '/admin/process_user',
+      dataType: 'json',
       data: $('#create-user-form').serialize(),
       success: function(result) {
         if (result == 'duplicate') {
-          alertify.notify("Cannot create new user: duplicate entry.", 'error', 5);
+          const message = 'Cannot create new user: duplicate entry.';
+          alertify.notify(message, 'error', 5);
         } else {
-          alertify.notify("New user created.", 'success', 5);
+          alertify.notify('New user created.', 'success', 5);
           document.getElementById('login-button').click();
         }
-      }
+      },
     });
-  };
+  }
 }

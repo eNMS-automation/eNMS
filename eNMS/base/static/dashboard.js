@@ -1,7 +1,14 @@
-var theme = {
+/*
+global
+counters: false
+defaultProperties: false
+echarts: false
+*/
+
+const theme = {
   color: [
     '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
-    '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+    '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7',
   ],
   title: {
     itemGap: 8,
@@ -56,12 +63,12 @@ var theme = {
     axisLine: {
       lineStyle: {
         color: '#408829',
-      }
+      },
     },
     splitArea: {
       show: true,
       areaStyle: {
-        color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+        color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)'],
       },
     },
     splitLine: {
@@ -75,8 +82,8 @@ var theme = {
       color: '#408829',
     },
     controlStyle: {
-      normal: { color: '#408829' },
-      emphasis: { color: '#408829' },
+      normal: {color: '#408829'},
+      emphasis: {color: '#408829'},
     },
   },
   k: {
@@ -206,7 +213,12 @@ gauge: {
   },
 };
 
-function draw_diagrams(objects, type) {
+/**
+ * Draw diagrams.
+ * @param {objects} objects - Objects properties.
+ * @param {type} type - Object type.
+ */
+function drawDiagrams(objects, type) {
   let legend = [];
   let data = [];
   for (const [key, value] of Object.entries(objects)) {
@@ -216,17 +228,17 @@ function draw_diagrams(objects, type) {
       name: key,
     });
   }
-  var link = echarts.init(document.getElementById(type), theme);
+  const link = echarts.init(document.getElementById(type), theme);
   link.setOption({
     tooltip: {
       trigger: 'item',
-      formatter: "{a} <br/>{b} : {c} ({d}%)"
+      formatter: '{a} <br/>{b} : {c} ({d}%)',
     },
     calculable: true,
     legend: {
       x: 'center',
       y: 'bottom',
-      data: legend
+      data: legend,
     },
     toolbox: {
       show: true,
@@ -239,19 +251,19 @@ function draw_diagrams(objects, type) {
                 x: '25%',
                 width: '50%',
                 funnelAlign: 'center',
-                max: 1548
-            }
-            }
+                max: 1548,
+            },
+          },
         },
         restore: {
             show: true,
-            title: "Restore"
+            title: 'Restore',
         },
         saveAsImage: {
             show: true,
-            title: "Save Image"
-        }
-      }
+            title: 'Save Image',
+        },
+      },
     },
     series: [{
       name: type,
@@ -260,11 +272,11 @@ function draw_diagrams(objects, type) {
       itemStyle: {
         normal: {
           label: {
-          show: true
+            show: true,
           },
           labelLine: {
-          show: true
-          }
+            show: true,
+          },
         },
         emphasis: {
           label: {
@@ -272,36 +284,36 @@ function draw_diagrams(objects, type) {
             position: 'center',
             textStyle: {
               fontSize: '14',
-              fontWeight: 'normal'
-            }
-          } 
-        }
+              fontWeight: 'normal',
+            },
+          },
+        },
       },
-    data: data
-    }]
+    data: data,
+    }],
   });
 }
 
-$.each(default_properties, function(type, property) {
+$.each(defaultProperties, function(type, property) {
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `/counters/${property}/${type}`,
-    dataType: "json",
-    success: function(objects){
-      draw_diagrams(objects, type);
-    }
+    dataType: 'json',
+    success: function(objects) {
+      drawDiagrams(objects, type);
+    },
   });
 });
 
 $.each(counters, function(type, _) {
   $(`#${type}-properties`).on('change', function() {
     $.ajax({
-      type: "POST",
+      type: 'POST',
       url: `/counters/${this.value}/${type}`,
-      dataType: "json",
-      success: function(objects){
-        draw_diagrams(objects, type);
-      }
+      dataType: 'json',
+      success: function(objects) {
+        drawDiagrams(objects, type);
+      },
     });
   });
 });

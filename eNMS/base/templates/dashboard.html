@@ -70,7 +70,7 @@
   <!-- ECharts -->
   <script src="{{ url_for('static', filename='echarts/echarts.min.js') }}"></script>
   <script>
-    var default_properties = {{default_properties|tojson|safe}};
+    var defaultProperties = {{default_properties|tojson|safe}};
     var counters = {{counters|tojson|safe}};
   </script>
   <script src="{{ url_for('static', filename='dashboard.js') }}"></script>

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 
 from eNMS import db
 from eNMS.base.associations import task_workflow_table
@@ -20,12 +20,13 @@ class WorkflowEdge(CustomBase):
     source = relationship(
         'Task',
         primaryjoin='Task.id == WorkflowEdge.source_id',
-        backref='destinations'
+        backref=backref('destinations', cascade='all, delete-orphan')
     )
     destination_id = Column(Integer, ForeignKey('Task.id'))
     destination = relationship(
         'Task',
-        primaryjoin='Task.id == WorkflowEdge.destination_id'
+        primaryjoin='Task.id == WorkflowEdge.destination_id',
+        backref=backref('sources', cascade='all, delete-orphan')
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='edges')

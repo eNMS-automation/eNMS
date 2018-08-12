@@ -45,6 +45,15 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
+            <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+              <div class="form-group">
+                <select id="select-filters" class="form-control">
+                  {% for pool in pools %}
+                    <option value={{ pool.id }}>{{ pool.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
             <div align='center' id="logical_view"></div>
           </div>
         </div>

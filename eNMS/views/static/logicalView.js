@@ -76,10 +76,6 @@ let svg = d3.select('#logical_view').append('svg')
   .call(zoom)
   .on('mousedown.zoom', null);
 
-let selection = svg.append('path')
-  .attr('class', 'selection')
-  .attr('visibility', 'hidden');
-
 let force = d3.layout.force()
   .gravity(0.2)
   .distance(10)

@@ -1,28 +1,4 @@
-(function($,sr){
-  var debounce = function (func, threshold, execAsap) {
-    var timeout;
-    return function debounced () {
-      var obj = this, args = arguments;
-      function delayed () {
-        if (!execAsap)
-        func.apply(obj, args); 
-        timeout = null; 
-      }
-      if (timeout)
-        clearTimeout(timeout);
-      else if (execAsap)
-        func.apply(obj, args);
-      timeout = setTimeout(delayed, threshold || 100); 
-    };
-  };
-
-  // smartresize 
-  jQuery.fn[sr] = function(fn){
-    return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr);
-  };
-})(jQuery,'smartresize');
-
-var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
+const currentUrl = window.location.href.split('#')[0].split('?')[0],
     $BODY = $('body'),
     $MENU_TOGGLE = $('#menu_toggle'),
     $SIDEBAR_MENU = $('#sidebar-menu'),
@@ -31,15 +7,15 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $RIGHT_COL = $('.right_col'),
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
-	
+
 // Sidebar
 function init_sidebar() {
   var setContentHeight = function () {
     // reset height
     $RIGHT_COL.css('min-height', $(window).height());
   
-    var bodyHeight = $BODY.outerHeight(),
-      footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+    var bodyHeight = $('body').outerHeight(),
+      footerHeight = $('body').hasClass('footer_fixed') ? -10 : $FOOTER.height(),
       leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
       contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
   
@@ -63,7 +39,7 @@ function init_sidebar() {
               $SIDEBAR_MENU.find('li').removeClass('active active-sm');
               $SIDEBAR_MENU.find('li ul').slideUp();
           } else {
-            if ( $BODY.is( ".nav-sm" ) ) {
+            if ( $('body').is( ".nav-sm" ) ) {
               $SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
               $SIDEBAR_MENU.find( "li ul" ).slideUp();
             }
@@ -77,29 +53,26 @@ function init_sidebar() {
 
   // toggle small or large menu 
   $MENU_TOGGLE.on('click', function() {
-    if ($BODY.hasClass('nav-md')) {
+    if ($('body').hasClass('nav-md')) {
       $SIDEBAR_MENU.find('li.active ul').hide();
       $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
     } else {
       $SIDEBAR_MENU.find('li.active-sm ul').show();
       $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
     }
-    $BODY.toggleClass('nav-md nav-sm');
+    $('body').toggleClass('nav-md nav-sm');
     setContentHeight();
     $('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
   });
 
   // check active menu
-  $SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+  $SIDEBAR_MENU.find('a[href="' + currentUrl + '"]').parent('li').addClass('current-page');
   $SIDEBAR_MENU.find('a').filter(function () {
-    return this.href == CURRENT_URL;
+    return this.href == currentUrl;
   }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
     setContentHeight();
   }).parent().addClass('active');
-  // recompute content when resizing
-  $(window).smartresize(function(){  
-    setContentHeight();
-  });
+
   setContentHeight();
   // fixed sidebar
   if ($.fn.mCustomScrollbar) {
@@ -122,5 +95,5 @@ if (typeof NProgress != 'undefined') {
 }
 
 $(document).ready(function() {
-	init_sidebar();
+  init_sidebar();
 });

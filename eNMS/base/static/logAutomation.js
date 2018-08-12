@@ -1,7 +1,12 @@
+/*
+global
+alertify: false
+*/
+
 table = $('#table').DataTable();
 
 function addLogRule(properties, mode) {
-  values = [];
+  let values = [];
   for (var i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
@@ -24,13 +29,13 @@ function addLogRule(properties, mode) {
   }
 })();
 
-function showModal() {
+function showModal() { // eslint-disable-line no-unused-vars
   $("#title").text("Add a new log rule");
   $("#edit-form").trigger("reset");
   $("#edit").modal("show");
 }
 
-function showLogRuleModal(id) {
+function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: "POST",
     url: `/get_log_rule/${id}`,
@@ -48,7 +53,7 @@ function showLogRuleModal(id) {
   $("#edit").modal('show');
 }
 
-function saveRule() {
+function saveRule() { // eslint-disable-line no-unused-vars
   $.ajax({
     type: "POST",
     url: '/save_log_rule',
@@ -62,7 +67,7 @@ function saveRule() {
   });
 }
 
-function deleteLogRule(id) {
+function deleteLogRule(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: "POST",
     url: `/delete_log_rule/${id}`,

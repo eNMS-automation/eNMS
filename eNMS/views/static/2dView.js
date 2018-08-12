@@ -38,7 +38,7 @@ function switchLayer(layer) {
   map.removeLayer(currentLayer);
   currentLayer = L.tileLayer(layers[layer]);
   map.addLayer(currentLayer);
-  $('.dropdown-submenu a.test').next('ul').toggle();
+  $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
 for (let i = 0; i < subtypes.length; i++) {

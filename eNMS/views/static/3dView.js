@@ -25,7 +25,7 @@ function switchLayer(layer) {
   currentLayer.removeFrom(map);
   currentLayer = WE.tileLayer(layers[layer]);
   currentLayer.addTo(map);
-  $('.dropdown-submenu a.test').next('ul').toggle();
+  $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
 for (let i = 0; i < nodes.length; i++) {

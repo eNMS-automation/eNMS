@@ -6,6 +6,8 @@
   {{ super() }}
  <!-- Vis CSS -->
   <link href="{{ url_for('workflows_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
+  <!-- Context Menu -->
+  <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
   <!-- Difflib CSS -->
   <link href="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
   <style>
@@ -46,11 +48,16 @@
     <li class="node-selection"><a tabindex="-1" href="#">Logs</a></li>
     <li class="node-selection"><a tabindex="-1" href="#">Compare</a></li>
     <li class="node-selection"><a tabindex="-1" href="#">Set as start</a></li>
-    <li class="global"><a tabindex="-1" href="#">Add new task</a></li>
-    <li class="global"><a tabindex="-1" href="#">Add existing task</a></li>
+    <li class="dropdown-submenu global">
+      <a class="test" tabindex="-1" href="#">Add task<span class="caret-right"></span></a>
+      <ul class="dropdown-menu">
+        <li><a tabindex="-1" href="#">Add new task</a></li>
+        <li><a tabindex="-1" href="#">Add existing task</a></li>
+      </ul>
+    </li>
     <li><a tabindex="-1" href="#">Delete selection</a></li>
     <li class="dropdown-submenu global">
-      <a class="test" tabindex="-1" href="#">Change mode<span class="caret"></span></a>
+      <a class="test" tabindex="-1" href="#">Change mode<span class="caret-right"></span></a>
       <ul class="dropdown-menu">
         <li><a tabindex="-1" href="#">Create success edge</a></li>
         <li><a tabindex="-1" href="#">Create failure edge</a></li>

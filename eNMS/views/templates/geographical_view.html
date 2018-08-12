@@ -5,6 +5,8 @@
 {% block stylesheets %}
   {{ super() }}
   <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.css') }}" rel="stylesheet">
+  <!-- Context Menu -->
+  <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
   {% if view == 'markercluster' %}
     <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.css') }}" rel="stylesheet">
     <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
@@ -48,7 +50,7 @@
         <li><a tabindex="-1" href="#">Add new task</a></li>
         <li><a tabindex="-1" href="#">Parameters</a></li>
       {% endif %}
-      <li class="dropdown-submenu global">
+      <li class="dropdown-submenu">
         <a class="test" tabindex="-1" href="#">Tile layer<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a tabindex="-1" href="#">Open Street Map</a></li>

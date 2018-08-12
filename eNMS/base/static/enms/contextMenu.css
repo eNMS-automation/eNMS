@@ -1,0 +1,20 @@
+.dropdown-submenu > .dropdown-menu {
+    left: 100%;
+    top: auto;
+    transform: translate(0, -60%);
+}
+
+.caret-right {
+float:right;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-left: 5px solid;
+  border-left-color:#999999;
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
+  margin-top:5px;
+  margin-right:-8px;
+}

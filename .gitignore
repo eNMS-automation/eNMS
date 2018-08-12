@@ -21,3 +21,6 @@ venv
 # sphinx docs 
 _build
 _templates
+
+# javascript
+package-lock.json

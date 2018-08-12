@@ -7,14 +7,14 @@ var theme = {
     itemGap: 8,
     textStyle: {
       fontWeight: 'normal',
-      color: '#408829'
-    }
+      color: '#408829',
+    },
   },
   dataRange: {
-    color: ['#1f610a', '#97b58d']
+    color: ['#1f610a', '#97b58d'],
   },
   toolbox: {
-    color: ['#408829', '#408829', '#408829', '#408829']
+    color: ['#408829', '#408829', '#408829', '#408829'],
   },
   tooltip: {
     backgroundColor: 'rgba(0,0,0,0.5)',
@@ -22,62 +22,62 @@ var theme = {
       type: 'line',
       lineStyle: {
         color: '#408829',
-        type: 'dashed'
+        type: 'dashed',
       },
       crossStyle: {
-        color: '#408829'
+        color: '#408829',
       },
       shadowStyle: {
-        color: 'rgba(200,200,200,0.3)'
-      }
-    }
+        color: 'rgba(200,200,200,0.3)',
+      },
+    },
   },
   dataZoom: {
     dataBackgroundColor: '#eee',
     fillerColor: 'rgba(64,136,41,0.2)',
-    handleColor: '#408829'
+    handleColor: '#408829',
   },
   grid: {
-    borderWidth: 0
+    borderWidth: 0,
   },
   categoryAxis: {
     axisLine: {
       lineStyle: {
-        color: '#408829'
-      }
+        color: '#408829',
+      },
     },
     splitLine: {
       lineStyle: {
-        color: ['#eee']
-      }
-    }
+        color: ['#eee'],
+      },
+    },
   },
   valueAxis: {
     axisLine: {
       lineStyle: {
-        color: '#408829'
+        color: '#408829',
       }
     },
     splitArea: {
       show: true,
       areaStyle: {
         color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
-      }
+      },
     },
     splitLine: {
       lineStyle: {
-        color: ['#eee']
-      }
-    }
+        color: ['#eee'],
+      },
+    },
   },
   timeline: {
     lineStyle: {
-      color: '#408829'
+      color: '#408829',
     },
     controlStyle: {
       normal: { color: '#408829' },
-      emphasis: { color: '#408829' }
-    }
+      emphasis: { color: '#408829' },
+    },
   },
   k: {
     itemStyle: {
@@ -87,43 +87,43 @@ var theme = {
         lineStyle: {
           width: 1,
           color: '#408829',
-          color0: '#86b379'
-        }
-      }
-    }
+          color0: '#86b379',
+        },
+      },
+    },
   },
   map: {
     itemStyle: {
       normal: {
         areaStyle: {
-          color: '#ddd'
+          color: '#ddd',
         },
         label: {
           textStyle: {
-            color: '#c12e34'
-          }
-        }
+            color: '#c12e34',
+          },
+        },
       },
       emphasis: {
         areaStyle: {
-          color: '#99d2dd'
+          color: '#99d2dd',
         },
         label: {
           textStyle: {
-            color: '#c12e34'
-          }
-        }
-      }
-    }
+            color: '#c12e34',
+          },
+        },
+      },
+    },
   },
   force: {
     itemStyle: {
       normal: {
         linkStyle: {
-          strokeColor: '#408829'
-        }
-      }
-    }
+          strokeColor: '#408829',
+        },
+      },
+    },
   },
   chord: {
     padding: 4,
@@ -131,28 +131,28 @@ var theme = {
     normal: {
       lineStyle: {
         width: 1,
-        color: 'rgba(128, 128, 128, 0.5)'
+        color: 'rgba(128, 128, 128, 0.5)',
       },
       chordStyle: {
         lineStyle: {
           width: 1,
-          color: 'rgba(128, 128, 128, 0.5)'
-        }
-      }
+          color: 'rgba(128, 128, 128, 0.5)',
+        },
+      },
     },
     emphasis: {
       lineStyle: {
         width: 1,
-        color: 'rgba(128, 128, 128, 0.5)'
+        color: 'rgba(128, 128, 128, 0.5)',
       },
       chordStyle: {
         lineStyle: {
           width: 1,
-          color: 'rgba(128, 128, 128, 0.5)'
-        }
-      }
-    }
-  }
+          color: 'rgba(128, 128, 128, 0.5)',
+        },
+      },
+    },
+  },
 },
 gauge: {
     startAngle: 225,
@@ -163,60 +163,60 @@ gauge: {
         color: [
           [0.2, '#86b379'],
           [0.8, '#68a54a'],
-          [1, '#408829']
+          [1, '#408829'],
         ],
-        width: 8
-      }
+        width: 8,
+      },
     },
     axisTick: {
       splitNumber: 10,
       length: 12,
       lineStyle: {
-        color: 'auto'
-      }
+        color: 'auto',
+      },
     },
     axisLabel: {
       textStyle: {
-        color: 'auto'
-      }
+        color: 'auto',
+      },
     },
     splitLine: {
       length: 18,
       lineStyle: {
-        color: 'auto'
-      }
+        color: 'auto',
+      },
     },
     pointer: {
       length: '90%',
-      color: 'auto'
+      color: 'auto',
     },
     title: {
       textStyle: {
-        color: '#333'
-      }
+        color: '#333',
+      },
     },
     detail: {
       textStyle: {
-        color: 'auto'
-      }
-    }
+        color: 'auto',
+      },
+    },
   },
   textStyle: {
-    fontFamily: 'Arial, Verdana, sans-serif'
-  }
+    fontFamily: 'Arial, Verdana, sans-serif',
+  },
 };
 
-  function draw_diagrams(objects, type) {
-    var legend = []
-        data = [];
-    for (const [key, value] of Object.entries(objects)) {
-      legend.push(key);
-      data.push({
+function draw_diagrams(objects, type) {
+  let legend = []
+  let data = [];
+  for (const [key, value] of Object.entries(objects)) {
+    legend.push(key);
+    data.push({
       value: value,
-      name: key
-      });
-    }
-    var link = echarts.init(document.getElementById(type), theme);
+      name: key,
+    });
+  }
+  var link = echarts.init(document.getElementById(type), theme);
   link.setOption({
   tooltip: {
       trigger: 'item',

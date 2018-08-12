@@ -207,7 +207,7 @@ gauge: {
 };
 
 function draw_diagrams(objects, type) {
-  let legend = []
+  let legend = [];
   let data = [];
   for (const [key, value] of Object.entries(objects)) {
     legend.push(key);
@@ -218,67 +218,67 @@ function draw_diagrams(objects, type) {
   }
   var link = echarts.init(document.getElementById(type), theme);
   link.setOption({
-  tooltip: {
+    tooltip: {
       trigger: 'item',
       formatter: "{a} <br/>{b} : {c} ({d}%)"
-  },
-  calculable: true,
-  legend: {
+    },
+    calculable: true,
+    legend: {
       x: 'center',
       y: 'bottom',
       data: legend
-  },
-  toolbox: {
+    },
+    toolbox: {
       show: true,
       feature: {
-      magicType: {
-          show: true,
-          type: ['pie', 'funnel'],
-          option: {
-          funnel: {
-              x: '25%',
-              width: '50%',
-              funnelAlign: 'center',
-              max: 1548
-          }
-          }
-      },
-      restore: {
-          show: true,
-          title: "Restore"
-      },
-      saveAsImage: {
-          show: true,
-          title: "Save Image"
+        magicType: {
+            show: true,
+            type: ['pie', 'funnel'],
+            option: {
+            funnel: {
+                x: '25%',
+                width: '50%',
+                funnelAlign: 'center',
+                max: 1548
+            }
+            }
+        },
+        restore: {
+            show: true,
+            title: "Restore"
+        },
+        saveAsImage: {
+            show: true,
+            title: "Save Image"
+        }
       }
-      }
-  },
-  series: [{
+    },
+    series: [{
       name: type,
       type: 'pie',
       radius: ['35%', '55%'],
       itemStyle: {
-      normal: {
+        normal: {
           label: {
           show: true
           },
           labelLine: {
           show: true
           }
-      },
-      emphasis: {
+        },
+        emphasis: {
           label: {
-          show: true,
-          position: 'center',
-          textStyle: {
+            show: true,
+            position: 'center',
+            textStyle: {
               fontSize: '14',
               fontWeight: 'normal'
-          }
+            }
+          } 
         }
-      }
       },
-      data: data
-  }]
+    data: data
+    }]
   });
 }
 

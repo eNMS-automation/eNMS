@@ -1,11 +1,18 @@
-function showModal(modal_name) {
-  $(`#${modal_name}`).modal('show');
+/**
+ * Show article modal.
+ * @param {name} name - Modal name.
+ */
+function showModal(name) { // eslint-disable-line no-unused-vars
+  $(`#${name}`).modal('show');
 }
 
-function partial(func) {
-  var args = Array.prototype.slice.call(arguments, 1);
+/**
+ * Returns partial function.
+ * @param {function} func - any function
+ * @return {function}
+ */
+function partial(func, ...args) { // eslint-disable-line no-unused-vars
   return function() {
-    var allArguments = args.concat(Array.prototype.slice.call(arguments));
-    return func.apply(this, allArguments);
+    return func.apply(this, args);
   };
 }

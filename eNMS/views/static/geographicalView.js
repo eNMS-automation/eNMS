@@ -31,7 +31,7 @@ function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
   }
 }
 
-$('.dropdown-submenu a.test').on('click', function(e) {
+$('.dropdown-submenu a.menu-submenu').on('click', function(e) {
   $(this).next('ul').toggle();
   e.stopPropagation();
   e.preventDefault();

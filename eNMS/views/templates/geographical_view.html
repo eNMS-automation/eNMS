@@ -35,23 +35,28 @@
   <form id="view-form" method="post">
     <input id="view-type" name="view" type="hidden">
     <ul id="contextMenu" class="dropdown-menu" role="menu">
-      {% if view == 'leaflet' %}
-        <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
-        <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
-      {% elif view == 'markercluster' %}
-        <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
-        <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
-      {% elif view == 'glearth' %}
-        <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
-        <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
-      {% endif %}
+      <li class="dropdown-submenu">
+        <a class="menu-submenu menu-view" tabindex="-1" href="#">View type<span class="caret-right"></span></a>
+        <ul class="dropdown-menu">
+          {% if view == 'leaflet' %}
+            <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
+            <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
+          {% elif view == 'markercluster' %}
+            <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
+            <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
+          {% elif view == 'glearth' %}
+            <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
+            <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
+          {% endif %}
+        </li>
+      </ul>
       <li><a tabindex="-1" href="#">Export to Google Earth</a></li>
       {% if view != 'glearth' %}
         <li><a tabindex="-1" href="#">Add new task</a></li>
         <li><a tabindex="-1" href="#">Parameters</a></li>
       {% endif %}
       <li class="dropdown-submenu">
-        <a class="test" tabindex="-1" href="#">Tile layer<span class="caret"></span></a>
+        <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
         <ul class="dropdown-menu">
           <li><a tabindex="-1" href="#">Open Street Map</a></li>
           <li><a tabindex="-1" href="#">Google Maps</a></li>

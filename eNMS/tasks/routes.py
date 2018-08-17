@@ -69,7 +69,6 @@ def calendar():
 @blueprint.route('/scheduler/<workflow_id>', methods=['POST'])
 @login_required
 def scheduler(workflow_id=None):
-    print(request.form)
     data = request.form.to_dict()
     data['job'] = get_obj(Job, id=data['job'])
     data['nodes'] = [get_obj(Node, id=id) for id in request.form.getlist('nodes')]
@@ -83,7 +82,6 @@ def scheduler(workflow_id=None):
 @blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
 @login_required
 def add_to_workflow(workflow_id):
-    print(request.form)
     workflow = get_obj(Workflow, id=workflow_id)
     task = get_obj(Task, id=request.form['task'])
     task.workflows.append(workflow)

@@ -86,7 +86,6 @@ def configure_database(app, test):
             try:
                 create_default_syslog_server()
             except Exception as e:
-                print(str(e))
         create_custom_scripts()
 
 

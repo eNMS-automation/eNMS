@@ -220,17 +220,13 @@ class WorkflowTask(Task):
                 if not success:
                     result = False
                 edge_type = 'success' if success else 'failure'
-                print(task)
                 for neighbor in task.task_neighbors(self.workflow, edge_type):
-                    print(neighbor)
                     if neighbor not in visited:
                         new_layer.add(neighbor)
                 logs[task.name] = task_logs
                 sleep(task.waiting_time)
             layer = new_layer
-        print(logs)
         self.logs[runtime] = logs
-        print(self.logs)
         db.session.commit()
         return result, logs
 
@@ -243,7 +239,6 @@ class WorkflowTask(Task):
 
 def task_factory(**kwargs):
     cls = WorkflowTask if kwargs['job'].type == 'workflow' else ScriptTask
-    print(cls)
     task = get_obj(cls, name=kwargs['name'])
     if task:
         for property, value in kwargs.items():

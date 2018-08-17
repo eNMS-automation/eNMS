@@ -147,7 +147,6 @@ def get_object(obj_type, obj_id):
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():
-    print(request.form)
     obj = object_factory(**request.form.to_dict())
     return jsonify(obj.serialized)
 

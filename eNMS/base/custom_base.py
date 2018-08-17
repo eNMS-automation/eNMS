@@ -9,7 +9,6 @@ class CustomBase(db.Model):
     # simplifies the syntax for flask forms
     @classmethod
     def choices(cls):
-        print(cls.query.all())
         return [(obj.id, obj.name) for obj in cls.query.all()]
 
     def __repr__(self):

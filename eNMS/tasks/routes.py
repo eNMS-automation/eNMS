@@ -71,8 +71,12 @@ def calendar():
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = get_obj(Job, id=data['job'])
-    data['nodes'] = [get_obj(Node, id=id) for id in request.form.getlist('nodes')]
-    data['pools'] = [get_obj(Pool, id=id) for id in request.form.getlist('pools')]
+    data['nodes'] = [
+        get_obj(Node, id=id) for id in request.form.getlist('nodes')
+    ]
+    data['pools'] = [
+        get_obj(Pool, id=id) for id in request.form.getlist('pools')
+    ]
     data['workflow'] = get_obj(Workflow, id=workflow_id)
     data['user'] = current_user
     task = task_factory(**data)

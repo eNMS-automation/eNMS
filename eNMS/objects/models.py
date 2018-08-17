@@ -11,7 +11,11 @@ from eNMS.base.associations import (
     task_pool_table
 )
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import get_obj, initialize_properties, integrity_rollback
+from eNMS.base.helpers import (
+    get_obj,
+    initialize_properties,
+    integrity_rollback
+)
 from eNMS.base.properties import (
     cls_to_properties,
     link_public_properties,
@@ -503,17 +507,17 @@ class Pool(CustomBase):
             # if the node-regex property is not in the request, the
             # regex box is unticked and we only check that the values
             # are equal.
-            str(value) == getattr(self, obj.class_type + '_' + property)
-            if not getattr(self, '{}_{}_regex'.format(obj.class_type, property))
+            str(value) == getattr(self, obj.class_type + '_' + prop)
+            if not getattr(self, '{}_{}_regex'.format(obj.class_type, prop))
             # if it is ticked, we use re.search to check that the value
             # of the node property matches the regular expression.
-            else search(getattr(self, obj.class_type + '_' + property), str(value))
-            for property, value in obj.__dict__.items()
+            else search(getattr(self, obj.class_type + '_' + prop), str(value))
+            for prop, value in obj.__dict__.items()
             # we consider only the properties in the form
-            if '{}_{}'.format(obj.class_type, property) in self.__dict__ and
+            if '{}_{}'.format(obj.class_type, prop) in self.__dict__ and
             # providing that the property field in the form is not empty
             # (empty field <==> property ignored)
-            getattr(self, obj.class_type + '_' + property)
+            getattr(self, obj.class_type + '_' + prop)
         )
 
     def filter_objects(self):

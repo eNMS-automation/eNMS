@@ -205,7 +205,7 @@ class NetmikoValidationScript(Script):
                     continue
                 output = netmiko_handler.send_command(command)
                 pattern = getattr(self, 'pattern' + str(i))
-                result = 'Output: {}\n\nExpected pattern: {}'.format(output, pattern)
+                result = f'Output: {output}\n\nExpected pattern: {pattern}'
                 outputs[command] = result
                 if pattern not in output:
                     success = False
@@ -291,7 +291,7 @@ class NapalmActionScript(Script):
             getattr(napalm_driver, self.action)()
             napalm_driver.close()
         except Exception as e:
-            result = 'napalm {} did not work because of {}'.format(self.action, e)
+            result = f'napalm {self.action} did not work because of {e}'
             success = False
         else:
             result = self.action + ' OK'
@@ -327,10 +327,10 @@ class NapalmGettersScript(Script):
                 try:
                     result[getter] = getattr(napalm_driver, getter)()
                 except Exception as e:
-                    result[getter] = '{} could not be retrieve because of {}'.format(getter, e)
+                    result[getter] = f'{getter} failed because of {e}'
             napalm_driver.close()
         except Exception as e:
-            result['error'] = 'getters process did not work because of {}'.format(e)
+            result['error'] = f'getters process did not work because of {e}'
             success = False
         else:
             success = True

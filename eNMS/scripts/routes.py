@@ -97,7 +97,11 @@ def create_script(script_type):
                     form['content'] = [''.join(template.render(**parameters))]
         elif script_type == 'file_transfer':
             source_file_name = form['source_file'][0]
-            source_file_path = join(current_app.path, 'file_transfer', source_file_name)
+            source_file_path = join(
+                current_app.path,
+                'file_transfer',
+                source_file_name
+            )
             form['source_file'] = [source_file_path]
     script = script_factory(script_type, **form)
     db.session.add(script)

@@ -37,7 +37,10 @@ def job_example(args):
     task, node, results = args
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
-    results[node.name] = {'success': True, 'logs': 'what will be displayed in the logs'}
+    results[node.name] = {
+        'success': True,
+        'logs': 'what will be displayed in the logs'
+    }
 
 
 example_parameters = {

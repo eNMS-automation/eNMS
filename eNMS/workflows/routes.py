@@ -105,12 +105,12 @@ def delete_node(workflow_id, task_id):
     return jsonify(task.properties)
 
 
-@blueprint.route('/add_edge/<workflow_id>/<type>/<source>/<dest>', methods=['POST'])
+@blueprint.route('/add_edge/<wf_id>/<type>/<source>/<dest>', methods=['POST'])
 @login_required
-def add_edge(workflow_id, type, source, dest):
+def add_edge(wf_id, type, source, dest):
     source_task = get_obj(Task, id=source)
     destination_task = get_obj(Task, id=dest)
-    workflow = get_obj(Workflow, id=workflow_id)
+    workflow = get_obj(Workflow, id=wf_id)
     workflow_edge = WorkflowEdge(type, source_task, destination_task)
     db.session.add(workflow_edge)
     workflow.edges.append(workflow_edge)

@@ -19,7 +19,9 @@ class CustomBase(db.Model):
 
     @property
     def serialized(self):
-        return {p: getattr(self, p) for p in cls_to_properties[self.__tablename__]}
+        return {
+            p: getattr(self, p) for p in cls_to_properties[self.__tablename__]
+        }
 
     @classmethod
     def serialize(cls):

@@ -50,7 +50,10 @@ def selenium_client():
     # the main thread: it must be disabled
     client = None
     try:
-        client = webdriver.Chrome('./tests/chromedriver', chrome_options=options)
+        client = webdriver.Chrome(
+            './tests/chromedriver',
+            chrome_options=options
+        )
     except Exception:
         pass
     # if the client cannot start, we don't want to start a Thread as the

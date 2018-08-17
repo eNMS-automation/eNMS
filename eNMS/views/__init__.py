@@ -19,7 +19,13 @@ styles = {}
 for subtype in node_subtypes:
     point_style = Style()
     point_style.labelstyle.color = Color.blue
-    path_icon = join(blueprint.root_path, 'static', 'images', 'default', subtype + '.gif')
+    path_icon = join(
+        blueprint.root_path,
+        'static',
+        'images',
+        'default',
+        f'{subtype}.gif'
+    )
     point_style.iconstyle.icon.href = path_icon
     styles[subtype] = point_style
 

@@ -21,7 +21,8 @@ import eNMS.base.models
 import eNMS.scripts.models
 from eNMS.admin.models import (
     create_default_parameters,
-    create_default_syslog_server
+    create_default_syslog_server,
+    User
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.config import config_dict
@@ -63,12 +64,12 @@ def register_blueprints(app):
 def configure_login_manager(app):
     @login_manager.user_loader
     def user_loader(id):
-        return db.session.query(eNMS.admin.models.User).filter_by(id=id).first()
+        return db.session.query(User).filter_by(id=id).first()
 
     @login_manager.request_loader
     def request_loader(request):
         name = request.form.get('name')
-        user = db.session.query(eNMS.admin.models.User).filter_by(name=name).first()
+        user = db.session.query(User).filter_by(name=name).first()
         return user if user else None
 
 

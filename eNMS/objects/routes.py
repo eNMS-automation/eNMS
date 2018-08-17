@@ -35,7 +35,8 @@ def objects_management():
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
     all_nodes = Node.choices()
-    add_link_form.source.choices = add_link_form.destination.choices = all_nodes
+    add_link_form.source.choices = all_nodes
+    add_link_form.destination.choices = all_nodes
     if request.method == 'POST':
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
@@ -134,8 +135,10 @@ def pool_management():
 @blueprint.route('/get/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
 def get_object(obj_type, obj_id):
-    cls = Node if obj_type == 'node' else Link
-    properties = node_public_properties if cls == Node else link_public_properties
+    if obj_type == 'node':
+        cls, properties = Node, node_public_properties
+    else:
+        cls, properties = Link, link_public_properties
     obj = get_obj(cls, id=obj_id)
     obj_properties = {
         property: str(getattr(obj, property))

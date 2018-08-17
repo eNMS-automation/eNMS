@@ -32,7 +32,8 @@ def view(view_type):
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
     all_nodes = Node.choices()
-    add_link_form.source.choices = add_link_form.destination.choices = all_nodes
+    add_link_form.source.choices = all_nodes
+    add_link_form.destination.choices = all_nodes
     view_options_form = ViewOptionsForm(request.form)
     google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
@@ -131,5 +132,8 @@ def export_to_google_earth():
 @login_required
 def get_logs(node_id):
     node = get_obj(Node, id=node_id)
-    node_logs = [l.content for l in Log.query.all() if l.source == node.ip_address]
+    node_logs = [
+        l.content for l in Log.query.all()
+        if l.source == node.ip_address
+    ]
     return jsonify('\n'.join(node_logs))

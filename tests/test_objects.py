@@ -71,7 +71,7 @@ def test_manual_object_creation(user_client):
         nodes = Node.query.all()
         for source in nodes[:3]:
             for destination in nodes[:3]:
-                name = '{}: {} to {}'.format(subtype, source.name, destination.name)
+                name = f'{subtype}: {source.name} to {destination.name}'
                 obj_dict = define_link(subtype, source.id, destination.id, name)
                 user_client.post('/objects/edit_object', data=obj_dict)
     # there must be:

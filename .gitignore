@@ -24,3 +24,6 @@ _templates
 
 # javascript
 package-lock.json
+
+# google earth file
+*.kmz

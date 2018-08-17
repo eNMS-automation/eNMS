@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from os import environ
+from warnings import warn
 import logging
 import sys
 
@@ -86,6 +87,7 @@ def configure_database(app, test):
             try:
                 create_default_syslog_server()
             except Exception as e:
+                warn(str(e))
         create_custom_scripts()
 
 

@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from netmiko.ssh_dispatcher import CLASS_MAPPER as netmiko_dispatcher
+from netmiko.ssh_dispatcher import CLASS_MAPPER
 from wtforms import (
     BooleanField,
     FileField,
@@ -68,7 +68,7 @@ class NetmikoConfigScriptForm(ConfigScriptForm):
     netmiko_type = SelectField('', choices=netmiko_type_choices)
     # exclude base driver from Netmiko available drivers
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
-    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
+    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, CLASS_MAPPER)))
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', choices=drivers)
     global_delay_factor = FloatField('global_delay_factor', default=1.)
@@ -110,7 +110,7 @@ class NetmikoValidationForm(ScriptForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
     exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
-    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, netmiko_dispatcher)))
+    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, CLASS_MAPPER)))
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('Driver', choices=drivers)
     command1 = TextField('Command 1')

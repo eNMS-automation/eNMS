@@ -41,6 +41,11 @@ napalm_actions = OrderedDict([
     ('Load replace', 'load_replace_candidate'),
 ])
 
+netmiko_drivers = sorted(
+    driver for driver in CLASS_MAPPER
+    if 'telnet' not in driver and 'ssh' not in driver
+)
+
 
 class ScriptForm(FlaskForm):
     name = TextField('Name')
@@ -66,9 +71,6 @@ class NetmikoConfigScriptForm(ConfigScriptForm):
         ('configuration', 'Configuration')
     )
     netmiko_type = SelectField('', choices=netmiko_type_choices)
-    # exclude base driver from Netmiko available drivers
-    exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
-    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, CLASS_MAPPER)))
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', choices=drivers)
     global_delay_factor = FloatField('global_delay_factor', default=1.)
@@ -109,8 +111,6 @@ class FileTransferScriptForm(ScriptForm):
 class NetmikoValidationForm(ScriptForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
-    exclude_base_driver = lambda driver: 'telnet' in driver or 'ssh' in driver
-    netmiko_drivers = sorted(tuple(filter(exclude_base_driver, CLASS_MAPPER)))
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('Driver', choices=drivers)
     command1 = TextField('Command 1')

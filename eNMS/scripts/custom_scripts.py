@@ -30,10 +30,9 @@ class CustomScript(Script):
 
 type_to_class['custom_script'] = CustomScript
 
-## Script that does nothing
-
 
 def job_example(args):
+    # Script that does nothing
     task, node, results = args
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
@@ -52,10 +51,9 @@ example_parameters = {
     'job_name': 'job_example'
 }
 
-## Script that uses Nornir to ping a device
-
 
 def nornir_ping_job(args):
+    # Script that uses Nornir to ping a device
     task, node, results = args
     nornir_inventory = {node.name: {'nornir_ip': node.ip_address}}
     external = Nornir(inventory=Inventory(nornir_inventory), dry_run=True)

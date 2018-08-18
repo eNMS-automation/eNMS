@@ -40,8 +40,6 @@ def test_netmiko_napalm_config(user_client):
     assert len(Task.query.all()) == 2
 
 
-## Google Earth export
-
 google_earth_dict = ImmutableMultiDict([
     ('google earth', ''),
     ('name', 'test_google_earth'),

@@ -331,8 +331,6 @@ class Pseudowire(Link):
     subtype = 'Pseudowire'
     color = '#902bec'
 
-## Dispatchers
-
 
 node_class = OrderedDict([
     ('Antenna', Antenna),

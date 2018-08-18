@@ -15,7 +15,6 @@ from werkzeug.datastructures import ImmutableMultiDict
 # test the creation of file transfer script (netmiko via SCP)
 # test the creation of ansible script
 
-## Netmiko configuration
 
 netmiko_ping = ImmutableMultiDict([
     ('name', 'netmiko_ping'),
@@ -144,15 +143,13 @@ def test_base_scripts(user_client):
     # not ordered, we use set instead for the test to pass on python 2 and 3
     assert set(netmiko_j2_script.content.split('\n')) == set(result.split('\n'))
     assert set(napalm_j2_script.content.split('\n')) == set(result.split('\n'))
-    ## file transfer script
+    # file transfer script
     user_client.post(
         'scripts/create_script/file_transfer',
         data=file_transfer_script
     )
     assert len(FileTransferScript.query.all()) == 1
     assert len(Script.query.all()) == 7
-
-## NAPALM getters
 
 
 getters_dict = ImmutableMultiDict([
@@ -174,8 +171,6 @@ def test_getters_script(user_client):
     )
     assert len(NapalmGettersScript.query.all()) == 1
 
-
-## Ansible script
 
 ansible_script = ImmutableMultiDict([
     ('name', 'testttt'),

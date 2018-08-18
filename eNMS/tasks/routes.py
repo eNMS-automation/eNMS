@@ -14,9 +14,6 @@ from eNMS.scripts.models import Job
 from eNMS.workflows.models import Workflow
 
 
-## Template rendering
-
-
 @blueprint.route('/task_management')
 @login_required
 def task_management():
@@ -60,9 +57,6 @@ def calendar():
         tasks=tasks,
         scheduling_form=scheduling_form
     )
-
-
-## AJAX calls
 
 
 @blueprint.route('/scheduler', methods=['POST'])

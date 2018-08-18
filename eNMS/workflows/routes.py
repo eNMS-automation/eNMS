@@ -17,9 +17,6 @@ from eNMS.workflows.forms import (
 from eNMS.workflows.models import WorkflowEdge, Workflow, workflow_factory
 
 
-## Template rendering
-
-
 @blueprint.route('/workflow_management')
 @login_required
 def workflows():
@@ -57,9 +54,6 @@ def workflow_editor(workflow_id=None):
         names=pretty_names,
         workflow=workflow.serialized if workflow_id else None
     )
-
-
-## AJAX calls
 
 
 @blueprint.route('/get/<workflow_id>', methods=['POST'])

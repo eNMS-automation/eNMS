@@ -26,9 +26,6 @@ from eNMS.base.properties import (
 )
 
 
-## Template rendering
-
-
 @blueprint.route('/object_management', methods=['GET', 'POST'])
 @login_required
 def objects_management():
@@ -127,9 +124,6 @@ def pool_management():
         fields=pool_public_properties,
         pools=Pool.serialize()
     )
-
-
-## AJAX calls
 
 
 @blueprint.route('/get/<obj_type>/<obj_id>', methods=['POST'])

@@ -23,9 +23,6 @@ from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
 
-## Template rendering
-
-
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
@@ -73,9 +70,6 @@ def view(view_type):
         nodes=Node.serialize(),
         links=Link.serialize()
     )
-
-
-## AJAX calls
 
 
 @blueprint.route('/connect_to_<name>', methods=['POST'])

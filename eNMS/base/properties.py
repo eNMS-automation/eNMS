@@ -132,7 +132,6 @@ type_to_public_properties = OrderedDict([
     ('Pseudowire', link_public_properties)
 ])
 
-## Diagram properties (for the dashboard)
 
 default_diagrams_properties = {
     'node': 'vendor',

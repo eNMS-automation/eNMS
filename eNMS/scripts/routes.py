@@ -16,9 +16,6 @@ from eNMS.scripts.properties import type_to_properties
 from eNMS.tasks.forms import SchedulingForm
 
 
-## Template rendering
-
-
 @blueprint.route('/script_management')
 @login_required
 def scripts():
@@ -45,9 +42,6 @@ def configuration():
         type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         type_to_name=type_to_name
     )
-
-
-## AJAX calls
 
 
 @blueprint.route('/get/<script_type>/<script_id>', methods=['POST'])

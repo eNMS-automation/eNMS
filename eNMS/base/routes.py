@@ -19,9 +19,6 @@ from eNMS.objects.models import get_obj
 from eNMS.tasks.models import Task
 
 
-## Template rendering
-
-
 @blueprint.route('/')
 def site_root():
     return redirect(url_for('admin_blueprint.login'))
@@ -66,9 +63,6 @@ def log_automation():
         fields=('name', 'source', 'content'),
         log_rules=LogRule.serialize()
     )
-
-
-## AJAX calls
 
 
 @blueprint.route('/filter_logs', methods=['POST'])
@@ -123,8 +117,6 @@ def delete_log(log_id):
     db.session.commit()
     return jsonify({'success': True})
 
-## Errors
-
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
@@ -144,8 +136,6 @@ def not_found_error(error):
 @blueprint.errorhandler(500)
 def internal_error(error):
     return render_template('errors/page_500.html'), 500
-
-## Shutdown
 
 
 def shutdown_server():

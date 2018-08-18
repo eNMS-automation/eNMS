@@ -28,8 +28,6 @@ from werkzeug.datastructures import ImmutableMultiDict
 # test the deletion of objects
 # test the pool system
 
-## Object creation
-
 
 def define_node(subtype, description):
     return ImmutableMultiDict([
@@ -129,8 +127,6 @@ def test_object_creation_all_type(user_client):
     for cls, number in number_per_subtype.items():
         assert len(cls.query.all()) == number
 
-## Object deletion
-
 
 nodes = ['router' + str(i) for i in range(5, 20)]
 links = ['link' + str(i) for i in range(4, 15)]
@@ -154,8 +150,6 @@ def test_link_deletion(user_client):
         user_client.post('/objects/delete/link/{}'.format(link.id))
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 38
-
-## Pool management
 
 
 pool1 = ImmutableMultiDict([

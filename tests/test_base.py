@@ -60,7 +60,7 @@ def check_blueprints(*blueprints):
         return wrapper
     return decorator
 
-## Base test
+
 # test the login system: login, user creation, logout
 # test that all pages respond with HTTP 403 if not logged in, 200 otherwise
 

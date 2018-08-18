@@ -13,12 +13,6 @@ db = SQLAlchemy(session_options={"expire_on_commit": False})
 login_manager = LoginManager()
 scheduler = APScheduler()
 
-import eNMS.objects.models
-import eNMS.tasks.models
-import eNMS.workflows.models
-import eNMS.admin.models
-import eNMS.base.models
-import eNMS.scripts.models
 from eNMS.admin.models import (
     create_default_parameters,
     create_default_syslog_server,

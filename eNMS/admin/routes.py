@@ -38,9 +38,6 @@ from eNMS.base.properties import pretty_names
 from eNMS.objects.models import object_factory
 
 
-## Template rendering
-
-
 @blueprint.route('/user_management')
 @login_required
 def users():
@@ -141,9 +138,6 @@ def parameters():
         geographical_parameters_form=GeographicalParametersForm(request.form),
         parameters=db.session.query(Parameters).one()
     )
-
-
-## AJAX calls
 
 
 @blueprint.route('/process_user', methods=['POST'])

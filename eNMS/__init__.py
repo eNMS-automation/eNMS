@@ -3,7 +3,6 @@ from flask_apscheduler import APScheduler
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
-from os import environ
 from warnings import warn
 import logging
 import sys
@@ -19,17 +18,9 @@ from eNMS.admin.models import (
     User
 )
 from eNMS.base.rest import configure_rest_api
-from eNMS.config import config_dict
 from eNMS.objects.models import create_default_pools
 from eNMS.scripts.custom_scripts import create_custom_scripts
 from eNMS.scripts.models import create_default_scripts
-
-get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Production')
-
-try:
-    config_mode = config_dict[get_config_mode.capitalize()]
-except KeyError:
-    sys.exit('Error: Invalid ENMS_CONFIG_MODE environment variable entry.')
 
 
 def register_extensions(app, test):
@@ -92,12 +83,9 @@ def configure_logs(app):
     logger.addHandler(logging.StreamHandler())
 
 
-def create_app(path, test=False, selenium=False):
+def create_app(path, config, test=False, selenium=False):
     app = Flask(__name__, static_folder='base/static')
-    if selenium:
-        app.config.from_object(config_dict['Selenium'])
-    else:
-        app.config.from_object(config_mode)
+    app.config.from_object(config)
     app.path = path
     register_extensions(app, test)
     register_blueprints(app)

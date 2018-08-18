@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from warnings import warn
 import logging
-import sys
 
 # for the tests, we set expire_on_commit to false
 db = SQLAlchemy(session_options={"expire_on_commit": False})
@@ -83,7 +82,7 @@ def configure_logs(app):
     logger.addHandler(logging.StreamHandler())
 
 
-def create_app(path, config, test=False, selenium=False):
+def create_app(path, config, test=False):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config)
     app.path = path

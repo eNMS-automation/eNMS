@@ -492,10 +492,10 @@ class Pool(CustomBase):
     def get_properties(self):
         result = {}
         for p in link_public_properties:
-            for property in 'link_{p} link_{p}_regex'.format(p=p).split():
+            for property in f'link_{p} link_{p}_regex'.split():
                 result[property] = getattr(self, property)
         for p in node_public_properties:
-            for property in 'node_{p} node_{p}_regex'.format(p=p).split():
+            for property in f'node_{p} node_{p}_regex'.split():
                 result[property] = getattr(self, property)
         result['name'], result['description'] = self.name, self.description
         return result
@@ -506,13 +506,13 @@ class Pool(CustomBase):
             # regex box is unticked and we only check that the values
             # are equal.
             str(value) == getattr(self, obj.class_type + '_' + prop)
-            if not getattr(self, '{}_{}_regex'.format(obj.class_type, prop))
+            if not getattr(self, f'{obj.class_type}_{prop}_regex')
             # if it is ticked, we use re.search to check that the value
             # of the node property matches the regular expression.
             else search(getattr(self, obj.class_type + '_' + prop), str(value))
             for prop, value in obj.__dict__.items()
             # we consider only the properties in the form
-            if '{}_{}'.format(obj.class_type, prop) in self.__dict__ and
+            if '{obj.class_type}_{prop}' in self.__dict__ and
             # providing that the property field in the form is not empty
             # (empty field <==> property ignored)
             getattr(self, obj.class_type + '_' + prop)

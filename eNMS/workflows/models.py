@@ -35,7 +35,7 @@ class WorkflowEdge(CustomBase):
         self.type = type
         self.source = source
         self.destination = destination
-        self.name = '{} -> {}'.format(self.source.name, self.destination.name)
+        self.name = f'{self.source.name} -> {self.destination.name}'
 
     @property
     def properties(self):

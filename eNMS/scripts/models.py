@@ -100,7 +100,7 @@ class NetmikoConfigScript(Script):
             )
             if self.netmiko_type == 'configuration':
                 netmiko_handler.send_config_set(self.content.splitlines())
-                result = 'configuration OK:\n\n{}'.format(self.content)
+                result = f'configuration OK:\n\n{self.content}'
             else:
                 # script_type is 'show_commands':
                 outputs = []
@@ -109,7 +109,7 @@ class NetmikoConfigScript(Script):
                 result = '\n\n'.join(outputs)
             success = True
         except Exception as e:
-            result = 'netmiko config did not work because of {}'.format(e)
+            result = f'netmiko config did not work because of {e}'
             success = False
         try:
             netmiko_handler.disconnect()
@@ -163,7 +163,7 @@ class FileTransferScript(Script):
             success = True
             netmiko_handler.disconnect()
         except Exception as e:
-            result = 'netmiko config did not work because of {}'.format(e)
+            result = f'netmiko config did not work because of {e}'
             success = False
         results[node.name] = {'success': success, 'logs': result}
 
@@ -210,7 +210,7 @@ class NetmikoValidationScript(Script):
                 if pattern not in output:
                     success = False
         except Exception as e:
-            results[node.name] = 'netmiko did not work because of {}'.format(e)
+            results[node.name] = f'netmiko did not work because of {e}'
             success = False
         result = outputs
         try:
@@ -251,10 +251,10 @@ class NapalmConfigScript(Script):
             napalm_driver.commit_config()
             napalm_driver.close()
         except Exception as e:
-            result = 'napalm config did not work because of {}'.format(e)
+            result = f'napalm config did not work because of {e}'
             success = False
         else:
-            result = 'configuration OK:\n\n{}'.format(config)
+            result = f'configuration OK:\n\n{config}'
             success = True
         results[node.name] = {'success': success, 'logs': result}
 

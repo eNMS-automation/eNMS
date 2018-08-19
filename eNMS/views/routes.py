@@ -52,7 +52,7 @@ def view(view_type):
     # name to id
     name_to_id = {node.name: id for id, node in enumerate(Node.query.all())}
     return render_template(
-        '{}_view.html'.format(view_type),
+        f'{view_type}_view.html',
         pools=Pool.query.all(),
         parameters=Parameters.query.one().serialized,
         view=view,

@@ -163,10 +163,10 @@ def delete_object(obj_type, obj_id):
 def process_pool():
     pool_properties = request.form.to_dict()
     for property in node_public_properties:
-        regex_property = 'node_{}_regex'.format(property)
+        regex_property = f'node_{property}_regex'
         pool_properties[regex_property] = regex_property in pool_properties
     for property in link_public_properties:
-        regex_property = 'link_{}_regex'.format(property)
+        regex_property = f'link_{property}_regex'
         pool_properties[regex_property] = regex_property in pool_properties
     pool = pool_factory(**pool_properties)
     return jsonify(pool.serialized)

@@ -41,7 +41,7 @@ def register_blueprints(app):
         'views',
     )
     for blueprint in blueprints:
-        module = import_module('eNMS.{}'.format(blueprint))
+        module = import_module(f'eNMS.{blueprint}')
         app.register_blueprint(module.blueprint)
 
 

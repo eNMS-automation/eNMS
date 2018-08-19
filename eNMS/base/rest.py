@@ -24,7 +24,7 @@ class GetObject(Resource):
         obj = get_obj(diagram_classes[class_name], name=object_name)
         db.session.delete(obj)
         db.session.commit()
-        return '{} {} successfully deleted'.format(class_name, object_name)
+        return f'{class_name} {object_name} successfully deleted'
 
 
 class UpdateObject(Resource):

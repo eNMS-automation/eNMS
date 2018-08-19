@@ -137,7 +137,7 @@ def test_node_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for node_name in nodes:
         node = get_obj(Node, name=node_name)
-        user_client.post('/objects/delete/node/{}'.format(node.id))
+        user_client.post(f'/objects/delete/node/{node.id}')
     assert len(Node.query.all()) == 18
     assert len(Link.query.all()) == 18
 
@@ -147,7 +147,7 @@ def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for link_name in links:
         link = get_obj(Link, name=link_name)
-        user_client.post('/objects/delete/link/{}'.format(link.id))
+        user_client.post(f'/objects/delete/link/{link.id}')
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 38
 
@@ -179,6 +179,6 @@ def test_pool_management(user_client):
     assert len(p2.nodes) == 12
     assert len(p2.links) == 4
     assert len(Pool.query.all()) == 5
-    user_client.post('/objects/delete_pool/{}'.format(p1.id))
-    user_client.post('/objects/delete_pool/{}'.format(p2.id))
+    user_client.post(f'/objects/delete_pool/{p1.id}')
+    user_client.post(f'/objects/delete_pool/{p2.id}')
     assert len(Pool.query.all()) == 3

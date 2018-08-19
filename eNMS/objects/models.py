@@ -512,7 +512,7 @@ class Pool(CustomBase):
             else search(getattr(self, obj.class_type + '_' + prop), str(value))
             for prop, value in obj.__dict__.items()
             # we consider only the properties in the form
-            if '{obj.class_type}_{prop}' in self.__dict__ and
+            if f'{obj.class_type}_{prop}' in self.__dict__ and
             # providing that the property field in the form is not empty
             # (empty field <==> property ignored)
             getattr(self, obj.class_type + '_' + prop)

@@ -376,9 +376,9 @@ class AnsibleScript(Script):
                 success = bool(search(self.content, str(output)))
             else:
                 success = self.content in str(output)
-            results[node.name] =  {'success': success, 'logs': output}
+            results[node.name] = {'success': success, 'logs': output}
         except Exception as e:
-            results[node.name] =  {'success': False, 'logs': str(e)}
+            results[node.name] = {'success': False, 'logs': str(e)}
 
 
 class RestCallScript(Script):

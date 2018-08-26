@@ -165,7 +165,6 @@ class ScriptTask(Task):
         return targets
 
     def job(self, runtime):
-        print(runtime)
         results = {}
         if self.script.node_multiprocessing:
             targets = self.compute_targets()

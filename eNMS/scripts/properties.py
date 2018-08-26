@@ -55,6 +55,8 @@ ansible_playbook_properties = script_properties + (
     'operating_system',
     'playbook_path',
     'arguments',
+    'content',
+    'content_regex',
     'options',
     'inventory_from_selection'
 )

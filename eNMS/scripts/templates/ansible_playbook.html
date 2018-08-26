@@ -3,7 +3,7 @@
     <div class="x_panel">
       <div class="x_content">
         {% for field in form if field.widget.input_type != 'hidden'  %}
-          {% if field.name != 'inventory_from_selection' %}
+          {% if field.name not in ('inventory_from_selection', 'content_regex') %}
             {% set validate = " required" if field.name in ("name", "playbook_name") else "" %}
             <label>{{ field.label.text }}</label>
             <div class='form-group'>
@@ -12,7 +12,7 @@
           {% endif %}
         {% endfor %}
         <fieldset>
-          {% for field in form if field.name in ('inventory_from_selection',)  %}
+          {% for field in form if field.name in ('inventory_from_selection', 'content_regex')  %}
             <div class="item">
             {{ field(id="ansible_playbook-" + field.name) }}
             <label for="ansible_playbook-" + field.name>{{ field.label.text }}</label>

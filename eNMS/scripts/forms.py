@@ -127,6 +127,8 @@ class AnsibleScriptForm(ScriptForm):
     playbook_path = TextField('Path to playbook')
     arguments = TextField('Optional arguments')
     inventory_from_selection = BooleanField()
+    content = TextField('Content')
+    content_regex = BooleanField()
 
 
 class RestCallScriptForm(ScriptForm):

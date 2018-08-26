@@ -153,7 +153,7 @@ def rest_script_test(user_client):
     )
     assert len(Task.query.all()) == 1
     # wait a bit for the task to run
-    sleep(15)
+    sleep(30)
     assert len(Node.query.all()) == 1
     user_client.post('/scripts/create_script/rest_call', data=delete_script)
     assert len(Script.query.all()) == 5
@@ -164,5 +164,5 @@ def rest_script_test(user_client):
         headers={'Accept': 'application/json'}
     )
     # wait a bit for the task to run
-    sleep(15)
+    sleep(30)
     assert len(Node.query.all()) == 0

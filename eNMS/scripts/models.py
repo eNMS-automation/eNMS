@@ -346,30 +346,36 @@ class AnsibleScript(Script):
     operating_system = Column(String)
     playbook_path = Column(String)
     arguments = Column(String)
+    content = Column(String)
+    content_regex = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
     inventory_from_selection = Column(Boolean)
-    node_multiprocessing = False
+    node_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'ansible_playbook',
     }
 
-    def job(self, task, results):
+    def job(self, args):
+        task, node, results = args
         try:
             arguments = self.arguments.split()
             command = ['ansible-playbook']
             if self.inventory_from_selection:
-                hosts = ','.join(node.ip_address for node in task.nodes)
-                command.extend(['-i', hosts + ','])
+                command.extend(['-i', node.ip_address + ','])
             command.append(self.playbook_path)
             output = check_output(command + arguments)
             try:
                 output = output.decode('utf-8')
             except AttributeError:
                 pass
-            return {'success': True, 'logs': output}
+            if self.content_regex:
+                success = bool(search(self.content, str(output)))
+            else:
+                success = self.content in str(output)
+            results[node.name] =  {'success': success, 'logs': output}
         except Exception as e:
-            return {'success': False, 'logs': str(e)}
+            results[node.name] =  {'success': False, 'logs': str(e)}
 
 
 class RestCallScript(Script):

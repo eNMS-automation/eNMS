@@ -58,6 +58,7 @@ ansible_playbook_properties = script_properties + (
     'content',
     'content_regex',
     'options',
+    'pass_node_properties',
     'inventory_from_selection'
 )
 
@@ -89,7 +90,8 @@ boolean_properties = (
     'disable_md5',
     'inline_transfer',
     'content_regex',
-    'inventory_from_selection'
+    'inventory_from_selection',
+    'pass_node_properties'
 )
 
 type_to_properties = {

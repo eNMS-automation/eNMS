@@ -349,6 +349,7 @@ class AnsibleScript(Script):
     content = Column(String)
     content_regex = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
+    pass_node_properties = Column(Boolean)
     inventory_from_selection = Column(Boolean)
     node_multiprocessing = True
 
@@ -361,6 +362,8 @@ class AnsibleScript(Script):
         try:
             arguments = self.arguments.split()
             command = ['ansible-playbook']
+            if self.pass_node_properties:
+                command.extend(['-e', dumps(node.properties)])
             if self.inventory_from_selection:
                 command.extend(['-i', node.ip_address + ','])
             command.append(self.playbook_path)

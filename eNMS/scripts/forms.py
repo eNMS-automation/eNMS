@@ -129,6 +129,7 @@ class AnsibleScriptForm(ScriptForm):
     inventory_from_selection = BooleanField()
     content = TextField('Content')
     content_regex = BooleanField()
+    pass_node_properties = BooleanField()
 
 
 class RestCallScriptForm(ScriptForm):

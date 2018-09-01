@@ -2,10 +2,9 @@ try:
     from SocketServer import BaseRequestHandler, UDPServer
 except Exception:
     from socketserver import BaseRequestHandler, UDPServer
-from threading import Thread
+
 
 class SyslogServer():
-
 
     def __init__(self):
         self.ip_address = '0.0.0.0'
@@ -24,9 +23,9 @@ class SyslogServer():
 class SyslogUDPHandler(BaseRequestHandler):
 
     def handle(self):
-        data = bytes.decode(self.request[0].strip())
-        print(data)
+        bytes.decode(self.request[0].strip())
         source, _ = self.client_address
+
 
 server = SyslogServer()
 server.start()

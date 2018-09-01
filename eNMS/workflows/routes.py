@@ -60,7 +60,7 @@ def workflow_editor(workflow_id=None):
 @login_required
 def get_workflow(workflow_id):
     workflow = get_obj(Workflow, id=workflow_id)
-    return jsonify(workflow.serialized)
+    return jsonify(workflow.serialized if workflow else {})
 
 
 @blueprint.route('/edit_workflow', methods=['POST'])

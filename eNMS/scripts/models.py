@@ -336,11 +336,13 @@ class NapalmGettersScript(Script):
                 success = self.content_match in str_dict(result)
             napalm_driver.close()
         except Exception as e:
-            result['error'] = f'getters process did not work because of {e}'
+            result['error'] = f'script did not work:\n{e}'
             success = False
-        else:
-            success = True
-        results[node.name] = {'success': success, 'logs': result}
+        results[node.name] = {
+            'success': success,
+            'logs': result,
+            'expected': self.content.match
+        }
 
 
 class AnsibleScript(Script):
@@ -450,13 +452,13 @@ def script_factory(type, **kwargs):
     cls = type_to_class[type]
     script = get_obj(cls, name=kwargs['name'][0]) or cls()
     for property in type_to_properties[type]:
-        # type is not in kwargs, we leave it unchanged
-        if property not in kwargs:
-            continue
         # unchecked tickbox do not yield any value when posting a form, and
         # they yield 'y' if checked
         if property in boolean_properties:
             value = property in kwargs
+        # type is not in kwargs, we leave it unchanged
+        elif property not in kwargs:
+            continue
         elif property in json_properties:
             str_dict, = kwargs[property]
             value = loads(str_dict) if str_dict else {}

@@ -4,7 +4,7 @@
       <div class="x_content">
         {% for field in form if field.widget.input_type != 'hidden'  %}
           {% if field.name not in ('inventory_from_selection', 'content_match_regex', 'pass_node_properties') %}
-            {% set validate = " required" if field.name in ("name", "playbook_name") else "" %}
+            {% set validate = ' required' if field.name in ('name', 'playbook_name') else '' %}
             <label>{{ field.label.text }}</label>
             <div class='form-group'>
               {{ field(id="ansible_playbook-" + field.name, class="form-control" + validate, placeholder=field.label.text) }}

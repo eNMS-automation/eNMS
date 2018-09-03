@@ -50,6 +50,8 @@ netmiko_validation_properties = script_properties + (
 
 napalm_getters_properties = script_properties + (
     'getters',
+    'content_match',
+    'content_match_regex'
 )
 
 ansible_playbook_properties = script_properties + (

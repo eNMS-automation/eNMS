@@ -4,11 +4,12 @@
     <div class="x_panel">
       <div class="x_content">
         <div class="form-group" style="height: 550px">
-          {% for field in form if field.widget.input_type != 'hidden'  %}      
+          {% for field in form if field.widget.input_type != 'hidden'  %}   
             {% if field.name != 'content_match_regex' %}
+              {% set validate = ' required' if field.name in ('name', 'getters') else '' %}
               <label>{{ names[field.name] }}</label>
               <div class='form-group'>
-                {{ field(id="napalm_getters-" + field.name, class="form-control required", placeholder=field.label.text, size=20) }}
+                {{ field(id="napalm_getters-" + field.name, class="form-control" + validate, placeholder=field.label.text, size=20) }}
               </div>
             {% else %}
               <fieldset>

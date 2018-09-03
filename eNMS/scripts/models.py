@@ -174,6 +174,9 @@ class NetmikoValidationScript(Script):
     content_match1 = Column(String)
     content_match2 = Column(String)
     content_match3 = Column(String)
+    content_match_regex1 = Column(String)
+    content_match_regex2 = Column(String)
+    content_match_regex3 = Column(String)
     node_multiprocessing = True
 
     __mapper_args__ = {
@@ -195,12 +198,18 @@ class NetmikoValidationScript(Script):
                 command = getattr(self, 'command' + str(i))
                 if not command:
                     continue
+                output = netmiko_handler.send_command(command)
+                expected = getattr(self, 'content_match' + str(i))
                 result[command] = {
-                    'output': netmiko_handler.send_command(command),
-                    'expected': getattr(self, 'content_match' + str(i))
+                    'output': output,
+                    'expected': expected
                 }
-                if result[command]['expected'] not in result[command]['output']:
-                    success = False
+                if getattr(self, 'content_match_regex' + str(i)):
+                    if not bool(search(expected, str(output))):
+                        success = False
+                else:
+                    if expected not in str(output):
+                        success = False
         except Exception as e:
             results[node.name] = f'netmiko did not work because of {e}'
             success = False
@@ -321,6 +330,10 @@ class NapalmGettersScript(Script):
                     result[getter] = getattr(napalm_driver, getter)()
                 except Exception as e:
                     result[getter] = f'{getter} failed because of {e}'
+            if self.content_match_regex:
+                success = bool(search(self.content_match, str_dict(result)))
+            else:
+                success = self.content_match in str_dict(result)
             napalm_driver.close()
         except Exception as e:
             result['error'] = f'getters process did not work because of {e}'

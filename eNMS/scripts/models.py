@@ -182,7 +182,7 @@ class NetmikoValidationScript(Script):
 
     def job(self, args):
         task, node, results = args
-        success, outputs = True, {}
+        success, result = True, {}
         try:
             netmiko_handler = ConnectHandler(
                 device_type=self.driver,
@@ -195,16 +195,15 @@ class NetmikoValidationScript(Script):
                 command = getattr(self, 'command' + str(i))
                 if not command:
                     continue
-                output = netmiko_handler.send_command(command)
-                pattern = getattr(self, 'pattern' + str(i))
-                result = f'Output: {output}\n\nExpected pattern: {pattern}'
-                outputs[command] = result
-                if pattern not in output:
+                result[command] = {
+                    'output': netmiko_handler.send_command(command),
+                    'pattern': getattr(self, 'pattern' + str(i))
+                }
+                if result[command]['pattern'] not in result[command]['output']:
                     success = False
         except Exception as e:
             results[node.name] = f'netmiko did not work because of {e}'
             success = False
-        result = outputs
         try:
             netmiko_handler.disconnect()
         except Exception:
@@ -297,6 +296,8 @@ class NapalmGettersScript(Script):
 
     id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
+    content_match = Column(String)
+    content_match_regex = Column(Boolean)
     node_multiprocessing = True
 
     __mapper_args__ = {

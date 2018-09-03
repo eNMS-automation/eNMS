@@ -4,13 +4,21 @@
     <div class="x_panel">
       <div class="x_content">
         <div class="form-group" style="height: 550px">
-          {% for field in form if field.widget.input_type != 'hidden'  %}                  
-            <label>{{ names[field.name] }}</label>
-            <div class='form-group'>
-              {{ field(id="napalm_getters-" + field.name, class="form-control required", placeholder=field.label.text, size=20) }}
-            </div>
+          {% for field in form if field.widget.input_type != 'hidden'  %}      
+            {% if field.name != 'content_match_regex' %}
+              <label>{{ names[field.name] }}</label>
+              <div class='form-group'>
+                {{ field(id="napalm_getters-" + field.name, class="form-control required", placeholder=field.label.text, size=20) }}
+              </div>
+            {% else %}
+              <fieldset>
+              <div class="item">
+                {{ field(id="rest_call-" + field.name) }}
+                <label for="rest_call-" + field.name>{{ field.label.text }}</label>
+              </div>
+              </fieldset>
+            {% endif %}
           {% endfor %}
-          
           <div class="ln_solid"></div>
           <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-2">
             <button class="btn btn-primary" type="reset">Reset</button>

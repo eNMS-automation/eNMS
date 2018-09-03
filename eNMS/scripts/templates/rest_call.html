@@ -4,7 +4,7 @@
       <div class="x_content">
         <div class="form-group" style="height: 650px">
           {% for field in form if field.widget.input_type != 'hidden'  %}
-            {% if field.name != 'content_regex' %}
+            {% if field.name != 'content_match_regex' %}
               <label>{{ field.label.text }}</label>
               <div class='form-group'>
                 {% set validate = " required" if field.name == "name" else "" %}

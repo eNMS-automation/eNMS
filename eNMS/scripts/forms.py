@@ -78,7 +78,9 @@ class NapalmConfigScriptForm(ConfigScriptForm):
 
 class NapalmGettersForm(ScriptForm):
     getters_choices = [(v, k) for k, v in getters_mapping.items()]
-    getters = SelectMultipleField('Nodes', choices=getters_choices)
+    getters = SelectMultipleField('Getters', choices=getters_choices)
+    content_match = TextField('Content Match')
+    content_match_regex = BooleanField()
 
 
 class FileTransferScriptForm(ScriptForm):
@@ -111,9 +113,12 @@ class NetmikoValidationForm(ScriptForm):
     command1 = TextField('Command 1')
     command2 = TextField('Command 2')
     command3 = TextField('Command 3')
-    pattern1 = TextField('Pattern 1')
-    pattern2 = TextField('Pattern 2')
-    pattern3 = TextField('Pattern 3')
+    content_match1 = TextField('Content match 1')
+    content_match2 = TextField('Content match 2')
+    content_match3 = TextField('Content match 3')
+    content_match_regex1 = BooleanField()
+    content_match_regex2 = BooleanField()
+    content_match_regex3 = BooleanField()
 
 
 class AnsibleScriptForm(ScriptForm):
@@ -122,8 +127,8 @@ class AnsibleScriptForm(ScriptForm):
     playbook_path = TextField('Path to playbook')
     arguments = TextField('Optional arguments')
     inventory_from_selection = BooleanField()
-    content = TextField('Content Match')
-    content_regex = BooleanField()
+    content_match = TextField('Content Match')
+    content_match_regex = BooleanField()
     pass_node_properties = BooleanField()
 
 
@@ -134,5 +139,5 @@ class RestCallScriptForm(ScriptForm):
     payload = TextAreaField('Payload')
     username = TextField('Username')
     password = PasswordField('Password')
-    content = TextField('Content Match')
-    content_regex = BooleanField()
+    content_match = TextField('Content Match')
+    content_match_regex = BooleanField()

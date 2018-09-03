@@ -40,9 +40,9 @@ netmiko_validation_properties = script_properties + (
     'command1',
     'command2',
     'command3',
-    'pattern1',
-    'pattern2',
-    'pattern3'
+    'content_match1',
+    'content_match2',
+    'content_match3',
 )
 
 napalm_getters_properties = script_properties + (

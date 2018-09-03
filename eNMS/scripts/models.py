@@ -171,9 +171,9 @@ class NetmikoValidationScript(Script):
     command1 = Column(String)
     command2 = Column(String)
     command3 = Column(String)
-    pattern1 = Column(String)
-    pattern2 = Column(String)
-    pattern3 = Column(String)
+    content_match1 = Column(String)
+    content_match2 = Column(String)
+    content_match3 = Column(String)
     node_multiprocessing = True
 
     __mapper_args__ = {
@@ -197,9 +197,9 @@ class NetmikoValidationScript(Script):
                     continue
                 result[command] = {
                     'output': netmiko_handler.send_command(command),
-                    'pattern': getattr(self, 'pattern' + str(i))
+                    'expected': getattr(self, 'content_match' + str(i))
                 }
-                if result[command]['pattern'] not in result[command]['output']:
+                if result[command]['expected'] not in result[command]['output']:
                     success = False
         except Exception as e:
             results[node.name] = f'netmiko did not work because of {e}'

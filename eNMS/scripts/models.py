@@ -346,8 +346,8 @@ class AnsibleScript(Script):
     operating_system = Column(String)
     playbook_path = Column(String)
     arguments = Column(String)
-    content = Column(String)
-    content_regex = Column(Boolean)
+    content_match = Column(String)
+    content_match_regex = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
     pass_node_properties = Column(Boolean)
     inventory_from_selection = Column(Boolean)
@@ -372,10 +372,10 @@ class AnsibleScript(Script):
                 output = output.decode('utf-8')
             except AttributeError:
                 pass
-            if self.content_regex:
-                success = bool(search(self.content, str(output)))
+            if self.content_match_regex:
+                success = bool(search(self.content_match, str(output)))
             else:
-                success = self.content in str(output)
+                success = self.content_match in str(output)
             results[node.name] = {'success': success, 'logs': output}
         except Exception as e:
             results[node.name] = {'success': False, 'logs': str(e)}
@@ -389,8 +389,8 @@ class RestCallScript(Script):
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
-    content = Column(String)
-    content_regex = Column(Boolean)
+    content_match = Column(String)
+    content_match_regex = Column(Boolean)
     username = Column(String)
     password = Column(String)
     node_multiprocessing = False
@@ -419,10 +419,10 @@ class RestCallScript(Script):
                     data=dumps(self.payload),
                     auth=HTTPBasicAuth(self.username, self.password)
                 ).content)
-            if self.content_regex:
-                success = bool(search(self.content, str(result)))
+            if self.content_match_regex:
+                success = bool(search(self.content_match, str(result)))
             else:
-                success = self.content in str(result)
+                success = self.content_match in str(result)
         except Exception as e:
             result, success = str(e), False
         return {'success': success, 'logs': result}

@@ -55,8 +55,8 @@ ansible_playbook_properties = script_properties + (
     'operating_system',
     'playbook_path',
     'arguments',
-    'content',
-    'content_regex',
+    'content_match',
+    'content_match_regex',
     'options',
     'pass_node_properties',
     'inventory_from_selection'
@@ -66,8 +66,8 @@ rest_call_properties = script_properties + (
     'call_type',
     'url',
     'payload',
-    'content',
-    'content_regex',
+    'content_match',
+    'content_match_regex',
     'username',
     'password'
 )
@@ -89,7 +89,7 @@ boolean_properties = (
     'overwrite_file',
     'disable_md5',
     'inline_transfer',
-    'content_regex',
+    'content_match_regex',
     'inventory_from_selection',
     'pass_node_properties'
 )

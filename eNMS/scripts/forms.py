@@ -127,7 +127,7 @@ class AnsibleScriptForm(ScriptForm):
     playbook_path = TextField('Path to playbook')
     arguments = TextField('Optional arguments')
     inventory_from_selection = BooleanField()
-    content = TextField('Content')
+    content = TextField('Content Match')
     content_regex = BooleanField()
     pass_node_properties = BooleanField()
 
@@ -139,5 +139,5 @@ class RestCallScriptForm(ScriptForm):
     payload = TextAreaField('Payload')
     username = TextField('Username')
     password = PasswordField('Password')
-    content = TextField('Content')
+    content = TextField('Content Match')
     content_regex = BooleanField()

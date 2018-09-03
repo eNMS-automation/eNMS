@@ -81,7 +81,6 @@ class NetmikoConfigScript(Script):
     content = Column(String)
     driver = Column(String)
     global_delay_factor = Column(Float)
-    netmiko_type = Column(String)
     node_multiprocessing = True
 
     __mapper_args__ = {
@@ -98,15 +97,8 @@ class NetmikoConfigScript(Script):
                 password=cisco_type7.decode(task.user.password),
                 secret=node.secret_password
             )
-            if self.netmiko_type == 'configuration':
-                netmiko_handler.send_config_set(self.content.splitlines())
-                result = f'configuration OK:\n\n{self.content}'
-            else:
-                # script_type is 'show_commands':
-                outputs = []
-                for show_command in self.content.splitlines():
-                    outputs.append(netmiko_handler.send_command(show_command))
-                result = '\n\n'.join(outputs)
+            netmiko_handler.send_config_set(self.content.splitlines())
+            result = f'configuration OK:\n\n{self.content}'
             success = True
         except Exception as e:
             result = f'netmiko config did not work because of {e}'

@@ -336,12 +336,12 @@ class NapalmGettersScript(Script):
                 success = self.content_match in str_dict(result)
             napalm_driver.close()
         except Exception as e:
-            result['error'] = f'script did not work:\n{e}'
+            result = f'script did not work:\n{e}'
             success = False
         results[node.name] = {
             'success': success,
             'logs': result,
-            'expected': self.content.match
+            'expected': self.content_match
         }
 
 

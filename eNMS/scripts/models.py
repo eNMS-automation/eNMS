@@ -25,7 +25,7 @@ from subprocess import check_output
 
 from eNMS import db
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import get_obj, integrity_rollback
+from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
 from eNMS.scripts.properties import (
     boolean_properties,
     json_properties,
@@ -110,56 +110,6 @@ class NetmikoConfigScript(Script):
         results[node.name] = {'success': success, 'logs': result}
 
 
-class FileTransferScript(Script):
-
-    __tablename__ = 'FileTransferScript'
-
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
-    driver = Column(String)
-    source_file = Column(String)
-    dest_file = Column(String)
-    file_system = Column(String)
-    direction = Column(String)
-    overwrite_file = Column(Boolean)
-    disable_md5 = Column(Boolean)
-    inline_transfer = Column(Boolean)
-    node_multiprocessing = True
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'file_transfer',
-    }
-
-    def job(self, args):
-        task, node, results = args
-        try:
-            netmiko_handler = ConnectHandler(
-                device_type=self.driver,
-                ip=node.ip_address,
-                username=task.user.name,
-                password=cisco_type7.decode(task.user.password),
-                secret=node.secret_password
-            )
-            transfer_dict = file_transfer(
-                netmiko_handler,
-                source_file=self.source_file,
-                dest_file=self.dest_file,
-                file_system=self.file_system,
-                direction=self.direction,
-                overwrite_file=self.overwrite_file,
-                disable_md5=self.disable_md5,
-                inline_transfer=self.inline_transfer
-            )
-            result = transfer_dict
-            success = True
-            netmiko_handler.disconnect()
-        except Exception as e:
-            result = f'netmiko config did not work because of {e}'
-            success = False
-        results[node.name] = {'success': success, 'logs': result}
-
-
 class NetmikoValidationScript(Script):
 
     __tablename__ = 'NetmikoValidationScript'
@@ -217,6 +167,56 @@ class NetmikoValidationScript(Script):
             netmiko_handler.disconnect()
         except Exception:
             pass
+        results[node.name] = {'success': success, 'logs': result}
+
+
+class FileTransferScript(Script):
+
+    __tablename__ = 'FileTransferScript'
+
+    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    vendor = Column(String)
+    operating_system = Column(String)
+    driver = Column(String)
+    source_file = Column(String)
+    dest_file = Column(String)
+    file_system = Column(String)
+    direction = Column(String)
+    overwrite_file = Column(Boolean)
+    disable_md5 = Column(Boolean)
+    inline_transfer = Column(Boolean)
+    node_multiprocessing = True
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'file_transfer',
+    }
+
+    def job(self, args):
+        task, node, results = args
+        try:
+            netmiko_handler = ConnectHandler(
+                device_type=self.driver,
+                ip=node.ip_address,
+                username=task.user.name,
+                password=cisco_type7.decode(task.user.password),
+                secret=node.secret_password
+            )
+            transfer_dict = file_transfer(
+                netmiko_handler,
+                source_file=self.source_file,
+                dest_file=self.dest_file,
+                file_system=self.file_system,
+                direction=self.direction,
+                overwrite_file=self.overwrite_file,
+                disable_md5=self.disable_md5,
+                inline_transfer=self.inline_transfer
+            )
+            result = transfer_dict
+            success = True
+            netmiko_handler.disconnect()
+        except Exception as e:
+            result = f'netmiko config did not work because of {e}'
+            success = False
         results[node.name] = {'success': success, 'logs': result}
 
 

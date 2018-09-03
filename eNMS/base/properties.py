@@ -213,7 +213,6 @@ pretty_names = OrderedDict([
     ('location', 'Location'),
     ('model', 'Model'),
     ('name', 'Name'),
-    ('netmiko_type', 'Netmiko type'),
     ('operating_system', 'Operating System'),
     ('os_version', 'OS version'),
     ('pass_node_properties', 'Pass node properties to the playbook'),

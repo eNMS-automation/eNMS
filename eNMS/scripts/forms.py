@@ -66,11 +66,6 @@ class ConfigScriptForm(ScriptForm):
 
 class NetmikoConfigScriptForm(ConfigScriptForm):
     file = FileField('File', validators=[FileAllowed(['yaml'], 'YAML only')])
-    netmiko_type_choices = (
-        ('show_commands', 'Show commands'),
-        ('configuration', 'Configuration')
-    )
-    netmiko_type = SelectField('', choices=netmiko_type_choices)
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', choices=drivers)
     global_delay_factor = FloatField('global_delay_factor', default=1.)

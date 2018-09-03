@@ -10,8 +10,7 @@ netmiko_config_properties = script_properties + (
     'operating_system',
     'content',
     'driver',
-    'global_delay_factor',
-    'netmiko_type'
+    'global_delay_factor'
 )
 
 napalm_config_properties = script_properties + (

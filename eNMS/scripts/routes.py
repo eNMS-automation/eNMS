@@ -53,6 +53,7 @@ def get_script(script_type, script_id):
         property: getattr(script, property)
         for property in properties
     }
+    print(script_properties)
     return jsonify(script_properties)
 
 

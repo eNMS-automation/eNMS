@@ -43,6 +43,9 @@ netmiko_validation_properties = script_properties + (
     'content_match1',
     'content_match2',
     'content_match3',
+    'content_match_regex1',
+    'content_match_regex2',
+    'content_match_regex3'
 )
 
 napalm_getters_properties = script_properties + (
@@ -89,6 +92,9 @@ boolean_properties = (
     'disable_md5',
     'inline_transfer',
     'content_match_regex',
+    'content_match_regex1',
+    'content_match_regex2',
+    'content_match_regex3',
     'inventory_from_selection',
     'pass_node_properties'
 )

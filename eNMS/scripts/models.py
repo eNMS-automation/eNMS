@@ -124,9 +124,9 @@ class NetmikoValidationScript(Script):
     content_match1 = Column(String)
     content_match2 = Column(String)
     content_match3 = Column(String)
-    content_match_regex1 = Column(String)
-    content_match_regex2 = Column(String)
-    content_match_regex3 = Column(String)
+    content_match_regex1 = Column(Boolean)
+    content_match_regex2 = Column(Boolean)
+    content_match_regex3 = Column(Boolean)
     node_multiprocessing = True
 
     __mapper_args__ = {

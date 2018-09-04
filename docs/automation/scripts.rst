@@ -103,46 +103,32 @@ Custom script
 -------------
 
 eNMS also gives you the option to create your own script. Once created, a custom script is automatically added to the web interface and can be used like any other script.
-To create a custom script, open the file ``eNMS/source/scripts/custom_scripts.py`` and use the following template:
+To create a custom script, add a new python file in ``eNMS/source/scripts/custom_scripts`` and use the following template:
 
-- a function that contains the code of the script
-- a dictionnary that contains the parameters of your new script, and an key ``job_name`` which value is the name of the job function.
+- a function called ``job`` that contains the code of the script.
+- a dictionnary called ``parameters`` that contains the parameters of your new script.
 
 ::
 
-  def job_example(args):
+  def job(args):
+      # Script that does nothing
       task, node, results = args
       # add your own logic here
-      # results is a dictionnary that contains the logs of the script
-      results[node.name] = 'what will be displayed in the logs'
-      # a script returns a boolean value used in workflows (see the workflow section)
-      return True if 'a condition for success' else False
+      # results is a dictionnary that contains the logs of the script, as well
+      # as a "sucess" boolean variable that indicates whether the script was
+      # run successfully or not
+      results[node.name] = {
+          'success': True,
+          'logs': 'what will be displayed in the logs'
+      }
 
-  example_parameters = {
+  parameters = {
       'name': 'script that does nothing',
-      'waiting_time': 0,
+      'node_multiprocessing': True,
       'description': 'does nothing',
       'vendor': 'none',
-      'operating_system': 'all',
-      'job_name': 'job_example'
+      'operating_system': 'all'
   }
 
-You must also the update the ``create_custom_scripts`` function at the bottom of the file:
-
-::
-  
-  def create_custom_scripts():
-      for parameters in (
-          example_parameters,
-          the_parameters_of_the_script_you_created
-      ):
-          try:
-              custom_script = CustomScript(**parameters)
-              db.session.add(custom_script)
-              db.session.commit()
-          except exc.IntegrityError:
-              db.session.rollback()
-
-Finally, restart the application.
-
-You can take a look at the other scripts for inspiration (in ``eNMS/source/scripts/models.py``). ``custom_scripts.py`` also contains a script called ``NornirPingScript`` that shows how to use the Nornir automation framework to ping a device on ports 23 and 443.
+After adding a new custom script, you must reload the application.
+Custom scripts must be added to the ``eNMS/source/scripts/custom_scripts`` folder. Inside that folder, you are free to create subfolders to organize your custom scripts any way you want: eNMS will automatically detect all python files.

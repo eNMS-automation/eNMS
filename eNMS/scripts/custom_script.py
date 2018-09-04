@@ -36,7 +36,6 @@ class CustomScript(Script):
             script_module = load_module(self.module_location)
             return getattr(script_module, 'job')(args)
         except Exception as e:
-            print(str(e))
             if len(args) == 2:
                 return {'success': False, 'logs': str(e)}
             else:

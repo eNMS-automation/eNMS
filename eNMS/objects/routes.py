@@ -5,6 +5,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 import xlwt
 from pathlib import Path
+
 from eNMS import db
 from eNMS.base.helpers import allowed_file, get_obj
 from eNMS.objects import blueprint

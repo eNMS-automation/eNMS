@@ -18,7 +18,7 @@ from eNMS.admin.models import (
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.objects.models import create_default_pools
-from eNMS.scripts.custom_scripts import create_custom_scripts
+from eNMS.scripts.custom_script import create_custom_scripts
 from eNMS.scripts.models import create_default_scripts
 
 

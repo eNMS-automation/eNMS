@@ -1,4 +1,13 @@
-def nornir_ping_job(args):
+parameters = {
+    'name': 'nornir ping 23 443',
+    'node_multiprocessing': True,
+    'description': 'Uses Nornir to ping',
+    'vendor': 'none',
+    'operating_system': 'all'
+}
+
+
+def job(args):
     # Script that uses Nornir to ping a device
     task, node, results = args
     nornir_inventory = {node.name: {'nornir_ip': node.ip_address}}
@@ -8,13 +17,3 @@ def nornir_ping_job(args):
         'success': all(res for res in ping_result[node.name].result.keys()),
         'logs': str(ping_result[node.name].result)
     }
-
-
-nornir_ping_parameters = {
-    'name': 'nornir ping 23 443',
-    'node_multiprocessing': True,
-    'description': 'Uses Nornir to ping',
-    'vendor': 'none',
-    'operating_system': 'all',
-    'job_name': 'nornir_ping_job'
-}

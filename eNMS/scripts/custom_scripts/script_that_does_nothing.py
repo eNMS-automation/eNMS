@@ -1,12 +1,9 @@
-a = 1
-
 parameters = {
     'name': 'script that does nothing',
     'node_multiprocessing': True,
     'description': 'does nothing',
     'vendor': 'none',
-    'operating_system': 'all',
-    'job_name': 'job_example'
+    'operating_system': 'all'
 }
 
 

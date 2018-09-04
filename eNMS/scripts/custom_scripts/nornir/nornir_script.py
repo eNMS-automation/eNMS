@@ -17,7 +17,7 @@ def job(args):
     nornir_inventory = {node.name: {'nornir_ip': node.ip_address}}
     external = Nornir(inventory=Inventory(nornir_inventory), dry_run=True)
     ping_result = external.run(networking.tcp_ping, ports=[23, 443])
-    return {
+    results[node.name] = {
         'success': all(res for res in ping_result[node.name].result.keys()),
         'logs': str(ping_result[node.name].result)
     }

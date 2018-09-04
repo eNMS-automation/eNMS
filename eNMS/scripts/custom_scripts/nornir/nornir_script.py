@@ -1,3 +1,7 @@
+from nornir.core import Nornir
+from nornir.core.inventory import Inventory
+from nornir.plugins.tasks import networking
+
 parameters = {
     'name': 'nornir ping 23 443',
     'node_multiprocessing': True,

@@ -4,11 +4,12 @@ from flask_login import current_user, login_required
 from re import search, sub
 
 from eNMS import db
+from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
-from eNMS.tasks.models import Task, task_factory
+from eNMS.tasks.models import Task
 from eNMS.objects.models import Pool, Node
 from eNMS.scripts.models import Job
 from eNMS.workflows.models import Workflow
@@ -73,7 +74,7 @@ def scheduler(workflow_id=None):
     ]
     data['workflow'] = retrieve(Workflow, id=workflow_id)
     data['user'] = current_user
-    task = task_factory(**data)
+    task = base_factory(data['job'].type, **data)
     return jsonify(task.serialized)
 
 

@@ -230,18 +230,3 @@ class WorkflowTask(Task):
         properties = {p: getattr(self, p) for p in cls_to_properties['Task']}
         properties['job'] = self.workflow.properties if self.workflow else None
         return properties
-
-
-def task_factory(**kwargs):
-    cls = WorkflowTask if kwargs['job'].type == 'workflow' else ScriptTask
-    task = retrieve(cls, name=kwargs['name'])
-    if task:
-        for property, value in kwargs.items():
-            if property in ('start_date', 'end_date') and value:
-                value = task.datetime_conversion(value)
-            setattr(task, property, value)
-    else:
-        task = cls(**kwargs)
-        db.session.add(task)
-    db.session.commit()
-    return task

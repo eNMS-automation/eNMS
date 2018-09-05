@@ -63,6 +63,8 @@ class Node(Object):
     ip_address = Column(String(120))
     longitude = Column(Float)
     latitude = Column(Float)
+    username = Column(String)
+    password = Column(String)
     secret_password = Column(String)
     tasks = relationship(
         'ScriptTask',

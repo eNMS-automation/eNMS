@@ -3,19 +3,6 @@ from sqlalchemy import exc
 from eNMS import db
 
 
-def initialize_properties(function):
-    def wrapper(self, **kwargs):
-        for property, value in kwargs.items():
-            # depending on whether value is an iterable or not, we must
-            # unpack it's value (when **kwargs is request.form, some values
-            # will be a 1-element list)
-            if hasattr(value, '__iter__') and not isinstance(value, str):
-                value = value[0]
-            setattr(self, property, value)
-        function(self)
-    return wrapper
-
-
 def get_obj(model, **kwargs):
     return db.session.query(model).filter_by(**kwargs).first()
 

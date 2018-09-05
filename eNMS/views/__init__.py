@@ -2,7 +2,11 @@ from flask import Blueprint
 from os.path import join
 from simplekml import Color, Style
 
-from eNMS.objects.models import node_subtypes, link_class
+from eNMS.base.properties import (
+    node_subtypes,
+    link_subtypes,
+    link_subtype_to_color
+)
 
 
 blueprint = Blueprint(
@@ -29,11 +33,12 @@ for subtype in node_subtypes:
     point_style.iconstyle.icon.href = path_icon
     styles[subtype] = point_style
 
-for subtype, cls in link_class.items():
+for subtype in link_subtypes:
     line_style = Style()
     # we convert the RGB color to a KML color,
     # i.e #RRGGBB to #AABBGGRR
-    kml_color = "#ff" + cls.color[-2:] + cls.color[3:5] + cls.color[1:3]
+    color = link_subtype_to_color[subtype]
+    kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
     line_style.linestyle.color = kml_color
     styles[subtype] = line_style
 

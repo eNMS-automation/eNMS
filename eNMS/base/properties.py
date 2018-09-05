@@ -28,6 +28,15 @@ link_subtypes = {
     'pseudowire': 'Pseudowire'
 }
 
+link_subtype_to_color = {
+    'bgp_peering': '#77ebca',
+    'etherchannel': '#cf228a',
+    'ethernet link': '#0000ff',
+    'optical link': '#d4222a',
+    'optical channel': '#ff8247',
+    'pseudowire': '#902bec'
+}
+
 node_common_properties = (
     'operating_system',
     'os_version',

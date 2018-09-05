@@ -29,7 +29,7 @@ class AddObjectForm(FlaskForm):
 
 class AddNode(AddObjectForm):
     node_types = [subtype for subtype in node_subtypes.items()]
-    type = SelectField('Type', choices=node_types)
+    subtype = SelectField('Type', choices=node_types)
     ip_address = TextField('IP address', [optional()])
     operating_system = TextField('Operating System', [optional()])
     os_version = TextField('OS version', [optional()])
@@ -40,7 +40,7 @@ class AddNode(AddObjectForm):
 
 class AddLink(AddObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
-    type = SelectField('Type', choices=link_types)
+    subtype = SelectField('Type', choices=link_types)
     source = SelectField('Source', choices=())
     destination = SelectField('Destination', choices=())
 

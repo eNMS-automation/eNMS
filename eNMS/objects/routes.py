@@ -21,12 +21,26 @@ from eNMS.base.properties import (
 )
 
 
+def process_kwargs(**kwargs):
+    if 'source' in kwargs:
+        source = retrieve(Node, name=kwargs.pop('source'))
+        destination = retrieve(Node, name=kwargs.pop('destination'))
+        kwargs.update({
+            'source_id': source.id,
+            'destination_id': destination.id,
+            'source': source,
+            'destination': destination
+        })
+    print(kwargs)
+    return kwargs
+
+
 @blueprint.route('/object_management', methods=['GET', 'POST'])
 @login_required
 def objects_management():
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
-    all_nodes = Node.choices()
+    all_nodes = [(n.name, n.name) for n in Node.query.all()]
     add_link_form.source.choices = all_nodes
     add_link_form.destination.choices = all_nodes
     if request.method == 'POST':
@@ -41,9 +55,7 @@ def objects_management():
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
-                    kwargs['type'] = obj_class
-                    kwargs['import'] = 'excel'
-                    object_factory(**kwargs)
+                    object_factory(**process_kwargs(**kwargs))
                 db.session.commit()
     return render_template(
         'object_management.html',
@@ -136,7 +148,8 @@ def get_object(obj_type, obj_id):
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():
-    obj = object_factory(**request.form.to_dict())
+    print(request.form)
+    obj = object_factory(**process_kwargs(**request.form.to_dict()))
     return jsonify(obj.serialized)
 
 

@@ -116,27 +116,13 @@ class Link(Object):
 
 
 def object_factory(**kwargs):
-    cls = Node if kwargs['type'] == 'Node' else Link
+    cls = Link if 'source' in kwargs else Node
     obj = retrieve(cls, name=kwargs['name'])
+    print(cls, obj)
     if obj:
         obj.update(**kwargs)
-    elif cls == Link:
-        if 'import' in kwargs:
-            source = retrieve(Node, name=kwargs.pop('source'))
-            destination = retrieve(Node, name=kwargs.pop('destination'))
-        else:
-            source = retrieve(Node, id=kwargs.pop('source'))
-            destination = retrieve(Node, id=kwargs.pop('destination'))
-        obj = Link(
-            source_id=source.id,
-            destination_id=destination.id,
-            source=source,
-            destination=destination,
-            **kwargs
-        )
-        db.session.add(obj)
     else:
-        obj = Node(**kwargs)
+        obj = cls(**kwargs)
         db.session.add(obj)
     db.session.commit()
     return obj

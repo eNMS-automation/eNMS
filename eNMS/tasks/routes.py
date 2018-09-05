@@ -9,7 +9,7 @@ from eNMS.base.helpers import retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
-from eNMS.tasks.models import Task
+from eNMS.tasks.models import ScriptTask, Task, WorkflowTask
 from eNMS.objects.models import Pool, Node
 from eNMS.scripts.models import Job
 from eNMS.workflows.models import Workflow
@@ -74,7 +74,8 @@ def scheduler(workflow_id=None):
     ]
     data['workflow'] = retrieve(Workflow, id=workflow_id)
     data['user'] = current_user
-    task = base_factory(data['job'].type, **data)
+    cls = WorkflowTask if data['job'].type == 'workflow' else ScriptTask
+    task = base_factory(cls, **data)
     return jsonify(task.serialized)
 
 

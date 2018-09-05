@@ -165,14 +165,14 @@ object_diagram_properties = (
 )
 
 node_diagram_properties = object_diagram_properties + (
-    'type',
+    'subtype',
     'vendor',
     'operating_system',
     'os_version'
 )
 
 link_diagram_properties = object_diagram_properties + (
-    'type',
+    'subtype',
     'vendor'
 )
 

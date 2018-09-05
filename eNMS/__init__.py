@@ -22,10 +22,10 @@ from eNMS.scripts.custom_script import create_custom_scripts
 from eNMS.scripts.models import create_default_scripts
 
 
-def register_extensions(app, test):
+def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
-    if not test:
+    if not scheduler.running:
         scheduler.init_app(app)
         scheduler.start()
 
@@ -57,7 +57,7 @@ def configure_login_manager(app):
         return user if user else None
 
 
-def configure_database(app, test):
+def configure_database(app):
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
@@ -68,11 +68,10 @@ def configure_database(app, test):
         create_default_parameters()
         create_default_scripts()
         create_default_pools()
-        if not test:
-            try:
-                create_default_syslog_server()
-            except Exception as e:
-                warn(str(e))
+        try:
+            create_default_syslog_server()
+        except Exception as e:
+            warn(str(e))
         create_custom_scripts()
 
 
@@ -86,10 +85,10 @@ def create_app(path, config, test=False):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config)
     app.path = path
-    register_extensions(app, test)
+    register_extensions(app)
     register_blueprints(app)
     configure_login_manager(app)
-    configure_database(app, test)
+    configure_database(app)
     configure_rest_api(app)
     configure_logs(app)
     return app

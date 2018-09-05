@@ -121,120 +121,6 @@ class Link(Object):
         return properties
 
 
-class BgpPeering(Link):
-
-    __tablename__ = 'BGP peering'
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'BGP peering',
-    }
-
-    id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'bgp_peering'
-    color = '#77ebca'
-
-
-class Etherchannel(Link):
-
-    __tablename__ = 'Etherchannel'
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'Etherchannel',
-    }
-
-    id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'Etherchannel'
-    color = '#cf228a'
-
-
-class EthernetLink(Link):
-
-    __tablename__ = 'Ethernet link'
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'Ethernet link',
-    }
-
-    id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'ethernet_link'
-    color = '#0000ff'
-
-
-class OpticalLink(Link):
-
-    __tablename__ = 'Optical link'
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'Optical link',
-    }
-
-    id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'optical_link'
-    color = '#d4222a'
-
-
-class OpticalChannel(Link):
-
-    __tablename__ = 'Optical channel'
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'Optical channel',
-    }
-
-    id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'optical_channel'
-    color = '#ff8247'
-
-
-class Pseudowire(Link):
-
-    __tablename__ = 'Pseudowire'
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'Pseudowire',
-    }
-
-    id = Column(Integer, ForeignKey('Link.id'), primary_key=True)
-    subtype = 'Pseudowire'
-    color = '#902bec'
-
-
-node_class = OrderedDict([
-    ('Antenna', Antenna),
-    ('Firewall', Firewall),
-    ('Host', Host),
-    ('Optical switch', OpticalSwitch),
-    ('Regenerator', Regenerator),
-    ('Router', Router),
-    ('Switch', Switch),
-    ('Server', Server),
-])
-
-node_subtypes = (
-    'antenna',
-    'firewall',
-    'host',
-    'optical_switch',
-    'regenerator',
-    'router',
-    'server',
-    'switch'
-)
-
-link_class = OrderedDict([
-    ('BGP peering', BgpPeering),
-    ('Etherchannel', Etherchannel),
-    ('Ethernet link', EthernetLink),
-    ('Optical channel', OpticalChannel),
-    ('Optical link', OpticalLink),
-    ('Pseudowire', Pseudowire)
-])
-
-object_class = OrderedDict()
-for cls_dict in (node_class, link_class):
-    object_class.update(cls_dict)
-
-
 def object_factory(**kwargs):
     obj_type = kwargs['type']
     cls = Node if obj_type in node_class else Link
@@ -248,7 +134,7 @@ def object_factory(**kwargs):
         else:
             source = retrieve(Node, id=kwargs.pop('source'))
             destination = retrieve(Node, id=kwargs.pop('destination'))
-        obj = link_class[obj_type](
+        obj = Link(
             source_id=source.id,
             destination_id=destination.id,
             source=source,
@@ -257,7 +143,7 @@ def object_factory(**kwargs):
         )
         db.session.add(obj)
     else:
-        obj = object_class[obj_type](**kwargs)
+        obj = Node(**kwargs)
         db.session.add(obj)
     db.session.commit()
     return obj

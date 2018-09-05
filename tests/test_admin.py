@@ -1,6 +1,6 @@
 from eNMS import db
 from eNMS.admin.models import Log, TacacsServer, User
-from eNMS.objects.models import retrieve
+from eNMS.base.helpers import retrieve
 from tests.test_base import check_blueprints
 
 

@@ -43,12 +43,15 @@ def calendar():
         # the calendar
         if not task.start_date:
             continue
-        python_month = search(r'.*-(\d{2})-.*', task.start_date).group(1)
+        python_month = search(
+            r'.*-(\d{2})-.*',
+            task.aps_date('start_date')
+        ).group(1)
         month = '{:02}'.format((int(python_month) - 1) % 12)
         js_date = [int(i) for i in sub(
             r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
             r"\1," + month + r",\3,\4,\5",
-            task.start_date
+            task.aps_date('start_date')
         ).split(',')]
         tasks[task.name] = {
             'date': js_date,

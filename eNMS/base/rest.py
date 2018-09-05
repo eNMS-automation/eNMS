@@ -4,7 +4,7 @@ from flask_restful import Api, Resource
 from eNMS import db
 from eNMS.base.classes import diagram_classes
 from eNMS.base.custom_base import factory
-from eNMS.objects.models import retrieve
+from eNMS.base.helpers import retrieve
 from eNMS.tasks.models import Task
 
 

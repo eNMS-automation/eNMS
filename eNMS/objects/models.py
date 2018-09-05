@@ -11,11 +11,7 @@ from eNMS.base.associations import (
     task_pool_table
 )
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import (
-    get_obj,
-    initialize_properties,
-    integrity_rollback
-)
+from eNMS.base.helpers import get_obj, integrity_rollback
 from eNMS.base.properties import (
     cls_to_properties,
     link_public_properties,
@@ -43,11 +39,12 @@ class Object(CustomBase):
         'polymorphic_on': type
     }
 
-    properties = object_common_properties
-
-    @initialize_properties
     def __init__(self, **kwargs):
-        pass
+        self.update(**kwargs)
+
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
     def __repr__(self):
         return self.name
@@ -80,13 +77,6 @@ class Node(Object):
     __mapper_args__ = {
         'polymorphic_identity': 'Node',
     }
-
-    properties = node_common_properties
-    class_type = 'node'
-
-    @initialize_properties
-    def __init__(self, **kwargs):
-        super(Node, self).__init__(**kwargs)
 
     @property
     def properties(self):
@@ -239,11 +229,6 @@ class Link(Object):
         ('destination', 'Destination')
     ])
 
-    class_type = 'link'
-
-    def __init__(self, **kwargs):
-        super(Link, self).__init__(**kwargs)
-
     @property
     def properties(self):
         return {p: str(getattr(self, p)) for p in cls_to_properties['Link']}
@@ -375,9 +360,7 @@ def object_factory(**kwargs):
     cls = Node if obj_type in node_class else Link
     obj = get_obj(cls, name=kwargs['name'])
     if obj:
-        for property, value in kwargs.items():
-            if property in obj.__dict__:
-                setattr(obj, property, value)
+        obj.update(**kwargs)
     elif obj_type in link_class:
         if 'import' in kwargs:
             source = get_obj(Node, name=kwargs.pop('source'))

@@ -58,26 +58,21 @@ class Task(CustomBase):
         'polymorphic_on': type
     }
 
-    def __init__(self, **data):
+    def __init__(self, **kwargs):
+        self.update(**kwargs)
         self.status = 'active'
-        self.waiting_time = data['waiting_time']
-        self.name = data['name']
-        self.user = data['user']
         self.creation_time = str(datetime.now())
-        self.frequency = data['frequency']
-        # if the start date is left empty, we turn the empty string into
-        # None as this is what AP Scheduler is expecting
-        for date in ('start_date', 'end_date'):
-            js_date = data[date]
-            value = self.datetime_conversion(js_date) if js_date else None
-            setattr(self, date, value)
         self.is_active = True
-        if 'do_not_run' not in data:
-            self.schedule(run_now='run_immediately' in data)
+        if 'do_not_run' not in kwargs:
+            self.schedule(run_now='run_immediately' in kwargs)
 
-    def datetime_conversion(self, date):
+    def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
         return datetime.strftime(dt, '%Y-%m-%d %H:%M:%S')
+
+    def aps_date(self, datetype):
+        date = getattr(self, datetype)
+        return self.aps_conversion(date) if date else None
 
     def pause_task(self):
         scheduler.pause_job(self.creation_time)
@@ -104,7 +99,7 @@ class Task(CustomBase):
 
     def schedule(self, run_now=True):
         now = datetime.now() + timedelta(seconds=15)
-        runtime = now if run_now else self.start_date
+        runtime = now if run_now else self.aps_date('start_date')
         if self.frequency:
             scheduler.add_job(
                 id=self.creation_time,
@@ -112,7 +107,7 @@ class Task(CustomBase):
                 args=[self.name, str(runtime)],
                 trigger='interval',
                 start_date=runtime,
-                end_date=self.end_date,
+                end_date=self.aps_date('end_date'),
                 seconds=int(self.frequency),
                 replace_existing=True
             )

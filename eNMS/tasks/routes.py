@@ -4,7 +4,7 @@ from flask_login import current_user, login_required
 from re import search, sub
 
 from eNMS import db
-from eNMS.base.custom_base import base_factory
+from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
@@ -75,7 +75,7 @@ def scheduler(workflow_id=None):
     data['workflow'] = retrieve(Workflow, id=workflow_id)
     data['user'] = current_user
     cls = WorkflowTask if data['job'].type == 'workflow' else ScriptTask
-    task = base_factory(cls, **data)
+    task = factory(cls, **data)
     return jsonify(task.serialized)
 
 

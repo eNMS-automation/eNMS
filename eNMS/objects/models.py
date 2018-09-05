@@ -9,7 +9,7 @@ from eNMS.base.associations import (
     task_node_table,
     task_pool_table
 )
-from eNMS.base.custom_base import base_factory, CustomBase
+from eNMS.base.custom_base import factory, CustomBase
 from eNMS.base.helpers import retrieve, integrity_rollback
 from eNMS.base.properties import link_public_properties, node_public_properties
 
@@ -248,4 +248,4 @@ default_pools = (
 @integrity_rollback
 def create_default_pools():
     for pool in default_pools:
-        pool = base_factory(Pool, **pool)
+        pool = factory(Pool, **pool)

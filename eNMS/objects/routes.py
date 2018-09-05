@@ -7,7 +7,7 @@ import xlwt
 from pathlib import Path
 
 from eNMS import db
-from eNMS.base.custom_base import base_factory
+from eNMS.base.custom_base import factory
 from eNMS.base.helpers import allowed_file, retrieve
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
@@ -55,7 +55,7 @@ def objects_management():
                 for row_index in range(1, sheet.nrows):
                     values = dict(zip(properties, sheet.row_values(row_index)))
                     cls, kwargs = process_kwargs(**values)
-                    base_factory(cls, **kwargs)
+                    factory(cls, **kwargs)
                 db.session.commit()
     return render_template(
         'object_management.html',
@@ -150,7 +150,7 @@ def get_object(obj_type, obj_id):
 def edit_object():
     print(request.form)
     cls, kwargs = process_kwargs(**request.form.to_dict())
-    obj = base_factory(cls, **kwargs)
+    obj = factory(cls, **kwargs)
     return jsonify(obj.serialized)
 
 
@@ -168,7 +168,7 @@ def delete_object(obj_type, obj_id):
 @login_required
 def process_pool():
     pool_properties = request.form.to_dict()
-    pool = base_factory(Pool, **pool_properties)
+    pool = factory(Pool, **pool_properties)
     return jsonify(pool.serialized)
 
 

@@ -2,7 +2,7 @@ from flask import jsonify, render_template, request
 from flask_login import login_required
 
 from eNMS import db
-from eNMS.base.custom_base import base_factory
+from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Node, Pool
@@ -67,7 +67,7 @@ def get_workflow(workflow_id):
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
 def edit_workflow():
-    workflow = base_factory(Workflow, **request.form.to_dict())
+    workflow = factory(Workflow, **request.form.to_dict())
     db.session.commit()
     return jsonify(workflow.serialized)
 

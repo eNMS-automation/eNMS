@@ -48,7 +48,7 @@ class CustomBase(db.Model):
         return [obj.serialized for obj in cls.query.all()]
 
 
-def base_factory(cls, **kwargs):
+def factory(cls, **kwargs):
     instance = retrieve(cls, name=kwargs['name'])
     if instance:
         instance.update(**kwargs)

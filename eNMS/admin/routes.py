@@ -38,7 +38,7 @@ from eNMS.admin.models import (
     TacacsServer
 )
 from eNMS.admin.properties import user_search_properties
-from eNMS.base.custom_base import base_factory
+from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
 
@@ -152,7 +152,7 @@ def parameters():
 
 @blueprint.route('/process_user', methods=['POST'])
 def process_user():
-    return jsonify(base_factory(User, **request.form.to_dict()).serialized)
+    return jsonify(factory(User, **request.form.to_dict()).serialized)
 
 
 @blueprint.route('/get_<user_id>', methods=['POST'])
@@ -220,7 +220,7 @@ def query_opennms():
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
                 nodes[node]['ip_address'] = interface['ipAddress']
-                base_factory(**nodes[node])
+                factory(**nodes[node])
     db.session.add(opennms_server)
     db.session.commit()
     return jsonify({'success': True})

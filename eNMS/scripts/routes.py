@@ -6,7 +6,7 @@ from werkzeug import secure_filename
 from yaml import load as yaml_load
 
 from eNMS import db
-from eNMS.base.custom_base import base_factory
+from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, allowed_file
 from eNMS.base.properties import pretty_names, script_public_properties
 from eNMS.objects.models import Node, Pool
@@ -98,4 +98,4 @@ def create_script(script_type):
                 source_file_name
             )
             form['source_file'] = source_file_path
-    return jsonify(base_factory(type_to_class[script_type], **form).serialized)
+    return jsonify(factory(type_to_class[script_type], **form).serialized)

@@ -43,7 +43,7 @@ class CustomBase(db.Model):
 
     @classmethod
     def serialize(cls):
-        return [obj.serialized for obj in cls.query.all()]
+        return [obj.properties for obj in cls.query.all()]
 
 
 def base_factory(cls, **kwargs):

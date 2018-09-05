@@ -23,7 +23,7 @@ from eNMS.base.properties import (
     node_public_properties,
     pool_public_properties,
     pretty_names,
-    type_to_public_properties
+    cls_to_properties
 )
 
 
@@ -77,7 +77,7 @@ def objects_download():
     style1 = xlwt.easyxf(num_format_str='#,##0.00')
     header_index = 0
     # Write tabs and headers
-    for tab, header in type_to_public_properties.items():
+    for tab, header in cls_to_properties.items():
         column = 0
         ws[tab] = wb.add_sheet(tab)
         ws[tab].row_index = 1

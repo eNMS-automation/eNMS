@@ -39,16 +39,6 @@ class Object(CustomBase):
         'polymorphic_on': type
     }
 
-    def __init__(self, **kwargs):
-        self.update(**kwargs)
-
-    def update(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-
-    def __repr__(self):
-        return self.name
-
 
 class Node(Object):
 
@@ -77,13 +67,6 @@ class Node(Object):
     __mapper_args__ = {
         'polymorphic_identity': 'Node',
     }
-
-    def __init__(self, **kwargs):
-        self.update(**kwargs)
-
-    @property
-    def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['Node']}
 
     @property
     def serialized(self):
@@ -231,13 +214,6 @@ class Link(Object):
         ('source', 'Source'),
         ('destination', 'Destination')
     ])
-
-    def __init__(self, **kwargs):
-        self.update(**kwargs)
-
-    @property
-    def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['Link']}
 
     @property
     def serialized(self):
@@ -450,17 +426,9 @@ class Pool(CustomBase):
     link_destination = Column(String)
     link_destination_regex = Column(Boolean)
 
-    def __init__(self, **kwargs):
-        self.update(**kwargs)
-        self.compute_pool()
-
     def update(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-
-    @property
-    def properties(self):
-        return {p: str(getattr(self, p)) for p in cls_to_properties['Pool']}
+        super().update(**kwargs)
+        self.compute_pool()
 
     @property
     def serialized(self):

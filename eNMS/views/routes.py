@@ -9,7 +9,7 @@ from subprocess import Popen
 
 from eNMS.admin.models import Parameters
 from eNMS.base.helpers import retrieve
-from eNMS.base.properties import node_subtypes
+from eNMS.base.properties import node_subtypes, link_subtype_to_color
 from eNMS.base.models import Log
 from eNMS.objects.forms import AddNode, AddLink
 from eNMS.objects.models import Pool, Node, Link
@@ -67,7 +67,8 @@ def view(view_type):
         link_fields=link_public_properties,
         labels=labels,
         names=pretty_names,
-        subtypes=list(node_subtypes),
+        node_subtypes=node_subtypes,
+        link_colors=link_subtype_to_color,
         name_to_id=name_to_id,
         nodes=Node.serialize(),
         links=Link.serialize()

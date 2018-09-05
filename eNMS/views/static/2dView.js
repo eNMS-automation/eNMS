@@ -5,6 +5,7 @@ L: false
 labels: false
 layers: false
 links: false
+link_colors: false
 markersArray: true
 nodes: false
 parameters: false
@@ -41,20 +42,20 @@ function switchLayer(layer) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-for (let i = 0; i < subtypes.length; i++) {
-  window[`icon_${subtypes[i]}`] = L.icon({
-    iconUrl: `static/images/default/${subtypes[i].toLowerCase()}.gif`,
+Object.keys(node_subtypes).forEach(function(subtype) {
+  window[`icon_${subtype}`] = L.icon({
+    iconUrl: `static/images/default/${subtype}.gif`,
     iconSize: [18, 12],
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
     });
-  window[`icon_selected_${subtypes[i]}`] = L.icon({
-    iconUrl: `static/images/selected/${subtypes[i].toLowerCase()}.gif`,
+  window[`icon_selected_${subtype}`] = L.icon({
+    iconUrl: `static/images/selected/${subtype}.gif`,
     iconSize: [18, 12],
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
   });
-}
+});
 
 // Create a new vector type with getLatLng and setLatLng methods.
 L.PolylineClusterable = L.Polyline.extend({
@@ -79,8 +80,8 @@ for (let i = 0; i < nodes.length; i++) {
   ]);
 
   marker.node_id = node.id;
-  marker.icon = window[`icon_${node.type}`];
-  marker.selected_icon = window[`icon_selected_${node.type}`];
+  marker.icon = window[`icon_${node.subtype}`];
+  marker.selected_icon = window[`icon_selected_${node.subtype}`];
   marker.setIcon(marker.icon);
   markersArray.push(marker);
 
@@ -116,9 +117,10 @@ for (let i = 0; i < links.length; i++) {
     link.destination_properties.latitude,
     link.destination_properties.longitude
   );
+  console.log(links[i])
   const pointList = [pointA, pointB];
   const polyline = new L.PolylineClusterable(pointList, {
-    color: 'red',
+    color: link_colors[links[i].subtype],
     weight: 3,
     opacity: 1,
     smoothFactor: 1,

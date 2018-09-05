@@ -79,8 +79,8 @@
             "id": {{ name_to_id[node.name] }},
             "real_id": {{ node.id }},
             "name": "{{ node.name }}",
-            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + node.type.lower() + '.gif') }}",
-            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + node.type.lower() + '.gif') }}"
+            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + node.subtype + '.gif') }}",
+            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + node.subtype + '.gif') }}"
           },
         {% endfor %}
       ],

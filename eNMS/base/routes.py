@@ -6,9 +6,10 @@ import flask_login
 
 from eNMS import db, login_manager
 from eNMS.base import blueprint
+from eNMS.base.custom_base import base_factory
 from eNMS.base.forms import LogFilteringForm, LogAutomationForm
 from eNMS.base.classes import diagram_classes
-from eNMS.base.models import Log, LogRule, log_rule_factory
+from eNMS.base.models import Log, LogRule
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,
@@ -94,7 +95,7 @@ def get_log_rule(log_rule_id):
 @flask_login.login_required
 def save_log_rule():
     tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
-    log_rule = log_rule_factory(**request.form.to_dict())
+    log_rule = base_factory(LogRule, **request.form.to_dict())
     log_rule.tasks = tasks
     db.session.commit()
     return jsonify(log_rule.serialized)

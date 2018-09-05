@@ -35,10 +35,10 @@ from eNMS.admin.models import (
     Parameters,
     SyslogServer,
     User,
-    user_factory,
     TacacsServer
 )
 from eNMS.admin.properties import user_search_properties
+from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import object_factory
@@ -153,7 +153,7 @@ def parameters():
 
 @blueprint.route('/process_user', methods=['POST'])
 def process_user():
-    return jsonify(user_factory(**request.form.to_dict()).serialized)
+    return jsonify(User, base_factory(**request.form.to_dict()).serialized)
 
 
 @blueprint.route('/get_<user_id>', methods=['POST'])

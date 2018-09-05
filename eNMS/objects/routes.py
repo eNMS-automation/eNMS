@@ -163,7 +163,7 @@ def delete_object(obj_type, obj_id):
 @login_required
 def process_pool():
     pool_properties = request.form.to_dict()
-    pool = base_factory(**pool_properties)
+    pool = base_factory(Pool, **pool_properties)
     return jsonify(pool.serialized)
 
 

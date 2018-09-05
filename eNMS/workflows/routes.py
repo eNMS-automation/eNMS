@@ -2,6 +2,7 @@ from flask import jsonify, render_template, request
 from flask_login import login_required
 
 from eNMS import db
+from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import get_obj
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Node, Pool
@@ -14,7 +15,7 @@ from eNMS.workflows.forms import (
     WorkflowEditorForm,
     WorkflowCreationForm
 )
-from eNMS.workflows.models import WorkflowEdge, Workflow, workflow_factory
+from eNMS.workflows.models import WorkflowEdge, Workflow
 
 
 @blueprint.route('/workflow_management')
@@ -66,7 +67,7 @@ def get_workflow(workflow_id):
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
 def edit_workflow():
-    workflow = workflow_factory(**request.form.to_dict())
+    workflow = base_factory(Workflow, **request.form.to_dict())
     db.session.commit()
     return jsonify(workflow.serialized)
 

@@ -497,4 +497,4 @@ default_pools = (
 @integrity_rollback
 def create_default_pools():
     for pool in default_pools:
-        pool = base_factory(**pool)
+        pool = base_factory(Pool, **pool)

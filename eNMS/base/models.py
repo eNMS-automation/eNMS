@@ -50,13 +50,6 @@ class LogRule(CustomBase):
         back_populates='log_rules'
     )
 
-    def __init__(self, **kwargs):
-        self.name = kwargs['name']
-        self.content = kwargs['content']
-        self.source = kwargs['source']
-        self.contentregex = 'contentregex' in kwargs
-        self.sourceregex = 'sourceregex' in kwargs
-
     def __repr__(self):
         return self.content
 

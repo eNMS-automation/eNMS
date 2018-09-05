@@ -38,10 +38,6 @@ class WorkflowEdge(CustomBase):
         self.name = f'{self.source.name} -> {self.destination.name}'
 
     @property
-    def properties(self):
-        return {p: getattr(self, p) for p in cls_to_properties['WorkflowEdge']}
-
-    @property
     def serialized(self):
         properties = self.properties
         properties['source'] = self.source.serialized
@@ -79,10 +75,6 @@ class Workflow(Job):
             setattr(self, property, kwargs[property])
 
     @property
-    def properties(self):
-        return {p: getattr(self, p) for p in cls_to_properties['Workflow']}
-
-    @property
     def serialized(self):
         properties = self.properties
         properties['tasks'] = [obj.properties for obj in getattr(self, 'tasks')]
@@ -93,11 +85,9 @@ class Workflow(Job):
 def workflow_factory(**kwargs):
     workflow = get_obj(Workflow, name=kwargs['name'])
     if workflow:
-        for property, value in kwargs.items():
-            if property in workflow.__dict__:
-                setattr(workflow, property, value)
+        workflow.update(**kwargs)
     else:
         workflow = Workflow(**kwargs)
-    db.session.add(workflow)
+        db.session.add(workflow)
     db.session.commit()
     return workflow

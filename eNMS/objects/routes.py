@@ -11,7 +11,7 @@ from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import allowed_file, retrieve
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
-from eNMS.objects.models import Link, Node, object_factory, Pool
+from eNMS.objects.models import Link, Node, Pool
 from eNMS.base.properties import (
     link_public_properties,
     node_public_properties,
@@ -31,8 +31,7 @@ def process_kwargs(**kwargs):
             'source': source,
             'destination': destination
         })
-    print(kwargs)
-    return kwargs
+    return Link if 'source' in kwargs else Node, kwargs
 
 
 @blueprint.route('/object_management', methods=['GET', 'POST'])
@@ -54,8 +53,9 @@ def objects_management():
                     continue
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
-                    kwargs = dict(zip(properties, sheet.row_values(row_index)))
-                    object_factory(**process_kwargs(**kwargs))
+                    values = dict(zip(properties, sheet.row_values(row_index)))
+                    cls, kwargs = process_kwargs(**values)
+                    base_factory(cls, **kwargs)
                 db.session.commit()
     return render_template(
         'object_management.html',
@@ -149,7 +149,8 @@ def get_object(obj_type, obj_id):
 @login_required
 def edit_object():
     print(request.form)
-    obj = object_factory(**process_kwargs(**request.form.to_dict()))
+    cls, kwargs = process_kwargs(**request.form.to_dict())
+    obj = base_factory(cls, **kwargs)
     return jsonify(obj.serialized)
 
 

@@ -115,19 +115,6 @@ class Link(Object):
         return properties
 
 
-def object_factory(**kwargs):
-    cls = Link if 'source' in kwargs else Node
-    obj = retrieve(cls, name=kwargs['name'])
-    print(cls, obj)
-    if obj:
-        obj.update(**kwargs)
-    else:
-        obj = cls(**kwargs)
-        db.session.add(obj)
-    db.session.commit()
-    return obj
-
-
 class Pool(CustomBase):
 
     __tablename__ = 'Pool'

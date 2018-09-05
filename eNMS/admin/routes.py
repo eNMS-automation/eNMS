@@ -41,7 +41,6 @@ from eNMS.admin.properties import user_search_properties
 from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
-from eNMS.objects.models import object_factory
 
 
 @blueprint.route('/user_management')
@@ -221,7 +220,7 @@ def query_opennms():
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
                 nodes[node]['ip_address'] = interface['ipAddress']
-                object_factory(**nodes[node])
+                base_factory(**nodes[node])
     db.session.add(opennms_server)
     db.session.commit()
     return jsonify({'success': True})

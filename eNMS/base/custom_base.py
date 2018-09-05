@@ -6,10 +6,8 @@ class CustomBase(db.Model):
 
     __abstract__ = True
 
-    # simplifies the syntax for flask forms
-    @classmethod
-    def choices(cls):
-        return [(obj.id, obj.name) for obj in cls.query.all()]
+    def __init__(self, **kwargs):
+        self.update(**kwargs)
 
     def __repr__(self):
         return self.name
@@ -17,11 +15,19 @@ class CustomBase(db.Model):
     def __lt__(self, other):
         return True
 
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
     @property
     def serialized(self):
         return {
             p: getattr(self, p) for p in cls_to_properties[self.__tablename__]
         }
+
+    @classmethod
+    def choices(cls):
+        return [(obj.id, obj.name) for obj in cls.query.all()]
 
     @classmethod
     def serialize(cls):

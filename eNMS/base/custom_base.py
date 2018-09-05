@@ -37,13 +37,17 @@ class CustomBase(db.Model):
         class_name = self.__tablename__
         return {p: getattr(self, p) for p in cls_to_properties[class_name]}
 
+    @property
+    def serialized(self):
+        return self.properties
+
     @classmethod
     def choices(cls):
         return [(obj.id, obj.name) for obj in cls.query.all()]
 
     @classmethod
     def serialize(cls):
-        return [obj.properties for obj in cls.query.all()]
+        return [obj.serialized for obj in cls.query.all()]
 
 
 def base_factory(cls, **kwargs):

@@ -153,7 +153,7 @@ def parameters():
 
 @blueprint.route('/process_user', methods=['POST'])
 def process_user():
-    return jsonify(User, base_factory(**request.form.to_dict()).serialized)
+    return jsonify(base_factory(User, **request.form.to_dict()).serialized)
 
 
 @blueprint.route('/get_<user_id>', methods=['POST'])

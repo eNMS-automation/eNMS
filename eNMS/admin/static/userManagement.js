@@ -76,8 +76,8 @@ function processData() { // eslint-disable-line no-unused-vars
       success: function(user) {
         const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'create';
         addUser(mode, user);
-        const message = `User ${user.name}
-        ${mode == 'edit' ? 'edited !' : 'created !'}.`;
+        const message = `User '${user.name}'
+        ${mode == 'edit' ? 'edited' : 'created'}.`;
         alertify.notify(message, 'success', 5);
       },
     });

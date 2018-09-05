@@ -1,3 +1,4 @@
+bcrypt
 flask
 flask_apscheduler
 flask_login
@@ -5,16 +6,16 @@ flask_migrate
 flask-restful
 flask_sqlalchemy
 flask_wtf
+gunicorn
+jinja2
 napalm
 netmiko
 nornir
-jinja2
+passlib
+pathlib
+pyyaml
 simplekml
 tacacs_plus
 wtforms
 xlrd
 xlwt
-pyyaml
-passlib
-pathlib
-gunicorn

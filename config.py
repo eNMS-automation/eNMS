@@ -1,10 +1,10 @@
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
-
-
 class Config(object):
+
     # SQL Alchemy
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db?check_same_thread=False'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
     # AP Scheduler
     JOBS = []
     SCHEDULER_JOBSTORES = {
@@ -19,13 +19,13 @@ class Config(object):
     }
 
 
-class ProductionConfig(Config):
-    DEBUG = False
-
-
 class DebugConfig(Config):
     DEBUG = True
     SECRET_KEY = 'key'
+
+
+class ProductionConfig(Config):
+    DEBUG = False
 
 
 class SeleniumConfig(Config):

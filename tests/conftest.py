@@ -11,7 +11,7 @@ from eNMS import create_app, db
 
 @fixture
 def base_client():
-    app = create_app(Path.cwd(), config_dict['Debug'], test=True)
+    app = create_app(Path.cwd(), config_dict['Debug'])
     app_context = app.app_context()
     app_context.push()
     db.session.close()
@@ -21,7 +21,7 @@ def base_client():
 
 @fixture
 def user_client():
-    app = create_app(Path.cwd(), config_dict['Debug'], test=True)
+    app = create_app(Path.cwd(), config_dict['Debug'])
     app_context = app.app_context()
     app_context.push()
     db.session.close()
@@ -37,7 +37,7 @@ def user_client():
 
 @fixture
 def selenium_client():
-    app = create_app(Path.cwd(), config_dict['Debug'], test=True)
+    app = create_app(Path.cwd(), config_dict['Debug'])
     app_context = app.app_context()
     app_context.push()
     db.session.close()

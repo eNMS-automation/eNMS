@@ -81,9 +81,10 @@ def configure_logs(app):
     logger.addHandler(logging.StreamHandler())
 
 
-def create_app(path, config, test=False):
+def create_app(path, config):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config)
+    app.production = not app.config['DEBUG']
     app.path = path
     register_extensions(app)
     register_blueprints(app)

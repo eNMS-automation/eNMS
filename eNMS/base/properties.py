@@ -1,6 +1,3 @@
-from collections import OrderedDict
-
-
 object_common_properties = (
     'name',
     'description',
@@ -115,22 +112,22 @@ cls_to_properties = {
     'Task': task_serialized_properties
 }
 
-type_to_public_properties = OrderedDict([
-    ('Antenna', node_public_properties),
-    ('Firewall', node_public_properties),
-    ('Host', node_public_properties),
-    ('Optical switch', node_public_properties),
-    ('Regenerator', node_public_properties),
-    ('Router', node_public_properties),
-    ('Switch', node_public_properties),
-    ('Server', node_public_properties),
-    ('BGP peering', link_public_properties),
-    ('Etherchannel', link_public_properties),
-    ('Ethernet link', link_public_properties),
-    ('Optical channel', link_public_properties),
-    ('Optical link', link_public_properties),
-    ('Pseudowire', link_public_properties)
-])
+type_to_public_properties = {
+    'Antenna': node_public_properties,
+    'Firewall': node_public_properties,
+    'Host': node_public_properties,
+    'Optical switch': node_public_properties,
+    'Regenerator': node_public_properties,
+    'Router': node_public_properties,
+    'Switch': node_public_properties,
+    'Server': node_public_properties,
+    'BGP peering': link_public_properties,
+    'Etherchannel': link_public_properties,
+    'Ethernet link': link_public_properties,
+    'Optical channel': link_public_properties,
+    'Optical link': link_public_properties,
+    'Pseudowire': link_public_properties
+}
 
 
 default_diagrams_properties = {
@@ -191,40 +188,40 @@ type_to_diagram_properties = {
     'task': task_diagram_properties
 }
 
-pretty_names = OrderedDict([
-    ('access_rights', 'Access rights'),
-    ('action', 'Action'),
-    ('content', 'Content'),
-    ('content_type', 'Content type'),
-    ('description', 'Description'),
-    ('destination', 'Destination'),
-    ('dest_file', 'Destination file'),
-    ('direction', 'Direction'),
-    ('driver', 'Driver'),
-    ('email', 'Email'),
-    ('file', 'File'),
-    ('file_system', 'File system'),
-    ('getters', 'Getters'),
-    ('global_delay_factor', 'Global delay factor'),
-    ('inventory_from_selection', 'Inventory from selection'),
-    ('ip_address', 'IP address'),
-    ('longitude', 'Longitude'),
-    ('latitude', 'Latitude'),
-    ('location', 'Location'),
-    ('model', 'Model'),
-    ('name', 'Name'),
-    ('operating_system', 'Operating System'),
-    ('os_version', 'OS version'),
-    ('pass_node_properties', 'Pass node properties to the playbook'),
-    ('recurrent', 'Recurrent'),
-    ('secret_password', 'Secret password'),
-    ('source', 'Source'),
-    ('source_file', 'Source file'),
-    ('text file', 'File'),
-    ('type', 'Type'),
-    ('vendor', 'Vendor'),
-    ('waiting_time', 'Waiting time')
-])
+pretty_names = {
+    'access_rights': 'Access rights',
+    'action': 'Action',
+    'content': 'Content',
+    'content_type': 'Content type',
+    'description': 'Description',
+    'destination': 'Destination',
+    'dest_file': 'Destination file',
+    'direction': 'Direction',
+    'driver': 'Driver',
+    'email': 'Email',
+    'file': 'File',
+    'file_system': 'File system',
+    'getters': 'Getters',
+    'global_delay_factor': 'Global delay factor',
+    'inventory_from_selection': 'Inventory from selection',
+    'ip_address': 'IP address',
+    'longitude': 'Longitude',
+    'latitude': 'Latitude',
+    'location': 'Location',
+    'model': 'Model',
+    'name': 'Name',
+    'operating_system': 'Operating System',
+    'os_version': 'OS version',
+    'pass_node_properties': 'Pass node properties to the playbook',
+    'recurrent': 'Recurrent',
+    'secret_password': 'Secret password',
+    'source': 'Source',
+    'source_file': 'Source file',
+    'text file': 'File',
+    'type': 'Type',
+    'vendor': 'Vendor',
+    'waiting_time': 'Waiting time'
+}
 
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 

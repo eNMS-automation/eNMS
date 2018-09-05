@@ -120,7 +120,7 @@ def pool_management():
 
 @blueprint.route('/get/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
-def retrieveect(obj_type, obj_id):
+def get_object(obj_type, obj_id):
     if obj_type == 'node':
         cls, properties = Node, node_public_properties
     else:

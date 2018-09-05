@@ -6,12 +6,13 @@ from werkzeug import secure_filename
 from yaml import load as yaml_load
 
 from eNMS import db
+from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import retrieve, allowed_file
 from eNMS.base.properties import pretty_names, script_public_properties
 from eNMS.objects.models import Node, Pool
 from eNMS.scripts import blueprint
 from eNMS.scripts.helpers import type_to_form, type_to_name
-from eNMS.scripts.models import Job, Script, script_factory, type_to_class
+from eNMS.scripts.models import Job, Script, type_to_class
 from eNMS.scripts.properties import type_to_properties
 from eNMS.tasks.forms import SchedulingForm
 
@@ -79,7 +80,8 @@ def delete_object(script_id):
 def create_script(script_type):
     script = retrieve(Script, name=request.form['name'])
     # convert ImmutableMultiDict to an actual dictionnary
-    form = dict(request.form)
+    form = dict(request.form.to_dict())
+    form['getters'] = request.form.getlist('getters')
     if not script:
         if script_type in ('netmiko_config', 'napalm_config'):
             if form['content_type'][0] != 'simple':
@@ -97,4 +99,4 @@ def create_script(script_type):
                 source_file_name
             )
             form['source_file'] = [source_file_path]
-    return jsonify(script_factory(type_to_class[script_type], **form).serialized)
+    return jsonify(base_factory(type_to_class[script_type], **form).serialized)

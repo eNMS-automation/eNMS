@@ -447,32 +447,6 @@ type_to_class = {
     'rest_call': RestCallScript
 }
 
-
-def script_factory(cls, **kwargs):
-    script = retrieve(cls, name=kwargs['name'][0]) or cls()
-    for property in type_to_properties[type]:
-        # unchecked tickbox do not yield any value when posting a form, and
-        # they yield 'y' if checked
-        if property in boolean_properties:
-            value = property in kwargs
-        # type is not in kwargs, we leave it unchanged
-        elif property not in kwargs:
-            continue
-        elif property in json_properties:
-            str_dict, = kwargs[property]
-            value = loads(str_dict) if str_dict else {}
-        # if the property is not a list, we unpack it as it is returned
-        # as a singleton in the ImmutableMultiDict
-        elif property not in list_properties:
-            value, = kwargs[property]
-        else:
-            value = kwargs[property]
-        setattr(script, property, value)
-    db.session.add(script)
-    db.session.commit()
-    return script
-
-
 default_scripts = (
     ('NAPALM Rollback', 'rollback'),
 )

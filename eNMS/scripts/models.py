@@ -26,12 +26,12 @@ from subprocess import check_output
 from eNMS import db
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
-from eNMS.scripts.properties import (
+from eNMS.base.properties import (
     boolean_properties,
     json_properties,
-    list_properties,
-    type_to_properties
+    list_properties
 )
+from eNMS.scripts.properties import type_to_properties
 
 
 class Job(CustomBase):

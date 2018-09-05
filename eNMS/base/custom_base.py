@@ -1,5 +1,10 @@
 from eNMS import db
-from eNMS.base.properties import cls_to_properties
+from eNMS.base.properties import (
+    boolean_properties,
+    cls_to_properties,
+    json_properties,
+    list_properties
+)
 
 
 class CustomBase(db.Model):
@@ -9,15 +14,22 @@ class CustomBase(db.Model):
     def __init__(self, **kwargs):
         self.update(**kwargs)
 
-    def __repr__(self):
-        return self.name
-
     def __lt__(self, other):
         return True
 
+    def __repr__(self):
+        return self.name
+
     def update(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+        for property, value in kwargs.items():
+            # unchecked tickbox do not yield any value when posting a form,
+            # and they yield 'y' if checked
+            if property in boolean_properties:
+                value = property in kwargs
+            elif property in json_properties:
+                str_dict, = kwargs[property]
+                value = loads(str_dict) if str_dict else {}
+            setattr(self, property, value)
 
     @property
     def serialized(self):

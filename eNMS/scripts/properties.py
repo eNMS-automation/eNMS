@@ -81,26 +81,6 @@ custom_properties = script_properties + (
     'operating_system'
 )
 
-list_properties = (
-    'getters',
-)
-
-json_properties = (
-    'payload',
-)
-
-boolean_properties = (
-    'overwrite_file',
-    'disable_md5',
-    'inline_transfer',
-    'content_match_regex',
-    'content_match_regex1',
-    'content_match_regex2',
-    'content_match_regex3',
-    'inventory_from_selection',
-    'pass_node_properties'
-)
-
 type_to_properties = {
     'netmiko_config': netmiko_config_properties,
     'napalm_action': script_properties,

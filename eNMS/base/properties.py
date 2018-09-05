@@ -245,11 +245,7 @@ pretty_names = {
 
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 
-## Property types
-
-list_properties = (
-    'getters',
-)
+# Property types
 
 json_properties = (
     'payload',

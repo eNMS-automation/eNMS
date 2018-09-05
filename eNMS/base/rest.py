@@ -17,26 +17,26 @@ class RestAutomation(Resource):
 
 class GetObject(Resource):
 
-    def get(self, class_name, object_name):
-        return retrieve(diagram_classes[class_name], name=object_name).serialized
+    def get(self, cls_name, object_name):
+        return retrieve(diagram_classes[cls_name], name=object_name).serialized
 
-    def delete(self, class_name, object_name):
-        obj = retrieve(diagram_classes[class_name], name=object_name)
+    def delete(self, cls_name, object_name):
+        obj = retrieve(diagram_classes[cls_name], name=object_name)
         db.session.delete(obj)
         db.session.commit()
-        return f'{class_name} {object_name} successfully deleted'
+        return f'{cls_name} {object_name} successfully deleted'
 
 
 class UpdateObject(Resource):
 
-    def post(self, class_name):
+    def post(self, cls_name):
         body = request.get_json(force=True, silent=True)
-        factory = class_to_factory[class_name]
+        factory = class_to_factory[cls_name]
         obj = factory(**body)
         return obj.serialized
 
-    def put(self, class_name):
-        return self.post(class_name)
+    def put(self, cls_name):
+        return self.post(cls_name)
 
 
 def configure_rest_api(app):
@@ -47,9 +47,9 @@ def configure_rest_api(app):
     )
     api.add_resource(
         UpdateObject,
-        '/rest/object/<string:class_name>'
+        '/rest/object/<string:cls_name>'
     )
     api.add_resource(
         GetObject,
-        '/rest/object/<string:class_name>/<string:object_name>'
+        '/rest/object/<string:cls_name>/<string:object_name>'
     )

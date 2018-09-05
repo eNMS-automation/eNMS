@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
@@ -12,13 +11,7 @@ from eNMS.base.associations import (
 )
 from eNMS.base.custom_base import base_factory, CustomBase
 from eNMS.base.helpers import retrieve, integrity_rollback
-from eNMS.base.properties import (
-    cls_to_properties,
-    link_public_properties,
-    node_common_properties,
-    node_public_properties,
-    object_common_properties
-)
+from eNMS.base.properties import link_public_properties, node_public_properties
 
 
 class Object(CustomBase):

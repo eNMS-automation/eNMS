@@ -25,12 +25,7 @@ from subprocess import check_output
 
 from eNMS import db
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import retrieve, integrity_rollback, str_dict
-from eNMS.base.properties import (
-    boolean_properties,
-    json_properties,
-    list_properties
-)
+from eNMS.base.helpers import integrity_rollback, str_dict
 from eNMS.scripts.properties import type_to_properties
 
 

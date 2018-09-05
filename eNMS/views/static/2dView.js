@@ -14,7 +14,7 @@ polylinesArray: true
 showModal: false
 showObjectModal: false
 selection: true
-subtypes: false
+node_subtypes: false
 view: false
 */
 
@@ -117,7 +117,7 @@ for (let i = 0; i < links.length; i++) {
     link.destination_properties.latitude,
     link.destination_properties.longitude
   );
-  console.log(links[i])
+
   const pointList = [pointA, pointB];
   const polyline = new L.PolylineClusterable(pointList, {
     color: link_colors[links[i].subtype],

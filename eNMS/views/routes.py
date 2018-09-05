@@ -38,7 +38,6 @@ def view(view_type):
     scheduling_form.job.choices = Job.choices()
     scheduling_form.nodes.choices = all_nodes
     scheduling_form.pools.choices = Pool.choices()
-    print(Link.serialize())
     labels = {'node': 'name', 'link': 'name'}
     if 'view_options' in request.form:
         # update labels

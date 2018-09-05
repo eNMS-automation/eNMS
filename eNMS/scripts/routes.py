@@ -79,24 +79,23 @@ def delete_object(script_id):
 @login_required
 def create_script(script_type):
     script = retrieve(Script, name=request.form['name'])
-    # convert ImmutableMultiDict to an actual dictionnary
     form = dict(request.form.to_dict())
     form['getters'] = request.form.getlist('getters')
     if not script:
         if script_type in ('netmiko_config', 'napalm_config'):
-            if form['content_type'][0] != 'simple':
+            if form['content_type'] != 'simple':
                 file = request.files['file']
                 filename = secure_filename(file.filename)
                 if allowed_file(filename, {'yaml', 'yml'}):
                     parameters = yaml_load(file.read())
-                    template = Template(form['content'][0])
-                    form['content'] = [''.join(template.render(**parameters))]
+                    template = Template(form['content'])
+                    form['content'] = ''.join(template.render(**parameters))
         elif script_type == 'file_transfer':
-            source_file_name = form['source_file'][0]
+            source_file_name = form['source_file']
             source_file_path = join(
                 current_app.path,
                 'file_transfer',
                 source_file_name
             )
-            form['source_file'] = [source_file_path]
+            form['source_file'] = source_file_path
     return jsonify(base_factory(type_to_class[script_type], **form).serialized)

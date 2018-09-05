@@ -5,8 +5,7 @@ from eNMS.base.helpers import retrieve
 from eNMS.base.properties import (
     boolean_properties,
     cls_to_properties,
-    json_properties,
-    list_properties
+    json_properties
 )
 
 
@@ -25,12 +24,10 @@ class CustomBase(db.Model):
 
     def update(self, **kwargs):
         for property, value in kwargs.items():
-            print(property, value)
             if property in boolean_properties or 'regex' in property:
                 value = property in kwargs
             elif property in json_properties:
-                str_dict, = kwargs[property]
-                value = loads(str_dict) if str_dict else {}
+                value = loads(value) if value else {}
             setattr(self, property, value)
 
     @property

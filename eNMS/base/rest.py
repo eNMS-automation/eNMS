@@ -2,7 +2,8 @@ from flask import request
 from flask_restful import Api, Resource
 
 from eNMS import db
-from eNMS.base.classes import class_to_factory, diagram_classes
+from eNMS.base.classes import diagram_classes
+from eNMS.base.custom_base import base_factory
 from eNMS.objects.models import retrieve
 from eNMS.tasks.models import Task
 
@@ -30,10 +31,7 @@ class GetObject(Resource):
 class UpdateObject(Resource):
 
     def post(self, cls_name):
-        body = request.get_json(force=True, silent=True)
-        factory = class_to_factory[cls_name]
-        obj = factory(**body)
-        return obj.serialized
+        return base_factory(**request.get_json(force=True, silent=True)).serialized
 
     def put(self, cls_name):
         return self.post(cls_name)

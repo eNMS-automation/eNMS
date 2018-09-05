@@ -13,13 +13,3 @@ diagram_classes = {
     'workflow': Workflow,
     'task': Task
 }
-
-class_to_factory = {
-    'node': base_factory,
-    'link': base_factory,
-    'pool': base_factory,
-    'user': base_factory,
-    'script': base_factory,
-    'task': base_factory,
-    'workflow': base_factory
-}

@@ -70,24 +70,9 @@ class Workflow(Job):
         'polymorphic_identity': 'workflow',
     }
 
-    def __init__(self, **kwargs):
-        for property in self.default_properties:
-            setattr(self, property, kwargs[property])
-
     @property
     def serialized(self):
         properties = self.properties
         properties['tasks'] = [obj.properties for obj in getattr(self, 'tasks')]
         properties['edges'] = [edge.serialized for edge in self.edges]
         return properties
-
-
-def workflow_factory(**kwargs):
-    workflow = get_obj(Workflow, name=kwargs['name'])
-    if workflow:
-        workflow.update(**kwargs)
-    else:
-        workflow = Workflow(**kwargs)
-        db.session.add(workflow)
-    db.session.commit()
-    return workflow

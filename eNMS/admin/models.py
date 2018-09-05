@@ -112,10 +112,6 @@ class OpenNmsServer(CustomBase):
     login = Column(String)
     password = Column(String)
 
-    def __init__(self, **kwargs):
-        for properties in kwargs.items():
-            setattr(self, *properties)
-
 
 class Parameters(CustomBase):
 
@@ -126,21 +122,6 @@ class Parameters(CustomBase):
     default_longitude = Column(Float, default=2.)
     default_latitude = Column(Float, default=48.)
     default_zoom_level = Column(Integer, default=5)
-
-    def __init__(self, **kwargs):
-        for properties in kwargs.items():
-            setattr(self, *properties)
-
-
-def user_factory(**kwargs):
-    user = get_obj(User, name=kwargs['name'])
-    if user:
-        user.update(**kwargs)
-    else:
-        user = User(**kwargs)
-        db.session.add(user)
-    db.session.commit()
-    return user
 
 
 @integrity_rollback

@@ -487,18 +487,6 @@ class Pool(CustomBase):
         }
 
 
-def pool_factory(**kwargs):
-    pool = get_obj(Pool, name=kwargs['name'])
-    if pool:
-        pool.update(**kwargs)
-    else:
-        pool = Pool(**kwargs)
-        db.session.add(pool)
-    pool.compute_pool()
-    db.session.commit()
-    return pool
-
-
 default_pools = (
     {'name': 'All objects'},
     {'name': 'Nodes only', 'link_name': '^$', 'link_name_regex': True},

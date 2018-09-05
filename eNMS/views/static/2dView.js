@@ -118,7 +118,7 @@ for (let i = 0; i < links.length; i++) {
   );
   const pointList = [pointA, pointB];
   const polyline = new L.PolylineClusterable(pointList, {
-    color: link.color,
+    color: 'red',
     weight: 3,
     opacity: 1,
     smoothFactor: 1,

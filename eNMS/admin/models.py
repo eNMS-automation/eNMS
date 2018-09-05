@@ -1,3 +1,4 @@
+from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy import Column, Float, Integer, String
 from sqlalchemy.orm import relationship
@@ -29,11 +30,15 @@ class User(CustomBase, UserMixin):
     tasks = relationship('Task', back_populates='user')
 
     def __init__(self, **kwargs):
-        print(kwargs)
-        password = kwargs.pop('password')
-        kwargs['password'] = cisco_type7.hash(password)
-        for property, value in kwargs.items():
-            setattr(self, property, value)
+        self.update(**kwargs)
+
+    def update(self, **kwargs):
+        print(current_app, current_app.production)
+        for key, value in kwargs.items():
+            if key == 'password':
+                
+                value = cisco_type7.hash(value)
+            setattr(self, key, value)
 
     def __repr__(self):
         return self.name
@@ -57,21 +62,6 @@ class TacacsServer(CustomBase):
 
     def __repr__(self):
         return self.ip_address
-
-
-def user_factory(**kwargs):
-    user = get_obj(User, name=kwargs['name'])
-    if user:
-        for property, value in kwargs.items():
-            if property in user.__dict__:
-                if property == 'password':
-                    value = cisco_type7.hash(value)
-                setattr(user, property, value)
-    else:
-        user = User(**kwargs)
-        db.session.add(user)
-    db.session.commit()
-    return user
 
 
 class SyslogUDPHandler(BaseRequestHandler):
@@ -135,9 +125,20 @@ class Parameters(CustomBase):
     default_latitude = Column(Float, default=48.)
     default_zoom_level = Column(Integer, default=5)
 
-    def update(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+    def __init__(self, **kwargs):
+        for properties in kwargs.items():
+            setattr(self, *properties)
+
+
+def user_factory(**kwargs):
+    user = get_obj(User, name=kwargs['name'])
+    if user:
+        user.update(**kwargs)
+    else:
+        user = User(**kwargs)
+        db.session.add(user)
+    db.session.commit()
+    return user
 
 
 @integrity_rollback

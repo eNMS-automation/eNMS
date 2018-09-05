@@ -1,5 +1,4 @@
 from eNMS.admin.models import User
-from eNMS.base.custom_base import base_factory
 from eNMS.objects.models import Link, Node
 from eNMS.scripts.models import Script
 from eNMS.tasks.models import Task

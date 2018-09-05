@@ -2,7 +2,6 @@ from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
 
-from eNMS import db
 from eNMS.base.associations import (
     pool_node_table,
     pool_link_table,
@@ -10,7 +9,7 @@ from eNMS.base.associations import (
     task_pool_table
 )
 from eNMS.base.custom_base import factory, CustomBase
-from eNMS.base.helpers import retrieve, integrity_rollback
+from eNMS.base.helpers import integrity_rollback
 from eNMS.base.properties import link_public_properties, node_public_properties
 
 

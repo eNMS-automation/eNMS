@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from netmiko.ssh_dispatcher import CLASS_MAPPER
@@ -13,33 +12,33 @@ from wtforms import (
     TextField
 )
 
-getters_mapping = OrderedDict([
-    ('ARP table', 'get_arp_table'),
-    ('Interfaces counters', 'get_interfaces_counters'),
-    ('Facts', 'get_facts'),
-    ('Environment', 'get_environment'),
-    ('Configuration', 'get_config'),
-    ('Interfaces', 'get_interfaces'),
-    ('Interface IP', 'get_interfaces_ip'),
-    ('LLDP neighbors', 'get_lldp_neighbors'),
-    ('LLDP neighbors detail', 'get_lldp_neighbors_detail'),
-    ('MAC address', 'get_mac_address_table'),
-    ('NTP servers', 'get_ntp_servers'),
-    ('NTP statistics', 'get_ntp_stats'),
-    ('Transceivers', 'get_optics'),
-    ('SNMP', 'get_snmp_information'),
-    ('Users', 'get_users'),
-    ('Network instances (VRF)', 'get_network_instances'),
-    ('NTP peers', 'get_ntp_peers'),
-    ('BGP configuration', 'get_bgp_config'),
-    ('BGP neighbors', 'get_bgp_neighbors'),
-    ('IPv6', 'get_ipv6_neighbors_table'),
-])
+getters_mapping = {
+    'ARP table': 'get_arp_table',
+    'Interfaces counters': 'get_interfaces_counters',
+    'Facts': 'get_facts',
+    'Environment': 'get_environment',
+    'Configuration': 'get_config',
+    'Interfaces': 'get_interfaces',
+    'Interface IP': 'get_interfaces_ip',
+    'LLDP neighbors': 'get_lldp_neighbors',
+    'LLDP neighbors detail': 'get_lldp_neighbors_detail',
+    'MAC address': 'get_mac_address_table',
+    'NTP servers': 'get_ntp_servers',
+    'NTP statistics': 'get_ntp_stats',
+    'Transceivers': 'get_optics',
+    'SNMP': 'get_snmp_information',
+    'Users': 'get_users',
+    'Network instances (VRF)': 'get_network_instances',
+    'NTP peers': 'get_ntp_peers',
+    'BGP configuration': 'get_bgp_config',
+    'BGP neighbors': 'get_bgp_neighbors',
+    'IPv6': 'get_ipv6_neighbors_table'
+}
 
-napalm_actions = OrderedDict([
-    ('Load merge', 'load_merge_candidate'),
-    ('Load replace', 'load_replace_candidate'),
-])
+napalm_actions = {
+    'Load merge': 'load_merge_candidate',
+    'Load replace': 'load_replace_candidate'
+}
 
 netmiko_drivers = sorted(
     driver for driver in CLASS_MAPPER

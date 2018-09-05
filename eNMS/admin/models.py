@@ -1,3 +1,4 @@
+from bcrypt import gensalt, hashpw
 from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy import Column, Float, Integer, String
@@ -33,11 +34,12 @@ class User(CustomBase, UserMixin):
         self.update(**kwargs)
 
     def update(self, **kwargs):
-        print(current_app, current_app.production)
         for key, value in kwargs.items():
             if key == 'password':
-                
-                value = cisco_type7.hash(value)
+                if current_app.production:
+                    value = hashpw(value.encode('utf8'), gensalt())
+                else:
+                    value = cisco_type7.hash(value)
             setattr(self, key, value)
 
     def __repr__(self):

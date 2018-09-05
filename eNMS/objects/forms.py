@@ -9,8 +9,12 @@ from wtforms import (
 )
 from wtforms.validators import optional
 
-from eNMS.base.properties import link_public_properties, node_public_properties
-from eNMS.objects.models import link_class, node_class
+from eNMS.base.properties import (
+    link_public_properties,
+    link_subtypes,
+    node_public_properties,
+    node_subtypes
+)
 
 
 class AddObjectForm(FlaskForm):
@@ -24,8 +28,8 @@ class AddObjectForm(FlaskForm):
 
 
 class AddNode(AddObjectForm):
-    node_type = [(t, t) for t in node_class]
-    type = SelectField('Type', choices=node_type)
+    node_types = [(t, t) for t in node_subtypes.values()]
+    type = SelectField('Type', choices=node_types)
     ip_address = TextField('IP address', [optional()])
     operating_system = TextField('Operating System', [optional()])
     os_version = TextField('OS version', [optional()])
@@ -35,8 +39,8 @@ class AddNode(AddObjectForm):
 
 
 class AddLink(AddObjectForm):
-    link_type = [(t, t) for t in link_class]
-    type = SelectField('Type', choices=link_type)
+    link_types = [(t, t) for t in link_subtypes.values()]
+    type = SelectField('Type', choices=link_types)
     source = SelectField('Source', choices=())
     destination = SelectField('Destination', choices=())
 

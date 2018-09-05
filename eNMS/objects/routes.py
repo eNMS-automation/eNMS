@@ -11,13 +11,7 @@ from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import allowed_file, retrieve
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
-from eNMS.objects.models import (
-    Link,
-    Node,
-    object_class,
-    object_factory,
-    Pool
-)
+from eNMS.objects.models import Link, Node, object_factory, Pool
 from eNMS.base.properties import (
     link_public_properties,
     node_public_properties,

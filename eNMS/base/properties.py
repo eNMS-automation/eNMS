@@ -8,6 +8,26 @@ object_common_properties = (
     'vendor'
 )
 
+node_subtypes = {
+    'antenna': 'Antenna',
+    'firewall': 'Firewall',
+    'host': 'Host',
+    'optical_switch': 'Optical switch',
+    'regenerator': 'Regenerator',
+    'router': 'Router',
+    'server': 'Server',
+    'switch': 'Switch'
+}
+
+link_subtypes = {
+    'bgp_peering': 'BGP peering',
+    'etherchannel': 'Etherchannel',
+    'ethernet_link': 'Ethernet link',
+    'optical_channel': 'Optical channel',
+    'optical_link': 'Optical link',
+    'pseudowire': 'Pseudowire'
+}
+
 node_common_properties = (
     'operating_system',
     'os_version',

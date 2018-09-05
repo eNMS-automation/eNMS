@@ -1,6 +1,6 @@
 object_common_properties = (
     'name',
-    'subtype'
+    'subtype',
     'description',
     'model',
     'location',
@@ -31,9 +31,9 @@ link_subtypes = {
 link_subtype_to_color = {
     'bgp_peering': '#77ebca',
     'etherchannel': '#cf228a',
-    'ethernet link': '#0000ff',
-    'optical link': '#d4222a',
-    'optical channel': '#ff8247',
+    'ethernet_link': '#0000ff',
+    'optical_link': '#d4222a',
+    'optical_channel': '#ff8247',
     'pseudowire': '#902bec'
 }
 
@@ -135,7 +135,7 @@ public_properties = (
 
 cls_to_properties = {
     'Node': node_public_properties,
-    'Link': ('color',) + link_public_properties,
+    'Link': link_public_properties,
     'Pool': pool_public_properties,
     'Script': script_public_properties,
     'Parameters': parameters_public_properties,
@@ -236,6 +236,7 @@ pretty_names = {
     'secret_password': 'Secret password',
     'source': 'Source',
     'source_file': 'Source file',
+    'subtype': 'Subtype',
     'text file': 'File',
     'type': 'Type',
     'vendor': 'Vendor',

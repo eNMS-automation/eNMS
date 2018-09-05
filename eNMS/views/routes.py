@@ -9,9 +9,10 @@ from subprocess import Popen
 
 from eNMS.admin.models import Parameters
 from eNMS.base.helpers import retrieve
+from eNMS.base.properties import node_subtypes
 from eNMS.base.models import Log
 from eNMS.objects.forms import AddNode, AddLink
-from eNMS.objects.models import Pool, Node, node_class, Link
+from eNMS.objects.models import Pool, Node, Link
 from eNMS.base.properties import (
     link_public_properties,
     node_public_properties,
@@ -66,7 +67,7 @@ def view(view_type):
         link_fields=link_public_properties,
         labels=labels,
         names=pretty_names,
-        subtypes=list(node_class),
+        subtypes=list(node_subtypes),
         name_to_id=name_to_id,
         nodes=Node.serialize(),
         links=Link.serialize()

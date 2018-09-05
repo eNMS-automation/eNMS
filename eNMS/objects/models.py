@@ -123,12 +123,11 @@ class Link(Object):
 
 
 def object_factory(**kwargs):
-    obj_type = kwargs['type']
-    cls = Node if obj_type in node_class else Link
+    cls = Node if kwargs['type'] == 'Node' else Link
     obj = retrieve(cls, name=kwargs['name'])
     if obj:
         obj.update(**kwargs)
-    elif obj_type in link_class:
+    elif cls == Link:
         if 'import' in kwargs:
             source = retrieve(Node, name=kwargs.pop('source'))
             destination = retrieve(Node, name=kwargs.pop('destination'))

@@ -1,4 +1,5 @@
 from flask import (
+    current_app,
     jsonify,
     redirect,
     render_template,
@@ -57,6 +58,7 @@ def login():
         name = str(request.form['name'])
         password = str(request.form['password'])
         user = db.session.query(User).filter_by(name=name).first()
+        print(current_app.production)
         if user and cisco_type7.verify(password, user.password):
             flask_login.login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))

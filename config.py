@@ -1,4 +1,7 @@
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from os import environ
+
+
 class Config(object):
 
     # SQL Alchemy
@@ -26,6 +29,7 @@ class DebugConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG = False
+    SECRET_KEY = environ.get('ENMS_SECRET_KEY')
 
 
 class SeleniumConfig(Config):

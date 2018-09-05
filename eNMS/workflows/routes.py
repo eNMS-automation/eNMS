@@ -3,7 +3,7 @@ from flask_login import login_required
 
 from eNMS import db
 from eNMS.base.custom_base import base_factory
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Node, Pool
 from eNMS.scripts.models import Job
@@ -40,7 +40,7 @@ def workflow_editor(workflow_id=None):
     add_existing_task_form = AddExistingTaskForm(request.form)
     workflow_editor_form = WorkflowEditorForm(request.form)
     workflow_editor_form.workflow.choices = Workflow.choices()
-    workflow = get_obj(Workflow, id=workflow_id)
+    workflow = retrieve(Workflow, id=workflow_id)
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
     scheduling_form.nodes.choices = Node.choices()
@@ -60,7 +60,7 @@ def workflow_editor(workflow_id=None):
 @blueprint.route('/get/<workflow_id>', methods=['POST'])
 @login_required
 def get_workflow(workflow_id):
-    workflow = get_obj(Workflow, id=workflow_id)
+    workflow = retrieve(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
 
 
@@ -75,7 +75,7 @@ def edit_workflow():
 @blueprint.route('/delete/<workflow_id>', methods=['POST'])
 @login_required
 def delete_workflow(workflow_id):
-    workflow = get_obj(Workflow, id=workflow_id)
+    workflow = retrieve(Workflow, id=workflow_id)
     db.session.delete(workflow)
     db.session.commit()
     return jsonify(workflow.name)
@@ -84,8 +84,8 @@ def delete_workflow(workflow_id):
 @blueprint.route('/add_node/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
 def add_node(workflow_id, task_id):
-    workflow = get_obj(Workflow, id=workflow_id)
-    task = get_obj(Task, id=task_id)
+    workflow = retrieve(Workflow, id=workflow_id)
+    task = retrieve(Task, id=task_id)
     workflow.tasks.append(task)
     db.session.commit()
     return jsonify(task.serialized)
@@ -94,7 +94,7 @@ def add_node(workflow_id, task_id):
 @blueprint.route('/delete_node/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
 def delete_node(workflow_id, task_id):
-    task = get_obj(Task, id=task_id)
+    task = retrieve(Task, id=task_id)
     db.session.delete(task)
     db.session.commit()
     return jsonify(task.properties)
@@ -103,9 +103,9 @@ def delete_node(workflow_id, task_id):
 @blueprint.route('/add_edge/<wf_id>/<type>/<source>/<dest>', methods=['POST'])
 @login_required
 def add_edge(wf_id, type, source, dest):
-    source_task = get_obj(Task, id=source)
-    destination_task = get_obj(Task, id=dest)
-    workflow = get_obj(Workflow, id=wf_id)
+    source_task = retrieve(Task, id=source)
+    destination_task = retrieve(Task, id=dest)
+    workflow = retrieve(Workflow, id=wf_id)
     workflow_edge = WorkflowEdge(type, source_task, destination_task)
     db.session.add(workflow_edge)
     workflow.edges.append(workflow_edge)
@@ -116,7 +116,7 @@ def add_edge(wf_id, type, source, dest):
 @blueprint.route('/delete_edge/<workflow_id>/<edge_id>', methods=['POST'])
 @login_required
 def delete_edge(workflow_id, edge_id):
-    edge = get_obj(WorkflowEdge, id=edge_id)
+    edge = retrieve(WorkflowEdge, id=edge_id)
     db.session.delete(edge)
     db.session.commit()
     return jsonify(edge.properties)
@@ -125,7 +125,7 @@ def delete_edge(workflow_id, edge_id):
 @blueprint.route('/set_as_start/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
 def set_as_start(workflow_id, task_id):
-    workflow = get_obj(Workflow, id=workflow_id)
+    workflow = retrieve(Workflow, id=workflow_id)
     workflow.start_task = task_id
     db.session.commit()
     return jsonify({'success': True})
@@ -135,7 +135,7 @@ def set_as_start(workflow_id, task_id):
 @login_required
 def save_positions():
     for task_id, position in request.json.items():
-        task = get_obj(Task, id=task_id)
+        task = retrieve(Task, id=task_id)
         task.x, task.y = position['x'], position['y']
     db.session.commit()
     return jsonify({'success': True})

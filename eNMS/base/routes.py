@@ -16,7 +16,7 @@ from eNMS.base.properties import (
     reverse_pretty_names,
     type_to_diagram_properties
 )
-from eNMS.objects.models import get_obj
+from eNMS.base.helpers import get_obj
 from eNMS.tasks.models import Task
 
 

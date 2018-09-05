@@ -3,7 +3,7 @@ from sqlalchemy.orm import backref, relationship
 
 from eNMS import db
 from eNMS.base.associations import task_workflow_table
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 from eNMS.base.models import CustomBase
 from eNMS.base.properties import cls_to_properties
 from eNMS.scripts.models import Job

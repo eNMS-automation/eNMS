@@ -4,7 +4,7 @@ from flask_login import current_user, login_required
 from re import search, sub
 
 from eNMS import db
-from eNMS.base.helpers import get_obj, str_dict
+from eNMS.base.helpers import retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
@@ -64,14 +64,14 @@ def calendar():
 @login_required
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
-    data['job'] = get_obj(Job, id=data['job'])
+    data['job'] = retrieve(Job, id=data['job'])
     data['nodes'] = [
-        get_obj(Node, id=id) for id in request.form.getlist('nodes')
+        retrieve(Node, id=id) for id in request.form.getlist('nodes')
     ]
     data['pools'] = [
-        get_obj(Pool, id=id) for id in request.form.getlist('pools')
+        retrieve(Pool, id=id) for id in request.form.getlist('pools')
     ]
-    data['workflow'] = get_obj(Workflow, id=workflow_id)
+    data['workflow'] = retrieve(Workflow, id=workflow_id)
     data['user'] = current_user
     task = task_factory(**data)
     return jsonify(task.serialized)
@@ -80,8 +80,8 @@ def scheduler(workflow_id=None):
 @blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
 @login_required
 def add_to_workflow(workflow_id):
-    workflow = get_obj(Workflow, id=workflow_id)
-    task = get_obj(Task, id=request.form['task'])
+    workflow = retrieve(Workflow, id=workflow_id)
+    task = retrieve(Task, id=request.form['task'])
     task.workflows.append(workflow)
     db.session.commit()
     return jsonify(task.serialized)
@@ -90,21 +90,21 @@ def add_to_workflow(workflow_id):
 @blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
 def get_task(task_id):
-    task = get_obj(Task, id=task_id)
+    task = retrieve(Task, id=task_id)
     return jsonify(task.serialized)
 
 
 @blueprint.route('/show_logs/<task_id>', methods=['POST'])
 @login_required
 def show_logs(task_id):
-    task = get_obj(Task, id=task_id)
+    task = retrieve(Task, id=task_id)
     return jsonify(str_dict(task.logs))
 
 
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])
 @login_required
 def get_diff(task_id, v1, v2, n1, n2):
-    task = get_obj(Task, id=task_id)
+    task = retrieve(Task, id=task_id)
     first = str_dict(task.logs[v1][n1]).splitlines()
     second = str_dict(task.logs[v2][n2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -114,7 +114,7 @@ def get_diff(task_id, v1, v2, n1, n2):
 @blueprint.route('/compare_logs/<task_id>', methods=['POST'])
 @login_required
 def compare_logs(task_id):
-    task = get_obj(Task, id=task_id)
+    task = retrieve(Task, id=task_id)
     results = {
         'nodes': [node.name for node in task.nodes],
         'versions': list(task.logs)

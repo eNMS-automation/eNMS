@@ -8,7 +8,7 @@ from simplekml import Kml
 from subprocess import Popen
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 from eNMS.base.models import Log
 from eNMS.objects.forms import AddNode, AddLink
 from eNMS.objects.models import Pool, Node, node_class, Link
@@ -75,7 +75,7 @@ def view(view_type):
 @blueprint.route('/connect_to_<name>', methods=['POST'])
 @login_required
 def putty_connection(name):
-    current_os, node = platform_system(), get_obj(Node, name=name)
+    current_os, node = platform_system(), retrieve(Node, name=name)
     password = cisco_type7.decode(current_user.password)
     if current_os == 'Windows':
         path_putty = join(current_app.path, 'applications', 'putty.exe')
@@ -125,7 +125,7 @@ def export_to_google_earth():
 @blueprint.route('/get_logs_<node_id>', methods=['POST'])
 @login_required
 def get_logs(node_id):
-    node = get_obj(Node, id=node_id)
+    node = retrieve(Node, id=node_id)
     node_logs = [
         l.content for l in Log.query.all()
         if l.source == node.ip_address

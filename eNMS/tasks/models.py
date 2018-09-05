@@ -14,13 +14,13 @@ from eNMS.base.associations import (
     task_workflow_table
 )
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
 
 
 def job(task_name, runtime):
     with scheduler.app.app_context():
-        task = get_obj(Task, name=task_name)
+        task = retrieve(Task, name=task_name)
         task.job(runtime)
 
 
@@ -207,7 +207,7 @@ class WorkflowTask(Task):
         super(WorkflowTask, self).__init__(**data)
 
     def job(self, runtime):
-        start_task = get_obj(Task, id=self.workflow.start_task)
+        start_task = retrieve(Task, id=self.workflow.start_task)
         if not start_task:
             return False, {runtime: 'No start task in the workflow.'}
         layer, visited = {start_task}, set()
@@ -239,7 +239,7 @@ class WorkflowTask(Task):
 
 def task_factory(**kwargs):
     cls = WorkflowTask if kwargs['job'].type == 'workflow' else ScriptTask
-    task = get_obj(cls, name=kwargs['name'])
+    task = retrieve(cls, name=kwargs['name'])
     if task:
         for property, value in kwargs.items():
             if property in ('start_date', 'end_date') and value:

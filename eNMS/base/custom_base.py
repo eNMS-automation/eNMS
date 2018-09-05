@@ -1,4 +1,5 @@
 from eNMS import db
+from eNMS.base.helpers import get_obj
 from eNMS.base.properties import (
     boolean_properties,
     cls_to_properties,

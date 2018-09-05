@@ -52,14 +52,3 @@ class LogRule(CustomBase):
 
     def __repr__(self):
         return self.content
-
-
-def log_rule_factory(**kwargs):
-    log_rule = get_obj(LogRule, name=kwargs['name'])
-    if log_rule:
-        log_rule.update(**kwargs)
-    else:
-        log_rule = LogRule(**kwargs)
-        db.session.add(log_rule)
-    db.session.commit()
-    return log_rule

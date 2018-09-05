@@ -43,3 +43,14 @@ class CustomBase(db.Model):
     @classmethod
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all()]
+
+
+def base_factory(cls, **kwargs):
+    instance = get_obj(cls, name=kwargs['name'])
+    if instance:
+        instance.update(**kwargs)
+    else:
+        instance = cls(**kwargs)
+        db.session.add(instance)
+    db.session.commit()
+    return instance

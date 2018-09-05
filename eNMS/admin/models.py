@@ -29,14 +29,10 @@ class User(CustomBase, UserMixin):
     tasks = relationship('Task', back_populates='user')
 
     def __init__(self, **kwargs):
+        print(kwargs)
         password = kwargs.pop('password')
         kwargs['password'] = cisco_type7.hash(password)
         for property, value in kwargs.items():
-            # depending on whether value is an iterable or not, we must
-            # unpack it's value (when **kwargs is request.form, some values
-            # will be a 1-element list)
-            if hasattr(value, '__iter__') and not isinstance(value, str):
-                value = value[0]
             setattr(self, property, value)
 
     def __repr__(self):

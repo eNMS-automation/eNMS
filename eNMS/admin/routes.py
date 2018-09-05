@@ -1,3 +1,4 @@
+from bcrypt import checkpw
 from flask import (
     current_app,
     jsonify,
@@ -6,13 +7,17 @@ from flask import (
     request,
     url_for
 )
-from flask_login import login_required
+from flask_login import (
+    current_user,
+    login_required,
+    login_user,
+    logout_user
+)
 from passlib.hash import cisco_type7
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
-import flask_login
-import requests
+from requests import get
 
 from eNMS import db
 from eNMS.admin import blueprint
@@ -58,9 +63,12 @@ def login():
         name = str(request.form['name'])
         password = str(request.form['password'])
         user = db.session.query(User).filter_by(name=name).first()
-        print(current_app.production)
-        if user and cisco_type7.verify(password, user.password):
-            flask_login.login_user(user)
+        if current_app.production:
+            match = checkpw(password.encode('utf8'), user.password)
+        else:
+            match = cisco_type7.verify(password, user.password)
+        if user and match:
+            login_user(user)
             return redirect(url_for('base_blueprint.dashboard'))
         else:
             try:
@@ -85,12 +93,12 @@ def login():
                     user = User(name=name, password=encrypted_password)
                     db.session.add(user)
                     db.session.commit()
-                    flask_login.login_user(user)
+                    login_user(user)
                     return redirect(url_for('base_blueprint.dashboard'))
             except NoResultFound:
                 pass
         return render_template('errors/page_403.html')
-    if not flask_login.current_user.is_authenticated:
+    if not current_user.is_authenticated:
         return render_template(
             'login.html',
             login_form=LoginForm(request.form),
@@ -102,7 +110,7 @@ def login():
 @blueprint.route('/logout')
 @login_required
 def logout():
-    flask_login.logout_user()
+    logout_user()
     return redirect(url_for('admin_blueprint.login'))
 
 
@@ -188,7 +196,7 @@ def save_syslog_server():
 def query_opennms():
     OpenNmsServer.query.delete()
     opennms_server = OpenNmsServer(**request.form.to_dict())
-    json_nodes = requests.get(
+    json_nodes = get(
         opennms_server.node_query,
         headers={'Accept': 'application/json'},
         auth=(opennms_server.login, opennms_server.password)
@@ -204,7 +212,7 @@ def query_opennms():
     }
 
     for node in list(nodes):
-        link = requests.get(
+        link = get(
             opennms_server.rest_query + '/nodes/' + node + '/ipinterfaces',
             headers={'Accept': 'application/json'},
             auth=(opennms_server.login, opennms_server.password)

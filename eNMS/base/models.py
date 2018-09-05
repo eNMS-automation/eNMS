@@ -57,9 +57,7 @@ class LogRule(CustomBase):
 def log_rule_factory(**kwargs):
     log_rule = get_obj(LogRule, name=kwargs['name'])
     if log_rule:
-        for property, value in kwargs.items():
-            if property in log_rule.__dict__:
-                setattr(log_rule, property, value)
+        log_rule.update(**kwargs)
     else:
         log_rule = LogRule(**kwargs)
         db.session.add(log_rule)

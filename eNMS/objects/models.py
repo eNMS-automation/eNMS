@@ -64,6 +64,8 @@ class Node(Object):
         back_populates='nodes'
     )
 
+    class_type = 'node'
+
     __mapper_args__ = {
         'polymorphic_identity': 'Node',
     }
@@ -181,39 +183,36 @@ class Link(Object):
     }
 
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
-
     source_id = Column(
         Integer,
         ForeignKey('Node.id')
     )
-
     destination_id = Column(
         Integer,
         ForeignKey('Node.id')
     )
-
     source = relationship(
         Node,
         primaryjoin=source_id == Node.id,
         backref=backref('source', cascade='all, delete-orphan')
     )
-
     destination = relationship(
         Node,
         primaryjoin=destination_id == Node.id,
         backref=backref('destination', cascade='all, delete-orphan')
     )
-
     pools = relationship(
         'Pool',
         secondary=pool_link_table,
         back_populates='links'
     )
 
-    properties = OrderedDict([
-        ('source', 'Source'),
-        ('destination', 'Destination')
-    ])
+    class_type = 'link'
+
+    properties = {
+        'source': 'Source',
+        'destination': 'Destination'
+    }
 
     @property
     def serialized(self):

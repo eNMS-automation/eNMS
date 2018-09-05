@@ -32,10 +32,9 @@ class CustomBase(db.Model):
             setattr(self, property, value)
 
     @property
-    def serialized(self):
-        return {
-            p: getattr(self, p) for p in cls_to_properties[self.__tablename__]
-        }
+    def properties(self):
+        class_name = self.__tablename__
+        return {p: getattr(self, p) for p in cls_to_properties[class_name]}
 
     @classmethod
     def choices(cls):

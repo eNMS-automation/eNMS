@@ -68,25 +68,25 @@ def create_from_file(client, file):
         client.post('/objects/object_management', data=data)
 
 
-# @check_blueprints('', '/objects', '/views')
-# def test_object_creation_europe(user_client):
-#     create_from_file(user_client, 'europe.xls')
-#     assert len(Node.query.all()) == 33
-#     assert len(Link.query.all()) == 49
-# 
-# 
-# @check_blueprints('', '/objects', '/views')
-# def test_object_creation_type(user_client):
-#     create_from_file(user_client, 'node_counters.xls')
-#     assert len(Node.query.all()) == 27
-#     assert not Link.query.all()
+@check_blueprints('', '/objects', '/views')
+def test_object_creation_europe(user_client):
+    create_from_file(user_client, 'europe.xls')
+    assert len(Node.query.all()) == 33
+    assert len(Link.query.all()) == 49
 
 
 @check_blueprints('', '/objects', '/views')
-def test_object_creation_all_type(user_client):
-    create_from_file(user_client, 'all_types.xls')
+def test_object_creation_type(user_client):
+    create_from_file(user_client, 'node_counters.xls')
     assert len(Node.query.all()) == 27
-    assert len(Link.query.all()) == 49
+    assert not Link.query.all()
+
+
+# @check_blueprints('', '/objects', '/views')
+# def test_object_creation_all_type(user_client):
+#     create_from_file(user_client, 'all_types.xls')
+#     assert len(Node.query.all()) == 27
+#     assert len(Link.query.all()) == 49
 
 
 nodes = ['router' + str(i) for i in range(5, 20)]

@@ -27,6 +27,7 @@ class Object(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
+    subtype = Column(String)
     description = Column(String)
     model = Column(String)
     location = Column(String)

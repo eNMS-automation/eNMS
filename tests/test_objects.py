@@ -1,7 +1,7 @@
 from tests.test_base import check_blueprints
 from eNMS.objects.models import (
     Antenna,
-    get_obj,
+    retrieve,
     Pool,
     Firewall,
     Host,
@@ -136,7 +136,7 @@ links = ['link' + str(i) for i in range(4, 15)]
 def test_node_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for node_name in nodes:
-        node = get_obj(Node, name=node_name)
+        node = retrieve(Node, name=node_name)
         user_client.post(f'/objects/delete/node/{node.id}')
     assert len(Node.query.all()) == 18
     assert len(Link.query.all()) == 18
@@ -146,7 +146,7 @@ def test_node_deletion(user_client):
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for link_name in links:
-        link = get_obj(Link, name=link_name)
+        link = retrieve(Link, name=link_name)
         user_client.post(f'/objects/delete/link/{link.id}')
     assert len(Node.query.all()) == 33
     assert len(Link.query.all()) == 38
@@ -173,7 +173,7 @@ def test_pool_management(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/objects/process_pool', data=pool1)
     user_client.post('/objects/process_pool', data=pool2)
-    p1, p2 = get_obj(Pool, name='pool1'), get_obj(Pool, name='pool2')
+    p1, p2 = retrieve(Pool, name='pool1'), retrieve(Pool, name='pool2')
     assert len(p1.nodes) == 21
     assert len(p1.links) == 20
     assert len(p2.nodes) == 12

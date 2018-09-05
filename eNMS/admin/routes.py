@@ -63,13 +63,14 @@ def login():
         name = str(request.form['name'])
         password = str(request.form['password'])
         user = db.session.query(User).filter_by(name=name).first()
-        if current_app.production:
-            match = checkpw(password.encode('utf8'), user.password)
-        else:
-            match = cisco_type7.verify(password, user.password)
-        if user and match:
-            login_user(user)
-            return redirect(url_for('base_blueprint.dashboard'))
+        if user:
+            if current_app.production:
+                match = checkpw(password.encode('utf8'), user.password)
+            else:
+                match = cisco_type7.verify(password, user.password)
+            if match:
+                login_user(user)
+                return redirect(url_for('base_blueprint.dashboard'))
         else:
             try:
                 # tacacs_plus does not support py2 unicode, hence the

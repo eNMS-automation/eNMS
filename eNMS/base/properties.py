@@ -56,6 +56,11 @@ workflow_public_properties = (
     'start_task'
 )
 
+workflow_edge_properties = (
+    'name',
+    'type'
+)
+
 user_public_properties = (
     'name',
     'email',
@@ -99,20 +104,17 @@ public_properties = (
 )
 
 cls_to_properties = {
-    'Node': ('id',) + node_public_properties,
-    'Link': ('id', 'color') + link_public_properties,
-    'Pool': ('id',) + pool_public_properties,
-    'Script': ('id',) + script_public_properties,
+    'Node': node_public_properties,
+    'Link': ('color',) + link_public_properties,
+    'Pool': pool_public_properties,
+    'Script': script_public_properties,
     'Parameters': parameters_public_properties,
-    'Workflow': ('id',) + workflow_public_properties,
-    'WorkflowEdge': ('id', 'name', 'type'),
-    'User': ('id',) + user_public_properties,
-    'Log': ('id',) + log_public_properties,
-    'LogRule': ('id',) + log_rule_public_properties,
-    'Task': task_serialized_properties
-}
-
-type_to_public_properties = {
+    'Workflow': workflow_public_properties,
+    'WorkflowEdge': workflow_edge_properties,
+    'User': user_public_properties,
+    'Log': log_public_properties,
+    'LogRule': log_rule_public_properties,
+    'Task': task_serialized_properties,
     'Antenna': node_public_properties,
     'Firewall': node_public_properties,
     'Host': node_public_properties,
@@ -129,6 +131,7 @@ type_to_public_properties = {
     'Pseudowire': link_public_properties
 }
 
+cls_to_properties = {k: ('id',) + v for k, v in cls_to_properties.items()}
 
 default_diagrams_properties = {
     'node': 'vendor',

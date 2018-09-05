@@ -39,16 +39,15 @@ def objects_management():
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
             book = open_workbook(file_contents=file.read())
-            for obj_type, cls in object_class.items():
+            for obj_class in ('Node', 'Link'):
                 try:
-                    sheet = book.sheet_by_name(obj_type)
-                # if the sheet cannot be found, there's nothing to import
+                    sheet = book.sheet_by_name(obj_class)
                 except XLRDError:
                     continue
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
                     kwargs = dict(zip(properties, sheet.row_values(row_index)))
-                    kwargs['type'] = obj_type
+                    kwargs['type'] = obj_class
                     kwargs['import'] = 'excel'
                     object_factory(**kwargs)
                 db.session.commit()
@@ -76,7 +75,6 @@ def objects_download():
     )
     style1 = xlwt.easyxf(num_format_str='#,##0.00')
     header_index = 0
-    # Write tabs and headers
     for tab, header in cls_to_properties.items():
         column = 0
         ws[tab] = wb.add_sheet(tab)
@@ -100,7 +98,6 @@ def objects_download():
                     continue
         column = 0
         ws[node['type']].row_index = ws[node['type']].row_index + 1
-    # Done writing rows
     obj_file = Path.cwd() / 'projects' / 'objects.xls'
     wb.save(str(obj_file))
     sfd = send_file(

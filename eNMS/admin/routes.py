@@ -39,7 +39,7 @@ from eNMS.admin.models import (
 )
 from eNMS.admin.properties import user_search_properties
 from eNMS.base.custom_base import base_factory
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import object_factory
 
@@ -159,14 +159,14 @@ def process_user():
 @blueprint.route('/get_<user_id>', methods=['POST'])
 @login_required
 def get_user(user_id):
-    user = get_obj(User, id=user_id)
+    user = retrieve(User, id=user_id)
     return jsonify(user.serialized)
 
 
 @blueprint.route('/delete_<user_id>', methods=['POST'])
 @login_required
 def delete_user(user_id):
-    user = get_obj(User, id=user_id)
+    user = retrieve(User, id=user_id)
     db.session.delete(user)
     db.session.commit()
     return jsonify(user.name)

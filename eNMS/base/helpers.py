@@ -3,7 +3,7 @@ from sqlalchemy import exc
 from eNMS import db
 
 
-def get_obj(model, **kwargs):
+def retrieve(model, **kwargs):
     return db.session.query(model).filter_by(**kwargs).first()
 
 

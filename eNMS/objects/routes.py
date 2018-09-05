@@ -8,7 +8,7 @@ from pathlib import Path
 
 from eNMS import db
 from eNMS.base.custom_base import base_factory
-from eNMS.base.helpers import allowed_file, get_obj
+from eNMS.base.helpers import allowed_file, retrieve
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import (
@@ -129,12 +129,12 @@ def pool_management():
 
 @blueprint.route('/get/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
-def get_object(obj_type, obj_id):
+def retrieveect(obj_type, obj_id):
     if obj_type == 'node':
         cls, properties = Node, node_public_properties
     else:
         cls, properties = Link, link_public_properties
-    obj = get_obj(cls, id=obj_id)
+    obj = retrieve(cls, id=obj_id)
     obj_properties = {
         property: str(getattr(obj, property))
         for property in properties
@@ -153,7 +153,7 @@ def edit_object():
 @login_required
 def delete_object(obj_type, obj_id):
     cls = Node if obj_type == 'node' else Link
-    obj = get_obj(cls, id=obj_id)
+    obj = retrieve(cls, id=obj_id)
     db.session.delete(obj)
     db.session.commit()
     return jsonify({'name': obj.name})
@@ -170,22 +170,22 @@ def process_pool():
 @blueprint.route('/get_pool/<pool_id>', methods=['POST'])
 @login_required
 def get_pool(pool_id):
-    return jsonify(get_obj(Pool, id=pool_id).get_properties())
+    return jsonify(retrieve(Pool, id=pool_id).get_properties())
 
 
 @blueprint.route('/get_pool_objects/<pool_id>', methods=['POST'])
 @login_required
 def get_pool_objects(pool_id):
-    pool = get_obj(Pool, id=pool_id)
+    pool = retrieve(Pool, id=pool_id)
     return jsonify(pool.serialized)
 
 
 @blueprint.route('/save_pool_objects/<pool_id>', methods=['POST'])
 @login_required
 def save_pool_objects(pool_id):
-    pool = get_obj(Pool, id=pool_id)
-    pool.nodes = [get_obj(Node, id=id) for id in request.form.getlist('nodes')]
-    pool.links = [get_obj(Link, id=id) for id in request.form.getlist('links')]
+    pool = retrieve(Pool, id=pool_id)
+    pool.nodes = [retrieve(Node, id=id) for id in request.form.getlist('nodes')]
+    pool.links = [retrieve(Link, id=id) for id in request.form.getlist('links')]
     db.session.commit()
     return jsonify(pool.name)
 
@@ -193,7 +193,7 @@ def save_pool_objects(pool_id):
 @blueprint.route('/pool_objects/<pool_id>', methods=['POST'])
 @login_required
 def filter_pool_objects(pool_id):
-    pool = get_obj(Pool, id=pool_id)
+    pool = retrieve(Pool, id=pool_id)
     return jsonify(pool.filter_objects())
 
 
@@ -209,7 +209,7 @@ def update_pools():
 @blueprint.route('/delete_pool/<pool_id>', methods=['POST'])
 @login_required
 def delete_pool(pool_id):
-    pool = get_obj(Pool, id=pool_id)
+    pool = retrieve(Pool, id=pool_id)
     db.session.delete(pool)
     db.session.commit()
     return jsonify(pool.name)

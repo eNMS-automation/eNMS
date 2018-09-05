@@ -25,7 +25,7 @@ from subprocess import check_output
 
 from eNMS import db
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import get_obj, integrity_rollback, str_dict
+from eNMS.base.helpers import retrieve, integrity_rollback, str_dict
 from eNMS.base.properties import (
     boolean_properties,
     json_properties,
@@ -450,7 +450,7 @@ type_to_class = {
 
 def script_factory(type, **kwargs):
     cls = type_to_class[type]
-    script = get_obj(cls, name=kwargs['name'][0]) or cls()
+    script = retrieve(cls, name=kwargs['name'][0]) or cls()
     for property in type_to_properties[type]:
         # unchecked tickbox do not yield any value when posting a form, and
         # they yield 'y' if checked

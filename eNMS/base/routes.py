@@ -16,7 +16,7 @@ from eNMS.base.properties import (
     reverse_pretty_names,
     type_to_diagram_properties
 )
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 from eNMS.tasks.models import Task
 
 
@@ -87,14 +87,14 @@ def filter_logs():
 @blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
 @flask_login.login_required
 def get_log_rule(log_rule_id):
-    log_rule = get_obj(LogRule, id=log_rule_id)
+    log_rule = retrieve(LogRule, id=log_rule_id)
     return jsonify(log_rule.serialized)
 
 
 @blueprint.route('/save_log_rule', methods=['POST'])
 @flask_login.login_required
 def save_log_rule():
-    tasks = [get_obj(Task, id=id) for id in request.form.getlist('tasks')]
+    tasks = [retrieve(Task, id=id) for id in request.form.getlist('tasks')]
     log_rule = base_factory(LogRule, **request.form.to_dict())
     log_rule.tasks = tasks
     db.session.commit()
@@ -113,7 +113,7 @@ def get_counters(property, type):
 @blueprint.route('/delete_log/<log_id>', methods=['POST'])
 @login_required
 def delete_log(log_id):
-    log = get_obj(Log, id=log_id)
+    log = retrieve(Log, id=log_id)
     db.session.delete(log)
     db.session.commit()
     return jsonify({'success': True})

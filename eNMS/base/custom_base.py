@@ -1,5 +1,5 @@
 from eNMS import db
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 from eNMS.base.properties import (
     boolean_properties,
     cls_to_properties,
@@ -47,7 +47,7 @@ class CustomBase(db.Model):
 
 
 def base_factory(cls, **kwargs):
-    instance = get_obj(cls, name=kwargs['name'])
+    instance = retrieve(cls, name=kwargs['name'])
     if instance:
         instance.update(**kwargs)
     else:

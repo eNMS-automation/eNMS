@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from eNMS import db
 from eNMS.base.associations import task_log_rule_table
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import get_obj
+from eNMS.base.helpers import retrieve
 
 
 class Log(CustomBase):

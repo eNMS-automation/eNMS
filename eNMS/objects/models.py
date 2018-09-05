@@ -11,7 +11,7 @@ from eNMS.base.associations import (
     task_pool_table
 )
 from eNMS.base.custom_base import base_factory, CustomBase
-from eNMS.base.helpers import get_obj, integrity_rollback
+from eNMS.base.helpers import retrieve, integrity_rollback
 from eNMS.base.properties import (
     cls_to_properties,
     link_public_properties,
@@ -339,16 +339,16 @@ for cls_dict in (node_class, link_class):
 def object_factory(**kwargs):
     obj_type = kwargs['type']
     cls = Node if obj_type in node_class else Link
-    obj = get_obj(cls, name=kwargs['name'])
+    obj = retrieve(cls, name=kwargs['name'])
     if obj:
         obj.update(**kwargs)
     elif obj_type in link_class:
         if 'import' in kwargs:
-            source = get_obj(Node, name=kwargs.pop('source'))
-            destination = get_obj(Node, name=kwargs.pop('destination'))
+            source = retrieve(Node, name=kwargs.pop('source'))
+            destination = retrieve(Node, name=kwargs.pop('destination'))
         else:
-            source = get_obj(Node, id=kwargs.pop('source'))
-            destination = get_obj(Node, id=kwargs.pop('destination'))
+            source = retrieve(Node, id=kwargs.pop('source'))
+            destination = retrieve(Node, id=kwargs.pop('destination'))
         obj = link_class[obj_type](
             source_id=source.id,
             destination_id=destination.id,

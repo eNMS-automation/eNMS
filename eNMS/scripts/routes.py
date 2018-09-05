@@ -6,7 +6,7 @@ from werkzeug import secure_filename
 from yaml import load as yaml_load
 
 from eNMS import db
-from eNMS.base.helpers import get_obj, allowed_file
+from eNMS.base.helpers import retrieve, allowed_file
 from eNMS.base.properties import pretty_names, script_public_properties
 from eNMS.objects.models import Node, Pool
 from eNMS.scripts import blueprint
@@ -47,7 +47,7 @@ def configuration():
 @blueprint.route('/get/<script_type>/<script_id>', methods=['POST'])
 @login_required
 def get_script(script_type, script_id):
-    script = get_obj(Script, id=script_id)
+    script = retrieve(Script, id=script_id)
     properties = type_to_properties[script_type]
     script_properties = {
         property: getattr(script, property)
@@ -68,7 +68,7 @@ def get_script_per_type(script_type):
 @blueprint.route('/delete/<script_id>', methods=['POST'])
 @login_required
 def delete_object(script_id):
-    script = get_obj(Script, id=script_id)
+    script = retrieve(Script, id=script_id)
     db.session.delete(script)
     db.session.commit()
     return jsonify(script.name)
@@ -77,7 +77,7 @@ def delete_object(script_id):
 @blueprint.route('/create_script/<script_type>', methods=['POST'])
 @login_required
 def create_script(script_type):
-    script = get_obj(Script, name=request.form['name'])
+    script = retrieve(Script, name=request.form['name'])
     # convert ImmutableMultiDict to an actual dictionnary
     form = dict(request.form)
     if not script:

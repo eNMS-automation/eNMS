@@ -24,7 +24,7 @@ class CustomBase(db.Model):
         for property, value in kwargs.items():
             # unchecked tickbox do not yield any value when posting a form,
             # and they yield 'y' if checked
-            if property in boolean_properties:
+            if property in boolean_properties or 'regex' in property:
                 value = property in kwargs
             elif property in json_properties:
                 str_dict, = kwargs[property]

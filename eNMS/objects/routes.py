@@ -7,6 +7,7 @@ import xlwt
 from pathlib import Path
 
 from eNMS import db
+from eNMS.base.custom_base import base_factory
 from eNMS.base.helpers import allowed_file, get_obj
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
@@ -15,8 +16,7 @@ from eNMS.objects.models import (
     Node,
     object_class,
     object_factory,
-    Pool,
-    pool_factory
+    Pool
 )
 from eNMS.base.properties import (
     link_public_properties,
@@ -163,13 +163,7 @@ def delete_object(obj_type, obj_id):
 @login_required
 def process_pool():
     pool_properties = request.form.to_dict()
-    for property in node_public_properties:
-        regex_property = f'node_{property}_regex'
-        pool_properties[regex_property] = regex_property in pool_properties
-    for property in link_public_properties:
-        regex_property = f'link_{property}_regex'
-        pool_properties[regex_property] = regex_property in pool_properties
-    pool = pool_factory(**pool_properties)
+    pool = base_factory(**pool_properties)
     return jsonify(pool.serialized)
 
 

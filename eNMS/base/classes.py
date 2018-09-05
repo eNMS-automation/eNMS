@@ -17,9 +17,9 @@ diagram_classes = {
 class_to_factory = {
     'node': object_factory,
     'link': object_factory,
-    'pool': pool_factory,
+    'pool': base_factory,
     'user': base_factory,
     'script': script_factory,
     'task': task_factory,
-    'workflow': workflow_factory
+    'workflow': base_factory
 }

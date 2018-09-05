@@ -448,8 +448,7 @@ type_to_class = {
 }
 
 
-def script_factory(type, **kwargs):
-    cls = type_to_class[type]
+def script_factory(cls, **kwargs):
     script = retrieve(cls, name=kwargs['name'][0]) or cls()
     for property in type_to_properties[type]:
         # unchecked tickbox do not yield any value when posting a form, and
@@ -469,6 +468,7 @@ def script_factory(type, **kwargs):
         else:
             value = kwargs[property]
         setattr(script, property, value)
+    db.session.add(script)
     db.session.commit()
     return script
 

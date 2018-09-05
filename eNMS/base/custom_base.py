@@ -23,8 +23,6 @@ class CustomBase(db.Model):
 
     def update(self, **kwargs):
         for property, value in kwargs.items():
-            # unchecked tickbox do not yield any value when posting a form,
-            # and they yield 'y' if checked
             if property in boolean_properties or 'regex' in property:
                 value = property in kwargs
             elif property in json_properties:
@@ -51,11 +49,7 @@ class CustomBase(db.Model):
 
 
 def base_factory(cls, **kwargs):
-    instance = retrieve(cls, name=kwargs['name'])
-    if instance:
-        instance.update(**kwargs)
-    else:
-        instance = cls(**kwargs)
-        db.session.add(instance)
+    instance = (retrieve(cls, name=kwargs['name']) or cls()).update(**kwargs)
+    db.session.add(instance)
     db.session.commit()
     return instance

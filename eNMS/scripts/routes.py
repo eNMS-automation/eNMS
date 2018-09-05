@@ -97,7 +97,4 @@ def create_script(script_type):
                 source_file_name
             )
             form['source_file'] = [source_file_path]
-    script = script_factory(script_type, **form)
-    db.session.add(script)
-    db.session.commit()
-    return jsonify(script.serialized)
+    return jsonify(script_factory(type_to_class[script_type], **form).serialized)

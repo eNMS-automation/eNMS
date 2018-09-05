@@ -3,6 +3,7 @@ from os import environ
 
 
 class Config(object):
+    DEBUG = True
 
     # SQL Alchemy
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db?check_same_thread=False'
@@ -23,13 +24,16 @@ class Config(object):
 
 
 class DebugConfig(Config):
-    DEBUG = True
     SECRET_KEY = 'key'
 
 
 class ProductionConfig(Config):
     DEBUG = False
     SECRET_KEY = environ.get('ENMS_SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = (
+        environ.get('ENMS_DATABASE_URL') or
+        'sqlite:///database.db?check_same_thread=False'
+    )
 
 
 class SeleniumConfig(Config):

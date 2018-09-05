@@ -32,6 +32,7 @@ from eNMS.base.properties import (
 def objects_management():
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
+    print(Link.serialize())
     all_nodes = Node.choices()
     add_link_form.source.choices = all_nodes
     add_link_form.destination.choices = all_nodes

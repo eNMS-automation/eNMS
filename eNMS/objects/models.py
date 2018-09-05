@@ -209,17 +209,12 @@ class Link(Object):
 
     class_type = 'link'
 
-    properties = {
-        'source': 'Source',
-        'destination': 'Destination'
-    }
-
     @property
     def serialized(self):
-        properties = self.properties
+        properties = {k: str(v) for k, v in self.properties.items()}
         for prop in ('source', 'destination'):
             properties[prop + '_properties'] = getattr(self, prop).serialized
-        return properties
+        return self.properties
 
 
 class BgpPeering(Link):

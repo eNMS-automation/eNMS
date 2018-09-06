@@ -121,17 +121,3 @@ class Parameters(CustomBase):
     default_longitude = Column(Float, default=2.)
     default_latitude = Column(Float, default=48.)
     default_zoom_level = Column(Integer, default=5)
-
-
-@integrity_rollback
-def create_default_parameters():
-    parameters = Parameters()
-    db.session.add(parameters)
-    db.session.commit()
-
-
-@integrity_rollback
-def create_default_syslog_server():
-    syslog_server = SyslogServer(ip_address='0.0.0.0', port=514)
-    db.session.add(syslog_server)
-    db.session.commit()

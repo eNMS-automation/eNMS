@@ -8,8 +8,7 @@ from eNMS.base.associations import (
     task_node_table,
     task_pool_table
 )
-from eNMS.base.custom_base import factory, CustomBase
-from eNMS.base.helpers import integrity_rollback
+from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import link_public_properties, node_public_properties
 
 
@@ -235,16 +234,3 @@ class Pool(CustomBase):
             'nodes': [node.serialized for node in self.nodes],
             'links': [link.serialized for link in self.links]
         }
-
-
-default_pools = (
-    {'name': 'All objects'},
-    {'name': 'Nodes only', 'link_name': '^$', 'link_name_regex': True},
-    {'name': 'Links only', 'node_name': '^$', 'node_name_regex': True}
-)
-
-
-@integrity_rollback
-def create_default_pools():
-    for pool in default_pools:
-        pool = factory(Pool, **pool)

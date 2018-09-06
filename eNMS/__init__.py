@@ -11,10 +11,11 @@ db = SQLAlchemy(session_options={"expire_on_commit": False})
 login_manager = LoginManager()
 scheduler = APScheduler()
 
-from eNMS.admin.models import (
+from eNMS.admin.models import User
+from eNMS.base.default import (
     create_default_parameters,
     create_default_syslog_server,
-    User
+    create_default_pools
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.objects.models import create_default_pools

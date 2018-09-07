@@ -9,7 +9,7 @@ def get_credentials(node, task):
     print(scheduler.app.production)
     if scheduler.app.production:
         creds = scheduler.app.vault_client.read(
-            f'secret/data/object/{node.name}'
+            f'secret/data/device/{node.name}'
         )['data']['data']
         return creds['username'], creds['password'], creds['secret_password']
     else:

@@ -67,9 +67,7 @@ def get_workflow(workflow_id):
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
 def edit_workflow():
-    workflow = factory(Workflow, **request.form.to_dict())
-    db.session.commit()
-    return jsonify(workflow.serialized)
+    return jsonify(factory(Workflow, **request.form.to_dict()).serialized)
 
 
 @blueprint.route('/delete/<workflow_id>', methods=['POST'])

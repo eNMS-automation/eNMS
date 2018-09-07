@@ -166,9 +166,7 @@ def delete_object(obj_type, obj_id):
 @blueprint.route('/process_pool', methods=['POST'])
 @login_required
 def process_pool():
-    pool_properties = request.form.to_dict()
-    pool = factory(Pool, **pool_properties)
-    return jsonify(pool.serialized)
+    return jsonify(factory(Pool, **request.form.to_dict()).serialized)
 
 
 @blueprint.route('/get_pool/<pool_id>', methods=['POST'])
@@ -179,9 +177,8 @@ def get_pool(pool_id):
 
 @blueprint.route('/get_pool_objects/<pool_id>', methods=['POST'])
 @login_required
-def get_pool_objects(pool_id):
-    pool = retrieve(Pool, id=pool_id)
-    return jsonify(pool.serialized)
+def get_pool_objects(pool_id): 
+    return jsonify(retrieve(Pool, id=pool_id).serialized)
 
 
 @blueprint.route('/save_pool_objects/<pool_id>', methods=['POST'])

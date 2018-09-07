@@ -93,15 +93,13 @@ def add_to_workflow(workflow_id):
 @blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
 def get_task(task_id):
-    task = retrieve(Task, id=task_id)
-    return jsonify(task.serialized)
+    return jsonify(retrieve(Task, id=task_id).serialized)
 
 
 @blueprint.route('/show_logs/<task_id>', methods=['POST'])
 @login_required
 def show_logs(task_id):
-    task = retrieve(Task, id=task_id)
-    return jsonify(str_dict(task.logs))
+    return jsonify(str_dict(retrieve(Task, id=task_id).logs))
 
 
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])
@@ -128,7 +126,7 @@ def compare_logs(task_id):
 @blueprint.route('/run_task/<task_id>', methods=['POST'])
 @login_required
 def run_task(task_id):
-    task = Task.query.filter_by(id=task_id).first()
+    task = retrieve(Task, id=task_id)
     task.schedule(run_now=True)
     return jsonify(task.serialized)
 

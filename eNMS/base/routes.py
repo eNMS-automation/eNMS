@@ -87,8 +87,7 @@ def filter_logs():
 @blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
 @flask_login.login_required
 def get_log_rule(log_rule_id):
-    log_rule = retrieve(LogRule, id=log_rule_id)
-    return jsonify(log_rule.serialized)
+    return jsonify(retrieve(LogRule, id=log_rule_id).serialized)
 
 
 @blueprint.route('/save_log_rule', methods=['POST'])

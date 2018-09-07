@@ -18,6 +18,7 @@ from eNMS.base.properties import (
     node_public_properties,
     pretty_names
 )
+from eNMS.scripts.connections import get_credentials
 from eNMS.scripts.models import Job
 from eNMS.tasks.forms import SchedulingForm
 from eNMS.views import blueprint, styles
@@ -78,20 +79,20 @@ def view(view_type):
 @login_required
 def putty_connection(name):
     current_os, node = platform_system(), retrieve(Node, name=name)
-    password = cisco_type7.decode(current_user.password)
+    username, password, _ = get_credentials(node, current_user)
     if current_os == 'Windows':
         path_putty = join(current_app.path, 'applications', 'putty.exe')
         ssh_connection = '{} -ssh {}@{} -pw {}'.format(
             path_putty,
-            current_user.name,
+            username,
             node.ip_address,
             password
         )
         Popen(ssh_connection.split())
     else:
-        arg = "gnome-terminal -e 'bash -c \"sshpass -p {} ssh {}@{}\"'".format(
+        arg = "gnome-terminal -- 'bash -c \"sshpass -p {} ssh {}@{}\"'".format(
             password,
-            current_user.name,
+            username,
             node.ip_address
         )
         os_system(arg)

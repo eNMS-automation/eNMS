@@ -63,7 +63,7 @@ def objects_management():
                 properties = sheet.row_values(0)
                 for row_index in range(1, sheet.nrows):
                     values = dict(zip(properties, sheet.row_values(row_index)))
-                    cls, kwargs = process_kwargs(**values)
+                    cls, kwargs = process_kwargs(current_app, **values)
                     factory(cls, **kwargs)
                 db.session.commit()
     return render_template(

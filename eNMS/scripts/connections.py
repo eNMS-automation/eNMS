@@ -5,11 +5,18 @@ from passlib.hash import cisco_type7 as ct7
 from eNMS import app
 
 
-def netmiko_connection(script, task, node):
+def get_credentials(node, task):
     if app.production:
-        username = 
+        credentials = app.vault_client.read(
+            f'secret/data/object/{node.name}'
+        )['data']['data']
+        return credentials['username'], credentials['password']
     else:
-        username, password = task.user.name, ct7(task.user.password)
+        return task.user.name, ct7(task.user.password)
+
+
+def netmiko_connection(script, task, node):
+    username, password = get_credentials(node, task)
     return ConnectHandler(
         device_type=script.driver,
         ip=node.ip_address,
@@ -20,10 +27,7 @@ def netmiko_connection(script, task, node):
 
 
 def napalm_connection(script, task, node):
-    driver = get_network_driver(node.operating_system)
-    if app.production:
-    else:
-        username, password = task.user.name, ct7(task.user.password)
+    username, password = get_credentials(node, task)
     return napalm_driver = driver(
         hostname=node.ip_address,
         username=username,

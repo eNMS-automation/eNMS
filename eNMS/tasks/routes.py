@@ -64,7 +64,6 @@ def calendar():
 
 
 @blueprint.route('/scheduler', methods=['POST'])
-@blueprint.route('/scheduler/<workflow_id>', methods=['POST'])
 @login_required
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
@@ -75,7 +74,6 @@ def scheduler(workflow_id=None):
     data['pools'] = [
         retrieve(Pool, id=id) for id in request.form.getlist('pools')
     ]
-    data['workflow'] = retrieve(Workflow, id=workflow_id)
     data['user'] = current_user
     cls = WorkflowTask if data['job'].type == 'workflow' else ScriptTask
     task = factory(cls, **data)

@@ -149,9 +149,9 @@ class ScriptTask(Task):
     }
 
     def __init__(self, **data):
-        self.script = data['job']
+        self.script = data.pop('job')
         self.nodes = data['nodes']
-        super(ScriptTask, self).__init__(**data)
+        super().__init__(**data)
 
     def compute_targets(self):
         targets = set(self.nodes)
@@ -198,8 +198,8 @@ class WorkflowTask(Task):
     }
 
     def __init__(self, **data):
-        self.workflow = data['job']
-        super(WorkflowTask, self).__init__(**data)
+        self.workflow = data.pop('job')
+        super().__init__(**data)
 
     def job(self, runtime):
         start_task = retrieve(Task, id=self.workflow.start_task)

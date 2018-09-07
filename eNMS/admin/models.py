@@ -12,7 +12,6 @@ from threading import Thread
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import integrity_rollback
 from eNMS.base.models import Log
 
 

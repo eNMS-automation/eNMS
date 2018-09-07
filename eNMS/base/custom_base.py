@@ -28,6 +28,8 @@ class CustomBase(db.Model):
                 value = property in kwargs
             elif property in json_properties:
                 value = loads(value) if value else {}
+            elif property == 'job':
+                continue
             setattr(self, property, value)
 
     @property

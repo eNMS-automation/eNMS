@@ -1,3 +1,4 @@
+from eNMS import db
 from eNMS.admin.models import Parameters, SyslogServer
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback

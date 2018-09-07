@@ -6,14 +6,17 @@ from eNMS import scheduler
 
 
 def get_credentials(node, task):
-    print(scheduler.app.production)
     if scheduler.app.production:
         creds = scheduler.app.vault_client.read(
             f'secret/data/device/{node.name}'
         )['data']['data']
         return creds['username'], creds['password'], creds['secret_password']
     else:
-        return task.user.name, ct7(task.user.password), node.secret_password
+        return (
+            task.user.name,
+            ct7.decode(task.user.password),
+            node.secret_password
+        )
 
 
 def netmiko_connection(script, task, node):

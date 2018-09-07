@@ -1,7 +1,5 @@
 from json import dumps, loads
-from napalm import get_network_driver
-from netmiko import ConnectHandler, file_transfer
-from passlib.hash import cisco_type7
+from netmiko import file_transfer
 from re import search
 from requests import (
     get as rest_get,
@@ -233,13 +231,6 @@ class NapalmConfigScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            driver = get_network_driver(node.operating_system)
-            napalm_driver = driver(
-                hostname=node.ip_address,
-                username=task.user.name,
-                password=cisco_type7.decode(task.user.password),
-                optional_args={'secret': node.secret_password}
-            )
             napalm_driver.open()
             config = '\n'.join(self.content.splitlines())
             getattr(napalm_driver, self.action)(config=config)

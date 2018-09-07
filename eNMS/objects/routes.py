@@ -1,4 +1,4 @@
-from flask import jsonify, render_template, request, send_file
+from flask import current_app, jsonify, render_template, request, send_file
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -21,7 +21,7 @@ from eNMS.base.properties import (
 )
 
 
-def process_kwargs(**kwargs):
+def process_kwargs(app, **kwargs):
     if 'source' in kwargs:
         source = retrieve(Node, name=kwargs.pop('source'))
         destination = retrieve(Node, name=kwargs.pop('destination'))
@@ -31,6 +31,12 @@ def process_kwargs(**kwargs):
             'source': source,
             'destination': destination
         })
+    elif app.production:
+        username, password = kwargs.pop('username'), kwargs.pop('password')
+        app.vault_client.write(
+            f'secret/data/device/{kwargs["name"]}',
+            data={'username': username, 'password': password}
+        )
     return Link if 'source' in kwargs else Node, kwargs
 
 
@@ -148,7 +154,7 @@ def get_object(obj_type, obj_id):
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():
-    cls, kwargs = process_kwargs(**request.form.to_dict())
+    cls, kwargs = process_kwargs(current_app, **request.form.to_dict())
     obj = factory(cls, **kwargs)
     return jsonify(obj.serialized)
 

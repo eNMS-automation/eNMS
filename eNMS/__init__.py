@@ -100,6 +100,6 @@ def create_app(path, config):
     configure_database(app)
     configure_rest_api(app)
     configure_logs(app)
-    # if app.production:
-    app.vault = create_vault_client(app)
+    if app.production:
+        app.vault = create_vault_client(app)
     return app

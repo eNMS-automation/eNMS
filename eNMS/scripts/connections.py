@@ -2,12 +2,13 @@ from napalm import get_network_driver
 from netmiko import ConnectHandler
 from passlib.hash import cisco_type7 as ct7
 
-from eNMS import app
+from eNMS import scheduler
 
 
 def get_credentials(node, task):
-    if app.production:
-        creds = app.vault_client.read(
+    print(scheduler.app.production)
+    if scheduler.app.production:
+        creds = scheduler.app.vault_client.read(
             f'secret/data/object/{node.name}'
         )['data']['data']
         return creds['username'], creds['password'], creds['secret_password']
@@ -33,5 +34,5 @@ def napalm_connection(script, task, node):
         hostname=node.ip_address,
         username=username,
         password=password,
-        optional_args={'secret': }
+        optional_args={'secret': secret_password}
     )

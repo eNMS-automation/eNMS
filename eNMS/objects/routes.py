@@ -1,4 +1,4 @@
-from flask import jsonify, render_template, request, send_file
+from flask import current_app, jsonify, render_template, request, send_file
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -6,7 +6,7 @@ from xlrd.biffh import XLRDError
 import xlwt
 from pathlib import Path
 
-from eNMS import app, db
+from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import allowed_file, retrieve
 from eNMS.objects import blueprint
@@ -21,7 +21,7 @@ from eNMS.base.properties import (
 )
 
 
-def process_kwargs(**kwargs):
+def process_kwargs(app, **kwargs):
     if 'source' in kwargs:
         source = retrieve(Node, name=kwargs.pop('source'))
         destination = retrieve(Node, name=kwargs.pop('destination'))

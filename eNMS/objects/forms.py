@@ -35,6 +35,8 @@ class AddNode(AddObjectForm):
     os_version = TextField('OS version', [optional()])
     longitude = FloatField('Longitude', default=0.)
     latitude = FloatField('Latitude', default=0.)
+    username = TextField('username')
+    password = PasswordField('Password')
     secret_password = PasswordField('Secret password')
 
 

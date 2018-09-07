@@ -29,9 +29,9 @@ def define_node(subtype, description):
     ])
 
 
-def define_link(subtype, source, destination, name):
+def define_link(subtype, source, destination):
     return ImmutableMultiDict([
-        ('name', name),
+        ('name', f'{subtype}: {source} to {destination}'),
         ('type', 'Link'),
         ('description', 'description'),
         ('location', 'Los Angeles'),
@@ -54,8 +54,7 @@ def test_manual_object_creation(user_client):
         nodes = Node.query.all()
         for source in nodes[:3]:
             for destination in nodes[:3]:
-                name = f'{subtype}: {source.name} to {destination.name}'
-                obj_dict = define_link(subtype, source.id, destination.id, name)
+                obj_dict = define_link(subtype, source.name, destination.name)
                 user_client.post('/objects/edit_object', data=obj_dict)
     # - exactly 16 nodes in total
     assert len(Node.query.all()) == 16

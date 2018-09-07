@@ -2,6 +2,7 @@ from flask import Flask
 from flask_apscheduler import APScheduler
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from hvac import Client as VaultClient
 from importlib import import_module
 from warnings import warn
 import logging
@@ -57,6 +58,13 @@ def configure_login_manager(app):
         return user if user else None
 
 
+def create_vault_client(app):
+    return VaultClient(
+        url=app.config['VAULT_ADDR'],
+        token=app.config['VAULT_TOKEN']
+    )
+
+
 def configure_database(app):
     @app.teardown_request
     def shutdown_session(exception=None):
@@ -92,4 +100,6 @@ def create_app(path, config):
     configure_database(app)
     configure_rest_api(app)
     configure_logs(app)
+    # if app.production:
+    app.vault = create_vault_client(app)
     return app

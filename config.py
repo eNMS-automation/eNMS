@@ -30,10 +30,16 @@ class DebugConfig(Config):
 class ProductionConfig(Config):
     DEBUG = False
     SECRET_KEY = environ.get('ENMS_SECRET_KEY')
+
+    # SQL Alchemy
     SQLALCHEMY_DATABASE_URI = (
         environ.get('ENMS_DATABASE_URL') or
         'sqlite:///database.db?check_same_thread=False'
     )
+
+    # Vault
+    VAULT_ADDR = environ.get('VAULT_ADDR')
+    VAULT_TOKEN = environ.get('VAULT_TOKEN')
 
 
 class SeleniumConfig(Config):

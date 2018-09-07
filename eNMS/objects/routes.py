@@ -177,7 +177,7 @@ def get_pool(pool_id):
 
 @blueprint.route('/get_pool_objects/<pool_id>', methods=['POST'])
 @login_required
-def get_pool_objects(pool_id): 
+def get_pool_objects(pool_id):
     return jsonify(retrieve(Pool, id=pool_id).serialized)
 
 

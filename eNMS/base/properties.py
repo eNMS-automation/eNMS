@@ -232,6 +232,7 @@ pretty_names = {
     'operating_system': 'Operating System',
     'os_version': 'OS version',
     'pass_node_properties': 'Pass node properties to the playbook',
+    'password': 'Password',
     'recurrent': 'Recurrent',
     'secret_password': 'Secret password',
     'source': 'Source',
@@ -239,6 +240,7 @@ pretty_names = {
     'subtype': 'Subtype',
     'text file': 'File',
     'type': 'Type',
+    'username': 'Username',
     'vendor': 'Vendor',
     'waiting_time': 'Waiting time'
 }

@@ -7,16 +7,16 @@ from eNMS import app
 
 def get_credentials(node, task):
     if app.production:
-        credentials = app.vault_client.read(
+        creds = app.vault_client.read(
             f'secret/data/object/{node.name}'
         )['data']['data']
-        return credentials['username'], credentials['password']
+        return creds['username'], creds['password'], creds['secret_password']
     else:
-        return task.user.name, ct7(task.user.password)
+        return task.user.name, ct7(task.user.password), node.secret_password
 
 
 def netmiko_connection(script, task, node):
-    username, password = get_credentials(node, task)
+    username, password, secret_password = get_credentials(node, task)
     return ConnectHandler(
         device_type=script.driver,
         ip=node.ip_address,
@@ -27,11 +27,11 @@ def netmiko_connection(script, task, node):
 
 
 def napalm_connection(script, task, node):
-    username, password = get_credentials(node, task)
+    username, password, secret_password = get_credentials(node, task)
     driver = get_network_driver(node.operating_system)
     return driver(
         hostname=node.ip_address,
         username=username,
         password=password,
-        optional_args={'secret': node.secret_password}
+        optional_args={'secret': }
     )

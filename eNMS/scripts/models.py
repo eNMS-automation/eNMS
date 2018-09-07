@@ -24,6 +24,7 @@ from subprocess import check_output
 from eNMS import db
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import integrity_rollback, str_dict
+from eNMS.scripts.connections import napalm_connection, netmiko_connection
 from eNMS.scripts.properties import type_to_properties
 
 
@@ -83,13 +84,7 @@ class NetmikoConfigScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            netmiko_handler = ConnectHandler(
-                device_type=self.driver,
-                ip=node.ip_address,
-                username=task.user.name,
-                password=cisco_type7.decode(task.user.password),
-                secret=node.secret_password
-            )
+            netmiko_handler = netmiko_connection(self, task, node)
             netmiko_handler.send_config_set(self.content.splitlines())
             result = f'configuration OK:\n\n{self.content}'
             success = True
@@ -130,13 +125,7 @@ class NetmikoValidationScript(Script):
         task, node, results = args
         success, result = True, {}
         try:
-            netmiko_handler = ConnectHandler(
-                device_type=self.driver,
-                ip=node.ip_address,
-                username=task.user.name,
-                password=cisco_type7.decode(task.user.password),
-                secret=node.secret_password
-            )
+            netmiko_handler = netmiko_connection(self, task, node)
             for i in range(1, 4):
                 command = getattr(self, 'command' + str(i))
                 if not command:
@@ -187,13 +176,7 @@ class FileTransferScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            netmiko_handler = ConnectHandler(
-                device_type=self.driver,
-                ip=node.ip_address,
-                username=task.user.name,
-                password=cisco_type7.decode(task.user.password),
-                secret=node.secret_password
-            )
+            netmiko_handler = netmiko_connection(self, task, node)
             transfer_dict = file_transfer(
                 netmiko_handler,
                 source_file=self.source_file,
@@ -231,6 +214,7 @@ class NapalmConfigScript(Script):
     def job(self, args):
         task, node, results = args
         try:
+            napalm_driver = napalm_connection(self, task, node)
             napalm_driver.open()
             config = '\n'.join(self.content.splitlines())
             getattr(napalm_driver, self.action)(config=config)
@@ -266,13 +250,7 @@ class NapalmActionScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            driver = get_network_driver(node.operating_system)
-            napalm_driver = driver(
-                hostname=node.ip_address,
-                username=task.user.name,
-                password=cisco_type7.decode(task.user.password),
-                optional_args={'secret': node.secret_password}
-            )
+            napalm_driver = napalm_connection(self, task, node)
             napalm_driver.open()
             getattr(napalm_driver, self.action)()
             napalm_driver.close()
@@ -303,13 +281,7 @@ class NapalmGettersScript(Script):
         task, node, results = args
         result = {}
         try:
-            driver = get_network_driver(node.operating_system)
-            napalm_driver = driver(
-                hostname=node.ip_address,
-                username=task.user.name,
-                password=cisco_type7.decode(task.user.password),
-                optional_args={'secret': node.secret_password}
-            )
+            napalm_driver = napalm_connection(self, task, node)
             napalm_driver.open()
             for getter in self.getters:
                 try:

@@ -28,7 +28,8 @@ def netmiko_connection(script, task, node):
 
 def napalm_connection(script, task, node):
     username, password = get_credentials(node, task)
-    return napalm_driver = driver(
+    driver = get_network_driver(node.operating_system)
+    return driver(
         hostname=node.ip_address,
         username=username,
         password=password,

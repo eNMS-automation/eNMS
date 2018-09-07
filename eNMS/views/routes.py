@@ -90,7 +90,7 @@ def putty_connection(name):
         )
         Popen(ssh_connection.split())
     else:
-        arg = "gnome-terminal -- 'bash -c \"sshpass -p {} ssh {}@{}\"'".format(
+        arg = "gnome-terminal -- /bin/bash -c 'sshpass -p {} ssh {}@{}'".format(
             password,
             username,
             node.ip_address

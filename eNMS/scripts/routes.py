@@ -9,7 +9,7 @@ from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, allowed_file
 from eNMS.base.properties import pretty_names, script_public_properties
-from eNMS.objects.models import Node, Pool
+from eNMS.objects.models import Device, Pool
 from eNMS.scripts import blueprint
 from eNMS.scripts.helpers import type_to_form, type_to_name
 from eNMS.scripts.models import Job, Script, type_to_class
@@ -21,7 +21,7 @@ from eNMS.tasks.forms import SchedulingForm
 @login_required
 def scripts():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.devices.choices = Node.choices()
+    scheduling_form.devices.choices = Device.choices()
     scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
     return render_template(

@@ -134,7 +134,7 @@ public_properties = (
 )
 
 cls_to_properties = {
-    'Node': device_public_properties,
+    'Device': device_public_properties,
     'Link': link_public_properties,
     'Pool': pool_public_properties,
     'Script': script_public_properties,

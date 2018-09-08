@@ -12,8 +12,8 @@ from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import allowed_file, retrieve
 from eNMS.objects import blueprint
-from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
-from eNMS.objects.models import Link, Node, Pool
+from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
+from eNMS.objects.models import Link, Device, Pool
 from eNMS.base.properties import (
     link_public_properties,
     device_public_properties,
@@ -25,8 +25,8 @@ from eNMS.base.properties import (
 
 def process_kwargs(app, **kwargs):
     if 'source' in kwargs:
-        source = retrieve(Node, name=kwargs.pop('source'))
-        destination = retrieve(Node, name=kwargs.pop('destination'))
+        source = retrieve(Device, name=kwargs.pop('source'))
+        destination = retrieve(Device, name=kwargs.pop('destination'))
         kwargs.update({
             'source_id': source.id,
             'destination_id': destination.id,
@@ -46,7 +46,7 @@ def process_kwargs(app, **kwargs):
         else:
             for arg in ('password', 'secret_password'):
                 kwargs[arg] = cisco_type7.hash(kwargs[arg])
-    return Link if 'source' in kwargs else Node, kwargs
+    return Link if 'source' in kwargs else Device, kwargs
 
 
 @blueprint.route('/device_management', methods=['GET', 'POST'])
@@ -56,7 +56,7 @@ def device_management():
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
             book = open_workbook(file_contents=file.read())
-            sheet = book.sheet_by_name('Node')
+            sheet = book.sheet_by_name('Device')
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
@@ -67,8 +67,8 @@ def device_management():
         'device_management.html',
         names=pretty_names,
         fields=device_public_properties,
-        devices=Node.serialize(),
-        add_device_form=AddNode(request.form)
+        devices=Device.serialize(),
+        add_device_form=AddDevice(request.form)
     )
 
 
@@ -76,7 +76,7 @@ def device_management():
 @login_required
 def link_management():
     add_link_form = AddLink(request.form)
-    all_devices = [(n.name, n.name) for n in Node.query.all()]
+    all_devices = [(n.name, n.name) for n in Device.query.all()]
     add_link_form.source.choices = all_devices
     add_link_form.destination.choices = all_devices
     if request.method == 'POST':
@@ -102,7 +102,7 @@ def link_management():
 @blueprint.route('/object_download')
 @login_required
 def objects_download():
-    devices = Node.serialize()
+    devices = Device.serialize()
     ws = {}
     wb = xlwt.Workbook()
     style0 = xlwt.easyxf(
@@ -148,7 +148,7 @@ def objects_download():
 @login_required
 def pool_management():
     pool_object_form = PoolObjectsForm(request.form)
-    pool_object_form.devices.choices = Node.choices()
+    pool_object_form.devices.choices = Device.choices()
     pool_object_form.links.choices = Link.choices()
     return render_template(
         'pool_management.html',
@@ -164,7 +164,7 @@ def pool_management():
 @login_required
 def get_object(obj_type, obj_id):
     if obj_type == 'device':
-        cls, properties = Node, device_public_properties
+        cls, properties = Device, device_public_properties
     else:
         cls, properties = Link, link_public_properties
     obj = retrieve(cls, id=obj_id)
@@ -186,7 +186,7 @@ def edit_object():
 @blueprint.route('/delete/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
 def delete_object(obj_type, obj_id):
-    cls = Node if obj_type == 'device' else Link
+    cls = Device if obj_type == 'device' else Link
     obj = retrieve(cls, id=obj_id)
     db.session.delete(obj)
     db.session.commit()
@@ -215,7 +215,7 @@ def get_pool_objects(pool_id):
 @login_required
 def save_pool_objects(pool_id):
     pool = retrieve(Pool, id=pool_id)
-    pool.devices = [retrieve(Node, id=id) for id in request.form.getlist('devices')]
+    pool.devices = [retrieve(Device, id=id) for id in request.form.getlist('devices')]
     pool.links = [retrieve(Link, id=id) for id in request.form.getlist('links')]
     db.session.commit()
     return jsonify(pool.name)

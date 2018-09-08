@@ -134,7 +134,7 @@ class ScriptTask(Task):
     script_id = Column(Integer, ForeignKey('Script.id'))
     script = relationship('Script', back_populates='tasks')
     devices = relationship(
-        'Node',
+        'Device',
         secondary=task_device_table,
         back_populates='tasks'
     )

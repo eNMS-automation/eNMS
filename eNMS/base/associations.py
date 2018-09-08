@@ -5,7 +5,7 @@ from eNMS.base.custom_base import CustomBase
 task_device_table = Table(
     'task_device_association',
     CustomBase.metadata,
-    Column('device_id', Integer, ForeignKey('Node.id')),
+    Column('device_id', Integer, ForeignKey('Device.id')),
     Column('script_task_id', Integer, ForeignKey('ScriptTask.id'))
 )
 
@@ -34,7 +34,7 @@ pool_device_table = Table(
     'pool_device_association',
     CustomBase.metadata,
     Column('pool_id', Integer, ForeignKey('Pool.id')),
-    Column('device_id', Integer, ForeignKey('Node.id'))
+    Column('device_id', Integer, ForeignKey('Device.id'))
 )
 
 pool_link_table = Table(

@@ -11,8 +11,8 @@ from eNMS.admin.models import Parameters
 from eNMS.base.helpers import get_credentials, retrieve
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.base.models import Log
-from eNMS.objects.forms import AddNode, AddLink
-from eNMS.objects.models import Pool, Node, Link
+from eNMS.objects.forms import AddDevice, AddLink
+from eNMS.objects.models import Pool, Device, Link
 from eNMS.base.properties import (
     link_public_properties,
     device_public_properties,
@@ -27,9 +27,9 @@ from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
-    add_device_form = AddNode(request.form)
+    add_device_form = AddDevice(request.form)
     add_link_form = AddLink(request.form)
-    all_devices = Node.choices()
+    all_devices = Device.choices()
     add_link_form.source.choices = all_devices
     add_link_form.destination.choices = all_devices
     view_options_form = ViewOptionsForm(request.form)
@@ -47,11 +47,11 @@ def view(view_type):
         }
     # for the sake of better performances, the view defaults to markercluster
     # if there are more than 2000 devices
-    view = 'leaflet' if len(Node.query.all()) < 2000 else 'markercluster'
+    view = 'leaflet' if len(Device.query.all()) < 2000 else 'markercluster'
     if 'view' in request.form:
         view = request.form['view']
     # name to id
-    name_to_id = {device.name: id for id, device in enumerate(Node.query.all())}
+    name_to_id = {device.name: id for id, device in enumerate(Device.query.all())}
     return render_template(
         f'{view_type}_view.html',
         pools=Pool.query.all(),
@@ -69,7 +69,7 @@ def view(view_type):
         device_subtypes=device_subtypes,
         link_colors=link_subtype_to_color,
         name_to_id=name_to_id,
-        devices=Node.serialize(),
+        devices=Device.serialize(),
         links=Link.serialize()
     )
 
@@ -77,7 +77,7 @@ def view(view_type):
 @blueprint.route('/connect_to_<name>', methods=['POST'])
 @login_required
 def putty_connection(name):
-    current_os, device = platform_system(), retrieve(Node, name=name)
+    current_os, device = platform_system(), retrieve(Device, name=name)
     username, password, _ = get_credentials(device)
     if current_os == 'Windows':
         path_putty = join(current_app.path, 'applications', 'putty.exe')
@@ -93,7 +93,7 @@ def putty_connection(name):
 @login_required
 def export_to_google_earth():
     kml_file = Kml()
-    for device in Node.query.all():
+    for device in Device.query.all():
         point = kml_file.newpoint(name=device.name)
         point.coords = [(device.longitude, device.latitude)]
         point.style = styles[device.subtype]
@@ -118,7 +118,7 @@ def export_to_google_earth():
 @blueprint.route('/get_logs_<device_id>', methods=['POST'])
 @login_required
 def get_logs(device_id):
-    device = retrieve(Node, id=device_id)
+    device = retrieve(Device, id=device_id)
     device_logs = [
         l.content for l in Log.query.all()
         if l.source == device.ip_address

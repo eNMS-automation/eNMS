@@ -23,11 +23,11 @@ class AddObjectForm(FlaskForm):
     location = TextField('Location')
     vendor = TextField('Vendor')
 
-# devices can be added to the database either one by one via the AddNode
+# devices can be added to the database either one by one via the AddDevice
 # form, or all at once by importing an Excel or a CSV file.
 
 
-class AddNode(AddObjectForm):
+class AddDevice(AddObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField('Type', choices=device_types)
     ip_address = TextField('IP address', [optional()])
@@ -66,5 +66,5 @@ class AddPoolForm(FlaskForm):
 
 
 class PoolObjectsForm(FlaskForm):
-    devices = SelectMultipleField('Nodes', choices=())
+    devices = SelectMultipleField('Devices', choices=())
     links = SelectMultipleField('Links', choices=())

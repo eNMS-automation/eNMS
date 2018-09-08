@@ -32,9 +32,9 @@ class Object(CustomBase):
     }
 
 
-class Node(Object):
+class Device(Object):
 
-    __tablename__ = 'Node'
+    __tablename__ = 'Device'
 
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     operating_system = Column(String(120))
@@ -59,7 +59,7 @@ class Node(Object):
     class_type = 'device'
 
     __mapper_args__ = {
-        'polymorphic_identity': 'Node',
+        'polymorphic_identity': 'Device',
     }
 
     @property
@@ -81,20 +81,20 @@ class Link(Object):
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     source_id = Column(
         Integer,
-        ForeignKey('Node.id')
+        ForeignKey('Device.id')
     )
     destination_id = Column(
         Integer,
-        ForeignKey('Node.id')
+        ForeignKey('Device.id')
     )
     source = relationship(
-        Node,
-        primaryjoin=source_id == Node.id,
+        Device,
+        primaryjoin=source_id == Device.id,
         backref=backref('source', cascade='all, delete-orphan')
     )
     destination = relationship(
-        Node,
-        primaryjoin=destination_id == Node.id,
+        Device,
+        primaryjoin=destination_id == Device.id,
         backref=backref('destination', cascade='all, delete-orphan')
     )
     pools = relationship(
@@ -121,7 +121,7 @@ class Pool(CustomBase):
     name = Column(String, unique=True)
     description = Column(String)
     devices = relationship(
-        'Node',
+        'Device',
         secondary=pool_device_table,
         back_populates='pools'
     )
@@ -186,7 +186,7 @@ class Pool(CustomBase):
         return properties
 
     def compute_pool(self):
-        self.devices = list(filter(self.object_match, Node.query.all()))
+        self.devices = list(filter(self.object_match, Device.query.all()))
         self.links = []
         for link in Link.query.all():
             # source and destination do not belong to a link __dict__, because

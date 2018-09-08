@@ -58,7 +58,7 @@ class OpenNmsForm(FlaskForm):
         default='https://demo.opennms.org/opennms/rest'
     )
     node_query = TextField(
-        'Nodes',
+        'Devices',
         default='https://demo.opennms.org/opennms/rest/nodes'
     )
     node_type = [subtype for subtype in device_subtypes.items()]

@@ -10,7 +10,7 @@ from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
 from eNMS.tasks.models import ScriptTask, Task, WorkflowTask
-from eNMS.objects.models import Pool, Node
+from eNMS.objects.models import Pool, Device
 from eNMS.scripts.models import Job
 from eNMS.workflows.models import Workflow
 
@@ -19,7 +19,7 @@ from eNMS.workflows.models import Workflow
 @login_required
 def task_management():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.devices.choices = Node.choices()
+    scheduling_form.devices.choices = Device.choices()
     scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
     return render_template(
@@ -69,7 +69,7 @@ def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = retrieve(Job, id=data['job'])
     data['devices'] = [
-        retrieve(Node, id=id) for id in request.form.getlist('devices')
+        retrieve(Device, id=id) for id in request.form.getlist('devices')
     ]
     data['pools'] = [
         retrieve(Pool, id=id) for id in request.form.getlist('pools')

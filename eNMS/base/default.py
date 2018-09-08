@@ -126,13 +126,14 @@ def create_default_workflows():
     }
     workflow = factory(Workflow, **workflow)
     for edge in (
-        [
-            'success',
-            retrieve(Task, name='task_create_vrf_TEST'),
-            retrieve(Task, name='task_delete_vrf_TEST')
-        ],
+        {
+            'name': '',
+            'workflow': workflow,
+            'type': 'success',
+            'source': retrieve(Task, name='task_create_vrf_TEST'),
+            'destination': retrieve(Task, name='task_delete_vrf_TEST')
+        },
     ):
-        workflow_edge = WorkflowEdge(*edge)
-        workflow.edges.append(workflow_edge)
+        factory(WorkflowEdge, **edge)
 
 # def create_workflow_edges():

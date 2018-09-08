@@ -104,10 +104,13 @@ def add_edge(wf_id, type, source, dest):
     source_task = retrieve(Task, id=source)
     destination_task = retrieve(Task, id=dest)
     workflow = retrieve(Workflow, id=wf_id)
-    workflow_edge = WorkflowEdge(type, source_task, destination_task)
-    db.session.add(workflow_edge)
-    workflow.edges.append(workflow_edge)
-    db.session.commit()
+    workflow_edge = factory(WorkflowEdge, **{
+        'name': '',
+        'workflow': workflow,
+        'type': type,
+        'source': source_task,
+        'destination': destination_task
+    })
     return jsonify(workflow_edge.serialized)
 
 

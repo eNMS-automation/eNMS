@@ -28,12 +28,6 @@ class WorkflowEdge(CustomBase):
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
     workflow = relationship('Workflow', back_populates='edges')
 
-    def __init__(self, type, source, destination):
-        self.type = type
-        self.source = source
-        self.destination = destination
-        self.name = f'{self.source.name} -> {self.destination.name}'
-
     @property
     def serialized(self):
         properties = self.properties

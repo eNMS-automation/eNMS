@@ -1,20 +1,18 @@
 <div class="right_col" role="main">
   <!-- begin row -->
-  <div class="row" style="height: 350px">
+  <div class="row">
     <!-- begin column -->
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div style="padding-bottom:5px;">
-        <form id="form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" >
-          <label class="btn btn-default btn-file" style="width:100%;">Import Network Topology
-            <input id="file" name="file" style="visibility:hidden; display:none" type="file">
-          </label>
-        </form>
-        <label class="btn btn-default btn-file" style="width:100%;">
-          <a href="object_download" style="color: black;">Export Network Topology</a>
-        </label>
-      </div>
-      <div class="x_panel">
+      <div class="x_panel" style="min-height: 90vh">
         <div class="x_content">
+          <form id="form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" >
+            <label class="btn btn-default btn-file" style="width:100%;">Import network topology
+              <input id="file" name="file" style="visibility:hidden; display:none" type="file">
+            </label>
+          </form>
+          <label class="btn btn-default btn-file" style="width:100%;">
+            <a href="object_download" style="color: black;">Export network topology</a>
+          </label>
           <div class="panel-group">
             <div style="padding-bottom:5px;">
               <button class="btn btn-default btn-file" onclick="showModal('device')" style="width:100%;">

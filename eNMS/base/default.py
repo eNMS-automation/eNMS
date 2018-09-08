@@ -8,7 +8,11 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.scripts.models import NetmikoConfigScript, Script
+from eNMS.scripts.models import (
+    NetmikoConfigScript,
+    NetmikoValidationScript,
+    Script
+)
 from eNMS.tasks.models import ScriptTask, Task
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
@@ -64,6 +68,7 @@ def create_default_network_topology(app):
 def create_default_scripts():
     for script in (
         {
+            'type': NetmikoConfigScript,
             'name': 'create_vrf_TEST',
             'description': 'Create a VRF "TEST"',
             'vendor': 'Cisco',
@@ -74,6 +79,17 @@ def create_default_scripts():
             'content': 'ip vrf TEST'
         },
         {
+            'type': NetmikoValidationScript,
+            'name': 'check_vrf_TEST',
+            'description': 'Check that the vrf "TEST" is configured',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'driver': 'cisco_ios',
+            'command1': 'show ip vrf',
+            'content_match1': 'TEST'
+        },
+        {
+            'type': NetmikoConfigScript,
             'name': 'delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
             'vendor': 'Cisco',
@@ -82,13 +98,24 @@ def create_default_scripts():
             'driver': 'cisco_ios',
             'global_delay_factor': '1.0',
             'content': 'no ip vrf TEST'
-        }
+        },
+        {
+            'type': NetmikoValidationScript,
+            'name': 'check_no_vrf_TEST',
+            'description': 'Check that the vrf "TEST" is NOT configured',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'driver': 'cisco_ios',
+            'command1': 'show ip vrf',
+            'content_match1': '^((?!gegr).)*$',
+            'content_match_regex1': 'y'
+        },
     ):
-        factory(NetmikoConfigScript, **script)
+        factory(script.pop('type'), **script)
 
 
 def create_default_tasks():
-    dev, user = retrieve(Device, name='router8'), 
+    dev, user = retrieve(Device, name='router8'), retrieve(User, name='cisco')
     for task in (
         {
             'name': 'task_create_vrf_TEST',

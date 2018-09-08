@@ -49,9 +49,32 @@ def process_kwargs(app, **kwargs):
     return Link if 'source' in kwargs else Node, kwargs
 
 
-@blueprint.route('/object_management', methods=['GET', 'POST'])
+@blueprint.route('/device_management', methods=['GET', 'POST'])
 @login_required
-def objects_management():
+def device_management():
+    if request.method == 'POST':
+        file = request.files['file']
+        if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
+            book = open_workbook(file_contents=file.read())
+            sheet = book.sheet_by_name('Node')
+            properties = sheet.row_values(0)
+            for row_index in range(1, sheet.nrows):
+                values = dict(zip(properties, sheet.row_values(row_index)))
+                cls, kwargs = process_kwargs(current_app, **values)
+                factory(cls, **kwargs)
+            db.session.commit()
+    return render_template(
+        'device_management.html',
+        names=pretty_names,
+        node_fields=node_public_properties,
+        nodes=Node.serialize(),
+        add_node_form=AddNode(request.form)
+    )
+
+
+@blueprint.route('/link_management', methods=['GET', 'POST'])
+@login_required
+def link_management():
     add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
     all_nodes = [(n.name, n.name) for n in Node.query.all()]
@@ -81,29 +104,6 @@ def objects_management():
         links=Link.serialize(),
         add_node_form=add_node_form,
         add_link_form=add_link_form
-    )
-
-
-@blueprint.route('/device_management', methods=['GET', 'POST'])
-@login_required
-def device_management():
-    if request.method == 'POST':
-        file = request.files['file']
-        if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
-            book = open_workbook(file_contents=file.read())
-            sheet = book.sheet_by_name('Node')
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(current_app, **values)
-                factory(cls, **kwargs)
-            db.session.commit()
-    return render_template(
-        'device_management.html',
-        names=pretty_names,
-        node_fields=node_public_properties,
-        nodes=Node.serialize(),
-        add_node_form=AddNode(request.form)
     )
 
 

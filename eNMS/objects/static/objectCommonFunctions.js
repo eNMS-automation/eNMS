@@ -5,6 +5,8 @@ fields: false
 table: false
 */
 
+const table = $('#table').DataTable(); // eslint-disable-line
+
 /**
  * Display object modal for editing.
  * @param {type} type - Node or link.
@@ -49,6 +51,7 @@ function editObject(type) { // eslint-disable-line no-unused-vars
         // the object can be edited from the views,
         // in which case we don't need to add it to the table
         if (typeof table !== 'undefined') {
+          console.log(typeof(properties));
           addObjectToTable(mode, type, properties);
         }
         const message = `Object ${properties.name}
@@ -101,7 +104,6 @@ function addObjectToTable(mode, type, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
   );
-  console.log(values, `#${type}-${properties.id}`);
   if (mode == 'edit') {
     table.row($(`#${type}-${properties.id}`)).data(values);
   } else {
@@ -138,8 +140,9 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
       async: false,
       success: function(objects) {
         for (let i = 0; i < objects[objType].length; i++) {
+          const obj = objects[objType][i];
           const mode = !$(`#${objType}-${obj.id}`).length ? 'edit' : 'create';
-          addObjectToTable(mode, objType.toLowerCase(), objects[objType][i]);
+          addObjectToTable(mode, objType.toLowerCase(), obj);
         }
         alertify.notify('Topology successfully imported.', 'success', 5);
       },

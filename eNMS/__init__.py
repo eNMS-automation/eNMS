@@ -20,7 +20,8 @@ from eNMS.base.default import (
     create_default_scripts,
     create_default_syslog_server,
     create_default_tasks,
-    create_default_user
+    create_default_user,
+    create_default_workflows
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.scripts.custom_script import create_custom_scripts
@@ -87,6 +88,7 @@ def configure_database(app):
         create_default_scripts()
         create_custom_scripts()
         create_default_tasks()
+        create_default_workflows()
 
 
 def configure_logs(app):

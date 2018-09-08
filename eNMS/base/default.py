@@ -10,6 +10,7 @@ from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.scripts.models import NetmikoConfigScript, Script
 from eNMS.tasks.models import ScriptTask
+from eNMS.workflows.models import Workflow
 
 
 def create_default_user():
@@ -112,3 +113,11 @@ def create_default_tasks():
         }
     ):
         factory(ScriptTask, **task)
+
+
+def create_default_workflows():
+    workflow = {
+        'name': 'Netmiko_VRF_workflow',
+        'description': 'Create and delete a VRF with Netmiko'
+    }
+    factory(Workflow, **workflow)

@@ -5,7 +5,7 @@ from eNMS.base.helpers import get_credentials
 
 
 def netmiko_connection(script, task, node):
-    username, password, secret_password = get_credentials(node, task.user)
+    username, password, secret_password = get_credentials(node)
     return ConnectHandler(
         device_type=script.driver,
         ip=node.ip_address,
@@ -16,7 +16,7 @@ def netmiko_connection(script, task, node):
 
 
 def napalm_connection(script, task, node):
-    username, password, secret_password = get_credentials(node, task.user)
+    username, password, secret_password = get_credentials(node)
     driver = get_network_driver(node.operating_system)
     return driver(
         hostname=node.ip_address,

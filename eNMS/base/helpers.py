@@ -39,7 +39,7 @@ def allowed_file(name, allowed_extensions):
     return allowed_syntax and allowed_extension
 
 
-def get_credentials(node, user):
+def get_credentials(node):
     if scheduler.app.production:
         creds = scheduler.app.vault_client.read(
             f'secret/data/device/{node.name}'

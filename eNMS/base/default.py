@@ -88,28 +88,29 @@ def create_default_scripts():
 
 
 def create_default_tasks():
+    dev, user = retrieve(Device, name='router8'), 
     for task in (
         {
             'name': 'task_create_vrf_TEST',
             'waiting_time': '0',
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [dev],
             'job': retrieve(Script, name='create_vrf_TEST'),
             'start_date': '',
             'end_date': '',
             'frequency': '',
             'do_not_run': 'y',
-            'user': retrieve(User, name='cisco')
+            'user': user
         },
         {
             'name': 'task_delete_vrf_TEST',
             'waiting_time': '0',
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [dev],
             'job': retrieve(Script, name='delete_vrf_TEST'),
             'start_date': '',
             'end_date': '',
             'frequency': '',
             'do_not_run': 'y',
-            'user': retrieve(User, name='cisco')
+            'user': user
         }
     ):
         factory(ScriptTask, **task)
@@ -135,5 +136,4 @@ def create_default_workflows():
         },
     ):
         factory(WorkflowEdge, **edge)
-
-# def create_workflow_edges():
+    workflow.start_task = retrieve(Task, name='task_create_vrf_TEST').id

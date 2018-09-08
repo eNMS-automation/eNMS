@@ -66,7 +66,7 @@ def device_management():
     return render_template(
         'device_management.html',
         names=pretty_names,
-        node_fields=node_public_properties,
+        fields=node_public_properties,
         nodes=Node.serialize(),
         add_node_form=AddNode(request.form)
     )
@@ -75,7 +75,6 @@ def device_management():
 @blueprint.route('/link_management', methods=['GET', 'POST'])
 @login_required
 def link_management():
-    add_node_form = AddNode(request.form)
     add_link_form = AddLink(request.form)
     all_nodes = [(n.name, n.name) for n in Node.query.all()]
     add_link_form.source.choices = all_nodes
@@ -84,25 +83,18 @@ def link_management():
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
             book = open_workbook(file_contents=file.read())
-            for obj_class in ('Node', 'Link'):
-                try:
-                    sheet = book.sheet_by_name(obj_class)
-                except XLRDError:
-                    continue
-                properties = sheet.row_values(0)
-                for row_index in range(1, sheet.nrows):
-                    values = dict(zip(properties, sheet.row_values(row_index)))
-                    cls, kwargs = process_kwargs(current_app, **values)
-                    factory(cls, **kwargs)
-                db.session.commit()
+            sheet = book.sheet_by_name('Link')
+            properties = sheet.row_values(0)
+            for row_index in range(1, sheet.nrows):
+                values = dict(zip(properties, sheet.row_values(row_index)))
+                cls, kwargs = process_kwargs(current_app, **values)
+                factory(cls, **kwargs)
+            db.session.commit()
     return render_template(
         'object_management.html',
         names=pretty_names,
-        node_fields=node_public_properties,
-        nodes=Node.serialize(),
-        link_fields=link_public_properties,
+        fields=link_public_properties,
         links=Link.serialize(),
-        add_node_form=add_node_form,
         add_link_form=add_link_form
     )
 

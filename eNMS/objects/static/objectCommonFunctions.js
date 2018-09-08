@@ -5,8 +5,6 @@ fields: false
 table: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line
-
 /**
  * Display object modal for editing.
  * @param {type} type - Node or link.

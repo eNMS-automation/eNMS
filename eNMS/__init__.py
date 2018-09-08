@@ -14,9 +14,10 @@ scheduler = APScheduler()
 
 from eNMS.admin.models import User
 from eNMS.base.default import (
+    create_default_network_topology,
     create_default_parameters,
-    create_default_syslog_server,
-    create_default_pools
+    create_default_pools,
+    create_default_syslog_server
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.scripts.custom_script import create_custom_scripts
@@ -73,6 +74,7 @@ def configure_database(app):
     def create_default():
         db.create_all()
         create_default_parameters()
+        create_default_network_topology(app)
         create_default_pools()
         try:
             create_default_syslog_server()

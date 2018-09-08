@@ -1,31 +1,3 @@
-<div id="edit-link" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="title">Edit link properties</h4>
-      </div>
-      <form id="edit-link-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-        <div class="modal-body">
-          <div class="form-group" style="height: 450px">
-          {% for field in add_link_form if field.widget.input_type != 'hidden'  %}
-            <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-            <div class="col-md-8 col-sm-8 col-xs-12">
-            {{ field(id= 'link-' + field.name, class="form-control") }}
-            </div><br><br>
-          {% endfor %}
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" onclick="editObject('link')">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 <div id="edit-node" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

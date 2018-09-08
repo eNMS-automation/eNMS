@@ -6,8 +6,7 @@ nodes: false
 nodeFields: false
 */
 
-const nodeTable = $('#node-table').DataTable(); // eslint-disable-line new-cap
-const linkTable = $('#link-table').DataTable(); // eslint-disable-line new-cap
+const nodeTable = $('#table').DataTable(); // eslint-disable-line new-cap
 
 /**
  * Add object to the datatable.

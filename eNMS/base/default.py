@@ -139,23 +139,25 @@ def create_default_tasks():
 
 
 def create_default_workflows():
-    workflow = {
+    tasks = [
+        retrieve(Task, name=task_name) for task_name in (
+            'task_create_vrf_TEST',
+            'task_check_vrf_TEST',
+            'task_delete_vrf_TEST',
+            'task_check_no_vrf_TEST'
+        )
+    ]
+    workflow = factory(Workflow, **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
-        'tasks': [
-            retrieve(Task, name='task_create_vrf_TEST'),
-            retrieve(Task, name='task_delete_vrf_TEST')
-        ]
-    }
-    workflow = factory(Workflow, **workflow)
-    for edge in (
-        {
-            'name': '',
+        'tasks': tasks
+    })
+    for i in range(len(tasks) - 1):
+        factory(WorkflowEdge, **{
+            'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
             'workflow': workflow,
             'type': 'success',
-            'source': retrieve(Task, name='task_create_vrf_TEST'),
-            'destination': retrieve(Task, name='task_delete_vrf_TEST')
-        },
-    ):
-        factory(WorkflowEdge, **edge)
-    workflow.start_task = retrieve(Task, name='task_create_vrf_TEST').id
+            'source': tasks[i],
+            'destination': tasks[i + 1]
+        })
+    workflow.start_task = tasks[0].id

@@ -361,7 +361,6 @@ class RestCallScript(Script):
 
 
 type_to_class = {
-    'napalm_action': NapalmActionScript,
     'netmiko_config': NetmikoConfigScript,
     'netmiko_validation': NetmikoValidationScript,
     'napalm_config': NapalmConfigScript,
@@ -370,15 +369,3 @@ type_to_class = {
     'ansible_playbook': AnsibleScript,
     'rest_call': RestCallScript
 }
-
-default_scripts = (
-    ('NAPALM Rollback', 'rollback'),
-)
-
-
-@integrity_rollback
-def create_default_scripts():
-    for name, action in default_scripts:
-        script = NapalmActionScript(name, action)
-        db.session.add(script)
-        db.session.commit()

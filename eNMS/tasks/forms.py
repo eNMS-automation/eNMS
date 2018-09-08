@@ -28,7 +28,7 @@ class SchedulingForm(FlaskForm):
         ('custom_script', 'Custom scripts')
     )
     script_type = SelectField('Type of script', choices=script_type_choices)
-    nodes = SelectMultipleField('', choices=())
+    devices = SelectMultipleField('', choices=())
     pools = SelectMultipleField('', choices=())
     job = SelectField('', choices=())
 
@@ -36,7 +36,7 @@ class SchedulingForm(FlaskForm):
 class CompareForm(FlaskForm):
     first_version = SelectField('', choices=())
     second_version = SelectField('', choices=())
-    first_node = SelectField('', choices=())
-    second_node = SelectField('', choices=())
+    first_device = SelectField('', choices=())
+    second_device = SelectField('', choices=())
     unified_diff = TextAreaField('')
     ndiff = TextAreaField('')

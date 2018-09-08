@@ -9,7 +9,7 @@ from time import sleep
 from eNMS import db, scheduler
 from eNMS.base.associations import (
     task_log_rule_table,
-    task_node_table,
+    task_device_table,
     task_pool_table,
     task_workflow_table
 )
@@ -133,9 +133,9 @@ class ScriptTask(Task):
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
     script_id = Column(Integer, ForeignKey('Script.id'))
     script = relationship('Script', back_populates='tasks')
-    nodes = relationship(
+    devices = relationship(
         'Node',
-        secondary=task_node_table,
+        secondary=task_device_table,
         back_populates='tasks'
     )
     pools = relationship(
@@ -150,25 +150,25 @@ class ScriptTask(Task):
 
     def __init__(self, **data):
         self.script = data.pop('job')
-        self.nodes = data['nodes']
+        self.devices = data['devices']
         super().__init__(**data)
 
     def compute_targets(self):
-        targets = set(self.nodes)
+        targets = set(self.devices)
         for pool in self.pools:
-            targets |= set(pool.nodes)
+            targets |= set(pool.devices)
         return targets
 
     def job(self, runtime):
         results = {}
-        if self.script.node_multiprocessing:
+        if self.script.device_multiprocessing:
             targets = self.compute_targets()
-            pool = ThreadPool(processes=len(self.nodes))
-            args = [(self, node, results) for node in targets]
+            pool = ThreadPool(processes=len(self.devices))
+            args = [(self, device, results) for device in targets]
             pool.map(self.script.job, args)
             pool.close()
             pool.join()
-            success = all(results[node.name]['success'] for node in targets)
+            success = all(results[device.name]['success'] for device in targets)
         else:
             results = self.script.job(self, results)
             success = results['success']
@@ -180,7 +180,7 @@ class ScriptTask(Task):
     def serialized(self):
         properties = self.properties
         properties['job'] = self.script.properties if self.script else None
-        properties['nodes'] = [node.properties for node in self.nodes]
+        properties['devices'] = [device.properties for device in self.devices]
         properties['pools'] = [pool.properties for pool in self.pools]
         return properties
 

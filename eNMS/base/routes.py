@@ -75,7 +75,7 @@ def filter_logs():
         # filters are contained in the values of the log
         request.form[prop] in str(val) if not prop + 'regex' in request.form
         # if it is ticked, we use re.search to check that the value
-        # of the node property matches the regular expression,
+        # of the device property matches the regular expression,
         # providing that the property field in the form is not empty
         # (empty field <==> property ignored)
         else search(request.form[prop], str(val)) for prop, val in log.items()

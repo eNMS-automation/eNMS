@@ -62,7 +62,7 @@ ansible_playbook_properties = script_properties + (
     'content_match',
     'content_match_regex',
     'options',
-    'pass_node_properties',
+    'pass_device_properties',
     'inventory_from_selection'
 )
 

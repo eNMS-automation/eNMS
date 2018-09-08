@@ -22,7 +22,7 @@ class CustomScript(Script):
     module_location = Column(String)
     vendor = Column(String)
     operating_system = Column(String)
-    node_multiprocessing = Column(Boolean, default=False)
+    device_multiprocessing = Column(Boolean, default=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'custom_script',
@@ -39,8 +39,8 @@ class CustomScript(Script):
             if len(args) == 2:
                 return {'success': False, 'logs': str(e)}
             else:
-                _, node, results = args
-                results[node.name] = {'success': False, 'logs': str(e)}
+                _, device, results = args
+                results[device.name] = {'success': False, 'logs': str(e)}
 
 
 type_to_class['custom_script'] = CustomScript

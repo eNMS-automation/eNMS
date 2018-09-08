@@ -21,7 +21,7 @@ from eNMS.tasks.forms import SchedulingForm
 @login_required
 def scripts():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.nodes.choices = Node.choices()
+    scheduling_form.devices.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
     return render_template(

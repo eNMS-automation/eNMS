@@ -43,7 +43,7 @@ def workflow_editor(workflow_id=None):
     workflow = retrieve(Workflow, id=workflow_id)
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
-    scheduling_form.nodes.choices = Node.choices()
+    scheduling_form.devices.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
     add_existing_task_form.task.choices = Task.choices()
     return render_template(

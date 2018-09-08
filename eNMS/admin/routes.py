@@ -185,31 +185,31 @@ def save_syslog_server():
 def query_opennms():
     OpenNmsServer.query.delete()
     opennms_server = OpenNmsServer(**request.form.to_dict())
-    json_nodes = get(
-        opennms_server.node_query,
+    json_devices = get(
+        opennms_server.device_query,
         headers={'Accept': 'application/json'},
         auth=(opennms_server.login, opennms_server.password)
     ).json()['node']
-    nodes = {
-        node['id']:
+    devices = {
+        device['id']:
             {
-            'longitude': node['assetRecord'].get('longitude', 0.),
-            'latitude': node['assetRecord'].get('latitude', 0.),
-            'name': node.get('label', node['id']),
+            'longitude': device['assetRecord'].get('longitude', 0.),
+            'latitude': device['assetRecord'].get('latitude', 0.),
+            'name': device.get('label', device['id']),
             'type': opennms_server.type
-        } for node in json_nodes
+        } for device in json_devices
     }
 
-    for node in list(nodes):
+    for device in list(devices):
         link = get(
-            opennms_server.rest_query + '/nodes/' + node + '/ipinterfaces',
+            opennms_server.rest_query + '/nodes/' + device + '/ipinterfaces',
             headers={'Accept': 'application/json'},
             auth=(opennms_server.login, opennms_server.password)
         ).json()
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
-                nodes[node]['ip_address'] = interface['ipAddress']
-                factory(**nodes[node])
+                devices[device]['ip_address'] = interface['ipAddress']
+                factory(**devices[device])
     db.session.add(opennms_server)
     db.session.commit()
     return jsonify({'success': True})

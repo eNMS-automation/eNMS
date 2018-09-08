@@ -8,7 +8,7 @@ from wtforms import (
     SelectMultipleField
 )
 
-from eNMS.base.properties import node_subtypes
+from eNMS.base.properties import device_subtypes
 
 
 class LoginForm(FlaskForm):
@@ -61,7 +61,7 @@ class OpenNmsForm(FlaskForm):
         'Nodes',
         default='https://demo.opennms.org/opennms/rest/nodes'
     )
-    node_type = [subtype for subtype in node_subtypes.items()]
+    node_type = [subtype for subtype in device_subtypes.items()]
     type = SelectField('Type', choices=node_type)
     login = TextField('Login')
     password = PasswordField('Password')

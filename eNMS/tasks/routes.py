@@ -19,7 +19,7 @@ from eNMS.workflows.models import Workflow
 @login_required
 def task_management():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.nodes.choices = Node.choices()
+    scheduling_form.devices.choices = Node.choices()
     scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
     return render_template(
@@ -68,8 +68,8 @@ def calendar():
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = retrieve(Job, id=data['job'])
-    data['nodes'] = [
-        retrieve(Node, id=id) for id in request.form.getlist('nodes')
+    data['devices'] = [
+        retrieve(Node, id=id) for id in request.form.getlist('devices')
     ]
     data['pools'] = [
         retrieve(Pool, id=id) for id in request.form.getlist('pools')
@@ -117,7 +117,7 @@ def get_diff(task_id, v1, v2, n1, n2):
 def compare_logs(task_id):
     task = retrieve(Task, id=task_id)
     results = {
-        'nodes': [node.name for node in task.nodes],
+        'devices': [device.name for device in task.devices],
         'versions': list(task.logs)
     }
     return jsonify(results)

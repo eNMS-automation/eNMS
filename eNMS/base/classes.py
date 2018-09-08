@@ -5,7 +5,7 @@ from eNMS.tasks.models import Task
 from eNMS.workflows.models import Workflow
 
 diagram_classes = {
-    'node': Node,
+    'device': Node,
     'link': Link,
     'user': User,
     'script': Script,

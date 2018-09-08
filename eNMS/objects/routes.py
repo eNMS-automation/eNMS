@@ -16,7 +16,7 @@ from eNMS.objects.forms import AddLink, AddNode, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import Link, Node, Pool
 from eNMS.base.properties import (
     link_public_properties,
-    node_public_properties,
+    device_public_properties,
     pool_public_properties,
     pretty_names,
     cls_to_properties
@@ -66,9 +66,9 @@ def device_management():
     return render_template(
         'device_management.html',
         names=pretty_names,
-        fields=node_public_properties,
-        nodes=Node.serialize(),
-        add_node_form=AddNode(request.form)
+        fields=device_public_properties,
+        devices=Node.serialize(),
+        add_device_form=AddNode(request.form)
     )
 
 
@@ -76,9 +76,9 @@ def device_management():
 @login_required
 def link_management():
     add_link_form = AddLink(request.form)
-    all_nodes = [(n.name, n.name) for n in Node.query.all()]
-    add_link_form.source.choices = all_nodes
-    add_link_form.destination.choices = all_nodes
+    all_devices = [(n.name, n.name) for n in Node.query.all()]
+    add_link_form.source.choices = all_devices
+    add_link_form.destination.choices = all_devices
     if request.method == 'POST':
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
@@ -102,7 +102,7 @@ def link_management():
 @blueprint.route('/object_download')
 @login_required
 def objects_download():
-    nodes = Node.serialize()
+    devices = Node.serialize()
     ws = {}
     wb = xlwt.Workbook()
     style0 = xlwt.easyxf(
@@ -119,12 +119,12 @@ def objects_download():
             ws[tab].write(header_index, column, entry, style0)
             column = column + 1
     column = 0
-    for node in nodes:
-        for k, v in node.items():
+    for device in devices:
+        for k, v in device.items():
             if k is not 'id':
                 try:
-                    ws[node['type']].write(
-                        ws[node['type']].row_index,
+                    ws[device['type']].write(
+                        ws[device['type']].row_index,
                         column,
                         v,
                         style1
@@ -133,7 +133,7 @@ def objects_download():
                 except Exception:
                     continue
         column = 0
-        ws[node['type']].row_index = ws[node['type']].row_index + 1
+        ws[device['type']].row_index = ws[device['type']].row_index + 1
     obj_file = Path.cwd() / 'projects' / 'objects.xls'
     wb.save(str(obj_file))
     sfd = send_file(
@@ -148,7 +148,7 @@ def objects_download():
 @login_required
 def pool_management():
     pool_object_form = PoolObjectsForm(request.form)
-    pool_object_form.nodes.choices = Node.choices()
+    pool_object_form.devices.choices = Node.choices()
     pool_object_form.links.choices = Link.choices()
     return render_template(
         'pool_management.html',
@@ -163,8 +163,8 @@ def pool_management():
 @blueprint.route('/get/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
 def get_object(obj_type, obj_id):
-    if obj_type == 'node':
-        cls, properties = Node, node_public_properties
+    if obj_type == 'device':
+        cls, properties = Node, device_public_properties
     else:
         cls, properties = Link, link_public_properties
     obj = retrieve(cls, id=obj_id)
@@ -186,7 +186,7 @@ def edit_object():
 @blueprint.route('/delete/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
 def delete_object(obj_type, obj_id):
-    cls = Node if obj_type == 'node' else Link
+    cls = Node if obj_type == 'device' else Link
     obj = retrieve(cls, id=obj_id)
     db.session.delete(obj)
     db.session.commit()
@@ -215,7 +215,7 @@ def get_pool_objects(pool_id):
 @login_required
 def save_pool_objects(pool_id):
     pool = retrieve(Pool, id=pool_id)
-    pool.nodes = [retrieve(Node, id=id) for id in request.form.getlist('nodes')]
+    pool.devices = [retrieve(Node, id=id) for id in request.form.getlist('devices')]
     pool.links = [retrieve(Link, id=id) for id in request.form.getlist('links')]
     db.session.commit()
     return jsonify(pool.name)

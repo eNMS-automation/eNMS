@@ -101,7 +101,7 @@ class OpenNmsServer(CustomBase):
 
     id = Column(Integer, primary_key=True)
     rest_query = Column(String)
-    node_query = Column(String)
+    device_query = Column(String)
     type = Column(String)
     login = Column(String)
     password = Column(String)

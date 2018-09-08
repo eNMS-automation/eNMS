@@ -75,16 +75,16 @@ class NetmikoConfigScript(Script):
     content = Column(String)
     driver = Column(String)
     global_delay_factor = Column(Float)
-    node_multiprocessing = True
+    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_config',
     }
 
     def job(self, args):
-        task, node, results = args
+        task, device, results = args
         try:
-            netmiko_handler = netmiko_connection(self, node)
+            netmiko_handler = netmiko_connection(self, device)
             netmiko_handler.send_config_set(self.content.splitlines())
             result = f'configuration OK:\n\n{self.content}'
             success = True
@@ -95,7 +95,7 @@ class NetmikoConfigScript(Script):
             netmiko_handler.disconnect()
         except Exception:
             pass
-        results[node.name] = {'success': success, 'logs': result}
+        results[device.name] = {'success': success, 'logs': result}
 
 
 class NetmikoValidationScript(Script):
@@ -115,17 +115,17 @@ class NetmikoValidationScript(Script):
     content_match_regex1 = Column(Boolean)
     content_match_regex2 = Column(Boolean)
     content_match_regex3 = Column(Boolean)
-    node_multiprocessing = True
+    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_validation',
     }
 
     def job(self, args):
-        task, node, results = args
+        task, device, results = args
         success, result = True, {}
         try:
-            netmiko_handler = netmiko_connection(self, node)
+            netmiko_handler = netmiko_connection(self, device)
             for i in range(1, 4):
                 command = getattr(self, 'command' + str(i))
                 if not command:
@@ -143,13 +143,13 @@ class NetmikoValidationScript(Script):
                     if expected not in str(output):
                         success = False
         except Exception as e:
-            results[node.name] = f'netmiko did not work because of {e}'
+            results[device.name] = f'netmiko did not work because of {e}'
             success = False
         try:
             netmiko_handler.disconnect()
         except Exception:
             pass
-        results[node.name] = {'success': success, 'logs': result}
+        results[device.name] = {'success': success, 'logs': result}
 
 
 class FileTransferScript(Script):
@@ -167,16 +167,16 @@ class FileTransferScript(Script):
     overwrite_file = Column(Boolean)
     disable_md5 = Column(Boolean)
     inline_transfer = Column(Boolean)
-    node_multiprocessing = True
+    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'file_transfer',
     }
 
     def job(self, args):
-        task, node, results = args
+        task, device, results = args
         try:
-            netmiko_handler = netmiko_connection(self, node)
+            netmiko_handler = netmiko_connection(self, device)
             transfer_dict = file_transfer(
                 netmiko_handler,
                 source_file=self.source_file,
@@ -193,7 +193,7 @@ class FileTransferScript(Script):
         except Exception as e:
             result = f'netmiko config did not work because of {e}'
             success = False
-        results[node.name] = {'success': success, 'logs': result}
+        results[device.name] = {'success': success, 'logs': result}
 
 
 class NapalmConfigScript(Script):
@@ -205,16 +205,16 @@ class NapalmConfigScript(Script):
     operating_system = Column(String)
     action = Column(String)
     content = Column(String)
-    node_multiprocessing = True
+    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_config',
     }
 
     def job(self, args):
-        task, node, results = args
+        task, device, results = args
         try:
-            napalm_driver = napalm_connection(node)
+            napalm_driver = napalm_connection(device)
             napalm_driver.open()
             config = '\n'.join(self.content.splitlines())
             getattr(napalm_driver, self.action)(config=config)
@@ -226,7 +226,7 @@ class NapalmConfigScript(Script):
         else:
             result = f'configuration OK:\n\n{config}'
             success = True
-        results[node.name] = {'success': success, 'logs': result}
+        results[device.name] = {'success': success, 'logs': result}
 
 
 class NapalmActionScript(Script):
@@ -237,7 +237,7 @@ class NapalmActionScript(Script):
     vendor = Column(String)
     operating_system = Column(String)
     action = Column(String, unique=True)
-    node_multiprocessing = True
+    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_action',
@@ -248,9 +248,9 @@ class NapalmActionScript(Script):
         self.action = action
 
     def job(self, args):
-        task, node, results = args
+        task, device, results = args
         try:
-            napalm_driver = napalm_connection(node)
+            napalm_driver = napalm_connection(device)
             napalm_driver.open()
             getattr(napalm_driver, self.action)()
             napalm_driver.close()
@@ -260,7 +260,7 @@ class NapalmActionScript(Script):
         else:
             result = self.action + ' OK'
             success = True
-        results[node.name] = {'success': success, 'logs': result}
+        results[device.name] = {'success': success, 'logs': result}
 
 
 class NapalmGettersScript(Script):
@@ -271,17 +271,17 @@ class NapalmGettersScript(Script):
     getters = Column(MutableList.as_mutable(PickleType), default=[])
     content_match = Column(String)
     content_match_regex = Column(Boolean)
-    node_multiprocessing = True
+    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_getters',
     }
 
     def job(self, args):
-        task, node, results = args
+        task, device, results = args
         result = {}
         try:
-            napalm_driver = napalm_connection(node)
+            napalm_driver = napalm_connection(device)
             napalm_driver.open()
             for getter in self.getters:
                 try:
@@ -296,7 +296,7 @@ class NapalmGettersScript(Script):
         except Exception as e:
             result = f'script did not work:\n{e}'
             success = False
-        results[node.name] = {
+        results[device.name] = {
             'success': success,
             'logs': result,
             'expected': self.content_match
@@ -315,23 +315,23 @@ class AnsibleScript(Script):
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
-    pass_node_properties = Column(Boolean)
+    pass_device_properties = Column(Boolean)
     inventory_from_selection = Column(Boolean)
-    node_multiprocessing = True
+    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'ansible_playbook',
     }
 
     def job(self, args):
-        task, node, results = args
+        task, device, results = args
         try:
             arguments = self.arguments.split()
             command = ['ansible-playbook']
-            if self.pass_node_properties:
-                command.extend(['-e', dumps(node.properties)])
+            if self.pass_device_properties:
+                command.extend(['-e', dumps(device.properties)])
             if self.inventory_from_selection:
-                command.extend(['-i', node.ip_address + ','])
+                command.extend(['-i', device.ip_address + ','])
             command.append(self.playbook_path)
             output = check_output(command + arguments)
             try:
@@ -342,9 +342,9 @@ class AnsibleScript(Script):
                 success = bool(search(self.content_match, str(output)))
             else:
                 success = self.content_match in str(output)
-            results[node.name] = {'success': success, 'logs': output}
+            results[device.name] = {'success': success, 'logs': output}
         except Exception as e:
-            results[node.name] = {'success': False, 'logs': str(e)}
+            results[device.name] = {'success': False, 'logs': str(e)}
 
 
 class RestCallScript(Script):
@@ -359,7 +359,7 @@ class RestCallScript(Script):
     content_match_regex = Column(Boolean)
     username = Column(String)
     password = Column(String)
-    node_multiprocessing = False
+    device_multiprocessing = False
     request_dict = {
         'GET': rest_get,
         'POST': rest_post,

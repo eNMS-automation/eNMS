@@ -7,7 +7,7 @@ from eNMS.objects.models import Pool
 default_pools = (
     {'name': 'All objects'},
     {'name': 'Nodes only', 'link_name': '^$', 'link_name_regex': True},
-    {'name': 'Links only', 'node_name': '^$', 'node_name_regex': True}
+    {'name': 'Links only', 'device_name': '^$', 'device_name_regex': True}
 )
 
 

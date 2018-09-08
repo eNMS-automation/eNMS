@@ -8,33 +8,25 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.scripts.models import NetmikoConfigScript
-
-cisco_user = {
-    'name': 'cisco',
-    'email': 'cisco@cisco.com',
-    'password': 'cisco'
-}
+from eNMS.scripts.models import NetmikoConfigScript, Script
+from eNMS.tasks.models import ScriptTask
 
 
-@integrity_rollback
 def create_default_user():
-    user = User(**cisco_user)
-    db.session.add(user)
-    db.session.commit()
+    user = factory(User, **{
+        'name': 'cisco',
+        'email': 'cisco@cisco.com',
+        'password': 'cisco'
+    })
 
 
-default_pools = (
-    {'name': 'All objects'},
-    {'name': 'Devices only', 'link_name': '^$', 'link_name_regex': True},
-    {'name': 'Links only', 'device_name': '^$', 'device_name_regex': True}
-)
-
-
-@integrity_rollback
 def create_default_pools():
-    for pool in default_pools:
-        pool = factory(Pool, **pool)
+    for pool in (
+        {'name': 'All objects'},
+        {'name': 'Devices only', 'link_name': '^$', 'link_name_regex': True},
+        {'name': 'Links only', 'device_name': '^$', 'device_name_regex': True}
+    ):
+        factory(Pool, **pool)
 
 
 @integrity_rollback
@@ -91,23 +83,21 @@ delete_vrf_TEST = {
 }
 
 
-@integrity_rollback
 def create_default_scripts():
     for script_data in (create_vrf_TEST, delete_vrf_TEST):
-        script = NetmikoConfigScript(**script_data)
-        db.session.add(script)
-        db.session.commit()
+        factory(NetmikoConfigScript, **script_data)
 
 
-@integrity_rollback
 def create_default_tasks():
     task_create_vrf_TEST = {
         'name': 'task_create_vrf_TEST',
         'waiting_time': '0',
         'devices': [retrieve(Device, name='router8')],
+        'job': retrieve(Script, name='create_vrf_TEST'),
         'start_date': '',
         'end_date': '',
         'frequency': '',
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
     }
+    factory(ScriptTask, **task_create_vrf_TEST)

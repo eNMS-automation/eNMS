@@ -80,3 +80,42 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
     },
   });
 }
+
+/**
+ * Add object to the datatable.
+ * @param {mode} mode - Create or edit.
+ * @param {type} type - Node or link.
+ * @param {properties} properties - Properties of the object.
+ */
+function addObjectToTable(mode, type, properties) {
+  let values = [];
+  for (let i = 0; i < fields.length; i++) {
+    if (['longitude', 'latitude'].includes(fields[i])) {
+      values.push(`${parseFloat(properties[fields[i]]).toFixed(2)}`);
+    } else {
+      values.push(`${properties[fields[i]]}`);
+    }
+  }
+  values.push(
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showObjectModal('${type}', '${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
+    onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
+  );
+  if (mode == 'edit') {
+    table.row($(`#${type}-${properties.id}`)).data(values);
+  } else {
+    const rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr('id', `${type}-${properties.id}`);
+  }
+}
+
+/**
+ * Display the object modal.
+ * @param {type} type - Node or link.
+ */
+function showModal(type) { // eslint-disable-line no-unused-vars
+  $('#title').text(`Add a new ${type}`);
+  $(`#edit-${type}-form`).trigger('reset');
+  $(`#edit-${type}`).modal('show');
+}

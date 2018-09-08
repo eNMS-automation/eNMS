@@ -7,18 +7,16 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  {% include 'object_modals.html' %}
-  {% include 'object_tables.html' %}
+  {% include 'link_modal.html' %}
+  {% include 'link_table.html' %}
 {% endblock content %}
 
 {% block javascripts %}
   {{ super()}}
   <script>
-    var nodeFields = {{ node_fields|tojson|safe }};
-    var linkFields = {{ link_fields|tojson|safe }};
-    var nodes = {{ nodes|tojson|safe }};
+    var fields = {{ fields|tojson|safe }};
     var links = {{ links|tojson|safe }};
   </script>
   <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
-  <script src="{{ url_for('objects_blueprint.static', filename='objectManagement.js') }}"></script>
+  <script src="{{ url_for('objects_blueprint.static', filename='linkManagement.js') }}"></script>
 {% endblock javascripts %}

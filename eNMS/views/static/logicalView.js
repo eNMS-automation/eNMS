@@ -13,15 +13,15 @@ const height = 500;
 let selectedNodes = [];
 
 /**
- * Select nodes in the scheduling modal.
+ * Select devices in the scheduling modal.
  */
 function sendSelection() {
-  $('#nodes').val(selectedNodes.map((s) => s[1].real_id));
+  $('#devices').val(selectedNodes.map((s) => s[1].real_id));
 }
 
 /**
- * Select a node.
- * @param {d} d - selected node.
+ * Select a device.
+ * @param {d} d - selected device.
  */
 function selectNode(d) {
   // we stop the propagation up the DOM tree so that the
@@ -36,11 +36,11 @@ function selectNode(d) {
 }
 
 /**
- * Show node property modal.
- * @param {d} d - selected node.
+ * Show device property modal.
+ * @param {d} d - selected device.
  */
 function showNodeProperties(d) {
-  showObjectModal('node', d.real_id);
+  showObjectModal('device', d.real_id);
 }
 
 /**
@@ -52,7 +52,7 @@ function showLinkProperties(d) {
 }
 
 /**
- * Unselect all nodes.
+ * Unselect all devices.
  */
 function unselectAll() {
   d3.event.preventDefault();
@@ -155,10 +155,10 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: 'json',
     success: function(objects) {
-      let nodesId = objects.nodes.map((n) => n.id);
+      let devicesId = objects.devices.map((n) => n.id);
       let linksId = objects.links.map((l) => l.id);
       node.style('visibility', function(d) {
-        return nodesId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
+        return devicesId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
       });
       link.style('visibility', function(d) {
         return linksId.includes(d.real_id.toString()) ? 'visible' : 'hidden';

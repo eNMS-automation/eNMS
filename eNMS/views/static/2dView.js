@@ -7,14 +7,14 @@ layers: false
 links: false
 link_colors: false
 markersArray: true
-nodes: false
+devices: false
 parameters: false
 partial: false
 polylinesArray: true
 showModal: false
 showObjectModal: false
 selection: true
-node_subtypes: false
+device_subtypes: false
 view: false
 */
 
@@ -42,7 +42,7 @@ function switchLayer(layer) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-Object.keys(node_subtypes).forEach(function(subtype) {
+Object.keys(device_subtypes).forEach(function(subtype) {
   window[`icon_${subtype}`] = L.icon({
     iconUrl: `static/images/default/${subtype}.gif`,
     iconSize: [18, 12],
@@ -72,30 +72,30 @@ L.PolylineClusterable = L.Polyline.extend({
   },
 });
 
-for (let i = 0; i < nodes.length; i++) {
-  const node = nodes[i];
+for (let i = 0; i < devices.length; i++) {
+  const device = devices[i];
   const marker = L.marker([
-    node.latitude,
-    node.longitude,
+    device.latitude,
+    device.longitude,
   ]);
 
-  marker.node_id = node.id;
-  marker.icon = window[`icon_${node.subtype}`];
-  marker.selected_icon = window[`icon_selected_${node.subtype}`];
+  marker.device_id = device.id;
+  marker.icon = window[`icon_${device.subtype}`];
+  marker.selected_icon = window[`icon_selected_${device.subtype}`];
   marker.setIcon(marker.icon);
   markersArray.push(marker);
 
   marker.on('dblclick', function(e) {
-    showObjectModal('node', this.node_id);
+    showObjectModal('device', this.device_id);
   });
 
   marker.on('click', function(e) {
     e.target.setIcon(e.target.selected_icon);
-    selection.push(this.node_id);
-    $('#nodes').val(selection);
+    selection.push(this.device_id);
+    $('#devices').val(selection);
   });
 
-  marker.bindTooltip(node[labels.node], {
+  marker.bindTooltip(device[labels.device], {
     permanent: false,
   });
 
@@ -141,14 +141,14 @@ for (let i = 0; i < links.length; i++) {
 }
 
 /**
- * Unselect all nodes.
+ * Unselect all devices.
  */
 function unselectAll() {
   for (let i = 0; i < markersArray.length; i++) {
     markersArray[i].setIcon(markersArray[i].icon);
   }
   selection = [];
-  $('#nodes').val(selection);
+  $('#devices').val(selection);
 }
 
 map.on('boxzoomend', function(e) {
@@ -156,10 +156,10 @@ map.on('boxzoomend', function(e) {
   for (let i = 0; i < markersArray.length; i++) {
     if (e.boxZoomBounds.contains(markersArray[i].getLatLng())) {
       markersArray[i].setIcon(markersArray[i].selected_icon);
-      selection.push(markersArray[i].node_id);
+      selection.push(markersArray[i].device_id);
     }
   }
-  $('#nodes').val(selection);
+  $('#devices').val(selection);
 });
 
 map.on('click', function(e) {
@@ -173,10 +173,10 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: 'json',
     success: function(objects) {
-      const nodesId = objects.nodes.map((n) => n.id);
+      const devicesId = objects.devices.map((n) => n.id);
       const linksId = objects.links.map((l) => l.id);
       for (let i = 0; i < markersArray.length; i++) {
-        if (nodesId.includes(markersArray[i].node_id)) {
+        if (devicesId.includes(markersArray[i].device_id)) {
           markersArray[i].addTo(map);
         } else {
           markersArray[i].removeFrom(map);

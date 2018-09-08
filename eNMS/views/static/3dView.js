@@ -4,7 +4,7 @@ alertify: false
 layers: false
 links: false
 markersArray: true
-nodes: false
+devices: false
 partial: false
 polylinesArray: true
 showModal: false
@@ -28,16 +28,16 @@ function switchLayer(layer) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-for (let i = 0; i < nodes.length; i++) {
-  const node = nodes[i];
+for (let i = 0; i < devices.length; i++) {
+  const device = devices[i];
   const marker = WE.marker(
-  [node.latitude, node.longitude],
+  [device.latitude, device.longitude],
   'static/images/3D/default/router.gif',
   15, 10
   ).addTo(map);
-  marker.node_id = node.id;
+  marker.device_id = device.id;
   marker.on('dblclick', function(e) {
-    showObjectModal('node', nodes[i].id);
+    showObjectModal('device', devices[i].id);
   });
   markersArray.push(marker);
 }
@@ -74,9 +74,9 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: 'json',
     success: function(objects) {
-      const nodesId = objects.nodes.map((n) => n.id);
+      const devicesId = objects.devices.map((n) => n.id);
       for (let i = 0; i < markersArray.length; i++) {
-        if (nodesId.includes(markersArray[i].node_id)) {
+        if (devicesId.includes(markersArray[i].device_id)) {
           markersArray[i].addTo(map);
         } else {
           markersArray[i].removeFrom(map);

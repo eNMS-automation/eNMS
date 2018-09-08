@@ -38,9 +38,9 @@ def process_kwargs(app, **kwargs):
             app.vault_client.write(
                 f'secret/data/device/{kwargs["name"]}',
                 data={
-                    'username': kwargs.pop('username'),
-                    'password': kwargs.pop('password'),
-                    'secret_password': kwargs.pop('secret_password')
+                    'username': kwargs.pop('username', ''),
+                    'password': kwargs.pop('password', ''),
+                    'secret_password': kwargs.pop('secret_password', '')
                 }
             )
         else:
@@ -52,17 +52,6 @@ def process_kwargs(app, **kwargs):
 @blueprint.route('/device_management', methods=['GET', 'POST'])
 @login_required
 def device_management():
-    if request.method == 'POST':
-        file = request.files['file']
-        if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
-            book = open_workbook(file_contents=file.read())
-            sheet = book.sheet_by_name('Device')
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(current_app, **values)
-                factory(cls, **kwargs)
-            db.session.commit()
     return render_template(
         'device_management.html',
         names=pretty_names,
@@ -79,17 +68,6 @@ def link_management():
     all_devices = [(n.name, n.name) for n in Device.query.all()]
     add_link_form.source.choices = all_devices
     add_link_form.destination.choices = all_devices
-    if request.method == 'POST':
-        file = request.files['file']
-        if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
-            book = open_workbook(file_contents=file.read())
-            sheet = book.sheet_by_name('Link')
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(current_app, **values)
-                factory(cls, **kwargs)
-            db.session.commit()
     return render_template(
         'link_management.html',
         names=pretty_names,
@@ -191,6 +169,24 @@ def delete_object(obj_type, obj_id):
     db.session.delete(obj)
     db.session.commit()
     return jsonify({'name': obj.name})
+
+
+@blueprint.route('/import_topology', methods=['POST'])
+@login_required
+def import_topology():
+    file = request.files['file']
+    if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
+        book = open_workbook(file_contents=file.read())
+        for object_type in ('Device', 'Link'):
+            sheet = book.sheet_by_name(object_type)
+            properties = sheet.row_values(0)
+            for row_index in range(1, sheet.nrows):
+                values = dict(zip(properties, sheet.row_values(row_index)))
+                print(values)
+                cls, kwargs = process_kwargs(current_app, **values)
+                factory(cls, **kwargs)
+            db.session.commit()
+    return jsonify({'success': True})
 
 
 @blueprint.route('/process_pool', methods=['POST'])

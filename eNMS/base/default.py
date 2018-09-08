@@ -60,44 +60,55 @@ def create_default_network_topology(app):
             db.session.commit()
 
 
-create_vrf_TEST = {
-    'name': 'create_vrf_TEST',
-    'description': 'Create a VRF "TEST"',
-    'vendor': 'Cisco',
-    'operating_system': 'IOS',
-    'content_type': 'simple',
-    'driver': 'cisco_ios',
-    'global_delay_factor': '1.0',
-    'content': 'ip vrf TEST'
-}
-
-delete_vrf_TEST = {
-    'name': 'delete_vrf_TEST',
-    'description': 'Delete VRF "TEST"',
-    'vendor': 'Cisco',
-    'operating_system': 'IOS',
-    'content_type': 'simple',
-    'driver': 'cisco_ios',
-    'global_delay_factor': '1.0',
-    'content': 'no ip vrf TEST'
-}
-
-
 def create_default_scripts():
-    for script_data in (create_vrf_TEST, delete_vrf_TEST):
-        factory(NetmikoConfigScript, **script_data)
+    for script in (
+        {
+            'name': 'create_vrf_TEST',
+            'description': 'Create a VRF "TEST"',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'content_type': 'simple',
+            'driver': 'cisco_ios',
+            'global_delay_factor': '1.0',
+            'content': 'ip vrf TEST'
+        },
+        {
+            'name': 'delete_vrf_TEST',
+            'description': 'Delete VRF "TEST"',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'content_type': 'simple',
+            'driver': 'cisco_ios',
+            'global_delay_factor': '1.0',
+            'content': 'no ip vrf TEST'
+        }
+    ):
+        factory(NetmikoConfigScript, **script)
 
 
 def create_default_tasks():
-    task_create_vrf_TEST = {
-        'name': 'task_create_vrf_TEST',
-        'waiting_time': '0',
-        'devices': [retrieve(Device, name='router8')],
-        'job': retrieve(Script, name='create_vrf_TEST'),
-        'start_date': '',
-        'end_date': '',
-        'frequency': '',
-        'do_not_run': 'y',
-        'user': retrieve(User, name='cisco')
-    }
-    factory(ScriptTask, **task_create_vrf_TEST)
+    for task in (
+        {
+            'name': 'task_create_vrf_TEST',
+            'waiting_time': '0',
+            'devices': [retrieve(Device, name='router8')],
+            'job': retrieve(Script, name='create_vrf_TEST'),
+            'start_date': '',
+            'end_date': '',
+            'frequency': '',
+            'do_not_run': 'y',
+            'user': retrieve(User, name='cisco')
+        },
+        {
+            'name': 'task_delete_vrf_TEST',
+            'waiting_time': '0',
+            'devices': [retrieve(Device, name='router8')],
+            'job': retrieve(Script, name='delete_vrf_TEST'),
+            'start_date': '',
+            'end_date': '',
+            'frequency': '',
+            'do_not_run': 'y',
+            'user': retrieve(User, name='cisco')
+        }
+    ):
+        factory(ScriptTask, **task)

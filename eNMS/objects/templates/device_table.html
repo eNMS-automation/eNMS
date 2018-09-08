@@ -1,0 +1,74 @@
+<div class="right_col" role="main">
+  <!-- begin row -->
+  <div class="row" style="height: 350px">
+    <!-- begin column -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div style="padding-bottom:5px;">
+        <form id="form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" >
+          <label class="btn btn-default btn-file" style="width:100%;">Import Network Topology
+            <input id="file" name="file" style="visibility:hidden; display:none" type="file">
+          </label>
+        </form>
+        <label class="btn btn-default btn-file" style="width:100%;">
+          <a href="object_download" style="color: black;">Export Network Topology</a>
+        </label>
+      </div>
+      <div class="x_panel">
+        <div class="x_content">
+          <div class="panel-group">
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="showModal('node')" style="width:100%;">
+                Add a new node
+              </button>
+            </div>
+          </div>
+          <table id="node-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                {% for field in node_fields %}
+                  <th>{{ names[field] }}</th>
+                {% endfor %}
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- end column -->
+  </div>
+  <!-- end row -->
+  <!-- begin row -->
+  <div class="row" style="height: 350px">
+    <!-- begin column -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content">
+          <div class="panel-group">
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="showModal('link')" style="width:100%;">
+                Add a new link
+              </button>
+            </div>
+          </div>
+          <table id="link-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                {% for field in link_fields %}
+                  <th>{{ names[field] }}</th>
+                {% endfor %}
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- end column -->
+  </div>
+  <!-- end row -->
+</div>

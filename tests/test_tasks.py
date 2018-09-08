@@ -9,8 +9,8 @@ from tests.test_objects import create_from_file
 instant_task = ImmutableMultiDict([
     ('name', 'instant_task'),
     ('waiting_time', '0'),
-    ('devices', '8'),
-    ('devices', '9'),
+    ('devices', '1'),
+    ('devices', '2'),
     ('start_date', ''),
     ('end_date', ''),
     ('frequency', ''),
@@ -21,8 +21,8 @@ instant_task = ImmutableMultiDict([
 scheduled_task = ImmutableMultiDict([
     ('name', 'scheduled_task'),
     ('waiting_time', '0'),
-    ('devices', '8'),
-    ('devices', '9'),
+    ('devices', '1'),
+    ('devices', '2'),
     ('start_date', '30/03/2018 19:10:13'),
     ('end_date', '06/04/2018 19:10:13'),
     ('frequency', '3600'),
@@ -35,9 +35,9 @@ scheduled_task = ImmutableMultiDict([
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('tasks/scheduler', data=instant_task)
-    assert len(Task.query.all()) == 1
+    assert len(Task.query.all()) == 5
     user_client.post('tasks/scheduler', data=scheduled_task)
-    assert len(Task.query.all()) == 2
+    assert len(Task.query.all()) == 6
 
 
 google_earth_dict = ImmutableMultiDict([

@@ -103,10 +103,9 @@ def delete_node(workflow_id, task_id):
 def add_edge(wf_id, type, source, dest):
     source_task = retrieve(Task, id=source)
     destination_task = retrieve(Task, id=dest)
-    workflow = retrieve(Workflow, id=wf_id)
     workflow_edge = factory(WorkflowEdge, **{
-        'name': '',
-        'workflow': workflow,
+        'name': f'{source_task.name} -> {destination_task.name}',
+        'workflow': retrieve(Workflow, id=wf_id),
         'type': type,
         'source': source_task,
         'destination': destination_task

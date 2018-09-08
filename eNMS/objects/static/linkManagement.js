@@ -1,6 +1,7 @@
 /*
 global
 addObjectToTable: false
+importTopology: false
 links: false
 */
 

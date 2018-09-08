@@ -21,9 +21,8 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from subprocess import check_output
 
-from eNMS import db
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import integrity_rollback, str_dict
+from eNMS.base.helpers import str_dict
 from eNMS.scripts.connections import napalm_connection, netmiko_connection
 from eNMS.scripts.properties import type_to_properties
 

@@ -1,3 +1,5 @@
+from eNMS.scripts.connections import napalm_connection
+
 parameters = {
     'name': 'Napalm Rollback',
     'device_multiprocessing': True,
@@ -15,7 +17,7 @@ def job(args):
         napalm_driver.rollback()
         napalm_driver.close()
     except Exception as e:
-        result = f'napalm {self.action} did not work because of {e}'
+        result = f'Napalm rollback did not work because of {e}'
         success = False
     else:
         result = 'Rollback successful'

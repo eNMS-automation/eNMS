@@ -57,9 +57,9 @@ def test_manual_object_creation(user_client):
                 obj_dict = define_link(subtype, source.name, destination.name)
                 user_client.post('/objects/edit_object', data=obj_dict)
     # - exactly 16 devices in total
-    assert len(Device.query.all()) == 16
+    assert len(Device.query.all()) == 22
     # - exactly 6*9 = 54 links in total
-    assert len(Link.query.all()) == 54
+    assert len(Link.query.all()) == 61
 
 
 def create_from_file(client, file):
@@ -78,8 +78,8 @@ def test_object_creation_europe(user_client):
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_type(user_client):
     create_from_file(user_client, 'device_counters.xls')
-    assert len(Device.query.all()) == 27
-    assert not Link.query.all()
+    assert len(Device.query.all()) == 33
+    assert len(Link.query.all()) == 7
 
 
 routers = ['router' + str(i) for i in range(5, 20)]

@@ -14,7 +14,6 @@ class CustomBase(db.Model):
     __abstract__ = True
 
     def __init__(self, **kwargs):
-        print(kwargs)
         self.update(**kwargs)
 
     def __lt__(self, other):

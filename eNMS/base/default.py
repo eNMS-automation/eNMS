@@ -18,7 +18,7 @@ from eNMS.workflows.models import Workflow, WorkflowEdge
 
 
 def create_default_user():
-    user = factory(User, **{
+    factory(User, **{
         'name': 'cisco',
         'email': 'cisco@cisco.com',
         'password': 'cisco'

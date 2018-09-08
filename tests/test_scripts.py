@@ -112,7 +112,7 @@ def test_base_scripts(user_client):
         '/scripts/create_script/netmiko_config',
         data=netmiko_ping
     )
-    assert len(NetmikoConfigScript.query.all()) == 1
+    assert len(NetmikoConfigScript.query.all()) == 3
     path_yaml = join(
         user_client.application.path,
         'scripts',
@@ -132,7 +132,7 @@ def test_base_scripts(user_client):
             data=napalm_jinja2_script
         )
     assert len(NapalmConfigScript.query.all()) == 1
-    assert len(Script.query.all()) == 6
+    assert len(Script.query.all()) == 10
     netmiko_j2_script = db.session.query(Script).filter_by(
         name='netmiko_subif'
     ).first()
@@ -149,7 +149,7 @@ def test_base_scripts(user_client):
         data=file_transfer_script
     )
     assert len(FileTransferScript.query.all()) == 1
-    assert len(Script.query.all()) == 7
+    assert len(Script.query.all()) == 11
 
 
 getters_dict = ImmutableMultiDict([
@@ -190,4 +190,4 @@ def test_ansible_scripts(user_client):
         data=ansible_script
     )
     assert len(AnsibleScript.query.all()) == 1
-    assert len(Script.query.all()) == 4
+    assert len(Script.query.all()) == 8

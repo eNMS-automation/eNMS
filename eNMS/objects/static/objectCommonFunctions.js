@@ -104,7 +104,6 @@ function addObjectToTable(mode, type, properties) {
     table.row($(`#${type}-${properties.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    console.log(rowNode);
     $(rowNode).attr('id', `${type}-${properties.id}`);
   }
 }
@@ -120,8 +119,8 @@ function showModal(type) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Create a new script.
- * @param {type} type - Type of script to create.
+ * Import topology.
+ * @param {objType} objType - Type of object.
  */
 function importTopology(objType) { // eslint-disable-line no-unused-vars
   if ($('#import-form').parsley().validate() ) {

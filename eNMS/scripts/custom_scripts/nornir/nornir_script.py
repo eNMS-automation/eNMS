@@ -4,7 +4,7 @@ from nornir.plugins.tasks import networking
 
 parameters = {
     'name': 'nornir ping 23 443',
-    'node_multiprocessing': True,
+    'device_multiprocessing': True,
     'description': 'Uses Nornir to ping',
     'vendor': 'none',
     'operating_system': 'all'
@@ -13,11 +13,11 @@ parameters = {
 
 def job(args):
     # Script that uses Nornir to ping a device
-    task, node, results = args
-    nornir_inventory = {node.name: {'nornir_ip': node.ip_address}}
+    task, device, results = args
+    nornir_inventory = {device.name: {'nornir_ip': device.ip_address}}
     external = Nornir(inventory=Inventory(nornir_inventory), dry_run=True)
     ping_result = external.run(networking.tcp_ping, ports=[23, 443])
-    results[node.name] = {
-        'success': all(res for res in ping_result[node.name].result.keys()),
-        'logs': str(ping_result[node.name].result)
+    results[device.name] = {
+        'success': all(res for res in ping_result[device.name].result.keys()),
+        'logs': str(ping_result[device.name].result)
     }

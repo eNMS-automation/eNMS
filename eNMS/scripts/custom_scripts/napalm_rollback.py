@@ -1,9 +1,9 @@
 parameters = {
-    'name': 'script that does nothing',
+    'name': 'Napalm Rollback',
     'device_multiprocessing': True,
-    'description': 'does nothing',
-    'vendor': 'none',
-    'operating_system': 'all'
+    'description': 'Napalm Rollback',
+    'vendor': 'All',
+    'operating_system': 'All'
 }
 
 

@@ -51,7 +51,6 @@ function editObject(type) { // eslint-disable-line no-unused-vars
         // the object can be edited from the views,
         // in which case we don't need to add it to the table
         if (typeof table !== 'undefined') {
-          console.log(typeof(properties));
           addObjectToTable(mode, type, properties);
         }
         const message = `Object ${properties.name}
@@ -89,7 +88,6 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
  * @param {properties} properties - Properties of the object.
  */
 function addObjectToTable(mode, type, properties) {
-  console.log(mode, type, properties);
   let values = [];
   for (let i = 0; i < fields.length; i++) {
     if (['longitude', 'latitude'].includes(fields[i])) {
@@ -108,6 +106,7 @@ function addObjectToTable(mode, type, properties) {
     table.row($(`#${type}-${properties.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
+    console.log(rowNode);
     $(rowNode).attr('id', `${type}-${properties.id}`);
   }
 }
@@ -135,14 +134,13 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: formData,
       contentType: false,
-      cache: false,
       processData: false,
       async: false,
       success: function(objects) {
         for (let i = 0; i < objects[objType].length; i++) {
           const obj = objects[objType][i];
-          const mode = !$(`#${objType}-${obj.id}`).length ? 'edit' : 'create';
-          addObjectToTable(mode, objType.toLowerCase(), obj);
+          // const mode = $(`#${objType}-${obj.id}`).length ? 'create' : 'edit';
+          addObjectToTable('create', objType.toLowerCase(), obj);
         }
         alertify.notify('Topology successfully imported.', 'success', 5);
       },

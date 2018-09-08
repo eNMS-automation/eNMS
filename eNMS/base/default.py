@@ -5,10 +5,17 @@ from xlrd.biffh import XLRDError
 from eNMS import db
 from eNMS.admin.models import Parameters, SyslogServer
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import integrity_rollback
+from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.scripts.models import NetmikoConfigScript
+
+
+# @integrity_rollback
+# def create_default_user():
+#     user = User()
+#     db.session.commit()
+
 
 default_pools = (
     {'name': 'All objects'},
@@ -83,3 +90,15 @@ def create_default_scripts():
         script = NetmikoConfigScript(**script_data)
         db.session.add(script)
         db.session.commit()
+
+
+# task_create_vrf_TEST = {
+#     'name': 'task_create_vrf_TEST',
+#     'waiting_time': '0',
+#     'devices': [retrieve(Device, name='router8')],
+#     'start_date': '',
+#     'end_date': '',
+#     'frequency': '',
+#     'do_not_run': 'y',
+#     'user': retrieve(User, name='cisco')
+# }

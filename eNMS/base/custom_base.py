@@ -14,6 +14,7 @@ class CustomBase(db.Model):
     __abstract__ = True
 
     def __init__(self, **kwargs):
+        print(kwargs)
         self.update(**kwargs)
 
     def __lt__(self, other):
@@ -23,7 +24,6 @@ class CustomBase(db.Model):
         return self.name
 
     def update(self, **kwargs):
-        print(kwargs)
         for property, value in kwargs.items():
             if property in boolean_properties or 'regex' in property:
                 value = property in kwargs

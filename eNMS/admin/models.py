@@ -27,9 +27,6 @@ class User(CustomBase, UserMixin):
     secret_password = Column(String(30))
     tasks = relationship('Task', back_populates='user')
 
-    def __init__(self, **kwargs):
-        self.update(**kwargs)
-
     def update(self, **kwargs):
         for key, value in kwargs.items():
             if key == 'password':

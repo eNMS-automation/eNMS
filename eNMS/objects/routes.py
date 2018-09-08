@@ -178,7 +178,10 @@ def import_topology():
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
         for object_type in ('Device', 'Link'):
-            sheet = book.sheet_by_name(object_type)
+            try:
+                sheet = book.sheet_by_name(object_type)
+            except XLRDError:
+                continue
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))

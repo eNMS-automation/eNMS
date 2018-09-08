@@ -17,6 +17,7 @@ from eNMS.base.default import (
     create_default_network_topology,
     create_default_parameters,
     create_default_pools,
+    create_default_scripts,
     create_default_syslog_server
 )
 from eNMS.base.rest import configure_rest_api
@@ -80,6 +81,7 @@ def configure_database(app):
             create_default_syslog_server()
         except Exception as e:
             warn(str(e))
+        create_default_scripts()
         create_custom_scripts()
 
 

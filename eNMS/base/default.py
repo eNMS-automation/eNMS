@@ -1,5 +1,4 @@
 from os.path import join
-from werkzeug.datastructures import ImmutableMultiDict
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
@@ -9,6 +8,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback
 from eNMS.objects.models import Pool
 from eNMS.objects.routes import process_kwargs
+from eNMS.scripts.models import NetmikoConfigScript
 
 default_pools = (
     {'name': 'All objects'},
@@ -54,27 +54,32 @@ def create_default_network_topology(app):
             db.session.commit()
 
 
-# Default scripts
+create_vrf_TEST = {
+    'name': 'create_vrf_TEST',
+    'description': 'Create a VRF "TEST"',
+    'vendor': 'Cisco',
+    'operating_system': 'IOS',
+    'content_type': 'simple',
+    'driver': 'cisco_ios',
+    'global_delay_factor': '1.0',
+    'content': 'ip vrf TEST'
+}
 
-create_vrf_TEST = ImmutableMultiDict([
-    ('name', 'create_vrf_TEST'),
-    ('description', 'Create a vrf "TEST"'),
-    ('vendor', 'Cisco'),
-    ('operating_system', 'IOS'),
-    ('content_type', 'simple'),
-    ('driver', 'cisco_ios'),
-    ('global_delay_factor', '1.0'),
-    ('content', 'ip vrf TEST')
-])
+delete_vrf_TEST = {
+    'name': 'delete_vrf_TEST',
+    'description': 'Delete VRF "TEST"',
+    'vendor': 'Cisco',
+    'operating_system': 'IOS',
+    'content_type': 'simple',
+    'driver': 'cisco_ios',
+    'global_delay_factor': '1.0',
+    'content': 'no ip vrf TEST'
+}
 
-remove_vrf_TEST = ImmutableMultiDict([
-    ('name', 'remove_vrf_TEST'),
-    ('description', 'Remove vrf "TEST"'),
-    ('vendor', 'Cisco'),
-    ('operating_system', 'IOS'),
-    ('content_type', 'simple'),
-    ('driver', 'cisco_ios'),
-    ('global_delay_factor', '1.0'),
-    ('content', 'no ip vrf TEST')
-])
 
+@integrity_rollback
+def create_default_scripts():
+    for script_data in (create_vrf_TEST, delete_vrf_TEST):
+        script = NetmikoConfigScript(**script_data)
+        db.session.add(script)
+        db.session.commit()

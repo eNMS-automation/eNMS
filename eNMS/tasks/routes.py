@@ -66,7 +66,6 @@ def calendar():
 @blueprint.route('/scheduler', methods=['POST'])
 @login_required
 def scheduler(workflow_id=None):
-    print(request.form)
     data = request.form.to_dict()
     data['job'] = retrieve(Job, id=data['job'])
     data['devices'] = [

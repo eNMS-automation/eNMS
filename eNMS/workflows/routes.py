@@ -67,7 +67,6 @@ def get_workflow(workflow_id):
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
 def edit_workflow():
-    print(request.form)
     return jsonify(factory(Workflow, **request.form.to_dict()).serialized)
 
 

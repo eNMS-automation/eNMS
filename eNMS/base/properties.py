@@ -8,7 +8,7 @@ object_common_properties = (
     'vendor'
 )
 
-node_subtypes = {
+device_subtypes = {
     'antenna': 'Antenna',
     'firewall': 'Firewall',
     'host': 'Host',
@@ -37,7 +37,7 @@ link_subtype_to_color = {
     'pseudowire': '#902bec'
 }
 
-node_common_properties = (
+device_common_properties = (
     'operating_system',
     'os_version',
     'ip_address',
@@ -58,9 +58,9 @@ link_common_properties = (
     'destination',
 )
 
-node_public_properties = (
+device_public_properties = (
     object_common_properties +
-    node_common_properties[:-1]
+    device_common_properties[:-1]
 )
 
 link_public_properties = (
@@ -129,12 +129,12 @@ task_serialized_properties = (
 )
 
 public_properties = (
-    node_public_properties +
+    device_public_properties +
     link_public_properties
 )
 
 cls_to_properties = {
-    'Node': node_public_properties,
+    'Node': device_public_properties,
     'Link': link_public_properties,
     'Pool': pool_public_properties,
     'Script': script_public_properties,
@@ -150,7 +150,7 @@ cls_to_properties = {
 cls_to_properties = {k: ('id',) + v for k, v in cls_to_properties.items()}
 
 default_diagrams_properties = {
-    'node': 'vendor',
+    'device': 'vendor',
     'link': 'location',
     'user': 'access_rights',
     'script': 'type',
@@ -164,7 +164,7 @@ object_diagram_properties = (
     'location',
 )
 
-node_diagram_properties = object_diagram_properties + (
+device_diagram_properties = object_diagram_properties + (
     'subtype',
     'vendor',
     'operating_system',
@@ -199,7 +199,7 @@ task_diagram_properties = (
 )
 
 type_to_diagram_properties = {
-    'node': node_diagram_properties,
+    'device': device_diagram_properties,
     'link': link_diagram_properties,
     'user': user_diagram_properties,
     'script': script_diagram_properties,
@@ -231,7 +231,7 @@ pretty_names = {
     'name': 'Name',
     'operating_system': 'Operating System',
     'os_version': 'OS version',
-    'pass_node_properties': 'Pass node properties to the playbook',
+    'pass_device_properties': 'Pass device properties to the playbook',
     'password': 'Password',
     'recurrent': 'Recurrent',
     'secret_password': 'Secret password',
@@ -262,7 +262,7 @@ boolean_properties = (
     'content_match_regex2',
     'content_match_regex3',
     'inventory_from_selection',
-    'pass_node_properties',
+    'pass_device_properties',
     'contentregex',
     'sourceregex'
 )

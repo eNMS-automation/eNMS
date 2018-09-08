@@ -2,10 +2,10 @@ from sqlalchemy import Column, ForeignKey, Integer, Table
 
 from eNMS.base.custom_base import CustomBase
 
-task_node_table = Table(
-    'task_node_association',
+task_device_table = Table(
+    'task_device_association',
     CustomBase.metadata,
-    Column('node_id', Integer, ForeignKey('Node.id')),
+    Column('device_id', Integer, ForeignKey('Node.id')),
     Column('script_task_id', Integer, ForeignKey('ScriptTask.id'))
 )
 
@@ -30,11 +30,11 @@ task_workflow_table = Table(
     Column('workflow_id', Integer, ForeignKey('Workflow.id'))
 )
 
-pool_node_table = Table(
-    'pool_node_association',
+pool_device_table = Table(
+    'pool_device_association',
     CustomBase.metadata,
     Column('pool_id', Integer, ForeignKey('Pool.id')),
-    Column('node_id', Integer, ForeignKey('Node.id'))
+    Column('device_id', Integer, ForeignKey('Node.id'))
 )
 
 pool_link_table = Table(

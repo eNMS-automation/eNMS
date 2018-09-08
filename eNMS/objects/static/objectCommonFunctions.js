@@ -20,7 +20,7 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
       }
     },
   });
-  if (type == 'node') {
+  if (type == 'device') {
     $.ajax({
       type: 'POST',
       url: `/views/get_logs_${id}`,
@@ -47,7 +47,7 @@ function editObject(type) { // eslint-disable-line no-unused-vars
         const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
         // the object can be edited from the views,
         // in which case we don't need to add it to the table
-        if (typeof nodeTable !== 'undefined') {
+        if (typeof table !== 'undefined') {
           addObjectToTable(mode, type, properties);
         }
         const message = `Object ${properties.name}
@@ -69,7 +69,6 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/delete/${type}/${id}`,
     success: function(properties) {
-      const table = type == 'node' ? nodeTable : linkTable;
       table.row($(`#${type}-${id}`)).remove().draw(false);
       alertify.notify(
         `Object '${properties.name}' successfully deleted.`,

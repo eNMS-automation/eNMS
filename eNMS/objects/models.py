@@ -3,13 +3,13 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
 
 from eNMS.base.associations import (
-    pool_node_table,
+    pool_device_table,
     pool_link_table,
-    task_node_table,
+    task_device_table,
     task_pool_table
 )
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.properties import link_public_properties, node_public_properties
+from eNMS.base.properties import link_public_properties, device_public_properties
 
 
 class Object(CustomBase):
@@ -47,16 +47,16 @@ class Node(Object):
     secret_password = Column(String)
     tasks = relationship(
         'ScriptTask',
-        secondary=task_node_table,
-        back_populates='nodes'
+        secondary=task_device_table,
+        back_populates='devices'
     )
     pools = relationship(
         'Pool',
-        secondary=pool_node_table,
-        back_populates='nodes'
+        secondary=pool_device_table,
+        back_populates='devices'
     )
 
-    class_type = 'node'
+    class_type = 'device'
 
     __mapper_args__ = {
         'polymorphic_identity': 'Node',
@@ -120,9 +120,9 @@ class Pool(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)
-    nodes = relationship(
+    devices = relationship(
         'Node',
-        secondary=pool_node_table,
+        secondary=pool_device_table,
         back_populates='pools'
     )
     links = relationship(
@@ -135,28 +135,28 @@ class Pool(CustomBase):
         secondary=task_pool_table,
         back_populates='pools'
     )
-    node_name = Column(String)
-    node_name_regex = Column(Boolean)
-    node_description = Column(String)
-    node_description_regex = Column(Boolean)
-    node_model = Column(String)
-    node_model_regex = Column(Boolean)
-    node_location = Column(String)
-    node_location_regex = Column(Boolean)
-    node_type = Column(String)
-    node_type_regex = Column(Boolean)
-    node_vendor = Column(String)
-    node_vendor_regex = Column(Boolean)
-    node_operating_system = Column(String)
-    node_operating_system_regex = Column(Boolean)
-    node_os_version = Column(String)
-    node_os_version_regex = Column(Boolean)
-    node_ip_address = Column(String)
-    node_ip_address_regex = Column(Boolean)
-    node_longitude = Column(String)
-    node_longitude_regex = Column(Boolean)
-    node_latitude = Column(String)
-    node_latitude_regex = Column(Boolean)
+    device_name = Column(String)
+    device_name_regex = Column(Boolean)
+    device_description = Column(String)
+    device_description_regex = Column(Boolean)
+    device_model = Column(String)
+    device_model_regex = Column(Boolean)
+    device_location = Column(String)
+    device_location_regex = Column(Boolean)
+    device_type = Column(String)
+    device_type_regex = Column(Boolean)
+    device_vendor = Column(String)
+    device_vendor_regex = Column(Boolean)
+    device_operating_system = Column(String)
+    device_operating_system_regex = Column(Boolean)
+    device_os_version = Column(String)
+    device_os_version_regex = Column(Boolean)
+    device_ip_address = Column(String)
+    device_ip_address_regex = Column(Boolean)
+    device_longitude = Column(String)
+    device_longitude_regex = Column(Boolean)
+    device_latitude = Column(String)
+    device_latitude_regex = Column(Boolean)
     link_name = Column(String)
     link_name_regex = Column(Boolean)
     link_description = Column(String)
@@ -181,12 +181,12 @@ class Pool(CustomBase):
     @property
     def serialized(self):
         properties = self.properties
-        for prop in ('nodes', 'links'):
+        for prop in ('devices', 'links'):
             properties[prop] = [obj.properties for obj in getattr(self, prop)]
         return properties
 
     def compute_pool(self):
-        self.nodes = list(filter(self.object_match, Node.query.all()))
+        self.devices = list(filter(self.object_match, Node.query.all()))
         self.links = []
         for link in Link.query.all():
             # source and destination do not belong to a link __dict__, because
@@ -205,21 +205,21 @@ class Pool(CustomBase):
         for p in link_public_properties:
             for property in f'link_{p} link_{p}_regex'.split():
                 result[property] = getattr(self, property)
-        for p in node_public_properties:
-            for property in f'node_{p} node_{p}_regex'.split():
+        for p in device_public_properties:
+            for property in f'device_{p} device_{p}_regex'.split():
                 result[property] = getattr(self, property)
         result['name'], result['description'] = self.name, self.description
         return result
 
     def object_match(self, obj):
         return all(
-            # if the node-regex property is not in the request, the
+            # if the device-regex property is not in the request, the
             # regex box is unticked and we only check that the values
             # are equal.
             str(value) == getattr(self, obj.class_type + '_' + prop)
             if not getattr(self, f'{obj.class_type}_{prop}_regex')
             # if it is ticked, we use re.search to check that the value
-            # of the node property matches the regular expression.
+            # of the device property matches the regular expression.
             else search(getattr(self, obj.class_type + '_' + prop), str(value))
             for prop, value in obj.__dict__.items()
             # we consider only the properties in the form
@@ -231,6 +231,6 @@ class Pool(CustomBase):
 
     def filter_objects(self):
         return {
-            'nodes': [node.serialized for node in self.nodes],
+            'devices': [device.serialized for device in self.devices],
             'links': [link.serialized for link in self.links]
         }

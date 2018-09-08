@@ -12,8 +12,8 @@ from wtforms.validators import optional
 from eNMS.base.properties import (
     link_public_properties,
     link_subtypes,
-    node_public_properties,
-    node_subtypes
+    device_public_properties,
+    device_subtypes
 )
 
 
@@ -23,13 +23,13 @@ class AddObjectForm(FlaskForm):
     location = TextField('Location')
     vendor = TextField('Vendor')
 
-# nodes can be added to the database either one by one via the AddNode
+# devices can be added to the database either one by one via the AddNode
 # form, or all at once by importing an Excel or a CSV file.
 
 
 class AddNode(AddObjectForm):
-    node_types = [subtype for subtype in node_subtypes.items()]
-    subtype = SelectField('Type', choices=node_types)
+    device_types = [subtype for subtype in device_subtypes.items()]
+    subtype = SelectField('Type', choices=device_types)
     ip_address = TextField('IP address', [optional()])
     operating_system = TextField('Operating System', [optional()])
     os_version = TextField('OS version', [optional()])
@@ -48,11 +48,11 @@ class AddLink(AddObjectForm):
 
 
 def configure_form(cls):
-    cls.node_properties = node_public_properties
+    cls.device_properties = device_public_properties
     cls.link_properties = link_public_properties
-    for property in node_public_properties:
-        setattr(cls, 'node_' + property, TextField(property))
-        setattr(cls, 'node_' + property + '_regex', BooleanField('Regex'))
+    for property in device_public_properties:
+        setattr(cls, 'device_' + property, TextField(property))
+        setattr(cls, 'device_' + property + '_regex', BooleanField('Regex'))
     for property in link_public_properties:
         setattr(cls, 'link_' + property, TextField(property))
         setattr(cls, 'link_' + property + '_regex', BooleanField('Regex'))
@@ -66,5 +66,5 @@ class AddPoolForm(FlaskForm):
 
 
 class PoolObjectsForm(FlaskForm):
-    nodes = SelectMultipleField('Nodes', choices=())
+    devices = SelectMultipleField('Nodes', choices=())
     links = SelectMultipleField('Links', choices=())

@@ -72,15 +72,15 @@
   <script>
     var graph = {  
       "nodes":[
-        {% for node in nodes %}  
+        {% for device in devices %}  
           {  
-            "x": {{ node.id }},
-            "y": {{ node.id }},
-            "id": {{ name_to_id[node.name] }},
-            "real_id": {{ node.id }},
-            "name": "{{ node.name }}",
-            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + node.subtype + '.gif') }}",
-            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + node.subtype + '.gif') }}"
+            "x": {{ device.id }},
+            "y": {{ device.id }},
+            "id": {{ name_to_id[device.name] }},
+            "real_id": {{ device.id }},
+            "name": "{{ device.name }}",
+            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + device.subtype + '.gif') }}",
+            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + device.subtype + '.gif') }}"
           },
         {% endfor %}
       ],
@@ -98,7 +98,7 @@
   </script>
   <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script>
-    var node_fields = {{ node_fields|tojson|safe }};
+    var device_fields = {{ device_fields|tojson|safe }};
     var link_fields = {{ link_fields|tojson|safe }};
   </script>
   <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>

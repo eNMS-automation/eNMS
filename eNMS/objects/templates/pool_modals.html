@@ -22,11 +22,11 @@
                   </tr>
                   </thead>
                   <tbody>
-                  {% for property in form.node_properties %}
+                  {% for property in form.device_properties %}
                     <tr>
                     <td>{{ names[property] }}</td>
-                    <td>{{ form['node_' + property](class="form-control") }}</td>
-                    <td>{{ form['node_' + property + '_regex'](class="form-control") }}</td>
+                    <td>{{ form['device_' + property](class="form-control") }}</td>
+                    <td>{{ form['device_' + property + '_regex'](class="form-control") }}</td>
                     </tr>
                   {% endfor %}
                   </tbody>
@@ -85,7 +85,7 @@
                 <div class="form-group">
                   <label>Nodes</label>
                   <div class='form-group'>
-                    {{ pool_object_form.nodes(class="form-control", size=10) }}
+                    {{ pool_object_form.devices(class="form-control", size=10) }}
                   </div>
                   <label>Links</label>
                   <div class='form-group'>

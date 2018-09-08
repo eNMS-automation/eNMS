@@ -5,7 +5,7 @@ from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
-from eNMS.objects.models import Node, Pool
+from eNMS.objects.models import Device, Pool
 from eNMS.scripts.models import Job
 from eNMS.tasks.forms import CompareForm, SchedulingForm
 from eNMS.tasks.models import Task
@@ -43,7 +43,7 @@ def workflow_editor(workflow_id=None):
     workflow = retrieve(Workflow, id=workflow_id)
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
-    scheduling_form.devices.choices = Node.choices()
+    scheduling_form.devices.choices = Device.choices()
     scheduling_form.pools.choices = Pool.choices()
     add_existing_task_form.task.choices = Task.choices()
     return render_template(

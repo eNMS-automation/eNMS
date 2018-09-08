@@ -3,7 +3,7 @@ from os.path import join
 from simplekml import Color, Style
 
 from eNMS.base.properties import (
-    node_subtypes,
+    device_subtypes,
     link_subtypes,
     link_subtype_to_color
 )
@@ -20,7 +20,7 @@ blueprint = Blueprint(
 
 styles = {}
 
-for subtype in node_subtypes:
+for subtype in device_subtypes:
     point_style = Style()
     point_style.labelstyle.color = Color.blue
     path_icon = join(

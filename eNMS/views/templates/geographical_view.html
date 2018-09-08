@@ -83,12 +83,12 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var node_fields = {{ node_fields|tojson|safe }};
+    var device_fields = {{ device_fields|tojson|safe }};
     var link_fields = {{ link_fields|tojson|safe }};
-    var nodes = {{ nodes|tojson|safe }};
+    var devices = {{ devices|tojson|safe }};
     var links = {{ links|tojson|safe }};
     var labels = {{ labels|tojson|safe }};
-    var node_subtypes = {{ node_subtypes|tojson|safe }};
+    var device_subtypes = {{ device_subtypes|tojson|safe }};
     var link_colors = {{ link_colors|tojson|safe }};
     var parameters = {{ parameters|tojson|safe }};
     var view = '{{ view }}';

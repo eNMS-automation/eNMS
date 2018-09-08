@@ -229,40 +229,6 @@ class NapalmConfigScript(Script):
         results[device.name] = {'success': success, 'logs': result}
 
 
-class NapalmActionScript(Script):
-
-    __tablename__ = 'NapalmActionScript'
-
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
-    action = Column(String, unique=True)
-    device_multiprocessing = True
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'napalm_action',
-    }
-
-    def __init__(self, name, action):
-        self.name = name
-        self.action = action
-
-    def job(self, args):
-        task, device, results = args
-        try:
-            napalm_driver = napalm_connection(device)
-            napalm_driver.open()
-            getattr(napalm_driver, self.action)()
-            napalm_driver.close()
-        except Exception as e:
-            result = f'napalm {self.action} did not work because of {e}'
-            success = False
-        else:
-            result = self.action + ' OK'
-            success = True
-        results[device.name] = {'success': success, 'logs': result}
-
-
 class NapalmGettersScript(Script):
 
     __tablename__ = 'NapalmGettersScript'

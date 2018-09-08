@@ -8,7 +8,7 @@ from simplekml import Kml
 from subprocess import Popen
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import retrieve
+from eNMS.base.helpers import get_credentials, retrieve
 from eNMS.base.properties import node_subtypes, link_subtype_to_color
 from eNMS.base.models import Log
 from eNMS.objects.forms import AddNode, AddLink
@@ -18,7 +18,6 @@ from eNMS.base.properties import (
     node_public_properties,
     pretty_names
 )
-from eNMS.scripts.connections import get_credentials
 from eNMS.scripts.models import Job
 from eNMS.tasks.forms import SchedulingForm
 from eNMS.views import blueprint, styles
@@ -79,23 +78,14 @@ def view(view_type):
 @login_required
 def putty_connection(name):
     current_os, node = platform_system(), retrieve(Node, name=name)
-    username, password, _ = get_credentials(node, current_user)
+    username, password, _ = get_credentials(node)
     if current_os == 'Windows':
         path_putty = join(current_app.path, 'applications', 'putty.exe')
-        ssh_connection = '{} -ssh {}@{} -pw {}'.format(
-            path_putty,
-            username,
-            node.ip_address,
-            password
-        )
-        Popen(ssh_connection.split())
+        ssh = f'{path_putty} -ssh {username}@{node.ip_address} -pw {password}'
+        Popen(ssh.split())
     else:
-        arg = "gnome-terminal -- /bin/bash -c 'sshpass -p {} ssh {}@{}'".format(
-            password,
-            username,
-            node.ip_address
-        )
-        os_system(arg)
+        sshpass = f'"sshpass -p {password} ssh {username}@{node.ip_address}"'
+        os_system(f'gnome-terminal -- /bin/bash -c {sshpass}')
     return jsonify({'success': True})
 
 

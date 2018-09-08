@@ -84,7 +84,7 @@ class NetmikoConfigScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            netmiko_handler = netmiko_connection(self, task, node)
+            netmiko_handler = netmiko_connection(self, node)
             netmiko_handler.send_config_set(self.content.splitlines())
             result = f'configuration OK:\n\n{self.content}'
             success = True
@@ -125,7 +125,7 @@ class NetmikoValidationScript(Script):
         task, node, results = args
         success, result = True, {}
         try:
-            netmiko_handler = netmiko_connection(self, task, node)
+            netmiko_handler = netmiko_connection(self, node)
             for i in range(1, 4):
                 command = getattr(self, 'command' + str(i))
                 if not command:
@@ -176,7 +176,7 @@ class FileTransferScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            netmiko_handler = netmiko_connection(self, task, node)
+            netmiko_handler = netmiko_connection(self, node)
             transfer_dict = file_transfer(
                 netmiko_handler,
                 source_file=self.source_file,
@@ -214,7 +214,7 @@ class NapalmConfigScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            napalm_driver = napalm_connection(self, task, node)
+            napalm_driver = napalm_connection(node)
             napalm_driver.open()
             config = '\n'.join(self.content.splitlines())
             getattr(napalm_driver, self.action)(config=config)
@@ -250,7 +250,7 @@ class NapalmActionScript(Script):
     def job(self, args):
         task, node, results = args
         try:
-            napalm_driver = napalm_connection(self, task, node)
+            napalm_driver = napalm_connection(node)
             napalm_driver.open()
             getattr(napalm_driver, self.action)()
             napalm_driver.close()
@@ -281,7 +281,7 @@ class NapalmGettersScript(Script):
         task, node, results = args
         result = {}
         try:
-            napalm_driver = napalm_connection(self, task, node)
+            napalm_driver = napalm_connection(node)
             napalm_driver.open()
             for getter in self.getters:
                 try:

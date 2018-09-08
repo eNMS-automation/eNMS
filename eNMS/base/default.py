@@ -3,18 +3,25 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
 from eNMS import db
-from eNMS.admin.models import Parameters, SyslogServer
+from eNMS.admin.models import Parameters, SyslogServer, User
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
-from eNMS.objects.models import Pool
+from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.scripts.models import NetmikoConfigScript
 
+cisco_user = {
+    'name': 'cisco',
+    'email': 'cisco@cisco.com',
+    'password': 'cisco'
+}
 
-# @integrity_rollback
-# def create_default_user():
-#     user = User()
-#     db.session.commit()
+
+@integrity_rollback
+def create_default_user():
+    user = User(**cisco_user)
+    db.session.add(user)
+    db.session.commit()
 
 
 default_pools = (
@@ -92,13 +99,15 @@ def create_default_scripts():
         db.session.commit()
 
 
-# task_create_vrf_TEST = {
-#     'name': 'task_create_vrf_TEST',
-#     'waiting_time': '0',
-#     'devices': [retrieve(Device, name='router8')],
-#     'start_date': '',
-#     'end_date': '',
-#     'frequency': '',
-#     'do_not_run': 'y',
-#     'user': retrieve(User, name='cisco')
-# }
+@integrity_rollback
+def create_default_tasks():
+    task_create_vrf_TEST = {
+        'name': 'task_create_vrf_TEST',
+        'waiting_time': '0',
+        'devices': [retrieve(Device, name='router8')],
+        'start_date': '',
+        'end_date': '',
+        'frequency': '',
+        'do_not_run': 'y',
+        'user': retrieve(User, name='cisco')
+    }

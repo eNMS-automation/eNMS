@@ -116,31 +116,26 @@ def create_default_scripts():
 
 def create_default_tasks():
     dev, user = retrieve(Device, name='router8'), retrieve(User, name='cisco')
-    for task in (
-        {
-            'name': 'task_create_vrf_TEST',
+    scripts = [
+        retrieve(Script, name=script_name) for script_name in (
+            'create_vrf_TEST',
+            'check_vrf_TEST',
+            'delete_vrf_TEST',
+            'check_no_vrf_TEST'
+        )
+    ]
+    for script in scripts:
+        factory(ScriptTask, **{
+            'name': f'task_{script.name}',
             'waiting_time': '0',
             'devices': [dev],
-            'job': retrieve(Script, name='create_vrf_TEST'),
+            'job': script,
             'start_date': '',
             'end_date': '',
             'frequency': '',
             'do_not_run': 'y',
             'user': user
-        },
-        {
-            'name': 'task_delete_vrf_TEST',
-            'waiting_time': '0',
-            'devices': [dev],
-            'job': retrieve(Script, name='delete_vrf_TEST'),
-            'start_date': '',
-            'end_date': '',
-            'frequency': '',
-            'do_not_run': 'y',
-            'user': user
-        }
-    ):
-        factory(ScriptTask, **task)
+        })
 
 
 def create_default_workflows():

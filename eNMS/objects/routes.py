@@ -187,9 +187,9 @@ def import_topology():
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
                 cls, kwargs = process_kwargs(current_app, **values)
-                objects[object_type].append(factory(cls, **kwargs))
+                objects[object_type].append(factory(cls, **kwargs).serialized)
             db.session.commit()
-    return jsonify([obj.serialized for obj in objects])
+    return jsonify(objects)
 
 
 @blueprint.route('/process_pool', methods=['POST'])

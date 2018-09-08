@@ -86,6 +86,7 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
  * @param {properties} properties - Properties of the object.
  */
 function addObjectToTable(mode, type, properties) {
+  console.log(mode, type, properties);
   let values = [];
   for (let i = 0; i < fields.length; i++) {
     if (['longitude', 'latitude'].includes(fields[i])) {
@@ -100,6 +101,7 @@ function addObjectToTable(mode, type, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
   );
+  console.log(values, `#${type}-${properties.id}`);
   if (mode == 'edit') {
     table.row($(`#${type}-${properties.id}`)).data(values);
   } else {
@@ -122,12 +124,12 @@ function showModal(type) { // eslint-disable-line no-unused-vars
  * Create a new script.
  * @param {type} type - Type of script to create.
  */
-function importTopology(type) { // eslint-disable-line no-unused-vars
+function importTopology(objType) { // eslint-disable-line no-unused-vars
   if ($('#import-form').parsley().validate() ) {
     const formData = new FormData($('#import-form')[0]);
     $.ajax({
       type: 'POST',
-      url: `/objects/import_topology/${type}`,
+      url: '/objects/import_topology',
       dataType: 'json',
       data: formData,
       contentType: false,
@@ -135,7 +137,11 @@ function importTopology(type) { // eslint-disable-line no-unused-vars
       processData: false,
       async: false,
       success: function(objects) {
-        console.log(objects);
+        for (let i = 0; i < objects[objType].length; i++) {
+          const obj = objects[objType][i];
+          const mode = !$(`#${objType}-${obj.id}`).length ? 'edit' : 'create';
+          addObjectToTable(mode, objType.toLowerCase(), obj);
+        }
         alertify.notify('Topology successfully imported.', 'success', 5);
       },
     });

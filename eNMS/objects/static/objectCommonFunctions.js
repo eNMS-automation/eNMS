@@ -1,9 +1,7 @@
 /*
 global
-addObjectToTable: false
 alertify: false
-linkTable: false
-nodeTable: false
+table: false
 */
 
 /**

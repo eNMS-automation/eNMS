@@ -9,6 +9,7 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 (function() {
   for (let i = 0; i < links.length; i++) {
+    console.log(links[i]);
     addObjectToTable('create', 'link', links[i]);
   }
 })();

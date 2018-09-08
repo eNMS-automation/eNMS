@@ -99,7 +99,7 @@ def link_management():
     )
 
 
-@blueprint.route('/object_download', methods=['GET'])
+@blueprint.route('/object_download')
 @login_required
 def objects_download():
     nodes = Node.serialize()

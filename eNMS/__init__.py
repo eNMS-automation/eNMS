@@ -20,7 +20,6 @@ from eNMS.base.default import (
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.scripts.custom_script import create_custom_scripts
-from eNMS.scripts.models import create_default_scripts
 
 
 def register_extensions(app):
@@ -74,7 +73,6 @@ def configure_database(app):
     def create_default():
         db.create_all()
         create_default_parameters()
-        create_default_scripts()
         create_default_pools()
         try:
             create_default_syslog_server()

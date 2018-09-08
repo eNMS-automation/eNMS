@@ -122,19 +122,20 @@ function showModal(type) { // eslint-disable-line no-unused-vars
  * Create a new script.
  * @param {type} type - Type of script to create.
  */
-function importTopology() { // eslint-disable-line no-unused-vars
+function importTopology(type) { // eslint-disable-line no-unused-vars
   if ($('#import-form').parsley().validate() ) {
     const formData = new FormData($('#import-form')[0]);
     $.ajax({
       type: 'POST',
-      url: '/objects/import_topology',
+      url: `/objects/import_topology/${type}`,
       dataType: 'json',
       data: formData,
       contentType: false,
       cache: false,
       processData: false,
       async: false,
-      success: function() {
+      success: function(objects) {
+        console.log(objects);
         alertify.notify('Topology successfully imported.', 'success', 5);
       },
     });

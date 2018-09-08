@@ -1,3 +1,4 @@
+from collections import defaultdict
 from flask import current_app, jsonify, render_template, request, send_file
 from flask_login import login_required
 from passlib.hash import cisco_type7
@@ -174,7 +175,7 @@ def delete_object(obj_type, obj_id):
 @blueprint.route('/import_topology', methods=['POST'])
 @login_required
 def import_topology():
-    file = request.files['file']
+    objects, file = defaultdict(list), request.files['file']
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
         for object_type in ('Device', 'Link'):
@@ -186,9 +187,9 @@ def import_topology():
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
                 cls, kwargs = process_kwargs(current_app, **values)
-                factory(cls, **kwargs)
+                objects[object_type].append(factory(cls, **kwargs))
             db.session.commit()
-    return jsonify({'success': True})
+    return jsonify([obj.serialized for obj in objects])
 
 
 @blueprint.route('/process_pool', methods=['POST'])

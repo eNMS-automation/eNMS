@@ -78,6 +78,7 @@ def delete_object(script_id):
 @blueprint.route('/create_script/<script_type>', methods=['POST'])
 @login_required
 def create_script(script_type):
+    print(request.form)
     script = retrieve(Script, name=request.form['name'])
     form = dict(request.form.to_dict())
     form['getters'] = request.form.getlist('getters')

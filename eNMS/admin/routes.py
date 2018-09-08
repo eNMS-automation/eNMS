@@ -1,12 +1,5 @@
 from bcrypt import checkpw
-from flask import (
-    current_app,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    url_for
-)
+from flask import jsonify, redirect, render_template, request, url_for
 from flask_login import (
     current_user,
     login_required,
@@ -63,11 +56,7 @@ def login():
         password = str(request.form['password'])
         user = db.session.query(User).filter_by(name=name).first()
         if user:
-            if current_app.production:
-                match = checkpw(password.encode('utf8'), user.password)
-            else:
-                match = cisco_type7.verify(password, user.password)
-            if match:
+            if checkpw(password.encode('utf8'), user.password):
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
         else:

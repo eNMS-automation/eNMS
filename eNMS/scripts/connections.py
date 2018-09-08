@@ -1,8 +1,7 @@
 from napalm import get_network_driver
 from netmiko import ConnectHandler
-from passlib.hash import cisco_type7 as ct7
 
-from eNMS import scheduler
+from eNMS.base.helpers import get_credentials
 
 
 def netmiko_connection(script, task, node):

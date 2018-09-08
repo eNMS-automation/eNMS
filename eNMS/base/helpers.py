@@ -1,6 +1,7 @@
+from passlib.hash import cisco_type7 as ct7
 from sqlalchemy import exc
 
-from eNMS import db
+from eNMS import db, scheduler
 
 
 def retrieve(model, **kwargs):

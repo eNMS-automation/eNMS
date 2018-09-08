@@ -5,16 +5,6 @@ from passlib.hash import cisco_type7 as ct7
 from eNMS import scheduler
 
 
-def get_credentials(node, user):
-    if scheduler.app.production:
-        creds = scheduler.app.vault_client.read(
-            f'secret/data/device/{node.name}'
-        )['data']['data']
-        return creds['username'], creds['password'], creds['secret_password']
-    else:
-        return user.name, ct7.decode(user.password), node.secret_password
-
-
 def netmiko_connection(script, task, node):
     username, password, secret_password = get_credentials(node, task.user)
     return ConnectHandler(

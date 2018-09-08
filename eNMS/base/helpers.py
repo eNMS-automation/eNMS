@@ -36,3 +36,17 @@ def allowed_file(name, allowed_extensions):
     allowed_syntax = '.' in name
     allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions
     return allowed_syntax and allowed_extension
+
+
+def get_credentials(node, user):
+    if scheduler.app.production:
+        creds = scheduler.app.vault_client.read(
+            f'secret/data/device/{node.name}'
+        )['data']['data']
+        return creds['username'], creds['password'], creds['secret_password']
+    else:
+        return (
+            node.username,
+            ct7.decode(node.password),
+            ct7.decode(node.secret_password)
+        )

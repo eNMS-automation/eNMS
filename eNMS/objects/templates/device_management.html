@@ -14,7 +14,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var nodeFields = {{ node_fields|tojson|safe }};
+    var fields = {{ node_fields|tojson|safe }};
     var nodes = {{ nodes|tojson|safe }};
   </script>
   <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>

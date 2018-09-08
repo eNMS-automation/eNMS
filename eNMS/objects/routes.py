@@ -87,15 +87,11 @@ def objects_management():
 @blueprint.route('/device_management', methods=['GET', 'POST'])
 @login_required
 def device_management():
-    add_node_form = 
     if request.method == 'POST':
         file = request.files['file']
         if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
             book = open_workbook(file_contents=file.read())
-            try:
-                sheet = book.sheet_by_name('Node')
-            except XLRDError:
-                continue
+            sheet = book.sheet_by_name('Node')
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))

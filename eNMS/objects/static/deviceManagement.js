@@ -6,7 +6,7 @@ nodes: false
 nodeFields: false
 */
 
-const nodeTable = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 /**
  * Add object to the datatable.
@@ -16,8 +16,6 @@ const nodeTable = $('#table').DataTable(); // eslint-disable-line new-cap
  */
 function addObjectToTable(mode, type, properties) {
   let values = [];
-  const table = type == 'node' ? nodeTable : linkTable;
-  const fields = type == 'node' ? nodeFields : linkFields;
   for (let i = 0; i < fields.length; i++) {
     if (['longitude', 'latitude'].includes(fields[i])) {
       values.push(`${parseFloat(properties[fields[i]]).toFixed(2)}`);
@@ -43,9 +41,6 @@ function addObjectToTable(mode, type, properties) {
   for (let i = 0; i < nodes.length; i++) {
     addObjectToTable('create', 'node', nodes[i]);
   }
-  for (let i = 0; i < links.length; i++) {
-    addObjectToTable('create', 'link', links[i]);
-  }
 })();
 
 document.getElementById('file').onchange = function() {
@@ -53,11 +48,10 @@ document.getElementById('file').onchange = function() {
 };
 
 /**
- * Display the object modal.
- * @param {type} type - Node or link.
+ * Display the node modal.
  */
-function showModal(type) { // eslint-disable-line no-unused-vars
-  $('#title').text(`Add a new ${type}`);
-  $(`#edit-${type}-form`).trigger('reset');
-  $(`#edit-${type}`).modal('show');
+function showModal() { // eslint-disable-line no-unused-vars
+  $('#title').text('Add a new node');
+  $('#edit-node-form').trigger('reset');
+  $('#edit-node').modal('show');
 }

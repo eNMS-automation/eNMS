@@ -91,7 +91,7 @@ def link_management():
                 factory(cls, **kwargs)
             db.session.commit()
     return render_template(
-        'object_management.html',
+        'link_management.html',
         names=pretty_names,
         fields=link_public_properties,
         links=Link.serialize(),

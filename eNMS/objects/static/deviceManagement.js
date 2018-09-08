@@ -2,7 +2,7 @@
 global
 addObjectToTable: false
 nodes: false
-nodeFields: false
+fields: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line new-cap

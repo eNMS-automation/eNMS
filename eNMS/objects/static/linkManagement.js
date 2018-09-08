@@ -1,15 +1,15 @@
 /*
 global
 addObjectToTable: false
-nodes: false
-nodeFields: false
+links: false
+fields: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 (function() {
-  for (let i = 0; i < nodes.length; i++) {
-    addObjectToTable('create', 'node', nodes[i]);
+  for (let i = 0; i < links.length; i++) {
+    addObjectToTable('create', 'link', links[i]);
   }
 })();
 

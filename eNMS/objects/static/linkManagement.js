@@ -2,14 +2,12 @@
 global
 addObjectToTable: false
 links: false
-fields: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
 (function() {
   for (let i = 0; i < links.length; i++) {
-    console.log(links[i]);
     addObjectToTable('create', 'link', links[i]);
   }
 })();

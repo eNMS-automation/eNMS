@@ -72,7 +72,10 @@ updated_response = {
 
 def rest_api_test(user_client):
     # POST: object creation
-    response = post('http://127.0.0.1:5000/rest/object/device', data=dumps(device))
+    response = post(
+        'http://127.0.0.1:5000/rest/object/device',
+        data=dumps(device)
+    )
     assert loads(response.content) == expected_response
     assert len(Device.query.all()) == 1
     # GET: retrieve object properties

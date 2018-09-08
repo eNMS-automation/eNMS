@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+fields: false
 table: false
 */
 

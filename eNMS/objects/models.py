@@ -9,7 +9,10 @@ from eNMS.base.associations import (
     task_pool_table
 )
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.properties import link_public_properties, device_public_properties
+from eNMS.base.properties import (
+    link_public_properties,
+    device_public_properties
+)
 
 
 class Object(CustomBase):

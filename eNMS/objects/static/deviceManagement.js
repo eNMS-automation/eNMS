@@ -2,10 +2,9 @@
 global
 addObjectToTable: false
 devices: false
-fields: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
 (function() {
   for (let i = 0; i < devices.length; i++) {

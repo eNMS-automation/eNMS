@@ -185,7 +185,6 @@ def import_topology():
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                print(values)
                 cls, kwargs = process_kwargs(current_app, **values)
                 factory(cls, **kwargs)
             db.session.commit()
@@ -214,7 +213,9 @@ def get_pool_objects(pool_id):
 @login_required
 def save_pool_objects(pool_id):
     pool = retrieve(Pool, id=pool_id)
-    pool.devices = [retrieve(Device, id=id) for id in request.form.getlist('devices')]
+    pool.devices = [
+        retrieve(Device, id=id) for id in request.form.getlist('devices')
+    ]
     pool.links = [retrieve(Link, id=id) for id in request.form.getlist('links')]
     db.session.commit()
     return jsonify(pool.name)

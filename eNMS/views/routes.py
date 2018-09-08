@@ -1,8 +1,7 @@
 from flask import current_app, jsonify, render_template, request
-from flask_login import current_user, login_required
+from flask_login import login_required
 from os import system as os_system
 from os.path import join
-from passlib.hash import cisco_type7
 from platform import system as platform_system
 from simplekml import Kml
 from subprocess import Popen
@@ -51,7 +50,9 @@ def view(view_type):
     if 'view' in request.form:
         view = request.form['view']
     # name to id
-    name_to_id = {device.name: id for id, device in enumerate(Device.query.all())}
+    name_to_id = {
+        device.name: id for id, device in enumerate(Device.query.all())
+    }
     return render_template(
         f'{view_type}_view.html',
         pools=Pool.query.all(),

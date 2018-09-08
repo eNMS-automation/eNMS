@@ -45,7 +45,7 @@ def process_kwargs(app, **kwargs):
             )
         else:
             for arg in ('password', 'secret_password'):
-                kwargs[arg] = cisco_type7.hash(kwargs[arg])
+                kwargs[arg] = cisco_type7.hash(kwargs.get(arg, ''))
     return Link if 'source' in kwargs else Device, kwargs
 
 

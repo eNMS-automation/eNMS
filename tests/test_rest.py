@@ -3,7 +3,7 @@ from requests import delete, get, post, put
 from time import sleep
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.objects.models import Node
+from eNMS.objects.models import Device
 from eNMS.scripts.models import Script
 from eNMS.tasks.models import Task
 
@@ -74,14 +74,14 @@ def rest_api_test(user_client):
     # POST: object creation
     response = post('http://127.0.0.1:5000/rest/object/device', data=dumps(device))
     assert loads(response.content) == expected_response
-    assert len(Node.query.all()) == 1
+    assert len(Device.query.all()) == 1
     # GET: retrieve object properties
     response = get(
         'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
     assert loads(response.content) == expected_response
-    assert len(Node.query.all()) == 1
+    assert len(Device.query.all()) == 1
     # PUT: update object properties
     put('http://127.0.0.1:5000/rest/object/device', data=dumps(updated_device))
     response = get(
@@ -89,13 +89,13 @@ def rest_api_test(user_client):
         headers={'Accept': 'application/json'}
     )
     assert loads(response.content) == updated_response
-    assert len(Node.query.all()) == 1
+    assert len(Device.query.all()) == 1
     # DELETE: delete an object
     delete(
         'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
-    assert len(Node.query.all()) == 0
+    assert len(Device.query.all()) == 0
 
 
 post_script = ImmutableMultiDict([
@@ -154,7 +154,7 @@ def rest_script_test(user_client):
     assert len(Task.query.all()) == 1
     # wait a bit for the task to run
     sleep(30)
-    assert len(Node.query.all()) == 1
+    assert len(Device.query.all()) == 1
     user_client.post('/scripts/create_script/rest_call', data=delete_script)
     assert len(Script.query.all()) == 5
     user_client.post('/tasks/scheduler', data=delete_script_task)
@@ -165,4 +165,4 @@ def rest_script_test(user_client):
     )
     # wait a bit for the task to run
     sleep(30)
-    assert len(Node.query.all()) == 0
+    assert len(Device.query.all()) == 0

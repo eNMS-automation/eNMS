@@ -15,7 +15,8 @@ urls = {
         '/parameters'
     ),
     '/objects': (
-        '/object_management',
+        '/device_management',
+        '/link_management',
         '/pool_management'
     ),
     '/views': (

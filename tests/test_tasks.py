@@ -9,8 +9,8 @@ from tests.test_objects import create_from_file
 instant_task = ImmutableMultiDict([
     ('name', 'instant_task'),
     ('waiting_time', '0'),
-    ('nodes', '8'),
-    ('nodes', '9'),
+    ('devices', '8'),
+    ('devices', '9'),
     ('start_date', ''),
     ('end_date', ''),
     ('frequency', ''),
@@ -21,8 +21,8 @@ instant_task = ImmutableMultiDict([
 scheduled_task = ImmutableMultiDict([
     ('name', 'scheduled_task'),
     ('waiting_time', '0'),
-    ('nodes', '8'),
-    ('nodes', '9'),
+    ('devices', '8'),
+    ('devices', '9'),
     ('start_date', '30/03/2018 19:10:13'),
     ('end_date', '06/04/2018 19:10:13'),
     ('frequency', '3600'),

@@ -7,7 +7,7 @@ from eNMS.objects.models import Node
 from eNMS.scripts.models import Script
 from eNMS.tasks.models import Task
 
-node = {
+device = {
     "name": "router10",
     "description": "france",
     "model": "None",
@@ -38,7 +38,7 @@ expected_response = {
     "pools": []
 }
 
-updated_node = {
+updated_device = {
     "name": "router10",
     "description": "france",
     "model": "None",
@@ -72,27 +72,27 @@ updated_response = {
 
 def rest_api_test(user_client):
     # POST: object creation
-    response = post('http://127.0.0.1:5000/rest/object/node', data=dumps(node))
+    response = post('http://127.0.0.1:5000/rest/object/device', data=dumps(device))
     assert loads(response.content) == expected_response
     assert len(Node.query.all()) == 1
     # GET: retrieve object properties
     response = get(
-        'http://127.0.0.1:5000/rest/object/node/router10',
+        'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
     assert loads(response.content) == expected_response
     assert len(Node.query.all()) == 1
     # PUT: update object properties
-    put('http://127.0.0.1:5000/rest/object/node', data=dumps(updated_node))
+    put('http://127.0.0.1:5000/rest/object/device', data=dumps(updated_device))
     response = get(
-        'http://127.0.0.1:5000/rest/object/node/router10',
+        'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
     assert loads(response.content) == updated_response
     assert len(Node.query.all()) == 1
     # DELETE: delete an object
     delete(
-        'http://127.0.0.1:5000/rest/object/node/router10',
+        'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
     assert len(Node.query.all()) == 0
@@ -102,8 +102,8 @@ post_script = ImmutableMultiDict([
     ('name', 'create_router10'),
     ('description', 'POST creation'),
     ('call_type', 'POST'),
-    ('url', 'http://127.0.0.1:5000/rest/object/node'),
-    ('payload', dumps(node)),
+    ('url', 'http://127.0.0.1:5000/rest/object/device'),
+    ('payload', dumps(device)),
     ('username', ''),
     ('password', ''),
     ('content', '.*15.5(\\d)M.*'),
@@ -124,7 +124,7 @@ delete_script = ImmutableMultiDict([
     ('name', 'delete_router10'),
     ('description', 'DELETE'),
     ('call_type', 'DELETE'),
-    ('url', 'http://127.0.0.1:5000/rest/object/node/router10'),
+    ('url', 'http://127.0.0.1:5000/rest/object/device/router10'),
     ('payload', ''),
     ('username', ''),
     ('password', ''),

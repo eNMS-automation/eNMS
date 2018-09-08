@@ -2,7 +2,7 @@ from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.base.helpers import retrieve
-from eNMS.base.properties import node_subtypes, link_subtypes
+from eNMS.base.properties import device_subtypes, link_subtypes
 from eNMS.objects.models import Node, Link, Pool
 
 from tests.test_base import check_blueprints
@@ -12,7 +12,7 @@ from tests.test_base import check_blueprints
 # test the pool system
 
 
-def define_node(subtype, description):
+def define_device(subtype, description):
     return ImmutableMultiDict([
         ('name', subtype + description),
         ('type', 'Node'),
@@ -43,20 +43,20 @@ def define_link(subtype, source, destination):
 
 
 def test_manual_object_creation(user_client):
-    # we create two nodes per type
-    for subtype in node_subtypes:
+    # we create two devices per type
+    for subtype in device_subtypes:
         for description in ('desc1', 'desc2'):
-            obj_dict = define_node(subtype, description)
+            obj_dict = define_device(subtype, description)
             user_client.post('/objects/edit_object', data=obj_dict)
-    # for each type of link, we select the first 3 nodes in the node row
-    # and create a link between each pair of nodes (including loopback links)
+    # for each type of link, we select the first 3 devices in the device row
+    # and create a link between each pair of devices (including loopback links)
     for subtype in link_subtypes:
-        nodes = Node.query.all()
-        for source in nodes[:3]:
-            for destination in nodes[:3]:
+        devices = Device.query.all()
+        for source in devices[:3]:
+            for destination in devices[:3]:
                 obj_dict = define_link(subtype, source.name, destination.name)
                 user_client.post('/objects/edit_object', data=obj_dict)
-    # - exactly 16 nodes in total
+    # - exactly 16 devices in total
     assert len(Node.query.all()) == 16
     # - exactly 6*9 = 54 links in total
     assert len(Link.query.all()) == 54
@@ -64,7 +64,7 @@ def test_manual_object_creation(user_client):
 
 def create_from_file(client, file):
     with open(join(client.application.path, 'projects', file), 'rb') as f:
-        data = dict(add_nodes='', file=f)
+        data = dict(add_devices='', file=f)
         client.post('/objects/object_management', data=data)
 
 
@@ -77,21 +77,21 @@ def test_object_creation_europe(user_client):
 
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_type(user_client):
-    create_from_file(user_client, 'node_counters.xls')
+    create_from_file(user_client, 'device_counters.xls')
     assert len(Node.query.all()) == 27
     assert not Link.query.all()
 
 
-nodes = ['router' + str(i) for i in range(5, 20)]
+devices = ['router' + str(i) for i in range(5, 20)]
 links = ['link' + str(i) for i in range(4, 15)]
 
 
 @check_blueprints('', '/objects', '/views')
-def test_node_deletion(user_client):
+def test_device_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
-    for node_name in nodes:
-        node = retrieve(Node, name=node_name)
-        user_client.post(f'/objects/delete/node/{node.id}')
+    for device_name in devices:
+        device = retrieve(Node, name=device_name)
+        user_client.post(f'/objects/delete/device/{device.id}')
     assert len(Node.query.all()) == 18
     assert len(Link.query.all()) == 18
 
@@ -108,15 +108,15 @@ def test_link_deletion(user_client):
 
 pool1 = ImmutableMultiDict([
     ('name', 'pool1'),
-    ('node_location', 'france|spain'),
-    ('node_location_regex', 'y'),
+    ('device_location', 'france|spain'),
+    ('device_location_regex', 'y'),
     ('link_name', 'link[1|2].'),
     ('link_name_regex', 'y'),
 ])
 
 pool2 = ImmutableMultiDict([
     ('name', 'pool2'),
-    ('node_location', 'france'),
+    ('device_location', 'france'),
     ('link_name', 'l.*k\\S3'),
     ('link_name_regex', 'y'),
 ])
@@ -128,9 +128,9 @@ def test_pool_management(user_client):
     user_client.post('/objects/process_pool', data=pool1)
     user_client.post('/objects/process_pool', data=pool2)
     p1, p2 = retrieve(Pool, name='pool1'), retrieve(Pool, name='pool2')
-    assert len(p1.nodes) == 21
+    assert len(p1.devices) == 21
     assert len(p1.links) == 20
-    assert len(p2.nodes) == 12
+    assert len(p2.devices) == 12
     assert len(p2.links) == 4
     assert len(Pool.query.all()) == 5
     user_client.post(f'/objects/delete_pool/{p1.id}')

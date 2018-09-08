@@ -1,10 +1,12 @@
 from flask import current_app, jsonify, render_template, request, send_file
 from flask_login import login_required
+from passlib.hash import cisco_type7
+from pathlib import Path
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 import xlwt
-from pathlib import Path
+
 
 from eNMS import db
 from eNMS.base.custom_base import factory
@@ -31,15 +33,19 @@ def process_kwargs(app, **kwargs):
             'source': source,
             'destination': destination
         })
-    elif app.production:
-        app.vault_client.write(
-            f'secret/data/device/{kwargs["name"]}',
-            data={
-                'username': kwargs.pop('username'),
-                'password': kwargs.pop('password'),
-                'secret_password': kwargs.pop('secret_password')
-            }
-        )
+    else:
+        if app.production:
+            app.vault_client.write(
+                f'secret/data/device/{kwargs["name"]}',
+                data={
+                    'username': kwargs.pop('username'),
+                    'password': kwargs.pop('password'),
+                    'secret_password': kwargs.pop('secret_password')
+                }
+            )
+        else:
+            for arg in ('password', 'secret_password'):
+                kwargs[arg] = cisco_type7.hash(kwargs[arg])
     return Link if 'source' in kwargs else Node, kwargs
 
 

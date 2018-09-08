@@ -117,3 +117,26 @@ function showModal(type) { // eslint-disable-line no-unused-vars
   $(`#edit-${type}-form`).trigger('reset');
   $(`#edit-${type}`).modal('show');
 }
+
+/**
+ * Create a new script.
+ * @param {type} type - Type of script to create.
+ */
+function importTopology() { // eslint-disable-line no-unused-vars
+  if ($('#import-form').parsley().validate() ) {
+    const formData = new FormData($('#import-form')[0]);
+    $.ajax({
+      type: 'POST',
+      url: '/objects/import_topology',
+      dataType: 'json',
+      data: formData,
+      contentType: false,
+      cache: false,
+      processData: false,
+      async: false,
+      success: function() {
+        alertify.notify('Topology successfully imported.', 'success', 5);
+      },
+    });
+  }
+}

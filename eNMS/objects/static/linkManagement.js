@@ -13,5 +13,5 @@ const table = $('#table').DataTable(); // eslint-disable-line
 })();
 
 document.getElementById('file').onchange = function() {
-  $('#form').submit();
+  importTopology();
 };

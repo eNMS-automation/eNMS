@@ -3,7 +3,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
 from eNMS import db
-from eNMS.admin.models import Parameters, SyslogServer, User
+from eNMS.admin.models import Parameters, User
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
@@ -137,7 +137,6 @@ def create_other_scripts():
         'url': 'http://127.0.0.1:5000/rest/object/device/router8',
         'payload': ''
     })
-    
 
 
 def create_netmiko_tasks():

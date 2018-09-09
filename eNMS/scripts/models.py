@@ -288,7 +288,7 @@ class NapalmGettersScript(Script):
             results['logs'] = {device.name: result}
             results['payload'] = {device.name: payloads}
             results['expected'] = self.content_match
-        if 'success' in results and results['success']:
+        if 'success' not in results or results['success']:
             results['success'] = success
 
 

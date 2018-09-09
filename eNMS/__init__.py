@@ -4,7 +4,6 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
 from importlib import import_module
-from warnings import warn
 import logging
 
 # for the tests, we set expire_on_commit to false

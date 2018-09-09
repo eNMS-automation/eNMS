@@ -212,7 +212,6 @@ function deleteEdge(edgeId) {
  * @return {visTask}.
  */
 function taskToNode(task) {
-  console.log(task)
   return {
     id: task.id,
     label: task.name,

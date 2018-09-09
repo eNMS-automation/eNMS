@@ -58,7 +58,7 @@ def create_default_network_topology(app):
             db.session.commit()
 
 
-def create_default_netmiko_scripts():
+def create_netmiko_scripts():
     for script in (
         {
             'type': NetmikoConfigScript,
@@ -107,7 +107,7 @@ def create_default_netmiko_scripts():
         factory(script.pop('type'), **script)
 
 
-def create_default_netmiko_tasks():
+def create_netmiko_tasks():
     scripts = [
         retrieve(Script, name=script_name) for script_name in (
             'create_vrf_TEST',
@@ -127,7 +127,7 @@ def create_default_netmiko_tasks():
         })
 
 
-def create_default_netmiko_workflow():
+def create_netmiko_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
             'task_create_vrf_TEST',
@@ -156,3 +156,12 @@ def create_default_netmiko_workflow():
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
     })
+
+def create_default_scripts():
+    create_netmiko_scripts()
+
+def create_default_tasks():
+    create_netmiko_tasks()
+
+def create_default_workflows():
+    create_netmiko_workflow()

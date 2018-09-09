@@ -18,7 +18,6 @@ from eNMS.base.default import (
     create_default_parameters,
     create_default_pools,
     create_default_scripts,
-    create_default_syslog_server,
     create_default_tasks,
     create_default_user,
     create_default_workflows

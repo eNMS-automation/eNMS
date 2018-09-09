@@ -97,6 +97,16 @@ class Task(CustomBase):
             if x.type == type and x.workflow == workflow
         ]
 
+    def get_payloads(self, workflow, runtime):
+        payloads = {}
+        for edge_type in ('success', 'failure'):
+            for task in self.task_neighbors(workflow, edge_type):
+                if 'success' in task.logs[runtime]:
+                    success = task.logs[runtime]['success']
+                    if (edge_type == 'success' and success
+                        or edge_type == 'failure' and not success):
+                            payloads[task.name] = task.logs[runtime]['payload']
+
     def schedule(self, run_now=True):
         now = datetime.now() + timedelta(seconds=15)
         runtime = now if run_now else self.aps_date('start_date')
@@ -159,12 +169,13 @@ class ScriptTask(Task):
             targets |= set(pool.devices)
         return targets
 
-    def job(self, runtime):
+    def job(self, runtime, workflow=None):
         results = {}
+        payloads = self.get_payloads(workflow) if workflow else None
         if self.script.device_multiprocessing:
             targets = self.compute_targets()
             pool = ThreadPool(processes=len(self.devices))
-            args = [(self, device, results) for device in targets]
+            args = [(self, device, results, payloads) for device in targets]
             pool.map(self.script.job, args)
             pool.close()
             pool.join()
@@ -173,7 +184,7 @@ class ScriptTask(Task):
                 for device in targets
             )
         else:
-            results = self.script.job(self, results)
+            results = self.script.job(self, results, payloads)
         self.logs[runtime] = results
         db.session.commit()
         return results
@@ -203,7 +214,7 @@ class WorkflowTask(Task):
         self.workflow = data.pop('job')
         super().__init__(**data)
 
-    def job(self, runtime):
+    def job(self, runtime, workflow=None):
         start_task = retrieve(Task, id=self.workflow.start_task)
         if not start_task:
             return False, {runtime: 'No start task in the workflow.'}
@@ -213,7 +224,9 @@ class WorkflowTask(Task):
             new_layer = set()
             for task in layer:
                 visited.add(task)
-                task_results = task.job(runtime)
+                task_results = task.job(runtime, workflow)
+                if task.id == self.workflow.end_task:
+                    results['success'] = task_results['success']
                 edge_type = 'success' if task_results['success'] else 'failure'
                 for neighbor in task.task_neighbors(self.workflow, edge_type):
                     if neighbor not in visited:
@@ -222,7 +235,6 @@ class WorkflowTask(Task):
                 sleep(task.waiting_time)
             layer = new_layer
         self.logs[runtime] = results
-        # + add results['success'] with end taks
         db.session.commit()
         return results
 

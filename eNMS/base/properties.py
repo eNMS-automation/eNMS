@@ -83,7 +83,8 @@ workflow_public_properties = (
     'name',
     'description',
     'type',
-    'start_task'
+    'start_task',
+    'end_task'
 )
 
 workflow_edge_properties = (

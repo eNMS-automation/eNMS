@@ -214,6 +214,7 @@ function deleteEdge(edgeId) {
  * @return {visTask}.
  */
 function taskToNode(task) {
+  console.log(task.id, workflow.end_task);
   return {
     id: task.id,
     label: task.name,
@@ -221,7 +222,7 @@ function taskToNode(task) {
     x: task.x,
     y: task.y,
     color: task.id == workflow.start_task ? 'green' :
-      workflow.end_task ? 'red' : '#D2E5FF',
+      task.id == workflow.end_task ? 'red' : '#D2E5FF',
   };
 }
 
@@ -275,7 +276,6 @@ function startTask() {
       success: function() {
         nodes.update({id: start.id, color: 'green'});
         workflow.start_task = start.id;
-        alertify.notify('Start task updated.', 'success', 5);
       },
     });
     alertify.notify(`Task ${start.label} set as start.`, 'success', 5);
@@ -299,7 +299,6 @@ function endTask() {
       success: function() {
         nodes.update({id: end.id, color: 'red'});
         workflow.end_task = end.id;
-        alertify.notify('Start task updated.', 'success', 5);
       },
     });
     alertify.notify(`Task ${end.label} set as end.`, 'success', 5);

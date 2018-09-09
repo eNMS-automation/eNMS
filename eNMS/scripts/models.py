@@ -94,7 +94,11 @@ class NetmikoConfigScript(Script):
             netmiko_handler.disconnect()
         except Exception:
             pass
-        results[device.name] = {'success': success, 'logs': result}
+        results[device.name] = {
+            'success': success,
+            'payload': None,
+            'logs': result
+        }
 
 
 class NetmikoValidationScript(Script):
@@ -148,7 +152,11 @@ class NetmikoValidationScript(Script):
             netmiko_handler.disconnect()
         except Exception:
             pass
-        results[device.name] = {'success': success, 'logs': result}
+        results[device.name] = {
+            'success': success,
+            'payload': None,
+            'logs': result
+        }
 
 
 class FileTransferScript(Script):
@@ -192,7 +200,11 @@ class FileTransferScript(Script):
         except Exception as e:
             result = f'netmiko config did not work because of {e}'
             success = False
-        results[device.name] = {'success': success, 'logs': result}
+        results[device.name] = {
+            'success': success,
+            'payload': None,
+            'logs': result
+        }
 
 
 class NapalmConfigScript(Script):
@@ -225,7 +237,11 @@ class NapalmConfigScript(Script):
         else:
             result = f'configuration OK:\n\n{config}'
             success = True
-        results[device.name] = {'success': success, 'logs': result}
+        results[device.name] = {
+            'success': success,
+            'payload': None,
+            'logs': result
+        }
 
 
 class NapalmGettersScript(Script):
@@ -263,6 +279,7 @@ class NapalmGettersScript(Script):
             success = False
         results[device.name] = {
             'success': success,
+            'payload': None,
             'logs': result,
             'expected': self.content_match
         }
@@ -307,9 +324,17 @@ class AnsibleScript(Script):
                 success = bool(search(self.content_match, str(output)))
             else:
                 success = self.content_match in str(output)
-            results[device.name] = {'success': success, 'logs': output}
+            results[device.name] = {
+                'success': success,
+                'payload': None,
+                'logs': output
+                }
         except Exception as e:
-            results[device.name] = {'success': False, 'logs': str(e)}
+            results[device.name] = {
+                'success': False,
+                'payload': None,
+                'logs': str(e)
+                }
 
 
 class RestCallScript(Script):

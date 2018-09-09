@@ -62,8 +62,8 @@ def create_netmiko_scripts():
     for script in (
         {
             'type': NetmikoConfigScript,
-            'name': 'create_vrf_TEST',
-            'description': 'Create a VRF "TEST"',
+            'name': 'netmiko_create_vrf_TEST',
+            'description': 'Create a VRF "TEST" with Netmiko',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'content_type': 'simple',
@@ -73,7 +73,7 @@ def create_netmiko_scripts():
         },
         {
             'type': NetmikoValidationScript,
-            'name': 'check_vrf_TEST',
+            'name': 'netmiko_check_vrf_TEST',
             'description': 'Check that the vrf "TEST" is configured',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -83,7 +83,7 @@ def create_netmiko_scripts():
         },
         {
             'type': NetmikoConfigScript,
-            'name': 'delete_vrf_TEST',
+            'name': 'netmiko_delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -94,7 +94,7 @@ def create_netmiko_scripts():
         },
         {
             'type': NetmikoValidationScript,
-            'name': 'check_no_vrf_TEST',
+            'name': 'netmiko_check_no_vrf_TEST',
             'description': 'Check that the vrf "TEST" is NOT configured',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -107,13 +107,25 @@ def create_netmiko_scripts():
         factory(script.pop('type'), **script)
 
 
+def create_napalm_script():
+    factory(NapalmConfigScript, **{
+        'name': 'napalm_create_vrf_TEST',
+        'description': 'Create a VRF "TEST" with Napalm',
+        'vendor': 'Cisco',
+        'operating_system': 'IOS',
+        'content_type': 'simple',
+        'action': 'load_merge_candidate',
+        'content': 'ip vrf TEST'
+    })
+
+
 def create_netmiko_tasks():
     scripts = [
         retrieve(Script, name=script_name) for script_name in (
-            'create_vrf_TEST',
-            'check_vrf_TEST',
-            'delete_vrf_TEST',
-            'check_no_vrf_TEST'
+            'netmiko_create_vrf_TEST',
+            'netmiko_check_vrf_TEST',
+            'netmiko_delete_vrf_TEST',
+            'netmiko_check_no_vrf_TEST'
         )
     ]
     for script in scripts:
@@ -125,6 +137,18 @@ def create_netmiko_tasks():
             'do_not_run': 'y',
             'user': retrieve(User, name='cisco')
         })
+
+
+def create_napalm_script():
+    factory(NapalmConfigScript, **{
+        'name': 'napalm_create_vrf_TEST',
+        'description': 'Create a VRF "TEST" with Napalm',
+        'vendor': 'Cisco',
+        'operating_system': 'IOS',
+        'content_type': 'simple',
+        'action': 'load_merge_candidate',
+        'content': 'ip vrf TEST'
+    })
 
 
 def create_netmiko_workflow():
@@ -159,6 +183,7 @@ def create_netmiko_workflow():
 
 def create_default_scripts():
     create_netmiko_scripts()
+    create_napalm_script
 
 def create_default_tasks():
     create_netmiko_tasks()

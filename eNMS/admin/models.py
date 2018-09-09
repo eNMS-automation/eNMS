@@ -1,5 +1,6 @@
 from bcrypt import gensalt, hashpw
-from flask_login import current_app, UserMixin
+from flask import current_app
+from flask_login import UserMixin
 from sqlalchemy import Column, Float, Integer, String
 from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
@@ -24,11 +25,10 @@ class User(CustomBase, UserMixin):
     email = Column(String(120), unique=True)
     access_rights = Column(String(120))
     password = Column(String(30))
-    secret_password = Column(String(30))
     tasks = relationship('Task', back_populates='user')
 
     def update(self, **kwargs):
-        hash = hashpw(kwargs['password'].encode('utf8'), gensalt())
+        hash = hashpw(kwargs.pop('password').encode('utf8'), gensalt())
         if current_app.production:
             app.vault_client.write(
                 f'secret/data/user/{kwargs["name"]}',

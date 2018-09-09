@@ -107,7 +107,7 @@ def create_default_scripts():
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
             'command1': 'show ip vrf',
-            'content_match1': '^((?!gegr).)*$',
+            'content_match1': '^((?!TEST).)*$',
             'content_match_regex1': 'y'
         },
     ):
@@ -127,7 +127,7 @@ def create_default_tasks():
         factory(ScriptTask, **{
             'name': f'task_{script.name}',
             'devices': [retrieve(Device, name='router8')],
-            'waiting_time': 10 if script.name = 'delete_vrf_TEST' else 0
+            'waiting_time': 10 if script.name == 'delete_vrf_TEST' else 0,
             'job': script,
             'do_not_run': 'y',
             'user': retrieve(User, name='cisco')

@@ -13,7 +13,7 @@ from eNMS.scripts.models import (
     NetmikoValidationScript,
     Script
 )
-from eNMS.tasks.models import ScriptTask, Task
+from eNMS.tasks.models import ScriptTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
 
@@ -127,12 +127,8 @@ def create_default_tasks():
     for script in scripts:
         factory(ScriptTask, **{
             'name': f'task_{script.name}',
-            'waiting_time': '0',
             'devices': [dev],
             'job': script,
-            'start_date': '',
-            'end_date': '',
-            'frequency': '',
             'do_not_run': 'y',
             'user': user
         })
@@ -161,3 +157,9 @@ def create_default_workflows():
             'destination': tasks[i + 1]
         })
     workflow.start_task = tasks[0].id
+    workflow_task = factory(WorkflowTask, **{
+        'name': 'task_netmiko_VRF_workflow',
+        'job': workflow,
+        'do_not_run': 'y',
+        'user': retrieve(User, name='cisco')
+    })

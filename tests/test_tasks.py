@@ -35,9 +35,9 @@ scheduled_task = ImmutableMultiDict([
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('tasks/scheduler', data=instant_task)
-    assert len(Task.query.all()) == 5
-    user_client.post('tasks/scheduler', data=scheduled_task)
     assert len(Task.query.all()) == 6
+    user_client.post('tasks/scheduler', data=scheduled_task)
+    assert len(Task.query.all()) == 7
 
 
 google_earth_dict = ImmutableMultiDict([

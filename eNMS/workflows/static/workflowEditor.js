@@ -69,7 +69,6 @@ function displayWorkflow(wf) {
       $('.node-selection').hide();
     }
   });
-  nodes.map((n) => graph.moveNode(n.id, n.x, n.y));
   return graph;
 }
 
@@ -83,7 +82,6 @@ if (workflow) {
     success: function(wf) {
       workflow = wf;
       graph = displayWorkflow(wf);
-      nodes.map((n) => graph.moveNode(n.id, n.x, n.y));
     },
   });
 }
@@ -214,12 +212,13 @@ function deleteEdge(edgeId) {
  * @return {visTask}.
  */
 function taskToNode(task) {
+  console.log(task)
   return {
     id: task.id,
     label: task.name,
     type: task.type,
-    x: task.x,
-    y: task.y,
+    x: task.positions[workflow.name] ? task.positions[workflow.name][0] : 0,
+    y: task.positions[workflow.name] ? task.positions[workflow.name][1] : 0,
     color: task.id == workflow.start_task ? 'green' :
       task.id == workflow.end_task ? 'red' : '#D2E5FF',
   };
@@ -370,7 +369,7 @@ $('#workflow-name').on('change', function() {
 function savePositions() {
   $.ajax({
     type: 'POST',
-    url: '/workflows/save_positions',
+    url: `/workflows/save_positions/${workflow.id}`,
     dataType: 'json',
     contentType: 'application/json;charset=UTF-8',
     data: JSON.stringify(graph.getPositions(), null, '\t'),

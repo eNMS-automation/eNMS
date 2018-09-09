@@ -124,8 +124,7 @@ task_serialized_properties = (
     'start_date',
     'end_date',
     'frequency',
-    'x',
-    'y',
+    'positions',
     'waiting_time',
 )
 
@@ -234,6 +233,7 @@ pretty_names = {
     'os_version': 'OS version',
     'pass_device_properties': 'Pass device properties to the playbook',
     'password': 'Password',
+    'positions': 'Positions',
     'recurrent': 'Recurrent',
     'secret_password': 'Secret password',
     'source': 'Source',

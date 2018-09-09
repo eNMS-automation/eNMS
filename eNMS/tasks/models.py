@@ -39,8 +39,7 @@ class Task(CustomBase):
     frequency = Column(String(120))
     start_date = Column(String)
     end_date = Column(String)
-    x = Column(Integer, default=0)
-    y = Column(Integer, default=0)
+    positions = Column(MutableDict.as_mutable(PickleType), default={})
     waiting_time = Column(Integer, default=0)
     workflows = relationship(
         'Workflow',

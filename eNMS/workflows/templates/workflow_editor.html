@@ -71,7 +71,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    var workflow = {{ workflow|tojson|safe }};
+    let workflow = {{ workflow|tojson|safe }};
   </script>
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>

@@ -234,11 +234,11 @@ function taskToNode(task) {
 function edgeToEdge(edge) {
   return {
     id: edge.id,
-    label: edge.type,
+    label: edge.type ? 'Success' : 'Failure',
     type: edge.type,
     from: edge.source.id,
     to: edge.destination.id,
-    color: {color: edge.type == 'success' ? 'green' : 'red'},
+    color: {color: edge.type ? 'green' : 'red'},
     arrows: {to: {enabled: true}},
   };
 }

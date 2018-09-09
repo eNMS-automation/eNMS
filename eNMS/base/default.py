@@ -13,6 +13,7 @@ from eNMS.scripts.models import (
     NapalmGettersScript,
     NetmikoConfigScript,
     NetmikoValidationScript,
+    RestCallScript,
     Script
 )
 from eNMS.tasks.models import ScriptTask, Task, WorkflowTask
@@ -125,8 +126,16 @@ def create_other_scripts():
     factory(NapalmGettersScript, **{
         'name': 'script_napalm_getter',
         'description': 'Getters: facts / Interfaces / Interfaces IP',
-        'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip'],
+        'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip']
     })
+    factory(RestCallScript, **{
+        'name': 'GET_router8',
+        'description': 'Use GET ReST call on router8',
+        'call_type': 'GET',
+        'url': 'http://127.0.0.1:5000/rest/object/device/router8',
+        'payload': ''
+    })
+    
 
 
 def create_netmiko_tasks():
@@ -177,8 +186,17 @@ def create_other_tasks():
         'job': retrieve(Script, name='script_napalm_getter'),
         'devices': [device],
         'do_not_run': 'y',
-        'user': cisco
+        'user': user
     })
+    factory(ScriptTask, **{
+        'name': 'task_script_napalm_getter',
+        'waiting_time': '0',
+        'job': retrieve(Script, name='script_napalm_getter'),
+        'devices': [device],
+        'do_not_run': 'y',
+        'user': user
+    })
+    {'name': 'task_GET_router8', 'waiting_time': '0', 'job': GET_router8, 'start_date': '', 'end_date': '', 'frequency': '', 'do_not_run': 'y', 'devices': [], 'pools': [], 'user': cisco}
 
 
 def create_netmiko_workflow():

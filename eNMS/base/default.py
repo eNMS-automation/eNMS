@@ -141,13 +141,21 @@ def create_netmiko_tasks():
 
 
 def create_napalm_task():
+    device = retrieve(Device, name='router8')
+    user = retrieve(User, name='cisco')
     factory(ScriptTask, **{
         'name': 'task_napalm_create_vrf_TEST',
-        'waiting_time': '0',
         'job': retrieve(Script, name='napalm_create_vrf_TEST'),
-        'devices': [retrieve(Device, name='router8')],
+        'devices': [device],
         'do_not_run': 'y',
-        'user': retrieve(User, name='cisco')
+        'user': user
+    })
+    factory(ScriptTask, **{
+        'name': 'task_napalm_rollback',
+        'job': Napalm Rollback,
+        'devices': [device],
+        'do_not_run': 'y',
+        'user': user
     })
 
 
@@ -182,6 +190,8 @@ def create_netmiko_workflow():
     })
 
 
+
+
 def create_default_scripts():
     create_netmiko_scripts()
     create_napalm_script()
@@ -190,6 +200,7 @@ def create_default_scripts():
 def create_default_tasks():
     create_netmiko_tasks()
     create_napalm_task()
+
 
 def create_default_workflows():
     create_netmiko_workflow()

@@ -9,6 +9,7 @@ from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.scripts.models import (
+    NapalmConfigScript,
     NetmikoConfigScript,
     NetmikoValidationScript,
     Script
@@ -139,15 +140,14 @@ def create_netmiko_tasks():
         })
 
 
-def create_napalm_script():
-    factory(NapalmConfigScript, **{
-        'name': 'napalm_create_vrf_TEST',
-        'description': 'Create a VRF "TEST" with Napalm',
-        'vendor': 'Cisco',
-        'operating_system': 'IOS',
-        'content_type': 'simple',
-        'action': 'load_merge_candidate',
-        'content': 'ip vrf TEST'
+def create_napalm_task():
+    factory(ScriptTask, **{
+        'name': 'task_napalm_create_vrf_TEST',
+        'waiting_time': '0',
+        'job': retrieve(Script, name='napalm_create_vrf_TEST'),
+        'devices': [retrieve(Device, name='router8')],
+        'do_not_run': 'y',
+        'user': retrieve(User, name='cisco')
     })
 
 
@@ -181,12 +181,15 @@ def create_netmiko_workflow():
         'user': retrieve(User, name='cisco')
     })
 
+
 def create_default_scripts():
     create_netmiko_scripts()
-    create_napalm_script
+    create_napalm_script()
+
 
 def create_default_tasks():
     create_netmiko_tasks()
+    create_napalm_task()
 
 def create_default_workflows():
     create_netmiko_workflow()

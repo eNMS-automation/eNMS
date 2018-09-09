@@ -131,8 +131,8 @@ def test_base_scripts(user_client):
             '/scripts/create_script/napalm_config',
             data=napalm_jinja2_script
         )
-    assert len(NapalmConfigScript.query.all()) == 1
-    assert len(Script.query.all()) == 10
+    assert len(NapalmConfigScript.query.all()) == 2
+    assert len(Script.query.all()) == 13
     netmiko_j2_script = db.session.query(Script).filter_by(
         name='netmiko_subif'
     ).first()
@@ -149,7 +149,7 @@ def test_base_scripts(user_client):
         data=file_transfer_script
     )
     assert len(FileTransferScript.query.all()) == 1
-    assert len(Script.query.all()) == 11
+    assert len(Script.query.all()) == 14
 
 
 getters_dict = ImmutableMultiDict([
@@ -169,7 +169,7 @@ def test_getters_script(user_client):
         '/scripts/create_script/napalm_getters',
         data=getters_dict
     )
-    assert len(NapalmGettersScript.query.all()) == 1
+    assert len(NapalmGettersScript.query.all()) == 2
 
 
 ansible_script = ImmutableMultiDict([
@@ -190,4 +190,4 @@ def test_ansible_scripts(user_client):
         data=ansible_script
     )
     assert len(AnsibleScript.query.all()) == 1
-    assert len(Script.query.all()) == 8
+    assert len(Script.query.all()) == 11

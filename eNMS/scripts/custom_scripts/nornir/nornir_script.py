@@ -13,11 +13,12 @@ parameters = {
 
 def job(args):
     # Script that uses Nornir to ping a device
-    task, device, results = args
+    task, device, results, payloads = args
     nornir_inventory = {device.name: {'nornir_ip': device.ip_address}}
     external = Nornir(inventory=Inventory(nornir_inventory), dry_run=True)
     ping_result = external.run(networking.tcp_ping, ports=[23, 443])
     results[device.name] = {
         'success': all(res for res in ping_result[device.name].result.keys()),
+        'payload': None,
         'logs': str(ping_result[device.name].result)
     }

@@ -81,7 +81,7 @@ class NetmikoConfigScript(Script):
     }
 
     def job(self, args):
-        task, device, results = args
+        task, device, results, payloads = args
         try:
             netmiko_handler = netmiko_connection(self, device)
             netmiko_handler.send_config_set(self.content.splitlines())
@@ -125,7 +125,7 @@ class NetmikoValidationScript(Script):
     }
 
     def job(self, args):
-        task, device, results = args
+        task, device, results, payloads = args
         success, result = True, {}
         try:
             netmiko_handler = netmiko_connection(self, device)
@@ -181,7 +181,7 @@ class FileTransferScript(Script):
     }
 
     def job(self, args):
-        task, device, results = args
+        task, device, results, payloads = args
         try:
             netmiko_handler = netmiko_connection(self, device)
             transfer_dict = file_transfer(
@@ -223,7 +223,7 @@ class NapalmConfigScript(Script):
     }
 
     def job(self, args):
-        task, device, results = args
+        task, device, results, payloads = args
         try:
             napalm_driver = napalm_connection(device)
             napalm_driver.open()
@@ -259,7 +259,7 @@ class NapalmGettersScript(Script):
     }
 
     def job(self, args):
-        task, device, results = args
+        task, device, results, payloads = args
         result = {}
         try:
             napalm_driver = napalm_connection(device)
@@ -306,7 +306,7 @@ class AnsibleScript(Script):
     }
 
     def job(self, args):
-        task, device, results = args
+        task, device, results, payloads = args
         try:
             arguments = self.arguments.split()
             command = ['ansible-playbook']
@@ -361,7 +361,7 @@ class RestCallScript(Script):
         'polymorphic_identity': 'rest_call',
     }
 
-    def job(self, task, results):
+    def job(self, task, results, payloads):
         try:
             if self.call_type in ('GET', 'DELETE'):
                 result = self.request_dict[self.call_type](
@@ -381,7 +381,11 @@ class RestCallScript(Script):
                 success = self.content_match in str(result)
         except Exception as e:
             result, success = str(e), False
-        return {'success': success, 'logs': result}
+        return {
+            'success': success,
+            'payload': None,
+            'logs': result
+        }
 
 
 type_to_class = {

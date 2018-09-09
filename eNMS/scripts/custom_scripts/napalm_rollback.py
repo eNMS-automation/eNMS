@@ -10,7 +10,7 @@ parameters = {
 
 
 def job(args):
-    task, device, results = args
+    task, device, results, payloads = args
     try:
         napalm_driver = napalm_connection(device)
         napalm_driver.open()
@@ -22,4 +22,8 @@ def job(args):
     else:
         result = 'Rollback successful'
         success = True
-    results[device.name] = {'success': success, 'logs': result}
+        results[device.name] = {
+            'success': success,
+            'payload': None,
+            'logs': result
+        }

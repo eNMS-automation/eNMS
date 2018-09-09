@@ -157,7 +157,7 @@ def create_default_workflows():
             'destination': tasks[i + 1]
         })
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
-    workflow_task = factory(WorkflowTask, **{
+    factory(WorkflowTask, **{
         'name': 'task_netmiko_VRF_workflow',
         'job': workflow,
         'do_not_run': 'y',

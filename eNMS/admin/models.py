@@ -30,7 +30,7 @@ class User(CustomBase, UserMixin):
     def update(self, **kwargs):
         hash = hashpw(kwargs.pop('password').encode('utf8'), gensalt())
         if current_app.production:
-            app.vault_client.write(
+            current_app.vault_client.write(
                 f'secret/data/user/{kwargs["name"]}',
                 data={'password': hash}
             )

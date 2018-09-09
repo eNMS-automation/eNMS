@@ -214,7 +214,6 @@ function deleteEdge(edgeId) {
  * @return {visTask}.
  */
 function taskToNode(task) {
-  console.log(task.id, workflow.end_task);
   return {
     id: task.id,
     label: task.name,

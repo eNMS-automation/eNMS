@@ -328,13 +328,13 @@ class AnsibleScript(Script):
                 'success': success,
                 'payload': None,
                 'logs': output
-                }
+            }
         except Exception as e:
             results[device.name] = {
                 'success': False,
                 'payload': None,
                 'logs': str(e)
-                }
+            }
 
 
 class RestCallScript(Script):

@@ -101,6 +101,7 @@ def delete_node(workflow_id, task_id):
 @blueprint.route('/add_edge/<wf_id>/<type>/<source>/<dest>', methods=['POST'])
 @login_required
 def add_edge(wf_id, type, source, dest):
+    print(type)
     source_task = retrieve(Task, id=source)
     destination_task = retrieve(Task, id=dest)
     workflow_edge = factory(WorkflowEdge, **{

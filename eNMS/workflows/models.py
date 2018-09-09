@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import backref, relationship
 
 from eNMS.base.associations import task_workflow_table
@@ -12,7 +12,7 @@ class WorkflowEdge(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    type = Column(String)
+    type = Column(Boolean)
     source_id = Column(Integer, ForeignKey('Task.id'))
     source = relationship(
         'Task',

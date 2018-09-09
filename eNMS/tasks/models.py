@@ -99,13 +99,12 @@ class Task(CustomBase):
 
     def get_payloads(self, workflow, runtime):
         payloads = {}
-        for edge_type in ('success', 'failure'):
+        for edge_type in (True, False):
             for task in self.task_neighbors(workflow, edge_type):
                 if 'success' in task.logs[runtime]:
                     success = task.logs[runtime]['success']
-                    if (edge_type == 'success' and success
-                        or edge_type == 'failure' and not success):
-                            payloads[task.name] = task.logs[runtime]['payload']
+                    if edge_type == success:
+                        payloads[task.name] = task.logs[runtime]['payload']
 
     def schedule(self, run_now=True):
         now = datetime.now() + timedelta(seconds=15)
@@ -225,10 +224,10 @@ class WorkflowTask(Task):
             for task in layer:
                 visited.add(task)
                 task_results = task.job(runtime, workflow)
+                success = task_results['success']
                 if task.id == self.workflow.end_task:
-                    results['success'] = task_results['success']
-                edge_type = 'success' if task_results['success'] else 'failure'
-                for neighbor in task.task_neighbors(self.workflow, edge_type):
+                    results['success'] = success
+                for neighbor in task.task_neighbors(self.workflow, success):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
                 results[task.name] = task_results

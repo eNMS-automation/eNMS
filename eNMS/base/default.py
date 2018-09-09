@@ -152,7 +152,7 @@ def create_default_workflows():
         factory(WorkflowEdge, **{
             'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
             'workflow': workflow,
-            'type': 'success',
+            'type': True,
             'source': tasks[i],
             'destination': tasks[i + 1]
         })

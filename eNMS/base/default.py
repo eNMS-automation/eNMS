@@ -126,11 +126,13 @@ def create_other_scripts():
     factory(NapalmGettersScript, **{
         'name': 'script_napalm_getter',
         'description': 'Getters: facts / Interfaces / Interfaces IP',
+        'content_match': '',
         'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip']
     })
     factory(RestCallScript, **{
         'name': 'GET_router8',
         'description': 'Use GET ReST call on router8',
+        'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/router8',
         'payload': ''
@@ -191,6 +193,7 @@ def create_other_tasks():
     factory(ScriptTask, **{
         'name': 'task_GET_router8',
         'job': retrieve(Script, name='GET_router8'),
+        'devices': [],
         'do_not_run': 'y',
         'user': user
     })
@@ -302,4 +305,4 @@ def create_default_tasks():
 def create_default_workflows():
     create_netmiko_workflow()
     create_napalm_workflow()
-    create_other_workflow
+    create_other_workflow()

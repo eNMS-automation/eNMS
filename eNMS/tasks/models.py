@@ -21,7 +21,9 @@ from eNMS.base.properties import cls_to_properties
 def job(task_name, runtime):
     with scheduler.app.app_context():
         task = retrieve(Task, name=task_name)
-        task.job(runtime)
+        workflow = task.workflow if task.type == 'WorkflowTask' else None
+        print('a', workflow)
+        task.job(runtime, workflow)
 
 
 class Task(CustomBase):
@@ -100,7 +102,7 @@ class Task(CustomBase):
         payloads = {}
         for edge_type in (True, False):
             for task in self.task_neighbors(workflow, edge_type):
-                if 'success' in task.logs[runtime]:
+                if runtime in task.logs and 'success' in task.logs[runtime]:
                     success = task.logs[runtime]['success']
                     if edge_type == success:
                         payloads[task.name] = task.logs[runtime]['payload']
@@ -167,9 +169,11 @@ class ScriptTask(Task):
             targets |= set(pool.devices)
         return targets
 
-    def job(self, runtime, workflow=None):
+    def job(self, runtime, workflow):
         results = {}
-        payloads = self.get_payloads(workflow) if workflow else None
+        print(workflow)
+        payloads = self.get_payloads(workflow, runtime) if workflow else None
+        print(payloads)
         if self.script.device_multiprocessing:
             targets = self.compute_targets()
             pool = ThreadPool(processes=len(self.devices))

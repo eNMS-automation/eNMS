@@ -65,13 +65,6 @@ class Device(Object):
         'polymorphic_identity': 'Device',
     }
 
-    @property
-    def serialized(self):
-        properties = self.properties
-        for prop in ('tasks', 'pools'):
-            properties[prop] = [obj.properties for obj in getattr(self, prop)]
-        return properties
-
 
 class Link(Object):
 

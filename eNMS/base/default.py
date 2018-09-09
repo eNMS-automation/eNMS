@@ -168,6 +168,23 @@ def create_napalm_task():
     })
 
 
+def create_napalm_task():
+    device = retrieve(Device, name='router8')
+    user = retrieve(User, name='cisco')
+    factory(ScriptTask, **{
+        'name': 'task_script_napalm_getter',
+        'waiting_time': '0',
+        'job': script_napalm_getter,
+        'devices': [device],
+        'do_not_run': 'y',
+        'user': cisco
+    })
+
+
+
+
+
+
 def create_netmiko_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
@@ -243,7 +260,3 @@ def create_default_tasks():
 def create_default_workflows():
     create_netmiko_workflow()
     create_napalm_workflow()
-
-
-
-# {'name': 'task_script_napalm_getter', 'waiting_time': '0', 'job': script_napalm_getter, 'devices': [router8], 'start_date': '', 'end_date': '', 'frequency': '', 'do_not_run': 'y', 'pools': [], 'user': cisco}

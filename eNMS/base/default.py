@@ -10,6 +10,7 @@ from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.scripts.models import (
     NapalmConfigScript,
+    NapalmGettersScript,
     NetmikoConfigScript,
     NetmikoValidationScript,
     Script
@@ -117,6 +118,14 @@ def create_napalm_script():
         'content_type': 'simple',
         'action': 'load_merge_candidate',
         'content': 'ip vrf TEST'
+    })
+
+
+def create_other_scripts():
+    factory(NapalmGettersScript, **{
+        'name': 'script_napalm_getter',
+        'description': 'Getters: facts / Interfaces / Interfaces IP',
+        'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip'],
     })
 
 
@@ -234,3 +243,7 @@ def create_default_tasks():
 def create_default_workflows():
     create_netmiko_workflow()
     create_napalm_workflow()
+
+
+
+# {'name': 'task_script_napalm_getter', 'waiting_time': '0', 'job': script_napalm_getter, 'devices': [router8], 'start_date': '', 'end_date': '', 'frequency': '', 'do_not_run': 'y', 'pools': [], 'user': cisco}

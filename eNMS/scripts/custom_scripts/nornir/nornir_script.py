@@ -19,6 +19,6 @@ def job(args):
     ping_result = external.run(networking.tcp_ping, ports=[23, 443])
     results[device.name] = {
         'success': all(res for res in ping_result[device.name].result.keys()),
-        'payload': None,
+        'payload': payloads,
         'logs': str(ping_result[device.name].result)
     }

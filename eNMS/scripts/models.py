@@ -96,7 +96,7 @@ class NetmikoConfigScript(Script):
             pass
         results[device.name] = {
             'success': success,
-            'payload': None,
+            'payload': payloads,
             'logs': result
         }
 
@@ -154,7 +154,7 @@ class NetmikoValidationScript(Script):
             pass
         results[device.name] = {
             'success': success,
-            'payload': None,
+            'payload': payloads,
             'logs': result
         }
 
@@ -202,7 +202,7 @@ class FileTransferScript(Script):
             success = False
         results[device.name] = {
             'success': success,
-            'payload': None,
+            'payload': payloads,
             'logs': result
         }
 
@@ -239,7 +239,7 @@ class NapalmConfigScript(Script):
             success = True
         results[device.name] = {
             'success': success,
-            'payload': None,
+            'payload': payloads,
             'logs': result
         }
 
@@ -277,9 +277,13 @@ class NapalmGettersScript(Script):
         except Exception as e:
             result = f'script did not work:\n{e}'
             success = False
+        if isinstance(payloads, dict):
+            payloads[self.name] = result
+        else:
+            payloads = {self.name: result}
         results[device.name] = {
             'success': success,
-            'payload': None,
+            'payload': payloads,
             'logs': result,
             'expected': self.content_match
         }
@@ -326,13 +330,13 @@ class AnsibleScript(Script):
                 success = self.content_match in str(output)
             results[device.name] = {
                 'success': success,
-                'payload': None,
+                'payload': payloads,
                 'logs': output
             }
         except Exception as e:
             results[device.name] = {
                 'success': False,
-                'payload': None,
+                'payload': payloads,
                 'logs': str(e)
             }
 
@@ -379,11 +383,15 @@ class RestCallScript(Script):
                 success = bool(search(self.content_match, str(result)))
             else:
                 success = self.content_match in str(result)
+            if isinstance(payloads, dict):
+                payloads[self.name] = result
+            else:
+                payloads = {self.name: result}
         except Exception as e:
             result, success = str(e), False
         return {
             'success': success,
-            'payload': None,
+            'payload': payloads,
             'logs': result
         }
 

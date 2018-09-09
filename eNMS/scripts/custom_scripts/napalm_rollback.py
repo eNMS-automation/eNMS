@@ -24,6 +24,6 @@ def job(args):
         success = True
         results[device.name] = {
             'success': success,
-            'payload': None,
+            'payload': payloads,
             'logs': result
         }

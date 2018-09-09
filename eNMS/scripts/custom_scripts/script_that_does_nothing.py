@@ -12,8 +12,9 @@ def job(args):
     task, device, results, payloads = args
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
+    payloads[self.name] = 'script that did nothing'
     results[device.name] = {
         'success': True,
-        'payload': 'nothing',
+        'payload': payloads,
         'logs': 'what will be displayed in the logs'
     }

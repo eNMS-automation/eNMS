@@ -115,7 +115,6 @@ def create_default_scripts():
 
 
 def create_default_tasks():
-    dev, user = retrieve(Device, name='router8'), retrieve(User, name='cisco')
     scripts = [
         retrieve(Script, name=script_name) for script_name in (
             'create_vrf_TEST',
@@ -127,10 +126,11 @@ def create_default_tasks():
     for script in scripts:
         factory(ScriptTask, **{
             'name': f'task_{script.name}',
-            'devices': [dev],
+            'devices': [retrieve(Device, name='router8')],
+            'waiting_time': 10 if script.name = 'delete_vrf_TEST' else 0
             'job': script,
             'do_not_run': 'y',
-            'user': user
+            'user': retrieve(User, name='cisco')
         })
 
 

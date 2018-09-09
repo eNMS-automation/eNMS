@@ -51,6 +51,7 @@ class CustomBase(db.Model):
 
 
 def factory(cls, **kwargs):
+    print(kwargs)
     instance = retrieve(cls, name=kwargs['name'])
     if instance:
         instance.update(**kwargs)

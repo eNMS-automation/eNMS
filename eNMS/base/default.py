@@ -42,13 +42,6 @@ def create_default_parameters():
 
 
 @integrity_rollback
-def create_default_syslog_server():
-    syslog_server = SyslogServer(ip_address='0.0.0.0', port=514)
-    db.session.add(syslog_server)
-    db.session.commit()
-
-
-@integrity_rollback
 def create_default_network_topology(app):
     with open(join(app.path, 'projects', 'defaults.xls'), 'rb') as f:
         book = open_workbook(file_contents=f.read())
@@ -65,7 +58,7 @@ def create_default_network_topology(app):
             db.session.commit()
 
 
-def create_default_scripts():
+def create_default_netmiko_scripts():
     for script in (
         {
             'type': NetmikoConfigScript,
@@ -114,7 +107,7 @@ def create_default_scripts():
         factory(script.pop('type'), **script)
 
 
-def create_default_tasks():
+def create_default_netmiko_tasks():
     scripts = [
         retrieve(Script, name=script_name) for script_name in (
             'create_vrf_TEST',
@@ -134,7 +127,7 @@ def create_default_tasks():
         })
 
 
-def create_default_workflows():
+def create_default_netmiko_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
             'task_create_vrf_TEST',

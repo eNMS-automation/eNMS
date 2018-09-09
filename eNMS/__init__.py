@@ -81,10 +81,6 @@ def configure_database(app):
         create_default_parameters()
         create_default_network_topology(app)
         create_default_pools()
-        try:
-            create_default_syslog_server()
-        except Exception as e:
-            warn(str(e))
         create_default_scripts()
         create_custom_scripts()
         create_default_tasks()

@@ -152,7 +152,7 @@ def create_napalm_task():
     })
     factory(ScriptTask, **{
         'name': 'task_napalm_rollback',
-        'job': Napalm Rollback,
+        'job': retrieve(Script, name='Napalm Rollback'),
         'devices': [device],
         'do_not_run': 'y',
         'user': user
@@ -162,10 +162,10 @@ def create_napalm_task():
 def create_netmiko_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
-            'task_create_vrf_TEST',
-            'task_check_vrf_TEST',
-            'task_delete_vrf_TEST',
-            'task_check_no_vrf_TEST'
+            'task_netmiko_create_vrf_TEST',
+            'task_netmiko_check_vrf_TEST',
+            'task_netmiko_delete_vrf_TEST',
+            'task_netmiko_check_no_vrf_TEST'
         )
     ]
     workflow = factory(Workflow, **{
@@ -190,6 +190,35 @@ def create_netmiko_workflow():
     })
 
 
+def create_napalm_workflow():
+    tasks = [
+        retrieve(Task, name=task_name) for task_name in (
+            'task_napalm_create_vrf_TEST',
+            'task_netmiko_check_vrf_TEST',
+            'task_napalm_rollback',
+            'task_netmiko_check_no_vrf_TEST'
+        )
+    ]
+    workflow = factory(Workflow, **{
+        'name': 'Napalm_VRF_workflow',
+        'description': 'Create and delete a VRF with Napalm',
+        'tasks': tasks
+    })
+    for i in range(len(tasks) - 1):
+        factory(WorkflowEdge, **{
+            'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
+            'workflow': workflow,
+            'type': True,
+            'source': tasks[i],
+            'destination': tasks[i + 1]
+        })
+    workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
+    factory(WorkflowTask, **{
+        'name': 'task_napalm_VRF_workflow',
+        'job': workflow,
+        'do_not_run': 'y',
+        'user': retrieve(User, name='cisco')
+    })
 
 
 def create_default_scripts():
@@ -204,3 +233,4 @@ def create_default_tasks():
 
 def create_default_workflows():
     create_netmiko_workflow()
+    create_napalm_workflow()

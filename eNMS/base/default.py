@@ -127,7 +127,7 @@ def create_default_tasks():
         factory(ScriptTask, **{
             'name': f'task_{script.name}',
             'devices': [retrieve(Device, name='router8')],
-            'waiting_time': 10 if script.name == 'delete_vrf_TEST' else 0,
+            'waiting_time': 3 if script.name == 'delete_vrf_TEST' else 0,
             'job': script,
             'do_not_run': 'y',
             'user': retrieve(User, name='cisco')
@@ -156,7 +156,7 @@ def create_default_workflows():
             'source': tasks[i],
             'destination': tasks[i + 1]
         })
-    workflow.start_task = tasks[0].id
+    workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
     workflow_task = factory(WorkflowTask, **{
         'name': 'task_netmiko_VRF_workflow',
         'job': workflow,

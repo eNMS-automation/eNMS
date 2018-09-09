@@ -131,6 +131,15 @@ def set_as_start(workflow_id, task_id):
     return jsonify({'success': True})
 
 
+@blueprint.route('/set_as_end/<workflow_id>/<task_id>', methods=['POST'])
+@login_required
+def set_as_end(workflow_id, task_id):
+    workflow = retrieve(Workflow, id=workflow_id)
+    workflow.end_task = task_id
+    db.session.commit()
+    return jsonify({'success': True})
+
+
 @blueprint.route('/save_positions', methods=['POST'])
 @login_required
 def save_positions():

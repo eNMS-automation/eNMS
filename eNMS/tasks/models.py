@@ -168,13 +168,15 @@ class ScriptTask(Task):
             pool.map(self.script.job, args)
             pool.close()
             pool.join()
-            success = all(results[device.name]['success'] for device in targets)
+            results['success'] = all(
+                results[device.name]['success']
+                for device in targets
+            )
         else:
             results = self.script.job(self, results)
-            success = results['success']
         self.logs[runtime] = results
         db.session.commit()
-        return success, results
+        return results
 
     @property
     def serialized(self):
@@ -206,24 +208,23 @@ class WorkflowTask(Task):
         if not start_task:
             return False, {runtime: 'No start task in the workflow.'}
         layer, visited = {start_task}, set()
-        result, logs = True, {}
+        results = {}
         while layer:
             new_layer = set()
             for task in layer:
                 visited.add(task)
-                success, task_logs = task.job(str(datetime.now()))
-                if not success:
-                    result = False
-                edge_type = 'success' if success else 'failure'
+                task_results = task.job(runtime)
+                edge_type = 'success' if task_results['success'] else 'failure'
                 for neighbor in task.task_neighbors(self.workflow, edge_type):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
-                logs[task.name] = task_logs
+                results[task.name] = task_results
                 sleep(task.waiting_time)
             layer = new_layer
-        self.logs[runtime] = logs
+        self.logs[runtime] = results
+        # + add results['success'] with end taks
         db.session.commit()
-        return result, logs
+        return results
 
     @property
     def serialized(self):

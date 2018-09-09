@@ -220,7 +220,8 @@ function taskToNode(task) {
     type: task.type,
     x: task.x,
     y: task.y,
-    color: task.id == workflow.start_task ? 'green' : '#D2E5FF',
+    color: task.id == workflow.start_task ? 'green' :
+      workflow.end_task ? 'red' : '#D2E5FF',
   };
 }
 
@@ -278,6 +279,30 @@ function startTask() {
       },
     });
     alertify.notify(`Task ${start.label} set as start.`, 'success', 5);
+  }
+}
+
+/**
+ * Set a task as end of the workflow.
+ */
+function endTask() {
+  let end = nodes.get(graph.getSelectedNodes()[0]);
+  if (end.length == 0 || !end.id) {
+    alertify.notify('You must select a task first.', 'error', 5);
+  } else {
+    if (workflow.end_task != 'None') {
+      nodes.update({id: workflow.end_task, color: '#D2E5FF'});
+    }
+    $.ajax({
+      type: 'POST',
+      url: `/workflows/set_as_end/${workflow.id}/${end.id}`,
+      success: function() {
+        nodes.update({id: end.id, color: 'red'});
+        workflow.end_task = end.id;
+        alertify.notify('Start task updated.', 'success', 5);
+      },
+    });
+    alertify.notify(`Task ${end.label} set as end.`, 'success', 5);
   }
 }
 
@@ -362,6 +387,7 @@ const action = {
   'Logs': showTaskLogs,
   'Compare': compareTaskLogs,
   'Set as start': startTask,
+  'Set as end': endTask,
   'Add new task': showSchedulingModal,
   'Add existing task': showExistingTaskModal,
   'Delete selection': deleteSelection,

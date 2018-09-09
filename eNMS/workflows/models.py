@@ -51,6 +51,7 @@ class Workflow(Job):
     task = relationship('WorkflowTask', back_populates='workflow')
     edges = relationship('WorkflowEdge', back_populates='workflow')
     start_task = Column(Integer)
+    end_task = Column(Integer)
 
     default_properties = (
         'name',

@@ -281,12 +281,15 @@ class NapalmGettersScript(Script):
             payloads[self.name] = result
         else:
             payloads = {self.name: result}
-        results[device.name] = {
-            'success': success,
-            'payload': payloads,
-            'logs': result,
-            'expected': self.content_match
-        }
+        if 'logs' in results:
+            results['logs'][device.name] = result
+            results['payload'][device.name] = payloads
+        else:
+            results['logs'] = {device.name: result}
+            results['payload'] = {device.name: payloads}
+            results['expected'] = self.content_match
+        if 'success' in results and results['success']:
+            results['success'] = success
 
 
 class AnsibleScript(Script):

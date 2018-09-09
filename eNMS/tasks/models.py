@@ -92,6 +92,12 @@ class Task(CustomBase):
             pass
         db.session.commit()
 
+    def task_sources(self, workflow, type):
+        return [
+            x.source for x in self.sources
+            if x.type == type and x.workflow == workflow
+        ]
+
     def task_neighbors(self, workflow, type):
         return [
             x.destination for x in self.destinations
@@ -101,11 +107,13 @@ class Task(CustomBase):
     def get_payloads(self, workflow, runtime):
         payloads = {}
         for edge_type in (True, False):
-            for task in self.task_neighbors(workflow, edge_type):
+            for task in self.task_sources(workflow, edge_type):
+                print(task, edge_type)
                 if runtime in task.logs and 'success' in task.logs[runtime]:
                     success = task.logs[runtime]['success']
                     if edge_type == success:
                         payloads[task.name] = task.logs[runtime]['payload']
+        return payloads
 
     def schedule(self, run_now=True):
         now = datetime.now() + timedelta(seconds=15)
@@ -181,10 +189,7 @@ class ScriptTask(Task):
             pool.map(self.script.job, args)
             pool.close()
             pool.join()
-            results['success'] = all(
-                results[device.name]['success']
-                for device in targets
-            )
+            results['success'] = True
         else:
             results = self.script.job(self, results, payloads)
         self.logs[runtime] = results

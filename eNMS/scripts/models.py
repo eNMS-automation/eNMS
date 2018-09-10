@@ -31,19 +31,14 @@ def multiprocessing(function):
     def wrapper(self, args):
         task, device, results, payloads = args
         success, result, payload = function(self, *args)
-        if isinstance(payloads, dict):
-            payloads[self.name] = result
-        else:
-            payloads = {self.name: result}
         if 'logs' in results:
-            results['logs'][device.name] = result
-            results['payload'][device.name] = payloads
+            results['logs'][device.name] = payload
+            results['payload'][device.name] = result
         else:
             results['logs'] = {device.name: result}
-            results['payload'] = {device.name: payloads}
+            results['payload'] = {device.name: payload}
         if 'success' not in results or results['success']:
             results['success'] = success
-        print(results)
     return wrapper
 
 

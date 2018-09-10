@@ -1,4 +1,4 @@
-
+from eNMS.scripts.models import multiprocessing
 
 parameters = {
     'name': 'script that does nothing',
@@ -10,12 +10,7 @@ parameters = {
 
 
 @multiprocessing
-def job(task, device, results, payloads):
+def job(script, task, device, results, payloads):
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
-    payloads['script that does nothing'] = 'script that did nothing'
-    results[device.name] = {
-        'success': True,
-        'payload': payloads,
-        'logs': 'what will be displayed in the logs'
-    }
+    return True, 'logs', 'payload'

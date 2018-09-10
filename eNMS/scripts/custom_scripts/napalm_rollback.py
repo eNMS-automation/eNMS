@@ -11,8 +11,7 @@ parameters = {
 
 
 @multiprocessing
-def job(args):
-    task, device, results, payloads = args
+def job(script, task, device, results, payloads):
     try:
         napalm_driver = napalm_connection(device)
         napalm_driver.open()
@@ -24,8 +23,4 @@ def job(args):
     else:
         result = 'Rollback successful'
         success = True
-        results[device.name] = {
-            'success': success,
-            'payload': payloads,
-            'logs': result
-        }
+    return success, result, None

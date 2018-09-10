@@ -32,15 +32,8 @@ class CustomScript(Script):
         self.__dict__.update(**kwargs)
 
     def job(self, args):
-        try:
-            script_module = load_module(self.module_location)
-            return getattr(script_module, 'job')(args)
-        except Exception as e:
-            if len(args) == 2:
-                return {'success': False, 'logs': str(e)}
-            else:
-                _, device, results = args
-                results[device.name] = {'success': False, 'logs': str(e)}
+        script_module = load_module(self.module_location)
+        return getattr(script_module, 'job')(self, args)
 
 
 type_to_class['custom_script'] = CustomScript

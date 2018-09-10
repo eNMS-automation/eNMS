@@ -27,6 +27,26 @@ from eNMS.scripts.connections import napalm_connection, netmiko_connection
 from eNMS.scripts.properties import type_to_properties
 
 
+def multiprocessing(function):
+    def wrapper(self, args):
+        task, device, results, payloads = args
+        success, result, payload = function(self, *args)
+        if isinstance(payloads, dict):
+            payloads[self.name] = result
+        else:
+            payloads = {self.name: result}
+        if 'logs' in results:
+            results['logs'][device.name] = result
+            results['payload'][device.name] = payloads
+        else:
+            results['logs'] = {device.name: result}
+            results['payload'] = {device.name: payloads}
+            results['expected'] = self.content_match
+        if 'success' not in results or results['success']:
+            results['success'] = success
+    return wrapper
+
+
 class Job(CustomBase):
 
     __tablename__ = 'Job'
@@ -80,25 +100,21 @@ class NetmikoConfigScript(Script):
         'polymorphic_identity': 'netmiko_config',
     }
 
-    def job(self, args):
-        task, device, results, payloads = args
+    @multiprocessing
+    def job(self, task, device, results, payloads):
         try:
             netmiko_handler = netmiko_connection(self, device)
             netmiko_handler.send_config_set(self.content.splitlines())
             result = f'configuration OK:\n\n{self.content}'
             success = True
+            try:
+                netmiko_handler.disconnect()
+            except Exception:
+                pass
         except Exception as e:
             result = f'netmiko config did not work because of {e}'
             success = False
-        try:
-            netmiko_handler.disconnect()
-        except Exception:
-            pass
-        results[device.name] = {
-            'success': success,
-            'payload': payloads,
-            'logs': result
-        }
+        return success, result, None
 
 
 class NetmikoValidationScript(Script):
@@ -124,7 +140,8 @@ class NetmikoValidationScript(Script):
         'polymorphic_identity': 'netmiko_validation',
     }
 
-    def job(self, args):
+    @multiprocessing
+    def job(self, task, device, results, payloads):
         task, device, results, payloads = args
         success, result = True, {}
         try:
@@ -135,28 +152,21 @@ class NetmikoValidationScript(Script):
                     continue
                 output = netmiko_handler.send_command(command)
                 expected = getattr(self, 'content_match' + str(i))
-                result[command] = {
-                    'output': output,
-                    'expected': expected
-                }
+                result[command] = {'output': output, 'expected': expected}
                 if getattr(self, 'content_match_regex' + str(i)):
                     if not bool(search(expected, str(output))):
                         success = False
                 else:
                     if expected not in str(output):
                         success = False
+            try:
+                netmiko_handler.disconnect()
+            except Exception:
+                pass
         except Exception as e:
-            results[device.name] = f'netmiko did not work because of {e}'
+            result = f'netmiko did not work because of {e}'
             success = False
-        try:
-            netmiko_handler.disconnect()
-        except Exception:
-            pass
-        results[device.name] = {
-            'success': success,
-            'payload': payloads,
-            'logs': result
-        }
+        return success, result, None
 
 
 class FileTransferScript(Script):
@@ -180,8 +190,8 @@ class FileTransferScript(Script):
         'polymorphic_identity': 'file_transfer',
     }
 
-    def job(self, args):
-        task, device, results, payloads = args
+    @multiprocessing
+    def job(self, task, device, results, payloads):
         try:
             netmiko_handler = netmiko_connection(self, device)
             transfer_dict = file_transfer(
@@ -200,11 +210,7 @@ class FileTransferScript(Script):
         except Exception as e:
             result = f'netmiko config did not work because of {e}'
             success = False
-        results[device.name] = {
-            'success': success,
-            'payload': payloads,
-            'logs': result
-        }
+        return success, result, result
 
 
 class NapalmConfigScript(Script):
@@ -222,8 +228,8 @@ class NapalmConfigScript(Script):
         'polymorphic_identity': 'napalm_config',
     }
 
-    def job(self, args):
-        task, device, results, payloads = args
+    @multiprocessing
+    def job(self, task, device, results, payloads):
         try:
             napalm_driver = napalm_connection(device)
             napalm_driver.open()
@@ -237,11 +243,7 @@ class NapalmConfigScript(Script):
         else:
             result = f'configuration OK:\n\n{config}'
             success = True
-        results[device.name] = {
-            'success': success,
-            'payload': payloads,
-            'logs': result
-        }
+        return success, result, None
 
 
 class NapalmGettersScript(Script):
@@ -258,8 +260,8 @@ class NapalmGettersScript(Script):
         'polymorphic_identity': 'napalm_getters',
     }
 
-    def job(self, args):
-        task, device, results, payloads = args
+    @multiprocessing
+    def job(self, task, device, results, payloads):
         result = {}
         try:
             napalm_driver = napalm_connection(device)
@@ -277,19 +279,7 @@ class NapalmGettersScript(Script):
         except Exception as e:
             result = f'script did not work:\n{e}'
             success = False
-        if isinstance(payloads, dict):
-            payloads[self.name] = result
-        else:
-            payloads = {self.name: result}
-        if 'logs' in results:
-            results['logs'][device.name] = result
-            results['payload'][device.name] = payloads
-        else:
-            results['logs'] = {device.name: result}
-            results['payload'] = {device.name: payloads}
-            results['expected'] = self.content_match
-        if 'success' not in results or results['success']:
-            results['success'] = success
+        return success, result, result
 
 
 class AnsibleScript(Script):
@@ -312,8 +302,8 @@ class AnsibleScript(Script):
         'polymorphic_identity': 'ansible_playbook',
     }
 
-    def job(self, args):
-        task, device, results, payloads = args
+    @multiprocessing
+    def job(self, task, device, results, payloads):
         try:
             arguments = self.arguments.split()
             command = ['ansible-playbook']
@@ -322,26 +312,18 @@ class AnsibleScript(Script):
             if self.inventory_from_selection:
                 command.extend(['-i', device.ip_address + ','])
             command.append(self.playbook_path)
-            output = check_output(command + arguments)
+            result = check_output(command + arguments)
             try:
-                output = output.decode('utf-8')
+                result = result.decode('utf-8')
             except AttributeError:
                 pass
             if self.content_match_regex:
-                success = bool(search(self.content_match, str(output)))
+                success = bool(search(self.content_match, str(result)))
             else:
-                success = self.content_match in str(output)
-            results[device.name] = {
-                'success': success,
-                'payload': payloads,
-                'logs': output
-            }
+                success = self.content_match in str(result)
         except Exception as e:
-            results[device.name] = {
-                'success': False,
-                'payload': payloads,
-                'logs': str(e)
-            }
+            success, logs = False, str(e)
+        return success, result, None
 
 
 class RestCallScript(Script):
@@ -392,11 +374,7 @@ class RestCallScript(Script):
                 payloads = {self.name: result}
         except Exception as e:
             result, success = str(e), False
-        return {
-            'success': success,
-            'payload': payloads,
-            'logs': result
-        }
+        return {'success': success, 'payload': payloads, 'logs': result}
 
 
 type_to_class = {

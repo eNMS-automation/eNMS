@@ -3,7 +3,6 @@ from os import environ
 
 
 class Config(object):
-    
 
     # SQL Alchemy
     SQLALCHEMY_DATABASE_URI = environ.get(

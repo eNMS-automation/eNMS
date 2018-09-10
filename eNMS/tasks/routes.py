@@ -106,8 +106,8 @@ def show_logs(task_id):
 @login_required
 def get_diff(task_id, v1, v2, n1, n2):
     task = retrieve(Task, id=task_id)
-    first = str_dict(task.logs[v1][n1]).splitlines()
-    second = str_dict(task.logs[v2][n2]).splitlines()
+    first = str_dict(task.logs[v1]['logs'][n1]).splitlines()
+    second = str_dict(task.logs[v2]['logs'][n2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
     return jsonify({'first': first, 'second': second, 'opcodes': opcodes})
 

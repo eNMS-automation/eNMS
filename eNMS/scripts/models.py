@@ -317,7 +317,7 @@ class AnsibleScript(Script):
             else:
                 success = self.content_match in str(result)
         except Exception as e:
-            success, logs = False, str(e)
+            success, result = False, str(e)
         return success, result, None
 
 

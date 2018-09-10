@@ -5,6 +5,7 @@ ENV FLASK_APP app.py
 COPY app.py config.py gunicorn.py requirements.txt ./
 COPY eNMS eNMS
 COPY migrations migrations
+COPY projects projects
 
 RUN pip install -r requirements.txt
 

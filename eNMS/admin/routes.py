@@ -66,10 +66,10 @@ def login():
             if current_app.production:
                 hash = current_app.vault_client.read(
                     f'secret/data/user/{name}'
-                )['data']['data']
+                )['data']['data']['password']
             else:
                 hash = user.password
-            if checkpw(password.encode('utf8'), hash):
+            if checkpw(password.encode('utf8'), hash.encode('utf-8')):
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
         else:

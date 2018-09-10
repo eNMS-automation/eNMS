@@ -41,9 +41,9 @@ def multiprocessing(function):
         else:
             results['logs'] = {device.name: result}
             results['payload'] = {device.name: payloads}
-            results['expected'] = self.content_match
         if 'success' not in results or results['success']:
             results['success'] = success
+        print(results)
     return wrapper
 
 
@@ -142,7 +142,6 @@ class NetmikoValidationScript(Script):
 
     @multiprocessing
     def job(self, task, device, results, payloads):
-        task, device, results, payloads = args
         success, result = True, {}
         try:
             netmiko_handler = netmiko_connection(self, device)
@@ -263,6 +262,7 @@ class NapalmGettersScript(Script):
     @multiprocessing
     def job(self, task, device, results, payloads):
         result = {}
+        results['expected'] = self.content_match
         try:
             napalm_driver = napalm_connection(device)
             napalm_driver.open()

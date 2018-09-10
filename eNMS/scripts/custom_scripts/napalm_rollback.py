@@ -1,4 +1,5 @@
 from eNMS.scripts.connections import napalm_connection
+from eNMS.scripts.models import multiprocessing
 
 parameters = {
     'name': 'Napalm Rollback',
@@ -9,6 +10,7 @@ parameters = {
 }
 
 
+@multiprocessing
 def job(args):
     task, device, results, payloads = args
     try:

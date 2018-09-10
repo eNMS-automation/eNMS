@@ -227,6 +227,7 @@ class WorkflowTask(Task):
             for task in layer:
                 visited.add(task)
                 task_results = task.job(runtime, workflow)
+                print(task_results)
                 success = task_results['success']
                 if task.id == self.workflow.end_task:
                     results['success'] = success

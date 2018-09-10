@@ -86,7 +86,6 @@ def putty_connection(name):
         Popen(ssh.split())
     else:
         sshpass = f'"sshpass -p {password} ssh {username}@{device.ip_address}"'
-        print(f'gnome-terminal -- /bin/bash -c {sshpass}')
         os_system(f'gnome-terminal -- /bin/bash -c {sshpass}')
     return jsonify({'success': True})
 

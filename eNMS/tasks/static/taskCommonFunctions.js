@@ -26,7 +26,7 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
         }
       }
       $('#job').val(properties.job.id);
-      $('#nodes').val(properties.nodes.map((n) => n.id));
+      $('#devices').val(properties.devices.map((n) => n.id));
       $('#pools').val(properties.pools.map((p) => p.id));
     },
   });
@@ -75,15 +75,15 @@ function compareTaskLogs(id) { // eslint-disable-line no-unused-vars
     url: `/tasks/compare_logs/${id}`,
     dataType: 'json',
     success: function(results) {
-      $('#first_version,#second_version,#first_node,#second_node').empty();
+      $('#first_version,#second_version,#first_device,#second_device').empty();
       for (let i = 0; i < results.versions.length; i++) {
         const value = results.versions[i];
         $('#first_version,#second_version').append($('<option></option>')
           .attr('value', value).text(value));
       }
-      for (let i = 0; i < results.nodes.length; i++) {
-        const value = results.nodes[i];
-        $('#first_node,#second_node').append($('<option></option>')
+      for (let i = 0; i < results.devices.length; i++) {
+        const value = results.devices[i];
+        $('#first_device,#second_device').append($('<option></option>')
           .attr('value', value).text(value));
       }
     },
@@ -91,13 +91,13 @@ function compareTaskLogs(id) { // eslint-disable-line no-unused-vars
   $('#compare-logs-modal').modal('show');
 }
 
-const dropDowns = '#first_version,#second_version,#first_node,#second_node';
+const dropDowns = '#first_version,#second_version,#first_device,#second_device';
 $(dropDowns).on('change', function() {
   $('#view').empty();
   const v1 = $('#first_version').val();
   const v2 = $('#second_version').val();
-  const n1 = $('#first_node').val();
-  const n2 = $('#second_node').val();
+  const n1 = $('#first_device').val();
+  const n2 = $('#second_device').val();
   $.ajax({
     type: 'POST',
     url: `/tasks/get_diff/${taskId}/${v1}/${v2}/${n1}/${n2}`,

@@ -1,0 +1,36 @@
+{% extends "base_site.html" %}
+
+{% block title %} Task management {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+  <style>
+    #main { height:90vh; }
+    @media (min-width: 1000px) {
+      .modal-lg {
+        width: 1200px;
+      }
+    }
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+  {% include 'scheduling_modal.html' %}
+  {% include 'task_modals.html' %}
+  {% include 'task_table.html' %}
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    var fields = {{ fields|tojson|safe }}
+    var tasks = {{ tasks|tojson|safe }}
+  </script>
+  <!-- Task management -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='taskCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
+  <!-- Difflib -->
+  <script src="{{ url_for('tasks_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
+{% endblock javascripts %}

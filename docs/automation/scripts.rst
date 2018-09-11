@@ -63,7 +63,7 @@ Just like with the ``Netmiko configuration`` script, a configuration can be eith
    :alt: NAPALM configuration script
    :align: center
 
-.. note:: The NAPALM driver used by eNMS is the one you configure in the "Operating System" property of a node.
+.. note:: The NAPALM driver used by eNMS is the one you configure in the "Operating System" property of a device.
 The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
 
 .. note:: This script does not by itself commit the configuration. To do so, a ``NAPALM action`` script must be used (see below).
@@ -86,7 +86,7 @@ A ``NAPALM getters`` script is a list of getters which output is displayed in th
    :alt: NAPALM getters script
    :align: center
 
-.. note:: just like with the ``NAPALM configuration`` scripts, the NAPALM driver used by eNMS is the one configured in the "Operating System" property of a node. The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
+.. note:: just like with the ``NAPALM configuration`` scripts, the NAPALM driver used by eNMS is the one configured in the "Operating System" property of a device. The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
 
 Ansible playbook script
 -----------------------
@@ -110,25 +110,23 @@ To create a custom script, add a new python file in ``eNMS/source/scripts/custom
 
 ::
 
-  def job(args):
-      # Script that does nothing
-      task, node, results = args
-      # add your own logic here
-      # results is a dictionnary that contains the logs of the script, as well
-      # as a "sucess" boolean variable that indicates whether the script was
-      # run successfully or not
-      results[node.name] = {
-          'success': True,
-          'logs': 'what will be displayed in the logs'
-      }
-
+  from eNMS.scripts.models import multiprocessing
+  
   parameters = {
       'name': 'script that does nothing',
-      'node_multiprocessing': True,
+      'device_multiprocessing': True,
       'description': 'does nothing',
       'vendor': 'none',
       'operating_system': 'all'
   }
+  
+  
+  @multiprocessing
+  def job(script, task, device, results, payloads):
+      # add your own logic here
+      # results is a dictionnary that contains the logs of the script
+      return True, 'logs', 'payload'
+
 
 After adding a new custom script, you must reload the application.
 Custom scripts must be added to the ``eNMS/source/scripts/custom_scripts`` folder. Inside that folder, you are free to create subfolders to organize your custom scripts any way you want: eNMS will automatically detect all python files.

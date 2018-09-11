@@ -112,7 +112,7 @@ function addObjectToTable(mode, type, properties) {
  * Display the object modal.
  * @param {type} type - Node or link.
  */
-function showModal(type) { // eslint-disable-line no-unused-vars
+function showObjectTypeModal(type) { // eslint-disable-line no-unused-vars
   $('#title').text(`Add a new ${type}`);
   $(`#edit-${type}-form`).trigger('reset');
   $(`#edit-${type}`).modal('show');

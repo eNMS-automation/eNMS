@@ -29,11 +29,13 @@ urls = {
     ),
     '/workflows': (
         '/workflow_management',
+        '/workflow_editor'
     ),
     '/tasks': (
-        '/task_management',
+        '/task_management/script',
+        '/task_management/workflow',
         '/calendar'
-    ),
+    )
 }
 
 free_access = {'/', '/admin/login', '/admin/create_account'}
@@ -79,6 +81,7 @@ def test_urls(user_client):
     for blueprint, pages in urls.items():
         for page in pages:
             page_url = blueprint + page
+            print(page_url)
             r = user_client.get(page_url, follow_redirects=True)
             assert r.status_code == 200
     # logout and test that we cannot access anything anymore

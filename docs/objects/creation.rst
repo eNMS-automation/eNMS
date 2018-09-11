@@ -5,12 +5,12 @@ Object creation
 Type of objects
 ---------------
 
-There are different types of nodes and links available in eNMS.
+There are different types of devices and links available in eNMS.
 
-* **Node**: Router, Switch, Optical switch, Server, Host, Antenna, Regenerator, Firewall.
-* **Link**: Ethernet link, Optical link, Etherchannel (LAG), Optical channel, Pseudowire, BGP peering.
+* **Device**: router, switch, optical switch, server, host, antenna, regenerator, firewall.
+* **Link**: ethernet link, optical link, etherchannel (LAG), optical channel, pseudowire, BGP peering.
 
-Each type of node (resp. link) has a specific icon (resp. color) when displayed graphically:
+Each type of device (resp. link) has a specific icon (resp. color) when displayed graphically:
     
 .. image:: /_static/objects/management/object_types.png
    :alt: Different types of objects
@@ -19,7 +19,7 @@ Each type of node (resp. link) has a specific icon (resp. color) when displayed 
 Creation
 --------
 
-Objects can be created from the :guilabel:`objects/object_management` page, in two different ways:
+Objects can be created from the :guilabel:`inventory/device_management` and :guilabel:`inventory/link_management` page, in two different ways:
 
 * Manually, by entering the value of each property in a form. With this method, objects have to be created one by one.
 * By importing an Excel file (.xls, .xlsx).
@@ -27,16 +27,16 @@ Objects can be created from the :guilabel:`objects/object_management` page, in t
 Manual creation
 ***************
 
-Clicking on the ``Add a new node`` or ``Add a new link`` buttons will open a form with the list of all properties of the object.
+Clicking on the ``Add a new device`` or ``Add a new link`` buttons will open a form with the list of all properties of the object.
 
 .. image:: /_static/objects/management/object_creation1.png
-   :alt: Node and link creation
+   :alt: Device and link creation
    :align: center
 
 Fill the form and click on the ``Submit`` button.
 
 .. image:: /_static/objects/management/object_creation2.png
-   :alt: Node and link creation forms
+   :alt: Device and link creation forms
    :align: center
 
 Creation via import
@@ -67,4 +67,4 @@ Some properties are mandatory:
  * Name: objects are uniquely defined by their name.
  * Source and destination: a link needs a source and a destination to be created.
 
-.. tip:: In order to visualize the network topology on a map, nodes must have geographical coordinates (longitude and latitude).
+.. tip:: In order to visualize the network topology on a map, devices must have geographical coordinates (longitude and latitude).

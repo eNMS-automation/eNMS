@@ -4,7 +4,6 @@ object_common_properties = (
     'description',
     'model',
     'location',
-    'type',
     'vendor'
 )
 

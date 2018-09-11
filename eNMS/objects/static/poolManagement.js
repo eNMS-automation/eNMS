@@ -80,7 +80,7 @@ function showPoolObjects(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/get_pool_objects/${id}`,
     success: function(properties) {
-      $('#nodes').val(properties.nodes.map((n) => n.id));
+      $('#devices').val(properties.devices.map((n) => n.id));
       $('#links').val(properties.links.map((l) => l.id));
       poolId = id;
     },

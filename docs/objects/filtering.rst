@@ -1,61 +1,55 @@
-================
-Object filtering
-================
+============
+Object pools
+============
 
-The filtering system allows to display only a subset of the network in the graphical view.
-A filter is a combination of values (or regular expressions) for the properties of an object. 
+Pools allows to create groups of devices. They can be used to filter the view, and to target an automation task to a specific subset of devices.
+A pool is defined as a combination of values (or regular expressions) for the properties of an object. 
 
-If the properties of an object does not match **all** properties of the filter, the object will be undisplayed when the filter is selected.
+If the properties of an object matches **all** properties of the pool, the object will belong to the pool.
  
-Filters can be created in :guilabel:`objects/object_filtering`.
+Pools can be created in :guilabel:`inventory/pool_management`.
 
-Node filtering
---------------
+A first example
+---------------
 
 .. image:: /_static/objects/filtering/node_filtering.png
    :alt: test
    :align: center
 
-This filter enforces the following conditions:
+This pool enforces the following conditions:
  * name: ``node.*`` --- this regular expression matches all nodes which name starts with ``node``.
  * type: ``Router|Switch`` --- matches routers and switches (nodes which type is either ``Router``, or ``Switch``.
  * vendor: ``Cisco`` --- for this property, the regular expression box is not ticked. This means the value must be exactly ``Cisco``.
 
-In summary, all Cisco routers or switches which name starts with ``node`` will match those conditions. All others will be filtered (that is, undisplayed from the graphical view).
+In summary, all Cisco routers or switches which name starts with ``node`` will match these conditions, and they will be a member of the pool.
 
 .. note:: All properties which field is left empty are simply ignored.
 
-Link filtering
+A pool of link
 --------------
 
 .. image:: /_static/objects/filtering/link_filtering.png
    :alt: test
    :align: center
 
-This filter enforces the following conditions:
+This pool enforces the following conditions:
  * type: ``Ethernet link`` --- matches all Ethernet links.
  * source: ``bnet6`` --- matches all links which source is the node ``bnet6``.
 
-In summary, all Ethernet links starting from the node ``bnet6`` will be considered, all others ignored. 
+In summary, all Ethernet links starting from the node ``bnet6`` will be part of the pool.
 
-Apply a filter
---------------
+Filter the view with a pool
+---------------------------
 
-Filters are applied from the geographical or logical view.
-You can switch between filters with the drop-down list in the top-right corner of the screen (framed in red below).
+Pools can be used as filters for the geographical and logical views.
+You can switch between pools with the drop-down list in the top-right corner of the screen (framed in red below).
 
 .. image:: /_static/objects/filtering/apply_filter.png
    :alt: Apply a filter
    :align: center
 
-Example
--------
+Let's consider the following network:
 
-Initial network
-***************
-
-In this first example, we consider the following network:
-    
 .. image:: /_static/objects/filtering/network.png
    :alt: test
    :align: center
@@ -66,10 +60,7 @@ Unfiltered, this network results in the following view:
    :alt: test
    :align: center
 
-Filter all links
-****************
-
-We create a filter with a condition on the ``Name`` of a link:
+We create a pool with a condition on the ``Name`` of a link:
 
 .. image:: /_static/objects/filtering/filter_all_links.png
    :alt: test
@@ -77,14 +68,11 @@ We create a filter with a condition on the ``Name`` of a link:
 
 There isn't a single link which name is ``a``: all links will be filtered.
 
-This result in the following view:
+Filtering the view with this pool will result in the following display:
 
 .. image:: /_static/objects/filtering/network_filter1.png
    :alt: test
    :align: center    
-
-Filter all nodes outside of France or Spain
-*******************************************
 
 We add a new condition on the ``Location`` of a node to exclude all nodes that are located outside of France or spain:
 
@@ -107,10 +95,10 @@ Finally, out of the remaining nodes, we exclude all nodes which operating system
    :alt: test
    :align: center
 
-This result in the following view:
+This results in the following view:
 
 .. image:: /_static/objects/filtering/network_filter3.png
    :alt: test
    :align: center 
 
-.. note:: Using the filtering system is important because network automation in eNMS is done graphically, by selecting nodes in the graphical view. See the :guilabel:`automation` documentation for more information.
+.. note:: Using the pool system is important because the targets of a script in eNMS can be a pool (or a group of pools). Therefore, pools can be used as a way to apply a script to a specific group of devices.

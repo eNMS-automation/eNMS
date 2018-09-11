@@ -87,7 +87,6 @@ def putty_connection(name):
     else:
         path_gotty = join(current_app.path, 'applications', 'gotty')
         sshpass = f'sshpass -p {password} ssh {username}@{device.ip_address}'
-        print(f'{path_gotty} -w -p 9000 {sshpass}')
         os_system(f'{path_gotty} -w -p 9000 {sshpass}')
     return jsonify({'success': True})
 

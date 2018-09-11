@@ -29,13 +29,9 @@ Manual creation
 
 Clicking on the ``Add a new device`` or ``Add a new link`` buttons will open a form with the list of all properties of the object.
 
-.. image:: /_static/objects/management/object_creation1.png
-   :alt: Device and link creation
-   :align: center
-
 Fill the form and click on the ``Submit`` button.
 
-.. image:: /_static/objects/management/object_creation2.png
+.. image:: /_static/objects/management/object_creation.png
    :alt: Device and link creation forms
    :align: center
 

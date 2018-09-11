@@ -56,6 +56,7 @@ Once eNMS is running, go to http://127.0.0.1:5000
 Run eNMS in Production
 ======================
 
+
 To start eNMS in production mode, you must change the value of the environment variable "ENMS_CONFIG_MODE" to "Production".
 
 ::
@@ -85,3 +86,19 @@ All credentials in production more are stored in a Vault: you cannot use eNMS in
  # set the VAULT_TOKEN environment variable
  (Windows) set VAULT_TOKEN=vault-token
  (Unix) export VAULT_TOKEN=vault-token
+
+
+========
+Database
+========
+
+You must tell eNMS where to find the address of your database by setting up the "ENMS_DATABASE_URL" environment database.
+
+::
+
+ # set the ENMS_DATABASE_URL environment variable
+ (Windows) set ENMS_DATABASE_URL=database-address
+ (Unix) export ENMS_DATABASE_URL=database-address
+
+
+In case this environment variable is not set, eNMS will default to using a SQLite database.

@@ -15,17 +15,18 @@ from eNMS.scripts.models import Job
 from eNMS.workflows.models import Workflow
 
 
-@blueprint.route('/task_management')
+@blueprint.route('/task_management/<task_type>')
 @login_required
-def task_management():
+def task_management(task_type):
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.devices.choices = Device.choices()
     scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
+    task_class = ScriptTask if task_type == 'script' else WorkflowTask
     return render_template(
-        'task_management.html',
+        f'{task_type}_tasks.html',
         fields=task_public_properties,
-        tasks=Task.serialize(),
+        tasks=task_class.serialize(),
         compare_form=CompareForm(request.form),
         scheduling_form=scheduling_form
     )

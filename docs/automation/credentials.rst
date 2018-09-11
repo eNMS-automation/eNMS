@@ -2,18 +2,18 @@
 Credentials
 ===========
 
-Login & username
+eNMS credentials
 ----------------
 
-The login and username used to connect to a device are the ones you use for eNMS.
-If you create an eNMS account with login ``cisco`` and password ``cisco``, eNMS will use the same credentials to try and connect to the devices upon running a script.
+The credentials used for eNMS hashed with bcrypt and the hash is stored in the database (test mode) or stored in the Hashicorp Vault (production mode). These credentials are used only for eNMS and nothing else.
 
-Secret password
----------------
+Device credentials
+------------------
 
-Unlike the username and password, the secret password is a property of the device itself.
-The secret password is set when the node is created (whether manually or from excel import):
+The credentials of a device are a property of the device itself.
     
-.. image:: /_static/automation/credentials/secret_password.png
+.. image:: /_static/automation/credentials/credentials.png
    :alt: Set secret password
    :align: center
+
+They are encrypted and stored in the database (test mode) or stored in the Hashicorp Vault (production mode). If you are using eNMS in production, you MUST use eNMS in production mode, and have a Vault set up to handle the storage of all credentials (see the installation section of the doc).

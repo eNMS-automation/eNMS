@@ -25,7 +25,7 @@ class Config(object):
     }
 
     # GoTTY
-    GOTTY_ALLOWED_PORTS = [8080, 9000, 9001, 9002]
+    GOTTY_ALLOWED_PORTS = list(range(9000, 9100))
     # 'sshpass' must be installed on the server for the authentication
     GOTTY_AUTHENTICATION = False
 

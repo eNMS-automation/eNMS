@@ -75,9 +75,9 @@ def view(view_type):
     )
 
 
-@blueprint.route('/connect_to_<name>', methods=['POST'])
+@blueprint.route('/connection/<name>', methods=['POST'])
 @login_required
-def putty_connection(name):
+def connection(name):
     current_os, device = platform_system(), retrieve(Device, name=name)
     username, password, _ = get_credentials(device)
     if current_os == 'Windows':
@@ -91,10 +91,10 @@ def putty_connection(name):
         else:
             cmd = f'ssh {username}@{device.ip_address}'
         port_index = current_app.gotty_increment % current_app.gotty_modulo
-        port = current_app.config['GOTTY_ALLOWED_PORTS'][port_index]
-        os_system(f'{path_gotty} -w -p 9000 {sshpass}')
         current_app.gotty_increment += 1
-    return jsonify({'device': device.name, 'port': port_index})
+        port = current_app.config['GOTTY_ALLOWED_PORTS'][port_index]
+        os_system(f'{path_gotty} -w -p {port} {cmd}')
+    return jsonify({'device': device.name, 'port': port})
 
 
 @blueprint.route('/export_to_google_earth', methods=['POST'])

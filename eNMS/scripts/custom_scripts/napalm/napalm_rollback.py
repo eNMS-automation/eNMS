@@ -4,23 +4,21 @@ from eNMS.scripts.models import multiprocessing
 parameters = {
     'name': 'Napalm Rollback',
     'device_multiprocessing': True,
-    'description': 'Napalm Rollback',
+    'description': 'Configuration rollback with Napalm',
     'vendor': 'All',
     'operating_system': 'All'
 }
 
 
 @multiprocessing
-def job(script, task, device, results, payloads):
+def job(script, task, device, results, incoming_payload):
     try:
         napalm_driver = napalm_connection(device)
         napalm_driver.open()
         napalm_driver.rollback()
         napalm_driver.close()
+        result, success = 'Rollback successful', True
     except Exception as e:
         result = f'Napalm rollback did not work because of {e}'
         success = False
-    else:
-        result = 'Rollback successful'
-        success = True
-    return success, result, None
+    return success, result, incoming_payload

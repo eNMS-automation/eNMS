@@ -105,8 +105,8 @@ class Task(CustomBase):
         ]
 
     def get_payloads(self, workflow, runtime):
-        if not workflow:
-            return None
+        if not workflow or not self.transfer_payload:
+            return {}
         payloads = {}
         for edge_type in (True, False):
             for task in self.task_sources(workflow, edge_type):

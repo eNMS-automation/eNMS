@@ -1,8 +1,7 @@
 from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
-from os import system as os_system
 from os.path import join
-from platform import system as platform_system
+from platform import system
 from simplekml import Kml
 from subprocess import Popen
 
@@ -78,7 +77,7 @@ def view(view_type):
 @blueprint.route('/connection/<name>', methods=['POST'])
 @login_required
 def connection(name):
-    current_os, device = platform_system(), retrieve(Device, name=name)
+    current_os, device = system(), retrieve(Device, name=name)
     username, password, _ = get_credentials(device)
     if current_os == 'Windows':
         path_putty = join(current_app.path, 'applications', 'putty.exe')
@@ -93,7 +92,7 @@ def connection(name):
         port_index = current_app.gotty_increment % current_app.gotty_modulo
         current_app.gotty_increment += 1
         port = current_app.config['GOTTY_ALLOWED_PORTS'][port_index]
-        os_system(f'{path_gotty} -w -p {port} {cmd}')
+        Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
     return jsonify({'device': device.name, 'port': port})
 
 

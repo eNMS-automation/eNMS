@@ -3,6 +3,10 @@ global
 alertify: false
 */
 
+/**
+ * Open new tab at the provided URL.
+ * @param {url} url - URL.
+ */
 function openUrl(url) {
   let win = window.open(url, '_blank');
   win.focus();

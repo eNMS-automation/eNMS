@@ -12,6 +12,7 @@ parameters = {
     'operating_system': 'all'
 }
 
+
 @multiprocessing
 def job(script, task, device, results, incoming_payload):
     '''Script that uses Nornir to ping a device.'''

@@ -9,6 +9,7 @@ parameters = {
     'operating_system': 'All'
 }
 
+
 @multiprocessing
 def job(script, task, device, results, incoming_payload):
     try:

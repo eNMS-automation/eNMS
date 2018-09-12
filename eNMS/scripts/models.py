@@ -375,8 +375,8 @@ class RestCallScript(Script):
         return {
             'success': success,
             'payload': {
-                'incoming': incoming_payload,
-                'outgoing': outgoing_payload
+                'incoming_payload': incoming_payload,
+                'outgoing_payload': result
             },
             'logs': result
         }

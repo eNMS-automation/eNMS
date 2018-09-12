@@ -17,6 +17,7 @@ class SchedulingForm(FlaskForm):
     frequency = TextField('Frequency')
     run_immediately = BooleanField('Run immediately')
     do_not_run = BooleanField('Do not run', default=True)
+    transfer_payload = BooleanField('Transfer payload', default=True)
     script_type_choices = (
         ('napalm_action', 'NAPALM action'),
         ('netmiko_config', 'Netmiko configuration'),

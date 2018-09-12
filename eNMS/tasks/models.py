@@ -1,7 +1,7 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime, timedelta
 from multiprocessing.pool import ThreadPool
-from sqlalchemy import Column, ForeignKey, Integer, String, PickleType
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 from time import sleep
@@ -42,6 +42,7 @@ class Task(CustomBase):
     end_date = Column(String)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     waiting_time = Column(Integer, default=0)
+    transfer_payload = Column(Boolean, default=False)
     workflows = relationship(
         'Workflow',
         secondary=task_workflow_table,

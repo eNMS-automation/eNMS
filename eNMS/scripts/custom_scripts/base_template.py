@@ -1,16 +1,14 @@
-from eNMS.scripts.models import multiprocessing
-
 parameters = {
-    'name': 'script that does nothing',
-    'device_multiprocessing': True,
-    'description': 'does nothing',
-    'vendor': 'none',
-    'operating_system': 'all'
+    'name': 'Base script (does nothing)',
+    'device_multiprocessing': False,
+    'description': 'Template example',
+    'vendor': 'All',
+    'operating_system': 'All'
 }
 
 
-@multiprocessing
-def job(script, task, device, results, payloads):
+def job(script, task, results, incoming_payload):
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
-    return True, 'logs', 'outgoing_payload'
+    # target devices can be accessed via 'task.devices'
+    return {'success': True, 'payload': 'Outgoing payload', 'logs': 'No result'}

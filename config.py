@@ -38,6 +38,9 @@ class ProductionConfig(Config):
     VAULT_ADDR = environ.get('VAULT_ADDR')
     VAULT_TOKEN = environ.get('VAULT_TOKEN')
 
+    # GoTTY
+    GOTTY_ALLOWED_PORTS = list(range(9000, 9100))
+
 
 class SeleniumConfig(Config):
     DEBUG = True

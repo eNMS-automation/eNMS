@@ -13,4 +13,4 @@ parameters = {
 def job(script, task, device, results, payloads):
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
-    return True, 'logs', 'payload'
+    return True, 'logs', 'outgoing_payload'

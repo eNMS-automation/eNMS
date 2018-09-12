@@ -105,15 +105,18 @@ class Task(CustomBase):
         ]
 
     def get_payloads(self, workflow, runtime):
-        if not workflow or not self.transfer_payload:
+        if not workflow:
             return {}
         payloads = {}
         for edge_type in (True, False):
             for task in self.task_sources(workflow, edge_type):
+                if not task.transfer_payload:
+                    continue
                 if runtime in task.logs and 'success' in task.logs[runtime]:
                     success = task.logs[runtime]['success']
                     if edge_type == success:
-                        payloads[task.name] = task.logs[runtime]['payload']
+                        pl = task.logs[runtime]['payload']['outgoing_payload']
+                        payloads[task.name] = pl
         return payloads
 
     def schedule(self, run_now=True):

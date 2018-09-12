@@ -1,5 +1,5 @@
 parameters = {
-    'name': 'Base parallel script (does nothing)',
+    'name': 'Base script (does nothing)',
     'device_multiprocessing': True,
     'description': 'Template example',
     'vendor': 'All',
@@ -7,7 +7,7 @@ parameters = {
 }
 
 
-def job(script, task, device, results, incoming_payload):
+def job(script, task, results, incoming_payload):
     # add your own logic here
     # results is a dictionnary that contains the logs of the script
     return True, 'logs', 'outgoing_payload'

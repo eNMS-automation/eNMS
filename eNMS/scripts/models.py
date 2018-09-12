@@ -30,13 +30,16 @@ from eNMS.scripts.properties import type_to_properties
 def multiprocessing(function):
     def wrapper(self, args):
         task, device, results, incoming_payload = args
-        success, result, outgoing_payload = function(self, *args)
+        success, result, payload = function(self, *args)
         if 'logs' in results:
             results['logs'][device.name] = result
-            results['payload'][device.name] = outgoing_payload
+            results['payload']['outgoing_payload'][device.name] = payload
         else:
             results['logs'] = {device.name: result}
-            results['payload'] = {device.name: outgoing_payload}
+            results['payload'] = {
+                'incoming_payload': incoming_payload,
+                'outgoing_payload': {device.name: payload}
+            }
         if 'success' not in results or results['success']:
             results['success'] = success
     return wrapper
@@ -109,7 +112,7 @@ class NetmikoConfigScript(Script):
         except Exception as e:
             result = f'netmiko config did not work because of {e}'
             success = False
-        return success, result, None
+        return success, result, incoming_payload
 
 
 class NetmikoValidationScript(Script):
@@ -160,7 +163,7 @@ class NetmikoValidationScript(Script):
         except Exception as e:
             result = f'netmiko did not work because of {e}'
             success = False
-        return success, result, None
+        return success, result, incoming_payload
 
 
 class FileTransferScript(Script):
@@ -237,7 +240,7 @@ class NapalmConfigScript(Script):
         else:
             result = f'configuration OK:\n\n{config}'
             success = True
-        return success, result, None
+        return success, result, incoming_payload
 
 
 class NapalmGettersScript(Script):
@@ -318,7 +321,7 @@ class AnsibleScript(Script):
                 success = self.content_match in str(result)
         except Exception as e:
             success, result = False, str(e)
-        return success, result, None
+        return success, result, incoming_payload
 
 
 class RestCallScript(Script):
@@ -369,7 +372,14 @@ class RestCallScript(Script):
                 incoming_payload = {self.name: result}
         except Exception as e:
             result, success = str(e), False
-        return {'success': success, 'payload': incoming_payload, 'logs': result}
+        return {
+            'success': success,
+            'payload': {
+                'incoming': incoming_payload,
+                'outgoing': outgoing_payload
+            },
+            'logs': result
+        }
 
 
 type_to_class = {

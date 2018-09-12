@@ -32,7 +32,7 @@ def multiprocessing(function):
         task, device, results, payloads = args
         success, result, payload = function(self, *args)
         if 'logs' in results:
-            results['logs'][device.name] = payload
+            results['logs'][device.name] = result
             results['payload'][device.name] = result
         else:
             results['logs'] = {device.name: result}

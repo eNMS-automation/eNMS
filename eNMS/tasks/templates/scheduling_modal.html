@@ -53,6 +53,12 @@
                     {{ scheduling_form.job(class="form-control") }}
                   </div>
                 </div>
+                <fieldset>
+                  <div class="item">
+                    {{ scheduling_form.transfer_payload() }}
+                    <label for=field.name>{{ scheduling_form.transfer_payload.label.text }}</label>
+                  </div>
+                </fieldset>
               </div>
             </div>
             <div id="step-2">
@@ -80,12 +86,12 @@
                   {{ scheduling_form.frequency(class="form-control") }}
                 </div>
                 <fieldset>
-                {% for field in scheduling_form if field.name in ('do_not_run', 'run_immediately')  %}
-                  <div class="item">
-                    {{ field() }}
-                    <label for=field.name>{{ field.label.text }}</label>
-                  </div>
-                {% endfor %}
+                  {% for field in scheduling_form if field.name in ('do_not_run', 'run_immediately')  %}
+                    <div class="item">
+                      {{ field() }}
+                      <label for=field.name>{{ field.label.text }}</label>
+                    </div>
+                  {% endfor %}
                 </fieldset>
               </div>
             </div>

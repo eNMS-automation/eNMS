@@ -1,6 +1,7 @@
 from difflib import SequenceMatcher
 from flask import jsonify, render_template, request
 from flask_login import current_user, login_required
+from json import dumps
 from re import search, sub
 
 from eNMS import db
@@ -100,7 +101,7 @@ def get_task(task_id):
 @blueprint.route('/show_logs/<task_id>', methods=['POST'])
 @login_required
 def show_logs(task_id):
-    return jsonify(str_dict(retrieve(Task, id=task_id).logs))
+    return jsonify(dumps(retrieve(Task, id=task_id).logs, indent=2))
 
 
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])

@@ -29,14 +29,14 @@ from eNMS.scripts.properties import type_to_properties
 
 def multiprocessing(function):
     def wrapper(self, args):
-        task, device, results, payloads = args
-        success, result, payload = function(self, *args)
+        task, device, results, incoming_payload = args
+        success, result, outgoing_payload = function(self, *args)
         if 'logs' in results:
             results['logs'][device.name] = result
-            results['payload'][device.name] = result
+            results['payload'][device.name] = outgoing_payload
         else:
             results['logs'] = {device.name: result}
-            results['payload'] = {device.name: payload}
+            results['payload'] = {device.name: outgoing_payload}
         if 'success' not in results or results['success']:
             results['success'] = success
     return wrapper
@@ -96,7 +96,7 @@ class NetmikoConfigScript(Script):
     }
 
     @multiprocessing
-    def job(self, task, device, results, payloads):
+    def job(self, task, device, results, incoming_payload):
         try:
             netmiko_handler = netmiko_connection(self, device)
             netmiko_handler.send_config_set(self.content.splitlines())
@@ -136,7 +136,7 @@ class NetmikoValidationScript(Script):
     }
 
     @multiprocessing
-    def job(self, task, device, results, payloads):
+    def job(self, task, device, results, incoming_payload):
         success, result = True, {}
         try:
             netmiko_handler = netmiko_connection(self, device)
@@ -185,7 +185,7 @@ class FileTransferScript(Script):
     }
 
     @multiprocessing
-    def job(self, task, device, results, payloads):
+    def job(self, task, device, results, incoming_payload):
         try:
             netmiko_handler = netmiko_connection(self, device)
             transfer_dict = file_transfer(
@@ -223,7 +223,7 @@ class NapalmConfigScript(Script):
     }
 
     @multiprocessing
-    def job(self, task, device, results, payloads):
+    def job(self, task, device, results, incoming_payload):
         try:
             napalm_driver = napalm_connection(device)
             napalm_driver.open()
@@ -255,7 +255,7 @@ class NapalmGettersScript(Script):
     }
 
     @multiprocessing
-    def job(self, task, device, results, payloads):
+    def job(self, task, device, results, incoming_payload):
         result = {}
         results['expected'] = self.content_match
         try:
@@ -298,7 +298,7 @@ class AnsibleScript(Script):
     }
 
     @multiprocessing
-    def job(self, task, device, results, payloads):
+    def job(self, task, device, results, incoming_payload):
         try:
             arguments = self.arguments.split()
             command = ['ansible-playbook']
@@ -345,7 +345,7 @@ class RestCallScript(Script):
         'polymorphic_identity': 'rest_call',
     }
 
-    def job(self, task, results, payloads):
+    def job(self, task, results, incoming_payload):
         try:
             if self.call_type in ('GET', 'DELETE'):
                 result = self.request_dict[self.call_type](
@@ -363,13 +363,13 @@ class RestCallScript(Script):
                 success = bool(search(self.content_match, str(result)))
             else:
                 success = self.content_match in str(result)
-            if isinstance(payloads, dict):
-                payloads[self.name] = result
+            if isinstance(incoming_payload, dict):
+                incoming_payload[self.name] = result
             else:
-                payloads = {self.name: result}
+                incoming_payload = {self.name: result}
         except Exception as e:
             result, success = str(e), False
-        return {'success': success, 'payload': payloads, 'logs': result}
+        return {'success': success, 'payload': incoming_payload, 'logs': result}
 
 
 type_to_class = {

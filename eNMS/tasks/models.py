@@ -104,6 +104,8 @@ class Task(CustomBase):
         ]
 
     def get_payloads(self, workflow, runtime):
+        if not workflow:
+            return None
         payloads = {}
         for edge_type in (True, False):
             for task in self.task_sources(workflow, edge_type):
@@ -177,16 +179,19 @@ class ScriptTask(Task):
 
     def job(self, runtime, workflow):
         results = {}
-        payloads = self.get_payloads(workflow, runtime) if workflow else None
+        incoming_payload = self.get_payloads(workflow, runtime)
         if self.script.device_multiprocessing:
             targets = self.compute_targets()
             pool = ThreadPool(processes=len(self.devices))
-            args = [(self, device, results, payloads) for device in targets]
+            args = [
+                (self, device, results, incoming_payload)
+                for device in targets
+            ]
             pool.map(self.script.job, args)
             pool.close()
             pool.join()
         else:
-            results = self.script.job(self, results, payloads)
+            results = self.script.job(self, results, incoming_payload)
         self.logs[runtime] = results
         db.session.commit()
         return results

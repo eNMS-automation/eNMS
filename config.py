@@ -24,6 +24,11 @@ class Config(object):
         }
     }
 
+    # GoTTY
+    GOTTY_ALLOWED_PORTS = [8080, 9000, 9001, 9002]
+    # 'sshpass' must be installed on the server for the authentication
+    GOTTY_AUTHENTICATION = True
+
 
 class DebugConfig(Config):
     DEBUG = True
@@ -37,9 +42,6 @@ class ProductionConfig(Config):
     # Vault
     VAULT_ADDR = environ.get('VAULT_ADDR')
     VAULT_TOKEN = environ.get('VAULT_TOKEN')
-
-    # GoTTY
-    GOTTY_ALLOWED_PORTS = list(range(9000, 9100))
 
 
 class SeleniumConfig(Config):

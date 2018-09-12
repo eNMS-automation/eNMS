@@ -86,9 +86,15 @@ def putty_connection(name):
         Popen(ssh.split())
     else:
         path_gotty = join(current_app.path, 'applications', 'gotty')
-        sshpass = f'sshpass -p {password} ssh {username}@{device.ip_address}'
+        if current_app.config['GOTTY_AUTHENTICATION']:
+            cmd = f'sshpass -p {password} ssh {username}@{device.ip_address}'
+        else:
+            cmd = f'ssh {username}@{device.ip_address}'
+        port_index = current_app.gotty_increment % current_app.gotty_modulo
+        port = current_app.config['GOTTY_ALLOWED_PORTS'][port_index]
         os_system(f'{path_gotty} -w -p 9000 {sshpass}')
-    return jsonify({'success': True})
+        current_app.gotty_increment += 1
+    return jsonify({'device': device.name, 'port': port_index})
 
 
 @blueprint.route('/export_to_google_earth', methods=['POST'])

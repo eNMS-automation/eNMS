@@ -91,6 +91,11 @@ def configure_logs(app):
     logger.addHandler(logging.StreamHandler())
 
 
+def configure_gotty(app):
+    app.gotty_modulo = len(app.config['GOTTY_ALLOWED_PORTS'])
+    app.gotty_increment = 0
+
+
 def create_app(path, config):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config)
@@ -102,6 +107,7 @@ def create_app(path, config):
     configure_database(app)
     configure_rest_api(app)
     configure_logs(app)
+    configure_gotty(app)
     if app.production:
         app.vault_client = create_vault_client(app)
     return app

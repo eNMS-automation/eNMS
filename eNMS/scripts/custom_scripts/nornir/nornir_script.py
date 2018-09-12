@@ -10,6 +10,7 @@ parameters = {
     'operating_system': 'all'
 }
 
+
 def job(script, task, device, results, incoming_payload):
     '''Script that uses Nornir to ping a device.'''
     nornir_inventory = {device.name: {'nornir_ip': device.ip_address}}

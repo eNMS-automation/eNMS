@@ -11,7 +11,7 @@ function SshConnection() { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/views/connection/${$(`#device-name`).val()}`,
     success: function(result) {
-      message = `Connection to ${result.device} on port ${result.port}.`;
+      const message = `Connection to ${result.device} on port ${result.port}.`;
       alertify.notify(message, 'success', 15);
     },
   });

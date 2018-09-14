@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, exc, ForeignKey, Integer, String
 
-from eNMS.services.custom_service import CustomService
+from eNMS.services.custom_service import CustomService, service_classes
 
 class AService(CustomService):
 
@@ -17,3 +17,5 @@ class AService(CustomService):
 
     def job(self, *args):
         return True, 'a', 'a'
+
+service_classes.append(AService)

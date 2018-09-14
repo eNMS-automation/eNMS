@@ -33,6 +33,7 @@ class CustomService(Service):
 
 
 type_to_class['custom_service'] = CustomService
+service_classes = []
 
 
 def create_custom_services():
@@ -40,3 +41,4 @@ def create_custom_services():
     for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):
             mod = load_module(str(file))
+            print(service_classes)

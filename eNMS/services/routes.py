@@ -11,6 +11,7 @@ from eNMS.base.helpers import retrieve, allowed_file
 from eNMS.base.properties import pretty_names, service_public_properties
 from eNMS.objects.models import Device, Pool
 from eNMS.services import blueprint
+from eNMS.services.custom_service import CustomService, service_classes
 from eNMS.services.helpers import type_to_form, type_to_name
 from eNMS.services.models import Job, Service, type_to_class
 from eNMS.services.properties import type_to_properties
@@ -48,6 +49,8 @@ def configuration():
 @blueprint.route('/custom_services')
 @login_required
 def custom_services():
+    services = CustomService.choices()
+    print(service_classes)
     return render_template('custom_services.html')
 
 

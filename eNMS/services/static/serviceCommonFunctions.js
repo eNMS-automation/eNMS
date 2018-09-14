@@ -1,12 +1,12 @@
 /**
- * Open the script modal for editing.
- * @param {type} type - Type of script to create.
- * @param {id} id - Id of the script to edit.
+ * Open the service modal for editing.
+ * @param {type} type - Type of service to create.
+ * @param {id} id - Id of the service to edit.
  */
-function showScriptModal(type, id) { // eslint-disable-line no-unused-vars
+function showServiceModal(type, id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/scripts/get/${type}/${id}`,
+    url: `/services/get/${type}/${id}`,
     success: function(properties) {
       $('#title').text(`Edit ${properties.name} properties`);
       for (const [property, value] of Object.entries(properties)) {

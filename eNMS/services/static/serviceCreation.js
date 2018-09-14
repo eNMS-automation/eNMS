@@ -4,23 +4,23 @@ alertify: false
 */
 
 /**
- * Create a new script.
- * @param {type} type - Type of script to create.
+ * Create a new service.
+ * @param {type} type - Type of service to create.
  */
-function createScript(type) { // eslint-disable-line no-unused-vars
+function createService(type) { // eslint-disable-line no-unused-vars
   if ($(`#${type}-form`).parsley().validate() ) {
     const formData = new FormData($(`#${type}-form`)[0]);
     $.ajax({
       type: 'POST',
-      url: `/scripts/create_script/${type}`,
+      url: `/services/create_service/${type}`,
       dataType: 'json',
       data: formData,
       contentType: false,
       cache: false,
       processData: false,
       async: false,
-      success: function(script) {
-        alertify.notify(`Script '${script.name}' created.`, 'success', 5);
+      success: function(service) {
+        alertify.notify(`Service '${service.name}' created.`, 'success', 5);
       },
     });
   }

@@ -10,9 +10,9 @@ from eNMS.base.helpers import retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareForm, SchedulingForm
-from eNMS.tasks.models import ScriptTask, Task, WorkflowTask
+from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.objects.models import Pool, Device
-from eNMS.scripts.models import Job
+from eNMS.services.models import Job
 from eNMS.workflows.models import Workflow
 
 
@@ -23,7 +23,7 @@ def task_management(task_type):
     scheduling_form.devices.choices = Device.choices()
     scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
-    task_class = ScriptTask if task_type == 'script' else WorkflowTask
+    task_class = ServiceTask if task_type == 'service' else WorkflowTask
     return render_template(
         f'{task_type}_tasks.html',
         fields=task_public_properties,
@@ -77,7 +77,7 @@ def scheduler(workflow_id=None):
         retrieve(Pool, id=id) for id in request.form.getlist('pools')
     ]
     data['user'] = current_user
-    cls = WorkflowTask if data['job'].type == 'workflow' else ScriptTask
+    cls = WorkflowTask if data['job'].type == 'workflow' else ServiceTask
     task = factory(cls, **data)
     return jsonify(task.serialized)
 

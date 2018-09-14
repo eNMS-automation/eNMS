@@ -3,7 +3,7 @@ from sqlalchemy.orm import backref, relationship
 
 from eNMS.base.associations import task_workflow_table
 from eNMS.base.models import CustomBase
-from eNMS.scripts.models import Job
+from eNMS.services.models import Job
 
 
 class WorkflowEdge(CustomBase):

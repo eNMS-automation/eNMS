@@ -16,7 +16,7 @@ from eNMS.base.properties import (
     device_public_properties,
     pretty_names
 )
-from eNMS.scripts.models import Job
+from eNMS.services.models import Job
 from eNMS.tasks.forms import SchedulingForm
 from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm

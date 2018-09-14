@@ -6,7 +6,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Device, Pool
-from eNMS.scripts.models import Job
+from eNMS.services.models import Job
 from eNMS.tasks.forms import CompareForm, SchedulingForm
 from eNMS.tasks.models import Task
 from eNMS.workflows import blueprint

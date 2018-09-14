@@ -23,8 +23,8 @@ from subprocess import check_output
 
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import str_dict
-from eNMS.scripts.connections import napalm_connection, netmiko_connection
-from eNMS.scripts.properties import type_to_properties
+from eNMS.services.connections import napalm_connection, netmiko_connection
+from eNMS.services.properties import type_to_properties
 
 
 def multiprocessing(function):
@@ -60,20 +60,20 @@ class Job(CustomBase):
     }
 
 
-class Script(Job):
+class Service(Job):
 
-    __tablename__ = 'Script'
+    __tablename__ = 'Service'
 
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
-    tasks = relationship('ScriptTask', back_populates='script')
+    tasks = relationship('ServiceTask', back_populates='service')
 
     __mapper_args__ = {
-        'polymorphic_identity': 'script',
+        'polymorphic_identity': 'service',
     }
 
     @property
     def properties(self):
-        custom_properties = type_to_properties['custom_script']
+        custom_properties = type_to_properties['custom_service']
         return {
             p: getattr(self, p)
             for p in type_to_properties.get(self.type, custom_properties)
@@ -86,11 +86,11 @@ class Script(Job):
         return properties
 
 
-class NetmikoConfigScript(Script):
+class NetmikoConfigService(Service):
 
-    __tablename__ = 'NetmikoConfigScript'
+    __tablename__ = 'NetmikoConfigService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     content = Column(String)
@@ -119,11 +119,11 @@ class NetmikoConfigScript(Script):
         return success, result, incoming_payload
 
 
-class NetmikoValidationScript(Script):
+class NetmikoValidationService(Service):
 
-    __tablename__ = 'NetmikoValidationScript'
+    __tablename__ = 'NetmikoValidationService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     driver = Column(String)
@@ -170,11 +170,11 @@ class NetmikoValidationScript(Script):
         return success, result, incoming_payload
 
 
-class FileTransferScript(Script):
+class FileTransferService(Service):
 
-    __tablename__ = 'FileTransferScript'
+    __tablename__ = 'FileTransferService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     driver = Column(String)
@@ -214,11 +214,11 @@ class FileTransferScript(Script):
         return success, result, result
 
 
-class NapalmConfigScript(Script):
+class NapalmConfigService(Service):
 
-    __tablename__ = 'NapalmConfigScript'
+    __tablename__ = 'NapalmConfigService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     action = Column(String)
@@ -247,11 +247,11 @@ class NapalmConfigScript(Script):
         return success, result, incoming_payload
 
 
-class NapalmGettersScript(Script):
+class NapalmGettersService(Service):
 
-    __tablename__ = 'NapalmGettersScript'
+    __tablename__ = 'NapalmGettersService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
     content_match = Column(String)
     content_match_regex = Column(Boolean)
@@ -279,16 +279,16 @@ class NapalmGettersScript(Script):
                 success = self.content_match in str_dict(result)
             napalm_driver.close()
         except Exception as e:
-            result = f'script did not work:\n{e}'
+            result = f'service did not work:\n{e}'
             success = False
         return success, result, result
 
 
-class AnsibleScript(Script):
+class AnsibleService(Service):
 
-    __tablename__ = 'AnsibleScript'
+    __tablename__ = 'AnsibleService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     playbook_path = Column(String)
@@ -328,11 +328,11 @@ class AnsibleScript(Script):
         return success, result, incoming_payload
 
 
-class RestCallScript(Script):
+class RestCallService(Service):
 
-    __tablename__ = 'RestCallScript'
+    __tablename__ = 'RestCallService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
@@ -387,11 +387,11 @@ class RestCallScript(Script):
 
 
 type_to_class = {
-    'netmiko_config': NetmikoConfigScript,
-    'netmiko_validation': NetmikoValidationScript,
-    'napalm_config': NapalmConfigScript,
-    'file_transfer': FileTransferScript,
-    'napalm_getters': NapalmGettersScript,
-    'ansible_playbook': AnsibleScript,
-    'rest_call': RestCallScript
+    'netmiko_config': NetmikoConfigService,
+    'netmiko_validation': NetmikoValidationService,
+    'napalm_config': NapalmConfigService,
+    'file_transfer': FileTransferService,
+    'napalm_getters': NapalmGettersService,
+    'ansible_playbook': AnsibleService,
+    'rest_call': RestCallService
 }

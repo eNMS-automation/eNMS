@@ -148,13 +148,13 @@ class Task(CustomBase):
         return {p: getattr(self, p) for p in cls_to_properties['Task']}
 
 
-class ScriptTask(Task):
+class ServiceTask(Task):
 
-    __tablename__ = 'ScriptTask'
+    __tablename__ = 'ServiceTask'
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
-    script_id = Column(Integer, ForeignKey('Script.id'))
-    script = relationship('Script', back_populates='tasks')
+    service_id = Column(Integer, ForeignKey('Service.id'))
+    service = relationship('Service', back_populates='tasks')
     devices = relationship(
         'Device',
         secondary=task_device_table,
@@ -167,11 +167,11 @@ class ScriptTask(Task):
     )
 
     __mapper_args__ = {
-        'polymorphic_identity': 'ScriptTask',
+        'polymorphic_identity': 'ServiceTask',
     }
 
     def __init__(self, **data):
-        self.script = data.pop('job')
+        self.service = data.pop('job')
         self.devices = data['devices']
         super().__init__(**data)
 
@@ -184,18 +184,18 @@ class ScriptTask(Task):
     def job(self, runtime, workflow):
         results = {}
         incoming_payload = self.get_payloads(workflow, runtime)
-        if self.script.device_multiprocessing:
+        if self.service.device_multiprocessing:
             targets = self.compute_targets()
             pool = ThreadPool(processes=len(self.devices))
             args = [
                 (self, device, results, incoming_payload)
                 for device in targets
             ]
-            pool.map(self.script.job, args)
+            pool.map(self.service.job, args)
             pool.close()
             pool.join()
         else:
-            results = self.script.job(self, results, incoming_payload)
+            results = self.service.job(self, results, incoming_payload)
         self.logs[runtime] = results
         db.session.commit()
         return results
@@ -203,7 +203,7 @@ class ScriptTask(Task):
     @property
     def serialized(self):
         properties = self.properties
-        properties['job'] = self.script.properties if self.script else None
+        properties['job'] = self.service.properties if self.service else None
         properties['devices'] = [device.properties for device in self.devices]
         properties['pools'] = [pool.properties for pool in self.pools]
         return properties

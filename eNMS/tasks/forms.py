@@ -18,7 +18,7 @@ class SchedulingForm(FlaskForm):
     run_immediately = BooleanField('Run immediately')
     do_not_run = BooleanField('Do not run', default=True)
     transfer_payload = BooleanField('Transfer payload', default=True)
-    script_type_choices = (
+    service_type_choices = (
         ('napalm_action', 'NAPALM action'),
         ('netmiko_config', 'Netmiko configuration'),
         ('napalm_config', 'NAPALM configuration'),
@@ -26,9 +26,9 @@ class SchedulingForm(FlaskForm):
         ('file_transfer', 'File transfer'),
         ('netmiko_validation', 'Netmiko validation'),
         ('ansible_playbook', 'Ansible playbook'),
-        ('custom_script', 'Custom scripts')
+        ('custom_service', 'Custom services')
     )
-    script_type = SelectField('Type of script', choices=script_type_choices)
+    service_type = SelectField('Type of service', choices=service_type_choices)
     devices = SelectMultipleField('', choices=())
     pools = SelectMultipleField('', choices=())
     job = SelectField('', choices=())

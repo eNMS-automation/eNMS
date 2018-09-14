@@ -31,10 +31,6 @@ class CustomScript(Script):
     def __init__(self, **kwargs):
         self.__dict__.update(**kwargs)
 
-    def job(self, args):
-        script_module = load_module(self.module_location)
-        return getattr(script_module, 'job')(self, args)
-
 
 type_to_class['custom_script'] = CustomScript
 
@@ -42,13 +38,5 @@ type_to_class['custom_script'] = CustomScript
 def create_custom_scripts():
     path_scripts = Path.cwd() / 'eNMS' / 'scripts' / 'custom_scripts'
     for file in path_scripts.glob('**/*.py'):
-        script_module = load_module(str(file))
-        try:
-            custom_script = CustomScript(**{
-                **getattr(script_module, 'parameters'),
-                'module_location': str(file)
-            })
-            db.session.add(custom_script)
-            db.session.commit()
-        except exc.IntegrityError:
-            db.session.rollback()
+        if 'init' not in str(file):
+            mod = load_module(str(file))

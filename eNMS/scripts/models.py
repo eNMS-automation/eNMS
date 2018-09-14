@@ -73,7 +73,11 @@ class Script(Job):
 
     @property
     def properties(self):
-        return {p: getattr(self, p) for p in type_to_properties[self.type]}
+        custom_properties = type_to_properties['custom_script']
+        return {
+            p: getattr(self, p)
+            for p in type_to_properties.get(self.type, custom_properties)
+        }
 
     @property
     def serialized(self):

@@ -74,13 +74,13 @@ def configure_database(app):
 
     @app.before_first_request
     def create_default():
+        create_custom_scripts()
         db.create_all()
         create_default_user()
         create_default_parameters()
         create_default_network_topology(app)
         create_default_pools()
         create_default_scripts()
-        create_custom_scripts()
         create_default_tasks()
         create_default_workflows()
 

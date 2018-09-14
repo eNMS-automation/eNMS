@@ -49,9 +49,12 @@ def configuration():
 @blueprint.route('/custom_services')
 @login_required
 def custom_services():
-    services = CustomService.choices()
-    print(service_classes)
-    return render_template('custom_services.html')
+    # services = CustomService.choices()
+    print([c.form for c in service_classes.values()])
+    return render_template(
+        'custom_services.html',
+        script_forms={s: c.form for s, c in service_classes.items()}
+        )
 
 
 @blueprint.route('/get/<service_type>/<service_id>', methods=['POST'])

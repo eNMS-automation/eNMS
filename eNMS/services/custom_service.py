@@ -33,7 +33,7 @@ class CustomService(Service):
 
 
 type_to_class['custom_service'] = CustomService
-service_classes = []
+service_classes = {}
 
 
 def create_custom_services():

@@ -12,10 +12,14 @@ class AService(CustomService):
         'polymorphic_identity': 'a_service',
     }
 
+    form = {
+        'value1': 'value1'
+    }
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def job(self, *args):
         return True, 'a', 'a'
 
-service_classes.append(AService)
+service_classes['A Service'] = AService

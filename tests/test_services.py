@@ -132,7 +132,7 @@ def test_base_services(user_client):
             data=napalm_jinja2_service
         )
     assert len(NapalmConfigService.query.all()) == 2
-    assert len(Service.query.all()) == 13
+    assert len(Service.query.all()) == 10
     netmiko_j2_service = db.session.query(Service).filter_by(
         name='netmiko_subif'
     ).first()
@@ -149,7 +149,7 @@ def test_base_services(user_client):
         data=file_transfer_service
     )
     assert len(FileTransferService.query.all()) == 1
-    assert len(Service.query.all()) == 14
+    assert len(Service.query.all()) == 11
 
 
 getters_dict = ImmutableMultiDict([
@@ -190,4 +190,4 @@ def test_ansible_services(user_client):
         data=ansible_service
     )
     assert len(AnsibleService.query.all()) == 1
-    assert len(Service.query.all()) == 11
+    assert len(Service.query.all()) == 8

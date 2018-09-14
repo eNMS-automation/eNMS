@@ -45,6 +45,12 @@ def configuration():
     )
 
 
+@blueprint.route('/custom_services')
+@login_required
+def custom_services():
+    return render_template('custom_services.html')
+
+
 @blueprint.route('/get/<service_type>/<service_id>', methods=['POST'])
 @login_required
 def get_service(service_type, service_id):

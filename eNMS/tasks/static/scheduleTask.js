@@ -33,15 +33,15 @@ function openWizard() { // eslint-disable-line no-unused-vars
 }
 
 // when a filter is selected, apply it
-$('#script_type').on('change', function() {
+$('#service_type').on('change', function() {
   $.ajax({
     type: 'POST',
-    url: `/scripts/script_type/${this.value}`,
+    url: `/services/service_type/${this.value}`,
     dataType: 'json',
-    success: function(scripts) {
-      $('#script').empty();
-      $.each(scripts, function(_, s) {
-        $('#script').append(`<option value="${s.id}">${s.name}</option>`);
+    success: function(services) {
+      $('#service').empty();
+      $.each(services, function(_, s) {
+        $('#service').append(`<option value="${s.id}">${s.name}</option>`);
       });
     },
   });

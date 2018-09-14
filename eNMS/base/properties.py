@@ -73,7 +73,7 @@ pool_public_properties = (
     'description'
 )
 
-script_public_properties = (
+service_public_properties = (
     'name',
     'type',
     'description'
@@ -138,7 +138,7 @@ cls_to_properties = {
     'Device': device_public_properties,
     'Link': link_public_properties,
     'Pool': pool_public_properties,
-    'Script': script_public_properties,
+    'Service': service_public_properties,
     'Parameters': parameters_public_properties,
     'Workflow': workflow_public_properties,
     'WorkflowEdge': workflow_edge_properties,
@@ -154,7 +154,7 @@ default_diagrams_properties = {
     'device': 'vendor',
     'link': 'location',
     'user': 'access_rights',
-    'script': 'type',
+    'service': 'type',
     'workflow': 'vendor',
     'task': 'type'
 }
@@ -188,7 +188,7 @@ workflow_diagram_properties = (
     'operating_system'
 )
 
-script_diagram_properties = (
+service_diagram_properties = (
     'type',
     'vendor',
     'operating_system'
@@ -203,7 +203,7 @@ type_to_diagram_properties = {
     'device': device_diagram_properties,
     'link': link_diagram_properties,
     'user': user_diagram_properties,
-    'script': script_diagram_properties,
+    'service': service_diagram_properties,
     'workflow': workflow_diagram_properties,
     'task': task_diagram_properties
 }

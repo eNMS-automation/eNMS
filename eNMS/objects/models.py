@@ -49,7 +49,7 @@ class Device(Object):
     password = Column(String)
     secret_password = Column(String)
     tasks = relationship(
-        'ScriptTask',
+        'ServiceTask',
         secondary=task_device_table,
         back_populates='devices'
     )
@@ -127,7 +127,7 @@ class Pool(CustomBase):
         back_populates='pools'
     )
     tasks = relationship(
-        'ScriptTask',
+        'ServiceTask',
         secondary=task_pool_table,
         back_populates='pools'
     )

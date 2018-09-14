@@ -1,11 +1,11 @@
-script_properties = (
+service_properties = (
     'id',
     'name',
     'type',
     'description',
 )
 
-netmiko_config_properties = script_properties + (
+netmiko_config_properties = service_properties + (
     'vendor',
     'operating_system',
     'content',
@@ -13,14 +13,14 @@ netmiko_config_properties = script_properties + (
     'global_delay_factor'
 )
 
-napalm_config_properties = script_properties + (
+napalm_config_properties = service_properties + (
     'vendor',
     'operating_system',
     'action',
     'content'
 )
 
-file_transfer_properties = script_properties + (
+file_transfer_properties = service_properties + (
     'vendor',
     'operating_system',
     'driver',
@@ -33,7 +33,7 @@ file_transfer_properties = script_properties + (
     'inline_transfer'
 )
 
-netmiko_validation_properties = script_properties + (
+netmiko_validation_properties = service_properties + (
     'vendor',
     'operating_system',
     'driver',
@@ -48,13 +48,13 @@ netmiko_validation_properties = script_properties + (
     'content_match_regex3'
 )
 
-napalm_getters_properties = script_properties + (
+napalm_getters_properties = service_properties + (
     'getters',
     'content_match',
     'content_match_regex'
 )
 
-ansible_playbook_properties = script_properties + (
+ansible_playbook_properties = service_properties + (
     'vendor',
     'operating_system',
     'playbook_path',
@@ -66,7 +66,7 @@ ansible_playbook_properties = script_properties + (
     'inventory_from_selection'
 )
 
-rest_call_properties = script_properties + (
+rest_call_properties = service_properties + (
     'call_type',
     'url',
     'payload',
@@ -76,7 +76,7 @@ rest_call_properties = script_properties + (
     'password'
 )
 
-custom_properties = script_properties + (
+custom_properties = service_properties + (
     'vendor',
     'operating_system'
 )
@@ -89,5 +89,5 @@ type_to_properties = {
     'napalm_getters': napalm_getters_properties,
     'ansible_playbook': ansible_playbook_properties,
     'rest_call': rest_call_properties,
-    'custom_script': custom_properties
+    'custom_service': custom_properties
 }

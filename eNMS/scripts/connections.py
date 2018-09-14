@@ -4,10 +4,10 @@ from netmiko import ConnectHandler
 from eNMS.base.helpers import get_credentials
 
 
-def netmiko_connection(script, device):
+def netmiko_connection(service, device):
     username, password, secret_password = get_credentials(device)
     return ConnectHandler(
-        device_type=script.driver,
+        device_type=service.driver,
         ip=device.ip_address,
         username=username,
         password=password,

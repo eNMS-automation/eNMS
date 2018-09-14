@@ -55,12 +55,17 @@ def custom_services():
     )
 
 
-@blueprint.route('/get_form/<service_id>', methods=['POST'])
+@blueprint.route('/get_form/<cls_name>', methods=['POST'])
 @login_required
-def get_form(service_id):
-    service = retrieve(Service, id=service_id)
-    
-    return jsonify(service.name)
+def get_form(cls_name):
+    cls = service_classes[cls_name]
+    html_form = ''.join(f'''
+      <label>{k}</label>
+      <div class='form-group'>
+        <input class="form-control" id="{k}" placeholder="{v}" type="text" value="">
+      </div>''' for k, v in cls.form.items())
+    instances = [instance.name for instance in cls.query.all()]
+    return jsonify({'form': html_form, 'instances': instances})
 
 
 @blueprint.route('/get/<service_type>/<service_id>', methods=['POST'])

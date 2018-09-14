@@ -12,10 +12,19 @@
     <div class="row">
       <div class="col-md-12 col-xs-12">
         <select class="form-control required" id="services"></select>
+        <select class="form-control required" id="service-instance"></select>
         <div class="x_panel">
-          
           <div class="x_content">
-            
+            <form data-parsley-validate id="rest_call-form" name="send" class="form-horizontal form-label-left" method="post">
+              <div class="form-group" style="height: 650px">
+                <div id="html-form"></div>
+                <div class="ln_solid"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button id="rest_call-button" type="button" class="btn btn-success" onclick="createService('rest_call')">Create</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

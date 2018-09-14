@@ -18,8 +18,6 @@ class CustomService(Service):
     __tablename__ = 'CustomService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    job_name = Column(String)
-    module_location = Column(String)
     vendor = Column(String)
     operating_system = Column(String)
     device_multiprocessing = Column(Boolean, default=False)
@@ -41,4 +39,9 @@ def create_custom_services():
     for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):
             mod = load_module(str(file))
-            print(service_classes)
+
+def create_custom_service_instances():
+    for cls in service_classes.values():
+        s = cls(**{'name': 'oook'})
+        db.session.add(s)
+        db.session.commit()

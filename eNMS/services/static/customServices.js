@@ -19,17 +19,18 @@ services: false
  * @param {id} id - Id of the service to delete.
  */
 function deleteService(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/services/delete/${id}`,
-    success: function(serviceName) {
-      table.row($(`#${id}`)).remove().draw(false);
-      const message = `Service '${serviceName}' successfully deleted.`;
-      alertify.notify(message, 'error', 5);
-    },
-  });
+
 }
 
 $('#services').change(function() {
-  console.log($('#services').val());
+  $.ajax({
+    type: 'POST',
+    url: `/services/get_form/${$('#services').val()}`,
+    success: function(result) {
+      $('#html-form').html(result.form);
+      console.log(result.instances);
+      alertify.notify('ok', 'success', 5);
+    },
+  });
+  console.log();
 });

@@ -46,12 +46,12 @@ netmiko_drivers = sorted(
 )
 
 
-class ScriptForm(FlaskForm):
+class ServiceForm(FlaskForm):
     name = TextField('Name')
     description = TextField('Description')
 
 
-class ConfigScriptForm(ScriptForm):
+class ConfigServiceForm(ServiceForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
     content = TextAreaField('')
@@ -63,26 +63,26 @@ class ConfigScriptForm(ScriptForm):
     content_type = SelectField('', choices=content_type_choices)
 
 
-class NetmikoConfigScriptForm(ConfigScriptForm):
+class NetmikoConfigServiceForm(ConfigServiceForm):
     file = FileField('File', validators=[FileAllowed(['yaml'], 'YAML only')])
     drivers = [(driver, driver) for driver in netmiko_drivers]
     driver = SelectField('', choices=drivers)
     global_delay_factor = FloatField('global_delay_factor', default=1.)
 
 
-class NapalmConfigScriptForm(ConfigScriptForm):
+class NapalmConfigServiceForm(ConfigServiceForm):
     action_choices = [(v, k) for k, v in napalm_actions.items()]
     action = SelectField('Actions', choices=action_choices)
 
 
-class NapalmGettersForm(ScriptForm):
+class NapalmGettersForm(ServiceForm):
     getters_choices = [(v, k) for k, v in getters_mapping.items()]
     getters = SelectMultipleField('Getters', choices=getters_choices)
     content_match = TextField('Content Match')
     content_match_regex = BooleanField()
 
 
-class FileTransferScriptForm(ScriptForm):
+class FileTransferServiceForm(ServiceForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
     driver_choices = (
@@ -104,7 +104,7 @@ class FileTransferScriptForm(ScriptForm):
     inline_transfer = BooleanField()
 
 
-class NetmikoValidationForm(ScriptForm):
+class NetmikoValidationForm(ServiceForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
     drivers = [(driver, driver) for driver in netmiko_drivers]
@@ -120,7 +120,7 @@ class NetmikoValidationForm(ScriptForm):
     content_match_regex3 = BooleanField()
 
 
-class AnsibleScriptForm(ScriptForm):
+class AnsibleServiceForm(ServiceForm):
     vendor = TextField('Vendor')
     operating_system = TextField('Operating system')
     playbook_path = TextField('Path to playbook')
@@ -131,7 +131,7 @@ class AnsibleScriptForm(ScriptForm):
     pass_device_properties = BooleanField()
 
 
-class RestCallScriptForm(ScriptForm):
+class RestCallServiceForm(ServiceForm):
     choices = ('GET', 'POST', 'PUT', 'DELETE')
     call_type = SelectField('Type', choices=tuple(zip(choices, choices)))
     url = TextField('URL')

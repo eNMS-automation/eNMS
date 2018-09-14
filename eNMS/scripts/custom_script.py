@@ -3,21 +3,21 @@ from pathlib import Path
 from sqlalchemy import Boolean, Column, exc, ForeignKey, Integer, String
 
 from eNMS import db
-from eNMS.scripts.models import Script, type_to_class
+from eNMS.services.models import Service, type_to_class
 
 
 def load_module(file_location):
     spec = spec_from_file_location(file_location, file_location)
-    script_module = module_from_spec(spec)
-    spec.loader.exec_module(script_module)
-    return script_module
+    service_module = module_from_spec(spec)
+    spec.loader.exec_module(service_module)
+    return service_module
 
 
-class CustomScript(Script):
+class CustomService(Service):
 
-    __tablename__ = 'CustomScript'
+    __tablename__ = 'CustomService'
 
-    id = Column(Integer, ForeignKey('Script.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     job_name = Column(String)
     module_location = Column(String)
     vendor = Column(String)
@@ -25,18 +25,18 @@ class CustomScript(Script):
     device_multiprocessing = Column(Boolean, default=False)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'custom_script',
+        'polymorphic_identity': 'custom_service',
     }
 
     def __init__(self, **kwargs):
         self.__dict__.update(**kwargs)
 
 
-type_to_class['custom_script'] = CustomScript
+type_to_class['custom_service'] = CustomService
 
 
-def create_custom_scripts():
-    path_scripts = Path.cwd() / 'eNMS' / 'scripts' / 'custom_scripts'
-    for file in path_scripts.glob('**/*.py'):
+def create_custom_services():
+    path_services = Path.cwd() / 'eNMS' / 'services' / 'custom_services'
+    for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):
             mod = load_module(str(file))

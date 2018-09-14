@@ -1,21 +1,21 @@
-from eNMS.scripts.forms import (
-    AnsibleScriptForm,
-    NapalmConfigScriptForm,
+from eNMS.services.forms import (
+    AnsibleServiceForm,
+    NapalmConfigServiceForm,
     NapalmGettersForm,
-    NetmikoConfigScriptForm,
-    FileTransferScriptForm,
+    NetmikoConfigServiceForm,
+    FileTransferServiceForm,
     NetmikoValidationForm,
-    RestCallScriptForm
+    RestCallServiceForm
 )
 
 type_to_form = {
-    'netmiko_config': NetmikoConfigScriptForm,
+    'netmiko_config': NetmikoConfigServiceForm,
     'netmiko_validation': NetmikoValidationForm,
-    'napalm_config': NapalmConfigScriptForm,
+    'napalm_config': NapalmConfigServiceForm,
     'napalm_getters': NapalmGettersForm,
-    'file_transfer': FileTransferScriptForm,
-    'ansible_playbook': AnsibleScriptForm,
-    'rest_call': RestCallScriptForm
+    'file_transfer': FileTransferServiceForm,
+    'ansible_playbook': AnsibleServiceForm,
+    'rest_call': RestCallServiceForm
 }
 
 type_to_name = {
@@ -26,5 +26,5 @@ type_to_name = {
     'file_transfer': 'File Transfer',
     'ansible_playbook': 'Ansible playbook',
     'rest_call': 'ReST Call',
-    'custom_script': 'Custom script'
+    'custom_service': 'Custom service'
 }

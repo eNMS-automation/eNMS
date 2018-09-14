@@ -27,8 +27,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    const scriptForms = {{ script_forms|tojson|safe }};
-    console.log(scriptForms);
+    const servicesClasses = {{ services_classes|tojson|safe }};
   </script>
   <script src="{{ url_for('services_blueprint.static', filename='customServices.js') }}"></script>
 {% endblock javascripts %}

@@ -28,7 +28,11 @@ $('#services').change(function() {
     url: `/services/get_form/${$('#services').val()}`,
     success: function(result) {
       $('#html-form').html(result.form);
-      console.log(result.instances);
+      for (let i = 0; i < result.instances.length; i++) {
+        const instance = result.instances[i];
+        $('#service-instance').append(`<option value='${instance}'>${instance}</option>`);
+      } 
+      console.log();
       alertify.notify('ok', 'success', 5);
     },
   });

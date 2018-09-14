@@ -40,8 +40,10 @@ def create_custom_services():
         if 'init' not in str(file):
             mod = load_module(str(file))
 
+
 def create_custom_service_instances():
-    for cls in service_classes.values():
-        s = cls(**{'name': 'oook'})
-        db.session.add(s)
-        db.session.commit()
+    for i in range(3):
+        for cls_name, cls in service_classes.items():
+            s = cls(**{'name': cls_name + 'oook' + str(i)})
+            db.session.add(s)
+            db.session.commit()

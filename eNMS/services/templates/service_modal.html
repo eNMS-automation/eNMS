@@ -1,5 +1,5 @@
-{% for script_type, script_form in type_to_form.items() %}
-  <div id="edit-{{ script_type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+{% for service_type, service_form in type_to_form.items() %}
+  <div id="edit-{{ service_type }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,8 +8,8 @@
           </button>
           <h4 class="modal-title" id="title"></h4>
         </div>
-        {% set form = script_form %}
-        {% include script_type + '.html' %}
+        {% set form = service_form %}
+        {% include service_type + '.html' %}
       </div>
     </div>
   </div>

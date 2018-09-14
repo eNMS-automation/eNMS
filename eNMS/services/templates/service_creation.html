@@ -1,0 +1,48 @@
+{% extends "base_site.html" %}
+
+{% block title %} Service creation {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <!-- begin row -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div role="tabpanel" data-example-id="togglable-tabs">
+              <ul class="nav nav-tabs bar_tabs" role="tablist">
+                {% for service_type, service_name in type_to_name.items() %}
+                  {% if service_type != "custom_service" %}
+                    {% set expanded = "true" if service_type == "netmiko_config" else "false" %}
+                    {% set active = "active" if service_type == "netmiko_config" else "" %}
+                    <li role="{{ service_type }}" class="{{ active }}"><a href="#{{ service_type }}" role="tab" data-toggle="tab" aria-expanded="{{ expanded }}">{{ service_name }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              <div class="tab-content">
+                {% for service_type, service_form in type_to_form.items() %}
+                  {% set class = "tab-pane fade active in" if service_type == "netmiko_config" else "tab-pane fade" %}
+                  <div role="tabpanel" class="{{ class }}" id="{{ service_type }}">
+                    {% set form = service_form %}
+                    {% include service_type + '.html' %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script src="{{ url_for('services_blueprint.static', filename='serviceCreation.js') }}"></script>
+{% endblock javascripts %}

@@ -1,19 +1,19 @@
 from eNMS import db
 from os.path import join
-from eNMS.scripts.models import (
-    AnsibleScript,
-    NapalmConfigScript,
-    NapalmGettersScript,
-    NetmikoConfigScript,
-    FileTransferScript,
-    Script
+from eNMS.services.models import (
+    AnsibleService,
+    NapalmConfigService,
+    NapalmGettersService,
+    NetmikoConfigService,
+    FileTransferService,
+    Service
 )
 from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
-# test the creation of configuration script (netmiko / napalm)
-# test the creation of file transfer script (netmiko via SCP)
-# test the creation of ansible script
+# test the creation of configuration service (netmiko / napalm)
+# test the creation of file transfer service (netmiko via SCP)
+# test the creation of ansible service
 
 
 netmiko_ping = ImmutableMultiDict([
@@ -23,7 +23,7 @@ netmiko_ping = ImmutableMultiDict([
     ('vendor', ''),
     ('operating_system', ''),
     ('content_type', 'simple'),
-    ('create_script', 'netmiko_config'),
+    ('create_service', 'netmiko_config'),
     ('content', 'ping 1.1.1.1'),
     ('netmiko_type', 'show_commands'),
     ('driver', 'cisco_xr_ssh'),
@@ -64,34 +64,34 @@ no ip redirects
 ip ospf cost 620
 '''
 
-netmiko_jinja2_script = dict([
+netmiko_jinja2_service = dict([
     ('name', 'netmiko_subif'),
     ('waiting_time', '0'),
     ('description', ''),
     ('vendor', ''),
     ('operating_system', ''),
     ('content_type', 'j2_template'),
-    ('create_script', 'netmiko_config'),
+    ('create_service', 'netmiko_config'),
     ('content', template),
     ('netmiko_type', 'configuration'),
     ('driver', 'cisco_xr_ssh'),
     ('global_delay_factor', '1.0'),
 ])
 
-napalm_jinja2_script = dict([
+napalm_jinja2_service = dict([
     ('name', 'napalm_subif'),
     ('waiting_time', '0'),
     ('description', ''),
     ('vendor', ''),
     ('operating_system', ''),
     ('content_type', 'j2_template'),
-    ('create_script', 'napalm_config'),
+    ('create_service', 'napalm_config'),
     ('content', template),
-    ('script_type', 'napalm_configuration'),
+    ('service_type', 'napalm_configuration'),
     ('action', 'load_merge_candidate')
 ])
 
-file_transfer_script = ImmutableMultiDict([
+file_transfer_service = ImmutableMultiDict([
     ('name', 'test'),
     ('waiting_time', '0'),
     ('description', ''),
@@ -102,17 +102,17 @@ file_transfer_script = ImmutableMultiDict([
     ('dest_file', 'path/to/destination'),
     ('file_system', 'flash:'),
     ('direction', 'put'),
-    ('create_script', 'file_transfer'),
+    ('create_service', 'file_transfer'),
 ])
 
 
-@check_blueprints('/scripts')
-def test_base_scripts(user_client):
+@check_blueprints('/services')
+def test_base_services(user_client):
     user_client.post(
-        '/scripts/create_script/netmiko_config',
+        '/services/create_service/netmiko_config',
         data=netmiko_ping
     )
-    assert len(NetmikoConfigScript.query.all()) == 3
+    assert len(NetmikoConfigService.query.all()) == 3
     path_yaml = join(
         user_client.application.path,
         'scripts',
@@ -120,59 +120,59 @@ def test_base_scripts(user_client):
         'parameters.yaml'
     )
     with open(path_yaml, 'rb') as f:
-        netmiko_jinja2_script['file'] = f
+        netmiko_jinja2_service['file'] = f
         user_client.post(
-            '/scripts/create_script/netmiko_config',
-            data=netmiko_jinja2_script
+            '/services/create_service/netmiko_config',
+            data=netmiko_jinja2_service
         )
     with open(path_yaml, 'rb') as f:
-        napalm_jinja2_script['file'] = f
+        napalm_jinja2_service['file'] = f
         user_client.post(
-            '/scripts/create_script/napalm_config',
-            data=napalm_jinja2_script
+            '/services/create_service/napalm_config',
+            data=napalm_jinja2_service
         )
-    assert len(NapalmConfigScript.query.all()) == 2
-    assert len(Script.query.all()) == 13
-    netmiko_j2_script = db.session.query(Script).filter_by(
+    assert len(NapalmConfigService.query.all()) == 2
+    assert len(Service.query.all()) == 13
+    netmiko_j2_service = db.session.query(Service).filter_by(
         name='netmiko_subif'
     ).first()
-    napalm_j2_script = db.session.query(Script).filter_by(
+    napalm_j2_service = db.session.query(Service).filter_by(
         name='napalm_subif'
     ).first()
     # simply removing the space does not work as yaml relies on dict, which are
     # not ordered, we use set instead for the test to pass on python 2 and 3
-    assert set(netmiko_j2_script.content.split('\n')) == set(result.split('\n'))
-    assert set(napalm_j2_script.content.split('\n')) == set(result.split('\n'))
-    # file transfer script
+    assert set(netmiko_j2_service.content.split('\n')) == set(result.split('\n'))
+    assert set(napalm_j2_service.content.split('\n')) == set(result.split('\n'))
+    # file transfer service
     user_client.post(
-        'scripts/create_script/file_transfer',
-        data=file_transfer_script
+        'services/create_service/file_transfer',
+        data=file_transfer_service
     )
-    assert len(FileTransferScript.query.all()) == 1
-    assert len(Script.query.all()) == 14
+    assert len(FileTransferService.query.all()) == 1
+    assert len(Service.query.all()) == 14
 
 
 getters_dict = ImmutableMultiDict([
-    ('name', 'napalm_getters_script'),
+    ('name', 'napalm_getters_service'),
     ('waiting_time', '0'),
     ('description', ''),
     ('getters', 'get_interfaces'),
     ('getters', 'get_interfaces_ip'),
     ('getters', 'get_lldp_neighbors'),
-    ('create_script', 'napalm_getters')
+    ('create_service', 'napalm_getters')
 ])
 
 
-@check_blueprints('/scripts')
-def test_getters_script(user_client):
+@check_blueprints('/services')
+def test_getters_service(user_client):
     user_client.post(
-        '/scripts/create_script/napalm_getters',
+        '/services/create_service/napalm_getters',
         data=getters_dict
     )
-    assert len(NapalmGettersScript.query.all()) == 2
+    assert len(NapalmGettersService.query.all()) == 2
 
 
-ansible_script = ImmutableMultiDict([
+ansible_service = ImmutableMultiDict([
     ('name', 'testttt'),
     ('waiting_time', '0'),
     ('description', ''),
@@ -183,11 +183,11 @@ ansible_script = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/scripts')
-def test_ansible_scripts(user_client):
+@check_blueprints('/services')
+def test_ansible_services(user_client):
     user_client.post(
-        '/scripts/create_script/ansible_playbook',
-        data=ansible_script
+        '/services/create_service/ansible_playbook',
+        data=ansible_service
     )
-    assert len(AnsibleScript.query.all()) == 1
-    assert len(Script.query.all()) == 11
+    assert len(AnsibleService.query.all()) == 1
+    assert len(Service.query.all()) == 11

@@ -45,7 +45,7 @@ google_earth_dict = ImmutableMultiDict([
     ('name', 'test_google_earth'),
     ('label_size', '1'),
     ('line_width', '2'),
-    ('netmiko_script', '')
+    ('netmiko_service', '')
 ])
 
 

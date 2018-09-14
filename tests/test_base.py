@@ -23,16 +23,16 @@ urls = {
         '/geographical_view',
         '/logical_view',
     ),
-    '/scripts': (
-        '/script_management',
-        '/script_creation',
+    '/services': (
+        '/service_management',
+        '/service_creation',
     ),
     '/workflows': (
         '/workflow_management',
         '/workflow_editor'
     ),
     '/tasks': (
-        '/task_management/script',
+        '/task_management/service',
         '/task_management/workflow',
         '/calendar'
     )

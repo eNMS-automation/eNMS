@@ -4,7 +4,7 @@ from time import sleep
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.objects.models import Device
-from eNMS.scripts.models import Script
+from eNMS.services.models import Service
 from eNMS.tasks.models import Task
 
 device = {
@@ -101,7 +101,7 @@ def rest_api_test(user_client):
     assert len(Device.query.all()) == 0
 
 
-post_script = ImmutableMultiDict([
+post_service = ImmutableMultiDict([
     ('name', 'create_router10'),
     ('description', 'POST creation'),
     ('call_type', 'POST'),
@@ -113,7 +113,7 @@ post_script = ImmutableMultiDict([
     ('content_regex', 'y')
 ])
 
-post_script_task = ImmutableMultiDict([
+post_service_task = ImmutableMultiDict([
     ('name', 'task_create_router'),
     ('waiting_time', '0'),
     ('job', '4'),
@@ -123,7 +123,7 @@ post_script_task = ImmutableMultiDict([
     ('run_immediately', 'y')
 ])
 
-delete_script = ImmutableMultiDict([
+delete_service = ImmutableMultiDict([
     ('name', 'delete_router10'),
     ('description', 'DELETE'),
     ('call_type', 'DELETE'),
@@ -135,7 +135,7 @@ delete_script = ImmutableMultiDict([
     ('content_regex', 'y')
 ])
 
-delete_script_task = ImmutableMultiDict([
+delete_service_task = ImmutableMultiDict([
     ('name', 'task_delete_router'),
     ('waiting_time', '0'),
     ('job', '5'),
@@ -146,10 +146,10 @@ delete_script_task = ImmutableMultiDict([
 ])
 
 
-def rest_script_test(user_client):
-    user_client.post('/scripts/create_script/rest_call', data=post_script)
-    assert len(Script.query.all()) == 4
-    user_client.post('/tasks/scheduler', data=post_script_task)
+def rest_service_test(user_client):
+    user_client.post('/services/create_service/rest_call', data=post_service)
+    assert len(Service.query.all()) == 4
+    user_client.post('/tasks/scheduler', data=post_service_task)
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_create_router',
         headers={'Accept': 'application/json'}
@@ -158,9 +158,9 @@ def rest_script_test(user_client):
     # wait a bit for the task to run
     sleep(30)
     assert len(Device.query.all()) == 1
-    user_client.post('/scripts/create_script/rest_call', data=delete_script)
-    assert len(Script.query.all()) == 5
-    user_client.post('/tasks/scheduler', data=delete_script_task)
+    user_client.post('/services/create_service/rest_call', data=delete_service)
+    assert len(Service.query.all()) == 5
+    user_client.post('/tasks/scheduler', data=delete_service_task)
     assert len(Task.query.all()) == 2
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_delete_router',

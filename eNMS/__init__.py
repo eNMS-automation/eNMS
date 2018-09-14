@@ -16,13 +16,13 @@ from eNMS.base.default import (
     create_default_network_topology,
     create_default_parameters,
     create_default_pools,
-    create_default_scripts,
+    create_default_services,
     create_default_tasks,
     create_default_user,
     create_default_workflows
 )
 from eNMS.base.rest import configure_rest_api
-from eNMS.scripts.custom_script import create_custom_scripts
+from eNMS.services.custom_service import create_custom_services
 
 
 def register_extensions(app):
@@ -37,7 +37,7 @@ def register_blueprints(app):
     blueprints = (
         'base',
         'objects',
-        'scripts',
+        'services',
         'workflows',
         'tasks',
         'admin',
@@ -74,13 +74,13 @@ def configure_database(app):
 
     @app.before_first_request
     def create_default():
-        create_custom_scripts()
+        create_custom_services()
         db.create_all()
         create_default_user()
         create_default_parameters()
         create_default_network_topology(app)
         create_default_pools()
-        create_default_scripts()
+        create_default_services()
         create_default_tasks()
         create_default_workflows()
 

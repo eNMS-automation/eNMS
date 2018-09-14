@@ -6,14 +6,14 @@ task_device_table = Table(
     'task_device_association',
     CustomBase.metadata,
     Column('device_id', Integer, ForeignKey('Device.id')),
-    Column('script_task_id', Integer, ForeignKey('ScriptTask.id'))
+    Column('service_task_id', Integer, ForeignKey('ServiceTask.id'))
 )
 
 task_pool_table = Table(
     'task_pool_association',
     CustomBase.metadata,
     Column('pool_id', Integer, ForeignKey('Pool.id')),
-    Column('script_task_id', Integer, ForeignKey('ScriptTask.id'))
+    Column('service_task_id', Integer, ForeignKey('ServiceTask.id'))
 )
 
 task_log_rule_table = Table(

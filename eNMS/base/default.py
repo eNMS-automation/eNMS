@@ -8,15 +8,15 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.scripts.models import (
-    NapalmConfigScript,
-    NapalmGettersScript,
-    NetmikoConfigScript,
-    NetmikoValidationScript,
-    RestCallScript,
-    Script
+from eNMS.services.models import (
+    NapalmConfigService,
+    NapalmGettersService,
+    NetmikoConfigService,
+    NetmikoValidationService,
+    RestCallService,
+    Service
 )
-from eNMS.tasks.models import ScriptTask, Task, WorkflowTask
+from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
 
@@ -61,10 +61,10 @@ def create_default_network_topology(app):
             db.session.commit()
 
 
-def create_netmiko_scripts():
-    for script in (
+def create_netmiko_services():
+    for service in (
         {
-            'type': NetmikoConfigScript,
+            'type': NetmikoConfigService,
             'name': 'netmiko_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Netmiko',
             'vendor': 'Cisco',
@@ -75,7 +75,7 @@ def create_netmiko_scripts():
             'content': 'ip vrf TEST'
         },
         {
-            'type': NetmikoValidationScript,
+            'type': NetmikoValidationService,
             'name': 'netmiko_check_vrf_TEST',
             'description': 'Check that the vrf "TEST" is configured',
             'vendor': 'Cisco',
@@ -85,7 +85,7 @@ def create_netmiko_scripts():
             'content_match1': 'TEST'
         },
         {
-            'type': NetmikoConfigScript,
+            'type': NetmikoConfigService,
             'name': 'netmiko_delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
             'vendor': 'Cisco',
@@ -96,7 +96,7 @@ def create_netmiko_scripts():
             'content': 'no ip vrf TEST'
         },
         {
-            'type': NetmikoValidationScript,
+            'type': NetmikoValidationService,
             'name': 'netmiko_check_no_vrf_TEST',
             'description': 'Check that the vrf "TEST" is NOT configured',
             'vendor': 'Cisco',
@@ -107,11 +107,11 @@ def create_netmiko_scripts():
             'content_match_regex1': 'y'
         },
     ):
-        factory(script.pop('type'), **script)
+        factory(service.pop('type'), **service)
 
 
-def create_napalm_script():
-    factory(NapalmConfigScript, **{
+def create_napalm_service():
+    factory(NapalmConfigService, **{
         'name': 'napalm_create_vrf_TEST',
         'description': 'Create a VRF "TEST" with Napalm',
         'vendor': 'Cisco',
@@ -122,14 +122,14 @@ def create_napalm_script():
     })
 
 
-def create_other_scripts():
-    factory(NapalmGettersScript, **{
-        'name': 'script_napalm_getter',
+def create_other_services():
+    factory(NapalmGettersService, **{
+        'name': 'service_napalm_getter',
         'description': 'Getters: facts / Interfaces / Interfaces IP',
         'content_match': '',
         'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip']
     })
-    factory(RestCallScript, **{
+    factory(RestCallService, **{
         'name': 'GET_router8',
         'description': 'Use GET ReST call on router8',
         'content_match': '',
@@ -140,20 +140,20 @@ def create_other_scripts():
 
 
 def create_netmiko_tasks():
-    scripts = [
-        retrieve(Script, name=script_name) for script_name in (
+    services = [
+        retrieve(Service, name=service_name) for service_name in (
             'netmiko_create_vrf_TEST',
             'netmiko_check_vrf_TEST',
             'netmiko_delete_vrf_TEST',
             'netmiko_check_no_vrf_TEST'
         )
     ]
-    for script in scripts:
-        factory(ScriptTask, **{
-            'name': f'task_{script.name}',
+    for service in services:
+        factory(ServiceTask, **{
+            'name': f'task_{service.name}',
             'devices': [retrieve(Device, name='router8')],
-            'waiting_time': 3 if script.name == 'delete_vrf_TEST' else 0,
-            'job': script,
+            'waiting_time': 3 if service.name == 'delete_vrf_TEST' else 0,
+            'job': service,
             'do_not_run': 'y',
             'user': retrieve(User, name='cisco')
         })
@@ -162,16 +162,16 @@ def create_netmiko_tasks():
 def create_napalm_tasks():
     device = retrieve(Device, name='router8')
     user = retrieve(User, name='cisco')
-    factory(ScriptTask, **{
+    factory(ServiceTask, **{
         'name': 'task_napalm_create_vrf_TEST',
-        'job': retrieve(Script, name='napalm_create_vrf_TEST'),
+        'job': retrieve(Service, name='napalm_create_vrf_TEST'),
         'devices': [device],
         'do_not_run': 'y',
         'user': user
     })
-    factory(ScriptTask, **{
+    factory(ServiceTask, **{
         'name': 'task_napalm_rollback',
-        'job': retrieve(Script, name='Napalm Rollback'),
+        'job': retrieve(Service, name='Napalm Rollback'),
         'devices': [device],
         'do_not_run': 'y',
         'user': user
@@ -181,17 +181,17 @@ def create_napalm_tasks():
 def create_other_tasks():
     device = retrieve(Device, name='router8')
     user = retrieve(User, name='cisco')
-    factory(ScriptTask, **{
-        'name': 'task_script_napalm_getter',
+    factory(ServiceTask, **{
+        'name': 'task_service_napalm_getter',
         'waiting_time': '0',
-        'job': retrieve(Script, name='script_napalm_getter'),
+        'job': retrieve(Service, name='service_napalm_getter'),
         'devices': [device],
         'do_not_run': 'y',
         'user': user
     })
-    factory(ScriptTask, **{
+    factory(ServiceTask, **{
         'name': 'task_GET_router8',
-        'job': retrieve(Script, name='GET_router8'),
+        'job': retrieve(Service, name='GET_router8'),
         'devices': [],
         'do_not_run': 'y',
         'user': user
@@ -263,7 +263,7 @@ def create_napalm_workflow():
 def create_other_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
-            'task_script_napalm_getter',
+            'task_service_napalm_getter',
             'task_GET_router8',
         )
     ]
@@ -289,10 +289,10 @@ def create_other_workflow():
     })
 
 
-def create_default_scripts():
-    create_netmiko_scripts()
-    create_napalm_script()
-    create_other_scripts()
+def create_default_services():
+    create_netmiko_services()
+    create_napalm_service()
+    create_other_services()
 
 
 def create_default_tasks():

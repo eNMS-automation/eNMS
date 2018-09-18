@@ -25,8 +25,21 @@ function buildServiceInstances() {
       $('#html-form').html(result.form);
       for (let i = 0; i < result.instances.length; i++) {
         const instance = result.instances[i];
-        $('#service-instance').append(`<option value='${instance}'>${instance}</option>`);
+        $('#service-instance').append(`<option value='${instance[0]}'>${instance[1]}</option>`);
       }
+    },
+  });
+}
+
+/**
+ * Fill form with instance values.
+ */
+function fillInstanceForm() {
+  $.ajax({
+    type: 'POST',
+    url: `/services/get_form_values/${$('#service-instance').val()}`,
+    success: function(result) {
+      console.log(result);
     },
   });
 }
@@ -41,5 +54,10 @@ function deleteService(id) { // eslint-disable-line no-unused-vars
 
 $('#services').change(function() {
   buildServiceInstances();
+  alertify.notify('ok', 'success', 5);
+});
+
+$('#service-instance').change(function() {
+  fillInstanceForm();
   alertify.notify('ok', 'success', 5);
 });

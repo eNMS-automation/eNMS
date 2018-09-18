@@ -19,8 +19,6 @@ class CustomService(Service):
     __tablename__ = 'CustomService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
     device_multiprocessing = Column(Boolean, default=False)
 
     __mapper_args__ = {
@@ -29,6 +27,14 @@ class CustomService(Service):
 
     def __init__(self, **kwargs):
         self.__dict__.update(**kwargs)
+
+    @property
+    def serialized(self):
+        serialized_object = {}
+        for cls, properties in self.form.items():
+            for property, value in properties.items():
+                serialized_object[property] = cls(value)
+        return serialized_object
 
 
 type_to_class['custom_service'] = CustomService

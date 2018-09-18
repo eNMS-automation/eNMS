@@ -63,9 +63,14 @@ def get_form(cls_name):
       <label>{k}</label>
       <div class='form-group'>
         <input class="form-control" id="{k}" placeholder="{v}" type="text" value="">
-      </div>''' for k, v in cls.form.items())
-    instances = [instance.name for instance in cls.query.all()]
-    return jsonify({'form': html_form, 'instances': instances})
+      </div>''' for k, v in cls.form[str].items())
+    return jsonify({'form': html_form, 'instances': cls.choices()})
+
+
+@blueprint.route('/get_form_values/<service_id>', methods=['POST'])
+@login_required
+def get_form_values(service_id):
+    return jsonify(retrieve(Service, id=service_id).serialized)
 
 
 @blueprint.route('/get/<service_type>/<service_id>', methods=['POST'])

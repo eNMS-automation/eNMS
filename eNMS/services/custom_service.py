@@ -3,6 +3,7 @@ from pathlib import Path
 from sqlalchemy import Boolean, Column, exc, ForeignKey, Integer, String
 
 from eNMS import db
+from eNMS.base.helpers import integrity_rollback
 from eNMS.services.models import Service, type_to_class
 
 
@@ -41,6 +42,7 @@ def create_custom_services():
             mod = load_module(str(file))
 
 
+@integrity_rollback
 def create_custom_service_instances():
     for i in range(3):
         for cls_name, cls in service_classes.items():

@@ -20,7 +20,7 @@ class AService(CustomService):
     operating_system = Column('Operating sytem', String)
     an_integer = Column('An integer', Integer)
     a_float = Column('A float', Float)
-    a_dict = Column(MutableDict.as_mutable(PickleType), default={})
+    a_dict = Column('A dictionnary', MutableDict.as_mutable(PickleType))
 
     __mapper_args__ = {
         'polymorphic_identity': 'a_service',

@@ -2,7 +2,7 @@ from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
 from jinja2 import Template
 from os.path import join
-from sqlalchemy import Boolean, Float, Integer, String
+from sqlalchemy import Boolean, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from werkzeug import secure_filename
 from yaml import load as yaml_load
@@ -90,7 +90,7 @@ def get_form(cls_name):
         build_separator('Float properties') +
         build_text_boxes(Float) +
         build_separator('Json properties') +
-        build_text_boxes(MutableDict)
+        build_text_boxes(PickleType)
     )
 
     return jsonify({'form': form, 'instances': cls.choices()})

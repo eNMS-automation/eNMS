@@ -7,26 +7,11 @@ class AService(CustomService):
     __tablename__ = 'AService'
 
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
-    vendor = Column(String, default='oo')
-    operating_system = Column(String)
+    vendor = Column('Vendor', String)
+    operating_system = Column('Operating sytem', String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'a_service',
-    }
-
-    form = {
-        str: {
-            'value1': 'value1',
-            'value2': 'value2'
-        },
-        int: {
-            'value3': 1,
-            'value4': 42
-        },
-        dict: {
-            'value5': {1: 2},
-            'value6': {}
-        }
     }
 
     def __init__(self, **kwargs):

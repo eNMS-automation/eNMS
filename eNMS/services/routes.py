@@ -60,7 +60,7 @@ def custom_services():
 @blueprint.route('/get_form/<cls_name>', methods=['POST'])
 @login_required
 def get_form(cls_name):
-    cls = service_classes[cls_name]
+    cls, forbidden = service_classes[cls_name], {'id'}
 
     def build_separator(text):
         return (f'''
@@ -74,19 +74,30 @@ def get_form(cls_name):
 
     def build_text_boxes(sql_type):
         return ''.join(f'''
-        <label>{k}</label>
-        <div class='form-group'>
-            <input class="form-control" id="{col.key}" type="text">
-        </div>''' for col in cls.__table__.columns if col.type == sql_type
+            <label>{col.key}</label>
+            <div class='form-group'>
+                <input class="form-control" id="{col.key}" type="text">
+            </div>'''
+            for col in cls.__table__.columns
+            if type(col.type) == sql_type and col.key not in forbidden
         )
 
+    for col in cls.__table__.columns:
+        print(type(col.type), String, type(col.type) == String)
+        if type(col.type) == String:
+            print(f'''
+            <label>{col.description}</label>
+            <div class='form-group'>
+                <input class="form-control" id="{col.key}" type="text">
+            </div>''')
+    print(build_text_boxes(build_text_boxes(String)))
     form = (
         build_separator('Text properties') +
-        build_text_boxes(build_text_boxes(String)) +
+        build_text_boxes(String) +
         build_separator('Integer properties') +
-        build_text_boxes(build_text_boxes(Integer)) +
+        build_text_boxes(Integer) +
         build_separator('Json properties') +
-        build_text_boxes(build_text_boxes(MutableDict))
+        build_text_boxes(MutableDict)
     )
 
     return jsonify({'form': form, 'instances': cls.choices()})

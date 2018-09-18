@@ -2,8 +2,8 @@ from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
 from jinja2 import Template
 from os.path import join
-from sqlalchemy import Boolean, Integer, String
-from sqlalchemy.ext.mutable import MutableDict, MutableList
+from sqlalchemy import Boolean, Float, Integer, String
+from sqlalchemy.ext.mutable import MutableDict
 from werkzeug import secure_filename
 from yaml import load as yaml_load
 
@@ -82,20 +82,13 @@ def get_form(cls_name):
             if type(col.type) == sql_type and col.key not in forbidden
         )
 
-    for col in cls.__table__.columns:
-        print(type(col.type), String, type(col.type) == String)
-        if type(col.type) == String:
-            print(f'''
-            <label>{col.description}</label>
-            <div class='form-group'>
-                <input class="form-control" id="{col.key}" type="text">
-            </div>''')
-    print(build_text_boxes(build_text_boxes(String)))
     form = (
         build_separator('Text properties') +
         build_text_boxes(String) +
         build_separator('Integer properties') +
         build_text_boxes(Integer) +
+        build_separator('Float properties') +
+        build_text_boxes(Float) +
         build_separator('Json properties') +
         build_text_boxes(MutableDict)
     )

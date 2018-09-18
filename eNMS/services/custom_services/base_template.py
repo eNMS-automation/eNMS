@@ -1,4 +1,13 @@
-from sqlalchemy import Boolean, Column, exc, ForeignKey, Integer, String
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String
+)
+from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.services.custom_service import CustomService, service_classes
 
@@ -9,6 +18,9 @@ class AService(CustomService):
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
     vendor = Column('Vendor', String)
     operating_system = Column('Operating sytem', String)
+    an_integer = Column('An integer', Integer)
+    a_float = Column('A float', Float)
+    a_dict = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
         'polymorphic_identity': 'a_service',

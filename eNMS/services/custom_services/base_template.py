@@ -16,11 +16,11 @@ class AService(CustomService):
     __tablename__ = 'AService'
 
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
-    vendor = Column('Vendor', String)
-    operating_system = Column('Operating sytem', String)
-    an_integer = Column('An integer', Integer)
-    a_float = Column('A float', Float)
-    a_dict = Column('A dictionnary', MutableDict.as_mutable(PickleType))
+    vendor = Column(String)
+    operating_system = Column(String)
+    an_integer = Column(Integer)
+    a_float = Column(Float)
+    a_dict = Column(MutableDict.as_mutable(PickleType))
 
     __mapper_args__ = {
         'polymorphic_identity': 'a_service',

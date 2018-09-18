@@ -19,7 +19,8 @@ class CustomService(Service):
     __tablename__ = 'CustomService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    device_multiprocessing = Column(Boolean, default=False)
+    device_multiprocessing = False
+    private = {'id'}
 
     __mapper_args__ = {
         'polymorphic_identity': 'custom_service',
@@ -31,9 +32,9 @@ class CustomService(Service):
     @property
     def serialized(self):
         serialized_object = {}
-        for cls, properties in self.form.items():
-            for property, value in properties.items():
-                serialized_object[property] = cls(value)
+        for col in self.__table__.columns:
+            print(col.key)
+            serialized_object[col.key] = getattr(self, col.key)
         return serialized_object
 
 

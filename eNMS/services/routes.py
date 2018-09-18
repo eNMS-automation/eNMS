@@ -60,7 +60,7 @@ def custom_services():
 @blueprint.route('/get_form/<cls_name>', methods=['POST'])
 @login_required
 def get_form(cls_name):
-    cls, forbidden = service_classes[cls_name], {'id'}
+    cls = service_classes[cls_name]
 
     def build_separator(text):
         return (f'''
@@ -79,7 +79,7 @@ def get_form(cls_name):
                 <input class="form-control" id="{col.key}" type="text">
             </div>'''
             for col in cls.__table__.columns
-            if type(col.type) == sql_type and col.key not in forbidden
+            if type(col.type) == sql_type and col.key not in cls.private
         )
 
     form = (

@@ -20,6 +20,10 @@ class AService(CustomService):
         int: {
             'value3': 1,
             'value4': 42
+        },
+        dict: {
+            'value5': {1: 2},
+            'value6': {}
         }
     }
 

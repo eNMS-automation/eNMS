@@ -82,7 +82,9 @@ def get_form(cls_name):
         build_separator('Text properties') +
         build_text_boxes(cls.form[str]) +
         build_separator('Integer properties') +
-        build_text_boxes(cls.form[int])
+        build_text_boxes(cls.form[int]) +
+        build_separator('Json properties') +
+        build_text_boxes(cls.form[dict])
     )
     return jsonify({'form': form, 'instances': cls.choices()})
 

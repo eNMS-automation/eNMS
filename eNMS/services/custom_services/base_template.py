@@ -7,6 +7,8 @@ class AService(CustomService):
     __tablename__ = 'AService'
 
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
+    vendor = Column(String, default='oo')
+    operating_system = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'a_service',

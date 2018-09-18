@@ -2,6 +2,8 @@ from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
 from jinja2 import Template
 from os.path import join
+from sqlalchemy import Boolean, Integer, String
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from werkzeug import secure_filename
 from yaml import load as yaml_load
 
@@ -70,22 +72,23 @@ def get_form(cls_name):
             </div>'''
         )
 
-    def build_text_boxes(properties):
+    def build_text_boxes(sql_type):
         return ''.join(f'''
         <label>{k}</label>
         <div class='form-group'>
-            <input class="form-control" id="{k}" type="text" value="{v}">
-        </div>''' for k, v in properties.items()
+            <input class="form-control" id="{col.key}" type="text">
+        </div>''' for col in cls.__table__.columns if col.type == sql_type
         )
 
     form = (
         build_separator('Text properties') +
-        build_text_boxes(cls.form[str]) +
+        build_text_boxes(build_text_boxes(String)) +
         build_separator('Integer properties') +
-        build_text_boxes(cls.form[int]) +
+        build_text_boxes(build_text_boxes(Integer)) +
         build_separator('Json properties') +
-        build_text_boxes(cls.form[dict])
+        build_text_boxes(build_text_boxes(MutableDict))
     )
+
     return jsonify({'form': form, 'instances': cls.choices()})
 
 
@@ -131,21 +134,21 @@ def create_service(service_type):
     service = retrieve(Service, name=request.form['name'])
     form = dict(request.form.to_dict())
     form['getters'] = request.form.getlist('getters')
-    if not service:
-        if service_type in ('netmiko_config', 'napalm_config'):
-            if form['content_type'] != 'simple':
-                file = request.files['file']
-                filename = secure_filename(file.filename)
-                if allowed_file(filename, {'yaml', 'yml'}):
-                    parameters = yaml_load(file.read())
-                    template = Template(form['content'])
-                    form['content'] = ''.join(template.render(**parameters))
-        elif service_type == 'file_transfer':
-            source_file_name = form['source_file']
-            source_file_path = join(
-                current_app.path,
-                'file_transfer',
-                source_file_name
-            )
-            form['source_file'] = source_file_path
+    # if not service:
+    #     if service_type in ('netmiko_config', 'napalm_config'):
+    #         if form['content_type'] != 'simple':
+    #             file = request.files['file']
+    #             filename = secure_filename(file.filename)
+    #             if allowed_file(filename, {'yaml', 'yml'}):
+    #                 parameters = yaml_load(file.read())
+    #                 template = Template(form['content'])
+    #                 form['content'] = ''.join(template.render(**parameters))
+    #     elif service_type == 'file_transfer':
+    #         source_file_name = form['source_file']
+    #         source_file_path = join(
+    #             current_app.path,
+    #             'file_transfer',
+    #             source_file_name
+    #         )
+    #         form['source_file'] = source_file_path
     return jsonify(factory(type_to_class[service_type], **form).serialized)

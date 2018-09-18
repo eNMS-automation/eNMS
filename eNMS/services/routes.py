@@ -59,12 +59,32 @@ def custom_services():
 @login_required
 def get_form(cls_name):
     cls = service_classes[cls_name]
-    html_form = ''.join(f'''
-      <label>{k}</label>
-      <div class='form-group'>
-        <input class="form-control" id="{k}" placeholder="{v}" type="text" value="">
-      </div>''' for k, v in cls.form[str].items())
-    return jsonify({'form': html_form, 'instances': cls.choices()})
+
+    def build_separator(text):
+        return (f'''
+            <div style="width: 100%; height: 20px; border-bottom: 1px;
+            solid black; text-align: center;">
+                <span style="font-size: 15px; padding: 0 10px;">
+                    {text}
+                </span>
+            </div>'''
+        )
+
+    def build_text_boxes(properties):
+        return ''.join(f'''
+        <label>{k}</label>
+        <div class='form-group'>
+            <input class="form-control" id="{k}" type="text" value="{v}">
+        </div>''' for k, v in properties.items()
+        )
+
+    form = (
+        build_separator('Text properties') +
+        build_text_boxes(cls.form[str]) +
+        build_separator('Integer properties') +
+        build_text_boxes(cls.form[int])
+    )
+    return jsonify({'form': form, 'instances': cls.choices()})
 
 
 @blueprint.route('/get_form_values/<service_id>', methods=['POST'])

@@ -38,8 +38,14 @@ function fillInstanceForm() {
   $.ajax({
     type: 'POST',
     url: `/services/get_form_values/${$('#service-instance').val()}`,
-    success: function(result) {
-      console.log(result);
+    success: function(properties) {
+      for (const [property, value] of Object.entries(properties)) {
+        if (property.includes('regex')) {
+          $(`#${property}`).prop('checked', value);
+        } else {
+          $(`#${property}`).val(value);
+        }
+      }
     },
   });
 }

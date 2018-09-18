@@ -16,6 +16,10 @@ class AService(CustomService):
         str: {
             'value1': 'value1',
             'value2': 'value2'
+        },
+        int: {
+            'value3': 1,
+            'value4': 42
         }
     }
 

@@ -13,8 +13,14 @@ class AService2(CustomService):
     }
 
     form = {
-        'Value 1': 'value1',
-        'Value 2': 'value2'
+        str: {
+            'value1': 'value1',
+            'value2': 'value2'
+        },
+        int: {
+            'value3': 1,
+            'value4': 42
+        }
     }
 
     def __init__(self, **kwargs):

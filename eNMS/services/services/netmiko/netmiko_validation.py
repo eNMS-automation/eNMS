@@ -1,4 +1,5 @@
 from netmiko.ssh_dispatcher import CLASS_MAPPER
+from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.services.connections import netmiko_connection

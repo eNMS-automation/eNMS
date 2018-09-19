@@ -45,7 +45,6 @@
   {{ super()}}
   <script>
     const servicesClasses = {{ services_classes|tojson|safe }};
-    const propertyTypes = {{ property_types|tojson|safe }};
   </script>
   <script src="{{ url_for('services_blueprint.static', filename='serviceEditor.js') }}"></script>
 {% endblock javascripts %}

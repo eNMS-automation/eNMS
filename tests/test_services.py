@@ -1,8 +1,5 @@
-from eNMS import db
-from os.path import join
 from eNMS.services.models import (
     AnsibleService,
-    NapalmConfigService,
     NapalmGettersService,
     NetmikoConfigService,
     FileTransferService,
@@ -52,12 +49,6 @@ def test_base_services(user_client):
         data=netmiko_ping
     )
     assert len(NetmikoConfigService.query.all()) == 3
-    path_yaml = join(
-        user_client.application.path,
-        'scripts',
-        'interfaces',
-        'parameters.yaml'
-    )
     assert len(Service.query.all()) == 8
     user_client.post(
         'services/create_service/file_transfer',

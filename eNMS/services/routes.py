@@ -36,8 +36,7 @@ def services():
 def service_editor():
     return render_template(
         'service_editor.html',
-        services_classes=list(service_classes),
-        property_types={k: str(v) for k, v in property_types.items()}
+        services_classes=list(service_classes)
     )
 
 

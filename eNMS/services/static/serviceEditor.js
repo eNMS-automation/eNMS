@@ -1,10 +1,6 @@
 /*
 global
 alertify: false
-fields: false
-propertyTypes: false
-types: false
-services: false
 servicesClasses: false
 */
 
@@ -69,7 +65,6 @@ function saveService() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#form').serialize(),
       success: function(result) {
-        console.log(result);
       },
     });
   }

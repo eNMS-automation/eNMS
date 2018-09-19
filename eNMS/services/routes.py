@@ -84,21 +84,6 @@ def get_form(cls_name):
             ):
                 continue
             if hasattr(cls, f'{col.key}_values'):
-                pass
-            else:
-                yield f'''
-                    <label>{col.key}</label>
-                    <div class="form-group">
-                      <input class="form-control" id="{col.key}"
-                      name="{col.key}"type="text">
-                    </div>'''
-
-    def build_multiple_select():
-        for col in cls.__table__.columns:
-            if (
-                hasattr(cls, f'{col.key}_values')
-                and property_types[col.key] == 'pickle'
-            ):
                 options = ''.join(
                     f'<option value="{k}">{v}</option>'
                     for k, v in getattr(cls, f'{col.key}_values')
@@ -117,6 +102,15 @@ def get_form(cls_name):
                 <div class="form-group">
                   {core_part}
                 </div>'''
+
+    def build_multiple_select():
+        for col in cls.__table__.columns:
+            if (
+                not hasattr(cls, f'{col.key}_values')
+                or property_types[col.key] != 'pickle'
+            ):
+                continue
+            
 
     def build_booleans():
         for col in cls.__table__.columns:

@@ -18,7 +18,6 @@ from eNMS.base.properties import (
 from eNMS.objects.models import Device, Pool
 from eNMS.services import blueprint
 from eNMS.services.custom_service import CustomService, service_classes
-from eNMS.services.helpers import type_to_form, type_to_name
 from eNMS.services.models import Job, Service, type_to_class
 from eNMS.services.properties import type_to_properties
 from eNMS.tasks.forms import SchedulingForm
@@ -34,21 +33,9 @@ def services():
     return render_template(
         'service_management.html',
         fields=service_public_properties,
-        type_to_form={t: s(request.form) for t, s in type_to_form.items()},
         names=pretty_names,
         scheduling_form=scheduling_form,
         services=Service.serialize()
-    )
-
-
-@blueprint.route('/service_creation')
-@login_required
-def configuration():
-    return render_template(
-        'service_creation.html',
-        names=pretty_names,
-        type_to_form={t: s(request.form) for t, s in type_to_form.items()},
-        type_to_name=type_to_name
     )
 
 

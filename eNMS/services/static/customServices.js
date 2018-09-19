@@ -24,6 +24,7 @@ function buildServiceInstances() {
     type: 'POST',
     url: `/services/get_form/${$('#services').val()}`,
     success: function(result) {
+      $('#service-instance').empty();
       $('#html-form').html(result.form);
       for (let i = 0; i < result.instances.length; i++) {
         const instance = result.instances[i];

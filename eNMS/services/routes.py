@@ -67,6 +67,8 @@ def custom_services():
 def get_form(cls_name):
     cls = service_classes[cls_name]
 
+    def 
+
     def build_text_boxes():
         for col in cls.__table__.columns:
             if (
@@ -82,26 +84,16 @@ def get_form(cls_name):
                   name="{col.key}"type="text">
                 </div>'''
 
-    def build_select_boxes():
-        for col in cls.__table__.columns:
-            if col.key in cls.private or not hasattr(cls, f'{col.key}_values'):
-                continue
-            options = ''.join(
-                f'<option value="{k}">{v}</option>'
-                for k, v in getattr(cls, f'{col.key}_values')
-            )
-            if property_types[col.key] == list:
-                multiple = 'multiple size="7"'
-            else:
-                multiple = ''
-            yield f'''
-                <label>{col.key}</label>
-                <div class="form-group">
-                  <select class="form-control" 
-                  id="{col.key}" name="{col.key}" {multiple}>
-                    {options}
-                  </select>
-                </div>'''
+    def build_select_box(col):
+        multiple = 'multiple size="7"' if property_types[col.key] == list else ''
+        yield f'''
+            <label>{col.key}</label>
+            <div class="form-group">
+                <select class="form-control" 
+                id="{col.key}" name="{col.key}" {multiple}>
+                {options}
+                </select>
+            </div>'''
 
     def build_booleans():
         for col in cls.__table__.columns:
@@ -114,6 +106,12 @@ def get_form(cls_name):
                 </div>'''
             ) + '</fieldset>'
 
+    for col in cls.__table__.columns:
+        if col.key in cls.private:
+            continue
+        if hasattr(cls, f'{col.key}_values'):
+            build_select_box(col)
+                
     form = (
         ''.join(build_text_boxes()) +
         ''.join(build_select_boxes()) +

@@ -27,7 +27,9 @@ function buildServiceInstances() {
       $('#html-form').html(result.form);
       for (let i = 0; i < result.instances.length; i++) {
         const instance = result.instances[i];
-        $('#service-instance').append(`<option value='${instance[0]}'>${instance[1]}</option>`);
+        $('#service-instance').append(
+          `<option value='${instance[0]}'>${instance[1]}</option>`
+        );
       }
     },
   });
@@ -41,10 +43,7 @@ function fillInstanceForm() {
     type: 'POST',
     url: `/services/get_form_values/${$('#service-instance').val()}`,
     success: function(properties) {
-      console.log(propertyTypes)
-      console.log(properties);
       for (const [property, value] of Object.entries(properties)) {
-        console.log(property, value);
         if (property.includes('bool')) {
           $(`#${property}`).prop('checked', value);
         } else if (property.includes('dict')) {

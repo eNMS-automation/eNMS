@@ -60,12 +60,18 @@ def create_custom_service_instances():
     for i in range(3):
         for cls_name, cls in service_classes.items():
             for col in cls.__table__.columns:
-                property_types[col.key] = {
-                    Boolean: bool,
-                    Integer: int,
-                    Float: float,
-                    PickleType: 'pickle',
-                }.get(type(col.type), str)
+                if (
+                    type(col.type) == PickleType
+                    and hasattr(cls, f'{col.key}_values')
+                ):
+                    property_types[col.key] = list
+                else:
+                    property_types[col.key] = {
+                        Boolean: bool,
+                        Integer: int,
+                        Float: float,
+                        PickleType: dict,
+                    }.get(type(col.type), str)
             s = cls(**{'name': cls_name + 'oook' + str(i)})
             db.session.add(s)
             db.session.commit()

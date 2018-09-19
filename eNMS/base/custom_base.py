@@ -21,9 +21,10 @@ class CustomBase(db.Model):
     def update(self, **kwargs):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
+            print(property, property_type, value)
             if property_type == bool:
                 value = property in kwargs
-            elif property_type == 'pickle':
+            elif property_type == dict:
                 value = loads(value) if value else {}
             elif property_type in [float, int]:
                 value = property_type(value or 0)

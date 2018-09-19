@@ -89,7 +89,7 @@ def get_form(cls_name):
                 f'<option value="{k}">{v}</option>'
                 for k, v in getattr(cls, f'{col.key}_values')
             )
-            if property_types[col.key] == 'pickle':
+            if property_types[col.key] == list:
                 multiple = 'multiple size="7"'
             else:
                 multiple = ''
@@ -163,5 +163,7 @@ def delete_object(service_id):
 @login_required
 def save_service(cls_name):
     form = dict(request.form.to_dict())
-    # form['getters'] = request.form.getlist('getters')
+    for key in request.form:
+        if property_types[key] == list:
+            form[key] = request.form.getlist(key)
     return jsonify(factory(service_classes[cls_name], **form).serialized)

@@ -52,6 +52,7 @@ function fillInstanceForm() {
           $(`#${property}`).val(value);
         }
       }
+    alertify.notify(`Service '${properties.name}' displayed`, 'success', 5);
     },
   });
 }
@@ -84,10 +85,8 @@ function deleteService(id) { // eslint-disable-line no-unused-vars
 
 $('#services').change(function() {
   buildServiceInstances();
-  alertify.notify('ok', 'success', 5);
 });
 
 $('#service-instance').change(function() {
   fillInstanceForm();
-  alertify.notify('ok', 'success', 5);
 });

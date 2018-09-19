@@ -102,21 +102,7 @@ class NetmikoConfigService(Service):
         'polymorphic_identity': 'netmiko_config',
     }
 
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        try:
-            netmiko_handler = netmiko_connection(self, device)
-            netmiko_handler.send_config_set(self.content.splitlines())
-            result = f'configuration OK:\n\n{self.content}'
-            success = True
-            try:
-                netmiko_handler.disconnect()
-            except Exception:
-                pass
-        except Exception as e:
-            result = f'netmiko config did not work because of {e}'
-            success = False
-        return success, result, incoming_payload
+
 
 
 class NetmikoValidationService(Service):

@@ -86,50 +86,6 @@ class Service(Job):
         return properties
 
 
-class FileTransferService(Service):
-
-    __tablename__ = 'FileTransferService'
-
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
-    driver = Column(String)
-    source_file = Column(String)
-    dest_file = Column(String)
-    file_system = Column(String)
-    direction = Column(String)
-    overwrite_file = Column(Boolean)
-    disable_md5 = Column(Boolean)
-    inline_transfer = Column(Boolean)
-    device_multiprocessing = True
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'file_transfer',
-    }
-
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        try:
-            netmiko_handler = netmiko_connection(self, device)
-            transfer_dict = file_transfer(
-                netmiko_handler,
-                source_file=self.source_file,
-                dest_file=self.dest_file,
-                file_system=self.file_system,
-                direction=self.direction,
-                overwrite_file=self.overwrite_file,
-                disable_md5=self.disable_md5,
-                inline_transfer=self.inline_transfer
-            )
-            result = transfer_dict
-            success = True
-            netmiko_handler.disconnect()
-        except Exception as e:
-            result = f'netmiko config did not work because of {e}'
-            success = False
-        return success, result, result
-
-
 class NapalmConfigService(Service):
 
     __tablename__ = 'NapalmConfigService'

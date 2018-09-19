@@ -17,9 +17,14 @@ class NetmikoFileTransferService(CustomService):
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
-    content = Column(String)
     driver = Column(String)
-    global_delay_factor = Column(Float, default=1.)
+    source_file = Column(String)
+    dest_file = Column(String)
+    file_system = Column(String)
+    direction = Column(String)
+    overwrite_file = Column(Boolean)
+    disable_md5 = Column(Boolean)
+    inline_transfer = Column(Boolean)
     device_multiprocessing = True
 
     driver_values = [(driver, driver) for driver in netmiko_drivers]
@@ -32,17 +37,23 @@ class NetmikoFileTransferService(CustomService):
     def job(self, task, device, results, incoming_payload):
         try:
             netmiko_handler = netmiko_connection(self, device)
-            netmiko_handler.send_config_set(self.content.splitlines())
-            result = f'configuration OK:\n\n{self.content}'
+            transfer_dict = file_transfer(
+                netmiko_handler,
+                source_file=self.source_file,
+                dest_file=self.dest_file,
+                file_system=self.file_system,
+                direction=self.direction,
+                overwrite_file=self.overwrite_file,
+                disable_md5=self.disable_md5,
+                inline_transfer=self.inline_transfer
+            )
+            result = transfer_dict
             success = True
-            try:
-                netmiko_handler.disconnect()
-            except Exception:
-                pass
+            netmiko_handler.disconnect()
         except Exception as e:
             result = f'netmiko config did not work because of {e}'
             success = False
-        return success, result, incoming_payload
+        return success, result, result
 
 
 service_classes['Netmiko File Transfer Service'] = NetmikoFileTransferService

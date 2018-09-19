@@ -1,5 +1,6 @@
+from importlib.util import spec_from_file_location, module_from_spec
 from json import dumps, loads
-from netmiko import file_transfer
+from pathlib import Path
 from re import search
 from requests import (
     get as rest_get,
@@ -21,10 +22,11 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from subprocess import check_output
 
+from eNMS import db
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import str_dict
-from eNMS.services.connections import napalm_connection, netmiko_connection
-from eNMS.services.properties import type_to_properties
+from eNMS.base.helpers import integrity_rollback
+from eNMS.base.properties import property_types
+from eNMS.services.models import Service
 
 
 def multiprocessing(function):
@@ -43,6 +45,13 @@ def multiprocessing(function):
         if 'success' not in results or results['success']:
             results['success'] = success
     return wrapper
+
+
+def load_module(file_location):
+    spec = spec_from_file_location(file_location, file_location)
+    service_module = module_from_spec(spec)
+    spec.loader.exec_module(service_module)
+    return service_module
 
 
 class Job(CustomBase):
@@ -66,6 +75,8 @@ class Service(Job):
 
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     tasks = relationship('ServiceTask', back_populates='service')
+    device_multiprocessing = False
+    private = {'id'}
 
     __mapper_args__ = {
         'polymorphic_identity': 'service',
@@ -77,8 +88,19 @@ class Service(Job):
 
     @property
     def serialized(self):
+        serialized_object = {'name': self.name}
+        serialized_object['tasks'] = [
+            obj.properties for obj in getattr(self, 'tasks')
+        ]
+        for col in self.__table__.columns:
+            value = getattr(self, col.key)
+            serialized_object[col.key] = value
+        return serialized_object
+
+    @property
+    def serialized(self):
         properties = self.properties
-        # properties['tasks'] = [obj.properties for obj in getattr(self, 'tasks')]
+        
         return properties
 
 
@@ -185,6 +207,31 @@ class RestCallService(Service):
 
 
 type_to_class = {
+    'service': Service,
     'ansible_playbook': AnsibleService,
     'rest_call': RestCallService
 }
+
+
+service_classes = {}
+
+
+def create_custom_services():
+    path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
+    for file in path_services.glob('**/*.py'):
+        if 'init' not in str(file):
+            mod = load_module(str(file))
+    for cls_name, cls in service_classes.items():
+        for col in cls.__table__.columns:
+            if (
+                type(col.type) == PickleType
+                and hasattr(cls, f'{col.key}_values')
+            ):
+                property_types[col.key] = list
+            else:
+                property_types[col.key] = {
+                    Boolean: bool,
+                    Integer: int,
+                    Float: float,
+                    PickleType: dict,
+                }.get(type(col.type), str)

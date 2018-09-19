@@ -1,3 +1,4 @@
+from netmiko import file_transfer
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 

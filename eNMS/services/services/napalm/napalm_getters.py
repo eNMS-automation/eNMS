@@ -3,15 +3,15 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 
 from eNMS.services.connections import napalm_connection
-from eNMS.services.custom_service import CustomService, service_classes
+from eNMS.services.custom_service import Service, service_classes
 from eNMS.services.models import multiprocessing
 
 
-class NapalmGettersService(CustomService):
+class NapalmGettersService(Service):
 
     __tablename__ = 'NapalmGettersService'
 
-    id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
     content_match = Column(String)
     content_match_regex = Column(Boolean)

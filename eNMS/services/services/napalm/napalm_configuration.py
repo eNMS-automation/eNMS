@@ -1,15 +1,15 @@
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.connections import napalm_connection
-from eNMS.services.custom_service import CustomService, service_classes
+from eNMS.services.custom_service import Service, service_classes
 from eNMS.services.models import multiprocessing
 
 
-class NapalmConfigurationService(CustomService):
+class NapalmConfigurationService(Service):
 
     __tablename__ = 'NapalmConfigurationService'
 
-    id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     action = Column(String)

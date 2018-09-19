@@ -26,7 +26,6 @@ from eNMS import db
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import integrity_rollback
 from eNMS.base.properties import property_types
-from eNMS.services.models import Service
 
 
 def multiprocessing(function):

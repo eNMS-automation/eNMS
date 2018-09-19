@@ -9,13 +9,13 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.services.custom_service import CustomService, service_classes
+from eNMS.services.models import Service, service_classes
 
-class AService(CustomService):
+class AService(Service):
 
     __tablename__ = 'AService'
 
-    id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     an_integer = Column(Integer)

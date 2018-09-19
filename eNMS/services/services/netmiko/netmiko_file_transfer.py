@@ -3,7 +3,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.services.connections import netmiko_connection
-from eNMS.services.custom_service import CustomService, service_classes
+from eNMS.services.custom_service import Service, service_classes
 from eNMS.services.models import multiprocessing
 
 netmiko_drivers = sorted(
@@ -12,11 +12,11 @@ netmiko_drivers = sorted(
 )
 
 
-class NetmikoFileTransferService(CustomService):
+class NetmikoFileTransferService(Service):
 
     __tablename__ = 'NetmikoFileTransferService'
 
-    id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     driver = Column(String)

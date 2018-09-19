@@ -58,11 +58,6 @@ class ConfigServiceForm(ServiceForm):
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
 
 
-class NetmikoConfigServiceForm(ConfigServiceForm):
-    file = FileField('File', validators=[FileAllowed(['yaml'], 'YAML only')])
-    global_delay_factor = FloatField('global_delay_factor', default=1.)
-
-
 class NapalmConfigServiceForm(ConfigServiceForm):
     action_choices = [(v, k) for k, v in napalm_actions.items()]
     action = SelectField('Actions', choices=action_choices)
@@ -73,44 +68,6 @@ class NapalmGettersForm(ServiceForm):
     getters = SelectMultipleField('Getters', choices=getters_choices)
     content_match = TextField('Content Match')
     content_match_regex = BooleanField()
-
-
-class FileTransferServiceForm(ServiceForm):
-    vendor = TextField('Vendor')
-    operating_system = TextField('Operating system')
-    driver_choices = (
-        ('cisco_ios', 'Cisco IOS'),
-        ('cisco_xe', 'Cisco IOS-XE'),
-        ('cisco_xr', 'Cisco IOS-XR'),
-        ('cisco_nxos', 'Cisco NX-OS'),
-        ('juniper_junos', 'Juniper'),
-        ('arista_eos', 'Arista')
-    )
-    driver = SelectField('', choices=driver_choices)
-    source_file = TextField('Source file')
-    dest_file = TextField('Destination file')
-    file_system = TextField('File system')
-    direction_choices = (('put', 'Upload'), ('get', 'Download'))
-    direction = SelectField('', choices=direction_choices)
-    overwrite_file = BooleanField()
-    disable_md5 = BooleanField()
-    inline_transfer = BooleanField()
-
-
-class NetmikoValidationForm(ServiceForm):
-    vendor = TextField('Vendor')
-    operating_system = TextField('Operating system')
-    drivers = [(driver, driver) for driver in netmiko_drivers]
-    driver = SelectField('Driver', choices=drivers)
-    command1 = TextField('Command 1')
-    command2 = TextField('Command 2')
-    command3 = TextField('Command 3')
-    content_match1 = TextField('Content match 1')
-    content_match2 = TextField('Content match 2')
-    content_match3 = TextField('Content match 3')
-    content_match_regex1 = BooleanField()
-    content_match_regex2 = BooleanField()
-    content_match_regex3 = BooleanField()
 
 
 class AnsibleServiceForm(ServiceForm):

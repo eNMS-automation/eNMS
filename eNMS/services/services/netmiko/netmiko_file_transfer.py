@@ -27,7 +27,16 @@ class NetmikoFileTransferService(CustomService):
     inline_transfer = Column(Boolean)
     device_multiprocessing = True
 
-    driver_values = [(driver, driver) for driver in netmiko_drivers]
+    driver_values = (
+        ('cisco_ios', 'Cisco IOS'),
+        ('cisco_xe', 'Cisco IOS-XE'),
+        ('cisco_xr', 'Cisco IOS-XR'),
+        ('cisco_nxos', 'Cisco NX-OS'),
+        ('juniper_junos', 'Juniper'),
+        ('arista_eos', 'Arista')
+    )
+
+    direction_values = (('put', 'Upload'), ('get', 'Download'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_file_transfer_service',

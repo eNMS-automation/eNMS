@@ -259,9 +259,7 @@ class RestCallService(Service):
 
 
 type_to_class = {
-    'netmiko_validation': NetmikoValidationService,
     'napalm_config': NapalmConfigService,
-    'file_transfer': FileTransferService,
     'napalm_getters': NapalmGettersService,
     'ansible_playbook': AnsibleService,
     'rest_call': RestCallService

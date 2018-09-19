@@ -132,9 +132,9 @@ def delete_object(service_id):
     return jsonify(service.name)
 
 
-@blueprint.route('/create_service/<service_type>', methods=['POST'])
+@blueprint.route('/create_service/<cls_name>', methods=['POST'])
 @login_required
-def create_service(service_type):
+def create_service(cls_name):
     service = retrieve(Service, name=request.form['name'])
     form = dict(request.form.to_dict())
     form['getters'] = request.form.getlist('getters')
@@ -155,4 +155,4 @@ def create_service(service_type):
     #             source_file_name
     #         )
     #         form['source_file'] = source_file_path
-    return jsonify(factory(type_to_class[service_type], **form).serialized)
+    return jsonify(factory(service_classes[cls_name], **form).serialized)

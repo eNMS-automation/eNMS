@@ -6,6 +6,9 @@ types: false
 services: false
 */
 
+let serviceClass = null;
+let serviceInstance = null;
+
 (function() {
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
@@ -51,6 +54,13 @@ function fillInstanceForm() {
 }
 
 /**
+ * Create or edit a service
+ */
+function saveService() { // eslint-disable-line no-unused-vars
+
+}
+
+/**
  * Delete a service.
  * @param {id} id - Id of the service to delete.
  */
@@ -58,12 +68,22 @@ function deleteService(id) { // eslint-disable-line no-unused-vars
 
 }
 
+/**
+ * Delete a service.
+ * @param {class} class - Service class.
+ */
+function saveService(class) { // eslint-disable-line no-unused-vars
+  console.log(class);
+}
+
 $('#services').change(function() {
+  serviceClass = $('#services').val();
   buildServiceInstances();
   alertify.notify('ok', 'success', 5);
 });
 
 $('#service-instance').change(function() {
+  serviceInstance = $('#service-instance').val();
   fillInstanceForm();
   alertify.notify('ok', 'success', 5);
 });

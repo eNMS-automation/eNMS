@@ -132,27 +132,9 @@ def delete_object(service_id):
     return jsonify(service.name)
 
 
-@blueprint.route('/create_service/<cls_name>', methods=['POST'])
+@blueprint.route('/save_service/<cls_name>', methods=['POST'])
 @login_required
-def create_service(cls_name):
-    service = retrieve(Service, name=request.form['name'])
+def save_service(cls_name):
     form = dict(request.form.to_dict())
-    form['getters'] = request.form.getlist('getters')
-    # if not service:
-    #     if service_type in ('netmiko_config', 'napalm_config'):
-    #         if form['content_type'] != 'simple':
-    #             file = request.files['file']
-    #             filename = secure_filename(file.filename)
-    #             if allowed_file(filename, {'yaml', 'yml'}):
-    #                 parameters = yaml_load(file.read())
-    #                 template = Template(form['content'])
-    #                 form['content'] = ''.join(template.render(**parameters))
-    #     elif service_type == 'file_transfer':
-    #         source_file_name = form['source_file']
-    #         source_file_path = join(
-    #             current_app.path,
-    #             'file_transfer',
-    #             source_file_name
-    #         )
-    #         form['source_file'] = source_file_path
+    # form['getters'] = request.form.getlist('getters')
     return jsonify(factory(service_classes[cls_name], **form).serialized)

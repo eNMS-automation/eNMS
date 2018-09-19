@@ -57,7 +57,15 @@ function fillInstanceForm() {
  * Create or edit a service
  */
 function saveService() { // eslint-disable-line no-unused-vars
+  const instanceId = ${$('#service-instance').val()};
+  const className = ${$('#services').val()};
+  $.ajax({
+    type: 'POST',
+    url: `/services/save_service/${className}/${instanceId}`,
+    success: function(result) {
 
+    },
+  });
 }
 
 /**
@@ -68,13 +76,6 @@ function deleteService(id) { // eslint-disable-line no-unused-vars
 
 }
 
-/**
- * Delete a service.
- * @param {class} class - Service class.
- */
-function saveService(class) { // eslint-disable-line no-unused-vars
-  console.log(class);
-}
 
 $('#services').change(function() {
   serviceClass = $('#services').val();

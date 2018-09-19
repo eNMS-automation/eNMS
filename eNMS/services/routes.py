@@ -68,9 +68,13 @@ def get_form(cls_name):
 
     def build_text_boxes():
         for col in cls.__table__.columns:
-            if col.key in cls.private or hasattr(cls, f'{col.key}_values'):
+            if (
+                col.key in cls.private
+                or hasattr(cls, f'{col.key}_values')
+                or property_types[col.key] == bool
+            ):
                 continue
-            yield '''
+            yield f'''
                 <label>{col.key}</label>
                 <div class="form-group">
                   <input class="form-control" id="{col.key}"
@@ -85,26 +89,18 @@ def get_form(cls_name):
                 f'<option value="{k}">{v}</option>'
                 for k, v in getattr(cls, f'{col.key}_values')
             )
+            if property_types[col.key] == 'pickle':
+                multiple = 'multiple size="7"'
+            else:
+                multiple = ''
             yield f'''
                 <label>{col.key}</label>
                 <div class="form-group">
                   <select class="form-control" 
-                  id="{col.key}" name="{col.key}">
+                  id="{col.key}" name="{col.key}" {multiple}>
                     {options}
                   </select>
                 </div>'''
-
-
-
-
-    def build_multiple_select():
-        for col in cls.__table__.columns:
-            if (
-                not hasattr(cls, f'{col.key}_values')
-                or property_types[col.key] != 'pickle'
-            ):
-                continue
-            
 
     def build_booleans():
         for col in cls.__table__.columns:
@@ -119,6 +115,7 @@ def get_form(cls_name):
 
     form = (
         ''.join(build_text_boxes()) +
+        ''.join(build_select_boxes()) +
         ''.join(build_booleans())
     )
 

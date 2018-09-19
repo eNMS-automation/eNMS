@@ -6,64 +6,62 @@ from eNMS.services.connections import napalm_connection
 from eNMS.services.models import multiprocessing, Service, service_classes
 
 
-class NapalmGettersService(Service):
+class RestCallService(Service):
 
-    __tablename__ = 'NapalmGettersService'
+    __tablename__ = 'RestCallService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    getters = Column(MutableList.as_mutable(PickleType), default=[])
+    call_type = Column(String)
+    url = Column(String)
+    payload = Column(MutableDict.as_mutable(PickleType), default={})
     content_match = Column(String)
     content_match_regex = Column(Boolean)
-    device_multiprocessing = True
-
-    getters_values = (
-        ('get_arp_table', 'ARP table'),
-        ('get_interfaces_counters', 'Interfaces counters'),
-        ('get_facts', 'Facts'),
-        ('get_environment', 'Environment'),
-        ('get_config', 'Configuration'),
-        ('get_interfaces', 'Interfaces'),
-        ('get_interfaces_ip', 'Interface IP'),
-        ('get_lldp_neighbors', 'LLDP neighbors'),
-        ('get_lldp_neighbors_detail', 'LLDP neighbors detail'),
-        ('get_mac_address_table', 'MAC address'),
-        ('get_ntp_servers', 'NTP servers'),
-        ('get_ntp_stats', 'NTP statistics'),
-        ('get_optics', 'Transceivers'),
-        ('get_snmp_information', 'SNMP'),
-        ('get_users', 'Users'),
-        ('get_network_instances', 'Network instances (VRF)'),
-        ('get_ntp_peers', 'NTP peers'),
-        ('get_bgp_config', 'BGP configuration'),
-        ('get_bgp_neighbors', 'BGP neighbors'),
-        ('get_ipv6_neighbors_table', 'IPv6')
-    )
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_configuration_service',
+    username = Column(String)
+    password = Column(String)
+    device_multiprocessing = False
+    request_dict = {
+        'GET': rest_get,
+        'POST': rest_post,
+        'PUT': rest_put,
+        'DELETE': rest_delete
     }
 
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        result = {}
-        results['expected'] = self.content_match
+    __mapper_args__ = {
+        'polymorphic_identity': 'rest_call_service',
+    }
+
+    def job(self, task, results, incoming_payload):
         try:
-            napalm_driver = napalm_connection(device)
-            napalm_driver.open()
-            for getter in self.getters:
-                try:
-                    result[getter] = getattr(napalm_driver, getter)()
-                except Exception as e:
-                    result[getter] = f'{getter} failed because of {e}'
-            if self.content_match_regex:
-                success = bool(search(self.content_match, str_dict(result)))
+            if self.call_type in ('GET', 'DELETE'):
+                result = self.request_dict[self.call_type](
+                    self.url,
+                    headers={'Accept': 'application/json'},
+                    auth=HTTPBasicAuth(self.username, self.password)
+                ).json()
             else:
-                success = self.content_match in str_dict(result)
-            napalm_driver.close()
+                result = loads(self.request_dict[self.call_type](
+                    self.url,
+                    data=dumps(self.payload),
+                    auth=HTTPBasicAuth(self.username, self.password)
+                ).content)
+            if self.content_match_regex:
+                success = bool(search(self.content_match, str(result)))
+            else:
+                success = self.content_match in str(result)
+            if isinstance(incoming_payload, dict):
+                incoming_payload[self.name] = result
+            else:
+                incoming_payload = {self.name: result}
         except Exception as e:
-            result = f'service did not work:\n{e}'
-            success = False
-        return success, result, result
+            result, success = str(e), False
+        return {
+            'success': success,
+            'payload': {
+                'incoming_payload': incoming_payload,
+                'outgoing_payload': result
+            },
+            'logs': result
+        }
 
 
-service_classes['Napalm Getters Service'] = NapalmGettersService
+service_classes['Rest Call Service'] = RestCallService

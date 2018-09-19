@@ -11,7 +11,6 @@ from eNMS.objects.routes import process_kwargs
 from eNMS.services.models import (
     NapalmConfigService,
     NapalmGettersService,
-    NetmikoValidationService,
     RestCallService,
     Service
 )
@@ -75,7 +74,7 @@ def create_netmiko_services():
             'content': 'ip vrf TEST'
         },
         {
-            'type': NetmikoValidationService,
+            'type': service_classes['Netmiko Validation Service'],
             'name': 'netmiko_check_vrf_TEST',
             'description': 'Check that the vrf "TEST" is configured',
             'vendor': 'Cisco',
@@ -96,7 +95,7 @@ def create_netmiko_services():
             'content': 'no ip vrf TEST'
         },
         {
-            'type': NetmikoValidationService,
+            'type': service_classes['Netmiko Validation Service'],
             'name': 'netmiko_check_no_vrf_TEST',
             'description': 'Check that the vrf "TEST" is NOT configured',
             'vendor': 'Cisco',

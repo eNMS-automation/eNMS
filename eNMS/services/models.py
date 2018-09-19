@@ -86,39 +86,6 @@ class Service(Job):
         return properties
 
 
-class NapalmConfigService(Service):
-
-    __tablename__ = 'NapalmConfigService'
-
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
-    action = Column(String)
-    content = Column(String)
-    device_multiprocessing = True
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'napalm_config',
-    }
-
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        try:
-            napalm_driver = napalm_connection(device)
-            napalm_driver.open()
-            config = '\n'.join(self.content.splitlines())
-            getattr(napalm_driver, self.action)(config=config)
-            napalm_driver.commit_config()
-            napalm_driver.close()
-        except Exception as e:
-            result = f'napalm config did not work because of {e}'
-            success = False
-        else:
-            result = f'configuration OK:\n\n{config}'
-            success = True
-        return success, result, incoming_payload
-
-
 class NapalmGettersService(Service):
 
     __tablename__ = 'NapalmGettersService'

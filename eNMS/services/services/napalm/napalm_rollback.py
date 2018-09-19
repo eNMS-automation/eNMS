@@ -1,13 +1,7 @@
-from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.custom_service import CustomService, service_classes
 from eNMS.services.models import multiprocessing
-
-netmiko_drivers = sorted(
-    driver for driver in CLASS_MAPPER
-    if 'telnet' not in driver and 'ssh' not in driver
-)
 
 
 class NapalmRollbackService(CustomService):

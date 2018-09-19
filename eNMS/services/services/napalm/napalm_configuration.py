@@ -1,13 +1,7 @@
-from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.custom_service import CustomService, service_classes
 from eNMS.services.models import multiprocessing
-
-netmiko_drivers = sorted(
-    driver for driver in CLASS_MAPPER
-    if 'telnet' not in driver and 'ssh' not in driver
-)
 
 
 class NapalmConfigurationService(CustomService):
@@ -17,12 +11,9 @@ class NapalmConfigurationService(CustomService):
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
+    action = Column(String)
     content = Column(String)
-    driver = Column(String)
-    global_delay_factor = Column(Float, default=1.)
     device_multiprocessing = True
-
-    driver_values = [(driver, driver) for driver in netmiko_drivers]
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_configuration_service',
@@ -31,17 +22,18 @@ class NapalmConfigurationService(CustomService):
     @multiprocessing
     def job(self, task, device, results, incoming_payload):
         try:
-            netmiko_handler = netmiko_connection(self, device)
-            netmiko_handler.send_config_set(self.content.splitlines())
-            result = f'configuration OK:\n\n{self.content}'
-            success = True
-            try:
-                netmiko_handler.disconnect()
-            except Exception:
-                pass
+            napalm_driver = napalm_connection(device)
+            napalm_driver.open()
+            config = '\n'.join(self.content.splitlines())
+            getattr(napalm_driver, self.action)(config=config)
+            napalm_driver.commit_config()
+            napalm_driver.close()
         except Exception as e:
-            result = f'netmiko config did not work because of {e}'
+            result = f'napalm config did not work because of {e}'
             success = False
+        else:
+            result = f'configuration OK:\n\n{config}'
+            success = True
         return success, result, incoming_payload
 
 

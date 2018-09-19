@@ -79,43 +79,42 @@ def get_form(cls_name):
     def build_text_boxes(column_type):
         for col in cls.__table__.columns:
             if (
-                property_types[col.key] != column_type:
-                or col.key not in cls.private
+                property_types[col.key] != column_type
+                or col.key in cls.private
             ):
                 continue
             if hasattr(cls, f'{col.key}_values'):
-                return ''
+                pass
             else:
-                return ''.join(f'''
+                yield f'''
                 <label>{col.key}</label>
                 <div class="form-group">
                 <input class="form-control" id="{col.key}"
                 name="{col.key}"type="text">
                 </div>'''
-                )
 
     def build_multiple_select():
-        return ''.join(f'''
-            <label>{col.key}</label>
-            <div class="form-group">
-              <input class="form-control" id="{col.key}"
-              name="{col.key}"type="text">
-            </div>'''
-            for col in cls.__table__.columns
-            if property_types[col.key] == dict
-            and col.key not in cls.private
-            and not hasattr(cls, f'{col.key}_values')
-        )
+        for col in cls.__table__.columns:
+            if (
+                hasattr(cls, f'{col.key}_values')
+                and property_types[col.key] == 'pickle'
+            ):
+                yield f'''
+                    <label>{col.key}</label>
+                    <div class="form-group">
+                    <input class="form-control" id="{col.key}"
+                    name="{col.key}"type="text">
+                    </div>'''
 
     form = (
         build_separator('Text properties') +
-        build_text_boxes(str) +
+        ''.join(build_text_boxes(str)) +
         build_separator('Integer properties') +
-        build_text_boxes(int) +
+        ''.join(build_text_boxes(int)) +
         build_separator('Float properties') +
-        build_text_boxes(float) +
+        ''.join(build_text_boxes(float)) +
         build_separator('Json properties') +
-        build_text_boxes(dict)
+        ''.join(build_text_boxes(dict))
     )
 
     return jsonify({'form': form, 'instances': cls.choices()})

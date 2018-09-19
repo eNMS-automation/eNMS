@@ -260,7 +260,7 @@ property_types = {
     'inventory_from_selection': bool,
     'overwrite_file': bool,
     'pass_device_properties': bool,
-    'payload': dict,
+    'payload': 'pickle',
     'contentregex': bool,
     'sourceregex': bool,
     'transfer_payload': bool

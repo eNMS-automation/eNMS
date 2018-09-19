@@ -23,7 +23,7 @@ class CustomBase(db.Model):
             property_type = property_types.get(property, None)
             if property_type == bool:
                 value = property in kwargs
-            elif property_type == dict:
+            elif property_type == 'pickle':
                 value = loads(value) if value else {}
             elif property_type in [float, int]:
                 value = property_type(value or 0)

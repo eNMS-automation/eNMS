@@ -64,7 +64,7 @@ def create_custom_service_instances():
                     Boolean: bool,
                     Integer: int,
                     Float: float,
-                    PickleType: dict,
+                    PickleType: 'pickle',
                 }.get(type(col.type), str)
             s = cls(**{'name': cls_name + 'oook' + str(i)})
             db.session.add(s)

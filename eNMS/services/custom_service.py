@@ -49,7 +49,7 @@ service_classes = {}
 
 
 def create_custom_services():
-    path_services = Path.cwd() / 'eNMS' / 'services' / 'custom_services'
+    path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
     for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):
             mod = load_module(str(file))

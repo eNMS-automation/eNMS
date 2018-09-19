@@ -10,9 +10,9 @@ netmiko_drivers = sorted(
 )
 
 
-class NetmikoValidationService(CustomService):
+class NetmikoFileTransferService(CustomService):
 
-    __tablename__ = 'NetmikoValidationService'
+    __tablename__ = 'NetmikoFileTransferService'
 
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
     vendor = Column(String)
@@ -25,7 +25,7 @@ class NetmikoValidationService(CustomService):
     driver_values = [(driver, driver) for driver in netmiko_drivers]
 
     __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_config_service',
+        'polymorphic_identity': 'netmiko_file_transfer_service',
     }
 
     @multiprocessing
@@ -45,4 +45,4 @@ class NetmikoValidationService(CustomService):
         return success, result, incoming_payload
 
 
-service_classes['Netmiko Configuration Service'] = NetmikoValidationService
+service_classes['Netmiko File Transfer Service'] = NetmikoFileTransferService

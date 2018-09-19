@@ -39,11 +39,11 @@ def services():
     )
 
 
-@blueprint.route('/custom_services')
+@blueprint.route('/service_editor')
 @login_required
-def custom_services():
+def service_editor():
     return render_template(
-        'custom_services.html',
+        'service_editor.html',
         services_classes=list(service_classes),
         property_types={k: str(v) for k, v in property_types.items()}
     )

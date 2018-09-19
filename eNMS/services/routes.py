@@ -68,7 +68,7 @@ def get_form(cls_name):
     cls = service_classes[cls_name]
 
     def build_text_box(c):
-        yield f'''
+        return f'''
             <label>{c.key}</label>
             <div class="form-group">
               <input class="form-control" id="{c.key}"
@@ -80,7 +80,7 @@ def get_form(cls_name):
             f'<option value="{k}">{v}</option>'
             for k, v in getattr(cls, f'{c.key}_values')
         )
-        yield f'''
+        return f'''
             <label>{c.key}</label>
             <div class="form-group">
               <select class="form-control" 
@@ -91,7 +91,7 @@ def get_form(cls_name):
             </div>'''
 
     def build_boolean_box(c):
-        yield '<fieldset>' + ''.join(f'''
+        return '<fieldset>' + ''.join(f'''
             <div class="item">
                 <input id="{c.key}" name="{c.key}" type="checkbox">
                 <label>{c.key}</label>
@@ -100,12 +100,14 @@ def get_form(cls_name):
 
     form = ''
     for col in cls.__table__.columns:
+        if col.key in cls.private:
+          continue
         if property_types[col.key] == bool:
             form += build_boolean_box(col)
         elif hasattr(cls, f'{col.key}_values'):
             form += build_select_box(col)
         else:
-            form +=
+            form += build_text_box(col)
 
     return jsonify({'form': form, 'instances': cls.choices()})
 

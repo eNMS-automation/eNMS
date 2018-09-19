@@ -8,7 +8,6 @@
 
 {% block content %}
   {% include 'scheduling_modal.html' %}
-  {% include 'service_modal.html' %}
   {% include 'service_table.html' %}
 {% endblock content %}
 
@@ -19,7 +18,6 @@
   <script>
     var fields = {{ fields|tojson|safe }}
     var services = {{ services|tojson|safe }}
-    var types = [{% for type in type_to_form %} "{{ type }}", {% endfor %}];
   </script>
   <script src="{{ url_for('services_blueprint.static', filename='serviceCommonFunctions.js') }}"></script>
   <script src="{{ url_for('services_blueprint.static', filename='serviceManagement.js') }}"></script>

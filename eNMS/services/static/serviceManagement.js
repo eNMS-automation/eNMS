@@ -2,7 +2,6 @@
 global
 alertify: false
 fields: false
-types: false
 services: false
 */
 
@@ -19,9 +18,6 @@ function addService(mode, properties) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showServiceModal('${properties.type}',
-    '${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
@@ -40,11 +36,6 @@ function addService(mode, properties) {
     addService('create', services[i]);
   }
 })();
-
-// replace the button value of all service forms with 'Update'
-for (let i = 0; i < types.length; i++) {
-  $(`#${types[i]}-button`).text('Update');
-}
 
 /**
  * Open scheduling modal for a service.

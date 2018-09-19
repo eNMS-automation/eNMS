@@ -86,25 +86,6 @@ class Service(Job):
         return properties
 
 
-class NetmikoConfigService(Service):
-
-    __tablename__ = 'NetmikoConfigService'
-
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
-    content = Column(String)
-    driver = Column(String)
-    global_delay_factor = Column(Float)
-    device_multiprocessing = True
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_config',
-    }
-
-
-
-
 class NetmikoValidationService(Service):
 
     __tablename__ = 'NetmikoValidationService'
@@ -373,7 +354,6 @@ class RestCallService(Service):
 
 
 type_to_class = {
-    'netmiko_config': NetmikoConfigService,
     'netmiko_validation': NetmikoValidationService,
     'napalm_config': NapalmConfigService,
     'file_transfer': FileTransferService,

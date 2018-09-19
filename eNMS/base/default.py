@@ -11,11 +11,11 @@ from eNMS.objects.routes import process_kwargs
 from eNMS.services.models import (
     NapalmConfigService,
     NapalmGettersService,
-    NetmikoConfigService,
     NetmikoValidationService,
     RestCallService,
     Service
 )
+from eNMS.services.custom_services.netmiko_config import NetmikoConfigService
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 

@@ -40,7 +40,10 @@ napalm_actions = {
     'Load replace': 'load_replace_candidate'
 }
 
-
+netmiko_drivers = sorted(
+    driver for driver in CLASS_MAPPER
+    if 'telnet' not in driver and 'ssh' not in driver
+)
 
 
 class ServiceForm(FlaskForm):
@@ -53,8 +56,6 @@ class ConfigServiceForm(ServiceForm):
     operating_system = TextField('Operating system')
     content = TextAreaField('')
     file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
-    content_type_choices = 
-    content_type = SelectField('', choices=content_type_choices)
 
 
 class NetmikoConfigServiceForm(ConfigServiceForm):

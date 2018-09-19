@@ -48,7 +48,7 @@ function fillInstanceForm() {
         if (property.includes('bool')) {
           $(`#${property}`).prop('checked', value);
         } else if (property.includes('dict')) {
-          $(`#${property}`).val(value ? JSON.stringify(value): {});
+          $(`#${property}`).val(value ? JSON.stringify(value): '{}');
         } else {
           $(`#${property}`).val(value);
         }

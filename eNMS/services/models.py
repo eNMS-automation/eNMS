@@ -83,24 +83,23 @@ class Service(Job):
 
     @property
     def properties(self):
-        return {'name': self.name}
+        return {p: getattr(self, p) for p in ('name', 'description', 'type')}
+
+    @property
+    def column_values(self):
+        serialized_object = self.properties
+        for col in self.__table__.columns:
+            value = getattr(self, col.key)
+            serialized_object[col.key] = value
+        return serialized_object
 
     @property
     def serialized(self):
-        serialized_object = self.properties
-        serialized_object['tasks'] = [
+        properties = self.properties
+        properties['tasks'] = [
             obj.properties for obj in getattr(self, 'tasks')
         ]
-        # for col in self.__table__.columns:
-        #     value = getattr(self, col.key)
-        #     serialized_object[col.key] = value
-        return serialized_object
-
-    # @property
-    # def serialized(self):
-    #     properties = self.properties
-    #     
-    #     return properties
+        return properties
 
 
 class AnsibleService(Service):

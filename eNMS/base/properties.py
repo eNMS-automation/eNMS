@@ -75,6 +75,8 @@ pool_public_properties = (
 
 service_public_properties = (
     'name',
+    'type',
+    'description'
 )
 
 workflow_public_properties = (

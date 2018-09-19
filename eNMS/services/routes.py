@@ -97,16 +97,10 @@ def get_form(cls_name):
     return jsonify({'form': form, 'instances': cls.choices()})
 
 
-@blueprint.route('/get_form_values/<service_id>', methods=['POST'])
+@blueprint.route('/get_service/<service_id>', methods=['POST'])
 @login_required
-def get_form_values(service_id):
-    return jsonify(retrieve(Service, id=service_id).serialized)
-
-
-@blueprint.route('/get/<service_type>/<service_id>', methods=['POST'])
-@login_required
-def get_service(service_type, service_id):
-    return jsonify(retrieve(Service, id=service_id).serialized)
+def get_service(service_id):
+    return jsonify(retrieve(Service, id=service_id).column_values)
 
 
 @blueprint.route('/service_type/<service_type>', methods=['POST'])

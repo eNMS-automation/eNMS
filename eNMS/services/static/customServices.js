@@ -42,7 +42,7 @@ function buildServiceInstances() {
 function fillInstanceForm() {
   $.ajax({
     type: 'POST',
-    url: `/services/get_form_values/${$('#service-instance').val()}`,
+    url: `/services/get_service/${$('#service-instance').val()}`,
     success: function(properties) {
       for (const [property, value] of Object.entries(properties)) {
         if (property.includes('bool')) {

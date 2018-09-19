@@ -66,17 +66,17 @@ def get_form(cls_name):
         return (f'''
             <div style="width: 100%; height: 20px; border-bottom: 1px;
             solid black; text-align: center;">
-                <span style="font-size: 15px; padding: 0 10px;">
-                    {text}
-                </span>
+              <span style="font-size: 15px; padding: 0 10px;">
+                {text}
+              </span>
             </div>'''
         )
 
     def build_text_boxes(sql_type):
         return ''.join(f'''
             <label>{col.key}</label>
-            <div class='form-group'>
-                <input class="form-control" id="{col.key}" type="text">
+            <div class="form-group">
+              <input class="form-control" id="{col.key}" type="text">
             </div>'''
             for col in cls.__table__.columns
             if type(col.type) == sql_type and col.key not in cls.private

@@ -16,8 +16,6 @@ class NapalmRollbackService(CustomService):
     global_delay_factor = Column(Float, default=1.)
     device_multiprocessing = True
 
-    driver_values = [(driver, driver) for driver in netmiko_drivers]
-
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_rollback_service',
     }

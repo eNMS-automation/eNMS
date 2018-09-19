@@ -16,7 +16,7 @@ class NapalmConfigurationService(CustomService):
     device_multiprocessing = True
 
     __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_configuration_service',
+        'polymorphic_identity': 'napalm_configuration_service',
     }
 
     @multiprocessing

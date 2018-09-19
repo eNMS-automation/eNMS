@@ -10,14 +10,11 @@ class NapalmGettersService(CustomService):
     __tablename__ = 'NapalmGettersService'
 
     id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
-    content = Column(String)
-    driver = Column(String)
-    global_delay_factor = Column(Float, default=1.)
+    getters = Column(MutableList.as_mutable(PickleType), default=[])
+    content_match = Column(String)
+    content_match_regex = Column(Boolean)
     device_multiprocessing = True
 
-    driver_values = [(driver, driver) for driver in netmiko_drivers]
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_configuration_service',
@@ -25,19 +22,25 @@ class NapalmGettersService(CustomService):
 
     @multiprocessing
     def job(self, task, device, results, incoming_payload):
+        result = {}
+        results['expected'] = self.content_match
         try:
-            netmiko_handler = netmiko_connection(self, device)
-            netmiko_handler.send_config_set(self.content.splitlines())
-            result = f'configuration OK:\n\n{self.content}'
-            success = True
-            try:
-                netmiko_handler.disconnect()
-            except Exception:
-                pass
+            napalm_driver = napalm_connection(device)
+            napalm_driver.open()
+            for getter in self.getters:
+                try:
+                    result[getter] = getattr(napalm_driver, getter)()
+                except Exception as e:
+                    result[getter] = f'{getter} failed because of {e}'
+            if self.content_match_regex:
+                success = bool(search(self.content_match, str_dict(result)))
+            else:
+                success = self.content_match in str_dict(result)
+            napalm_driver.close()
         except Exception as e:
-            result = f'netmiko config did not work because of {e}'
+            result = f'service did not work:\n{e}'
             success = False
-        return success, result, incoming_payload
+        return success, result, result
 
 
-service_classes['Napalm Configuration Service'] = NapalmGettersService
+service_classes['Napalm Getters Service'] = NapalmGettersService

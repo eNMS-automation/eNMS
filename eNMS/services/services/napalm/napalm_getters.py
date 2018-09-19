@@ -16,26 +16,26 @@ class NapalmGettersService(CustomService):
     device_multiprocessing = True
 
     getters_values = (
-        ('get_arp_table', 'ARP table': 
-        ('get_interfaces_counters', 'Interfaces counters': 
-        ('get_facts', 'Facts': 
-        ('Environment': 'get_environment',
-        ('Configuration': 'get_config',
-        ('Interfaces': 'get_interfaces',
-        ('Interface IP': 'get_interfaces_ip',
-        ('LLDP neighbors': 'get_lldp_neighbors',
-        ('LLDP neighbors detail': 'get_lldp_neighbors_detail',
-        ('MAC address': 'get_mac_address_table',
-        ('NTP servers': 'get_ntp_servers',
-        ('NTP statistics': 'get_ntp_stats',
-        ('Transceivers': 'get_optics',
-        ('SNMP': 'get_snmp_information',
-        ('Users': 'get_users',
-        ('Network instances (VRF)': 'get_network_instances',
-        ('NTP peers': 'get_ntp_peers',
-        ('BGP configuration': 'get_bgp_config',
-        ('BGP neighbors': 'get_bgp_neighbors',
-        ('IPv6': 'get_ipv6_neighbors_table'
+        ('get_arp_table', 'ARP table'),
+        ('get_interfaces_counters', 'Interfaces counters'),
+        ('get_facts', 'Facts'),
+        ('get_environment', 'Environment'),
+        ('get_config', 'Configuration'),
+        ('get_interfaces', 'Interfaces'),
+        ('get_interfaces_ip', 'Interface IP'),
+        ('get_lldp_neighbors', 'LLDP neighbors'),
+        ('get_lldp_neighbors_detail', 'LLDP neighbors detail'),
+        ('get_mac_address_table', 'MAC address'),
+        ('get_ntp_servers', 'NTP servers'),
+        ('get_ntp_stats', 'NTP statistics'),
+        ('get_optics', 'Transceivers'),
+        ('get_snmp_information', 'SNMP'),
+        ('get_users', 'Users'),
+        ('get_network_instances', 'Network instances (VRF)'),
+        ('get_ntp_peers', 'NTP peers'),
+        ('get_bgp_config', 'BGP configuration'),
+        ('get_bgp_neighbors', 'BGP neighbors'),
+        ('get_ipv6_neighbors_table', 'IPv6')
     )
 
     __mapper_args__ = {

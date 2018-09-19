@@ -66,32 +66,36 @@ def custom_services():
 def get_form(cls_name):
     cls = service_classes[cls_name]
 
-    def build_text_boxes(column_type):
+    def build_text_boxes():
         for col in cls.__table__.columns:
-            if (
-                property_types[col.key] != column_type
-                or col.key in cls.private
-            ):
+            if col.key in cls.private or hasattr(cls, f'{col.key}_values'):
                 continue
-            if hasattr(cls, f'{col.key}_values'):
-                options = ''.join(
-                    f'<option value="{k}">{v}</option>'
-                    for k, v in getattr(cls, f'{col.key}_values')
-                )
-                core_part = f'''
-                    <select class="form-control" 
-                    id="{col.key}" name="{col.key}">
-                      {options}
-                    </select>'''
-            else:
-                core_part = '''
-                    <input class="form-control" id="{col.key}"
-                    name="{col.key}"type="text">'''
+            yield '''
+                <label>{col.key}</label>
+                <div class="form-group">
+                  <input class="form-control" id="{col.key}"
+                  name="{col.key}"type="text">
+                </div>'''
+
+    def build_select_boxes():
+        for col in cls.__table__.columns:
+            if col.key in cls.private or not hasattr(cls, f'{col.key}_values'):
+                continue
+            options = ''.join(
+                f'<option value="{k}">{v}</option>'
+                for k, v in getattr(cls, f'{col.key}_values')
+            )
             yield f'''
                 <label>{col.key}</label>
                 <div class="form-group">
-                  {core_part}
+                  <select class="form-control" 
+                  id="{col.key}" name="{col.key}">
+                    {options}
+                  </select>
                 </div>'''
+
+
+
 
     def build_multiple_select():
         for col in cls.__table__.columns:
@@ -106,19 +110,16 @@ def get_form(cls_name):
         for col in cls.__table__.columns:
             if not property_types[col.key] == bool:
                 continue
-            yield ''.join(f'''
+            yield '<fieldset>' + ''.join(f'''
                 <div class="item">
                   <input id="{col.key}" name="{col.key}" type="checkbox">
                   <label>{col.key}</label>
                 </div>'''
-            )
+            ) + '</fieldset>'
 
     form = (
-        ''.join(build_text_boxes(str)) +
-        ''.join(build_text_boxes(int)) +
-        ''.join(build_text_boxes(float)) +
-        ''.join(build_text_boxes('pickle')) +
-        f'<fieldset>{"".join(build_booleans())}</fieldset>'
+        ''.join(build_text_boxes()) +
+        ''.join(build_booleans())
     )
 
     return jsonify({'form': form, 'instances': cls.choices()})

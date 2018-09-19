@@ -55,7 +55,6 @@ function fillInstanceForm() {
  * Create or edit a service
  */
 function saveService() { // eslint-disable-line no-unused-vars
-  console.log($('#form').serialize());
   if ($('#form').parsley().validate()) {
     $.ajax({
       type: 'POST',
@@ -63,7 +62,7 @@ function saveService() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#form').serialize(),
       success: function(result) {
-  
+        console.log(result);
       },
     });
   }

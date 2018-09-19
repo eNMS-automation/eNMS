@@ -112,6 +112,7 @@ def get_service(service_type, service_id):
         property: getattr(service, property)
         for property in properties
     }
+    print(service_properties)
     return jsonify(service_properties)
 
 
@@ -136,7 +137,6 @@ def delete_object(service_id):
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])
 @login_required
 def save_service(cls_name):
-    print(request.form)
     form = dict(request.form.to_dict())
     # form['getters'] = request.form.getlist('getters')
     return jsonify(factory(service_classes[cls_name], **form).serialized)

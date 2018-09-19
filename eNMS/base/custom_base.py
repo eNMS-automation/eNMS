@@ -20,10 +20,13 @@ class CustomBase(db.Model):
 
     def update(self, **kwargs):
         for property, value in kwargs.items():
-            if property_types.get(property, None) == bool:
+            property_type = property_types.get(property, None)
+            if property_type == bool:
                 value = property in kwargs
-            elif property_types.get(property, None) == dict:
+            elif property_type == dict:
                 value = loads(value) if value else {}
+            elif property_type in [float, int]:
+                value = property_type(value or 0)
             setattr(self, property, value)
 
     @property

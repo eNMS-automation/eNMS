@@ -1,9 +1,18 @@
 from importlib.util import spec_from_file_location, module_from_spec
 from pathlib import Path
-from sqlalchemy import Boolean, Column, exc, ForeignKey, Integer, String
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String
+)
 
 from eNMS import db
 from eNMS.base.helpers import integrity_rollback
+from eNMS.base.properties import property_types
 from eNMS.services.models import Service, type_to_class
 
 
@@ -26,14 +35,11 @@ class CustomService(Service):
         'polymorphic_identity': 'custom_service',
     }
 
-    def __init__(self, **kwargs):
-        self.__dict__.update(**kwargs)
-
     @property
     def serialized(self):
         serialized_object = {'name': self.name}
         for col in self.__table__.columns:
-            serialized_object[col.key] = getattr(self, col.key)
+            serialized_object[col.key] = str(getattr(self, col.key))
         return serialized_object
 
 
@@ -52,6 +58,13 @@ def create_custom_services():
 def create_custom_service_instances():
     for i in range(3):
         for cls_name, cls in service_classes.items():
+            for col in cls.__table__.columns:
+                property_types[col.key] = {
+                    Boolean: bool,
+                    Integer: int,
+                    Float: float,
+                    PickleType: dict,
+                }.get(type(col.type), str)
             s = cls(**{'name': cls_name + 'oook' + str(i)})
             db.session.add(s)
             db.session.commit()

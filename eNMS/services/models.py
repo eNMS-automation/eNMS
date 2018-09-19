@@ -33,13 +33,6 @@ def multiprocessing(function):
     return wrapper
 
 
-def load_module(file_location):
-    spec = spec_from_file_location(file_location, file_location)
-    service_module = module_from_spec(spec)
-    spec.loader.exec_module(service_module)
-    return service_module
-
-
 class Job(CustomBase):
 
     __tablename__ = 'Job'
@@ -96,7 +89,8 @@ def create_custom_services():
     path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
     for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):
-            load_module(str(file))
+            spec = spec_from_file_location(str(file), str(file))
+            spec.loader.exec_module(module_from_spec(spec))
     for cls_name, cls in service_classes.items():
         for col in cls.__table__.columns:
             if (

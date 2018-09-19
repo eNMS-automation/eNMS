@@ -17,7 +17,7 @@ from eNMS.base.properties import (
 )
 from eNMS.objects.models import Device, Pool
 from eNMS.services import blueprint
-from eNMS.services.models import Job, Service, service_classes, type_to_class
+from eNMS.services.models import Job, Service, service_classes
 from eNMS.tasks.forms import SchedulingForm
 
 
@@ -101,15 +101,6 @@ def get_form(cls_name):
 @login_required
 def get_service(service_id):
     return jsonify(retrieve(Service, id=service_id).column_values)
-
-
-@blueprint.route('/service_type/<service_type>', methods=['POST'])
-@login_required
-def get_service_per_type(service_type):
-    return jsonify([{
-        'id': s.id,
-        'name': s.name
-    } for s in type_to_class[service_type].query.all()])
 
 
 @blueprint.route('/delete/<service_id>', methods=['POST'])

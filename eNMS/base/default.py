@@ -8,7 +8,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.services.models import service_classes, RestCallService, Service
+from eNMS.services.models import service_classes, Service
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
@@ -122,7 +122,7 @@ def create_other_services():
         'content_match': '',
         'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip']
     })
-    factory(RestCallService, **{
+    factory(service_classes['Rest Call Service'], **{
         'name': 'GET_router8',
         'description': 'Use GET ReST call on router8',
         'content_match': '',

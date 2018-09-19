@@ -1,15 +1,9 @@
-from flask import current_app, jsonify, render_template, request
+from flask import jsonify, render_template, request
 from flask_login import login_required
-from jinja2 import Template
-from os.path import join
-from sqlalchemy import Boolean, Float, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict
-from werkzeug import secure_filename
-from yaml import load as yaml_load
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import retrieve, allowed_file
+from eNMS.base.helpers import retrieve
 from eNMS.base.properties import (
     pretty_names,
     property_types,
@@ -68,7 +62,7 @@ def get_form(cls_name):
         return f'''
             <label>{c.key}</label>
             <div class="form-group">
-              <select class="form-control" 
+              <select class="form-control"
               id="{c.key}" name="{c.key}"
               {'multiple size="7"' if property_types[c.key] == list else ''}>
               {options}
@@ -80,13 +74,12 @@ def get_form(cls_name):
             <div class="item">
                 <input id="{c.key}" name="{c.key}" type="checkbox">
                 <label>{c.key}</label>
-            </div>'''
-        ) + '</fieldset>'
+            </div>''') + '</fieldset>'
 
     form = ''
     for col in cls.__table__.columns:
         if col.key in cls.private:
-          continue
+            continue
         if property_types[col.key] == bool:
             form += build_boolean_box(col)
         elif hasattr(cls, f'{col.key}_values'):

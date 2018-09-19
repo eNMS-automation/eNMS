@@ -10,7 +10,7 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.services.models import multiprocessing, Service, service_classes
+from eNMS.services.models import Service, service_classes
 
 
 class RestCallService(Service):

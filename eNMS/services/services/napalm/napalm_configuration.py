@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.services.connections import napalm_connection
 from eNMS.services.models import multiprocessing, Service, service_classes

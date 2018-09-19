@@ -11,7 +11,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from eNMS import db
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import property_types
 
@@ -97,12 +96,12 @@ def create_custom_services():
     path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
     for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):
-            mod = load_module(str(file))
+            load_module(str(file))
     for cls_name, cls in service_classes.items():
         for col in cls.__table__.columns:
             if (
-                type(col.type) == PickleType
-                and hasattr(cls, f'{col.key}_values')
+                type(col.type) == PickleType and
+                hasattr(cls, f'{col.key}_values')
             ):
                 property_types[col.key] = list
             else:

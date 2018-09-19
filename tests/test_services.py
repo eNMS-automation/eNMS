@@ -30,67 +30,6 @@ netmiko_ping = ImmutableMultiDict([
     ('global_delay_factor', '1.0'),
 ])
 
-template = '''
-{% for interface, properties in subinterfaces.items() %}
-interface FastEthernet0/0.{{ interface }}
-description {{ properties.aire }}
-encapsulation dot1Q {{ properties.dot1Q }}
-ip address {{ properties.address }} 255.255.255.248
-no ip redirects
-ip ospf cost {{ properties.cost }}
-{% endfor %}
-'''
-
-result = '''
-interface FastEthernet0/0.420
-description 262
-encapsulation dot1Q 420
-ip address 10.124.33.250 255.255.255.248
-no ip redirects
-ip ospf cost 320
-
-interface FastEthernet0/0.418
-description 252
-encapsulation dot1Q 418
-ip address 10.124.33.234 255.255.255.248
-no ip redirects
-ip ospf cost 520
-
-interface FastEthernet0/0.419
-description 261
-encapsulation dot1Q 419
-ip address 10.124.33.242 255.255.255.248
-no ip redirects
-ip ospf cost 620
-'''
-
-netmiko_jinja2_service = dict([
-    ('name', 'netmiko_subif'),
-    ('waiting_time', '0'),
-    ('description', ''),
-    ('vendor', ''),
-    ('operating_system', ''),
-    ('content_type', 'j2_template'),
-    ('create_service', 'netmiko_config'),
-    ('content', template),
-    ('netmiko_type', 'configuration'),
-    ('driver', 'cisco_xr_ssh'),
-    ('global_delay_factor', '1.0'),
-])
-
-napalm_jinja2_service = dict([
-    ('name', 'napalm_subif'),
-    ('waiting_time', '0'),
-    ('description', ''),
-    ('vendor', ''),
-    ('operating_system', ''),
-    ('content_type', 'j2_template'),
-    ('create_service', 'napalm_config'),
-    ('content', template),
-    ('service_type', 'napalm_configuration'),
-    ('action', 'load_merge_candidate')
-])
-
 file_transfer_service = ImmutableMultiDict([
     ('name', 'test'),
     ('waiting_time', '0'),
@@ -119,31 +58,7 @@ def test_base_services(user_client):
         'interfaces',
         'parameters.yaml'
     )
-    with open(path_yaml, 'rb') as f:
-        netmiko_jinja2_service['file'] = f
-        user_client.post(
-            '/services/create_service/netmiko_config',
-            data=netmiko_jinja2_service
-        )
-    with open(path_yaml, 'rb') as f:
-        napalm_jinja2_service['file'] = f
-        user_client.post(
-            '/services/create_service/napalm_config',
-            data=napalm_jinja2_service
-        )
-    assert len(NapalmConfigService.query.all()) == 2
-    assert len(Service.query.all()) == 10
-    netmiko_j2_service = db.session.query(Service).filter_by(
-        name='netmiko_subif'
-    ).first()
-    napalm_j2_service = db.session.query(Service).filter_by(
-        name='napalm_subif'
-    ).first()
-    # simply removing the space does not work as yaml relies on dict, which are
-    # not ordered, we use set instead for the test to pass on python 2 and 3
-    assert set(netmiko_j2_service.content.split('\n')) == set(result.split('\n'))
-    assert set(napalm_j2_service.content.split('\n')) == set(result.split('\n'))
-    # file transfer service
+    assert len(Service.query.all()) == 8
     user_client.post(
         'services/create_service/file_transfer',
         data=file_transfer_service

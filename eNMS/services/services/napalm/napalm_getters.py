@@ -56,9 +56,9 @@ class NapalmGettersService(Service):
                 except Exception as e:
                     result[getter] = f'{getter} failed because of {e}'
             if self.content_match_regex:
-                success = bool(search(self.content_match, str_dict(result)))
+                success = bool(search(self.content_match, str(result)))
             else:
-                success = self.content_match in str_dict(result)
+                success = self.content_match in str(result)
             napalm_driver.close()
         except Exception as e:
             result = f'service did not work:\n{e}'

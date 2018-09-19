@@ -11,6 +11,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.services.models import Service, service_classes
 
+
 class AService(Service):
 
     __tablename__ = 'AService'
@@ -46,5 +47,6 @@ class AService(Service):
 
     def job(self, *args):
         return True, 'a', 'a'
+
 
 service_classes['A Service'] = AService

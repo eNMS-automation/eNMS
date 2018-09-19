@@ -22,11 +22,7 @@ from eNMS.base.default import (
     create_default_workflows
 )
 from eNMS.base.rest import configure_rest_api
-from eNMS.services.custom_service import (
-    create_custom_services,
-    create_custom_service_instances
-)
-
+from eNMS.services.custom_service import create_custom_services
 
 
 def register_extensions(app):
@@ -80,7 +76,6 @@ def configure_database(app):
     def create_default():
         create_custom_services()
         db.create_all()
-        create_custom_service_instances()
         create_default_user()
         create_default_parameters()
         create_default_network_topology(app)

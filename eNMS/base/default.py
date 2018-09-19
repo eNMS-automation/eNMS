@@ -15,7 +15,7 @@ from eNMS.services.models import (
     RestCallService,
     Service
 )
-from eNMS.services.custom_services.netmiko_config import NetmikoConfigService
+from eNMS.services.custom_service import service_classes
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
@@ -64,7 +64,7 @@ def create_default_network_topology(app):
 def create_netmiko_services():
     for service in (
         {
-            'type': NetmikoConfigService,
+            'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Netmiko',
             'vendor': 'Cisco',
@@ -85,7 +85,7 @@ def create_netmiko_services():
             'content_match1': 'TEST'
         },
         {
-            'type': NetmikoConfigService,
+            'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
             'vendor': 'Cisco',

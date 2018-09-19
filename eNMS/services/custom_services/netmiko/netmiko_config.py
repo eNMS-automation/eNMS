@@ -45,4 +45,4 @@ class NetmikoConfigService(CustomService):
         return success, result, incoming_payload
 
 
-service_classes['Netmiko Configuration Service'] = AService
+service_classes['Netmiko Configuration Service'] = NetmikoConfigService

@@ -8,8 +8,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.services.models import RestCallService, Service
-from eNMS.services.custom_service import service_classes
+from eNMS.services.models import service_classes, RestCallService, Service
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 

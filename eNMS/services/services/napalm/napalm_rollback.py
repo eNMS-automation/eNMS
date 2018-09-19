@@ -1,15 +1,14 @@
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.connections import napalm_connection
-from eNMS.services.custom_service import CustomService, service_classes
-from eNMS.services.models import multiprocessing
+from eNMS.services.models import multiprocessing, Service, service_classes
 
 
-class NapalmRollbackService(CustomService):
+class NapalmRollbackService(Service):
 
     __tablename__ = 'NapalmRollbackService'
 
-    id = Column(Integer, ForeignKey('CustomService.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
     content = Column(String)

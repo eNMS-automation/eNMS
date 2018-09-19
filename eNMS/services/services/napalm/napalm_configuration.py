@@ -1,8 +1,7 @@
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.connections import napalm_connection
-from eNMS.services.custom_service import Service, service_classes
-from eNMS.services.models import multiprocessing
+from eNMS.services.models import multiprocessing, Service, service_classes
 
 
 class NapalmConfigurationService(Service):

@@ -2,8 +2,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.connections import netmiko_connection
-from eNMS.services.custom_service import Service, service_classes
-from eNMS.services.models import multiprocessing
+from eNMS.services.models import multiprocessing, Service, service_classes
 
 netmiko_drivers = sorted(
     driver for driver in CLASS_MAPPER

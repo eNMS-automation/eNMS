@@ -87,11 +87,11 @@ def get_form(cls_name):
                 pass
             else:
                 yield f'''
-                <label>{col.key}</label>
-                <div class="form-group">
-                <input class="form-control" id="{col.key}"
-                name="{col.key}"type="text">
-                </div>'''
+                    <label>{col.key}</label>
+                    <div class="form-group">
+                      <input class="form-control" id="{col.key}"
+                      name="{col.key}"type="text">
+                    </div>'''
 
     def build_multiple_select():
         for col in cls.__table__.columns:
@@ -102,9 +102,20 @@ def get_form(cls_name):
                 yield f'''
                     <label>{col.key}</label>
                     <div class="form-group">
-                    <input class="form-control" id="{col.key}"
-                    name="{col.key}"type="text">
+                      <input class="form-control" id="{col.key}"
+                      name="{col.key}"type="text">
                     </div>'''
+
+    def build_booleans():
+        for col in cls.__table__.columns:
+            if not property_types[col.key] == bool:
+                continue
+            yield ''.join(f'''
+                <div class="item">
+                  <input id="{col.key}" name="{col.key}" type="checkbox">
+                  <label>{col.key}</label>
+                </div>'''
+            )
 
     form = (
         build_separator('Text properties') +
@@ -114,7 +125,9 @@ def get_form(cls_name):
         build_separator('Float properties') +
         ''.join(build_text_boxes(float)) +
         build_separator('Json properties') +
-        ''.join(build_text_boxes(dict))
+        ''.join(build_text_boxes(dict)) +
+        build_separator('Boolean properties') +
+        f'<fieldset>{"".join(build_booleans())}</fieldset>'
     )
 
     return jsonify({'form': form, 'instances': cls.choices()})

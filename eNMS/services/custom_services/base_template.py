@@ -22,6 +22,8 @@ class AService(CustomService):
     a_float = Column(Float)
     a_list = Column(MutableList.as_mutable(PickleType))
     a_dict = Column(MutableDict.as_mutable(PickleType))
+    boolean1 = Column(Boolean)
+    boolean2 = Column(Boolean)
     
     a_list_values = [
         'value1',

@@ -66,16 +66,6 @@ def custom_services():
 def get_form(cls_name):
     cls = service_classes[cls_name]
 
-    def build_separator(text):
-        return (f'''
-            <div style="width: 100%; height: 20px; border-bottom: 1px;
-            solid black; text-align: center;">
-              <span style="font-size: 15px; padding: 0 10px;">
-                {text}
-              </span>
-            </div>'''
-        )
-
     def build_text_boxes(column_type):
         for col in cls.__table__.columns:
             if (
@@ -124,15 +114,10 @@ def get_form(cls_name):
             )
 
     form = (
-        build_separator('Text properties') +
         ''.join(build_text_boxes(str)) +
-        build_separator('Integer properties') +
         ''.join(build_text_boxes(int)) +
-        build_separator('Float properties') +
         ''.join(build_text_boxes(float)) +
-        build_separator('Json properties') +
         ''.join(build_text_boxes('pickle')) +
-        build_separator('Boolean properties') +
         f'<fieldset>{"".join(build_booleans())}</fieldset>'
     )
 

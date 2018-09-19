@@ -57,7 +57,8 @@ def configuration():
 def custom_services():
     return render_template(
         'custom_services.html',
-        services_classes=list(service_classes)
+        services_classes=list(service_classes),
+        property_types={k: str(v) for k, v in property_types.items()}
     )
 
 

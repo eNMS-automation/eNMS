@@ -40,7 +40,7 @@ class CustomService(Service):
         serialized_object = {'name': self.name}
         for col in self.__table__.columns:
             value = getattr(self, col.key)
-            serialized_object[col.key] = str(value) if value else ''
+            serialized_object[col.key] = value
         return serialized_object
 
 

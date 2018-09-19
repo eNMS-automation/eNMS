@@ -2,8 +2,10 @@
 global
 alertify: false
 fields: false
+propertyTypes: false
 types: false
 services: false
+servicesClasses: false
 */
 
 (function() {
@@ -39,10 +41,14 @@ function fillInstanceForm() {
     type: 'POST',
     url: `/services/get_form_values/${$('#service-instance').val()}`,
     success: function(properties) {
+      console.log(propertyTypes)
       console.log(properties);
       for (const [property, value] of Object.entries(properties)) {
-        if (property.includes('regex')) {
+        console.log(property, value);
+        if (property.includes('bool')) {
           $(`#${property}`).prop('checked', value);
+        } else if (property.includes('dict')) {
+          $(`#${property}`).val(value ? JSON.stringify(value): {});
         } else {
           $(`#${property}`).val(value);
         }

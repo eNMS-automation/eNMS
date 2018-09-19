@@ -7,7 +7,7 @@ from sqlalchemy import (
     PickleType,
     String
 )
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.services.custom_service import CustomService, service_classes
 
@@ -20,7 +20,14 @@ class AService(CustomService):
     operating_system = Column(String)
     an_integer = Column(Integer)
     a_float = Column(Float)
+    a_list = Column(MutableList.as_mutable(PickleType))
     a_dict = Column(MutableDict.as_mutable(PickleType))
+    
+    a_list_values = [
+        'value1',
+        'value2',
+        'value3'
+    ]
 
     __mapper_args__ = {
         'polymorphic_identity': 'a_service',

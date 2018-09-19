@@ -10,7 +10,11 @@ from yaml import load as yaml_load
 from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, allowed_file
-from eNMS.base.properties import pretty_names, service_public_properties
+from eNMS.base.properties import (
+    pretty_names,
+    property_types,
+    service_public_properties
+)
 from eNMS.objects.models import Device, Pool
 from eNMS.services import blueprint
 from eNMS.services.custom_service import CustomService, service_classes
@@ -72,7 +76,25 @@ def get_form(cls_name):
             </div>'''
         )
 
-    def build_text_boxes(sql_type):
+    def build_text_boxes(column_type):
+        for col in cls.__table__.columns:
+            if (
+                property_types[col.key] != column_type:
+                or col.key not in cls.private
+            ):
+                continue
+            if hasattr(cls, f'{col.key}_values'):
+                return ''
+            else:
+                return ''.join(f'''
+                <label>{col.key}</label>
+                <div class="form-group">
+                <input class="form-control" id="{col.key}"
+                name="{col.key}"type="text">
+                </div>'''
+                )
+
+    def build_multiple_select():
         return ''.join(f'''
             <label>{col.key}</label>
             <div class="form-group">
@@ -80,18 +102,20 @@ def get_form(cls_name):
               name="{col.key}"type="text">
             </div>'''
             for col in cls.__table__.columns
-            if type(col.type) == sql_type and col.key not in cls.private
+            if property_types[col.key] == dict
+            and col.key not in cls.private
+            and not hasattr(cls, f'{col.key}_values')
         )
 
     form = (
         build_separator('Text properties') +
-        build_text_boxes(String) +
+        build_text_boxes(str) +
         build_separator('Integer properties') +
-        build_text_boxes(Integer) +
+        build_text_boxes(int) +
         build_separator('Float properties') +
-        build_text_boxes(Float) +
+        build_text_boxes(float) +
         build_separator('Json properties') +
-        build_text_boxes(PickleType)
+        build_text_boxes(dict)
     )
 
     return jsonify({'form': form, 'instances': cls.choices()})

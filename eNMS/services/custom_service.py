@@ -39,7 +39,8 @@ class CustomService(Service):
     def serialized(self):
         serialized_object = {'name': self.name}
         for col in self.__table__.columns:
-            serialized_object[col.key] = str(getattr(self, col.key))
+            value = getattr(self, col.key)
+            serialized_object[col.key] = str(value) if value else ''
         return serialized_object
 
 

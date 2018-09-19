@@ -12,39 +12,10 @@ from wtforms import (
     TextField
 )
 
-napalm_actions = {
-    'Load merge': 'load_merge_candidate',
-    'Load replace': 'load_replace_candidate'
-}
-
-netmiko_drivers = sorted(
-    driver for driver in CLASS_MAPPER
-    if 'telnet' not in driver and 'ssh' not in driver
-)
-
 
 class ServiceForm(FlaskForm):
     name = TextField('Name')
     description = TextField('Description')
-
-
-class ConfigServiceForm(ServiceForm):
-    vendor = TextField('Vendor')
-    operating_system = TextField('Operating system')
-    content = TextAreaField('')
-    file = FileField('', validators=[FileAllowed(['yaml'], 'YAML only')])
-
-
-class NapalmConfigServiceForm(ConfigServiceForm):
-    action_choices = [(v, k) for k, v in napalm_actions.items()]
-    action = SelectField('Actions', choices=action_choices)
-
-
-class NapalmGettersForm(ServiceForm):
-    getters_choices = [(v, k) for k, v in getters_mapping.items()]
-    getters = SelectMultipleField('Getters', choices=getters_choices)
-    content_match = TextField('Content Match')
-    content_match_regex = BooleanField()
 
 
 class AnsibleServiceForm(ServiceForm):

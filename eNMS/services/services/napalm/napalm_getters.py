@@ -16,9 +16,9 @@ class NapalmGettersService(CustomService):
     device_multiprocessing = True
 
     getters_values = (
-        ('ARP table': 'get_arp_table',
-        ('Interfaces counters': 'get_interfaces_counters',
-        ('Facts': 'get_facts',
+        ('get_arp_table', 'ARP table': 
+        ('get_interfaces_counters', 'Interfaces counters': 
+        ('get_facts', 'Facts': 
         ('Environment': 'get_environment',
         ('Configuration': 'get_config',
         ('Interfaces': 'get_interfaces',

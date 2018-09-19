@@ -15,6 +15,11 @@ class NapalmConfigurationService(CustomService):
     content = Column(String)
     device_multiprocessing = True
 
+    action_values = (
+        ('load_merge_candidate', 'Load merge'),
+        ('load_replace_candidate', 'Load replace')
+    )
+
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_configuration_service',
     }

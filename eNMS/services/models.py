@@ -102,9 +102,6 @@ class Service(Job):
         return properties
 
 
-
-
-
 service_classes = {}
 
 

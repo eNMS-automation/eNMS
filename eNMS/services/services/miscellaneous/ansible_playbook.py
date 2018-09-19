@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy.ext.mutable import MutableDict
+from subprocess import check_output
 
-from eNMS.services.connections import napalm_connection
 from eNMS.services.models import multiprocessing, Service, service_classes
 
 

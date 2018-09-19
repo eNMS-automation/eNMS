@@ -1,8 +1,15 @@
+from json import dumps, loads
 from re import search
+from requests import (
+    get as rest_get,
+    post as rest_post,
+    put as rest_put,
+    delete as rest_delete
+)
+from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableList
+from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.services.connections import napalm_connection
 from eNMS.services.models import multiprocessing, Service, service_classes
 
 

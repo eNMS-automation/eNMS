@@ -1,14 +1,5 @@
 from importlib.util import spec_from_file_location, module_from_spec
-from json import dumps, loads
 from pathlib import Path
-from re import search
-from requests import (
-    get as rest_get,
-    post as rest_post,
-    put as rest_put,
-    delete as rest_delete
-)
-from requests.auth import HTTPBasicAuth
 from sqlalchemy import (
     Boolean,
     Column,
@@ -18,13 +9,10 @@ from sqlalchemy import (
     PickleType,
     String
 )
-from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
-from subprocess import check_output
 
 from eNMS import db
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import integrity_rollback
 from eNMS.base.properties import property_types
 
 

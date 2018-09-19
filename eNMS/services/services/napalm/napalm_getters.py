@@ -1,6 +1,8 @@
-
+from re import search
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy.ext.mutable import MutableList
 
+from eNMS.services.connections import napalm_connection
 from eNMS.services.custom_service import CustomService, service_classes
 from eNMS.services.models import multiprocessing
 

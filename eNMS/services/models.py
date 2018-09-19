@@ -189,8 +189,6 @@ class RestCallService(Service):
 
 
 type_to_class = {
-    'napalm_config': NapalmConfigService,
-    'napalm_getters': NapalmGettersService,
     'ansible_playbook': AnsibleService,
     'rest_call': RestCallService
 }

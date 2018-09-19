@@ -8,12 +8,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.services.models import (
-    NapalmConfigService,
-    NapalmGettersService,
-    RestCallService,
-    Service
-)
+from eNMS.services.models import RestCallService, Service
 from eNMS.services.custom_service import service_classes
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
@@ -110,7 +105,7 @@ def create_netmiko_services():
 
 
 def create_napalm_service():
-    factory(NapalmConfigService, **{
+    factory(service_classes['Napalm Configuration Service'], **{
         'name': 'napalm_create_vrf_TEST',
         'description': 'Create a VRF "TEST" with Napalm',
         'vendor': 'Cisco',
@@ -122,7 +117,7 @@ def create_napalm_service():
 
 
 def create_other_services():
-    factory(NapalmGettersService, **{
+    factory(service_classes['Napalm Getters Service'], **{
         'name': 'service_napalm_getter',
         'description': 'Getters: facts / Interfaces / Interfaces IP',
         'content_match': '',

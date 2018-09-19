@@ -39,6 +39,7 @@ function fillInstanceForm() {
     type: 'POST',
     url: `/services/get_form_values/${$('#service-instance').val()}`,
     success: function(properties) {
+      console.log(properties);
       for (const [property, value] of Object.entries(properties)) {
         if (property.includes('regex')) {
           $(`#${property}`).prop('checked', value);
@@ -54,13 +55,18 @@ function fillInstanceForm() {
  * Create or edit a service
  */
 function saveService() { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/services/save_service/${$('#services').val()}`,
-    success: function(result) {
-
-    },
-  });
+  console.log($('#form').serialize());
+  if ($('#form').parsley().validate()) {
+    $.ajax({
+      type: 'POST',
+      url: `/services/save_service/${$('#services').val()}`,
+      dataType: 'json',
+      data: $('#form').serialize(),
+      success: function(result) {
+  
+      },
+    });
+  }
 }
 
 /**

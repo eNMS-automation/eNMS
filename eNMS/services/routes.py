@@ -76,7 +76,8 @@ def get_form(cls_name):
         return ''.join(f'''
             <label>{col.key}</label>
             <div class="form-group">
-              <input class="form-control" id="{col.key}" type="text">
+              <input class="form-control" id="{col.key}"
+              name="{col.key}"type="text">
             </div>'''
             for col in cls.__table__.columns
             if type(col.type) == sql_type and col.key not in cls.private
@@ -135,6 +136,7 @@ def delete_object(service_id):
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])
 @login_required
 def save_service(cls_name):
+    print(request.form)
     form = dict(request.form.to_dict())
     # form['getters'] = request.form.getlist('getters')
     return jsonify(factory(service_classes[cls_name], **form).serialized)

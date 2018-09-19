@@ -31,9 +31,8 @@ class CustomService(Service):
 
     @property
     def serialized(self):
-        serialized_object = {}
+        serialized_object = {'name': self.name}
         for col in self.__table__.columns:
-            print(col.key)
             serialized_object[col.key] = getattr(self, col.key)
         return serialized_object
 

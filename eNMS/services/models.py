@@ -12,7 +12,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.properties import property_types
+from eNMS.base.properties import cls_to_properties, property_types
 
 
 def multiprocessing(function):
@@ -70,7 +70,7 @@ class Service(Job):
 
     @property
     def properties(self):
-        return {p: getattr(self, p) for p in ('name', 'description', 'type')}
+        return {p: getattr(self, p) for p in cls_to_properties['Service']}
 
     @property
     def column_values(self):

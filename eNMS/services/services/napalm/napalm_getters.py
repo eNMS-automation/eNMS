@@ -1,5 +1,5 @@
 from re import search
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 
 from eNMS.services.connections import napalm_connection

@@ -23,16 +23,16 @@ class NapalmRollbackService(CustomService):
 
     @multiprocessing
     def job(self, task, device, results, incoming_payload):
-    try:
-        napalm_driver = napalm_connection(device)
-        napalm_driver.open()
-        napalm_driver.rollback()
-        napalm_driver.close()
-        result, success = 'Rollback successful', True
-    except Exception as e:
-        result = f'Napalm rollback did not work because of {e}'
-        success = False
-    return success, result, incoming_payload
+        try:
+            napalm_driver = napalm_connection(device)
+            napalm_driver.open()
+            napalm_driver.rollback()
+            napalm_driver.close()
+            result, success = 'Rollback successful', True
+        except Exception as e:
+            result = f'Napalm rollback did not work because of {e}'
+            success = False
+        return success, result, incoming_payload
 
 
 service_classes['Napalm Rollback Service'] = NapalmRollbackService

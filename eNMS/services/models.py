@@ -73,16 +73,12 @@ class Service(Job):
 
     @property
     def properties(self):
-        custom_properties = type_to_properties['custom_service']
-        return {
-            p: getattr(self, p)
-            for p in type_to_properties.get(self.type, custom_properties)
-        }
+        return {'name': self.name, 'description': self.description}
 
     @property
     def serialized(self):
         properties = self.properties
-        properties['tasks'] = [obj.properties for obj in getattr(self, 'tasks')]
+        # properties['tasks'] = [obj.properties for obj in getattr(self, 'tasks')]
         return properties
 
 

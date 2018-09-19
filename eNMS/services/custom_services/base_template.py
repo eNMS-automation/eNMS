@@ -24,11 +24,17 @@ class AService(CustomService):
     a_dict = Column(MutableDict.as_mutable(PickleType))
     boolean1 = Column(Boolean)
     boolean2 = Column(Boolean)
-    
+
+    vendor_values = [
+        ('cisco', 'Cisco'),
+        ('juniper', 'Juniper'),
+        ('arista', 'Arista')
+    ]
+
     a_list_values = [
-        'value1',
-        'value2',
-        'value3'
+        ('value1', 'Value 1'),
+        ('value2', 'Value 2'),
+        ('value3', 'Value 3')
     ]
 
     __mapper_args__ = {

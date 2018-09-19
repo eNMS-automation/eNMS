@@ -99,12 +99,24 @@ def get_form(cls_name):
                 hasattr(cls, f'{col.key}_values')
                 and property_types[col.key] == 'pickle'
             ):
-                yield f'''
-                    <label>{col.key}</label>
-                    <div class="form-group">
-                      <input class="form-control" id="{col.key}"
-                      name="{col.key}"type="text">
-                    </div>'''
+                options = ''.join(
+                    f'<option value="{k}">{v}</option>'
+                    for k, v in getattr(cls, f'{col.key}_values')
+                )
+                core_part = f'''
+                    <select class="form-control" 
+                    id="{col.key}" name="{col.key}">
+                      {options}
+                    </select>'''
+            else:
+                core_part = '''
+                    <input class="form-control" id="{col.key}"
+                    name="{col.key}"type="text">'''
+            yield f'''
+                <label>{col.key}</label>
+                <div class="form-group">
+                  {core_part}
+                </div>'''
 
     def build_booleans():
         for col in cls.__table__.columns:
@@ -125,7 +137,7 @@ def get_form(cls_name):
         build_separator('Float properties') +
         ''.join(build_text_boxes(float)) +
         build_separator('Json properties') +
-        ''.join(build_text_boxes(dict)) +
+        ''.join(build_text_boxes('pickle')) +
         build_separator('Boolean properties') +
         f'<fieldset>{"".join(build_booleans())}</fieldset>'
     )

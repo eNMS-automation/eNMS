@@ -250,23 +250,18 @@ pretty_names = {
 
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 
-# Property types
-
-json_properties = (
-    'payload',
-)
-
-boolean_properties = (
-    'overwrite_file',
-    'disable_md5',
-    'inline_transfer',
-    'content_match_regex',
-    'content_match_regex1',
-    'content_match_regex2',
-    'content_match_regex3',
-    'inventory_from_selection',
-    'pass_device_properties',
-    'contentregex',
-    'sourceregex',
-    'transfer_payload'
-)
+property_types = {
+    'content_match_regex': bool,
+    'content_match_regex1': bool,
+    'content_match_regex2': bool,
+    'content_match_regex3': bool,
+    'disable_md5': bool,
+    'inline_transfer': bool,
+    'inventory_from_selection': bool,
+    'overwrite_file': bool,
+    'pass_device_properties': bool,
+    'payload': dict,
+    'contentregex': bool,
+    'sourceregex': bool,
+    'transfer_payload': bool
+}

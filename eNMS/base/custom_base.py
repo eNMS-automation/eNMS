@@ -2,11 +2,7 @@ from json import loads
 
 from eNMS import db
 from eNMS.base.helpers import retrieve
-from eNMS.base.properties import (
-    boolean_properties,
-    cls_to_properties,
-    json_properties
-)
+from eNMS.base.properties import cls_to_properties, property_types
 
 
 class CustomBase(db.Model):
@@ -24,12 +20,10 @@ class CustomBase(db.Model):
 
     def update(self, **kwargs):
         for property, value in kwargs.items():
-            if property in boolean_properties or 'regex' in property:
+            if property_types.get(property, None) == bool:
                 value = property in kwargs
-            elif property in json_properties:
+            elif property_types.get(property, None) == dict:
                 value = loads(value) if value else {}
-            elif property == 'job':
-                continue
             setattr(self, property, value)
 
     @property

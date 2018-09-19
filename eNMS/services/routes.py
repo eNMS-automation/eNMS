@@ -164,6 +164,6 @@ def delete_object(service_id):
 def save_service(cls_name):
     form = dict(request.form.to_dict())
     for key in request.form:
-        if property_types[key] == list:
+        if property_types.get(key, None) == list:
             form[key] = request.form.getlist(key)
     return jsonify(factory(service_classes[cls_name], **form).serialized)

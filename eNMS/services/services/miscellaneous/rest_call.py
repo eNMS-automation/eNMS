@@ -26,6 +26,13 @@ class RestCallService(Service):
         'DELETE': rest_delete
     }
 
+    call_type_values = (
+        ('GET', 'GET'),
+        ('POST', 'POST'),
+        ('PUT', 'PUT'),
+        ('DELETE', 'DELETE')
+    )
+
     __mapper_args__ = {
         'polymorphic_identity': 'rest_call_service',
     }

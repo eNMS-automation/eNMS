@@ -32,7 +32,7 @@ class Config(object):
     GOTTY_AUTHENTICATION = True
 
     # In production, it is likely that the web server (e.g nginx) allows
-    # only one port. In that case, the web server can be configured to 
+    # only one port. In that case, the web server can be configured to
     # redirect the requests to another port, as GoTTY needs its own port to
     # listen to.
     # Example of a redirection from https://eNMS/terminal1 to port 8080 :

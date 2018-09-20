@@ -40,7 +40,6 @@ function buildServiceInstances() {
  * Fill form with instance values.
  */
 function fillInstanceForm() {
-  console.log($('#service-instance').val());
   $.ajax({
     type: 'POST',
     url: `/services/get_service/${$('#service-instance').val()}`,

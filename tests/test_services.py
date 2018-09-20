@@ -40,13 +40,17 @@ def test_base_services(user_client):
         '/services/save_service/Netmiko Configuration Service',
         data=netmiko_ping
     )
-    assert len(service_classes['Netmiko Configuration Service'].query.all()) == 3
+    assert len(
+        service_classes['Netmiko Configuration Service'].query.all()
+    ) == 3
     assert len(Service.query.all()) == 9
     user_client.post(
         'services/save_service/Netmiko File Transfer Service',
         data=file_transfer_service
     )
-    assert len(service_classes['Netmiko File Transfer Service'].query.all()) == 1
+    assert len(
+        service_classes['Netmiko File Transfer Service'].query.all()
+    ) == 1
     assert len(Service.query.all()) == 10
 
 

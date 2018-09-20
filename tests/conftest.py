@@ -7,7 +7,6 @@ from time import sleep
 
 from config import config_dict
 from eNMS import create_app, db
-from eNMS.services.models import service_classes
 
 
 @fixture

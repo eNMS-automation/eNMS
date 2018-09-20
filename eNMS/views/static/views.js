@@ -22,7 +22,8 @@ function SshConnection() { // eslint-disable-line no-unused-vars
     success: function(result) {
       const protocol = window.location.protocol;
       const hostname = window.location.hostname;
-      openUrl(`${protocol}//${hostname}:${result.port}`);
+      const slug = result.url ? `/${result.url}` : '';
+      openUrl(`${protocol}//${hostname}:${result.port}${slug}`);
       const message = `Connection to ${result.device} on port ${result.port}.`;
       alertify.notify(message, 'success', 15);
     },

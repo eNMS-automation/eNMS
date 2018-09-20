@@ -79,20 +79,26 @@ def view(view_type):
 def connection(name):
     current_os, device = system(), retrieve(Device, name=name)
     username, password, _ = get_credentials(device)
+    conf = current_app.config
     if current_os == 'Windows':
         path_putty = join(current_app.path, 'applications', 'putty.exe')
         ssh = f'{path_putty} -ssh {username}@{device.ip_address} -pw {password}'
         Popen(ssh.split())
     else:
         path_gotty = join(current_app.path, 'applications', 'gotty')
-        if current_app.config['GOTTY_AUTHENTICATION']:
+        if conf['GOTTY_AUTHENTICATION']:
             cmd = f'sshpass -p {password} ssh {username}@{device.ip_address}'
         else:
             cmd = f'ssh {username}@{device.ip_address}'
         port_index = current_app.gotty_increment % current_app.gotty_modulo
         current_app.gotty_increment += 1
-        port = current_app.config['GOTTY_ALLOWED_PORTS'][port_index]
-        Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
+        if conf['GOTTY_PORT_REDIRECTION']:
+            port = conf['GOTTY_WEBSERVER_PORT']
+            url = conf['GOTTY_ALLOWED_URLS'][port_index]
+            Popen(f'{path_gotty} -w -p {port} -u {url} {cmd}'.split())
+        else:
+            port = conf['GOTTY_ALLOWED_PORTS'][port_index]
+            Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
     return jsonify({'device': device.name, 'port': port})
 
 

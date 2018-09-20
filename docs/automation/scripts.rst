@@ -8,15 +8,8 @@ The following types of script are available in eNMS.
 Netmiko configuration script
 ----------------------------
 
-There are two types of Netmiko configuration scripts:
-  - **"show" commands**: a list of “show commands” which output will be displayed in the logs.
-  - **configuration**: a list of commands to be configured on the devices.
-
-For each type, the content of the script can be:
-  - ``text-based``: a list of configuration commands to be sent to the device.
-  - ``template-based``: the script is a Jinja2 template. A .YAML file containing all parameters must be provided.
-
-Finally, a **driver** must be selected among all available netmiko drivers.
+Uses Netmiko to send list of commands to be configured on the devices.
+A **driver** must be selected among all available netmiko drivers.
 
 .. image:: /_static/automation/scripts/netmiko_configuration_script.png
    :alt: Netmiko configuration script
@@ -27,8 +20,6 @@ Netmiko File transfer script
 
 A file transfer script sends a file to a device, or retrieve a file from a device.
 It relies on Netmiko file transfer functions.
-
-If you want to send a file to a device, you must place the file in the ``eNMS/file_transfer`` folder.
 
 .. image:: /_static/automation/scripts/file_transfer_script.png
    :alt: Netmiko file transfer script
@@ -56,8 +47,6 @@ This type of script uses NAPALM to update the configuration of a device.
 There are two types of operations:
   - ``load merge``: add the script configuration to the existing configuration of the target.
   - ``load replace``: replace the configuration of the target with the script configuration.
-
-Just like with the ``Netmiko configuration`` script, a configuration can be either ``text-based``, or ``template-based``.
 
 .. image:: /_static/automation/scripts/napalm_configuration_script.png
    :alt: NAPALM configuration script
@@ -92,15 +81,13 @@ Ansible playbook script
 -----------------------
 
 An ``Ansible playbook`` script sends an ansible playbook to the devices.
-The playbook file must be placed in the ``eNMS/playbooks`` folder, along with the Ansible configuration file (``ansible.cfg``).
-To create an ``Ansible playbook`` script, simply enter the name of the playbook (example: ``the_playbook.yml``) in the ``Playbook name`` field of the form.
 
 .. image:: /_static/automation/scripts/ansible_playbook_script.png
    :alt: Ansible script
    :align: center
 
-Custom script
--------------
+Add new scripts
+---------------
 
 eNMS also gives you the option to create your own script. Once created, a custom script is automatically added to the web interface and can be used like any other script.
 To create a custom script, add a new python file in ``eNMS/source/scripts/custom_scripts`` and use the following template:

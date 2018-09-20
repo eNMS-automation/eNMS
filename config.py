@@ -41,7 +41,11 @@ class Config(object):
     # }
     GOTTY_WEBSERVER_PORT = 8080
     GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', False)
-    GOTTY_ALLOWED_URLS = [f'terminal{i}' for i in range(3)]
+    # The following is configured by default :
+    # /eNMS_IP:server_port/terminal1 -> 127.0.0.1:8080
+    # /eNMS_IP:server_port/terminal2 -> 127.0.0.1:8081
+    # /eNMS_IP:server_port/terminal3 -> 127.0.0.1:8082
+    GOTTY_ALLOWED_URLS = [(f'terminal{i + 1}', 8080 + i) for i in range(10)]
     # By default, each new client that tries to connect to a GoTTY terminal
     # will have its own SSH session to the target device.
     # If the port multiplexing option is enabled, clients will all share the

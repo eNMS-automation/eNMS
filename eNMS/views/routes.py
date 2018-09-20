@@ -94,10 +94,13 @@ def connection(name):
         port_index = current_app.gotty_increment % current_app.gotty_modulo
         current_app.gotty_increment += 1
         if conf['GOTTY_PORT_REDIRECTION']:
-            port = conf['GOTTY_WEBSERVER_PORT']
-            url = conf['GOTTY_ALLOWED_URLS'][port_index]
-            Popen(f'{path_gotty} -w -p {port} -u {url} {cmd}'.split())
-            return jsonify({'device': device.name, 'port': port, 'url': url})
+            url, port = conf['GOTTY_ALLOWED_URLS'][port_index]
+            Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
+            return jsonify({
+                'device': device.name,
+                'port': conf['GOTTY_WEBSERVER_PORT'],
+                'url': url
+            })
         else:
             port = conf['GOTTY_ALLOWED_PORTS'][port_index]
             Popen(f'{path_gotty} -w -p {port} {cmd}'.split())

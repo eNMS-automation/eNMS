@@ -144,6 +144,14 @@ eNMS does not by default use the device credentials to automatically log in, but
 
 ::
 
- # set the ENMS_DATABASE_URL environment variable
+ # enable automatic authentication
  sudo apt-get install sshpass
  export GOTTY_AUTHENTICATION=1
+
+In production, for security reasons, it is possible that only one port is available on the web server. 
+In that case, the web server must be configured to redirect the traffic from a given URL to the associated GoTTY port, by configuring the "GOTTY_ALLOWED_URLS" and enabling the redirection by setting "GOTTY_PORT_REDIRECTION" to True.
+
+::
+
+ # enable port redirection
+ export GOTTY_PORT_REDIRECTION=1

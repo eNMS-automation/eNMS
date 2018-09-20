@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+propertyTypes: false
 servicesClasses: false
 */
 
@@ -28,6 +29,9 @@ function buildServiceInstances() {
           `<option value='${instance[0]}'>${instance[1]}</option>`
         );
       }
+      if ($('#service-instance').val()) {
+        fillInstanceForm();
+      }
     },
   });
 }
@@ -36,14 +40,16 @@ function buildServiceInstances() {
  * Fill form with instance values.
  */
 function fillInstanceForm() {
+  console.log($('#service-instance').val());
   $.ajax({
     type: 'POST',
     url: `/services/get_service/${$('#service-instance').val()}`,
     success: function(properties) {
       for (const [property, value] of Object.entries(properties)) {
-        if (property.includes('bool')) {
+        const propertyType = propertyTypes[property] || 'str';
+        if (propertyType.includes('bool')) {
           $(`#${property}`).prop('checked', value);
-        } else if (property.includes('dict')) {
+        } else if (propertyType.includes('dict')) {
           $(`#${property}`).val(value ? JSON.stringify(value): '{}');
         } else {
           $(`#${property}`).val(value);

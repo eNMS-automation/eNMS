@@ -112,30 +112,34 @@ GoTTY must be configured in the ``config.py`` file.
 
 ::
 
- # goTTY (webSSH connections)
- # Default: 20 ports reserved from 8080 to 8099)
- # eNMS will use these 20 ports as GoTTY WebSSH terminal
- GOTTY_ALLOWED_PORTS = list(range(8080, 8100))
- # 'sshpass' must be installed on the server for the authentication
- GOTTY_AUTHENTICATION = True
+  # goTTY (webSSH connections)
+  # Default: 20 ports reserved from 8080 to 8099)
+  # eNMS will use these 20 ports as GoTTY WebSSH terminal
+  GOTTY_ALLOWED_PORTS = list(range(8080, 8100))
+  # 'sshpass' must be installed on the server for the authentication
+  GOTTY_AUTHENTICATION = environ.get('GOTTY_AUTHENTICATION', False)
 
- # In production, it is likely that the web server (e.g nginx) allows
- # only one port. In that case, the web server can be configured to
- # redirect the requests to another port, as GoTTY needs its own port to
- # listen to.
- # Example of a redirection from https://eNMS/terminal1 to port 8080 :
- # location /terminal1 {
- # proxy_pass http://127.0.0.1:8080;
- # }
- GOTTY_WEBSERVER_PORT = 8080
- GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', False)
- GOTTY_ALLOWED_URLS = [f'terminal{i}' for i in range(3)]
- # By default, each new client that tries to connect to a GoTTY terminal
- # will have its own SSH session to the target device.
- # If the port multiplexing option is enabled, clients will all share the
- # same SSH session instead (they will actually share the same terminal
- # with tmux)
- # GOTTY_MULTIPLEXING = environ.get('GOTTY_PORT_REDIRECTION', False)
+  # In production, it is likely that the web server (e.g nginx) allows
+  # only one port. In that case, the web server can be configured to
+  # redirect the requests to another port, as GoTTY needs its own port to
+  # listen to.
+  # Example of a redirection from https://eNMS/terminal1 to port 8080 :
+  # location /terminal1 {
+  # proxy_pass  http://127.0.0.1:8080;
+  # }
+  GOTTY_WEBSERVER_PORT = 8080
+  GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', False)
+  # The following is configured by default :
+  # /eNMS_IP:server_port/terminal1 -> 127.0.0.1:8080
+  # /eNMS_IP:server_port/terminal2 -> 127.0.0.1:8081
+  # /eNMS_IP:server_port/terminal3 -> 127.0.0.1:8082
+  GOTTY_ALLOWED_URLS = [(f'terminal{i + 1}', 8080 + i) for i in range(10)]
+  # By default, each new client that tries to connect to a GoTTY terminal
+  # will have its own SSH session to the target device.
+  # If the port multiplexing option is enabled, clients will all share the
+  # same SSH session instead (they will actually share the same terminal
+  # with tmux)
+  GOTTY_MULTIPLEXING = environ.get('GOTTY_PORT_REDIRECTION', False)
 
 "GOTTY_ALLOWED_PORTS" defines which range of ports GoTTY will use to start an SSH session.
 eNMS uses a rotation system so that GoTTY will use these ports sequentially to handle all user requests.

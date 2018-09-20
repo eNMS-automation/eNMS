@@ -40,7 +40,7 @@ class Config(object):
     # proxy_pass  http://127.0.0.1:8080;
     # }
     GOTTY_WEBSERVER_PORT = 8080
-    GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', True)
+    GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', False)
     GOTTY_ALLOWED_URLS = [f'terminal{i}' for i in range(3)]
     # By default, each new client that tries to connect to a GoTTY terminal
     # will have its own SSH session to the target device.

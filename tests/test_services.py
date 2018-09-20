@@ -14,11 +14,10 @@ netmiko_ping = ImmutableMultiDict([
     ('vendor', ''),
     ('operating_system', ''),
     ('content_type', 'simple'),
-    ('create_service', 'netmiko_config'),
     ('content', 'ping 1.1.1.1'),
     ('netmiko_type', 'show_commands'),
     ('driver', 'cisco_xr_ssh'),
-    ('global_delay_factor', '1.0'),
+    ('global_delay_factor', '1.0')
 ])
 
 file_transfer_service = ImmutableMultiDict([
@@ -31,42 +30,39 @@ file_transfer_service = ImmutableMultiDict([
     ('source_file', 'path/to/source'),
     ('dest_file', 'path/to/destination'),
     ('file_system', 'flash:'),
-    ('direction', 'put'),
-    ('create_service', 'file_transfer'),
+    ('direction', 'put')
 ])
 
 
 @check_blueprints('/services')
 def test_base_services(user_client):
     user_client.post(
-        '/services/create_service/netmiko_config',
+        '/services/save_service/Netmiko Configuration Service',
         data=netmiko_ping
     )
     assert len(service_classes['Netmiko Configuration Service'].query.all()) == 3
-    assert len(Service.query.all()) == 8
+    assert len(Service.query.all()) == 9
     user_client.post(
-        'services/create_service/file_transfer',
+        'services/save_service/Netmiko File Transfer Service',
         data=file_transfer_service
     )
     assert len(service_classes['Netmiko File Transfer Service'].query.all()) == 1
-    assert len(Service.query.all()) == 11
+    assert len(Service.query.all()) == 10
 
 
 getters_dict = ImmutableMultiDict([
     ('name', 'napalm_getters_service'),
-    ('waiting_time', '0'),
     ('description', ''),
     ('getters', 'get_interfaces'),
     ('getters', 'get_interfaces_ip'),
-    ('getters', 'get_lldp_neighbors'),
-    ('create_service', 'napalm_getters')
+    ('getters', 'get_lldp_neighbors')
 ])
 
 
 @check_blueprints('/services')
 def test_getters_service(user_client):
     user_client.post(
-        '/services/create_service/napalm_getters',
+        '/services/save_service/Napalm Getters Service',
         data=getters_dict
     )
     assert len(service_classes['Napalm Getters Service'].query.all()) == 2
@@ -86,8 +82,8 @@ ansible_service = ImmutableMultiDict([
 @check_blueprints('/services')
 def test_ansible_services(user_client):
     user_client.post(
-        '/services/create_service/ansible_playbook',
+        '/services/save_service/Ansible Playbook Service',
         data=ansible_service
     )
     assert len(service_classes['Ansible Playbook Service'].query.all()) == 1
-    assert len(Service.query.all()) == 8
+    assert len(Service.query.all()) == 9

@@ -21,11 +21,11 @@ urls = {
     ),
     '/views': (
         '/geographical_view',
-        '/logical_view',
+        '/logical_view'
     ),
     '/services': (
         '/service_management',
-        '/service_creation',
+        '/service_editor'
     ),
     '/workflows': (
         '/workflow_management',

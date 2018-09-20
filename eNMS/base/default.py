@@ -1,4 +1,7 @@
+from importlib.util import spec_from_file_location, module_from_spec
 from os.path import join
+from pathlib import Path
+from sqlalchemy import Boolean, Float, Integer, PickleType
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
@@ -6,11 +9,35 @@ from eNMS import db
 from eNMS.admin.models import Parameters, User
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
+from eNMS.base.properties import property_types
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.services.models import service_classes, Service
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
+
+
+@integrity_rollback
+def create_service_classes():
+    path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
+    for file in path_services.glob('**/*.py'):
+        if 'init' not in str(file):
+            spec = spec_from_file_location(str(file), str(file))
+            spec.loader.exec_module(module_from_spec(spec))
+    for cls_name, cls in service_classes.items():
+        for col in cls.__table__.columns:
+            if (
+                type(col.type) == PickleType and
+                hasattr(cls, f'{col.key}_values')
+            ):
+                property_types[col.key] = list
+            else:
+                property_types[col.key] = {
+                    Boolean: bool,
+                    Integer: int,
+                    Float: float,
+                    PickleType: dict,
+                }.get(type(col.type), str)
 
 
 def create_default_user():
@@ -56,11 +83,6 @@ def create_default_network_topology(app):
 
 def create_netmiko_services():
     for service in (
-        {
-            'type': service_classes['Napalm Rollback Service'],
-            'name': 'Napalm Rollback',
-            'description': 'Rollback a configuration with Napalm'
-        },
         {
             'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_create_vrf_TEST',
@@ -109,17 +131,27 @@ def create_netmiko_services():
 
 
 def create_napalm_service():
-    factory(service_classes['Napalm Configuration Service'], **{
-        'name': 'napalm_create_vrf_TEST',
-        'description': 'Create a VRF "TEST" with Napalm',
-        'vendor': 'Cisco',
-        'operating_system': 'IOS',
-        'content_type': 'simple',
-        'action': 'load_merge_candidate',
-        'content': 'ip vrf TEST'
-    })
+    for service in (
+        {
+            'type': service_classes['Napalm Rollback Service'],
+            'name': 'Napalm Rollback',
+            'description': 'Rollback a configuration with Napalm'
+        },
+        {
+            'type': service_classes['Napalm Configuration Service'],
+            'name': 'napalm_create_vrf_TEST',
+            'description': 'Create a VRF "TEST" with Napalm',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'content_type': 'simple',
+            'action': 'load_merge_candidate',
+            'content': 'ip vrf TEST'
+        }
+    ):
+        factory(service.pop('type'), **service)
 
 
+@integrity_rollback
 def create_other_services():
     factory(service_classes['Napalm Getters Service'], **{
         'name': 'service_napalm_getter',
@@ -137,6 +169,7 @@ def create_other_services():
     })
 
 
+@integrity_rollback
 def create_netmiko_tasks():
     services = [
         retrieve(Service, name=service_name) for service_name in (
@@ -157,6 +190,7 @@ def create_netmiko_tasks():
         })
 
 
+@integrity_rollback
 def create_napalm_tasks():
     device = retrieve(Device, name='router8')
     user = retrieve(User, name='cisco')
@@ -176,6 +210,7 @@ def create_napalm_tasks():
     })
 
 
+@integrity_rollback
 def create_other_tasks():
     device = retrieve(Device, name='router8')
     user = retrieve(User, name='cisco')
@@ -196,6 +231,7 @@ def create_other_tasks():
     })
 
 
+@integrity_rollback
 def create_netmiko_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
@@ -227,6 +263,7 @@ def create_netmiko_workflow():
     })
 
 
+@integrity_rollback
 def create_napalm_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
@@ -258,6 +295,7 @@ def create_napalm_workflow():
     })
 
 
+@integrity_rollback
 def create_other_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (

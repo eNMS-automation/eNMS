@@ -40,7 +40,7 @@ class NapalmGettersService(Service):
     )
 
     __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_configuration_service',
+        'polymorphic_identity': 'napalm_getters_service',
     }
 
     @multiprocessing

@@ -12,7 +12,7 @@ def integrity_rollback(function):
     def wrapper(*a, **kw):
         try:
             function(*a, **kw)
-        except exc.IntegrityError:
+        except (exc.IntegrityError, exc.InvalidRequestError):
             db.session.rollback()
     return wrapper
 

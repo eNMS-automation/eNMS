@@ -1,18 +1,8 @@
-from importlib.util import spec_from_file_location, module_from_spec
-from pathlib import Path
-from sqlalchemy import (
-    Boolean,
-    Column,
-    Float,
-    ForeignKey,
-    Integer,
-    PickleType,
-    String
-)
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.properties import cls_to_properties, property_types
+from eNMS.base.properties import cls_to_properties
 
 
 def multiprocessing(function):
@@ -85,23 +75,4 @@ class Service(Job):
 service_classes = {}
 
 
-def create_service_classes():
-    path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
-    for file in path_services.glob('**/*.py'):
-        if 'init' not in str(file):
-            spec = spec_from_file_location(str(file), str(file))
-            spec.loader.exec_module(module_from_spec(spec))
-    for cls_name, cls in service_classes.items():
-        for col in cls.__table__.columns:
-            if (
-                type(col.type) == PickleType and
-                hasattr(cls, f'{col.key}_values')
-            ):
-                property_types[col.key] = list
-            else:
-                property_types[col.key] = {
-                    Boolean: bool,
-                    Integer: int,
-                    Float: float,
-                    PickleType: dict,
-                }.get(type(col.type), str)
+

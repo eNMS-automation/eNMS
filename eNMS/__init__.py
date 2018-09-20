@@ -74,7 +74,7 @@ def configure_database(app):
 
     @app.before_first_request
     def create_default():
-        create_custom_services()
+        create_default_services()
         db.create_all()
         create_default_user()
         create_default_parameters()

@@ -85,7 +85,7 @@ class Service(Job):
 service_classes = {}
 
 
-def create_custom_services():
+def create_service_classes():
     path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
     for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):

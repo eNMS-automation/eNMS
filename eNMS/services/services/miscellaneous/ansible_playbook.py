@@ -51,4 +51,4 @@ class AnsiblePlaybookService(Service):
         return success, result, incoming_payload
 
 
-service_classes['Ansible Playbook'] = AnsiblePlaybookService
+service_classes['Ansible Playbook Service'] = AnsiblePlaybookService

@@ -29,7 +29,7 @@ class Config(object):
     # eNMS will use these 20 ports as GoTTY WebSSH terminal
     GOTTY_ALLOWED_PORTS = list(range(8080, 8100))
     # 'sshpass' must be installed on the server for the authentication
-    GOTTY_AUTHENTICATION = True
+    GOTTY_AUTHENTICATION = environ.get('GOTTY_AUTHENTICATION', False)
 
     # In production, it is likely that the web server (e.g nginx) allows
     # only one port. In that case, the web server can be configured to

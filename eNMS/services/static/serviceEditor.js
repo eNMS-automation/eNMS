@@ -64,7 +64,15 @@ function saveService() { // eslint-disable-line no-unused-vars
       url: `/services/save_service/${$('#services').val()}`,
       dataType: 'json',
       data: $('#form').serialize(),
-      success: function(result) {
+      success: function(service) {
+        if (0 == $(`#service-instance option[value='${service.id}']`).length) {
+          $('#service-instance').append(
+            `<option value='${service.id}'>${service.name}</option>`
+          );
+          alertify.notify(`Service '${service.name}' created.`, 'success', 5);
+        } else {
+          alertify.notify(`Service '${service.name}' updated.`, 'success', 5);
+        }
       },
     });
   }

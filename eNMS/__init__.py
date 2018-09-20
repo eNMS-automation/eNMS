@@ -92,8 +92,11 @@ def configure_logs(app):
 
 
 def configure_gotty(app):
-    app.gotty_modulo = len(app.config['GOTTY_ALLOWED_PORTS'])
     app.gotty_increment = 0
+    if app.config['GOTTY_PORT_REDIRECTION']:
+        app.gotty_modulo = len(app.config['GOTTY_ALLOWED_URLS'])
+    else:
+        app.gotty_modulo = len(app.config['GOTTY_ALLOWED_PORTS'])
 
 
 def create_app(path, config):

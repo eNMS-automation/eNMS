@@ -57,6 +57,11 @@ def create_default_network_topology(app):
 def create_netmiko_services():
     for service in (
         {
+            'type': service_classes['Napalm Rollback Service'],
+            'name': 'Napalm Rollback',
+            'description': 'Rollback a configuration with Napalm'
+        },
+        {
             'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Netmiko',

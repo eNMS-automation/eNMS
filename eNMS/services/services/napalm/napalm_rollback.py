@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer
 
 from eNMS.services.connections import napalm_connection
 from eNMS.services.models import multiprocessing, Service, service_classes
@@ -9,11 +9,6 @@ class NapalmRollbackService(Service):
     __tablename__ = 'NapalmRollbackService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
-    content = Column(String)
-    driver = Column(String)
-    global_delay_factor = Column(Float, default=1.)
     device_multiprocessing = True
 
     __mapper_args__ = {

@@ -39,7 +39,7 @@ class Config(object):
     # location /terminal1 {
     # proxy_pass  http://127.0.0.1:8080;
     # }
-    GOTTY_WEBSERVER_PORT = 8080
+    GOTTY_WEBSERVER_PORT = environ.get('GOTTY_WEBSERVER_PORT', 8080)
     GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', False)
     # The following is configured by default :
     # /eNMS_IP:server_port/terminal1 -> 127.0.0.1:8080

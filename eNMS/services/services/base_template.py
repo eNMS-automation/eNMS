@@ -42,11 +42,11 @@ class AService(Service):
         'polymorphic_identity': 'a_service',
     }
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-    def job(self, *args):
-        return {'success': True, 'result': 'nothing happened'}
+    def job(self, task, incoming_payload):
+        results = {'success': True, 'result': 'nothing happened'}
+        for device in task.compute_targets():
+            results[device.name] = True
+        return results
 
 
 service_classes['A Service'] = AService

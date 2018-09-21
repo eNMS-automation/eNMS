@@ -146,7 +146,7 @@ def create_napalm_service():
             'content_type': 'simple',
             'action': 'load_merge_candidate',
             'content': 'ip vrf TEST'
-        }
+        },
     ):
         factory(service.pop('type'), **service)
 

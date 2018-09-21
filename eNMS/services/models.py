@@ -5,24 +5,6 @@ from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import cls_to_properties
 
 
-def multiprocessing(function):
-    def wrapper(self, args):
-        task, device, results, incoming_payload = args
-        success, result, payload = function(self, *args)
-        if 'logs' in results:
-            results['logs'][device.name] = result
-            results['payload']['outgoing_payload'][device.name] = payload
-        else:
-            results['logs'] = {device.name: result}
-            results['payload'] = {
-                'incoming_payload': incoming_payload,
-                'outgoing_payload': {device.name: payload}
-            }
-        if 'success' not in results or results['success']:
-            results['success'] = success
-    return wrapper
-
-
 class Job(CustomBase):
 
     __tablename__ = 'Job'

@@ -15,8 +15,9 @@ class NapalmRollbackService(Service):
         'polymorphic_identity': 'napalm_rollback_service',
     }
 
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
+    def job(self, incoming_payload):
+        results = {}
+        for device in self.task.compute_targets():
         try:
             napalm_driver = napalm_connection(device)
             napalm_driver.open()

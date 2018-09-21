@@ -2,7 +2,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.connections import netmiko_connection
-from eNMS.services.models import multiprocessing, Service, service_classes
+from eNMS.services.models import Service, service_classes
 
 netmiko_drivers = sorted(
     driver for driver in CLASS_MAPPER
@@ -28,21 +28,22 @@ class NetmikoConfigurationService(Service):
         'polymorphic_identity': 'netmiko_configuration_service',
     }
 
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        try:
-            netmiko_handler = netmiko_connection(self, device)
-            netmiko_handler.send_config_set(self.content.splitlines())
-            result = f'configuration OK:\n\n{self.content}'
-            success = True
+    def job(self, incoming_payload):
+        results = {}
+        for device in self.task.compute_targets():
             try:
-                netmiko_handler.disconnect()
-            except Exception:
-                pass
-        except Exception as e:
-            result = f'netmiko config did not work because of {e}'
-            success = False
-        return success, result, incoming_payload
+                netmiko_handler = netmiko_connection(self, device)
+                netmiko_handler.send_config_set(self.content.splitlines())
+                results[device.name] = f'configuration OK:\n\n{self.content}'
+                success = True
+                try:
+                    netmiko_handler.disconnect()
+                except Exception:
+                    pass
+            except Exception as e:
+                result = f'netmiko config did not work because of {e}'
+                success = False
+        return success, results, incoming_payload
 
 
 service_classes['Netmiko Configuration Service'] = NetmikoConfigurationService

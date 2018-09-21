@@ -43,26 +43,27 @@ class NetmikoFileTransferService(Service):
         'polymorphic_identity': 'netmiko_file_transfer_service',
     }
 
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        try:
-            netmiko_handler = netmiko_connection(self, device)
-            transfer_dict = file_transfer(
-                netmiko_handler,
-                source_file=self.source_file,
-                dest_file=self.dest_file,
-                file_system=self.file_system,
-                direction=self.direction,
-                overwrite_file=self.overwrite_file,
-                disable_md5=self.disable_md5,
-                inline_transfer=self.inline_transfer
-            )
-            result = transfer_dict
-            success = True
-            netmiko_handler.disconnect()
-        except Exception as e:
-            result = f'netmiko config did not work because of {e}'
-            success = False
+    def job(self, incoming_payload):
+        results = {}
+        for device in self.task.compute_targets():
+            try:
+                netmiko_handler = netmiko_connection(self, device)
+                transfer_dict = file_transfer(
+                    netmiko_handler,
+                    source_file=self.source_file,
+                    dest_file=self.dest_file,
+                    file_system=self.file_system,
+                    direction=self.direction,
+                    overwrite_file=self.overwrite_file,
+                    disable_md5=self.disable_md5,
+                    inline_transfer=self.inline_transfer
+                )
+                result = transfer_dict
+                success = True
+                netmiko_handler.disconnect()
+            except Exception as e:
+                result = f'netmiko config did not work because of {e}'
+                success = False
         return success, result, result
 
 

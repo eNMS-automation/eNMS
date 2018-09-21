@@ -182,20 +182,8 @@ class ServiceTask(Task):
         return targets
 
     def job(self, runtime, workflow):
-        results = {}
         incoming_payload = self.get_payloads(workflow, runtime)
-        if self.service.device_multiprocessing:
-            targets = self.compute_targets()
-            pool = ThreadPool(processes=len(self.devices))
-            args = [
-                (self, device, results, incoming_payload)
-                for device in targets
-            ]
-            pool.map(self.service.job, args)
-            pool.close()
-            pool.join()
-        else:
-            results = self.service.job(self, results, incoming_payload)
+        results = self.service.job(self, incoming_payload)
         self.logs[runtime] = results
         db.session.commit()
         return results

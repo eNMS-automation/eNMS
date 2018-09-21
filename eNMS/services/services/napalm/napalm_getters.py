@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 
 from eNMS.services.connections import napalm_connection
-from eNMS.services.models import multiprocessing, Service, service_classes
+from eNMS.services.models import Service, service_classes
 
 
 class NapalmGettersService(Service):
@@ -44,7 +44,7 @@ class NapalmGettersService(Service):
     }
 
     def job(self, incoming_payload):
-        results = {}
+        results, global_success = {}, True
         for device in self.task.compute_targets():
             result = {}
             results['expected'] = self.content_match
@@ -62,8 +62,10 @@ class NapalmGettersService(Service):
                     success = self.content_match in str(result)
                 napalm_driver.close()
             except Exception as e:
-                results[device.name] = f'task failed ({e})'
-                results['success'] = False
+                result, success = f'task failed ({e})', False
+                global_success = False
+            results[device.name] = {'success': success, 'result': result}
+        results['success'] = global_success
         return results
 
 

@@ -46,7 +46,7 @@ class AService(Service):
         super().__init__(**kwargs)
 
     def job(self, *args):
-        return True, 'a', 'a'
+        return {'success': True, 'result': 'nothing happened'}
 
 
 service_classes['A Service'] = AService

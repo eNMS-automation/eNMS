@@ -3,7 +3,7 @@ from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.services.connections import netmiko_connection
-from eNMS.services.models import multiprocessing, Service, service_classes
+from eNMS.services.models import Service, service_classes
 
 netmiko_drivers = sorted(
     driver for driver in CLASS_MAPPER
@@ -37,7 +37,7 @@ class NetmikoValidationService(Service):
     }
 
     def job(self, incoming_payload):
-        results = {}
+        results, global_success = {}, True
         for device in self.task.compute_targets():
             success, result = True, {}
             try:
@@ -51,17 +51,19 @@ class NetmikoValidationService(Service):
                     result[command] = {'output': output, 'expected': expected}
                     if getattr(self, 'content_match_regex' + str(i)):
                         if not bool(search(expected, str(output))):
-                            success = False
+                            global_success, success = False, False
                     else:
                         if expected not in str(output):
-                            success = False
+                            global_success, success = False, False
                 try:
                     netmiko_handler.disconnect()
                 except Exception:
                     pass
             except Exception as e:
-                results[device.name] = f'task failed ({e})'
-                results['success'] = False
+                result, success = f'task failed ({e})', False
+                global_success = False
+            results[device.name] = {'success': success, 'result': result}
+        results['success'] = global_success
         return results
 
 

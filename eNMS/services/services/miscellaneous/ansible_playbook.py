@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 
-from eNMS.services.models import multiprocessing, Service, service_classes
+from eNMS.services.models import Service, service_classes
 
 
 class AnsiblePlaybookService(Service):
@@ -28,7 +28,7 @@ class AnsiblePlaybookService(Service):
     }
 
     def job(self, incoming_payload):
-        results = {}
+        results, global_success = {}, True
         for device in self.task.compute_targets():
             try:
                 arguments = self.arguments.split()
@@ -47,10 +47,13 @@ class AnsiblePlaybookService(Service):
                     success = bool(search(self.content_match, str(result)))
                 else:
                     success = self.content_match in str(result)
-                except Exception as e:
-                    result = f'task failed ({e})'
-                    success = False
+                if not success:
+                    global_success = False
+            except Exception as e:
+                result, success = f'task failed ({e})', False
+                global_success = False
             results[device.name] = {'success': success, 'result': result}
+        results['success'] = global_success
         return results
 
 

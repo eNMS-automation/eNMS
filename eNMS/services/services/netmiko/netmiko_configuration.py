@@ -29,7 +29,7 @@ class NetmikoConfigurationService(Service):
     }
 
     def job(self, incoming_payload):
-        results = {}
+        results, global_success = {}, True
         for device in self.task.compute_targets():
             try:
                 netmiko_handler = netmiko_connection(self, device)
@@ -41,8 +41,10 @@ class NetmikoConfigurationService(Service):
                 except Exception:
                     pass
             except Exception as e:
-                results[device.name] = f'task failed ({e})'
-                results['success'] = False
+                result, success = f'task failed ({e})', False
+                global_success = False
+            results[device.name] = {'success': success, 'result': result}
+        results['success'] = global_success
         return results
 
 

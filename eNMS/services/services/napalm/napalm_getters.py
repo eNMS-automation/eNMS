@@ -43,27 +43,28 @@ class NapalmGettersService(Service):
         'polymorphic_identity': 'napalm_getters_service',
     }
 
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        result = {}
-        results['expected'] = self.content_match
-        try:
-            napalm_driver = napalm_connection(device)
-            napalm_driver.open()
-            for getter in self.getters:
-                try:
-                    result[getter] = getattr(napalm_driver, getter)()
-                except Exception as e:
-                    result[getter] = f'{getter} failed because of {e}'
-            if self.content_match_regex:
-                success = bool(search(self.content_match, str(result)))
-            else:
-                success = self.content_match in str(result)
-            napalm_driver.close()
-        except Exception as e:
-            result = f'service did not work:\n{e}'
-            success = False
-        return success, result, result
+    def job(self, incoming_payload):
+        results = {}
+        for device in self.task.compute_targets():
+            result = {}
+            results['expected'] = self.content_match
+            try:
+                napalm_driver = napalm_connection(device)
+                napalm_driver.open()
+                for getter in self.getters:
+                    try:
+                        result[getter] = getattr(napalm_driver, getter)()
+                    except Exception as e:
+                        result[getter] = f'{getter} failed because of {e}'
+                if self.content_match_regex:
+                    success = bool(search(self.content_match, str(result)))
+                else:
+                    success = self.content_match in str(result)
+                napalm_driver.close()
+            except Exception as e:
+                results[device.name] = f'task failed ({e})'
+                results['success'] = False
+        return results
 
 
 service_classes['Napalm Getters Service'] = NapalmGettersService

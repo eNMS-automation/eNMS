@@ -3,7 +3,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.services.connections import netmiko_connection
-from eNMS.services.models import multiprocessing, Service, service_classes
+from eNMS.services.models import Service, service_classes
 
 netmiko_drivers = sorted(
     driver for driver in CLASS_MAPPER
@@ -58,13 +58,13 @@ class NetmikoFileTransferService(Service):
                     disable_md5=self.disable_md5,
                     inline_transfer=self.inline_transfer
                 )
-                result = transfer_dict
-                success = True
+                results[device.name] = transfer_dict
+                results['success'] = True
                 netmiko_handler.disconnect()
             except Exception as e:
-                result = f'netmiko config did not work because of {e}'
-                success = False
-        return success, result, result
+                results[device.name] = f'task failed ({e})'
+                results['success'] = False
+        return results
 
 
 service_classes['Netmiko File Transfer Service'] = NetmikoFileTransferService

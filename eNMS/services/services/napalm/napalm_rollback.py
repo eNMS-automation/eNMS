@@ -18,16 +18,16 @@ class NapalmRollbackService(Service):
     def job(self, incoming_payload):
         results = {}
         for device in self.task.compute_targets():
-        try:
-            napalm_driver = napalm_connection(device)
-            napalm_driver.open()
-            napalm_driver.rollback()
-            napalm_driver.close()
-            result, success = 'Rollback successful', True
-        except Exception as e:
-            result = f'Napalm rollback did not work because of {e}'
-            success = False
-        return success, result, incoming_payload
+            try:
+                napalm_driver = napalm_connection(device)
+                napalm_driver.open()
+                napalm_driver.rollback()
+                napalm_driver.close()
+                result, success = 'Rollback successful', True
+            except Exception as e:
+                results[device.name] = f'task failed ({e})'
+                results['success'] = False
+        return results
 
 
 service_classes['Napalm Rollback Service'] = NapalmRollbackService

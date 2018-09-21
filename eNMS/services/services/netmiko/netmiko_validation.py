@@ -36,32 +36,33 @@ class NetmikoValidationService(Service):
         'polymorphic_identity': 'netmiko_validation_service',
     }
 
-    @multiprocessing
-    def job(self, task, device, results, incoming_payload):
-        success, result = True, {}
-        try:
-            netmiko_handler = netmiko_connection(self, device)
-            for i in range(1, 4):
-                command = getattr(self, 'command' + str(i))
-                if not command:
-                    continue
-                output = netmiko_handler.send_command(command)
-                expected = getattr(self, 'content_match' + str(i))
-                result[command] = {'output': output, 'expected': expected}
-                if getattr(self, 'content_match_regex' + str(i)):
-                    if not bool(search(expected, str(output))):
-                        success = False
-                else:
-                    if expected not in str(output):
-                        success = False
+    def job(self, incoming_payload):
+        results = {}
+        for device in self.task.compute_targets():
+            success, result = True, {}
             try:
-                netmiko_handler.disconnect()
-            except Exception:
-                pass
-        except Exception as e:
-            result = f'netmiko did not work because of {e}'
-            success = False
-        return success, result, incoming_payload
+                netmiko_handler = netmiko_connection(self, device)
+                for i in range(1, 4):
+                    command = getattr(self, 'command' + str(i))
+                    if not command:
+                        continue
+                    output = netmiko_handler.send_command(command)
+                    expected = getattr(self, 'content_match' + str(i))
+                    result[command] = {'output': output, 'expected': expected}
+                    if getattr(self, 'content_match_regex' + str(i)):
+                        if not bool(search(expected, str(output))):
+                            success = False
+                    else:
+                        if expected not in str(output):
+                            success = False
+                try:
+                    netmiko_handler.disconnect()
+                except Exception:
+                    pass
+            except Exception as e:
+                results[device.name] = f'task failed ({e})'
+                results['success'] = False
+        return results
 
 
 service_classes['Netmiko Validation Service'] = NetmikoValidationService

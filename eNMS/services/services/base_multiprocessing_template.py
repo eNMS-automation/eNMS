@@ -13,9 +13,9 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS.services.models import Service, service_classes
 
 
-class AService(Service):
+class ParralelService(Service):
 
-    __tablename__ = 'AService'
+    __tablename__ = 'ParralelService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
@@ -40,21 +40,21 @@ class AService(Service):
     ]
 
     __mapper_args__ = {
-        'polymorphic_identity': 'a_service',
+        'polymorphic_identity': 'parallel_service',
     }
 
     def job(self, task, incoming_payload):
-        targets, results = self.compute_targets()
-        pool = ThreadPool(processes=len(self.targets))
-        pool.map(self.device_job, [(device, *args) for device in targets])
+        targets = task.compute_targets()
+        results = {'success': True, 'result': 'nothing happened'}
+        pool = ThreadPool(processes=len(targets))
+        pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()
         pool.join()
-
-    def device_job(self, task, incoming_payload):
-        results = {'success': True, 'result': 'nothing happened'}
-        for device in task.compute_targets():
-            results[device.name] = True
         return results
 
+    def device_job(self, args):
+        device, results = args
+        results[device.name] = True
 
-service_classes['A Service'] = AService
+
+service_classes['Parralel Service'] = ParralelService

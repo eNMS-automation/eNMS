@@ -22,8 +22,6 @@ class NetmikoFileTransferService(Service):
     overwrite_file = Column(Boolean)
     disable_md5 = Column(Boolean)
     inline_transfer = Column(Boolean)
-    device_multiprocessing = True
-
     driver_values = (
         ('cisco_ios', 'Cisco IOS'),
         ('cisco_xe', 'Cisco IOS-XE'),
@@ -32,7 +30,6 @@ class NetmikoFileTransferService(Service):
         ('juniper_junos', 'Juniper'),
         ('arista_eos', 'Arista')
     )
-
     direction_values = (('put', 'Upload'), ('get', 'Download'))
 
     __mapper_args__ = {
@@ -40,28 +37,25 @@ class NetmikoFileTransferService(Service):
     }
 
     def job(self, incoming_payload):
-        results, global_success = {}, True
-        for device in self.task.compute_targets():
-            try:
-                netmiko_handler = netmiko_connection(self, device)
-                transfer_dict = file_transfer(
-                    netmiko_handler,
-                    source_file=self.source_file,
-                    dest_file=self.dest_file,
-                    file_system=self.file_system,
-                    direction=self.direction,
-                    overwrite_file=self.overwrite_file,
-                    disable_md5=self.disable_md5,
-                    inline_transfer=self.inline_transfer
-                )
-                result, success = transfer_dict, True
-                netmiko_handler.disconnect()
-            except Exception as e:
-                result, success = f'task failed ({e})', False
-                global_success = False
-            results[device.name] = {'success': success, 'result': result}
-        results['success'] = global_success
-        return results
+        device, results = args
+        try:
+            netmiko_handler = netmiko_connection(self, device)
+            transfer_dict = file_transfer(
+                netmiko_handler,
+                source_file=self.source_file,
+                dest_file=self.dest_file,
+                file_system=self.file_system,
+                direction=self.direction,
+                overwrite_file=self.overwrite_file,
+                disable_md5=self.disable_md5,
+                inline_transfer=self.inline_transfer
+            )
+            result, success = transfer_dict, True
+            netmiko_handler.disconnect()
+        except Exception as e:
+            result, success = f'task failed ({e})', False
+            results['success'] = False
+        results[device.name] = {'success': success, 'result': result}
 
 
 service_classes['Netmiko File Transfer Service'] = NetmikoFileTransferService

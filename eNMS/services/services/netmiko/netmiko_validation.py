@@ -28,7 +28,6 @@ class NetmikoValidationService(Service):
     content_match_regex1 = Column(Boolean)
     content_match_regex2 = Column(Boolean)
     content_match_regex3 = Column(Boolean)
-    device_multiprocessing = True
 
     driver_values = [(driver, driver) for driver in netmiko_drivers]
 

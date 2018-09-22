@@ -1,13 +1,9 @@
-from netmiko.ssh_dispatcher import CLASS_MAPPER
+from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.services.connections import netmiko_connection
+from eNMS.services.helpers import netmiko_drivers
 from eNMS.services.models import Service, service_classes
-
-netmiko_drivers = sorted(
-    driver for driver in CLASS_MAPPER
-    if 'telnet' not in driver and 'ssh' not in driver
-)
 
 
 class NetmikoConfigurationService(Service):
@@ -20,8 +16,6 @@ class NetmikoConfigurationService(Service):
     content = Column(String)
     driver = Column(String)
     global_delay_factor = Column(Float, default=1.)
-    device_multiprocessing = True
-
     driver_values = [(driver, driver) for driver in netmiko_drivers]
 
     __mapper_args__ = {

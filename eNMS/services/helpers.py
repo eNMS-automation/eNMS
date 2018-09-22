@@ -1,7 +1,13 @@
 from napalm import get_network_driver
 from netmiko import ConnectHandler
+from netmiko.ssh_dispatcher import CLASS_MAPPER
 
 from eNMS.base.helpers import get_credentials
+
+netmiko_drivers = sorted(
+    driver for driver in CLASS_MAPPER
+    if 'telnet' not in driver and 'ssh' not in driver
+)
 
 
 def netmiko_connection(service, device):

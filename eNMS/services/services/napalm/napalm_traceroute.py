@@ -14,8 +14,6 @@ class NapalmTracerouteService(Service):
     vrf = Column(String)
     ttl = Column(Integer)
     timeout = Column(Integer)
-    size = Column(Integer)
-    count = Column(Integer)
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_traceroute_service',
@@ -35,17 +33,15 @@ class NapalmTracerouteService(Service):
         try:
             napalm_driver = napalm_connection(device)
             napalm_driver.open()
-            ping = napalm_driver.ping(
+            traceroute = napalm_driver.traceroute(
                 device.ip_address,
                 source=self.source,
                 vrf=self.vrf,
                 ttl=self.ttl or 255,
-                timeout=self.timeout or 2,
-                size=self.size or 100,
-                count=self.count or 5
+                timeout=self.timeout or 2
             )
             napalm_driver.close()
-            result, success = ping, True
+            result, success = traceroute, 'success' in traceroute
         except Exception as e:
             result, success = f'task failed ({e})', False
             results['success'] = False

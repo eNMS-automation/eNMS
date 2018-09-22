@@ -45,7 +45,7 @@ class NapalmPingService(Service):
                 count=self.count or 5
             )
             napalm_driver.close()
-            result, success = ping, True
+            result, success = ping, 'success' in ping
         except Exception as e:
             result, success = f'task failed ({e})', False
             results['success'] = False

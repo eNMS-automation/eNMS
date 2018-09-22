@@ -1,3 +1,4 @@
+from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer
 
 from eNMS.services.helpers import napalm_connection
@@ -9,7 +10,6 @@ class NapalmRollbackService(Service):
     __tablename__ = 'NapalmRollbackService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_rollback_service',

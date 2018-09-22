@@ -1,3 +1,4 @@
+from multiprocessing.pool import ThreadPool
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
@@ -14,7 +15,6 @@ class NapalmGettersService(Service):
     getters = Column(MutableList.as_mutable(PickleType), default=[])
     content_match = Column(String)
     content_match_regex = Column(Boolean)
-    device_multiprocessing = True
     getters_values = (
         ('get_arp_table', 'ARP table'),
         ('get_interfaces_counters', 'Interfaces counters'),

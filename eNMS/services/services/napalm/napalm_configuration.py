@@ -1,3 +1,4 @@
+from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.services.helpers import napalm_connection
@@ -13,7 +14,6 @@ class NapalmConfigurationService(Service):
     operating_system = Column(String)
     action = Column(String)
     content = Column(String)
-    device_multiprocessing = True
     action_values = (
         ('load_merge_candidate', 'Load merge'),
         ('load_replace_candidate', 'Load replace')

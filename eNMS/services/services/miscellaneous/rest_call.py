@@ -25,14 +25,6 @@ class RestCallService(Service):
     content_match_regex = Column(Boolean)
     username = Column(String)
     password = Column(String)
-    device_multiprocessing = False
-    request_dict = {
-        'GET': rest_get,
-        'POST': rest_post,
-        'PUT': rest_put,
-        'DELETE': rest_delete
-    }
-
     call_type_values = (
         ('GET', 'GET'),
         ('POST', 'POST'),
@@ -40,11 +32,18 @@ class RestCallService(Service):
         ('DELETE', 'DELETE')
     )
 
+    request_dict = {
+        'GET': rest_get,
+        'POST': rest_post,
+        'PUT': rest_put,
+        'DELETE': rest_delete
+    }
+
     __mapper_args__ = {
         'polymorphic_identity': 'rest_call_service',
     }
 
-    def job(self, incoming_payload):
+    def job(self, task, incoming_payload):
         try:
             if self.call_type in ('GET', 'DELETE'):
                 result = self.request_dict[self.call_type](

@@ -1,4 +1,5 @@
 from json import dumps
+from multiprocessing.pool import ThreadPool
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
@@ -21,7 +22,6 @@ class AnsiblePlaybookService(Service):
     options = Column(MutableDict.as_mutable(PickleType), default={})
     pass_device_properties = Column(Boolean)
     inventory_from_selection = Column(Boolean)
-    device_multiprocessing = True
 
     __mapper_args__ = {
         'polymorphic_identity': 'ansible_playbook_service',

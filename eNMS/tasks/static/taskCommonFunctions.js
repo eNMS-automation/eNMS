@@ -43,7 +43,7 @@ function runTask(id) { // eslint-disable-line no-unused-vars
     url: `/tasks/run_task/${id}`,
     dataType: 'json',
     success: function(task) {
-      alertify.notify(`Task '${task.name}' started`, 'success', 5);
+      alertify.notify(`Task '${task.name}' started.`, 'success', 5);
     },
   });
 }

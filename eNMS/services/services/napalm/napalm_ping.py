@@ -10,12 +10,12 @@ class NapalmPingService(Service):
     __tablename__ = 'NapalmPingService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    source = Column(String, default='')
-    vrf = Column(String, default='')
-    ttl = Column(Integer, default=255)
-    timeout = Column(Integer, default=2)
-    size = Column(Integer, default=100)
-    count = Column(Integer, default=5)
+    source = Column(String)
+    vrf = Column(String)
+    ttl = Column(Integer)
+    timeout = Column(Integer)
+    size = Column(Integer)
+    count = Column(Integer)
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_ping_service',
@@ -37,12 +37,12 @@ class NapalmPingService(Service):
             napalm_driver.open()
             ping = napalm_driver.ping(
                 device.ip_address,
-                source=getattr(self, 'source', '')
-                vrf=getattr(self, 'vrf', ''),
-                ttl=getattr(self, 'ttl', '255'),
-                timeout=getattr(self, 'timeout', '2'),
-                size=self.size,
-                count=self.count
+                source=self.source,
+                vrf=self.vrf,
+                ttl=self.ttl or 255,
+                timeout=self.timeout or 2,
+                size=self.size or 100,
+                count=self.count or 5
             )
             napalm_driver.close()
             result, success = ping, True

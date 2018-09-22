@@ -103,21 +103,6 @@ class Task(CustomBase):
             if x.type == type and x.workflow == workflow
         ]
 
-    def get_payloads(self, workflow, runtime):
-        if not workflow:
-            return {}
-        payloads = {}
-        for edge_type in (True, False):
-            for task in self.task_sources(workflow, edge_type):
-                if not task.transfer_payload:
-                    continue
-                if runtime in task.logs and 'success' in task.logs[runtime]:
-                    success = task.logs[runtime]['success']
-                    if edge_type == success:
-                        pl = task.logs[runtime]['payload']['outgoing_payload']
-                        payloads[task.name] = pl
-        return payloads
-
     def schedule(self, run_now=True):
         now = datetime.now() + timedelta(seconds=15)
         runtime = now if run_now else self.aps_date('start_date')
@@ -180,9 +165,8 @@ class ServiceTask(Task):
             targets |= set(pool.devices)
         return targets
 
-    def job(self, runtime, workflow):
-        incoming_payload = self.get_payloads(workflow, runtime)
-        results = self.service.job(self, incoming_payload)
+    def job(self, runtime, workflow, payload=None):
+        results = self.service.job(self, payload)
         self.logs[runtime] = results
         db.session.commit()
         return results
@@ -222,7 +206,7 @@ class WorkflowTask(Task):
             new_layer = set()
             for task in layer:
                 visited.add(task)
-                task_results = task.job(runtime, workflow)
+                task_results = task.job(runtime, workflow, results)
                 success = task_results['success']
                 if task.id == self.workflow.end_task:
                     results['success'] = success

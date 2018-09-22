@@ -53,11 +53,6 @@ class Workflow(Job):
     start_task = Column(Integer)
     end_task = Column(Integer)
 
-    default_properties = (
-        'name',
-        'description'
-    )
-
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',
     }

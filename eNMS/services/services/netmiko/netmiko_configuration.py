@@ -32,20 +32,19 @@ class NetmikoConfigurationService(Service):
 
     def job(self, args):
         device, results = args
-        for device in self.task.compute_targets():
+        try:
+            netmiko_handler = netmiko_connection(self, device)
+            netmiko_handler.send_config_set(self.content.splitlines())
+            results[device.name] = f'configuration OK ({self.content})'
+            success = True
             try:
-                netmiko_handler = netmiko_connection(self, device)
-                netmiko_handler.send_config_set(self.content.splitlines())
-                results[device.name] = f'configuration OK ({self.content})'
-                success = True
-                try:
-                    netmiko_handler.disconnect()
-                except Exception:
-                    pass
-            except Exception as e:
-                result, success = f'task failed ({e})', False
-                results['success'] = False
-            results[device.name] = {'success': success, 'result': result}
+                netmiko_handler.disconnect()
+            except Exception:
+                pass
+        except Exception as e:
+            result, success = f'task failed ({e})', False
+            results['success'] = False
+        results[device.name] = {'success': success, 'result': result}
 
 
 service_classes['Netmiko Configuration Service'] = NetmikoConfigurationService

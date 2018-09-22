@@ -39,35 +39,32 @@ class NetmikoValidationService(Service):
         pool.join()
         return results
 
-    def job(self, incoming_payload):
-        results, global_success = {}, True
-        for device in self.task.compute_targets():
-            success, result = True, {}
+    def job(self, args):
+        device, results = args
+        success, result = True, {}
+        try:
+            netmiko_handler = netmiko_connection(self, device)
+            for i in range(1, 4):
+                command = getattr(self, 'command' + str(i))
+                if not command:
+                    continue
+                output = netmiko_handler.send_command(command)
+                expected = getattr(self, 'content_match' + str(i))
+                result[command] = {'output': output, 'expected': expected}
+                if getattr(self, 'content_match_regex' + str(i)):
+                    if not bool(search(expected, str(output))):
+                        results['success'] = False, success = False, False
+                else:
+                    if expected not in str(output):
+                        results['success'] = False, success = False, False
             try:
-                netmiko_handler = netmiko_connection(self, device)
-                for i in range(1, 4):
-                    command = getattr(self, 'command' + str(i))
-                    if not command:
-                        continue
-                    output = netmiko_handler.send_command(command)
-                    expected = getattr(self, 'content_match' + str(i))
-                    result[command] = {'output': output, 'expected': expected}
-                    if getattr(self, 'content_match_regex' + str(i)):
-                        if not bool(search(expected, str(output))):
-                            global_success, success = False, False
-                    else:
-                        if expected not in str(output):
-                            global_success, success = False, False
-                try:
-                    netmiko_handler.disconnect()
-                except Exception:
-                    pass
-            except Exception as e:
-                result, success = f'task failed ({e})', False
-                global_success = False
-            results[device.name] = {'success': success, 'result': result}
-        results['success'] = global_success
-        return results
+                netmiko_handler.disconnect()
+            except Exception:
+                pass
+        except Exception as e:
+            result, success = f'task failed ({e})', False
+            results['success'] = False
+        results[device.name] = {'success': success, 'result': result}
 
 
 service_classes['Netmiko Validation Service'] = NetmikoValidationService

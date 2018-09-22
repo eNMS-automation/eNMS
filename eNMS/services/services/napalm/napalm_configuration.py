@@ -14,7 +14,6 @@ class NapalmConfigurationService(Service):
     action = Column(String)
     content = Column(String)
     device_multiprocessing = True
-
     action_values = (
         ('load_merge_candidate', 'Load merge'),
         ('load_replace_candidate', 'Load replace')
@@ -24,8 +23,17 @@ class NapalmConfigurationService(Service):
         'polymorphic_identity': 'napalm_configuration_service',
     }
 
-    def job(self, incoming_payload):
-        results, global_success = {}, True
+    def job(self, task, incoming_payload):
+        targets = task.compute_targets()
+        results = {'success': True}
+        pool = ThreadPool(processes=len(targets))
+        pool.map(self.device_job, [(device, results) for device in targets])
+        pool.close()
+        pool.join()
+        return results
+
+    def device_job(self, args):
+        device, results = args
         for device in self.task.compute_targets():
             try:
                 napalm_driver = napalm_connection(device)

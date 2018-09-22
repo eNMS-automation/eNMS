@@ -1,14 +1,10 @@
+from multiprocessing.pool import ThreadPool
 from netmiko import file_transfer
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
-from eNMS.services.connections import netmiko_connection
+from eNMS.services.helpers import netmiko_connection
 from eNMS.services.models import Service, service_classes
-
-netmiko_drivers = sorted(
-    driver for driver in CLASS_MAPPER
-    if 'telnet' not in driver and 'ssh' not in driver
-)
 
 
 class NetmikoFileTransferService(Service):

@@ -1,14 +1,10 @@
+from multiprocessing.pool import ThreadPool
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
-from eNMS.services.connections import netmiko_connection
+from eNMS.services.helpers import netmiko_connection, netmiko_drivers
 from eNMS.services.models import Service, service_classes
-
-netmiko_drivers = sorted(
-    driver for driver in CLASS_MAPPER
-    if 'telnet' not in driver and 'ssh' not in driver
-)
 
 
 class NetmikoValidationService(Service):
@@ -28,12 +24,20 @@ class NetmikoValidationService(Service):
     content_match_regex1 = Column(Boolean)
     content_match_regex2 = Column(Boolean)
     content_match_regex3 = Column(Boolean)
-
     driver_values = [(driver, driver) for driver in netmiko_drivers]
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_validation_service',
     }
+
+    def job(self, task, incoming_payload):
+        targets = task.compute_targets()
+        results = {'success': True}
+        pool = ThreadPool(processes=len(targets))
+        pool.map(self.device_job, [(device, results) for device in targets])
+        pool.close()
+        pool.join()
+        return results
 
     def job(self, incoming_payload):
         results, global_success = {}, True

@@ -63,5 +63,4 @@ class AnsiblePlaybookService(Service):
         results[device.name] = {'success': success, 'result': result}
 
 
-
 service_classes['Ansible Playbook Service'] = AnsiblePlaybookService

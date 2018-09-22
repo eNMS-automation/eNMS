@@ -1,6 +1,5 @@
 from multiprocessing.pool import ThreadPool
 from netmiko import file_transfer
-from netmiko.ssh_dispatcher import CLASS_MAPPER
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.services.helpers import netmiko_connection

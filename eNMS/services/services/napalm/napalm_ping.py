@@ -1,21 +1,24 @@
 from multiprocessing.pool import ThreadPool
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.services.helpers import napalm_connection
 from eNMS.services.models import Service, service_classes
 
 
-class NapalmRollbackService(Service):
+class NapalmPingService(Service):
 
-    __tablename__ = 'NapalmRollbackService'
+    __tablename__ = 'NapalmPingService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    destination = Column(String)
-    source = Column(String)
-    vrf = Column(String)
+    source = Column(String, default='')
+    vrf = Column(String, default='')
+    ttl = Column(Integer, default=255)
+    timeout = Column(Integer, default=2)
+    size = Column(Integer, default=100)
+    count = Column(Integer, default=5)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'napalm_rollback_service',
+        'polymorphic_identity': 'napalm_ping_service',
     }
 
     def job(self, task, incoming_payload):
@@ -32,13 +35,21 @@ class NapalmRollbackService(Service):
         try:
             napalm_driver = napalm_connection(device)
             napalm_driver.open()
-            napalm_driver.rollback()
+            ping = napalm_driver.ping(
+                device.ip_address,
+                source=getattr(self, 'source', '')
+                vrf=getattr(self, 'vrf', ''),
+                ttl=getattr(self, 'ttl', '255'),
+                timeout=getattr(self, 'timeout', '2'),
+                size=self.size,
+                count=self.count
+            )
             napalm_driver.close()
-            result, success = 'Rollback successful', True
+            result, success = ping, True
         except Exception as e:
             result, success = f'task failed ({e})', False
             results['success'] = False
         results[device.name] = {'success': success, 'result': result}
 
 
-service_classes['Napalm Rollback Service'] = NapalmRollbackService
+service_classes['Napalm Ping Service'] = NapalmPingService

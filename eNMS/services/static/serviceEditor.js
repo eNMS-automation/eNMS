@@ -44,6 +44,7 @@ function fillInstanceForm() {
     type: 'POST',
     url: `/services/get_service/${$('#service-instance').val()}`,
     success: function(properties) {
+      $('#name').empty();
       for (const [property, value] of Object.entries(properties)) {
         const propertyType = propertyTypes[property] || 'str';
         if (propertyType.includes('bool')) {

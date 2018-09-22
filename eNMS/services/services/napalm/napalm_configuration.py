@@ -25,7 +25,7 @@ class NapalmConfigurationService(Service):
 
     def job(self, task, incoming_payload):
         targets = task.compute_targets()
-        results = {'success': True}
+        results = {'success': True, 'configuration': self.content}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()
@@ -34,21 +34,18 @@ class NapalmConfigurationService(Service):
 
     def device_job(self, args):
         device, results = args
-        for device in self.task.compute_targets():
-            try:
-                napalm_driver = napalm_connection(device)
-                napalm_driver.open()
-                config = '\n'.join(self.content.splitlines())
-                getattr(napalm_driver, self.action)(config=config)
-                napalm_driver.commit_config()
-                napalm_driver.close()
-                result, success = f'Config push ({config})', True
-            except Exception as e:
-                result, success = f'task failed ({e})', False
-                global_success = False
-            results[device.name] = {'success': success, 'result': result}
-        results['success'] = global_success
-        return results
+        try:
+            napalm_driver = napalm_connection(device)
+            napalm_driver.open()
+            config = '\n'.join(self.content.splitlines())
+            getattr(napalm_driver, self.action)(config=config)
+            napalm_driver.commit_config()
+            napalm_driver.close()
+            result, success = f'Config push ({config})', True
+        except Exception as e:
+            result, success = f'task failed ({e})', False
+            results['success'] = False
+        results[device.name] = {'success': success, 'result': result}
 
 
 service_classes['Napalm Configuration Service'] = NapalmConfigurationService

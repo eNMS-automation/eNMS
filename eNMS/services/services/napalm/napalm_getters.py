@@ -15,7 +15,6 @@ class NapalmGettersService(Service):
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     device_multiprocessing = True
-
     getters_values = (
         ('get_arp_table', 'ARP table'),
         ('get_interfaces_counters', 'Interfaces counters'),
@@ -43,30 +42,37 @@ class NapalmGettersService(Service):
         'polymorphic_identity': 'napalm_getters_service',
     }
 
-    def job(self, incoming_payload):
-        results, global_success = {}, True
-        for device in self.task.compute_targets():
-            result = {}
-            results['expected'] = self.content_match
-            try:
-                napalm_driver = napalm_connection(device)
-                napalm_driver.open()
-                for getter in self.getters:
-                    try:
-                        result[getter] = getattr(napalm_driver, getter)()
-                    except Exception as e:
-                        result[getter] = f'{getter} failed because of {e}'
-                if self.content_match_regex:
-                    success = bool(search(self.content_match, str(result)))
-                else:
-                    success = self.content_match in str(result)
-                napalm_driver.close()
-            except Exception as e:
-                result, success = f'task failed ({e})', False
-                global_success = False
-            results[device.name] = {'success': success, 'result': result}
-        results['success'] = global_success
+    def job(self, task, incoming_payload):
+        targets = task.compute_targets()
+        results = {'success': True, 'expected': self.content_match}
+        pool = ThreadPool(processes=len(targets))
+        pool.map(self.device_job, [(device, results) for device in targets])
+        pool.close()
+        pool.join()
         return results
+
+    def device_job(self, args):
+        device, results = args
+        result = {}
+        try:
+            napalm_driver = napalm_connection(device)
+            napalm_driver.open()
+            for getter in self.getters:
+                try:
+                    result[getter] = getattr(napalm_driver, getter)()
+                except Exception as e:
+                    result[getter] = f'{getter} failed because of {e}'
+            if self.content_match_regex:
+                success = bool(search(self.content_match, str(result)))
+            else:
+                success = self.content_match in str(result)
+            if not success:
+                results['success'] = False
+            napalm_driver.close()
+        except Exception as e:
+            result, success = f'task failed ({e})', False
+            results['success'] = False
+        results[device.name] = {'success': success, 'result': result}
 
 
 service_classes['Napalm Getters Service'] = NapalmGettersService

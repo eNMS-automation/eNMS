@@ -39,7 +39,7 @@ class NetmikoValidationService(Service):
         pool.join()
         return results
 
-    def job(self, args):
+    def device_job(self, args):
         device, results = args
         success, result = True, {}
         try:
@@ -53,10 +53,10 @@ class NetmikoValidationService(Service):
                 result[command] = {'output': output, 'expected': expected}
                 if getattr(self, 'content_match_regex' + str(i)):
                     if not bool(search(expected, str(output))):
-                        results['success'] = False, success = False, False
+                        results['success'], success = False, False
                 else:
                     if expected not in str(output):
-                        results['success'] = False, success = False, False
+                        results['success'], success = False, False
             try:
                 netmiko_handler.disconnect()
             except Exception:

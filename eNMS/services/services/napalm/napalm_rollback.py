@@ -1,6 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer
 
-from eNMS.services.connections import napalm_connection
+from eNMS.services.helpers import napalm_connection
 from eNMS.services.models import Service, service_classes
 
 

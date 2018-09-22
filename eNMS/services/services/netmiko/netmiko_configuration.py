@@ -30,13 +30,12 @@ class NetmikoConfigurationService(Service):
         pool.join()
         return results
 
-    def job(self, args):
+    def device_job(self, args):
         device, results = args
         try:
             netmiko_handler = netmiko_connection(self, device)
             netmiko_handler.send_config_set(self.content.splitlines())
-            results[device.name] = f'configuration OK ({self.content})'
-            success = True
+            result, success = f'configuration OK ({self.content})', True
             try:
                 netmiko_handler.disconnect()
             except Exception:

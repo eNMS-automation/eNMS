@@ -2,7 +2,7 @@ from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 
-from eNMS.services.connections import napalm_connection
+from eNMS.services.helpers import napalm_connection
 from eNMS.services.models import Service, service_classes
 
 

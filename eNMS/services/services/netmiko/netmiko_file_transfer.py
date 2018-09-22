@@ -36,7 +36,16 @@ class NetmikoFileTransferService(Service):
         'polymorphic_identity': 'netmiko_file_transfer_service',
     }
 
-    def job(self, incoming_payload):
+    def job(self, task, incoming_payload):
+        targets = task.compute_targets()
+        results = {'success': True}
+        pool = ThreadPool(processes=len(targets))
+        pool.map(self.device_job, [(device, results) for device in targets])
+        pool.close()
+        pool.join()
+        return results
+
+    def device_job(self, args):
         device, results = args
         try:
             netmiko_handler = netmiko_connection(self, device)

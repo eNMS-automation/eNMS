@@ -32,10 +32,10 @@ class User(CustomBase, UserMixin):
         if current_app.production:
             current_app.vault_client.write(
                 f'secret/data/user/{kwargs["name"]}',
-                data={'password': hash}
+                data={'password': hash.decode('utf-8')}
             )
         else:
-            kwargs['password'] = hash
+            kwargs['password'] = hash.decode('utf-8')
         super().update(**kwargs)
 
     def __repr__(self):

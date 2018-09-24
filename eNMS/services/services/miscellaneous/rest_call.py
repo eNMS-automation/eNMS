@@ -73,7 +73,7 @@ class RestCallService(Service):
                 'incoming_payload': incoming_payload,
                 'outgoing_payload': result
             },
-            'logs': result
+            'result': result
         }
 
 

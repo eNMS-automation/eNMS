@@ -24,8 +24,8 @@
 {% block javascripts %}
   {{ super() }}
   <script>
-    var fields = {{ fields|tojson|safe }}
-    var tasks = {{ tasks|tojson|safe }}
+    var fields = {{ fields|tojson|safe }};
+    var tasks = {{ tasks|tojson|safe }};
   </script>
   <!-- Task management -->
   <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>

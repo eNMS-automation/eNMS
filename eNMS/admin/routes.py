@@ -69,7 +69,7 @@ def login():
                 )['data']['data']['password'].encode('utf-8')
             else:
                 hash = user.password
-            if checkpw(password.encode('utf8'), hash):
+            if checkpw(password.encode('utf8'), hash.encode('utf-8')):
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
         else:

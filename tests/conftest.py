@@ -27,8 +27,8 @@ def user_client():
     db.session.close()
     db.drop_all()
     client = app.test_client()
-    create = {'name': 'test', 'password': '', 'create_account': ''}
-    login = {'name': 'test', 'password': '', 'login': ''}
+    create = {'name': 'test', 'password': 'a', 'create_account': ''}
+    login = {'name': 'test', 'password': 'a', 'login': ''}
     with app.app_context():
         client.post('/admin/process_user', data=create)
         client.post('/admin/login', data=login)

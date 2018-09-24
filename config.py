@@ -51,7 +51,7 @@ class Config(object):
     # If the port multiplexing option is enabled, clients will all share the
     # same SSH session instead (they will actually share the same terminal
     # with tmux)
-    GOTTY_MULTIPLEXING = environ.get('GOTTY_PORT_REDIRECTION', False)
+    GOTTY_MULTIPLEXING = environ.get('GOTTY_MULTIPLEXING', False)
 
 
 class DebugConfig(Config):

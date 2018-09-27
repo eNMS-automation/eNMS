@@ -69,10 +69,6 @@ class RestCallService(Service):
             result, success = str(e), False
         return {
             'success': success,
-            'payload': {
-                'incoming_payload': incoming_payload,
-                'outgoing_payload': result
-            },
             'result': result
         }
 

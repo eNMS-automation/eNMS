@@ -231,6 +231,7 @@ def query_opennms():
 @blueprint.route('/save_geographical_parameters', methods=['POST'])
 @login_required
 def save_parameters():
+    print(request.form)
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())
     db.session.commit()

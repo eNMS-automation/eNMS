@@ -120,6 +120,7 @@ task_serialized_properties = (
     'name',
     'creation_time',
     'status',
+    'logs',
     'start_date',
     'end_date',
     'frequency',

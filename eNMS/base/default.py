@@ -261,6 +261,8 @@ def create_netmiko_workflow():
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
     })
+    for index, task in enumerate(tasks):
+        task.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
 
 
 @integrity_rollback
@@ -293,6 +295,8 @@ def create_napalm_workflow():
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
     })
+    for index, task in enumerate(tasks):
+        task.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
 
 @integrity_rollback
@@ -323,6 +327,8 @@ def create_other_workflow():
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
     })
+    for index, task in enumerate(tasks):
+        task.positions['custom_workflow'] = (0, 100 * index)
 
 
 def create_default_services():

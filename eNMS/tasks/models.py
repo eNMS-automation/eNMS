@@ -223,5 +223,5 @@ class WorkflowTask(Task):
     @property
     def serialized(self):
         properties = {p: getattr(self, p) for p in cls_to_properties['Task']}
-        # properties['job'] = self.workflow.properties if self.workflow else None
+        properties['job'] = self.workflow.properties if self.workflow else None
         return properties

@@ -12,9 +12,9 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS.services.models import Service, service_classes
 
 
-class AService(Service):
+class ExampleService(Service):
 
-    __tablename__ = 'AService'
+    __tablename__ = 'ExampleService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
@@ -39,7 +39,7 @@ class AService(Service):
     ]
 
     __mapper_args__ = {
-        'polymorphic_identity': 'a_service',
+        'polymorphic_identity': 'example_service',
     }
 
     def job(self, task, incoming_payload):
@@ -49,4 +49,4 @@ class AService(Service):
         return results
 
 
-service_classes['A Service'] = AService
+service_classes['Example Service'] = ExampleService

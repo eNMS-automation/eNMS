@@ -13,9 +13,9 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS.services.models import Service, service_classes
 
 
-class ParralelService(Service):
+class ParallelService(Service):
 
-    __tablename__ = 'ParralelService'
+    __tablename__ = 'ParallelService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     vendor = Column(String)
@@ -57,4 +57,4 @@ class ParralelService(Service):
         results[device.name] = True
 
 
-service_classes['Parralel Service'] = ParralelService
+service_classes['Parallel Service'] = ParallelService

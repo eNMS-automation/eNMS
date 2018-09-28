@@ -1,3 +1,10 @@
+# This file shows how to implement a parallel service in eNMS.
+# A parallel service is a service that is executed on all target devices
+# in parallel.
+# It can be removed if you are deploying eNMS in production.
+# If you want to see a few examples of parallel services, you can have a look
+# at the /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
+
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import (
     Boolean,
@@ -44,6 +51,9 @@ class ParallelService(Service):
     }
 
     def job(self, task, incoming_payload):
+        # The "job" function is called when the service is executed.
+        # It uses the multiprocessing module to execute the service in parallel
+        # on all target devices.
         targets = task.compute_targets()
         results = {'success': True, 'result': 'nothing happened'}
         pool = ThreadPool(processes=len(targets))

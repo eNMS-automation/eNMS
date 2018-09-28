@@ -6,7 +6,6 @@ Automation
    :maxdepth: 1
 
    credentials
-   scripts
+   services
    workflows
-   os_upgrade
    rest

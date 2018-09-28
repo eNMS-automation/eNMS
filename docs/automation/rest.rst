@@ -18,7 +18,7 @@ Retrieve or delete an object
  # via a GET or DELETE call to the following URL
  http://IP_address/rest/object/object_type/object_name
 
-``object_type`` can be any of the following: ``device``, ``link``, ``user``, ``script``, ``workflow``, ``task``.
+``object_type`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``.
 
 .. image:: /_static/automation/rest/get_object.png
    :alt: GET call to retrieve a device

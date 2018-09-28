@@ -30,22 +30,16 @@ class Config(object):
     GOTTY_ALLOWED_PORTS = list(range(8080, 8100))
     # 'sshpass' must be installed on the server for the authentication
     GOTTY_AUTHENTICATION = environ.get('GOTTY_AUTHENTICATION', False)
-
     # In production, it is likely that the web server (e.g nginx) allows
     # only one port. In that case, the web server can be configured to
     # redirect the requests to another port, as GoTTY needs its own port to
     # listen to.
     # Example of a redirection from https://eNMS/terminal1 to port 8080 :
     # location /terminal1 {
-    # proxy_pass  http://127.0.0.1:8080;
+    #     proxy_pass  http://127.0.0.1:8080;
     # }
-    GOTTY_WEBSERVER_PORT = environ.get('GOTTY_WEBSERVER_PORT', 8080)
+    GOTTY_WEBSERVER_PORT = environ.get('GOTTY_WEBSERVER_PORT', 80)
     GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', False)
-    # The following is configured by default :
-    # /eNMS_IP:server_port/terminal1 -> 127.0.0.1:8080
-    # /eNMS_IP:server_port/terminal2 -> 127.0.0.1:8081
-    # /eNMS_IP:server_port/terminal3 -> 127.0.0.1:8082
-    GOTTY_ALLOWED_URLS = [(f'terminal{i + 1}', 8080 + i) for i in range(10)]
     # By default, each new client that tries to connect to a GoTTY terminal
     # will have its own SSH session to the target device.
     # If the port multiplexing option is enabled, clients will all share the

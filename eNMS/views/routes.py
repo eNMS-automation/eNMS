@@ -93,18 +93,12 @@ def connection(name):
             cmd = f'ssh {username}@{device.ip_address}'
         port_index = current_app.gotty_increment % current_app.gotty_modulo
         current_app.gotty_increment += 1
-        if conf['GOTTY_PORT_REDIRECTION']:
-            url, port = conf['GOTTY_ALLOWED_URLS'][port_index]
-            Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
-            return jsonify({
-                'device': device.name,
-                'port': conf['GOTTY_WEBSERVER_PORT'],
-                'url': url
-            })
-        else:
-            port = conf['GOTTY_ALLOWED_PORTS'][port_index]
-            Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
-            return jsonify({'device': device.name, 'port': port})
+        Popen(f'{path_gotty} -w -p {local_port} {cmd}'.split())
+        return jsonify({
+            'device': device.name,
+            'port': conf['GOTTY_ALLOWED_PORTS'][port_index],
+            'redirection': conf['GOTTY_PORT_REDIRECTION']
+        })
 
 
 @blueprint.route('/export_to_google_earth', methods=['POST'])

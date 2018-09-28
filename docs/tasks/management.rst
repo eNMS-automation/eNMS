@@ -23,7 +23,7 @@ There are two additional options for periodic tasks (tasks that run periodically
 - compare the logs, between: 
 
     - two different devices.
-    - two different scripts or workflows.
+    - two different services or workflows.
     - two different times.
 
 .. image:: /_static/tasks/management/log_comparison.png

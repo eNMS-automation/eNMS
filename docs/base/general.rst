@@ -18,9 +18,9 @@ Design philosophy
 eNMS provides a way to automate networks **graphically**, in a few simple steps:
     
 1. Creation of the network (e.g by importing a spreadsheet describing the network topology).
-#. Creation of the scripts and workflows.
 #. Visualization of the network on a world map, or via a force-based algorithm.
-#. Selection of the target devices graphically, and scheduling of the script/workflow.
+#. Creation of services and workflows.
+#. Selection of the target devices graphically, and scheduling of the service/workflow.
 
 Application stack
 -----------------
@@ -37,4 +37,8 @@ eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :g
 |Application                             |Flask/Python                        |
 +----------------------------------------+------------------------------------+
 |Database                                |SQLite or PostgreSQL                |
++----------------------------------------+------------------------------------+
+|Credentials storage                     |Hashicorp vault                     |
++----------------------------------------+------------------------------------+
+|WebSSH connection                       |GoTTY                               |
 +----------------------------------------+------------------------------------+

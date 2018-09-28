@@ -101,4 +101,4 @@ This results in the following view:
    :alt: test
    :align: center 
 
-.. note:: Using the pool system is important because the targets of a script in eNMS can be a pool (or a group of pools). Therefore, pools can be used as a way to apply a script to a specific group of devices.
+.. note:: Using the pool system is important because the targets of a service in eNMS can be a pool (or a group of pools). Therefore, pools can be used as a way to apply a service to a specific group of devices.

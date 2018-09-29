@@ -133,24 +133,38 @@ GoTTY must be configured in the ``config.py`` file.
  # }
  GOTTY_WEBSERVER_PORT = environ.get('GOTTY_WEBSERVER_PORT', 80)
  GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION', False)
- # By default, each new client that tries to connect to a GoTTY terminal
- # will have its own SSH session to the target device.
- # If the port multiplexing option is enabled, clients will all share the
- # same SSH session instead (they will actually share the same terminal
- # with tmux)
- GOTTY_MULTIPLEXING = environ.get('GOTTY_MULTIPLEXING', False)
+
 
 "GOTTY_ALLOWED_PORTS" defines which range of ports GoTTY will use to start an SSH session.
 eNMS uses a rotation system so that GoTTY will use these ports sequentially to handle all user requests.
 
 eNMS does not by default use the device credentials to automatically log in, but it can be configured to do so with the "GOTTY_AUTHENTICATION" variable. To send in the credentials, eNMS uses "sshpass": you must install "sshpass" on the server if you activate this option.
 
-GoTTY multiplexing:     
+Allowed ports:
+The GOTTY_ALLOWED_PORTS defines which ports are used by GoTTY to start
+an SSH session to a device.
+The user can access the SSH session on "127.0.0.1:port_number".
+Upon starting a connection, eNMS will automatically redirect the user
+to that URL.
+Default: 20 ports reserved from 8080 to 8099)
+eNMS will use these 20 ports as GoTTY WebSSH terminal
+
+Multiplexing:     
 By default, each new client that tries to connect to a GoTTY terminal
 will have its own SSH session to the target device.
 If the port multiplexing option is enabled, clients will all share the
 same SSH session instead (they will actually share the same terminal
 with tmux)
+
+Port redirection:
+In production, it is likely that the web server (e.g nginx) allows
+only one port. In that case, the web server can be configured to
+redirect the requests to another port, as GoTTY needs its own port to
+listen to.
+Example of a redirection from https://eNMS/terminal1 to port 8080 :
+location /terminal1 {
+    proxy_pass  http://127.0.0.1:8080;
+}
 
 ::
 

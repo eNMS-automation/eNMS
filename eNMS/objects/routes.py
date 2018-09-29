@@ -3,6 +3,7 @@ from flask import current_app, jsonify, render_template, request, send_file
 from flask_login import login_required
 from passlib.hash import cisco_type7
 from pathlib import Path
+from subprocess import Popen
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -11,7 +12,7 @@ import xlwt
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import allowed_file, retrieve
+from eNMS.base.helpers import allowed_file, get_credentials, retrieve
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import Link, Device, Pool
@@ -160,21 +161,23 @@ def connection(id):
     print(request.form)
     # mutliplexing:  gotty -w -p {port} tmux new -A -s gotty3 ssh 127.0.0.1
     device = retrieve(Device, id=id)
-    username, password, _ = get_credentials(device)
-    conf = current_app.config
-    path_gotty = join(current_app.path, 'applications', 'gotty')
-    if conf['GOTTY_AUTHENTICATION']:
-        cmd = f'sshpass -p {password} ssh {username}@{device.ip_address}'
-    else:
-        cmd = f'ssh {username}@{device.ip_address}'
+    user, pwd, _ = get_credentials(device)
+    cmd = [str(current_app.path / 'applications' / 'gotty'), '-w']
     port_index = current_app.gotty_increment % current_app.gotty_modulo
     current_app.gotty_increment += 1
-    port = conf['GOTTY_ALLOWED_PORTS'][port_index]
-    Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
+    port = current_app.config['GOTTY_ALLOWED_PORTS'][port_index]
+    cmd.extend(['-p', str(port)])
+    if 'accept-once' in request.form:
+        cmd.append('--once')
+    if 'authentication' in request.form:
+        cmd.extend(f'sshpass -p {pwd} ssh {user}@{device.ip_address}'.split())
+    else:
+        cmd.extend(f'ssh {user}@{device.ip_address}'.split())
+    Popen(cmd)
     return jsonify({
         'device': device.name,
         'port': port,
-        'redirection': conf['GOTTY_PORT_REDIRECTION']
+        'redirection': current_app.config['GOTTY_PORT_REDIRECTION']
     })
 
 

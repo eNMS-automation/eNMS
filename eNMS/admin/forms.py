@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (
+    BooleanField,
     FloatField,
     IntegerField,
     TextField,
@@ -50,6 +51,12 @@ class GeographicalParametersForm(FlaskForm):
     default_longitude = FloatField('Default longitude')
     default_latitude = FloatField('Default latitude')
     default_zoom_level = IntegerField('Default zoom level')
+
+
+class GottyParametersForm(FlaskForm):
+    start_port = FloatField('Start port')
+    end_port = FloatField('End port')
+    gotty_port_redirection = BooleanField()
 
 
 class OpenNmsForm(FlaskForm):

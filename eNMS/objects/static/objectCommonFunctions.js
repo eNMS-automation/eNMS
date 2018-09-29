@@ -168,7 +168,7 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/connection/${id}`,
     dataType: 'json',
-    data: $(`connection-parameters-form`).serialize(),
+    data: $('#connection-parameters-form').serialize(),
     success: function(result) {
       const protocol = window.location.protocol;
       const hostname = window.location.hostname;
@@ -178,7 +178,7 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
         } else {
           openUrl(`${protocol}//${hostname}:${result.port}`);
         }
-      }, 500);
+      }, 300);
       const message = `Connection to ${result.device} on port ${result.port}.`;
       alertify.notify(message, 'success', 15);
     },

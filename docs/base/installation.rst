@@ -145,6 +145,13 @@ eNMS uses a rotation system so that GoTTY will use these ports sequentially to h
 
 eNMS does not by default use the device credentials to automatically log in, but it can be configured to do so with the "GOTTY_AUTHENTICATION" variable. To send in the credentials, eNMS uses "sshpass": you must install "sshpass" on the server if you activate this option.
 
+GoTTY multiplexing:     
+By default, each new client that tries to connect to a GoTTY terminal
+will have its own SSH session to the target device.
+If the port multiplexing option is enabled, clients will all share the
+same SSH session instead (they will actually share the same terminal
+with tmux)
+
 ::
 
  # enable automatic authentication

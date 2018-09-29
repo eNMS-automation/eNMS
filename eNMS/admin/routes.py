@@ -26,6 +26,7 @@ from eNMS.admin.forms import (
     CreateAccountForm,
     LoginForm,
     GeographicalParametersForm,
+    GottyParametersForm,
     OpenNmsForm,
     SyslogServerForm,
     TacacsServerForm,
@@ -148,6 +149,7 @@ def parameters():
     return render_template(
         'parameters.html',
         geographical_parameters_form=GeographicalParametersForm(request.form),
+        gotty_parameters=GottyParametersForm(request.form),
         parameters=db.session.query(Parameters).one()
     )
 
@@ -230,7 +232,16 @@ def query_opennms():
 
 @blueprint.route('/save_geographical_parameters', methods=['POST'])
 @login_required
-def save_parameters():
+def save_geographical_parameters():
+    parameters = db.session.query(Parameters).one()
+    parameters.update(**request.form.to_dict())
+    db.session.commit()
+    return jsonify({'success': True})
+
+
+@blueprint.route('/save_gotty_parameters', methods=['POST'])
+@login_required
+def save_gotty_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())
     db.session.commit()

@@ -6,7 +6,7 @@ from flask import (
     request,
     send_file
 )
-from flask_login import login_required
+from flask_login import current_user, login_required
 from pathlib import Path
 from subprocess import Popen
 from werkzeug.utils import secure_filename
@@ -163,18 +163,26 @@ def get_object(obj_type, obj_id):
 @blueprint.route('/connection/<id>', methods=['POST'])
 @login_required
 def connection(id):
+    print(request.form)
     # mutliplexing:  gotty -w -p {port} tmux new -A -s gotty3 ssh 127.0.0.1
     parameters, device = Parameters.query.one(), retrieve(Device, id=id)
-    user, pwd, _ = get_credentials(app, device)
+    if request.form['credentials'] == 'device':
+        user, pwd, _ = get_credentials(app, device)
+    else:
+        user = current_user.name
+        pwd = vault_helper(app, f'user/{user}')['password']
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port = parameters.get_gotty_port()
     cmd.extend(['-p', str(port)])
     if 'accept-once' in request.form:
         cmd.append('--once')
+    if 'multiplexing' in request.form:
+        cmd.extend(f'tmux new -A -s gotty{port}'.split())
     if 'authentication' in request.form:
         cmd.extend(f'sshpass -p {pwd} ssh {user}@{device.ip_address}'.split())
     else:
         cmd.extend(f'ssh {user}@{device.ip_address}'.split())
+    print(cmd)
     Popen(cmd)
     return jsonify({
         'device': device.name,

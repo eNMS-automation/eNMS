@@ -38,9 +38,9 @@ def allowed_file(name, allowed_extensions):
     return allowed_syntax and allowed_extension
 
 
-def vault_helper(vault, path, id, data):
-    vault_path = f'secret/data/{path}/{id}'
+def vault_helper(app, path, data=None):
+    vault_path = f'secret/data/{path}'
     if not data:
-        vault.read(vault_path)['data']['data']
+        return app.vault_client.read(vault_path)['data']['data']
     else:
-        vault.write(vault_path, data=data)
+        app.vault_client.write(vault_path, data=data)

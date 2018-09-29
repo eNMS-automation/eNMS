@@ -41,7 +41,7 @@ def process_kwargs(app, **kwargs):
                 kwargs.pop(property, '')
                 for property in ('username', 'password', 'enable_password')
             }
-            vault_helper(app.vault_client, 'device', kwargs['id'], data)
+            vault_helper(app, f'device/{kwargs["id"]}', data)
     return Link if 'source' in kwargs else Device, kwargs
 
 

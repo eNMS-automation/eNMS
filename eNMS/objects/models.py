@@ -47,7 +47,7 @@ class Device(Object):
     latitude = Column(Float)
     username = Column(String)
     password = Column(String)
-    secret_password = Column(String)
+    enable_password = Column(String)
     tasks = relationship(
         'ServiceTask',
         secondary=task_device_table,

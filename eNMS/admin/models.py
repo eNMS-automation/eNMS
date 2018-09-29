@@ -28,10 +28,8 @@ class User(CustomBase, UserMixin):
 
     def update(self, **kwargs):
         if current_app.production:
-            current_app.vault_client.write(
-                f'secret/data/user/{kwargs["id"]}',
-                data={'password': kwargs.pop('password')}
-            )
+            data = {'password': kwargs.pop('password')}
+            vault_helper(current_app, f'user/{kwargs["id"]}', data)
         super().update(**kwargs)
 
     def __repr__(self):

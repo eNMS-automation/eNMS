@@ -42,7 +42,7 @@ device_common_properties = (
     'ip_address',
     'longitude',
     'latitude',
-    'secret_password'
+    'enable_password'
 )
 
 task_public_properties = (
@@ -238,7 +238,7 @@ pretty_names = {
     'password': 'Password',
     'positions': 'Positions',
     'recurrent': 'Recurrent',
-    'secret_password': 'Secret password',
+    'enable_password': 'Enable password',
     'source': 'Source',
     'source_file': 'Source file',
     'subtype': 'Subtype',

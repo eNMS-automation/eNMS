@@ -12,7 +12,6 @@ from flask_login import (
     login_user,
     logout_user
 )
-from passlib.hash import cisco_type7
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
@@ -39,7 +38,7 @@ from eNMS.admin.models import (
 )
 from eNMS.admin.properties import user_search_properties
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import retrieve
+from eNMS.base.helpers import retrieve, vault_helper
 from eNMS.base.properties import pretty_names
 
 
@@ -60,16 +59,14 @@ def users():
 def login():
     if request.method == 'POST':
         name = str(request.form['name'])
-        password = str(request.form['password'])
-        user = db.session.query(User).filter_by(name=name).first()
+        user_password = str(request.form['password'])
+        user = retrieve(User, name=name)
         if user:
             if current_app.production:
-                db_password = current_app.vault_client.read(
-                    f'secret/data/user/{name}'
-                )['data']['data']['password']
+                pwd = vault_helper(current_app, f'user/{user.id}')['password']
             else:
-                db_password = user.password
-            if password == db_password:
+                pwd = user.password
+            if user_password == pwd:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
         else:
@@ -80,7 +77,6 @@ def login():
                 # as it is not serializable: this temporary fixes will create
                 # a new instance of TACACSClient at each TACACS connection
                 # attemp: clearly suboptimal, to be improved later.
-                encrypted_password = cisco_type7.hash(password)
                 tacacs_server = db.session.query(TacacsServer).one()
                 tacacs_client = TACACSClient(
                     str(tacacs_server.ip_address),
@@ -89,10 +85,10 @@ def login():
                 )
                 if tacacs_client.authenticate(
                     name,
-                    password,
+                    user_password,
                     TAC_PLUS_AUTHEN_TYPE_ASCII
                 ).valid:
-                    user = User(name=name, password=encrypted_password)
+                    user = User(name=name, password=user_password)
                     db.session.add(user)
                     db.session.commit()
                     login_user(user)

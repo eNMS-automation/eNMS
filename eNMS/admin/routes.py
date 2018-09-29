@@ -1,4 +1,3 @@
-from bcrypt import checkpw
 from flask import (
     current_app,
     jsonify,
@@ -65,12 +64,12 @@ def login():
         user = db.session.query(User).filter_by(name=name).first()
         if user:
             if current_app.production:
-                hash = current_app.vault_client.read(
+                db_password = current_app.vault_client.read(
                     f'secret/data/user/{name}'
-                )['data']['data']['password'].encode('utf-8')
+                )['data']['data']['password']
             else:
-                hash = user.password.encode('utf-8')
-            if checkpw(password.encode('utf8'), hash):
+                db_password = user.password
+            if password == db_password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
         else:

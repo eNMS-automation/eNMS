@@ -1,4 +1,3 @@
-from passlib.hash import cisco_type7 as ct7
 from sqlalchemy import exc
 
 from eNMS import db, scheduler
@@ -39,15 +38,9 @@ def allowed_file(name, allowed_extensions):
     return allowed_syntax and allowed_extension
 
 
-def get_credentials(device):
-    if scheduler.app.production:
-        creds = scheduler.app.vault_client.read(
-            f'secret/data/device/{device.name}'
-        )['data']['data']
-        return creds['username'], creds['password'], creds['secret_password']
+def vault_helper(vault, path, id, data):
+    vault_path = f'secret/data/{path}/{id}'
+    if not data:
+        vault.read(vault_path)['data']['data']
     else:
-        return (
-            device.username,
-            ct7.decode(device.password),
-            ct7.decode(device.secret_password)
-        )
+        vault.write(vault_path, data=data)

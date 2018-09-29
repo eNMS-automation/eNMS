@@ -1,7 +1,6 @@
 from collections import defaultdict
 from flask import current_app, jsonify, render_template, request, send_file
 from flask_login import login_required
-from passlib.hash import cisco_type7
 from pathlib import Path
 from subprocess import Popen
 from werkzeug.utils import secure_filename
@@ -13,7 +12,7 @@ import xlwt
 from eNMS import db
 from eNMS.admin.models import Parameters
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import allowed_file, get_credentials, retrieve
+from eNMS.base.helpers import allowed_file, retrieve, vault_helper
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import Link, Device, Pool
@@ -38,17 +37,11 @@ def process_kwargs(app, **kwargs):
         })
     else:
         if app.production:
-            app.vault_client.write(
-                f'secret/data/device/{kwargs["name"]}',
-                data={
-                    'username': kwargs.pop('username', ''),
-                    'password': kwargs.pop('password', ''),
-                    'secret_password': kwargs.pop('secret_password', '')
-                }
-            )
-        else:
-            for arg in ('password', 'secret_password'):
-                kwargs[arg] = cisco_type7.hash(kwargs.get(arg, ''))
+            data={
+                kwargs.pop(property, '')
+                for property in ('username', 'password', 'enable_password')
+            }
+            vault_helper(app.vault_client, 'device', kwargs['id'], data)
     return Link if 'source' in kwargs else Device, kwargs
 
 

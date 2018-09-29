@@ -1,4 +1,3 @@
-bcrypt
 flask
 flask_apscheduler
 flask_login

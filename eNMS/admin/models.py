@@ -1,4 +1,3 @@
-from bcrypt import gensalt, hashpw
 from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, Float, Integer, String
@@ -28,14 +27,11 @@ class User(CustomBase, UserMixin):
     tasks = relationship('Task', back_populates='user')
 
     def update(self, **kwargs):
-        hash = hashpw(kwargs.pop('password').encode('utf8'), gensalt())
         if current_app.production:
             current_app.vault_client.write(
-                f'secret/data/user/{kwargs["name"]}',
-                data={'password': hash.decode('utf-8')}
+                f'secret/data/user/{kwargs["id"]}',
+                data={'password': kwargs.pop('password')}
             )
-        else:
-            kwargs['password'] = hash.decode('utf-8')
         super().update(**kwargs)
 
     def __repr__(self):

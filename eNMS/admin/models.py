@@ -120,7 +120,6 @@ class Parameters(CustomBase):
     default_zoom_level = Column(Integer, default=5)
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)
-    gotty_port_redirection = Column(Boolean, default=True)
     gotty_port_index = Column(Integer, default=-1)
 
     @property

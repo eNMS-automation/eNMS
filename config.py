@@ -28,6 +28,7 @@ class Config(object):
 class DebugConfig(Config):
     DEBUG = True
     SECRET_KEY = environ.get('ENMS_SECRET_KEY', 'get-a-real-key')
+    GOTTY_PORT_REDIRECTION = False
 
 
 class ProductionConfig(Config):
@@ -41,6 +42,9 @@ class ProductionConfig(Config):
     # There MUST be a Vault configured to use eNMS in production mode.
     VAULT_ADDR = environ.get('VAULT_ADDR')
     VAULT_TOKEN = environ.get('VAULT_TOKEN')
+    
+    # GoTTY
+    GOTTY_PORT_REDIRECTION = True
 
 
 class SeleniumConfig(Config):

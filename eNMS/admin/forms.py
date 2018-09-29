@@ -56,7 +56,6 @@ class GeographicalParametersForm(FlaskForm):
 class GottyParametersForm(FlaskForm):
     gotty_start_port = FloatField('Start port')
     gotty_end_port = FloatField('End port')
-    gotty_port_redirection = BooleanField()
 
 
 class OpenNmsForm(FlaskForm):

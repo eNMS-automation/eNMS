@@ -114,8 +114,7 @@ parameters_public_properties = (
     'default_latitude',
     'default_zoom_level',
     'gotty_start_port',
-    'gotty_end_port',
-    'gotty_port_redirection'
+    'gotty_end_port'
 )
 
 task_serialized_properties = (

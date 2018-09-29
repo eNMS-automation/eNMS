@@ -163,8 +163,6 @@ def get_object(obj_type, obj_id):
 @blueprint.route('/connection/<id>', methods=['POST'])
 @login_required
 def connection(id):
-    print(request.form)
-    # mutliplexing:  gotty -w -p {port} tmux new -A -s gotty3 ssh 127.0.0.1
     parameters, device = Parameters.query.one(), retrieve(Device, id=id)
     if request.form['credentials'] == 'device':
         user, pwd, _ = get_credentials(app, device)
@@ -182,7 +180,6 @@ def connection(id):
         cmd.extend(f'sshpass -p {pwd} ssh {user}@{device.ip_address}'.split())
     else:
         cmd.extend(f'ssh {user}@{device.ip_address}'.split())
-    print(cmd)
     Popen(cmd)
     return jsonify({
         'device': device.name,

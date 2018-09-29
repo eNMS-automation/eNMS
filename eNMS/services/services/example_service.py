@@ -1,11 +1,20 @@
-# This file shows how to implement a parallel service in eNMS.
-# A parallel service is a service that is executed on all target devices
-# in parallel.
+# This class serves as a template example for the user to understand
+# how to implement their own custom services to eNMS. 
 # It can be removed if you are deploying eNMS in production.
-# If you want to see a few examples of parallel services, you can have a look
-# at the /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
 
-from multiprocessing.pool import ThreadPool
+# Each new service must inherit from the "Service" class.
+# eNMS will automatically generate a form in the web GUI by looking at the
+# SQL parameters of the class.
+# By default, a property (String, Float, Integer) will be displayed in the GUI
+# with a text area for the input.
+# If the property in a Boolean, it will be displayed as a tick box instead.
+# If the class contains a "property_name_values" property with a list of
+# values, it will be displayed:
+# - as a multiple selection drop-down list if the property is an SQL "List".
+# - as a single selection drop-down list in all other cases.
+# If you want to see a few examples of services, you can have a look at the
+# /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
+
 # Importing SQL Alchemy column types to handle all of the types of
 # form additions that the user could have.
 from sqlalchemy import (
@@ -22,15 +31,15 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS.services.models import Service, service_classes
 
 
-class ParallelService(Service):
+class ExampleService(Service):
 
-    __tablename__ = 'ParallelService'
+    __tablename__ = 'ExampleService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    # The "vendor" property will be displayed as a drop-down list, because
+    # the "vendor" property will be displayed as a drop-down list, because
     # there is an associated "vendor_values" property in the class.
     vendor = Column(String)
-    # The "operating_system" property will be displayed as a text area.
+    # the "operating_system" property will be displayed as a text area.
     operating_system = Column(String)
     # Text area
     an_integer = Column(Integer)
@@ -62,7 +71,7 @@ class ParallelService(Service):
     ]
 
     __mapper_args__ = {
-        'polymorphic_identity': 'parallel_service',
+        'polymorphic_identity': 'example_service',
     }
 
     def job(self, task, incoming_payload):
@@ -70,14 +79,11 @@ class ParallelService(Service):
         # The parameters of the service can be accessed with self (self.vendor,
         # self.boolean1, etc)
         # The target devices can be computed via "task.compute_targets()".
-        # It uses the multiprocessing module to execute the service in parallel
-        # on all target devices.
-        targets = task.compute_targets()
+        # You can look at how default services (netmiko, napalm, etc.) are
+        # implemented in the /services subfolders (/netmiko, /napalm, etc).
         results = {'success': True, 'result': 'nothing happened'}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(self.device_job, [(device, results) for device in targets])
-        pool.close()
-        pool.join()
+        for device in task.compute_targets():
+            results[device.name] = True
         # The results is a dictionnary that will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.
@@ -85,9 +91,5 @@ class ParallelService(Service):
         # forward with a "Sucess" edge or a "Failure" edge.
         return results
 
-    def device_job(self, args):
-        device, results = args
-        results[device.name] = True
 
-
-service_classes['Parallel Service'] = ParallelService
+service_classes['Example Service'] = ExampleService

@@ -67,7 +67,7 @@ def create_vault_client(app):
     )
     if client.is_sealed() and app.config['UNSEAL_VAULT']:
         keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
-        client.unseal_multi(filter(None, key))
+        client.unseal_multi(filter(None, keys))
     return client
 
 

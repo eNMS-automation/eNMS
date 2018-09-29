@@ -154,6 +154,34 @@ def get_object(obj_type, obj_id):
     return jsonify(obj_properties)
 
 
+@blueprint.route('/connection/<id>', methods=['POST'])
+@login_required
+def connection(id):
+    # mutliplexing:  gotty -w -p {port} tmux new -A -s gotty3 ssh 127.0.0.1
+    current_os, device = system(), retrieve(Device, id=id)
+    username, password, _ = get_credentials(device)
+    conf = current_app.config
+    if current_os == 'Windows':
+        path_putty = join(current_app.path, 'applications', 'putty.exe')
+        ssh = f'{path_putty} -ssh {username}@{device.ip_address} -pw {password}'
+        Popen(ssh.split())
+    else:
+        path_gotty = join(current_app.path, 'applications', 'gotty')
+        if conf['GOTTY_AUTHENTICATION']:
+            cmd = f'sshpass -p {password} ssh {username}@{device.ip_address}'
+        else:
+            cmd = f'ssh {username}@{device.ip_address}'
+        port_index = current_app.gotty_increment % current_app.gotty_modulo
+        current_app.gotty_increment += 1
+        port = conf['GOTTY_ALLOWED_PORTS'][port_index]
+        Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
+        return jsonify({
+            'device': device.name,
+            'port': port,
+            'redirection': conf['GOTTY_PORT_REDIRECTION']
+        })
+
+
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():

@@ -162,6 +162,7 @@ function openUrl(url) {
 
 /**
  * Start an SSH session to the device.
+ * @param {id} id - Device id.
  */
 function sshConnection(id) { // eslint-disable-line no-unused-vars
   $.ajax({
@@ -172,7 +173,7 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
     success: function(result) {
       const protocol = window.location.protocol;
       const hostname = window.location.hostname;
-      setTimeout(function () {
+      setTimeout(function() {
         if (result.redirection) {
           openUrl(`${protocol}//${hostname}/terminal${result.port}/`);
         } else {

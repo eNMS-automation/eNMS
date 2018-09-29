@@ -1,8 +1,10 @@
 /*
 global
 addObjectToTable: false
-importTopology: false
 devices: false
+importTopology: false
+partial: false
+sshConnection: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line
@@ -23,8 +25,10 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
     addObjectToTable('create', 'device', devices[i]);
   }
 
-  $('#authentication').change(function () {
-    $('#user-credentials,#device-credentials').prop('disabled', !$(this). prop("checked"));
+  $('#authentication').change(function() {
+    $('#user-credentials,#device-credentials').prop(
+      'disabled', !$(this). prop('checked')
+    );
   });
 })();
 

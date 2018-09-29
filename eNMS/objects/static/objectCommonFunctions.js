@@ -82,7 +82,7 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
 /**
  * Add object to the datatable.
  * @param {mode} mode - Create or edit.
- * @param {type} type - Node or link.
+ * @param {type} type - Device or link.
  * @param {properties} properties - Properties of the object.
  */
 function addObjectToTable(mode, type, properties) {
@@ -93,6 +93,12 @@ function addObjectToTable(mode, type, properties) {
     } else {
       values.push(`${properties[fields[i]]}`);
     }
+  }
+
+  // if it is a device, we add the "Connect" button.
+  if (type == 'device') {
+    values.push(`<button type="button" class="btn btn-success btn-xs"
+    onclick="connectionParametersModal('${properties.id}')">Connect</button>`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"

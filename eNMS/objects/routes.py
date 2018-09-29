@@ -1,5 +1,11 @@
 from collections import defaultdict
-from flask import current_app, jsonify, render_template, request, send_file
+from flask import (
+    current_app as app,
+    jsonify,
+    render_template,
+    request,
+    send_file
+)
 from flask_login import login_required
 from pathlib import Path
 from subprocess import Popen
@@ -12,7 +18,12 @@ import xlwt
 from eNMS import db
 from eNMS.admin.models import Parameters
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import allowed_file, retrieve, vault_helper
+from eNMS.base.helpers import (
+    allowed_file,
+    retrieve,
+    vault_helper,
+    get_credentials
+)
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import Link, Device, Pool
@@ -154,8 +165,8 @@ def get_object(obj_type, obj_id):
 def connection(id):
     # mutliplexing:  gotty -w -p {port} tmux new -A -s gotty3 ssh 127.0.0.1
     parameters, device = Parameters.query.one(), retrieve(Device, id=id)
-    user, pwd, _ = get_credentials(device)
-    cmd = [str(current_app.path / 'applications' / 'gotty'), '-w']
+    user, pwd, _ = get_credentials(app, device)
+    cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port = parameters.get_gotty_port()
     cmd.extend(['-p', str(port)])
     if 'accept-once' in request.form:
@@ -168,14 +179,14 @@ def connection(id):
     return jsonify({
         'device': device.name,
         'port': port,
-        'redirection': current_app.config['GOTTY_PORT_REDIRECTION']
+        'redirection': app.config['GOTTY_PORT_REDIRECTION']
     })
 
 
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 def edit_object():
-    cls, kwargs = process_kwargs(current_app, **request.form.to_dict())
+    cls, kwargs = process_kwargs(app, **request.form.to_dict())
     obj = factory(cls, **kwargs)
     return jsonify(obj.serialized)
 
@@ -204,7 +215,7 @@ def import_topology():
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(current_app, **values)
+                cls, kwargs = process_kwargs(app, **values)
                 objects[object_type].append(factory(cls, **kwargs).serialized)
             db.session.commit()
     return jsonify(objects)

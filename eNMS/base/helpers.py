@@ -48,4 +48,8 @@ def vault_helper(app, path, data=None):
 
 
 def get_credentials(app, device):
-    return 'okk' 
+    if app.production:
+        data = vault_helper(app, f'device/{device.name}')
+        return data['username'], data['password'], data['enable_password']
+    else:
+        return device.username, device.password, device.enable_password

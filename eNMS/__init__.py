@@ -61,10 +61,14 @@ def configure_login_manager(app):
 
 
 def create_vault_client(app):
-    return VaultClient(
+    client = VaultClient(
         url=app.config['VAULT_ADDR'],
         token=app.config['VAULT_TOKEN']
     )
+    if client.is_sealed() and app.config['UNSEAL_VAULT']:
+        keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
+        client.unseal_multi(filter(None, key))
+    return client
 
 
 def configure_database(app):

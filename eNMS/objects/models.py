@@ -20,13 +20,13 @@ class Object(CustomBase):
     __tablename__ = 'Object'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(120), unique=True)
+    name = Column(String, unique=True)
     subtype = Column(String)
     description = Column(String)
     model = Column(String)
     location = Column(String)
-    vendor = Column(String(120))
-    type = Column(String(50))
+    vendor = Column(String)
+    type = Column(String)
     visible = Column(Boolean, default=True)
 
     __mapper_args__ = {
@@ -40,9 +40,9 @@ class Device(Object):
     __tablename__ = 'Device'
 
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
-    operating_system = Column(String(120))
-    os_version = Column(String(120))
-    ip_address = Column(String(120))
+    operating_system = Column(String)
+    os_version = Column(String)
+    ip_address = Column(String)
     longitude = Column(Float)
     latitude = Column(Float)
     username = Column(String)

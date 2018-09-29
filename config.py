@@ -42,7 +42,7 @@ class ProductionConfig(Config):
     # There MUST be a Vault configured to use eNMS in production mode.
     VAULT_ADDR = environ.get('VAULT_ADDR')
     VAULT_TOKEN = environ.get('VAULT_TOKEN')
-    
+
     # GoTTY
     GOTTY_PORT_REDIRECTION = True
 

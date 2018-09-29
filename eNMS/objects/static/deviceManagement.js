@@ -23,7 +23,6 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
     addObjectToTable('create', 'device', devices[i]);
   }
 
-  $('#user-credentials,#device-credentials').prop('disabled', true);
   $('#authentication').change(function () {
     $('#user-credentials,#device-credentials').prop('disabled', !$(this). prop("checked"));
   });

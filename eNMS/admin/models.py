@@ -123,13 +123,15 @@ class Parameters(CustomBase):
     gotty_port_index = Column(Integer, default=-1)
 
     def update(self, **kwargs):
+        print('tttt'*200)
         self.gotty_port_index = -1
         super().update(**kwargs)
 
     @property
-    def gotty_range_length(self):
+    def gotty_range(self):
         return self.gotty_end_port - self.gotty_start_port
 
     def get_gotty_port(self):
         self.gotty_port_index += 1
-        return self.gotty_port_index % self.gotty_range_length
+        db.session.commit()
+        return self.gotty_start_port + self.gotty_port_index % self.gotty_range

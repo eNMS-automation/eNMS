@@ -149,7 +149,7 @@ def parameters():
     return render_template(
         'parameters.html',
         geographical_parameters_form=GeographicalParametersForm(request.form),
-        gotty_parameters=GottyParametersForm(request.form),
+        gotty_parameters_form=GottyParametersForm(request.form),
         parameters=db.session.query(Parameters).one()
     )
 

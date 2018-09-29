@@ -112,7 +112,10 @@ log_rule_public_properties = log_public_properties + (
 parameters_public_properties = (
     'default_longitude',
     'default_latitude',
-    'default_zoom_level'
+    'default_zoom_level',
+    'gotty_start_port',
+    'gotty_end_port',
+    'gotty_port_redirection'
 )
 
 task_serialized_properties = (

@@ -121,3 +121,12 @@ class Parameters(CustomBase):
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)
     gotty_port_redirection = Column(Boolean, default=True)
+    gotty_port_index = Column(Integer, default=-1)
+
+    @property
+    def gotty_range_length(self):
+        return self.gotty_end_port - self.gotty_start_port
+
+    def get_gotty_port(self):
+        self.gotty_port_index += 1
+        return self.gotty_port_index % self.gotty_range_length

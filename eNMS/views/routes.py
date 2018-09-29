@@ -23,13 +23,10 @@ from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
 def view(view_type):
-    add_device_form = AddDevice(request.form)
     add_link_form = AddLink(request.form)
     all_devices = Device.choices()
     add_link_form.source.choices = all_devices
     add_link_form.destination.choices = all_devices
-    view_options_form = ViewOptionsForm(request.form)
-    google_earth_form = GoogleEarthForm(request.form)
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
     scheduling_form.devices.choices = all_devices
@@ -56,9 +53,9 @@ def view(view_type):
         parameters=Parameters.query.one().serialized,
         view=view,
         scheduling_form=scheduling_form,
-        view_options_form=view_options_form,
-        google_earth_form=google_earth_form,
-        add_device_form=add_device_form,
+        view_options_form=ViewOptionsForm(request.form),
+        google_earth_form=GoogleEarthForm(request.form),
+        add_device_form=AddDevice(request.form),
         add_link_form=add_link_form,
         device_fields=device_public_properties,
         link_fields=link_public_properties,

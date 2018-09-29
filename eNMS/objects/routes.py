@@ -11,6 +11,7 @@ import xlwt
 
 
 from eNMS import db
+from eNMS.admin.models import Parameters
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import allowed_file, get_credentials, retrieve
 from eNMS.objects import blueprint
@@ -158,14 +159,11 @@ def get_object(obj_type, obj_id):
 @blueprint.route('/connection/<id>', methods=['POST'])
 @login_required
 def connection(id):
-    print(request.form)
     # mutliplexing:  gotty -w -p {port} tmux new -A -s gotty3 ssh 127.0.0.1
-    device = retrieve(Device, id=id)
+    parameters, device = Parameters.query.one(), retrieve(Device, id=id)
     user, pwd, _ = get_credentials(device)
     cmd = [str(current_app.path / 'applications' / 'gotty'), '-w']
-    port_index = current_app.gotty_increment % current_app.gotty_modulo
-    current_app.gotty_increment += 1
-    port = current_app.config['GOTTY_ALLOWED_PORTS'][port_index]
+    port = parameters.get_gotty_port()
     cmd.extend(['-p', str(port)])
     if 'accept-once' in request.form:
         cmd.append('--once')

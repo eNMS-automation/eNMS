@@ -163,10 +163,10 @@ function openUrl(url) {
 /**
  * Start an SSH session to the device.
  */
-function SshConnection(id) { // eslint-disable-line no-unused-vars
+function sshConnection(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/views/connection/${id}`,
+    url: `/objects/connection/${id}`,
     success: function(result) {
       const protocol = window.location.protocol;
       const hostname = window.location.hostname;

@@ -12,6 +12,7 @@ const table = $('#table').DataTable(); // eslint-disable-line
  * @param {id} id - Device id.
  */
 function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
+  $('#connection-button').click(partial(sshConnection, id));
   $('#connection-parameters-form').trigger('reset');
   $('#connection-parameters').modal('show');
 }

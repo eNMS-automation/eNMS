@@ -74,34 +74,6 @@ def view(view_type):
     )
 
 
-@blueprint.route('/connection/<name>', methods=['POST'])
-@login_required
-def connection(name):
-    # mutliplexing:  gotty -w -p {port} tmux new -A -s gotty3 ssh 127.0.0.1
-    current_os, device = system(), retrieve(Device, name=name)
-    username, password, _ = get_credentials(device)
-    conf = current_app.config
-    if current_os == 'Windows':
-        path_putty = join(current_app.path, 'applications', 'putty.exe')
-        ssh = f'{path_putty} -ssh {username}@{device.ip_address} -pw {password}'
-        Popen(ssh.split())
-    else:
-        path_gotty = join(current_app.path, 'applications', 'gotty')
-        if conf['GOTTY_AUTHENTICATION']:
-            cmd = f'sshpass -p {password} ssh {username}@{device.ip_address}'
-        else:
-            cmd = f'ssh {username}@{device.ip_address}'
-        port_index = current_app.gotty_increment % current_app.gotty_modulo
-        current_app.gotty_increment += 1
-        port = conf['GOTTY_ALLOWED_PORTS'][port_index]
-        Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
-        return jsonify({
-            'device': device.name,
-            'port': port,
-            'redirection': conf['GOTTY_PORT_REDIRECTION']
-        })
-
-
 @blueprint.route('/export_to_google_earth', methods=['POST'])
 @login_required
 def export_to_google_earth():

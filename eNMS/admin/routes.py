@@ -1,5 +1,5 @@
 from flask import (
-    current_app,
+    current_app as app,
     jsonify,
     redirect,
     render_template,
@@ -62,8 +62,8 @@ def login():
         user_password = str(request.form['password'])
         user = retrieve(User, name=name)
         if user:
-            if current_app.production:
-                pwd = vault_helper(current_app, f'user/{user.id}')['password']
+            if app.production:
+                pwd = vault_helper(app, f'user/{user.name}')['password']
             else:
                 pwd = user.password
             if user_password == pwd:

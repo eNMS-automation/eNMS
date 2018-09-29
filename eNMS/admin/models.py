@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app as app
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, Float, Integer, String
 from sqlalchemy.orm import relationship
@@ -11,6 +11,7 @@ from threading import Thread
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import CustomBase
+from eNMS.base.helpers import vault_helper
 from eNMS.base.models import Log
 
 
@@ -27,9 +28,9 @@ class User(CustomBase, UserMixin):
     tasks = relationship('Task', back_populates='user')
 
     def update(self, **kwargs):
-        if current_app.production:
+        if app.production:
             data = {'password': kwargs.pop('password')}
-            vault_helper(current_app, f'user/{kwargs["id"]}', data)
+            vault_helper(app, f'user/{kwargs["name"]}', data)
         super().update(**kwargs)
 
     def __repr__(self):

@@ -43,4 +43,9 @@ def vault_helper(app, path, data=None):
     if not data:
         return app.vault_client.read(vault_path)['data']['data']
     else:
+        print(vault_path, data)
         app.vault_client.write(vault_path, data=data)
+
+
+def get_credentials(app, device):
+    return 'okk' 

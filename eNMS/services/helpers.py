@@ -1,3 +1,4 @@
+from flask import current_app
 from napalm import get_network_driver
 from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER
@@ -11,7 +12,7 @@ netmiko_drivers = sorted(
 
 
 def netmiko_connection(service, device):
-    username, password, secret_password = get_credentials(device)
+    username, password, secret_password = get_credentials(current_app, device)
     return ConnectHandler(
         device_type=service.driver,
         ip=device.ip_address,
@@ -22,7 +23,7 @@ def netmiko_connection(service, device):
 
 
 def napalm_connection(device):
-    username, password, secret_password = get_credentials(device)
+    username, password, secret_password = get_credentials(current_app, device)
     driver = get_network_driver(device.operating_system)
     return driver(
         hostname=device.ip_address,

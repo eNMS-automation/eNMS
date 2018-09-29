@@ -17,11 +17,11 @@ from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
 
 
-def job(task_name, runtime):
+def job(task_name):
     with scheduler.app.app_context():
         task = retrieve(Task, name=task_name)
         workflow = task.workflow if task.type == 'WorkflowTask' else None
-        task.job(runtime, workflow)
+        task.job(workflow)
 
 
 class Task(CustomBase):
@@ -110,7 +110,7 @@ class Task(CustomBase):
             scheduler.add_job(
                 id=self.creation_time,
                 func=job,
-                args=[self.name, str(runtime)],
+                args=[self.name],
                 trigger='interval',
                 start_date=runtime,
                 end_date=self.aps_date('end_date'),
@@ -122,10 +122,9 @@ class Task(CustomBase):
                 id=str(runtime),
                 run_date=runtime,
                 func=job,
-                args=[self.name, str(runtime)],
+                args=[self.name],
                 trigger='date'
             )
-        return str(runtime)
 
     @property
     def properties(self):
@@ -165,10 +164,11 @@ class ServiceTask(Task):
             targets |= set(pool.devices)
         return targets
 
-    def job(self, runtime, workflow, payload=None):
+    def job(self, workflow, payload=None):
         results = self.service.job(self, payload)
-        self.logs[runtime] = results
+        self.logs[str(datetime.now())] = results
         db.session.commit()
+        print(self.logs)
         return results
 
     @property
@@ -196,7 +196,8 @@ class WorkflowTask(Task):
         self.workflow = data.pop('job')
         super().__init__(**data)
 
-    def job(self, runtime, workflow=None):
+    def job(self, workflow=None):
+        runtime = str(datetime.now())
         start_task = retrieve(Task, id=self.workflow.start_task)
         if not start_task:
             return False, {runtime: 'No start task in the workflow.'}

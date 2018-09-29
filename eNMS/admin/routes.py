@@ -81,7 +81,7 @@ def login():
                 tacacs_client = TACACSClient(
                     str(tacacs_server.ip_address),
                     int(tacacs_server.port),
-                    str(cisco_type7.decode(str(tacacs_server.password)))
+                    str(tacacs_server.password)
                 )
                 if tacacs_client.authenticate(
                     name,

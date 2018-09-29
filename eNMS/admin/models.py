@@ -1,6 +1,6 @@
 from flask import current_app as app
 from flask_login import UserMixin
-from sqlalchemy import Boolean, Column, Float, Integer, String
+from sqlalchemy import Column, Float, Integer, String
 from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
 try:
@@ -118,7 +118,6 @@ class Parameters(CustomBase):
     gotty_port_index = Column(Integer, default=-1)
 
     def update(self, **kwargs):
-        print('tttt'*200)
         self.gotty_port_index = -1
         super().update(**kwargs)
 

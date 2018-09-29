@@ -1,5 +1,5 @@
 # This class serves as a template example for the user to understand
-# how to implement their own custom services to eNMS. 
+# how to implement their own custom services to eNMS.
 # It can be removed if you are deploying eNMS in production.
 
 # A parallel service is a service that is executed on all target devices
@@ -95,4 +95,4 @@ class ExampleMultiprocessingService(Service):
         results[device.name] = True
 
 
-service_classes['Example Multiprocessing Service'] = ExampleMultiprocessingService
+service_classes['Example Parallel Service'] = ExampleMultiprocessingService

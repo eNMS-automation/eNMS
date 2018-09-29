@@ -48,7 +48,7 @@ def process_kwargs(app, **kwargs):
         })
     else:
         if app.production:
-            data={
+            data = {
                 property: kwargs.pop(property, '')
                 for property in ('username', 'password', 'enable_password')
             }

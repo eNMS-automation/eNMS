@@ -1,5 +1,5 @@
 # This class serves as a template example for the user to understand
-# how to implement their own custom services to eNMS. 
+# how to implement their own custom services to eNMS.
 # It can be removed if you are deploying eNMS in production.
 
 # Each new service must inherit from the "Service" class.

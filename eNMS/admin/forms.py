@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
 from wtforms import (
-    BooleanField,
     FloatField,
     IntegerField,
     TextField,

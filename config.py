@@ -24,10 +24,19 @@ class Config(object):
         }
     }
 
-    # goTTY (webSSH connections)
+    # GoTTY
+    # eNMS uses GoTTY to provide a webSSH solution to authenticate the user
+    # to network devices.
+
+    # The GOTTY_ALLOWED_PORTS defines which ports are used by GoTTY to start
+    # an SSH session to a device.
+    # The user can access the SSH session on "127.0.0.1:port_number".
+    # Upon starting a connection, eNMS will automatically redirect the user
+    # to that URL.
+    GOTTY_ALLOWED_PORTS = list(range(8080, 8100))
     # Default: 20 ports reserved from 8080 to 8099)
     # eNMS will use these 20 ports as GoTTY WebSSH terminal
-    GOTTY_ALLOWED_PORTS = list(range(8080, 8100))
+    
     # 'sshpass' must be installed on the server for the authentication
     GOTTY_AUTHENTICATION = environ.get('GOTTY_AUTHENTICATION', False)
     # In production, it is likely that the web server (e.g nginx) allows

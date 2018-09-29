@@ -24,11 +24,6 @@ class Config(object):
         }
     }
 
-    GOTTY_ALLOWED_PORTS = list(range(8080, 8100))
-    # 'sshpass' must be installed on the server for the authentication
-    GOTTY_AUTHENTICATION = environ.get('GOTTY_AUTHENTICATION', False)
-    GOTTY_WEBSERVER_PORT = environ.get('GOTTY_WEBSERVER_PORT', 80)
-
 
 class DebugConfig(Config):
     DEBUG = True

@@ -1,7 +1,7 @@
 from bcrypt import gensalt, hashpw
 from flask import current_app
 from flask_login import UserMixin
-from sqlalchemy import Column, Float, Integer, String
+from sqlalchemy import Boolean, Column, Float, Integer, String
 from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
 try:

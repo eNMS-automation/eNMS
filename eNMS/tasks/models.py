@@ -119,11 +119,12 @@ class Task(CustomBase):
             )
         else:
             scheduler.add_job(
-                id=str(runtime),
-                run_date=runtime,
+                id=self.creation_time,
                 func=job,
+                run_date=runtime,
                 args=[self.name],
-                trigger='date'
+                trigger='date',
+                replace_existing=True
             )
 
     @property

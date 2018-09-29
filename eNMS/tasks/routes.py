@@ -148,7 +148,7 @@ def delete_task(task_id):
 def pause_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.pause_task()
-    return task_management()
+    return jsonify({})
 
 
 @blueprint.route('/resume_task/<task_id>', methods=['POST'])
@@ -156,4 +156,4 @@ def pause_task(task_id):
 def resume_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.resume_task()
-    return task_management()
+    return jsonify({})

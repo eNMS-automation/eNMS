@@ -122,6 +122,10 @@ class Parameters(CustomBase):
     gotty_end_port = Column(Integer, default=9100)
     gotty_port_index = Column(Integer, default=-1)
 
+    def update(self, **kwargs):
+        self.gotty_port_index = -1
+        super().update(**kwargs)
+
     @property
     def gotty_range_length(self):
         return self.gotty_end_port - self.gotty_start_port

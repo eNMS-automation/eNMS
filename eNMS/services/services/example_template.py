@@ -13,7 +13,8 @@
 # If you want to see a few examples of services, you can have a look at the
 # /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
 
-
+# Importing SQL Alchemy column types to handle all of the types of
+# form additions that the user could have.
 from sqlalchemy import (
     Boolean,
     Column,
@@ -51,13 +52,16 @@ class ExampleService(Service):
     boolean1 = Column(Boolean)
     boolean2 = Column(Boolean)
 
+    # these values will be displayed in a single selection drop-down list,
+    # for the property "a_list".
     vendor_values = [
         ('cisco', 'Cisco'),
         ('juniper', 'Juniper'),
         ('arista', 'Arista')
     ]
 
-    # that property will be displayed
+    # these values will be displayed in a multiple selection drop-down list,
+    # for the property "a_list".
     a_list_values = [
         ('value1', 'Value 1'),
         ('value2', 'Value 2'),
@@ -80,7 +84,7 @@ class ExampleService(Service):
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.
         # In a workflow, the "success" value will determine whether to move
-        # forward with a "Sucess" edge or a "Failure" edge.S
+        # forward with a "Sucess" edge or a "Failure" edge.
         return results
 
 

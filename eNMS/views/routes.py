@@ -93,10 +93,11 @@ def connection(name):
             cmd = f'ssh {username}@{device.ip_address}'
         port_index = current_app.gotty_increment % current_app.gotty_modulo
         current_app.gotty_increment += 1
-        Popen(f'{path_gotty} -w -p {local_port} {cmd}'.split())
+        port = conf['GOTTY_ALLOWED_PORTS'][port_index]
+        Popen(f'{path_gotty} -w -p {port} {cmd}'.split())
         return jsonify({
             'device': device.name,
-            'port': conf['GOTTY_ALLOWED_PORTS'][port_index],
+            'port': port,
             'redirection': conf['GOTTY_PORT_REDIRECTION']
         })
 

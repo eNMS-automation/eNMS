@@ -6,6 +6,8 @@
 # at the /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
 
 from multiprocessing.pool import ThreadPool
+# Importing SQL Alchemy column types to handle all of the types of
+# form additions that the user could have.
 from sqlalchemy import (
     Boolean,
     Column,

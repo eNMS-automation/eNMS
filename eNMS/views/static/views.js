@@ -24,9 +24,9 @@ function SshConnection() { // eslint-disable-line no-unused-vars
       const hostname = window.location.hostname;
       setTimeout(function () {
         if (result.redirection) {
-          openUrl(`${protocol}//${hostname}:${result.port}`);
-        } else {
           openUrl(`${protocol}//${hostname}/terminal${result.port}/`);
+        } else {
+          openUrl(`${protocol}//${hostname}:${result.port}`);
         }
       }, 500);
       const message = `Connection to ${result.device} on port ${result.port}.`;

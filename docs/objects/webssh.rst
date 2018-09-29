@@ -8,13 +8,42 @@ GoTTY is a web SSH solution that can be found on github: https://github.com/yuda
 Installation
 ------------
 
-There is no need to install GoTTY: it is shipped with eNMS by default in `/eNMS/applications`.
-However, you must make sure that the file `gotty` can be executed (`chmod 755 gotty`).
+There is no need to install GoTTY: it is shipped with eNMS by default in ``/eNMS/applications``.
+However, you must make sure that the file `gotty` can be executed (``chmod 755 gotty``).
 
--------
-Web SSH
+Port allocation
+---------------
 
-eNMS uses GoTTY to start a web SSH connection to any network device.
+GoTTY listens to a port provided by eNMS to listen for incoming requests. By default, eNMS will use the range of ports [9000, 9099].
+You can change this range directly from the web UI, in :guilabel:`admin/parameters` :
+ 
+.. image:: /_static/objects/webssh/port_allocation.png
+   :alt: GoTTY default range of ports
+   :align: center
+
+Port redirection
+----------------
+
+In production, only one port is allowed on the web server. In that case, the reverse proxy must be configured to redirect the requests to ``terminal<port_number>`` to ``localhost:<port_number>``.
+
+With Nginx, this can be accomplished with the following `location` :
+
+::
+
+ location ~ ^/terminal(.*)$ {
+   proxy_set_header X-Real-IP $remote_addr;
+   proxy_set_header X-Forwarded-For $remote_addr;
+   proxy_set_header Host $host;
+   rewrite ^/terminal(.*)/?$ / break;
+   rewrite ^/terminal(.*)/(.*)$ /$2 break;
+   proxy_pass http://127.0.0.1:$1;
+   proxy_http_version 1.1;
+   proxy_set_header Upgrade $http_upgrade;
+   proxy_set_header Connection "upgrade";
+ }
+
+A full example of nginx configuration can be found in ``eNMS/nginx``.
+
 
 "GOTTY_ALLOWED_PORTS" defines which range of ports GoTTY will use to start an SSH session.
 eNMS uses a rotation system so that GoTTY will use these ports sequentially to handle all user requests.
@@ -37,24 +66,11 @@ If the port multiplexing option is enabled, clients will all share the
 same SSH session instead (they will actually share the same terminal
 with tmux)
 
-Port redirection:
-In production, it is likely that the web server (e.g nginx) allows
-only one port. In that case, the web server can be configured to
-redirect the requests to another port, as GoTTY needs its own port to
-listen to.
-Example of a redirection from https://eNMS/terminal1 to port 8080 :
-location /terminal1 {
-    proxy_pass  http://127.0.0.1:8080;
-}
 
-::
 
- # enable automatic authentication
- sudo apt-get install sshpass
- export GOTTY_AUTHENTICATION=1
 
-In production, for security reasons, it is possible that only one port is available on the web server. 
-In that case, the web server must be configured to redirect the traffic from a given URL to the associated GoTTY port, by configuring the "GOTTY_ALLOWED_URLS" and enabling the redirection by setting "GOTTY_PORT_REDIRECTION" to True.
+
+ 
 
 ::
 

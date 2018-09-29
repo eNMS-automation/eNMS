@@ -167,6 +167,8 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/objects/connection/${id}`,
+    dataType: 'json',
+    data: $(`connection-parameters-form`).serialize(),
     success: function(result) {
       const protocol = window.location.protocol;
       const hostname = window.location.hostname;

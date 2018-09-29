@@ -1,12 +1,11 @@
 from flask import current_app, jsonify, render_template, request
 from flask_login import login_required
 from os.path import join
-from platform import system
 from simplekml import Kml
 from subprocess import Popen
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import get_credentials, retrieve
+from eNMS.base.helpers import retrieve
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.base.models import Log
 from eNMS.objects.forms import AddDevice, AddLink

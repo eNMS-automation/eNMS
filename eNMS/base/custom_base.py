@@ -23,6 +23,7 @@ class CustomBase(db.Model):
             property_type = property_types.get(property, None)
             if property_type == bool or 'regex' in property:
                 value = property in kwargs
+                print(property, value)
             elif property_type == dict:
                 value = loads(value) if value else {}
             elif property_type in [float, int]:

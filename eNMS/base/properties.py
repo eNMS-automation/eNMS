@@ -259,6 +259,7 @@ property_types = {
     'content_match_regex2': bool,
     'content_match_regex3': bool,
     'disable_md5': bool,
+    'gotty_port_redirection': bool,
     'inline_transfer': bool,
     'inventory_from_selection': bool,
     'overwrite_file': bool,

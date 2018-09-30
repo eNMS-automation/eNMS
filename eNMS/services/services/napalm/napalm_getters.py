@@ -3,7 +3,7 @@ from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 
-from eNMS.services.helpers import napalm_connection
+from eNMS.services.helpers import napalm_connection, napalm_drivers
 from eNMS.services.models import Service, service_classes
 
 
@@ -12,9 +12,11 @@ class NapalmGettersService(Service):
     __tablename__ = 'NapalmGettersService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    getters = Column(MutableList.as_mutable(PickleType), default=[])
     content_match = Column(String)
     content_match_regex = Column(Boolean)
+    driver = Column(String)
+    driver_values = napalm_drivers
+    getters = Column(MutableList.as_mutable(PickleType), default=[])
     getters_values = (
         ('get_arp_table', 'ARP table'),
         ('get_interfaces_counters', 'Interfaces counters'),

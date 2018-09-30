@@ -1,7 +1,7 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.services.helpers import napalm_connection
+from eNMS.services.helpers import napalm_connection, napalm_drivers
 from eNMS.services.models import Service, service_classes
 
 

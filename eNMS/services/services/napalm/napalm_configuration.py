@@ -1,7 +1,7 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.services.helpers import napalm_connection
+from eNMS.services.helpers import napalm_connection, napalm_drivers
 from eNMS.services.models import Service, service_classes
 
 
@@ -13,11 +13,13 @@ class NapalmConfigurationService(Service):
     vendor = Column(String)
     operating_system = Column(String)
     action = Column(String)
-    content = Column(String)
     action_values = (
         ('load_merge_candidate', 'Load merge'),
         ('load_replace_candidate', 'Load replace')
     )
+    content = Column(String)
+    driver = Column(String)
+    driver_values = napalm_drivers
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_configuration_service',

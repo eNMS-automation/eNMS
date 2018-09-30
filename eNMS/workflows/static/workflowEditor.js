@@ -328,26 +328,6 @@ function switchMode(mode) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-/**
- * Show task modal for editing.
- * @param {id} id - Id of the task to edit.
- */
-function showTaskModal(id) {
-  $.ajax({
-    type: 'POST',
-    url: `/tasks/get/${id}`,
-    success: function(task) {
-      for (const [property, value] of Object.entries(task)) {
-        if ($(`#${property}`).length) {
-          const input = Array.isArray(value) ? value.map((s) => s.id) : value;
-          $(`#${property}`).val(input);
-        }
-      }
-    },
-  });
-  $('#scheduling').modal('show');
-}
-
 $('#workflow-name').on('change', function() {
   savePositions();
   $.ajax({

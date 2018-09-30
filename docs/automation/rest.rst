@@ -10,6 +10,8 @@ eNMS has a ReST API allowing to:
 - update an object
 - execute a task.
 
+This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
+
 Retrieve or delete an object
 ****************************
 

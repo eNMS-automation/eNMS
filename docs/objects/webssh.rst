@@ -46,9 +46,25 @@ With Nginx, this can be accomplished with the following `location` :
 
 A full example of nginx configuration can be found in ``eNMS/nginx``.
 
-Connection parameters
----------------------
+Connect to a device
+-------------------
 
+You can connect to a device by clicking on the ``Connect`` button in :guilabel:`objects/device_management`.
+
+.. image:: /_static/objects/webssh/connect_buttons.png
+   :alt: Connect buttons
+   :align: center
+
+The following window will pop up:
+
+.. image:: /_static/objects/webssh/connection_parameters.png
+   :alt: Connection window
+   :align: center
+
+You can configure the following parameters :
+
+- Accept only one client: the first client will be allowed, all others will be rejected when trying to access the terminal URL.
+- Share session with all clients: a single process will be shared across all clients with tmux (terminal multiplexing), such that all clients will share the same SSH session (same screen).
 eNMS does not by default use the device credentials to automatically log in, but it can be configured to do so. To send in the credentials, eNMS uses "sshpass": you must install "sshpass" on the server if you activate this option.
 
 Multiplexing:     

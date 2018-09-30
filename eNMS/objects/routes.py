@@ -164,11 +164,6 @@ def get_object(obj_type, obj_id):
 @login_required
 def connection(id):
     parameters, device = Parameters.query.one(), retrieve(Device, id=id)
-    if request.form['credentials'] == 'device':
-        user, pwd, _ = get_credentials(app, device)
-    else:
-        user = current_user.name
-        pwd = vault_helper(app, f'user/{user}')['password']
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port = parameters.get_gotty_port()
     cmd.extend(['-p', str(port)])
@@ -177,9 +172,14 @@ def connection(id):
     if 'multiplexing' in request.form:
         cmd.extend(f'tmux new -A -s gotty{port}'.split())
     if 'authentication' in request.form:
+        if request.form['credentials'] == 'device':
+            user, pwd, _ = get_credentials(app, device)
+        else:
+            user = current_user.name
+            pwd = vault_helper(app, f'user/{user}')['password']
         cmd.extend(f'sshpass -p {pwd} ssh {user}@{device.ip_address}'.split())
     else:
-        cmd.extend(f'ssh {user}@{device.ip_address}'.split())
+        cmd.extend(f'ssh {device.ip_address}'.split())
     Popen(cmd)
     return jsonify({
         'device': device.name,

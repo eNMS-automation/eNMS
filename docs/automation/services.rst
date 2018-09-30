@@ -105,17 +105,25 @@ This file contains the following code :
   
   service_classes['Example Service'] = ExampleService
 
+When the application starts, it loads all python files in ``eNMS/eNMS/services/services``, and adds the model to the database.
+You can create instances of that service from the web UI. eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances.
+
+For the ``ExampleService`` class displayed above, the auto-generated form will be the following :
+
+.. image:: /_static/automation/services/example_service.png
+   :alt: Example service
+   :align: center
+
 Add new services
 ----------------
 
-All default services mentioned below are located in the ``eNMS/source/services/services`` folder. 
-After adding a new custom service, you must reload the application.
+All default services mentioned below are located in the ``eNMS/source/services/services`` folder. After adding a new custom service, you must reload the application.
 Inside that folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files.
 
 Netmiko configuration service
 ----------------------------
 
-Uses Netmiko to send list of commands to be configured on the devices.
+Uses Netmiko to send  alist of commands to be configured on the devices.
 A **driver** must be selected among all available netmiko drivers.
 
 .. image:: /_static/automation/services/netmiko_configuration_service.png

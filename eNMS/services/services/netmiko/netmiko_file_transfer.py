@@ -2,7 +2,7 @@ from multiprocessing.pool import ThreadPool
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
-from eNMS.services.helpers import netmiko_connection
+from eNMS.services.helpers import netmiko_connection, netmiko_scp_drivers
 from eNMS.services.models import Service, service_classes
 
 
@@ -14,6 +14,7 @@ class NetmikoFileTransferService(Service):
     vendor = Column(String)
     operating_system = Column(String)
     driver = Column(String)
+    driver_values = netmiko_scp_drivers
     source_file = Column(String)
     dest_file = Column(String)
     file_system = Column(String)
@@ -21,14 +22,7 @@ class NetmikoFileTransferService(Service):
     overwrite_file = Column(Boolean)
     disable_md5 = Column(Boolean)
     inline_transfer = Column(Boolean)
-    driver_values = (
-        ('cisco_ios', 'Cisco IOS'),
-        ('cisco_xe', 'Cisco IOS-XE'),
-        ('cisco_xr', 'Cisco IOS-XR'),
-        ('cisco_nxos', 'Cisco NX-OS'),
-        ('juniper_junos', 'Juniper'),
-        ('arista_eos', 'Arista')
-    )
+
     direction_values = (('put', 'Upload'), ('get', 'Download'))
 
     __mapper_args__ = {

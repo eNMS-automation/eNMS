@@ -10,12 +10,14 @@ class NapalmPingService(Service):
     __tablename__ = 'NapalmPingService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    source = Column(String)
-    vrf = Column(String)
-    ttl = Column(Integer)
-    timeout = Column(Integer)
-    size = Column(Integer)
     count = Column(Integer)
+    driver = Column(String)
+    driver_values = napalm_drivers
+    size = Column(Integer)
+    source = Column(String)
+    timeout = Column(Integer)
+    ttl = Column(Integer)
+    vrf = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_ping_service',

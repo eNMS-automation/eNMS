@@ -14,8 +14,8 @@ class NetmikoConfigurationService(Service):
     operating_system = Column(String)
     content = Column(String)
     driver = Column(String)
+    driver_values = netmiko_drivers
     global_delay_factor = Column(Float, default=1.)
-    driver_values = [(driver, driver) for driver in netmiko_drivers]
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_configuration_service',

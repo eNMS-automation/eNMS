@@ -10,6 +10,8 @@ class NapalmRollbackService(Service):
     __tablename__ = 'NapalmRollbackService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    driver = Column(String)
+    driver_values = napalm_drivers
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_rollback_service',

@@ -41,7 +41,6 @@ class Task(CustomBase):
     end_date = Column(String)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     waiting_time = Column(Integer, default=0)
-    transfer_payload = Column(Boolean, default=False)
     workflows = relationship(
         'Workflow',
         secondary=task_workflow_table,
@@ -165,8 +164,8 @@ class ServiceTask(Task):
             targets |= set(pool.devices)
         return targets
 
-    def job(self, workflow, payload=None):
-        results = self.service.job(self, payload)
+    def job(self, workflow, workflow_results=None):
+        results = self.service.job(self, workflow_results)
         self.logs[str(datetime.now())] = results
         db.session.commit()
         return results
@@ -202,24 +201,23 @@ class WorkflowTask(Task):
         if not start_task:
             return False, {runtime: 'No start task in the workflow.'}
         layer, visited = {start_task}, set()
-        results = {}
+        workflow_results = {}
         while layer:
             new_layer = set()
             for task in layer:
                 visited.add(task)
-                task_results = task.job(workflow, results)
                 success = task_results['success']
                 if task.id == self.workflow.end_task:
-                    results['success'] = success
+                    workflow_results['success'] = success
                 for neighbor in task.task_neighbors(self.workflow, success):
                     if neighbor not in visited:
                         new_layer.add(neighbor)
-                results[task.name] = task_results
+                workflow_results[task.name] = task_results
                 sleep(task.waiting_time)
             layer = new_layer
-        self.logs[runtime] = results
+        self.logs[runtime] = workflow_results
         db.session.commit()
-        return results
+        return workflow_results
 
     @property
     def serialized(self):

@@ -49,8 +49,7 @@ task_public_properties = (
     'name',
     'creation_time',
     'frequency',
-    'status',
-    'transfer_payload'
+    'status'
 )
 
 link_common_properties = (
@@ -127,8 +126,7 @@ task_serialized_properties = (
     'end_date',
     'frequency',
     'positions',
-    'waiting_time',
-    'transfer_payload'
+    'waiting_time'
 )
 
 public_properties = (
@@ -243,7 +241,6 @@ pretty_names = {
     'source_file': 'Source file',
     'subtype': 'Subtype',
     'text file': 'File',
-    'transfer_payload': 'Transfer payload',
     'type': 'Type',
     'username': 'Username',
     'vendor': 'Vendor',
@@ -266,5 +263,4 @@ property_types = {
     'payload': dict,
     'contentregex': bool,
     'sourceregex': bool,
-    'transfer_payload': bool
 }

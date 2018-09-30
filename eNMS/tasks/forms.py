@@ -17,7 +17,6 @@ class SchedulingForm(FlaskForm):
     frequency = TextField('Frequency')
     run_immediately = BooleanField('Run immediately')
     do_not_run = BooleanField('Do not run', default=True)
-    transfer_payload = BooleanField('Transfer payload', default=True)
     service_type = SelectField('Type of service', choices=())
     devices = SelectMultipleField('', choices=())
     pools = SelectMultipleField('', choices=())

@@ -23,7 +23,7 @@ class NetmikoConfigurationService(Service):
 
     def job(self, task, incoming_payload):
         targets = task.compute_targets()
-        results = {'success': True}
+        results = {'success': True, 'payload': incoming_payload}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()
@@ -43,7 +43,10 @@ class NetmikoConfigurationService(Service):
         except Exception as e:
             result, success = f'task failed ({e})', False
             results['success'] = False
-        results[device.name] = {'success': success, 'result': result}
+        results[device.name] = {
+            'success': success,
+            'result': result
+        }
 
 
 service_classes['Netmiko Configuration Service'] = NetmikoConfigurationService

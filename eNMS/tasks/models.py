@@ -169,7 +169,6 @@ class ServiceTask(Task):
         results = self.service.job(self, payload)
         self.logs[str(datetime.now())] = results
         db.session.commit()
-        print(self.logs)
         return results
 
     @property

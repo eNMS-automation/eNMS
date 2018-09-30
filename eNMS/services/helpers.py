@@ -6,15 +6,15 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from eNMS import scheduler
 from eNMS.base.helpers import get_credentials
 
-netmiko_drivers = sorted(
+NETMIKO_DRIVERS = sorted(
     (driver, driver) for driver in CLASS_MAPPER
     if 'telnet' not in driver and 'ssh' not in driver
 )
 
-netmiko_scp_drivers = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
+NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
 
 # we exclude "base" from supported drivers
-napalm_drivers = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
+NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
 def netmiko_connection(service, device):

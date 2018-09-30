@@ -1,7 +1,7 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.services.helpers import napalm_connection, napalm_drivers
+from eNMS.services.helpers import napalm_connection, NAPALM_DRIVERS
 from eNMS.services.models import Service, service_classes
 
 
@@ -19,7 +19,7 @@ class NapalmConfigurationService(Service):
     )
     content = Column(String)
     driver = Column(String)
-    driver_values = napalm_drivers
+    driver_values = NAPALM_DRIVERS
     operating_system = Column(String)
     vendor = Column(String)
 

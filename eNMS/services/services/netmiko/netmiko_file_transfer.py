@@ -2,7 +2,7 @@ from multiprocessing.pool import ThreadPool
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
-from eNMS.services.helpers import netmiko_connection, netmiko_scp_drivers
+from eNMS.services.helpers import netmiko_connection, NETMIKO_SCP_DRIVERS
 from eNMS.services.models import Service, service_classes
 
 
@@ -16,7 +16,7 @@ class NetmikoFileTransferService(Service):
     direction_values = (('put', 'Upload'), ('get', 'Download'))
     disable_md5 = Column(Boolean)
     driver = Column(String)
-    driver_values = netmiko_scp_drivers
+    driver_values = NETMIKO_SCP_DRIVERS
     file_system = Column(String)
     inline_transfer = Column(Boolean)
     operating_system = Column(String)

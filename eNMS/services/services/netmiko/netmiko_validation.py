@@ -2,7 +2,7 @@ from multiprocessing.pool import ThreadPool
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
-from eNMS.services.helpers import netmiko_connection, netmiko_drivers
+from eNMS.services.helpers import netmiko_connection, NETMIKO_DRIVERS
 from eNMS.services.models import Service, service_classes
 
 
@@ -21,7 +21,7 @@ class NetmikoValidationService(Service):
     content_match_regex2 = Column(Boolean)
     content_match_regex3 = Column(Boolean)
     driver = Column(String)
-    driver_values = netmiko_drivers
+    driver_values = NETMIKO_DRIVERS
     operating_system = Column(String)
     vendor = Column(String)
 

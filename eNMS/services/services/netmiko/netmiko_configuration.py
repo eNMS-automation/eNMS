@@ -1,7 +1,7 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
-from eNMS.services.helpers import netmiko_connection, netmiko_drivers
+from eNMS.services.helpers import netmiko_connection, NETMIKO_DRIVERS
 from eNMS.services.models import Service, service_classes
 
 
@@ -14,7 +14,7 @@ class NetmikoConfigurationService(Service):
     operating_system = Column(String)
     content = Column(String)
     driver = Column(String)
-    driver_values = netmiko_drivers
+    driver_values = NETMIKO_DRIVERS
     global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {

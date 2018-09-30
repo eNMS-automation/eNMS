@@ -25,8 +25,8 @@ You can change this range directly from the web UI, in :guilabel:`admin/paramete
 Port redirection
 ----------------
 
-In production, only one port is allowed on the web server. In that case, the reverse proxy must be configured to redirect the requests to ``terminal<port_number>`` to ``localhost:<port_number>``.
-eNMS must be made aware of the port redirection by setting the ``GOTTY_PORT_REDIRECTION`` to ``True`` in ``/eNMS/config.py``.
+In production, only one port is allowed on the web server. In that case, the reverse proxy must be configured to redirect the requests to ``terminal<port_number>`` to ``localhost:<port_number>``.  (: set it to True to enable it).
+eNMS must be made aware of the port redirection by setting the ``GOTTY_PORT_REDIRECTION`` to ``True`` in ``/eNMS/config.py`` (GOTTY_PORT_REDIRECTION is set to False by default: it is disabled).
 
 With Nginx, this can be accomplished with the following `location` :
 

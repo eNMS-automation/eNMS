@@ -58,10 +58,10 @@ function scheduleTask() {
       dataType: 'json',
       data: $('#scheduling-form').serialize(),
       success: function(result) {
+        $('#scheduling').modal('hide');
         alertify.notify(`Task '${result.name}' scheduled.`, 'success', 5);
       },
     });
-    $('#scheduling').modal('hide');
   } else {
     alertify.notify('Some fields are missing.', 'error', 5);
   }

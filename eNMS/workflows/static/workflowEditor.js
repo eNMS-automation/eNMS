@@ -87,36 +87,6 @@ if (workflow) {
 }
 
 /**
- * Schedule a task.
- */
-function scheduleTask() { // eslint-disable-line no-unused-vars
-  if (!workflow) {
-    alertify.notify(`You must create a workflow in the
-    'Workflow management' page first.`, 'error', 5);
-  }
-  if ($('#scheduling-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: `/tasks/scheduler/${workflow.id}`,
-      dataType: 'json',
-      data: $('#scheduling-form').serialize(),
-      success: function(result) {
-        $('#scheduling').modal('hide');
-        if (graph.findNode(result.id).length == 0) {
-          nodes.add(taskToNode(result));
-          saveNode(result);
-          alertify.notify(`Task '${result.name}' created.`, 'success', 5);
-        } else {
-          alertify.notify(`Task '${result.name}' edited.`, 'success', 5);
-        }
-      },
-    });
-  } else {
-    alertify.notify('Some fields are missing.', 'error', 5);
-  }
-}
-
-/**
  * Add an existing task to the workflow.
  */
 function addTaskToWorkflow() { // eslint-disable-line no-unused-vars

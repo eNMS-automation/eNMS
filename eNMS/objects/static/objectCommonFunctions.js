@@ -180,6 +180,7 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
   $('#connection-button').unbind('click');
   $('#connection-button').click(partial(sshConnection, id));
   $('#connection-parameters-form').trigger('reset');
+  $('#edit-device').modal('hide');
   $('#connection-parameters').modal('show');
 }
 
@@ -194,11 +195,11 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
     dataType: 'json',
     data: $('#connection-parameters-form').serialize(),
     success: function(result) {
-      if (result.server_addr) {
-        const url = result.server_addr;
-      } else {
-        const url = `${window.location.protocol}//${window.location.hostname}`;
+      let url = result.server_addr;
+      if (!url) {
+        url = `${window.location.protocol}//${window.location.hostname}`;
       }
+      console.log(url);
       setTimeout(function() {
         if (result.redirection) {
           openUrl(`${url}/terminal${result.port}/`);

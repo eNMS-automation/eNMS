@@ -21,7 +21,7 @@ This file contains the following code :
   # If the property in a Boolean, it will be displayed as a tick box instead.
   # If the class contains a "property_name_values" property with a list of
   # values, it will be displayed:
-  # - as a multiple selection drop-down list if the property is an SQL "List".
+  # - as a multiple selection list if the property is an SQL "MutableList".
   # - as a single selection drop-down list in all other cases.
   # If you want to see a few examples of services, you can have a look at the
   # /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
@@ -56,7 +56,7 @@ This file contains the following code :
       an_integer = Column(Integer)
       # Text area
       a_float = Column(Float)
-      # the "a_list" property will be displayed as a multiple selection drop-down
+      # the "a_list" property will be displayed as a multiple selection list.
       # list, with the values contained in "a_list_values".
       a_list = Column(MutableList.as_mutable(PickleType))
       # Text area where a python dictionnary is expected
@@ -108,11 +108,16 @@ This file contains the following code :
 When the application starts, it loads all python files in ``eNMS/eNMS/services/services``, and adds the model to the database.
 You can create instances of that service from the web UI. eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances.
 
-For the ``ExampleService`` class displayed above, the auto-generated form will be the following :
+For the ``ExampleService`` class displayed above, here is the associated auto-generated form:
 
 .. image:: /_static/automation/services/example_service.png
    :alt: Example service
    :align: center
+
+The rules for the auto-generation of forms are the following:
+  - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property which name is "<property_name>_values", eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
+  - A Boolean property is displayed as a tick box.
+  - A MutableList property is displayed as a multi-selection list
 
 Add new services
 ----------------

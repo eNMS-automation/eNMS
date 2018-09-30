@@ -52,15 +52,14 @@ Once eNMS is running, go to http://127.0.0.1:5000
 -------------------------------------------------
 
 
-Run eNMS in Production
-----------------------
+Run eNMS in Production (Unix only)
+----------------------------------
 
 To start eNMS in production mode, you must change the value of the environment variable "ENMS_CONFIG_MODE" to "Production".
 
 ::
 
  # set the ENMS_CONFIG_MODE environment variable
- (Windows) set ENMS_CONFIG_MODE=Production
  (Unix) export ENMS_CONFIG_MODE=Production
 
 The Flask secret key is used for securely signing the session cookie and other security related needs.
@@ -77,11 +76,9 @@ All credentials in production more are stored in a Vault: you cannot use eNMS in
 ::
 
  # set the VAULT_ADDR environment variable
- (Windows) set VAULT_ADDR=vault-address
  (Unix) export VAULT_ADDR=vault-address
 
  # set the VAULT_TOKEN environment variable
- (Windows) set VAULT_TOKEN=vault-token
  (Unix) export VAULT_TOKEN=vault-token
 
 eNMS can also unseal the Vault automatically at start time.
@@ -92,9 +89,7 @@ This mechanism is disabled by default. To activate it, you need to:
 ::
 
  # set the UNSEAL_VAULT_KEYx environment variable
- (Windows) set UNSEAL_VAULT_KEY1=key1
  (Unix) export UNSEAL_VAULT_KEY1=key1
- (Windows) set UNSEAL_VAULT_KEY2=key2
  (Unix) export UNSEAL_VAULT_KEY2=key2
 
 
@@ -106,7 +101,6 @@ You must tell eNMS where to find the address of your database by setting up the 
 ::
 
  # set the ENMS_DATABASE_URL environment variable
- (Windows) set ENMS_DATABASE_URL=database-address
  (Unix) export ENMS_DATABASE_URL=database-address
 
 

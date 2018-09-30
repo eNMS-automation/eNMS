@@ -1,18 +1,22 @@
 ============
-Object pools
+Pools
 ============
 
-Pools allows to create groups of devices. They can be used to filter the view, and to target an automation task to a specific subset of devices.
+Pools allows to create groups of objects. They can be used to filter the view, but also to target an automation task to a specific subset of devices.
 A pool is defined as a combination of values (or regular expressions) for the properties of an object. 
 
 If the properties of an object matches **all** properties of the pool, the object will belong to the pool.
  
 Pools can be created in :guilabel:`inventory/pool_management`.
 
+.. image:: /_static/objects/pools/pool_creation.png
+   :alt: test
+   :align: center
+
 A first example
 ---------------
 
-.. image:: /_static/objects/filtering/node_filtering.png
+.. image:: /_static/objects/pools/node_filtering.png
    :alt: test
    :align: center
 
@@ -28,7 +32,7 @@ In summary, all Cisco routers or switches which name starts with ``node`` will m
 A pool of link
 --------------
 
-.. image:: /_static/objects/filtering/link_filtering.png
+.. image:: /_static/objects/pools/link_filtering.png
    :alt: test
    :align: center
 
@@ -44,25 +48,25 @@ Filter the view with a pool
 Pools can be used as filters for the geographical and logical views.
 You can switch between pools with the drop-down list in the top-right corner of the screen (framed in red below).
 
-.. image:: /_static/objects/filtering/apply_filter.png
+.. image:: /_static/objects/pools/apply_filter.png
    :alt: Apply a filter
    :align: center
 
 Let's consider the following network:
 
-.. image:: /_static/objects/filtering/network.png
+.. image:: /_static/objects/pools/network.png
    :alt: test
    :align: center
 
 Unfiltered, this network results in the following view:
 
-.. image:: /_static/objects/filtering/unfiltered_network.png
+.. image:: /_static/objects/pools/unfiltered_network.png
    :alt: test
    :align: center
 
 We create a pool with a condition on the ``Name`` of a link:
 
-.. image:: /_static/objects/filtering/filter_all_links.png
+.. image:: /_static/objects/pools/filter_all_links.png
    :alt: test
    :align: center
 
@@ -70,19 +74,19 @@ There isn't a single link which name is ``a``: all links will be filtered.
 
 Filtering the view with this pool will result in the following display:
 
-.. image:: /_static/objects/filtering/network_filter1.png
+.. image:: /_static/objects/pools/network_filter1.png
    :alt: test
    :align: center    
 
 We add a new condition on the ``Location`` of a node to exclude all nodes that are located outside of France or spain:
 
-.. image:: /_static/objects/filtering/filter_location.png
+.. image:: /_static/objects/pools/filter_location.png
    :alt: test
    :align: center
 
 This result in the following view:
 
-.. image:: /_static/objects/filtering/network_filter2.png
+.. image:: /_static/objects/pools/network_filter2.png
    :alt: test
    :align: center    
 
@@ -91,13 +95,13 @@ Restrict to nodes with IOS-XE or IOS-XR
 
 Finally, out of the remaining nodes, we exclude all nodes which operating system is not IOS-XE or IOS-XR:
 
-.. image:: /_static/objects/filtering/filter_os.png
+.. image:: /_static/objects/pools/filter_os.png
    :alt: test
    :align: center
 
 This results in the following view:
 
-.. image:: /_static/objects/filtering/network_filter3.png
+.. image:: /_static/objects/pools/network_filter3.png
    :alt: test
    :align: center 
 

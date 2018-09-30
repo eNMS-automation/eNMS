@@ -1,6 +1,6 @@
-===============
-Object creation
-===============
+=======
+Objects
+=======
 
 Type of objects
 ---------------

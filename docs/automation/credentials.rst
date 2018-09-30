@@ -21,5 +21,5 @@ The credentials of a device are a property of the device itself.
 
 They are encrypted and stored in the database (test mode) or stored in the Hashicorp Vault (production mode).
 The credentials of a device are :
-- a username and password (authentication)
-- an "enable password" required to enter the "enable" mode for some devices 
+  - a username and password (authentication).
+  - an "enable password" required on some devices to enter the "enable" mode.

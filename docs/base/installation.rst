@@ -52,25 +52,23 @@ Once eNMS is running, go to http://127.0.0.1:5000
 -------------------------------------------------
 
 
-Run eNMS in Production
-----------------------
+Run eNMS in Production (Unix only)
+----------------------------------
 
 To start eNMS in production mode, you must change the value of the environment variable "ENMS_CONFIG_MODE" to "Production".
 
 ::
 
  # set the ENMS_CONFIG_MODE environment variable
- (Windows) set ENMS_CONFIG_MODE=Production
  (Unix) export ENMS_CONFIG_MODE=Production
 
-
+The Flask secret key is used for securely signing the session cookie and other security related needs.
 In production mode, the secret key is not automatically set to a default value in case it is missing. Therefore, you must set it up yourself:
 
 ::
 
- # set the SECRET_KEY environment variable
- (Windows) set SECRET_KEY=value-of-your-secret-key
- (Unix) export SECRET_KEY=value-of-your-secret-key
+ # set the ENMS_SECRET_KEY environment variable
+ (Unix) export ENMS_SECRET_KEY=value-of-your-secret-key
 
 
 All credentials in production more are stored in a Vault: you cannot use eNMS in production without first setting up a Vault. Once this is done, you must tell eNMS how to connect to the vault:

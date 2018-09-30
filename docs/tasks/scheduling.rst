@@ -4,8 +4,11 @@ Scheduling
 
 Scheduling a service or a workflow is done from the graphical view of the network, in two steps:
     
-1. Selection of the target devices
-#. Scheduling the service
+1. Scheduling the service/workflow
+#. Selection of the target devices
+#. Scheduling (start date, end date, frequency)
+
+There is no difference between scheduling a service or a workflow: the mechanism is exactly the same.
 
 Target selection
 ----------------

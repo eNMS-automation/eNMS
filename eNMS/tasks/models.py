@@ -206,6 +206,7 @@ class WorkflowTask(Task):
             new_layer = set()
             for task in layer:
                 visited.add(task)
+                task_results = task.job(workflow, workflow_results)
                 success = task_results['success']
                 if task.id == self.workflow.end_task:
                     workflow_results['success'] = success

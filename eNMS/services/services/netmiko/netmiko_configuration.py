@@ -23,7 +23,7 @@ class NetmikoConfigurationService(Service):
 
     def job(self, task, incoming_payload):
         targets = task.compute_targets()
-        results = {'success': True, 'payload': incoming_payload}
+        results = {'success': True}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()

@@ -1,6 +1,6 @@
-=======
-Web SSH
-=======
+===================
+Web SSH (Unix only)
+===================
 
 eNMS uses GoTTY to automatically start an SSH session to any device.
 GoTTY is a web SSH solution that can be found on github: https://github.com/yudai/gotty
@@ -65,11 +65,6 @@ You can configure the following parameters :
 
 - Accept only one client: the first client will be allowed, all others will be rejected when trying to access the terminal URL.
 - Share session with all clients: a single process will be shared across all clients with tmux (terminal multiplexing), such that all clients will share the same SSH session (same screen).
-eNMS does not by default use the device credentials to automatically log in, but it can be configured to do so. To send in the credentials, eNMS uses "sshpass": you must install "sshpass" on the server if you activate this option.
+- Automatically authenticate: eNMS will use the credentials stored in the Vault (production mode) or the database (test mode) to automatically authenticate to the network device. eNMS uses ``sshpass`` for the authentication: it must be installed if you activate the automatic authentication (``sudo apt-get install sshpass``).
 
-Multiplexing:     
-By default, each new client that tries to connect to a GoTTY terminal
-will have its own SSH session to the target device.
-If the port multiplexing option is enabled, clients will all share the
-same SSH session instead (they will actually share the same terminal
-with tmux)
+By default, eNMS uses the user credentials for the authentication (the ones you use to log in to eNMS). However, it can be configured to use the device credentials instead (the credentials that you can specify when creating a new device).

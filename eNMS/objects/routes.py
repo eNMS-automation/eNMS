@@ -184,7 +184,8 @@ def connection(id):
     return jsonify({
         'device': device.name,
         'port': port,
-        'redirection': app.config['GOTTY_PORT_REDIRECTION']
+        'redirection': app.config['GOTTY_PORT_REDIRECTION'],
+        'server_addr': app.config['GOTTY_SERVER_ADDR']
     })
 
 

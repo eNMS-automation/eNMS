@@ -171,13 +171,16 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
     dataType: 'json',
     data: $('#connection-parameters-form').serialize(),
     success: function(result) {
-      const protocol = window.location.protocol;
-      const hostname = window.location.hostname;
+      if (result.server_addr) {
+        const url = result.server_addr;
+      } else {
+        const url = `${window.location.protocol}//${window.location.hostname}`;
+      }
       setTimeout(function() {
         if (result.redirection) {
-          openUrl(`${protocol}//${hostname}/terminal${result.port}/`);
+          openUrl(`${url}/terminal${result.port}/`);
         } else {
-          openUrl(`${protocol}//${hostname}:${result.port}`);
+          openUrl(`${url}:${result.port}`);
         }
       }, 300);
       const message = `Connection to ${result.device} on port ${result.port}.`;

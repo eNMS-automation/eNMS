@@ -24,11 +24,14 @@ class Config(object):
         }
     }
 
+    # WebSSH (GoTTY)
+    GOTTY_PORT_REDIRECTION = False
+    GOTTY_SERVER_ADDR = environ.get('GOTTY_SERVER_ADDR', None)
+
 
 class DebugConfig(Config):
     DEBUG = True
     SECRET_KEY = environ.get('ENMS_SECRET_KEY', 'get-a-real-key')
-    GOTTY_PORT_REDIRECTION = False
 
 
 class ProductionConfig(Config):

@@ -31,7 +31,7 @@ class NapalmTracerouteService(Service):
     def device_job(self, args):
         device, results = args
         try:
-            napalm_driver = napalm_connection(device)
+            napalm_driver = napalm_connection(self, device)
             napalm_driver.open()
             traceroute = napalm_driver.traceroute(
                 device.ip_address,

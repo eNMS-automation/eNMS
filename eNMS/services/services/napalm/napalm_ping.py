@@ -33,7 +33,7 @@ class NapalmPingService(Service):
     def device_job(self, args):
         device, results = args
         try:
-            napalm_driver = napalm_connection(device)
+            napalm_driver = napalm_connection(self, device)
             napalm_driver.open()
             ping = napalm_driver.ping(
                 device.ip_address,

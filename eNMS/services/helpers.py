@@ -1,4 +1,5 @@
 from napalm import get_network_driver
+from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER
 
@@ -9,6 +10,9 @@ netmiko_drivers = sorted(
     driver for driver in CLASS_MAPPER
     if 'telnet' not in driver and 'ssh' not in driver
 )
+
+# we exclude "base" from supported drivers
+napalm_drivers = SUPPORTED_DRIVERS[1:]
 
 
 def netmiko_connection(service, device):
@@ -22,9 +26,9 @@ def netmiko_connection(service, device):
     )
 
 
-def napalm_connection(device):
+def napalm_connection(service, device):
     username, password, enable_password = get_credentials(scheduler.app, device)
-    driver = get_network_driver(device.operating_system)
+    driver = get_network_driver(service.driver)
     return driver(
         hostname=device.ip_address,
         username=username,

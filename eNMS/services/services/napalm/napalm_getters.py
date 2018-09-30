@@ -55,7 +55,7 @@ class NapalmGettersService(Service):
         device, results = args
         result = {}
         try:
-            napalm_driver = napalm_connection(device)
+            napalm_driver = napalm_connection(self, device)
             napalm_driver.open()
             for getter in self.getters:
                 try:

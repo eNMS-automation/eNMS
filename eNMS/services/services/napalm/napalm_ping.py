@@ -13,10 +13,12 @@ class NapalmPingService(Service):
     count = Column(Integer)
     driver = Column(String)
     driver_values = napalm_drivers
+    operating_system = Column(String)
     size = Column(Integer)
     source = Column(String)
     timeout = Column(Integer)
     ttl = Column(Integer)
+    vendor = Column(String)
     vrf = Column(String)
 
     __mapper_args__ = {

@@ -11,19 +11,18 @@ class NetmikoFileTransferService(Service):
     __tablename__ = 'NetmikoFileTransferService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
+    dest_file = Column(String)
+    direction = Column(String)
+    direction_values = (('put', 'Upload'), ('get', 'Download'))
+    disable_md5 = Column(Boolean)
     driver = Column(String)
     driver_values = netmiko_scp_drivers
-    source_file = Column(String)
-    dest_file = Column(String)
     file_system = Column(String)
-    direction = Column(String)
-    overwrite_file = Column(Boolean)
-    disable_md5 = Column(Boolean)
     inline_transfer = Column(Boolean)
-
-    direction_values = (('put', 'Upload'), ('get', 'Download'))
+    operating_system = Column(String)
+    overwrite_file = Column(Boolean)
+    source_file = Column(String)
+    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_file_transfer_service',

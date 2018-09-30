@@ -12,9 +12,11 @@ class NapalmTracerouteService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     driver = Column(String)
     driver_values = napalm_drivers
+    operating_system = Column(String)
     source = Column(String)
     timeout = Column(Integer)
     ttl = Column(Integer)
+    vendor = Column(String)
     vrf = Column(String)
 
     __mapper_args__ = {

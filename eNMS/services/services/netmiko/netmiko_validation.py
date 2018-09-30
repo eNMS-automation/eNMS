@@ -11,8 +11,6 @@ class NetmikoValidationService(Service):
     __tablename__ = 'NetmikoValidationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    vendor = Column(String)
-    operating_system = Column(String)
     command1 = Column(String)
     command2 = Column(String)
     command3 = Column(String)
@@ -24,6 +22,8 @@ class NetmikoValidationService(Service):
     content_match_regex3 = Column(Boolean)
     driver = Column(String)
     driver_values = netmiko_drivers
+    operating_system = Column(String)
+    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_validation_service',

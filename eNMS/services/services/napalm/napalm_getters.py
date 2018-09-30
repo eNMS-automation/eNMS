@@ -39,6 +39,8 @@ class NapalmGettersService(Service):
         ('get_bgp_neighbors', 'BGP neighbors'),
         ('get_ipv6_neighbors_table', 'IPv6')
     )
+    operating_system = Column(String)
+    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_getters_service',

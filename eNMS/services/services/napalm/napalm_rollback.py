@@ -12,6 +12,8 @@ class NapalmRollbackService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     driver = Column(String)
     driver_values = napalm_drivers
+    operating_system = Column(String)
+    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_rollback_service',

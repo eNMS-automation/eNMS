@@ -20,6 +20,8 @@ class NapalmConfigurationService(Service):
     content = Column(String)
     driver = Column(String)
     driver_values = napalm_drivers
+    operating_system = Column(String)
+    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_configuration_service',

@@ -12,7 +12,7 @@ There are different types of devices and links available in eNMS.
 
 Each type of device (resp. link) has a specific icon (resp. color) when displayed graphically:
     
-.. image:: /_static/objects/management/object_types.png
+.. image:: /_static/objects/objects/object_types.png
    :alt: Different types of objects
    :align: center
 
@@ -31,7 +31,7 @@ Clicking on the ``Add a new device`` or ``Add a new link`` buttons will open a f
 
 Fill the form and click on the ``Submit`` button.
 
-.. image:: /_static/objects/management/object_creation.png
+.. image:: /_static/objects/objects/object_creation.png
    :alt: Device and link creation forms
    :align: center
 
@@ -42,7 +42,7 @@ All objects can be created at once by importing an Excel file. Devices must be d
 The first line of a spreadsheet contains the properties, the following lines define the objects, as demonstrated in the example below.
 If you want to export the existing data out, you can export an Excel spreadsheet with all the object data filled out by clicking: ``Export network Topology``.
 
-.. image:: /_static/objects/management/import.png
+.. image:: /_static/objects/objects/import.png
    :alt: Example of excel spreadsheet for import
    :align: center
 

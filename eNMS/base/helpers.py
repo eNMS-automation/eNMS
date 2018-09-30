@@ -46,9 +46,16 @@ def vault_helper(app, path, data=None):
         app.vault_client.write(vault_path, data=data)
 
 
-def get_credentials(app, device):
+def get_device_credentials(app, device):
     if app.production:
         data = vault_helper(app, f'device/{device.name}')
         return data['username'], data['password'], data['enable_password']
     else:
         return device.username, device.password, device.enable_password
+
+
+def get_user_credentials(app, user):
+    if app.production:
+        return user.name, vault_helper(app, f'user/{user.name}')['password']
+    else:
+        return user.name, user.password

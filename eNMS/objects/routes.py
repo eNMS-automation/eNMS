@@ -22,7 +22,8 @@ from eNMS.base.helpers import (
     allowed_file,
     retrieve,
     vault_helper,
-    get_credentials
+    get_device_credentials,
+    get_user_credentials
 )
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
@@ -173,11 +174,10 @@ def connection(id):
         cmd.extend(f'tmux new -A -s gotty{port}'.split())
     if 'authentication' in request.form:
         if request.form['credentials'] == 'device':
-            user, pwd, _ = get_credentials(app, device)
+            login, pwd, _ = get_device_credentials(app, device)
         else:
-            user = current_user.name
-            pwd = vault_helper(app, f'user/{user}')['password']
-        cmd.extend(f'sshpass -p {pwd} ssh {user}@{device.ip_address}'.split())
+            login, pwd = get_user_credentials(app, current_user)
+        cmd.extend(f'sshpass -p {pwd} ssh {login}@{device.ip_address}'.split())
     else:
         cmd.extend(f'ssh {device.ip_address}'.split())
     Popen(cmd)

@@ -5,6 +5,14 @@ fields: false
 table: false
 */
 
+(function() {
+  $('#authentication').change(function() {
+    $('#user-credentials,#device-credentials').prop(
+      'disabled', !$(this). prop('checked')
+    );
+  });
+})();
+
 /**
  * Display object modal for editing.
  * @param {type} type - Node or link.
@@ -19,6 +27,10 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
       for (const [property, value] of Object.entries(properties)) {
         $(`#${type}-${property}`).val(value);
       }
+      $('#connection-parameters-button').unbind('click');
+      $('#connection-parameters-button').click(
+        partial(connectionParametersModal, id)
+      );
     },
   });
   if (type == 'device') {
@@ -158,6 +170,17 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
 function openUrl(url) {
   let win = window.open(url, '_blank');
   win.focus();
+}
+
+/**
+ * Display the device connection modal.
+ * @param {id} id - Device id.
+ */
+function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
+  $('#connection-button').unbind('click');
+  $('#connection-button').click(partial(sshConnection, id));
+  $('#connection-parameters-form').trigger('reset');
+  $('#connection-parameters').modal('show');
 }
 
 /**

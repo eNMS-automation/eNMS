@@ -105,7 +105,7 @@ This file contains the following code :
   
   service_classes['Example Service'] = ExampleService
 
-When the application starts, it loads all python files in ``eNMS/eNMS/services/services``, and adds the model to the database.
+When the application starts, it loads all python files in ``eNMS/eNMS/services/services``, and adds all models to the database.
 You can create instances of that service from the web UI. eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances.
 
 For the ``ExampleService`` class displayed above, here is the associated auto-generated form:
@@ -117,25 +117,24 @@ For the ``ExampleService`` class displayed above, here is the associated auto-ge
 The rules for the auto-generation of forms are the following:
   - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property which name is "<property_name>_values", eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
   - A Boolean property is displayed as a tick box.
-  - A MutableList property is displayed as a multi-selection list
+  - A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
+  - A MutableDict property is displayed as a text area. You can write a dictionnary in that text area: it will be converted to an actual python dictionnary.
 
-Add new services
-----------------
+Inside the ``eNMS/eNMS/services/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
 
-All default services mentioned below are located in the ``eNMS/source/services/services`` folder. After adding a new custom service, you must reload the application.
-Inside that folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files.
+eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm`` and ``ansible``.
 
-Netmiko configuration service
+Netmiko Configuration Service
 ----------------------------
 
-Uses Netmiko to send  alist of commands to be configured on the devices.
+Uses Netmiko to send a list of commands to be configured on the devices.
 A **driver** must be selected among all available netmiko drivers.
 
 .. image:: /_static/automation/services/netmiko_configuration_service.png
    :alt: Netmiko configuration service
    :align: center
 
-Netmiko File transfer service
+Netmiko File Transfer Service
 ----------------------------
 
 A file transfer service sends a file to a device, or retrieve a file from a device.
@@ -147,20 +146,21 @@ It relies on Netmiko file transfer functions.
 
 .. caution:: File-transfer services only works for IOS, IOS-XE, IOS-XR, NX-OS and Junos.
 
-Netmiko validation service
+Netmiko Validation Service
 -------------------------
 
 A ``Netmiko validation`` service is used to check the state of a device, in a workflow (see the ``Workflow`` section for examples about how it is used).
 
 There are 3 ``command`` field and 3 ``pattern`` field. For each couple of command/pattern field, eNMS will check if the expected pattern can be found in the output of the command.
 If the result is positive for all 3 couples, the service will return ``True`` (allowing the workflow to go forward, following the ``success`` edges), else it will return ``False``.
+The values for a ``pattern`` field can also be a regular expression.
 
 .. image:: /_static/automation/services/netmiko_validation_service.png
    :alt: Netmiko validation service
    :align: center
 
-NAPALM configuration service
----------------------------
+Napalm Configuration service
+----------------------------
 
 This type of service uses NAPALM to update the configuration of a device.
 
@@ -172,13 +172,8 @@ There are two types of operations:
    :alt: NAPALM configuration service
    :align: center
 
-.. note:: The NAPALM driver used by eNMS is the one you configure in the "Operating System" property of a device.
-The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
-
-.. note:: This service does not by itself commit the configuration. To do so, a ``NAPALM action`` service must be used (see below).
-
-NAPALM action service
---------------------
+Napalm Rollback Service
+-----------------------
 
 ``NAPALM action`` services do not have to be created: they are created by default when eNMS runs for the first time.
 There are three actions:
@@ -186,8 +181,8 @@ There are three actions:
   - ``discard``: discards the changes before they were committed.
   - ``rollback``: rollbacks the changes after they have been committed.
 
-NAPALM getters service
----------------------
+Napalm getters service
+----------------------
 
 A ``NAPALM getters`` service is a list of getters which output is displayed in the logs.
 
@@ -195,13 +190,12 @@ A ``NAPALM getters`` service is a list of getters which output is displayed in t
    :alt: NAPALM getters service
    :align: center
 
-.. note:: just like with the ``NAPALM configuration`` services, the NAPALM driver used by eNMS is the one configured in the "Operating System" property of a device. The NAPALM drivers name must be respected: ``ios, iosxr, nxos, junos, eos``.
-
-Ansible playbook service
------------------------
+Ansible Playbook Service
+------------------------
 
 An ``Ansible playbook`` service sends an ansible playbook to the devices.
 
 .. image:: /_static/automation/services/ansible_playbook_service.png
    :alt: Ansible service
    :align: center
+

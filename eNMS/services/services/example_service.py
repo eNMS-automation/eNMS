@@ -10,7 +10,7 @@
 # If the property in a Boolean, it will be displayed as a tick box instead.
 # If the class contains a "property_name_values" property with a list of
 # values, it will be displayed:
-# - as a multiple selection drop-down list if the property is an SQL "List".
+# - as a multiple selection list if the property is an SQL "MutableList".
 # - as a single selection drop-down list in all other cases.
 # If you want to see a few examples of services, you can have a look at the
 # /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
@@ -45,7 +45,7 @@ class ExampleService(Service):
     an_integer = Column(Integer)
     # Text area
     a_float = Column(Float)
-    # the "a_list" property will be displayed as a multiple selection drop-down
+    # the "a_list" property will be displayed as a multiple selection list
     # list, with the values contained in "a_list_values".
     a_list = Column(MutableList.as_mutable(PickleType))
     # Text area where a python dictionnary is expected
@@ -62,7 +62,7 @@ class ExampleService(Service):
         ('arista', 'Arista')
     ]
 
-    # these values will be displayed in a multiple selection drop-down list,
+    # these values will be displayed in a multiple selection list,
     # for the property "a_list".
     a_list_values = [
         ('value1', 'Value 1'),

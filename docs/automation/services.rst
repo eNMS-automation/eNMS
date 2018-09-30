@@ -1,9 +1,8 @@
-=======
-Scripts
-=======
+========
+Services
+========
 
-Scripts are created from the :guilabel:`Scripts` menu. 
-The following types of service are available in eNMS.
+A service is a Python class that performs an action.
 
 Netmiko configuration service
 ----------------------------
@@ -87,7 +86,7 @@ An ``Ansible playbook`` service sends an ansible playbook to the devices.
    :align: center
 
 Add new services
----------------
+----------------
 
 All default services mentioned above are located in the ``eNMS/source/services/services`` folder. New services can be added to the folder by reusing the same base template:
 

@@ -22,6 +22,16 @@ You can change this range directly from the web UI, in :guilabel:`admin/paramete
    :alt: GoTTY default range of ports
    :align: center
 
+Custom URL
+----------
+
+eNMS automatically redirects you to the address and port GoTTY is listening to, using JavaScript variables ``window.location.hostname`` and ``window.location.protocol``. If these variables do not redirect to the right URL, you can tell eNMS which URL and port are the right ones by setting the ``GOTTY_SERVER_ADDR`` in ``config.py``.
+
+::
+
+ # set the GOTTY_SERVER_ADDR environment variable
+ (Unix) export GOTTY_SERVER_ADDR=https://URL:8443
+
 Port redirection
 ----------------
 
@@ -65,6 +75,4 @@ You can configure the following parameters :
 
 - Accept only one client: the first client will be allowed, all others will be rejected when trying to access the terminal URL.
 - Share session with all clients: a single process will be shared across all clients with tmux (terminal multiplexing), such that all clients will share the same SSH session (same screen).
-- Automatically authenticate: eNMS will use the credentials stored in the Vault (production mode) or the database (test mode) to automatically authenticate to the network device. eNMS uses ``sshpass`` for the authentication: it must be installed if you activate the automatic authentication (``sudo apt-get install sshpass``).
-
-By default, eNMS uses the user credentials for the authentication (the ones you use to log in to eNMS). However, it can be configured to use the device credentials instead (the credentials that you can specify when creating a new device).
+- Automatically authenticate: eNMS will use the credentials stored in the Vault (production mode) or the database (test mode) to automatically authenticate to the network device. eNMS uses ``sshpass`` for the authentication: it must be installed if you activate the automatic authentication (``sudo apt-get install sshpass``). By default, eNMS uses the user credentials for the authentication (the ones you use to log in to eNMS). However, it can be configured to use the device credentials instead (the credentials that you can specify when creating a new device).

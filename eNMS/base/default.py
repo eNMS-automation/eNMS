@@ -134,13 +134,15 @@ def create_napalm_service():
     for service in (
         {
             'type': service_classes['Napalm Rollback Service'],
-            'name': 'Napalm Rollback',
-            'description': 'Rollback a configuration with Napalm'
+            'name': 'Napalm IOS Rollback',
+            'driver': 'ios',
+            'description': 'Rollback a configuration with Napalm IOS'
         },
         {
             'type': service_classes['Napalm Configuration Service'],
             'name': 'napalm_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Napalm',
+            'driver': 'ios',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'content_type': 'simple',

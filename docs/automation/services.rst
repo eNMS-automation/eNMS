@@ -124,6 +124,18 @@ Inside the ``eNMS/eNMS/services/services`` folder, you are free to create subfol
 
 eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm`` and ``ansible``.
 
+Service Editor
+--------------
+
+.. image:: /_static/automation/services/service_editor.png
+   :alt: Netmiko configuration service
+   :align: center
+
+You can create and edit all services from the :guilabel:`services/service_editor` page in the ``Microservices`` section.
+The first drop-down list allows the user to choose a class of service (like the class ``ExampleService`` discussed previously).
+The second one contains all instances for that class of service (if there are no such instance, it is empty).
+The form displayed below these two lists is the auto-generated form : it can be used both as a way to create new services, or edit existing ones.
+
 Netmiko Configuration Service
 ----------------------------
 

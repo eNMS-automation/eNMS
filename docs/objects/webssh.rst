@@ -67,7 +67,7 @@ From the device management table
 
 You can connect to a device by clicking on the ``Connect`` button in :guilabel:`objects/device_management`.
 
-.. image:: /_static/objects/webssh/connect_buttons.png
+.. image:: /_static/objects/webssh/connect_from_device_management.png
    :alt: Connect buttons
    :align: center
 
@@ -86,3 +86,8 @@ You can configure the following parameters :
 From the views
 **************
 
+You can also connect to a device from the geographical or logical view. Double-clicking on a device opens the property panel that contains the ``Connect`` button.
+
+.. image:: /_static/objects/webssh/connect_from_view.png
+   :alt: Connection window
+   :align: center

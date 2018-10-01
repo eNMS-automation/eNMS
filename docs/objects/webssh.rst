@@ -30,7 +30,7 @@ eNMS automatically redirects you to the address and port GoTTY is listening to, 
 ::
 
  # set the GOTTY_SERVER_ADDR environment variable
- (Unix) export GOTTY_SERVER_ADDR=https://URL:8443
+ (Unix) export GOTTY_SERVER_ADDR=https://URL (just the URL, and eNMS will add the GoTTY port)
 
 Port redirection
 ----------------

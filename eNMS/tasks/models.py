@@ -36,7 +36,7 @@ class Task(CustomBase):
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='tasks')
     logs = Column(MutableDict.as_mutable(PickleType), default={})
-    frequency = Column(String(120))
+    frequency = Column(String)
     start_date = Column(String)
     end_date = Column(String)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
@@ -62,7 +62,9 @@ class Task(CustomBase):
         self.status = 'Active'
         self.creation_time = str(datetime.now())
         self.is_active = True
-        self.schedule(kwargs['start_task'] == 'run-now')
+        schedule_task = kwargs['start-task']
+        if schedule_task != 'do-not-run':
+            self.schedule(schedule_task == 'run-now')
 
     def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')

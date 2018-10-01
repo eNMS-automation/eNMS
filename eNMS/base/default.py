@@ -186,6 +186,7 @@ def create_netmiko_tasks():
             'name': f'task_{service.name}',
             'devices': [retrieve(Device, name='router8')],
             'waiting_time': 3 if service.name == 'delete_vrf_TEST' else 0,
+            'start-task': 'do-not-run',
             'job': service,
             'do_not_run': 'y',
             'user': retrieve(User, name='cisco')
@@ -200,12 +201,14 @@ def create_napalm_tasks():
         'name': 'task_napalm_create_vrf_TEST',
         'job': retrieve(Service, name='napalm_create_vrf_TEST'),
         'devices': [device],
+        'start-task': 'do-not-run',
         'do_not_run': 'y',
         'user': user
     })
     factory(ServiceTask, **{
         'name': 'task_napalm_rollback',
         'job': retrieve(Service, name='Napalm Rollback'),
+        'start-task': 'do-not-run',
         'devices': [device],
         'do_not_run': 'y',
         'user': user
@@ -219,6 +222,7 @@ def create_other_tasks():
     factory(ServiceTask, **{
         'name': 'task_service_napalm_getter',
         'waiting_time': '0',
+        'start-task': 'do-not-run',
         'job': retrieve(Service, name='service_napalm_getter'),
         'devices': [device],
         'do_not_run': 'y',
@@ -226,6 +230,7 @@ def create_other_tasks():
     })
     factory(ServiceTask, **{
         'name': 'task_GET_router8',
+        'start-task': 'do-not-run',
         'job': retrieve(Service, name='GET_router8'),
         'devices': [],
         'do_not_run': 'y',
@@ -259,6 +264,7 @@ def create_netmiko_workflow():
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
     factory(WorkflowTask, **{
         'name': 'task_netmiko_VRF_workflow',
+        'start-task': 'do-not-run',
         'job': workflow,
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
@@ -293,6 +299,7 @@ def create_napalm_workflow():
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
     factory(WorkflowTask, **{
         'name': 'task_napalm_VRF_workflow',
+        'start-task': 'do-not-run',
         'job': workflow,
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
@@ -325,6 +332,7 @@ def create_other_workflow():
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
     factory(WorkflowTask, **{
         'name': 'task_custom_workflow',
+        'start-task': 'do-not-run',
         'job': workflow,
         'do_not_run': 'y',
         'user': retrieve(User, name='cisco')

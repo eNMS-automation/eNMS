@@ -5,7 +5,7 @@ alertify: false
 
 (function() {
   $('#start_date,#end_date,#frequency').attr('disabled', true)
-  $('#run-now').change(function() {
+  $('#run-now,#do-not-run').change(function() {
     $('#start_date,#end_date,#frequency').attr('disabled', true);
   });
   $('#schedule').change(function() {

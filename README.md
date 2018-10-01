@@ -29,26 +29,16 @@ The dashboard provides a graphical overview of all objects with dynamic charts.
 
 Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/objects/object_management)_, _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_
 
-Relevant part of the doc: _[Object creation](http://enms.readthedocs.io/en/latest/objects/creation.html)_
-
 # 2. Network visualization
 
 Two visualizations are proposed:
 - **Geographical view**: display the network on a world map in 2D or 3D, with Open Street Map or Google Map.
 - **Logical view**: display the network in an aesthetically-pleasing way via a force-based algorithm.
 
-Views can be filtered to display only a subset of the network. A filter is a combination of values (or regular expressions) for each property: it defines whether an object should be displayed or not.
-
+Views can be filtered to display only a subset of the network. A pool is a combination of values (or regular expressions) for each property: it defines whether an object should be displayed or not.
 You can display the property of an object from both views, and start an SSH session to a device.
 
-In the following example, we create a first filter with the regular expression `france|spain` for `location` to filter all _objects_ that are not in France or in Spain, and a second filter with the value `IOS-XR` for `Operating System` to filter all _nodes_ that do not have the `IOS-XR` operating system.
-We use these filters on both views, then start an SSH session to one of the router.
-
-![Network GIS visualization](readme/network-visualization.gif)
-
 Try it out yourself (double-click on a node to display its properties): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Filters](http://afourmy.pythonanywhere.com/objects/object_filtering)_
-
-Relevant parts of the doc: _[Geographical view](http://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical view](http://enms.readthedocs.io/en/latest/views/logical_view.html)_, _[Filters](http://enms.readthedocs.io/en/latest/objects/filtering.html)_, _[Bindings](http://enms.readthedocs.io/en/latest/views/bindings.html)_
 
 # 3. Creation of scripts and workflows
 

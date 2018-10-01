@@ -2,8 +2,8 @@
 Installation
 ============
 
-First steps
------------
+Run eNMS in test mode
+---------------------
 
 ::
 
@@ -14,8 +14,7 @@ First steps
  # install the requirements:
  pip install -r requirements.txt
 
-Start eNMS in debugging mode
-----------------------------
+Start eNMS in debugging mode :
 
 ::
 
@@ -30,9 +29,7 @@ Start eNMS in debugging mode
  # run the application
  flask run --host=0.0.0.0
 
-
-Start eNMS with gunicorn (better)
----------------------------------
+Start eNMS with gunicorn :
 
 ::
 
@@ -40,17 +37,14 @@ Start eNMS with gunicorn (better)
  gunicorn --config gunicorn.py app:app
 
 
-Start eNMS as a docker container (even better)
-----------------------------------------------
+Start eNMS as a docker container :
 
 ::
 
  # download & run the container
  docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
 
-Once eNMS is running, go to http://127.0.0.1:5000
--------------------------------------------------
-
+Once eNMS is running, go to http://127.0.0.1:5000, then create an account and log in.
 
 Run eNMS in Production (Unix only)
 ----------------------------------

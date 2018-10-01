@@ -57,7 +57,7 @@ def test_base_services(user_client):
 getters_dict = ImmutableMultiDict([
     ('name', 'napalm_getters_service'),
     ('description', ''),
-    ('driver': 'ios'),
+    ('driver', 'ios'),
     ('getters', 'get_interfaces'),
     ('getters', 'get_interfaces_ip'),
     ('getters', 'get_lldp_neighbors')

@@ -33,3 +33,30 @@ All selected devices are highlighted in red. A ``right-click`` will automaticall
 Refer to the :guilabel:`views/bindings` section of the docs for more information.
 
 
+Task overview
+-------------
+
+In the :guilabel:`tasks/task_management` page, you can find a summary of all existing tasks.
+
+.. image:: /_static/tasks/management/task_table.png
+   :alt: Task table
+   :align: center
+
+From this table, you can:
+
+- view the logs of the task.
+- edit the task's properties, including the scheduling properties (dates and frequency).
+- delete the task.
+
+There are two additional options for periodic tasks (tasks that run periodically at a user-defined frequency):
+
+- pause or resume the task
+- compare the logs, between: 
+
+    - two different devices.
+    - two different services or workflows.
+    - two different times.
+
+.. image:: /_static/tasks/management/log_comparison.png
+   :alt: Log comparison
+   :align: center

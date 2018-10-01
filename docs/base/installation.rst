@@ -44,7 +44,7 @@ Start eNMS as a docker container :
  # download & run the container
  docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
 
-Once eNMS is running, go to http://127.0.0.1:5000, then create an account and log in.
+Once eNMS is running, you can go to http://127.0.0.1:5000, create an account and log in.
 
 Run eNMS in Production (Unix only)
 ----------------------------------
@@ -54,48 +54,45 @@ To start eNMS in production mode, you must change the value of the environment v
 ::
 
  # set the ENMS_CONFIG_MODE environment variable
- (Unix) export ENMS_CONFIG_MODE=Production
+ export ENMS_CONFIG_MODE=Production
 
 The Flask secret key is used for securely signing the session cookie and other security related needs.
-In production mode, the secret key is not automatically set to a default value in case it is missing. Therefore, you must set it up yourself:
+In production mode, the secret key is not automatically set to a default value in case it is missing. Therefore, you must configure it yourself:
 
 ::
 
  # set the ENMS_SECRET_KEY environment variable
- (Unix) export ENMS_SECRET_KEY=value-of-your-secret-key
+ export ENMS_SECRET_KEY=value-of-your-secret-key
 
 
-All credentials in production more are stored in a Vault: you cannot use eNMS in production without first setting up a Vault. Once this is done, you must tell eNMS how to connect to the vault:
+All credentials in production more are stored in a Hashicorp Vault: you cannot use eNMS in production without first setting up a Vault.
+Once this is done, you must tell eNMS how to connect to the vault:
 
 ::
 
  # set the VAULT_ADDR environment variable
- (Unix) export VAULT_ADDR=vault-address
+ export VAULT_ADDR=vault-address
 
  # set the VAULT_TOKEN environment variable
- (Unix) export VAULT_TOKEN=vault-token
+ export VAULT_TOKEN=vault-token
 
 eNMS can also unseal the Vault automatically at start time.
 This mechanism is disabled by default. To activate it, you need to:
-- set the ``UNSEAL_VAULT`` variable in ``config.py`` to ``True``
-- set the UNSEAL_VAULT_KEYx (``x`` in [1, 5]) environment variables :
+  - set the ``UNSEAL_VAULT`` variable in ``config.py`` to ``True``
+  - set the UNSEAL_VAULT_KEYx (``x`` in [1, 5]) environment variables :
 
 ::
 
  # set the UNSEAL_VAULT_KEYx environment variable
- (Unix) export UNSEAL_VAULT_KEY1=key1
- (Unix) export UNSEAL_VAULT_KEY2=key2
+ export UNSEAL_VAULT_KEY1=key1
+ export UNSEAL_VAULT_KEY2=key2
+ etc
 
-
---------
-Database
-
-You must tell eNMS where to find the address of your database by setting up the "ENMS_DATABASE_URL" environment database.
+You also have to tell eNMS the address of your database by setting the "ENMS_DATABASE_URL" environment variable.
 
 ::
 
  # set the ENMS_DATABASE_URL environment variable
- (Unix) export ENMS_DATABASE_URL=database-address
-
+ export ENMS_DATABASE_URL=database-address
 
 In case this environment variable is not set, eNMS will default to using a SQLite database.

@@ -1,6 +1,6 @@
-=========
-Workflows
-=========
+===============
+Workflow System
+===============
 
 A workflow is a directed graph which nodes are tasks.
 

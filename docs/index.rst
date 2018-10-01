@@ -23,21 +23,21 @@ Views
 
    views/index
 
-Automation 
+Services
+========
+
+.. toctree::
+   :maxdepth: 2
+
+   services/index
+
+Workflows
 ==========
 
 .. toctree::
    :maxdepth: 2
 
-   automation/index
-
-Tasks
-=====
-
-.. toctree::
-   :maxdepth: 2
-
-   tasks/index
+   scheduling/index
 
 License
 =======

@@ -13,14 +13,15 @@ It encompasses the following aspects of network automation:
 - **Configuration management**: commit/rollback of a configuration via NAPALM.
 - **Netmiko scripting**: using netmiko to push a configuration, or display the result of a set of commands.
 - **Ansible support**: sending and managing ansible playbooks.
-- **Workflows**: Netmiko, NAPALM and Ansible scripts can be combined together graphically to define a workflow.
-- **Scheduling**: any task can be scheduled to start and end at specific times, periodically or not.
+- **Custom scripts**: any python script is automatically turned into an eNMS script and added to the web UI.
+- **Workflows**: Scripts can be combined together graphically in a workflow.
+- **Scheduling**: any task (script or workflow) can be scheduled to start and end at specific times, periodically or not.
 
 While network automation traditionally requires scripting skills, eNMS provides a way to automate networks graphically, in a few simple steps:
 - **Creation** of the network.
 - **Visualization** of the network on a world map (geographical view), or via a force-based algorithm (logical view).
 - **Creation** of scripts and workflows.
-- **Scheduling** of the task from the geographical or logical view.
+- **Scheduling** of script & workflows
 
 # 1. Network creation
 
@@ -49,6 +50,7 @@ The following types of script can be created:
 - **NAPALM _getters_**: list of getters which output is displayed in the task logs.
 - **Ansible playbook**: send an ansible playbook with optional arguments.
 - **ReST Call**: issue a GET/POST/PUT/DELETE ReST call.
+- **Custom script**: any python script you create is automatically detected and added to the web UI.
 
 Scripts can be combined to form a **workflow**. A workflow is a directed graph which vertices are scripts.
 There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).

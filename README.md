@@ -44,26 +44,16 @@ Try it out yourself (double-click on a node to display its properties): _[Geogra
 
 The following types of script can be created:
 - **Netmiko _configuration_**: list of commands to configure the device (plain text or Jinja2 template).
-- **Netmiko _show commands_**: list of “show commands” which output is displayed in the task logs.
-- **Netmiko _validation_**: list of command which output must contain a specific pattern (used in workflows).
+- **Netmiko _validation_**: list of command which output must contain a specific pattern.
 - **NAPALM _configuration_ task**: partial or full configuration (plain text or Jinja2 template) of the device.
 - **NAPALM _getters_**: list of getters which output is displayed in the task logs.
 - **Ansible playbook**: send an ansible playbook with optional arguments.
+- **ReST Call**: issue a GET/POST/PUT/DELETE ReST call.
 
 Scripts can be combined to form a **workflow**. A workflow is a directed graph which vertices are scripts.
 There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).
 
-In the following example, we create a workflow to configure a VRF on Cisco IOS. Our workflow is made of 4 scripts:
-- `create_vrf`: uses NAPALM to configure a new VRF on the router (via `Load merge`).
-- `NAPALM Commit`: commits the newly configured VRF.
-- `validate_vrf`: uses Netmiko to verify that the state of the router is consistent with what is expected.
-- `NAPALM Rollback`: use NAPALM to rollback the configuration if the previous validation fails (`validate_vrf` script).
-
-![Workflow creation](readme/workflow-creation.gif)
-
 Try it out yourself: _[Script creation](http://afourmy.pythonanywhere.com/scripts/script_creation)_, _[Script management](http://afourmy.pythonanywhere.com/scripts/script_management)_, _[VRF configuration workflow](http://afourmy.pythonanywhere.com/workflows/manage_configure_vrf)_ (double-click on a script to display its properties)
-
-Relevant parts of the doc: _[Scripts](http://enms.readthedocs.io/en/latest/automation/scripts.html)_, _[Workflows](http://enms.readthedocs.io/en/latest/automation/workflows.html)_, _[OS upgrade workflow](http://enms.readthedocs.io/en/latest/automation/os_upgrade.html)_, 
 
 # 4. Scheduling
 

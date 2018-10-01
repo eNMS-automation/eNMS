@@ -52,57 +52,7 @@ You can switch between pools with the drop-down list in the top-right corner of 
    :alt: Apply a filter
    :align: center
 
-Let's consider the following network:
+Use a pool as target of an automation task
+------------------------------------------
 
-.. image:: /_static/objects/pools/network.png
-   :alt: test
-   :align: center
-
-Unfiltered, this network results in the following view:
-
-.. image:: /_static/objects/pools/unfiltered_network.png
-   :alt: test
-   :align: center
-
-We create a pool with a condition on the ``Name`` of a link:
-
-.. image:: /_static/objects/pools/filter_all_links.png
-   :alt: test
-   :align: center
-
-There isn't a single link which name is ``a``: all links will be filtered.
-
-Filtering the view with this pool will result in the following display:
-
-.. image:: /_static/objects/pools/network_filter1.png
-   :alt: test
-   :align: center    
-
-We add a new condition on the ``Location`` of a device to exclude all devices that are located outside of France or spain:
-
-.. image:: /_static/objects/pools/filter_location.png
-   :alt: test
-   :align: center
-
-This result in the following view:
-
-.. image:: /_static/objects/pools/network_filter2.png
-   :alt: test
-   :align: center    
-
-Restrict to devices with IOS-XE or IOS-XR
-*****************************************
-
-Finally, out of the remaining devices, we exclude all devices which operating system is not IOS-XE or IOS-XR:
-
-.. image:: /_static/objects/pools/filter_os.png
-   :alt: test
-   :align: center
-
-This results in the following view:
-
-.. image:: /_static/objects/pools/network_filter3.png
-   :alt: test
-   :align: center 
-
-.. note:: Using the pool system is important because the targets of a service in eNMS can be a pool (or a group of pools). Therefore, pools can be used as a way to apply a service to a specific group of devices.
+Using the pool system is important because they can be used as targets of an automation task.

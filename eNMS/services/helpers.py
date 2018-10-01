@@ -24,7 +24,7 @@ def netmiko_connection(service, device):
         ip=device.ip_address,
         username=username,
         password=pwd,
-        secret=device.enable_pwd
+        secret=enable_pwd
     )
 
 

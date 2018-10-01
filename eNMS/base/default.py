@@ -158,6 +158,7 @@ def create_other_services():
     factory(service_classes['Napalm Getters Service'], **{
         'name': 'service_napalm_getter',
         'description': 'Getters: facts / Interfaces / Interfaces IP',
+        'driver': 'ios',
         'content_match': '',
         'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip']
     })

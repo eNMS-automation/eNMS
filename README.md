@@ -65,32 +65,14 @@ The following parameters are available:
 - **Start date**: instead of running the task immediately, the task will start at a specific time.
 - **End date**: used for a periodic task to stop at a specific time.
 
-In the following example, we schedule the `configure_vrf` workflow created at the previous step.
-All scheduling fields are left empty: the workflow is executed immediately.
-The scripts of the workflow are executed one by one, except for `NAPALM Rollback` as the validation step does not fail.
-
-![Workflow creation](readme/scheduling.gif)
-
 Try it out yourself (`Scheduling` button): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Calendar](http://afourmy.pythonanywhere.com/tasks/calendar)_
-
-Relevant part of the doc: _[Scheduling](http://enms.readthedocs.io/en/latest/tasks/scheduling.html)_
 
 # 5. Comparison of the results
 
 The results of a periodic task can be compared between two different times, devices or tasks.
 eNMS displays a dynamic line-by-line diff of the outputs.
 
-In the following example, we schedule two periodic tasks:
-- a task that will periodically run `show interfaces` on a router with Netmiko.
-- a NAPALM getter task that will periodically retrieve the output of NAPALM `get_interfaces_counters` getter.
-
-We can see in the comparison how counters increase through time for both tasks.
-
-![Workflow creation](readme/comparison.gif)
-
 Try it out yourself: _[Task management](http://afourmy.pythonanywhere.com/tasks/task_management)_
-
-Relevant part of the doc: _[Task results](http://enms.readthedocs.io/en/latest/tasks/management.html)_
 
 # Miscellaneous
 

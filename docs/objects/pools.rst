@@ -5,7 +5,7 @@ Pools
 Pools allows to create groups of objects. They can be used to filter the view, but also to target an automation task to a specific subset of devices.
 A pool is defined as a combination of values (or regular expressions) for the properties of an object. 
 
-If the properties of an object matches **all** properties of the pool, the object will belong to the pool.
+If the properties of an object matches **all** pool properties, the object will belong to the pool.
  
 Pools can be created in :guilabel:`inventory/pool_management`.
 
@@ -16,21 +16,21 @@ Pools can be created in :guilabel:`inventory/pool_management`.
 A first example
 ---------------
 
-.. image:: /_static/objects/pools/node_filtering.png
+.. image:: /_static/objects/pools/device_filtering.png
    :alt: test
    :align: center
 
 This pool enforces the following conditions:
- * name: ``node.*`` --- this regular expression matches all nodes which name starts with ``node``.
- * type: ``Router|Switch`` --- matches routers and switches (nodes which type is either ``Router``, or ``Switch``.
+ * name: ``node.*`` --- this regular expression matches all devices which name starts with ``node``.
+ * type: ``Router|Switch`` --- matches routers and switches (devices which type is either ``Router``, or ``Switch``.
  * vendor: ``Cisco`` --- for this property, the regular expression box is not ticked. This means the value must be exactly ``Cisco``.
 
 In summary, all Cisco routers or switches which name starts with ``node`` will match these conditions, and they will be a member of the pool.
 
 .. note:: All properties which field is left empty are simply ignored.
 
-A pool of link
---------------
+A pool of links
+---------------
 
 .. image:: /_static/objects/pools/link_filtering.png
    :alt: test
@@ -38,9 +38,9 @@ A pool of link
 
 This pool enforces the following conditions:
  * type: ``Ethernet link`` --- matches all Ethernet links.
- * source: ``bnet6`` --- matches all links which source is the node ``bnet6``.
+ * source: ``bnet6`` --- matches all links which source is the device ``bnet6``.
 
-In summary, all Ethernet links starting from the node ``bnet6`` will be part of the pool.
+In summary, all Ethernet links starting from the device ``bnet6`` will be part of the pool.
 
 Filter the view with a pool
 ---------------------------
@@ -78,7 +78,7 @@ Filtering the view with this pool will result in the following display:
    :alt: test
    :align: center    
 
-We add a new condition on the ``Location`` of a node to exclude all nodes that are located outside of France or spain:
+We add a new condition on the ``Location`` of a device to exclude all devices that are located outside of France or spain:
 
 .. image:: /_static/objects/pools/filter_location.png
    :alt: test
@@ -90,10 +90,10 @@ This result in the following view:
    :alt: test
    :align: center    
 
-Restrict to nodes with IOS-XE or IOS-XR
-***************************************
+Restrict to devices with IOS-XE or IOS-XR
+*****************************************
 
-Finally, out of the remaining nodes, we exclude all nodes which operating system is not IOS-XE or IOS-XR:
+Finally, out of the remaining devices, we exclude all devices which operating system is not IOS-XE or IOS-XR:
 
 .. image:: /_static/objects/pools/filter_os.png
    :alt: test

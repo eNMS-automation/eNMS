@@ -25,10 +25,7 @@ While network automation traditionally requires scripting skills, eNMS provides 
 # 1. Network creation
 
 Nodes and links can be created either one by one by specifying all properties manually, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
-
 The dashboard provides a graphical overview of all objects with dynamic charts.
-
-![Object creation](readme/network-creation.gif)
 
 Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/objects/object_management)_, _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_
 

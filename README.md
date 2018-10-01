@@ -82,38 +82,11 @@ Try it out yourself: _[Task management](http://afourmy.pythonanywhere.com/tasks/
 
 # Getting started
 
-### (Optional) Set up a [virtual environment](https://docs.python.org/3/library/venv.html) 
-
-### 1. Get the code
-    git clone https://github.com/afourmy/eNMS.git
-    cd eNMS
-
-### 2. Install requirements 
-    pip install -r requirements.txt
-
-### 3. Set the FLASK_APP environment variable
-    (Windows) set FLASK_APP=app.py
-    (Unix) export FLASK_APP=app.py
-
-### 4. Run the application
-    flask run --host=0.0.0.0
-
-### 5. Go the http://127.0.0.1:5000/
-
-### 6. Create an account and log in
-
-# Run eNMS in a docker container
-
-### 1. Download & run the container
-    docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
-
-### 2. Go to http://127.0.0.1:5000
-
-### 3. Create an account and log in
+_[Installation](https://enms.readthedocs.io/en/latest/base/installation.html)_
 
 # Contact
 
-For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack") (channel #enms)
+For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack") (channel **#enms**)
 
 # Other projects you might be interested in
 

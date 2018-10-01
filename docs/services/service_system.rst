@@ -110,7 +110,7 @@ You can create instances of that service from the web UI. eNMS looks at the clas
 
 For the ``ExampleService`` class displayed above, here is the associated auto-generated form:
 
-.. image:: /_static/automation/services/example_service.png
+.. image:: /_static/automation/services/service_system/example_service.png
    :alt: Example service
    :align: center
 
@@ -130,14 +130,14 @@ Service Management
 All services are displayed in the :guilabel:`services/service_management` page in the ``Microservices`` section.
 They can be scheduled (see the ``scheduling`` section of the doc for more information) and deleted.
 
-.. image:: /_static/automation/services/service_management.png
+.. image:: /_static/automation/services/service_system/service_management.png
    :alt: Service Editor
    :align: center
 
 Service Editor
 --------------
 
-.. image:: /_static/automation/services/service_editor.png
+.. image:: /_static/automation/services/service_system/service_editor.png
    :alt: Service Editor
    :align: center
 

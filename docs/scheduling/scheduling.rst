@@ -2,9 +2,9 @@
 Scheduling
 ==========
 
-You can schedule a service :
-  - From the :guilabel:`services/service_management` page
-  - From the geographical (:guilabel:`views/geographical_view`) or the logical view (:guilabel:`views/logical_view`)
+You can schedule a service by creating a _task_:
+  - From the :guilabel:`services/service_management` page.
+  - From the geographical view (:guilabel:`views/geographical_view`) or the logical view (:guilabel:`views/logical_view`).
 
 From the Service Management page
 --------------------------------

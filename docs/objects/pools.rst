@@ -42,14 +42,22 @@ This pool enforces the following conditions:
 
 In summary, all Ethernet links starting from the device ``bnet6`` will be part of the pool.
 
+Default pools
+-------------
+
+Three pools are created by default in eNMS:
+  - "All objects": a pool that matches all devices and links.
+  - "Devices only": matches all devices, no link.
+  - "Links only": matches all links, no device.
+
 Filter the view with a pool
 ---------------------------
 
 Pools can be used as filters for the geographical and logical views.
 You can switch between pools with the drop-down list in the top-right corner of the screen (framed in red below).
 
-.. image:: /_static/objects/pools/apply_filter.png
-   :alt: Apply a filter
+.. image:: /_static/objects/pools/view_filter.png
+   :alt: Apply a filter to the view
    :align: center
 
 Use a pool as target of an automation task

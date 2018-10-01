@@ -208,7 +208,7 @@ def create_napalm_tasks():
     })
     factory(ServiceTask, **{
         'name': 'task_napalm_rollback',
-        'job': retrieve(Service, name='Napalm Rollback'),
+        'job': retrieve(Service, name='Napalm IOS Rollback'),
         'start-task': 'do-not-run',
         'devices': [device],
         'do_not_run': 'y',

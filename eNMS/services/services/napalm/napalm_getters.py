@@ -46,7 +46,7 @@ class NapalmGettersService(Service):
         'polymorphic_identity': 'napalm_getters_service',
     }
 
-    def job(self, task, incoming_payload):
+    def job(self, task, workflow_results):
         targets = task.compute_targets()
         results = {'success': True, 'expected': self.content_match}
         pool = ThreadPool(processes=len(targets))

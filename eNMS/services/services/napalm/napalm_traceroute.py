@@ -23,7 +23,7 @@ class NapalmTracerouteService(Service):
         'polymorphic_identity': 'napalm_traceroute_service',
     }
 
-    def job(self, task, incoming_payload):
+    def job(self, task, workflow_results):
         targets = task.compute_targets()
         results = {'success': True}
         pool = ThreadPool(processes=len(targets))

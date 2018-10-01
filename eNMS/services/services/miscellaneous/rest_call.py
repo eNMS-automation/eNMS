@@ -43,7 +43,7 @@ class RestCallService(Service):
         'polymorphic_identity': 'rest_call_service',
     }
 
-    def job(self, task, incoming_payload):
+    def job(self, task, workflow_results):
         try:
             if self.call_type in ('GET', 'DELETE'):
                 result = self.request_dict[self.call_type](
@@ -61,10 +61,6 @@ class RestCallService(Service):
                 success = bool(search(self.content_match, str(result)))
             else:
                 success = self.content_match in str(result)
-            if isinstance(incoming_payload, dict):
-                incoming_payload[self.name] = result
-            else:
-                incoming_payload = {self.name: result}
         except Exception as e:
             result, success = str(e), False
         return {

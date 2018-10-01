@@ -27,7 +27,7 @@ class NapalmConfigurationService(Service):
         'polymorphic_identity': 'napalm_configuration_service',
     }
 
-    def job(self, task, incoming_payload):
+    def job(self, task, workflow_results):
         targets = task.compute_targets()
         results = {'success': True, 'configuration': self.content}
         pool = ThreadPool(processes=len(targets))

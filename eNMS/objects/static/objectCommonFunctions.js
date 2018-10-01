@@ -2,6 +2,7 @@
 global
 alertify: false
 fields: false
+partial: false
 table: false
 */
 
@@ -199,7 +200,6 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
       if (!url) {
         url = `${window.location.protocol}//${window.location.hostname}`;
       }
-      console.log(url);
       setTimeout(function() {
         if (result.redirection) {
           openUrl(`${url}/terminal${result.port}/`);

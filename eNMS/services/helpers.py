@@ -18,22 +18,22 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
 def netmiko_connection(service, device):
-    username, password, enable_password = get_device_credentials(scheduler.app, device)
+    username, pwd, enable_pwd = get_device_credentials(scheduler.app, device)
     return ConnectHandler(
         device_type=service.driver,
         ip=device.ip_address,
         username=username,
-        password=password,
-        secret=device.enable_password
+        password=pwd,
+        secret=device.enable_pwd
     )
 
 
 def napalm_connection(service, device):
-    username, password, enable_password = get_device_credentials(scheduler.app, device)
+    username, pwd, enable_pwd = get_device_credentials(scheduler.app, device)
     driver = get_network_driver(service.driver)
     return driver(
         hostname=device.ip_address,
         username=username,
-        password=password,
-        optional_args={'secret': enable_password}
+        password=pwd,
+        optional_args={'secret': enable_pwd}
     )

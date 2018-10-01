@@ -3,8 +3,6 @@ global
 addObjectToTable: false
 devices: false
 importTopology: false
-partial: false
-sshConnection: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line

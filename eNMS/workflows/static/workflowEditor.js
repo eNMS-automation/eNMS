@@ -4,6 +4,7 @@ alertify: false
 compareTaskLogs: false
 partial: false
 showTaskLogs: false
+showTaskModal: false
 vis: false
 workflow: true
 */
@@ -213,7 +214,7 @@ function edgeToEdge(edge) {
 /**
  * Show scheduling modal.
  */
-function showSchedulingModal() {
+function showSchedulingModal() { // eslint-disable-line no-unused-vars
   $('#scheduling').modal('show');
   $('.dropdown-submenu a.menu-task').next('ul').toggle();
 }

@@ -1,6 +1,6 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime, timedelta
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, PickleType
+from sqlalchemy import Column, ForeignKey, Integer, String, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 from time import sleep

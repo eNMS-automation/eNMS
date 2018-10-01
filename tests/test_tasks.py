@@ -11,9 +11,7 @@ instant_task = ImmutableMultiDict([
     ('waiting_time', '0'),
     ('devices', '1'),
     ('devices', '2'),
-    ('start_date', ''),
-    ('end_date', ''),
-    ('frequency', ''),
+    ('start-task', 'run-now'),
     ('job', '2'),
     ('run_immediately', 'y')
 ])
@@ -23,6 +21,7 @@ scheduled_task = ImmutableMultiDict([
     ('waiting_time', '0'),
     ('devices', '1'),
     ('devices', '2'),
+    ('start-task', 'schedule'),
     ('start_date', '30/03/2018 19:10:13'),
     ('end_date', '06/04/2018 19:10:13'),
     ('frequency', '3600'),

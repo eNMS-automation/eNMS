@@ -4,8 +4,7 @@ from wtforms import (
     IntegerField,
     SelectField,
     SelectMultipleField,
-    TextField,
-    TextAreaField
+    TextField
 )
 
 

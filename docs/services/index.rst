@@ -1,11 +1,10 @@
-==========
-Automation
-==========
+========
+Services
+========
 
 .. toctree::
    :maxdepth: 1
 
-   credentials
-   services
-   workflows
-   rest
+   service_system
+   default_services
+   service_scheduling

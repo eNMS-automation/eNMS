@@ -37,7 +37,15 @@ Workflows
 .. toctree::
    :maxdepth: 2
 
-   scheduling/index
+   workflows/index
+
+ReST API
+========
+
+.. toctree::
+   :maxdepth: 2
+
+   rest_api/index
 
 License
 =======

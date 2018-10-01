@@ -153,8 +153,8 @@ Uses Netmiko to send a list of commands to be configured on the devices.
 A **driver** must be selected among all available netmiko drivers.
 The list of netmiko drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
-.. image:: /_static/automation/services/netmiko_configuration_service.png
-   :alt: Netmiko configuration service
+.. image:: /_static/automation/services/netmiko_configuration.png
+   :alt: Netmiko Configuration service
    :align: center
 
 Netmiko File Transfer Service
@@ -163,8 +163,8 @@ Netmiko File Transfer Service
 A file transfer service sends a file to a device, or retrieve a file from a device.
 It relies on Netmiko file transfer functions.
 
-.. image:: /_static/automation/services/file_transfer_service.png
-   :alt: Netmiko file transfer service
+.. image:: /_static/automation/services/netmiko_file_transfer.png
+   :alt: Netmiko File Transfer service
    :align: center
 
 .. caution:: File-transfer services only works for IOS, IOS-XE, IOS-XR, NX-OS and Junos.
@@ -178,39 +178,39 @@ There are 3 ``command`` field and 3 ``pattern`` field. For each couple of comman
 If the result is positive for all 3 couples, the service will return ``True`` (allowing the workflow to go forward, following the ``success`` edges), else it will return ``False``.
 The values for a ``pattern`` field can also be a regular expression.
 
-.. image:: /_static/automation/services/netmiko_validation_service.png
+.. image:: /_static/automation/services/netmiko_validation.png
    :alt: Netmiko validation service
    :align: center
 
 Napalm Configuration service
 ----------------------------
 
-This type of service uses NAPALM to update the configuration of a device.
+This type of service uses Napalm to update the configuration of a device.
 
 There are two types of operations:
   - ``load merge``: add the service configuration to the existing configuration of the target.
   - ``load replace``: replace the configuration of the target with the service configuration.
 
-.. image:: /_static/automation/services/napalm_configuration_service.png
-   :alt: NAPALM configuration service
+.. image:: /_static/automation/services/napalm_configuration.png
+   :alt: Napalm configuration service
    :align: center
 
 Napalm Rollback Service
 -----------------------
 
-``NAPALM action`` services do not have to be created: they are created by default when eNMS runs for the first time.
-There are three actions:
-  - ``commit``: commits the changes pushed with ``load replace`` or ``load merge``.
-  - ``discard``: discards the changes before they were committed.
-  - ``rollback``: rollbacks the changes after they have been committed.
+Use Napalm to Rollback a configuration.
+
+.. image:: /_static/automation/services/napalm_rollback.png
+   :alt: Napalm Rollback service
+   :align: center
 
 Napalm getters service
 ----------------------
 
-A ``NAPALM getters`` service is a list of getters which output is displayed in the logs.
+A ``Napalm getters`` service is a list of getters which output is displayed in the logs.
 
 .. image:: /_static/automation/services/napalm_getters_service.png
-   :alt: NAPALM getters service
+   :alt: Napalm getters service
    :align: center
 
 Ansible Playbook Service

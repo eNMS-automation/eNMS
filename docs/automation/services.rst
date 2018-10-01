@@ -207,18 +207,26 @@ Use Napalm to Rollback a configuration.
 Napalm getters service
 ----------------------
 
-A ``Napalm getters`` service is a list of getters which output is displayed in the logs.
+A ``Napalm Getters`` service is a list of getters which output is displayed in the logs.
 
-.. image:: /_static/automation/services/napalm_getters_service.png
-   :alt: Napalm getters service
+.. image:: /_static/automation/services/napalm_getters.png
+   :alt: Napalm Getters service
    :align: center
 
 Ansible Playbook Service
 ------------------------
 
-An ``Ansible playbook`` service sends an ansible playbook to the devices.
+An ``Ansible Playbook`` service sends an ansible playbook to the devices.
 
-.. image:: /_static/automation/services/ansible_playbook_service.png
-   :alt: Ansible service
+.. image:: /_static/automation/services/ansible_playbook.png
+   :alt: Ansible Playbook service
    :align: center
 
+ReST Call Service
+-----------------
+
+Send a ReST call (GET, POST, PUT or DELETE) to an URL with optional payload.
+
+.. image:: /_static/automation/services/rest_call.png
+   :alt: ReST Call service
+   :align: center

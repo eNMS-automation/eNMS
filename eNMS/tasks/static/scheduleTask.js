@@ -3,6 +3,16 @@ global
 alertify: false
 */
 
+(function() {
+  $('#start_date,#end_date,#frequency').attr('disabled', true)
+  $('#run-now').change(function() {
+    $('#start_date,#end_date,#frequency').attr('disabled', true);
+  });
+  $('#schedule').change(function() {
+    $('#start_date,#end_date,#frequency').attr('disabled', false);
+  });
+})();
+
 const dates = ['start_date', 'end_date'];
 const today = new Date();
 for (let i = 0; i < dates.length; i++) {

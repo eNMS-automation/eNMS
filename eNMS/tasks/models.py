@@ -59,11 +59,10 @@ class Task(CustomBase):
 
     def __init__(self, **kwargs):
         self.update(**kwargs)
-        self.status = 'active'
+        self.status = 'Active'
         self.creation_time = str(datetime.now())
         self.is_active = True
-        if 'do_not_run' not in kwargs:
-            self.schedule(run_now='run_immediately' in kwargs)
+        self.schedule(kwargs['start_task'] == 'run-now')
 
     def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
@@ -75,12 +74,12 @@ class Task(CustomBase):
 
     def pause_task(self):
         scheduler.pause_job(self.creation_time)
-        self.status = 'suspended'
+        self.status = 'Suspended'
         db.session.commit()
 
     def resume_task(self):
         scheduler.resume_job(self.creation_time)
-        self.status = 'active'
+        self.status = 'Active'
         db.session.commit()
 
     def delete_task(self):

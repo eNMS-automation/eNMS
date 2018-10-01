@@ -41,11 +41,11 @@
               <div class="form-group">
                 <label>Name</label>
                 <div class='form-group'>
-                  {{ scheduling_form.name(class="form-control", required=true) }}
+                  {{ scheduling_form.name(class="form-control", required=true, autocomplete="off") }}
                 </div>
                 <label>Waiting time</label>
                 <div class='form-group'>
-                  {{ scheduling_form.waiting_time(class="form-control", required=true) }}
+                  {{ scheduling_form.waiting_time(class="form-control", required=true, autocomplete="off") }}
                 </div>
                 <div id="job-div">
                   <label>Job</label>
@@ -66,27 +66,31 @@
                 </div>
             </div>
             <div id="step-3">
+              <div class="radio">
+                <label>
+                  <input type="radio" checked="" value="run-now" id="run-now" name="start-task">
+                  Run the task now
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" value="schedule" id="schedule" name="start-task">
+                  Schedule the task
+                </label>
+              </div>
               <div class="form-group" style="min-height: 350px">
                 <label>Start date</label>
                 <div class='form-group'>
-                  {{ scheduling_form.start_date(id="start_date", class="form-control", autocomplete="off") }}
+                  {{ scheduling_form.start_date(class="form-control", autocomplete="off") }}
                 </div>
                 <label>End date</label>
                 <div class='form-group'>
-                  {{ scheduling_form.end_date(id="end_date", class="form-control", autocomplete="off") }}
+                  {{ scheduling_form.end_date(class="form-control", autocomplete="off") }}
                 </div>
                 <label>Frequency (seconds)</label>
                 <div class='form-group'>
-                  {{ scheduling_form.frequency(class="form-control") }}
+                  {{ scheduling_form.frequency(class="form-control", autocomplete="off") }}
                 </div>
-                <fieldset>
-                  {% for field in scheduling_form if field.name in ('do_not_run', 'run_immediately')  %}
-                    <div class="item">
-                      {{ field() }}
-                      <label for=field.name>{{ field.label.text }}</label>
-                    </div>
-                  {% endfor %}
-                </fieldset>
               </div>
             </div>
           </div>

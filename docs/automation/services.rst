@@ -151,6 +151,7 @@ Netmiko Configuration Service
 
 Uses Netmiko to send a list of commands to be configured on the devices.
 A **driver** must be selected among all available netmiko drivers.
+The list of netmiko drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
 .. image:: /_static/automation/services/netmiko_configuration_service.png
    :alt: Netmiko configuration service

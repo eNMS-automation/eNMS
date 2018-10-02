@@ -1,5 +1,5 @@
 ==================
-Service scheduling
+Service Scheduling
 ==================
 
 A step is scheduled by creating a ``Task``. It is a 3-steps process:

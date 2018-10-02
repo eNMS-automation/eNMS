@@ -1,5 +1,5 @@
 ================
-Default services
+Default Services
 ================
 
 The following services are present by default in eNMS.

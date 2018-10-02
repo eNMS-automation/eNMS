@@ -110,7 +110,29 @@ You can create instances of that service from the web UI.
 
 eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances.
 
-For the ``ExampleService`` class displayed above, here is the associated auto-generated form:
+For the ``ExampleService`` class displayed above, the SQL columns are the following ones:
+
+::
+
+  vendor = Column(String)
+  an_integer = Column(Integer)
+  a_float = Column(Float)
+  a_list = Column(MutableList.as_mutable(PickleType))
+  a_dict = Column(MutableDict.as_mutable(PickleType))
+  boolean1 = Column(Boolean)
+  boolean2 = Column(Boolean)
+  vendor_values = [
+      ('cisco', 'Cisco'),
+      ('juniper', 'Juniper'),
+      ('arista', 'Arista')
+  ]
+  a_list_values = [
+      ('value1', 'Value 1'),
+      ('value2', 'Value 2'),
+      ('value3', 'Value 3')
+  ]
+
+Here is the associated auto-generated form:
 
 .. image:: /_static/services/service_system/example_service.png
    :alt: Example service

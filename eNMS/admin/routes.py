@@ -42,7 +42,7 @@ from eNMS.admin.properties import user_search_properties
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, vault_helper
 from eNMS.base.properties import pretty_names
-from eNMS.objects.models import Link, Device
+from eNMS.objects.models import Device
 
 
 @blueprint.route('/user_management')

@@ -10,6 +10,7 @@ Each task in eNMS returns a boolean value:
 
 There are two types of edge in a workflow: ``success edge`` and ``failure edge``.
 The ``success edge`` indicates where to move in the graph if the source task was executed with success, while the ``failure edge`` does the same thing in case of failure.
+On top of that, each workflow must have a ``Start`` task and an ``End`` task for eNMS to know which task should be executed first and when to stop running the workflow.
 
 Workflows are created and managed from the :guilabel:`workflows/workflow_management` page. 
 
@@ -36,11 +37,19 @@ It contains:
   - A ``general right-click menu`` (Right-click on the background).
   - A ``task-specific right-click menu`` (Right-click on a task).
 
-.. image:: /_static/workflows/workflow_system/workflow_background_menu.png
-   :alt: Workflow management
-   :align: center
-
 The ``general right-click menu`` contains the following entries:
   - Change mode (create edges or move a task in the editor)
   - Add task (let you choose a task among all existing tasks)
   - Delete selection (all selected objects are deleted, tasks or edges)
+
+.. image:: /_static/workflows/workflow_system/workflow_background_menu.png
+   :alt: Workflow management
+   :align: center
+
+The ``task-specific right-click menu`` contains:
+  - The same entries as in the ``Task Management`` webpage: ``Edit``, ``Logs``, ``Compare``
+  - The ``Set as start`` and ``Set as end`` entries, for eNMS to know where the workflow starts, and where it ends.
+
+.. image:: /_static/workflows/workflow_system/workflow_task_menu.png
+   :alt: Workflow management
+   :align: center

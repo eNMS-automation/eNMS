@@ -12,6 +12,7 @@ napalm
 netmiko
 passlib
 pathlib
+psycopg2
 pynetbox
 pyyaml
 simplekml

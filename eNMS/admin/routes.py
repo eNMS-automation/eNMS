@@ -12,6 +12,7 @@ from flask_login import (
     login_user,
     logout_user
 )
+from pynetbox import api as netbox_api
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
@@ -40,6 +41,7 @@ from eNMS.admin.properties import user_search_properties
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, vault_helper
 from eNMS.base.properties import pretty_names
+from eNMS.objects.models import Link, Device
 
 
 @blueprint.route('/user_management')
@@ -219,9 +221,23 @@ def query_opennms():
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
                 devices[device]['ip_address'] = interface['ipAddress']
-                factory(**devices[device])
+                factory(Device, **devices[device])
     db.session.add(opennms_server)
     db.session.commit()
+    return jsonify({'success': True})
+
+
+@blueprint.route('/query_netbox', methods=['POST'])
+@login_required
+def query_netbox():
+    nb = netbox_api(request.form['netbox_address'], token=request.form['token'])
+    for device in nb.dcim.devices.all():
+        device_ip = device.primary_ip4 or device.primary_ip6
+        factory(Device, {
+            'name': device.name,
+            'ip_address': str(device_ip),
+            'subtype': request.form['netbox_node_type']
+        })
     return jsonify({'success': True})
 
 

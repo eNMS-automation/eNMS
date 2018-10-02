@@ -75,3 +75,4 @@ class OpenNmsForm(FlaskForm):
 class NetboxForm(FlaskForm):
     netbox_address = TextField('Address', default='http://0.0.0.0:8000')
     netbox_token = TextField('Token')
+    netbox_node_type = [subtype for subtype in device_subtypes.items()]

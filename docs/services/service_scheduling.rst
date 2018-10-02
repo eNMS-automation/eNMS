@@ -2,6 +2,31 @@
 Service scheduling
 ==================
 
+A step is scheduled by creating a ``Task``. It is a 3-steps process:
+
+1. Choosing a name and a waiting time
+
+The waiting time is only considered when the task is used in a workflow (see the ``Workflow`` section of the doc for more information). It defines how much time to wait after the task is finished (after reloading a device for example).
+
+.. image:: /_static/services/service_scheduling/step1.png
+   :alt: Scheduling: step 1
+   :align: center
+
+#. Target selection
+
+Targets can be selected as individual device or as pool. The resulting targets of the task will be a set composed of all selected devices, along with the devices of all selected pools.
+
+.. image:: /_static/services/service_scheduling/step2.png
+   :alt: Scheduling: step 1
+   :align: center
+
+#. Date and time selection
+
+Three options:
+  - Do not run the task (you may want to create it but schedule it later, or use it as part of a workflow)
+  - Run the task now
+  - Schedule a date and time for the task to run later on. If a ``Frequency`` is selected, the task will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``, the task will run indefinitely until you manually stop it.
+
 You can schedule a service :
   - From the :guilabel:`services/service_management` page
   - From the geographical (:guilabel:`views/geographical_view`) or the logical view (:guilabel:`views/logical_view`)
@@ -9,16 +34,9 @@ You can schedule a service :
 From the Service Management page
 --------------------------------
 
-A task can be scheduled to run at a specific time, once or periodically.
-
-For a periodic task, set the frequency in seconds in the ``Frequency`` field.
-The task will run indefinitely, until it is stopped or deleted from the task management page (:guilabel:`tasks/task_management`). Optionally, an ``End date`` can be scheduled for the service to stop running automatically.
-
 .. image:: /_static/tasks/scheduling/scheduling2.png
    :alt: test
    :align: center
-
-.. note:: If the ``Start date`` field is left empty, the service will run immediately.
 
 From the views
 --------------

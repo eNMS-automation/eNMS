@@ -47,15 +47,4 @@ From this table, you can:
 - edit the task's properties, including the scheduling properties (dates and frequency).
 - delete the task.
 
-There are two additional options for periodic tasks (tasks that run periodically at a user-defined frequency):
 
-- pause or resume the task
-- compare the logs, between: 
-
-    - two different devices.
-    - two different services or workflows.
-    - two different times.
-
-.. image:: /_static/tasks/management/log_comparison.png
-   :alt: Log comparison
-   :align: center

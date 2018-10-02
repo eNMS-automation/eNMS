@@ -56,16 +56,16 @@ Refer to the :guilabel:`views/bindings` section of the docs for more information
 Service tasks
 -------------
 
-In the :guilabel:`tasks/task_management` page, you can find a summary of all existing tasks.
+In the :guilabel:`tasks/task_management/service` page, you can find a summary of all existing "Service" tasks.
 
-.. image:: /_static/tasks/management/task_table.png
-   :alt: Task table
+.. image:: /_static/services/service_scheduling/service_tasks.png.png
+   :alt: Multiple selection
    :align: center
 
 From this table, you can:
 
-- view the logs of the task.
-- edit the task's properties, including the scheduling properties (dates and frequency).
-- delete the task.
-
-
+  - View the logs of the task.
+  - Edit the task's properties, including the scheduling properties (dates and frequency).
+  - Compare the logs of the task between any two runs, any two devices.
+  - Pause & resume the task.
+  - Delete the task.

@@ -12,6 +12,7 @@ napalm
 netmiko
 passlib
 pathlib
+pynetbox
 pyyaml
 simplekml
 tacacs_plus

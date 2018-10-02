@@ -21,7 +21,7 @@ The property panel also contains a ``Logs`` tabs that display all logs sent by t
    :alt: Property panel: logs
    :align: center
 
-* :guilabel:`Shift + left-click`: draw a selection rectangle to select multiple devices at once.
+* :guilabel:`Shift + left-click`: draw a selection rectangle to select multiple devices at once (geographical view only).
 
 .. image:: /_static/views/bindings/multiple_selection.png
    :alt: Multiple selection

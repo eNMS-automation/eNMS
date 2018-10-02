@@ -95,53 +95,56 @@ This file contains the following code :
           results = {'success': True, 'result': 'nothing happened'}
           for device in task.compute_targets():
               results[device.name] = True
-          # The results is a dictionnary that will be displayed in the logs.
+          # "results" is a dictionnary that will be displayed in the logs.
           # It must contain at least a key "success" that indicates whether
           # the execution of the service was a success or a failure.
           # In a workflow, the "success" value will determine whether to move
-          # forward with a "Sucess" edge or a "Failure" edge.
+          # forward with a "Success" edge or a "Failure" edge.
           return results
   
   
   service_classes['Example Service'] = ExampleService
 
 When the application starts, it loads all python files in ``eNMS/eNMS/services/services``, and adds all models to the database.
-You can create instances of that service from the web UI. eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances.
+You can create instances of that service from the web UI.
+
+eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances.
 
 For the ``ExampleService`` class displayed above, here is the associated auto-generated form:
 
-.. image:: /_static/automation/services/service_system/example_service.png
+.. image:: /_static/services/service_system/example_service.png
    :alt: Example service
    :align: center
 
-The rules for the auto-generation of forms are the following:
-  - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property which name is "<property_name>_values", eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
+The rules for the auto-generation of service forms are the following:
+  - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property which name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
   - A Boolean property is displayed as a tick box.
   - A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
   - A MutableDict property is displayed as a text area. You can write a dictionnary in that text area: it will be converted to an actual python dictionnary.
 
 Inside the ``eNMS/eNMS/services/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
 
-eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm`` and ``ansible``.
+eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm``, ``nornir`` and ``ansible``.
 
 Service Management
 ------------------
 
 All services are displayed in the :guilabel:`services/service_management` page in the ``Microservices`` section.
-They can be scheduled (see the ``scheduling`` section of the doc for more information) and deleted.
+They can be scheduled (see the :guilabel:`Service scheduling` section of the doc for more information) and deleted.
 
-.. image:: /_static/automation/services/service_system/service_management.png
+.. image:: /_static/services/service_system/service_management.png
    :alt: Service Editor
    :align: center
 
 Service Editor
 --------------
 
-.. image:: /_static/automation/services/service_system/service_editor.png
+.. image:: /_static/services/service_system/service_editor.png
    :alt: Service Editor
    :align: center
 
 You can create and edit all services from the :guilabel:`services/service_editor` page in the ``Microservices`` section.
-The first drop-down list allows the user to choose a class of service (like the class ``ExampleService`` discussed previously).
-The second one contains all instances for that class of service (if there are no such instance, it is empty).
+  - The first drop-down list allows the user to choose a class of service (like the class ``ExampleService`` discussed previously).
+  - The second one contains all instances for that class of service (if there is no such instance, it is empty).
+  
 The form displayed below these two lists is the auto-generated form : it can be used both as a way to create new services, or edit existing ones.

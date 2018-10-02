@@ -83,11 +83,11 @@ class ExampleMultiprocessingService(Service):
         pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()
         pool.join()
-        # The results is a dictionnary that will be displayed in the logs.
+        # "results" is a dictionnary that will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.
         # In a workflow, the "success" value will determine whether to move
-        # forward with a "Sucess" edge or a "Failure" edge.
+        # forward with a "Success" edge or a "Failure" edge.
         return results
 
     def device_job(self, args):

@@ -86,7 +86,7 @@ You can configure the following parameters :
 From the views
 **************
 
-You can also connect to a device from the geographical or logical view. Double-clicking on a device opens the property panel that contains the ``Connect`` button.
+You can also connect to a device from the geographical or logical view. Double-clicking on a device opens the property panel of that device. This window contains the same ``Connect`` button as in the :guilabel:`objects/device_management` page.
 
 .. image:: /_static/objects/webssh/connect_from_view.png
    :alt: Connection window

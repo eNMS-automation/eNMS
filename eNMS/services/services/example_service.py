@@ -84,11 +84,11 @@ class ExampleService(Service):
         results = {'success': True, 'result': 'nothing happened'}
         for device in task.compute_targets():
             results[device.name] = True
-        # The results is a dictionnary that will be displayed in the logs.
+        # "results" is a dictionnary that will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.
         # In a workflow, the "success" value will determine whether to move
-        # forward with a "Sucess" edge or a "Failure" edge.
+        # forward with a "Success" edge or a "Failure" edge.
         return results
 
 

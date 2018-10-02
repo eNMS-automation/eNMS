@@ -70,3 +70,8 @@ class OpenNmsForm(FlaskForm):
     type = SelectField('Type', choices=node_type)
     login = TextField('Login')
     password = PasswordField('Password')
+
+
+class NetboxForm(FlaskForm):
+    netbox_address = TextField('Address', default='http://0.0.0.0:8000')
+    netbox_token = TextField('Token')

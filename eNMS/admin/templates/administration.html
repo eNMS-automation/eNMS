@@ -110,15 +110,19 @@
           </div>
           <div class="x_content">
             <br />
-            <form id="opennms_form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <form id="netbox_form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div class="form-group" style="height: 450px">
-                TODO
+                {% for field in netbox_form if field.widget.input_type != 'hidden'  %}
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    {{ field(class="form-control required", placeholder=field.label.text) }}
+                  </div><br><br><br>
+                {% endfor %}
               </div>
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                   <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="queryOpenNMS()">Retrieve nodes</button>
+                  <button type="button" class="btn btn-success" onclick="queryNetbox()">Retrieve nodes</button>
                 </div>
               </div>
             </form>

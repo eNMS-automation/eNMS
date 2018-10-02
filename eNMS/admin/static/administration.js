@@ -50,3 +50,19 @@ function queryOpenNMS() { // eslint-disable-line no-unused-vars
     });
   }
 }
+
+/**
+ * Query Netbox server.
+ */
+function queryNetbox() { // eslint-disable-line no-unused-vars
+  if ($('#netbox_form').parsley().validate()) {
+    $.ajax({
+      type: 'POST',
+      url: '/admin/query_netbox',
+      data: $('#netbox_form').serialize(),
+      success: function() {
+        alertify.notify(`Query sent to Netbox.`, 'success', 5);
+      },
+    });
+  }
+}

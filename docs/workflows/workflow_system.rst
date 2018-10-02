@@ -13,8 +13,8 @@ The ``success edge`` indicates where to move in the graph if the source task was
 
 Workflows are created and managed from the :guilabel:`workflows/workflow_management` page. 
 
-Creation of a workflow
-**********************
+Workflow creation
+-----------------
 
 In the :guilabel:`workflows/workflow_management` page, click on the button ``Add a new workflow`` and fill the workflow creation form.
 The new workflow will be automatically added to the table of worflows.
@@ -22,3 +22,9 @@ The new workflow will be automatically added to the table of worflows.
 .. image:: /_static/automation/workflows/workflow_creation.png
    :alt: Workflow creation
    :align: center
+
+Workflow scheduling
+-------------------
+
+The scheduling of workflows is exactly the same as with services.
+Refer to the :guilabel:`Service scheduling` section of the doc for more information.

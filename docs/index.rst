@@ -39,13 +39,13 @@ Workflows
 
    workflows/index
 
-ReST API
-========
+Event-driven automation
+=======================
 
 .. toctree::
    :maxdepth: 2
 
-   rest_api/index
+   event_driven/index
 
 License
 =======

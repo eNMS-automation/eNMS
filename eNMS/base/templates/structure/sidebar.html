@@ -1,19 +1,8 @@
 <div class="left_col scroll-view">
-  <div class="navbar nav_title" style="border: 0;">
-    <a href="" class="site_title"><i class="fa fa-spinner"></i> <span> eNMS </span></a>
+  <div class="navbar nav_title" style="border:0; ">
+    <center><img src="{{ url_for('static', filename='enms/logo.png') }}" style="width:60px; height:60px;"><span>eNMS</span></a></center>
   </div>
   <div class="clearfix"></div>
-  <!-- menu profile quick info -->
-  <div class="profile clearfix">
-    <div class="profile_pic">
-      <img src="{{ url_for('admin_blueprint.static', filename='images/user.png') }}" alt="..." class="img-circle profile_img">
-    </div>
-    <div class="profile_info">
-      <span> Welcome, </span>
-      <h2> {{ current_user.name }} </h2>
-    </div>
-  </div>
-  <!-- /menu profile quick info -->
   <br />
   <!-- sidebar menu -->
   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">

@@ -30,12 +30,17 @@ Workflow Editor
 ---------------
 
 The :guilabel:`workflows/workflow_editor` is the place where tasks are organized into workflows.
-It contains
+It contains:
   - A drop-down list with all existing workflows to switch between workflows.
   - The workflow itself, displayed as a graph. The nodes are ``Tasks`` and there are two types of edge: ``success`` edge and ``failure edge``. If a task runs successfully, it will "follow" the ``success`` edge, otherwise the ``failure`` edge.
-  - A general right-click menu (Right-click on the background).
-  - A task-specific right-click menu (Right-click on a task).
+  - A ``general right-click menu`` (Right-click on the background).
+  - A ``task-specific right-click menu`` (Right-click on a task).
 
 .. image:: /_static/workflows/workflow_system/workflow_background_menu.png
    :alt: Workflow management
    :align: center
+
+The ``general right-click menu`` contains the following entries:
+  - Change mode (create edges or move a task in the editor)
+  - Add task (let you choose a task among all existing tasks)
+  - Delete selection (all selected objects are deleted, tasks or edges)

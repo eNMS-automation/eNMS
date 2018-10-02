@@ -47,7 +47,7 @@ From the views
 
 Select the target devices (see the :guilabel:`Views / Bindings` section of the doc), and select ``Add new task`` in the right-click menu. The devices you selected graphically will be automatically selected in the task creation process described above (step 2).
 
-.. image:: /_static/services/service_scheduling/step1.png.png
+.. image:: /_static/services/service_scheduling/step1.png
    :alt: Multiple selection
    :align: center
 
@@ -58,7 +58,7 @@ Service tasks
 
 In the :guilabel:`tasks/task_management/service` page, you can find a summary of all existing "Service" tasks.
 
-.. image:: /_static/services/service_scheduling/service_tasks.png.png
+.. image:: /_static/services/service_scheduling/service_tasks.png
    :alt: Multiple selection
    :align: center
 

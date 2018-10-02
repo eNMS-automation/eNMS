@@ -39,7 +39,7 @@ Go to the :guilabel:`services/service_management` page and click on the ``Schedu
 The ``Job`` drop-down list in the first step of the task creation will not appear: it is automatically set to the appropriate service.
 
 .. image:: /_static/services/service_scheduling/from_service_management.png
-   :alt: test
+   :alt: Schedule from Service Management page
    :align: center
 
 From the views
@@ -47,8 +47,8 @@ From the views
 
 Select the target devices (see the :guilabel:`Views / Bindings` section of the doc), and select ``Add new task`` in the right-click menu. The devices you selected graphically will be automatically selected in the task creation process described above (step 2).
 
-.. image:: /_static/services/service_scheduling/step1.png
-   :alt: Multiple selection
+.. image:: /_static/services/service_scheduling/from_view.png
+   :alt: Schedule from view
    :align: center
 
 Refer to the :guilabel:`views/bindings` section of the docs for more information.
@@ -59,7 +59,7 @@ Service tasks
 In the :guilabel:`tasks/task_management/service` page, you can find a summary of all existing "Service" tasks.
 
 .. image:: /_static/services/service_scheduling/service_tasks.png
-   :alt: Multiple selection
+   :alt: Service task management
    :align: center
 
 From this table, you can:

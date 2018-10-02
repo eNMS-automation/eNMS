@@ -30,3 +30,14 @@ This workflow is made of 4 services:
 .. image:: /_static/workflows/netmiko_workflow/check_no_vrf.png
    :alt: Validate there is no VRF TEST
    :align: center
+
+Configure and decommission a VRF with Napalm
+--------------------------------------------
+
+This workflow peforms the same action as the previous one (create and delete a VRF called ``TEST``, and validate each step), exception it uses Napalm to create and decommission the VRF.
+
+The creation step is handled by Napalm ``load_merge`` function while the VRF deletion relies on Napalm ``rollback`` function.
+
+.. image:: /_static/workflows/other_workflows/napalm_workflow.png
+   :alt: Napalm workflow
+   :align: center

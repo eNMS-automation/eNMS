@@ -26,6 +26,7 @@ from eNMS.admin.forms import (
     LoginForm,
     GeographicalParametersForm,
     GottyParametersForm,
+    NetboxForm,
     OpenNmsForm,
     SyslogServerForm,
     TacacsServerForm,
@@ -131,6 +132,7 @@ def admninistration():
         opennms_server = None
     return render_template(
         'administration.html',
+        netbox_form=NetboxForm(request.form),
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),
         opennms_form=OpenNmsForm(request.form),
@@ -230,13 +232,18 @@ def query_opennms():
 @blueprint.route('/query_netbox', methods=['POST'])
 @login_required
 def query_netbox():
-    nb = netbox_api(request.form['netbox_address'], token=request.form['token'])
+    nb = netbox_api(
+        request.form['netbox_address'],
+        token=request.form['netbox_token']
+    )
     for device in nb.dcim.devices.all():
         device_ip = device.primary_ip4 or device.primary_ip6
-        factory(Device, {
+        factory(Device, **{
             'name': device.name,
-            'ip_address': str(device_ip),
-            'subtype': request.form['netbox_node_type']
+            'ip_address': str(device_ip).split('/')[0],
+            'subtype': request.form['netbox_type'],
+            'longitude': 0.,
+            'latitude': 0.
         })
     return jsonify({'success': True})
 

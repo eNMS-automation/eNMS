@@ -4,8 +4,9 @@ Service scheduling
 
 A step is scheduled by creating a ``Task``. It is a 3-steps process:
 
-1. Choosing a name and a waiting time
+1. Choosing a name, a waiting time and a job
 
+The job is the service (or workflow, as you can see in the ``Workflow`` section) that you want to execute.
 The waiting time is only considered when the task is used in a workflow (see the ``Workflow`` section of the doc for more information). It defines how much time to wait after the task is finished (after reloading a device for example).
 
 .. image:: /_static/services/service_scheduling/step1.png
@@ -34,22 +35,25 @@ You can schedule a service :
 From the Service Management page
 --------------------------------
 
-.. image:: /_static/tasks/scheduling/scheduling2.png
+Go to the :guilabel:`services/service_management` page and click on the ``Schedule`` button for the service you want to schedule.
+The ``Job`` drop-down list in the first step of the task creation will not appear: it is automatically set to the appropriate service.
+
+.. image:: /_static/services/service_scheduling/from_service_management.png
    :alt: test
    :align: center
 
 From the views
 --------------
 
-You can ``left-click`` on a device to select it, or use ``shift + left-click`` to draw a selection rectangle and select multiple devices at once. All selected devices are highlighted in red. A ``left-click`` on the background will automatically unselect all devices (see the :guilabel:`Views / Bindings` section of the doc).
+Select the target devices (see the :guilabel:`Views / Bindings` section of the doc), and select ``Add new task`` in the right-click menu. The devices you selected graphically will be automatically selected in the task creation process described above (step 2).
 
-.. image:: /_static/views/bindings/multiple_selection.png
+.. image:: /_static/services/service_scheduling/step1.png.png
    :alt: Multiple selection
    :align: center
 
 Refer to the :guilabel:`views/bindings` section of the docs for more information.
 
-Task overview
+Service tasks
 -------------
 
 In the :guilabel:`tasks/task_management` page, you can find a summary of all existing tasks.

@@ -166,20 +166,24 @@ def get_object(obj_type, obj_id):
 def connection(id):
     parameters, device = Parameters.query.one(), retrieve(Device, id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
-    port = parameters.get_gotty_port()
+    port, ip = parameters.get_gotty_port(), device.ip_address
     cmd.extend(['-p', str(port)])
     if 'accept-once' in request.form:
         cmd.append('--once')
     if 'multiplexing' in request.form:
         cmd.extend(f'tmux new -A -s gotty{port}'.split())
+    if app.config['GOTTY_BYPASS_KEY_PROMPT']:
+        options = '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+    else:
+        options = ''
     if 'authentication' in request.form:
         if request.form['credentials'] == 'device':
             login, pwd, _ = get_device_credentials(app, device)
         else:
             login, pwd = get_user_credentials(app, current_user)
-        cmd.extend(f'sshpass -p {pwd} ssh {login}@{device.ip_address}'.split())
+        cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{ip}'.split())
     else:
-        cmd.extend(f'ssh {device.ip_address}'.split())
+        cmd.extend(f'ssh {options} {ip}'.split())
     Popen(cmd)
     return jsonify({
         'device': device.name,

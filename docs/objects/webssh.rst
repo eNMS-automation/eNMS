@@ -72,6 +72,14 @@ If the remote device is not in ``~/.ssh/known_hosts``, ``ssh`` prompts the user 
 
  export GOTTY_BYPASS_KEY_PROMPT=1
 
+This is equivalent to adding the following lines in ``/etc/ssh_config``:
+
+::
+
+ Host *
+     StrictHostKeyChecking no
+     UserKnownHostsFile /dev/null
+
 Connect to a device
 -------------------
 

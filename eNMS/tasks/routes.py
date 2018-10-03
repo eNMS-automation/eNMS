@@ -108,9 +108,8 @@ def show_logs(task_id):
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])
 @login_required
 def get_diff(task_id, v1, v2, n1=None, n2=None):
-    print(n1, n2)
     task = retrieve(Task, id=task_id)
-    if n1 and n2:
+    if n1 and n2 and n1 in task.logs[v1] and n2 in task.logs[v2]:
         first = str_dict(task.logs[v1][n1]).splitlines()
         second = str_dict(task.logs[v2][n2]).splitlines()
     else:

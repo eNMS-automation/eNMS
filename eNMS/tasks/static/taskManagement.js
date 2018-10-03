@@ -21,9 +21,7 @@ function addTask(mode, properties) {
   const status = properties.status == 'active' ? 'pause' : 'resume';
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showTaskLogs('${properties.id}')"></i>Logs</a></button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareTaskLogs('${properties.id}')"></i>Compare</a></button>`,
+    onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="showTaskModal('${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-success btn-xs"

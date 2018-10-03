@@ -68,7 +68,7 @@ function showTaskLogs(id) { // eslint-disable-line no-unused-vars
  * Show the compare logs modal for task.
  * @param {id} id - Task id.
  */
-function compareTaskLogs(id) { // eslint-disable-line no-unused-vars
+function showLogs(id) { // eslint-disable-line no-unused-vars
   taskId = id;
   $.ajax({
     type: 'POST',

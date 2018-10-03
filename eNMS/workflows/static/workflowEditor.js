@@ -331,8 +331,7 @@ function savePositions() {
 
 const action = {
   'Edit': showTaskModal,
-  'Logs': showTaskLogs,
-  'Compare': compareTaskLogs,
+  'Logs': showLogs,
   'Set as start': startTask,
   'Set as end': endTask,
   'Add task': showExistingTaskModal,

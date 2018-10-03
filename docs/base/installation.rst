@@ -139,3 +139,25 @@ Then, start the service and enable it to run at boot:
  systemctl start postgresql-9.6
  systemctl enable postgresql-9.6
 
+Database creation
+*****************
+
+At a minimum, we need to create a database for NetBox and assign it a username and password for authentication. This is done with the following commands.
+
+::
+
+ sudo -u postgres psql -c "CREATE DATABASE enms;"
+ sudo -u postgres psql -c "CREATE USER enms WITH PASSWORD 'strong-password-here';"
+ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE enms TO enms;"
+
+You can verify that authentication works issuing the following command and providing the configured password. (Replace ``localhost`` with your database server if using a remote database.)
+
+::
+
+ psql -U enms -W -h localhost enms
+
+If successful, you will enter a enms prompt. Type \q to exit.
+
+Update the configuration
+************************
+

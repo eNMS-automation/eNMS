@@ -6,14 +6,13 @@
     <ul class="nav navbar-nav navbar-right">
       <li class="">
         <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <img src="{{ url_for('admin_blueprint.static', filename='images/user.png') }}" alt="">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
           {{ current_user.name }}
           <span class=" fa fa-angle-down"></span>
         </a>
         <ul class="dropdown-menu dropdown-usermenu pull-right">
-          <li><a href="javascript:;"> Profile </a></li>
           <li><a href="javascript:;"> Settings </a></li>
-          <li><a href="/admin/logout"><i class="fa fa-sign-out pull-right"></i> Log out </a></li>
+          <li><a href="/admin/logout"><i class="fa fa-sign-out pull-right"></i>Log out</a></li>
         </ul>
       </li>
     </ul>

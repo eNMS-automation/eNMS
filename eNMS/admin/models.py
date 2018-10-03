@@ -21,17 +21,21 @@ class User(CustomBase, UserMixin):
 
     id = Column(Integer, primary_key=True)
     type = Column(String, default='admin')
-    name = Column(String(120), unique=True)
-    email = Column(String(120), unique=True)
-    access_rights = Column(String(120))
-    password = Column(String(30))
+    email = Column(String, unique=True)
+    name = Column(String, unique=True)
+    permission = Column(Integer)
+    password = Column(String)
     tasks = relationship('Task', back_populates='user')
+    permissions = {'base': 0, 'edit': 1, 'automate': 2, 'admin': 3}
 
     def update(self, **kwargs):
         if app.production:
             data = {'password': kwargs.pop('password')}
             vault_helper(app, f'user/{kwargs["name"]}', data)
         super().update(**kwargs)
+
+    def allowed(self, permission)
+        return self.permission >= permissions[permission]
 
     def __repr__(self):
         return self.name

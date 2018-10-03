@@ -16,6 +16,17 @@ def integrity_rollback(function):
     return wrapper
 
 
+def permission_required(permission):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if not current_user.allowed(permission):
+                abort(403)
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
 def str_dict(input, depth=0):
     tab = '\t' * depth
     if isinstance(input, list):

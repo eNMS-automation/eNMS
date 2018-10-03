@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_apscheduler import APScheduler
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -89,6 +89,24 @@ def configure_database(app):
         create_default_workflows()
 
 
+def configure_errors(app):
+    @login_manager.unauthorized_handler
+    def unauthorized_handler():
+        return render_template('errors/page_403.html'), 403
+
+    @app.errorhandler(403)
+    def authorization_required(error):
+        return render_template('errors/page_403.html'), 403
+
+    @app.errorhandler(404)
+    def not_found_error(error):
+        return render_template('errors/page_404.html'), 404
+
+    @app.errorhandler(500)
+    def internal_error(error):
+        return render_template('errors/page_500.html'), 500
+
+
 def configure_logs(app):
     logging.basicConfig(filename='error.log', level=logging.DEBUG)
     logger = logging.getLogger('netmiko')
@@ -106,6 +124,7 @@ def create_app(path, config):
     configure_database(app)
     configure_rest_api(app)
     configure_logs(app)
+    configure_errors(app)
     if app.production:
         app.vault_client = create_vault_client(app)
     return app

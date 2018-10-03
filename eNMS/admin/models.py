@@ -1,6 +1,7 @@
 from flask import current_app as app
 from flask_login import UserMixin
-from sqlalchemy import Column, Float, Integer, String
+from sqlalchemy import Column, Float, Integer, PickleType, String
+from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
 try:
@@ -24,7 +25,7 @@ class User(CustomBase, UserMixin):
     type = Column(String, default='admin')
     email = Column(String, unique=True)
     name = Column(String, unique=True)
-    permission = Column(Integer)
+    permissions = Column(MutableList.as_mutable(PickleType))
     password = Column(String)
     tasks = relationship('Task', back_populates='user')
 
@@ -35,7 +36,7 @@ class User(CustomBase, UserMixin):
         super().update(**kwargs)
 
     def allowed(self, permission):
-        return self.permission >= user_permissions[permission]
+        return permision in self.permissions
 
     def __repr__(self):
         return self.name

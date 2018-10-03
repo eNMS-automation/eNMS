@@ -25,13 +25,9 @@ class CreateAccountForm(FlaskForm):
 class AddUser(FlaskForm):
     name = TextField('Username')
     email = TextField('Email')
-    permissions = tuple(enumerate(user_permissions))
-    permission = SelectField('Permission', choices=permissions)
+    permission_choices = [(p, p) for p in user_permissions]
+    permissions = SelectMultipleField('Permissions', choices=permission_choices)
     password = PasswordField('Password')
-
-
-class DeleteUser(FlaskForm):
-    users = SelectMultipleField('Users', choices=())
 
 
 class TacacsServerForm(FlaskForm):

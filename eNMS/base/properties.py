@@ -97,12 +97,12 @@ user_public_properties = (
     'permission'
 )
 
-user_permissions = {
-    'default': 0,
-    'edit': 1,
-    'automate': 2,
-    'admin': 3
-}
+user_permissions = (
+    'Admin',
+    'User Management page',
+    'Administration Panel page',
+    'Add/edit/delete users'
+)
 
 log_public_properties = (
     'source',

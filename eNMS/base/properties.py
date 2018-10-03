@@ -106,7 +106,7 @@ user_permissions = (
     'Admin',
     'User Management page',
     'Administration Panel page',
-    'Add/edit/delete users'
+    'Manage users'
 )
 
 log_public_properties = (

@@ -75,6 +75,9 @@ function processData() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#edit-form').serialize(),
       success: function(user) {
+        if (!user) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        }
         const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'create';
         addUser(mode, user);
         const message = `User '${user.name}'
@@ -96,6 +99,9 @@ function deleteUser(userId) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/admin/delete_${userId}`,
     success: function(userName) {
+      if (!userName) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      }
       alertify.notify(`User '${userName}' deleted.`, 'error', 5);
     },
   });

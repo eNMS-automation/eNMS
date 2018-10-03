@@ -1,4 +1,4 @@
-from flask import abort
+from flask import abort, jsonify
 from flask_login import current_user
 from functools import wraps
 from sqlalchemy import exc
@@ -19,12 +19,15 @@ def integrity_rollback(function):
     return wrapper
 
 
-def permission_required(permission):
+def permission_required(permission, redirect=True):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if not current_user.allowed(permission):
-                abort(403)
+                if redirect:
+                    abort(403)
+                else:
+                    return jsonify(False)
             return f(*args, **kwargs)
         return decorated_function
     return decorator

@@ -147,6 +147,8 @@ def admninistration():
 
 
 @blueprint.route('/process_user', methods=['POST'])
+@login_required
+@permission_required('Manage users', redirect=False)
 def process_user():
     user_data = request.form.to_dict()
     user_data['permissions'] = request.form.getlist('permissions')
@@ -162,6 +164,7 @@ def get_user(user_id):
 
 @blueprint.route('/delete_<user_id>', methods=['POST'])
 @login_required
+@permission_required('Manage users', redirect=False)
 def delete_user(user_id):
     user = retrieve(User, id=user_id)
     db.session.delete(user)

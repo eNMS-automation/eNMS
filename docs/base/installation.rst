@@ -114,17 +114,28 @@ If a recent enough version of PostgreSQL is not available through your distribut
  sudo apt-get update
  sudo apt-get install -y postgresql libpq-dev
 
-  - Centos: CentOS 7.4 does not ship with a recent enough version of PostgreSQL, so it will need to be installed from an external repository. The instructions below show the installation of PostgreSQL 9.6.
+Installation on Centos
+**********************
+
+Centos: CentOS 7.4 does not ship with a recent enough version of PostgreSQL, so it will need to be installed from an external repository. The instructions below show the installation of PostgreSQL 9.6.
 
 ::
 
-  yum install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
-  yum install postgresql96 postgresql96-server postgresql96-devel
-  /usr/pgsql-9.6/bin/postgresql96-setup initdb
+ yum install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+ yum install postgresql96 postgresql96-server postgresql96-devel
+ /usr/pgsql-9.6/bin/postgresql96-setup initdb
 
 CentOS users should modify the PostgreSQL configuration to accept password-based authentication by replacing ``ident`` with ``md5`` for all host entries within ``/var/lib/pgsql/9.6/data/pg_hba.conf``. For example:
 
 ::
 
-  host    all             all             127.0.0.1/32            md5
-  host    all             all             ::1/128                 md5
+ host    all             all             127.0.0.1/32            md5
+ host    all             all             ::1/128                 md5
+
+Then, start the service and enable it to run at boot:
+
+::
+
+ systemctl start postgresql-9.6
+ systemctl enable postgresql-9.6
+

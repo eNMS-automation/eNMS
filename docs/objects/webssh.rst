@@ -27,7 +27,7 @@ You can change this range directly from the web UI, in :guilabel:`admin/paramete
 Custom URL
 ----------
 
-eNMS automatically redirects you to the address and port GoTTY is listening to, using JavaScript variables ``window.location.hostname`` and ``window.location.protocol``. If these variables do not redirect to the right URL, you can tell eNMS which protocol and URL to use by setting the ``GOTTY_SERVER_ADDR`` in ``config.py``.
+eNMS automatically redirects you to the address and port GoTTY is listening to, using JavaScript variables ``window.location.hostname`` and ``window.location.protocol``. If these variables do not redirect to the right URL, you can tell eNMS which protocol and URL to use by configuring the ``GOTTY_SERVER_ADDR`` environment variable.
 
 ::
 
@@ -57,7 +57,20 @@ With Nginx, this can be accomplished with the following `location` :
 
 A full example of nginx configuration can be found in ``eNMS/nginx``.
 
-eNMS does not by default perform any port redirection: you must set ``GOTTY_PORT_REDIRECTION`` to ``True`` in ``/eNMS/config.py`` to enable it.
+eNMS does not by default perform any port redirection: you must set the ``GOTTY_PORT_REDIRECTION`` environment to ``1`` to enable it.
+
+::
+
+ export GOTTY_PORT_REDIRECTION=1
+
+Ignore fingerprint prompt
+-------------------------
+
+If the remote device is not in ``~/.ssh/known_hosts``, ``ssh`` prompts the user to add ssh fingerprint to ``known_hosts`` file, causing GoTTY to fail. To bypass that prompt, you can set the ``GOTTY_BYPASS_KEY_PROMPT`` to 1 to run the ``ssh`` command with the options ``-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null``.
+
+::
+
+ export GOTTY_BYPASS_KEY_PROMPT=1
 
 Connect to a device
 -------------------

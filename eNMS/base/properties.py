@@ -94,7 +94,7 @@ workflow_edge_properties = (
 user_public_properties = (
     'name',
     'email',
-    'permission'
+    'permissions'
 )
 
 user_permissions = (
@@ -160,7 +160,7 @@ cls_to_properties = {k: ('id',) + v for k, v in cls_to_properties.items()}
 default_diagrams_properties = {
     'device': 'vendor',
     'link': 'location',
-    'user': 'access_rights',
+    'user': 'name',
     'service': 'type',
     'workflow': 'vendor',
     'task': 'type'

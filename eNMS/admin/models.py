@@ -14,7 +14,6 @@ from eNMS import db, scheduler
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import vault_helper
 from eNMS.base.models import Log
-from eNMS.base.properties import user_permissions
 
 
 class User(CustomBase, UserMixin):
@@ -36,7 +35,7 @@ class User(CustomBase, UserMixin):
         super().update(**kwargs)
 
     def allowed(self, permission):
-        return permision in self.permissions
+        return permission in self.permissions
 
     def __repr__(self):
         return self.name

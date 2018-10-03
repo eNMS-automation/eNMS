@@ -78,8 +78,8 @@ Once this is done, you must tell eNMS how to connect to the vault:
 
 eNMS can also unseal the Vault automatically at start time.
 This mechanism is disabled by default. To activate it, you need to:
-  - set the ``UNSEAL_VAULT`` variable in ``config.py`` to ``True``
-  - set the UNSEAL_VAULT_KEYx (``x`` in [1, 5]) environment variables :
+ - set the ``UNSEAL_VAULT`` variable in ``config.py`` to ``True``
+ - set the UNSEAL_VAULT_KEYx (``x`` in [1, 5]) environment variables :
 
 ::
 

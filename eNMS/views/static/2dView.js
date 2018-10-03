@@ -19,6 +19,10 @@ view: false
 */
 
 let markers;
+// hiddenMarkers contains all markers that were undisplayed because of a 
+// pool filter. We keep track of them so that they are not selected by the
+// boxzoomend when they are hidden.
+let hiddenMarkers;
 
 const map = L.map('mapid').setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -154,7 +158,8 @@ function unselectAll() {
 map.on('boxzoomend', function(e) {
   unselectAll();
   for (let i = 0; i < markersArray.length; i++) {
-    if (e.boxZoomBounds.contains(markersArray[i].getLatLng())) {
+    if (e.boxZoomBounds.contains(markersArray[i].getLatLng())
+      && !hiddenMarkers.includes(markersArray[i])) {
       markersArray[i].setIcon(markersArray[i].selected_icon);
       selection.push(markersArray[i].device_id);
     }
@@ -173,6 +178,7 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: 'json',
     success: function(objects) {
+      hiddenMarkers = [];
       const devicesId = objects.devices.map((n) => n.id);
       const linksId = objects.links.map((l) => l.id);
       for (let i = 0; i < markersArray.length; i++) {
@@ -180,6 +186,7 @@ $('#select-filters').on('change', function() {
           markersArray[i].addTo(map);
         } else {
           markersArray[i].removeFrom(map);
+          hiddenMarkers.push(markersArray[i]);
         }
       }
       for (let i = 0; i < polylinesArray.length; i++) {

@@ -13,6 +13,7 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
  * @param {properties} properties - Properties of the user.
  */
 function addUser(mode, properties) {
+  console.log(fields)
   let values = [];
   for (let i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);

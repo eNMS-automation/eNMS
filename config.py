@@ -22,7 +22,7 @@ class Config(object):
     # WebSSH (GoTTY)
     GOTTY_PORT_REDIRECTION = environ.get('GOTTY_PORT_REDIRECTION')
     GOTTY_SERVER_ADDR = environ.get('GOTTY_SERVER_ADDR')
-    GOTTY_BYPASS_PROMPT = environ.get('GOTTY_BYPASS_PROMPT')
+    GOTTY_BYPASS_KEY_PROMPT = environ.get('GOTTY_BYPASS_KEY_PROMPT')
 
 
 class DebugConfig(Config):
@@ -79,4 +79,3 @@ config_dict = {
     'Debug': DebugConfig,
     'Selenium': SeleniumConfig
 }
- 

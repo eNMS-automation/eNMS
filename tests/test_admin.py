@@ -10,7 +10,7 @@ def test_user_management(user_client):
         dict_user = {
             'name': user,
             'email': '{}@test.com'.format(user),
-            'access_rights': 'Read-only',
+            'permissions': ['Admin'],
             'password': user,
         }
         user_client.post('/admin/process_user', data=dict_user)

@@ -148,7 +148,9 @@ def admninistration():
 
 @blueprint.route('/process_user', methods=['POST'])
 def process_user():
-    return jsonify(factory(User, **request.form.to_dict()).serialized)
+    user_data = request.form.to_dict()
+    user_data['permissions'] = request.form.getlist('permissions')
+    return jsonify(factory(User, **user_data).serialized)
 
 
 @blueprint.route('/get_<user_id>', methods=['POST'])

@@ -93,6 +93,11 @@ workflow_edge_properties = (
 
 user_public_properties = (
     'name',
+    'email'
+)
+
+user_serialized_properties = (
+    'name',
     'email',
     'permissions'
 )
@@ -149,7 +154,7 @@ cls_to_properties = {
     'Parameters': parameters_public_properties,
     'Workflow': workflow_public_properties,
     'WorkflowEdge': workflow_edge_properties,
-    'User': user_public_properties,
+    'User': user_serialized_properties,
     'Log': log_public_properties,
     'LogRule': log_rule_public_properties,
     'Task': task_serialized_properties

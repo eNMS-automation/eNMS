@@ -1,9 +1,8 @@
 /*
 global
 alertify: false
-compareTaskLogs: false
 partial: false
-showTaskLogs: false
+showLogs: false
 showTaskModal: false
 vis: false
 workflow: true

@@ -13,7 +13,7 @@
     </div>
   </div>
 </div>
-<div id="compare-logs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="logs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -26,22 +26,22 @@
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>First device</label>
-            {{ compare_form.first_device(class="form-control") }}
+            {{ logs_form.first_device(class="form-control") }}
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>First version</label>
-            {{ compare_form.first_version(class="form-control") }}
+            {{ logs_form.first_version(class="form-control") }}
           </div>
 
         </div>
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>Second device</label>
-            {{ compare_form.second_device(class="form-control") }}
+            {{ logs_form.second_device(class="form-control") }}
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>Second version</label>
-            {{ compare_form.second_version(class="form-control") }}
+            {{ logs_form.second_version(class="form-control") }}
           </div>
         </div><br>
         <div class="row">

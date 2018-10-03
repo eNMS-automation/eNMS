@@ -104,13 +104,15 @@ def show_logs(task_id):
     return jsonify(dumps(retrieve(Task, id=task_id).logs, indent=4))
 
 
+@blueprint.route('/get_diff/<task_id>/<v1>/<v2>', methods=['POST'])
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])
 @login_required
 def get_diff(task_id, v1, v2, n1=None, n2=None):
+    print(n1, n2)
     task = retrieve(Task, id=task_id)
     if n1 and n2:
-        first = str_dict(task.logs[v1]['result'][n1]).splitlines()
-        second = str_dict(task.logs[v2]['result'][n2]).splitlines()
+        first = str_dict(task.logs[v1][n1]).splitlines()
+        second = str_dict(task.logs[v2][n2]).splitlines()
     else:
         first = str_dict(task.logs[v1]).splitlines()
         second = str_dict(task.logs[v2]).splitlines()

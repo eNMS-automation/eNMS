@@ -88,7 +88,7 @@ function compareTaskLogs(id) { // eslint-disable-line no-unused-vars
       }
     },
   });
-  $('#compare-logs-modal').modal('show');
+  $('#logs-modal').modal('show');
 }
 
 const dropDowns = '#first_version,#second_version,#first_device,#second_device';
@@ -98,9 +98,10 @@ $(dropDowns).on('change', function() {
   const v2 = $('#second_version').val();
   const n1 = $('#first_device').val();
   const n2 = $('#second_device').val();
+  const nodeSlugs = n1 && n2 ? `/${n1}/${n2}` : '';
   $.ajax({
     type: 'POST',
-    url: `/tasks/get_diff/${taskId}/${v1}/${v2}/${n1}/${n2}`,
+    url: `/tasks/get_diff/${taskId}/${v1}/${v2}${nodeSlugs}`,
     dataType: 'json',
     success: function(data) {
       $('#view').append(diffview.buildView({

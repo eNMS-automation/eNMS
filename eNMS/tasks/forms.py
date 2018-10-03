@@ -22,7 +22,7 @@ class SchedulingForm(FlaskForm):
     job = SelectField('', choices=())
 
 
-class CompareForm(FlaskForm):
+class LogsForm(FlaskForm):
     first_version = SelectField('', choices=())
     second_version = SelectField('', choices=())
     first_device = SelectField('', choices=())

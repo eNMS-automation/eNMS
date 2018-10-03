@@ -7,7 +7,7 @@ from eNMS.base.helpers import retrieve
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Device, Pool
 from eNMS.services.models import Job
-from eNMS.tasks.forms import CompareForm, SchedulingForm
+from eNMS.tasks.forms import LogsForm, SchedulingForm
 from eNMS.tasks.models import Task
 from eNMS.workflows import blueprint
 from eNMS.workflows.forms import (
@@ -51,7 +51,7 @@ def workflow_editor(workflow_id=None):
         add_existing_task_form=add_existing_task_form,
         workflow_editor_form=workflow_editor_form,
         scheduling_form=scheduling_form,
-        compare_form=CompareForm(request.form),
+        logs_form=LogsForm(request.form),
         names=pretty_names,
         workflow=workflow.serialized if workflow_id else None
     )

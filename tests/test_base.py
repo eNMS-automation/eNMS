@@ -11,8 +11,7 @@ urls = {
     '/admin': (
         '/user_management',
         '/login',
-        '/administration',
-        '/parameters'
+        '/administration'
     ),
     '/objects': (
         '/device_management',

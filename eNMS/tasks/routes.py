@@ -9,7 +9,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
-from eNMS.tasks.forms import CompareForm, SchedulingForm
+from eNMS.tasks.forms import LogsForm, SchedulingForm
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.objects.models import Pool, Device
 from eNMS.services.models import Job
@@ -28,7 +28,7 @@ def task_management(task_type):
         f'{task_type}_tasks.html',
         fields=task_public_properties,
         tasks=task_class.serialize(),
-        compare_form=CompareForm(request.form),
+        logs_form=LogsForm(request.form),
         scheduling_form=scheduling_form
     )
 
@@ -106,10 +106,14 @@ def show_logs(task_id):
 
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])
 @login_required
-def get_diff(task_id, v1, v2, n1, n2):
+def get_diff(task_id, v1, v2, n1=None, n2=None):
     task = retrieve(Task, id=task_id)
-    first = str_dict(task.logs[v1]['result'][n1]).splitlines()
-    second = str_dict(task.logs[v2]['result'][n2]).splitlines()
+    if n1 and n2:
+        first = str_dict(task.logs[v1]['result'][n1]).splitlines()
+        second = str_dict(task.logs[v2]['result'][n2]).splitlines()
+    else:
+        first = str_dict(task.logs[v1]).splitlines()
+        second = str_dict(task.logs[v2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
     return jsonify({'first': first, 'second': second, 'opcodes': opcodes})
 

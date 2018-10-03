@@ -46,7 +46,7 @@ from eNMS.objects.models import Device
 
 @blueprint.route('/user_management')
 @login_required
-@permission_required('admin')
+@permission_required('User Management')
 def users():
     form = AddUser(request.form)
     return render_template(
@@ -117,6 +117,7 @@ def logout():
 
 @blueprint.route('/administration')
 @login_required
+@permission_required('Administration')
 def admninistration():
     try:
         tacacs_server = db.session.query(TacacsServer).one()

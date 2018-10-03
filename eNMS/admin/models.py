@@ -35,7 +35,7 @@ class User(CustomBase, UserMixin):
         super().update(**kwargs)
 
     def allowed(self, permission):
-        return permission in self.permissions
+        return permission in self.permissions or 'Admin' in self.permissions
 
     def __repr__(self):
         return self.name

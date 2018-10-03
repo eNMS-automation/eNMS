@@ -18,12 +18,14 @@
             <li><a href="/log_automation">Log Automation</a></li>
           </ul>
         </li>
-        <li><a><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="/admin/user_management">User Management</a></li>
-            <li><a href="/admin/administration">Administration Panel</a></li>
-          </ul>
-        </li>
+        {% if 'Admin' in current_user.permissions %}
+          <li><a><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="/admin/user_management">User Management</a></li>
+              <li><a href="/admin/administration">Administration Panel</a></li>
+            </ul>
+          </li>
+        {% endif %}
         <li><a><i class="fa fa-sitemap"></i>Inventory<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/objects/device_management">Device Management</a></li>

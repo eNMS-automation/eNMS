@@ -51,7 +51,7 @@ def create_default_users():
         'name': 'cisco',
         'email': 'cisco@cisco.com',
         'password': 'cisco',
-        'permissions': ['admin']
+        'permissions': ['Admin']
     })
 
 

@@ -6,7 +6,6 @@ table: false
 */
 
 let taskId;
-let taskLogs;
 
 /**
  * Show the scheduling modal for task.

@@ -22,10 +22,6 @@ class SchedulingForm(FlaskForm):
     job = SelectField('', choices=())
 
 
-class LogsForm(FlaskForm):
-    version = SelectField('', choices=())
-
-
 class CompareLogsForm(FlaskForm):
     first_version = SelectField('', choices=())
     second_version = SelectField('', choices=())

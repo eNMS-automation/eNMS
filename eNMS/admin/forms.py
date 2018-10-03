@@ -24,10 +24,11 @@ class CreateAccountForm(FlaskForm):
 
 class AddUser(FlaskForm):
     name = TextField('Username')
+    password = PasswordField('Password')
     email = TextField('Email')
     permission_choices = [(p, p) for p in user_permissions]
     permissions = SelectMultipleField('Permissions', choices=permission_choices)
-    password = PasswordField('Password')
+    
 
 
 class TacacsServerForm(FlaskForm):

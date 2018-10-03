@@ -13,7 +13,7 @@
             {% for field in form if field.widget.input_type != 'hidden'  %}
               <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
               <div class="col-md-8 col-sm-8 col-xs-12">
-                {{ field(id=field.name, class="form-control required") }}
+                {{ field(id=field.name, class="form-control required", size=15) }}
               </div><br><br>
             {% endfor %}
           </div>

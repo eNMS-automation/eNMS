@@ -41,6 +41,7 @@ function addUser(mode, properties) {
  * Display user modal for creation.
  */
 function showModal() { // eslint-disable-line no-unused-vars
+  $('#edit-form').trigger('reset');
   $('#title').text('Add a new user');
   $('#edit').modal('show');
 }

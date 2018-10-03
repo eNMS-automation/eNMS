@@ -142,7 +142,7 @@ Then, start the service and enable it to run at boot:
 Database creation
 *****************
 
-At a minimum, we need to create a database for NetBox and assign it a username and password for authentication. This is done with the following commands.
+At a minimum, we need to create a database for eNMS and assign it a username and password for authentication. This is done with the following commands.
 
 ::
 

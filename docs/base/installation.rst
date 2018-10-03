@@ -96,3 +96,35 @@ You also have to tell eNMS the address of your database by setting the "ENMS_DAT
  export ENMS_DATABASE_URL=database-address
 
 In case this environment variable is not set, eNMS will default to using a SQLite database.
+
+Run eNMS with a PostgreSQL database
+-----------------------------------
+
+In production, it is advised to use a PostgreSQL database to store data. This can be hosted locally or on a remote server. 
+
+.. note:: The installation instructions provided here have been tested to work on Ubuntu 16.04 and CentOS 7.4. The particular commands needed to install dependencies on other distributions may vary significantly.
+
+Installation on Ubuntu
+**********************
+
+If a recent enough version of PostgreSQL is not available through your distribution's package manager, you'll need to install it from an official PostgreSQL repository.
+
+::
+
+ sudo apt-get update
+ sudo apt-get install -y postgresql libpq-dev
+
+  - Centos: CentOS 7.4 does not ship with a recent enough version of PostgreSQL, so it will need to be installed from an external repository. The instructions below show the installation of PostgreSQL 9.6.
+
+::
+
+  yum install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+  yum install postgresql96 postgresql96-server postgresql96-devel
+  /usr/pgsql-9.6/bin/postgresql96-setup initdb
+
+CentOS users should modify the PostgreSQL configuration to accept password-based authentication by replacing ``ident`` with ``md5`` for all host entries within ``/var/lib/pgsql/9.6/data/pg_hba.conf``. For example:
+
+::
+
+  host    all             all             127.0.0.1/32            md5
+  host    all             all             ::1/128                 md5

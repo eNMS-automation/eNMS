@@ -9,7 +9,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
-from eNMS.tasks.forms import LogsForm, SchedulingForm
+from eNMS.tasks.forms import CompareLogsForm, LogsForm, SchedulingForm
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.objects.models import Pool, Device
 from eNMS.services.models import Job
@@ -26,6 +26,7 @@ def task_management(task_type):
     task_class = ServiceTask if task_type == 'service' else WorkflowTask
     return render_template(
         f'{task_type}_tasks.html',
+        compare_logs_form=CompareLogsForm(request.form),
         fields=task_public_properties,
         tasks=task_class.serialize(),
         logs_form=LogsForm(request.form),
@@ -123,8 +124,12 @@ def get_diff(task_id, v1, v2, n1=None, n2=None):
 @login_required
 def compare_logs(task_id):
     task = retrieve(Task, id=task_id)
+    if hasattr(task, 'devices'):
+        devices = [device.name for device in task.devices]
+    else:
+        devices = []
     results = {
-        'devices': [device.name for device in task.devices],
+        'devices': devices,
         'versions': list(task.logs)
     }
     return jsonify(results)

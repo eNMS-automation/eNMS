@@ -8,6 +8,7 @@
         <h4 class="modal-title" id="title"></h4>
       </div>
       <div class="modal-body">
+        {{ logs_form.version(class="form-control") }}
         <pre id="logs"></pre>
       </div>
     </div>
@@ -26,22 +27,22 @@
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>First device</label>
-            {{ logs_form.first_device(class="form-control") }}
+            {{ compare_logs_form.first_device(class="form-control") }}
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>First version</label>
-            {{ logs_form.first_version(class="form-control") }}
+            {{ compare_logs_form.first_version(class="form-control") }}
           </div>
 
         </div>
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>Second device</label>
-            {{ logs_form.second_device(class="form-control") }}
+            {{ compare_logs_form.second_device(class="form-control") }}
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <label>Second version</label>
-            {{ logs_form.second_version(class="form-control") }}
+            {{ compare_logs_form.second_version(class="form-control") }}
           </div>
         </div><br>
         <div class="row">

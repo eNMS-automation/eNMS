@@ -6,6 +6,7 @@ table: false
 */
 
 let taskId;
+let taskLogs;
 
 /**
  * Show the scheduling modal for task.
@@ -58,7 +59,11 @@ function showTaskLogs(id) { // eslint-disable-line no-unused-vars
     url: `/tasks/show_logs/${id}`,
     dataType: 'json',
     success: function(logs) {
-      $('#logs').text(logs);
+      taskLogs = logs;
+      for (const key of Object.keys(logs)) {
+        $('#version').append($('<option></option>')
+          .attr('value', key).text(key));
+      }
     },
   });
   $(`#show-logs-modal`).modal('show');
@@ -90,6 +95,12 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
   });
   $('#logs-modal').modal('show');
 }
+
+$('#version').on('change', function() {
+  $('#logs').empty();
+  $('#logs').append(taskLogs[$('#version').val()]);
+  });
+});
 
 const dropDowns = '#first_version,#second_version,#first_device,#second_device';
 $(dropDowns).on('change', function() {

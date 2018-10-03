@@ -132,24 +132,16 @@ def admninistration():
         opennms_server = None
     return render_template(
         'administration.html',
+        geographical_parameters_form=GeographicalParametersForm(request.form),
+        gotty_parameters_form=GottyParametersForm(request.form),
         netbox_form=NetboxForm(request.form),
+        parameters=db.session.query(Parameters).one(),
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),
         opennms_form=OpenNmsForm(request.form),
         tacacs_server=tacacs_server,
         syslog_server=syslog_server,
         opennms_server=opennms_server
-    )
-
-
-@blueprint.route('/parameters')
-@login_required
-def parameters():
-    return render_template(
-        'parameters.html',
-        geographical_parameters_form=GeographicalParametersForm(request.form),
-        gotty_parameters_form=GottyParametersForm(request.form),
-        parameters=db.session.query(Parameters).one()
     )
 
 

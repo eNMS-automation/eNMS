@@ -40,11 +40,18 @@ def create_service_classes():
                 }.get(type(col.type), str)
 
 
-def create_default_user():
+def create_default_users():
+    factory(User, **{
+        'name': 'p2',
+        'email': 'p2@p2.com',
+        'password': 'p2',
+        'permission': 2
+    })
     factory(User, **{
         'name': 'cisco',
         'email': 'cisco@cisco.com',
-        'password': 'cisco'
+        'password': 'cisco',
+        'permission': 3
     })
 
 

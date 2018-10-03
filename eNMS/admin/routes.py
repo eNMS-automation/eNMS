@@ -38,20 +38,20 @@ from eNMS.admin.models import (
     User,
     TacacsServer
 )
-from eNMS.admin.properties import user_search_properties
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import retrieve, vault_helper
-from eNMS.base.properties import pretty_names
+from eNMS.base.helpers import permission_required, retrieve, vault_helper
+from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.objects.models import Device
 
 
 @blueprint.route('/user_management')
 @login_required
+@permission_required('admin')
 def users():
     form = AddUser(request.form)
     return render_template(
         'users_overview.html',
-        fields=user_search_properties,
+        fields=user_public_properties,
         names=pretty_names,
         users=User.serialize(),
         form=form

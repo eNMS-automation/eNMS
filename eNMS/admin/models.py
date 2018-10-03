@@ -13,6 +13,7 @@ from eNMS import db, scheduler
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import vault_helper
 from eNMS.base.models import Log
+from eNMS.base.properties import user_permissions
 
 
 class User(CustomBase, UserMixin):
@@ -26,7 +27,6 @@ class User(CustomBase, UserMixin):
     permission = Column(Integer)
     password = Column(String)
     tasks = relationship('Task', back_populates='user')
-    permissions = {'base': 0, 'edit': 1, 'automate': 2, 'admin': 3}
 
     def update(self, **kwargs):
         if app.production:
@@ -34,8 +34,8 @@ class User(CustomBase, UserMixin):
             vault_helper(app, f'user/{kwargs["name"]}', data)
         super().update(**kwargs)
 
-    def allowed(self, permission)
-        return self.permission >= permissions[permission]
+    def allowed(self, permission):
+        return self.permission >= user_permissions[permission]
 
     def __repr__(self):
         return self.name

@@ -94,8 +94,15 @@ workflow_edge_properties = (
 user_public_properties = (
     'name',
     'email',
-    'access_rights'
+    'permission'
 )
+
+user_permissions = {
+    'default': 0,
+    'edit': 1,
+    'automate': 2,
+    'admin': 3
+}
 
 log_public_properties = (
     'source',
@@ -234,6 +241,7 @@ pretty_names = {
     'os_version': 'OS version',
     'pass_device_properties': 'Pass device properties to the playbook',
     'password': 'Password',
+    'permission': 'Permission',
     'positions': 'Positions',
     'recurrent': 'Recurrent',
     'enable_password': 'Enable password',

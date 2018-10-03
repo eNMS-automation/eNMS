@@ -8,7 +8,7 @@ from wtforms import (
     SelectMultipleField
 )
 
-from eNMS.base.properties import device_subtypes
+from eNMS.base.properties import device_subtypes, user_permissions
 
 
 class LoginForm(FlaskForm):
@@ -25,8 +25,8 @@ class CreateAccountForm(FlaskForm):
 class AddUser(FlaskForm):
     name = TextField('Username')
     email = TextField('Email')
-    access_right_choices = (('Read-only',) * 2, ('Read-write',) * 2)
-    access_rights = SelectField('Access rights', choices=access_right_choices)
+    permissions = tuple(enumerate(user_permissions))
+    permission = SelectField('Permission', choices=permissions)
     password = PasswordField('Password')
 
 

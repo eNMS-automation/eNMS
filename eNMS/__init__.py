@@ -18,7 +18,7 @@ from eNMS.base.default import (
     create_default_pools,
     create_default_services,
     create_default_tasks,
-    create_default_user,
+    create_default_users,
     create_default_workflows,
     create_service_classes
 )
@@ -80,7 +80,7 @@ def configure_database(app):
     def create_default():
         create_service_classes()
         db.create_all()
-        create_default_user()
+        create_default_users()
         create_default_parameters()
         create_default_network_topology(app)
         create_default_pools()

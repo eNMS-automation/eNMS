@@ -20,6 +20,7 @@ class CustomBase(db.Model):
 
     def update(self, **kwargs):
         for property, value in kwargs.items():
+            print(property, value)
             property_type = property_types.get(property, None)
             if property_type == bool or 'regex' in property:
                 value = property in kwargs
@@ -32,7 +33,7 @@ class CustomBase(db.Model):
     @property
     def properties(self):
         class_name = self.__tablename__
-        return {p: str(getattr(self, p)) for p in cls_to_properties[class_name]}
+        return {p: getattr(self, p) for p in cls_to_properties[class_name]}
 
     @property
     def serialized(self):

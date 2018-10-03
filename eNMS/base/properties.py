@@ -275,5 +275,5 @@ property_types = {
     'pass_device_properties': bool,
     'payload': dict,
     'contentregex': bool,
-    'sourceregex': bool,
+    'sourceregex': bool
 }

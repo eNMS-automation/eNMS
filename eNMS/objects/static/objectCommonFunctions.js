@@ -209,6 +209,9 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
       }, 300);
       const message = `Connection to ${result.device} on port ${result.port}.`;
       alertify.notify(message, 'success', 15);
+      const warning = `Don't forget to turn off the pop-up blocker !`
+      alertify.notify(warning, 'error', 20);
+      $('#connection-parameters').modal('hide');
     },
   });
 }

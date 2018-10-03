@@ -33,7 +33,6 @@ class CustomBase(db.Model):
     def properties(self):
         class_name, result = self.__tablename__, {}
         for property in cls_to_properties[class_name]:
-            print(property, getattr(self, property))
             try:
                 dumps(getattr(self, property))
                 result[property] = getattr(self, property)

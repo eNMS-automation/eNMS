@@ -42,15 +42,15 @@ def create_service_classes():
 
 def create_default_users():
     factory(User, **{
-        'name': 'p2',
-        'email': 'p2@p2.com',
-        'password': 'p2',
-        'permissions': ['User Management']
-    })
-    factory(User, **{
         'name': 'cisco',
         'email': 'cisco@cisco.com',
         'password': 'cisco',
+        'permissions': []
+    })
+    factory(User, **{
+        'name': 'admin',
+        'email': 'admin@admin.com',
+        'password': 'admin',
         'permissions': ['Admin']
     })
 

@@ -53,17 +53,13 @@ function runTask(id) { // eslint-disable-line no-unused-vars
  * Show the logs modal for a task.
  * @param {id} id - Task id.
  */
-function showTaskLogs(id) { // eslint-disable-line no-unused-vars
+function showLogs(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/tasks/show_logs/${id}`,
     dataType: 'json',
     success: function(logs) {
-      taskLogs = logs;
-      for (const key of Object.keys(logs)) {
-        $('#version').append($('<option></option>')
-          .attr('value', key).text(key));
-      }
+      $('#logs').text(logs);
     },
   });
   $(`#show-logs-modal`).modal('show');
@@ -73,7 +69,7 @@ function showTaskLogs(id) { // eslint-disable-line no-unused-vars
  * Show the compare logs modal for task.
  * @param {id} id - Task id.
  */
-function showLogs(id) { // eslint-disable-line no-unused-vars
+function compareLogs(id) { // eslint-disable-line no-unused-vars
   taskId = id;
   $.ajax({
     type: 'POST',
@@ -95,12 +91,6 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
   });
   $('#logs-modal').modal('show');
 }
-
-$('#version').on('change', function() {
-  $('#logs').empty();
-  $('#logs').append(taskLogs[$('#version').val()]);
-  });
-});
 
 const dropDowns = '#first_version,#second_version,#first_device,#second_device';
 $(dropDowns).on('change', function() {

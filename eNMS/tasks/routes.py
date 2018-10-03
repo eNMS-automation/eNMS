@@ -124,10 +124,6 @@ def get_diff(task_id, v1, v2, n1=None, n2=None):
 @login_required
 def compare_logs(task_id):
     task = retrieve(Task, id=task_id)
-    if hasattr(task, 'devices'):
-        devices = [device.name for device in task.devices]
-    else:
-        devices = []
     results = {
         'devices': devices,
         'versions': list(task.logs)

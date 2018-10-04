@@ -91,16 +91,16 @@ class Task(CustomBase):
             pass
         db.session.commit()
 
-    def task_sources(self, workflow, type):
+    def task_sources(self, workflow, type='all'):
         return [
             x.source for x in self.sources
-            if x.type == type and x.workflow == workflow
+            if (type == 'all' or x.type == type) and x.workflow == workflow
         ]
 
-    def task_neighbors(self, workflow, type):
+    def task_successors(self, workflow, type='all'):
         return [
             x.destination for x in self.destinations
-            if x.type == type and x.workflow == workflow
+            if (type == 'all' or x.type == type) and x.workflow == workflow
         ]
 
     def schedule(self, run_now=True):
@@ -201,22 +201,26 @@ class WorkflowTask(Task):
         start_task = retrieve(Task, id=self.workflow.start_task)
         if not start_task:
             return False, {runtime: 'No start task in the workflow.'}
-        layer, visited = {start_task}, set()
+        tasks, visited = [start_task], set()
         workflow_results = {}
-        while layer:
-            new_layer = set()
-            for task in layer:
-                visited.add(task)
-                task_results = task.job(workflow, workflow_results)
-                success = task_results['success']
-                if task.id == self.workflow.end_task:
-                    workflow_results['success'] = success
-                for neighbor in task.task_neighbors(self.workflow, success):
-                    if neighbor not in visited:
-                        new_layer.add(neighbor)
-                workflow_results[task.name] = task_results
-                sleep(task.waiting_time)
-            layer = new_layer
+        while tasks:
+            task = tasks.pop()
+            # We check that all predecessors of the task have been visited
+            # to ensure that the task will receive the full payload.
+            # If it isn't the case, we put it back in the heap and move on to
+            # another task.
+            if any(n not in visited for n in task.task_sources(self.workflow)):
+                continue
+            visited.add(task)
+            task_results = task.job(workflow, workflow_results)
+            success = task_results['success']
+            if task.id == self.workflow.end_task:
+                workflow_results['success'] = success
+            for successor in task.task_successors(self.workflow, success):
+                if successor not in visited:
+                    tasks.append(successor)
+            workflow_results[task.name] = task_results
+            sleep(task.waiting_time)
         self.logs[runtime] = workflow_results
         db.session.commit()
         return workflow_results

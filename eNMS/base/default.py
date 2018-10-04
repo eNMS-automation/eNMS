@@ -223,12 +223,11 @@ def create_napalm_workflow():
         task.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
 
-@integrity_rollback
 def create_payload_transfer_workflow():
     tasks = []
     services = [{
         'name': 'GET_router8',
-        'type': 'Rest Call Service',
+        'type': service_classes['Rest Call Service'],
         'description': 'Use GET ReST call on router8',
         'content_match': '',
         'call_type': 'GET',
@@ -236,13 +235,14 @@ def create_payload_transfer_workflow():
         'payload': ''
     }] + [{
             'name': f'service_napalm_getter_{getter}',
-            'type': 'Napalm Getters Service',
+            'type': service_classes['Napalm Getters Service'],
             'description': f'Getter: {getter}',
             'driver': 'ios',
             'content_match': '',
             'getters': [getter]
         } for getter in (
             'get_facts',
+            'get_environment',
             'get_interfaces',
             'get_interfaces_ip',
             'get_config'

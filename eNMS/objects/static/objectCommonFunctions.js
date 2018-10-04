@@ -207,7 +207,7 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
         openUrl(terminal);
       }, 300);
       const messageLink = `Click here to connect to ${result.device}.`;
-      const link = `<a target='_blank' href='${terminal}'>${link}</a>`;
+      const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
       alertify.notify(link, 'success', 15);
       const warning = `Don't forget to turn off the pop-up blocker !`;
       alertify.notify(warning, 'error', 20);

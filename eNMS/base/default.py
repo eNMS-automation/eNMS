@@ -206,6 +206,7 @@ def create_napalm_tasks():
 
 @integrity_rollback
 def create_netmiko_workflow():
+    tasks = []
     for service in (
         {
             'type': service_classes['Netmiko Configuration Service'],

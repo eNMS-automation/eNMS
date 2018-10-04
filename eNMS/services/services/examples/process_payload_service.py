@@ -3,26 +3,25 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from eNMS.services.models import Service, service_classes
 
 
-class ProcessPayloadService(Service):
+class GenericService(Service):
 
     __tablename__ = 'ProcessPayloadService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    process_function = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'process_payload_service',
     }
 
     def job(self, task, incoming_payload):
-        process = getattr(self, self.process_function)(incoming_payload)
-        results = {'success': process, 'result': process}
-        return results
+        return getattr(self, self.name)(task, incoming_payload)
 
-    def process_payload1(self, payload):
+    def process_payload1(self, task, payload):
         config = payload['task_service_napalm_getter_get_config']['success']
         intf = payload['task_service_napalm_getter_get_interfaces']['success']
-        return config and intf
+        result = config and intf
+        return {'success': result, 'result': result}
+         
 
 
 service_classes['Process Payload Service'] = ProcessPayloadService

@@ -262,13 +262,16 @@ def create_payload_transfer_workflow():
         'description': 'ReST call, Napalm getters, etc',
         'tasks': tasks
     })
-    for i in range(len(tasks) - 1):
+
+    # create workflow edges with following schema:
+    edges = [(0, 1), (0, 2), (1, 3), (3, 4), (4, 5), (2, 5)]
+    for x, y in edges:
         factory(WorkflowEdge, **{
-            'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
+            'name': f'{tasks[x].name} -> {tasks[y].name}',
             'workflow': workflow,
             'type': True,
-            'source': tasks[i],
-            'destination': tasks[i + 1]
+            'source': tasks[x],
+            'destination': tasks[y]
         })
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
     factory(WorkflowTask, **{
@@ -277,8 +280,9 @@ def create_payload_transfer_workflow():
         'job': workflow,
         'user': retrieve(User, name='cisco')
     })
-    for index, task in enumerate(tasks):
-        task.positions['payload_transfer_workflow'] = (0, 100 * index)
+    positions = [(0, 0), (100, 50), (50, -50), (100, -50), (150, -50), (200, 0)]
+    for index, position in enumerate(positions):
+        tasks[index].positions['payload_transfer_workflow'] = position
 
 
 def create_default_workflows():

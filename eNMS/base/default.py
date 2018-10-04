@@ -251,15 +251,15 @@ def create_netmiko_workflow():
             'content_match_regex1': 'y'
         },
     ):
-        factory(service.pop('type'), **service)
-    tasks = [
-        retrieve(Task, name=task_name) for task_name in (
-            'task_netmiko_create_vrf_TEST',
-            'task_netmiko_check_vrf_TEST',
-            'task_netmiko_delete_vrf_TEST',
-            'task_netmiko_check_no_vrf_TEST'
-        )
-    ]
+        instance = factory(service.pop('type'), **service)
+        tasks.append(factory(ServiceTask, **{
+            'name': f'task_{instance.name}',
+            'devices': [retrieve(Device, name='router8')],
+            'waiting_time': 3 if instance.name == 'delete_vrf_TEST' else 0,
+            'start-task': 'do-not-run',
+            'job': instance,
+            'user': retrieve(User, name='cisco')
+        }))
     workflow = factory(Workflow, **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
@@ -353,19 +353,7 @@ def create_napalm_workflow():
 #         task.positions['payload_transfer_workflow'] = (0, 100 * index)
 
 
-def create_default_services():
-    create_netmiko_services()
-    create_napalm_service()
-    create_other_services()
-
-
-def create_default_tasks():
-    create_netmiko_tasks()
-    create_napalm_tasks()
-    create_other_tasks()
-
-
 def create_default_workflows():
     create_netmiko_workflow()
-    create_napalm_workflow()
-    create_other_workflow()
+    # create_napalm_workflow()
+    # create_other_workflow()

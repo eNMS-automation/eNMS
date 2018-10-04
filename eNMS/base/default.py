@@ -89,55 +89,31 @@ def create_default_network_topology(app):
 
 
 @integrity_rollback
-def create_payload_transfer_services():
+def create_payload_transfer_tasks():
+    device = retrieve(Device, name='router8')
+    user = retrieve(User, name='cisco')
+    getterse
     for getter in (
         'get_facts',
         'get_interfaces',
         'get_interfaces_ip',
         'get_config'
         ):
-        factory(service_classes['Napalm Getters Service'], **{
-            'name': f'service_napalm_getter_{getter}',
-            'description': f'Getter: {getter}',
-            'driver': 'ios',
-            'content_match': '',
-            'getters': [getter]
+        factory(ServiceTask, **{
+            'name': 'task_service_napalm_getter',
+            'waiting_time': '0',
+            'start-task': 'do-not-run',
+            'job': retrieve(Service, name=f'service_napalm_getter_{getter}'),
+            'devices': [device],
+            'user': user
         })
-    factory(service_classes['Rest Call Service'], **{
-        'name': 'GET_router8',
-        'description': 'Use GET ReST call on router8',
-        'content_match': '',
-        'call_type': 'GET',
-        'url': 'http://127.0.0.1:5000/rest/object/device/router8',
-        'payload': ''
+    factory(ServiceTask, **{
+        'name': 'task_GET_router8',
+        'start-task': 'do-not-run',
+        'job': retrieve(Service, name='GET_router8'),
+        'devices': [],
+        'user': user
     })
-
-
-# @integrity_rollback
-# def create_payload_transfer_tasks():
-#     device = retrieve(Device, name='router8')
-#     user = retrieve(User, name='cisco')
-#     for getter in (
-#         'get_facts',
-#         'get_interfaces',
-#         'get_interfaces_ip',
-#         'get_config'
-#         ):
-#         factory(ServiceTask, **{
-#             'name': 'task_service_napalm_getter',
-#             'waiting_time': '0',
-#             'start-task': 'do-not-run',
-#             'job': retrieve(Service, name=f'service_napalm_getter_{getter}'),
-#             'devices': [device],
-#             'user': user
-#         })
-#     factory(ServiceTask, **{
-#         'name': 'task_GET_router8',
-#         'start-task': 'do-not-run',
-#         'job': retrieve(Service, name='GET_router8'),
-#         'devices': [],
-#         'user': user
-#     })
 
 
 @integrity_rollback
@@ -275,37 +251,74 @@ def create_napalm_workflow():
         task.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
 
-# @integrity_rollback
-# def create_payload_transfer_workflow():
-#     tasks = [
-#         retrieve(Task, name=task_name) for task_name in (
-#             *['task_service_napalm_getter_{getter}' for getter in (
-#                 
-#             'task_GET_router8',
-#         )
-#     ]
-#     workflow = factory(Workflow, **{
-#         'name': 'payload_transfer_workflow',
-#         'description': 'ReST call, Napalm getters, etc',
-#         'tasks': tasks
-#     })
-#     for i in range(len(tasks) - 1):
-#         factory(WorkflowEdge, **{
-#             'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
-#             'workflow': workflow,
-#             'type': True,
-#             'source': tasks[i],
-#             'destination': tasks[i + 1]
-#         })
-#     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
-#     factory(WorkflowTask, **{
-#         'name': 'task_payload_transfer_workflow',
-#         'start-task': 'do-not-run',
-#         'job': workflow,
-#         'user': retrieve(User, name='cisco')
-#     })
-#     for index, task in enumerate(tasks):
-#         task.positions['payload_transfer_workflow'] = (0, 100 * index)
+@integrity_rollback
+def create_payload_transfer_workflow():
+    services = [
+        {
+            'name': f'service_napalm_getter_{getter}',
+            'type': 'Napalm Getters Service',
+            'description': f'Getter: {getter}',
+            'driver': 'ios',
+            'content_match': '',
+            'getters': [getter]
+        } for getter in (
+            'get_facts',
+            'get_interfaces',
+            'get_interfaces_ip',
+            'get_config'
+        )
+    ] + [{
+        'name': 'GET_router8',
+        'type': '
+        'description': 'Use GET ReST call on router8',
+        'content_match': '',
+        'call_type': 'GET',
+        'url': 'http://127.0.0.1:5000/rest/object/device/router8',
+        'payload': ''
+    }]
+    for service in services:
+        instance = factory(service.pop('type'), **service)
+        tasks.append(factory(ServiceTask, **{
+            'name': f'task_{instance.name}',
+            'job': instance,
+            'start-task': 'do-not-run',
+            'devices': [retrieve(Device, name='router8')],
+            'user': retrieve(User, name='cisco')
+        }))
+    # tasks = [
+    #     retrieve(Task, name=task_name) for task_name in (
+    #         *['task_service_napalm_getter_{getter}' for getter in (
+    #             'get_facts',
+    #             'get_interfaces',
+    #             'get_interfaces_ip',
+    #             'get_config'
+    #             )
+    #         ],
+    #         'task_GET_router8',
+    #     )
+    # ]
+    workflow = factory(Workflow, **{
+        'name': 'payload_transfer_workflow',
+        'description': 'ReST call, Napalm getters, etc',
+        'tasks': tasks
+    })
+    for i in range(len(tasks) - 1):
+        factory(WorkflowEdge, **{
+            'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
+            'workflow': workflow,
+            'type': True,
+            'source': tasks[i],
+            'destination': tasks[i + 1]
+        })
+    workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
+    factory(WorkflowTask, **{
+        'name': 'task_payload_transfer_workflow',
+        'start-task': 'do-not-run',
+        'job': workflow,
+        'user': retrieve(User, name='cisco')
+    })
+    for index, task in enumerate(tasks):
+        task.positions['payload_transfer_workflow'] = (0, 100 * index)
 
 
 def create_default_workflows():

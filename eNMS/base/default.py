@@ -113,47 +113,6 @@ def create_payload_transfer_services():
     })
 
 
-@integrity_rollback
-def create_netmiko_tasks():
-    services = [
-        retrieve(Service, name=service_name) for service_name in (
-            'netmiko_create_vrf_TEST',
-            'netmiko_check_vrf_TEST',
-            'netmiko_delete_vrf_TEST',
-            'netmiko_check_no_vrf_TEST'
-        )
-    ]
-    for service in services:
-        factory(ServiceTask, **{
-            'name': f'task_{service.name}',
-            'devices': [retrieve(Device, name='router8')],
-            'waiting_time': 3 if service.name == 'delete_vrf_TEST' else 0,
-            'start-task': 'do-not-run',
-            'job': service,
-            'user': retrieve(User, name='cisco')
-        })
-
-
-@integrity_rollback
-def create_napalm_tasks():
-    device = retrieve(Device, name='router8')
-    user = retrieve(User, name='cisco')
-    factory(ServiceTask, **{
-        'name': 'task_napalm_create_vrf_TEST',
-        'job': retrieve(Service, name='napalm_create_vrf_TEST'),
-        'devices': [device],
-        'start-task': 'do-not-run',
-        'user': user
-    })
-    factory(ServiceTask, **{
-        'name': 'task_napalm_rollback',
-        'job': retrieve(Service, name='Napalm IOS Rollback'),
-        'start-task': 'do-not-run',
-        'devices': [device],
-        'user': user
-    })
-
-
 # @integrity_rollback
 # def create_payload_transfer_tasks():
 #     device = retrieve(Device, name='router8')
@@ -282,7 +241,15 @@ def create_napalm_workflow():
             'content': 'ip vrf TEST'
         },
     ):
-        factory(service.pop('type'), **service)
+        instance = factory(service.pop('type'), **service)
+        tasks.append(factory(ServiceTask, **{
+            'name': f'task_{instance.name}',
+            'job': instance,
+            'start-task': 'do-not-run',
+            'devices': [retrieve(Device, name='router8')],
+            'user': retrieve(User, name='cisco')
+        }))
+    tasks.insert(1, 
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
@@ -344,5 +311,5 @@ def create_napalm_workflow():
 
 def create_default_workflows():
     create_netmiko_workflow()
-    # create_napalm_workflow()
+    create_napalm_workflow()
     # create_other_workflow()

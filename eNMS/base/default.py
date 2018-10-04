@@ -89,34 +89,6 @@ def create_default_network_topology(app):
 
 
 @integrity_rollback
-def create_payload_transfer_tasks():
-    device = retrieve(Device, name='router8')
-    user = retrieve(User, name='cisco')
-    getterse
-    for getter in (
-        'get_facts',
-        'get_interfaces',
-        'get_interfaces_ip',
-        'get_config'
-        ):
-        factory(ServiceTask, **{
-            'name': 'task_service_napalm_getter',
-            'waiting_time': '0',
-            'start-task': 'do-not-run',
-            'job': retrieve(Service, name=f'service_napalm_getter_{getter}'),
-            'devices': [device],
-            'user': user
-        })
-    factory(ServiceTask, **{
-        'name': 'task_GET_router8',
-        'start-task': 'do-not-run',
-        'job': retrieve(Service, name='GET_router8'),
-        'devices': [],
-        'user': user
-    })
-
-
-@integrity_rollback
 def create_netmiko_workflow():
     tasks = []
     for service in (

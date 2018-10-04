@@ -247,9 +247,8 @@ def create_payload_transfer_workflow():
             'get_config'
         )] + [{
             'name': 'process_payload1',
-            'type': service_classes['Process Payload Service'],
-            'description': 'Process Payload',
-            'process_function': 'process_payload1'
+            'type': service_classes['Generic Service'],
+            'description': 'Process Payload in example workflow',
         }]
     for service in services:
         instance = factory(service.pop('type'), **service)

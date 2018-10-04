@@ -5,12 +5,12 @@ from eNMS.services.models import Service, service_classes
 
 class GenericService(Service):
 
-    __tablename__ = 'ProcessPayloadService'
+    __tablename__ = 'GenericService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'process_payload_service',
+        'polymorphic_identity': 'generic_service',
     }
 
     def job(self, task, incoming_payload):
@@ -21,7 +21,6 @@ class GenericService(Service):
         intf = payload['task_service_napalm_getter_get_interfaces']['success']
         result = config and intf
         return {'success': result, 'result': result}
-         
 
 
-service_classes['Process Payload Service'] = ProcessPayloadService
+service_classes['Generic Service'] = GenericService

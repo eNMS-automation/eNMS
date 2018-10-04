@@ -88,29 +88,6 @@ def create_default_network_topology(app):
             db.session.commit()
 
 
-def create_napalm_service():
-    for service in (
-        {
-            'type': service_classes['Napalm Rollback Service'],
-            'name': 'Napalm IOS Rollback',
-            'driver': 'ios',
-            'description': 'Rollback a configuration with Napalm IOS'
-        },
-        {
-            'type': service_classes['Napalm Configuration Service'],
-            'name': 'napalm_create_vrf_TEST',
-            'description': 'Create a VRF "TEST" with Napalm',
-            'driver': 'ios',
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'content_type': 'simple',
-            'action': 'load_merge_candidate',
-            'content': 'ip vrf TEST'
-        },
-    ):
-        factory(service.pop('type'), **service)
-
-
 @integrity_rollback
 def create_payload_transfer_services():
     for getter in (
@@ -214,7 +191,6 @@ def create_netmiko_workflow():
             'description': 'Create a VRF "TEST" with Netmiko',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
-            'content_type': 'simple',
             'driver': 'cisco_ios',
             'global_delay_factor': '1.0',
             'content': 'ip vrf TEST'
@@ -235,7 +211,6 @@ def create_netmiko_workflow():
             'description': 'Delete VRF "TEST"',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
-            'content_type': 'simple',
             'driver': 'cisco_ios',
             'global_delay_factor': '1.0',
             'content': 'no ip vrf TEST'
@@ -287,14 +262,27 @@ def create_netmiko_workflow():
 
 @integrity_rollback
 def create_napalm_workflow():
-    tasks = [
-        retrieve(Task, name=task_name) for task_name in (
-            'task_napalm_create_vrf_TEST',
-            'task_netmiko_check_vrf_TEST',
-            'task_napalm_rollback',
-            'task_netmiko_check_no_vrf_TEST'
-        )
-    ]
+    tasks = []
+    for service in (
+        {
+            'type': service_classes['Napalm Rollback Service'],
+            'name': 'Napalm IOS Rollback',
+            'driver': 'ios',
+            'description': 'Rollback a configuration with Napalm IOS'
+        },
+        {
+            'type': service_classes['Napalm Configuration Service'],
+            'name': 'napalm_create_vrf_TEST',
+            'description': 'Create a VRF "TEST" with Napalm',
+            'driver': 'ios',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'content_type': 'simple',
+            'action': 'load_merge_candidate',
+            'content': 'ip vrf TEST'
+        },
+    ):
+        factory(service.pop('type'), **service)
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',

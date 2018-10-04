@@ -161,14 +161,20 @@ def create_napalm_service():
 
 
 @integrity_rollback
-def create_other_services():
-    factory(service_classes['Napalm Getters Service'], **{
-        'name': 'service_napalm_getter',
-        'description': 'Getters: facts / Interfaces / Interfaces IP',
-        'driver': 'ios',
-        'content_match': '',
-        'getters': ['get_facts', 'get_interfaces', 'get_interfaces_ip']
-    })
+def create_payload_transfer_services():
+    for getter in (
+        'get_facts',
+        'get_interfaces',
+        'get_interfaces_ip',
+        'get_config'
+        ):
+        factory(service_classes['Napalm Getters Service'], **{
+            'name': f'service_napalm_getter_{getter}',
+            'description': f'Getter: {getter}',
+            'driver': 'ios',
+            'content_match': '',
+            'getters': [getter]
+        })
     factory(service_classes['Rest Call Service'], **{
         'name': 'GET_router8',
         'description': 'Use GET ReST call on router8',
@@ -196,7 +202,6 @@ def create_netmiko_tasks():
             'waiting_time': 3 if service.name == 'delete_vrf_TEST' else 0,
             'start-task': 'do-not-run',
             'job': service,
-            'do_not_run': 'y',
             'user': retrieve(User, name='cisco')
         })
 
@@ -210,7 +215,6 @@ def create_napalm_tasks():
         'job': retrieve(Service, name='napalm_create_vrf_TEST'),
         'devices': [device],
         'start-task': 'do-not-run',
-        'do_not_run': 'y',
         'user': user
     })
     factory(ServiceTask, **{
@@ -218,22 +222,26 @@ def create_napalm_tasks():
         'job': retrieve(Service, name='Napalm IOS Rollback'),
         'start-task': 'do-not-run',
         'devices': [device],
-        'do_not_run': 'y',
         'user': user
     })
 
 
 @integrity_rollback
-def create_other_tasks():
+def create_payload_transfer_tasks():
     device = retrieve(Device, name='router8')
     user = retrieve(User, name='cisco')
+    for getter in (
+        'get_facts',
+        'get_interfaces',
+        'get_interfaces_ip',
+        'get_config'
+        ):
     factory(ServiceTask, **{
         'name': 'task_service_napalm_getter',
         'waiting_time': '0',
         'start-task': 'do-not-run',
-        'job': retrieve(Service, name='service_napalm_getter'),
+        'job': retrieve(Service, name=f'service_napalm_getter_{getter}'),
         'devices': [device],
-        'do_not_run': 'y',
         'user': user
     })
     factory(ServiceTask, **{
@@ -241,7 +249,6 @@ def create_other_tasks():
         'start-task': 'do-not-run',
         'job': retrieve(Service, name='GET_router8'),
         'devices': [],
-        'do_not_run': 'y',
         'user': user
     })
 
@@ -274,7 +281,6 @@ def create_netmiko_workflow():
         'name': 'task_netmiko_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
-        'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
     })
     for index, task in enumerate(tasks):
@@ -317,7 +323,7 @@ def create_napalm_workflow():
 
 
 @integrity_rollback
-def create_other_workflow():
+def create_payload_transfer_workflow():
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
             'task_service_napalm_getter',

@@ -169,7 +169,7 @@ def delete_user(user_id):
     user = retrieve(User, id=user_id)
     db.session.delete(user)
     db.session.commit()
-    return jsonify(user.name)
+    return jsonify(user.serialized)
 
 
 @blueprint.route('/save_tacacs_server', methods=['POST'])

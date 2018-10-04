@@ -98,11 +98,11 @@ function deleteUser(userId) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/admin/delete_${userId}`,
-    success: function(userName) {
-      if (!userName) {
+    success: function(user) {
+      if (!user) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       }
-      alertify.notify(`User '${userName}' deleted.`, 'error', 5);
+      alertify.notify(`User '${user.name}' deleted.`, 'error', 5);
     },
   });
 }

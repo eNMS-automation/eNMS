@@ -104,9 +104,18 @@ user_serialized_properties = (
 
 user_permissions = (
     'Admin',
-    'User Management page',
-    'Administration Panel page',
-    'Manage users'
+    'Admin section',
+    'Inventory section',
+    'Views section',
+    'Services section',
+    'Worflow section',
+    'Task management section'
+    'Edit users',
+    'Edit objects',
+    'Edit services',
+    'Edit workflows',
+    'Edit tasks',
+    'Schedule tasks'
 )
 
 log_public_properties = (

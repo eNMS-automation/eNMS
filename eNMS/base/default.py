@@ -276,15 +276,16 @@ def create_payload_transfer_workflow():
             'destination': tasks[y]
         })
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
+    positions = [(0, 0), (10, 15), (5, -5), (10, -10), (15, -15), (50, 0)]
+    for index, (x, y) in enumerate(positions):
+        tasks[index].positions['payload_transfer_workflow'] = x * 100, y * 100
     factory(WorkflowTask, **{
         'name': 'task_payload_transfer_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
         'user': retrieve(User, name='cisco')
     })
-    positions = [(0, 0), (100, 50), (50, -50), (100, -50), (150, -50), (200, 0)]
-    for index, position in enumerate(positions):
-        tasks[index].positions['payload_transfer_workflow'] = position
+
 
 
 def create_default_workflows():

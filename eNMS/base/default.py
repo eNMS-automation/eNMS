@@ -225,8 +225,16 @@ def create_napalm_workflow():
 
 @integrity_rollback
 def create_payload_transfer_workflow():
-    services = [
-        {
+    tasks = []
+    services = [{
+        'name': 'GET_router8',
+        'type': 'Rest Call Service',
+        'description': 'Use GET ReST call on router8',
+        'content_match': '',
+        'call_type': 'GET',
+        'url': 'http://127.0.0.1:5000/rest/object/device/router8',
+        'payload': ''
+    }] + [{
             'name': f'service_napalm_getter_{getter}',
             'type': 'Napalm Getters Service',
             'description': f'Getter: {getter}',
@@ -239,15 +247,7 @@ def create_payload_transfer_workflow():
             'get_interfaces_ip',
             'get_config'
         )
-    ] + [{
-        'name': 'GET_router8',
-        'type': '
-        'description': 'Use GET ReST call on router8',
-        'content_match': '',
-        'call_type': 'GET',
-        'url': 'http://127.0.0.1:5000/rest/object/device/router8',
-        'payload': ''
-    }]
+    ]
     for service in services:
         instance = factory(service.pop('type'), **service)
         tasks.append(factory(ServiceTask, **{
@@ -257,18 +257,6 @@ def create_payload_transfer_workflow():
             'devices': [retrieve(Device, name='router8')],
             'user': retrieve(User, name='cisco')
         }))
-    # tasks = [
-    #     retrieve(Task, name=task_name) for task_name in (
-    #         *['task_service_napalm_getter_{getter}' for getter in (
-    #             'get_facts',
-    #             'get_interfaces',
-    #             'get_interfaces_ip',
-    #             'get_config'
-    #             )
-    #         ],
-    #         'task_GET_router8',
-    #     )
-    # ]
     workflow = factory(Workflow, **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
@@ -296,4 +284,4 @@ def create_payload_transfer_workflow():
 def create_default_workflows():
     create_netmiko_workflow()
     create_napalm_workflow()
-    # create_other_workflow()
+    create_payload_transfer_workflow()

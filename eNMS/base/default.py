@@ -88,55 +88,6 @@ def create_default_network_topology(app):
             db.session.commit()
 
 
-def create_netmiko_services():
-    for service in (
-        {
-            'type': service_classes['Netmiko Configuration Service'],
-            'name': 'netmiko_create_vrf_TEST',
-            'description': 'Create a VRF "TEST" with Netmiko',
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'content_type': 'simple',
-            'driver': 'cisco_ios',
-            'global_delay_factor': '1.0',
-            'content': 'ip vrf TEST'
-        },
-        {
-            'type': service_classes['Netmiko Validation Service'],
-            'name': 'netmiko_check_vrf_TEST',
-            'description': 'Check that the vrf "TEST" is configured',
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'driver': 'cisco_ios',
-            'command1': 'show ip vrf',
-            'content_match1': 'TEST'
-        },
-        {
-            'type': service_classes['Netmiko Configuration Service'],
-            'name': 'netmiko_delete_vrf_TEST',
-            'description': 'Delete VRF "TEST"',
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'content_type': 'simple',
-            'driver': 'cisco_ios',
-            'global_delay_factor': '1.0',
-            'content': 'no ip vrf TEST'
-        },
-        {
-            'type': service_classes['Netmiko Validation Service'],
-            'name': 'netmiko_check_no_vrf_TEST',
-            'description': 'Check that the vrf "TEST" is NOT configured',
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'driver': 'cisco_ios',
-            'command1': 'show ip vrf',
-            'content_match1': '^((?!TEST).)*$',
-            'content_match_regex1': 'y'
-        },
-    ):
-        factory(service.pop('type'), **service)
-
-
 def create_napalm_service():
     for service in (
         {
@@ -226,35 +177,81 @@ def create_napalm_tasks():
     })
 
 
-@integrity_rollback
-def create_payload_transfer_tasks():
-    device = retrieve(Device, name='router8')
-    user = retrieve(User, name='cisco')
-    for getter in (
-        'get_facts',
-        'get_interfaces',
-        'get_interfaces_ip',
-        'get_config'
-        ):
-    factory(ServiceTask, **{
-        'name': 'task_service_napalm_getter',
-        'waiting_time': '0',
-        'start-task': 'do-not-run',
-        'job': retrieve(Service, name=f'service_napalm_getter_{getter}'),
-        'devices': [device],
-        'user': user
-    })
-    factory(ServiceTask, **{
-        'name': 'task_GET_router8',
-        'start-task': 'do-not-run',
-        'job': retrieve(Service, name='GET_router8'),
-        'devices': [],
-        'user': user
-    })
+# @integrity_rollback
+# def create_payload_transfer_tasks():
+#     device = retrieve(Device, name='router8')
+#     user = retrieve(User, name='cisco')
+#     for getter in (
+#         'get_facts',
+#         'get_interfaces',
+#         'get_interfaces_ip',
+#         'get_config'
+#         ):
+#         factory(ServiceTask, **{
+#             'name': 'task_service_napalm_getter',
+#             'waiting_time': '0',
+#             'start-task': 'do-not-run',
+#             'job': retrieve(Service, name=f'service_napalm_getter_{getter}'),
+#             'devices': [device],
+#             'user': user
+#         })
+#     factory(ServiceTask, **{
+#         'name': 'task_GET_router8',
+#         'start-task': 'do-not-run',
+#         'job': retrieve(Service, name='GET_router8'),
+#         'devices': [],
+#         'user': user
+#     })
 
 
 @integrity_rollback
 def create_netmiko_workflow():
+    for service in (
+        {
+            'type': service_classes['Netmiko Configuration Service'],
+            'name': 'netmiko_create_vrf_TEST',
+            'description': 'Create a VRF "TEST" with Netmiko',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'content_type': 'simple',
+            'driver': 'cisco_ios',
+            'global_delay_factor': '1.0',
+            'content': 'ip vrf TEST'
+        },
+        {
+            'type': service_classes['Netmiko Validation Service'],
+            'name': 'netmiko_check_vrf_TEST',
+            'description': 'Check that the vrf "TEST" is configured',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'driver': 'cisco_ios',
+            'command1': 'show ip vrf',
+            'content_match1': 'TEST'
+        },
+        {
+            'type': service_classes['Netmiko Configuration Service'],
+            'name': 'netmiko_delete_vrf_TEST',
+            'description': 'Delete VRF "TEST"',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'content_type': 'simple',
+            'driver': 'cisco_ios',
+            'global_delay_factor': '1.0',
+            'content': 'no ip vrf TEST'
+        },
+        {
+            'type': service_classes['Netmiko Validation Service'],
+            'name': 'netmiko_check_no_vrf_TEST',
+            'description': 'Check that the vrf "TEST" is NOT configured',
+            'vendor': 'Cisco',
+            'operating_system': 'IOS',
+            'driver': 'cisco_ios',
+            'command1': 'show ip vrf',
+            'content_match1': '^((?!TEST).)*$',
+            'content_match_regex1': 'y'
+        },
+    ):
+        factory(service.pop('type'), **service)
     tasks = [
         retrieve(Task, name=task_name) for task_name in (
             'task_netmiko_create_vrf_TEST',
@@ -322,37 +319,38 @@ def create_napalm_workflow():
         task.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
 
-@integrity_rollback
-def create_payload_transfer_workflow():
-    tasks = [
-        retrieve(Task, name=task_name) for task_name in (
-            'task_service_napalm_getter',
-            'task_GET_router8',
-        )
-    ]
-    workflow = factory(Workflow, **{
-        'name': 'custom_workflow',
-        'description': 'ReST call, Napalm getters, etc',
-        'tasks': tasks
-    })
-    for i in range(len(tasks) - 1):
-        factory(WorkflowEdge, **{
-            'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
-            'workflow': workflow,
-            'type': True,
-            'source': tasks[i],
-            'destination': tasks[i + 1]
-        })
-    workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
-    factory(WorkflowTask, **{
-        'name': 'task_custom_workflow',
-        'start-task': 'do-not-run',
-        'job': workflow,
-        'do_not_run': 'y',
-        'user': retrieve(User, name='cisco')
-    })
-    for index, task in enumerate(tasks):
-        task.positions['custom_workflow'] = (0, 100 * index)
+# @integrity_rollback
+# def create_payload_transfer_workflow():
+#     tasks = [
+#         retrieve(Task, name=task_name) for task_name in (
+#             *['task_service_napalm_getter_{getter}' for getter in (
+#                 
+#             'task_GET_router8',
+#         )
+#     ]
+#     workflow = factory(Workflow, **{
+#         'name': 'payload_transfer_workflow',
+#         'description': 'ReST call, Napalm getters, etc',
+#         'tasks': tasks
+#     })
+#     for i in range(len(tasks) - 1):
+#         factory(WorkflowEdge, **{
+#             'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
+#             'workflow': workflow,
+#             'type': True,
+#             'source': tasks[i],
+#             'destination': tasks[i + 1]
+#         })
+#     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
+#     factory(WorkflowTask, **{
+#         'name': 'task_payload_transfer_workflow',
+#         'start-task': 'do-not-run',
+#         'job': workflow,
+#         'do_not_run': 'y',
+#         'user': retrieve(User, name='cisco')
+#     })
+#     for index, task in enumerate(tasks):
+#         task.positions['payload_transfer_workflow'] = (0, 100 * index)
 
 
 def create_default_services():

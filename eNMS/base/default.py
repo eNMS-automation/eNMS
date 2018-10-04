@@ -224,12 +224,6 @@ def create_napalm_workflow():
     tasks = []
     for service in (
         {
-            'type': service_classes['Napalm Rollback Service'],
-            'name': 'Napalm IOS Rollback',
-            'driver': 'ios',
-            'description': 'Rollback a configuration with Napalm IOS'
-        },
-        {
             'type': service_classes['Napalm Configuration Service'],
             'name': 'napalm_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Napalm',
@@ -240,6 +234,12 @@ def create_napalm_workflow():
             'action': 'load_merge_candidate',
             'content': 'ip vrf TEST'
         },
+        {
+            'type': service_classes['Napalm Rollback Service'],
+            'name': 'Napalm IOS Rollback',
+            'driver': 'ios',
+            'description': 'Rollback a configuration with Napalm IOS'
+        }
     ):
         instance = factory(service.pop('type'), **service)
         tasks.append(factory(ServiceTask, **{
@@ -249,7 +249,8 @@ def create_napalm_workflow():
             'devices': [retrieve(Device, name='router8')],
             'user': retrieve(User, name='cisco')
         }))
-    tasks.insert(1, 
+    tasks.insert(1, retrieve(Task, name=f'task_netmiko_check_vrf_TEST'))
+    tasks.append(retrieve(Task, name=f'task_netmiko_check_no_vrf_TEST'))
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
@@ -268,7 +269,6 @@ def create_napalm_workflow():
         'name': 'task_napalm_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
-        'do_not_run': 'y',
         'user': retrieve(User, name='cisco')
     })
     for index, task in enumerate(tasks):
@@ -302,7 +302,6 @@ def create_napalm_workflow():
 #         'name': 'task_payload_transfer_workflow',
 #         'start-task': 'do-not-run',
 #         'job': workflow,
-#         'do_not_run': 'y',
 #         'user': retrieve(User, name='cisco')
 #     })
 #     for index, task in enumerate(tasks):

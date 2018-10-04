@@ -233,7 +233,7 @@ def create_payload_transfer_workflow():
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/router8',
         'payload': ''
-    }] + [{
+        }] + [{
             'name': f'service_napalm_getter_{getter}',
             'type': service_classes['Napalm Getters Service'],
             'description': f'Getter: {getter}',
@@ -242,12 +242,14 @@ def create_payload_transfer_workflow():
             'getters': [getter]
         } for getter in (
             'get_facts',
-            'get_environment',
             'get_interfaces',
             'get_interfaces_ip',
             'get_config'
-        )
-    ]
+        )] + [{
+            'name': 'process_payload1',
+            'type': service_classes['Process Payload Service'],
+            'description': 'Process Payload'
+        }]
     for service in services:
         instance = factory(service.pop('type'), **service)
         tasks.append(factory(ServiceTask, **{

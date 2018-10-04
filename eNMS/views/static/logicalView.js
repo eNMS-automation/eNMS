@@ -158,7 +158,7 @@ $('#select-filters').on('change', function() {
       let devicesId = objects.devices.map((n) => n.id);
       let linksId = objects.links.map((l) => l.id);
       node.style('visibility', function(d) {
-        return devicesId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
+        return devicesId.includes(d.real_id) ? 'visible' : 'hidden';
       });
       link.style('visibility', function(d) {
         return linksId.includes(d.real_id.toString()) ? 'visible' : 'hidden';

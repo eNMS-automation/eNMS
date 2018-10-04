@@ -1,4 +1,5 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from multiprocessing.pool import ThreadPool
+from sqlalchemy import Column, ForeignKey, Integer
 
 from eNMS.services.models import Service, service_classes
 

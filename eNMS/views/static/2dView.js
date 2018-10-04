@@ -19,7 +19,7 @@ view: false
 */
 
 let markers;
-// hiddenMarkers contains all markers that were undisplayed because of a 
+// hiddenMarkers contains all markers that were undisplayed because of a
 // pool filter. We keep track of them so that they are not selected by the
 // boxzoomend when they are hidden.
 let hiddenMarkers;

@@ -15,7 +15,6 @@ def test_user_management(user_client):
         }
         user_client.post('/admin/process_user', data=dict_user)
     assert len(User.query.all()) == 5
-    # user deletion
     user1 = retrieve(User, name='user1')
     user_client.post('/admin/delete_{}'.format(user1.id))
     assert len(User.query.all()) == 4

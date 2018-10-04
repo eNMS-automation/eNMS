@@ -12,7 +12,7 @@ from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.base.properties import property_types
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.services.models import service_classes, Service
+from eNMS.services.models import service_classes
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
@@ -233,23 +233,23 @@ def create_payload_transfer_workflow():
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/router8',
         'payload': ''
-        }] + [{
-            'name': f'service_napalm_getter_{getter}',
-            'type': service_classes['Napalm Getters Service'],
-            'description': f'Getter: {getter}',
-            'driver': 'ios',
-            'content_match': '',
-            'getters': [getter]
-        } for getter in (
-            'get_facts',
-            'get_interfaces',
-            'get_interfaces_ip',
-            'get_config'
-        )] + [{
-            'name': 'process_payload1',
-            'type': service_classes['Generic Service'],
-            'description': 'Process Payload in example workflow',
-        }]
+    }] + [{
+        'name': f'service_napalm_getter_{getter}',
+        'type': service_classes['Napalm Getters Service'],
+        'description': f'Getter: {getter}',
+        'driver': 'ios',
+        'content_match': '',
+        'getters': [getter]
+    } for getter in (
+        'get_facts',
+        'get_interfaces',
+        'get_interfaces_ip',
+        'get_config'
+    )] + [{
+        'name': 'process_payload1',
+        'type': service_classes['Generic Service'],
+        'description': 'Process Payload in example workflow',
+    }]
     for service in services:
         instance = factory(service.pop('type'), **service)
         tasks.append(factory(ServiceTask, **{
@@ -278,14 +278,13 @@ def create_payload_transfer_workflow():
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
     positions = [(0, 0), (10, 15), (5, -5), (10, -10), (15, -15), (50, 0)]
     for index, (x, y) in enumerate(positions):
-        tasks[index].positions['payload_transfer_workflow'] = x * 100, y * 100
+        tasks[index].positions['payload_transfer_workflow'] = x * 10, y * 10
     factory(WorkflowTask, **{
         'name': 'task_payload_transfer_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
         'user': retrieve(User, name='cisco')
     })
-
 
 
 def create_default_workflows():

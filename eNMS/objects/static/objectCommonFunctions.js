@@ -200,16 +200,16 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
       if (!url) {
         url = `${window.location.protocol}//${window.location.hostname}`;
       }
-      terminal = result.redirection
+      const terminal = result.redirection
         ? `${url}/terminal${result.port}/`
         : `${url}:${result.port}`;
       setTimeout(function() {
         openUrl(terminal);
       }, 300);
-      const link = `Click here to connect to ${result.device}.`
-      const messageLink = `<a target='_blank' href='${terminal}'>${link}</a>`;
-      alertify.notify(messageLink, 'success', 15);
-      const warning = `Don't forget to turn off the pop-up blocker !`
+      const messageLink = `Click here to connect to ${result.device}.`;
+      const link = `<a target='_blank' href='${terminal}'>${link}</a>`;
+      alertify.notify(link, 'success', 15);
+      const warning = `Don't forget to turn off the pop-up blocker !`;
       alertify.notify(warning, 'error', 20);
       $('#connection-parameters').modal('hide');
     },

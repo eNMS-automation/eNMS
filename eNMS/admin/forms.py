@@ -28,7 +28,6 @@ class AddUser(FlaskForm):
     email = TextField('Email')
     permission_choices = [(p, p) for p in user_permissions]
     permissions = SelectMultipleField('Permissions', choices=permission_choices)
-    
 
 
 class TacacsServerForm(FlaskForm):

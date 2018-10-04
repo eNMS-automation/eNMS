@@ -34,8 +34,12 @@ class User(CustomBase, UserMixin):
             vault_helper(app, f'user/{kwargs["name"]}', data)
         super().update(**kwargs)
 
+    @property
+    def is_admin(self):
+        return 'Admin' in self.permissions
+
     def allowed(self, permission):
-        return permission in self.permissions
+        return self.is_admin or permission in self.permissions
 
     def __repr__(self):
         return self.name

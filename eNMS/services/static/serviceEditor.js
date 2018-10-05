@@ -79,10 +79,11 @@ function saveService() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#form').serialize(),
       success: function(service) {
-        if (!result) {
+        if (!service) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
-          if (0 == $(`#service-instance option[value='${service.id}']`).length) {
+          const isNew = $(`#service-instance option[value='${service.id}']`);
+          if (0 == isNew.length) {
             $('#service-instance').append(
               `<option value='${service.id}'>${service.name}</option>`
             );

@@ -79,7 +79,8 @@ function saveRule() { // eslint-disable-line no-unused-vars
       if (!logRule) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        const mode = $('#title').text().startsWith('Edit') ? 'edited' : 'created';
+        const title = $('#title').text().startsWith('Edit');
+        const mode = title ? 'edited' : 'created';
         addLogRule(logRule, mode);
         alertify.notify(`Log rule '${logRule.name}' ${mode}.`, 'success', 5);
         $('#edit').modal('hide');

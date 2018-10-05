@@ -74,7 +74,7 @@ $('#select-filters').on('change', function() {
     url: `/objects/pool_objects/${this.value}`,
     dataType: 'json',
     success: function(objects) {
-      if (!result) {
+      if (!objects) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         const devicesId = objects.devices.map((n) => n.id);

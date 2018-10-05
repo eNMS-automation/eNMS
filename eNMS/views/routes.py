@@ -4,9 +4,8 @@ from os.path import join
 from simplekml import Kml
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import permission_required, retrieve
+from eNMS.base.helpers import permission_required
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
-from eNMS.base.models import Log
 from eNMS.objects.forms import AddDevice, AddLink
 from eNMS.objects.models import Pool, Device, Link
 from eNMS.base.properties import (

@@ -3,7 +3,7 @@ from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import login_required
 from re import search
 
-from eNMS import db, login_manager
+from eNMS import db
 from eNMS.base import blueprint
 from eNMS.base.custom_base import factory
 from eNMS.base.forms import LogFilteringForm, LogAutomationForm

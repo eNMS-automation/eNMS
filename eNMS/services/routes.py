@@ -17,6 +17,7 @@ from eNMS.tasks.forms import SchedulingForm
 
 @blueprint.route('/service_management')
 @login_required
+@permission_required('Services section')
 def services():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.devices.choices = Device.choices()
@@ -33,6 +34,7 @@ def services():
 
 @blueprint.route('/service_editor')
 @login_required
+@permission_required('Services section')
 def service_editor():
     return render_template(
         'service_editor.html',
@@ -43,6 +45,7 @@ def service_editor():
 
 @blueprint.route('/get_form/<cls_name>', methods=['POST'])
 @login_required
+@permission_required('Services section', redirect=False)
 def get_form(cls_name):
     cls = service_classes[cls_name]
 
@@ -92,12 +95,14 @@ def get_form(cls_name):
 
 @blueprint.route('/get_service/<service_id>', methods=['POST'])
 @login_required
+@permission_required('Services section', redirect=False)
 def get_service(service_id):
     return jsonify(retrieve(Service, id=service_id).column_values)
 
 
 @blueprint.route('/delete/<service_id>', methods=['POST'])
 @login_required
+@permission_required('Edit services', redirect=False)
 def delete_object(service_id):
     service = retrieve(Service, id=service_id)
     db.session.delete(service)
@@ -107,6 +112,7 @@ def delete_object(service_id):
 
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])
 @login_required
+@permission_required('Edit services', redirect=False)
 def save_service(cls_name):
     form = dict(request.form.to_dict())
     for key in request.form:

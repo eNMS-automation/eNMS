@@ -88,7 +88,7 @@ def link_management():
 
 @blueprint.route('/object_download')
 @login_required
-@permission_required('Inventory section')
+@permission_required('Inventory section', redirect=False)
 def objects_download():
     devices = Device.serialize()
     ws = {}

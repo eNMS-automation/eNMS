@@ -58,13 +58,17 @@ function showPoolModal(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/get_pool/${id}`,
     success: function(properties) {
-      for (const [property, value] of Object.entries(properties)) {
-        if (property.includes('regex')) {
-          $(`#${property}`).prop('checked', value);
-        } else {
-          $(`#${property}`).val(value);
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        for (const [property, value] of Object.entries(properties)) {
+          if (property.includes('regex')) {
+            $(`#${property}`).prop('checked', value);
+          } else {
+            $(`#${property}`).val(value);
+          }
+          $('#title').text(`Edit pool properties`);
         }
-        $('#title').text(`Edit pool properties`);
       }
     },
   });
@@ -80,9 +84,13 @@ function showPoolObjects(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/get_pool_objects/${id}`,
     success: function(properties) {
-      $('#devices').val(properties.devices.map((n) => n.id));
-      $('#links').val(properties.links.map((l) => l.id));
-      poolId = id;
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $('#devices').val(properties.devices.map((n) => n.id));
+        $('#links').val(properties.links.map((l) => l.id));
+        poolId = id;
+      }
     },
   });
   $('#edit-pool-objects').modal('show');
@@ -98,7 +106,11 @@ function savePoolObjects() { // eslint-disable-line no-unused-vars
     dataType: 'json',
     data: $('#pool-objects-form').serialize(),
     success: function() {
-      alertify.notify('Changes saved.', 'success', 5);
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        alertify.notify('Changes saved.', 'success', 5);
+      }
     },
   });
   $('#edit-pool-objects').modal('hide');
@@ -115,11 +127,14 @@ function savePool() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#edit-form').serialize(),
       success: function(pool) {
-        const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-        addPool(mode, pool);
-        const message = `Pool '${pool.name}'
-        ${mode == 'edit' ? 'edited !' : 'created !'}.`;
-        alertify.notify(message, 'success', 5);
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+          addPool(mode, pool);
+          const message = `Pool '${pool.name}'
+          ${mode == 'edit' ? 'edited !' : 'created !'}.`;
+          alertify.notify(message, 'success', 5);
       },
     });
     $('#edit').modal('hide');

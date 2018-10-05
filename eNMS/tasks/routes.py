@@ -6,7 +6,7 @@ from re import search, sub
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import retrieve, str_dict
+from eNMS.base.helpers import permission_required, retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import CompareLogsForm, SchedulingForm
@@ -18,6 +18,7 @@ from eNMS.workflows.models import Workflow
 
 @blueprint.route('/task_management/<task_type>')
 @login_required
+@permission_required('Tasks section')
 def task_management(task_type):
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.devices.choices = Device.choices()
@@ -35,6 +36,7 @@ def task_management(task_type):
 
 @blueprint.route('/calendar')
 @login_required
+@permission_required('Tasks section')
 def calendar():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -67,6 +69,7 @@ def calendar():
 
 @blueprint.route('/scheduler', methods=['POST'])
 @login_required
+@permission_required('Schedule tasks', redirect=False)
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = retrieve(Job, id=data['job'])
@@ -84,6 +87,7 @@ def scheduler(workflow_id=None):
 
 @blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
 @login_required
+@permission_required('Edit tasks', redirect=False)
 def add_to_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     task = retrieve(Task, id=request.form['task'])
@@ -94,12 +98,14 @@ def add_to_workflow(workflow_id):
 
 @blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Tasks section', redirect=False)
 def get_task(task_id):
     return jsonify(retrieve(Task, id=task_id).serialized)
 
 
 @blueprint.route('/show_logs/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Tasks section', redirect=False)
 def show_logs(task_id):
     return jsonify(dumps(retrieve(Task, id=task_id).logs, indent=4))
 
@@ -107,6 +113,7 @@ def show_logs(task_id):
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>', methods=['POST'])
 @blueprint.route('/get_diff/<task_id>/<v1>/<v2>/<n1>/<n2>', methods=['POST'])
 @login_required
+@permission_required('Tasks section', redirect=False)
 def get_diff(task_id, v1, v2, n1=None, n2=None):
     task = retrieve(Task, id=task_id)
     if n1 and n2 and n1 in task.logs[v1] and n2 in task.logs[v2]:
@@ -121,6 +128,7 @@ def get_diff(task_id, v1, v2, n1=None, n2=None):
 
 @blueprint.route('/compare_logs/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Tasks section', redirect=False)
 def compare_logs(task_id):
     task = retrieve(Task, id=task_id)
     results = {
@@ -132,6 +140,7 @@ def compare_logs(task_id):
 
 @blueprint.route('/run_task/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Schedule tasks', redirect=False)
 def run_task(task_id):
     task = retrieve(Task, id=task_id)
     task.schedule(run_now=True)
@@ -140,6 +149,7 @@ def run_task(task_id):
 
 @blueprint.route('/delete_task/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Edit tasks', redirect=False)
 def delete_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.delete_task()
@@ -150,6 +160,7 @@ def delete_task(task_id):
 
 @blueprint.route('/pause_task/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Schedule tasks', redirect=False)
 def pause_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.pause_task()
@@ -158,6 +169,7 @@ def pause_task(task_id):
 
 @blueprint.route('/resume_task/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Schedule tasks', redirect=False)
 def resume_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.resume_task()

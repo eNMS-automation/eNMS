@@ -93,3 +93,14 @@ def export_to_google_earth():
     )
     kml_file.save(filepath)
     return jsonify({'success': True})
+
+
+@blueprint.route('/get_logs/<device_id>', methods=['POST'])
+@login_required
+def get_logs(device_id):
+    device = retrieve(Device, id=device_id)
+    device_logs = [
+        log.content for log in Log.query.all()
+        if log.source == device.ip_address
+    ]
+    return jsonify('\n'.join(device_logs))

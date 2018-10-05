@@ -22,7 +22,7 @@ class User(CustomBase, UserMixin):
 
     id = Column(Integer, primary_key=True)
     type = Column(String, default='admin')
-    email = Column(String, unique=True)
+    email = Column(String)
     name = Column(String, unique=True)
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     password = Column(String)
@@ -50,8 +50,8 @@ class TacacsServer(CustomBase):
     __tablename__ = 'TacacsServer'
 
     id = Column(Integer, primary_key=True)
-    ip_address = Column(String(120), unique=True)
-    password = Column(String(120), unique=True)
+    ip_address = Column(String(120))
+    password = Column(String(120))
     port = Column(Integer)
     timeout = Column(Integer)
 
@@ -81,7 +81,7 @@ class SyslogServer(CustomBase):
     __tablename__ = 'SyslogServer'
 
     id = Column(Integer, primary_key=True)
-    ip_address = Column(String, unique=True)
+    ip_address = Column(String)
     port = Column(Integer)
 
     def __init__(self, **kwargs):

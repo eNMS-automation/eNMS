@@ -53,7 +53,8 @@
             <h1>Create Account</h1>
             {% for field in create_account_form if field.widget.input_type != 'hidden'  %}
               <div>
-                {{ field(class="form-control required", placeholder=field.label.text) }}
+                {% set required = '' if field.name == 'email' else ' required' %}
+                {{ field(class="form-control" + required, placeholder=field.label.text) }}
               </div>
             {% endfor %}
             <div>

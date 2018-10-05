@@ -37,7 +37,7 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
   if (type == 'device') {
     $.ajax({
       type: 'POST',
-      url: `/views/get_logs_${id}`,
+      url: `/views/get_logs/${id}`,
       success: function(logs) {
         $('#logs').text(logs);
       },

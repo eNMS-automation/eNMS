@@ -57,7 +57,7 @@ function editObject(type) { // eslint-disable-line no-unused-vars
       url: '/objects/edit_object',
       dataType: 'json',
       data: $(`#edit-${type}-form`).serialize(),
-      success: function(properties) {
+      success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
@@ -65,9 +65,9 @@ function editObject(type) { // eslint-disable-line no-unused-vars
           // the object can be edited from the views,
           // in which case we don't need to add it to the table
           if (typeof table !== 'undefined') {
-            addObjectToTable(mode, type, properties);
+            addObjectToTable(mode, type, result);
           }
-          const message = `Object ${properties.name}
+          const message = `Object ${result.name}
           ${mode == 'edit' ? 'edited' : 'created'}.`;
           alertify.notify(message, 'success', 5);
         }
@@ -86,13 +86,13 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/objects/delete/${type}/${id}`,
-    success: function(properties) {
+    success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         table.row($(`#${type}-${id}`)).remove().draw(false);
         alertify.notify(
-          `Object '${properties.name}' successfully deleted.`,
+          `Object '${result.name}' successfully deleted.`,
           'error', 5
         );
       }
@@ -161,12 +161,16 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
       processData: false,
       async: false,
       success: function(objects) {
-        for (let i = 0; i < objects[objType].length; i++) {
-          const obj = objects[objType][i];
-          // const mode = $(`#${objType}-${obj.id}`).length ? 'create' : 'edit';
-          addObjectToTable('create', objType.toLowerCase(), obj);
+        if (!objects) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          for (let i = 0; i < objects[objType].length; i++) {
+            const obj = objects[objType][i];
+            // const mode = $(`#${objType}-${obj.id}`).length ? 'create' : 'edit';
+            addObjectToTable('create', objType.toLowerCase(), obj);
+          }
+          alertify.notify('Topology successfully imported.', 'success', 5);
         }
-        alertify.notify('Topology successfully imported.', 'success', 5);
       },
     });
   }
@@ -204,22 +208,26 @@ function sshConnection(id) { // eslint-disable-line no-unused-vars
     dataType: 'json',
     data: $('#connection-parameters-form').serialize(),
     success: function(result) {
-      let url = result.server_addr;
-      if (!url) {
-        url = `${window.location.protocol}//${window.location.hostname}`;
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        let url = result.server_addr;
+        if (!url) {
+          url = `${window.location.protocol}//${window.location.hostname}`;
+        }
+        const terminal = result.redirection
+          ? `${url}/terminal${result.port}/`
+          : `${url}:${result.port}`;
+        setTimeout(function() {
+          openUrl(terminal);
+        }, 300);
+        const messageLink = `Click here to connect to ${result.device}.`;
+        const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
+        alertify.notify(link, 'success', 15);
+        const warning = `Don't forget to turn off the pop-up blocker !`;
+        alertify.notify(warning, 'error', 20);
+        $('#connection-parameters').modal('hide');
       }
-      const terminal = result.redirection
-        ? `${url}/terminal${result.port}/`
-        : `${url}:${result.port}`;
-      setTimeout(function() {
-        openUrl(terminal);
-      }, 300);
-      const messageLink = `Click here to connect to ${result.device}.`;
-      const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
-      alertify.notify(link, 'success', 15);
-      const warning = `Don't forget to turn off the pop-up blocker !`;
-      alertify.notify(warning, 'error', 20);
-      $('#connection-parameters').modal('hide');
     },
   });
 }

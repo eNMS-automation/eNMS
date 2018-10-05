@@ -19,10 +19,11 @@ from eNMS.admin.models import Parameters
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     allowed_file,
-    retrieve,
-    vault_helper,
     get_device_credentials,
-    get_user_credentials
+    get_user_credentials,
+    permission_required,
+    retrieve,
+    vault_helper
 )
 from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm

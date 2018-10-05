@@ -105,7 +105,7 @@ function savePoolObjects() { // eslint-disable-line no-unused-vars
     url: `/objects/save_pool_objects/${poolId}`,
     dataType: 'json',
     data: $('#pool-objects-form').serialize(),
-    success: function() {
+    success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
@@ -127,7 +127,7 @@ function savePool() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#edit-form').serialize(),
       success: function(pool) {
-        if (!result) {
+        if (!pool) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
@@ -151,7 +151,7 @@ function deletePool(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/delete_pool/${id}`,
     success: function(name) {
-      if (!result) {
+      if (!name) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         table.row($(`#${id}`)).remove().draw(false);

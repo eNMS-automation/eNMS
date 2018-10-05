@@ -27,7 +27,7 @@
     <div class="login_wrapper">
       <div class="animate form login_form">
         <section class="login_content">
-          <form data-parsley-validate method="post">
+          <form data-parsley-validate method="post" autocomplete="off">
             <h1>Login Form</h1>
             {% for field in login_form if field.widget.input_type != 'hidden'  %}
               <div>
@@ -49,7 +49,7 @@
       </div>
       <div id="register" class="animate form registration_form">
         <section class="login_content">
-          <form data-parsley-validate id="create-user-form" method="post">
+          <form data-parsley-validate id="create-user-form" method="post" autocomplete="off">
             <h1>Create Account</h1>
             {% for field in create_account_form if field.widget.input_type != 'hidden'  %}
               <div>

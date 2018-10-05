@@ -31,7 +31,7 @@ class AddObjectForm(FlaskForm):
 class AddDevice(AddObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)
-    ip_address = TextField()
+    ip_address = TextField('IP address')
     operating_system = TextField()
     os_version = TextField()
     longitude = FloatField(default=0.)

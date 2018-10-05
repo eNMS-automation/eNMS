@@ -140,6 +140,8 @@ def create_netmiko_workflow():
     workflow = factory(Workflow, **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
+        'vendor': 'Cisco',
+        'operating_system': 'IOS',
         'tasks': tasks
     })
     for i in range(len(tasks) - 1):
@@ -196,6 +198,8 @@ def create_napalm_workflow():
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
+        'vendor': 'Cisco',
+        'operating_system': 'IOS',
         'tasks': tasks
     })
     for i in range(len(tasks) - 1):
@@ -256,6 +260,8 @@ def create_payload_transfer_workflow():
     workflow = factory(Workflow, **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
+        'vendor': 'Cisco',
+        'operating_system': 'IOS',
         'tasks': tasks
     })
 

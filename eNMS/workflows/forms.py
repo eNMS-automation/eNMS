@@ -9,6 +9,8 @@ class AddExistingTaskForm(FlaskForm):
 class WorkflowCreationForm(FlaskForm):
     name = TextField('Name')
     description = TextField('Description')
+    vendor = TextField()
+    operating_system = TextField()
 
 
 class WorkflowEditorForm(FlaskForm):

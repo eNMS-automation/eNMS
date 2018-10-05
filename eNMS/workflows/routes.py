@@ -4,7 +4,7 @@ from flask_login import login_required
 from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
-from eNMS.base.properties import pretty_names
+from eNMS.base.properties import pretty_names, workflow_table_properties
 from eNMS.objects.models import Device, Pool
 from eNMS.services.models import Job
 from eNMS.tasks.forms import CompareLogsForm, SchedulingForm
@@ -28,7 +28,7 @@ def workflows():
         'workflow_management.html',
         names=pretty_names,
         scheduling_form=scheduling_form,
-        fields=('name', 'description'),
+        fields=workflow_table_properties,
         workflows=Workflow.serialize(),
         form=WorkflowCreationForm(request.form)
     )

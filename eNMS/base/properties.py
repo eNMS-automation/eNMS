@@ -88,6 +88,13 @@ workflow_public_properties = (
     'end_task'
 )
 
+workflow_table_properties = (
+    'name',
+    'description',
+    'vendor',
+    'operating_system'
+)
+
 workflow_edge_properties = (
     'name',
     'type'

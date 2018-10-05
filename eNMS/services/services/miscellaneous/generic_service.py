@@ -23,7 +23,7 @@ class GenericService(Service):
         speed_Fa1 = result_int_r8['FastEthernet0/1']['speed']
         same_speed = speed_Fa0 == speed_Fa1
         
-        facts_r8 = payload['task_service_napalm_getter_get_facts']['success']
+        facts_r8 = payload['task_service_napalm_getter_get_facts']['router8']
         result_facts_r8 = facts_r8['result']['get_facts']
         uptime_less_than_50000 = result_facts_r8['uptime'] < 50000
         return {

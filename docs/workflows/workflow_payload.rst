@@ -108,10 +108,21 @@ If we want to use the results of the Napalm getters in the final task ``task_pro
 ::
 
   def job(self, task, payload):
-      config = payload['task_service_napalm_getter_get_config']['success']
-      intf = payload['task_service_napalm_getter_get_interfaces']['success']
-      facts = payload['task_service_napalm_getter_get_facts']['success']
-      success = config and intf and facts
-      return {'success': success, 'result': ''}
+      int_r8 = payload['task_service_napalm_getter_get_interfaces']['router8']
+      result_int_r8 = int_r8['result']['get_interfaces']
+      speed_Fa0 = result_int_r8['FastEthernet0/0']['speed']
+      speed_Fa1 = result_int_r8['FastEthernet0/1']['speed']
+      same_speed = speed_Fa0 == speed_Fa1
+      
+      facts_r8 = payload['task_service_napalm_getter_get_facts']['router8']
+      result_facts_r8 = facts_r8['result']['get_facts']
+      uptime_less_than_50000 = result_facts_r8['uptime'] < 50000
+      return {
+          'success': True,
+          'result': {
+              'same_speed_Fa0_Fa1': same_speed,
+              'uptime_less_5000': uptime_less_than_50000
+          }
+      }
 
-This ``job`` function reuses the ``success`` value in the ``results`` of three tasks of the worflow (one of which, ``task_service_napalm_getter_get_facts``, is not a direct predecessor of ``task_process_payload1``) to create a new variable.
+This ``job`` function reuses the Napalm getters of two tasks of the worflow (one of which, ``task_service_napalm_getter_get_facts``, is not a direct predecessor of ``task_process_payload1``) to create new variables and inject them in the results.

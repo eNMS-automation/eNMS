@@ -7,3 +7,4 @@ Workflows
 
    workflow_system
    workflow_examples
+   workflow_payload

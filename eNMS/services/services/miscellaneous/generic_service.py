@@ -19,8 +19,8 @@ class GenericService(Service):
     def process_payload1(self, task, payload):
         config = payload['task_service_napalm_getter_get_config']['success']
         intf = payload['task_service_napalm_getter_get_interfaces']['success']
-        result = config and intf
-        return {'success': result, 'result': result}
+        facts = payload['task_service_napalm_getter_get_facts']['success']
+        return {'success': True, 'result': True}
 
 
 service_classes['Generic Service'] = GenericService

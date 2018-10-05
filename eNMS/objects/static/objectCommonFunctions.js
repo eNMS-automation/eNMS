@@ -58,15 +58,19 @@ function editObject(type) { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $(`#edit-${type}-form`).serialize(),
       success: function(properties) {
-        const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-        // the object can be edited from the views,
-        // in which case we don't need to add it to the table
-        if (typeof table !== 'undefined') {
-          addObjectToTable(mode, type, properties);
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+          // the object can be edited from the views,
+          // in which case we don't need to add it to the table
+          if (typeof table !== 'undefined') {
+            addObjectToTable(mode, type, properties);
+          }
+          const message = `Object ${properties.name}
+          ${mode == 'edit' ? 'edited' : 'created'}.`;
+          alertify.notify(message, 'success', 5);
         }
-        const message = `Object ${properties.name}
-        ${mode == 'edit' ? 'edited' : 'created'}.`;
-        alertify.notify(message, 'success', 5);
       },
     });
     $(`#edit-${type}`).modal('hide');
@@ -83,11 +87,15 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/delete/${type}/${id}`,
     success: function(properties) {
-      table.row($(`#${type}-${id}`)).remove().draw(false);
-      alertify.notify(
-        `Object '${properties.name}' successfully deleted.`,
-        'error', 5
-    );
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        table.row($(`#${type}-${id}`)).remove().draw(false);
+        alertify.notify(
+          `Object '${properties.name}' successfully deleted.`,
+          'error', 5
+        );
+      }
     },
   });
 }

@@ -6,7 +6,7 @@ alertify: false
 /**
  * Create a new account.
  */
-function signup() { // eslint-disable-line no-unused-vars
+function signUp() { // eslint-disable-line no-unused-vars
   if ($('#create-user-form').parsley().validate()) {
     $.ajax({
       type: 'POST',

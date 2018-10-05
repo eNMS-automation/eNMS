@@ -149,9 +149,9 @@ def admninistration():
 
 @blueprint.route('/create_new_user', methods=['POST'])
 def create_new_user():
-    if 'permission' in user_data:
-        abort(403)
     user_data = request.form.to_dict()
+    if 'permissions' in user_data:
+        abort(403)
     return jsonify(factory(User, **user_data).serialized)
 
 

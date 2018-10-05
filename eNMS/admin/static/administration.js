@@ -15,8 +15,9 @@ function saveTacacsServer() { // eslint-disable-line no-unused-vars
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify(`Tacacs server saved.`, 'success', 5);
         }
-        alertify.notify(`Tacacs server saved.`, 'success', 5);
       },
     });
   }
@@ -34,8 +35,9 @@ function saveSyslogServer() { // eslint-disable-line no-unused-vars
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify(`Syslog server saved.`, 'success', 5);
         }
-        alertify.notify(`Syslog server saved.`, 'success', 5);
       },
     });
   }
@@ -53,8 +55,9 @@ function queryOpenNMS() { // eslint-disable-line no-unused-vars
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify(`Query sent to openNMS.`, 'success', 5);
         }
-        alertify.notify(`Query sent to openNMS.`, 'success', 5);
       },
     });
   }
@@ -72,8 +75,9 @@ function queryNetbox() { // eslint-disable-line no-unused-vars
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify(`Query sent to Netbox.`, 'success', 5);
         }
-        alertify.notify(`Query sent to Netbox.`, 'success', 5);
       },
     });
   }
@@ -91,8 +95,9 @@ function saveGeographicalParameters() { // eslint-disable-line no-unused-vars
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify('Geographical parameters saved.', 'success', 5);
         }
-        alertify.notify('Geographical parameters saved.', 'success', 5);
       },
     });
   }
@@ -110,8 +115,9 @@ function saveGottyParameters() { // eslint-disable-line no-unused-vars
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify('GoTTY parameters saved.', 'success', 5);
         }
-        alertify.notify('GoTTY parameters saved.', 'success', 5);
       },
     });
   }

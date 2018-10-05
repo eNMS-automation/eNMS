@@ -24,7 +24,7 @@ class User(CustomBase, UserMixin):
     type = Column(String, default='admin')
     email = Column(String, unique=True)
     name = Column(String, unique=True)
-    permissions = Column(MutableList.as_mutable(PickleType))
+    permissions = Column(MutableList.as_mutable(PickleType), default=[])
     password = Column(String)
     tasks = relationship('Task', back_populates='user')
 

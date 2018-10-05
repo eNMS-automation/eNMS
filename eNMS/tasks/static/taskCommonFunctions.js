@@ -90,7 +90,8 @@ function compareLogs(id) { // eslint-disable-line no-unused-vars
       if (!results) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        $('#first_version,#second_version,#first_device,#second_device').empty();
+        $('#first_version,#second_version').empty();
+        $('#first_device,#second_device').empty();
         for (let i = 0; i < results.versions.length; i++) {
           const value = results.versions[i];
           $('#first_version,#second_version').append($('<option></option>')
@@ -141,9 +142,13 @@ function deleteTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/tasks/delete_task/${id}`,
-    success: function() {
-      table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify('Task successfully deleted.', 'success', 5);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        table.row($(`#${id}`)).remove().draw(false);
+        alertify.notify('Task successfully deleted.', 'success', 5);
+      }
     },
   });
 }
@@ -156,12 +161,16 @@ function pauseTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/tasks/pause_task/${id}`,
-    success: function() {
-      $(`#pause-resume-${id}`).attr(
-        'onclick',
-        `resumeTask('${id}')`
-    ).text('Resume');
-      alertify.notify('Task paused.', 'success', 5);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $(`#pause-resume-${id}`).attr(
+          'onclick',
+          `resumeTask('${id}')`
+        ).text('Resume');
+        alertify.notify('Task paused.', 'success', 5);
+      }
     },
   });
 }
@@ -174,12 +183,16 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/tasks/resume_task/${id}`,
-    success: function() {
-      $(`#pause-resume-${id}`).attr(
-        'onclick',
-        `pauseTask('${id}')`
-    ).text('Pause');
-      alertify.notify('Task resumed.', 'success', 5);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $(`#pause-resume-${id}`).attr(
+          'onclick',
+          `pauseTask('${id}')`
+        ).text('Pause');
+        alertify.notify('Task resumed.', 'success', 5);
+      }
     },
   });
 }

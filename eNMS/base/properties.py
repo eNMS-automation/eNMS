@@ -81,6 +81,8 @@ service_public_properties = (
 workflow_public_properties = (
     'name',
     'description',
+    'vendor',
+    'operating_system',
     'type',
     'start_task',
     'end_task'
@@ -175,8 +177,8 @@ cls_to_properties = {
 cls_to_properties = {k: ('id',) + v for k, v in cls_to_properties.items()}
 
 default_diagrams_properties = {
-    'device': 'vendor',
-    'link': 'location',
+    'device': 'model',
+    'link': 'model',
     'user': 'name',
     'service': 'type',
     'workflow': 'vendor',
@@ -184,26 +186,19 @@ default_diagrams_properties = {
 }
 
 object_diagram_properties = (
-    'description',
     'model',
-    'location',
+    'vendor',
+    'subtype',
+    'location'
 )
 
 device_diagram_properties = object_diagram_properties + (
-    'subtype',
-    'vendor',
     'operating_system',
     'os_version'
 )
 
-link_diagram_properties = object_diagram_properties + (
-    'subtype',
-    'vendor'
-)
-
 user_diagram_properties = (
-    'type',
-    'access_rights',
+    'name',
 )
 
 workflow_diagram_properties = (
@@ -225,7 +220,7 @@ task_diagram_properties = (
 
 type_to_diagram_properties = {
     'device': device_diagram_properties,
-    'link': link_diagram_properties,
+    'link': object_diagram_properties,
     'user': user_diagram_properties,
     'service': service_diagram_properties,
     'workflow': workflow_diagram_properties,

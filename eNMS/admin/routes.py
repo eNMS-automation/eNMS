@@ -166,7 +166,7 @@ def process_user():
 
 @blueprint.route('/get/<user_id>', methods=['POST'])
 @login_required
-@permission_required('Admin section')
+@permission_required('Admin section', redirect=False)
 def get_user(user_id):
     user = retrieve(User, id=user_id)
     return jsonify(user.serialized)

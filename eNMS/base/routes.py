@@ -91,7 +91,7 @@ def get_log_rule(log_rule_id):
 
 @blueprint.route('/save_log_rule', methods=['POST'])
 @login_required
-@permission_required('Edit logs')
+@permission_required('Edit logs', redirect=False)
 def save_log_rule():
     data = request.form.to_dict()
     data['tasks'] = [
@@ -104,7 +104,7 @@ def save_log_rule():
 
 @blueprint.route('/delete_log_rule/<log_id>', methods=['POST'])
 @login_required
-@permission_required('Edit logs')
+@permission_required('Edit logs', redirect=False)
 def delete_log_rule(log_id):
     log_rule = retrieve(LogRule, id=log_id)
     db.session.delete(log_rule)
@@ -123,7 +123,7 @@ def get_counters(property, type):
 
 @blueprint.route('/delete_log/<log_id>', methods=['POST'])
 @login_required
-@permission_required('Edit logs')
+@permission_required('Edit logs', redirect=False)
 def delete_log(log_id):
     log = retrieve(Log, id=log_id)
     db.session.delete(log)

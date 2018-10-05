@@ -54,9 +54,13 @@ function deleteLog(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/delete_log/${id}`,
-    success: function() {
-      table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify('Log successfully deleted.', 'error', 5);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        table.row($(`#${id}`)).remove().draw(false);
+        alertify.notify('Log successfully deleted.', 'error', 5);
+      }
     },
   });
 }

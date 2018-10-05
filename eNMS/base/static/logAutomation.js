@@ -76,10 +76,14 @@ function saveRule() { // eslint-disable-line no-unused-vars
     url: '/save_log_rule',
     data: $('#edit-form').serialize(),
     success: function(logRule) {
-      const mode = $('#title').text().startsWith('Edit') ? 'edited' : 'created';
-      addLogRule(logRule, mode);
-      alertify.notify(`Log rule '${logRule.name}' ${mode}.`, 'success', 5);
-      $('#edit').modal('hide');
+      if (!logRule) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        const mode = $('#title').text().startsWith('Edit') ? 'edited' : 'created';
+        addLogRule(logRule, mode);
+        alertify.notify(`Log rule '${logRule.name}' ${mode}.`, 'success', 5);
+        $('#edit').modal('hide');
+      }
     },
   });
 }
@@ -92,9 +96,13 @@ function deleteLogRule(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/delete_log_rule/${id}`,
-    success: function() {
-      table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify('Log rule successfully deleted.', 'error', 5);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        table.row($(`#${id}`)).remove().draw(false);
+        alertify.notify('Log rule successfully deleted.', 'error', 5);
+      }
     },
   });
 }

@@ -71,7 +71,7 @@ def view(view_type):
 
 @blueprint.route('/export_to_google_earth', methods=['POST'])
 @login_required
-@permission_required('Views section')
+@permission_required('Views section', redirect=False)
 def export_to_google_earth():
     kml_file = Kml()
     for device in Device.query.all():

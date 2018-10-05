@@ -3,7 +3,7 @@ from flask_login import login_required
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import retrieve
+from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import pretty_names
 from eNMS.objects.models import Device, Pool
 from eNMS.services.models import Job
@@ -20,6 +20,7 @@ from eNMS.workflows.models import WorkflowEdge, Workflow
 
 @blueprint.route('/workflow_management')
 @login_required
+@permission_required('Workflows section')
 def workflows():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -34,8 +35,8 @@ def workflows():
 
 
 @blueprint.route('/workflow_editor/')
-@blueprint.route('/workflow_editor/<workflow_id>')
 @login_required
+@permission_required('Workflows section')
 def workflow_editor(workflow_id=None):
     add_existing_task_form = AddExistingTaskForm(request.form)
     workflow_editor_form = WorkflowEditorForm(request.form)
@@ -59,6 +60,7 @@ def workflow_editor(workflow_id=None):
 
 @blueprint.route('/get/<workflow_id>', methods=['POST'])
 @login_required
+@permission_required('Workflows section', redirect=False)
 def get_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
@@ -66,12 +68,14 @@ def get_workflow(workflow_id):
 
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def edit_workflow():
     return jsonify(factory(Workflow, **request.form.to_dict()).serialized)
 
 
 @blueprint.route('/delete/<workflow_id>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def delete_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     db.session.delete(workflow)
@@ -81,6 +85,7 @@ def delete_workflow(workflow_id):
 
 @blueprint.route('/add_node/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def add_node(workflow_id, task_id):
     workflow = retrieve(Workflow, id=workflow_id)
     task = retrieve(Task, id=task_id)
@@ -91,6 +96,7 @@ def add_node(workflow_id, task_id):
 
 @blueprint.route('/delete_node/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def delete_node(workflow_id, task_id):
     task = retrieve(Task, id=task_id)
     db.session.delete(task)
@@ -100,6 +106,7 @@ def delete_node(workflow_id, task_id):
 
 @blueprint.route('/add_edge/<wf_id>/<type>/<source>/<dest>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def add_edge(wf_id, type, source, dest):
     source_task = retrieve(Task, id=source)
     destination_task = retrieve(Task, id=dest)
@@ -115,6 +122,7 @@ def add_edge(wf_id, type, source, dest):
 
 @blueprint.route('/delete_edge/<workflow_id>/<edge_id>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def delete_edge(workflow_id, edge_id):
     edge = retrieve(WorkflowEdge, id=edge_id)
     db.session.delete(edge)
@@ -124,6 +132,7 @@ def delete_edge(workflow_id, edge_id):
 
 @blueprint.route('/set_as_start/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def set_as_start(workflow_id, task_id):
     workflow = retrieve(Workflow, id=workflow_id)
     workflow.start_task = task_id
@@ -133,6 +142,7 @@ def set_as_start(workflow_id, task_id):
 
 @blueprint.route('/set_as_end/<workflow_id>/<task_id>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def set_as_end(workflow_id, task_id):
     workflow = retrieve(Workflow, id=workflow_id)
     workflow.end_task = task_id
@@ -142,6 +152,7 @@ def set_as_end(workflow_id, task_id):
 
 @blueprint.route('/save_positions/<workflow_id>', methods=['POST'])
 @login_required
+@permission_required('Edit workflows', redirect=False)
 def save_positions(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     for task_id, position in request.json.items():

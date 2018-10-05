@@ -80,7 +80,7 @@ def delete_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     db.session.delete(workflow)
     db.session.commit()
-    return jsonify(workflow.name)
+    return jsonify(workflow)
 
 
 @blueprint.route('/add_node/<workflow_id>/<task_id>', methods=['POST'])

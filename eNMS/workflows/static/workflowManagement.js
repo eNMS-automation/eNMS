@@ -68,8 +68,12 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/workflows/get/${id}`,
     success: function(properties) {
-      for (const [property, value] of Object.entries(properties)) {
-        $(`#property-${property}`).val(value);
+      if (!properties) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        for (const [property, value] of Object.entries(properties)) {
+          $(`#property-${property}`).val(value);
+        }
       }
     },
   });
@@ -87,11 +91,15 @@ function editObject() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#edit-form').serialize(),
       success: function(properties) {
-        const mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
-        addWorkflow(mode, properties);
-        const message = `Workflow ${properties.name};
-        ${mode == 'edit' ? 'edited' : 'created'}.`;
-        alertify.notify(message, 'success', 5);
+        if (!properties) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          const mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
+          addWorkflow(mode, properties);
+          const message = `Workflow ${properties.name};
+          ${mode == 'edit' ? 'edited' : 'created'}.`;
+          alertify.notify(message, 'success', 5);
+        }
       },
     });
     $(`#edit`).modal('hide');
@@ -106,9 +114,13 @@ function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/workflows/delete/${id}`,
-    success: function(name) {
-      table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify(`Workflow '${name}' deleted.`, 'error', 5);
+    success: function(workflow) {
+      if (!workflow) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        table.row($(`#${id}`)).remove().draw(false);
+        alertify.notify(`Workflow '${workflow.name}' deleted.`, 'error', 5);
+      }
     },
   });
 }

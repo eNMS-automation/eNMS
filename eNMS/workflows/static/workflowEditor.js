@@ -264,9 +264,13 @@ function startTask() {
     $.ajax({
       type: 'POST',
       url: `/workflows/set_as_start/${workflow.id}/${start.id}`,
-      success: function() {
-        nodes.update({id: start.id, color: 'green'});
-        workflow.start_task = start.id;
+      success: function(result) {
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          nodes.update({id: start.id, color: 'green'});
+          workflow.start_task = start.id;
+        }
       },
     });
     alertify.notify(`Task ${start.label} set as start.`, 'success', 5);
@@ -287,9 +291,13 @@ function endTask() {
     $.ajax({
       type: 'POST',
       url: `/workflows/set_as_end/${workflow.id}/${end.id}`,
-      success: function() {
-        nodes.update({id: end.id, color: 'red'});
-        workflow.end_task = end.id;
+      success: function(result) {
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          nodes.update({id: end.id, color: 'red'});
+          workflow.end_task = end.id;
+        }
       },
     });
     alertify.notify(`Task ${end.label} set as end.`, 'success', 5);
@@ -328,10 +336,14 @@ $('#workflow-name').on('change', function() {
     type: 'POST',
     url: `/workflows/get/${this.value}`,
     dataType: 'json',
-    success: function(wf) {
-      workflow = wf;
-      graph = displayWorkflow(wf);
-      alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        workflow = result;
+        graph = displayWorkflow(result);
+        alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
+      }
     },
   });
 });
@@ -346,8 +358,10 @@ function savePositions() {
     dataType: 'json',
     contentType: 'application/json;charset=UTF-8',
     data: JSON.stringify(graph.getPositions(), null, '\t'),
-    success: function() {
-      // Positions saved
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      }
     },
   });
 }

@@ -21,16 +21,20 @@ function buildServiceInstances() {
     type: 'POST',
     url: `/services/get_form/${$('#services').val()}`,
     success: function(result) {
-      $('#service-instance').empty();
-      $('#html-form').html(result.form);
-      for (let i = 0; i < result.instances.length; i++) {
-        const instance = result.instances[i];
-        $('#service-instance').append(
-          `<option value='${instance[0]}'>${instance[1]}</option>`
-        );
-      }
-      if ($('#service-instance').val()) {
-        fillInstanceForm();
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $('#service-instance').empty();
+        $('#html-form').html(result.form);
+        for (let i = 0; i < result.instances.length; i++) {
+          const instance = result.instances[i];
+          $('#service-instance').append(
+            `<option value='${instance[0]}'>${instance[1]}</option>`
+          );
+        }
+        if ($('#service-instance').val()) {
+          fillInstanceForm();
+        }
       }
     },
   });
@@ -43,19 +47,23 @@ function fillInstanceForm() {
   $.ajax({
     type: 'POST',
     url: `/services/get_service/${$('#service-instance').val()}`,
-    success: function(properties) {
-      $('#name').empty();
-      for (const [property, value] of Object.entries(properties)) {
-        const propertyType = propertyTypes[property] || 'str';
-        if (propertyType.includes('bool')) {
-          $(`#${property}`).prop('checked', value);
-        } else if (propertyType.includes('dict')) {
-          $(`#${property}`).val(value ? JSON.stringify(value): '{}');
-        } else {
-          $(`#${property}`).val(value);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $('#name').empty();
+        for (const [property, value] of Object.entries(result)) {
+          const propertyType = propertyTypes[property] || 'str';
+          if (propertyType.includes('bool')) {
+            $(`#${property}`).prop('checked', value);
+          } else if (propertyType.includes('dict')) {
+            $(`#${property}`).val(value ? JSON.stringify(value): '{}');
+          } else {
+            $(`#${property}`).val(value);
+          }
         }
+        alertify.notify(`Service '${result.name}' displayed`, 'success', 5);
       }
-    alertify.notify(`Service '${properties.name}' displayed`, 'success', 5);
     },
   });
 }
@@ -71,13 +79,17 @@ function saveService() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#form').serialize(),
       success: function(service) {
-        if (0 == $(`#service-instance option[value='${service.id}']`).length) {
-          $('#service-instance').append(
-            `<option value='${service.id}'>${service.name}</option>`
-          );
-          alertify.notify(`Service '${service.name}' created.`, 'success', 5);
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
-          alertify.notify(`Service '${service.name}' updated.`, 'success', 5);
+          if (0 == $(`#service-instance option[value='${service.id}']`).length) {
+            $('#service-instance').append(
+              `<option value='${service.id}'>${service.name}</option>`
+            );
+            alertify.notify(`Service '${service.name}' created.`, 'success', 5);
+          } else {
+            alertify.notify(`Service '${service.name}' updated.`, 'success', 5);
+          }
         }
       },
     });

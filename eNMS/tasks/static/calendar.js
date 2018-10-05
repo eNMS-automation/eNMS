@@ -29,9 +29,13 @@ $(function() {
         type: 'POST',
         url: `/tasks/get/${calEvent.title}`,
         dataType: 'json',
-        success: function(properties){
-          for (const [property, value] of Object.entries(properties)) {
-            $(`#${property}`).val(value);
+        success: function(result){
+          if (!result) {
+            alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+          } else {
+            for (const [property, value] of Object.entries(result)) {
+              $(`#${property}`).val(value);
+            }
           }
         }
       });

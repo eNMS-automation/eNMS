@@ -18,16 +18,20 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
     url: `/tasks/get/${id}`,
     dataType: 'json',
     success: function(properties) {
-      for (const [property, value] of Object.entries(properties)) {
-        if (typeof(value) === 'boolean') {
-          $(`#${property}`).prop('checked', value);
-        } else {
-          $(`#${property}`).val(value);
+      if (!properties) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        for (const [property, value] of Object.entries(properties)) {
+          if (typeof(value) === 'boolean') {
+            $(`#${property}`).prop('checked', value);
+          } else {
+            $(`#${property}`).val(value);
+          }
         }
+        $('#job').val(properties.job.id);
+        $('#devices').val(properties.devices.map((n) => n.id));
+        $('#pools').val(properties.pools.map((p) => p.id));
       }
-      $('#job').val(properties.job.id);
-      $('#devices').val(properties.devices.map((n) => n.id));
-      $('#pools').val(properties.pools.map((p) => p.id));
     },
   });
   $('#scheduling').modal('show');
@@ -43,7 +47,11 @@ function runTask(id) { // eslint-disable-line no-unused-vars
     url: `/tasks/run_task/${id}`,
     dataType: 'json',
     success: function(task) {
-      alertify.notify(`Task '${task.name}' started.`, 'success', 5);
+      if (!task) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        alertify.notify(`Task '${task.name}' started.`, 'success', 5);
+      }
     },
   });
 }
@@ -58,7 +66,11 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
     url: `/tasks/show_logs/${id}`,
     dataType: 'json',
     success: function(logs) {
-      $('#logs').text(logs);
+      if (!logs) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $('#logs').text(logs);
+      }
     },
   });
   $(`#show-logs-modal`).modal('show');
@@ -75,16 +87,20 @@ function compareLogs(id) { // eslint-disable-line no-unused-vars
     url: `/tasks/compare_logs/${id}`,
     dataType: 'json',
     success: function(results) {
-      $('#first_version,#second_version,#first_device,#second_device').empty();
-      for (let i = 0; i < results.versions.length; i++) {
-        const value = results.versions[i];
-        $('#first_version,#second_version').append($('<option></option>')
-          .attr('value', value).text(value));
-      }
-      for (let i = 0; i < results.devices.length; i++) {
-        const value = results.devices[i];
-        $('#first_device,#second_device').append($('<option></option>')
-          .attr('value', value).text(value));
+      if (!results) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $('#first_version,#second_version,#first_device,#second_device').empty();
+        for (let i = 0; i < results.versions.length; i++) {
+          const value = results.versions[i];
+          $('#first_version,#second_version').append($('<option></option>')
+            .attr('value', value).text(value));
+        }
+        for (let i = 0; i < results.devices.length; i++) {
+          const value = results.devices[i];
+          $('#first_device,#second_device').append($('<option></option>')
+            .attr('value', value).text(value));
+        }
       }
     },
   });

@@ -17,7 +17,7 @@
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
-              <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+              <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
                 <div class="modal-body">
                   <div class="form-group" style="height: 450px">
                   {% for field in add_device_form if field.widget.input_type != 'hidden'  %}

@@ -7,7 +7,7 @@
         </button>
         <h4 class="modal-title" id="title">Edit link properties</h4>
       </div>
-      <form id="edit-link-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+      <form id="edit-link-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body">
           <div class="form-group" style="height: 450px">
           {% for field in add_link_form if field.widget.input_type != 'hidden'  %}

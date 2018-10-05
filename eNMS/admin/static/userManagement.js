@@ -80,12 +80,14 @@ function processData() { // eslint-disable-line no-unused-vars
       success: function(user) {
         if (!user) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          const title = $('#title').text().startsWith('Edit');
+          const mode = title ? 'edit' : 'create';
+          addUser(mode, user);
+          const message = `User '${user.name}'
+          ${mode == 'edit' ? 'edited' : 'created'}.`;
+          alertify.notify(message, 'success', 5);
         }
-        const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'create';
-        addUser(mode, user);
-        const message = `User '${user.name}'
-        ${mode == 'edit' ? 'edited' : 'created'}.`;
-        alertify.notify(message, 'success', 5);
       },
     });
     $('#edit').modal('hide');
@@ -97,15 +99,16 @@ function processData() { // eslint-disable-line no-unused-vars
  * @param {userId} userId - Id of the user to be deleted.
  */
 function deleteUser(userId) { // eslint-disable-line no-unused-vars
-  $(`#${userId}`).remove();
   $.ajax({
     type: 'POST',
     url: `/admin/delete/${userId}`,
     success: function(user) {
       if (!user) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $(`#${userId}`).remove();
+        alertify.notify(`User '${user.name}' deleted.`, 'error', 5);
       }
-      alertify.notify(`User '${user.name}' deleted.`, 'error', 5);
     },
   });
 }

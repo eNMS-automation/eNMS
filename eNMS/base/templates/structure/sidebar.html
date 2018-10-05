@@ -17,7 +17,7 @@
             <li><a href="/log_automation">Log Automation</a></li>
           </ul>
         </li>
-        {% if 'Admin' in current_user.permissions %}
+        {% if current_user.allowed('Admin section') %}
           <li><a><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/admin/user_management">User Management</a></li>

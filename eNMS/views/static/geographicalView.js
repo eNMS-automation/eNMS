@@ -23,8 +23,12 @@ function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
       url: '/views/export_to_google_earth',
       dataType: 'json',
       data: $('#google-earth-form').serialize(),
-      success: function() {
-        alertify.notify(`Project exported to Google Earth.`, 'success', 5);
+      success: function(result) {
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify(`Project exported to Google Earth.`, 'success', 5);
+        }
       },
     });
     $('#google-earth').modal('hide');

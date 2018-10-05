@@ -57,11 +57,11 @@ function showPoolModal(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/objects/get_pool/${id}`,
-    success: function(properties) {
+    success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        for (const [property, value] of Object.entries(properties)) {
+        for (const [property, value] of Object.entries(result)) {
           if (property.includes('regex')) {
             $(`#${property}`).prop('checked', value);
           } else {
@@ -83,12 +83,12 @@ function showPoolObjects(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/objects/get_pool_objects/${id}`,
-    success: function(properties) {
+    success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        $('#devices').val(properties.devices.map((n) => n.id));
-        $('#links').val(properties.links.map((l) => l.id));
+        $('#devices').val(result.devices.map((n) => n.id));
+        $('#links').val(result.links.map((l) => l.id));
         poolId = id;
       }
     },
@@ -135,6 +135,7 @@ function savePool() { // eslint-disable-line no-unused-vars
           const message = `Pool '${pool.name}'
           ${mode == 'edit' ? 'edited !' : 'created !'}.`;
           alertify.notify(message, 'success', 5);
+        }
       },
     });
     $('#edit').modal('hide');
@@ -150,8 +151,12 @@ function deletePool(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/delete_pool/${id}`,
     success: function(name) {
-      table.row($(`#${id}`)).remove().draw(false);
-      alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        table.row($(`#${id}`)).remove().draw(false);
+        alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
+      }
     },
   });
 }
@@ -163,8 +168,12 @@ function updatePools() { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: '/objects/update_pools',
-    success: function(properties) {
-      alertify.notify('Pools successfully updated.', 'success', 5);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        alertify.notify('Pools successfully updated.', 'success', 5);
+      }
     },
   });
 }

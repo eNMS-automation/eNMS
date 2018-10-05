@@ -1,4 +1,5 @@
 from flask import (
+    abort,
     current_app as app,
     jsonify,
     redirect,
@@ -144,6 +145,14 @@ def admninistration():
         syslog_server=syslog_server,
         opennms_server=opennms_server
     )
+
+
+@blueprint.route('/create_new_user', methods=['POST'])
+def create_new_user():
+    if 'permission' in user_data:
+        abort(403)
+    user_data = request.form.to_dict()
+    return jsonify(factory(User, **user_data).serialized)
 
 
 @blueprint.route('/process_user', methods=['POST'])

@@ -109,7 +109,8 @@ user_permissions = (
     'Views section',
     'Services section',
     'Worflow section',
-    'Task management section'
+    'Task management section',
+    'Edit parameters',
     'Edit users',
     'Edit objects',
     'Edit services',

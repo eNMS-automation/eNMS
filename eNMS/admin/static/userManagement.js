@@ -48,14 +48,17 @@ function showModal() { // eslint-disable-line no-unused-vars
 
 /**
  * Display user modal for editing.
- * @param {name} name - Name of the user to be deleted.
+ * @param {userId} userId - Id of the user to be deleted.
  */
-function showUserModal(name) { // eslint-disable-line no-unused-vars
+function showUserModal(userId) { // eslint-disable-line no-unused-vars
   $('#title').text('Edit user properties');
   $.ajax({
     type: 'POST',
-    url: `/admin/get_${name}`,
+    url: `/admin/get/${userId}`,
     success: function(properties) {
+      if (!properties) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      }
       for (const [property, value] of Object.entries(properties)) {
         $(`#${property}`).val(value);
       }
@@ -97,7 +100,7 @@ function deleteUser(userId) { // eslint-disable-line no-unused-vars
   $(`#${userId}`).remove();
   $.ajax({
     type: 'POST',
-    url: `/admin/delete_${userId}`,
+    url: `/admin/delete/${userId}`,
     success: function(user) {
       if (!user) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

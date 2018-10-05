@@ -126,6 +126,7 @@ class Task(CustomBase):
                 trigger='date',
                 replace_existing=True
             )
+        return runtime
 
     @property
     def properties(self):

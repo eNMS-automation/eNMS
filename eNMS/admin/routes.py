@@ -46,7 +46,7 @@ from eNMS.objects.models import Device
 
 @blueprint.route('/user_management')
 @login_required
-@permission_required('Admin')
+@permission_required('Admin section')
 def users():
     form = AddUser(request.form)
     return render_template(
@@ -117,7 +117,7 @@ def logout():
 
 @blueprint.route('/administration')
 @login_required
-@permission_required('Admin')
+@permission_required('Admin section')
 def admninistration():
     try:
         tacacs_server = db.session.query(TacacsServer).one()
@@ -148,23 +148,24 @@ def admninistration():
 
 @blueprint.route('/process_user', methods=['POST'])
 @login_required
-@permission_required('Manage users', redirect=False)
+@permission_required('Edit users', redirect=False)
 def process_user():
     user_data = request.form.to_dict()
     user_data['permissions'] = request.form.getlist('permissions')
     return jsonify(factory(User, **user_data).serialized)
 
 
-@blueprint.route('/get_<user_id>', methods=['POST'])
+@blueprint.route('/get/<user_id>', methods=['POST'])
 @login_required
+@permission_required('Admin section')
 def get_user(user_id):
     user = retrieve(User, id=user_id)
     return jsonify(user.serialized)
 
 
-@blueprint.route('/delete_<user_id>', methods=['POST'])
+@blueprint.route('/delete/<user_id>', methods=['POST'])
 @login_required
-@permission_required('Manage users', redirect=False)
+@permission_required('Edit users', redirect=False)
 def delete_user(user_id):
     user = retrieve(User, id=user_id)
     db.session.delete(user)
@@ -174,6 +175,7 @@ def delete_user(user_id):
 
 @blueprint.route('/save_tacacs_server', methods=['POST'])
 @login_required
+@permission_required('Edit parameters', redirect=False)
 def save_tacacs_server():
     TacacsServer.query.delete()
     tacacs_server = TacacsServer(**request.form.to_dict())
@@ -184,6 +186,7 @@ def save_tacacs_server():
 
 @blueprint.route('/save_syslog_server', methods=['POST'])
 @login_required
+@permission_required('Edit parameters', redirect=False)
 def save_syslog_server():
     SyslogServer.query.delete()
     syslog_server = SyslogServer(**request.form.to_dict())
@@ -194,6 +197,7 @@ def save_syslog_server():
 
 @blueprint.route('/query_opennms', methods=['POST'])
 @login_required
+@permission_required('Edit objects', redirect=False)
 def query_opennms():
     OpenNmsServer.query.delete()
     opennms_server = OpenNmsServer(**request.form.to_dict())
@@ -229,6 +233,7 @@ def query_opennms():
 
 @blueprint.route('/query_netbox', methods=['POST'])
 @login_required
+@permission_required('Edit objects', redirect=False)
 def query_netbox():
     nb = netbox_api(
         request.form['netbox_address'],
@@ -248,6 +253,7 @@ def query_netbox():
 
 @blueprint.route('/save_geographical_parameters', methods=['POST'])
 @login_required
+@permission_required('Edit parameters', redirect=False)
 def save_geographical_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())
@@ -257,6 +263,7 @@ def save_geographical_parameters():
 
 @blueprint.route('/save_gotty_parameters', methods=['POST'])
 @login_required
+@permission_required('Edit parameters', redirect=False)
 def save_gotty_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())

@@ -44,7 +44,7 @@ Start eNMS as a docker container :
  # download & run the container
  docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
 
-Once eNMS is running, you can go to http://127.0.0.1:5000, create an account and log in.
+Once eNMS is running, you can go to http://127.0.0.1:5000, and log in with the admin account (login / password: admin / admin).
 
 Run eNMS in Production (Unix only)
 ----------------------------------
@@ -159,8 +159,8 @@ You can verify that authentication works issuing the following command and provi
 
 If successful, you will enter a enms prompt. Type \q to exit.
 
-Update the configuration
-************************
+Export PostgreSQL variables
+***************************
 
 The configuration file contains the SQL Alchemy configuration:
 

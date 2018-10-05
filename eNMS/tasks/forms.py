@@ -23,7 +23,7 @@ class SchedulingForm(FlaskForm):
 
 
 class CompareLogsForm(FlaskForm):
-    first_version = SelectField()
-    second_version = SelectField()
-    first_device = SelectField()
-    second_device = SelectField()
+    first_version = SelectField(choices=())
+    second_version = SelectField(choices=())
+    first_device = SelectField(choices=())
+    second_device = SelectField(choices=())

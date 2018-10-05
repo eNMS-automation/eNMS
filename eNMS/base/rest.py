@@ -1,14 +1,28 @@
-from flask import request
+from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
 
-from eNMS import db
+from eNMS import auth, db
+from eNMS.admin.models import User
 from eNMS.base.classes import diagram_classes
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import retrieve
+from eNMS.base.helpers import get_user_credentials, retrieve
 from eNMS.tasks.models import Task
 
 
+@auth.get_password
+def get_password(username):
+    user = retrieve(User, name=username)
+    if user:
+        return get_user_credentials(current_app, user)[1]
+
+
+@auth.error_handler
+def unauthorized():
+    return make_response(jsonify({'message': 'Unauthorized access'}), 403)
+
+
 class RestAutomation(Resource):
+    decorators = [auth.login_required]
 
     def get(self, task_name):
         task = retrieve(Task, name=task_name)
@@ -16,7 +30,8 @@ class RestAutomation(Resource):
         return {'task': task.serialized, 'id': runtime}
 
 
-class GetObject(Resource):
+class GetInstance(Resource):
+    decorators = [auth.login_required]
 
     def get(self, cls_name, object_name):
         return retrieve(diagram_classes[cls_name], name=object_name).serialized
@@ -28,7 +43,8 @@ class GetObject(Resource):
         return f'{cls_name} {object_name} successfully deleted'
 
 
-class UpdateObject(Resource):
+class UpdateInstance(Resource):
+    decorators = [auth.login_required]
 
     def post(self, cls_name):
         return factory(**request.get_json(force=True, silent=True)).serialized
@@ -44,10 +60,10 @@ def configure_rest_api(app):
         '/rest/execute_task/<string:task_name>'
     )
     api.add_resource(
-        UpdateObject,
+        UpdateInstance,
         '/rest/object/<string:cls_name>'
     )
     api.add_resource(
-        GetObject,
+        GetInstance,
         '/rest/object/<string:cls_name>/<string:object_name>'
     )

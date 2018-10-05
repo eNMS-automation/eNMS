@@ -1,5 +1,6 @@
 flask
 flask_apscheduler
+flask_httpauth
 flask_login
 flask_migrate
 flask-restful

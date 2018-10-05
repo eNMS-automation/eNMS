@@ -75,4 +75,5 @@ def get_user_credentials(app, user):
     if app.production:
         return user.name, vault_helper(app, f'user/{user.name}')['password']
     else:
+        print('test', user.name, user.password)
         return user.name, user.password

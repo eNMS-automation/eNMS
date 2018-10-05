@@ -12,40 +12,40 @@ from eNMS.base.properties import device_subtypes, user_permissions
 
 
 class LoginForm(FlaskForm):
-    name = TextField('Username')
-    password = PasswordField('Password')
+    name = TextField()
+    password = PasswordField()
 
 
 class CreateAccountForm(FlaskForm):
-    name = TextField('Username')
-    email = TextField('Email')
-    password = PasswordField('Password')
+    name = TextField()
+    email = TextField()
+    password = PasswordField()
 
 
 class AddUser(FlaskForm):
-    name = TextField('Username')
-    password = PasswordField('Password')
-    email = TextField('Email')
+    name = TextField()
+    password = PasswordField()
+    email = TextField()
     permission_choices = [(p, p) for p in user_permissions]
-    permissions = SelectMultipleField('Permissions', choices=permission_choices)
+    permissions = SelectMultipleField(choices=permission_choices)
 
 
 class TacacsServerForm(FlaskForm):
-    ip_address = TextField('IP address')
-    password = PasswordField('Password')
-    port = IntegerField('Port', default=49)
-    timeout = IntegerField('Timeout', default=10)
+    ip_address = TextField()
+    password = PasswordField()
+    port = IntegerField(default=49)
+    timeout = IntegerField(default=10)
 
 
 class SyslogServerForm(FlaskForm):
-    ip_address = TextField('IP address', default='0.0.0.0')
-    port = IntegerField('Port', default=514)
+    ip_address = TextField(default='0.0.0.0')
+    port = IntegerField(default=514)
 
 
 class GeographicalParametersForm(FlaskForm):
-    default_longitude = FloatField('Default longitude')
-    default_latitude = FloatField('Default latitude')
-    default_zoom_level = IntegerField('Default zoom level')
+    default_longitude = FloatField()
+    default_latitude = FloatField()
+    default_zoom_level = IntegerField()
 
 
 class GottyParametersForm(FlaskForm):

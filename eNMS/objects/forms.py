@@ -18,10 +18,11 @@ from eNMS.base.properties import (
 
 
 class AddObjectForm(FlaskForm):
-    name = TextField('Name')
-    description = TextField('Description')
-    location = TextField('Location')
-    vendor = TextField('Vendor')
+    name = TextField()
+    description = TextField()
+    location = TextField()
+    vendor = TextField()
+    model = TextField()
 
 # devices can be added to the database either one by one via the AddDevice
 # form, or all at once by importing an Excel or a CSV file.
@@ -29,22 +30,22 @@ class AddObjectForm(FlaskForm):
 
 class AddDevice(AddObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
-    subtype = SelectField('Type', choices=device_types)
-    ip_address = TextField('IP address', [optional()])
-    operating_system = TextField('Operating System', [optional()])
-    os_version = TextField('OS version', [optional()])
-    longitude = FloatField('Longitude', default=0.)
-    latitude = FloatField('Latitude', default=0.)
-    username = TextField('username')
-    password = PasswordField('Password')
-    secret_password = PasswordField('Secret password')
+    subtype = SelectField(choices=device_types)
+    ip_address = TextField()
+    operating_system = TextField()
+    os_version = TextField()
+    longitude = FloatField(default=0.)
+    latitude = FloatField(default=0.)
+    username = TextField()
+    password = PasswordField()
+    secret_password = PasswordField()
 
 
 class AddLink(AddObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
-    subtype = SelectField('Type', choices=link_types)
-    source = SelectField('Source', choices=())
-    destination = SelectField('Destination', choices=())
+    subtype = SelectField(choices=link_types)
+    source = SelectField()
+    destination = SelectField()
 
 
 def configure_form(cls):
@@ -61,10 +62,10 @@ def configure_form(cls):
 
 @configure_form
 class AddPoolForm(FlaskForm):
-    name = TextField('Name')
-    description = TextField('Description')
+    name = TextField()
+    description = TextField()
 
 
 class PoolObjectsForm(FlaskForm):
-    devices = SelectMultipleField('Devices', choices=())
-    links = SelectMultipleField('Links', choices=())
+    devices = SelectMultipleField()
+    links = SelectMultipleField()

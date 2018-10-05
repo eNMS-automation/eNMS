@@ -36,9 +36,9 @@ The dictionnary ``results`` is the payload of the task, i.e the information that
   
 The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the ``result`` of all tasks that have already been executed.
 
-If we consider the aforementioned workflow, the task ``task_process_payload1`` receives this variable ``payload`` that contains the results of all other tasks in the workflow (because it is the last one to be executed).
+If we consider the aforementioned workflow, the task ``task_process_payload1`` receives the variable ``payload`` that contains the results of all other tasks in the workflow (because it is the last one to be executed).
 
-If we run the workflow, the result of 
+The results of the task ``task_service_napalm_getter_get_facts`` is the following:
 
 ::
 
@@ -69,7 +69,41 @@ If we run the workflow, the result of
       }
   }
 
-Here's what the the ``job`` function of ``task_process_payload1`` could look like:
+Consequently, the ``payload`` variable received by ``task_process_payload1`` will look like this:
+
+::
+
+  {
+      "task_service_napalm_getter_get_facts": {
+          "success": true,
+          "expected": "",
+          "router8": {
+              "success": true,
+              "result": {
+                  "get_facts": {
+                      "uptime": 25920,
+                      "vendor": "Cisco",
+                      "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
+                      "serial_number": "FHK111813HZ",
+                      "model": "1841",
+                      "hostname": "test",
+                      "fqdn": "test.pynms.fr",
+                      "interface_list": [
+                          "FastEthernet0/0",
+                          "FastEthernet0/1",
+                          "Serial0/0/0",
+                          "Loopback22"
+                      ]
+                  }
+              }
+          }
+      },
+    "task_service_napalm_getter_get_interfaces": {...},
+    "task_service_napalm_getter_get_config": {...},
+    etc...
+  }
+
+If we want to use the results of the Napalm getters in the final task ``task_process_payload1``, here's what the the ``job`` function of ``task_process_payload1`` could look like:
 
 ::
 

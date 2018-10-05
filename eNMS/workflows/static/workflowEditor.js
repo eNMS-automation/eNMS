@@ -79,9 +79,13 @@ if (workflow) {
   $.ajax({
     type: 'POST',
     url: `/workflows/get/${$('#workflow-name').val()}`,
-    success: function(wf) {
-      workflow = wf;
-      graph = displayWorkflow(wf);
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        workflow = result;
+        graph = displayWorkflow(result);
+      }
     },
   });
 }
@@ -101,13 +105,17 @@ function addTaskToWorkflow() { // eslint-disable-line no-unused-vars
       dataType: 'json',
       data: $('#add-existing-task-form').serialize(),
       success: function(task) {
-        $('#add-existing-task').modal('hide');
-        if (graph.findNode(task.id).length == 0) {
-          nodes.add(taskToNode(task));
-          saveNode(task);
-          alertify.notify(`Task '${task.name}' created.`, 'success', 5);
+        if (!task) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
-          alertify.notify(`Task already in workflow.`, 'error', 5);
+          $('#add-existing-task').modal('hide');
+          if (graph.findNode(task.id).length == 0) {
+            nodes.add(taskToNode(task));
+            saveNode(task);
+            alertify.notify(`Task '${task.name}' created.`, 'success', 5);
+          } else {
+            alertify.notify(`Task already in workflow.`, 'error', 5);
+          }
         }
       },
     });
@@ -125,8 +133,12 @@ function saveNode(task) {
     type: 'POST',
     url: `/workflows/add_node/${workflow.id}/${task.id}`,
     success: function(task) {
-      const message = `Task '${task.name}' added to the workflow.`;
-      alertify.notify(message, 'success', 5);
+      if (!task) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        const message = `Task '${task.name}' added to the workflow.`;
+        alertify.notify(message, 'success', 5);
+      }
     },
   });
 }
@@ -140,8 +152,12 @@ function deleteNode(id) {
     type: 'POST',
     url: `/workflows/delete_node/${workflow.id}/${id}`,
     success: function(task) {
-      const message = `Task '${task.name}' deleted from the workflow.`;
-      alertify.notify(message, 'success', 5);
+      if (!task) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        const message = `Task '${task.name}' deleted from the workflow.`;
+        alertify.notify(message, 'success', 5);
+      }
     },
   });
 }
@@ -156,8 +172,12 @@ function saveEdge(edge) {
     type: 'POST',
     url: `/workflows/add_edge/${param}`,
     success: function(edge) {
-      alertify.notify('Edge added to the workflow', 'success', 5);
-      edges.add(edgeToEdge(edge));
+      if (!edge) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        alertify.notify('Edge added to the workflow', 'success', 5);
+        edges.add(edgeToEdge(edge));
+      }
     },
   });
 }
@@ -171,7 +191,11 @@ function deleteEdge(edgeId) {
     type: 'POST',
     url: `/workflows/delete_edge/${workflow.id}/${edgeId}`,
     success: function(edge) {
-      alertify.notify('Edge deleted the workflow', 'success', 5);
+      if (!edge) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        alertify.notify('Edge deleted the workflow', 'success', 5);
+      }
     },
   });
 }

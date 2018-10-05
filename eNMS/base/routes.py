@@ -15,7 +15,7 @@ from eNMS.base.properties import (
     reverse_pretty_names,
     type_to_diagram_properties
 )
-from eNMS.base.helpers import retrieve
+from eNMS.base.helpers import permission_required, retrieve
 from eNMS.tasks.models import Task
 
 
@@ -25,7 +25,7 @@ def site_root():
 
 
 @blueprint.route('/dashboard')
-@flask_login.login_required
+@login_required
 def dashboard():
     return render_template(
         'dashboard.html',
@@ -84,13 +84,13 @@ def filter_logs():
 
 
 @blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
-@flask_login.login_required
+@login_required
 def get_log_rule(log_rule_id):
     return jsonify(retrieve(LogRule, id=log_rule_id).serialized)
 
 
 @blueprint.route('/save_log_rule', methods=['POST'])
-@flask_login.login_required
+@login_required
 @permission_required('Edit logs')
 def save_log_rule():
     tasks = [retrieve(Task, id=id) for id in request.form.getlist('tasks')]
@@ -100,8 +100,18 @@ def save_log_rule():
     return jsonify(log_rule.serialized)
 
 
+@blueprint.route('/delete_log_rule/<log_id>', methods=['POST'])
+@login_required
+@permission_required('Edit logs')
+def delete_log_rule(log_id):
+    log_rule = retrieve(LogRule, id=log_id)
+    db.session.delete(log_rule)
+    db.session.commit()
+    return jsonify({'success': True})
+
+
 @blueprint.route('/counters/<property>/<type>', methods=['POST'])
-@flask_login.login_required
+@login_required
 def get_counters(property, type):
     objects = diagram_classes[type].query.all()
     if property in reverse_pretty_names:

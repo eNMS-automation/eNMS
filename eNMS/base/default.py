@@ -42,12 +42,6 @@ def create_service_classes():
 
 def create_default_users():
     factory(User, **{
-        'name': 'cisco',
-        'email': 'cisco@cisco.com',
-        'password': 'cisco',
-        'permissions': []
-    })
-    factory(User, **{
         'name': 'admin',
         'email': 'admin@admin.com',
         'password': 'admin',
@@ -141,7 +135,7 @@ def create_netmiko_workflow():
             'waiting_time': 3 if instance.name == 'delete_vrf_TEST' else 0,
             'start-task': 'do-not-run',
             'job': instance,
-            'user': retrieve(User, name='cisco')
+            'user': retrieve(User, name='admin')
         }))
     workflow = factory(Workflow, **{
         'name': 'Netmiko_VRF_workflow',
@@ -161,7 +155,7 @@ def create_netmiko_workflow():
         'name': 'task_netmiko_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
-        'user': retrieve(User, name='cisco')
+        'user': retrieve(User, name='admin')
     })
     for index, task in enumerate(tasks):
         task.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
@@ -195,7 +189,7 @@ def create_napalm_workflow():
             'job': instance,
             'start-task': 'do-not-run',
             'devices': [retrieve(Device, name='router8')],
-            'user': retrieve(User, name='cisco')
+            'user': retrieve(User, name='admin')
         }))
     tasks.insert(1, retrieve(Task, name=f'task_netmiko_check_vrf_TEST'))
     tasks.append(retrieve(Task, name=f'task_netmiko_check_no_vrf_TEST'))
@@ -217,7 +211,7 @@ def create_napalm_workflow():
         'name': 'task_napalm_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
-        'user': retrieve(User, name='cisco')
+        'user': retrieve(User, name='admin')
     })
     for index, task in enumerate(tasks):
         task.positions['Napalm_VRF_workflow'] = (0, 100 * index)
@@ -257,7 +251,7 @@ def create_payload_transfer_workflow():
             'job': instance,
             'start-task': 'do-not-run',
             'devices': [retrieve(Device, name='router8')],
-            'user': retrieve(User, name='cisco')
+            'user': retrieve(User, name='admin')
         }))
     workflow = factory(Workflow, **{
         'name': 'payload_transfer_workflow',
@@ -283,7 +277,7 @@ def create_payload_transfer_workflow():
         'name': 'task_payload_transfer_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
-        'user': retrieve(User, name='cisco')
+        'user': retrieve(User, name='admin')
     })
 
 

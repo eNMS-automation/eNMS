@@ -119,7 +119,7 @@ user_permissions = (
     'Views section',
     'Services section',
     'Worflow section',
-    'Task Management section',
+    'Tasks section',
     'Edit logs',
     'Edit parameters',
     'Edit users',
@@ -216,13 +216,13 @@ workflow_diagram_properties = (
 
 service_diagram_properties = (
     'type',
-    'vendor',
-    'operating_system'
+    'device_multiprocessing'
 )
 
 task_diagram_properties = (
     'type',
-    'recurrent',
+    'status',
+    'frequency'
 )
 
 type_to_diagram_properties = {
@@ -242,11 +242,13 @@ pretty_names = {
     'description': 'Description',
     'destination': 'Destination',
     'dest_file': 'Destination file',
+    'device_multiprocessing': 'Device multiprocessing',
     'direction': 'Direction',
     'driver': 'Driver',
     'email': 'Email',
     'file': 'File',
     'file_system': 'File system',
+    'frequency': 'Frequency',
     'getters': 'Getters',
     'global_delay_factor': 'Global delay factor',
     'inventory_from_selection': 'Inventory from selection',
@@ -266,6 +268,7 @@ pretty_names = {
     'enable_password': 'Enable password',
     'source': 'Source',
     'source_file': 'Source file',
+    'status': 'Status',
     'subtype': 'Subtype',
     'text file': 'File',
     'type': 'Type',

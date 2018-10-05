@@ -34,7 +34,7 @@ This workflow is made of 4 services:
 Configure and decommission a VRF with Napalm
 --------------------------------------------
 
-This workflow peforms the same action as the previous one (create and delete a VRF called ``TEST``, and validate each step), exception it uses Napalm to create and decommission the VRF.
+This workflow peforms the same action as the previous one (create and delete a VRF called ``TEST``, and validate each step), except it uses Napalm to create and decommission the VRF.
 
 The creation step is handled by Napalm ``load_merge`` function while the VRF deletion relies on Napalm ``rollback`` function.
 

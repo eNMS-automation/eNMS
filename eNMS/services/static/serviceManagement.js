@@ -48,25 +48,6 @@ function showSchedulingModal(id) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Create a new service.
- * @param {type} type - Type of service to create.
- */
-function createService(type) { // eslint-disable-line no-unused-vars
-  if ($(`#${type}-form`).parsley().validate() ) {
-    $.ajax({
-      type: 'POST',
-      url: `/services/create_service/${type}`,
-      dataType: 'json',
-      data: $(`#${type}-form`).serialize(),
-      success: function() {
-        alertify.notify('Service successfully updated.', 'success', 5);
-      },
-    });
-    $(`#edit-${type}`).modal('hide');
-  }
-}
-
-/**
  * Delete a service.
  * @param {id} id - Id of the service to delete.
  */
@@ -74,10 +55,14 @@ function deleteService(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
     url: `/services/delete/${id}`,
-    success: function(serviceName) {
-      table.row($(`#${id}`)).remove().draw(false);
-      const message = `Service '${serviceName}' successfully deleted.`;
-      alertify.notify(message, 'error', 5);
+    success: function(service) {
+      if (!service) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        table.row($(`#${id}`)).remove().draw(false);
+        const message = `Service '${service.name}' successfully deleted.`;
+        alertify.notify(message, 'error', 5);
+      }
     },
   });
 }

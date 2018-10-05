@@ -107,7 +107,7 @@ def delete_object(service_id):
     service = retrieve(Service, id=service_id)
     db.session.delete(service)
     db.session.commit()
-    return jsonify(service.name)
+    return jsonify(service.serialized)
 
 
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])

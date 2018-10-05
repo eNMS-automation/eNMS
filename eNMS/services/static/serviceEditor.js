@@ -96,15 +96,6 @@ function saveService() { // eslint-disable-line no-unused-vars
   }
 }
 
-/**
- * Delete a service.
- * @param {id} id - Id of the service to delete.
- */
-function deleteService(id) { // eslint-disable-line no-unused-vars
-
-}
-
-
 $('#services').change(function() {
   buildServiceInstances();
 });

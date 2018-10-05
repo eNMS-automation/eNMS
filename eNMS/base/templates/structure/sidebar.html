@@ -25,6 +25,7 @@
             </ul>
           </li>
         {% endif %}
+        {% if current_user.allowed('Inventory section') %}
         <li><a><i class="fa fa-sitemap"></i>Inventory<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/objects/device_management">Device Management</a></li>
@@ -32,24 +33,32 @@
             <li><a href="/objects/pool_management">Pool Management</a></li>
           </ul>
         </li>
+        {% endif %}
+        {% if current_user.allowed('Views section') %}
         <li><a><i class="fa fa-map-marker"></i>Views<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/views/geographical_view">Geographical View</a></li>
             <li><a href="/views/logical_view">Logical View</a></li>
           </ul>
         </li>
+        {% endif %}
+        {% if current_user.allowed('Services section') %}
         <li><a><i class="fa fa-clock-o"></i>Services<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/services/service_management">Service Management</a></li>
             <li><a href="/services/service_editor">Service Editor</a></li>
           </ul>
         </li>
+        {% endif %}
+        {% if current_user.allowed('Workflows section') %}
         <li><a><i class="fa fa-clock-o"></i>Workflows<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/workflows/workflow_management">Workflow Management</a></li>
             <li><a href="/workflows/workflow_editor/">Workflow Editor</a></li>
           </ul>
         </li>
+        {% endif %}
+        {% if current_user.allowed('Task Management section') %}
         <li><a><i class="fa fa-clock-o"></i>Task Management<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/tasks/task_management/service">Service Tasks</a></li>
@@ -57,6 +66,7 @@
             <li><a href="/tasks/calendar">Calendar</a></li>
           </ul>
         </li>
+        {% endif %}
       </ul>
     </div>
   </div>

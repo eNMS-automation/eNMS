@@ -3,7 +3,7 @@ from flask_login import login_required
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import retrieve
+from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import (
     pretty_names,
     property_types,

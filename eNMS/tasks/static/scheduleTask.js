@@ -49,10 +49,14 @@ $('#service_type').on('change', function() {
     url: `/services/service_type/${this.value}`,
     dataType: 'json',
     success: function(services) {
-      $('#service').empty();
-      $.each(services, function(_, s) {
-        $('#service').append(`<option value="${s.id}">${s.name}</option>`);
-      });
+      if (!services) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        $('#service').empty();
+        $.each(services, function(_, s) {
+          $('#service').append(`<option value="${s.id}">${s.name}</option>`);
+        });
+      }
     },
   });
 });
@@ -68,8 +72,12 @@ function scheduleTask() {
       dataType: 'json',
       data: $('#scheduling-form').serialize(),
       success: function(result) {
-        $('#scheduling').modal('hide');
-        alertify.notify(`Task '${result.name}' scheduled.`, 'success', 5);
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          $('#scheduling').modal('hide');
+          alertify.notify(`Task '${result.name}' scheduled.`, 'success', 5);
+        }
       },
     });
   } else {

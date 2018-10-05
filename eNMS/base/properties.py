@@ -118,7 +118,7 @@ user_permissions = (
     'Inventory section',
     'Views section',
     'Services section',
-    'Worflow section',
+    'Workflows section',
     'Tasks section',
     'Edit logs',
     'Edit parameters',

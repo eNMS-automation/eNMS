@@ -2,7 +2,6 @@ from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import login_required
 from re import search
-import flask_login
 
 from eNMS import db, login_manager
 from eNMS.base import blueprint
@@ -67,7 +66,7 @@ def log_automation():
 
 
 @blueprint.route('/filter_logs', methods=['POST'])
-@flask_login.login_required
+@login_required
 def filter_logs():
     logs = [log for log in Log.serialize() if all(
         # if the regex property is not in the request, the
@@ -92,6 +91,7 @@ def get_log_rule(log_rule_id):
 
 @blueprint.route('/save_log_rule', methods=['POST'])
 @flask_login.login_required
+@permission_required('Edit logs')
 def save_log_rule():
     tasks = [retrieve(Task, id=id) for id in request.form.getlist('tasks')]
     log_rule = factory(LogRule, **request.form.to_dict())
@@ -111,31 +111,12 @@ def get_counters(property, type):
 
 @blueprint.route('/delete_log/<log_id>', methods=['POST'])
 @login_required
+@permission_required('Edit logs')
 def delete_log(log_id):
     log = retrieve(Log, id=log_id)
     db.session.delete(log)
     db.session.commit()
     return jsonify({'success': True})
-
-
-@login_manager.unauthorized_handler
-def unauthorized_handler():
-    return render_template('errors/page_403.html'), 403
-
-
-@blueprint.errorhandler(403)
-def authorization_required(error):
-    return render_template('errors/page_403.html'), 403
-
-
-@blueprint.errorhandler(404)
-def not_found_error(error):
-    return render_template('errors/page_404.html'), 404
-
-
-@blueprint.errorhandler(500)
-def internal_error(error):
-    return render_template('errors/page_500.html'), 500
 
 
 def shutdown_server():

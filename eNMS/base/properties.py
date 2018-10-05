@@ -110,6 +110,7 @@ user_permissions = (
     'Services section',
     'Worflow section',
     'Task Management section',
+    'Edit logs',
     'Edit parameters',
     'Edit users',
     'Edit objects',

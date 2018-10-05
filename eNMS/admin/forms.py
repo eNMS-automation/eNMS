@@ -31,14 +31,14 @@ class AddUser(FlaskForm):
 
 
 class TacacsServerForm(FlaskForm):
-    ip_address = TextField()
+    ip_address = TextField('IP address')
     password = PasswordField()
     port = IntegerField(default=49)
     timeout = IntegerField(default=10)
 
 
 class SyslogServerForm(FlaskForm):
-    ip_address = TextField(default='0.0.0.0')
+    ip_address = TextField('IP address', default='0.0.0.0')
     port = IntegerField(default=514)
 
 
@@ -54,22 +54,16 @@ class GottyParametersForm(FlaskForm):
 
 
 class OpenNmsForm(FlaskForm):
-    rest_query = TextField(
-        'ReST API',
-        default='https://demo.opennms.org/opennms/rest'
-    )
-    node_query = TextField(
-        'Devices',
-        default='https://demo.opennms.org/opennms/rest/nodes'
-    )
+    rest_api = TextField(default='https://demo.opennms.org/opennms/rest')
+    devices = TextField(default='https://demo.opennms.org/opennms/rest/nodes')
     node_type = [subtype for subtype in device_subtypes.items()]
-    type = SelectField('Type', choices=node_type)
-    login = TextField('Login')
-    password = PasswordField('Password')
+    type = SelectField(choices=node_type)
+    login = TextField()
+    password = PasswordField()
 
 
 class NetboxForm(FlaskForm):
-    netbox_address = TextField('Address', default='http://0.0.0.0:8000')
-    netbox_token = TextField('Token')
+    netbox_address = TextField(default='http://0.0.0.0:8000')
+    netbox_token = TextField()
     node_type = [subtype for subtype in device_subtypes.items()]
-    netbox_type = SelectField('Type', choices=node_type)
+    netbox_type = SelectField(choices=node_type)

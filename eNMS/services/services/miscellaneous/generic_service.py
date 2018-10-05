@@ -14,7 +14,11 @@ class GenericService(Service):
     }
 
     def job(self, task, incoming_payload):
-        return getattr(self, self.name)(task, incoming_payload)
+        try:
+            return getattr(self, self.name)(task, incoming_payload)
+        # exceptions mess up the scheduler, we need to catch them all
+        except Exception as e:
+            return {'success': False, 'result': str(e)}
 
     def process_payload1(self, task, payload):
         int_r8 = payload['task_service_napalm_getter_get_interfaces']['router8']
@@ -27,7 +31,7 @@ class GenericService(Service):
         result_facts_r8 = facts_r8['result']['get_facts']
         uptime_less_than_50000 = result_facts_r8['uptime'] < 50000
         return {
-            'success': success,
+            'success': True,
             'result': {
                 'same_speed_Fa0_Fa1': same_speed,
                 'uptime_less_5000': uptime_less_than_50000

@@ -93,9 +93,11 @@ def get_log_rule(log_rule_id):
 @login_required
 @permission_required('Edit logs')
 def save_log_rule():
-    tasks = [retrieve(Task, id=id) for id in request.form.getlist('tasks')]
-    log_rule = factory(LogRule, **request.form.to_dict())
-    log_rule.tasks = tasks
+    data = request.form.to_dict()
+    data['tasks'] = [
+        retrieve(Task, id=id) for id in request.form.getlist('tasks')
+    ]
+    log_rule = factory(LogRule, **data)
     db.session.commit()
     return jsonify(log_rule.serialized)
 

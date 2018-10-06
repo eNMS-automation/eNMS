@@ -276,7 +276,7 @@ def create_payload_transfer_workflow():
             'destination': tasks[y]
         })
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
-    positions = [(0, 0), (10, 15), (5, -5), (10, -10), (15, -15), (50, 0)]
+    positions = [(-5, 0), (5, -10), (15, 10), (15, -10), (30, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
         tasks[index].positions['payload_transfer_workflow'] = x * 10, y * 10
     factory(WorkflowTask, **{

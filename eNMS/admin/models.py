@@ -112,8 +112,8 @@ class Parameters(CustomBase):
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)
     gotty_port_index = Column(Integer, default=-1)
-    opennms_rest_query = Column(String)
-    device_query = Column(String)
+    opennms_rest_api = Column(String)
+    opennms_devices = Column(String)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

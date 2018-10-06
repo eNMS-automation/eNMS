@@ -33,7 +33,6 @@ from eNMS.admin.forms import (
     TacacsServerForm,
 )
 from eNMS.admin.models import (
-    OpenNmsServer,
     Parameters,
     SyslogServer,
     User,
@@ -128,8 +127,6 @@ def admninistration():
         syslog_server = db.session.query(SyslogServer).one()
     except NoResultFound:
         syslog_server = None
-    try:
-        opennms_server = db.session.query(OpenNmsServer).one()
     except NoResultFound:
         opennms_server = None
     return render_template(
@@ -142,8 +139,7 @@ def admninistration():
         syslog_form=SyslogServerForm(request.form),
         opennms_form=OpenNmsForm(request.form),
         tacacs_server=tacacs_server,
-        syslog_server=syslog_server,
-        opennms_server=opennms_server
+        syslog_server=syslog_server
     )
 
 
@@ -209,11 +205,13 @@ def save_syslog_server():
 @permission_required('Edit objects', redirect=False)
 def query_opennms():
     parameters = db.session.query(Parameters).one()
-    opennms_server = parameters.update(**request.form.to_dict())
+    login, password = request.form['login'], request.form['password']
+    parameters.update(**request.form.to_dict())
+    print(request.form.to_dict(), parameters.__dict__, login, password)
     json_devices = get(
-        opennms_server.device_query,
+        parameters.devices,
         headers={'Accept': 'application/json'},
-        auth=(opennms_server.login, opennms_server.password)
+        auth=(login, password)
     ).json()['node']
     devices = {
         device['id']:
@@ -221,21 +219,20 @@ def query_opennms():
             'longitude': device['assetRecord'].get('longitude', 0.),
             'latitude': device['assetRecord'].get('latitude', 0.),
             'name': device.get('label', device['id']),
-            'type': opennms_server.type
+            'subtype': request.form['type']
         } for device in json_devices
     }
 
     for device in list(devices):
         link = get(
-            opennms_server.rest_query + '/nodes/' + device + '/ipinterfaces',
+            f'{parameters.rest_api}/nodes/{device}/ipinterfaces',
             headers={'Accept': 'application/json'},
-            auth=(opennms_server.login, opennms_server.password)
+            auth=(login, password)
         ).json()
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
                 devices[device]['ip_address'] = interface['ipAddress']
                 factory(Device, **devices[device])
-    db.session.add(opennms_server)
     db.session.commit()
     return jsonify({'success': True})
 

@@ -146,7 +146,9 @@ parameters_public_properties = (
     'default_latitude',
     'default_zoom_level',
     'gotty_start_port',
-    'gotty_end_port'
+    'gotty_end_port',
+    'opennms_rest_api',
+    'opennms_devices'
 )
 
 task_serialized_properties = (

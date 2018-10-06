@@ -7,7 +7,6 @@ from wtforms import (
     SelectField,
     TextField
 )
-from wtforms.validators import optional
 
 from eNMS.base.properties import (
     link_public_properties,

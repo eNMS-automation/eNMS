@@ -107,7 +107,6 @@ def configure_errors(app):
 
 
 def configure_logs(app):
-    print(app.path / 'logs' / 'enms.log')
     logging.basicConfig(
         level=logging.DEBUG,
         handlers=[

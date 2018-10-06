@@ -10,5 +10,29 @@ This can be done with the ``Generic Service``.
 
 A "Generic Service" has only one parameter: a name. The function that will run when this service is scheduled is the one that carries the same name as the service itself.
 
-Let's take a look at how the ``Generic Service`` is implement
+Let's take a look at how the ``Generic Service`` is implemented:
 
+::
+
+  class GenericService(Service):
+  
+      __tablename__ = 'GenericService'
+  
+      id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+  
+      __mapper_args__ = {
+          'polymorphic_identity': 'generic_service',
+      }
+  
+      def job(self, task, incoming_payload):
+          try:
+              return getattr(self, self.name)(task, incoming_payload)
+          # exceptions mess up the scheduler, we need to catch them all
+          except Exception as e:
+              return {'success': False, 'result': str(e)}
+  
+      def job1(self, task, payload):
+        pass
+
+The ``job`` function of ``GenericService`` will run the class method of ``GenericService`` with the same name as the instance itself.
+In other words, if you create an instance of ``GenericService`` called ``job1``, when that instance of ``GenericService`` is executed, the ``job1`` method of ``GenericService`` will run.

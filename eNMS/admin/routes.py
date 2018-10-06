@@ -207,9 +207,9 @@ def query_opennms():
     parameters = db.session.query(Parameters).one()
     login, password = request.form['login'], request.form['password']
     parameters.update(**request.form.to_dict())
-    print(request.form.to_dict(), parameters.__dict__, login, password)
+    db.session.commit()
     json_devices = get(
-        parameters.devices,
+        parameters.opennms_devices,
         headers={'Accept': 'application/json'},
         auth=(login, password)
     ).json()['node']
@@ -219,13 +219,13 @@ def query_opennms():
             'longitude': device['assetRecord'].get('longitude', 0.),
             'latitude': device['assetRecord'].get('latitude', 0.),
             'name': device.get('label', device['id']),
-            'subtype': request.form['type']
+            'subtype': request.form['subtype']
         } for device in json_devices
     }
 
     for device in list(devices):
         link = get(
-            f'{parameters.rest_api}/nodes/{device}/ipinterfaces',
+            f'{parameters.opennms_rest_api}/nodes/{device}/ipinterfaces',
             headers={'Accept': 'application/json'},
             auth=(login, password)
         ).json()

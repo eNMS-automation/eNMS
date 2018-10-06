@@ -100,18 +100,6 @@ class SyslogServer(CustomBase):
         th.start()
 
 
-class OpenNmsServer(CustomBase):
-
-    __tablename__ = 'OpenNmsServer'
-
-    id = Column(Integer, primary_key=True)
-    rest_query = Column(String)
-    device_query = Column(String)
-    type = Column(String)
-    login = Column(String)
-    password = Column(String)
-
-
 class Parameters(CustomBase):
 
     __tablename__ = 'Parameters'
@@ -124,6 +112,8 @@ class Parameters(CustomBase):
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)
     gotty_port_index = Column(Integer, default=-1)
+    opennms_rest_query = Column(String)
+    device_query = Column(String)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

@@ -208,8 +208,8 @@ def save_syslog_server():
 @login_required
 @permission_required('Edit objects', redirect=False)
 def query_opennms():
-    OpenNmsServer.query.delete()
-    opennms_server = OpenNmsServer(**request.form.to_dict())
+    parameters = db.session.query(Parameters).one()
+    opennms_server = parameters.update(**request.form.to_dict())
     json_devices = get(
         opennms_server.device_query,
         headers={'Accept': 'application/json'},

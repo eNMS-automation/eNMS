@@ -7,4 +7,5 @@ Services
 
    service_system
    default_services
+   generic_service
    service_scheduling

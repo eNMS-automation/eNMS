@@ -42,11 +42,9 @@ class ConfigureBgpService(Service):
                 route-target import {local_as}:410
                 route-target export {local_as}:400
                 maximum route 10000 80
-
-                interface Loopback {loopback}
+                interface {loopback}
                 ip vrf forwarding {vrf_name}
                 ip address {loopback_ip} 255.255.255.255
-
                 router bgp {local_as}
                 address-family ipv4 vrf {vrf_name}
                 network {loopback_ip} mask 255.255.255.255
@@ -63,6 +61,8 @@ class ConfigureBgpService(Service):
                 remote_as=self.remote_as,
                 vrf_name=self.vrf_name
             )
+            config = '\n'.join(filter(None, config.splitlines()))
+            print(config)
             getattr(napalm_driver, 'load_merge_candidate')(config=config)
             napalm_driver.commit_config()
             napalm_driver.close()

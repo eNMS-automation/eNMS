@@ -62,7 +62,6 @@ class ConfigureBgpService(Service):
                 vrf_name=self.vrf_name
             )
             config = '\n'.join(filter(None, config.splitlines()))
-            print(config)
             getattr(napalm_driver, 'load_merge_candidate')(config=config)
             napalm_driver.commit_config()
             napalm_driver.close()

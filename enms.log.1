@@ -1,0 +1,507 @@
+INFO:werkzeug:127.0.0.1 - - [06/Oct/2018 04:19:02] "GET /tasks/task_management/service HTTP/1.0" 200 -
+INFO:apscheduler.scheduler:Added job "2018-10-06 04:19:00.889216" to job store "default"
+DEBUG:apscheduler.scheduler:Looking for jobs to run
+DEBUG:apscheduler.scheduler:Next wakeup is due at 2018-10-06 04:19:26.633792+02:00 (in 14.964200 seconds)
+INFO:werkzeug:127.0.0.1 - - [06/Oct/2018 04:19:11] "POST /tasks/run_task/1 HTTP/1.0" 200 -
+DEBUG:apscheduler.scheduler:Looking for jobs to run
+INFO:apscheduler.executors.default:Running job "2018-10-06 04:19:00.889216 (trigger: date[2018-10-06 04:19:26 CEST], next run at: 2018-10-06 04:19:26 CEST)" (scheduled at 2018-10-06 04:19:26.633792+02:00)
+INFO:apscheduler.scheduler:Removed job 2018-10-06 04:19:00.889216
+DEBUG:apscheduler.scheduler:No jobs; waiting until a job is added
+DEBUG:paramiko.transport:starting thread (client mode): 0x8369668
+DEBUG:paramiko.transport:Local version/idstring: SSH-2.0-paramiko_2.4.1
+DEBUG:paramiko.transport:Remote version/idstring: SSH-1.99-Cisco-1.25
+INFO:paramiko.transport:Connected (version 1.99, client Cisco-1.25)
+DEBUG:paramiko.transport:kex algos:['diffie-hellman-group1-sha1'] server key:['ssh-rsa'] client encrypt:['aes128-cbc', '3des-cbc', 'aes192-cbc', 'aes256-cbc'] server encrypt:['aes128-cbc', '3des-cbc', 'aes192-cbc', 'aes256-cbc'] client mac:['hmac-sha1', 'hmac-sha1-96', 'hmac-md5', 'hmac-md5-96'] server mac:['hmac-sha1', 'hmac-sha1-96', 'hmac-md5', 'hmac-md5-96'] client compress:['none'] server compress:['none'] client lang:[''] server lang:[''] kex follows?False
+DEBUG:paramiko.transport:Kex agreed: diffie-hellman-group1-sha1
+DEBUG:paramiko.transport:HostKey agreed: ssh-rsa
+DEBUG:paramiko.transport:Cipher agreed: aes128-cbc
+DEBUG:paramiko.transport:MAC agreed: hmac-sha1
+DEBUG:paramiko.transport:Compression agreed: none
+DEBUG:paramiko.transport:kex engine KexGroup1 specified hash_algo <built-in function openssl_sha1>
+DEBUG:paramiko.transport:Switch to new keys ...
+DEBUG:paramiko.transport:Adding ssh-rsa host key for 192.168.1.88: b'efc0062f3b97b45acbcf40dbab2b3fe9'
+DEBUG:paramiko.transport:userauth is OK
+INFO:paramiko.transport:Authentication (password) successful!
+DEBUG:paramiko.transport:[chan 0] Max packet in: 32768 bytes
+DEBUG:paramiko.transport:[chan 0] Max packet out: 4096 bytes
+DEBUG:paramiko.transport:Secsh channel 0 opened.
+DEBUG:paramiko.transport:[chan 0] Sesch channel 0 request ok
+DEBUG:paramiko.transport:[chan 0] Sesch channel 0 request ok
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:In disable_paging
+DEBUG:netmiko:Command: terminal length 0
+
+DEBUG:netmiko:write_channel: b'terminal length 0\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: termina
+DEBUG:netmiko:_read_channel_expect read_data: l length 0
+test#
+DEBUG:netmiko:Pattern found: test terminal length 0
+test#
+DEBUG:netmiko:terminal length 0
+test#
+DEBUG:netmiko:Exiting disable_paging
+DEBUG:netmiko:write_channel: b'terminal width 511\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: te
+DEBUG:netmiko:_read_channel_expect read_data: rminal width 511
+test#
+DEBUG:netmiko:Pattern found: test terminal width 511
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: 
+test#
+DEBUG:netmiko:Pattern found: test 
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: 
+test#
+DEBUG:netmiko:Pattern found: test 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'dir\n'
+DEBUG:netmiko:read_channel: dir
+DEBUG:netmiko:read_channel: 
+
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: Directory of flash:/
+
+    1  -rw-    16958152   May 4 2015 10:55:40 +00:00  c1841-spservicesk9-mz.124-8.bin
+    2  -rw-        1821   May 2 2007 23:41:50 +00:00  sdmconfig-18xx.cfg
+    3  -rw-     4734464   May 2 2007 23:42:28 +00:00  sdm.tar
+    4  -rw-      833024   May 2 2007 23:42:50 +00:00  es.tar
+    5  -rw-     1052160   May 2 2007 23:43:14 +00:00  common.tar
+    6  -rw-        1038   May 2 2007 23:43:34 +00:00  home.shtml
+    7  -rw-      102400   May 2 2007 23:43:56 +00:00  home.tar
+    8  -rw-      491213   May 2 2007 23:44:24 +00:00  128MB.sdf
+    9  -rw-     1684577   May 2 2007 23:45:06 +00:00  securedesktop-ios-3.1.1.27-k9.pkg
+   10  -rw-      398305   May 2 2007 23:45:40 +00:00  sslclient-win-1.1.0.154.pkg
+   11  -rw-          11   Oct 4 2018 16:27:30 +00:00  merge_config.txt
+   12  -rw-        5058   Oct 6 2018 01:22:26 +00:00  rollback_config.txt
+   13  -rw-        1058  Sep 13 2017 13:18:08 +00:00  candidate_config.txt
+   14  -rw-           0  Apr 21 2018 19:15:32 +00:00  a.txt
+   15  -rw-           8  Apr 21 2018 19:17:08 +00:00  b.txt
+   16  -rw-           3  Jul 25 2018 15:32:10 +00:00  c.txt
+   17  -rw-           3  Apr 26 2018 07:43:58 +00:00  bab.txt
+
+31932416 bytes total (5627904 bytes free)
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'dir flash:\n'
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: dir flash:
+
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: Directory of flash:/
+
+    1  -rw-    16958152   May 4 2015 10:55:40 +00:00  c1841-spservicesk9-mz.124-8.bin
+    2  -rw-        1821   May 2 2007 23:41:50 +00:00  sdmconfig-18xx.cfg
+    3  -rw-     4734464   May 2 2007 23:42:28 +00:00  sdm.tar
+    4  -rw-      833024   May 2 2007 23:42:50 +00:00  es.tar
+    5  -rw-     1052160   May 2 2007 23:43:14 +00:00  common.tar
+    6  -rw-        1038   May 2 2007 23:43:34 +00:00  home.shtml
+    7  -rw-      102400   May 2 2007 23:43:56 +00:00  home.tar
+    8  -rw-      491213   May 2 2007 23:44:24 +00:00  128MB.sdf
+    9  -rw-     1684577   May 2 2007 23:45:06 +00:00  securedesktop-ios-3.1.1.27-k9.pkg
+   10  -rw-      398305   May 2 2007 23:45:40 +00:00  sslclient-win-1.1.0.154.pkg
+   11  -rw-          11   Oct 4 2018 16:27:30 +00:00  merge_config.txt
+   12  -rw-        5058   Oct 6 2018 01:22:26 +00:00  rollback_config.txt
+   13  -rw-        1058  Sep 13 2017 13:18:08 +00:00  candidate_config.txt
+   14  -rw-           0  Apr 21 2018 19:15:32 +00:00  a.txt
+   15  -rw-           8  Apr 21 2018 19:17:08 +00:00  b.txt
+   16  -rw-           3  Jul 25 2018 15:32:10 +00:00  c.txt
+   17  -rw-           3  Apr 26 2018 07:43:58 +00:00  bab.txt
+
+31932416 bytes total (5627904 bytes free)
+test#
+DEBUG:paramiko.transport:starting thread (client mode): 0xadd82e8
+DEBUG:paramiko.transport:Local version/idstring: SSH-2.0-paramiko_2.4.1
+DEBUG:paramiko.transport:Remote version/idstring: SSH-1.99-Cisco-1.25
+INFO:paramiko.transport:Connected (version 1.99, client Cisco-1.25)
+DEBUG:paramiko.transport:kex algos:['diffie-hellman-group1-sha1'] server key:['ssh-rsa'] client encrypt:['aes128-cbc', '3des-cbc', 'aes192-cbc', 'aes256-cbc'] server encrypt:['aes128-cbc', '3des-cbc', 'aes192-cbc', 'aes256-cbc'] client mac:['hmac-sha1', 'hmac-sha1-96', 'hmac-md5', 'hmac-md5-96'] server mac:['hmac-sha1', 'hmac-sha1-96', 'hmac-md5', 'hmac-md5-96'] client compress:['none'] server compress:['none'] client lang:[''] server lang:[''] kex follows?False
+DEBUG:paramiko.transport:Kex agreed: diffie-hellman-group1-sha1
+DEBUG:paramiko.transport:HostKey agreed: ssh-rsa
+DEBUG:paramiko.transport:Cipher agreed: aes128-cbc
+DEBUG:paramiko.transport:MAC agreed: hmac-sha1
+DEBUG:paramiko.transport:Compression agreed: none
+DEBUG:paramiko.transport:kex engine KexGroup1 specified hash_algo <built-in function openssl_sha1>
+DEBUG:paramiko.transport:Switch to new keys ...
+DEBUG:paramiko.transport:Adding ssh-rsa host key for 192.168.1.88: b'efc0062f3b97b45acbcf40dbab2b3fe9'
+DEBUG:paramiko.transport:userauth is OK
+INFO:paramiko.transport:Authentication (password) successful!
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'dir flash:/merge_config.txt\n'
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: dir flash:/merge_config.txt
+Directory of flash:/merge_config.txt
+
+   11  -rw-          11   Oct 4 2018 16:27:30 +00:00  merge_config.txt
+
+31932416 bytes total (5627904 bytes free)
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'verify /md5 flash:/merge_config.txt\n'
+DEBUG:netmiko:read_channel: verif
+DEBUG:netmiko:read_channel: y /md5 flash:/merge_config.txt
+.Done!
+verify /md5 (flash:/merge_config.txt) = e2085d22ea2feaab0f6d6e9be604e345
+
+
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'dir flash:\n'
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: dir flash:
+
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: Directory of flash:/
+
+    1  -rw-    16958152   May 4 2015 10:55:40 +00:00  c1841-spservicesk9-mz.124-8.bin
+    2  -rw-        1821   May 2 2007 23:41:50 +00:00  sdmconfig-18xx.cfg
+    3  -rw-     4734464   May 2 2007 23:42:28 +00:00  sdm.tar
+    4  -rw-      833024   May 2 2007 23:42:50 +00:00  es.tar
+    5  -rw-     1052160   May 2 2007 23:43:14 +00:00  common.tar
+    6  -rw-        1038   May 2 2007 23:43:34 +00:00  home.shtml
+    7  -rw-      102400   May 2 2007 23:43:56 +00:00  home.tar
+    8  -rw-      491213   May 2 2007 23:44:24 +00:00  128MB.sdf
+    9  -rw-     1684577   May 2 2007 23:45:06 +00:00  securedesktop-ios-3.1.1.27-k9.pkg
+   10  -rw-      398305   May 2 2007 23:45:40 +00:00  sslclient-win-1.1.0.154.pkg
+   11  -rw-          11   Oct 4 2018 16:27:30 +00:00  merge_config.txt
+   12  -rw-        5058   Oct 6 2018 01:22:26 +00:00  rollback_config.txt
+   13  -rw-        1058  Sep 13 2017 13:18:08 +00:00  candidate_config.txt
+   14  -rw-           0  Apr 21 2018 19:15:32 +00:00  a.txt
+   15  -rw-           8  Apr 21 2018 19:17:08 +00:00  b.txt
+   16  -rw-           3  Jul 25 2018 15:32:10 +00:00  c.txt
+   17  -rw-           3  Apr 26 2018 07:43:58 +00:00  bab.txt
+
+31932416 bytes total (5627904 bytes free)
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'show running-config | inc ip scp server enable\n'
+DEBUG:netmiko:read_channel: show
+DEBUG:netmiko:read_channel:  running-config | inc ip scp server enable
+
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: ip scp server enable
+test#
+DEBUG:paramiko.transport:[chan 0] Max packet in: 32768 bytes
+DEBUG:paramiko.transport:[chan 0] Max packet out: 4096 bytes
+DEBUG:paramiko.transport:Secsh channel 0 opened.
+DEBUG:paramiko.transport:[chan 0] Sesch channel 0 request ok
+DEBUG:paramiko.transport:[chan 0] EOF sent (0)
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:paramiko.transport:EOF in transport thread
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'verify /md5 flash:/merge_config.txt\n'
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: verify /md5 flash:/merge_config.txt
+.Done!
+verify /md5 (flash:/merge_config.txt) = 0ba7dedc9188ab8db9d466caff8eb8f7
+
+
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'config term\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: conf
+DEBUG:netmiko:_read_channel_expect read_data: ig term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:Pattern found: test config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'file prompt quiet\n'
+DEBUG:netmiko:read_channel: file prompt quiet
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'end\n'
+DEBUG:netmiko:Pattern is: #
+DEBUG:netmiko:_read_channel_expect read_data: e
+DEBUG:netmiko:_read_channel_expect read_data: nd
+test#
+DEBUG:netmiko:Pattern found: # end
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:exit_config_mode: end
+test#
+DEBUG:netmiko:config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#file prompt quiet
+test(config)#end
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'copy running-config flash:/rollback_config.txt\n'
+DEBUG:netmiko:read_channel: co
+DEBUG:netmiko:read_channel: py running-config flash:/rollback_config.txt
+
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+5082 bytes copied in 1.420 secs (3579 bytes/sec)
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'config term\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: config term
+DEBUG:netmiko:_read_channel_expect read_data: 
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:Pattern found: test config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'no file prompt quiet\n'
+DEBUG:netmiko:read_channel: no file prompt quiet
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'end\n'
+DEBUG:netmiko:Pattern is: #
+DEBUG:netmiko:_read_channel_expect read_data: e
+DEBUG:netmiko:_read_channel_expect read_data: nd
+test#
+DEBUG:netmiko:Pattern found: # end
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:exit_config_mode: end
+test#
+DEBUG:netmiko:config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#no file prompt quiet
+test(config)#end
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'dir flash:/merge_config.txt\n'
+DEBUG:netmiko:read_channel: dir 
+DEBUG:netmiko:read_channel: flash:/merge_config.txt
+Directory of flash:/merge_config.txt
+
+   11  -rw-         734   Oct 6 2018 02:28:08 +00:00  merge_config.txt
+
+31932416 bytes total (5627904 bytes free)
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'config term\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: confi
+DEBUG:netmiko:_read_channel_expect read_data: g term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:Pattern found: test config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'file prompt quiet\n'
+DEBUG:netmiko:read_channel: file prompt quiet
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'end\n'
+DEBUG:netmiko:Pattern is: #
+DEBUG:netmiko:_read_channel_expect read_data: en
+DEBUG:netmiko:_read_channel_expect read_data: d
+test#
+DEBUG:netmiko:Pattern found: # end
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:exit_config_mode: end
+test#
+DEBUG:netmiko:config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#file prompt quiet
+test(config)#end
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'copy flash:/merge_config.txt running-config\n'
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: copy flash:/merge_config.txt running-config
+
+                interface Loopback Lo100
+                                   ^
+% Invalid input detected at '^' marker.
+
+                ip vrf forwarding configure_BGP_test
+                                  ^
+% Invalid input detected at '^' marker.
+
+                ip address 100.1.1.1 255.255.255.255
+                          ^
+% Invalid input detected at '^' marker.
+
+734 bytes copied in 0.092 secs (7978 bytes/sec)
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'config term\n'
+DEBUG:netmiko:Pattern is: test
+DEBUG:netmiko:_read_channel_expect read_data: config
+DEBUG:netmiko:_read_channel_expect read_data:  term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:Pattern found: test config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+test(config)#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'no file prompt quiet\n'
+DEBUG:netmiko:read_channel: no file prompt quiet
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test(config)#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:write_channel: b'end\n'
+DEBUG:netmiko:Pattern is: #
+DEBUG:netmiko:_read_channel_expect read_data: en
+DEBUG:netmiko:_read_channel_expect read_data: d
+test#
+DEBUG:netmiko:Pattern found: # end
+test#
+DEBUG:netmiko:write_channel: b'\n'
+DEBUG:netmiko:read_channel: 
+test#
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 
+DEBUG:netmiko:read_channel: 

@@ -83,6 +83,32 @@ def create_default_network_topology(app):
 
 
 @integrity_rollback
+def create_default_services():
+    for service in (
+        {
+            'type': service_classes['Configure Bgp Service'],
+            'name': 'napalm_configure_bgp_1',
+            'description': 'Configure BGP Peering with Napalm',
+            'local_as': 100,
+            'loopback': 'Lo100',
+            'loopback_ip': '100.1.1.1',
+            'neighbor_ip': '100.1.2.1',
+            'remote_as': 200,
+            'vrf_name': 'configure_BGP_test'
+        },
+    ):
+        instance = factory(service.pop('type'), **service)
+        factory(ServiceTask, **{
+            'name': f'task_{instance.name}',
+            'devices': [retrieve(Device, name='router8')],
+            'waiting_time': 0,
+            'start-task': 'do-not-run',
+            'job': instance,
+            'user': retrieve(User, name='admin')
+        })
+
+
+@integrity_rollback
 def create_netmiko_workflow():
     tasks = []
     for service in (
@@ -288,6 +314,7 @@ def create_payload_transfer_workflow():
 
 
 def create_default_workflows():
+    create_default_services()
     create_netmiko_workflow()
     create_napalm_workflow()
     create_payload_transfer_workflow()

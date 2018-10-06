@@ -111,9 +111,9 @@ def configure_logs(app):
         level=logging.DEBUG,
         handlers=[
             RotatingFileHandler(
-                'enms.log',
-                maxBytes=20000,
-                backupCount=50
+                app.path / 'logs' / 'enms.log',
+                maxBytes=2000000,
+                backupCount=10
             ),
             logging.StreamHandler()
         ]

@@ -38,12 +38,12 @@ def str_dict(input, depth=0):
     if isinstance(input, list):
         result = '\n'
         for element in input:
-            result += '{}- {}\n'.format(tab, str_dict(element, depth + 1))
+            result += f'{tab}- {str_dict(element, depth + 1)}\n'
         return result
     elif isinstance(input, dict):
         result = ''
         for key, value in input.items():
-            result += '\n{}{}: {}'.format(tab, key, str_dict(value, depth + 1))
+            result += f'\n{tab}{key}: {str_dict(value, depth + 1)}'
         return result
     else:
         return str(input)

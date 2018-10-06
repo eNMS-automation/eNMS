@@ -36,31 +36,24 @@ class ConfigureBgpService(Service):
         try:
             napalm_driver = napalm_connection(self, device)
             napalm_driver.open()
-            config = '''
-                ip vrf {vrf_name}
-                rd {local_as}:235
-                route-target import {local_as}:410
-                route-target export {local_as}:400
+            config = f'''
+                ip vrf {self.vrf_name}
+                rd {self.local_as}:235
+                route-target import {self.local_as}:410
+                route-target export {self.local_as}:400
                 maximum route 10000 80
-                interface {loopback}
-                ip vrf forwarding {vrf_name}
-                ip address {loopback_ip} 255.255.255.255
-                router bgp {local_as}
-                address-family ipv4 vrf {vrf_name}
-                network {loopback_ip} mask 255.255.255.255
-                neighbor {neighbor_ip} remote-as {remote_as}
-                neighbor {neighbor_ip} activate
-                neighbor {neighbor_ip} send-community both
-                neighbor {neighbor_ip} as-override
+                interface {self.loopback}
+                ip vrf forwarding {self.vrf_name}
+                ip address {self._ip} 255.255.255.255
+                router bgp {self.local_as}
+                address-family ipv4 vrf {self.vrf_name}
+                network {self.loopback_ip} mask 255.255.255.255
+                neighbor {self.neighbor_ip} remote-as {self.remote_as}
+                neighbor {self.neighbor_ip} activate
+                neighbor {self.neighbor_ip} send-community both
+                neighbor {self.neighbor_ip} as-override
                 exit-address-family
-            '''.format(
-                local_as=self.local_as,
-                loopback=self.loopback,
-                loopback_ip=self.loopback_ip,
-                neighbor_ip=self.neighbor_ip,
-                remote_as=self.remote_as,
-                vrf_name=self.vrf_name
-            )
+            '''
             config = '\n'.join(filter(None, config.splitlines()))
             getattr(napalm_driver, 'load_merge_candidate')(config=config)
             napalm_driver.commit_config()

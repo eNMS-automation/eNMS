@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
 from importlib import import_module
 import logging
+from logging.handlers import RotatingFileHandler
 
 # for the tests, we set expire_on_commit to false
 auth = HTTPBasicAuth()
@@ -106,9 +107,18 @@ def configure_errors(app):
 
 
 def configure_logs(app):
-    logging.basicConfig(filename='error.log', level=logging.DEBUG)
-    logger = logging.getLogger('netmiko')
-    logger.addHandler(logging.StreamHandler())
+    print(app.path / 'logs' / 'enms.log')
+    logging.basicConfig(
+        level=logging.DEBUG,
+        handlers=[
+            RotatingFileHandler(
+                'enms.log',
+                maxBytes=20000,
+                backupCount=50
+            ),
+            logging.StreamHandler()
+        ]
+    )
 
 
 def create_app(path, config):

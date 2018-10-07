@@ -16,7 +16,7 @@ class GenericParallelService(Service):
 
     def job(self, task, incoming_payload):
         targets = task.compute_targets()
-        results = {'success': True, 'result': 'nothing happened'}
+        results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(
             getattr(self, self.name),
@@ -27,7 +27,15 @@ class GenericParallelService(Service):
 
     def job1(self, args):
         task, device, payload, results = args
-        results[device.name] = True
+        results['devices'][device.name] = True
+
+    def job2(self, args):
+        task, device, payload, results = args
+        results['devices'][device.name] = True
+
+    def job3(self, args):
+        task, device, payload, results = args
+        results['devices'][device.name] = True
 
 
 service_classes['Generic Parallel Service'] = GenericParallelService

@@ -20,6 +20,15 @@ class GenericService(Service):
         except Exception as e:
             return {'success': False, 'result': str(e)}
 
+    def job1(self, task, payload):
+        return {'success': True, 'result': ''}
+
+    def job2(self, task, payload):
+        return {'success': True, 'result': ''}
+
+    def job3(self, task, payload):
+        return {'success': True, 'result': ''}
+
     def process_payload1(self, task, payload):
         int_r8 = payload['task_service_napalm_getter_get_interfaces']['router8']
         result_int_r8 = int_r8['result']['get_interfaces']

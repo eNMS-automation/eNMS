@@ -21,7 +21,7 @@ class NapalmRollbackService(Service):
 
     def job(self, task, workflow_results):
         targets = task.compute_targets()
-        results = {'success': True}
+        results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()

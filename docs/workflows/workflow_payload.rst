@@ -137,27 +137,27 @@ This is what the GenericService class would look like with the last example:
 ::
 
   class GenericService(Service):
-  
+
       __tablename__ = 'GenericService'
-  
+
       id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-  
+
       __mapper_args__ = {
           'polymorphic_identity': 'generic_service',
       }
-  
+
       def job(self, task, incoming_payload):
           return getattr(self, self.name)(task, incoming_payload)
-  
+
       def job1(self, task, payload):
           return {'success': True, 'result': ''}
-  
+
       def job2(self, task, payload):
           return {'success': True, 'result': ''}
-  
+
       def job3(self, task, payload):
           return {'success': True, 'result': ''}
-  
+
       def process_payload1(self, task, payload):
           get_int = payload['task_service_napalm_getter_get_interfaces']
           r8_int = get_int['devices']['router8']['result']['get_interfaces']

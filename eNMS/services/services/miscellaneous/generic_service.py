@@ -14,11 +14,10 @@ class GenericService(Service):
     }
 
     def job(self, task, incoming_payload):
-        try:
-            return getattr(self, self.name)(task, incoming_payload)
-        # exceptions mess up the scheduler, we need to catch them all
-        except Exception as e:
-            return {'success': False, 'result': str(e)}
+        # try:
+        return getattr(self, self.name)(task, incoming_payload)
+        # except Exception as e:
+            # return {'success': False, 'result': str(e)}
 
     def job1(self, task, payload):
         return {'success': True, 'result': ''}

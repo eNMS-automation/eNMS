@@ -30,7 +30,7 @@ class NetmikoFileTransferService(Service):
 
     def job(self, task, workflow_results):
         targets = task.compute_targets()
-        results = {'success': True}
+        results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()
@@ -55,8 +55,11 @@ class NetmikoFileTransferService(Service):
             netmiko_handler.disconnect()
         except Exception as e:
             result, success = f'task failed ({e})', False
-            results['success'] = False
-        results[device.name] = {'success': success, 'result': result}
+        results['result'], results['success'] = result, success
+        results['devices'][device.name] = {
+            'success': success,
+            'result': result
+        }
 
 
 service_classes['Netmiko File Transfer Service'] = NetmikoFileTransferService

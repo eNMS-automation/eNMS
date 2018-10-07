@@ -30,15 +30,15 @@ class GenericService(Service):
         return {'success': True, 'result': ''}
 
     def process_payload1(self, task, payload):
-        int_r8 = payload['task_service_napalm_getter_get_interfaces']['router8']
-        result_int_r8 = int_r8['result']['get_interfaces']
-        speed_fa0 = result_int_r8['FastEthernet0/0']['speed']
-        speed_fa1 = result_int_r8['FastEthernet0/1']['speed']
+        get_int = payload['task_service_napalm_getter_get_interfaces']
+        r8_int = get_int['devices']['router8']['result']['get_interfaces']
+        speed_fa0 = r8_int['FastEthernet0/0']['speed']
+        speed_fa1 = r8_int['FastEthernet0/1']['speed']
         same_speed = speed_fa0 == speed_fa1
 
-        facts_r8 = payload['task_service_napalm_getter_get_facts']['router8']
-        result_facts_r8 = facts_r8['result']['get_facts']
-        uptime_less_than_50000 = result_facts_r8['uptime'] < 50000
+        get_facts = payload['task_service_napalm_getter_get_facts']
+        r8_facts = get_facts['devices']['router8']['result']['get_facts']
+        uptime_less_than_50000 = r8_facts['uptime'] < 50000
         return {
             'success': True,
             'result': {

@@ -167,7 +167,10 @@ class ServiceTask(Task):
         return targets
 
     def job(self, workflow, workflow_results=None):
-        results = self.service.job(self, workflow_results)
+        try:
+            results = self.service.job(self, workflow_results)
+        except Exception as e:
+            return {'success': False, 'result': str(e)}
         self.logs[str(datetime.now())] = results
         db.session.commit()
         return results

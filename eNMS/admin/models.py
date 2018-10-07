@@ -112,10 +112,12 @@ class Parameters(CustomBase):
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)
     gotty_port_index = Column(Integer, default=-1)
-    opennms_rest_api = Column(String,
+    opennms_rest_api = Column(
+        String,
         default='https://demo.opennms.org/opennms/rest'
     )
-    opennms_devices = Column(String,
+    opennms_devices = Column(
+        String,
         default='https://demo.opennms.org/opennms/rest/nodes'
     )
     opennms_login = Column(String, default='demo')

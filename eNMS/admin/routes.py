@@ -127,8 +127,6 @@ def admninistration():
         syslog_server = db.session.query(SyslogServer).one()
     except NoResultFound:
         syslog_server = None
-    except NoResultFound:
-        opennms_server = None
     return render_template(
         'administration.html',
         geographical_parameters_form=GeographicalParametersForm(request.form),

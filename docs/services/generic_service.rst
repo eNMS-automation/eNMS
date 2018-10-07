@@ -9,6 +9,7 @@ Another use-case is to implement a service that will only exist as a single inst
 This can be done with the ``Generic Service``.
 
 A "Generic Service" has only one parameter: a name. The function that will run when this service is scheduled is the one that carries the same name as the service itself.
+The "GenericService" can be seen as a "job multiplexer" for simple scripts.
 
 Let's take a look at how the ``Generic Service`` is implemented:
 
@@ -25,14 +26,18 @@ Let's take a look at how the ``Generic Service`` is implemented:
       }
   
       def job(self, task, incoming_payload):
-          try:
-              return getattr(self, self.name)(task, incoming_payload)
-          # exceptions mess up the scheduler, we need to catch them all
-          except Exception as e:
-              return {'success': False, 'result': str(e)}
+          return getattr(self, self.name)(task, incoming_payload)
   
       def job1(self, task, payload):
-        pass
+          return {'success': True, 'result': ''}
+  
+      def job2(self, task, payload):
+          return {'success': True, 'result': ''}
+  
+      def job3(self, task, payload):
+          return {'success': True, 'result': ''}
+
 
 The ``job`` function of ``GenericService`` will run the class method of ``GenericService`` with the same name as the instance itself.
 In other words, if you create an instance of ``GenericService`` called ``job1``, when that instance of ``GenericService`` is executed, the ``job1`` method of ``GenericService`` will run.
+If you create an instance ``job2``, the ``job2`` method of ``GenericService`` will run, etc.

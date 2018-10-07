@@ -37,7 +37,6 @@ Let's take a look at how the ``Generic Service`` is implemented:
       def job3(self, task, payload):
           return {'success': True, 'result': ''}
 
-
 The ``job`` function of ``GenericService`` will run the class method of ``GenericService`` with the same name as the instance itself.
 In other words, if you create an instance of ``GenericService`` called ``job1``, when that instance of ``GenericService`` is executed, the ``job1`` method of ``GenericService`` will run.
 If you create an instance ``job2``, the ``job2`` method of ``GenericService`` will run, etc.

@@ -108,21 +108,30 @@ If we want to use the results of the Napalm getters in the final task ``task_pro
 ::
 
   def job(self, task, payload):
-      int_r8 = payload['task_service_napalm_getter_get_interfaces']['router8']
-      result_int_r8 = int_r8['result']['get_interfaces']
-      speed_Fa0 = result_int_r8['FastEthernet0/0']['speed']
-      speed_Fa1 = result_int_r8['FastEthernet0/1']['speed']
-      same_speed = speed_Fa0 == speed_Fa1
-      
-      facts_r8 = payload['task_service_napalm_getter_get_facts']['router8']
-      result_facts_r8 = facts_r8['result']['get_facts']
-      uptime_less_than_50000 = result_facts_r8['uptime'] < 50000
+      get_int = payload['task_service_napalm_getter_get_interfaces']
+      r8_int = get_int['devices']['router8']['result']['get_interfaces']
+      speed_fa0 = r8_int['FastEthernet0/0']['speed']
+      speed_fa1 = r8_int['FastEthernet0/1']['speed']
+      same_speed = speed_fa0 == speed_fa1
+
+      get_facts = payload['task_service_napalm_getter_get_facts']
+      r8_facts = get_facts['devices']['router8']['result']['get_facts']
+      uptime_less_than_50000 = r8_facts['uptime'] < 50000
       return {
           'success': True,
           'result': {
-              'same_speed_Fa0_Fa1': same_speed,
+              'same_speed_fa0_fa1': same_speed,
               'uptime_less_5000': uptime_less_than_50000
           }
       }
 
 This ``job`` function reuses the Napalm getters of two tasks of the worflow (one of which, ``task_service_napalm_getter_get_facts``, is not a direct predecessor of ``task_process_payload1``) to create new variables and inject them in the results.
+
+Use of a GenericService instance to process the payload
+-------------------------------------------------------
+
+When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the GenericService class, and add a method called after the name of the instance. The GenericService class acts as a "job multiplexer" (see the ``GenericService`` section of the doc).
+
+
+
+

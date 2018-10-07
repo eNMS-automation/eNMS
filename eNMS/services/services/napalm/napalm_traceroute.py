@@ -49,7 +49,10 @@ class NapalmTracerouteService(Service):
         except Exception as e:
             result, success = f'task failed ({e})', False
             results['success'] = False
-        results[device.name] = {'success': success, 'result': result}
+        results['devices'][device.name] = {
+            'success': success,
+            'result': result
+        }
 
 
 service_classes['Napalm Traceroute Service'] = NapalmTracerouteService

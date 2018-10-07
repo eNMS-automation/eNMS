@@ -35,14 +35,14 @@ class NetmikoConfigurationService(Service):
         try:
             netmiko_handler = netmiko_connection(self, device)
             netmiko_handler.send_config_set(self.content.splitlines())
-            result, success = f'configuration OK ({self.content})', True
+            result, success = f'configuration OK', True
             try:
                 netmiko_handler.disconnect()
             except Exception:
                 pass
         except Exception as e:
             result, success = f'task failed ({e})', False
-        results['result'], results['success'] = result, success
+            results['success'] = False
         results['devices'][device.name] = {
             'success': success,
             'result': result

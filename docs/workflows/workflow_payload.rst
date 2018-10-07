@@ -132,6 +132,48 @@ Use of a GenericService instance to process the payload
 
 When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the GenericService class, and add a method called after the name of the instance. The GenericService class acts as a "job multiplexer" (see the ``GenericService`` section of the doc).
 
+This is what the GenericService class would look like with the last example:
 
+::
 
+  class GenericService(Service):
+  
+      __tablename__ = 'GenericService'
+  
+      id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+  
+      __mapper_args__ = {
+          'polymorphic_identity': 'generic_service',
+      }
+  
+      def job(self, task, incoming_payload):
+          return getattr(self, self.name)(task, incoming_payload)
+  
+      def job1(self, task, payload):
+          return {'success': True, 'result': ''}
+  
+      def job2(self, task, payload):
+          return {'success': True, 'result': ''}
+  
+      def job3(self, task, payload):
+          return {'success': True, 'result': ''}
+  
+      def process_payload1(self, task, payload):
+          get_int = payload['task_service_napalm_getter_get_interfaces']
+          r8_int = get_int['devices']['router8']['result']['get_interfaces']
+          speed_fa0 = r8_int['FastEthernet0/0']['speed']
+          speed_fa1 = r8_int['FastEthernet0/1']['speed']
+          same_speed = speed_fa0 == speed_fa1
+  
+          get_facts = payload['task_service_napalm_getter_get_facts']
+          r8_facts = get_facts['devices']['router8']['result']['get_facts']
+          uptime_less_than_50000 = r8_facts['uptime'] < 50000
+          return {
+              'success': True,
+              'result': {
+                  'same_speed_fa0_fa1': same_speed,
+                  'uptime_less_5000': uptime_less_than_50000
+              }
+          }
 
+From the web UI, you can then create an instance of ``GenericService`` called ``process_payload1``.

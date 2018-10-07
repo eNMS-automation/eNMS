@@ -54,11 +54,11 @@ class GottyParametersForm(FlaskForm):
 
 
 class OpenNmsForm(FlaskForm):
-    opennms_rest_api = TextField(default='https://demo.opennms.org/opennms/rest')
-    opennms_devices = TextField(default='https://demo.opennms.org/opennms/rest/nodes')
+    opennms_rest_api = TextField()
+    opennms_devices = TextField()
     node_type = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=node_type)
-    login = TextField()
+    opennms_login = TextField()
     password = PasswordField()
 
 

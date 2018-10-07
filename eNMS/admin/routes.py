@@ -205,7 +205,7 @@ def save_syslog_server():
 @permission_required('Edit objects', redirect=False)
 def query_opennms():
     parameters = db.session.query(Parameters).one()
-    login, password = request.form['login'], request.form['password']
+    login, password = parameters.opennms_login, request.form['password']
     parameters.update(**request.form.to_dict())
     db.session.commit()
     json_devices = get(
@@ -216,9 +216,15 @@ def query_opennms():
     devices = {
         device['id']:
             {
+            'name': device.get('label', device['id']),
+            'description': device['assetRecord'].get('description', ''),
+            'location': device['assetRecord'].get('building', ''),
+            'vendor': device['assetRecord'].get('manufacturer', ''),
+            'model': device['assetRecord'].get('modelNumber', ''),
+            'operating_system': device.get('operatingSystem', ''),
+            'os_version': device['assetRecord'].get('sysDescription', ''),
             'longitude': device['assetRecord'].get('longitude', 0.),
             'latitude': device['assetRecord'].get('latitude', 0.),
-            'name': device.get('label', device['id']),
             'subtype': request.form['subtype']
         } for device in json_devices
     }

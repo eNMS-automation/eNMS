@@ -148,7 +148,8 @@ parameters_public_properties = (
     'gotty_start_port',
     'gotty_end_port',
     'opennms_rest_api',
-    'opennms_devices'
+    'opennms_devices',
+    'opennms_login'
 )
 
 task_serialized_properties = (

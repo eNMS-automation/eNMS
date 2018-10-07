@@ -49,21 +49,28 @@ class NetmikoValidationService(Service):
                     continue
                 output = netmiko_handler.send_command(command)
                 expected = getattr(self, 'content_match' + str(i))
-                result[command] = {'output': output, 'expected': expected}
                 if getattr(self, 'content_match_regex' + str(i)):
                     if not bool(search(expected, str(output))):
-                        results['success'], success = False, False
+                        success = False
                 else:
                     if expected not in str(output):
-                        results['success'], success = False, False
+                        success = False
+                result[command] = {
+                    'output': output,
+                    'expected': expected,
+                    'success': success
+                }
             try:
                 netmiko_handler.disconnect()
             except Exception:
                 pass
         except Exception as e:
             result, success = f'task failed ({e})', False
-            results['success'] = False
-        results[device.name] = {'success': success, 'result': result}
+        results['result'], results['success'] = result, success
+        results['devices'][device.name] = {
+            'success': success,
+            'result': result
+        }
 
 
 service_classes['Netmiko Validation Service'] = NetmikoValidationService

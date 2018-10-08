@@ -9,8 +9,8 @@ showModal: false
 showObjectModal: false
 */
 
-const width = 960;
-const height = 500;
+const width = 1200;
+const height = 1400;
 let selectedNodes = [];
 
 /**
@@ -80,7 +80,7 @@ let svg = d3.select('#logical_view').append('svg')
 let force = d3.layout.force()
   .gravity(0.2)
   .distance(10)
-  .charge(-100)
+  .charge(-50)
   .size([width, height]);
 
 force

@@ -38,9 +38,12 @@ def view(view_type):
             'device': request.form['device_label'],
             'link': request.form['link_label']
         }
-    # for the sake of better performances, the view defaults to markercluster
-    # if there are more than 2000 devices
-    view = 'leaflet' if len(Device.query.all()) < 2000 else 'markercluster'
+    if len(Device.query.all()) < 50:
+        view = 'glearth'
+    elif len(Device.query.all()) < 2000:
+        view = 'leaflet'
+    else:
+        view = 'markercluster'
     if 'view' in request.form:
         view = request.form['view']
     # name to id

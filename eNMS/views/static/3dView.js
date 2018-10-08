@@ -7,6 +7,7 @@ markersArray: true
 devices: false
 partial: false
 polylinesArray: true
+selection: true
 showModal: false
 showObjectModal: false
 WE: false
@@ -36,6 +37,13 @@ for (let i = 0; i < devices.length; i++) {
   15, 10
   ).addTo(map);
   marker.device_id = device.id;
+  marker.on('click', function(e) {
+     console.log(e.target.element.children[0]);
+    console.log($(e.target.element.children[0]).css("background-image", "url('static/images/3D/selection/router.gif')"));
+    //e.target.setIcon(e.target.selected_icon);
+    selection.push(devices[i].id);
+    $('#devices').val(selection);
+  });
   marker.on('dblclick', function(e) {
     showObjectModal('device', devices[i].id);
   });

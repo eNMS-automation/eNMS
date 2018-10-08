@@ -7,5 +7,5 @@ Services
 
    service_system
    default_services
-   generic_service
+   swiss_army_knife_service
    service_scheduling

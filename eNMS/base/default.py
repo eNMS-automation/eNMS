@@ -271,7 +271,7 @@ def create_payload_transfer_workflow():
         'get_config'
     )] + [{
         'name': 'process_payload1',
-        'type': service_classes['Generic Service'],
+        'type': service_classes['Swiss Army Knife Service'],
         'description': 'Process Payload in example workflow',
     }]
     for service in services:

@@ -116,9 +116,13 @@ def show_logs(task_id):
 @permission_required('Tasks section', redirect=False)
 def get_diff(task_id, v1, v2, n1=None, n2=None):
     task = retrieve(Task, id=task_id)
-    if n1 and n2 and n1 in task.logs[v1] and n2 in task.logs[v2]:
-        first = str_dict(task.logs[v1][n1]).splitlines()
-        second = str_dict(task.logs[v2][n2]).splitlines()
+    has_devices = 'devices' in task.logs[v1] and 'devices' in task.logs[v2]
+    if has_devices:
+        value_n1 = task.logs[v1]['devices'].get(n1, None)
+        value_n2 = task.logs[v2]['devices'].get(n2, None)
+    if has_devices and value_n1 and value_n2:
+        first = str_dict(value_n1).splitlines()
+        second = str_dict(value_n2).splitlines()
     else:
         first = str_dict(task.logs[v1]).splitlines()
         second = str_dict(task.logs[v2]).splitlines()
@@ -131,8 +135,12 @@ def get_diff(task_id, v1, v2, n1=None, n2=None):
 @permission_required('Tasks section', redirect=False)
 def compare_logs(task_id):
     task = retrieve(Task, id=task_id)
+    if task.type == 'WorkflowTask':
+        devices = []
+    else:
+        devices = [device.name for device in task.devices]
     results = {
-        'devices': [device.name for device in task.devices],
+        'devices': devices,
         'versions': list(task.logs)
     }
     return jsonify(results)

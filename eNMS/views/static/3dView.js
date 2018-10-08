@@ -38,9 +38,10 @@ for (let i = 0; i < devices.length; i++) {
   ).addTo(map);
   marker.device_id = device.id;
   marker.on('click', function(e) {
-     console.log(e.target.element.children[0]);
-    console.log($(e.target.element.children[0]).css("background-image", "url('static/images/3D/selection/router.gif')"));
-    //e.target.setIcon(e.target.selected_icon);
+    $(e.target.element.children[0]).css(
+      "background-image",
+      "url('static/images/3D/selection/router.gif')"
+    );
     selection.push(devices[i].id);
     $('#devices').val(selection);
   });
@@ -131,6 +132,25 @@ $('#select-filters').on('change', function() {
     },
   });
 });
+
+/**
+ * Unselect all devices.
+ */
+function unselectAll() {
+  for (let i = 0; i < markersArray.length; i++) {
+    $(markersArray[i].element.children[0]).css(
+      "background-image",
+      "url('static/images/3D/default/router.gif')"
+    );
+  }
+  selection = [];
+  $('#devices').val(selection);
+}
+
+map.on('click', function(e) {
+  unselectAll();
+});
+
 
 const action = {
   'Parameters': partial(showModal, 'filters'),

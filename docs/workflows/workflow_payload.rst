@@ -138,23 +138,23 @@ If we want to use the results of the Napalm getters in the final task ``task_pro
 
 This ``job`` function reuses the Napalm getters of two tasks of the worflow (one of which, ``task_service_napalm_getter_get_facts``, is not a direct predecessor of ``task_process_payload1``) to create new variables and inject them in the results.
 
-Use of a GenericService instance to process the payload
+Use of a SwissArmyKnifeService instance to process the payload
 -------------------------------------------------------
 
-When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the GenericService class, and add a method called after the name of the instance. The GenericService class acts as a "job multiplexer" (see the ``GenericService`` section of the doc).
+When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the SwissArmyKnifeService class, and add a method called after the name of the instance. The SwissArmyKnifeService class acts as a "job multiplexer" (see the ``SwissArmyKnifeService`` section of the doc).
 
-This is what the GenericService class would look like with the last example:
+This is what the SwissArmyKnifeService class would look like with the last example:
 
 ::
 
-  class GenericService(Service):
+  class SwissArmyKnifeService(Service):
 
-      __tablename__ = 'GenericService'
+      __tablename__ = 'SwissArmyKnifeService'
 
       id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
 
       __mapper_args__ = {
-          'polymorphic_identity': 'generic_service',
+          'polymorphic_identity': 'swiss_army_knife_service',
       }
 
       def job(self, task, incoming_payload):
@@ -187,4 +187,4 @@ This is what the GenericService class would look like with the last example:
               }
           }
 
-From the web UI, you can then create an instance of ``GenericService`` called ``process_payload1``.
+From the web UI, you can then create an instance of ``SwissArmyKnifeService`` called ``process_payload1``.

@@ -3,14 +3,14 @@ from sqlalchemy import Column, ForeignKey, Integer
 from eNMS.services.models import Service, service_classes
 
 
-class GenericService(Service):
+class SwissArmyKnifeService(Service):
 
-    __tablename__ = 'GenericService'
+    __tablename__ = 'SwissArmyKnifeService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'generic_service',
+        'polymorphic_identity': 'swiss_army_knife_service',
     }
 
     def job(self, task, incoming_payload):
@@ -44,4 +44,4 @@ class GenericService(Service):
         }
 
 
-service_classes['Generic Service'] = GenericService
+service_classes['Swiss Army Knife Service'] = SwissArmyKnifeService

@@ -4,5 +4,5 @@ accesslog = '-'
 loglevel = 'debug'
 capture_output = True
 enable_stdio_inheritance = True
-timeout = 300
-graceful_timeout = 300
+timeout = 1000
+graceful_timeout = 1000

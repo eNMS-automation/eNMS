@@ -79,6 +79,8 @@ You can click on the ``Compare`` button in the :guilabel:`Service tasks` section
    :alt: Logs comparison
    :align: center
 
+.. note:: For the comparison between devices to work, the results of a task must contain a ``devices`` key, which value is a dictionnary associating device names to device results.
+
 Periodic tasks
 **************
 

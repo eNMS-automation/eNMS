@@ -26,15 +26,26 @@ The code for a task ``job`` function is the following:
 
 ::
 
-  def job(self, task, payload):
-      results = {'success': True, 'result': 'nothing happened'}
+  def job(self, task, incoming_payload):
+      # The "job" function is called when the service is executed.
+      # The parameters of the service can be accessed with self (self.vendor,
+      # self.boolean1, etc)
+      # The target devices can be computed via "task.compute_targets()".
+      # You can look at how default services (netmiko, napalm, etc.) are
+      # implemented in the /services subfolders (/netmiko, /napalm, etc).
+      results = {'success': True, 'devices': {}}
       for device in task.compute_targets():
-          results[device.name] = True
+          results['devices'][device.name] = True
+      # "results" is a dictionnary that will be displayed in the logs.
+      # It must contain at least a key "success" that indicates whether
+      # the execution of the service was a success or a failure.
+      # In a workflow, the "success" value will determine whether to move
+      # forward with a "Success" edge or a "Failure" edge.
       return results
 
 The dictionnary ``results`` is the payload of the task, i.e the information that will be transferred to the next tasks to run in the workflow. ``results`` MUST contain a key ``success``, to tell eNMS whether the task was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
   
-The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the ``result`` of all tasks that have already been executed.
+The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the ``results`` of all tasks that have already been executed.
 
 If we consider the aforementioned workflow, the task ``task_process_payload1`` receives the variable ``payload`` that contains the results of all other tasks in the workflow (because it is the last one to be executed).
 
@@ -43,31 +54,30 @@ The results of the task ``task_service_napalm_getter_get_facts`` is the followin
 ::
 
   {
-      "2018-10-06 01:19:05.844289": {
-          "success": true,
-          "expected": "",
-          "router8": {
-              "success": true,
-              "result": {
-                  "get_facts": {
-                      "uptime": 25920,
-                      "vendor": "Cisco",
-                      "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
-                      "serial_number": "FHK111813HZ",
-                      "model": "1841",
-                      "hostname": "test",
-                      "fqdn": "test.pynms.fr",
-                      "interface_list": [
-                          "FastEthernet0/0",
-                          "FastEthernet0/1",
-                          "Serial0/0/0",
-                          "Loopback22"
-                      ]
-                  }
-              }
-          }
-      }
-  }
+    "success": true,
+    "devices": {
+        "router8": {
+            "success": true,
+            "result": {
+                "get_facts": {
+                    "uptime": 480,
+                    "vendor": "Cisco",
+                    "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
+                    "serial_number": "FHK111813HZ",
+                    "model": "1841",
+                    "hostname": "test",
+                    "fqdn": "test.pynms.fr",
+                    "interface_list": [
+                        "FastEthernet0/0",
+                        "FastEthernet0/1",
+                        "Serial0/0/0",
+                        "Loopback22"
+                    ]
+                }
+            }
+        }
+    }
+  },
 
 Consequently, the ``payload`` variable received by ``task_process_payload1`` will look like this:
 
@@ -76,24 +86,25 @@ Consequently, the ``payload`` variable received by ``task_process_payload1`` wil
   {
       "task_service_napalm_getter_get_facts": {
           "success": true,
-          "expected": "",
-          "router8": {
-              "success": true,
-              "result": {
-                  "get_facts": {
-                      "uptime": 25920,
-                      "vendor": "Cisco",
-                      "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
-                      "serial_number": "FHK111813HZ",
-                      "model": "1841",
-                      "hostname": "test",
-                      "fqdn": "test.pynms.fr",
-                      "interface_list": [
-                          "FastEthernet0/0",
-                          "FastEthernet0/1",
-                          "Serial0/0/0",
-                          "Loopback22"
-                      ]
+          "devices": {
+              "router8": {
+                  "success": true,
+                  "result": {
+                      "get_facts": {
+                          "uptime": 480,
+                          "vendor": "Cisco",
+                          "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
+                          "serial_number": "FHK111813HZ",
+                          "model": "1841",
+                          "hostname": "test",
+                          "fqdn": "test.pynms.fr",
+                          "interface_list": [
+                              "FastEthernet0/0",
+                              "FastEthernet0/1",
+                              "Serial0/0/0",
+                              "Loopback22"
+                          ]
+                      }
                   }
               }
           }

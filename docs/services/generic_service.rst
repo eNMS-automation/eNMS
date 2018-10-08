@@ -38,5 +38,5 @@ Let's take a look at how the ``Generic Service`` is implemented:
           return {'success': True, 'result': ''}
 
 The ``job`` function of ``GenericService`` will run the class method of ``GenericService`` with the same name as the instance itself.
-In other words, if you create an instance of ``GenericService`` called ``job1``, when that instance of ``GenericService`` is executed, the ``job1`` method of ``GenericService`` will run.
-If you create an instance ``job2``, the ``job2`` method of ``GenericService`` will run, etc.
+
+In other words, with the above code, you can create two instances of GenericService from the web UI: one named "job1" and the other named "job2". Then, you'll need to create a task for each of these service instances, and you'll add them to the appropriate workflow. The GenericService class will take care of calling the right "job" function based on the name of the instance.

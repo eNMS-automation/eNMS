@@ -69,3 +69,13 @@ From this table, you can:
   - Compare the logs of the task between any two runs, any two devices.
   - Pause & resume the task.
   - Delete the task.
+
+Logs comparison
+***************
+
+You can click on the ``Compare`` button in the :guilabel:`Service tasks` section to have a line-by-line diff of the task logs between any two versions, any two devices.
+
+Periodic tasks
+**************
+
+A task is periodic if you set a frequency when scheduling it (it will be run periodically). You can use the ``Pause`` and ``Resume`` buttons in the :guilabel:`Service tasks` to pause and resume the task as needed.

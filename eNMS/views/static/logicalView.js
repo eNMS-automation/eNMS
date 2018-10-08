@@ -126,7 +126,7 @@ node.append('text')
   .attr('dx', 8)
   .attr('dy', '.35em')
   .text(function(d) {
-    return d.name;
+    return d[labels.device];
   });
 
 force.on('tick', function() {

@@ -78,6 +78,9 @@
           {  
             "x": {{ device.id }},
             "y": {{ device.id }},
+            "description": "{{ device.description }}",
+            "vendor": "{{ device.vendor }}",
+            "ip_address": "{{ device.ip_address }}",
             "id": {{ name_to_id[device.name] }},
             "real_id": {{ device.id }},
             "name": "{{ device.name }}",
@@ -97,6 +100,7 @@
         {% endfor %}
       ]
     };
+    var labels = {{ labels|tojson|safe }};
   </script>
   <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script>

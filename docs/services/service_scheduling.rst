@@ -75,6 +75,10 @@ Logs comparison
 
 You can click on the ``Compare`` button in the :guilabel:`Service tasks` section to have a line-by-line diff of the task logs between any two versions, any two devices.
 
+.. image:: /_static/services/service_scheduling/task_comparison.png
+   :alt: Logs comparison
+   :align: center
+
 Periodic tasks
 **************
 

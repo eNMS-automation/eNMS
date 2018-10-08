@@ -10,7 +10,7 @@ showObjectModal: false
 */
 
 const width = 1200;
-const height = 1400;
+const height = 600;
 let selectedNodes = [];
 
 /**

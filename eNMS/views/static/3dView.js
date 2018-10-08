@@ -39,8 +39,8 @@ for (let i = 0; i < devices.length; i++) {
   marker.device_id = device.id;
   marker.on('click', function(e) {
     $(e.target.element.children[0]).css(
-      "background-image",
-      "url('static/images/3D/selection/router.gif')"
+      'background-image',
+      'url("static/images/3D/selection/router.gif")'
     );
     selection.push(devices[i].id);
     $('#devices').val(selection);
@@ -139,8 +139,8 @@ $('#select-filters').on('change', function() {
 function unselectAll() {
   for (let i = 0; i < markersArray.length; i++) {
     $(markersArray[i].element.children[0]).css(
-      "background-image",
-      "url('static/images/3D/default/router.gif')"
+      'background-image',
+      'url("static/images/3D/default/router.gif")'
     );
   }
   selection = [];

@@ -3,6 +3,7 @@ global
 alertify: false
 d3: false
 graph: false
+labels: false
 partial: false
 showModal: false
 showObjectModal: false

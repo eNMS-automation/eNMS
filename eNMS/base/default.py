@@ -258,7 +258,7 @@ def create_payload_transfer_workflow():
         'url': 'http://127.0.0.1:5000/rest/object/device/router8',
         'payload': ''
     }] + [{
-        'name': f'service_napalm_getter_{getter}',
+        'name': f'{getter}',
         'type': service_classes['Napalm Getters Service'],
         'description': f'Getter: {getter}',
         'driver': 'ios',
@@ -302,7 +302,7 @@ def create_payload_transfer_workflow():
             'destination': tasks[y]
         })
     workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
-    positions = [(-5, 0), (5, -10), (15, 10), (15, -10), (30, -10), (40, 0)]
+    positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
         tasks[index].positions['payload_transfer_workflow'] = x * 10, y * 10
     factory(WorkflowTask, **{

@@ -81,9 +81,9 @@ class ExampleService(Service):
         # The target devices can be computed via "task.compute_targets()".
         # You can look at how default services (netmiko, napalm, etc.) are
         # implemented in the /services subfolders (/netmiko, /napalm, etc).
-        results = {'success': True, 'result': 'nothing happened'}
+        results = {'success': True, 'devices': {}}
         for device in task.compute_targets():
-            results[device.name] = True
+            results['devices'][device.name] = True
         # "results" is a dictionnary that will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.

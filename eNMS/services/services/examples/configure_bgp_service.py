@@ -24,7 +24,7 @@ class ConfigureBgpService(Service):
 
     def job(self, task, workflow_results):
         targets = task.compute_targets()
-        results = {'success': True}
+        results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])
         pool.close()
@@ -62,7 +62,10 @@ class ConfigureBgpService(Service):
         except Exception as e:
             result, success = f'task failed ({e})', False
             results['success'] = False
-        results[device.name] = {'success': success, 'result': result}
+        results['devices'][device.name] = {
+            'success': success,
+            'result': result
+        }
 
 
 service_classes['Configure Bgp Service'] = ConfigureBgpService

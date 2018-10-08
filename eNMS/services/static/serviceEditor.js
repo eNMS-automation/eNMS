@@ -34,6 +34,8 @@ function buildServiceInstances() {
         }
         if ($('#service-instance').val()) {
           fillInstanceForm();
+        } else {
+          $('#form').trigger('reset');
         }
       }
     },

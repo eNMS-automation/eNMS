@@ -1,3 +1,4 @@
+from pathlib import Path
 from random import uniform
 from xlwt import easyxf, Workbook
 
@@ -10,10 +11,12 @@ style1 = easyxf(num_format_str='#,##0.00')
 
 ws = wb.add_sheet('Device')
 
-for index, header in enumerate(('name', 'longitude', 'latitude')):
+for index, header in enumerate(('name', 'longitude', 'latitude', 'subtype')):
     ws.write(0, index, header)
-for i in range(1, 2000):
-    for j in range(2):
-        ws.write(i, j, str(i) if not j else uniform(1., 2.))
-wb.save('test')
+for i in range(1, 10):
+    ws.write(i, 0, i)
+    ws.write(i, 1, uniform(-40., 40.))
+    ws.write(i, 2, uniform(-40., 40.))
+    ws.write(i, 3, 'router')
     
+wb.save(Path.cwd() / 'test.xls')

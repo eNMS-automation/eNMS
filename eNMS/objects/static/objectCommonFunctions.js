@@ -166,7 +166,6 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
         } else {
           for (let i = 0; i < objects[objType].length; i++) {
             const obj = objects[objType][i];
-            // const m $(`#${objType}-${obj.id}`).length ? 'create' : 'edit';
             addObjectToTable('create', objType.toLowerCase(), obj);
           }
           alertify.notify('Topology successfully imported.', 'success', 5);

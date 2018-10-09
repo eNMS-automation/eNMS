@@ -94,8 +94,8 @@ class Workflow(Job):
     @property
     def serialized(self):
         properties = self.properties
-        properties['scheduled_tasks'] = [
-            obj.properties for obj in getattr(self, 'scheduled_tasks')
+        properties['tasks'] = [
+            obj.properties for obj in getattr(self, 'tasks')
         ]
         properties['jobs'] = [
             obj.properties for obj in getattr(self, 'jobs')

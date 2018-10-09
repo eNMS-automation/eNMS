@@ -34,7 +34,7 @@ class Task(CustomBase):
     start_date = Column(String)
     end_date = Column(String)
     job_id = Column(Integer, ForeignKey('Job.id'))
-    job = relationship('Job', back_populates='scheduled_tasks')
+    job = relationship('Job', back_populates='tasks')
     log_rules = relationship(
         'LogRule',
         secondary=task_log_rule_table,

@@ -20,7 +20,7 @@ class Job(CustomBase):
     description = Column(String)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
-    scheduled_tasks = relationship('Task', back_populates='job')
+    tasks = relationship('Task', back_populates='job')
     type = Column(String)
     waiting_time = Column(Integer, default=0)
     workflows = relationship(
@@ -111,8 +111,8 @@ class Service(Job):
         properties['pools'] = [
             obj.properties for obj in getattr(self, 'pools')
         ]
-        properties['scheduled_tasks'] = [
-            obj.properties for obj in getattr(self, 'scheduled_tasks')
+        properties['tasks'] = [
+            obj.properties for obj in getattr(self, 'tasks')
         ]
         return properties
 

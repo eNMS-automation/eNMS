@@ -87,10 +87,10 @@ job_public_properties = (
     'waiting_time'
 )
 
-service_public_properties = job_public_properties + (
-    'devices',
-    'pools'
-)
+service_public_properties = job_public_properties# + (
+#     'devices',
+#     'pools'
+# )
 
 workflow_public_properties = job_public_properties + (
     'vendor',

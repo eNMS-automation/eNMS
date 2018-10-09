@@ -32,25 +32,6 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Run task.
- * @param {id} id - Task id.
- */
-function runTask(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/tasks/run_task/${id}`,
-    dataType: 'json',
-    success: function(task) {
-      if (!task) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        alertify.notify(`Task '${task.name}' started.`, 'success', 5);
-      }
-    },
-  });
-}
-
-/**
  * Delete a task.
  * @param {id} id - Task id.
  */

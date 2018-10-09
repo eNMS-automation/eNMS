@@ -22,8 +22,6 @@ function addTask(mode, properties) {
   values.push(
     `<button type="button" class="btn btn-success btn-xs"
     onclick="showTaskModal('${properties.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-success btn-xs"
-    onclick="runTask('${properties.id}')">Run</button>`,
     `<button id="pause-resume-${properties.id}" type="button"
     class="btn btn-danger btn-xs" onclick="${status}Task('${properties.id}')">
     ${status.charAt(0).toUpperCase() + status.substr(1)}</button>`,

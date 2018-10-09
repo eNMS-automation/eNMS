@@ -24,6 +24,8 @@ function addWorkflow(mode, properties) {
     onclick="compareLogs('${properties.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-success btn-xs"
+    onclick="runJob('${properties.id}')">Run</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs"

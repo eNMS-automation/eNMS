@@ -13,7 +13,7 @@ from eNMS.base.properties import property_types
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.services.models import Job, service_classes
-from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
+from eNMS.tasks.models import Task
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
 
@@ -100,7 +100,7 @@ def create_default_services():
         },
     ):
         instance = factory(service.pop('type'), **service)
-        factory(ServiceTask, **{
+        factory(Task, **{
             'name': f'task_{instance.name}',
             'start-task': 'do-not-run',
             'job': instance,
@@ -164,7 +164,7 @@ def create_netmiko_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-        factory(ServiceTask, **{
+        factory(Task, **{
             'name': f'task_{instance.name}',
             'start-task': 'do-not-run',
             'job': instance,
@@ -186,7 +186,7 @@ def create_netmiko_workflow():
             'destination': services[i + 1]
         })
     workflow.start_task, workflow.end_task = services[0].id, services[-1].id
-    factory(WorkflowTask, **{
+    factory(Task, **{
         'name': 'task_netmiko_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
@@ -224,7 +224,7 @@ def create_napalm_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-        factory(ServiceTask, **{
+        factory(Task, **{
             'name': f'task_{instance.name}',
             'job': instance,
             'start-task': 'do-not-run',
@@ -248,7 +248,7 @@ def create_napalm_workflow():
             'destination': services[i + 1]
         })
     workflow.start_task, workflow.end_task = services[0].id, services[-1].id
-    factory(WorkflowTask, **{
+    factory(Task, **{
         'name': 'task_napalm_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
@@ -293,7 +293,7 @@ def create_payload_transfer_workflow():
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-        factory(ServiceTask, **{
+        factory(Task, **{
             'name': f'task_{instance.name}',
             'job': instance,
             'start-task': 'do-not-run',
@@ -322,7 +322,7 @@ def create_payload_transfer_workflow():
     positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
         services[index].positions['payload_transfer_workflow'] = x * 10, y * 10
-    factory(WorkflowTask, **{
+    factory(Task, **{
         'name': 'task_payload_transfer_workflow',
         'start-task': 'do-not-run',
         'job': workflow,

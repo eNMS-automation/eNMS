@@ -89,19 +89,19 @@ def create_default_services():
             'type': service_classes['Configure Bgp Service'],
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
+            'devices': [retrieve(Device, name='router8')],
             'local_as': 100,
             'loopback': 'Lo100',
             'loopback_ip': '100.1.1.1',
             'neighbor_ip': '100.1.2.1',
             'remote_as': 200,
-            'vrf_name': 'configure_BGP_test'
+            'vrf_name': 'configure_BGP_test',
+            'waiting_time': 0
         },
     ):
         instance = factory(service.pop('type'), **service)
         factory(ServiceTask, **{
             'name': f'task_{instance.name}',
-            'devices': [retrieve(Device, name='router8')],
-            'waiting_time': 0,
             'start-task': 'do-not-run',
             'job': instance,
             'user': retrieve(User, name='admin')
@@ -116,6 +116,7 @@ def create_netmiko_workflow():
             'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Netmiko',
+            'waiting_time': 0,
             'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -127,6 +128,7 @@ def create_netmiko_workflow():
             'type': service_classes['Netmiko Validation Service'],
             'name': 'netmiko_check_vrf_TEST',
             'description': 'Check that the vrf "TEST" is configured',
+            'waiting_time': 0,
             'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -138,6 +140,7 @@ def create_netmiko_workflow():
             'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
+            'waiting_time': 15,
             'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -149,6 +152,7 @@ def create_netmiko_workflow():
             'type': service_classes['Netmiko Validation Service'],
             'name': 'netmiko_check_no_vrf_TEST',
             'description': 'Check that the vrf "TEST" is NOT configured',
+            'waiting_time': 0,
             'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -162,7 +166,6 @@ def create_netmiko_workflow():
         services.append(instance)
         factory(ServiceTask, **{
             'name': f'task_{instance.name}',
-            'waiting_time': 3 if instance.name == 'delete_vrf_TEST' else 0,
             'start-task': 'do-not-run',
             'job': instance,
             'user': retrieve(User, name='admin')
@@ -201,6 +204,8 @@ def create_napalm_workflow():
             'type': service_classes['Napalm Configuration Service'],
             'name': 'napalm_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Napalm',
+            'waiting_time': 0,
+            'devices': [retrieve(Device, name='router8')],
             'driver': 'ios',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -212,7 +217,9 @@ def create_napalm_workflow():
             'type': service_classes['Napalm Rollback Service'],
             'name': 'Napalm IOS Rollback',
             'driver': 'ios',
-            'description': 'Rollback a configuration with Napalm IOS'
+            'description': 'Rollback a configuration with Napalm IOS',
+            'devices': [retrieve(Device, name='router8')],
+            'waiting_time': 0
         }
     ):
         instance = factory(service.pop('type'), **service)
@@ -221,7 +228,6 @@ def create_napalm_workflow():
             'name': f'task_{instance.name}',
             'job': instance,
             'start-task': 'do-not-run',
-            'devices': [retrieve(Device, name='router8')],
             'user': retrieve(User, name='admin')
         })
     services.insert(1, retrieve(Job, name='netmiko_check_vrf_TEST'))
@@ -258,6 +264,8 @@ def create_payload_transfer_workflow():
         'name': 'GET_router8',
         'type': service_classes['Rest Call Service'],
         'description': 'Use GET ReST call on router8',
+        'waiting_time': 0,
+        'devices': [retrieve(Device, name='router8')],
         'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/router8',
@@ -266,6 +274,8 @@ def create_payload_transfer_workflow():
         'name': f'{getter}',
         'type': service_classes['Napalm Getters Service'],
         'description': f'Getter: {getter}',
+        'waiting_time': 0,
+        'devices': [retrieve(Device, name='router8')],
         'driver': 'ios',
         'content_match': '',
         'getters': [getter]
@@ -278,6 +288,8 @@ def create_payload_transfer_workflow():
         'name': 'process_payload1',
         'type': service_classes['Swiss Army Knife Service'],
         'description': 'Process Payload in example workflow',
+        'waiting_time': 0,
+        'devices': [retrieve(Device, name='router8')]
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)

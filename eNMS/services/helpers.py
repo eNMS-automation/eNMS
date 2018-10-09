@@ -28,12 +28,16 @@ def netmiko_connection(service, device):
     )
 
 
-def napalm_connection(service, device):
+def napalm_connection(service, device, optional_args = None):
+    if not optional_args:
+        optional_args = {}
     username, pwd, enable_pwd = get_device_credentials(scheduler.app, device)
+    if 'secret' not in enable_pwd:
+        optional_args['secret'] = enable_pwd
     driver = get_network_driver(service.driver)
     return driver(
         hostname=device.ip_address,
         username=username,
         password=pwd,
-        optional_args={'secret': enable_pwd}
+        optional_args=optional_args
     )

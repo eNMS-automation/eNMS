@@ -1,7 +1,7 @@
 from multiprocessing.pool import ThreadPool
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableList
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.services.helpers import napalm_connection, NAPALM_DRIVERS
 from eNMS.services.models import Service, service_classes
@@ -40,6 +40,7 @@ class NapalmGettersService(Service):
         ('get_ipv6_neighbors_table', 'IPv6')
     )
     operating_system = Column(String)
+    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     vendor = Column(String)
 
     __mapper_args__ = {
@@ -59,7 +60,7 @@ class NapalmGettersService(Service):
         device, results = args
         result = {}
         try:
-            napalm_driver = napalm_connection(self, device)
+            napalm_driver = napalm_connection(self, device, self.optional_args)
             napalm_driver.open()
             for getter in self.getters:
                 try:

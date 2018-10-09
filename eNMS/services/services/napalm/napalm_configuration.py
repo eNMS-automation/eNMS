@@ -1,5 +1,6 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.services.helpers import napalm_connection, NAPALM_DRIVERS
 from eNMS.services.models import Service, service_classes
@@ -21,6 +22,7 @@ class NapalmConfigurationService(Service):
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     operating_system = Column(String)
+    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     vendor = Column(String)
 
     __mapper_args__ = {
@@ -39,7 +41,7 @@ class NapalmConfigurationService(Service):
     def device_job(self, args):
         device, results = args
         try:
-            napalm_driver = napalm_connection(self, device)
+            napalm_driver = napalm_connection(self, device, self.optional_args)
             napalm_driver.open()
             config = '\n'.join(self.content.splitlines())
             getattr(napalm_driver, self.action)(config=config)

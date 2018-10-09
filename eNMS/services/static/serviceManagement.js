@@ -18,6 +18,8 @@ function addService(mode, properties) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs"

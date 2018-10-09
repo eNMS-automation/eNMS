@@ -19,6 +19,8 @@ function addWorkflow(mode, properties) {
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
+    onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
+    `<button type="button" class="btn btn-info btn-xs"
     onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,

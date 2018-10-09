@@ -72,18 +72,18 @@ pool_public_properties = (
     'description'
 )
 
-service_public_properties = (
+job_public_properties = (
     'name',
     'type',
-    'description'
+    'description',
+    'logs'
 )
 
-workflow_public_properties = (
-    'name',
-    'description',
+service_public_properties = job_public_properties
+
+workflow_public_properties = job_public_properties + (
     'vendor',
     'operating_system',
-    'type',
     'start_task',
     'end_task'
 )
@@ -157,7 +157,6 @@ task_serialized_properties = (
     'name',
     'creation_time',
     'status',
-    'logs',
     'start_date',
     'end_date',
     'frequency',

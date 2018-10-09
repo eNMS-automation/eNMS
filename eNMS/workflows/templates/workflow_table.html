@@ -18,6 +18,7 @@
                 {% for field in form if field.widget.input_type != 'hidden'  %}
                   <th>{{ names[field.name] }}</th>
                 {% endfor %}
+                <th style="width: 10%">Logs</th>
                 <th style="width: 10%">Edit</th>
                 <th style="width: 10%">Schedule</th>
                 <th style="width: 10%">Delete</th>

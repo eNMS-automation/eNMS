@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <link href="{{ url_for('services_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -22,5 +23,6 @@
   </script>
   <script src="{{ url_for('services_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <script src="{{ url_for('services_blueprint.static', filename='serviceManagement.js') }}"></script>
-  
+  <!-- Difflib -->
+  <script src="{{ url_for('services_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
 {% endblock javascripts %}

@@ -17,16 +17,22 @@ class WorkflowEdge(CustomBase):
     source = relationship(
         'Job',
         primaryjoin='Job.id == WorkflowEdge.source_id',
-        backref=backref('destinations', cascade='all, delete-orphan')
+        backref=backref('destinations', cascade='all, delete-orphan'),
+        foreign_keys='WorkflowEdge.source_id'
     )
     destination_id = Column(Integer, ForeignKey('Job.id'))
     destination = relationship(
         'Job',
         primaryjoin='Job.id == WorkflowEdge.destination_id',
-        backref=backref('sources', cascade='all, delete-orphan')
+        backref=backref('sources', cascade='all, delete-orphan'),
+        foreign_keys='WorkflowEdge.destination_id'
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))
-    workflow = relationship('Workflow', back_populates='edges')
+    workflow = relationship(
+        'Workflow',
+        back_populates='edges',
+        foreign_keys='WorkflowEdge.workflow_id'
+    )
 
     @property
     def serialized(self):

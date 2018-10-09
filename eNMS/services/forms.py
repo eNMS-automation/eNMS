@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, SelectField, SelectMultipleField
+from wtforms import IntegerField, TextField, SelectField, SelectMultipleField
 
 
 class ServiceForm(FlaskForm):

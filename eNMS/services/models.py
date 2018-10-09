@@ -1,4 +1,5 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
 from eNMS.base.custom_base import CustomBase
@@ -12,6 +13,7 @@ class Job(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     description = Column(String)
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
     scheduled_tasks = relationship('Task', back_populates='job')
     type = Column(String)
 

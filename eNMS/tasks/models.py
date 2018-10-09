@@ -35,7 +35,6 @@ class Task(CustomBase):
     type = Column(String)
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='tasks')
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
     frequency = Column(String)
     start_date = Column(String)
     end_date = Column(String)
@@ -171,7 +170,7 @@ class ServiceTask(Task):
             results = self.job.job(self, workflow_results)
         except Exception as e:
             return {'success': False, 'result': str(e)}
-        self.logs[str(datetime.now())] = results
+        self.job.logs[str(datetime.now())] = results
         db.session.commit()
         return results
 
@@ -223,7 +222,7 @@ class WorkflowTask(Task):
                     tasks.append(successor)
             workflow_results[task.name] = task_results
             sleep(task.waiting_time)
-        self.logs[runtime] = workflow_results
+        self.job.logs[runtime] = workflow_results
         db.session.commit()
         return workflow_results
 

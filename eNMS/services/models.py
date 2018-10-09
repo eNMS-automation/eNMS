@@ -3,8 +3,8 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
 from eNMS.base.associations import (
-    job_device_table,
-    job_pool_table,
+    service_device_table,
+    service_pool_table,
     job_workflow_table
 )
 from eNMS.base.custom_base import CustomBase
@@ -85,14 +85,20 @@ class Service(Job):
         for col in self.__table__.columns:
             value = getattr(self, col.key)
             serialized_object[col.key] = value
+        serialized_object['devices'] = [
+            obj.properties for obj in getattr(self, 'devices')
+        ]
+        serialized_object['pools'] = [
+            obj.properties for obj in getattr(self, 'pools')
+        ]
         return serialized_object
 
     def run(self, workflow, workflow_results=None):
         try:
-            results = self.job.job(self, workflow_results)
+            results = self.job(self, workflow_results)
         except Exception as e:
             return {'success': False, 'result': str(e)}
-        self.job.logs[str(datetime.now())] = results
+        self.logs[str(datetime.now())] = results
         db.session.commit()
         return results
 

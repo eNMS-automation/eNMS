@@ -110,12 +110,13 @@ def create_default_services():
 
 @integrity_rollback
 def create_netmiko_workflow():
-    tasks = []
+    services = []
     for service in (
         {
             'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Netmiko',
+            'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -126,6 +127,7 @@ def create_netmiko_workflow():
             'type': service_classes['Netmiko Validation Service'],
             'name': 'netmiko_check_vrf_TEST',
             'description': 'Check that the vrf "TEST" is configured',
+            'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -136,6 +138,7 @@ def create_netmiko_workflow():
             'type': service_classes['Netmiko Configuration Service'],
             'name': 'netmiko_delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
+            'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -146,6 +149,7 @@ def create_netmiko_workflow():
             'type': service_classes['Netmiko Validation Service'],
             'name': 'netmiko_check_no_vrf_TEST',
             'description': 'Check that the vrf "TEST" is NOT configured',
+            'devices': [retrieve(Device, name='router8')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -155,9 +159,9 @@ def create_netmiko_workflow():
         },
     ):
         instance = factory(service.pop('type'), **service)
+        services.append(instance)
         tasks.append(factory(ServiceTask, **{
             'name': f'task_{instance.name}',
-            'devices': [retrieve(Device, name='router8')],
             'waiting_time': 3 if instance.name == 'delete_vrf_TEST' else 0,
             'start-task': 'do-not-run',
             'job': instance,
@@ -316,5 +320,5 @@ def create_payload_transfer_workflow():
 def create_default_workflows():
     create_default_services()
     create_netmiko_workflow()
-    create_napalm_workflow()
-    create_payload_transfer_workflow()
+    # create_napalm_workflow()
+    # create_payload_transfer_workflow()

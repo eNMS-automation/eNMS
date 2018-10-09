@@ -8,8 +8,8 @@ from eNMS.base.properties import pretty_names, workflow_table_properties
 from eNMS.objects.models import Device, Pool
 from eNMS.services.forms import CompareLogsForm
 from eNMS.services.models import Job
-from eNMS.services.forms import CompareLogsForm
 from eNMS.tasks.models import Task
+from eNMS.tasks.forms import SchedulingForm
 from eNMS.workflows import blueprint
 from eNMS.workflows.forms import (
     AddExistingTaskForm,

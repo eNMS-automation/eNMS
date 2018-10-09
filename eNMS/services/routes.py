@@ -1,9 +1,11 @@
+from difflib import SequenceMatcher
 from flask import jsonify, render_template, request
 from flask_login import login_required
+from json import dumps
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, retrieve
+from eNMS.base.helpers import permission_required, retrieve, str_dict
 from eNMS.base.properties import (
     pretty_names,
     property_types,

@@ -2,7 +2,6 @@ from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS import db
 from eNMS.services.models import Service, service_classes
 
 

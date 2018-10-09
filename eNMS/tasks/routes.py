@@ -1,12 +1,10 @@
-from difflib import SequenceMatcher
 from flask import jsonify, render_template, request
 from flask_login import current_user, login_required
-from json import dumps
 from re import search, sub
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, retrieve, str_dict
+from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import SchedulingForm

@@ -4,11 +4,11 @@ alertify: false
 diffview: false
 */
 
-let taskId;
+let jobId;
 
 /**
- * Show the logs modal for a task.
- * @param {id} id - Task id.
+ * Show the logs modal for a job.
+ * @param {id} id - Job id.
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
   $.ajax({
@@ -27,11 +27,11 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Show the compare logs modal for task.
- * @param {id} id - Task id.
+ * Show the compare logs modal for job.
+ * @param {id} id - Job id.
  */
 function compareLogs(id) { // eslint-disable-line no-unused-vars
-  taskId = id;
+  jobId = id;
   $.ajax({
     type: 'POST',
     url: `/services/compare_logs/${id}`,
@@ -58,7 +58,7 @@ $('#first_version,#second_version').on('change', function() {
   const v2 = $('#second_version').val();
   $.ajax({
     type: 'POST',
-    url: `/services/get_diff/${taskId}/${v1}/${v2}`,
+    url: `/services/get_diff/${jobId}/${v1}/${v2}`,
     dataType: 'json',
     success: function(data) {
       $('#view').append(diffview.buildView({
@@ -75,19 +75,19 @@ $('#first_version,#second_version').on('change', function() {
 });
 
 /**
- * Run task.
- * @param {id} id - Task id.
+ * Run job.
+ * @param {id} id - Job id.
  */
-function runTask(id) { // eslint-disable-line no-unused-vars
+function runJob(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/tasks/run_task/${id}`,
+    url: `/services/run_service/${id}`,
     dataType: 'json',
-    success: function(task) {
-      if (!task) {
+    success: function(job) {
+      if (!job) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        alertify.notify(`Task '${task.name}' started.`, 'success', 5);
+        alertify.notify(`Job '${job.name}' started.`, 'success', 5);
       }
     },
   });

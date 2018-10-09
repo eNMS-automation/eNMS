@@ -160,36 +160,36 @@ def create_netmiko_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-        tasks.append(factory(ServiceTask, **{
+        factory(ServiceTask, **{
             'name': f'task_{instance.name}',
             'waiting_time': 3 if instance.name == 'delete_vrf_TEST' else 0,
             'start-task': 'do-not-run',
             'job': instance,
             'user': retrieve(User, name='admin')
-        }))
+        })
     workflow = factory(Workflow, **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
         'vendor': 'Cisco',
         'operating_system': 'IOS',
-        'tasks': tasks
+        'jobs': services
     })
-    for i in range(len(tasks) - 1):
+    for i in range(len(services) - 1):
         factory(WorkflowEdge, **{
-            'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
+            'name': f'{services[i].name} -> {services[i + 1].name}',
             'workflow': workflow,
             'type': True,
-            'source': tasks[i],
-            'destination': tasks[i + 1]
+            'source': services[i],
+            'destination': services[i + 1]
         })
-    workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
+    workflow.start_task, workflow.end_task = services[0].id, services[-1].id
     factory(WorkflowTask, **{
         'name': 'task_netmiko_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
         'user': retrieve(User, name='admin')
     })
-    for index, task in enumerate(tasks):
+    for index, task in enumerate(services):
         task.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
 
 

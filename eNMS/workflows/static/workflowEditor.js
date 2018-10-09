@@ -3,7 +3,7 @@ global
 alertify: false
 partial: false
 showLogs: false
-showTaskModal: false
+showJobModal: false
 vis: false
 workflow: true
 */
@@ -98,17 +98,17 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5);
   }
-  if ($('#add-existing-task').parsley().validate()) {
+  if ($('#add-job').parsley().validate()) {
     $.ajax({
       type: 'POST',
       url: `/tasks/add_to_workflow/${workflow.id}`,
       dataType: 'json',
-      data: $('#add-existing-task-form').serialize(),
+      data: $('#add-job-form').serialize(),
       success: function(task) {
         if (!task) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
-          $('#add-existing-task').modal('hide');
+          $('#add-job').modal('hide');
           if (graph.findNode(task.id).length == 0) {
             nodes.add(taskToNode(task));
             saveNode(task);
@@ -246,7 +246,7 @@ function showSchedulingModal() { // eslint-disable-line no-unused-vars
  * Display modal to add an existing task.
  */
 function showExistingTaskModal() {
-  $('#add-existing-task').modal('show');
+  $('#add-job').modal('show');
   $('.dropdown-submenu a.menu-task').next('ul').toggle();
 }
 

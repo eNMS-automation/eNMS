@@ -80,17 +80,6 @@ def scheduler(workflow_id=None):
     return jsonify(task.serialized)
 
 
-@blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
-@login_required
-@permission_required('Edit tasks', redirect=False)
-def add_to_workflow(workflow_id):
-    workflow = retrieve(Workflow, id=workflow_id)
-    task = retrieve(Task, id=request.form['task'])
-    task.workflows.append(workflow)
-    db.session.commit()
-    return jsonify(task.serialized)
-
-
 @blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
 @permission_required('Tasks section', redirect=False)

@@ -2,8 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField, TextField
 
 
-class AddExistingTaskForm(FlaskForm):
-    task = SelectField()
+class AddJobForm(FlaskForm):
+    job = SelectField()
 
 
 class WorkflowCreationForm(FlaskForm):

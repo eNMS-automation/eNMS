@@ -25,8 +25,6 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
           }
         }
         $('#job').val(properties.job.id);
-        $('#devices').val(properties.devices.map((n) => n.id));
-        $('#pools').val(properties.pools.map((p) => p.id));
       }
     },
   });

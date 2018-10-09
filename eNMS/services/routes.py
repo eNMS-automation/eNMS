@@ -160,3 +160,14 @@ def compare_logs(job_id):
         'versions': list(job.logs)
     }
     return jsonify(results)
+
+
+@blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
+@login_required
+@permission_required('Edit workflows', redirect=False)
+def add_to_workflow(workflow_id):
+    workflow = retrieve(Workflow, id=workflow_id)
+    job = retrieve(Job, id=request.form['job'])
+    job.workflows.append(workflow)
+    db.session.commit()
+    return jsonify(job.serialized)

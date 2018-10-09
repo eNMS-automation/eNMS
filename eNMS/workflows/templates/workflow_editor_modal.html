@@ -1,4 +1,4 @@
-<div id="add-existing-task" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="add-job" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,10 +7,10 @@
         </button>
         <h4 class="modal-title" id="title">Add Task in Workflow</h4>
       </div>
-      <form id="add-existing-task-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+      <form id="add-job-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
         <div class="modal-body">
           <div class="form-group">
-            {{ add_existing_task_form.task(class="form-control") }}
+            {{ add_job_form.task(class="form-control") }}
           </div>
         </div>
         <div class="modal-footer">

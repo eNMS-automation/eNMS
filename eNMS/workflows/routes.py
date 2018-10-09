@@ -12,7 +12,7 @@ from eNMS.tasks.models import Task
 from eNMS.tasks.forms import SchedulingForm
 from eNMS.workflows import blueprint
 from eNMS.workflows.forms import (
-    AddExistingTaskForm,
+    AddJobForm,
     WorkflowEditorForm,
     WorkflowCreationForm
 )

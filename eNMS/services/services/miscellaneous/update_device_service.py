@@ -5,15 +5,15 @@ from sqlalchemy.ext.mutable import MutableDict
 from eNMS.services.models import Service, service_classes
 
 
-class UpdatePropertyService(Service):
+class UpdateDeviceService(Service):
 
-    __tablename__ = 'UpdatePropertyService'
+    __tablename__ = 'UpdateDeviceService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     update_dictionnary = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
-        'polymorphic_identity': 'update_property_service',
+        'polymorphic_identity': 'update_device_service',
     }
 
     def job(self, task, incoming_payload):
@@ -21,13 +21,13 @@ class UpdatePropertyService(Service):
         results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(
-            self.update_property,
+            self.update_device,
             [(task, device, incoming_payload, results) for device in targets])
         pool.close()
         pool.join()
         return results
 
-    def update_property(self, args):
+    def update_device(self, args):
         task, device, payload, results = args
         try:
             for property, value in self.update_dictionnary.items():
@@ -42,4 +42,4 @@ class UpdatePropertyService(Service):
         }
 
 
-service_classes['Update Property Service'] = UpdatePropertyService
+service_classes['Update Device Service'] = UpdateDeviceService

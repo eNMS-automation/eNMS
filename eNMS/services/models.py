@@ -12,7 +12,7 @@ class Job(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     description = Column(String)
-    task = relationship('Task', back_populates='job')
+    scheduled_tasks = relationship('Task', back_populates='job')
     type = Column(String)
 
     __mapper_args__ = {
@@ -26,7 +26,6 @@ class Service(Job):
     __tablename__ = 'Service'
 
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
-    tasks = relationship('ServiceTask', back_populates='service')
     device_multiprocessing = False
     private = {'id'}
 
@@ -49,8 +48,8 @@ class Service(Job):
     @property
     def serialized(self):
         properties = self.properties
-        properties['tasks'] = [
-            obj.properties for obj in getattr(self, 'tasks')
+        properties['scheduled_tasks'] = [
+            obj.properties for obj in getattr(self, 'scheduled_tasks')
         ]
         return properties
 

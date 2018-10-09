@@ -17,11 +17,11 @@ from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
 
 
-def job(task_name):
+def scheduler_job(task_name):
     with scheduler.app.app_context():
         task = retrieve(Task, name=task_name)
         workflow = task.workflow if task.type == 'WorkflowTask' else None
-        task.job(workflow)
+        task.run(workflow)
 
 
 class Task(CustomBase):
@@ -41,7 +41,7 @@ class Task(CustomBase):
     end_date = Column(String)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     job_id = Column(Integer, ForeignKey('Job.id'))
-    job = relationship('Job', back_populates='task')
+    job = relationship('Job', back_populates='scheduled_tasks')
     waiting_time = Column(Integer, default=0)
     workflows = relationship(
         'Workflow',
@@ -111,7 +111,7 @@ class Task(CustomBase):
         if self.frequency:
             scheduler.add_job(
                 id=self.creation_time,
-                func=job,
+                func=scheduler_job,
                 args=[self.name],
                 trigger='interval',
                 start_date=runtime,
@@ -122,7 +122,7 @@ class Task(CustomBase):
         else:
             scheduler.add_job(
                 id=self.creation_time,
-                func=job,
+                func=scheduler_job,
                 run_date=runtime,
                 args=[self.name],
                 trigger='date',
@@ -166,7 +166,7 @@ class ServiceTask(Task):
             targets |= set(pool.devices)
         return targets
 
-    def job(self, workflow, workflow_results=None):
+    def run(self, workflow, workflow_results=None):
         try:
             results = self.job.job(self, workflow_results)
         except Exception as e:
@@ -198,7 +198,7 @@ class WorkflowTask(Task):
         self.job = data.pop('job')
         super().__init__(**data)
 
-    def job(self, workflow=None):
+    def run(self, workflow=None):
         runtime = str(datetime.now())
         start_task = retrieve(Task, id=self.job.start_task)
         if not start_task:

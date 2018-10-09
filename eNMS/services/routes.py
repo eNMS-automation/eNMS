@@ -1,9 +1,11 @@
+from datetime import datetime, timedelta
 from difflib import SequenceMatcher
-from flask import jsonify, render_template, request
+from flask import jsonify, render_template, request, copy_current_request_context
 from flask_login import login_required
+from gevent import spawn
 from json import dumps
 
-from eNMS import db
+from eNMS import db, scheduler
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve, str_dict
 from eNMS.base.properties import (
@@ -16,6 +18,11 @@ from eNMS.services import blueprint
 from eNMS.services.forms import CompareLogsForm, ServiceForm
 from eNMS.services.models import Job, Service, service_classes
 from eNMS.tasks.forms import SchedulingForm
+
+
+def scheduler_job(job_id):
+    with scheduler.app.app_context():
+        retrieve(Job, id=job_id).run()
 
 
 @blueprint.route('/service_management')
@@ -120,9 +127,15 @@ def delete_object(service_id):
 @login_required
 @permission_required('Service section', redirect=False)
 def run_job(job_id):
-    job = retrieve(Job, id=job_id)
-    job.run()
-    return jsonify(job.serialized)
+    now = datetime.now() + timedelta(seconds=15)
+    scheduler.add_job(
+        id=str(now),
+        func=scheduler_job,
+        run_date=now,
+        args=[job_id],
+        trigger='date'
+    )
+    return jsonify({})
 
 
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])

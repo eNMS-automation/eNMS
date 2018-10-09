@@ -1,7 +1,9 @@
+from datetime import datetime
 from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
+from eNMS import db
 from eNMS.base.associations import (
     service_device_table,
     service_pool_table,

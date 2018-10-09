@@ -97,7 +97,7 @@ class Task(CustomBase):
             )
         else:
             scheduler.add_job(
-                id=self.creation_time,
+                id=runtime,
                 func=scheduler_job,
                 run_date=runtime,
                 args=[self.name],

@@ -81,7 +81,7 @@ $('#first_version,#second_version').on('change', function() {
 function runJob(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/services/run_service/${id}`,
+    url: `/services/run_job/${id}`,
     dataType: 'json',
     success: function(job) {
       if (!job) {

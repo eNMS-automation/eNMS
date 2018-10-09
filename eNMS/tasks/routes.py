@@ -8,23 +8,22 @@ from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
 from eNMS.tasks.forms import SchedulingForm
-from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
+from eNMS.tasks.models import Task
 from eNMS.objects.models import Pool, Device
 from eNMS.services.models import Job
 from eNMS.workflows.models import Workflow
 
 
-@blueprint.route('/task_management/<task_type>')
+@blueprint.route('/task_management')
 @login_required
 @permission_required('Tasks section')
 def task_management(task_type):
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
-    task_class = ServiceTask if task_type == 'service' else WorkflowTask
     return render_template(
-        f'{task_type}_tasks.html',
+        f'task_management.html',
         fields=task_public_properties,
-        tasks=task_class.serialize(),
+        tasks=Task.serialize(),
         scheduling_form=scheduling_form
     )
 

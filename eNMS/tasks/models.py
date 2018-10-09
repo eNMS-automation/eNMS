@@ -113,5 +113,5 @@ class Task(CustomBase):
     @property
     def serialized(self):
         properties = self.properties
-        properties['job'] = self.job.properties if self.job else None
+        properties['job'] = self.job.properties
         return properties

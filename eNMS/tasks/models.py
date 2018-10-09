@@ -127,35 +127,3 @@ class Task(CustomBase):
         properties = self.properties
         properties['job'] = self.job.properties if self.job else None
         return properties
-
-
-class ServiceTask(Task):
-
-    __tablename__ = 'ServiceTask'
-
-    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'ServiceTask',
-    }
-
-    @property
-    def serialized(self):
-        properties = self.properties
-        properties['job'] = self.job.properties if self.job else None
-        return properties
-
-
-class WorkflowTask(Task):
-
-    __tablename__ = 'WorkflowTask'
-
-    id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'WorkflowTask',
-    }
-
-
-
-

@@ -30,8 +30,6 @@ def view(view_type):
     add_link_form.destination.choices = all_devices
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
-    scheduling_form.devices.choices = all_devices
-    scheduling_form.pools.choices = Pool.choices()
     labels = {'device': 'name', 'link': 'name'}
     if 'view_options' in request.form:
         labels = {

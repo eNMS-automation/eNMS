@@ -93,7 +93,7 @@ class Service(Job):
         ]
         return serialized_object
 
-    def run(self, workflow, workflow_results=None):
+    def run(self, workflow_results=None):
         try:
             results = self.job(self, workflow_results)
         except Exception as e:

@@ -79,15 +79,6 @@ def get_task(task_id):
     return jsonify(retrieve(Task, id=task_id).serialized)
 
 
-@blueprint.route('/run_task/<task_id>', methods=['POST'])
-@login_required
-@permission_required('Schedule tasks', redirect=False)
-def run_task(task_id):
-    task = retrieve(Task, id=task_id)
-    task.schedule(run_now=True)
-    return jsonify(task.serialized)
-
-
 @blueprint.route('/delete_task/<task_id>', methods=['POST'])
 @login_required
 @permission_required('Edit tasks', redirect=False)

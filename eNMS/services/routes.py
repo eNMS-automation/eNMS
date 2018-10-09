@@ -116,6 +116,15 @@ def delete_object(service_id):
     return jsonify(service.serialized)
 
 
+@blueprint.route('/run_job/<job_id>', methods=['POST'])
+@login_required
+@permission_required('Service section', redirect=False)
+def run_job(job_id):
+    job = retrieve(Job, id=job_id)
+    job.run()
+    return jsonify(job.serialized)
+
+
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])
 @login_required
 @permission_required('Edit services', redirect=False)

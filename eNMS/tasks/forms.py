@@ -20,10 +20,3 @@ class SchedulingForm(FlaskForm):
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
     job = SelectField()
-
-
-class CompareLogsForm(FlaskForm):
-    first_version = SelectField(choices=())
-    second_version = SelectField(choices=())
-    first_device = SelectField(choices=())
-    second_device = SelectField(choices=())

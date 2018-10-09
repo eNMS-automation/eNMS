@@ -82,7 +82,9 @@ job_public_properties = (
     'name',
     'type',
     'description',
-    'logs'
+    'logs',
+    'positions',
+    'waiting_time'
 )
 
 service_public_properties = job_public_properties
@@ -165,9 +167,7 @@ task_serialized_properties = (
     'status',
     'start_date',
     'end_date',
-    'frequency',
-    'positions',
-    'waiting_time'
+    'frequency'
 )
 
 public_properties = (

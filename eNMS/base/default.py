@@ -195,7 +195,7 @@ def create_netmiko_workflow():
 
 @integrity_rollback
 def create_napalm_workflow():
-    tasks = []
+    services = []
     for service in (
         {
             'type': service_classes['Napalm Configuration Service'],
@@ -216,43 +216,44 @@ def create_napalm_workflow():
         }
     ):
         instance = factory(service.pop('type'), **service)
-        tasks.append(factory(ServiceTask, **{
+        services.append(instance)
+        factory(ServiceTask, **{
             'name': f'task_{instance.name}',
             'job': instance,
             'start-task': 'do-not-run',
             'devices': [retrieve(Device, name='router8')],
             'user': retrieve(User, name='admin')
-        }))
-    tasks.insert(1, retrieve(Task, name=f'task_netmiko_check_vrf_TEST'))
-    tasks.append(retrieve(Task, name=f'task_netmiko_check_no_vrf_TEST'))
+        })
+    services.insert(1, retrieve(Job, name='netmiko_check_vrf_TEST'))
+    services.append(retrieve(Job, name=f'netmiko_check_no_vrf_TEST'))
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
         'vendor': 'Cisco',
         'operating_system': 'IOS',
-        'tasks': tasks
+        'jobs': services
     })
-    for i in range(len(tasks) - 1):
+    for i in range(len(services) - 1):
         factory(WorkflowEdge, **{
-            'name': f'{tasks[i].name} -> {tasks[i + 1].name}',
+            'name': f'{services[i].name} -> {services[i + 1].name}',
             'workflow': workflow,
             'type': True,
-            'source': tasks[i],
-            'destination': tasks[i + 1]
+            'source': services[i],
+            'destination': services[i + 1]
         })
-    workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
+    workflow.start_task, workflow.end_task = services[0].id, services[-1].id
     factory(WorkflowTask, **{
         'name': 'task_napalm_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
         'user': retrieve(User, name='admin')
     })
-    for index, task in enumerate(tasks):
+    for index, task in enumerate(services):
         task.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
 
 def create_payload_transfer_workflow():
-    tasks = []
+    services = []
     services = [{
         'name': 'GET_router8',
         'type': service_classes['Rest Call Service'],
@@ -280,13 +281,13 @@ def create_payload_transfer_workflow():
     }]
     for service in services:
         instance = factory(service.pop('type'), **service)
-        tasks.append(factory(ServiceTask, **{
+        factory(ServiceTask, **{
             'name': f'task_{instance.name}',
             'job': instance,
             'start-task': 'do-not-run',
             'devices': [retrieve(Device, name='router8')],
             'user': retrieve(User, name='admin')
-        }))
+        })
     workflow = factory(Workflow, **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
@@ -320,5 +321,5 @@ def create_payload_transfer_workflow():
 def create_default_workflows():
     create_default_services()
     create_netmiko_workflow()
-    # create_napalm_workflow()
-    # create_payload_transfer_workflow()
+    create_napalm_workflow()
+    create_payload_transfer_workflow()

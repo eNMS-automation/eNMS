@@ -122,6 +122,12 @@ class Task(CustomBase):
     def properties(self):
         return {p: getattr(self, p) for p in cls_to_properties['Task']}
 
+    @property
+    def serialized(self):
+        properties = self.properties
+        properties['job'] = self.job.properties if self.job else None
+        return properties
+
 
 class ServiceTask(Task):
 
@@ -150,37 +156,6 @@ class WorkflowTask(Task):
         'polymorphic_identity': 'WorkflowTask',
     }
 
-    def run(self, workflow=None):
-        runtime = str(datetime.now())
-        start_job = retrieve(Task, id=self.job.start_job)
-        if not start_job:
-            return False, {runtime: 'No start task in the workflow.'}
-        tasks, visited = [start_job], set()
-        workflow_results = {}
-        while tasks:
-            task = tasks.pop()
-            # We check that all predecessors of the task have been visited
-            # to ensure that the task will receive the full payload.
-            # If it isn't the case, we put it back in the heap and move on to
-            # another task.
-            if any(n not in visited for n in task.task_sources(self.job)):
-                continue
-            visited.add(task)
-            task_results = task.run(workflow, workflow_results)
-            success = task_results['success']
-            if task.id == self.job.end_task:
-                workflow_results['success'] = success
-            for successor in task.task_successors(self.job, success):
-                if successor not in visited:
-                    tasks.append(successor)
-            workflow_results[task.name] = task_results
-            sleep(task.waiting_time)
-        self.job.logs[runtime] = workflow_results
-        db.session.commit()
-        return workflow_results
 
-    @property
-    def serialized(self):
-        properties = {p: getattr(self, p) for p in cls_to_properties['Task']}
-        properties['job'] = self.job.properties if self.job else None
-        return properties
+
+

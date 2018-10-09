@@ -136,7 +136,6 @@ class ServiceTask(Task):
 
     def __init__(self, **data):
         self.job = data.pop('job')
-        self.devices = data['devices']
         super().__init__(**data)
 
     def run(self, workflow, workflow_results=None):
@@ -152,8 +151,6 @@ class ServiceTask(Task):
     def serialized(self):
         properties = self.properties
         properties['job'] = self.job.properties if self.job else None
-        properties['devices'] = [device.properties for device in self.devices]
-        properties['pools'] = [pool.properties for pool in self.pools]
         return properties
 
 

@@ -62,5 +62,8 @@ class Workflow(Job):
         properties['scheduled_tasks'] = [
             obj.properties for obj in getattr(self, 'scheduled_tasks')
         ]
+        properties['tasks'] = [
+            obj.properties for obj in getattr(self, 'tasks')
+        ]
         properties['edges'] = [edge.serialized for edge in self.edges]
         return properties

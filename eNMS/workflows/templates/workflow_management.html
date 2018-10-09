@@ -5,6 +5,14 @@
 {% block stylesheets %}
   {{ super() }}
   <link href="{{ url_for('services_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+  <style>
+    #main { height:90vh; }
+    @media (min-width: 1000px) {
+      .modal-lg {
+        width: 1200px;
+      }
+    }
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}

@@ -2,7 +2,6 @@
 global
 alertify: false
 diffview: false
-table: false
 */
 
 let taskId;

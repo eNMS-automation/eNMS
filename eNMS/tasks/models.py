@@ -20,7 +20,7 @@ from eNMS.base.properties import cls_to_properties
 def scheduler_job(task_name):
     with scheduler.app.app_context():
         task = retrieve(Task, name=task_name)
-        workflow = task.workflow if task.type == 'WorkflowTask' else None
+        workflow = task.job if task.type == 'WorkflowTask' else None
         task.run(workflow)
 
 
@@ -213,7 +213,7 @@ class WorkflowTask(Task):
             if any(n not in visited for n in task.task_sources(self.job)):
                 continue
             visited.add(task)
-            task_results = task.job(workflow, workflow_results)
+            task_results = task.run(workflow, workflow_results)
             success = task_results['success']
             if task.id == self.job.end_task:
                 workflow_results['success'] = success

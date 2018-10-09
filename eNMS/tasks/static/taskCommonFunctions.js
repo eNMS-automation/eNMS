@@ -1,18 +1,14 @@
 /*
 global
 alertify: false
-diffview: false
 table: false
 */
-
-let taskId;
 
 /**
  * Show the scheduling modal for task.
  * @param {id} id - Task id.
  */
 function showTaskModal(id) { // eslint-disable-line no-unused-vars
-  taskId = id;
   $.ajax({
     type: 'POST',
     url: `/tasks/get/${id}`,

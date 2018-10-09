@@ -16,7 +16,7 @@ def scheduler_job(task_name):
     with scheduler.app.app_context():
         task = retrieve(Task, name=task_name)
         workflow = task.job if task.type == 'WorkflowTask' else None
-        task.run(workflow)
+        task.job.run(workflow)
 
 
 class Task(CustomBase):
@@ -47,6 +47,7 @@ class Task(CustomBase):
     }
 
     def __init__(self, **kwargs):
+        self.job = data.pop('job')
         self.update(**kwargs)
         self.status = 'Active'
         self.creation_time = str(datetime.now())
@@ -132,19 +133,6 @@ class ServiceTask(Task):
         'polymorphic_identity': 'ServiceTask',
     }
 
-    def __init__(self, **data):
-        self.job = data.pop('job')
-        super().__init__(**data)
-
-    def run(self, workflow, workflow_results=None):
-        try:
-            results = self.job.job(self, workflow_results)
-        except Exception as e:
-            return {'success': False, 'result': str(e)}
-        self.job.logs[str(datetime.now())] = results
-        db.session.commit()
-        return results
-
     @property
     def serialized(self):
         properties = self.properties
@@ -162,16 +150,12 @@ class WorkflowTask(Task):
         'polymorphic_identity': 'WorkflowTask',
     }
 
-    def __init__(self, **data):
-        self.job = data.pop('job')
-        super().__init__(**data)
-
     def run(self, workflow=None):
         runtime = str(datetime.now())
-        start_task = retrieve(Task, id=self.job.start_task)
-        if not start_task:
+        start_job = retrieve(Task, id=self.job.start_job)
+        if not start_job:
             return False, {runtime: 'No start task in the workflow.'}
-        tasks, visited = [start_task], set()
+        tasks, visited = [start_job], set()
         workflow_results = {}
         while tasks:
             task = tasks.pop()

@@ -92,8 +92,8 @@ service_public_properties = job_public_properties
 workflow_public_properties = job_public_properties + (
     'vendor',
     'operating_system',
-    'start_task',
-    'end_task'
+    'start_job',
+    'end_job'
 )
 
 workflow_table_properties = (

@@ -75,6 +75,15 @@ class Service(Job):
             serialized_object[col.key] = value
         return serialized_object
 
+    def run(self, workflow, workflow_results=None):
+        try:
+            results = self.job.job(self, workflow_results)
+        except Exception as e:
+            return {'success': False, 'result': str(e)}
+        self.job.logs[str(datetime.now())] = results
+        db.session.commit()
+        return results
+
     @property
     def serialized(self):
         properties = self.properties

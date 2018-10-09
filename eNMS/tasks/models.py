@@ -40,6 +40,8 @@ class Task(CustomBase):
     start_date = Column(String)
     end_date = Column(String)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
+    job_id = Column(Integer, ForeignKey('Job.id'))
+    job = relationship('Job', back_populates='task')
     waiting_time = Column(Integer, default=0)
     workflows = relationship(
         'Workflow',
@@ -138,8 +140,6 @@ class ServiceTask(Task):
     __tablename__ = 'ServiceTask'
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
-    service_id = Column(Integer, ForeignKey('Service.id'))
-    service = relationship('Service', back_populates='tasks')
     devices = relationship(
         'Device',
         secondary=task_device_table,
@@ -156,7 +156,7 @@ class ServiceTask(Task):
     }
 
     def __init__(self, **data):
-        self.service = data.pop('job')
+        self.job = data.pop('job')
         self.devices = data['devices']
         super().__init__(**data)
 
@@ -168,7 +168,7 @@ class ServiceTask(Task):
 
     def job(self, workflow, workflow_results=None):
         try:
-            results = self.service.job(self, workflow_results)
+            results = self.job.job(self, workflow_results)
         except Exception as e:
             return {'success': False, 'result': str(e)}
         self.logs[str(datetime.now())] = results
@@ -178,7 +178,7 @@ class ServiceTask(Task):
     @property
     def serialized(self):
         properties = self.properties
-        properties['job'] = self.service.properties if self.service else None
+        properties['job'] = self.job.properties if self.job else None
         properties['devices'] = [device.properties for device in self.devices]
         properties['pools'] = [pool.properties for pool in self.pools]
         return properties
@@ -189,20 +189,18 @@ class WorkflowTask(Task):
     __tablename__ = 'WorkflowTask'
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
-    workflow_id = Column(Integer, ForeignKey('Workflow.id'))
-    workflow = relationship('Workflow', back_populates='task')
 
     __mapper_args__ = {
         'polymorphic_identity': 'WorkflowTask',
     }
 
     def __init__(self, **data):
-        self.workflow = data.pop('job')
+        self.job = data.pop('job')
         super().__init__(**data)
 
     def job(self, workflow=None):
         runtime = str(datetime.now())
-        start_task = retrieve(Task, id=self.workflow.start_task)
+        start_task = retrieve(Task, id=self.job.start_task)
         if not start_task:
             return False, {runtime: 'No start task in the workflow.'}
         tasks, visited = [start_task], set()
@@ -213,14 +211,14 @@ class WorkflowTask(Task):
             # to ensure that the task will receive the full payload.
             # If it isn't the case, we put it back in the heap and move on to
             # another task.
-            if any(n not in visited for n in task.task_sources(self.workflow)):
+            if any(n not in visited for n in task.task_sources(self.job)):
                 continue
             visited.add(task)
             task_results = task.job(workflow, workflow_results)
             success = task_results['success']
-            if task.id == self.workflow.end_task:
+            if task.id == self.job.end_task:
                 workflow_results['success'] = success
-            for successor in task.task_successors(self.workflow, success):
+            for successor in task.task_successors(self.job, success):
                 if successor not in visited:
                     tasks.append(successor)
             workflow_results[task.name] = task_results
@@ -232,5 +230,5 @@ class WorkflowTask(Task):
     @property
     def serialized(self):
         properties = {p: getattr(self, p) for p in cls_to_properties['Task']}
-        properties['job'] = self.workflow.properties if self.workflow else None
+        properties['job'] = self.job.properties if self.job else None
         return properties

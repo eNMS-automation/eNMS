@@ -12,6 +12,7 @@ class Job(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     description = Column(String)
+    task = relationship('Task', back_populates='job')
     type = Column(String)
 
     __mapper_args__ = {

@@ -19,8 +19,6 @@ from eNMS.workflows.models import Workflow
 @permission_required('Tasks section')
 def task_management(task_type):
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.devices.choices = Device.choices()
-    scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
     task_class = ServiceTask if task_type == 'service' else WorkflowTask
     return render_template(

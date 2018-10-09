@@ -121,6 +121,12 @@ def delete_object(service_id):
 @permission_required('Edit services', redirect=False)
 def save_service(cls_name):
     form = dict(request.form.to_dict())
+    form['devices'] = [
+        retrieve(Device, id=id) for id in request.form.getlist('devices')
+    ]
+    form['pools'] = [
+        retrieve(Pool, id=id) for id in request.form.getlist('pools')
+    ]
     for key in request.form:
         if property_types.get(key, None) == list:
             form[key] = request.form.getlist(key)

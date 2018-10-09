@@ -48,7 +48,6 @@ class Workflow(Job):
         secondary=task_workflow_table,
         back_populates='workflows'
     )
-    task = relationship('WorkflowTask', back_populates='workflow')
     edges = relationship('WorkflowEdge', back_populates='workflow')
     start_task = Column(Integer)
     end_task = Column(Integer)

@@ -40,16 +40,16 @@ def workflows():
 @login_required
 @permission_required('Workflows section')
 def workflow_editor(workflow_id=None):
-    add_existing_task_form = AddExistingTaskForm(request.form)
+    add_job_form = AddJobForm(request.form)
     workflow_editor_form = WorkflowEditorForm(request.form)
     workflow_editor_form.workflow.choices = Workflow.choices()
     workflow = retrieve(Workflow, id=workflow_id)
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
-    add_existing_task_form.task.choices = Task.choices()
+    add_job_form.job.choices = Job.choices()
     return render_template(
         'workflow_editor.html',
-        add_existing_task_form=add_existing_task_form,
+        add_job_form=add_job_form,
         workflow_editor_form=workflow_editor_form,
         scheduling_form=scheduling_form,
         compare_logs_form=CompareLogsForm(request.form),
@@ -83,39 +83,39 @@ def delete_workflow(workflow_id):
     return jsonify(workflow)
 
 
-@blueprint.route('/add_node/<workflow_id>/<task_id>', methods=['POST'])
+@blueprint.route('/add_node/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
 @permission_required('Edit workflows', redirect=False)
-def add_node(workflow_id, task_id):
+def add_node(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
-    task = retrieve(Task, id=task_id)
-    workflow.tasks.append(task)
+    job = retrieve(Job, id=job_id)
+    workflow.jobs.append(job)
     db.session.commit()
-    return jsonify(task.serialized)
+    return jsonify(job.serialized)
 
 
-@blueprint.route('/delete_node/<workflow_id>/<task_id>', methods=['POST'])
+@blueprint.route('/delete_node/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
 @permission_required('Edit workflows', redirect=False)
-def delete_node(workflow_id, task_id):
-    task = retrieve(Task, id=task_id)
-    db.session.delete(task)
+def delete_node(workflow_id, job_id):
+    job = retrieve(Job, id=job_id)
+    db.session.delete(job)
     db.session.commit()
-    return jsonify(task.properties)
+    return jsonify(job.properties)
 
 
 @blueprint.route('/add_edge/<wf_id>/<type>/<source>/<dest>', methods=['POST'])
 @login_required
 @permission_required('Edit workflows', redirect=False)
 def add_edge(wf_id, type, source, dest):
-    source_task = retrieve(Task, id=source)
-    destination_task = retrieve(Task, id=dest)
+    source_job = retrieve(Job, id=source)
+    destination_job = retrieve(Job, id=dest)
     workflow_edge = factory(WorkflowEdge, **{
-        'name': f'{source_task.name} -> {destination_task.name}',
+        'name': f'{source_job.name} -> {destination_job.name}',
         'workflow': retrieve(Workflow, id=wf_id),
         'type': type == 'true',
-        'source': source_task,
-        'destination': destination_task
+        'source': source_job,
+        'destination': destination_job
     })
     return jsonify(workflow_edge.serialized)
 
@@ -130,22 +130,22 @@ def delete_edge(workflow_id, edge_id):
     return jsonify(edge.properties)
 
 
-@blueprint.route('/set_as_start/<workflow_id>/<task_id>', methods=['POST'])
+@blueprint.route('/set_as_start/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
 @permission_required('Edit workflows', redirect=False)
-def set_as_start(workflow_id, task_id):
+def set_as_start(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
-    workflow.start_task = task_id
+    workflow.start_job = job_id
     db.session.commit()
     return jsonify({'success': True})
 
 
-@blueprint.route('/set_as_end/<workflow_id>/<task_id>', methods=['POST'])
+@blueprint.route('/set_as_end/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
 @permission_required('Edit workflows', redirect=False)
-def set_as_end(workflow_id, task_id):
+def set_as_end(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
-    workflow.end_task = task_id
+    workflow.end_job = job_id
     db.session.commit()
     return jsonify({'success': True})
 
@@ -155,8 +155,8 @@ def set_as_end(workflow_id, task_id):
 @permission_required('Edit workflows', redirect=False)
 def save_positions(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
-    for task_id, position in request.json.items():
-        task = retrieve(Task, id=task_id)
-        task.positions[workflow.name] = (position['x'], position['y'])
+    for job_id, position in request.json.items():
+        job = retrieve(Job, id=job_id)
+        job.positions[workflow.name] = (position['x'], position['y'])
     db.session.commit()
     return jsonify({'success': True})

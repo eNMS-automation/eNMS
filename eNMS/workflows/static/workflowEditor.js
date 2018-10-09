@@ -93,7 +93,7 @@ if (workflow) {
 /**
  * Add an existing task to the workflow.
  */
-function addTaskToWorkflow() { // eslint-disable-line no-unused-vars
+function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5);
@@ -112,9 +112,9 @@ function addTaskToWorkflow() { // eslint-disable-line no-unused-vars
           if (graph.findNode(task.id).length == 0) {
             nodes.add(taskToNode(task));
             saveNode(task);
-            alertify.notify(`Task '${task.name}' created.`, 'success', 5);
+            alertify.notify(`Job '${task.name}' created.`, 'success', 5);
           } else {
-            alertify.notify(`Task already in workflow.`, 'error', 5);
+            alertify.notify(`Job already in workflow.`, 'error', 5);
           }
         }
       },

@@ -6,11 +6,7 @@ from sqlalchemy.orm import relationship
 from time import sleep
 
 from eNMS import db, scheduler
-from eNMS.base.associations import (
-    task_log_rule_table,
-    task_device_table,
-    task_pool_table
-)
+from eNMS.base.associations import task_log_rule_table
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
@@ -142,12 +138,6 @@ class ServiceTask(Task):
         self.job = data.pop('job')
         self.devices = data['devices']
         super().__init__(**data)
-
-    def compute_targets(self):
-        targets = set(self.devices)
-        for pool in self.pools:
-            targets |= set(pool.devices)
-        return targets
 
     def run(self, workflow, workflow_results=None):
         try:

@@ -42,6 +42,12 @@ class Job(CustomBase):
         'polymorphic_on': type
     }
 
+    def compute_targets(self):
+        targets = set(self.devices)
+        for pool in self.pools:
+            targets |= set(pool.devices)
+        return targets
+
 
 class Service(Job):
 

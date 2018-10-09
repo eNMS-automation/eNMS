@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import backref, relationship
 
-from eNMS.base.associations import task_workflow_table
+from eNMS.base.associations import job_workflow_table
 from eNMS.base.models import CustomBase
 from eNMS.services.models import Job
 
@@ -43,9 +43,9 @@ class Workflow(Job):
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
-    tasks = relationship(
-        'Task',
-        secondary=task_workflow_table,
+    jobs = relationship(
+        'Job',
+        secondary=job_workflow_table,
         back_populates='workflows'
     )
     edges = relationship('WorkflowEdge', back_populates='workflow')
@@ -62,8 +62,8 @@ class Workflow(Job):
         properties['scheduled_tasks'] = [
             obj.properties for obj in getattr(self, 'scheduled_tasks')
         ]
-        properties['tasks'] = [
-            obj.properties for obj in getattr(self, 'tasks')
+        properties['jobs'] = [
+            obj.properties for obj in getattr(self, 'jobs')
         ]
         properties['edges'] = [edge.serialized for edge in self.edges]
         return properties

@@ -13,7 +13,7 @@ from eNMS.base.properties import (
 )
 from eNMS.objects.models import Device, Pool
 from eNMS.services import blueprint
-from eNMS.services.forms import CompareLogsForm
+from eNMS.services.forms import CompareLogsForm, ServiceForm
 from eNMS.services.models import Job, Service, service_classes
 from eNMS.tasks.forms import SchedulingForm
 
@@ -23,8 +23,6 @@ from eNMS.tasks.forms import SchedulingForm
 @permission_required('Services section')
 def services():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.devices.choices = Device.choices()
-    scheduling_form.pools.choices = Pool.choices()
     scheduling_form.job.choices = Job.choices()
     return render_template(
         'service_management.html',
@@ -40,9 +38,13 @@ def services():
 @login_required
 @permission_required('Services section')
 def service_editor():
+    service_form = ServiceForm(request.form)
+    service_form.devices.choices = Device.choices()
+    service_form.pools.choices = Pool.choices()
     return render_template(
         'service_editor.html',
         property_types={k: str(v) for k, v in property_types.items()},
+        service_form=service_form,
         services_classes=list(service_classes)
     )
 

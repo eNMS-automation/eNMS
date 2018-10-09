@@ -17,6 +17,4 @@ class SchedulingForm(FlaskForm):
     run_immediately = BooleanField()
     do_not_run = BooleanField(default=True)
     service_type = SelectField()
-    devices = SelectMultipleField(choices=())
-    pools = SelectMultipleField(choices=())
     job = SelectField()

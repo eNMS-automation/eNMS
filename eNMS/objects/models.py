@@ -5,8 +5,8 @@ from sqlalchemy.orm import backref, relationship
 from eNMS.base.associations import (
     pool_device_table,
     pool_link_table,
-    task_device_table,
-    task_pool_table
+    job_device_table,
+    job_pool_table
 )
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import (
@@ -127,8 +127,8 @@ class Pool(CustomBase):
         back_populates='pools'
     )
     jobs = relationship(
-        'ServiceTask',
-        secondary=task_pool_table,
+        'Job',
+        secondary=job_pool_table,
         back_populates='pools'
     )
     device_name = Column(String)

@@ -275,6 +275,7 @@ pretty_names = {
     'subtype': 'Subtype',
     'text file': 'File',
     'type': 'Type',
+    'update_dictionnary': 'Update dictionnary',
     'username': 'Username',
     'vendor': 'Vendor',
     'waiting_time': 'Waiting time'
@@ -295,5 +296,6 @@ property_types = {
     'pass_device_properties': bool,
     'payload': dict,
     'contentregex': bool,
-    'sourceregex': bool
+    'sourceregex': bool,
+    'update_dictionnary': dict
 }

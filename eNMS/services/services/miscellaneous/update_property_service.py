@@ -1,5 +1,5 @@
 from multiprocessing.pool import ThreadPool
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS import db
@@ -22,7 +22,7 @@ class UpdatePropertyService(Service):
         results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(
-            getattr(self, 'update_property'),
+            self.update_property,
             [(task, device, incoming_payload, results) for device in targets])
         pool.close()
         pool.join()
@@ -31,9 +31,8 @@ class UpdatePropertyService(Service):
     def update_property(self, args):
         task, device, payload, results = args
         try:
-            for property, value in self.values.items()
+            for property, value in self.update_dictionnary.items():
                 setattr(device, property, value)
-            db.session.commit()
             result, success = f'update successfully executed', False
         except Exception as e:
             result, success = f'task failed ({e})', False

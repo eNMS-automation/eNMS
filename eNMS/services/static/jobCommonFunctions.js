@@ -42,15 +42,9 @@ function compareLogs(id) { // eslint-disable-line no-unused-vars
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         $('#first_version,#second_version').empty();
-        $('#first_device,#second_device').empty();
         for (let i = 0; i < results.versions.length; i++) {
           const value = results.versions[i];
           $('#first_version,#second_version').append($('<option></option>')
-            .attr('value', value).text(value));
-        }
-        for (let i = 0; i < results.devices.length; i++) {
-          const value = results.devices[i];
-          $('#first_device,#second_device').append($('<option></option>')
             .attr('value', value).text(value));
         }
       }
@@ -59,22 +53,21 @@ function compareLogs(id) { // eslint-disable-line no-unused-vars
   $('#logs-modal').modal('show');
 }
 
-const dropDowns = '#first_version,#second_version,#first_device,#second_device';
-$(dropDowns).on('change', function() {
+$('#first_version,#second_version').on('change', function() {
   $('#view').empty();
   const v1 = $('#first_version').val();
   const v2 = $('#second_version').val();
   $.ajax({
     type: 'POST',
-    url: `/services/get_diff/${taskId}/${v1}/${v2}${nodeSlugs}`,
+    url: `/services/get_diff/${taskId}/${v1}/${v2}`,
     dataType: 'json',
     success: function(data) {
       $('#view').append(diffview.buildView({
         baseTextLines: data.first,
         newTextLines: data.second,
         opcodes: data.opcodes,
-        baseTextName: `${n1} - ${v1}`,
-        newTextName: `${n2} - ${v2}`,
+        baseTextName: `${v1}`,
+        newTextName: `${v2}`,
         contextSize: null,
         viewType: 0,
       }));

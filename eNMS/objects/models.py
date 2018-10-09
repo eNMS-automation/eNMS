@@ -48,9 +48,9 @@ class Device(Object):
     username = Column(String)
     password = Column(String)
     enable_password = Column(String)
-    jobs = relationship(
-        'Job',
-        secondary=job_device_table,
+    services = relationship(
+        'Service',
+        secondary=service_device_table,
         back_populates='devices'
     )
     pools = relationship(
@@ -126,10 +126,10 @@ class Pool(CustomBase):
         secondary=pool_link_table,
         back_populates='pools'
     )
-    jobs = relationship(
-        'Job',
-        secondary=job_pool_table,
-        back_populates='pools'
+    services = relationship(
+        'Service',
+        secondary=service_pool_table,
+        back_populates='services'
     )
     device_name = Column(String)
     device_name_regex = Column(Boolean)

@@ -64,6 +64,8 @@ function fillInstanceForm() {
             $(`#${property}`).val(value);
           }
         }
+        $('#devices').val(properties.devices.map((n) => n.id));
+        $('#pools').val(properties.pools.map((p) => p.id));
         alertify.notify(`Service '${result.name}' displayed`, 'success', 5);
       }
     },

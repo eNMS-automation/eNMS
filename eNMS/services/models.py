@@ -28,16 +28,6 @@ class Job(CustomBase):
         secondary=job_workflow_table,
         back_populates='jobs'
     )
-    devices = relationship(
-        'Device',
-        secondary=job_device_table,
-        back_populates='jobs'
-    )
-    pools = relationship(
-        'Pool',
-        secondary=job_pool_table,
-        back_populates='jobs'
-    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'Job',
@@ -70,6 +60,16 @@ class Service(Job):
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     device_multiprocessing = False
     private = {'id'}
+    devices = relationship(
+        'Device',
+        secondary=service_device_table,
+        back_populates='services'
+    )
+    pools = relationship(
+        'Pool',
+        secondary=service_pool_table,
+        back_populates='services'
+    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'service',
@@ -99,6 +99,12 @@ class Service(Job):
     @property
     def serialized(self):
         properties = self.properties
+        properties['devices'] = [
+            obj.properties for obj in getattr(self, 'devices')
+        ]
+        properties['pools'] = [
+            obj.properties for obj in getattr(self, 'pools')
+        ]
         properties['scheduled_tasks'] = [
             obj.properties for obj in getattr(self, 'scheduled_tasks')
         ]

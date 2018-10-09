@@ -55,8 +55,8 @@ class Workflow(Job):
         back_populates='workflows'
     )
     edges = relationship('WorkflowEdge', back_populates='workflow')
-    start_task = Column(Integer)
-    end_task = Column(Integer)
+    start_job = Column(Integer)
+    end_job = Column(Integer)
 
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',

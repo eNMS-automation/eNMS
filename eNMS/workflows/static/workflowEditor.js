@@ -53,7 +53,7 @@ let edgeType;
  * @return {graph}
  */
 function displayWorkflow(wf) {
-  nodes = new vis.DataSet(wf.jobs.map(taskToNode));
+  nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   graph = new vis.Network(container, {nodes: nodes, edges: edges}, dsoptions);
   graph.setOptions({physics: false});
@@ -91,7 +91,7 @@ if (workflow) {
 }
 
 /**
- * Add an existing task to the workflow.
+ * Add an existing job to the workflow.
  */
 function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   if (!workflow) {
@@ -101,18 +101,18 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   if ($('#add-job').parsley().validate()) {
     $.ajax({
       type: 'POST',
-      url: `/tasks/add_to_workflow/${workflow.id}`,
+      url: `/services/add_to_workflow/${workflow.id}`,
       dataType: 'json',
       data: $('#add-job-form').serialize(),
-      success: function(task) {
-        if (!task) {
+      success: function(job) {
+        if (!job) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           $('#add-job').modal('hide');
-          if (graph.findNode(task.id).length == 0) {
-            nodes.add(taskToNode(task));
-            saveNode(task);
-            alertify.notify(`Job '${task.name}' created.`, 'success', 5);
+          if (graph.findNode(job.id).length == 0) {
+            nodes.add(jobToNode(job));
+            saveNode(job);
+            alertify.notify(`Job '${job.name}' created.`, 'success', 5);
           } else {
             alertify.notify(`Job already in workflow.`, 'error', 5);
           }
@@ -125,18 +125,18 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Add task to the workflow object (back-end).
- * @param {task} task - Task to add to the workflow.
+ * Add job to the workflow object (back-end).
+ * @param {job} job - job to add to the workflow.
  */
-function saveNode(task) {
+function saveNode(job) {
   $.ajax({
     type: 'POST',
-    url: `/workflows/add_node/${workflow.id}/${task.id}`,
-    success: function(task) {
-      if (!task) {
+    url: `/workflows/add_node/${workflow.id}/${job.id}`,
+    success: function(job) {
+      if (!job) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        const message = `Task '${task.name}' added to the workflow.`;
+        const message = `Job '${job.name}' added to the workflow.`;
         alertify.notify(message, 'success', 5);
       }
     },
@@ -144,18 +144,18 @@ function saveNode(task) {
 }
 
 /**
- * Delete task from the workflow (back-end).
- * @param {id} id - Id of the task to be deleted.
+ * Delete job from the workflow (back-end).
+ * @param {id} id - Id of the job to be deleted.
  */
 function deleteNode(id) {
   $.ajax({
     type: 'POST',
     url: `/workflows/delete_node/${workflow.id}/${id}`,
-    success: function(task) {
-      if (!task) {
+    success: function(job) {
+      if (!job) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        const message = `Task '${task.name}' deleted from the workflow.`;
+        const message = `Job '${job.name}' deleted from the workflow.`;
         alertify.notify(message, 'success', 5);
       }
     },
@@ -201,24 +201,24 @@ function deleteEdge(edgeId) {
 }
 
 /**
- * Convert task object to Vis task node.
- * @param {task} task - Task object.
- * @return {visTask}.
+ * Convert job object to Vis job node.
+ * @param {job} job - Job object.
+ * @return {visJob}.
  */
-function taskToNode(task) {
+function jobToNode(job) {
   return {
-    id: task.id,
-    label: task.name,
-    type: task.type,
-    x: task.positions[workflow.name] ? task.positions[workflow.name][0] : 0,
-    y: task.positions[workflow.name] ? task.positions[workflow.name][1] : 0,
-    color: task.id == workflow.start_task ? 'green' :
-      task.id == workflow.end_task ? 'red' : '#D2E5FF',
+    id: job.id,
+    label: job.name,
+    type: job.type,
+    x: job.positions[workflow.name] ? job.positions[workflow.name][0] : 0,
+    y: job.positions[workflow.name] ? job.positions[workflow.name][1] : 0,
+    color: job.id == workflow.start_job ? 'green' :
+      job.id == workflow.end_job ? 'red' : '#D2E5FF',
   };
 }
 
 /**
- * Convert edge object to Vis task edge.
+ * Convert edge object to Vis job edge.
  * @param {edge} edge - Edge object.
  * @return {visEdge}.
  */
@@ -239,27 +239,27 @@ function edgeToEdge(edge) {
  */
 function showSchedulingModal() { // eslint-disable-line no-unused-vars
   $('#scheduling').modal('show');
-  $('.dropdown-submenu a.menu-task').next('ul').toggle();
+  $('.dropdown-submenu a.menu-job').next('ul').toggle();
 }
 
 /**
- * Display modal to add an existing task.
+ * Display modal to add an existing job.
  */
-function showExistingTaskModal() {
+function showExistingJobModal() {
   $('#add-job').modal('show');
-  $('.dropdown-submenu a.menu-task').next('ul').toggle();
+  $('.dropdown-submenu a.menu-job').next('ul').toggle();
 }
 
 /**
- * Set a task as start of the workflow.
+ * Set a job as start of the workflow.
  */
-function startTask() {
+function startJob() {
   let start = nodes.get(graph.getSelectedNodes()[0]);
   if (start.length == 0 || !start.id) {
-    alertify.notify('You must select a task first.', 'error', 5);
+    alertify.notify('You must select a job first.', 'error', 5);
   } else {
-    if (workflow.start_task != 'None') {
-      nodes.update({id: workflow.start_task, color: '#D2E5FF'});
+    if (workflow.start_job != 'None') {
+      nodes.update({id: workflow.start_job, color: '#D2E5FF'});
     }
     $.ajax({
       type: 'POST',
@@ -269,24 +269,24 @@ function startTask() {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           nodes.update({id: start.id, color: 'green'});
-          workflow.start_task = start.id;
+          workflow.start_job = start.id;
         }
       },
     });
-    alertify.notify(`Task ${start.label} set as start.`, 'success', 5);
+    alertify.notify(`Job ${start.label} set as start.`, 'success', 5);
   }
 }
 
 /**
- * Set a task as end of the workflow.
+ * Set a job as end of the workflow.
  */
-function endTask() {
+function endjob() {
   let end = nodes.get(graph.getSelectedNodes()[0]);
   if (end.length == 0 || !end.id) {
-    alertify.notify('You must select a task first.', 'error', 5);
+    alertify.notify('You must select a job first.', 'error', 5);
   } else {
-    if (workflow.end_task != 'None') {
-      nodes.update({id: workflow.end_task, color: '#D2E5FF'});
+    if (workflow.end_job != 'None') {
+      nodes.update({id: workflow.end_job, color: '#D2E5FF'});
     }
     $.ajax({
       type: 'POST',
@@ -296,11 +296,11 @@ function endTask() {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           nodes.update({id: end.id, color: 'red'});
-          workflow.end_task = end.id;
+          workflow.end_job = end.id;
         }
       },
     });
-    alertify.notify(`Task ${end.label} set as end.`, 'success', 5);
+    alertify.notify(`Job ${end.label} set as end.`, 'success', 5);
   }
 }
 
@@ -367,11 +367,11 @@ function savePositions() {
 }
 
 const action = {
-  'Edit': showTaskModal,
+  'Edit': showJobModal,
   'Logs': showLogs,
-  'Set as start': startTask,
-  'Set as end': endTask,
-  'Add task': showExistingTaskModal,
+  'Set as start': startJob,
+  'Set as end': endJob,
+  'Add job': showJobModal,
   'Delete selection': deleteSelection,
   'Create success edge': partial(switchMode, 'success'),
   'Create failure edge': partial(switchMode, 'failure'),

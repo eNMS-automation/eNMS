@@ -47,7 +47,7 @@ class Task(CustomBase):
     }
 
     def __init__(self, **kwargs):
-        self.job = data.pop('job')
+        self.job = kwargs.pop('job')
         self.update(**kwargs)
         self.status = 'Active'
         self.creation_time = str(datetime.now())

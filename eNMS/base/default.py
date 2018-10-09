@@ -185,15 +185,15 @@ def create_netmiko_workflow():
             'source': services[i],
             'destination': services[i + 1]
         })
-    workflow.start_task, workflow.end_task = services[0].id, services[-1].id
+    workflow.start_job, workflow.end_job = services[0].id, services[-1].id
     factory(Task, **{
         'name': 'task_netmiko_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
         'user': retrieve(User, name='admin')
     })
-    for index, task in enumerate(services):
-        task.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
+    for index, service in enumerate(services):
+        service.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
 
 
 @integrity_rollback
@@ -247,15 +247,15 @@ def create_napalm_workflow():
             'source': services[i],
             'destination': services[i + 1]
         })
-    workflow.start_task, workflow.end_task = services[0].id, services[-1].id
+    workflow.start_job, workflow.end_job = services[0].id, services[-1].id
     factory(Task, **{
         'name': 'task_napalm_VRF_workflow',
         'start-task': 'do-not-run',
         'job': workflow,
         'user': retrieve(User, name='admin')
     })
-    for index, task in enumerate(services):
-        task.positions['Napalm_VRF_workflow'] = (0, 100 * index)
+    for index, service in enumerate(services):
+        service.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
 
 def create_payload_transfer_workflow():
@@ -318,7 +318,7 @@ def create_payload_transfer_workflow():
             'source': services[x],
             'destination': services[y]
         })
-    workflow.start_task, workflow.end_task = services[0].id, services[-1].id
+    workflow.start_job, workflow.end_job = services[0].id, services[-1].id
     positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
         services[index].positions['payload_transfer_workflow'] = x * 10, y * 10

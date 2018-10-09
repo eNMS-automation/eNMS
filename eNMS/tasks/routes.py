@@ -17,7 +17,7 @@ from eNMS.workflows.models import Workflow
 @blueprint.route('/task_management')
 @login_required
 @permission_required('Tasks section')
-def task_management(task_type):
+def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
     return render_template(

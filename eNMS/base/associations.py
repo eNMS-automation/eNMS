@@ -2,18 +2,18 @@ from sqlalchemy import Column, ForeignKey, Integer, Table
 
 from eNMS.base.custom_base import CustomBase
 
-task_device_table = Table(
-    'task_device_association',
+job_device_table = Table(
+    'job_device_association',
     CustomBase.metadata,
     Column('device_id', Integer, ForeignKey('Device.id')),
-    Column('service_task_id', Integer, ForeignKey('ServiceTask.id'))
+    Column('job_id', Integer, ForeignKey('Job.id'))
 )
 
-task_pool_table = Table(
-    'task_pool_association',
+job_pool_table = Table(
+    'job_pool_association',
     CustomBase.metadata,
     Column('pool_id', Integer, ForeignKey('Pool.id')),
-    Column('service_task_id', Integer, ForeignKey('ServiceTask.id'))
+    Column('job_id', Integer, ForeignKey('Job.id'))
 )
 
 task_log_rule_table = Table(
@@ -23,10 +23,10 @@ task_log_rule_table = Table(
     Column('log_rule_id', Integer, ForeignKey('LogRule.id'))
 )
 
-task_workflow_table = Table(
-    'task_workflow_association',
+job_workflow_table = Table(
+    'job_workflow_association',
     CustomBase.metadata,
-    Column('task_id', Integer, ForeignKey('Task.id')),
+    Column('job_id', Integer, ForeignKey('Job.id')),
     Column('workflow_id', Integer, ForeignKey('Workflow.id'))
 )
 

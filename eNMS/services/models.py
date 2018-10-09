@@ -2,6 +2,11 @@ from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 
+from eNMS.base.associations import (
+    job_device_table,
+    job_pool_table,
+    job_workflow_table
+)
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import cls_to_properties
 
@@ -16,6 +21,21 @@ class Job(CustomBase):
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     scheduled_tasks = relationship('Task', back_populates='job')
     type = Column(String)
+    workflows = relationship(
+        'Workflow',
+        secondary=job_workflow_table,
+        back_populates='jobs'
+    )
+    devices = relationship(
+        'Device',
+        secondary=job_device_table,
+        back_populates='jobs'
+    )
+    pools = relationship(
+        'Pool',
+        secondary=job_pool_table,
+        back_populates='jobs'
+    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'Job',

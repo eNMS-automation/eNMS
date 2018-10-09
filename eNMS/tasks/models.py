@@ -9,8 +9,7 @@ from eNMS import db, scheduler
 from eNMS.base.associations import (
     task_log_rule_table,
     task_device_table,
-    task_pool_table,
-    task_workflow_table
+    task_pool_table
 )
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import retrieve
@@ -42,11 +41,6 @@ class Task(CustomBase):
     job_id = Column(Integer, ForeignKey('Job.id'))
     job = relationship('Job', back_populates='scheduled_tasks')
     waiting_time = Column(Integer, default=0)
-    workflows = relationship(
-        'Workflow',
-        secondary=task_workflow_table,
-        back_populates='tasks'
-    )
     log_rules = relationship(
         'LogRule',
         secondary=task_log_rule_table,
@@ -139,16 +133,6 @@ class ServiceTask(Task):
     __tablename__ = 'ServiceTask'
 
     id = Column(Integer, ForeignKey('Task.id'), primary_key=True)
-    devices = relationship(
-        'Device',
-        secondary=task_device_table,
-        back_populates='tasks'
-    )
-    pools = relationship(
-        'Pool',
-        secondary=task_pool_table,
-        back_populates='tasks'
-    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'ServiceTask',

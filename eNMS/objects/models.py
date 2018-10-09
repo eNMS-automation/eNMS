@@ -48,9 +48,9 @@ class Device(Object):
     username = Column(String)
     password = Column(String)
     enable_password = Column(String)
-    tasks = relationship(
-        'ServiceTask',
-        secondary=task_device_table,
+    jobs = relationship(
+        'Job',
+        secondary=job_device_table,
         back_populates='devices'
     )
     pools = relationship(
@@ -126,7 +126,7 @@ class Pool(CustomBase):
         secondary=pool_link_table,
         back_populates='pools'
     )
-    tasks = relationship(
+    jobs = relationship(
         'ServiceTask',
         secondary=task_pool_table,
         back_populates='pools'

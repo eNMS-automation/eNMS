@@ -73,3 +73,13 @@ NASA tiles
 .. image:: /_static/views/geographical_view/nasa_layer.png
    :alt: NASA
    :align: center
+
+Default view
+------------
+
+The default view depends on the number of nodes:
+- less than 50 nodes, 3D
+- less than 2000: leaflet (classic 2D view)
+- more than 2000: clusterized 2D
+
+You can switch to any view from the right-click menu.

@@ -13,16 +13,16 @@ class WorkflowEdge(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     type = Column(Boolean)
-    source_id = Column(Integer, ForeignKey('Task.id'))
+    source_id = Column(Integer, ForeignKey('Job.id'))
     source = relationship(
-        'Task',
-        primaryjoin='Task.id == WorkflowEdge.source_id',
+        'Job',
+        primaryjoin='Job.id == WorkflowEdge.source_id',
         backref=backref('destinations', cascade='all, delete-orphan')
     )
-    destination_id = Column(Integer, ForeignKey('Task.id'))
+    destination_id = Column(Integer, ForeignKey('Job.id'))
     destination = relationship(
-        'Task',
-        primaryjoin='Task.id == WorkflowEdge.destination_id',
+        'Job',
+        primaryjoin='Job.id == WorkflowEdge.destination_id',
         backref=backref('sources', cascade='all, delete-orphan')
     )
     workflow_id = Column(Integer, ForeignKey('Workflow.id'))

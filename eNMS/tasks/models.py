@@ -33,10 +33,8 @@ class Task(CustomBase):
     frequency = Column(String)
     start_date = Column(String)
     end_date = Column(String)
-    positions = Column(MutableDict.as_mutable(PickleType), default={})
     job_id = Column(Integer, ForeignKey('Job.id'))
     job = relationship('Job', back_populates='scheduled_tasks')
-    waiting_time = Column(Integer, default=0)
     log_rules = relationship(
         'LogRule',
         secondary=task_log_rule_table,

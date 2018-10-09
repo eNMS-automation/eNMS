@@ -18,9 +18,11 @@ class Job(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     description = Column(String)
+    positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     scheduled_tasks = relationship('Task', back_populates='job')
     type = Column(String)
+    waiting_time = Column(Integer, default=0)
     workflows = relationship(
         'Workflow',
         secondary=job_workflow_table,

@@ -7,6 +7,7 @@ class ServiceForm(FlaskForm):
     description = TextField()
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
+    waiting_time = IntegerField(default=0)
 
 
 class CompareLogsForm(FlaskForm):

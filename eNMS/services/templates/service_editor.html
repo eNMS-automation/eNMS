@@ -31,6 +31,10 @@
                 <div class="form-group">
                   {{ service_form.description(class="form-control") }}
                 </div>
+                <label>Waiting time</label>
+                <div class='form-group'>
+                  {{ scheduling_form.waiting_time(class="form-control", required=true, autocomplete="off") }}
+                </div>
                 <label>Nodes</label>
                 <div class='form-group'>
                   {{ service_form.devices(class="form-control", size=8) }}

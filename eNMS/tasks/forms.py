@@ -12,7 +12,6 @@ class SchedulingForm(FlaskForm):
     start_date = TextField()
     end_date = TextField()
     name = TextField()
-    waiting_time = IntegerField(default=0)
     frequency = TextField()
     run_immediately = BooleanField()
     do_not_run = BooleanField(default=True)

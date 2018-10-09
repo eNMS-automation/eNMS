@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField,
+from wtforms import SelectField
 
 
 class CompareLogsForm(FlaskForm):

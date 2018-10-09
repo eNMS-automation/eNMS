@@ -9,7 +9,7 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve, str_dict
 from eNMS.base.properties import task_public_properties
 from eNMS.tasks import blueprint
-from eNMS.tasks.forms import CompareLogsForm, SchedulingForm
+from eNMS.tasks.forms import SchedulingForm
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.objects.models import Pool, Device
 from eNMS.services.models import Job
@@ -27,7 +27,6 @@ def task_management(task_type):
     task_class = ServiceTask if task_type == 'service' else WorkflowTask
     return render_template(
         f'{task_type}_tasks.html',
-        compare_logs_form=CompareLogsForm(request.form),
         fields=task_public_properties,
         tasks=task_class.serialize(),
         scheduling_form=scheduling_form

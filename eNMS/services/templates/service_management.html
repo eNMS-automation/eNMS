@@ -20,5 +20,7 @@
     var fields = {{ fields|tojson|safe }}
     var services = {{ services|tojson|safe }}
   </script>
+  <script src="{{ url_for('services_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <script src="{{ url_for('services_blueprint.static', filename='serviceManagement.js') }}"></script>
+  
 {% endblock javascripts %}

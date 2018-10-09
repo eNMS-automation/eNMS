@@ -14,7 +14,7 @@ let taskId;
 function showLogs(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/tasks/show_logs/${id}`,
+    url: `/services/show_logs/${id}`,
     dataType: 'json',
     success: function(logs) {
       if (!logs) {
@@ -35,7 +35,7 @@ function compareLogs(id) { // eslint-disable-line no-unused-vars
   taskId = id;
   $.ajax({
     type: 'POST',
-    url: `/tasks/compare_logs/${id}`,
+    url: `/services/compare_logs/${id}`,
     dataType: 'json',
     success: function(results) {
       if (!results) {
@@ -64,12 +64,9 @@ $(dropDowns).on('change', function() {
   $('#view').empty();
   const v1 = $('#first_version').val();
   const v2 = $('#second_version').val();
-  const n1 = $('#first_device').val();
-  const n2 = $('#second_device').val();
-  const nodeSlugs = n1 && n2 ? `/${n1}/${n2}` : '';
   $.ajax({
     type: 'POST',
-    url: `/tasks/get_diff/${taskId}/${v1}/${v2}${nodeSlugs}`,
+    url: `/services/get_diff/${taskId}/${v1}/${v2}${nodeSlugs}`,
     dataType: 'json',
     success: function(data) {
       $('#view').append(diffview.buildView({

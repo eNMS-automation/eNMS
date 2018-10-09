@@ -6,8 +6,9 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import pretty_names, workflow_table_properties
 from eNMS.objects.models import Device, Pool
+from eNMS.services.forms import CompareLogsForm
 from eNMS.services.models import Job
-from eNMS.tasks.forms import CompareLogsForm, SchedulingForm
+from eNMS.services.forms import CompareLogsForm
 from eNMS.tasks.models import Task
 from eNMS.workflows import blueprint
 from eNMS.workflows.forms import (
@@ -26,6 +27,7 @@ def workflows():
     scheduling_form.job.choices = Job.choices()
     return render_template(
         'workflow_management.html',
+        compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
         scheduling_form=scheduling_form,
         fields=workflow_table_properties,

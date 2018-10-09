@@ -7,10 +7,11 @@ from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import (
     pretty_names,
     property_types,
-    service_public_properties
+    service_table_properties
 )
 from eNMS.objects.models import Device, Pool
 from eNMS.services import blueprint
+from eNMS.services.forms import CompareLogsForm
 from eNMS.services.models import Job, Service, service_classes
 from eNMS.tasks.forms import SchedulingForm
 
@@ -25,7 +26,8 @@ def services():
     scheduling_form.job.choices = Job.choices()
     return render_template(
         'service_management.html',
-        fields=service_public_properties,
+        compare_logs_form=CompareLogsForm(request.form),
+        fields=service_table_properties,
         names=pretty_names,
         scheduling_form=scheduling_form,
         services=Service.serialize()
@@ -123,7 +125,7 @@ def save_service(cls_name):
 
 @blueprint.route('/show_logs/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Tasks section', redirect=False)
+@permission_required('Service section', redirect=False)
 def show_logs(job_id):
     return jsonify(dumps(retrieve(Job, id=job_id).logs, indent=4))
 

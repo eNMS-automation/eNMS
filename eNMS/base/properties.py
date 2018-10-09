@@ -72,6 +72,12 @@ pool_public_properties = (
     'description'
 )
 
+service_table_properties = (
+    'name',
+    'type',
+    'description'
+)
+
 job_public_properties = (
     'name',
     'type',

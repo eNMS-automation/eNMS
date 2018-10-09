@@ -125,6 +125,12 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Show Job Modal
+ * @param {job} job - job to add to the workflow.
+ */
+function showJobModal(job) {
+}
+/**
  * Add job to the workflow object (back-end).
  * @param {job} job - job to add to the workflow.
  */
@@ -280,7 +286,7 @@ function startJob() {
 /**
  * Set a job as end of the workflow.
  */
-function endjob() {
+function endJob() {
   let end = nodes.get(graph.getSelectedNodes()[0]);
   if (end.length == 0 || !end.id) {
     alertify.notify('You must select a job first.', 'error', 5);

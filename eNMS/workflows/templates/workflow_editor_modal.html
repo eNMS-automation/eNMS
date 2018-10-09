@@ -5,17 +5,17 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="title">Add Task in Workflow</h4>
+        <h4 class="modal-title" id="title">Add Job in Workflow</h4>
       </div>
       <form id="add-job-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
         <div class="modal-body">
           <div class="form-group">
-            {{ add_job_form.task(class="form-control") }}
+            {{ add_job_form.job(class="form-control") }}
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" onclick="addTaskToWorkflow()">Submit</button>
+          <button type="button" class="btn btn-success" onclick="addJobToWorkflow()">Submit</button>
         </div>
       </form>
     </div>

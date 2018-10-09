@@ -12,7 +12,7 @@ from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.base.properties import property_types
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.services.models import service_classes
+from eNMS.services.models import Job, service_classes
 from eNMS.tasks.models import ServiceTask, Task, WorkflowTask
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
@@ -254,7 +254,7 @@ def create_napalm_workflow():
 
 def create_payload_transfer_workflow():
     services = []
-    services = [{
+    for service in [{
         'name': 'GET_router8',
         'type': service_classes['Rest Call Service'],
         'description': 'Use GET ReST call on router8',
@@ -278,9 +278,9 @@ def create_payload_transfer_workflow():
         'name': 'process_payload1',
         'type': service_classes['Swiss Army Knife Service'],
         'description': 'Process Payload in example workflow',
-    }]
-    for service in services:
+    }]:
         instance = factory(service.pop('type'), **service)
+        services.append(instance)
         factory(ServiceTask, **{
             'name': f'task_{instance.name}',
             'job': instance,
@@ -293,23 +293,23 @@ def create_payload_transfer_workflow():
         'description': 'ReST call, Napalm getters, etc',
         'vendor': 'Cisco',
         'operating_system': 'IOS',
-        'tasks': tasks
+        'jobs': services
     })
 
     # create workflow edges with following schema:
     edges = [(0, 1), (0, 2), (1, 3), (3, 4), (4, 5), (2, 5)]
     for x, y in edges:
         factory(WorkflowEdge, **{
-            'name': f'{tasks[x].name} -> {tasks[y].name}',
+            'name': f'{services[x].name} -> {services[y].name}',
             'workflow': workflow,
             'type': True,
-            'source': tasks[x],
-            'destination': tasks[y]
+            'source': services[x],
+            'destination': services[y]
         })
-    workflow.start_task, workflow.end_task = tasks[0].id, tasks[-1].id
+    workflow.start_task, workflow.end_task = services[0].id, services[-1].id
     positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
-        tasks[index].positions['payload_transfer_workflow'] = x * 10, y * 10
+        services[index].positions['payload_transfer_workflow'] = x * 10, y * 10
     factory(WorkflowTask, **{
         'name': 'task_payload_transfer_workflow',
         'start-task': 'do-not-run',

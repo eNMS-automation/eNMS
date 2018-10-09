@@ -44,6 +44,18 @@ class Job(CustomBase):
         'polymorphic_on': type
     }
 
+    def job_sources(self, workflow, type='all'):
+        return [
+            x.source for x in self.sources
+            if (type == 'all' or x.type == type) and x.workflow == workflow
+        ]
+
+    def job_successors(self, workflow, type='all'):
+        return [
+            x.destination for x in self.destinations
+            if (type == 'all' or x.type == type) and x.workflow == workflow
+        ]
+
     def compute_targets(self):
         targets = set(self.devices)
         for pool in self.pools:

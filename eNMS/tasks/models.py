@@ -81,18 +81,6 @@ class Task(CustomBase):
             pass
         db.session.commit()
 
-    def task_sources(self, workflow, type='all'):
-        return [
-            x.source for x in self.sources
-            if (type == 'all' or x.type == type) and x.workflow == workflow
-        ]
-
-    def task_successors(self, workflow, type='all'):
-        return [
-            x.destination for x in self.destinations
-            if (type == 'all' or x.type == type) and x.workflow == workflow
-        ]
-
     def schedule(self, run_now=True):
         now = datetime.now() + timedelta(seconds=15)
         runtime = now if run_now else self.aps_date('start_date')

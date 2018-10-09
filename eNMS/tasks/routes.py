@@ -67,15 +67,8 @@ def calendar():
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = retrieve(Job, id=data['job'])
-    data['devices'] = [
-        retrieve(Device, id=id) for id in request.form.getlist('devices')
-    ]
-    data['pools'] = [
-        retrieve(Pool, id=id) for id in request.form.getlist('pools')
-    ]
     data['user'] = current_user
-    cls = WorkflowTask if data['job'].type == 'workflow' else ServiceTask
-    task = factory(cls, **data)
+    task = factory(Task, **data)
     return jsonify(task.serialized)
 
 

@@ -119,13 +119,13 @@ If we want to use the results of the Napalm getters in the final task ``task_pro
 ::
 
   def job(self, task, payload):
-      get_int = payload['task_service_napalm_getter_get_interfaces']
+      get_int = payload['task_get_interfaces']
       r8_int = get_int['devices']['router8']['result']['get_interfaces']
       speed_fa0 = r8_int['FastEthernet0/0']['speed']
       speed_fa1 = r8_int['FastEthernet0/1']['speed']
       same_speed = speed_fa0 == speed_fa1
 
-      get_facts = payload['task_service_napalm_getter_get_facts']
+      get_facts = payload['task_get_facts']
       r8_facts = get_facts['devices']['router8']['result']['get_facts']
       uptime_less_than_50000 = r8_facts['uptime'] < 50000
       return {

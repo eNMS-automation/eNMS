@@ -29,7 +29,7 @@ from eNMS.automation.models import (
     WorkflowEdge,
     Workflow
 )
-from eNMS.tasks.forms import SchedulingForm
+from eNMS.schedule.forms import SchedulingForm
 
 
 def scheduler_job(job_id):

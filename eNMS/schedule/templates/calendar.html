@@ -5,7 +5,7 @@
 {% block stylesheets %}
   {{ super() }}
   <!-- FullCalendar -->
-  <link href="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('schedule_blueprint.static', filename='fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -25,12 +25,12 @@
 {% block javascripts %}
   {{ super() }}
   <!-- FullCalendar -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
+  <script src="{{ url_for('schedule_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
   <script> var tasks = {{ tasks|tojson|safe }};</script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script src="{{ url_for('schedule_blueprint.static', filename='scheduleTask.js') }}"></script>
   <!-- Task management -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='taskManagement.js') }}"></script>
+  <script src="{{ url_for('schedule_blueprint.static', filename='taskManagement.js') }}"></script>
   <!-- Calendar -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='calendar.js') }}"></script>
+  <script src="{{ url_for('schedule_blueprint.static', filename='calendar.js') }}"></script>
 {% endblock javascripts %}

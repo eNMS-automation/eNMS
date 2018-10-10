@@ -13,7 +13,7 @@ from eNMS.base.properties import property_types
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.automation.models import Job, service_classes, Workflow, WorkflowEdge
-from eNMS.tasks.models import Task
+from eNMS.schedule.models import Task
 
 
 @integrity_rollback

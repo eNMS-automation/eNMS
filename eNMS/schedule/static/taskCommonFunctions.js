@@ -11,7 +11,7 @@ table: false
 function showTaskModal(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/tasks/get/${id}`,
+    url: `/schedule/get/${id}`,
     dataType: 'json',
     success: function(properties) {
       if (!properties) {
@@ -38,7 +38,7 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
 function deleteTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/tasks/delete_task/${id}`,
+    url: `/schedule/delete_task/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -57,7 +57,7 @@ function deleteTask(id) { // eslint-disable-line no-unused-vars
 function pauseTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/tasks/pause_task/${id}`,
+    url: `/schedule/pause_task/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -79,7 +79,7 @@ function pauseTask(id) { // eslint-disable-line no-unused-vars
 function resumeTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/tasks/resume_task/${id}`,
+    url: `/schedule/resume_task/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

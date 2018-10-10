@@ -12,27 +12,27 @@
           <div class="form-group">
             <label>Name</label>
             <div class='form-group'>
-              {{ scheduling_form.task_name(class="form-control", required=true) }}
+              {{ scheduling_form.name(id="task-name", class="form-control", required=true) }}
             </div>
             <div id="job-div">
               <label>Job</label>
               <div class="form-group">
-                {{ scheduling_form.task_job(class="form-control") }}
+                {{ scheduling_form.job(class="form-control") }}
               </div>
             </div>
           </div>
           <div class="form-group" style="min-height: 350px">
             <label>Start date</label>
             <div class='form-group'>
-              {{ scheduling_form.task_start_date(class="form-control", required=true) }}
+              {{ scheduling_form.start_date(class="form-control", required=true) }}
             </div>
             <label>End date</label>
             <div class='form-group'>
-              {{ scheduling_form.task_end_date(class="form-control") }}
+              {{ scheduling_form.end_date(class="form-control") }}
             </div>
             <label>Frequency (seconds)</label>
             <div class='form-group'>
-              {{ scheduling_form.task_frequency(class="form-control", autocomplete="off") }}
+              {{ scheduling_form.frequency(class="form-control", autocomplete="off") }}
             </div>
           </div>
         </div>

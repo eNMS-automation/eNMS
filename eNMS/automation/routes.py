@@ -42,7 +42,7 @@ def scheduler_job(job_id):
 @permission_required('Services section')
 def service_management():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.task_job.choices = Job.choices()
+    scheduling_form.job.choices = Job.choices()
     service_form = ServiceForm(request.form)
     service_form.devices.choices = Device.choices()
     service_form.pools.choices = Pool.choices()
@@ -64,7 +64,7 @@ def service_management():
 @permission_required('Workflows section')
 def workflow_management():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.task_job.choices = Job.choices()
+    scheduling_form.job.choices = Job.choices()
     return render_template(
         'workflow_management.html',
         compare_logs_form=CompareLogsForm(request.form),

@@ -14,27 +14,27 @@ class ParallelSwissArmyKnifeService(Service):
         'polymorphic_identity': 'parallel_swiss_army_knife_service',
     }
 
-    def job(self, task, incoming_payload):
+    def job(self, workflow_results=None):
         targets = self.compute_targets()
         results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(
             getattr(self, self.name),
-            [(task, device, incoming_payload, results) for device in targets])
+            [(device, workflow_results, results) for device in targets])
         pool.close()
         pool.join()
         return results
 
     def job1(self, args):
-        task, device, payload, results = args
+        device, payload, results = args
         results['devices'][device.name] = True
 
     def job2(self, args):
-        task, device, payload, results = args
+        device, payload, results = args
         results['devices'][device.name] = True
 
     def job3(self, args):
-        task, device, payload, results = args
+        device, payload, results = args
         results['devices'][device.name] = True
 
 

@@ -17,7 +17,7 @@ from eNMS.automation.models import Job
 @permission_required('Schedule section')
 def task_management():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.task_job.choices = Job.choices()
+    scheduling_form.job.choices = Job.choices()
     return render_template(
         f'task_management.html',
         fields=task_public_properties,

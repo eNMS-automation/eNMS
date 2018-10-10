@@ -50,6 +50,7 @@ class Task(CustomBase):
         self.status = 'Active'
         self.creation_time = str(datetime.now())
         self.is_active = True
+        self.schedule()
 
     def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
@@ -90,14 +91,14 @@ class Task(CustomBase):
             )
         else:
             scheduler.add_job(
-                id=runtime,
+                id=self.creation_time,
                 func=scheduler_job,
-                run_date=runtime,
+                run_date=self.aps_date('start_date'),
                 args=[self.name],
                 trigger='date',
                 replace_existing=True
             )
-        return runtime
+        return str(datetime.now())
 
     @property
     def properties(self):

@@ -6,7 +6,7 @@ alertify: false
 const dates = ['start_date', 'end_date'];
 const today = new Date();
 for (let i = 0; i < dates.length; i++) {
-  $('#task_' + dates[i]).datetimepicker({
+  $('#' + dates[i]).datetimepicker({
     format: 'DD/MM/YYYY HH:mm:ss',
     widgetPositioning: {
       horizontal: 'left',
@@ -14,8 +14,8 @@ for (let i = 0; i < dates.length; i++) {
     },
     useCurrent: false,
   });
-  if ($('#task_' + dates[i]).length) {
-    $('#task_' + dates[i]).data('DateTimePicker').minDate(today);
+  if ($('#' + dates[i]).length) {
+    $('#' + dates[i]).data('DateTimePicker').minDate(today);
   }
 }
 

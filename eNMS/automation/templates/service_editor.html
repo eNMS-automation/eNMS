@@ -8,6 +8,7 @@
         <h4 class="modal-title" id="title">Create a new service</h4>
       </div>
       <div class="modal-body">
+        <form data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
           <!-- Smart Wizard -->
           <div id="wizard" class="form_wizard wizard_horizontal">
             <ul class="wizard_steps">
@@ -66,16 +67,12 @@
               <div class='form-group'>
                 {{ service_form.pools(class="form-control", size=8) }}
               </div>
-              <div class="ln_solid"></div>
-              <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
-              </div>
             </div>
-          </div>
-
-
-
+            <div class="ln_solid"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
+            </div>
           </div>
         </form>
       </div>

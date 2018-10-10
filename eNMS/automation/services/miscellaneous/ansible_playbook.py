@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 
-from eNMS.services.models import Service, service_classes
+from eNMS.automation.models import Service, service_classes
 
 
 class AnsiblePlaybookService(Service):

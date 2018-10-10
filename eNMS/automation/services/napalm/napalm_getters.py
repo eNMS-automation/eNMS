@@ -3,8 +3,8 @@ from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.services.helpers import napalm_connection, NAPALM_DRIVERS
-from eNMS.services.models import Service, service_classes
+from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
+from eNMS.automation.models import Service, service_classes
 
 
 class NapalmGettersService(Service):

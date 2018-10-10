@@ -1,8 +1,8 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.services.helpers import napalm_connection, NAPALM_DRIVERS
-from eNMS.services.models import Service, service_classes
+from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
+from eNMS.automation.models import Service, service_classes
 
 
 class NapalmTracerouteService(Service):

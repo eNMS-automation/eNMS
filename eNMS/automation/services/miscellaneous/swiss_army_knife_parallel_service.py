@@ -1,7 +1,7 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer
 
-from eNMS.services.models import Service, service_classes
+from eNMS.automation.models import Service, service_classes
 
 
 class GenericParallelService(Service):

@@ -28,7 +28,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.services.models import Service, service_classes
+from eNMS.automation.models import Service, service_classes
 
 
 class ExampleService(Service):

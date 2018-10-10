@@ -9,40 +9,18 @@
       </div>
       <form id="scheduling-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body" style="min-height:70vh;">
-          <!-- Smart Wizard -->
-          <div id="wizard" class="form_wizard wizard_horizontal">
-            <ul class="wizard_steps">
-              <li>
-                <a href="#step-1">
-                  <span class="step_no">1</span>
-                  <span class="step_descr"> Step 1 <br/>
-                  <small>Parameters</small>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#step-2">
-                  <span class="step_no">2</span>
-                  <span class="step_descr"> Step 2 <br/>
-                  <small>Scheduling</small>
-                  </span>
-                </a>
-              </li>
-            </ul>
-            <div id="step-1">
+          <div class="form-group">
+            <label>Name</label>
+            <div class='form-group'>
+              {{ scheduling_form.name(class="form-control", required=true, autocomplete="off") }}
+            </div>
+            <div id="job-div">
+              <label>Job</label>
               <div class="form-group">
-                <label>Name</label>
-                <div class='form-group'>
-                  {{ scheduling_form.name(class="form-control", required=true, autocomplete="off") }}
-                </div>
-                <div id="job-div">
-                  <label>Job</label>
-                  <div class="form-group">
-                    {{ scheduling_form.job(class="form-control") }}
-                  </div>
-                </div>
+                {{ scheduling_form.job(class="form-control") }}
               </div>
             </div>
+          </div>
             <div id="step-2">
               <div class="radio">
                 <label>

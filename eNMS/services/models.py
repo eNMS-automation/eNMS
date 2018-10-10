@@ -1,7 +1,7 @@
 from datetime import datetime
-from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 
 from eNMS import db
 from eNMS.base.associations import (

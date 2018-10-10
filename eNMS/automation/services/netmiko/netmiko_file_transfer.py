@@ -62,4 +62,4 @@ class NetmikoFileTransferService(Service):
         }
 
 
-service_classes['Netmiko File Transfer Service'] = NetmikoFileTransferService
+service_classes['netmiko_file_transfer_service'] = NetmikoFileTransferService

@@ -4,14 +4,14 @@ from sqlalchemy import Column, ForeignKey, Integer
 from eNMS.automation.models import Service, service_classes
 
 
-class GenericParallelService(Service):
+class ParallelSwissArmyKnifeService(Service):
 
-    __tablename__ = 'GenericParallelService'
+    __tablename__ = 'ParallelSwissArmyKnifeService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'generic_parallel_service',
+        'polymorphic_identity': 'parallel_swiss_army_knife_service',
     }
 
     def job(self, task, incoming_payload):
@@ -38,4 +38,4 @@ class GenericParallelService(Service):
         results['devices'][device.name] = True
 
 
-service_classes['Generic Parallel Service'] = GenericParallelService
+service_classes['parallel_swiss_army_knife_service'] = ParallelSwissArmyKnifeService

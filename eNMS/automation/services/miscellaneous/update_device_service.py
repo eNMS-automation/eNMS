@@ -42,4 +42,4 @@ class UpdateDeviceService(Service):
         }
 
 
-service_classes['Update Device Service'] = UpdateDeviceService
+service_classes['update_device_service'] = UpdateDeviceService

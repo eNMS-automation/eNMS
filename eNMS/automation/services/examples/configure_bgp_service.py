@@ -68,4 +68,4 @@ class ConfigureBgpService(Service):
         }
 
 
-service_classes['Configure Bgp Service'] = ConfigureBgpService
+service_classes['configure_bgp_service'] = ConfigureBgpService

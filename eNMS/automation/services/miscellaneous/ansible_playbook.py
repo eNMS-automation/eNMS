@@ -66,4 +66,4 @@ class AnsiblePlaybookService(Service):
         }
 
 
-service_classes['Ansible Playbook Service'] = AnsiblePlaybookService
+service_classes['ansible_playbook_service'] = AnsiblePlaybookService

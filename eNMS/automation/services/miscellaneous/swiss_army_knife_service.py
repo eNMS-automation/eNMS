@@ -44,4 +44,4 @@ class SwissArmyKnifeService(Service):
         }
 
 
-service_classes['Swiss Army Knife Service'] = SwissArmyKnifeService
+service_classes['swiss_army_knife_service'] = SwissArmyKnifeService

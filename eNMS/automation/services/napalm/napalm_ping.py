@@ -59,4 +59,4 @@ class NapalmPingService(Service):
         }
 
 
-service_classes['Napalm Ping Service'] = NapalmPingService
+service_classes['napalm_ping_service'] = NapalmPingService

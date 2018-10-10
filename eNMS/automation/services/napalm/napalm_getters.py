@@ -83,4 +83,4 @@ class NapalmGettersService(Service):
         }
 
 
-service_classes['Napalm Getters Service'] = NapalmGettersService
+service_classes['napalm_getters_service'] = NapalmGettersService

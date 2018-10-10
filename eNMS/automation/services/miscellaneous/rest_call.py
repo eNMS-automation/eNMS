@@ -69,4 +69,4 @@ class RestCallService(Service):
         }
 
 
-service_classes['Rest Call Service'] = RestCallService
+service_classes['rest_call_service'] = RestCallService

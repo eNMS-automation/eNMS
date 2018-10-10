@@ -57,4 +57,4 @@ class NapalmConfigurationService(Service):
         }
 
 
-service_classes['Napalm Configuration Service'] = NapalmConfigurationService
+service_classes['napalm_configuration_service'] = NapalmConfigurationService

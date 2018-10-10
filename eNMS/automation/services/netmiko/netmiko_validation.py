@@ -73,4 +73,4 @@ class NetmikoValidationService(Service):
         }
 
 
-service_classes['Netmiko Validation Service'] = NetmikoValidationService
+service_classes['netmiko_validation_service'] = NetmikoValidationService

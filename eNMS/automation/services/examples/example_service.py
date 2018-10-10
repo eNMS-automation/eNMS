@@ -92,4 +92,4 @@ class ExampleService(Service):
         return results
 
 
-service_classes['Example Service'] = ExampleService
+service_classes['example_service'] = ExampleService

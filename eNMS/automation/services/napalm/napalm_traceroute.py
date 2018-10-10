@@ -55,4 +55,4 @@ class NapalmTracerouteService(Service):
         }
 
 
-service_classes['Napalm Traceroute Service'] = NapalmTracerouteService
+service_classes['napalm_traceroute_service'] = NapalmTracerouteService

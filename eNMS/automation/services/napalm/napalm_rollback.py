@@ -45,4 +45,4 @@ class NapalmRollbackService(Service):
         }
 
 
-service_classes['Napalm Rollback Service'] = NapalmRollbackService
+service_classes['napalm_rollback_service'] = NapalmRollbackService

@@ -36,12 +36,12 @@ def register_extensions(app):
 
 def register_blueprints(app):
     blueprints = (
+        'admin',
+        'automation',
         'base',
         'objects',
-        'automation',
-        'tasks',
-        'admin',
-        'views',
+        'schedule',
+        'views'
     )
     for blueprint in blueprints:
         module = import_module(f'eNMS.{blueprint}')

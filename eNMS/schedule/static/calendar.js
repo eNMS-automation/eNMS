@@ -27,7 +27,7 @@ $(function() {
       /*
       $.ajax({
         type: 'POST',
-        url: `/tasks/get/${calEvent.title}`,
+        url: `/schedule/get/${calEvent.title}`,
         dataType: 'json',
         success: function(result){
           if (!result) {

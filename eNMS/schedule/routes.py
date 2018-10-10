@@ -14,7 +14,7 @@ from eNMS.automation.models import Job
 
 @blueprint.route('/task_management')
 @login_required
-@permission_required('Tasks section')
+@permission_required('Schedule section')
 def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -28,7 +28,7 @@ def task_management():
 
 @blueprint.route('/calendar')
 @login_required
-@permission_required('Tasks section')
+@permission_required('Schedule section')
 def calendar():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -72,7 +72,7 @@ def scheduler(workflow_id=None):
 
 @blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
-@permission_required('Tasks section', redirect=False)
+@permission_required('Schedule section', redirect=False)
 def get_task(task_id):
     return jsonify(retrieve(Task, id=task_id).serialized)
 

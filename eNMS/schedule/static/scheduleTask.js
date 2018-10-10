@@ -45,7 +45,7 @@ function scheduleTask() {
   if ($('#scheduling-form').parsley().validate()) {
     $.ajax({
       type: 'POST',
-      url: '/tasks/scheduler',
+      url: '/schedule/scheduler',
       dataType: 'json',
       data: $('#scheduling-form').serialize(),
       success: function(result) {

@@ -10,7 +10,9 @@ servicesClasses: false
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);
   }
-  buildServiceInstances();
+  $('#service-editor').on('hidden.bs.modal', function () {
+    $('#wizard').smartWizard('goToStep', 1);
+  })
 })();
 
 /**
@@ -19,6 +21,7 @@ servicesClasses: false
 function openWizard() { // eslint-disable-line no-unused-vars
   $('#wizard').smartWizard({
     onFinish: saveService,
+    onLeave: function() { console.log('test') },
     enableFinishButton: true,
   });
   $('.buttonNext').addClass('btn btn-success');
@@ -97,6 +100,9 @@ function saveService() { // eslint-disable-line no-unused-vars
             alertify.notify(`Service '${service.name}' updated.`, 'success', 5);
           }
         }
+        $('#wizard').smartWizard('goToStep', 1);
+        $('#service-editor').modal('hide');
+        
       },
     });
   }

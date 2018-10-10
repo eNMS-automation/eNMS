@@ -81,10 +81,10 @@ def workflow_management():
 @permission_required('Workflows section')
 def workflow_editor(workflow_id=None):
     add_job_form = AddJobForm(request.form)
+    add_job_form.job.choices = Job.choices()
     workflow_editor_form = WorkflowEditorForm(request.form)
     workflow_editor_form.workflow.choices = Workflow.choices()
     workflow = retrieve(Workflow, id=workflow_id)
-    add_job_form.job.choices = Job.choices()
     return render_template(
         'workflow_editor.html',
         add_job_form=add_job_form,

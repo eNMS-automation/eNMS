@@ -128,7 +128,8 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
  * Show Job Modal
  * @param {job} job - job to add to the workflow.
  */
-function showJobModal(job) {
+function editServiceId(id) {
+  console.log(selectedNode);
 }
 /**
  * Add job to the workflow object (back-end).
@@ -249,14 +250,6 @@ function showSchedulingModal() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Display modal to add an existing job.
- */
-function showExistingJobModal() {
-  $('#add-job').modal('show');
-  $('.dropdown-submenu a.menu-job').next('ul').toggle();
-}
-
-/**
  * Set a job as start of the workflow.
  */
 function startJob() {
@@ -373,11 +366,11 @@ function savePositions() {
 }
 
 const action = {
-  'Edit': showJobModal,
+  'Edit': editServiceId,
   'Logs': showLogs,
   'Set as start': startJob,
   'Set as end': endJob,
-  'Add job': showJobModal,
+  'Add job': partial(showModal, 'add-job'),
   'Delete selection': deleteSelection,
   'Create success edge': partial(switchMode, 'success'),
   'Create failure edge': partial(switchMode, 'failure'),

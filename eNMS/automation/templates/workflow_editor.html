@@ -21,6 +21,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  {% include 'workflow_editor_modal.html' %}
   {% include 'logs_modals.html' %}
   <div class="right_col" role="main">
     <!-- begin row -->
@@ -68,6 +69,7 @@
   <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <!-- Services -->
+  <script src="{{ url_for('automation_blueprint.static', filename='serviceEditor.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <!-- Vis JS -->
   <script src="{{ url_for('automation_blueprint.static', filename='vis/vis.min.js') }}"></script>

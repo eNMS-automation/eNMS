@@ -1,9 +1,7 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime, timedelta
-from sqlalchemy import Column, ForeignKey, Integer, String, PickleType
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from time import sleep
 
 from eNMS import db, scheduler
 from eNMS.base.associations import task_log_rule_table

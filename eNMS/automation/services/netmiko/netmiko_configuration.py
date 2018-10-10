@@ -1,8 +1,8 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
-from eNMS.services.helpers import netmiko_connection, NETMIKO_DRIVERS
-from eNMS.services.models import Service, service_classes
+from eNMS.automation.helpers import netmiko_connection, NETMIKO_DRIVERS
+from eNMS.automation.models import Service, service_classes
 
 
 class NetmikoConfigurationService(Service):

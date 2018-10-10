@@ -1,11 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import (
-    BooleanField,
-
-    SelectField,
-
-    TextField
-)
+from wtforms import BooleanField, SelectField, TextField
 
 
 class SchedulingForm(FlaskForm):

@@ -47,18 +47,6 @@ def services():
     )
 
 
-@blueprint.route('/service_editor')
-@login_required
-@permission_required('Services section')
-def service_editor():
-    return render_template(
-        'service_editor.html',
-        property_types={k: str(v) for k, v in property_types.items()},
-        service_form=service_form,
-        services_classes=list(service_classes)
-    )
-
-
 @blueprint.route('/get_form/<cls_name>', methods=['POST'])
 @login_required
 @permission_required('Services section', redirect=False)

@@ -84,14 +84,11 @@ def workflow_editor(workflow_id=None):
     workflow_editor_form = WorkflowEditorForm(request.form)
     workflow_editor_form.workflow.choices = Workflow.choices()
     workflow = retrieve(Workflow, id=workflow_id)
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = Job.choices()
     add_job_form.job.choices = Job.choices()
     return render_template(
         'workflow_editor.html',
         add_job_form=add_job_form,
         workflow_editor_form=workflow_editor_form,
-        scheduling_form=scheduling_form,
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
         workflow=workflow.serialized if workflow_id else None
@@ -144,7 +141,6 @@ def get_form(cls_name):
             form += build_select_box(col)
         else:
             form += build_text_box(col)
-    print(form)
     return jsonify({'form': form, 'instances': cls.choices()})
 
 

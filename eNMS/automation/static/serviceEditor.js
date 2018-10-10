@@ -55,7 +55,6 @@ function editService(type, id) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        
         for (const [property, value] of Object.entries(result)) {
           const propertyType = propertyTypes[property] || 'str';
           if (propertyType.includes('bool')) {
@@ -63,10 +62,7 @@ function editService(type, id) {
           } else if (propertyType.includes('dict')) {
             $(`#${property}`).val(value ? JSON.stringify(value): '{}');
           } else {
-            console.log(property, value);
-            console.log($(`#${property}`));
             $(`#${property}`).val(value);
-            console.log($(`#${property}`).val());
           }
         }
         $('#devices').val(result.devices.map((n) => n.id));

@@ -6,9 +6,9 @@ from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import task_public_properties
-from eNMS.tasks import blueprint
-from eNMS.tasks.forms import SchedulingForm
-from eNMS.tasks.models import Task
+from eNMS.schedule import blueprint
+from eNMS.schedule.forms import SchedulingForm
+from eNMS.schedule.models import Task
 from eNMS.automation.models import Job
 
 

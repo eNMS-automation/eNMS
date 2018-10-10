@@ -72,7 +72,7 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
   $('#title').text(`Edit properties`);
   $.ajax({
     type: 'POST',
-    url: `/workflows/get/${id}`,
+    url: `/automation/get/${id}`,
     success: function(properties) {
       if (!properties) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -93,7 +93,7 @@ function editObject() { // eslint-disable-line no-unused-vars
   if ($('#edit-form').parsley().validate() ) {
     $.ajax({
       type: 'POST',
-      url: `/workflows/edit_workflow`,
+      url: `/automation/edit_workflow`,
       dataType: 'json',
       data: $('#edit-form').serialize(),
       success: function(properties) {
@@ -119,7 +119,7 @@ function editObject() { // eslint-disable-line no-unused-vars
 function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/workflows/delete/${id}`,
+    url: `/automation/delete/${id}`,
     success: function(workflow) {
       if (!workflow) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

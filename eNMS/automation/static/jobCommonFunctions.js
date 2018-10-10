@@ -13,7 +13,7 @@ let jobId;
 function showLogs(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/services/show_logs/${id}`,
+    url: `/automation/show_logs/${id}`,
     dataType: 'json',
     success: function(logs) {
       if (!logs) {
@@ -34,7 +34,7 @@ function compareLogs(id) { // eslint-disable-line no-unused-vars
   jobId = id;
   $.ajax({
     type: 'POST',
-    url: `/services/compare_logs/${id}`,
+    url: `/automation/compare_logs/${id}`,
     dataType: 'json',
     success: function(results) {
       if (!results) {
@@ -58,7 +58,7 @@ $('#first_version,#second_version').on('change', function() {
   const v2 = $('#second_version').val();
   $.ajax({
     type: 'POST',
-    url: `/services/get_diff/${jobId}/${v1}/${v2}`,
+    url: `/automation/get_diff/${jobId}/${v1}/${v2}`,
     dataType: 'json',
     success: function(data) {
       $('#view').append(diffview.buildView({
@@ -81,7 +81,7 @@ $('#first_version,#second_version').on('change', function() {
 function runJob(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/services/run_job/${id}`,
+    url: `/automation/run_job/${id}`,
     dataType: 'json',
     success: function(job) {
       if (!job) {

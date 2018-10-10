@@ -19,7 +19,7 @@ servicesClasses: false
 function buildServiceInstances() {
   $.ajax({
     type: 'POST',
-    url: `/services/get_form/${$('#services').val()}`,
+    url: `/automation/get_form/${$('#services').val()}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -48,7 +48,7 @@ function buildServiceInstances() {
 function fillInstanceForm() {
   $.ajax({
     type: 'POST',
-    url: `/services/get_service/${$('#service-instance').val()}`,
+    url: `/automation/get_service/${$('#service-instance').val()}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -79,7 +79,7 @@ function saveService() { // eslint-disable-line no-unused-vars
   if ($('#form').parsley().validate()) {
     $.ajax({
       type: 'POST',
-      url: `/services/save_service/${$('#services').val()}`,
+      url: `/automation/save_service/${$('#services').val()}`,
       dataType: 'json',
       data: $('#form').serialize(),
       success: function(service) {

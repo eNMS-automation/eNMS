@@ -78,7 +78,7 @@ if (workflow) {
 } else {
   $.ajax({
     type: 'POST',
-    url: `/workflows/get/${$('#workflow-name').val()}`,
+    url: `/automation/get/${$('#workflow-name').val()}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -101,7 +101,7 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   if ($('#add-job').parsley().validate()) {
     $.ajax({
       type: 'POST',
-      url: `/services/add_to_workflow/${workflow.id}`,
+      url: `/automation/add_to_workflow/${workflow.id}`,
       dataType: 'json',
       data: $('#add-job-form').serialize(),
       success: function(job) {
@@ -137,7 +137,7 @@ function showJobModal(job) {
 function saveNode(job) {
   $.ajax({
     type: 'POST',
-    url: `/workflows/add_node/${workflow.id}/${job.id}`,
+    url: `/automation/add_node/${workflow.id}/${job.id}`,
     success: function(job) {
       if (!job) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -156,7 +156,7 @@ function saveNode(job) {
 function deleteNode(id) {
   $.ajax({
     type: 'POST',
-    url: `/workflows/delete_node/${workflow.id}/${id}`,
+    url: `/automation/delete_node/${workflow.id}/${id}`,
     success: function(job) {
       if (!job) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -176,7 +176,7 @@ function saveEdge(edge) {
   const param = `${workflow.id}/${edge.type}/${edge.from}/${edge.to}`;
   $.ajax({
     type: 'POST',
-    url: `/workflows/add_edge/${param}`,
+    url: `/automation/add_edge/${param}`,
     success: function(edge) {
       if (!edge) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -195,7 +195,7 @@ function saveEdge(edge) {
 function deleteEdge(edgeId) {
   $.ajax({
     type: 'POST',
-    url: `/workflows/delete_edge/${workflow.id}/${edgeId}`,
+    url: `/automation/delete_edge/${workflow.id}/${edgeId}`,
     success: function(edge) {
       if (!edge) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -269,7 +269,7 @@ function startJob() {
     }
     $.ajax({
       type: 'POST',
-      url: `/workflows/set_as_start/${workflow.id}/${start.id}`,
+      url: `/automation/set_as_start/${workflow.id}/${start.id}`,
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -296,7 +296,7 @@ function endJob() {
     }
     $.ajax({
       type: 'POST',
-      url: `/workflows/set_as_end/${workflow.id}/${end.id}`,
+      url: `/automation/set_as_end/${workflow.id}/${end.id}`,
       success: function(result) {
         if (!result) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -340,7 +340,7 @@ $('#workflow-name').on('change', function() {
   savePositions();
   $.ajax({
     type: 'POST',
-    url: `/workflows/get/${this.value}`,
+    url: `/automation/get/${this.value}`,
     dataType: 'json',
     success: function(result) {
       if (!result) {
@@ -360,7 +360,7 @@ $('#workflow-name').on('change', function() {
 function savePositions() {
   $.ajax({
     type: 'POST',
-    url: `/workflows/save_positions/${workflow.id}`,
+    url: `/automation/save_positions/${workflow.id}`,
     dataType: 'json',
     contentType: 'application/json;charset=UTF-8',
     data: JSON.stringify(graph.getPositions(), null, '\t'),

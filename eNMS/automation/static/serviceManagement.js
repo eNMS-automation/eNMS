@@ -60,7 +60,7 @@ function showSchedulingModal(id) { // eslint-disable-line no-unused-vars
 function deleteService(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/services/delete/${id}`,
+    url: `/automation/delete/${id}`,
     success: function(service) {
       if (!service) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

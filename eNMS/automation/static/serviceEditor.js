@@ -18,7 +18,7 @@ servicesClasses: false
 function buildServiceInstances(type) {
   $.ajax({
     type: 'POST',
-    url: `/automation/get_form/${type}`,
+    url: `/automation/get_form/${type || $('#services').val()}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

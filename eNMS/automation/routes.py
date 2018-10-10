@@ -169,6 +169,7 @@ def delete_object(service_id):
 @login_required
 @permission_required('Service section', redirect=False)
 def run_job(job_id):
+    job = retrieve(Job, id=job_id)
     now = datetime.now() + timedelta(seconds=15)
     scheduler.add_job(
         id=str(now),
@@ -177,7 +178,7 @@ def run_job(job_id):
         args=[job_id],
         trigger='date'
     )
-    return jsonify({})
+    return jsonify(job.serialized)
 
 
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])

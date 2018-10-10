@@ -98,13 +98,7 @@ def create_default_services():
             'waiting_time': 0
         },
     ):
-        instance = factory(service.pop('type'), **service)
-        factory(Task, **{
-            'name': f'task_{instance.name}',
-            'start-task': 'do-not-run',
-            'job': instance,
-            'user': retrieve(User, name='admin')
-        })
+        factory(service.pop('type'), **service)
 
 
 @integrity_rollback

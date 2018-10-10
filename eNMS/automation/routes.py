@@ -20,15 +20,15 @@ from eNMS.base.properties import (
     workflow_table_properties
 )
 from eNMS.objects.models import Device, Pool
-from eNMS.services import blueprint
-from eNMS.services.forms import (
+from eNMS.automation import blueprint
+from eNMS.automation.forms import (
     AddJobForm,
     CompareLogsForm,
     ServiceForm,
     WorkflowEditorForm,
     WorkflowCreationForm 
 )
-from eNMS.services.models import (
+from eNMS.automation.models import (
     Job,
     Service,
     service_classes,
@@ -46,7 +46,7 @@ def scheduler_job(job_id):
 @blueprint.route('/service_management')
 @login_required
 @permission_required('Services section')
-def services():
+def service_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
     service_form = ServiceForm(request.form)
@@ -68,7 +68,7 @@ def services():
 @blueprint.route('/workflow_management')
 @login_required
 @permission_required('Workflows section')
-def workflows():
+def workflow_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
     return render_template(

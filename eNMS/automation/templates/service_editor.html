@@ -14,16 +14,24 @@
               <li>
                 <a href="#step-1">
                   <span class="step_no">1</span>
-                  <span class="step_descr"> Step 1 <br/>
-                  <small>General</small>
+                  <span class="step_descr">Step 1<br/>
+                    <small>General</small>
                   </span>
                 </a>
               </li>
               <li>
                 <a href="#step-2">
                   <span class="step_no">2</span>
-                  <span class="step_descr"> Step 2 <br/>
-                  <small>Scheduling</small>
+                  <span class="step_descr">Step 2<br/>
+                    <small>Parameters</small>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#step-3">
+                  <span class="step_no">3</span>
+                  <span class="step_descr">Step 3<br/>
+                    <small>Scheduling</small>
                   </span>
                 </a>
               </li>
@@ -47,59 +55,27 @@
               </div>
             </div>
             <div id="step-2">
-              <div class="radio">
-                <label>
-                  <input type="radio" checked="" value="do-not-run" id="do-not-run" name="start-task">
-                  Do not run the task
-                </label>
+              <div id="html-form"></div>
+            </div>
+            <div id="step-3">
+              <label>Nodes</label>
+              <div class='form-group'>
+                {{ service_form.devices(class="form-control", size=8) }}
               </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="run-now" id="run-now" name="start-task">
-                  Run the task now
-                </label>
+              <label>Pools</label>
+              <div class='form-group'>
+                {{ service_form.pools(class="form-control", size=8) }}
               </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="schedule" id="schedule" name="start-task">
-                  Schedule the task
-                </label>
-              </div></br>
-              <div class="form-group" style="min-height: 350px">
-                <label>Start date</label>
-                <div class='form-group'>
-                  {{ scheduling_form.start_date(class="form-control", autocomplete="off") }}
-                </div>
-                <label>End date</label>
-                <div class='form-group'>
-                  {{ scheduling_form.end_date(class="form-control", autocomplete="off") }}
-                </div>
-                <label>Frequency (seconds)</label>
-                <div class='form-group'>
-                  {{ scheduling_form.frequency(class="form-control", autocomplete="off") }}
-                </div>
+              <div class="ln_solid"></div>
+              <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                <button class="btn btn-primary" type="reset">Reset</button>
+                <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
               </div>
             </div>
           </div>
 
 
-        <form data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
-          <div class="form-group" style="height: 650px">
 
-            <label>Nodes</label>
-            <div class='form-group'>
-              {{ service_form.devices(class="form-control", size=8) }}
-            </div>
-            <label>Pools</label>
-            <div class='form-group'>
-              {{ service_form.pools(class="form-control", size=8) }}
-            </div>
-            <div id="html-form"></div>
-            <div class="ln_solid"></div>
-            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
-            </div>
           </div>
         </form>
       </div>

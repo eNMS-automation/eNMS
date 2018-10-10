@@ -1,13 +1,7 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
-from flask import (
-    jsonify,
-    render_template,
-    request,
-    copy_current_request_context
-)
+from flask import jsonify, render_template, request
 from flask_login import login_required
-from gevent import spawn
 from json import dumps
 
 from eNMS import db, scheduler
@@ -26,7 +20,7 @@ from eNMS.automation.forms import (
     CompareLogsForm,
     ServiceForm,
     WorkflowEditorForm,
-    WorkflowCreationForm 
+    WorkflowCreationForm
 )
 from eNMS.automation.models import (
     Job,

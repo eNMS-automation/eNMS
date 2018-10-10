@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
+from time import sleep
 
 from eNMS import db
 from eNMS.base.associations import (
@@ -10,6 +11,7 @@ from eNMS.base.associations import (
     job_workflow_table
 )
 from eNMS.base.custom_base import CustomBase
+from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
 
 
@@ -180,7 +182,7 @@ class Workflow(Job):
 
     def run(self, workflow=None):
         runtime = str(datetime.now())
-        start_job = retrieve(Task, id=self.job.start_job)
+        start_job = retrieve(Job, id=self.job.start_job)
         if not start_job:
             return False, {runtime: 'No start task in the workflow.'}
         tasks, visited = [start_job], set()

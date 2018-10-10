@@ -29,7 +29,12 @@ from eNMS.services.forms import (
     WorkflowCreationForm 
 )
 from eNMS.services.models import (
-    Job, Service, service_classes, WorkflowEdge, Workflow
+    Job,
+    Service,
+    service_classes,
+    WorkflowEdge,
+    Workflow
+)
 from eNMS.tasks.forms import SchedulingForm
 
 

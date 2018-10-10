@@ -27,7 +27,7 @@
   <!-- jQuery Smart Wizard -->
   <script src="{{ url_for('automation_blueprint.static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script src="{{ url_for('schedule_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script>
     var fields = {{ fields|tojson|safe }}
     var services = {{ services|tojson|safe }}

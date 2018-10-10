@@ -29,7 +29,7 @@
     var workflows = {{ workflows|tojson|safe }};
   </script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script src="{{ url_for('schedule_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='workflowManagement.js') }}"></script>
   <!-- Difflib -->

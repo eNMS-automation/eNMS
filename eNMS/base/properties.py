@@ -48,6 +48,8 @@ device_common_properties = (
 task_public_properties = (
     'name',
     'creation_time',
+    'start_date',
+    'end_date',
     'frequency',
     'status'
 )

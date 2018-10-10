@@ -6,7 +6,11 @@ from simplekml import Kml
 from eNMS.admin.models import Parameters
 from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.models import Log
-from eNMS.base.properties import device_subtypes, link_subtype_to_color
+from eNMS.base.properties import (
+    device_subtypes,
+    link_subtype_to_color,
+    property_types
+)
 from eNMS.objects.forms import AddDevice, AddLink
 from eNMS.objects.models import Pool, Device, Link
 from eNMS.base.properties import (
@@ -15,7 +19,7 @@ from eNMS.base.properties import (
     pretty_names
 )
 from eNMS.automation.forms import ServiceForm
-from eNMS.automation.models import Job
+from eNMS.automation.models import service_classes
 from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 

@@ -3,10 +3,10 @@ from flask_restful import Api, Resource
 
 from eNMS import auth, db
 from eNMS.admin.models import User
+from eNMS.automation.models import Job
 from eNMS.base.classes import diagram_classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import get_user_credentials, retrieve
-from eNMS.tasks.models import Task
 
 
 @auth.get_password
@@ -24,10 +24,10 @@ def unauthorized():
 class RestAutomation(Resource):
     decorators = [auth.login_required]
 
-    def get(self, task_name):
-        task = retrieve(Task, name=task_name)
-        runtime = task.schedule(run_now=True)
-        return {'task': task.serialized, 'id': runtime}
+    def get(self, job_name):
+        job = retrieve(Job, name=job_name)
+        runtime = job.run()
+        return {'job': job.serialized, 'id': runtime}
 
 
 class GetInstance(Resource):
@@ -57,7 +57,7 @@ def configure_rest_api(app):
     api = Api(app)
     api.add_resource(
         RestAutomation,
-        '/rest/execute_task/<string:task_name>'
+        '/rest/run_job/<string:job_name>'
     )
     api.add_resource(
         UpdateInstance,

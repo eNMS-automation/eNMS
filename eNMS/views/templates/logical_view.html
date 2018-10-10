@@ -34,7 +34,7 @@
 
 {% block content %}
   {% include 'gis_modals.html' %}
-  {% include 'scheduling_modal.html' %}
+  {% include 'service_editor.html' %}
   {% include 'device_modal.html' %}
   {% include 'link_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
@@ -66,6 +66,10 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    const servicesClasses = {{ services_classes|tojson|safe }};
+    const propertyTypes = {{ property_types|tojson|safe }};
+  </script>
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
@@ -102,7 +106,9 @@
     };
     var labels = {{ labels|tojson|safe }};
   </script>
-  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <!-- Create service graphically -->
+  <script src="{{ url_for('automation_blueprint.static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='serviceEditor.js') }}"></script>
   <script>
     var device_fields = {{ device_fields|tojson|safe }};
     var link_fields = {{ link_fields|tojson|safe }};

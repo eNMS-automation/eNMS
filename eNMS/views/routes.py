@@ -14,8 +14,8 @@ from eNMS.base.properties import (
     device_public_properties,
     pretty_names
 )
+from eNMS.automation.forms import ServiceForm
 from eNMS.automation.models import Job
-from eNMS.tasks.forms import SchedulingForm
 from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
@@ -28,8 +28,9 @@ def view(view_type):
     all_devices = Device.choices()
     add_link_form.source.choices = all_devices
     add_link_form.destination.choices = all_devices
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = Job.choices()
+    service_form = ServiceForm(request.form)
+    service_form.devices.choices = Device.choices()
+    service_form.pools.choices = Pool.choices()
     labels = {'device': 'name', 'link': 'name'}
     if 'view_options' in request.form:
         labels = {
@@ -53,7 +54,9 @@ def view(view_type):
         pools=Pool.query.all(),
         parameters=Parameters.query.one().serialized,
         view=view,
-        scheduling_form=scheduling_form,
+        property_types={k: str(v) for k, v in property_types.items()},
+        service_form=service_form,
+        services_classes=list(service_classes),
         view_options_form=ViewOptionsForm(request.form),
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),

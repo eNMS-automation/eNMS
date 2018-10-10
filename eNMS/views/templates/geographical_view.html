@@ -18,7 +18,7 @@
 
 {% block content %}
   {% include 'gis_modals.html' %}
-  {% include 'scheduling_modal.html' %}
+  {% include 'service_editor.html' %}
   {% include 'device_modal.html' %}
   {% include 'link_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
@@ -94,12 +94,15 @@
     var link_colors = {{ link_colors|tojson|safe }};
     var parameters = {{ parameters|tojson|safe }};
     var view = '{{ view }}';
+    const servicesClasses = {{ services_classes|tojson|safe }};
+    const propertyTypes = {{ property_types|tojson|safe }};
   </script>
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
-  <!-- Task scheduling -->
-  <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <!-- Create service graphically -->
+  <script src="{{ url_for('automation_blueprint.static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='serviceEditor.js') }}"></script>
   <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='geographicalView.js') }}"></script>
   {% if view == 'glearth' %}

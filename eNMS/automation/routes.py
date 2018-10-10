@@ -170,7 +170,7 @@ def delete_object(service_id):
 @permission_required('Service section', redirect=False)
 def run_job(job_id):
     job = retrieve(Job, id=job_id)
-    now = datetime.now() + timedelta(seconds=15)
+    now = datetime.now() + timedelta(seconds=5)
     scheduler.add_job(
         id=str(now),
         func=scheduler_job,

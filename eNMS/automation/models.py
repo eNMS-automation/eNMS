@@ -183,30 +183,30 @@ class Workflow(Job):
 
     def run(self, workflow=None):
         runtime = str(datetime.now())
-        start_job = retrieve(Job, id=self.job.start_job)
+        start_job = retrieve(Job, id=self.start_job)
         if not start_job:
             return False, {runtime: 'No start task in the workflow.'}
-        tasks, visited = [start_job], set()
+        jobs, visited = [start_job], set()
         workflow_results = {}
-        while tasks:
-            task = tasks.pop()
-            # We check that all predecessors of the task have been visited
-            # to ensure that the task will receive the full payload.
+        while jobs:
+            job = jobs.pop()
+            # We check that all predecessors of the job have been visited
+            # to ensure that the job will receive the full payload.
             # If it isn't the case, we put it back in the heap and move on to
-            # another task.
-            if any(n not in visited for n in task.task_sources(self.job)):
+            # another job.
+            if any(n not in visited for n in job.job_sources(self)):
                 continue
-            visited.add(task)
-            task_results = task.run(workflow, workflow_results)
-            success = task_results['success']
-            if task.id == self.job.end_task:
+            visited.add(job)
+            job_results = job.run(workflow_results)
+            success = job_results['success']
+            if job.id == self.end_job:
                 workflow_results['success'] = success
-            for successor in task.task_successors(self.job, success):
+            for successor in job.job_successors(self, success):
                 if successor not in visited:
-                    tasks.append(successor)
-            workflow_results[task.name] = task_results
-            sleep(task.waiting_time)
-        self.job.logs[runtime] = workflow_results
+                    jobs.append(successor)
+            workflow_results[job.name] = job_results
+            sleep(job.waiting_time)
+        self.logs[runtime] = workflow_results
         db.session.commit()
         return workflow_results
 

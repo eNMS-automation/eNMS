@@ -7,36 +7,38 @@
         </button>
         <h4 class="modal-title" id="title">Service Editor</h4>
       </div>
+      <div class="modal-body">
         <form data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
-            <div class="form-group" style="height: 650px">
+          <div class="form-group" style="height: 650px">
             <label>Name</label>
             <div class="form-group">
-                {{ service_form.name(class="form-control") }}
+              {{ service_form.name(class="form-control") }}
             </div>
             <label>Description</label>
             <div class="form-group">
-                {{ service_form.description(class="form-control") }}
+              {{ service_form.description(class="form-control") }}
             </div>
             <label>Waiting time</label>
             <div class='form-group'>
-                {{ service_form.waiting_time(class="form-control", required=true, autocomplete="off") }}
+              {{ service_form.waiting_time(class="form-control", required=true, autocomplete="off") }}
             </div>
             <label>Nodes</label>
             <div class='form-group'>
-                {{ service_form.devices(class="form-control", size=8) }}
+              {{ service_form.devices(class="form-control", size=8) }}
             </div>
             <label>Pools</label>
             <div class='form-group'>
-                {{ service_form.pools(class="form-control", size=8) }}
+              {{ service_form.pools(class="form-control", size=8) }}
             </div>
             <div id="html-form"></div>
             <div class="ln_solid"></div>
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
             </div>
-            </div>
+          </div>
         </form>
+      <div class="modal-body">
     </div>
   </div>
 </div>

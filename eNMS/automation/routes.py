@@ -100,7 +100,6 @@ def workflow_editor(workflow_id=None):
 @permission_required('Services section', redirect=False)
 def get_service(service_id):
     service = retrieve(Service, id=service_id)
-    print(service.type)
     cls = service_classes[service.type]
 
     def build_text_box(c):
@@ -143,7 +142,7 @@ def get_service(service_id):
             form += build_select_box(col)
         else:
             form += build_text_box(col)
-    return jsonify(service.column_values)
+    return jsonify({'form': form, 'service': service.column_values})
 
 
 @blueprint.route('/delete/<service_id>', methods=['POST'])

@@ -13,27 +13,10 @@ servicesClasses: false
 })();
 
 /**
- * Build select list of service instances.
- */
-function buildServiceInstances(type) {
-  $.ajax({
-    type: 'POST',
-    url: `/automation/get_form/${type || $('#services').val()}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $('#html-form').html(result.form);
-      }
-    },
-  });
-}
-
-/**
  * Edit a service.
  */
-function editService(type, id) {
-  buildServiceInstances(type);
+function editService(id) {
+  id = id || $('#services').val();
   $.ajax({
     type: 'POST',
     url: `/automation/get_service/${id}`,
@@ -41,6 +24,7 @@ function editService(type, id) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
+        $('#html-form').html(result.form);
         for (const [property, value] of Object.entries(result)) {
           const propertyType = propertyTypes[property] || 'str';
           if (propertyType.includes('bool')) {
@@ -92,5 +76,5 @@ function saveService() { // eslint-disable-line no-unused-vars
 }
 
 $('#services').change(function() {
-  buildServiceInstances();
+  editService();
 });

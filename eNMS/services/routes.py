@@ -31,12 +31,16 @@ def scheduler_job(job_id):
 def services():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
+    service_form = ServiceForm(request.form)
+    service_form.devices.choices = Device.choices()
+    service_form.pools.choices = Pool.choices()
     return render_template(
         'service_management.html',
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,
         names=pretty_names,
         scheduling_form=scheduling_form,
+        service_form=service_form,
         services=Service.serialize()
     )
 
@@ -45,9 +49,6 @@ def services():
 @login_required
 @permission_required('Services section')
 def service_editor():
-    service_form = ServiceForm(request.form)
-    service_form.devices.choices = Device.choices()
-    service_form.pools.choices = Pool.choices()
     return render_template(
         'service_editor.html',
         property_types={k: str(v) for k, v in property_types.items()},

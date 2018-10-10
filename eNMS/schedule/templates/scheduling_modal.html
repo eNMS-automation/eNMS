@@ -1,4 +1,4 @@
-<div id="scheduling" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" onmouseenter="openWizard()">
+<div id="scheduling" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -35,6 +35,10 @@
               {{ scheduling_form.task_frequency(class="form-control", autocomplete="off") }}
             </div>
           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" onclick="scheduleTask()">Submit</button>
         </div>
       </form>
     </div>

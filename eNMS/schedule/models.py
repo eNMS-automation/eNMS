@@ -50,9 +50,6 @@ class Task(CustomBase):
         self.status = 'Active'
         self.creation_time = str(datetime.now())
         self.is_active = True
-        schedule_task = kwargs['start-task']
-        if schedule_task != 'do-not-run':
-            self.schedule(schedule_task == 'run-now')
 
     def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
@@ -79,16 +76,14 @@ class Task(CustomBase):
             pass
         db.session.commit()
 
-    def schedule(self, run_now=True):
-        now = datetime.now() + timedelta(seconds=15)
-        runtime = now if run_now else self.aps_date('start_date')
+    def schedule(self):
         if self.frequency:
             scheduler.add_job(
                 id=self.creation_time,
                 func=scheduler_job,
                 args=[self.name],
                 trigger='interval',
-                start_date=runtime,
+                start_date=self.aps_date('start_date'),
                 end_date=self.aps_date('end_date'),
                 seconds=int(self.frequency),
                 replace_existing=True

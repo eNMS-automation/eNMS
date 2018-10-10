@@ -8,16 +8,17 @@
           <div class="panel-group">
             <div style="padding-bottom:5px;">
               <button class="btn btn-default btn-file" onclick="showModal()" style="width:100%;">
-                Add a new workflow
+                Create a new workflow
               </button>
             </div>
           </div>
           <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
             <thead>
               <tr>
-                {% for field in form if field.widget.input_type != 'hidden'  %}
-                  <th>{{ names[field.name] }}</th>
-                {% endfor %}
+                <th style="width: 20%">Name</th>
+                <th style="width: 30%">Description</th>
+                <th style="width: 10%">Vendor</th>
+                <th style="width: 10%">Operating System</th>
                 <th style="width: 5%">Logs</th>
                 <th style="width: 5%">Compare</th>
                 <th style="width: 5%">Edit</th>

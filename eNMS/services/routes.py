@@ -1,6 +1,11 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
-from flask import jsonify, render_template, request, copy_current_request_context
+from flask import (
+    jsonify,
+    render_template,
+    request,
+    copy_current_request_context
+)
 from flask_login import login_required
 from gevent import spawn
 from json import dumps
@@ -11,12 +16,20 @@ from eNMS.base.helpers import permission_required, retrieve, str_dict
 from eNMS.base.properties import (
     pretty_names,
     property_types,
-    service_table_properties
+    service_table_properties,
+    workflow_table_properties
 )
 from eNMS.objects.models import Device, Pool
 from eNMS.services import blueprint
-from eNMS.services.forms import CompareLogsForm, ServiceForm
-from eNMS.services.models import Job, Service, service_classes
+from eNMS.services.forms import (
+    AddJobForm,
+    CompareLogsForm,
+    ServiceForm,
+    WorkflowEditorForm,
+    WorkflowCreationForm 
+)
+from eNMS.services.models import (
+    Job, Service, service_classes, WorkflowEdge, Workflow
 from eNMS.tasks.forms import SchedulingForm
 
 

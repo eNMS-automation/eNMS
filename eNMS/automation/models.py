@@ -98,9 +98,8 @@ class Service(Job):
         return serialized_object
 
     def run(self, workflow_results=None):
-        print('test')
         try:
-            results = self.job(self, workflow_results)
+            results = self.job(workflow_results)
         except Exception as e:
             results = {'success': False, 'result': str(e)}
         self.logs[str(datetime.now())] = results

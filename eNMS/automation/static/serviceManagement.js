@@ -27,6 +27,8 @@ function addService(mode, properties) {
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
+    onclick="editService('${properties.type}', '${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteService('${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {

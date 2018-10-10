@@ -10,49 +10,37 @@ servicesClasses: false
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);
   }
-  buildServiceInstances();
 })();
 
 /**
  * Build select list of service instances.
  */
-function buildServiceInstances() {
+function buildServiceInstances(type) {
   $.ajax({
     type: 'POST',
-    url: `/automation/get_form/${$('#services').val()}`,
+    url: `/automation/get_form/${type}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        $('#service-instance').empty();
         $('#html-form').html(result.form);
-        for (let i = 0; i < result.instances.length; i++) {
-          const instance = result.instances[i];
-          $('#service-instance').append(
-            `<option value='${instance[0]}'>${instance[1]}</option>`
-          );
-        }
-        if ($('#service-instance').val()) {
-          fillInstanceForm();
-        } else {
-          $('#form').trigger('reset');
-        }
       }
     },
   });
 }
 
 /**
- * Fill form with instance values.
+ * Edit a service.
  */
-function fillInstanceForm() {
+function editService(type, id) {
   $.ajax({
     type: 'POST',
-    url: `/automation/get_service/${$('#service-instance').val()}`,
+    url: `/automation/get_service/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
+        buildServiceInstances(type);
         $('#name').empty();
         for (const [property, value] of Object.entries(result)) {
           const propertyType = propertyTypes[property] || 'str';
@@ -66,14 +54,13 @@ function fillInstanceForm() {
         }
         $('#devices').val(result.devices.map((n) => n.id));
         $('#pools').val(result.pools.map((p) => p.id));
-        alertify.notify(`Service '${result.name}' displayed`, 'success', 5);
       }
     },
   });
 }
 
 /**
- * Create or edit a service
+ * Save a service.
  */
 function saveService() { // eslint-disable-line no-unused-vars
   if ($('#form').parsley().validate()) {
@@ -103,8 +90,4 @@ function saveService() { // eslint-disable-line no-unused-vars
 
 $('#services').change(function() {
   buildServiceInstances();
-});
-
-$('#service-instance').change(function() {
-  fillInstanceForm();
 });

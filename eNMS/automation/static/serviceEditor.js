@@ -10,6 +10,7 @@ servicesClasses: false
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);
   }
+  buildServiceInstances();
 })();
 
 /**

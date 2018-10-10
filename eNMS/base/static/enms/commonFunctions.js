@@ -1,8 +1,17 @@
 /**
- * Show article modal.
+ * Show modal.
  * @param {name} name - Modal name.
  */
 function showModal(name) { // eslint-disable-line no-unused-vars
+  $(`#${name}`).modal('show');
+}
+
+/**
+ * Reset form and show modal.
+ * @param {name} name - Modal name.
+ */
+function resetShowModal(name) { // eslint-disable-line no-unused-vars
+  $(`#${name}-form`).trigger('reset');
   $(`#${name}`).modal('show');
 }
 

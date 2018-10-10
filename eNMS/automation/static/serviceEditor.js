@@ -47,6 +47,7 @@ function buildServiceInstances(type) {
  * Edit a service.
  */
 function editService(type, id) {
+  buildServiceInstances(type);
   $.ajax({
     type: 'POST',
     url: `/automation/get_service/${id}`,
@@ -54,8 +55,7 @@ function editService(type, id) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        buildServiceInstances(type);
-        $('#name').empty();
+        
         for (const [property, value] of Object.entries(result)) {
           const propertyType = propertyTypes[property] || 'str';
           if (propertyType.includes('bool')) {
@@ -63,11 +63,15 @@ function editService(type, id) {
           } else if (propertyType.includes('dict')) {
             $(`#${property}`).val(value ? JSON.stringify(value): '{}');
           } else {
+            console.log(property, value);
+            console.log($(`#${property}`));
             $(`#${property}`).val(value);
+            console.log($(`#${property}`).val());
           }
         }
         $('#devices').val(result.devices.map((n) => n.id));
         $('#pools').val(result.pools.map((p) => p.id));
+        showModal('service-editor');
       }
     },
   });
@@ -77,12 +81,12 @@ function editService(type, id) {
  * Save a service.
  */
 function saveService() { // eslint-disable-line no-unused-vars
-  if ($('#form').parsley().validate()) {
+  if ($('#service-editor-form').parsley().validate()) {
     $.ajax({
       type: 'POST',
       url: `/automation/save_service/${$('#services').val()}`,
       dataType: 'json',
-      data: $('#form').serialize(),
+      data: $('#service-editor-form').serialize(),
       success: function(service) {
         if (!service) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

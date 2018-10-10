@@ -3,9 +3,8 @@ from wtforms import SelectField, TextField
 
 
 class SchedulingForm(FlaskForm):
-    start_date = TextField()
-    end_date = TextField()
-    name = TextField()
-    frequency = TextField()
-    service_type = SelectField()
-    job = SelectField()
+    task_start_date = TextField()
+    task_end_date = TextField()
+    task_name = TextField()
+    task_frequency = TextField()
+    task_job = SelectField()

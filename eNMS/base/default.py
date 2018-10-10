@@ -85,7 +85,7 @@ def create_default_network_topology(app):
 def create_default_services():
     for service in (
         {
-            'type': service_classes['Configure Bgp Service'],
+            'type': service_classes['configure_bgp_service'],
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
             'devices': [retrieve(Device, name='router8')],
@@ -106,7 +106,7 @@ def create_netmiko_workflow():
     services = []
     for service in (
         {
-            'type': service_classes['Netmiko Configuration Service'],
+            'type': service_classes['netmiko_configuration_service'],
             'name': 'netmiko_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Netmiko',
             'waiting_time': 0,
@@ -118,7 +118,7 @@ def create_netmiko_workflow():
             'content': 'ip vrf TEST'
         },
         {
-            'type': service_classes['Netmiko Validation Service'],
+            'type': service_classes['netmiko_validation_service'],
             'name': 'netmiko_check_vrf_TEST',
             'description': 'Check that the vrf "TEST" is configured',
             'waiting_time': 0,
@@ -130,7 +130,7 @@ def create_netmiko_workflow():
             'content_match1': 'TEST'
         },
         {
-            'type': service_classes['Netmiko Configuration Service'],
+            'type': service_classes['netmiko_configuration_service'],
             'name': 'netmiko_delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
             'waiting_time': 15,
@@ -142,7 +142,7 @@ def create_netmiko_workflow():
             'content': 'no ip vrf TEST'
         },
         {
-            'type': service_classes['Netmiko Validation Service'],
+            'type': service_classes['netmiko_validation_service'],
             'name': 'netmiko_check_no_vrf_TEST',
             'description': 'Check that the vrf "TEST" is NOT configured',
             'waiting_time': 0,
@@ -182,7 +182,7 @@ def create_napalm_workflow():
     services = []
     for service in (
         {
-            'type': service_classes['Napalm Configuration Service'],
+            'type': service_classes['napalm_configuration_service'],
             'name': 'napalm_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Napalm',
             'waiting_time': 0,
@@ -195,7 +195,7 @@ def create_napalm_workflow():
             'content': 'ip vrf TEST'
         },
         {
-            'type': service_classes['Napalm Rollback Service'],
+            'type': service_classes['napalm_rollback_service'],
             'name': 'Napalm IOS Rollback',
             'driver': 'ios',
             'description': 'Rollback a configuration with Napalm IOS',
@@ -231,7 +231,7 @@ def create_payload_transfer_workflow():
     services = []
     for service in [{
         'name': 'GET_router8',
-        'type': service_classes['Rest Call Service'],
+        'type': service_classes['rest_call_service'],
         'description': 'Use GET ReST call on router8',
         'waiting_time': 0,
         'devices': [retrieve(Device, name='router8')],
@@ -241,7 +241,7 @@ def create_payload_transfer_workflow():
         'payload': ''
     }] + [{
         'name': f'{getter}',
-        'type': service_classes['Napalm Getters Service'],
+        'type': service_classes['napalm_getters_service'],
         'description': f'Getter: {getter}',
         'waiting_time': 0,
         'devices': [retrieve(Device, name='router8')],
@@ -255,7 +255,7 @@ def create_payload_transfer_workflow():
         'get_config'
     )] + [{
         'name': 'process_payload1',
-        'type': service_classes['Swiss Army Knife Service'],
+        'type': service_classes['swiss_army_knife_service'],
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
         'devices': [retrieve(Device, name='router8')]

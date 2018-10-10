@@ -49,4 +49,4 @@ class NetmikoConfigurationService(Service):
         }
 
 
-service_classes['Netmiko Configuration Service'] = NetmikoConfigurationService
+service_classes['netmiko_configuration_service'] = NetmikoConfigurationService

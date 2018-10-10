@@ -24,6 +24,8 @@
 
 {% block javascripts %}
   {{ super() }}
+  <!-- jQuery Smart Wizard -->
+  <script src="{{ url_for('automation_static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
   <script>

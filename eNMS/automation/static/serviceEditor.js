@@ -10,24 +10,7 @@ servicesClasses: false
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);
   }
-  $('#service-editor').on('hidden.bs.modal', function () {
-    $('#wizard').smartWizard('goToStep', 1);
-  })
 })();
-
-/**
- * Initialize the open wizard (Service Editor).
- */
-function openWizard() { // eslint-disable-line no-unused-vars
-  $('#wizard').smartWizard({
-    onFinish: saveService,
-    onLeave: function() { console.log('test') },
-    enableFinishButton: true,
-  });
-  $('.buttonNext').addClass('btn btn-success');
-  $('.buttonPrevious').addClass('btn btn-primary');
-  $('.buttonFinish').addClass('btn btn-default');
-}
 
 /**
  * Build select list of service instances.

@@ -1,14 +1,14 @@
-<div id="service-editor" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="service-editor" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" onmouseenter="openWizard()">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="title">Create a new service</h4>
+        <h4 class="modal-title">Create a new service</h4>
       </div>
-      <div class="modal-body">
-        <form data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
+      <form data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
+        <div class="modal-body">
           <!-- Smart Wizard -->
           <div id="wizard" class="form_wizard wizard_horizontal">
             <ul class="wizard_steps">
@@ -32,7 +32,7 @@
                 <a href="#step-3">
                   <span class="step_no">3</span>
                   <span class="step_descr">Step 3<br/>
-                    <small>Scheduling</small>
+                    <small>Targets</small>
                   </span>
                 </a>
               </li>
@@ -44,7 +44,7 @@
               </div>
               <label>Name</label>
               <div class="form-group">
-                {{ service_form.name(class="form-control") }}
+                {{ service_form.name(class="form-control", required=true) }}
               </div>
               <label>Description</label>
               <div class="form-group">
@@ -52,7 +52,7 @@
               </div>
               <label>Waiting time</label>
               <div class='form-group'>
-                {{ service_form.waiting_time(class="form-control", required=true, autocomplete="off") }}
+                {{ service_form.waiting_time(class="form-control", required=true) }}
               </div>
             </div>
             <div id="step-2">
@@ -68,14 +68,9 @@
                 {{ service_form.pools(class="form-control", size=8) }}
               </div>
             </div>
-            <div class="ln_solid"></div>
-            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
-            </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

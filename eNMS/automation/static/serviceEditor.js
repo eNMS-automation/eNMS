@@ -13,6 +13,19 @@ servicesClasses: false
 })();
 
 /**
+ * Initialize the open wizard (Service Editor).
+ */
+function openWizard() { // eslint-disable-line no-unused-vars
+  $('#wizard').smartWizard({
+    onFinish: saveService,
+    enableFinishButton: true,
+  });
+  $('.buttonNext').addClass('btn btn-success');
+  $('.buttonPrevious').addClass('btn btn-primary');
+  $('.buttonFinish').addClass('btn btn-default');
+}
+
+/**
  * Build select list of service instances.
  */
 function buildServiceInstances(type) {

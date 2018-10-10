@@ -13,19 +13,19 @@ class SwissArmyKnifeService(Service):
         'polymorphic_identity': 'swiss_army_knife_service',
     }
 
-    def job(self, task, incoming_payload):
-        return getattr(self, self.name)(task, incoming_payload)
+    def job(self, workflow_results=None):
+        return getattr(self, self.name)(task, workflow_results)
 
-    def job1(self, task, payload):
+    def job1(self, workflow_results=None):
         return {'success': True, 'result': ''}
 
-    def job2(self, task, payload):
+    def job2(self, workflow_results=None):
         return {'success': True, 'result': ''}
 
-    def job3(self, task, payload):
+    def job3(self, workflow_results=None):
         return {'success': True, 'result': ''}
 
-    def process_payload1(self, task, payload):
+    def process_payload1(self, workflow_results=None):
         get_int = payload['task_get_interfaces']
         r8_int = get_int['devices']['router8']['result']['get_interfaces']
         speed_fa0 = r8_int['FastEthernet0/0']['speed']

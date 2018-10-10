@@ -15,7 +15,7 @@ class ParallelSwissArmyKnifeService(Service):
     }
 
     def job(self, task, incoming_payload):
-        targets = task.compute_targets()
+        targets = self.compute_targets()
         results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(

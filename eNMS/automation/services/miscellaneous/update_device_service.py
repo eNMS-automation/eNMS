@@ -16,19 +16,19 @@ class UpdateDeviceService(Service):
         'polymorphic_identity': 'update_device_service',
     }
 
-    def job(self, task, incoming_payload):
-        targets = task.compute_targets()
+    def job(self, workflow_results=None):
+        targets = self.compute_targets()
         results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(
             self.update_device,
-            [(task, device, incoming_payload, results) for device in targets])
+            [(device, results) for device in targets])
         pool.close()
         pool.join()
         return results
 
     def update_device(self, args):
-        task, device, payload, results = args
+        device, results = args
         try:
             for property, value in self.update_dictionnary.items():
                 setattr(device, property, value)

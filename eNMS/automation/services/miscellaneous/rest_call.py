@@ -43,7 +43,7 @@ class RestCallService(Service):
         'polymorphic_identity': 'rest_call_service',
     }
 
-    def job(self, task, workflow_results):
+    def job(self, workflow_results=None):
         try:
             if self.call_type in ('GET', 'DELETE'):
                 result = self.request_dict[self.call_type](

@@ -19,8 +19,8 @@ class NapalmRollbackService(Service):
         'polymorphic_identity': 'napalm_rollback_service',
     }
 
-    def job(self, task, workflow_results):
-        targets = task.compute_targets()
+    def job(self, workflow_results=None):
+        targets = self.compute_targets()
         results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])

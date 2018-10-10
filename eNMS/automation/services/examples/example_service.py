@@ -78,11 +78,11 @@ class ExampleService(Service):
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.vendor,
         # self.boolean1, etc)
-        # The target devices can be computed via "task.compute_targets()".
+        # The target devices can be computed via "self.compute_targets()".
         # You can look at how default services (netmiko, napalm, etc.) are
         # implemented in the /services subfolders (/netmiko, /napalm, etc).
         results = {'success': True, 'devices': {}}
-        for device in task.compute_targets():
+        for device in self.compute_targets():
             results['devices'][device.name] = True
         # "results" is a dictionnary that will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether

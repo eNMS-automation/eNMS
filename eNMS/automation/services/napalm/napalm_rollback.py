@@ -37,7 +37,7 @@ class NapalmRollbackService(Service):
             napalm_driver.close()
             result, success = 'Rollback successful', True
         except Exception as e:
-            result, success = f'task failed ({e})', False
+            result, success = f'service failed ({e})', False
             results['success'] = False
         results['devices'][device.name] = {
             'success': success,

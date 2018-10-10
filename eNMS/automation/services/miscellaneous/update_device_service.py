@@ -34,7 +34,7 @@ class UpdateDeviceService(Service):
                 setattr(device, property, value)
             result, success = f'update successfully executed', False
         except Exception as e:
-            result, success = f'task failed ({e})', False
+            result, success = f'service failed ({e})', False
             results['success'] = False
         results['devices'][device.name] = {
             'success': success,

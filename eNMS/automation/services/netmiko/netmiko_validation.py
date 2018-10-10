@@ -29,8 +29,8 @@ class NetmikoValidationService(Service):
         'polymorphic_identity': 'netmiko_validation_service',
     }
 
-    def job(self, task, workflow_results):
-        targets = task.compute_targets()
+    def job(self, workflow_results=None):
+        targets = self.compute_targets()
         results = {'success': True, 'devices': {}}
         pool = ThreadPool(processes=len(targets))
         pool.map(self.device_job, [(device, results) for device in targets])
@@ -65,7 +65,7 @@ class NetmikoValidationService(Service):
             except Exception:
                 pass
         except Exception as e:
-            result, success = f'task failed ({e})', False
+            result, success = f'service failed ({e})', False
             results['success'] = False
         results['devices'][device.name] = {
             'success': success,

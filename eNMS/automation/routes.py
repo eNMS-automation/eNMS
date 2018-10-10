@@ -95,11 +95,13 @@ def workflow_editor(workflow_id=None):
     )
 
 
-@blueprint.route('/get_form/<cls_name>', methods=['POST'])
+@blueprint.route('/get_service/<service_id>', methods=['POST'])
 @login_required
 @permission_required('Services section', redirect=False)
-def get_form(cls_name):
-    cls = service_classes[cls_name]
+def get_service(service_id):
+    service = retrieve(Service, id=service_id)
+    print(service.type)
+    cls = service_classes[service.type]
 
     def build_text_box(c):
         return f'''
@@ -141,14 +143,7 @@ def get_form(cls_name):
             form += build_select_box(col)
         else:
             form += build_text_box(col)
-    return jsonify({'form': form, 'instances': cls.choices()})
-
-
-@blueprint.route('/get_service/<service_id>', methods=['POST'])
-@login_required
-@permission_required('Services section', redirect=False)
-def get_service(service_id):
-    return jsonify(retrieve(Service, id=service_id).column_values)
+    return jsonify(service.column_values)
 
 
 @blueprint.route('/delete/<service_id>', methods=['POST'])

@@ -1,46 +1,42 @@
-<div id="edit-device" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="service-editor" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="title">Edit device properties</h4>
+        <h4 class="modal-title" id="title">Service Editor</h4>
       </div>
-      <div class="modal-body">
-        <div role="tabpanel" data-example-id="togglable-tabs">
-          <ul class="nav nav-tabs bar_tabs" role="tablist">
-            <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Node properties</a>
-            </li>
-            <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">Logs</a>
-            </li>
-          </ul>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
-              <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-                <div class="modal-body">
-                  <div class="form-group" style="height: 450px">
-                  {% for field in add_device_form if field.widget.input_type != 'hidden'  %}
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(id= 'device-' + field.name, class="form-control") }}
-                    </div><br><br>
-                  {% endfor %}
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-success" id="connection-parameters-button">Connect</button>
-                  <button type="button" class="btn btn-success" onclick="editObject('device')">Save</button>
-                </div>
-              </form>
+        <form data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
+            <div class="form-group" style="height: 650px">
+            <label>Name</label>
+            <div class="form-group">
+                {{ service_form.name(class="form-control") }}
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="napalm-config">
-              <pre id="logs"></pre>
+            <label>Description</label>
+            <div class="form-group">
+                {{ service_form.description(class="form-control") }}
             </div>
-          </div>
-        </div>
-      </div>
+            <label>Waiting time</label>
+            <div class='form-group'>
+                {{ service_form.waiting_time(class="form-control", required=true, autocomplete="off") }}
+            </div>
+            <label>Nodes</label>
+            <div class='form-group'>
+                {{ service_form.devices(class="form-control", size=8) }}
+            </div>
+            <label>Pools</label>
+            <div class='form-group'>
+                {{ service_form.pools(class="form-control", size=8) }}
+            </div>
+            <div id="html-form"></div>
+            <div class="ln_solid"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                <button class="btn btn-primary" type="reset">Reset</button>
+                <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
+            </div>
+            </div>
+        </form>
     </div>
   </div>
 </div>

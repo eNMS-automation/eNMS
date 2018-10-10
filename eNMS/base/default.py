@@ -163,12 +163,6 @@ def create_netmiko_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-        factory(Task, **{
-            'name': f'task_{instance.name}',
-            'start-task': 'do-not-run',
-            'job': instance,
-            'user': retrieve(User, name='admin')
-        })
     workflow = factory(Workflow, **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
@@ -185,12 +179,6 @@ def create_netmiko_workflow():
             'destination': services[i + 1]
         })
     workflow.start_job, workflow.end_job = services[0].id, services[-1].id
-    factory(Task, **{
-        'name': 'task_netmiko_VRF_workflow',
-        'start-task': 'do-not-run',
-        'job': workflow,
-        'user': retrieve(User, name='admin')
-    })
     for index, service in enumerate(services):
         service.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
 
@@ -223,12 +211,6 @@ def create_napalm_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-        factory(Task, **{
-            'name': f'task_{instance.name}',
-            'job': instance,
-            'start-task': 'do-not-run',
-            'user': retrieve(User, name='admin')
-        })
     services.insert(1, retrieve(Job, name='netmiko_check_vrf_TEST'))
     services.append(retrieve(Job, name=f'netmiko_check_no_vrf_TEST'))
     workflow = factory(Workflow, **{
@@ -247,12 +229,6 @@ def create_napalm_workflow():
             'destination': services[i + 1]
         })
     workflow.start_job, workflow.end_job = services[0].id, services[-1].id
-    factory(Task, **{
-        'name': 'task_napalm_VRF_workflow',
-        'start-task': 'do-not-run',
-        'job': workflow,
-        'user': retrieve(User, name='admin')
-    })
     for index, service in enumerate(services):
         service.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
@@ -292,13 +268,6 @@ def create_payload_transfer_workflow():
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-        factory(Task, **{
-            'name': f'task_{instance.name}',
-            'job': instance,
-            'start-task': 'do-not-run',
-            'devices': [retrieve(Device, name='router8')],
-            'user': retrieve(User, name='admin')
-        })
     workflow = factory(Workflow, **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
@@ -321,12 +290,6 @@ def create_payload_transfer_workflow():
     positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
         services[index].positions['payload_transfer_workflow'] = x * 10, y * 10
-    factory(Task, **{
-        'name': 'task_payload_transfer_workflow',
-        'start-task': 'do-not-run',
-        'job': workflow,
-        'user': retrieve(User, name='admin')
-    })
 
 
 def create_default_workflows():

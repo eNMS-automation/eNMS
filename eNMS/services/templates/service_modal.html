@@ -8,6 +8,14 @@
         <h4 class="modal-title" id="title">Service Editor</h4>
       </div>
       <div class="modal-body">
+        <div class='form-group'>
+          <label for="services">Service Type</label>
+          <select class="form-control" id="services"></select>
+        </div>
+        <div class='form-group'>
+          <label for="service-instance">Instances of Service Type</label>
+          <select class="form-control" id="service-instance"></select>
+        </div>
         <form data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
           <div class="form-group" style="height: 650px">
             <label>Name</label>
@@ -38,7 +46,7 @@
             </div>
           </div>
         </form>
-      <div class="modal-body">
+      </div>
     </div>
   </div>
 </div>

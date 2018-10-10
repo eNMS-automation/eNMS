@@ -7,7 +7,5 @@ class SchedulingForm(FlaskForm):
     end_date = TextField()
     name = TextField()
     frequency = TextField()
-    run_immediately = BooleanField()
-    do_not_run = BooleanField(default=True)
     service_type = SelectField()
     job = SelectField()

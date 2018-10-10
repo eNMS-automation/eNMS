@@ -29,19 +29,6 @@ for (let i = 0; i < dates.length; i++) {
   }
 }
 
-/**
- * Initialize the open wizard for scheduling task.
- */
-function openWizard() { // eslint-disable-line no-unused-vars
-  $('#wizard').smartWizard({
-    onFinish: scheduleTask,
-    enableFinishButton: true,
-  });
-  $('.buttonNext').addClass('btn btn-success');
-  $('.buttonPrevious').addClass('btn btn-primary');
-  $('.buttonFinish').addClass('btn btn-default');
-}
-
 // when a filter is selected, apply it
 $('#service_type').on('change', function() {
   $.ajax({

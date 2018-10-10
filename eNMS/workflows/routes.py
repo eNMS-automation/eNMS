@@ -19,43 +19,7 @@ from eNMS.workflows.forms import (
 from eNMS.workflows.models import WorkflowEdge, Workflow
 
 
-@blueprint.route('/workflow_management')
-@login_required
-@permission_required('Workflows section')
-def workflows():
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = Job.choices()
-    return render_template(
-        'workflow_management.html',
-        compare_logs_form=CompareLogsForm(request.form),
-        names=pretty_names,
-        scheduling_form=scheduling_form,
-        fields=workflow_table_properties,
-        workflows=Workflow.serialize(),
-        form=WorkflowCreationForm(request.form)
-    )
 
-
-@blueprint.route('/workflow_editor/')
-@login_required
-@permission_required('Workflows section')
-def workflow_editor(workflow_id=None):
-    add_job_form = AddJobForm(request.form)
-    workflow_editor_form = WorkflowEditorForm(request.form)
-    workflow_editor_form.workflow.choices = Workflow.choices()
-    workflow = retrieve(Workflow, id=workflow_id)
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = Job.choices()
-    add_job_form.job.choices = Job.choices()
-    return render_template(
-        'workflow_editor.html',
-        add_job_form=add_job_form,
-        workflow_editor_form=workflow_editor_form,
-        scheduling_form=scheduling_form,
-        compare_logs_form=CompareLogsForm(request.form),
-        names=pretty_names,
-        workflow=workflow.serialized if workflow_id else None
-    )
 
 
 @blueprint.route('/get/<workflow_id>', methods=['POST'])

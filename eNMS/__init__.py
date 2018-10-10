@@ -38,8 +38,7 @@ def register_blueprints(app):
     blueprints = (
         'base',
         'objects',
-        'services',
-        'workflows',
+        'automation',
         'tasks',
         'admin',
         'views',

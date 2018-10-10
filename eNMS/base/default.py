@@ -12,14 +12,14 @@ from eNMS.base.helpers import integrity_rollback, retrieve
 from eNMS.base.properties import property_types
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
-from eNMS.services.models import Job, service_classes
+from eNMS.automation.models import Job, service_classes
 from eNMS.tasks.models import Task
 from eNMS.workflows.models import Workflow, WorkflowEdge
 
 
 @integrity_rollback
 def create_service_classes():
-    path_services = Path.cwd() / 'eNMS' / 'services' / 'services'
+    path_services = Path.cwd() / 'eNMS' / 'automation' / 'services'
     for file in path_services.glob('**/*.py'):
         if 'init' not in str(file):
             spec = spec_from_file_location(str(file), str(file))

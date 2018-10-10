@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('services_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+  <link href="{{ url_for('automation_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
   <style>
     #main { height:90vh; }
     @media (min-width: 1000px) {
@@ -30,8 +30,8 @@
   </script>
   <!-- Scheduling: wizard / bootstrap datetimepicker -->
   <script src="{{ url_for('tasks_blueprint.static', filename='scheduleTask.js') }}"></script>
-  <script src="{{ url_for('services_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
-  <script src="{{ url_for('workflows_blueprint.static', filename='workflowManagement.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='workflowManagement.js') }}"></script>
   <!-- Difflib -->
-  <script src="{{ url_for('services_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
 {% endblock javascripts %}

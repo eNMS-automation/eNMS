@@ -128,7 +128,7 @@ user_permissions = (
     'Connect to device',
     'Inventory section',
     'Views section',
-    'Services section',
+    'Automation section',
     'Workflows section',
     'Tasks section',
     'Edit logs',

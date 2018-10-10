@@ -10,8 +10,7 @@ from eNMS.tasks import blueprint
 from eNMS.tasks.forms import SchedulingForm
 from eNMS.tasks.models import Task
 from eNMS.objects.models import Pool, Device
-from eNMS.services.models import Job
-from eNMS.workflows.models import Workflow
+from eNMS.automation.models import Job, Workflow
 
 
 @blueprint.route('/task_management')

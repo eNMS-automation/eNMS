@@ -40,7 +40,9 @@ def services():
         fields=service_table_properties,
         names=pretty_names,
         scheduling_form=scheduling_form,
+        property_types={k: str(v) for k, v in property_types.items()},
         service_form=service_form,
+        services_classes=list(service_classes),
         services=Service.serialize()
     )
 

@@ -85,22 +85,27 @@ def workflow_editor(workflow_id=None):
     workflow_editor_form = WorkflowEditorForm(request.form)
     workflow_editor_form.workflow.choices = Workflow.choices()
     workflow = retrieve(Workflow, id=workflow_id)
+    service_form = ServiceForm(request.form)
+    service_form.devices.choices = Device.choices()
+    service_form.pools.choices = Pool.choices()
     return render_template(
         'workflow_editor.html',
         add_job_form=add_job_form,
         workflow_editor_form=workflow_editor_form,
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
+        property_types={k: str(v) for k, v in property_types.items()},
+        service_form=service_form,
         workflow=workflow.serialized if workflow_id else None
     )
 
 
-@blueprint.route('/get_service/<service_id>', methods=['POST'])
+@blueprint.route('/get_service/<id_or_cls>', methods=['POST'])
 @login_required
 @permission_required('Services section', redirect=False)
-def get_service(service_id):
-    service = retrieve(Service, id=service_id)
-    cls = service_classes[service.type]
+def get_service(id_or_cls):
+    service = retrieve(Service, id=id_or_cls)
+    cls = service_classes[service.type if service else id_or_cls]
 
     def build_text_box(c):
         return f'''
@@ -142,7 +147,10 @@ def get_service(service_id):
             form += build_select_box(col)
         else:
             form += build_text_box(col)
-    return jsonify({'form': form, 'service': service.column_values})
+    return jsonify({
+        'form': form,
+        'service': service.column_values if service else None
+    })
 
 
 @blueprint.route('/delete/<service_id>', methods=['POST'])

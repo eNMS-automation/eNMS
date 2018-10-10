@@ -124,13 +124,7 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   }
 }
 
-/**
- * Show Job Modal
- * @param {job} job - job to add to the workflow.
- */
-function editServiceId(id) {
-  console.log(selectedNode);
-}
+
 /**
  * Add job to the workflow object (back-end).
  * @param {job} job - job to add to the workflow.
@@ -366,7 +360,7 @@ function savePositions() {
 }
 
 const action = {
-  'Edit': editServiceId,
+  'Edit': editService,
   'Logs': showLogs,
   'Set as start': startJob,
   'Set as end': endJob,

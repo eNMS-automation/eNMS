@@ -21,6 +21,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  {% include 'service_editor.html' %}
   {% include 'workflow_editor_modal.html' %}
   {% include 'logs_modals.html' %}
   <div class="right_col" role="main">
@@ -64,6 +65,7 @@
   {{ super()}}
   <script>
     let workflow = {{ workflow|tojson|safe }};
+    const propertyTypes = {{ property_types|tojson|safe }};
   </script>
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>

@@ -21,23 +21,26 @@ function editService(id) {
     type: 'POST',
     url: `/automation/get_service/${id}`,
     success: function(result) {
+      console.log(result);
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         $('#html-form').html(result.form);
-        for (const [property, value] of Object.entries(result)) {
-          const propertyType = propertyTypes[property] || 'str';
-          if (propertyType.includes('bool')) {
-            $(`#${property}`).prop('checked', value);
-          } else if (propertyType.includes('dict')) {
-            $(`#${property}`).val(value ? JSON.stringify(value): '{}');
-          } else {
-            $(`#${property}`).val(value);
+          if (result.service) {
+          for (const [property, value] of Object.entries(result.service)) {
+            const propertyType = propertyTypes[property] || 'str';
+            if (propertyType.includes('bool')) {
+              $(`#${property}`).prop('checked', value);
+            } else if (propertyType.includes('dict')) {
+              $(`#${property}`).val(value ? JSON.stringify(value): '{}');
+            } else {
+              $(`#${property}`).val(value);
+            }
           }
+          $('#devices').val(result.service.devices.map((n) => n.id));
+          $('#pools').val(result.service.pools.map((p) => p.id));
+          showModal('service-editor');
         }
-        $('#devices').val(result.devices.map((n) => n.id));
-        $('#pools').val(result.pools.map((p) => p.id));
-        showModal('service-editor');
       }
     },
   });

@@ -1,6 +1,0 @@
-/*
-global
-alertify: false
-*/
-
-

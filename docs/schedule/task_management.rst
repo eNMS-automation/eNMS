@@ -2,45 +2,14 @@
 Service Scheduling
 ==================
 
-A step is scheduled by creating a ``Task``. It is a 3-steps process:
+Services can be scheduled by creating a ``Task``, from the :guilabel:`schedule/task_management` page.
+You need to:
+    - Choose a name.
+    - Select a job (the service or workflow that you want to execute).
+    - Choose a start date.
+    - (Optional) Choose a frequency and an end date. If a ``Frequency`` is defined, the job will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``, the task will run indefinitely until you manually stop it.
 
-1. Choosing a name, a waiting time and a job
 
-The job is the service (or workflow, as you can see in the ``Workflow`` section) that you want to execute.
-The waiting time is only considered when the task is used in a workflow (see the ``Workflow`` section of the doc for more information). It defines how much time to wait after the task is finished (after reloading a device for example).
-
-.. image:: /_static/services/service_scheduling/step1.png
-   :alt: Scheduling: step 1
-   :align: center
-
-#. Target selection
-
-Targets can be selected as individual device or as pool. The resulting targets of the task will be a set composed of all selected devices, along with the devices of all selected pools.
-
-.. image:: /_static/services/service_scheduling/step2.png
-   :alt: Scheduling: step 1
-   :align: center
-
-#. Date and time selection
-
-Three options:
-  - Do not run the task (you may want to create it but schedule it later, or use it as part of a workflow)
-  - Run the task now
-  - Schedule a date and time for the task to run later on. If a ``Frequency`` is selected, the task will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``, the task will run indefinitely until you manually stop it.
-
-You can schedule a service :
-  - From the :guilabel:`services/service_management` page
-  - From the geographical (:guilabel:`views/geographical_view`) or the logical view (:guilabel:`views/logical_view`)
-
-From the Service Management page
---------------------------------
-
-Go to the :guilabel:`services/service_management` page and click on the ``Schedule`` button for the service you want to schedule.
-The ``Job`` drop-down list in the first step of the task creation will not appear: it is automatically set to the appropriate service.
-
-.. image:: /_static/services/service_scheduling/from_service_management.png
-   :alt: Schedule from Service Management page
-   :align: center
 
 From the views
 --------------
@@ -62,24 +31,7 @@ In the :guilabel:`tasks/task_management/service` page, you can find a summary of
    :alt: Service task management
    :align: center
 
-From this table, you can:
 
-  - View the logs of the task.
-  - Edit the task's properties, including the scheduling properties (dates and frequency).
-  - Compare the logs of the task between any two runs, any two devices.
-  - Pause & resume the task.
-  - Delete the task.
-
-Logs comparison
-***************
-
-You can click on the ``Compare`` button in the :guilabel:`Service tasks` section to have a line-by-line diff of the task logs between any two versions, any two devices.
-
-.. image:: /_static/services/service_scheduling/task_comparison.png
-   :alt: Logs comparison
-   :align: center
-
-.. note:: For the comparison between devices to work, the results of a task must contain a ``devices`` key, which value is a dictionnary associating device names to device results.
 
 Periodic tasks
 **************

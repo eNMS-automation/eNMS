@@ -39,7 +39,7 @@ Let's take a look at how the ``Swiss Army Knife Service`` is implemented:
 
 The ``job`` function of ``SwissArmyKnifeService`` will run the class method of ``SwissArmyKnifeService`` with the same name as the instance itself.
 
-In other words, with the above code, you can create two instances of SwissArmyKnifeService from the web UI: one named "job1" and the other named "job2". Then, you'll need to create a task for each of these service instances, and you'll add them to the appropriate workflow. The SwissArmyKnifeService class will take care of calling the right "job" function based on the name of the instance.
+In other words, with the above code, you can create two instances of SwissArmyKnifeService from the web UI: one named "job1" and the other named "job2". The SwissArmyKnifeService class will take care of calling the right "job" function based on the name of the instance.
 
 Parralel Swiss Army Knife Service
 ---------------------------------

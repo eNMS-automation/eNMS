@@ -43,13 +43,13 @@ The base code for a job function is the following:
       # forward with a "Success" edge or a "Failure" edge.
       return results
 
-The dictionnary ``results`` is the payload of the job, i.e the information that will be transferred to the next tasks to run in the workflow. ``results`` MUST contain a key ``success``, to tell eNMS whether the task was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
+The dictionnary ``results`` is the payload of the job, i.e the information that will be transferred to the next jobs to run in the workflow. ``results`` MUST contain a key ``success``, to tell eNMS whether the job was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
   
-The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the ``results`` of all tasks that have already been executed.
+The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the ``results`` of all jobs that have already been executed.
 
-If we consider the aforementioned workflow, the task ``task_process_payload1`` receives the variable ``payload`` that contains the results of all other tasks in the workflow (because it is the last one to be executed).
+If we consider the aforementioned workflow, the job ``process_payload1`` receives the variable ``payload`` that contains the results of all other jobs in the workflow (because it is the last one to be executed).
 
-The results of the task ``task_service_napalm_getter_get_facts`` is the following:
+The results of the job ``get_facts`` is the following:
 
 ::
 
@@ -79,12 +79,12 @@ The results of the task ``task_service_napalm_getter_get_facts`` is the followin
     }
   },
 
-Consequently, the ``payload`` variable received by ``task_process_payload1`` will look like this:
+Consequently, the ``payload`` variable received by ``process_payload1`` will look like this:
 
 ::
 
   {
-      "task_service_napalm_getter_get_facts": {
+      "get_facts": {
           "success": true,
           "devices": {
               "router8": {
@@ -109,12 +109,12 @@ Consequently, the ``payload`` variable received by ``task_process_payload1`` wil
               }
           }
       },
-    "task_service_napalm_getter_get_interfaces": {...},
-    "task_service_napalm_getter_get_config": {...},
+    "get_interfaces": {...},
+    "get_config": {...},
     etc...
   }
 
-If we want to use the results of the Napalm getters in the final task ``task_process_payload1``, here's what the the ``job`` function of ``task_process_payload1`` could look like:
+If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the the ``job`` function of ``process_payload1`` could look like:
 
 ::
 
@@ -136,7 +136,7 @@ If we want to use the results of the Napalm getters in the final task ``task_pro
           }
       }
 
-This ``job`` function reuses the Napalm getters of two tasks of the worflow (one of which, ``task_service_napalm_getter_get_facts``, is not a direct predecessor of ``task_process_payload1``) to create new variables and inject them in the results.
+This ``job`` function reuses the Napalm getters of two jobs of the worflow (one of which, ``get_facts``, is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
 
 Use of a SwissArmyKnifeService instance to process the payload
 -------------------------------------------------------

@@ -95,3 +95,14 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 .. image:: /_static/services/default_services/rest_call.png
    :alt: ReST Call service
    :align: center
+
+Update Device Service
+---------------------
+
+Update the properties of one or several devices in eNMS inventory.
+This service takes a dictionnary as input: all key/value pairs of that dictionnary are used to update properties in the inventory.
+Example: if you create a workflow to perform the upgrade of a device, you might want to change the value of the ``operating_system`` property in eNMS to keep the inventory up-to-date.
+
+.. image:: /_static/services/default_services/update_device.png
+   :alt: Update Device service
+   :align: center

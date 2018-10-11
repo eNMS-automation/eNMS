@@ -34,22 +34,22 @@ file_transfer_service = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/services')
+@check_blueprints('/automation')
 def test_base_services(user_client):
     user_client.post(
-        '/services/save_service/Netmiko Configuration Service',
+        '/automation/save_service/netmiko_configuration_service',
         data=netmiko_ping
     )
     assert len(
-        service_classes['Netmiko Configuration Service'].query.all()
+        service_classes['netmiko_configuration_service'].query.all()
     ) == 3
     assert len(Service.query.all()) == 14
     user_client.post(
-        'services/save_service/Netmiko File Transfer Service',
+        'services/save_service/netmiko_file_transfer_service',
         data=file_transfer_service
     )
     assert len(
-        service_classes['Netmiko File Transfer Service'].query.all()
+        service_classes['netmiko_file_transfer_service'].query.all()
     ) == 1
     assert len(Service.query.all()) == 15
 
@@ -64,13 +64,13 @@ getters_dict = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/services')
+@check_blueprints('/automation')
 def test_getters_service(user_client):
     user_client.post(
-        '/services/save_service/Napalm Getters Service',
+        '/automation/save_service/napalm_getters_service',
         data=getters_dict
     )
-    assert len(service_classes['Napalm Getters Service'].query.all()) == 5
+    assert len(service_classes['napalm_getters_service'].query.all()) == 5
 
 
 ansible_service = ImmutableMultiDict([
@@ -84,11 +84,11 @@ ansible_service = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/services')
+@check_blueprints('/automation')
 def test_ansible_services(user_client):
     user_client.post(
-        '/services/save_service/Ansible Playbook Service',
+        '/automation/save_service/ansible_playbook_service',
         data=ansible_service
     )
-    assert len(service_classes['Ansible Playbook Service'].query.all()) == 1
+    assert len(service_classes['ansible_playbook_service'].query.all()) == 1
     assert len(Service.query.all()) == 14

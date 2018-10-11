@@ -22,17 +22,13 @@ urls = {
         '/geographical_view',
         '/logical_view'
     ),
-    '/services': (
+    '/automation': (
         '/service_management',
-        '/service_editor'
-    ),
-    '/workflows': (
         '/workflow_management',
         '/workflow_editor'
     ),
-    '/tasks': (
-        '/task_management/service',
-        '/task_management/workflow',
+    '/schedule': (
+        '/task_management',
         '/calendar'
     )
 }

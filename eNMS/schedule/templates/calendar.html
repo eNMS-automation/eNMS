@@ -9,7 +9,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-{% include 'scheduling_modal.html' %}
+{% include 'task_modal.html' %}
 <div class="right_col" role="main">
   <div class="row">
     <div class="col-md-12">
@@ -26,9 +26,9 @@
   {{ super() }}
   <!-- FullCalendar -->
   <script src="{{ url_for('schedule_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
-  <script> var tasks = {{ tasks|tojson|safe }};</script>
-  <!-- Scheduling: wizard / bootstrap datetimepicker -->
-  <script src="{{ url_for('schedule_blueprint.static', filename='scheduleTask.js') }}"></script>
+  <script>
+    var tasks = {{ tasks|tojson|safe }};
+  </script>
   <!-- Task management -->
   <script src="{{ url_for('schedule_blueprint.static', filename='taskManagement.js') }}"></script>
   <!-- Calendar -->

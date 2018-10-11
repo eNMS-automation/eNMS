@@ -49,9 +49,7 @@ def calendar():
             r"\1," + month + r",\3,\4,\5",
             task.aps_date('start_date')
         ).split(',')]
-        tasks[task.name] = {
-            'date': js_date,
-        }
+        tasks[task.name] = {**task.serialized, **{'date': js_date}}
     return render_template(
         'calendar.html',
         tasks=tasks,

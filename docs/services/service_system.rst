@@ -4,7 +4,7 @@ Services
 
 A service is a Python class that performs an action. You can define all the parameters you need as SQL Alchemy columns: eNMS will inspect the class parameters to automatically generate a service creation form in the web UI.
 
-In ``eNMS/eNMS/services/services``, you will find the file ``example_service.py`` with a service template that you can use as starting point to create your own services. 
+In ``eNMS/eNMS/automation/services/examples``, you will find the file ``example_service.py`` with a service template that you can use as starting point to create your own services. 
 This file contains the following code :
 
 ::
@@ -39,7 +39,7 @@ This file contains the following code :
   )
   from sqlalchemy.ext.mutable import MutableDict, MutableList
   
-  from eNMS.services.models import Service, service_classes
+  from eNMS.automation.models import Service, service_classes
   
   
   class ExampleService(Service):
@@ -56,7 +56,7 @@ This file contains the following code :
       an_integer = Column(Integer)
       # Text area
       a_float = Column(Float)
-      # the "a_list" property will be displayed as a multiple selection list.
+      # the "a_list" property will be displayed as a multiple selection list
       # list, with the values contained in "a_list_values".
       a_list = Column(MutableList.as_mutable(PickleType))
       # Text area where a python dictionnary is expected
@@ -73,7 +73,7 @@ This file contains the following code :
           ('arista', 'Arista')
       ]
   
-      # these values will be displayed in a multiple selection drop-down list,
+      # these values will be displayed in a multiple selection list,
       # for the property "a_list".
       a_list_values = [
           ('value1', 'Value 1'),
@@ -89,12 +89,12 @@ This file contains the following code :
           # The "job" function is called when the service is executed.
           # The parameters of the service can be accessed with self (self.vendor,
           # self.boolean1, etc)
-          # The target devices can be computed via "task.compute_targets()".
+          # The target devices can be computed via "self.compute_targets()".
           # You can look at how default services (netmiko, napalm, etc.) are
           # implemented in the /services subfolders (/netmiko, /napalm, etc).
-          results = {'success': True, 'result': 'nothing happened'}
-          for device in task.compute_targets():
-              results[device.name] = True
+          results = {'success': True, 'devices': {}}
+          for device in self.compute_targets():
+              results['devices'][device.name] = True
           # "results" is a dictionnary that will be displayed in the logs.
           # It must contain at least a key "success" that indicates whether
           # the execution of the service was a success or a failure.
@@ -103,12 +103,12 @@ This file contains the following code :
           return results
   
   
-  service_classes['Example Service'] = ExampleService
+  service_classes['example_service'] = ExampleService
 
-When the application starts, it loads all python files in ``eNMS/eNMS/services/services``, and adds all models to the database.
+When the application starts, it loads all python files in ``eNMS/eNMS/automation/services``, and adds all models to the database.
 You can create instances of that service from the web UI.
 
-eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances.
+eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances of that service.
 
 For the ``ExampleService`` class displayed above, the SQL columns are the following ones:
 
@@ -144,7 +144,7 @@ The rules for the auto-generation of service forms are the following:
   - A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
   - A MutableDict property is displayed as a text area. You can write a dictionnary in that text area: it will be converted to an actual python dictionnary.
 
-Inside the ``eNMS/eNMS/services/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
+Inside the ``eNMS/eNMS/automation/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
 
 eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm``, ``nornir`` and ``ansible``.
 

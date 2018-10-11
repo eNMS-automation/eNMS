@@ -93,6 +93,13 @@ if (workflow) {
 /**
  * Add an existing job to the workflow.
  */
+function runWorkflow() { // eslint-disable-line no-unused-vars
+  runJob(workflow.id);
+}
+
+/**
+ * Add an existing job to the workflow.
+ */
 function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the

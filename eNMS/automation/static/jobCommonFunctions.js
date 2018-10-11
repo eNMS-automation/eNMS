@@ -11,11 +11,13 @@ let jobId;
  * @param {id} id - Job id.
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
+  
   $.ajax({
     type: 'POST',
     url: `/automation/show_logs/${id}`,
     dataType: 'json',
     success: function(logs) {
+      console.log(logs);
       if (!logs) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {

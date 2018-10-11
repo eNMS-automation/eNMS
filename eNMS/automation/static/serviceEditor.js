@@ -13,20 +13,27 @@ servicesClasses: false
 })();
 
 /**
+ * Show the Service Editor modal
+ */
+function showServiceEditor() {
+  $('#services').show();
+  $('#service-editor').modal('show');
+}
+
+/**
  * Edit a service.
  */
 function editService(id) {
-  id = id || $('#services').val();
   $.ajax({
     type: 'POST',
-    url: `/automation/get_service/${id}`,
+    url: `/automation/get_service/${id || $('#services').val()}`,
     success: function(result) {
-      console.log(result);
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         $('#html-form').html(result.form);
-          if (result.service) {
+        if (result.service) {
+          $('#services').hide();
           for (const [property, value] of Object.entries(result.service)) {
             const propertyType = propertyTypes[property] || 'str';
             if (propertyType.includes('bool')) {

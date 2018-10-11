@@ -360,8 +360,11 @@ function savePositions() {
 }
 
 const action = {
-  'Edit': editService,
+  'Run workflow': runWorkflow,
+  'Edit job': editService,
+  'Run job': runJob,
   'Logs': showLogs,
+  'Compare': compareLogs,
   'Set as start': startJob,
   'Set as end': endJob,
   'Add job': partial(showModal, 'add-job'),

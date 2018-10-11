@@ -24,8 +24,6 @@ function addService(mode, properties) {
     onclick="compareLogs('${properties.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="runJob('${properties.id}')">Run</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="editService('${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
@@ -44,16 +42,6 @@ function addService(mode, properties) {
     addService('create', services[i]);
   }
 })();
-
-/**
- * Open scheduling modal for a service.
- * @param {id} id - Id of the service to schedule.
- */
-function showSchedulingModal(id) { // eslint-disable-line no-unused-vars
-  $('#job-div').hide();
-  $('#job').val(id);
-  $('#scheduling').modal('show');
-}
 
 /**
  * Delete a service.

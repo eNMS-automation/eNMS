@@ -86,14 +86,17 @@ function scheduleTask() {
       url: '/schedule/scheduler',
       dataType: 'json',
       data: $('#task-modal-form').serialize(),
-      success: function(result) {
+      success: function(task) {
         console.log(taskManagement);
-        if (!result) {
+        if (!task) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
+          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+          addTask(mode, task);
+          const message = `Task '${task.name}'
+          ${mode == 'edit' ? 'edited' : 'created'} !`;
+          alertify.notify(message, 'success', 5);
           $('#task-modal').modal('hide');
-          addTask(mode, properties)
-          alertify.notify(`Task '${result.name}' scheduled.`, 'success', 5);
         }
       },
     });

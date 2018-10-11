@@ -26,8 +26,6 @@ function addWorkflow(mode, properties) {
     onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="runJob('${properties.id}')">Run</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showSchedulingModal('${properties.id}')">Schedule</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteWorkflow('${properties.id}')">Delete</button>`
   );
@@ -44,16 +42,6 @@ function addWorkflow(mode, properties) {
     addWorkflow('create', workflows[i]);
   }
 })();
-
-/**
- * Open the scheduling modal (disable job section: we schedule the workflow).
- * @param {id} id - Id of the workflow to schedule.
- */
-function showSchedulingModal(id) { // eslint-disable-line no-unused-vars
-  $('#job-div').hide();
-  $('#job').val(id);
-  $('#scheduling').modal('show');
-}
 
 /**
  * Open the workflow modal for creation.

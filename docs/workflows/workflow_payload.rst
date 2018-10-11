@@ -2,16 +2,16 @@
 Workflow Payload
 ================
 
-Task dependency
----------------
+Job dependency
+--------------
 
-One of the property of workflows in eNMS is that a task will not start unless all of its "predecessors" tasks have been executed.
+One of the property of workflows in eNMS is that a job will not start unless all of its "predecessors" jobs have been executed.
 
-In the example below, the task ``task_process_payload1`` has two "predecessors" tasks:
-  - ``task_service_napalm_getters_get_interfaces``
-  - ``task_service_napalm_getters_get_config``
+In the example below, the job ``process_payload1`` has two "predecessors" jobs:
+  - ``get_interfaces``
+  - ``get_config``
 
-It will not run until ``task_service_napalm_getters_get_interfaces`` and ``task_service_napalm_getters_get_config`` have been executed.
+It will not run until ``get_interfaces`` and ``get_config`` have been executed.
 
 .. image:: /_static/workflows/other_workflows/payload_transfer_workflow.png
    :alt: Payload Transfer Workflow
@@ -20,9 +20,9 @@ It will not run until ``task_service_napalm_getters_get_interfaces`` and ``task_
 Payload transfer
 ----------------
 
-The most important characteristic of workflows is the transfer of data between task. When a task starts, it is provided with the results of ALL tasks in the workflow that have already been executed (and not only the results of its "predecessors").
+The most important characteristic of workflows is the transfer of data between job. When a job starts, it is provided with the results of ALL jobs in the workflow that have already been executed (and not only the results of its "predecessors").
 
-The code for a task ``job`` function is the following:
+The base code for a job function is the following:
 
 ::
 
@@ -34,7 +34,7 @@ The code for a task ``job`` function is the following:
       # You can look at how default services (netmiko, napalm, etc.) are
       # implemented in the /services subfolders (/netmiko, /napalm, etc).
       results = {'success': True, 'devices': {}}
-      for device in task.compute_targets():
+      for device in self.compute_targets():
           results['devices'][device.name] = True
       # "results" is a dictionnary that will be displayed in the logs.
       # It must contain at least a key "success" that indicates whether
@@ -43,7 +43,7 @@ The code for a task ``job`` function is the following:
       # forward with a "Success" edge or a "Failure" edge.
       return results
 
-The dictionnary ``results`` is the payload of the task, i.e the information that will be transferred to the next tasks to run in the workflow. ``results`` MUST contain a key ``success``, to tell eNMS whether the task was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
+The dictionnary ``results`` is the payload of the job, i.e the information that will be transferred to the next tasks to run in the workflow. ``results`` MUST contain a key ``success``, to tell eNMS whether the task was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
   
 The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the ``results`` of all tasks that have already been executed.
 

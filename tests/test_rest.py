@@ -4,8 +4,8 @@ from time import sleep
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.objects.models import Device
-from eNMS.services.models import Service
-from eNMS.tasks.models import Task
+from eNMS.automation.models import Service
+from eNMS.schedule.models import Task
 
 device = {
     "name": "router10",
@@ -147,9 +147,9 @@ delete_service_task = ImmutableMultiDict([
 
 
 def rest_service_test(user_client):
-    user_client.post('/services/create_service/rest_call', data=post_service)
+    user_client.post('/automation/create_service/rest_call', data=post_service)
     assert len(Service.query.all()) == 4
-    user_client.post('/tasks/scheduler', data=post_service_task)
+    user_client.post('/schedule/scheduler', data=post_service_task)
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_create_router',
         headers={'Accept': 'application/json'}
@@ -158,9 +158,9 @@ def rest_service_test(user_client):
     # wait a bit for the task to run
     sleep(30)
     assert len(Device.query.all()) == 1
-    user_client.post('/services/create_service/rest_call', data=delete_service)
+    user_client.post('/automation/create_service/rest_call', data=delete_service)
     assert len(Service.query.all()) == 5
-    user_client.post('/tasks/scheduler', data=delete_service_task)
+    user_client.post('/schedule/scheduler', data=delete_service_task)
     assert len(Task.query.all()) == 2
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_delete_router',

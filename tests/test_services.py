@@ -1,4 +1,4 @@
-from eNMS.services.models import Service, service_classes
+from eNMS.automation.models import Service, service_classes
 from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -10,6 +10,8 @@ from werkzeug.datastructures import ImmutableMultiDict
 netmiko_ping = ImmutableMultiDict([
     ('name', 'netmiko_ping'),
     ('waiting_time', '0'),
+    ('devices', '1'),
+    ('devices', '2'),
     ('description', ''),
     ('vendor', ''),
     ('operating_system', ''),
@@ -23,6 +25,8 @@ netmiko_ping = ImmutableMultiDict([
 file_transfer_service = ImmutableMultiDict([
     ('name', 'test'),
     ('waiting_time', '0'),
+    ('devices', '1'),
+    ('devices', '2'),
     ('description', ''),
     ('vendor', ''),
     ('operating_system', ''),
@@ -45,7 +49,7 @@ def test_base_services(user_client):
     ) == 3
     assert len(Service.query.all()) == 14
     user_client.post(
-        'services/save_service/netmiko_file_transfer_service',
+        'automation/save_service/netmiko_file_transfer_service',
         data=file_transfer_service
     )
     assert len(
@@ -76,6 +80,8 @@ def test_getters_service(user_client):
 ansible_service = ImmutableMultiDict([
     ('name', 'testttt'),
     ('waiting_time', '0'),
+    ('devices', '1'),
+    ('devices', '2'),
     ('description', ''),
     ('vendor', ''),
     ('operating_system', ''),

@@ -1,6 +1,6 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.tasks.models import Task
+from eNMS.schedule.models import Task
 
 from tests.test_base import check_blueprints
 from tests.test_objects import create_from_file
@@ -8,17 +8,12 @@ from tests.test_objects import create_from_file
 
 instant_task = ImmutableMultiDict([
     ('name', 'instant_task'),
-    ('waiting_time', '0'),
-    ('devices', '1'),
-    ('devices', '2'),
     ('start-task', 'run-now'),
-    ('job', '2'),
-    ('run_immediately', 'y')
+    ('job', '2')
 ])
 
 scheduled_task = ImmutableMultiDict([
     ('name', 'scheduled_task'),
-    ('waiting_time', '0'),
     ('start-task', 'schedule'),
     ('start_date', '30/03/2018 19:10:13'),
     ('end_date', '06/04/2018 19:10:13'),
@@ -31,9 +26,9 @@ scheduled_task = ImmutableMultiDict([
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('schedule/scheduler', data=instant_task)
-    assert len(Task.query.all()) == 17
+    assert len(Task.query.all()) == 1
     user_client.post('schedule/scheduler', data=scheduled_task)
-    assert len(Task.query.all()) == 18
+    assert len(Task.query.all()) == 2
 
 
 google_earth_dict = ImmutableMultiDict([

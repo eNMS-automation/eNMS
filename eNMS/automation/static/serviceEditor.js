@@ -16,14 +16,21 @@ servicesClasses: false
  * Show the Service Editor modal
  */
 function showServiceEditor() {
+  $('#title').text('Create a new service');
   $('#services').show();
+  $('#service-editor-form').trigger('reset');
+  editService();
   $('#service-editor').modal('show');
+  
 }
 
 /**
  * Edit a service.
  */
 function editService(id) {
+  if (id) {
+    $('#title').text('Edit service');
+  }
   $.ajax({
     type: 'POST',
     url: `/automation/get_service/${id || $('#services').val()}`,
@@ -67,19 +74,13 @@ function saveService() { // eslint-disable-line no-unused-vars
         if (!service) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
-          const isNew = $(`#service-instance option[value='${service.id}']`);
-          if (0 == isNew.length) {
-            $('#service-instance').append(
-              `<option value='${service.id}'>${service.name}</option>`
-            );
-            alertify.notify(`Service '${service.name}' created.`, 'success', 5);
-          } else {
-            alertify.notify(`Service '${service.name}' updated.`, 'success', 5);
-          }
+          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+          addService(mode, service);
+          const message = `Service '${service.name}'
+          ${mode == 'edit' ? 'edited' : 'created'} !`;
+          alertify.notify(message, 'success', 5);
+          $('#service-editor').modal('hide');
         }
-        $('#wizard').smartWizard('goToStep', 1);
-        $('#service-editor').modal('hide');
-        
       },
     });
   }

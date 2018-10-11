@@ -30,6 +30,7 @@
     var tasks = {{ tasks|tojson|safe }};
   </script>
   <!-- Task management -->
+  <script src="{{ url_for('schedule_blueprint.static', filename='taskCommonMethods.js') }}"></script>
   <script src="{{ url_for('schedule_blueprint.static', filename='taskManagement.js') }}"></script>
   <!-- Calendar -->
   <script src="{{ url_for('schedule_blueprint.static', filename='calendar.js') }}"></script>

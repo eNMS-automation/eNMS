@@ -74,7 +74,7 @@ class ExampleService(Service):
         'polymorphic_identity': 'example_service',
     }
 
-    def job(self, task, incoming_payload):
+    def job(self, incoming_payload):
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.vendor,
         # self.boolean1, etc)

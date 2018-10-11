@@ -26,11 +26,11 @@ The base code for a job function is the following:
 
 ::
 
-  def job(self, task, incoming_payload):
+  def job(self, incoming_payload):
       # The "job" function is called when the service is executed.
       # The parameters of the service can be accessed with self (self.vendor,
       # self.boolean1, etc)
-      # The target devices can be computed via "task.compute_targets()".
+      # The target devices can be computed via "self.compute_targets()".
       # You can look at how default services (netmiko, napalm, etc.) are
       # implemented in the /services subfolders (/netmiko, /napalm, etc).
       results = {'success': True, 'devices': {}}

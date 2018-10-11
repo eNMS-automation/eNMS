@@ -1,8 +1,11 @@
 /*
 global
+addService: false
 alertify: false
 propertyTypes: false
 servicesClasses: false
+showModal: false
+workflowEditor: false;
 */
 
 (function() {
@@ -15,17 +18,17 @@ servicesClasses: false
 /**
  * Show the Service Editor modal
  */
-function showServiceEditor() {
+function showServiceEditor() { // eslint-disable-line no-unused-vars
   $('#title').text('Create a new service');
   $('#services').show();
   $('#service-editor-form').trigger('reset');
   editService();
   $('#service-editor').modal('show');
-  
 }
 
 /**
  * Edit a service.
+ * @param {id} id - Service Id.
  */
 function editService(id) {
   if (id) {

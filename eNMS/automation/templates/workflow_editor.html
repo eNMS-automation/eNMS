@@ -44,22 +44,22 @@
     <!-- end row -->
   </div>
   <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li class="node-selection"><a tabindex="-1" href="#">Edit</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Run</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Edit Job</a></li>
+    <li class="node-selection"><a tabindex="-1" href="#">Run Job</a></li>
     <li class="node-selection"><a tabindex="-1" href="#">Logs</a></li>
     <li class="node-selection"><a tabindex="-1" href="#">Compare</a></li>
     <li class="node-selection"><a tabindex="-1" href="#">Set as start</a></li>
     <li class="node-selection"><a tabindex="-1" href="#">Set as end</a></li>
     <li class="dropdown-submenu global">
-      <a class="menu-submenu menu-layer" tabindex="-1" href="#">Change mode<span class="caret-right"></span></a>
+      <a class="menu-submenu menu-layer" tabindex="-1" href="#">Change Mode<span class="caret-right"></span></a>
       <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Create 'Success edge'</a></li>
-        <li><a tabindex="-1" href="#">Create 'Failure edge'</a></li>
+        <li><a tabindex="-1" href="#">Create "Success" edge</a></li>
+        <li><a tabindex="-1" href="#">Create "Failure" edge</a></li>
         <li><a tabindex="-1" href="#">Move Nodes</a></li>
       </ul>
     </li>
-    <li><a tabindex="-1" href="#">Add Job</a></li>
-    <li><a tabindex="-1" href="#">Run Workflow</a></li>
+    <li class="global"><a tabindex="-1" href="#">Add Job</a></li>
+    <li class="global"><a tabindex="-1" href="#">Run Workflow</a></li>
     <li><a tabindex="-1" href="#">Delete Selection</a></li>
   </ul>
 {% endblock content %}
@@ -68,6 +68,7 @@
   {{ super()}}
   <script>
     let workflow = {{ workflow|tojson|safe }};
+    const servicesClasses = {{ services_classes|tojson|safe }};
     const propertyTypes = {{ property_types|tojson|safe }};
   </script>
   <!-- Base -->

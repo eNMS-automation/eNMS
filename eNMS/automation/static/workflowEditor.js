@@ -8,6 +8,8 @@ vis: false
 workflow: true
 */
 
+const workflowEditor = true;
+
 const container = document.getElementById('network');
 const dsoptions = {
   edges: {
@@ -243,14 +245,6 @@ function edgeToEdge(edge) {
 }
 
 /**
- * Show scheduling modal.
- */
-function showSchedulingModal() { // eslint-disable-line no-unused-vars
-  $('#scheduling').modal('show');
-  $('.dropdown-submenu a.menu-job').next('ul').toggle();
-}
-
-/**
  * Set a job as start of the workflow.
  */
 function startJob() {
@@ -352,6 +346,7 @@ $('#workflow-name').on('change', function() {
  * Save positions of the workflow nodes.
  */
 function savePositions() {
+  console.log(workflow, workflow.id);
   $.ajax({
     type: 'POST',
     url: `/automation/save_positions/${workflow.id}`,
@@ -367,18 +362,18 @@ function savePositions() {
 }
 
 const action = {
-  'Run workflow': runWorkflow,
-  'Edit job': editService,
-  'Run job': runJob,
+  'Run Workflow': runWorkflow,
+  'Edit Job': editService,
+  'Run Job': runJob,
   'Logs': showLogs,
   'Compare': compareLogs,
   'Set as start': startJob,
   'Set as end': endJob,
-  'Add job': partial(showModal, 'add-job'),
-  'Delete selection': deleteSelection,
-  'Create success edge': partial(switchMode, 'success'),
-  'Create failure edge': partial(switchMode, 'failure'),
-  'Move nodes': partial(switchMode, 'node'),
+  'Add Job': partial(showModal, 'add-job'),
+  'Delete Selection': deleteSelection,
+  'Create "Success" edge': partial(switchMode, 'success'),
+  'Create "Failure" edge': partial(switchMode, 'failure'),
+  'Move Nodes': partial(switchMode, 'node'),
 };
 
 $('.dropdown-submenu a.menu-submenu').on('click', function(e) {

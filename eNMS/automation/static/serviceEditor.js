@@ -51,6 +51,7 @@ function editService(id) {
               $(`#${property}`).val(value);
             }
           }
+          $('#services').val(result.service.type);
           $('#devices').val(result.service.devices.map((n) => n.id));
           $('#pools').val(result.service.pools.map((p) => p.id));
           showModal('service-editor');
@@ -75,7 +76,9 @@ function saveService() { // eslint-disable-line no-unused-vars
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          addService(mode, service);
+          if (!workflowEditor) {
+            addService(mode, service);
+          }
           const message = `Service '${service.name}'
           ${mode == 'edit' ? 'edited' : 'created'} !`;
           alertify.notify(message, 'success', 5);

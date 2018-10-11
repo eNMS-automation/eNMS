@@ -96,6 +96,7 @@ def workflow_editor(workflow_id=None):
         names=pretty_names,
         property_types={k: str(v) for k, v in property_types.items()},
         service_form=service_form,
+        services_classes=list(service_classes),
         workflow=workflow.serialized if workflow_id else None
     )
 
@@ -193,6 +194,7 @@ def save_service(cls_name):
     for key in request.form:
         if property_types.get(key, None) == list:
             form[key] = request.form.getlist(key)
+    print(form)
     return jsonify(factory(service_classes[cls_name], **form).serialized)
 
 
@@ -332,6 +334,7 @@ def set_as_end(workflow_id, job_id):
 @login_required
 @permission_required('Edit workflows', redirect=False)
 def save_positions(workflow_id):
+    print(workflow_id)
     workflow = retrieve(Workflow, id=workflow_id)
     for job_id, position in request.json.items():
         job = retrieve(Job, id=job_id)

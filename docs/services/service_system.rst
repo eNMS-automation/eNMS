@@ -151,12 +151,21 @@ eNMS comes with a list of "default" services based on network automation framewo
 Service Management
 ------------------
 
-All services are displayed in the :guilabel:`services/service_management` page in the ``Microservices`` section.
-They can be scheduled (see the :guilabel:`Service scheduling` section of the doc for more information) and deleted.
+All services are displayed in the :guilabel:`automation/service_management` page in the ``Automation`` section.
 
 .. image:: /_static/services/service_system/service_management.png
    :alt: Service Editor
    :align: center
+
+From the :guilabel:`automation/service_management` page, you can:
+
+  - Start a service (``Run`` button)
+  - View the logs of the service.
+  - Edit the service properties.
+  - Compare the logs of the service.
+  - Delete the service.
+
+Clicking on the ``Compare`` button generates a line-by-line diff of the service logs between any two runs:
 
 Service Editor
 --------------

@@ -53,30 +53,31 @@ The results of the job ``get_facts`` is the following:
 
 ::
 
-  {
-    "success": true,
-    "devices": {
-        "router8": {
-            "success": true,
-            "result": {
-                "get_facts": {
-                    "uptime": 480,
-                    "vendor": "Cisco",
-                    "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
-                    "serial_number": "FHK111813HZ",
-                    "model": "1841",
-                    "hostname": "test",
-                    "fqdn": "test.pynms.fr",
-                    "interface_list": [
-                        "FastEthernet0/0",
-                        "FastEthernet0/1",
-                        "Serial0/0/0",
-                        "Loopback22"
-                    ]
-                }
-            }
-        }
-    }
+  "get_facts": {
+      "success": true,
+      "devices": {
+          "router8": {
+              "success": true,
+              "result": {
+                  "get_facts": {
+                      "uptime": 60,
+                      "vendor": "Cisco",
+                      "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
+                      "serial_number": "FHK111813HZ",
+                      "model": "1841",
+                      "hostname": "test",
+                      "fqdn": "test.pynms.fr",
+                      "interface_list": [
+                          "FastEthernet0/0",
+                          "FastEthernet0/1",
+                          "Serial0/0/0",
+                          "Loopback22",
+                          "Loopback100"
+                      ]
+                  }
+              }
+          }
+      }
   },
 
 Consequently, the ``payload`` variable received by ``process_payload1`` will look like this:
@@ -84,31 +85,32 @@ Consequently, the ``payload`` variable received by ``process_payload1`` will loo
 ::
 
   {
-      "get_facts": {
-          "success": true,
-          "devices": {
-              "router8": {
-                  "success": true,
-                  "result": {
-                      "get_facts": {
-                          "uptime": 480,
-                          "vendor": "Cisco",
-                          "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
-                          "serial_number": "FHK111813HZ",
-                          "model": "1841",
-                          "hostname": "test",
-                          "fqdn": "test.pynms.fr",
-                          "interface_list": [
-                              "FastEthernet0/0",
-                              "FastEthernet0/1",
-                              "Serial0/0/0",
-                              "Loopback22"
-                          ]
-                      }
-                  }
-              }
-          }
-      },
+    "get_facts": {
+        "success": true,
+        "devices": {
+            "router8": {
+                "success": true,
+                "result": {
+                    "get_facts": {
+                        "uptime": 60,
+                        "vendor": "Cisco",
+                        "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
+                        "serial_number": "FHK111813HZ",
+                        "model": "1841",
+                        "hostname": "test",
+                        "fqdn": "test.pynms.fr",
+                        "interface_list": [
+                            "FastEthernet0/0",
+                            "FastEthernet0/1",
+                            "Serial0/0/0",
+                            "Loopback22",
+                            "Loopback100"
+                        ]
+                    }
+                }
+            }
+        }
+    },
     "get_interfaces": {...},
     "get_config": {...},
     etc...
@@ -119,13 +121,13 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 ::
 
   def job(self, task, payload):
-      get_int = payload['task_get_interfaces']
+      get_int = workflow_results['get_interfaces']
       r8_int = get_int['devices']['router8']['result']['get_interfaces']
       speed_fa0 = r8_int['FastEthernet0/0']['speed']
       speed_fa1 = r8_int['FastEthernet0/1']['speed']
       same_speed = speed_fa0 == speed_fa1
 
-      get_facts = payload['task_get_facts']
+      get_facts = workflow_results['get_facts']
       r8_facts = get_facts['devices']['router8']['result']['get_facts']
       uptime_less_than_50000 = r8_facts['uptime'] < 50000
       return {
@@ -169,14 +171,14 @@ This is what the SwissArmyKnifeService class would look like with the last examp
       def job3(self, task, payload):
           return {'success': True, 'result': ''}
 
-      def process_payload1(self, task, payload):
-          get_int = payload['task_service_napalm_getter_get_interfaces']
+      def process_payload1(self, workflow_results=None):
+          get_int = workflow_results['get_interfaces']
           r8_int = get_int['devices']['router8']['result']['get_interfaces']
           speed_fa0 = r8_int['FastEthernet0/0']['speed']
           speed_fa1 = r8_int['FastEthernet0/1']['speed']
           same_speed = speed_fa0 == speed_fa1
   
-          get_facts = payload['task_service_napalm_getter_get_facts']
+          get_facts = workflow_results['get_facts']
           r8_facts = get_facts['devices']['router8']['result']['get_facts']
           uptime_less_than_50000 = r8_facts['uptime'] < 50000
           return {

@@ -1,5 +1,6 @@
 /*
 global
+showTaskModal: false
 tasks: false
 */
 

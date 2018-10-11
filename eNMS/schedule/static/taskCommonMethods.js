@@ -1,3 +1,8 @@
+/*
+global
+alertify: false
+*/
+
 /**
  * Show the task modal for task.
  * @param {id} id - Task id.
@@ -13,7 +18,6 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
       url: `/schedule/get/${id}`,
       dataType: 'json',
       success: function(properties) {
-        console.log(properties);
         if (!properties) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {

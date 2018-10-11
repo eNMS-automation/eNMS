@@ -158,7 +158,10 @@ def rest_service_test(user_client):
     # wait a bit for the task to run
     sleep(30)
     assert len(Device.query.all()) == 1
-    user_client.post('/automation/create_service/rest_call', data=delete_service)
+    user_client.post(
+        '/automation/create_service/rest_call',
+        data=delete_service
+    )
     assert len(Service.query.all()) == 5
     user_client.post('/schedule/scheduler', data=delete_service_task)
     assert len(Task.query.all()) == 2

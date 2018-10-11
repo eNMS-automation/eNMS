@@ -11,7 +11,7 @@ class ParallelSwissArmyKnifeService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'parallel_swiss_army_knife_service',
+        'polymorphic_identity': 'sak_parallel_service',
     }
 
     def job(self, workflow_results=None):
@@ -38,4 +38,4 @@ class ParallelSwissArmyKnifeService(Service):
         results['devices'][device.name] = True
 
 
-service_classes['parallel_swiss_army_knife_service'] = ParallelSwissArmyKnifeService
+service_classes['sak_parallel_service'] = ParallelSwissArmyKnifeService

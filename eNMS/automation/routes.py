@@ -333,13 +333,9 @@ def set_as_end(workflow_id, job_id):
 @login_required
 @permission_required('Edit workflows', redirect=False)
 def save_positions(workflow_id):
-    print(workflow_id)
     workflow = retrieve(Workflow, id=workflow_id)
-    print(workflow)
-    print(request.json)
     for job_id, position in request.json.items():
         job = retrieve(Job, id=job_id)
-        print(job_id, job, job.positions)
         job.positions[workflow.name] = (position['x'], position['y'])
     db.session.commit()
     return jsonify({'success': True})

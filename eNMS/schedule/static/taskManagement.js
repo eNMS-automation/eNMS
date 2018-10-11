@@ -1,11 +1,12 @@
 /*
 global
+alertify: false
 fields: false
 tasks: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
-const taskManagement = true;
+const taskManagement = true; // eslint-disable-line no-unused-vars
 
 /**
  * Add a task to the datatable.
@@ -41,7 +42,7 @@ function addTask(mode, properties) {
 /**
  * Schedule a task.
  */
-function scheduleTask() {
+function scheduleTask() { // eslint-disable-line no-unused-vars
   if ($('#task-modal-form').parsley().validate()) {
     $.ajax({
       type: 'POST',
@@ -49,7 +50,6 @@ function scheduleTask() {
       dataType: 'json',
       data: $('#task-modal-form').serialize(),
       success: function(task) {
-        console.log(taskManagement);
         if (!task) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {

@@ -1,14 +1,17 @@
 /*
 global
 alertify: false
+compareLogs: false
+editService: false
 partial: false
+runJob: false
 showLogs: false
-showJobModal: false
+showModal: false
 vis: false
 workflow: true
 */
 
-const workflowEditor = true;
+const workflowEditor = true; // eslint-disable-line no-unused-vars
 
 const container = document.getElementById('network');
 const dsoptions = {
@@ -346,7 +349,6 @@ $('#workflow-name').on('change', function() {
  * Save positions of the workflow nodes.
  */
 function savePositions() {
-  console.log(workflow, workflow.id);
   $.ajax({
     type: 'POST',
     url: `/automation/save_positions/${workflow.id}`,

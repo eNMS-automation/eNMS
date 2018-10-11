@@ -1,5 +1,5 @@
 from apscheduler.jobstores.base import JobLookupError
-from datetime import datetime, timedelta
+from datetime import datetime
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 

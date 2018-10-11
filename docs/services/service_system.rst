@@ -154,7 +154,7 @@ Service Management
 All services are displayed in the :guilabel:`automation/service_management` page in the ``Automation`` section.
 
 .. image:: /_static/services/service_system/service_management.png
-   :alt: Service Editor
+   :alt: Service Management page
    :align: center
 
 From the :guilabel:`automation/service_management` page, you can:
@@ -165,17 +165,9 @@ From the :guilabel:`automation/service_management` page, you can:
   - Compare the logs of the service.
   - Delete the service.
 
-Clicking on the ``Compare`` button generates a line-by-line diff of the service logs between any two runs:
+Clicking on the ``Compare`` button generates a line-by-line diff of the service logs between any two runs.
+Here's a comparison of a ``Napalm get_facts`` service:
 
-Service Editor
---------------
-
-.. image:: /_static/services/service_system/service_editor.png
-   :alt: Service Editor
+.. image:: /_static/services/service_system/service_compare_logs.png
+   :alt: Compare logs
    :align: center
-
-You can create and edit all services from the :guilabel:`services/service_editor` page in the ``Microservices`` section.
-  - The first drop-down list allows the user to choose a class of service (like the class ``ExampleService`` discussed previously).
-  - The second one contains all instances for that class of service (if there is no such instance, it is empty).
-  
-The form displayed below these two lists is the auto-generated form : it can be used both as a way to create new services, or edit existing ones.

@@ -221,7 +221,7 @@ def create_napalm_workflow():
             'source': services[i],
             'destination': services[i + 1]
         })
-    workflow.start_job, workflow.end_job = services[0].id, services[-1].id
+    workflow.start_job, workflow.end_job = services[0], services[-1]
     for index, service in enumerate(services):
         service.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
@@ -281,7 +281,7 @@ def create_payload_transfer_workflow():
             'source': services[x],
             'destination': services[y]
         })
-    workflow.start_job, workflow.end_job = services[0].id, services[-1].id
+    workflow.start_job, workflow.end_job = services[0], services[-1]
     positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
         services[index].positions['payload_transfer_workflow'] = x * 10, y * 10

@@ -2,6 +2,7 @@ from napalm import get_network_driver
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from re import compile, sub
 
 from eNMS import db, scheduler
 from eNMS.automation.models import Job
@@ -43,6 +44,10 @@ def napalm_connection(service, device):
         password=pwd,
         optional_args=optional_args
     )
+
+
+def substitute(data)
+    return compile('{{(.*?)}}').sub(lambda m: str(eval(m.group()[2:-2])), s)
 
 
 def scheduler_job(job_id):

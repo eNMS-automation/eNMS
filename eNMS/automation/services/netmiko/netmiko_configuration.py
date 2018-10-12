@@ -1,7 +1,11 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import netmiko_connection, NETMIKO_DRIVERS
+from eNMS.automation.helpers import (
+    netmiko_connection,
+    NETMIKO_DRIVERS,
+    substitute
+)
 from eNMS.automation.models import Service, service_classes
 
 
@@ -24,9 +28,10 @@ class NetmikoConfigurationService(Service):
 
     def job(self, device, results, payload):
         netmiko_handler = netmiko_connection(self, device)
-        netmiko_handler.send_config_set(self.content.splitlines())
+        config = substitute(self.content)
+        netmiko_handler.send_config_set(config.splitlines())
         netmiko_handler.disconnect()
-        return {'success': True, 'result': 'configuration OK'}
+        return {'success': True, 'result': f'configuration OK {config}'}
 
 
 service_classes['netmiko_configuration_service'] = NetmikoConfigurationService

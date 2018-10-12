@@ -2,7 +2,11 @@ from multiprocessing.pool import ThreadPool
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import netmiko_connection, NETMIKO_DRIVERS
+from eNMS.automation.helpers import (
+    netmiko_connection,
+    NETMIKO_DRIVERS,
+    substitute
+)
 from eNMS.automation.models import Service, service_classes
 
 
@@ -26,7 +30,7 @@ class NetmikoValidationService(Service):
 
     def job(self, device, results, payload):
         netmiko_handler = netmiko_connection(self, device)
-        output = netmiko_handler.send_command(self.content)
+        output = netmiko_handler.send_command(substitute(self.content))
         success = (
             self.content_match_regex and search(self.content_match, output)
             or self.content_match in output and not self.content_match_regex

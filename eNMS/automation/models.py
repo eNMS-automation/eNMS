@@ -99,14 +99,14 @@ class Service(Job):
         return serialized_object
 
     def run(self, payload=None, targets=None):
-        # payload and targets come from the workflow.
-        # if the service is run outside the context of a workflow, we use
-        # the services targets
-        # if it runs inside a workflow, and the workflow has devices of its own,
-        # targets will be set to the workflow devices
-        if not targets:
-            targets = self.compute_targets()
-        if targets:
+        if self.has_targets:
+            # payload and targets come from the workflow.
+            # if the service is run outside the context of a workflow, we use
+            # the services targets
+            # if it runs inside a workflow, and the workflow has devices of
+            # its own, targets will be set to the workflow devices
+            if not targets:
+                targets = self.compute_targets()
             results = {'success': True, 'devices': {}}
             pool = ThreadPool(processes=len(targets))
             pool.map(
@@ -115,10 +115,8 @@ class Service(Job):
             )
             pool.close()
             pool.join()
-            
-            
         else:
-            results = self.job()
+            results = self.job(payload)
         self.logs[str(datetime.now())] = results
         db.session.commit()
         return results

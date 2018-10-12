@@ -18,6 +18,7 @@ class RestCallService(Service):
     __tablename__ = 'RestCallService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = False
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
@@ -44,29 +45,23 @@ class RestCallService(Service):
     }
 
     def job(self, workflow_results=None):
-        try:
-            if self.call_type in ('GET', 'DELETE'):
-                result = self.request_dict[self.call_type](
-                    self.url,
-                    headers={'Accept': 'application/json'},
-                    auth=HTTPBasicAuth(self.username, self.password)
-                ).json()
-            else:
-                result = loads(self.request_dict[self.call_type](
-                    self.url,
-                    data=dumps(self.payload),
-                    auth=HTTPBasicAuth(self.username, self.password)
-                ).content)
-            if self.content_match_regex:
-                success = bool(search(self.content_match, str(result)))
-            else:
-                success = self.content_match in str(result)
-        except Exception as e:
-            result, success = str(e), False
-        return {
-            'success': success,
-            'result': result
-        }
+        if self.call_type in ('GET', 'DELETE'):
+            result = self.request_dict[self.call_type](
+                self.url,
+                headers={'Accept': 'application/json'},
+                auth=HTTPBasicAuth(self.username, self.password)
+            ).json()
+        else:
+            result = loads(self.request_dict[self.call_type](
+                self.url,
+                data=dumps(self.payload),
+                auth=HTTPBasicAuth(self.username, self.password)
+            ).content)
+        if self.content_match_regex:
+            success = bool(search(self.content_match, str(result)))
+        else:
+            success = self.content_match in str(result)
+        return {'success': success, 'result': result}
 
 
 service_classes['rest_call_service'] = RestCallService

@@ -7,7 +7,6 @@ from eNMS import db, scheduler
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.associations import task_log_rule_table
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
 
 

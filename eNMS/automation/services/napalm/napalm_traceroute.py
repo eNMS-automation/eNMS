@@ -35,7 +35,7 @@ class NapalmTracerouteService(Service):
             timeout=self.timeout or 2
         )
         napalm_driver.close()
-        return {'success': 'success' in traceroute, 'result': traceroute} 
+        return {'success': 'success' in traceroute, 'result': traceroute}
 
 
 service_classes['napalm_traceroute_service'] = NapalmTracerouteService

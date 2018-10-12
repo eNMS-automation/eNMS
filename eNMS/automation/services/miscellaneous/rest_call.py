@@ -46,7 +46,7 @@ class RestCallService(Service):
     }
 
     def job(self, *args):
-        if self.has_targets
+        if self.has_targets:
             device, results, payload = args
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
@@ -62,8 +62,8 @@ class RestCallService(Service):
             ).content)
         match = substitute(self.content_match, locals())
         success = (
-            self.content_match_regex and search(match, result)
-            or match in result and not self.content_match_regex
+            self.content_match_regex and search(match, result) or
+            match in result and not self.content_match_regex
         )
         return {'success': success, 'result': result}
 

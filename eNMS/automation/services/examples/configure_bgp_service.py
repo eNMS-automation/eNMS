@@ -1,4 +1,3 @@
-from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import napalm_connection

@@ -1,5 +1,4 @@
 from json import dumps
-from multiprocessing.pool import ThreadPool
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
@@ -30,7 +29,7 @@ class AnsiblePlaybookService(Service):
     }
 
     def job(self, device, results, payload):
-        arguments = substitue(self.arguments).split()
+        arguments = substitute(self.arguments, locals()).split()
         command = ['ansible-playbook']
         if self.pass_device_properties:
             command.extend(['-e', dumps(device.properties)])
@@ -44,8 +43,8 @@ class AnsiblePlaybookService(Service):
             pass
         match = substitute(self.content_match, locals())
         success = (
-            self.content_match_regex and search(match, result)
-            or match in result and not self.content_match_regex
+            self.content_match_regex and search(match, result) or
+            match in result and not self.content_match_regex
         )
         return {'success': False, 'result': result}
 

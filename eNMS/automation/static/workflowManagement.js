@@ -62,17 +62,14 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/automation/get/${id}`,
     success: function(properties) {
-      console.log(properties);
       if (!properties) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         for (const [property, value] of Object.entries(properties)) {
-          console.log(property, value);
           $(`#${property}`).val(value);
         }
         $('#devices').val(properties.devices.map((n) => n.id));
         $('#pools').val(properties.pools.map((p) => p.id));
-        console.log(properties.devices.map((n) => n.id), $('#devices'));
       }
     },
   });

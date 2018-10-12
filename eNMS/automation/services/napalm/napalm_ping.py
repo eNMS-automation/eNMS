@@ -40,7 +40,7 @@ class NapalmPingService(Service):
             count=self.count or 5
         )
         napalm_driver.close()
-        return {'success': 'success' in ping, 'result': ping} 
+        return {'success': 'success' in ping, 'result': ping}
 
 
 service_classes['napalm_ping_service'] = NapalmPingService

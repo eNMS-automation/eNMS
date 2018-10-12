@@ -24,30 +24,18 @@ class NetmikoValidationService(Service):
     }
 
     def job(self, device, results, payload):
-        try:
-            netmiko_handler = netmiko_connection(self, device)
-            output = netmiko_handler.send_command(self.content)
-            if self.content_match_regex:
-                if not bool(search(self.content_match, str(output))):
-                    success = False
-            else:
-                if self.content_match not in str(output):
-                    success = False
-            if not success:
-                results['success'] = False
-            result[command] = {
-                'output': output,
-                'expected': self.content_match,
-                'success': success
-            }
-            try:
-                netmiko_handler.disconnect()
-            except Exception:
-                pass
-        except Exception as e:
-            result, success = f'service failed ({e})', False
-            results['success'] = False
-        results['devices'][device.name] = {
+        netmiko_handler = netmiko_connection(self, device)
+        output = netmiko_handler.send_command(self.content)
+        if self.content_match_regex:
+            if not bool(search(self.content_match, str(output))):
+                success = False
+        else:
+            if self.content_match not in str(output):
+                success = False
+        netmiko_handler.disconnect()
+        return {
+            'output': output,
+            'expected': self.content_match,
             'success': success,
             'result': result
         }

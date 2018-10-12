@@ -21,17 +21,7 @@ class NetmikoConfigurationService(Service):
         'polymorphic_identity': 'netmiko_configuration_service',
     }
 
-    def job(self, workflow_results=None):
-        targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(self.device_job, [(device, results) for device in targets])
-        pool.close()
-        pool.join()
-        return results
-
-    def device_job(self, args):
-        device, results = args
+    def job(self, device, results, payload):
         try:
             netmiko_handler = netmiko_connection(self, device)
             netmiko_handler.send_config_set(self.content.splitlines())
@@ -42,11 +32,7 @@ class NetmikoConfigurationService(Service):
                 pass
         except Exception as e:
             result, success = f'service failed ({e})', False
-            results['success'] = False
-        results['devices'][device.name] = {
-            'success': success,
-            'result': result
-        }
+        return = {'success': success, 'result': result}
 
 
 service_classes['netmiko_configuration_service'] = NetmikoConfigurationService

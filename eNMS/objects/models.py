@@ -5,8 +5,8 @@ from sqlalchemy.orm import backref, relationship
 from eNMS.base.associations import (
     pool_device_table,
     pool_link_table,
-    service_device_table,
-    service_pool_table
+    job_device_table,
+    job_pool_table
 )
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import (
@@ -49,8 +49,8 @@ class Device(Object):
     password = Column(String)
     enable_password = Column(String)
     services = relationship(
-        'Service',
-        secondary=service_device_table,
+        'Job',
+        secondary=job_device_table,
         back_populates='devices'
     )
     pools = relationship(
@@ -126,9 +126,9 @@ class Pool(CustomBase):
         secondary=pool_link_table,
         back_populates='pools'
     )
-    services = relationship(
-        'Service',
-        secondary=service_pool_table,
+    jobs = relationship(
+        'Job',
+        secondary=job_pool_table,
         back_populates='pools'
     )
     device_name = Column(String)

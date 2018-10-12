@@ -44,6 +44,8 @@ class NetmikoValidationService(Service):
             else:
                 if self.content_match not in str(output):
                     success = False
+            if not success:
+                results['success'] = False
             result[command] = {
                 'output': output,
                 'expected': self.content_match,

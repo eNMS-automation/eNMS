@@ -98,13 +98,25 @@ class Service(Job):
         return serialized_object
 
     def run(self, workflow_results=None):
-        try:
-            results = self.job(workflow_results)
-        except Exception as e:
-            results = {'success': False, 'result': str(e)}
+        targets = self.compute_targets()
+        results = {'success': True, 'devices': {}}
+        pool = ThreadPool(processes=len(targets))
+        pool.map(
+            self.device_run,
+            [(device, results, workflow_results) for device in targets]
+        )
+        pool.close()
+        pool.join()
         self.logs[str(datetime.now())] = results
         db.session.commit()
         return results
+
+    def device_run(self, args):
+        device, results = args
+        try:
+            results[device.name] = self.job(workflow_results, device)
+        except Exception as e:
+            results[device.name] = {'success': False, 'result': str(e)}
 
     @property
     def serialized(self):

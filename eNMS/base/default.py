@@ -125,8 +125,8 @@ def create_netmiko_workflow():
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
-            'command1': 'show ip vrf',
-            'content_match1': 'TEST'
+            'content': 'show ip vrf',
+            'content_match': 'TEST'
         },
         {
             'type': service_classes['netmiko_configuration_service'],
@@ -149,9 +149,9 @@ def create_netmiko_workflow():
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
-            'command1': 'show ip vrf',
-            'content_match1': '^((?!TEST).)*$',
-            'content_match_regex1': 'y'
+            'content': 'show ip vrf',
+            'content_match': '^((?!TEST).)*$',
+            'content_match_regex': 'y'
         },
     ):
         instance = factory(service.pop('type'), **service)

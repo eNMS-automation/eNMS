@@ -1,5 +1,6 @@
 from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
 from eNMS.automation.models import Service, service_classes
@@ -13,6 +14,7 @@ class NapalmRollbackService(Service):
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     operating_system = Column(String)
+    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     vendor = Column(String)
 
     __mapper_args__ = {

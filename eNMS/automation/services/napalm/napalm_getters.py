@@ -56,11 +56,8 @@ class NapalmGettersService(Service):
         pool.join()
         return results
 
-    def device_job(self, args):
-        device, results = args
-        result = {}
-        try:
-            napalm_driver = napalm_connection(self, device, self.optional_args)
+    def job(self, device, results, payload):
+        napalm_driver = napalm_connection(self, device)
             napalm_driver.open()
             for getter in self.getters:
                 try:

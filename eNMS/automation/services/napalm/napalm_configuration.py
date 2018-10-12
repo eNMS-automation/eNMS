@@ -30,7 +30,7 @@ class NapalmConfigurationService(Service):
     }
 
     def job(self, device, results, payload):
-        napalm_driver = napalm_connection(self, device, self.optional_args)
+        napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         config = '\n'.join(self.content.splitlines())
         getattr(napalm_driver, self.action)(config=config)

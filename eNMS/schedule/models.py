@@ -4,17 +4,11 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from eNMS import db, scheduler
+from eNMS.automation.routes import scheduler_job
 from eNMS.base.associations import task_log_rule_table
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
-
-
-def scheduler_job(task_name):
-    with scheduler.app.app_context():
-        task = retrieve(Task, name=task_name)
-        workflow = task.job if task.type == 'WorkflowTask' else None
-        task.job.run(workflow)
 
 
 class Task(CustomBase):

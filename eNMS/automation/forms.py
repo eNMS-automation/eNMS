@@ -24,6 +24,8 @@ class WorkflowCreationForm(FlaskForm):
     description = TextField()
     vendor = TextField()
     operating_system = TextField()
+    devices = SelectMultipleField(choices=())
+    pools = SelectMultipleField(choices=())
 
 
 class WorkflowEditorForm(FlaskForm):

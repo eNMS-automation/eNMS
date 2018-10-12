@@ -203,13 +203,13 @@ class Workflow(Job):
         'polymorphic_identity': 'workflow',
     }
 
-    def run(self, workflow=None):
+    def run(self):
         runtime = str(datetime.now())
         start_job = retrieve(Job, id=self.start_job)
         if not start_job:
             return False, {runtime: 'No start task in the workflow.'}
         jobs, visited = [start_job], set()
-        workflow_results = {}
+        payload = {}
         while jobs:
             job = jobs.pop()
             # We check that all predecessors of the job have been visited
@@ -219,18 +219,18 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            job_results = job.run(workflow_results)
+            job_results = job.run(payload)
             success = job_results['success']
             if job.id == self.end_job:
-                workflow_results['success'] = success
+                payload['success'] = success
             for successor in job.job_successors(self, success):
                 if successor not in visited:
                     jobs.append(successor)
-            workflow_results[job.name] = job_results
+            payload[job.name] = job_results
             sleep(job.waiting_time)
-        self.logs[runtime] = workflow_results
+        self.logs[runtime] = payload
         db.session.commit()
-        return workflow_results
+        return payload
 
     @property
     def serialized(self):

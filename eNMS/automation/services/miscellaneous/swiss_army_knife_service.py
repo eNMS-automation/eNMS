@@ -14,26 +14,25 @@ class SwissArmyKnifeService(Service):
         'polymorphic_identity': 'swiss_army_knife_service',
     }
 
-    def job(self, workflow_results=None):
-        return getattr(self, self.name)(workflow_results)
+    def job(self, *args):
+        return getattr(self, self.name)(*args)
 
-    def job1(self, workflow_results=None):
+    # Instance call "job1" with has_targets set to True
+    def job1(self, device, results, payload):
         return {'success': True, 'result': ''}
 
-    def job2(self, workflow_results=None):
+    # Instance call "job2" with has_targets set to False
+    def job2(self, payload):
         return {'success': True, 'result': ''}
 
-    def job3(self, workflow_results=None):
-        return {'success': True, 'result': ''}
-
-    def process_payload1(self, workflow_results=None):
-        get_int = workflow_results['get_interfaces']
+    def process_payload1(self, payload):
+        get_int = payload['get_interfaces']
         r8_int = get_int['devices']['router8']['result']['get_interfaces']
         speed_fa0 = r8_int['FastEthernet0/0']['speed']
         speed_fa1 = r8_int['FastEthernet0/1']['speed']
         same_speed = speed_fa0 == speed_fa1
 
-        get_facts = workflow_results['get_facts']
+        get_facts = payload['get_facts']
         r8_facts = get_facts['devices']['router8']['result']['get_facts']
         uptime_less_than_50000 = r8_facts['uptime'] < 50000
         return {

@@ -16,30 +16,10 @@ class UpdateDeviceService(Service):
         'polymorphic_identity': 'update_device_service',
     }
 
-    def job(self, workflow_results=None):
-        targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(
-            self.update_device,
-            [(device, results) for device in targets])
-        pool.close()
-        pool.join()
-        return results
-
-    def update_device(self, args):
-        device, results = args
-        try:
-            for property, value in self.update_dictionnary.items():
-                setattr(device, property, value)
-            result, success = f'update successfully executed', False
-        except Exception as e:
-            result, success = f'service failed ({e})', False
-            results['success'] = False
-        results['devices'][device.name] = {
-            'success': success,
-            'result': result
-        }
+    def job(self, device, results, payload):
+        for property, value in self.update_dictionnary.items():
+            setattr(device, property, value)
+        return {'success': True, 'result': 'properties updated'}
 
 
 service_classes['update_device_service'] = UpdateDeviceService

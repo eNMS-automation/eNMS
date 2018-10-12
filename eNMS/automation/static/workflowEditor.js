@@ -219,14 +219,19 @@ function deleteEdge(edgeId) {
  * @return {visJob}.
  */
 function jobToNode(job) {
+  if (workflow.end_job) {
+    color = job.id == workflow.start_job.id ? 'green' :
+      job.id == workflow.end_job.id ? 'red' : '#D2E5FF';
+  } else {
+    color = '#D2E5FF';
+  }
   return {
     id: job.id,
     label: job.name,
     type: job.type,
     x: job.positions[workflow.name] ? job.positions[workflow.name][0] : 0,
     y: job.positions[workflow.name] ? job.positions[workflow.name][1] : 0,
-    color: job.id == workflow.start_job ? 'green' :
-      job.id == workflow.end_job ? 'red' : '#D2E5FF',
+    color: color
   };
 }
 
@@ -255,8 +260,8 @@ function startJob() {
   if (start.length == 0 || !start.id) {
     alertify.notify('You must select a job first.', 'error', 5);
   } else {
-    if (workflow.start_job != 'None') {
-      nodes.update({id: workflow.start_job, color: '#D2E5FF'});
+    if (workflow.start_job) {
+      nodes.update({id: workflow.start_job.id, color: '#D2E5FF'});
     }
     $.ajax({
       type: 'POST',
@@ -266,7 +271,7 @@ function startJob() {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           nodes.update({id: start.id, color: 'green'});
-          workflow.start_job = start.id;
+          workflow.start_job = start;
         }
       },
     });
@@ -282,8 +287,8 @@ function endJob() {
   if (end.length == 0 || !end.id) {
     alertify.notify('You must select a job first.', 'error', 5);
   } else {
-    if (workflow.end_job != 'None') {
-      nodes.update({id: workflow.end_job, color: '#D2E5FF'});
+    if (workflow.end_job) {
+      nodes.update({id: workflow.end_job.id, color: '#D2E5FF'});
     }
     $.ajax({
       type: 'POST',
@@ -293,7 +298,7 @@ function endJob() {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           nodes.update({id: end.id, color: 'red'});
-          workflow.end_job = end.id;
+          workflow.end_job = end;
         }
       },
     });

@@ -258,6 +258,10 @@ class Workflow(Job):
     @property
     def serialized(self):
         properties = self.properties
+        if self.start_job:
+            properties['start_job'] = self.start_job.properties
+        if self.end_job:
+            properties['end_job'] = self.end_job.properties
         properties['tasks'] = [
             obj.properties for obj in getattr(self, 'tasks')
         ]

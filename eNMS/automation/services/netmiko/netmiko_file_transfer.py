@@ -28,38 +28,20 @@ class NetmikoFileTransferService(Service):
         'polymorphic_identity': 'netmiko_file_transfer_service',
     }
 
-    def job(self, workflow_results=None):
-        targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(self.device_job, [(device, results) for device in targets])
-        pool.close()
-        pool.join()
-        return results
-
-    def device_job(self, args):
-        device, results = args
-        try:
-            netmiko_handler = netmiko_connection(self, device)
-            transfer_dict = file_transfer(
-                netmiko_handler,
-                source_file=self.source_file,
-                dest_file=self.dest_file,
-                file_system=self.file_system,
-                direction=self.direction,
-                overwrite_file=self.overwrite_file,
-                disable_md5=self.disable_md5,
-                inline_transfer=self.inline_transfer
-            )
-            result, success = transfer_dict, True
-            netmiko_handler.disconnect()
-        except Exception as e:
-            result, success = f'service failed ({e})', False
-            results['success'] = False
-        results['devices'][device.name] = {
-            'success': success,
-            'result': result
-        }
+    def job(self, device, results, payload):
+        netmiko_handler = netmiko_connection(self, device)
+        transfer_dict = file_transfer(
+            netmiko_handler,
+            source_file=self.source_file,
+            dest_file=self.dest_file,
+            file_system=self.file_system,
+            direction=self.direction,
+            overwrite_file=self.overwrite_file,
+            disable_md5=self.disable_md5,
+            inline_transfer=self.inline_transfer
+        )
+        netmiko_handler.disconnect()
+        return {'success': True, 'result': transfer_dict}
 
 
 service_classes['netmiko_file_transfer_service'] = NetmikoFileTransferService

@@ -29,32 +29,14 @@ class NapalmConfigurationService(Service):
         'polymorphic_identity': 'napalm_configuration_service',
     }
 
-    def job(self, workflow_results=None):
-        targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(self.device_job, [(device, results) for device in targets])
-        pool.close()
-        pool.join()
-        return results
-
-    def device_job(self, args):
-        device, results = args
-        try:
-            napalm_driver = napalm_connection(self, device, self.optional_args)
-            napalm_driver.open()
-            config = '\n'.join(self.content.splitlines())
-            getattr(napalm_driver, self.action)(config=config)
-            napalm_driver.commit_config()
-            napalm_driver.close()
-            result, success = f'Config push ({config})', True
-        except Exception as e:
-            result, success = f'service failed ({e})', False
-            results['success'] = False
-        results['devices'][device.name] = {
-            'success': success,
-            'result': result
-        }
+    def job(self, device, results, payload):
+        napalm_driver = napalm_connection(self, device, self.optional_args)
+        napalm_driver.open()
+        config = '\n'.join(self.content.splitlines())
+        getattr(napalm_driver, self.action)(config=config)
+        napalm_driver.commit_config()
+        napalm_driver.close()
+        return {'success': success, 'result': f'Config push ({config})'}
 
 
 service_classes['napalm_configuration_service'] = NapalmConfigurationService

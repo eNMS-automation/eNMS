@@ -232,6 +232,8 @@ def create_payload_transfer_workflow():
         'name': 'GET_router8',
         'type': service_classes['rest_call_service'],
         'description': 'Use GET ReST call on router8',
+        'username': 'admin',
+        'password': 'admin',
         'waiting_time': 0,
         'devices': [retrieve(Device, name='router8')],
         'content_match': '',

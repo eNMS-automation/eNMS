@@ -79,7 +79,7 @@ function saveService() { // eslint-disable-line no-unused-vars
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          if (!workflowEditor) {
+          if (typeof workflowEditor === 'undefined') {
             addService(mode, service);
           }
           const message = `Service '${service.name}'

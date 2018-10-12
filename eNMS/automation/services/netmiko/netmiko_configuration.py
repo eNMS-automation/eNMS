@@ -24,9 +24,8 @@ class NetmikoConfigurationService(Service):
     def job(self, device, results, payload):
         netmiko_handler = netmiko_connection(self, device)
         netmiko_handler.send_config_set(self.content.splitlines())
-        result, success = f'configuration OK', True
         netmiko_handler.disconnect()
-        return {'success': success, 'result': result}
+        return {'success': True, 'result': 'configuration OK'}
 
 
 service_classes['netmiko_configuration_service'] = NetmikoConfigurationService

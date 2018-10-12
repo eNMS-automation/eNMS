@@ -37,7 +37,6 @@ class NetmikoValidationService(Service):
             'output': output,
             'expected': self.content_match,
             'success': success,
-            'result': result
         }
 
 

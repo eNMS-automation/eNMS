@@ -204,6 +204,26 @@ class Workflow(Job):
     }
 
     def run(self):
+        targets = self.compute_targets()
+        if targets:
+            # devices / pools were defined at workflow level: they are all we
+            # consider and the targets defined at task level will be overriden
+            results = {'success': True, 'devices': {}}
+            pool = ThreadPool(processes=len(targets))
+            pool.map([(device, results) for device in targets])
+            pool.close()
+            pool.join()
+        else:
+            results = self.job()
+        self.logs[str(datetime.now())] = results
+        db.session.commit()
+        return results
+
+    def job(self, args=None):
+        if args:
+            device, results = args
+        else:
+            device = None
         runtime = str(datetime.now())
         start_job = retrieve(Job, id=self.start_job)
         if not start_job:
@@ -219,7 +239,7 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            job_results = job.run(payload)
+            job_results = job.run(payload, device)
             success = job_results['success']
             if job.id == self.end_job:
                 payload['success'] = success
@@ -228,9 +248,10 @@ class Workflow(Job):
                     jobs.append(successor)
             payload[job.name] = job_results
             sleep(job.waiting_time)
-        self.logs[runtime] = payload
-        db.session.commit()
-        return payload
+        if device:
+            results['devices'][device.name] = payload
+        else:
+            return payload
 
     @property
     def serialized(self):

@@ -4,7 +4,8 @@ from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 
 from eNMS import scheduler
-from eNMS.base.helpers import get_device_credentials
+from eNMS.automation.models import Job
+from eNMS.base.helpers import get_device_credentials, retrieve
 
 NETMIKO_DRIVERS = sorted(
     (driver, driver) for driver in CLASS_MAPPER
@@ -42,3 +43,8 @@ def napalm_connection(service, device):
         password=pwd,
         optional_args=optional_args
     )
+
+
+def scheduler_job(job_id):
+    with scheduler.app.app_context():
+        retrieve(Job, id=job_id).run()

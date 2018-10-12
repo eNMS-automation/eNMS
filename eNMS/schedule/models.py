@@ -4,7 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from eNMS import db, scheduler
-from eNMS.automation.routes import scheduler_job
+from eNMS.automation.helpers import scheduler_job
 from eNMS.base.associations import task_log_rule_table
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import retrieve

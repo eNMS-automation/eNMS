@@ -22,6 +22,7 @@ from eNMS.automation.forms import (
     WorkflowEditorForm,
     WorkflowCreationForm
 )
+from eNMS.automation.helpers import scheduler_job
 from eNMS.automation.models import (
     Job,
     Service,
@@ -30,11 +31,6 @@ from eNMS.automation.models import (
     Workflow
 )
 from eNMS.schedule.forms import SchedulingForm
-
-
-def scheduler_job(job_id):
-    with scheduler.app.app_context():
-        retrieve(Job, id=job_id).run()
 
 
 @blueprint.route('/service_management')
@@ -49,7 +45,6 @@ def service_management():
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,
         names=pretty_names,
-        scheduling_form=scheduling_form,
         property_types={k: str(v) for k, v in property_types.items()},
         service_form=service_form,
         services_classes=list(service_classes),
@@ -68,10 +63,9 @@ def workflow_management():
         'workflow_management.html',
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
-        scheduling_form=scheduling_form,
         fields=workflow_table_properties,
         workflows=Workflow.serialize(),
-        form=
+        workflow_creation_form=workflow_creation_form
     )
 
 
@@ -248,7 +242,14 @@ def get_workflow(workflow_id):
 @login_required
 @permission_required('Edit workflows', redirect=False)
 def edit_workflow():
-    return jsonify(factory(Workflow, **request.form.to_dict()).serialized)
+    form = dict(request.form.to_dict())
+    form['devices'] = [
+        retrieve(Device, id=id) for id in request.form.getlist('devices')
+    ]
+    form['pools'] = [
+        retrieve(Pool, id=id) for id in request.form.getlist('pools')
+    ]
+    return jsonify(factory(Workflow, **form).serialized)
 
 
 @blueprint.route('/delete/<workflow_id>', methods=['POST'])

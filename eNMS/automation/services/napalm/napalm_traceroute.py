@@ -25,36 +25,18 @@ class NapalmTracerouteService(Service):
         'polymorphic_identity': 'napalm_traceroute_service',
     }
 
-    def job(self, workflow_results):
-        targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(self.device_job, [(device, results) for device in targets])
-        pool.close()
-        pool.join()
-        return results
-
-    def device_job(self, args):
-        device, results = args
-        try:
-            napalm_driver = napalm_connection(self, device)
-            napalm_driver.open()
-            traceroute = napalm_driver.traceroute(
-                device.ip_address,
-                source=self.source,
-                vrf=self.vrf,
-                ttl=self.ttl or 255,
-                timeout=self.timeout or 2
-            )
-            napalm_driver.close()
-            result, success = traceroute, 'success' in traceroute
-        except Exception as e:
-            result, success = f'service failed ({e})', False
-            results['success'] = False
-        results['devices'][device.name] = {
-            'success': success,
-            'result': result
-        }
+    def job(self, device, results, payload):
+        napalm_driver = napalm_connection(self, device)
+        napalm_driver.open()
+        traceroute = napalm_driver.traceroute(
+            device.ip_address,
+            source=self.source,
+            vrf=self.vrf,
+            ttl=self.ttl or 255,
+            timeout=self.timeout or 2
+        )
+        napalm_driver.close()
+        return {'success': 'success' in traceroute, 'result': traceroute} 
 
 
 service_classes['napalm_traceroute_service'] = NapalmTracerouteService

@@ -11,15 +11,9 @@ class NetmikoValidationService(Service):
     __tablename__ = 'NetmikoValidationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    command1 = Column(String)
-    command2 = Column(String)
-    command3 = Column(String)
-    content_match1 = Column(String)
-    content_match2 = Column(String)
-    content_match3 = Column(String)
-    content_match_regex1 = Column(Boolean)
-    content_match_regex2 = Column(Boolean)
-    content_match_regex3 = Column(Boolean)
+    content = Column(String)
+    content_match = Column(String)
+    content_match_regex = Column(Boolean)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     operating_system = Column(String)
@@ -43,23 +37,18 @@ class NetmikoValidationService(Service):
         success, result = True, {}
         try:
             netmiko_handler = netmiko_connection(self, device)
-            for i in range(1, 4):
-                command = getattr(self, 'command' + str(i))
-                if not command:
-                    continue
-                output = netmiko_handler.send_command(command)
-                expected = getattr(self, 'content_match' + str(i))
-                if getattr(self, 'content_match_regex' + str(i)):
-                    if not bool(search(expected, str(output))):
-                        success = False
-                else:
-                    if expected not in str(output):
-                        success = False
-                result[command] = {
-                    'output': output,
-                    'expected': expected,
-                    'success': success
-                }
+            output = netmiko_handler.send_command(self.content)
+            if self.content_match_regex:
+                if not bool(search(self.content_match, str(output))):
+                    success = False
+            else:
+                if self.content_match not in str(output):
+                    success = False
+            result[command] = {
+                'output': output,
+                'expected': self.content_match,
+                'success': success
+            }
             try:
                 netmiko_handler.disconnect()
             except Exception:

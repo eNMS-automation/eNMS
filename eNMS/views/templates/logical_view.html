@@ -107,7 +107,6 @@
     var labels = {{ labels|tojson|safe }};
   </script>
   <!-- Create service graphically -->
-  <script src="{{ url_for('automation_blueprint.static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='serviceEditor.js') }}"></script>
   <script>
     var device_fields = {{ device_fields|tojson|safe }};

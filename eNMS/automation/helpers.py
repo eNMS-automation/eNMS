@@ -29,6 +29,7 @@ def netmiko_connection(service, device):
 
 
 def napalm_connection(service, device):
+    optional_args = service.optional_args
     if not optional_args:
         optional_args = {}
     username, pwd, enable_pwd = get_device_credentials(scheduler.app, device)
@@ -39,5 +40,5 @@ def napalm_connection(service, device):
         hostname=device.ip_address,
         username=username,
         password=pwd,
-        optional_args=service.optional_args
+        optional_args=optional_args
     )

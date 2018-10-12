@@ -48,7 +48,7 @@ class Device(Object):
     username = Column(String)
     password = Column(String)
     enable_password = Column(String)
-    services = relationship(
+    jobs = relationship(
         'Job',
         secondary=job_device_table,
         back_populates='devices'

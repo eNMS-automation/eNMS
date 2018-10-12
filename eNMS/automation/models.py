@@ -7,8 +7,8 @@ from time import sleep
 
 from eNMS import db
 from eNMS.base.associations import (
-    service_device_table,
-    service_pool_table,
+    job_device_table,
+    job_pool_table,
     job_workflow_table
 )
 from eNMS.base.custom_base import CustomBase
@@ -36,12 +36,12 @@ class Job(CustomBase):
     devices = relationship(
         'Device',
         secondary=job_device_table,
-        back_populates='services'
+        back_populates='jobs'
     )
     pools = relationship(
         'Pool',
         secondary=job_pool_table,
-        back_populates='services'
+        back_populates='jobs'
     )
 
     __mapper_args__ = {
@@ -73,7 +73,6 @@ class Service(Job):
     __tablename__ = 'Service'
 
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
-    device_multiprocessing = False
     private = {'id'}
 
     __mapper_args__ = {

@@ -67,10 +67,12 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         for (const [property, value] of Object.entries(properties)) {
-          $(`#property-${property}`).val(value);
+          console.log(property, value);
+          $(`#${property}`).val(value);
         }
         $('#devices').val(properties.devices.map((n) => n.id));
         $('#pools').val(properties.pools.map((p) => p.id));
+        console.log(properties.devices.map((n) => n.id), $('#devices'));
       }
     },
   });

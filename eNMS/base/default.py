@@ -171,7 +171,7 @@ def create_netmiko_workflow():
             'source': services[i],
             'destination': services[i + 1]
         })
-    workflow.start_job, workflow.end_job = services[0].id, services[-1].id
+    workflow.start_job, workflow.end_job = services[0], services[-1]
     for index, service in enumerate(services):
         service.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
 
@@ -289,6 +289,6 @@ def create_payload_transfer_workflow():
 
 def create_default_workflows():
     create_netmiko_workflow()
-    create_napalm_workflow()
-    create_payload_transfer_workflow()
+    # create_napalm_workflow()
+    # create_payload_transfer_workflow()
     create_default_services()

@@ -314,7 +314,7 @@ def delete_edge(workflow_id, edge_id):
 @permission_required('Edit workflows', redirect=False)
 def set_as_start(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
-    workflow.start_job = job_id
+    workflow.start_job = retrieve(Job, id=job_id)
     db.session.commit()
     return jsonify({'success': True})
 
@@ -324,7 +324,7 @@ def set_as_start(workflow_id, job_id):
 @permission_required('Edit workflows', redirect=False)
 def set_as_end(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
-    workflow.end_job = job_id
+    workflow.end_job = retrieve(Job, id=job_id)
     db.session.commit()
     return jsonify({'success': True})
 

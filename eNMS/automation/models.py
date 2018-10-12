@@ -196,8 +196,18 @@ class Workflow(Job):
         back_populates='workflows'
     )
     edges = relationship('WorkflowEdge', back_populates='workflow')
-    start_job = Column(Integer)
-    end_job = Column(Integer)
+    start_job_id = Column(Integer, ForeignKey('Workflow.id'))
+    start_job = relationship(
+        'Job',
+        primaryjoin='Job.id == Workflow.start_job_id',
+        foreign_keys='Workflow.start_job_id'
+    )
+    end_job_id = Column(Integer, ForeignKey('Workflow.id'))
+    end_job = relationship(
+        'Job',
+        primaryjoin='Job.id == Workflow.end_job_id',
+        foreign_keys='Workflow.end_job_id'
+    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',
@@ -210,7 +220,7 @@ class Workflow(Job):
             # consider and the targets defined at task level will be overriden
             results = {'success': True, 'devices': {}}
             pool = ThreadPool(processes=len(targets))
-            pool.map([(device, results) for device in targets])
+            pool.map(self.scheduler_job, [(device, results) for device in targets])
             pool.close()
             pool.join()
         else:
@@ -225,10 +235,7 @@ class Workflow(Job):
         else:
             device = None
         runtime = str(datetime.now())
-        start_job = retrieve(Job, id=self.start_job)
-        if not start_job:
-            return False, {runtime: 'No start task in the workflow.'}
-        jobs, visited = [start_job], set()
+        jobs, visited = [self.start_job], set()
         payload = {}
         while jobs:
             job = jobs.pop()
@@ -241,7 +248,7 @@ class Workflow(Job):
             visited.add(job)
             job_results = job.run(payload, device)
             success = job_results['success']
-            if job.id == self.end_job:
+            if job == self.end_job:
                 payload['success'] = success
             for successor in job.job_successors(self, success):
                 if successor not in visited:

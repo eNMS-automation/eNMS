@@ -215,12 +215,13 @@ class Workflow(Job):
 
     def run(self):
         targets = self.compute_targets()
+        print(targets, len(targets))
         if targets:
             # devices / pools were defined at workflow level: they are all we
             # consider and the targets defined at task level will be overriden
             results = {'success': True, 'devices': {}}
             pool = ThreadPool(processes=len(targets))
-            pool.map(self.scheduler_job, [(device, results) for device in targets])
+            pool.map(self.job, [(device, results) for device in targets])
             pool.close()
             pool.join()
         else:
@@ -230,10 +231,8 @@ class Workflow(Job):
         return results
 
     def job(self, args=None):
-        if args:
-            device, results = args
-        else:
-            device = None
+        device, results = args
+        target = {device} if device else None
         runtime = str(datetime.now())
         jobs, visited = [self.start_job], set()
         payload = {}
@@ -246,7 +245,7 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            job_results = job.run(payload, device)
+            job_results = job.run(payload, target)
             success = job_results['success']
             if job == self.end_job:
                 payload['success'] = success
@@ -255,8 +254,8 @@ class Workflow(Job):
                     jobs.append(successor)
             payload[job.name] = job_results
             sleep(job.waiting_time)
-        if device:
-            results['devices'][device.name] = payload
+        if target:
+            results['devices'][target.name] = payload
         else:
             return payload
 

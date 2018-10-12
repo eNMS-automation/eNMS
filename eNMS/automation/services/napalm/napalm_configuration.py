@@ -37,7 +37,7 @@ class NapalmConfigurationService(Service):
         getattr(napalm_driver, self.action)(config=config)
         napalm_driver.commit_config()
         napalm_driver.close()
-        return {'success': success, 'result': f'Config push ({config})'}
+        return {'success': True, 'result': f'Config push ({config})'}
 
 
 service_classes['napalm_configuration_service'] = NapalmConfigurationService

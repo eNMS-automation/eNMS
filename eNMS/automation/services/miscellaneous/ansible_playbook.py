@@ -42,10 +42,10 @@ class AnsiblePlaybookService(Service):
             result = result.decode('utf-8')
         except AttributeError:
             pass
-        if self.content_match_regex:
-            success = bool(search(self.content_match, str(result)))
-        else:
-            success = self.content_match in str(result)
+        success = (
+            self.content_match_regex and search(self.content_match, output)
+            or self.content_match in output and not self.content_match_regex
+        )
         return {'success': False, 'result': result}
 
 

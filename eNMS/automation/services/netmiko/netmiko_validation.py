@@ -27,12 +27,10 @@ class NetmikoValidationService(Service):
     def job(self, device, results, payload):
         netmiko_handler = netmiko_connection(self, device)
         output = netmiko_handler.send_command(self.content)
-        if self.content_match_regex:
-            if not bool(search(self.content_match, str(output))):
-                success = False
-        else:
-            if self.content_match not in str(output):
-                success = False
+        success = (
+            self.content_match_regex and search(self.content_match, output)
+            or self.content_match in output and not self.content_match_regex
+        )
         netmiko_handler.disconnect()
         return {
             'output': output,

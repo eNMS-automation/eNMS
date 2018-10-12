@@ -3,7 +3,7 @@ from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 
-from eNMS import scheduler
+from eNMS import db, scheduler
 from eNMS.automation.models import Job
 from eNMS.base.helpers import get_device_credentials, retrieve
 
@@ -48,3 +48,4 @@ def napalm_connection(service, device):
 def scheduler_job(job_id):
     with scheduler.app.app_context():
         retrieve(Job, id=job_id).run()
+        db.session.commit()

@@ -289,6 +289,6 @@ def create_payload_transfer_workflow():
 
 def create_default_workflows():
     create_netmiko_workflow()
-    # create_napalm_workflow()
-    # create_payload_transfer_workflow()
+    create_napalm_workflow()
+    create_payload_transfer_workflow()
     create_default_services()

@@ -117,7 +117,8 @@ class Service(Job):
         else:
             results = self.job(payload)
         self.logs[str(datetime.now())] = results
-        db.session.commit()
+        # with scheduler.app.app_context():
+        # db.session.commit()
         return results
 
     def device_run(self, args):
@@ -215,7 +216,6 @@ class Workflow(Job):
 
     def run(self):
         targets = self.compute_targets()
-        print(targets, len(targets))
         if targets:
             # devices / pools were defined at workflow level: they are all we
             # consider and the targets defined at task level will be overriden
@@ -227,12 +227,10 @@ class Workflow(Job):
         else:
             results = self.job()
         self.logs[str(datetime.now())] = results
-        db.session.commit()
-        return results
 
     def job(self, args=None):
-        device, results = args
-        target = {device} if device else None
+        if args:
+            device, results = args
         runtime = str(datetime.now())
         jobs, visited = [self.start_job], set()
         payload = {}
@@ -245,7 +243,7 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            job_results = job.run(payload, target)
+            job_results = job.run(payload, {device} if args else None)
             success = job_results['success']
             if job == self.end_job:
                 payload['success'] = success
@@ -254,8 +252,8 @@ class Workflow(Job):
                     jobs.append(successor)
             payload[job.name] = job_results
             sleep(job.waiting_time)
-        if target:
-            results['devices'][target.name] = payload
+        if args:
+            results['devices'][device.name] = payload
         else:
             return payload
 

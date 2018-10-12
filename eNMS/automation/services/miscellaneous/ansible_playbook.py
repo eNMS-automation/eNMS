@@ -30,20 +30,19 @@ class AnsiblePlaybookService(Service):
     }
 
     def job(self, device, results, payload):
-        device, results = args
         arguments = substitue(self.arguments).split()
         command = ['ansible-playbook']
         if self.pass_device_properties:
             command.extend(['-e', dumps(device.properties)])
         if self.inventory_from_selection:
             command.extend(['-i', device.ip_address + ','])
-        command.append(substitute(self.playbook_path))
+        command.append(substitute(self.playbook_path, locals()))
         result = check_output(command + arguments)
         try:
             result = result.decode('utf-8')
         except AttributeError:
             pass
-        match = substitute(self.content_match)
+        match = substitute(self.content_match, locals())
         success = (
             self.content_match_regex and search(match, result)
             or match in result and not self.content_match_regex

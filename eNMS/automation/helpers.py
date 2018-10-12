@@ -46,8 +46,10 @@ def napalm_connection(service, device):
     )
 
 
-def substitute(data):
-    return compile('{{(.*?)}}').sub(lambda m: str(eval(m.group()[2:-2])), data)
+def substitute(data, variables):
+    r = compile('{{(.*?)}}')
+    replace_with_locals = lambda m: str(eval(m.group()[2:-2], variables))
+    return r.sub(replace_with_locals, data)
 
 
 def scheduler_job(job_id):

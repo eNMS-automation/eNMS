@@ -19,7 +19,7 @@ class RestCallService(Service):
     __tablename__ = 'RestCallService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = False
+    has_targets = Column(Boolean)
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
@@ -45,20 +45,22 @@ class RestCallService(Service):
         'polymorphic_identity': 'rest_call_service',
     }
 
-    def job(self, workflow_results=None):
+    def job(self, *args):
+        if self.has_targets
+            device, results, payload = args
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
-                substitute(self.url),
+                substitute(self.url, locals()),
                 headers={'Accept': 'application/json'},
                 auth=HTTPBasicAuth(self.username, self.password)
             ).json()
         else:
             result = loads(self.request_dict[self.call_type](
-                substitute(self.url),
+                substitute(self.url, locals()),
                 data=dumps(self.payload),
                 auth=HTTPBasicAuth(self.username, self.password)
             ).content)
-        match = substitute(self.content_match)
+        match = substitute(self.content_match, locals())
         success = (
             self.content_match_regex and search(match, result)
             or match in result and not self.content_match_regex

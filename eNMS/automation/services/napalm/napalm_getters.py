@@ -60,7 +60,7 @@ class NapalmGettersService(Service):
                 result[getter] = getattr(napalm_driver, getter)()
             except Exception as e:
                 result[getter] = f'{getter} failed because of {e}'
-        output, match = str(result), substitue(self.content_match)
+        output, match = str(result), substitute(self.content_match, locals())
         success = (
             self.content_match_regex and search(match, output)
             or match in output and not self.content_match_regex

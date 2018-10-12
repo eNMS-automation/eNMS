@@ -28,7 +28,7 @@ class NetmikoConfigurationService(Service):
 
     def job(self, device, results, payload):
         netmiko_handler = netmiko_connection(self, device)
-        config = substitute(self.content)
+        config = substitute(self.content, locals())
         netmiko_handler.send_config_set(config.splitlines())
         netmiko_handler.disconnect()
         return {'success': True, 'result': f'configuration OK {config}'}

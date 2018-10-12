@@ -117,17 +117,15 @@ class Service(Job):
         else:
             results = self.job(payload)
         self.logs[str(datetime.now())] = results
-        # with scheduler.app.app_context():
-        # db.session.commit()
         return results
 
     def device_run(self, args):
         device, results, payload = args
         try:
-            results[device.name] = self.job(device, results, payload)
+            results['devices'][device.name] = self.job(device, results, payload)
         except Exception as e:
-            results[device.name] = {'success': False, 'result': str(e)}
-        if not results[device.name]['success']:
+            results['devices'][device.name] = {'success': False, 'result': str(e)}
+        if not results['devices'][device.name]['success']:
             results['success'] = False
 
     @property

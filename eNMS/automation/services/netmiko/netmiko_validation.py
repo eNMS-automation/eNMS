@@ -23,18 +23,7 @@ class NetmikoValidationService(Service):
         'polymorphic_identity': 'netmiko_validation_service',
     }
 
-    def job(self, workflow_results=None):
-        targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(self.device_job, [(device, results) for device in targets])
-        pool.close()
-        pool.join()
-        return results
-
-    def device_job(self, args):
-        device, results = args
-        success, result = True, {}
+    def job(self, device, results, payload):
         try:
             netmiko_handler = netmiko_connection(self, device)
             output = netmiko_handler.send_command(self.content)

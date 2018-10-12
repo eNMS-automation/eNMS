@@ -1,4 +1,5 @@
 from datetime import datetime
+from multiprocessing.pool import ThreadPool
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
@@ -97,26 +98,33 @@ class Service(Job):
         ]
         return serialized_object
 
-    def run(self, workflow_results=None):
+    def run(self, payload=None):
+        print('ttt'*1000)
         targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(
-            self.device_run,
-            [(device, results, workflow_results) for device in targets]
-        )
-        pool.close()
-        pool.join()
-        self.logs[str(datetime.now())] = results
-        db.session.commit()
+        print('aaa'*1000)
+        try:
+            results = {'success': True, 'devices': {}}
+            pool = ThreadPool(processes=len(targets))
+            pool.map(
+                self.device_run,
+                [(device, results, payload) for device in targets]
+            )
+            pool.close()
+            pool.join()
+            self.logs[str(datetime.now())] = results
+            db.session.commit()
+        except Exception as e:
+            print(str(e))
         return results
 
     def device_run(self, args):
-        device, results = args
+        device, results, payload = args
         try:
-            results[device.name] = self.job(workflow_results, device)
+            results[device.name] = self.job(device, results, payload)
         except Exception as e:
             results[device.name] = {'success': False, 'result': str(e)}
+        if not results[device.name]['success']:
+            results['success'] = False
 
     @property
     def serialized(self):

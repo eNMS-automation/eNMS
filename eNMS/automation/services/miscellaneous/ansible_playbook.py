@@ -5,6 +5,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 
+from eNMS.automation.helpers import substitute
 from eNMS.automation.models import Service, service_classes
 
 
@@ -30,21 +31,22 @@ class AnsiblePlaybookService(Service):
 
     def job(self, device, results, payload):
         device, results = args
-        arguments = self.arguments.split()
+        arguments = substitue(self.arguments).split()
         command = ['ansible-playbook']
         if self.pass_device_properties:
             command.extend(['-e', dumps(device.properties)])
         if self.inventory_from_selection:
             command.extend(['-i', device.ip_address + ','])
-        command.append(self.playbook_path)
+        command.append(substitute(self.playbook_path))
         result = check_output(command + arguments)
         try:
             result = result.decode('utf-8')
         except AttributeError:
             pass
+        match = substitute(self.content_match)
         success = (
-            self.content_match_regex and search(self.content_match, output)
-            or self.content_match in output and not self.content_match_regex
+            self.content_match_regex and search(match, result)
+            or match in result and not self.content_match_regex
         )
         return {'success': False, 'result': result}
 

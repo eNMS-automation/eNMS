@@ -3,7 +3,11 @@ from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
+from eNMS.automation.helpers import (
+    napalm_connection,
+    NAPALM_DRIVERS,
+    substitute
+)
 from eNMS.automation.models import Service, service_classes
 
 
@@ -56,9 +60,10 @@ class NapalmGettersService(Service):
                 result[getter] = getattr(napalm_driver, getter)()
             except Exception as e:
                 result[getter] = f'{getter} failed because of {e}'
+        output, match = str(result), substitue(self.content_match)
         success = (
-            self.content_match_regex and search(self.content_match, output)
-            or self.content_match in output and not self.content_match_regex
+            self.content_match_regex and search(match, output)
+            or match in output and not self.content_match_regex
         )
         napalm_driver.close()
         return {'success': success, 'result': result}

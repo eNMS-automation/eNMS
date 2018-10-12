@@ -10,6 +10,7 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
+from eNMS.automation.helpers import substitute
 from eNMS.automation.models import Service, service_classes
 
 
@@ -47,19 +48,20 @@ class RestCallService(Service):
     def job(self, workflow_results=None):
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
-                self.url,
+                substitute(self.url),
                 headers={'Accept': 'application/json'},
                 auth=HTTPBasicAuth(self.username, self.password)
             ).json()
         else:
             result = loads(self.request_dict[self.call_type](
-                self.url,
+                substitute(self.url),
                 data=dumps(self.payload),
                 auth=HTTPBasicAuth(self.username, self.password)
             ).content)
+        match = substitute(self.content_match)
         success = (
-            self.content_match_regex and search(self.content_match, output)
-            or self.content_match in output and not self.content_match_regex
+            self.content_match_regex and search(match, result)
+            or match in result and not self.content_match_regex
         )
         return {'success': success, 'result': result}
 

@@ -2,7 +2,11 @@ from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
+from eNMS.automation.helpers import (
+    napalm_connection,
+    NAPALM_DRIVERS,
+    substitute
+)
 from eNMS.automation.models import Service, service_classes
 
 
@@ -33,7 +37,7 @@ class NapalmConfigurationService(Service):
     def job(self, device, results, payload):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
-        config = '\n'.join(self.content.splitlines())
+        config = '\n'.join(substitue(self.content).splitlines())
         getattr(napalm_driver, self.action)(config=config)
         napalm_driver.commit_config()
         napalm_driver.close()

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
 from eNMS.automation.models import Service, service_classes
 

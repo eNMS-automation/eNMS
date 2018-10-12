@@ -36,6 +36,7 @@ class ExampleService(Service):
     __tablename__ = 'ExampleService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = False
     # the "vendor" property will be displayed as a drop-down list, because
     # there is an associated "vendor_values" property in the class.
     vendor = Column(String)
@@ -74,22 +75,18 @@ class ExampleService(Service):
         'polymorphic_identity': 'example_service',
     }
 
-    def job(self, incoming_payload):
+    def job(self, payload):
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.vendor,
         # self.boolean1, etc)
-        # The target devices can be computed via "self.compute_targets()".
         # You can look at how default services (netmiko, napalm, etc.) are
         # implemented in the /services subfolders (/netmiko, /napalm, etc).
-        results = {'success': True, 'devices': {}}
-        for device in self.compute_targets():
-            results['devices'][device.name] = True
         # "results" is a dictionnary that will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.
         # In a workflow, the "success" value will determine whether to move
         # forward with a "Success" edge or a "Failure" edge.
-        return results
+        return {'success': True, 'result': 'example'}
 
 
 service_classes['example_service'] = ExampleService

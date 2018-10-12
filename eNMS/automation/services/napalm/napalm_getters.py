@@ -12,6 +12,7 @@ class NapalmGettersService(Service):
     __tablename__ = 'NapalmGettersService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     driver = Column(String)
@@ -47,37 +48,20 @@ class NapalmGettersService(Service):
         'polymorphic_identity': 'napalm_getters_service',
     }
 
-    def job(self, workflow_results=None):
-        targets = self.compute_targets()
-        results = {'success': True, 'devices': {}}
-        pool = ThreadPool(processes=len(targets))
-        pool.map(self.device_job, [(device, results) for device in targets])
-        pool.close()
-        pool.join()
-        return results
-
     def job(self, device, results, payload):
-        napalm_driver = napalm_connection(self, device)
-            napalm_driver.open()
-            for getter in self.getters:
-                try:
-                    result[getter] = getattr(napalm_driver, getter)()
-                except Exception as e:
-                    result[getter] = f'{getter} failed because of {e}'
-            if self.content_match_regex:
-                success = bool(search(self.content_match, str(result)))
-            else:
-                success = self.content_match in str(result)
-            if not success:
-                results['success'] = False
-            napalm_driver.close()
-        except Exception as e:
-            result, success = f'service failed ({e})', False
-            results['success'] = False
-        results['devices'][device.name] = {
-            'success': success,
-            'result': result
-        }
+        napalm_driver, result = napalm_connection(self, device), {}
+        napalm_driver.open()
+        for getter in self.getters:
+            try:
+                result[getter] = getattr(napalm_driver, getter)()
+            except Exception as e:
+                result[getter] = f'{getter} failed because of {e}'
+        if self.content_match_regex:
+            success = bool(search(self.content_match, str(result)))
+        else:
+            success = self.content_match in str(result)
+        napalm_driver.close()
+        return {'success': success, 'result': result}
 
 
 service_classes['napalm_getters_service'] = NapalmGettersService

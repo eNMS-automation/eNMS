@@ -2,7 +2,7 @@ from napalm import get_network_driver
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
-from re import compile, sub
+from re import compile
 
 from eNMS import db, scheduler
 from eNMS.automation.models import Job
@@ -48,7 +48,9 @@ def napalm_connection(service, device):
 
 def substitute(data, variables):
     r = compile('{{(.*?)}}')
-    replace_with_locals = lambda m: str(eval(m.group()[2:-2], variables))
+
+    def replace_with_locals(match):
+        return str(eval(match.group()[2:-2], variables))
     return r.sub(replace_with_locals, data)
 
 

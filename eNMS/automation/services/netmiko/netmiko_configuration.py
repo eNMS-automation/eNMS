@@ -1,4 +1,3 @@
-from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import (

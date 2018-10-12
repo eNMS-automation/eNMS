@@ -1,4 +1,3 @@
-from multiprocessing.pool import ThreadPool
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 

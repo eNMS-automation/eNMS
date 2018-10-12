@@ -1,4 +1,3 @@
-from multiprocessing.pool import ThreadPool
 from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 

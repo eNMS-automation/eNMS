@@ -5,14 +5,12 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 
-from eNMS import db
 from eNMS.base.associations import (
     job_device_table,
     job_pool_table,
     job_workflow_table
 )
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import retrieve
 from eNMS.base.properties import cls_to_properties
 
 
@@ -124,7 +122,10 @@ class Service(Job):
         try:
             results['devices'][device.name] = self.job(device, results, payload)
         except Exception as e:
-            results['devices'][device.name] = {'success': False, 'result': str(e)}
+            results['devices'][device.name] = {
+                'success': False,
+                'result': str(e)
+            }
         if not results['devices'][device.name]['success']:
             results['success'] = False
 
@@ -229,7 +230,6 @@ class Workflow(Job):
     def job(self, args=None):
         if args:
             device, results = args
-        runtime = str(datetime.now())
         jobs, visited = [self.start_job], set()
         payload = {}
         while jobs:

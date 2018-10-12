@@ -30,7 +30,6 @@ from eNMS.automation.models import (
     WorkflowEdge,
     Workflow
 )
-from eNMS.schedule.forms import SchedulingForm
 
 
 @blueprint.route('/service_management')

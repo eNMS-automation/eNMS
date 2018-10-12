@@ -1,4 +1,3 @@
-from multiprocessing.pool import ThreadPool
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 

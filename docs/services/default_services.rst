@@ -3,7 +3,7 @@ Default Services
 ================
 
 The following services are present by default in eNMS.
-They can be used as models to create more complex services, or used as such if they meet your needs.
+They can be used as templates to create more complex services, or used as such if they meet your needs.
 
 Netmiko Configuration Service
 -----------------------------
@@ -33,11 +33,7 @@ Netmiko Validation Service
 Uses Netmiko to validate the state of a device, in a workflow (see the ``Workflow`` section for examples about how it is used).
 The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
-There are 3 ``command`` field and 3 ``pattern`` field. For each couple of command / pattern fields, eNMS will check if the expected pattern can be found in the output of the command.
-
-If the result is positive for all 3 couples, the service is considered successful (allowing the workflow to go forward, following the ``success`` edges), otherwise it is considered to have failed.
-
-The values for a ``pattern`` field can also be a regular expression.
+There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
 
 .. image:: /_static/services/default_services/netmiko_validation.png
    :alt: Netmiko validation service

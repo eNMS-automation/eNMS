@@ -185,4 +185,4 @@ This is what the SwissArmyKnifeService class would look like with the last examp
               }
           }
 
-From the web UI, you can then create an instance of ``SwissArmyKnifeService`` called ``process_payload1``.
+From the web UI, you can then create an instance of ``SwissArmyKnifeService`` called ``process_payload1``, and add that job in the workflow. When the job is called, eNMS will automatically use the ``process_payload1`` method, and process the payload accordingly.

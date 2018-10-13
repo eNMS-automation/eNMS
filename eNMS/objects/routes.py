@@ -29,6 +29,7 @@ from eNMS.objects import blueprint
 from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import Link, Device, Pool
 from eNMS.base.properties import (
+    boolean_properties,
     link_public_properties,
     device_public_properties,
     pool_public_properties,
@@ -244,7 +245,12 @@ def import_topology():
 @login_required
 @permission_required('Edit objects', redirect=False)
 def process_pool():
-    return jsonify(factory(Pool, **request.form.to_dict()).serialized)
+    form = request.form.to_dict()
+    print(form)
+    for property in boolean_properties:
+        if property not in form:
+            form[property] = 'off'
+    return jsonify(factory(Pool, **form).serialized)
 
 
 @blueprint.route('/get_pool/<pool_id>', methods=['POST'])

@@ -291,4 +291,4 @@ pretty_names = {
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 
 property_types = {}
-service_boolean_properties = []
+boolean_properties = []

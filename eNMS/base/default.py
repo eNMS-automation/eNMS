@@ -9,7 +9,7 @@ from eNMS import db
 from eNMS.admin.models import Parameters, User
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, retrieve
-from eNMS.base.properties import property_types, service_boolean_properties
+from eNMS.base.properties import property_types, boolean_properties
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.automation.models import Job, service_classes, Workflow, WorkflowEdge
@@ -25,7 +25,7 @@ def create_service_classes():
     for cls_name, cls in service_classes.items():
         for col in cls.__table__.columns:
             if type(col.type) == Boolean:
-                service_boolean_properties.append(col.key)
+                boolean_properties.append(col.key)
             if (
                 type(col.type) == PickleType and
                 hasattr(cls, f'{col.key}_values')
@@ -38,7 +38,13 @@ def create_service_classes():
                     Float: float,
                     PickleType: dict,
                 }.get(type(col.type), str)
-    print(service_boolean_properties)
+
+
+@integrity_rollback
+def process_pool_properties():
+    for col in Pool.__table__.columns:
+        if type(col.type) == Boolean:
+            boolean_properties.append(col.key)
 
 
 def create_default_users():

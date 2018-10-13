@@ -5,7 +5,7 @@ from eNMS.base.helpers import retrieve
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,
-    service_boolean_properties
+    boolean_properties
 )
 
 
@@ -25,8 +25,8 @@ class CustomBase(db.Model):
     def update(self, **kwargs):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            if property in service_boolean_properties:
-                value = kwargs[property] == 'on'
+            if property in boolean_properties:
+                value = kwargs[property] in ('y', 'on')
             elif 'regex' in property:
                 value = property in kwargs
             elif property_type == dict:

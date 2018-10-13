@@ -23,7 +23,7 @@ class Job(CustomBase):
     description = Column(String)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
-    tasks = relationship('Task', back_populates='job')
+    tasks = relationship('Task', back_populates='job', cascade='all,delete')
     type = Column(String)
     waiting_time = Column(Integer, default=0)
     workflows = relationship(

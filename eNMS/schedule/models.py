@@ -1,7 +1,7 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime
 from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 
 from eNMS import db, scheduler
 from eNMS.automation.helpers import scheduler_job
@@ -75,7 +75,7 @@ class Task(CustomBase):
             scheduler.add_job(
                 id=self.creation_time,
                 func=scheduler_job,
-                args=[self.name],
+                args=[self.job.id],
                 trigger='interval',
                 start_date=self.aps_date('start_date'),
                 end_date=self.aps_date('end_date'),
@@ -87,11 +87,10 @@ class Task(CustomBase):
                 id=self.creation_time,
                 func=scheduler_job,
                 run_date=self.aps_date('start_date'),
-                args=[self.name],
+                args=[self.job.id],
                 trigger='date',
                 replace_existing=True
             )
-        return str(datetime.now())
 
     @property
     def properties(self):

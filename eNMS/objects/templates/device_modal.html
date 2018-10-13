@@ -19,10 +19,10 @@
             <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
               <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
                 <div class="modal-body">
-                  <div class="form-group" style="height: 450px">
+                  <div class="form-group">
                   {% for field in add_device_form if field.widget.input_type != 'hidden'  %}
-                    <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
                     {{ field(id= 'device-' + field.name, class="form-control") }}
                     </div><br><br>
                   {% endfor %}

@@ -246,7 +246,6 @@ def import_topology():
 @permission_required('Edit objects', redirect=False)
 def process_pool():
     form = request.form.to_dict()
-    print(form)
     for property in boolean_properties:
         if property not in form:
             form[property] = 'off'

@@ -34,16 +34,12 @@ Create or update an object
  # via a POST or PUT call to the following URL
  http://IP_address/rest/object/object_type
 
-Execute a task
-**************
+Execute a job (i.e a service, or a workflow)
+********************************************
 
 ::
 
  # via a GET call to the following URL
- http://IP_address/rest/execute_task/task_name
+ http://IP_address/rest/run_job/job_name
 
-The task will start immediately (and its properties are displayed).
-
-.. image:: /_static/automation/rest/start_task.png
-   :alt: GET call to execute a task
-   :align: center
+The job will run immediately.

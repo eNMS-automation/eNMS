@@ -127,9 +127,7 @@ def get_service(id_or_cls):
     def build_boolean_box(c):
         return '<fieldset>' + ''.join(f'''
             <div class="item">
-                
                 <input id="{c.key}" name="{c.key}" type="checkbox">
-                <input type='hidden' value='0' name="{c.key}">
                 <label>{c.key}</label>
             </div>''') + '</fieldset>'
 

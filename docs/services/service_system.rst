@@ -180,3 +180,26 @@ When you create a new service, the form will also contain multiple selection fie
 
 The service will run on all selected devices in parallel (multiprocessing). If you select pools, it will run on the union of all devices in the selected pools.
 Some services have no target device at all, depending on what the service does.
+
+Variable substitution
+---------------------
+
+For some services, it is useful for a string to accept variable such as timestamps or device parameters.
+For example, if you run a ReST call script on several devices to send a request at a given URL, you might want the URL to depend on the name of the device.
+Any code between double curved brackets will be evaluated at runtime and replace with the appropriate value.
+
+For example, you can POST a request on several device at ``/url/{{device.name}}``, and ``{{device.name}}`` will be replaced by the name of the device.
+
+Let's consider the following ReST call service:
+
+.. image:: /_static/services/service_system/variable_substitution.png
+   :alt: Variable substitution
+   :align: center
+
+When this service is executed, the following GET requests will be sent in parallel:
+
+::
+
+  INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router18 HTTP/1.1" 200 -
+  INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router14 HTTP/1.1" 200 -
+  INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router8 HTTP/1.1" 200 -

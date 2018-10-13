@@ -35,7 +35,7 @@ Let's take a look at how the ``Swiss Army Knife Service`` is implemented:
           return getattr(self, self.name)(*args)
   
       # Instance call "job1" with has_targets set to True
-      def job1(self, device, results, payload):
+      def job1(self, device, payload):
           return {'success': True, 'result': ''}
   
       # Instance call "job2" with has_targets set to False
@@ -67,42 +67,4 @@ The ``job`` function of ``SwissArmyKnifeService`` will run the class method of `
 
 In other words, with the above code, you can create two instances of SwissArmyKnifeService from the web UI: one named "job1" and the other named "job2". The SwissArmyKnifeService class will take care of calling the right "job" function based on the name of the instance.
 
-Parralel Swiss Army Knife Service
----------------------------------
-
-There is also a parallel version of the Swiss Army Knife Service:
-
-::
-
-  class ParallelSwissArmyKnifeService(Service):
-  
-      __tablename__ = 'ParallelSwissArmyKnifeService'
-  
-      id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-  
-      __mapper_args__ = {
-          'polymorphic_identity': 'parallel_swiss_army_knife_service',
-      }
-  
-      def job(self, workflow_results=None):
-          targets = self.compute_targets()
-          results = {'success': True, 'devices': {}}
-          pool = ThreadPool(processes=len(targets))
-          pool.map(
-              getattr(self, self.name),
-              [(device, workflow_results, results) for device in targets])
-          pool.close()
-          pool.join()
-          return results
-  
-      def job1(self, args):
-          device, payload, results = args
-          results['devices'][device.name] = True
-  
-      def job2(self, args):
-          device, payload, results = args
-          results['devices'][device.name] = True
-  
-      def job3(self, args):
-          device, payload, results = args
-          results['devices'][device.name] = True
+The SwissArmyKnifeService also has a parameter ``has_targets`` that defines whether or not the service will use the devices selected upon creating a new instance. If ``has_targets`` is selected, the SwissArmyKnifeService ``job`` function will take an additional ``device``, the device object that you can use however you want.

@@ -38,6 +38,8 @@ It contains:
 The ``general right-click menu`` contains the following entries:
   - Change Mode (create edges or move a job in the editor)
   - Add Job (let you choose a job among all existing jobs)
+  - Run Workflow (starts the workflow)
+  - View and compare the logs of the workflow (``Workflow Logs``, ``Compare Workflow Logs``)
   - Delete Delection (all selected objects are deleted, jobs or edges)
 
 .. image:: /_static/workflows/workflow_system/workflow_background_menu.png
@@ -46,7 +48,7 @@ The ``general right-click menu`` contains the following entries:
 
 From the ``job-specific right-click menu``, you can:
   - Edit a job (service or workflow)
-  - View and compare the logs (``Logs``, ``Compare``)
+  - View and compare the logs of the job (``Job Logs``, ``Compare Job Logs``)
   - Set a job as start or end of the workflow (``Set as start``, ``Set as end``) for eNMS to know where the workflow starts, and where it ends.
 
 .. image:: /_static/workflows/workflow_system/workflow_job_menu.png

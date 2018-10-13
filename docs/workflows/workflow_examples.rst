@@ -24,8 +24,7 @@ This workflow is made of 4 services:
       :alt: Delete VRF TEST
       :align: center
 
-  - netmiko_check_vrf_TEST: uses Netmiko to validate that ``TEST`` is NOT in the output of ``show ip vrf``. In order to perform that
- check, we must use a regular expression: we check that the ouput of ``show ip vrf`` is matched by the regular expression ``^((?!TEST).)*$``.
+  - netmiko_check_vrf_TEST: uses Netmiko to validate that ``TEST`` is NOT in the output of ``show ip vrf``. In order to perform that check, we must use a regular expression: we check that the ouput of ``show ip vrf`` is matched by the regular expression ``^((?!TEST).)*$``.
 
     .. image:: /_static/workflows/netmiko_workflow/check_no_vrf.png
       :alt: Validate there is no VRF TEST

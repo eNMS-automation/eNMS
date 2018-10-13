@@ -32,9 +32,6 @@ def view(view_type):
     all_devices = Device.choices()
     add_link_form.source.choices = all_devices
     add_link_form.destination.choices = all_devices
-    service_form = ServiceForm(request.form)
-    service_form.devices.choices = Device.choices()
-    service_form.pools.choices = Pool.choices()
     labels = {'device': 'name', 'link': 'name'}
     if 'view_options' in request.form:
         labels = {
@@ -58,9 +55,6 @@ def view(view_type):
         pools=Pool.query.all(),
         parameters=Parameters.query.one().serialized,
         view=view,
-        property_types={k: str(v) for k, v in property_types.items()},
-        service_form=service_form,
-        services_classes=list(service_classes),
         view_options_form=ViewOptionsForm(request.form),
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),

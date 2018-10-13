@@ -27,7 +27,7 @@ class NetmikoValidationService(Service):
         'polymorphic_identity': 'netmiko_validation_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         netmiko_handler = netmiko_connection(self, device)
         command = substitute(self.content, locals())
         output = netmiko_handler.send_command(command)

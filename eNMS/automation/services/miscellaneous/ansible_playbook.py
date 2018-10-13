@@ -28,7 +28,7 @@ class AnsiblePlaybookService(Service):
         'polymorphic_identity': 'ansible_playbook_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         arguments = substitute(self.arguments, locals()).split()
         command = ['ansible-playbook']
         if self.pass_device_properties:

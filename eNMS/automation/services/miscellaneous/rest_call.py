@@ -47,7 +47,7 @@ class RestCallService(Service):
 
     def job(self, *args):
         if self.has_targets:
-            device, results, payload = args
+            device, payload = args
         rest_url = substitute(self.url, locals())
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](

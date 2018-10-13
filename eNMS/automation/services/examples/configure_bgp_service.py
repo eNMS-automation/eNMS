@@ -22,7 +22,7 @@ class ConfigureBgpService(Service):
         'polymorphic_identity': 'configure_bgp_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         config = f'''

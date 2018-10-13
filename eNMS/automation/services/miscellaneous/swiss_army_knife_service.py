@@ -18,7 +18,7 @@ class SwissArmyKnifeService(Service):
         return getattr(self, self.name)(*args)
 
     # Instance call "job1" with has_targets set to True
-    def job1(self, device, results, payload):
+    def job1(self, device, payload):
         return {'success': True, 'result': ''}
 
     # Instance call "job2" with has_targets set to False

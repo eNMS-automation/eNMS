@@ -28,7 +28,7 @@ class NetmikoFileTransferService(Service):
         'polymorphic_identity': 'netmiko_file_transfer_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         netmiko_handler = netmiko_connection(self, device)
         transfer_dict = file_transfer(
             netmiko_handler,

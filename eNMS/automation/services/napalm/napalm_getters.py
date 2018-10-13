@@ -51,7 +51,7 @@ class NapalmGettersService(Service):
         'polymorphic_identity': 'napalm_getters_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         napalm_driver, result = napalm_connection(self, device), {}
         napalm_driver.open()
         for getter in self.getters:

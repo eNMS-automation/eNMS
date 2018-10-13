@@ -33,7 +33,7 @@ class NapalmConfigurationService(Service):
         'polymorphic_identity': 'napalm_configuration_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         config = '\n'.join(substitute(self.content, locals()).splitlines())

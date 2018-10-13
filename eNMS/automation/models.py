@@ -123,7 +123,7 @@ class Service(Job):
     def device_run(self, args):
         device, results, payload = args
         try:
-            results['devices'][device.name] = self.job(device, results, payload)
+            results['devices'][device.name] = self.job(device, payload)
         except Exception as e:
             results['devices'][device.name] = {
                 'success': False,

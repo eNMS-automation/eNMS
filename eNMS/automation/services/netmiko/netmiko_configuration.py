@@ -25,7 +25,7 @@ class NetmikoConfigurationService(Service):
         'polymorphic_identity': 'netmiko_configuration_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         netmiko_handler = netmiko_connection(self, device)
         config = substitute(self.content, locals())
         netmiko_handler.send_config_set(config.splitlines())

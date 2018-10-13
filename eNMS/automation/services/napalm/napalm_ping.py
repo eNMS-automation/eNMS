@@ -27,7 +27,7 @@ class NapalmPingService(Service):
         'polymorphic_identity': 'napalm_ping_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         ping = napalm_driver.ping(

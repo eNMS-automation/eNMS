@@ -15,7 +15,7 @@ class UpdateDeviceService(Service):
         'polymorphic_identity': 'update_device_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         for property, value in self.update_dictionnary.items():
             setattr(device, property, value)
         return {'success': True, 'result': 'properties updated'}

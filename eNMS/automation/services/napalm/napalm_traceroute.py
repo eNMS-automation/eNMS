@@ -24,7 +24,7 @@ class NapalmTracerouteService(Service):
         'polymorphic_identity': 'napalm_traceroute_service',
     }
 
-    def job(self, device, results, payload):
+    def job(self, device, payload):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         traceroute = napalm_driver.traceroute(

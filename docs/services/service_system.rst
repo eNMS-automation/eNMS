@@ -85,22 +85,18 @@ This file contains the following code :
           'polymorphic_identity': 'example_service',
       }
   
-      def job(self, task, incoming_payload):
+      def job(self, payload):
           # The "job" function is called when the service is executed.
           # The parameters of the service can be accessed with self (self.vendor,
           # self.boolean1, etc)
-          # The target devices can be computed via "self.compute_targets()".
           # You can look at how default services (netmiko, napalm, etc.) are
           # implemented in the /services subfolders (/netmiko, /napalm, etc).
-          results = {'success': True, 'devices': {}}
-          for device in self.compute_targets():
-              results['devices'][device.name] = True
           # "results" is a dictionnary that will be displayed in the logs.
           # It must contain at least a key "success" that indicates whether
           # the execution of the service was a success or a failure.
           # In a workflow, the "success" value will determine whether to move
           # forward with a "Success" edge or a "Failure" edge.
-          return results
+          return {'success': True, 'result': 'example'}
   
   
   service_classes['example_service'] = ExampleService
@@ -115,6 +111,7 @@ For the ``ExampleService`` class displayed above, the SQL columns are the follow
 ::
 
   vendor = Column(String)
+  operating_system = Column(String)
   an_integer = Column(Integer)
   a_float = Column(Float)
   a_list = Column(MutableList.as_mutable(PickleType))
@@ -140,7 +137,7 @@ Here is the associated auto-generated form:
 
 The rules for the auto-generation of service forms are the following:
   - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property which name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
-  - A Boolean property is displayed as a tick box.
+  - A Boolean property is displayed as a checkbox.
   - A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
   - A MutableDict property is displayed as a text area. You can write a dictionnary in that text area: it will be converted to an actual python dictionnary.
 
@@ -171,3 +168,15 @@ Here's a comparison of a ``Napalm get_facts`` service:
 .. image:: /_static/services/service_system/service_compare_logs.png
    :alt: Compare logs
    :align: center
+
+Service devices
+---------------
+
+When you create a new service, the form will also contain multiple selection fields for you to select "target devices".
+
+.. image:: /_static/services/service_system/target_selection.png
+   :alt: Target selection
+   :align: center
+
+The service will run on all selected devices in parallel (multiprocessing). If you select pools, it will run on the union of all devices in the selected pools.
+Some services have no target device at all, depending on what the service does.

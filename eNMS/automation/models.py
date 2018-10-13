@@ -113,7 +113,10 @@ class Service(Job):
             pool.close()
             pool.join()
         else:
-            results = self.job(payload)
+            try:
+                results = self.job(payload)
+            except Exception as e:
+                results = {'success': False, 'result': str(e)}
         self.logs[str(datetime.now())] = results
         return results
 

@@ -38,7 +38,6 @@
   {% include 'link_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
   <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li><a tabindex="-1" href="#">Add new task</a></li>
     <li><a tabindex="-1" href="#">Parameters</a></li>
   </ul>
   <div class="right_col" role="main">
@@ -65,10 +64,6 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-    const servicesClasses = {{ services_classes|tojson|safe }};
-    const propertyTypes = {{ property_types|tojson|safe }};
-  </script>
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
@@ -105,8 +100,6 @@
     };
     var labels = {{ labels|tojson|safe }};
   </script>
-  <!-- Create service graphically -->
-  <script src="{{ url_for('automation_blueprint.static', filename='serviceEditor.js') }}"></script>
   <script>
     var device_fields = {{ device_fields|tojson|safe }};
     var link_fields = {{ link_fields|tojson|safe }};

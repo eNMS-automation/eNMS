@@ -368,12 +368,28 @@ function savePositions() {
   });
 }
 
+/**
+ * Show workflow logs
+ */
+function showWorkflowLogs() {
+  showLogs(workflow.id);
+}
+
+/**
+ * Compare workflow logs
+ */
+function compareWorkflowLogs() {
+  compareLogs(workflow.id);
+}
+
 const action = {
   'Run Workflow': runWorkflow,
   'Edit Job': editService,
   'Run Job': runJob,
-  'Logs': showLogs,
-  'Compare': compareLogs,
+  'Job Logs': showLogs,
+  'Compare Job Logs': compareLogs,
+  'Workflow Logs': showWorkflowLogs,
+  'Compare Workflow Logs': compareWorkflowLogs,
   'Set as start': startJob,
   'Set as end': endJob,
   'Add Job': partial(showModal, 'add-job'),

@@ -48,15 +48,16 @@ class RestCallService(Service):
     def job(self, *args):
         if self.has_targets:
             device, results, payload = args
+        rest_url = substitute(self.url, locals())
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
-                substitute(self.url, locals()),
+                rest_url,
                 headers={'Accept': 'application/json'},
                 auth=HTTPBasicAuth(self.username, self.password)
             ).json()
         else:
             result = loads(self.request_dict[self.call_type](
-                substitute(self.url, locals()),
+                rest_url,
                 data=dumps(self.payload),
                 auth=HTTPBasicAuth(self.username, self.password)
             ).content)
@@ -65,7 +66,7 @@ class RestCallService(Service):
             self.content_match_regex and search(match, str(result)) or
             match in str(result) and not self.content_match_regex
         )
-        return {'success': success, 'result': result}
+        return {'success': success, 'result': result, 'url': rest_url}
 
 
 service_classes['rest_call_service'] = RestCallService

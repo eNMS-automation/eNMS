@@ -54,3 +54,8 @@ From the ``job-specific right-click menu``, you can:
 .. image:: /_static/workflows/workflow_system/workflow_job_menu.png
    :alt: Workflow management
    :align: center
+
+Workflow devices
+----------------
+
+When you create a workflow, just like with services, the form will also contain multiple selection fields for you to select "target devices". If you don't select any device, the job devices will be used. If you select target devices for the workflow, all devices selected at "job level" will be ignored, and the workflow will run in parallel (multiprocessing) on all devices.

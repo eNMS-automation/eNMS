@@ -1,7 +1,7 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime
 from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import relationship
 
 from eNMS import db, scheduler
 from eNMS.automation.helpers import scheduler_job

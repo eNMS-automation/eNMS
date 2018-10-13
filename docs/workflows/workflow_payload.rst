@@ -26,26 +26,22 @@ The base code for a job function is the following:
 
 ::
 
-  def job(self, incoming_payload):
+  def job(self, payload):
       # The "job" function is called when the service is executed.
       # The parameters of the service can be accessed with self (self.vendor,
       # self.boolean1, etc)
-      # The target devices can be computed via "self.compute_targets()".
       # You can look at how default services (netmiko, napalm, etc.) are
       # implemented in the /services subfolders (/netmiko, /napalm, etc).
-      results = {'success': True, 'devices': {}}
-      for device in self.compute_targets():
-          results['devices'][device.name] = True
       # "results" is a dictionnary that will be displayed in the logs.
       # It must contain at least a key "success" that indicates whether
       # the execution of the service was a success or a failure.
       # In a workflow, the "success" value will determine whether to move
       # forward with a "Success" edge or a "Failure" edge.
-      return results
+      return {'success': True, 'result': 'example'}
 
-The dictionnary ``results`` is the payload of the job, i.e the information that will be transferred to the next jobs to run in the workflow. ``results`` MUST contain a key ``success``, to tell eNMS whether the job was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
+The dictionnary that is returned by ``job`` is the payload of the job, i.e the information that will be transferred to the next jobs to run in the workflow. It MUST contain a key ``success``, to tell eNMS whether the job was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
   
-The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the ``results`` of all jobs that have already been executed.
+The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the results of all jobs that have already been executed.
 
 If we consider the aforementioned workflow, the job ``process_payload1`` receives the variable ``payload`` that contains the results of all other jobs in the workflow (because it is the last one to be executed).
 
@@ -120,14 +116,14 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 
 ::
 
-  def job(self, task, payload):
-      get_int = workflow_results['get_interfaces']
+  def job(self, payload):
+      get_int = payload['get_interfaces']
       r8_int = get_int['devices']['router8']['result']['get_interfaces']
       speed_fa0 = r8_int['FastEthernet0/0']['speed']
       speed_fa1 = r8_int['FastEthernet0/1']['speed']
       same_speed = speed_fa0 == speed_fa1
 
-      get_facts = workflow_results['get_facts']
+      get_facts = payload['get_facts']
       r8_facts = get_facts['devices']['router8']['result']['get_facts']
       uptime_less_than_50000 = r8_facts['uptime'] < 50000
       return {
@@ -141,7 +137,7 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 This ``job`` function reuses the Napalm getters of two jobs of the worflow (one of which, ``get_facts``, is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
 
 Use of a SwissArmyKnifeService instance to process the payload
--------------------------------------------------------
+--------------------------------------------------------------
 
 When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the SwissArmyKnifeService class, and add a method called after the name of the instance. The SwissArmyKnifeService class acts as a "job multiplexer" (see the ``SwissArmyKnifeService`` section of the doc).
 
@@ -150,35 +146,35 @@ This is what the SwissArmyKnifeService class would look like with the last examp
 ::
 
   class SwissArmyKnifeService(Service):
-
+  
       __tablename__ = 'SwissArmyKnifeService'
-
+  
       id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-
+      has_targets = Column(Boolean)
+  
       __mapper_args__ = {
           'polymorphic_identity': 'swiss_army_knife_service',
       }
-
-      def job(self, task, incoming_payload):
-          return getattr(self, self.name)(task, incoming_payload)
-
-      def job1(self, task, payload):
+  
+      def job(self, *args):
+          return getattr(self, self.name)(*args)
+  
+      # Instance call "job1" with has_targets set to True
+      def job1(self, device, payload):
           return {'success': True, 'result': ''}
-
-      def job2(self, task, payload):
+  
+      # Instance call "job2" with has_targets set to False
+      def job2(self, payload):
           return {'success': True, 'result': ''}
-
-      def job3(self, task, payload):
-          return {'success': True, 'result': ''}
-
-      def process_payload1(self, workflow_results=None):
-          get_int = workflow_results['get_interfaces']
+  
+      def process_payload1(self, payload):
+          get_int = payload['get_interfaces']
           r8_int = get_int['devices']['router8']['result']['get_interfaces']
           speed_fa0 = r8_int['FastEthernet0/0']['speed']
           speed_fa1 = r8_int['FastEthernet0/1']['speed']
           same_speed = speed_fa0 == speed_fa1
   
-          get_facts = workflow_results['get_facts']
+          get_facts = payload['get_facts']
           r8_facts = get_facts['devices']['router8']['result']['get_facts']
           uptime_less_than_50000 = r8_facts['uptime'] < 50000
           return {

@@ -10,6 +10,7 @@ from eNMS.base.helpers import permission_required, retrieve, str_dict
 from eNMS.base.properties import (
     pretty_names,
     property_types,
+    service_boolean_properties,
     service_table_properties,
     workflow_table_properties
 )
@@ -126,7 +127,9 @@ def get_service(id_or_cls):
     def build_boolean_box(c):
         return '<fieldset>' + ''.join(f'''
             <div class="item">
+                
                 <input id="{c.key}" name="{c.key}" type="checkbox">
+                <input type='hidden' value='0' name="{c.key}">
                 <label>{c.key}</label>
             </div>''') + '</fieldset>'
 
@@ -176,6 +179,7 @@ def run_job(job_id):
 @login_required
 @permission_required('Edit services', redirect=False)
 def save_service(cls_name):
+    
     form = dict(request.form.to_dict())
     form['devices'] = [
         retrieve(Device, id=id) for id in request.form.getlist('devices')
@@ -186,6 +190,9 @@ def save_service(cls_name):
     for key in request.form:
         if property_types.get(key, None) == list:
             form[key] = request.form.getlist(key)
+    for property in service_boolean_properties:
+        if property not in form:
+            form[property] = 'off'
     return jsonify(factory(service_classes[cls_name], **form).serialized)
 
 

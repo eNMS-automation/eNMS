@@ -290,19 +290,5 @@ pretty_names = {
 
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 
-property_types = {
-    'content_match_regex': bool,
-    'content_match_regex1': bool,
-    'content_match_regex2': bool,
-    'content_match_regex3': bool,
-    'disable_md5': bool,
-    'gotty_port_redirection': bool,
-    'inline_transfer': bool,
-    'inventory_from_selection': bool,
-    'overwrite_file': bool,
-    'pass_device_properties': bool,
-    'payload': dict,
-    'contentregex': bool,
-    'sourceregex': bool,
-    'update_dictionnary': dict
-}
+property_types = {}
+service_boolean_properties = []

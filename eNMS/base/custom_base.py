@@ -2,7 +2,11 @@ from json import dumps, loads
 
 from eNMS import db
 from eNMS.base.helpers import retrieve
-from eNMS.base.properties import cls_to_properties, property_types
+from eNMS.base.properties import (
+    cls_to_properties,
+    property_types,
+    service_boolean_properties
+)
 
 
 class CustomBase(db.Model):
@@ -21,7 +25,9 @@ class CustomBase(db.Model):
     def update(self, **kwargs):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            if property_type == bool or 'regex' in property:
+            if property in service_boolean_properties:
+                value = kwargs[property] == 'on'
+            elif 'regex' in property:
                 value = property in kwargs
             elif property_type == dict:
                 value = loads(value) if value else {}

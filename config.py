@@ -24,6 +24,9 @@ class Config(object):
     GOTTY_SERVER_ADDR = environ.get('GOTTY_SERVER_ADDR')
     GOTTY_BYPASS_KEY_PROMPT = environ.get('GOTTY_BYPASS_KEY_PROMPT')
 
+    # Vault
+    USE_VAULT = False
+
 
 class DebugConfig(Config):
     DEBUG = True
@@ -56,7 +59,8 @@ class ProductionConfig(Config):
     # Vault
     # In production, all credentials (hashes, usernames and passwords) are
     # stored in a vault.
-    # There MUST be a Vault configured to use eNMS in production mode.
+    # There MUST be a Vault to use eNMS in production mode securely.
+    USE_VAULT = int(environ.get('USE_VAULT', True))
     VAULT_ADDR = environ.get('VAULT_ADDR')
     VAULT_TOKEN = environ.get('VAULT_TOKEN')
     UNSEAL_VAULT = environ.get('UNSEAL_VAULT')

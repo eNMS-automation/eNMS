@@ -133,6 +133,6 @@ def create_app(path, config):
     configure_rest_api(app)
     configure_logs(app)
     configure_errors(app)
-    if app.production:
+    if app.config['USE_VAULT']:
         app.vault_client = create_vault_client(app)
     return app

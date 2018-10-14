@@ -15,14 +15,6 @@ workflowBuilder: false;
     overflowText: '{n} devices selected',
     noResultsText: 'No results found',
   });
-  $('#pools').fSelect({
-    placeholder: 'Select pools',
-    numDisplayed: 5,
-    overflowText: '{n} pools selected',
-    noResultsText: 'No results found',
-    searchText: 'Search',
-    showSearch: true
-  });
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);
@@ -69,7 +61,9 @@ function editService(id) {
             }
           }
           $('#services').val(result.service.type);
-          $('#devices').val(result.service.devices.map((n) => n.id));
+          result.service.devices.map(
+            (n) => $(`.fs-option[data-value='${n.id}']`).addClass('selected')
+          );
           $('#pools').val(result.service.pools.map((p) => p.id));
           showModal('service-editor');
         }

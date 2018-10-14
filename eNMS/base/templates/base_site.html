@@ -22,14 +22,13 @@
         <!-- NProgress -->
         <link href="{{ url_for('static', filename='nprogress/nprogress.css') }}" rel="stylesheet">
         <!-- Multiselect -->
-        <link href="{{ url_for('static', filename='fselect/fSelect.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='fselect/fSelect.min.css') }}" rel="stylesheet">
         <!-- Alertify -->
         <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
         <!-- eNMS -->
         <link href="{{ url_for('static', filename='enms/enms.min.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
-
     {% endblock head %}
   </head>
   <body class="{% block body_class %}nav-md {% endblock body_class %}">
@@ -64,7 +63,7 @@
         <!-- NProgress -->
         <script src="{{ url_for('static', filename='nprogress/nprogress.min.js') }}"></script>
         <!-- Multiselect -->
-        <script src="{{ url_for('static', filename='fselect/fSelect.js') }}"></script>
+        <script src="{{ url_for('static', filename='fselect/fSelect.min.js') }}"></script>
         <!-- Moment -->
         <script src="{{ url_for('static', filename='moment/moment.min.js') }}"></script>
         <!-- Parsley -->

@@ -14,14 +14,6 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
     overflowText: '{n} devices selected',
     noResultsText: 'No results found',
   });
-  $('#pools').fSelect({
-    placeholder: 'Select pools',
-    numDisplayed: 5,
-    overflowText: '{n} pools selected',
-    noResultsText: 'No results found',
-    searchText: 'Search',
-    showSearch: true
-  });
 })();
 
 /**
@@ -85,7 +77,9 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
         for (const [property, value] of Object.entries(properties)) {
           $(`#${property}`).val(value);
         }
-        $('#devices').val(properties.devices.map((n) => n.id));
+        result.service.devices.map(
+          (n) => $(`.fs-option[data-value='${n.id}']`).addClass('selected')
+        );
         $('#pools').val(properties.pools.map((p) => p.id));
       }
     },

@@ -49,7 +49,7 @@ def process_kwargs(app, **kwargs):
             'destination': destination
         })
     else:
-        if app.production:
+        if app.config['USE_VAULT']:
             data = {
                 property: kwargs.pop(property, '')
                 for property in ('username', 'password', 'enable_password')

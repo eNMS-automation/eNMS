@@ -27,7 +27,7 @@ Clusterized 2D map
 ******************
 
 The clusterized 2D map is based on the :guilabel:`Leaflet MarkerCluster` JavaScript library.
-Nodes and links are displayed as clusters, which size depends on the zoom level.
+Devices and links are displayed as clusters, which size depends on the zoom level.
 
 The clusterized map works well for large networks (up to 50000 devices), and it supports colocated devices.
 Clicking on a group of colocated devices will expand the group.
@@ -77,8 +77,8 @@ NASA tiles
 Default view
 ------------
 
-The default view depends on the number of nodes:
-- less than 50 nodes, 3D
+The default view depends on the number of devices:
+- less than 50 devices, 3D
 - less than 2000: leaflet (classic 2D view)
 - more than 2000: clusterized 2D
 

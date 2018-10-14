@@ -63,7 +63,7 @@ You can switch between pools with the drop-down list in the top-right corner of 
 Use a pool as target of an automation task
 ------------------------------------------
 
-Pools can also be used as target of an automation. The second step of the scheduling process of a service is to select the targets. You can select multiple nodes, as well as multiple pools as targets.
+Pools can also be used as target of an automation. The second step of the scheduling process of a service is to select the targets. You can select multiple devices, as well as multiple pools as targets.
 
 .. image:: /_static/objects/pools/target_pool.png
    :alt: Use a pool as target of a task

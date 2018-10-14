@@ -2,7 +2,7 @@
 Workflow System
 ===============
 
-A workflow is a directed graph which nodes are "jobs". A job can be a service or another workflow.
+A workflow is a directed graph which nodes can be a service or another workflow.
 
 Each job in eNMS returns a boolean value:
   - ``True`` if it ran successfully.
@@ -28,7 +28,7 @@ From the same page, workflows can be edited and deleted.
 Workflow Editor
 ---------------
 
-The :guilabel:`workflows/workflow_editor` is the place where jobs are organized into workflows.
+The :guilabel:`workflows/workflow_editor` is the place where services (or other workflow) are organized into workflows.
 It contains:
   - A drop-down list with all existing workflows to switch between workflows.
   - The workflow itself, displayed as a graph. The nodes are ``jobs`` (services or workflows) and there are two types of edge: ``Success`` edge and ``Failure`` edge. If a job runs successfully, it will "follow" the ``success`` edge, otherwise the ``failure`` edge.

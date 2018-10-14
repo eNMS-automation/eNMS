@@ -12,4 +12,5 @@ COPY projects projects
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
+
 ENTRYPOINT ["./boot.sh"]

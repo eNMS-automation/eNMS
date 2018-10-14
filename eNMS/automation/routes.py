@@ -20,7 +20,7 @@ from eNMS.automation.forms import (
     AddJobForm,
     CompareLogsForm,
     ServiceForm,
-    WorkflowEditorForm,
+    WorkflowBuilderForm,
     WorkflowCreationForm
 )
 from eNMS.automation.helpers import scheduler_job
@@ -69,22 +69,22 @@ def workflow_management():
     )
 
 
-@blueprint.route('/workflow_editor/')
+@blueprint.route('/workflow_builder/')
 @login_required
 @permission_required('Workflows section')
-def workflow_editor(workflow_id=None):
+def workflow_builder(workflow_id=None):
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()
-    workflow_editor_form = WorkflowEditorForm(request.form)
-    workflow_editor_form.workflow.choices = Workflow.choices()
+    workflow_builder_form = WorkflowBuilderForm(request.form)
+    workflow_builder_form.workflow.choices = Workflow.choices()
     workflow = retrieve(Workflow, id=workflow_id)
     service_form = ServiceForm(request.form)
     service_form.devices.choices = Device.choices()
     service_form.pools.choices = Pool.choices()
     return render_template(
-        'workflow_editor.html',
+        'workflow_builder.html',
         add_job_form=add_job_form,
-        workflow_editor_form=workflow_editor_form,
+        workflow_builder_form=workflow_builder_form,
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
         property_types={k: str(v) for k, v in property_types.items()},

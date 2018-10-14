@@ -5,7 +5,7 @@ alertify: false
 propertyTypes: false
 servicesClasses: false
 showModal: false
-workflowEditor: false;
+workflowBuilder: false;
 */
 
 (function() {
@@ -79,7 +79,7 @@ function saveService() { // eslint-disable-line no-unused-vars
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          if (typeof workflowEditor === 'undefined') {
+          if (typeof workflowBuilder === 'undefined') {
             addService(mode, service);
           }
           const message = `Service '${service.name}'

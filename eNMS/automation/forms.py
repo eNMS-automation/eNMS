@@ -28,5 +28,5 @@ class WorkflowCreationForm(FlaskForm):
     pools = SelectMultipleField(choices=())
 
 
-class WorkflowEditorForm(FlaskForm):
+class WorkflowBuilderForm(FlaskForm):
     workflow = SelectField()

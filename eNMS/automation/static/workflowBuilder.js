@@ -11,7 +11,7 @@ vis: false
 workflow: true
 */
 
-const workflowEditor = true; // eslint-disable-line no-unused-vars
+const workflowBuilder = true; // eslint-disable-line no-unused-vars
 
 const container = document.getElementById('network');
 const dsoptions = {

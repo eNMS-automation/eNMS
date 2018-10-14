@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Workflow editor {% endblock title %}
+{% block title %} Workflow builder {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -22,7 +22,7 @@
 
 {% block content %}
   {% include 'service_editor.html' %}
-  {% include 'workflow_editor_modal.html' %}
+  {% include 'workflow_builder_modal.html' %}
   {% include 'logs_modals.html' %}
   <div class="right_col" role="main">
     <!-- begin row -->
@@ -31,7 +31,7 @@
         <div class="x_panel">
           <div class="x_content">
             <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
-              {{ workflow_editor_form.workflow(id="workflow-name", class="form-control") }}
+              {{ workflow_builder_form.workflow(id="workflow-name", class="form-control") }}
             </div>
             <div id="network" style="height:80vh; width:100%;></div>
             <div class="ln_solid"></div>
@@ -81,7 +81,7 @@
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <!-- Vis JS -->
   <script src="{{ url_for('automation_blueprint.static', filename='vis/vis.min.js') }}"></script>
-  <script src="{{ url_for('automation_blueprint.static', filename='workflowEditor.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='workflowBuilder.js') }}"></script>
   <!-- Difflib -->
   <script src="{{ url_for('automation_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
 {% endblock javascripts %}

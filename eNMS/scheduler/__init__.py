@@ -1,11 +1,11 @@
 from flask import Blueprint
 
 blueprint = Blueprint(
-    'schedule_blueprint',
+    'scheduler_blueprint',
     __name__,
-    url_prefix='/schedule',
+    url_prefix='/scheduler',
     template_folder='templates',
     static_folder='static'
 )
 
-import eNMS.schedule.routes  # noqa: F401
+import eNMS.scheduler.routes  # noqa: F401

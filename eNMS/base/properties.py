@@ -129,7 +129,7 @@ user_permissions = (
     'Views section',
     'Automation section',
     'Workflows section',
-    'Schedule section',
+    'Scheduling section',
     'Edit logs',
     'Edit parameters',
     'Edit users',

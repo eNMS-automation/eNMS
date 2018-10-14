@@ -16,7 +16,7 @@ from eNMS.base.properties import (
     type_to_diagram_properties
 )
 from eNMS.base.helpers import permission_required, retrieve
-from eNMS.schedule.models import Task
+from eNMS.scheduling.models import Task
 
 
 @blueprint.route('/')

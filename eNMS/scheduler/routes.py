@@ -6,15 +6,15 @@ from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import task_public_properties
-from eNMS.schedule import blueprint
-from eNMS.schedule.forms import SchedulingForm
-from eNMS.schedule.models import Task
+from eNMS.scheduler import blueprint
+from eNMS.scheduler.forms import SchedulingForm
+from eNMS.scheduler.models import Task
 from eNMS.automation.models import Job
 
 
 @blueprint.route('/task_management')
 @login_required
-@permission_required('Schedule section')
+@permission_required('Scheduler section')
 def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -28,7 +28,7 @@ def task_management():
 
 @blueprint.route('/calendar')
 @login_required
-@permission_required('Schedule section')
+@permission_required('Scheduler section')
 def calendar():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -70,7 +70,7 @@ def scheduler(workflow_id=None):
 
 @blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
-@permission_required('Schedule section', redirect=False)
+@permission_required('Scheduler section', redirect=False)
 def get_task(task_id):
     return jsonify(retrieve(Task, id=task_id).serialized)
 

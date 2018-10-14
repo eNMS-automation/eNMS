@@ -41,7 +41,7 @@ def register_blueprints(app):
         'automation',
         'base',
         'objects',
-        'schedule',
+        'scheduling',
         'views'
     )
     for blueprint in blueprints:

@@ -15,7 +15,7 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
   } else {
     $.ajax({
       type: 'POST',
-      url: `/schedule/get/${id}`,
+      url: `/scheduler/get/${id}`,
       dataType: 'json',
       success: function(properties) {
         if (!properties) {

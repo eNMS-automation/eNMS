@@ -51,11 +51,11 @@
           </ul>
         </li>
         {% endif %}
-        {% if current_user.allowed('Schedule section') %}
-        <li><a><i class="fa fa-clock-o"></i>Schedule<span class="fa fa-chevron-down"></span></a>
+        {% if current_user.allowed('Scheduling section') %}
+        <li><a><i class="fa fa-clock-o"></i>Scheduling<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="/schedule/task_management">Task Management</a></li>
-            <li><a href="/schedule/calendar">Calendar</a></li>
+            <li><a href="/scheduling/task_management">Task Management</a></li>
+            <li><a href="/scheduling/calendar">Calendar</a></li>
           </ul>
         </li>
         {% endif %}

@@ -46,7 +46,7 @@ function scheduleTask() { // eslint-disable-line no-unused-vars
   if ($('#task-modal-form').parsley().validate()) {
     $.ajax({
       type: 'POST',
-      url: '/scheduler/scheduler',
+      url: '/scheduling/scheduler',
       dataType: 'json',
       data: $('#task-modal-form').serialize(),
       success: function(task) {
@@ -74,7 +74,7 @@ function scheduleTask() { // eslint-disable-line no-unused-vars
 function deleteTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/scheduler/delete_task/${id}`,
+    url: `/scheduling/delete_task/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -93,7 +93,7 @@ function deleteTask(id) { // eslint-disable-line no-unused-vars
 function pauseTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/scheduler/pause_task/${id}`,
+    url: `/scheduling/pause_task/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
@@ -115,7 +115,7 @@ function pauseTask(id) { // eslint-disable-line no-unused-vars
 function resumeTask(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/scheduler/resume_task/${id}`,
+    url: `/scheduling/resume_task/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

@@ -77,7 +77,9 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
         for (const [property, value] of Object.entries(properties)) {
           $(`#${property}`).val(value);
         }
-        result.service.devices.map(
+        $('.fs-option').removeClass('selected');
+        $('.fs-label').text('Select devices');
+        properties.devices.map(
           (n) => $(`.fs-option[data-value='${n.id}']`).addClass('selected')
         );
         $('#pools').val(properties.pools.map((p) => p.id));

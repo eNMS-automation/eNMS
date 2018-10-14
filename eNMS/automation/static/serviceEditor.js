@@ -14,6 +14,7 @@ workflowBuilder: false;
     numDisplayed: 5,
     overflowText: '{n} devices selected',
     noResultsText: 'No results found',
+    showSearch: true,
   });
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
@@ -61,6 +62,8 @@ function editService(id) {
             }
           }
           $('#services').val(result.service.type);
+          $('.fs-option').removeClass('selected');
+          $('.fs-label').text('Select devices');
           result.service.devices.map(
             (n) => $(`.fs-option[data-value='${n.id}']`).addClass('selected')
           );

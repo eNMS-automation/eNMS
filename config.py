@@ -45,11 +45,11 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = environ.get(
         'ENMS_DATABASE_URL',
         'postgresql://{}:{}@{}:{}/{}'.format(
-            environ.get('ENMS_DATABASE_USER', 'enms'),
-            environ.get('ENMS_DATABASE_PASSWORD'),
-            environ.get('ENMS_DATABASE_HOST', 'localhost'),
-            environ.get('ENMS_DATABASE_PORT', 5432),
-            environ.get('ENMS_DATABASE_NAME', 'enms')
+            environ.get('POSTGRES_USER', 'enms'),
+            environ.get('POSTGRES_PASSWORD'),
+            environ.get('POSTGRES_HOST', 'db'),
+            environ.get('POSTGRES_PORT', 5432),
+            environ.get('POSTGRES_DB', 'enms')
         )
     )
 

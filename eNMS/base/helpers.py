@@ -64,7 +64,7 @@ def vault_helper(app, path, data=None):
 
 
 def get_device_credentials(app, device):
-    if app.production:
+    if app.config['USE_VAULT']:
         data = vault_helper(app, f'device/{device.name}')
         return data['username'], data['password'], data['enable_password']
     else:
@@ -72,7 +72,7 @@ def get_device_credentials(app, device):
 
 
 def get_user_credentials(app, user):
-    if app.production:
+    if app.config['USE_VAULT']:
         return user.name, vault_helper(app, f'user/{user.name}')['password']
     else:
         return user.name, user.password

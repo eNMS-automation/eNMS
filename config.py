@@ -49,7 +49,7 @@ class ProductionConfig(Config):
         'ENMS_DATABASE_URL',
         'postgresql://{}:{}@{}:{}/{}'.format(
             environ.get('POSTGRES_USER', 'enms'),
-            environ.get('POSTGRES_PASSWORD'),
+            environ.get('POSTGRES_PASSWORD', 'enms'),
             environ.get('POSTGRES_HOST', 'db'),
             environ.get('POSTGRES_PORT', 5432),
             environ.get('POSTGRES_DB', 'enms')

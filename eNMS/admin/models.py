@@ -29,7 +29,7 @@ class User(CustomBase, UserMixin):
     tasks = relationship('Task', back_populates='user')
 
     def update(self, **kwargs):
-        if app.production:
+        if app.config['USE_VAULT']:
             data = {'password': kwargs.pop('password')}
             vault_helper(app, f'user/{kwargs["name"]}', data)
         super().update(**kwargs)

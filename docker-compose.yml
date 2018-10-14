@@ -3,14 +3,14 @@ services:
   db:
     restart: always
     image: postgres:latest
-    env_file: .env
+    env_file: .env-pgsql
     expose:
       - 5432
     networks:
       - db_network
   enms:
     restart: always
-    env_file: .env-pgsql
+    env_file: .env
     build: .
     ports:
       - "5000:5000"

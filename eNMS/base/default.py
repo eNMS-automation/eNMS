@@ -134,7 +134,7 @@ def create_netmiko_workflow():
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
-            'content': 'show ip vrf',
+            'command': 'show ip vrf',
             'content_match': 'TEST'
         },
         {
@@ -158,7 +158,7 @@ def create_netmiko_workflow():
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
-            'content': 'show ip vrf',
+            'command': 'show ip vrf',
             'content_match': '^((?!TEST).)*$',
             'content_match_regex': 'y'
         },

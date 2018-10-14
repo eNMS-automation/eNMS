@@ -11,13 +11,13 @@ showObjectModal: false
 
 const width = 1200;
 const height = 600;
-let selectedNodes = [];
+let selectedDevices = [];
 
 /**
  * Select devices in the scheduling modal.
  */
 function sendSelection() {
-  $('#devices').val(selectedNodes.map((s) => s[1].real_id));
+  $('#devices').val(selectedDevices.map((s) => s[1].real_id));
 }
 
 /**
@@ -28,8 +28,8 @@ function selectNode(d) {
   // we stop the propagation up the DOM tree so that the
   // unselectAll event bound to the canvas is not triggered
   d3.event.stopPropagation();
-  // add both the HTML and graph elements in the selectedNodes array
-  selectedNodes.push([this, d]);
+  // add both the HTML and graph elements in the selectedDevices array
+  selectedDevices.push([this, d]);
   d3.select(this)
     .select('image')
     .attr('xlink:href', d.selected_img);
@@ -57,12 +57,12 @@ function showLinkProperties(d) {
  */
 function unselectAll() {
   d3.event.preventDefault();
-  for (let i = 0; i < selectedNodes.length; i++) {
-    d3.select(selectedNodes[i][0])
+  for (let i = 0; i < selectedDevices.length; i++) {
+    d3.select(selectedDevices[i][0])
       .select('image')
-      .attr('xlink:href', selectedNodes[i][1].img);
+      .attr('xlink:href', selectedDevices[i][1].img);
   }
-  selectedNodes = [];
+  selectedDevices = [];
   sendSelection();
 }
 

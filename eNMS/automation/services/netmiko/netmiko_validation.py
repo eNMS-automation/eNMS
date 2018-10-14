@@ -15,7 +15,7 @@ class NetmikoValidationService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
-    content = Column(String)
+    command = Column(String)
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     driver = Column(String)
@@ -29,7 +29,7 @@ class NetmikoValidationService(Service):
 
     def job(self, device, payload):
         netmiko_handler = netmiko_connection(self, device)
-        command = substitute(self.content, locals())
+        command = substitute(self.command, locals())
         output = netmiko_handler.send_command(command)
         success = (
             self.content_match_regex and search(self.content_match, output) or

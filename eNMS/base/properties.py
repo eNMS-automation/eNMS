@@ -247,6 +247,7 @@ type_to_diagram_properties = {
 pretty_names = {
     'access_rights': 'Access rights',
     'action': 'Action',
+    'command': 'Command',
     'content': 'Content',
     'content_type': 'Content type',
     'description': 'Description',

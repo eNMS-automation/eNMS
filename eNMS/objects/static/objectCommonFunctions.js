@@ -20,7 +20,7 @@ table: false
  * @param {id} id - Id of the object to edit.
  */
 function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
-  $('#title').text(`Edit ${type} properties`);
+  
   $.ajax({
     type: 'POST',
     url: `/objects/get/${type}/${id}`,
@@ -32,6 +32,7 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
       $('#connection-parameters-button').click(
         partial(connectionParametersModal, id)
       );
+      $('#title').text(`Edit ${capitalize(type)} '${properties.name}'`);
     },
   });
   if (type == 'device') {
@@ -140,7 +141,7 @@ function addObjectToTable(mode, type, properties) {
  * @param {type} type - Node or link.
  */
 function showObjectTypeModal(type) { // eslint-disable-line no-unused-vars
-  $('#title').text(`Add a new ${type}`);
+  $('#title').text(`Create a New ${capitalize(type)}`);
   $(`#edit-${type}-form`).trigger('reset');
   $(`#edit-${type}`).modal('show');
 }

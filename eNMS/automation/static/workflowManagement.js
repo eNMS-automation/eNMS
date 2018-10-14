@@ -47,7 +47,7 @@ function addWorkflow(mode, properties) {
  * Open the workflow modal for creation.
  */
 function showModal() { // eslint-disable-line no-unused-vars
-  $('#title').text('Add a new workflow');
+  $('#title').text('Create a New Workflow');
   $('#edit-form').trigger('reset');
   $('#edit').modal('show');
 }
@@ -57,7 +57,7 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the workflow to edit.
  */
 function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  $('#title').text(`Edit properties`);
+  $('#title').text(`Edit Workflow`);
   $.ajax({
     type: 'POST',
     url: `/automation/get/${id}`,

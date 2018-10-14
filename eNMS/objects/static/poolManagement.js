@@ -44,7 +44,7 @@ function addPool(mode, properties) {
  * Open pool modal for creation.
  */
 function showModal() { // eslint-disable-line no-unused-vars
-  $('#title').text('Add a new pool');
+  $('#title').text('Create a New Pool');
   $('#edit-form').trigger('reset');
   $('#edit').modal('show');
 }
@@ -67,7 +67,7 @@ function showPoolModal(id) { // eslint-disable-line no-unused-vars
           } else {
             $(`#${property}`).val(value);
           }
-          $('#title').text(`Edit pool properties`);
+          $('#title').text(`Edit Pool '${result.name}'`);
         }
       }
     },

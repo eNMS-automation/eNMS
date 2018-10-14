@@ -9,7 +9,7 @@ alertify: false
  */
 function showTaskModal(id) { // eslint-disable-line no-unused-vars
   if (!id) {
-    $('#title').text('Create a new task');
+    $('#title').text('Create a New Task');
     $('#task-modal-form').trigger('reset');
     $('#task-modal').modal('show');
   } else {
@@ -26,7 +26,7 @@ function showTaskModal(id) { // eslint-disable-line no-unused-vars
           }
           $('#job').val(properties.job.id);
         }
-        $('#title').text(`Edit task '${properties.name}'`);
+        $('#title').text(`Edit Task '${properties.name}'`);
       },
     });
   }

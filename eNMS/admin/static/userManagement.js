@@ -42,7 +42,7 @@ function addUser(mode, properties) {
  */
 function showModal() { // eslint-disable-line no-unused-vars
   $('#edit-form').trigger('reset');
-  $('#title').text('Add a new user');
+  $('#title').text('Create a New User');
   $('#edit').modal('show');
 }
 
@@ -51,7 +51,7 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {userId} userId - Id of the user to be deleted.
  */
 function showUserModal(userId) { // eslint-disable-line no-unused-vars
-  $('#title').text('Edit user properties');
+  
   $.ajax({
     type: 'POST',
     url: `/admin/get/${userId}`,
@@ -62,6 +62,7 @@ function showUserModal(userId) { // eslint-disable-line no-unused-vars
       for (const [property, value] of Object.entries(properties)) {
         $(`#${property}`).val(value);
       }
+      $('#title').text(`Edit User '${properties.name}'`);
     },
   });
   $('#edit').modal('show');

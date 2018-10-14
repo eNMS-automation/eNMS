@@ -25,3 +25,11 @@ function partial(func, ...args) { // eslint-disable-line no-unused-vars
     return func.apply(this, args);
   };
 }
+
+/**
+ * Capitalize.
+ * @param {string} string - Word.
+ */
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

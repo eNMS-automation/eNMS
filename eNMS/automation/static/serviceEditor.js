@@ -19,7 +19,7 @@ workflowBuilder: false;
  * Show the Service Editor modal
  */
 function showServiceEditor() { // eslint-disable-line no-unused-vars
-  $('#title').text('Create a new service');
+  $('#title').text('Create a New Service Instance');
   $('#services').show();
   $('#service-editor-form').trigger('reset');
   editService();
@@ -32,7 +32,7 @@ function showServiceEditor() { // eslint-disable-line no-unused-vars
  */
 function editService(id) {
   if (id) {
-    $('#title').text('Edit service');
+    $('#title').text('Edit Service Instance');
   }
   $.ajax({
     type: 'POST',

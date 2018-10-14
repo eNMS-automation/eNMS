@@ -50,7 +50,7 @@ from eNMS.objects.models import Device
 def users():
     form = AddUser(request.form)
     return render_template(
-        'users_overview.html',
+        'user_management.html',
         fields=user_public_properties,
         names=pretty_names,
         users=User.serialize(),

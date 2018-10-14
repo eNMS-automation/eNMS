@@ -2,7 +2,7 @@
     display: inline-block;
     cursor: pointer;
     line-height: 1;
-    width: 200px;
+    width: 100%;
 }
 
 .fs-label-wrap {
@@ -44,7 +44,7 @@
     position: absolute;
     background-color: #fff;
     border: 1px solid #ddd;
-    width: 200px;
+    width: 100%;
     margin-top: 5px;
     z-index: 1000;
 }

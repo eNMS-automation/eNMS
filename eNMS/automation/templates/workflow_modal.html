@@ -14,7 +14,7 @@
               {% set validate = " required" if field.name == "name" else "" %}
               <label>{{ field.label }}</label>
               <div class='form-group'>
-                {{ field(class="form-control" + validate, size=8) }}
+                {{ field(class="form-control" + validate) }}
               </div>
             {% endfor %}
           </div>

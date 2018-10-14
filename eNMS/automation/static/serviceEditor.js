@@ -9,7 +9,20 @@ workflowBuilder: false;
 */
 
 (function() {
-  $('#devices,#pools').fSelect();
+  $('#devices').fSelect({
+    placeholder: 'Select devices',
+    numDisplayed: 5,
+    overflowText: '{n} devices selected',
+    noResultsText: 'No results found',
+  });
+  $('#pools').fSelect({
+    placeholder: 'Select pools',
+    numDisplayed: 5,
+    overflowText: '{n} pools selected',
+    noResultsText: 'No results found',
+    searchText: 'Search',
+    showSearch: true
+  });
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);

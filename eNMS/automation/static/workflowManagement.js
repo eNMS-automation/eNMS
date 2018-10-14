@@ -7,6 +7,23 @@ workflows: false
 
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
+(function() {
+  $('#devices').fSelect({
+    placeholder: 'Select devices',
+    numDisplayed: 5,
+    overflowText: '{n} devices selected',
+    noResultsText: 'No results found',
+  });
+  $('#pools').fSelect({
+    placeholder: 'Select pools',
+    numDisplayed: 5,
+    overflowText: '{n} pools selected',
+    noResultsText: 'No results found',
+    searchText: 'Search',
+    showSearch: true
+  });
+})();
+
 /**
  * Add workflow to the datatable.
  * @param {mode} mode - Create or edit.

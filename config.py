@@ -20,7 +20,7 @@ class Config(object):
     }
 
     # WebSSH (GoTTY)
-    GOTTY_PORT_REDIRECTION = int(environ.get('GOTTY_PORT_REDIRECTION'))
+    GOTTY_PORT_REDIRECTION = int(environ.get('GOTTY_PORT_REDIRECTION', False))
     GOTTY_SERVER_ADDR = environ.get('GOTTY_SERVER_ADDR')
     GOTTY_BYPASS_KEY_PROMPT = environ.get('GOTTY_BYPASS_KEY_PROMPT')
 

@@ -35,11 +35,11 @@ class Object(CustomBase):
     }
 
 
-class Device(CustomDevice):
+class Device(Object):
 
     __tablename__ = 'Device'
 
-    id = Column(Integer, ForeignKey('CustomDevice.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
     ip_address = Column(String)

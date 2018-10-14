@@ -65,7 +65,7 @@ def login():
         user_password = str(request.form['password'])
         user = retrieve(User, name=name)
         if user:
-            if app.production:
+            if app.config['USE_VAULT']:
                 pwd = vault_helper(app, f'user/{user.name}')['password']
             else:
                 pwd = user.password

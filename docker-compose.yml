@@ -10,7 +10,7 @@ services:
       - db_network
   enms:
     restart: always
-    env_file: .env
+    env_file: .env-pgsql
     build: .
     ports:
       - "5000:5000"

@@ -1,0 +1,37 @@
+version: '3'
+services:
+  db:
+    restart: always
+    image: postgres:10
+    env_file: .env
+    expose:
+      - 5432
+    networks:
+      - db_network
+  gentelella:
+    restart: always
+    env_file: .env
+    build: .
+    ports:
+      - "5000:5000"
+    networks:
+      - db_network
+      - web_network
+    depends_on:
+      - db
+  nginx:
+    restart: always
+    image: "nginx:latest"
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - web_network
+    depends_on: 
+      - gentelella
+networks:
+  db_network:
+    driver: bridge
+  web_network:
+    driver: bridge

@@ -35,11 +35,22 @@ class Object(CustomBase):
     }
 
 
-class Device(Object):
+CustomDevice = type(
+    'CustomDevice',
+    (Object,),
+    {
+        '__tablename__': 'CustomDevice',
+        'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
+        'test': Column(Integer, default='a')
+    }
+)
+
+
+class Device(CustomDevice):
 
     __tablename__ = 'Device'
 
-    id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('CustomDevice.id'), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
     ip_address = Column(String)

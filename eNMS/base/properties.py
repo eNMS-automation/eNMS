@@ -42,6 +42,7 @@ device_common_properties = (
     'ip_address',
     'longitude',
     'latitude',
+    'test',
     'enable_password'
 )
 
@@ -280,6 +281,7 @@ pretty_names = {
     'source_file': 'Source file',
     'status': 'Status',
     'subtype': 'Subtype',
+    'test': 'Test',
     'text file': 'File',
     'type': 'Type',
     'update_dictionnary': 'Update dictionnary',

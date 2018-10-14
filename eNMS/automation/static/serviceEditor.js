@@ -9,6 +9,7 @@ workflowBuilder: false;
 */
 
 (function() {
+  $('#devices,#pools').fSelect();
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);

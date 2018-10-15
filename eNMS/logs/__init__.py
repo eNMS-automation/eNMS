@@ -1,11 +1,11 @@
 from flask import Blueprint
 
 blueprint = Blueprint(
-    'automation_blueprint',
+    'logs_blueprint',
     __name__,
-    url_prefix='/automation',
+    url_prefix='/logs',
     template_folder='templates',
     static_folder='static'
 )
 
-import eNMS.automation.routes  # noqa: F401
+import eNMS.logs.routes  # noqa: F401

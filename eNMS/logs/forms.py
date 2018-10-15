@@ -1,35 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, TextField, SelectField, SelectMultipleField
+from wtforms import BooleanField, SelectMultipleField, TextField
 
 
-class ServiceForm(FlaskForm):
-    name = TextField()
-    description = TextField()
-    devices = SelectMultipleField(choices=())
-    pools = SelectMultipleField(choices=())
-    waiting_time = IntegerField(default=0)
+def configure_form(cls):
+    cls.properties = ('source', 'content')
+    for property in ('source', 'content'):
+        setattr(cls, property, TextField(property))
+        setattr(cls, property + 'regex', BooleanField('Regex'))
+    return cls
 
 
-class CompareLogsForm(FlaskForm):
-    first_version = SelectField(choices=())
-    second_version = SelectField(choices=())
-
-
-class AddJobForm(FlaskForm):
-    job = SelectField()
-
-
-class WorkflowCreationForm(FlaskForm):
-    name = TextField()
-    description = TextField()
-    vendor = TextField()
-    operating_system = TextField()
-    devices = SelectMultipleField(choices=())
-    pools = SelectMultipleField(choices=())
-
-
-class WorkflowBuilderForm(FlaskForm):
-    workflow = SelectField()
+@configure_form
+class LogFilteringForm(FlaskForm):
+    pass
 
 
 class LogAutomationForm(LogFilteringForm):

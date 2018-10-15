@@ -25,47 +25,47 @@
           </li>
         {% endif %}
         {% if current_user.allowed('Inventory section') %}
-        <li><a><i class="fa fa-sitemap"></i>Inventory<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="/objects/device_management">Device Management</a></li>
-            <li><a href="/objects/link_management">Link Management</a></li>
-            <li><a href="/objects/pool_management">Pool Management</a></li>
-          </ul>
-        </li>
+          <li><a><i class="fa fa-sitemap"></i>Inventory<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="/objects/device_management">Device Management</a></li>
+              <li><a href="/objects/link_management">Link Management</a></li>
+              <li><a href="/objects/pool_management">Pool Management</a></li>
+            </ul>
+          </li>
         {% endif %}
         {% if current_user.allowed('Views section') %}
-        <li><a><i class="fa fa-map-marker"></i>Views<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="/views/geographical_view">Geographical View</a></li>
-            <li><a href="/views/logical_view">Logical View</a></li>
-          </ul>
-        </li>
+          <li><a><i class="fa fa-map-marker"></i>Views<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="/views/geographical_view">Geographical View</a></li>
+              <li><a href="/views/logical_view">Logical View</a></li>
+            </ul>
+          </li>
         {% endif %}
         {% if current_user.allowed('Automation section') %}
-        <li><a><i class="fa fa-clock-o"></i>Automation<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="/automation/service_management">Service Management</a></li>
-            <li><a href="/automation/workflow_management">Workflow Management</a></li>
-            <li><a href="/automation/workflow_builder/">Workflow Builder</a></li>
-            <li><a href="/automation/syslog_automation">Syslog Automation</a></li>
-          </ul>
-        </li>
+          <li><a><i class="fa fa-clock-o"></i>Automation<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="/automation/service_management">Service Management</a></li>
+              <li><a href="/automation/workflow_management">Workflow Management</a></li>
+              <li><a href="/automation/workflow_builder/">Workflow Builder</a></li>
+              <li><a href="/automation/syslog_automation">Syslog Automation</a></li>
+            </ul>
+          </li>
         {% endif %}
         {% if current_user.allowed('Scheduling section') %}
-        <li><a><i class="fa fa-clock-o"></i>Scheduling<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="/scheduling/task_management">Task Management</a></li>
-            <li><a href="/scheduling/calendar">Calendar</a></li>
-          </ul>
-        </li>
+          <li><a><i class="fa fa-clock-o"></i>Scheduling<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="/scheduling/task_management">Task Management</a></li>
+              <li><a href="/scheduling/calendar">Calendar</a></li>
+            </ul>
+          </li>
         {% endif %}
         {% if current_user.allowed('Logs section') %}
-        <li><a><i class="fa fa-clock-o"></i>Logs<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="/logs/log_management">Log Management</a></li>
-            <li><a href="/logs/log_automation">Log Automation</a></li>
-          </ul>
-        </li>
+          <li><a><i class="fa fa-clock-o"></i>Logs<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="/logs/log_management">Log Management</a></li>
+              <li><a href="/logs/log_automation">Log Automation</a></li>
+            </ul>
+          </li>
         {% endif %}
       </ul>
     </div>

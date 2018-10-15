@@ -415,20 +415,18 @@ $('#network').contextMenu({
 });
 
 function getWorkflowStatus(){
-  $.ajax({
-    type: 'POST',
-    url: `/automation/get/${this.value}`,
-    dataType: 'json',
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        workflow = result;
-        graph = displayWorkflow(result);
-        alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
-      }
-    },
-  });
+  if (workflow) {
+    $.ajax({
+      type: 'POST',
+      url: `/automation/get_status/${workflow.id}`,
+      dataType: 'json',
+      success: function(result) {
+        if (result) {
+          nodes.update({id: result, color: '#000000'});
+        }
+      },
+    });
+  }
   setTimeout(getWorkflowStatus, 2000);
 }
 

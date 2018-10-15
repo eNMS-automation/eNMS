@@ -342,3 +342,11 @@ def save_positions(workflow_id):
         job.positions[workflow.name] = (position['x'], position['y'])
     db.session.commit()
     return jsonify({'success': True})
+
+
+@blueprint.route('/get_status/<workflow_id>', methods=['POST'])
+@login_required
+@permission_required('Automation section', redirect=False)
+def get_status(workflow_id):
+    workflow = retrieve(Workflow, id=workflow_id)
+    return jsonify(workflow.current_job)

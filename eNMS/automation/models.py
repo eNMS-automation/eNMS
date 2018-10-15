@@ -200,7 +200,7 @@ class Workflow(Job):
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
-    current_job = Column(String)
+    current_job = Column(Integer)
     jobs = relationship(
         'Job',
         secondary=job_workflow_table,
@@ -252,7 +252,7 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            self.current_job = job.name
+            self.current_job = job.id
             db.session.commit()
             job_results = job.run(payload, {device} if args else None)
             success = job_results['success']

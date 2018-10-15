@@ -7,6 +7,7 @@ from time import sleep
 
 from eNMS.base.associations import (
     job_device_table,
+    job_log_rule_table,
     job_pool_table,
     job_workflow_table
 )

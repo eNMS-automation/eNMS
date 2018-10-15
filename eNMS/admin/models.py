@@ -4,16 +4,12 @@ from sqlalchemy import Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
-try:
-    from SocketServer import BaseRequestHandler, UDPServer
-except Exception:
-    from socketserver import BaseRequestHandler, UDPServer
+from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import vault_helper
-from eNMS.logs.models import Log
 
 
 class User(CustomBase, UserMixin):
@@ -63,41 +59,6 @@ class TacacsServer(CustomBase):
 
     def __repr__(self):
         return self.ip_address
-
-
-class SyslogUDPHandler(BaseRequestHandler):
-
-    def handle(self):
-        with scheduler.app.app_context():
-            data = bytes.decode(self.request[0].strip())
-            source, _ = self.client_address
-            log = Log(source, str(data))
-            db.session.add(log)
-            db.session.commit()
-
-
-class SyslogServer(CustomBase):
-
-    __tablename__ = 'SyslogServer'
-
-    id = Column(Integer, primary_key=True)
-    ip_address = Column(String)
-    port = Column(Integer)
-
-    def __init__(self, **kwargs):
-        self.ip_address = kwargs['ip_address']
-        self.port = int(kwargs['port'])
-        self.start()
-
-    def __repr__(self):
-        return self.ip_address
-
-    def start(self):
-        UDPServer.allow_reuse_address = True
-        self.server = UDPServer((self.ip_address, self.port), SyslogUDPHandler)
-        th = Thread(target=self.server.serve_forever)
-        th.daemon = True
-        th.start()
 
 
 class Parameters(CustomBase):

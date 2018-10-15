@@ -1,18 +1,35 @@
-from datetime import datetime
-from multiprocessing.pool import ThreadPool
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict
-from sqlalchemy.orm import backref, relationship
-from time import sleep
+from re import search
+from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy.orm import relationship
 
-from eNMS.base.associations import (
-    job_device_table,
-    job_pool_table,
-    job_workflow_table,
-    task_log_rule_table
-)
+from eNMS.automation.models import LogRule
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.properties import cls_to_properties
+
+
+class Log(CustomBase):
+
+    __tablename__ = 'Log'
+
+    id = Column(Integer, primary_key=True)
+    source = Column(String)
+    content = Column(String)
+
+    def __init__(self, source, content):
+        self.source = source
+        self.content = content
+        for log_rule in LogRule.query.all():
+            trigger_tasks = all(
+                getattr(log_rule, prop) in getattr(self, prop)
+                if not getattr(log_rule, prop + 'regex')
+                else search(getattr(log_rule, prop), getattr(self, prop))
+                for prop in ('source', 'content') if getattr(log_rule, prop)
+            )
+            if trigger_tasks:
+                for task in log_rule.tasks:
+                    task.run()
+
+    def __repr__(self):
+        return self.content
 
 
 class LogRule(CustomBase):

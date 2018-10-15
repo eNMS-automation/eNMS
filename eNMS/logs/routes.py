@@ -3,11 +3,11 @@ from flask_login import login_required
 from re import search
 
 from eNMS import db
-from eNMS.logs.forms import LogAutomationForm
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
+from eNMS.base.properties import pretty_names
 from eNMS.logs import blueprint
-from eNMS.logs.forms import LogFilteringForm
+from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
 from eNMS.logs.models import Log, LogRule
 
 
@@ -21,6 +21,20 @@ def log_management():
         names=pretty_names,
         fields=('source', 'content'),
         logs=Log.serialize()
+    )
+
+
+@blueprint.route('/syslog_automation')
+@login_required
+def syslog_automation():
+    log_automation_form = LogAutomationForm(request.form)
+    log_automation_form.tasks.choices = Task.choices()
+    return render_template(
+        'log_automation.html',
+        log_automation_form=log_automation_form,
+        names=pretty_names,
+        fields=('name', 'source', 'content'),
+        log_rules=LogRule.serialize()
     )
 
 

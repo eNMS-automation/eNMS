@@ -79,7 +79,7 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
         }
         $('.fs-option').removeClass('selected');
         $('.fs-label').text('Select devices');
-        result.service.devices.map(
+        properties.devices.map(
           (n) => $(`.fs-option[data-value='${n.id}']`).click()
         );
         $('#pools').val(properties.pools.map((p) => p.id));
@@ -103,7 +103,7 @@ function editObject() { // eslint-disable-line no-unused-vars
         if (!properties) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
-          const mode = $('#title').text() == `Edit properties` ? 'edit' : 'add';
+          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
           addWorkflow(mode, properties);
           const message = `Workflow ${properties.name};
           ${mode == 'edit' ? 'edited' : 'created'}.`;

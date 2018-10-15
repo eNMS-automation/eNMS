@@ -414,6 +414,26 @@ $('#network').contextMenu({
   },
 });
 
+function getWorkflowStatus(){
+  $.ajax({
+    type: 'POST',
+    url: `/automation/get/${this.value}`,
+    dataType: 'json',
+    success: function(result) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        workflow = result;
+        graph = displayWorkflow(result);
+        alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
+      }
+    },
+  });
+  setTimeout(getWorkflowStatus, 2000);
+}
+
+getWorkflowStatus();
+
 $(window).bind('beforeunload', function() {
   savePositions();
 });

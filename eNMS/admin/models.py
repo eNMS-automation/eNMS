@@ -4,8 +4,6 @@ from sqlalchemy import Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
-from socketserver import BaseRequestHandler, UDPServer
-from threading import Thread
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import CustomBase

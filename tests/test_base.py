@@ -25,11 +25,15 @@ urls = {
     '/automation': (
         '/service_management',
         '/workflow_management',
-        '/workflow_editor'
+        '/workflow_builder'
     ),
     '/schedule': (
         '/task_management',
         '/calendar'
+    ),
+    '/logs': (
+        '/log_management',
+        '/log_automation'
     )
 }
 

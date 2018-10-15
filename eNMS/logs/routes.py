@@ -25,7 +25,7 @@ def log_management():
     )
 
 
-@blueprint.route('/syslog_automation')
+@blueprint.route('/log_automation')
 @login_required
 def syslog_automation():
     log_automation_form = LogAutomationForm(request.form)

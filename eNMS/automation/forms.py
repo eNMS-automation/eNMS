@@ -1,8 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, TextField, SelectField, SelectMultipleField
+from wtforms import (
+    HiddenField,
+    IntegerField,
+    TextField,
+    SelectField,
+    SelectMultipleField
+)
 
 
 class ServiceForm(FlaskForm):
+    id = HiddenField()
     name = TextField()
     description = TextField()
     devices = SelectMultipleField(choices=())
@@ -20,6 +27,7 @@ class AddJobForm(FlaskForm):
 
 
 class WorkflowCreationForm(FlaskForm):
+    id = HiddenField()
     name = TextField()
     description = TextField()
     vendor = TextField()

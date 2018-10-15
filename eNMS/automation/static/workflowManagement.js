@@ -79,8 +79,8 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
         }
         $('.fs-option').removeClass('selected');
         $('.fs-label').text('Select devices');
-        properties.devices.map(
-          (n) => $(`.fs-option[data-value='${n.id}']`).addClass('selected')
+        result.service.devices.map(
+          (n) => $(`.fs-option[data-value='${n.id}']`).click()
         );
         $('#pools').val(properties.pools.map((p) => p.id));
       }

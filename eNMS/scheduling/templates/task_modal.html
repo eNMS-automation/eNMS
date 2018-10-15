@@ -10,6 +10,7 @@
       <form id="task-modal-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body" style="min-height:70vh;">
           <div class="form-group">
+            {{ scheduling_form.id() }}
             <label>Name</label>
             <div class='form-group'>
               {{ scheduling_form.name(class="form-control", required=true) }}

@@ -65,7 +65,7 @@ function editService(id) {
           $('.fs-option').removeClass('selected');
           $('.fs-label').text('Select devices');
           result.service.devices.map(
-            (n) => $(`.fs-option[data-value='${n.id}']`).addClass('selected')
+            (n) => $(`.fs-option[data-value='${n.id}']`).click()
           );
           $('#pools').val(result.service.pools.map((p) => p.id));
           showModal('service-editor');

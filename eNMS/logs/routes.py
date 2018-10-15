@@ -4,6 +4,7 @@ from flask_login import login_required
 from eNMS.logs.forms import LogAutomationForm
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
+from eNMS.logs import blueprint
 
 
 @blueprint.route('/log_management')

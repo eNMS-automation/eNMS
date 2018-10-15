@@ -2,6 +2,7 @@ from re import search
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 
+from eNMS.base.associations import task_log_rule_table
 from eNMS.base.custom_base import CustomBase
 
 

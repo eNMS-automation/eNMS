@@ -5,15 +5,16 @@ from simplekml import Kml
 
 from eNMS.admin.models import Parameters
 from eNMS.base.helpers import permission_required, retrieve
-from eNMS.base.models import Log
-from eNMS.base.properties import device_subtypes, link_subtype_to_color
-from eNMS.objects.forms import AddDevice, AddLink
-from eNMS.objects.models import Pool, Device, Link
 from eNMS.base.properties import (
-    link_public_properties,
     device_public_properties,
+    device_subtypes,
+    link_public_properties,
+    link_subtype_to_color,
     pretty_names
 )
+from eNMS.logs.models import Log
+from eNMS.objects.forms import AddDevice, AddLink
+from eNMS.objects.models import Pool, Device, Link
 from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 

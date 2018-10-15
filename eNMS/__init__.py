@@ -10,7 +10,7 @@ from logging.handlers import RotatingFileHandler
 
 # for the tests, we set expire_on_commit to false
 auth = HTTPBasicAuth()
-db = SQLAlchemy(session_options={"expire_on_commit": False})
+db = SQLAlchemy(session_options={'expire_on_commit': False, 'autoflush': False})
 login_manager = LoginManager()
 scheduler = APScheduler()
 

@@ -1,5 +1,9 @@
-object_common_properties = (
-    'name',
+base_properties = (
+    'id',
+    'name'
+)
+
+object_common_properties = base_properties + (
     'subtype',
     'description',
     'model',
@@ -36,7 +40,7 @@ link_subtype_to_color = {
     'pseudowire': '#902bec'
 }
 
-device_common_properties = (
+device_properties = object_common_properties + (
     'operating_system',
     'os_version',
     'ip_address',
@@ -45,8 +49,7 @@ device_common_properties = (
     'enable_password'
 )
 
-task_public_properties = (
-    'name',
+task_public_properties = base_properties + (
     'creation_time',
     'start_date',
     'end_date',
@@ -59,26 +62,12 @@ link_common_properties = (
     'destination',
 )
 
-device_public_properties = (
-    object_common_properties +
-    device_common_properties[:-1]
-)
-
 link_public_properties = (
     object_common_properties +
     link_common_properties
 )
 
-pool_public_properties = (
-    'name',
-    'description'
-)
-
-service_table_properties = (
-    'name',
-    'type',
-    'description'
-)
+pool_public_properties = base_properties
 
 job_public_properties = (
     'name',
@@ -96,6 +85,16 @@ workflow_public_properties = job_public_properties + (
     'operating_system',
     'start_job',
     'end_job'
+)
+
+# Public properties
+
+device_public_properties = device_properties[1:-1]
+
+service_table_properties = (
+    'name',
+    'type',
+    'description'
 )
 
 workflow_table_properties = (
@@ -172,13 +171,8 @@ task_serialized_properties = (
     'frequency'
 )
 
-public_properties = (
-    device_public_properties +
-    link_public_properties
-)
-
 cls_to_properties = {
-    'Device': device_public_properties,
+    'Device': device_properties,
     'Link': link_public_properties,
     'Pool': pool_public_properties,
     'Service': service_public_properties,

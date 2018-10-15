@@ -9,11 +9,9 @@ from eNMS.base.properties import (
 
 
 class ViewOptionsForm(FlaskForm):
-    device_label_choices = [
-        (p, pretty_names[p]) for p in device_public_properties
-    ]
+    device_label_choices = [(p, p) for p in device_public_properties]
     device_label = SelectField(choices=device_label_choices)
-    link_label_choices = [(p, pretty_names[p]) for p in link_public_properties]
+    link_label_choices = [(p, p) for p in link_public_properties]
     link_label = SelectField(choices=link_label_choices)
 
 

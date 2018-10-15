@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     FloatField,
+    HiddenField,
     PasswordField,
     SelectMultipleField,
     SelectField,
@@ -17,6 +18,7 @@ from eNMS.base.properties import (
 
 
 class AddObjectForm(FlaskForm):
+    id = HiddenField()
     name = TextField()
     description = TextField()
     location = TextField()

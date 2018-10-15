@@ -20,11 +20,11 @@ table: false
  * @param {id} id - Id of the object to edit.
  */
 function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
-  
   $.ajax({
     type: 'POST',
     url: `/objects/get/${type}/${id}`,
     success: function(properties) {
+      console.log(properties);
       for (const [property, value] of Object.entries(properties)) {
         $(`#${type}-${property}`).val(value);
       }

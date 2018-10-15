@@ -151,20 +151,12 @@ def pool_management():
     )
 
 
-@blueprint.route('/get/<obj_type>/<obj_id>', methods=['POST'])
+@blueprint.route('/get/<obj_type>/<id>', methods=['POST'])
 @login_required
 @permission_required('Inventory section', redirect=False)
-def get_object(obj_type, obj_id):
-    if obj_type == 'device':
-        cls, properties = Device, device_public_properties
-    else:
-        cls, properties = Link, link_public_properties
-    obj = retrieve(cls, id=obj_id)
-    obj_properties = {
-        property: str(getattr(obj, property))
-        for property in properties
-    }
-    return jsonify(obj_properties)
+def get_object(obj_type, id):
+    device = retrieve(Device if obj_type == 'device' else Link, id=id)
+    return jsonify(device.serialized)
 
 
 @blueprint.route('/connection/<id>', methods=['POST'])

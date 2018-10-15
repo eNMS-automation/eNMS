@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     FloatField,
+    HiddenField,
     IntegerField,
     TextField,
     PasswordField,
@@ -23,6 +24,7 @@ class CreateAccountForm(FlaskForm):
 
 
 class AddUser(FlaskForm):
+    id = HiddenField()
     name = TextField()
     password = PasswordField()
     email = TextField()

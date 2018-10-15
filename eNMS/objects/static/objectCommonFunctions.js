@@ -127,8 +127,9 @@ function addObjectToTable(mode, type, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
   );
+  console.log(mode, properties.id, values);
   if (mode == 'edit') {
-    table.row($(`${properties.id}`)).data(values);
+    table.row($(`#${properties.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
     $(rowNode).attr('id', `${properties.id}`);

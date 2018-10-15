@@ -60,7 +60,10 @@ class CustomBase(db.Model):
 
 
 def factory(cls, **kwargs):
-    instance = retrieve(cls, name=kwargs['name'])
+    if 'id' in kwargs:
+        instance = retrieve(cls, id=kwargs.pop('id'))
+    else:
+        instance = retrieve(cls, name=kwargs['name'])
     if instance:
         instance.update(**kwargs)
     else:

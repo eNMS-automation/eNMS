@@ -23,6 +23,7 @@ function addUser(mode, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteUser('${properties.id}')">Delete</button>`
   );
+  console.log(mode, properties, values);
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
   } else {

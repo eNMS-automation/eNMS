@@ -1,10 +1,14 @@
 from flask import jsonify, render_template, request
 from flask_login import login_required
+from re import search
 
+from eNMS import db
 from eNMS.logs.forms import LogAutomationForm
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
 from eNMS.logs import blueprint
+from eNMS.logs.forms import LogFilteringForm
+from eNMS.logs.models import Log, LogRule
 
 
 @blueprint.route('/log_management')
@@ -46,21 +50,6 @@ def filter_logs():
         if prop in request.form and request.form[prop]
     )]
     return jsonify(logs)
-
-
-
-@blueprint.route('/syslog_automation')
-@login_required
-def syslog_automation():
-    log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.tasks.choices = Task.choices()
-    return render_template(
-        'log_automation.html',
-        log_automation_form=log_automation_form,
-        names=pretty_names,
-        fields=('name', 'source', 'content'),
-        log_rules=LogRule.serialize()
-    )
 
 
 @blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])

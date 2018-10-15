@@ -8,8 +8,7 @@ from time import sleep
 from eNMS.base.associations import (
     job_device_table,
     job_pool_table,
-    job_workflow_table,
-    task_log_rule_table
+    job_workflow_table
 )
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import cls_to_properties

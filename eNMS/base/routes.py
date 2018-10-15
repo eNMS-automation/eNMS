@@ -1,11 +1,8 @@
 from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import login_required
-from re import search
 
-from eNMS import db
 from eNMS.base import blueprint
-from eNMS.base.custom_base import factory
 from eNMS.base.classes import diagram_classes
 from eNMS.base.properties import (
     default_diagrams_properties,
@@ -13,7 +10,6 @@ from eNMS.base.properties import (
     reverse_pretty_names,
     type_to_diagram_properties
 )
-from eNMS.base.helpers import permission_required, retrieve
 
 
 @blueprint.route('/')

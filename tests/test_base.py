@@ -25,7 +25,7 @@ urls = {
         '/workflow_management',
         '/workflow_builder'
     ),
-    '/schedule': (
+    '/scheduling': (
         '/task_management',
         '/calendar'
     ),

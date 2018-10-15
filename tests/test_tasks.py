@@ -14,7 +14,6 @@ instant_task = ImmutableMultiDict([
 
 scheduled_task = ImmutableMultiDict([
     ('name', 'scheduled_task'),
-    ('start-task', 'schedule'),
     ('start_date', '30/03/2018 19:10:13'),
     ('end_date', '06/04/2018 19:10:13'),
     ('frequency', '3600'),
@@ -25,9 +24,9 @@ scheduled_task = ImmutableMultiDict([
 @check_blueprints('/scheduling')
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
-    user_client.post('schedule/scheduler', data=instant_task)
+    user_client.post('scheduling/scheduler', data=instant_task)
     assert len(Task.query.all()) == 1
-    user_client.post('schedule/scheduler', data=scheduled_task)
+    user_client.post('scheduling/scheduler', data=scheduled_task)
     assert len(Task.query.all()) == 2
 
 

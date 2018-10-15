@@ -23,7 +23,6 @@ function addUser(mode, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteUser('${properties.id}')">Delete</button>`
   );
-  console.log(mode, properties, values);
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
   } else {
@@ -52,7 +51,6 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {userId} userId - Id of the user to be deleted.
  */
 function showUserModal(userId) { // eslint-disable-line no-unused-vars
-  
   $.ajax({
     type: 'POST',
     url: `/admin/get/${userId}`,

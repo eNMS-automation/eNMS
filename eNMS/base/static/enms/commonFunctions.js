@@ -29,7 +29,8 @@ function partial(func, ...args) { // eslint-disable-line no-unused-vars
 /**
  * Capitalize.
  * @param {string} string - Word.
+ * @return {capitalizedString}
  */
-function capitalize(string) {
+function capitalize(string) { // eslint-disable-line no-unused-vars
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+capitalize: false
 fields: false
 partial: false
 table: false
@@ -127,7 +128,6 @@ function addObjectToTable(mode, type, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
   );
-  console.log(mode, properties.id, values);
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
   } else {

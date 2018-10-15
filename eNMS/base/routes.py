@@ -8,7 +8,7 @@ from eNMS.base import blueprint
 from eNMS.base.custom_base import factory
 from eNMS.base.forms import LogFilteringForm, LogAutomationForm
 from eNMS.base.classes import diagram_classes
-from eNMS.base.models import Log, LogRule
+from eNMS.base.models import Log
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,
@@ -51,20 +51,6 @@ def log_management():
     )
 
 
-@blueprint.route('/log_automation')
-@login_required
-def log_automation():
-    log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.tasks.choices = Task.choices()
-    return render_template(
-        'log_automation.html',
-        log_automation_form=log_automation_form,
-        names=pretty_names,
-        fields=('name', 'source', 'content'),
-        log_rules=LogRule.serialize()
-    )
-
-
 @blueprint.route('/filter_logs', methods=['POST'])
 @login_required
 def filter_logs():
@@ -81,35 +67,6 @@ def filter_logs():
         if prop in request.form and request.form[prop]
     )]
     return jsonify(logs)
-
-
-@blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
-@login_required
-def get_log_rule(log_rule_id):
-    return jsonify(retrieve(LogRule, id=log_rule_id).serialized)
-
-
-@blueprint.route('/save_log_rule', methods=['POST'])
-@login_required
-@permission_required('Edit logs', redirect=False)
-def save_log_rule():
-    data = request.form.to_dict()
-    data['tasks'] = [
-        retrieve(Task, id=id) for id in request.form.getlist('tasks')
-    ]
-    log_rule = factory(LogRule, **data)
-    db.session.commit()
-    return jsonify(log_rule.serialized)
-
-
-@blueprint.route('/delete_log_rule/<log_id>', methods=['POST'])
-@login_required
-@permission_required('Edit logs', redirect=False)
-def delete_log_rule(log_id):
-    log_rule = retrieve(LogRule, id=log_id)
-    db.session.delete(log_rule)
-    db.session.commit()
-    return jsonify({'success': True})
 
 
 @blueprint.route('/counters/<property>/<type>', methods=['POST'])

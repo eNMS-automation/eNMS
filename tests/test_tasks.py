@@ -1,6 +1,6 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.schedule.models import Task
+from eNMS.scheduling.models import Task
 
 from tests.test_base import check_blueprints
 from tests.test_objects import create_from_file
@@ -22,7 +22,7 @@ scheduled_task = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('/views', '/schedule')
+@check_blueprints('/scheduling')
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('schedule/scheduler', data=instant_task)

@@ -5,7 +5,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.objects.models import Device
 from eNMS.automation.models import Service
-from eNMS.schedule.models import Task
+from eNMS.scheduling.models import Task
 
 device = {
     "name": "router10",

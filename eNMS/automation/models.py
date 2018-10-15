@@ -280,23 +280,3 @@ class Workflow(Job):
             obj.properties for obj in getattr(self, 'pools')
         ]
         return properties
-
-
-class LogRule(CustomBase):
-
-    __tablename__ = 'LogRule'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    source = Column(String)
-    sourceregex = Column(Boolean)
-    content = Column(String)
-    contentregex = Column(Boolean)
-    tasks = relationship(
-        'Task',
-        secondary=task_log_rule_table,
-        back_populates='log_rules'
-    )
-
-    def __repr__(self):
-        return self.content

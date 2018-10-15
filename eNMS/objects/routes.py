@@ -204,6 +204,7 @@ def connection(id):
 @login_required
 @permission_required('Edit objects', redirect=False)
 def edit_object():
+    print(request.form.to_dict())
     cls, kwargs = process_kwargs(app, **request.form.to_dict())
     obj = factory(cls, **kwargs)
     return jsonify(obj.serialized)

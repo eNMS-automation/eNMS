@@ -57,15 +57,12 @@ task_public_properties = base_properties + (
     'status'
 )
 
-link_common_properties = (
+link_properties = object_common_properties + (
     'source',
-    'destination',
+    'destination'
 )
 
-link_public_properties = (
-    object_common_properties +
-    link_common_properties
-)
+link_public_properties = link_properties[1:]
 
 pool_public_properties = base_properties
 

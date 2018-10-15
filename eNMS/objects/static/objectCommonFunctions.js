@@ -24,9 +24,8 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: `/objects/get/${type}/${id}`,
     success: function(properties) {
-      console.log(properties);
       for (const [property, value] of Object.entries(properties)) {
-        $(`#${type}-${property}`).val(value);
+        $(`#${property}`).val(value);
       }
       $('#connection-parameters-button').unbind('click');
       $('#connection-parameters-button').click(
@@ -91,7 +90,7 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        table.row($(`#${type}-${id}`)).remove().draw(false);
+        table.row($(`#${id}`)).remove().draw(false);
         alertify.notify(
           `Object '${result.name}' successfully deleted.`,
           'error', 5
@@ -129,10 +128,10 @@ function addObjectToTable(mode, type, properties) {
     onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
-    table.row($(`#${type}-${properties.id}`)).data(values);
+    table.row($(`${properties.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${type}-${properties.id}`);
+    $(rowNode).attr('id', `${properties.id}`);
   }
 }
 

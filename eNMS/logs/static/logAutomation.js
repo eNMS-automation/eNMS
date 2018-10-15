@@ -52,7 +52,7 @@ function showModal() { // eslint-disable-line no-unused-vars
 function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/automation/get_log_rule/${id}`,
+    url: `/logs/get_log_rule/${id}`,
     success: function(logRule) {
       for (const [property, value] of Object.entries(logRule)) {
         if (property.includes('regex')) {
@@ -73,7 +73,7 @@ function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
 function saveRule() { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: '/automation/save_log_rule',
+    url: '/logs/save_log_rule',
     data: $('#edit-form').serialize(),
     success: function(logRule) {
       if (!logRule) {
@@ -96,7 +96,7 @@ function saveRule() { // eslint-disable-line no-unused-vars
 function deleteLogRule(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/automation/delete_log_rule/${id}`,
+    url: `/logs/delete_log_rule/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

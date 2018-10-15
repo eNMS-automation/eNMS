@@ -4,9 +4,7 @@ disable(CRITICAL)
 urls = {
     '': (
         '/',
-        '/dashboard',
-        '/log_management',
-        '/log_automation'
+        '/dashboard'
     ),
     '/admin': (
         '/user_management',

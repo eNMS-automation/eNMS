@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 
+from eNMS import db, scheduler
 from eNMS.base.associations import job_log_rule_table
 from eNMS.base.custom_base import CustomBase
 

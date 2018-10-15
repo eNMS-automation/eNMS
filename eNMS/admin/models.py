@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
 
-from eNMS import db, scheduler
+from eNMS import db
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import vault_helper
 

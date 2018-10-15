@@ -1,4 +1,3 @@
-from eNMS import db
 from eNMS.admin.models import TacacsServer, User
 from eNMS.base.helpers import retrieve
 from tests.test_base import check_blueprints

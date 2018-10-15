@@ -3,8 +3,7 @@ from wtforms import IntegerField, SelectField, TextField
 
 from eNMS.base.properties import (
     link_public_properties,
-    device_public_properties,
-    pretty_names
+    device_public_properties
 )
 
 

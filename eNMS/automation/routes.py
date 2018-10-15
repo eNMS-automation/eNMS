@@ -56,7 +56,7 @@ def service_management():
 
 @blueprint.route('/workflow_management')
 @login_required
-@permission_required('Workflows section')
+@permission_required('Automation section')
 def workflow_management():
     workflow_creation_form = WorkflowCreationForm(request.form)
     workflow_creation_form.devices.choices = Device.choices()
@@ -73,7 +73,7 @@ def workflow_management():
 
 @blueprint.route('/workflow_builder/')
 @login_required
-@permission_required('Workflows section')
+@permission_required('Automation section')
 def workflow_builder(workflow_id=None):
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()
@@ -175,7 +175,7 @@ def delete_object(service_id):
 
 @blueprint.route('/run_job/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Service section', redirect=False)
+@permission_required('Automation section', redirect=False)
 def run_job(job_id):
     job = retrieve(Job, id=job_id)
     now = datetime.now() + timedelta(seconds=5)
@@ -211,14 +211,14 @@ def save_service(cls_name):
 
 @blueprint.route('/show_logs/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Service section', redirect=False)
+@permission_required('Automation section', redirect=False)
 def show_logs(job_id):
     return jsonify(dumps(retrieve(Job, id=job_id).logs, indent=4))
 
 
 @blueprint.route('/get_diff/<job_id>/<v1>/<v2>', methods=['POST'])
 @login_required
-@permission_required('Service section', redirect=False)
+@permission_required('Automation section', redirect=False)
 def get_diff(job_id, v1, v2, n1=None, n2=None):
     job = retrieve(Job, id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
@@ -251,7 +251,7 @@ def add_to_workflow(workflow_id):
 
 @blueprint.route('/get/<workflow_id>', methods=['POST'])
 @login_required
-@permission_required('Workflows section', redirect=False)
+@permission_required('Automation section', redirect=False)
 def get_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
@@ -362,13 +362,14 @@ def save_positions(workflow_id):
 
 @blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
 @login_required
+@permission_required('Automation section', redirect=False)
 def get_log_rule(log_rule_id):
     return jsonify(retrieve(LogRule, id=log_rule_id).serialized)
 
 
 @blueprint.route('/save_log_rule', methods=['POST'])
 @login_required
-@permission_required('Edit logs', redirect=False)
+@permission_required('Edit log rules', redirect=False)
 def save_log_rule():
     data = request.form.to_dict()
     data['tasks'] = [
@@ -381,7 +382,7 @@ def save_log_rule():
 
 @blueprint.route('/delete_log_rule/<log_id>', methods=['POST'])
 @login_required
-@permission_required('Edit logs', redirect=False)
+@permission_required('Edit log rules', redirect=False)
 def delete_log_rule(log_id):
     log_rule = retrieve(LogRule, id=log_id)
     db.session.delete(log_rule)

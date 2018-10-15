@@ -19,7 +19,6 @@ from eNMS.automation import blueprint
 from eNMS.automation.forms import (
     AddJobForm,
     CompareLogsForm,
-    LogAutomationForm,
     ServiceForm,
     WorkflowBuilderForm,
     WorkflowCreationForm
@@ -27,7 +26,6 @@ from eNMS.automation.forms import (
 from eNMS.automation.helpers import scheduler_job
 from eNMS.automation.models import (
     Job,
-    LogRule,
     Service,
     service_classes,
     WorkflowEdge,
@@ -342,35 +340,5 @@ def save_positions(workflow_id):
     for job_id, position in request.json.items():
         job = retrieve(Job, id=job_id)
         job.positions[workflow.name] = (position['x'], position['y'])
-    db.session.commit()
-    return jsonify({'success': True})
-
-
-@blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
-@login_required
-@permission_required('Automation section', redirect=False)
-def get_log_rule(log_rule_id):
-    return jsonify(retrieve(LogRule, id=log_rule_id).serialized)
-
-
-@blueprint.route('/save_log_rule', methods=['POST'])
-@login_required
-@permission_required('Edit log rules', redirect=False)
-def save_log_rule():
-    data = request.form.to_dict()
-    data['tasks'] = [
-        retrieve(Task, id=id) for id in request.form.getlist('tasks')
-    ]
-    log_rule = factory(LogRule, **data)
-    db.session.commit()
-    return jsonify(log_rule.serialized)
-
-
-@blueprint.route('/delete_log_rule/<log_id>', methods=['POST'])
-@login_required
-@permission_required('Edit log rules', redirect=False)
-def delete_log_rule(log_id):
-    log_rule = retrieve(LogRule, id=log_id)
-    db.session.delete(log_rule)
     db.session.commit()
     return jsonify({'success': True})

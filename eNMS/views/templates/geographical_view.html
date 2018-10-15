@@ -57,6 +57,11 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
+              {% if view == 'glearth' %}
+                <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
+                  <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box">EGRHTFEFGR</p></strong>
+                </div>
+              {% endif %}
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
                 <div class="form-group">
                   <select id="select-filters" class="form-control">

@@ -48,6 +48,13 @@ for (let i = 0; i < devices.length; i++) {
   marker.on('dblclick', function(e) {
     showObjectModal('device', devices[i].id);
   });
+  marker.on('mouseover', function(e) {
+    $('#name-box').text(devices[i].name);
+    $('#name-box').show();
+  });
+  marker.on('mouseout', function(e) {
+    $('#name-box').hide();
+  });
   markersArray.push(marker);
 }
 

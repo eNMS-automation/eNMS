@@ -13,8 +13,3 @@ def configure_form(cls):
 @configure_form
 class LogFilteringForm(FlaskForm):
     pass
-
-
-class LogAutomationForm(LogFilteringForm):
-    name = TextField()
-    tasks = SelectMultipleField()

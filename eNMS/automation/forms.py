@@ -30,3 +30,8 @@ class WorkflowCreationForm(FlaskForm):
 
 class WorkflowBuilderForm(FlaskForm):
     workflow = SelectField()
+
+
+class LogAutomationForm(LogFilteringForm):
+    name = TextField()
+    tasks = SelectMultipleField()

@@ -13,7 +13,7 @@ from threading import Thread
 from eNMS import db, scheduler
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import vault_helper
-from eNMS.base.models import Log
+# from eNMS.logs.models import Log
 
 
 class User(CustomBase, UserMixin):

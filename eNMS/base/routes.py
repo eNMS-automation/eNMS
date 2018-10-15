@@ -6,7 +6,6 @@ from re import search
 from eNMS import db
 from eNMS.base import blueprint
 from eNMS.base.custom_base import factory
-from eNMS.base.forms import LogFilteringForm, LogAutomationForm
 from eNMS.base.classes import diagram_classes
 from eNMS.base.models import Log
 from eNMS.base.properties import (
@@ -16,7 +15,6 @@ from eNMS.base.properties import (
     type_to_diagram_properties
 )
 from eNMS.base.helpers import permission_required, retrieve
-from eNMS.scheduling.models import Task
 
 
 @blueprint.route('/')

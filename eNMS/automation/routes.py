@@ -96,20 +96,6 @@ def workflow_builder(workflow_id=None):
     )
 
 
-@blueprint.route('/syslog_automation')
-@login_required
-def syslog_automation():
-    log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.tasks.choices = Task.choices()
-    return render_template(
-        'log_automation.html',
-        log_automation_form=log_automation_form,
-        names=pretty_names,
-        fields=('name', 'source', 'content'),
-        log_rules=LogRule.serialize()
-    )
-
-
 @blueprint.route('/get_service/<id_or_cls>', methods=['POST'])
 @login_required
 @permission_required('Services section', redirect=False)

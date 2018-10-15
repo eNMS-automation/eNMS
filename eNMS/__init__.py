@@ -40,6 +40,7 @@ def register_blueprints(app):
         'admin',
         'automation',
         'base',
+        'logs',
         'objects',
         'scheduling',
         'views'

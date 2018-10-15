@@ -2,7 +2,6 @@ from re import search
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 
-from eNMS.automation.models import LogRule
 from eNMS.base.custom_base import CustomBase
 
 

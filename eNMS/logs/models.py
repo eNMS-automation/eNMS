@@ -42,9 +42,9 @@ class LogRule(CustomBase):
     sourceregex = Column(Boolean)
     content = Column(String)
     contentregex = Column(Boolean)
-    tasks = relationship(
-        'Task',
-        secondary=task_log_rule_table,
+    jobs = relationship(
+        'Job',
+        secondary=job_log_rule_table,
         back_populates='log_rules'
     )
 

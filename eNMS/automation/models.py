@@ -41,6 +41,11 @@ class Job(CustomBase):
         secondary=job_pool_table,
         back_populates='jobs'
     )
+    log_rules = relationship(
+        'LogRule',
+        secondary=job_log_rule_table,
+        back_populates='jobs'
+    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'Job',

@@ -16,10 +16,10 @@ job_pool_table = Table(
     Column('job_id', Integer, ForeignKey('Job.id'))
 )
 
-task_log_rule_table = Table(
-    'task_log_rule_association',
+job_log_rule_table = Table(
+    'job_log_rule_association',
     CustomBase.metadata,
-    Column('task_id', Integer, ForeignKey('Task.id')),
+    Column('job_id', Integer, ForeignKey('Job.id')),
     Column('log_rule_id', Integer, ForeignKey('LogRule.id'))
 )
 

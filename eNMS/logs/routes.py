@@ -3,6 +3,7 @@ from flask_login import login_required
 from re import search
 
 from eNMS import db
+from eNMS.automation.models import Job
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import permission_required, retrieve
 from eNMS.base.properties import pretty_names
@@ -28,7 +29,7 @@ def log_management():
 @login_required
 def syslog_automation():
     log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.tasks.choices = Task.choices()
+    log_automation_form.jobs.choices = Job.choices()
     return render_template(
         'log_automation.html',
         log_automation_form=log_automation_form,
@@ -78,8 +79,8 @@ def get_log_rule(log_rule_id):
 @permission_required('Edit log rules', redirect=False)
 def save_log_rule():
     data = request.form.to_dict()
-    data['tasks'] = [
-        retrieve(Task, id=id) for id in request.form.getlist('tasks')
+    data['jobs'] = [
+        retrieve(Job, id=id) for id in request.form.getlist('jobs')
     ]
     log_rule = factory(LogRule, **data)
     db.session.commit()

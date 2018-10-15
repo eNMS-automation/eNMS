@@ -26,11 +26,6 @@ class Task(CustomBase):
     end_date = Column(String)
     job_id = Column(Integer, ForeignKey('Job.id'))
     job = relationship('Job', back_populates='tasks')
-    log_rules = relationship(
-        'LogRule',
-        secondary=task_log_rule_table,
-        back_populates='tasks'
-    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'Task',

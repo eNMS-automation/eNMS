@@ -1,11 +1,11 @@
 base_properties = (
     'id',
-    'name'
+    'name',
+    'description'
 )
 
 object_common_properties = base_properties + (
     'subtype',
-    'description',
     'model',
     'location',
     'vendor'
@@ -49,13 +49,15 @@ device_properties = object_common_properties + (
     'enable_password'
 )
 
-task_public_properties = base_properties + (
+task_properties = base_properties + (
     'creation_time',
     'start_date',
     'end_date',
     'frequency',
     'status'
 )
+
+task_public_properties = task_properties[1:]
 
 link_properties = object_common_properties + (
     'source',
@@ -64,7 +66,7 @@ link_properties = object_common_properties + (
 
 link_public_properties = link_properties[1:]
 
-pool_public_properties = base_properties
+pool_public_properties = base_properties[1:]
 
 job_public_properties = (
     'name',

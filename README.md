@@ -45,15 +45,19 @@ Geographical View                             |  Logical View
 # 3. Service creation
 
 eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, a service can be any python script.
-If your python script, takes input parameters, eNMS will automatically generate a form in the web UI for you to create as many instances of the service as you need.
+If your python script, takes input parameters, eNMS will automatically generate a form in the web UI.
 
 To generate a form that matches your service, eNMS will perform the following conversion:
 - python `string` -> Text box.
-- python `list` -> Drop-down list (single or multiselect)
-- python `bool` -> Check box.
+- python `list` -> Drop-down list (single or multiselect).
+- python `bool` -> Checkbox.
 - python `dict` -> Text box expecting a dictionnary.
 
 ![eNMS](readme/form_generation.png)
+
+Once created, you can create as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
+
+![eNMS](readme/service_management.png)
 
 # 4. Workflows
 

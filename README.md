@@ -3,6 +3,8 @@
 | **master** | [![Build Status](https://travis-ci.org/afourmy/eNMS.svg?branch=master)](https://travis-ci.org/afourmy/eNMS) [![Coverage Status](https://coveralls.io/repos/github/afourmy/eNMS/badge.svg?branch=master)](https://coveralls.io/github/afourmy/eNMS?branch=master)
 | **develop** | [![Build Status](https://travis-ci.org/afourmy/eNMS.svg?branch=develop)](https://travis-ci.org/afourmy/eNMS) [![Coverage Status](https://coveralls.io/repos/github/afourmy/eNMS/badge.svg?branch=develop)](https://coveralls.io/github/afourmy/eNMS?branch=develop)
 
+___
+
 # Introduction
 
 eNMS is an Open Source Software entirely focused on network automation.
@@ -17,6 +19,8 @@ It encompasses the following aspects of network automation:
 - **Scheduling**: Services and Workflows can be scheduled to start at a later time, or run periodically.
 - **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
 
+___
+
 Automate your network in a few simple steps:
 
 # 1. Network creation
@@ -30,6 +34,8 @@ Dashboard                           |  Inventory
 
 Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/objects/object_management)_, _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_
 
+___
+
 # 2. Network visualization
 
 Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...), and logically with `d3.js`.
@@ -37,11 +43,13 @@ You can double-click on a node to display its properties, or start a Web SSH ses
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  ![Logical](readme/logical_view.png)
+[![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  ![Logical](readme/logical_view2.png)
 
 Try it out yourself: _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_
 
-# 3. Creation of scripts and workflows
+___
+
+# 3. Service creation
 
 The following types of script can be created:
 - **Netmiko _configuration_**: list of commands to configure the device (plain text or Jinja2 template).
@@ -57,7 +65,13 @@ There are two types of edge in a workflow: `success edge` and `failure edge`. Th
 
 Try it out yourself: _[Script creation](http://afourmy.pythonanywhere.com/scripts/script_creation)_, _[Script management](http://afourmy.pythonanywhere.com/scripts/script_management)_, _[VRF configuration workflow](http://afourmy.pythonanywhere.com/workflows/manage_configure_vrf)_ (double-click on a script to display its properties)
 
-# 4. Scheduling
+___
+
+# 4. Workflows
+
+___
+
+# 5. Scheduling
 
 Once a script / workflow has been created, a task can be scheduled from the graphical view.
 The targets are selected graphically. Filters can be used to schedule a task on a specific subset of device.
@@ -69,6 +83,8 @@ The following parameters are available:
 
 Try it out yourself (`Scheduling` button): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Calendar](http://afourmy.pythonanywhere.com/tasks/calendar)_
 
+___
+
 # 5. Comparison of the results
 
 The results of a periodic task can be compared between two different times, devices or tasks.
@@ -76,7 +92,9 @@ eNMS displays a dynamic line-by-line diff of the outputs.
 
 Try it out yourself: _[Task management](http://afourmy.pythonanywhere.com/tasks/task_management)_
 
-# Miscellaneous
+___
+
+# Advanced features
 
 - eNMS can act as a TACACS+ authentication server: upon authentication, a request will be sent to the server to check the credentials and log in the user.
 - eNMS can act as a Syslog server: all logs are stored in the database, and can be filtered with regular expressions. Eventually, the idea is to use the logs for event-driven automation, i.e trigger the execution of a script upon receiving a specific type of log.

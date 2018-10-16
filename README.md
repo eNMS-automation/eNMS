@@ -36,8 +36,8 @@ Once created, eNMS can display your network geographically on a 2D or 3D world m
 You can double-click on a node to display its properties, or start a Web SSH session to the device.
 
 Geographical View                             |  Logical View
-:--------------------------------------------:|:------------------------------------:
-![Geographical](readme/geographical_view.png)  |  ![Logical](readme/logical_view.png)
+:--------------------------------------------:|:-------------------------------:
+![Geographical](readme/geographical.png)      |  ![Logical](readme/logical.png)
 
 Try it out yourself: _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_
 

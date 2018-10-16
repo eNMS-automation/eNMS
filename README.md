@@ -68,13 +68,9 @@ When a workflow is executed, its status will be updated in real-time on the web 
 
 ## 5. Scheduling
 
-Once a script / workflow has been created, a task can be scheduled from the graphical view.
-The targets are selected graphically. Filters can be used to schedule a task on a specific subset of device.
+Services and workflows can be run directly from the web UI. You can also schedule them to run at a later time, and periodically by defining a start date and an end date. All scheduled tasks are displayed in a calendar.
 
-The following parameters are available:
-- **Frequency**: the task is executed periodically. This is especially useful for tasks that pull some information from the device, i.e netmiko **_show commands_** / **_NAPALM getters_** tasks.
-- **Start date**: instead of running the task immediately, the task will start at a specific time.
-- **End date**: used for a periodic task to stop at a specific time.
+![eNMS](readme/calendar.png)
 
 Try it out yourself (`Scheduling` button): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Calendar](http://afourmy.pythonanywhere.com/tasks/calendar)_
 

@@ -421,8 +421,9 @@ function getWorkflowStatus(){
       url: `/automation/get_status/${workflow.id}`,
       dataType: 'json',
       success: function(result) {
+        $('#status').text(result.status);
         if (result) {
-          nodes.update({id: result, color: '#000000'});
+          console.log(result);
         }
       },
     });

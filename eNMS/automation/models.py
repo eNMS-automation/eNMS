@@ -200,7 +200,7 @@ class Workflow(Job):
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     vendor = Column(String)
     operating_system = Column(String)
-    current_job = Column(Integer)
+    status = Column(String, default='Idle')
     jobs = relationship(
         'Job',
         secondary=job_workflow_table,
@@ -218,6 +218,12 @@ class Workflow(Job):
         'Job',
         primaryjoin='Job.id == Workflow.end_job_id',
         foreign_keys='Workflow.end_job_id'
+    )
+    current_job_id = Column(Integer, ForeignKey('Workflow.id'))
+    current_job = relationship(
+        'Job',
+        primaryjoin='Job.id == Workflow.current_job_id',
+        foreign_keys='Workflow.current_job_id'
     )
 
     __mapper_args__ = {
@@ -239,6 +245,7 @@ class Workflow(Job):
         self.logs[str(datetime.now())] = results
 
     def job(self, args=None):
+        self.status = 'Running'
         if args:
             device, results = args
         jobs, visited = [self.start_job], set()
@@ -252,7 +259,7 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            self.current_job = job.id
+            self.current_job = job
             db.session.commit()
             job_results = job.run(payload, {device} if args else None)
             success = job_results['success']
@@ -263,6 +270,7 @@ class Workflow(Job):
                     jobs.append(successor)
             payload[job.name] = job_results
             sleep(job.waiting_time)
+        self.status = 'Idle'
         if args:
             results['devices'][device.name] = payload
         else:
@@ -275,6 +283,8 @@ class Workflow(Job):
             properties['start_job'] = self.start_job.properties
         if self.end_job:
             properties['end_job'] = self.end_job.properties
+        if self.current_job:
+            properties['current_job'] = self.current_job.properties
         properties['tasks'] = [
             obj.properties for obj in getattr(self, 'tasks')
         ]

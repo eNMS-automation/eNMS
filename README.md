@@ -22,9 +22,9 @@ It encompasses the following aspects of network automation:
 
 ___
 
-Automate your network in a few simple steps:
+# Main features
 
-# 1. Network creation
+## 1. Network creation
 
 Nodes and links can be created either one by one, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
 A dashboard provides a graphical overview of all objects with dynamic charts.
@@ -33,7 +33,7 @@ Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
 ![Inventory](readme/inventory.png)  |  ![Dashboard](readme/dashboard.png)
 
-# 2. Network visualization
+## 2. Network visualization
 
 Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...), and logically with `d3.js`.
 You can double-click on a node to display its properties, or start a Web SSH session to the device.
@@ -42,7 +42,7 @@ Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
 [![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  ![Logical](readme/logical_view2.png)
 
-# 3. Service creation
+## 3. Service creation
 
 eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, a service can be any python script.
 If your python script, takes input parameters, eNMS will automatically generate a form in the web UI.
@@ -59,12 +59,14 @@ Once created, you can create as many instances of your service as you need. Serv
 
 ![eNMS](readme/service_management.png)
 
-# 4. Workflows
+## 4. Workflows
 
-Scripts can be combined to form a **workflow**. A workflow is a directed graph which vertices are scripts.
-There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).
+Services can be combined as a workflow. In a workflow, services can be connected with two types of edge: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).
+When a workflow is executed, its status will be updated in real-time on the web UI.
 
-# 5. Scheduling
+![eNMS](readme/workflow.png)
+
+## 5. Scheduling
 
 Once a script / workflow has been created, a task can be scheduled from the graphical view.
 The targets are selected graphically. Filters can be used to schedule a task on a specific subset of device.

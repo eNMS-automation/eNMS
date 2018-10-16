@@ -72,24 +72,29 @@ Services and workflows can be run directly from the web UI. You can also schedul
 
 ![eNMS](readme/calendar.png)
 
-Try it out yourself (`Scheduling` button): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Calendar](http://afourmy.pythonanywhere.com/tasks/calendar)_
+Check out the docs: _[Scheduling](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Calendar](http://afourmy.pythonanywhere.com/tasks/calendar)_
 
-___
+## 6. Event-driven automation
 
-# 5. Comparison of the results
-
-The results of a periodic task can be compared between two different times, devices or tasks.
-eNMS displays a dynamic line-by-line diff of the outputs.
-
-Try it out yourself: _[Task management](http://afourmy.pythonanywhere.com/tasks/task_management)_
+Event-driven automation in eNMS is twofold:
+- eNMS has an internal ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a worflow with a POST request to the appropriate URL.
+- eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
 
 ___
 
 # Advanced features
 
+## 1. Authentication
+
 - eNMS can act as a TACACS+ authentication server: upon authentication, a request will be sent to the server to check the credentials and log in the user.
-- eNMS can act as a Syslog server: all logs are stored in the database, and can be filtered with regular expressions. Eventually, the idea is to use the logs for event-driven automation, i.e trigger the execution of a script upon receiving a specific type of log.
-- From the geographical view, networks can be displayed on the earth with a 3D map. They can also be exported to Google Earth.
+- Authentication with RADIUS and Active Directory is currently under development.
+
+## 2. Network creation with external Network Source of Truth
+
+## 3. Network export
+
+- 
+- Networks can also be exported to Google Earth (as a `.kmz` file).
 
 # Getting started
 

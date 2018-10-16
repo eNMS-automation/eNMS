@@ -7,7 +7,7 @@
 
 eNMS is an open source web application designed to help automate networks graphically.
 
-![eNMS](readme/eNMS.png)
+![eNMS](readme/introduction.png)
 
 It encompasses the following aspects of network automation:
 - **Configuration management**: commit/rollback of a configuration via NAPALM.

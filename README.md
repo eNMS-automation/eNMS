@@ -14,6 +14,7 @@ eNMS is an Open Source Software entirely focused on network automation.
 It encompasses the following aspects of network automation:
 - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm.
 - **Ansible Service**: Sending and managing Ansible playbooks.
+- **ReST Service**: Send a ReST call (GET/POST/DELETE/...) with variable URL and payload.
 - **Custom Services**: Any of your python scripts can be automatically integrated into the web UI.
 - **Workflows**: Services can be combined together graphically in a workflow.
 - **Scheduling**: Services and Workflows can be scheduled to start at a later time, or run periodically.
@@ -32,10 +33,6 @@ Dashboard                           |  Inventory
 :----------------------------------:|:-----------------------------------:
 ![Dashboard](readme/inventory.png)  |  ![Inventory](readme/dashboard.png)
 
-Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/objects/object_management)_, _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_
-
-___
-
 # 2. Network visualization
 
 Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...), and logically with `d3.js`.
@@ -45,31 +42,23 @@ Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
 [![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  ![Logical](readme/logical_view2.png)
 
-Try it out yourself: _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_
-
-___
-
 # 3. Service creation
 
-The following types of script can be created:
-- **Netmiko _configuration_**: list of commands to configure the device (plain text or Jinja2 template).
-- **Netmiko _validation_**: list of command which output must contain a specific pattern.
-- **NAPALM _configuration_ task**: partial or full configuration (plain text or Jinja2 template) of the device.
-- **NAPALM _getters_**: list of getters which output is displayed in the task logs.
-- **Ansible playbook**: send an ansible playbook with optional arguments.
-- **ReST Call**: issue a GET/POST/PUT/DELETE ReST call.
-- **Custom script**: any python script you create is automatically detected and added to the web UI.
+eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, a service can be any python script.
+If your python script, takes input parameters, eNMS will automatically generate a form in the web UI for you to create as many instances of the service as you need.
 
-Scripts can be combined to form a **workflow**. A workflow is a directed graph which vertices are scripts.
-There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).
+To generate a form that matches your service, eNMS will perform the following conversion:
+- python `string` -> Text box.
+- python `list` -> Drop-down list (single or multiselect)
+- python `bool` -> Check box.
+- python `dict` -> Text box expecting a dictionnary.
 
-Try it out yourself: _[Script creation](http://afourmy.pythonanywhere.com/scripts/script_creation)_, _[Script management](http://afourmy.pythonanywhere.com/scripts/script_management)_, _[VRF configuration workflow](http://afourmy.pythonanywhere.com/workflows/manage_configure_vrf)_ (double-click on a script to display its properties)
 
-___
 
 # 4. Workflows
 
-___
+Scripts can be combined to form a **workflow**. A workflow is a directed graph which vertices are scripts.
+There are two types of edge in a workflow: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).
 
 # 5. Scheduling
 

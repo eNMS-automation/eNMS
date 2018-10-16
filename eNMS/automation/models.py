@@ -259,8 +259,9 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            self.current_job = job
-            db.session.commit()
+            if not args:
+                self.current_job = job
+                db.session.commit()
             job_results = job.run(payload, {device} if args else None)
             success = job_results['success']
             if job == self.end_job:

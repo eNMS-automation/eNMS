@@ -96,6 +96,8 @@ ___
 - 
 - Networks can also be exported to Google Earth (as a `.kmz` file).
 
+___
+
 # Getting started
 
 _[Installation](https://enms.readthedocs.io/en/latest/base/installation.html)_

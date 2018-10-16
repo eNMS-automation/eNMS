@@ -418,13 +418,12 @@ function getWorkflowStatus(){
   if (workflow) {
     $.ajax({
       type: 'POST',
-      url: `/automation/get_status/${workflow.id}`,
+      url: `/automation/get/${workflow.id}`,
       dataType: 'json',
       success: function(result) {
-        $('#status').text(result.status);
-        if (result) {
-          console.log(result);
-        }
+        $('#status').text(`Status: ${result.status}.`);
+        const job = result.current_job ? result.current_job.name : 'None';
+        $('#current-job').text(`Current job: ${job}.`);
       },
     });
   }

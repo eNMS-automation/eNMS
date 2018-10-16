@@ -23,9 +23,9 @@ eNMS provides a way to automate networks graphically, in a few simple steps:
 Nodes and links can be created either one by one by specifying all properties manually, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
 A dashboard provides a graphical overview of all objects with dynamic charts.
 
-Dashboard                      |  Inventory
-:-----------------------------:|:-------------------------:
-![eNMS](readme/inventory.png)  |  ![eNMS](readme/dashboard.png)
+Dashboard                           |  Inventory
+:----------------------------------:|:-----------------------------------:
+![Dashboard](readme/inventory.png)  |  ![Inventory](readme/dashboard.png)
 
 Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/objects/object_management)_, _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_
 

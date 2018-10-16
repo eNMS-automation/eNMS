@@ -36,6 +36,7 @@ Once created, eNMS can display your network geographically on a 2D or 3D world m
 You can click on a node to instantly start a Web SSH session to the associated device.
 
 
+
 Try it out yourself (double-click on a node to display its properties): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Filters](http://afourmy.pythonanywhere.com/objects/object_filtering)_
 
 # 3. Creation of scripts and workflows

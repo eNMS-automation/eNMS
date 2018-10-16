@@ -80,7 +80,7 @@ let svg = d3.select('#logical_view').append('svg')
 let force = d3.layout.force()
   .gravity(0.2)
   .distance(10)
-  .charge(-50)
+  .charge(-1000)
   .size([width, height]);
 
 force

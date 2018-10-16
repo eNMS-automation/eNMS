@@ -43,7 +43,7 @@ You can double-click on a node to display its properties, or start a Web SSH ses
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  ![Logical](readme/logical_view2.png)
+[![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  ![Logical](readme/logical_view.png)
 
 Try it out yourself: _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_
 

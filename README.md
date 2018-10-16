@@ -29,9 +29,9 @@ Automate your network in a few simple steps:
 Nodes and links can be created either one by one, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
 A dashboard provides a graphical overview of all objects with dynamic charts.
 
-Dashboard                           |  Inventory
+Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
-![Dashboard](readme/inventory.png)  |  ![Inventory](readme/dashboard.png)
+![Inventory](readme/inventory.png)  |  ![Dashboard](readme/dashboard.png)
 
 # 2. Network visualization
 
@@ -53,7 +53,7 @@ To generate a form that matches your service, eNMS will perform the following co
 - python `bool` -> Check box.
 - python `dict` -> Text box expecting a dictionnary.
 
-
+![eNMS](readme/form_generation.png)
 
 # 4. Workflows
 

@@ -5,22 +5,23 @@
 
 # Introduction
 
-eNMS is an open source web application designed to help automate networks graphically.
+eNMS is an Open Source Software entirely focused on network automation.
 
 ![eNMS](readme/introduction.png)
 
 It encompasses the following aspects of network automation:
-- **Configuration management**: commit/rollback of a configuration via NAPALM.
-- **Ansible support**: sending and managing ansible playbooks.
-- **Custom scripts**: any python script is automatically turned into an eNMS script and added to the web UI.
-- **Workflows**: Scripts can be combined together graphically in a workflow.
-- **Scheduling**: any task (script or workflow) can be scheduled to start and end at specific times, periodically or not.
+- **Configuration Management Service**: Commit / Rollback of a configuration with Napalm.
+- **Ansible Service**: Sending and managing Ansible playbooks.
+- **Custom Services**: Any of your python scripts can be automatically integrated into the web UI.
+- **Workflows**: Services can be combined together graphically in a workflow.
+- **Scheduling**: Services and Workflows can be scheduled to start at a later time, or run periodically.
+- **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
 
-eNMS provides a way to automate networks graphically, in a few simple steps:
+Automate your network in a few simple steps:
 
 # 1. Network creation
 
-Nodes and links can be created either one by one by specifying all properties manually, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
+Nodes and links can be created either one by one, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
 A dashboard provides a graphical overview of all objects with dynamic charts.
 
 Dashboard                           |  Inventory
@@ -31,12 +32,9 @@ Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/obje
 
 # 2. Network visualization
 
-Two visualizations are proposed:
-- **Geographical view**: display the network on a world map in 2D or 3D, with Open Street Map or Google Map.
-- **Logical view**: display the network in an aesthetically-pleasing way via a force-based algorithm.
+Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...), and logically with `d3.js`.
+You can click on a node to instantly start a Web SSH session to the associated device.
 
-Views can be filtered to display only a subset of the network. A pool is a combination of values (or regular expressions) for each property: it defines whether an object should be displayed or not.
-You can display the property of an object from both views, and start an SSH session to a device.
 
 Try it out yourself (double-click on a node to display its properties): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Filters](http://afourmy.pythonanywhere.com/objects/object_filtering)_
 

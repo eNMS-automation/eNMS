@@ -33,13 +33,13 @@ Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/obje
 # 2. Network visualization
 
 Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...), and logically with `d3.js`.
-You can click on a node to instantly start a Web SSH session to the associated device.
+You can double-click on a node to display its properties, or start a Web SSH session to the device.
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:------------------------------------:
-![Geographical](readme/geographica_view.png)  |  ![Logical](readme/logical_view.png)
+![Geographical](readme/geographical_view.png)  |  ![Logical](readme/logical_view.png)
 
-Try it out yourself (double-click on a node to display its properties): _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Filters](http://afourmy.pythonanywhere.com/objects/object_filtering)_
+Try it out yourself: _[Geographical view](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_
 
 # 3. Creation of scripts and workflows
 

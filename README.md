@@ -11,22 +11,21 @@ eNMS is an open source web application designed to help automate networks graphi
 
 It encompasses the following aspects of network automation:
 - **Configuration management**: commit/rollback of a configuration via NAPALM.
-- **Netmiko scripting**: using netmiko to push a configuration, or display the result of a set of commands.
 - **Ansible support**: sending and managing ansible playbooks.
 - **Custom scripts**: any python script is automatically turned into an eNMS script and added to the web UI.
 - **Workflows**: Scripts can be combined together graphically in a workflow.
 - **Scheduling**: any task (script or workflow) can be scheduled to start and end at specific times, periodically or not.
 
-While network automation traditionally requires scripting skills, eNMS provides a way to automate networks graphically, in a few simple steps:
-- **Creation** of the network.
-- **Visualization** of the network on a world map (geographical view), or via a force-based algorithm (logical view).
-- **Creation** of scripts and workflows.
-- **Scheduling** of script & workflows
+eNMS provides a way to automate networks graphically, in a few simple steps:
 
 # 1. Network creation
 
 Nodes and links can be created either one by one by specifying all properties manually, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
-The dashboard provides a graphical overview of all objects with dynamic charts.
+A dashboard provides a graphical overview of all objects with dynamic charts.
+
+Dashboard                      |  Inventory
+:-----------------------------:|:-------------------------:
+![eNMS](readme/inventory.png)  |  ![eNMS](readme/dashboard.png)
 
 Try it out yourself: _[Object management](http://afourmy.pythonanywhere.com/objects/object_management)_, _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_
 

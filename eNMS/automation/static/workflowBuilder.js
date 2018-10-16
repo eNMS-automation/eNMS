@@ -414,7 +414,10 @@ $('#network').contextMenu({
   },
 });
 
-function getWorkflowStatus(){
+/**
+ * Get Workflow Status.
+ */
+function getWorkflowStatus() {
   if (workflow) {
     $.ajax({
       type: 'POST',

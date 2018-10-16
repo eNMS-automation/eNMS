@@ -270,7 +270,7 @@ class Workflow(Job):
                     jobs.append(successor)
             payload[job.name] = job_results
             sleep(job.waiting_time)
-        self.status = 'Idle'
+        self.status, self.current_job = 'Idle', None
         if args:
             results['devices'][device.name] = payload
         else:

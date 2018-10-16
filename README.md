@@ -7,7 +7,7 @@
 
 eNMS is an Open Source Software entirely focused on network automation.
 
-![eNMS](readme/introduction.png)
+![eNMS](readme/enms.png)
 
 It encompasses the following aspects of network automation:
 - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm.

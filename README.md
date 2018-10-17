@@ -7,7 +7,7 @@ ___
 
 # Introduction
 
-eNMS is an Open Source Software entirely focused on network automation.
+eNMS is a vendor-agnostic NMS designed for building network automation solutions.
 
 ![eNMS](readme/enms.png)
 
@@ -103,10 +103,19 @@ ___
 # Getting started
 
 ## Quick start
+    git clone https://github.com/afourmy/eNMS.git
+    cd eNMS
+    pip3 install -r requirements.txt (on Windows
+    export FLASK_APP=app.py (on Windows, use `set` instead of `export`)
+    flask run --host=0.0.0.0
 
-- `git pull https://github.com/afourmy/eNMS.git`
+## Quick start as a docker container
+    docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
 
-_[Installation](https://enms.readthedocs.io/en/latest/base/installation.html)_
+## Deploy eNMS in production
+
+In production, eNMS is configured to use a PostgreSQL database and a Hashicorp Vault (storage of network credentials).
+Check out the `Installation` section of the docs: _[Install eNMS](https://enms.readthedocs.io/en/latest/base/installation.html)_
 
 # Contact
 

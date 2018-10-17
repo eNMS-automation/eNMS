@@ -81,5 +81,5 @@
     var fields = {{ fields|tojson|safe }};
     var logs = {{ logs|tojson|safe }};
   </script>
-  <script src="{{ url_for('static', filename='logManagement.js') }}"></script>
+  <script src="{{ url_for('logs_blueprint.static', filename='logManagement.js') }}"></script>
 {% endblock javascripts %}

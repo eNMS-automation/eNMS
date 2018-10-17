@@ -34,7 +34,7 @@ function addLog(properties) {
 function filterLogs() { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: '/filter_logs',
+    url: '/logs/filter_logs',
     data: $('#filtering-form').serialize(),
     success: function(logs) {
       table.clear().draw();
@@ -53,7 +53,7 @@ function filterLogs() { // eslint-disable-line no-unused-vars
 function deleteLog(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/delete_log/${id}`,
+    url: `/logs/delete_log/${id}`,
     success: function(result) {
       if (!result) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

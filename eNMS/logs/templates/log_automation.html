@@ -17,5 +17,5 @@
     var fields = {{ fields|tojson|safe }};
     var logRules = {{ log_rules|tojson|safe }};
   </script>
-  <script src="{{ url_for('static', filename='logAutomation.js') }}"></script>
+  <script src="{{ url_for('logs_blueprint.static', filename='logAutomation.js') }}"></script>
 {% endblock javascripts %}

@@ -109,6 +109,14 @@ def get_service(id_or_cls):
               name="{c.key}" type="text">
             </div>'''
 
+    def build_textarea_box(c):
+        return f'''
+            <label>{c.key}</label>
+            <div class="form-group">
+              <input class="form-control" id="{c.key}"
+              name="{c.key}" type="text">
+            </div>'''
+
     def build_select_box(c):
         options = ''.join(
             f'<option value="{k}">{v}</option>'
@@ -139,6 +147,8 @@ def get_service(id_or_cls):
             form += build_boolean_box(col)
         elif hasattr(cls, f'{col.key}_values'):
             form += build_select_box(col)
+        elif hasattr(cls, f'{col.key}_textarea'):
+            form += build_textarea_box(col)
         else:
             form += build_text_box(col)
     return jsonify({

@@ -23,6 +23,7 @@ class NapalmConfigurationService(Service):
         ('load_replace_candidate', 'Load replace')
     )
     content = Column(String)
+    content_textarea = True
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     operating_system = Column(String)

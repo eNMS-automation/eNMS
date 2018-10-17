@@ -17,6 +17,7 @@ class NetmikoConfigurationService(Service):
     vendor = Column(String)
     operating_system = Column(String)
     content = Column(String)
+    content_textarea = True
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     global_delay_factor = Column(Float, default=1.)

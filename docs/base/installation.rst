@@ -65,7 +65,14 @@ In production mode, the secret key is not automatically set to a default value i
  export ENMS_SECRET_KEY=value-of-your-secret-key
 
 
-All credentials in production more are stored in a Hashicorp Vault: you cannot use eNMS in production without first setting up a Vault.
+All credentials should be stored in a Hashicorp Vault: the environement variable ``USE_VAULT`` tells eNMS that a Vault has been setup and can be used. This variable is set to ``0`` by default in debug mode, and ``1`` in production mode.
+If you want to use the Vault in debug mode, you can set it to 1:
+ 
+::
+
+ # set the USE_VAULT environment variable
+ export USE_VAULT=1
+
 Once this is done, you must tell eNMS how to connect to the vault:
 
 ::

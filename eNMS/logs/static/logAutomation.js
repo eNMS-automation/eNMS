@@ -60,6 +60,7 @@ function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
         } else {
           $(`#${property}`).val(value);
         }
+        $('#jobs').val(logRule.jobs.map((j) => j.id));
         $('#title').text(`Edit log rule properties`);
       }
     },

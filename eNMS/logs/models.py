@@ -88,3 +88,9 @@ class LogRule(CustomBase):
 
     def __repr__(self):
         return self.content
+
+    @property
+    def serialized(self):
+        properties = self.properties
+        properties['jobs'] = [obj.properties for obj in getattr(self, 'jobs')]
+        return properties

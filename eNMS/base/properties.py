@@ -148,7 +148,8 @@ log_public_properties = (
 log_rule_public_properties = log_public_properties + (
     'name',
     'sourceregex',
-    'contentregex'
+    'contentregex',
+    'jobs'
 )
 
 parameters_public_properties = (

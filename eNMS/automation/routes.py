@@ -292,8 +292,7 @@ def add_node(workflow_id, job_id):
 @permission_required('Edit workflows', redirect=False)
 def delete_node(workflow_id, job_id):
     job = retrieve(Job, id=job_id)
-    db.session.delete(job)
-    db.session.commit()
+    workflow.jobs.remove(job)
     return jsonify(job.properties)
 
 

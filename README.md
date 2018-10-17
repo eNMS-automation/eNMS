@@ -91,14 +91,20 @@ ___
 
 ## 2. Network creation with external Network Source of Truth
 
+If you use an NSoT like OpenNMS or Netbox to document your network, eNMS can automatically import the network topology (nodes and links), as well as all IP addresses and geographical coordinates.
+
 ## 3. Network export
 
-- 
-- Networks can also be exported to Google Earth (as a `.kmz` file).
+- Networks can be exported as an Excel file. 
+- Networks can be exported as a `kmz` file, for you to visualize your network on Google Earth.
 
 ___
 
 # Getting started
+
+## Quick start
+
+- `git pull https://github.com/afourmy/eNMS.git`
 
 _[Installation](https://enms.readthedocs.io/en/latest/base/installation.html)_
 

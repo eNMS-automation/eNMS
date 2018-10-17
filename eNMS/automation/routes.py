@@ -113,8 +113,8 @@ def get_service(id_or_cls):
         return f'''
             <label>{c.key}</label>
             <div class="form-group">
-              <input class="form-control" id="{c.key}"
-              name="{c.key}" type="text">
+              <textarea style="height: 150px;" rows="30" class="form-control" id="{c.key}"
+              name="{c.key}"></textarea>
             </div>'''
 
     def build_select_box(c):

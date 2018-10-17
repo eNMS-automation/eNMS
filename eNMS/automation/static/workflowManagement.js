@@ -122,7 +122,7 @@ function editObject() { // eslint-disable-line no-unused-vars
 function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
   $.ajax({
     type: 'POST',
-    url: `/automation/delete/${id}`,
+    url: `/automation/delete_workflow/${id}`,
     success: function(workflow) {
       if (!workflow) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

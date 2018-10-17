@@ -266,14 +266,14 @@ def edit_workflow():
     return jsonify(factory(Workflow, **form).serialized)
 
 
-@blueprint.route('/delete/<workflow_id>', methods=['POST'])
+@blueprint.route('/delete_workflow/<workflow_id>', methods=['POST'])
 @login_required
 @permission_required('Edit workflows', redirect=False)
 def delete_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     db.session.delete(workflow)
     db.session.commit()
-    return jsonify(workflow)
+    return jsonify(workflow.serialized)
 
 
 @blueprint.route('/add_node/<workflow_id>/<job_id>', methods=['POST'])

@@ -293,7 +293,6 @@ def add_node(workflow_id, job_id):
 def delete_node(workflow_id, job_id):
     job = retrieve(Job, id=job_id)
     workflow = retrieve(Workflow, id=workflow_id)
-    print(workflow.jobs, job)
     workflow.jobs.remove(job)
     db.session.commit()
     return jsonify(job.properties)

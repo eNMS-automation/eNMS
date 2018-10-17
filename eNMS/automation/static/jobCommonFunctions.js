@@ -19,7 +19,7 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
       if (!logs) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
-        $('#logs').text(logs.replace(/\\n/g,'\n'));
+        $('#logs').text(logs.replace(/\\n/g, '\n'));
       }
     },
   });

@@ -89,14 +89,13 @@ for (let i = 0; i < devices.length; i++) {
   marker.setIcon(marker.icon);
   markersArray.push(marker);
 
-  marker.on('dblclick', function(e) {
-    showObjectModal('device', this.device_id);
-  });
-
   marker.on('click', function(e) {
-    e.target.setIcon(e.target.selected_icon);
-    selection.push(this.device_id);
-    $('#devices').val(selection);
+    /*
+      e.target.setIcon(e.target.selected_icon);
+      selection.push(this.device_id);
+      $('#devices').val(selection);
+    */
+    showObjectModal('device', this.device_id);
   });
 
   marker.bindTooltip(device[labels.device], {

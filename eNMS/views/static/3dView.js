@@ -38,14 +38,14 @@ for (let i = 0; i < devices.length; i++) {
   ).addTo(map);
   marker.device_id = device.id;
   marker.on('click', function(e) {
-    $(e.target.element.children[0]).css(
+    /*
+      $(e.target.element.children[0]).css(
       'background-image',
       'url("static/images/3D/selection/router.gif")'
-    );
-    selection.push(devices[i].id);
-    $('#devices').val(selection);
-  });
-  marker.on('dblclick', function(e) {
+      );
+      selection.push(devices[i].id);
+      $('#devices').val(selection);
+    */
     showObjectModal('device', devices[i].id);
   });
   marker.on('mouseover', function(e) {

@@ -2,34 +2,19 @@
 What is eNMS
 ============
 
-eNMS is an open source web application designed to help automate networks.
+eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
+
 It encompasses the following aspects of network automation:
+- **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
+- **Ansible Service**: Sending and managing Ansible playbooks.
+- **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
+- **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
+- **Workflows**: Services can be combined together graphically in a workflow.
+- **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
+- **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
 
-* **Configuration Management service**: commit / rollback of a configuration via Netmiko or Napalm.
-* **Ansible Playbook service**: sending and managing ansible playbooks.
-* **Custom services**: any python script is automatically detected by eNMS and added to the web UI.
-* **Workflows**: all services can be organized in workflows.
-* **Scheduling**: any service/workflow can be scheduled to run at a specific time, periodically or not.
 
-Design philosophy
------------------
 
-eNMS provides a way to automate networks **graphically**, in a few simple steps:
-    
-1. Creation of the network (e.g by importing a spreadsheet describing the network topology).
-#. Visualization of the network on a world map, or via a force-based algorithm.
-
-.. image:: /_static/base/geographical_view.png
-   :alt: 3D view
-   :align: center
-
-#. Creation of services and workflows.
-
-.. image:: /_static/base/workflow.png
-   :alt: A workflow
-   :align: center
-
-#. Scheduling of the service/workflow.
 
 Application stack
 -----------------

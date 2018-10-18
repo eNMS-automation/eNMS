@@ -7,7 +7,7 @@ ___
 
 # Introduction
 
-eNMS is a vendor-agnostic NMS designed for building network automation solutions.
+eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
 ![eNMS](readme/enms.png)
 
@@ -15,7 +15,7 @@ It encompasses the following aspects of network automation:
 - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
 - **Ansible Service**: Sending and managing Ansible playbooks.
 - **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
-- **Custom Services**: Any of your python scripts can be automatically integrated into the web UI.
+- **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
 - **Workflows**: Services can be combined together graphically in a workflow.
 - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
 - **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
@@ -129,7 +129,7 @@ Check out the `Installation` section of the docs: _[Install eNMS](https://enms.r
 
 # Contact
 
-For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack") (channel **#enms**)
+For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel **#enms**.
 
 # Other projects you might be interested in
 

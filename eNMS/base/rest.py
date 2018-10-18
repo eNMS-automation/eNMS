@@ -25,9 +25,10 @@ class RestAutomation(Resource):
     decorators = [auth.login_required]
 
     def get(self, job_name):
+        print(job_name)
         job = retrieve(Job, name=job_name)
-        runtime = job.run()
-        return {'job': job.serialized, 'id': runtime}
+        results = job.run()
+        return {'job': job.serialized, 'results': results}
 
 
 class GetInstance(Resource):

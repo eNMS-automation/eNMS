@@ -12,12 +12,12 @@ eNMS is a vendor-agnostic NMS designed for building network automation solutions
 ![eNMS](readme/enms.png)
 
 It encompasses the following aspects of network automation:
-- **Configuration Management Service**: Commit / Rollback of a configuration with Napalm.
+- **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
 - **Ansible Service**: Sending and managing Ansible playbooks.
-- **ReST Service**: Send a ReST call (GET/POST/DELETE/...) with variable URL and payload.
+- **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
 - **Custom Services**: Any of your python scripts can be automatically integrated into the web UI.
 - **Workflows**: Services can be combined together graphically in a workflow.
-- **Scheduling**: Services and Workflows can be scheduled to start at a later time, or run periodically.
+- **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
 - **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
 
 ___
@@ -115,6 +115,7 @@ ___
 ## Deploy eNMS in production
 
 In production, eNMS is configured to use a PostgreSQL database and a Hashicorp Vault (storage of network credentials).
+
 Check out the `Installation` section of the docs: _[Install eNMS](https://enms.readthedocs.io/en/latest/base/installation.html)_
 
 # Contact

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: edc0be7988c4
+Revision ID: c17af5ce2f8b
 Revises: 
-Create Date: 2018-10-04 07:55:34.192737
+Create Date: 2018-10-18 09:33:19.437841
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'edc0be7988c4'
+revision = 'c17af5ce2f8b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,7 +22,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
+    sa.Column('positions', sa.PickleType(), nullable=True),
+    sa.Column('logs', sa.PickleType(), nullable=True),
     sa.Column('type', sa.String(), nullable=True),
+    sa.Column('waiting_time', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
@@ -54,15 +57,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-    op.create_table('OpenNmsServer',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('rest_query', sa.String(), nullable=True),
-    sa.Column('device_query', sa.String(), nullable=True),
-    sa.Column('type', sa.String(), nullable=True),
-    sa.Column('login', sa.String(), nullable=True),
-    sa.Column('password', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('Parameters',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
@@ -72,6 +66,9 @@ def upgrade():
     sa.Column('gotty_start_port', sa.Integer(), nullable=True),
     sa.Column('gotty_end_port', sa.Integer(), nullable=True),
     sa.Column('gotty_port_index', sa.Integer(), nullable=True),
+    sa.Column('opennms_rest_api', sa.String(), nullable=True),
+    sa.Column('opennms_devices', sa.String(), nullable=True),
+    sa.Column('opennms_login', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
@@ -124,8 +121,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('ip_address', sa.String(), nullable=True),
     sa.Column('port', sa.Integer(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('ip_address')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('TacacsServer',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -133,9 +129,7 @@ def upgrade():
     sa.Column('password', sa.String(length=120), nullable=True),
     sa.Column('port', sa.Integer(), nullable=True),
     sa.Column('timeout', sa.Integer(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('ip_address'),
-    sa.UniqueConstraint('password')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('User',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -145,7 +139,6 @@ def upgrade():
     sa.Column('permissions', sa.PickleType(), nullable=True),
     sa.Column('password', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
     sa.UniqueConstraint('name')
     )
     op.create_table('Device',
@@ -173,12 +166,11 @@ def upgrade():
     sa.Column('status', sa.String(), nullable=True),
     sa.Column('type', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('logs', sa.PickleType(), nullable=True),
     sa.Column('frequency', sa.String(), nullable=True),
     sa.Column('start_date', sa.String(), nullable=True),
     sa.Column('end_date', sa.String(), nullable=True),
-    sa.Column('positions', sa.PickleType(), nullable=True),
-    sa.Column('waiting_time', sa.Integer(), nullable=True),
+    sa.Column('job_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['job_id'], ['Job.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['User.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
@@ -187,10 +179,27 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('vendor', sa.String(), nullable=True),
     sa.Column('operating_system', sa.String(), nullable=True),
-    sa.Column('start_task', sa.Integer(), nullable=True),
-    sa.Column('end_task', sa.Integer(), nullable=True),
+    sa.Column('status', sa.String(), nullable=True),
+    sa.Column('start_job_id', sa.Integer(), nullable=True),
+    sa.Column('end_job_id', sa.Integer(), nullable=True),
+    sa.Column('current_job_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['current_job_id'], ['Workflow.id'], ),
+    sa.ForeignKeyConstraint(['end_job_id'], ['Workflow.id'], ),
     sa.ForeignKeyConstraint(['id'], ['Job.id'], ),
+    sa.ForeignKeyConstraint(['start_job_id'], ['Workflow.id'], ),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('job_log_rule_association',
+    sa.Column('job_id', sa.Integer(), nullable=True),
+    sa.Column('log_rule_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['job_id'], ['Job.id'], ),
+    sa.ForeignKeyConstraint(['log_rule_id'], ['LogRule.id'], )
+    )
+    op.create_table('job_pool_association',
+    sa.Column('pool_id', sa.Integer(), nullable=True),
+    sa.Column('job_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['job_id'], ['Job.id'], ),
+    sa.ForeignKeyConstraint(['pool_id'], ['Pool.id'], )
     )
     op.create_table('Link',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -201,13 +210,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['source_id'], ['Device.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('ServiceTask',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('service_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['id'], ['Task.id'], ),
-    sa.ForeignKeyConstraint(['service_id'], ['Service.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('WorkflowEdge',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
@@ -215,17 +217,22 @@ def upgrade():
     sa.Column('source_id', sa.Integer(), nullable=True),
     sa.Column('destination_id', sa.Integer(), nullable=True),
     sa.Column('workflow_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['destination_id'], ['Task.id'], ),
-    sa.ForeignKeyConstraint(['source_id'], ['Task.id'], ),
+    sa.ForeignKeyConstraint(['destination_id'], ['Job.id'], ),
+    sa.ForeignKeyConstraint(['source_id'], ['Job.id'], ),
     sa.ForeignKeyConstraint(['workflow_id'], ['Workflow.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('WorkflowTask',
-    sa.Column('id', sa.Integer(), nullable=False),
+    op.create_table('job_device_association',
+    sa.Column('device_id', sa.Integer(), nullable=True),
+    sa.Column('job_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['device_id'], ['Device.id'], ),
+    sa.ForeignKeyConstraint(['job_id'], ['Job.id'], )
+    )
+    op.create_table('job_workflow_association',
+    sa.Column('job_id', sa.Integer(), nullable=True),
     sa.Column('workflow_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['id'], ['Task.id'], ),
-    sa.ForeignKeyConstraint(['workflow_id'], ['Workflow.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.ForeignKeyConstraint(['job_id'], ['Job.id'], ),
+    sa.ForeignKeyConstraint(['workflow_id'], ['Workflow.id'], )
     )
     op.create_table('pool_device_association',
     sa.Column('pool_id', sa.Integer(), nullable=True),
@@ -233,58 +240,25 @@ def upgrade():
     sa.ForeignKeyConstraint(['device_id'], ['Device.id'], ),
     sa.ForeignKeyConstraint(['pool_id'], ['Pool.id'], )
     )
-    op.create_table('task_log_rule_association',
-    sa.Column('task_id', sa.Integer(), nullable=True),
-    sa.Column('log_rule_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['log_rule_id'], ['LogRule.id'], ),
-    sa.ForeignKeyConstraint(['task_id'], ['Task.id'], )
-    )
-    op.create_table('task_workflow_association',
-    sa.Column('task_id', sa.Integer(), nullable=True),
-    sa.Column('workflow_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['task_id'], ['Task.id'], ),
-    sa.ForeignKeyConstraint(['workflow_id'], ['Workflow.id'], )
-    )
     op.create_table('pool_link_association',
     sa.Column('pool_id', sa.Integer(), nullable=True),
     sa.Column('link_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['link_id'], ['Link.id'], ),
     sa.ForeignKeyConstraint(['pool_id'], ['Pool.id'], )
     )
-    op.create_table('task_device_association',
-    sa.Column('device_id', sa.Integer(), nullable=True),
-    sa.Column('service_task_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['device_id'], ['Device.id'], ),
-    sa.ForeignKeyConstraint(['service_task_id'], ['ServiceTask.id'], )
-    )
-    op.create_table('task_pool_association',
-    sa.Column('pool_id', sa.Integer(), nullable=True),
-    sa.Column('service_task_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['pool_id'], ['Pool.id'], ),
-    sa.ForeignKeyConstraint(['service_task_id'], ['ServiceTask.id'], )
-    )
-    op.drop_table('apscheduler_jobs')
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    op.create_table('apscheduler_jobs',
-    sa.Column('id', sa.VARCHAR(length=191), nullable=False),
-    sa.Column('next_run_time', sa.FLOAT(), nullable=True),
-    sa.Column('job_state', sa.BLOB(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.drop_table('task_pool_association')
-    op.drop_table('task_device_association')
     op.drop_table('pool_link_association')
-    op.drop_table('task_workflow_association')
-    op.drop_table('task_log_rule_association')
     op.drop_table('pool_device_association')
-    op.drop_table('WorkflowTask')
+    op.drop_table('job_workflow_association')
+    op.drop_table('job_device_association')
     op.drop_table('WorkflowEdge')
-    op.drop_table('ServiceTask')
     op.drop_table('Link')
+    op.drop_table('job_pool_association')
+    op.drop_table('job_log_rule_association')
     op.drop_table('Workflow')
     op.drop_table('Task')
     op.drop_table('Service')
@@ -294,7 +268,6 @@ def downgrade():
     op.drop_table('SyslogServer')
     op.drop_table('Pool')
     op.drop_table('Parameters')
-    op.drop_table('OpenNmsServer')
     op.drop_table('Object')
     op.drop_table('LogRule')
     op.drop_table('Log')

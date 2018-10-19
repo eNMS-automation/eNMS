@@ -74,7 +74,7 @@ def create_default_parameters():
 
 @integrity_rollback
 def create_default_network_topology(app):
-    with open(join(app.path, 'projects', 'defaults.xls'), 'rb') as f:
+    with open(join(app.path, 'projects', 'usa.xls'), 'rb') as f:
         book = open_workbook(file_contents=f.read())
         for object_type in ('Device', 'Link'):
             try:
@@ -96,7 +96,7 @@ def create_default_services():
             'type': service_classes['configure_bgp_service'],
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [retrieve(Device, name='Washington')],
             'local_as': 100,
             'loopback': 'Lo100',
             'loopback_ip': '100.1.1.1',
@@ -118,7 +118,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Netmiko',
             'waiting_time': 0,
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -130,7 +130,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_vrf_TEST',
             'description': 'Check that the vrf "TEST" is configured',
             'waiting_time': 0,
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -142,7 +142,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_delete_vrf_TEST',
             'description': 'Delete VRF "TEST"',
             'waiting_time': 15,
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -154,7 +154,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_no_vrf_TEST',
             'description': 'Check that the vrf "TEST" is NOT configured',
             'waiting_time': 0,
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Cisco',
             'operating_system': 'IOS',
             'driver': 'cisco_ios',
@@ -194,7 +194,7 @@ def create_napalm_workflow():
             'name': 'napalm_create_vrf_TEST',
             'description': 'Create a VRF "TEST" with Napalm',
             'waiting_time': 0,
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [retrieve(Device, name='Washington')],
             'driver': 'ios',
             'vendor': 'Cisco',
             'operating_system': 'IOS',
@@ -207,7 +207,7 @@ def create_napalm_workflow():
             'name': 'Napalm IOS Rollback',
             'driver': 'ios',
             'description': 'Rollback a configuration with Napalm IOS',
-            'devices': [retrieve(Device, name='router8')],
+            'devices': [retrieve(Device, name='Washington')],
             'waiting_time': 0
         }
     ):
@@ -238,23 +238,23 @@ def create_napalm_workflow():
 def create_payload_transfer_workflow():
     services = []
     for service in [{
-        'name': 'GET_router8',
+        'name': 'GET_Washington',
         'type': service_classes['rest_call_service'],
-        'description': 'Use GET ReST call on router8',
+        'description': 'Use GET ReST call on Washington',
         'username': 'admin',
         'password': 'admin',
         'waiting_time': 0,
-        'devices': [retrieve(Device, name='router8')],
+        'devices': [retrieve(Device, name='Washington')],
         'content_match': '',
         'call_type': 'GET',
-        'url': 'http://127.0.0.1:5000/rest/object/device/router8',
+        'url': 'http://127.0.0.1:5000/rest/object/device/Washington',
         'payload': ''
     }] + [{
         'name': f'{getter}',
         'type': service_classes['napalm_getters_service'],
         'description': f'Getter: {getter}',
         'waiting_time': 0,
-        'devices': [retrieve(Device, name='router8')],
+        'devices': [retrieve(Device, name='Washington')],
         'driver': 'ios',
         'content_match': '',
         'getters': [getter]
@@ -268,7 +268,7 @@ def create_payload_transfer_workflow():
         'type': service_classes['swiss_army_knife_service'],
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
-        'devices': [retrieve(Device, name='router8')]
+        'devices': [retrieve(Device, name='Washington')]
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)

@@ -16,6 +16,8 @@ A **driver** must be selected among all available netmiko drivers. The list of d
    :alt: Netmiko Configuration service
    :align: center
 
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
+
 Netmiko File Transfer Service
 -----------------------------
 
@@ -39,6 +41,8 @@ There is a ``command`` field and a ``pattern`` field. eNMS will check if the exp
    :alt: Netmiko validation service
    :align: center
 
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
+
 Napalm Configuration service
 ----------------------------
 
@@ -52,6 +56,8 @@ There are two types of operations:
 .. image:: /_static/services/default_services/napalm_configuration.png
    :alt: Napalm configuration service
    :align: center
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
 Napalm Rollback Service
 -----------------------
@@ -71,6 +77,8 @@ Uses Napalm to retrieve a list of getters whose output is displayed in the logs.
    :alt: Napalm Getters service
    :align: center
 
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content_match` input field of its configuration form.
+
 Ansible Playbook Service
 ------------------------
 
@@ -82,6 +90,8 @@ An option allows inventory devices to be selected, such that the Ansible Playboo
    :alt: Ansible Playbook service
    :align: center
 
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `playbook_path` and `content_match` input fields of its configuration form.
+
 ReST Call Service
 -----------------
 
@@ -91,6 +101,8 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 .. image:: /_static/services/default_services/rest_call.png
    :alt: ReST Call service
    :align: center
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
 Update Device Service
 ---------------------

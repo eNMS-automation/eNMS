@@ -9,7 +9,7 @@ All devices are displayed at their exact location (they must have been created w
 Geographical display
 --------------------
 
-There are three types of geographical displayed available.
+There are three types of geographical displays available.
 
 2D map
 ******
@@ -27,7 +27,7 @@ Clusterized 2D map
 ******************
 
 The clusterized 2D map is based on the :guilabel:`Leaflet MarkerCluster` JavaScript library.
-Devices and links are displayed as clusters, which size depends on the zoom level.
+Devices and links are displayed as clusters, whose size depends on the zoom level.
 
 The clusterized map works well for large networks (up to 50000 devices), and it supports colocated devices.
 Clicking on a group of colocated devices will expand the group.
@@ -51,7 +51,7 @@ The 3D map works well for small networks (less than 500 devices) with no colocat
 Tile layers
 -----------
 
-There are three types of tile layer available for the geographical display.
+There are three types of tile layers available for the geographical display.
 
 OpenStreetMap tiles
 *******************
@@ -78,7 +78,7 @@ Default view
 ------------
 
 The default view depends on the number of devices:
-- less than 50 devices, 3D
+- less than 50 devices: 3D
 - less than 2000: leaflet (classic 2D view)
 - more than 2000: clusterized 2D
 

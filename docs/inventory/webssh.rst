@@ -14,8 +14,6 @@ However, you must make sure that the file `gotty` can be executed (``chmod 755 g
 Port allocation
 ---------------
 
-GoTTY listens to a port provided by eNMS incoming requests.
-
 By default, eNMS will use the range of ports [9000, 9099]. eNMS uses a rotation system to allocate these ports sequentially as user requests come in.
 
 You can change this range directly from the web UI, in :guilabel:`admin/parameters` :
@@ -37,7 +35,7 @@ eNMS automatically redirects you to the address and port GoTTY is listening to, 
 Port redirection
 ----------------
 
-In a production environment, only one port should allowed by the HTTP web server. In that case, the reverse proxy must be configured to redirect the requests to ``terminal<port_number>`` to ``localhost:<port_number>``.
+In a production environment, only one port should be allowed (to be exposed) by the HTTP web server. In that case, the reverse proxy must be configured to redirect the requests to ``terminal<port_number>`` to ``localhost:<port_number>``.
 
 With Nginx, this can be accomplished with the following `location` :
 

@@ -3,7 +3,7 @@ Default Services
 ================
 
 The following services are present by default in eNMS.
-They can be used as templates to create more complex services, or used as such if they meet your needs.
+They can be used as templates to create more complex services, or used as-is if they meet your needs.
 
 Netmiko Configuration Service
 -----------------------------
@@ -30,7 +30,7 @@ A **driver** must be selected among all available netmiko file transfer drivers.
 Netmiko Validation Service
 --------------------------
 
-Uses Netmiko to validate the state of a device, in a workflow (see the ``Workflow`` section for examples about how it is used).
+Uses Netmiko to send commands to a device and validates the output to determine the state of that device. See the ``Workflow`` section for examples of how it is used in a workflow.
 The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
 There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
@@ -43,7 +43,7 @@ Napalm Configuration service
 ----------------------------
 
 Uses Napalm to configure a device.
-The list of drivers is built upon napalm ``SUPPORTED DRIVER`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
+The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 There are two types of operations:
   - ``load merge``: add the service configuration to the existing configuration of the target.
@@ -65,8 +65,7 @@ Use Napalm to rollback a configuration.
 Napalm getters service
 ----------------------
 
-Uses Napalm to retrieve a list of getters which output is displayed in the logs.
-The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
+Uses Napalm to retrieve a list of getters whose output is displayed in the logs. The output can be validated with a command / pattern mechanism like the ``Netmiko Validation Service``.
 
 .. image:: /_static/services/default_services/napalm_getters.png
    :alt: Napalm Getters service
@@ -77,6 +76,7 @@ Ansible Playbook Service
 
 An ``Ansible Playbook`` service sends an ansible playbook to the devices.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
+An option allows inventory devices to be selected, such that the Ansible Playbook is run on each device in the selection. Another option allows device properties from the inventory to be passed to the ansible playbook as a dictionary.
 
 .. image:: /_static/services/default_services/ansible_playbook.png
    :alt: Ansible Playbook service
@@ -85,7 +85,7 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 ReST Call Service
 -----------------
 
-Send a ReST call (GET, POST, PUT or DELETE) to an URL with optional payload.
+Send a ReST call (GET, POST, PUT or DELETE) to a URL with optional payload.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
 
 .. image:: /_static/services/default_services/rest_call.png

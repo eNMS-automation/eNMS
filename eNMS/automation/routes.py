@@ -302,14 +302,12 @@ def delete_node(workflow_id, job_id):
 @login_required
 @permission_required('Edit workflows', redirect=False)
 def add_edge(wf_id, type, source, dest):
-    source_job = retrieve(Job, id=source)
-    destination_job = retrieve(Job, id=dest)
     workflow_edge = factory(WorkflowEdge, **{
-        'name': f'{source_job.name} -> {destination_job.name}',
+        'name': f'{wf_id}-{type}:{source}->{dest}',
         'workflow': retrieve(Workflow, id=wf_id),
         'type': type == 'true',
-        'source': source_job,
-        'destination': destination_job
+        'source': retrieve(Job, id=source),
+        'destination': retrieve(Job, id=dest)
     })
     return jsonify(workflow_edge.serialized)
 

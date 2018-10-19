@@ -18,35 +18,46 @@ Main features
     
 1. Creation of the network
 
-Nodes and links can be created either one by one, or all at once by importing an Excel spreadsheet. Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted. A dashboard provides a graphical overview of all objects with dynamic charts.
+Devices and links can be created either one by one, or all at once by importing an Excel spreadsheet.
+Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
+A dashboard provides a graphical overview of all objects with dynamic charts.
 
 #. Network visualization
 
-Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...), and logically with d3.js. You can double-click on a node to display its properties, or start a Web SSH session to the device.
+Once created, eNMS can display your network:
+- geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
+- logically with a force-based algorithm (`d3.js`).
+You can click on a device to display its properties or start a Web SSH terminal session.
 
 #. Service creation
 
-eNMS comes with a number of "default services" leveraging libraries such as ansible, requests, netmiko, napalm to perform simple automation tasks. However, a service can be any python script. If your python script, takes input parameters, eNMS will automatically generate a form in the web UI.
+eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, absolutely any python script can be turned into a "service".
+If your python script takes input parameters, eNMS will automatically generate a form in the web UI.
 
 To generate a form that matches your service, eNMS will perform the following conversion:
+- python `string` -> Text box (single line or multiline)
+- python `list` -> Drop-down list (single or multiselect).
+- python `bool` -> Checkbox.
+- python `dict` -> Text box expecting a dictionary.
 
-python string -> Text box.
-python list -> Drop-down list (single or multiselect).
-python bool -> Checkbox.
-python dict -> Text box expecting a dictionnary.
-
-Once created, you can create as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
+Once created, you can have as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
 
 #. Workflows
-Services can be combined as a workflow. In a workflow, services can be connected with two types of edge: success edge and failure edge. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed). When a workflow is executed, its status will be updated in real-time on the web UI.
+
+Services (and other Workflows) can be combined into a single workflow.
+Within a workflow, services can be connected with two edge types: `Success` edge and `Failure` edge. The `Success` edge (versus `Failure` edge) indicates which path to follow in the graph if the source service is successfully executed (versus failed).
+A workflow keeps track of a `payload` dictionary, such that when a service starts, it has access to the results of all previously executed services.
+When a workflow is executed, its status will be updated in real-time on the web UI.
 
 #. Scheduling
-Services and workflows can be run directly from the web UI. You can also schedule them to run at a later time, and periodically by defining a start date and an end date. All scheduled tasks are displayed in a calendar.
+
+While services and workflows can be run directly and immediately from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
 
 #. Event-driven automation
-Event-driven automation in eNMS is twofold:
-* eNMS has an internal ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a worflow with a POST request to the appropriate URL.
-* eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
+
+Event-driven automation in eNMS has two aspects:
+- eNMS has a ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a workflow with a GET request to the appropriate URL. 
+- eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
 
 Application stack
 -----------------

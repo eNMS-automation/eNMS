@@ -30,19 +30,24 @@ function selectNode(d) {
   d3.event.stopPropagation();
   // add both the HTML and graph elements in the selectedDevices array
   selectedDevices.push([this, d]);
+  /*
   d3.select(this)
     .select('image')
     .attr('xlink:href', d.selected_img);
   sendSelection();
+  */
+  showObjectModal('device', d.real_id);
 }
 
 /**
  * Show device property modal.
  * @param {d} d - selected device.
  */
+/*
 function showNodeProperties(d) {
   showObjectModal('device', d.real_id);
 }
+*/
 
 /**
  * Show link property modal.
@@ -101,8 +106,8 @@ let node = container.selectAll('.node')
   .enter().append('g')
   .attr('class', 'node')
   .call(force.drag)
-  .on('click', selectNode)
-  .on('dblclick', showNodeProperties);
+  .on('click', selectNode);
+  // .on('dblclick', showNodeProperties);
 
 /**
  * Zoom with scroll.

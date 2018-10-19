@@ -99,7 +99,11 @@ if (workflow) {
  * Add an existing job to the workflow.
  */
 function runWorkflow() { // eslint-disable-line no-unused-vars
-  runJob(workflow.id);
+  if (!workflow.start_job || !workflow.end_job) {
+    alertify.notify('The workflow must have a start AND an end.', 'error', 5);
+  } else {
+    runJob(workflow.id);
+  }
 }
 
 /**

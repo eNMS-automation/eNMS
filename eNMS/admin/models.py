@@ -65,8 +65,8 @@ class Parameters(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, default='default', unique=True)
-    default_longitude = Column(Float, default=2.)
-    default_latitude = Column(Float, default=48.)
+    default_longitude = Column(Float, default=-96.)
+    default_latitude = Column(Float, default=33.)
     default_zoom_level = Column(Integer, default=5)
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)

@@ -112,7 +112,6 @@ class Service(Job):
             if not targets:
                 targets = self.compute_targets()
             results = {'success': True, 'devices': {}}
-            print('test')
             pool = ThreadPool(processes=len(targets))
             pool.map(
                 self.device_run,

@@ -27,7 +27,7 @@ ___
 
 ## 1. Network creation
 
-Nodes and links can be created either one by one, or all at once by importing an Excel spreadsheet.
+Devices and links can be created either one by one, or all at once by importing an Excel spreadsheet.
 
 Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
 
@@ -43,7 +43,7 @@ Once created, eNMS can display your network:
 - geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
 - logically with a force-based algorithm (`d3.js`).
 
-You can click on a device to display its properties or start a Web SSH session.
+You can click on a device to display its properties or start a Web SSH terminal session.
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
@@ -68,11 +68,13 @@ Once created, you can have as many instances of your service as you need. Servic
 
 ## 4. Workflows
 
-Services can be combined into a workflow. In the workflow, services can be connected with two types of edge: `Success` edge and `Failure` edge. The `Success` edge (versus `Failure` edge) indicates which path to follow in the graph if the source script was successfully executed (versus failed).
+Services (and other Workflows) can be combined into a single workflow.
+
+Within a workflow, services can be connected with two edge types: `Success` edge and `Failure` edge. The `Success` edge (versus `Failure` edge) indicates which path to follow in the graph if the source service is successfully executed (versus failed).
 
 A workflow keeps track of a `payload` dictionary, such that when a service starts, it has access to the results of all previously executed services.
 
-The status of a workflow is updated in real-time in the web UI.
+When a workflow is executed, its status will be updated in real-time on the web UI.
 
 ![eNMS](readme/workflow.png)
 
@@ -87,7 +89,7 @@ Check out the docs: _[Scheduling](http://afourmy.pythonanywhere.com/views/geogra
 ## 6. Event-driven automation
 
 Event-driven automation in eNMS has two aspects:
-- eNMS has an ReST API that can be used to create, update and delete any type of object (devices, services, workflows, etc), but also to trigger the execution of a service or a worflow with a POST request to the appropriate URL.
+- eNMS has a ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a workflow with a GET request to the appropriate URL. 
 - eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
 
 ___
@@ -101,7 +103,7 @@ ___
 
 ## 2. Network creation with external Network Source of Truth
 
-If you use an NSoT like OpenNMS or Netbox to document your network, eNMS can automatically import the network topology (nodes and links), as well as all IP addresses and geographical coordinates.
+If you use an NSoT like OpenNMS or Netbox to document your network, eNMS can automatically import the network topology (devices and links), as well as all IP addresses and geographical coordinates.
 
 ## 3. Network export
 

@@ -6,13 +6,13 @@ General
 
    base/index
 
-Objects 
-=======
+Inventory 
+=========
 
 .. toctree::
    :maxdepth: 2
 
-   objects/index
+   inventory/index
 
 Views
 =====
@@ -31,7 +31,7 @@ Services
    services/index
 
 Workflows
-==========
+=========
 
 .. toctree::
    :maxdepth: 2

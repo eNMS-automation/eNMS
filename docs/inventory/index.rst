@@ -1,6 +1,6 @@
-=======
-Objects
-=======
+=========
+Inventory
+=========
 
 .. toctree::
    :maxdepth: 1

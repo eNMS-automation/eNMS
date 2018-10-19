@@ -2,10 +2,10 @@
 Pools
 ============
 
-Pools allows to create groups of objects. They can be used to filter the view, but also to target an automation task to a specific subset of devices.
-A pool is defined as a combination of values (or regular expressions) for the properties of an object. 
+Pools allow the user to create groups of objects. They can be used to filter the view, but also to target an automation task to a specific subset of devices.
+A pool is defined as a combination of values (or regular expressions) for the properties of an object (in the inventory). 
 
-If the properties of an object matches **all** pool properties, the object will belong to the pool.
+If the properties of an inventory object matches **all** pool properties, the object will belong to the pool.
  
 Pools can be created in :guilabel:`inventory/pool_management`.
 
@@ -27,7 +27,7 @@ This pool enforces the following conditions:
 
 In summary, all Cisco routers or switches which name starts with ``node`` will match these conditions, and they will be a member of the pool.
 
-.. note:: All properties which field is left empty are simply ignored.
+.. note:: All properties left with empty fields are simply ignored.
 
 A pool of links
 ---------------
@@ -38,7 +38,7 @@ A pool of links
 
 This pool enforces the following conditions:
  * type: ``Ethernet link`` --- matches all Ethernet links.
- * source: ``bnet6`` --- matches all links which source is the device ``bnet6``.
+ * source: ``bnet6`` --- matches all links whose source is the device ``bnet6``.
 
 In summary, all Ethernet links starting from the device ``bnet6`` will be part of the pool.
 
@@ -63,7 +63,7 @@ You can switch between pools with the drop-down list in the top-right corner of 
 Use a pool as target of an automation task
 ------------------------------------------
 
-Pools can also be used as target of an automation. The second step of the scheduling process of a service is to select the targets. You can select multiple devices, as well as multiple pools as targets.
+Pools can also be used as targets of an automation. The second step of the scheduling process of a service is to select the targets. You can select multiple devices, as well as multiple pools as targets.
 
 .. image:: /_static/objects/pools/target_pool.png
    :alt: Use a pool as target of a task

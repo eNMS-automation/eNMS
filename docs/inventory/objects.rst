@@ -19,10 +19,12 @@ Each type of device (resp. link) has a specific icon (resp. color) when displaye
 Creation
 --------
 
-Objects can be created from the :guilabel:`inventory/device_management` and :guilabel:`inventory/link_management` page, in two different ways:
+Inventory can be created from the :guilabel:`inventory/device_management` and :guilabel:`inventory/link_management` page, in two different ways:
 
 * Manually, by entering the value of each property in a form (one by one).
 * By importing an Excel file (.xls, .xlsx).
+
+.. note:: Note the workbook/tab names and column names in the Excel file should exactly match the examples provided with eNMS.
 
 Manual creation
 ***************

@@ -136,7 +136,7 @@ Here is the associated auto-generated form:
    :align: center
 
 The rules for the auto-generation of service forms are the following:
-  - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property which name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
+  - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property whose name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
   - A Boolean property is displayed as a checkbox.
   - A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
   - A MutableDict property is displayed as a text area. You can write a dictionnary in that text area: it will be converted to an actual python dictionnary.
@@ -148,7 +148,7 @@ eNMS comes with a list of "default" services based on network automation framewo
 Service Management
 ------------------
 
-All services are displayed in the :guilabel:`automation/service_management` page in the ``Automation`` section.
+Once a service has been customized with parameters, devices selected, etc, we refer to it as a Service Instance. All Service Instances are displayed in the :guilabel:`automation/service_management` page in the ``Automation`` section.
 
 .. image:: /_static/services/service_system/service_management.png
    :alt: Service Management page
@@ -156,11 +156,11 @@ All services are displayed in the :guilabel:`automation/service_management` page
 
 From the :guilabel:`automation/service_management` page, you can:
 
-  - Start a service (``Run`` button)
-  - View the logs of the service.
-  - Edit the service properties.
-  - Compare the logs of the service.
-  - Delete the service.
+  - Start a Service Instance (``Run`` button).
+  - View the logs of the Service Instance.
+  - Edit the Service Instance properties.
+  - Compare the logs of the Service Instance.
+  - Delete the Service Instance.
 
 Clicking on the ``Compare`` button generates a line-by-line diff of the service logs between any two runs.
 Here's a comparison of a ``Napalm get_facts`` service:
@@ -172,7 +172,7 @@ Here's a comparison of a ``Napalm get_facts`` service:
 Service devices
 ---------------
 
-When you create a new service, the form will also contain multiple selection fields for you to select "target devices".
+When you create a new Service Instance, the form will also contain multiple selection fields for you to select "target devices".
 
 .. image:: /_static/services/service_system/target_selection.png
    :alt: Target selection
@@ -184,11 +184,11 @@ Some services have no target device at all, depending on what the service does.
 Variable substitution
 ---------------------
 
-For some services, it is useful for a string to accept variable such as timestamps or device parameters.
+For some services, it is useful for a string to include variables such as a timestamp or device parameters.
 For example, if you run a ReST call script on several devices to send a request at a given URL, you might want the URL to depend on the name of the device.
-Any code between double curved brackets will be evaluated at runtime and replace with the appropriate value.
+Any code between double curved brackets will be evaluated at runtime and replaced with the appropriate value.
 
-For example, you can POST a request on several device at ``/url/{{device.name}}``, and ``{{device.name}}`` will be replaced by the name of the device.
+For example, you can POST a request on several devices at ``/url/{{device.name}}``, and ``{{device.name}}`` will be replaced on each execution iteration by the name of each device.
 
 Let's consider the following ReST call service:
 

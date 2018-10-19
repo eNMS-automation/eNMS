@@ -57,9 +57,9 @@ def test_manual_object_creation(user_client):
                 obj_dict = define_link(subtype, source.name, destination.name)
                 user_client.post('/objects/edit_object', data=obj_dict)
     # - exactly 16 devices in total
-    assert len(Device.query.all()) == 22
+    assert len(Device.query.all()) == 43
     # - exactly 6*9 = 54 links in total
-    assert len(Link.query.all()) == 61
+    assert len(Link.query.all()) == 82
 
 
 def create_from_file(client, file):
@@ -71,15 +71,15 @@ def create_from_file(client, file):
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_europe(user_client):
     create_from_file(user_client, 'europe.xls')
-    assert len(Device.query.all()) == 33
-    assert len(Link.query.all()) == 49
+    assert len(Device.query.all()) == 60
+    assert len(Link.query.all()) == 53
 
 
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_type(user_client):
     create_from_file(user_client, 'device_counters.xls')
-    assert len(Device.query.all()) == 33
-    assert len(Link.query.all()) == 7
+    assert len(Device.query.all()) == 54
+    assert len(Link.query.all()) == 28
 
 
 routers = ['router' + str(i) for i in range(5, 20)]
@@ -92,8 +92,8 @@ def test_device_deletion(user_client):
     for device_name in routers:
         device = retrieve(Device, name=device_name)
         user_client.post(f'/objects/delete/device/{device.id}')
-    assert len(Device.query.all()) == 18
-    assert len(Link.query.all()) == 18
+    assert len(Device.query.all()) == 45
+    assert len(Link.query.all()) == 22
 
 
 @check_blueprints('', '/objects', '/views')
@@ -102,8 +102,8 @@ def test_link_deletion(user_client):
     for link_name in links:
         link = retrieve(Link, name=link_name)
         user_client.post(f'/objects/delete/link/{link.id}')
-    assert len(Device.query.all()) == 33
-    assert len(Link.query.all()) == 38
+    assert len(Device.query.all()) == 60
+    assert len(Link.query.all()) == 42
 
 
 pool1 = ImmutableMultiDict([

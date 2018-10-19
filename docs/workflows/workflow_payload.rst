@@ -20,7 +20,7 @@ It will not run until ``get_interfaces`` and ``get_config`` have been executed.
 Payload transfer
 ----------------
 
-The most important characteristic of workflows is the transfer of data between job. When a job starts, it is provided with the results of ALL jobs in the workflow that have already been executed (and not only the results of its "predecessors").
+The most important characteristic of workflows is the transfer of data between jobs. When a job starts, it is provided with the results of ALL jobs in the workflow that have already been executed (and not only the results of its "predecessors").
 
 The base code for a job function is the following:
 
@@ -32,16 +32,16 @@ The base code for a job function is the following:
       # self.boolean1, etc)
       # You can look at how default services (netmiko, napalm, etc.) are
       # implemented in the /services subfolders (/netmiko, /napalm, etc).
-      # "results" is a dictionnary that will be displayed in the logs.
+      # "results" is a dictionary that will be displayed in the logs.
       # It must contain at least a key "success" that indicates whether
       # the execution of the service was a success or a failure.
       # In a workflow, the "success" value will determine whether to move
       # forward with a "Success" edge or a "Failure" edge.
       return {'success': True, 'result': 'example'}
 
-The dictionnary that is returned by ``job`` is the payload of the job, i.e the information that will be transferred to the next jobs to run in the workflow. It MUST contain a key ``success``, to tell eNMS whether the job was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
+The dictionary that is returned by ``job`` is the payload of the job, i.e the information that will be transferred to the next jobs to run in the workflow. It MUST contain a key ``success``, to tell eNMS whether the job was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
   
-The last argument of the ``job`` function is ``payload``: it is a dictionnary that contains the results of all jobs that have already been executed.
+The last argument of the ``job`` function is ``payload``: it is a dictionary that contains the results of all jobs that have already been executed.
 
 If we consider the aforementioned workflow, the job ``process_payload1`` receives the variable ``payload`` that contains the results of all other jobs in the workflow (because it is the last one to be executed).
 
@@ -134,7 +134,7 @@ If we want to use the results of the Napalm getters in the final job ``process_p
           }
       }
 
-This ``job`` function reuses the Napalm getters of two jobs of the worflow (one of which, ``get_facts``, is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
+This ``job`` function reuses the Napalm getters of two jobs of the workflow (one of which, ``get_facts``, is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
 
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------
@@ -185,4 +185,4 @@ This is what the SwissArmyKnifeService class would look like with the last examp
               }
           }
 
-From the web UI, you can then create an instance of ``SwissArmyKnifeService`` called ``process_payload1``, and add that job in the workflow. When the job is called, eNMS will automatically use the ``process_payload1`` method, and process the payload accordingly.
+From the web UI, you can then create an Service Instance of ``SwissArmyKnifeService`` called ``process_payload1``, and add that instance in the workflow. When the service instance is called, eNMS will automatically use the ``process_payload1`` method, and process the payload accordingly.

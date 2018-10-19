@@ -96,7 +96,7 @@ ___
 
 ## 1. Authentication
 
-- eNMS can act as a TACACS+ authentication server: upon authentication, a request will be sent to the server to check the credentials and log in the user.
+- eNMS supports TACACS+ authentication: upon logging in, a request will be sent to your TACACS+ server to validate the credentials and log in the user.
 - Authentication with RADIUS and Active Directory are currently under development.
 
 ## 2. Network creation with external Network Source of Truth
@@ -115,12 +115,14 @@ ___
 ## Quick start
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS
-    pip3 install -r requirements.txt (on Windows
+    pip3 install -r requirements.txt
     export FLASK_APP=app.py (on Windows, use `set` instead of `export`)
     flask run --host=0.0.0.0
+    Log in (default credentials: `admin`/`admin`)
 
 ## Quick start as a docker container
     docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
+    Log in (default credentials: `admin`/`admin`)
 
 ## Deploy eNMS in production
 

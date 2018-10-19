@@ -13,7 +13,7 @@ eNMS is a vendor-agnostic NMS designed for building workflow-based network autom
 ![eNMS](readme/enms.png)
 
 It encompasses the following aspects of network automation:
-- **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
+- **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmiko.
 - **Ansible Service**: Sending and managing Ansible playbooks.
 - **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
 - **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
@@ -58,19 +58,19 @@ To generate a form that matches your service, eNMS will perform the following co
 - python `string` -> Text box (single line or multiline)
 - python `list` -> Drop-down list (single or multiselect).
 - python `bool` -> Checkbox.
-- python `dict` -> Text box expecting a dictionnary.
+- python `dict` -> Text box expecting a dictionary.
 
 ![eNMS](readme/form_generation.png)
 
-Once created, you can create as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
+Once created, you can have as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
 
 ![eNMS](readme/service_management.png)
 
 ## 4. Workflows
 
-Services can be combined as a workflow. In a workflow, services can be connected with two types of edge: `success edge` and `failure edge`. The success edge (resp. failure edge) indicates which path to follow in the graph if the source script was successfully executed (resp. failed).
+Services can be combined into a workflow. In the workflow, services can be connected with two types of edge: `Success` edge and `Failure` edge. The `Success` edge (versus `Failure` edge) indicates which path to follow in the graph if the source script was successfully executed (versus failed).
 
-A workflow keeps track of a `payload` dictionnary, such that when a service starts, it has access to the results of all previously executed services.
+A workflow keeps track of a `payload` dictionary, such that when a service starts, it has access to the results of all previously executed services.
 
 The status of a workflow is updated in real-time in the web UI.
 
@@ -78,7 +78,7 @@ The status of a workflow is updated in real-time in the web UI.
 
 ## 5. Scheduling
 
-While services and workflows can be run directly from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
+While services and workflows can be run directly and immediately from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
 
 ![eNMS](readme/calendar.png)
 
@@ -86,8 +86,8 @@ Check out the docs: _[Scheduling](http://afourmy.pythonanywhere.com/views/geogra
 
 ## 6. Event-driven automation
 
-Event-driven automation in eNMS is twofold:
-- eNMS has an internal ReST API that can be used to create, update and delete any type of objects (devices, services, workflows, etc), but also to trigger the execution of a service or a worflow with a POST request to the appropriate URL.
+Event-driven automation in eNMS has two aspects:
+- eNMS has an ReST API that can be used to create, update and delete any type of object (devices, services, workflows, etc), but also to trigger the execution of a service or a worflow with a POST request to the appropriate URL.
 - eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
 
 ___
@@ -97,7 +97,7 @@ ___
 ## 1. Authentication
 
 - eNMS can act as a TACACS+ authentication server: upon authentication, a request will be sent to the server to check the credentials and log in the user.
-- Authentication with RADIUS and Active Directory is currently under development.
+- Authentication with RADIUS and Active Directory are currently under development.
 
 ## 2. Network creation with external Network Source of Truth
 
@@ -106,7 +106,7 @@ If you use an NSoT like OpenNMS or Netbox to document your network, eNMS can aut
 ## 3. Network export
 
 - Networks can be exported as an Excel file. 
-- Networks can be exported as a `kmz` file, for you to visualize your network on Google Earth.
+- Networks can be exported as a `kmz` file for you to visualize your network on Google Earth.
 
 ___
 

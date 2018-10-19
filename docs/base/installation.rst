@@ -69,6 +69,8 @@ In production mode, the secret key is not automatically set to a default value i
 
 
 All credentials should be stored in a Hashicorp Vault: the environement variable ``USE_VAULT`` tells eNMS that a Vault has been setup and can be used. This variable is set to ``0`` by default in debug mode, and ``1`` in production mode.
+Follow the manufacturer's instructions and options for how to setup a Hashicorp Vault.
+
 If you want to use the Vault in debug mode, you can set it to 1:
  
 ::

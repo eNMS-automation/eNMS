@@ -47,7 +47,7 @@ You can click on a device to display its properties or start a Web SSH terminal 
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  ![Logical](readme/logical_view2.png)
+[![Geographical](readme/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](readme/logical_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
 
 ## 3. Service creation
 

@@ -224,9 +224,8 @@ function deleteEdge(edgeId) {
  */
 function jobToNode(job) {
   let color;
-  console.log(workflow, job.id);
   if (workflow.start_job && workflow.start_job.id == job.id) {
-    color = 'green'
+    color = 'green';
   } else if (workflow.end_job && workflow.end_job.id == job.id) {
     color = 'red';
   } else {

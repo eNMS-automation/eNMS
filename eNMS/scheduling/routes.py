@@ -14,7 +14,7 @@ from eNMS.automation.models import Job
 
 @blueprint.route('/task_management')
 @login_required
-@permission_required('Scheduling section')
+@permission_required('Scheduling Section')
 def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -28,7 +28,7 @@ def task_management():
 
 @blueprint.route('/calendar')
 @login_required
-@permission_required('Scheduling section')
+@permission_required('Scheduling Section')
 def calendar():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -59,7 +59,7 @@ def calendar():
 
 @blueprint.route('/scheduler', methods=['POST'])
 @login_required
-@permission_required('Schedule tasks', redirect=False)
+@permission_required('Edit Scheduling Section', redirect=False)
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = retrieve(Job, id=data['job'])
@@ -70,14 +70,14 @@ def scheduler(workflow_id=None):
 
 @blueprint.route('/get/<task_id>', methods=['POST'])
 @login_required
-@permission_required('Scheduling section', redirect=False)
+@permission_required('Scheduling Section', redirect=False)
 def get_task(task_id):
     return jsonify(retrieve(Task, id=task_id).serialized)
 
 
 @blueprint.route('/delete_task/<task_id>', methods=['POST'])
 @login_required
-@permission_required('Edit tasks', redirect=False)
+@permission_required('Edit Scheduling Section', redirect=False)
 def delete_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.delete_task()
@@ -88,7 +88,7 @@ def delete_task(task_id):
 
 @blueprint.route('/pause_task/<task_id>', methods=['POST'])
 @login_required
-@permission_required('Schedule tasks', redirect=False)
+@permission_required('Edit Scheduling Section', redirect=False)
 def pause_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.pause_task()
@@ -97,7 +97,7 @@ def pause_task(task_id):
 
 @blueprint.route('/resume_task/<task_id>', methods=['POST'])
 @login_required
-@permission_required('Schedule tasks', redirect=False)
+@permission_required('Edit Scheduling Section', redirect=False)
 def resume_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.resume_task()

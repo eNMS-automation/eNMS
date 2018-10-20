@@ -21,7 +21,7 @@ from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
 @blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
 @login_required
-@permission_required('Views section')
+@permission_required('Views Section')
 def view(view_type):
     add_link_form = AddLink(request.form)
     all_devices = Device.choices()
@@ -68,7 +68,7 @@ def view(view_type):
 
 @blueprint.route('/export_to_google_earth', methods=['POST'])
 @login_required
-@permission_required('Views section', redirect=False)
+@permission_required('Views Section', redirect=False)
 def export_to_google_earth():
     kml_file = Kml()
     for device in Device.query.all():
@@ -95,6 +95,7 @@ def export_to_google_earth():
 
 @blueprint.route('/get_logs/<device_id>', methods=['POST'])
 @login_required
+@permission_required('Logs Section', redirect=False)
 def get_logs(device_id):
     device = retrieve(Device, id=device_id)
     device_logs = [

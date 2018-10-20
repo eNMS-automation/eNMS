@@ -39,11 +39,16 @@ A dashboard provides a graphical overview of all objects with dynamic charts.
 Once created, eNMS can display your network:
   - geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
 
-  .. image:: /_static/base/geographical_view.png
-    :alt: Dashboard
+  .. image:: /_static/base/enms.png
+    :alt: Geographical View
     :align: center
 
   - logically with a force-based algorithm (`d3.js`).
+
+  .. image:: /_static/base/logical_view.png
+    :alt: Logical View
+    :align: center
+
 You can click on a device to display its properties or start a Web SSH terminal session.
 
 #. Service creation
@@ -57,7 +62,15 @@ To generate a form that matches your service, eNMS will perform the following co
   - python `bool` -> Checkbox.
   - python `dict` -> Text box expecting a dictionary.
 
+.. image:: /_static/base/form_generation.png
+  :alt: Form Generation
+  :align: center
+
 Once created, you can have as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
+
+.. image:: /_static/base/service_management.png
+  :alt: Service Management
+  :align: center
 
 #. Workflows
 
@@ -66,9 +79,17 @@ Within a workflow, services can be connected with two edge types: `Success` edge
 A workflow keeps track of a `payload` dictionary, such that when a service starts, it has access to the results of all previously executed services.
 When a workflow is executed, its status will be updated in real-time on the web UI.
 
+.. image:: /_static/base/workflow.png
+  :alt: Workflow Builder
+  :align: center
+
 #. Scheduling
 
 While services and workflows can be run directly and immediately from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
+
+.. image:: /_static/base/calendar.png
+  :alt: Calendar
+  :align: center
 
 #. Event-driven automation
 

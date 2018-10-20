@@ -15,7 +15,7 @@
             <li><a href="/dashboard">Dashboard</a></li>
           </ul>
         </li>
-        {% if current_user.allowed('Admin section') %}
+        {% if current_user.allowed('Admin Section') %}
           <li><a><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/admin/user_management">User Management</a></li>
@@ -23,7 +23,7 @@
             </ul>
           </li>
         {% endif %}
-        {% if current_user.allowed('Inventory section') %}
+        {% if current_user.allowed('Inventory Section') %}
           <li><a><i class="fa fa-sitemap"></i>Inventory<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/objects/device_management">Device Management</a></li>
@@ -32,7 +32,7 @@
             </ul>
           </li>
         {% endif %}
-        {% if current_user.allowed('Views section') %}
+        {% if current_user.allowed('Views Section') %}
           <li><a><i class="fa fa-map-marker"></i>Views<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/views/geographical_view">Geographical View</a></li>
@@ -40,7 +40,7 @@
             </ul>
           </li>
         {% endif %}
-        {% if current_user.allowed('Automation section') %}
+        {% if current_user.allowed('Automation Section') %}
           <li><a><i class="fa fa-clock-o"></i>Automation<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/automation/service_management">Service Management</a></li>
@@ -49,7 +49,7 @@
             </ul>
           </li>
         {% endif %}
-        {% if current_user.allowed('Scheduling section') %}
+        {% if current_user.allowed('Scheduling Section') %}
           <li><a><i class="fa fa-clock-o"></i>Scheduling<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/scheduling/task_management">Task Management</a></li>
@@ -57,7 +57,7 @@
             </ul>
           </li>
         {% endif %}
-        {% if current_user.allowed('Logs section') %}
+        {% if current_user.allowed('Logs Section') %}
           <li><a><i class="fa fa-clock-o"></i>Logs<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/logs/log_management">Log Management</a></li>

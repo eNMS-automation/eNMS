@@ -4,7 +4,7 @@ Role-based access
 
 When you create a new user from the :guilabel:`schedule/task_management`, you get to specify what the user can and cannot do.
 
-.. image:: /_static/security/user_creation.png
+.. image:: /_static/security/user_creation_modal.png
    :alt: User creation
    :align: center
 

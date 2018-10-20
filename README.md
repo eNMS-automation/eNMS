@@ -135,6 +135,14 @@ Check out the `Installation` section of the docs: _[Install eNMS](https://enms.r
 
 For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel **#enms**.
 
+___
+
+# Coming up next
+
+## A notification system (send the results of an automation task via mail or Slack)
+## Gitlab support (e.g push the logs of an automation task to gitlab)
+## RADIUS + Active Directory authentication
+
 # Other projects you might be interested in
 
 - _[Flask Gentelella](https://github.com/afourmy/flask-gentelella)_: The Flask/Bootstrap template eNMS is built upon.

@@ -14,6 +14,7 @@ from eNMS.logs.models import Log, LogRule
 
 @blueprint.route('/log_management')
 @login_required
+@permission_required('Logs Section')
 def log_management():
     log_filtering_form = LogFilteringForm(request.form)
     return render_template(
@@ -27,6 +28,7 @@ def log_management():
 
 @blueprint.route('/log_automation')
 @login_required
+@permission_required('Logs Section')
 def syslog_automation():
     log_automation_form = LogAutomationForm(request.form)
     log_automation_form.jobs.choices = Job.choices()
@@ -41,7 +43,7 @@ def syslog_automation():
 
 @blueprint.route('/delete_log/<log_id>', methods=['POST'])
 @login_required
-@permission_required('Edit logs', redirect=False)
+@permission_required('Edit Logs Section', redirect=False)
 def delete_log(log_id):
     log = retrieve(Log, id=log_id)
     db.session.delete(log)
@@ -51,6 +53,7 @@ def delete_log(log_id):
 
 @blueprint.route('/filter_logs', methods=['POST'])
 @login_required
+@permission_required('Logs Section')
 def filter_logs():
     logs = [log for log in Log.serialize() if all(
         # if the regex property is not in the request, the
@@ -69,14 +72,14 @@ def filter_logs():
 
 @blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
 @login_required
-@permission_required('Automation section', redirect=False)
+@permission_required('Logs Section')
 def get_log_rule(log_rule_id):
     return jsonify(retrieve(LogRule, id=log_rule_id).serialized)
 
 
 @blueprint.route('/save_log_rule', methods=['POST'])
 @login_required
-@permission_required('Edit log rules', redirect=False)
+@permission_required('Edit Logs Section', redirect=False)
 def save_log_rule():
     data = request.form.to_dict()
     data['jobs'] = [
@@ -89,7 +92,7 @@ def save_log_rule():
 
 @blueprint.route('/delete_log_rule/<log_id>', methods=['POST'])
 @login_required
-@permission_required('Edit log rules', redirect=False)
+@permission_required('Edit Logs Section', redirect=False)
 def delete_log_rule(log_id):
     log_rule = retrieve(LogRule, id=log_id)
     db.session.delete(log_rule)

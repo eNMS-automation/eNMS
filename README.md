@@ -35,7 +35,7 @@ A dashboard provides a graphical overview of all objects with dynamic charts.
 
 Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
-![Inventory](readme/inventory.png)  |  ![Dashboard](readme/dashboard.png)
+[![Inventory](readme/inventory.png)](http://afourmy.pythonanywhere.com/objects/device_management) |  [![Dashboard](readme/dashboard.png)](http://afourmy.pythonanywhere.com/dashboard)
 
 ## 2. Network visualization
 
@@ -64,7 +64,7 @@ To generate a form that matches your service, eNMS will perform the following co
 
 Once created, you can have as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
 
-![eNMS](readme/service_management.png)
+[![Service Management](readme/service_management.png)](http://afourmy.pythonanywhere.com/automation/service_management)
 
 ## 4. Workflows
 
@@ -76,13 +76,13 @@ A workflow keeps track of a `payload` dictionary, such that when a service start
 
 When a workflow is executed, its status will be updated in real-time on the web UI.
 
-![eNMS](readme/workflow.png)
+[![Workflow Builder](readme/workflow.png)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 
 ## 5. Scheduling
 
 While services and workflows can be run directly and immediately from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
 
-![eNMS](readme/calendar.png)
+[![Calendar](readme/calendar.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
 
 Check out the docs: _[Scheduling](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical view](http://afourmy.pythonanywhere.com/views/logical_view)_, _[Calendar](http://afourmy.pythonanywhere.com/tasks/calendar)_
 

@@ -1,8 +1,8 @@
-==================
-Service Scheduling
-==================
+==========
+Scheduling
+==========
 
-Services can be scheduled by creating a ``Task``, from the :guilabel:`schedule/task_management` page.
+Services and Workflows can be scheduled by creating a ``Task``, from the :guilabel:`schedule/task_management` page.
 
 You need to:
     - Choose a name.

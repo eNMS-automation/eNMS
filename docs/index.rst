@@ -38,6 +38,14 @@ Workflows
 
    workflows/index
 
+Scheduling
+==========
+
+.. toctree::
+   :maxdepth: 2
+
+   scheduling/index
+
 Event-driven automation
 =======================
 

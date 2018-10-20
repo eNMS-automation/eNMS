@@ -39,9 +39,9 @@ A dashboard provides a graphical overview of all objects with dynamic charts.
 Once created, eNMS can display your network:
   - geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
 
-.. image:: /_static/base/geographical_view.png
-   :alt: Dashboard
-   :align: center
+  .. image:: /_static/base/geographical_view.png
+    :alt: Dashboard
+    :align: center
 
   - logically with a force-based algorithm (`d3.js`).
 You can click on a device to display its properties or start a Web SSH terminal session.

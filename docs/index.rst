@@ -14,6 +14,14 @@ Inventory
 
    inventory/index
 
+Security
+========
+
+.. toctree::
+   :maxdepth: 2
+
+   security/index
+
 Views
 =====
 

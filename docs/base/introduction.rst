@@ -5,13 +5,13 @@ What is eNMS
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
 It encompasses the following aspects of network automation:
-* **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
-* **Ansible Service**: Sending and managing Ansible playbooks.
-* **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
-* **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
-* **Workflows**: Services can be combined together graphically in a workflow.
-* **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
-* **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
+  - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
+  - **Ansible Service**: Sending and managing Ansible playbooks.
+  - **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
+  - **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
+  - **Workflows**: Services can be combined together graphically in a workflow.
+  - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
+  - **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
 
 Main features
 -------------
@@ -21,6 +21,10 @@ Main features
 Devices and links can be created either one by one, or all at once by importing an Excel spreadsheet.
 Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
 A dashboard provides a graphical overview of all objects with dynamic charts.
+
+.. image:: /_static/services/service_system/service_compare_logs.png
+   :alt: Compare logs
+   :align: center
 
 #. Network visualization
 
@@ -35,10 +39,10 @@ eNMS comes with a number of "default services" leveraging libraries such as `ans
 If your python script takes input parameters, eNMS will automatically generate a form in the web UI.
 
 To generate a form that matches your service, eNMS will perform the following conversion:
-- python `string` -> Text box (single line or multiline)
-- python `list` -> Drop-down list (single or multiselect).
-- python `bool` -> Checkbox.
-- python `dict` -> Text box expecting a dictionary.
+  - python `string` -> Text box (single line or multiline)
+  - python `list` -> Drop-down list (single or multiselect).
+  - python `bool` -> Checkbox.
+  - python `dict` -> Text box expecting a dictionary.
 
 Once created, you can have as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
 

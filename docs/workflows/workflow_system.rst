@@ -59,3 +59,8 @@ Workflow devices
 ----------------
 
 When you create a workflow, just like with services instances, the form will also contain multiple selection fields for you to select "target devices". If you don’t select any device, the devices for each Service (or sub- Workflow) will be used. If you select target devices for the workflow, all devices selected at the individual Service level will be ignored, and the workflow will run in parallel (multiprocessing) on all devices.
+
+In other words:
+- Service Instance tasks (and workflow instance tasks) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
+- If multiple inventory devices are selected within the workflow definition, these will run independently from each other, in parallel, while following the sequential rules of the workflow.
+- If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel, but each service instance step is required to be completed by all devices before moving to the next step in the workflow, and the workflow status is displayed and updated in real-time in the workflow builder.

@@ -205,3 +205,10 @@ When this service is executed, the following GET requests will be sent in parall
   INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router8 HTTP/1.1" 200 -
 
 Variable substitution is also valid in a configuration string (for a Netmiko or Napalm configuration) service, as well as a validation string (Netmiko validation service, Ansible playbook, etc).
+
+Run multiple services
+---------------------
+
+- Service instance tasks will run in parallel to other service instance tasks as long as they are standalone and do not exist within a workflow.
+- Service Instance tasks (and workflow instance tasks) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
+- If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel.

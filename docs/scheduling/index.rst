@@ -1,6 +1,6 @@
-========
-Schedule
-========
+==========
+Scheduling
+==========
 
 .. toctree::
    :maxdepth: 1

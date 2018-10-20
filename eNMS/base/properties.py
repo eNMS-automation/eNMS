@@ -123,9 +123,10 @@ user_serialized_properties = (
 
 user_permissions = (
     'Admin',
-    'Admin Section',
     'Connect to device',
+    'Admin Section',
     'Inventory Section',
+    'Views Section',
     'Automation Section',
     'Scheduling Section',
     'Logs Section',

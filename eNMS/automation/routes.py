@@ -35,7 +35,7 @@ from eNMS.automation.models import (
 
 @blueprint.route('/service_management')
 @login_required
-@permission_required('Services section')
+@permission_required('Automation Section')
 def service_management():
     service_form = ServiceForm(request.form)
     service_form.devices.choices = Device.choices()
@@ -54,7 +54,7 @@ def service_management():
 
 @blueprint.route('/workflow_management')
 @login_required
-@permission_required('Automation section')
+@permission_required('Automation Section')
 def workflow_management():
     workflow_creation_form = WorkflowCreationForm(request.form)
     workflow_creation_form.devices.choices = Device.choices()
@@ -71,7 +71,7 @@ def workflow_management():
 
 @blueprint.route('/workflow_builder/')
 @login_required
-@permission_required('Automation section')
+@permission_required('Automation Section')
 def workflow_builder(workflow_id=None):
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()
@@ -96,7 +96,7 @@ def workflow_builder(workflow_id=None):
 
 @blueprint.route('/get_service/<id_or_cls>', methods=['POST'])
 @login_required
-@permission_required('Services section', redirect=False)
+@permission_required('Automation Section', redirect=False)
 def get_service(id_or_cls):
     service = retrieve(Service, id=id_or_cls)
     cls = service_classes[service.type if service else id_or_cls]
@@ -160,7 +160,7 @@ def get_service(id_or_cls):
 
 @blueprint.route('/delete/<service_id>', methods=['POST'])
 @login_required
-@permission_required('Edit services', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def delete_object(service_id):
     service = retrieve(Service, id=service_id)
     db.session.delete(service)
@@ -170,7 +170,7 @@ def delete_object(service_id):
 
 @blueprint.route('/run_job/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Automation section', redirect=False)
+@permission_required('Automation Section', redirect=False)
 def run_job(job_id):
     job = retrieve(Job, id=job_id)
     now = datetime.now() + timedelta(seconds=5)
@@ -186,7 +186,7 @@ def run_job(job_id):
 
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])
 @login_required
-@permission_required('Edit services', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def save_service(cls_name):
     form = dict(request.form.to_dict())
     form['devices'] = [
@@ -206,14 +206,14 @@ def save_service(cls_name):
 
 @blueprint.route('/show_logs/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Automation section', redirect=False)
+@permission_required('Automation Section', redirect=False)
 def show_logs(job_id):
     return jsonify(dumps(retrieve(Job, id=job_id).logs, indent=4))
 
 
 @blueprint.route('/get_diff/<job_id>/<v1>/<v2>', methods=['POST'])
 @login_required
-@permission_required('Automation section', redirect=False)
+@permission_required('Automation Section', redirect=False)
 def get_diff(job_id, v1, v2, n1=None, n2=None):
     job = retrieve(Job, id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
@@ -224,7 +224,7 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
 
 @blueprint.route('/compare_logs/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Services section', redirect=False)
+@permission_required('Automation Section', redirect=False)
 def compare_logs(job_id):
     job = retrieve(Job, id=job_id)
     results = {
@@ -235,7 +235,7 @@ def compare_logs(job_id):
 
 @blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def add_to_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     job = retrieve(Job, id=request.form['job'])
@@ -246,7 +246,7 @@ def add_to_workflow(workflow_id):
 
 @blueprint.route('/get/<workflow_id>', methods=['POST'])
 @login_required
-@permission_required('Automation section', redirect=False)
+@permission_required('Automation Section', redirect=False)
 def get_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
@@ -254,7 +254,7 @@ def get_workflow(workflow_id):
 
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def edit_workflow():
     form = dict(request.form.to_dict())
     form['devices'] = [
@@ -268,7 +268,7 @@ def edit_workflow():
 
 @blueprint.route('/delete_workflow/<workflow_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def delete_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     db.session.delete(workflow)
@@ -278,7 +278,7 @@ def delete_workflow(workflow_id):
 
 @blueprint.route('/add_node/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def add_node(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
     job = retrieve(Job, id=job_id)
@@ -289,7 +289,7 @@ def add_node(workflow_id, job_id):
 
 @blueprint.route('/delete_node/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def delete_node(workflow_id, job_id):
     job = retrieve(Job, id=job_id)
     workflow = retrieve(Workflow, id=workflow_id)
@@ -300,7 +300,7 @@ def delete_node(workflow_id, job_id):
 
 @blueprint.route('/add_edge/<wf_id>/<type>/<source>/<dest>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def add_edge(wf_id, type, source, dest):
     workflow_edge = factory(WorkflowEdge, **{
         'name': f'{wf_id}-{type}:{source}->{dest}',
@@ -314,7 +314,7 @@ def add_edge(wf_id, type, source, dest):
 
 @blueprint.route('/delete_edge/<workflow_id>/<edge_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def delete_edge(workflow_id, edge_id):
     edge = retrieve(WorkflowEdge, id=edge_id)
     db.session.delete(edge)
@@ -324,7 +324,7 @@ def delete_edge(workflow_id, edge_id):
 
 @blueprint.route('/set_as_start/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def set_as_start(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
     workflow.start_job = retrieve(Job, id=job_id)
@@ -334,7 +334,7 @@ def set_as_start(workflow_id, job_id):
 
 @blueprint.route('/set_as_end/<workflow_id>/<job_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def set_as_end(workflow_id, job_id):
     workflow = retrieve(Workflow, id=workflow_id)
     workflow.end_job = retrieve(Job, id=job_id)
@@ -344,7 +344,7 @@ def set_as_end(workflow_id, job_id):
 
 @blueprint.route('/save_positions/<workflow_id>', methods=['POST'])
 @login_required
-@permission_required('Edit workflows', redirect=False)
+@permission_required('Edit Automation Section', redirect=False)
 def save_positions(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
     for job_id, position in request.json.items():

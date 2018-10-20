@@ -46,7 +46,7 @@ from eNMS.objects.models import Device
 
 @blueprint.route('/user_management')
 @login_required
-@permission_required('Admin section')
+@permission_required('Admin Section')
 def users():
     form = AddUser(request.form)
     return render_template(
@@ -117,7 +117,7 @@ def logout():
 
 @blueprint.route('/administration')
 @login_required
-@permission_required('Admin section')
+@permission_required('Admin Section')
 def admninistration():
     try:
         tacacs_server = db.session.query(TacacsServer).one()
@@ -151,7 +151,7 @@ def create_new_user():
 
 @blueprint.route('/process_user', methods=['POST'])
 @login_required
-@permission_required('Edit users', redirect=False)
+@permission_required('Edit Admin Section', redirect=False)
 def process_user():
     user_data = request.form.to_dict()
     user_data['permissions'] = request.form.getlist('permissions')
@@ -160,7 +160,7 @@ def process_user():
 
 @blueprint.route('/get/<user_id>', methods=['POST'])
 @login_required
-@permission_required('Admin section', redirect=False)
+@permission_required('Admin Section', redirect=False)
 def get_user(user_id):
     user = retrieve(User, id=user_id)
     return jsonify(user.serialized)
@@ -168,7 +168,7 @@ def get_user(user_id):
 
 @blueprint.route('/delete/<user_id>', methods=['POST'])
 @login_required
-@permission_required('Edit users', redirect=False)
+@permission_required('Edit Admin Section', redirect=False)
 def delete_user(user_id):
     user = retrieve(User, id=user_id)
     db.session.delete(user)

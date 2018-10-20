@@ -15,7 +15,7 @@ Device credentials
 
 The credentials of a device are a property of the device itself.
     
-.. image:: /_static/automation/credentials/credentials.png
+.. image:: /_static/security/credentials.png
    :alt: Set password
    :align: center
 

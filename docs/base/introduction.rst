@@ -4,6 +4,10 @@ What is eNMS
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
+.. image:: /_static/base/enms.png
+   :alt: Compare logs
+   :align: center
+
 It encompasses the following aspects of network automation:
   - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
   - **Ansible Service**: Sending and managing Ansible playbooks.
@@ -22,15 +26,24 @@ Devices and links can be created either one by one, or all at once by importing 
 Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
 A dashboard provides a graphical overview of all objects with dynamic charts.
 
-.. image:: /_static/services/service_system/service_compare_logs.png
-   :alt: Compare logs
+.. image:: /_static/base/inventory.png
+   :alt: Inventory
+   :align: center
+
+.. image:: /_static/base/dashboard.png
+   :alt: Dashboard
    :align: center
 
 #. Network visualization
 
 Once created, eNMS can display your network:
-- geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
-- logically with a force-based algorithm (`d3.js`).
+  - geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
+
+.. image:: /_static/base/geographical_view.png
+   :alt: Dashboard
+   :align: center
+
+  - logically with a force-based algorithm (`d3.js`).
 You can click on a device to display its properties or start a Web SSH terminal session.
 
 #. Service creation

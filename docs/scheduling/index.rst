@@ -6,3 +6,4 @@ Scheduling
    :maxdepth: 1
 
    task_management
+   scheduler

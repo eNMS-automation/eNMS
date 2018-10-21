@@ -115,51 +115,51 @@ def create_netmiko_workflow():
     for service in (
         {
             'type': service_classes['netmiko_configuration_service'],
-            'name': 'netmiko_create_vrf_TEST',
-            'description': 'Create a VRF "TEST" with Netmiko',
+            'name': 'netmiko_create_vrf_test',
+            'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
             'global_delay_factor': '1.0',
-            'content': 'ip vrf TEST'
+            'content': 'vrf definition test'
         },
         {
             'type': service_classes['netmiko_validation_service'],
-            'name': 'netmiko_check_vrf_TEST',
-            'description': 'Check that the vrf "TEST" is configured',
+            'name': 'netmiko_check_vrf_test',
+            'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
-            'command': 'show ip vrf',
-            'content_match': 'TEST'
+            'command': 'show vrf',
+            'content_match': 'test'
         },
         {
             'type': service_classes['netmiko_configuration_service'],
-            'name': 'netmiko_delete_vrf_TEST',
-            'description': 'Delete VRF "TEST"',
+            'name': 'netmiko_delete_vrf_test',
+            'description': 'Delete VRF "test"',
             'waiting_time': 15,
             'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
             'global_delay_factor': '1.0',
-            'content': 'no ip vrf TEST'
+            'content': 'no vrf definition test'
         },
         {
             'type': service_classes['netmiko_validation_service'],
-            'name': 'netmiko_check_no_vrf_TEST',
-            'description': 'Check that the vrf "TEST" is NOT configured',
+            'name': 'netmiko_check_no_vrf_test',
+            'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
-            'command': 'show ip vrf',
-            'content_match': '^((?!TEST).)*$',
+            'command': 'show vrf',
+            'content_match': '^((?!test).)*$',
             'content_match_regex': 'y'
         },
     ):
@@ -191,8 +191,8 @@ def create_napalm_workflow():
     for service in (
         {
             'type': service_classes['napalm_configuration_service'],
-            'name': 'napalm_create_vrf_TEST',
-            'description': 'Create a VRF "TEST" with Napalm',
+            'name': 'napalm_create_vrf_test',
+            'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
             'driver': 'eos',
@@ -200,7 +200,7 @@ def create_napalm_workflow():
             'operating_system': 'eos',
             'content_type': 'simple',
             'action': 'load_merge_candidate',
-            'content': 'ip vrf TEST'
+            'content': 'vrf definition test'
         },
         {
             'type': service_classes['napalm_rollback_service'],
@@ -213,8 +213,8 @@ def create_napalm_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-    services.insert(1, retrieve(Job, name='netmiko_check_vrf_TEST'))
-    services.append(retrieve(Job, name=f'netmiko_check_no_vrf_TEST'))
+    services.insert(1, retrieve(Job, name='netmiko_check_vrf_test'))
+    services.append(retrieve(Job, name=f'netmiko_check_no_vrf_test'))
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',

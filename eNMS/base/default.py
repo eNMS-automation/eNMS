@@ -119,9 +119,9 @@ def create_netmiko_workflow():
             'description': 'Create a VRF "TEST" with Netmiko',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'driver': 'cisco_ios',
+            'vendor': 'Arista',
+            'operating_system': 'eos',
+            'driver': 'arista_eos',
             'global_delay_factor': '1.0',
             'content': 'ip vrf TEST'
         },
@@ -131,9 +131,9 @@ def create_netmiko_workflow():
             'description': 'Check that the vrf "TEST" is configured',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'driver': 'cisco_ios',
+            'vendor': 'Arista',
+            'operating_system': 'eos',
+            'driver': 'arista_eos',
             'command': 'show ip vrf',
             'content_match': 'TEST'
         },
@@ -143,9 +143,9 @@ def create_netmiko_workflow():
             'description': 'Delete VRF "TEST"',
             'waiting_time': 15,
             'devices': [retrieve(Device, name='Washington')],
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'driver': 'cisco_ios',
+            'vendor': 'Arista',
+            'operating_system': 'eos',
+            'driver': 'arista_eos',
             'global_delay_factor': '1.0',
             'content': 'no ip vrf TEST'
         },
@@ -155,9 +155,9 @@ def create_netmiko_workflow():
             'description': 'Check that the vrf "TEST" is NOT configured',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
-            'driver': 'cisco_ios',
+            'vendor': 'Arista',
+            'operating_system': 'eos',
+            'driver': 'arista_eos',
             'command': 'show ip vrf',
             'content_match': '^((?!TEST).)*$',
             'content_match_regex': 'y'
@@ -168,8 +168,8 @@ def create_netmiko_workflow():
     workflow = factory(Workflow, **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
-        'vendor': 'Cisco',
-        'operating_system': 'IOS',
+        'vendor': 'Arista',
+        'operating_system': 'eos',
         'jobs': services
     })
     for i in range(len(services) - 1):
@@ -195,18 +195,18 @@ def create_napalm_workflow():
             'description': 'Create a VRF "TEST" with Napalm',
             'waiting_time': 0,
             'devices': [retrieve(Device, name='Washington')],
-            'driver': 'ios',
-            'vendor': 'Cisco',
-            'operating_system': 'IOS',
+            'driver': 'eos',
+            'vendor': 'Arista',
+            'operating_system': 'eos',
             'content_type': 'simple',
             'action': 'load_merge_candidate',
             'content': 'ip vrf TEST'
         },
         {
             'type': service_classes['napalm_rollback_service'],
-            'name': 'Napalm IOS Rollback',
-            'driver': 'ios',
-            'description': 'Rollback a configuration with Napalm IOS',
+            'name': 'Napalm eos Rollback',
+            'driver': 'eos',
+            'description': 'Rollback a configuration with Napalm eos',
             'devices': [retrieve(Device, name='Washington')],
             'waiting_time': 0
         }
@@ -218,8 +218,8 @@ def create_napalm_workflow():
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
-        'vendor': 'Cisco',
-        'operating_system': 'IOS',
+        'vendor': 'Arista',
+        'operating_system': 'eos',
         'jobs': services
     })
     for i in range(len(services) - 1):
@@ -255,7 +255,7 @@ def create_payload_transfer_workflow():
         'description': f'Getter: {getter}',
         'waiting_time': 0,
         'devices': [retrieve(Device, name='Washington')],
-        'driver': 'ios',
+        'driver': 'eos',
         'content_match': '',
         'getters': [getter]
     } for getter in (
@@ -275,8 +275,8 @@ def create_payload_transfer_workflow():
     workflow = factory(Workflow, **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
-        'vendor': 'Cisco',
-        'operating_system': 'IOS',
+        'vendor': 'Arista',
+        'operating_system': 'eos',
         'jobs': services
     })
 

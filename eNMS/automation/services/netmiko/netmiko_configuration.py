@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import (
     netmiko_connection,
@@ -20,6 +20,7 @@ class NetmikoConfigurationService(Service):
     content_textarea = True
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
+    enable_mode = Column(Boolean)
     global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {
@@ -28,7 +29,8 @@ class NetmikoConfigurationService(Service):
 
     def job(self, device, payload):
         netmiko_handler = netmiko_connection(self, device)
-        netmiko_handler.enable()
+        if self.enable_mode:
+            netmiko_handler.enable()
         config = substitute(self.content, locals())
         netmiko_handler.send_config_set(config.splitlines())
         netmiko_handler.disconnect()

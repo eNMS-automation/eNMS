@@ -123,7 +123,8 @@ def create_netmiko_workflow():
             'operating_system': 'eos',
             'driver': 'arista_eos',
             'global_delay_factor': '1.0',
-            'content': 'vrf definition test'
+            'content': 'vrf definition test',
+            'enable_mode': 'y'
         },
         {
             'type': service_classes['netmiko_validation_service'],
@@ -147,7 +148,8 @@ def create_netmiko_workflow():
             'operating_system': 'eos',
             'driver': 'arista_eos',
             'global_delay_factor': '1.0',
-            'content': 'no vrf definition test'
+            'content': 'no vrf definition test',
+            'enable_mode': 'y'
         },
         {
             'type': service_classes['netmiko_validation_service'],

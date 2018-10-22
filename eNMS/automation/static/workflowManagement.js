@@ -66,53 +66,33 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the workflow to edit.
  */
 function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  $('#title').text(`Edit Workflow`);
-  $.ajax({
-    type: 'POST',
-    url: `/automation/get/${id}`,
-    success: function(properties) {
-      if (!properties) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        for (const [property, value] of Object.entries(properties)) {
-          $(`#${property}`).val(value);
-        }
-        $('.fs-option').removeClass('selected');
-        $('.fs-label').text('Select devices');
-        properties.devices.map(
-          (n) => $(`.fs-option[data-value='${n.id}']`).click()
-        );
-        $('#pools').val(properties.pools.map((p) => p.id));
-      }
-    },
+  call(`/automation/get/${id}`, function(properties) {
+    $('#title').text(`Edit Workflow`);
+    for (const [property, value] of Object.entries(properties)) {
+      $(`#${property}`).val(value);
+    }
+    $('.fs-option').removeClass('selected');
+    $('.fs-label').text('Select devices');
+    properties.devices.map(
+      (n) => $(`.fs-option[data-value='${n.id}']`).click()
+    );
+    $('#pools').val(properties.pools.map((p) => p.id));
+    $(`#edit`).modal('show');
   });
-  $(`#edit`).modal('show');
 }
 
 /**
  * Edit a workflow.
  */
 function editObject() { // eslint-disable-line no-unused-vars
-  if ($('#edit-form').parsley().validate() ) {
-    $.ajax({
-      type: 'POST',
-      url: `/automation/edit_workflow`,
-      dataType: 'json',
-      data: $('#edit-form').serialize(),
-      success: function(properties) {
-        if (!properties) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          addWorkflow(mode, properties);
-          const message = `Workflow ${properties.name};
-          ${mode == 'edit' ? 'edited' : 'created'}.`;
-          alertify.notify(message, 'success', 5);
-        }
-      },
-    });
+  fCall('/automation/edit_workflow', '#edit-form', function(properties) {
+    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+    addWorkflow(mode, properties);
+    const message = `Workflow ${properties.name};
+    ${mode == 'edit' ? 'edited' : 'created'}.`;
+    alertify.notify(message, 'success', 5);
     $(`#edit`).modal('hide');
-  }
+  });
 }
 
 /**

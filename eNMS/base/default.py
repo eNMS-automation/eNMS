@@ -202,7 +202,7 @@ def create_napalm_workflow():
             'operating_system': 'eos',
             'content_type': 'simple',
             'action': 'load_merge_candidate',
-            'content': 'vrf definition test'
+            'content': 'vrf definition test\n'
         },
         {
             'type': service_classes['napalm_rollback_service'],

@@ -51,47 +51,28 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {userId} userId - Id of the user to be deleted.
  */
 function showUserModal(userId) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/admin/get/${userId}`,
-    success: function(properties) {
-      if (!properties) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      }
-      for (const [property, value] of Object.entries(properties)) {
-        $(`#${property}`).val(value);
-      }
-      $('#title').text(`Edit User '${properties.name}'`);
-    },
+  call(`/admin/get/${userId}`, function(properties) {
+    for (const [property, value] of Object.entries(properties)) {
+      $(`#${property}`).val(value);
+    }
+    $('#title').text(`Edit User '${properties.name}'`);
+    $('#edit').modal('show');
   });
-  $('#edit').modal('show');
 }
 
 /**
  * Create or edit user.
  */
 function processData() { // eslint-disable-line no-unused-vars
-  if ($('#edit-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: `/admin/process_user`,
-      dataType: 'json',
-      data: $('#edit-form').serialize(),
-      success: function(user) {
-        if (!user) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          const title = $('#title').text().startsWith('Edit');
-          const mode = title ? 'edit' : 'create';
-          addUser(mode, user);
-          const message = `User '${user.name}'
-          ${mode == 'edit' ? 'edited' : 'created'}.`;
-          alertify.notify(message, 'success', 5);
-        }
-      },
-    });
+  fCall('/admin/process_user', '#edit-form', function(user) {
+    const title = $('#title').text().startsWith('Edit');
+    const mode = title ? 'edit' : 'create';
+    addUser(mode, user);
+    const message = `User '${user.name}'
+    ${mode == 'edit' ? 'edited' : 'created'}.`;
+    alertify.notify(message, 'success', 5);
     $('#edit').modal('hide');
-  }
+  });
 }
 
 /**
@@ -99,9 +80,11 @@ function processData() { // eslint-disable-line no-unused-vars
  * @param {userId} userId - Id of the user to be deleted.
  */
 function deleteUser(userId) { // eslint-disable-line no-unused-vars
+  call(`/admin/delete/${userId}`, function(user) {
+  
   $.ajax({
     type: 'POST',
-    url: `/admin/delete/${userId}`,
+    url: ,
     success: function(user) {
       if (!user) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);

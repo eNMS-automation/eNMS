@@ -36,6 +36,9 @@ Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
 [![Inventory](docs/_static/base/inventory.png)](http://afourmy.pythonanywhere.com/objects/device_management) |  [![Dashboard](docs/_static/base/dashboard.png)](http://afourmy.pythonanywhere.com/dashboard)
 
+Online demo: _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_, _[Inventory](http://afourmy.pythonanywhere.com/objects/device_management)_
+Docs: _[Objects](https://enms.readthedocs.io/en/latest/inventory/objects.html)_
+
 ## 2. Network visualization
 
 Once created, eNMS can display your network:
@@ -47,6 +50,9 @@ You can click on a device to display its properties or start a Web SSH terminal 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
 [![Geographical](docs/_static/base/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/base/logical_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
+
+Online demo: _[Geographical View](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical View](http://afourmy.pythonanywhere.com/views/logical_view)_
+Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_
 
 ## 3. Service creation
 

@@ -65,7 +65,7 @@ function call(url, callback) { // eslint-disable-line no-unused-vars
  * @param {form} form - Form.
  * @param {callback} callback - Function to process results.
  */
-function formCall(url, form, callback) { // eslint-disable-line no-unused-vars
+function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
   if ($(form).parsley().validate()) {
     $.ajax({
       type: 'POST',

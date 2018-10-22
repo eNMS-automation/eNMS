@@ -7,7 +7,7 @@ alertify: false
  * Save Tacacs server.
  */
 function saveTacacsServer() { // eslint-disable-line no-unused-vars
-  formCall('/admin/save_tacacs_server', '#tacacs_form', function() {
+  fCall('/admin/save_tacacs_server', '#tacacs_form', function() {
     alertify.notify(`Tacacs server saved.`, 'success', 5);
   });
 }
@@ -36,6 +36,9 @@ function saveSyslogServer() { // eslint-disable-line no-unused-vars
  * Query openNMS server.
  */
 function queryOpenNMS() { // eslint-disable-line no-unused-vars
+  fCall('/admin/query_netbox', '#netbox_form', function() {
+    alertify.notify('Topology imported from Netbox.', 'success', 5);
+  });
   if ($('#opennms_form').parsley().validate()) {
     $.ajax({
       type: 'POST',
@@ -56,27 +59,16 @@ function queryOpenNMS() { // eslint-disable-line no-unused-vars
  * Query Netbox server.
  */
 function queryNetbox() { // eslint-disable-line no-unused-vars
-  if ($('#netbox_form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/admin/query_netbox',
-      data: $('#netbox_form').serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          alertify.notify(`Query sent to Netbox.`, 'success', 5);
-        }
-      },
-    });
-  }
+  fCall('/admin/query_netbox', '#netbox_form', function() {
+    alertify.notify('Topology imported from Netbox.', 'success', 5);
+  });
 }
 
 /**
  * Save geographical parameters.
  */
 function saveGeographicalParameters() { // eslint-disable-line no-unused-vars
-  formCall(
+  fCall(
     '/admin/save_geographical_parameters',
     '#geographical-parameters-form',
     function() {
@@ -89,11 +81,7 @@ function saveGeographicalParameters() { // eslint-disable-line no-unused-vars
  * Save GoTTY parameters.
  */
 function saveGottyParameters() { // eslint-disable-line no-unused-vars
-  formCall(
-    '/admin/save_gotty_parameters',
-    '#gotty-parameters-form',
-    function() {
-      alertify.notify('GoTTY parameters saved.', 'success', 5);
-    }
-  );
+  fCall('/admin/save_gotty_parameters', '#gotty-parameters-form', function() {
+    alertify.notify('GoTTY parameters saved.', 'success', 5);
+  });
 }

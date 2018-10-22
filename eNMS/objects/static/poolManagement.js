@@ -1,6 +1,8 @@
 /*
 global
 alertify: false
+call: false
+fCall: false
 fields: false
 pools: false
 */

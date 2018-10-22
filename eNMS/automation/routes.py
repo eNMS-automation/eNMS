@@ -238,6 +238,7 @@ def compare_logs(job_id):
 @permission_required('Edit Automation Section', redirect=False)
 def add_to_workflow(workflow_id):
     workflow = retrieve(Workflow, id=workflow_id)
+    print(request.form)
     job = retrieve(Job, id=request.form['job'])
     job.workflows.append(workflow)
     db.session.commit()

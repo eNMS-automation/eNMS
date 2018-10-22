@@ -106,32 +106,21 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5);
   }
-  if ($('#add-job').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: `/automation/add_to_workflow/${workflow.id}`,
-      dataType: 'json',
-      data: $('#add-job-form').serialize(),
-      success: function(job) {
-        if (!job) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          $('#add-job').modal('hide');
-          if (graph.findNode(job.id).length == 0) {
-            nodes.add(jobToNode(job));
-            saveNode(job);
-            alertify.notify(`Job '${job.name}' created.`, 'success', 5);
-          } else {
-            alertify.notify(`Job already in workflow.`, 'error', 5);
-          }
-        }
-      },
-    });
-  } else {
-    alertify.notify('Some fields are missing.', 'error', 5);
-  }
+  fCall(
+    `/automation/add_to_workflow/${workflow.id}`,
+    '#add-job',
+    function(job) {
+      $('#add-job').modal('hide');
+      if (graph.findNode(job.id).length == 0) {
+        nodes.add(jobToNode(job));
+        saveNode(job);
+        alertify.notify(`Job '${job.name}' created.`, 'success', 5);
+      } else {
+        alertify.notify(`Job already in workflow.`, 'error', 5);
+      }
+    }
+  );
 }
-
 
 /**
  * Add job to the workflow object (back-end).

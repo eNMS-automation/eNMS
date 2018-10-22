@@ -1,8 +1,10 @@
 /*
 global
 alertify: false
+call: false
 compareLogs: false
 editService: false
+fCall: false
 partial: false
 runJob: false
 showLogs: false
@@ -105,11 +107,9 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5);
-  }
-  fCall(
-    `/automation/add_to_workflow/${workflow.id}`,
-    '#add-job-form',
-    function(job) {
+  } else {
+    const url = `/automation/add_to_workflow/${workflow.id}`;
+    fCall(url, '#add-job-form', function(job) {
       $('#add-job').modal('hide');
       if (graph.findNode(job.id).length == 0) {
         nodes.add(jobToNode(job));
@@ -118,8 +118,8 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
       } else {
         alertify.notify(`Job already in workflow.`, 'error', 5);
       }
-    }
-  );
+    });
+  }
 }
 
 /**
@@ -148,17 +148,9 @@ function deleteNode(id) {
  */
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.type}/${edge.from}/${edge.to}`;
-  $.ajax({
-    type: 'POST',
-    url: `/automation/add_edge/${param}`,
-    success: function(edge) {
-      if (!edge) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        alertify.notify('Edge added to the workflow', 'success', 5);
-        edges.add(edgeToEdge(edge));
-      }
-    },
+  call(`/automation/add_edge/${param}`, function(edge) {
+    alertify.notify('Edge added to the workflow', 'success', 5);
+    edges.add(edgeToEdge(edge));
   });
 }
 
@@ -167,16 +159,8 @@ function saveEdge(edge) {
  * @param {edgeId} edgeId - Id of the edge to be deleted.
  */
 function deleteEdge(edgeId) {
-  $.ajax({
-    type: 'POST',
-    url: `/automation/delete_edge/${workflow.id}/${edgeId}`,
-    success: function(edge) {
-      if (!edge) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        alertify.notify('Edge deleted the workflow', 'success', 5);
-      }
-    },
+  call(`/automation/delete_edge/${workflow.id}/${edgeId}`, function(edge) {
+    alertify.notify('Edge deleted the workflow', 'success', 5);
   });
 }
 

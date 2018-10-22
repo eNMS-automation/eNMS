@@ -1,3 +1,8 @@
+/*
+global
+alertify: false
+*/
+
 /**
  * Show modal.
  * @param {name} name - Modal name.
@@ -33,4 +38,46 @@ function partial(func, ...args) { // eslint-disable-line no-unused-vars
  */
 function capitalize(string) { // eslint-disable-line no-unused-vars
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * jQuery Ajax Call.
+ * @param {url} url - Url.
+ * @param {callback} callback - Function to process results.
+ */
+function call(url, callback) { // eslint-disable-line no-unused-vars
+  $.ajax({
+    type: 'POST',
+    url: url,
+    success: function(results) {
+      if (!result) {
+        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else {
+        callback(results);
+      }
+    },
+  });
+}
+
+/**
+ * jQuery Ajax Form Call.
+ * @param {url} url - Url.
+ * @param {form} form - Form.
+ * @param {callback} callback - Function to process results.
+ */
+function formCall(url, form, callback) { // eslint-disable-line no-unused-vars
+  if ($(form).parsley().validate()) {
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: $(form).serialize(),
+      success: function(result) {
+        if (!result) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          callback(results);
+        }
+      },
+    });
+  }
 }

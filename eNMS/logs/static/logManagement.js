@@ -1,6 +1,8 @@
 /*
 global
 alertify: false
+call: false
+fCall: false
 fields: false
 logs: false
 */
@@ -32,17 +34,12 @@ function addLog(properties) {
  * Filter logs.
  */
 function filterLogs() { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: '/logs/filter_logs',
-    data: $('#filtering-form').serialize(),
-    success: function(logs) {
-      table.clear().draw();
-      for (let i = 0; i < logs.length; i++) {
-        addLog(logs[i]);
-      }
-      alertify.notify(`Logs successfully filtered.`, 'success', 5);
-    },
+  fCall('/logs/filter_logs', '#filtering-form', function(logs) {
+    table.clear().draw();
+    for (let i = 0; i < logs.length; i++) {
+      addLog(logs[i]);
+    }
+    alertify.notify(`Logs successfully filtered.`, 'success', 5);
   });
 }
 
@@ -51,16 +48,8 @@ function filterLogs() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the log to be deleted.
  */
 function deleteLog(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/logs/delete_log/${id}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        table.row($(`#${id}`)).remove().draw(false);
-        alertify.notify('Log successfully deleted.', 'error', 5);
-      }
-    },
+  call(`/logs/delete_log/${id}`, function(result) {
+  table.row($(`#${id}`)).remove().draw(false);
+  alertify.notify('Log successfully deleted.', 'error', 5);
   });
 }

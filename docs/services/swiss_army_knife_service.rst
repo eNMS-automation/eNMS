@@ -45,19 +45,12 @@ Let's take a look at how the ``Swiss Army Knife Service`` is implemented:
           return {'success': True, 'result': ''}
   
       def process_payload1(self, payload):
-          get_int = payload['get_interfaces']
-          r8_int = get_int['devices']['router8']['result']['get_interfaces']
-          speed_fa0 = r8_int['FastEthernet0/0']['speed']
-          speed_fa1 = r8_int['FastEthernet0/1']['speed']
-          same_speed = speed_fa0 == speed_fa1
-  
           get_facts = payload['get_facts']
-          r8_facts = get_facts['devices']['router8']['result']['get_facts']
-          uptime_less_than_50000 = r8_facts['uptime'] < 50000
+          facts = get_facts['devices']['Washington']['result']['get_facts']
+          uptime_less_than_50000 = facts['uptime'] < 50000
           return {
               'success': True,
               'result': {
-                  'same_speed_fa0_fa1': same_speed,
                   'uptime_less_5000': uptime_less_than_50000
               }
           }

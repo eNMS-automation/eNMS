@@ -2,6 +2,8 @@
 global
 addService: false
 alertify: false
+call: false
+fCall: false
 propertyTypes: false
 servicesClasses: false
 showModal: false
@@ -64,7 +66,7 @@ function editService(id) {
       );
       $('#pools').val(result.service.pools.map((p) => p.id));
       showModal('service-editor');
-    },
+    }
   });
 }
 
@@ -72,20 +74,17 @@ function editService(id) {
  * Save a service.
  */
 function saveService() { // eslint-disable-line no-unused-vars
-  const url = `/automation/save_service/${$('#services').val()}
+  const url = `/automation/save_service/${$('#services').val()}`
   fCall(url, '#service-editor-form', function(service) {
-          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          if (typeof workflowBuilder === 'undefined') {
-            addService(mode, service);
-          }
-          const message = `Service '${service.name}'
-          ${mode == 'edit' ? 'edited' : 'created'} !`;
-          alertify.notify(message, 'success', 5);
-          $('#service-editor').modal('hide');
-        }
-      },
-    });
-  }
+    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+    if (typeof workflowBuilder === 'undefined') {
+      addService(mode, service);
+    }
+    const note = `Service '${service.name}'
+    ${mode == 'edit' ? 'edited' : 'created'} !`;
+    alertify.notify(message, 'success', 5);
+    $('#service-editor').modal('hide');
+  });
 }
 
 $('#services').change(function() {

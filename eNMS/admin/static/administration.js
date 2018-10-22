@@ -80,7 +80,7 @@ function saveGeographicalParameters() { // eslint-disable-line no-unused-vars
     '/admin/save_geographical_parameters',
     '#geographical-parameters-form',
     function() {
-      alertify.notify(`Tacacs server saved.`, 'success', 5);
+      alertify.notify('Geographical parameters saved.', 'success', 5);
     }
   );
 }
@@ -89,18 +89,11 @@ function saveGeographicalParameters() { // eslint-disable-line no-unused-vars
  * Save GoTTY parameters.
  */
 function saveGottyParameters() { // eslint-disable-line no-unused-vars
-  if ($('#gotty-parameters-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/admin/save_gotty_parameters',
-      data: $('#gotty-parameters-form').serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          alertify.notify('GoTTY parameters saved.', 'success', 5);
-        }
-      },
-    });
-  }
+  formCall(
+    '/admin/save_gotty_parameters',
+    '#gotty-parameters-form',
+    function() {
+      alertify.notify('GoTTY parameters saved.', 'success', 5);
+    }
+  );
 }

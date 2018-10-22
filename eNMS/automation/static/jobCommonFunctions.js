@@ -39,21 +39,16 @@ $('#first_version,#second_version').on('change', function() {
   $('#view').empty();
   const v1 = $('#first_version').val();
   const v2 = $('#second_version').val();
-  $.ajax({
-    type: 'POST',
-    url: `/automation/get_diff/${jobId}/${v1}/${v2}`,
-    dataType: 'json',
-    success: function(data) {
-      $('#view').append(diffview.buildView({
-        baseTextLines: data.first,
-        newTextLines: data.second,
-        opcodes: data.opcodes,
-        baseTextName: `${v1}`,
-        newTextName: `${v2}`,
-        contextSize: null,
-        viewType: 0,
-      }));
-    },
+  call(`/automation/get_diff/${jobId}/${v1}/${v2}`, function(data) {
+    $('#view').append(diffview.buildView({
+      baseTextLines: data.first,
+      newTextLines: data.second,
+      opcodes: data.opcodes,
+      baseTextName: `${v1}`,
+      newTextName: `${v2}`,
+      contextSize: null,
+      viewType: 0,
+    }));
   });
 });
 
@@ -62,16 +57,7 @@ $('#first_version,#second_version').on('change', function() {
  * @param {id} id - Job id.
  */
 function runJob(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/automation/run_job/${id}`,
-    dataType: 'json',
-    success: function(job) {
-      if (!job) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        alertify.notify(`Job '${job.name}' started.`, 'success', 5);
-      }
-    },
+  call(`/automation/run_job/${id}`, function(job) {
+    alertify.notify(`Job '${job.name}' started.`, 'success', 5);
   });
 }

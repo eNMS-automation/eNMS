@@ -273,19 +273,10 @@ function switchMode(mode) {
 
 $('#workflow-name').on('change', function() {
   savePositions();
-  $.ajax({
-    type: 'POST',
-    url: `/automation/get/${this.value}`,
-    dataType: 'json',
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        workflow = result;
-        graph = displayWorkflow(result);
-        alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
-      }
-    },
+  call(`/automation/get/${this.value}`, function(result) {
+    workflow = result;
+    graph = displayWorkflow(result);
+    alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
   });
 });
 

@@ -1,5 +1,6 @@
 /*
 global
+call: false
 counters: false
 defaultProperties: false
 echarts: false
@@ -295,26 +296,15 @@ function drawDiagrams(objects, type) {
 }
 
 $.each(defaultProperties, function(type, property) {
-    
-  $.ajax({
-    type: 'POST',
-    url: `/counters/${property}/${type}`,
-    dataType: 'json',
-    success: function(objects) {
-      drawDiagrams(objects, type);
-    },
+  call(`/counters/${property}/${type}`, function(objects) {
+    drawDiagrams(objects, type);
   });
 });
 
 $.each(counters, function(type, _) {
   $(`#${type}-properties`).on('change', function() {
-    $.ajax({
-      type: 'POST',
-      url: `/counters/${this.value}/${type}`,
-      dataType: 'json',
-      success: function(objects) {
-        drawDiagrams(objects, type);
-      },
+    call(`/counters/${this.value}/${type}`, function(objects) {
+      drawDiagrams(objects, type);
     });
   });
 });

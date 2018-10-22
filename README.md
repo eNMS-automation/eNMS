@@ -104,7 +104,7 @@ Event-driven automation in eNMS has two aspects:
 - eNMS has a ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a workflow with a GET request to the appropriate URL. 
 - eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
 
-- Docs: _[ReST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.html)_
+Docs: _[ReST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.html)_
 
 ___
 
@@ -154,9 +154,9 @@ ___
 
 # Coming up next
 
-## A notification system (send the results of an automation task via mail or Slack)
-## Gitlab support (e.g push the logs of an automation task to gitlab)
-## RADIUS + Active Directory authentication
+- A notification system (send the results of an automation task via mail or Slack)
+- Gitlab support (e.g push the logs of an automation task to gitlab)
+- RADIUS + Active Directory authentication
 
 # Other projects you might be interested in
 

@@ -216,19 +216,12 @@ function startJob() {
     if (workflow.start_job) {
       nodes.update({id: workflow.start_job.id, color: '#D2E5FF'});
     }
-    $.ajax({
-      type: 'POST',
-      url: `/automation/set_as_start/${workflow.id}/${start.id}`,
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          nodes.update({id: start.id, color: 'green'});
-          workflow.start_job = start;
-        }
-      },
+    const url = `/automation/set_as_start/${workflow.id}/${start.id}`;
+    call(url, function(result) {
+      nodes.update({id: start.id, color: 'green'});
+      workflow.start_job = start;
+      alertify.notify(`Job ${start.label} set as start.`, 'success', 5);
     });
-    alertify.notify(`Job ${start.label} set as start.`, 'success', 5);
   }
 }
 
@@ -243,19 +236,12 @@ function endJob() {
     if (workflow.end_job) {
       nodes.update({id: workflow.end_job.id, color: '#D2E5FF'});
     }
-    $.ajax({
-      type: 'POST',
-      url: `/automation/set_as_end/${workflow.id}/${end.id}`,
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          nodes.update({id: end.id, color: 'red'});
-          workflow.end_job = end;
-        }
-      },
+    const url = `/automation/set_as_end/${workflow.id}/${end.id}`;
+    call(url, function(result) {
+      nodes.update({id: end.id, color: 'red'});
+      workflow.end_job = end;
+      alertify.notify(`Job ${end.label} set as end.`, 'success', 5);
     });
-    alertify.notify(`Job ${end.label} set as end.`, 'success', 5);
   }
 }
 

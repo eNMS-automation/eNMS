@@ -295,6 +295,7 @@ function drawDiagrams(objects, type) {
 }
 
 $.each(defaultProperties, function(type, property) {
+    
   $.ajax({
     type: 'POST',
     url: `/counters/${property}/${type}`,

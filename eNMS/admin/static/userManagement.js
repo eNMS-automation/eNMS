@@ -81,17 +81,7 @@ function processData() { // eslint-disable-line no-unused-vars
  */
 function deleteUser(userId) { // eslint-disable-line no-unused-vars
   call(`/admin/delete/${userId}`, function(user) {
-  
-  $.ajax({
-    type: 'POST',
-    url: ,
-    success: function(user) {
-      if (!user) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $(`#${userId}`).remove();
-        alertify.notify(`User '${user.name}' deleted.`, 'error', 5);
-      }
-    },
+    $(`#${userId}`).remove();
+    alertify.notify(`User '${user.name}' deleted.`, 'error', 5);
   });
 }

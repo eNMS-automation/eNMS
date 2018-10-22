@@ -108,7 +108,7 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   }
   fCall(
     `/automation/add_to_workflow/${workflow.id}`,
-    '#add-job',
+    '#add-job-form',
     function(job) {
       $('#add-job').modal('hide');
       if (graph.findNode(job.id).length == 0) {
@@ -127,17 +127,8 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
  * @param {job} job - job to add to the workflow.
  */
 function saveNode(job) {
-  $.ajax({
-    type: 'POST',
-    url: `/automation/add_node/${workflow.id}/${job.id}`,
-    success: function(job) {
-      if (!job) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        const message = `Job '${job.name}' added to the workflow.`;
-        alertify.notify(message, 'success', 5);
-      }
-    },
+  call(`/automation/add_node/${workflow.id}/${job.id}`, function(job) {
+    alertify.notify(`'${job.name}' added to the workflow.`, 'success', 5);
   });
 }
 
@@ -146,17 +137,8 @@ function saveNode(job) {
  * @param {id} id - Id of the job to be deleted.
  */
 function deleteNode(id) {
-  $.ajax({
-    type: 'POST',
-    url: `/automation/delete_node/${workflow.id}/${id}`,
-    success: function(job) {
-      if (!job) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        const message = `Job '${job.name}' deleted from the workflow.`;
-        alertify.notify(message, 'success', 5);
-      }
-    },
+  call(`/automation/delete_node/${workflow.id}/${id}`, function(job) {
+    alertify.notify(`'${job.name}' deleted from the workflow.`, 'success', 5);
   });
 }
 

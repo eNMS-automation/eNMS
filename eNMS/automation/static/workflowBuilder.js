@@ -348,15 +348,10 @@ $('#network').contextMenu({
  */
 function getWorkflowStatus() {
   if (workflow) {
-    $.ajax({
-      type: 'POST',
-      url: `/automation/get/${workflow.id}`,
-      dataType: 'json',
-      success: function(result) {
-        $('#status').text(`Status: ${result.status}.`);
-        const job = result.current_job ? result.current_job.name : 'None';
-        $('#current-job').text(`Current job: ${job}.`);
-      },
+    call(`/automation/get/${workflow.id}`, function(result) {
+      $('#status').text(`Status: ${result.status}.`);
+      const job = result.current_job ? result.current_job.name : 'None';
+      $('#current-job').text(`Current job: ${job}.`);
     });
   }
   setTimeout(getWorkflowStatus, 2000);

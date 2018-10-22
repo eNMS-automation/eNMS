@@ -41,36 +41,29 @@ function editService(id) {
   if (id) {
     $('#title').text('Edit Service Instance');
   }
-  $.ajax({
-    type: 'POST',
-    url: `/automation/get_service/${id || $('#services').val()}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $('#html-form').html(result.form);
-        if (result.service) {
-          $('#services').hide();
-          for (const [property, value] of Object.entries(result.service)) {
-            const propertyType = propertyTypes[property] || 'str';
-            if (propertyType.includes('bool')) {
-              $(`#${property}`).prop('checked', value);
-            } else if (propertyType.includes('dict')) {
-              $(`#${property}`).val(value ? JSON.stringify(value): '{}');
-            } else {
-              $(`#${property}`).val(value);
-            }
-          }
-          $('#services').val(result.service.type);
-          $('.fs-option').removeClass('selected');
-          $('.fs-label').text('Select devices');
-          result.service.devices.map(
-            (n) => $(`.fs-option[data-value='${n.id}']`).click()
-          );
-          $('#pools').val(result.service.pools.map((p) => p.id));
-          showModal('service-editor');
+  const url = `/automation/get_service/${id || $('#services').val()}`;
+  call(url, function(result) {
+    $('#html-form').html(result.form);
+    if (result.service) {
+      $('#services').hide();
+      for (const [property, value] of Object.entries(result.service)) {
+        const propertyType = propertyTypes[property] || 'str';
+        if (propertyType.includes('bool')) {
+          $(`#${property}`).prop('checked', value);
+        } else if (propertyType.includes('dict')) {
+          $(`#${property}`).val(value ? JSON.stringify(value): '{}');
+        } else {
+          $(`#${property}`).val(value);
         }
       }
+      $('#services').val(result.service.type);
+      $('.fs-option').removeClass('selected');
+      $('.fs-label').text('Select devices');
+      result.service.devices.map(
+        (n) => $(`.fs-option[data-value='${n.id}']`).click()
+      );
+      $('#pools').val(result.service.pools.map((p) => p.id));
+      showModal('service-editor');
     },
   });
 }
@@ -79,16 +72,8 @@ function editService(id) {
  * Save a service.
  */
 function saveService() { // eslint-disable-line no-unused-vars
-  if ($('#service-editor-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: `/automation/save_service/${$('#services').val()}`,
-      dataType: 'json',
-      data: $('#service-editor-form').serialize(),
-      success: function(service) {
-        if (!service) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
+  const url = `/automation/save_service/${$('#services').val()}
+  fCall(url, '#service-editor-form', function(service) {
           const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
           if (typeof workflowBuilder === 'undefined') {
             addService(mode, service);

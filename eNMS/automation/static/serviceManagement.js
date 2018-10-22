@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+call: false
 fields: false
 services: false
 */
@@ -48,17 +49,9 @@ function addService(mode, properties) {
  * @param {id} id - Id of the service to delete.
  */
 function deleteService(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/automation/delete/${id}`,
-    success: function(service) {
-      if (!service) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        table.row($(`#${id}`)).remove().draw(false);
-        const message = `Service '${service.name}' successfully deleted.`;
-        alertify.notify(message, 'error', 5);
-      }
-    },
+  call(`/automation/delete/${id}`, function(service) {
+    table.row($(`#${id}`)).remove().draw(false);
+    const message = `Service '${service.name}' successfully deleted.`;
+    alertify.notify(message, 'error', 5);
   });
 }

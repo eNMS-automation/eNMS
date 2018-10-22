@@ -16,43 +16,18 @@ function saveTacacsServer() { // eslint-disable-line no-unused-vars
  * Save Syslog server.
  */
 function saveSyslogServer() { // eslint-disable-line no-unused-vars
-  if ($('#syslog_form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/admin/save_syslog_server',
-      data: $('#syslog_form').serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          alertify.notify(`Syslog server saved.`, 'success', 5);
-        }
-      },
-    });
-  }
+  fCall('/admin/save_syslog_server', '#syslog_form', function() {
+    alertify.notify('Syslog server saved.', 'success', 5);
+  });
 }
 
 /**
  * Query openNMS server.
  */
 function queryOpenNMS() { // eslint-disable-line no-unused-vars
-  fCall('/admin/query_netbox', '#netbox_form', function() {
-    alertify.notify('Topology imported from Netbox.', 'success', 5);
+  fCall('/admin/query_opennms', '#opennms_form', function() {
+    alertify.notify('Topology imported from OpenNMS.', 'success', 5);
   });
-  if ($('#opennms_form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/admin/query_opennms',
-      data: $('#opennms_form').serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          alertify.notify(`Query sent to openNMS.`, 'success', 5);
-        }
-      },
-    });
-  }
 }
 
 /**

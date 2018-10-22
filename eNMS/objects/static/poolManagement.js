@@ -56,25 +56,17 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the pool to edit.
  */
 function showPoolModal(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/objects/get_pool/${id}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+  call(`/objects/get_pool/${id}`, function(result) {
+    for (const [property, value] of Object.entries(result)) {
+      if (property.includes('regex')) {
+        $(`#${property}`).prop('checked', value);
       } else {
-        for (const [property, value] of Object.entries(result)) {
-          if (property.includes('regex')) {
-            $(`#${property}`).prop('checked', value);
-          } else {
-            $(`#${property}`).val(value);
-          }
-          $('#title').text(`Edit Pool '${result.name}'`);
-        }
+        $(`#${property}`).val(value);
       }
-    },
+      $('#title').text(`Edit Pool '${result.name}'`);
+    }
+    $('#edit').modal('show');
   });
-  $('#edit').modal('show');
 }
 
 /**
@@ -82,40 +74,23 @@ function showPoolModal(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the pool.
  */
 function showPoolObjects(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/objects/get_pool_objects/${id}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $('#devices').val(result.devices.map((n) => n.id));
-        $('#links').val(result.links.map((l) => l.id));
-        poolId = id;
-      }
-    },
+  call(`/objects/get_pool_objects/${id}`, function(result) {
+    $('#devices').val(result.devices.map((n) => n.id));
+    $('#links').val(result.links.map((l) => l.id));
+    poolId = id;
+    $('#edit-pool-objects').modal('show');
   });
-  $('#edit-pool-objects').modal('show');
 }
 
 /**
  * Update pool objects.
  */
 function savePoolObjects() { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/objects/save_pool_objects/${poolId}`,
-    dataType: 'json',
-    data: $('#pool-objects-form').serialize(),
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        alertify.notify('Changes saved.', 'success', 5);
-      }
-    },
+  const url = `/objects/save_pool_objects/${poolId}`;
+  fCall(url, '#pool-objects-form', function(result) {
+    alertify.notify('Changes saved.', 'success', 5);
+    $('#edit-pool-objects').modal('hide');
   });
-  $('#edit-pool-objects').modal('hide');
 }
 
 /**

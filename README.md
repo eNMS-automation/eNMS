@@ -36,8 +36,8 @@ Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
 [![Inventory](docs/_static/base/inventory.png)](http://afourmy.pythonanywhere.com/objects/device_management) |  [![Dashboard](docs/_static/base/dashboard.png)](http://afourmy.pythonanywhere.com/dashboard)
 
-Online demo: _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_, _[Inventory](http://afourmy.pythonanywhere.com/objects/device_management)_
-Docs: _[Objects](https://enms.readthedocs.io/en/latest/inventory/objects.html)_
+- Online demo: _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_, _[Inventory](http://afourmy.pythonanywhere.com/objects/device_management)_
+- Docs: _[Objects](https://enms.readthedocs.io/en/latest/inventory/objects.html)_
 
 ## 2. Network visualization
 
@@ -51,8 +51,8 @@ Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
 [![Geographical](docs/_static/base/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/base/logical_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
 
-Online demo: _[Geographical View](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical View](http://afourmy.pythonanywhere.com/views/logical_view)_
-Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_
+- Online demo: _[Geographical View](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical View](http://afourmy.pythonanywhere.com/views/logical_view)_
+- Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_
 
 ## 3. Service creation
 
@@ -71,8 +71,8 @@ Once created, you can have as many instances of your service as you need. Servic
 
 [![Service Management](docs/_static/base/service_management.png)](http://afourmy.pythonanywhere.com/automation/service_management)
 
-Online demo: _[Services](http://afourmy.pythonanywhere.com/automation/service_management)_
-Docs: _[Services](https://enms.readthedocs.io/en/latest/services/service_system.html)_, _[Default Services](https://enms.readthedocs.io/en/latest/services/default_services.html)_
+- Online demo: _[Services](http://afourmy.pythonanywhere.com/automation/service_management)_
+- Docs: _[Services](https://enms.readthedocs.io/en/latest/services/service_system.html)_, _[Default Services](https://enms.readthedocs.io/en/latest/services/default_services.html)_
 
 ## 4. Workflows
 
@@ -86,8 +86,8 @@ When a workflow is executed, its status will be updated in real-time on the web 
 
 [![Workflow Builder](docs/_static/base/workflow.png)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 
-Online demo: _[Workflow Builder](http://afourmy.pythonanywhere.com/automation/workflow_builder/)_
-Docs: _[Workflow System](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
+- Online demo: _[Workflow Builder](http://afourmy.pythonanywhere.com/automation/workflow_builder/)_
+- Docs: _[Workflow System](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
 
 ## 5. Scheduling
 
@@ -95,8 +95,8 @@ While services and workflows can be run directly and immediately from the web UI
 
 [![Calendar](docs/_static/base/calendar.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
 
-Online Demo: _[Calendar](http://afourmy.pythonanywhere.com/scheduling/calendar)_
-Docs: _[Scheduling](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)_
+- Online Demo: _[Calendar](http://afourmy.pythonanywhere.com/scheduling/calendar)_
+- Docs: _[Scheduling](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)_
 
 ## 6. Event-driven automation
 
@@ -104,7 +104,7 @@ Event-driven automation in eNMS has two aspects:
 - eNMS has a ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a workflow with a GET request to the appropriate URL. 
 - eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
 
-Docs: _[ReST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.html)_
+- Docs: _[ReST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.html)_
 
 ___
 

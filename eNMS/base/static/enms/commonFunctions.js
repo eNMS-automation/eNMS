@@ -50,7 +50,7 @@ function call(url, callback) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: url,
     success: function(results) {
-      if (!result) {
+      if (!results) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
       } else {
         callback(results);
@@ -71,8 +71,8 @@ function formCall(url, form, callback) { // eslint-disable-line no-unused-vars
       type: 'POST',
       url: url,
       data: $(form).serialize(),
-      success: function(result) {
-        if (!result) {
+      success: function(results) {
+        if (!results) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {
           callback(results);

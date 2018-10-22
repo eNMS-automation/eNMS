@@ -7,20 +7,9 @@ alertify: false
  * Save Tacacs server.
  */
 function saveTacacsServer() { // eslint-disable-line no-unused-vars
-  if ($('#tacacs_form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/admin/save_tacacs_server',
-      data: $('#tacacs_form').serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          alertify.notify(`Tacacs server saved.`, 'success', 5);
-        }
-      },
-    });
-  }
+  formCall('/admin/save_tacacs_server', '#tacacs_form', function() {
+    alertify.notify(`Tacacs server saved.`, 'success', 5);
+  });
 }
 
 /**
@@ -87,20 +76,13 @@ function queryNetbox() { // eslint-disable-line no-unused-vars
  * Save geographical parameters.
  */
 function saveGeographicalParameters() { // eslint-disable-line no-unused-vars
-  if ($('#geographical-parameters-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/admin/save_geographical_parameters',
-      data: $('#geographical-parameters-form').serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          alertify.notify('Geographical parameters saved.', 'success', 5);
-        }
-      },
-    });
-  }
+  formCall(
+    '/admin/save_geographical_parameters',
+    '#geographical-parameters-form',
+    function() {
+      alertify.notify(`Tacacs server saved.`, 'success', 5);
+    }
+  );
 }
 
 /**

@@ -1,6 +1,8 @@
 /*
 global
 alertify: false
+call: false
+fCall: false
 fields: false
 logRules: false
 */
@@ -50,43 +52,30 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the log rule.
  */
 function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/logs/get_log_rule/${id}`,
-    success: function(logRule) {
-      for (const [property, value] of Object.entries(logRule)) {
-        if (property.includes('regex')) {
-          $(`#${property}`).prop('checked', value);
-        } else {
-          $(`#${property}`).val(value);
-        }
-        $('#jobs').val(logRule.jobs.map((j) => j.id));
-        $('#title').text(`Edit log rule properties`);
+  call(`/logs/get_log_rule/${id}`, function(logRule) {
+    for (const [property, value] of Object.entries(logRule)) {
+      if (property.includes('regex')) {
+        $(`#${property}`).prop('checked', value);
+      } else {
+        $(`#${property}`).val(value);
       }
-    },
+      $('#jobs').val(logRule.jobs.map((j) => j.id));
+      $('#title').text(`Edit log rule properties`);
+    }
+    $('#edit').modal('show');
   });
-  $('#edit').modal('show');
 }
 
 /**
  * Save log rule.
  */
 function saveRule() { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: '/logs/save_log_rule',
-    data: $('#edit-form').serialize(),
-    success: function(logRule) {
-      if (!logRule) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        const title = $('#title').text().startsWith('Edit');
-        const mode = title ? 'edited' : 'created';
-        addLogRule(logRule, mode);
-        alertify.notify(`Log rule '${logRule.name}' ${mode}.`, 'success', 5);
-        $('#edit').modal('hide');
-      }
-    },
+  fCall('/logs/save_log_rule', '#edit-form', function(logRule) {
+    const title = $('#title').text().startsWith('Edit');
+    const mode = title ? 'edited' : 'created';
+    addLogRule(logRule, mode);
+    alertify.notify(`Log rule '${logRule.name}' ${mode}.`, 'success', 5);
+    $('#edit').modal('hide');
   });
 }
 

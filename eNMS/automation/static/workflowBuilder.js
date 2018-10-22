@@ -81,17 +81,9 @@ if (workflow) {
   $('#workflow-name').val(workflow.id);
   displayWorkflow(workflow);
 } else {
-  $.ajax({
-    type: 'POST',
-    url: `/automation/get/${$('#workflow-name').val()}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        workflow = result;
-        graph = displayWorkflow(result);
-      }
-    },
+  call(`/automation/get/${$('#workflow-name').val()}`, function(result) {
+    workflow = result;
+    graph = displayWorkflow(result);
   });
 }
 

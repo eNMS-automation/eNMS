@@ -1,6 +1,8 @@
 /*
 global
 alertify: false
+call: false
+fCall: false
 fields: false
 workflows: false
 */
@@ -100,16 +102,8 @@ function editObject() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the workflow to delete.
  */
 function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/automation/delete_workflow/${id}`,
-    success: function(workflow) {
-      if (!workflow) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        table.row($(`#${id}`)).remove().draw(false);
-        alertify.notify(`Workflow '${workflow.name}' deleted.`, 'error', 5);
-      }
-    },
+  call(`/automation/delete_workflow/${id}`, function(workflow) {
+    table.row($(`#${id}`)).remove().draw(false);
+    alertify.notify(`Workflow '${workflow.name}' deleted.`, 'error', 5);
   });
 }

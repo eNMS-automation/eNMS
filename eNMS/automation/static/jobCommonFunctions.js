@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+call: false
 diffview: false
 */
 
@@ -11,19 +12,10 @@ let jobId;
  * @param {id} id - Job id.
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/automation/show_logs/${id}`,
-    dataType: 'json',
-    success: function(logs) {
-      if (!logs) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $('#logs').text(logs.replace(/\\n/g, '\n'));
-      }
-    },
+  call(`/automation/show_logs/${id}`, function(logs) {
+    $('#logs').text(logs.replace(/\\n/g, '\n'));
+    $(`#show-logs-modal`).modal('show');
   });
-  $(`#show-logs-modal`).modal('show');
 }
 
 /**
@@ -32,24 +24,15 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
  */
 function compareLogs(id) { // eslint-disable-line no-unused-vars
   jobId = id;
-  $.ajax({
-    type: 'POST',
-    url: `/automation/compare_logs/${id}`,
-    dataType: 'json',
-    success: function(results) {
-      if (!results) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $('#first_version,#second_version').empty();
-        for (let i = 0; i < results.versions.length; i++) {
-          const value = results.versions[i];
-          $('#first_version,#second_version').append($('<option></option>')
-            .attr('value', value).text(value));
-        }
-      }
-    },
+  call(`/automation/compare_logs/${id}`, function(results) {
+    $('#first_version,#second_version').empty();
+    for (let i = 0; i < results.versions.length; i++) {
+      const value = results.versions[i];
+      $('#first_version,#second_version').append($('<option></option>')
+        .attr('value', value).text(value));
+    }
+    $('#logs-modal').modal('show');
   });
-  $('#logs-modal').modal('show');
 }
 
 $('#first_version,#second_version').on('change', function() {

@@ -97,26 +97,14 @@ function savePoolObjects() { // eslint-disable-line no-unused-vars
  * Update pool properties.
  */
 function savePool() { // eslint-disable-line no-unused-vars
-  if ($('#edit-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: `/objects/process_pool`,
-      dataType: 'json',
-      data: $('#edit-form').serialize(),
-      success: function(pool) {
-        if (!pool) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          addPool(mode, pool);
-          const message = `Pool '${pool.name}'
-          ${mode == 'edit' ? 'edited !' : 'created !'}.`;
-          alertify.notify(message, 'success', 5);
-        }
-      },
-    });
+  fCall('/objects/process_pool', '#edit-form', function(pool) {
+    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+    addPool(mode, pool);
+    const message = `Pool '${pool.name}'
+    ${mode == 'edit' ? 'edited !' : 'created !'}.`;
+    alertify.notify(message, 'success', 5);
     $('#edit').modal('hide');
-  }
+  });
 }
 
 /**

@@ -112,17 +112,9 @@ function savePool() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the pool to delete.
  */
 function deletePool(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/objects/delete_pool/${id}`,
-    success: function(name) {
-      if (!name) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        table.row($(`#${id}`)).remove().draw(false);
-        alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
-      }
-    },
+  call(`/objects/delete_pool/${id}`, function(name) {
+    table.row($(`#${id}`)).remove().draw(false);
+    alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
   });
 }
 
@@ -130,15 +122,7 @@ function deletePool(id) { // eslint-disable-line no-unused-vars
  * Update all pool objects according to pool properties.
  */
 function updatePools() { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: '/objects/update_pools',
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        alertify.notify('Pools successfully updated.', 'success', 5);
-      }
-    },
+  call('/objects/update_pools', function(result) {
+    alertify.notify('Pools successfully updated.', 'success', 5);
   });
 }

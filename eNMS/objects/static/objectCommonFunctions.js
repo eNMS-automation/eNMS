@@ -169,33 +169,23 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Device id.
  */
 function sshConnection(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/objects/connection/${id}`,
-    dataType: 'json',
-    data: $('#connection-parameters-form').serialize(),
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        let url = result.server_addr;
-        if (!url) {
-          url = `${window.location.protocol}//${window.location.hostname}`;
-        }
-        const terminal = result.redirection
-          ? `${url}/terminal${result.port}/`
-          : `${url}:${result.port}`;
-        setTimeout(function() {
-          openUrl(terminal);
-        }, 300);
-        const messageLink = `Click here to connect to ${result.device}.`;
-        const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
-        alertify.notify(link, 'success', 15);
-        const warning = `Don't forget to turn off the pop-up blocker !`;
-        alertify.notify(warning, 'error', 20);
-        $('#connection-parameters').modal('hide');
-      }
-    },
+  const url = `/objects/connection/${id}`;
+  fCall(url, '#connection-parameters-form', function(result) {
+    let url = result.server_addr;
+    if (!url) {
+      url = `${window.location.protocol}//${window.location.hostname}`;
+    }
+    const terminal = result.redirection
+      ? `${url}/terminal${result.port}/`
+      : `${url}:${result.port}`;
+    setTimeout(function() {
+      openUrl(terminal);
+    }, 300);
+    const messageLink = `Click here to connect to ${result.device}.`;
+    const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
+    alertify.notify(link, 'success', 15);
+    const warning = `Don't forget to turn off the pop-up blocker !`;
+    alertify.notify(warning, 'error', 20);
+    $('#connection-parameters').modal('hide');
   });
 }
-

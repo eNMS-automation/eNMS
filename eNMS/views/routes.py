@@ -102,4 +102,4 @@ def get_logs(device_id):
         log.content for log in Log.query.all()
         if log.source == device.ip_address
     ]
-    return jsonify('\n'.join(device_logs))
+    return jsonify('\n'.join(device_logs) or True)

@@ -21,30 +21,20 @@ table: false
  * @param {id} id - Id of the object to edit.
  */
 function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/objects/get/${type}/${id}`,
-    success: function(properties) {
-      for (const [property, value] of Object.entries(properties)) {
-        $(`#${type}-${property}`).val(value);
-      }
-      $('#connection-parameters-button').unbind('click');
-      $('#connection-parameters-button').click(
-        partial(connectionParametersModal, id)
-      );
-      $('#title').text(`Edit ${capitalize(type)} '${properties.name}'`);
-    },
+  call(`/objects/get/${type}/${id}`, function(properties) {
+    for (const [property, value] of Object.entries(properties)) {
+      $(`#${type}-${property}`).val(value);
+    }
+    $('#connection-parameters-button').unbind('click');
+    $('#connection-parameters-button').click(
+      partial(connectionParametersModal, id)
+    );
+    $('#title').text(`Edit ${capitalize(type)} '${properties.name}'`);
+    if (type == 'device') {
+      call(`/views/get_logs/${id}`, function(logs) { $('#logs').text(logs); });
+    }
+    $(`#edit-${type}`).modal('show');
   });
-  if (type == 'device') {
-    $.ajax({
-      type: 'POST',
-      url: `/views/get_logs/${id}`,
-      success: function(logs) {
-        $('#logs').text(logs);
-      },
-    });
-  }
-  $(`#edit-${type}`).modal('show');
 }
 
 /**

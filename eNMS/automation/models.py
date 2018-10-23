@@ -243,6 +243,7 @@ class Workflow(Job):
         else:
             results = self.job()
         self.logs[str(datetime.now())] = results
+        return results
 
     def job(self, args=None):
         self.status = 'Running'

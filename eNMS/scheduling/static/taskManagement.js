@@ -43,28 +43,14 @@ function addTask(mode, properties) {
  * Schedule a task.
  */
 function scheduleTask() { // eslint-disable-line no-unused-vars
-  if ($('#task-modal-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/scheduling/scheduler',
-      dataType: 'json',
-      data: $('#task-modal-form').serialize(),
-      success: function(task) {
-        if (!task) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          addTask(mode, task);
-          const message = `Task '${task.name}'
-          ${mode == 'edit' ? 'edited' : 'created'} !`;
-          alertify.notify(message, 'success', 5);
-          $('#task-modal').modal('hide');
-        }
-      },
-    });
-  } else {
-    alertify.notify('Some fields are missing.', 'error', 5);
-  }
+  fCall('/scheduling/scheduler', '#task-modal-form', function(task) {
+    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+    addTask(mode, task);
+    const message = `Task '${task.name}'
+    ${mode == 'edit' ? 'edited' : 'created'} !`;
+    alertify.notify(message, 'success', 5);
+    $('#task-modal').modal('hide');
+  });
 }
 
 /**

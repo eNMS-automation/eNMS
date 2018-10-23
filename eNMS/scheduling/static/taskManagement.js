@@ -72,17 +72,9 @@ function scheduleTask() { // eslint-disable-line no-unused-vars
  * @param {id} id - Task id.
  */
 function deleteTask(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/scheduling/delete_task/${id}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        table.row($(`#${id}`)).remove().draw(false);
-        alertify.notify('Task successfully deleted.', 'success', 5);
-      }
-    },
+  call(`/scheduling/delete_task/${id}`, function(result) {
+    table.row($(`#${id}`)).remove().draw(false);
+    alertify.notify('Task successfully deleted.', 'success', 5);
   });
 }
 

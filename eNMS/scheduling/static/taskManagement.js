@@ -69,20 +69,12 @@ function deleteTask(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Task id.
  */
 function pauseTask(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/scheduling/pause_task/${id}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $(`#pause-resume-${id}`).attr(
-          'onclick',
-          `resumeTask('${id}')`
-        ).text('Resume');
-        alertify.notify('Task paused.', 'success', 5);
-      }
-    },
+  call(`/scheduling/pause_task/${id}`, function(result) {
+    $(`#pause-resume-${id}`).attr(
+      'onclick',
+      `resumeTask('${id}')`
+    ).text('Resume');
+    alertify.notify('Task paused.', 'success', 5);
   });
 }
 
@@ -91,20 +83,12 @@ function pauseTask(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Task id.
  */
 function resumeTask(id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/scheduling/resume_task/${id}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        $(`#pause-resume-${id}`).attr(
-          'onclick',
-          `pauseTask('${id}')`
-        ).text('Pause');
-        alertify.notify('Task resumed.', 'success', 5);
-      }
-    },
+  call(`/scheduling/resume_task/${id}`, function(result) {
+    $(`#pause-resume-${id}`).attr(
+      'onclick',
+      `pauseTask('${id}')`
+    ).text('Pause');
+    alertify.notify('Task resumed.', 'success', 5);
   });
 }
 

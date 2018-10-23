@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+call: false
 L: false
 labels: false
 layers: false
@@ -172,35 +173,26 @@ map.on('click', function(e) {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  $.ajax({
-    type: 'POST',
-    url: `/objects/pool_objects/${this.value}`,
-    dataType: 'json',
-    success: function(objects) {
-      if (!objects) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+  call(`/objects/pool_objects/${this.value}`, function(objects) {
+    hiddenMarkers = [];
+    const devicesId = objects.devices.map((n) => n.id);
+    const linksId = objects.links.map((l) => l.id);
+    for (let i = 0; i < markersArray.length; i++) {
+      if (devicesId.includes(markersArray[i].device_id)) {
+        markersArray[i].addTo(map);
       } else {
-        hiddenMarkers = [];
-        const devicesId = objects.devices.map((n) => n.id);
-        const linksId = objects.links.map((l) => l.id);
-        for (let i = 0; i < markersArray.length; i++) {
-          if (devicesId.includes(markersArray[i].device_id)) {
-            markersArray[i].addTo(map);
-          } else {
-            markersArray[i].removeFrom(map);
-            hiddenMarkers.push(markersArray[i]);
-          }
-        }
-        for (let i = 0; i < polylinesArray.length; i++) {
-          if (linksId.includes(polylinesArray[i].link_id)) {
-            polylinesArray[i].addTo(map);
-          } else {
-            polylinesArray[i].removeFrom(map);
-          }
-        }
-        alertify.notify('Filter applied.', 'success', 5);
+        markersArray[i].removeFrom(map);
+        hiddenMarkers.push(markersArray[i]);
       }
-    },
+    }
+    for (let i = 0; i < polylinesArray.length; i++) {
+      if (linksId.includes(polylinesArray[i].link_id)) {
+        polylinesArray[i].addTo(map);
+      } else {
+        polylinesArray[i].removeFrom(map);
+      }
+    }
+    alertify.notify('Filter applied.', 'success', 5);
   });
 });
 

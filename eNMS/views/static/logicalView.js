@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+call: false
 d3: false
 graph: false
 labels: false

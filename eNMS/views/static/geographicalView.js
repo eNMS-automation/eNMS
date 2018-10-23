@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+fCall: false
 */
 
 const layers = { // eslint-disable-line no-unused-vars
@@ -17,22 +18,11 @@ let selection = []; // eslint-disable-line no-unused-vars
  * Export project to Google Earth (creation of a .kmz file).
  */
 function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
-  if ($('#google-earth-form').parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/views/export_to_google_earth',
-      dataType: 'json',
-      data: $('#google-earth-form').serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          alertify.notify(`Project exported to Google Earth.`, 'success', 5);
-        }
-      },
-    });
+  const url = '/views/export_to_google_earth';
+  fCall(url, '#google-earth-form', function(result) {
+    alertify.notify(`Project exported to Google Earth.`, 'success', 5);
     $('#google-earth').modal('hide');
-  }
+  });
 }
 
 $('.dropdown-submenu a.menu-submenu').on('click', function(e) {

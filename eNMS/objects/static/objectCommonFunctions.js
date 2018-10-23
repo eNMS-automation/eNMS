@@ -1,7 +1,9 @@
 /*
 global
 alertify: false
+call: false
 capitalize: false
+fCall: false
 fields: false
 partial: false
 table: false
@@ -42,30 +44,16 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
  * @param {type} type - Node or link.
  */
 function editObject(type) { // eslint-disable-line no-unused-vars
-  if ($(`#edit-${type}-form`).parsley().validate()) {
-    $.ajax({
-      type: 'POST',
-      url: '/objects/edit_object',
-      dataType: 'json',
-      data: $(`#edit-${type}-form`).serialize(),
-      success: function(result) {
-        if (!result) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-          // the object can be edited from the views,
-          // in which case we don't need to add it to the table
-          if (typeof table !== 'undefined') {
-            addObjectToTable(mode, type, result);
-          }
-          const message = `Object ${result.name}
-          ${mode == 'edit' ? 'edited' : 'created'}.`;
-          alertify.notify(message, 'success', 5);
-        }
-      },
-    });
+  fCall('/objects/edit_object', `#edit-${type}-form`, function(result) {
+    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+    if (typeof table !== 'undefined') {
+      addObjectToTable(mode, type, result);
+    }
+    const message = `Object ${result.name}
+    ${mode == 'edit' ? 'edited' : 'created'}.`;
+    alertify.notify(message, 'success', 5);
     $(`#edit-${type}`).modal('hide');
-  }
+  });
 }
 
 /**
@@ -74,20 +62,9 @@ function editObject(type) { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the object to delete.
  */
 function deleteObject(type, id) { // eslint-disable-line no-unused-vars
-  $.ajax({
-    type: 'POST',
-    url: `/objects/delete/${type}/${id}`,
-    success: function(result) {
-      if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        table.row($(`#${id}`)).remove().draw(false);
-        alertify.notify(
-          `Object '${result.name}' successfully deleted.`,
-          'error', 5
-        );
-      }
-    },
+  call(`/objects/delete/${type}/${id}`, function(result) {
+    table.row($(`#${id}`)).remove().draw(false);
+    alertify.notify(`Object '${result.name}' deleted.`, 'error', 5);
   });
 }
 

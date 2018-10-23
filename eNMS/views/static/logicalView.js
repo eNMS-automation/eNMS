@@ -156,25 +156,16 @@ force.on('tick', function() {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  $.ajax({
-    type: 'POST',
-    url: `/objects/pool_objects/${this.value}`,
-    dataType: 'json',
-    success: function(objects) {
-      if (!objects) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else {
-        let devicesId = objects.devices.map((n) => n.id);
-        let linksId = objects.links.map((l) => l.id);
-        node.style('visibility', function(d) {
-          return devicesId.includes(d.real_id) ? 'visible' : 'hidden';
-        });
-        link.style('visibility', function(d) {
-          return linksId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
-        });
-        alertify.notify(`Filter applied.`, 'success', 5);
-      }
-    },
+  call(`/objects/pool_objects/${this.value}`, function(objects) {
+    let devicesId = objects.devices.map((n) => n.id);
+    let linksId = objects.links.map((l) => l.id);
+    node.style('visibility', function(d) {
+      return devicesId.includes(d.real_id) ? 'visible' : 'hidden';
+    });
+    link.style('visibility', function(d) {
+      return linksId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
+    });
+    alertify.notify(`Filter applied.`, 'success', 5);
   });
 });
 

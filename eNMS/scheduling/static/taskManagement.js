@@ -1,6 +1,8 @@
 /*
 global
 alertify: false
+call: false
+fCall: false
 fields: false
 tasks: false
 */
@@ -98,7 +100,6 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
       addTask('create', tasks[i]);
     }
   }
-
   const dates = ['start_date', 'end_date'];
   const today = new Date();
   for (let i = 0; i < dates.length; i++) {

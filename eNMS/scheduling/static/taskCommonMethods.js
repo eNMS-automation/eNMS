@@ -1,6 +1,5 @@
 /*
 global
-alertify: false
 call: false
 */
 

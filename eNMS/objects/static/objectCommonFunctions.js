@@ -33,7 +33,9 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
     );
     $('#title').text(`Edit ${capitalize(type)} '${properties.name}'`);
     if (type == 'device') {
-      call(`/views/get_logs/${id}`, function(logs) { $('#logs').text(logs); });
+      call(`/views/get_logs/${id}`, function(logs) {
+        $('#logs').text(logs);
+      });
     }
     $(`#edit-${type}`).modal('show');
   });

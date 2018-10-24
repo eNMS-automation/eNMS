@@ -92,16 +92,17 @@ class Job(CustomBase):
         db.session.commit()
         return results
 
+    def get_results(device=None):
+        try:
+            return self.job(device, payload) if device else self.job(payload)
+        except Exception as e:
+            results = {'success': False, 'result': str(e)}
+
     def run(self, payload=None, targets=None):
+        results = {'success': True, 'devices': {}}
+        if not targets:
+            targets = self.compute_targets()
         if self.multiprocessing:
-            # payload and targets come from the workflow.
-            # if the service is run outside the context of a workflow, we use
-            # the services targets
-            # if it runs inside a workflow, and the workflow has devices of
-            # its own, targets will be set to the workflow devices
-            if not targets:
-                targets = self.compute_targets()
-            results = {'success': True, 'devices': {}}
             pool = ThreadPool(processes=min(len(targets), 1))
             pool.map(
                 self.device_run,
@@ -110,10 +111,14 @@ class Job(CustomBase):
             pool.close()
             pool.join()
         else:
-            try:
-                results = self.job(payload)
-            except Exception as e:
-                results = {'success': False, 'result': str(e)}
+            if targets:
+                results['devices'] = {
+                    device.name: self.get_results(device)
+                    for device in targets
+                }
+            else:
+                results = self.get_results()
+
         return results
 
     def device_run(self, args):
@@ -240,9 +245,8 @@ class Workflow(Job):
         super().__init__(**kwargs)
 
     def job(self, *args):
-        if not self.multiprocessing:
-            self.status = {'status': 'Running', 'jobs': {}}
-            db.session.commit()
+        self.status = {'status': 'Running', 'jobs': {}}
+        db.session.commit()
         device, payload = args if len(args) == 2 else (None, args)
         jobs, visited = [retrieve(Service, name='Start')], set()
         results = {'success': False}
@@ -255,14 +259,12 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            if not self.multiprocessing:
-                self.status['current_job'] = job.serialized
-                db.session.commit()
+            self.status['current_job'] = job.serialized
+            db.session.commit()
             job_results = job.run(results, {device} if device else None)
             success = job_results['success']
-            if not self.multiprocessing:
-                self.status['jobs'][job.id] = success
-                db.session.commit()
+            self.status['jobs'][job.id] = success
+            db.session.commit()
             if job == retrieve(Service, name='End'):
                 results['success'] = success
             for successor in job.job_successors(self, success):
@@ -270,9 +272,8 @@ class Workflow(Job):
                     jobs.append(successor)
             results[job.name] = job_results
             sleep(job.waiting_time)
-        if not self.multiprocessing:
-            self.status['current_job'] = None
-            db.session.commit()
+        self.status['current_job'] = None
+        db.session.commit()
         return results
 
     @property

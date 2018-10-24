@@ -209,6 +209,7 @@ class Workflow(Job):
     __tablename__ = 'Workflow'
 
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
+    multiprocessing = Column(Boolean)
     vendor = Column(String)
     operating_system = Column(String)
     status = Column(String, default='Idle')
@@ -240,23 +241,6 @@ class Workflow(Job):
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',
     }
-
-
-
-    def run(self, payload=None, targets=None):
-        if not targets:
-            targets = self.compute_targets()
-        if targets:
-            # devices / pools were defined at workflow level: they are all we
-            # consider and the targets defined at task level will be overriden
-            results = {'success': True, 'devices': {}}
-            pool = ThreadPool(processes=len(targets))
-            pool.map(self.job, [(device, results) for device in targets])
-            pool.close()
-            pool.join()
-        else:
-            results = self.job()
-        return results
 
     def device_run(self, args):
         device, results, payload = args

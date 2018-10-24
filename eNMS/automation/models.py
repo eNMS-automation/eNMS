@@ -76,43 +76,14 @@ class Job(CustomBase):
 
     def try_run(self, payload=None, targets=None):
         now = str(datetime.now())
-        for _ in range(self.number_of_retry):
+        for i in range(self.number_of_retry):
             results = self.run(payload, targets)
             self.logs[now] = results
             if results['success']:
                 break
-            sleep(self.time_between_retries)
+            if i != self.number_of_retry - 1:
+                sleep(self.time_between_retries)
         return results
-
-
-class Service(Job):
-
-    __tablename__ = 'Service'
-
-    id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
-    private = {'id'}
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'service',
-    }
-
-    @property
-    def properties(self):
-        return {p: getattr(self, p) for p in cls_to_properties['Service']}
-
-    @property
-    def column_values(self):
-        serialized_object = self.properties
-        for col in self.__table__.columns:
-            value = getattr(self, col.key)
-            serialized_object[col.key] = value
-        serialized_object['devices'] = [
-            obj.properties for obj in getattr(self, 'devices')
-        ]
-        serialized_object['pools'] = [
-            obj.properties for obj in getattr(self, 'pools')
-        ]
-        return serialized_object
 
     def run(self, payload=None, targets=None):
         if self.multiprocessing:
@@ -149,6 +120,36 @@ class Service(Job):
             }
         if not results['devices'][device.name]['success']:
             results['success'] = False
+
+
+class Service(Job):
+
+    __tablename__ = 'Service'
+
+    id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
+    private = {'id'}
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'service',
+    }
+
+    @property
+    def properties(self):
+        return {p: getattr(self, p) for p in cls_to_properties['Service']}
+
+    @property
+    def column_values(self):
+        serialized_object = self.properties
+        for col in self.__table__.columns:
+            value = getattr(self, col.key)
+            serialized_object[col.key] = value
+        serialized_object['devices'] = [
+            obj.properties for obj in getattr(self, 'devices')
+        ]
+        serialized_object['pools'] = [
+            obj.properties for obj in getattr(self, 'pools')
+        ]
+        return serialized_object
 
     @property
     def serialized(self):
@@ -241,18 +242,6 @@ class Workflow(Job):
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',
     }
-
-    def device_run(self, args):
-        device, results, payload = args
-        try:
-            results['devices'][device.name] = self.job(device, payload)
-        except Exception as e:
-            results['devices'][device.name] = {
-                'success': False,
-                'result': str(e)
-            }
-        if not results['devices'][device.name]['success']:
-            results['success'] = False
 
     def job(self, payload=None, args=None):
         self.status = 'Running'

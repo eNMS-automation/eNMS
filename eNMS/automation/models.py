@@ -210,7 +210,7 @@ class Workflow(Job):
     __tablename__ = 'Workflow'
 
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
-    multiprocessing = Column(Boolean)
+    multiprocessing = Column(Boolean, default=False)
     vendor = Column(String)
     operating_system = Column(String)
     status = Column(String, default='Idle')
@@ -243,12 +243,11 @@ class Workflow(Job):
         'polymorphic_identity': 'workflow',
     }
 
-    def job(self, payload=None, args=None):
+    def job(self, args):
         self.status = 'Running'
-        if args:
-            device, results = args
+        device, payload = args if len(args) == 2 else (None, args)
         jobs, visited = [self.start_job], set()
-        payload = {}
+        results = {}
         while jobs:
             job = jobs.pop()
             # We check that all predecessors of the job have been visited
@@ -261,20 +260,17 @@ class Workflow(Job):
             if not args:
                 self.current_job = job
                 db.session.commit()
-            job_results = job.run(payload, {device} if args else None)
+            job_results = job.run(results, {device} if device else None)
             success = job_results['success']
             if job == self.end_job:
-                payload['success'] = success
+                results['success'] = success
             for successor in job.job_successors(self, success):
                 if successor not in visited:
                     jobs.append(successor)
-            payload[job.name] = job_results
+            results[job.name] = job_results
             sleep(job.waiting_time)
         self.status, self.current_job = 'Idle', None
-        if args:
-            results['devices'][device.name] = payload
-        else:
-            return payload
+        return results
 
     @property
     def serialized(self):

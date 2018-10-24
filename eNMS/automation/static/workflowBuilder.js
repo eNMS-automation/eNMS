@@ -99,18 +99,6 @@ if (workflow) {
 /**
  * Add an existing job to the workflow.
  */
-function runWorkflow() { // eslint-disable-line no-unused-vars
-  runJob(workflow.id);
-  workflowInit = true;
-  getWorkflowStatus();
-  setTimeout(() => {
-    workflowInit = false;
-  }, 15000);
-}
-
-/**
- * Add an existing job to the workflow.
- */
 function addJobToWorkflow() { // eslint-disable-line no-unused-vars
   if (!workflow) {
     alertify.notify(`You must create a workflow in the
@@ -309,15 +297,34 @@ $('#network').contextMenu({
 });
 
 /**
+ * Start the workflow.
+ */
+function runWorkflow() { // eslint-disable-line no-unused-vars
+  runJob(workflow.id);
+  workflowInit = true;
+  for (const job of workflow.jobs) {
+    console.log(job, job.id);
+    nodes.update({id: job.id, color: '#D2E5FF'});
+  }
+  getWorkflowStatus();
+  setTimeout(() => {
+    workflowInit = false;
+  }, 15000);
+}
+
+/**
  * Get Workflow Status.
  */
 function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(wf) {
+      console.log(wf);
       $('#status').text(`Status: ${wf.status.status}.`);
       if (wf.status.current_job) {
-        nodes.update({id: wf.status.current_job.id, color: 'white'});
+        nodes.update({id: wf.status.current_job.id, color: '#89CFF0'});
         $('#current-job').text(`Current job: ${wf.status.current_job.name}.`);
+      } else {
+        $('#status').text('Status: Idle.');
       }
       if (wf.status.jobs) {
         for (const [id, success] of Object.entries(wf.status.jobs)) {
@@ -326,6 +333,9 @@ function getWorkflowStatus() {
       }
       if (workflowInit || wf.status.status == 'Running') {
         setTimeout(getWorkflowStatus, 1000);
+      } else {
+        call(`/automation/reset_workflow_logs/${workflow.id}`, () => {});
+        console.log('reset');
       }
     });
   }

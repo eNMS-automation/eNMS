@@ -214,19 +214,16 @@ class Workflow(Job):
     multiprocessing = Column(Boolean, default=False)
     vendor = Column(String)
     operating_system = Column(String)
-    status = Column(String, default='Idle')
+    logs = Column(
+        MutableDict.as_mutable(PickleType),
+        default={'status': 'Idle'}
+    )
     jobs = relationship(
         'Job',
         secondary=job_workflow_table,
         back_populates='workflows'
     )
     edges = relationship('WorkflowEdge', back_populates='workflow')
-    current_job_id = Column(Integer, ForeignKey('Workflow.id'))
-    current_job = relationship(
-        'Job',
-        primaryjoin='Job.id == Workflow.current_job_id',
-        foreign_keys='Workflow.current_job_id'
-    )
 
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',
@@ -237,10 +234,11 @@ class Workflow(Job):
             retrieve(Service, name='Start'),
             retrieve(Service, name='End')
         ])
+        
         super().__init__(**kwargs)
 
     def job(self, *args):
-        self.status = 'Running'
+        self.logs = {'status': 'Running', 'jobs': {}}
         db.session.commit()
         device, payload = args if len(args) == 2 else (None, args)
         jobs, visited = [retrieve(Service, name='Start')], set()
@@ -254,10 +252,12 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            self.current_job = job
+            self.logs['current_job'] = job.serialized
             db.session.commit()
             job_results = job.run(results, {device} if device else None)
             success = job_results['success']
+            self.logs['jobs'][job.id] = success
+            db.session.commit()
             if job == retrieve(Service, name='End'):
                 results['success'] = success
             for successor in job.job_successors(self, success):
@@ -265,7 +265,7 @@ class Workflow(Job):
                     jobs.append(successor)
             results[job.name] = job_results
             sleep(job.waiting_time)
-        self.status, self.current_job = 'Idle', None
+        self.logs['status'], self.logs['current_job'] = 'Idle', None
         return results
 
     @property

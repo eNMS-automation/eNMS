@@ -102,7 +102,7 @@ if (workflow) {
 function runWorkflow() { // eslint-disable-line no-unused-vars
   runJob(workflow.id);
   workflowInit = true;
-  getWorkflowStatus, 6000();
+  getWorkflowStatus();
   setTimeout(() => {
     workflowInit = false;
   }, 10000);
@@ -313,15 +313,16 @@ $('#network').contextMenu({
  */
 function getWorkflowStatus() {
   if (workflow) {
-    call(`/automation/get/${workflow.id}`, function(result) {
-      console.log(result.status);
+    call(`/automation/workflow_logs/${workflow.id}`, function(result) {
       $('#status').text(`Status: ${result.status}.`);
-      console.log(result.current_job)
-      const job = result.current_job ? result.current_job.name : 'None';
-      nodes.update({id: result.current_job.id, color: '#D2E5FF'});
-      $('#current-job').text(`Current job: ${job}.`);
-      if (result.status == 'Running') {
-        setTimeout(getWorkflowStatus, 1000);
+      console.log(result.status);
+      if (result.status == 'Running' || workflowInit) {
+        const job = result.current_job ? result.current_job.name : 'None';
+        if (result.current_job) {
+          nodes.update({id: result.current_job.id, color: 'green'});
+          $('#current-job').text(`Current job: ${job}.`);
+        }
+        setTimeout(getWorkflowStatus, 100);
       }
     });
   }

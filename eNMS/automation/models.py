@@ -28,6 +28,10 @@ class Job(CustomBase):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
+    status = Column(
+        MutableDict.as_mutable(PickleType),
+        default={'status': 'Idle'}
+    )
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
     type = Column(String)
     waiting_time = Column(Integer, default=0)
@@ -84,6 +88,8 @@ class Job(CustomBase):
                 break
             if i != self.number_of_retry - 1:
                 sleep(self.time_between_retries)
+        self.status['status'] = 'Idle'
+        db.session.commit()
         return results
 
     def run(self, payload=None, targets=None):
@@ -112,13 +118,13 @@ class Job(CustomBase):
 
     def device_run(self, args):
         device, results, payload = args
-        try:
-            results['devices'][device.name] = self.job(device, payload)
-        except Exception as e:
-            results['devices'][device.name] = {
-                'success': False,
-                'result': str(e)
-            }
+        # try:
+        results['devices'][device.name] = self.job(device, payload)
+        # except Exception as e:
+            # results['devices'][device.name] = {
+            #     'success': False,
+            #     'result': str(e)
+            # }
         if not results['devices'][device.name]['success']:
             results['success'] = False
 
@@ -214,10 +220,6 @@ class Workflow(Job):
     multiprocessing = Column(Boolean, default=False)
     vendor = Column(String)
     operating_system = Column(String)
-    status = Column(
-        MutableDict.as_mutable(PickleType),
-        default={'status': 'Idle'}
-    )
     jobs = relationship(
         'Job',
         secondary=job_workflow_table,
@@ -265,7 +267,7 @@ class Workflow(Job):
                     jobs.append(successor)
             results[job.name] = job_results
             sleep(job.waiting_time)
-        self.status['status'], self.status['current_job'] = 'Idle', None
+        self.status['current_job'] = None
         db.session.commit()
         return results
 

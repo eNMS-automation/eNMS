@@ -34,10 +34,13 @@ class WorkflowCreationForm(FlaskForm):
     name = TextField()
     description = TextField()
     multiprocessing = BooleanField('ggg')
+    number_of_retry = IntegerField(default=1)
+    time_between_retries = IntegerField(default=10)
     vendor = TextField()
     operating_system = TextField()
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
+    
 
 
 class WorkflowBuilderForm(FlaskForm):

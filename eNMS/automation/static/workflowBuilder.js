@@ -15,6 +15,12 @@ workflow: true
 
 const workflowBuilder = true; // eslint-disable-line no-unused-vars
 
+/* When running a workflow, it takes a few seconds to switch from "Idle" to
+"Running" status. workflowInit will be true for 10 seconds after starting the
+workflow, and eNMS will not stop querying for the status until workflowInit
+is False */
+let workflowInit = false;
+
 const container = document.getElementById('network');
 const dsoptions = {
   edges: {
@@ -95,6 +101,11 @@ if (workflow) {
  */
 function runWorkflow() { // eslint-disable-line no-unused-vars
   runJob(workflow.id);
+  workflowInit = true;
+  getWorkflowStatus, 6000();
+  setTimeout(() => {
+    workflowInit = false;
+  }, 10000);
 }
 
 /**
@@ -303,15 +314,18 @@ $('#network').contextMenu({
 function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(result) {
+      console.log(result.status);
       $('#status').text(`Status: ${result.status}.`);
+      console.log(result.current_job)
       const job = result.current_job ? result.current_job.name : 'None';
+      nodes.update({id: result.current_job.id, color: '#D2E5FF'});
       $('#current-job').text(`Current job: ${job}.`);
+      if (result.status == 'Running') {
+        setTimeout(getWorkflowStatus, 1000);
+      }
     });
   }
-  setTimeout(getWorkflowStatus, 2000);
 }
-
-getWorkflowStatus();
 
 $(window).bind('beforeunload', function() {
   savePositions();

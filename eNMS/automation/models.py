@@ -241,6 +241,7 @@ class Workflow(Job):
 
     def job(self, *args):
         self.status = 'Running'
+        db.session.commit()
         device, payload = args if len(args) == 2 else (None, args)
         jobs, visited = [retrieve(Service, name='Start')], set()
         results = {'success': False}
@@ -253,9 +254,8 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            if not args:
-                self.current_job = job
-                db.session.commit()
+            self.current_job = job
+            db.session.commit()
             job_results = job.run(results, {device} if device else None)
             success = job_results['success']
             if job == retrieve(Service, name='End'):

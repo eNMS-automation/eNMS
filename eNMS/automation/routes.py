@@ -323,7 +323,7 @@ def delete_edge(workflow_id, edge_id):
     edge = retrieve(WorkflowEdge, id=edge_id)
     db.session.delete(edge)
     db.session.commit()
-    return jsonify(edge.properties)
+    return jsonify({'success': True})
 
 
 @blueprint.route('/save_positions/<workflow_id>', methods=['POST'])

@@ -276,8 +276,6 @@ const action = {
   'Compare Logs': compareLogs,
   'Workflow Logs': showWorkflowLogs,
   'Compare Workflow Logs': compareWorkflowLogs,
-  'Set as start': startJob,
-  'Set as end': endJob,
   'Add Service or Workflow': partial(showModal, 'add-job'),
   'Delete': deleteSelection,
   'Create "Success" edge': partial(switchMode, 'success'),

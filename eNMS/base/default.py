@@ -185,9 +185,9 @@ def create_netmiko_workflow():
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
         'vendor': 'Arista',
-        'operating_system': 'eos',
-        'jobs': services
+        'operating_system': 'eos'
     })
+    workflow.jobs.extend(services)
     for i in range(len(services) - 1):
         factory(WorkflowEdge, **{
             'name': f'{services[i].name} -> {services[i + 1].name}',
@@ -196,7 +196,6 @@ def create_netmiko_workflow():
             'source': services[i],
             'destination': services[i + 1]
         })
-    workflow.start_job, workflow.end_job = services[0], services[-1]
     for index, service in enumerate(services):
         service.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
 
@@ -235,9 +234,9 @@ def create_napalm_workflow():
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
         'vendor': 'Arista',
-        'operating_system': 'eos',
-        'jobs': services
+        'operating_system': 'eos'
     })
+    workflow.jobs.extend(services)
     for i in range(len(services) - 1):
         factory(WorkflowEdge, **{
             'name': f'{services[i].name} -> {services[i + 1].name}',
@@ -246,7 +245,6 @@ def create_napalm_workflow():
             'source': services[i],
             'destination': services[i + 1]
         })
-    workflow.start_job, workflow.end_job = services[0], services[-1]
     for index, service in enumerate(services):
         service.positions['Napalm_VRF_workflow'] = (0, 100 * index)
 
@@ -292,9 +290,9 @@ def create_payload_transfer_workflow():
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
         'vendor': 'Arista',
-        'operating_system': 'eos',
-        'jobs': services
+        'operating_system': 'eos'
     })
+    workflow.jobs.extend(services)
 
     # create workflow edges with following schema:
     edges = [(0, 1), (0, 2), (1, 3), (3, 4), (4, 5), (2, 5)]
@@ -306,7 +304,6 @@ def create_payload_transfer_workflow():
             'source': services[x],
             'destination': services[y]
         })
-    workflow.start_job, workflow.end_job = services[0], services[-1]
     positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
     for index, (x, y) in enumerate(positions):
         services[index].positions['payload_transfer_workflow'] = x * 10, y * 10

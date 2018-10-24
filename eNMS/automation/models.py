@@ -115,7 +115,7 @@ class Service(Job):
         return serialized_object
 
     def run(self, payload=None, targets=None):
-        if self.has_targets:
+        if self.multiprocessing:
             # payload and targets come from the workflow.
             # if the service is run outside the context of a workflow, we use
             # the services targets
@@ -124,7 +124,7 @@ class Service(Job):
             if not targets:
                 targets = self.compute_targets()
             results = {'success': True, 'devices': {}}
-            pool = ThreadPool(processes=len(targets))
+            pool = ThreadPool(processes=min(len(targets), 1))
             pool.map(
                 self.device_run,
                 [(device, results, payload) for device in targets]

@@ -13,7 +13,7 @@ class AnsiblePlaybookService(Service):
     __tablename__ = 'AnsiblePlaybookService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = True
+    multiprocessing = True
     vendor = Column(String)
     operating_system = Column(String)
     playbook_path = Column(String)

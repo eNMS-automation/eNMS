@@ -19,7 +19,7 @@ class RestCallService(Service):
     __tablename__ = 'RestCallService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = Column(Boolean)
+    multiprocessing = Column(Boolean)
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
@@ -46,7 +46,7 @@ class RestCallService(Service):
     }
 
     def job(self, *args):
-        if self.has_targets:
+        if self.multiprocessing:
             device, payload = args
         rest_url = substitute(self.url, locals())
         if self.call_type in ('GET', 'DELETE'):

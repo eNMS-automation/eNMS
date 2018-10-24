@@ -36,7 +36,7 @@ class ExampleService(Service):
     __tablename__ = 'ExampleService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = False
+    multiprocessing = False
     # the "vendor" property will be displayed as a drop-down list, because
     # there is an associated "vendor_values" property in the class.
     vendor = Column(String)

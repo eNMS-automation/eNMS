@@ -14,7 +14,7 @@ class NetmikoValidationService(Service):
     __tablename__ = 'NetmikoValidationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = True
+    multiprocessing = True
     command = Column(String)
     content_match = Column(String)
     content_match_regex = Column(Boolean)

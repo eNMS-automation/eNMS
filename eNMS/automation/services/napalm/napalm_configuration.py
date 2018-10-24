@@ -14,7 +14,7 @@ class NapalmConfigurationService(Service):
     __tablename__ = 'NapalmConfigurationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = True
+    multiprocessing = True
     vendor = Column(String)
     operating_system = Column(String)
     action = Column(String)

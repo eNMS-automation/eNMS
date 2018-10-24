@@ -8,7 +8,7 @@ class SwissArmyKnifeService(Service):
     __tablename__ = 'SwissArmyKnifeService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = Column(Boolean)
+    multiprocessing = Column(Boolean)
 
     __mapper_args__ = {
         'polymorphic_identity': 'swiss_army_knife_service',
@@ -17,11 +17,11 @@ class SwissArmyKnifeService(Service):
     def job(self, *args):
         return getattr(self, self.name)(*args)
 
-    # Instance call "job1" with has_targets set to True
+    # Instance call "job1" with multiprocessing set to True
     def job1(self, device, payload):
         return {'success': True, 'result': ''}
 
-    # Instance call "job2" with has_targets set to False
+    # Instance call "job2" with multiprocessing set to False
     def job2(self, payload):
         return {'success': True, 'result': ''}
 

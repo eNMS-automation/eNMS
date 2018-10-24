@@ -10,7 +10,7 @@ class NapalmPingService(Service):
     __tablename__ = 'NapalmPingService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = True
+    multiprocessing = True
     count = Column(Integer)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS

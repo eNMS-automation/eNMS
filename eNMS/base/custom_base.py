@@ -26,14 +26,13 @@ class CustomBase(db.Model):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
             if property in boolean_properties:
-                value = kwargs[property] in ('y', 'on', 'false')
+                value = kwargs[property] in ('y', 'on')
             elif 'regex' in property:
                 value = property in kwargs
             elif property_type == dict:
                 value = loads(value) if value else {}
             elif property_type in [float, int]:
                 value = property_type(value or 0)
-            print(property, value)
             setattr(self, property, value)
 
     @property

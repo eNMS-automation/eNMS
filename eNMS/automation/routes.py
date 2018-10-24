@@ -257,7 +257,6 @@ def get_workflow(workflow_id):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def edit_workflow():
-    print(request.form)
     form = dict(request.form.to_dict())
     form['devices'] = [
         retrieve(Device, id=id) for id in request.form.getlist('devices')

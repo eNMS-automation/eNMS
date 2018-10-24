@@ -243,11 +243,11 @@ class Workflow(Job):
         'polymorphic_identity': 'workflow',
     }
 
-    def job(self, args):
+    def job(self, *args):
         self.status = 'Running'
-        device, payload = args if isinstance(args, list) else (None, args)
+        device, payload = args if len(args) == 2 else (None, args)
         jobs, visited = [self.start_job], set()
-        results = {}
+        results = {'success': False}
         while jobs:
             job = jobs.pop()
             # We check that all predecessors of the job have been visited

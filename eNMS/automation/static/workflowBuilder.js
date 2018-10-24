@@ -323,7 +323,7 @@ function colorJob(id, color) {
 function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(wf) {
-      console.log(wf);
+      console.log(wf.status);
       $('#status').text(`Status: ${wf.status.status}.`);
       if (wf.status.current_job) {
         colorJob(wf.status.current_job.id, '#89CFF0');

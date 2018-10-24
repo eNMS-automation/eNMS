@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 
-from eNMS import db
+from eNMS import db, scheduler
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,
@@ -118,13 +118,13 @@ class Job(CustomBase):
 
     def device_run(self, args):
         device, results, payload = args
-        # try:
-        results['devices'][device.name] = self.job(device, payload)
-        # except Exception as e:
-            # results['devices'][device.name] = {
-            #     'success': False,
-            #     'result': str(e)
-            # }
+        try:
+            results['devices'][device.name] = self.job(device, payload)
+        except Exception as e:
+            results['devices'][device.name] = {
+                'success': False,
+                'result': str(e)
+            }
         if not results['devices'][device.name]['success']:
             results['success'] = False
 
@@ -240,8 +240,9 @@ class Workflow(Job):
         super().__init__(**kwargs)
 
     def job(self, *args):
-        self.status = {'status': 'Running', 'jobs': {}}
-        db.session.commit()
+        if not self.multiprocessing:
+            self.status = {'status': 'Running', 'jobs': {}}
+            db.session.commit()
         device, payload = args if len(args) == 2 else (None, args)
         jobs, visited = [retrieve(Service, name='Start')], set()
         results = {'success': False}
@@ -254,12 +255,14 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            self.status['current_job'] = job.serialized
-            db.session.commit()
+            if not self.multiprocessing:
+                self.status['current_job'] = job.serialized
+                db.session.commit()
             job_results = job.run(results, {device} if device else None)
             success = job_results['success']
-            self.status['jobs'][job.id] = success
-            db.session.commit()
+            if not self.multiprocessing:
+                self.status['jobs'][job.id] = success
+                db.session.commit()
             if job == retrieve(Service, name='End'):
                 results['success'] = success
             for successor in job.job_successors(self, success):
@@ -267,8 +270,9 @@ class Workflow(Job):
                     jobs.append(successor)
             results[job.name] = job_results
             sleep(job.waiting_time)
-        self.status['current_job'] = None
-        db.session.commit()
+        if not self.multiprocessing:
+            self.status['current_job'] = None
+            db.session.commit()
         return results
 
     @property

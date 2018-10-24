@@ -188,16 +188,18 @@ def create_netmiko_workflow():
         'operating_system': 'eos'
     })
     workflow.jobs.extend(services)
-    for i in range(len(services) - 1):
+    edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
+    for x, y in edges:
         factory(WorkflowEdge, **{
-            'name': f'{services[i].name} -> {services[i + 1].name}',
+            'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
-            'source': services[i],
-            'destination': services[i + 1]
+            'source': workflow.jobs[x],
+            'destination': workflow.jobs[y]
         })
-    for index, service in enumerate(services):
-        service.positions['Netmiko_VRF_workflow'] = (0, 100 * index)
+    positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
+    for index, (x, y) in enumerate(positions):
+        workflow.jobs[index].positions['Netmiko_VRF_workflow'] = x * 10, y * 10
 
 
 @integrity_rollback
@@ -237,16 +239,18 @@ def create_napalm_workflow():
         'operating_system': 'eos'
     })
     workflow.jobs.extend(services)
-    for i in range(len(services) - 1):
+    edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
+    for x, y in edges:
         factory(WorkflowEdge, **{
-            'name': f'{services[i].name} -> {services[i + 1].name}',
+            'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
-            'source': services[i],
-            'destination': services[i + 1]
+            'source': workflow.jobs[x],
+            'destination': workflow.jobs[y]
         })
-    for index, service in enumerate(services):
-        service.positions['Napalm_VRF_workflow'] = (0, 100 * index)
+    positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
+    for index, (x, y) in enumerate(positions):
+        workflow.jobs[index].positions['Napalm_VRF_workflow'] = x * 10, y * 10
 
 
 def create_payload_transfer_workflow():
@@ -295,18 +299,18 @@ def create_payload_transfer_workflow():
     workflow.jobs.extend(services)
 
     # create workflow edges with following schema:
-    edges = [(0, 1), (0, 2), (1, 3), (3, 4), (4, 5), (2, 5)]
+    positions = [(-20, 0), (50, 0), (-5, 0), (-5, -10), (15, 10), (15, -10), (30, -10), (30, 0)]
+    for index, (x, y) in enumerate(positions):
+        workflow.jobs[index].positions['payload_transfer_workflow'] = x * 10, y * 10
+    edges = [(0, 2), (2, 3), (2, 4), (3, 5), (5, 6), (6, 7), (4, 7), (7, 1)]
     for x, y in edges:
         factory(WorkflowEdge, **{
-            'name': f'{services[x].name} -> {services[y].name}',
+            'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
-            'source': services[x],
-            'destination': services[y]
+            'source': workflow.jobs[x],
+            'destination': workflow.jobs[y]
         })
-    positions = [(-5, 0), (-5, -10), (15, 10), (15, -10), (40, -10), (40, 0)]
-    for index, (x, y) in enumerate(positions):
-        services[index].positions['payload_transfer_workflow'] = x * 10, y * 10
 
 
 def create_default_workflows():

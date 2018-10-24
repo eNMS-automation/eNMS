@@ -27,11 +27,11 @@ class SwissArmyKnifeService(Service):
 
     def Start(self, *a, **kw):
         # Start of a workflow
-        pass
+        return {'success': True}
 
     def End(self, *a, **kw):
         # End of a workflow
-        pass
+        return {'success': True}
 
     def process_payload1(self, payload):
         get_facts = payload['get_facts']

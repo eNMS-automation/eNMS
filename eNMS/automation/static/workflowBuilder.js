@@ -306,7 +306,7 @@ function runWorkflow() { // eslint-disable-line no-unused-vars
   getWorkflowStatus();
   setTimeout(() => {
     workflowInit = false;
-  }, 15000);
+  }, 10000);
 }
 
 /**
@@ -323,7 +323,6 @@ function colorJob(id, color) {
 function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(wf) {
-      console.log(wf.status);
       $('#status').text(`Status: ${wf.status.status}.`);
       if (wf.status.current_job) {
         colorJob(wf.status.current_job.id, '#89CFF0');

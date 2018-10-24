@@ -92,11 +92,11 @@ class Job(CustomBase):
         db.session.commit()
         return results
 
-    def get_results(device=None):
+    def get_results(self, payload, device=None):
         try:
             return self.job(device, payload) if device else self.job(payload)
         except Exception as e:
-            results = {'success': False, 'result': str(e)}
+            return {'success': False, 'result': str(e)}
 
     def run(self, payload=None, targets=None):
         results = {'success': True, 'devices': {}}
@@ -113,12 +113,11 @@ class Job(CustomBase):
         else:
             if targets:
                 results['devices'] = {
-                    device.name: self.get_results(device)
+                    device.name: self.get_results(payload, device)
                     for device in targets
                 }
             else:
-                results = self.get_results()
-
+                results = self.get_results(payload)
         return results
 
     def device_run(self, args):

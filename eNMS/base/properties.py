@@ -85,6 +85,7 @@ workflow_public_properties = job_public_properties + (
     'vendor',
     'operating_system',
     'status',
+    'multiprocessing',
     'start_job',
     'end_job',
     'current_job'
@@ -291,4 +292,4 @@ pretty_names = {
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 
 property_types = {}
-boolean_properties = []
+boolean_properties = ['multiprocessing']

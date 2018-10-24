@@ -69,9 +69,17 @@ function showModal() { // eslint-disable-line no-unused-vars
  */
 function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
   call(`/automation/get/${id}`, function(properties) {
+  
     $('#title').text(`Edit Workflow`);
     for (const [property, value] of Object.entries(properties)) {
-      $(`#${property}`).val(value);
+      const propertyType = propertyTypes[property] || 'str';
+      if (propertyType.includes('bool')) {
+        $(`#${property}`).prop('checked', value);
+      } else if (propertyType.includes('dict')) {
+        $(`#${property}`).val(value ? JSON.stringify(value): '{}');
+      } else {
+        $(`#${property}`).val(value);
+      }
     }
     $('.fs-option').removeClass('selected');
     $('.fs-label').text('Select devices');
@@ -87,6 +95,7 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
  * Edit a workflow.
  */
 function editObject() { // eslint-disable-line no-unused-vars
+  console.log($('#edit-form').serialize());
   fCall('/automation/edit_workflow', '#edit-form', function(properties) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     addWorkflow(mode, properties);

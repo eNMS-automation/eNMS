@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (
+    BooleanField,
     HiddenField,
     IntegerField,
     TextField,
@@ -32,6 +33,7 @@ class WorkflowCreationForm(FlaskForm):
     id = HiddenField()
     name = TextField()
     description = TextField()
+    multiprocessing = BooleanField('ggg')
     vendor = TextField()
     operating_system = TextField()
     devices = SelectMultipleField(choices=())

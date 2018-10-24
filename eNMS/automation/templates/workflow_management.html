@@ -25,6 +25,7 @@
   {{ super()}}
   <script>
     var fields = {{ fields|tojson|safe }};
+    const propertyTypes = {{ property_types|tojson|safe }};
     var workflows = {{ workflows|tojson|safe }};
   </script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>

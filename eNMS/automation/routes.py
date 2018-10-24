@@ -64,6 +64,7 @@ def workflow_management():
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
         fields=workflow_table_properties,
+        property_types={k: str(v) for k, v in property_types.items()},
         workflows=Workflow.serialize(),
         workflow_creation_form=workflow_creation_form
     )
@@ -134,11 +135,11 @@ def get_service(id_or_cls):
             </div>'''
 
     def build_boolean_box(c):
-        return '<fieldset>' + ''.join(f'''
+        return '<fieldset>' + f'''
             <div class="item">
                 <input id="{c.key}" name="{c.key}" type="checkbox">
                 <label>{c.key}</label>
-            </div>''') + '</fieldset>'
+            </div>''' + '</fieldset>'
 
     form = ''
     for col in cls.__table__.columns:
@@ -256,6 +257,7 @@ def get_workflow(workflow_id):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def edit_workflow():
+    print(request.form)
     form = dict(request.form.to_dict())
     form['devices'] = [
         retrieve(Device, id=id) for id in request.form.getlist('devices')

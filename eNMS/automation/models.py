@@ -214,7 +214,7 @@ class Workflow(Job):
     multiprocessing = Column(Boolean, default=False)
     vendor = Column(String)
     operating_system = Column(String)
-    logs = Column(
+    status = Column(
         MutableDict.as_mutable(PickleType),
         default={'status': 'Idle'}
     )
@@ -238,7 +238,7 @@ class Workflow(Job):
         super().__init__(**kwargs)
 
     def job(self, *args):
-        self.logs = {'status': 'Running', 'jobs': {}}
+        self.status = {'status': 'Running', 'jobs': {}}
         db.session.commit()
         device, payload = args if len(args) == 2 else (None, args)
         jobs, visited = [retrieve(Service, name='Start')], set()
@@ -252,11 +252,11 @@ class Workflow(Job):
             if any(n not in visited for n in job.job_sources(self)):
                 continue
             visited.add(job)
-            self.logs['current_job'] = job.serialized
+            self.status['current_job'] = job.serialized
             db.session.commit()
             job_results = job.run(results, {device} if device else None)
             success = job_results['success']
-            self.logs['jobs'][job.id] = success
+            self.status['jobs'][job.id] = success
             db.session.commit()
             if job == retrieve(Service, name='End'):
                 results['success'] = success
@@ -265,7 +265,8 @@ class Workflow(Job):
                     jobs.append(successor)
             results[job.name] = job_results
             sleep(job.waiting_time)
-        self.logs['status'], self.logs['current_job'] = 'Idle', None
+        self.status['status'], self.status['current_job'] = 'Idle', None
+        db.session.commit()
         return results
 
     @property

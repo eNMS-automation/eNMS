@@ -84,9 +84,8 @@ service_public_properties = job_public_properties
 workflow_public_properties = job_public_properties + (
     'vendor',
     'operating_system',
-    'status',
     'multiprocessing',
-    'current_job'
+    'status'
 )
 
 # Public properties

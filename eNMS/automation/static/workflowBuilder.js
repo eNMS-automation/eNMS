@@ -302,10 +302,7 @@ $('#network').contextMenu({
 function runWorkflow() { // eslint-disable-line no-unused-vars
   runJob(workflow.id);
   workflowInit = true;
-  for (const job of workflow.jobs) {
-    console.log(job, job.id);
-    nodes.update({id: job.id, color: '#D2E5FF'});
-  }
+  workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
   getWorkflowStatus();
   setTimeout(() => {
     workflowInit = false;
@@ -315,27 +312,32 @@ function runWorkflow() { // eslint-disable-line no-unused-vars
 /**
  * Get Workflow Status.
  */
+function colorJob(id, color) {
+  if (id != 1 && id != 2) {
+    nodes.update({id: id, color: color});
+  }
+}
+/**
+ * Get Workflow Status.
+ */
 function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(wf) {
       console.log(wf);
       $('#status').text(`Status: ${wf.status.status}.`);
       if (wf.status.current_job) {
-        nodes.update({id: wf.status.current_job.id, color: '#89CFF0'});
+        colorJob(wf.status.current_job.id, '#89CFF0');
         $('#current-job').text(`Current job: ${wf.status.current_job.name}.`);
       } else {
         $('#status').text('Status: Idle.');
       }
       if (wf.status.jobs) {
-        for (const [id, success] of Object.entries(wf.status.jobs)) {
-          nodes.update({id:id, color: success ? 'green' : 'red'});
-        }
+        $.each(wf.status.jobs, (id, res) => colorJob(id, res ? 'green' : 'red'));
       }
       if (workflowInit || wf.status.status == 'Running') {
         setTimeout(getWorkflowStatus, 1000);
       } else {
         call(`/automation/reset_workflow_logs/${workflow.id}`, () => {});
-        console.log('reset');
       }
     });
   }

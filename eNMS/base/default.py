@@ -93,6 +93,16 @@ def create_default_network_topology(app):
 def create_default_services():
     for service in (
         {
+            'type': service_classes['swiss_army_knife_service'],
+            'name': 'Start',
+            'description': 'Start point of a workflow'
+        },
+        {
+            'type': service_classes['swiss_army_knife_service'],
+            'name': 'End',
+            'description': 'End point of a workflow'
+        },
+        {
             'type': service_classes['configure_bgp_service'],
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
@@ -104,16 +114,6 @@ def create_default_services():
             'remote_as': 200,
             'vrf_name': 'configure_BGP_test',
             'waiting_time': 0
-        },
-        {
-            'type': service_classes['swiss_army_knife_service'],
-            'name': 'Start',
-            'description': 'Start point of a workflow'
-        },
-        {
-            'type': service_classes['swiss_army_knife_service'],
-            'name': 'End',
-            'description': 'End point of a workflow'
         }
     ):
         factory(service.pop('type'), **service)

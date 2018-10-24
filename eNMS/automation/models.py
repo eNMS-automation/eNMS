@@ -245,7 +245,7 @@ class Workflow(Job):
 
     def job(self, args):
         self.status = 'Running'
-        device, payload = args if len(args) == 2 else (None, args)
+        device, payload = args if isinstance(args, list) else (None, args)
         jobs, visited = [self.start_job], set()
         results = {}
         while jobs:

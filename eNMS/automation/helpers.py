@@ -57,5 +57,5 @@ def substitute(data, variables):
 
 def scheduler_job(job_id):
     with scheduler.app.app_context():
-        retrieve(Job, id=job_id).run()
+        retrieve(Job, id=job_id).try_run()
         db.session.commit()

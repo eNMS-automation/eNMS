@@ -22,9 +22,17 @@
           <div class="form-group">
             {{ service_form.description(class="form-control") }}
           </div>
-          <label>Waiting time</label>
+          <label>Waiting time (in seconds)</label>
           <div class='form-group'>
             {{ service_form.waiting_time(class="form-control", required=true) }}
+          </div>
+          <label>Number of retry</label>
+          <div class='form-group'>
+            {{ service_form.number_of_retry(class="form-control", required=true) }}
+          </div>
+          <label>Time between retries (in seconds)</label>
+          <div class='form-group'>
+            {{ service_form.time_between_retries(class="form-control", required=true) }}
           </div>
           <div id="html-form"></div>
           <label>Devices (optional: can be defined in the workflow)</label>

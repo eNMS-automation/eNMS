@@ -15,6 +15,8 @@ class ServiceForm(FlaskForm):
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
     waiting_time = IntegerField(default=0)
+    number_of_retry = IntegerField(default=1)
+    time_between_retries = IntegerField(default=10)
 
 
 class CompareLogsForm(FlaskForm):

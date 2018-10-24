@@ -23,6 +23,8 @@ class Job(CustomBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(120), unique=True)
     description = Column(String)
+    number_of_retry = Column(Integer, default=1)
+    time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
@@ -54,6 +56,12 @@ class Job(CustomBase):
         'polymorphic_on': type
     }
 
+    def compute_targets(self):
+        targets = set(self.devices)
+        for pool in self.pools:
+            targets |= set(pool.devices)
+        return targets
+
     def job_sources(self, workflow, type='all'):
         return [
             x.source for x in self.sources
@@ -65,12 +73,6 @@ class Job(CustomBase):
             x.destination for x in self.destinations
             if (type == 'all' or x.type == type) and x.workflow == workflow
         ]
-
-    def compute_targets(self):
-        targets = set(self.devices)
-        for pool in self.pools:
-            targets |= set(pool.devices)
-        return targets
 
 
 class Service(Job):
@@ -102,6 +104,15 @@ class Service(Job):
         ]
         return serialized_object
 
+    def try_run(self, payload=None, targets=None):
+        now = str(datetime.now())
+        for _ in range(self.number_of_retry):
+            results = self.run(payload, targets)
+            self.logs[now] = results
+            if results['success']:
+                return results
+            sleep(self.time_between_retries)
+
     def run(self, payload=None, targets=None):
         if self.has_targets:
             # payload and targets come from the workflow.
@@ -124,8 +135,6 @@ class Service(Job):
                 results = self.job(payload)
             except Exception as e:
                 results = {'success': False, 'result': str(e)}
-        self.logs[str(datetime.now())] = results
-        return results
 
     def device_run(self, args):
         device, results, payload = args
@@ -229,6 +238,13 @@ class Workflow(Job):
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',
     }
+
+    def try_run(self):
+        for _ in range(self.number_of_retry):
+            results = self.run()
+            if results['success']:
+                break
+            sleep(self.time_between_retries)
 
     def run(self):
         targets = self.compute_targets()

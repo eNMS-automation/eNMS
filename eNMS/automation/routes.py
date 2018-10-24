@@ -253,13 +253,6 @@ def get_workflow(workflow_id):
     return jsonify(workflow.serialized if workflow else {})
 
 
-@blueprint.route('/workflow_logs/<workflow_id>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
-def workflow_logs(workflow_id):
-    return jsonify(retrieve(Workflow, id=workflow_id).logs)
-
-
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
 @permission_required('Edit Automation Section', redirect=False)

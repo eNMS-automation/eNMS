@@ -313,18 +313,14 @@ $('#network').contextMenu({
  */
 function getWorkflowStatus() {
   if (workflow) {
-    call(`/automation/get/${workflow.id}`, function(status) {
-      $('#status').text(`Status: .`);
-      console.log(status);
-      if (workflowInit) {
-        /*
-        const job = result.current_job ? result.current_job.name : 'None';
-        if (result.current_job) {
-          nodes.update({id: result.current_job.id, color: 'green'});
-          $('#current-job').text(`Current job: ${job}.`);
-        }
-        */
-        setTimeout(getWorkflowStatus, 1000);
+    call(`/automation/get/${workflow.id}`, function(wf) {
+      $('#status').text(`Status: ${wf.status.status}.`);
+      if (wf.status.current_job) {
+        nodes.update({id: wf.status.current_job.id, color: 'green'});
+        $('#current-job').text(`Current job: ${wf.status.current_job.name}.`);
+      }
+      if (workflowInit || wf.status.status == 'Running') {
+        setTimeout(getWorkflowStatus, 500);
       }
     });
   }

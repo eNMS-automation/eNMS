@@ -86,8 +86,6 @@ workflow_public_properties = job_public_properties + (
     'operating_system',
     'status',
     'multiprocessing',
-    'start_job',
-    'end_job',
     'current_job'
 )
 

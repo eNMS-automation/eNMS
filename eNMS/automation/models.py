@@ -221,18 +221,6 @@ class Workflow(Job):
         back_populates='workflows'
     )
     edges = relationship('WorkflowEdge', back_populates='workflow')
-    start_job_id = Column(Integer, ForeignKey('Workflow.id'))
-    start_job = relationship(
-        'Job',
-        primaryjoin='Job.id == Workflow.start_job_id',
-        foreign_keys='Workflow.start_job_id'
-    )
-    end_job_id = Column(Integer, ForeignKey('Workflow.id'))
-    end_job = relationship(
-        'Job',
-        primaryjoin='Job.id == Workflow.end_job_id',
-        foreign_keys='Workflow.end_job_id'
-    )
     current_job_id = Column(Integer, ForeignKey('Workflow.id'))
     current_job = relationship(
         'Job',
@@ -254,7 +242,7 @@ class Workflow(Job):
     def job(self, *args):
         self.status = 'Running'
         device, payload = args if len(args) == 2 else (None, args)
-        jobs, visited = [self.start_job], set()
+        jobs, visited = [retrieve(Service, name='Start')], set()
         results = {'success': False}
         while jobs:
             job = jobs.pop()
@@ -270,7 +258,7 @@ class Workflow(Job):
                 db.session.commit()
             job_results = job.run(results, {device} if device else None)
             success = job_results['success']
-            if job == self.end_job:
+            if job == retrieve(Service, name='End'):
                 results['success'] = success
             for successor in job.job_successors(self, success):
                 if successor not in visited:
@@ -283,10 +271,6 @@ class Workflow(Job):
     @property
     def serialized(self):
         properties = self.properties
-        if self.start_job:
-            properties['start_job'] = self.start_job.properties
-        if self.end_job:
-            properties['end_job'] = self.end_job.properties
         if self.current_job:
             properties['current_job'] = self.current_job.properties
         properties['tasks'] = [

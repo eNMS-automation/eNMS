@@ -12,6 +12,7 @@ from eNMS.base.associations import (
     job_pool_table,
     job_workflow_table
 )
+from eNMS.base.helpers import retrieve
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.properties import cls_to_properties
 
@@ -242,6 +243,10 @@ class Workflow(Job):
     __mapper_args__ = {
         'polymorphic_identity': 'workflow',
     }
+
+    def __init__(self, **kwargs):
+        self.jobs.extend([retrieve(Workflow, name='Start'), retrieve(Workflow, name='End')])
+        super().__init__(**kwargs)
 
     def job(self, *args):
         self.status = 'Running'

@@ -105,6 +105,16 @@ def create_default_services():
             'vrf_name': 'configure_BGP_test',
             'waiting_time': 0
         },
+        {
+            'type': service_classes['swiss_army_knife_service'],
+            'name': 'Start',
+            'description': 'Start point of a workflow'
+        },
+        {
+            'type': service_classes['swiss_army_knife_service'],
+            'name': 'End',
+            'description': 'End point of a workflow'
+        }
     ):
         factory(service.pop('type'), **service)
 

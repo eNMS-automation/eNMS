@@ -258,6 +258,9 @@ def get_workflow(workflow_id):
 @permission_required('Edit Automation Section', redirect=False)
 def edit_workflow():
     form = dict(request.form.to_dict())
+    for property in boolean_properties:
+        if property not in form:
+            form[property] = 'off'
     form['devices'] = [
         retrieve(Device, id=id) for id in request.form.getlist('devices')
     ]

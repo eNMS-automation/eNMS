@@ -8,7 +8,7 @@ class SwissArmyKnifeService(Service):
     __tablename__ = 'SwissArmyKnifeService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean)
+    multiprocessing = Column(Boolean, default=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'swiss_army_knife_service',
@@ -24,6 +24,14 @@ class SwissArmyKnifeService(Service):
     # Instance call "job2" with multiprocessing set to False
     def job2(self, payload):
         return {'success': True, 'result': ''}
+
+    def Start(self, *a, **kw):
+        # Start of a workflow
+        pass
+
+    def End(self, *a, **kw):
+        # End of a workflow
+        pass
 
     def process_payload1(self, payload):
         get_facts = payload['get_facts']

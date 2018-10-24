@@ -326,26 +326,6 @@ def delete_edge(workflow_id, edge_id):
     return jsonify(edge.properties)
 
 
-@blueprint.route('/set_as_start/<workflow_id>/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
-def set_as_start(workflow_id, job_id):
-    workflow = retrieve(Workflow, id=workflow_id)
-    workflow.start_job = retrieve(Job, id=job_id)
-    db.session.commit()
-    return jsonify({'success': True})
-
-
-@blueprint.route('/set_as_end/<workflow_id>/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
-def set_as_end(workflow_id, job_id):
-    workflow = retrieve(Workflow, id=workflow_id)
-    workflow.end_job = retrieve(Job, id=job_id)
-    db.session.commit()
-    return jsonify({'success': True})
-
-
 @blueprint.route('/save_positions/<workflow_id>', methods=['POST'])
 @login_required
 @permission_required('Edit Automation Section', redirect=False)

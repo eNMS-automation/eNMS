@@ -124,7 +124,8 @@ def create_netmiko_workflow():
             'driver': 'arista_eos',
             'global_delay_factor': '1.0',
             'content': 'vrf definition test',
-            'enable_mode': 'y'
+            'enable_mode': 'y',
+            'fast_cli': 'y'
         },
         {
             'type': service_classes['netmiko_validation_service'],
@@ -136,20 +137,22 @@ def create_netmiko_workflow():
             'operating_system': 'eos',
             'driver': 'arista_eos',
             'command': 'show vrf',
-            'content_match': 'test'
+            'content_match': 'test',
+            'fast_cli': 'y'
         },
         {
             'type': service_classes['netmiko_configuration_service'],
             'name': 'netmiko_delete_vrf_test',
             'description': 'Delete VRF "test"',
-            'waiting_time': 15,
+            'waiting_time': 1,
             'devices': [retrieve(Device, name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
             'global_delay_factor': '1.0',
             'content': 'no vrf definition test',
-            'enable_mode': 'y'
+            'enable_mode': 'y',
+            'fast_cli': 'y'
         },
         {
             'type': service_classes['netmiko_validation_service'],
@@ -162,7 +165,8 @@ def create_netmiko_workflow():
             'driver': 'arista_eos',
             'command': 'show vrf',
             'content_match': '^((?!test).)*$',
-            'content_match_regex': 'y'
+            'content_match_regex': 'y',
+            'fast_cli': 'y'
         },
     ):
         instance = factory(service.pop('type'), **service)

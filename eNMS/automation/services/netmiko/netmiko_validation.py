@@ -20,6 +20,7 @@ class NetmikoValidationService(Service):
     content_match_regex = Column(Boolean)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
+    fast_cli = Column(Boolean, default=False)
     operating_system = Column(String)
     vendor = Column(String)
 

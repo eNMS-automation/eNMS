@@ -105,7 +105,7 @@ function runWorkflow() { // eslint-disable-line no-unused-vars
   getWorkflowStatus();
   setTimeout(() => {
     workflowInit = false;
-  }, 10000);
+  }, 15000);
 }
 
 /**
@@ -316,11 +316,16 @@ function getWorkflowStatus() {
     call(`/automation/get/${workflow.id}`, function(wf) {
       $('#status').text(`Status: ${wf.status.status}.`);
       if (wf.status.current_job) {
-        nodes.update({id: wf.status.current_job.id, color: 'green'});
+        nodes.update({id: wf.status.current_job.id, color: 'white'});
         $('#current-job').text(`Current job: ${wf.status.current_job.name}.`);
       }
+      if (wf.status.jobs) {
+        for (const [id, success] of Object.entries(wf.status.jobs)) {
+          nodes.update({id:id, color: success ? 'green' : 'red'});
+        }
+      }
       if (workflowInit || wf.status.status == 'Running') {
-        setTimeout(getWorkflowStatus, 500);
+        setTimeout(getWorkflowStatus, 1000);
       }
     });
   }

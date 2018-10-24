@@ -265,7 +265,6 @@ class Workflow(Job):
                     jobs.append(successor)
             results[job.name] = job_results
             sleep(job.waiting_time)
-        self.status['status'], self.status['current_job'] = 'Idle', None
         db.session.commit()
         return results
 

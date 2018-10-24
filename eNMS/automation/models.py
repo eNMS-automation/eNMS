@@ -74,6 +74,16 @@ class Job(CustomBase):
             if (type == 'all' or x.type == type) and x.workflow == workflow
         ]
 
+    def try_run(self, payload=None, targets=None):
+        now = str(datetime.now())
+        for _ in range(self.number_of_retry):
+            results = self.run(payload, targets)
+            self.logs[now] = results
+            if results['success']:
+                break
+            sleep(self.time_between_retries)
+        return results
+
 
 class Service(Job):
 
@@ -103,16 +113,6 @@ class Service(Job):
             obj.properties for obj in getattr(self, 'pools')
         ]
         return serialized_object
-
-    def try_run(self, payload=None, targets=None):
-        now = str(datetime.now())
-        for _ in range(self.number_of_retry):
-            results = self.run(payload, targets)
-            self.logs[now] = results
-            if results['success']:
-                break
-            sleep(self.time_between_retries)
-        return results
 
     def run(self, payload=None, targets=None):
         if self.has_targets:
@@ -241,15 +241,11 @@ class Workflow(Job):
         'polymorphic_identity': 'workflow',
     }
 
-    def try_run(self):
-        for _ in range(self.number_of_retry):
-            results = self.run()
-            if results['success']:
-                break
-            sleep(self.time_between_retries)
 
-    def run(self):
-        targets = self.compute_targets()
+
+    def run(self, payload=None, targets=None):
+        if not targets:
+            targets = self.compute_targets()
         if targets:
             # devices / pools were defined at workflow level: they are all we
             # consider and the targets defined at task level will be overriden
@@ -260,10 +256,21 @@ class Workflow(Job):
             pool.join()
         else:
             results = self.job()
-        self.logs[str(datetime.now())] = results
         return results
 
-    def job(self, args=None):
+    def device_run(self, args):
+        device, results, payload = args
+        try:
+            results['devices'][device.name] = self.job(device, payload)
+        except Exception as e:
+            results['devices'][device.name] = {
+                'success': False,
+                'result': str(e)
+            }
+        if not results['devices'][device.name]['success']:
+            results['success'] = False
+
+    def job(self, payload=None, args=None):
         self.status = 'Running'
         if args:
             device, results = args

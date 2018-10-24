@@ -110,8 +110,9 @@ class Service(Job):
             results = self.run(payload, targets)
             self.logs[now] = results
             if results['success']:
-                return results
+                break
             sleep(self.time_between_retries)
+        return results
 
     def run(self, payload=None, targets=None):
         if self.has_targets:
@@ -135,6 +136,7 @@ class Service(Job):
                 results = self.job(payload)
             except Exception as e:
                 results = {'success': False, 'result': str(e)}
+        return results
 
     def device_run(self, args):
         device, results, payload = args

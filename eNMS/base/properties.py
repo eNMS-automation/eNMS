@@ -74,7 +74,9 @@ job_public_properties = (
     'description',
     'logs',
     'positions',
-    'waiting_time'
+    'waiting_time',
+    'number_of_retry',
+    'time_between_retries'
 )
 
 service_public_properties = job_public_properties
@@ -95,14 +97,18 @@ device_public_properties = device_properties[1:-1]
 service_table_properties = (
     'name',
     'type',
-    'description'
+    'description',
+    'number_of_retry',
+    'time_between_retries'
 )
 
 workflow_table_properties = (
     'name',
     'description',
     'vendor',
-    'operating_system'
+    'operating_system',
+    'number_of_retry',
+    'time_between_retries'
 )
 
 workflow_edge_properties = (

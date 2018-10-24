@@ -245,7 +245,10 @@ class Workflow(Job):
     }
 
     def __init__(self, **kwargs):
-        self.jobs.extend([retrieve(Workflow, name='Start'), retrieve(Workflow, name='End')])
+        self.jobs.extend([
+            retrieve(Service, name='Start'),
+            retrieve(Service, name='End')
+        ])
         super().__init__(**kwargs)
 
     def job(self, *args):

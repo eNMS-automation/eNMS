@@ -94,11 +94,7 @@ if (workflow) {
  * Add an existing job to the workflow.
  */
 function runWorkflow() { // eslint-disable-line no-unused-vars
-  if (!workflow.start_job || !workflow.end_job) {
-    alertify.notify('The workflow must have a start AND an end.', 'error', 5);
-  } else {
-    runJob(workflow.id);
-  }
+  runJob(workflow.id);
 }
 
 /**
@@ -172,10 +168,8 @@ function deleteEdge(edgeId) {
  */
 function jobToNode(job) {
   let color;
-  if (workflow.start_job && workflow.start_job.id == job.id) {
-    color = 'green';
-  } else if (workflow.end_job && workflow.end_job.id == job.id) {
-    color = 'red';
+  if (job.name == 'Start' || job.name == 'End') {
+    color = 'pink';
   } else {
     color = '#D2E5FF';
   }
@@ -206,45 +200,6 @@ function edgeToEdge(edge) {
   };
 }
 
-/**
- * Set a job as start of the workflow.
- */
-function startJob() {
-  let start = nodes.get(graph.getSelectedNodes()[0]);
-  if (start.length == 0 || !start.id) {
-    alertify.notify('You must select a job first.', 'error', 5);
-  } else {
-    if (workflow.start_job) {
-      nodes.update({id: workflow.start_job.id, color: '#D2E5FF'});
-    }
-    const url = `/automation/set_as_start/${workflow.id}/${start.id}`;
-    call(url, function(result) {
-      nodes.update({id: start.id, color: 'green'});
-      workflow.start_job = start;
-      alertify.notify(`Job ${start.label} set as start.`, 'success', 5);
-    });
-  }
-}
-
-/**
- * Set a job as end of the workflow.
- */
-function endJob() {
-  let end = nodes.get(graph.getSelectedNodes()[0]);
-  if (end.length == 0 || !end.id) {
-    alertify.notify('You must select a job first.', 'error', 5);
-  } else {
-    if (workflow.end_job) {
-      nodes.update({id: workflow.end_job.id, color: '#D2E5FF'});
-    }
-    const url = `/automation/set_as_end/${workflow.id}/${end.id}`;
-    call(url, function(result) {
-      nodes.update({id: end.id, color: 'red'});
-      workflow.end_job = end;
-      alertify.notify(`Job ${end.label} set as end.`, 'success', 5);
-    });
-  }
-}
 
 /**
  * Delete selected nodes and edges.

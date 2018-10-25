@@ -6,7 +6,7 @@ from re import compile
 
 from eNMS import db, scheduler
 from eNMS.automation.models import Job
-from eNMS.base.helpers import get_device_credentials, get
+from eNMS.base.helpers import get_device_credentials, fetch
 
 NETMIKO_DRIVERS = sorted(
     (driver, driver) for driver in CLASS_MAPPER
@@ -57,7 +57,7 @@ def substitute(data, variables):
 
 def scheduler_job(job_id):
     with scheduler.app.app_context():
-        job = get(Job, id=job_id)
+        job = fetch(Job, id=job_id)
         job.status = {'state': 'Running'}
         db.session.commit()
         job.try_run()

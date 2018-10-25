@@ -4,7 +4,7 @@ from os.path import join
 from simplekml import Kml
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import permission_required, fetch
+from eNMS.base.helpers import fetch, get, permission_required, post
 from eNMS.base.properties import (
     device_public_properties,
     device_subtypes,
@@ -19,9 +19,7 @@ from eNMS.views import blueprint, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
 
-@blueprint.route('/<view_type>_view', methods=['GET', 'POST'])
-@login_required
-@permission_required('Views Section')
+@get(blueprint, '/<view_type>_view', 'Views Section')
 def view(view_type):
     add_link_form = AddLink(request.form)
     all_devices = Device.choices()
@@ -66,9 +64,7 @@ def view(view_type):
     )
 
 
-@blueprint.route('/export_to_google_earth', methods=['POST'])
-@login_required
-@permission_required('Views Section', redirect=False)
+@get(blueprint, '/export_to_google_earth', 'Views Section')
 def export_to_google_earth():
     kml_file = Kml()
     for device in Device.query.all():
@@ -93,13 +89,10 @@ def export_to_google_earth():
     return jsonify({'success': True})
 
 
-@blueprint.route('/get_logs/<device_id>', methods=['POST'])
-@login_required
-@permission_required('Logs Section', redirect=False)
+@post(blueprint, '/get_logs/<device_id>', 'Logs Section')
 def get_logs(device_id):
-    device = fetch(Device, id=device_id)
     device_logs = [
         log.content for log in Log.query.all()
-        if log.source == device.ip_address
+        if log.source == fetch(Device, id=device_id).ip_address
     ]
     return jsonify('\n'.join(device_logs) or True)

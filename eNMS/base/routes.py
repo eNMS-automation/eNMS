@@ -39,14 +39,10 @@ def get_counters(property, type):
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 
-def shutdown_server():
+@post(blueprint, '/shutdown', 'Admin')
+def shutdown():
     func = request.environ.get('werkzeug.server.shutdown')
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
-
-
-@post(blueprint, '/shutdown', 'Admin')
-def shutdown():
-    shutdown_server()
     return 'Server shutting down...'

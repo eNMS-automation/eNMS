@@ -159,9 +159,7 @@ def delete_object(service_id):
     return jsonify(service.serialized)
 
 
-@blueprint.route('/run_job/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
+@post(blueprint, '/run_job/<job_id>', 'Edit Automation Section')
 def run_job(job_id):
     job = fetch(Job, id=job_id)
     now = datetime.now() + timedelta(seconds=5)
@@ -175,10 +173,7 @@ def run_job(job_id):
     return jsonify(job.serialized)
 
 
-@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
-@blueprint.route('/save_service/<cls_name>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/save_service/<cls_name>', 'Edit Automation Section')
 def save_service(cls_name):
     form = dict(request.form.to_dict())
     form['devices'] = [
@@ -199,6 +194,7 @@ def save_service(cls_name):
 @blueprint.route('/show_logs/<job_id>', methods=['POST'])
 @login_required
 @permission_required('Automation Section', redirect=False)
+@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
 def show_logs(job_id):
     return jsonify(dumps(fetch(Job, id=job_id).logs, indent=4))
 
@@ -206,6 +202,7 @@ def show_logs(job_id):
 @blueprint.route('/get_diff/<job_id>/<v1>/<v2>', methods=['POST'])
 @login_required
 @permission_required('Automation Section', redirect=False)
+@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
 def get_diff(job_id, v1, v2, n1=None, n2=None):
     job = fetch(Job, id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
@@ -214,9 +211,7 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
     return jsonify({'first': first, 'second': second, 'opcodes': opcodes})
 
 
-@blueprint.route('/clear_logs/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
+@post(blueprint, '/clear_logs/<job_id>', 'Edit Automation Section')
 def clear_logs(job_id):
     fetch(Job, id=job_id).logs = {}
     db.session.commit()
@@ -226,6 +221,7 @@ def clear_logs(job_id):
 @blueprint.route('/compare_logs/<job_id>', methods=['POST'])
 @login_required
 @permission_required('Automation Section', redirect=False)
+@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
 def compare_logs(job_id):
     job = fetch(Job, id=job_id)
     results = {
@@ -234,10 +230,7 @@ def compare_logs(job_id):
     return jsonify(results)
 
 
-@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
-@blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/add_to_workflow/<workflow_id>', 'Edit Automation Section')
 def add_to_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     job = fetch(Job, id=request.form['job'])
@@ -249,23 +242,20 @@ def add_to_workflow(workflow_id):
 @blueprint.route('/get/<workflow_id>', methods=['POST'])
 @login_required
 @permission_required('Automation Section', redirect=False)
+@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
 def get_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
 
-@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
-@blueprint.route('/reset_workflow_logs/<workflow_id>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
+
+@post(blueprint, '/reset_workflow_logs/<workflow_id>', 'Edit Automation Section')
 def reset_workflow_logs(workflow_id):
     fetch(Workflow, id=workflow_id).status = {'state': 'Idle'}
     db.session.commit()
     return jsonify(True)
 
-@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
-@blueprint.route('/edit_workflow', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+
+@post(blueprint, '/edit_workflow',, 'Edit Automation Section')
 def edit_workflow():
     form = dict(request.form.to_dict())
     for property in boolean_properties:
@@ -279,10 +269,8 @@ def edit_workflow():
     ]
     return jsonify(factory(Workflow, **form).serialized)
 
-@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
-@blueprint.route('/delete_workflow/<workflow_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+
+@post(blueprint, '/delete_workflow/<workflow_id>', 'Edit Automation Section')
 def delete_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     db.session.delete(workflow)

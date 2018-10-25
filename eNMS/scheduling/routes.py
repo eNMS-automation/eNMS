@@ -4,7 +4,7 @@ from re import search, sub
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, fetch
+from eNMS.base.helpers import fetch, get, permission_required, post
 from eNMS.base.properties import task_public_properties
 from eNMS.scheduling import blueprint
 from eNMS.scheduling.forms import SchedulingForm
@@ -12,9 +12,7 @@ from eNMS.scheduling.models import Task
 from eNMS.automation.models import Job
 
 
-@blueprint.route('/task_management')
-@login_required
-@permission_required('Scheduling Section')
+@get(blueprint, '/task_management', 'Scheduling Section')
 def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -26,9 +24,7 @@ def task_management():
     )
 
 
-@blueprint.route('/calendar')
-@login_required
-@permission_required('Scheduling Section')
+@get(blueprint, '/calendar', 'Scheduling Section')
 def calendar():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -57,9 +53,7 @@ def calendar():
     )
 
 
-@blueprint.route('/scheduler', methods=['POST'])
-@login_required
-@permission_required('Edit Scheduling Section', redirect=False)
+@post(blueprint, '/scheduler', 'Edit Scheduling Section')
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = fetch(Job, id=data['job'])
@@ -68,16 +62,12 @@ def scheduler(workflow_id=None):
     return jsonify(task.serialized)
 
 
-@blueprint.route('/get/<task_id>', methods=['POST'])
-@login_required
-@permission_required('Scheduling Section', redirect=False)
+@post(blueprint, '/get/<task_id>', 'Scheduling Section')
 def get_task(task_id):
     return jsonify(fetch(Task, id=task_id).serialized)
 
 
-@blueprint.route('/delete_task/<task_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Scheduling Section', redirect=False)
+@post(blueprint, '/delete_task/<task_id>', 'Edit Scheduling Section')
 def delete_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.delete_task()
@@ -86,18 +76,14 @@ def delete_task(task_id):
     return jsonify(task.name)
 
 
-@blueprint.route('/pause_task/<task_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Scheduling Section', redirect=False)
+@post(blueprint, '/pause_task/<task_id>', 'Edit Scheduling Section')
 def pause_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.pause_task()
     return jsonify({})
 
 
-@blueprint.route('/resume_task/<task_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Scheduling Section', redirect=False)
+@post(blueprint, '/resume_task/<task_id>', 'Edit Scheduling Section')
 def resume_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.resume_task()

@@ -142,7 +142,6 @@ def admninistration():
     )
 
 
-@blueprint.route(, methods=['POST'])
 @post(blueprint, '/create_new_user', 'Edit Admin Section')
 def create_new_user():
     user_data = request.form.to_dict()

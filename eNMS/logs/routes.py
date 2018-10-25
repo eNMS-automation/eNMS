@@ -5,7 +5,7 @@ from re import search
 from eNMS import db
 from eNMS.automation.models import Job
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, fetch
+from eNMS.base.helpers import fetch, get, permission_required, post
 from eNMS.base.properties import pretty_names
 from eNMS.logs import blueprint
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
@@ -37,9 +37,7 @@ def syslog_automation():
     )
 
 
-@blueprint.route('/delete_log/<log_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Logs Section', redirect=False)
+@post(blueprint, '/delete_log/<log_id>', 'Edit Logs Section')
 def delete_log(log_id):
     log = fetch(Log, id=log_id)
     db.session.delete(log)
@@ -47,9 +45,7 @@ def delete_log(log_id):
     return jsonify({'success': True})
 
 
-@blueprint.route('/filter_logs', methods=['POST'])
-@login_required
-@permission_required('Logs Section')
+@post(blueprint, '/filter_logs', 'Edit Logs Section')
 def filter_logs():
     logs = [log for log in Log.serialize() if all(
         # if the regex property is not in the request, the
@@ -66,16 +62,12 @@ def filter_logs():
     return jsonify(logs)
 
 
-@blueprint.route('/get_log_rule/<log_rule_id>', methods=['POST'])
-@login_required
-@permission_required('Logs Section')
+@post(blueprint, '/get_log_rule/<log_rule_id>', 'Logs Section')
 def get_log_rule(log_rule_id):
     return jsonify(fetch(LogRule, id=log_rule_id).serialized)
 
 
-@blueprint.route('/save_log_rule', methods=['POST'])
-@login_required
-@permission_required('Edit Logs Section', redirect=False)
+@post(blueprint, '/save_log_rule', 'Edit Logs Section')
 def save_log_rule():
     data = request.form.to_dict()
     data['jobs'] = [
@@ -86,9 +78,7 @@ def save_log_rule():
     return jsonify(log_rule.serialized)
 
 
-@blueprint.route('/delete_log_rule/<log_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Logs Section', redirect=False)
+@post(blueprint, '/delete_log_rule/<log_id>', 'Edit Logs Section')
 def delete_log_rule(log_id):
     log_rule = fetch(LogRule, id=log_id)
     db.session.delete(log_rule)

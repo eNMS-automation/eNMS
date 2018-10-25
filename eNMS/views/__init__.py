@@ -9,7 +9,7 @@ from eNMS.base.properties import (
 )
 
 
-blueprint = Blueprint(
+bp = Blueprint(
     'views_blueprint',
     __name__,
     url_prefix='/views',
@@ -24,7 +24,7 @@ for subtype in device_subtypes:
     point_style = Style()
     point_style.labelstyle.color = Color.blue
     path_icon = join(
-        blueprint.root_path,
+        bp.root_path,
         'static',
         'images',
         'default',

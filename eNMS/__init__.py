@@ -51,7 +51,7 @@ def register_blueprints(app):
     )
     for blueprint in blueprints:
         module = import_module(f'eNMS.{blueprint}')
-        app.register_blueprint(module.blueprint)
+        app.register_blueprint(module.bp)
 
 
 def configure_login_manager(app):

@@ -38,7 +38,7 @@ from eNMS.admin.models import (
     TacacsServer
 )
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, retrieve, vault_helper
+from eNMS.base.helpers import permission_required, get, vault_helper
 from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.logs.models import SyslogServer
 from eNMS.objects.models import Device
@@ -63,7 +63,7 @@ def login():
     if request.method == 'POST':
         name = str(request.form['name'])
         user_password = str(request.form['password'])
-        user = retrieve(User, name=name)
+        user = get(User, name=name)
         if user:
             if app.config['USE_VAULT']:
                 pwd = vault_helper(app, f'user/{user.name}')['password']
@@ -162,7 +162,7 @@ def process_user():
 @login_required
 @permission_required('Admin Section', redirect=False)
 def get_user(user_id):
-    user = retrieve(User, id=user_id)
+    user = get(User, id=user_id)
     return jsonify(user.serialized)
 
 
@@ -170,7 +170,7 @@ def get_user(user_id):
 @login_required
 @permission_required('Edit Admin Section', redirect=False)
 def delete_user(user_id):
-    user = retrieve(User, id=user_id)
+    user = get(User, id=user_id)
     db.session.delete(user)
     db.session.commit()
     return jsonify(user.serialized)

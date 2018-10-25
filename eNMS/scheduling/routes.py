@@ -6,13 +6,13 @@ from eNMS import db
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import fetch, get, post
 from eNMS.base.properties import task_public_properties
-from eNMS.scheduling import blueprint
+from eNMS.scheduling import bp
 from eNMS.scheduling.forms import SchedulingForm
 from eNMS.scheduling.models import Task
 from eNMS.automation.models import Job
 
 
-@get(blueprint, '/task_management', 'Scheduling Section')
+@get(bp, '/task_management', 'Scheduling Section')
 def task_management():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -24,7 +24,7 @@ def task_management():
     )
 
 
-@get(blueprint, '/calendar', 'Scheduling Section')
+@get(bp, '/calendar', 'Scheduling Section')
 def calendar():
     scheduling_form = SchedulingForm(request.form)
     scheduling_form.job.choices = Job.choices()
@@ -53,7 +53,7 @@ def calendar():
     )
 
 
-@post(blueprint, '/scheduler', 'Edit Scheduling Section')
+@post(bp, '/scheduler', 'Edit Scheduling Section')
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = fetch(Job, id=data['job'])
@@ -62,12 +62,12 @@ def scheduler(workflow_id=None):
     return jsonify(task.serialized)
 
 
-@post(blueprint, '/get/<task_id>', 'Scheduling Section')
+@post(bp, '/get/<task_id>', 'Scheduling Section')
 def get_task(task_id):
     return jsonify(fetch(Task, id=task_id).serialized)
 
 
-@post(blueprint, '/delete_task/<task_id>', 'Edit Scheduling Section')
+@post(bp, '/delete_task/<task_id>', 'Edit Scheduling Section')
 def delete_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.delete_task()
@@ -76,14 +76,14 @@ def delete_task(task_id):
     return jsonify(task.name)
 
 
-@post(blueprint, '/pause_task/<task_id>', 'Edit Scheduling Section')
+@post(bp, '/pause_task/<task_id>', 'Edit Scheduling Section')
 def pause_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.pause_task()
     return jsonify(True)
 
 
-@post(blueprint, '/resume_task/<task_id>', 'Edit Scheduling Section')
+@post(bp, '/resume_task/<task_id>', 'Edit Scheduling Section')
 def resume_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.resume_task()

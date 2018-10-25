@@ -14,11 +14,11 @@ from eNMS.base.properties import (
 from eNMS.logs.models import Log
 from eNMS.objects.forms import AddDevice, AddLink
 from eNMS.objects.models import Pool, Device, Link
-from eNMS.views import blueprint, styles
+from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
 
-@get(blueprint, '/<view_type>_view', 'Views Section')
+@get(bp, '/<view_type>_view', 'Views Section')
 def view(view_type):
     add_link_form = AddLink(request.form)
     all_devices = Device.choices()
@@ -63,7 +63,7 @@ def view(view_type):
     )
 
 
-@get(blueprint, '/export_to_google_earth', 'Views Section')
+@get(bp, '/export_to_google_earth', 'Views Section')
 def export_to_google_earth():
     kml_file = Kml()
     for device in Device.query.all():
@@ -88,7 +88,7 @@ def export_to_google_earth():
     return jsonify({'success': True})
 
 
-@post(blueprint, '/get_logs/<device_id>', 'Logs Section')
+@post(bp, '/get_logs/<device_id>', 'Logs Section')
 def get_logs(device_id):
     device_logs = [
         log.content for log in Log.query.all()

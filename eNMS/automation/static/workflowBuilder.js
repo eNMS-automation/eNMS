@@ -323,6 +323,7 @@ function colorJob(id, color) {
 function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(wf) {
+      console.log(wf.status.status);
       $('#status').text(`Status: ${wf.status.status}.`);
       if (wf.status.current_device) {
         $('#current-device').text(`Current device: ${wf.status.current_device}.`);

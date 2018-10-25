@@ -81,8 +81,6 @@ class Job(CustomBase):
 
     def try_run(self, payload=None, targets=None):
         now = str(datetime.now())
-        self.status['status'] = 'Running'
-        db.session.commit()
         for i in range(self.number_of_retry):
             results = self.run(payload, targets)
             self.logs[now] = results
@@ -90,8 +88,6 @@ class Job(CustomBase):
                 break
             if i != self.number_of_retry - 1:
                 sleep(self.time_between_retries)
-        self.status['status'] = 'Idle'
-        db.session.commit()
         return results
 
     def get_results(self, payload, device=None):
@@ -249,7 +245,7 @@ class Workflow(Job):
             }
             db.session.commit()
         jobs, visited = [self.jobs[0]], set()
-        results = {'success': False}
+        results = {'success': True}
         while jobs:
             job = jobs.pop()
             # We check that all predecessors of the job have been visited
@@ -262,7 +258,7 @@ class Workflow(Job):
             if not self.multiprocessing:
                 self.status['current_job'] = job.serialized
                 db.session.commit()
-            job_results = job.run(results, {device} if device else None)
+            job_results = job.try_run(results, {device} if device else None)
             success = job_results['success']
             if not self.multiprocessing:
                 self.status['jobs'][job.id] = success

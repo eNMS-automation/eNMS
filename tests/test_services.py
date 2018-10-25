@@ -47,7 +47,7 @@ def test_base_services(user_client):
     assert len(
         service_classes['netmiko_configuration_service'].query.all()
     ) == 3
-    assert len(Service.query.all()) == 14
+    assert len(Service.query.all()) == 16
     user_client.post(
         'automation/save_service/netmiko_file_transfer_service',
         data=file_transfer_service
@@ -55,7 +55,7 @@ def test_base_services(user_client):
     assert len(
         service_classes['netmiko_file_transfer_service'].query.all()
     ) == 1
-    assert len(Service.query.all()) == 15
+    assert len(Service.query.all()) == 17
 
 
 getters_dict = ImmutableMultiDict([
@@ -97,4 +97,4 @@ def test_ansible_services(user_client):
         data=ansible_service
     )
     assert len(service_classes['ansible_playbook_service'].query.all()) == 1
-    assert len(Service.query.all()) == 14
+    assert len(Service.query.all()) == 16

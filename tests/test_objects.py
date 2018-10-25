@@ -1,7 +1,7 @@
 from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.helpers import get
+from eNMS.base.helpers import fetch
 from eNMS.base.properties import device_subtypes, link_subtypes
 from eNMS.objects.models import Device, Link, Pool
 
@@ -90,7 +90,7 @@ links = ['link' + str(i) for i in range(4, 15)]
 def test_device_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for device_name in routers:
-        device = get(Device, name=device_name)
+        device = fetch(Device, name=device_name)
         user_client.post(f'/objects/delete/device/{device.id}')
     assert len(Device.query.all()) == 45
     assert len(Link.query.all()) == 22
@@ -100,7 +100,7 @@ def test_device_deletion(user_client):
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for link_name in links:
-        link = get(Link, name=link_name)
+        link = fetch(Link, name=link_name)
         user_client.post(f'/objects/delete/link/{link.id}')
     assert len(Device.query.all()) == 60
     assert len(Link.query.all()) == 42
@@ -127,7 +127,7 @@ def test_pool_management(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/objects/process_pool', data=pool1)
     user_client.post('/objects/process_pool', data=pool2)
-    p1, p2 = get(Pool, name='pool1'), get(Pool, name='pool2')
+    p1, p2 = fetch(Pool, name='pool1'), fetch(Pool, name='pool2')
     assert len(p1.devices) == 21
     assert len(p1.links) == 20
     assert len(p2.devices) == 12

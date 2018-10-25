@@ -1,5 +1,5 @@
 from eNMS.admin.models import TacacsServer, User
-from eNMS.base.helpers import get
+from eNMS.base.helpers import fetch
 from tests.test_base import check_blueprints
 
 
@@ -14,7 +14,7 @@ def test_user_management(user_client):
         }
         user_client.post('/admin/process_user', data=dict_user)
     assert len(User.query.all()) == 4
-    user1 = get(User, name='user1')
+    user1 = fetch(User, name='user1')
     user_client.post('/admin/delete/{}'.format(user1.id))
     assert len(User.query.all()) == 3
 

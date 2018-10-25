@@ -33,7 +33,7 @@ def permission_required(permission, redirect=True):
     return decorator
 
 
-def route(blueprint, url, permission, method='GET'):
+def r(blueprint, url, permission, method='GET'):
     def outer(func):
         @blueprint.route(url, methods=[method])
         @login_required

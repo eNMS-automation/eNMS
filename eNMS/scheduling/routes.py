@@ -4,7 +4,7 @@ from re import search, sub
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, get
+from eNMS.base.helpers import permission_required, fetch
 from eNMS.base.properties import task_public_properties
 from eNMS.scheduling import blueprint
 from eNMS.scheduling.forms import SchedulingForm
@@ -62,7 +62,7 @@ def calendar():
 @permission_required('Edit Scheduling Section', redirect=False)
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
-    data['job'] = get(Job, id=data['job'])
+    data['job'] = fetch(Job, id=data['job'])
     data['user'] = current_user
     task = factory(Task, **data)
     return jsonify(task.serialized)
@@ -72,7 +72,7 @@ def scheduler(workflow_id=None):
 @login_required
 @permission_required('Scheduling Section', redirect=False)
 def get_task(task_id):
-    return jsonify(get(Task, id=task_id).serialized)
+    return jsonify(fetch(Task, id=task_id).serialized)
 
 
 @blueprint.route('/delete_task/<task_id>', methods=['POST'])

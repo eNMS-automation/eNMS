@@ -4,7 +4,7 @@ from os.path import join
 from simplekml import Kml
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import permission_required, get
+from eNMS.base.helpers import permission_required, fetch
 from eNMS.base.properties import (
     device_public_properties,
     device_subtypes,
@@ -97,7 +97,7 @@ def export_to_google_earth():
 @login_required
 @permission_required('Logs Section', redirect=False)
 def get_logs(device_id):
-    device = get(Device, id=device_id)
+    device = fetch(Device, id=device_id)
     device_logs = [
         log.content for log in Log.query.all()
         if log.source == device.ip_address

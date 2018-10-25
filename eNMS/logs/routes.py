@@ -5,7 +5,7 @@ from re import search
 from eNMS import db
 from eNMS.automation.models import Job
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, get
+from eNMS.base.helpers import permission_required, fetch
 from eNMS.base.properties import pretty_names
 from eNMS.logs import blueprint
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
@@ -45,7 +45,7 @@ def syslog_automation():
 @login_required
 @permission_required('Edit Logs Section', redirect=False)
 def delete_log(log_id):
-    log = get(Log, id=log_id)
+    log = fetch(Log, id=log_id)
     db.session.delete(log)
     db.session.commit()
     return jsonify({'success': True})
@@ -74,7 +74,7 @@ def filter_logs():
 @login_required
 @permission_required('Logs Section')
 def get_log_rule(log_rule_id):
-    return jsonify(get(LogRule, id=log_rule_id).serialized)
+    return jsonify(fetch(LogRule, id=log_rule_id).serialized)
 
 
 @blueprint.route('/save_log_rule', methods=['POST'])
@@ -83,7 +83,7 @@ def get_log_rule(log_rule_id):
 def save_log_rule():
     data = request.form.to_dict()
     data['jobs'] = [
-        get(Job, id=id) for id in request.form.getlist('jobs')
+        fetch(Job, id=id) for id in request.form.getlist('jobs')
     ]
     log_rule = factory(LogRule, **data)
     db.session.commit()
@@ -94,7 +94,7 @@ def save_log_rule():
 @login_required
 @permission_required('Edit Logs Section', redirect=False)
 def delete_log_rule(log_id):
-    log_rule = get(LogRule, id=log_id)
+    log_rule = fetch(LogRule, id=log_id)
     db.session.delete(log_rule)
     db.session.commit()
     return jsonify({'success': True})

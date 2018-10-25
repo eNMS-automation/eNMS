@@ -75,7 +75,6 @@ function editService(id) {
  */
 function saveService() { // eslint-disable-line no-unused-vars
   const url = `/automation/save_service/${$('#services').val()}`;
-  console.log($('#service-editor-form').serialize());
   fCall(url, '#service-editor-form', function(service) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     if (typeof workflowBuilder === 'undefined') {

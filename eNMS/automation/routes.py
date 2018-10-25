@@ -260,7 +260,7 @@ def get_workflow(workflow_id):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def reset_workflow_logs(workflow_id):
-    fetch(Workflow, id=workflow_id).status = {'status': 'Idle'}
+    fetch(Workflow, id=workflow_id).status = {'state': 'Idle'}
     db.session.commit()
     return jsonify(True)
 

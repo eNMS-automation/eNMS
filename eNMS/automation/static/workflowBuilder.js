@@ -66,7 +66,6 @@ let edgeType;
  * @return {graph}
  */
 function displayWorkflow(wf) {
-  console.log(wf);
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   graph = new vis.Network(container, {nodes: nodes, edges: edges}, dsoptions);
@@ -300,14 +299,16 @@ $('#network').contextMenu({
  * Start the workflow.
  */
 function runWorkflow() { // eslint-disable-line no-unused-vars
+  workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
   runJob(workflow.id);
   workflowInit = true;
-  workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
   getWorkflowStatus();
 }
 
 /**
  * Get Workflow Status.
+ * @param {id} id - Workflow Id.
+ * @param {color} color - Node color.
  */
 function colorJob(id, color) {
   if (id != 1 && id != 2) {
@@ -322,7 +323,9 @@ function getWorkflowStatus() {
     call(`/automation/get/${workflow.id}`, function(wf) {
       $('#status').text(`State: ${wf.status.state || 'Idle'}.`);
       if (wf.status.current_device) {
-        $('#current-device').text(`Current device: ${wf.status.current_device}.`);
+        $('#current-device').text(
+          `Current device: ${wf.status.current_device}.`
+        );
       }
       if (wf.status.current_job) {
         colorJob(wf.status.current_job.id, '#89CFF0');
@@ -331,7 +334,7 @@ function getWorkflowStatus() {
         $('#current-device,#current-job').empty();
       }
       if (wf.status.jobs) {
-        $.each(wf.status.jobs, (id, res) => colorJob(id, res ? 'green' : 'red'));
+        $.each(wf.status.jobs, (id, r) => colorJob(id, r ? 'green' : 'red'));
       }
       if (workflowInit || wf.status.state == 'Running') {
         if (workflowInit && wf.status.state == 'Running') {

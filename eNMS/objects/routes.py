@@ -22,7 +22,7 @@ from eNMS.base.helpers import (
     get_device_credentials,
     get_user_credentials,
     permission_required,
-    retrieve,
+    get,
     vault_helper
 )
 from eNMS.objects import blueprint
@@ -40,8 +40,8 @@ from eNMS.base.properties import (
 
 def process_kwargs(app, **kwargs):
     if 'source' in kwargs:
-        source = retrieve(Device, name=kwargs.pop('source'))
-        destination = retrieve(Device, name=kwargs.pop('destination'))
+        source = get(Device, name=kwargs.pop('source'))
+        destination = get(Device, name=kwargs.pop('destination'))
         kwargs.update({
             'source_id': source.id,
             'destination_id': destination.id,
@@ -155,7 +155,7 @@ def pool_management():
 @login_required
 @permission_required('Inventory Section', redirect=False)
 def get_object(obj_type, id):
-    device = retrieve(Device if obj_type == 'device' else Link, id=id)
+    device = get(Device if obj_type == 'device' else Link, id=id)
     return jsonify(device.serialized)
 
 
@@ -163,7 +163,7 @@ def get_object(obj_type, id):
 @login_required
 @permission_required('Connect to device', redirect=False)
 def connection(id):
-    parameters, device = Parameters.query.one(), retrieve(Device, id=id)
+    parameters, device = Parameters.query.one(), get(Device, id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port, ip = parameters.get_gotty_port(), device.ip_address
     cmd.extend(['-p', str(port)])
@@ -206,7 +206,7 @@ def edit_object():
 @permission_required('Edit Inventory Section', redirect=False)
 def delete_object(obj_type, obj_id):
     cls = Device if obj_type == 'device' else Link
-    obj = retrieve(cls, id=obj_id)
+    obj = get(cls, id=obj_id)
     db.session.delete(obj)
     db.session.commit()
     return jsonify({'name': obj.name})
@@ -248,25 +248,25 @@ def process_pool():
 @login_required
 @permission_required('Inventory Section', redirect=False)
 def get_pool(pool_id):
-    return jsonify(retrieve(Pool, id=pool_id).get_properties())
+    return jsonify(get(Pool, id=pool_id).get_properties())
 
 
 @blueprint.route('/get_pool_objects/<pool_id>', methods=['POST'])
 @login_required
 @permission_required('Inventory Section', redirect=False)
 def get_pool_objects(pool_id):
-    return jsonify(retrieve(Pool, id=pool_id).serialized)
+    return jsonify(get(Pool, id=pool_id).serialized)
 
 
 @blueprint.route('/save_pool_objects/<pool_id>', methods=['POST'])
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
 def save_pool_objects(pool_id):
-    pool = retrieve(Pool, id=pool_id)
+    pool = get(Pool, id=pool_id)
     pool.devices = [
-        retrieve(Device, id=id) for id in request.form.getlist('devices')
+        get(Device, id=id) for id in request.form.getlist('devices')
     ]
-    pool.links = [retrieve(Link, id=id) for id in request.form.getlist('links')]
+    pool.links = [get(Link, id=id) for id in request.form.getlist('links')]
     db.session.commit()
     return jsonify(pool.name)
 
@@ -275,7 +275,7 @@ def save_pool_objects(pool_id):
 @login_required
 @permission_required('Inventory Section', redirect=False)
 def filter_pool_objects(pool_id):
-    pool = retrieve(Pool, id=pool_id)
+    pool = get(Pool, id=pool_id)
     return jsonify(pool.filter_objects())
 
 
@@ -293,7 +293,7 @@ def update_pools():
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
 def delete_pool(pool_id):
-    pool = retrieve(Pool, id=pool_id)
+    pool = get(Pool, id=pool_id)
     db.session.delete(pool)
     db.session.commit()
     return jsonify(pool.name)

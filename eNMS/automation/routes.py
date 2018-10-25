@@ -14,7 +14,7 @@ from eNMS.base.properties import (
     workflow_table_properties
 )
 from eNMS.objects.models import Device, Pool
-from eNMS.automation import blueprint
+from eNMS.automation import bp
 from eNMS.automation.forms import (
     AddJobForm,
     CompareLogsForm,
@@ -32,7 +32,7 @@ from eNMS.automation.models import (
 )
 
 
-@get(blueprint, '/service_management', 'Automation Section')
+@get(bp, '/service_management', 'Automation Section')
 def service_management():
     service_form = ServiceForm(request.form)
     service_form.devices.choices = Device.choices()
@@ -49,7 +49,7 @@ def service_management():
     )
 
 
-@get(blueprint, '/workflow_management', 'Automation Section')
+@get(bp, '/workflow_management', 'Automation Section')
 def workflow_management():
     workflow_creation_form = WorkflowCreationForm(request.form)
     workflow_creation_form.devices.choices = Device.choices()
@@ -65,7 +65,7 @@ def workflow_management():
     )
 
 
-@get(blueprint, '/workflow_builder', 'Automation Section')
+@get(bp, '/workflow_builder', 'Automation Section')
 def workflow_builder(workflow_id=None):
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()
@@ -88,7 +88,7 @@ def workflow_builder(workflow_id=None):
     )
 
 
-@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
+@post(bp, '/get_service/<id_or_cls>', 'Automation Section')
 def get_service(id_or_cls):
     service = fetch(Service, id=id_or_cls)
     cls = service_classes[service.type if service else id_or_cls]
@@ -150,7 +150,7 @@ def get_service(id_or_cls):
     })
 
 
-@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
+@post(bp, '/delete/<service_id>', 'Edit Automation Section')
 def delete_object(service_id):
     service = fetch(Service, id=service_id)
     db.session.delete(service)
@@ -158,7 +158,7 @@ def delete_object(service_id):
     return jsonify(service.serialized)
 
 
-@post(blueprint, '/run_job/<job_id>', 'Edit Automation Section')
+@post(bp, '/run_job/<job_id>', 'Edit Automation Section')
 def run_job(job_id):
     job = fetch(Job, id=job_id)
     now = datetime.now() + timedelta(seconds=5)
@@ -172,7 +172,7 @@ def run_job(job_id):
     return jsonify(job.serialized)
 
 
-@post(blueprint, '/save_service/<cls_name>', 'Edit Automation Section')
+@post(bp, '/save_service/<cls_name>', 'Edit Automation Section')
 def save_service(cls_name):
     form = dict(request.form.to_dict())
     form['devices'] = [
@@ -190,12 +190,12 @@ def save_service(cls_name):
     return jsonify(factory(service_classes[cls_name], **form).serialized)
 
 
-@post(blueprint, '/show_logs/<job_id>', 'Automation Section')
+@post(bp, '/show_logs/<job_id>', 'Automation Section')
 def show_logs(job_id):
     return jsonify(dumps(fetch(Job, id=job_id).logs, indent=4))
 
 
-@post(blueprint, '/get_diff/<job_id>/<v1>/<v2>', 'Automation Section')
+@post(bp, '/get_diff/<job_id>/<v1>/<v2>', 'Automation Section')
 def get_diff(job_id, v1, v2, n1=None, n2=None):
     job = fetch(Job, id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
@@ -204,14 +204,14 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
     return jsonify({'first': first, 'second': second, 'opcodes': opcodes})
 
 
-@post(blueprint, '/clear_logs/<job_id>', 'Edit Automation Section')
+@post(bp, '/clear_logs/<job_id>', 'Edit Automation Section')
 def clear_logs(job_id):
     fetch(Job, id=job_id).logs = {}
     db.session.commit()
     return jsonify(True)
 
 
-@post(blueprint, '/compare_logs/<job_id>', 'Automation Section')
+@post(bp, '/compare_logs/<job_id>', 'Automation Section')
 def compare_logs(job_id):
     job = fetch(Job, id=job_id)
     results = {
@@ -220,7 +220,7 @@ def compare_logs(job_id):
     return jsonify(results)
 
 
-@post(blueprint, '/add_to_workflow/<workflow_id>', 'Edit Automation Section')
+@post(bp, '/add_to_workflow/<workflow_id>', 'Edit Automation Section')
 def add_to_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     job = fetch(Job, id=request.form['job'])
@@ -229,20 +229,20 @@ def add_to_workflow(workflow_id):
     return jsonify(job.serialized)
 
 
-@post(blueprint, '/get/<workflow_id>', 'Automation Section')
+@post(bp, '/get/<workflow_id>', 'Automation Section')
 def get_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
 
 
-@post(blueprint, '/reset_workflow_logs/<workflow_id>', 'Edit Automation Section')
+@post(bp, '/reset_workflow_logs/<workflow_id>', 'Edit Automation Section')
 def reset_workflow_logs(workflow_id):
     fetch(Workflow, id=workflow_id).status = {'state': 'Idle'}
     db.session.commit()
     return jsonify(True)
 
 
-@post(blueprint, '/edit_workflow', 'Edit Automation Section')
+@post(bp, '/edit_workflow', 'Edit Automation Section')
 def edit_workflow():
     form = dict(request.form.to_dict())
     for property in boolean_properties:
@@ -257,7 +257,7 @@ def edit_workflow():
     return jsonify(factory(Workflow, **form).serialized)
 
 
-@post(blueprint, '/delete_workflow/<workflow_id>', 'Edit Automation Section')
+@post(bp, '/delete_workflow/<workflow_id>', 'Edit Automation Section')
 def delete_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     db.session.delete(workflow)
@@ -265,7 +265,7 @@ def delete_workflow(workflow_id):
     return jsonify(workflow.serialized)
 
 
-@post(blueprint, '/add_node/<workflow_id>/<job_id>', 'Edit Automation Section')
+@post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def add_node(workflow_id, job_id):
     workflow = fetch(Workflow, id=workflow_id)
     job = fetch(Job, id=job_id)
@@ -274,7 +274,7 @@ def add_node(workflow_id, job_id):
     return jsonify(job.serialized)
 
 
-@post(blueprint, '/delete_node/<workflow_id>/<job_id>', 'Edit Automation Section')
+@post(bp, '/delete_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def delete_node(workflow_id, job_id):
     job = fetch(Job, id=job_id)
     workflow = fetch(Workflow, id=workflow_id)
@@ -283,7 +283,7 @@ def delete_node(workflow_id, job_id):
     return jsonify(job.properties)
 
 
-@post(blueprint, '/add_edge/<wf_id>/<type>/<source>/<dest>', 'Edit Automation Section')
+@post(bp, '/add_edge/<wf_id>/<type>/<source>/<dest>', 'Edit Automation Section')
 def add_edge(wf_id, type, source, dest):
     workflow_edge = factory(WorkflowEdge, **{
         'name': f'{wf_id}-{type}:{source}->{dest}',
@@ -295,7 +295,7 @@ def add_edge(wf_id, type, source, dest):
     return jsonify(workflow_edge.serialized)
 
 
-@post(blueprint, '/delete_edge/<workflow_id>/<edge_id>', 'Edit Automation Section')
+@post(bp, '/delete_edge/<workflow_id>/<edge_id>', 'Edit Automation Section')
 def delete_edge(workflow_id, edge_id):
     edge = fetch(WorkflowEdge, id=edge_id)
     db.session.delete(edge)
@@ -303,7 +303,7 @@ def delete_edge(workflow_id, edge_id):
     return jsonify({'success': True})
 
 
-@post(blueprint, '/save_positions/<workflow_id>', 'Edit Automation Section')
+@post(bp, '/save_positions/<workflow_id>', 'Edit Automation Section')
 def save_positions(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     for job_id, position in request.json.items():

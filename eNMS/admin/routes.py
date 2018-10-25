@@ -38,15 +38,19 @@ from eNMS.admin.models import (
     TacacsServer
 )
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, fetch, vault_helper
+from eNMS.base.helpers import (
+    get,
+    permission_required,
+    post,
+    fetch,
+    vault_helper
+)
 from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.logs.models import SyslogServer
 from eNMS.objects.models import Device
 
 
-@blueprint.route('/user_management')
-@login_required
-@permission_required('Admin Section')
+@get(blueprint, '/user_management', 'Admin Section')
 def users():
     form = AddUser(request.form)
     return render_template(
@@ -108,16 +112,13 @@ def login():
     return redirect(url_for('base_blueprint.dashboard'))
 
 
-@blueprint.route('/logout')
-@login_required
+@get(blueprint, '/logout')
 def logout():
     logout_user()
     return redirect(url_for('admin_blueprint.login'))
 
 
-@blueprint.route('/administration')
-@login_required
-@permission_required('Admin Section')
+@get(blueprint, '/administration', 'Admin Section')
 def admninistration():
     try:
         tacacs_server = db.session.query(TacacsServer).one()
@@ -141,7 +142,8 @@ def admninistration():
     )
 
 
-@blueprint.route('/create_new_user', methods=['POST'])
+@blueprint.route(, methods=['POST'])
+@post(blueprint, '/create_new_user', 'Edit Admin Section')
 def create_new_user():
     user_data = request.form.to_dict()
     if 'permissions' in user_data:

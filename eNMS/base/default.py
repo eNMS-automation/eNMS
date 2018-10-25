@@ -230,8 +230,8 @@ def create_napalm_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-    services.insert(1, retrieve(Job, name='netmiko_check_vrf_test'))
-    services.append(retrieve(Job, name=f'netmiko_check_no_vrf_test'))
+    services.insert(1, get(Job, name='netmiko_check_vrf_test'))
+    services.append(get(Job, name=f'netmiko_check_no_vrf_test'))
     workflow = factory(Workflow, **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
@@ -262,7 +262,7 @@ def create_payload_transfer_workflow():
         'username': 'admin',
         'password': 'admin',
         'waiting_time': 0,
-        'devices': [retrieve(Device, name='Washington')],
+        'devices': [get(Device, name='Washington')],
         'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/Washington',
@@ -272,7 +272,7 @@ def create_payload_transfer_workflow():
         'type': service_classes['napalm_getters_service'],
         'description': f'Getter: {getter}',
         'waiting_time': 0,
-        'devices': [retrieve(Device, name='Washington')],
+        'devices': [get(Device, name='Washington')],
         'driver': 'eos',
         'content_match': '',
         'getters': [getter]
@@ -286,7 +286,7 @@ def create_payload_transfer_workflow():
         'type': service_classes['swiss_army_knife_service'],
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
-        'devices': [retrieve(Device, name='Washington')]
+        'devices': [get(Device, name='Washington')]
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)

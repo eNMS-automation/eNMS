@@ -6,7 +6,7 @@ from json import dumps
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, retrieve, str_dict
+from eNMS.base.helpers import permission_required, get, str_dict
 from eNMS.base.properties import (
     boolean_properties,
     pretty_names,
@@ -78,7 +78,7 @@ def workflow_builder(workflow_id=None):
     add_job_form.job.choices = Job.choices()
     workflow_builder_form = WorkflowBuilderForm(request.form)
     workflow_builder_form.workflow.choices = Workflow.choices()
-    workflow = retrieve(Workflow, id=workflow_id)
+    workflow = get(Workflow, id=workflow_id)
     service_form = ServiceForm(request.form)
     service_form.devices.choices = Device.choices()
     service_form.pools.choices = Pool.choices()
@@ -99,7 +99,7 @@ def workflow_builder(workflow_id=None):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def get_service(id_or_cls):
-    service = retrieve(Service, id=id_or_cls)
+    service = get(Service, id=id_or_cls)
     cls = service_classes[service.type if service else id_or_cls]
 
     def build_text_box(c):
@@ -163,7 +163,7 @@ def get_service(id_or_cls):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def delete_object(service_id):
-    service = retrieve(Service, id=service_id)
+    service = get(Service, id=service_id)
     db.session.delete(service)
     db.session.commit()
     return jsonify(service.serialized)
@@ -173,7 +173,7 @@ def delete_object(service_id):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def run_job(job_id):
-    job = retrieve(Job, id=job_id)
+    job = get(Job, id=job_id)
     now = datetime.now() + timedelta(seconds=5)
     scheduler.add_job(
         id=str(now),
@@ -191,10 +191,10 @@ def run_job(job_id):
 def save_service(cls_name):
     form = dict(request.form.to_dict())
     form['devices'] = [
-        retrieve(Device, id=id) for id in request.form.getlist('devices')
+        get(Device, id=id) for id in request.form.getlist('devices')
     ]
     form['pools'] = [
-        retrieve(Pool, id=id) for id in request.form.getlist('pools')
+        get(Pool, id=id) for id in request.form.getlist('pools')
     ]
     for key in request.form:
         if property_types.get(key, None) == list:
@@ -209,14 +209,14 @@ def save_service(cls_name):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def show_logs(job_id):
-    return jsonify(dumps(retrieve(Job, id=job_id).logs, indent=4))
+    return jsonify(dumps(get(Job, id=job_id).logs, indent=4))
 
 
 @blueprint.route('/get_diff/<job_id>/<v1>/<v2>', methods=['POST'])
 @login_required
 @permission_required('Automation Section', redirect=False)
 def get_diff(job_id, v1, v2, n1=None, n2=None):
-    job = retrieve(Job, id=job_id)
+    job = get(Job, id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
     second = str_dict(job.logs[v2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -227,7 +227,7 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def clear_logs(job_id):
-    retrieve(Job, id=job_id).logs = {}
+    get(Job, id=job_id).logs = {}
     db.session.commit()
     return jsonify(True)
 
@@ -236,7 +236,7 @@ def clear_logs(job_id):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def compare_logs(job_id):
-    job = retrieve(Job, id=job_id)
+    job = get(Job, id=job_id)
     results = {
         'versions': list(job.logs)
     }
@@ -247,8 +247,8 @@ def compare_logs(job_id):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def add_to_workflow(workflow_id):
-    workflow = retrieve(Workflow, id=workflow_id)
-    job = retrieve(Job, id=request.form['job'])
+    workflow = get(Workflow, id=workflow_id)
+    job = get(Job, id=request.form['job'])
     job.workflows.append(workflow)
     db.session.commit()
     return jsonify(job.serialized)
@@ -258,7 +258,7 @@ def add_to_workflow(workflow_id):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def get_workflow(workflow_id):
-    workflow = retrieve(Workflow, id=workflow_id)
+    workflow = get(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
 
 
@@ -266,7 +266,7 @@ def get_workflow(workflow_id):
 @login_required
 @permission_required('Automation Section', redirect=False)
 def reset_workflow_logs(workflow_id):
-    retrieve(Workflow, id=workflow_id).status = {'status': 'Idle'}
+    get(Workflow, id=workflow_id).status = {'status': 'Idle'}
     db.session.commit()
     return jsonify(True)
 
@@ -280,10 +280,10 @@ def edit_workflow():
         if property not in form:
             form[property] = 'off'
     form['devices'] = [
-        retrieve(Device, id=id) for id in request.form.getlist('devices')
+        get(Device, id=id) for id in request.form.getlist('devices')
     ]
     form['pools'] = [
-        retrieve(Pool, id=id) for id in request.form.getlist('pools')
+        get(Pool, id=id) for id in request.form.getlist('pools')
     ]
     return jsonify(factory(Workflow, **form).serialized)
 
@@ -292,7 +292,7 @@ def edit_workflow():
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def delete_workflow(workflow_id):
-    workflow = retrieve(Workflow, id=workflow_id)
+    workflow = get(Workflow, id=workflow_id)
     db.session.delete(workflow)
     db.session.commit()
     return jsonify(workflow.serialized)
@@ -302,8 +302,8 @@ def delete_workflow(workflow_id):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def add_node(workflow_id, job_id):
-    workflow = retrieve(Workflow, id=workflow_id)
-    job = retrieve(Job, id=job_id)
+    workflow = get(Workflow, id=workflow_id)
+    job = get(Job, id=job_id)
     workflow.jobs.append(job)
     db.session.commit()
     return jsonify(job.serialized)
@@ -313,8 +313,8 @@ def add_node(workflow_id, job_id):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def delete_node(workflow_id, job_id):
-    job = retrieve(Job, id=job_id)
-    workflow = retrieve(Workflow, id=workflow_id)
+    job = get(Job, id=job_id)
+    workflow = get(Workflow, id=workflow_id)
     workflow.jobs.remove(job)
     db.session.commit()
     return jsonify(job.properties)
@@ -326,10 +326,10 @@ def delete_node(workflow_id, job_id):
 def add_edge(wf_id, type, source, dest):
     workflow_edge = factory(WorkflowEdge, **{
         'name': f'{wf_id}-{type}:{source}->{dest}',
-        'workflow': retrieve(Workflow, id=wf_id),
+        'workflow': get(Workflow, id=wf_id),
         'type': type == 'true',
-        'source': retrieve(Job, id=source),
-        'destination': retrieve(Job, id=dest)
+        'source': get(Job, id=source),
+        'destination': get(Job, id=dest)
     })
     return jsonify(workflow_edge.serialized)
 
@@ -338,7 +338,7 @@ def add_edge(wf_id, type, source, dest):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def delete_edge(workflow_id, edge_id):
-    edge = retrieve(WorkflowEdge, id=edge_id)
+    edge = get(WorkflowEdge, id=edge_id)
     db.session.delete(edge)
     db.session.commit()
     return jsonify({'success': True})
@@ -348,9 +348,9 @@ def delete_edge(workflow_id, edge_id):
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
 def save_positions(workflow_id):
-    workflow = retrieve(Workflow, id=workflow_id)
+    workflow = get(Workflow, id=workflow_id)
     for job_id, position in request.json.items():
-        job = retrieve(Job, id=job_id)
+        job = get(Job, id=job_id)
         job.positions[workflow.name] = (position['x'], position['y'])
     db.session.commit()
     return jsonify({'success': True})

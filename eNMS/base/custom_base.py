@@ -1,7 +1,7 @@
 from json import dumps, loads
 
 from eNMS import db
-from eNMS.base.helpers import retrieve
+from eNMS.base.helpers import get
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,
@@ -61,9 +61,9 @@ class CustomBase(db.Model):
 
 def factory(cls, **kwargs):
     if 'id' in kwargs:
-        instance = retrieve(cls, id=kwargs.pop('id'))
+        instance = get(cls, id=kwargs.pop('id'))
     else:
-        instance = retrieve(cls, name=kwargs['name'])
+        instance = get(cls, name=kwargs['name'])
     if instance:
         instance.update(**kwargs)
     else:

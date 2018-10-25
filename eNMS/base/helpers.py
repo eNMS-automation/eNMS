@@ -1,5 +1,5 @@
 from flask import abort, jsonify
-from flask_login import current_user
+from flask_login import current_user, login_required
 from functools import wraps
 from sqlalchemy import exc
 
@@ -31,6 +31,18 @@ def permission_required(permission, redirect=True):
             return f(*args, **kwargs)
         return decorated_function
     return decorator
+
+
+def route(blueprint, url, permission, method='GET'):
+    def outer(func):
+        @blueprint.route(url, methods=[method])
+        @login_required
+        @permission_required(permission, redirect=(method == 'GET'))
+        @wraps(func)
+        def inner(*args, **kwargs):
+            return func(*args, **kwargs)
+        return inner
+    return outer
 
 
 def str_dict(input, depth=0):

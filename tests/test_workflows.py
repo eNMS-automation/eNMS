@@ -3,7 +3,6 @@ from requests import get
 from requests.auth import HTTPBasicAuth
 
 from eNMS import db
-from eNMS.base.helpers import retrieve
 from eNMS.automation.models import Workflow
 
 from tests.test_base import check_blueprints

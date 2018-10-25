@@ -6,7 +6,7 @@ from json import dumps
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import permission_required, get, str_dict
+from eNMS.base.helpers import get, permission_required, r, str_dict
 from eNMS.base.properties import (
     boolean_properties,
     pretty_names,
@@ -33,9 +33,7 @@ from eNMS.automation.models import (
 )
 
 
-@blueprint.route('/service_management')
-@login_required
-@permission_required('Automation Section')
+@r(blueprint, '/service_management', 'Automation Section')
 def service_management():
     service_form = ServiceForm(request.form)
     service_form.devices.choices = Device.choices()
@@ -52,9 +50,7 @@ def service_management():
     )
 
 
-@blueprint.route('/workflow_management')
-@login_required
-@permission_required('Automation Section')
+@r(blueprint, '/workflow_management', 'Automation Section')
 def workflow_management():
     workflow_creation_form = WorkflowCreationForm(request.form)
     workflow_creation_form.devices.choices = Device.choices()
@@ -70,9 +66,7 @@ def workflow_management():
     )
 
 
-@blueprint.route('/workflow_builder/')
-@login_required
-@permission_required('Automation Section')
+@r(blueprint, '/workflow_builder', 'Automation Section')
 def workflow_builder(workflow_id=None):
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()

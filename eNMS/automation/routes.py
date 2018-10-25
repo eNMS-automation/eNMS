@@ -6,7 +6,7 @@ from json import dumps
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import fetch, permission_required, r, str_dict
+from eNMS.base.helpers import fetch, get, permission_required, post, str_dict
 from eNMS.base.properties import (
     boolean_properties,
     pretty_names,
@@ -33,7 +33,7 @@ from eNMS.automation.models import (
 )
 
 
-@r(blueprint, '/service_management', 'Automation Section')
+@get(blueprint, '/service_management', 'Automation Section')
 def service_management():
     service_form = ServiceForm(request.form)
     service_form.devices.choices = Device.choices()
@@ -50,7 +50,7 @@ def service_management():
     )
 
 
-@r(blueprint, '/workflow_management', 'Automation Section')
+@get(blueprint, '/workflow_management', 'Automation Section')
 def workflow_management():
     workflow_creation_form = WorkflowCreationForm(request.form)
     workflow_creation_form.devices.choices = Device.choices()
@@ -66,7 +66,7 @@ def workflow_management():
     )
 
 
-@r(blueprint, '/workflow_builder', 'Automation Section')
+@get(blueprint, '/workflow_builder', 'Automation Section')
 def workflow_builder(workflow_id=None):
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()
@@ -89,9 +89,7 @@ def workflow_builder(workflow_id=None):
     )
 
 
-@blueprint.route('/get_service/<id_or_cls>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
+@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
 def get_service(id_or_cls):
     service = fetch(Service, id=id_or_cls)
     cls = service_classes[service.type if service else id_or_cls]
@@ -153,9 +151,7 @@ def get_service(id_or_cls):
     })
 
 
-@blueprint.route('/delete/<service_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
 def delete_object(service_id):
     service = fetch(Service, id=service_id)
     db.session.delete(service)

@@ -33,16 +33,18 @@ def permission_required(permission, redirect=True):
     return decorator
 
 
-def r(blueprint, url, permission, method='GET'):
-    def outer(func):
-        @blueprint.route(url, methods=[method])
-        @login_required
-        @permission_required(permission, redirect=(method == 'GET'))
-        @wraps(func)
-        def inner(*args, **kwargs):
-            return func(*args, **kwargs)
-        return inner
-    return outer
+def route_function(method):
+    def route(blueprint, url, permission, method=method):
+        def outer(func):
+            @blueprint.route(url, methods=[method])
+            @login_required
+            @permission_required(permission, redirect=(method == 'GET'))
+            @wraps(func)
+            def inner(*args, **kwargs):
+                return func(*args, **kwargs)
+            return inner
+        return outer
+    return route
 
 
 def str_dict(input, depth=0):
@@ -88,3 +90,6 @@ def get_user_credentials(app, user):
         return user.name, vault_helper(app, f'user/{user.name}')['password']
     else:
         return user.name, user.password
+
+
+get, post = route_function('GET'), route_function('POST')

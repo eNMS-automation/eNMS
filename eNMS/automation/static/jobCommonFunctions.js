@@ -12,10 +12,19 @@ let jobId;
  * @param {id} id - Job id.
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
+  jobId = id;
   call(`/automation/show_logs/${id}`, function(logs) {
     $('#logs').text(logs.replace(/\\n/g, '\n'));
     $(`#show-logs-modal`).modal('show');
   });
+}
+
+/**
+ * Clear the logs
+ * @param {id} id - Job id.
+ */
+function clearLogs(id) { // eslint-disable-line no-unused-vars
+  $('#logs').empty();
 }
 
 /**

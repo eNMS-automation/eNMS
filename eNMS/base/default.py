@@ -299,9 +299,19 @@ def create_payload_transfer_workflow():
     workflow.jobs.extend(services)
 
     # create workflow edges with following schema:
-    positions = [(-20, 0), (50, 0), (-5, 0), (-5, -10), (15, 10), (15, -10), (30, -10), (30, 0)]
+    positions = [
+        (-20, 0),
+        (50, 0),
+        (-5, 0),
+        (-5, -10),
+        (15, 10),
+        (15, -10),
+        (30, -10),
+        (30, 0)
+    ]
     for index, (x, y) in enumerate(positions):
-        workflow.jobs[index].positions['payload_transfer_workflow'] = x * 10, y * 10
+        job = workflow.jobs[index]
+        job.positions['payload_transfer_workflow'] = x * 10, y * 10
     edges = [(0, 2), (2, 3), (2, 4), (3, 5), (5, 6), (6, 7), (4, 7), (7, 1)]
     for x, y in edges:
         factory(WorkflowEdge, **{

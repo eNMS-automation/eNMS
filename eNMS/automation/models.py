@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 
-from eNMS import db, scheduler
+from eNMS import db
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,

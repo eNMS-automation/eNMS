@@ -40,7 +40,6 @@ class WorkflowCreationForm(FlaskForm):
     operating_system = TextField()
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
-    
 
 
 class WorkflowBuilderForm(FlaskForm):

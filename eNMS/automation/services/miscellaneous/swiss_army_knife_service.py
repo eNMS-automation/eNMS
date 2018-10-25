@@ -25,11 +25,11 @@ class SwissArmyKnifeService(Service):
     def job2(self, payload):
         return {'success': True, 'result': ''}
 
-    def Start(self, *a, **kw):
+    def Start(self, *a, **kw):  # noqa: N802
         # Start of a workflow
         return {'success': True}
 
-    def End(self, *a, **kw):
+    def End(self, *a, **kw):  # noqa: N802
         # End of a workflow
         return {'success': True}
 

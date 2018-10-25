@@ -23,7 +23,7 @@ def permission_required(permission, redirect=True):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
-            if not current_user.allowed(permission):
+            if permission and not current_user.allowed(permission):
                 if redirect:
                     abort(403)
                 else:
@@ -34,7 +34,7 @@ def permission_required(permission, redirect=True):
 
 
 def route_function(method):
-    def route(blueprint, url, permission, method=method):
+    def route(blueprint, url, permission=None, method=method):
         def outer(func):
             @blueprint.route(url, methods=[method])
             @login_required

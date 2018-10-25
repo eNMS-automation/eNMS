@@ -4,6 +4,7 @@ from flask_login import login_required
 
 from eNMS.base import blueprint
 from eNMS.base.classes import diagram_classes
+from eNMS.base.helpers import get, post
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,
@@ -12,13 +13,12 @@ from eNMS.base.properties import (
 )
 
 
-@blueprint.route('/')
+@get(blueprint, '/')
 def site_root():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@blueprint.route('/dashboard')
-@login_required
+@get(blueprint, '/dashboard')
 def dashboard():
     return render_template(
         'dashboard.html',
@@ -31,8 +31,7 @@ def dashboard():
     )
 
 
-@blueprint.route('/counters/<property>/<type>', methods=['POST'])
-@login_required
+@post(blueprint, '/counters/<property>/<type>')
 def get_counters(property, type):
     objects = diagram_classes[type].query.all()
     if property in reverse_pretty_names:
@@ -47,7 +46,7 @@ def shutdown_server():
     func()
 
 
-@blueprint.route('/shutdown', methods=['POST'])
+@post(blueprint, '/shutdown', 'Admin')
 def shutdown():
     shutdown_server()
     return 'Server shutting down...'

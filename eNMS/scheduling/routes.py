@@ -80,11 +80,11 @@ def delete_task(task_id):
 def pause_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.pause_task()
-    return jsonify({})
+    return jsonify(True)
 
 
 @post(blueprint, '/resume_task/<task_id>', 'Edit Scheduling Section')
 def resume_task(task_id):
     task = Task.query.filter_by(id=task_id).first()
     task.resume_task()
-    return jsonify({})
+    return jsonify(True)

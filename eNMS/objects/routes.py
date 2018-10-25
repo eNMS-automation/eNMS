@@ -19,10 +19,12 @@ from eNMS.admin.models import Parameters
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     allowed_file,
+    fetch,
+    get,
     get_device_credentials,
     get_user_credentials,
     permission_required,
-    fetch,
+    post,
     vault_helper
 )
 from eNMS.objects import blueprint
@@ -58,9 +60,7 @@ def process_kwargs(app, **kwargs):
     return Link if 'source' in kwargs else Device, kwargs
 
 
-@blueprint.route('/device_management', methods=['GET', 'POST'])
-@login_required
-@permission_required('Inventory Section')
+@get(blueprint, '/device_management', 'Inventory Section')
 def device_management():
     return render_template(
         'device_management.html',
@@ -71,9 +71,7 @@ def device_management():
     )
 
 
-@blueprint.route('/link_management', methods=['GET', 'POST'])
-@login_required
-@permission_required('Inventory Section')
+@get(blueprint, '/link_management', 'Inventory Section')
 def link_management():
     add_link_form = AddLink(request.form)
     all_devices = [(n.name, n.name) for n in Device.query.all()]
@@ -88,9 +86,7 @@ def link_management():
     )
 
 
-@blueprint.route('/object_download')
-@login_required
-@permission_required('Inventory Section', redirect=False)
+@post(blueprint, '/export_topology', 'Inventory Section')
 def objects_download():
     devices = Device.serialize()
     ws = {}

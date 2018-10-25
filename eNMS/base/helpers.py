@@ -6,7 +6,7 @@ from sqlalchemy import exc
 from eNMS import db
 
 
-def get(model, **kwargs):
+def fetch(model, **kwargs):
     return db.session.query(model).filter_by(**kwargs).first()
 
 

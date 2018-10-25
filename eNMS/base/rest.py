@@ -6,12 +6,12 @@ from eNMS.admin.models import User
 from eNMS.automation.models import Job
 from eNMS.base.classes import diagram_classes
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import get_user_credentials, get
+from eNMS.base.helpers import get_user_credentials, fetch
 
 
 @auth.get_password
 def get_password(username):
-    user = get(User, name=username)
+    user = fetch(User, name=username)
     if user:
         return get_user_credentials(current_app, user)[1]
 
@@ -25,7 +25,7 @@ class RestAutomation(Resource):
     decorators = [auth.login_required]
 
     def get(self, job_name):
-        job = get(Job, name=job_name)
+        job = fetch(Job, name=job_name)
         results = job.run()
         return {'job': job.serialized, 'results': results}
 
@@ -34,10 +34,10 @@ class GetInstance(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls_name, object_name):
-        return get(diagram_classes[cls_name], name=object_name).serialized
+        return fetch(diagram_classes[cls_name], name=object_name).serialized
 
     def delete(self, cls_name, object_name):
-        obj = get(diagram_classes[cls_name], name=object_name)
+        obj = fetch(diagram_classes[cls_name], name=object_name)
         db.session.delete(obj)
         db.session.commit()
         return f'{cls_name} {object_name} successfully deleted'

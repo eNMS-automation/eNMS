@@ -150,26 +150,20 @@ def create_new_user():
     return jsonify(factory(User, **user_data).serialized)
 
 
-@blueprint.route('/process_user', methods=['POST'])
-@login_required
-@permission_required('Edit Admin Section', redirect=False)
+@post(blueprint, '/process_user', 'Edit Admin Section')
 def process_user():
     user_data = request.form.to_dict()
     user_data['permissions'] = request.form.getlist('permissions')
     return jsonify(factory(User, **user_data).serialized)
 
 
-@blueprint.route('/get/<user_id>', methods=['POST'])
-@login_required
-@permission_required('Admin Section', redirect=False)
+@post(blueprint, '/get/<user_id>', 'Admin Section')
 def get_user(user_id):
     user = fetch(User, id=user_id)
     return jsonify(user.serialized)
 
 
-@blueprint.route('/delete/<user_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Admin Section', redirect=False)
+@post(blueprint, '/delete/<user_id>', 'Edit Admin Section')
 def delete_user(user_id):
     user = fetch(User, id=user_id)
     db.session.delete(user)
@@ -177,9 +171,7 @@ def delete_user(user_id):
     return jsonify(user.serialized)
 
 
-@blueprint.route('/save_tacacs_server', methods=['POST'])
-@login_required
-@permission_required('Edit parameters', redirect=False)
+@post(blueprint, '/save_tacacs_server', 'Edit parameters')
 def save_tacacs_server():
     TacacsServer.query.delete()
     tacacs_server = TacacsServer(**request.form.to_dict())
@@ -188,9 +180,7 @@ def save_tacacs_server():
     return jsonify({'success': True})
 
 
-@blueprint.route('/save_syslog_server', methods=['POST'])
-@login_required
-@permission_required('Edit parameters', redirect=False)
+@post(blueprint, '/save_syslog_server', 'Edit parameters')
 def save_syslog_server():
     SyslogServer.query.delete()
     syslog_server = SyslogServer(**request.form.to_dict())
@@ -199,9 +189,7 @@ def save_syslog_server():
     return jsonify({'success': True})
 
 
-@blueprint.route('/query_opennms', methods=['POST'])
-@login_required
-@permission_required('Edit objects', redirect=False)
+@post(blueprint, '/query_opennms', 'Edit objects')
 def query_opennms():
     parameters = db.session.query(Parameters).one()
     login, password = parameters.opennms_login, request.form['password']
@@ -242,9 +230,7 @@ def query_opennms():
     return jsonify({'success': True})
 
 
-@blueprint.route('/query_netbox', methods=['POST'])
-@login_required
-@permission_required('Edit objects', redirect=False)
+@post(blueprint, '/query_netbox', 'Edit objects')
 def query_netbox():
     nb = netbox_api(
         request.form['netbox_address'],
@@ -262,9 +248,7 @@ def query_netbox():
     return jsonify({'success': True})
 
 
-@blueprint.route('/save_geographical_parameters', methods=['POST'])
-@login_required
-@permission_required('Edit parameters', redirect=False)
+@post(blueprint, '/save_geographical_parameters', 'Edit parameters')
 def save_geographical_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())
@@ -272,9 +256,7 @@ def save_geographical_parameters():
     return jsonify({'success': True})
 
 
-@blueprint.route('/save_gotty_parameters', methods=['POST'])
-@login_required
-@permission_required('Edit parameters', redirect=False)
+@post(blueprint, '/save_gotty_parameters', 'Edit parameters')
 def save_gotty_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())

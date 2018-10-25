@@ -12,7 +12,7 @@ from eNMS.base.properties import (
 )
 
 
-@get(bp, '/')
+@bp.route('/')
 def site_root():
     return redirect(url_for('admin_blueprint.login'))
 

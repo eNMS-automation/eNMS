@@ -6,12 +6,12 @@ from eNMS.automation.models import Job
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import fetch, get, post
 from eNMS.base.properties import pretty_names
-from eNMS.logs import blueprint
+from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
 from eNMS.logs.models import Log, LogRule
 
 
-@get(blueprint, '/log_management', 'Logs Section')
+@get(bp, '/log_management', 'Logs Section')
 def log_management():
     log_filtering_form = LogFilteringForm(request.form)
     return render_template(
@@ -23,7 +23,7 @@ def log_management():
     )
 
 
-@get(blueprint, '/log_automation', 'Logs Section')
+@get(bp, '/log_automation', 'Logs Section')
 def syslog_automation():
     log_automation_form = LogAutomationForm(request.form)
     log_automation_form.jobs.choices = Job.choices()
@@ -36,7 +36,7 @@ def syslog_automation():
     )
 
 
-@post(blueprint, '/delete_log/<log_id>', 'Edit Logs Section')
+@post(bp, '/delete_log/<log_id>', 'Edit Logs Section')
 def delete_log(log_id):
     log = fetch(Log, id=log_id)
     db.session.delete(log)
@@ -44,7 +44,7 @@ def delete_log(log_id):
     return jsonify({'success': True})
 
 
-@post(blueprint, '/filter_logs', 'Edit Logs Section')
+@post(bp, '/filter_logs', 'Edit Logs Section')
 def filter_logs():
     logs = [log for log in Log.serialize() if all(
         # if the regex property is not in the request, the
@@ -61,12 +61,12 @@ def filter_logs():
     return jsonify(logs)
 
 
-@post(blueprint, '/get_log_rule/<log_rule_id>', 'Logs Section')
+@post(bp, '/get_log_rule/<log_rule_id>', 'Logs Section')
 def get_log_rule(log_rule_id):
     return jsonify(fetch(LogRule, id=log_rule_id).serialized)
 
 
-@post(blueprint, '/save_log_rule', 'Edit Logs Section')
+@post(bp, '/save_log_rule', 'Edit Logs Section')
 def save_log_rule():
     data = request.form.to_dict()
     data['jobs'] = [
@@ -77,7 +77,7 @@ def save_log_rule():
     return jsonify(log_rule.serialized)
 
 
-@post(blueprint, '/delete_log_rule/<log_id>', 'Edit Logs Section')
+@post(bp, '/delete_log_rule/<log_id>', 'Edit Logs Section')
 def delete_log_rule(log_id):
     log_rule = fetch(LogRule, id=log_id)
     db.session.delete(log_rule)

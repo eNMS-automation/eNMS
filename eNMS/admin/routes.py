@@ -15,7 +15,7 @@ from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 from requests import get as http_get
 
 from eNMS import db
-from eNMS.admin import blueprint
+from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
@@ -44,7 +44,7 @@ from eNMS.logs.models import SyslogServer
 from eNMS.objects.models import Device
 
 
-@get(blueprint, '/user_management', 'Admin Section')
+@get(bp, '/user_management', 'Admin Section')
 def users():
     form = AddUser(request.form)
     return render_template(
@@ -56,7 +56,7 @@ def users():
     )
 
 
-@blueprint.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         name = str(request.form['name'])
@@ -106,13 +106,13 @@ def login():
     return redirect(url_for('base_blueprint.dashboard'))
 
 
-@get(blueprint, '/logout')
+@get(bp, '/logout')
 def logout():
     logout_user()
     return redirect(url_for('admin_blueprint.login'))
 
 
-@get(blueprint, '/administration', 'Admin Section')
+@get(bp, '/administration', 'Admin Section')
 def admninistration():
     try:
         tacacs_server = db.session.query(TacacsServer).one()
@@ -136,7 +136,7 @@ def admninistration():
     )
 
 
-@post(blueprint, '/create_new_user', 'Edit Admin Section')
+@post(bp, '/create_new_user', 'Edit Admin Section')
 def create_new_user():
     user_data = request.form.to_dict()
     if 'permissions' in user_data:
@@ -144,20 +144,20 @@ def create_new_user():
     return jsonify(factory(User, **user_data).serialized)
 
 
-@post(blueprint, '/process_user', 'Edit Admin Section')
+@post(bp, '/process_user', 'Edit Admin Section')
 def process_user():
     user_data = request.form.to_dict()
     user_data['permissions'] = request.form.getlist('permissions')
     return jsonify(factory(User, **user_data).serialized)
 
 
-@post(blueprint, '/get/<user_id>', 'Admin Section')
+@post(bp, '/get/<user_id>', 'Admin Section')
 def get_user(user_id):
     user = fetch(User, id=user_id)
     return jsonify(user.serialized)
 
 
-@post(blueprint, '/delete/<user_id>', 'Edit Admin Section')
+@post(bp, '/delete/<user_id>', 'Edit Admin Section')
 def delete_user(user_id):
     user = fetch(User, id=user_id)
     db.session.delete(user)
@@ -165,7 +165,7 @@ def delete_user(user_id):
     return jsonify(user.serialized)
 
 
-@post(blueprint, '/save_tacacs_server', 'Edit parameters')
+@post(bp, '/save_tacacs_server', 'Edit parameters')
 def save_tacacs_server():
     TacacsServer.query.delete()
     tacacs_server = TacacsServer(**request.form.to_dict())
@@ -174,7 +174,7 @@ def save_tacacs_server():
     return jsonify({'success': True})
 
 
-@post(blueprint, '/save_syslog_server', 'Edit parameters')
+@post(bp, '/save_syslog_server', 'Edit parameters')
 def save_syslog_server():
     SyslogServer.query.delete()
     syslog_server = SyslogServer(**request.form.to_dict())
@@ -183,7 +183,7 @@ def save_syslog_server():
     return jsonify({'success': True})
 
 
-@post(blueprint, '/query_opennms', 'Edit objects')
+@post(bp, '/query_opennms', 'Edit objects')
 def query_opennms():
     parameters = db.session.query(Parameters).one()
     login, password = parameters.opennms_login, request.form['password']
@@ -224,7 +224,7 @@ def query_opennms():
     return jsonify({'success': True})
 
 
-@post(blueprint, '/query_netbox', 'Edit objects')
+@post(bp, '/query_netbox', 'Edit objects')
 def query_netbox():
     nb = netbox_api(
         request.form['netbox_address'],
@@ -242,7 +242,7 @@ def query_netbox():
     return jsonify({'success': True})
 
 
-@post(blueprint, '/save_geographical_parameters', 'Edit parameters')
+@post(bp, '/save_geographical_parameters', 'Edit parameters')
 def save_geographical_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())
@@ -250,7 +250,7 @@ def save_geographical_parameters():
     return jsonify({'success': True})
 
 
-@post(blueprint, '/save_gotty_parameters', 'Edit parameters')
+@post(bp, '/save_gotty_parameters', 'Edit parameters')
 def save_gotty_parameters():
     parameters = db.session.query(Parameters).one()
     parameters.update(**request.form.to_dict())

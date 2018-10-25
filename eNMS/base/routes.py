@@ -1,7 +1,7 @@
 from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
 
-from eNMS.base import blueprint
+from eNMS.base import bp
 from eNMS.base.classes import diagram_classes
 from eNMS.base.helpers import get, post
 from eNMS.base.properties import (
@@ -12,12 +12,12 @@ from eNMS.base.properties import (
 )
 
 
-@get(blueprint, '/')
+@get(bp, '/')
 def site_root():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@get(blueprint, '/dashboard')
+@get(bp, '/dashboard')
 def dashboard():
     return render_template(
         'dashboard.html',
@@ -30,7 +30,7 @@ def dashboard():
     )
 
 
-@post(blueprint, '/counters/<property>/<type>')
+@post(bp, '/counters/<property>/<type>')
 def get_counters(property, type):
     objects = diagram_classes[type].query.all()
     if property in reverse_pretty_names:
@@ -38,7 +38,7 @@ def get_counters(property, type):
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 
-@post(blueprint, '/shutdown', 'Admin')
+@post(bp, '/shutdown', 'Admin')
 def shutdown():
     func = request.environ.get('werkzeug.server.shutdown')
     if func is None:

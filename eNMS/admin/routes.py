@@ -7,12 +7,7 @@ from flask import (
     request,
     url_for
 )
-from flask_login import (
-    current_user,
-    login_required,
-    login_user,
-    logout_user
-)
+from flask_login import current_user, login_user, logout_user
 from pynetbox import api as netbox_api
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
@@ -40,7 +35,6 @@ from eNMS.admin.models import (
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     get,
-    permission_required,
     post,
     fetch,
     vault_helper

@@ -1,10 +1,10 @@
 from flask import jsonify, render_template, request
-from flask_login import current_user, login_required
+from flask_login import current_user
 from re import search, sub
 
 from eNMS import db
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import fetch, get, permission_required, post
+from eNMS.base.helpers import fetch, get, post
 from eNMS.base.properties import task_public_properties
 from eNMS.scheduling import blueprint
 from eNMS.scheduling.forms import SchedulingForm

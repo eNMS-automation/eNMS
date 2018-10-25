@@ -1,10 +1,9 @@
 from flask import current_app, jsonify, render_template, request
-from flask_login import login_required
 from os.path import join
 from simplekml import Kml
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import fetch, get, permission_required, post
+from eNMS.base.helpers import fetch, get, post
 from eNMS.base.properties import (
     device_public_properties,
     device_subtypes,

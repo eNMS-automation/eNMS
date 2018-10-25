@@ -1,6 +1,5 @@
 from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
-from flask_login import login_required
 
 from eNMS.base import blueprint
 from eNMS.base.classes import diagram_classes

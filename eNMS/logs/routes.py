@@ -1,11 +1,10 @@
 from flask import jsonify, render_template, request
-from flask_login import login_required
 from re import search
 
 from eNMS import db
 from eNMS.automation.models import Job
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import fetch, get, permission_required, post
+from eNMS.base.helpers import fetch, get, post
 from eNMS.base.properties import pretty_names
 from eNMS.logs import blueprint
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm

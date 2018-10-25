@@ -6,7 +6,7 @@ from flask import (
     request,
     send_file
 )
-from flask_login import current_user, login_required
+from flask_login import current_user
 from pathlib import Path
 from subprocess import Popen
 from werkzeug.utils import secure_filename
@@ -23,7 +23,6 @@ from eNMS.base.helpers import (
     get,
     get_device_credentials,
     get_user_credentials,
-    permission_required,
     post,
     vault_helper
 )

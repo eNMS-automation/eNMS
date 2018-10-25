@@ -1,12 +1,11 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from flask import jsonify, render_template, request
-from flask_login import login_required
 from json import dumps
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import fetch, get, permission_required, post, str_dict
+from eNMS.base.helpers import fetch, get, post, str_dict
 from eNMS.base.properties import (
     boolean_properties,
     pretty_names,

@@ -223,6 +223,15 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
     return jsonify({'first': first, 'second': second, 'opcodes': opcodes})
 
 
+@blueprint.route('/clear_logs/<job_id>', methods=['POST'])
+@login_required
+@permission_required('Automation Section', redirect=False)
+def clear_logs(job_id):
+    retrieve(Job, id=job_id).logs = {}
+    db.session.commit()
+    return jsonify(True)
+
+
 @blueprint.route('/compare_logs/<job_id>', methods=['POST'])
 @login_required
 @permission_required('Automation Section', redirect=False)

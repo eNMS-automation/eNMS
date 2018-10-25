@@ -23,8 +23,11 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
  * Clear the logs
  * @param {id} id - Job id.
  */
-function clearLogs(id) { // eslint-disable-line no-unused-vars
-  $('#logs').empty();
+function clearLogs() { // eslint-disable-line no-unused-vars
+  call(`/automation/clear_logs/${jobId}`, () => {
+    $('#logs').empty();
+    alertify.notify(`Logs cleared`, 'success', 5);
+  });
 }
 
 /**

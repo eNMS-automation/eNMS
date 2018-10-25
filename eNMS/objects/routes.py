@@ -86,6 +86,21 @@ def link_management():
     )
 
 
+@get(blueprint, '/pool_management', 'Inventory Section')
+def pool_management():
+    pool_object_form = PoolObjectsForm(request.form)
+    pool_object_form.devices.choices = Device.choices()
+    pool_object_form.links.choices = Link.choices()
+    return render_template(
+        'pool_management.html',
+        form=AddPoolForm(request.form),
+        pool_object_form=pool_object_form,
+        names=pretty_names,
+        fields=pool_public_properties,
+        pools=Pool.serialize()
+    )
+
+
 @post(blueprint, '/export_topology', 'Inventory Section')
 def objects_download():
     devices = Device.serialize()
@@ -130,34 +145,13 @@ def objects_download():
     return sfd
 
 
-@blueprint.route('/pool_management')
-@login_required
-@permission_required('Inventory Section')
-def pool_management():
-    pool_object_form = PoolObjectsForm(request.form)
-    pool_object_form.devices.choices = Device.choices()
-    pool_object_form.links.choices = Link.choices()
-    return render_template(
-        'pool_management.html',
-        form=AddPoolForm(request.form),
-        pool_object_form=pool_object_form,
-        names=pretty_names,
-        fields=pool_public_properties,
-        pools=Pool.serialize()
-    )
-
-
-@blueprint.route('/get/<obj_type>/<id>', methods=['POST'])
-@login_required
-@permission_required('Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_object(obj_type, id):
     device = fetch(Device if obj_type == 'device' else Link, id=id)
     return jsonify(device.serialized)
 
 
-@blueprint.route('/connection/<id>', methods=['POST'])
-@login_required
-@permission_required('Connect to device', redirect=False)
+@post(blueprint, '/connection/<id>', 'Connect to device')
 def connection(id):
     parameters, device = Parameters.query.one(), fetch(Device, id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
@@ -191,6 +185,7 @@ def connection(id):
 @blueprint.route('/edit_object', methods=['POST'])
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Edit Inventory Section')
 def edit_object():
     cls, kwargs = process_kwargs(app, **request.form.to_dict())
     obj = factory(cls, **kwargs)
@@ -200,6 +195,7 @@ def edit_object():
 @blueprint.route('/delete/<obj_type>/<obj_id>', methods=['POST'])
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Edit Inventory Section')
 def delete_object(obj_type, obj_id):
     cls = Device if obj_type == 'device' else Link
     obj = fetch(cls, id=obj_id)
@@ -211,6 +207,7 @@ def delete_object(obj_type, obj_id):
 @blueprint.route('/import_topology', methods=['POST'])
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Edit Inventory Section')
 def import_topology():
     objects, file = defaultdict(list), request.files['file']
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
@@ -232,6 +229,7 @@ def import_topology():
 @blueprint.route('/process_pool', methods=['POST'])
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Edit Inventory Section')
 def process_pool():
     form = request.form.to_dict()
     for property in boolean_properties:
@@ -243,6 +241,7 @@ def process_pool():
 @blueprint.route('/get_pool/<pool_id>', methods=['POST'])
 @login_required
 @permission_required('Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_pool(pool_id):
     return jsonify(fetch(Pool, id=pool_id).get_properties())
 
@@ -250,6 +249,7 @@ def get_pool(pool_id):
 @blueprint.route('/get_pool_objects/<pool_id>', methods=['POST'])
 @login_required
 @permission_required('Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_pool_objects(pool_id):
     return jsonify(fetch(Pool, id=pool_id).serialized)
 
@@ -257,6 +257,7 @@ def get_pool_objects(pool_id):
 @blueprint.route('/save_pool_objects/<pool_id>', methods=['POST'])
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Edit Inventory Section')
 def save_pool_objects(pool_id):
     pool = fetch(Pool, id=pool_id)
     pool.devices = [
@@ -270,6 +271,7 @@ def save_pool_objects(pool_id):
 @blueprint.route('/pool_objects/<pool_id>', methods=['POST'])
 @login_required
 @permission_required('Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Inventory Section')
 def filter_pool_objects(pool_id):
     pool = fetch(Pool, id=pool_id)
     return jsonify(pool.filter_objects())
@@ -278,6 +280,7 @@ def filter_pool_objects(pool_id):
 @blueprint.route('/update_pools', methods=['POST'])
 @permission_required('Edit Inventory Section', redirect=False)
 @login_required
+@post(blueprint, '/get/<obj_type>/<id>', 'Edit Inventory Section')
 def update_pools():
     for pool in Pool.query.all():
         pool.compute_pool()
@@ -288,6 +291,7 @@ def update_pools():
 @blueprint.route('/delete_pool/<pool_id>', methods=['POST'])
 @login_required
 @permission_required('Edit Inventory Section', redirect=False)
+@post(blueprint, '/get/<obj_type>/<id>', 'Edit Inventory Section')
 def delete_pool(pool_id):
     pool = fetch(Pool, id=pool_id)
     db.session.delete(pool)

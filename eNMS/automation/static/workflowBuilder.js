@@ -324,11 +324,15 @@ function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(wf) {
       $('#status').text(`Status: ${wf.status.status}.`);
+      if (wf.status.current_device) {
+        $('#current-device').text(`Current device: ${wf.status.current_device}.`);
+      }
       if (wf.status.current_job) {
         colorJob(wf.status.current_job.id, '#89CFF0');
         $('#current-job').text(`Current job: ${wf.status.current_job.name}.`);
       } else {
         $('#status').text('Status: Idle.');
+        $('#current-device,#current-job').empty();
       }
       if (wf.status.jobs) {
         $.each(wf.status.jobs, (id, res) => colorJob(id, res ? 'green' : 'red'));

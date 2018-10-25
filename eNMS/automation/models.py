@@ -235,11 +235,9 @@ class Workflow(Job):
     def job(self, *args):
         device, payload = args if len(args) == 2 else (None, args)
         if not self.multiprocessing:
-            self.status = {
-                'state': 'Running',
-                'jobs': {},
-                'current_device': device.name
-            }
+            self.status = {'state': 'Running', 'jobs': {}}
+            if device:
+                self.status['current_device'] = device.name
             db.session.commit()
         jobs, visited = [self.jobs[0]], set()
         results = {'success': True}

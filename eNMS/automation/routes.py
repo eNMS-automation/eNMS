@@ -175,6 +175,7 @@ def run_job(job_id):
     return jsonify(job.serialized)
 
 
+@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
 @blueprint.route('/save_service/<cls_name>', methods=['POST'])
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
@@ -233,6 +234,7 @@ def compare_logs(job_id):
     return jsonify(results)
 
 
+@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
 @blueprint.route('/add_to_workflow/<workflow_id>', methods=['POST'])
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
@@ -251,7 +253,7 @@ def get_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
 
-
+@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
 @blueprint.route('/reset_workflow_logs/<workflow_id>', methods=['POST'])
 @login_required
 @permission_required('Automation Section', redirect=False)
@@ -260,7 +262,7 @@ def reset_workflow_logs(workflow_id):
     db.session.commit()
     return jsonify(True)
 
-
+@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
 @blueprint.route('/edit_workflow', methods=['POST'])
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
@@ -277,7 +279,7 @@ def edit_workflow():
     ]
     return jsonify(factory(Workflow, **form).serialized)
 
-
+@post(blueprint, '/delete/<service_id>', 'Edit Automation Section')
 @blueprint.route('/delete_workflow/<workflow_id>', methods=['POST'])
 @login_required
 @permission_required('Edit Automation Section', redirect=False)
@@ -288,9 +290,7 @@ def delete_workflow(workflow_id):
     return jsonify(workflow.serialized)
 
 
-@blueprint.route('/add_node/<workflow_id>/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/add_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def add_node(workflow_id, job_id):
     workflow = fetch(Workflow, id=workflow_id)
     job = fetch(Job, id=job_id)
@@ -299,9 +299,7 @@ def add_node(workflow_id, job_id):
     return jsonify(job.serialized)
 
 
-@blueprint.route('/delete_node/<workflow_id>/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/delete_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def delete_node(workflow_id, job_id):
     job = fetch(Job, id=job_id)
     workflow = fetch(Workflow, id=workflow_id)
@@ -310,9 +308,7 @@ def delete_node(workflow_id, job_id):
     return jsonify(job.properties)
 
 
-@blueprint.route('/add_edge/<wf_id>/<type>/<source>/<dest>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/add_edge/<wf_id>/<type>/<source>/<dest>', 'Edit Automation Section')
 def add_edge(wf_id, type, source, dest):
     workflow_edge = factory(WorkflowEdge, **{
         'name': f'{wf_id}-{type}:{source}->{dest}',
@@ -324,9 +320,7 @@ def add_edge(wf_id, type, source, dest):
     return jsonify(workflow_edge.serialized)
 
 
-@blueprint.route('/delete_edge/<workflow_id>/<edge_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/delete_edge/<workflow_id>/<edge_id>', 'Edit Automation Section')
 def delete_edge(workflow_id, edge_id):
     edge = fetch(WorkflowEdge, id=edge_id)
     db.session.delete(edge)
@@ -334,9 +328,7 @@ def delete_edge(workflow_id, edge_id):
     return jsonify({'success': True})
 
 
-@blueprint.route('/save_positions/<workflow_id>', methods=['POST'])
-@login_required
-@permission_required('Edit Automation Section', redirect=False)
+@post(blueprint, '/save_positions/<workflow_id>', 'Edit Automation Section')
 def save_positions(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     for job_id, position in request.json.items():

@@ -191,18 +191,12 @@ def save_service(cls_name):
     return jsonify(factory(service_classes[cls_name], **form).serialized)
 
 
-@blueprint.route('/show_logs/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
-@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
+@post(blueprint, '/show_logs/<job_id>', 'Automation Section')
 def show_logs(job_id):
     return jsonify(dumps(fetch(Job, id=job_id).logs, indent=4))
 
 
-@blueprint.route('/get_diff/<job_id>/<v1>/<v2>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
-@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
+@post(blueprint, '/get_diff/<job_id>/<v1>/<v2>', 'Automation Section')
 def get_diff(job_id, v1, v2, n1=None, n2=None):
     job = fetch(Job, id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
@@ -218,10 +212,7 @@ def clear_logs(job_id):
     return jsonify(True)
 
 
-@blueprint.route('/compare_logs/<job_id>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
-@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
+@post(blueprint, '/compare_logs/<job_id>', 'Automation Section')
 def compare_logs(job_id):
     job = fetch(Job, id=job_id)
     results = {
@@ -239,10 +230,7 @@ def add_to_workflow(workflow_id):
     return jsonify(job.serialized)
 
 
-@blueprint.route('/get/<workflow_id>', methods=['POST'])
-@login_required
-@permission_required('Automation Section', redirect=False)
-@post(blueprint, '/get_service/<id_or_cls>', 'Automation Section')
+@post(blueprint, '/get/<workflow_id>', 'Automation Section')
 def get_workflow(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
@@ -255,7 +243,7 @@ def reset_workflow_logs(workflow_id):
     return jsonify(True)
 
 
-@post(blueprint, '/edit_workflow',, 'Edit Automation Section')
+@post(blueprint, '/edit_workflow', 'Edit Automation Section')
 def edit_workflow():
     form = dict(request.form.to_dict())
     for property in boolean_properties:

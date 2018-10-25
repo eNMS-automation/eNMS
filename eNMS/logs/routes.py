@@ -12,9 +12,7 @@ from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
 from eNMS.logs.models import Log, LogRule
 
 
-@blueprint.route('/log_management')
-@login_required
-@permission_required('Logs Section')
+@get(blueprint, '/log_management', 'Logs Section')
 def log_management():
     log_filtering_form = LogFilteringForm(request.form)
     return render_template(
@@ -26,9 +24,7 @@ def log_management():
     )
 
 
-@blueprint.route('/log_automation')
-@login_required
-@permission_required('Logs Section')
+@get(blueprint, '/log_automation', 'Logs Section')
 def syslog_automation():
     log_automation_form = LogAutomationForm(request.form)
     log_automation_form.jobs.choices = Job.choices()

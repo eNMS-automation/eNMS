@@ -304,9 +304,6 @@ function runWorkflow() { // eslint-disable-line no-unused-vars
   workflowInit = true;
   workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
   getWorkflowStatus();
-  setTimeout(() => {
-    workflowInit = false;
-  }, 10000);
 }
 
 /**
@@ -332,13 +329,15 @@ function getWorkflowStatus() {
         colorJob(wf.status.current_job.id, '#89CFF0');
         $('#current-job').text(`Current job: ${wf.status.current_job.name}.`);
       } else {
-        $('#status').text('Status: Idle.');
         $('#current-device,#current-job').empty();
       }
       if (wf.status.jobs) {
         $.each(wf.status.jobs, (id, res) => colorJob(id, res ? 'green' : 'red'));
       }
       if (workflowInit || wf.status.status == 'Running') {
+        if (workflowInit && wf.status.status == 'Running') {
+          workflowInit = !workflowInit;
+        }
         setTimeout(getWorkflowStatus, 1000);
       } else {
         call(`/automation/reset_workflow_logs/${workflow.id}`, () => {});

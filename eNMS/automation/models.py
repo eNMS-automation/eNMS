@@ -28,10 +28,7 @@ class Job(CustomBase):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
-    status = Column(
-        MutableDict.as_mutable(PickleType),
-        default={'status': 'Idle'}
-    )
+    status = Column(MutableDict.as_mutable(PickleType), default={})
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
     type = Column(String)
     waiting_time = Column(Integer, default=0)
@@ -239,7 +236,7 @@ class Workflow(Job):
         device, payload = args if len(args) == 2 else (None, args)
         if not self.multiprocessing:
             self.status = {
-                'status': 'Running',
+                'state': 'Running',
                 'jobs': {},
                 'current_device': device.name
             }

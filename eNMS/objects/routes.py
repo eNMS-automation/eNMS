@@ -172,8 +172,7 @@ def connection(id):
         cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{ip}'.split())
     else:
         cmd.extend(f'ssh {options} {ip}'.split())
-    cmd.extend(f'-p {request.form["port"]}'.split())
-    print(cmd)
+    cmd.extend(f'-p {device.port}'.split())
     Popen(cmd)
     return jsonify({
         'device': device.name,

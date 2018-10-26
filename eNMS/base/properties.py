@@ -46,6 +46,7 @@ device_properties = object_common_properties + (
     'ip_address',
     'longitude',
     'latitude',
+    'port',
     'enable_password'
 )
 
@@ -271,6 +272,7 @@ pretty_names = {
     'pass_device_properties': 'Pass device properties to the playbook',
     'password': 'Password',
     'permission': 'Permission',
+    'port': 'Port',
     'positions': 'Positions',
     'recurrent': 'Recurrent',
     'enable_password': 'Enable password',

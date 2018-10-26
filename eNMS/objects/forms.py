@@ -33,6 +33,7 @@ class AddDevice(AddObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)
     ip_address = TextField('IP address')
+    port = TextField()
     operating_system = TextField()
     os_version = TextField()
     longitude = FloatField(default=0.)

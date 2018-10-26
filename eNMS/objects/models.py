@@ -45,6 +45,7 @@ class Device(Object):
     ip_address = Column(String)
     longitude = Column(Float)
     latitude = Column(Float)
+    port = Column(Integer, default=22)
     username = Column(String)
     password = Column(String)
     enable_password = Column(String)

@@ -127,6 +127,7 @@ function exportTopology() { // eslint-disable-line no-unused-vars
  * @param {objType} objType - Type of object.
  */
 function importTopology(objType) { // eslint-disable-line no-unused-vars
+  alertify.notify('Topology import: starting...', 'success', 5);
   if ($('#import-form').parsley().validate() ) {
     const formData = new FormData($('#import-form')[0]);
     $.ajax({
@@ -138,6 +139,7 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
       processData: false,
       async: false,
       success: function(objects) {
+        alertify.notify('Topology import: adding objects to the table...', 'success', 5);
         if (!objects) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {

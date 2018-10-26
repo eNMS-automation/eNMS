@@ -96,6 +96,22 @@ if (workflow) {
 }
 
 /**
+ * Set job as start of the workflow.
+ * @param {id} id - Id.
+ */
+function setStart(id) {
+  console.log(id);
+}
+
+/**
+ * Add job to the workflow object (back-end).
+ * @param {job} job - job to add to the workflow.
+ */
+function setStart(id) {
+  console.log(id);
+}
+
+/**
  * Add an existing job to the workflow.
  */
 function addJobToWorkflow() { // eslint-disable-line no-unused-vars
@@ -269,6 +285,8 @@ function compareWorkflowLogs() {
 const action = {
   'Run Workflow': runWorkflow,
   'Edit': editService,
+  'Set as Start': setStart,
+  'Set as End': setEnd,
   'Run': runJob,
   'Logs': showLogs,
   'Compare Logs': compareLogs,

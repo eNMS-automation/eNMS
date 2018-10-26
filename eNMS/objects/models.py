@@ -128,14 +128,13 @@ class Link(Object):
 
 AbstractPool = type('AbstractPool', (CustomBase,), {
     '__tablename__': 'AbstractPool',
-    'id': Column(Integer, ForeignKey('CustomBase.id'), primary_key=True),
+    'id': Column(Integer, primary_key=True),
     '__mapper_args__': {'polymorphic_identity': 'AbstractPool'},
-    **{**{
-        f'device_{property}': Column(String)
-        for property in device_public_properties
-    }, **{
-        f'device_{property}_regex': Column(Boolean)
-        for property in device_public_properties
+    **{
+    **{f'device_{p}': Column(String) for p in device_public_properties},
+    **{f'device_{p}_regex': Column(Boolean) for p in device_public_properties},
+    **{f'link_{p}': Column(String) for p in link_public_properties},
+    **{f'link_{p}_regex': Column(Boolean) for p in link_public_properties
     }}
 })
     
@@ -163,22 +162,6 @@ class Pool(AbstractPool):
         secondary=job_pool_table,
         back_populates='pools'
     )
-    link_name = Column(String)
-    link_name_regex = Column(Boolean)
-    link_description = Column(String)
-    link_description_regex = Column(Boolean)
-    link_model = Column(String)
-    link_model_regex = Column(Boolean)
-    link_location = Column(String)
-    link_location_regex = Column(Boolean)
-    link_subtype = Column(String)
-    link_subtype_regex = Column(Boolean)
-    link_vendor = Column(String)
-    link_vendor_regex = Column(Boolean)
-    link_source = Column(String)
-    link_source_regex = Column(Boolean)
-    link_destination = Column(String)
-    link_destination_regex = Column(Boolean)
 
     def update(self, **kwargs):
         super().update(**kwargs)

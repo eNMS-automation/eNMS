@@ -14,13 +14,11 @@ class NapalmPingService(Service):
     count = Column(Integer)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
-    operating_system = Column(String)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     size = Column(Integer)
     source = Column(String)
     timeout = Column(Integer)
     ttl = Column(Integer)
-    vendor = Column(String)
     vrf = Column(String)
 
     __mapper_args__ = {

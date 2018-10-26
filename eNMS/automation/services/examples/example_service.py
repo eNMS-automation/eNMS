@@ -37,11 +37,11 @@ class ExampleService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     multiprocessing = False
-    # the "vendor" property will be displayed as a drop-down list, because
-    # there is an associated "vendor_values" property in the class.
-    vendor = Column(String)
-    # the "operating_system" property will be displayed as a text area.
-    operating_system = Column(String)
+    # the "string1" property will be displayed as a drop-down list, because
+    # there is an associated "string1_values" property in the class.
+    string1 = Column(String)
+    # the "string2" property will be displayed as a text area.
+    string2 = Column(String)
     # Text area
     an_integer = Column(Integer)
     # Text area
@@ -57,7 +57,7 @@ class ExampleService(Service):
 
     # these values will be displayed in a single selection drop-down list,
     # for the property "a_list".
-    vendor_values = [
+    string1_values = [
         ('cisco', 'Cisco'),
         ('juniper', 'Juniper'),
         ('arista', 'Arista')
@@ -77,7 +77,7 @@ class ExampleService(Service):
 
     def job(self, payload):
         # The "job" function is called when the service is executed.
-        # The parameters of the service can be accessed with self (self.vendor,
+        # The parameters of the service can be accessed with self (self.string1,
         # self.boolean1, etc)
         # You can look at how default services (netmiko, napalm, etc.) are
         # implemented in the /services subfolders (/netmiko, /napalm, etc).

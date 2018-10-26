@@ -15,8 +15,6 @@ class NapalmConfigurationService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     multiprocessing = True
-    vendor = Column(String)
-    operating_system = Column(String)
     action = Column(String)
     action_values = (
         ('load_merge_candidate', 'Load merge'),
@@ -26,9 +24,7 @@ class NapalmConfigurationService(Service):
     content_textarea = True
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
-    operating_system = Column(String)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
-    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'napalm_configuration_service',

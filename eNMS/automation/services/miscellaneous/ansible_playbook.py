@@ -14,8 +14,6 @@ class AnsiblePlaybookService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     multiprocessing = True
-    vendor = Column(String)
-    operating_system = Column(String)
     playbook_path = Column(String)
     arguments = Column(String)
     content_match = Column(String)

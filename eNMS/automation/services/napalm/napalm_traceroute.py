@@ -13,12 +13,10 @@ class NapalmTracerouteService(Service):
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     multiprocessing = True
-    operating_system = Column(String)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     source = Column(String)
     timeout = Column(Integer)
     ttl = Column(Integer)
-    vendor = Column(String)
     vrf = Column(String)
 
     __mapper_args__ = {

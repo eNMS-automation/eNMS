@@ -9,6 +9,9 @@ partial: false
 table: false
 */
 
+/**
+ * Flip Combo box depending on whether or not authentication is selected.
+ */
 function flipAuthenticationCombo() {
   $('#user-credentials,#device-credentials').prop(
     'disabled', !$('#authentication').prop('checked')
@@ -143,7 +146,7 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
       processData: false,
       async: false,
       success: function(objects) {
-        alertify.notify('Topology import: adding objects to the table...', 'success', 5);
+        alertify.notify('Adding objects to the table...', 'success', 5);
         if (!objects) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else {

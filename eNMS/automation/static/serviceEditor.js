@@ -4,6 +4,7 @@ addService: false
 alertify: false
 call: false
 fCall: false
+nodes: false
 propertyTypes: false
 servicesClasses: false
 showModal: false
@@ -85,7 +86,7 @@ function saveService() { // eslint-disable-line no-unused-vars
     const message = `Service '${service.name}'
     ${mode == 'edit' ? 'edited' : 'created'} !`;
     if (workflowBuilder) {
-      nodes.update({id: service.id, label: service.name})
+      nodes.update({id: service.id, label: service.name});
     }
     alertify.notify(message, 'success', 5);
     $('#service-editor').modal('hide');

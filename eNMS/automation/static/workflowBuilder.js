@@ -73,7 +73,7 @@ function displayWorkflow(wf) {
   graph.on('oncontext', function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
-    graph.selectNodes([node])
+    graph.selectNodes([node]);
     if (typeof node !== 'undefined') {
       $('.node-selection').show();
       $('.global').hide();

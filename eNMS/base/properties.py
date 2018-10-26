@@ -89,7 +89,7 @@ job_public_properties = [
     'logs',
     'positions',
     'waiting_time',
-    'number_of_retry',
+    'number_of_retries',
     'time_between_retries'
 ]
 
@@ -106,7 +106,7 @@ service_table_properties = [
     'name',
     'type',
     'description',
-    'number_of_retry',
+    'number_of_retries',
     'time_between_retries'
 ]
 
@@ -115,7 +115,7 @@ workflow_table_properties = [
     'description',
     'vendor',
     'operating_system',
-    'number_of_retry',
+    'number_of_retries',
     'time_between_retries'
 ]
 

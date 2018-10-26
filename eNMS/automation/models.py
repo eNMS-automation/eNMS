@@ -81,12 +81,12 @@ class Job(CustomBase):
 
     def try_run(self, payload=None, targets=None):
         now = str(datetime.now())
-        for i in range(self.number_of_retry + 1):
+        for i in range(self.number_of_retries + 1):
             results = self.run(payload, targets)
             self.logs[now] = results
             if results['success']:
                 break
-            if i != self.number_of_retry:
+            if i != self.number_of_retries:
                 sleep(self.time_between_retries)
         return results
 

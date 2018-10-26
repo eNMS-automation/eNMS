@@ -46,10 +46,6 @@ def parent_device():
         return Object
     with open(filepath, 'r') as properties:
         dict_properties = load(properties)
-        print({property: 
-                    Column(sql_types[values['type']], default=values['default'])
-                    for property, values in dict_properties.items()
-                })
         device_public_properties.extend(list(dict_properties))
         pretty_names.update({k: k for k in dict_properties})
         cls_to_properties['Device'].extend(list(dict_properties))
@@ -70,11 +66,7 @@ class Device(ParentDevice):
 
     __tablename__ = 'Device'
 
-    id = Column(
-        Integer,
-        ForeignKey(ParentDevice.id),
-        primary_key=True
-    )
+    id = Column(Integer, ForeignKey(ParentDevice.id), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
     ip_address = Column(String)

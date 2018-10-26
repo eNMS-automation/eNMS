@@ -32,6 +32,8 @@ class Job(CustomBase):
     status = Column(MutableDict.as_mutable(PickleType), default={})
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
     type = Column(String)
+    vendor = Column(String)
+    operating_system = Column(String)
     waiting_time = Column(Integer, default=0)
     workflows = relationship(
         'Workflow',
@@ -212,8 +214,6 @@ class Workflow(Job):
 
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     multiprocessing = Column(Boolean, default=False)
-    vendor = Column(String)
-    operating_system = Column(String)
     jobs = relationship(
         'Job',
         secondary=job_workflow_table,

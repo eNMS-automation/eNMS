@@ -19,10 +19,8 @@ class NetmikoFileTransferService(Service):
     driver_values = NETMIKO_SCP_DRIVERS
     file_system = Column(String)
     inline_transfer = Column(Boolean)
-    operating_system = Column(String)
     overwrite_file = Column(Boolean)
     source_file = Column(String)
-    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_file_transfer_service',

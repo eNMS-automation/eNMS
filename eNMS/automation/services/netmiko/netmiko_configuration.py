@@ -14,7 +14,6 @@ class NetmikoConfigurationService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     multiprocessing = True
-    vendor = Column(String)
     operating_system = Column(String)
     content = Column(String)
     content_textarea = True

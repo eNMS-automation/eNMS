@@ -21,8 +21,6 @@ class NetmikoValidationService(Service):
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     fast_cli = Column(Boolean, default=False)
-    operating_system = Column(String)
-    vendor = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_validation_service',

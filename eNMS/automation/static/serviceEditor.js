@@ -31,6 +31,8 @@ function showServiceEditor() { // eslint-disable-line no-unused-vars
   $('#title').text('Create a New Service Instance');
   $('#services').show();
   $('#service-editor-form').trigger('reset');
+  $('.fs-option').removeClass('selected');
+  $('.fs-label').text('Select devices');
   editService();
   $('#service-editor').modal('show');
 }

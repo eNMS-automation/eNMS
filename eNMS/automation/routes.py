@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
-from flask import jsonify, render_template, request
+from flask import jsonify, render_template, request, session
 from json import dumps
 
 from eNMS import db, scheduler
@@ -66,25 +66,24 @@ def workflow_management():
 
 
 @get(bp, '/workflow_builder', 'Automation Section')
-def workflow_builder(workflow_id=None):
+def workflow_builder():
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()
     workflow_builder_form = WorkflowBuilderForm(request.form)
     workflow_builder_form.workflow.choices = Workflow.choices()
-    workflow = fetch(Workflow, id=workflow_id)
     service_form = JobForm(request.form)
     service_form.devices.choices = Device.choices()
     service_form.pools.choices = Pool.choices()
     return render_template(
         'workflow_builder.html',
+        workflow=session.get('workflow', None),
         add_job_form=add_job_form,
         workflow_builder_form=workflow_builder_form,
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
         property_types={k: str(v) for k, v in property_types.items()},
         service_form=service_form,
-        services_classes=list(service_classes),
-        workflow=workflow.serialized if workflow_id else None
+        services_classes=list(service_classes)
     )
 
 
@@ -306,6 +305,7 @@ def delete_edge(workflow_id, edge_id):
 @post(bp, '/save_positions/<workflow_id>', 'Edit Automation Section')
 def save_positions(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
+    session['workflow'] = workflow.serialized
     for job_id, position in request.json.items():
         job = fetch(Job, id=job_id)
         job.positions[workflow.name] = (position['x'], position['y'])

@@ -1,5 +1,4 @@
 from json import dumps, loads
-from sqlalchemy import Boolean, Column
 
 from eNMS import db
 from eNMS.base.helpers import fetch
@@ -61,7 +60,6 @@ class CustomBase(db.Model):
 
     @classmethod
     def serialize(cls):
-        print(cls, [(obj.name, obj.hidden) for obj in cls.query.all()])
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
 

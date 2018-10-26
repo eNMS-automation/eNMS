@@ -1,11 +1,5 @@
 from collections import defaultdict
-from flask import (
-    current_app as app,
-    jsonify,
-    render_template,
-    request,
-    send_file
-)
+from flask import current_app as app, jsonify, render_template, request
 from flask_login import current_user
 from pathlib import Path
 from subprocess import Popen
@@ -32,6 +26,7 @@ from eNMS.objects.models import Link, Device, Pool
 from eNMS.base.properties import (
     boolean_properties,
     device_public_properties,
+    link_public_properties,
     pool_public_properties,
     pretty_names,
     cls_to_properties

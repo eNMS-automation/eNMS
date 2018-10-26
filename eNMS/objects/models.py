@@ -130,21 +130,22 @@ AbstractPool = type('AbstractPool', (CustomBase,), {
     '__tablename__': 'AbstractPool',
     'id': Column(Integer, ForeignKey('CustomBase.id'), primary_key=True),
     '__mapper_args__': {'polymorphic_identity': 'AbstractPool'},
-    **{
-        **{
-            f'device_{property}': Column(String),
-            f'device_{property}_regex': Column(Boolean)
-            for property, values in device_
-    }
+    **{**{
+        f'device_{property}': Column(String)
+        for property in device_public_properties
+    }, **{
+        f'device_{property}_regex': Column(Boolean)
+        for property in device_public_properties
+    }}
 })
     
 
 
-class Pool(CustomBase):
+class Pool(AbstractPool):
 
     __tablename__ = 'Pool'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, ForeignKey('AbstractPool.id'), primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)
     devices = relationship(

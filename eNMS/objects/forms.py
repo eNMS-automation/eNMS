@@ -10,6 +10,7 @@ from wtforms import (
 )
 
 from eNMS.base.properties import (
+    custom_properties,
     link_public_properties,
     link_subtypes,
     device_public_properties,
@@ -27,17 +28,12 @@ class AddObjectForm(FlaskForm):
 
 
 def configure_device_form(cls):
-    cls.device_properties = device_public_properties
-    cls.link_properties = link_public_properties
-    for property in device_public_properties:
-        setattr(cls, 'device_' + property, TextField(property))
-        setattr(cls, 'device_' + property + '_regex', BooleanField('Regex'))
-    for property in link_public_properties:
-        setattr(cls, 'link_' + property, TextField(property))
-        setattr(cls, 'link_' + property + '_regex', BooleanField('Regex'))
+    for property in custom_properties:
+        setattr(cls, property, TextField())
     return cls
 
 
+@configure_device_form
 class AddDevice(AddObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)

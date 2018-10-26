@@ -126,6 +126,20 @@ class Link(Object):
         return properties
 
 
+AbstractPool = type('AbstractPool', (CustomBase,), {
+    '__tablename__': 'AbstractPool',
+    'id': Column(Integer, ForeignKey('CustomBase.id'), primary_key=True),
+    '__mapper_args__': {'polymorphic_identity': 'AbstractPool'},
+    **{
+        **{
+            f'device_{property}': Column(String),
+            f'device_{property}_regex': Column(Boolean)
+            for property, values in device_
+    }
+})
+    
+
+
 class Pool(CustomBase):
 
     __tablename__ = 'Pool'
@@ -148,28 +162,6 @@ class Pool(CustomBase):
         secondary=job_pool_table,
         back_populates='pools'
     )
-    device_name = Column(String)
-    device_name_regex = Column(Boolean)
-    device_description = Column(String)
-    device_description_regex = Column(Boolean)
-    device_model = Column(String)
-    device_model_regex = Column(Boolean)
-    device_location = Column(String)
-    device_location_regex = Column(Boolean)
-    device_subtype = Column(String)
-    device_subtype_regex = Column(Boolean)
-    device_vendor = Column(String)
-    device_vendor_regex = Column(Boolean)
-    device_operating_system = Column(String)
-    device_operating_system_regex = Column(Boolean)
-    device_os_version = Column(String)
-    device_os_version_regex = Column(Boolean)
-    device_ip_address = Column(String)
-    device_ip_address_regex = Column(Boolean)
-    device_longitude = Column(String)
-    device_longitude_regex = Column(Boolean)
-    device_latitude = Column(String)
-    device_latitude_regex = Column(Boolean)
     link_name = Column(String)
     link_name_regex = Column(Boolean)
     link_description = Column(String)

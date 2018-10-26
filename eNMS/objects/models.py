@@ -220,10 +220,10 @@ class Pool(CustomBase):
             else search(getattr(self, f'{obj.class_type}_{prop}'), str(value))
             for prop, value in obj.__dict__.items()
             # we consider only the properties in the form
-            if f'{obj.class_type}_{prop}' in self.__dict__ and
+            if f'{obj.class_type}_{prop}' in self.__dict__
             # providing that the property field in the form is not empty
             # (empty field <==> property ignored)
-            getattr(self, f'{obj.class_type}_{prop}')
+            and getattr(self, f'{obj.class_type}_{prop}')
         )
 
     def filter_objects(self):

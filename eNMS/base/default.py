@@ -27,8 +27,8 @@ def create_service_classes():
             if type(col.type) == Boolean:
                 boolean_properties.append(col.key)
             if (
-                type(col.type) == PickleType and
-                hasattr(cls, f'{col.key}_values')
+                type(col.type) == PickleType
+                and hasattr(cls, f'{col.key}_values')
             ):
                 property_types[col.key] = list
             else:

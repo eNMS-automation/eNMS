@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
 from importlib import import_module
-import logging
+from logging import basicConfig, DEBUG, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 
 auth = HTTPBasicAuth()
@@ -113,15 +113,15 @@ def configure_errors(app):
 
 
 def configure_logs(app):
-    logging.basicConfig(
-        level=logging.DEBUG,
+    basicConfig(
+        level=DEBUG,
         handlers=[
             RotatingFileHandler(
                 app.path / 'logs' / 'enms.log',
                 maxBytes=2000000,
                 backupCount=10
             ),
-            logging.StreamHandler()
+            StreamHandler()
         ]
     )
 
@@ -140,4 +140,5 @@ def create_app(path, config):
     configure_errors(app)
     if app.config['USE_VAULT']:
         app.vault_client = create_vault_client(app)
+    info('eNMS starting')
     return app

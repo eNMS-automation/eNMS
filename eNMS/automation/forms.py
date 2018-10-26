@@ -16,7 +16,7 @@ class JobForm(FlaskForm):
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
-    number_of_retry = IntegerField(default=1)
+    number_of_retry = IntegerField('Number of retries', default=0)
     time_between_retries = IntegerField(
         'Time between retries (in seconds)',
         default=10

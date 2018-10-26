@@ -25,7 +25,7 @@ class Job(CustomBase):
     hidden = Column(Boolean, default=False)
     name = Column(String, unique=True)
     description = Column(String)
-    number_of_retry = Column(Integer, default=1)
+    number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
@@ -81,12 +81,12 @@ class Job(CustomBase):
 
     def try_run(self, payload=None, targets=None):
         now = str(datetime.now())
-        for i in range(self.number_of_retry):
+        for i in range(self.number_of_retry + 1):
             results = self.run(payload, targets)
             self.logs[now] = results
             if results['success']:
                 break
-            if i != self.number_of_retry - 1:
+            if i != self.number_of_retry:
                 sleep(self.time_between_retries)
         return results
 

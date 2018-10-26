@@ -13,6 +13,7 @@ from eNMS.base.associations import (
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import sql_types
 from eNMS.base.properties import (
+    cls_to_properties,
     link_public_properties,
     device_public_properties,
     pretty_names
@@ -45,11 +46,18 @@ def custom_device():
         return Device
     with open(filepath, 'r') as properties:
         dict_properties = load(properties)
+        print({property: 
+                    Column(sql_types[values['type']], default=values['default'])
+                    for property, values in dict_properties.items()
+                })
         device_public_properties.extend(list(dict_properties))
+        pretty_names.update({k: k for k in dict_properties})
+        cls_to_properties['Device'].extend(list(dict_properties))
         return type('CustomDevice', (Object,), {
             '__tablename__': 'CustomDevice',
             'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
-            **{property: 
+            '__mapper_args__': {'polymorphic_identity': 'CustomDevice'},
+            **{property:
                 Column(sql_types[values['type']], default=values['default'])
                 for property, values in dict_properties.items()
             }

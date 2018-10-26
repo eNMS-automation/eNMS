@@ -33,11 +33,13 @@ class CustomBase(db.Model):
                 value = loads(value) if value else {}
             elif property_type in [float, int]:
                 value = property_type(value or 0)
+            print(property, value)
             setattr(self, property, value)
 
     @property
     def properties(self):
         class_name, result = self.__tablename__, {}
+        print(class_name, cls_to_properties[class_name])
         for property in cls_to_properties[class_name]:
             try:
                 dumps(getattr(self, property))

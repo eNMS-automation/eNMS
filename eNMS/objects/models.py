@@ -40,10 +40,10 @@ class Object(CustomBase):
     }
 
 
-def custom_device():
+def parent_device():
     filepath = environ.get('PATH_CUSTOM_PROPERTIES')
     if not filepath:
-        return Device
+        return Object
     with open(filepath, 'r') as properties:
         dict_properties = load(properties)
         print({property: 
@@ -63,12 +63,18 @@ def custom_device():
             }
         })
 
+ParentDevice = parent_device()
 
-class Device(custom_device()):
+
+class Device(ParentDevice):
 
     __tablename__ = 'Device'
 
-    id = Column(Integer, ForeignKey('CustomDevice.id'), primary_key=True)
+    id = Column(
+        Integer,
+        ForeignKey(ParentDevice.id),
+        primary_key=True
+    )
     operating_system = Column(String)
     os_version = Column(String)
     ip_address = Column(String)

@@ -1,15 +1,15 @@
-base_properties = (
+base_properties = [
     'id',
     'name',
     'description'
-)
+]
 
-object_common_properties = base_properties + (
+object_common_properties = base_properties + [
     'subtype',
     'model',
     'location',
     'vendor'
-)
+]
 
 device_subtypes = {
     'antenna': 'Antenna',
@@ -40,36 +40,35 @@ link_subtype_to_color = {
     'pseudowire': '#902bec'
 }
 
-device_properties = object_common_properties + (
+device_public_properties = object_common_properties[1:] + [
     'operating_system',
     'os_version',
     'ip_address',
     'longitude',
     'latitude',
-    'port',
-    'enable_password'
-)
+    'port'
+]
 
-task_properties = base_properties + (
+task_properties = base_properties + [
     'creation_time',
     'start_date',
     'end_date',
     'frequency',
     'status'
-)
+]
 
 task_public_properties = task_properties[1:]
 
-link_properties = object_common_properties + (
+link_properties = object_common_properties + [
     'source',
     'destination'
-)
+]
 
 link_public_properties = link_properties[1:]
 
 pool_public_properties = base_properties[1:]
 
-job_public_properties = (
+job_public_properties = [
     'name',
     'type',
     'description',
@@ -78,55 +77,51 @@ job_public_properties = (
     'waiting_time',
     'number_of_retry',
     'time_between_retries'
-)
+]
 
 service_public_properties = job_public_properties
 
-workflow_public_properties = job_public_properties + (
+workflow_public_properties = job_public_properties + [
     'vendor',
     'operating_system',
     'multiprocessing',
     'status'
-)
+]
 
-# Public properties
-
-device_public_properties = device_properties[1:-1]
-
-service_table_properties = (
+service_table_properties = [
     'name',
     'type',
     'description',
     'number_of_retry',
     'time_between_retries'
-)
+]
 
-workflow_table_properties = (
+workflow_table_properties = [
     'name',
     'description',
     'vendor',
     'operating_system',
     'number_of_retry',
     'time_between_retries'
-)
+]
 
-workflow_edge_properties = (
+workflow_edge_properties = [
     'name',
     'type'
-)
+]
 
-user_public_properties = (
+user_public_properties = [
     'name',
     'email'
-)
+]
 
-user_serialized_properties = (
+user_serialized_properties = [
     'name',
     'email',
     'permissions'
-)
+]
 
-user_permissions = (
+user_permissions = [
     'Admin',
     'Connect to device',
     'Admin Section',
@@ -140,21 +135,21 @@ user_permissions = (
     'Edit Automation Section',
     'Edit Scheduling Section',
     'Edit Logs Section'
-)
+]
 
-log_public_properties = (
+log_public_properties = [
     'source',
     'content'
-)
+]
 
-log_rule_public_properties = log_public_properties + (
+log_rule_public_properties = log_public_properties + [
     'name',
     'sourceregex',
     'contentregex',
     'jobs'
-)
+]
 
-parameters_public_properties = (
+parameters_public_properties = [
     'default_longitude',
     'default_latitude',
     'default_zoom_level',
@@ -163,9 +158,9 @@ parameters_public_properties = (
     'opennms_rest_api',
     'opennms_devices',
     'opennms_login'
-)
+]
 
-task_serialized_properties = (
+task_serialized_properties = [
     'id',
     'name',
     'creation_time',
@@ -173,7 +168,7 @@ task_serialized_properties = (
     'start_date',
     'end_date',
     'frequency'
-)
+]
 
 cls_to_properties = {
     'Device': device_public_properties,
@@ -189,7 +184,7 @@ cls_to_properties = {
     'Task': task_serialized_properties
 }
 
-cls_to_properties = {k: ('id',) + v for k, v in cls_to_properties.items()}
+cls_to_properties = {k: ['id'] + v for k, v in cls_to_properties.items()}
 
 default_diagrams_properties = {
     'device': 'model',
@@ -200,38 +195,38 @@ default_diagrams_properties = {
     'task': 'type'
 }
 
-object_diagram_properties = (
+object_diagram_properties = [
     'model',
     'vendor',
     'subtype',
     'location'
-)
+]
 
-device_diagram_properties = object_diagram_properties + (
+device_diagram_properties = object_diagram_properties + [
     'operating_system',
     'os_version'
-)
+]
 
-user_diagram_properties = (
+user_diagram_properties = [
     'name',
-)
+]
 
-workflow_diagram_properties = (
+workflow_diagram_properties = [
     'type',
     'vendor',
     'operating_system'
-)
+]
 
-service_diagram_properties = (
+service_diagram_properties = [
     'type',
     'device_multiprocessing'
-)
+]
 
-task_diagram_properties = (
+task_diagram_properties = [
     'type',
     'status',
     'frequency'
-)
+]
 
 type_to_diagram_properties = {
     'device': device_diagram_properties,

@@ -6,7 +6,7 @@ from sqlalchemy import Boolean, exc, Integer, String, Float
 from eNMS import db
 
 
-sql_columns = {
+sql_types = {
     'boolean': Boolean,
     'float': Float,
     'integer': Integer,

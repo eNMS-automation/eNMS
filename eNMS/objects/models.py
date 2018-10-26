@@ -39,13 +39,8 @@ class Object(CustomBase):
 
 
 with open(environ.get('PATH_CUSTOM_PROPERTIES'), 'r') as properties:
-    # print(properties)
-    # print({property: 
-    #             Column(
-    #                 sql_columns[values['type']],
-    #                 default=values['default']
-    #             ) for property, values in load(properties).items()
-    #         })
+    dict_properties = load(properties)
+    device_public_properties.extend(list(dict_properties))
     CustomDevice = type(
         'CustomDevice',
         (Object,),
@@ -53,10 +48,8 @@ with open(environ.get('PATH_CUSTOM_PROPERTIES'), 'r') as properties:
             '__tablename__': 'CustomDevice',
             'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
             **{property: 
-                Column(
-                    sql_columns[values['type']],
-                    default=values['default']
-                ) for property, values in load(properties).items()
+                Column(sql_types[values['type']], default=values['default'])
+                for property, values in dict_properties.items()
             }
         }
     )

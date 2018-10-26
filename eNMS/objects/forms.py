@@ -41,8 +41,6 @@ class AddDevice(AddObjectForm):
     username = TextField()
     password = PasswordField()
     secret_password = PasswordField()
-    property1 = FloatField()
-    property2 = TextField()
 
 
 class AddLink(AddObjectForm):

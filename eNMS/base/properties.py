@@ -1,3 +1,16 @@
+from os import environ
+from yaml import load
+
+
+def custom_properties():
+    filepath = environ.get('PATH_CUSTOM_PROPERTIES')
+    if not filepath:
+        return {}
+    with open(filepath, 'r') as properties:
+        return load(properties)
+
+custom_properties = custom_properties()
+
 base_properties = [
     'id',
     'name',

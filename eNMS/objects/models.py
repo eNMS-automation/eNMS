@@ -1,8 +1,6 @@
-from os import environ
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
-from yaml import load, YAMLError
 
 from eNMS.base.associations import (
     pool_device_table,

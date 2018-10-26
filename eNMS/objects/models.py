@@ -11,10 +11,11 @@ from eNMS.base.associations import (
     job_pool_table
 )
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import sql_columns
+from eNMS.base.helpers import sql_types
 from eNMS.base.properties import (
     link_public_properties,
-    device_public_properties
+    device_public_properties,
+    pretty_names
 )
 
 
@@ -38,24 +39,24 @@ class Object(CustomBase):
     }
 
 
-with open(environ.get('PATH_CUSTOM_PROPERTIES'), 'r') as properties:
-    dict_properties = load(properties)
-    device_public_properties.extend(list(dict_properties))
-    CustomDevice = type(
-        'CustomDevice',
-        (Object,),
-        {
+def custom_device():
+    filepath = environ.get('PATH_CUSTOM_PROPERTIES')
+    if not filepath:
+        return Device
+    with open(filepath, 'r') as properties:
+        dict_properties = load(properties)
+        device_public_properties.extend(list(dict_properties))
+        return type('CustomDevice', (Object,), {
             '__tablename__': 'CustomDevice',
             'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
             **{property: 
                 Column(sql_types[values['type']], default=values['default'])
                 for property, values in dict_properties.items()
             }
-        }
-    )
+        })
 
 
-class Device(CustomDevice):
+class Device(custom_device()):
 
     __tablename__ = 'Device'
 

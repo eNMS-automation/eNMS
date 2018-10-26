@@ -320,7 +320,6 @@ $('#network').contextMenu({
  * Start the workflow.
  */
 function runWorkflow() { // eslint-disable-line no-unused-vars
-  console.log(workflow);
   workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
   runJob(workflow.id);
   workflowInit = true;

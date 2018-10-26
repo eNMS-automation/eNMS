@@ -176,7 +176,7 @@ task_serialized_properties = (
 )
 
 cls_to_properties = {
-    'Device': device_properties,
+    'Device': device_public_properties,
     'Link': link_public_properties,
     'Pool': pool_public_properties,
     'Service': service_public_properties,

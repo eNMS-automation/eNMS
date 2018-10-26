@@ -116,6 +116,13 @@ function showObjectTypeModal(type) { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Export topology.
+ */
+function exportTopology() { // eslint-disable-line no-unused-vars
+  call('/objects/export_topology', function() {});
+}
+
+/**
  * Import topology.
  * @param {objType} objType - Type of object.
  */

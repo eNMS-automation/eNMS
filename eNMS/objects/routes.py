@@ -12,7 +12,7 @@ from subprocess import Popen
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
-import xlwt
+from xlwt import Workbook
 
 from eNMS import db
 from eNMS.admin.models import Parameters
@@ -31,7 +31,6 @@ from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
 from eNMS.objects.models import Link, Device, Pool
 from eNMS.base.properties import (
     boolean_properties,
-    link_public_properties,
     device_public_properties,
     pool_public_properties,
     pretty_names,
@@ -98,50 +97,6 @@ def pool_management():
         fields=pool_public_properties,
         pools=Pool.serialize()
     )
-
-
-@post(bp, '/export_topology', 'Inventory Section')
-def objects_download():
-    devices = Device.serialize()
-    ws = {}
-    wb = xlwt.Workbook()
-    style0 = xlwt.easyxf(
-        'font: name Times New Roman, color-index black, bold on',
-        num_format_str='#,##0.00'
-    )
-    style1 = xlwt.easyxf(num_format_str='#,##0.00')
-    header_index = 0
-    for tab, header in cls_to_properties.items():
-        column = 0
-        ws[tab] = wb.add_sheet(tab)
-        ws[tab].row_index = 1
-        for entry in header:
-            ws[tab].write(header_index, column, entry, style0)
-            column = column + 1
-    column = 0
-    for device in devices:
-        for k, v in device.items():
-            if k is not 'id':
-                try:
-                    ws[device['type']].write(
-                        ws[device['type']].row_index,
-                        column,
-                        v,
-                        style1
-                    )
-                    column = column + 1
-                except Exception:
-                    continue
-        column = 0
-        ws[device['type']].row_index = ws[device['type']].row_index + 1
-    obj_file = Path.cwd() / 'projects' / 'objects.xls'
-    wb.save(str(obj_file))
-    sfd = send_file(
-        filename_or_fp=str(obj_file),
-        as_attachment=True,
-        attachment_filename='objects.xls'
-    )
-    return sfd
 
 
 @post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
@@ -215,6 +170,19 @@ def import_topology():
                 objects[object_type].append(factory(cls, **kwargs).serialized)
             db.session.commit()
     return jsonify(objects)
+
+
+@post(bp, '/export_topology', 'Inventory Section')
+def export_topology():
+    workbook = Workbook()
+    for cls in (Device, Link):
+        sheet, objects = workbook.add_sheet(cls.__tablename__), cls.serialize()
+        for index, property in enumerate(cls_to_properties[cls.__tablename__]):
+            sheet.write(0, index, property)
+            for obj_index, obj in enumerate(objects, 1):
+                sheet.write(obj_index, index, obj[property])
+    workbook.save(Path.cwd() / 'projects' / 'objects.xls')
+    return jsonify(True)
 
 
 @post(bp, '/process_pool', 'Edit Inventory Section')

@@ -9,7 +9,7 @@ from wtforms import (
 )
 
 
-class JobForm(FlaskForm)
+class JobForm(FlaskForm):
     id = HiddenField()
     name = TextField()
     description = TextField()

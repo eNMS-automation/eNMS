@@ -18,9 +18,9 @@ from eNMS.automation import bp
 from eNMS.automation.forms import (
     AddJobForm,
     CompareLogsForm,
-    ServiceForm,
+    JobForm,
     WorkflowBuilderForm,
-    WorkflowCreationForm
+    WorkflowForm
 )
 from eNMS.automation.helpers import scheduler_job
 from eNMS.automation.models import (
@@ -34,7 +34,7 @@ from eNMS.automation.models import (
 
 @get(bp, '/service_management', 'Automation Section')
 def service_management():
-    service_form = ServiceForm(request.form)
+    service_form = JobForm(request.form)
     service_form.devices.choices = Device.choices()
     service_form.pools.choices = Pool.choices()
     return render_template(
@@ -51,7 +51,7 @@ def service_management():
 
 @get(bp, '/workflow_management', 'Automation Section')
 def workflow_management():
-    workflow_creation_form = WorkflowCreationForm(request.form)
+    workflow_creation_form = WorkflowForm(request.form)
     workflow_creation_form.devices.choices = Device.choices()
     workflow_creation_form.pools.choices = Pool.choices()
     return render_template(
@@ -72,7 +72,7 @@ def workflow_builder(workflow_id=None):
     workflow_builder_form = WorkflowBuilderForm(request.form)
     workflow_builder_form.workflow.choices = Workflow.choices()
     workflow = fetch(Workflow, id=workflow_id)
-    service_form = ServiceForm(request.form)
+    service_form = JobForm(request.form)
     service_form.devices.choices = Device.choices()
     service_form.pools.choices = Pool.choices()
     return render_template(

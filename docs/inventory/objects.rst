@@ -79,3 +79,34 @@ Some properties are mandatory:
  * Source and destination: a link needs a source and a destination to be created.
 
 .. tip:: In order to visualize the network topology on a map, devices must have geographical coordinates (longitude and latitude).
+
+Custom properties
+-----------------
+
+It is possible to add custom properties to a device.
+There are four types of properties that you can add: string, integer, float, and boolean.
+
+Custom properties are read from a YAML file when eNMS starts.
+The YAML file must have the following format:
+
+::
+
+ property1:
+     type: "integer"
+     default: 4
+ property2:
+   type: string
+   default: "a"
+
+This YAML file will create two properties:
+- "property1": an integer property defaulting to 4
+- "property2": a string property defaulting to "a"
+
+.. note:: You can find examples of YAML files with custom propertyes in :guilabel:`eNMS/tests/custom_properties`.
+
+For eNMS to know where the file with custom properties is located on the server, you must set the ``PATH_CUSTOM_PROPERTIES`` environment variable to the path of the YAML file.
+
+::
+
+ # set the PATH_CUSTOM_PROPERTIES environment variable
+ export PATH_CUSTOM_PROPERTIES=/path/to/yaml/file

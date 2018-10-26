@@ -1,3 +1,4 @@
+from logging import info
 from napalm import get_network_driver
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
@@ -59,7 +60,9 @@ def scheduler_job(job_id):
     with scheduler.app.app_context():
         job = fetch(Job, id=job_id)
         job.status = {'state': 'Running'}
+        info(f'{job.name}: starting.')
         db.session.commit()
         job.try_run()
+        info(f'{job.name}: finished.')
         job.status['state'] = 'Idle'
         db.session.commit()

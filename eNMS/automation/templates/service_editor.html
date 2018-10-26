@@ -22,6 +22,22 @@
           <div class="form-group">
             {{ service_form.description(class="form-control") }}
           </div>
+          <label>Devices (optional: can be defined in the workflow)</label>
+          <div class='form-group'>
+            {{ service_form.devices(class="form-control") }}
+          </div>
+          <label>Pools (optional: can be defined in the workflow)</label>
+          <div class='form-group'>
+            {{ service_form.pools(class="form-control") }}
+          </div>
+          <label>Vendor</label>
+          <div class="form-group">
+            {{ service_form.vendor(class="form-control") }}
+          </div>
+          <label>Operating System</label>
+          <div class="form-group">
+            {{ service_form.operating_system(class="form-control") }}
+          </div>
           <label>Waiting time (in seconds)</label>
           <div class='form-group'>
             {{ service_form.waiting_time(class="form-control", required=true) }}
@@ -35,14 +51,6 @@
             {{ service_form.time_between_retries(class="form-control", required=true) }}
           </div>
           <div id="html-form"></div>
-          <label>Devices (optional: can be defined in the workflow)</label>
-          <div class='form-group'>
-            {{ service_form.devices(class="form-control") }}
-          </div>
-          <label>Pools (optional: can be defined in the workflow)</label>
-          <div class='form-group'>
-            {{ service_form.pools(class="form-control") }}
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -100,15 +100,15 @@ if (workflow) {
  * @param {id} id - Id.
  */
 function setStart(id) {
-  console.log(id);
+  saveEdge({from: 1, to: id, type: true});
 }
 
 /**
- * Add job to the workflow object (back-end).
- * @param {job} job - job to add to the workflow.
+ * Set job as end of the workflow.
+ * @param {id} id - Id.
  */
-function setStart(id) {
-  console.log(id);
+function setEnd(id) {
+  saveEdge({from: id, to: 2, type: true});
 }
 
 /**

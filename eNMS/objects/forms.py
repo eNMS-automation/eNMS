@@ -17,6 +17,23 @@ from eNMS.base.properties import (
     device_subtypes
 )
 
+def configure_device_form(cls):
+    for property in custom_properties:
+        setattr(cls, property, TextField())
+    return cls
+
+
+def configure_pool_form(cls):
+    cls.device_properties = device_public_properties
+    cls.link_properties = link_public_properties
+    for property in device_public_properties:
+        setattr(cls, 'device_' + property, TextField(property))
+        setattr(cls, 'device_' + property + '_regex', BooleanField('Regex'))
+    for property in link_public_properties:
+        setattr(cls, 'link_' + property, TextField(property))
+        setattr(cls, 'link_' + property + '_regex', BooleanField('Regex'))
+    return cls
+
 
 class AddObjectForm(FlaskForm):
     id = HiddenField()
@@ -25,12 +42,6 @@ class AddObjectForm(FlaskForm):
     location = TextField()
     vendor = TextField()
     model = TextField()
-
-
-def configure_device_form(cls):
-    for property in custom_properties:
-        setattr(cls, property, TextField())
-    return cls
 
 
 @configure_device_form
@@ -53,18 +64,6 @@ class AddLink(AddObjectForm):
     subtype = SelectField(choices=link_types)
     source = SelectField()
     destination = SelectField()
-
-
-def configure_pool_form(cls):
-    cls.device_properties = device_public_properties
-    cls.link_properties = link_public_properties
-    for property in device_public_properties:
-        setattr(cls, 'device_' + property, TextField(property))
-        setattr(cls, 'device_' + property + '_regex', BooleanField('Regex'))
-    for property in link_public_properties:
-        setattr(cls, 'link_' + property, TextField(property))
-        setattr(cls, 'link_' + property + '_regex', BooleanField('Regex'))
-    return cls
 
 
 @configure_pool_form

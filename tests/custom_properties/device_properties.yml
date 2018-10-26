@@ -1,0 +1,6 @@
+property1:
+    type: "integer"
+    default: 4
+property2:
+  type: string
+  default: "a"

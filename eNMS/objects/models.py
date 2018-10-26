@@ -2,6 +2,7 @@ from os import environ
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
+from yaml import load, YAMLError
 
 from eNMS.base.associations import (
     pool_device_table,
@@ -10,6 +11,7 @@ from eNMS.base.associations import (
     job_pool_table
 )
 from eNMS.base.custom_base import CustomBase
+from eNMS.base.helpers import sql_columns
 from eNMS.base.properties import (
     link_public_properties,
     device_public_properties
@@ -36,19 +38,28 @@ class Object(CustomBase):
     }
 
 
-# open a yaml file
-path = environ.get('PATH_DEVICE_PROPERTIES')
-
-
-# CustomDevice = type(
-#     'CustomDevice',
-#     (Object,),
-#     {
-#         '__tablename__': 'CustomDevice',
-#         'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
-#         'test': Column(Integer, default='a')
-#     }
-# )
+with open(environ.get('PATH_CUSTOM_PROPERTIES'), 'r') as properties:
+    # print(properties)
+    # print({property: 
+    #             Column(
+    #                 sql_columns[values['type']],
+    #                 default=values['default']
+    #             ) for property, values in load(properties).items()
+    #         })
+    CustomDevice = type(
+        'CustomDevice',
+        (Object,),
+        {
+            '__tablename__': 'CustomDevice',
+            'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
+            **{property: 
+                Column(
+                    sql_columns[values['type']],
+                    default=values['default']
+                ) for property, values in load(properties).items()
+            }
+        }
+    )
 
 
 class Device(CustomDevice):

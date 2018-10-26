@@ -17,6 +17,7 @@ from eNMS.base.properties import (
     device_subtypes
 )
 
+
 def configure_device_form(cls):
     for property in custom_properties:
         setattr(cls, property, TextField())

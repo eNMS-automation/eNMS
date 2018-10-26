@@ -41,8 +41,8 @@ ParentDevice = type('CustomDevice', (Object,), {
     '__tablename__': 'CustomDevice',
     'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
     '__mapper_args__': {'polymorphic_identity': 'CustomDevice'},
-    **{property:
-        Column(sql_types[values['type']], default=values['default'])
+    **{
+        property: Column(sql_types[values['type']], default=values['default'])
         for property, values in custom_properties.items()
     }
 }) if custom_properties else Object
@@ -126,12 +126,15 @@ class Link(Object):
 AbstractPool = type('AbstractPool', (CustomBase,), {
     '__tablename__': 'AbstractPool',
     'id': Column(Integer, primary_key=True),
-    '__mapper_args__': {'polymorphic_identity': 'AbstractPool'},
-    **{**{f'device_{p}': Column(String) for p in device_public_properties},
-    **{f'device_{p}_regex': Column(Boolean) for p in device_public_properties},
-    **{f'link_{p}': Column(String) for p in link_public_properties},
-    **{f'link_{p}_regex': Column(Boolean) for p in link_public_properties
-    }}
+    '__mapper_args__': {'polymorphic_identity': 'AbstractPool'}, **{
+        **{f'device_{p}': Column(String) for p in device_public_properties},
+        **{
+            f'device_{p}_regex': Column(Boolean)
+            for p in device_public_properties
+        },
+        **{f'link_{p}': Column(String) for p in link_public_properties},
+        **{f'link_{p}_regex': Column(Boolean) for p in link_public_properties}
+    }
 })
 
 

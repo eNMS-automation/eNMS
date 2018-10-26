@@ -134,7 +134,6 @@ def connection(id):
 
 @post(bp, '/edit_object', 'Edit Inventory Section')
 def edit_object():
-    print(request.form.to_dict())
     cls, kwargs = process_kwargs(app, **request.form.to_dict())
     obj = factory(cls, **kwargs)
     return jsonify(obj.serialized)

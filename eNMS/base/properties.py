@@ -9,6 +9,7 @@ def get_custom_properties():
     with open(filepath, 'r') as properties:
         return load(properties)
 
+
 custom_properties = get_custom_properties()
 
 base_properties = [

@@ -22,7 +22,8 @@ class Job(CustomBase):
     __tablename__ = 'Job'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(120), unique=True)
+    hidden = Column(Boolean, default=False)
+    name = Column(String, unique=True)
     description = Column(String)
     number_of_retry = Column(Integer, default=1)
     time_between_retries = Column(Integer, default=10)

@@ -1,4 +1,5 @@
 from json import dumps, loads
+from sqlalchemy import Boolean, Column
 
 from eNMS import db
 from eNMS.base.helpers import fetch
@@ -33,6 +34,7 @@ class CustomBase(db.Model):
                 value = loads(value) if value else {}
             elif property_type in [float, int]:
                 value = property_type(value or 0)
+            print(property, value)
             setattr(self, property, value)
 
     @property
@@ -50,13 +52,18 @@ class CustomBase(db.Model):
     def serialized(self):
         return self.properties
 
+    @property
+    def visible(self):
+        return not (hasattr(self, 'hidden') and self.hidden)
+
     @classmethod
     def choices(cls):
-        return [(obj.id, obj.name) for obj in cls.query.all()]
+        return [(obj.id, obj.name) for obj in cls.query.all() if obj.visible]
 
     @classmethod
     def serialize(cls):
-        return [obj.serialized for obj in cls.query.all()]
+        print(cls, [(obj.name, obj.hidden) for obj in cls.query.all()])
+        return [obj.serialized for obj in cls.query.all() if obj.visible]
 
 
 def factory(cls, **kwargs):

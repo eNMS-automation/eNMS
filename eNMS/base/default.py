@@ -95,12 +95,14 @@ def create_default_services():
         {
             'type': service_classes['swiss_army_knife_service'],
             'name': 'Start',
-            'description': 'Start point of a workflow'
+            'description': 'Start point of a workflow',
+            'hidden': True
         },
         {
             'type': service_classes['swiss_army_knife_service'],
             'name': 'End',
-            'description': 'End point of a workflow'
+            'description': 'End point of a workflow',
+            'hidden': True
         },
         {
             'type': service_classes['configure_bgp_service'],

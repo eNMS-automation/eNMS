@@ -20,6 +20,7 @@ class Object(CustomBase):
     __tablename__ = 'Object'
 
     id = Column(Integer, primary_key=True)
+    hidden = Column(Boolean, default=False)
     name = Column(String, unique=True)
     subtype = Column(String)
     description = Column(String)
@@ -27,7 +28,6 @@ class Object(CustomBase):
     location = Column(String)
     vendor = Column(String)
     type = Column(String)
-    visible = Column(Boolean, default=True)
 
     __mapper_args__ = {
         'polymorphic_identity': 'Object',

@@ -25,8 +25,17 @@ class AddObjectForm(FlaskForm):
     vendor = TextField()
     model = TextField()
 
-# devices can be added to the database either one by one via the AddDevice
-# form, or all at once by importing an Excel or a CSV file.
+
+def configure_device_form(cls):
+    cls.device_properties = device_public_properties
+    cls.link_properties = link_public_properties
+    for property in device_public_properties:
+        setattr(cls, 'device_' + property, TextField(property))
+        setattr(cls, 'device_' + property + '_regex', BooleanField('Regex'))
+    for property in link_public_properties:
+        setattr(cls, 'link_' + property, TextField(property))
+        setattr(cls, 'link_' + property + '_regex', BooleanField('Regex'))
+    return cls
 
 
 class AddDevice(AddObjectForm):
@@ -50,7 +59,7 @@ class AddLink(AddObjectForm):
     destination = SelectField()
 
 
-def configure_form(cls):
+def configure_pool_form(cls):
     cls.device_properties = device_public_properties
     cls.link_properties = link_public_properties
     for property in device_public_properties:
@@ -62,7 +71,7 @@ def configure_form(cls):
     return cls
 
 
-@configure_form
+@configure_pool_form
 class AddPoolForm(FlaskForm):
     name = TextField()
     description = TextField()

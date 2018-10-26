@@ -11,10 +11,9 @@ from eNMS.base.associations import (
 from eNMS.base.custom_base import CustomBase
 from eNMS.base.helpers import sql_types
 from eNMS.base.properties import (
-    cls_to_properties,
+    custom_properties,
     link_public_properties,
     device_public_properties,
-    pretty_names
 )
 
 
@@ -39,23 +38,15 @@ class Object(CustomBase):
 
 
 def parent_device():
-    filepath = environ.get('PATH_CUSTOM_PROPERTIES')
-    if not filepath:
-        return Object
-    with open(filepath, 'r') as properties:
-        dict_properties = load(properties)
-        device_public_properties.extend(list(dict_properties))
-        pretty_names.update({k: k for k in dict_properties})
-        cls_to_properties['Device'].extend(list(dict_properties))
-        return type('CustomDevice', (Object,), {
-            '__tablename__': 'CustomDevice',
-            'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
-            '__mapper_args__': {'polymorphic_identity': 'CustomDevice'},
-            **{property:
-                Column(sql_types[values['type']], default=values['default'])
-                for property, values in dict_properties.items()
-            }
-        })
+    return type('CustomDevice', (Object,), {
+        '__tablename__': 'CustomDevice',
+        'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
+        '__mapper_args__': {'polymorphic_identity': 'CustomDevice'},
+        **{property:
+            Column(sql_types[values['type']], default=values['default'])
+            for property, values in custom_properties.items()
+        }
+    }) if custom_properties else Object
 
 ParentDevice = parent_device()
 

@@ -2,14 +2,14 @@ from os import environ
 from yaml import load
 
 
-def custom_properties():
+def get_custom_properties():
     filepath = environ.get('PATH_CUSTOM_PROPERTIES')
     if not filepath:
         return {}
     with open(filepath, 'r') as properties:
         return load(properties)
 
-custom_properties = custom_properties()
+custom_properties = get_custom_properties()
 
 base_properties = [
     'id',
@@ -60,7 +60,7 @@ device_public_properties = object_common_properties[1:] + [
     'longitude',
     'latitude',
     'port'
-]
+] + list(custom_properties)
 
 task_properties = base_properties + [
     'creation_time',
@@ -296,7 +296,7 @@ pretty_names = {
     'waiting_time': 'Waiting time'
 }
 
+pretty_names.update({k: k for k in custom_properties})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
-
 property_types = {}
 boolean_properties = ['multiprocessing']

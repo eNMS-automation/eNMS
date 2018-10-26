@@ -73,7 +73,9 @@ function displayWorkflow(wf) {
   graph.on('oncontext', function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
-    graph.selectNodes([node]);
+    if (node) {
+      graph.selectNodes([node]);
+    }
     if (typeof node !== 'undefined') {
       $('.node-selection').show();
       $('.global').hide();
@@ -318,6 +320,7 @@ $('#network').contextMenu({
  * Start the workflow.
  */
 function runWorkflow() { // eslint-disable-line no-unused-vars
+  console.log(workflow);
   workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
   runJob(workflow.id);
   workflowInit = true;

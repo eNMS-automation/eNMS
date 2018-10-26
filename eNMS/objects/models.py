@@ -1,3 +1,4 @@
+from os import environ
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import backref, relationship
@@ -35,11 +36,26 @@ class Object(CustomBase):
     }
 
 
-class Device(Object):
+# open a yaml file
+path = environ.get('PATH_DEVICE_PROPERTIES')
+
+
+# CustomDevice = type(
+#     'CustomDevice',
+#     (Object,),
+#     {
+#         '__tablename__': 'CustomDevice',
+#         'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
+#         'test': Column(Integer, default='a')
+#     }
+# )
+
+
+class Device(CustomDevice):
 
     __tablename__ = 'Device'
 
-    id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
+    id = Column(Integer, ForeignKey('CustomDevice.id'), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
     ip_address = Column(String)

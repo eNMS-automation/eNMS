@@ -9,11 +9,15 @@ partial: false
 table: false
 */
 
+function flipAuthenticationCombo() {
+  $('#user-credentials,#device-credentials').prop(
+    'disabled', !$('#authentication').prop('checked')
+  );
+}
+
 (function() {
   $('#authentication').change(function() {
-    $('#user-credentials,#device-credentials').prop(
-      'disabled', !$(this). prop('checked')
-    );
+    flipAuthenticationCombo();
   });
 })();
 
@@ -171,6 +175,7 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
   $('#connection-button').unbind('click');
   $('#connection-button').click(partial(sshConnection, id));
   $('#connection-parameters-form').trigger('reset');
+  flipAuthenticationCombo();
   $('#edit-device').modal('hide');
   $('#connection-parameters').modal('show');
 }

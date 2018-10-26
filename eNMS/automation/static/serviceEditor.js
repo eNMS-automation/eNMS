@@ -84,6 +84,9 @@ function saveService() { // eslint-disable-line no-unused-vars
     }
     const message = `Service '${service.name}'
     ${mode == 'edit' ? 'edited' : 'created'} !`;
+    if (workflowBuilder) {
+      nodes.update({id: service.id, label: service.name})
+    }
     alertify.notify(message, 'success', 5);
     $('#service-editor').modal('hide');
   });

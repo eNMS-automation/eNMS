@@ -108,7 +108,8 @@ service_table_properties = [
     'type',
     'description',
     'number_of_retries',
-    'time_between_retries'
+    'time_between_retries',
+    'state'
 ]
 
 workflow_table_properties = [
@@ -117,7 +118,8 @@ workflow_table_properties = [
     'vendor',
     'operating_system',
     'number_of_retries',
-    'time_between_retries'
+    'time_between_retries',
+    'state'
 ]
 
 workflow_edge_properties = [

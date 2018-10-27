@@ -312,6 +312,6 @@ $.each(counters, function(type, _) {
 (function() {
   $('#doc-link').attr(
     'href',
-    'https://enms.readthedocs.io/en/latest/workflows/index.html'
+    'https://enms.readthedocs.io/en/latest/base/introduction.html'
   )
 })();

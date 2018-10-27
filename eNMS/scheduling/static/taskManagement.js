@@ -117,6 +117,6 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
   }
   $('#doc-link').attr(
     'href',
-    'https://enms.readthedocs.io/en/latest/workflows/index.html'
+    'https://enms.readthedocs.io/en/latest/scheduling/task_management.html'
   )
 })();

@@ -48,11 +48,13 @@ class CustomBase(db.Model):
         return result
 
     @property
-    def serialized(self):
+    def serialized(self, export=False):
+        get = 'id' if export else 'properties'
         properties = self.properties
         for property in serialization_properties:
-            if hasattr(self, property) and hasattr(getattr(self, property), 'properties'):
-                properties[property] = getattr(self, property).properties
+            if hasattr(self, property):
+                if hasattr(getattr(self, property), 'properties'):
+                    properties[property] = getattr(getattr(self, property), get)
             if hasattr(self, f'{property}s'):
                 # a workflow has edges: we need to know not only the edge
                 # properties, but also the properties of its source and

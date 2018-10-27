@@ -132,7 +132,9 @@ workflow_table_properties = [
 
 workflow_edge_properties = [
     'name',
-    'type'
+    'type',
+    'source_id',
+    'destination_id'
 ]
 
 user_public_properties = [

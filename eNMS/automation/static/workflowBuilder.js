@@ -353,7 +353,7 @@ function getWorkflowStatus() {
         $('#current-device,#current-job').empty();
       }
       if (wf.status.jobs) {
-        $.each(wf.status.jobs, (id, r) => colorJob(id, r ? 'green' : 'red'));
+        $.each(wf.status.jobs, (id, r) => colorJob(id, r ? '#32cd32' : '#FF6666'));
       }
       if (workflowInit || wf.state == 'Running') {
         if (workflowInit && wf.state == 'Running') {

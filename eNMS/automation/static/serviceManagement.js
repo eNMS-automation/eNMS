@@ -45,9 +45,9 @@ function getStates() {
   call('/automation/get_states/service', function(states) {
     for (let i = 0; i < states.length; i++) {
       col = table.column('#state');
-      table.cell(i, col).data(states[i]).draw();
+      table.cell(i, col).data(states[i]).draw(false);
     }
-    setTimeout(getStates, 200);
+    setTimeout(getStates, 1000);
   });
 }
 

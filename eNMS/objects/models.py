@@ -115,13 +115,6 @@ class Link(Object):
 
     class_type = 'link'
 
-    @property
-    def serialized(self):
-        properties = {k: str(v) for k, v in self.properties.items()}
-        for prop in ('source', 'destination'):
-            properties[prop + '_properties'] = getattr(self, prop).serialized
-        return properties
-
 
 AbstractPool = type('AbstractPool', (CustomBase,), {
     '__tablename__': 'AbstractPool',

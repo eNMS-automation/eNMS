@@ -61,10 +61,10 @@ for (let i = 0; i < devices.length; i++) {
 
 for (let i = 0; i < links.length; i++) {
   const link = links[i];
-  const sourceLatitude = link.source_properties.latitude;
-  const sourceLongitude = link.source_properties.longitude;
-  const destinationLatitude = link.destination_properties.latitude;
-  const destinationLongitude = link.destination_properties.longitude;
+  const sourceLatitude = link.source.latitude;
+  const sourceLongitude = link.source.longitude;
+  const destinationLatitude = link.destination.latitude;
+  const destinationLongitude = link.destination.longitude;
   const color = link.color;
   const polygonSD = WE.polygon(
   [
@@ -105,10 +105,10 @@ $('#select-filters').on('change', function() {
     polylinesArray = [];
     for (let i = 0; i < objects.links.length; i++) {
       const link = objects.links[i];
-      const sourceLatitude = link.source_properties.latitude;
-      const sourceLongitude = link.source_properties.longitude;
-      const destinationLatitude = link.destination_properties.latitude;
-      const destinationLongitude = link.destination_properties.longitude;
+      const sourceLatitude = link.source.latitude;
+      const sourceLongitude = link.source.longitude;
+      const destinationLatitude = link.destination.latitude;
+      const destinationLongitude = link.destination.longitude;
       const color = link.color;
       const objId = link.id;
       const polygonSD = WE.polygon(

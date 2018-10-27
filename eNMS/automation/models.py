@@ -247,9 +247,3 @@ class Workflow(Job):
             self.status['current_job'] = None
             db.session.commit()
         return results
-
-    @property
-    def serialized(self):
-        properties = super().serialized
-        properties['edges'] = [edge.serialized for edge in self.edges]
-        return properties

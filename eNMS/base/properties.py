@@ -311,7 +311,7 @@ boolean_properties = ['multiprocessing']
 serialization_properties = (
     'destination',
     'device',
-    # 'edge',
+    'edge',
     'job',
     'link',
     'pool',

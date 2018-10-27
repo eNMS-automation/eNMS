@@ -114,12 +114,12 @@ for (let i = 0; i < devices.length; i++) {
 for (let i = 0; i < links.length; i++) {
   const link = links[i];
   let pointA = new L.LatLng(
-    link.source_properties.latitude,
-    link.source_properties.longitude
+    link.source.latitude,
+    link.source.longitude
   );
   let pointB = new L.LatLng(
-    link.destination_properties.latitude,
-    link.destination_properties.longitude
+    link.destination.latitude,
+    link.destination.longitude
   );
 
   const pointList = [pointA, pointB];

@@ -86,6 +86,7 @@ job_public_properties = [
     'name',
     'type',
     'description',
+    'state',
     'logs',
     'positions',
     'waiting_time',

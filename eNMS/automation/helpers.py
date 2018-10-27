@@ -59,10 +59,10 @@ def substitute(data, variables):
 def scheduler_job(job_id):
     with scheduler.app.app_context():
         job = fetch(Job, id=job_id)
-        job.status = {'state': 'Running'}
+        job.state = 'Running'
         info(f'{job.name}: starting.')
         db.session.commit()
         job.try_run()
         info(f'{job.name}: finished.')
-        job.status['state'] = 'Idle'
+        job.state = 'Idle'
         db.session.commit()

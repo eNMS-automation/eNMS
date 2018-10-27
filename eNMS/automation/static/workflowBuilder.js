@@ -340,7 +340,7 @@ function colorJob(id, color) {
 function getWorkflowStatus() {
   if (workflow) {
     call(`/automation/get/${workflow.id}`, function(wf) {
-      $('#status').text(`State: ${wf.status.state || 'Idle'}.`);
+      $('#state').text(`State: ${wf.state}.`);
       if (wf.status.current_device) {
         $('#current-device').text(
           `Current device: ${wf.status.current_device}.`
@@ -355,8 +355,8 @@ function getWorkflowStatus() {
       if (wf.status.jobs) {
         $.each(wf.status.jobs, (id, r) => colorJob(id, r ? 'green' : 'red'));
       }
-      if (workflowInit || wf.status.state == 'Running') {
-        if (workflowInit && wf.status.state == 'Running') {
+      if (workflowInit || wf.state == 'Running') {
+        if (workflowInit && wf.state == 'Running') {
           workflowInit = !workflowInit;
         }
         setTimeout(getWorkflowStatus, 1000);

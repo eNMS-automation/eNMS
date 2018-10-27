@@ -265,13 +265,14 @@ def save_gotty_parameters():
     return jsonify({'success': True})
 
 
-@post(bp, '/export_services', 'Admin Section')
-def export_services():
-    path = current_app.path / 'migrations' / 'export' / 'services.yaml'
-    with open(path, 'w') as migration_file:
-        dump(
-            diagram_classes['service'].serialize(),
-            migration_file,
-            default_flow_style=False
-        )
+@post(bp, '/export', 'Admin Section')
+def export():
+    for cls_name, cls in diagram_classes.items():
+        path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
+        with open(path, 'w') as migration_file:
+            dump(
+                diagram_classes[cls_name].serialize(),
+                migration_file,
+                default_flow_style=False
+            )
     return jsonify(True)

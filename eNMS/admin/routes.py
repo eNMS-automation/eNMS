@@ -13,6 +13,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 from requests import get as http_get
+from yaml import dump
 
 from eNMS import db
 from eNMS.admin import bp
@@ -266,5 +267,11 @@ def save_gotty_parameters():
 
 @post(bp, '/export_services', 'Admin Section')
 def export_services():
-    user_data = request.form.to_dict()
-    return jsonify(factory(User, **user_data).serialized)
+    path = current_app.path / 'migrations' / 'export' / 'services.yaml'
+    with open(path, 'w') as migration_file:
+        dump(
+            diagram_classes['service'].serialize(),
+            migration_file,
+            default_flow_style=False
+        )
+    return jsonify(True)

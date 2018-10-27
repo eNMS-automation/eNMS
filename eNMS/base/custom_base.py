@@ -51,8 +51,8 @@ class CustomBase(db.Model):
     def serialized(self):
         properties = self.properties
         for property in serialization_properties:
-            # if hasattr(self, property):
-                # properties[property] = getattr(self, property).properties
+            if hasattr(self, property) and hasattr(getattr(self, property), 'properties'):
+                properties[property] = getattr(self, property).properties
             if hasattr(self, f'{property}s'):
                 properties[f'{property}s'] = [
                     obj.properties for obj in getattr(self, f'{property}s')

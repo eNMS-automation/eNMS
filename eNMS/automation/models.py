@@ -201,13 +201,6 @@ class WorkflowEdge(CustomBase):
         foreign_keys='WorkflowEdge.workflow_id'
     )
 
-    @property
-    def serialized(self):
-        properties = self.properties
-        properties['source'] = self.source.serialized
-        properties['destination'] = self.destination.serialized
-        return properties
-
 
 class Workflow(Job):
 
@@ -271,18 +264,6 @@ class Workflow(Job):
 
     @property
     def serialized(self):
-        properties = self.properties
-        properties['tasks'] = [
-            obj.properties for obj in getattr(self, 'tasks')
-        ]
-        properties['jobs'] = [
-            obj.properties for obj in getattr(self, 'jobs')
-        ]
+        properties = super().serialized
         properties['edges'] = [edge.serialized for edge in self.edges]
-        properties['devices'] = [
-            obj.properties for obj in getattr(self, 'devices')
-        ]
-        properties['pools'] = [
-            obj.properties for obj in getattr(self, 'pools')
-        ]
         return properties

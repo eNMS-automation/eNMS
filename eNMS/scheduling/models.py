@@ -15,6 +15,7 @@ class Task(CustomBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
+    description = Column(String)
     creation_time = Column(String)
     status = Column(String)
     type = Column(String)

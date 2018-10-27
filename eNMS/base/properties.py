@@ -180,6 +180,7 @@ parameters_public_properties = [
 task_serialized_properties = [
     'id',
     'name',
+    'description',
     'job_name',
     'status',
     'start_date',

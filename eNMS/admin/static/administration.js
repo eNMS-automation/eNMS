@@ -61,3 +61,10 @@ function saveGottyParameters() { // eslint-disable-line no-unused-vars
     alertify.notify('GoTTY parameters saved.', 'success', 5);
   });
 }
+
+(function() {
+  $('#doc-link').attr(
+    'href',
+    'https://enms.readthedocs.io/en/latest/workflows/index.html'
+  )
+})();

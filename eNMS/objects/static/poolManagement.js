@@ -37,6 +37,10 @@ function addPool(mode, properties) {
 }
 
 (function() {
+  $('#doc-link').attr(
+    'href',
+    'https://enms.readthedocs.io/en/latest/workflows/index.html'
+  )
   for (let i = 0; i < pools.length; i++) {
     addPool('create', pools[i]);
   }

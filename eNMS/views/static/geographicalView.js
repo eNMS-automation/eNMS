@@ -30,3 +30,10 @@ $('.dropdown-submenu a.menu-submenu').on('click', function(e) {
   e.stopPropagation();
   e.preventDefault();
 });
+
+(function() {
+  $('#doc-link').attr(
+    'href',
+    'https://enms.readthedocs.io/en/latest/views/geographical_view.html'
+  )
+})();

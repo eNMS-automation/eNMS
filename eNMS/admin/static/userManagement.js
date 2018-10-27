@@ -34,6 +34,10 @@ function addUser(mode, properties) {
 }
 
 (function() {
+  $('#doc-link').attr(
+    'href',
+    'https://enms.readthedocs.io/en/latest/workflows/index.html'
+  )
   for (let i = 0; i < users.length; i++) {
     addUser('create', users[i]);
   }

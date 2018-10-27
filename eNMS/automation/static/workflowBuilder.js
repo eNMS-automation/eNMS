@@ -318,7 +318,7 @@ $('#network').contextMenu({
   $('#doc-link').attr(
     'href',
     'https://enms.readthedocs.io/en/latest/workflows/index.html'
-  )
+  );
 })();
 
 /**
@@ -361,7 +361,9 @@ function getWorkflowStatus() {
         $('#current-device,#current-job').empty();
       }
       if (wf.status.jobs) {
-        $.each(wf.status.jobs, (id, r) => colorJob(id, r ? '#32cd32' : '#FF6666'));
+        $.each(wf.status.jobs, (id, success) => {
+          colorJob(id, success ? '#32cd32' : '#FF6666')
+        });
       }
       if (workflowInit || wf.state == 'Running') {
         if (workflowInit && wf.state == 'Running') {

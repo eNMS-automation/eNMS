@@ -196,7 +196,6 @@ def save_service(cls_name):
         return jsonify(factory(service_classes[cls_name], **form).serialized)
     except JSONDecodeError:
         return jsonify('JSONDecodeError')
-    return 
 
 
 @post(bp, '/show_logs/<job_id>', 'Automation Section')

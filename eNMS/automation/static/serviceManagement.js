@@ -44,7 +44,7 @@ function addService(mode, properties) {
 function getStates() {
   call('/automation/get_states/service', function(states) {
     for (let i = 0; i < states.length; i++) {
-      col = table.column('#state');
+      const col = table.column('#state');
       table.cell(i, col).data(states[i]).draw(false);
     }
     setTimeout(getStates, 1000);
@@ -55,7 +55,7 @@ function getStates() {
   $('#doc-link').attr(
     'href',
     'https://enms.readthedocs.io/en/latest/services/index.html'
-  )
+  );
   for (let i = 0; i < services.length; i++) {
     addService('create', services[i]);
   }

@@ -81,7 +81,7 @@ function saveService() { // eslint-disable-line no-unused-vars
   fCall(url, '#service-editor-form', function(result) {
     if (result == 'JSONDecodeError') {
       const message = `Json Parsing Error: make sure that properties expecting
-        dictionnaries have valid Json input.`
+        dictionnaries have valid Json input.`;
       alertify.notify(message, 'error', 5);
     } else {
       const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';

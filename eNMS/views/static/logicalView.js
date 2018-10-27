@@ -187,5 +187,5 @@ $('#logical_view').contextMenu({
   $('#doc-link').attr(
     'href',
     'https://enms.readthedocs.io/en/latest/views/logical_view.html'
-  )
+  );
 })();

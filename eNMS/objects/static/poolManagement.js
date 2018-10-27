@@ -40,7 +40,7 @@ function addPool(mode, properties) {
   $('#doc-link').attr(
     'href',
     'https://enms.readthedocs.io/en/latest/inventory/pools.html'
-  )
+  );
   for (let i = 0; i < pools.length; i++) {
     addPool('create', pools[i]);
   }

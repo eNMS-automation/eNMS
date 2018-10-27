@@ -313,5 +313,5 @@ $.each(counters, function(type, _) {
   $('#doc-link').attr(
     'href',
     'https://enms.readthedocs.io/en/latest/base/introduction.html'
-  )
+  );
 })();

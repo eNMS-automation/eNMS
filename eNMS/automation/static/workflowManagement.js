@@ -55,7 +55,7 @@ function addWorkflow(mode, properties) {
 function getStates() {
   call('/automation/get_states/workflow', function(states) {
     for (let i = 0; i < states.length; i++) {
-      col = table.column('#state');
+      const col = table.column('#state');
       table.cell(i, col).data(states[i]).draw(false);
     }
     setTimeout(getStates, 1000);
@@ -66,7 +66,7 @@ function getStates() {
   $('#doc-link').attr(
     'href',
     'https://enms.readthedocs.io/en/latest/workflows/index.html'
-  )
+  );
   for (let i = 0; i < workflows.length; i++) {
     addWorkflow('create', workflows[i]);
   }

@@ -334,6 +334,7 @@ function colorJob(id, color) {
     nodes.update({id: id, color: color});
   }
 }
+
 /**
  * Get Workflow Status.
  */

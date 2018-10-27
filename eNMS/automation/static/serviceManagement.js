@@ -38,10 +38,21 @@ function addService(mode, properties) {
   }
 }
 
+/**
+ * Get Services States.
+ */
+function getStates() {
+  call(`/automation/get/${workflow.id}`, function(wf) {
+    console.log(table.column(0).data());
+    setTimeout(getStates, 2000);
+  });
+}
+
 (function() {
   for (let i = 0; i < services.length; i++) {
     addService('create', services[i]);
   }
+  getStates();
 })();
 
 /**

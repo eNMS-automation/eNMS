@@ -39,10 +39,10 @@ function addService(mode, properties) {
 }
 
 /**
- * Get Services States.
+ * Get Service States.
  */
 function getStates() {
-  call(`/automation/get_states/service`, function(states) {
+  call('/automation/get_states/service', function(states) {
     for (let i = 0; i < states.length; i++) {
       col = table.column('#state');
       table.cell(i, col).data(states[i]).draw();

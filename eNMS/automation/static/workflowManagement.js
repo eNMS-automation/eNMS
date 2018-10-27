@@ -53,7 +53,7 @@ function addWorkflow(mode, properties) {
  * Get Workflow States.
  */
 function getStates() {
-  call(`/automation/get_states/service`, function(states) {
+  call('/automation/get_states/workflow', function(states) {
     for (let i = 0; i < states.length; i++) {
       col = table.column('#state');
       table.cell(i, col).data(states[i]).draw();
@@ -66,6 +66,7 @@ function getStates() {
   for (let i = 0; i < workflows.length; i++) {
     addWorkflow('create', workflows[i]);
   }
+  getStates();
 })();
 
 /**

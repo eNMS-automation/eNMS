@@ -149,9 +149,10 @@ def get_service(id_or_cls):
     })
 
 
-@post(bp, '/get_states', 'Automation Section')
-def get_states():
-    return jsonify([s['state'] for s in Service.serialize()])
+@post(bp, '/get_states/<cls>', 'Automation Section')
+def get_states(cls):
+    cls = Service if cls == 'service' else Workflow
+    return jsonify([s['state'] for s in cls.serialize()])
 
 
 @post(bp, '/delete/<service_id>', 'Edit Automation Section')

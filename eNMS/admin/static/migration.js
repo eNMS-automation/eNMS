@@ -5,10 +5,10 @@ call: false
 */
 
 /**
- * Export services.
+ * Export all for migration.
  */
-function export() { // eslint-disable-line no-unused-vars
+function migrationExport() { // eslint-disable-line no-unused-vars
   call('/admin/export', function() {
-    alertify.notify('Services successfully exported', 'success', 5);
+    alertify.notify('Export successful.', 'success', 5);
   });
 }

@@ -62,6 +62,10 @@ class CustomBase(db.Model):
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
+    @classmethod
+    def export(cls):
+        return [obj.properties for obj in cls.query.all()]
+
 
 def factory(cls, **kwargs):
     if 'id' in kwargs:

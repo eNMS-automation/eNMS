@@ -219,7 +219,7 @@ function edgeToEdge(edge) {
  * Delete selected nodes and edges.
  */
 function deleteSelection() {
-  node = graph.getSelectedNodes()[0];
+  const node = graph.getSelectedNodes()[0];
   if (node != 1 && node != 2) {
     deleteNode(node);
     graph.getSelectedEdges().map((edge) => deleteEdge(edge));

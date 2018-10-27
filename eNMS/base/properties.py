@@ -301,6 +301,8 @@ pretty_names = {
     'waiting_time': 'Waiting time'
 }
 
+# Export properties
+
 pretty_names.update({k: k for k in custom_properties})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 property_types = {}

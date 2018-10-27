@@ -270,9 +270,6 @@ def export():
     for cls_name, cls in diagram_classes.items():
         path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
         with open(path, 'w') as migration_file:
-            dump(
-                diagram_classes[cls_name].serialize(),
-                migration_file,
-                default_flow_style=False
-            )
+            instances = diagram_classes[cls_name].export()
+            dump(instances, migration_file, default_flow_style=False)
     return jsonify(True)

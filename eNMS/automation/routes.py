@@ -149,12 +149,9 @@ def get_service(id_or_cls):
     })
 
 
-@post(bp, '/get_states', 'Edit Automation Section')
-def delete_object(service_id):
-    service = fetch(Service, id=service_id)
-    db.session.delete(service)
-    db.session.commit()
-    return jsonify(service.serialized)
+@post(bp, '/get_states', 'Automation Section')
+def get_states():
+    return jsonify([s['state'] for s in Service.serialize()])
 
 
 @post(bp, '/delete/<service_id>', 'Edit Automation Section')

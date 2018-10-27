@@ -42,9 +42,12 @@ function addService(mode, properties) {
  * Get Services States.
  */
 function getStates() {
-  call(`/automation/get/${workflow.id}`, function(wf) {
-    console.log(table.column(0).data());
-    setTimeout(getStates, 2000);
+  call(`/automation/get_states/service`, function(states) {
+    for (let i = 0; i < states.length; i++) {
+      col = table.column('#state');
+      table.cell(i, col).data(states[i]).draw();
+    }
+    setTimeout(getStates, 200);
   });
 }
 

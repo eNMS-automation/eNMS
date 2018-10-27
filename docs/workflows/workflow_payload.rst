@@ -136,6 +136,8 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 
 This ``job`` function reuses the Napalm getters of two jobs of the workflow (one of which, ``get_facts``, is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
 
+.. tip:: You can run a job directly from the Workflow Builder to see if it passes (and rerun if it fails), and also which payload the job returns.
+
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------
 

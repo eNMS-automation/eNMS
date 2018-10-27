@@ -1,3 +1,4 @@
+from dicttoxml import dicttoxml
 from json import dumps, loads
 from re import search
 from requests import (
@@ -25,6 +26,7 @@ class RestCallService(Service):
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     content_match = Column(String)
     content_match_regex = Column(Boolean)
+    convert_to_xml = Column(Boolean)
     username = Column(String)
     password = Column(String)
     call_type_values = (
@@ -49,6 +51,10 @@ class RestCallService(Service):
         if self.multiprocessing:
             device, payload = args
         rest_url = substitute(self.url, locals())
+        if self.convert_to_xml:
+            data = dicttoxml(self.payload)
+        else:
+            data = dumps(self.payload)
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
                 rest_url,
@@ -58,7 +64,7 @@ class RestCallService(Service):
         else:
             result = loads(self.request_dict[self.call_type](
                 rest_url,
-                data=dumps(self.payload),
+                data=data,
                 auth=HTTPBasicAuth(self.username, self.password)
             ).content)
         match = substitute(self.content_match, locals())

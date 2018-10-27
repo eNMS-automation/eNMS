@@ -35,9 +35,6 @@ class User(CustomBase, UserMixin):
     def allowed(self, permission):
         return self.is_admin or permission in self.permissions
 
-    def __repr__(self):
-        return self.name
-
 
 class TacacsServer(CustomBase):
 

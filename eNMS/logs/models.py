@@ -85,6 +85,3 @@ class LogRule(CustomBase):
         secondary=job_log_rule_table,
         back_populates='log_rules'
     )
-
-    def __repr__(self):
-        return self.content

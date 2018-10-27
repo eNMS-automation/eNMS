@@ -59,9 +59,8 @@ class CustomBase(db.Model):
                 # a workflow has edges: we need to know not only the edge
                 # properties, but also the properties of its source and
                 # destination: we need the serialized edge.
-                func = 'serialized' if property == 'edge' else 'properties'
                 properties[f'{property}s'] = [
-                    getattr(obj, func) for obj in getattr(self, f'{property}s')
+                    getattr(obj, get) for obj in getattr(self, f'{property}s')
                 ]
         return properties
 

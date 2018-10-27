@@ -210,8 +210,8 @@ function edgeToEdge(edge) {
     id: edge.id,
     label: edge.type ? 'Success' : 'Failure',
     type: edge.type,
-    from: edge.source.id,
-    to: edge.destination.id,
+    from: edge.source_id,
+    to: edge.destination_id,
     color: {color: edge.type ? 'green' : 'red'},
     arrows: {to: {enabled: true}},
   };

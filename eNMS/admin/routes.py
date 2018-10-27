@@ -261,3 +261,11 @@ def save_gotty_parameters():
     parameters.update(**request.form.to_dict())
     db.session.commit()
     return jsonify({'success': True})
+
+
+@post(bp, '/create_new_user', 'Edit Admin Section')
+def create_new_user():
+    user_data = request.form.to_dict()
+    if 'permissions' in user_data:
+        abort(403)
+    return jsonify(factory(User, **user_data).serialized)

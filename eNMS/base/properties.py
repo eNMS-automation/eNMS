@@ -307,3 +307,14 @@ pretty_names.update({k: k for k in custom_properties})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 property_types = {}
 boolean_properties = ['multiprocessing']
+
+serialization_properties = (
+    'destination',
+    'device',
+    'edge',
+    'job',
+    'link',
+    'pool',
+    'source',
+    'task'
+)

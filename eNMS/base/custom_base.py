@@ -5,7 +5,8 @@ from eNMS.base.helpers import fetch
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,
-    boolean_properties
+    boolean_properties,
+    serialization_properties
 )
 
 
@@ -48,7 +49,15 @@ class CustomBase(db.Model):
 
     @property
     def serialized(self):
-        return self.properties
+        properties = self.properties
+        for property in serialization_properties:
+            # if hasattr(self, property):
+                # properties[property] = getattr(self, property).properties
+            if hasattr(self, f'{property}s'):
+                properties[f'{property}s'] = [
+                    obj.properties for obj in getattr(self, f'{property}s')
+                ]
+        return properties
 
     @property
     def visible(self):

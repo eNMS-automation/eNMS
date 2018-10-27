@@ -74,9 +74,10 @@ def workflow_builder():
     service_form = JobForm(request.form)
     service_form.devices.choices = Device.choices()
     service_form.pools.choices = Pool.choices()
+    workflow = fetch(Workflow, id=session.get('workflow', None))
     return render_template(
         'workflow_builder.html',
-        workflow=session.get('workflow', None),
+        workflow=workflow.serialized if workflow else None,
         add_job_form=add_job_form,
         workflow_builder_form=workflow_builder_form,
         compare_logs_form=CompareLogsForm(request.form),
@@ -314,7 +315,7 @@ def delete_edge(workflow_id, edge_id):
 @post(bp, '/save_positions/<workflow_id>', 'Edit Automation Section')
 def save_positions(workflow_id):
     workflow = fetch(Workflow, id=workflow_id)
-    session['workflow'] = workflow.serialized
+    session['workflow'] = workflow.id
     for job_id, position in request.json.items():
         job = fetch(Job, id=job_id)
         job.positions[workflow.name] = (position['x'], position['y'])

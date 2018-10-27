@@ -87,6 +87,7 @@ function displayWorkflow(wf) {
 }
 
 if (workflow) {
+  console.log(workflow);
   $('#workflow-name').val(workflow.id);
   displayWorkflow(workflow);
 } else {

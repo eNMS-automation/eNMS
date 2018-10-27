@@ -79,17 +79,23 @@ function editService(id) {
 function saveService() { // eslint-disable-line no-unused-vars
   const url = `/automation/save_service/${$('#services').val()}`;
   fCall(url, '#service-editor-form', function(service) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-    if (typeof workflowBuilder === 'undefined') {
-      addService(mode, service);
+    if (result == 'JSONDecodeError') {
+      const message = `Json Parsing Error: make sure that properties expecting
+        dictionnaries have valid Json input.`
+      alertify.notify(message, 'error', 5);
+    } else {
+      const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+      if (typeof workflowBuilder === 'undefined') {
+        addService(mode, service);
+      }
+      const message = `Service '${service.name}'
+      ${mode == 'edit' ? 'edited' : 'created'} !`;
+      if (workflowBuilder) {
+        nodes.update({id: service.id, label: service.name});
+      }
+      alertify.notify(message, 'success', 5);
+      $('#service-editor').modal('hide');
     }
-    const message = `Service '${service.name}'
-    ${mode == 'edit' ? 'edited' : 'created'} !`;
-    if (workflowBuilder) {
-      nodes.update({id: service.id, label: service.name});
-    }
-    alertify.notify(message, 'success', 5);
-    $('#service-editor').modal('hide');
   });
 }
 

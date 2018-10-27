@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from flask import jsonify, render_template, request, session
-from json import dumps
+from json import dumps, JSONDecodeError
 
 from eNMS import db, scheduler
 from eNMS.base.custom_base import factory
@@ -186,7 +186,11 @@ def save_service(cls_name):
     for property in boolean_properties:
         if property not in form:
             form[property] = 'off'
-    return jsonify(factory(service_classes[cls_name], **form).serialized)
+    try:
+        jsonify(factory(service_classes[cls_name], **form).serialized)
+    except JSONDecodeError:
+        return jsonify('JSONDecodeError')
+    return 
 
 
 @post(bp, '/show_logs/<job_id>', 'Automation Section')

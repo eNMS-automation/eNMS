@@ -215,14 +215,18 @@ function edgeToEdge(edge) {
   };
 }
 
-
 /**
  * Delete selected nodes and edges.
  */
 function deleteSelection() {
-  graph.getSelectedNodes().map((node) => deleteNode(node));
-  graph.getSelectedEdges().map((edge) => deleteEdge(edge));
-  graph.deleteSelected();
+  node = graph.getSelectedNodes()[0];
+  if (node != 1 && node != 2) {
+    deleteNode(node);
+    graph.getSelectedEdges().map((edge) => deleteEdge(edge));
+    graph.deleteSelected();
+  } else {
+    alertify.notify('Start and End task cannot be deleted', 'error', 5);
+  }
 }
 
 /**

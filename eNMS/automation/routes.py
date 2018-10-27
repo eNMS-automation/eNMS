@@ -187,7 +187,7 @@ def save_service(cls_name):
         if property not in form:
             form[property] = 'off'
     try:
-        jsonify(factory(service_classes[cls_name], **form).serialized)
+        return jsonify(factory(service_classes[cls_name], **form).serialized)
     except JSONDecodeError:
         return jsonify('JSONDecodeError')
     return 

@@ -362,7 +362,7 @@ function getWorkflowStatus() {
       }
       if (wf.status.jobs) {
         $.each(wf.status.jobs, (id, success) => {
-          colorJob(id, success ? '#32cd32' : '#FF6666')
+          colorJob(id, success ? '#32cd32' : '#FF6666');
         });
       }
       if (workflowInit || wf.state == 'Running') {

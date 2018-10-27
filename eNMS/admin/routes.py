@@ -32,6 +32,7 @@ from eNMS.admin.models import (
     User,
     TacacsServer
 )
+from eNMS.base.classes import diagram_classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     get,
@@ -263,9 +264,7 @@ def save_gotty_parameters():
     return jsonify({'success': True})
 
 
-@post(bp, '/create_new_user', 'Edit Admin Section')
-def create_new_user():
+@post(bp, '/export_services', 'Admin Section')
+def export_services():
     user_data = request.form.to_dict()
-    if 'permissions' in user_data:
-        abort(403)
     return jsonify(factory(User, **user_data).serialized)

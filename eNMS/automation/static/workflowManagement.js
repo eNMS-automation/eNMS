@@ -63,6 +63,10 @@ function getStates() {
 }
 
 (function() {
+  $('#doc-link').attr(
+    'href',
+    'https://enms.readthedocs.io/en/latest/workflows/index.html'
+  )
   for (let i = 0; i < workflows.length; i++) {
     addWorkflow('create', workflows[i]);
   }

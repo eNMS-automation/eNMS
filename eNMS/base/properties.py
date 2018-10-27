@@ -75,10 +75,18 @@ task_public_properties = task_properties[1:]
 
 link_properties = object_common_properties + [
     'source',
-    'destination'
+    'destination',
 ]
 
-link_public_properties = link_properties[1:]
+link_public_properties = link_properties[1:] + [
+    'source_name',
+    'destination_name'
+]
+
+link_table_properties = object_common_properties[1:] + [
+    'source_name',
+    'destination_name'
+]
 
 pool_public_properties = base_properties[1:]
 
@@ -263,6 +271,7 @@ pretty_names = {
     'content_type': 'Content type',
     'description': 'Description',
     'destination': 'Destination',
+    'destination_name': 'Destination',
     'dest_file': 'Destination file',
     'device_multiprocessing': 'Device multiprocessing',
     'direction': 'Direction',
@@ -290,6 +299,7 @@ pretty_names = {
     'recurrent': 'Recurrent',
     'enable_password': 'Enable password',
     'source': 'Source',
+    'source_name': 'Source',
     'source_file': 'Source file',
     'status': 'Status',
     'subtype': 'Subtype',

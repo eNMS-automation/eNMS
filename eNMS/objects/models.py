@@ -113,6 +113,14 @@ class Link(Object):
         back_populates='links'
     )
 
+    @property
+    def source_name(self):
+        return self.source.name
+
+    @property
+    def destination_name(self):
+        return self.destination.name
+
     class_type = 'link'
 
 

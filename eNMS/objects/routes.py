@@ -26,7 +26,7 @@ from eNMS.objects.models import Link, Device, Pool
 from eNMS.base.properties import (
     boolean_properties,
     device_public_properties,
-    link_public_properties,
+    link_table_properties,
     pool_public_properties,
     pretty_names,
     cls_to_properties
@@ -73,7 +73,7 @@ def link_management():
     return render_template(
         'link_management.html',
         names=pretty_names,
-        fields=link_public_properties,
+        fields=link_table_properties,
         links=Link.serialize(),
         add_link_form=add_link_form
     )

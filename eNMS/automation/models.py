@@ -155,20 +155,6 @@ class Service(Job):
         ]
         return serialized_object
 
-    @property
-    def serialized(self):
-        properties = self.properties
-        properties['devices'] = [
-            obj.properties for obj in getattr(self, 'devices')
-        ]
-        properties['pools'] = [
-            obj.properties for obj in getattr(self, 'pools')
-        ]
-        properties['tasks'] = [
-            obj.properties for obj in getattr(self, 'tasks')
-        ]
-        return properties
-
 
 service_classes = {}
 

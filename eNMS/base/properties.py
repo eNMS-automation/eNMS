@@ -64,7 +64,7 @@ device_public_properties = object_common_properties[1:] + [
 ] + list(custom_properties)
 
 task_properties = base_properties + [
-    'creation_time',
+    'job_name',
     'start_date',
     'end_date',
     'frequency',
@@ -180,7 +180,7 @@ parameters_public_properties = [
 task_serialized_properties = [
     'id',
     'name',
-    'creation_time',
+    'job_name',
     'status',
     'start_date',
     'end_date',

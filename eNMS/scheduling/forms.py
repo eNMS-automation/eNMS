@@ -7,5 +7,6 @@ class SchedulingForm(FlaskForm):
     start_date = TextField()
     end_date = TextField()
     name = TextField()
+    description = TextField()
     frequency = TextField()
     job = SelectField()

@@ -87,6 +87,10 @@ class Task(CustomBase):
             )
 
     @property
+    def job_name(self):
+        return self.job.name
+
+    @property
     def properties(self):
         return {p: getattr(self, p) for p in cls_to_properties['Task']}
 

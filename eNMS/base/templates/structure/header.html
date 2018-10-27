@@ -4,6 +4,7 @@
       <a id="menu_toggle"><i class="fa fa-bars"></i></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
+
       <li class="">
         <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
@@ -13,6 +14,12 @@
         <ul class="dropdown-menu dropdown-usermenu pull-right">
           <li><a href="/admin/logout"><i class="fa fa-sign-out pull-right"></i>Log out</a></li>
         </ul>
+      </li>
+      <li class="">
+        <a href="javascript:;" class="user-profile">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+          Docs
+        </a>
       </li>
     </ul>
   </nav>

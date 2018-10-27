@@ -58,9 +58,22 @@ def create_default_users():
 
 def create_default_pools():
     for pool in (
-        {'name': 'All objects'},
-        {'name': 'Devices only', 'link_name': '^$', 'link_name_regex': 'y'},
-        {'name': 'Links only', 'device_name': '^$', 'device_name_regex': 'y'}
+        {
+            'name': 'All objects',
+            'description': 'All objects'
+        },
+        {
+            'name': 'Devices only',
+            'description': 'Devices only',
+            'link_name': '^$',
+            'link_name_regex': 'y'
+        },
+        {
+            'name': 'Links only',
+            'description': 'Links only',
+            'device_name': '^$',
+            'device_name_regex': 'y'
+        }
     ):
         factory(Pool, **pool)
 

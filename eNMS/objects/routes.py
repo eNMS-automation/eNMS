@@ -94,6 +94,18 @@ def pool_management():
     )
 
 
+@get(bp, '/import_export', 'Inventory Section')
+def pool_management():
+    return render_template(
+        'pool_management.html',
+        form=AddPoolForm(request.form),
+        pool_object_form=pool_object_form,
+        names=pretty_names,
+        fields=pool_table_properties,
+        pools=Pool.serialize()
+    )
+
+
 @post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_object(obj_type, id):
     device = fetch(Device if obj_type == 'device' else Link, id=id)

@@ -35,7 +35,7 @@ from eNMS.admin.models import (
     TacacsServer
 )
 from eNMS.automation.models import service_classes
-from eNMS.base.classes import diagram_classes
+from eNMS.base.classes import classes, diagram_classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     get,
@@ -296,19 +296,18 @@ def migration_import():
                 else:
                     cls = diagram_classes[cls_name]
                 for property, value in obj_data.items():
-                    
                     if property not in import_properties[cls_name]:
                         continue
                     elif property in serialization_properties:
                         obj[property] = fetch(
-                            diagram_classes[property]
+                            classes[property]
                             if property not in ('source', 'destination')
                             else Device,
                             id=value
                         )
                     elif property[:-1] in serialization_properties:
                         obj[property] = objectify(
-                            diagram_classes[property[:-1]], 
+                            classes[property[:-1]], 
                             value
                         )
                     else:

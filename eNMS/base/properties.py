@@ -380,7 +380,9 @@ user_import_properties = user_serialized_properties + [
 ]
 
 workflow_import_properties = workflow_public_properties + [
-    'id'
+    'id',
+    'jobs',
+    'edges'
 ]
 
 import_properties = {

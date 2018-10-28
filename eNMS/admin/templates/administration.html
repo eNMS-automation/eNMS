@@ -99,33 +99,6 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xs-6">
-        <div class="x_panel">
-          <div class="x_title">
-            <h4 class="text-center">Netbox import</h4>
-          </div>
-          <div class="x_content">
-            <br>
-            <form id="netbox_form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-              <div class="form-group" style="height: 450px">
-                {% for field in netbox_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", placeholder=field.label.text) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="queryNetbox()">Retrieve devices</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- end row -->
     <div class="row">
@@ -177,28 +150,6 @@
                 <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
                   <button class="btn btn-primary" type="reset">Reset</button>
                   <button type="button" class="btn btn-success" onclick="saveGottyParameters()">Save changes</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h4 class="text-center">Import / Export (Migration)</h4>
-          </div>
-          <div class="x_content">
-            <br/>
-            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-              <div class="form-group" style="height: 450px">
-                {{ export_form.export(class="form-control required", size="15") }}
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                  <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
-                  <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
                 </div>
               </div>
             </form>

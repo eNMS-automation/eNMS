@@ -95,6 +95,7 @@ class NetboxForm(FlaskForm):
     netbox_type = SelectField(choices=node_type)
 
 
-class ExportForm(FlaskForm):
-    export_choices = [(p, p) for p in import_properties]
+class ImportExportForm(FlaskForm):
+    name = TextField()
+    export_choices = [(p, p.capitalize()) for p in import_properties]
     export = SelectMultipleField(choices=export_choices)

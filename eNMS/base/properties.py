@@ -401,6 +401,6 @@ import_properties = {
     'pool': pool_import_properties,
     'service': service_import_properties,
     'edge': workflow_edge_import_properties,
+    'workflow': workflow_import_properties,
     'task': task_import_properties,
-    'workflow': workflow_import_properties
 }

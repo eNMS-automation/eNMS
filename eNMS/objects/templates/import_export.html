@@ -36,19 +36,21 @@
             <h4 class="text-center">Import / Export (Migration)</h4>
           </div>
           <div class="x_content" style="min-height: 450px">
-            <br/>
             <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div class="form-group">
-                {{ export_form.export(class="form-control required", size="15") }}
+                {{ export_form.name(class="form-control required") }}
               </div>
-              <div class="ln_solid"></div>
               <div class="form-group">
-                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                  <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
-                  <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
-                </div>
+                {{ export_form.export(class="form-control required", size="10") }}
               </div>
             </form>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+                <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
+                <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

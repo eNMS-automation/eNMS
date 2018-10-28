@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+call: false
 fCall: false
 */
 

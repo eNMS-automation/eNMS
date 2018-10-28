@@ -5,11 +5,10 @@ from wtforms import (
     IntegerField,
     TextField,
     PasswordField,
-    SelectField,
     SelectMultipleField
 )
 
-from eNMS.base.properties import device_subtypes, user_permissions
+from eNMS.base.properties import user_permissions
 
 
 class LoginForm(FlaskForm):

@@ -6,7 +6,6 @@ from sqlalchemy.orm import relationship
 from eNMS import db, scheduler
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.properties import cls_to_properties
 
 
 class Task(CustomBase):

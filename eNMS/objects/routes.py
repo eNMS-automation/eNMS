@@ -256,8 +256,9 @@ def delete_pool(pool_id):
 
 @post(bp, '/migration_export', 'Admin Section')
 def migration_export():
+    name = request.form['name']
     for cls_name in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
+        path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
         with open(path, 'w') as migration_file:
             instances = diagram_classes[cls_name].export()
             dump(instances, migration_file, default_flow_style=False)
@@ -266,8 +267,9 @@ def migration_export():
 
 @post(bp, '/migration_import', 'Admin Section')
 def migration_import():
+    name = request.form['name']
     for cls_name in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
+        path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
         with open(path, 'r') as migration_file:
             for obj_data in load(migration_file):
                 obj = {}
@@ -286,10 +288,7 @@ def migration_import():
                             id=value
                         )
                     elif property[:-1] in serialization_properties:
-                        obj[property] = objectify(
-                            classes[property[:-1]], 
-                            value
-                        )
+                        obj[property] = objectify(classes[property[:-1]], value)
                     else:
                         obj[property] = value
                 factory(cls, **obj)

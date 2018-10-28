@@ -32,7 +32,6 @@ from eNMS.base.custom_base import factory
 from eNMS.base.helpers import get, post, fetch, vault_helper
 from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.logs.models import SyslogServer
-from eNMS.objects.models import Device
 
 
 @get(bp, '/user_management', 'Admin Section')

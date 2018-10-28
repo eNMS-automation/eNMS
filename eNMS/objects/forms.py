@@ -76,3 +76,24 @@ class AddPoolForm(FlaskForm):
 class PoolObjectsForm(FlaskForm):
     devices = SelectMultipleField()
     links = SelectMultipleField()
+
+
+class OpenNmsForm(FlaskForm):
+    opennms_rest_api = TextField()
+    opennms_devices = TextField()
+    node_type = [subtype for subtype in device_subtypes.items()]
+    subtype = SelectField(choices=node_type)
+    opennms_login = TextField()
+    password = PasswordField()
+
+
+class NetboxForm(FlaskForm):
+    netbox_address = TextField(default='http://0.0.0.0:8000')
+    netbox_token = TextField()
+    node_type = [subtype for subtype in device_subtypes.items()]
+    netbox_type = SelectField(choices=node_type)
+
+
+class ExportForm(FlaskForm):
+    export_choices = [(k, c.__tablename__) for k, c in diagram_classes.items()]
+    export = SelectMultipleField(choices=export_choices)

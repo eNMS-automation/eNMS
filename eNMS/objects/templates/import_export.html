@@ -8,70 +8,53 @@
 
 {% block content %}
   <div class="right_col" role="main">
-    <!-- begin row -->
     <div class="row">
-      <div class="col-md-6 col-xs-6">
+      <div class="col-md-6 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h4 class="text-center">TACACS+ server</h4>
+            <h4 class="text-center">Import / Export (Migration)</h4>
           </div>
           <div class="x_content">
-            <br>
-            <form id="tacacs_form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+            <br/>
+            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div class="form-group" style="height: 450px">
-                {% for field in tacacs_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {% if tacacs_server %}
-                      {{ field(class="form-control required", value=tacacs_server[field.name]) }}
-                    {% else %}
-                      {{ field(class="form-control required", placeholder=field.label.text) }}
-                    {% endif %}
-                  </div><br><br><br>
-                {% endfor %}
+                {{ export_form.export(class="form-control required", size="15") }}
               </div>
               <div class="ln_solid"></div>
               <div class="form-group">
-                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="saveTacacsServer()">Save changes</button>
+                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+                  <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
+                  <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xs-6">
+      <div class="col-md-6 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h4 class="text-center">Syslog server</h4>
+            <h4 class="text-center">Import / Export (Migration)</h4>
           </div>
           <div class="x_content">
-            <br>
-            <form id="syslog_form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+            <br/>
+            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div class="form-group" style="height: 450px">
-                {% for field in syslog_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {% if syslog_server %}
-                      {{ field(class="form-control required", value=syslog_server[field.name]) }}
-                    {% else %}
-                      {{ field(class="form-control required", placeholder=field.label.text) }}
-                    {% endif %}
-                  </div><br><br><br>
-                {% endfor %}
+                {{ export_form.export(class="form-control required", size="15") }}
               </div>
               <div class="ln_solid"></div>
               <div class="form-group">
-                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="saveSyslogServer()">Save changes</button>
+                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+                  <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
+                  <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-md-6 col-xs-6">
         <div class="x_panel">
           <div class="x_title">
@@ -127,86 +110,6 @@
         </div>
       </div>
     </div>
-    <!-- end row -->
-    <div class="row">
-      <div class="col-md-6 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h4 class="text-center">Geographical parameters</h4>
-          </div>
-          <div class="x_content">
-            <br>
-            <form id="geographical-parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-              <div class="form-group" style="height: 450px">
-                {% for field in geographical_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="saveGeographicalParameters()">Save changes</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h4 class="text-center">GoTTY parameters</h4>
-          </div>
-          <div class="x_content">
-            <br/>
-            <form id="gotty-parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-              <div class="form-group" style="height: 450px">
-                {% for field in gotty_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="saveGottyParameters()">Save changes</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h4 class="text-center">Import / Export (Migration)</h4>
-          </div>
-          <div class="x_content">
-            <br/>
-            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-              <div class="form-group" style="height: 450px">
-                {{ export_form.export(class="form-control required", size="15") }}
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                  <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
-                  <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end row -->
   </div>
 {% endblock content %}
 

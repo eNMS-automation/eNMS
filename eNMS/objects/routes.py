@@ -95,14 +95,10 @@ def pool_management():
 
 
 @get(bp, '/import_export', 'Inventory Section')
-def pool_management():
+def import_export():
     return render_template(
-        'pool_management.html',
+        'import_export.html',
         form=AddPoolForm(request.form),
-        pool_object_form=pool_object_form,
-        names=pretty_names,
-        fields=pool_table_properties,
-        pools=Pool.serialize()
     )
 
 

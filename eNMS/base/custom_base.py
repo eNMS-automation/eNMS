@@ -86,7 +86,7 @@ class CustomBase(db.Model):
 
 def factory(cls, **kwargs):
     if 'id' in kwargs:
-        instance = fetch(cls, id=kwargs.pop('id'))
+        instance = fetch(cls, id=kwargs['id'])
     else:
         instance = fetch(cls, name=kwargs['name'])
     if instance:

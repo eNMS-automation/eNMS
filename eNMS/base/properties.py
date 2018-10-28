@@ -385,8 +385,18 @@ workflow_import_properties = workflow_public_properties + [
     'edges'
 ]
 
+workflow_edge_import_properties = [
+    'id',
+    'name',
+    'type',
+    'source_id',
+    'destination_id',
+    'workflow'
+]
+
 import_properties = {
     'device': device_import_properties,
+    'edge': workflow_edge_import_properties,
     'link': link_import_properties,
     'pool': pool_import_properties,
     'service': service_import_properties,

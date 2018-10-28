@@ -331,24 +331,48 @@ serialization_properties = (
     'task'
 )
 
-import_device_properties = device_public_properties + [
+device_import_properties = device_public_properties + [
     'id'
 ]
 
-import_pool_properties = pool_public_properties + [
+link_import_properties = link_properties + [
+    'id'
+]
+
+pool_import_properties = pool_public_properties + [
     'id',
     'devices'
 ]
 
-import_service_properties = service_public_properties + [
+service_import_properties = service_public_properties + [
     'id',
     'type',
     'devices',
     'pools'
 ]
 
+task_import_properties = base_properties + [
+    'start_date',
+    'end_date',
+    'frequency',
+    'status',
+    'job'
+]
+
+user_import_properties = user_serialized_properties + [
+    'id'
+]
+
+workflow_import_properties = workflow_public_properties + [
+    'id'
+]
+
 import_properties = {
-    'device': import_device_properties,
-    'pool': import_pool_properties,
-    'service': import_service_properties
+    'device': device_import_properties,
+    'link': link_import_properties,
+    'pool': pool_import_properties,
+    'service': service_import_properties,
+    'task': task_import_properties,
+    'user': user_import_properties,
+    'workflow': workflow_import_properties
 }

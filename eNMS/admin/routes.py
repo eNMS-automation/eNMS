@@ -300,9 +300,15 @@ def migration_import():
                     if property not in import_properties[cls_name]:
                         continue
                     elif property in serialization_properties:
-                        obj[property] = fetch(diagram_classes[property], id=value)
+                        obj[property] = fetch(
+                            diagram_classes[property],
+                            id=value
+                        )
                     elif property[:-1] in serialization_properties:
-                        obj[property] = objectify(diagram_classes[property[:-1]], value)
+                        obj[property] = objectify(
+                            diagram_classes[property[:-1]], 
+                            value
+                        )
                     else:
                         obj[property] = value
                 print(obj)

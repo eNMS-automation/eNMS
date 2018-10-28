@@ -112,7 +112,7 @@ def pool_management():
 def import_export():
     return render_template(
         'import_export.html',
-        export_form=ExportForm(request.form),
+        import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
         parameters=db.session.query(Parameters).one(),

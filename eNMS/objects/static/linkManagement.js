@@ -16,7 +16,3 @@ const table = $('#table').DataTable(); // eslint-disable-line
     addObjectToTable('create', 'link', links[i]);
   }
 })();
-
-document.getElementById('file').onchange = function() {
-  importTopology('Link');
-};

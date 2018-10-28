@@ -5,6 +5,11 @@ call: false
 fCall: false
 */
 
+document.getElementById('file').onchange = function() {
+  importTopology('Device');
+};
+
+
 /**
  * Export topology.
  */
@@ -14,9 +19,9 @@ function exportTopology() { // eslint-disable-line no-unused-vars
 
 /**
  * Import topology.
- * @param {objType} objType - Type of object.
  */
-function importTopology(objType) { // eslint-disable-line no-unused-vars
+function importTopology() { // eslint-disable-line no-unused-vars
+  console.log('test');
   alertify.notify('Topology import: starting...', 'success', 5);
   if ($('#import-form').parsley().validate() ) {
     const formData = new FormData($('#import-form')[0]);

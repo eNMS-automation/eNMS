@@ -38,10 +38,10 @@
           <div class="x_content" style="min-height: 450px">
             <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div class="form-group">
-                {{ export_form.name(class="form-control required") }}
+                {{ import_export_form.name(class="form-control required") }}
               </div>
               <div class="form-group">
-                {{ export_form.export(class="form-control required", size="10") }}
+                {{ import_export_form.export(class="form-control required", size="10") }}
               </div>
             </form>
             <div class="ln_solid"></div>
@@ -116,5 +116,5 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script src="{{ url_for('admin_blueprint.static', filename='administration.js') }}"></script>
+  <script src="{{ url_for('objects_blueprint.static', filename='importExport.js') }}"></script>
 {% endblock javascripts %}

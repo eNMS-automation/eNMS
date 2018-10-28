@@ -4,24 +4,39 @@ alertify: false
 fCall: false
 */
 
-
-
 /**
- * Save GoTTY parameters.
+ * Export topology.
  */
-function saveGottyParameters() { // eslint-disable-line no-unused-vars
-  fCall('/admin/save_gotty_parameters', '#gotty-parameters-form', function() {
-    alertify.notify('GoTTY parameters saved.', 'success', 5);
-  });
+function exportTopology() { // eslint-disable-line no-unused-vars
+  call('/objects/export_topology', function() {});
 }
 
 /**
- * Export all for migration.
+ * Import topology.
+ * @param {objType} objType - Type of object.
  */
-function migrationExport() { // eslint-disable-line no-unused-vars
-  fCall('/admin/migration_export', '#import-export-form', function() {
-    alertify.notify('Export successful.', 'success', 5);
-  });
+function importTopology(objType) { // eslint-disable-line no-unused-vars
+  alertify.notify('Topology import: starting...', 'success', 5);
+  if ($('#import-form').parsley().validate() ) {
+    const formData = new FormData($('#import-form')[0]);
+    $.ajax({
+      type: 'POST',
+      url: '/objects/import_topology',
+      dataType: 'json',
+      data: formData,
+      contentType: false,
+      processData: false,
+      async: false,
+      success: function(objects) {
+        alertify.notify('Adding objects to the table...', 'success', 5);
+        if (!objects) {
+          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else {
+          alertify.notify('Topology successfully imported.', 'success', 5);
+        }
+      },
+    });
+  }
 }
 
 /**
@@ -36,6 +51,6 @@ function migrationImport() { // eslint-disable-line no-unused-vars
 (function() {
   $('#doc-link').attr(
     'href',
-    'https://enms.readthedocs.io/en/latest/security/access.html'
+    'https://enms.readthedocs.io/en/latest/inventory/objects.html'
   );
 })();

@@ -123,45 +123,6 @@ function showObjectTypeModal(type) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Export topology.
- */
-function exportTopology() { // eslint-disable-line no-unused-vars
-  call('/objects/export_topology', function() {});
-}
-
-/**
- * Import topology.
- * @param {objType} objType - Type of object.
- */
-function importTopology(objType) { // eslint-disable-line no-unused-vars
-  alertify.notify('Topology import: starting...', 'success', 5);
-  if ($('#import-form').parsley().validate() ) {
-    const formData = new FormData($('#import-form')[0]);
-    $.ajax({
-      type: 'POST',
-      url: '/objects/import_topology',
-      dataType: 'json',
-      data: formData,
-      contentType: false,
-      processData: false,
-      async: false,
-      success: function(objects) {
-        alertify.notify('Adding objects to the table...', 'success', 5);
-        if (!objects) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else {
-          for (let i = 0; i < objects[objType].length; i++) {
-            const obj = objects[objType][i];
-            addObjectToTable('create', objType.toLowerCase(), obj);
-          }
-          alertify.notify('Topology successfully imported.', 'success', 5);
-        }
-      },
-    });
-  }
-}
-
-/**
  * Open new tab at the provided URL.
  * @param {url} url - URL.
  */

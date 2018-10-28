@@ -34,10 +34,12 @@ from eNMS.admin.models import (
     User,
     TacacsServer
 )
+from eNMS.automation.models import service_classes
 from eNMS.base.classes import diagram_classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     get,
+    objectify,
     post,
     fetch,
     vault_helper
@@ -45,6 +47,7 @@ from eNMS.base.helpers import (
 from eNMS.base.properties import (
     import_properties,
     pretty_names,
+    serialization_properties,
     user_public_properties
 )
 from eNMS.logs.models import SyslogServer
@@ -286,8 +289,22 @@ def migration_import():
     for cls_name in request.form.getlist('export'):
         path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
         with open(path, 'r') as migration_file:
-            for obj in load(migration_file):
-                obj = {k: v for k, v in obj.items() if k in import_properties[cls_name]}
+            for obj_data in load(migration_file):
+                obj = {}
+                if cls_name == 'service':
+                    cls = service_classes[obj_data.pop('type')]
+                else:
+                    cls = diagram_classes[cls_name]
+                for property, value in obj_data.items():
+                    
+                    if property not in import_properties[cls_name]:
+                        continue
+                    elif property in serialization_properties:
+                        obj[property] = fetch(diagram_classes[property], id=value)
+                    elif property[:-1] in serialization_properties:
+                        obj[property] = objectify(diagram_classes[property[:-1]], value)
+                    else:
+                        obj[property] = value
                 print(obj)
-                factory(diagram_classes[cls_name], **obj)
+                factory(cls, **obj)
     return jsonify(True)

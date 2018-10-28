@@ -18,6 +18,10 @@ def fetch(model, **kwargs):
     return db.session.query(model).filter_by(**kwargs).first()
 
 
+def objectify(model, object_list):
+    return [fetch(model, id=object_id) for object_id in object_list]
+
+
 def integrity_rollback(function):
     def wrapper(*a, **kw):
         try:

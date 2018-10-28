@@ -342,11 +342,13 @@ import_pool_properties = pool_public_properties + [
 
 import_service_properties = service_public_properties + [
     'id',
+    'type',
     'devices',
     'pools'
 ]
 
 import_properties = {
     'device': import_device_properties,
-    'pool': import_pool_properties
+    'pool': import_pool_properties,
+    'service': import_service_properties
 }

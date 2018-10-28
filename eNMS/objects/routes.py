@@ -108,7 +108,8 @@ def import_export():
         'import_export.html',
         export_form=ExportForm(request.form),
         netbox_form=NetboxForm(request.form),
-        opennms_form=OpenNmsForm(request.form)
+        opennms_form=OpenNmsForm(request.form),
+        parameters=db.session.query(Parameters).one(),
     )
 
 

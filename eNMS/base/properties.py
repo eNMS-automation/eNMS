@@ -395,12 +395,12 @@ workflow_edge_import_properties = [
 ]
 
 import_properties = {
+    'user': user_import_properties,
     'device': device_import_properties,
-    'edge': workflow_edge_import_properties,
     'link': link_import_properties,
     'pool': pool_import_properties,
     'service': service_import_properties,
+    'edge': workflow_edge_import_properties,
     'task': task_import_properties,
-    'user': user_import_properties,
     'workflow': workflow_import_properties
 }

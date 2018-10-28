@@ -14,7 +14,8 @@ from eNMS.base.properties import (
     link_public_properties,
     link_subtypes,
     device_public_properties,
-    device_subtypes
+    device_subtypes,
+    import_properties
 )
 
 
@@ -95,5 +96,5 @@ class NetboxForm(FlaskForm):
 
 
 class ExportForm(FlaskForm):
-    export_choices = [(k, c.__tablename__) for k, c in diagram_classes.items()]
+    export_choices = [(p, p) for p in import_properties]
     export = SelectMultipleField(choices=export_choices)

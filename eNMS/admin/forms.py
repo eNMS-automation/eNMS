@@ -9,7 +9,6 @@ from wtforms import (
     SelectMultipleField
 )
 
-from eNMS.base.classes import diagram_classes
 from eNMS.base.properties import device_subtypes, user_permissions
 
 

@@ -244,3 +244,45 @@ def delete_pool(pool_id):
     db.session.delete(pool)
     db.session.commit()
     return jsonify(pool.name)
+
+
+@post(bp, '/migration_export', 'Admin Section')
+def migration_export():
+    for cls_name in request.form.getlist('export'):
+        path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
+        with open(path, 'w') as migration_file:
+            instances = diagram_classes[cls_name].export()
+            dump(instances, migration_file, default_flow_style=False)
+    return jsonify(True)
+
+
+@post(bp, '/migration_import', 'Admin Section')
+def migration_import():
+    for cls_name in request.form.getlist('export'):
+        path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
+        with open(path, 'r') as migration_file:
+            for obj_data in load(migration_file):
+                obj = {}
+                if cls_name == 'service':
+                    cls = service_classes[obj_data.pop('type')]
+                else:
+                    cls = diagram_classes[cls_name]
+                for property, value in obj_data.items():
+                    if property not in import_properties[cls_name]:
+                        continue
+                    elif property in serialization_properties:
+                        obj[property] = fetch(
+                            classes[property]
+                            if property not in ('source', 'destination')
+                            else Device,
+                            id=value
+                        )
+                    elif property[:-1] in serialization_properties:
+                        obj[property] = objectify(
+                            classes[property[:-1]], 
+                            value
+                        )
+                    else:
+                        obj[property] = value
+                factory(cls, **obj)
+    return jsonify(True)

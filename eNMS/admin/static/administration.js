@@ -66,7 +66,7 @@ function saveGottyParameters() { // eslint-disable-line no-unused-vars
  * Export all for migration.
  */
 function migrationExport() { // eslint-disable-line no-unused-vars
-  fCall('/admin/export', '#import-export-form', function() {
+  fCall('/admin/migration_export', '#import-export-form', function() {
     alertify.notify('Export successful.', 'success', 5);
   });
 }
@@ -75,7 +75,7 @@ function migrationExport() { // eslint-disable-line no-unused-vars
  * Export all for migration.
  */
 function migrationImport() { // eslint-disable-line no-unused-vars
-  fCall('/admin/import', '#import-export-form', function() {
+  fCall('/admin/migration_import', '#import-export-form', function() {
     alertify.notify('Import successful.', 'success', 5);
   });
 }

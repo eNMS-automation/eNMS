@@ -330,3 +330,23 @@ serialization_properties = (
     'source',
     'task'
 )
+
+import_device_properties = device_public_properties + [
+    'id'
+]
+
+import_pool_properties = pool_public_properties + [
+    'id',
+    'devices'
+]
+
+import_service_properties = service_public_properties + [
+    'id',
+    'devices',
+    'pools'
+]
+
+import_properties = {
+    'device': import_device_properties,
+    'pool': import_pool_properties
+}

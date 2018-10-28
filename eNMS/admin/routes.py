@@ -42,7 +42,11 @@ from eNMS.base.helpers import (
     fetch,
     vault_helper
 )
-from eNMS.base.properties import pretty_names, user_public_properties
+from eNMS.base.properties import (
+    import_properties,
+    pretty_names,
+    user_public_properties
+)
 from eNMS.logs.models import SyslogServer
 from eNMS.objects.models import Device
 
@@ -267,7 +271,7 @@ def save_gotty_parameters():
     return jsonify({'success': True})
 
 
-@post(bp, '/export', 'Admin Section')
+@post(bp, '/migration_export', 'Admin Section')
 def migration_export():
     for cls_name in request.form.getlist('export'):
         path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
@@ -277,10 +281,13 @@ def migration_export():
     return jsonify(True)
 
 
-@post(bp, '/import', 'Admin Section')
+@post(bp, '/migration_import', 'Admin Section')
 def migration_import():
     for cls_name in request.form.getlist('export'):
         path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
         with open(path, 'r') as migration_file:
-            print(load(migration_file))
+            for obj in load(migration_file):
+                obj = {k: v for k, v in obj.items() if k in import_properties[cls_name]}
+                print(obj)
+                factory(diagram_classes[cls_name], **obj)
     return jsonify(True)

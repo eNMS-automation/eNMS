@@ -2,7 +2,7 @@ from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
 
 from eNMS.base import bp
-from eNMS.base.classes import diagram_classes
+from eNMS.base.classes import classes
 from eNMS.base.helpers import get, post
 from eNMS.base.properties import (
     default_diagrams_properties,
@@ -24,9 +24,7 @@ def dashboard():
         names=pretty_names,
         properties=type_to_diagram_properties,
         default_properties=default_diagrams_properties,
-        counters={
-            name: len(cls.query.all()) for name, cls in diagram_classes.items()
-        }
+        counters={name: len(cls.query.all()) for name, cls in classes.items()}
     )
 
 

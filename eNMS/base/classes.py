@@ -14,14 +14,3 @@ classes = {
     'workflow': Workflow,
     'task': Task
 }
-
-diagram_classes = {
-    'device': Device,
-    'link': Link,
-    'pool': Pool,
-    'user': User,
-    'service': Service,
-    'edge': WorkflowEdge,
-    'workflow': Workflow,
-    'task': Task
-}

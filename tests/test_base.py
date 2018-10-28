@@ -14,7 +14,8 @@ urls = {
     '/objects': (
         '/device_management',
         '/link_management',
-        '/pool_management'
+        '/pool_management',
+        '/import_export'
     ),
     '/views': (
         '/geographical_view',

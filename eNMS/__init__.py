@@ -25,8 +25,7 @@ from eNMS.base.default import (
     create_default_pools,
     create_default_users,
     create_default_workflows,
-    create_service_classes,
-    process_pool_properties
+    create_service_classes
 )
 from eNMS.base.rest import configure_rest_api
 
@@ -85,7 +84,6 @@ def configure_database(app):
     @app.before_first_request
     def create_default():
         create_service_classes()
-        process_pool_properties()
         db.create_all()
         create_default_users()
         create_default_parameters()

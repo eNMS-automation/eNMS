@@ -11,6 +11,7 @@ def get_custom_properties():
 
 
 custom_properties = get_custom_properties()
+boolean_properties = ['multiprocessing']
 
 base_properties = [
     'id',
@@ -97,8 +98,11 @@ for obj_type, properties in (
     ('link', link_public_properties)
 ):
     for prop in properties:
-        for property in f'{obj_type}_{prop} {obj_type}_{prop}_regex'.split():
-            pool_public_properties.append(property)
+        pool_public_properties.extend([
+            f'{obj_type}_{prop}',
+            f'{obj_type}_{prop}_regex'
+        ])
+        boolean_properties.append(f'{obj_type}_{prop}_regex')
 
 
 job_public_properties = [
@@ -329,7 +333,6 @@ pretty_names = {
 pretty_names.update({k: k for k in custom_properties})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 property_types = {}
-boolean_properties = ['multiprocessing']
 
 serialization_properties = (
     'destination',

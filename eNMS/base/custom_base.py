@@ -26,9 +26,8 @@ class CustomBase(db.Model):
     def update(self, **kwargs):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            print(property, value, boolean_properties)
             if property in boolean_properties:
-                value = kwargs[property] in ('y', 'on')
+                value = kwargs[property] in ('y', 'on', True)
             elif 'regex' in property:
                 value = property in kwargs
             elif property_type == dict:

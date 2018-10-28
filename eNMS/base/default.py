@@ -40,13 +40,6 @@ def create_service_classes():
                 }.get(type(col.type), str)
 
 
-@integrity_rollback
-def process_pool_properties():
-    for col in Pool.__table__.columns:
-        if type(col.type) == Boolean:
-            boolean_properties.append(col.key)
-
-
 def create_default_users():
     factory(User, **{
         'name': 'admin',

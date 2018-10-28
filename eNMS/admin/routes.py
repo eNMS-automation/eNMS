@@ -84,12 +84,6 @@ def login():
                 return redirect(url_for('base_blueprint.dashboard'))
         else:
             try:
-                # tacacs_plus does not support py2 unicode, hence the
-                # conversion to string.
-                # TACACSClient cannot be saved directly to session
-                # as it is not serializable: this temporary fixes will create
-                # a new instance of TACACSClient at each TACACS connection
-                # attemp: clearly suboptimal, to be improved later.
                 tacacs_server = db.session.query(TacacsServer).one()
                 tacacs_client = TACACSClient(
                     str(tacacs_server.ip_address),
@@ -163,14 +157,12 @@ def process_user():
 
 @post(bp, '/get/<user_id>', 'Admin Section')
 def get_user(user_id):
-    user = fetch(User, id=user_id)
-    return jsonify(user.serialized)
+    return jsonify(fetch(User, id=user_id).serialized)
 
 
 @post(bp, '/delete/<user_id>', 'Edit Admin Section')
 def delete_user(user_id):
-    user = fetch(User, id=user_id)
-    db.session.delete(user)
+    db.session.delete(fetch(User, id=user_id))
     db.session.commit()
     return jsonify(True)
 
@@ -178,8 +170,7 @@ def delete_user(user_id):
 @post(bp, '/save_tacacs_server', 'Edit parameters')
 def save_tacacs_server():
     TacacsServer.query.delete()
-    tacacs_server = TacacsServer(**request.form.to_dict())
-    db.session.add(tacacs_server)
+    db.session.add(TacacsServer(**request.form.to_dict()))
     db.session.commit()
     return jsonify(True)
 
@@ -187,8 +178,7 @@ def save_tacacs_server():
 @post(bp, '/save_syslog_server', 'Edit parameters')
 def save_syslog_server():
     SyslogServer.query.delete()
-    syslog_server = SyslogServer(**request.form.to_dict())
-    db.session.add(syslog_server)
+    db.session.add(SyslogServer(**request.form.to_dict()))
     db.session.commit()
     return jsonify(True)
 

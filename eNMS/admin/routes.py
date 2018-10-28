@@ -301,7 +301,9 @@ def migration_import():
                         continue
                     elif property in serialization_properties:
                         obj[property] = fetch(
-                            diagram_classes[property],
+                            diagram_classes[property]
+                            if property not in ('source', 'destination')
+                            else Device,
                             id=value
                         )
                     elif property[:-1] in serialization_properties:

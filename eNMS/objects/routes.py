@@ -21,7 +21,15 @@ from eNMS.base.helpers import (
     vault_helper
 )
 from eNMS.objects import bp
-from eNMS.objects.forms import AddLink, AddDevice, AddPoolForm, PoolObjectsForm
+from eNMS.objects.forms import (
+    AddLink,
+    AddDevice,
+    AddPoolForm,
+    ExportForm,
+    NetboxForm,
+    OpenNmsForm,
+    PoolObjectsForm
+)
 from eNMS.objects.models import Link, Device, Pool
 from eNMS.base.properties import (
     boolean_properties,
@@ -98,7 +106,9 @@ def pool_management():
 def import_export():
     return render_template(
         'import_export.html',
-        form=AddPoolForm(request.form),
+        export_form=ExportForm(request.form),
+        netbox_form=NetboxForm(request.form),
+        opennms_form=OpenNmsForm(request.form)
     )
 
 

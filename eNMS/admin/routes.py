@@ -20,12 +20,9 @@ from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
-    ExportForm,
     LoginForm,
     GeographicalParametersForm,
     GottyParametersForm,
-    NetboxForm,
-    OpenNmsForm,
     SyslogServerForm,
     TacacsServerForm,
 )
@@ -139,14 +136,11 @@ def admninistration():
         syslog_server = None
     return render_template(
         'administration.html',
-        export_form=ExportForm(request.form),
         geographical_parameters_form=GeographicalParametersForm(request.form),
         gotty_parameters_form=GottyParametersForm(request.form),
-        netbox_form=NetboxForm(request.form),
         parameters=db.session.query(Parameters).one(),
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),
-        opennms_form=OpenNmsForm(request.form),
         tacacs_server=tacacs_server,
         syslog_server=syslog_server
     )

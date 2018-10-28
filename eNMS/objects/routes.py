@@ -2,14 +2,19 @@ from collections import defaultdict
 from flask import current_app as app, jsonify, render_template, request
 from flask_login import current_user
 from pathlib import Path
+from pynetbox import api as netbox_api
+from requests import get as http_get
 from subprocess import Popen
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
+from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin.models import Parameters
+from eNMS.automation.models import service_classes
+from eNMS.base.classes import classes, diagram_classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     allowed_file,
@@ -17,6 +22,7 @@ from eNMS.base.helpers import (
     get,
     get_device_credentials,
     get_user_credentials,
+    objectify,
     post,
     vault_helper
 )
@@ -33,11 +39,13 @@ from eNMS.objects.forms import (
 from eNMS.objects.models import Link, Device, Pool
 from eNMS.base.properties import (
     boolean_properties,
+    cls_to_properties,
     device_public_properties,
+    import_properties,
     link_table_properties,
     pool_table_properties,
     pretty_names,
-    cls_to_properties
+    serialization_properties
 )
 
 

@@ -8,12 +8,9 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
-from pynetbox import api as netbox_api
 from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
-from requests import get as http_get
-from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin import bp
@@ -31,22 +28,9 @@ from eNMS.admin.models import (
     User,
     TacacsServer
 )
-from eNMS.automation.models import service_classes
-from eNMS.base.classes import classes, diagram_classes
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import (
-    get,
-    objectify,
-    post,
-    fetch,
-    vault_helper
-)
-from eNMS.base.properties import (
-    import_properties,
-    pretty_names,
-    serialization_properties,
-    user_public_properties
-)
+from eNMS.base.helpers import get, post, fetch, vault_helper
+from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.logs.models import SyslogServer
 from eNMS.objects.models import Device
 

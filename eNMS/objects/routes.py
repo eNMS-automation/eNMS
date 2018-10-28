@@ -235,7 +235,7 @@ def update_pools():
     for pool in Pool.query.all():
         pool.compute_pool()
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(True)
 
 
 @post(bp, '/delete_pool/<pool_id>', 'Edit Inventory Section')
@@ -326,7 +326,7 @@ def query_opennms():
                 devices[device]['ip_address'] = interface['ipAddress']
                 factory(Device, **devices[device])
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(True)
 
 
 @post(bp, '/query_netbox', 'Edit objects')
@@ -344,4 +344,4 @@ def query_netbox():
             'longitude': 0.,
             'latitude': 0.
         })
-    return jsonify({'success': True})
+    return jsonify(True)

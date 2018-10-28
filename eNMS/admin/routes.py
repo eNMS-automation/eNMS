@@ -172,7 +172,7 @@ def delete_user(user_id):
     user = fetch(User, id=user_id)
     db.session.delete(user)
     db.session.commit()
-    return jsonify(user.serialized)
+    return jsonify(True)
 
 
 @post(bp, '/save_tacacs_server', 'Edit parameters')
@@ -181,7 +181,7 @@ def save_tacacs_server():
     tacacs_server = TacacsServer(**request.form.to_dict())
     db.session.add(tacacs_server)
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(True)
 
 
 @post(bp, '/save_syslog_server', 'Edit parameters')
@@ -190,20 +190,18 @@ def save_syslog_server():
     syslog_server = SyslogServer(**request.form.to_dict())
     db.session.add(syslog_server)
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(True)
 
 
 @post(bp, '/save_geographical_parameters', 'Edit parameters')
 def save_geographical_parameters():
-    parameters = db.session.query(Parameters).one()
-    parameters.update(**request.form.to_dict())
+    db.session.query(Parameters).one().update(**request.form.to_dict())
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(True)
 
 
 @post(bp, '/save_gotty_parameters', 'Edit parameters')
 def save_gotty_parameters():
-    parameters = db.session.query(Parameters).one()
-    parameters.update(**request.form.to_dict())
+    db.session.query(Parameters).one().update(**request.form.to_dict())
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(True)

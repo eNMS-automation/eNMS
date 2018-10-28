@@ -9,7 +9,11 @@ from wtforms import (
     SelectMultipleField
 )
 
-from eNMS.base.properties import device_subtypes, user_permissions
+from eNMS.base.classes import diagram_classes
+from eNMS.base.properties import (
+    device_subtypes,
+    serialization_properties,
+    user_permissions
 
 
 class LoginForm(FlaskForm):
@@ -69,3 +73,8 @@ class NetboxForm(FlaskForm):
     netbox_token = TextField()
     node_type = [subtype for subtype in device_subtypes.items()]
     netbox_type = SelectField(choices=node_type)
+
+
+class ExportForm(FlaskForm):
+    export_choices = [(k, c.__tablename__) for k, v in diagram_classes.items()]
+    export = SelectMultipleField(choices=export_choices)

@@ -66,7 +66,7 @@ function saveGottyParameters() { // eslint-disable-line no-unused-vars
  * Export all for migration.
  */
 function migrationExport() { // eslint-disable-line no-unused-vars
-  call('/admin/export', function() {
+  fCall('/admin/export', '#export-form', function() {
     alertify.notify('Export successful.', 'success', 5);
   });
 }

@@ -186,19 +186,19 @@
       <div class="col-md-6 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h4 class="text-center">Export (Migration)</h4>
+            <h4 class="text-center">Import / Export (Migration)</h4>
           </div>
           <div class="x_content">
             <br/>
-            <form id="export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div class="form-group" style="height: 450px">
-                {{ export_form.export(class="form-control required") }}
+                {{ export_form.export(class="form-control required", size="15") }}
               </div>
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="migrationExport()">Save changes</button>
+                  <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
+                  <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
                 </div>
               </div>
             </form>

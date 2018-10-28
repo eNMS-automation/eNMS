@@ -10,10 +10,7 @@ from wtforms import (
 )
 
 from eNMS.base.classes import diagram_classes
-from eNMS.base.properties import (
-    device_subtypes,
-    serialization_properties,
-    user_permissions
+from eNMS.base.properties import device_subtypes, user_permissions
 
 
 class LoginForm(FlaskForm):
@@ -76,5 +73,5 @@ class NetboxForm(FlaskForm):
 
 
 class ExportForm(FlaskForm):
-    export_choices = [(k, c.__tablename__) for k, v in diagram_classes.items()]
+    export_choices = [(k, c.__tablename__) for k, c in diagram_classes.items()]
     export = SelectMultipleField(choices=export_choices)

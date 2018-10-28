@@ -13,13 +13,14 @@ from sqlalchemy.orm.exc import NoResultFound
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 from requests import get as http_get
-from yaml import dump
+from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
+    ExportForm,
     LoginForm,
     GeographicalParametersForm,
     GottyParametersForm,
@@ -131,6 +132,7 @@ def admninistration():
         syslog_server = None
     return render_template(
         'administration.html',
+        export_form=ExportForm(request.form),
         geographical_parameters_form=GeographicalParametersForm(request.form),
         gotty_parameters_form=GottyParametersForm(request.form),
         netbox_form=NetboxForm(request.form),
@@ -266,10 +268,19 @@ def save_gotty_parameters():
 
 
 @post(bp, '/export', 'Admin Section')
-def export():
-    for cls_name, cls in diagram_classes.items():
+def migration_export():
+    for cls_name in request.form.getlist('export'):
         path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
         with open(path, 'w') as migration_file:
             instances = diagram_classes[cls_name].export()
             dump(instances, migration_file, default_flow_style=False)
+    return jsonify(True)
+
+
+@post(bp, '/import', 'Admin Section')
+def migration_import():
+    for cls_name in request.form.getlist('export'):
+        path = app.path / 'migrations' / 'export' / f'{cls_name}.yaml'
+        with open(path, 'r') as migration_file:
+            print(load(migration_file))
     return jsonify(True)

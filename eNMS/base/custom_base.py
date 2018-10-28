@@ -47,8 +47,7 @@ class CustomBase(db.Model):
                 result[property] = str(getattr(self, property))
         return result
 
-    @property
-    def serialized(self, export=False):
+    def to_dict(self, export=False):
         get = 'id' if export else 'properties'
         properties = self.properties
         for property in serialization_properties:
@@ -65,8 +64,16 @@ class CustomBase(db.Model):
         return properties
 
     @property
+    def serialized(self):
+        return self.to_dict()
+
+    @property
     def visible(self):
         return not (hasattr(self, 'hidden') and self.hidden)
+
+    @classmethod
+    def export(cls):
+        return [obj.to_dict(export=True) for obj in cls.query.all()]
 
     @classmethod
     def choices(cls):
@@ -75,10 +82,6 @@ class CustomBase(db.Model):
     @classmethod
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
-
-    @classmethod
-    def export(cls):
-        return [obj.properties for obj in cls.query.all()]
 
 
 def factory(cls, **kwargs):

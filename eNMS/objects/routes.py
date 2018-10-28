@@ -286,3 +286,62 @@ def migration_import():
                         obj[property] = value
                 factory(cls, **obj)
     return jsonify(True)
+
+
+@post(bp, '/query_opennms', 'Edit objects')
+def query_opennms():
+    parameters = db.session.query(Parameters).one()
+    login, password = parameters.opennms_login, request.form['password']
+    parameters.update(**request.form.to_dict())
+    db.session.commit()
+    json_devices = http_get(
+        parameters.opennms_devices,
+        headers={'Accept': 'application/json'},
+        auth=(login, password)
+    ).json()['node']
+    devices = {
+        device['id']:
+            {
+            'name': device.get('label', device['id']),
+            'description': device['assetRecord'].get('description', ''),
+            'location': device['assetRecord'].get('building', ''),
+            'vendor': device['assetRecord'].get('manufacturer', ''),
+            'model': device['assetRecord'].get('modelNumber', ''),
+            'operating_system': device.get('operatingSystem', ''),
+            'os_version': device['assetRecord'].get('sysDescription', ''),
+            'longitude': device['assetRecord'].get('longitude', 0.),
+            'latitude': device['assetRecord'].get('latitude', 0.),
+            'subtype': request.form['subtype']
+        } for device in json_devices
+    }
+
+    for device in list(devices):
+        link = http_get(
+            f'{parameters.opennms_rest_api}/nodes/{device}/ipinterfaces',
+            headers={'Accept': 'application/json'},
+            auth=(login, password)
+        ).json()
+        for interface in link['ipInterface']:
+            if interface['snmpPrimary'] == 'P':
+                devices[device]['ip_address'] = interface['ipAddress']
+                factory(Device, **devices[device])
+    db.session.commit()
+    return jsonify({'success': True})
+
+
+@post(bp, '/query_netbox', 'Edit objects')
+def query_netbox():
+    nb = netbox_api(
+        request.form['netbox_address'],
+        token=request.form['netbox_token']
+    )
+    for device in nb.dcim.devices.all():
+        device_ip = device.primary_ip4 or device.primary_ip6
+        factory(Device, **{
+            'name': device.name,
+            'ip_address': str(device_ip).split('/')[0],
+            'subtype': request.form['netbox_type'],
+            'longitude': 0.,
+            'latitude': 0.
+        })
+    return jsonify({'success': True})

@@ -14,7 +14,7 @@ from eNMS.base.associations import (
 )
 from eNMS.base.helpers import fetch
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.properties import cls_to_properties
+from eNMS.base.properties import cls_to_properties, service_properties
 
 
 class Job(CustomBase):
@@ -139,7 +139,10 @@ class Service(Job):
 
     @property
     def properties(self):
-        return {p: getattr(self, p) for p in cls_to_properties['Service']}
+        prop = {p: getattr(self, p) for p in cls_to_properties['Service']}
+        for property in service_properties[self.type]:
+            prop[property] = getattr(self, property)
+        return prop
 
     @property
     def column_values(self):

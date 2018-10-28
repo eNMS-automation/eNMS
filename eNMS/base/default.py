@@ -9,7 +9,11 @@ from eNMS import db
 from eNMS.admin.models import Parameters, User
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import integrity_rollback, fetch
-from eNMS.base.properties import property_types, boolean_properties
+from eNMS.base.properties import (
+    property_types,
+    boolean_properties,
+    service_properties
+)
 from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.automation.models import Job, service_classes, Workflow, WorkflowEdge
@@ -24,6 +28,7 @@ def create_service_classes():
             spec.loader.exec_module(module_from_spec(spec))
     for cls_name, cls in service_classes.items():
         for col in cls.__table__.columns:
+            service_properties[cls_name].append(col.key)
             if type(col.type) == Boolean:
                 boolean_properties.append(col.key)
             if (

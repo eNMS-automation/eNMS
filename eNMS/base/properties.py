@@ -1,3 +1,4 @@
+from collections import defaultdict
 from os import environ
 from yaml import load
 
@@ -332,6 +333,7 @@ pretty_names = {
 
 pretty_names.update({k: k for k in custom_properties})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
+service_properties = defaultdict(list)
 property_types = {}
 
 serialization_properties = (

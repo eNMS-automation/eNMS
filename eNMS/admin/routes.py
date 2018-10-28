@@ -63,11 +63,6 @@ def users():
     )
 
 
-@get(bp, '/migration', 'Admin Section')
-def migration():
-    return render_template('migration.html')
-
-
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

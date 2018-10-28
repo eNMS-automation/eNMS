@@ -14,3 +14,5 @@ classes = {
     'workflow': Workflow,
     'task': Task
 }
+
+service_classes = {}

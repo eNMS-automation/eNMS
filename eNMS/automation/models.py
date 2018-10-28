@@ -159,9 +159,6 @@ class Service(Job):
         return serialized_object
 
 
-service_classes = {}
-
-
 class WorkflowEdge(CustomBase):
 
     __tablename__ = 'WorkflowEdge'

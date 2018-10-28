@@ -13,8 +13,7 @@ from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin.models import Parameters
-from eNMS.automation.models import service_classes
-from eNMS.base.classes import classes, diagram_classes
+from eNMS.base.classes import classes, service_classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     allowed_file,
@@ -175,38 +174,6 @@ def delete_object(obj_type, obj_id):
     return jsonify({'name': obj.name})
 
 
-@post(bp, '/import_topology', 'Edit Inventory Section')
-def import_topology():
-    objects, file = defaultdict(list), request.files['file']
-    if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
-        book = open_workbook(file_contents=file.read())
-        for object_type in ('Device', 'Link'):
-            try:
-                sheet = book.sheet_by_name(object_type)
-            except XLRDError:
-                continue
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(app, **values)
-                objects[object_type].append(factory(cls, **kwargs).serialized)
-            db.session.commit()
-    return jsonify(objects)
-
-
-@post(bp, '/export_topology', 'Inventory Section')
-def export_topology():
-    workbook = Workbook()
-    for cls in (Device, Link):
-        sheet, objects = workbook.add_sheet(cls.__tablename__), cls.serialize()
-        for index, property in enumerate(cls_to_properties[cls.__tablename__]):
-            sheet.write(0, index, property)
-            for obj_index, obj in enumerate(objects, 1):
-                sheet.write(obj_index, index, obj[property])
-    workbook.save(Path.cwd() / 'projects' / 'objects.xls')
-    return jsonify(True)
-
-
 @post(bp, '/process_pool', 'Edit Inventory Section')
 def process_pool():
     form = request.form.to_dict()
@@ -254,13 +221,45 @@ def delete_pool(pool_id):
     return jsonify(pool.name)
 
 
+@post(bp, '/import_topology', 'Edit Inventory Section')
+def import_topology():
+    objects, file = defaultdict(list), request.files['file']
+    if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
+        book = open_workbook(file_contents=file.read())
+        for object_type in ('Device', 'Link'):
+            try:
+                sheet = book.sheet_by_name(object_type)
+            except XLRDError:
+                continue
+            properties = sheet.row_values(0)
+            for row_index in range(1, sheet.nrows):
+                values = dict(zip(properties, sheet.row_values(row_index)))
+                cls, kwargs = process_kwargs(app, **values)
+                objects[object_type].append(factory(cls, **kwargs).serialized)
+            db.session.commit()
+    return jsonify(objects)
+
+
+@post(bp, '/export_topology', 'Inventory Section')
+def export_topology():
+    workbook = Workbook()
+    for cls in (Device, Link):
+        sheet, objects = workbook.add_sheet(cls.__tablename__), cls.serialize()
+        for index, property in enumerate(cls_to_properties[cls.__tablename__]):
+            sheet.write(0, index, property)
+            for obj_index, obj in enumerate(objects, 1):
+                sheet.write(obj_index, index, obj[property])
+    workbook.save(Path.cwd() / 'projects' / 'objects.xls')
+    return jsonify(True)
+
+
 @post(bp, '/migration_export', 'Admin Section')
 def migration_export():
     name = request.form['name']
     for cls_name in request.form.getlist('export'):
         path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
         with open(path, 'w') as migration_file:
-            instances = diagram_classes[cls_name].export()
+            instances = classes[cls_name].export()
             dump(instances, migration_file, default_flow_style=False)
     return jsonify(True)
 
@@ -276,7 +275,7 @@ def migration_import():
                 if cls_name == 'service':
                     cls = service_classes[obj_data.pop('type')]
                 else:
-                    cls = diagram_classes[cls_name]
+                    cls = classes[cls_name]
                 for property, value in obj_data.items():
                     if property not in import_properties[cls_name]:
                         continue

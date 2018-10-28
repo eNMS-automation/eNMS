@@ -30,7 +30,7 @@ def dashboard():
 
 @post(bp, '/counters/<property>/<type>')
 def get_counters(property, type):
-    objects = diagram_classes[type].query.all()
+    objects = classes[type].query.all()
     if property in reverse_pretty_names:
         property = reverse_pretty_names[property]
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))

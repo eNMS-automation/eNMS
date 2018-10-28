@@ -194,11 +194,6 @@ def get_pool(pool_id):
     return jsonify(fetch(Pool, id=pool_id).serialized)
 
 
-@post(bp, '/get_pool_objects/<pool_id>', 'Inventory Section')
-def get_pool_objects(pool_id):
-    return jsonify(fetch(Pool, id=pool_id).serialized)
-
-
 @post(bp, '/save_pool_objects/<pool_id>', 'Edit Inventory Section')
 def save_pool_objects(pool_id):
     pool = fetch(Pool, id=pool_id)

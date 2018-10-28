@@ -78,7 +78,7 @@ function showPoolModal(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the pool.
  */
 function showPoolObjects(id) { // eslint-disable-line no-unused-vars
-  call(`/objects/get_pool_objects/${id}`, function(result) {
+  call(`/objects/get_pool/${id}`, function(result) {
     $('#devices').val(result.devices.map((n) => n.id));
     $('#links').val(result.links.map((l) => l.id));
     poolId = id;

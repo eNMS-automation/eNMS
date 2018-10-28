@@ -181,17 +181,6 @@ class Pool(AbstractPool):
             if self.object_match(link):
                 self.links.append(link)
 
-    def get_properties(self):
-        result = {}
-        for p in link_public_properties:
-            for property in f'link_{p} link_{p}_regex'.split():
-                result[property] = getattr(self, property)
-        for p in device_public_properties:
-            for property in f'device_{p} device_{p}_regex'.split():
-                result[property] = getattr(self, property)
-        result['name'], result['description'] = self.name, self.description
-        return result
-
     def object_match(self, obj):
         return all(
             # if the device-regex property is not in the request, the

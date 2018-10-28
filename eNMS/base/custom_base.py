@@ -27,6 +27,7 @@ class CustomBase(db.Model):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
             if property in boolean_properties:
+                print(property, value)
                 value = kwargs[property] in ('y', 'on')
             elif 'regex' in property:
                 value = property in kwargs

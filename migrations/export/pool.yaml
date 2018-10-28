@@ -1,4 +1,28 @@
 - description: All objects
+  device_description: null
+  device_description_regex: null
+  device_ip_address: null
+  device_ip_address_regex: null
+  device_latitude: null
+  device_latitude_regex: null
+  device_location: null
+  device_location_regex: null
+  device_longitude: null
+  device_longitude_regex: null
+  device_model: null
+  device_model_regex: null
+  device_name: null
+  device_name_regex: null
+  device_operating_system: null
+  device_operating_system_regex: null
+  device_os_version: null
+  device_os_version_regex: null
+  device_port: null
+  device_port_regex: null
+  device_subtype: null
+  device_subtype_regex: null
+  device_vendor: null
+  device_vendor_regex: null
   devices:
   - 1
   - 2
@@ -29,6 +53,26 @@
   - 27
   id: 1
   jobs: []
+  link_description: null
+  link_description_regex: null
+  link_destination: null
+  link_destination_name: null
+  link_destination_name_regex: null
+  link_destination_regex: null
+  link_location: null
+  link_location_regex: null
+  link_model: null
+  link_model_regex: null
+  link_name: null
+  link_name_regex: null
+  link_source: null
+  link_source_name: null
+  link_source_name_regex: null
+  link_source_regex: null
+  link_subtype: null
+  link_subtype_regex: null
+  link_vendor: null
+  link_vendor_regex: null
   links:
   - 28
   - 29
@@ -60,6 +104,30 @@
   - 55
   name: All objects
 - description: Devices only
+  device_description: null
+  device_description_regex: null
+  device_ip_address: null
+  device_ip_address_regex: null
+  device_latitude: null
+  device_latitude_regex: null
+  device_location: null
+  device_location_regex: null
+  device_longitude: null
+  device_longitude_regex: null
+  device_model: null
+  device_model_regex: null
+  device_name: null
+  device_name_regex: null
+  device_operating_system: null
+  device_operating_system_regex: null
+  device_os_version: null
+  device_os_version_regex: null
+  device_port: null
+  device_port_regex: null
+  device_subtype: null
+  device_subtype_regex: null
+  device_vendor: null
+  device_vendor_regex: null
   devices:
   - 1
   - 2
@@ -90,12 +158,76 @@
   - 27
   id: 2
   jobs: []
+  link_description: null
+  link_description_regex: null
+  link_destination: null
+  link_destination_name: null
+  link_destination_name_regex: null
+  link_destination_regex: null
+  link_location: null
+  link_location_regex: null
+  link_model: null
+  link_model_regex: null
+  link_name: ^$
+  link_name_regex: true
+  link_source: null
+  link_source_name: null
+  link_source_name_regex: null
+  link_source_regex: null
+  link_subtype: null
+  link_subtype_regex: null
+  link_vendor: null
+  link_vendor_regex: null
   links: []
   name: Devices only
 - description: Links only
+  device_description: null
+  device_description_regex: null
+  device_ip_address: null
+  device_ip_address_regex: null
+  device_latitude: null
+  device_latitude_regex: null
+  device_location: null
+  device_location_regex: null
+  device_longitude: null
+  device_longitude_regex: null
+  device_model: null
+  device_model_regex: null
+  device_name: ^$
+  device_name_regex: true
+  device_operating_system: null
+  device_operating_system_regex: null
+  device_os_version: null
+  device_os_version_regex: null
+  device_port: null
+  device_port_regex: null
+  device_subtype: null
+  device_subtype_regex: null
+  device_vendor: null
+  device_vendor_regex: null
   devices: []
   id: 3
   jobs: []
+  link_description: null
+  link_description_regex: null
+  link_destination: null
+  link_destination_name: null
+  link_destination_name_regex: null
+  link_destination_regex: null
+  link_location: null
+  link_location_regex: null
+  link_model: null
+  link_model_regex: null
+  link_name: null
+  link_name_regex: null
+  link_source: null
+  link_source_name: null
+  link_source_name_regex: null
+  link_source_regex: null
+  link_subtype: null
+  link_subtype_regex: null
+  link_vendor: null
+  link_vendor_regex: null
   links:
   - 28
   - 29

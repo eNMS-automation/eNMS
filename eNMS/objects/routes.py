@@ -191,7 +191,7 @@ def process_pool():
 
 @post(bp, '/get_pool/<pool_id>', 'Inventory Section')
 def get_pool(pool_id):
-    return jsonify(fetch(Pool, id=pool_id).get_properties())
+    return jsonify(fetch(Pool, id=pool_id).serialized)
 
 
 @post(bp, '/get_pool_objects/<pool_id>', 'Inventory Section')

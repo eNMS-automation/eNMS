@@ -313,6 +313,5 @@ def migration_import():
                         )
                     else:
                         obj[property] = value
-                print(obj)
                 factory(cls, **obj)
     return jsonify(True)

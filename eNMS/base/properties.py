@@ -88,7 +88,18 @@ link_table_properties = object_common_properties[1:] + [
     'destination_name'
 ]
 
+pool_table_properties = base_properties[1:]
+
 pool_public_properties = base_properties[1:]
+
+for obj_type, properties in (
+    ('device', device_public_properties),
+    ('link', link_public_properties)
+):
+    for prop in properties:
+        for property in f'{obj_type}_{prop} {obj_type}_{prop}_regex'.split():
+            pool_public_properties.append(property)
+
 
 job_public_properties = [
     'name',

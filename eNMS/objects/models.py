@@ -166,13 +166,6 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    @property
-    def serialized(self):
-        properties = self.properties
-        for prop in ('devices', 'links'):
-            properties[prop] = [obj.properties for obj in getattr(self, prop)]
-        return properties
-
     def compute_pool(self):
         self.devices = list(filter(self.object_match, Device.query.all()))
         self.links = []

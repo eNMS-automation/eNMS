@@ -27,7 +27,7 @@ from eNMS.base.properties import (
     boolean_properties,
     device_public_properties,
     link_table_properties,
-    pool_public_properties,
+    pool_table_properties,
     pretty_names,
     cls_to_properties
 )
@@ -89,7 +89,7 @@ def pool_management():
         form=AddPoolForm(request.form),
         pool_object_form=pool_object_form,
         names=pretty_names,
-        fields=pool_public_properties,
+        fields=pool_table_properties,
         pools=Pool.serialize()
     )
 

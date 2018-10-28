@@ -43,8 +43,17 @@ function importTopology(objType) { // eslint-disable-line no-unused-vars
 /**
  * Export all for migration.
  */
+function migrationExport() { // eslint-disable-line no-unused-vars
+  fCall('/migration_export', '#import-export-form', function() {
+    alertify.notify('Export successful.', 'success', 5);
+  });
+}
+
+/**
+ * Export all for migration.
+ */
 function migrationImport() { // eslint-disable-line no-unused-vars
-  fCall('/admin/migration_import', '#import-export-form', function() {
+  fCall('/migration_import', '#import-export-form', function() {
     alertify.notify('Import successful.', 'success', 5);
   });
 }

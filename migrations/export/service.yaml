@@ -6,6 +6,7 @@
   devices: []
   id: 1
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  multiprocessing: false
   name: Start
   number_of_retries: 0
   pools: []
@@ -35,6 +36,7 @@
   devices: []
   id: 2
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  multiprocessing: false
   name: End
   number_of_retries: 0
   pools: []
@@ -67,26 +69,38 @@
   devices:
   - 4
   id: 3
+  local_as: 100
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  loopback: Lo100
+  loopback_ip: 100.1.1.1
   name: napalm_configure_bgp_1
+  neighbor_ip: 100.1.2.1
   number_of_retries: 0
   pools: []
   positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  remote_as: 200
   sources: []
   state: Idle
   tasks: []
   time_between_retries: 10
   type: configure_bgp_service
+  vrf_name: configure_BGP_test
   waiting_time: 0
-- description: Create a VRF "test" with Netmiko
+- content: vrf definition test
+  description: Create a VRF "test" with Netmiko
   destinations:
   - 2
   devices:
   - 4
+  driver: arista_eos
+  enable_mode: true
+  fast_cli: true
+  global_delay_factor: 1.0
   id: 4
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: netmiko_create_vrf_test
   number_of_retries: 0
+  operating_system: eos
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -102,12 +116,17 @@
   time_between_retries: 10
   type: netmiko_configuration_service
   waiting_time: 0
-- description: Check that the vrf "test" is configured
+- command: show vrf
+  content_match: test
+  content_match_regex: null
+  description: Check that the vrf "test" is configured
   destinations:
   - 3
   - 8
   devices:
   - 4
+  driver: arista_eos
+  fast_cli: true
   id: 5
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: netmiko_check_vrf_test
@@ -132,15 +151,21 @@
   time_between_retries: 10
   type: netmiko_validation_service
   waiting_time: 0
-- description: Delete VRF "test"
+- content: no vrf definition test
+  description: Delete VRF "test"
   destinations:
   - 4
   devices:
   - 4
+  driver: arista_eos
+  enable_mode: true
+  fast_cli: true
+  global_delay_factor: 1.0
   id: 6
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: netmiko_delete_vrf_test
   number_of_retries: 0
+  operating_system: eos
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -156,12 +181,17 @@
   time_between_retries: 10
   type: netmiko_configuration_service
   waiting_time: 1
-- description: Check that the vrf "test" is NOT configured
+- command: show vrf
+  content_match: ^((?!test).)*$
+  content_match_regex: true
+  description: Check that the vrf "test" is NOT configured
   destinations:
   - 5
   - 10
   devices:
   - 4
+  driver: arista_eos
+  fast_cli: true
   id: 7
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: netmiko_check_no_vrf_test
@@ -186,15 +216,21 @@
   time_between_retries: 10
   type: netmiko_validation_service
   waiting_time: 0
-- description: Create a VRF "test" with Napalm
+- action: load_merge_candidate
+  content: 'vrf definition test
+
+    '
+  description: Create a VRF "test" with Napalm
   destinations:
   - 7
   devices:
   - 4
+  driver: eos
   id: 9
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: napalm_create_vrf_test
   number_of_retries: 0
+  optional_args: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -215,10 +251,12 @@
   - 9
   devices:
   - 4
+  driver: eos
   id: 10
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: Napalm eos Rollback
   number_of_retries: 0
+  optional_args: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -234,7 +272,11 @@
   time_between_retries: 10
   type: napalm_rollback_service
   waiting_time: 0
-- description: Use GET ReST call on Washington
+- call_type: GET
+  content_match: ''
+  content_match_regex: null
+  convert_to_xml: null
+  description: Use GET ReST call on Washington
   destinations:
   - 12
   - 13
@@ -242,8 +284,11 @@
   - 4
   id: 12
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  multiprocessing: null
   name: GET_Washington
   number_of_retries: 0
+  password: admin
+  payload: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -258,16 +303,27 @@
   tasks: []
   time_between_retries: 10
   type: rest_call_service
+  url: http://127.0.0.1:5000/rest/object/device/Washington
+  username: admin
   waiting_time: 0
-- description: 'Getter: get_facts'
+- content_match: ''
+  content_match_regex: null
+  description: 'Getter: get_facts'
   destinations:
   - 14
   devices:
   - 4
+  driver: eos
+  getters: !!python/object/new:sqlalchemy.ext.mutable.MutableList
+    listitems:
+    - get_facts
+    state:
+    - get_facts
   id: 13
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: get_facts
   number_of_retries: 0
+  optional_args: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -283,15 +339,24 @@
   time_between_retries: 10
   type: napalm_getters_service
   waiting_time: 0
-- description: 'Getter: get_interfaces'
+- content_match: ''
+  content_match_regex: null
+  description: 'Getter: get_interfaces'
   destinations:
   - 17
   devices:
   - 4
+  driver: eos
+  getters: !!python/object/new:sqlalchemy.ext.mutable.MutableList
+    listitems:
+    - get_interfaces
+    state:
+    - get_interfaces
   id: 14
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: get_interfaces
   number_of_retries: 0
+  optional_args: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -307,15 +372,24 @@
   time_between_retries: 10
   type: napalm_getters_service
   waiting_time: 0
-- description: 'Getter: get_interfaces_ip'
+- content_match: ''
+  content_match_regex: null
+  description: 'Getter: get_interfaces_ip'
   destinations:
   - 15
   devices:
   - 4
+  driver: eos
+  getters: !!python/object/new:sqlalchemy.ext.mutable.MutableList
+    listitems:
+    - get_interfaces_ip
+    state:
+    - get_interfaces_ip
   id: 15
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: get_interfaces_ip
   number_of_retries: 0
+  optional_args: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -331,15 +405,24 @@
   time_between_retries: 10
   type: napalm_getters_service
   waiting_time: 0
-- description: 'Getter: get_config'
+- content_match: ''
+  content_match_regex: null
+  description: 'Getter: get_config'
   destinations:
   - 16
   devices:
   - 4
+  driver: eos
+  getters: !!python/object/new:sqlalchemy.ext.mutable.MutableList
+    listitems:
+    - get_config
+    state:
+    - get_config
   id: 16
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: get_config
   number_of_retries: 0
+  optional_args: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -362,6 +445,7 @@
   - 4
   id: 17
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  multiprocessing: false
   name: process_payload1
   number_of_retries: 0
   pools: []

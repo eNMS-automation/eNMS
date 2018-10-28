@@ -12,6 +12,7 @@ from eNMS.base.helpers import integrity_rollback, fetch
 from eNMS.base.properties import (
     property_types,
     boolean_properties,
+    service_import_properties,
     service_properties
 )
 from eNMS.objects.models import Device, Pool
@@ -29,6 +30,7 @@ def create_service_classes():
     for cls_name, cls in service_classes.items():
         for col in cls.__table__.columns:
             service_properties[cls_name].append(col.key)
+            service_import_properties.append(col.key)
             if type(col.type) == Boolean:
                 boolean_properties.append(col.key)
             if (

@@ -4,7 +4,7 @@ from flask_restful import Api, Resource
 from eNMS import auth, db
 from eNMS.admin.models import User
 from eNMS.automation.models import Job
-from eNMS.base.classes import diagram_classes
+from eNMS.base.classes import classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import get_user_credentials, fetch
 
@@ -34,10 +34,10 @@ class GetInstance(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls_name, object_name):
-        return fetch(diagram_classes[cls_name], name=object_name).serialized
+        return fetch(classes[cls_name], name=object_name).serialized
 
     def delete(self, cls_name, object_name):
-        obj = fetch(diagram_classes[cls_name], name=object_name)
+        obj = fetch(classes[cls_name], name=object_name)
         db.session.delete(obj)
         db.session.commit()
         return f'{cls_name} {object_name} successfully deleted'

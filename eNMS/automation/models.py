@@ -247,3 +247,6 @@ class Workflow(Job):
             self.status['current_job'] = None
             db.session.commit()
         return results
+
+
+service_classes = {}

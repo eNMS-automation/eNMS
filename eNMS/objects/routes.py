@@ -13,7 +13,6 @@ from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin.models import Parameters
-from eNMS.base.classes import classes, service_classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     allowed_file,
@@ -30,7 +29,7 @@ from eNMS.objects.forms import (
     AddLink,
     AddDevice,
     AddPoolForm,
-    ExportForm,
+    ImportExportForm,
     NetboxForm,
     OpenNmsForm,
     PoolObjectsForm

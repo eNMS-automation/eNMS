@@ -6,16 +6,14 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
 from eNMS import db
-from eNMS.admin.models import Parameters, User
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import integrity_rollback, fetch, process_kwargs
+from eNMS.base.helpers import classes, integrity_rollback, fetch, process_kwargs
 from eNMS.base.properties import (
     property_types,
     boolean_properties,
     service_import_properties,
     service_properties
 )
-from eNMS.objects.models import Device, Pool
 from eNMS.objects.routes import process_kwargs
 from eNMS.automation.models import Job, service_classes, Workflow, WorkflowEdge
 

@@ -8,4 +8,4 @@ bp = Blueprint(
     static_folder='static'
 )
 
-import eNMS.admin.routes  # noqa: F401
+# import eNMS.admin.routes  # noqa: F401

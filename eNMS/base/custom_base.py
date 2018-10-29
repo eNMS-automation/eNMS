@@ -1,7 +1,6 @@
 from json import dumps, loads
 
 from eNMS import db
-from eNMS.base.helpers import fetch
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,
@@ -82,17 +81,3 @@ class CustomBase(db.Model):
     @classmethod
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
-
-
-def factory(cls, **kwargs):
-    if 'id' in kwargs:
-        instance = fetch(cls, id=kwargs['id'])
-    else:
-        instance = fetch(cls, name=kwargs['name'])
-    if instance:
-        instance.update(**kwargs)
-    else:
-        instance = cls(**kwargs)
-        db.session.add(instance)
-    db.session.commit()
-    return instance

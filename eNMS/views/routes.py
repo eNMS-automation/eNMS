@@ -2,7 +2,6 @@ from flask import current_app, jsonify, render_template, request
 from os.path import join
 from simplekml import Kml
 
-from eNMS.admin.models import Parameters
 from eNMS.base.helpers import (
     choices,
     fetch,
@@ -95,6 +94,6 @@ def export_to_google_earth():
 def get_logs(device_id):
     device_logs = [
         log.content for log in fetch_all('Log')
-        if log.source == fetch(Device, id=device_id).ip_address
+        if log.source == fetch('Device', id=device_id).ip_address
     ]
     return jsonify('\n'.join(device_logs) or True)

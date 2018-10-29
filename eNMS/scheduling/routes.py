@@ -3,7 +3,6 @@ from flask_login import current_user
 from re import search, sub
 
 from eNMS import db
-from eNMS.base.models import classes
 from eNMS.base.helpers import (
     choices,
     factory,

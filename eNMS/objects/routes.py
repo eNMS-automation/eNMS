@@ -15,6 +15,7 @@ from eNMS import db
 from eNMS.base.helpers import (
     choices,
     delete,
+    export,
     factory,
     fetch,
     fetch_all,
@@ -238,12 +239,12 @@ def migration_export():
 def migration_import():
     name = request.form['name']
     for cls in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
+        path = app.path / 'migrations' / 'export' / name / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             for obj_data in load(migration_file):
-                cls = obj_data.pop('type') if cls == 'service' else cls
+                cls, obj = obj_data.pop('type') if cls == 'service' else cls, {}
                 for property, value in obj_data.items():
-                    if property not in import_properties[cls_name]:
+                    if property not in import_properties[cls]:
                         continue
                     elif property in serialization_properties:
                         obj[property] = fetch(
@@ -296,7 +297,7 @@ def query_opennms():
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
                 devices[device]['ip_address'] = interface['ipAddress']
-                factory(classes['Device'], **devices[device])
+                factory('Device', **devices[device])
     db.session.commit()
     return jsonify(True)
 
@@ -309,7 +310,7 @@ def query_netbox():
     )
     for device in nb.dcim.devices.all():
         device_ip = device.primary_ip4 or device.primary_ip6
-        factory(classes['Device'], **{
+        factory('Device', **{
             'name': device.name,
             'ip_address': str(device_ip).split('/')[0],
             'subtype': request.form['netbox_type'],

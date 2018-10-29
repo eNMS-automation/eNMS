@@ -143,7 +143,8 @@ def connection(id):
 
 @post(bp, '/edit_object', 'Edit Inventory Section')
 def edit_object():
-    return jsonify(factory(*process_kwargs(app, **request.form.to_dict())))
+    cls, kwargs = process_kwargs(app, **request.form.to_dict())
+    return jsonify(factory(cls, **kwargs).serialized)
 
 
 @post(bp, '/delete/<obj_type>/<obj_id>', 'Edit Inventory Section')
@@ -205,9 +206,8 @@ def import_topology():
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                objects[obj_type].append(
-                    factory(*process_kwargs(app, **values)).serialized
-                )
+                cls, kwargs = process_kwargs(app, **values)
+                objects[obj_type].append(factory(cls, **kwargs).serialized)
             db.session.commit()
     return jsonify(objects)
 

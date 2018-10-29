@@ -16,7 +16,7 @@ def fetch_all(model):
 
 
 def objectify(model, object_list):
-    return [fetch(classes[model], id=object_id) for object_id in object_list]
+    return [fetch(model, id=object_id) for object_id in object_list]
 
 
 def delete(model, **kwargs):

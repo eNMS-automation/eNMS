@@ -21,9 +21,14 @@ bp = Blueprint(
 )
 
 from eNMS.base.classes import classes, service_classes
-from eNMS.automation.models import Job, Service, Workflow
+from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
 
-classes.update({'Job': Job, 'Service': Service, 'Workflow': Workflow})
+classes.update({
+    'Job': Job,
+    'Service': Service,
+    'Workflow': Workflow,
+    'WorkflowEdge': WorkflowEdge
+})
 
 def create_service_classes():
     path_services = Path.cwd() / 'eNMS' / 'automation' / 'services'

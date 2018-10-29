@@ -8,7 +8,7 @@ from xlrd.biffh import XLRDError
 from eNMS import db
 from eNMS.admin.models import Parameters, User
 from eNMS.base.custom_base import factory
-from eNMS.base.helpers import integrity_rollback, fetch
+from eNMS.base.helpers import integrity_rollback, fetch, process_kwargs
 from eNMS.base.properties import (
     property_types,
     boolean_properties,

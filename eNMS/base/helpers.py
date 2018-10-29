@@ -75,6 +75,26 @@ def str_dict(input, depth=0):
         return str(input)
 
 
+def process_kwargs(app, **kwargs):
+    if 'source' in kwargs:
+        source = fetch(Device, name=kwargs.pop('source'))
+        destination = fetch(Device, name=kwargs.pop('destination'))
+        kwargs.update({
+            'source_id': source.id,
+            'destination_id': destination.id,
+            'source': source,
+            'destination': destination
+        })
+    else:
+        if app.config['USE_VAULT']:
+            data = {
+                property: kwargs.pop(property, '')
+                for property in ('username', 'password', 'enable_password')
+            }
+            vault_helper(app, f'device/{kwargs["name"]}', data)
+    return Link if 'source' in kwargs else Device, kwargs
+
+
 def allowed_file(name, allowed_extensions):
     allowed_syntax = '.' in name
     allowed_extension = name.rsplit('.', 1)[1].lower() in allowed_extensions

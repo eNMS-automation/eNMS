@@ -13,6 +13,7 @@ from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin.models import Parameters
+from eNMS.base.classes import classes
 from eNMS.base.custom_base import factory
 from eNMS.base.helpers import (
     allowed_file,
@@ -22,6 +23,7 @@ from eNMS.base.helpers import (
     get_user_credentials,
     objectify,
     post,
+    process_kwargs,
     vault_helper
 )
 from eNMS.objects import bp
@@ -47,24 +49,7 @@ from eNMS.base.properties import (
 )
 
 
-def process_kwargs(app, **kwargs):
-    if 'source' in kwargs:
-        source = fetch(Device, name=kwargs.pop('source'))
-        destination = fetch(Device, name=kwargs.pop('destination'))
-        kwargs.update({
-            'source_id': source.id,
-            'destination_id': destination.id,
-            'source': source,
-            'destination': destination
-        })
-    else:
-        if app.config['USE_VAULT']:
-            data = {
-                property: kwargs.pop(property, '')
-                for property in ('username', 'password', 'enable_password')
-            }
-            vault_helper(app, f'device/{kwargs["name"]}', data)
-    return Link if 'source' in kwargs else Device, kwargs
+
 
 
 @get(bp, '/device_management', 'Inventory Section')

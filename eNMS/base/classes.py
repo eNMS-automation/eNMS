@@ -15,9 +15,4 @@ classes = {
     'task': Task
 }
 
-# properties = {
-#     'single':
-#         'destination': Device,
-#         'job': Job,
-#         'source': Device,
-#         'user
+properties = {}

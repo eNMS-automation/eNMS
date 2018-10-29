@@ -1,4 +1,16 @@
 from flask import Blueprint
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+from sqlalchemy import Boolean, Float, Integer, PickleType
+
+from eNMS import db
+from eNMS.base.properties import (
+    property_types,
+    boolean_properties,
+    service_import_properties,
+    service_properties
+)
+
 
 bp = Blueprint(
     'automation_blueprint',
@@ -8,7 +20,7 @@ bp = Blueprint(
     static_folder='static'
 )
 
-from eNMS.base.classes import classes
+from eNMS.base.classes import classes, service_classes
 from eNMS.automation.models import Job, Service, Workflow
 
 classes.update({'Job': Job, 'Service': Service, 'Workflow': Workflow})

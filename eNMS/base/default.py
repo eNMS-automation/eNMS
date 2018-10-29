@@ -105,7 +105,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_create_vrf_test',
             'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
-            'devices': [fetch(classes['Device'], name='Washington')],
+            'devices': [fetch('Device', name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -132,7 +132,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_delete_vrf_test',
             'description': 'Delete VRF "test"',
             'waiting_time': 1,
-            'devices': [fetch(classes['Device'], name='Washington')],
+            'devices': [fetch('Device', name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -146,7 +146,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_no_vrf_test',
             'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
-            'devices': [fetch(classes['Device'], name='Washington')],
+            'devices': [fetch('Device', name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -188,7 +188,7 @@ def create_napalm_workflow():
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
-            'devices': [fetch(classes['Device'], name='Washington')],
+            'devices': [fetch('Device', name='Washington')],
             'driver': 'eos',
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -201,14 +201,14 @@ def create_napalm_workflow():
             'name': 'Napalm eos Rollback',
             'driver': 'eos',
             'description': 'Rollback a configuration with Napalm eos',
-            'devices': [fetch(classes['Device'], name='Washington')],
+            'devices': [fetch('Device', name='Washington')],
             'waiting_time': 0
         }
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-    services.insert(1, fetch(Job, name='netmiko_check_vrf_test'))
-    services.append(fetch(Job, name=f'netmiko_check_no_vrf_test'))
+    services.insert(1, fetch('Job', name='netmiko_check_vrf_test'))
+    services.append(fetch('Job', name=f'netmiko_check_no_vrf_test'))
     workflow = factory('Workflow', **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',

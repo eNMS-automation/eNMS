@@ -15,6 +15,16 @@ def objectify(model, object_list):
     return [fetch(classes[model], id=object_id) for object_id in object_list]
 
 
+def delete(model, **kwargs):
+    instance = db.session.query(classes[model]).filter_by(**kwargs).first()
+    db.session.delete(pool)
+    db.session.commit()
+    return instance.serialized
+
+def serialize(model):
+    return classes[model].serialize()
+
+
 def factory(cls_name, **kwargs):
     if 'id' in kwargs:
         instance = fetch(cls_name, id=kwargs['id'])

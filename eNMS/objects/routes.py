@@ -15,11 +15,13 @@ from eNMS import db
 from eNMS.admin.models import Parameters
 from eNMS.base.models import classes
 from eNMS.base.helpers import (
+    delete,
     factory,
     fetch,
     get,
     objectify,
     post,
+    serialize
 )
 from eNMS.base.security import (
     allowed_file,
@@ -159,7 +161,7 @@ def process_pool():
     for property in boolean_properties:
         if property not in form:
             form[property] = 'off'
-    return jsonify(factory('Pool, **form).serialized)
+    return jsonify(factory('Pool', **form).serialized)
 
 
 @post(bp, '/get_pool/<pool_id>', 'Inventory Section')
@@ -193,10 +195,7 @@ def update_pools():
 
 @post(bp, '/delete_pool/<pool_id>', 'Edit Inventory Section')
 def delete_pool(pool_id):
-    pool = fetch('Pool', id=pool_id)
-    db.session.delete(pool)
-    db.session.commit()
-    return jsonify(pool.name)
+    return jsonify(delete('Pool', id=pool_id))
 
 
 @post(bp, '/import_topology', 'Edit Inventory Section')
@@ -221,7 +220,7 @@ def import_topology():
 @post(bp, '/export_topology', 'Inventory Section')
 def export_topology():
     workbook = Workbook()
-    for cls in ('Device', 'Link'):
+    for cls in (classes['Device'], classes['Link']):
         sheet, objects = workbook.add_sheet(cls.__tablename__), cls.serialize()
         for index, property in enumerate(cls_to_properties[cls.__tablename__]):
             sheet.write(0, index, property)

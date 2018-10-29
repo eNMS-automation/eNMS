@@ -14,3 +14,10 @@ classes = {
     'workflow': Workflow,
     'task': Task
 }
+
+# properties = {
+#     'single':
+#         'destination': Device,
+#         'job': Job,
+#         'source': Device,
+#         'user

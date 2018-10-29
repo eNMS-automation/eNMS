@@ -9,7 +9,6 @@ document.getElementById('file').onchange = function() {
   importTopology('Device');
 };
 
-
 /**
  * Export topology.
  */

@@ -8,7 +8,7 @@ from eNMS.base.associations import (
     job_device_table,
     job_pool_table
 )
-from eNMS.base.custom_base import CustomBase
+from eNMS.base.base import Base
 from eNMS.base.helpers import sql_types
 from eNMS.base.properties import (
     custom_properties,
@@ -17,7 +17,7 @@ from eNMS.base.properties import (
 )
 
 
-class Object(CustomBase):
+class Object(Base):
 
     __tablename__ = 'Object'
 
@@ -124,7 +124,7 @@ class Link(Object):
     class_type = 'link'
 
 
-AbstractPool = type('AbstractPool', (CustomBase,), {
+AbstractPool = type('AbstractPool', (Base,), {
     '__tablename__': 'AbstractPool',
     'id': Column(Integer, primary_key=True),
     '__mapper_args__': {'polymorphic_identity': 'AbstractPool'}, **{

@@ -5,10 +5,10 @@ from sqlalchemy.orm import relationship
 
 from eNMS import db, scheduler
 from eNMS.automation.helpers import scheduler_job
-from eNMS.base.custom_base import CustomBase
+from eNMS.base.base import Base
 
 
-class Task(CustomBase):
+class Task(Base):
 
     __tablename__ = 'Task'
 

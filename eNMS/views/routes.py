@@ -3,7 +3,15 @@ from os.path import join
 from simplekml import Kml
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import choices, fetch, fetch_all, get, post
+from eNMS.base.helpers import (
+    choices,
+    fetch,
+    fetch_all,
+    get,
+    get_one,
+    post,
+    serialize
+)
 from eNMS.base.properties import (
     device_public_properties,
     device_subtypes,
@@ -18,6 +26,7 @@ from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
 @get(bp, '/<view_type>_view', 'Views Section')
 def view(view_type):
+    devices = fetch_all('Device')
     add_link_form = AddLink(request.form)
     add_link_form.source.choices = choices('Device')
     add_link_form.destination.choices = choices('Device')
@@ -27,18 +36,18 @@ def view(view_type):
             'device': request.form['device_label'],
             'link': request.form['link_label']
         }
-    if len(Device.query.all()) < 50:
+    if len(devices) < 50:
         view = 'glearth'
-    elif len(Device.query.all()) < 2000:
+    elif len(devices) < 2000:
         view = 'leaflet'
     else:
         view = 'markercluster'
     if 'view' in request.form:
         view = request.form['view']
-    name_to_id = {d.name: id for id, d in enumerate(fetch_all('Device'))}
+    name_to_id = {device.name: id for id, device in enumerate(devices)}
     return render_template(
         f'{view_type}_view.html',
-        pools=fetch_all('Pool',
+        pools=fetch_all('Pool'),
         parameters=get_one('Parameters'),
         view=view,
         view_options_form=ViewOptionsForm(request.form),

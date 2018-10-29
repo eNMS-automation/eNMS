@@ -1,5 +1,4 @@
-from eNMS.admin.models import TacacsServer, User
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, fetch_all
 from tests.test_base import check_blueprints
 
 
@@ -13,10 +12,10 @@ def test_user_management(user_client):
             'password': user,
         }
         user_client.post('/admin/process_user', data=dict_user)
-    assert len(User.query.all()) == 4
-    user1 = fetch(User, name='user1')
+    assert len(fetch_all('User')) == 4
+    user1 = fetch('User', name='user1')
     user_client.post('/admin/delete/{}'.format(user1.id))
-    assert len(User.query.all()) == 3
+    assert len(fetch_all('User')) == 3
 
 
 @check_blueprints('', '/admin')
@@ -28,4 +27,4 @@ def test_tacacs_configuration(user_client):
         'timeout': '10'
     }
     user_client.post('/admin/save_tacacs_server', data=tacacs_server)
-    assert len(TacacsServer.query.all()) == 1
+    assert len(fetch_all('TacacsServer')) == 1

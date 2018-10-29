@@ -2,7 +2,6 @@
 global
 addObjectToTable: false
 devices: false
-importTopology: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line

@@ -20,7 +20,6 @@ function exportTopology() { // eslint-disable-line no-unused-vars
  * Import topology.
  */
 function importTopology() { // eslint-disable-line no-unused-vars
-  console.log('test');
   alertify.notify('Topology import: starting...', 'success', 5);
   if ($('#import-form').parsley().validate() ) {
     const formData = new FormData($('#import-form')[0]);
@@ -48,7 +47,7 @@ function importTopology() { // eslint-disable-line no-unused-vars
  * Export all for migration.
  */
 function migrationExport() { // eslint-disable-line no-unused-vars
-  fCall('/migration_export', '#import-export-form', function() {
+  fCall('/objects/migration_export', '#import-export-form', function() {
     alertify.notify('Export successful.', 'success', 5);
   });
 }
@@ -57,7 +56,7 @@ function migrationExport() { // eslint-disable-line no-unused-vars
  * Export all for migration.
  */
 function migrationImport() { // eslint-disable-line no-unused-vars
-  fCall('/migration_import', '#import-export-form', function() {
+  fCall('/objects/migration_import', '#import-export-form', function() {
     alertify.notify('Import successful.', 'success', 5);
   });
 }

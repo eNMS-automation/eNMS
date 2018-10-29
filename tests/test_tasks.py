@@ -1,6 +1,6 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.scheduling.models import Task
+from eNMS.base.helpers import fetch_all
 
 from tests.test_base import check_blueprints
 from tests.test_objects import create_from_file
@@ -25,9 +25,9 @@ scheduled_task = ImmutableMultiDict([
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('scheduling/scheduler', data=instant_task)
-    assert len(Task.query.all()) == 1
+    assert len(fetch_all('Task')) == 1
     user_client.post('scheduling/scheduler', data=scheduled_task)
-    assert len(Task.query.all()) == 2
+    assert len(fetch_all('Task')) == 2
 
 
 google_earth_dict = ImmutableMultiDict([

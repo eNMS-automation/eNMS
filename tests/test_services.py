@@ -1,6 +1,7 @@
-from eNMS.automation.models import Service, service_classes
 from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
+
+from eNMS.base.helpers import fetch, fetch_all
 
 # test the creation of configuration service (netmiko / napalm)
 # test the creation of file transfer service (netmiko via SCP)
@@ -44,18 +45,14 @@ def test_base_services(user_client):
         '/automation/save_service/netmiko_configuration_service',
         data=netmiko_ping
     )
-    assert len(
-        service_classes['netmiko_configuration_service'].query.all()
-    ) == 3
-    assert len(Service.query.all()) == 16
+    assert len(fetch_all('netmiko_configuration_service')) == 3
+    assert len(fetch_all('Service')) == 16
     user_client.post(
         'automation/save_service/netmiko_file_transfer_service',
         data=file_transfer_service
     )
-    assert len(
-        service_classes['netmiko_file_transfer_service'].query.all()
-    ) == 1
-    assert len(Service.query.all()) == 17
+    assert len(fetch_all('netmiko_file_transfer_service')) == 1
+    assert len(fetch_all('Service')) == 17
 
 
 getters_dict = ImmutableMultiDict([
@@ -74,7 +71,7 @@ def test_getters_service(user_client):
         '/automation/save_service/napalm_getters_service',
         data=getters_dict
     )
-    assert len(service_classes['napalm_getters_service'].query.all()) == 5
+    assert len(fetch_all('napalm_getters_service')) == 5
 
 
 ansible_service = ImmutableMultiDict([
@@ -96,5 +93,5 @@ def test_ansible_services(user_client):
         '/automation/save_service/ansible_playbook_service',
         data=ansible_service
     )
-    assert len(service_classes['ansible_playbook_service'].query.all()) == 1
-    assert len(Service.query.all()) == 16
+    assert len(fetch_all('ansible_playbook_service')) == 1
+    assert len(fetch_all('Service')) == 16

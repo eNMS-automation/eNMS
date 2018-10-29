@@ -3,9 +3,7 @@ from requests import delete, get, post, put
 from time import sleep
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.objects.models import Device
-from eNMS.automation.models import Service
-from eNMS.scheduling.models import Task
+from eNMS.base.helpers import fetch, fetch_all
 
 device = {
     "name": "router10",
@@ -77,14 +75,14 @@ def rest_api_test(user_client):
         data=dumps(device)
     )
     assert loads(response.content) == expected_response
-    assert len(Device.query.all()) == 1
+    assert len(fetch_all('Device')) == 1
     # GET: retrieve object properties
     response = get(
         'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
     assert loads(response.content) == expected_response
-    assert len(Device.query.all()) == 1
+    assert len(fetch_all('Device')) == 1
     # PUT: update object properties
     put('http://127.0.0.1:5000/rest/object/device', data=dumps(updated_device))
     response = get(
@@ -92,13 +90,13 @@ def rest_api_test(user_client):
         headers={'Accept': 'application/json'}
     )
     assert loads(response.content) == updated_response
-    assert len(Device.query.all()) == 1
+    assert len(fetch_all('Device')) == 1
     # DELETE: delete an object
     delete(
         'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
-    assert len(Device.query.all()) == 0
+    assert len(fetch_all('Device')) == 0
 
 
 post_service = ImmutableMultiDict([
@@ -148,27 +146,27 @@ delete_service_task = ImmutableMultiDict([
 
 def rest_service_test(user_client):
     user_client.post('/automation/create_service/rest_call', data=post_service)
-    assert len(Service.query.all()) == 4
+    assert len(fetch_all('Service')) == 4
     user_client.post('/schedule/scheduler', data=post_service_task)
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_create_router',
         headers={'Accept': 'application/json'}
     )
-    assert len(Task.query.all()) == 1
+    assert len(fetch_all('Task')) == 1
     # wait a bit for the task to run
     sleep(30)
-    assert len(Device.query.all()) == 1
+    assert len(fetch_all('Device')) == 1
     user_client.post(
         '/automation/create_service/rest_call',
         data=delete_service
     )
-    assert len(Service.query.all()) == 5
+    assert len(fetch_all('Service')) == 5
     user_client.post('/schedule/scheduler', data=delete_service_task)
-    assert len(Task.query.all()) == 2
+    assert len(fetch_all('Task')) == 2
     get(
         'http://127.0.0.1:5000/rest/execute_task/task_delete_router',
         headers={'Accept': 'application/json'}
     )
     # wait a bit for the task to run
     sleep(30)
-    assert len(Device.query.all()) == 0
+    assert len(fetch_all('Device')) == 0

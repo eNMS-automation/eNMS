@@ -1,9 +1,8 @@
 from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, fetch_all
 from eNMS.base.properties import device_subtypes, link_subtypes
-from eNMS.objects.models import Device, Link, Pool
 
 from tests.test_base import check_blueprints
 
@@ -51,15 +50,15 @@ def test_manual_object_creation(user_client):
     # for each type of link, we select the first 3 devices in the device row
     # and create a link between each pair of devices (including loopback links)
     for subtype in link_subtypes:
-        devices = Device.query.all()
+        devices = fetch_all('Device')
         for source in devices[:3]:
             for destination in devices[:3]:
                 obj_dict = define_link(subtype, source.name, destination.name)
                 user_client.post('/objects/edit_object', data=obj_dict)
     # - exactly 16 devices in total
-    assert len(Device.query.all()) == 43
+    assert len(fetch_all('Device')) == 43
     # - exactly 6*9 = 54 links in total
-    assert len(Link.query.all()) == 82
+    assert len(fetch_all('Link')) == 82
 
 
 def create_from_file(client, file):
@@ -71,15 +70,15 @@ def create_from_file(client, file):
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_europe(user_client):
     create_from_file(user_client, 'europe.xls')
-    assert len(Device.query.all()) == 60
-    assert len(Link.query.all()) == 53
+    assert len(fetch_all('Device')) == 60
+    assert len(fetch_all('Link')) == 53
 
 
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_type(user_client):
     create_from_file(user_client, 'device_counters.xls')
-    assert len(Device.query.all()) == 54
-    assert len(Link.query.all()) == 28
+    assert len(fetch_all('Device')) == 54
+    assert len(fetch_all('Link')) == 28
 
 
 routers = ['router' + str(i) for i in range(5, 20)]
@@ -90,20 +89,20 @@ links = ['link' + str(i) for i in range(4, 15)]
 def test_device_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for device_name in routers:
-        device = fetch(Device, name=device_name)
+        device = fetch('Device', name=device_name)
         user_client.post(f'/objects/delete/device/{device.id}')
-    assert len(Device.query.all()) == 45
-    assert len(Link.query.all()) == 22
+    assert len(fetch_all('Device')) == 45
+    assert len(fetch_all('Link')) == 22
 
 
 @check_blueprints('', '/objects', '/views')
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for link_name in links:
-        link = fetch(Link, name=link_name)
+        link = fetch('Link', name=link_name)
         user_client.post(f'/objects/delete/link/{link.id}')
-    assert len(Device.query.all()) == 60
-    assert len(Link.query.all()) == 42
+    assert len(fetch_all('Device')) == 60
+    assert len(fetch_all('Link')) == 42
 
 
 pool1 = ImmutableMultiDict([
@@ -127,12 +126,12 @@ def test_pool_management(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/objects/process_pool', data=pool1)
     user_client.post('/objects/process_pool', data=pool2)
-    p1, p2 = fetch(Pool, name='pool1'), fetch(Pool, name='pool2')
+    p1, p2 = fetch('Pool', name='pool1'), fetch('Pool', name='pool2')
     assert len(p1.devices) == 21
     assert len(p1.links) == 20
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
-    assert len(Pool.query.all()) == 5
+    assert len(fetch_all('Pool')) == 5
     user_client.post(f'/objects/delete_pool/{p1.id}')
     user_client.post(f'/objects/delete_pool/{p2.id}')
-    assert len(Pool.query.all()) == 3
+    assert len(fetch_all('Pool')) == 3

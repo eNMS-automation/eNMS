@@ -100,7 +100,7 @@ def import_export():
         import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
-        parameters=db.session.query(Parameters).one(),
+        parameters=get_parameters(),
     )
 
 
@@ -111,7 +111,7 @@ def get_object(obj_type, id):
 
 @post(bp, '/connection/<id>', 'Connect to device')
 def connection(id):
-    parameters, device = classes['Parameters'].query.one(), fetch(Device, id=id)
+    parameters, device = get_parameters(), fetch(Device, id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port, ip = parameters.get_gotty_port(), device.ip_address
     cmd.extend(['-p', str(port)])
@@ -197,16 +197,17 @@ def import_topology():
     objects, file = defaultdict(list), request.files['file']
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
-        for object_type in ('Device', 'Link'):
+        for obj_type in ('Device', 'Link'):
             try:
-                sheet = book.sheet_by_name(object_type)
+                sheet = book.sheet_by_name(obj_type)
             except XLRDError:
                 continue
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(app, **values)
-                objects[object_type].append(factory(cls, **kwargs).serialized)
+                objects[obj_type].append(
+                    factory(*process_kwargs(app, **values)).serialized
+                )
             db.session.commit()
     return jsonify(objects)
 
@@ -215,10 +216,10 @@ def import_topology():
 def export_topology():
     workbook = Workbook()
     for obj_type in ('Device', 'Link'):
-        sheet, objects = workbook.add_sheet(obj_type), serialize(obj_type)
+        sheet = workbook.add_sheet(obj_type), 
         for index, property in enumerate(cls_to_properties[obj_type]):
             sheet.write(0, index, property)
-            for obj_index, obj in enumerate(objects, 1):
+            for obj_index, obj in enumerate(serialize(obj_type), 1):
                 sheet.write(obj_index, index, obj[property])
     workbook.save(Path.cwd() / 'projects' / 'objects.xls')
     return jsonify(True)
@@ -226,7 +227,7 @@ def export_topology():
 
 @post(bp, '/query_opennms', 'Edit objects')
 def query_opennms():
-    parameters = db.session.query(Parameters).one()
+    parameters = get_parameters()
     login, password = parameters.opennms_login, request.form['password']
     parameters.update(**request.form.to_dict())
     db.session.commit()

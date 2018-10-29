@@ -34,7 +34,7 @@ def choices(model):
 
 
 def get_parameters():
-    return db.session.query(Parameters).one()
+    return classes['Parameters'].query.one()
 
 
 def factory(cls_name, **kwargs):

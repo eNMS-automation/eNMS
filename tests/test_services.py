@@ -1,7 +1,7 @@
 from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.helpers import fetch, fetch_all
+from eNMS.base.helpers import fetch_all
 
 # test the creation of configuration service (netmiko / napalm)
 # test the creation of file transfer service (netmiko via SCP)

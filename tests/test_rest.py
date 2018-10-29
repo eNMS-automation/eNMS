@@ -3,7 +3,7 @@ from requests import delete, get, post, put
 from time import sleep
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.helpers import fetch, fetch_all
+from eNMS.base.helpers import fetch_all
 
 device = {
     "name": "router10",

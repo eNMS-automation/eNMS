@@ -7,7 +7,7 @@ from passlib.hash import cisco_type7
 
 from eNMS import db
 from eNMS.base.custom_base import CustomBase
-from eNMS.base.helpers import vault_helper
+from eNMS.base.security import vault_helper
 
 
 class User(CustomBase, UserMixin):

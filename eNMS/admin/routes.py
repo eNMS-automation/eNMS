@@ -24,21 +24,19 @@ from eNMS.admin.forms import (
     TacacsServerForm,
 )
 from eNMS.base.models import classes
-from eNMS.base.helpers import get, post, factory, fetch
+from eNMS.base.helpers import get, post, factory, fetch, serialize
 from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.base.security import vault_helper
-from eNMS.logs.models import SyslogServer
 
 
 @get(bp, '/user_management', 'Admin Section')
 def users():
-    form = AddUser(request.form)
     return render_template(
         'user_management.html',
         fields=user_public_properties,
         names=pretty_names,
-        users=classes['User'].serialize(),
-        form=form
+        users=serialize('User'),
+        form=AddUser(request.form)
     )
 
 
@@ -56,27 +54,6 @@ def login():
             if user_password == pwd:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
-        else:
-            try:
-                tacacs_server = db.session.query(TacacsServer).one()
-                tacacs_client = TACACSClient(
-                    str(tacacs_server.ip_address),
-                    int(tacacs_server.port),
-                    str(tacacs_server.password)
-                )
-                if tacacs_client.authenticate(
-                    name,
-                    user_password,
-                    TAC_PLUS_AUTHEN_TYPE_ASCII
-                ).valid:
-                    user = User(name=name, password=user_password)
-                    db.session.add(user)
-                    db.session.commit()
-                    login_user(user)
-                    return redirect(url_for('base_blueprint.dashboard'))
-            except NoResultFound:
-                pass
-        return render_template('errors/page_403.html')
     if not current_user.is_authenticated:
         return render_template(
             'login.html',

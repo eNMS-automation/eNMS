@@ -6,7 +6,7 @@ from json import dumps, JSONDecodeError
 from eNMS import db, scheduler
 from eNMS.base.models import classes, service_classes
 from eNMS.base.helpers import (
-    choice,
+    choices,
     factory,
     fetch,
     get,

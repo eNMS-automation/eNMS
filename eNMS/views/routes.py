@@ -3,7 +3,7 @@ from os.path import join
 from simplekml import Kml
 
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import fetch, get, post
+from eNMS.base.helpers import choices, fetch, fetch_all, get, post
 from eNMS.base.properties import (
     device_public_properties,
     device_subtypes,
@@ -11,9 +11,7 @@ from eNMS.base.properties import (
     link_subtype_to_color,
     pretty_names
 )
-from eNMS.logs.models import Log
 from eNMS.objects.forms import AddDevice, AddLink
-from eNMS.objects.models import Pool, Device, Link
 from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
@@ -21,9 +19,8 @@ from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 @get(bp, '/<view_type>_view', 'Views Section')
 def view(view_type):
     add_link_form = AddLink(request.form)
-    all_devices = Device.choices()
-    add_link_form.source.choices = all_devices
-    add_link_form.destination.choices = all_devices
+    add_link_form.source.choices = choices('Device')
+    add_link_form.destination.choices = choices('Device')
     labels = {'device': 'name', 'link': 'name'}
     if 'view_options' in request.form:
         labels = {
@@ -38,14 +35,11 @@ def view(view_type):
         view = 'markercluster'
     if 'view' in request.form:
         view = request.form['view']
-    # name to id
-    name_to_id = {
-        device.name: id for id, device in enumerate(Device.query.all())
-    }
+    name_to_id = {d.name: id for id, d in enumerate(fetch_all('Device'))}
     return render_template(
         f'{view_type}_view.html',
-        pools=Pool.query.all(),
-        parameters=Parameters.query.one().serialized,
+        pools=fetch_all('Pool',
+        parameters=get_one('Parameters'),
         view=view,
         view_options_form=ViewOptionsForm(request.form),
         google_earth_form=GoogleEarthForm(request.form),
@@ -58,20 +52,20 @@ def view(view_type):
         device_subtypes=device_subtypes,
         link_colors=link_subtype_to_color,
         name_to_id=name_to_id,
-        devices=Device.serialize(),
-        links=Link.serialize()
+        devices=serialize('Device'),
+        links=serialize('Link')
     )
 
 
 @get(bp, '/export_to_google_earth', 'Views Section')
 def export_to_google_earth():
     kml_file = Kml()
-    for device in Device.query.all():
+    for device in fetch_all('Device'):
         point = kml_file.newpoint(name=device.name)
         point.coords = [(device.longitude, device.latitude)]
         point.style = styles[device.subtype]
         point.style.labelstyle.scale = request.form['label_size']
-    for link in Link.query.all():
+    for link in fetch_all('Link'):
         line = kml_file.newlinestring(name=link.name)
         line.coords = [
             (link.source.longitude, link.source.latitude),
@@ -85,13 +79,13 @@ def export_to_google_earth():
         f'{request.form["name"]}.kmz'
     )
     kml_file.save(filepath)
-    return jsonify({'success': True})
+    return jsonify(True)
 
 
 @post(bp, '/get_logs/<device_id>', 'Logs Section')
 def get_logs(device_id):
     device_logs = [
-        log.content for log in Log.query.all()
+        log.content for log in fetch_all('Log')
         if log.source == fetch(Device, id=device_id).ip_address
     ]
     return jsonify('\n'.join(device_logs) or True)

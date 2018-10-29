@@ -24,7 +24,7 @@ from eNMS.admin.forms import (
     TacacsServerForm,
 )
 from eNMS.base.models import classes
-from eNMS.base.helpers import get, post, factory, fetch, serialize
+from eNMS.base.helpers import get, get_one, post, factory, fetch, serialize
 from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.base.security import vault_helper
 

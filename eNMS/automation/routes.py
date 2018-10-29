@@ -10,6 +10,7 @@ from eNMS.base.helpers import (
     factory,
     fetch,
     get,
+    objectify,
     post,
     str_dict,
     serialize
@@ -152,15 +153,12 @@ def get_service(id_or_cls):
 
 @post(bp, '/get_states/<cls>', 'Automation Section')
 def get_states(cls):
-    return jsonify([s['state'] for s in classes[cls.capitalize()].serialize()])
+    return jsonify([s['state'] for s in serialize(cls.capitalize())])
 
 
 @post(bp, '/delete/<service_id>', 'Edit Automation Section')
 def delete_object(service_id):
-    service = fetch('Service', id=service_id)
-    db.session.delete(service)
-    db.session.commit()
-    return jsonify(service.serialized)
+    return jsonify(delete('Service', id=service_id))
 
 
 @post(bp, '/run_job/<job_id>', 'Edit Automation Section')
@@ -180,12 +178,8 @@ def run_job(job_id):
 @post(bp, '/save_service/<cls_name>', 'Edit Automation Section')
 def save_service(cls_name):
     form = dict(request.form.to_dict())
-    form['devices'] = [
-        fetch('Device', id=id) for id in request.form.getlist('devices')
-    ]
-    form['pools'] = [
-        fetch('Pool', id=id) for id in request.form.getlist('pools')
-    ]
+    form['devices'] = objectify('Device', request.form.getlist('devices'))
+    form['pools'] = objectify('Pool', request.form.getlist('pools'))
     for key in request.form:
         if property_types.get(key, None) == list:
             form[key] = request.form.getlist(key)
@@ -193,7 +187,7 @@ def save_service(cls_name):
         if property not in form:
             form[property] = 'off'
     try:
-        return jsonify(factory(service_classes[cls_name], **form).serialized)
+        return jsonify(factory(cls_name, **form).serialized)
     except JSONDecodeError:
         return jsonify('JSONDecodeError')
 
@@ -222,9 +216,7 @@ def clear_logs(job_id):
 @post(bp, '/compare_logs/<job_id>', 'Automation Section')
 def compare_logs(job_id):
     job = fetch('Job', id=job_id)
-    results = {
-        'versions': list(job.logs)
-    }
+    results = {'versions': list(job.logs)}
     return jsonify(results)
 
 
@@ -256,12 +248,8 @@ def edit_workflow():
     for property in boolean_properties:
         if property not in form:
             form[property] = 'off'
-    form['devices'] = [
-        fetch('Device', id=id) for id in request.form.getlist('devices')
-    ]
-    form['pools'] = [
-        fetch('Pool', id=id) for id in request.form.getlist('pools')
-    ]
+    form['devices'] = objectify('Device', request.form.getlist('devices'))
+    form['pools'] = objectify('Pool', request.form.getlist('pools'))
     return jsonify(factory('Workflow', **form).serialized)
 
 

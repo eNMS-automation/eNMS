@@ -11,6 +11,6 @@ bp = Blueprint(
 from eNMS.base.classes import classes
 
 from eNMS.admin.models import User, Parameters
-classes['User'] = User
+classes.update({'User': User, 'Parameters': Parameters})
 
 import eNMS.admin.routes  # noqa: F401

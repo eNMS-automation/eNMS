@@ -85,8 +85,8 @@ def configure_database(app):
         # create_service_classes()
         db.create_all()
         create_default_users()
-        # create_default_parameters()
-        # create_default_network_topology(app)
+        create_default_parameters()
+        create_default_network_topology(app)
         # create_default_pools()
         # create_default_workflows()
 

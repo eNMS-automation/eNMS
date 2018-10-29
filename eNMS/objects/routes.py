@@ -74,7 +74,7 @@ def link_management():
         'link_management.html',
         names=pretty_names,
         fields=link_table_properties,
-        links=Link.serialize(),
+        links=classes['Link'].serialize(),
         add_link_form=add_link_form
     )
 
@@ -83,14 +83,14 @@ def link_management():
 def pool_management():
     pool_object_form = PoolObjectsForm(request.form)
     pool_object_form.devices.choices = classes['Device'].choices()
-    pool_object_form.links.choices = Link.choices()
+    pool_object_form.links.choices = classes['Link'].choices()
     return render_template(
         'pool_management.html',
         form=AddPoolForm(request.form),
         pool_object_form=pool_object_form,
         names=pretty_names,
         fields=pool_table_properties,
-        pools=Pool.serialize()
+        pools=classes['Pool'].serialize()
     )
 
 
@@ -107,7 +107,7 @@ def import_export():
 
 @post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_object(obj_type, id):
-    device = fetch(classes['Device'] if obj_type == 'device' else Link, id=id)
+    device = fetch(classes['Device'] if obj_type == 'device' else classes['Link'], id=id)
     return jsonify(device.serialized)
 
 
@@ -152,7 +152,7 @@ def edit_object():
 
 @post(bp, '/delete/<obj_type>/<obj_id>', 'Edit Inventory Section')
 def delete_object(obj_type, obj_id):
-    cls = classes['Device'] if obj_type == 'device' else Link
+    cls = classes['Device'] if obj_type == 'device' else classes['Link']
     obj = fetch(cls, id=obj_id)
     db.session.delete(obj)
     db.session.commit()
@@ -165,34 +165,34 @@ def process_pool():
     for property in boolean_properties:
         if property not in form:
             form[property] = 'off'
-    return jsonify(factory(Pool, **form).serialized)
+    return jsonify(factory(classes['Pool'], **form).serialized)
 
 
 @post(bp, '/get_pool/<pool_id>', 'Inventory Section')
 def get_pool(pool_id):
-    return jsonify(fetch(Pool, id=pool_id).serialized)
+    return jsonify(fetch(classes['Pool'], id=pool_id).serialized)
 
 
 @post(bp, '/save_pool_objects/<pool_id>', 'Edit Inventory Section')
 def save_pool_objects(pool_id):
-    pool = fetch(Pool, id=pool_id)
+    pool = fetch(classes['Pool'], id=pool_id)
     pool.devices = [
         fetch(classes['Device'], id=id) for id in request.form.getlist('devices')
     ]
-    pool.links = [fetch(Link, id=id) for id in request.form.getlist('links')]
+    pool.links = [fetch(classes['Link'], id=id) for id in request.form.getlist('links')]
     db.session.commit()
     return jsonify(pool.name)
 
 
 @post(bp, '/pool_objects/<pool_id>', 'Inventory Section')
 def filter_pool_objects(pool_id):
-    pool = fetch(Pool, id=pool_id)
+    pool = fetch(classes['Pool'], id=pool_id)
     return jsonify(pool.filter_objects())
 
 
 @post(bp, '/update_pools', 'Edit Inventory Section')
 def update_pools():
-    for pool in Pool.query.all():
+    for pool in classes['Pool'].query.all():
         pool.compute_pool()
     db.session.commit()
     return jsonify(True)
@@ -200,7 +200,7 @@ def update_pools():
 
 @post(bp, '/delete_pool/<pool_id>', 'Edit Inventory Section')
 def delete_pool(pool_id):
-    pool = fetch(Pool, id=pool_id)
+    pool = fetch(classes['Pool'], id=pool_id)
     db.session.delete(pool)
     db.session.commit()
     return jsonify(pool.name)
@@ -228,7 +228,7 @@ def import_topology():
 @post(bp, '/export_topology', 'Inventory Section')
 def export_topology():
     workbook = Workbook()
-    for cls in (classes['Device'], Link):
+    for cls in (classes['Device'], classes['Link']):
         sheet, objects = workbook.add_sheet(cls.__tablename__), cls.serialize()
         for index, property in enumerate(cls_to_properties[cls.__tablename__]):
             sheet.write(0, index, property)

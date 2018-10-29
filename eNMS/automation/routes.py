@@ -4,8 +4,8 @@ from flask import jsonify, render_template, request, session
 from json import dumps, JSONDecodeError
 
 from eNMS import db, scheduler
-from eNMS.base.custom_base import factory
-from eNMS.base.helpers import fetch, get, post, str_dict
+from eNMS.base.classes import classes
+from eNMS.base.helpers import factory, fetch, get, post, str_dict
 from eNMS.base.properties import (
     boolean_properties,
     pretty_names,
@@ -13,7 +13,6 @@ from eNMS.base.properties import (
     service_table_properties,
     workflow_table_properties
 )
-from eNMS.objects.models import Device, Pool
 from eNMS.automation import bp
 from eNMS.automation.forms import (
     AddJobForm,
@@ -23,13 +22,6 @@ from eNMS.automation.forms import (
     WorkflowForm
 )
 from eNMS.automation.helpers import scheduler_job
-from eNMS.automation.models import (
-    Job,
-    Service,
-    service_classes,
-    WorkflowEdge,
-    Workflow
-)
 
 
 @get(bp, '/service_management', 'Automation Section')
@@ -52,7 +44,7 @@ def service_management():
 @get(bp, '/workflow_management', 'Automation Section')
 def workflow_management():
     workflow_creation_form = WorkflowForm(request.form)
-    workflow_creation_form.devices.choices = Device.choices()
+    workflow_creation_form.devices.choices = classes['Device'].choices()
     workflow_creation_form.pools.choices = Pool.choices()
     return render_template(
         'workflow_management.html',
@@ -72,7 +64,7 @@ def workflow_builder():
     workflow_builder_form = WorkflowBuilderForm(request.form)
     workflow_builder_form.workflow.choices = Workflow.choices()
     service_form = JobForm(request.form)
-    service_form.devices.choices = Device.choices()
+    service_form.devices.choices = classes['Device'].choices()
     service_form.pools.choices = Pool.choices()
     workflow = fetch(Workflow, id=session.get('workflow', None))
     return render_template(
@@ -182,7 +174,7 @@ def run_job(job_id):
 def save_service(cls_name):
     form = dict(request.form.to_dict())
     form['devices'] = [
-        fetch(Device, id=id) for id in request.form.getlist('devices')
+        fetch('Device', id=id) for id in request.form.getlist('devices')
     ]
     form['pools'] = [
         fetch(Pool, id=id) for id in request.form.getlist('pools')

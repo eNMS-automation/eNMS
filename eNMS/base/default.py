@@ -9,7 +9,7 @@ from eNMS.base.security import process_kwargs
 
 
 def create_default_users():
-    factory(classes['User'], **{
+    factory('User', **{
         'name': 'admin',
         'email': 'admin@admin.com',
         'password': 'admin',
@@ -58,8 +58,9 @@ def create_default_network_topology(app):
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(app, classes, **values)
-                factory(cls, **kwargs).serialized
+                cls, kwargs = process_kwargs(app, **values)
+                print(cls, kwargs)
+                factory(cls, **kwargs)
             db.session.commit()
 
 

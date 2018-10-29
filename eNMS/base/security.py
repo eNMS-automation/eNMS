@@ -18,7 +18,7 @@ def process_kwargs(app, **kwargs):
                 for property in ('username', 'password', 'enable_password')
             }
             vault_helper(app, f'device/{kwargs["name"]}', data)
-    return Link if 'source' in kwargs else 'Device', kwargs
+    return 'Link' if 'source' in kwargs else 'Device', kwargs
 
 
 def allowed_file(name, allowed_extensions):

@@ -4,25 +4,26 @@ from functools import wraps
 from sqlalchemy import exc
 
 from eNMS import db
+from eNMS.base.classes import classes
 
 
 def fetch(model, **kwargs):
-    return db.session.query(model).filter_by(**kwargs).first()
+    return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 
 def objectify(model, object_list):
-    return [fetch(model, id=object_id) for object_id in object_list]
+    return [fetch(classes[model], id=object_id) for object_id in object_list]
 
 
-def factory(cls, **kwargs):
+def factory(cls_name, **kwargs):
     if 'id' in kwargs:
-        instance = fetch(cls, id=kwargs['id'])
+        instance = fetch(cls_name, id=kwargs['id'])
     else:
-        instance = fetch(cls, name=kwargs['name'])
+        instance = fetch(cls_name, name=kwargs['name'])
     if instance:
         instance.update(**kwargs)
     else:
-        instance = cls(**kwargs)
+        instance = classes[cls_name](**kwargs)
         db.session.add(instance)
     db.session.commit()
     return instance

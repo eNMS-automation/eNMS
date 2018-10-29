@@ -100,7 +100,7 @@ def import_export():
         import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
-        parameters=get_parameters(),
+        parameters=get_one('Parameters'),
     )
 
 
@@ -111,7 +111,7 @@ def get_object(obj_type, id):
 
 @post(bp, '/connection/<id>', 'Connect to device')
 def connection(id):
-    parameters, device = get_parameters(), fetch(Device, id=id)
+    parameters, device = get_one('Parameters'), fetch(Device, id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port, ip = parameters.get_gotty_port(), device.ip_address
     cmd.extend(['-p', str(port)])
@@ -227,7 +227,7 @@ def export_topology():
 
 @post(bp, '/query_opennms', 'Edit objects')
 def query_opennms():
-    parameters = get_parameters()
+    parameters = get_one('Parameters')
     login, password = parameters.opennms_login, request.form['password']
     parameters.update(**request.form.to_dict())
     db.session.commit()

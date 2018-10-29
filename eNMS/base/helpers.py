@@ -33,8 +33,8 @@ def choices(model):
     return classes[model].choices()
 
 
-def get_parameters():
-    return classes['Parameters'].query.one()
+def get_one(model):
+    return classes[model].query.one()
 
 
 def factory(cls_name, **kwargs):

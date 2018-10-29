@@ -43,8 +43,7 @@ def users():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name = str(request.form['name'])
-        user_password = str(request.form['password'])
+        name, user_password = request.form['name'], request.form['password']
         user = fetch('User', name=name)
         if user:
             if app.config['USE_VAULT']:
@@ -72,18 +71,18 @@ def logout():
 @get(bp, '/administration', 'Admin Section')
 def admninistration():
     try:
-        tacacs_server = db.session.query(classes['TacacsServer']).one()
+        tacacs_server = get_one('TacacsServer')
     except NoResultFound:
         tacacs_server = None
     try:
-        syslog_server = db.session.query(classes['SyslogServer']).one()
+        syslog_server = get_one('SyslogServer')
     except NoResultFound:
         syslog_server = None
     return render_template(
         'administration.html',
         geographical_parameters_form=GeographicalParametersForm(request.form),
         gotty_parameters_form=GottyParametersForm(request.form),
-        parameters=db.session.query(classes['Parameters']).one(),
+        parameters=get_one('Parameters'),
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),
         tacacs_server=tacacs_server,
@@ -113,9 +112,7 @@ def get_user(user_id):
 
 @post(bp, '/delete/<user_id>', 'Edit Admin Section')
 def delete_user(user_id):
-    db.session.delete(fetch('User', id=user_id))
-    db.session.commit()
-    return jsonify(True)
+    return jsonify(delete('User', id=user_id))
 
 
 @post(bp, '/save_tacacs_server', 'Edit parameters')
@@ -136,13 +133,13 @@ def save_syslog_server():
 
 @post(bp, '/save_geographical_parameters', 'Edit parameters')
 def save_geographical_parameters():
-    db.session.query(classes['Parameters']).one().update(**request.form.to_dict())
+    get_one('Parameters').update(**request.form.to_dict())
     db.session.commit()
     return jsonify(True)
 
 
 @post(bp, '/save_gotty_parameters', 'Edit parameters')
 def save_gotty_parameters():
-    db.session.query(classes['Parameters']).one().update(**request.form.to_dict())
+    get_one('Parameters').update(**request.form.to_dict())
     db.session.commit()
     return jsonify(True)

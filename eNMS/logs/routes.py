@@ -2,9 +2,9 @@ from flask import jsonify, render_template, request
 from re import search
 
 from eNMS import db
-from eNMS.base.models import classes
 from eNMS.base.helpers import (
     choices,
+    delete,
     factory,
     fetch,
     get,

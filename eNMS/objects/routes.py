@@ -12,7 +12,6 @@ from xlwt import Workbook
 from yaml import dump, load
 
 from eNMS import db
-from eNMS.admin.models import Parameters
 from eNMS.base.helpers import (
     choices,
     delete,
@@ -29,8 +28,7 @@ from eNMS.base.security import (
     allowed_file,
     get_device_credentials,
     get_user_credentials,
-    process_kwargs,
-    vault_helper
+    process_kwargs
 )
 from eNMS.objects import bp
 from eNMS.objects.forms import (
@@ -143,7 +141,7 @@ def connection(id):
 
 
 @post(bp, '/edit_object', 'Edit Inventory Section')
-def edit_object(): 
+def edit_object():
     return jsonify(factory(*process_kwargs(app, **request.form.to_dict())))
 
 
@@ -163,14 +161,14 @@ def process_pool():
 
 @post(bp, '/get/pool/<pool_id>', 'Inventory Section')
 def get_pool(pool_id):
-    return jsonify(fetch(Pool, id=pool_id).serialized)
+    return jsonify(fetch('Pool', id=pool_id).serialized)
 
 
 @post(bp, '/save_pool_objects/<pool_id>', 'Edit Inventory Section')
 def save_pool_objects(pool_id):
     pool = fetch('Pool', id=pool_id)
     pool.devices = objectify(request.form.getlist('devices'))
-    pool.links =  objectify(request.form.getlist('links'))
+    pool.links = objectify(request.form.getlist('links'))
     db.session.commit()
     return jsonify(pool.name)
 
@@ -217,7 +215,7 @@ def import_topology():
 def export_topology():
     workbook = Workbook()
     for obj_type in ('Device', 'Link'):
-        sheet = workbook.add_sheet(obj_type), 
+        sheet = workbook.add_sheet(obj_type)
         for index, property in enumerate(cls_to_properties[obj_type]):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(serialize(obj_type), 1):
@@ -232,8 +230,7 @@ def migration_export():
     for cls_name in request.form.getlist('export'):
         path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
         with open(path, 'w') as migration_file:
-            instances = classes[cls_name].export()
-            dump(instances, migration_file, default_flow_style=False)
+            dump(export(cls_name), migration_file, default_flow_style=False)
     return jsonify(True)
 
 

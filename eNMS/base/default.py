@@ -58,7 +58,8 @@ def create_default_network_topology(app):
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                factory(*process_kwargs(app, **values))
+                cls, kwargs = process_kwargs(app, **values)
+                factory(cls, **kwargs)
             db.session.commit()
 
 

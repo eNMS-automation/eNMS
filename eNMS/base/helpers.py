@@ -34,6 +34,10 @@ def choices(model):
     return classes[model].choices()
 
 
+def export(model):
+    return classes[model].export()
+
+
 def get_one(model):
     return classes[model].query.one()
 

@@ -115,7 +115,7 @@ def create_netmiko_workflow():
             'fast_cli': 'y'
         },
         {
-            'type': classes['netmiko_validation_service'],
+            'type': 'netmiko_validation_service',
             'name': 'netmiko_check_vrf_test',
             'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
@@ -128,7 +128,7 @@ def create_netmiko_workflow():
             'fast_cli': 'y'
         },
         {
-            'type': classes['netmiko_configuration_service'],
+            'type': 'netmiko_configuration_service',
             'name': 'netmiko_delete_vrf_test',
             'description': 'Delete VRF "test"',
             'waiting_time': 1,
@@ -142,7 +142,7 @@ def create_netmiko_workflow():
             'fast_cli': 'y'
         },
         {
-            'type': classes['netmiko_validation_service'],
+            'type': 'netmiko_validation_service',
             'name': 'netmiko_check_no_vrf_test',
             'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
@@ -184,7 +184,7 @@ def create_napalm_workflow():
     services = []
     for service in (
         {
-            'type': classes['napalm_configuration_service'],
+            'type': 'napalm_configuration_service',
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
@@ -197,7 +197,7 @@ def create_napalm_workflow():
             'content': 'vrf definition test\n'
         },
         {
-            'type': classes['napalm_rollback_service'],
+            'type': 'napalm_rollback_service',
             'name': 'Napalm eos Rollback',
             'driver': 'eos',
             'description': 'Rollback a configuration with Napalm eos',
@@ -234,22 +234,22 @@ def create_payload_transfer_workflow():
     services = []
     for service in [{
         'name': 'GET_Washington',
-        'type': classes['rest_call_service'],
+        'type': 'rest_call_service',
         'description': 'Use GET ReST call on Washington',
         'username': 'admin',
         'password': 'admin',
         'waiting_time': 0,
-        'devices': [fetch(classes['Device'], name='Washington')],
+        'devices': [fetch('Device', name='Washington')],
         'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/Washington',
         'payload': ''
     }] + [{
         'name': f'{getter}',
-        'type': classes['napalm_getters_service'],
+        'type': 'napalm_getters_service',
         'description': f'Getter: {getter}',
         'waiting_time': 0,
-        'devices': [fetch(classes['Device'], name='Washington')],
+        'devices': [fetch('Device', name='Washington')],
         'driver': 'eos',
         'content_match': '',
         'getters': [getter]
@@ -260,10 +260,10 @@ def create_payload_transfer_workflow():
         'get_config'
     )] + [{
         'name': 'process_payload1',
-        'type': classes['swiss_army_knife_service'],
+        'type': 'swiss_army_knife_service',
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
-        'devices': [fetch(classes['Device'], name='Washington')]
+        'devices': [fetch('Device', name='Washington')]
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)

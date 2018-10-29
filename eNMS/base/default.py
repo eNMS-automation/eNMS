@@ -36,7 +36,7 @@ def create_default_pools():
             'device_name_regex': 'y'
         }
     ):
-        factory(classes['Pool'], **pool)
+        factory('Pool', **pool)
 
 
 @integrity_rollback
@@ -68,22 +68,22 @@ def create_default_network_topology(app):
 def create_default_services():
     for service in (
         {
-            'type': classes['swiss_army_knife_service'],
+            'type': 'swiss_army_knife_service',
             'name': 'Start',
             'description': 'Start point of a workflow',
             'hidden': True
         },
         {
-            'type': classes['swiss_army_knife_service'],
+            'type': 'swiss_army_knife_service',
             'name': 'End',
             'description': 'End point of a workflow',
             'hidden': True
         },
         {
-            'type': classes['configure_bgp_service'],
+            'type': 'configure_bgp_service',
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
-            'devices': [fetch(classes['Device'], name='Washington')],
+            'devices': [fetch('Device', name='Washington')],
             'local_as': 100,
             'loopback': 'Lo100',
             'loopback_ip': '100.1.1.1',
@@ -101,7 +101,7 @@ def create_netmiko_workflow():
     services = []
     for service in (
         {
-            'type': classes['netmiko_configuration_service'],
+            'type': 'netmiko_configuration_service',
             'name': 'netmiko_create_vrf_test',
             'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
@@ -119,7 +119,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_vrf_test',
             'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
-            'devices': [fetch(classes['Device'], name='Washington')],
+            'devices': [fetch('Device', name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -158,7 +158,7 @@ def create_netmiko_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-    workflow = factory(classes['Workflow'], **{
+    workflow = factory('Workflow', **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
         'vendor': 'Arista',
@@ -167,7 +167,7 @@ def create_netmiko_workflow():
     workflow.jobs.extend(services)
     edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
     for x, y in edges:
-        factory(classes['WorkflowEdge'], **{
+        factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
@@ -209,7 +209,7 @@ def create_napalm_workflow():
         services.append(instance)
     services.insert(1, fetch(Job, name='netmiko_check_vrf_test'))
     services.append(fetch(Job, name=f'netmiko_check_no_vrf_test'))
-    workflow = factory(classes['Workflow'], **{
+    workflow = factory('Workflow', **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
         'vendor': 'Arista',
@@ -218,7 +218,7 @@ def create_napalm_workflow():
     workflow.jobs.extend(services)
     edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
     for x, y in edges:
-        factory(classes['WorkflowEdge'], **{
+        factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
@@ -267,7 +267,7 @@ def create_payload_transfer_workflow():
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-    workflow = factory(classes['Workflow'], **{
+    workflow = factory('Workflow', **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
         'vendor': 'Arista',
@@ -291,7 +291,7 @@ def create_payload_transfer_workflow():
         job.positions['payload_transfer_workflow'] = x * 10, y * 10
     edges = [(0, 2), (2, 3), (2, 4), (3, 5), (5, 6), (6, 7), (4, 7), (7, 1)]
     for x, y in edges:
-        factory(classes['WorkflowEdge'], **{
+        factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,

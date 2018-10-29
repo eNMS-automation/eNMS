@@ -20,6 +20,7 @@ from eNMS.base.helpers import (
     fetch,
     fetch_all,
     get,
+    get_one,
     objectify,
     post,
     serialize
@@ -111,7 +112,7 @@ def get_object(obj_type, id):
 
 @post(bp, '/connection/<id>', 'Connect to device')
 def connection(id):
-    parameters, device = get_one('Parameters'), fetch(Device, id=id)
+    parameters, device = get_one('Parameters'), fetch('Device', id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port, ip = parameters.get_gotty_port(), device.ip_address
     cmd.extend(['-p', str(port)])

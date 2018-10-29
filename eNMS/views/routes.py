@@ -48,7 +48,7 @@ def view(view_type):
     return render_template(
         f'{view_type}_view.html',
         pools=fetch_all('Pool'),
-        parameters=get_one('Parameters'),
+        parameters=get_one('Parameters').serialized,
         view=view,
         view_options_form=ViewOptionsForm(request.form),
         google_earth_form=GoogleEarthForm(request.form),

@@ -18,6 +18,7 @@ from eNMS.base.helpers import (
     delete,
     factory,
     fetch,
+    fetch_all,
     get,
     objectify,
     post,
@@ -147,10 +148,7 @@ def edit_object():
 
 @post(bp, '/delete/<obj_type>/<obj_id>', 'Edit Inventory Section')
 def delete_object(obj_type, obj_id):
-    obj = fetch(obj_type.capitalize(), id=obj_id)
-    db.session.delete(obj)
-    db.session.commit()
-    return jsonify({'name': obj.name})
+    return jsonify(delete(obj_type.capitalize(), id=obj_id))
 
 
 @post(bp, '/process_pool', 'Edit Inventory Section')
@@ -162,7 +160,7 @@ def process_pool():
     return jsonify(factory('Pool', **form).serialized)
 
 
-@post(bp, '/get_pool/<pool_id>', 'Inventory Section')
+@post(bp, '/get/pool/<pool_id>', 'Inventory Section')
 def get_pool(pool_id):
     return jsonify(fetch(Pool, id=pool_id).serialized)
 
@@ -170,10 +168,8 @@ def get_pool(pool_id):
 @post(bp, '/save_pool_objects/<pool_id>', 'Edit Inventory Section')
 def save_pool_objects(pool_id):
     pool = fetch('Pool', id=pool_id)
-    pool.devices = [
-        fetch('Device', id=id) for id in request.form.getlist('devices')
-    ]
-    pool.links = [fetch('Link', id=id) for id in request.form.getlist('links')]
+    pool.devices = objectify(request.form.getlist('devices'))
+    pool.links =  objectify(request.form.getlist('links'))
     db.session.commit()
     return jsonify(pool.name)
 
@@ -185,7 +181,7 @@ def filter_pool_objects(pool_id):
 
 @post(bp, '/update_pools', 'Edit Inventory Section')
 def update_pools():
-    for pool in classes['Pool'].query.all():
+    for pool in fetch_all('Pool'):
         pool.compute_pool()
     db.session.commit()
     return jsonify(True)

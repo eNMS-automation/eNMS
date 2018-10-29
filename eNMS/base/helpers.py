@@ -11,6 +11,10 @@ def fetch(model, **kwargs):
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 
+def fetch_all(model):
+    return classes[model].query.all()
+
+
 def objectify(model, object_list):
     return [fetch(classes[model], id=object_id) for object_id in object_list]
 
@@ -27,6 +31,10 @@ def serialize(model):
 
 def choices(model):
     return classes[model].choices()
+
+
+def get_parameters():
+    return db.session.query(Parameters).one()
 
 
 def factory(cls_name, **kwargs):

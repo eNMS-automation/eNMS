@@ -18,7 +18,7 @@ db = SQLAlchemy(
 login_manager = LoginManager()
 scheduler = APScheduler()
 
-from eNMS.admin.models import User
+from eNMS.admin.classes import classes
 from eNMS.base.default import (
     create_default_network_topology,
     create_default_parameters,

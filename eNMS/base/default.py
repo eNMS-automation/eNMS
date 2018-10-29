@@ -6,16 +6,15 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
 from eNMS import db
-from eNMS.base.custom_base import factory
-from eNMS.base.helpers import classes, integrity_rollback, fetch, process_kwargs
+from eNMS.base.classes import classes
+from eNMS.base.helpers import factory, integrity_rollback, fetch
 from eNMS.base.properties import (
     property_types,
     boolean_properties,
     service_import_properties,
     service_properties
 )
-from eNMS.objects.routes import process_kwargs
-from eNMS.automation.models import Job, service_classes, Workflow, WorkflowEdge
+from eNMS.base.security import process_kwargs
 
 
 @integrity_rollback
@@ -46,7 +45,7 @@ def create_service_classes():
 
 
 def create_default_users():
-    factory(User, **{
+    factory(classes['User'], **{
         'name': 'admin',
         'email': 'admin@admin.com',
         'password': 'admin',
@@ -73,7 +72,7 @@ def create_default_pools():
             'device_name_regex': 'y'
         }
     ):
-        factory(Pool, **pool)
+        factory(classes['Pool'], **pool)
 
 
 @integrity_rollback
@@ -194,7 +193,7 @@ def create_netmiko_workflow():
     ):
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-    workflow = factory(Workflow, **{
+    workflow = factory(classes['Workflow'], **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
         'vendor': 'Arista',
@@ -203,7 +202,7 @@ def create_netmiko_workflow():
     workflow.jobs.extend(services)
     edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
     for x, y in edges:
-        factory(WorkflowEdge, **{
+        factory(classes['WorkflowEdge'], **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
@@ -245,7 +244,7 @@ def create_napalm_workflow():
         services.append(instance)
     services.insert(1, fetch(Job, name='netmiko_check_vrf_test'))
     services.append(fetch(Job, name=f'netmiko_check_no_vrf_test'))
-    workflow = factory(Workflow, **{
+    workflow = factory(classes['Workflow'], **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
         'vendor': 'Arista',
@@ -254,7 +253,7 @@ def create_napalm_workflow():
     workflow.jobs.extend(services)
     edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
     for x, y in edges:
-        factory(WorkflowEdge, **{
+        factory(classes['Workflow']Edge, **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
@@ -303,7 +302,7 @@ def create_payload_transfer_workflow():
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)
-    workflow = factory(Workflow, **{
+    workflow = factory(classes['Workflow'], **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
         'vendor': 'Arista',
@@ -327,7 +326,7 @@ def create_payload_transfer_workflow():
         job.positions['payload_transfer_workflow'] = x * 10, y * 10
     edges = [(0, 2), (2, 3), (2, 4), (3, 5), (5, 6), (6, 7), (4, 7), (7, 1)]
     for x, y in edges:
-        factory(WorkflowEdge, **{
+        factory(classes['Workflow']Edge, **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,

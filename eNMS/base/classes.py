@@ -10,13 +10,13 @@ from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
 from eNMS.scheduling.models import Task
 
 classes = {
-    'device': Device,
-    'edge': WorkflowEdge,
-    'link': Link,
-    'pool': Pool,
-    'user': User,
-    'job': Job,
-    'service': Service,
-    'workflow': Workflow,
-    'task': Task
+    'Device': Device,
+    'WorkflowEdge': WorkflowEdge,
+    'Link': Link,
+    'Pool': Pool,
+    'User': User,
+    'Job': Job,
+    'Service': Service,
+    'Workflow': Workflow,
+    'Task': Task
 }

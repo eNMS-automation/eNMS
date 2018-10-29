@@ -7,7 +7,8 @@ from re import compile
 
 from eNMS import db, scheduler
 from eNMS.automation.models import Job
-from eNMS.base.helpers import get_device_credentials, fetch
+from eNMS.base.helpers import fetch
+from eNMS.base.security import get_device_credentials
 
 NETMIKO_DRIVERS = sorted(
     (driver, driver) for driver in CLASS_MAPPER

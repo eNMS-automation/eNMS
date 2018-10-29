@@ -5,8 +5,8 @@ from eNMS import auth, db
 from eNMS.admin.models import User
 from eNMS.automation.models import Job
 from eNMS.base.classes import classes
-from eNMS.base.custom_base import factory
-from eNMS.base.helpers import get_user_credentials, fetch
+from eNMS.base.helpers import factory, fetch
+from eNMS.base.security import get_user_credentials
 
 
 @auth.get_password

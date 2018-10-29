@@ -13,6 +13,14 @@ sql_types = {
 }
 
 
+def fetch(model, **kwargs):
+    return db.session.query(model).filter_by(**kwargs).first()
+
+
+def objectify(model, object_list):
+    return [fetch(model, id=object_id) for object_id in object_list]
+
+
 def factory(cls, **kwargs):
     if 'id' in kwargs:
         instance = fetch(cls, id=kwargs['id'])
@@ -25,14 +33,6 @@ def factory(cls, **kwargs):
         db.session.add(instance)
     db.session.commit()
     return instance
-
-
-def fetch(model, **kwargs):
-    return db.session.query(model).filter_by(**kwargs).first()
-
-
-def objectify(model, object_list):
-    return [fetch(model, id=object_id) for object_id in object_list]
 
 
 def integrity_rollback(function):

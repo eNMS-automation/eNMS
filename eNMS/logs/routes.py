@@ -3,8 +3,7 @@ from re import search
 
 from eNMS import db
 from eNMS.automation.models import Job
-from eNMS.base.custom_base import factory
-from eNMS.base.helpers import fetch, get, post
+from eNMS.base.helpers import factory, fetch, get, post
 from eNMS.base.properties import pretty_names
 from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm

@@ -39,6 +39,6 @@ def create_service_classes():
                 }.get(type(col.type), str)
 
 create_service_classes()
-classes.update
+classes.update(service_classes)
 
 import eNMS.automation.routes  # noqa: F401

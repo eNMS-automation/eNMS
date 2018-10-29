@@ -7,8 +7,6 @@ from eNMS.base.helpers import factory, fetch, get, post
 from eNMS.base.properties import task_public_properties
 from eNMS.scheduling import bp
 from eNMS.scheduling.forms import SchedulingForm
-from eNMS.scheduling.models import Task
-from eNMS.automation.models import Job
 
 
 @get(bp, '/task_management', 'Scheduling Section')
@@ -55,7 +53,7 @@ def calendar():
 @post(bp, '/scheduler', 'Edit Scheduling Section')
 def scheduler(workflow_id=None):
     data = request.form.to_dict()
-    data['job'] = fetch(Job, id=data['job'])
+    data['job'] = fetch('Job', id=data['job'])
     data['user'] = current_user
     task = factory(Task, **data)
     return jsonify(task.serialized)
@@ -63,7 +61,7 @@ def scheduler(workflow_id=None):
 
 @post(bp, '/get/<task_id>', 'Scheduling Section')
 def get_task(task_id):
-    return jsonify(fetch(Task, id=task_id).serialized)
+    return jsonify(fetch('Task', id=task_id).serialized)
 
 
 @post(bp, '/delete_task/<task_id>', 'Edit Scheduling Section')

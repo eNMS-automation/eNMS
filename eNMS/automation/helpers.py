@@ -58,7 +58,7 @@ def substitute(data, variables):
 
 def scheduler_job(job_id):
     with scheduler.app.app_context():
-        job = fetch(Job, id=job_id)
+        job = fetch('Job', id=job_id)
         job.state = 'Running'
         info(f'{job.name}: starting.')
         db.session.commit()

@@ -12,7 +12,7 @@ from eNMS.base.associations import (
     job_pool_table,
     job_workflow_table
 )
-from eNMS.base.helpers import fetch
+# from eNMS.base.helpers import fetch
 from eNMS.base.base import Base
 from eNMS.base.properties import cls_to_properties, service_properties
 
@@ -206,7 +206,7 @@ class Workflow(Job):
     }
 
     def __init__(self, **kwargs):
-        defaults = [fetch(Service, name='Start'), fetch(Service, name='End')]
+        # defaults = [fetch(Service, name='Start'), fetch(Service, name='End')]
         self.jobs.extend(defaults)
         super().__init__(**kwargs)
 

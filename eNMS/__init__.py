@@ -55,12 +55,12 @@ def register_blueprints(app):
 def configure_login_manager(app):
     @login_manager.user_loader
     def user_loader(id):
-        return db.session.query(User).filter_by(id=id).first()
+        return db.session.query(classes['User']).filter_by(id=id).first()
 
     @login_manager.request_loader
     def request_loader(request):
         name = request.form.get('name')
-        user = db.session.query(User).filter_by(name=name).first()
+        user = db.session.query(classes['User']).filter_by(name=name).first()
         return user if user else None
 
 
@@ -84,11 +84,11 @@ def configure_database(app):
     def create_default():
         # create_service_classes()
         db.create_all()
-        create_default_users()
-        create_default_parameters()
-        create_default_network_topology(app)
-        create_default_pools()
-        create_default_workflows()
+        # create_default_users()
+        # create_default_parameters()
+        # create_default_network_topology(app)
+        # create_default_pools()
+        # create_default_workflows()
 
 
 def configure_errors(app):

@@ -1,6 +1,7 @@
 from json import dumps, loads
 
 from eNMS import db
+from eNMS.base.classes import classes
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,

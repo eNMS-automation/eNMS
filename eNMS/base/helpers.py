@@ -1,17 +1,9 @@
 from flask import abort, jsonify
 from flask_login import current_user, login_required
 from functools import wraps
-from sqlalchemy import Boolean, exc, Integer, String, Float
+from sqlalchemy import exc
 
 from eNMS import db
-from eNMS.base.classes import classes
-
-sql_types = {
-    'boolean': Boolean,
-    'float': Float,
-    'integer': Integer,
-    'string': String
-}
 
 
 def fetch(model, **kwargs):

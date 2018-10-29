@@ -7,4 +7,4 @@ bp = Blueprint(
     template_folder='templates'
 )
 
-# import eNMS.base.routes  # noqa: F401
+import eNMS.base.routes  # noqa: F401

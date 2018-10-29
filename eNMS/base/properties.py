@@ -1,5 +1,6 @@
 from collections import defaultdict
 from os import environ
+from sqlalchemy import Boolean, Integer, String, Float
 from yaml import load
 
 
@@ -10,6 +11,13 @@ def get_custom_properties():
     with open(filepath, 'r') as properties:
         return load(properties)
 
+
+sql_types = {
+    'boolean': Boolean,
+    'float': Float,
+    'integer': Integer,
+    'string': String
+}
 
 custom_properties = get_custom_properties()
 boolean_properties = ['multiprocessing']

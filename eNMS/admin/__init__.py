@@ -8,4 +8,9 @@ bp = Blueprint(
     static_folder='static'
 )
 
-# import eNMS.admin.routes  # noqa: F401
+from eNMS.base.classes import classes
+
+from eNMS.admin.models import User, Parameters
+classes['User'] = User
+
+import eNMS.admin.routes  # noqa: F401

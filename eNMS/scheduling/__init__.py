@@ -8,4 +8,8 @@ bp = Blueprint(
     static_folder='static'
 )
 
-# import eNMS.scheduling.routes  # noqa: F401
+from eNMS.base.classes import classes
+from eNMS.scheduling.models import Task
+
+classes['Task'] = Task
+import eNMS.scheduling.routes  # noqa: F401

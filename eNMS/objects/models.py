@@ -9,11 +9,11 @@ from eNMS.base.associations import (
     job_pool_table
 )
 from eNMS.base.base import Base
-from eNMS.base.helpers import sql_types
 from eNMS.base.properties import (
     custom_properties,
     link_public_properties,
     device_public_properties,
+    sql_types
 )
 
 

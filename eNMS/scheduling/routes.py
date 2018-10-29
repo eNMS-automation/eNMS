@@ -74,7 +74,7 @@ def get_task(task_id):
 
 @post(bp, '/delete_task/<task_id>', 'Edit Scheduling Section')
 def delete_task(task_id):
-    task = classes['Task'].query.filter_by(id=task_id).first()
+    task = fetch('Task', id=task_id)
     task.delete_task()
     db.session.delete(task)
     db.session.commit()
@@ -83,13 +83,11 @@ def delete_task(task_id):
 
 @post(bp, '/pause_task/<task_id>', 'Edit Scheduling Section')
 def pause_task(task_id):
-    task = classes['Task'].query.filter_by(id=task_id).first()
-    task.pause_task()
+    fetch('Task', id=task_id).pause_task()
     return jsonify(True)
 
 
 @post(bp, '/resume_task/<task_id>', 'Edit Scheduling Section')
 def resume_task(task_id):
-    task = classes['Task'].query.filter_by(id=task_id).first()
-    task.resume_task()
+    fetch('Task', id=task_id).resume_task()
     return jsonify(True)

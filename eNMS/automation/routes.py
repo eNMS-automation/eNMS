@@ -60,7 +60,7 @@ def workflow_management():
 @get(bp, '/workflow_builder', 'Automation Section')
 def workflow_builder():
     add_job_form = AddJobForm(request.form)
-    add_job_form.job.choices = Job.choices()
+    add_job_form.job.choices = classes['Job'].choices()
     workflow_builder_form = WorkflowBuilderForm(request.form)
     workflow_builder_form.workflow.choices = classes['Workflow'].choices()
     service_form = JobForm(request.form)
@@ -157,7 +157,7 @@ def delete_object(service_id):
 
 @post(bp, '/run_job/<job_id>', 'Edit Automation Section')
 def run_job(job_id):
-    job = fetch(Job, id=job_id)
+    job = fetch('Job', id=job_id)
     now = datetime.now() + timedelta(seconds=5)
     scheduler.add_job(
         id=str(now),
@@ -192,12 +192,12 @@ def save_service(cls_name):
 
 @post(bp, '/show_logs/<job_id>', 'Automation Section')
 def show_logs(job_id):
-    return jsonify(dumps(fetch(Job, id=job_id).logs, indent=4))
+    return jsonify(dumps(fetch('Job', id=job_id).logs, indent=4))
 
 
 @post(bp, '/get_diff/<job_id>/<v1>/<v2>', 'Automation Section')
 def get_diff(job_id, v1, v2, n1=None, n2=None):
-    job = fetch(Job, id=job_id)
+    job = fetch('Job', id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
     second = str_dict(job.logs[v2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -206,14 +206,14 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
 
 @post(bp, '/clear_logs/<job_id>', 'Edit Automation Section')
 def clear_logs(job_id):
-    fetch(Job, id=job_id).logs = {}
+    fetch('Job', id=job_id).logs = {}
     db.session.commit()
     return jsonify(True)
 
 
 @post(bp, '/compare_logs/<job_id>', 'Automation Section')
 def compare_logs(job_id):
-    job = fetch(Job, id=job_id)
+    job = fetch('Job', id=job_id)
     results = {
         'versions': list(job.logs)
     }
@@ -223,7 +223,7 @@ def compare_logs(job_id):
 @post(bp, '/add_to_workflow/<workflow_id>', 'Edit Automation Section')
 def add_to_workflow(workflow_id):
     workflow = fetch('Workflow', id=workflow_id)
-    job = fetch(Job, id=request.form['job'])
+    job = fetch('Job', id=request.form['job'])
     job.workflows.append(workflow)
     db.session.commit()
     return jsonify(job.serialized)
@@ -249,7 +249,7 @@ def edit_workflow():
         if property not in form:
             form[property] = 'off'
     form['devices'] = [
-        fetch(Device, id=id) for id in request.form.getlist('devices')
+        fetch('Device', id=id) for id in request.form.getlist('devices')
     ]
     form['pools'] = [
         fetch('Pool', id=id) for id in request.form.getlist('pools')
@@ -268,7 +268,7 @@ def delete_workflow(workflow_id):
 @post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def add_node(workflow_id, job_id):
     workflow = fetch('Workflow', id=workflow_id)
-    job = fetch(Job, id=job_id)
+    job = fetch('Job', id=job_id)
     workflow.jobs.append(job)
     db.session.commit()
     return jsonify(job.serialized)
@@ -276,7 +276,7 @@ def add_node(workflow_id, job_id):
 
 @post(bp, '/delete_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def delete_node(workflow_id, job_id):
-    job = fetch(Job, id=job_id)
+    job = fetch('Job', id=job_id)
     workflow = fetch('Workflow', id=workflow_id)
     workflow.jobs.remove(job)
     db.session.commit()
@@ -289,15 +289,15 @@ def add_edge(wf_id, type, source, dest):
         'name': f'{wf_id}-{type}:{source}->{dest}',
         'workflow': fetch('Workflow', id=wf_id),
         'type': type == 'true',
-        'source': fetch(Job, id=source),
-        'destination': fetch(Job, id=dest)
+        'source': fetch('Job', id=source),
+        'destination': fetch('Job', id=dest)
     })
     return jsonify(workflow_edge.serialized)
 
 
 @post(bp, '/delete_edge/<workflow_id>/<edge_id>', 'Edit Automation Section')
 def delete_edge(workflow_id, edge_id):
-    edge = fetch(WorkflowEdge, id=edge_id)
+    edge = fetch('WorkflowEdge', id=edge_id)
     db.session.delete(edge)
     db.session.commit()
     return jsonify({'success': True})
@@ -308,7 +308,7 @@ def save_positions(workflow_id):
     workflow = fetch('Workflow', id=workflow_id)
     session['workflow'] = workflow.id
     for job_id, position in request.json.items():
-        job = fetch(Job, id=job_id)
+        job = fetch('Job', id=job_id)
         job.positions[workflow.name] = (position['x'], position['y'])
     db.session.commit()
     return jsonify({'success': True})

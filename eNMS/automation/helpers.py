@@ -6,7 +6,6 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from re import compile
 
 from eNMS import db, scheduler
-from eNMS.automation.models import Job
 from eNMS.base.helpers import fetch
 from eNMS.base.security import get_device_credentials
 

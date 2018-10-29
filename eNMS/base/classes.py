@@ -20,25 +20,3 @@ classes = {
     'workflow': Workflow,
     'task': Task
 }
-
-
-def factory(cls, **kwargs):
-    if 'id' in kwargs:
-        instance = fetch(cls, id=kwargs['id'])
-    else:
-        instance = fetch(cls, name=kwargs['name'])
-    if instance:
-        instance.update(**kwargs)
-    else:
-        instance = cls(**kwargs)
-        db.session.add(instance)
-    db.session.commit()
-    return instance
-
-
-def fetch(model, **kwargs):
-    return db.session.query(model).filter_by(**kwargs).first()
-
-
-def objectify(model, object_list):
-    return [fetch(model, id=object_id) for object_id in object_list]

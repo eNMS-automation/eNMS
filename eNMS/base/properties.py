@@ -239,12 +239,12 @@ cls_to_properties = {
 cls_to_properties = {k: ['id'] + v for k, v in cls_to_properties.items()}
 
 default_diagrams_properties = {
-    'device': 'model',
-    'link': 'model',
-    'user': 'name',
-    'service': 'type',
-    'workflow': 'vendor',
-    'task': 'type'
+    'Device': 'model',
+    'Link': 'model',
+    'User': 'name',
+    'Service': 'type',
+    'Workflow': 'vendor',
+    'Task': 'type'
 }
 
 object_diagram_properties = [
@@ -281,12 +281,12 @@ task_diagram_properties = [
 ]
 
 type_to_diagram_properties = {
-    'device': device_diagram_properties,
-    'link': object_diagram_properties,
-    'user': user_diagram_properties,
-    'service': service_diagram_properties,
-    'workflow': workflow_diagram_properties,
-    'task': task_diagram_properties
+    'Device': device_diagram_properties,
+    'Link': object_diagram_properties,
+    'User': user_diagram_properties,
+    'Service': service_diagram_properties,
+    'Workflow': workflow_diagram_properties,
+    'Task': task_diagram_properties
 }
 
 pretty_names = {

@@ -8,4 +8,6 @@ bp = Blueprint(
     static_folder='static'
 )
 
-# import eNMS.objects.routes  # noqa: F401
+from eNMS.base.classes import classes
+from eNMS.objects.models import Device
+import eNMS.objects.routes  # noqa: F401

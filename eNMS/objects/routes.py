@@ -13,16 +13,18 @@ from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin.models import Parameters
-from eNMS.base.helpers import classes
-from eNMS.base.custom_base import factory
+from eNMS.base.classes import classes
 from eNMS.base.helpers import (
-    allowed_file,
+    factory,
     fetch,
     get,
-    get_device_credentials,
-    get_user_credentials,
     objectify,
     post,
+)
+from eNMS.base.security import (
+    allowed_file,
+    get_device_credentials,
+    get_user_credentials,
     process_kwargs,
     vault_helper
 )
@@ -57,7 +59,7 @@ def device_management():
         'device_management.html',
         names=pretty_names,
         fields=device_public_properties,
-        devices=Device.serialize(),
+        devices=classes['Device'].serialize(),
         add_device_form=AddDevice(request.form)
     )
 
@@ -65,7 +67,7 @@ def device_management():
 @get(bp, '/link_management', 'Inventory Section')
 def link_management():
     add_link_form = AddLink(request.form)
-    all_devices = [(n.name, n.name) for n in Device.query.all()]
+    all_devices = [(n.name, n.name) for n in classes['Device'].query.all()]
     add_link_form.source.choices = all_devices
     add_link_form.destination.choices = all_devices
     return render_template(
@@ -80,7 +82,7 @@ def link_management():
 @get(bp, '/pool_management', 'Inventory Section')
 def pool_management():
     pool_object_form = PoolObjectsForm(request.form)
-    pool_object_form.devices.choices = Device.choices()
+    pool_object_form.devices.choices = classes['Device'].choices()
     pool_object_form.links.choices = Link.choices()
     return render_template(
         'pool_management.html',
@@ -105,13 +107,13 @@ def import_export():
 
 @post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_object(obj_type, id):
-    device = fetch(Device if obj_type == 'device' else Link, id=id)
+    device = fetch(classes['Device'] if obj_type == 'device' else Link, id=id)
     return jsonify(device.serialized)
 
 
 @post(bp, '/connection/<id>', 'Connect to device')
 def connection(id):
-    parameters, device = Parameters.query.one(), fetch(Device, id=id)
+    parameters, device = Parameters.query.one(), fetch(classes['Device'], id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port, ip = parameters.get_gotty_port(), device.ip_address
     cmd.extend(['-p', str(port)])
@@ -150,7 +152,7 @@ def edit_object():
 
 @post(bp, '/delete/<obj_type>/<obj_id>', 'Edit Inventory Section')
 def delete_object(obj_type, obj_id):
-    cls = Device if obj_type == 'device' else Link
+    cls = classes['Device'] if obj_type == 'device' else Link
     obj = fetch(cls, id=obj_id)
     db.session.delete(obj)
     db.session.commit()
@@ -175,7 +177,7 @@ def get_pool(pool_id):
 def save_pool_objects(pool_id):
     pool = fetch(Pool, id=pool_id)
     pool.devices = [
-        fetch(Device, id=id) for id in request.form.getlist('devices')
+        fetch(classes['Device'], id=id) for id in request.form.getlist('devices')
     ]
     pool.links = [fetch(Link, id=id) for id in request.form.getlist('links')]
     db.session.commit()
@@ -226,54 +228,13 @@ def import_topology():
 @post(bp, '/export_topology', 'Inventory Section')
 def export_topology():
     workbook = Workbook()
-    for cls in (Device, Link):
+    for cls in (classes['Device'], Link):
         sheet, objects = workbook.add_sheet(cls.__tablename__), cls.serialize()
         for index, property in enumerate(cls_to_properties[cls.__tablename__]):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(objects, 1):
                 sheet.write(obj_index, index, obj[property])
     workbook.save(Path.cwd() / 'projects' / 'objects.xls')
-    return jsonify(True)
-
-
-@post(bp, '/migration_export', 'Admin Section')
-def migration_export():
-    name = request.form['name']
-    for cls_name in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
-        with open(path, 'w') as migration_file:
-            instances = classes[cls_name].export()
-            dump(instances, migration_file, default_flow_style=False)
-    return jsonify(True)
-
-
-@post(bp, '/migration_import', 'Admin Section')
-def migration_import():
-    name = request.form['name']
-    for cls_name in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
-        with open(path, 'r') as migration_file:
-            for obj_data in load(migration_file):
-                obj = {}
-                if cls_name == 'service':
-                    cls = service_classes[obj_data.pop('type')]
-                else:
-                    cls = classes[cls_name]
-                for property, value in obj_data.items():
-                    if property not in import_properties[cls_name]:
-                        continue
-                    elif property in serialization_properties:
-                        obj[property] = fetch(
-                            classes[property]
-                            if property not in ('source', 'destination')
-                            else Device,
-                            id=value
-                        )
-                    elif property[:-1] in serialization_properties:
-                        obj[property] = objectify(classes[property[:-1]], value)
-                    else:
-                        obj[property] = value
-                factory(cls, **obj)
     return jsonify(True)
 
 
@@ -313,7 +274,7 @@ def query_opennms():
         for interface in link['ipInterface']:
             if interface['snmpPrimary'] == 'P':
                 devices[device]['ip_address'] = interface['ipAddress']
-                factory(Device, **devices[device])
+                factory(classes['Device'], **devices[device])
     db.session.commit()
     return jsonify(True)
 
@@ -326,7 +287,7 @@ def query_netbox():
     )
     for device in nb.dcim.devices.all():
         device_ip = device.primary_ip4 or device.primary_ip6
-        factory(Device, **{
+        factory(classes['Device'], **{
             'name': device.name,
             'ip_address': str(device_ip).split('/')[0],
             'subtype': request.form['netbox_type'],

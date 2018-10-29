@@ -58,7 +58,7 @@ def device_management():
         'device_management.html',
         names=pretty_names,
         fields=device_public_properties,
-        devices=classes['Device'].serialize(),
+        devices=serialize('Device'),
         add_device_form=AddDevice(request.form)
     )
 
@@ -80,15 +80,15 @@ def link_management():
 @get(bp, '/pool_management', 'Inventory Section')
 def pool_management():
     pool_object_form = PoolObjectsForm(request.form)
-    pool_object_form.devices.choices = classes['Device'].choices()
-    pool_object_form.links.choices = classes['Link'].choices()
+    pool_object_form.devices.choices = choices('Device')
+    pool_object_form.links.choices = choices('Link')
     return render_template(
         'pool_management.html',
         form=AddPoolForm(request.form),
         pool_object_form=pool_object_form,
         names=pretty_names,
         fields=pool_table_properties,
-        pools=classes['Pool'].serialize()
+        pools=serialize('Pool')
     )
 
 
@@ -105,8 +105,7 @@ def import_export():
 
 @post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_object(obj_type, id):
-    device = fetch(obj_type.capitalize(), id=id)
-    return jsonify(device.serialized)
+    return jsonify(fetch(obj_type.capitalize(), id=id).serialized)
 
 
 @post(bp, '/connection/<id>', 'Connect to device')

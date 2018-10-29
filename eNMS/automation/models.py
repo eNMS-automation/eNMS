@@ -13,11 +13,11 @@ from eNMS.base.associations import (
     job_workflow_table
 )
 from eNMS.base.helpers import fetch
-from eNMS.base.custom_base import CustomBase
+from eNMS.base.base import Base
 from eNMS.base.properties import cls_to_properties, service_properties
 
 
-class Job(CustomBase):
+class Job(Base):
 
     __tablename__ = 'Job'
 
@@ -159,7 +159,7 @@ class Service(Job):
         return serialized_object
 
 
-class WorkflowEdge(CustomBase):
+class WorkflowEdge(Base):
 
     __tablename__ = 'WorkflowEdge'
 
@@ -247,6 +247,3 @@ class Workflow(Job):
             self.status['current_job'] = None
             db.session.commit()
         return results
-
-
-service_classes = {}

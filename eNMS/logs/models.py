@@ -6,7 +6,7 @@ from threading import Thread
 
 from eNMS import db, scheduler
 from eNMS.base.associations import job_log_rule_table
-from eNMS.base.custom_base import CustomBase
+from eNMS.base.base import Base
 
 
 class SyslogUDPHandler(BaseRequestHandler):
@@ -20,7 +20,7 @@ class SyslogUDPHandler(BaseRequestHandler):
             db.session.commit()
 
 
-class SyslogServer(CustomBase):
+class SyslogServer(Base):
 
     __tablename__ = 'SyslogServer'
 
@@ -44,7 +44,7 @@ class SyslogServer(CustomBase):
         th.start()
 
 
-class Log(CustomBase):
+class Log(Base):
 
     __tablename__ = 'Log'
 
@@ -70,7 +70,7 @@ class Log(CustomBase):
         return self.content
 
 
-class LogRule(CustomBase):
+class LogRule(Base):
 
     __tablename__ = 'LogRule'
 

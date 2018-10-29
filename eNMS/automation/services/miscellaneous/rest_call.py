@@ -12,7 +12,8 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import substitute
-from eNMS.automation.models import Service, service_classes
+from eNMS.automation.models import Service
+from eNMS.base.classes import service_classes
 
 
 class RestCallService(Service):

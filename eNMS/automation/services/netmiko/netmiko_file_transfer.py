@@ -2,7 +2,8 @@ from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import netmiko_connection, NETMIKO_SCP_DRIVERS
-from eNMS.automation.models import Service, service_classes
+from eNMS.automation.models import Service
+from eNMS.base.classes import service_classes
 
 
 class NetmikoFileTransferService(Service):

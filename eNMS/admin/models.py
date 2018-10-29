@@ -6,11 +6,11 @@ from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
 
 from eNMS import db
-from eNMS.base.custom_base import CustomBase
+from eNMS.base.base import Base
 from eNMS.base.security import vault_helper
 
 
-class User(CustomBase, UserMixin):
+class User(Base, UserMixin):
 
     __tablename__ = 'User'
 
@@ -36,7 +36,7 @@ class User(CustomBase, UserMixin):
         return self.is_admin or permission in self.permissions
 
 
-class TacacsServer(CustomBase):
+class TacacsServer(Base):
 
     __tablename__ = 'TacacsServer'
 
@@ -56,7 +56,7 @@ class TacacsServer(CustomBase):
         return self.ip_address
 
 
-class Parameters(CustomBase):
+class Parameters(Base):
 
     __tablename__ = 'Parameters'
 

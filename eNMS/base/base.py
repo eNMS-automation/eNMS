@@ -9,7 +9,7 @@ from eNMS.base.properties import (
 )
 
 
-class CustomBase(db.Model):
+class Base(db.Model):
 
     __abstract__ = True
 

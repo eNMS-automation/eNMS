@@ -1,7 +1,8 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import napalm_connection
-from eNMS.automation.models import Service, service_classes
+from eNMS.automation.models import Service
+from eNMS.base.classes import service_classes
 
 
 class ConfigureBgpService(Service):

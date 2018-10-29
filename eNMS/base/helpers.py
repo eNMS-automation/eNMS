@@ -4,6 +4,7 @@ from functools import wraps
 from sqlalchemy import Boolean, exc, Integer, String, Float
 
 from eNMS import db
+from eNMS.base.classes import classes
 
 sql_types = {
     'boolean': Boolean,

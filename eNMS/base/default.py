@@ -82,7 +82,7 @@ def create_default_services():
             'type': classes['configure_bgp_service'],
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
-            'devices': [fetch(Device, name='Washington')],
+            'devices': [fetch(classes['Device'], name='Washington')],
             'local_as': 100,
             'loopback': 'Lo100',
             'loopback_ip': '100.1.1.1',
@@ -104,7 +104,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_create_vrf_test',
             'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
-            'devices': [fetch(Device, name='Washington')],
+            'devices': [fetch(classes['Device'], name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -118,7 +118,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_vrf_test',
             'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
-            'devices': [fetch(Device, name='Washington')],
+            'devices': [fetch(classes['Device'], name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -131,7 +131,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_delete_vrf_test',
             'description': 'Delete VRF "test"',
             'waiting_time': 1,
-            'devices': [fetch(Device, name='Washington')],
+            'devices': [fetch(classes['Device'], name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -145,7 +145,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_no_vrf_test',
             'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
-            'devices': [fetch(Device, name='Washington')],
+            'devices': [fetch(classes['Device'], name='Washington')],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -187,7 +187,7 @@ def create_napalm_workflow():
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
-            'devices': [fetch(Device, name='Washington')],
+            'devices': [fetch(classes['Device'], name='Washington')],
             'driver': 'eos',
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -200,7 +200,7 @@ def create_napalm_workflow():
             'name': 'Napalm eos Rollback',
             'driver': 'eos',
             'description': 'Rollback a configuration with Napalm eos',
-            'devices': [fetch(Device, name='Washington')],
+            'devices': [fetch(classes['Device'], name='Washington')],
             'waiting_time': 0
         }
     ):
@@ -238,7 +238,7 @@ def create_payload_transfer_workflow():
         'username': 'admin',
         'password': 'admin',
         'waiting_time': 0,
-        'devices': [fetch(Device, name='Washington')],
+        'devices': [fetch(classes['Device'], name='Washington')],
         'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/Washington',
@@ -248,7 +248,7 @@ def create_payload_transfer_workflow():
         'type': classes['napalm_getters_service'],
         'description': f'Getter: {getter}',
         'waiting_time': 0,
-        'devices': [fetch(Device, name='Washington')],
+        'devices': [fetch(classes['Device'], name='Washington')],
         'driver': 'eos',
         'content_match': '',
         'getters': [getter]
@@ -262,7 +262,7 @@ def create_payload_transfer_workflow():
         'type': classes['swiss_army_knife_service'],
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
-        'devices': [fetch(Device, name='Washington')]
+        'devices': [fetch(classes['Device'], name='Washington')]
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)

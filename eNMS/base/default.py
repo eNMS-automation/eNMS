@@ -24,7 +24,7 @@ def create_service_classes():
         if 'init' not in str(file):
             spec = spec_from_file_location(str(file), str(file))
             spec.loader.exec_module(module_from_spec(spec))
-    for cls_name, cls in service_classes.items():
+    for cls_name, cls in classes.items():
         for col in cls.__table__.columns:
             service_properties[cls_name].append(col.key)
             service_import_properties.append(col.key)
@@ -103,19 +103,19 @@ def create_default_network_topology(app):
 def create_default_services():
     for service in (
         {
-            'type': service_classes['swiss_army_knife_service'],
+            'type': classes['swiss_army_knife_service'],
             'name': 'Start',
             'description': 'Start point of a workflow',
             'hidden': True
         },
         {
-            'type': service_classes['swiss_army_knife_service'],
+            'type': classes['swiss_army_knife_service'],
             'name': 'End',
             'description': 'End point of a workflow',
             'hidden': True
         },
         {
-            'type': service_classes['configure_bgp_service'],
+            'type': classes['configure_bgp_service'],
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
             'devices': [fetch(Device, name='Washington')],
@@ -136,7 +136,7 @@ def create_netmiko_workflow():
     services = []
     for service in (
         {
-            'type': service_classes['netmiko_configuration_service'],
+            'type': classes['netmiko_configuration_service'],
             'name': 'netmiko_create_vrf_test',
             'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
@@ -150,7 +150,7 @@ def create_netmiko_workflow():
             'fast_cli': 'y'
         },
         {
-            'type': service_classes['netmiko_validation_service'],
+            'type': classes['netmiko_validation_service'],
             'name': 'netmiko_check_vrf_test',
             'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
@@ -163,7 +163,7 @@ def create_netmiko_workflow():
             'fast_cli': 'y'
         },
         {
-            'type': service_classes['netmiko_configuration_service'],
+            'type': classes['netmiko_configuration_service'],
             'name': 'netmiko_delete_vrf_test',
             'description': 'Delete VRF "test"',
             'waiting_time': 1,
@@ -177,7 +177,7 @@ def create_netmiko_workflow():
             'fast_cli': 'y'
         },
         {
-            'type': service_classes['netmiko_validation_service'],
+            'type': classes['netmiko_validation_service'],
             'name': 'netmiko_check_no_vrf_test',
             'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
@@ -219,7 +219,7 @@ def create_napalm_workflow():
     services = []
     for service in (
         {
-            'type': service_classes['napalm_configuration_service'],
+            'type': classes['napalm_configuration_service'],
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
@@ -232,7 +232,7 @@ def create_napalm_workflow():
             'content': 'vrf definition test\n'
         },
         {
-            'type': service_classes['napalm_rollback_service'],
+            'type': classes['napalm_rollback_service'],
             'name': 'Napalm eos Rollback',
             'driver': 'eos',
             'description': 'Rollback a configuration with Napalm eos',
@@ -253,7 +253,7 @@ def create_napalm_workflow():
     workflow.jobs.extend(services)
     edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
     for x, y in edges:
-        factory(classes['Workflow']Edge, **{
+        factory(classes['WorkflowEdge'], **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
@@ -269,7 +269,7 @@ def create_payload_transfer_workflow():
     services = []
     for service in [{
         'name': 'GET_Washington',
-        'type': service_classes['rest_call_service'],
+        'type': classes['rest_call_service'],
         'description': 'Use GET ReST call on Washington',
         'username': 'admin',
         'password': 'admin',
@@ -281,7 +281,7 @@ def create_payload_transfer_workflow():
         'payload': ''
     }] + [{
         'name': f'{getter}',
-        'type': service_classes['napalm_getters_service'],
+        'type': classes['napalm_getters_service'],
         'description': f'Getter: {getter}',
         'waiting_time': 0,
         'devices': [fetch(Device, name='Washington')],
@@ -295,7 +295,7 @@ def create_payload_transfer_workflow():
         'get_config'
     )] + [{
         'name': 'process_payload1',
-        'type': service_classes['swiss_army_knife_service'],
+        'type': classes['swiss_army_knife_service'],
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
         'devices': [fetch(Device, name='Washington')]
@@ -326,7 +326,7 @@ def create_payload_transfer_workflow():
         job.positions['payload_transfer_workflow'] = x * 10, y * 10
     edges = [(0, 2), (2, 3), (2, 4), (3, 5), (5, 6), (6, 7), (4, 7), (7, 1)]
     for x, y in edges:
-        factory(classes['Workflow']Edge, **{
+        factory(classes['WorkflowEdge'], **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,

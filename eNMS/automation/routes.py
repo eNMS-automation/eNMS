@@ -255,16 +255,12 @@ def edit_workflow():
 
 @post(bp, '/delete_workflow/<workflow_id>', 'Edit Automation Section')
 def delete_workflow(workflow_id):
-    workflow = fetch('Workflow', id=workflow_id)
-    db.session.delete(workflow)
-    db.session.commit()
-    return jsonify(workflow.serialized)
+    return jsonify(delete('Workflow', id=workflow_id))
 
 
 @post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def add_node(workflow_id, job_id):
-    workflow = fetch('Workflow', id=workflow_id)
-    job = fetch('Job', id=job_id)
+    workflow, job  = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.append(job)
     db.session.commit()
     return jsonify(job.serialized)
@@ -272,8 +268,7 @@ def add_node(workflow_id, job_id):
 
 @post(bp, '/delete_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def delete_node(workflow_id, job_id):
-    job = fetch('Job', id=job_id)
-    workflow = fetch('Workflow', id=workflow_id)
+    workflow, job  = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.remove(job)
     db.session.commit()
     return jsonify(job.properties)
@@ -293,10 +288,7 @@ def add_edge(wf_id, type, source, dest):
 
 @post(bp, '/delete_edge/<workflow_id>/<edge_id>', 'Edit Automation Section')
 def delete_edge(workflow_id, edge_id):
-    edge = fetch('WorkflowEdge', id=edge_id)
-    db.session.delete(edge)
-    db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(delete('WorkflowEdge', id=edge_id))
 
 
 @post(bp, '/save_positions/<workflow_id>', 'Edit Automation Section')
@@ -307,4 +299,4 @@ def save_positions(workflow_id):
         job = fetch('Job', id=job_id)
         job.positions[workflow.name] = (position['x'], position['y'])
     db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(True)

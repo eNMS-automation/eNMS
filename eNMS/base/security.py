@@ -1,7 +1,7 @@
-def process_kwargs(app, **kwargs):
+def process_kwargs(app, classes, **kwargs):
     if 'source' in kwargs:
-        source = fetch(Device, name=kwargs.pop('source'))
-        destination = fetch(Device, name=kwargs.pop('destination'))
+        source = fetch(classes['Device'], name=kwargs.pop('source'))
+        destination = fetch(classes['Device'], name=kwargs.pop('destination'))
         kwargs.update({
             'source_id': source.id,
             'destination_id': destination.id,
@@ -15,7 +15,7 @@ def process_kwargs(app, **kwargs):
                 for property in ('username', 'password', 'enable_password')
             }
             vault_helper(app, f'device/{kwargs["name"]}', data)
-    return Link if 'source' in kwargs else Device, kwargs
+    return classes['Link'] if 'source' in kwargs else classes['Device'], kwargs
 
 
 def allowed_file(name, allowed_extensions):

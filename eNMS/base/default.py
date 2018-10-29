@@ -5,12 +5,6 @@ from xlrd.biffh import XLRDError
 from eNMS import db
 from eNMS.base.classes import classes
 from eNMS.base.helpers import factory, integrity_rollback, fetch
-from eNMS.base.properties import (
-    property_types,
-    boolean_properties,
-    service_import_properties,
-    service_properties
-)
 from eNMS.base.security import process_kwargs
 
 
@@ -47,7 +41,7 @@ def create_default_pools():
 
 @integrity_rollback
 def create_default_parameters():
-    parameters = Parameters()
+    parameters = classes['Parameters']()
     db.session.add(parameters)
     db.session.commit()
 

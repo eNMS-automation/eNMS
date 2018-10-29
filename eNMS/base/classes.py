@@ -6,7 +6,13 @@ from pathlib import Path
 from sqlalchemy import Boolean, Float, Integer, PickleType
 
 from eNMS import db
-from eNMS.admin.models import User
+from eNMS.admin.models import Parameters, User
+from eNMS.base.properties import (
+    property_types,
+    boolean_properties,
+    service_import_properties,
+    service_properties
+)
 from eNMS.objects.models import Link, Device, Pool
 from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
 from eNMS.scheduling.models import Task
@@ -15,6 +21,7 @@ classes = {
     'Device': Device,
     'WorkflowEdge': WorkflowEdge,
     'Link': Link,
+    'Parameters': Parameters,
     'Pool': Pool,
     'User': User,
     'Job': Job,
@@ -32,7 +39,7 @@ def create_service_classes():
         if 'init' not in str(file):
             spec = spec_from_file_location(str(file), str(file))
             spec.loader.exec_module(module_from_spec(spec))
-    for cls_name, cls in classes.items():
+    for cls_name, cls in service_classes.items():
         for col in cls.__table__.columns:
             service_properties[cls_name].append(col.key)
             service_import_properties.append(col.key)

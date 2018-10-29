@@ -11,7 +11,7 @@ from eNMS.base.security import get_user_credentials
 
 @auth.get_password
 def get_password(username):
-    user = fetch(User, name=username)
+    user = fetch('User', name=username)
     if user:
         return get_user_credentials(current_app, user)[1]
 
@@ -25,7 +25,7 @@ class RestAutomation(Resource):
     decorators = [auth.login_required]
 
     def get(self, job_name):
-        job = fetch(Job, name=job_name)
+        job = fetch('Job', name=job_name)
         results = job.run()
         return {'job': job.serialized, 'results': results}
 
@@ -34,10 +34,10 @@ class GetInstance(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls_name, object_name):
-        return fetch(classes[cls_name], name=object_name).serialized
+        return fetch(cls_name, name=object_name).serialized
 
     def delete(self, cls_name, object_name):
-        obj = fetch(classes[cls_name], name=object_name)
+        obj = fetch(cls_name, name=object_name)
         db.session.delete(obj)
         db.session.commit()
         return f'{cls_name} {object_name} successfully deleted'
@@ -47,7 +47,10 @@ class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
     def post(self, cls_name):
-        return factory(**request.get_json(force=True, silent=True)).serialized
+        return factory(
+            cls_name,
+            **request.get_json(force=True, silent=True)
+        ).serialized
 
     def put(self, cls_name):
         return self.post(cls_name)

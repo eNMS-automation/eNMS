@@ -2,12 +2,11 @@ from flask import jsonify, render_template, request
 from re import search
 
 from eNMS import db
-from eNMS.automation.models import Job
+from eNMS.base.classes import classes
 from eNMS.base.helpers import factory, fetch, get, post
 from eNMS.base.properties import pretty_names
 from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
-from eNMS.logs.models import Log, LogRule
 
 
 @get(bp, '/log_management', 'Logs Section')
@@ -18,26 +17,26 @@ def log_management():
         log_filtering_form=log_filtering_form,
         names=pretty_names,
         fields=('source', 'content'),
-        logs=Log.serialize()
+        logs=classes['Log'].serialize()
     )
 
 
 @get(bp, '/log_automation', 'Logs Section')
 def syslog_automation():
     log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.jobs.choices = Job.choices()
+    log_automation_form.jobs.choices = classes['Job'].choices()
     return render_template(
         'log_automation.html',
         log_automation_form=log_automation_form,
         names=pretty_names,
         fields=('name', 'source', 'content'),
-        log_rules=LogRule.serialize()
+        log_rules=classes['LogRule'].serialize()
     )
 
 
 @post(bp, '/delete_log/<log_id>', 'Edit Logs Section')
 def delete_log(log_id):
-    log = fetch(Log, id=log_id)
+    log = fetch('Log', id=log_id)
     db.session.delete(log)
     db.session.commit()
     return jsonify({'success': True})
@@ -45,7 +44,7 @@ def delete_log(log_id):
 
 @post(bp, '/filter_logs', 'Edit Logs Section')
 def filter_logs():
-    logs = [log for log in Log.serialize() if all(
+    logs = [log for log in classes['Log'].serialize() if all(
         # if the regex property is not in the request, the
         # regex box is unticked and we only check that the values of the
         # filters are contained in the values of the log
@@ -62,23 +61,23 @@ def filter_logs():
 
 @post(bp, '/get_log_rule/<log_rule_id>', 'Logs Section')
 def get_log_rule(log_rule_id):
-    return jsonify(fetch(LogRule, id=log_rule_id).serialized)
+    return jsonify(fetch('LogRule', id=log_rule_id).serialized)
 
 
 @post(bp, '/save_log_rule', 'Edit Logs Section')
 def save_log_rule():
     data = request.form.to_dict()
     data['jobs'] = [
-        fetch(Job, id=id) for id in request.form.getlist('jobs')
+        fetch('Job', id=id) for id in request.form.getlist('jobs')
     ]
-    log_rule = factory(LogRule, **data)
+    log_rule = factory('LogRule', **data)
     db.session.commit()
     return jsonify(log_rule.serialized)
 
 
 @post(bp, '/delete_log_rule/<log_id>', 'Edit Logs Section')
 def delete_log_rule(log_id):
-    log_rule = fetch(LogRule, id=log_id)
+    log_rule = fetch('LogRule', id=log_id)
     db.session.delete(log_rule)
     db.session.commit()
     return jsonify({'success': True})

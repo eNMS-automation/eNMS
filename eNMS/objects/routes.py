@@ -13,8 +13,8 @@ from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin.models import Parameters
-from eNMS.base.models import classes
 from eNMS.base.helpers import (
+    choices,
     delete,
     factory,
     fetch,
@@ -66,14 +66,13 @@ def device_management():
 @get(bp, '/link_management', 'Inventory Section')
 def link_management():
     add_link_form = AddLink(request.form)
-    all_devices = [(n.name, n.name) for n in classes['Device'].query.all()]
-    add_link_form.source.choices = all_devices
-    add_link_form.destination.choices = all_devices
+    add_link_form.source.choices = choices('Device')
+    add_link_form.destination.choices = choices('Device')
     return render_template(
         'link_management.html',
         names=pretty_names,
         fields=link_table_properties,
-        links=classes['Link'].serialize(),
+        links=serialize('Link'),
         add_link_form=add_link_form
     )
 
@@ -220,9 +219,9 @@ def import_topology():
 @post(bp, '/export_topology', 'Inventory Section')
 def export_topology():
     workbook = Workbook()
-    for cls in (classes['Device'], classes['Link']):
-        sheet, objects = workbook.add_sheet(cls.__tablename__), cls.serialize()
-        for index, property in enumerate(cls_to_properties[cls.__tablename__]):
+    for obj_type in ('Device', 'Link'):
+        sheet, objects = workbook.add_sheet(obj_type), serialize(obj_type)
+        for index, property in enumerate(cls_to_properties[obj_type]):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(objects, 1):
                 sheet.write(obj_index, index, obj[property])

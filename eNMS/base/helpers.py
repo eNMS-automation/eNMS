@@ -25,6 +25,10 @@ def serialize(model):
     return classes[model].serialize()
 
 
+def choices(model):
+    return classes[model].choices()
+
+
 def factory(cls_name, **kwargs):
     if 'id' in kwargs:
         instance = fetch(cls_name, id=kwargs['id'])

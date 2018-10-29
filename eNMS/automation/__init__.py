@@ -3,14 +3,12 @@ from importlib.util import spec_from_file_location, module_from_spec
 from pathlib import Path
 from sqlalchemy import Boolean, Float, Integer, PickleType
 
-from eNMS import db
 from eNMS.base.properties import (
     property_types,
     boolean_properties,
     service_import_properties,
     service_properties
 )
-
 
 bp = Blueprint(
     'automation_blueprint',
@@ -29,6 +27,7 @@ classes.update({
     'Workflow': Workflow,
     'WorkflowEdge': WorkflowEdge
 })
+
 
 def create_service_classes():
     path_services = Path.cwd() / 'eNMS' / 'automation' / 'services'
@@ -54,6 +53,7 @@ def create_service_classes():
                     Float: float,
                     PickleType: dict,
                 }.get(type(col.type), str)
+
 
 create_service_classes()
 classes.update(service_classes)

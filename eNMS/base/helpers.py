@@ -21,9 +21,10 @@ def objectify(model, object_list):
 
 def delete(model, **kwargs):
     instance = db.session.query(classes[model]).filter_by(**kwargs).first()
-    db.session.delete(pool)
+    db.session.delete(instance)
     db.session.commit()
     return instance.serialized
+
 
 def serialize(model):
     return classes[model].serialize()

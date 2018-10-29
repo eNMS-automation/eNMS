@@ -82,4 +82,5 @@ class Base(db.Model):
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
+
 classes, service_classes = {}, {}

@@ -2,9 +2,6 @@ from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
 
 from eNMS import auth, db
-from eNMS.admin.models import User
-from eNMS.automation.models import Job
-from eNMS.base.models import classes
 from eNMS.base.helpers import factory, fetch
 from eNMS.base.security import get_user_credentials
 

@@ -4,9 +4,10 @@ from flask import jsonify, render_template, request, session
 from json import dumps, JSONDecodeError
 
 from eNMS import db, scheduler
-from eNMS.base.models import classes, service_classes
+from eNMS.base.models import service_classes
 from eNMS.base.helpers import (
     choices,
+    delete,
     factory,
     fetch,
     get,
@@ -260,7 +261,7 @@ def delete_workflow(workflow_id):
 
 @post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def add_node(workflow_id, job_id):
-    workflow, job  = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
+    workflow, job = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.append(job)
     db.session.commit()
     return jsonify(job.serialized)
@@ -268,7 +269,7 @@ def add_node(workflow_id, job_id):
 
 @post(bp, '/delete_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def delete_node(workflow_id, job_id):
-    workflow, job  = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
+    workflow, job = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.remove(job)
     db.session.commit()
     return jsonify(job.properties)
@@ -276,7 +277,7 @@ def delete_node(workflow_id, job_id):
 
 @post(bp, '/add_edge/<wf_id>/<type>/<source>/<dest>', 'Edit Automation Section')
 def add_edge(wf_id, type, source, dest):
-    workflow_edge = factory(WorkflowEdge, **{
+    workflow_edge = factory('WorkflowEdge', **{
         'name': f'{wf_id}-{type}:{source}->{dest}',
         'workflow': fetch('Workflow', id=wf_id),
         'type': type == 'true',

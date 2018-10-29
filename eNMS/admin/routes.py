@@ -9,8 +9,6 @@ from flask import (
 )
 from flask_login import current_user, login_user, logout_user
 from sqlalchemy.orm.exc import NoResultFound
-from tacacs_plus.client import TACACSClient
-from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII
 
 from eNMS import db
 from eNMS.admin import bp
@@ -24,7 +22,15 @@ from eNMS.admin.forms import (
     TacacsServerForm,
 )
 from eNMS.base.models import classes
-from eNMS.base.helpers import get, get_one, post, factory, fetch, serialize
+from eNMS.base.helpers import (
+    delete,
+    get,
+    get_one,
+    post,
+    factory,
+    fetch,
+    serialize
+)
 from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.base.security import vault_helper
 

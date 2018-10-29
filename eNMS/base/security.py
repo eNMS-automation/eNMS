@@ -1,3 +1,6 @@
+from eNMS.base.helpers import fetch
+
+
 def process_kwargs(app, classes, **kwargs):
     if 'source' in kwargs:
         source = fetch(classes['Device'], name=kwargs.pop('source'))

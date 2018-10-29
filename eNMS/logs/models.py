@@ -6,7 +6,7 @@ from threading import Thread
 
 from eNMS import db, scheduler
 from eNMS.base.associations import job_log_rule_table
-from eNMS.base.base import Base
+from eNMS.base.models import Base
 
 
 class SyslogUDPHandler(BaseRequestHandler):

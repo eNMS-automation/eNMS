@@ -8,7 +8,7 @@ from eNMS.base.associations import (
     job_device_table,
     job_pool_table
 )
-from eNMS.base.base import Base
+from eNMS.base.models import Base
 from eNMS.base.properties import (
     custom_properties,
     link_public_properties,

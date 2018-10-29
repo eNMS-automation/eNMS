@@ -13,7 +13,7 @@ from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin.models import Parameters
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.base.helpers import (
     factory,
     fetch,

@@ -4,7 +4,7 @@ from flask import jsonify, render_template, request, session
 from json import dumps, JSONDecodeError
 
 from eNMS import db, scheduler
-from eNMS.base.classes import classes, service_classes
+from eNMS.base.models import classes, service_classes
 from eNMS.base.helpers import factory, fetch, get, post, str_dict
 from eNMS.base.properties import (
     boolean_properties,

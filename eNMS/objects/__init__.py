@@ -8,7 +8,7 @@ bp = Blueprint(
     static_folder='static'
 )
 
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.objects.models import Device, Link, Pool
 classes.update({'Device': Device, 'Link': Link, 'Pool': Pool})
 import eNMS.objects.routes  # noqa: F401

@@ -1,7 +1,6 @@
 from json import dumps, loads
 
 from eNMS import db
-from eNMS.base.classes import classes
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,
@@ -82,3 +81,5 @@ class Base(db.Model):
     @classmethod
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
+
+classes, service_classes = {}, {}

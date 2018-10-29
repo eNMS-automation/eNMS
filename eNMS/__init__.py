@@ -18,7 +18,7 @@ db = SQLAlchemy(
 login_manager = LoginManager()
 scheduler = APScheduler()
 
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.base.default import (
     create_default_network_topology,
     create_default_parameters,
@@ -84,10 +84,10 @@ def configure_database(app):
     def create_default():
         db.create_all()
         create_default_users()
-        create_default_parameters()
-        create_default_network_topology(app)
-        create_default_pools()
-        create_default_workflows()
+        # create_default_parameters()
+        # create_default_network_topology(app)
+        # create_default_pools()
+        # create_default_workflows()
 
 
 def configure_errors(app):

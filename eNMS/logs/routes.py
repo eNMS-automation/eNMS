@@ -2,7 +2,7 @@ from flask import jsonify, render_template, request
 from re import search
 
 from eNMS import db
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.base.helpers import factory, fetch, get, post
 from eNMS.base.properties import pretty_names
 from eNMS.logs import bp

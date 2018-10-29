@@ -6,7 +6,7 @@ from subprocess import check_output
 
 from eNMS.automation.helpers import substitute
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
+from eNMS.base.models import service_classes
 
 
 class AnsiblePlaybookService(Service):

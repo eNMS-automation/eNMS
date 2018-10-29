@@ -2,7 +2,7 @@ from collections import Counter
 from flask import jsonify, render_template, redirect, request, url_for
 
 from eNMS.base import bp
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.base.helpers import get, post
 from eNMS.base.properties import (
     default_diagrams_properties,

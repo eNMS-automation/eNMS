@@ -3,7 +3,7 @@ from flask_login import current_user
 from re import search, sub
 
 from eNMS import db
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.base.helpers import factory, fetch, get, post
 from eNMS.base.properties import task_public_properties
 from eNMS.scheduling import bp

@@ -3,7 +3,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
 from eNMS import db
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.base.helpers import factory, integrity_rollback, fetch
 from eNMS.base.security import process_kwargs
 

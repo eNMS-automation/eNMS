@@ -8,7 +8,7 @@ bp = Blueprint(
     static_folder='static'
 )
 
-from eNMS.base.classes import classes
+from eNMS.base.models import classes
 from eNMS.logs.models import Log, LogRule
 
 classes.update({'Log': Log, 'LogRule': LogRule})

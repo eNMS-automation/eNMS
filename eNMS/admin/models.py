@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from passlib.hash import cisco_type7
 
 from eNMS import db
-from eNMS.base.base import Base
+from eNMS.base.models import Base
 from eNMS.base.security import vault_helper
 
 

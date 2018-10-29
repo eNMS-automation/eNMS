@@ -13,7 +13,7 @@ from eNMS.base.associations import (
     job_workflow_table
 )
 from eNMS.base.helpers import fetch
-from eNMS.base.base import Base
+from eNMS.base.models import Base
 from eNMS.base.properties import cls_to_properties, service_properties
 
 

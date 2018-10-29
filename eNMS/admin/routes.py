@@ -106,7 +106,7 @@ def admninistration():
         'administration.html',
         geographical_parameters_form=GeographicalParametersForm(request.form),
         gotty_parameters_form=GottyParametersForm(request.form),
-        parameters=db.session.query(Parameters).one(),
+        parameters=db.session.query(classes['Parameters']).one(),
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),
         tacacs_server=tacacs_server,

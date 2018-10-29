@@ -50,9 +50,6 @@ from eNMS.base.properties import (
 )
 
 
-
-
-
 @get(bp, '/device_management', 'Inventory Section')
 def device_management():
     return render_template(
@@ -107,13 +104,13 @@ def import_export():
 
 @post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_object(obj_type, id):
-    device = fetch(classes['Device'] if obj_type == 'device' else classes['Link'], id=id)
+    device = fetch(obj_type.capitalize(), id=id)
     return jsonify(device.serialized)
 
 
 @post(bp, '/connection/<id>', 'Connect to device')
 def connection(id):
-    parameters, device = Parameters.query.one(), fetch(classes['Device'], id=id)
+    parameters, device = classes['Parameters'].query.one(), fetch(Device, id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
     port, ip = parameters.get_gotty_port(), device.ip_address
     cmd.extend(['-p', str(port)])

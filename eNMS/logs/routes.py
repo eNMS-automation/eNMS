@@ -3,7 +3,7 @@ from re import search
 
 from eNMS import db
 from eNMS.base.models import classes
-from eNMS.base.helpers import factory, fetch, get, post
+from eNMS.base.helpers import choices, factory, fetch, get, post, serialize
 from eNMS.base.properties import pretty_names
 from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
@@ -17,34 +17,31 @@ def log_management():
         log_filtering_form=log_filtering_form,
         names=pretty_names,
         fields=('source', 'content'),
-        logs=classes['Log'].serialize()
+        logs=serialize('Log')
     )
 
 
 @get(bp, '/log_automation', 'Logs Section')
 def syslog_automation():
     log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.jobs.choices = classes['Job'].choices()
+    log_automation_form.jobs.choices = choices('Job')
     return render_template(
         'log_automation.html',
         log_automation_form=log_automation_form,
         names=pretty_names,
         fields=('name', 'source', 'content'),
-        log_rules=classes['LogRule'].serialize()
+        log_rules=serialize('LogRule')
     )
 
 
 @post(bp, '/delete_log/<log_id>', 'Edit Logs Section')
 def delete_log(log_id):
-    log = fetch('Log', id=log_id)
-    db.session.delete(log)
-    db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(delete('Log', id=log_id))
 
 
 @post(bp, '/filter_logs', 'Edit Logs Section')
 def filter_logs():
-    logs = [log for log in classes['Log'].serialize() if all(
+    logs = [log for log in serialize('Log') if all(
         # if the regex property is not in the request, the
         # regex box is unticked and we only check that the values of the
         # filters are contained in the values of the log
@@ -67,9 +64,7 @@ def get_log_rule(log_rule_id):
 @post(bp, '/save_log_rule', 'Edit Logs Section')
 def save_log_rule():
     data = request.form.to_dict()
-    data['jobs'] = [
-        fetch('Job', id=id) for id in request.form.getlist('jobs')
-    ]
+    data['jobs'] = objectify('Job', request.form.getlist('jobs'))
     log_rule = factory('LogRule', **data)
     db.session.commit()
     return jsonify(log_rule.serialized)

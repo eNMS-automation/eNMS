@@ -24,13 +24,13 @@ def dashboard():
         names=pretty_names,
         properties=type_to_diagram_properties,
         default_properties=default_diagrams_properties,
-        counters={name: len(fetch_all(cls)) for cls in classes}
+        counters={cls: len(fetch_all(cls)) for cls in classes}
     )
 
 
 @post(bp, '/counters/<property>/<type>')
 def get_counters(property, type):
-    objects = classes[type].query.all()
+    objects = fetch_all(type)
     if property in reverse_pretty_names:
         property = reverse_pretty_names[property]
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))

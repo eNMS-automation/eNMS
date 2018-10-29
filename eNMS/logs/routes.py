@@ -3,7 +3,15 @@ from re import search
 
 from eNMS import db
 from eNMS.base.models import classes
-from eNMS.base.helpers import choices, factory, fetch, get, post, serialize
+from eNMS.base.helpers import (
+    choices,
+    factory,
+    fetch,
+    get,
+    objectify,
+    post,
+    serialize
+)
 from eNMS.base.properties import pretty_names
 from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
@@ -72,7 +80,4 @@ def save_log_rule():
 
 @post(bp, '/delete_log_rule/<log_id>', 'Edit Logs Section')
 def delete_log_rule(log_id):
-    log_rule = fetch('LogRule', id=log_id)
-    db.session.delete(log_rule)
-    db.session.commit()
-    return jsonify({'success': True})
+    return jsonify(delete('LogRule', id=log_id))

@@ -4,7 +4,15 @@ from re import search, sub
 
 from eNMS import db
 from eNMS.base.models import classes
-from eNMS.base.helpers import factory, fetch, get, post
+from eNMS.base.helpers import (
+    choices,
+    factory,
+    fetch,
+    fetch_all,
+    get,
+    post,
+    serialize
+)
 from eNMS.base.properties import task_public_properties
 from eNMS.scheduling import bp
 from eNMS.scheduling.forms import SchedulingForm
@@ -13,11 +21,11 @@ from eNMS.scheduling.forms import SchedulingForm
 @get(bp, '/task_management', 'Scheduling Section')
 def task_management():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = classes['Job'].choices()
+    scheduling_form.job.choices = choices('Job')
     return render_template(
         f'task_management.html',
         fields=task_public_properties,
-        tasks=classes['Task'].serialize(),
+        tasks=serialize('Task'),
         scheduling_form=scheduling_form
     )
 
@@ -25,9 +33,9 @@ def task_management():
 @get(bp, '/calendar', 'Scheduling Section')
 def calendar():
     scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = classes['Job'].choices()
+    scheduling_form.job.choices = choices('Job')
     tasks = {}
-    for task in classes['Task'].query.all():
+    for task in fetch_all('Task'):
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar
@@ -56,8 +64,7 @@ def scheduler(workflow_id=None):
     data = request.form.to_dict()
     data['job'] = fetch('Job', id=data['job'])
     data['user'] = current_user
-    task = factory('Task', **data)
-    return jsonify(task.serialized)
+    return jsonify(factory('Task', **data).serialized)
 
 
 @post(bp, '/get/<task_id>', 'Scheduling Section')

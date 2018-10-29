@@ -8,4 +8,9 @@ bp = Blueprint(
     static_folder='static'
 )
 
+from eNMS.base.classes import classes
+from eNMS.automation.models import Job, Service, Workflow
+
+classes.update({'Job': Job, 'Service': Service, 'Workflow': Workflow})
+
 import eNMS.automation.routes  # noqa: F401

@@ -4,7 +4,7 @@ from flask import jsonify, render_template, request, session
 from json import dumps, JSONDecodeError
 
 from eNMS import db, scheduler
-from eNMS.base.classes import classes
+from eNMS.base.classes import classes, service_classes
 from eNMS.base.helpers import factory, fetch, get, post, str_dict
 from eNMS.base.properties import (
     boolean_properties,
@@ -27,8 +27,8 @@ from eNMS.automation.helpers import scheduler_job
 @get(bp, '/service_management', 'Automation Section')
 def service_management():
     service_form = JobForm(request.form)
-    service_form.devices.choices = Device.choices()
-    service_form.pools.choices = Pool.choices()
+    service_form.devices.choices = classes['Device'].choices()
+    service_form.pools.choices = classes['Pool'].choices()
     return render_template(
         'service_management.html',
         compare_logs_form=CompareLogsForm(request.form),
@@ -37,7 +37,7 @@ def service_management():
         property_types={k: str(v) for k, v in property_types.items()},
         service_form=service_form,
         services_classes=list(service_classes),
-        services=Service.serialize()
+        services=classes['Service'].serialize()
     )
 
 
@@ -45,14 +45,14 @@ def service_management():
 def workflow_management():
     workflow_creation_form = WorkflowForm(request.form)
     workflow_creation_form.devices.choices = classes['Device'].choices()
-    workflow_creation_form.pools.choices = Pool.choices()
+    workflow_creation_form.pools.choices = classes['Pool'].choices()
     return render_template(
         'workflow_management.html',
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
         fields=workflow_table_properties,
         property_types={k: str(v) for k, v in property_types.items()},
-        workflows=Workflow.serialize(),
+        workflows=classes['Workflow'].serialize(),
         workflow_creation_form=workflow_creation_form
     )
 
@@ -62,11 +62,11 @@ def workflow_builder():
     add_job_form = AddJobForm(request.form)
     add_job_form.job.choices = Job.choices()
     workflow_builder_form = WorkflowBuilderForm(request.form)
-    workflow_builder_form.workflow.choices = Workflow.choices()
+    workflow_builder_form.workflow.choices = classes['Workflow'].choices()
     service_form = JobForm(request.form)
     service_form.devices.choices = classes['Device'].choices()
-    service_form.pools.choices = Pool.choices()
-    workflow = fetch(Workflow, id=session.get('workflow', None))
+    service_form.pools.choices = classes['Pool'].choices()
+    workflow = fetch('Workflow', id=session.get('workflow', None))
     return render_template(
         'workflow_builder.html',
         workflow=workflow.serialized if workflow else None,
@@ -82,7 +82,7 @@ def workflow_builder():
 
 @post(bp, '/get_service/<id_or_cls>', 'Automation Section')
 def get_service(id_or_cls):
-    service = fetch(Service, id=id_or_cls)
+    service = fetch('Service', id=id_or_cls)
     cls = service_classes[service.type if service else id_or_cls]
 
     def build_text_box(c):
@@ -144,13 +144,12 @@ def get_service(id_or_cls):
 
 @post(bp, '/get_states/<cls>', 'Automation Section')
 def get_states(cls):
-    cls = Service if cls == 'service' else Workflow
-    return jsonify([s['state'] for s in cls.serialize()])
+    return jsonify([s['state'] for s in classes[cls.capitalize()].serialize()])
 
 
 @post(bp, '/delete/<service_id>', 'Edit Automation Section')
 def delete_object(service_id):
-    service = fetch(Service, id=service_id)
+    service = fetch('Service', id=service_id)
     db.session.delete(service)
     db.session.commit()
     return jsonify(service.serialized)
@@ -177,7 +176,7 @@ def save_service(cls_name):
         fetch('Device', id=id) for id in request.form.getlist('devices')
     ]
     form['pools'] = [
-        fetch(Pool, id=id) for id in request.form.getlist('pools')
+        fetch('Pool', id=id) for id in request.form.getlist('pools')
     ]
     for key in request.form:
         if property_types.get(key, None) == list:
@@ -223,7 +222,7 @@ def compare_logs(job_id):
 
 @post(bp, '/add_to_workflow/<workflow_id>', 'Edit Automation Section')
 def add_to_workflow(workflow_id):
-    workflow = fetch(Workflow, id=workflow_id)
+    workflow = fetch('Workflow', id=workflow_id)
     job = fetch(Job, id=request.form['job'])
     job.workflows.append(workflow)
     db.session.commit()
@@ -232,13 +231,13 @@ def add_to_workflow(workflow_id):
 
 @post(bp, '/get/<workflow_id>', 'Automation Section')
 def get_workflow(workflow_id):
-    workflow = fetch(Workflow, id=workflow_id)
+    workflow = fetch('Workflow', id=workflow_id)
     return jsonify(workflow.serialized if workflow else {})
 
 
 @post(bp, '/reset_workflow_logs/<workflow_id>', 'Edit Automation Section')
 def reset_workflow_logs(workflow_id):
-    fetch(Workflow, id=workflow_id).status = {'state': 'Idle'}
+    fetch('Workflow', id=workflow_id).status = {'state': 'Idle'}
     db.session.commit()
     return jsonify(True)
 
@@ -253,14 +252,14 @@ def edit_workflow():
         fetch(Device, id=id) for id in request.form.getlist('devices')
     ]
     form['pools'] = [
-        fetch(Pool, id=id) for id in request.form.getlist('pools')
+        fetch('Pool', id=id) for id in request.form.getlist('pools')
     ]
-    return jsonify(factory(Workflow, **form).serialized)
+    return jsonify(factory('Workflow', **form).serialized)
 
 
 @post(bp, '/delete_workflow/<workflow_id>', 'Edit Automation Section')
 def delete_workflow(workflow_id):
-    workflow = fetch(Workflow, id=workflow_id)
+    workflow = fetch('Workflow', id=workflow_id)
     db.session.delete(workflow)
     db.session.commit()
     return jsonify(workflow.serialized)
@@ -268,7 +267,7 @@ def delete_workflow(workflow_id):
 
 @post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def add_node(workflow_id, job_id):
-    workflow = fetch(Workflow, id=workflow_id)
+    workflow = fetch('Workflow', id=workflow_id)
     job = fetch(Job, id=job_id)
     workflow.jobs.append(job)
     db.session.commit()
@@ -278,7 +277,7 @@ def add_node(workflow_id, job_id):
 @post(bp, '/delete_node/<workflow_id>/<job_id>', 'Edit Automation Section')
 def delete_node(workflow_id, job_id):
     job = fetch(Job, id=job_id)
-    workflow = fetch(Workflow, id=workflow_id)
+    workflow = fetch('Workflow', id=workflow_id)
     workflow.jobs.remove(job)
     db.session.commit()
     return jsonify(job.properties)
@@ -288,7 +287,7 @@ def delete_node(workflow_id, job_id):
 def add_edge(wf_id, type, source, dest):
     workflow_edge = factory(WorkflowEdge, **{
         'name': f'{wf_id}-{type}:{source}->{dest}',
-        'workflow': fetch(Workflow, id=wf_id),
+        'workflow': fetch('Workflow', id=wf_id),
         'type': type == 'true',
         'source': fetch(Job, id=source),
         'destination': fetch(Job, id=dest)
@@ -306,7 +305,7 @@ def delete_edge(workflow_id, edge_id):
 
 @post(bp, '/save_positions/<workflow_id>', 'Edit Automation Section')
 def save_positions(workflow_id):
-    workflow = fetch(Workflow, id=workflow_id)
+    workflow = fetch('Workflow', id=workflow_id)
     session['workflow'] = workflow.id
     for job_id, position in request.json.items():
         job = fetch(Job, id=job_id)

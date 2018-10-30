@@ -114,3 +114,5 @@ Example: if you create a workflow to perform the upgrade of a device, you might 
 .. image:: /_static/services/default_services/update_inventory.png
    :alt: Update Inventory service
    :align: center
+
+.. note:: Example of dictionnary to update the "Model" property of all target devices: ``{"model":"ao"}``.

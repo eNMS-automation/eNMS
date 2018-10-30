@@ -171,8 +171,8 @@ def get_pool(pool_id):
 @post(bp, '/save_pool_objects/<pool_id>', 'Edit Inventory Section')
 def save_pool_objects(pool_id):
     pool = fetch('Pool', id=pool_id)
-    pool.devices = objectify(request.form.getlist('devices'))
-    pool.links = objectify(request.form.getlist('links'))
+    pool.devices = objectify('Device', request.form.getlist('devices'))
+    pool.links = objectify('Link', request.form.getlist('links'))
     db.session.commit()
     return jsonify(pool.name)
 

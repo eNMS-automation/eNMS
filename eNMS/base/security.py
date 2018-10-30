@@ -2,7 +2,7 @@ from eNMS.base.helpers import fetch
 
 
 def process_kwargs(app, **kwargs):
-    if 'source' in kwargs:
+    if 'source_name' in kwargs:
         source = fetch('Device', name=kwargs.pop('source_name'))
         destination = fetch('Device', name=kwargs.pop('destination_name'))
         kwargs.update({

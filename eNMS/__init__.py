@@ -114,7 +114,7 @@ def configure_logs(app):
         handlers=[
             RotatingFileHandler(
                 app.path / 'logs' / 'enms.log',
-                maxBytes=2000000,
+                maxBytes=20000000,
                 backupCount=10
             ),
             StreamHandler()

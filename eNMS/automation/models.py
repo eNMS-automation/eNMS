@@ -242,11 +242,11 @@ class Workflow(Job):
             if not self.multiprocessing:
                 self.status['jobs'][job.id] = success
                 db.session.commit()
-            if job == self.jobs[1]:
-                results['success'] = True
             for successor in job.job_successors(self, success):
                 if successor not in visited:
                     jobs.append(successor)
+                if successor == self.jobs[1]:
+                    results['success'] = True
             results[job.name] = job_results
             sleep(job.waiting_time)
         if not self.multiprocessing:

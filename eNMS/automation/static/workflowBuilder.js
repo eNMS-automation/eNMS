@@ -73,7 +73,7 @@ function displayWorkflow(wf) {
   graph.on('oncontext', function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
-    if (typeof node !== 'undefined') {
+    if (typeof node !== 'undefined' && node != 1 && node != 2) {
       graph.selectNodes([node]);
       $('.node-selection').show();
       $('.global').hide();
@@ -220,13 +220,9 @@ function edgeToEdge(edge) {
  */
 function deleteSelection() {
   const node = graph.getSelectedNodes()[0];
-  if (node != 1 && node != 2) {
-    deleteNode(node);
-    graph.getSelectedEdges().map((edge) => deleteEdge(edge));
-    graph.deleteSelected();
-  } else {
-    alertify.notify('Start and End task cannot be deleted', 'error', 5);
-  }
+  deleteNode(node);
+  graph.getSelectedEdges().map((edge) => deleteEdge(edge));
+  graph.deleteSelected();
 }
 
 /**

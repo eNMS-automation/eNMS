@@ -221,7 +221,7 @@ class Workflow(Job):
                 self.status['current_device'] = device.name
             db.session.commit()
         jobs, visited = [self.jobs[0]], set()
-        results = {'success': True}
+        results = {'success': False}
         while jobs:
             job = jobs.pop()
             # We check that all predecessors of the job have been visited
@@ -240,7 +240,7 @@ class Workflow(Job):
                 self.status['jobs'][job.id] = success
                 db.session.commit()
             if job == self.jobs[1]:
-                results['success'] = success
+                results['success'] = True
             for successor in job.job_successors(self, success):
                 if successor not in visited:
                     jobs.append(successor)

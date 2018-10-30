@@ -37,6 +37,8 @@ class ExampleService(Service):
     __tablename__ = 'ExampleService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    # see eNMS documentation section on Workflow devices for a description of
+    # the multiprocessing property and its expected behavior
     multiprocessing = False
     # the "string1" property will be displayed as a drop-down list, because
     # there is an associated "string1_values" property in the class.

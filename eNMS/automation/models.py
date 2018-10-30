@@ -87,7 +87,7 @@ class Job(Base):
             if results['success']:
                 break
             if i != self.number_of_retries:
-                failed_attempts[f'Attempts {i}'] = results
+                failed_attempts[f'Attempts {i + 1}'] = results
                 sleep(self.time_between_retries)
         results['failed_attempts'] = failed_attempts
         self.logs[str(datetime.now())] = results

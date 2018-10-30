@@ -55,6 +55,24 @@ From the ``job-specific right-click menu``, you can:
    :alt: Workflow management
    :align: center
 
+Waiting time
+------------
+
+Services and Workflows have a ``Waiting time`` property: this tells eNMS how much time it should wait after the Service/Subworkflow has run.
+This is useful if for example you're reloading a device: you'll need to wait some time for the device to come back to life before moving on.
+Another use-case is to run a command that takes some time to be executed. For example, on Cisco devices, deleting a VRF can takes up a few minutes.
+
+If a script is configured to "retry" in case it is not successful, eNMS will also wait "time between retries" between each try. The execution of the service in a workflow, in terms of waiting times, would be the following:
+
+..
+
+  First try
+  "time between retries" pause
+  Retry 1
+  "time between retries" pause 
+  Retry 2
+  "Waiting time" pause
+
 Workflow devices
 ----------------
 

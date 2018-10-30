@@ -61,7 +61,6 @@ def factory(cls_name, **kwargs):
     if instance:
         instance.update(**kwargs)
     else:
-        print(kwargs)
         instance = classes[cls_name](**kwargs)
         db.session.add(instance)
     db.session.commit()

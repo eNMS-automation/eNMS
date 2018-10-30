@@ -232,7 +232,7 @@ def create_napalm_workflow():
 def create_payload_transfer_workflow():
     services = []
     for service in [{
-        'name': 'GET_Washington',
+        'name': 'GET_device',
         'type': 'rest_call_service',
         'description': 'Use GET ReST call on eNMS ReST API',
         'username': 'admin',
@@ -242,7 +242,8 @@ def create_payload_transfer_workflow():
         'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/{{device.name}}',
-        'payload': ''
+        'payload': '',
+        'multiprocessing': 'y'
     }] + [{
         'name': f'{getter}',
         'type': 'napalm_getters_service',

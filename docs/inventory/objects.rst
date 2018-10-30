@@ -91,16 +91,18 @@ The YAML file must have the following format:
 
 ::
 
- property1:
-     type: "integer"
-     default: 4
- property2:
-   type: string
-   default: "a"
+property1:
+  pretty_name: Property 1
+  type: integer
+  default: 4
+property2:
+  pretty_name: Property 2
+  type: string
+  default: "a"
 
 This YAML file will create two properties:
-- "property1": an integer property defaulting to 4
-- "property2": a string property defaulting to "a"
+- "property1": an integer property defaulting to 4, displayed "Property 1" in the GUI.
+- "property2": a string property defaulting to "a" displayed "Property 2" in the GUI.
 
 .. note:: You can find examples of YAML files with custom propertyes in :guilabel:`eNMS/tests/custom_properties`.
 

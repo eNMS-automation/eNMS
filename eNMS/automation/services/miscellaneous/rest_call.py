@@ -27,7 +27,6 @@ class RestCallService(Service):
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     content_match = Column(String)
     content_match_regex = Column(Boolean)
-    convert_result_to_xml = Column(Boolean)
     username = Column(String)
     password = Column(String)
     call_type_values = (
@@ -55,7 +54,6 @@ class RestCallService(Service):
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
                 rest_url,
-                headers={'Accept': 'application/json'},
                 auth=HTTPBasicAuth(self.username, self.password)
             ).json()
         else:
@@ -69,8 +67,6 @@ class RestCallService(Service):
             self.content_match_regex and search(match, str(result))
             or match in str(result) and not self.content_match_regex
         )
-        if self.convert_result_to_xml:
-            result = str(dicttoxml(result))
         return {'success': success, 'result': result, 'url': rest_url}
 
 

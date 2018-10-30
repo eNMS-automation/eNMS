@@ -45,7 +45,6 @@ from eNMS.objects.forms import (
 )
 from eNMS.base.properties import (
     boolean_properties,
-    cls_to_properties,
     device_public_properties,
     export_properties,
     import_properties,
@@ -260,7 +259,6 @@ def migration_import():
                         obj[property] = objectify(model, value)
                     else:
                         obj[property] = value
-                print(obj)
                 factory(cls_name, **obj)
     return jsonify(True)
 

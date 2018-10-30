@@ -36,8 +36,8 @@ def define_link(subtype, source, destination):
         ('location', 'Los Angeles'),
         ('vendor', 'Juniper'),
         ('type', subtype),
-        ('source', source),
-        ('destination', destination),
+        ('source_name', source),
+        ('destination_name', destination),
     ])
 
 

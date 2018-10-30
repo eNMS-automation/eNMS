@@ -1,4 +1,3 @@
-from dicttoxml import dicttoxml
 from json import dumps, loads
 from re import search
 from requests import (

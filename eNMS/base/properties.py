@@ -344,16 +344,16 @@ reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 service_properties = defaultdict(list)
 property_types = {}
 
-serialization_properties = (
-    'destination',
-    'device',
-    'edge',
-    'job',
-    'link',
-    'pool',
-    'source',
-    'task'
-)
+serialization_properties = {
+    'destination': 'Device',
+    'device': 'Device',
+    'edge': 'WorkflowEdge',
+    'job': 'Job',
+    'link': 'Link',
+    'pool': 'Pool',
+    'source': 'Device',
+    'task': 'Task'
+}
 
 device_import_properties = device_public_properties + [
     'id'
@@ -403,14 +403,14 @@ workflow_edge_import_properties = [
 ]
 
 import_properties = {
-    'user': user_import_properties,
-    'device': device_import_properties,
-    'link': link_import_properties,
-    'pool': pool_import_properties,
-    'service': service_import_properties,
-    'edge': workflow_edge_import_properties,
-    'workflow': workflow_import_properties,
-    'task': task_import_properties,
+    'User': user_import_properties,
+    'Device': device_import_properties,
+    'Link': link_import_properties,
+    'Pool': pool_import_properties,
+    'Service': service_import_properties,
+    'WorkflowEdge': workflow_edge_import_properties,
+    'Workflow': workflow_import_properties,
+    'Task': task_import_properties,
 }
 
 # Export topology properties

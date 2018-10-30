@@ -116,9 +116,5 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-    var directories = {{ directories|tojson|safe }};
-    console.log(directories);
-  </script>
   <script src="{{ url_for('objects_blueprint.static', filename='importExport.js') }}"></script>
 {% endblock javascripts %}

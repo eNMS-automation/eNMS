@@ -1,7 +1,7 @@
 from collections import defaultdict
 from flask import current_app as app, jsonify, render_template, request
 from flask_login import current_user
-from os import makedirs, walk
+from os import makedirs
 from os.path import exists
 from pathlib import Path
 from pynetbox import api as netbox_api
@@ -100,7 +100,6 @@ def pool_management():
 def import_export():
     return render_template(
         'import_export.html',
-        directories=list(walk(app.path / 'migrations' / 'export'))[0][1],
         import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
@@ -248,22 +247,21 @@ def migration_import():
         path = app.path / 'migrations' / 'export' / name / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             for obj_data in load(migration_file):
-                cls, obj = obj_data.pop('type') if cls == 'service' else cls, {}
+                cls_name = obj_data.pop('type') if cls == 'Service' else cls
+                obj = {}
                 for property, value in obj_data.items():
                     if property not in import_properties[cls]:
                         continue
                     elif property in serialization_properties:
-                        obj[property] = fetch(
-                            property
-                            if property not in ('source', 'destination')
-                            else 'Device',
-                            id=value
-                        )
+                        model = serialization_properties[property]
+                        obj[property] = fetch(model, id=value)
                     elif property[:-1] in serialization_properties:
-                        obj[property] = objectify(property[:-1], value)
+                        model = serialization_properties[property[:-1]]
+                        obj[property] = objectify(model, value)
                     else:
                         obj[property] = value
-                factory(cls, **obj)
+                print(obj)
+                factory(cls_name, **obj)
     return jsonify(True)
 
 

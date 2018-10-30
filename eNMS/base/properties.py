@@ -337,7 +337,7 @@ pretty_names = {
     'waiting_time': 'Waiting time'
 }
 
-# Export properties
+# Import properties
 
 pretty_names.update({k: v['pretty_name'] for k, v in custom_properties.items()})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
@@ -411,4 +411,11 @@ import_properties = {
     'edge': workflow_edge_import_properties,
     'workflow': workflow_import_properties,
     'task': task_import_properties,
+}
+
+# Export topology properties
+
+export_properties = {
+    'Device': device_public_properties,
+    'Link': link_table_properties
 }

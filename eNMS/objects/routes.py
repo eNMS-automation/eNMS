@@ -45,6 +45,7 @@ from eNMS.base.properties import (
     boolean_properties,
     cls_to_properties,
     device_public_properties,
+    export_properties,
     import_properties,
     link_table_properties,
     pool_table_properties,
@@ -217,7 +218,7 @@ def export_topology():
     workbook = Workbook()
     for obj_type in ('Device', 'Link'):
         sheet = workbook.add_sheet(obj_type)
-        for index, property in enumerate(cls_to_properties[obj_type]):
+        for index, property in enumerate(export_properties[obj_type]):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(serialize(obj_type), 1):
                 sheet.write(obj_index, index, obj[property])

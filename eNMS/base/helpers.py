@@ -7,6 +7,14 @@ from eNMS import db
 from eNMS.base.models import classes
 
 
+def add_classes(*models):
+    for model in models:
+        classes.update({
+            model.__tablename__: model,
+            model.__tablename__.lower(): model
+        })
+
+
 def fetch(model, **kwargs):
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 

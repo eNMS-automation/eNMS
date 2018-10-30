@@ -234,14 +234,14 @@ def create_payload_transfer_workflow():
     for service in [{
         'name': 'GET_Washington',
         'type': 'rest_call_service',
-        'description': 'Use GET ReST call on Washington',
+        'description': 'Use GET ReST call on eNMS ReST API',
         'username': 'admin',
         'password': 'admin',
         'waiting_time': 0,
         'devices': [fetch('Device', name='Washington')],
         'content_match': '',
         'call_type': 'GET',
-        'url': 'http://127.0.0.1:5000/rest/object/device/Washington',
+        'url': 'http://127.0.0.1:5000/rest/object/device/{{device.name}}',
         'payload': ''
     }] + [{
         'name': f'{getter}',

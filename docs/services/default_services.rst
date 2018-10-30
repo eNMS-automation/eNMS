@@ -104,13 +104,13 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
-Update Device Service
+Update Inventory Service
 ---------------------
 
 Update the properties of one or several devices in eNMS inventory.
 This service takes a dictionnary as input: all key/value pairs of that dictionnary are used to update properties in the inventory.
 Example: if you create a workflow to perform the upgrade of a device, you might want to change the value of the ``operating_system`` property in eNMS to keep the inventory up-to-date.
 
-.. image:: /_static/services/default_services/update_device.png
-   :alt: Update Device service
+.. image:: /_static/services/default_services/update_inventory.png
+   :alt: Update Inventory service
    :align: center

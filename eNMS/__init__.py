@@ -111,6 +111,8 @@ def configure_errors(app):
 def configure_logs(app):
     basicConfig(
         level=DEBUG,
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        datefmt='%m-%d-%Y %H:%M:%S',
         handlers=[
             RotatingFileHandler(
                 app.path / 'logs' / 'enms.log',

@@ -34,9 +34,13 @@ class SwissArmyKnifeService(Service):
         # End of a workflow
         return {'success': True}
 
-    def process_payload1(self, payload):
+    def process_payload1(self, device, payload):
         get_facts = payload['get_facts']
-        facts = get_facts['devices']['Washington']['result']['get_facts']
+        # we use the name of the device to get the result for that particular
+        # device.
+        # all of the other inventory properties of the device are available
+        # to use, including custom properties.
+        facts = get_facts['devices'][device.name]['result']['get_facts']
         uptime_less_than_50000 = facts['uptime'] < 50000
         return {
             'success': True,

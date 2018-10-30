@@ -31,7 +31,7 @@ class GetInstance(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls_name, object_name):
-        return fetch(cls_name, name=object_name).serialized
+        return fetch(cls_name, name=object_name).properties
 
     def delete(self, cls_name, object_name):
         obj = fetch(cls_name, name=object_name)
@@ -47,7 +47,7 @@ class UpdateInstance(Resource):
         return factory(
             cls_name,
             **request.get_json(force=True, silent=True)
-        ).serialized
+        ).properties
 
     def put(self, cls_name):
         return self.post(cls_name)

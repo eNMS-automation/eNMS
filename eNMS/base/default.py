@@ -152,7 +152,9 @@ def create_netmiko_workflow():
             'command': 'show vrf',
             'content_match': '^((?!test).)*$',
             'content_match_regex': 'y',
-            'fast_cli': 'y'
+            'fast_cli': 'y',
+            'number_of_retries': 2,
+            'time_between_retries': 1
         },
     ):
         instance = factory(service.pop('type'), **service)

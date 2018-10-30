@@ -81,14 +81,16 @@ class Job(Base):
         ]
 
     def try_run(self, payload=None, targets=None):
-        now = str(datetime.now())
+        failed_attempts = {}
         for i in range(self.number_of_retries + 1):
             results = self.run(payload, targets)
-            self.logs[now] = results
             if results['success']:
                 break
             if i != self.number_of_retries:
+                failed_attempts[f'Attempts {i}'] = results
                 sleep(self.time_between_retries)
+        results['failed_attempts'] = failed_attempts
+        self.logs[str(datetime.now())] = results
         return results
 
     def get_results(self, payload, device=None):
@@ -98,7 +100,7 @@ class Job(Base):
             return {'success': False, 'result': str(e)}
 
     def run(self, payload=None, targets=None):
-        results = {'success': True, 'devices': {}}
+        results = {'success': True, 'result': {'devices': {}}}
         if not targets:
             targets = self.compute_targets()
         if self.multiprocessing:
@@ -111,7 +113,7 @@ class Job(Base):
             pool.join()
         else:
             if targets:
-                results['devices'] = {
+                results['result']['devices'] = {
                     device.name: self.get_results(payload, device)
                     for device in targets
                 }
@@ -121,8 +123,9 @@ class Job(Base):
 
     def device_run(self, args):
         device, results, payload = args
-        results['devices'][device.name] = self.get_results(payload, device)
-        if not results['devices'][device.name]['success']:
+        device_result = self.get_results(payload, device)
+        results['result']['devices'][device.name] = device_result
+        if not results['result']['devices'][device.name]['success']:
             results['success'] = False
 
 

@@ -119,14 +119,17 @@ class Job(Base):
                 }
             else:
                 results = self.get_results(payload)
+        if any(
+            not results['result']['devices'][device.name]['success']
+            for device in targets
+        ):
+            results['success'] = False
         return results
 
     def device_run(self, args):
         device, results, payload = args
         device_result = self.get_results(payload, device)
         results['result']['devices'][device.name] = device_result
-        if not results['result']['devices'][device.name]['success']:
-            results['success'] = False
 
 
 class Service(Job):

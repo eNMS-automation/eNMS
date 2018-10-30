@@ -40,8 +40,8 @@ class SwissArmyKnifeService(Service):
         # device.
         # all of the other inventory properties of the device are available
         # to use, including custom properties.
-        facts = get_facts['devices'][device.name]['result']['get_facts']
-        uptime_less_than_50000 = facts['uptime'] < 50000
+        results = get_facts['result']['devices'][device.name]['result']
+        uptime_less_than_50000 = results['get_facts']['uptime'] < 50000
         return {
             'success': True,
             'result': {

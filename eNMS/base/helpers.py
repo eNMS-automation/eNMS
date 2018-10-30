@@ -53,7 +53,7 @@ def get_one(model):
 def factory(cls_name, **kwargs):
     if 'id' in kwargs:
         instance = fetch(cls_name, id=kwargs['id'])
-        if not instance:
+        if not kwargs['id']:
             kwargs.pop('id')
     else:
         instance = fetch(cls_name, name=kwargs['name'])

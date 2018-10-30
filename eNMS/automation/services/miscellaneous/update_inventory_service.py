@@ -10,6 +10,7 @@ class UpdateInventoryService(Service):
     __tablename__ = 'UpdateInventoryService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    multiprocessing = False
     update_dictionnary = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {

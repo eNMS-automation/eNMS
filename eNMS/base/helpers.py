@@ -52,14 +52,16 @@ def get_one(model):
 
 def factory(cls_name, **kwargs):
     if 'id' in kwargs:
-        instance = fetch(cls_name, id=kwargs['id'])
-        if not kwargs['id']:
-            kwargs.pop('id')
+        if kwargs['id']:
+            instance = fetch(cls_name, id=kwargs['id'])
+        else:
+            instance = kwargs.pop('id')
     else:
         instance = fetch(cls_name, name=kwargs['name'])
     if instance:
         instance.update(**kwargs)
     else:
+        print(kwargs)
         instance = classes[cls_name](**kwargs)
         db.session.add(instance)
     db.session.commit()

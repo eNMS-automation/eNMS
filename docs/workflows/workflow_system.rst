@@ -87,7 +87,12 @@ A workflow has a property ``Multiprocessing``:
 
 In other words:
 - Service Instance tasks (and Subworkflow tasks) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
-- If multiple inventory devices are selected within the workflow definition, these will run independently from each other (in parallel if the ``multiprocessing`` property is activated, sequentially otherwise``, while following the sequential rules of the workflow.
+- If multiple inventory devices are selected within the workflow definition, these will run independently from each other (in parallel if the ``multiprocessing`` property is activated, sequentially otherwise, while following the sequential rules of the workflow.
 - If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel, but each service instance step is required to be completed by all devices before moving to the next step in the workflow.
 
 The status of a workflow will be updated in real-time in the Workflow Builder.
+
+Success of a Workflow
+---------------------
+
+The behavior of the workflow is such that the workflow is considered to have an overall Success status if the END job is reached. So, the END job should only be reached by a success edge when the overall status of the workflow is considered successful. If a particular service job fails, then the workflow should just stop there (with the workflow thus having an overall Failure status), or it should call a cleanup/remediation job (after which the workflow will just stop there).

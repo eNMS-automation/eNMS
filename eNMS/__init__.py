@@ -84,7 +84,7 @@ def configure_database(app):
         db.create_all()
         create_default_users()
         create_default_parameters()
-        create_default_examples(app)
+        # create_default_examples(app)
         create_default_pools()
 
 

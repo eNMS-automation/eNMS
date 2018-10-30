@@ -8,9 +8,9 @@ bp = Blueprint(
     static_folder='static'
 )
 
-from eNMS.base.models import classes
+from eNMS.base.helpers import add_classes
 from eNMS.scheduling.models import Task
 
-classes['Task'] = Task
+add_classes(Task)
 
 import eNMS.scheduling.routes  # noqa: F401

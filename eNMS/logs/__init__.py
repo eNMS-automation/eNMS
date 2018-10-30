@@ -8,9 +8,9 @@ bp = Blueprint(
     static_folder='static'
 )
 
-from eNMS.base.models import classes
+from eNMS.base.helpers import add_classes
 from eNMS.logs.models import Log, LogRule, SyslogServer
 
-classes.update({'Log': Log, 'LogRule': LogRule, 'SyslogServer': SyslogServer})
+add_classes(Log, LogRule, SyslogServer)
 
 import eNMS.logs.routes  # noqa: F401

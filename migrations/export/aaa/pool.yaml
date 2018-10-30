@@ -19,6 +19,10 @@
   device_os_version_regex: null
   device_port: null
   device_port_regex: null
+  device_property1: null
+  device_property1_regex: null
+  device_property2: null
+  device_property2_regex: null
   device_subtype: null
   device_subtype_regex: null
   device_vendor: null
@@ -124,6 +128,10 @@
   device_os_version_regex: null
   device_port: null
   device_port_regex: null
+  device_property1: null
+  device_property1_regex: null
+  device_property2: null
+  device_property2_regex: null
   device_subtype: null
   device_subtype_regex: null
   device_vendor: null
@@ -201,6 +209,10 @@
   device_os_version_regex: null
   device_port: null
   device_port_regex: null
+  device_property1: null
+  device_property1_regex: null
+  device_property2: null
+  device_property2_regex: null
   device_subtype: null
   device_subtype_regex: null
   device_vendor: null

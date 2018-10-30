@@ -195,7 +195,7 @@
   id: 7
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
   name: netmiko_check_no_vrf_test
-  number_of_retries: 0
+  number_of_retries: 2
   pools: []
   positions: !!python/object/new:sqlalchemy.ext.mutable.MutableDict
     dictitems:
@@ -213,7 +213,7 @@
   - 9
   state: Idle
   tasks: []
-  time_between_retries: 10
+  time_between_retries: 1
   type: netmiko_validation_service
   waiting_time: 0
 - action: load_merge_candidate
@@ -275,8 +275,8 @@
 - call_type: GET
   content_match: ''
   content_match_regex: null
-  convert_to_xml: null
-  description: Use GET ReST call on Washington
+  convert_result_to_xml: null
+  description: Use GET ReST call on eNMS ReST API
   destinations:
   - 12
   - 13
@@ -284,8 +284,8 @@
   - 4
   id: 12
   logs: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
-  multiprocessing: null
-  name: GET_Washington
+  multiprocessing: true
+  name: GET_device
   number_of_retries: 0
   password: admin
   payload: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
@@ -303,7 +303,7 @@
   tasks: []
   time_between_retries: 10
   type: rest_call_service
-  url: http://127.0.0.1:5000/rest/object/device/Washington
+  url: http://127.0.0.1:5000/rest/object/device/{{device.name}}
   username: admin
   waiting_time: 0
 - content_match: ''

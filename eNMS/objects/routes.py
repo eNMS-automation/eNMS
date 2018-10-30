@@ -1,6 +1,8 @@
 from collections import defaultdict
 from flask import current_app as app, jsonify, render_template, request
 from flask_login import current_user
+from os import makedirs, walk
+from os.path import exists
 from pathlib import Path
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -98,6 +100,7 @@ def pool_management():
 def import_export():
     return render_template(
         'import_export.html',
+        directories=list(walk(app.path / 'migrations' / 'export'))[0][1],
         import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
@@ -230,8 +233,10 @@ def export_topology():
 def migration_export():
     name = request.form['name']
     for cls_name in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'export' / name / f'{cls_name}.yaml'
-        with open(path, 'w') as migration_file:
+        dir_path = app.path / 'migrations' / 'export' / name
+        if not exists(dir_path):
+            makedirs(dir_path)
+        with open(dir_path / f'{cls_name}.yaml', 'w') as migration_file:
             dump(export(cls_name), migration_file, default_flow_style=False)
     return jsonify(True)
 

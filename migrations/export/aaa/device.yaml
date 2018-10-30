@@ -13,6 +13,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: PaloAlto
@@ -30,6 +32,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Austin
@@ -47,6 +51,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Washington
@@ -77,6 +83,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Arista
 - description: Chicago
@@ -94,6 +102,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: SanJose
@@ -111,6 +121,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: SanDiego
@@ -128,6 +140,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Dallas
@@ -145,6 +159,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Philadelphia
@@ -162,6 +178,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: LosAngeles
@@ -179,6 +197,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Detroit
@@ -196,6 +216,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Richmond
@@ -213,6 +235,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Atlanta
@@ -230,6 +254,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Boston
@@ -247,6 +273,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Houston
@@ -264,6 +292,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Baltimore
@@ -281,6 +311,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Cleveland
@@ -298,6 +330,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Columbus
@@ -315,6 +349,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Cincinnati
@@ -332,6 +368,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Cambridge
@@ -349,6 +387,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Minneapolis
@@ -366,6 +406,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: NewYork
@@ -383,6 +425,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Sacramento
@@ -400,6 +444,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: SanFrancisco
@@ -417,6 +463,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Orange
@@ -434,6 +482,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Juniper
 - description: Oakland
@@ -451,6 +501,8 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco
 - description: Denver
@@ -468,5 +520,7 @@
   - 1
   - 2
   port: 22
+  property1: 4
+  property2: a
   subtype: router
   vendor: Cisco

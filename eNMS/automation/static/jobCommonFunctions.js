@@ -14,7 +14,7 @@ let jobId;
 function showLogs(id) { // eslint-disable-line no-unused-vars
   jobId = id;
   call(`/automation/show_logs/${id}`, function(logs) {
-    $('#logs').text(logs.replace(/\\n/g, '\n'));
+    $('#logs').text(logs.replace(/(?:\\[rn]|[\r\n]+)+/g, '\n'));
     $(`#show-logs-modal`).modal('show');
   });
 }
@@ -27,6 +27,7 @@ function clearLogs() { // eslint-disable-line no-unused-vars
   call(`/automation/clear_logs/${jobId}`, () => {
     $('#logs').empty();
     alertify.notify(`Logs cleared`, 'success', 5);
+    $(`#show-logs-modal`).modal('hide');
   });
 }
 

@@ -39,7 +39,7 @@
             <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div>
                 <label>
-                  Directory pathname to use in eNMS_HOME/migrations/import_export<br>
+                  Directory pathname to use in eNMS_HOME/migrations/import_export :<br>
                   Example: "10312018_backup"
                 </label>
                 <div class="form-group">
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div>
-                <label>eNMS subsystem to use for Import / Export</label>
+                <label>eNMS object types to include in Import / Export :</label>
                 <div class="form-group">
                   {{ import_export_form.export(class="form-control required", size="10") }}
                 </div>

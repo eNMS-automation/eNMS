@@ -112,7 +112,10 @@ def post(blueprint, url, permission=None, method=['POST']):
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                return jsonify({'failure': True, 'error': str(e)})
+                error = str(e)
+                if error == 'Expecting value: line 1 column 1 (char 0)':
+                    error = 'Invalid syntax for dictionnary input.'
+                return jsonify({'failure': True, 'error': error})
         return inner
     return outer
 

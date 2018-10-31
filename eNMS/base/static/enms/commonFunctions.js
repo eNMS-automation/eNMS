@@ -74,7 +74,6 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
       url: url,
       data: $(form).serialize(),
       success: function(results) {
-        console.log(results);
         if (!results) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
         } else if (results.failure) {

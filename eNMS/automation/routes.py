@@ -187,10 +187,7 @@ def save_service(cls_name):
     for property in boolean_properties:
         if property not in form:
             form[property] = 'off'
-    try:
-        return jsonify(factory(cls_name, **form).serialized)
-    except JSONDecodeError:
-        return jsonify('JSONDecodeError')
+    return jsonify(factory(cls_name, **form).serialized)
 
 
 @post(bp, '/show_logs/<job_id>', 'Automation Section')

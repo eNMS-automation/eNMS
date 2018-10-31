@@ -27,6 +27,9 @@ class Config(object):
     # Vault
     USE_VAULT = False
 
+    # Examples
+    CREATE_EXAMPLES = environ.get('CREATE_EXAMPLES', True)
+
 
 class DebugConfig(Config):
     DEBUG = True

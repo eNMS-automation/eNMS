@@ -1,5 +1,6 @@
-from flask import Blueprint
+from flask import Blueprint, current_app
 from importlib.util import spec_from_file_location, module_from_spec
+from os import environ
 from pathlib import Path
 from sqlalchemy import Boolean, Float, Integer, PickleType
 
@@ -28,9 +29,12 @@ add_classes(Job, Service, Workflow, WorkflowEdge)
 def create_service_classes():
     path_services = Path.cwd() / 'eNMS' / 'automation' / 'services'
     for file in path_services.glob('**/*.py'):
-        if 'init' not in str(file):
-            spec = spec_from_file_location(str(file), str(file))
-            spec.loader.exec_module(module_from_spec(spec))
+        if 'init' in str(file):
+            continue
+        if not environ.get('CREATE_EXAMPLES', True) and 'examples' in str(file):
+            continue
+        spec = spec_from_file_location(str(file), str(file))
+        spec.loader.exec_module(module_from_spec(spec))
     for cls_name, cls in service_classes.items():
         for col in cls.__table__.columns:
             service_properties[cls_name].append(col.key)

@@ -52,6 +52,8 @@ function call(url, callback) { // eslint-disable-line no-unused-vars
     success: function(results) {
       if (!results) {
         alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      } else if (results.failure) {
+        alertify.notify(results.error, 'error', 5);
       } else {
         callback(results);
       }
@@ -74,6 +76,8 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
       success: function(results) {
         if (!results) {
           alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        } else if (results.failure) {
+          alertify.notify(results.error, 'error', 5);
         } else {
           callback(results);
         }

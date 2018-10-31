@@ -28,7 +28,7 @@ class Config(object):
     USE_VAULT = False
 
     # Examples
-    CREATE_EXAMPLES = environ.get('CREATE_EXAMPLES', True)
+    CREATE_EXAMPLES = int(environ.get('CREATE_EXAMPLES', True))
 
 
 class DebugConfig(Config):

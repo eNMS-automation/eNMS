@@ -108,7 +108,6 @@ let node = container.selectAll('.node')
   .attr('class', 'node')
   .call(force.drag)
   .on('click', selectNode);
-  // .on('dblclick', showNodeProperties);
 
 /**
  * Zoom with scroll.
@@ -164,7 +163,7 @@ $('#select-filters').on('change', function() {
       return devicesId.includes(d.real_id) ? 'visible' : 'hidden';
     });
     link.style('visibility', function(d) {
-      return linksId.includes(d.real_id.toString()) ? 'visible' : 'hidden';
+      return linksId.includes(d.real_id) ? 'visible' : 'hidden';
     });
     alertify.notify(`Filter applied.`, 'success', 5);
   });

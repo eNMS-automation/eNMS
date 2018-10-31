@@ -92,8 +92,8 @@
           {
             "real_id": {{ link.id }},
             "name": "{{ link.name }}",
-            "source": {{ name_to_id[link.source['name']] }},
-            "target": {{ name_to_id[link.destination['name']] }}
+            "source": {{ name_to_id[link.source_name] }},
+            "target": {{ name_to_id[link.destination_name] }}
           },
         {% endfor %}
       ]

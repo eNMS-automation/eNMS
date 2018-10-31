@@ -257,7 +257,7 @@ object_diagram_properties = [
 device_diagram_properties = object_diagram_properties + [
     'operating_system',
     'os_version'
-]
+] + list(p for p, v in custom_properties.items() if v['add_to_dashboard'])
 
 user_diagram_properties = [
     'name',

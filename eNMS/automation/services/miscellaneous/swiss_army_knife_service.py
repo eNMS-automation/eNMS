@@ -34,6 +34,9 @@ class SwissArmyKnifeService(Service):
         # End of a workflow
         return {'success': True}
 
+    def test(self, payload):
+        return {'success': True}
+
     def process_payload1(self, device, payload):
         get_facts = payload['get_facts']
         # we use the name of the device to get the result for that particular

@@ -100,10 +100,17 @@ class Job(Base):
             return {'success': False, 'result': str(e)}
 
     def run(self, payload=None, targets=None):
-        results = {'success': True, 'result': {'devices': {}}}
+        
         if not targets:
             targets = self.compute_targets()
+        if targets:
+            results = {'result': {'devices': {}}}
+            results['result']['devices'] = {
+                device.name: self.get_results(payload, device)
+                for device in targets
+            }
         if self.multiprocessing:
+            
             pool = ThreadPool(processes=min(len(targets), 1))
             pool.map(
                 self.device_run,
@@ -113,17 +120,15 @@ class Job(Base):
             pool.join()
         else:
             if targets:
-                results['result']['devices'] = {
-                    device.name: self.get_results(payload, device)
-                    for device in targets
-                }
+
             else:
                 results = self.get_results(payload)
-        if any(
+            
+        remaining_targets = set(
             not results['result']['devices'][device.name]['success']
             for device in targets
-        ):
-            results['success'] = False
+        )
+        results['success'] = not bool(remaining_targets)
         return results
 
     def device_run(self, args):

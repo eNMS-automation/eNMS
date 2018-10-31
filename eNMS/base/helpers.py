@@ -76,16 +76,6 @@ def integrity_rollback(function):
     return wrapper
 
 
-def catch_exception_frontend(function):
-    @wraps(function)
-    def wrapper(*a, **kw):
-        try:
-            return function(*a, **kw)
-        except Exception as e:
-            return jsonify({'failure': True, 'error': str(e)})
-    return wrapper
-
-
 def permission_required(permission, redirect=True):
     def decorator(f):
         @wraps(f)
@@ -117,10 +107,12 @@ def post(blueprint, url, permission=None, method=['POST']):
         @blueprint.route(url, methods=method)
         @login_required
         @permission_required(permission, redirect=False)
-        @catch_exception_frontend
         @wraps(func)
         def inner(*args, **kwargs):
-            return func(*args, **kwargs)
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                return jsonify({'failure': True, 'error': str(e)})
         return inner
     return outer
 

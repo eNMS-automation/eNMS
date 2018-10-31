@@ -229,9 +229,7 @@ class Workflow(Job):
             job = jobs.pop()
             # We check that all predecessors of the job have been visited
             # to ensure that the job will receive the full payload.
-            # If it isn't the case, we put it back in the heap and move on to
-            # another job.
-            if any(n not in visited for n in job.job_sources(self)):
+            if any(node not in visited for node in job.job_sources(self)):
                 continue
             visited.add(job)
             if not self.multiprocessing:

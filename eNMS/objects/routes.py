@@ -69,8 +69,9 @@ def device_management():
 @get(bp, '/link_management', 'Inventory Section')
 def link_management():
     add_link_form = AddLink(request.form)
-    add_link_form.source.choices = choices('Device')
-    add_link_form.destination.choices = choices('Device')
+    devices = [(l.name, l.name) for l in fetch_all('Device')]
+    add_link_form.source_name.choices = devices
+    add_link_form.destination_name.choices = devices
     return render_template(
         'link_management.html',
         names=pretty_names,

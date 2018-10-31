@@ -83,7 +83,7 @@ class Job(Base):
     def try_run(self, payload=None, targets=None):
         failed_attempts = {}
         for i in range(self.number_of_retries + 1):
-            results = self.run(payload, targets)
+            results, remaining_targets = self.run(payload, targets)
             if results['success']:
                 break
             if i != self.number_of_retries:
@@ -100,36 +100,31 @@ class Job(Base):
             return {'success': False, 'result': str(e)}
 
     def run(self, payload=None, targets=None):
-        
         if not targets:
             targets = self.compute_targets()
         if targets:
             results = {'result': {'devices': {}}}
-            results['result']['devices'] = {
-                device.name: self.get_results(payload, device)
-                for device in targets
-            }
-        if self.multiprocessing:
-            
-            pool = ThreadPool(processes=min(len(targets), 1))
-            pool.map(
-                self.device_run,
-                [(device, results, payload) for device in targets]
-            )
-            pool.close()
-            pool.join()
-        else:
-            if targets:
-
+            if self.multiprocessing:
+                pool = ThreadPool(processes=min(len(targets), 1))
+                pool.map(
+                    self.device_run,
+                    [(device, results, payload) for device in targets]
+                )
+                pool.close()
+                pool.join()
             else:
-                results = self.get_results(payload)
-            
-        remaining_targets = set(
-            not results['result']['devices'][device.name]['success']
-            for device in targets
-        )
-        results['success'] = not bool(remaining_targets)
-        return results
+                results['result']['devices'] = {
+                    device.name: self.get_results(payload, device)
+                    for device in targets
+            remaining_targets = set(
+                not results['result']['devices'][device.name]['success']
+                for device in targets
+            )
+            results['success'] = not bool(remaining_targets)
+            return results, remaining_targets
+        else:
+            return self.get_results(payload), None
+
 
     def device_run(self, args):
         device, results, payload = args

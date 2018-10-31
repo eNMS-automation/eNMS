@@ -2,13 +2,11 @@
 Migrations
 ==========
 
-Go to eNMS root folder and run "flask db upgrade"
--------------------------------------------------
+In your current version, go to :guilabel:`objects/import_export`, enter a ``Name``, select the types of objects that you can to port to the next version, and click on ``Export``.
+eNMS will automatically exports the data in the ``eNMS/migrations/export/<Name>`` as YaML files.
 
-Each major release of eNMS is packaged with an alembic migrations script that will perform schema translation of the database from the last major release of eNMS.
+.. image:: /_static/objects/objects/migrations.png
+   :alt: Migrations
+   :align: center
 
-To run the migration script, run the following command:
-
-::
-
- flask db upgrade
+In the next version, repeat the same procedure and click on ``Import``.

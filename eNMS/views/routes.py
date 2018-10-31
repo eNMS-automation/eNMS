@@ -23,7 +23,7 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 
 
-@get(bp, '/<view_type>_view', 'Views Section')
+@get(bp, '/<view_type>_view', 'Views Section', ['GET', 'POST'])
 def view(view_type):
     devices = fetch_all('Device')
     add_link_form = AddLink(request.form)

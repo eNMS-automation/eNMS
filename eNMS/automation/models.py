@@ -71,19 +71,22 @@ class Job(Base):
     def job_sources(self, workflow, type='all'):
         return [
             x.source for x in self.sources
-            if (type == 'all' or x.type == type) and x.workflow == workflow
+            if (type == 'all' or x.type == type)
+            and x.workflow == workflow
         ]
 
     def job_successors(self, workflow, type='all'):
         return [
             x.destination for x in self.destinations
-            if (type == 'all' or x.type == type) and x.workflow == workflow
+            if (type == 'all' or x.type == type)
+            and x.workflow == workflow
         ]
 
     def try_run(self, payload=None, remaining_targets=None):
         failed_attempts = {}
         for i in range(self.number_of_retries + 1):
             results, remaining_targets = self.run(payload, remaining_targets)
+            print('tttt'*500, remaining_targets)
             if results['success']:
                 break
             if i != self.number_of_retries:
@@ -116,10 +119,11 @@ class Job(Base):
                 results['result']['devices'] = {
                     device.name: self.get_results(payload, device)
                     for device in targets
-            remaining_targets = set(
-                not results['result']['devices'][device.name]['success']
-                for device in targets
-            )
+                }
+            remaining_targets = {
+                device for device in targets
+                if not results['result']['devices'][device.name]['success']
+            }
             results['success'] = not bool(remaining_targets)
             return results, remaining_targets
         else:

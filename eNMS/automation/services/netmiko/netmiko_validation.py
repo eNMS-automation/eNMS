@@ -1,5 +1,5 @@
 from re import search
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import (
     netmiko_connection,
@@ -22,6 +22,8 @@ class NetmikoValidationService(Service):
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     fast_cli = Column(Boolean, default=False)
+    timeout = Column(Integer, default=1.)
+    global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_validation_service',

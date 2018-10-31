@@ -1,5 +1,5 @@
 from netmiko import file_transfer
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import netmiko_connection, NETMIKO_SCP_DRIVERS
 from eNMS.automation.models import Service
@@ -22,6 +22,9 @@ class NetmikoFileTransferService(Service):
     inline_transfer = Column(Boolean)
     overwrite_file = Column(Boolean)
     source_file = Column(String)
+    fast_cli = Column(Boolean, default=False)
+    timeout = Column(Integer, default=1.)
+    global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {
         'polymorphic_identity': 'netmiko_file_transfer_service',

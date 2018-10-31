@@ -111,7 +111,8 @@ def create_netmiko_workflow():
             'global_delay_factor': '1.0',
             'content': 'vrf definition test',
             'enable_mode': 'y',
-            'fast_cli': 'y'
+            'fast_cli': 'y',
+            'timeout': 3
         },
         {
             'type': 'netmiko_validation_service',
@@ -124,7 +125,8 @@ def create_netmiko_workflow():
             'driver': 'arista_eos',
             'command': 'show vrf',
             'content_match': 'test',
-            'fast_cli': 'y'
+            'fast_cli': 'y',
+            'timeout': 3
         },
         {
             'type': 'netmiko_configuration_service',
@@ -138,7 +140,8 @@ def create_netmiko_workflow():
             'global_delay_factor': '1.0',
             'content': 'no vrf definition test',
             'enable_mode': 'y',
-            'fast_cli': 'y'
+            'fast_cli': 'y',
+            'timeout': 3
         },
         {
             'type': 'netmiko_validation_service',
@@ -153,6 +156,7 @@ def create_netmiko_workflow():
             'content_match': '^((?!test).)*$',
             'content_match_regex': 'y',
             'fast_cli': 'y',
+            'timeout': 3,
             'number_of_retries': 2,
             'time_between_retries': 1
         },

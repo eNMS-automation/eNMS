@@ -28,7 +28,9 @@ def netmiko_connection(service, device):
         username=username,
         password=pwd,
         secret=enable_pwd,
-        fast_cli=service.fast_cli
+        fast_cli=service.fast_cli,
+        timeout=service.timeout,
+        global_delay_factor=service.global_delay_factor
     )
 
 

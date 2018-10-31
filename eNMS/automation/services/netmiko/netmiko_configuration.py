@@ -22,6 +22,7 @@ class NetmikoConfigurationService(Service):
     driver_values = NETMIKO_DRIVERS
     enable_mode = Column(Boolean)
     fast_cli = Column(Boolean, default=False)
+    timeout = Column(Integer, default=1.)
     global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {

@@ -185,11 +185,11 @@ The configuration file contains the SQL Alchemy configuration:
  SQLALCHEMY_DATABASE_URI = environ.get(
      'ENMS_DATABASE_URL',
      'postgresql://{}:{}@{}:{}/{}'.format(
-         environ.get('ENMS_DATABASE_USER', 'enms'),
-         environ.get('ENMS_DATABASE_PASSWORD'),
-         environ.get('ENMS_DATABASE_HOST', 'localhost'),
-         environ.get('ENMS_DATABASE_PORT', 5432),
-         environ.get('ENMS_DATABASE_NAME', 'enms')
+         environ.get('POSTGRES_USER', 'enms'),
+         environ.get('POSTGRES_PASSWORD'),
+         environ.get('POSTGRES_HOST', 'localhost'),
+         environ.get('POSTGRES_PORT', 5432),
+         environ.get('POSTGRES_DB', 'enms')
      )
  )
 
@@ -197,6 +197,7 @@ You need to export each variable with its value:
 
 ::
 
- export ENMS_DATABASE_USER=your-username
- export ENMS_DATABASE_PASSWORD=your-password
+ export POSTGRES_USER=your-username
+ export POSTGRES_PASSWORD=your-password
  etc...
+

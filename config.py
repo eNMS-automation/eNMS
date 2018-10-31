@@ -27,6 +27,11 @@ class Config(object):
     # Vault
     USE_VAULT = False
 
+    # Theme support
+    # if active then the theme folder has to exist as /static/<THEME_NAME>
+    THEME_ACTIVE = True
+    THEME_NAME = "default"
+
 
 class DebugConfig(Config):
     DEBUG = True

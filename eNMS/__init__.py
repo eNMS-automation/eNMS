@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from flask_apscheduler import APScheduler
 from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
@@ -121,6 +121,33 @@ def configure_logs(app):
         ]
     )
 
+def apply_themes(app):
+    """
+    Add support for themes.
+
+    Enable THEME_ACTIVE in the config and set a THEME_NAME.
+    Then all calls to url_for('static', filename='') will include the theme name automatically
+
+    In a url_for('static', filename='', theme='') call you can override the theme by providing a "theme" parameter
+
+    Make sure that the theme folder exist in each /static folder of each blueprint
+    """
+    @app.context_processor
+    def override_url_for():
+        return dict(url_for=_generate_url_for_theme)
+
+    def _generate_url_for_theme(endpoint, **values):
+        if endpoint.endswith('static'):
+            filename = values.get('filename', '')
+            themename = values.get('theme', None)
+            if not themename:
+                if app.config.get('THEME_ACTIVE', False) and app.config.get('THEME_NAME', None):
+                    themename = app.config.get('THEME_NAME')
+            if themename:
+                filename = "{}/{}".format(themename, filename)
+                values['filename'] = filename
+        return url_for(endpoint, **values)
+
 
 def create_app(path, config):
     app = Flask(__name__, static_folder='base/static')
@@ -137,4 +164,5 @@ def create_app(path, config):
     if app.config['USE_VAULT']:
         app.vault_client = create_vault_client(app)
     info('eNMS starting')
+    apply_themes(app)
     return app

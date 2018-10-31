@@ -88,6 +88,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+    let theme_name = {{ config['THEME_NAME']|tojson|safe }};
     let device_fields = {{ device_fields|tojson|safe }};
     let link_fields = {{ link_fields|tojson|safe }};
     let devices = {{ devices|tojson|safe }};

@@ -30,11 +30,12 @@ function switchLayer(layer) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
+//  'static/images/3D/default/router.gif',
 for (let i = 0; i < devices.length; i++) {
   const device = devices[i];
   const marker = WE.marker(
   [device.latitude, device.longitude],
-  'static/images/3D/default/router.gif',
+  'static/'+theme_name+'/images/3D/default/router.gif',
   15, 10
   ).addTo(map);
   marker.device_id = device.id;
@@ -139,7 +140,7 @@ function unselectAll() {
   for (let i = 0; i < markersArray.length; i++) {
     $(markersArray[i].element.children[0]).css(
       'background-image',
-      'url("static/images/3D/default/router.gif")'
+      'url("static/'+theme_name+'/images/3D/default/router.gif")'
     );
   }
   selection = [];

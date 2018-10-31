@@ -80,10 +80,10 @@ class Job(Base):
             if (type == 'all' or x.type == type) and x.workflow == workflow
         ]
 
-    def try_run(self, payload=None, targets=None):
+    def try_run(self, payload=None, remaining_targets=None):
         failed_attempts = {}
         for i in range(self.number_of_retries + 1):
-            results, remaining_targets = self.run(payload, targets)
+            results, remaining_targets = self.run(payload, remaining_targets)
             if results['success']:
                 break
             if i != self.number_of_retries:
@@ -124,7 +124,6 @@ class Job(Base):
             return results, remaining_targets
         else:
             return self.get_results(payload), None
-
 
     def device_run(self, args):
         device, results, payload = args

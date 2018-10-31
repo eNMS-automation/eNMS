@@ -129,16 +129,17 @@ ___
 # Getting started
 
 ## Quick start
+    Install python 3.5+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS
     pip3 install -r requirements.txt
     export FLASK_APP=app.py (on Windows, use `set` instead of `export`)
     flask run --host=0.0.0.0
-    Log in (default credentials: `admin`/`admin`)
+    Log in (default credentials: `admin`/ `admin`)
 
 ## Quick start as a docker container
     docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
-    Log in (default credentials: `admin`/`admin`)
+    Log in (default credentials: `admin`/ `admin`)
 
 ## Deploy eNMS in production
 

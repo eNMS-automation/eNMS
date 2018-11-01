@@ -56,6 +56,8 @@ class Job(Base):
         secondary=job_log_rule_table,
         back_populates='jobs'
     )
+    notification_id = Column(Integer, ForeignKey('Job.id'))
+    notification = relationship('Job', remote_side=[id])
 
     __mapper_args__ = {
         'polymorphic_identity': 'Job',

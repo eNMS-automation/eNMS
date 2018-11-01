@@ -3,6 +3,7 @@ from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 
+from eNMS import mail
 from eNMS.automation.models import Service
 from eNMS.base.models import service_classes
 

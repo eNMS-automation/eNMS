@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_apscheduler import APScheduler
 from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
 from importlib import import_module
@@ -16,6 +17,7 @@ db = SQLAlchemy(
     }
 )
 login_manager = LoginManager()
+mail = Mail()
 scheduler = APScheduler()
 
 from eNMS.base.models import classes
@@ -31,6 +33,7 @@ from eNMS.base.rest import configure_rest_api
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
+    mail.init_app(app)
     if not scheduler.running:
         scheduler.init_app(app)
         scheduler.start()

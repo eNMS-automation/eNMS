@@ -3,6 +3,7 @@ flask
 flask_apscheduler
 flask_httpauth
 flask_login
+flask_mail
 flask_migrate
 flask-restful
 flask_sqlalchemy

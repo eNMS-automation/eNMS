@@ -121,16 +121,20 @@ def configure_logs(app):
         ]
     )
 
+
 def apply_themes(app):
     """
     Add support for themes.
 
     Enable THEME_ACTIVE in the config and set a THEME_NAME.
-    Then all calls to url_for('static', filename='') will include the theme name automatically
+    All calls to url_for('static', filename='') will modfify
+      the url to include the theme name
 
-    In a url_for('static', filename='', theme='') call you can override the theme by providing a "theme" parameter
+    If you provide the theme parameter directly in url_for then it will
+      override the default settings:
+    ex. url_for('static', filename='', theme='')
 
-    Make sure that the theme folder exist in each /static folder of each blueprint
+    The theme folder name should exist in each /static folder of each blueprint
     """
     @app.context_processor
     def override_url_for():
@@ -141,7 +145,8 @@ def apply_themes(app):
             filename = values.get('filename', '')
             themename = values.get('theme', None)
             if not themename:
-                if app.config.get('THEME_ACTIVE', False) and app.config.get('THEME_NAME', None):
+                if app.config.get('THEME_ACTIVE', False) and \
+                        app.config.get('THEME_NAME', None):
                     themename = app.config.get('THEME_NAME')
             if themename:
                 filename = "{}/{}".format(themename, filename)

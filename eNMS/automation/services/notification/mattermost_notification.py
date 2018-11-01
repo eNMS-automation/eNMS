@@ -1,8 +1,7 @@
-from flask_mail import Message
-from netmiko import file_transfer
+from json import dumps
+from requests import post
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS import mail
 from eNMS.automation.models import Service
 from eNMS.base.models import service_classes
 
@@ -12,9 +11,7 @@ class MattermostNotificationService(Service):
     __tablename__ = 'MattermostNotificationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    title = Column(String)
-    sender = Column(String)
-    recipients = Column(String)
+    channel = Column(String)
     body = Column(String)
     body_textarea = True
     multiprocessing = False
@@ -24,14 +21,11 @@ class MattermostNotificationService(Service):
     }
 
     def job(self, _):
-        message = Message(
-            self.title,
-            sender=self.sender,
-            recipients=self.recipients.split(','),
-            body=self.body
-        )
-        mail.send(message)
-        return {'success': True, 'result': message}
+        result = requests.post(self.url, data=json.dumps({
+            "channel": self.channel,
+            "text": self.body
+        }))
+        return {'success': True, 'result': result}
 
 
 service_classes['mattermost_notification_service'] = MattermostNotificationService

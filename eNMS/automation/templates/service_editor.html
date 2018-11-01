@@ -50,9 +50,13 @@
           <div class='form-group'>
             {{ service_form.time_between_retries(class="form-control", required=true) }}
           </div>
-          <label>Notification</label>
+          <label>Send Notification</label>
           <div class='form-group'>
-            {{ service_form.notification(class="form-control", required=true) }}
+            {{ service_form.send_notification(class="form-control") }}
+          </div>
+          <label>Send Notification Method</label>
+          <div class='form-group'>
+            {{ service_form.send_notification_method(class="form-control") }}
           </div>
           <div id="html-form"></div>
         </div>

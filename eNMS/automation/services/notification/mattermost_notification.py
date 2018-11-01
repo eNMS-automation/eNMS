@@ -22,7 +22,6 @@ class MattermostNotificationService(Service):
     }
 
     def job(self, _):
-        print(serialized)
         result = requests.post(
             get_one('Parameters').mattermost_url,
             data=json.dumps({

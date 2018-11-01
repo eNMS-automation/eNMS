@@ -57,8 +57,8 @@ class Job(Base):
         back_populates='jobs'
     )
     send_notification = Column(Boolean, default=False)
-    send_notification = Column(String)
-    send_notification_values = (
+    send_notification_method = Column(String)
+    send_notification_method_values = (
         ('Mail', 'mail_feedback_notification'),
         ('Slack', 'slack_feedback_notification'),
         ('Mattermost', 'mattermost_feedback_notification'),

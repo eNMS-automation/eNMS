@@ -37,7 +37,20 @@ class SwissArmyKnifeService(Service):
         return {'success': True}
 
     def mail_feedback_notification(self, payload):
-        # send a notification with mails of the workflow
+        message = Message(
+            payload['job'].name,
+            sender='notification@enms.fr',
+            recipients=self.recipients.split(','),
+            body=payload['result']
+        )
+        mail.send(message)
+
+    def slack_feedback_notification(self, payload):
+        # send a notification on Slack
+        pass
+
+    def mattermost_feedback_notification(self, payload):
+        # send a notification on Mattermost
         pass
 
     def process_payload1(self, device, payload):

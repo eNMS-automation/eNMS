@@ -39,6 +39,7 @@ def service_management():
     service_form = JobForm(request.form)
     service_form.devices.choices = choices('Device')
     service_form.pools.choices = choices('Pool')
+    service_form.notification.choices = choices('Job')
     return render_template(
         'service_management.html',
         compare_logs_form=CompareLogsForm(request.form),
@@ -76,6 +77,7 @@ def workflow_builder():
     service_form = JobForm(request.form)
     service_form.devices.choices = choices('Device')
     service_form.pools.choices = choices('Pool')
+    service_form.notification.choices = choices('Job')
     workflow = fetch('Workflow', id=session.get('workflow', None))
     return render_template(
         'workflow_builder.html',

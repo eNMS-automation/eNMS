@@ -56,8 +56,11 @@ class Job(Base):
         secondary=job_log_rule_table,
         back_populates='jobs'
     )
-    notification_id = Column(Integer, ForeignKey('Job.id'))
-    notification = relationship('Job', remote_side=[id])
+    send_notification = Column(Boolean, default=False)
+    send_notification = 
+    send_notification_values = (
+        ('Mail', 'mail_feedback_notification'),
+        ('get', 'Download'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'Job',
@@ -88,7 +91,6 @@ class Job(Base):
         failed_attempts = {}
         for i in range(self.number_of_retries + 1):
             results, remaining_targets = self.run(payload, remaining_targets)
-            print('tttt'*500, remaining_targets)
             if results['success']:
                 break
             if i != self.number_of_retries:

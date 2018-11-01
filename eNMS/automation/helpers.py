@@ -64,7 +64,12 @@ def scheduler_job(job_id):
         job.state = 'Running'
         info(f'{job.name}: starting.')
         db.session.commit()
-        job.try_run()
+        results = job.try_run()
         info(f'{job.name}: finished.')
         job.state = 'Idle'
+        if job.send_notification:
+            fetch('Job', name=job.notification).try_run({
+                'job': job.serialized,
+                'result': results
+            })
         db.session.commit()

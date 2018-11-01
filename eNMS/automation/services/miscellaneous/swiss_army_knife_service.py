@@ -1,5 +1,7 @@
+from flask_mail import Message
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
+from eNMS import mail
 from eNMS.automation.models import Service
 from eNMS.base.models import service_classes
 
@@ -34,8 +36,9 @@ class SwissArmyKnifeService(Service):
         # End of a workflow
         return {'success': True}
 
-    def test(self, payload):
-        return {'success': True}
+    def mail_feedback_notification(self, payload):
+        # send a notification with mails of the workflow
+        pass
 
     def process_payload1(self, device, payload):
         get_facts = payload['get_facts']

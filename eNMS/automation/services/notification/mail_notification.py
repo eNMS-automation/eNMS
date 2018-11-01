@@ -2,7 +2,6 @@ from flask_mail import Message
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-
 from eNMS import mail
 from eNMS.automation.models import Service
 from eNMS.base.models import service_classes
@@ -24,7 +23,7 @@ class MailNotificationService(Service):
         'polymorphic_identity': 'mail_notification_service',
     }
 
-    def job(self, payload):
+    def job(self, _):
         message = Message(
             self.title,
             sender=self.sender,

@@ -50,10 +50,12 @@
           <div class='form-group'>
             {{ service_form.time_between_retries(class="form-control", required=true) }}
           </div>
-          <label>Send Notification</label>
-          <div class='form-group'>
-            {{ service_form.send_notification(class="form-control") }}
-          </div>
+          <fieldset>
+            <div class="item">
+              <input id="send_notification" name="send_notification" type="checkbox" value="y">
+              <label>Send Notification</label>
+            </div>
+          </fieldset>
           <label>Send Notification Method</label>
           <div class='form-group'>
             {{ service_form.send_notification_method(class="form-control") }}

@@ -67,6 +67,7 @@ def scheduler_job(job_id):
         results = job.try_run()
         info(f'{job.name}: finished.')
         job.state = 'Idle'
+        print('tttt'*300, job.send_notification)
         if job.send_notification:
             fetch('Job', name=job.notification).try_run({
                 'job': job.serialized,

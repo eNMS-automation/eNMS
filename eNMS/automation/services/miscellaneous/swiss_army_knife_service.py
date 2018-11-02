@@ -50,15 +50,14 @@ class SwissArmyKnifeService(Service):
         mail.send(message)
 
     def slack_feedback_notification(self, payload):
+        pass
+
+    def mattermost_feedback_notification(self, payload):
         parameters = get_one('Parameters')
         post(parameters.mattermost_url, data=dumps({
             "channel": parameters.mattermost_channel,
             "text": self.body
         }))
-
-    def mattermost_feedback_notification(self, payload):
-        # send a notification on Mattermost
-        pass
 
     def process_payload1(self, device, payload):
         get_facts = payload['get_facts']

@@ -28,9 +28,17 @@ function flipAuthenticationCombo() {
  * Display object modal for editing.
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to edit.
+ * @param {duplicate} duplicate - Edit versus duplicate.
  */
 function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
   call(`/objects/get/${type}/${id}`, function(properties) {
+    $('#title').text(
+      `${duplicate ? 'Duplicate' : 'Edit'}
+      ${capitalize(type)} '${properties.name}'
+    `);
+    if (duplicate) {
+      pool.id = pool.name = '';
+    }
     for (const [property, value] of Object.entries(properties)) {
       $(`#${type}-${property}`).val(value);
     }
@@ -38,7 +46,6 @@ function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
     $('#connection-parameters-button').click(
       partial(connectionParametersModal, id)
     );
-    $('#title').text(`Edit ${capitalize(type)} '${properties.name}'`);
     if (type == 'device') {
       call(`/views/get_logs/${id}`, function(logs) {
         $('#logs').text(logs);
@@ -92,7 +99,6 @@ function addObjectToTable(mode, type, properties) {
       values.push(`${properties[fields[i]]}`);
     }
   }
-
   // if it is a device, we add the "Connect" button.
   if (type == 'device') {
     values.push(`<button type="button" class="btn btn-success btn-xs"

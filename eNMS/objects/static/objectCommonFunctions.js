@@ -107,6 +107,9 @@ function addObjectToTable(mode, type, properties) {
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showObjectModal('${type}', '${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showObjectModal('${type}', '${properties.id}', true)">
+    Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
   );

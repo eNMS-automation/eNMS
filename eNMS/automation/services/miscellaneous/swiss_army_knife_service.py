@@ -57,7 +57,7 @@ class SwissArmyKnifeService(Service):
         parameters = get_one('Parameters')
         post(parameters.mattermost_url, data=dumps({
             "channel": parameters.mattermost_channel,
-            "text": str_dict(payload)
+            "text": str_dict(payload['result'])
         }))
         return {'success': True}
 

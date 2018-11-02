@@ -52,3 +52,10 @@ class GeographicalParametersForm(FlaskForm):
 class GottyParametersForm(FlaskForm):
     gotty_start_port = FloatField('Start port')
     gotty_end_port = FloatField('End port')
+
+
+class NotificationParametersForm(FlaskForm):
+    mail_sender = TextField()
+    mail_recipients = TextField()
+    mattermost_url = TextField('Mattermost URL')
+    mattermost_channel = TextField()

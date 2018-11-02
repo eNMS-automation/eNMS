@@ -40,10 +40,11 @@ class SwissArmyKnifeService(Service):
         return {'success': True}
 
     def mail_feedback_notification(self, payload):
+        parameters = get_one('Parameters')
         message = Message(
             payload['job'].name,
-            sender='notification@enms.fr',
-            recipients=self.recipients.split(','),
+            sender=parameters.sender,
+            recipients=parameters.mail_recipients,
             body=payload['result']
         )
         mail.send(message)

@@ -18,6 +18,7 @@ from eNMS.admin.forms import (
     LoginForm,
     GeographicalParametersForm,
     GottyParametersForm,
+    NotificationParametersForm,
     SyslogServerForm,
     TacacsServerForm,
 )
@@ -88,6 +89,7 @@ def admninistration():
         'administration.html',
         geographical_parameters_form=GeographicalParametersForm(request.form),
         gotty_parameters_form=GottyParametersForm(request.form),
+        notification_parameters_form=NotificationParametersForm(request.form),
         parameters=get_one('Parameters'),
         tacacs_form=TacacsServerForm(request.form),
         syslog_form=SyslogServerForm(request.form),

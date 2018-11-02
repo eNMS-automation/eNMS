@@ -77,10 +77,13 @@ class Parameters(Base):
         default='https://demo.opennms.org/opennms/rest/nodes'
     )
     opennms_login = Column(String, default='demo')
+    mattermost_sender = Column(String)
+    mattermost_recipients = Column(String)
     mattermost_url = Column(
         String,
         default='http://192.168.105.2:8065/hooks/dnuajekqp78jjbbajo8ewuw4ih'
     )
+    mattermost_channel = Column(String)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

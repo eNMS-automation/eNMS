@@ -32,6 +32,7 @@ from eNMS.base.helpers import (
     post,
     factory,
     fetch,
+    fetch_all,
     serialize
 )
 from eNMS.base.properties import pretty_names, user_public_properties
@@ -167,8 +168,10 @@ def save_notification_parameters():
 
 @post(bp, '/database_filtering', 'Edit parameters')
 def database_filtering():
-    pool_devices = fetch('Pool', id=request.form['pool']).devices
-    for device in fetch_all('Device'):
-        setattr(device, 'hidden', device not in pool_devices)
+    pool = fetch('Pool', id=request.form['pool'])
+    pool_objects = {'Device': pool.devices, 'Link': link.devices}
+    for obj_type in ('Device', 'Link'):
+        for obj in fetch_all(obj_type):
+            setattr(obj, 'hidden', obj not in pool_objects[obj_type])
     db.session.commit()
     return jsonify(True)

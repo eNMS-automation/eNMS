@@ -20,7 +20,7 @@ sql_types = {
 }
 
 custom_properties = get_custom_properties()
-boolean_properties = ['multiprocessing']
+boolean_properties = ['multiprocessing', 'send_notification']
 
 base_properties = [
     'id',
@@ -123,7 +123,9 @@ job_public_properties = [
     'positions',
     'waiting_time',
     'number_of_retries',
-    'time_between_retries'
+    'time_between_retries',
+    'send_notification',
+    'send_notification_method'
 ]
 
 service_public_properties = job_public_properties

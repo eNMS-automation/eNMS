@@ -151,3 +151,10 @@ def save_gotty_parameters():
     get_one('Parameters').update(**request.form.to_dict())
     db.session.commit()
     return jsonify(True)
+
+
+@post(bp, '/save_notification_parameters', 'Edit parameters')
+def save_notification_parameters():
+    get_one('Parameters').update(**request.form.to_dict())
+    db.session.commit()
+    return jsonify(True)

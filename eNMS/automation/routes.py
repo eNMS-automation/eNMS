@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from flask import jsonify, render_template, request, session
-from json import dumps, JSONDecodeError
+from json import dumps
 
 from eNMS import db, scheduler
 from eNMS.base.models import service_classes

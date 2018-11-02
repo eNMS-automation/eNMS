@@ -27,7 +27,6 @@ class Base(db.Model):
             property_type = property_types.get(property, None)
             if property in boolean_properties:
                 value = kwargs[property] in ('y', 'on', 'false', 'true', True)
-                print(property, value)
             elif 'regex' in property:
                 value = property in kwargs
             elif property_type == dict:

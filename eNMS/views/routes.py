@@ -3,7 +3,6 @@ from os.path import join
 from simplekml import Kml
 
 from eNMS.base.helpers import (
-    choices,
     fetch,
     fetch_all,
     get,

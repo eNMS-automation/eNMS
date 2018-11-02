@@ -1,6 +1,5 @@
 from flask_mail import Message
-from netmiko import file_transfer
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS import mail
 from eNMS.automation.models import Service

@@ -66,9 +66,13 @@ function saveGottyParameters() { // eslint-disable-line no-unused-vars
  * Save notification parameters.
  */
 function saveNotificationParameters() { // eslint-disable-line no-unused-vars
-  fCall('/admin/save_notification_parameters', '#notification-parameters-form', function() {
-    alertify.notify('Notification parameters saved.', 'success', 5);
-  });
+  fCall(
+    '/admin/save_notification_parameters',
+    '#notification-parameters-form',
+    function() {
+      alertify.notify('Notification parameters saved.', 'success', 5);
+    }
+  );
 }
 
 (function() {

@@ -1,10 +1,10 @@
 from json import dumps
 from requests import post
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.base.helpers import get_one
 from eNMS.automation.models import Service
-from eNMS.base.models import service_classes
+from eNMS.base.models import service_classes as sc
 
 
 class MattermostNotificationService(Service):
@@ -33,4 +33,4 @@ class MattermostNotificationService(Service):
         return {'success': True, 'result': str(result)}
 
 
-service_classes['mattermost_notification_service'] = MattermostNotificationService
+sc['mattermost_notification_service'] = MattermostNotificationService

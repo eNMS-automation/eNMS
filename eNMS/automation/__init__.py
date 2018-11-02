@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app
+from flask import Blueprint
 from importlib.util import spec_from_file_location, module_from_spec
 from os import environ
 from pathlib import Path

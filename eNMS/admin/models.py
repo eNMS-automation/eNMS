@@ -77,7 +77,7 @@ class Parameters(Base):
         default='https://demo.opennms.org/opennms/rest/nodes'
     )
     opennms_login = Column(String, default='demo')
-    mail_sender = Column(String)
+    mail_sender = Column(String, default='enms@enms.fr')
     mail_recipients = Column(String)
     mattermost_url = Column(
         String,

@@ -3,6 +3,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS import mail
 from eNMS.automation.models import Service
+from eNMS.base.helpers import get_one
 from eNMS.base.models import service_classes
 
 
@@ -23,10 +24,15 @@ class MailNotificationService(Service):
     }
 
     def job(self, _):
+        parameters = get_one('Parameters')
+        if self.recipients:
+            recipients = self.recipients.split(',')
+        else:
+            recipients = parameters.mail_sender.split(',')
         message = Message(
             self.title,
-            sender=self.sender,
-            recipients=self.recipients.split(','),
+            sender=self.sender or parameters.mail_sender,
+            recipients=recipients,
             body=self.body
         )
         mail.send(message)

@@ -58,11 +58,6 @@ class Job(Base):
     )
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(String)
-    send_notification_method_values = (
-        ('Mail', 'mail_feedback_notification'),
-        ('Slack', 'slack_feedback_notification'),
-        ('Mattermost', 'mattermost_feedback_notification'),
-    )
     mail_recipient = Column(String)
 
     __mapper_args__ = {

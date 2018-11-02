@@ -22,14 +22,15 @@ class MattermostNotificationService(Service):
     }
 
     def job(self, _):
-        result = requests.post(
-            get_one('Parameters').mattermost_url,
-            data=json.dumps({
-                "channel": self.channel,
+        parameters = get_one('Parameters')
+        result = post(
+            parameters.mattermost_url,
+            data=dumps({
+                "channel": self.channel or parameters.mattermost_channel,
                 "text": self.body
             })
         )
-        return {'success': True, 'result': result}
+        return {'success': True, 'result': str(result)}
 
 
 service_classes['mattermost_notification_service'] = MattermostNotificationService

@@ -5,6 +5,7 @@ from wtforms import (
     IntegerField,
     TextField,
     PasswordField,
+    SelectField,
     SelectMultipleField
 )
 
@@ -59,3 +60,7 @@ class NotificationParametersForm(FlaskForm):
     mail_recipients = TextField()
     mattermost_url = TextField('Mattermost URL')
     mattermost_channel = TextField()
+
+
+class DatabaseFilteringForm(FlaskForm):
+    pools = SelectField(choices=())

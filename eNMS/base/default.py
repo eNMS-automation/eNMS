@@ -92,7 +92,14 @@ def create_default_services():
             'type': 'swiss_army_knife_service',
             'name': 'mattermost_feedback_notification',
             'description': 'Mattermost notification (service logs)'
-        },
+        }
+    ):
+        factory(service.pop('type'), **service)
+
+
+@integrity_rollback
+def create_example_services():
+    for service in (
         {
             'type': 'configure_bgp_service',
             'name': 'napalm_configure_bgp_1',
@@ -105,7 +112,7 @@ def create_default_services():
             'remote_as': 200,
             'vrf_name': 'configure_BGP_test',
             'waiting_time': 0
-        }
+        },
     ):
         factory(service.pop('type'), **service)
 

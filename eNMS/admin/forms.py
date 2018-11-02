@@ -63,4 +63,4 @@ class NotificationParametersForm(FlaskForm):
 
 
 class DatabaseFilteringForm(FlaskForm):
-    pools = SelectField(choices=())
+    pool = SelectField(choices=())

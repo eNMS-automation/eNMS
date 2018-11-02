@@ -10,7 +10,8 @@ eNMS has a ReST API allowing to:
 - delete an object
 - create an object
 - update an object
-- execute a Service instance or a Workflow.
+- run a Service instance or a Workflow.
+- make sure eNMS is alive.
 
 This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
@@ -46,3 +47,13 @@ Execute a job (i.e a service, or a workflow)
  http://IP_address/rest/run_job/job_name
 
 The job will run immediately.
+
+Heartbeat
+*********
+
+::
+
+ # Test that eNMS is still alive (used for high availability mechanisms)
+ http://IP_address/rest/is_alive
+
+eNMS returns ``True`` if it is still alive.

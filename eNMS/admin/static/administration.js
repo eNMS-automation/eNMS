@@ -75,6 +75,15 @@ function saveNotificationParameters() { // eslint-disable-line no-unused-vars
   );
 }
 
+/**
+ * Database Filtering.
+ */
+function databaseFiltering() { // eslint-disable-line no-unused-vars
+  fCall('/admin/database_filtering', '#database-filtering-form', function() {
+    alertify.notify('Database successfully filtered.', 'success', 5);
+  });
+}
+
 (function() {
   $('#doc-link').attr(
     'href',

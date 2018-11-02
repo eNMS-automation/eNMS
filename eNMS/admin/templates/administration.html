@@ -163,7 +163,7 @@
           </div>
           <div class="x_content">
             <br/>
-            <form id="notification-parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <form id="database-filtering-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <label>Select a pool for database filtering :</label>
               <div class="form-group" style="height: 250px">
                 {{ database_filtering_form.pools(class="form-control") }}
@@ -171,7 +171,7 @@
               <div class="ln_solid"></div>
               <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-4">
                 <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="button" class="btn btn-success" onclick="saveNotificationParameters()">Save changes</button>
+                <button type="button" class="btn btn-success" onclick="databaseFiltering()">Save changes</button>
               </div>
               </div>
             </form>

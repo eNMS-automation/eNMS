@@ -234,3 +234,9 @@ To set up the mail system, you must export the following environment variables b
   MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
 From within eNMS, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.
+
+.. image:: /_static/services/service_system/notifications.png
+   :alt: Notification
+   :align: center
+
+The ``Mail Recipients`` parameter must be set for the mail system to work. If the ``Mattermost Channel`` is not set, the default ``Town Square`` will be used.

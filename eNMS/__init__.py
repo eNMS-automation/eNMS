@@ -22,6 +22,7 @@ scheduler = APScheduler()
 
 from eNMS.base.models import classes
 from eNMS.base.default import (
+    create_default_services,
     create_default_parameters,
     create_default_pools,
     create_default_users,
@@ -87,6 +88,7 @@ def configure_database(app):
         db.create_all()
         create_default_users()
         create_default_parameters()
+        create_default_services()
         if app.config['CREATE_EXAMPLES']:
             create_default_examples(app)
         create_default_pools()

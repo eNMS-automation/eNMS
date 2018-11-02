@@ -330,7 +330,7 @@ def create_payload_transfer_workflow():
 
 def create_default_examples(app):
     create_default_network_topology(app),
-    create_default_services()
+    create_example_services()
     create_netmiko_workflow()
     create_napalm_workflow()
     create_payload_transfer_workflow()

@@ -81,20 +81,17 @@ def create_default_services():
         {
             'type': 'swiss_army_knife_service',
             'name': 'mail_feedback_notification',
-            'description': 'Mail notification (service logs)',
-            'hidden': True
+            'description': 'Mail notification (service logs)'
         },
         {
             'type': 'swiss_army_knife_service',
             'name': 'slack_feedback_notification',
-            'description': 'Slack notification (service logs)',
-            'hidden': True
+            'description': 'Slack notification (service logs)'
         },
         {
             'type': 'swiss_army_knife_service',
             'name': 'mattermost_feedback_notification',
-            'description': 'Mattermost notification (service logs)',
-            'hidden': True
+            'description': 'Mattermost notification (service logs)'
         },
         {
             'type': 'configure_bgp_service',

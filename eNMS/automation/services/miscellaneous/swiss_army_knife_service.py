@@ -44,11 +44,11 @@ class SwissArmyKnifeService(Service):
         message = Message(
             payload['job']['name'],
             sender=parameters.mail_sender,
-            recipients=parameters.mail_recipients,
-            body=payload['result']
+            recipients=parameters.mail_recipients.split(','),
+            body=str_dict(payload['result'])
         )
         mail.send(message)
-        {'success': True}
+        return {'success': True}
 
     def slack_feedback_notification(self, payload):
         pass

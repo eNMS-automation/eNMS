@@ -36,7 +36,7 @@ class MailNotificationService(Service):
             body=self.body
         )
         mail.send(message)
-        return {'success': True, 'result': message}
+        return {'success': True, 'result': str(message)}
 
 
 service_classes['mail_notification_service'] = MailNotificationService

@@ -169,7 +169,7 @@ def save_notification_parameters():
 @post(bp, '/database_filtering', 'Edit parameters')
 def database_filtering():
     pool = fetch('Pool', id=request.form['pool'])
-    pool_objects = {'Device': pool.devices, 'Link': link.devices}
+    pool_objects = {'Device': pool.devices, 'Link': pool.links}
     for obj_type in ('Device', 'Link'):
         for obj in fetch_all(obj_type):
             setattr(obj, 'hidden', obj not in pool_objects[obj_type])

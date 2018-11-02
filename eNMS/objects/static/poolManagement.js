@@ -24,6 +24,8 @@ function addPool(mode, properties) {
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showPoolModal('${properties.id}')">Edit properties</button>`,
     `<button type="button" class="btn btn-info btn-xs"
+    onclick="showPoolModal('${properties.id}', true)">Duplicate</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
     onclick="showPoolObjects('${properties.id}')">Edit objects</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deletePool('${properties.id}')">Delete</button>`
@@ -58,7 +60,7 @@ function showModal() { // eslint-disable-line no-unused-vars
 /**
  * Display pool modal for editing.
  * @param {id} id - Id of the pool to edit.
-  * @param {duplicate} duplicate - Id of the pool to edit.
+ * @param {duplicate} duplicate - Edit versus duplicate.
  */
 function showPoolModal(id, duplicate) { // eslint-disable-line no-unused-vars
   call(`/objects/get/pool/${id}`, function(pool) {

@@ -57,6 +57,7 @@ function showModal() { // eslint-disable-line no-unused-vars
 /**
  * Display user modal for editing.
  * @param {id} id - User ID.
+ * @param {duplicate} duplicate - Edit versus duplicate.
  */
 function showUserModal(id, duplicate) { // eslint-disable-line no-unused-vars
   call(`/admin/get/${id}`, function(properties) {

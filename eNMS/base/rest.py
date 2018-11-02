@@ -18,6 +18,12 @@ def unauthorized():
     return make_response(jsonify({'message': 'Unauthorized access'}), 403)
 
 
+class GetInstance(Resource):
+
+    def get(self):
+        return True
+
+
 class RestAutomation(Resource):
     decorators = [auth.login_required]
 
@@ -30,40 +36,32 @@ class RestAutomation(Resource):
 class GetInstance(Resource):
     decorators = [auth.login_required]
 
-    def get(self, cls_name, object_name):
-        return fetch(cls_name, name=object_name).properties
+    def get(self, cls, name):
+        return fetch(cls, name=name).properties
 
-    def delete(self, cls_name, object_name):
-        obj = fetch(cls_name, name=object_name)
+    def delete(self, cls, name):
+        obj = fetch(cls, name=name)
         db.session.delete(obj)
         db.session.commit()
-        return f'{cls_name} {object_name} successfully deleted'
+        return f'{cls} {name} successfully deleted'
 
 
 class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
-    def post(self, cls_name):
+    def post(self, cls):
         return factory(
-            cls_name,
+            cls,
             **request.get_json(force=True, silent=True)
         ).properties
 
-    def put(self, cls_name):
-        return self.post(cls_name)
+    def put(self, cls):
+        return self.post(cls)
 
 
 def configure_rest_api(app):
     api = Api(app)
-    api.add_resource(
-        RestAutomation,
-        '/rest/run_job/<string:job_name>'
-    )
-    api.add_resource(
-        UpdateInstance,
-        '/rest/object/<string:cls_name>'
-    )
-    api.add_resource(
-        GetInstance,
-        '/rest/object/<string:cls_name>/<string:object_name>'
-    )
+    api.add_resource(Hearthbeat, '/rest/is_alive')
+    api.add_resource(RestAutomation, '/rest/run_job/<string:job_name>')
+    api.add_resource(UpdateInstance, '/rest/object/<string:cls>')
+    api.add_resource(GetInstance, '/rest/object/<string:cls>/<string:name>')

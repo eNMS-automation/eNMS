@@ -68,3 +68,12 @@ Pools can also be used as targets of an automation. The second step of the sched
 .. image:: /_static/objects/pools/target_pool.png
    :alt: Use a pool as target of a task
    :align: center
+
+Use a pool to restrict all of eNMS to a subset of objects
+---------------------------------------------------------
+
+From the :guilabel:`admin/administration` panel, you can select a pool used as a database filtering mechanism.
+All mechanisms and all pages in eNMS will be restricted to the objects of that pool.
+
+In a production environment, for scalability purposes, multiples instances of eNMS can be deployed (per region, per type of device) to limit the amount of objects that a single instance must handle.
+It is recommended to not have more than 5000 devices per instance of eNMS.

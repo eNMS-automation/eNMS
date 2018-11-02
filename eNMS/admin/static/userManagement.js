@@ -67,7 +67,6 @@ function showUserModal(userId, duplicate=false) { // eslint-disable-line no-unus
       properties.id = properties.name = '';
     }
     for (const [property, value] of Object.entries(properties)) {
-      console.log(property, value);
       $(`#${property}`).val(value);
     }
     $('#edit').modal('show');

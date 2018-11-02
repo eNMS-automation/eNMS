@@ -63,6 +63,10 @@ def login():
             if user_password == pwd:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
+            else:
+                abort(403)
+        else:
+            abort(403)
     if not current_user.is_authenticated:
         return render_template(
             'login.html',

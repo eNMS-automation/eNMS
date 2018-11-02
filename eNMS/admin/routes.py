@@ -15,15 +15,17 @@ from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
-    LoginForm,
+    DatabaseFilteringForm,
     GeographicalParametersForm,
     GottyParametersForm,
+    LoginForm,
     NotificationParametersForm,
     SyslogServerForm,
     TacacsServerForm,
 )
 from eNMS.base.models import classes
 from eNMS.base.helpers import (
+    choices,
     delete,
     get,
     get_one,
@@ -77,6 +79,8 @@ def logout():
 
 @get(bp, '/administration', 'Admin Section')
 def admninistration():
+    database_filtering_form = DatabaseFilteringForm(request.form)
+    database_filtering_form.pools.choices = choices('Pool')
     try:
         tacacs_server = get_one('TacacsServer')
     except NoResultFound:
@@ -87,6 +91,7 @@ def admninistration():
         syslog_server = None
     return render_template(
         'administration.html',
+        database_filtering_form=database_filtering_form,
         geographical_parameters_form=GeographicalParametersForm(request.form),
         gotty_parameters_form=GottyParametersForm(request.form),
         notification_parameters_form=NotificationParametersForm(request.form),

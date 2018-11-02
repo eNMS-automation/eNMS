@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
 from eNMS import mail
 from eNMS.automation.models import Service
-from eNMS.base.helpers import get_one
+from eNMS.base.helpers import get_one, str_dict
 from eNMS.base.models import service_classes
 
 
@@ -42,12 +42,13 @@ class SwissArmyKnifeService(Service):
     def mail_feedback_notification(self, payload):
         parameters = get_one('Parameters')
         message = Message(
-            payload['job'].name,
-            sender=parameters.sender,
+            payload['job']['name'],
+            sender=parameters.mail_sender,
             recipients=parameters.mail_recipients,
             body=payload['result']
         )
         mail.send(message)
+        {'success': True}
 
     def slack_feedback_notification(self, payload):
         pass
@@ -56,8 +57,9 @@ class SwissArmyKnifeService(Service):
         parameters = get_one('Parameters')
         post(parameters.mattermost_url, data=dumps({
             "channel": parameters.mattermost_channel,
-            "text": self.body
+            "text": str_dict(payload)
         }))
+        return {'success': True}
 
     def process_payload1(self, device, payload):
         get_facts = payload['get_facts']

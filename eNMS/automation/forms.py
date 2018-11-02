@@ -16,11 +16,10 @@ class JobForm(FlaskForm):
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
-    send_notification = BooleanField()
     send_notification_method = SelectField(choices=(
-        ('Mail', 'mail_feedback_notification'),
-        ('Slack', 'slack_feedback_notification'),
-        ('Mattermost', 'mattermost_feedback_notification'),
+        ('mail_feedback_notification', 'Mail'),
+        ('slack_feedback_notification', 'Slack'),
+        ('mattermost_feedback_notification', 'Mattermost'),
     ))
     number_of_retries = IntegerField('Number of retries', default=0)
     time_between_retries = IntegerField(
@@ -41,7 +40,7 @@ class AddJobForm(FlaskForm):
 
 
 class WorkflowForm(JobForm):
-    multiprocessing = BooleanField('ggg')
+    multiprocessing = BooleanField()
 
 
 class WorkflowBuilderForm(FlaskForm):

@@ -47,7 +47,7 @@ class RestCallService(Service):
     }
 
     def job(self, *args):
-        if self.multiprocessing:
+        if len(args) == 2:
             device, payload = args
         rest_url = substitute(self.url, locals())
         if self.call_type in ('GET', 'DELETE'):

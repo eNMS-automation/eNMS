@@ -210,5 +210,27 @@ Run multiple services
 ---------------------
 
 - Service instance tasks will run in parallel to other service instance tasks as long as they are standalone and do not exist within a workflow.
-- Service Instance tasks (and workflow instance tasks) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
+- Service Instance (and workflows) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
 - If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel.
+
+Service notification
+--------------------
+
+When a service (or a workflow) finishes, you can choose to receive a notification that contains the logs of the service (whether it was successful or not for each device, etc).
+
+There are three types of notification:
+- Mail notification: eNMS sends a mail to an address of your choice.
+- Slack notification: eNMS sends a message to a channel of your choice.
+- Mattermost notification: same as Slack, with Mattermost.
+
+To set up the mail system, you must export the following environment variables before starting eNMS:
+
+::
+
+  MAIL_SERVER = environ.get('MAIL_SERVER', 'smtp.googlemail.com')
+  MAIL_PORT = int(environ.get('MAIL_PORT', '587'))
+  MAIL_USE_TLS = int(environ.get('MAIL_USE_TLS', True))
+  MAIL_USERNAME = environ.get('MAIL_USERNAME')
+  MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
+
+From within eNMS, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.

@@ -58,14 +58,13 @@ function showModal() { // eslint-disable-line no-unused-vars
 /**
  * Display pool modal for editing.
  * @param {id} id - Id of the pool to edit.
+  * @param {duplicate} duplicate - Id of the pool to edit.
  */
-function showPoolModal(id, duplicate=false) { // eslint-disable-line no-unused-vars
+function showPoolModal(id, duplicate) { // eslint-disable-line no-unused-vars
   call(`/objects/get/pool/${id}`, function(pool) {
-    $('#title').text(
-      `${duplicate ? 'Duplicate' : 'Edit'} Pool '${pool.name}'`
-    );
+    $('#title').text(`${duplicate ? 'Duplicate' : 'Edit'} Pool '${pool.name}'`);
     if (duplicate) {
-      properties.id = properties.name = '';
+      pool.id = pool.name = '';
     }
     for (const [property, value] of Object.entries(pool)) {
       if (property.includes('regex')) {
@@ -73,10 +72,8 @@ function showPoolModal(id, duplicate=false) { // eslint-disable-line no-unused-v
       } else {
         $(`#${property}`).val(value);
       }
-
-      $('#edit').modal('show');
     }
-    
+    $('#edit').modal('show');
   });
 }
 

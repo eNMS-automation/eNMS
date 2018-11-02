@@ -56,10 +56,10 @@ function showModal() { // eslint-disable-line no-unused-vars
 
 /**
  * Display user modal for editing.
- * @param {userId} userId - Id of the user to be deleted.
+ * @param {id} id - User ID.
  */
-function showUserModal(userId, duplicate=false) { // eslint-disable-line no-unused-vars
-  call(`/admin/get/${userId}`, function(properties) {
+function showUserModal(id, duplicate) { // eslint-disable-line no-unused-vars
+  call(`/admin/get/${id}`, function(properties) {
     $('#title').text(
       `${duplicate ? 'Duplicate' : 'Edit'} User '${properties.name}'`
     );

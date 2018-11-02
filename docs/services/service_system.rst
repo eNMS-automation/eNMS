@@ -213,6 +213,17 @@ Run multiple services
 - Service Instance (and workflows) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
 - If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel.
 
+Retry mechanism
+---------------
+
+Each service can be configured to run again in case of failures.
+There are two parameters to configure:
+
+- The number of retries (default: 0)
+- The time between retries (default: 10 seconds)
+
+.. note:: The retry will affect only the devices for which the service failed. Let's consider a service configured to run on 3 devices D1, D2, and D3 with 2 "retries". If it fails on D2 and D3 when the service runs for the first time, eNMS will run the service again for D2 and D3 at the first retry. If D2 succeeds and D3 fails, the second and last retry will run on D3 only.
+
 Service notification
 --------------------
 
@@ -233,7 +244,7 @@ To set up the mail system, you must export the following environment variables b
   MAIL_USERNAME = environ.get('MAIL_USERNAME')
   MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
-From within eNMS, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.
+From the :guilabel:`admin/administration` panel, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.
 
 .. image:: /_static/services/service_system/notifications.png
    :alt: Notification

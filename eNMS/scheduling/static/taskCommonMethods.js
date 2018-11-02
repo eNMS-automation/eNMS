@@ -13,12 +13,17 @@ function showTaskModal(id, duplicate) { // eslint-disable-line no-unused-vars
     $('#task-modal-form').trigger('reset');
     $('#task-modal').modal('show');
   } else {
-    call(`/scheduling/get/${id}`, function(properties) {
-      $('#title').text(`Edit Task '${properties.name}'`);
-      for (const [property, value] of Object.entries(properties)) {
+    call(`/scheduling/get/${id}`, function(task) {
+      $('#title').text(
+        `${duplicate ? 'Duplicate' : 'Edit'} Task '${task.name}'`
+      );
+      if (duplicate) {
+        task.id = task.name = '';
+      }
+      for (const [property, value] of Object.entries(task)) {
         $(`#${property}`).val(value);
       }
-      $('#job').val(properties.job.id);
+      $('#job').val(task.job.id);
     });
   }
   $('#task-modal').modal('show');

@@ -59,17 +59,24 @@ function showModal() { // eslint-disable-line no-unused-vars
  * Display pool modal for editing.
  * @param {id} id - Id of the pool to edit.
  */
-function showPoolModal(id) { // eslint-disable-line no-unused-vars
-  call(`/objects/get/pool/${id}`, function(result) {
-    for (const [property, value] of Object.entries(result)) {
+function showPoolModal(id, duplicate=false) { // eslint-disable-line no-unused-vars
+  call(`/objects/get/pool/${id}`, function(pool) {
+    $('#title').text(
+      `${duplicate ? 'Duplicate' : 'Edit'} Pool '${pool.name}'`
+    );
+    if (duplicate) {
+      properties.id = properties.name = '';
+    }
+    for (const [property, value] of Object.entries(pool)) {
       if (property.includes('regex')) {
         $(`#${property}`).prop('checked', value);
       } else {
         $(`#${property}`).val(value);
       }
-      $('#title').text(`Edit Pool '${result.name}'`);
+
+      $('#edit').modal('show');
     }
-    $('#edit').modal('show');
+    
   });
 }
 
@@ -78,9 +85,9 @@ function showPoolModal(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the pool.
  */
 function showPoolObjects(id) { // eslint-disable-line no-unused-vars
-  call(`/objects/get/pool/${id}`, function(result) {
-    $('#devices').val(result.devices.map((n) => n.id));
-    $('#links').val(result.links.map((l) => l.id));
+  call(`/objects/get/pool/${id}`, function(pool) {
+    $('#devices').val(pool.devices.map((n) => n.id));
+    $('#links').val(pool.links.map((l) => l.id));
     poolId = id;
     $('#edit-pool-objects').modal('show');
   });
@@ -91,7 +98,7 @@ function showPoolObjects(id) { // eslint-disable-line no-unused-vars
  */
 function savePoolObjects() { // eslint-disable-line no-unused-vars
   const url = `/objects/save_pool_objects/${poolId}`;
-  fCall(url, '#pool-objects-form', function(result) {
+  fCall(url, '#pool-objects-form', function() {
     alertify.notify('Changes saved.', 'success', 5);
     $('#edit-pool-objects').modal('hide');
   });
@@ -126,7 +133,7 @@ function deletePool(id) { // eslint-disable-line no-unused-vars
  * Update all pool objects according to pool properties.
  */
 function updatePools() { // eslint-disable-line no-unused-vars
-  call('/objects/update_pools', function(result) {
+  call('/objects/update_pools', function() {
     alertify.notify('Pools successfully updated.', 'success', 5);
   });
 }

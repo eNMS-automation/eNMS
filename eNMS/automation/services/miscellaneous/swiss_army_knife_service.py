@@ -1,8 +1,11 @@
 from flask_mail import Message
+from json import dumps
+from requests import post
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
 from eNMS import mail
 from eNMS.automation.models import Service
+from eNMS.base.helpers import get_one
 from eNMS.base.models import service_classes
 
 
@@ -46,8 +49,11 @@ class SwissArmyKnifeService(Service):
         mail.send(message)
 
     def slack_feedback_notification(self, payload):
-        # send a notification on Slack
-        pass
+        parameters = get_one('Parameters')
+        post(parameters.mattermost_url, data=dumps({
+            "channel": parameters.mattermost_channel,
+            "text": self.body
+        }))
 
     def mattermost_feedback_notification(self, payload):
         # send a notification on Mattermost

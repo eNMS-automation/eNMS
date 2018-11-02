@@ -30,16 +30,16 @@ function flipAuthenticationCombo() {
  * @param {id} id - Id of the object to edit.
  * @param {duplicate} duplicate - Edit versus duplicate.
  */
-function showObjectModal(type, id) { // eslint-disable-line no-unused-vars
-  call(`/objects/get/${type}/${id}`, function(properties) {
+function showObjectModal(type, id, duplicate) { // eslint-disable-line no-unused-vars
+  call(`/objects/get/${type}/${id}`, function(obj) {
     $('#title').text(
       `${duplicate ? 'Duplicate' : 'Edit'}
-      ${capitalize(type)} '${properties.name}'
+      ${capitalize(type)} '${obj.name}'
     `);
     if (duplicate) {
-      pool.id = pool.name = '';
+      obj.id = obj.name = '';
     }
-    for (const [property, value] of Object.entries(properties)) {
+    for (const [property, value] of Object.entries(obj)) {
       $(`#${type}-${property}`).val(value);
     }
     $('#connection-parameters-button').unbind('click');
@@ -88,36 +88,36 @@ function deleteObject(type, id) { // eslint-disable-line no-unused-vars
  * Add object to the datatable.
  * @param {mode} mode - Create or edit.
  * @param {type} type - Device or link.
- * @param {properties} properties - Properties of the object.
+ * @param {obj} obj - Properties of the object.
  */
-function addObjectToTable(mode, type, properties) {
+function addObjectToTable(mode, type, obj) {
   let values = [];
   for (let i = 0; i < fields.length; i++) {
     if (['longitude', 'latitude'].includes(fields[i])) {
-      values.push(`${parseFloat(properties[fields[i]]).toFixed(2)}`);
+      values.push(`${parseFloat(obj[fields[i]]).toFixed(2)}`);
     } else {
-      values.push(`${properties[fields[i]]}`);
+      values.push(`${obj[fields[i]]}`);
     }
   }
   // if it is a device, we add the "Connect" button.
   if (type == 'device') {
     values.push(`<button type="button" class="btn btn-success btn-xs"
-    onclick="connectionParametersModal('${properties.id}')">Connect</button>`);
+    onclick="connectionParametersModal('${obj.id}')">Connect</button>`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showObjectModal('${type}', '${properties.id}')">Edit</button>`,
+    onclick="showObjectModal('${type}', '${obj.id}')">Edit</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showObjectModal('${type}', '${properties.id}', true)">
+    onclick="showObjectModal('${type}', '${obj.id}', true)">
     Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteObject('${type}', '${properties.id}')">Delete</button>`
+    onclick="deleteObject('${type}', '${obj.id}')">Delete</button>`
   );
   if (mode == 'edit') {
-    table.row($(`#${properties.id}`)).data(values);
+    table.row($(`#${obj.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${properties.id}`);
+    $(rowNode).attr('id', `${obj.id}`);
   }
 }
 

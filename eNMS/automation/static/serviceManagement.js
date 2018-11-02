@@ -28,6 +28,8 @@ function addService(mode, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="editService('${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
+    onclick="editService('${properties.id}', true)">Duplicate</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteService('${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {

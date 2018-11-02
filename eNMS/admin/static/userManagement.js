@@ -22,6 +22,8 @@ function addUser(mode, properties) {
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showUserModal('${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showUserModal('${properties.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteUser('${properties.id}')">Delete</button>`
   );
@@ -56,12 +58,18 @@ function showModal() { // eslint-disable-line no-unused-vars
  * Display user modal for editing.
  * @param {userId} userId - Id of the user to be deleted.
  */
-function showUserModal(userId) { // eslint-disable-line no-unused-vars
+function showUserModal(userId, duplicate=false) { // eslint-disable-line no-unused-vars
   call(`/admin/get/${userId}`, function(properties) {
+    $('#title').text(
+      `${duplicate ? 'Duplicate' : 'Edit'} User '${properties.name}'`
+    );
+    if (duplicate) {
+      properties.id = properties.name = '';
+    }
     for (const [property, value] of Object.entries(properties)) {
+      console.log(property, value);
       $(`#${property}`).val(value);
     }
-    $('#title').text(`Edit User '${properties.name}'`);
     $('#edit').modal('show');
   });
 }

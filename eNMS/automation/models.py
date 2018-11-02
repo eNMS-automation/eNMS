@@ -99,10 +99,10 @@ class Job(Base):
         return results
 
     def get_results(self, payload, device=None):
-        # try:
-        return self.job(device, payload) if device else self.job(payload)
-        # except Exception as e:
-            # return {'success': False, 'result': str(e)}
+        try:
+            return self.job(device, payload) if device else self.job(payload)
+        except Exception as e:
+            return {'success': False, 'result': str(e)}
 
     def run(self, payload=None, targets=None):
         if not targets:

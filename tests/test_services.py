@@ -46,13 +46,13 @@ def test_base_services(user_client):
         data=netmiko_ping
     )
     assert len(fetch_all('netmiko_configuration_service')) == 3
-    assert len(fetch_all('Service')) == 16
+    assert len(fetch_all('Service')) == 19
     user_client.post(
         'automation/save_service/netmiko_file_transfer_service',
         data=file_transfer_service
     )
     assert len(fetch_all('netmiko_file_transfer_service')) == 1
-    assert len(fetch_all('Service')) == 17
+    assert len(fetch_all('Service')) == 20
 
 
 getters_dict = ImmutableMultiDict([
@@ -94,4 +94,4 @@ def test_ansible_services(user_client):
         data=ansible_service
     )
     assert len(fetch_all('ansible_playbook_service')) == 1
-    assert len(fetch_all('Service')) == 16
+    assert len(fetch_all('Service')) == 19

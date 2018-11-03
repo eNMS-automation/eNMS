@@ -39,7 +39,7 @@ function addWorkflow(mode, workflow) {
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showWorkflowModal('${workflow.id}')">Edit</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showDuplicateWorkflowModal('${workflow.id}')">Duplicate</button>`,
+    onclick="showWorkflowModal('${workflow.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteWorkflow('${workflow.id}')">Delete</button>`
   );
@@ -82,23 +82,6 @@ function showModal() { // eslint-disable-line no-unused-vars
   $('#title').text('Create a New Workflow');
   $('#edit-form').trigger('reset');
   $('#edit').modal('show');
-}
-
-/**
- * Open the name modal for workflow duplication.
- */
-function showDuplicateWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  $('#name-button').click(partial(duplicateWorkflow, id));
-  $('#name-modal').trigger('reset');
-  $('#name-modal').modal('show');
-}
-
-function duplicateWorkflow(id) {
-  fCall(`/automation/duplicate_workflow/${id}`, '#name-form', function(wf) {
-    addWorkflow('add', wf);
-    alertify.notify(`Workflow '${wf.name}' duplicated`, 'success', 5);
-    $('#name-modal').modal('hide');
-  });
 }
 
 /**

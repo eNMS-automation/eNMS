@@ -179,14 +179,7 @@ def run_job(job_id):
 
 @post(bp, '/save_service/<cls_name>', 'Edit Automation Section')
 def save_service(cls_name):
-    form = dict(request.form.to_dict())
-    for key in request.form:
-        if property_types.get(key, None) == list:
-            form[key] = request.form.getlist(key)
-    for property in boolean_properties:
-        if property not in form:
-            form[property] = 'off'
-    return jsonify(factory(cls_name, **form).serialized)
+    return jsonify(factory(cls_name, **request.form).serialized)
 
 
 @post(bp, '/show_logs/<job_id>', 'Automation Section')

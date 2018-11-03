@@ -5,7 +5,7 @@ from sqlalchemy import exc
 
 from eNMS import db
 from eNMS.base.classes import classes
-from eNMS.base.properties import property_types
+from eNMS.base.properties import boolean_properties, property_types
 
 
 def add_classes(*models):
@@ -84,6 +84,9 @@ def process_form(function):
         for key in request.form:
             if property_types.get(key, None) == list:
                 data[key] = request.form.getlist(key)
+        for property in boolean_properties:
+            if property not in form:
+                form[property] = 'off'
         request.form = data
         return function(*a, **kw)
     return wrapper

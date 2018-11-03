@@ -244,13 +244,7 @@ def reset_workflow_logs(workflow_id):
 
 @post(bp, '/edit_workflow', 'Edit Automation Section')
 def edit_workflow(id):
-    form = dict(request.form.to_dict())
-    for property in boolean_properties:
-        if property not in form:
-            form[property] = 'off'
-    form['devices'] = objectify('Device', request.form.getlist('devices'))
-    form['pools'] = objectify('Pool', request.form.getlist('pools'))
-    return jsonify(factory('Workflow', **form).serialized)
+    return jsonify(factory('Workflow', **request.form).serialized)
 
 
 @post(bp, '/delete_workflow/<workflow_id>', 'Edit Automation Section')

@@ -85,8 +85,8 @@ def process_request(function):
             if property_types.get(key, None) == list:
                 data[key] = request.form.getlist(key)
         for property in boolean_properties:
-            if property not in form:
-                form[property] = 'off'
+            if property not in request.form:
+                data[property] = 'off'
         request.form = data
         return function(*a, **kw)
     return wrapper

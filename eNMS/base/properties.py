@@ -371,7 +371,9 @@ relationships = {
     },
     'Workflow': {
         'edge': 'WorkflowEdge',
-        'job': 'Job'
+        'job': 'Job',
+        'device': 'Device',
+        'pool': 'Pool'
     },
     'WorkflowEdge': {
         'source': 'Job',

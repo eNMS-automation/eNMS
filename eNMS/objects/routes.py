@@ -67,16 +67,12 @@ def device_management():
 
 @get(bp, '/link_management', 'Inventory Section')
 def link_management():
-    add_link_form = AddLink(request.form)
-    devices = [(l.name, l.name) for l in fetch_all('Device')]
-    add_link_form.source_name.choices = devices
-    add_link_form.destination_name.choices = devices
     return render_template(
         'link_management.html',
         names=pretty_names,
         fields=link_table_properties,
         links=serialize('Link'),
-        add_link_form=add_link_form
+        add_link_form=AddLink(request.form, 'Link')
     )
 
 
@@ -85,7 +81,7 @@ def pool_management():
     return render_template(
         'pool_management.html',
         form=AddPoolForm(request.form),
-        pool_object_form=PoolObjectsForm(request.form),
+        pool_object_form=PoolObjectsForm(request.form, 'Pool'),
         names=pretty_names,
         fields=pool_table_properties,
         pools=serialize('Pool')

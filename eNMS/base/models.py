@@ -92,9 +92,9 @@ class Base(db.Model):
 
 class BaseForm(FlaskForm):
 
-    def __init__(self, request):
+    def __init__(self, request, model=None):
         super().__init__(request)
-        for cls in rel:
+        for cls in rel.get(model, []):
             for property_name in (cls.lower(), f'{cls.lower()}s'):
                 if hasattr(self, property_name):
                     print(property_name)

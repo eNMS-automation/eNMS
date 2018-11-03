@@ -221,6 +221,7 @@ def add_to_workflow(workflow_id):
 @post(bp, '/get/<workflow_id>', 'Automation Section')
 def get_workflow(workflow_id):
     workflow = fetch('Workflow', id=workflow_id)
+    print(workflow.devices)
     return jsonify(workflow.serialized if workflow else {})
 
 

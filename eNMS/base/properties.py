@@ -355,6 +355,7 @@ property_types = {
 }
 
 relationships = {
+    'Device': {},
     'Link': {
         'source': 'Device',
         'destination': 'Device'

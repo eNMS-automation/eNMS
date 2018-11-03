@@ -198,8 +198,8 @@ def create_netmiko_workflow():
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
-            'from': workflow.jobs[x].id,
-            'to': workflow.jobs[y].id
+            'source': workflow.jobs[x].id,
+            'destination': workflow.jobs[y].id
         })
     positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
     for index, (x, y) in enumerate(positions):

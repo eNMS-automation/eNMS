@@ -246,21 +246,8 @@ def migration_import():
     for cls in request.form.getlist('export'):
         path = app.path / 'migrations' / 'import_export' / name / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
-            for obj_data in load(migration_file):
-                cls_name = obj_data.pop('type') if cls == 'Service' else cls
-                obj = {}
-                for property, value in obj_data.items():
-                    if property not in import_properties[cls]:
-                        continue
-                    elif property in serialization_properties:
-                        model = serialization_properties[property]
-                        obj[property] = fetch(model, id=value)
-                    elif property[:-1] in serialization_properties:
-                        model = serialization_properties[property[:-1]]
-                        obj[property] = objectify(model, value)
-                    else:
-                        obj[property] = value
-                factory(cls_name, **obj)
+            for obj in load(migration_file):
+                factory(obj.pop('type') if cls == 'Service' else cls, **obj)
     return jsonify(True)
 
 

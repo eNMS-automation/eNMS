@@ -55,7 +55,7 @@ class Base(db.Model):
     def to_dict(self, export=False):
         get = 'id' if export else 'properties'
         properties = self.properties
-        for property in serialization_properties:
+        for property in rel:
             if hasattr(self, property):
                 if hasattr(getattr(self, property), 'properties'):
                     properties[property] = getattr(getattr(self, property), get)

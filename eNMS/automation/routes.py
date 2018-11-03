@@ -180,8 +180,6 @@ def run_job(job_id):
 @post(bp, '/save_service/<cls_name>', 'Edit Automation Section')
 def save_service(cls_name):
     form = dict(request.form.to_dict())
-    form['devices'] = objectify('Device', request.form.getlist('devices'))
-    form['pools'] = objectify('Pool', request.form.getlist('pools'))
     for key in request.form:
         if property_types.get(key, None) == list:
             form[key] = request.form.getlist(key)

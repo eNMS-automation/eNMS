@@ -118,9 +118,7 @@ def create_new_user():
 
 @post(bp, '/process_user', 'Edit Admin Section')
 def process_user():
-    user_data = request.form.to_dict()
-    user_data['permissions'] = request.form.getlist('permissions')
-    return jsonify(factory('User', **user_data).serialized)
+    return jsonify(factory('User', **request.form).serialized)
 
 
 @post(bp, '/get/<user_id>', 'Admin Section')

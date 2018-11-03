@@ -276,7 +276,6 @@ def query_opennms():
             'subtype': request.form['subtype']
         } for device in json_devices
     }
-
     for device in list(devices):
         link = http_get(
             f'{parameters.opennms_rest_api}/nodes/{device}/ipinterfaces',

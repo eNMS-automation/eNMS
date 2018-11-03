@@ -344,7 +344,15 @@ pretty_names = {
 pretty_names.update({k: v['pretty_name'] for k, v in custom_properties.items()})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 service_properties = defaultdict(list)
-property_types = {'send_notification': bool}
+
+property_types = {
+    'devices': list,
+    'pools': list,
+    'jobs': list,
+    'edges': list,
+    'permissions': list,
+    'send_notification': bool
+}
 
 relationships = {
     'Link': {

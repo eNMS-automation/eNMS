@@ -1,10 +1,11 @@
-from flask import abort, jsonify
+from flask import abort, jsonify, request
 from flask_login import current_user, login_required
 from functools import wraps
 from sqlalchemy import exc
 
 from eNMS import db
 from eNMS.base.classes import classes
+from eNMS.base.properties import property_types
 
 
 def add_classes(*models):
@@ -77,6 +78,17 @@ def integrity_rollback(function):
     return wrapper
 
 
+def process_form(function):
+    def wrapper(*a, **kw):
+        data = request.form.to_dict()
+        for key in request.form:
+            if property_types.get(key, None) == list:
+                data[key] = request.form.getlist(key)
+        request.form = data
+        return function(*a, **kw)
+    return wrapper
+
+
 def permission_required(permission, redirect=True):
     def decorator(f):
         @wraps(f)
@@ -109,6 +121,7 @@ def post(blueprint, url, permission=None, method=['POST']):
         @login_required
         @permission_required(permission, redirect=False)
         @wraps(func)
+        @process_form
         def inner(*args, **kwargs):
             try:
                 return func(*args, **kwargs)

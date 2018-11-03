@@ -88,7 +88,7 @@ function showModal() { // eslint-disable-line no-unused-vars
  * Open the name modal for workflow duplication.
  */
 function showDuplicateWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  $('#name-button').click = partial(duplicateWorkflow, id);
+  $('#name-button').click(partial(duplicateWorkflow, id));
   $('#name-modal').trigger('reset');
   $('#name-modal').modal('show');
 }

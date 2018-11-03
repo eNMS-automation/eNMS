@@ -20,7 +20,6 @@ login_manager = LoginManager()
 mail = Mail()
 scheduler = APScheduler()
 
-from eNMS.base.models import classes
 from eNMS.base.default import (
     create_default_services,
     create_default_parameters,
@@ -58,13 +57,11 @@ def register_blueprints(app):
 def configure_login_manager(app):
     @login_manager.user_loader
     def user_loader(id):
-        return db.session.query(classes['User']).filter_by(id=id).first()
+        return fetch('User', id=id)
 
     @login_manager.request_loader
     def request_loader(request):
-        name = request.form.get('name')
-        user = db.session.query(classes['User']).filter_by(name=name).first()
-        return user if user else None
+        return fetch('User', name=request.form['name'])
 
 
 def create_vault_client(app):

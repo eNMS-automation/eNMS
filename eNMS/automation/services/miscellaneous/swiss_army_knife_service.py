@@ -5,8 +5,8 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
 from eNMS import mail
 from eNMS.automation.models import Service
-from eNMS.base.helpers import get_one, str_dict
 from eNMS.base.classes import service_classes
+from eNMS.base.helpers import get_one, str_dict
 
 
 class SwissArmyKnifeService(Service):

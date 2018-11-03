@@ -88,9 +88,17 @@ function showModal() { // eslint-disable-line no-unused-vars
  * Open the name modal for workflow duplication.
  */
 function showDuplicateWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  jobId = id;
+  $('#name-button').click = partial(duplicateWorkflow, id);
   $('#name-modal').trigger('reset');
   $('#name-modal').modal('show');
+}
+
+function duplicateWorkflow(id) {
+  fCall(`/automation/duplicate_workflow/${id}`, '#name-form', function(wf) {
+    addWorkflow('add', wf);
+    alertify.notify(`Workflow '${wf.name}' duplicated`, 'success', 5);
+    $('#name-modal').modal('hide');
+  });
 }
 
 /**

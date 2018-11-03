@@ -94,8 +94,7 @@ class BaseForm(FlaskForm):
 
     def __init__(self, request, model=None):
         super().__init__(request)
-        for cls in rel.get(model, []):
-            for property_name in (cls.lower(), f'{cls.lower()}s'):
-                if hasattr(self, property_name):
-                    print(property_name)
-                    getattr(self, property_name).choices = choices(cls)
+        for property, cls in rel.get(model, {}).items():
+            for name in (property.lower(), f'{property.lower()}s'):
+                if hasattr(self, name):
+                    getattr(self, name).choices = choices(cls)

@@ -27,6 +27,7 @@ from eNMS.base.default import (
     create_default_users,
     create_default_examples
 )
+from eNMS.base.helpers import fetch
 from eNMS.base.rest import configure_rest_api
 
 
@@ -61,7 +62,7 @@ def configure_login_manager(app):
 
     @login_manager.request_loader
     def request_loader(request):
-        return fetch('User', name=request.form['name'])
+        return fetch('User', name=request.form.get('name'))
 
 
 def create_vault_client(app):

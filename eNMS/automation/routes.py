@@ -5,7 +5,7 @@ from json import dumps
 from sqlalchemy.orm.session import make_transient
 
 from eNMS import db, scheduler
-from eNMS.base.models import service_classes
+from eNMS.base.classes import service_classes
 from eNMS.base.helpers import (
     choices,
     delete,

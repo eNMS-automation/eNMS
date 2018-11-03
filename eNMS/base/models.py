@@ -1,7 +1,8 @@
+from flask_wtf import FlaskForm
 from json import dumps, loads
 
 from eNMS import db
-from eNMS.base.helpers import fetch, objectify
+from eNMS.base.helpers import fetch, objectify, choices
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,
@@ -88,3 +89,13 @@ class Base(db.Model):
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
+
+class BaseForm(FlaskForm):
+
+    def __init__(self, request):
+        super().__init__(request)
+        for cls in rel:
+            for property_name in (cls.lower(), f'{cls.lower()}s'):
+                if hasattr(self, property_name):
+                    print(property_name)
+                    getattr(self, property_name).choices = choices(cls)

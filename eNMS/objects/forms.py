@@ -1,4 +1,3 @@
-from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     FloatField,
@@ -10,6 +9,7 @@ from wtforms import (
     TextField
 )
 
+from eNMS.base.models import BaseForm
 from eNMS.base.properties import (
     custom_properties,
     link_public_properties,
@@ -38,7 +38,7 @@ def configure_pool_form(cls):
     return cls
 
 
-class AddObjectForm(FlaskForm):
+class AddObjectForm(BaseForm):
     id = HiddenField()
     name = TextField()
     description = TextField()
@@ -70,17 +70,17 @@ class AddLink(AddObjectForm):
 
 
 @configure_pool_form
-class AddPoolForm(FlaskForm):
+class AddPoolForm(BaseForm):
     name = TextField()
     description = TextField()
 
 
-class PoolObjectsForm(FlaskForm):
+class PoolObjectsForm(BaseForm):
     devices = SelectMultipleField()
     links = SelectMultipleField()
 
 
-class OpenNmsForm(FlaskForm):
+class OpenNmsForm(BaseForm):
     opennms_rest_api = TextField()
     opennms_devices = TextField()
     node_type = [subtype for subtype in device_subtypes.items()]
@@ -89,14 +89,14 @@ class OpenNmsForm(FlaskForm):
     password = PasswordField()
 
 
-class NetboxForm(FlaskForm):
+class NetboxForm(BaseForm):
     netbox_address = TextField(default='http://0.0.0.0:8000')
     netbox_token = TextField()
     node_type = [subtype for subtype in device_subtypes.items()]
     netbox_type = SelectField(choices=node_type)
 
 
-class ImportExportForm(FlaskForm):
+class ImportExportForm(BaseForm):
     name = TextField()
     export_choices = [(p, p.capitalize()) for p in import_properties]
     export = SelectMultipleField(choices=export_choices)

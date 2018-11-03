@@ -82,13 +82,10 @@ def link_management():
 
 @get(bp, '/pool_management', 'Inventory Section')
 def pool_management():
-    pool_object_form = PoolObjectsForm(request.form)
-    pool_object_form.devices.choices = choices('Device')
-    pool_object_form.links.choices = choices('Link')
     return render_template(
         'pool_management.html',
         form=AddPoolForm(request.form),
-        pool_object_form=pool_object_form,
+        pool_object_form=PoolObjectsForm(request.form),
         names=pretty_names,
         fields=pool_table_properties,
         pools=serialize('Pool')

@@ -60,10 +60,7 @@ def calendar():
 
 @post(bp, '/scheduler', 'Edit Scheduling Section')
 def scheduler(workflow_id=None):
-    data = request.form.to_dict()
-    data['job'] = fetch('Job', id=data['job'])
-    data['user'] = current_user
-    return jsonify(factory('Task', **data).serialized)
+    return jsonify(factory('Task', **request.form).serialized)
 
 
 @post(bp, '/get/<task_id>', 'Scheduling Section')

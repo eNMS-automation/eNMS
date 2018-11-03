@@ -71,11 +71,7 @@ def get_log_rule(log_rule_id):
 
 @post(bp, '/save_log_rule', 'Edit Logs Section')
 def save_log_rule():
-    data = request.form.to_dict()
-    data['jobs'] = objectify('Job', request.form.getlist('jobs'))
-    log_rule = factory('LogRule', **data)
-    db.session.commit()
-    return jsonify(log_rule.serialized)
+    return jsonify(factory('LogRule', **request.form).serialized)
 
 
 @post(bp, '/delete_log_rule/<log_id>', 'Edit Logs Section')

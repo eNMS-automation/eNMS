@@ -78,7 +78,7 @@ def integrity_rollback(function):
     return wrapper
 
 
-def process_form(function):
+def process_request(function):
     def wrapper(*a, **kw):
         data = request.form.to_dict()
         for key in request.form:
@@ -118,13 +118,13 @@ def get(blueprint, url, permission=None, method=['GET']):
     return outer
 
 
-def post(blueprint, url, permission=None, method=['POST']):
+def post(blueprint, url, permission=None):
     def outer(func):
-        @blueprint.route(url, methods=method)
+        @blueprint.route(url, methods=['POST'])
         @login_required
         @permission_required(permission, redirect=False)
         @wraps(func)
-        @process_form
+        @process_request
         def inner(*args, **kwargs):
             try:
                 return func(*args, **kwargs)

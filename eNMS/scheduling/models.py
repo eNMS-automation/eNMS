@@ -18,8 +18,6 @@ class Task(Base):
     creation_time = Column(String)
     status = Column(String)
     type = Column(String)
-    user_id = Column(Integer, ForeignKey('User.id'))
-    user = relationship('User', back_populates='tasks')
     frequency = Column(String)
     start_date = Column(String)
     end_date = Column(String)

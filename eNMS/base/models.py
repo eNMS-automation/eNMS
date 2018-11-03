@@ -25,7 +25,9 @@ class Base(db.Model):
     def update(self, **kwargs):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            if property in boolean_properties:
+            if property in serialization_properties:
+            elif property[:-1] in serialization_properties:
+            elif property in boolean_properties:
                 value = kwargs[property] in ('y', 'on', 'false', 'true', True)
             elif 'regex' in property:
                 value = property in kwargs
@@ -82,5 +84,3 @@ class Base(db.Model):
     def serialize(cls):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
-
-classes, service_classes = {}, {}

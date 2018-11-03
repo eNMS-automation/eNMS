@@ -19,8 +19,8 @@ bp = Blueprint(
     static_folder='static'
 )
 
+from eNMS.base.classes import classes, service_classes
 from eNMS.base.helpers import add_classes
-from eNMS.base.models import classes, service_classes
 from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
 
 add_classes(Job, Service, Workflow, WorkflowEdge)

@@ -4,7 +4,7 @@ from functools import wraps
 from sqlalchemy import exc
 
 from eNMS import db
-from eNMS.base.models import classes
+from eNMS.base.classes import classes
 
 
 def add_classes(*models):

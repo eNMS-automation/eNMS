@@ -4,7 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from eNMS import mail
 from eNMS.automation.models import Service
 from eNMS.base.helpers import get_one
-from eNMS.base.models import service_classes
+from eNMS.base.classes import service_classes
 
 
 class MailNotificationService(Service):

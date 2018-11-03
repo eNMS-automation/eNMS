@@ -105,10 +105,6 @@ def configure_errors(app):
     def not_found_error(error):
         return render_template('errors/page_404.html'), 404
 
-    @app.errorhandler(500)
-    def internal_error(error):
-        return render_template('errors/page_500.html'), 500
-
 
 def configure_logs(app):
     basicConfig(

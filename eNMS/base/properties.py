@@ -346,15 +346,29 @@ reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 service_properties = defaultdict(list)
 property_types = {'send_notification': bool}
 
-serialization_properties = {
-    'destination': 'Device',
-    'device': 'Device',
-    'edge': 'WorkflowEdge',
-    'job': 'Job',
-    'link': 'Link',
-    'pool': 'Pool',
-    'source': 'Device',
-    'task': 'Task'
+relationships = {
+    'Link': {
+        'source': 'Device',
+        'destination': 'Device'
+    },
+    'Pool': {
+        'device': 'Device',
+        'link': 'Link',
+    },
+    'Service': {
+        'device': 'Device',
+        'pool': 'Pool',
+        'workflow': 'Workflow',
+        'task': 'Task'
+    },
+    'Workflow': {
+        'edge': 'WorkflowEdge',
+        'job': 'Job'
+    },
+    'WorkflowEdge': {
+        'source': 'Job',
+        'destination': 'Job'
+    }
 }
 
 device_import_properties = device_public_properties + [

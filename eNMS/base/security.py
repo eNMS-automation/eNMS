@@ -8,8 +8,8 @@ def process_kwargs(app, **kwargs):
         kwargs.update({
             'source_id': source.id,
             'destination_id': destination.id,
-            'source': source,
-            'destination': destination
+            'source': source.id,
+            'destination': destination.id
         })
     else:
         if app.config['USE_VAULT']:

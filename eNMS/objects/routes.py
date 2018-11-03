@@ -50,8 +50,7 @@ from eNMS.base.properties import (
     import_properties,
     link_table_properties,
     pool_table_properties,
-    pretty_names,
-    serialization_properties
+    pretty_names
 )
 
 

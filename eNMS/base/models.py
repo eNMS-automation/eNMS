@@ -6,7 +6,7 @@ from eNMS.base.properties import (
     cls_to_properties,
     property_types,
     boolean_properties,
-    serialization_properties
+    relationships as rel
 )
 
 
@@ -26,11 +26,12 @@ class Base(db.Model):
     def update(self, **kwargs):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            if property in serialization_properties:
-                value = fetch(serialization_properties[property], id=value)
-            elif property[:-1] in serialization_properties:
-                value = objectify(serialization_properties[property[:-1]], id=value)
-            if property in boolean_properties:
+            serial = rel.get(self.__tablename__, rel['Service'])
+            if property in serial:
+                value = fetch(serial[property], id=value)
+            elif property[:-1] in serial:
+                value = objectify(serial[property[:-1]], value)
+            elif property in boolean_properties:
                 value = kwargs[property] in ('y', 'on', 'false', 'true', True)
             elif 'regex' in property:
                 value = property in kwargs

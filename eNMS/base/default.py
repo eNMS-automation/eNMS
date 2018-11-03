@@ -104,7 +104,7 @@ def create_example_services():
             'type': 'configure_bgp_service',
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
-            'devices': [fetch('Device', name='Washington')],
+            'devices': [fetch('Device', name='Washington').id],
             'local_as': 100,
             'loopback': 'Lo100',
             'loopback_ip': '100.1.1.1',
@@ -126,7 +126,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_create_vrf_test',
             'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington')],
+            'devices': [fetch('Device', name='Washington').id],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -141,7 +141,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_vrf_test',
             'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington')],
+            'devices': [fetch('Device', name='Washington').id],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -155,7 +155,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_delete_vrf_test',
             'description': 'Delete VRF "test"',
             'waiting_time': 1,
-            'devices': [fetch('Device', name='Washington')],
+            'devices': [fetch('Device', name='Washington').id],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -170,7 +170,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_no_vrf_test',
             'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington')],
+            'devices': [fetch('Device', name='Washington').id],
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -198,8 +198,8 @@ def create_netmiko_workflow():
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
-            'source': workflow.jobs[x],
-            'destination': workflow.jobs[y]
+            'from': workflow.jobs[x].id,
+            'to': workflow.jobs[y].id
         })
     positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
     for index, (x, y) in enumerate(positions):
@@ -215,7 +215,7 @@ def create_napalm_workflow():
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington')],
+            'devices': [fetch('Device', name='Washington').id],
             'driver': 'eos',
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -228,7 +228,7 @@ def create_napalm_workflow():
             'name': 'Napalm eos Rollback',
             'driver': 'eos',
             'description': 'Rollback a configuration with Napalm eos',
-            'devices': [fetch('Device', name='Washington')],
+            'devices': [fetch('Device', name='Washington').id],
             'waiting_time': 0
         }
     ):
@@ -249,8 +249,8 @@ def create_napalm_workflow():
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
-            'source': workflow.jobs[x],
-            'destination': workflow.jobs[y]
+            'source': workflow.jobs[x].id,
+            'destination': workflow.jobs[y].id
         })
     positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
     for index, (x, y) in enumerate(positions):
@@ -266,7 +266,7 @@ def create_payload_transfer_workflow():
         'username': 'admin',
         'password': 'admin',
         'waiting_time': 0,
-        'devices': [fetch('Device', name='Washington')],
+        'devices': [fetch('Device', name='Washington').id],
         'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/{{device.name}}',
@@ -277,7 +277,7 @@ def create_payload_transfer_workflow():
         'type': 'napalm_getters_service',
         'description': f'Getter: {getter}',
         'waiting_time': 0,
-        'devices': [fetch('Device', name='Washington')],
+        'devices': [fetch('Device', name='Washington').id],
         'driver': 'eos',
         'content_match': '',
         'getters': [getter]
@@ -291,7 +291,7 @@ def create_payload_transfer_workflow():
         'type': 'swiss_army_knife_service',
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
-        'devices': [fetch('Device', name='Washington')]
+        'devices': [fetch('Device', name='Washington').id]
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)
@@ -323,8 +323,8 @@ def create_payload_transfer_workflow():
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow,
             'type': True,
-            'source': workflow.jobs[x],
-            'destination': workflow.jobs[y]
+            'source': workflow.jobs[x].id,
+            'destination': workflow.jobs[y].id
         })
 
 

@@ -251,15 +251,22 @@ def reset_workflow_logs(workflow_id):
     return jsonify(True)
 
 
-@post(bp, '/edit_workflow', 'Edit Automation Section')
-def edit_workflow():
+@post(bp, '/edit_workflow/<id>', 'Edit Automation Section')
+def edit_workflow(id):
     form = dict(request.form.to_dict())
     for property in boolean_properties:
         if property not in form:
             form[property] = 'off'
-    form['devices'] = objectify('Device', request.form.getlist('devices'))
-    form['pools'] = objectify('Pool', request.form.getlist('pools'))
-    return jsonify(factory('Workflow', **form).serialized)
+    workflow = fetch('Workflow', id=id)
+    if not workflow:
+        form['devices'] = objectify('Device', request.form.getlist('devices'))
+        form['pools'] = objectify('Pool', request.form.getlist('pools'))
+        return jsonify(factory('Workflow', **form).serialized)
+    else:
+        duplicated_workflow = factory('Workflow', **form)
+        for property in ('devices', 'pools', 'jobs', 'edges'):
+            setattr(duplicate_workflow, property, getattr(workflow, property))
+        return jsonify(duplicated_workflow.serialized)
 
 
 @post(bp, '/delete_workflow/<workflow_id>', 'Edit Automation Section')

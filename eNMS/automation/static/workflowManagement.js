@@ -91,7 +91,7 @@ function showModal() { // eslint-disable-line no-unused-vars
 function showWorkflowModal(id, duplicate) { // eslint-disable-line no-unused-vars
   call(`/automation/get/${id}`, function(workflow) {
     $('#title').text(`${duplicate ? 'Duplicate' : 'Edit'} Workflow`);
-    $('#workflow-modal-button').click(partial(editObject, duplicate));
+    $('#workflow-modal-button').click(partial(editObject, id));
     if (duplicate) {
       workflow.id = workflow.name = '';
     }
@@ -118,9 +118,8 @@ function showWorkflowModal(id, duplicate) { // eslint-disable-line no-unused-var
 /**
  * Edit a workflow.
  */
-function editObject(duplicate) { // eslint-disable-line no-unused-vars
-  const endpoint = duplicate ? 'duplicate' : 'edit';
-  fCall('/automation/${endpoint}_workflow', '#edit-form', function(workflow) {
+function editObject(id) { // eslint-disable-line no-unused-vars
+  fCall(`/automation/edit_workflow/${id}`, '#edit-form', function(workflow) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     addWorkflow(mode, workflow);
     const message = `Workflow ${workflow.name};

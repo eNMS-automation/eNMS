@@ -22,30 +22,32 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 /**
  * Add workflow to the datatable.
  * @param {mode} mode - Create or edit.
- * @param {properties} properties - Properties of the workflow.
+ * @param {workflow} workflow - Workflow.
  */
-function addWorkflow(mode, properties) {
+function addWorkflow(mode, workflow) {
   let values = [];
   for (let i = 0; i < fields.length; i++) {
-    values.push(`${properties[fields[i]]}`);
+    values.push(`${workflow[fields[i]]}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
+    onclick="showLogs('${workflow.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareLogs('${properties.id}')"></i>Compare</a></button>`,
+    onclick="compareLogs('${workflow.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showWorkflowModal('${properties.id}')">Edit</button>`,
+    onclick="showWorkflowModal('${workflow.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showDuplicateWorkflowModal('${workflow.id}')">Edit</button>`,
     `<button type="button" class="btn btn-success btn-xs"
-    onclick="runJob('${properties.id}')">Run</button>`,
+    onclick="runJob('${workflow.id}')">Run</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteWorkflow('${properties.id}')">Delete</button>`
+    onclick="deleteWorkflow('${workflow.id}')">Delete</button>`
   );
   if (mode == 'edit') {
-    table.row($(`#${properties.id}`)).data(values);
+    table.row($(`#${workflow.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${properties.id}`);
+    $(rowNode).attr('id', `${workflow.id}`);
   }
 }
 
@@ -87,9 +89,9 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the workflow to edit.
  */
 function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  call(`/automation/get/${id}`, function(properties) {
+  call(`/automation/get/${id}`, function(workflow) {
     $('#title').text(`Edit Workflow`);
-    for (const [property, value] of Object.entries(properties)) {
+    for (const [property, value] of Object.entries(workflow)) {
       const propertyType = propertyTypes[property] || 'str';
       if (propertyType.includes('bool')) {
         $(`#${property}`).prop('checked', value);
@@ -101,10 +103,10 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
     }
     $('.fs-option').removeClass('selected');
     $('.fs-label').text('Select devices');
-    properties.devices.map(
+    workflow.devices.map(
       (n) => $(`.fs-option[data-value='${n.id}']`).click()
     );
-    $('#pools').val(properties.pools.map((p) => p.id));
+    $('#pools').val(workflow.pools.map((p) => p.id));
     $(`#edit`).modal('show');
   });
 }
@@ -113,10 +115,10 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
  * Edit a workflow.
  */
 function editObject() { // eslint-disable-line no-unused-vars
-  fCall('/automation/edit_workflow', '#edit-form', function(properties) {
+  fCall('/automation/edit_workflow', '#edit-form', function(workflow) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-    addWorkflow(mode, properties);
-    const message = `Workflow ${properties.name};
+    addWorkflow(mode, workflow);
+    const message = `Workflow ${workflow.name};
     ${mode == 'edit' ? 'edited' : 'created'}.`;
     alertify.notify(message, 'success', 5);
     $(`#edit`).modal('hide');

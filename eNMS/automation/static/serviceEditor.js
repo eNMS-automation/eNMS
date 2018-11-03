@@ -44,7 +44,7 @@ function showServiceEditor() { // eslint-disable-line no-unused-vars
  */
 function editService(id, duplicate) {
   if (id) {
-    $('#title').text('${duplicate ? 'Duplicate' : 'Edit'} Service Instance');
+    $('#title').text(`${duplicate ? 'Duplicate' : 'Edit'} Service Instance`);
   }
   const url = `/automation/get_service/${id || $('#services').val()}`;
   call(url, function(result) {

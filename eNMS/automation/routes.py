@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from flask import jsonify, render_template, request, session
 from json import dumps
-from sqlalchemy.orm.session import make_transient
 
 from eNMS import db, scheduler
 from eNMS.base.classes import service_classes
@@ -227,12 +226,7 @@ def get_workflow(workflow_id):
 
 @post(bp, '/duplicate_workflow/<workflow_id>', 'Edit Automation Section')
 def duplicate_workflow(workflow_id):
-    workflow = fetch('Workflow', id=workflow_id)
-    db.session.expunge(workflow)  # expunge the object from session
-    make_transient(workflow)  # 
-    workflow.id = None
-    db.session.add(workflow)
-    return jsonify(workflow.serialized)
+    return jsonify(workflow_id)
 
 
 @post(bp, '/reset_workflow_logs/<workflow_id>', 'Edit Automation Section')

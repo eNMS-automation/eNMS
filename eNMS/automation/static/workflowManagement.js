@@ -39,7 +39,7 @@ function addWorkflow(mode, workflow) {
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showWorkflowModal('${workflow.id}')">Edit</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showWorkflowModal('${workflow.id}', true)">Duplicate</button>`,
+    onclick="showWorkflowModal('${workflow.id}')">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteWorkflow('${workflow.id}')">Delete</button>`
   );
@@ -88,13 +88,9 @@ function showModal() { // eslint-disable-line no-unused-vars
  * Open the workflow modal for editing.
  * @param {id} id - Id of the workflow to edit.
  */
-function showWorkflowModal(id, duplicate) { // eslint-disable-line no-unused-vars
+function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
   call(`/automation/get/${id}`, function(workflow) {
-    $('#title').text(`${duplicate ? 'Duplicate' : 'Edit'} Workflow`);
-    $('#workflow-modal-button').click(partial(editObject, id));
-    if (duplicate) {
-      workflow.id = workflow.name = '';
-    }
+    $('#title').text(`Edit Workflow`);
     for (const [property, value] of Object.entries(workflow)) {
       const propertyType = propertyTypes[property] || 'str';
       if (propertyType.includes('bool')) {
@@ -118,8 +114,8 @@ function showWorkflowModal(id, duplicate) { // eslint-disable-line no-unused-var
 /**
  * Edit a workflow.
  */
-function editObject(id) { // eslint-disable-line no-unused-vars
-  fCall(`/automation/edit_workflow/${id}`, '#edit-form', function(workflow) {
+function editObject() { // eslint-disable-line no-unused-vars
+  fCall('/automation/edit_workflow', '#edit-form', function(workflow) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     addWorkflow(mode, workflow);
     const message = `Workflow ${workflow.name};

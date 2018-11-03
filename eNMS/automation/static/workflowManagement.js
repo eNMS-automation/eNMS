@@ -34,12 +34,12 @@ function addWorkflow(mode, workflow) {
     onclick="showLogs('${workflow.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs"
     onclick="compareLogs('${workflow.id}')"></i>Compare</a></button>`,
+    `<button type="button" class="btn btn-success btn-xs"
+    onclick="runJob('${workflow.id}')">Run</button>`,
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showWorkflowModal('${workflow.id}')">Edit</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showDuplicateWorkflowModal('${workflow.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-success btn-xs"
-    onclick="runJob('${workflow.id}')">Run</button>`,
+    onclick="showDuplicateWorkflowModal('${workflow.id}')">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteWorkflow('${workflow.id}')">Delete</button>`
   );
@@ -82,6 +82,15 @@ function showModal() { // eslint-disable-line no-unused-vars
   $('#title').text('Create a New Workflow');
   $('#edit-form').trigger('reset');
   $('#edit').modal('show');
+}
+
+/**
+ * Open the name modal for workflow duplication.
+ */
+function showDuplicateWorkflowModal(id) { // eslint-disable-line no-unused-vars
+  jobId = id;
+  $('#name-modal').trigger('reset');
+  $('#name-modal').modal('show');
 }
 
 /**

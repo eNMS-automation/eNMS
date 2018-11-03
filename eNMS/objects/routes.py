@@ -108,7 +108,7 @@ def import_export():
 
 @post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
 def get_object(obj_type, id):
-    return jsonify(fetch(obj_type.capitalize(), id=id).serialized)
+    return jsonify(fetch(obj_type, id=id).serialized)
 
 
 @post(bp, '/connection/<id>', 'Connect to device')
@@ -151,16 +151,12 @@ def edit_object():
 
 @post(bp, '/delete/<obj_type>/<obj_id>', 'Edit Inventory Section')
 def delete_object(obj_type, obj_id):
-    return jsonify(delete(obj_type.capitalize(), id=obj_id))
+    return jsonify(delete(obj_type, id=obj_id))
 
 
 @post(bp, '/process_pool', 'Edit Inventory Section')
 def process_pool():
-    form = request.form.to_dict()
-    for property in boolean_properties:
-        if property not in form:
-            form[property] = 'off'
-    return jsonify(factory('Pool', **form).serialized)
+    return jsonify(factory('Pool', **request.form).serialized)
 
 
 @post(bp, '/get/pool/<pool_id>', 'Inventory Section')

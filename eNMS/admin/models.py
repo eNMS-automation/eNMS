@@ -20,7 +20,6 @@ class User(Base, UserMixin):
     name = Column(String, unique=True)
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     password = Column(String)
-    tasks = relationship('Task', back_populates='user')
 
     def update(self, **kwargs):
         if app.config['USE_VAULT']:

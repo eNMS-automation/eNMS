@@ -19,10 +19,9 @@ from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
 
 @get(bp, '/log_management', 'Logs Section')
 def log_management():
-    log_filtering_form = LogFilteringForm(request.form)
     return render_template(
         'log_management.html',
-        log_filtering_form=log_filtering_form,
+        log_filtering_form=LogFilteringForm(request.form),
         names=pretty_names,
         fields=('source', 'content'),
         logs=serialize('Log')
@@ -31,11 +30,9 @@ def log_management():
 
 @get(bp, '/log_automation', 'Logs Section')
 def syslog_automation():
-    log_automation_form = LogAutomationForm(request.form)
-    log_automation_form.jobs.choices = choices('Job')
     return render_template(
         'log_automation.html',
-        log_automation_form=log_automation_form,
+        log_automation_form=LogAutomationForm(request.form, 'Task'),
         names=pretty_names,
         fields=('name', 'source', 'content'),
         log_rules=serialize('LogRule')
@@ -50,14 +47,7 @@ def delete_log(log_id):
 @post(bp, '/filter_logs', 'Edit Logs Section')
 def filter_logs():
     logs = [log for log in serialize('Log') if all(
-        # if the regex property is not in the request, the
-        # regex box is unticked and we only check that the values of the
-        # filters are contained in the values of the log
         request.form[prop] in str(val) if not prop + 'regex' in request.form
-        # if it is ticked, we use re.search to check that the value
-        # of the device property matches the regular expression,
-        # providing that the property field in the form is not empty
-        # (empty field <==> property ignored)
         else search(request.form[prop], str(val)) for prop, val in log.items()
         if prop in request.form and request.form[prop]
     )]

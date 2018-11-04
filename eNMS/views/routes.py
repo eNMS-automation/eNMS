@@ -25,10 +25,6 @@ from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 @get(bp, '/<view_type>_view', 'Views Section', ['GET', 'POST'])
 def view(view_type):
     devices = fetch_all('Device')
-    add_link_form = AddLink(request.form)
-    form_devices = [(l.name, l.name) for l in fetch_all('Device')]
-    add_link_form.source_name.choices = form_devices
-    add_link_form.destination_name.choices = form_devices
     labels = {'device': 'name', 'link': 'name'}
     if 'view_options' in request.form:
         labels = {
@@ -52,7 +48,7 @@ def view(view_type):
         view_options_form=ViewOptionsForm(request.form),
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
-        add_link_form=add_link_form,
+        add_link_form=AddLink(request.form, 'Link'),
         device_fields=device_public_properties,
         link_fields=link_public_properties,
         labels=labels,

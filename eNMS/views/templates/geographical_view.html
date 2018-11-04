@@ -7,7 +7,7 @@
   <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.css') }}" rel="stylesheet">
   <!-- Context Menu -->
   <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
-  {% if view == 'markercluster' %}
+  {% if view == '2DC' %}
     <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.css') }}" rel="stylesheet">
     <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
   {% endif %}
@@ -28,14 +28,14 @@
         <a class="menu-submenu menu-view" tabindex="-1" href="#">View type<span class="caret-right"></span></a>
         <ul class="dropdown-menu">
           {% if view == 'leaflet' %}
-            <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
-            <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
-          {% elif view == 'markercluster' %}
+            <li onclick="$('#view-type').val('2DC'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
+            <li onclick="$('#view-type').val('3D'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
+          {% elif view == '2DC' %}
             <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
-            <li onclick="$('#view-type').val('glearth'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
-          {% elif view == 'glearth' %}
+            <li onclick="$('#view-type').val('3D'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
+          {% elif view == '3D' %}
             <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
-            <li onclick="$('#view-type').val('markercluster'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
+            <li onclick="$('#view-type').val('2DC'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
           {% endif %}
         </li>
       </ul>
@@ -54,7 +54,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
-              {% if view == 'glearth' %}
+              {% if view == '3D' %}
                 <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
                   <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box">EGRHTFEFGR</p></strong>
                 </div>
@@ -68,7 +68,7 @@
                   </select>
                 </div>
               </div>
-              {% if view == 'glearth' %}
+              {% if view == '3D' %}
                 <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
               {% else %}
                 <div id="mapid"></div>
@@ -99,13 +99,13 @@
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='geographicalView.js') }}"></script>
-  {% if view == 'glearth' %}
+  {% if view == '3D' %}
     <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
     <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
   {% else %}
     <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.js') }}"></script>
-    {% if view == 'markercluster' %}
-      <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+    {% if view == '2DC' %}
+      <script src="{{ url_for('views_blueprint.static', filename='leaflet-2DC/leaflet.markercluster.min.js') }}"></script>
     {% endif %}
     <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
   {% endif %}

@@ -372,7 +372,7 @@ relationships = {
     },
     'Task': {
         'job': 'Job'
-    }
+    },
     'Workflow': {
         'edge': 'WorkflowEdge',
         'job': 'Job',
@@ -382,7 +382,7 @@ relationships = {
     'WorkflowEdge': {
         'source': 'Job',
         'destination': 'Job'
-    },
+    }
 }
 
 device_import_properties = device_public_properties + [

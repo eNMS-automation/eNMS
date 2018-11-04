@@ -36,16 +36,13 @@ from eNMS.automation.helpers import scheduler_job
 
 @get(bp, '/service_management', 'Automation Section')
 def service_management():
-    service_form = JobForm(request.form)
-    service_form.devices.choices = choices('Device')
-    service_form.pools.choices = choices('Pool')
     return render_template(
         'service_management.html',
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,
         names=pretty_names,
         property_types={k: str(v) for k, v in property_types.items()},
-        service_form=service_form,
+        service_form=JobForm(request.form, 'Service'),
         services_classes=list(service_classes),
         services=serialize('Service')
     )
@@ -53,9 +50,6 @@ def service_management():
 
 @get(bp, '/workflow_management', 'Automation Section')
 def workflow_management():
-    workflow_creation_form = WorkflowForm(request.form, 'Workflow')
-    workflow_creation_form.devices.choices = choices('Device')
-    workflow_creation_form.pools.choices = choices('Pool')
     return render_template(
         'workflow_management.html',
         compare_logs_form=CompareLogsForm(request.form),
@@ -63,29 +57,22 @@ def workflow_management():
         fields=workflow_table_properties,
         property_types={k: str(v) for k, v in property_types.items()},
         workflows=serialize('Workflow'),
-        workflow_creation_form=workflow_creation_form
+        workflow_creation_form=WorkflowForm(request.form, 'Workflow')
     )
 
 
 @get(bp, '/workflow_builder', 'Automation Section')
 def workflow_builder():
-    add_job_form = AddJobForm(request.form)
-    add_job_form.job.choices = choices('Job')
-    workflow_builder_form = WorkflowBuilderForm(request.form)
-    workflow_builder_form.workflow.choices = choices('Workflow')
-    service_form = JobForm(request.form)
-    service_form.devices.choices = choices('Device')
-    service_form.pools.choices = choices('Pool')
     workflow = fetch('Workflow', id=session.get('workflow', None))
     return render_template(
         'workflow_builder.html',
         workflow=workflow.serialized if workflow else None,
-        add_job_form=add_job_form,
-        workflow_builder_form=workflow_builder_form,
+        add_job_form=AddJobForm(request.form, 'Service'),
+        workflow_builder_form=WorkflowBuilderForm(request.form, 'Service'),
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,
         property_types={k: str(v) for k, v in property_types.items()},
-        service_form=service_form,
+        service_form=JobForm(request.form, 'Service'),
         services_classes=list(service_classes)
     )
 

@@ -4,7 +4,6 @@ alertify: false
 call: false
 d3: false
 graph: false
-labels: false
 partial: false
 showModal: false
 showObjectModal: false
@@ -132,7 +131,7 @@ node.append('text')
   .attr('dx', 8)
   .attr('dy', '.35em')
   .text(function(d) {
-    return d[labels.device];
+    return d['name'];
   });
 
 force.on('tick', function() {

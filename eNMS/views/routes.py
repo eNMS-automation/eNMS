@@ -19,7 +19,7 @@ from eNMS.base.properties import (
 )
 from eNMS.objects.forms import AddDevice, AddLink
 from eNMS.views import bp, styles
-from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
+from eNMS.views.forms import GoogleEarthForm
 
 
 @get(bp, '/<view_type>_view', 'Views Section', ['GET', 'POST'])
@@ -30,15 +30,14 @@ def view(view_type):
         pools=fetch_all('Pool'),
         parameters=get_one('Parameters').serialized,
         view=request.form.get(
-            'view',('3D', ('2D', '2DC'))[len(d) > 2000][len(d) > 50]
+            'view',
+            ('3D', ('2D', '2DC')[len(devices) > 2000])[len(devices) > 50]
         ),
-        view_options_form=ViewOptionsForm(request.form),
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form, 'Link'),
         device_fields=device_public_properties,
         link_fields=link_public_properties,
-        labels=labels,
         names=pretty_names,
         device_subtypes=device_subtypes,
         link_colors=link_subtype_to_color,

@@ -3,7 +3,6 @@ global
 alertify: false
 call: false
 L: false
-labels: false
 layers: false
 links: false
 link_colors: false
@@ -99,7 +98,7 @@ for (let i = 0; i < devices.length; i++) {
     showObjectModal('device', this.device_id);
   });
 
-  marker.bindTooltip(device[labels.device], {
+  marker.bindTooltip(device['name'], {
     permanent: false,
   });
 
@@ -134,7 +133,7 @@ for (let i = 0; i < links.length; i++) {
   polyline.on('dblclick', function(e) {
     showObjectModal('link', this.link_id);
   });
-  polyline.bindTooltip(link[labels.link], {
+  polyline.bindTooltip(link['name'], {
     permanent: false,
   });
   if (view == 'leaflet') {

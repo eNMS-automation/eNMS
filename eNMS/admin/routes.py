@@ -116,21 +116,6 @@ def create_new_user():
     return jsonify(factory('User', **user_data).serialized)
 
 
-@post(bp, '/process_user', 'Edit Admin Section')
-def process_user():
-    return jsonify(factory('User', **request.form).serialized)
-
-
-@post(bp, '/get/<user_id>', 'Admin Section')
-def get_user(user_id):
-    return jsonify(fetch('User', id=user_id).serialized)
-
-
-@post(bp, '/delete/<user_id>', 'Edit Admin Section')
-def delete_user(user_id):
-    return jsonify(delete('User', id=user_id))
-
-
 @post(bp, '/save_tacacs_server', 'Edit parameters')
 def save_tacacs_server():
     classes['TacacsServer'].query.delete()

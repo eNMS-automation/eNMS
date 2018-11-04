@@ -67,7 +67,7 @@ def workflow_builder():
     return render_template(
         'workflow_builder.html',
         workflow=workflow.serialized if workflow else None,
-        add_job_form=AddJobForm(request.form, 'Service'),
+        add_job_form=AddJobForm(request.form, 'Workflow'),
         workflow_builder_form=WorkflowBuilderForm(request.form, 'Service'),
         compare_logs_form=CompareLogsForm(request.form),
         names=pretty_names,

@@ -42,30 +42,30 @@
               <div class="x_title">
                 <h4 class="text-center">Geographical Parameters</h4>
               </div><br>
-              <div class="form-group" style="height: 250px">
-                {% for field in geographical_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-              <div class="form-group" style="height: 250px">
-                {% for field in gotty_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-              <div class="form-group" style="height: 250px">
-                {% for field in notification_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
+              {% for field in geographical_parameters_form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(class="form-control required", value=parameters[field.name]) }}
+                </div><br><br><br>
+              {% endfor %}
+              <div class="x_title">
+                <h4 class="text-center">SSH Terminal Parameters</h4>
+              </div><br>
+              {% for field in gotty_parameters_form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(class="form-control required", value=parameters[field.name]) }}
+                </div><br><br><br>
+              {% endfor %}
+              <div class="x_title">
+                <h4 class="text-center">Notification Parameters</h4>
+              </div><br>
+              {% for field in notification_parameters_form if field.widget.input_type != 'hidden'  %}
+                <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  {{ field(class="form-control", value=parameters[field.name]) }}
+                </div><br><br><br>
+              {% endfor %}
                 <label>Select a pool for database filtering :</label>
                 <div class="form-group" style="height: 250px">
                   {{ database_filtering_form.pool(class="form-control") }}

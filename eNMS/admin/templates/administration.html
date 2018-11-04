@@ -12,60 +12,67 @@
       <div class="row">
         <div class="col-md-12 col-xs-12">
           <div class="x_panel">
-            <div class="x_title">
-              <h4 class="text-center">TACACS+ server</h4>
-            </div>
+
             <div class="x_content">
-
-              {% for field in tacacs_form if field.widget.input_type != 'hidden'  %}
-                <label class="control-label col-md-2 col-sm-2 col-xs-12 col-md-offset-1">{{ field.label }}</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  {% if tacacs_server %}
-                    {{ field(class="form-control required", value=tacacs_server[field.name]) }}
-                  {% else %}
-                    {{ field(class="form-control required", placeholder=field.label.text) }}
-                  {% endif %}
-                </div><br><br><br>
-              {% endfor %}
-              {% for field in syslog_form if field.widget.input_type != 'hidden'  %}
-                <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                  {% if syslog_server %}
-                    {{ field(class="form-control required", value=syslog_server[field.name]) }}
-                  {% else %}
-                    {{ field(class="form-control required", placeholder=field.label.text) }}
-                  {% endif %}
-                </div><br><br><br>
-              {% endfor %}
-
-              <div class="form-group" style="height: 250px">
-                {% for field in geographical_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", value=parameters[field.name]) }}
+              <div class="col-md-8 col-xs-8 col-md-offset-2">
+                <div class="x_title">
+                  <h4 class="text-center">TACACS+ Server</h4>
+                </div><br>
+                {% for field in tacacs_form if field.widget.input_type != 'hidden'  %}
+                  <label class="control-label col-md-2 col-sm-2 col-xs-12 col-md-offset-1">{{ field.label }}</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {% if tacacs_server %}
+                      {{ field(class="form-control required", value=tacacs_server[field.name]) }}
+                    {% else %}
+                      {{ field(class="form-control required", placeholder=field.label.text) }}
+                    {% endif %}
                   </div><br><br><br>
                 {% endfor %}
-              </div>
-              <div class="form-group" style="height: 250px">
-                {% for field in gotty_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", value=parameters[field.name]) }}
+                <div class="x_title">
+                  <h4 class="text-center">Syslog Server</h4>
+                </div><br>
+                {% for field in syslog_form if field.widget.input_type != 'hidden'  %}
+                  <label class="control-label col-md-2 col-sm-2 col-xs-12 col-md-offset-1">{{ field.label }}</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {% if syslog_server %}
+                      {{ field(class="form-control required", value=syslog_server[field.name]) }}
+                    {% else %}
+                      {{ field(class="form-control required", placeholder=field.label.text) }}
+                    {% endif %}
                   </div><br><br><br>
                 {% endfor %}
-              </div>
-              <div class="form-group" style="height: 250px">
-                {% for field in notification_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-                <label>Select a pool for database filtering :</label>
-                <div class="form-group" style="height: 250px">
-                  {{ database_filtering_form.pool(class="form-control") }}
+                <div class="x_title">
+                  <h4 class="text-center">Geographical Parameters</h4>
                 </div>
+                <div class="form-group" style="height: 250px">
+                  {% for field in geographical_parameters_form if field.widget.input_type != 'hidden'  %}
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      {{ field(class="form-control required", value=parameters[field.name]) }}
+                    </div><br><br><br>
+                  {% endfor %}
+                </div>
+                <div class="form-group" style="height: 250px">
+                  {% for field in gotty_parameters_form if field.widget.input_type != 'hidden'  %}
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      {{ field(class="form-control required", value=parameters[field.name]) }}
+                    </div><br><br><br>
+                  {% endfor %}
+                </div>
+                <div class="form-group" style="height: 250px">
+                  {% for field in notification_parameters_form if field.widget.input_type != 'hidden'  %}
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      {{ field(class="form-control", value=parameters[field.name]) }}
+                    </div><br><br><br>
+                  {% endfor %}
+                </div>
+                  <label>Select a pool for database filtering :</label>
+                  <div class="form-group" style="height: 250px">
+                    {{ database_filtering_form.pool(class="form-control") }}
+                  </div>
+              </div>
             </div>
           </div>
         </div>

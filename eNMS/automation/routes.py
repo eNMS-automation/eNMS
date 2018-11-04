@@ -53,7 +53,7 @@ def service_management():
 
 @get(bp, '/workflow_management', 'Automation Section')
 def workflow_management():
-    workflow_creation_form = WorkflowForm(request.form)
+    workflow_creation_form = WorkflowForm(request.form, 'Workflow')
     workflow_creation_form.devices.choices = choices('Device')
     workflow_creation_form.pools.choices = choices('Pool')
     return render_template(

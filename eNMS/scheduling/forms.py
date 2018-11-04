@@ -1,8 +1,9 @@
-from flask_wtf import FlaskForm
 from wtforms import HiddenField, SelectField, TextField
 
+from eNMS.base.models import BaseForm
 
-class SchedulingForm(FlaskForm):
+
+class SchedulingForm(BaseForm):
     id = HiddenField()
     start_date = TextField()
     end_date = TextField()

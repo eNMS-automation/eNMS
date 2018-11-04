@@ -1,5 +1,6 @@
-from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, SelectMultipleField, TextField
+
+from eNMS.base.models import BaseForm
 
 
 def configure_form(cls):
@@ -11,7 +12,7 @@ def configure_form(cls):
 
 
 @configure_form
-class LogFilteringForm(FlaskForm):
+class LogFilteringForm(BaseForm):
     pass
 
 

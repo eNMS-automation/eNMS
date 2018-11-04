@@ -116,6 +116,21 @@ def create_new_user():
     return jsonify(factory('User', **user_data).serialized)
 
 
+@post(bp, '/process_user', 'Edit Admin Section')
+def process_user():
+    return jsonify(factory('User', **request.form).serialized)
+
+
+@post(bp, '/get/<user_id>', 'Admin Section')
+def get_user(user_id):
+    return jsonify(fetch('User', id=user_id).serialized)
+
+
+@post(bp, '/delete/<user_id>', 'Edit Admin Section')
+def delete_user(user_id):
+    return jsonify(delete('User', id=user_id))
+
+
 @post(bp, '/save_tacacs_server', 'Edit parameters')
 def save_tacacs_server():
     classes['TacacsServer'].query.delete()
@@ -132,22 +147,8 @@ def save_syslog_server():
     return jsonify(True)
 
 
-@post(bp, '/save_geographical_parameters', 'Edit parameters')
-def save_geographical_parameters():
-    get_one('Parameters').update(**request.form.to_dict())
-    db.session.commit()
-    return jsonify(True)
-
-
-@post(bp, '/save_gotty_parameters', 'Edit parameters')
-def save_gotty_parameters():
-    get_one('Parameters').update(**request.form.to_dict())
-    db.session.commit()
-    return jsonify(True)
-
-
-@post(bp, '/save_notification_parameters', 'Edit parameters')
-def save_notification_parameters():
+@post(bp, '/save_parameters', 'Edit parameters')
+def save_parameters():
     get_one('Parameters').update(**request.form.to_dict())
     db.session.commit()
     return jsonify(True)

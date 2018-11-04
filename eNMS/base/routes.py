@@ -28,21 +28,6 @@ def dashboard():
     )
 
 
-@post(bp, '/process/<cls>', 'Edit Admin Section')
-def process_instance(cls):
-    return jsonify(factory(cls, **request.form).serialized)
-
-
-@post(bp, '/get/<cls>/<id>', 'Admin Section')
-def get_instance(id):
-    return jsonify(fetch(cls, id=user_id).serialized)
-
-
-@post(bp, '/delete/<user_id>', 'Edit Admin Section')
-def delete_instance(user_id):
-    return jsonify(delete('User', id=user_id))
-
-
 @post(bp, '/counters/<property>/<type>')
 def get_counters(property, type):
     objects = fetch_all(type)

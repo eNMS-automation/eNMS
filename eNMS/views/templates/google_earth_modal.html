@@ -1,30 +1,3 @@
-<div id="filters" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title">View options</h4>
-      </div>
-      <form data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-        <div class="modal-body">
-          <div class="form-group">
-            <h5 class="modal-title">Labels</h5><br>
-            {{ view_options_form.device_label(id="device_label", class="form-control") }}<br>
-            {{ view_options_form.link_label(id="link_label", class="form-control") }}
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="text-center">
-            <button type="submit" name="view_options" class="btn btn-success">Submit</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <div id="google-earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

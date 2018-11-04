@@ -1,17 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, SelectField, TextField
-
-from eNMS.base.properties import (
-    link_public_properties,
-    device_public_properties
-)
-
-
-class ViewOptionsForm(FlaskForm):
-    device_label_choices = [(p, p) for p in device_public_properties]
-    device_label = SelectField(choices=device_label_choices)
-    link_label_choices = [(p, p) for p in link_public_properties]
-    link_label = SelectField(choices=link_label_choices)
+from wtforms import IntegerField, TextField
 
 
 class GoogleEarthForm(FlaskForm):

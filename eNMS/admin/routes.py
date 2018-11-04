@@ -79,8 +79,6 @@ def logout():
 
 @get(bp, '/administration', 'Admin Section')
 def admninistration():
-    database_filtering_form = DatabaseFilteringForm(request.form)
-    database_filtering_form.pool.choices = choices('Pool')
     try:
         tacacs_server = get_one('TacacsServer')
     except NoResultFound:
@@ -91,7 +89,6 @@ def admninistration():
         syslog_server = None
     return render_template(
         'administration.html',
-        database_filtering_form=database_filtering_form,
         form=Form(request.form),
         parameters=get_one('Parameters'),
 

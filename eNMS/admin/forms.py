@@ -49,4 +49,11 @@ class TacacsServerForm(BaseForm):
     mattermost_url = TextField('Mattermost URL')
     mattermost_channel = TextField()
     pool = SelectField(choices=())
-    # categories = (
+    categories = {
+        'TACACS+ Server': (
+            'tacacs_ip_address',
+            'tacacs_password',
+            'tacacs_port',
+            'tacacs_timeout'
+        ),
+    }

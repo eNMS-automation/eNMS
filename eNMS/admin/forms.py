@@ -33,15 +33,15 @@ class AddUser(BaseForm):
 
 
 class TacacsServerForm(BaseForm):
-    ip_address = TextField('IP address')
-    password = PasswordField()
-    port = IntegerField(default=49)
-    timeout = IntegerField(default=10)
-
+    tacacs_ip_address = TextField('IP address')
+    tacacs_password = PasswordField()
+    tacacs_port = IntegerField(default=49)
+    tacacs_timeout = IntegerField(default=10)
+    syslog_ip_address = TextField('IP address', default='0.0.0.0')
+    syslog_port = IntegerField(default=514)
 
 class SyslogServerForm(BaseForm):
-    ip_address = TextField('IP address', default='0.0.0.0')
-    port = IntegerField(default=514)
+
 
 
 class GeographicalParametersForm(BaseForm):

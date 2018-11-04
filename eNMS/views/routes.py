@@ -16,7 +16,7 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
 
-@get(bp, '/<view_type>_view', 'Views Section')
+@get(bp, '/<view_type>_view', 'Views Section', ['GET', 'POST'])
 def view(view_type):
     devices = fetch_all('Device')
     return render_template(
@@ -30,7 +30,6 @@ def view(view_type):
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form, 'Link'),
-        names=pretty_names,
         device_subtypes=device_subtypes,
         link_colors=link_subtype_to_color,
         name_to_id={d.name: id for id, d in enumerate(devices)},

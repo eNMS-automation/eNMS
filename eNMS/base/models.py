@@ -33,7 +33,7 @@ class Base(db.Model):
             elif property[:-1] in serial:
                 value = objectify(serial[property[:-1]], value)
             elif property in boolean_properties:
-                value = kwargs[property] in ('y', 'on', 'false', 'true', True)
+                value = kwargs[property] != 'off'
             elif 'regex' in property:
                 value = property in kwargs
             elif property_type == dict:

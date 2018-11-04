@@ -19,20 +19,16 @@ from eNMS.scheduling.forms import SchedulingForm
 
 @get(bp, '/task_management', 'Scheduling Section')
 def task_management():
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = choices('Job')
     return render_template(
         f'task_management.html',
         fields=task_public_properties,
         tasks=serialize('Task'),
-        scheduling_form=scheduling_form
+        scheduling_form=SchedulingForm(request.form, 'Job')
     )
 
 
 @get(bp, '/calendar', 'Scheduling Section')
 def calendar():
-    scheduling_form = SchedulingForm(request.form)
-    scheduling_form.job.choices = choices('Job')
     tasks = {}
     for task in fetch_all('Task'):
         # javascript dates range from 0 to 11, we must account for that by
@@ -54,7 +50,7 @@ def calendar():
     return render_template(
         'calendar.html',
         tasks=tasks,
-        scheduling_form=scheduling_form
+        scheduling_form=SchedulingForm(request.form, 'Job')
     )
 
 

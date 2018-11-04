@@ -40,36 +40,12 @@ function queryNetbox() { // eslint-disable-line no-unused-vars
   });
 }
 
-/**
- * Save geographical parameters.
- */
-function saveGeographicalParameters() { // eslint-disable-line no-unused-vars
-  fCall(
-    '/admin/save_geographical_parameters',
-    '#geographical-parameters-form',
-    function() {
-      alertify.notify('Geographical parameters saved.', 'success', 5);
-    }
-  );
-}
-
-/**
- * Save GoTTY parameters.
- */
-function saveGottyParameters() { // eslint-disable-line no-unused-vars
-  fCall('/admin/save_gotty_parameters', '#gotty-parameters-form', function() {
-    alertify.notify('GoTTY parameters saved.', 'success', 5);
-  });
-}
 
 /**
  * Save notification parameters.
  */
-function saveNotificationParameters() { // eslint-disable-line no-unused-vars
-  fCall(
-    '/admin/save_notification_parameters',
-    '#notification-parameters-form',
-    function() {
+function saveParameters() { // eslint-disable-line no-unused-vars
+  fCall('/admin/save_parameters', '#parameters-form', function() {
       alertify.notify('Notification parameters saved.', 'success', 5);
     }
   );

@@ -10,19 +10,13 @@ from eNMS.base.helpers import (
     post,
     serialize
 )
-from eNMS.base.properties import (
-    device_public_properties,
-    device_subtypes,
-    link_public_properties,
-    link_subtype_to_color,
-    pretty_names
-)
+from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.objects.forms import AddDevice, AddLink
 from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
 
-@get(bp, '/<view_type>_view', 'Views Section', ['GET', 'POST'])
+@get(bp, '/<view_type>_view', 'Views Section')
 def view(view_type):
     devices = fetch_all('Device')
     return render_template(
@@ -36,8 +30,6 @@ def view(view_type):
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form, 'Link'),
-        device_fields=device_public_properties,
-        link_fields=link_public_properties,
         names=pretty_names,
         device_subtypes=device_subtypes,
         link_colors=link_subtype_to_color,

@@ -31,7 +31,7 @@ const map = L.map('mapid').setView(
 const osmLayer = L.tileLayer(layers['osm']);
 map.addLayer(osmLayer);
 let currentLayer = osmLayer;
-if (view == 'markercluster') {
+if (view == '2DC') {
   markers = L.markerClusterGroup();
 }
 

@@ -168,19 +168,6 @@ $('#select-filters').on('change', function() {
   });
 });
 
-let action = {
-  'Parameters': partial(showModal, 'filters'),
-  'Add new task': partial(showModal, 'scheduling'),
-};
-
-$('#logical_view').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function(invokedOn, selectedMenu) {
-    let row = selectedMenu.text();
-    action[row]();
-  },
-});
-
 (function() {
   $('#doc-link').attr(
     'href',

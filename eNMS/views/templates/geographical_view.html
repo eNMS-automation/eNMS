@@ -85,8 +85,6 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    let device_fields = {{ device_fields|tojson|safe }};
-    let link_fields = {{ link_fields|tojson|safe }};
     let devices = {{ devices|tojson|safe }};
     let links = {{ links|tojson|safe }};
     let device_subtypes = {{ device_subtypes|tojson|safe }};
@@ -105,7 +103,7 @@
   {% else %}
     <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.js') }}"></script>
     {% if view == '2DC' %}
-      <script src="{{ url_for('views_blueprint.static', filename='leaflet-2DC/leaflet.markercluster.min.js') }}"></script>
+      <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
     {% endif %}
     <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
   {% endif %}

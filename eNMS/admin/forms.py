@@ -39,28 +39,14 @@ class TacacsServerForm(BaseForm):
     tacacs_timeout = IntegerField(default=10)
     syslog_ip_address = TextField('IP address', default='0.0.0.0')
     syslog_port = IntegerField(default=514)
-
-class SyslogServerForm(BaseForm):
-
-
-
-class GeographicalParametersForm(BaseForm):
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
-
-
-class GottyParametersForm(BaseForm):
     gotty_start_port = FloatField('Start port')
     gotty_end_port = FloatField('End port')
-
-
-class NotificationParametersForm(BaseForm):
     mail_sender = TextField()
     mail_recipients = TextField()
     mattermost_url = TextField('Mattermost URL')
     mattermost_channel = TextField()
-
-
-class DatabaseFilteringForm(BaseForm):
     pool = SelectField(choices=())
+    # categories = (

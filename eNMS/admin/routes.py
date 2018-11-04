@@ -15,13 +15,8 @@ from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
-    DatabaseFilteringForm,
-    GeographicalParametersForm,
-    GottyParametersForm,
+    Form,
     LoginForm,
-    NotificationParametersForm,
-    SyslogServerForm,
-    TacacsServerForm,
 )
 from eNMS.base.classes import classes
 from eNMS.base.helpers import (
@@ -97,12 +92,9 @@ def admninistration():
     return render_template(
         'administration.html',
         database_filtering_form=database_filtering_form,
-        geographical_parameters_form=GeographicalParametersForm(request.form),
-        gotty_parameters_form=GottyParametersForm(request.form),
-        notification_parameters_form=NotificationParametersForm(request.form),
+        form=Form(request.form),
         parameters=get_one('Parameters'),
-        tacacs_form=TacacsServerForm(request.form),
-        syslog_form=SyslogServerForm(request.form),
+
         tacacs_server=tacacs_server,
         syslog_server=syslog_server
     )

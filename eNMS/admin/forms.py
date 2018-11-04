@@ -32,7 +32,7 @@ class AddUser(BaseForm):
     permissions = SelectMultipleField(choices=permission_choices)
 
 
-class TacacsServerForm(BaseForm):
+class Form(BaseForm):
     tacacs_ip_address = TextField('IP address')
     tacacs_password = PasswordField()
     tacacs_port = IntegerField(default=49)

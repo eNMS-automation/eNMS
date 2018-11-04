@@ -13,14 +13,18 @@
         <div class="x_panel">
           <div class="x_content">
             <div class="col-md-10 col-xs-10 col-md-offset-1">
-              <div class="x_title">
-                <h4 class="text-center">TACACS+ Server</h4>
-              </div><br>
-              {% for field in tacacs_form if field.widget.input_type != 'hidden'  %}
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                  {{ field(class="form-control required", placeholder=field.label.text) }}
-                </div><br><br><br>
+
+              {% for title, properties in form.categories.items() %}
+                <div class="x_title">
+                  <h4 class="text-center">{{ title }}</h4>
+                </div><br>
+                {% for property in property %}
+                  {% set field = getattr(form, property) %}
+                  <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    {{ field(class="form-control required", placeholder=field.label.text) }}
+                  </div><br><br><br>
+                {% endfor %}
               {% endfor %}
           </div>
         </div>

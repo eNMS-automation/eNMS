@@ -25,21 +25,10 @@ from eNMS.views.forms import GoogleEarthForm, ViewOptionsForm
 @get(bp, '/<view_type>_view', 'Views Section', ['GET', 'POST'])
 def view(view_type):
     devices = fetch_all('Device')
-    labels = {'device': 'name', 'link': 'name'}
-    if 'view_options' in request.form:
-        labels = {
-            'device': request.form['device_label'],
-            'link': request.form['link_label']
-        }
-    if len(devices) < 50:
-        view = 'glearth'
-    elif len(devices) < 2000:
-        view = 'leaflet'
-    else:
-        view = 'markercluster'
-    if 'view' in request.form:
-        view = request.form['view']
-    name_to_id = {device.name: id for id, device in enumerate(devices)}
+    view = request.form.get(
+        'view',
+        ('3D', ('2D', 'Cluster'))[len(devices) > 2000][len(devices) > 50]
+    )
     return render_template(
         f'{view_type}_view.html',
         pools=fetch_all('Pool'),
@@ -55,7 +44,7 @@ def view(view_type):
         names=pretty_names,
         device_subtypes=device_subtypes,
         link_colors=link_subtype_to_color,
-        name_to_id=name_to_id,
+        name_to_id={d.name: id for id, d in enumerate(devices)},
         devices=serialize('Device'),
         links=serialize('Link')
     )

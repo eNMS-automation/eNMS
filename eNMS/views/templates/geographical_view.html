@@ -17,7 +17,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  {% include 'gis_modals.html' %}
+  {% include 'google_earth_modal.html' %}
   {% include 'device_modal.html' %}
   {% include 'link_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
@@ -40,9 +40,6 @@
         </li>
       </ul>
       <li><a tabindex="-1" href="#">Export to Google Earth</a></li>
-      {% if view != 'glearth' %}
-        <li><a tabindex="-1" href="#">Parameters</a></li>
-      {% endif %}
       <li class="dropdown-submenu">
         <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
         <ul class="dropdown-menu">
@@ -92,7 +89,6 @@
     let link_fields = {{ link_fields|tojson|safe }};
     let devices = {{ devices|tojson|safe }};
     let links = {{ links|tojson|safe }};
-    let labels = {{ labels|tojson|safe }};
     let device_subtypes = {{ device_subtypes|tojson|safe }};
     let link_colors = {{ link_colors|tojson|safe }};
     let parameters = {{ parameters|tojson|safe }};

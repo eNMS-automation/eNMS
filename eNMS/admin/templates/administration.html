@@ -75,15 +75,15 @@
     </div>
     <!-- end row -->
     <div class="row">
-      <form id="parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-        <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-xs-12">
+        <form id="parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
           <div class="x_panel">
             <div class="x_title">
               <h4 class="text-center">Geographical parameters</h4>
             </div>
             <div class="x_content">
               <div class="form-group" style="height: 250px">
-                {% for field in geographical_parameters_form if field.widget.input_type != 'hidden'  %}
+                {% for field in parameters_form if field.widget.input_type != 'hidden'  %}
                   <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
                   <div class="col-md-8 col-sm-8 col-xs-12">
                     {{ field(class="form-control required", value=parameters[field.name]) }}
@@ -99,55 +99,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h4 class="text-center">GoTTY parameters</h4>
-            </div>
-            <div class="x_content">
-              <div class="form-group" style="height: 250px">
-                {% for field in gotty_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control required", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-4">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="saveGottyParameters()">Save changes</button>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h4 class="text-center">Notification parameters</h4>
-            </div>
-            <div class="x_content">
-              <div class="form-group" style="height: 250px">
-                {% for field in notification_parameters_form if field.widget.input_type != 'hidden'  %}
-                  <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control", value=parameters[field.name]) }}
-                  </div><br><br><br>
-                {% endfor %}
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-4">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="saveNotificationParameters()">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
       <div class="col-md-6 col-xs-12">
         <div class="x_panel">
           <div class="x_title">

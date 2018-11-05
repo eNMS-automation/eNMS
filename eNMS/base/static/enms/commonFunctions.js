@@ -131,7 +131,8 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
     }
     for (const [property, value] of Object.entries(instance)) {
       const propertyType = propertyTypes[property] || 'str';
-      if (propertyType.includes('bool')) {
+      console.log(property, value)
+      if (propertyType.includes('bool') || property.includes('regex')) {
         $(`#${property}`).prop('checked', value);
       } else if (propertyType.includes('dict')) {
         $(`#${property}`).val(value ? JSON.stringify(value): '{}');
@@ -142,7 +143,6 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
     $(`#edit-${type}`).modal('show');
   });
 }
-
 
 /**
  * Create or edit instance.

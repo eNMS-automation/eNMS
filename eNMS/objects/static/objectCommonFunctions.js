@@ -110,16 +110,6 @@ function addObjectToTable(mode, type, obj) {
 }
 
 /**
- * Display the object modal.
- * @param {type} type - Node or link.
- */
-function showObjectTypeModal(type) { // eslint-disable-line no-unused-vars
-  $('#title').text(`Create a New ${capitalize(type)}`);
-  $(`#edit-${type}-form`).trigger('reset');
-  $(`#edit-${type}`).modal('show');
-}
-
-/**
  * Open new tab at the provided URL.
  * @param {url} url - URL.
  */

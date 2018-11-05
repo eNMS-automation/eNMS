@@ -99,7 +99,7 @@ function addObjectToTable(mode, type, obj) {
     onclick="showObjectModal('${type}', '${obj.id}', true)">
     Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="delete('${type}', '${obj.id}')">Delete</button>`
+    onclick="deleteInstance('${type}', '${obj.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${obj.id}`)).data(values);

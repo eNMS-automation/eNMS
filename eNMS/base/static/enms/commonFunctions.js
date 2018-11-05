@@ -105,3 +105,32 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
     alertify.notify(`${type} '${result.name}' deleted.`, 'error', 5);
   });
 }
+
+/**
+ * Display user modal for creation.
+ */
+function showCreateModal(type) { // eslint-disable-line no-unused-vars
+  $(`#edit-${type}-form`).trigger('reset');
+  $('#title').text(`Create a New ${type}`);
+  $(`#edit-${type}`).modal('show');
+}
+
+/**
+ * Display user modal for editing.
+ * @param {id} id - User ID.
+ * @param {duplicate} duplicate - Edit versus duplicate.
+ */
+function showUserModal(id, duplicate) { // eslint-disable-line no-unused-vars
+  call(`/get/user/${id}`, function(user) {
+    $('#title').text(
+      `${duplicate ? 'Duplicate' : 'Edit'} User '${user.name}'`
+    );
+    if (duplicate) {
+      user.id = user.name = '';
+    }
+    for (const [property, value] of Object.entries(user)) {
+      $(`#${property}`).val(value);
+    }
+    $('#edit').modal('show');
+  });
+}

@@ -26,7 +26,7 @@ function addUser(mode, user) {
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showUserModal('${user.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="delete('user', '${user.id}')">Delete</button>`
+    onclick="deleteInstance('user', '${user.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${user.id}`)).data(values);
@@ -43,34 +43,7 @@ function addUser(mode, user) {
   }
 })();
 
-/**
- * Display user modal for creation.
- */
-function showModal() { // eslint-disable-line no-unused-vars
-  $('#edit-form').trigger('reset');
-  $('#title').text('Create a New User');
-  $('#edit').modal('show');
-}
 
-/**
- * Display user modal for editing.
- * @param {id} id - User ID.
- * @param {duplicate} duplicate - Edit versus duplicate.
- */
-function showUserModal(id, duplicate) { // eslint-disable-line no-unused-vars
-  call(`/get/user/${id}`, function(user) {
-    $('#title').text(
-      `${duplicate ? 'Duplicate' : 'Edit'} User '${user.name}'`
-    );
-    if (duplicate) {
-      user.id = user.name = '';
-    }
-    for (const [property, value] of Object.entries(user)) {
-      $(`#${property}`).val(value);
-    }
-    $('#edit').modal('show');
-  });
-}
 
 /**
  * Create or edit user.

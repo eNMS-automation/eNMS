@@ -29,7 +29,7 @@ function addPool(mode, properties) {
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showPoolObjects('${properties.id}')">Edit objects</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="delete('pool', '${properties.id}')">Delete</button>`
+    onclick="deleteInstance('pool', '${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);

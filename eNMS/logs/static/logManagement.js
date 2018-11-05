@@ -19,7 +19,7 @@ function addLog(properties) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(`<button type="button" class="btn btn-danger btn-xs"
-  onclick="delete('Log', '${properties.id}')">Delete</button>`);
+  onclick="deleteInstance('Log', '${properties.id}')">Delete</button>`);
   const rowNode = table.row.add(values).draw(false).node();
   $(rowNode).attr('id', `${properties.id}`);
 }

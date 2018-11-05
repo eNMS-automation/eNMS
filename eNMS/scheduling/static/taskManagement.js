@@ -33,7 +33,7 @@ function addTask(mode, properties) {
     class="btn btn-danger btn-xs" onclick="${status}Task('${properties.id}')">
     ${status.charAt(0).toUpperCase() + status.substr(1)}</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="delete('task', '${properties.id}')">Delete</button>`
+    onclick="deleteInstance('task', '${properties.id}')">Delete</button>`
   );
 
   if (mode == 'edit') {

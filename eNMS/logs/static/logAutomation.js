@@ -22,7 +22,7 @@ function addLogRule(properties, mode) {
   values.push(`<button type="button" class="btn btn-info btn-xs"
   onclick="showLogRuleModal('${properties.id}')">Edit</button>`);
   values.push(`<button type="button" class="btn btn-danger btn-xs"
-  onclick="delete('logrule', '${properties.id}')">Delete</button>`);
+  onclick="deleteInstance('logrule', '${properties.id}')">Delete</button>`);
 
   if (mode == 'edited') {
     table.row($(`#${properties.id}`)).data(values);

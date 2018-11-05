@@ -17,10 +17,7 @@ from eNMS.admin.forms import (
     AdministrationForm,
     LoginForm,
 )
-from eNMS.base.classes import classes
 from eNMS.base.helpers import (
-    choices,
-    delete,
     get,
     get_one,
     post,

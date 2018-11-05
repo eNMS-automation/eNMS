@@ -6,18 +6,15 @@ from json import dumps
 from eNMS import db, scheduler
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import (
-    choices,
     delete,
     factory,
     fetch,
     get,
-    objectify,
     post,
     str_dict,
     serialize
 )
 from eNMS.base.properties import (
-    boolean_properties,
     pretty_names,
     property_types,
     service_table_properties,

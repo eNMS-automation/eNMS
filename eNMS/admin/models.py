@@ -2,7 +2,6 @@ from flask import current_app as app
 from flask_login import UserMixin
 from sqlalchemy import Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
-from sqlalchemy.orm import relationship
 
 from eNMS import db
 from eNMS.base.models import Base

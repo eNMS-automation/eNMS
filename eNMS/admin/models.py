@@ -3,7 +3,6 @@ from flask_login import UserMixin
 from sqlalchemy import Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
-from passlib.hash import cisco_type7
 
 from eNMS import db
 from eNMS.base.models import Base

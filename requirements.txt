@@ -13,7 +13,6 @@ hvac
 jinja2
 napalm
 netmiko
-passlib
 pathlib
 psycopg2
 pynetbox

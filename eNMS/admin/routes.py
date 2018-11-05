@@ -8,7 +8,6 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
-from sqlalchemy.orm.exc import NoResultFound
 
 from eNMS import db
 from eNMS.admin import bp

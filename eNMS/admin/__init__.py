@@ -9,8 +9,8 @@ bp = Blueprint(
 )
 
 from eNMS.base.helpers import add_classes
-from eNMS.admin.models import User, Parameters, TacacsServer
+from eNMS.admin.models import User, Parameters
 
-add_classes(User, Parameters, TacacsServer)
+add_classes(User, Parameters)
 
 import eNMS.admin.routes  # noqa: F401

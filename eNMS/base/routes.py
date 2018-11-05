@@ -3,7 +3,7 @@ from flask import jsonify, render_template, redirect, request, url_for
 
 from eNMS.base import bp
 from eNMS.base.classes import classes
-from eNMS.base.helpers import fetch_all, get, post
+from eNMS.base.helpers import delete, factory, fetch, fetch_all, get, post
 from eNMS.base.properties import (
     default_diagrams_properties,
     pretty_names,
@@ -36,19 +36,19 @@ def get_counters(property, type):
     return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
 
 
-@post(bp, '/get/<cls>/<user_id>', 'View')
-def get_instance(user_id):
-    return jsonify(fetch('User', id=user_id).serialized)
+@post(bp, '/get/<cls>/<id>', 'View')
+def get_instance(cls, id):
+    return jsonify(fetch(cls, id=id).serialized)
 
 
 @post(bp, '/update/<cls>', 'Edit')
-def update_instance():
-    return jsonify(factory('User', **request.form).serialized)
+def update_instance(cls):
+    return jsonify(factory(cls, **request.form).serialized)
 
 
-@post(bp, '/delete/<cls>/<user_id>', 'Edit')
-def delete_instance(user_id):
-    return jsonify(delete('User', id=user_id))
+@post(bp, '/delete/<cls>/<id>', 'Edit')
+def delete_instance(cls, id):
+    return jsonify(delete(cls, id=id))
 
 
 @post(bp, '/shutdown', 'Admin')

@@ -25,54 +25,6 @@ function flipAuthenticationCombo() {
 })();
 
 /**
- * Display object modal for editing.
- * @param {type} type - Node or link.
- * @param {id} id - Id of the object to edit.
- * @param {dup} dup - Edit versus dup.
- */
-function showObjectModal(type, id, dup) { // eslint-disable-line no-unused-vars
-  call(`/get/${type}/${id}`, function(obj) {
-    $('#title').text(
-      `${dup ? 'Duplicate' : 'Edit'}
-      ${capitalize(type)} '${obj.name}'
-    `);
-    if (dup) {
-      obj.id = obj.name = '';
-    }
-    for (const [property, value] of Object.entries(obj)) {
-      $(`#${type}-${property}`).val(value);
-    }
-    $('#connection-parameters-button').unbind('click');
-    $('#connection-parameters-button').click(
-      partial(connectionParametersModal, id)
-    );
-    if (type == 'device') {
-      call(`/views/get_logs/${id}`, function(logs) {
-        $('#logs').text(logs);
-      });
-    }
-    $(`#edit-${type}`).modal('show');
-  });
-}
-
-/**
- * Edit object.
- * @param {type} type - Node or link.
- */
-function editObject(type) { // eslint-disable-line no-unused-vars
-  fCall(`/update/${type}`, `#edit-${type}-form`, function(result) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-    if (typeof table !== 'undefined') {
-      addObjectToTable(mode, type, result);
-    }
-    const message = `Object ${result.name}
-    ${mode == 'edit' ? 'edited' : 'created'}.`;
-    alertify.notify(message, 'success', 5);
-    $(`#edit-${type}`).modal('hide');
-  });
-}
-
-/**
  * Add object to the datatable.
  * @param {mode} mode - Create or edit.
  * @param {type} type - Device or link.

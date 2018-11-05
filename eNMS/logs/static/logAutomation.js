@@ -19,10 +19,7 @@ function addLogRule(properties, mode) {
   for (let i = 0; i < fields.length; i++) {
     values.push(`${properties[fields[i]]}`);
   }
-  values.push(`<button type="button" class="btn btn-info btn-xs"
-  onclick="showLogRuleModal('${properties.id}')">Edit</button>`);
-  values.push(`<button type="button" class="btn btn-danger btn-xs"
-  onclick="deleteInstance('logrule', '${properties.id}')">Delete</button>`);
+
 
   if (mode == 'edited') {
     table.row($(`#${properties.id}`)).data(values);
@@ -32,20 +29,21 @@ function addLogRule(properties, mode) {
   }
 }
 
+function tableActions(values, logrule) {
+  values.push(
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showTypeModal('logrule', '${logrule.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
+    onclick="deleteInstance('logrule', '${logrule.id}')">Delete</button>`
+  );
+}
+
 (function() {
   for (let i = 0; i < logRules.length; i++) {
     addLogRule(logRules[i], 'create');
   }
 })();
 
-/**
- * Display log rule modal.
- */
-function showModal() { // eslint-disable-line no-unused-vars
-  $('#title').text('Add a new log rule');
-  $('#edit-form').trigger('reset');
-  $('#edit').modal('show');
-}
 
 /**
  * Display log rule modal for editing.
@@ -66,14 +64,4 @@ function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
   });
 }
 
-/**
- * Save log rule.
- */
-function saveRule() { // eslint-disable-line no-unused-vars
-  fCall('/update/logrule', '#edit-form', function(logRule) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edited' : 'created';
-    addLogRule(logRule, mode);
-    alertify.notify(`Log rule '${logRule.name}' ${mode}.`, 'success', 5);
-    $('#edit').modal('hide');
-  });
-}
+

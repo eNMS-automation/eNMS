@@ -76,6 +76,7 @@ function call(url, callback) { // eslint-disable-line no-unused-vars
  * @param {callback} callback - Function to process results.
  */
 function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
+  console.log(form)
   if ($(form).parsley().validate()) {
     $.ajax({
       type: 'POST',
@@ -122,7 +123,7 @@ function showCreateModal(type) { // eslint-disable-line no-unused-vars
  */
 function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-vars
   call(`/get/${type}/${id}`, function(instance) {
-    $('#title').text(
+    $(`#title-${type}`).text(
       `${duplicate ? 'Duplicate' : 'Edit'} ${type} '${instance.name}'`
     );
     if (duplicate) {
@@ -140,14 +141,14 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
  * Create or edit instance.
  */
 function processData(type) { // eslint-disable-line no-unused-vars
-  fCall('/update/${type}', '#edit-${type}-form', function(instance) {
-    const title = $('#title-${type}').text().startsWith('Edit');
+  fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
+    const title = $(`#title-${type}`).text().startsWith('Edit');
     const mode = title ? 'edit' : 'create';
-    addInstance(mode, instance);
+    addInstance(mode, type, instance);
     const message = `${type} '${instance.name}'
     ${mode == 'edit' ? 'edited' : 'created'}.`;
     alertify.notify(message, 'success', 5);
-    $('#edit-${type}').modal('hide');
+    $(`#edit-${type}`).modal('hide');
   });
 }
 

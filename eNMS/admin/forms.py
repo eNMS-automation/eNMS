@@ -56,4 +56,28 @@ class AdministrationForm(BaseForm):
             'tacacs_port',
             'tacacs_timeout'
         ),
+        'Syslog Server': (
+            'syslog_ip_address',
+            'syslog_port',
+        ),
+        'Geographical Parameters': (
+            'default_longitude',
+            'default_latitude',
+            'default_zoom_level'
+        ),
+        'SSH Terminal Parameters': (
+            'gotty_start_port',
+            'gotty_end_port'
+        ),
+        'Notification Parameters': (
+            'mail_sender',
+            'mail_recipients',
+            'mattermost_url',
+            'mattermost_channel'
+        ),
+        'Horizontal Scaling': (
+            'database_filtering_pool',
+        )
+    }
+        
     }

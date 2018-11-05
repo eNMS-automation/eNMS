@@ -4,6 +4,14 @@ alertify: false
 */
 
 /**
+ * Update link to the docs.
+ * @param {url} url - URL pointing to the right page of the docs.
+ */
+function doc(url) { // eslint-disable-line no-unused-vars
+  $('#doc-link').attr('href', url);
+}
+
+/**
  * Show modal.
  * @param {name} name - Modal name.
  */

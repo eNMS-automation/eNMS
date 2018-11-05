@@ -81,7 +81,7 @@ def logout():
 def admninistration():
     return render_template(
         'administration.html',
-        form=AdministrationForm(request.form),
+        form=AdministrationForm(request.form, 'Parameters'),
         parameters=get_one('Parameters')
     )
 
@@ -112,13 +112,7 @@ def delete_user(user_id):
 @post(bp, '/save_parameters', 'Edit parameters')
 def save_parameters():
     get_one('Parameters').update(**request.form.to_dict())
-    db.session.commit()
-    return jsonify(True)
-
-
-@post(bp, '/database_filtering', 'Edit parameters')
-def database_filtering():
-    pool = fetch('Pool', id=request.form['pool'])
+    pool = fetch('Pool', id=request.form['database_filtering_pool'])
     pool_objects = {'Device': pool.devices, 'Link': pool.links}
     for obj_type in ('Device', 'Link'):
         for obj in fetch_all(obj_type):

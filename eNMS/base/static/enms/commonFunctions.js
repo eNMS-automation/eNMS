@@ -116,21 +116,56 @@ function showCreateModal(type) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Display user modal for editing.
- * @param {id} id - User ID.
+ * Display instance modal for editing.
+ * @param {id} id - Instance ID.
  * @param {duplicate} duplicate - Edit versus duplicate.
  */
-function showUserModal(id, duplicate) { // eslint-disable-line no-unused-vars
-  call(`/get/user/${id}`, function(user) {
+function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-vars
+  call(`/get/${type}/${id}`, function(instance) {
     $('#title').text(
-      `${duplicate ? 'Duplicate' : 'Edit'} User '${user.name}'`
+      `${duplicate ? 'Duplicate' : 'Edit'} ${type} '${instance.name}'`
     );
     if (duplicate) {
-      user.id = user.name = '';
+      instance.id = instance.name = '';
     }
-    for (const [property, value] of Object.entries(user)) {
+    for (const [property, value] of Object.entries(instance)) {
       $(`#${property}`).val(value);
     }
-    $('#edit').modal('show');
+    $('#edit-${type}').modal('show');
   });
+}
+
+
+/**
+ * Create or edit instance.
+ */
+function processData(type) { // eslint-disable-line no-unused-vars
+  fCall('/update/${type}', '#edit-${type}-form', function(instance) {
+    const title = $('#title-${type}').text().startsWith('Edit');
+    const mode = title ? 'edit' : 'create';
+    addInstance(mode, instance);
+    const message = `${type} '${instance.name}'
+    ${mode == 'edit' ? 'edited' : 'created'}.`;
+    alertify.notify(message, 'success', 5);
+    $('#edit-${type}').modal('hide');
+  });
+}
+
+/**
+ * Add user to datatable or edit line.
+ * @param {mode} mode - Create or edit.
+ * @param {user} user - Properties of the user.
+ */
+function addInstance(mode, type, user) {
+  let values = [];
+  for (let i = 0; i < fields.length; i++) {
+    values.push(`${user[fields[i]]}`);
+  }
+  tableActions(values, instance)
+  if (mode == 'edit') {
+    table.row($(`#${user.id}`)).data(values);
+  } else {
+    const rowNode = table.row.add(values).draw(false).node();
+    $(rowNode).attr('id', `${user.id}`);
+  }
 }

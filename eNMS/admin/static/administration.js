@@ -5,24 +5,6 @@ fCall: false
 */
 
 /**
- * Save Tacacs server.
- */
-function saveTacacsServer() { // eslint-disable-line no-unused-vars
-  fCall('/admin/save_tacacs_server', '#tacacs_form', function() {
-    alertify.notify(`Tacacs server saved.`, 'success', 5);
-  });
-}
-
-/**
- * Save Syslog server.
- */
-function saveSyslogServer() { // eslint-disable-line no-unused-vars
-  fCall('/admin/save_syslog_server', '#syslog_form', function() {
-    alertify.notify('Syslog server saved.', 'success', 5);
-  });
-}
-
-/**
  * Query openNMS server.
  */
 function queryOpenNMS() { // eslint-disable-line no-unused-vars
@@ -40,24 +22,14 @@ function queryNetbox() { // eslint-disable-line no-unused-vars
   });
 }
 
-
 /**
- * Save notification parameters.
+ * Save Parameters.
  */
 function saveParameters() { // eslint-disable-line no-unused-vars
   fCall('/admin/save_parameters', '#parameters-form', function() {
       alertify.notify('Notification parameters saved.', 'success', 5);
     }
   );
-}
-
-/**
- * Database Filtering.
- */
-function databaseFiltering() { // eslint-disable-line no-unused-vars
-  fCall('/admin/database_filtering', '#database-filtering-form', function() {
-    alertify.notify('Database successfully filtered.', 'success', 5);
-  });
 }
 
 (function() {

@@ -107,7 +107,7 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Display user modal for creation.
+ * Display type modal for creation.
  */
 function showCreateModal(type) { // eslint-disable-line no-unused-vars
   $(`#edit-${type}-form`).trigger('reset');
@@ -131,7 +131,7 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
     for (const [property, value] of Object.entries(instance)) {
       $(`#${property}`).val(value);
     }
-    $('#edit-${type}').modal('show');
+    $(`#edit-${type}`).modal('show');
   });
 }
 
@@ -152,20 +152,20 @@ function processData(type) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Add user to datatable or edit line.
+ * Add instance to datatable or edit line.
  * @param {mode} mode - Create or edit.
- * @param {user} user - Properties of the user.
+ * @param {instance} instance - Properties of the instance.
  */
-function addInstance(mode, type, user) {
+function addInstance(mode, type, instance) {
   let values = [];
   for (let i = 0; i < fields.length; i++) {
-    values.push(`${user[fields[i]]}`);
+    values.push(`${instance[fields[i]]}`);
   }
   tableActions(values, instance)
   if (mode == 'edit') {
-    table.row($(`#${user.id}`)).data(values);
+    table.row($(`#${instance.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${user.id}`);
+    $(rowNode).attr('id', `${instance.id}`);
   }
 }

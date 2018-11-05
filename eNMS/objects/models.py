@@ -115,6 +115,9 @@ class Link(Object):
     )
 
     def __init__(self, **kwargs):
+        self.update(**kwargs)
+
+    def update(self, **kwargs):
         if 'source_name' in kwargs:
             source = fetch('Device', name=kwargs.pop('source_name'))
             destination = fetch('Device', name=kwargs.pop('destination_name'))
@@ -124,7 +127,7 @@ class Link(Object):
                 'source': source.id,
                 'destination': destination.id
             })
-        super().__init__(**kwargs)
+        super().update(**kwargs)
 
     @property
     def source_name(self):

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from json import dumps, loads
 
-from eNMS import app, db
+from eNMS import db, use_vault
 from eNMS.base.helpers import fetch, objectify, choices
 from eNMS.base.properties import (
     cls_to_properties,
@@ -10,6 +10,7 @@ from eNMS.base.properties import (
     relationships as rel,
     vault_properties
 )
+from eNMS.base.security import vault_helper
 
 
 class Base(db.Model):
@@ -29,11 +30,13 @@ class Base(db.Model):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
             serial = rel.get(self.__tablename__, rel['Service'])
-            if property in vault_properties:
+            print(property, value)
+            if property in vault_properties and use_vault:
                 vault_helper(
-                    f'{self.type}/{kwargs["id"]}/{property}',
+                    f'{self.__tablename__}/{kwargs["name"]}/{property}',
                     {property: value}
                 )
+                continue
             elif property in serial:
                 value = fetch(serial[property], id=value)
             elif property[:-1] in serial:

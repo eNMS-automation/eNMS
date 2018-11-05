@@ -30,8 +30,7 @@ from eNMS.base.helpers import (
 from eNMS.base.security import (
     allowed_file,
     get_device_credentials,
-    get_user_credentials,
-    process_kwargs
+    get_user_credentials
 )
 from eNMS.objects import bp
 from eNMS.objects.forms import (
@@ -166,8 +165,7 @@ def import_topology():
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(app, **values)
-                objects[obj_type].append(factory(cls, **kwargs).serialized)
+                objects[obj_type].append(factory(obj_type, **kwargs).serialized)
             db.session.commit()
     return jsonify(objects)
 

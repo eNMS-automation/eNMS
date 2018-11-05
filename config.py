@@ -26,7 +26,7 @@ class Config(object):
     GOTTY_BYPASS_KEY_PROMPT = environ.get('GOTTY_BYPASS_KEY_PROMPT')
 
     # Vault
-    USE_VAULT = False
+    USE_VAULT = int(environ.get('USE_VAULT', False))
 
     # Examples
     CREATE_EXAMPLES = int(environ.get('CREATE_EXAMPLES', True))

@@ -8,6 +8,7 @@ from hvac import Client as VaultClient
 from importlib import import_module
 from logging import basicConfig, DEBUG, info, StreamHandler
 from logging.handlers import RotatingFileHandler
+from os import environ
 
 auth = HTTPBasicAuth()
 db = SQLAlchemy(
@@ -19,6 +20,9 @@ db = SQLAlchemy(
 login_manager = LoginManager()
 mail = Mail()
 scheduler = APScheduler()
+
+# Vault
+use_vault = int(environ.get('USE_VAULT', False))
 vault_client = VaultClient()
 
 from eNMS.base.default import (
@@ -132,7 +136,7 @@ def create_app(path, config):
     configure_rest_api(app)
     configure_logs(app)
     configure_errors(app)
-    if app.config['USE_VAULT']:
+    if use_vault:
         configure_vault_client(app)
     info('eNMS starting')
     return app

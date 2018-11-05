@@ -5,7 +5,6 @@ from xlrd.biffh import XLRDError
 from eNMS import db
 from eNMS.base.classes import classes
 from eNMS.base.helpers import factory, integrity_rollback, fetch
-from eNMS.base.security import process_kwargs
 
 
 def create_default_users():
@@ -58,8 +57,7 @@ def create_default_network_topology(app):
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
-                cls, kwargs = process_kwargs(app, **values)
-                factory(cls, **kwargs)
+                factory(object_type, **values)
             db.session.commit()
 
 

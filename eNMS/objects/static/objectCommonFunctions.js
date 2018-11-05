@@ -33,7 +33,7 @@ function flipAuthenticationCombo() {
 function showObjectModal(type, id, dup) { // eslint-disable-line no-unused-vars
   call(`/get/${type}/${id}`, function(obj) {
     $('#title').text(
-      `${dup ? 'dup' : 'Edit'}
+      `${dup ? 'Duplicate' : 'Edit'}
       ${capitalize(type)} '${obj.name}'
     `);
     if (dup) {
@@ -69,18 +69,6 @@ function editObject(type) { // eslint-disable-line no-unused-vars
     ${mode == 'edit' ? 'edited' : 'created'}.`;
     alertify.notify(message, 'success', 5);
     $(`#edit-${type}`).modal('hide');
-  });
-}
-
-/**
- * Delete object.
- * @param {type} type - Node or link.
- * @param {id} id - Id of the object to delete.
- */
-function deleteObject(type, id) { // eslint-disable-line no-unused-vars
-  call(`/delete/${type}/${id}`, function(result) {
-    table.row($(`#${id}`)).remove().draw(false);
-    alertify.notify(`Object '${result.name}' deleted.`, 'error', 5);
   });
 }
 

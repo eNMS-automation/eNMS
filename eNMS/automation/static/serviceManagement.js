@@ -54,10 +54,7 @@ function getStates() {
 }
 
 (function() {
-  $('#doc-link').attr(
-    'href',
-    'https://enms.readthedocs.io/en/latest/services/index.html'
-  );
+  doc('https://enms.readthedocs.io/en/latest/services/index.html');
   for (let i = 0; i < services.length; i++) {
     addService('create', services[i]);
   }

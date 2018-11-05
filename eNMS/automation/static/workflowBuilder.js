@@ -317,10 +317,7 @@ $('#network').contextMenu({
 });
 
 (function() {
-  $('#doc-link').attr(
-    'href',
-    'https://enms.readthedocs.io/en/latest/workflows/index.html'
-  );
+  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
 })();
 
 /**

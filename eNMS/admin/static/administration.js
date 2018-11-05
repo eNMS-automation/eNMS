@@ -15,8 +15,5 @@ function saveParameters() { // eslint-disable-line no-unused-vars
 }
 
 (function() {
-  $('#doc-link').attr(
-    'href',
-    'https://enms.readthedocs.io/en/latest/security/access.html'
-  );
+  doc('https://enms.readthedocs.io/en/latest/security/access.html');
 })();

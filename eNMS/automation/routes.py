@@ -200,13 +200,6 @@ def add_to_workflow(workflow_id):
     return jsonify(job.serialized)
 
 
-@post(bp, '/get/<workflow_id>', 'View')
-def get_workflow(workflow_id):
-    workflow = fetch('Workflow', id=workflow_id)
-    print(workflow.devices)
-    return jsonify(workflow.serialized if workflow else {})
-
-
 @post(bp, '/duplicate_workflow/<workflow_id>', 'Edit')
 def duplicate_workflow(workflow_id):
     return jsonify(workflow_id)
@@ -217,16 +210,6 @@ def reset_workflow_logs(workflow_id):
     fetch('Workflow', id=workflow_id).status = {'state': 'Idle'}
     db.session.commit()
     return jsonify(True)
-
-
-@post(bp, '/edit_workflow', 'Edit')
-def edit_workflow(id):
-    return jsonify(factory('Workflow', **request.form).serialized)
-
-
-@post(bp, '/delete_workflow/<workflow_id>', 'Edit')
-def delete_workflow(workflow_id):
-    return jsonify(delete('Workflow', id=workflow_id))
 
 
 @post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit')

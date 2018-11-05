@@ -54,7 +54,7 @@ from eNMS.base.properties import (
 )
 
 
-@get(bp, '/device_management', 'Inventory Section')
+@get(bp, '/device_management', 'View')
 def device_management():
     return render_template(
         'device_management.html',
@@ -65,7 +65,7 @@ def device_management():
     )
 
 
-@get(bp, '/link_management', 'Inventory Section')
+@get(bp, '/link_management', 'View')
 def link_management():
     return render_template(
         'link_management.html',
@@ -76,7 +76,7 @@ def link_management():
     )
 
 
-@get(bp, '/pool_management', 'Inventory Section')
+@get(bp, '/pool_management', 'View')
 def pool_management():
     return render_template(
         'pool_management.html',
@@ -88,7 +88,7 @@ def pool_management():
     )
 
 
-@get(bp, '/import_export', 'Inventory Section')
+@get(bp, '/import_export', 'View')
 def import_export():
     return render_template(
         'import_export.html',
@@ -97,11 +97,6 @@ def import_export():
         opennms_form=OpenNmsForm(request.form),
         parameters=get_one('Parameters'),
     )
-
-
-@post(bp, '/get/<obj_type>/<id>', 'Inventory Section')
-def get_object(obj_type, id):
-    return jsonify(fetch(obj_type, id=id).serialized)
 
 
 @post(bp, '/connection/<id>', 'Connect to device')
@@ -136,28 +131,13 @@ def connection(id):
     })
 
 
-@post(bp, '/edit_object', 'Edit Inventory Section')
+@post(bp, '/edit_object', 'Edit')
 def edit_object():
     cls, kwargs = process_kwargs(app, **request.form.to_dict())
     return jsonify(factory(cls, **kwargs).serialized)
 
 
-@post(bp, '/delete/<obj_type>/<obj_id>', 'Edit Inventory Section')
-def delete_object(obj_type, obj_id):
-    return jsonify(delete(obj_type, id=obj_id))
-
-
-@post(bp, '/process_pool', 'Edit Inventory Section')
-def process_pool():
-    return jsonify(factory('Pool', **request.form).serialized)
-
-
-@post(bp, '/get/pool/<pool_id>', 'Inventory Section')
-def get_pool(pool_id):
-    return jsonify(fetch('Pool', id=pool_id).serialized)
-
-
-@post(bp, '/save_pool_objects/<pool_id>', 'Edit Inventory Section')
+@post(bp, '/save_pool_objects/<pool_id>', 'Edit')
 def save_pool_objects(pool_id):
     pool = fetch('Pool', id=pool_id)
     pool.devices = objectify('Device', request.form.getlist('devices'))
@@ -166,12 +146,12 @@ def save_pool_objects(pool_id):
     return jsonify(pool.name)
 
 
-@post(bp, '/pool_objects/<pool_id>', 'Inventory Section')
+@post(bp, '/pool_objects/<pool_id>', 'View')
 def filter_pool_objects(pool_id):
     return jsonify(fetch('Pool', id=pool_id).filter_objects())
 
 
-@post(bp, '/update_pools', 'Edit Inventory Section')
+@post(bp, '/update_pools', 'Edit')
 def update_pools():
     for pool in fetch_all('Pool'):
         pool.compute_pool()
@@ -179,12 +159,7 @@ def update_pools():
     return jsonify(True)
 
 
-@post(bp, '/delete_pool/<pool_id>', 'Edit Inventory Section')
-def delete_pool(pool_id):
-    return jsonify(delete('Pool', id=pool_id))
-
-
-@post(bp, '/import_topology', 'Edit Inventory Section')
+@post(bp, '/import_topology', 'Edit')
 def import_topology():
     objects, file = defaultdict(list), request.files['file']
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
@@ -203,7 +178,7 @@ def import_topology():
     return jsonify(objects)
 
 
-@post(bp, '/export_topology', 'Inventory Section')
+@post(bp, '/export_topology', 'View')
 def export_topology():
     workbook = Workbook()
     for obj_type in ('Device', 'Link'):

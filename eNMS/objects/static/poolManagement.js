@@ -11,71 +11,25 @@ pools: false
 let poolId = null;
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
-/**
- * Add pool to the datatable.
- * @param {mode} mode - Create or edit.
- * @param {properties} properties - Properties of the pool.
- */
-function addPool(mode, properties) {
-  let values = [];
-  for (let i = 0; i < fields.length; i++) {
-    values.push(`${properties[fields[i]]}`);
-  }
+function tableActions(values, pool) {
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showPoolModal('${properties.id}')">Edit properties</button>`,
+    onclick="showTypeModal('pool', '${pool.id}')">Edit properties</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showPoolModal('${properties.id}', true)">Duplicate</button>`,
+    onclick="showTypeModal('pool', '${pool.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showPoolObjects('${properties.id}')">Edit objects</button>`,
+    onclick="showPoolObjects('${pool.id}')">Edit objects</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('pool', '${properties.id}')">Delete</button>`
+    onclick="deleteInstance('pool', '${pool.id}')">Delete</button>`
   );
-  if (mode == 'edit') {
-    table.row($(`#${properties.id}`)).data(values);
-  } else {
-    const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${properties.id}`);
-  }
 }
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/pools.html');
   for (let i = 0; i < pools.length; i++) {
-    addPool('create', pools[i]);
+    addInstance('create', 'pool', pools[i]);
   }
 })();
-
-/**
- * Open pool modal for creation.
- */
-function showModal() { // eslint-disable-line no-unused-vars
-  $('#title').text('Create a New Pool');
-  $('#edit-form').trigger('reset');
-  $('#edit').modal('show');
-}
-
-/**
- * Display pool modal for editing.
- * @param {id} id - Id of the pool to edit.
- * @param {duplicate} duplicate - Edit versus duplicate.
- */
-function showPoolModal(id, duplicate) { // eslint-disable-line no-unused-vars
-  call(`/get/pool/${id}`, function(pool) {
-    $('#title').text(`${duplicate ? 'Duplicate' : 'Edit'} Pool '${pool.name}'`);
-    if (duplicate) {
-      pool.id = pool.name = '';
-    }
-    for (const [property, value] of Object.entries(pool)) {
-      if (property.includes('regex')) {
-        $(`#${property}`).prop('checked', value);
-      } else {
-        $(`#${property}`).val(value);
-      }
-    }
-    $('#edit').modal('show');
-  });
-}
 
 /**
  * Display pool objects for editing.
@@ -98,20 +52,6 @@ function savePoolObjects() { // eslint-disable-line no-unused-vars
   fCall(url, '#pool-objects-form', function() {
     alertify.notify('Changes saved.', 'success', 5);
     $('#edit-pool-objects').modal('hide');
-  });
-}
-
-/**
- * Update pool properties.
- */
-function savePool() { // eslint-disable-line no-unused-vars
-  fCall('/update/pool', '#edit-form', function(pool) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-    addPool(mode, pool);
-    const message = `Pool '${pool.name}'
-    ${mode == 'edit' ? 'edited !' : 'created !'}.`;
-    alertify.notify(message, 'success', 5);
-    $('#edit').modal('hide');
   });
 }
 

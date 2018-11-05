@@ -129,8 +129,15 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
     if (duplicate) {
       instance.id = instance.name = '';
     }
-    for (const [property, value] of Object.entries(instance)) {
-      $(`#${property}`).val(value);
+    for (const [property, value] of Object.entries(workflow)) {
+      const propertyType = propertyTypes[property] || 'str';
+      if (propertyType.includes('bool')) {
+        $(`#${property}`).prop('checked', value);
+      } else if (propertyType.includes('dict')) {
+        $(`#${property}`).val(value ? JSON.stringify(value): '{}');
+      } else {
+        $(`#${property}`).val(value);
+      }
     }
     $(`#edit-${type}`).modal('show');
   });

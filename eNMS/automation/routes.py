@@ -158,11 +158,6 @@ def run_job(job_id):
     return jsonify(job.serialized)
 
 
-@post(bp, '/save_service/<cls_name>', 'Edit')
-def save_service(cls_name):
-    return jsonify(factory(cls_name, **request.form).serialized)
-
-
 @post(bp, '/show_logs/<job_id>', 'View')
 def show_logs(job_id):
     return jsonify(dumps(fetch('Job', id=job_id).logs, indent=4))

@@ -39,11 +39,6 @@ def syslog_automation():
     )
 
 
-@post(bp, '/delete_log/<log_id>', 'Edit Logs Section')
-def delete_log(log_id):
-    return jsonify(delete('Log', id=log_id))
-
-
 @post(bp, '/filter_logs', 'Edit Logs Section')
 def filter_logs():
     logs = [log for log in serialize('Log') if all(
@@ -52,18 +47,3 @@ def filter_logs():
         if prop in request.form and request.form[prop]
     )]
     return jsonify(logs)
-
-
-@post(bp, '/get_log_rule/<log_rule_id>', 'Logs Section')
-def get_log_rule(log_rule_id):
-    return jsonify(fetch('LogRule', id=log_rule_id).serialized)
-
-
-@post(bp, '/save_log_rule', 'Edit Logs Section')
-def save_log_rule():
-    return jsonify(factory('LogRule', **request.form).serialized)
-
-
-@post(bp, '/delete_log_rule/<log_id>', 'Edit Logs Section')
-def delete_log_rule(log_id):
-    return jsonify(delete('LogRule', id=log_id))

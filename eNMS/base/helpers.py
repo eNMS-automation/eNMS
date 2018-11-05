@@ -30,6 +30,8 @@ def objectify(model, object_list):
 
 def delete(model, **kwargs):
     instance = db.session.query(classes[model]).filter_by(**kwargs).first()
+    if instance.type == 'Task':
+        instance.delete_task()
     result = instance.serialized
     db.session.delete(instance)
     db.session.commit()

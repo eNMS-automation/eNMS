@@ -83,7 +83,7 @@ function saveRule() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the log rule to be deleted.
  */
 function deleteLogRule(id) { // eslint-disable-line no-unused-vars
-  call(`/logs/delete_log_rule/${id}`, function(result) {
+  call(`/delete/logrule/${id}`, function(result) {
     table.row($(`#${id}`)).remove().draw(false);
     alertify.notify('Log rule successfully deleted.', 'error', 5);
   });

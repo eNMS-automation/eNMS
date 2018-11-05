@@ -66,7 +66,7 @@ function getStates() {
  * @param {id} id - Id of the service to delete.
  */
 function deleteService(id) { // eslint-disable-line no-unused-vars
-  call(`/automation/delete/${id}`, function(service) {
+  call(`/delete/service/${id}`, function(service) {
     table.row($(`#${id}`)).remove().draw(false);
     const message = `Service '${service.name}' successfully deleted.`;
     alertify.notify(message, 'error', 5);

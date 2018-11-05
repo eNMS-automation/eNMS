@@ -119,7 +119,7 @@ function savePool() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the pool to delete.
  */
 function deletePool(id) { // eslint-disable-line no-unused-vars
-  call(`/objects/delete_pool/${id}`, function(name) {
+  call(`/delete/pool/${id}`, function(name) {
     table.row($(`#${id}`)).remove().draw(false);
     alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
   });

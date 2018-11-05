@@ -86,7 +86,7 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the workflow to edit.
  */
 function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  call(`/automation/get/${id}`, function(workflow) {
+  call(`/get/workflow/${id}`, function(workflow) {
     $('#title').text(`Edit Workflow`);
     for (const [property, value] of Object.entries(workflow)) {
       const propertyType = propertyTypes[property] || 'str';
@@ -127,7 +127,7 @@ function editObject() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the workflow to delete.
  */
 function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
-  call(`/automation/delete_workflow/${id}`, function(workflow) {
+  call(`/delete/workflow/${id}`, function(workflow) {
     table.row($(`#${id}`)).remove().draw(false);
     alertify.notify(`Workflow '${workflow.name}' deleted.`, 'error', 5);
   });

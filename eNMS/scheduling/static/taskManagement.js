@@ -62,7 +62,7 @@ function scheduleTask() { // eslint-disable-line no-unused-vars
  * @param {id} id - Task id.
  */
 function deleteTask(id) { // eslint-disable-line no-unused-vars
-  call(`/scheduling/delete_task/${id}`, function(result) {
+  call(`/delete/task/${id}`, function(result) {
     table.row($(`#${id}`)).remove().draw(false);
     alertify.notify('Task successfully deleted.', 'success', 5);
   });

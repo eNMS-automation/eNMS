@@ -78,7 +78,7 @@ function editObject(type) { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the object to delete.
  */
 function deleteObject(type, id) { // eslint-disable-line no-unused-vars
-  call(`/objects/delete/${type}/${id}`, function(result) {
+  call(`/delete/${type}/${id}`, function(result) {
     table.row($(`#${id}`)).remove().draw(false);
     alertify.notify(`Object '${result.name}' deleted.`, 'error', 5);
   });

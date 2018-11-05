@@ -91,7 +91,7 @@ function processData() { // eslint-disable-line no-unused-vars
  * @param {userId} userId - Id of the user to be deleted.
  */
 function deleteUser(userId) { // eslint-disable-line no-unused-vars
-  call(`/admin/delete/${userId}`, function(user) {
+  call(`/delete/user/${userId}`, function(user) {
     $(`#${userId}`).remove();
     alertify.notify(`User '${user.name}' deleted.`, 'error', 5);
   });

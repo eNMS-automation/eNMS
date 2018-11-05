@@ -246,7 +246,7 @@ function switchMode(mode) {
 
 $('#workflow-name').on('change', function() {
   savePositions();
-  call(`/automation/get/${this.value}`, function(result) {
+  call(`/get/workflow/${this.value}`, function(result) {
     workflow = result;
     graph = displayWorkflow(result);
     alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);

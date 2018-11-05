@@ -48,7 +48,7 @@ function filterLogs() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the log to be deleted.
  */
 function deleteLog(id) { // eslint-disable-line no-unused-vars
-  call(`/logs/delete_log/${id}`, function(result) {
+  call(`/delete/log/${id}`, function(result) {
   table.row($(`#${id}`)).remove().draw(false);
   alertify.notify('Log successfully deleted.', 'error', 5);
   });

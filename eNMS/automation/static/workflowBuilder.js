@@ -3,6 +3,7 @@ global
 alertify: false
 call: false
 compareLogs: false
+doc: false
 editService: false
 fCall: false
 partial: false

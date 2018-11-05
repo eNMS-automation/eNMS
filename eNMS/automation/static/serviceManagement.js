@@ -2,6 +2,7 @@
 global
 alertify: false
 call: false
+doc: false
 fields: false
 services: false
 */

@@ -1,6 +1,7 @@
 /*
 global
 addObjectToTable: false
+doc: false
 links: false
 */
 

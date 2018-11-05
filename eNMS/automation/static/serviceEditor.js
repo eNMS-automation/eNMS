@@ -41,6 +41,7 @@ function showServiceEditor() { // eslint-disable-line no-unused-vars
 /**
  * Edit a service.
  * @param {id} id - Service Id.
+ * @param {duplicate} duplicate - Duplicate.
  */
 function editService(id, duplicate) {
   if (id) {

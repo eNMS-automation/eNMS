@@ -3,9 +3,8 @@ global
 alertify: false
 call: false
 d3: false
+doc: false
 graph: false
-partial: false
-showModal: false
 showObjectModal: false
 */
 

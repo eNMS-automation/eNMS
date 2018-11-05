@@ -6,6 +6,7 @@ call: false
 /**
  * Show the task modal for task.
  * @param {id} id - Task id.
+ * @param {duplicate} duplicate - Duplicate.
  */
 function showTaskModal(id, duplicate) { // eslint-disable-line no-unused-vars
   if (!id) {

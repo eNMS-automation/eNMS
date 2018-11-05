@@ -28,15 +28,15 @@ function flipAuthenticationCombo() {
  * Display object modal for editing.
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to edit.
- * @param {duplicate} duplicate - Edit versus duplicate.
+ * @param {dup} dup - Edit versus dup.
  */
-function showObjectModal(type, id, duplicate) { // eslint-disable-line no-unused-vars
+function showObjectModal(type, id, dup) { // eslint-disable-line no-unused-vars
   call(`/get/${type}/${id}`, function(obj) {
     $('#title').text(
-      `${duplicate ? 'Duplicate' : 'Edit'}
+      `${dup ? 'dup' : 'Edit'}
       ${capitalize(type)} '${obj.name}'
     `);
-    if (duplicate) {
+    if (dup) {
       obj.id = obj.name = '';
     }
     for (const [property, value] of Object.entries(obj)) {

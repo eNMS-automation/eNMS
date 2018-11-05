@@ -2,6 +2,7 @@
 global
 alertify: false
 call: false
+doc: false
 fCall: false
 fields: false
 users: false

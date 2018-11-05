@@ -1,5 +1,6 @@
 /*
 global
+doc: false
 showTaskModal: false
 tasks: false
 */

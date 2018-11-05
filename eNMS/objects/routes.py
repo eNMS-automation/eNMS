@@ -15,8 +15,6 @@ from yaml import dump, load
 
 from eNMS import db
 from eNMS.base.helpers import (
-    choices,
-    delete,
     export,
     factory,
     fetch,
@@ -43,10 +41,8 @@ from eNMS.objects.forms import (
     PoolObjectsForm
 )
 from eNMS.base.properties import (
-    boolean_properties,
     device_public_properties,
     export_properties,
-    import_properties,
     link_table_properties,
     pool_table_properties,
     pretty_names
@@ -164,8 +160,12 @@ def import_topology():
                 continue
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                objects[obj_type].append(factory(obj_type, **kwargs).serialized)
+                objects[obj_type].append(
+                    factory(
+                        obj_type,
+                        **dict(zip(properties, sheet.row_values(row_index)))
+                    ).serialized
+                )
             db.session.commit()
     return jsonify(objects)
 

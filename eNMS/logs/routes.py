@@ -1,17 +1,7 @@
 from flask import jsonify, render_template, request
 from re import search
 
-from eNMS import db
-from eNMS.base.helpers import (
-    choices,
-    delete,
-    factory,
-    fetch,
-    get,
-    objectify,
-    post,
-    serialize
-)
+from eNMS.base.helpers import get, post, serialize
 from eNMS.base.properties import pretty_names
 from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm

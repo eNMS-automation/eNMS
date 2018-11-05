@@ -1,11 +1,7 @@
 from flask import jsonify, render_template, request
-from flask_login import current_user
 from re import search, sub
 
-from eNMS import db
 from eNMS.base.helpers import (
-    choices,
-    factory,
     fetch,
     fetch_all,
     get,

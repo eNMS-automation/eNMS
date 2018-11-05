@@ -48,7 +48,7 @@ class AdministrationForm(BaseForm):
     mail_recipients = TextField()
     mattermost_url = TextField('Mattermost URL')
     mattermost_channel = TextField()
-    pool = SelectField(choices=())
+    database_filtering_pool = SelectField(choices=())
     categories = {
         'TACACS+ Server': (
             'tacacs_ip_address',
@@ -78,6 +78,4 @@ class AdministrationForm(BaseForm):
         'Horizontal Scaling': (
             'database_filtering_pool',
         )
-    }
-        
     }

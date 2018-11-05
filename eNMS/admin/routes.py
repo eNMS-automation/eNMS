@@ -15,7 +15,7 @@ from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
     CreateAccountForm,
-    Form,
+    AdministrationForm,
     LoginForm,
 )
 from eNMS.base.classes import classes
@@ -79,21 +79,10 @@ def logout():
 
 @get(bp, '/administration', 'Admin Section')
 def admninistration():
-    try:
-        tacacs_server = get_one('TacacsServer')
-    except NoResultFound:
-        tacacs_server = None
-    try:
-        syslog_server = get_one('SyslogServer')
-    except NoResultFound:
-        syslog_server = None
     return render_template(
         'administration.html',
-        form=Form(request.form),
-        parameters=get_one('Parameters'),
-
-        tacacs_server=tacacs_server,
-        syslog_server=syslog_server
+        form=AdministrationForm(request.form),
+        parameters=get_one('Parameters')
     )
 
 
@@ -118,22 +107,6 @@ def get_user(user_id):
 @post(bp, '/delete/<user_id>', 'Edit Admin Section')
 def delete_user(user_id):
     return jsonify(delete('User', id=user_id))
-
-
-@post(bp, '/save_tacacs_server', 'Edit parameters')
-def save_tacacs_server():
-    classes['TacacsServer'].query.delete()
-    db.session.add(classes['TacacsServer'](**request.form.to_dict()))
-    db.session.commit()
-    return jsonify(True)
-
-
-@post(bp, '/save_syslog_server', 'Edit parameters')
-def save_syslog_server():
-    classes['SyslogServer'].query.delete()
-    db.session.add(classes['SyslogServer'](**request.form.to_dict()))
-    db.session.commit()
-    return jsonify(True)
 
 
 @post(bp, '/save_parameters', 'Edit parameters')

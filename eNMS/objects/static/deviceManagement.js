@@ -7,16 +7,17 @@ doc: false
 
 const table = $('#table').DataTable(); // eslint-disable-line
 
-function tableActions(values, pool) {
+function tableActions(values, device) {
   values.push(
+    `<button type="button" class="btn btn-success btn-xs"
+    onclick="connectionParametersModal('${device.id}')">Connect</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showTypeModal('pool', '${pool.id}')">Edit properties</button>`,
+    onclick="showTypeModal('device', '${device.id}')">Edit</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showTypeModal('pool', '${pool.id}', true)">Duplicate</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showPoolObjects('${pool.id}')">Edit objects</button>`,
+    onclick="showTypeModal('device', '${device.id}', true)">
+    Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('pool', '${pool.id}')">Delete</button>`
+    onclick="deleteInstance('device', '${device.id}')">Delete</button>`
   );
 }
 

@@ -7,15 +7,15 @@ links: false
 
 const table = $('#table').DataTable(); // eslint-disable-line
 
-function tableActions(values, pool) {
+function tableActions(values, obj) {
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showTypeModal('link', '${obj.id}')">Edit</button>`,
+    onclick="showTypeModal('link', '${link.id}')">Edit</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showTypeModal('link', '${obj.id}', true)">
+    onclick="showTypeModal('link', '${link.id}', true)">
     Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('link', '${obj.id}')">Delete</button>`
+    onclick="deleteInstance('link', '${link.id}')">Delete</button>`
   );
 }
 

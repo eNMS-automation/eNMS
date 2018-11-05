@@ -25,43 +25,6 @@ function flipAuthenticationCombo() {
 })();
 
 /**
- * Add object to the datatable.
- * @param {mode} mode - Create or edit.
- * @param {type} type - Device or link.
- * @param {obj} obj - Properties of the object.
- */
-function addObjectToTable(mode, type, obj) {
-  let values = [];
-  for (let i = 0; i < fields.length; i++) {
-    if (['longitude', 'latitude'].includes(fields[i])) {
-      values.push(`${parseFloat(obj[fields[i]]).toFixed(2)}`);
-    } else {
-      values.push(`${obj[fields[i]]}`);
-    }
-  }
-  // if it is a device, we add the "Connect" button.
-  if (type == 'device') {
-    values.push(`<button type="button" class="btn btn-success btn-xs"
-    onclick="connectionParametersModal('${obj.id}')">Connect</button>`);
-  }
-  values.push(
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showObjectModal('${type}', '${obj.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showObjectModal('${type}', '${obj.id}', true)">
-    Duplicate</button>`,
-    `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('${type}', '${obj.id}')">Delete</button>`
-  );
-  if (mode == 'edit') {
-    table.row($(`#${obj.id}`)).data(values);
-  } else {
-    const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${obj.id}`);
-  }
-}
-
-/**
  * Open new tab at the provided URL.
  * @param {url} url - URL.
  */

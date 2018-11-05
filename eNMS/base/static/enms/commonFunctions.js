@@ -133,11 +133,11 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
       const propertyType = propertyTypes[property] || 'str';
       console.log(property, value)
       if (propertyType.includes('bool') || property.includes('regex')) {
-        $(`#${property}`).prop('checked', value);
+        $(`#${type}-${property}`).prop('checked', value);
       } else if (propertyType.includes('dict')) {
-        $(`#${property}`).val(value ? JSON.stringify(value): '{}');
+        $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
       } else {
-        $(`#${property}`).val(value);
+        $(`#${type}-${property}`).val(value);
       }
     }
     $(`#edit-${type}`).modal('show');

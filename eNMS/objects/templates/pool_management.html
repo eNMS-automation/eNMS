@@ -20,8 +20,8 @@
           <div class="x_content">
             <form id="edit-pool-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
                 <div class="form-group">
-                {{ form['name'](class="form-control required", placeholder="Name") }}<br>
-                {{ form['description'](class="form-control", placeholder="Description") }}<br>
+                {{ form['name'](id="pool-name", class="form-control required", placeholder="Name") }}<br>
+                {{ form['description'](id="pool-description", class="form-control", placeholder="Description") }}<br>
                 <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                     <tr>
@@ -34,8 +34,8 @@
                     {% for property in form.device_properties %}
                       <tr>
                       <td>{{ names[property] }}</td>
-                      <td>{{ form['device_' + property](class="form-control") }}</td>
-                      <td>{{ form['device_' + property + '_regex'](class="form-control") }}</td>
+                      <td>{{ form['device_' + property](id="pool-" + 'device_' + property, class="form-control") }}</td>
+                      <td>{{ form['device_' + property + '_regex'](id="pool-" +'device_' + property + '_regex', class="form-control") }}</td>
                       </tr>
                     {% endfor %}
                     </tbody>
@@ -56,8 +56,8 @@
                     {% for property in form.link_properties %}
                       <tr>
                       <td>{{ names[property] }}</td>
-                      <td>{{ form['link_' + property](class="form-control") }}</td>
-                      <td>{{ form['link_' + property + '_regex'](class="form-control") }}</td>
+                      <td>{{ form['link_' + property](id="pool-" + 'link_' + property, class="form-control") }}</td>
+                      <td>{{ form['link_' + property + '_regex'](id="pool-" +'link_' + property + '_regex', class="form-control") }}</td>
                       </tr>
                     {% endfor %}
                     </tbody>

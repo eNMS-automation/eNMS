@@ -17,7 +17,7 @@ from eNMS.scheduling import bp
 from eNMS.scheduling.forms import SchedulingForm
 
 
-@get(bp, '/task_management', 'Scheduling Section')
+@get(bp, '/task_management', 'View')
 def task_management():
     return render_template(
         f'task_management.html',
@@ -27,7 +27,7 @@ def task_management():
     )
 
 
-@get(bp, '/calendar', 'Scheduling Section')
+@get(bp, '/calendar', 'View')
 def calendar():
     tasks = {}
     for task in fetch_all('Task'):
@@ -54,32 +54,13 @@ def calendar():
     )
 
 
-@post(bp, '/scheduler', 'Edit Scheduling Section')
-def scheduler(workflow_id=None):
-    return jsonify(factory('Task', **request.form).serialized)
-
-
-@post(bp, '/get/<task_id>', 'Scheduling Section')
-def get_task(task_id):
-    return jsonify(fetch('Task', id=task_id).serialized)
-
-
-@post(bp, '/delete_task/<task_id>', 'Edit Scheduling Section')
-def delete_task(task_id):
-    task = fetch('Task', id=task_id)
-    task.delete_task()
-    db.session.delete(task)
-    db.session.commit()
-    return jsonify(task.name)
-
-
-@post(bp, '/pause_task/<task_id>', 'Edit Scheduling Section')
+@post(bp, '/pause_task/<task_id>', 'Edit')
 def pause_task(task_id):
     fetch('Task', id=task_id).pause_task()
     return jsonify(True)
 
 
-@post(bp, '/resume_task/<task_id>', 'Edit Scheduling Section')
+@post(bp, '/resume_task/<task_id>', 'Edit')
 def resume_task(task_id):
     fetch('Task', id=task_id).resume_task()
     return jsonify(True)

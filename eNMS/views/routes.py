@@ -16,7 +16,7 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
 
-@get(bp, '/<view_type>_view', 'Views Section', ['GET', 'POST'])
+@get(bp, '/<view_type>_view', 'View', ['GET', 'POST'])
 def view(view_type):
     devices = fetch_all('Device')
     return render_template(
@@ -38,7 +38,7 @@ def view(view_type):
     )
 
 
-@get(bp, '/export_to_google_earth', 'Views Section')
+@get(bp, '/export_to_google_earth', 'View')
 def export_to_google_earth():
     kml_file = Kml()
     for device in fetch_all('Device'):
@@ -63,7 +63,7 @@ def export_to_google_earth():
     return jsonify(True)
 
 
-@post(bp, '/get_logs/<device_id>', 'Logs Section')
+@post(bp, '/get_logs/<device_id>', 'View')
 def get_logs(device_id):
     device_logs = [
         log.content for log in fetch_all('Log')

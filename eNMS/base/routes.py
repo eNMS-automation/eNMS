@@ -41,12 +41,12 @@ def get_instance(user_id):
     return jsonify(fetch('User', id=user_id).serialized)
 
 
-@post(bp, '/update/<cls>', 'Editing')
+@post(bp, '/update/<cls>', 'Edit')
 def update_instance():
     return jsonify(factory('User', **request.form).serialized)
 
 
-@post(bp, '/delete/<cls>/<user_id>', 'Editing')
+@post(bp, '/delete/<cls>/<user_id>', 'Edit')
 def delete_instance(user_id):
     return jsonify(delete('User', id=user_id))
 

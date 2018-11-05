@@ -178,7 +178,7 @@ user_permissions = [
     'Admin',
     'Connect to device',
     'View',
-    'Editing'
+    'Edit'
 ]
 
 log_public_properties = [

@@ -34,7 +34,7 @@ from eNMS.base.properties import pretty_names, user_public_properties
 from eNMS.base.security import vault_helper
 
 
-@get(bp, '/user_management', 'Admin Section')
+@get(bp, '/user_management', 'View')
 def users():
     return render_template(
         'user_management.html',
@@ -77,7 +77,7 @@ def logout():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@get(bp, '/administration', 'Admin Section')
+@get(bp, '/administration', 'View')
 def admninistration():
     return render_template(
         'administration.html',
@@ -86,7 +86,7 @@ def admninistration():
     )
 
 
-@post(bp, '/create_new_user', 'Edit Admin Section')
+@post(bp, '/create_new_user', 'Edit')
 def create_new_user():
     user_data = request.form.to_dict()
     if 'permissions' in user_data:
@@ -94,7 +94,7 @@ def create_new_user():
     return jsonify(factory('User', **user_data).serialized)
 
 
-@post(bp, '/save_parameters', 'Edit parameters')
+@post(bp, '/save_parameters', 'Admin')
 def save_parameters():
     get_one('Parameters').update(**request.form.to_dict())
     pool = fetch('Pool', id=request.form['database_filtering_pool'])

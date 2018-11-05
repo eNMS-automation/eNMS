@@ -17,7 +17,7 @@ from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
 
 
-@get(bp, '/log_management', 'Logs Section')
+@get(bp, '/log_management', 'View')
 def log_management():
     return render_template(
         'log_management.html',
@@ -28,7 +28,7 @@ def log_management():
     )
 
 
-@get(bp, '/log_automation', 'Logs Section')
+@get(bp, '/log_automation', 'View')
 def syslog_automation():
     return render_template(
         'log_automation.html',
@@ -39,7 +39,7 @@ def syslog_automation():
     )
 
 
-@post(bp, '/filter_logs', 'Edit Logs Section')
+@post(bp, '/filter_logs', 'Edit')
 def filter_logs():
     logs = [log for log in serialize('Log') if all(
         request.form[prop] in str(val) if not prop + 'regex' in request.form

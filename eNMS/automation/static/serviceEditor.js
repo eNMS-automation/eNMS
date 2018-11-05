@@ -85,9 +85,9 @@ function saveService() { // eslint-disable-line no-unused-vars
   fCall(url, '#service-editor-form', function(result) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     if (typeof workflowBuilder === 'undefined') {
-    addService(mode, result);
+      addService(mode, result);
     } else {
-    nodes.update({id: result.id, label: result.name});
+      nodes.update({id: result.id, label: result.name});
     }
     const message = `Service '${result.name}'
     ${mode == 'edit' ? 'edited' : 'created'} !`;

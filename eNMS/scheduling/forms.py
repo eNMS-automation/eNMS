@@ -10,4 +10,4 @@ class SchedulingForm(BaseForm):
     name = TextField()
     description = TextField()
     frequency = TextField()
-    job = SelectField()
+    job = SelectField(choices=())

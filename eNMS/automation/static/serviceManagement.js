@@ -31,7 +31,7 @@ function addService(mode, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="editService('${properties.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteService('${properties.id}')">Delete</button>`
+    onclick="deleteInstance('service', '${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
@@ -62,14 +62,3 @@ function getStates() {
   getStates();
 })();
 
-/**
- * Delete a service.
- * @param {id} id - Id of the service to delete.
- */
-function deleteService(id) { // eslint-disable-line no-unused-vars
-  call(`/delete/service/${id}`, function(service) {
-    table.row($(`#${id}`)).remove().draw(false);
-    const message = `Service '${service.name}' successfully deleted.`;
-    alertify.notify(message, 'error', 5);
-  });
-}

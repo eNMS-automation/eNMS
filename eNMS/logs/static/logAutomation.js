@@ -52,7 +52,7 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the log rule.
  */
 function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
-  call(`/logs/get_log_rule/${id}`, function(logRule) {
+  call(`/get/logrule/${id}`, function(logRule) {
     for (const [property, value] of Object.entries(logRule)) {
       if (property.includes('regex')) {
         $(`#${property}`).prop('checked', value);

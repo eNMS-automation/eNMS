@@ -13,7 +13,7 @@ function showTaskModal(id, duplicate) { // eslint-disable-line no-unused-vars
     $('#task-modal-form').trigger('reset');
     $('#task-modal').modal('show');
   } else {
-    call(`/scheduling/get/${id}`, function(task) {
+    call(`/get/task/${id}`, function(task) {
       $('#title').text(
         `${duplicate ? 'Duplicate' : 'Edit'} Task '${task.name}'`
       );

@@ -60,7 +60,7 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {duplicate} duplicate - Edit versus duplicate.
  */
 function showPoolModal(id, duplicate) { // eslint-disable-line no-unused-vars
-  call(`/objects/get/pool/${id}`, function(pool) {
+  call(`/get/pool/${id}`, function(pool) {
     $('#title').text(`${duplicate ? 'Duplicate' : 'Edit'} Pool '${pool.name}'`);
     if (duplicate) {
       pool.id = pool.name = '';
@@ -81,7 +81,7 @@ function showPoolModal(id, duplicate) { // eslint-disable-line no-unused-vars
  * @param {id} id - Id of the pool.
  */
 function showPoolObjects(id) { // eslint-disable-line no-unused-vars
-  call(`/objects/get/pool/${id}`, function(pool) {
+  call(`/get/pool/${id}`, function(pool) {
     $('#devices').val(pool.devices.map((n) => n.id));
     $('#links').val(pool.links.map((l) => l.id));
     poolId = id;
@@ -104,7 +104,7 @@ function savePoolObjects() { // eslint-disable-line no-unused-vars
  * Update pool properties.
  */
 function savePool() { // eslint-disable-line no-unused-vars
-  fCall('/objects/process_pool', '#edit-form', function(pool) {
+  fCall('/update/pool', '#edit-form', function(pool) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     addPool(mode, pool);
     const message = `Pool '${pool.name}'

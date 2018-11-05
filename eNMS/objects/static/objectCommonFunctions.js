@@ -31,7 +31,7 @@ function flipAuthenticationCombo() {
  * @param {duplicate} duplicate - Edit versus duplicate.
  */
 function showObjectModal(type, id, duplicate) { // eslint-disable-line no-unused-vars
-  call(`/objects/get/${type}/${id}`, function(obj) {
+  call(`/get/${type}/${id}`, function(obj) {
     $('#title').text(
       `${duplicate ? 'Duplicate' : 'Edit'}
       ${capitalize(type)} '${obj.name}'

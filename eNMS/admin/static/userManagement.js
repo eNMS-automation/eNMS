@@ -26,7 +26,7 @@ function addUser(mode, user) {
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showUserModal('${user.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteUser('${user.id}')">Delete</button>`
+    onclick="delete('user', '${user.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${user.id}`)).data(values);
@@ -84,16 +84,5 @@ function processData() { // eslint-disable-line no-unused-vars
     ${mode == 'edit' ? 'edited' : 'created'}.`;
     alertify.notify(message, 'success', 5);
     $('#edit').modal('hide');
-  });
-}
-
-/**
- * Delete user.
- * @param {userId} userId - Id of the user to be deleted.
- */
-function deleteUser(userId) { // eslint-disable-line no-unused-vars
-  call(`/delete/user/${userId}`, function(user) {
-    $(`#${userId}`).remove();
-    alertify.notify(`User '${user.name}' deleted.`, 'error', 5);
   });
 }

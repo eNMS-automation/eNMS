@@ -29,7 +29,7 @@ function addPool(mode, properties) {
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showPoolObjects('${properties.id}')">Edit objects</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deletePool('${properties.id}')">Delete</button>`
+    onclick="delete('pool', '${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
@@ -112,17 +112,6 @@ function savePool() { // eslint-disable-line no-unused-vars
     ${mode == 'edit' ? 'edited !' : 'created !'}.`;
     alertify.notify(message, 'success', 5);
     $('#edit').modal('hide');
-  });
-}
-
-/**
- * Delete pool.
- * @param {id} id - Id of the pool to delete.
- */
-function deletePool(id) { // eslint-disable-line no-unused-vars
-  call(`/delete/pool/${id}`, function(name) {
-    table.row($(`#${id}`)).remove().draw(false);
-    alertify.notify(`Pool '${name}' successfully deleted.`, 'error', 5);
   });
 }
 

@@ -19,7 +19,7 @@ function addLog(properties) {
     values.push(`${properties[fields[i]]}`);
   }
   values.push(`<button type="button" class="btn btn-danger btn-xs"
-  onclick="deleteLog('${properties.id}')">Delete</button>`);
+  onclick="delete('Log', '${properties.id}')">Delete</button>`);
   const rowNode = table.row.add(values).draw(false).node();
   $(rowNode).attr('id', `${properties.id}`);
 }
@@ -40,16 +40,5 @@ function filterLogs() { // eslint-disable-line no-unused-vars
       addLog(logs[i]);
     }
     alertify.notify(`Logs successfully filtered.`, 'success', 5);
-  });
-}
-
-/**
- * Delete log.
- * @param {id} id - Id of the log to be deleted.
- */
-function deleteLog(id) { // eslint-disable-line no-unused-vars
-  call(`/delete/log/${id}`, function(result) {
-  table.row($(`#${id}`)).remove().draw(false);
-  alertify.notify('Log successfully deleted.', 'error', 5);
   });
 }

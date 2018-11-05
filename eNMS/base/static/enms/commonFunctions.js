@@ -102,6 +102,6 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
 function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
   call(`/delete/${type}/${id}`, function(result) {
     table.row($(`#${id}`)).remove().draw(false);
-    alertify.notify(`${capitalize(type)} '${result.name}' deleted.`, 'error', 5);
+    alertify.notify(`${type} '${result.name}' deleted.`, 'error', 5);
   });
 }

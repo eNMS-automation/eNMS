@@ -177,17 +177,8 @@ user_serialized_properties = [
 user_permissions = [
     'Admin',
     'Connect to device',
-    'Admin Section',
-    'Inventory Section',
-    'Views Section',
-    'Automation Section',
-    'Scheduling Section',
-    'Logs Section',
-    'Edit Admin Section',
-    'Edit Inventory Section',
-    'Edit Automation Section',
-    'Edit Scheduling Section',
-    'Edit Logs Section'
+    'View',
+    'Editing'
 ]
 
 log_public_properties = [

@@ -17,6 +17,21 @@ def site_root():
     return redirect(url_for('admin_blueprint.login'))
 
 
+@post(bp, '/update/<cls>', 'Edit Admin Section')
+def update_instance():
+    return jsonify(factory('User', **request.form).serialized)
+
+
+@post(bp, '/get/<cls>/<user_id>', 'Admin Section')
+def get_instance(user_id):
+    return jsonify(fetch('User', id=user_id).serialized)
+
+
+@post(bp, '/delete/<cls>/<user_id>', 'Edit Admin Section')
+def delete_instance(user_id):
+    return jsonify(delete('User', id=user_id))
+
+
 @get(bp, '/dashboard')
 def dashboard():
     return render_template(

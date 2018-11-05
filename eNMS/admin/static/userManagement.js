@@ -12,26 +12,26 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 /**
  * Add user to datatable or edit line.
  * @param {mode} mode - Create or edit.
- * @param {properties} properties - Properties of the user.
+ * @param {user} user - Properties of the user.
  */
-function addUser(mode, properties) {
+function addUser(mode, user) {
   let values = [];
   for (let i = 0; i < fields.length; i++) {
-    values.push(`${properties[fields[i]]}`);
+    values.push(`${user[fields[i]]}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showUserModal('${properties.id}')">Edit</button>`,
+    onclick="showUserModal('${user.id}')">Edit</button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showUserModal('${properties.id}', true)">Duplicate</button>`,
+    onclick="showUserModal('${user.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteUser('${properties.id}')">Delete</button>`
+    onclick="deleteUser('${user.id}')">Delete</button>`
   );
   if (mode == 'edit') {
-    table.row($(`#${properties.id}`)).data(values);
+    table.row($(`#${user.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${properties.id}`);
+    $(rowNode).attr('id', `${user.id}`);
   }
 }
 
@@ -57,14 +57,14 @@ function showModal() { // eslint-disable-line no-unused-vars
  * @param {duplicate} duplicate - Edit versus duplicate.
  */
 function showUserModal(id, duplicate) { // eslint-disable-line no-unused-vars
-  call(`/admin/get/${id}`, function(properties) {
+  call(`/get/user/${id}`, function(user) {
     $('#title').text(
-      `${duplicate ? 'Duplicate' : 'Edit'} User '${properties.name}'`
+      `${duplicate ? 'Duplicate' : 'Edit'} User '${user.name}'`
     );
     if (duplicate) {
-      properties.id = properties.name = '';
+      user.id = user.name = '';
     }
-    for (const [property, value] of Object.entries(properties)) {
+    for (const [property, value] of Object.entries(user)) {
       $(`#${property}`).val(value);
     }
     $('#edit').modal('show');

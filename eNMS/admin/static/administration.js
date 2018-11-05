@@ -5,24 +5,6 @@ fCall: false
 */
 
 /**
- * Query openNMS server.
- */
-function queryOpenNMS() { // eslint-disable-line no-unused-vars
-  fCall('/admin/query_opennms', '#opennms_form', function() {
-    alertify.notify('Topology imported from OpenNMS.', 'success', 5);
-  });
-}
-
-/**
- * Query Netbox server.
- */
-function queryNetbox() { // eslint-disable-line no-unused-vars
-  fCall('/admin/query_netbox', '#netbox_form', function() {
-    alertify.notify('Topology imported from Netbox.', 'success', 5);
-  });
-}
-
-/**
  * Save Parameters.
  */
 function saveParameters() { // eslint-disable-line no-unused-vars

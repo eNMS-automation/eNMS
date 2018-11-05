@@ -1,13 +1,14 @@
 from flask_wtf import FlaskForm
 from json import dumps, loads
 
-from eNMS import db
+from eNMS import app, db
 from eNMS.base.helpers import fetch, objectify, choices
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,
     boolean_properties,
-    relationships as rel
+    relationships as rel,
+    vault_properties
 )
 
 
@@ -28,7 +29,12 @@ class Base(db.Model):
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
             serial = rel.get(self.__tablename__, rel['Service'])
-            if property in serial:
+            if property in vault_properties:
+                vault_helper(
+                    f'{self.type}/{kwargs["id"]}/{property}',
+                    {property: value}
+                )
+            elif property in serial:
                 value = fetch(serial[property], id=value)
             elif property[:-1] in serial:
                 value = objectify(serial[property[:-1]], value)

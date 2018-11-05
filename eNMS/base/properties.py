@@ -21,6 +21,7 @@ sql_types = {
 
 custom_properties = get_custom_properties()
 boolean_properties = ['multiprocessing', 'send_notification']
+vault_properties = ['username', 'password', 'enable_password']
 
 base_properties = [
     'id',

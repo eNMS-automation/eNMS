@@ -19,6 +19,7 @@ db = SQLAlchemy(
 login_manager = LoginManager()
 mail = Mail()
 scheduler = APScheduler()
+vault_client = VaultClient()
 
 from eNMS.base.default import (
     create_default_services,
@@ -65,15 +66,12 @@ def configure_login_manager(app):
         return fetch('User', name=request.form.get('name'))
 
 
-def create_vault_client(app):
-    client = VaultClient(
-        url=app.config['VAULT_ADDR'],
-        token=app.config['VAULT_TOKEN']
-    )
-    if client.is_sealed() and app.config['UNSEAL_VAULT']:
+def configure_vault_client(app):
+    vault_client.url = app.config['VAULT_ADDR']
+    vault_client.token = app.config['VAULT_TOKEN']
+    if vault_client.is_sealed() and app.config['UNSEAL_VAULT']:
         keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
-        client.unseal_multi(filter(None, keys))
-    return client
+        vault_client.unseal_multi(filter(None, keys))
 
 
 def configure_database(app):
@@ -135,6 +133,6 @@ def create_app(path, config):
     configure_logs(app)
     configure_errors(app)
     if app.config['USE_VAULT']:
-        app.vault_client = create_vault_client(app)
+        configure_vault_client(app)
     info('eNMS starting')
     return app

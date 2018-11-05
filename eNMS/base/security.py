@@ -1,23 +1,15 @@
-from eNMS.base.helpers import fetch
+from eNMS import vault_client
 
 
 def process_kwargs(app, **kwargs):
-    if 'source_name' in kwargs:
-        source = fetch('Device', name=kwargs.pop('source_name'))
-        destination = fetch('Device', name=kwargs.pop('destination_name'))
-        kwargs.update({
-            'source_id': source.id,
-            'destination_id': destination.id,
-            'source': source.id,
-            'destination': destination.id
-        })
+
     else:
         if app.config['USE_VAULT']:
             data = {
                 property: kwargs.pop(property, '')
-                for property in ('username', 'password', 'enable_password')
+                for property in ()
             }
-            vault_helper(app, f'device/{kwargs["name"]}', data)
+            
     return 'Link' if 'source' in kwargs else 'Device', kwargs
 
 
@@ -27,12 +19,12 @@ def allowed_file(name, allowed_extensions):
     return allowed_syntax and allowed_extension
 
 
-def vault_helper(app, path, data=None):
+def vault_helper(path, data=None):
     vault_path = f'secret/data/{path}'
     if not data:
-        return app.vault_client.read(vault_path)['data']['data']
+        return vault_client.read(vault_path)['data']['data']
     else:
-        app.vault_client.write(vault_path, data=data)
+        vault_client.write(vault_path, data=data)
 
 
 def get_device_credentials(app, device):

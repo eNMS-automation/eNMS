@@ -131,12 +131,6 @@ def connection(id):
     })
 
 
-@post(bp, '/edit_object', 'Edit')
-def edit_object():
-    cls, kwargs = process_kwargs(app, **request.form.to_dict())
-    return jsonify(factory(cls, **kwargs).serialized)
-
-
 @post(bp, '/save_pool_objects/<pool_id>', 'Edit')
 def save_pool_objects(pool_id):
     pool = fetch('Pool', id=pool_id)

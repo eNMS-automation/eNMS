@@ -60,7 +60,7 @@ function showObjectModal(type, id, duplicate) { // eslint-disable-line no-unused
  * @param {type} type - Node or link.
  */
 function editObject(type) { // eslint-disable-line no-unused-vars
-  fCall('/objects/edit_object', `#edit-${type}-form`, function(result) {
+  fCall(`/update/${type}`, `#edit-${type}-form`, function(result) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     if (typeof table !== 'undefined') {
       addObjectToTable(mode, type, result);

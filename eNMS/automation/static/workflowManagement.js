@@ -112,7 +112,7 @@ function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
  * Edit a workflow.
  */
 function editObject() { // eslint-disable-line no-unused-vars
-  fCall('/automation/edit_workflow', '#edit-form', function(workflow) {
+  fCall('/update/workflow', '#edit-form', function(workflow) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     addWorkflow(mode, workflow);
     const message = `Workflow ${workflow.name};

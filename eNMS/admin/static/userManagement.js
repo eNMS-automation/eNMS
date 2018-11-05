@@ -75,7 +75,7 @@ function showUserModal(id, duplicate) { // eslint-disable-line no-unused-vars
  * Create or edit user.
  */
 function processData() { // eslint-disable-line no-unused-vars
-  fCall('/admin/process_user', '#edit-form', function(user) {
+  fCall('/update/user', '#edit-form', function(user) {
     const title = $('#title').text().startsWith('Edit');
     const mode = title ? 'edit' : 'create';
     addUser(mode, user);

@@ -47,7 +47,7 @@ function addTask(mode, properties) {
  * Schedule a task.
  */
 function scheduleTask() { // eslint-disable-line no-unused-vars
-  fCall('/scheduling/scheduler', '#task-modal-form', function(task) {
+  fCall('/update/task', '#task-modal-form', function(task) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     addTask(mode, task);
     const message = `Task '${task.name}'

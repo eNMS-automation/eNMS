@@ -70,7 +70,7 @@ function showLogRuleModal(id) { // eslint-disable-line no-unused-vars
  * Save log rule.
  */
 function saveRule() { // eslint-disable-line no-unused-vars
-  fCall('/logs/save_log_rule', '#edit-form', function(logRule) {
+  fCall('/update/logrule', '#edit-form', function(logRule) {
     const mode = $('#title').text().startsWith('Edit') ? 'edited' : 'created';
     addLogRule(logRule, mode);
     alertify.notify(`Log rule '${logRule.name}' ${mode}.`, 'success', 5);

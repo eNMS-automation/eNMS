@@ -191,7 +191,7 @@ def export_topology():
     return jsonify(True)
 
 
-@post(bp, '/migration_export', 'Admin Section')
+@post(bp, '/migration_export', 'Admin')
 def migration_export():
     name = request.form['name']
     for cls_name in request.form.getlist('export'):
@@ -203,7 +203,7 @@ def migration_export():
     return jsonify(True)
 
 
-@post(bp, '/migration_import', 'Admin Section')
+@post(bp, '/migration_import', 'Admin')
 def migration_import():
     name = request.form['name']
     for cls in request.form.getlist('export'):
@@ -214,7 +214,7 @@ def migration_import():
     return jsonify(True)
 
 
-@post(bp, '/query_opennms', 'Edit objects')
+@post(bp, '/query_opennms', 'Edit')
 def query_opennms():
     parameters = get_one('Parameters')
     login, password = parameters.opennms_login, request.form['password']
@@ -254,7 +254,7 @@ def query_opennms():
     return jsonify(True)
 
 
-@post(bp, '/query_netbox', 'Edit objects')
+@post(bp, '/query_netbox', 'Edit')
 def query_netbox():
     nb = netbox_api(
         request.form['netbox_address'],

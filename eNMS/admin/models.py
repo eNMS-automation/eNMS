@@ -35,26 +35,6 @@ class User(Base, UserMixin):
         return self.is_admin or permission in self.permissions
 
 
-class TacacsServer(Base):
-
-    __tablename__ = 'TacacsServer'
-
-    id = Column(Integer, primary_key=True)
-    ip_address = Column(String(120))
-    password = Column(String(120))
-    port = Column(Integer)
-    timeout = Column(Integer)
-
-    def __init__(self, **kwargs):
-        self.ip_address = kwargs['ip_address']
-        self.password = cisco_type7.hash(kwargs['password'])
-        self.port = int(kwargs['port'])
-        self.timeout = int(kwargs['timeout'])
-
-    def __repr__(self):
-        return self.ip_address
-
-
 class Parameters(Base):
 
     __tablename__ = 'Parameters'

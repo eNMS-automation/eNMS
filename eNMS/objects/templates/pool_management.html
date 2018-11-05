@@ -164,6 +164,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
     var fields = {{ fields|tojson|safe }};
     var pools = {{ pools|tojson|safe }};
   </script>

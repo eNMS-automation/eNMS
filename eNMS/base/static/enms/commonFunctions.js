@@ -129,7 +129,7 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
     if (duplicate) {
       instance.id = instance.name = '';
     }
-    for (const [property, value] of Object.entries(workflow)) {
+    for (const [property, value] of Object.entries(instance)) {
       const propertyType = propertyTypes[property] || 'str';
       if (propertyType.includes('bool')) {
         $(`#${property}`).prop('checked', value);

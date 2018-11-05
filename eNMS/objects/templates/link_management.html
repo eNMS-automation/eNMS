@@ -52,6 +52,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
     var fields = {{ fields|tojson|safe }};
     var links = {{ links|tojson|safe }};
   </script>

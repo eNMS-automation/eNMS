@@ -15,8 +15,7 @@ from eNMS.base.properties import (
     link_public_properties,
     link_subtypes,
     device_public_properties,
-    device_subtypes,
-    import_properties
+    device_subtypes
 )
 
 
@@ -94,9 +93,3 @@ class NetboxForm(BaseForm):
     netbox_token = TextField()
     node_type = [subtype for subtype in device_subtypes.items()]
     netbox_type = SelectField(choices=node_type)
-
-
-class ImportExportForm(BaseForm):
-    name = TextField()
-    export_choices = [(p, p.capitalize()) for p in import_properties]
-    export = SelectMultipleField(choices=export_choices)

@@ -9,7 +9,7 @@ from wtforms import (
 )
 
 from eNMS.base.models import BaseForm
-from eNMS.base.properties import user_permissions
+from eNMS.base.properties import import_properties, user_permissions
 
 
 class LoginForm(BaseForm):
@@ -79,3 +79,9 @@ class AdministrationForm(BaseForm):
             'pool',
         )
     }
+
+
+class ImportExportForm(BaseForm):
+    name = TextField()
+    export_choices = [(p, p.capitalize()) for p in import_properties]
+    export = SelectMultipleField(choices=export_choices)

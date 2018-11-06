@@ -12,7 +12,7 @@ parameters: false
 partial: false
 polylinesArray: true
 showModal: false
-showObjectModal: false
+showTypeModal: false
 selection: true
 device_subtypes: false
 view: false
@@ -95,7 +95,7 @@ for (let i = 0; i < devices.length; i++) {
       selection.push(this.device_id);
       $('#devices').val(selection);
     */
-    showObjectModal('device', this.device_id);
+    showTypeModal('device', this.device_id);
   });
 
   marker.bindTooltip(device['name'], {
@@ -131,7 +131,7 @@ for (let i = 0; i < links.length; i++) {
   polylinesArray.push(polyline);
   polyline.link_id = link.id;
   polyline.on('dblclick', function(e) {
-    showObjectModal('link', this.link_id);
+    showTypeModal('link', this.link_id);
   });
   polyline.bindTooltip(link['name'], {
     permanent: false,

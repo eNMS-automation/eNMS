@@ -1,4 +1,4 @@
-from flask import abort, jsonify, request
+from flask import abort, jsonify, request, render_template
 from flask_login import current_user, login_required
 from functools import wraps
 from sqlalchemy import exc
@@ -137,6 +137,9 @@ def post(blueprint, url, permission=None):
                 return jsonify({'failure': True, 'error': error})
         return inner
     return outer
+
+
+def webpage()
 
 
 def str_dict(input, depth=0):

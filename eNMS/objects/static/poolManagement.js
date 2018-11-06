@@ -1,17 +1,22 @@
 /*
 global
+addInstance: false
 alertify: false
 call: false
 doc: false
 fCall: false
-fields: false
 pools: false
 */
 
 let poolId = null;
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
-function tableActions(values, pool) {
+/**
+ * Table Actions.
+ * @param {values} values - values array.
+ * @param {pool} pool - Pool.
+ */
+function tableActions(values, pool) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showTypeModal('pool', '${pool.id}')">Edit properties</button>`,

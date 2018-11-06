@@ -16,6 +16,7 @@ from eNMS.admin.forms import (
     CreateAccountForm,
     AdministrationForm,
     LoginForm,
+    MigrationsForm
 )
 from eNMS.base.helpers import (
     get,
@@ -50,7 +51,7 @@ def administration():
 @get(bp, '/migrations', 'View')
 def migrations():
     return dict(
-        form=AdministrationForm(request.form, 'Parameters'),
+        form=MigrationsForm(request.form, 'Parameters'),
     )
 
 

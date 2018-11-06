@@ -35,7 +35,6 @@ from eNMS.objects.forms import (
     AddLink,
     AddDevice,
     AddPoolForm,
-    ImportExportForm,
     NetboxForm,
     OpenNmsForm,
     PoolObjectsForm

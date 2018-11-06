@@ -1,13 +1,18 @@
 /*
 global
-addObjectToTable: false
+addInstance: false
 doc: false
 links: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line
 
-function tableActions(values, link) {
+/**
+ * Table Actions.
+ * @param {values} values - values array.
+ * @param {link} link - Link properties.
+ */
+function tableActions(values, link) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showTypeModal('link', '${link.id}')">Edit</button>`,

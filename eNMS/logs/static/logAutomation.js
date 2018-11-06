@@ -1,9 +1,6 @@
 /*
 global
-alertify: false
-call: false
-fCall: false
-fields: false
+addInstance: false
 logRules: false
 */
 
@@ -11,10 +8,10 @@ const table = $('#table').DataTable(); // eslint-disable-line
 
 /**
  * Add a service to the datatable.
- * @param {mode} mode - Create or edit.
- * @param {properties} properties - Properties of the service.
+ * @param {values} values - User properties.
+ * @param {logrule} logrule - Log Rule.
  */
-function tableActions(values, logrule) {
+function tableActions(values, logrule) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showTypeModal('logrule', '${logrule.id}')">Edit</button>`,

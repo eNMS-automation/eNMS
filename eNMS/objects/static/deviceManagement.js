@@ -1,13 +1,18 @@
 /*
 global
-addObjectToTable: false
+addInstance: false
 devices: false
 doc: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line
 
-function tableActions(values, device) {
+/**
+ * Table Actions.
+ * @param {values} values - values array.
+ * @param {device} device - Device properties.
+ */
+function tableActions(values, device) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-success btn-xs"
     onclick="connectionParametersModal('${device.id}')">Connect</button>`,

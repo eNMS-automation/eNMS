@@ -6,37 +6,37 @@ fields: false
 services: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line
+const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 /**
  * Add a service to the datatable.
  * @param {mode} mode - Create or edit.
- * @param {service} service - Service properties.
+ * @param {properties} properties - Properties of the service.
  */
-function addService(mode, service) {
+function addService(mode, properties) {
   let values = [];
   for (let i = 0; i < fields.length; i++) {
-    values.push(`${service[fields[i]]}`);
+    values.push(`${properties[fields[i]]}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showLogs('${service.id}')"></i>Logs</a></button>`,
+    onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareLogs('${service.id}')"></i>Compare</a></button>`,
+    onclick="compareLogs('${properties.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
-    onclick="runJob('${service.id}')">Run</button>`,
+    onclick="runJob('${properties.id}')">Run</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="editService('${service.id}')">Edit</button>`,
+    onclick="editService('${properties.id}')">Edit</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="editService('${service.id}', true)">Duplicate</button>`,
+    onclick="editService('${properties.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('service', '${service.id}')">Delete</button>`
+    onclick="deleteInstance('service', '${properties.id}')">Delete</button>`
   );
   if (mode == 'edit') {
-    table.row($(`#${service.id}`)).data(values);
+    table.row($(`#${properties.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${service.id}`);
+    $(rowNode).attr('id', `${properties.id}`);
   }
 }
 

@@ -1,7 +1,6 @@
 /*
 global
 alertify: false
-call: false
 fCall: false
 fields: false
 logs: false

@@ -112,27 +112,23 @@ def permission_required(permission, redirect=True):
     return decorator
 
 
-def templated(template=None):
-    def decorator(f):
-        @wraps(f)
-        def decorated_function(*args, **kwargs):
-            
-
-            ctx = f(*args, **kwargs) or {}
-            ctx.update({
-                'names': pretty_names,
-                'property_types': {k: str(v) for k, v in property_types.items()}
-            })
-            template = ctx.pop('template', request.endpoint.split('.')[-1] + '.html')
-            return render_template(template, **ctx)
-        return decorated_function
-    return decorator
+def templated(function):
+    @wraps(function)
+    def decorated_function(*args, **kwargs):
+        ctx = function(*args, **kwargs) or {}
+        ctx.update({
+            'names': pretty_names,
+            'property_types': {k: str(v) for k, v in property_types.items()}
+        })
+        template = ctx.pop('template', request.endpoint.split('.')[-1] + '.html')
+        return render_template(template, **ctx)
+    return decorated_function
 
 
 def get(blueprint, url, permission=None, method=['GET']):
     def outer(func):
         @blueprint.route(url, methods=method)
-        @templated()
+        @templated
         @login_required
         @permission_required(permission)
         @wraps(func)

@@ -1,12 +1,8 @@
 /*
 global
 alertify: false
-call: false
-capitalize: false
 fCall: false
-fields: false
 partial: false
-table: false
 */
 
 /**

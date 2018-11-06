@@ -175,29 +175,6 @@ def export_topology():
     return jsonify(True)
 
 
-@post(bp, '/migration_export', 'Admin')
-def migration_export():
-    name = request.form['name']
-    for cls_name in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'import_export' / name
-        if not exists(path):
-            makedirs(path)
-        with open(path / f'{cls_name}.yaml', 'w') as migration_file:
-            dump(export(cls_name), migration_file, default_flow_style=False)
-    return jsonify(True)
-
-
-@post(bp, '/migration_import', 'Admin')
-def migration_import():
-    name = request.form['name']
-    for cls in request.form.getlist('export'):
-        path = app.path / 'migrations' / 'import_export' / name / f'{cls}.yaml'
-        with open(path, 'r') as migration_file:
-            for obj in load(migration_file):
-                factory(obj.pop('type') if cls == 'Service' else cls, **obj)
-    return jsonify(True)
-
-
 @post(bp, '/query_opennms', 'Edit')
 def query_opennms():
     parameters = get_one('Parameters')

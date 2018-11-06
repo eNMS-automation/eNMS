@@ -1,43 +1,42 @@
 /*
 global
-alertify: false
 call: false
 doc: false
 fields: false
 services: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
 /**
  * Add a service to the datatable.
  * @param {mode} mode - Create or edit.
- * @param {properties} properties - Properties of the service.
+ * @param {service} service - Service properties.
  */
-function addService(mode, properties) {
+function addService(mode, service) {
   let values = [];
   for (let i = 0; i < fields.length; i++) {
-    values.push(`${properties[fields[i]]}`);
+    values.push(`${service[fields[i]]}`);
   }
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
+    onclick="showLogs('${service.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareLogs('${properties.id}')"></i>Compare</a></button>`,
+    onclick="compareLogs('${service.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
-    onclick="runJob('${properties.id}')">Run</button>`,
+    onclick="runJob('${service.id}')">Run</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="editService('${properties.id}')">Edit</button>`,
+    onclick="editService('${service.id}')">Edit</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="editService('${properties.id}', true)">Duplicate</button>`,
+    onclick="editService('${service.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('service', '${properties.id}')">Delete</button>`
+    onclick="deleteInstance('service', '${service.id}')">Delete</button>`
   );
   if (mode == 'edit') {
-    table.row($(`#${properties.id}`)).data(values);
+    table.row($(`#${service.id}`)).data(values);
   } else {
     const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${properties.id}`);
+    $(rowNode).attr('id', `${service.id}`);
   }
 }
 

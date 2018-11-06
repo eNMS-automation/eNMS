@@ -1,16 +1,18 @@
 /*
 global
-alertify: false
-call: false
+addInstance: false
 doc: false
-fCall: false
-fields: false
 users: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
-function tableActions(values, user) {
+/**
+ * Edit a service.
+ * @param {values} values - User properties.
+ * @param {user} user - User.
+ */
+function tableActions(values, user) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showTypeModal('user', '${user.id}')">Edit</button>`,

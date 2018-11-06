@@ -7,8 +7,13 @@ fields: false
 logRules: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
+/**
+ * Add a service to the datatable.
+ * @param {mode} mode - Create or edit.
+ * @param {properties} properties - Properties of the service.
+ */
 function tableActions(values, logrule) {
   values.push(
     `<button type="button" class="btn btn-info btn-xs"

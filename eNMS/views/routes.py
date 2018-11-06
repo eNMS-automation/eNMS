@@ -19,8 +19,8 @@ from eNMS.views.forms import GoogleEarthForm
 @get(bp, '/<view_type>_view', 'View', ['GET', 'POST'])
 def view(view_type):
     devices = fetch_all('Device')
-    return webpage(
-        f'{view_type}_view.html',
+    return dict(
+        template=f'{view_type}_view.html',
         pools=fetch_all('Pool'),
         parameters=get_one('Parameters').serialized,
         view=request.form.get(

@@ -116,16 +116,15 @@ def templated(template=None):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
-            template_name = template
-            if template_name is None:
-                template_name = request.endpoint.replace('.', '/') + '.html'
-            ctx = {} if ctx is None else f(*args, **kwargs)
+            
+
+            ctx = f(*args, **kwargs) or {}
             ctx.update({
                 'names': pretty_names,
                 'property_types': {k: str(v) for k, v in property_types.items()}
             })
-            print(template_name)
-            return render_template(template_name, **ctx)
+            template = ctx.pop('template', request.endpoint.split('.')[-1] + '.html')
+            return render_template(template, **ctx)
         return decorated_function
     return decorator
 

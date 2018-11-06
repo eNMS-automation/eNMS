@@ -91,7 +91,7 @@ if (workflow) {
   $('#workflow-name').val(workflow.id);
   displayWorkflow(workflow);
 } else {
-  call(`/automation/get/${$('#workflow-name').val()}`, function(result) {
+  call(`/get/workflow/${$('#workflow-name').val()}`, function(result) {
     workflow = result;
     graph = displayWorkflow(result);
   });
@@ -347,7 +347,7 @@ function colorJob(id, color) {
  */
 function getWorkflowStatus() {
   if (workflow) {
-    call(`/automation/get/${workflow.id}`, function(wf) {
+    call(`/get/workflow/${workflow.id}`, function(wf) {
       $('#state').text(`State: ${wf.state}.`);
       if (wf.status.current_device) {
         $('#current-device').text(

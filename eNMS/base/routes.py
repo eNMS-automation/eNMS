@@ -6,7 +6,6 @@ from eNMS.base.classes import classes
 from eNMS.base.helpers import delete, factory, fetch, fetch_all, get, post
 from eNMS.base.properties import (
     default_diagrams_properties,
-    pretty_names,
     reverse_pretty_names,
     type_to_diagram_properties
 )
@@ -19,9 +18,7 @@ def site_root():
 
 @get(bp, '/dashboard')
 def dashboard():
-    return render_template(
-        'dashboard.html',
-        names=pretty_names,
+    return dict(
         properties=type_to_diagram_properties,
         default_properties=default_diagrams_properties,
         counters={cls: len(fetch_all(cls)) for cls in classes}

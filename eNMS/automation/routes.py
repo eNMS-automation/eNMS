@@ -15,8 +15,6 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import (
-    pretty_names,
-    property_types,
     service_table_properties,
     workflow_table_properties
 )
@@ -33,12 +31,9 @@ from eNMS.automation.helpers import scheduler_job
 
 @get(bp, '/service_management', 'View')
 def service_management():
-    return render_template(
-        'service_management.html',
+    return dict(
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,
-        names=pretty_names,
-        property_types={k: str(v) for k, v in property_types.items()},
         service_form=JobForm(request.form, 'Service'),
         services_classes=list(service_classes),
         services=serialize('Service')
@@ -47,12 +42,9 @@ def service_management():
 
 @get(bp, '/workflow_management', 'View')
 def workflow_management():
-    return render_template(
-        'workflow_management.html',
+    return dict(
         compare_logs_form=CompareLogsForm(request.form),
-        names=pretty_names,
         fields=workflow_table_properties,
-        property_types={k: str(v) for k, v in property_types.items()},
         workflows=serialize('Workflow'),
         workflow_creation_form=WorkflowForm(request.form, 'Workflow')
     )
@@ -61,14 +53,11 @@ def workflow_management():
 @get(bp, '/workflow_builder', 'View')
 def workflow_builder():
     workflow = fetch('Workflow', id=session.get('workflow', None))
-    return render_template(
-        'workflow_builder.html',
+    return dict(
         workflow=workflow.serialized if workflow else None,
         add_job_form=AddJobForm(request.form, 'Workflow'),
         workflow_builder_form=WorkflowBuilderForm(request.form, 'Service'),
         compare_logs_form=CompareLogsForm(request.form),
-        names=pretty_names,
-        property_types={k: str(v) for k, v in property_types.items()},
         service_form=JobForm(request.form, 'Service'),
         services_classes=list(service_classes)
     )

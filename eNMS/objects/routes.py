@@ -50,8 +50,7 @@ from eNMS.base.properties import (
 
 @get(bp, '/device_management', 'View')
 def device_management():
-    return webpage(
-        'device_management.html',
+    return dict(
         fields=device_public_properties,
         devices=serialize('Device'),
         add_device_form=AddDevice(request.form)
@@ -60,8 +59,7 @@ def device_management():
 
 @get(bp, '/link_management', 'View')
 def link_management():
-    return webpage(
-        'link_management.html',
+    return dict(
         fields=link_table_properties,
         links=serialize('Link'),
         add_link_form=AddLink(request.form, 'Link')
@@ -70,8 +68,7 @@ def link_management():
 
 @get(bp, '/pool_management', 'View')
 def pool_management():
-    return webpage(
-        'pool_management.html',
+    return dict(
         form=AddPoolForm(request.form),
         pool_object_form=PoolObjectsForm(request.form, 'Pool'),
         fields=pool_table_properties,
@@ -81,8 +78,7 @@ def pool_management():
 
 @get(bp, '/import_export', 'View')
 def import_export():
-    return webpage(
-        'import_export.html',
+    return dict(
         import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),

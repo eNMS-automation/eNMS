@@ -26,7 +26,7 @@ from eNMS.base.helpers import (
     fetch_all,
     serialize
 )
-from eNMS.base.properties import pretty_names, user_public_properties
+from eNMS.base.properties import user_public_properties
 from eNMS.base.security import vault_helper
 
 
@@ -36,6 +36,14 @@ def user_management():
         fields=user_public_properties,
         users=serialize('User'),
         form=AddUser(request.form)
+    )
+
+
+@get(bp, '/administration', 'View')
+def administration():
+    return dict(
+        form=AdministrationForm(request.form, 'Parameters'),
+        parameters=get_one('Parameters')
     )
 
 
@@ -69,15 +77,6 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('admin_blueprint.login'))
-
-
-@get(bp, '/administration', 'View')
-def admninistration():
-    return render_template(
-        'administration.html',
-        form=AdministrationForm(request.form, 'Parameters'),
-        parameters=get_one('Parameters')
-    )
 
 
 @post(bp, '/create_new_user', 'Edit')

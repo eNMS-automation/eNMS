@@ -15,8 +15,7 @@ from eNMS.scheduling.forms import SchedulingForm
 
 @get(bp, '/task_management', 'View')
 def task_management():
-    return render_template(
-        f'task_management.html',
+    return dict(
         fields=task_public_properties,
         tasks=serialize('Task'),
         scheduling_form=SchedulingForm(request.form, 'Job')
@@ -43,8 +42,7 @@ def calendar():
             task.aps_date('start_date')
         ).split(',')]
         tasks[task.name] = {**task.serialized, **{'date': js_date}}
-    return render_template(
-        'calendar.html',
+    return dict(
         tasks=tasks,
         scheduling_form=SchedulingForm(request.form, 'Job')
     )

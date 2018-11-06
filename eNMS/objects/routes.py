@@ -23,7 +23,8 @@ from eNMS.base.helpers import (
     get_one,
     objectify,
     post,
-    serialize
+    serialize,
+    webpage
 )
 from eNMS.base.security import (
     allowed_file,
@@ -44,46 +45,38 @@ from eNMS.base.properties import (
     device_public_properties,
     export_properties,
     link_table_properties,
-    pool_table_properties,
-    pretty_names,
-    property_types
+    pool_table_properties
 )
 
 
 @get(bp, '/device_management', 'View')
 def device_management():
-    return render_template(
+    return webpage(
         'device_management.html',
-        names=pretty_names,
         fields=device_public_properties,
         devices=serialize('Device'),
-        property_types={k: str(v) for k, v in property_types.items()},
         add_device_form=AddDevice(request.form)
     )
 
 
 @get(bp, '/link_management', 'View')
 def link_management():
-    return render_template(
+    return webpage(
         'link_management.html',
-        names=pretty_names,
         fields=link_table_properties,
         links=serialize('Link'),
-        property_types={k: str(v) for k, v in property_types.items()},
         add_link_form=AddLink(request.form, 'Link')
     )
 
 
 @get(bp, '/pool_management', 'View')
 def pool_management():
-    return render_template(
+    return webpage(
         'pool_management.html',
         form=AddPoolForm(request.form),
         pool_object_form=PoolObjectsForm(request.form, 'Pool'),
-        names=pretty_names,
         fields=pool_table_properties,
-        pools=serialize('Pool'),
-        property_types={k: str(v) for k, v in property_types.items()},
+        pools=serialize('Pool')
     )
 
 

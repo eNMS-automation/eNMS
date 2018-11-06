@@ -5,7 +5,11 @@ from sqlalchemy import exc
 
 from eNMS import db
 from eNMS.base.classes import classes
-from eNMS.base.properties import boolean_properties, property_types
+from eNMS.base.properties import (
+    boolean_properties,
+    pretty_names,
+    property_types
+)
 
 
 def add_classes(*models):
@@ -139,7 +143,12 @@ def post(blueprint, url, permission=None):
     return outer
 
 
-def webpage()
+def webpage(*args, **kwargs):
+    kwargs.update({
+        'names': pretty_names,
+        'property_types': {k: str(v) for k, v in property_types.items()}
+    })
+    return render_template(*args, **kwargs)
 
 
 def str_dict(input, depth=0):

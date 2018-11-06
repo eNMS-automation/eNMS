@@ -8,7 +8,8 @@ from eNMS.base.helpers import (
     get,
     get_one,
     post,
-    serialize
+    serialize,
+    webpage
 )
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.objects.forms import AddDevice, AddLink
@@ -19,7 +20,7 @@ from eNMS.views.forms import GoogleEarthForm
 @get(bp, '/<view_type>_view', 'View', ['GET', 'POST'])
 def view(view_type):
     devices = fetch_all('Device')
-    return render_template(
+    return webpage(
         f'{view_type}_view.html',
         pools=fetch_all('Pool'),
         parameters=get_one('Parameters').serialized,

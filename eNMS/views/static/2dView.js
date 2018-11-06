@@ -130,7 +130,7 @@ for (let i = 0; i < links.length; i++) {
   });
   polylinesArray.push(polyline);
   polyline.link_id = link.id;
-  polyline.on('dblclick', function(e) {
+  polyline.on('click', function(e) {
     showTypeModal('link', this.link_id);
   });
   polyline.bindTooltip(link['name'], {

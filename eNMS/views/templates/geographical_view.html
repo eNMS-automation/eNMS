@@ -119,6 +119,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
     let devices = {{ devices|tojson|safe }};
     let links = {{ links|tojson|safe }};
     let device_subtypes = {{ device_subtypes|tojson|safe }};

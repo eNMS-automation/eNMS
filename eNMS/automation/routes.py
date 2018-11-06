@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
-from flask import jsonify, render_template, request, session
+from flask import jsonify, request, session
 from json import dumps
 
 from eNMS import db, scheduler
@@ -15,6 +15,7 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import (
+    property_types,
     service_table_properties,
     workflow_table_properties
 )

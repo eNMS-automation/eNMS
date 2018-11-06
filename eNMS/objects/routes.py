@@ -1,8 +1,6 @@
 from collections import defaultdict
 from flask import current_app as app, jsonify, render_template, request
 from flask_login import current_user
-from os import makedirs
-from os.path import exists
 from pathlib import Path
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -11,11 +9,9 @@ from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
-from yaml import dump, load
 
 from eNMS import db
 from eNMS.base.helpers import (
-    export,
     factory,
     fetch,
     fetch_all,
@@ -78,7 +74,6 @@ def pool_management():
 @get(bp, '/import_export', 'View')
 def import_export():
     return dict(
-        import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
         parameters=get_one('Parameters'),

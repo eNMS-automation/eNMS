@@ -8,6 +8,9 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
+from os import makedirs
+from os.path import exists
+from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin import bp
@@ -19,6 +22,7 @@ from eNMS.admin.forms import (
     MigrationsForm
 )
 from eNMS.base.helpers import (
+    export,
     get,
     get_one,
     post,
@@ -50,9 +54,7 @@ def administration():
 
 @get(bp, '/migrations', 'View')
 def migrations():
-    return dict(
-        form=MigrationsForm(request.form, 'Parameters'),
-    )
+    return dict(migrations_form=MigrationsForm(request.form, 'Parameters'))
 
 
 @bp.route('/login', methods=['GET', 'POST'])

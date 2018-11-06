@@ -1,5 +1,5 @@
 from collections import Counter
-from flask import jsonify, render_template, redirect, request, url_for
+from flask import jsonify, redirect, request, url_for
 
 from eNMS.base import bp
 from eNMS.base.classes import classes

@@ -65,6 +65,7 @@
   <!-- D3.js -->
   <script src="{{ url_for('views_blueprint.static', filename='d3/d3.v3.min.js') }}"></script>
   <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
     var graph = {  
       "nodes":[
         {% for device in devices %}  

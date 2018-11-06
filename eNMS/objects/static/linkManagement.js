@@ -7,7 +7,7 @@ links: false
 
 const table = $('#table').DataTable(); // eslint-disable-line
 
-function tableActions(values, obj) {
+function tableActions(values, link) {
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showTypeModal('link', '${link.id}')">Edit</button>`,

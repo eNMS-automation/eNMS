@@ -1,4 +1,4 @@
-from flask import jsonify, render_template, request
+from flask import jsonify, request
 from re import search, sub
 
 from eNMS.base.helpers import (

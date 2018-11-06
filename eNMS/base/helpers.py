@@ -120,8 +120,8 @@ def templated(function):
             'names': pretty_names,
             'property_types': {k: str(v) for k, v in property_types.items()}
         })
-        template = ctx.pop('template', request.endpoint.split('.')[-1] + '.html')
-        return render_template(template, **ctx)
+        endpoint = request.endpoint.split('.')[-1]
+        return render_template(ctx.pop('template', f'{endpoint}.html'), **ctx)
     return decorated_function
 
 

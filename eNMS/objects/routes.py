@@ -1,5 +1,5 @@
 from collections import defaultdict
-from flask import current_app as app, jsonify, render_template, request
+from flask import current_app as app, jsonify, request
 from flask_login import current_user
 from pathlib import Path
 from pynetbox import api as netbox_api

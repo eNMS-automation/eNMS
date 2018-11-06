@@ -5,7 +5,7 @@ call: false
 d3: false
 doc: false
 graph: false
-showObjectModal: false
+showTypeModal: false
 */
 
 const width = 1200;
@@ -35,7 +35,7 @@ function selectNode(d) {
     .attr('xlink:href', d.selected_img);
   sendSelection();
   */
-  showObjectModal('device', d.real_id);
+  showTypeModal('device', d.real_id);
 }
 
 /**
@@ -44,7 +44,7 @@ function selectNode(d) {
  */
 /*
 function showNodeProperties(d) {
-  showObjectModal('device', d.real_id);
+  showTypeModal('device', d.real_id);
 }
 */
 
@@ -53,7 +53,7 @@ function showNodeProperties(d) {
  * @param {d} d - selected link.
  */
 function showLinkProperties(d) {
-  showObjectModal('link', d.real_id);
+  showTypeModal('link', d.real_id);
 }
 
 /**
@@ -98,7 +98,7 @@ let link = container.selectAll('.link')
   .data(graph.links)
   .enter().append('line')
   .attr('class', 'link')
-  .on('dblclick', showLinkProperties);
+  .on('click', showLinkProperties);
 
 let node = container.selectAll('.node')
   .data(graph.nodes)

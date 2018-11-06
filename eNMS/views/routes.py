@@ -1,4 +1,4 @@
-from flask import current_app, jsonify, render_template, request
+from flask import current_app, jsonify, request
 from os.path import join
 from simplekml import Kml
 

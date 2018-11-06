@@ -1,29 +1,24 @@
-from flask import jsonify, render_template, request
+from flask import jsonify, request
 from re import search
 
 from eNMS.base.helpers import get, post, serialize
-from eNMS.base.properties import pretty_names
 from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
 
 
 @get(bp, '/log_management', 'View')
 def log_management():
-    return render_template(
-        'log_management.html',
+    return dict(
         log_filtering_form=LogFilteringForm(request.form),
-        names=pretty_names,
         fields=('source', 'content'),
         logs=serialize('Log')
     )
 
 
 @get(bp, '/log_automation', 'View')
-def syslog_automation():
-    return render_template(
-        'log_automation.html',
+def log_automation():
+    return dict(
         log_automation_form=LogAutomationForm(request.form, 'Task'),
-        names=pretty_names,
         fields=('name', 'source', 'content'),
         log_rules=serialize('LogRule')
     )

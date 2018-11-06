@@ -23,8 +23,7 @@ from eNMS.base.helpers import (
     get_one,
     objectify,
     post,
-    serialize,
-    webpage
+    serialize
 )
 from eNMS.base.security import (
     allowed_file,

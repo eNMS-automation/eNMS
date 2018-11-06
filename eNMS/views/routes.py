@@ -8,8 +8,7 @@ from eNMS.base.helpers import (
     get,
     get_one,
     post,
-    serialize,
-    webpage
+    serialize
 )
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.objects.forms import AddDevice, AddLink

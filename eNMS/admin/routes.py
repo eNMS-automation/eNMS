@@ -31,11 +31,9 @@ from eNMS.base.security import vault_helper
 
 
 @get(bp, '/user_management', 'View')
-def users():
-    return render_template(
-        'user_management.html',
+def user_management():
+    return dict(
         fields=user_public_properties,
-        names=pretty_names,
         users=serialize('User'),
         form=AddUser(request.form)
     )

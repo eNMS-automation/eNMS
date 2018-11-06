@@ -112,9 +112,28 @@ def permission_required(permission, redirect=True):
     return decorator
 
 
+def templated(template=None):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            template_name = template
+            if template_name is None:
+                template_name = request.endpoint.replace('.', '/') + '.html'
+            ctx = {} if ctx is None else f(*args, **kwargs)
+            ctx.update({
+                'names': pretty_names,
+                'property_types': {k: str(v) for k, v in property_types.items()}
+            })
+            print(template_name)
+            return render_template(template_name, **ctx)
+        return decorated_function
+    return decorator
+
+
 def get(blueprint, url, permission=None, method=['GET']):
     def outer(func):
         @blueprint.route(url, methods=method)
+        @templated()
         @login_required
         @permission_required(permission)
         @wraps(func)
@@ -141,14 +160,6 @@ def post(blueprint, url, permission=None):
                 return jsonify({'failure': True, 'error': error})
         return inner
     return outer
-
-
-def webpage(*args, **kwargs):
-    kwargs.update({
-        'names': pretty_names,
-        'property_types': {k: str(v) for k, v in property_types.items()}
-    })
-    return render_template(*args, **kwargs)
 
 
 def str_dict(input, depth=0):

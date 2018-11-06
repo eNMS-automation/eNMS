@@ -47,6 +47,13 @@ def administration():
     )
 
 
+@get(bp, '/migrations', 'View')
+def migrations():
+    return dict(
+        form=AdministrationForm(request.form, 'Parameters'),
+    )
+
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

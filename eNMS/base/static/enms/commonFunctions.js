@@ -1,6 +1,10 @@
 /*
 global
 alertify: false
+fields: false
+propertyTypes: false
+table: false
+tableActions: false
 */
 
 /**
@@ -76,7 +80,6 @@ function call(url, callback) { // eslint-disable-line no-unused-vars
  * @param {callback} callback - Function to process results.
  */
 function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
-  console.log(form)
   if ($(form).parsley().validate()) {
     $.ajax({
       type: 'POST',
@@ -109,6 +112,7 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
 
 /**
  * Display type modal for creation.
+ * @param {type} type - Type.
  */
 function showCreateModal(type) { // eslint-disable-line no-unused-vars
   $(`#edit-${type}-form`).trigger('reset');
@@ -118,20 +122,17 @@ function showCreateModal(type) { // eslint-disable-line no-unused-vars
 
 /**
  * Display instance modal for editing.
+ * @param {type} type - Type.
  * @param {id} id - Instance ID.
- * @param {duplicate} duplicate - Edit versus duplicate.
+ * @param {dup} dup - Edit versus duplicate.
  */
-function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-vars
+function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
   call(`/get/${type}/${id}`, function(instance) {
-    $(`#title-${type}`).text(
-      `${duplicate ? 'Duplicate' : 'Edit'} ${type} '${instance.name}'`
-    );
-    if (duplicate) {
-      instance.id = instance.name = '';
-    }
+    const mode = dup ? 'Duplicate' : 'Edit';
+    $(`#title-${type}`).text(`${mode} ${type} '${instance.name}'`);
+    if (dup) instance.id = instance.name = '';
     for (const [property, value] of Object.entries(instance)) {
       const propertyType = propertyTypes[property] || 'str';
-      console.log(property, value)
       if (propertyType.includes('bool') || property.includes('regex')) {
         $(`#${type}-${property}`).prop('checked', value);
       } else if (propertyType.includes('dict')) {
@@ -146,6 +147,7 @@ function showTypeModal(type, id, duplicate) { // eslint-disable-line no-unused-v
 
 /**
  * Create or edit instance.
+ * @param {type} type - Type.
  */
 function processData(type) { // eslint-disable-line no-unused-vars
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
@@ -162,6 +164,7 @@ function processData(type) { // eslint-disable-line no-unused-vars
 /**
  * Add instance to datatable or edit line.
  * @param {mode} mode - Create or edit.
+ * @param {type} type - Type.
  * @param {instance} instance - Properties of the instance.
  */
 function addInstance(mode, type, instance) {
@@ -169,7 +172,7 @@ function addInstance(mode, type, instance) {
   for (let i = 0; i < fields.length; i++) {
     values.push(`${instance[fields[i]]}`);
   }
-  tableActions(values, instance)
+  tableActions(values, instance);
   if (mode == 'edit') {
     table.row($(`#${instance.id}`)).data(values);
   } else {

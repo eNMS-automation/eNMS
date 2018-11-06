@@ -82,7 +82,7 @@ def pool_management():
 
 @get(bp, '/import_export', 'View')
 def import_export():
-    return render_template(
+    return webpage(
         'import_export.html',
         import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),

@@ -30,36 +30,24 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-xs-6">
         <div class="x_panel">
           <div class="x_title">
-            <h4 class="text-center">Import / Export (Migration)</h4>
+            <h4 class="text-center">LibreNMS import</h4>
           </div>
-          <div class="x_content" style="min-height: 450px">
-            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-              <div>
-                <label>
-                  Directory pathname to use in eNMS_HOME/migrations/import_export :<br>
-                  Example: "10312018_backup"
-                </label>
-                <div class="form-group">
-                  {{ import_export_form.name(class="form-control required") }}
-                </div>
+          <div class="x_content">
+            <br>
+            <form id="librenms_form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+              <div class="form-group" style="height: 450px">
               </div>
-              <div>
-                <label>eNMS object types to include in Import / Export :</label>
-                <div class="form-group">
-                  {{ import_export_form.export(class="form-control required", size="10") }}
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="button" class="btn btn-success" onclick="queryOpenNMS()">Retrieve devices</button>
                 </div>
               </div>
             </form>
-            <div class="ln_solid"></div>
-            <div class="form-group">
-              <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                <button type="button" class="btn btn-success" onclick="migrationImport()">Import</button>
-                <button type="button" class="btn btn-success" onclick="migrationExport()">Export</button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

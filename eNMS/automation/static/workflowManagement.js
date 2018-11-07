@@ -42,26 +42,6 @@ function tableActions(values, pool) { // eslint-disable-line no-unused-vars
   );
 }
 
-
-/**
- * Add workflow to the datatable.
- * @param {mode} mode - Create or edit.
- * @param {workflow} workflow - Workflow.
- */
-function addWorkflow(mode, workflow) {
-  let values = [];
-  for (let i = 0; i < fields.length; i++) {
-    values.push(`${workflow[fields[i]]}`);
-  }
-
-  if (mode == 'edit') {
-    table.row($(`#${workflow.id}`)).data(values);
-  } else {
-    const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${workflow.id}`);
-  }
-}
-
 /**
  * Get Workflow States.
  */
@@ -78,7 +58,7 @@ function getStates() {
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
   for (let i = 0; i < workflows.length; i++) {
-    addWorkflow('create', workflows[i]);
+    addInstance('create', 'workflow', workflows[i]);
   }
   getStates();
 })();

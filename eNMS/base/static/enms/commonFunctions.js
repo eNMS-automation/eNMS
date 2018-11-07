@@ -140,28 +140,38 @@ function showCreateModal(type) { // eslint-disable-line no-unused-vars
 /**
  * Display instance modal for editing.
  * @param {type} type - Type.
+ * @param {instance} instance - Object instance.
+ * @param {dup} dup - Edit versus duplicate.
+ */
+function processInstance(type, instance, dup) {
+  const mode = dup ? 'Duplicate' : 'Edit';
+  $(`#title-${type}`).text(`${mode} ${type} '${instance.name}'`);
+  if (dup) instance.id = instance.name = '';
+  for (const [property, value] of Object.entries(instance)) {
+    const propertyType = propertyTypes[property] || 'str';
+    if (propertyType.includes('bool') || property.includes('regex')) {
+      $(`#${type}-${property}`).prop('checked', value);
+    } else if (propertyType.includes('dict')) {
+      $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
+    } else if (propertyType.includes('list')) {
+      $(`#${type}-${property}`).multiselect('deselectAll', false);
+      $(`#${type}-${property}`).multiselect('select', value.map((p) => p.id));
+    } else {
+      $(`#${type}-${property}`).val(value);
+    }
+  }
+  $(`#edit-${type}`).modal('show');
+}
+
+/**
+ * Display instance modal for editing.
+ * @param {type} type - Type.
  * @param {id} id - Instance ID.
  * @param {dup} dup - Edit versus duplicate.
  */
 function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
   call(`/get/${type}/${id}`, function(instance) {
-    const mode = dup ? 'Duplicate' : 'Edit';
-    $(`#title-${type}`).text(`${mode} ${type} '${instance.name}'`);
-    if (dup) instance.id = instance.name = '';
-    for (const [property, value] of Object.entries(instance)) {
-      const propertyType = propertyTypes[property] || 'str';
-      if (propertyType.includes('bool') || property.includes('regex')) {
-        $(`#${type}-${property}`).prop('checked', value);
-      } else if (propertyType.includes('dict')) {
-        $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
-      } else if (propertyType.includes('list')) {
-        $(`#${type}-${property}`).multiselect('deselectAll', false);
-        $(`#${type}-${property}`).multiselect('select', value.map((p) => p.id));
-      } else {
-        $(`#${type}-${property}`).val(value);
-      }
-    }
-    $(`#edit-${type}`).modal('show');
+    processInstance(type, instance, dup);
   });
 }
 

@@ -37,4 +37,3 @@ function tableActions(values, service) { // eslint-disable-line no-unused-vars
   }
   getStates('service');
 })();
-

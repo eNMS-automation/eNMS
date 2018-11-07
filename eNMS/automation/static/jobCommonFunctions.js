@@ -84,6 +84,6 @@ function getStates(type) {
       const col = table.column('#state');
       table.cell(i, col).data(states[i]).draw(false);
     }
-    setTimeout(getStates, 1000);
+    setTimeout(partial(getStates, type), 1000);
   });
 }

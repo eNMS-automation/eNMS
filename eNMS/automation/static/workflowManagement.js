@@ -48,6 +48,11 @@ function getStates() {
   for (let i = 0; i < workflows.length; i++) {
     addInstance('create', 'workflow', workflows[i]);
   }
-  $('#workflow-devices').multiselect();
+  $('#workflow-devices').multiselect({
+    enableFiltering: true,
+    numberDisplayed: 5,
+    includeSelectAllOption: true,
+    maxHeight: 400
+  });
   getStates();
 })();

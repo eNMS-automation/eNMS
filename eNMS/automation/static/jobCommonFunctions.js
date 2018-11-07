@@ -74,3 +74,16 @@ function runJob(id) { // eslint-disable-line no-unused-vars
     alertify.notify(`Job '${job.name}' started.`, 'success', 5);
   });
 }
+
+/**
+ * Get Service States.
+ */
+function getStates(type) {
+  call(`/automation/get_states/${type}`, function(states) {
+    for (let i = 0; i < states.length; i++) {
+      const col = table.column('#state');
+      table.cell(i, col).data(states[i]).draw(false);
+    }
+    setTimeout(getStates, 1000);
+  });
+}

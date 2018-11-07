@@ -30,24 +30,11 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
   );
 }
 
-/**
- * Get Workflow States.
- */
-function getStates() {
-  call('/automation/get_states/workflow', function(states) {
-    for (let i = 0; i < states.length; i++) {
-      const col = table.column('#state');
-      table.cell(i, col).data(states[i]).draw(false);
-    }
-    setTimeout(getStates, 1000);
-  });
-}
-
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
   for (let i = 0; i < workflows.length; i++) {
     addInstance('create', 'workflow', workflows[i]);
   }
   convertSelect('workflow-devices', 'workflow-pools');
-  getStates();
+  getStates('workflow');
 })();

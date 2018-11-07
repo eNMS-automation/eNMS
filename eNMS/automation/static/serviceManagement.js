@@ -11,9 +11,9 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 /**
  * Table Actions.
  * @param {values} values - values array.
- * @param {workflow} workflow - workflow.
+ * @param {service} service - service.
  */
-function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
+function tableActions(values, service) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,

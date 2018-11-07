@@ -1,24 +1,10 @@
 /*
 global
-alertify: false
+addInstance
 call: false
 doc: false
-fCall: false
-fields: false
-propertyTypes: false
 workflows: false
 */
-
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
-
-(function() {
-  $('#devices').fSelect({
-    placeholder: 'Select devices',
-    numDisplayed: 5,
-    overflowText: '{n} devices selected',
-    noResultsText: 'No results found',
-  });
-})();
 
 /**
  * Table Actions.
@@ -56,9 +42,16 @@ function getStates() {
 }
 
 (function() {
+  const table = $('#table').DataTable(); // eslint-disable-line new-cap
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
   for (let i = 0; i < workflows.length; i++) {
     addInstance('create', 'workflow', workflows[i]);
   }
+  $('#workflow-devices').fSelect({
+    placeholder: 'Select devices',
+    numDisplayed: 5,
+    overflowText: '{n} devices selected',
+    noResultsText: 'No results found',
+  });
   getStates();
 })();

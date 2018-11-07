@@ -338,10 +338,10 @@ reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 service_properties = defaultdict(list)
 
 property_types = {
-    'devices': 'cls',
-    'pools': 'cls',
-    'jobs': 'cls',
-    'edges': 'cls',
+    'devices': object,
+    'pools': object,
+    'jobs': object,
+    'edges': object,
     'permissions': list,
     'send_notification': bool
 }

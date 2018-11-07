@@ -116,11 +116,12 @@ def templated(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
         ctx = function(*args, **kwargs) or {}
-        if isinstance(ctx, dict):
-            ctx.update({
-                'names': pretty_names,
-                'property_types': {k: str(v) for k, v in property_types.items()}
-            })
+        if not isinstance(ctx, dict):
+            return ctx
+        ctx.update({
+            'names': pretty_names,
+            'property_types': {k: str(v) for k, v in property_types.items()}
+        })
         endpoint = request.endpoint.split('.')[-1]
         return render_template(ctx.pop('template', f'{endpoint}.html'), **ctx)
     return decorated_function

@@ -36,7 +36,7 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
  * Convert to Bootstrap Multiselect.
  * @param {ids} ids - Ids.
  */
-function convertSelect(ids) { // eslint-disable-line no-unused-vars
+function convertSelect(...ids) { // eslint-disable-line no-unused-vars
   for (let i = 0; i < ids.length; i++) {
     $(`#${ids[i]}`).multiselect({
       enableFiltering: true,

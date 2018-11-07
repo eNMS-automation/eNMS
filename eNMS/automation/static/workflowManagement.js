@@ -48,6 +48,6 @@ function getStates() {
   for (let i = 0; i < workflows.length; i++) {
     addInstance('create', 'workflow', workflows[i]);
   }
-  convertSelect(['workflow-devices', 'workflow-pools']);
+  convertSelect('workflow-devices', 'workflow-pools');
   getStates();
 })();

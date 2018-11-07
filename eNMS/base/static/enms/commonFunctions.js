@@ -33,6 +33,23 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Convert to Bootstrap Multiselect.
+ * @param {ids} ids - Ids.
+ */
+function convertSelect(ids) { // eslint-disable-line no-unused-vars
+  for (let i = 0; i < ids.length; i++) {
+    $(`#${ids[i]}`).multiselect({
+      enableFiltering: true,
+      numberDisplayed: 10,
+      includeSelectAllOption: true,
+      selectAllNumber: true,
+      maxHeight: 400,
+      buttonWidth: '100%',
+    });
+  }
+}
+
+/**
  * Returns partial function.
  * @param {function} func - any function
  * @return {function}
@@ -137,8 +154,9 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
         $(`#${type}-${property}`).prop('checked', value);
       } else if (propertyType.includes('dict')) {
         $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
-      } else if (propertyType.includes('object')) {
-        $(`#${type}-${property}`).val(value.map((p) => p.id));
+      } else if (propertyType.includes('list')) {
+        $(`#${type}-${property}`).multiselect('deselectAll', false);
+        $(`#${type}-${property}`).multiselect('select', value.map((p) => p.id));
       } else {
         $(`#${type}-${property}`).val(value);
       }

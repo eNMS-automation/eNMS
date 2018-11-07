@@ -133,10 +133,13 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
     if (dup) instance.id = instance.name = '';
     for (const [property, value] of Object.entries(instance)) {
       const propertyType = propertyTypes[property] || 'str';
+      console.log(property, value, propertyType);
       if (propertyType.includes('bool') || property.includes('regex')) {
         $(`#${type}-${property}`).prop('checked', value);
       } else if (propertyType.includes('dict')) {
         $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
+      } else if (propertyType == 'cls') {
+        $(`#${type}-${property}`).val(value.map((p) => p.id));
       } else {
         $(`#${type}-${property}`).val(value);
       }

@@ -88,7 +88,7 @@ def process_request(function):
     def wrapper(*a, **kw):
         data = request.form.to_dict()
         for key in request.form:
-            if property_types.get(key, None) == list:
+            if property_types.get(key, None) in (list, 'cls'):
                 data[key] = request.form.getlist(key)
         for property in boolean_properties:
             if property not in request.form:

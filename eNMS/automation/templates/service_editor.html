@@ -9,20 +9,20 @@
       </div>
       <form id="edit-service-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body">
-          {% for field in workflow_creation_form %}
+          {% for field in service_form %}
             {% if field.widget.input_type == 'hidden' %}
-              {{ field(id="workflow-id") }}
-            {% elif field.name == 'multiprocessing' %}
+              {{ field(id="service-id") }}
+            {% elif field.name == 'send_notification' %}
               <fieldset>
                 <div class="item">
-                  <input id="workflow-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
+                  <input id="service-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
                   <label>{{ field.name }}</label>
                 </div>
               </fieldset>
             {% else %}
               <label>{{ field.label }}</label>
               <div class='form-group'>
-                {{ field(id='workflow-' + field.name, class="form-control") }}
+                {{ field(id='service-' + field.name, class="form-control") }}
               </div>
             {% endif %}
           {% endfor %}

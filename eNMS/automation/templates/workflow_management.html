@@ -32,7 +32,7 @@
               {% for field in workflow_creation_form %}
                 {% if field.widget.input_type == 'hidden' %}
                   {{ field(id="workflow-id") }}
-                {% elif field.name == 'multiprocessing' %}
+                {% elif field.name in ('multiprocessing', 'send_notification') %}
                   <fieldset>
                     <div class="item">
                       <input id="workflow-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">

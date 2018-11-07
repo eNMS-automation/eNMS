@@ -16,24 +16,24 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 function tableActions(values, service) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
+    onclick="showLogs('${service.id}')"></i>Logs</a></button>`,
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareLogs('${properties.id}')"></i>Compare</a></button>`,
+    onclick="compareLogs('${service.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
-    onclick="runJob('${properties.id}')">Run</button>`,
+    onclick="runJob('${service.id}')">Run</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="editService('${properties.id}')">Edit</button>`,
+    onclick="editService('${service.id}')">Edit</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="editService('${properties.id}', true)">Duplicate</button>`,
+    onclick="editService('${service.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('service', '${properties.id}')">Delete</button>`
+    onclick="deleteInstance('service', '${service.id}')">Delete</button>`
   );
 }
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/services/index.html');
   for (let i = 0; i < services.length; i++) {
-    addService('create', services[i]);
+    addInstance('create', 'service', services[i]);
   }
   getStates('service');
 })();

@@ -17,6 +17,7 @@ class JobForm(BaseForm):
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
+    send_notification = BooleanField()
     send_notification_method = SelectField(choices=(
         ('mail_feedback_notification', 'Mail'),
         ('slack_feedback_notification', 'Slack'),

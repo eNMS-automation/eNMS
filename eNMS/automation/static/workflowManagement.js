@@ -23,9 +23,9 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 /**
  * Table Actions.
  * @param {values} values - values array.
- * @param {pool} pool - Pool.
+ * @param {workflow} workflow - workflow.
  */
-function tableActions(values, pool) { // eslint-disable-line no-unused-vars
+function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showLogs('${workflow.id}')"></i>Logs</a></button>`,

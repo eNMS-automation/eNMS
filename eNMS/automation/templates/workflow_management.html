@@ -31,18 +31,18 @@
             <div class="form-group">
               {% for field in workflow_creation_form %}
                 {% if field.widget.input_type == 'hidden' %}
-                  {{ field() }}
+                  {{ field(id="workflow-id") }}
                 {% elif field.name == 'multiprocessing' %}
                   <fieldset>
                     <div class="item">
-                      <input id="{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
+                      <input id="workflow-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
                       <label>{{ field.name }}</label>
                     </div>
                   </fieldset>
                 {% else %}
                   <label>{{ field.label }}</label>
                   <div class='form-group'>
-                    {{ field(class="form-control") }}
+                    {{ field(id='workflow-' + field.name, class="form-control") }}
                   </div>
                 {% endif %}
               {% endfor %}

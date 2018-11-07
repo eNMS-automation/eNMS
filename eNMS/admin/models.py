@@ -39,6 +39,10 @@ class Parameters(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, default='default', unique=True)
+    tacacs_ip_address = Column(String)
+    tacacs_password = Column(String)
+    tacacs_port = Column(Integer, default=49)
+    tacacs_timeout = Column(Integer, default=10)
     default_longitude = Column(Float, default=-96.)
     default_latitude = Column(Float, default=33.)
     default_zoom_level = Column(Integer, default=5)

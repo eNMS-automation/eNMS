@@ -11,10 +11,10 @@ def test_user_management(user_client):
             'permissions': ['Admin'],
             'password': user,
         }
-        user_client.post('/admin/process_user', data=dict_user)
+        user_client.post('/update/user', data=dict_user)
     assert len(fetch_all('User')) == 4
     user1 = fetch('User', name='user1')
-    user_client.post('/admin/delete/{}'.format(user1.id))
+    user_client.post('/delete/user/{}'.format(user1.id))
     assert len(fetch_all('User')) == 3
 
 

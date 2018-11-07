@@ -99,7 +99,8 @@ def create_new_user():
 
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
-    get_one('Parameters').update(**request.form.to_dict())
+    parameters, data = get_one('Parameters'), request.form.to_dict()
+    parameters.update(**data)
     pool = fetch('Pool', id=request.form['database_filtering_pool'])
     pool_objects = {'Device': pool.devices, 'Link': pool.links}
     for obj_type in ('Device', 'Link'):

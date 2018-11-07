@@ -18,7 +18,7 @@ def task_management():
     return dict(
         fields=task_public_properties,
         tasks=serialize('Task'),
-        scheduling_form=SchedulingForm(request.form, 'Job')
+        scheduling_form=SchedulingForm(request.form, 'Task')
     )
 
 
@@ -44,7 +44,7 @@ def calendar():
         tasks[task.name] = {**task.serialized, **{'date': js_date}}
     return dict(
         tasks=tasks,
-        scheduling_form=SchedulingForm(request.form, 'Job')
+        scheduling_form=SchedulingForm(request.form, 'Task')
     )
 
 

@@ -31,11 +31,11 @@ workflowBuilder: false;
 function showServiceEditor() { // eslint-disable-line no-unused-vars
   $('#title').text('Create a New Service Instance');
   $('#services').show();
-  $('#service-editor-form').trigger('reset');
+  $('#edit-service-form').trigger('reset');
   $('.fs-option').removeClass('selected');
   $('.fs-label').text('Select devices');
   editService();
-  $('#service-editor').modal('show');
+  $('#edit-service').modal('show');
 }
 
 /**
@@ -72,7 +72,7 @@ function editService(id, duplicate) {
         (n) => $(`.fs-option[data-value='${n.id}']`).click()
       );
       $('#pools').val(result.service.pools.map((p) => p.id));
-      showModal('service-editor');
+      showModal('edit-service');
     }
   });
 }
@@ -82,7 +82,7 @@ function editService(id, duplicate) {
  */
 function saveService() { // eslint-disable-line no-unused-vars
   const url = `/automation/save_service/${$('#services').val()}`;
-  fCall(url, '#service-editor-form', function(result) {
+  fCall(url, '#edit-service-form', function(result) {
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     if (typeof workflowBuilder === 'undefined') {
       addService(mode, result);
@@ -92,7 +92,7 @@ function saveService() { // eslint-disable-line no-unused-vars
     const message = `Service '${result.name}'
     ${mode == 'edit' ? 'edited' : 'created'} !`;
     alertify.notify(message, 'success', 5);
-    $('#service-editor').modal('hide');
+    $('#edit-service').modal('hide');
   });
 }
 

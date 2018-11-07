@@ -1,4 +1,4 @@
-<div id="service-editor" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="edit-service" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,7 +7,7 @@
         </button>
         <h4 class="modal-title" id="title"></h4>
       </div>
-      <form id="service-editor-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
+      <form id="edit-service-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body">
           {{ service_form.id() }}
           <label>Type of Service</label>
@@ -64,7 +64,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" onclick="saveService()">Submit</button>
+          <button type="button" class="btn btn-success" onclick="processData('service')">Submit</button>
         </div>
       </form>
     </div>

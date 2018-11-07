@@ -78,50 +78,11 @@ function getStates() {
  */
 function showModal() { // eslint-disable-line no-unused-vars
   $('#title').text('Create a New Workflow');
-  $('#edit-form').trigger('reset');
-  $('#edit').modal('show');
+  $('#edit-workflow-form').trigger('reset');
+  $('#edit-workflow').modal('show');
 }
 
-/**
- * Open the workflow modal for editing.
- * @param {id} id - Id of the workflow to edit.
- */
-function showWorkflowModal(id) { // eslint-disable-line no-unused-vars
-  call(`/get/workflow/${id}`, function(workflow) {
-    $('#title').text(`Edit Workflow`);
-    for (const [property, value] of Object.entries(workflow)) {
-      const propertyType = propertyTypes[property] || 'str';
-      if (propertyType.includes('bool')) {
-        $(`#${property}`).prop('checked', value);
-      } else if (propertyType.includes('dict')) {
-        $(`#${property}`).val(value ? JSON.stringify(value): '{}');
-      } else {
-        $(`#${property}`).val(value);
-      }
-    }
-    $('.fs-option').removeClass('selected');
-    $('.fs-label').text('Select devices');
-    workflow.devices.map(
-      (n) => $(`.fs-option[data-value='${n.id}']`).click()
-    );
-    $('#pools').val(workflow.pools.map((p) => p.id));
-    $(`#edit`).modal('show');
-  });
-}
 
-/**
- * Edit a workflow.
- */
-function editObject() { // eslint-disable-line no-unused-vars
-  fCall('/update/workflow', '#edit-form', function(workflow) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-    addWorkflow(mode, workflow);
-    const message = `Workflow ${workflow.name};
-    ${mode == 'edit' ? 'edited' : 'created'}.`;
-    alertify.notify(message, 'success', 5);
-    $(`#edit`).modal('hide');
-  });
-}
 
 /**
  * Delete a workflow.

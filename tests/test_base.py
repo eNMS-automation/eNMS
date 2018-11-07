@@ -57,6 +57,7 @@ def check_blueprints(*blueprints):
             function(user_client)
             for blueprint in blueprints:
                 for page in urls[blueprint]:
+                    print(blueprint, page)
                     r = user_client.get(blueprint + page, follow_redirects=True)
                     assert r.status_code == 200
         return wrapper

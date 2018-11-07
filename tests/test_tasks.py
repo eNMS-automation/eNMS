@@ -24,9 +24,9 @@ scheduled_task = ImmutableMultiDict([
 @check_blueprints('/scheduling')
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, 'europe.xls')
-    user_client.post('scheduling/scheduler', data=instant_task)
+    user_client.post('/update/task', data=instant_task)
     assert len(fetch_all('Task')) == 1
-    user_client.post('scheduling/scheduler', data=scheduled_task)
+    user_client.post('/update/task', data=scheduled_task)
     assert len(fetch_all('Task')) == 2
 
 

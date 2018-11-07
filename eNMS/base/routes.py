@@ -45,6 +45,7 @@ def update_instance(cls):
 
 @post(bp, '/delete/<cls>/<id>', 'Edit')
 def delete_instance(cls, id):
+    print(cls, id)
     return jsonify(delete(cls, id=id))
 
 

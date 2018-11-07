@@ -146,12 +146,8 @@ def import_topology():
                 continue
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
-                objects[obj_type].append(
-                    factory(
-                        obj_type,
-                        **dict(zip(properties, sheet.row_values(row_index)))
-                    ).serialized
-                )
+                prop = dict(zip(properties, sheet.row_values(row_index)))
+                objects[obj_type].append(factory(obj_type, **prop).serialized)
             db.session.commit()
     return jsonify(objects)
 

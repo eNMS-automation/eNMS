@@ -10,6 +10,7 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 from os import makedirs
 from os.path import exists
+from tacacs_plus.client import TACACSClient
 from yaml import dump, load
 
 from eNMS import db
@@ -72,6 +73,19 @@ def login():
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
+        elif current_app.tacacs_client:
+            if tacacs_client.authenticate(
+                name,
+                user_password,
+                TAC_PLUS_AUTHEN_TYPE_ASCII
+            ).valid:
+                user = User(name=name, password=user_password)
+                db.session.add(user)
+                db.session.commit()
+                login_user(user)
+                return redirect(url_for('base_blueprint.dashboard'))
+            else:
+                abort(403)
         else:
             abort(403)
     if not current_user.is_authenticated:
@@ -101,6 +115,11 @@ def create_new_user():
 def save_parameters():
     parameters, data = get_one('Parameters'), request.form.to_dict()
     parameters.update(**data)
+    current_app.tacacs_client = TACACSClient(
+        parameters.tacacs_ip_address,
+        parameters.tacacs_port,
+        parameters.tacacs_password
+    )
     pool = fetch('Pool', id=request.form['database_filtering_pool'])
     pool_objects = {'Device': pool.devices, 'Link': pool.links}
     for obj_type in ('Device', 'Link'):

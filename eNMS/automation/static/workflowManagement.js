@@ -6,6 +6,8 @@ doc: false
 workflows: false
 */
 
+const table = $('#table').DataTable(); // eslint-disable-line new-cap
+
 /**
  * Table Actions.
  * @param {values} values - values array.
@@ -42,16 +44,10 @@ function getStates() {
 }
 
 (function() {
-  const table = $('#table').DataTable(); // eslint-disable-line new-cap
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
   for (let i = 0; i < workflows.length; i++) {
     addInstance('create', 'workflow', workflows[i]);
   }
-  $('#workflow-devices').fSelect({
-    placeholder: 'Select devices',
-    numDisplayed: 5,
-    overflowText: '{n} devices selected',
-    noResultsText: 'No results found',
-  });
+  $('#workflow-devices').multiselect();
   getStates();
 })();

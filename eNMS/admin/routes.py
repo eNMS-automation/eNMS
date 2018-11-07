@@ -11,6 +11,7 @@ from flask_login import current_user, login_user, logout_user
 from os import makedirs
 from os.path import exists
 from tacacs_plus.client import TACACSClient
+from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII as FLAG
 from yaml import dump, load
 
 from eNMS import db
@@ -61,27 +62,21 @@ def migrations():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name, user_password = request.form['name'], request.form['password']
+        name, password = request.form['name'], request.form['password']
         user = fetch('User', name=name)
         if user:
             if app.config['USE_VAULT']:
                 pwd = vault_helper(app, f'user/{user.name}')['password']
             else:
                 pwd = user.password
-            if user_password == pwd:
+            if password == pwd:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
         elif app.tacacs_client:
-            if app.tacacs_client.authenticate(
-                name,
-                user_password,
-                TAC_PLUS_AUTHEN_TYPE_ASCII
-            ).valid:
-                user = factory(
-                    'User', **{'name': name, 'password': user_password}
-                )
+            if app.tacacs_client.authenticate(name, password, FLAG).valid:
+                user = factory('User', **{'name': name, 'password': password})
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:

@@ -9,15 +9,11 @@ services: false
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 /**
- * Add a service to the datatable.
- * @param {mode} mode - Create or edit.
- * @param {properties} properties - Properties of the service.
+ * Table Actions.
+ * @param {values} values - values array.
+ * @param {workflow} workflow - workflow.
  */
-function addService(mode, properties) {
-  let values = [];
-  for (let i = 0; i < fields.length; i++) {
-    values.push(`${properties[fields[i]]}`);
-  }
+function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showLogs('${properties.id}')"></i>Logs</a></button>`,
@@ -32,12 +28,6 @@ function addService(mode, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('service', '${properties.id}')">Delete</button>`
   );
-  if (mode == 'edit') {
-    table.row($(`#${properties.id}`)).data(values);
-  } else {
-    const rowNode = table.row.add(values).draw(false).node();
-    $(rowNode).attr('id', `${properties.id}`);
-  }
 }
 
 /**

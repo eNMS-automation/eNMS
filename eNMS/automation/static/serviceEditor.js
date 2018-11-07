@@ -20,19 +20,6 @@ workflowBuilder: false;
 })();
 
 /**
- * Show the Service Editor modal
- */
-function showServiceEditor() { // eslint-disable-line no-unused-vars
-  $('#title').text('Create a New Service Instance');
-  $('#services').show();
-  $('#edit-service-form').trigger('reset');
-  $('.fs-option').removeClass('selected');
-  $('.fs-label').text('Select devices');
-  editService();
-  $('#edit-service').modal('show');
-}
-
-/**
  * Edit a service.
  * @param {id} id - Service Id.
  * @param {duplicate} duplicate - Duplicate.

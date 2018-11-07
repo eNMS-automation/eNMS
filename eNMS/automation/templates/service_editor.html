@@ -10,56 +10,7 @@
       <form id="edit-service-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body">
           {{ service_form.id() }}
-          <label>Type of Service</label>
-          <div class='form-group'>
-            <select class="form-control" id="services"></select>
-          </div>
-          <label>Name</label>
-          <div class="form-group">
-            {{ service_form.name(class="form-control", required=true) }}
-          </div>
-          <label>Description</label>
-          <div class="form-group">
-            {{ service_form.description(class="form-control") }}
-          </div>
-          <label>Devices (optional: can be defined in the workflow)</label>
-          <div class='form-group'>
-            {{ service_form.devices(class="form-control") }}
-          </div>
-          <label>Pools (optional: can be defined in the workflow)</label>
-          <div class='form-group'>
-            {{ service_form.pools(class="form-control") }}
-          </div>
-          <label>Vendor</label>
-          <div class="form-group">
-            {{ service_form.vendor(class="form-control") }}
-          </div>
-          <label>Operating System</label>
-          <div class="form-group">
-            {{ service_form.operating_system(class="form-control") }}
-          </div>
-          <label>Waiting time (in seconds)</label>
-          <div class='form-group'>
-            {{ service_form.waiting_time(class="form-control", required=true) }}
-          </div>
-          <label>Number of retries</label>
-          <div class='form-group'>
-            {{ service_form.number_of_retries(class="form-control", required=true) }}
-          </div>
-          <label>Time between retries (in seconds)</label>
-          <div class='form-group'>
-            {{ service_form.time_between_retries(class="form-control", required=true) }}
-          </div>
-          <fieldset>
-            <div class="item">
-              <input id="send_notification" name="send_notification" type="checkbox" value="y">
-              <label>Send Notification</label>
-            </div>
-          </fieldset>
-          <label>Send Notification Method</label>
-          <div class='form-group'>
-            {{ service_form.send_notification_method(class="form-control") }}
-          </div>
+
           <div id="html-form"></div>
         </div>
         <div class="modal-footer">

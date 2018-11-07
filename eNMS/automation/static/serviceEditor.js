@@ -12,13 +12,7 @@ workflowBuilder: false;
 */
 
 (function() {
-  $('#devices').fSelect({
-    placeholder: 'Select devices',
-    numDisplayed: 5,
-    overflowText: '{n} devices selected',
-    noResultsText: 'No results found',
-    showSearch: true,
-  });
+  convertSelect('service-devices', 'service-pools');
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);

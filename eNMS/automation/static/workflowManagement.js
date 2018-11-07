@@ -72,25 +72,3 @@ function getStates() {
   }
   getStates();
 })();
-
-/**
- * Open the workflow modal for creation.
- */
-function showModal() { // eslint-disable-line no-unused-vars
-  $('#title').text('Create a New Workflow');
-  $('#edit-workflow-form').trigger('reset');
-  $('#edit-workflow').modal('show');
-}
-
-
-
-/**
- * Delete a workflow.
- * @param {id} id - Id of the workflow to delete.
- */
-function deleteWorkflow(id) { // eslint-disable-line no-unused-vars
-  call(`/delete/workflow/${id}`, function(workflow) {
-    table.row($(`#${id}`)).remove().draw(false);
-    alertify.notify(`Workflow '${workflow.name}' deleted.`, 'error', 5);
-  });
-}

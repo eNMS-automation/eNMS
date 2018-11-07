@@ -98,14 +98,6 @@ def logout():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@post(bp, '/create_new_user', 'Edit')
-def create_new_user():
-    user_data = request.form.to_dict()
-    if 'permissions' in user_data:
-        abort(403)
-    return jsonify(factory('User', **user_data).serialized)
-
-
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
     parameters, data = get_one('Parameters'), request.form.to_dict()

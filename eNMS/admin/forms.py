@@ -17,12 +17,6 @@ class LoginForm(BaseForm):
     password = PasswordField()
 
 
-class CreateAccountForm(BaseForm):
-    name = TextField()
-    email = TextField()
-    password = PasswordField()
-
-
 class AddUser(BaseForm):
     id = HiddenField()
     name = TextField()

@@ -73,15 +73,15 @@ def login():
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
-        elif current_app.tacacs_client:
-            if tacacs_client.authenticate(
+        elif app.tacacs_client:
+            if app.tacacs_client.authenticate(
                 name,
                 user_password,
                 TAC_PLUS_AUTHEN_TYPE_ASCII
             ).valid:
-                user = User(name=name, password=user_password)
-                db.session.add(user)
-                db.session.commit()
+                user = factory(
+                    'User', **{'name': name, 'password': user_password}
+                )
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
@@ -115,7 +115,7 @@ def create_new_user():
 def save_parameters():
     parameters, data = get_one('Parameters'), request.form.to_dict()
     parameters.update(**data)
-    current_app.tacacs_client = TACACSClient(
+    app.tacacs_client = TACACSClient(
         parameters.tacacs_ip_address,
         parameters.tacacs_port,
         parameters.tacacs_password

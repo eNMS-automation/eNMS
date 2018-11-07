@@ -21,6 +21,29 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
 })();
 
 /**
+ * Table Actions.
+ * @param {values} values - values array.
+ * @param {pool} pool - Pool.
+ */
+function tableActions(values, pool) { // eslint-disable-line no-unused-vars
+  values.push(
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showLogs('${workflow.id}')"></i>Logs</a></button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="compareLogs('${workflow.id}')"></i>Compare</a></button>`,
+    `<button type="button" class="btn btn-success btn-xs"
+    onclick="runJob('${workflow.id}')">Run</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showTypeModal('workflow', '${workflow.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-info btn-xs"
+    onclick="showTypeModal('workflow', '${workflow.id}')">Duplicate</button>`,
+    `<button type="button" class="btn btn-danger btn-xs"
+    onclick="deleteInstance('workflow', '${workflow.id}')">Delete</button>`
+  );
+}
+
+
+/**
  * Add workflow to the datatable.
  * @param {mode} mode - Create or edit.
  * @param {workflow} workflow - Workflow.
@@ -30,20 +53,7 @@ function addWorkflow(mode, workflow) {
   for (let i = 0; i < fields.length; i++) {
     values.push(`${workflow[fields[i]]}`);
   }
-  values.push(
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showLogs('${workflow.id}')"></i>Logs</a></button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareLogs('${workflow.id}')"></i>Compare</a></button>`,
-    `<button type="button" class="btn btn-success btn-xs"
-    onclick="runJob('${workflow.id}')">Run</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showWorkflowModal('${workflow.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showWorkflowModal('${workflow.id}')">Duplicate</button>`,
-    `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteWorkflow('${workflow.id}')">Delete</button>`
-  );
+
   if (mode == 'edit') {
     table.row($(`#${workflow.id}`)).data(values);
   } else {

@@ -30,7 +30,6 @@ class Task(Base):
     }
 
     def __init__(self, **kwargs):
-        self.job = kwargs.pop('job')
         self.update(**kwargs)
         self.status = 'Active'
         self.creation_time = str(datetime.now())

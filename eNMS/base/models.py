@@ -27,9 +27,9 @@ class Base(db.Model):
         return self.name
 
     def update(self, **kwargs):
+        serial = rel.get(self.__tablename__, rel['Service'])
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            serial = rel.get(self.__tablename__, rel['Service'])
             if property in vault_properties and use_vault:
                 vault_helper(
                     f'{self.__tablename__}/{kwargs["name"]}/{property}',

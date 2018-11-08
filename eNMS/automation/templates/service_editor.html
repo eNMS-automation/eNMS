@@ -9,6 +9,10 @@
       </div>
       <form id="edit-service-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body">
+          <label>Type of Service</label>
+          <div class='form-group'>
+            <select class="form-control" id="services"></select>
+          </div>
           {% for field in service_form %}
             {% if field.widget.input_type == 'hidden' %}
               {{ field(id="service-id") }}

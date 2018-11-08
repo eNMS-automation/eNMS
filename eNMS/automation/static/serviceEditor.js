@@ -27,7 +27,7 @@ workflowBuilder: false;
 function editService(id, duplicate) {
   const url = `/automation/get_service/${id || $('#services').val()}`;
   call(url, function(result) {
-    processInstance('service', result.service, duplicate);
+    if (result.service) processInstance('service', result.service, duplicate);
     $('#html-form').html(result.form);
   });
 }

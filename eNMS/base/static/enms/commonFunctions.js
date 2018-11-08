@@ -37,8 +37,8 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
  * @param {ids} ids - Ids.
  */
 function convertSelect(...ids) { // eslint-disable-line no-unused-vars
-  for (let i = 0; i < ids.length; i++) {
-    $(`#${ids[i]}`).multiselect({
+  ids.forEach((id) => {
+    $(`#${id}`).multiselect({
       enableFiltering: true,
       numberDisplayed: 10,
       includeSelectAllOption: true,
@@ -46,7 +46,7 @@ function convertSelect(...ids) { // eslint-disable-line no-unused-vars
       maxHeight: 400,
       buttonWidth: '100%',
     });
-  }
+  });
 }
 
 /**

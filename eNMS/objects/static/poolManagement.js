@@ -29,21 +29,15 @@ function tableActions(values, pool) { // eslint-disable-line no-unused-vars
   );
 }
 
-(function() {
-  doc('https://enms.readthedocs.io/en/latest/inventory/pools.html');
-  for (let i = 0; i < pools.length; i++) {
-    addInstance('create', 'pool', pools[i]);
-  }
-})();
-
 /**
  * Display pool objects for editing.
  * @param {id} id - Id of the pool.
  */
 function showPoolObjects(id) { // eslint-disable-line no-unused-vars
   call(`/get/pool/${id}`, function(pool) {
-    $('#devices').val(pool.devices.map((n) => n.id));
-    $('#links').val(pool.links.map((l) => l.id));
+    $('#device,#links').multiselect('deselectAll', false);
+    $('#devices').multiselect('select', pool.devices.map((n) => n.id));
+    $('#links').multiselect('select', pool.links.map((l) => l.id));
     poolId = id;
     $('#edit-pool-objects').modal('show');
   });
@@ -68,3 +62,11 @@ function updatePools() { // eslint-disable-line no-unused-vars
     alertify.notify('Pools successfully updated.', 'success', 5);
   });
 }
+
+(function() {
+  doc('https://enms.readthedocs.io/en/latest/inventory/pools.html');
+  convertSelect('devices', 'links');
+  for (let i = 0; i < pools.length; i++) {
+    addInstance('create', 'pool', pools[i]);
+  }
+})();

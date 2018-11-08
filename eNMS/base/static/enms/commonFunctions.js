@@ -176,18 +176,26 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Save instance.
+ * @param {instance} instance - Object instance.
+ */
+function saveInstance(type, instance) {
+  const title = $(`#title-${type}`).text().startsWith('Edit');
+  const mode = title ? 'edit' : 'create';
+  const message = `${type} '${instance.name}'
+  ${mode == 'edit' ? 'edited' : 'created'}.`;
+  alertify.notify(message, 'success', 5);
+  $(`#edit-${type}`).modal('hide');
+}
+
+/**
  * Create or edit instance.
  * @param {type} type - Type.
  */
 function processData(type) { // eslint-disable-line no-unused-vars
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
-    const title = $(`#title-${type}`).text().startsWith('Edit');
-    const mode = title ? 'edit' : 'create';
     addInstance(mode, type, instance);
-    const message = `${type} '${instance.name}'
-    ${mode == 'edit' ? 'edited' : 'created'}.`;
-    alertify.notify(message, 'success', 5);
-    $(`#edit-${type}`).modal('hide');
+    saveInstance(type, instance);
   });
 }
 

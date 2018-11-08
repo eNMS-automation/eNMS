@@ -17,6 +17,9 @@ workflowBuilder: false;
     const cls = servicesClasses[i];
     $('#services').append(`<option value='${cls}'>${cls}</option>`);
   }
+  $('#services').change(function() {
+    editService();
+  });
 })();
 
 /**
@@ -38,19 +41,11 @@ function editService(id, duplicate) {
 function saveService() { // eslint-disable-line no-unused-vars
   const url = `/automation/save_service/${$('#services').val()}`;
   fCall(url, '#edit-service-form', function(result) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     if (typeof workflowBuilder === 'undefined') {
       addService(mode, result);
     } else {
       nodes.update({id: result.id, label: result.name});
     }
-    const message = `Service '${result.name}'
-    ${mode == 'edit' ? 'edited' : 'created'} !`;
-    alertify.notify(message, 'success', 5);
-    $('#edit-service').modal('hide');
+    saveInstance(type, instance);
   });
 }
-
-$('#services').change(function() {
-  editService();
-});

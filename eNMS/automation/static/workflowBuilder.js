@@ -98,22 +98,6 @@ if (workflow) {
 }
 
 /**
- * Set job as start of the workflow.
- * @param {id} id - Id.
- */
-function setStart(id) {
-  saveEdge({from: 1, to: id, type: true});
-}
-
-/**
- * Set job as end of the workflow.
- * @param {id} id - Id.
- */
-function setEnd(id) {
-  saveEdge({from: id, to: 2, type: true});
-}
-
-/**
  * Add an existing job to the workflow.
  */
 function addJobToWorkflow() { // eslint-disable-line no-unused-vars
@@ -289,11 +273,10 @@ function compareWorkflowLogs() {
 const action = {
   'Run Workflow': runWorkflow,
   'Edit': editService,
-  'Set as Start': setStart,
-  'Set as End': setEnd,
   'Run': runJob,
   'Logs': showLogs,
   'Compare Logs': compareLogs,
+  'Edit Workflow': editWorkflow,
   'Workflow Logs': showWorkflowLogs,
   'Compare Workflow Logs': compareWorkflowLogs,
   'Add Service or Workflow': partial(showModal, 'add-job'),

@@ -373,7 +373,8 @@ relationships = {
     },
     'WorkflowEdge': {
         'source': 'Job',
-        'destination': 'Job'
+        'destination': 'Job',
+        'workflow': 'Workflow'
     },
     'Parameters': {
         'pool': 'Pool'

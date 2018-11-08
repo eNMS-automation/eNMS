@@ -17,7 +17,6 @@ from eNMS.base.helpers import (
     fetch_all,
     get,
     get_one,
-    objectify,
     post,
     serialize
 )

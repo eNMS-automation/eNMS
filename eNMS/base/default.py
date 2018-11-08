@@ -194,7 +194,7 @@ def create_netmiko_workflow():
     for x, y in edges:
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
-            'workflow': workflow,
+            'workflow': workflow.id,
             'type': True,
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
@@ -245,7 +245,7 @@ def create_napalm_workflow():
     for x, y in edges:
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
-            'workflow': workflow,
+            'workflow': workflow.id,
             'type': True,
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
@@ -319,7 +319,7 @@ def create_payload_transfer_workflow():
     for x, y in edges:
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
-            'workflow': workflow,
+            'workflow': workflow.id,
             'type': True,
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id

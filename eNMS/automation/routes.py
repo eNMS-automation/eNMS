@@ -214,10 +214,10 @@ def delete_node(workflow_id, job_id):
 def add_edge(wf_id, type, source, dest):
     workflow_edge = factory('WorkflowEdge', **{
         'name': f'{wf_id}-{type}:{source}->{dest}',
-        'workflow': fetch('Workflow', id=wf_id),
+        'workflow': wf_id,
         'type': type == 'true',
-        'source': fetch('Job', id=source),
-        'destination': fetch('Job', id=dest)
+        'source': source,
+        'destination': dest
     })
     return jsonify(workflow_edge.serialized)
 

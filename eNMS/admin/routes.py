@@ -83,7 +83,7 @@ def login():
         else:
             abort(403)
     if not current_user.is_authenticated:
-        return render_template('login.html',login_form=LoginForm(request.form))
+        return render_template('login.html', login_form=LoginForm(request.form))
     return redirect(url_for('base_blueprint.dashboard'))
 
 

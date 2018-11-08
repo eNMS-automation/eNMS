@@ -238,7 +238,7 @@ class Workflow(Job):
                 continue
             visited.add(job)
             if not self.multiprocessing:
-                self.status['current_job'] = job.serialized
+                self.status['current_job'] = job.properties
                 db.session.commit()
             job_results = job.try_run(results, {device} if device else None)
             success = job_results['success']

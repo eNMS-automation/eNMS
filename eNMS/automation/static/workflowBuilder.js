@@ -270,6 +270,13 @@ function compareWorkflowLogs() {
   compareLogs(workflow.id);
 }
 
+/**
+ * Edit Workflow
+ */
+function editWorkflow() {
+  showTypeModal('workflow', workflow.id);
+}
+
 const action = {
   'Run Workflow': runWorkflow,
   'Edit': editService,

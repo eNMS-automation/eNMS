@@ -1,0 +1,40 @@
+  <div id="edit-workflow" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="title-workflow"></h4>
+        </div>
+        <form id="edit-workflow-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+          <div class="modal-body">
+            <div class="form-group">
+              {% for field in workflow_creation_form %}
+                {% if field.widget.input_type == 'hidden' %}
+                  {{ field(id="workflow-id") }}
+                {% elif field.name in ('multiprocessing', 'send_notification') %}
+                  <fieldset>
+                    <div class="item">
+                      <input id="workflow-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
+                      <label>{{ field.name }}</label>
+                    </div>
+                  </fieldset>
+                {% else %}
+                  <label>{{ field.label }}</label>
+                  <div class='form-group'>
+                    {{ field(id='workflow-' + field.name, class="form-control") }}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="button" class="btn btn-success" onclick="processData('workflow')">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

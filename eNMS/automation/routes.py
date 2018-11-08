@@ -58,6 +58,7 @@ def workflow_builder():
         workflow=workflow.serialized if workflow else None,
         add_job_form=AddJobForm(request.form, 'Workflow'),
         workflow_builder_form=WorkflowBuilderForm(request.form, 'Service'),
+        workflow_creation_form=WorkflowForm(request.form, 'Workflow'),
         compare_logs_form=CompareLogsForm(request.form),
         service_form=JobForm(request.form, 'Service'),
         services_classes=list(service_classes)

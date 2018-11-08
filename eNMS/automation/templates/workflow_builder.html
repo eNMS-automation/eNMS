@@ -22,6 +22,7 @@
 
 {% block content %}
   {% include 'service_editor.html' %}
+  {% include 'workflow_modal.html' %}
   {% include 'logs_modals.html' %}
   <div id="add-job" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -58,7 +59,7 @@
               <strong><p id="current-device"></p></strong>
             </div>
             <div class="btn-group" style="z-index:2; position: absolute; left:35vw; top:10px;">  
-              {{ workflow_builder_form.workflow(id="workflow-name", class="form-control") }}
+              {{ workflow_builder_form.workflow(id="current-workflow", class="form-control") }}
             </div>
             <div id="network" style="height:80vh; width:100%;></div>
             <div class="ln_solid"></div>

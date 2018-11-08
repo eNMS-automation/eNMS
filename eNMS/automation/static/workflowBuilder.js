@@ -87,11 +87,12 @@ function displayWorkflow(wf) {
   return graph;
 }
 
+console.log(workflow);
 if (workflow) {
-  $('#workflow-name').val(workflow.id);
+  $('#current-workflow').val(workflow.id);
   displayWorkflow(workflow);
 } else {
-  call(`/get/workflow/${$('#workflow-name').val()}`, function(result) {
+  call(`/get/workflow/${$('#current-workflow').val()}`, function(result) {
     workflow = result;
     graph = displayWorkflow(result);
   });
@@ -229,7 +230,7 @@ function switchMode(mode) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-$('#workflow-name').on('change', function() {
+$('#current-workflow').on('change', function() {
   savePositions();
   call(`/get/workflow/${this.value}`, function(result) {
     workflow = result;

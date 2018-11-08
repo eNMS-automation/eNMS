@@ -41,11 +41,11 @@ function editService(id, duplicate) {
 function saveService() { // eslint-disable-line no-unused-vars
   const url = `/automation/save_service/${$('#services').val()}`;
   fCall(url, '#edit-service-form', function(result) {
+    mode = saveInstance(type, instance);
     if (typeof workflowBuilder === 'undefined') {
       addService(mode, result);
     } else {
       nodes.update({id: result.id, label: result.name});
     }
-    saveInstance(type, instance);
   });
 }

@@ -354,7 +354,7 @@ relationships = {
     },
     'Pool': {
         'device': 'Device',
-        'link': 'Link',
+        'link': 'Link'
     },
     'Service': {
         'device': 'Device',

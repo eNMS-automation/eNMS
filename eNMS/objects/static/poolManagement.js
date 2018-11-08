@@ -35,7 +35,7 @@ function tableActions(values, pool) { // eslint-disable-line no-unused-vars
  */
 function showPoolObjects(id) { // eslint-disable-line no-unused-vars
   call(`/get/pool/${id}`, function(pool) {
-    $('#device,#links').multiselect('deselectAll', false);
+    $('#devices,#links').multiselect('deselectAll', false);
     $('#devices').multiselect('select', pool.devices.map((n) => n.id));
     $('#links').multiselect('select', pool.links.map((l) => l.id));
     poolId = id;
@@ -65,7 +65,7 @@ function updatePools() { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/pools.html');
-  convertSelect('devices', 'links');
+  convertSelect('links', 'devices');
   for (let i = 0; i < pools.length; i++) {
     addInstance('create', 'pool', pools[i]);
   }

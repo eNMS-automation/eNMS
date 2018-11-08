@@ -186,6 +186,7 @@ function saveInstance(type, instance) {
   ${mode == 'edit' ? 'edited' : 'created'}.`;
   alertify.notify(message, 'success', 5);
   $(`#edit-${type}`).modal('hide');
+  return mode
 }
 
 /**
@@ -194,8 +195,8 @@ function saveInstance(type, instance) {
  */
 function processData(type) { // eslint-disable-line no-unused-vars
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
+    mode = saveInstance(type, instance);
     addInstance(mode, type, instance);
-    saveInstance(type, instance);
   });
 }
 

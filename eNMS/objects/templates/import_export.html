@@ -33,29 +33,6 @@
       <div class="col-md-6 col-xs-6">
         <div class="x_panel" style="min-height: 450px">
           <div class="x_title">
-            <h4 class="text-center">LibreNMS import</h4>
-          </div>
-          <div class="x_content">
-            <br>
-            <form id="librenms_form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-              <div class="form-group">
-              </div>
-              <div class="ln_solid"></div>
-              <div class="form-group">
-                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <button type="button" class="btn btn-success" onclick="queryOpenNMS()">Import</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-xs-6">
-        <div class="x_panel" style="min-height: 450px">
-          <div class="x_title">
             <h4 class="text-center">OpenNMS import</h4>
           </div>
           <div class="x_content">
@@ -80,6 +57,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-md-6 col-xs-6">
         <div class="x_panel" style="min-height: 450px">
           <div class="x_title">
@@ -101,6 +80,28 @@
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                   <button class="btn btn-primary" type="reset">Reset</button>
                   <button type="button" class="btn btn-success" onclick="queryNetbox()">Import</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        <div class="x_panel" style="min-height: 450px">
+          <div class="x_title">
+            <h4 class="text-center">LibreNMS import</h4>
+          </div>
+          <div class="x_content">
+            <br>
+            <form id="librenms_form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+              <div class="form-group">
+                TODO
+              </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="button" class="btn btn-success" onclick="queryOpenNMS()">Import</button>
                 </div>
               </div>
             </form>

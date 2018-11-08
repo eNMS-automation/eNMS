@@ -18,11 +18,11 @@ const table = $('#table').DataTable(); // eslint-disable-line
  */
 function tableActions(values, pool) { // eslint-disable-line no-unused-vars
   values.push(
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('pool', '${pool.id}')">Edit properties</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('pool', '${pool.id}', true)">Duplicate</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showPoolObjects('${pool.id}')">Edit objects</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('pool', '${pool.id}')">Delete</button>`

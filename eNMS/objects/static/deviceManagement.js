@@ -16,9 +16,9 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-success btn-xs"
     onclick="connectionParametersModal('${device.id}')">Connect</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('device', '${device.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('device', '${device.id}', true)">
     Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"

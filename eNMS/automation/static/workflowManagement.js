@@ -21,9 +21,9 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
     onclick="compareLogs('${workflow.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="runJob('${workflow.id}')">Run</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('workflow', '${workflow.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('workflow', '${workflow.id}')">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('workflow', '${workflow.id}')">Delete</button>`

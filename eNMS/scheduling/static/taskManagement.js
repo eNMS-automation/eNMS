@@ -25,13 +25,13 @@ function addTask(mode, properties) {
   }
   const status = properties.status == 'active' ? 'pause' : 'resume';
   values.push(
-    `<button type="button" class="btn btn-success btn-xs"
-    onclick="showTaskModal('${properties.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-success btn-xs"
-    onclick="showTaskModal('${properties.id}', true)">Duplicate</button>`,
     `<button id="pause-resume-${properties.id}" type="button"
-    class="btn btn-danger btn-xs" onclick="${status}Task('${properties.id}')">
+    class="btn btn-success btn-xs" onclick="${status}Task('${properties.id}')">
     ${status.charAt(0).toUpperCase() + status.substr(1)}</button>`,
+    `<button type="button" class="btn btn-primary btn-xs"
+    onclick="showTaskModal('${properties.id}')">Edit</button>`,
+    `<button type="button" class="btn btn-primary btn-xs"
+    onclick="showTaskModal('${properties.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('task', '${properties.id}')">Delete</button>`
   );

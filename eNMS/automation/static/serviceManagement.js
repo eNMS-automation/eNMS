@@ -21,9 +21,9 @@ function tableActions(values, service) { // eslint-disable-line no-unused-vars
     onclick="compareLogs('${service.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="runJob('${service.id}')">Run</button>`,
-    `<button type="button" class="btn btn-danger btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="editService('${service.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-danger btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="editService('${service.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('service', '${service.id}')">Delete</button>`

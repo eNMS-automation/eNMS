@@ -1,5 +1,6 @@
 from flask_mail import Message
 from json import dumps
+from os import remove
 from requests import post
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
@@ -53,6 +54,7 @@ class SwissArmyKnifeService(Service):
             print(str_dict(payload["logs"][payload["runtime"]]), file=text_file)
         with open(filename, 'r') as text_file:
             message.attach(filename, 'text/plain', text_file.read())
+        remove(filename)
         mail.send(message)
         return {'success': True}
 

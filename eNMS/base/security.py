@@ -7,19 +7,19 @@ def allowed_file(name, allowed_extensions):
     return allowed_syntax and allowed_extension
 
 
-def vault_helper(path, data=None):
-    if not data:
-        return vault_client.read(f'secret/data/{path}')['data']['data']
-    else:
-        vault_client.write(f'secret/data/{path}', data=data)
+def write_vault(path, data):
+    vault_client.write(f'secret/data/{path}', data=data)
+
+
+def read_vault(path, *properties):
+    data = vault_client.read(f'secret/data/{path}')['data']['data']
+    return [data[property] for property in properties]
 
 
 def get_device_credentials(app, device):
     if app.config['USE_VAULT']:
-        data = vault_helper(f'Device/{device.name}')
-        return (
-            vault_helper(f'Device/{device.name}')['password'],
-            vault_helper(f'Device/{device.name}')['enable_password']
+        return read_vault(
+            f'Device/{device.name}', 'password', 'enable_password'
         )
     else:
         return device.password, device.enable_password
@@ -27,6 +27,6 @@ def get_device_credentials(app, device):
 
 def get_user_credentials(app, user):
     if app.config['USE_VAULT']:
-        return vault_helper(f'user/{user.name}')['password']
+        return read_vault(f'User/{user.name}', 'password')
     else:
         return user.password

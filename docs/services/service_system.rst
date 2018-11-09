@@ -230,9 +230,9 @@ Service notification
 When a service (or a workflow) finishes, you can choose to receive a notification that contains the logs of the service (whether it was successful or not for each device, etc).
 
 There are three types of notification:
-- Mail notification: eNMS sends a mail to an address of your choice.
-- Slack notification: eNMS sends a message to a channel of your choice.
-- Mattermost notification: same as Slack, with Mattermost.
+  - Mail notification: eNMS sends a mail to an address of your choice.
+  - Slack notification: eNMS sends a message to a channel of your choice.
+  - Mattermost notification: same as Slack, with Mattermost.
 
 To set up the mail system, you must export the following environment variables before starting eNMS:
 

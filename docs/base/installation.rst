@@ -204,7 +204,7 @@ You need to export each variable with its value:
 Default Examples
 ----------------
 
-By default, eNMS will create a few examples of each type of objects (devices, links, services, workflows...).
+By default, eNMS will create a few examples of each type of object (devices, links, services, workflows...).
 If you run eNMS in production, you might want to deactivate this.
 
 To deactivate, set the ``CREATE_EXAMPLES`` environment variable to ``0``.

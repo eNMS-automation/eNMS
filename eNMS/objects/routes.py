@@ -107,7 +107,7 @@ def connection(id):
         'device': device.name,
         'port': port,
         'redirection': app.config['GOTTY_PORT_REDIRECTION'],
-        'server_addr': app.config['GOTTY_SERVER_ADDR']
+        'server_addr': app.config['ENMS_SERVER_ADDR']
     })
 
 

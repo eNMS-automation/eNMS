@@ -3,6 +3,7 @@ from napalm import get_network_driver
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from os import environ
 from re import compile
 
 from eNMS import db, scheduler
@@ -70,7 +71,8 @@ def get_results_summary(job, results, now):
             if not device_results['success']
         ]
         summary.append(f'Failed on devices: {", ".join(failed_devices)}')
-    logs_url = f'http://SERVER_URL/automation/logs/{job.id}/{now}'
+    server_url = environ.get('ENMS_SERVER_ADDR', 'http://SERVER_IP')
+    logs_url = f'{server_url}/automation/logs/{job.id}/{now}'
     summary.append(f'Logs: {logs_url}')
     return '\n\n'.join(summary)
 

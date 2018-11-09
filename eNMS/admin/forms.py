@@ -3,7 +3,7 @@ from wtforms import (
     FloatField,
     HiddenField,
     IntegerField,
-    TextField,
+    StringField,
     PasswordField,
     SelectField,
     SelectMultipleField
@@ -14,35 +14,35 @@ from eNMS.base.properties import import_properties, user_permissions
 
 
 class LoginForm(BaseForm):
-    name = TextField()
+    name = StringField()
     password = PasswordField()
 
 
 class AddUser(BaseForm):
     id = HiddenField()
-    name = TextField()
+    name = StringField()
     password = PasswordField()
-    email = TextField()
+    email = StringField()
     permission_choices = [(p, p) for p in user_permissions]
     permissions = SelectMultipleField(choices=permission_choices)
 
 
 class AdministrationForm(BaseForm):
-    tacacs_ip_address = TextField('IP address')
+    tacacs_ip_address = StringField('IP address')
     tacacs_password = PasswordField()
     tacacs_port = IntegerField(default=49)
     tacacs_timeout = IntegerField(default=10)
-    syslog_ip_address = TextField('IP address', default='0.0.0.0')
+    syslog_ip_address = StringField('IP address', default='0.0.0.0')
     syslog_port = IntegerField(default=514)
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
     gotty_start_port = FloatField('Start port')
     gotty_end_port = FloatField('End port')
-    mail_sender = TextField()
-    mail_recipients = TextField()
-    mattermost_url = TextField('Mattermost URL')
-    mattermost_channel = TextField()
+    mail_sender = StringField()
+    mail_recipients = StringField()
+    mattermost_url = StringField('Mattermost URL')
+    mattermost_channel = StringField()
     mattermost_verify_certificate = BooleanField()
     pool = SelectField(choices=())
     categories = {
@@ -79,6 +79,6 @@ class AdministrationForm(BaseForm):
 
 
 class MigrationsForm(BaseForm):
-    name = TextField()
+    name = StringField()
     export_choices = [(p, p.capitalize()) for p in import_properties]
     export = SelectMultipleField(choices=export_choices)

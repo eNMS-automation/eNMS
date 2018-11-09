@@ -1,13 +1,13 @@
-from wtforms import HiddenField, SelectField, TextField
+from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.base.models import BaseForm
 
 
 class SchedulingForm(BaseForm):
     id = HiddenField()
-    start_date = TextField()
-    end_date = TextField()
-    name = TextField()
-    description = TextField()
-    frequency = TextField()
+    start_date = StringField()
+    end_date = StringField()
+    name = StringField()
+    description = StringField()
+    frequency = StringField()
     job = SelectField(choices=())

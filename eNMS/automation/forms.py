@@ -2,7 +2,7 @@ from wtforms import (
     BooleanField,
     HiddenField,
     IntegerField,
-    TextField,
+    StringField,
     SelectField,
     SelectMultipleField
 )
@@ -12,8 +12,8 @@ from eNMS.base.models import BaseForm
 
 class JobForm(BaseForm):
     id = HiddenField()
-    name = TextField()
-    description = TextField()
+    name = StringField()
+    description = StringField()
     devices = SelectMultipleField(choices=())
     pools = SelectMultipleField(choices=())
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
@@ -28,8 +28,8 @@ class JobForm(BaseForm):
         'Time between retries (in seconds)',
         default=10
     )
-    vendor = TextField()
-    operating_system = TextField()
+    vendor = StringField()
+    operating_system = StringField()
 
 
 class CompareLogsForm(BaseForm):

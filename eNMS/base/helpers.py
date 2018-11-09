@@ -28,6 +28,13 @@ def fetch_all(model):
     return classes[model].query.all()
 
 
+def fetch_all_visible(model):
+    return [
+        instance for instance in classes[model].query.all()
+        if instance.visible
+    ]
+
+
 def objectify(model, object_list):
     return [fetch(model, id=object_id) for object_id in object_list]
 

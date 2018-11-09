@@ -3,7 +3,7 @@ from flask import jsonify, redirect, request, url_for
 
 from eNMS.base import bp
 from eNMS.base.classes import classes
-from eNMS.base.helpers import delete, factory, fetch, fetch_all, get, post
+from eNMS.base.helpers import delete, factory, fetch, fetch_all_visible, get, post
 from eNMS.base.properties import (
     default_diagrams_properties,
     reverse_pretty_names,
@@ -21,7 +21,7 @@ def dashboard():
     return dict(
         properties=type_to_diagram_properties,
         default_properties=default_diagrams_properties,
-        counters={cls: len(fetch_all(cls)) for cls in classes}
+        counters={cls: len(fetch_all_visible(cls)) for cls in classes}
     )
 
 

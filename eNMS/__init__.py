@@ -73,7 +73,7 @@ def configure_login_manager(app):
 def configure_vault_client(app):
     vault_client.url = app.config['VAULT_ADDR']
     vault_client.token = app.config['VAULT_TOKEN']
-    if vault_client.is_sealed() and app.config['UNSEAL_VAULT']:
+    if vault_client.sys.is_sealed() and app.config['UNSEAL_VAULT']:
         keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
         vault_client.unseal_multi(filter(None, keys))
 

@@ -33,16 +33,12 @@
               <li><a href="/objects/import_export">Import & Export</a></li>
             </ul>
           </li>
-        {% endif %}
-        {% if current_user.allowed('Views Section') %}
           <li><a><i class="fa fa-map-marker"></i>Views<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/views/geographical_view">Geographical View</a></li>
               <li><a href="/views/logical_view">Logical View</a></li>
             </ul>
           </li>
-        {% endif %}
-        {% if current_user.allowed('Automation Section') %}
           <li><a><i class="fa fa-clock-o"></i>Automation<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/automation/service_management">Service Management</a></li>
@@ -50,16 +46,12 @@
               <li><a href="/automation/workflow_builder">Workflow Builder</a></li>
             </ul>
           </li>
-        {% endif %}
-        {% if current_user.allowed('Scheduling Section') %}
           <li><a><i class="fa fa-clock-o"></i>Scheduling<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/scheduling/task_management">Task Management</a></li>
               <li><a href="/scheduling/calendar">Calendar</a></li>
             </ul>
           </li>
-        {% endif %}
-        {% if current_user.allowed('Logs Section') %}
           <li><a><i class="fa fa-clock-o"></i>Logs<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/logs/log_management">Log Management</a></li>

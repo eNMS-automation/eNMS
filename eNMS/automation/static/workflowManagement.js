@@ -9,6 +9,16 @@ workflows: false
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
 
 /**
+ * Display instance modal for editing.
+ * @param {id} id - Instance ID.
+ */
+function duplicate(id) { // eslint-disable-line no-unused-vars
+  call(`/automation/duplicate_workflow/${id}`, function(instance) {
+    
+  });
+}
+
+/**
  * Table Actions.
  * @param {values} values - values array.
  * @param {workflow} workflow - workflow.
@@ -24,7 +34,7 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('workflow', '${workflow.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('workflow', '${workflow.id}')">Duplicate</button>`,
+    onclick="duplicate('${workflow.id}')">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('workflow', '${workflow.id}')">Delete</button>`
   );

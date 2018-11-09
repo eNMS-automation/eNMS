@@ -61,7 +61,7 @@ class Parameters(Base):
     )
     opennms_login = Column(String, default='demo')
     mail_sender = Column(String, default='enms@enms.fr')
-    mail_recipients = Column(String)
+    mail_recipients = Column(String, default='antoinefourmy@gmail.com')
     mattermost_url = Column(
         String,
         default='http://192.168.105.2:8065/hooks/dnuajekqp78jjbbajo8ewuw4ih'

@@ -45,8 +45,12 @@ class SwissArmyKnifeService(Service):
             payload['job']['name'],
             sender=parameters.mail_sender,
             recipients=parameters.mail_recipients.split(','),
-            body=str_dict(payload['result'])
+            body=payload['result']
         )
+        runtime = payload["runtime"].replace('.', '').replace(':', '')
+        with open(f'logs-{runtime}.txt', 'w+') as text_file:
+            print(str_dict(payload["logs"][payload["runtime"]]), file=text_file)
+            message.attach('logs.txt', 'text/plain', text_file.read())
         mail.send(message)
         return {'success': True}
 
@@ -56,8 +60,8 @@ class SwissArmyKnifeService(Service):
     def mattermost_feedback_notification(self, payload):
         parameters = get_one('Parameters')
         post(parameters.mattermost_url, data=dumps({
-            "channel": parameters.mattermost_channel,
-            "text": str_dict(payload['result'])
+            'channel': parameters.mattermost_channel,
+            'text': payload['result']
         }))
         return {'success': True}
 

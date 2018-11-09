@@ -90,6 +90,8 @@ def scheduler_job(job_id):
         if job.send_notification:
             fetch('Job', name=job.send_notification_method).try_run({
                 'job': job.serialized,
+                'logs': job.logs,
+                'runtime': now,
                 'result': get_results_summary(job, results, now)
             })
         db.session.commit()

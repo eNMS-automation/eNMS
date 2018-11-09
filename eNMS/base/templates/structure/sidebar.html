@@ -24,7 +24,7 @@
             </ul>
           </li>
         {% endif %}
-        {% if current_user.allowed('Inventory Section') %}
+        {% if current_user.allowed('View') %}
           <li><a><i class="fa fa-sitemap"></i>Inventory<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/objects/device_management">Device Management</a></li>

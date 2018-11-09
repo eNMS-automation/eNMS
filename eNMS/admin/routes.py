@@ -66,7 +66,7 @@ def login():
         user = fetch('User', name=name)
         if user:
             if app.config['USE_VAULT']:
-                pwd = vault_helper(app, f'user/{user.name}')['password']
+                pwd = vault_helper(f'user/{user.name}')['password']
             else:
                 pwd = user.password
             if password == pwd:

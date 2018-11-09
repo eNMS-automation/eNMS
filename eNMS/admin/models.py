@@ -23,8 +23,10 @@ class User(Base, UserMixin):
         if not kwargs.get('password', None):
             kwargs.pop('password', None)
         if app.config['USE_VAULT'] and 'password' in kwargs:
-            data = {'password': kwargs['password']}
-            vault_helper(app, f'user/{kwargs["name"]}', data)
+            vault_helper(
+                f'user/{kwargs["name"]}',
+                {'password': kwargs.pop('password')}
+            )
         super().update(**kwargs)
 
     @property

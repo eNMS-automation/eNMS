@@ -43,7 +43,8 @@ def delete(model, **kwargs):
 
 
 def delete_all(model):
-    db.session.query(classes[model]).delete()
+    for instance in fetch_all(model):
+        delete(model, id=instance.id)
     db.session.commit()
 
 

@@ -40,11 +40,7 @@ class Object(Base):
 
 CustomDevice = type('CustomDevice', (Object,), {
     '__tablename__': 'CustomDevice',
-    'id': Column(
-        Integer,
-        ForeignKey('Object.id', ondelete='CASCADE'),
-        primary_key=True
-    ),
+    'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
     '__mapper_args__': {'polymorphic_identity': 'CustomDevice'},
     **{
         property: Column(sql_types[values['type']], default=values['default'])
@@ -57,11 +53,7 @@ class Device(CustomDevice):
 
     __tablename__ = 'Device'
 
-    id = Column(
-        Integer,
-        ForeignKey(CustomDevice.id, ondelete='CASCADE'),
-        primary_key=True
-    )
+    id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
     ip_address = Column(String)
@@ -97,11 +89,7 @@ class Link(Object):
         'polymorphic_identity': 'Link',
     }
 
-    id = Column(
-        Integer,
-        ForeignKey('Object.id', ondelete='CASCADE'),
-        primary_key=True
-    )
+    id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     source_id = Column(
         Integer,
         ForeignKey('Device.id')
@@ -113,12 +101,12 @@ class Link(Object):
     source = relationship(
         Device,
         primaryjoin=source_id == Device.id,
-        backref=backref('source', cascade='all,delete-orphan')
+        backref=backref('source', cascade='all, delete-orphan')
     )
     destination = relationship(
         Device,
         primaryjoin=destination_id == Device.id,
-        backref=backref('destination', cascade='all,delete-orphan')
+        backref=backref('destination', cascade='all, delete-orphan')
     )
     pools = relationship(
         'Pool',

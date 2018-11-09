@@ -25,6 +25,7 @@ class MattermostNotificationService(Service):
         parameters = get_one('Parameters')
         result = post(
             parameters.mattermost_url,
+            verify=False,
             data=dumps({
                 "channel": self.channel or parameters.mattermost_channel,
                 "text": self.body

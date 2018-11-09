@@ -95,8 +95,8 @@ def logout():
 
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
-    parameters, data = get_one('Parameters'), request.form.to_dict()
-    parameters.update(**data)
+    parameters = get_one('Parameters')
+    parameters.update(**request.form)
     app.tacacs_client = TACACSClient(
         parameters.tacacs_ip_address,
         parameters.tacacs_port,

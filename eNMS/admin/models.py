@@ -1,6 +1,6 @@
 from flask import current_app as app
 from flask_login import UserMixin
-from sqlalchemy import Column, Float, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 
 from eNMS import db
@@ -67,6 +67,7 @@ class Parameters(Base):
         default='http://192.168.105.2:8065/hooks/dnuajekqp78jjbbajo8ewuw4ih'
     )
     mattermost_channel = Column(String)
+    mattermost_verify_certificate = Column(Boolean)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

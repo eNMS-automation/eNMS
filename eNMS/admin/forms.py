@@ -1,4 +1,5 @@
 from wtforms import (
+    BooleanField,
     FloatField,
     HiddenField,
     IntegerField,
@@ -42,6 +43,7 @@ class AdministrationForm(BaseForm):
     mail_recipients = TextField()
     mattermost_url = TextField('Mattermost URL')
     mattermost_channel = TextField()
+    mattermost_verify_certificate = BooleanField()
     pool = SelectField(choices=())
     categories = {
         'TACACS+ Server': (
@@ -67,7 +69,8 @@ class AdministrationForm(BaseForm):
             'mail_sender',
             'mail_recipients',
             'mattermost_url',
-            'mattermost_channel'
+            'mattermost_channel',
+            'mattermost_verify_certificate'
         ),
         'Horizontal Scaling': (
             'pool',

@@ -8,7 +8,7 @@ from eNMS.base.properties import (
     property_types,
     boolean_properties,
     relationships as rel,
-    vault_properties
+    private_properties
 )
 from eNMS.base.security import vault_helper
 
@@ -30,12 +30,15 @@ class Base(db.Model):
         serial = rel.get(self.__tablename__, rel['Service'])
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            if property in vault_properties and use_vault:
-                vault_helper(
-                    f'{self.__tablename__}/{kwargs["name"]}/{property}',
-                    {property: value}
-                )
-                continue
+            if property in private_properties:
+                if not value:
+                    continue
+                if use_vault:
+                    vault_helper(
+                        f'{self.__tablename__}/{kwargs["name"]}/{property}',
+                        {property: value}
+                    )
+                    continue
             elif property in serial:
                 value = fetch(serial[property], id=value)
             elif property[:-1] in serial:

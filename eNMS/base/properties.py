@@ -25,7 +25,7 @@ boolean_properties = [
     'multiprocessing',
     'send_notification'
 ]
-vault_properties = ['username', 'password', 'enable_password']
+private_properties = ['password', 'enable_password']
 
 base_properties = [
     'id',

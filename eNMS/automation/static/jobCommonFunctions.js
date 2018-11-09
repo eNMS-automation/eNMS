@@ -71,7 +71,11 @@ $('#first_version,#second_version').on('change', function() {
  */
 function runJob(id) { // eslint-disable-line no-unused-vars
   call(`/automation/run_job/${id}`, function(job) {
-    alertify.notify(`Job '${job.name}' started.`, 'success', 5);
+    if (job.error) {
+      alertify.notify(`Error: ${job.error}.`, 'error', 5);
+    } else {
+      alertify.notify(`Job '${job.name}' started.`, 'success', 5);
+    }
   });
 }
 

@@ -141,6 +141,8 @@ def get_states(cls):
 @post(bp, '/run_job/<job_id>', 'Edit')
 def run_job(job_id):
     job = fetch('Job', id=job_id)
+    if job.state == 'Running':
+        return jsonify({'error': 'Job is already running'})
     now = datetime.now() + timedelta(seconds=5)
     scheduler.add_job(
         id=str(now),

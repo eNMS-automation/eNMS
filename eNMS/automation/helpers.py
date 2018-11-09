@@ -22,13 +22,13 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
 def netmiko_connection(service, device):
-    username, pwd, enable_pwd = get_device_credentials(scheduler.app, device)
+    password, enable_password = get_device_credentials(scheduler.app, device)
     return ConnectHandler(
         device_type=service.driver,
         ip=device.ip_address,
         username=username,
-        password=pwd,
-        secret=enable_pwd,
+        password=password,
+        secret=enable_password,
         fast_cli=service.fast_cli,
         timeout=service.timeout,
         global_delay_factor=service.global_delay_factor
@@ -39,14 +39,14 @@ def napalm_connection(service, device):
     optional_args = service.optional_args
     if not optional_args:
         optional_args = {}
-    username, pwd, enable_pwd = get_device_credentials(scheduler.app, device)
+    password, enable_password = get_device_credentials(scheduler.app, device)
     if 'secret' not in optional_args:
-        optional_args['secret'] = enable_pwd
+        optional_args['secret'] = enable_password
     driver = get_network_driver(service.driver)
     return driver(
         hostname=device.ip_address,
         username=username,
-        password=pwd,
+        password=password,
         optional_args=optional_args
     )
 
@@ -87,6 +87,7 @@ def scheduler_job(job_id):
         results, now = job.try_run()
         info(f'{job.name}: finished.')
         job.state = 'Idle'
+        db.session.commit()
         if job.send_notification:
             fetch('Job', name=job.send_notification_method).try_run({
                 'job': job.serialized,
@@ -95,3 +96,4 @@ def scheduler_job(job_id):
                 'result': get_results_summary(job, results, now)
             })
         db.session.commit()
+        

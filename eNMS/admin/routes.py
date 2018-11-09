@@ -33,7 +33,7 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import user_public_properties
-from eNMS.base.security import vault_helper
+from eNMS.base.security import get_user_credentials
 
 
 @get(bp, '/user_management', 'View')
@@ -62,21 +62,21 @@ def migrations():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name, password = request.form['name'], request.form['password']
+        name, input_password = request.form['name'], request.form['password']
         user = fetch('User', name=name)
         if user:
-            if app.config['USE_VAULT']:
-                pwd = vault_helper(f'user/{user.name}')['password']
-            else:
-                pwd = user.password
-            if password == pwd:
+            password = get_user_credentials(app, user)
+            if input_password == password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
         elif app.tacacs_client:
-            if app.tacacs_client.authenticate(name, password, FLAG).valid:
-                user = factory('User', **{'name': name, 'password': password})
+            if app.tacacs_client.authenticate(name, input_password, FLAG).valid:
+                user = factory(
+                    'User',
+                    **{'name': name, 'password': input_password}
+                )
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:

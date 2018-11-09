@@ -20,13 +20,6 @@ class User(Base, UserMixin):
     password = Column(String)
 
     def update(self, **kwargs):
-        if not kwargs.get('password', None):
-            kwargs.pop('password', None)
-        if app.config['USE_VAULT'] and 'password' in kwargs:
-            vault_helper(
-                f'user/{kwargs["name"]}',
-                {'password': kwargs.pop('password')}
-            )
         super().update(**kwargs)
 
     @property

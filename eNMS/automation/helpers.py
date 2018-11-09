@@ -62,7 +62,6 @@ def get_results_summary(job, results, now):
         f'Runtime: {now}',
         f'Status: {"PASS" if results["success"] else "FAILED"}'
     ]
-    print(results, 'devices' in results, not results["success"])
     if 'devices' in results['result'] and not results["success"]:
         device_status = [
             f'{device}: {"PASS" if device_results["success"] else "FAILED"}'
@@ -90,4 +89,3 @@ def scheduler_job(job_id):
                 'result': get_results_summary(job, results, now)
             })
         db.session.commit()
-        

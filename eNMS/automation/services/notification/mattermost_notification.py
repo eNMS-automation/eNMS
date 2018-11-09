@@ -23,7 +23,6 @@ class MattermostNotificationService(Service):
 
     def job(self, _):
         parameters = get_one('Parameters')
-        
         result = post(
             parameters.mattermost_url,
             verify=parameters.mattermost_verify_certificate,

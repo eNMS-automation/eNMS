@@ -50,10 +50,10 @@ class SwissArmyKnifeService(Service):
         )
         runtime = payload["runtime"].replace('.', '').replace(':', '')
         filename = f'logs-{runtime}.txt'
-        with open(filename, 'w') as text_file:
-            print(str_dict(payload["logs"][payload["runtime"]]), file=text_file)
-        with open(filename, 'r') as text_file:
-            message.attach(filename, 'text/plain', text_file.read())
+        with open(filename, 'w') as file:
+            file.write(str_dict(payload["logs"][payload["runtime"]]))
+        with open(filename, 'r') as file:
+            message.attach(filename, 'text/plain', file.read())
         remove(filename)
         mail.send(message)
         return {'success': True}

@@ -3,7 +3,15 @@ from flask import jsonify, redirect, request, url_for
 
 from eNMS.base import bp
 from eNMS.base.classes import classes
-from eNMS.base.helpers import delete, factory, fetch, fetch_all_visible, get, post
+from eNMS.base.helpers import (
+    delete,
+    factory,
+    fetch,
+    fetch_all,
+    fetch_all_visible,
+    get,
+    post
+)
 from eNMS.base.properties import (
     default_diagrams_properties,
     reverse_pretty_names,

@@ -47,7 +47,6 @@ def user_management():
 
 @get(bp, '/administration', 'View')
 def administration():
-    print(get_one('Parameters').mattermost_verify_certificate)
     return dict(
         form=AdministrationForm(request.form, 'Parameters'),
         parameters=get_one('Parameters')

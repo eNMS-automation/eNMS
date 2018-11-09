@@ -1,4 +1,3 @@
-from flask import current_app as app
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList

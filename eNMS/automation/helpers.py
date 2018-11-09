@@ -14,19 +14,16 @@ NETMIKO_DRIVERS = sorted(
     (driver, driver) for driver in CLASS_MAPPER
     if 'telnet' not in driver and 'ssh' not in driver
 )
-
 NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
-
-# we exclude "base" from supported drivers
 NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
 def netmiko_connection(service, device):
-    password, enable_password = get_device_credentials(scheduler.app, device)
+    password, enable_password = get_device_credentials(device)
     return ConnectHandler(
         device_type=service.driver,
         ip=device.ip_address,
-        username=username,
+        username=device.username,
         password=password,
         secret=enable_password,
         fast_cli=service.fast_cli,
@@ -39,13 +36,13 @@ def napalm_connection(service, device):
     optional_args = service.optional_args
     if not optional_args:
         optional_args = {}
-    password, enable_password = get_device_credentials(scheduler.app, device)
+    password, enable_password = get_device_credentials(device)
     if 'secret' not in optional_args:
         optional_args['secret'] = enable_password
     driver = get_network_driver(service.driver)
     return driver(
         hostname=device.ip_address,
-        username=username,
+        username=device.username,
         password=password,
         optional_args=optional_args
     )
@@ -81,9 +78,6 @@ def get_results_summary(job, results, now):
 def scheduler_job(job_id):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)
-        job.state = 'Running'
-        info(f'{job.name}: starting.')
-        db.session.commit()
         results, now = job.try_run()
         info(f'{job.name}: finished.')
         job.state = 'Idle'

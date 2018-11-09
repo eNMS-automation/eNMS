@@ -65,7 +65,7 @@ def login():
         name, input_password = request.form['name'], request.form['password']
         user = fetch('User', name=name)
         if user:
-            password = get_user_credentials(app, user)
+            password = get_user_credentials(user)
             if input_password == password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))

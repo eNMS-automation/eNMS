@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from flask import jsonify, request, session
 from json import dumps
+from logging import info
 
 from eNMS import db, scheduler
 from eNMS.base.classes import service_classes
@@ -143,6 +144,9 @@ def run_job(job_id):
     job = fetch('Job', id=job_id)
     if job.state == 'Running':
         return jsonify({'error': 'Job is already running'})
+    job.state = 'Running'
+    info(f'{job.name}: starting.')
+    db.session.commit()
     now = datetime.now() + timedelta(seconds=5)
     scheduler.add_job(
         id=str(now),

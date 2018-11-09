@@ -1,4 +1,4 @@
-from eNMS import vault_client
+from eNMS import use_vault, vault_client
 
 
 def allowed_file(name, allowed_extensions):
@@ -16,18 +16,15 @@ def read_vault(path, property):
     return vault_client.read(full_path)['data']['data'][property]
 
 
-def get_device_credentials(app, device):
-    if app.config['USE_VAULT']:
-        return (
-            read_vault(f'Device/{device.name}', 'password'),
-            read_vault(f'Device/{device.name}', 'enable_password')
-        )
-    else:
-        return device.password, device.enable_password
+def get_device_credentials(device):
+    return (
+        read_vault(f'Device/{device.name}', 'password'),
+        read_vault(f'Device/{device.name}', 'enable_password')
+    ) if use_vault else (device.password, device.enable_password)
 
 
-def get_user_credentials(app, user):
-    if app.config['USE_VAULT']:
+def get_user_credentials(user):
+    if use_vault:
         return read_vault(f'User/{user.name}', 'password')
     else:
         return user.password

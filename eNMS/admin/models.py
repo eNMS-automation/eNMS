@@ -5,7 +5,6 @@ from sqlalchemy.ext.mutable import MutableList
 
 from eNMS import db
 from eNMS.base.models import Base
-from eNMS.base.security import vault_helper
 
 
 class User(Base, UserMixin):

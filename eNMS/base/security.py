@@ -11,15 +11,16 @@ def write_vault(path, data):
     vault_client.write(f'secret/data/{path}', data=data)
 
 
-def read_vault(path, *properties):
-    data = vault_client.read(f'secret/data/{path}')['data']['data']
-    return [data[property] for property in properties]
+def read_vault(path, property):
+    full_path = f'secret/data/{path}/{property}'
+    return vault_client.read(full_path)['data']['data'][property]
 
 
 def get_device_credentials(app, device):
     if app.config['USE_VAULT']:
-        return read_vault(
-            f'Device/{device.name}', 'password', 'enable_password'
+        return (
+            read_vault(f'Device/{device.name}', 'password'),
+            read_vault(f'Device/{device.name}', 'enable_password')
         )
     else:
         return device.password, device.enable_password

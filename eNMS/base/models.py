@@ -10,7 +10,7 @@ from eNMS.base.properties import (
     relationships as rel,
     private_properties
 )
-from eNMS.base.security import vault_helper
+from eNMS.base.security import write_vault
 
 
 class Base(db.Model):
@@ -34,7 +34,7 @@ class Base(db.Model):
                 if not value:
                     continue
                 if use_vault:
-                    vault_helper(
+                    write_vault(
                         f'{self.__tablename__}/{kwargs["name"]}/{property}',
                         {property: value}
                     )

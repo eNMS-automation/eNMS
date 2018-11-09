@@ -65,12 +65,13 @@ def get_results_summary(job, results, now):
         f'Runtime: {now}',
         f'Status: {"PASS" if results["success"] else "FAILED"}'
     ]
-    if 'devices' in results and not results["success"]:
-        failed_devices = [
-            device for device, device_results in results['devices'].items()
-            if not device_results['success']
+    print(results, 'devices' in results, not results["success"])
+    if 'devices' in results['result'] and not results["success"]:
+        device_status = [
+            f'{device}: {"PASS" if device_results["success"] else "FAILED"}'
+            for device, device_results in results['result']['devices'].items()
         ]
-        summary.append(f'Failed on devices: {", ".join(failed_devices)}')
+        summary.append(f'Per-device Status: {", ".join(device_status)}')
     server_url = environ.get('ENMS_SERVER_ADDR', 'http://SERVER_IP')
     logs_url = f'{server_url}/automation/logs/{job.id}/{now}'
     summary.append(f'Logs: {logs_url}')

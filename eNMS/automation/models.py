@@ -86,7 +86,7 @@ class Job(Base):
         ]
 
     def try_run(self, payload=None, remaining_targets=None):
-        failed_attempts = {}
+        failed_attempts, now = {}, str(datetime.now()).replace(' ', '-')
         for i in range(self.number_of_retries + 1):
             results, remaining_targets = self.run(payload, remaining_targets)
             if results['success']:
@@ -95,8 +95,8 @@ class Job(Base):
                 failed_attempts[f'Attempts {i + 1}'] = results
                 sleep(self.time_between_retries)
         results['failed_attempts'] = failed_attempts
-        self.logs[str(datetime.now())] = results
-        return results
+        self.logs[now] = results
+        return results, now
 
     def get_results(self, payload, device=None):
         try:
@@ -240,7 +240,7 @@ class Workflow(Job):
             if not self.multiprocessing:
                 self.status['current_job'] = job.properties
                 db.session.commit()
-            job_results = job.try_run(results, {device} if device else None)
+            job_results, _ = job.try_run(results, {device} if device else None)
             success = job_results['success']
             if not self.multiprocessing:
                 self.status['jobs'][job.id] = success

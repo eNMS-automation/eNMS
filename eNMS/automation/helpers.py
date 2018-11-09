@@ -58,18 +58,35 @@ def substitute(data, variables):
     return r.sub(replace_with_locals, data)
 
 
+def get_results_summary(job, results, now):
+    summary = [
+        f'Job: {job.name} ({job.type})',
+        f'Runtime: {now}',
+        f'Status: {"PASS" if results["success"] else "FAILED"}'
+    ]
+    if 'devices' in results and not results["success"]:
+        failed_devices = [
+            device for device, device_results in results['devices'].items()
+            if not device_results['success']
+        ]
+        summary.append(f'Failed on devices: {", ".join(failed_devices)}')
+    logs_url = f'http://SERVER_URL/automation/logs/{job.id}/{now}'
+    summary.append(f'Logs: {logs_url}')
+    return '\n\n'.join(summary)
+
+
 def scheduler_job(job_id):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)
         job.state = 'Running'
         info(f'{job.name}: starting.')
         db.session.commit()
-        results = job.try_run()
+        results, now = job.try_run()
         info(f'{job.name}: finished.')
         job.state = 'Idle'
         if job.send_notification:
             fetch('Job', name=job.send_notification_method).try_run({
                 'job': job.serialized,
-                'result': results
+                'result': get_results_summary(job, results, now)
             })
         db.session.commit()

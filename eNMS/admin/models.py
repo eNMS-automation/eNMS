@@ -67,7 +67,7 @@ class Parameters(Base):
         default='http://192.168.105.2:8065/hooks/dnuajekqp78jjbbajo8ewuw4ih'
     )
     mattermost_channel = Column(String)
-    mattermost_verify_certificate = Column(Boolean)
+    mattermost_verify_certificate = Column(Boolean, default=True)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

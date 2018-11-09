@@ -23,9 +23,10 @@ class MattermostNotificationService(Service):
 
     def job(self, _):
         parameters = get_one('Parameters')
+        
         result = post(
             parameters.mattermost_url,
-            verify=False,
+            verify=parameters.mattermost_verify_certificate,
             data=dumps({
                 "channel": self.channel or parameters.mattermost_channel,
                 "text": self.body

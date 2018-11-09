@@ -65,6 +65,11 @@ def workflow_builder():
     )
 
 
+@get(bp, '/logs/<id>/<runtime>', 'View')
+def logs(id, runtime):
+    return f'<pre>{dumps(fetch("Job", id=id).logs[runtime], indent=4)}</pre>'
+
+
 @post(bp, '/get_service/<id_or_cls>', 'View')
 def get_service(id_or_cls):
     service = fetch('Service', id=id_or_cls)

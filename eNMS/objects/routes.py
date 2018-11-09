@@ -133,9 +133,11 @@ def update_pools():
 @post(bp, '/import_topology', 'Edit')
 def import_topology():
     if request.form.get('replace', None) == 'y':
-        delete_all('Link')
         delete_all('Device')
-    print(fetch_all('Device'), fetch_all('Object'))
+    if request.form.get('update-pools', None) == 'y':
+        for pool in fetch_all('Pool'):
+            pool.compute_pool()
+        db.session.commit()
     objects, file = defaultdict(list), request.files['file']
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
@@ -147,7 +149,6 @@ def import_topology():
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 prop = dict(zip(properties, sheet.row_values(row_index)))
-                print(prop)
                 objects[obj_type].append(factory(obj_type, **prop).serialized)
             db.session.commit()
     return jsonify(objects)

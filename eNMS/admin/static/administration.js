@@ -10,7 +10,7 @@ fCall: false
  */
 function saveParameters() { // eslint-disable-line no-unused-vars
   fCall('/admin/save_parameters', '#parameters-form', function() {
-      alertify.notify('Notification parameters saved.', 'success', 5);
+      alertify.notify('Parameters saved.', 'success', 5);
     }
   );
 }

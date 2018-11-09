@@ -22,7 +22,7 @@
                   {% set value = parameters[property] %}
                   <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
                   <div class="col-md-8 col-sm-8 col-xs-12">
-                    {{ field(class="form-control", value=value, placeholder=field.label.text) }}
+                    {{ field(class="form-control", value=value, checked=value, placeholder=field.label.text) }}
                   </div><br><br><br>
                 {% endfor %}
               {% endfor %}

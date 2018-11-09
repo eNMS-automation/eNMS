@@ -47,6 +47,7 @@ def user_management():
 
 @get(bp, '/administration', 'View')
 def administration():
+    print(get_one('Parameters').mattermost_verify_certificate)
     return dict(
         form=AdministrationForm(request.form, 'Parameters'),
         parameters=get_one('Parameters')
@@ -102,7 +103,7 @@ def save_parameters():
         parameters.tacacs_port,
         parameters.tacacs_password
     )
-    pool = fetch('Pool', id=request.form['database_filtering_pool'])
+    pool = fetch('Pool', id=request.form['pool'])
     pool_objects = {'Device': pool.devices, 'Link': pool.links}
     for obj_type in ('Device', 'Link'):
         for obj in fetch_all(obj_type):

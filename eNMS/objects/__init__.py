@@ -9,8 +9,8 @@ bp = Blueprint(
 )
 
 from eNMS.base.helpers import add_classes
-from eNMS.objects.models import Device, Link, Pool
+from eNMS.objects.models import Device, Link, Object, Pool
 
-add_classes(Device, Link, Pool)
+add_classes(Device, Link, Object, Pool)
 
 import eNMS.objects.routes  # noqa: F401

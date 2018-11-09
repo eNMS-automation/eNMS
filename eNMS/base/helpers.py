@@ -42,6 +42,11 @@ def delete(model, **kwargs):
     return result
 
 
+def delete_all(model):
+    db.session.query(classes[model]).delete()
+    db.session.commit()
+
+
 def serialize(model):
     return classes[model].serialize()
 

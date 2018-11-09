@@ -12,6 +12,7 @@ from xlwt import Workbook
 
 from eNMS import db
 from eNMS.base.helpers import (
+    delete_all,
     factory,
     fetch,
     fetch_all,
@@ -132,7 +133,9 @@ def update_pools():
 @post(bp, '/import_topology', 'Edit')
 def import_topology():
     if request.form.get('replace', None) == 'y':
-        print('ttttt'*500)
+        delete_all('Link')
+        delete_all('Device')
+    print(fetch_all('Device'), fetch_all('Object'))
     objects, file = defaultdict(list), request.files['file']
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
@@ -144,6 +147,7 @@ def import_topology():
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 prop = dict(zip(properties, sheet.row_values(row_index)))
+                print(prop)
                 objects[obj_type].append(factory(obj_type, **prop).serialized)
             db.session.commit()
     return jsonify(objects)

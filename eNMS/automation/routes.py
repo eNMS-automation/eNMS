@@ -67,7 +67,8 @@ def workflow_builder():
 
 @get(bp, '/logs/<id>/<runtime>', 'View')
 def logs(id, runtime):
-    return f'<pre>{dumps(fetch("Job", id=id).logs[runtime], indent=4)}</pre>'
+    message = fetch("Job", id=id).logs.get(runtime, 'Logs have been removed')
+    return f'<pre>{dumps(message, indent=4)}</pre>'
 
 
 @post(bp, '/get_service/<id_or_cls>', 'View')

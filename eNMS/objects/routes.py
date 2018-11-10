@@ -1,6 +1,7 @@
 from collections import defaultdict
 from flask import current_app as app, jsonify, request
 from flask_login import current_user
+from logging import info
 from pathlib import Path
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -149,7 +150,11 @@ def import_topology():
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 prop = dict(zip(properties, sheet.row_values(row_index)))
-                objects[obj_type].append(factory(obj_type, **prop).serialized)
+                try:
+                    obj = factory(obj_type, **prop).serialized
+                except Exception as e:
+                    info(f'{str(prop)} could not be imported ({str(e)})')
+                objects[obj_type].append(obj)
             db.session.commit()
     return jsonify(objects)
 

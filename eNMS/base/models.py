@@ -62,7 +62,6 @@ class Base(db.Model):
                 result[property] = getattr(self, property)
             except TypeError:
                 result[property] = str(getattr(self, property))
-        print(result)
         return result
 
     def to_dict(self, export=False):

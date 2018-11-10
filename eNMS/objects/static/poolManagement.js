@@ -3,6 +3,7 @@ global
 addInstance: false
 alertify: false
 call: false
+convertSelect: false
 doc: false
 fCall: false
 pools: false

@@ -10,6 +10,7 @@ partial: false
 runJob: false
 showLogs: false
 showModal: false
+showTypeModal: false
 vis: false
 workflow: true
 */
@@ -87,7 +88,6 @@ function displayWorkflow(wf) {
   return graph;
 }
 
-console.log(workflow);
 if (workflow) {
   $('#current-workflow').val(workflow.id);
   displayWorkflow(workflow);

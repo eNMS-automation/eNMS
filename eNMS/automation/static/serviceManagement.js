@@ -1,12 +1,12 @@
 /*
 global
-call: false
+addInstance: false
 doc: false
-fields: false
+getStates: false
 services: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
 /**
  * Table Actions.

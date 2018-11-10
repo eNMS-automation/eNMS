@@ -2,11 +2,13 @@
 global
 addInstance
 call: false
+convertSelect: false
 doc: false
+getStates: false
 workflows: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+const table = $('#table').DataTable(); // eslint-disable-line
 
 /**
  * Display instance modal for editing.
@@ -14,7 +16,6 @@ const table = $('#table').DataTable(); // eslint-disable-line new-cap
  */
 function duplicate(id) { // eslint-disable-line no-unused-vars
   call(`/automation/duplicate_workflow/${id}`, function(instance) {
-    
   });
 }
 

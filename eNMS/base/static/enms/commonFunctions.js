@@ -177,7 +177,9 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
 
 /**
  * Save instance.
+ * @param {type} type - Type.
  * @param {instance} instance - Object instance.
+ * @return {mode}
  */
 function saveInstance(type, instance) {
   const title = $(`#title-${type}`).text().startsWith('Edit');
@@ -186,7 +188,7 @@ function saveInstance(type, instance) {
   ${mode == 'edit' ? 'edited' : 'created'}.`;
   alertify.notify(message, 'success', 5);
   $(`#edit-${type}`).modal('hide');
-  return mode
+  return mode;
 }
 
 /**
@@ -195,7 +197,7 @@ function saveInstance(type, instance) {
  */
 function processData(type) { // eslint-disable-line no-unused-vars
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
-    mode = saveInstance(type, instance);
+    const mode = saveInstance(type, instance);
     addInstance(mode, type, instance);
   });
 }

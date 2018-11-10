@@ -35,5 +35,5 @@ function tableActions(values, service) { // eslint-disable-line no-unused-vars
   for (let i = 0; i < services.length; i++) {
     addInstance('create', 'service', services[i]);
   }
-  getStates('service');
+  //getStates('service');
 })();

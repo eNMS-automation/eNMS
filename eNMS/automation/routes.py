@@ -16,6 +16,7 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import (
+    cls_to_properties,
     property_types,
     service_table_properties,
     workflow_table_properties
@@ -117,20 +118,20 @@ def get_service(id_or_cls):
             </div>''' + '</fieldset>'
 
     form = ''
-    for col in cls.__table__.columns:
-        if col.key in cls.private:
+    for property in cls_to_properties[cls.type]:
+        if property in cls.private:
             continue
-        if property_types[col.key] == bool:
+        if property_types[property] == bool:
             form += build_boolean_box(col)
-        elif hasattr(cls, f'{col.key}_values'):
+        elif hasattr(cls, f'{property}_values'):
             form += build_select_box(col)
-        elif hasattr(cls, f'{col.key}_textarea'):
+        elif hasattr(cls, f'{property}_textarea'):
             form += build_textarea_box(col)
         else:
             form += build_text_box(col)
     return jsonify({
         'form': form,
-        'service': service.column_values if service else None
+        'service': service.serialized if service else None
     })
 
 

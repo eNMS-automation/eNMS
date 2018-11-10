@@ -56,13 +56,13 @@ class Base(db.Model):
     @property
     def properties(self):
         class_name, result = self.__tablename__, {}
-        print(class_name, cls_to_properties[class_name])
         for property in cls_to_properties[class_name]:
             try:
                 dumps(getattr(self, property))
                 result[property] = getattr(self, property)
             except TypeError:
                 result[property] = str(getattr(self, property))
+        print(result)
         return result
 
     def to_dict(self, export=False):

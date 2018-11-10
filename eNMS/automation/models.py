@@ -148,20 +148,6 @@ class Service(Job):
         'polymorphic_identity': 'service',
     }
 
-    @property
-    def column_values(self):
-        serialized_object = self.properties
-        for col in self.__table__.columns:
-            value = getattr(self, col.key)
-            serialized_object[col.key] = value
-        serialized_object['devices'] = [
-            obj.properties for obj in getattr(self, 'devices')
-        ]
-        serialized_object['pools'] = [
-            obj.properties for obj in getattr(self, 'pools')
-        ]
-        return serialized_object
-
 
 class WorkflowEdge(Base):
 

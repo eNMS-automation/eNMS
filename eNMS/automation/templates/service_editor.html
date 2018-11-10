@@ -11,7 +11,7 @@
         <div class="modal-body">
           <label>Type of Service</label>
           <div class='form-group'>
-            <select class="form-control" id="services"></select>
+            <select class="form-control" id="service-type"></select>
           </div>
           {% for field in service_form %}
             {% if field.widget.input_type == 'hidden' %}
@@ -34,7 +34,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" onclick="processData('service')">Submit</button>
+          <button type="button" class="btn btn-success" onclick="saveService('service')">Submit</button>
         </div>
       </form>
     </div>

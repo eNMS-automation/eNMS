@@ -15,9 +15,9 @@ workflowBuilder: false;
   convertSelect('service-devices', 'service-pools');
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
-    $('#services').append(`<option value='${cls}'>${cls}</option>`);
+    $('#service-type').append(`<option value='${cls}'>${cls}</option>`);
   }
-  $('#services').change(function() {
+  $('#service-type').change(function() {
     editService();
   });
 })();
@@ -28,7 +28,7 @@ workflowBuilder: false;
  * @param {duplicate} duplicate - Duplicate.
  */
 function editService(id, duplicate) {
-  const url = `/automation/get_service/${id || $('#services').val()}`;
+  const url = `/automation/get_service/${id || $('#service-type').val()}`;
   call(url, function(result) {
     if (result.service) processInstance('service', result.service, duplicate);
     $('#html-form').html(result.form);
@@ -39,8 +39,7 @@ function editService(id, duplicate) {
  * Save a service.
  */
 function saveService() { // eslint-disable-line no-unused-vars
-  const url = `/automation/save_service/${$('#services').val()}`;
-  fCall(url, '#edit-service-form', function(service) {
+  fCall(`/update/${$('#service-type').val()}`, '#edit-service-form', function(service) {
     const mode = saveInstance('service', service);
     if (typeof workflowBuilder === 'undefined') {
       addInstance(mode, 'service', service);

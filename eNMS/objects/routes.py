@@ -95,7 +95,7 @@ def connection(id):
         if request.form['credentials'] == 'device':
             login, pwd = device.username, device.password
         else:
-            login, pwd = user.name, user.password
+            login, pwd = current_user.name, current_user.password
         cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{ip}'.split())
     else:
         cmd.extend(f'ssh {options} {ip}'.split())

@@ -26,27 +26,29 @@ class Base(db.Model):
     def __repr__(self):
         return self.name
 
-    def __getattr__(self, property):
+    def __getattribute__(self, property):
         if property in private_properties and use_vault:
             path = f'secret/data/{self.type}/{self.name}/{property}'
-            vault_client.read(path)['data']['data'][property]
+            return vault_client.read(path)['data']['data'][property]
         else:
-            return getattr(self, property)
+            return super().__getattribute__(property)
+
+    def __setattr__(self, property, value):
+        if property in private_properties:
+            if not value:
+                return
+            if use_vault:
+                vault_client.write(
+                    f'secret/data/{self.type}/{self.name}/{property}',
+                    data={property: value}
+                )
+        super().__setattr__(property, value)
 
     def update(self, **kwargs):
         serial = rel.get(self.__tablename__, rel['Service'])
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            if property in private_properties:
-                if not value:
-                    continue
-                if use_vault:
-                    write_vault(
-                        f'{self.type}/{kwargs["name"]}/{property}',
-                        {property: value}
-                    )
-                    continue
-            elif property in serial:
+            if property in serial:
                 value = fetch(serial[property], id=value)
             elif property[:-1] in serial:
                 value = objectify(serial[property[:-1]], value)

@@ -308,18 +308,12 @@ $('#network').contextMenu({
   },
 });
 
-(function() {
-  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-})();
-
 /**
  * Start the workflow.
  */
 function runWorkflow() { // eslint-disable-line no-unused-vars
   workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
   runJob(workflow.id);
-  workflowInit = true;
-  getWorkflowStatus();
 }
 
 /**
@@ -356,18 +350,16 @@ function getWorkflowStatus() {
           colorJob(id, success ? '#32cd32' : '#FF6666');
         });
       }
-      if (workflowInit || wf.state == 'Running') {
-        if (workflowInit && wf.state == 'Running') {
-          workflowInit = !workflowInit;
-        }
-        setTimeout(getWorkflowStatus, 1000);
-      } else {
-        call(`/automation/reset_workflow_logs/${workflow.id}`, () => {});
-      }
     });
   }
+  setTimeout(getWorkflowStatus, 1000);
 }
 
 $(window).bind('beforeunload', function() {
   savePositions();
 });
+
+(function() {
+  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
+  getWorkflowStatus();
+})();

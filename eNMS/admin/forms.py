@@ -79,6 +79,5 @@ class AdministrationForm(BaseForm):
 
 
 class MigrationsForm(BaseForm):
-    name = StringField()
     export_choices = [(p, p.capitalize()) for p in import_properties]
     export = SelectMultipleField(choices=export_choices)

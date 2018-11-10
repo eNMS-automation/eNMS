@@ -8,7 +8,7 @@ from eNMS.base.associations import (
     job_device_table,
     job_pool_table
 )
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, get_one
 from eNMS.base.models import Base
 from eNMS.base.properties import (
     custom_properties,
@@ -16,6 +16,7 @@ from eNMS.base.properties import (
     device_public_properties,
     sql_types
 )
+from eNMS.objects.helpers import database_filtering
 
 
 class Object(Base):
@@ -186,16 +187,14 @@ class Pool(AbstractPool):
         self.devices = list(filter(self.object_match, Device.query.all()))
         self.links = []
         for link in Link.query.all():
-            # source and destination do not belong to a link __dict__, because
-            # they are SQLalchemy relationships and not columns
-            # we update __dict__ with these properties for the filtering
-            # system to include them
             link.__dict__.update({
                 'source': link.source,
                 'destination': link.destination
             })
             if self.object_match(link):
                 self.links.append(link)
+        if get_one('Parameters').pool == self:
+            database_filtering(self)
 
     def object_match(self, obj):
         return all(

@@ -29,11 +29,11 @@ from eNMS.base.helpers import (
     post,
     factory,
     fetch,
-    fetch_all,
     serialize
 )
 from eNMS.base.properties import user_public_properties
 from eNMS.base.security import get_user_credentials
+from eNMS.objects.helpers import database_filtering
 
 
 @get(bp, '/user_management', 'View')
@@ -102,11 +102,7 @@ def save_parameters():
         parameters.tacacs_port,
         parameters.tacacs_password
     )
-    pool = fetch('Pool', id=request.form['pool'])
-    pool_objects = {'Device': pool.devices, 'Link': pool.links}
-    for obj_type in ('Device', 'Link'):
-        for obj in fetch_all(obj_type):
-            setattr(obj, 'hidden', obj not in pool_objects[obj_type])
+    database_filtering(fetch('Pool', id=request.form['pool']))
     db.session.commit()
     return jsonify(True)
 

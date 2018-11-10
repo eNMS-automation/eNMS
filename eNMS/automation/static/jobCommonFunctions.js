@@ -56,11 +56,11 @@ $('#display').on('change', function() {
 });
 
 $('#compare_with').on('change', function() {
-  $('#view').empty();
+  $('#logs').empty();
   const v1 = $('#display').val();
   const v2 = $('#compare_with').val();
   call(`/automation/get_diff/${jobId}/${v1}/${v2}`, function(data) {
-    $('#view').append(diffview.buildView({
+    $('#logs').append(diffview.buildView({
       baseTextLines: data.first,
       newTextLines: data.second,
       opcodes: data.opcodes,

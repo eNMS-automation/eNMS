@@ -35,7 +35,7 @@ class Base(db.Model):
                     continue
                 if use_vault:
                     write_vault(
-                        f'{self.__tablename__}/{kwargs["name"]}/{property}',
+                        f'{self.type}/{kwargs["name"]}/{property}',
                         {property: value}
                     )
                     continue

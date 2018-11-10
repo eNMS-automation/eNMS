@@ -11,20 +11,9 @@ def write_vault(path, data):
     vault_client.write(f'secret/data/{path}', data=data)
 
 
-def read_vault(path, property):
-    full_path = f'secret/data/{path}/{property}'
-    return vault_client.read(full_path)['data']['data'][property]
-
-
-def get_device_credentials(device):
-    return (
-        read_vault(f'Device/{device.name}', 'password'),
-        read_vault(f'Device/{device.name}', 'enable_password')
-    ) if use_vault else (device.password, device.enable_password)
-
-
-def get_user_credentials(user):
+def sget(instance, property):
     if use_vault:
-        return read_vault(f'User/{user.name}', 'password')
+        path = f'secret/data/{instance.type}/{instance.name}/{property}'
+        return vault_client.read(path)['data']['data'][property]
     else:
-        return user.password
+        return getattr(instance, property)

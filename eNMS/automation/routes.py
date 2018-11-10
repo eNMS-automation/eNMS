@@ -78,57 +78,57 @@ def get_service(id_or_cls):
     service = fetch('Service', id=id_or_cls)
     cls = service_classes[service.type if service else id_or_cls]
 
-    def build_text_box(c):
+    def build_text_box(property):
         return f'''
-            <label>{c.key}</label>
+            <label>{property}</label>
             <div class="form-group">
-              <input class="form-control" id="{c.key}"
-              name="{c.key}" type="text">
+              <input class="form-control" id="{property}"
+              name="{property}" type="text">
             </div>'''
 
-    def build_textarea_box(c):
+    def build_textarea_box(property):
         return f'''
-            <label>{c.key}</label>
+            <label>{property}</label>
             <div class="form-group">
               <textarea style="height: 150px;" rows="30"
-              class="form-control" id="{c.key}"
-              name="{c.key}"></textarea>
+              class="form-control" id="{property}"
+              name="{property}"></textarea>
             </div>'''
 
-    def build_select_box(c):
+    def build_select_box(property):
         options = ''.join(
             f'<option value="{k}">{v}</option>'
-            for k, v in getattr(cls, f'{c.key}_values')
+            for k, v in getattr(cls, f'{property}_values')
         )
         return f'''
-            <label>{c.key}</label>
+            <label>{property}</label>
             <div class="form-group">
               <select class="form-control"
-              id="{c.key}" name="{c.key}"
-              {'multiple size="7"' if property_types[c.key] == list else ''}>
+              id="{property}" name="{property}"
+              {'multiple size="7"' if property_types[property] == list else ''}>
               {options}
               </select>
             </div>'''
 
-    def build_boolean_box(c):
+    def build_boolean_box(property):
         return '<fieldset>' + f'''
             <div class="item">
-                <input id="{c.key}" name="{c.key}" type="checkbox">
-                <label>{c.key}</label>
+                <input id="{property}" name="{property}" type="checkbox">
+                <label>{property}</label>
             </div>''' + '</fieldset>'
 
     form = ''
-    for property in cls_to_properties[cls.type]:
-        if property in cls.private:
+    for property in cls_to_properties[cls.__tablename__]:
+        if property in cls.private or property in cls_to_properties['Service']:
             continue
-        if property_types[property] == bool:
-            form += build_boolean_box(col)
+        if property_types.get(property, None) == bool:
+            form += build_boolean_box(property)
         elif hasattr(cls, f'{property}_values'):
-            form += build_select_box(col)
+            form += build_select_box(property)
         elif hasattr(cls, f'{property}_textarea'):
-            form += build_textarea_box(col)
+            form += build_textarea_box(property)
         else:
-            form += build_text_box(col)
+            form += build_text_box(property)
     return jsonify({
         'form': form,
         'service': service.serialized if service else None

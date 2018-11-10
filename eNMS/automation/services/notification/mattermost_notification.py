@@ -4,7 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.base.helpers import get_one
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes as sc
+from eNMS.base.classes import service_classes
 
 
 class MattermostNotificationService(Service):
@@ -18,7 +18,7 @@ class MattermostNotificationService(Service):
     multiprocessing = False
 
     __mapper_args__ = {
-        'polymorphic_identity': 'mattermost_notification_service',
+        'polymorphic_identity': 'MattermostNotificationService',
     }
 
     def job(self, _):
@@ -34,4 +34,4 @@ class MattermostNotificationService(Service):
         return {'success': True, 'result': str(result)}
 
 
-sc['mattermost_notification_service'] = MattermostNotificationService
+service_classes['MattermostNotificationService'] = MattermostNotificationService

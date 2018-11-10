@@ -56,6 +56,7 @@ class Base(db.Model):
     @property
     def properties(self):
         class_name, result = self.__tablename__, {}
+        print(class_name, cls_to_properties[class_name])
         for property in cls_to_properties[class_name]:
             try:
                 dumps(getattr(self, property))

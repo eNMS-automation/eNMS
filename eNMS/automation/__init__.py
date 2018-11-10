@@ -37,7 +37,7 @@ def create_service_classes():
         spec = spec_from_file_location(str(file), str(file))
         spec.loader.exec_module(module_from_spec(spec))
     for cls_name, cls in service_classes.items():
-        cls_to_properties[cls_name] = cls_to_properties['Service']
+        cls_to_properties[cls_name] = list(cls_to_properties['Service'])
         for col in cls.__table__.columns:
             cls_to_properties[cls_name].append(col.key)
             service_import_properties.append(col.key)

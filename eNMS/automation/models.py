@@ -14,7 +14,7 @@ from eNMS.base.associations import (
 )
 from eNMS.base.helpers import fetch
 from eNMS.base.models import Base
-from eNMS.base.properties import cls_to_properties, service_properties
+from eNMS.base.properties import cls_to_properties
 
 
 class Job(Base):
@@ -147,13 +147,6 @@ class Service(Job):
     __mapper_args__ = {
         'polymorphic_identity': 'service',
     }
-
-    @property
-    def properties(self):
-        prop = {p: getattr(self, p) for p in cls_to_properties['Service']}
-        for property in service_properties[self.type]:
-            prop[property] = getattr(self, property)
-        return prop
 
     @property
     def column_values(self):

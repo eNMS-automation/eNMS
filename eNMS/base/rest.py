@@ -8,7 +8,7 @@ from eNMS.base.security import get_user_credentials
 
 @auth.get_password
 def get_password(username):
-    return get_user_credentials(fetch('User', name=username))
+    return sget(fetch('User', name=username), 'password')
 
 
 @auth.error_handler

@@ -9,11 +9,3 @@ def allowed_file(name, allowed_extensions):
 
 def write_vault(path, data):
     vault_client.write(f'secret/data/{path}', data=data)
-
-
-def sget(instance, property):
-    if use_vault:
-        path = f'secret/data/{instance.type}/{instance.name}/{property}'
-        return vault_client.read(path)['data']['data'][property]
-    else:
-        return getattr(instance, property)

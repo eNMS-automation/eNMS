@@ -26,6 +26,13 @@ class Base(db.Model):
     def __repr__(self):
         return self.name
 
+    def __getattr__(self, property):
+        if property in private_properties and use_vault:
+            path = f'secret/data/{instance.type}/{instance.name}/{property}'
+            vault_client.read(path)['data']['data'][property]
+        else:
+            return getattr(self, property)
+
     def update(self, **kwargs):
         serial = rel.get(self.__tablename__, rel['Service'])
         for property, value in kwargs.items():

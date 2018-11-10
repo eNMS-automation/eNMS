@@ -14,9 +14,9 @@ const table = $('#table').DataTable(); // eslint-disable-line
  * Display instance modal for editing.
  * @param {id} id - Instance ID.
  */
-function duplicate(id) { // eslint-disable-line no-unused-vars
-  call(`/automation/duplicate_workflow/${id}`, function(instance) {
-  });
+function showWorkflowModalDuplicate(id) { // eslint-disable-line no-unused-vars
+  $('#workflow-button').click(partial(duplicateWorkflow, id));
+  showTypeModal('workflow', '${workflow.id}');
 }
 
 /**
@@ -35,7 +35,7 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('workflow', '${workflow.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="duplicate('${workflow.id}')">Duplicate</button>`,
+    onclick="showWorkflowModalDuplicate('${workflow.id}')">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('workflow', '${workflow.id}')">Delete</button>`
   );

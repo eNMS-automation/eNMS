@@ -15,9 +15,9 @@ const table = $('#table').DataTable(); // eslint-disable-line
  */
 function tableActions(values, user) { // eslint-disable-line no-unused-vars
   values.push(
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('user', '${user.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-info btn-xs"
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('user', '${user.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="deleteInstance('user', '${user.id}')">Delete</button>`

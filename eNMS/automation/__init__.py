@@ -5,10 +5,10 @@ from pathlib import Path
 from sqlalchemy import Boolean, Float, Integer, PickleType
 
 from eNMS.base.properties import (
+    cls_to_properties,
     property_types,
     boolean_properties,
-    service_import_properties,
-    service_properties
+    service_import_properties
 )
 
 bp = Blueprint(
@@ -37,8 +37,9 @@ def create_service_classes():
         spec = spec_from_file_location(str(file), str(file))
         spec.loader.exec_module(module_from_spec(spec))
     for cls_name, cls in service_classes.items():
+        cls_to_properties[cls_name] = cls_to_properties['Service']
         for col in cls.__table__.columns:
-            service_properties[cls_name].append(col.key)
+            cls_to_properties[cls_name].append(col.key)
             service_import_properties.append(col.key)
             if type(col.type) == Boolean:
                 boolean_properties.append(col.key)

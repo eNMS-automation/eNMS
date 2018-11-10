@@ -1,4 +1,3 @@
-from collections import defaultdict
 from os import environ
 from sqlalchemy import Boolean, Integer, String, Float
 from yaml import load
@@ -349,7 +348,6 @@ pretty_names = {
 
 pretty_names.update({k: v['pretty_name'] for k, v in custom_properties.items()})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
-service_properties = defaultdict(list)
 
 property_types = {
     'devices': list,

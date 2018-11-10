@@ -3,12 +3,11 @@ from flask_restful import Api, Resource
 
 from eNMS import auth
 from eNMS.base.helpers import delete, factory, fetch
-from eNMS.base.security import get_user_credentials
 
 
 @auth.get_password
 def get_password(username):
-    return sget(fetch('User', name=username), 'password')
+    return fetch('User', name=username).password
 
 
 @auth.error_handler

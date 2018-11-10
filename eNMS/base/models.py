@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from json import dumps, loads
 
-from eNMS import db, use_vault
+from eNMS import db, use_vault, vault_client
 from eNMS.base.helpers import fetch, objectify, choices
 from eNMS.base.properties import (
     cls_to_properties,
@@ -28,7 +28,7 @@ class Base(db.Model):
 
     def __getattr__(self, property):
         if property in private_properties and use_vault:
-            path = f'secret/data/{instance.type}/{instance.name}/{property}'
+            path = f'secret/data/{self.type}/{self.name}/{property}'
             vault_client.read(path)['data']['data'][property]
         else:
             return getattr(self, property)

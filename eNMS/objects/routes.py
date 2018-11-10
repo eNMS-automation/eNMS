@@ -22,11 +22,7 @@ from eNMS.base.helpers import (
     post,
     serialize
 )
-from eNMS.base.security import (
-    allowed_file,
-    get_device_credentials,
-    get_user_credentials
-)
+from eNMS.base.security import allowed_file
 from eNMS.objects import bp
 from eNMS.objects.forms import (
     AddLink,
@@ -97,9 +93,9 @@ def connection(id):
         options = ''
     if 'authentication' in request.form:
         if request.form['credentials'] == 'device':
-            login, pwd, _ = get_device_credentials(app, device)
+            login, pwd = device.username, device.password
         else:
-            login, pwd = get_user_credentials(app, current_user)
+            login, pwd = user.name, user.password
         cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{ip}'.split())
     else:
         cmd.extend(f'ssh {options} {ip}'.split())

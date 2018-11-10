@@ -8,7 +8,6 @@ from re import compile
 
 from eNMS import db, scheduler
 from eNMS.base.helpers import fetch
-from eNMS.base.security import get_device_credentials
 
 NETMIKO_DRIVERS = sorted(
     (driver, driver) for driver in CLASS_MAPPER
@@ -19,13 +18,12 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
 def netmiko_connection(service, device):
-    password, enable_password = get_device_credentials(device)
     return ConnectHandler(
         device_type=service.driver,
         ip=device.ip_address,
         username=device.username,
-        password=password,
-        secret=enable_password,
+        password=device.password,
+        secret=device.enable_password,
         fast_cli=service.fast_cli,
         timeout=service.timeout,
         global_delay_factor=service.global_delay_factor
@@ -36,14 +34,13 @@ def napalm_connection(service, device):
     optional_args = service.optional_args
     if not optional_args:
         optional_args = {}
-    password, enable_password = get_device_credentials(device)
     if 'secret' not in optional_args:
-        optional_args['secret'] = enable_password
+        optional_args['secret'] = device.enable_password
     driver = get_network_driver(service.driver)
     return driver(
         hostname=device.ip_address,
         username=device.username,
-        password=password,
+        password=device.password,
         optional_args=optional_args
     )
 

@@ -32,7 +32,6 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import user_public_properties
-from eNMS.base.security import get_user_credentials
 from eNMS.objects.helpers import database_filtering
 
 
@@ -67,8 +66,7 @@ def login():
         name, input_password = request.form['name'], request.form['password']
         user = fetch('User', name=name)
         if user:
-            password = get_user_credentials(user)
-            if input_password == password:
+            if input_password == user.password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:

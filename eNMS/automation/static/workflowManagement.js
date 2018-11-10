@@ -24,8 +24,6 @@ function showWorkflowModalDuplicate(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Instance ID.
  */
 function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
-  $('#workflow-button').off('click')
-  $('#workflow-button').click(partial(processData, 'workflow'));
   $('#edit-workflow').modal('hide');
   fCall(
     `/automation/duplicate_workflow/${id}`,
@@ -65,5 +63,9 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
     addInstance('create', 'workflow', workflows[i]);
   }
   convertSelect('workflow-devices', 'workflow-pools');
+  $('#edit-workflow').on('hidden.bs.modal', function () {
+    console.log('test');
+    $('#workflow-button').attr('onclick', 'processData("workflow")');
+  });
   getStates('workflow');
 })();

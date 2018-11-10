@@ -1,8 +1,0 @@
-{% for interface, properties in subinterfaces.items() %}
-interface FastEthernet0/0.{{ interface }}
- description {{ properties.aire }}
- encapsulation dot1Q {{ properties.dot1Q }}
- ip address {{ properties.address }} 255.255.255.248
- no ip redirects
- ip ospf cost {{ properties.cost }}
-{% endfor %}

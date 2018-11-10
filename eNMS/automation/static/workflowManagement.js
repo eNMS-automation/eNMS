@@ -1,10 +1,12 @@
 /*
 global
-addInstance
-call: false
+alertify: false
+addInstance: false
 convertSelect: false
 doc: false
+fCall: false
 getStates: false
+showTypeModal: false
 workflows: false
 */
 
@@ -61,8 +63,7 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
     addInstance('create', 'workflow', workflows[i]);
   }
   convertSelect('workflow-devices', 'workflow-pools');
-  $('#edit-workflow').on('hidden.bs.modal', function () {
-    console.log('test');
+  $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');
   });
   getStates('workflow');

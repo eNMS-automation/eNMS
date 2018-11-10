@@ -47,14 +47,14 @@ def create_service_classes():
                 type(col.type) == PickleType
                 and hasattr(cls, f'{col.key}_values')
             ):
-                property_types[col.key] = list
+                property_types[col.key] = 'list'
             else:
                 property_types[col.key] = {
-                    Boolean: bool,
-                    Integer: int,
-                    Float: float,
-                    PickleType: dict,
-                }.get(type(col.type), str)
+                    Boolean: 'bool',
+                    Integer: 'int',
+                    Float: 'float',
+                    PickleType: 'dict',
+                }.get(type(col.type), 'str')
 
 
 create_service_classes()

@@ -206,7 +206,7 @@ function deleteSelection() {
     graph.getSelectedEdges().map((edge) => deleteEdge(edge));
     graph.deleteSelected();
   } else {
-    alertify.notify("Start and End of a Workflow cannot be deleted", 'error', 5);
+    alertify.notify('Start and End cannot be deleted', 'error', 5);
   }
 }
 

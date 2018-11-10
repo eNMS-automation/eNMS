@@ -104,9 +104,10 @@ def get_service(id_or_cls):
             <label>{property}</label>
             <div class="form-group">
               <select class="form-control"
-              id="service-{property}" name="service-{property}"
-              {'multiple size="7"' if property_types[property] == list else ''}>
-              {options}
+                id="service-{property}" name="service-{property}"
+                {'multiple size="7"'
+                if property_types[property] == 'list'
+                else ''}>{options}
               </select>
             </div>'''
 
@@ -121,7 +122,7 @@ def get_service(id_or_cls):
     for property in cls_to_properties[cls.__tablename__]:
         if property in cls_to_properties['Service']:
             continue
-        if property_types.get(property, None) == bool:
+        if property_types.get(property, None) == 'bool':
             form += build_boolean_box(property)
         elif hasattr(cls, f'{property}_values'):
             form += build_select_box(property)

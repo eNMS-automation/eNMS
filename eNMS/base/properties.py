@@ -356,7 +356,7 @@ property_types = {
     'edges': 'object-list',
     'permissions': 'list',
     'import_export_types': 'list',
-    'send_notification': bool
+    'send_notification': 'bool'
 }
 
 relationships = {

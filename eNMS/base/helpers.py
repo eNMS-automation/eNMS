@@ -101,7 +101,7 @@ def process_request(function):
     def wrapper(*a, **kw):
         data = request.form.to_dict()
         for key in request.form:
-            if property_types.get(key, None) in (list, object):
+            if 'list' in property_types.get(key, ''):
                 data[key] = request.form.getlist(key)
         for property in boolean_properties:
             if property not in request.form:
@@ -161,13 +161,13 @@ def post(blueprint, url, permission=None):
         @wraps(func)
         @process_request
         def inner(*args, **kwargs):
-            # try:
-            return func(*args, **kwargs)
-            # except Exception as e:
-            #     error = str(e)
-            #     if error == 'Expecting value: line 1 column 1 (char 0)':
-            #         error = 'Invalid syntax for dictionnary input.'
-            #     return jsonify({'failure': True, 'error': error})
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                error = str(e)
+                if error == 'Expecting value: line 1 column 1 (char 0)':
+                    error = 'Invalid syntax for dictionnary input.'
+                return jsonify({'failure': True, 'error': error})
         return inner
     return outer
 

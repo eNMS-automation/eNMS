@@ -42,16 +42,16 @@ file_transfer_service = ImmutableMultiDict([
 @check_blueprints('/automation')
 def test_base_services(user_client):
     user_client.post(
-        '/update/netmiko_configuration_service',
+        '/update/NetmikoConfigurationService',
         data=netmiko_ping
     )
-    assert len(fetch_all('netmiko_configuration_service')) == 3
+    assert len(fetch_all('NetmikoConfigurationService')) == 3
     assert len(fetch_all('Service')) == 19
     user_client.post(
-        '/update/netmiko_file_transfer_service',
+        '/update/NetmikoFileTransferService',
         data=file_transfer_service
     )
-    assert len(fetch_all('netmiko_file_transfer_service')) == 1
+    assert len(fetch_all('NetmikoFileTransferService')) == 1
     assert len(fetch_all('Service')) == 20
 
 
@@ -68,10 +68,10 @@ getters_dict = ImmutableMultiDict([
 @check_blueprints('/automation')
 def test_getters_service(user_client):
     user_client.post(
-        '/update/napalm_getters_service',
+        '/update/NapalmGettersService',
         data=getters_dict
     )
-    assert len(fetch_all('napalm_getters_service')) == 5
+    assert len(fetch_all('NapalmGettersService')) == 5
 
 
 ansible_service = ImmutableMultiDict([
@@ -90,8 +90,8 @@ ansible_service = ImmutableMultiDict([
 @check_blueprints('/automation')
 def test_ansible_services(user_client):
     user_client.post(
-        '/update/ansible_playbook_service',
+        '/update/AnsiblePlaybookService',
         data=ansible_service
     )
-    assert len(fetch_all('ansible_playbook_service')) == 1
+    assert len(fetch_all('AnsiblePlaybookService')) == 1
     assert len(fetch_all('Service')) == 19

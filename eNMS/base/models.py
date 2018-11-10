@@ -55,10 +55,10 @@ class Base(db.Model):
                 value = kwargs[property] != 'off'
             elif 'regex' in property:
                 value = property in kwargs
-            elif property_type == dict:
+            elif property_type == 'dict':
                 value = loads(value) if value else {}
-            elif property_type in [float, int]:
-                value = property_type(value or 0)
+            elif property_type in ['float', 'int']:
+                value = {'float': float, 'int': int}[property_type](value or 0)
             setattr(self, property, value)
 
     @property

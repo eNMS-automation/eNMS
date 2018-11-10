@@ -17,8 +17,6 @@ function tableActions(values, service) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showLogs('${service.id}')"></i>Logs</a></button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareLogs('${service.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="runJob('${service.id}')">Run</button>`,
     `<button type="button" class="btn btn-primary btn-xs"

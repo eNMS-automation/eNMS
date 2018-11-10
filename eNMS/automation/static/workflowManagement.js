@@ -44,8 +44,6 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
     onclick="showLogs('${workflow.id}')"></i>Logs</a></button>`,
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="compareLogs('${workflow.id}')"></i>Compare</a></button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="runJob('${workflow.id}')">Run</button>`,
     `<button type="button" class="btn btn-primary btn-xs"

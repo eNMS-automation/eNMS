@@ -39,12 +39,16 @@ function editService(id, duplicate) {
  * Save a service.
  */
 function saveService() { // eslint-disable-line no-unused-vars
-  fCall(`/update/${$('#service-type').val()}`, '#edit-service-form', function(service) {
-    const mode = saveInstance('service', service);
-    if (typeof workflowBuilder === 'undefined') {
-      addInstance(mode, 'service', service);
-    } else {
-      nodes.update({id: service.id, label: service.name});
+  fCall(
+    `/update/${$('#service-type').val()}`,
+    '#edit-service-form',
+    function(service) {
+      const mode = saveInstance('service', service);
+      if (typeof workflowBuilder === 'undefined') {
+        addInstance(mode, 'service', service);
+      } else {
+        nodes.update({id: service.id, label: service.name});
+      }
     }
-  });
+  );
 }

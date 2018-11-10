@@ -1,4 +1,4 @@
-from flask import current_app, jsonify, make_response, request
+from flask import jsonify, make_response, request
 from flask_restful import Api, Resource
 
 from eNMS import auth

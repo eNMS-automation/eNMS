@@ -14,7 +14,6 @@ from eNMS.base.associations import (
 )
 from eNMS.base.helpers import fetch
 from eNMS.base.models import Base
-from eNMS.base.properties import cls_to_properties
 
 
 class Job(Base):
@@ -99,10 +98,10 @@ class Job(Base):
         return results, now
 
     def get_results(self, payload, device=None):
-        # try:
-        return self.job(device, payload) if device else self.job(payload)
-        # except Exception as e:
-            # return {'success': False, 'result': str(e)}
+        try:
+            return self.job(device, payload) if device else self.job(payload)
+        except Exception as e:
+            return {'success': False, 'result': str(e)}
 
     def run(self, payload=None, targets=None):
         if not targets:

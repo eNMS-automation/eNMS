@@ -73,7 +73,6 @@ $('#compare_with').on('change', function() {
 });
 
 
-
 /**
  * Run job.
  * @param {id} id - Job id.

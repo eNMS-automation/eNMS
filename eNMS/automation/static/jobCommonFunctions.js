@@ -15,9 +15,15 @@ let jobId;
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
   jobId = id;
-  call(`/automation/show_logs/${id}`, function(logs) {
-    $('#logs').text(logs.replace(/(?:\\[rn]|[\r\n]+)+/g, '\n'));
-    $(`#show-logs-modal`).modal('show');
+  call(`/get/job/${id}`, (job) => {
+    $('#first_version,#second_version').empty();
+    for (let i = 0; i < job.logs.length; i++) {
+      const value = job.logs[i];
+      $('#first_version,#second_version').append($('<option></option>')
+        .attr('value', value).text(value));
+    }
+    $('#logs').text(JSON.stringify(job.logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n'));
+    $('#logs-modal').modal('show');
   });
 }
 
@@ -30,23 +36,6 @@ function clearLogs() { // eslint-disable-line no-unused-vars
     $('#logs').empty();
     alertify.notify(`Logs cleared`, 'success', 5);
     $(`#show-logs-modal`).modal('hide');
-  });
-}
-
-/**
- * Show the compare logs modal for job.
- * @param {id} id - Job id.
- */
-function compareLogs(id) { // eslint-disable-line no-unused-vars
-  jobId = id;
-  call(`/automation/compare_logs/${id}`, function(results) {
-    $('#first_version,#second_version').empty();
-    for (let i = 0; i < results.versions.length; i++) {
-      const value = results.versions[i];
-      $('#first_version,#second_version').append($('<option></option>')
-        .attr('value', value).text(value));
-    }
-    $('#logs-modal').modal('show');
   });
 }
 

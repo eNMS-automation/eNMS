@@ -159,11 +159,6 @@ def run_job(job_id):
     return jsonify(job.serialized)
 
 
-@post(bp, '/show_logs/<job_id>', 'View')
-def show_logs(job_id):
-    return jsonify(dumps(fetch('Job', id=job_id).logs, indent=4))
-
-
 @post(bp, '/get_diff/<job_id>/<v1>/<v2>', 'View')
 def get_diff(job_id, v1, v2, n1=None, n2=None):
     job = fetch('Job', id=job_id)
@@ -178,13 +173,6 @@ def clear_logs(job_id):
     fetch('Job', id=job_id).logs = {}
     db.session.commit()
     return jsonify(True)
-
-
-@post(bp, '/compare_logs/<job_id>', 'View')
-def compare_logs(job_id):
-    job = fetch('Job', id=job_id)
-    results = {'versions': list(job.logs)}
-    return jsonify(results)
 
 
 @post(bp, '/add_to_workflow/<workflow_id>', 'Edit')

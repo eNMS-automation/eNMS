@@ -357,6 +357,7 @@ property_types = {
     'jobs': list,
     'edges': list,
     'permissions': list,
+    'import_export_types': list,
     'send_notification': bool
 }
 

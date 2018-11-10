@@ -80,4 +80,4 @@ class AdministrationForm(BaseForm):
 
 class MigrationsForm(BaseForm):
     export_choices = [(p, p.capitalize()) for p in import_properties]
-    export = SelectMultipleField(choices=export_choices)
+    import_export_types = SelectMultipleField(choices=export_choices)

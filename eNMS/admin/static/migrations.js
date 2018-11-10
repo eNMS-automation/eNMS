@@ -1,8 +1,10 @@
 /*
 global
 alertify: false
+convertSelect: false
 doc: false
 fCall: false
+folders: false
 */
 
 /**
@@ -10,7 +12,7 @@ fCall: false
  */
 function migrationsExport() { // eslint-disable-line no-unused-vars
   alertify.notify('Export initiated.', 'success', 5);
-  fCall('/objects/migration_export', '#import-export-form', function() {
+  fCall('/admin/migration_export', '#import-export-form', function() {
     alertify.notify('Export successful.', 'success', 5);
   });
 }
@@ -20,11 +22,15 @@ function migrationsExport() { // eslint-disable-line no-unused-vars
  */
 function migrationsImport() { // eslint-disable-line no-unused-vars
   alertify.notify('Import initiated.', 'success', 5);
-  fCall('/objects/migration_import', '#import-export-form', function() {
+  fCall('/admin/migration_import', '#import-export-form', function() {
     alertify.notify('Import successful.', 'success', 5);
   });
 }
 
 (function() {
-  doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
+  convertSelect('import_export_types');
+  folders.forEach((f) => {
+    $('#versions').append(`<option value='${f}'></option>`);
+  });
+  doc('https://enms.readthedocs.io/en/latest/base/migrations.html');
 })();

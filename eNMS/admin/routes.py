@@ -55,8 +55,10 @@ def administration():
 
 @get(bp, '/migrations', 'View')
 def migrations():
-    # print(listdir(app.path / 'migrations' / 'import_export'))
-    return dict(migrations_form=MigrationsForm(request.form, 'Parameters'))
+    return dict(
+        migrations_form=MigrationsForm(request.form, 'Parameters'),
+        folders=listdir(app.path / 'migrations' / 'import_export')
+    )
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -111,7 +113,7 @@ def save_parameters():
 @post(bp, '/migration_export', 'Admin')
 def migration_export():
     name = request.form['name']
-    for cls_name in request.form.getlist('export'):
+    for cls_name in request.form['import_export_types']:
         path = app.path / 'migrations' / 'import_export' / name
         if not exists(path):
             makedirs(path)

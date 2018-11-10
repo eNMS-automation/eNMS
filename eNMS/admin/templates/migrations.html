@@ -11,7 +11,7 @@
     <div class="row">
       <div class="x_panel">
         <div class="x_content" style="min-height: 450px">
-          <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
             <div>
               <label>
                 Directory pathname to use in eNMS_HOME/migrations/import_export :<br>
@@ -25,7 +25,7 @@
             <div>
               <label>eNMS object types to include in Import / Export :</label>
               <div class="form-group">
-                {{ migrations_form.export(class="form-control required", size="10") }}
+                {{ migrations_form.import_export_types(class="form-control required", size="10") }}
               </div>
             </div>
           </form>
@@ -44,5 +44,8 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    const folders = {{ folders|tojson|safe }};
+  </script>
   <script src="{{ url_for('admin_blueprint.static', filename='migrations.js') }}"></script>
 {% endblock javascripts %}

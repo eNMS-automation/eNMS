@@ -8,7 +8,7 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
-from os import makedirs
+from os import listdir, makedirs
 from os.path import exists
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII as FLAG
@@ -55,6 +55,7 @@ def administration():
 
 @get(bp, '/migrations', 'View')
 def migrations():
+    # print(listdir(app.path / 'migrations' / 'import_export'))
     return dict(migrations_form=MigrationsForm(request.form, 'Parameters'))
 
 

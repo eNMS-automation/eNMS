@@ -19,6 +19,7 @@ function migrationsExport() { // eslint-disable-line no-unused-vars
  * Export all for migration.
  */
 function migrationsImport() { // eslint-disable-line no-unused-vars
+  alertify.notify('Import initiated.', 'success', 5);
   fCall('/objects/migration_import', '#import-export-form', function() {
     alertify.notify('Import successful.', 'success', 5);
   });

@@ -12,7 +12,7 @@
       <div class="row">
         <div class="x_panel">
           <div class="x_content" style="min-height: 450px">
-            <form id="migrations-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
               <div>
 
                 <label>
@@ -20,14 +20,8 @@
                   Example: "10312018_backup"
                 </label>
                 <div class="form-group">
-                  <input class="form-control required" list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
-                  <datalist id="ice-cream-flavors">
-                    <option value="Chocolate">
-                    <option value="Coconut">
-                    <option value="Mint">
-                    <option value="Strawberry">
-                    <option value="Vanilla">
-                  </datalist>
+                  <input class="form-control required" list="versions" id="name" name="name" />
+                  <datalist id="versions"></datalist>
                 </div>
               </div>
               <div>

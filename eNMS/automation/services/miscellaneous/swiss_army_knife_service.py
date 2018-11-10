@@ -18,7 +18,7 @@ class SwissArmyKnifeService(Service):
     multiprocessing = Column(Boolean, default=False)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'swiss_army_knife_service',
+        'polymorphic_identity': 'SwissArmyKnifeService',
     }
 
     def job(self, *args):
@@ -85,4 +85,4 @@ class SwissArmyKnifeService(Service):
         }
 
 
-service_classes['swiss_army_knife_service'] = SwissArmyKnifeService
+service_classes['SwissArmyKnifeService'] = SwissArmyKnifeService

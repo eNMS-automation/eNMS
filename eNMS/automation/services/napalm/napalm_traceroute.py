@@ -21,7 +21,7 @@ class NapalmTracerouteService(Service):
     vrf = Column(String)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'napalm_traceroute_service',
+        'polymorphic_identity': 'NapalmTracerouteService',
     }
 
     def job(self, device, payload):
@@ -38,4 +38,4 @@ class NapalmTracerouteService(Service):
         return {'success': 'success' in traceroute, 'result': traceroute}
 
 
-service_classes['napalm_traceroute_service'] = NapalmTracerouteService
+service_classes['NapalmTracerouteService'] = NapalmTracerouteService

@@ -47,7 +47,7 @@ class NapalmGettersService(Service):
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
-        'polymorphic_identity': 'napalm_getters_service',
+        'polymorphic_identity': 'NapalmGettersService',
     }
 
     def job(self, device, payload):
@@ -67,4 +67,4 @@ class NapalmGettersService(Service):
         return {'success': success, 'result': result}
 
 
-service_classes['napalm_getters_service'] = NapalmGettersService
+service_classes['NapalmGettersService'] = NapalmGettersService

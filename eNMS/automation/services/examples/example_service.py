@@ -75,7 +75,7 @@ class ExampleService(Service):
     ]
 
     __mapper_args__ = {
-        'polymorphic_identity': 'example_service',
+        'polymorphic_identity': 'ExampleService',
     }
 
     def job(self, payload):
@@ -92,4 +92,4 @@ class ExampleService(Service):
         return {'success': True, 'result': 'example'}
 
 
-service_classes['example_service'] = ExampleService
+service_classes['ExampleService'] = ExampleService

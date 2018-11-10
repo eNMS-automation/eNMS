@@ -17,7 +17,7 @@ class NapalmRollbackService(Service):
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
-        'polymorphic_identity': 'napalm_rollback_service',
+        'polymorphic_identity': 'NapalmRollbackService',
     }
 
     def job(self, device, payload):
@@ -28,4 +28,4 @@ class NapalmRollbackService(Service):
         return {'success': True, 'result': 'Rollback successful'}
 
 
-service_classes['napalm_rollback_service'] = NapalmRollbackService
+service_classes['NapalmRollbackService'] = NapalmRollbackService

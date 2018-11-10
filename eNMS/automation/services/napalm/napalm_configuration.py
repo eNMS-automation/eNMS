@@ -28,7 +28,7 @@ class NapalmConfigurationService(Service):
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
-        'polymorphic_identity': 'napalm_configuration_service',
+        'polymorphic_identity': 'NapalmConfigurationService',
     }
 
     def job(self, device, payload):
@@ -41,4 +41,4 @@ class NapalmConfigurationService(Service):
         return {'success': True, 'result': f'Config push ({config})'}
 
 
-service_classes['napalm_configuration_service'] = NapalmConfigurationService
+service_classes['NapalmConfigurationService'] = NapalmConfigurationService

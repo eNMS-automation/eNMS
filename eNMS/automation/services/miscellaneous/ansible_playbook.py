@@ -24,7 +24,7 @@ class AnsiblePlaybookService(Service):
     inventory_from_selection = Column(Boolean)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'ansible_playbook_service',
+        'polymorphic_identity': 'AnsiblePlaybookService',
     }
 
     def job(self, device, payload):
@@ -48,4 +48,4 @@ class AnsiblePlaybookService(Service):
         return {'success': False, 'result': result}
 
 
-service_classes['ansible_playbook_service'] = AnsiblePlaybookService
+service_classes['AnsiblePlaybookService'] = AnsiblePlaybookService

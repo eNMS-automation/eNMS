@@ -20,7 +20,7 @@ class ConfigureBgpService(Service):
     driver = 'ios'
 
     __mapper_args__ = {
-        'polymorphic_identity': 'configure_bgp_service',
+        'polymorphic_identity': 'ConfigureBgpService',
     }
 
     def job(self, device, payload):
@@ -51,4 +51,4 @@ class ConfigureBgpService(Service):
         return {'success': True, 'result': f'Config push ({config})'}
 
 
-service_classes['configure_bgp_service'] = ConfigureBgpService
+service_classes['ConfigureBgpService'] = ConfigureBgpService

@@ -25,7 +25,7 @@ class NetmikoConfigurationService(Service):
     global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_configuration_service',
+        'polymorphic_identity': 'NetmikoConfigurationService',
     }
 
     def job(self, device, payload):
@@ -38,4 +38,4 @@ class NetmikoConfigurationService(Service):
         return {'success': True, 'result': f'configuration OK {config}'}
 
 
-service_classes['netmiko_configuration_service'] = NetmikoConfigurationService
+service_classes['NetmikoConfigurationService'] = NetmikoConfigurationService

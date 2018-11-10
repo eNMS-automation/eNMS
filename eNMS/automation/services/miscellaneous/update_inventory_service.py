@@ -14,7 +14,7 @@ class UpdateInventoryService(Service):
     update_dictionnary = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {
-        'polymorphic_identity': 'update_inventory_service',
+        'polymorphic_identity': 'UpdateInventoryService',
     }
 
     def job(self, device, payload):
@@ -23,4 +23,4 @@ class UpdateInventoryService(Service):
         return {'success': True, 'result': 'properties updated'}
 
 
-service_classes['update_inventory_service'] = UpdateInventoryService
+service_classes['UpdateInventoryService'] = UpdateInventoryService

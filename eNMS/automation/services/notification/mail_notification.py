@@ -20,7 +20,7 @@ class MailNotificationService(Service):
     multiprocessing = False
 
     __mapper_args__ = {
-        'polymorphic_identity': 'mail_notification_service',
+        'polymorphic_identity': 'MailNotificationService',
     }
 
     def job(self, _):
@@ -39,4 +39,4 @@ class MailNotificationService(Service):
         return {'success': True, 'result': str(message)}
 
 
-service_classes['mail_notification_service'] = MailNotificationService
+service_classes['MailNotificationService'] = MailNotificationService

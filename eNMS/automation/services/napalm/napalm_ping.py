@@ -23,7 +23,7 @@ class NapalmPingService(Service):
     vrf = Column(String)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'napalm_ping_service',
+        'polymorphic_identity': 'NapalmPingService',
     }
 
     def job(self, device, payload):
@@ -42,4 +42,4 @@ class NapalmPingService(Service):
         return {'success': 'success' in ping, 'result': ping}
 
 
-service_classes['napalm_ping_service'] = NapalmPingService
+service_classes['NapalmPingService'] = NapalmPingService

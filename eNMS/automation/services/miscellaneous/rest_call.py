@@ -43,7 +43,7 @@ class RestCallService(Service):
     }
 
     __mapper_args__ = {
-        'polymorphic_identity': 'rest_call_service',
+        'polymorphic_identity': 'RestCallService',
     }
 
     def job(self, *args):
@@ -69,4 +69,4 @@ class RestCallService(Service):
         return {'success': success, 'result': result, 'url': rest_url}
 
 
-service_classes['rest_call_service'] = RestCallService
+service_classes['RestCallService'] = RestCallService

@@ -26,7 +26,7 @@ class NetmikoValidationService(Service):
     global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_validation_service',
+        'polymorphic_identity': 'NetmikoValidationService',
     }
 
     def job(self, device, payload):
@@ -45,4 +45,4 @@ class NetmikoValidationService(Service):
         }
 
 
-service_classes['netmiko_validation_service'] = NetmikoValidationService
+service_classes['NetmikoValidationService'] = NetmikoValidationService

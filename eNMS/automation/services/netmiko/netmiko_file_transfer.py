@@ -27,7 +27,7 @@ class NetmikoFileTransferService(Service):
     global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'netmiko_file_transfer_service',
+        'polymorphic_identity': 'NetmikoFileTransferService',
     }
 
     def job(self, device, payload):
@@ -46,4 +46,4 @@ class NetmikoFileTransferService(Service):
         return {'success': True, 'result': transfer_dict}
 
 
-service_classes['netmiko_file_transfer_service'] = NetmikoFileTransferService
+service_classes['NetmikoFileTransferService'] = NetmikoFileTransferService

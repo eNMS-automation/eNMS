@@ -16,17 +16,21 @@ let jobId;
 function showLogs(id) { // eslint-disable-line no-unused-vars
   jobId = id;
   call(`/get/job/${id}`, (job) => {
-    $('#first_version,#second_version').empty();
+    $('#display,#compare_with').empty();
     Object.keys(job.logs).forEach((option) => {
-      $('#first_version,#second_version').append(
+      $('#display,#compare_with').append(
         $('<option></option>').attr('value', option).text(option)
       );
     });
-    const logs = job.logs[$('#first_version').val()];
-    $('#logs').text(
-      JSON.stringify(logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
-    );
-    $('#logs-modal').modal('show');
+    const logs = job.logs[$('#display').val()];
+    if (logs) {
+      $('#logs').text(
+        JSON.stringify(logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
+      );
+      $('#logs-modal').modal('show');
+    } else {
+      alertify.notify('Logs are empty.', 'error', 5);
+    }
   });
 }
 
@@ -42,10 +46,19 @@ function clearLogs() { // eslint-disable-line no-unused-vars
   });
 }
 
-$('#first_version,#second_version').on('change', function() {
+$('#display').on('change', function() {
+  call(`/get/job/${jobId}`, (job) => {
+    const logs = job.logs[$('#display').val()];
+    $('#logs').text(
+      JSON.stringify(logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
+    );
+  });
+});
+
+$('#compare_with').on('change', function() {
   $('#view').empty();
-  const v1 = $('#first_version').val();
-  const v2 = $('#second_version').val();
+  const v1 = $('#display').val();
+  const v2 = $('#compare_with').val();
   call(`/automation/get_diff/${jobId}/${v1}/${v2}`, function(data) {
     $('#view').append(diffview.buildView({
       baseTextLines: data.first,
@@ -59,6 +72,8 @@ $('#first_version,#second_version').on('change', function() {
   });
 });
 
+
+
 /**
  * Run job.
  * @param {id} id - Job id.
@@ -66,7 +81,7 @@ $('#first_version,#second_version').on('change', function() {
 function runJob(id) { // eslint-disable-line no-unused-vars
   call(`/automation/run_job/${id}`, function(job) {
     if (job.error) {
-      alertify.notify(`Error: ${job.error}.`, 'error', 5);
+      alertify.notify(job.error, 'error', 5);
     } else {
       alertify.notify(`Job '${job.name}' started.`, 'success', 5);
     }

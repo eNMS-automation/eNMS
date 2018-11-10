@@ -33,8 +33,8 @@ class JobForm(BaseForm):
 
 
 class CompareLogsForm(BaseForm):
-    first_version = SelectField(choices=())
-    second_version = SelectField(choices=())
+    display = SelectField(choices=())
+    compare_with = SelectField(choices=())
 
 
 class AddJobForm(BaseForm):

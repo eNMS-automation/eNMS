@@ -144,7 +144,7 @@ def get_states(cls):
 def run_job(job_id):
     job = fetch('Job', id=job_id)
     if job.state == 'Running':
-        return jsonify({'error': 'Job is already running'})
+        return jsonify({'error': 'Job is already running.'})
     job.state = 'Running'
     info(f'{job.name}: starting.')
     db.session.commit()

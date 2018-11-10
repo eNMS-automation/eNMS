@@ -1,13 +1,13 @@
 /*
 global
-addService: false
-alertify: false
+addInstance: false
 call: false
+convertSelect: false
 fCall: false
 nodes: false
-propertyTypes: false
+processInstance: false
+saveInstance: false
 servicesClasses: false
-showModal: false
 workflowBuilder: false;
 */
 
@@ -40,12 +40,12 @@ function editService(id, duplicate) {
  */
 function saveService() { // eslint-disable-line no-unused-vars
   const url = `/automation/save_service/${$('#services').val()}`;
-  fCall(url, '#edit-service-form', function(result) {
-    mode = saveInstance(type, instance);
+  fCall(url, '#edit-service-form', function(service) {
+    const mode = saveInstance('service', service);
     if (typeof workflowBuilder === 'undefined') {
-      addService(mode, result);
+      addInstance(mode, 'service', service);
     } else {
-      nodes.update({id: result.id, label: result.name});
+      nodes.update({id: service.id, label: service.name});
     }
   });
 }

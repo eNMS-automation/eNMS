@@ -3,6 +3,8 @@ global
 alertify: false
 call: false
 diffview: false
+partial
+table: false
 */
 
 let jobId;
@@ -81,8 +83,9 @@ function runJob(id) { // eslint-disable-line no-unused-vars
 
 /**
  * Get Service States.
+ * @param {type} type - Service or Workflow.
  */
-function getStates(type) {
+function getStates(type) { // eslint-disable-line no-unused-vars
   call(`/automation/get_states/${type}`, function(states) {
     for (let i = 0; i < states.length; i++) {
       const col = table.column('#state');

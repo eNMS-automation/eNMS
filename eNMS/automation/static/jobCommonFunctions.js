@@ -17,12 +17,15 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
   jobId = id;
   call(`/get/job/${id}`, (job) => {
     $('#first_version,#second_version').empty();
-    for (let i = 0; i < job.logs.length; i++) {
-      const value = job.logs[i];
-      $('#first_version,#second_version').append($('<option></option>')
-        .attr('value', value).text(value));
-    }
-    $('#logs').text(JSON.stringify(job.logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n'));
+    Object.keys(job.logs).forEach((option) => {
+      $('#first_version,#second_version').append(
+        $('<option></option>').attr('value', option).text(option)
+      );
+    });
+    const logs = job.logs[$('#first_version').val()];
+    $('#logs').text(
+      JSON.stringify(logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
+    );
     $('#logs-modal').modal('show');
   });
 }

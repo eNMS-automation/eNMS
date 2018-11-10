@@ -17,4 +17,5 @@ function saveParameters() { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
+  $('#pool').val(parameters.pool.id);
 })();

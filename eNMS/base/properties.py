@@ -204,9 +204,19 @@ parameters_public_properties = [
     'default_zoom_level',
     'gotty_start_port',
     'gotty_end_port',
+    'mail_sender',
+    'mail_recipients',
+    'mattermost_url',
+    'mattermost_channel',
+    'mattermost_verify_certificate',
     'opennms_rest_api',
     'opennms_devices',
-    'opennms_login'
+    'opennms_login',
+    'pool',
+    'tacacs_ip_address',
+    'tacacs_password',
+    'tacacs_port',
+    'tacacs_timeout',
 ]
 
 task_serialized_properties = [

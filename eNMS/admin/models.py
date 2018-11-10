@@ -1,6 +1,7 @@
 from flask_login import UserMixin
-from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
+from sqlalchemy.orm import backref, relationship
 
 from eNMS import db
 from eNMS.base.models import Base
@@ -61,6 +62,8 @@ class Parameters(Base):
     )
     mattermost_channel = Column(String)
     mattermost_verify_certificate = Column(Boolean, default=True)
+    pool_id = Column(Integer, ForeignKey('Pool.id'))
+    pool = relationship('Pool')
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

@@ -49,7 +49,7 @@ def user_management():
 def administration():
     return dict(
         form=AdministrationForm(request.form, 'Parameters'),
-        parameters=get_one('Parameters')
+        parameters=get_one('Parameters').serialized
     )
 
 

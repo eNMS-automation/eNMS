@@ -16,7 +16,21 @@ const table = $('#table').DataTable(); // eslint-disable-line
  */
 function showWorkflowModalDuplicate(id) { // eslint-disable-line no-unused-vars
   $('#workflow-button').click(partial(duplicateWorkflow, id));
-  showTypeModal('workflow', '${workflow.id}');
+  showTypeModal('workflow', id, true);
+}
+
+/**
+ * Display instance modal for editing.
+ * @param {id} id - Instance ID.
+ */
+function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
+  $('#workflow-button').click(partial(processData, 'workflow'));
+  $('#edit-workflow').modal('hide');
+  fCall(
+    `/automation/duplicate_workflow/${id}`,
+    '#edit-workflow-form',
+    (workflow) => addInstance('create', 'workflow', workflow)
+  );
 }
 
 /**

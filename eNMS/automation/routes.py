@@ -197,14 +197,12 @@ def add_to_workflow(workflow_id):
 
 @post(bp, '/duplicate_workflow/<workflow_id>', 'Edit')
 def duplicate_workflow(workflow_id):
-    workflow = fetch('Workflow', id=workflow_id)
-    properties = workflow.properties
-    properties.update({'id': '', 'name': 'test6'})
-    new_workflow = factory('Workflow', **properties)
-    for job in workflow.jobs:
+    parent_workflow = fetch('Workflow', id=workflow_id)
+    new_workflow = jsonify(factory('Workflow', **request.form).serialized)
+    for job in parent_workflow.jobs:
         new_workflow.jobs.append(job)
-        job.positions[new_workflow.name] = job.positions[workflow.name]
-    for edge in workflow.edges:
+        job.positions[new_workflow.name] = job.positions[parent_workflow.name]
+    for edge in parent_workflow.edges:
         type, source, destination = edge.type, edge.source, edge.destination
         new_workflow.edges.append(factory('WorkflowEdge', **{
             'name': f'{new_workflow.id}-{type}:{source.id}->{destination.id}',
@@ -214,7 +212,7 @@ def duplicate_workflow(workflow_id):
             'destination': destination.id
         }))
     db.session.commit()
-    return jsonify(workflow_id)
+    return jsonify(new_workflow.serialized)
 
 
 @post(bp, '/reset_workflow_logs/<workflow_id>', 'Edit')

@@ -350,12 +350,12 @@ pretty_names.update({k: v['pretty_name'] for k, v in custom_properties.items()})
 reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 
 property_types = {
-    'devices': list,
-    'pools': list,
-    'jobs': list,
-    'edges': list,
-    'permissions': list,
-    'import_export_types': list,
+    'devices': 'object-list',
+    'pools': 'object-list',
+    'jobs': 'object-list',
+    'edges': 'object-list',
+    'permissions': 'list',
+    'import_export_types': 'list',
     'send_notification': bool
 }
 

@@ -154,8 +154,10 @@ function processInstance(type, instance, dup) {
     } else if (propertyType.includes('dict')) {
       $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
     } else if (propertyType.includes('list')) {
+      list = propertyType === 'object-list' ? value.map((p) => p.id) : value;
+      console.log(list);
       $(`#${type}-${property}`).multiselect('deselectAll', false);
-      $(`#${type}-${property}`).multiselect('select', value.map((p) => p.id));
+      $(`#${type}-${property}`).multiselect('select', list);
     } else {
       $(`#${type}-${property}`).val(value);
     }

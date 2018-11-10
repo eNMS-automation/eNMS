@@ -82,8 +82,8 @@ def get_service(id_or_cls):
         return f'''
             <label>{property}</label>
             <div class="form-group">
-              <input class="form-control" id="{property}"
-              name="{property}" type="text">
+              <input class="form-control" id="service-{property}"
+              name="service-{property}" type="text">
             </div>'''
 
     def build_textarea_box(property):
@@ -91,8 +91,8 @@ def get_service(id_or_cls):
             <label>{property}</label>
             <div class="form-group">
               <textarea style="height: 150px;" rows="30"
-              class="form-control" id="{property}"
-              name="{property}"></textarea>
+              class="form-control" id="service-{property}"
+              name="service-{property}"></textarea>
             </div>'''
 
     def build_select_box(property):
@@ -104,7 +104,7 @@ def get_service(id_or_cls):
             <label>{property}</label>
             <div class="form-group">
               <select class="form-control"
-              id="{property}" name="{property}"
+              id="service-{property}" name="service-{property}"
               {'multiple size="7"' if property_types[property] == list else ''}>
               {options}
               </select>
@@ -113,13 +113,13 @@ def get_service(id_or_cls):
     def build_boolean_box(property):
         return '<fieldset>' + f'''
             <div class="item">
-                <input id="{property}" name="{property}" type="checkbox">
-                <label>{property}</label>
+                <input id="service-{property}" name="service-{property}"
+                type="checkbox"><label>{property}</label>
             </div>''' + '</fieldset>'
 
     form = ''
     for property in cls_to_properties[cls.__tablename__]:
-        if property in cls.private or property in cls_to_properties['Service']:
+        if property in cls_to_properties['Service']:
             continue
         if property_types.get(property, None) == bool:
             form += build_boolean_box(property)

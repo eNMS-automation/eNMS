@@ -8,40 +8,37 @@
 
 {% block content %}
   <div class="right_col" role="main">
-    <form id="form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-      <div class="row">
-        <div class="x_panel">
-          <div class="x_content" style="min-height: 450px">
-            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-              <div>
-
-                <label>
-                  Directory pathname to use in eNMS_HOME/migrations/import_export :<br>
-                  Example: "10312018_backup"
-                </label>
-                <div class="form-group">
-                  <input class="form-control required" list="versions" id="name" name="name" />
-                  <datalist id="versions"></datalist>
-                </div>
+    <div class="row">
+      <div class="x_panel">
+        <div class="x_content" style="min-height: 450px">
+          <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <div>
+              <label>
+                Directory pathname to use in eNMS_HOME/migrations/import_export :<br>
+                Example: "10312018_backup"
+              </label>
+              <div class="form-group">
+                <input class="form-control required" list="versions" id="name" name="name" />
+                <datalist id="versions"></datalist>
               </div>
-              <div>
-                <label>eNMS object types to include in Import / Export :</label>
-                <div class="form-group">
-                  {{ migrations_form.export(class="form-control required", size="10") }}
-                </div>
+            </div>
+            <div>
+              <label>eNMS object types to include in Import / Export :</label>
+              <div class="form-group">
+                {{ migrations_form.export(class="form-control required", size="10") }}
               </div>
-            </form>
-            <div class="ln_solid"></div>
-            <div class="form-group">
-              <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                <button type="button" class="btn btn-success" onclick="migrationsImport()">Import</button>
-                <button type="button" class="btn btn-success" onclick="migrationsExport()">Export</button>
-              </div>
+            </div>
+          </form>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+              <button type="button" class="btn btn-success" onclick="migrationsImport()">Import</button>
+              <button type="button" class="btn btn-success" onclick="migrationsExport()">Export</button>
             </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 {% endblock content %}
 

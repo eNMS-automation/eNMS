@@ -96,3 +96,10 @@ Success of a Workflow
 ---------------------
 
 The behavior of the workflow is such that the workflow is considered to have an overall Success status if the END job is reached. So, the END job should only be reached by a success edge when the overall status of the workflow is considered successful. If a particular service job fails, then the workflow should just stop there (with the workflow thus having an overall Failure status), or it should call a cleanup/remediation job (after which the workflow will just stop there).
+
+Position saving
+---------------
+
+Note that position data in the Workflow Builder graph is saved to the database only when the user navigates away from the graph.
+  - Upon leaving the Workflow Builder page.
+  - When switching to another workflow.

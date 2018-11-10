@@ -15,7 +15,7 @@ const table = $('#table').DataTable(); // eslint-disable-line
  * @param {id} id - Instance ID.
  */
 function showWorkflowModalDuplicate(id) { // eslint-disable-line no-unused-vars
-  $('#workflow-button').click(partial(duplicateWorkflow, id));
+  $('#workflow-button').attr('onclick', `duplicateWorkflow(${id})`);
   showTypeModal('workflow', id, true);
 }
 
@@ -24,12 +24,16 @@ function showWorkflowModalDuplicate(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Instance ID.
  */
 function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
+  $('#workflow-button').off('click')
   $('#workflow-button').click(partial(processData, 'workflow'));
   $('#edit-workflow').modal('hide');
   fCall(
     `/automation/duplicate_workflow/${id}`,
     '#edit-workflow-form',
-    (workflow) => addInstance('create', 'workflow', workflow)
+    (workflow) => {
+      addInstance('create', 'workflow', workflow);
+      alertify.notify('Workflow successfully duplicated', 'success', 5);
+    }
   );
 }
 

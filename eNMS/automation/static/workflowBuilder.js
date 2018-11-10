@@ -16,13 +16,6 @@ workflow: true
 */
 
 const workflowBuilder = true; // eslint-disable-line no-unused-vars
-
-/* When running a workflow, it takes a few seconds to switch from "Idle" to
-"Running" status. workflowInit will be true for 10 seconds after starting the
-workflow, and eNMS will not stop querying for the status until workflowInit
-is False */
-let workflowInit = false;
-
 const container = document.getElementById('network');
 const dsoptions = {
   edges: {
@@ -206,11 +199,15 @@ function edgeToEdge(edge) {
  */
 function deleteSelection() {
   const node = graph.getSelectedNodes()[0];
-  if (node) {
-    deleteNode(node);
+  if (node != 1 && node != 2) {
+    if (node) {
+      deleteNode(node);
+    }
+    graph.getSelectedEdges().map((edge) => deleteEdge(edge));
+    graph.deleteSelected();
+  } else {
+    alertify.notify("Start and End of a Workflow cannot be deleted", 'error', 5);
   }
-  graph.getSelectedEdges().map((edge) => deleteEdge(edge));
-  graph.deleteSelected();
 }
 
 /**

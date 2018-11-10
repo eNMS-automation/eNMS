@@ -198,7 +198,7 @@ def add_to_workflow(workflow_id):
 @post(bp, '/duplicate_workflow/<workflow_id>', 'Edit')
 def duplicate_workflow(workflow_id):
     parent_workflow = fetch('Workflow', id=workflow_id)
-    new_workflow = jsonify(factory('Workflow', **request.form).serialized)
+    new_workflow = factory('Workflow', **request.form)
     for job in parent_workflow.jobs:
         new_workflow.jobs.append(job)
         job.positions[new_workflow.name] = job.positions[parent_workflow.name]

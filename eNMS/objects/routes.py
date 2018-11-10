@@ -22,7 +22,6 @@ from eNMS.base.helpers import (
     post,
     serialize
 )
-from eNMS.base.security import allowed_file
 from eNMS.objects import bp
 from eNMS.objects.forms import (
     AddLink,
@@ -32,6 +31,7 @@ from eNMS.objects.forms import (
     OpenNmsForm,
     PoolObjectsForm
 )
+from eNMS.objects.helpers import allowed_file
 from eNMS.base.properties import (
     device_public_properties,
     export_properties,

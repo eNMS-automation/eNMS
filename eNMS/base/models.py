@@ -10,7 +10,6 @@ from eNMS.base.properties import (
     relationships as rel,
     private_properties
 )
-from eNMS.base.security import write_vault
 
 
 class Base(db.Model):

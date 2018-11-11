@@ -59,7 +59,7 @@ def get_results_summary(job, results, now):
         f'Runtime: {now}',
         f'Status: {"PASS" if results["success"] else "FAILED"}'
     ]
-    if 'devices' in results['result'] and not results["success"]:
+    if 'devices' in results.get('result', '') and not results["success"]:
         device_status = [
             f'{device}: {"PASS" if device_results["success"] else "FAILED"}'
             for device, device_results in results['result']['devices'].items()

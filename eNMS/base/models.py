@@ -48,14 +48,13 @@ class Base(db.Model):
     def update(self, **kwargs):
         serial = rel.get(self.__tablename__, rel['Service'])
         for property, value in kwargs.items():
-            print(property, value)
             property_type = property_types.get(property, None)
             if property in serial:
                 value = fetch(serial[property], id=value)
             elif property[:-1] in serial:
                 value = objectify(serial[property[:-1]], value)
             elif property in boolean_properties:
-                value = kwargs[property] != 'off'
+                value = kwargs[property] not in ('off', None, False)
             elif 'regex' in property:
                 value = property in kwargs
             elif property_type == 'dict':

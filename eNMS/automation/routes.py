@@ -225,7 +225,7 @@ def delete_node(workflow_id, job_id):
     workflow, job = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.remove(job)
     db.session.commit()
-    return jsonify(job.properties)
+    return jsonify(job.serialized)
 
 
 @post(bp, '/add_edge/<wf_id>/<subtype>/<source>/<dest>', 'Edit')

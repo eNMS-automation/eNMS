@@ -41,7 +41,7 @@ const dsoptions = {
     },
     addEdge: function(data, callback) {
       if (data.from != data.to) {
-        data.type = edgeType == 'success' ? true : false;
+        data.subtype = edgeType == 'success' ? true : false;
         saveEdge(data);
         graph.addEdgeMode();
       }

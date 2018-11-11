@@ -16,7 +16,6 @@ class Task(Base):
     description = Column(String)
     creation_time = Column(String)
     status = Column(String)
-    type = Column(String)
     frequency = Column(String)
     start_date = Column(String)
     end_date = Column(String)

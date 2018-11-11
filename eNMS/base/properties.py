@@ -162,7 +162,7 @@ workflow_table_properties = [
 
 workflow_edge_properties = [
     'name',
-    'type',
+    'subtype',
     'source_id',
     'destination_id'
 ]
@@ -435,7 +435,7 @@ workflow_import_properties = workflow_public_properties + [
 workflow_edge_import_properties = [
     'id',
     'name',
-    'type',
+    'subtype',
     'source_id',
     'destination_id',
     'workflow'

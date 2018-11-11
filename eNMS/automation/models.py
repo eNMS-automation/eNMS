@@ -19,6 +19,8 @@ from eNMS.base.models import Base
 class Job(Base):
 
     __tablename__ = 'Job'
+    type = Column(String)
+    __mapper_args__ = {'polymorphic_identity': 'Job', 'polymorphic_on': type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String, unique=True)
@@ -30,7 +32,6 @@ class Job(Base):
     state = Column(String, default='Idle')
     status = Column(MutableDict.as_mutable(PickleType), default={})
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
-    type = Column(String)
     vendor = Column(String)
     operating_system = Column(String)
     waiting_time = Column(Integer, default=0)
@@ -57,11 +58,6 @@ class Job(Base):
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(String)
     mail_recipient = Column(String)
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'Job',
-        'polymorphic_on': type
-    }
 
     def compute_targets(self):
         targets = set(self.devices)
@@ -173,6 +169,7 @@ class WorkflowEdge(Base):
 class Workflow(Job):
 
     __tablename__ = 'Workflow'
+    __mapper_args__ = {'polymorphic_identity': 'Workflow'}
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     multiprocessing = Column(Boolean, default=False)
     jobs = relationship(
@@ -181,7 +178,6 @@ class Workflow(Job):
         back_populates='workflows'
     )
     edges = relationship('WorkflowEdge', back_populates='workflow')
-    __mapper_args__ = {'polymorphic_identity': 'Workflow'}
 
     def __init__(self, **kwargs):
         default = [fetch('Service', name='Start'), fetch('Service', name='End')]

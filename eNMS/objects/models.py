@@ -22,6 +22,7 @@ from eNMS.objects.helpers import database_filtering
 class Object(Base):
 
     __tablename__ = 'Object'
+    type = Column(String)
     __mapper_args__ = {
         'polymorphic_identity': 'Object',
         'polymorphic_on': type
@@ -34,7 +35,7 @@ class Object(Base):
     model = Column(String)
     location = Column(String)
     vendor = Column(String)
-    type = Column(String)
+    
 
 
 CustomDevice = type('CustomDevice', (Object,), {
@@ -127,6 +128,7 @@ class Link(Object):
 
 AbstractPool = type('AbstractPool', (Base,), {
     '__tablename__': 'AbstractPool',
+    'type': 'AbstractPool',
     '__mapper_args__': {'polymorphic_identity': 'AbstractPool'},
     'id': Column(Integer, primary_key=True), **{
         **{f'device_{p}': Column(String) for p in device_public_properties},
@@ -142,8 +144,7 @@ AbstractPool = type('AbstractPool', (Base,), {
 
 class Pool(AbstractPool):
 
-    __tablename__ = 'Pool'
-    __mapper_args__ = {'polymorphic_identity': 'Pool'}
+    __tablename__ = type = 'Pool'
     id = Column(Integer, ForeignKey('AbstractPool.id'), primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)

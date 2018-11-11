@@ -138,7 +138,7 @@ function deleteNode(id) {
  * @param {edge} edge - Edge to add to the workflow.
  */
 function saveEdge(edge) {
-  const param = `${workflow.id}/${edge.type}/${edge.from}/${edge.to}`;
+  const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/automation/add_edge/${param}`, function(edge) {
     alertify.notify('Edge added to the workflow', 'success', 5);
     edges.add(edgeToEdge(edge));
@@ -279,11 +279,9 @@ const action = {
   'Run Workflow': runWorkflow,
   'Edit': editService,
   'Run': runJob,
-  'Logs': showLogs,
-  'Compare Logs': compareLogs,
+  'Service Logs': showLogs,
   'Edit Workflow': editWorkflow,
   'Workflow Logs': showWorkflowLogs,
-  'Compare Workflow Logs': compareWorkflowLogs,
   'Add Service or Workflow': partial(showModal, 'add-job'),
   'Delete': deleteSelection,
   'Create "Success" edge': partial(switchMode, 'success'),

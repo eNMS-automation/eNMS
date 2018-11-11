@@ -19,6 +19,7 @@ from eNMS.base.helpers import (
     fetch_all,
     get,
     get_one,
+    objectify,
     post,
     serialize
 )
@@ -112,7 +113,11 @@ def connection(id):
 
 @post(bp, '/save_pool_objects/<id>', 'Edit')
 def save_pool_objects(id):
-    return jsonify(factory('Pool', **{**request.form, **{'id': id}}).serialized)
+    pool = fetch('Pool', id=id)
+    print(request.form['devices'])
+    pool.devices = objectify('Device', request.form['devices'])
+    db.session.commit()
+    return jsonify(pool.serialized)
 
 
 @post(bp, '/pool_objects/<pool_id>', 'View')

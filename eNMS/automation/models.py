@@ -56,7 +56,10 @@ class Job(Base):
         back_populates='jobs'
     )
     send_notification = Column(Boolean, default=False)
-    send_notification_method = Column(String)
+    send_notification_method = Column(
+        String,
+        default='mail_feedback_notification'
+    )
     mail_recipient = Column(String)
 
     def compute_targets(self):

@@ -22,7 +22,6 @@ from eNMS.objects.helpers import database_filtering
 class Object(Base):
 
     __tablename__ = 'Object'
-
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String, unique=True)
@@ -32,7 +31,6 @@ class Object(Base):
     location = Column(String)
     vendor = Column(String)
     type = Column(String)
-
     __mapper_args__ = {
         'polymorphic_identity': 'Object',
         'polymorphic_on': type
@@ -83,9 +81,7 @@ class Device(CustomDevice):
 class Link(Object):
 
     __tablename__ = 'Link'
-
     __mapper_args__ = {'polymorphic_identity': 'Link'}
-
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     source_id = Column(
         Integer,

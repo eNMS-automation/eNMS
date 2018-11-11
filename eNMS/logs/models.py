@@ -22,9 +22,7 @@ class SyslogUDPHandler(BaseRequestHandler):
 
 class SyslogServer(Base):
 
-    __tablename__ = 'SyslogServer'
-    type = 'SyslogServer'
-
+    __tablename__ = type = 'SyslogServer'
     id = Column(Integer, primary_key=True)
     ip_address = Column(String)
     port = Column(Integer)
@@ -47,9 +45,7 @@ class SyslogServer(Base):
 
 class Log(Base):
 
-    __tablename__ = 'Log'
-    type = 'Log'
-
+    __tablename__ = type = 'Log'
     id = Column(Integer, primary_key=True)
     source = Column(String)
     content = Column(String)
@@ -74,9 +70,7 @@ class Log(Base):
 
 class LogRule(Base):
 
-    __tablename__ = 'LogRule'
-    type = 'LogRule'
-
+    __tablename__ = type = 'LogRule'
     id = Column(Integer, primary_key=True)
     name = Column(String)
     source = Column(String)

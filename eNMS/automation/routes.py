@@ -193,11 +193,11 @@ def duplicate_workflow(workflow_id):
         new_workflow.jobs.append(job)
         job.positions[new_workflow.name] = job.positions[parent_workflow.name]
     for edge in parent_workflow.edges:
-        type, source, destination = edge.type, edge.source, edge.destination
+        subtype, source, destination = edge.subtype, edge.source, edge.destination
         new_workflow.edges.append(factory('WorkflowEdge', **{
-            'name': f'{new_workflow.id}-{type}:{source.id}->{destination.id}',
+            'name': f'{new_workflow.id}-{subtype}:{source.id}->{destination.id}',
             'workflow': new_workflow.id,
-            'type': type,
+            'subtype': subtype,
             'source': source.id,
             'destination': destination.id
         }))
@@ -228,12 +228,12 @@ def delete_node(workflow_id, job_id):
     return jsonify(job.properties)
 
 
-@post(bp, '/add_edge/<wf_id>/<type>/<source>/<dest>', 'Edit')
-def add_edge(wf_id, type, source, dest):
+@post(bp, '/add_edge/<wf_id>/<subtype>/<source>/<dest>', 'Edit')
+def add_edge(wf_id, subtype, source, dest):
     workflow_edge = factory('WorkflowEdge', **{
-        'name': f'{wf_id}-{type}:{source}->{dest}',
+        'name': f'{wf_id}-{subtype}:{source}->{dest}',
         'workflow': wf_id,
-        'type': type == 'true',
+        'subtype': subtype == 'true',
         'source': source,
         'destination': dest
     })

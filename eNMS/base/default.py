@@ -246,7 +246,7 @@ def create_napalm_workflow():
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow.id,
-            'type': True,
+            'subtype': True,
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })

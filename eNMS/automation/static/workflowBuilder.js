@@ -185,11 +185,11 @@ function jobToNode(job) {
 function edgeToEdge(edge) {
   return {
     id: edge.id,
-    label: edge.type ? 'Success' : 'Failure',
-    type: edge.type,
+    label: edge.subtype ? 'Success' : 'Failure',
+    type: edge.subtype,
     from: edge.source_id,
     to: edge.destination_id,
-    color: {color: edge.type ? 'green' : 'red'},
+    color: {color: edge.subtype ? 'green' : 'red'},
     arrows: {to: {enabled: true}},
   };
 }

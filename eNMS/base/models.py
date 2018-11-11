@@ -48,6 +48,7 @@ class Base(db.Model):
     def update(self, **kwargs):
         serial = rel.get(self.__tablename__, rel['Service'])
         for property, value in kwargs.items():
+            print(property, value)
             property_type = property_types.get(property, None)
             if property in serial:
                 value = fetch(serial[property], id=value)

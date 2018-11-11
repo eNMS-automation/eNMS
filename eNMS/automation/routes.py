@@ -83,7 +83,7 @@ def get_service(id_or_cls):
             <label>{property}</label>
             <div class="form-group">
               <input class="form-control" id="service-{property}"
-              name="service-{property}" type="text">
+              name="{property}" type="text">
             </div>'''
 
     def build_textarea_box(property):
@@ -92,7 +92,7 @@ def get_service(id_or_cls):
             <div class="form-group">
               <textarea style="height: 150px;" rows="30"
               class="form-control" id="service-{property}"
-              name="service-{property}"></textarea>
+              name="{property}"></textarea>
             </div>'''
 
     def build_select_box(property):
@@ -104,7 +104,7 @@ def get_service(id_or_cls):
             <label>{property}</label>
             <div class="form-group">
               <select class="form-control"
-                id="service-{property}" name="service-{property}"
+                id="service-{property}" name="{property}"
                 {'multiple size="7"'
                 if property_types[property] == 'list'
                 else ''}>{options}
@@ -114,7 +114,7 @@ def get_service(id_or_cls):
     def build_boolean_box(property):
         return '<fieldset>' + f'''
             <div class="item">
-                <input id="service-{property}" name="service-{property}"
+                <input id="service-{property}" name="{property}"
                 type="checkbox"><label>{property}</label>
             </div>''' + '</fieldset>'
 

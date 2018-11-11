@@ -17,9 +17,7 @@ from eNMS.base.models import Base
 
 class User(Base, UserMixin):
 
-    __tablename__ = 'User'
-    type = 'User'
-
+    __tablename__ = type = 'User'
     id = Column(Integer, primary_key=True)
     email = Column(String)
     name = Column(String, unique=True)
@@ -39,9 +37,7 @@ class User(Base, UserMixin):
 
 class Parameters(Base):
 
-    __tablename__ = 'Parameters'
-    type = 'Parameters'
-
+    __tablename__ = type = 'Parameters'
     id = Column(Integer, primary_key=True)
     name = Column(String, default='default', unique=True)
     tacacs_ip_address = Column(String)

@@ -19,7 +19,6 @@ from eNMS.base.models import Base
 class Job(Base):
 
     __tablename__ = 'Job'
-
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String, unique=True)
@@ -139,22 +138,16 @@ class Job(Base):
 class Service(Job):
 
     __tablename__ = 'Service'
-
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
-    private = {'id'}
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'service',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'Service'}
 
 
 class WorkflowEdge(Base):
 
-    __tablename__ = 'WorkflowEdge'
-
+    __tablename__ = type = 'WorkflowEdge'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    type = Column(Boolean)
+    subtype = Column(Boolean)
     source_id = Column(Integer, ForeignKey('Job.id'))
     source = relationship(
         'Job',
@@ -180,7 +173,6 @@ class WorkflowEdge(Base):
 class Workflow(Job):
 
     __tablename__ = 'Workflow'
-
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     multiprocessing = Column(Boolean, default=False)
     jobs = relationship(
@@ -189,10 +181,7 @@ class Workflow(Job):
         back_populates='workflows'
     )
     edges = relationship('WorkflowEdge', back_populates='workflow')
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'workflow',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'Workflow'}
 
     def __init__(self, **kwargs):
         default = [fetch('Service', name='Start'), fetch('Service', name='End')]

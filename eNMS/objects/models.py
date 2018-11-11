@@ -77,18 +77,14 @@ class Device(CustomDevice):
 
     class_type = 'device'
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'Device',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'Device'}
 
 
 class Link(Object):
 
     __tablename__ = 'Link'
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'Link',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'Link'}
 
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     source_id = Column(

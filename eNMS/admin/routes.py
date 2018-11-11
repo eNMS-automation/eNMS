@@ -123,9 +123,11 @@ def migration_export():
 @post(bp, '/migration_import', 'Admin')
 def migration_import():
     name = request.form['name']
-    for cls in request.form.getlist('export'):
+    print(request.form)
+    for cls in request.form['import_export_types']:
         path = app.path / 'migrations' / 'import_export' / name / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             for obj in load(migration_file):
+                print(obj)
                 factory(obj.pop('type') if cls == 'Service' else cls, **obj)
     return jsonify(True)

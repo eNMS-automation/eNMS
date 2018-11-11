@@ -461,3 +461,10 @@ export_properties = {
     'Device': device_public_properties,
     'Link': link_table_properties
 }
+
+# Properties to not migrate
+
+dont_migrate = {
+    'Service': ['logs', 'state', 'tasks', 'workflows'],
+    'Workflow': ['logs', 'state', 'status']
+}

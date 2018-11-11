@@ -5,6 +5,7 @@ from eNMS import db, use_vault, vault_client
 from eNMS.base.helpers import fetch, objectify, choices
 from eNMS.base.properties import (
     cls_to_properties,
+    dont_migrate,
     property_types,
     boolean_properties,
     relationships as rel,
@@ -62,10 +63,11 @@ class Base(db.Model):
                 value = {'float': float, 'int': int}[property_type](value or 0)
             setattr(self, property, value)
 
-    @property
-    def properties(self):
-        class_name, result = self.__tablename__, {}
-        for property in cls_to_properties[class_name]:
+    def get_properties(self, export=False):
+        result = {}
+        for property in cls_to_properties[self.type]:
+            if property in private_properties:
+                continue
             try:
                 dumps(getattr(self, property))
                 result[property] = getattr(self, property)
@@ -75,18 +77,29 @@ class Base(db.Model):
 
     def to_dict(self, export=False):
         get = 'id' if export else 'properties'
-        properties = self.properties
-        for property in rel.get(self.__tablename__, rel['Service']):
+        properties = self.get_properties(export)
+        no_migrate = dont_migrate.get(self.type, dont_migrate['Service'])
+        for property in rel.get(self.type, rel['Service']):
+            if export and property in no_migrate:
+                print(property)
+                continue
             if hasattr(self, property):
                 if hasattr(getattr(self, property), 'properties'):
-                    properties[property] = getattr(getattr(self, property), get)
+                    properties[property] = (
+                        getattr(self, property).id if export
+                        else getattr(self, property).get_properties()
+                    )
             if hasattr(self, f'{property}s'):
                 # a workflow has edges: we need to know not only the edge
                 # properties, but also the properties of its source and
                 # destination: we need the serialized edge.
                 properties[f'{property}s'] = [
-                    getattr(obj, get) for obj in getattr(self, f'{property}s')
+                    obj.id if export else obj.get_properties()
+                    for obj in getattr(self, f'{property}s')
                 ]
+        if export:
+            for property in no_migrate:
+                properties.pop(property, None)
         return properties
 
     @property

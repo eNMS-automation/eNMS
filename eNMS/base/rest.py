@@ -34,7 +34,7 @@ class GetInstance(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls, name):
-        return fetch(cls, name=name).properties
+        return fetch(cls, name=name).get_properties()
 
     def delete(self, cls, name):
         return delete(fetch(cls, name=name))

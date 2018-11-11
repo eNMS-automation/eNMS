@@ -140,7 +140,6 @@ function deleteNode(id) {
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/automation/add_edge/${param}`, function(edge) {
-    alertify.notify('Edge added to the workflow', 'success', 5);
     edges.add(edgeToEdge(edge));
   });
 }
@@ -150,9 +149,7 @@ function saveEdge(edge) {
  * @param {edgeId} edgeId - Id of the edge to be deleted.
  */
 function deleteEdge(edgeId) {
-  call(`/automation/delete_edge/${workflow.id}/${edgeId}`, function(edge) {
-    alertify.notify('Edge deleted the workflow', 'success', 5);
-  });
+  call(`/automation/delete_edge/${workflow.id}/${edgeId}`, () => {});
 }
 
 /**

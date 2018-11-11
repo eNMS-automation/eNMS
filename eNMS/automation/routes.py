@@ -146,7 +146,7 @@ def run_job(job_id):
     job = fetch('Job', id=job_id)
     if job.state == 'Running':
         return jsonify({'error': 'Job is already running.'})
-    job.state = 'Running'
+    job.state, job.status = 'Running', {}
     info(f'{job.name}: starting.')
     db.session.commit()
     now = datetime.now() + timedelta(seconds=5)

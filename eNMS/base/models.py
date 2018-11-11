@@ -82,7 +82,7 @@ class Base(db.Model):
             if export and property in no_migrate:
                 continue
             if hasattr(self, property):
-                if hasattr(getattr(self, property), 'properties'):
+                if hasattr(getattr(self, property), 'get_properties'):
                     properties[property] = (
                         getattr(self, property).id if export
                         else getattr(self, property).get_properties()

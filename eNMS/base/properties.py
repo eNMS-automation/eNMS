@@ -74,7 +74,8 @@ device_public_properties = object_common_properties[1:] + [
     'ip_address',
     'longitude',
     'latitude',
-    'port'
+    'port',
+    'username'
 ] + list(custom_properties)
 
 task_properties = base_properties + [

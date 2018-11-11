@@ -18,9 +18,9 @@ from eNMS.base.models import Base
 class User(Base, UserMixin):
 
     __tablename__ = 'User'
+    type = 'User'
 
     id = Column(Integer, primary_key=True)
-    type = Column(String, default='admin')
     email = Column(String)
     name = Column(String, unique=True)
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
@@ -40,6 +40,7 @@ class User(Base, UserMixin):
 class Parameters(Base):
 
     __tablename__ = 'Parameters'
+    type = 'Parameters'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, default='default', unique=True)

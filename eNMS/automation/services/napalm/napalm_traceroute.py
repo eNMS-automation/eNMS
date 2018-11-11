@@ -15,7 +15,7 @@ class NapalmTracerouteService(Service):
     driver_values = NAPALM_DRIVERS
     multiprocessing = True
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
-    source = Column(String)
+    source_ip = Column(String)
     timeout = Column(Integer)
     ttl = Column(Integer)
     vrf = Column(String)

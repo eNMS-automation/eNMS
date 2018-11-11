@@ -355,6 +355,8 @@ property_types = {
     'jobs': 'object-list',
     'edges': 'object-list',
     'permissions': 'list',
+    'source': 'object',
+    'destination': 'object',
     'import_export_types': 'list',
     'send_notification': 'bool'
 }

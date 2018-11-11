@@ -28,18 +28,16 @@ class Base(db.Model):
     def __getattribute__(self, property):
         if property in private_properties and use_vault:
             path = f'secret/data/{self.__tablename__}/{self.name}/{property}'
-            print(property, f'secret/data/{self.__tablename__}/{self.name}/{property}')
-            return vault_client.read(path)['data']['data'][property]
+            data = vault_client.read(path)
+            return data['data']['data'][property] if data else ''
         else:
             return super().__getattribute__(property)
 
     def __setattr__(self, property, value):
-        print(property, value)
         if property in private_properties:
             if not value:
                 return
             if use_vault:
-                print(f'secret/data/{self.__tablename__}/{self.name}/{property}')
                 vault_client.write(
                     f'secret/data/{self.__tablename__}/{self.name}/{property}',
                     data={property: value}

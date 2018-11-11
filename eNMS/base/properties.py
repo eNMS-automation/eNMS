@@ -351,6 +351,7 @@ reverse_pretty_names = {v: k for k, v in pretty_names.items()}
 
 property_types = {
     'devices': 'object-list',
+    'links': 'object-list',
     'pools': 'object-list',
     'jobs': 'object-list',
     'edges': 'object-list',

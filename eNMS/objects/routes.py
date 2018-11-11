@@ -114,8 +114,8 @@ def connection(id):
 @post(bp, '/save_pool_objects/<id>', 'Edit')
 def save_pool_objects(id):
     pool = fetch('Pool', id=id)
-    print(request.form['devices'])
     pool.devices = objectify('Device', request.form['devices'])
+    pool.links = objectify('Link', request.form['links'])
     db.session.commit()
     return jsonify(pool.serialized)
 

@@ -32,14 +32,14 @@ class NetmikoValidationService(Service):
     def job(self, device, payload):
         netmiko_handler = netmiko_connection(self, device)
         command = substitute(self.command, locals())
-        output = netmiko_handler.send_command(command)
+        res = netmiko_handler.send_command(command)
         success = (
-            self.content_match_regex and search(self.content_match, output)
-            or self.content_match in output and not self.content_match_regex
+            self.content_match_regex and bool(search(self.content_match, res))
+            or self.content_match in res and not self.content_match_regex
         )
         netmiko_handler.disconnect()
         return {
-            'output': output,
+            'output': res,
             'expected': self.content_match,
             'success': success,
         }

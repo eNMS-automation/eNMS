@@ -149,7 +149,6 @@ function processInstance(type, instance, dup) {
   if (dup) instance.id = instance.name = '';
   for (const [property, value] of Object.entries(instance)) {
     const propertyType = propertyTypes[property] || 'str';
-    
     if (propertyType.includes('bool') || property.includes('regex')) {
       $(`#${type}-${property}`).prop('checked', value);
     } else if (propertyType.includes('dict')) {

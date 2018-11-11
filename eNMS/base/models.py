@@ -76,12 +76,10 @@ class Base(db.Model):
         return result
 
     def to_dict(self, export=False):
-        get = 'id' if export else 'properties'
         properties = self.get_properties(export)
         no_migrate = dont_migrate.get(self.type, dont_migrate['Service'])
         for property in rel.get(self.type, rel['Service']):
             if export and property in no_migrate:
-                print(property)
                 continue
             if hasattr(self, property):
                 if hasattr(getattr(self, property), 'properties'):

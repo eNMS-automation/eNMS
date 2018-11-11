@@ -95,7 +95,6 @@ def connection(id):
     if 'authentication' in request.form:
         if request.form['credentials'] == 'device':
             login, pwd = device.username, device.password
-            print(device.username, device.password)
         else:
             login, pwd = current_user.name, current_user.password
         cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{ip}'.split())

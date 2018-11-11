@@ -60,7 +60,7 @@ class NapalmGettersService(Service):
                 result[getter] = f'{getter} failed because of {e}'
         output, match = str(result), substitute(self.content_match, locals())
         success = (
-            self.content_match_regex and search(match, output)
+            self.content_match_regex and bool(search(match, output))
             or match in output and not self.content_match_regex
         )
         napalm_driver.close()

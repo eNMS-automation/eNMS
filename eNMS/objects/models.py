@@ -35,7 +35,6 @@ class Object(Base):
     model = Column(String)
     location = Column(String)
     vendor = Column(String)
-    
 
 
 CustomDevice = type('CustomDevice', (Object,), {

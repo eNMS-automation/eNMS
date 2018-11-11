@@ -2,7 +2,6 @@
 global
 alertify: false
 call: false
-compareLogs: false
 doc: false
 editService: false
 fCall: false
@@ -256,13 +255,6 @@ function savePositions() {
  */
 function showWorkflowLogs() {
   showLogs(workflow.id);
-}
-
-/**
- * Compare workflow logs
- */
-function compareWorkflowLogs() {
-  compareLogs(workflow.id);
 }
 
 /**

@@ -42,7 +42,7 @@ class AnsiblePlaybookService(Service):
             pass
         match = substitute(self.content_match, locals())
         success = (
-            self.content_match_regex and search(match, result)
+            self.content_match_regex and bool(search(match, result))
             or match in result and not self.content_match_regex
         )
         return {'success': False, 'result': result}

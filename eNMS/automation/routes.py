@@ -193,13 +193,13 @@ def duplicate_workflow(workflow_id):
         new_workflow.jobs.append(job)
         job.positions[new_workflow.name] = job.positions[parent_workflow.name]
     for edge in parent_workflow.edges:
-        subtype, source, destination = edge.subtype, edge.source, edge.destination
+        subtype, src, dest = edge.subtype, edge.source, edge.destination
         new_workflow.edges.append(factory('WorkflowEdge', **{
-            'name': f'{new_workflow.id}-{subtype}:{source.id}->{destination.id}',
+            'name': f'{new_workflow.id}-{subtype}:{src.id}->{dest.id}',
             'workflow': new_workflow.id,
             'subtype': subtype,
-            'source': source.id,
-            'destination': destination.id
+            'source': src.id,
+            'destination': dest.id
         }))
     db.session.commit()
     return jsonify(new_workflow.serialized)

@@ -10,8 +10,7 @@ from eNMS.base.models import Base
 
 class Task(Base):
 
-    __tablename__ = 'Task'
-
+    __tablename__ = type = 'Task'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)
@@ -23,11 +22,6 @@ class Task(Base):
     end_date = Column(String)
     job_id = Column(Integer, ForeignKey('Job.id'))
     job = relationship('Job', back_populates='tasks')
-
-    __mapper_args__ = {
-        'polymorphic_identity': 'Task',
-        'polymorphic_on': type
-    }
 
     def __init__(self, **kwargs):
         self.update(**kwargs)

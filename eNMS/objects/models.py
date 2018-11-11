@@ -22,6 +22,10 @@ from eNMS.objects.helpers import database_filtering
 class Object(Base):
 
     __tablename__ = 'Object'
+    __mapper_args__ = {
+        'polymorphic_identity': 'Object',
+        'polymorphic_on': type
+    }
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String, unique=True)
@@ -31,16 +35,12 @@ class Object(Base):
     location = Column(String)
     vendor = Column(String)
     type = Column(String)
-    __mapper_args__ = {
-        'polymorphic_identity': 'Object',
-        'polymorphic_on': type
-    }
 
 
 CustomDevice = type('CustomDevice', (Object,), {
     '__tablename__': 'CustomDevice',
-    'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
     '__mapper_args__': {'polymorphic_identity': 'CustomDevice'},
+    'id': Column(Integer, ForeignKey('Object.id'), primary_key=True),
     **{
         property: Column(sql_types[values['type']], default=values['default'])
         for property, values in custom_properties.items()
@@ -51,7 +51,7 @@ CustomDevice = type('CustomDevice', (Object,), {
 class Device(CustomDevice):
 
     __tablename__ = 'Device'
-
+    __mapper_args__ = {'polymorphic_identity': 'Device'}
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
@@ -75,22 +75,14 @@ class Device(CustomDevice):
 
     class_type = 'device'
 
-    __mapper_args__ = {'polymorphic_identity': 'Device'}
-
 
 class Link(Object):
 
     __tablename__ = 'Link'
     __mapper_args__ = {'polymorphic_identity': 'Link'}
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
-    source_id = Column(
-        Integer,
-        ForeignKey('Device.id')
-    )
-    destination_id = Column(
-        Integer,
-        ForeignKey('Device.id')
-    )
+    source_id = Column(Integer, ForeignKey('Device.id'))
+    destination_id = Column(Integer, ForeignKey('Device.id'))
     source = relationship(
         Device,
         primaryjoin=source_id == Device.id,
@@ -135,8 +127,8 @@ class Link(Object):
 
 AbstractPool = type('AbstractPool', (Base,), {
     '__tablename__': 'AbstractPool',
-    'id': Column(Integer, primary_key=True),
-    '__mapper_args__': {'polymorphic_identity': 'AbstractPool'}, **{
+    '__mapper_args__': {'polymorphic_identity': 'AbstractPool'},
+    'id': Column(Integer, primary_key=True), **{
         **{f'device_{p}': Column(String) for p in device_public_properties},
         **{
             f'device_{p}_regex': Column(Boolean)
@@ -151,7 +143,7 @@ AbstractPool = type('AbstractPool', (Base,), {
 class Pool(AbstractPool):
 
     __tablename__ = 'Pool'
-
+    __mapper_args__ = {'polymorphic_identity': 'Pool'}
     id = Column(Integer, ForeignKey('AbstractPool.id'), primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)

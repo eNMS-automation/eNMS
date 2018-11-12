@@ -123,6 +123,7 @@ job_public_properties = [
     'name',
     'type',
     'description',
+    'status',
     'state',
     'logs',
     'positions',
@@ -138,8 +139,7 @@ service_public_properties = job_public_properties
 workflow_public_properties = job_public_properties + [
     'vendor',
     'operating_system',
-    'multiprocessing',
-    'status'
+    'multiprocessing'
 ]
 
 service_table_properties = [
@@ -148,7 +148,7 @@ service_table_properties = [
     'description',
     'number_of_retries',
     'time_between_retries',
-    'state'
+    'status'
 ]
 
 workflow_table_properties = [
@@ -158,7 +158,7 @@ workflow_table_properties = [
     'operating_system',
     'number_of_retries',
     'time_between_retries',
-    'state'
+    'status'
 ]
 
 workflow_edge_properties = [

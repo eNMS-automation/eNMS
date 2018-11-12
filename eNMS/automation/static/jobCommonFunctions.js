@@ -88,15 +88,15 @@ function runJob(id) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Get Service States.
+ * Get Service Status.
  * @param {type} type - Service or Workflow.
  */
-function getStates(type) { // eslint-disable-line no-unused-vars
-  call(`/automation/get_states/${type}`, function(states) {
-    for (let i = 0; i < states.length; i++) {
-      const col = table.column('#state');
-      table.cell(i, col).data(states[i]).draw(false);
+function getStatus(type) { // eslint-disable-line no-unused-vars
+  call(`/automation/get_status/${type}`, function(status) {
+    for (let i = 0; i < status.length; i++) {
+      const col = table.column('#status');
+      table.cell(i, col).data(status[i]).draw(false);
     }
-    setTimeout(partial(getStates, type), 1000);
+    setTimeout(partial(getStatus, type), 1000);
   });
 }

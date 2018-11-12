@@ -32,17 +32,10 @@ const dsoptions = {
   },
   manipulation: {
     enabled: false,
-    addNode: function(data, callback) {
-      // filling in the popup DOM elements
-    },
-    editNode: function(data, callback) {
-      // filling in the popup DOM elements
-    },
     addEdge: function(data, callback) {
       if (data.from != data.to) {
         data.subtype = edgeType == 'success' ? true : false;
         saveEdge(data);
-        graph.addEdgeMode();
       }
     },
   },
@@ -53,6 +46,7 @@ let edges;
 let graph;
 let selectedNode;
 let edgeType;
+let mode;
 
 /**
  * Display a workflow.
@@ -140,6 +134,7 @@ function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/automation/add_edge/${param}`, function(edge) {
     edges.add(edgeToEdge(edge));
+    switchMode(mode);
   });
 }
 
@@ -210,7 +205,8 @@ function deleteSelection() {
  * Change the mode (motion, creation of success or failure edge).
  * @param {mode} mode - Mode to switch to.
  */
-function switchMode(mode) {
+function switchMode(newMode) {
+  mode = newMode;
   if (mode == 'success' || mode == 'failure') {
     edgeType = mode;
     graph.addEdgeMode();
@@ -219,7 +215,6 @@ function switchMode(mode) {
     graph.addNodeMode();
     alertify.notify('Mode: node motion.', 'success', 5);
   }
-  // close the bootstrap submenu for layers
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 

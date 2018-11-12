@@ -8,6 +8,7 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
+from logging import info
 from os import listdir, makedirs
 from os.path import exists
 from tacacs_plus.client import TACACSClient
@@ -122,7 +123,7 @@ def migration_export():
 
 @post(bp, '/migration_import', 'Admin')
 def migration_import():
-    name, status = request.form['name'], True
+    name, status = request.form['name'], 'Topology successfully imported.'
     for cls in request.form['import_export_types']:
         path = app.path / 'migrations' / 'import_export' / name / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
@@ -131,5 +132,5 @@ def migration_import():
                     factory(obj.pop('type') if cls == 'Service' else cls, **obj)
                 except Exception as e:
                     info(f'{str(obj)} could not be imported ({str(e)})')
-                    status = False
+                    status = 'Partial import (see logs).'
     return jsonify(status)

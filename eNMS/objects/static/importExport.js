@@ -52,12 +52,9 @@ function importTopology() { // eslint-disable-line no-unused-vars
       contentType: false,
       processData: false,
       async: false,
-      success: function(status) {
-        if (!status) {
-          alertify.notify('Partial import (see logs).', 'error', 5);
-        } else {
-          alertify.notify('Topology successfully imported.', 'success', 5);
-        }
+      success: function(result) {
+        alertify.notify(result, 'success', 5);
+      }
       },
     });
   }

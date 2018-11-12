@@ -139,7 +139,7 @@ def import_topology():
         for pool in fetch_all('Pool'):
             pool.compute_pool()
         db.session.commit()
-    file, status = request.files['file'], True
+    file, result = request.files['file'], 'Topology successfully imported.'
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
         for obj_type in ('Device', 'Link'):
@@ -154,9 +154,9 @@ def import_topology():
                     obj = factory(obj_type, **prop).serialized
                 except Exception as e:
                     info(f'{str(prop)} could not be imported ({str(e)})')
-                    status = False
+                    result = 'Partial import (see logs).'
             db.session.commit()
-    return jsonify(status)
+    return jsonify(result)
 
 
 @post(bp, '/export_topology', 'View')

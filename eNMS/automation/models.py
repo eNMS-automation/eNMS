@@ -29,6 +29,7 @@ class Job(Base):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
+    status = Column(String, default='Idle')
     state = Column(MutableDict.as_mutable(PickleType), default={})
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
     vendor = Column(String)

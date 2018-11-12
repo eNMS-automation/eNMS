@@ -138,15 +138,15 @@ def get_service(id_or_cls):
 
 @post(bp, '/get_states/<cls>', 'View')
 def get_states(cls):
-    return jsonify([s['status']['state'] for s in serialize(cls.capitalize())])
+    return jsonify([s['state'] for s in serialize(cls.capitalize())])
 
 
 @post(bp, '/run_job/<job_id>', 'Edit')
 def run_job(job_id):
     job = fetch('Job', id=job_id)
-    if job.status.state == 'Running':
+    if job.state == 'Running':
         return jsonify({'error': 'Job is already running.'})
-    job.state = {'status': 'Running'}
+    job.state, job.status = 'Running', {}
     info(f'{job.name}: starting.')
     db.session.commit()
     now = datetime.now() + timedelta(seconds=5)
@@ -207,7 +207,7 @@ def duplicate_workflow(workflow_id):
 
 @post(bp, '/reset_workflow_logs/<workflow_id>', 'Edit')
 def reset_workflow_logs(workflow_id):
-    fetch('Workflow', id=workflow_id).state = {'status': 'Idle'}
+    fetch('Workflow', id=workflow_id).status = {'state': 'Idle'}
     db.session.commit()
     return jsonify(True)
 

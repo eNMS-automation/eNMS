@@ -2,7 +2,7 @@
 global
 addInstance: false
 doc: false
-getStates: false
+getStatus: false
 services: false
 */
 
@@ -33,5 +33,5 @@ function tableActions(values, service) { // eslint-disable-line no-unused-vars
   for (let i = 0; i < services.length; i++) {
     addInstance('create', 'service', services[i]);
   }
-  getStates('service');
+  getStatus('service');
 })();

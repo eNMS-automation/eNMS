@@ -88,7 +88,7 @@ function runJob(id) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Get Service States.
+ * Get States.
  * @param {type} type - Service or Workflow.
  */
 function getStates(type) { // eslint-disable-line no-unused-vars

@@ -5,7 +5,7 @@ addInstance: false
 convertSelect: false
 doc: false
 fCall: false
-getStates: false
+getAllStatus: false
 showTypeModal: false
 workflows: false
 */
@@ -66,5 +66,5 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
   $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');
   });
-  getStates('workflow');
+  getAllStatus('workflow');
 })();

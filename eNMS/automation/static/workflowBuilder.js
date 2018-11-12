@@ -300,7 +300,7 @@ function runWorkflow() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Get Workflow Status.
+ * Get Workflow State.
  * @param {id} id - Workflow Id.
  * @param {color} color - Node color.
  */
@@ -311,31 +311,31 @@ function colorJob(id, color) {
 }
 
 /**
- * Get Workflow Status.
+ * Get Workflow State.
  */
-function getWorkflowStatus() {
+function getWorkflowState() {
   if (workflow) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
-      $('#state').text(`State: ${wf.state}.`);
-      if (wf.status.current_device) {
+      $('#state').text(`Status: ${wf.state.status}.`);
+      if (wf.state.current_device) {
         $('#current-device').text(
-          `Current device: ${wf.status.current_device}.`
+          `Current device: ${wf.state.current_device}.`
         );
       }
-      if (wf.status.current_job) {
-        colorJob(wf.status.current_job.id, '#89CFF0');
-        $('#current-job').text(`Current job: ${wf.status.current_job.name}.`);
+      if (wf.state.current_job) {
+        colorJob(wf.state.current_job.id, '#89CFF0');
+        $('#current-job').text(`Current job: ${wf.state.current_job.name}.`);
       } else {
         $('#current-device,#current-job').empty();
       }
-      if (wf.status.jobs) {
-        $.each(wf.status.jobs, (id, success) => {
+      if (wf.state.jobs) {
+        $.each(wf.state.jobs, (id, success) => {
           colorJob(id, success ? '#32cd32' : '#FF6666');
         });
       }
     });
   }
-  setTimeout(getWorkflowStatus, 1000);
+  setTimeout(getWorkflowState, 1000);
 }
 
 $(window).bind('beforeunload', function() {
@@ -344,5 +344,5 @@ $(window).bind('beforeunload', function() {
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  getWorkflowStatus();
+  getWorkflowState();
 })();

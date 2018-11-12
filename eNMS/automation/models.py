@@ -29,8 +29,7 @@ class Job(Base):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
-    state = Column(String, default='Idle')
-    status = Column(MutableDict.as_mutable(PickleType), default={})
+    state = Column(MutableDict.as_mutable(PickleType), default={})
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
     vendor = Column(String)
     operating_system = Column(String)
@@ -190,9 +189,9 @@ class Workflow(Job):
     def job(self, *args):
         device, payload = args if len(args) == 2 else (None, args)
         if not self.multiprocessing:
-            self.status = {'jobs': {}}
+            self.state = {'jobs': {}}
             if device:
-                self.status['current_device'] = device.name
+                self.state['current_device'] = device.name
             db.session.commit()
         jobs, visited = [self.jobs[0]], set()
         results = {'success': False}
@@ -204,12 +203,12 @@ class Workflow(Job):
                 continue
             visited.add(job)
             if not self.multiprocessing:
-                self.status['current_job'] = job.get_properties()
+                self.state['current_job'] = job.get_properties()
                 db.session.commit()
             job_results, _ = job.try_run(results, {device} if device else None)
             success = job_results['success']
             if not self.multiprocessing:
-                self.status['jobs'][job.id] = success
+                self.state['jobs'][job.id] = success
                 db.session.commit()
             for successor in job.job_successors(self, success):
                 if successor not in visited:
@@ -219,6 +218,6 @@ class Workflow(Job):
             results[job.name] = job_results
             sleep(job.waiting_time)
         if not self.multiprocessing:
-            self.status['current_job'] = None
+            self.state['current_job'] = None
             db.session.commit()
         return results

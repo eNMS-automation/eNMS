@@ -156,7 +156,7 @@ def import_topology():
                     info(f'{str(prop)} could not be imported ({str(e)})')
                     status = False
             db.session.commit()
-    return status
+    return jsonify(status)
 
 
 @post(bp, '/export_topology', 'View')

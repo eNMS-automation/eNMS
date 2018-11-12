@@ -18,11 +18,12 @@ function migrationsExport() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Export all for migration.
+ * Import all for migration.
  */
 function migrationsImport() { // eslint-disable-line no-unused-vars
   alertify.notify('Import initiated.', 'success', 5);
-  fCall('/admin/migration_import', '#import-export-form', function() {
+  fCall('/admin/migration_import', '#import-export-form', function(result) {
+    console.log(result);
     alertify.notify('Import successful.', 'success', 5);
   });
 }

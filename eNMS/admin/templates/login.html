@@ -23,7 +23,7 @@
   <div class="login_wrapper">
     <section class="login_content">
       <form data-parsley-validate method="post" autocomplete="off">
-        <h1>Log in</h1>
+        <h1>Login</h1>
         {% for field in login_form if field.widget.input_type != 'hidden'  %}
           <div>
             {{ field(class="form-control required", placeholder=field.label.text) }}

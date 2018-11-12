@@ -1,4 +1,3 @@
-from collections import defaultdict
 from flask import current_app as app, jsonify, request
 from flask_login import current_user
 from logging import info
@@ -140,7 +139,7 @@ def import_topology():
         for pool in fetch_all('Pool'):
             pool.compute_pool()
         db.session.commit()
-    objects, file = defaultdict(list), request.files['file']
+    file, status = request.files['file'], True
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
         for obj_type in ('Device', 'Link'):
@@ -155,9 +154,9 @@ def import_topology():
                     obj = factory(obj_type, **prop).serialized
                 except Exception as e:
                     info(f'{str(prop)} could not be imported ({str(e)})')
-                objects[obj_type].append(obj)
+                    status = False
             db.session.commit()
-    return jsonify(objects)
+    return status
 
 
 @post(bp, '/export_topology', 'View')

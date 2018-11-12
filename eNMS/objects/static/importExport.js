@@ -50,10 +50,9 @@ function importTopology() { // eslint-disable-line no-unused-vars
       contentType: false,
       processData: false,
       async: false,
-      success: function(objects) {
-        alertify.notify('Adding objects to the table...', 'success', 5);
-        if (!objects) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+      success: function(status) {
+        if (!status) {
+          alertify.notify('Partial import (see logs).', 'error', 5);
         } else {
           alertify.notify('Topology successfully imported.', 'success', 5);
         }

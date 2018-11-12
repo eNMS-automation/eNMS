@@ -76,7 +76,7 @@ def scheduler_job(job_id):
         job = fetch('Job', id=job_id)
         results, now = job.try_run()
         info(f'{job.name}: finished.')
-        job.state = 'Idle'
+        job.status, job.state = 'Idle', {}
         db.session.commit()
         if job.send_notification:
             fetch('Job', name=job.send_notification_method).try_run({

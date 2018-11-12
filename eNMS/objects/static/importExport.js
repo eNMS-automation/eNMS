@@ -54,7 +54,6 @@ function importTopology() { // eslint-disable-line no-unused-vars
       async: false,
       success: function(result) {
         alertify.notify(result, 'success', 5);
-      }
       },
     });
   }

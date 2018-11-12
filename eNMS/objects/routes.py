@@ -151,7 +151,7 @@ def import_topology():
             for row_index in range(1, sheet.nrows):
                 prop = dict(zip(properties, sheet.row_values(row_index)))
                 try:
-                    obj = factory(obj_type, **prop).serialized
+                    factory(obj_type, **prop).serialized
                 except Exception as e:
                     info(f'{str(prop)} could not be imported ({str(e)})')
                     result = 'Partial import (see logs).'

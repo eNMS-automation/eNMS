@@ -218,7 +218,4 @@ class Workflow(Job):
                     results['success'] = True
             results[job.name] = job_results
             sleep(job.waiting_time)
-        if not self.multiprocessing:
-            self.state['current_job'] = None
-            db.session.commit()
         return results

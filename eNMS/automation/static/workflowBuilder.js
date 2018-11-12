@@ -32,6 +32,8 @@ const dsoptions = {
   },
   manipulation: {
     enabled: false,
+    addNode: function(data, callback) {
+    },
     addEdge: function(data, callback) {
       if (data.from != data.to) {
         data.subtype = edgeType == 'success' ? true : false;
@@ -316,7 +318,7 @@ function colorJob(id, color) {
 function getWorkflowState() {
   if (workflow) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
-      $('#state').text(`Status: ${wf.state.status}.`);
+      $('#status').text(`Status: ${wf.status}.`);
       if (wf.state.current_device) {
         $('#current-device').text(
           `Current device: ${wf.state.current_device}.`

@@ -46,7 +46,6 @@ let edges;
 let graph;
 let selectedNode;
 let edgeType;
-let mode;
 
 /**
  * Display a workflow.
@@ -61,14 +60,20 @@ function displayWorkflow(wf) {
   graph.on('oncontext', function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
+    const edge = this.getEdgeAt(properties.pointer.DOM);
     if (typeof node !== 'undefined' && node != 1 && node != 2) {
       graph.selectNodes([node]);
+      $('.global,.edge-selection').hide();
       $('.node-selection').show();
-      $('.global').hide();
+      selectedNode = node;
+    } else if (typeof edge !== 'undefined' && node != 1 && node != 2) {
+      graph.selectEdges([edge]);
+      $('.global,.node-selection').hide();
+      $('.edge-selection').show();
       selectedNode = node;
     } else {
-      $('.global').show();
       $('.node-selection').hide();
+      $('.global').show();
     }
   });
   return graph;
@@ -134,7 +139,7 @@ function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/automation/add_edge/${param}`, function(edge) {
     edges.add(edgeToEdge(edge));
-    switchMode(mode);
+    graph.addEdgeMode();
   });
 }
 
@@ -205,8 +210,7 @@ function deleteSelection() {
  * Change the mode (motion, creation of success or failure edge).
  * @param {mode} mode - Mode to switch to.
  */
-function switchMode(newMode) {
-  mode = newMode;
+function switchMode(mode) {
   if (mode == 'success' || mode == 'failure') {
     edgeType = mode;
     graph.addEdgeMode();

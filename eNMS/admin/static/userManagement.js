@@ -26,7 +26,7 @@ function tableActions(values, user) { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
-  convertSelect('user-permissions');
+  convertSelect('#user-permissions');
   for (let i = 0; i < users.length; i++) {
     addInstance('create', 'user', users[i]);
   }

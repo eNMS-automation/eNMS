@@ -7,6 +7,8 @@ table: false
 tableActions: false
 */
 
+let multiSelects = [];
+
 /**
  * Update link to the docs.
  * @param {url} url - URL pointing to the right page of the docs.
@@ -37,8 +39,10 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
  * @param {ids} ids - Ids.
  */
 function convertSelect(...ids) { // eslint-disable-line no-unused-vars
+  
   ids.forEach((id) => {
-    $(`#${id}`).multiselect({
+    multiSelects.push(id);
+    $(id).multiselect({
       enableFiltering: true,
       numberDisplayed: 10,
       includeSelectAllOption: true,
@@ -133,6 +137,7 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
  */
 function showCreateModal(type) { // eslint-disable-line no-unused-vars
   $(`#edit-${type}-form`).trigger('reset');
+  multiSelects.forEach((id) => $(id).multiselect('refresh'));
   $(`#title-${type}`).text(`Create a New ${type}`);
   $(`#edit-${type}`).modal('show');
 }

@@ -123,7 +123,7 @@ def migration_export():
 
 @post(bp, '/migration_import', 'Admin')
 def migration_import():
-    name, status = request.form['name'], 'Import successfull.'
+    name, status = request.form['name'], 'Import successful.'
     for cls in request.form['import_export_types']:
         path = app.path / 'migrations' / 'import_export' / name / f'{cls}.yaml'
         with open(path, 'r') as migration_file:

@@ -62,7 +62,7 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
   for (let i = 0; i < workflows.length; i++) {
     addInstance('create', 'workflow', workflows[i]);
   }
-  convertSelect('workflow-devices', 'workflow-pools');
+  convertSelect('#workflow-devices', '#workflow-pools');
   $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');
   });

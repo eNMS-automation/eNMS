@@ -28,7 +28,7 @@ function migrationsImport() { // eslint-disable-line no-unused-vars
 }
 
 (function() {
-  convertSelect('import_export_types');
+  convertSelect('#import_export_types');
   folders.forEach((f) => {
     $('#versions').append(`<option value='${f}'></option>`);
   });

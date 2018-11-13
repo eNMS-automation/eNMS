@@ -66,7 +66,7 @@ function updatePools() { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/pools.html');
-  convertSelect('links', 'devices');
+  convertSelect('#links', '#devices');
   for (let i = 0; i < pools.length; i++) {
     addInstance('create', 'pool', pools[i]);
   }

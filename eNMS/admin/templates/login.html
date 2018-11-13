@@ -23,14 +23,14 @@
   <div class="login_wrapper">
     <section class="login_content">
       <form data-parsley-validate method="post" autocomplete="off">
-        <h1>Login</h1>
+        <h1>Sign in</h1>
         {% for field in login_form if field.widget.input_type != 'hidden'  %}
           <div>
             {{ field(class="form-control required", placeholder=field.label.text) }}
           </div>
         {% endfor %}
         <div>
-        <button type="submit" class="btn btn-default submit" name="login">Log in</button>
+        <button type="submit" class="btn btn-default submit" name="login">Submit</button>
         </div>
         <div class="separator"></div>
       </form>

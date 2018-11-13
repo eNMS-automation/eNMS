@@ -85,10 +85,16 @@ if (workflow) {
   $('#current-workflow').val(workflow.id);
   displayWorkflow(workflow);
 } else {
-  call(`/get/workflow/${$('#current-workflow').val()}`, function(result) {
-    workflow = result;
-    graph = displayWorkflow(result);
-  });
+  workflow = $('#current-workflow').val();
+  if (workflow) {
+    call(`/get/workflow/${workflow}`, function(result) {
+      workflow = result;
+      graph = displayWorkflow(result);
+    });
+  } else {
+    alertify.notify(`You must create a workflow in the
+    'Workflow management' page first.`, 'error', 5);
+  }
 }
 
 /**

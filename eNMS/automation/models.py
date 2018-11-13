@@ -183,9 +183,11 @@ class Workflow(Job):
     edges = relationship('WorkflowEdge', back_populates='workflow')
 
     def __init__(self, **kwargs):
-        default = [fetch('Service', name='Start'), fetch('Service', name='End')]
+        end = fetch('Service', name='End')
+        default = [fetch('Service', name='Start'), end]
         self.jobs.extend(default)
         super().__init__(**kwargs)
+        end.positions[self.name] = (500, 0)
 
     def job(self, *args):
         device, payload = args if len(args) == 2 else (None, args)

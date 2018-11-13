@@ -39,7 +39,6 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
  * @param {ids} ids - Ids.
  */
 function convertSelect(...ids) { // eslint-disable-line no-unused-vars
-  
   ids.forEach((id) => {
     multiSelects.push(id);
     $(id).multiselect({

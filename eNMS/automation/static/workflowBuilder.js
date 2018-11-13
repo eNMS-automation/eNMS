@@ -325,7 +325,7 @@ function getWorkflowState() {
   if (workflow) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
       $('#status').text(`Status: ${wf.status}.`);
-      if(wf.id == workflow.id) {
+      if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_device) {
             $('#current-device').text(
@@ -334,7 +334,9 @@ function getWorkflowState() {
           }
           if (wf.state.current_job) {
             colorJob(wf.state.current_job.id, '#89CFF0');
-            $('#current-job').text(`Current job: ${wf.state.current_job.name}.`);
+            $('#current-job').text(
+              `Current job: ${wf.state.current_job.name}.`
+            );
           } else {
             $('#current-device,#current-job').empty();
           }

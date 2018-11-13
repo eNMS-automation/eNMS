@@ -350,7 +350,7 @@ function getWorkflowState() {
       }
     });
   }
-  setTimeout(getWorkflowState, 500);
+  setTimeout(getWorkflowState, 1500);
 }
 
 $(window).bind('beforeunload', function() {

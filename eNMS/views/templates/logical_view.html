@@ -60,7 +60,6 @@
 {% block javascripts %}
   {{ super()}}
   <!-- Base -->
-  <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <!-- D3.js -->
   <script src="{{ url_for('views_blueprint.static', filename='d3/d3.v3.min.js') }}"></script>
@@ -95,7 +94,6 @@
       ]
     };
   </script>
-  <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
   <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

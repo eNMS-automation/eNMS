@@ -325,30 +325,32 @@ function getWorkflowState() {
   if (workflow) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
       $('#status').text(`Status: ${wf.status}.`);
-      if (Object.keys(wf.state).length !== 0) {
-        if (wf.state.current_device) {
-          $('#current-device').text(
-            `Current device: ${wf.state.current_device}.`
-          );
-        }
-        if (wf.state.current_job) {
-          colorJob(wf.state.current_job.id, '#89CFF0');
-          $('#current-job').text(`Current job: ${wf.state.current_job.name}.`);
+      if(wf.id == workflow.id) {
+        if (Object.keys(wf.state).length !== 0) {
+          if (wf.state.current_device) {
+            $('#current-device').text(
+              `Current device: ${wf.state.current_device}.`
+            );
+          }
+          if (wf.state.current_job) {
+            colorJob(wf.state.current_job.id, '#89CFF0');
+            $('#current-job').text(`Current job: ${wf.state.current_job.name}.`);
+          } else {
+            $('#current-device,#current-job').empty();
+          }
+          if (wf.state.jobs) {
+            $.each(wf.state.jobs, (id, success) => {
+              colorJob(id, success ? '#32cd32' : '#FF6666');
+            });
+          }
         } else {
-          $('#current-device,#current-job').empty();
+          $('#current-job').text('');
+          wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
-        if (wf.state.jobs) {
-          $.each(wf.state.jobs, (id, success) => {
-            colorJob(id, success ? '#32cd32' : '#FF6666');
-          });
-        }
-      } else {
-        $('#current-job').text('');
-        wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
       }
     });
   }
-  setTimeout(getWorkflowState, 1000);
+  setTimeout(getWorkflowState, 500);
 }
 
 $(window).bind('beforeunload', function() {

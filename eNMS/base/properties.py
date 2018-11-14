@@ -24,6 +24,14 @@ boolean_properties = [
     'multiprocessing',
     'send_notification'
 ]
+list_properties = [
+    'devices',
+    'pools',
+    'links',
+    'permissions',
+    'getters',
+    'import_export_types'
+]
 private_properties = ['password', 'enable_password']
 
 base_properties = [

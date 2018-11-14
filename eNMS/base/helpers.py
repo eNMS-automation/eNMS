@@ -7,6 +7,7 @@ from eNMS import db
 from eNMS.base.classes import classes
 from eNMS.base.properties import (
     boolean_properties,
+    list_properties,
     pretty_names,
     property_types
 )
@@ -100,9 +101,11 @@ def integrity_rollback(function):
 def process_request(function):
     def wrapper(*a, **kw):
         data = request.form.to_dict()
-        for key in request.form:
-            if 'list' in property_types.get(key, ''):
-                data[key] = request.form.getlist(key)
+        for property in list_properties:
+            if property in request.form:
+                data[property] = request.form.getlist(property)
+            else:
+                data[property] = []
         for property in boolean_properties:
             if property not in request.form:
                 data[property] = 'off'

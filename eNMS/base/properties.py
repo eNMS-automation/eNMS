@@ -129,6 +129,8 @@ for obj_type, properties in (
 
 job_public_properties = [
     'name',
+    'vendor',
+    'operating_system',
     'type',
     'description',
     'status',
@@ -145,8 +147,6 @@ job_public_properties = [
 service_public_properties = job_public_properties
 
 workflow_public_properties = job_public_properties + [
-    'vendor',
-    'operating_system',
     'multiprocessing'
 ]
 

@@ -129,7 +129,7 @@ ___
 # Getting started
 
 ## Quick start
-    Install python 3.5+ (earlier versions not supported)
+    Install python 3.6+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS
     pip3 install -r requirements.txt

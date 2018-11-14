@@ -109,7 +109,7 @@ eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :g
 +----------------------------------------+------------------------------------+
 |WSGI Service                            |gunicorn or uWSGI                   |
 +----------------------------------------+------------------------------------+
-|Application                             |Flask/Python                        |
+|Application                             |Flask/Python 3.6+                   |
 +----------------------------------------+------------------------------------+
 |Database                                |SQLite or PostgreSQL                |
 +----------------------------------------+------------------------------------+

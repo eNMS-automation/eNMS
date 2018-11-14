@@ -102,7 +102,7 @@ for (let i = 0; i < devices.length; i++) {
     permanent: false,
   });
 
-  if (view == 'leaflet') {
+  if (view == '2D') {
     marker.addTo(map);
   } else {
     markers.addLayer(marker);
@@ -136,7 +136,7 @@ for (let i = 0; i < links.length; i++) {
   polyline.bindTooltip(link['name'], {
     permanent: false,
   });
-  if (view == 'leaflet') {
+  if (view == '2D') {
     polyline.addTo(map);
   } else {
     markers.addLayer(polyline);

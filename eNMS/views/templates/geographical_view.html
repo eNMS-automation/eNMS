@@ -61,14 +61,14 @@
       <li class="dropdown-submenu">
         <a class="menu-submenu menu-view" tabindex="-1" href="#">View type<span class="caret-right"></span></a>
         <ul class="dropdown-menu">
-          {% if view == 'leaflet' %}
+          {% if view == '2D' %}
             <li onclick="$('#view-type').val('2DC'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
             <li onclick="$('#view-type').val('3D'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
           {% elif view == '2DC' %}
-            <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
+            <li onclick="$('#view-type').val('2D'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
             <li onclick="$('#view-type').val('3D'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
           {% elif view == '3D' %}
-            <li onclick="$('#view-type').val('leaflet'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
+            <li onclick="$('#view-type').val('2D'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
             <li onclick="$('#view-type').val('2DC'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
           {% endif %}
         </li>

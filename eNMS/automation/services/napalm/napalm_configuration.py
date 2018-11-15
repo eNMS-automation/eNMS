@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import (
@@ -15,7 +15,6 @@ class NapalmConfigurationService(Service):
     __tablename__ = 'NapalmConfigurationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=True)
     action = Column(String)
     action_values = (
         ('load_merge_candidate', 'Load merge'),

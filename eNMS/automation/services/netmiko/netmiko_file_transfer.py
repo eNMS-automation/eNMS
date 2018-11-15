@@ -11,7 +11,6 @@ class NetmikoFileTransferService(Service):
     __tablename__ = 'NetmikoFileTransferService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=True)
     dest_file = Column(String)
     direction = Column(String)
     direction_values = (('put', 'Upload'), ('get', 'Download'))

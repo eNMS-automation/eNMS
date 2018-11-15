@@ -16,7 +16,6 @@ class NapalmGettersService(Service):
     __tablename__ = 'NapalmGettersService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=True)
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     driver = Column(String)

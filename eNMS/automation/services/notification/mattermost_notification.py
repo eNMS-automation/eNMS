@@ -15,7 +15,6 @@ class MattermostNotificationService(Service):
     channel = Column(String)
     body = Column(String)
     body_textarea = True
-    multiprocessing = False
 
     __mapper_args__ = {
         'polymorphic_identity': 'MattermostNotificationService',

@@ -25,6 +25,7 @@ class Job(Base):
     hidden = Column(Boolean, default=False)
     name = Column(String, unique=True)
     description = Column(String)
+    multiprocessing = Column(Boolean, default=False)
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
@@ -174,7 +175,6 @@ class Workflow(Job):
     __tablename__ = 'Workflow'
     __mapper_args__ = {'polymorphic_identity': 'Workflow'}
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=False)
     jobs = relationship(
         'Job',
         secondary=job_workflow_table,

@@ -14,7 +14,6 @@ class NetmikoConfigurationService(Service):
     __tablename__ = 'NetmikoConfigurationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=True)
     content = Column(String)
     content_textarea = True
     driver = Column(String)

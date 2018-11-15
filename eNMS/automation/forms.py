@@ -8,13 +8,15 @@ from wtforms import (
     SelectMultipleField
 )
 
+from eNMS.base.models import MultipleObjectField, ObjectField
+
 
 class JobForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()
-    devices = SelectMultipleField('Device')
-    pools = SelectMultipleField('Pool')
+    devices = MultipleObjectField('Device')
+    pools = MultipleObjectField('Pool')
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
     send_notification = BooleanField()
     send_notification_method = SelectField(choices=(
@@ -37,7 +39,7 @@ class CompareLogsForm(FlaskForm):
 
 
 class AddJobForm(FlaskForm):
-    job = SelectField('Job')
+    job = ObjectField('Job')
 
 
 class WorkflowForm(JobForm):
@@ -45,4 +47,4 @@ class WorkflowForm(JobForm):
 
 
 class WorkflowBuilderForm(FlaskForm):
-    workflow = SelectField('Workflow')
+    workflow = ObjectField('Workflow')

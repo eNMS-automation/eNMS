@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import HiddenField, SelectField, StringField
 
+from eNMS.base.models import ObjectField
+
 
 class SchedulingForm(FlaskForm):
     id = HiddenField()
@@ -9,4 +11,4 @@ class SchedulingForm(FlaskForm):
     name = StringField()
     description = StringField()
     frequency = StringField()
-    job = SelectField('Job')
+    job = ObjectField('Job')

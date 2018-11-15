@@ -37,7 +37,7 @@ def service_management():
     return dict(
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,
-        service_form=JobForm(request.form, 'Service'),
+        service_form=JobForm(request.form),
         services_classes=list(service_classes),
         services=serialize('Service')
     )
@@ -49,7 +49,7 @@ def workflow_management():
         compare_logs_form=CompareLogsForm(request.form),
         fields=workflow_table_properties,
         workflows=serialize('Workflow'),
-        workflow_creation_form=WorkflowForm(request.form, 'Workflow')
+        workflow_creation_form=WorkflowForm(request.form)
     )
 
 
@@ -59,8 +59,8 @@ def workflow_builder():
     return dict(
         workflow=workflow.serialized if workflow else None,
         add_job_form=AddJobForm(request.form, 'Workflow'),
-        workflow_builder_form=WorkflowBuilderForm(request.form, 'Service'),
-        workflow_creation_form=WorkflowForm(request.form, 'Workflow'),
+        workflow_builder_form=WorkflowBuilderForm(request.form),
+        workflow_creation_form=WorkflowForm(request.form),
         compare_logs_form=CompareLogsForm(request.form),
         service_form=JobForm(request.form, 'Service'),
         services_classes=list(service_classes)

@@ -112,11 +112,12 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
         if (graph.findNode(job.id).length == 0) {
           nodes.add(jobToNode(job));
           saveNode(job);
-          alertify.notify(`Job '${job.name}' created.`, 'success', 5);
         } else {
-          alertify.notify(`Job already in workflow.`, 'error', 5);
+          alertify.notify(
+            `Job '${job.name}' already in workflow.`, 'error', 5
+          );
         }
-      }
+      });
     });
   }
 }

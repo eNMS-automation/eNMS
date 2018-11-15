@@ -11,6 +11,7 @@ from eNMS.base.helpers import (
     factory,
     fetch,
     get,
+    objectify,
     post,
     str_dict,
     serialize

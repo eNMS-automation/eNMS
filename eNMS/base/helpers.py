@@ -169,7 +169,7 @@ def post(blueprint, url, permission=None):
                 error = str(e)
                 if error == 'Expecting value: line 1 column 1 (char 0)':
                     error = 'Invalid syntax for dictionnary input.'
-                return {'error': error}
+                return jsonify({'error': error})
         return inner
     return outer
 

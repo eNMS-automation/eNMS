@@ -1,3 +1,5 @@
+
+from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     FloatField,
@@ -9,16 +11,15 @@ from wtforms import (
     SelectMultipleField
 )
 
-from eNMS.base.models import BaseForm
 from eNMS.base.properties import import_properties, user_permissions
 
 
-class LoginForm(BaseForm):
+class LoginForm(FlaskForm):
     name = StringField()
     password = PasswordField()
 
 
-class AddUser(BaseForm):
+class AddUser(FlaskForm):
     id = HiddenField()
     name = StringField()
     password = PasswordField()
@@ -27,7 +28,7 @@ class AddUser(BaseForm):
     permissions = SelectMultipleField(choices=permission_choices)
 
 
-class AdministrationForm(BaseForm):
+class AdministrationForm(FlaskForm):
     tacacs_ip_address = StringField('IP address')
     tacacs_password = PasswordField()
     tacacs_port = IntegerField(default=49)
@@ -78,6 +79,6 @@ class AdministrationForm(BaseForm):
     }
 
 
-class MigrationsForm(BaseForm):
+class MigrationsForm(FlaskForm):
     export_choices = [(p, p.capitalize()) for p in import_properties]
     import_export_types = SelectMultipleField(choices=export_choices)

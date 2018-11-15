@@ -1,3 +1,4 @@
+from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     HiddenField,
@@ -7,10 +8,8 @@ from wtforms import (
     SelectMultipleField
 )
 
-from eNMS.base.models import BaseForm
 
-
-class JobForm(BaseForm):
+class JobForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()
@@ -32,12 +31,12 @@ class JobForm(BaseForm):
     operating_system = StringField()
 
 
-class CompareLogsForm(BaseForm):
+class CompareLogsForm(FlaskForm):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
 
 
-class AddJobForm(BaseForm):
+class AddJobForm(FlaskForm):
     job = SelectField()
 
 
@@ -45,5 +44,5 @@ class WorkflowForm(JobForm):
     multiprocessing = BooleanField()
 
 
-class WorkflowBuilderForm(BaseForm):
+class WorkflowBuilderForm(FlaskForm):
     workflow = SelectField()

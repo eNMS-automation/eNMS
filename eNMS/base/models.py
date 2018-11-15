@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+from wtforms import SelectMultipleField
 from json import dumps, loads
 
 from eNMS import db, use_vault, vault_client
@@ -121,11 +121,15 @@ class Base(db.Model):
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
 
-class BaseForm(FlaskForm):
+class ObjectField(SelectField):
 
-    def __init__(self, request, model=None):
-        super().__init__(request)
-        for property, cls in rel.get(model, {}).items():
-            for name in (property.lower(), f'{property.lower()}s'):
-                if hasattr(self, name):
-                    getattr(self, name).choices = choices(cls)
+    def __init__(self, model, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.choices = choices(model)
+
+
+class MultipleObjectField(SelectMultipleField):
+
+    def __init__(self, model, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.choices = choices(model)

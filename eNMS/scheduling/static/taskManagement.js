@@ -52,7 +52,7 @@ function scheduleTask() { // eslint-disable-line no-unused-vars
     const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
     addTask(mode, task);
     const message = `Task '${task.name}'
-    ${mode == 'edit' ? 'edited' : 'created'} !`;
+    ${mode == 'edit' ? 'edited' : 'created'}.`;
     alertify.notify(message, 'success', 5);
     $('#task-modal').modal('hide');
   });

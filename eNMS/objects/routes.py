@@ -62,7 +62,7 @@ def link_management():
 def pool_management():
     return dict(
         form=AddPoolForm(request.form),
-        pool_object_form=PoolObjectsForm(request.form, 'Pool'),
+        pool_object_form=PoolObjectsForm(request.form),
         fields=pool_table_properties,
         pools=serialize('Pool')
     )

@@ -1,3 +1,4 @@
+from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     FloatField,
@@ -9,7 +10,7 @@ from wtforms import (
     StringField
 )
 
-from eNMS.base.models import BaseForm
+from eNMS.base.models import MultipleObjectField, ObjectField
 from eNMS.base.properties import (
     custom_properties,
     link_public_properties,
@@ -37,7 +38,7 @@ def configure_pool_form(cls):
     return cls
 
 
-class AddObjectForm(BaseForm):
+class AddObjectForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()
@@ -69,17 +70,17 @@ class AddLink(AddObjectForm):
 
 
 @configure_pool_form
-class AddPoolForm(BaseForm):
+class AddPoolForm(FlaskForm):
     name = StringField()
     description = StringField()
 
 
-class PoolObjectsForm(BaseForm):
-    devices = SelectMultipleField()
-    links = SelectMultipleField()
+class PoolObjectsForm(FlaskForm):
+    devices = ObjectField('Device')
+    links = ObjectField('Link')
 
 
-class OpenNmsForm(BaseForm):
+class OpenNmsForm(FlaskForm):
     opennms_rest_api = StringField()
     opennms_devices = StringField()
     node_type = [subtype for subtype in device_subtypes.items()]
@@ -88,7 +89,7 @@ class OpenNmsForm(BaseForm):
     password = PasswordField()
 
 
-class NetboxForm(BaseForm):
+class NetboxForm(FlaskForm):
     netbox_address = StringField(default='http://0.0.0.0:8000')
     netbox_token = StringField()
     node_type = [subtype for subtype in device_subtypes.items()]

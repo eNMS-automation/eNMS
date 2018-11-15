@@ -1,4 +1,4 @@
-from flask import current_app, jsonify, request
+from flask import current_app, request
 from os.path import join
 from simplekml import Kml
 
@@ -60,7 +60,7 @@ def export_to_google_earth():
         f'{request.form["name"]}.kmz'
     )
     kml_file.save(filepath)
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/get_logs/<device_id>', 'View')
@@ -69,4 +69,4 @@ def get_logs(device_id):
         log.content for log in fetch_all('Log')
         if log.source == fetch('Device', id=device_id).ip_address
     ]
-    return jsonify('\n'.join(device_logs) or True)
+    return '\n'.join(device_logs) or True

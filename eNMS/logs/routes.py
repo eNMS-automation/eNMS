@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import request
 from re import search
 
 from eNMS.base.helpers import get, post, serialize
@@ -31,4 +31,4 @@ def filter_logs():
         else search(request.form[prop], str(val)) for prop, val in log.items()
         if prop in request.form and request.form[prop]
     )]
-    return jsonify(logs)
+    return logs

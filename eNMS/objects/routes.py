@@ -1,4 +1,4 @@
-from flask import current_app as app, jsonify, request
+from flask import current_app as app, request
 from flask_login import current_user
 from logging import info
 from pathlib import Path
@@ -101,12 +101,12 @@ def connection(id):
         cmd.extend(f'ssh {options} {ip}'.split())
     cmd.extend(f'-p {device.port}'.split())
     Popen(cmd)
-    return jsonify({
+    return {
         'device': device.name,
         'port': port,
         'redirection': app.config['GOTTY_PORT_REDIRECTION'],
         'server_addr': app.config['ENMS_SERVER_ADDR']
-    })
+    }
 
 
 @post(bp, '/save_pool_objects/<id>', 'Edit')
@@ -115,12 +115,12 @@ def save_pool_objects(id):
     pool.devices = objectify('Device', request.form['devices'])
     pool.links = objectify('Link', request.form['links'])
     db.session.commit()
-    return jsonify(pool.serialized)
+    return pool.serialized
 
 
 @post(bp, '/pool_objects/<pool_id>', 'View')
 def filter_pool_objects(pool_id):
-    return jsonify(fetch('Pool', id=pool_id).filter_objects())
+    return fetch('Pool', id=pool_id).filter_objects()
 
 
 @post(bp, '/update_pools', 'Edit')
@@ -128,7 +128,7 @@ def update_pools():
     for pool in fetch_all('Pool'):
         pool.compute_pool()
     db.session.commit()
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/import_topology', 'Edit')
@@ -156,7 +156,7 @@ def import_topology():
                     info(f'{str(prop)} could not be imported ({str(e)})')
                     result = 'Partial import (see logs).'
             db.session.commit()
-    return jsonify(result)
+    return result
 
 
 @post(bp, '/export_topology', 'View')
@@ -169,7 +169,7 @@ def export_topology():
             for obj_index, obj in enumerate(serialize(obj_type), 1):
                 sheet.write(obj_index, index, obj[property])
     workbook.save(Path.cwd() / 'projects' / 'objects.xls')
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/query_opennms', 'Edit')
@@ -209,7 +209,7 @@ def query_opennms():
                 devices[device]['ip_address'] = interface['ipAddress']
                 factory('Device', **devices[device])
     db.session.commit()
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/query_netbox', 'Edit')
@@ -227,4 +227,4 @@ def query_netbox():
             'longitude': 0.,
             'latitude': 0.
         })
-    return jsonify(True)
+    return True

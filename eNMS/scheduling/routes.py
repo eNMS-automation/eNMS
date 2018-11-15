@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import request
 from re import search, sub
 
 from eNMS.base.helpers import (
@@ -51,10 +51,10 @@ def calendar():
 @post(bp, '/pause_task/<task_id>', 'Edit')
 def pause_task(task_id):
     fetch('Task', id=task_id).pause_task()
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/resume_task/<task_id>', 'Edit')
 def resume_task(task_id):
     fetch('Task', id=task_id).resume_task()
-    return jsonify(True)
+    return True

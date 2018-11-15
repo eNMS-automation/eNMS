@@ -10,7 +10,7 @@ class ConfigureBgpService(Service):
     __tablename__ = 'ConfigureBgpService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = True
+    multiprocessing = Column(Boolean, default=True)
     local_as = Column(Integer)
     loopback = Column(String)
     loopback_ip = Column(String)

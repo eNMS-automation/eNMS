@@ -28,7 +28,7 @@ def view(view_type):
         ),
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
-        add_link_form=AddLink(request.form, 'Link'),
+        add_link_form=AddLink(request.form),
         device_subtypes=device_subtypes,
         link_colors=link_subtype_to_color,
         name_to_id={d.name: id for id, d in enumerate(devices)},

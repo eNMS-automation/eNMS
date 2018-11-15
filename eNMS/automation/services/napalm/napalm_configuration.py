@@ -15,7 +15,7 @@ class NapalmConfigurationService(Service):
     __tablename__ = 'NapalmConfigurationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = True
+    multiprocessing = Column(Boolean, default=True)
     action = Column(String)
     action_values = (
         ('load_merge_candidate', 'Load merge'),

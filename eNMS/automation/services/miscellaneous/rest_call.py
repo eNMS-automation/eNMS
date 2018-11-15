@@ -20,7 +20,7 @@ class RestCallService(Service):
     __tablename__ = 'RestCallService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean)
+    multiprocessing = Column(Boolean, default=False)
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})

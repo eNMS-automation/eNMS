@@ -16,7 +16,7 @@
           {% for field in service_form %}
             {% if field.widget.input_type == 'hidden' %}
               {{ field(id="service-id") }}
-            {% elif field.name == 'send_notification' %}
+            {% elif field.name in ('multiprocessing', 'send_notification') %}
               <fieldset>
                 <div class="item">
                   <input id="service-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">

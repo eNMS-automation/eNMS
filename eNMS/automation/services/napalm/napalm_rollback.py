@@ -11,7 +11,7 @@ class NapalmRollbackService(Service):
     __tablename__ = 'NapalmRollbackService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = True
+    multiprocessing = Column(Boolean, default=True)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})

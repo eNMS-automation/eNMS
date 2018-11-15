@@ -13,7 +13,7 @@ class NapalmTracerouteService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
-    multiprocessing = True
+    multiprocessing = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     source_ip = Column(String)
     timeout = Column(Integer)

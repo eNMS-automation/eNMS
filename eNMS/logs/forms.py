@@ -21,4 +21,4 @@ class LogAutomationForm(LogFilteringForm):
     id = HiddenField()
     list_fields = HiddenField(default='jobs')
     name = StringField()
-    jobs = ObjectMultipleField('Job')
+    jobs = MultipleObjectField('Job')

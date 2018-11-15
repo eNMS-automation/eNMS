@@ -29,13 +29,13 @@ def configure_pool_form(cls):
     cls.device_properties = device_public_properties
     cls.link_properties = link_public_properties
     boolean_fields = []
-    for cls, properties in (
+    for cls_name, properties in (
         ('device', device_public_properties),
         ('link', link_public_properties)
     ):
         for property in properties:
-            boolean_field = f'{cls}_{property}_regex'
-            setattr(cls, f'{cls}_{property}', StringField(property))
+            boolean_field = f'{cls_name}_{property}_regex'
+            setattr(cls, f'{cls_name}_{property}', StringField(property))
             setattr(cls, boolean_field, BooleanField('Regex'))
             boolean_fields.append(boolean_field)
     setattr(

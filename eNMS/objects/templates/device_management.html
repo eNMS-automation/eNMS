@@ -7,6 +7,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  {% include 'confirm_deletion_modal.html' %}
   {% include 'device_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
   <div class="right_col" role="main">

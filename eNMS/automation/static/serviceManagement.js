@@ -24,7 +24,7 @@ function tableActions(values, service) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="editService('${service.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('service', '${service.id}')">Delete</button>`
+    onclick="confirmDeletion('service', '${service.id}')">Delete</button>`
   );
 }
 

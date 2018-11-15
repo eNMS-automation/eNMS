@@ -53,7 +53,7 @@ function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showWorkflowModalDuplicate('${workflow.id}')">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('workflow', '${workflow.id}')">Delete</button>`
+    onclick="confirmDeletion('workflow', '${workflow.id}')">Delete</button>`
   );
 }
 

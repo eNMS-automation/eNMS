@@ -20,7 +20,7 @@ function tableActions(values, link) { // eslint-disable-line no-unused-vars
     onclick="showTypeModal('link', '${link.id}', true)">
     Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('link', '${link.id}')">Delete</button>`
+    onclick="confirmDeletion('link', '${link.id}')">Delete</button>`
   );
 }
 

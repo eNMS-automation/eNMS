@@ -33,7 +33,7 @@ function addTask(mode, properties) {
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTaskModal('${properties.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('task', '${properties.id}')">Delete</button>`
+    onclick="confirmDeletion('task', '${properties.id}')">Delete</button>`
   );
 
   if (mode == 'edit') {

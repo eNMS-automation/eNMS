@@ -26,7 +26,7 @@ function tableActions(values, pool) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showPoolObjects('${pool.id}')">Edit objects</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('pool', '${pool.id}')">Delete</button>`
+    onclick="confirmDeletion('pool', '${pool.id}')">Delete</button>`
   );
 }
 

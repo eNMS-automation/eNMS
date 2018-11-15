@@ -1,3 +1,4 @@
+from flask_wtf import FlaskForm
 from wtforms import SelectField, SelectMultipleField
 from json import dumps, loads
 
@@ -54,7 +55,7 @@ class Base(db.Model):
             elif property[:-1] in serial:
                 value = objectify(serial[property[:-1]], value)
             elif property in boolean_properties:
-                value = kwargs[property] not in ('off', None, False)
+                value = kwargs[property] not in (None, False)
             elif 'regex' in property:
                 value = property in kwargs
             elif property_type == 'dict':

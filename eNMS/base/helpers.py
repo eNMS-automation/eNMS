@@ -101,14 +101,13 @@ def integrity_rollback(function):
 def process_request(function):
     def wrapper(*a, **kw):
         data = request.form.to_dict()
-        for property in list_properties:
+        for property in data.get('list_fields', '').split(','):
             if property in request.form:
                 data[property] = request.form.getlist(property)
             else:
                 data[property] = []
-        for property in boolean_properties:
-            if property not in request.form:
-                data[property] = 'off'
+        for property in data.get('boolean_fields', '').split(','):
+            data[property] = property in request.form
         request.form = data
         return function(*a, **kw)
     return wrapper

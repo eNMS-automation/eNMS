@@ -13,8 +13,8 @@ class JobForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()
-    devices = SelectMultipleField(choices=())
-    pools = SelectMultipleField(choices=())
+    devices = SelectMultipleField('Device')
+    pools = SelectMultipleField('Pool')
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
     send_notification = BooleanField()
     send_notification_method = SelectField(choices=(
@@ -37,7 +37,7 @@ class CompareLogsForm(FlaskForm):
 
 
 class AddJobForm(FlaskForm):
-    job = SelectField()
+    job = SelectField('Job')
 
 
 class WorkflowForm(JobForm):
@@ -45,4 +45,4 @@ class WorkflowForm(JobForm):
 
 
 class WorkflowBuilderForm(FlaskForm):
-    workflow = SelectField()
+    workflow = SelectField('Workflow')

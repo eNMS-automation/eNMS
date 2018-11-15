@@ -9,4 +9,4 @@ class SchedulingForm(FlaskForm):
     name = StringField()
     description = StringField()
     frequency = StringField()
-    job = SelectField(choices=())
+    job = SelectField('Job')

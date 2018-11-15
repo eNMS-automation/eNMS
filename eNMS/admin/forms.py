@@ -1,4 +1,3 @@
-
 from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
@@ -11,6 +10,7 @@ from wtforms import (
     SelectMultipleField
 )
 
+from eNMS.base.models import ObjectField
 from eNMS.base.properties import import_properties, user_permissions
 
 
@@ -45,7 +45,7 @@ class AdministrationForm(FlaskForm):
     mattermost_url = StringField('Mattermost URL')
     mattermost_channel = StringField()
     mattermost_verify_certificate = BooleanField()
-    pool = SelectField(choices=())
+    pool = ObjectField('Pool')
     categories = {
         'TACACS+ Server': (
             'tacacs_ip_address',

@@ -1,6 +1,5 @@
+from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, SelectMultipleField, StringField
-
-from eNMS.base.models import BaseForm
 
 
 def configure_form(cls):
@@ -12,11 +11,11 @@ def configure_form(cls):
 
 
 @configure_form
-class LogFilteringForm(BaseForm):
+class LogFilteringForm(FlaskForm):
     pass
 
 
 class LogAutomationForm(LogFilteringForm):
     id = HiddenField()
     name = StringField()
-    jobs = SelectMultipleField()
+    jobs = SelectMultipleField('Job')

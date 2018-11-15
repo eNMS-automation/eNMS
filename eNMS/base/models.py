@@ -1,4 +1,4 @@
-from wtforms import SelectMultipleField
+from wtforms import SelectField, SelectMultipleField
 from json import dumps, loads
 
 from eNMS import db, use_vault, vault_client

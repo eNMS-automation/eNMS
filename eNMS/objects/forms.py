@@ -65,8 +65,8 @@ class AddDevice(AddObjectForm):
 class AddLink(AddObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)
-    source = SelectField()
-    destination = SelectField()
+    source = ObjectField()
+    destination = ObjectField()
 
 
 @configure_pool_form
@@ -76,8 +76,8 @@ class AddPoolForm(FlaskForm):
 
 
 class PoolObjectsForm(FlaskForm):
-    devices = ObjectField('Device')
-    links = ObjectField('Link')
+    devices = MultipleObjectField('Device')
+    links = MultipleObjectField('Link')
 
 
 class OpenNmsForm(FlaskForm):

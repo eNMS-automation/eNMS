@@ -54,7 +54,7 @@ def link_management():
     return dict(
         fields=link_table_properties,
         links=serialize('Link'),
-        add_link_form=AddLink(request.form, 'Link')
+        add_link_form=AddLink(request.form)
     )
 
 

@@ -172,7 +172,7 @@ def create_netmiko_workflow():
             'operating_system': 'eos',
             'driver': 'arista_eos',
             'command': 'show vrf',
-            'content_match': '^((?!test).)*$',
+            'content_match': '^((?!test)[\s\S])*$',
             'content_match_regex': 'y',
             'fast_cli': 'y',
             'timeout': 3,

@@ -26,8 +26,7 @@ from eNMS.automation.forms import (
     AddJobForm,
     CompareLogsForm,
     JobForm,
-    WorkflowBuilderForm,
-    WorkflowForm
+    WorkflowBuilderForm
 )
 from eNMS.automation.helpers import scheduler_job
 
@@ -49,7 +48,7 @@ def workflow_management():
         compare_logs_form=CompareLogsForm(request.form),
         fields=workflow_table_properties,
         workflows=serialize('Workflow'),
-        workflow_creation_form=WorkflowForm(request.form)
+        workflow_creation_form=JobForm(request.form)
     )
 
 
@@ -60,7 +59,7 @@ def workflow_builder():
         workflow=workflow.serialized if workflow else None,
         add_job_form=AddJobForm(request.form, 'Workflow'),
         workflow_builder_form=WorkflowBuilderForm(request.form),
-        workflow_creation_form=WorkflowForm(request.form),
+        workflow_creation_form=JobForm(request.form),
         compare_logs_form=CompareLogsForm(request.form),
         service_form=JobForm(request.form, 'Service'),
         services_classes=list(service_classes)

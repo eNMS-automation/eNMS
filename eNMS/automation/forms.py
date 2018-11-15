@@ -13,9 +13,12 @@ from eNMS.base.models import MultipleObjectField, ObjectField
 
 class JobForm(FlaskForm):
     id = HiddenField()
+    boolean_fields = HiddenField(default='send_notification,multiprocessing')
+    list_fields = HiddenField(default='devices,pools')
     name = StringField()
     description = StringField()
     devices = MultipleObjectField('Device')
+    multiprocessing = BooleanField()
     pools = MultipleObjectField('Pool')
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
     send_notification = BooleanField()
@@ -40,10 +43,6 @@ class CompareLogsForm(FlaskForm):
 
 class AddJobForm(FlaskForm):
     job = ObjectField('Job')
-
-
-class WorkflowForm(JobForm):
-    multiprocessing = BooleanField()
 
 
 class WorkflowBuilderForm(FlaskForm):

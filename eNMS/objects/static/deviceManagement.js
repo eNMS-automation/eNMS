@@ -22,7 +22,7 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
     onclick="showTypeModal('device', '${device.id}', true)">
     Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="deleteInstance('device', '${device.id}')">Delete</button>`
+    onclick="confirmDeletion('device', '${device.id}')">Delete</button>`
   );
 }
 

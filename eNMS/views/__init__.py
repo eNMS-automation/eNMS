@@ -1,5 +1,5 @@
 from flask import Blueprint
-from os.path import join
+from pathlib import Path
 from simplekml import Color, Style
 
 from eNMS.base.properties import (
@@ -18,19 +18,13 @@ bp = Blueprint(
 )
 
 
-styles = {}
+styles, path_bp = {}, Path(bp.root_path)
 
 for subtype in device_subtypes:
     point_style = Style()
     point_style.labelstyle.color = Color.blue
-    path_icon = join(
-        bp.root_path,
-        'static',
-        'images',
-        'default',
-        f'{subtype}.gif'
-    )
-    point_style.iconstyle.icon.href = path_icon
+    icon = path_bp / 'static' / 'images' / 'default' / f'{subtype}.gif'
+    point_style.iconstyle.icon.href = icon
     styles[subtype] = point_style
 
 for subtype in link_subtypes:

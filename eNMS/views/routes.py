@@ -1,5 +1,4 @@
-from flask import current_app, request
-from os.path import join
+from flask import current_app as app, request
 from simplekml import Kml
 
 from eNMS.base.helpers import (
@@ -54,11 +53,7 @@ def export_to_google_earth():
         ]
         line.style = styles[link.type]
         line.style.linestyle.width = request.form['line_width']
-    filepath = join(
-        current_app.path,
-        'google_earth',
-        f'{request.form["name"]}.kmz'
-    )
+    filepath = app.path / 'google_earth' / f'{request.form["name"]}.kmz'
     kml_file.save(filepath)
     return True
 

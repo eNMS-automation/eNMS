@@ -1,4 +1,3 @@
-from os.path import join
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
@@ -47,7 +46,7 @@ def create_default_parameters():
 
 @integrity_rollback
 def create_default_network_topology(app):
-    with open(join(app.path, 'projects', 'usa.xls'), 'rb') as f:
+    with open(app.path / 'projects' / 'usa.xls', 'rb') as f:
         book = open_workbook(file_contents=f.read())
         for object_type in ('Device', 'Link'):
             try:

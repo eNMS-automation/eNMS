@@ -1,14 +1,9 @@
-from os.path import join
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.base.helpers import fetch, fetch_all
 from eNMS.base.properties import device_subtypes, link_subtypes
 
 from tests.test_base import check_blueprints
-
-# test the creation of objects, manual and via excel import
-# test the deletion of objects
-# test the pool system
 
 
 def define_device(subtype, description):
@@ -62,7 +57,7 @@ def test_manual_object_creation(user_client):
 
 
 def create_from_file(client, file):
-    with open(join(client.application.path, 'projects', file), 'rb') as f:
+    with open(client.application.path / 'projects' / file, 'rb') as f:
         data = dict(file=f)
         client.post('/objects/import_topology', data=data)
 

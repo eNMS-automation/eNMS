@@ -1,7 +1,6 @@
 from flask import (
     abort,
     current_app as app,
-    jsonify,
     redirect,
     render_template,
     request,
@@ -106,7 +105,7 @@ def save_parameters():
     )
     database_filtering(fetch('Pool', id=request.form['pool']))
     db.session.commit()
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/migration_export', 'Admin')
@@ -118,7 +117,7 @@ def migration_export():
             makedirs(path)
         with open(path / f'{cls_name}.yaml', 'w') as migration_file:
             dump(export(cls_name), migration_file, default_flow_style=False)
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/migration_import', 'Admin')
@@ -133,4 +132,4 @@ def migration_import():
                 except Exception as e:
                     info(f'{str(obj)} could not be imported ({str(e)})')
                     status = 'Partial import (see logs).'
-    return jsonify(status)
+    return status

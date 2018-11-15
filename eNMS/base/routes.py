@@ -1,5 +1,5 @@
 from collections import Counter
-from flask import jsonify, redirect, request, url_for
+from flask import redirect, request, url_for
 
 from eNMS.base import bp
 from eNMS.base.classes import classes
@@ -38,22 +38,22 @@ def get_counters(property, type):
     objects = fetch_all(type)
     if property in reverse_pretty_names:
         property = reverse_pretty_names[property]
-    return jsonify(Counter(map(lambda o: str(getattr(o, property)), objects)))
+    return Counter(map(lambda o: str(getattr(o, property)), objects))
 
 
 @post(bp, '/get/<cls>/<id>', 'View')
 def get_instance(cls, id):
-    return jsonify(fetch(cls, id=id).serialized)
+    return fetch(cls, id=id).serialized
 
 
 @post(bp, '/update/<cls>', 'Edit')
 def update_instance(cls):
-    return jsonify(factory(cls, **request.form).serialized)
+    return factory(cls, **request.form).serialized
 
 
 @post(bp, '/delete/<cls>/<id>', 'Edit')
 def delete_instance(cls, id):
-    return jsonify(delete(cls, id=id))
+    return delete(cls, id=id)
 
 
 @post(bp, '/shutdown', 'Admin')

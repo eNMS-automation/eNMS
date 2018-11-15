@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
-from flask import jsonify, request, session
+from flask import request, session
 from json import dumps
 from logging import info
 
@@ -130,22 +130,19 @@ def get_service(id_or_cls):
             form += build_textarea_box(property)
         else:
             form += build_text_box(property)
-    return jsonify({
-        'form': form,
-        'service': service.serialized if service else None
-    })
+    return {'form': form, 'service': service.serialized if service else None}
 
 
 @post(bp, '/get_status/<cls>', 'View')
 def get_status(cls):
-    return jsonify([s['status'] for s in serialize(cls.capitalize())])
+    return [s['status'] for s in serialize(cls.capitalize())]
 
 
 @post(bp, '/run_job/<job_id>', 'Edit')
 def run_job(job_id):
     job = fetch('Job', id=job_id)
     if job.status == 'Running':
-        return jsonify({'error': 'Job is already running.'})
+        return {'error': 'Job is already running.'}
     job.status, job.state = 'Running', {}
     info(f'{job.name}: starting.')
     db.session.commit()
@@ -157,7 +154,7 @@ def run_job(job_id):
         args=[job_id],
         trigger='date'
     )
-    return jsonify(job.serialized)
+    return job.serialized
 
 
 @post(bp, '/get_diff/<job_id>/<v1>/<v2>', 'View')
@@ -166,14 +163,14 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
     first = str_dict(job.logs[v1]).splitlines()
     second = str_dict(job.logs[v2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
-    return jsonify({'first': first, 'second': second, 'opcodes': opcodes})
+    return {'first': first, 'second': second, 'opcodes': opcodes}
 
 
 @post(bp, '/clear_logs/<job_id>', 'Edit')
 def clear_logs(job_id):
     fetch('Job', id=job_id).logs = {}
     db.session.commit()
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/add_to_workflow/<workflow_id>', 'Edit')
@@ -182,7 +179,7 @@ def add_to_workflow(workflow_id):
     job = fetch('Job', id=request.form['job'])
     job.workflows.append(workflow)
     db.session.commit()
-    return jsonify(job.serialized)
+    return job.serialized
 
 
 @post(bp, '/duplicate_workflow/<workflow_id>', 'Edit')
@@ -202,14 +199,14 @@ def duplicate_workflow(workflow_id):
             'destination': dest.id
         }))
     db.session.commit()
-    return jsonify(new_workflow.serialized)
+    return new_workflow.serialized
 
 
 @post(bp, '/reset_workflow_logs/<workflow_id>', 'Edit')
 def reset_workflow_logs(workflow_id):
     fetch('Workflow', id=workflow_id).state = {}
     db.session.commit()
-    return jsonify(True)
+    return True
 
 
 @post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit')
@@ -217,7 +214,7 @@ def add_node(workflow_id, job_id):
     workflow, job = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.append(job)
     db.session.commit()
-    return jsonify(job.serialized)
+    return job.serialized
 
 
 @post(bp, '/delete_node/<workflow_id>/<job_id>', 'Edit')
@@ -225,7 +222,7 @@ def delete_node(workflow_id, job_id):
     workflow, job = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.remove(job)
     db.session.commit()
-    return jsonify(job.serialized)
+    return job.serialized
 
 
 @post(bp, '/add_edge/<wf_id>/<subtype>/<source>/<dest>', 'Edit')
@@ -237,12 +234,12 @@ def add_edge(wf_id, subtype, source, dest):
         'source': source,
         'destination': dest
     })
-    return jsonify(workflow_edge.serialized)
+    return workflow_edge.serialized
 
 
 @post(bp, '/delete_edge/<workflow_id>/<edge_id>', 'Edit')
 def delete_edge(workflow_id, edge_id):
-    return jsonify(delete('WorkflowEdge', id=edge_id))
+    return delete('WorkflowEdge', id=edge_id)
 
 
 @post(bp, '/save_positions/<workflow_id>', 'Edit')
@@ -253,4 +250,4 @@ def save_positions(workflow_id):
         job = fetch('Job', id=job_id)
         job.positions[workflow.name] = (position['x'], position['y'])
     db.session.commit()
-    return jsonify(True)
+    return True

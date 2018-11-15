@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType
+from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.models import Service
@@ -10,7 +10,6 @@ class UpdateInventoryService(Service):
     __tablename__ = 'UpdateInventoryService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=False)
     update_dictionnary = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {

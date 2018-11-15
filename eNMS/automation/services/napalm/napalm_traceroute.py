@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
@@ -13,7 +13,6 @@ class NapalmTracerouteService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
-    multiprocessing = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     source_ip = Column(String)
     timeout = Column(Integer)

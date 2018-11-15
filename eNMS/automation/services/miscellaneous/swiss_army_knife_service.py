@@ -2,7 +2,7 @@ from flask_mail import Message
 from json import dumps
 from os import remove
 from requests import post
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Column, ForeignKey, Integer
 
 from eNMS import mail
 from eNMS.automation.models import Service
@@ -15,7 +15,6 @@ class SwissArmyKnifeService(Service):
     __tablename__ = 'SwissArmyKnifeService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'SwissArmyKnifeService',

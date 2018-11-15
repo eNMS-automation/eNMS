@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import napalm_connection
 from eNMS.automation.models import Service
@@ -10,7 +10,6 @@ class ConfigureBgpService(Service):
     __tablename__ = 'ConfigureBgpService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    multiprocessing = Column(Boolean, default=True)
     local_as = Column(Integer)
     loopback = Column(String)
     loopback_ip = Column(String)

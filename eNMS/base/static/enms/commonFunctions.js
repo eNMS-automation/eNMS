@@ -69,7 +69,21 @@ function partial(func, ...args) { // eslint-disable-line no-unused-vars
  * @return {capitalizedString}
  */
 function capitalize(string) { // eslint-disable-line no-unused-vars
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Process results.
+ * @param {results} results - Results.
+ */
+function processResults(callback, results) {
+  if (!results) {
+    alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+  } else if (results.error) {
+    alertify.notify(results.error, 'error', 5);
+  } else {
+    callback(results);
+  }
 }
 
 /**
@@ -82,13 +96,7 @@ function call(url, callback) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: url,
     success: function(results) {
-      if (!results) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-      } else if (results.failure) {
-        alertify.notify(results.error, 'error', 5);
-      } else {
-        callback(results);
-      }
+      processResults(callback, results)
     },
   });
 }
@@ -106,13 +114,7 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
       url: url,
       data: $(form).serialize(),
       success: function(results) {
-        if (!results) {
-          alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
-        } else if (results.failure) {
-          alertify.notify(results.error, 'error', 5);
-        } else {
-          callback(results);
-        }
+        processResults(callback, results)
       },
     });
   }

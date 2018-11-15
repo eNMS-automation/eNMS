@@ -55,7 +55,7 @@ def administration():
 @get(bp, '/migrations', 'View')
 def migrations():
     return dict(
-        migrations_form=MigrationsForm(request.form, 'Parameters'),
+        migrations_form=MigrationsForm(request.form),
         folders=listdir(app.path / 'migrations' / 'import_export')
     )
 

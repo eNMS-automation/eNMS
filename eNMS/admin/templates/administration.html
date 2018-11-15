@@ -13,6 +13,7 @@
         <div class="x_panel">
           <div class="x_content">
             <div class="col-md-10 col-xs-10 col-md-offset-1">
+              {{ form.boolean_fields() }}
               {% for title, properties in form.categories.items() %}
                 <div class="x_title">
                   <h4 class="text-center">{{ title }}</h4>

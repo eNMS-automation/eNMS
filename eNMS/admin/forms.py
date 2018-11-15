@@ -20,6 +20,7 @@ class LoginForm(FlaskForm):
 
 
 class AddUser(FlaskForm):
+    list_fields = HiddenField(default='permissions')
     id = HiddenField()
     name = StringField()
     password = PasswordField()
@@ -29,6 +30,7 @@ class AddUser(FlaskForm):
 
 
 class AdministrationForm(FlaskForm):
+    boolean_fields = HiddenField(default='mattermost_verify_certificate')
     tacacs_ip_address = StringField('IP address')
     tacacs_password = PasswordField()
     tacacs_port = IntegerField(default=49)
@@ -80,5 +82,6 @@ class AdministrationForm(FlaskForm):
 
 
 class MigrationsForm(FlaskForm):
-    export_choices = [(p, p.capitalize()) for p in import_properties]
+    list_fields = HiddenField(default='import_export_types')
+    export_choices = [(p, p) for p in import_properties]
     import_export_types = SelectMultipleField(choices=export_choices)

@@ -76,7 +76,7 @@ class AddPoolForm(FlaskForm):
 
 
 class PoolObjectsForm(FlaskForm):
-    list_field = HiddenField(default='devices,links')
+    list_fields = HiddenField(default='devices,links')
     devices = MultipleObjectField('Device')
     links = MultipleObjectField('Link')
 

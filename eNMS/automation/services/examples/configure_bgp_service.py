@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import napalm_connection
 from eNMS.automation.models import Service

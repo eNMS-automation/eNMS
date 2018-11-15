@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS

@@ -69,21 +69,18 @@ updated_response = {
 
 
 def rest_api_test(user_client):
-    # POST: object creation
     response = post(
         'http://127.0.0.1:5000/rest/object/device',
         data=dumps(device)
     )
     assert loads(response.content) == expected_response
     assert len(fetch_all('Device')) == 1
-    # GET: retrieve object properties
     response = get(
         'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
     )
     assert loads(response.content) == expected_response
     assert len(fetch_all('Device')) == 1
-    # PUT: update object properties
     put('http://127.0.0.1:5000/rest/object/device', data=dumps(updated_device))
     response = get(
         'http://127.0.0.1:5000/rest/object/device/router10',
@@ -91,7 +88,6 @@ def rest_api_test(user_client):
     )
     assert loads(response.content) == updated_response
     assert len(fetch_all('Device')) == 1
-    # DELETE: delete an object
     delete(
         'http://127.0.0.1:5000/rest/object/device/router10',
         headers={'Accept': 'application/json'}
@@ -153,7 +149,6 @@ def rest_service_test(user_client):
         headers={'Accept': 'application/json'}
     )
     assert len(fetch_all('Task')) == 1
-    # wait a bit for the task to run
     sleep(30)
     assert len(fetch_all('Device')) == 1
     user_client.post(
@@ -167,6 +162,5 @@ def rest_service_test(user_client):
         'http://127.0.0.1:5000/rest/execute_task/task_delete_router',
         headers={'Accept': 'application/json'}
     )
-    # wait a bit for the task to run
     sleep(30)
     assert len(fetch_all('Device')) == 0

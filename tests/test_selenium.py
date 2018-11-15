@@ -1,10 +1,6 @@
 from tests.test_base import urls
 
 
-# this test uses selenium to check, for all pages of gentelella, that there
-# are no severe entry in chromium logs.
-# it is renamed selenium_test instead of test_selenium to be ignored by pytest
-# (and therefore Travis CI) for now.
 def selenium_test(selenium_client):
     for blueprint, pages in urls.items():
         for page in pages:

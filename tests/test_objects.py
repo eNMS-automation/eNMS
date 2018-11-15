@@ -37,22 +37,17 @@ def define_link(subtype, source, destination):
 
 
 def test_manual_object_creation(user_client):
-    # we create two devices per type
     for subtype in device_subtypes:
         for description in ('desc1', 'desc2'):
             obj_dict = define_device(subtype, description)
             user_client.post('/update/device', data=obj_dict)
-    # for each type of link, we select the first 3 devices in the device row
-    # and create a link between each pair of devices (including loopback links)
     for subtype in link_subtypes:
         devices = fetch_all('Device')
         for source in devices[:3]:
             for destination in devices[:3]:
                 obj_dict = define_link(subtype, source.name, destination.name)
                 user_client.post('/update/link', data=obj_dict)
-    # - exactly 16 devices in total
     assert len(fetch_all('Device')) == 43
-    # - exactly 6*9 = 54 links in total
     assert len(fetch_all('Link')) == 82
 
 

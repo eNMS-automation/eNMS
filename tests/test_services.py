@@ -3,10 +3,6 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.base.helpers import fetch_all
 
-# test the creation of configuration service (netmiko / napalm)
-# test the creation of file transfer service (netmiko via SCP)
-# test the creation of ansible service
-
 
 netmiko_ping = ImmutableMultiDict([
     ('name', 'netmiko_ping'),

@@ -63,10 +63,6 @@ def check_blueprints(*blueprints):
     return decorator
 
 
-# test the login system: login, user creation, logout
-# test that all pages respond with HTTP 403 if not logged in, 200 otherwise
-
-
 def test_authentication(base_client):
     for blueprint, pages in urls.items():
         for page in pages:
@@ -82,6 +78,5 @@ def test_urls(user_client):
             page_url = blueprint + page
             r = user_client.get(page_url, follow_redirects=True)
             assert r.status_code == 200
-    # logout and test that we cannot access anything anymore
     r = user_client.get('/admin/logout', follow_redirects=True)
     test_authentication(user_client)

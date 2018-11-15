@@ -37,12 +37,3 @@ google_earth_dict = ImmutableMultiDict([
     ('line_width', '2'),
     ('netmiko_service', '')
 ])
-
-
-# @check_blueprints('/views')
-# def test_google_earth(user_client):
-#     create_from_file(user_client, 'europe.xls')
-#     user_client.post(
-#         '/views/export_to_google_earth',
-#         data=google_earth_dict
-#     )

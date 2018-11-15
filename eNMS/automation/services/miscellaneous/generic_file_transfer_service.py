@@ -3,8 +3,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
-from os.path import expanduser
 from paramiko import SSHClient, AutoAddPolicy
+from pathlib import Path
 from scp import SCPClient
 
 
@@ -24,10 +24,10 @@ class GenericFileTransferService(Service):
         'polymorphic_identity': 'GenericFileTransferService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         ssh = SSHClient()
         ssh.set_missing_host_key_policy(AutoAddPolicy())
-        ssh.load_host_keys(expanduser('~' / '.ssh' / 'known_hosts'))
+        ssh.load_host_keys(Path.home() / '.ssh' / 'known_hosts')
         ssh.connect(
             device.ip_address,
             username=device.username,

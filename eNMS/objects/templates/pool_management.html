@@ -20,6 +20,7 @@
         <div class="x_panel">
           <div class="x_content">
             <form id="edit-pool-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+              {{ pool_object_form.boolean_fields() }}
                 <div class="form-group">
                 {{ form['name'](id="pool-name", class="form-control required", placeholder="Name") }}<br>
                 {{ form['description'](id="pool-description", class="form-control", placeholder="Description") }}<br>

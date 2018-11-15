@@ -5,7 +5,6 @@ from wtforms import (
     HiddenField,
     IntegerField,
     PasswordField,
-    SelectMultipleField,
     SelectField,
     StringField
 )
@@ -29,12 +28,21 @@ def configure_device_form(cls):
 def configure_pool_form(cls):
     cls.device_properties = device_public_properties
     cls.link_properties = link_public_properties
-    for property in device_public_properties:
-        setattr(cls, 'device_' + property, StringField(property))
-        setattr(cls, 'device_' + property + '_regex', BooleanField('Regex'))
-    for property in link_public_properties:
-        setattr(cls, 'link_' + property, StringField(property))
-        setattr(cls, 'link_' + property + '_regex', BooleanField('Regex'))
+    boolean_fields = []
+    for cls, properties in (
+        ('device', device_public_properties),
+        ('link', link_public_properties)
+    ):
+        for property in properties:
+            boolean_field = f'{cls}_{property}_regex'
+            setattr(cls, f'{cls}_{property}', StringField(property))
+            setattr(cls, boolean_field, BooleanField('Regex'))
+            boolean_fields.append(boolean_field)
+    setattr(
+        cls,
+        'boolean_fields',
+        HiddenField(default=','.join(boolean_fields))
+    )
     return cls
 
 

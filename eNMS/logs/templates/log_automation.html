@@ -20,6 +20,7 @@
           <div class="x_content">
             <form id="edit-logrule-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
               {{ log_automation_form.id() }}
+              {{ log_automation_form.list_fields() }}
               <label>Name</label>
               <div class='form-group'>
                 {{ log_automation_form.name(class="form-control required") }}

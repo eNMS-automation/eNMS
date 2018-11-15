@@ -112,7 +112,7 @@ def save_parameters():
 def migration_export():
     name = request.form['name']
     for cls_name in request.form['import_export_types']:
-        path = app.path / 'migrations' / 'import_export' / name
+        path = app.path / 'migrations' / name
         if not exists(path):
             makedirs(path)
         with open(path / f'{cls_name}.yaml', 'w') as migration_file:
@@ -124,7 +124,7 @@ def migration_export():
 def migration_import():
     name, status = request.form['name'], 'Import successful.'
     for cls in request.form['import_export_types']:
-        path = app.path / 'migrations' / 'import_export' / name / f'{cls}.yaml'
+        path = app.path / 'migrations' / name / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             for obj in load(migration_file):
                 try:

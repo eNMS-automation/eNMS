@@ -34,9 +34,10 @@
           <h4 class="modal-title" id="title">Add Service or Workflow</h4>
         </div>
         <form id="add-job-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+          {{ add_job_form.list_fields() }}
           <div class="modal-body">
             <div class="form-group">
-              {{ add_job_form.job(class="form-control") }}
+              {{ add_job_form.add_jobs(class="form-control", size=15) }}
             </div>
           </div>
           <div class="modal-footer">

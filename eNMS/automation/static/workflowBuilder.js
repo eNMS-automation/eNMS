@@ -105,15 +105,17 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5);
   } else {
-    const url = `/automation/add_to_workflow/${workflow.id}`;
-    fCall(url, '#add-job-form', function(job) {
-      $('#add-job').modal('hide');
-      if (graph.findNode(job.id).length == 0) {
-        nodes.add(jobToNode(job));
-        saveNode(job);
-        alertify.notify(`Job '${job.name}' created.`, 'success', 5);
-      } else {
-        alertify.notify(`Job already in workflow.`, 'error', 5);
+    const url = `/automation/add_jobs_to_workflow/${workflow.id}`;
+    fCall(url, '#add-job-form', function(jobs) {
+      jobs.forEach((job) => {
+        $('#add-job').modal('hide');
+        if (graph.findNode(job.id).length == 0) {
+          nodes.add(jobToNode(job));
+          saveNode(job);
+          alertify.notify(`Job '${job.name}' created.`, 'success', 5);
+        } else {
+          alertify.notify(`Job already in workflow.`, 'error', 5);
+        }
       }
     });
   }
@@ -361,5 +363,6 @@ $(window).bind('beforeunload', function() {
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
+  convertSelect('#add_jobs');
   getWorkflowState();
 })();

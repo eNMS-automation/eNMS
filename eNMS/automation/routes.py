@@ -57,11 +57,11 @@ def workflow_builder():
     workflow = fetch('Workflow', id=session.get('workflow', None))
     return dict(
         workflow=workflow.serialized if workflow else None,
-        add_job_form=AddJobForm(request.form, 'Workflow'),
+        add_job_form=AddJobForm(request.form),
         workflow_builder_form=WorkflowBuilderForm(request.form),
         workflow_creation_form=JobForm(request.form),
         compare_logs_form=CompareLogsForm(request.form),
-        service_form=JobForm(request.form, 'Service'),
+        service_form=JobForm(request.form),
         services_classes=list(service_classes)
     )
 
@@ -172,13 +172,14 @@ def clear_logs(job_id):
     return True
 
 
-@post(bp, '/add_to_workflow/<workflow_id>', 'Edit')
-def add_to_workflow(workflow_id):
+@post(bp, '/add_jobs_to_workflow/<workflow_id>', 'Edit')
+def add_jobs_to_workflow(workflow_id):
     workflow = fetch('Workflow', id=workflow_id)
-    job = fetch('Job', id=request.form['job'])
-    job.workflows.append(workflow)
+    jobs = objectify('Job', request.form['add_jobs'])
+    for job in jobs:
+        job.workflows.append(workflow)
     db.session.commit()
-    return job.serialized
+    return [job.serialized for job in jobs]
 
 
 @post(bp, '/duplicate_workflow/<workflow_id>', 'Edit')

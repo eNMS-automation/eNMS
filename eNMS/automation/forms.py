@@ -42,7 +42,8 @@ class CompareLogsForm(FlaskForm):
 
 
 class AddJobForm(FlaskForm):
-    job = ObjectField('Job')
+    list_fields = HiddenField(default='add_jobs')
+    add_jobs = MultipleObjectField('Job')
 
 
 class WorkflowBuilderForm(FlaskForm):

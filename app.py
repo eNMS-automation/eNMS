@@ -3,7 +3,7 @@ from pathlib import Path
 from sys import exit
 
 from config import config_dict
-from eNMS import create_app, db
+from eNMS import create_app
 
 get_config_mode = environ.get('ENMS_CONFIG_MODE', 'Debug')
 

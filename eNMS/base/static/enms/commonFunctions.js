@@ -74,6 +74,7 @@ function capitalize(string) { // eslint-disable-line no-unused-vars
 
 /**
  * Process results.
+ * @param {callback} callback - Callback function.
  * @param {results} results - Results.
  */
 function processResults(callback, results) {
@@ -96,7 +97,7 @@ function call(url, callback) { // eslint-disable-line no-unused-vars
     type: 'POST',
     url: url,
     success: function(results) {
-      processResults(callback, results)
+      processResults(callback, results);
     },
   });
 }
@@ -114,7 +115,7 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
       url: url,
       data: $(form).serialize(),
       success: function(results) {
-        processResults(callback, results)
+        processResults(callback, results);
       },
     });
   }
@@ -142,7 +143,9 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
   call(`/delete/${type}/${id}`, function(result) {
     $('#confirm-delete').modal('hide');
     table.row($(`#${id}`)).remove().draw(false);
-    alertify.notify(`${capitalize(type)} '${result.name}' deleted.`, 'error', 5);
+    alertify.notify(
+      `${capitalize(type)} '${result.name}' deleted.`, 'error', 5
+    );
   });
 }
 

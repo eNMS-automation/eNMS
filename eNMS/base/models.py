@@ -1,4 +1,3 @@
-from flask_wtf import FlaskForm
 from wtforms import SelectField, SelectMultipleField
 from json import dumps, loads
 

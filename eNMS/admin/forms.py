@@ -6,7 +6,6 @@ from wtforms import (
     IntegerField,
     StringField,
     PasswordField,
-    SelectField,
     SelectMultipleField
 )
 

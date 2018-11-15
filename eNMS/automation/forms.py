@@ -4,8 +4,7 @@ from wtforms import (
     HiddenField,
     IntegerField,
     StringField,
-    SelectField,
-    SelectMultipleField
+    SelectField
 )
 
 from eNMS.base.models import MultipleObjectField, ObjectField

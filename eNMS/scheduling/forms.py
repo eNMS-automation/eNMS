@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import HiddenField, SelectField, StringField
+from wtforms import HiddenField, StringField
 
 from eNMS.base.models import ObjectField
 

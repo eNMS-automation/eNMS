@@ -5,12 +5,7 @@ from sqlalchemy import exc
 
 from eNMS import db
 from eNMS.base.classes import classes
-from eNMS.base.properties import (
-    boolean_properties,
-    list_properties,
-    pretty_names,
-    property_types
-)
+from eNMS.base.properties import pretty_names, property_types
 
 
 def add_classes(*models):

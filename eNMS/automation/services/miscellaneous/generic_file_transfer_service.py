@@ -1,11 +1,10 @@
+from paramiko import SSHClient, AutoAddPolicy
+from pathlib import Path
+from scp import SCPClient
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-
-from paramiko import SSHClient, AutoAddPolicy
-from pathlib import Path
-from scp import SCPClient
 
 
 class GenericFileTransferService(Service):

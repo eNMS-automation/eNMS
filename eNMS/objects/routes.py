@@ -127,7 +127,6 @@ def update_pools():
 
 @post(bp, '/import_topology', 'Edit')
 def import_topology():
-    print(request.form)
     return object_import(request.form, request.files['file'])
 
 

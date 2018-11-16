@@ -92,8 +92,8 @@ class PoolObjectsForm(FlaskForm):
 class ImportExportForm(FlaskForm):
     boolean_fields = HiddenField(default='update_pools,replace')
     name = StringField()
-    update_pools = BooleanField('Update pools after import')
-    replace = BooleanField('Replace Existing Topology')
+    update_pools = BooleanField()
+    replace = BooleanField()
 
 
 class OpenNmsForm(FlaskForm):

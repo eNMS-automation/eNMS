@@ -8,7 +8,14 @@ from requests import (
 )
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import (
-    Boolean, Column, ForeignKey, Integer, PickleType, String
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String
+)
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import substitute
@@ -53,22 +60,22 @@ class RestCallService(Service):
         if len(args) == 2:
             device, payload = args
         rest_url = substitute(self.url, locals())
+        kwargs = {
+            p: getattr(self, p)
+            for p in ('headers', 'params', 'timeout')
+        }
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
                 rest_url,
-                headers=self.headers,
-                params=self.params,
-                timeout=self.timeout,
-                auth=HTTPBasicAuth(self.username, self.password)
+                auth=HTTPBasicAuth(self.username, self.password),
+                **kwargs
             ).json()
         else:
             result = loads(self.request_dict[self.call_type](
                 rest_url,
-                headers=self.headers,
-                params=self.params,
-                timeout=self.timeout,
                 data=dumps(self.payload),
-                auth=HTTPBasicAuth(self.username, self.password)
+                auth=HTTPBasicAuth(self.username, self.password),
+                **kwargs
             ).content)
         match = substitute(self.content_match, locals())
         success = (

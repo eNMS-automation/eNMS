@@ -8,11 +8,9 @@ from flask import (
 )
 from flask_login import current_user, login_user, logout_user
 from logging import info
-from os import listdir, makedirs
-from os.path import exists
+from os import listdir
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII as FLAG
-from yaml import dump, load
 
 from eNMS import db
 from eNMS.admin import bp
@@ -111,14 +109,7 @@ def save_parameters():
 
 @post(bp, '/migration_export', 'Admin')
 def migration_export():
-    name = request.form['name']
-    for cls_name in request.form['import_export_types']:
-        path = app.path / 'migrations' / name
-        if not exists(path):
-            makedirs(path)
-        with open(path / f'{cls_name}.yaml', 'w') as migration_file:
-            dump(export(cls_name), migration_file, default_flow_style=False)
-    return True
+    return migrate(app.path, request)
 
 
 @post(bp, '/migration_import', 'Admin')

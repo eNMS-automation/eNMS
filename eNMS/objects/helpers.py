@@ -1,3 +1,10 @@
+from logging import info
+from pathlib import Path
+from werkzeug.utils import secure_filename
+from xlrd import open_workbook
+from xlrd.biffh import XLRDError
+from xlwt import Workbook
+
 from eNMS import db
 from eNMS.base.helpers import fetch_all
 
@@ -17,9 +24,9 @@ def allowed_file(name, allowed_extensions):
 
 
 def object_import(request):
-    if request.form.get('replace', None) == 'y':
+    if request.get('replace', None) == 'y':
         delete_all('Device')
-    if request.form.get('update-pools', None) == 'y':
+    if request.get('update-pools', None) == 'y':
         for pool in fetch_all('Pool'):
             pool.compute_pool()
         db.session.commit()

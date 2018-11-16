@@ -1,14 +1,8 @@
 from flask import current_app as app, request
 from flask_login import current_user
-from logging import info
-from pathlib import Path
 from pynetbox import api as netbox_api
 from requests import get as http_get
 from subprocess import Popen
-from werkzeug.utils import secure_filename
-from xlrd import open_workbook
-from xlrd.biffh import XLRDError
-from xlwt import Workbook
 
 from eNMS import db
 from eNMS.base.helpers import (
@@ -31,7 +25,7 @@ from eNMS.objects.forms import (
     OpenNmsForm,
     PoolObjectsForm
 )
-from eNMS.objects.helpers import allowed_file
+from eNMS.objects.helpers import allowed_file, object_export, object_import
 from eNMS.base.properties import (
     device_public_properties,
     export_properties,
@@ -133,20 +127,12 @@ def update_pools():
 
 @post(bp, '/import_topology', 'Edit')
 def import_topology():
-
+    object_import(request.form)
 
 
 @post(bp, '/export_topology', 'View')
 def export_topology():
-    workbook = Workbook()
-    for obj_type in ('Device', 'Link'):
-        sheet = workbook.add_sheet(obj_type)
-        for index, property in enumerate(export_properties[obj_type]):
-            sheet.write(0, index, property)
-            for obj_index, obj in enumerate(serialize(obj_type), 1):
-                sheet.write(obj_index, index, obj[property])
-    workbook.save(Path.cwd() / 'projects' / 'objects.xls')
-    return True
+    object_export(request.form)
 
 
 @post(bp, '/query_opennms', 'Edit')

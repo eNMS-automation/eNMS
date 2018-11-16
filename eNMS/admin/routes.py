@@ -20,6 +20,7 @@ from eNMS.admin.forms import (
     LoginForm,
     MigrationsForm
 )
+from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.base.helpers import (
     delete_all,
     export,
@@ -107,23 +108,9 @@ def save_parameters():
     return True
 
 
-@post(bp, '/migration_export', 'Admin')
-def migration_export():
-    return migrate(app.path, request)
-
-
-@post(bp, '/migration_import', 'Admin')
-def migration_import():
-    status = 'Import successful.'
-    if request.form['empty_database_before_import']:
-        delete_all(*request.form['import_export_types'])
-    for cls in request.form['import_export_types']:
-        path = app.path / 'migrations' / request.form['name'] / f'{cls}.yaml'
-        with open(path, 'r') as migration_file:
-            for obj in load(migration_file):
-                try:
-                    factory(obj.pop('type') if cls == 'Service' else cls, **obj)
-                except Exception as e:
-                    info(f'{str(obj)} could not be imported ({str(e)})')
-                    status = 'Partial import (see logs).'
-    return status
+@post(bp, '/migration_<direction>', 'Admin')
+def migration(direction):
+    return {
+        'import': migrate_import,
+        'export': migrate_export
+    }[direction](app.path, request)

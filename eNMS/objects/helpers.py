@@ -16,7 +16,7 @@ def allowed_file(name, allowed_extensions):
     return allowed_syntax and allowed_extension
 
 
-def object_import():
+def object_import(request):
     if request.form.get('replace', None) == 'y':
         delete_all('Device')
     if request.form.get('update-pools', None) == 'y':
@@ -41,3 +41,15 @@ def object_import():
                     result = 'Partial import (see logs).'
             db.session.commit()
     return result
+
+
+def object_export(request):
+    workbook = Workbook()
+    for obj_type in ('Device', 'Link'):
+        sheet = workbook.add_sheet(obj_type)
+        for index, property in enumerate(export_properties[obj_type]):
+            sheet.write(0, index, property)
+            for obj_index, obj in enumerate(serialize(obj_type), 1):
+                sheet.write(obj_index, index, obj[property])
+    workbook.save(Path.cwd() / 'projects' / 'objects.xls')
+    return True

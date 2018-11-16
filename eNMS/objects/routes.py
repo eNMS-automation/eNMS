@@ -20,6 +20,7 @@ from eNMS.objects.forms import (
     AddLink,
     AddDevice,
     AddPoolForm,
+    ImportExportForm,
     NetboxForm,
     OpenNmsForm,
     PoolObjectsForm
@@ -63,6 +64,7 @@ def pool_management():
 @get(bp, '/import_export', 'View')
 def import_export():
     return dict(
+        import_export_form=ImportExportForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
         parameters=get_one('Parameters'),
@@ -125,12 +127,12 @@ def update_pools():
 
 @post(bp, '/import_topology', 'Edit')
 def import_topology():
+    print(request.form)
     return object_import(request.form, request.files['file'])
 
 
 @post(bp, '/export_topology', 'View')
 def export_topology():
-    print(request.form)
     return object_export(request.form, app.path)
 
 

@@ -94,6 +94,7 @@ class Job(Base):
                 sleep(self.time_between_retries)
         results['failed_attempts'] = failed_attempts
         self.logs[now] = results
+        db.session.commit()
         return results, now
 
     def get_results(self, payload, device=None):

@@ -38,12 +38,12 @@ Create or update an object
  # via a POST or PUT call to the following URL
  http://IP_address/rest/object/object_type
 
-Execute a job (i.e a service, or a workflow)
-********************************************
+Run a service, or a workflow)
+*****************************
 
 ::
 
- # via a GET call to the following URL
+ # via a POST call to the following URL
  http://IP_address/rest/run_job/job_name
 
 The job will run immediately.
@@ -78,7 +78,7 @@ Example of payload:
 ::
 
  {
-     "name": "test_project",
-     "import_export_types": ["User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
-     "empty_database_before_import": "False"
+  "name": "test_project",
+  "import_export_types": ["User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
+  "empty_database_before_import": "False"
  }

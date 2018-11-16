@@ -25,10 +25,13 @@ class Heartbeat(Resource):
 class RestAutomation(Resource):
     decorators = [auth.login_required]
 
-    def get(self, job_name):
+    def post(self, job_name):
         job = fetch('Job', name=job_name)
-        results = job.run()
-        return {'job': job.serialized, 'results': results}
+        targets = {
+            fetch('Device', name=device_name)
+            for device_name in request.get_json()['devices']
+        }
+        return job.try_run(remaining_targets=targets)
 
 
 class GetInstance(Resource):
@@ -55,7 +58,6 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction):
-        print(request.get_json())
         return {
             'import': migrate_import,
             'export': migrate_export

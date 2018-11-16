@@ -13,7 +13,10 @@
         <div class="x_content" style="min-height: 450px">
           <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
             {{ migrations_form.list_fields() }}
+            {{ migrations_form.boolean_fields() }}
             <div>
+              <label>Empty Database before Import</label>
+              {{ migrations_form.empty_database_before_import() }}<br><br>
               <label>
                 Directory pathname to use in eNMS_HOME/migrations/import_export :<br>
                 Example: "10312018_backup"

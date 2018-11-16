@@ -1,0 +1,144 @@
+- destination: 7
+  destination_id: 7
+  id: 1
+  name: Netmiko_VRF_workflow 0 -> 2
+  source: 1
+  source_id: 1
+  subtype: true
+  workflow: 11
+- destination: 8
+  destination_id: 8
+  id: 2
+  name: Netmiko_VRF_workflow 2 -> 3
+  source: 7
+  source_id: 7
+  subtype: true
+  workflow: 11
+- destination: 9
+  destination_id: 9
+  id: 3
+  name: Netmiko_VRF_workflow 3 -> 4
+  source: 8
+  source_id: 8
+  subtype: true
+  workflow: 11
+- destination: 10
+  destination_id: 10
+  id: 4
+  name: Netmiko_VRF_workflow 4 -> 5
+  source: 9
+  source_id: 9
+  subtype: true
+  workflow: 11
+- destination: 2
+  destination_id: 2
+  id: 5
+  name: Netmiko_VRF_workflow 5 -> 1
+  source: 10
+  source_id: 10
+  subtype: true
+  workflow: 11
+- destination: 12
+  destination_id: 12
+  id: 6
+  name: Napalm_VRF_workflow 0 -> 2
+  source: 1
+  source_id: 1
+  subtype: true
+  workflow: 14
+- destination: 8
+  destination_id: 8
+  id: 7
+  name: Napalm_VRF_workflow 2 -> 3
+  source: 12
+  source_id: 12
+  subtype: true
+  workflow: 14
+- destination: 13
+  destination_id: 13
+  id: 8
+  name: Napalm_VRF_workflow 3 -> 4
+  source: 8
+  source_id: 8
+  subtype: true
+  workflow: 14
+- destination: 10
+  destination_id: 10
+  id: 9
+  name: Napalm_VRF_workflow 4 -> 5
+  source: 13
+  source_id: 13
+  subtype: true
+  workflow: 14
+- destination: 2
+  destination_id: 2
+  id: 10
+  name: Napalm_VRF_workflow 5 -> 1
+  source: 10
+  source_id: 10
+  subtype: true
+  workflow: 14
+- destination: 15
+  destination_id: 15
+  id: 11
+  name: payload_transfer_workflow 0 -> 2
+  source: 1
+  source_id: 1
+  subtype: true
+  workflow: 21
+- destination: 16
+  destination_id: 16
+  id: 12
+  name: payload_transfer_workflow 2 -> 3
+  source: 15
+  source_id: 15
+  subtype: true
+  workflow: 21
+- destination: 17
+  destination_id: 17
+  id: 13
+  name: payload_transfer_workflow 2 -> 4
+  source: 15
+  source_id: 15
+  subtype: true
+  workflow: 21
+- destination: 18
+  destination_id: 18
+  id: 14
+  name: payload_transfer_workflow 3 -> 5
+  source: 16
+  source_id: 16
+  subtype: true
+  workflow: 21
+- destination: 19
+  destination_id: 19
+  id: 15
+  name: payload_transfer_workflow 5 -> 6
+  source: 18
+  source_id: 18
+  subtype: true
+  workflow: 21
+- destination: 20
+  destination_id: 20
+  id: 16
+  name: payload_transfer_workflow 6 -> 7
+  source: 19
+  source_id: 19
+  subtype: true
+  workflow: 21
+- destination: 20
+  destination_id: 20
+  id: 17
+  name: payload_transfer_workflow 4 -> 7
+  source: 17
+  source_id: 17
+  subtype: true
+  workflow: 21
+- destination: 2
+  destination_id: 2
+  id: 18
+  name: payload_transfer_workflow 7 -> 1
+  source: 20
+  source_id: 20
+  subtype: true
+  workflow: 21

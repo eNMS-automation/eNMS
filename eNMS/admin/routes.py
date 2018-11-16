@@ -56,7 +56,7 @@ def administration():
 def migrations():
     return dict(
         migrations_form=MigrationsForm(request.form),
-        folders=listdir(app.path / 'migrations' / 'import_export')
+        folders=listdir(app.path / 'migrations')
     )
 
 
@@ -122,6 +122,8 @@ def migration_export():
 
 @post(bp, '/migration_import', 'Admin')
 def migration_import():
+    if request.form['empty_database_before_import']:
+        pass
     name, status = request.form['name'], 'Import successful.'
     for cls in request.form['import_export_types']:
         path = app.path / 'migrations' / name / f'{cls}.yaml'

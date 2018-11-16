@@ -1,0 +1,89 @@
+- description: Create and delete a VRF with Netmiko
+  devices: []
+  edges:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  id: 11
+  jobs:
+  - 1
+  - 2
+  - 7
+  - 8
+  - 9
+  - 10
+  multiprocessing: false
+  name: Netmiko_VRF_workflow
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  time_between_retries: 10
+  type: Workflow
+  vendor: Arista
+  waiting_time: 0
+- description: Create and delete a VRF with Napalm
+  devices: []
+  edges:
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  id: 14
+  jobs:
+  - 1
+  - 2
+  - 12
+  - 8
+  - 13
+  - 10
+  multiprocessing: false
+  name: Napalm_VRF_workflow
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  time_between_retries: 10
+  type: Workflow
+  vendor: Arista
+  waiting_time: 0
+- description: ReST call, Napalm getters, etc
+  devices: []
+  edges:
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  id: 21
+  jobs:
+  - 1
+  - 2
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  multiprocessing: false
+  name: payload_transfer_workflow
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  time_between_retries: 10
+  type: Workflow
+  vendor: Arista
+  waiting_time: 0

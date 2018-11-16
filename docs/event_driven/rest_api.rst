@@ -57,3 +57,28 @@ Heartbeat
  http://IP_address/rest/is_alive
 
 eNMS returns ``True`` if it is still alive.
+
+Migrations
+**********
+
+The migration system can be triggered from the ReST API:
+
+::
+
+ # Export: via a POST call to the following URL
+ http://IP_address/rest/migrate/export
+
+ # Import: via a POST call to the following URL
+ http://IP_address/rest/migrate/import
+
+The payload must contain the name of the project, the types of object to import/export, and an boolean parameter called ``empty_database_before_import`` that tells eNMS whether or not to empty the database before importing.
+
+Example of payload:
+
+::
+
+ {
+     "name": "test_project",
+     "import_export_types": ["User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
+     "empty_database_before_import": "False"
+ }

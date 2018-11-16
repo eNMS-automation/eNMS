@@ -23,11 +23,9 @@ class SwissArmyKnifeService(Service):
     def job(self, *args):
         return getattr(self, self.name)(*args)
 
-    # Instance call "job1" with multiprocessing set to True
     def job1(self, device, payload):
         return {'success': True, 'result': ''}
 
-    # Instance call "job2" with multiprocessing set to False
     def job2(self, payload):
         return {'success': True, 'result': ''}
 

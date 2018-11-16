@@ -44,7 +44,7 @@ def calendar():
         tasks[task.name] = {**task.serialized, **{'date': js_date}}
     return dict(
         tasks=tasks,
-        scheduling_form=SchedulingForm(request.form, 'Task')
+        scheduling_form=SchedulingForm(request.form)
     )
 
 

@@ -4,6 +4,7 @@ from flask_restful import Api, Resource
 from eNMS import auth
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.base.helpers import delete, factory, fetch
+from eNMS.objects.helpers import object_export, object_import
 
 
 @auth.get_password
@@ -64,6 +65,16 @@ class Migrate(Resource):
         }[direction](current_app.path, request.get_json())
 
 
+class Topology(Resource):
+    decorators = [auth.login_required]
+
+    def post(self, direction):
+        if direction == 'import':
+            object_import(request.get_json(), request.files['file'])
+        elif direction == 'export':
+            object_import(current_app.path, request.get_json())
+
+
 def configure_rest_api(app):
     api = Api(app)
     api.add_resource(Heartbeat, '/rest/is_alive')
@@ -71,3 +82,4 @@ def configure_rest_api(app):
     api.add_resource(UpdateInstance, '/rest/object/<string:cls>')
     api.add_resource(GetInstance, '/rest/object/<string:cls>/<string:name>')
     api.add_resource(Migrate, '/rest/migrate/<string:direction>')
+    api.add_resource(Topology, '/rest/topology/<string:direction>')

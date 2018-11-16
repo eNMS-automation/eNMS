@@ -1,6 +1,9 @@
+from logging import info
 from os import makedirs
 from os.path import exists
 from yaml import dump, load
+
+from eNMS.base.helpers import delete_all, export, factory
 
 
 def migrate_export(path_app, request):
@@ -15,10 +18,10 @@ def migrate_export(path_app, request):
 
 def migrate_import(path_app, request):
     status = 'Import successful.'
-    if request.form['empty_database_before_import']:
-        delete_all(*request.form['import_export_types'])
-    for cls in request.form['import_export_types']:
-        path = app.path / 'migrations' / request.form['name'] / f'{cls}.yaml'
+    if request['empty_database_before_import']:
+        delete_all(*request['import_export_types'])
+    for cls in request['import_export_types']:
+        path = path_app / 'migrations' / request['name'] / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             for obj in load(migration_file):
                 try:

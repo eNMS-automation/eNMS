@@ -7,7 +7,6 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
-from logging import info
 from os import listdir
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII as FLAG
@@ -22,8 +21,6 @@ from eNMS.admin.forms import (
 )
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.base.helpers import (
-    delete_all,
-    export,
     get,
     get_one,
     post,
@@ -31,7 +28,7 @@ from eNMS.base.helpers import (
     fetch,
     serialize
 )
-from eNMS.base.properties import import_properties, user_public_properties
+from eNMS.base.properties import user_public_properties
 from eNMS.objects.helpers import database_filtering
 
 

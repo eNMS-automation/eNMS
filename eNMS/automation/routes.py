@@ -151,6 +151,9 @@ def run_job(job_id):
     job = fetch('Job', id=job_id)
     if job.status == 'Running':
         return {'error': 'Job is already running.'}
+    targets = job.compute_targets()
+    if hasattr(job, 'has_targets') and not targets:
+        return {'error': 'Set devices or pools as targets first.'}
     job.status, job.state = 'Running', {}
     info(f'{job.name}: starting.')
     db.session.commit()

@@ -15,6 +15,7 @@ class NetmikoValidationService(Service):
     __tablename__ = 'NetmikoValidationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     command = Column(String)
     content_match = Column(String)
     content_match_regex = Column(Boolean)
@@ -28,7 +29,7 @@ class NetmikoValidationService(Service):
         'polymorphic_identity': 'NetmikoValidationService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         netmiko_handler = netmiko_connection(self, device)
         command = substitute(self.command, locals())
         res = netmiko_handler.send_command(command)

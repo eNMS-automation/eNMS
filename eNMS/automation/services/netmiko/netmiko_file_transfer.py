@@ -11,6 +11,7 @@ class NetmikoFileTransferService(Service):
     __tablename__ = 'NetmikoFileTransferService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     dest_file = Column(String)
     direction = Column(String)
     direction_values = (('put', 'Upload'), ('get', 'Download'))
@@ -29,7 +30,7 @@ class NetmikoFileTransferService(Service):
         'polymorphic_identity': 'NetmikoFileTransferService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         netmiko_handler = netmiko_connection(self, device)
         transfer_dict = file_transfer(
             netmiko_handler,

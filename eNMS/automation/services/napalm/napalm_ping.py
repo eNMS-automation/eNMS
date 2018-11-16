@@ -11,6 +11,7 @@ class NapalmPingService(Service):
     __tablename__ = 'NapalmPingService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     count = Column(Integer)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
@@ -25,7 +26,7 @@ class NapalmPingService(Service):
         'polymorphic_identity': 'NapalmPingService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         ping = napalm_driver.ping(

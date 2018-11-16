@@ -11,6 +11,7 @@ class NapalmTracerouteService(Service):
     __tablename__ = 'NapalmTracerouteService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
@@ -23,7 +24,7 @@ class NapalmTracerouteService(Service):
         'polymorphic_identity': 'NapalmTracerouteService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         traceroute = napalm_driver.traceroute(

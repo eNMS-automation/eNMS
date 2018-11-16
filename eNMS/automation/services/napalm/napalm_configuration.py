@@ -15,6 +15,7 @@ class NapalmConfigurationService(Service):
     __tablename__ = 'NapalmConfigurationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     action = Column(String)
     action_values = (
         ('load_merge_candidate', 'Load merge'),
@@ -30,7 +31,7 @@ class NapalmConfigurationService(Service):
         'polymorphic_identity': 'NapalmConfigurationService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         config = '\n'.join(substitute(self.content, locals()).splitlines())

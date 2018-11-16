@@ -10,6 +10,7 @@ class ConfigureBgpService(Service):
     __tablename__ = 'ConfigureBgpService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     local_as = Column(Integer)
     loopback = Column(String)
     loopback_ip = Column(String)
@@ -22,7 +23,7 @@ class ConfigureBgpService(Service):
         'polymorphic_identity': 'ConfigureBgpService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         config = f'''

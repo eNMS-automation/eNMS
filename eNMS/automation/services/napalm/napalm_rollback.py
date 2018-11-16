@@ -11,6 +11,7 @@ class NapalmRollbackService(Service):
     __tablename__ = 'NapalmRollbackService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
@@ -19,7 +20,7 @@ class NapalmRollbackService(Service):
         'polymorphic_identity': 'NapalmRollbackService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         napalm_driver = napalm_connection(self, device)
         napalm_driver.open()
         napalm_driver.rollback()

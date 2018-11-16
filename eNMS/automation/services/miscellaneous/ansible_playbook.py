@@ -14,6 +14,7 @@ class AnsiblePlaybookService(Service):
     __tablename__ = 'AnsiblePlaybookService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    has_targets = True
     playbook_path = Column(String)
     arguments = Column(String)
     content_match = Column(String)
@@ -26,7 +27,7 @@ class AnsiblePlaybookService(Service):
         'polymorphic_identity': 'AnsiblePlaybookService',
     }
 
-    def job(self, device, payload):
+    def job(self, device, _):
         arguments = substitute(self.arguments, locals()).split()
         command = ['ansible-playbook']
         if self.pass_device_properties:

@@ -7,7 +7,8 @@ from requests import (
     delete as rest_delete
 )
 from requests.auth import HTTPBasicAuth
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import (
+    Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import substitute
@@ -23,6 +24,9 @@ class RestCallService(Service):
     call_type = Column(String)
     url = Column(String)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
+    params = Column(MutableDict.as_mutable(PickleType), default={})
+    headers = Column(MutableDict.as_mutable(PickleType), default={})
+    timeout = Column(Float, default=15.)
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     username = Column(String)
@@ -52,11 +56,17 @@ class RestCallService(Service):
         if self.call_type in ('GET', 'DELETE'):
             result = self.request_dict[self.call_type](
                 rest_url,
+                headers=self.headers,
+                params=self.params,
+                timeout=self.timeout,
                 auth=HTTPBasicAuth(self.username, self.password)
             ).json()
         else:
             result = loads(self.request_dict[self.call_type](
                 rest_url,
+                headers=self.headers,
+                params=self.params,
+                timeout=self.timeout,
                 data=dumps(self.payload),
                 auth=HTTPBasicAuth(self.username, self.password)
             ).content)

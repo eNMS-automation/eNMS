@@ -45,7 +45,7 @@ class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
     def post(self, cls):
-        return factory(cls, **request.get_json(force=True, silent=True)).name
+        return factory(cls, **request.get_json().name
 
     def put(self, cls):
         return self.post(cls)

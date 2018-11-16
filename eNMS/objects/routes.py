@@ -6,7 +6,6 @@ from subprocess import Popen
 
 from eNMS import db
 from eNMS.base.helpers import (
-    delete_all,
     factory,
     fetch,
     fetch_all,
@@ -25,10 +24,9 @@ from eNMS.objects.forms import (
     OpenNmsForm,
     PoolObjectsForm
 )
-from eNMS.objects.helpers import allowed_file, object_export, object_import
+from eNMS.objects.helpers import object_export, object_import
 from eNMS.base.properties import (
     device_public_properties,
-    export_properties,
     link_table_properties,
     pool_table_properties
 )
@@ -127,12 +125,12 @@ def update_pools():
 
 @post(bp, '/import_topology', 'Edit')
 def import_topology():
-    object_import(request.form)
+    object_import(request.form, request.files['file'])
 
 
 @post(bp, '/export_topology', 'View')
 def export_topology():
-    object_export(request.form)
+    object_export(request.form, app.path)
 
 
 @post(bp, '/query_opennms', 'Edit')

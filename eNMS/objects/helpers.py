@@ -1,12 +1,12 @@
 from logging import info
-from pathlib import Path
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS import db
-from eNMS.base.helpers import fetch_all
+from eNMS.base.helpers import delete_all, factory, fetch_all, serialize
+from eNMS.base.properties import export_properties
 
 
 def database_filtering(pool):
@@ -23,14 +23,14 @@ def allowed_file(name, allowed_extensions):
     return allowed_syntax and allowed_extension
 
 
-def object_import(request):
+def object_import(request, file):
     if request.get('replace', None) == 'y':
         delete_all('Device')
     if request.get('update-pools', None) == 'y':
         for pool in fetch_all('Pool'):
             pool.compute_pool()
         db.session.commit()
-    file, result = request.files['file'], 'Topology successfully imported.'
+    result = 'Topology successfully imported.'
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
         for obj_type in ('Device', 'Link'):
@@ -50,7 +50,7 @@ def object_import(request):
     return result
 
 
-def object_export(request):
+def object_export(request, path_app):
     workbook = Workbook()
     for obj_type in ('Device', 'Link'):
         sheet = workbook.add_sheet(obj_type)
@@ -58,5 +58,5 @@ def object_export(request):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(serialize(obj_type), 1):
                 sheet.write(obj_index, index, obj[property])
-    workbook.save(Path.cwd() / 'projects' / 'objects.xls')
+    workbook.save(path_app / 'projects' / 'objects.xls')
     return True

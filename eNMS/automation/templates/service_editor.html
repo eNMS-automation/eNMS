@@ -15,7 +15,7 @@
           </div>
           {% for field in service_form %}
             {% if field.widget.input_type == 'hidden' %}
-              {{ field(id="service-id") }}
+              {{ field(id='service-' + field.name) }}
             {% elif field.name in ('multiprocessing', 'send_notification') %}
               <fieldset>
                 <div class="item">

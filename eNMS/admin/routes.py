@@ -23,6 +23,7 @@ from eNMS.admin.forms import (
     MigrationsForm
 )
 from eNMS.base.helpers import (
+    delete_all,
     export,
     get,
     get_one,
@@ -31,7 +32,7 @@ from eNMS.base.helpers import (
     fetch,
     serialize
 )
-from eNMS.base.properties import user_public_properties
+from eNMS.base.properties import import_properties, user_public_properties
 from eNMS.objects.helpers import database_filtering
 
 
@@ -122,11 +123,11 @@ def migration_export():
 
 @post(bp, '/migration_import', 'Admin')
 def migration_import():
+    status = 'Import successful.'
     if request.form['empty_database_before_import']:
-        pass
-    name, status = request.form['name'], 'Import successful.'
+        delete_all(*request.form['import_export_types'])
     for cls in request.form['import_export_types']:
-        path = app.path / 'migrations' / name / f'{cls}.yaml'
+        path = app.path / 'migrations' / request.form['name'] / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             for obj in load(migration_file):
                 try:

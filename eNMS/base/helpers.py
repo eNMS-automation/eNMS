@@ -45,9 +45,10 @@ def delete(model, **kwargs):
     return result
 
 
-def delete_all(model):
-    for instance in fetch_all(model):
-        delete(model, id=instance.id)
+def delete_all(*models):
+    for model in models:
+        for instance in fetch_all(model):
+            delete(model, id=instance.id)
     db.session.commit()
 
 
@@ -95,6 +96,7 @@ def integrity_rollback(function):
 
 def process_request(function):
     def wrapper(*a, **kw):
+        print(request.form)
         data = request.form.to_dict()
         for property in data.get('list_fields', '').split(','):
             if property in request.form:

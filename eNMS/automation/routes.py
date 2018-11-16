@@ -118,19 +118,27 @@ def get_service(id_or_cls):
                 type="checkbox"><label>{property}</label>
             </div>''' + '</fieldset>'
 
-    form = ''
+    form, list_properties, boolean_properties = '', [], []
     for property in cls_to_properties[cls.__tablename__]:
         if property in cls_to_properties['Service']:
             continue
         if property_types.get(property, None) == 'bool':
             form += build_boolean_box(property)
+            boolean_properties.append(property)
         elif hasattr(cls, f'{property}_values'):
             form += build_select_box(property)
+            if property_types[property] == 'list':
+                list_properties.append(property)
         elif hasattr(cls, f'{property}_textarea'):
             form += build_textarea_box(property)
         else:
             form += build_text_box(property)
-    return {'form': form, 'service': service.serialized if service else None}
+    return {
+        'boolean_properties': ','.join(boolean_properties),
+        'form': form,
+        'list_properties': ','.join(list_properties),
+        'service': service.serialized if service else None
+    }
 
 
 @post(bp, '/get_status/<cls>', 'View')

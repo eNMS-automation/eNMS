@@ -1,7 +1,8 @@
-from flask import jsonify, make_response, request
+from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
 
 from eNMS import auth
+from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.base.helpers import delete, factory, fetch
 
 
@@ -50,9 +51,21 @@ class UpdateInstance(Resource):
         return self.post(cls)
 
 
+class Migrate(Resource):
+    decorators = [auth.login_required]
+
+    def post(self, direction):
+        print(request.get_json())
+        return {
+            'import': migrate_import,
+            'export': migrate_export
+        }[direction](current_app.path, request.get_json())
+
+
 def configure_rest_api(app):
     api = Api(app)
     api.add_resource(Heartbeat, '/rest/is_alive')
     api.add_resource(RestAutomation, '/rest/run_job/<string:job_name>')
     api.add_resource(UpdateInstance, '/rest/object/<string:cls>')
     api.add_resource(GetInstance, '/rest/object/<string:cls>/<string:name>')
+    api.add_resource(Migrate, '/rest/migrate/<string:direction>')

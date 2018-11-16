@@ -89,6 +89,13 @@ class PoolObjectsForm(FlaskForm):
     links = MultipleObjectField('Link')
 
 
+class ImportExportForm(FlaskForm):
+    boolean_fields = HiddenField(default='update_pools,replace')
+    name = StringField()
+    update_pools = BooleanField()
+    replace = BooleanField()
+
+
 class OpenNmsForm(FlaskForm):
     opennms_rest_api = StringField()
     opennms_devices = StringField()

@@ -24,9 +24,9 @@ def allowed_file(name, allowed_extensions):
 
 
 def object_import(request, file):
-    if request.get('replace', None) == 'y':
+    if request['replace']:
         delete_all('Device')
-    if request.get('update-pools', None) == 'y':
+    if request['update_pools']:
         for pool in fetch_all('Pool'):
             pool.compute_pool()
         db.session.commit()
@@ -58,5 +58,5 @@ def object_export(request, path_app):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(serialize(obj_type), 1):
                 sheet.write(obj_index, index, obj[property])
-    workbook.save(path_app / 'projects' / 'objects.xls')
+    workbook.save(path_app / 'projects' / f'{request["name"]}.xls')
     return True

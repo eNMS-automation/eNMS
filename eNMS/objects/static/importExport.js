@@ -32,7 +32,7 @@ function queryNetbox() { // eslint-disable-line no-unused-vars
  * Export topology.
  */
 function exportTopology() { // eslint-disable-line no-unused-vars
-  call('/objects/export_topology', function() {
+  fCall('/objects/export_topology', '#import-form', function() {
     alertify.notify('Topology successfully exported.', 'success', 5);
   });
 }

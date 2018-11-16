@@ -15,7 +15,11 @@
             <h4 class="text-center">Import / Export Topology</h4>
           </div>
           <div class="x_content">
-            <form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+            <form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
+              <label class="control-label col-md-1 col-sm-1 col-xs-12"><label for="name">Name</label></label>
+              <div class="col-md-11 col-sm-11 col-xs-12">
+                <input class="form-control" id="name" name="name" type="text" value="">
+              </div><br><br><br>
               <fieldset>
                 <div class="item">
                   <input id="replace" name="replace" type="checkbox" value="y" checked>

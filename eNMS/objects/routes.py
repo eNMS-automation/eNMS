@@ -130,6 +130,7 @@ def import_topology():
 
 @post(bp, '/export_topology', 'View')
 def export_topology():
+    print(request.form)
     return object_export(request.form, app.path)
 
 

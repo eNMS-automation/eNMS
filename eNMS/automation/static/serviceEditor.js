@@ -29,12 +29,14 @@ workflowBuilder: false;
  */
 function editService(id, duplicate) {
   const url = `/automation/get_service/${id || $('#service-type').val()}`;
-  call(url, function(result) {
-    $('#service-boolean_fields').val(`${$('#service-boolean_fields').val()},${result.boolean_properties}`);
-    $('#service-list_fields').val(`${$('#service-list_fields').val()},${result.list_properties}`);
-    console.log($('#service-list_fields').val());
-    $('#html-form').html(result.form);
-    if (result.service) processInstance('service', result.service, duplicate);
+  call(url, function(r) {
+    for (const type of ['boolean', 'list']) {
+      const fields = $(`#service-${type}_fields`);
+      const prop = type == 'boolean' ? r.boolean_properties : r.list_properties;
+      fields.val(`${fields.val()},${prop}`);
+    }
+    $('#html-form').html(r.form);
+    if (r.service) processInstance('service', r.service, duplicate);
   });
 }
 

@@ -46,7 +46,16 @@ Run a service, or a workflow)
  # via a POST call to the following URL
  http://IP_address/rest/run_job/job_name
 
-The job will run immediately.
+The payload must contain a ``devices`` key with the list of target devices.
+If that list is empty, the service / workflow will run on the targets configured from the web UI.
+
+Example of payload:
+
+::
+ 
+ {
+   "devices": ["Washington"]
+ }
 
 Heartbeat
 *********

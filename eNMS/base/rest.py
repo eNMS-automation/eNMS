@@ -26,12 +26,16 @@ class Heartbeat(Resource):
 class RestAutomation(Resource):
     decorators = [auth.login_required]
 
-    def post(self, job_name):
-        job = fetch('Job', name=job_name)
+    def post(self):
+        payload = request.get_json()
+        job = fetch('Job', name=payload['name'])
+        print(request.get_json())
         targets = {
             fetch('Device', name=device_name)
-            for device_name in request.get_json()['devices']
+            for device_name in request.get_json().get('devices', '')
         }
+        for pool_name in request.get_json().get('pools', ''):
+            targets |= set(fetch('Pool', name=pool_name).devices)
         return job.try_run(remaining_targets=targets)
 
 
@@ -78,7 +82,7 @@ class Topology(Resource):
 def configure_rest_api(app):
     api = Api(app)
     api.add_resource(Heartbeat, '/rest/is_alive')
-    api.add_resource(RestAutomation, '/rest/run_job/<string:job_name>')
+    api.add_resource(RestAutomation, '/rest/run_job')
     api.add_resource(UpdateInstance, '/rest/object/<string:cls>')
     api.add_resource(GetInstance, '/rest/object/<string:cls>/<string:name>')
     api.add_resource(Migrate, '/rest/migrate/<string:direction>')

@@ -78,11 +78,12 @@ class RestCallService(Service):
                 **kwargs
             ).content)
         match = substitute(self.content_match, locals())
-        success = (
-            self.content_match_regex and bool(search(match, str(result)))
-            or match in str(result) and not self.content_match_regex
-        )
-        return {'success': success, 'result': result, 'url': rest_url}
+        return {
+            'url': rest_url,
+            'expected': match,
+            'result': result,
+            'success': self.match_content(str(result), match)
+        }
 
 
 service_classes['RestCallService'] = RestCallService

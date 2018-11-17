@@ -144,11 +144,10 @@ class Service(Job):
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     __mapper_args__ = {'polymorphic_identity': 'Service'}
 
-    def match_content(self, output, match):
-        match = substitute(self.content_match, locals())
+    def match_content(self, result, match):
         return (
-            self.content_match_regex and bool(search(match, output))
-            or match in output and not self.content_match_regex
+            self.content_match_regex and bool(search(match, result))
+            or match in result and not self.content_match_regex
         )
 
 class WorkflowEdge(Base):

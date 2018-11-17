@@ -100,17 +100,24 @@ The import and export of topology can be triggered from the ReST API, with a POS
 ::
 
  # Export: via a POST call to the following URL
- http://IP_address/rest/migrate/export
+ http://IP_address/rest/topology/export
 
  # Import: via a POST call to the following URL
- http://IP_address/rest/migrate/import
+ http://IP_address/rest/topology/import
 
 For the import, you need to configure two parameters:
 
 - update_pools: Whether or not pools must be updated after the topology import to take into consideration the newly imported objects.
-- replace: Whether or not the existing topology must be erased and replaced by the newly imported objects.*
+- replace: Whether or not the existing topology must be erased and replaced by the newly imported objects.
 
-For the export, you must send a POST request to 
+::
+
+ {
+     "update_pools": "True",
+     "replace": "True"
+ }
+
+For the export, you must set the name of the exported file:
 
 ::
 

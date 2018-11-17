@@ -60,12 +60,12 @@ class NapalmGettersService(Service):
             except Exception as e:
                 result[getter] = f'{getter} failed because of {e}'
         output, match = str(result), substitute(self.content_match, locals())
-        success = (
-            self.content_match_regex and bool(search(match, output))
-            or match in output and not self.content_match_regex
-        )
         napalm_driver.close()
-        return {'success': success, 'result': result}
+        return {
+            'expected': match,
+            'result': result,
+            'success': self.match_content(output, match)
+        }
 
 
 service_classes['NapalmGettersService'] = NapalmGettersService

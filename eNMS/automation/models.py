@@ -1,11 +1,13 @@
 from datetime import datetime
 from multiprocessing.pool import ThreadPool
+from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 
 from eNMS import db
+from eNMS.automation.helpers import substitute
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,
@@ -142,6 +144,12 @@ class Service(Job):
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     __mapper_args__ = {'polymorphic_identity': 'Service'}
 
+    def match_content(self, output, match):
+        match = substitute(self.content_match, locals())
+        return (
+            self.content_match_regex and bool(search(match, output))
+            or match in output and not self.content_match_regex
+        )
 
 class WorkflowEdge(Base):
 

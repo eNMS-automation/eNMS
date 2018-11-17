@@ -41,11 +41,11 @@ class AnsiblePlaybookService(Service):
         except AttributeError:
             pass
         match = substitute(self.content_match, locals())
-        success = (
-            self.content_match_regex and bool(search(match, result))
-            or match in result and not self.content_match_regex
-        )
-        return {'success': False, 'result': result}
+        return {
+            'expected': match,
+            'result': result,
+            'success': self.match_content(result, match)
+        }
 
 
 service_classes['AnsiblePlaybookService'] = AnsiblePlaybookService

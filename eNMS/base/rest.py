@@ -29,7 +29,6 @@ class RestAutomation(Resource):
     def post(self):
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
-        print(request.get_json())
         targets = {
             fetch('Device', name=device_name)
             for device_name in request.get_json().get('devices', '')

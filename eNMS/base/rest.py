@@ -70,9 +70,9 @@ class Topology(Resource):
 
     def post(self, direction):
         if direction == 'import':
-            object_import(request.get_json(), request.files['file'])
+            return object_import(request.form, request.files['file'])
         elif direction == 'export':
-            object_export(request.get_json(), current_app.path)
+            return object_export(request.get_json(), current_app.path)
 
 
 def configure_rest_api(app):

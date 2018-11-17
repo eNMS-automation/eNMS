@@ -75,6 +75,9 @@ class ExampleService(Service):
         'polymorphic_identity': 'ExampleService',
     }
 
+    # Some services will take action or interrogate a device. The job method
+    # can also take device as a parameter for these types of services.
+    # def job(self, device, payload):
     def job(self, payload):
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.string1,

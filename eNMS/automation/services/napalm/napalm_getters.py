@@ -42,7 +42,8 @@ class NapalmGettersService(Service):
         ('get_ntp_peers', 'NTP peers'),
         ('get_bgp_config', 'BGP configuration'),
         ('get_bgp_neighbors', 'BGP neighbors'),
-        ('get_ipv6_neighbors_table', 'IPv6')
+        ('get_ipv6_neighbors_table', 'IPv6'),
+        ('is_alive', 'Is alive')
     )
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

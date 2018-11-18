@@ -36,6 +36,7 @@ class RestCallService(Service):
     timeout = Column(Float, default=15.)
     content_match = Column(String)
     content_match_regex = Column(Boolean)
+    negative_logic = Column(Boolean)
     username = Column(String)
     password = Column(String)
     call_type_values = (

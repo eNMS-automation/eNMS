@@ -19,6 +19,7 @@ class AnsiblePlaybookService(Service):
     arguments = Column(String)
     content_match = Column(String)
     content_match_regex = Column(Boolean)
+    negative_logic = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
     pass_device_properties = Column(Boolean)
     inventory_from_selection = Column(Boolean)

@@ -53,7 +53,7 @@ Object.keys(device_subtypes).forEach(function(subtype) {
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
     });
-  window[`icon_selected_${subtype}`] = L.icon({
+  window[`red_icon_${subtype}`] = L.icon({
     iconUrl: `static/images/selected/${subtype}.gif`,
     iconSize: [18, 12],
     iconAnchor: [9, 6],
@@ -76,22 +76,22 @@ L.PolylineClusterable = L.Polyline.extend({
   },
 });
 
+const routerIcon = window['icon_router'];
+
 for (let i = 0; i < devices.length; i++) {
   const device = devices[i];
   const marker = L.marker([
     device.latitude,
     device.longitude,
   ]);
-
   marker.device_id = device.id;
-  marker.icon = window[`icon_${device.subtype}`];
-  marker.selected_icon = window[`icon_selected_${device.subtype}`];
+  marker.icon = window[`icon_${device.subtype}`] || routerIcon;
+  marker.redIcon = window[`red_icon_${device.subtype}`] || routerIcon;
   marker.setIcon(marker.icon);
   markersArray.push(marker);
-
   marker.on('click', function(e) {
     /*
-      e.target.setIcon(e.target.selected_icon);
+      e.target.setIcon(e.target.redIcon);
       selection.push(this.device_id);
       $('#devices').val(selection);
     */
@@ -159,7 +159,7 @@ map.on('boxzoomend', function(e) {
   for (let i = 0; i < markersArray.length; i++) {
     if (e.boxZoomBounds.contains(markersArray[i].getLatLng())
       && !hiddenMarkers.includes(markersArray[i])) {
-      markersArray[i].setIcon(markersArray[i].selected_icon);
+      markersArray[i].setIcon(markersArray[i].redIcon);
       selection.push(markersArray[i].device_id);
     }
   }

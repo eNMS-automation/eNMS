@@ -64,6 +64,7 @@ class NapalmGettersService(Service):
         napalm_driver.close()
         return {
             'expected': match,
+            'negative_logic': self.negative_logic,
             'result': result,
             'success': self.match_content(output, match)
         }

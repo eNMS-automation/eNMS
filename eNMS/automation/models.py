@@ -145,10 +145,12 @@ class Service(Job):
     __mapper_args__ = {'polymorphic_identity': 'Service'}
 
     def match_content(self, result, match):
-        return (
+        success = (
             self.content_match_regex and bool(search(match, result))
             or match in result and not self.content_match_regex
         )
+        return success if not self.negative_logic else not success
+
 
 class WorkflowEdge(Base):
 

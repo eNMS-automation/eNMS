@@ -44,6 +44,7 @@ class AnsiblePlaybookService(Service):
         match = substitute(self.content_match, locals())
         return {
             'expected': match,
+            'negative_logic': self.negative_logic,
             'result': result,
             'success': self.match_content(result, match)
         }

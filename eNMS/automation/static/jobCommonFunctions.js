@@ -8,22 +8,38 @@ table: false
 */
 
 let jobId;
+let refresh;
 
 /**
- * Refresh logs.
+ * Display logs.
+ * @param {logs} logs - Job logs.
+ */
+function displayLogs() { // eslint-disable-line no-unused-vars
+  call(`/get/job/${jobId}`, (job) => {
+    $('#display,#compare_with').empty();
+    Object.keys(job.logs).forEach((option) => {
+      $('#display,#compare_with').append(
+        $('<option></option>').attr('value', option).text(option)
+      );
+    });
+    const firstLogs = job.logs[$('#display').val()];
+    if (firstLogs) {
+      $('#logs').text(
+        JSON.stringify(firstLogs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
+      );
+    }
+  });
+}
+
+/**
+ * Display logs.
  * @param {logs} logs - Job logs.
  */
 function refreshLogs(logs) { // eslint-disable-line no-unused-vars
-  $('#display,#compare_with').empty();
-  Object.keys(logs).forEach((option) => {
-    $('#display,#compare_with').append(
-      $('<option></option>').attr('value', option).text(option)
-    );
-  });
-  const logs = job.logs[$('#display').val()];
-  $('#logs').text(
-    JSON.stringify(logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
-  );
+  if (refresh) {
+    displayLogs()
+    setTimeout(refreshLogs, 1000);
+  }
 }
 
 /**
@@ -31,11 +47,9 @@ function refreshLogs(logs) { // eslint-disable-line no-unused-vars
  * @param {id} id - Job id.
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
-  jobId = id;
-  call(`/get/job/${id}`, (job) => {
-    refreshLogs(job.logs);
-
-    $('#logs-modal').modal('show');
+  jobId, refresh = id, true;
+  displayLogs();
+  $('#logs-modal').modal('show');
   });
 }
 

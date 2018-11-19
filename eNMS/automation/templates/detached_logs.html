@@ -1,45 +1,40 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<body>
-
-<!-- Bootstrap -->
-<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-<!-- Alertify -->
-<link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
-<link href="{{ url_for('automation_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
-
-
-<button class="btn btn-default btn-file" onclick="clearLogs()" style="width:100%;">
-  Clear
-</button><br><br>
-<label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
-<div class="col-md-10 col-sm-10 col-xs-12">
-  {{ compare_logs_form.display(class="form-control") }}
-</div>
-<label class="control-label col-md-2 col-sm-2 col-xs-12">Compare With :</label>
-<div class="col-md-10 col-sm-10 col-xs-12">
-  {{ compare_logs_form.compare_with(class="form-control") }}
-</div>
-<hr><hr><hr><hr>
-<div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <pre id="logs"></pre>
-  </div>
-</div>
-
-<!-- jQuery -->
-<script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap -->
-<script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
-<!-- Alertify -->
-<script src="{{ url_for('static', filename='alertifyjs/alertify.min.js') }}"></script>
-<!-- Logs -->
-<script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
-<script>
-  jobId = {{ job }};
-  refreshLogs();
-</script>
-</body>
+  <body>
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Alertify -->
+    <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
+    <link href="{{ url_for('automation_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+    <button class="btn btn-default btn-file" onclick="clearLogs()" style="width:100%;">
+      Clear
+    </button><br><br>
+    <label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+      {{ compare_logs_form.display(class="form-control") }}
+    </div>
+    <label class="control-label col-md-2 col-sm-2 col-xs-12">Compare With :</label>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+      {{ compare_logs_form.compare_with(class="form-control") }}
+    </div>
+    <hr><hr><hr><hr>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <pre id="logs"></pre>
+      </div>
+    </div>
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+    <!-- Alertify -->
+    <script src="{{ url_for('static', filename='alertifyjs/alertify.min.js') }}"></script>
+    <!-- Logs -->
+    <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
+    <script>
+      jobId = {{ job }};
+      refreshLogs();
+    </script>
+  </body>
 </html>

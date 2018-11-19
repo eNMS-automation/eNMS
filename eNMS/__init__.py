@@ -75,7 +75,7 @@ def configure_vault_client(app):
     vault_client.token = app.config['VAULT_TOKEN']
     if vault_client.sys.is_sealed() and app.config['UNSEAL_VAULT']:
         keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
-        vault_client.unseal_multi(filter(None, keys))
+        vault_client.sys.submit_unseal_keys(filter(None, keys))
 
 
 def configure_database(app):

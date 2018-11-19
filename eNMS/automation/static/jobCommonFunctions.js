@@ -53,7 +53,7 @@ function refreshLogs(logs) { // eslint-disable-line no-unused-vars
 function showLogs(id) { // eslint-disable-line no-unused-vars
   refresh = true;
   jobId = id;
-  clearLogs(notify=false);
+  $('#logs').empty();
   refreshLogs();
   $('#logs-modal').modal('show');
 }
@@ -61,6 +61,17 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
 /**
  * Clear the logs
  * @param {id} id - Job id.
+ */
+function clearLogs() { // eslint-disable-line no-unused-vars
+  call(`/automation/clear_logs/${jobId}`, () => {
+    $('#logs').empty();
+    alertify.notify('Logs cleared.', 'success', 5);
+    $(`#show-logs-modal`).modal('hide');
+  });
+}
+
+/**
+ * Detach window
  */
 function clearLogs(notify=true) { // eslint-disable-line no-unused-vars
   call(`/automation/clear_logs/${jobId}`, () => {

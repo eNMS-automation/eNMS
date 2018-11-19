@@ -10,7 +10,14 @@ showTypeModal: false
 workflows: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line
+const table = $('#table').DataTable({
+  "preDrawCallback": function(settings) {
+    pageScrollPos = $(window).scrollTop();
+  },
+  "drawCallback": function(settings) {
+    $(window).scrollTop(pageScrollPos);
+  }
+}); // eslint-disable-line
 
 /**
  * Display instance modal for editing.

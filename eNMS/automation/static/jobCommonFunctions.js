@@ -10,6 +10,10 @@ table: false
 let jobId;
 let refresh;
 
+$('#logs-modal').on('hidden.bs.modal', function () {
+  refresh = false;
+})
+
 /**
  * Display logs.
  * @param {logs} logs - Job logs.
@@ -38,7 +42,7 @@ function displayLogs() { // eslint-disable-line no-unused-vars
 function refreshLogs(logs) { // eslint-disable-line no-unused-vars
   if (refresh) {
     displayLogs()
-    setTimeout(refreshLogs, 1000);
+    setTimeout(refreshLogs, 3000);
   }
 }
 
@@ -47,10 +51,11 @@ function refreshLogs(logs) { // eslint-disable-line no-unused-vars
  * @param {id} id - Job id.
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
-  jobId, refresh = id, true;
-  displayLogs();
+  refresh = true;
+  jobId = id;
+  console.log(id);
+  refreshLogs();
   $('#logs-modal').modal('show');
-  });
 }
 
 /**

@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}" />
+  </head>
   <body>
     <!-- Bootstrap -->
     <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -30,10 +35,15 @@
     <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
     <!-- Alertify -->
     <script src="{{ url_for('static', filename='alertifyjs/alertify.min.js') }}"></script>
+    <!-- Difflib -->
+    <script src="{{ url_for('automation_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
+    <!-- Common functions -->
+    <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
     <!-- Logs -->
     <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
     <script>
       jobId = {{ job }};
+      refresh = true;
       refreshLogs();
     </script>
   </body>

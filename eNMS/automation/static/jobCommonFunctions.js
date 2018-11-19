@@ -19,7 +19,6 @@ $('#logs-modal').on('hidden.bs.modal', function () {
  * @param {logs} logs - Job logs.
  */
 function displayLogs() { // eslint-disable-line no-unused-vars
-  console.log(jobId);
   call(`/get/job/${jobId}`, (job) => {
     $('#display,#compare_with').empty();
     Object.keys(job.logs).forEach((option) => {

@@ -67,6 +67,11 @@ def workflow_builder():
     )
 
 
+@get(bp, '/detach_logs/<id>', 'View')
+def detached_logs(id):
+    return {'job': id, 'compare_logs_form': CompareLogsForm(request.form)}
+
+
 @get(bp, '/logs/<id>/<runtime>', 'View')
 def logs(id, runtime):
     message = fetch("Job", id=id).logs.get(runtime, 'Logs have been removed')

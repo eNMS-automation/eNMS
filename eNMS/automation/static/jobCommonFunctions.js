@@ -19,6 +19,7 @@ $('#logs-modal').on('hidden.bs.modal', function () {
  * @param {logs} logs - Job logs.
  */
 function displayLogs() { // eslint-disable-line no-unused-vars
+  console.log(jobId);
   call(`/get/job/${jobId}`, (job) => {
     $('#display,#compare_with').empty();
     Object.keys(job.logs).forEach((option) => {
@@ -73,14 +74,13 @@ function clearLogs() { // eslint-disable-line no-unused-vars
 /**
  * Detach window
  */
-function clearLogs(notify=true) { // eslint-disable-line no-unused-vars
-  call(`/automation/clear_logs/${jobId}`, () => {
-    $('#logs').empty();
-    if (notify) {
-      alertify.notify('Logs cleared.', 'success', 5);
-    }
-    $(`#show-logs-modal`).modal('hide');
-  });
+function detachWindow() { // eslint-disable-line no-unused-vars
+  window.open(
+    `/automation/detach_logs/${jobId}`,
+    'Logs',
+    'height=800,width=600'
+  );
+  $(`#show-logs-modal`).modal('hide');
 }
 
 $('#display').on('change', function() {

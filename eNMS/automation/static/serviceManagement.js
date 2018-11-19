@@ -6,7 +6,14 @@ getStatus: false
 services: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line
+const table = $('#table').DataTable({
+  "preDrawCallback": function(settings) {
+    pageScrollPos = $(window).scrollTop();
+  },
+  "drawCallback": function(settings) {
+    $(window).scrollTop(pageScrollPos);
+  }
+}); // eslint-disable-line
 
 /**
  * Table Actions.

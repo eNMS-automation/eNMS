@@ -1,4 +1,3 @@
-from re import search
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import (

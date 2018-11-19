@@ -7,7 +7,6 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 
 from eNMS import db
-from eNMS.automation.helpers import substitute
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,

@@ -1,5 +1,4 @@
 from json import dumps, loads
-from re import search
 from requests import (
     get as rest_get,
     post as rest_post,

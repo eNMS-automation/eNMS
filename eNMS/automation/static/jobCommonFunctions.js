@@ -10,13 +10,13 @@ table: false
 let jobId;
 let refresh;
 
-$('#logs-modal').on('hidden.bs.modal', function () {
+$('#logs-modal').on('hidden.bs.modal', function() {
   refresh = false;
-})
+});
 
 /**
  * Display logs.
- * @param {logs} logs - Job logs.
+ * @param {firstTime} firstTime - First time.
  */
 function displayLogs(firstTime) { // eslint-disable-line no-unused-vars
   call(`/get/job/${jobId}`, (job) => {
@@ -32,7 +32,9 @@ function displayLogs(firstTime) { // eslint-disable-line no-unused-vars
       const firstLogs = job.logs[$('#display').val()];
       if (firstLogs) {
         $('#logs').text(
-          JSON.stringify(firstLogs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
+          JSON.stringify(firstLogs, null, 2).replace(
+            /(?:\\[rn]|[\r\n]+)+/g, '\n'
+          )
         );
       }
     }
@@ -41,11 +43,11 @@ function displayLogs(firstTime) { // eslint-disable-line no-unused-vars
 
 /**
  * Display logs.
- * @param {logs} logs - Job logs.
+ * @param {firstTime} firstTime - First time.
  */
 function refreshLogs(firstTime=true) { // eslint-disable-line no-unused-vars
   if (refresh) {
-    displayLogs(firstTime)
+    displayLogs(firstTime);
     setTimeout(refreshLogs, 3000);
   }
 }

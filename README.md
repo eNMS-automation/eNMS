@@ -11,8 +11,6 @@ eNMS is a vendor-agnostic NMS designed for building workflow-based network autom
 
 [![eNMS](docs/_static/base/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
 
-[![eNMS](docs/_static/base/workflow.gif)](http://afourmy.pythonanywhere.com/views/geographical_view)
-
 It encompasses the following aspects of network automation:
 - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmiko.
 - **Ansible Service**: Sending and managing Ansible playbooks.
@@ -21,6 +19,8 @@ It encompasses the following aspects of network automation:
 - **Workflows**: Services can be combined together graphically in a workflow.
 - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
 - **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
+
+[![Workflow System](docs/_static/base/workflow.gif)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 
 ___
 

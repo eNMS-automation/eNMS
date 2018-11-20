@@ -48,7 +48,7 @@ class AdministrationForm(FlaskForm):
     mattermost_verify_certificate = BooleanField()
     pool = ObjectField('Pool')
     categories = {
-        'TACACS+ Server': (
+        'TACACS+ Client': (
             'tacacs_ip_address',
             'tacacs_password',
             'tacacs_port',

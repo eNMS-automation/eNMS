@@ -10,7 +10,7 @@ urls = {
         '/user_management',
         '/login',
         '/administration',
-        '/migrations'
+        '/database'
     ),
     '/objects': (
         '/device_management',

@@ -49,8 +49,8 @@ def administration():
     )
 
 
-@get(bp, '/migrations', 'View')
-def migrations():
+@get(bp, '/database', 'View')
+def database():
     return dict(
         migrations_form=MigrationsForm(request.form),
         folders=listdir(app.path / 'migrations')

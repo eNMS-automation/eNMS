@@ -79,6 +79,10 @@ function displayWorkflow(wf) {
       $('.global').show();
     }
   });
+  console.log(`#add_jobs option[value='${wf.id}']`);
+  $(`#add_jobs option[value='${wf.id}']`).remove();
+  $(`#add_jobs`).multiselect('destroy');
+  buildSelect('#add_jobs');
   return graph;
 }
 
@@ -236,6 +240,10 @@ function switchMode(mode) {
 
 $('#current-workflow').on('change', function() {
   savePositions();
+  console.log(`<option value='${workflow.id}'>${workflow.name}</option>`);
+  $('#add_jobs').append(
+    `<option value='${workflow.id}'>${workflow.name}</option>`
+  );
   call(`/get/workflow/${this.value}`, function(result) {
     workflow = result;
     graph = displayWorkflow(result);

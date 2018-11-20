@@ -35,20 +35,28 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Build or rebuild multiselect.
+ * @param {id} id - Id.
+ */
+function buildSelect(id) { // eslint-disable-line no-unused-vars
+  $(id).multiselect({
+    enableFiltering: true,
+    numberDisplayed: 10,
+    includeSelectAllOption: true,
+    selectAllNumber: true,
+    maxHeight: 400,
+    buttonWidth: '100%',
+  });
+}
+
+/**
  * Convert to Bootstrap Multiselect.
  * @param {ids} ids - Ids.
  */
 function convertSelect(...ids) { // eslint-disable-line no-unused-vars
   ids.forEach((id) => {
     multiSelects.push(id);
-    $(id).multiselect({
-      enableFiltering: true,
-      numberDisplayed: 10,
-      includeSelectAllOption: true,
-      selectAllNumber: true,
-      maxHeight: 400,
-      buttonWidth: '100%',
-    });
+    buildSelect(id);
   });
 }
 

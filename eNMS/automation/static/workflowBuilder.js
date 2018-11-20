@@ -326,7 +326,7 @@ function colorJob(id, color) {
  * Get Workflow State.
  */
 function getWorkflowState() {
-  if (workflow) {
+  if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
@@ -356,7 +356,7 @@ function getWorkflowState() {
       }
     });
   }
-  setTimeout(getWorkflowState, 100);
+  setTimeout(getWorkflowState, 2500);
 }
 
 $(window).bind('beforeunload', function() {

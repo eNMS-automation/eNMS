@@ -72,7 +72,7 @@ function clearLogs() { // eslint-disable-line no-unused-vars
   call(`/automation/clear_logs/${jobId}`, () => {
     $('#logs').empty();
     alertify.notify('Logs cleared.', 'success', 5);
-    $(`#show-logs-modal`).modal('hide');
+    $('#logs-modal').modal('hide');
   });
 }
 
@@ -84,8 +84,8 @@ function detachWindow() { // eslint-disable-line no-unused-vars
     `/automation/detach_logs/${jobId}`,
     'Logs',
     'height=800,width=600'
-  );
-  $(`#show-logs-modal`).modal('hide');
+  ).focus();
+  $('#logs-modal').modal('hide');
 }
 
 $('#display').on('change', function() {

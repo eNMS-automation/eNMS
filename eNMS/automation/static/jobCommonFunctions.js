@@ -26,16 +26,14 @@ function displayLogs() { // eslint-disable-line no-unused-vars
         $('<option></option>').attr('value', option).text(option)
       );
     });
-    if (refresh) {
-      $('#display,#compare_with').val(logs[logs.length - 1]);
-      const firstLogs = job.logs[$('#display').val()];
-      if (firstLogs) {
-        $('#logs').text(
-          JSON.stringify(firstLogs, null, 2).replace(
-            /(?:\\[rn]|[\r\n]+)+/g, '\n'
-          )
-        );
-      }
+    $('#display,#compare_with').val(logs[logs.length - 1]);
+    const firstLogs = job.logs[$('#display').val()];
+    if (firstLogs) {
+      $('#logs').text(
+        JSON.stringify(firstLogs, null, 2).replace(
+          /(?:\\[rn]|[\r\n]+)+/g, '\n'
+        )
+      );
     }
   });
 }
@@ -45,8 +43,12 @@ function displayLogs() { // eslint-disable-line no-unused-vars
  * @param {firstTime} firstTime - First time.
  */
 function refreshLogs(firstTime=false) { // eslint-disable-line no-unused-vars
+  console.log('test');
   if (firstTime) {
     refresh = !refresh;
+    $('#refresh-logs-button').text(
+      refresh ? 'Stop periodic Refresh' : 'Trigger periodic Refresh'
+    );
   }
   if (refresh) {
     displayLogs();
@@ -59,7 +61,6 @@ function refreshLogs(firstTime=false) { // eslint-disable-line no-unused-vars
  * @param {id} id - Job id.
  */
 function showLogs(id) { // eslint-disable-line no-unused-vars
-  refresh = true;
   jobId = id;
   $('#logs').empty();
   displayLogs();

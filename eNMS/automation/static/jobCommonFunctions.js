@@ -16,9 +16,8 @@ $('#logs-modal').on('hidden.bs.modal', function() {
 
 /**
  * Display logs.
- * @param {firstTime} firstTime - First time.
  */
-function displayLogs(firstTime) { // eslint-disable-line no-unused-vars
+function displayLogs() { // eslint-disable-line no-unused-vars
   call(`/get/job/${jobId}`, (job) => {
     $('#display,#compare_with').empty();
     const logs = Object.keys(job.logs);
@@ -27,7 +26,7 @@ function displayLogs(firstTime) { // eslint-disable-line no-unused-vars
         $('<option></option>').attr('value', option).text(option)
       );
     });
-    if (firstTime) {
+    if (refresh) {
       $('#display,#compare_with').val(logs[logs.length - 1]);
       const firstLogs = job.logs[$('#display').val()];
       if (firstLogs) {
@@ -45,10 +44,13 @@ function displayLogs(firstTime) { // eslint-disable-line no-unused-vars
  * Display logs.
  * @param {firstTime} firstTime - First time.
  */
-function refreshLogs(firstTime=true) { // eslint-disable-line no-unused-vars
+function refreshLogs(firstTime=false) { // eslint-disable-line no-unused-vars
+  if (firstTime) {
+    refresh = !refresh;
+  }
   if (refresh) {
-    displayLogs(firstTime);
-    setTimeout(refreshLogs, 3000);
+    displayLogs();
+    setTimeout(refreshLogs, 5000);
   }
 }
 
@@ -60,7 +62,7 @@ function showLogs(id) { // eslint-disable-line no-unused-vars
   refresh = true;
   jobId = id;
   $('#logs').empty();
-  refreshLogs();
+  displayLogs();
   $('#logs-modal').modal('show');
 }
 

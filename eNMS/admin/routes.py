@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import (
     abort,
     current_app as app,
@@ -22,6 +23,7 @@ from eNMS.admin.forms import (
 )
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.base.helpers import (
+    fetch_all,
     get,
     get_one,
     post,
@@ -109,6 +111,16 @@ def save_parameters():
 
 @post(bp, '/clear_logs', 'Admin')
 def clear_logs():
+    clear_date = datetime.strptime(
+        request.form['clear_logs_date'],
+        '%d/%m/%Y %H:%M:%S'
+    )
+    for job in fetch_all('Job'):
+        job.logs = {
+            date: log for date, log in job.logs.items()
+            if datetime.strptime(date, '%Y-%m-%d-%H:%M:%S.%f') > clear_date
+        }
+    db.session.commit()
     return True
 
 

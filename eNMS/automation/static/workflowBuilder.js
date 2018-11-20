@@ -356,7 +356,7 @@ function getWorkflowState() {
             });
           }
         } else {
-          $('#current-job').text('');
+          $('#current-job').empty();
           wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
       }

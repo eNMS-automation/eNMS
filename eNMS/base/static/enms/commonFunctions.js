@@ -210,13 +210,15 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
  * @param {instance} instance - Object instance.
  * @return {mode}
  */
-function saveInstance(type, instance) {
+function saveInstance(type, instance, hideModal=true) {
   const title = $(`#title-${type}`).text().startsWith('Edit');
   const mode = title ? 'edit' : 'create';
   const message = `${type} '${instance.name}'
   ${mode == 'edit' ? 'edited' : 'created'}.`;
   alertify.notify(message, 'success', 5);
-  $(`#edit-${type}`).modal('hide');
+  if (hideModal) {
+    $(`#edit-${type}`).modal('hide');
+  }
   return mode;
 }
 

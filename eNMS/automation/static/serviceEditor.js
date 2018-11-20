@@ -43,17 +43,34 @@ function editService(id, duplicate) {
 /**
  * Save a service.
  */
-function saveService() { // eslint-disable-line no-unused-vars
+function saveService(runService=false) { // eslint-disable-line no-unused-vars
   fCall(
     `/update/${$('#service-type').val()}`,
     '#edit-service-form',
     function(service) {
-      const mode = saveInstance('service', service);
+      const mode = saveInstance('service', service, hideModal=!runService);
       if (typeof workflowBuilder === 'undefined') {
         addInstance(mode, 'service', service);
       } else {
         nodes.update({id: service.id, label: service.name});
       }
+      if (runService) {
+        runJob(service.id);
+      }
     }
+  );
+}
+
+/**
+ * Save and Run a service.
+ */
+function saveRunService() { // eslint-disable-line no-unused-vars
+  fCall(
+    `/update/${$('#service-type').val()}`,
+    '#edit-service-form',
+    function(service) {
+      saveInstance('service', service);
+      
+    },
   );
 }

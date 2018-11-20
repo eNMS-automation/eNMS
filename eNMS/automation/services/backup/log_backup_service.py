@@ -22,6 +22,7 @@ class LogBackupService(Service):
     }
 
     def job(self, _):
+        path_backup = str(Path.cwd() / 'logs' / 'backup')
         # ssh = SSHClient()
         # ssh.set_missing_host_key_policy(AutoAddPolicy())
         # ssh.load_host_keys(Path.home() / '.ssh' / 'known_hosts')
@@ -36,7 +37,7 @@ class LogBackupService(Service):
         # ssh.close()
         return {
             'success': True,
-            'result': str(Path.cwd())
+            'result': 'ok'
         }
 
 

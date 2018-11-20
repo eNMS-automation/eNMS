@@ -19,6 +19,7 @@ class NapalmGettersService(Service):
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     negative_logic = Column(Boolean)
+    delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
     getters = Column(MutableList.as_mutable(PickleType), default=[])

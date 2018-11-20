@@ -19,6 +19,7 @@ class NetmikoValidationService(Service):
     content_match = Column(String)
     content_match_regex = Column(Boolean)
     negative_logic = Column(Boolean)
+    delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     fast_cli = Column(Boolean, default=False)

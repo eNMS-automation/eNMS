@@ -55,6 +55,7 @@ getters_dict = ImmutableMultiDict([
     ('name', 'napalm_getters_service'),
     ('description', ''),
     ('driver', 'ios'),
+    ('list_fields', 'getters'),
     ('getters', 'get_interfaces'),
     ('getters', 'get_interfaces_ip'),
     ('getters', 'get_lldp_neighbors')

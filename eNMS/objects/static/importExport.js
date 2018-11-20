@@ -50,11 +50,12 @@ function importTopology() { // eslint-disable-line no-unused-vars
       data: formData,
       contentType: false,
       processData: false,
-      async: false,
+      async: true,
       success: function(result) {
         alertify.notify(result, 'success', 5);
       },
     });
+  $('#file')[0].value = '';
   }
 }
 

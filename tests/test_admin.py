@@ -6,6 +6,7 @@ from tests.test_base import check_blueprints
 def test_user_management(user_client):
     for user in ('user1', 'user2', 'user3'):
         dict_user = {
+            'list_fields': 'permissions',
             'name': user,
             'email': f'{user}@test.com',
             'permissions': ['Admin'],

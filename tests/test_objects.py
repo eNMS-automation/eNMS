@@ -53,22 +53,22 @@ def test_manual_object_creation(user_client):
 
 def create_from_file(client, file):
     with open(client.application.path / 'projects' / file, 'rb') as f:
-        data = dict(file=f)
+        data = {'file': f, 'replace': True, 'update_pools': True}
         client.post('/objects/import_topology', data=data)
 
 
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_europe(user_client):
     create_from_file(user_client, 'europe.xls')
-    assert len(fetch_all('Device')) == 60
-    assert len(fetch_all('Link')) == 53
+    assert len(fetch_all('Device')) == 33
+    assert len(fetch_all('Link')) == 49
 
 
 @check_blueprints('', '/objects', '/views')
 def test_object_creation_type(user_client):
     create_from_file(user_client, 'device_counters.xls')
-    assert len(fetch_all('Device')) == 54
-    assert len(fetch_all('Link')) == 28
+    assert len(fetch_all('Device')) == 27
+    assert len(fetch_all('Link')) == 0
 
 
 routers = ['router' + str(i) for i in range(5, 20)]
@@ -81,8 +81,8 @@ def test_device_deletion(user_client):
     for device_name in routers:
         device = fetch('Device', name=device_name)
         user_client.post(f'/delete/device/{device.id}')
-    assert len(fetch_all('Device')) == 45
-    assert len(fetch_all('Link')) == 22
+    assert len(fetch_all('Device')) == 18
+    assert len(fetch_all('Link')) == 18
 
 
 @check_blueprints('', '/objects', '/views')
@@ -91,8 +91,8 @@ def test_link_deletion(user_client):
     for link_name in links:
         link = fetch('Link', name=link_name)
         user_client.post(f'/delete/link/{link.id}')
-    assert len(fetch_all('Device')) == 60
-    assert len(fetch_all('Link')) == 42
+    assert len(fetch_all('Device')) == 33
+    assert len(fetch_all('Link')) == 38
 
 
 pool1 = ImmutableMultiDict([

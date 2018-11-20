@@ -53,6 +53,10 @@ def substitute(data, variables):
     return r.sub(replace_with_locals, data)
 
 
+def space_deleter(input):
+    return ''.join(input.split())
+
+
 def get_results_summary(job, results, now):
     summary = [
         f'Job: {job.name} ({job.type})',

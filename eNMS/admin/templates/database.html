@@ -73,5 +73,5 @@
   <script>
     const folders = {{ folders|tojson|safe }};
   </script>
-  <script src="{{ url_for('admin_blueprint.static', filename='migrations.js') }}"></script>
+  <script src="{{ url_for('admin_blueprint.static', filename='database.js') }}"></script>
 {% endblock javascripts %}

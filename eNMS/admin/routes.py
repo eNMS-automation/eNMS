@@ -16,6 +16,7 @@ from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
     AdministrationForm,
+    LogsForm,
     LoginForm,
     MigrationsForm
 )
@@ -52,6 +53,7 @@ def administration():
 @get(bp, '/database', 'View')
 def database():
     return dict(
+        logs_form=LogsForm(request.form),
         migrations_form=MigrationsForm(request.form),
         folders=listdir(app.path / 'migrations')
     )

@@ -86,3 +86,7 @@ class MigrationsForm(FlaskForm):
     empty_database_before_import = BooleanField()
     export_choices = [(p, p) for p in import_properties]
     import_export_types = SelectMultipleField(choices=export_choices)
+
+
+class LogsForm(FlaskForm):
+    clear_logs_date = StringField()

@@ -11,6 +11,8 @@ eNMS is a vendor-agnostic NMS designed for building workflow-based network autom
 
 [![eNMS](docs/_static/base/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
 
+[![eNMS](docs/_static/base/workflow.gif)](http://afourmy.pythonanywhere.com/views/geographical_view)
+
 It encompasses the following aspects of network automation:
 - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmiko.
 - **Ansible Service**: Sending and managing Ansible playbooks.
@@ -135,11 +137,11 @@ ___
     pip3 install -r requirements.txt
     export FLASK_APP=app.py (on Windows, use `set` instead of `export`)
     flask run --host=0.0.0.0
-    Log in (default credentials: `admin`/ `admin`)
+    Log in (default credentials: `admin` / `admin`)
 
 ## Quick start as a docker container
     docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
-    Log in (default credentials: `admin`/ `admin`)
+    Log in (default credentials: `admin` / `admin`)
 
 ## Deploy eNMS in production
 

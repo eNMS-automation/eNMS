@@ -36,7 +36,7 @@ class LogBackupService(Service):
         # ssh.close()
         return {
             'success': True,
-            'result': f'File {self.source_file} transferred successfully'
+            'result': str(Path.cwd())
         }
 
 

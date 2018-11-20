@@ -107,6 +107,11 @@ def save_parameters():
     return True
 
 
+@post(bp, '/clear_logs', 'Admin')
+def clear_logs():
+    return True
+
+
 @post(bp, '/migration_<direction>', 'Admin')
 def migration(direction):
     return {

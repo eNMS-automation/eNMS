@@ -27,6 +27,15 @@ function migrationsImport() { // eslint-disable-line no-unused-vars
   });
 }
 
+/**
+ * Clear logs.
+ */
+function clearLogs() { // eslint-disable-line no-unused-vars
+  fCall('/admin/clear_logs', '#logs-form', function(result) {
+    alertify.notify('Logs cleared.', 'success', 5);
+  });
+}
+
 (function() {
   convertSelect('#import_export_types');
   folders.forEach((f) => {

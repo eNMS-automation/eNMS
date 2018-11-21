@@ -154,7 +154,7 @@ def get_service(id_or_cls):
 
 @post(bp, '/get_status/<cls>', 'View')
 def get_status(cls):
-    return [s.status for s in fetch_all_visible(cls)]
+    return [instance.status for instance in fetch_all_visible(cls)]
 
 
 @post(bp, '/run_job/<job_id>', 'Edit')
@@ -163,10 +163,11 @@ def run_job(job_id):
     if job.status == 'Running':
         return {'error': 'Job is already running.'}
     targets = job.compute_targets()
-    if hasattr(job, 'has_targets') and job.has_targets and not targets:
-        return {'error': 'Set devices or pools as targets first.'}
-    if hasattr(job, 'has_targets') and not job.has_targets and targets:
-        return {'error': 'This service should not have targets configured.'}
+    if hasattr(job, 'has_targets'):
+        if job.has_targets and not targets:
+            return {'error': 'Set devices or pools as targets first.'}
+        if not job.has_targets and targets:
+            return {'error': 'This service should not have targets configured.'}
     job.status, job.state = 'Running', {}
     info(f'{job.name}: starting.')
     db.session.commit()

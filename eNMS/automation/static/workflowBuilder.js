@@ -295,6 +295,7 @@ const action = {
   'Create "Success" edge': partial(switchMode, 'success'),
   'Create "Failure" edge': partial(switchMode, 'failure'),
   'Move Nodes': partial(switchMode, 'node'),
+  'Refresh View': getWorkflowState,
 };
 
 $('.dropdown-submenu a.menu-submenu').on('click', function(e) {
@@ -336,7 +337,6 @@ function colorJob(id, color) {
 function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
-      console.log(wf);
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {

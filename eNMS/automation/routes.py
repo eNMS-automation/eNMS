@@ -78,6 +78,11 @@ def logs(id, runtime):
     return f'<pre>{dumps(message, indent=4)}</pre>'
 
 
+@post(bp, '/get/job_logs/<id>', 'View')
+def get_logs(id):
+    return fetch("Job", id=id).logs
+
+
 @post(bp, '/get_service/<id_or_cls>', 'View')
 def get_service(id_or_cls):
     service = fetch('Service', id=id_or_cls)

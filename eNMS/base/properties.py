@@ -135,7 +135,6 @@ job_public_properties = [
     'description',
     'status',
     'state',
-    'logs',
     'positions',
     'waiting_time',
     'number_of_retries',

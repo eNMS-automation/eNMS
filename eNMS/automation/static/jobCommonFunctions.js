@@ -138,6 +138,6 @@ function getStatus(type) { // eslint-disable-line no-unused-vars
       const col = table.column('#status');
       table.cell(i, col).data(status[i]).draw(false);
     }
-    setTimeout(partial(getStatus, type), 1000);
+    setTimeout(partial(getStatus, type), 5000);
   });
 }

@@ -209,6 +209,7 @@ parameters_public_properties = [
     'default_longitude',
     'default_latitude',
     'default_zoom_level',
+    'default_view',
     'gotty_start_port',
     'gotty_end_port',
     'mail_sender',

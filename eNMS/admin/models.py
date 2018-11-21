@@ -47,6 +47,7 @@ class Parameters(Base):
     default_longitude = Column(Float, default=-96.)
     default_latitude = Column(Float, default=33.)
     default_zoom_level = Column(Integer, default=5)
+    default_view = Column(String, default='2D')
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)
     gotty_port_index = Column(Integer, default=-1)

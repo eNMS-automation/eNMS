@@ -18,16 +18,17 @@ $('#logs-modal').on('hidden.bs.modal', function() {
  * Display logs.
  */
 function displayLogs() { // eslint-disable-line no-unused-vars
-  call(`/get/job/${jobId}`, (job) => {
+  call(`/automation/get_logs/${jobId}`, (logs) => {
+    console.log(logs);
     $('#display,#compare_with').empty();
-    const logs = Object.keys(job.logs);
-    logs.forEach((option) => {
+    const times = Object.keys(logs);
+    times.forEach((option) => {
       $('#display,#compare_with').append(
         $('<option></option>').attr('value', option).text(option)
       );
     });
-    $('#display,#compare_with').val(logs[logs.length - 1]);
-    const firstLogs = job.logs[$('#display').val()];
+    $('#display,#compare_with').val(times[times.length - 1]);
+    const firstLogs = logs[$('#display').val()];
     if (firstLogs) {
       $('#logs').text(
         JSON.stringify(firstLogs, null, 2).replace(
@@ -91,10 +92,10 @@ function detachWindow() { // eslint-disable-line no-unused-vars
 }
 
 $('#display').on('change', function() {
-  call(`/get/job/${jobId}`, (job) => {
-    const logs = job.logs[$('#display').val()];
+  call(`/automation/get_logs/${jobId}`, (logs) => {
+    const log = logs[$('#display').val()];
     $('#logs').text(
-      JSON.stringify(logs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
+      JSON.stringify(log, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
     );
   });
 });
@@ -124,6 +125,9 @@ $('#compare_with').on('change', function() {
 function runJob(id) { // eslint-disable-line no-unused-vars
   call(`/automation/run_job/${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, 'success', 5);
+    if (typeof workflowBuilder !== 'undefined') {
+      getWorkflowState();
+    }
   });
 }
 
@@ -133,7 +137,6 @@ function runJob(id) { // eslint-disable-line no-unused-vars
  */
 function getStatus(type) { // eslint-disable-line no-unused-vars
   call(`/automation/get_status/${type}`, function(status) {
-    console.log(status);
     for (let i = 0; i < status.length; i++) {
       const col = table.column('#status');
       table.cell(i, col).data(status[i]).draw(false);

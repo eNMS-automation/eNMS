@@ -83,6 +83,7 @@ function displayWorkflow(wf) {
   $(`#add_jobs option[value='${wf.id}']`).remove();
   $(`#add_jobs`).multiselect('destroy');
   buildSelect('#add_jobs');
+  getWorkflowState();
   return graph;
 }
 
@@ -335,7 +336,7 @@ function colorJob(id, color) {
 function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
-      console.log(wf, roughSizeOfObject(wf));
+      console.log(wf);
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
@@ -364,7 +365,10 @@ function getWorkflowState() {
       }
     });
   }
-  setTimeout(getWorkflowState, 300);
+  console.log(wf.status == 'Running');
+  if (wf.status == 'Running') {
+    setTimeout(getWorkflowState, 3000);
+  }
 }
 
 $(window).bind('beforeunload', function() {

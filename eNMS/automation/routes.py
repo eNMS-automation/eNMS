@@ -74,13 +74,13 @@ def detached_logs(id):
 
 @get(bp, '/logs/<id>/<runtime>', 'View')
 def logs(id, runtime):
-    message = fetch("Job", id=id).logs.get(runtime, 'Logs have been removed')
+    message = fetch('Job', id=id).logs.get(runtime, 'Logs have been removed')
     return f'<pre>{dumps(message, indent=4)}</pre>'
 
 
-@post(bp, '/get/job_logs/<id>', 'View')
+@post(bp, '/get_logs/<id>', 'View')
 def get_logs(id):
-    return fetch("Job", id=id).logs
+    return fetch('Job', id=id).logs
 
 
 @post(bp, '/get_service/<id_or_cls>', 'View')

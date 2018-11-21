@@ -10,6 +10,7 @@ from eNMS.base.helpers import (
     delete,
     factory,
     fetch,
+    fetch_all_visible,
     get,
     objectify,
     post,
@@ -153,7 +154,7 @@ def get_service(id_or_cls):
 
 @post(bp, '/get_status/<cls>', 'View')
 def get_status(cls):
-    return [s['status'] for s in serialize(cls.capitalize())]
+    return [s.status for s in fetch_all_visible(cls)]
 
 
 @post(bp, '/run_job/<job_id>', 'Edit')

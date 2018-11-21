@@ -474,5 +474,6 @@ export_properties = {
 
 dont_migrate = {
     'Service': ['logs', 'state', 'tasks', 'workflows'],
+    'Task': ['job_name'],
     'Workflow': ['logs', 'state', 'status']
 }

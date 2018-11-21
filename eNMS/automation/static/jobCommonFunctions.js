@@ -3,6 +3,7 @@ global
 alertify: false
 call: false
 diffview: false
+getWorkflowState: false
 partial
 table: false
 */
@@ -19,7 +20,6 @@ $('#logs-modal').on('hidden.bs.modal', function() {
  */
 function displayLogs() { // eslint-disable-line no-unused-vars
   call(`/automation/get_logs/${jobId}`, (logs) => {
-    console.log(logs);
     $('#display,#compare_with').empty();
     const times = Object.keys(logs);
     times.forEach((option) => {

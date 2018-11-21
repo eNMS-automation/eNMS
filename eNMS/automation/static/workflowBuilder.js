@@ -362,12 +362,11 @@ function getWorkflowState() {
           $('#current-job').empty();
           wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
+        if (wf.status == 'Running') {
+          setTimeout(getWorkflowState, 3000);
+        }
       }
     });
-  }
-  console.log(wf.status == 'Running');
-  if (wf.status == 'Running') {
-    setTimeout(getWorkflowState, 3000);
   }
 }
 

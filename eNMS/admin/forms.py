@@ -4,6 +4,7 @@ from wtforms import (
     FloatField,
     HiddenField,
     IntegerField,
+    SelectField,
     StringField,
     PasswordField,
     SelectMultipleField
@@ -39,6 +40,11 @@ class AdministrationForm(FlaskForm):
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
+    default_view = SelectField(choices=(
+        ('2D', '2D View'),
+        ('2DC', '2D Clusterized View'),
+        ('3D', '3D View'),
+    ))
     gotty_start_port = FloatField('Start port')
     gotty_end_port = FloatField('End port')
     mail_sender = StringField()
@@ -61,7 +67,8 @@ class AdministrationForm(FlaskForm):
         'Geographical Parameters': (
             'default_longitude',
             'default_latitude',
-            'default_zoom_level'
+            'default_zoom_level',
+            'default_view'
         ),
         'SSH Terminal Parameters': (
             'gotty_start_port',

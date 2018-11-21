@@ -43,7 +43,6 @@ function displayLogs() { // eslint-disable-line no-unused-vars
  * @param {firstTime} firstTime - First time.
  */
 function refreshLogs(firstTime=false) { // eslint-disable-line no-unused-vars
-  console.log('test');
   if (firstTime) {
     refresh = !refresh;
     $('#refresh-logs-button').text(
@@ -134,6 +133,7 @@ function runJob(id) { // eslint-disable-line no-unused-vars
  */
 function getStatus(type) { // eslint-disable-line no-unused-vars
   call(`/automation/get_status/${type}`, function(status) {
+    console.log(status);
     for (let i = 0; i < status.length; i++) {
       const col = table.column('#status');
       table.cell(i, col).data(status[i]).draw(false);

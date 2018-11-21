@@ -216,6 +216,7 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
  * Save instance.
  * @param {type} type - Type.
  * @param {instance} instance - Object instance.
+ * @param {hideModal} hideModal - Hide edit modal after saving.
  * @return {mode}
  */
 function saveInstance(type, instance, hideModal=true) {

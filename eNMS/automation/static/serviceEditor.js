@@ -6,6 +6,7 @@ convertSelect: false
 fCall: false
 nodes: false
 processInstance: false
+runJob: false
 saveInstance: false
 servicesClasses: false
 workflowBuilder: false;
@@ -42,13 +43,14 @@ function editService(id, duplicate) {
 
 /**
  * Save a service.
+ * @param {run} run - Run after saving.
  */
 function saveService(run=false) { // eslint-disable-line no-unused-vars
   fCall(
     `/update/${$('#service-type').val()}`,
     '#edit-service-form',
     function(service) {
-      const mode = saveInstance('service', service, hideModal=!run);
+      const mode = saveInstance('service', service, !run);
       if (typeof workflowBuilder === 'undefined') {
         addInstance(mode, 'service', service);
       } else {

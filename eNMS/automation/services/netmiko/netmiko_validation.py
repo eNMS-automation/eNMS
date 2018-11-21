@@ -17,6 +17,7 @@ class NetmikoValidationService(Service):
     has_targets = True
     command = Column(String)
     content_match = Column(String)
+    content_match_textarea = True
     content_match_regex = Column(Boolean)
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)

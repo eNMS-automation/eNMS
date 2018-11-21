@@ -38,7 +38,6 @@ function clearLogs() { // eslint-disable-line no-unused-vars
 
 (function() {
   convertSelect('#import_export_types');
-  const today = new Date();
   $('#clear_logs_date').datetimepicker({
     format: 'DD/MM/YYYY HH:mm:ss',
     widgetPositioning: {

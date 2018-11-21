@@ -23,21 +23,21 @@ class LogBackupService(Service):
 
     def job(self, _):
         path_backup = str(Path.cwd() / 'logs' / 'backup')
-        # ssh = SSHClient()
-        # ssh.set_missing_host_key_policy(AutoAddPolicy())
-        # ssh.load_host_keys(Path.home() / '.ssh' / 'known_hosts')
+        ssh = SSHClient()
+        ssh.set_missing_host_key_policy(AutoAddPolicy())
+        ssh.load_host_keys(Path.home() / '.ssh' / 'known_hosts')
         # ssh.connect(
         #     device.ip_address,
         #     username=device.username,
         #     password=device.password,
         #     look_for_keys=False
         # )
-        # with SCPClient(ssh.get_transport()) as scp:
-        #     getattr(scp, self.direction)(*files)
-        # ssh.close()
+        with SCPClient(ssh.get_transport()) as scp:
+            getattr(scp, self.direction)('a', 'b')
+        ssh.close()
         return {
             'success': True,
-            'result': 'ok'
+            'result': path_backup
         }
 
 

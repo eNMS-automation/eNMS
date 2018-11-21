@@ -34,6 +34,7 @@ class RestCallService(Service):
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     timeout = Column(Float, default=15.)
     content_match = Column(String)
+    content_match_textarea = True
     content_match_regex = Column(Boolean)
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)

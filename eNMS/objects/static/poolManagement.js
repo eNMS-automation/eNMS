@@ -58,7 +58,8 @@ function savePoolObjects() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Update pool.
+ * Update one or all pools.
+ * @param {pool} pool - Id of a pool or 'all'.
  */
 function updatePool(pool) { // eslint-disable-line no-unused-vars
   call(`/objects/update_pool/${pool}`, function() {

@@ -117,10 +117,13 @@ def filter_pool_objects(pool_id):
     return fetch('Pool', id=pool_id).filter_objects()
 
 
-@post(bp, '/update_pools', 'Edit')
-def update_pools():
-    for pool in fetch_all('Pool'):
-        pool.compute_pool()
+@post(bp, '/update_pool/<pool>', 'Edit')
+def update_pools(pool):
+    if pool == 'all':
+        for pool in fetch_all('Pool'):
+            pool.compute_pool()
+    else:
+        fetch('Pool', id=pool).compute_pool()
     db.session.commit()
     return True
 

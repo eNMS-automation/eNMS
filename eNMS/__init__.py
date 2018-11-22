@@ -1,3 +1,4 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, render_template
 from flask_apscheduler import APScheduler
 from flask_httpauth import HTTPBasicAuth
@@ -19,7 +20,21 @@ db = SQLAlchemy(
 )
 login_manager = LoginManager()
 mail = Mail()
-scheduler = APScheduler()
+
+# Scheduler
+
+scheduler = BackgroundScheduler({
+    'apscheduler.jobstores.default': {
+        'type': 'sqlalchemy',
+        'url': 'sqlite:///jobs.sqlite'
+    },
+    'apscheduler.executors.default': {
+        'class': 'apscheduler.executors.pool:ThreadPoolExecutor',
+        'max_workers': '500'
+    },
+    'apscheduler.job_defaults.coalesce': 'false',
+    'apscheduler.job_defaults.max_instances': '3',
+})
 
 # Vault
 use_vault = int(environ.get('USE_VAULT', False))
@@ -41,7 +56,6 @@ def register_extensions(app):
     login_manager.init_app(app)
     mail.init_app(app)
     if not scheduler.running:
-        scheduler.init_app(app)
         scheduler.start()
 
 

@@ -7,19 +7,6 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
 
-    # AP Scheduler
-    JOBS = []
-    SCHEDULER_JOBSTORES = {
-        'default': SQLAlchemyJobStore(url='sqlite:///flask_context.db')
-    }
-    SCHEDULER_API_ENABLED = True
-    SCHEDULER_EXECUTORS = {
-        'default': {
-            'type': 'threadpool',
-            'max_workers': 500
-        }
-    }
-
     # ENMS
     ENMS_SERVER_ADDR = environ.get('ENMS_SERVER_ADDR')
 

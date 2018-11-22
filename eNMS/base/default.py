@@ -123,7 +123,7 @@ def create_example_services():
         },
         {
             'type': 'LogBackupService',
-            'name': 'atest_log_backup_service',
+            'name': 'test_log_backup_service',
             'description': 'Test the log backup service',
             'devices': [fetch('Device', name='Aserver').id],
             'protocol': 'scp',
@@ -134,7 +134,7 @@ def create_example_services():
         },
         {
             'type': 'DatabaseBackupService',
-            'name': 'atest_log_backup_service',
+            'name': 'test_database_backup_service',
             'description': 'Test the log backup service',
             'devices': [fetch('Device', name='Aserver').id],
             'protocol': 'scp',

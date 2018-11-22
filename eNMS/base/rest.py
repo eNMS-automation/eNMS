@@ -62,7 +62,6 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction):
-        print(request.get_json())
         return {
             'import': migrate_import,
             'export': migrate_export
@@ -74,7 +73,10 @@ class Topology(Resource):
 
     def post(self, direction):
         if direction == 'import':
-            return object_import(request.form, request.files['file'])
+            data = request.form.to_dict()
+            for property in ('replace', 'update_pools'):
+                data[property] = True if data[property] == 'True' else False
+            return object_import(data, request.files['file'])
         elif direction == 'export':
             return object_export(request.get_json(), current_app.path)
 

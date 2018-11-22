@@ -26,10 +26,6 @@ def allowed_file(name, allowed_extensions):
 def object_import(request, file):
     if request['replace']:
         delete_all('Device')
-    if request['update_pools']:
-        for pool in fetch_all('Pool'):
-            pool.compute_pool()
-        db.session.commit()
     result = 'Topology successfully imported.'
     if allowed_file(secure_filename(file.filename), {'xls', 'xlsx'}):
         book = open_workbook(file_contents=file.read())
@@ -47,6 +43,10 @@ def object_import(request, file):
                     info(f'{str(prop)} could not be imported ({str(e)})')
                     result = 'Partial import (see logs).'
             db.session.commit()
+    if request['update_pools']:
+        for pool in fetch_all('Pool'):
+            pool.compute_pool()
+        db.session.commit()
     return result
 
 

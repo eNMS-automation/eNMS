@@ -62,6 +62,7 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction):
+        print(request.get_json())
         return {
             'import': migrate_import,
             'export': migrate_export

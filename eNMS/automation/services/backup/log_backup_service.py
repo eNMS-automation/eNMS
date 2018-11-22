@@ -3,8 +3,8 @@ from json import dump
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
 from os import makedirs
-from scp import SCPClient
-from sqlalchemy import Column, ForeignKey, Integer, String
+from shutils import rmtree
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
 from eNMS.automation.models import Service
@@ -50,6 +50,7 @@ class LogBackupService(Service):
         )
         self.transfer_file(ssh_client)
         ssh_client.close()
+        rmtree(path_dir)
         return {
             'success': True,
             'result': path_backup

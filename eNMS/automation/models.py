@@ -1,6 +1,7 @@
 from datetime import datetime
 from multiprocessing.pool import ThreadPool
 from re import search
+from scp import SCPClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship

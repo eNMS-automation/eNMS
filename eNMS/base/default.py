@@ -113,11 +113,11 @@ def create_example_services():
         {
             'type': 'GenericFileTransferService',
             'name': 'test_file_transfer_service',
-            'devices': ['28'],
+            'devices': [fetch('Device', name='AServer').id],
             'direction': 'get',
             'protocol': 'scp',
-            'source_file': '/media/sf_VM/eNMS/tests/file_transfer/c1841-spservicesk10-mz.124-8.bin',
-            'destination_file': '/media/sf_VM/eNMS/tests/file_transfer/test.bin',
+            'source_file': '/media/sf_VM/eNMS/tests/file_transfer/a.bin',
+            'destination_file': '/media/sf_VM/eNMS/tests/file_transfer/b.bin',
             'missing_host_key_policy': True
         }
     ):

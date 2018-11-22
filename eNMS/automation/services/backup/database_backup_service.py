@@ -10,6 +10,7 @@ from tarfile import open as open_tar
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import fetch_all, strip_all
+from eNMS.base.properties import import_properties
 
 
 class LogBackupService(Service):
@@ -30,14 +31,12 @@ class LogBackupService(Service):
     }
 
     def job(self, device, _):
-        path_backup = Path.cwd() / 'logs' / 'job_logs'
+        path_backup = Path.cwd() / 'migrations'
         now = strip_all(str(datetime.now()))
-        path_dir = path_backup / f'logs_{now}'
-        source = path_backup / f'logs_{now}.tgz'
+        path_dir = path_backup / f'backup_{now}'
+        source = path_backup / f'backup_{now}.tgz'
         makedirs(path_dir)
-        for job in fetch_all('Job'):
-            with open(path_dir / f'{job.name}.json', 'w') as log_file:
-                dump(job.logs, log_file)
+
         with open_tar(source, 'w:gz') as tar:
             tar.add(path_dir, arcname='/')
         ssh_client = SSHClient()

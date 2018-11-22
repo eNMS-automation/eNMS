@@ -22,6 +22,8 @@ function tableActions(values, pool) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('pool', '${pool.id}')">Edit properties</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
+    onclick="computePool('${pool.id}')">Update</button>`,
+    `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('pool', '${pool.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showPoolObjects('${pool.id}')">Edit objects</button>`,
@@ -56,11 +58,11 @@ function savePoolObjects() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Update all pool objects according to pool properties.
+ * Update pool.
  */
-function updatePools() { // eslint-disable-line no-unused-vars
-  call('/objects/update_pools', function() {
-    alertify.notify('Pools successfully updated.', 'success', 5);
+function updatePool(pool) { // eslint-disable-line no-unused-vars
+  call(`/objects/update_pool/${pool}`, function() {
+    alertify.notify('Update successful.', 'success', 5);
   });
 }
 

@@ -35,7 +35,7 @@ def view(view_type):
 
 
 @get(bp, '/export_to_google_earth', 'View')
-def export_to_google_earth():g
+def export_to_google_earth():
     kml_file = Kml()
     for device in fetch_all('Device'):
         point = kml_file.newpoint(name=device.name)

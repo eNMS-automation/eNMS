@@ -129,6 +129,7 @@ for obj_type, properties in (
 
 job_public_properties = [
     'name',
+    'multiprocessing',
     'vendor',
     'operating_system',
     'type',
@@ -144,10 +145,7 @@ job_public_properties = [
 ]
 
 service_public_properties = job_public_properties
-
-workflow_public_properties = job_public_properties + [
-    'multiprocessing'
-]
+workflow_public_properties = job_public_properties
 
 service_table_properties = [
     'name',
@@ -368,7 +366,9 @@ property_types = {
     'source': 'object',
     'destination': 'object',
     'import_export_types': 'list',
-    'send_notification': 'bool'
+    'send_notification': 'bool',
+    'multiprocessing': 'bool',
+    'mattermost_verify_certificate': 'bool'
 }
 
 relationships = {

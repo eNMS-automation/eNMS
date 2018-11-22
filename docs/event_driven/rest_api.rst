@@ -106,8 +106,25 @@ The import and export of topology can be triggered from the ReST API, with a POS
  http://IP_address/rest/topology/import
 
 For the import, you need to attach the file as part of the request (of type "form-data" and not JSON) and configure two key/value pairs:
-- update_pools: Whether or not pools must be updated after the topology import to take into consideration the newly imported objects.
-- replace: Whether or not the existing topology must be erased and replaced by the newly imported objects.
+ - update_pools: Whether or not pools must be updated after the topology import to take into consideration the newly imported objects.
+ - replace: Whether or not the existing topology must be erased and replaced by the newly imported objects.
+
+Example of python script to import programmatically:
+
+::
+
+ from json import dumps
+ from pathlib import Path
+ from requests import post
+ from requests.auth import HTTPBasicAuth
+ 
+ with open(Path.cwd() / 'project_name.xls', 'rb') as f:
+     post(
+         'http://IP/rest/topology/import',
+         data={'replace': True, 'update_pools': False},
+         files={'file': f},
+         auth=HTTPBasicAuth('admin', 'admin')
+     )
 
 For the export, you must set the name of the exported file in the JSON payload:
 

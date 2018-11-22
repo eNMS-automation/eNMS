@@ -21,7 +21,10 @@ class LogBackupService(Service):
     protocol = Column(String)
     protocol_values = (('scp', 'SCP'), ('sftp', 'SFTP'))
     delete_directory_and_archive = Column(Boolean)
-    source_file = Column(String)
+    server_ip_address = Column(String)
+    destination_path = Column(String)
+    username = Column(String)
+    password = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'LogBackupService',
@@ -37,15 +40,16 @@ class LogBackupService(Service):
                 dump(job.logs, log_file)
         with open_tar(f'logs_{now}', 'w:gz') as tar:
             tar.add('json')
-        ssh = SSHClient()
-        ssh.set_missing_host_key_policy(AutoAddPolicy())
-        # ssh.connect(
-        #     device.ip_address,
-        #     username=device.username,
-        #     password=device.password,
-        #     look_for_keys=False
-        # )
-        ssh.close()
+        ssh_client = SSHClient()
+        ssh_client.set_missing_host_key_policy(AutoAddPolicy())
+        ssh_client.connect(
+            self.server_ip_address,
+            username=self.username,
+            password=self.password,
+            look_for_keys=False
+        )
+        self.transfer_file(ssh_client)
+        ssh_client.close()
         return {
             'success': True,
             'result': path_backup

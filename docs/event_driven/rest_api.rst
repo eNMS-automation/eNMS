@@ -89,8 +89,28 @@ Example of payload:
  {
   "name": "test_project",
   "import_export_types": ["User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
-  "empty_database_before_import": "False"
+  "empty_database_before_import": true
  }
+
+You can also trigger the import/export programmatically. Here's an example with the python ``requests`` library.
+
+::
+
+ from json import dumps
+ from requests import post
+ from requests.auth import HTTPBasicAuth
+
+ post(
+     'yourIP/rest/migrate/import',
+     data=dumps({
+         "name": "Backup",
+         "empty_database_before_import": False,
+         "import_export_types": ["User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
+     }),
+     headers={'content-type': 'application/json'},
+     auth=HTTPBasicAuth('admin', 'admin')
+ )
+
 
 Topology Import / Export
 ************************

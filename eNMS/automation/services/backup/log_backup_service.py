@@ -57,7 +57,7 @@ class LogBackupService(Service):
             remove(source)
         return {
             'success': True,
-            'result': f'logs stored in {destination}'
+            'result': f'logs stored in {destination} ({device.ip_address})'
         }
 
 

@@ -55,6 +55,7 @@ def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    scheduler.app = app
     if not scheduler.running:
         scheduler.start()
 

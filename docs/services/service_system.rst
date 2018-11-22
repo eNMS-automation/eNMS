@@ -206,6 +206,19 @@ When this service is executed, the following GET requests will be sent in parall
 
 Variable substitution is also valid in a configuration string (for a Netmiko or Napalm configuration) service, as well as a validation string (Netmiko validation service, Ansible playbook, etc).
 
+Result Validation
+-----------------
+
+For some services, the success or failure of the service is decided by a "Validation" process.
+The validation consists in:
+  - Either looking for a string in the output of the service
+  - Or matching the output of the service against a regular expression
+
+A few options are available to the user:
+  - ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
+  - ``Delete spaces``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
+
+
 Run multiple services
 ---------------------
 

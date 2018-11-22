@@ -19,6 +19,9 @@ class GenericFileTransferService(Service):
     protocol_values = (('scp', 'SCP'), ('sftp', 'SFTP'))
     source_file = Column(String)
     destination_file = Column(String)
+    missing_host_key_policy = Column(Boolean)
+    load_known_host_keys = Column(Boolean)
+    look_for_keys = Column(Boolean)
 
     __mapper_args__ = {
         'polymorphic_identity': 'GenericFileTransferService',
@@ -26,13 +29,15 @@ class GenericFileTransferService(Service):
 
     def job(self, device, _):
         ssh = SSHClient()
-        ssh.set_missing_host_key_policy(AutoAddPolicy())
-        ssh.load_host_keys(Path.home() / '.ssh' / 'known_hosts')
+        if self.missing_host_key_policy:
+            ssh.set_missing_host_key_policy(AutoAddPolicy())
+        if self.load_known_host_keys:
+            ssh.load_system_host_keys()
         ssh.connect(
             device.ip_address,
             username=device.username,
             password=device.password,
-            look_for_keys=False
+            look_for_keys=self.look_for_keys
         )
         files = (self.source_file, self.destination_file)
         if self.protocol == 'sftp':

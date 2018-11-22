@@ -2,7 +2,7 @@ from flask_mail import Message
 from json import dumps
 from os import remove
 from requests import post
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
 from eNMS import mail
 from eNMS.automation.models import Service

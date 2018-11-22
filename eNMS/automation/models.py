@@ -28,6 +28,7 @@ class Job(Base):
     name = Column(String, unique=True)
     description = Column(String)
     multiprocessing = Column(Boolean, default=False)
+    max_processes = Column(Integer, default=50)
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
@@ -111,7 +112,8 @@ class Job(Base):
         if targets:
             results = {'result': {'devices': {}}}
             if self.multiprocessing:
-                pool = ThreadPool(processes=min(len(targets), 1))
+                processes = min(min(len(targets), 1), self.max_processes)
+                pool = ThreadPool(processes=processes)
                 pool.map(
                     self.device_run,
                     [(device, results, payload) for device in targets]

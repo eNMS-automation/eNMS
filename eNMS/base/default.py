@@ -110,6 +110,16 @@ def create_example_services():
             'vrf_name': 'configure_BGP_test',
             'waiting_time': 0
         },
+        {
+            'type': 'GenericFileTransferService',
+            'name': 'test_file_transfer_service',
+            'devices': ['28'],
+            'direction': 'get',
+            'protocol': 'scp',
+            'source_file': '/media/sf_VM/eNMS/tests/file_transfer/c1841-spservicesk10-mz.124-8.bin',
+            'destination_file': '/media/sf_VM/eNMS/tests/file_transfer/test.bin',
+            'missing_host_key_policy': True
+        }
     ):
         factory(service.pop('type'), **service)
 

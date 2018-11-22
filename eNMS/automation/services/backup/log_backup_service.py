@@ -3,7 +3,7 @@ from json import dump
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
 from os import makedirs
-from shutils import rmtree
+from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 

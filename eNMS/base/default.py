@@ -113,7 +113,8 @@ def create_example_services():
         {
             'type': 'GenericFileTransferService',
             'name': 'test_file_transfer_service',
-            'devices': [fetch('Device', name='AServer').id],
+            'description': 'Test the file transfer service',
+            'devices': [fetch('Device', name='Aserver').id],
             'direction': 'get',
             'protocol': 'scp',
             'source_file': '/media/sf_VM/eNMS/tests/file_transfer/a.bin',

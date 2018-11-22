@@ -50,7 +50,8 @@ class LogBackupService(Service):
         )
         self.transfer_file(ssh_client)
         ssh_client.close()
-        rmtree(path_dir)
+        if self.delete_directory_and_archive:
+            rmtree(path_dir)
         return {
             'success': True,
             'result': path_backup

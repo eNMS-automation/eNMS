@@ -2,6 +2,7 @@ from flask import abort, jsonify, request, render_template
 from flask_login import current_user, login_required
 from functools import wraps
 from sqlalchemy import exc
+from string import punctuation
 
 from eNMS import db
 from eNMS.base.classes import classes
@@ -184,3 +185,7 @@ def str_dict(input, depth=0):
         return result
     else:
         return str(input)
+
+
+def strip_all(input):
+    return input.translate(str.maketrans('', '', f'{punctuation} '))

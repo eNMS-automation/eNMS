@@ -9,7 +9,7 @@ from tarfile import open as open_tar
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import fetch_all
+from eNMS.base.helpers import fetch_all, strip_all
 
 
 class LogBackupService(Service):
@@ -17,7 +17,7 @@ class LogBackupService(Service):
     __tablename__ = 'LogBackupService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = False
+    has_targets = True
     direction = 'put'
     protocol = Column(String)
     protocol_values = (('scp', 'SCP'), ('sftp', 'SFTP'))
@@ -30,7 +30,7 @@ class LogBackupService(Service):
 
     def job(self, device, _):
         path_backup = Path.cwd() / 'logs' / 'job_logs'
-        now = str(datetime.now()).replace(' ', '-')
+        now = strip_all(str(datetime.now()))
         path_dir = path_backup / f'logs_{now}'
         makedirs(path_dir)
         for job in fetch_all('Job'):

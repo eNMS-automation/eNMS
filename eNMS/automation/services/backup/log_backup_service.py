@@ -18,19 +18,17 @@ class LogBackupService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = False
+    direction = 'put'
     protocol = Column(String)
     protocol_values = (('scp', 'SCP'), ('sftp', 'SFTP'))
     delete_directory_and_archive = Column(Boolean)
-    server_ip_address = Column(String)
     destination_path = Column(String)
-    username = Column(String)
-    password = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'LogBackupService',
     }
 
-    def job(self, _):
+    def job(self, device, _):
         path_backup = Path.cwd() / 'logs' / 'job_logs'
         now = str(datetime.now()).replace(' ', '-')
         path_dir = path_backup / f'logs_{now}'
@@ -39,19 +37,24 @@ class LogBackupService(Service):
             with open(path_dir / f'{job.name}.json', 'w') as log_file:
                 dump(job.logs, log_file)
         with open_tar(f'logs_{now}', 'w:gz') as tar:
-            tar.add('json')
+            tar.add(path_dir)
         ssh_client = SSHClient()
         ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         ssh_client.connect(
-            self.server_ip_address,
-            username=self.username,
-            password=self.password,
+            device.ip_address,
+            username=device.username,
+            password=device.password,
             look_for_keys=False
         )
-        self.transfer_file(ssh_client)
+        self.transfer_file(
+            ssh_client,
+            path_backup / f'logs_{now}',
+            self.destination_path / f'logs_{now}'
+        )
         ssh_client.close()
         if self.delete_directory_and_archive:
             rmtree(path_dir)
+            #TODO delete archive
         return {
             'success': True,
             'result': path_backup

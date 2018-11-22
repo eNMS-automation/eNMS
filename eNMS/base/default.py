@@ -120,6 +120,15 @@ def create_example_services():
             'source_file': '/media/sf_VM/eNMS/tests/file_transfer/a.bin',
             'destination_file': '/media/sf_VM/eNMS/tests/file_transfer/b.bin',
             'missing_host_key_policy': True
+        },
+        {
+            'type': 'LogBackupService',
+            'name': 'atest_log_backup_service',
+            'description': 'Test the log backup service',
+            'devices': [fetch('Device', name='Aserver').id],
+            'protocol': 'scp',
+            'destination_ip_address': '127.0.0.1',
+            'destination_path': '/media/sf_VM/eNMS/tests/file_transfer'
         }
     ):
         factory(service.pop('type'), **service)

@@ -48,7 +48,6 @@ def get_instance(cls, id):
 
 @post(bp, '/update/<cls>', 'Edit')
 def update_instance(cls):
-    print(request.form)
     return factory(cls, **request.form).serialized
 
 

@@ -48,13 +48,15 @@ Run a service, or a workflow)
 
 The payload must contain a ``devices`` key with the list of target devices.
 If that list is empty, the service / workflow will run on the targets configured from the web UI.
+You can also add a ``pools`` key if you want the job to target a specific list of pools.
 
 Example of payload:
 
 ::
  
  {
-   "devices": ["Washington"]
+   "devices": ["Washington"],
+   "pools": ["Pool1", "Pool2"]
  }
 
 Heartbeat
@@ -111,7 +113,6 @@ You can also trigger the import/export programmatically. Here's an example with 
      auth=HTTPBasicAuth('admin', 'admin')
  )
 
-
 Topology Import / Export
 ************************
 
@@ -125,7 +126,7 @@ The import and export of topology can be triggered from the ReST API, with a POS
  # Import: via a POST call to the following URL
  http://IP_address/rest/topology/import
 
-For the import, you need to attach the file as part of the request (of type "form-data" and not JSON) and configure two key/value pairs:
+For the import, you need to attach the file as part of the request (of type "form-data" and not JSON) and set the two following ``key`` / ``value`` pairs:
  - update_pools: Whether or not pools must be updated after the topology import to take into consideration the newly imported objects.
  - replace: Whether or not the existing topology must be erased and replaced by the newly imported objects.
 

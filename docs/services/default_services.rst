@@ -104,6 +104,12 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
+.. note:: You can use the following parameters from the requests library:
+  ::
+    params – (optional) Dictionary, list of tuples or bytes to send in the body of the Request.
+    headers – (optional) Dictionary of HTTP Headers to send with the Request.
+    timeout (float) How many seconds to wait for the server to send data before giving up
+
 Update Inventory Service
 ---------------------
 

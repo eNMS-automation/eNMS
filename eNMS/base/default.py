@@ -131,6 +131,17 @@ def create_example_services():
             'destination_path': '/media/sf_VM/eNMS/tests/file_transfer',
             'delete_archive': True,
             'delete_folder': True
+        },
+        {
+            'type': 'DatabaseBackupService',
+            'name': 'atest_log_backup_service',
+            'description': 'Test the log backup service',
+            'devices': [fetch('Device', name='Aserver').id],
+            'protocol': 'scp',
+            'destination_ip_address': '127.0.0.1',
+            'destination_path': '/media/sf_VM/eNMS/tests/file_transfer',
+            'delete_archive': True,
+            'delete_folder': True
         }
     ):
         factory(service.pop('type'), **service)

@@ -1,8 +1,7 @@
 from datetime import datetime
-from json import dump
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
-from os import makedirs, remove
+from os import remove
 from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
@@ -10,7 +9,7 @@ from tarfile import open as open_tar
 from eNMS.admin.helpers import migrate_export
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import fetch_all, strip_all
+from eNMS.base.helpers import strip_all
 from eNMS.base.properties import import_properties
 
 

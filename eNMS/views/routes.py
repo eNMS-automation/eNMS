@@ -18,7 +18,6 @@ from eNMS.views.forms import GoogleEarthForm
 @get(bp, '/<view_type>_view', 'View', ['GET', 'POST'])
 def view(view_type):
     devices, parameters = fetch_all('Device'), get_one('Parameters').serialized
-    print(parameters)
     return dict(
         template=f'{view_type}_view.html',
         pools=fetch_all('Pool'),
@@ -36,7 +35,7 @@ def view(view_type):
 
 
 @get(bp, '/export_to_google_earth', 'View')
-def export_to_google_earth():
+def export_to_google_earth():g
     kml_file = Kml()
     for device in fetch_all('Device'):
         point = kml_file.newpoint(name=device.name)

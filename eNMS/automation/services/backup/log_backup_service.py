@@ -2,7 +2,7 @@ from datetime import datetime
 from json import dump
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
-from os import makedirs
+from os import makedirs, remove
 from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
@@ -32,12 +32,13 @@ class LogBackupService(Service):
         path_backup = Path.cwd() / 'logs' / 'job_logs'
         now = strip_all(str(datetime.now()))
         path_dir = path_backup / f'logs_{now}'
+        source = path_backup / f'logs_{now}.tgz'
         makedirs(path_dir)
         for job in fetch_all('Job'):
             with open(path_dir / f'{job.name}.json', 'w') as log_file:
                 dump(job.logs, log_file)
-        with open_tar(f'logs_{now}', 'w:gz') as tar:
-            tar.add(path_dir)
+        with open_tar(source, 'w:gz') as tar:
+            tar.add(path_dir, arcname='/')
         ssh_client = SSHClient()
         ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         ssh_client.connect(
@@ -46,18 +47,15 @@ class LogBackupService(Service):
             password=device.password,
             look_for_keys=False
         )
-        self.transfer_file(
-            ssh_client,
-            path_backup / f'logs_{now}',
-            self.destination_path / f'logs_{now}'
-        )
+        destination = f'{self.destination_path}/logs_{now}.tgz'
+        self.transfer_file(ssh_client, source, destination)
         ssh_client.close()
         if self.delete_directory_and_archive:
             rmtree(path_dir)
-            #TODO delete archive
+            remove(source)
         return {
             'success': True,
-            'result': path_backup
+            'result': f'logs stored in {destination}'
         }
 
 

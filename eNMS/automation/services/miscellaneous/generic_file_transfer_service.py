@@ -28,26 +28,19 @@ class GenericFileTransferService(Service):
     }
 
     def job(self, device, _):
-        ssh = SSHClient()
+        ssh_client = SSHClient()
         if self.missing_host_key_policy:
-            ssh.set_missing_host_key_policy(AutoAddPolicy())
+            ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         if self.load_known_host_keys:
-            ssh.load_system_host_keys()
-        ssh.connect(
+            ssh_client.load_system_host_keys()
+        ssh_client.connect(
             device.ip_address,
             username=device.username,
             password=device.password,
             look_for_keys=self.look_for_keys
         )
-        files = (self.source_file, self.destination_file)
-        if self.protocol == 'sftp':
-            sftp = ssh.open_sftp()
-            getattr(sftp, self.direction)(*files)
-            sftp.close()
-        else:
-            with SCPClient(ssh.get_transport()) as scp:
-                getattr(scp, self.direction)(*files)
-        ssh.close()
+        self.transfer_file(ssh_client)
+        ssh_client.close()
         return {
             'success': True,
             'result': f'File {self.source_file} transferred successfully'

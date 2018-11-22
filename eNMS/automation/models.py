@@ -153,6 +153,16 @@ class Service(Job):
         )
         return success if not self.negative_logic else not success
 
+    def transfer_file(self, ssh_client):
+        files = (self.source_file, self.destination_file)
+        if self.protocol == 'sftp':
+            sftp = ssh_client.open_sftp()
+            getattr(sftp, self.direction)(*files)
+            sftp.close()
+        else:
+            with SCPClient(ssh_client.get_transport()) as scp:
+                getattr(scp, self.direction)(*files)
+
 
 class WorkflowEdge(Base):
 

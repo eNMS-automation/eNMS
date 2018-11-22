@@ -18,6 +18,7 @@ class JobForm(FlaskForm):
     description = StringField()
     devices = MultipleObjectField('Device')
     multiprocessing = BooleanField()
+    max_processes = IntegerField('Maximum number of processes', default=50)
     pools = MultipleObjectField('Pool')
     waiting_time = IntegerField('Waiting time (in seconds)', default=0)
     send_notification = BooleanField()

@@ -22,7 +22,7 @@ function tableActions(values, pool) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('pool', '${pool.id}')">Edit properties</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="computePool('${pool.id}')">Update</button>`,
+    onclick="updatePool('${pool.id}')">Update</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('pool', '${pool.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-primary btn-xs"

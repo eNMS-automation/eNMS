@@ -1,10 +1,15 @@
+from datetime import datetime
+from json import dump
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
+from os import makedirs
 from scp import SCPClient
 from sqlalchemy import Column, ForeignKey, Integer, String
+from tarfile import open as open_tar
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.base.helpers import fetch_all
 
 
 class LogBackupService(Service):
@@ -15,6 +20,7 @@ class LogBackupService(Service):
     has_targets = False
     protocol = Column(String)
     protocol_values = (('scp', 'SCP'), ('sftp', 'SFTP'))
+    delete_directory_and_archive = Column(Boolean)
     source_file = Column(String)
 
     __mapper_args__ = {
@@ -22,18 +28,23 @@ class LogBackupService(Service):
     }
 
     def job(self, _):
-        path_backup = str(Path.cwd() / 'logs' / 'backup')
+        path_backup = Path.cwd() / 'logs' / 'job_logs'
+        now = str(datetime.now()).replace(' ', '-')
+        path_dir = path_backup / f'logs_{now}'
+        makedirs(path_dir)
+        for job in fetch_all('Job'):
+            with open(path_dir / f'{job.name}.json', 'w') as log_file:
+                dump(job.logs, log_file)
+        with open_tar(f'logs_{now}', 'w:gz') as tar:
+            tar.add('json')
         ssh = SSHClient()
         ssh.set_missing_host_key_policy(AutoAddPolicy())
-        ssh.load_host_keys(Path.home() / '.ssh' / 'known_hosts')
         # ssh.connect(
         #     device.ip_address,
         #     username=device.username,
         #     password=device.password,
         #     look_for_keys=False
         # )
-        with SCPClient(ssh.get_transport()) as scp:
-            getattr(scp, self.direction)('a', 'b')
         ssh.close()
         return {
             'success': True,

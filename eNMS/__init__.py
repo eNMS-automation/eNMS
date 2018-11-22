@@ -115,7 +115,7 @@ def configure_logs(app):
         datefmt='%m-%d-%Y %H:%M:%S',
         handlers=[
             RotatingFileHandler(
-                app.path / 'logs' / 'enms.log',
+                app.path / 'logs' / 'app_logs' / 'enms.log',
                 maxBytes=20000000,
                 backupCount=10
             ),

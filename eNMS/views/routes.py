@@ -17,15 +17,13 @@ from eNMS.views.forms import GoogleEarthForm
 
 @get(bp, '/<view_type>_view', 'View', ['GET', 'POST'])
 def view(view_type):
-    devices = fetch_all('Device')
+    devices, parameters = fetch_all('Device'), get_one('Parameters').serialized
+    print(parameters)
     return dict(
         template=f'{view_type}_view.html',
         pools=fetch_all('Pool'),
-        parameters=get_one('Parameters').serialized,
-        view=request.form.get(
-            'view',
-            ('3D', ('2D', '2DC')[len(devices) > 2000])[len(devices) > 50]
-        ),
+        parameters=parameters,
+        view=request.form.get('view', parameters['default_view']),
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),

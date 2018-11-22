@@ -13,9 +13,9 @@ from eNMS.base.helpers import fetch_all, strip_all
 from eNMS.base.properties import import_properties
 
 
-class LogBackupService(Service):
+class DatabaseBackupService(Service):
 
-    __tablename__ = 'LogBackupService'
+    __tablename__ = 'DatabaseBackupService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
@@ -27,7 +27,7 @@ class LogBackupService(Service):
     destination_path = Column(String)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'LogBackupService',
+        'polymorphic_identity': 'DatabaseBackupService',
     }
 
     def job(self, device, _):
@@ -60,4 +60,4 @@ class LogBackupService(Service):
         }
 
 
-service_classes['LogBackupService'] = LogBackupService
+service_classes['DatabaseBackupService'] = DatabaseBackupService

@@ -48,7 +48,7 @@ function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
  */
 function saveDeviceJobs(id) { // eslint-disable-line no-unused-vars
   const url = `/objects/save_device_jobs/${id}`;
-  fCall(url, '#device-automation-form', function() {
+  fCall(url, '#device-automation-form', function(device) {
     alertify.notify('Changes saved.', 'success', 5);
     $('#device-automation').modal('hide');
   });

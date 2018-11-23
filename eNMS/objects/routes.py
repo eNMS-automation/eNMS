@@ -106,12 +106,10 @@ def connection(id):
 
 
 @post(bp, '/save_device_jobs/<id>', 'Edit')
-def save_device_jobs(id):
-    print(request.form)
-    device = fetch('Pool', id=id)
-    # pool.devices = objectify('Device', request.form['devices'])
+def save_device_jobs(id): 
+    fetch('Device', id=id).jobs = objectify('Job', request.form['jobs'])
     db.session.commit()
-    return device.serialized
+    return True
 
 
 @post(bp, '/save_pool_objects/<id>', 'Edit')

@@ -34,9 +34,9 @@ function openUrl(url) {
  * @param {id} id - Device id.
  */
 function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
-  $('#node-automation-button').unbind('click');
-  $('#node-automation-button').click(partial(updateNodeAutomation, id));
-  $('#node-automation').modal('show');
+  $('#device-automation-button').unbind('click');
+  $('#device-automation-button').click(partial(updateDeviceAutomation, id));
+  $('#device-automation').modal('show');
 }
 
 /**
@@ -56,7 +56,15 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
  * Start an SSH session to the device.
  * @param {id} id - Device id.
  */
-function sshConnection(id) { // eslint-disable-line no-unused-vars
+function sshConnection(id) {
+  console.log(id);
+}
+
+/**
+ * Start an SSH session to the device.
+ * @param {id} id - Device id.
+ */
+function sshConnection(id) {
   const url = `/objects/connection/${id}`;
   fCall(url, '#connection-parameters-form', function(result) {
     let url = result.server_addr;

@@ -2,6 +2,7 @@ from flask_mail import Message
 from json import dumps
 from os import remove
 from requests import post
+from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
 from eNMS import mail
@@ -57,7 +58,14 @@ class SwissArmyKnifeService(Service):
         return {'success': True}
 
     def slack_feedback_notification(self, payload):
-        pass
+        parameters = get_one('Parameters')
+        slack_client = SlackClient(parameters.slack_token)
+        result = slack_client.api_call(
+            'chat.postMessage',
+            channel=parameters.slack_channel,
+            text=str_dict(payload['result'])
+        )
+        return {'success': True}
 
     def mattermost_feedback_notification(self, payload):
         parameters = get_one('Parameters')

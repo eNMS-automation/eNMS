@@ -50,7 +50,7 @@ class DatabaseBackupService(Service):
             password=device.password,
             look_for_keys=False
         )
-        destination = f'{self.destination_path}/logs_{now}.tgz'
+        destination = f'{self.destination_path}/backup_{now}.tgz'
         self.transfer_file(ssh_client, source, destination)
         ssh_client.close()
         if self.delete_folder:
@@ -59,7 +59,7 @@ class DatabaseBackupService(Service):
             remove(source)
         return {
             'success': True,
-            'result': f'logs stored in {destination} ({device.ip_address})'
+            'result': f'backup stored in {destination} ({device.ip_address})'
         }
 
 

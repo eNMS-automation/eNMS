@@ -1,6 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, render_template
-from flask_apscheduler import APScheduler
 from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -22,7 +21,6 @@ login_manager = LoginManager()
 mail = Mail()
 
 # Scheduler
-
 scheduler = BackgroundScheduler({
     'apscheduler.jobstores.default': {
         'type': 'sqlalchemy',
@@ -30,7 +28,7 @@ scheduler = BackgroundScheduler({
     },
     'apscheduler.executors.default': {
         'class': 'apscheduler.executors.pool:ThreadPoolExecutor',
-        'max_workers': '500'
+        'max_workers': '50'
     },
     'apscheduler.job_defaults.coalesce': 'false',
     'apscheduler.job_defaults.max_instances': '3',

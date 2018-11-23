@@ -1,4 +1,3 @@
-from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from os import environ
 
 

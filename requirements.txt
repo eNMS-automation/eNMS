@@ -1,6 +1,5 @@
 dicttoxml
 flask
-flask_apscheduler
 flask_httpauth
 flask_login
 flask_mail

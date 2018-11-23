@@ -30,6 +30,16 @@ function openUrl(url) {
 }
 
 /**
+ * Display the device automation modal.
+ * @param {id} id - Device id.
+ */
+function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
+  $('#node-automation-button').unbind('click');
+  $('#node-automation-button').click(partial(updateNodeAutomation, id));
+  $('#node-automation').modal('show');
+}
+
+/**
  * Display the device connection modal.
  * @param {id} id - Device id.
  */

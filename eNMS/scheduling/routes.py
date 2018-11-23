@@ -1,6 +1,7 @@
 from flask import request
 from re import search, sub
 
+from eNMS import scheduler
 from eNMS.base.helpers import (
     fetch,
     fetch_all,
@@ -46,6 +47,12 @@ def calendar():
         tasks=tasks,
         scheduling_form=SchedulingForm(request.form)
     )
+
+
+@post(bp, '/scheduler/<action>', 'Admin')
+def scheduler_action(action):
+    getattr(scheduler, action)()
+    return True
 
 
 @post(bp, '/pause_task/<task_id>', 'Edit')

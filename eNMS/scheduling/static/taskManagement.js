@@ -49,7 +49,7 @@ function addTask(mode, properties) {
  */
 function scheduler(action) { // eslint-disable-line no-unused-vars
   call(`/scheduling/scheduler/${action}`, function() {
-      alertify.notify('Done.', 'success', 5);
+      alertify.notify(`Scheduler ${action}d.`, 'success', 5);
     }
   );
 }

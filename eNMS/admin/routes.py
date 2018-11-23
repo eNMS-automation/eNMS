@@ -12,7 +12,7 @@ from os import listdir
 from tacacs_plus.client import TACACSClient
 from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII as FLAG
 
-from eNMS import db, scheduler
+from eNMS import db
 from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddUser,
@@ -130,12 +130,3 @@ def migration(direction):
         'import': migrate_import,
         'export': migrate_export
     }[direction](app.path, request.form)
-
-
-@post(bp, '/scheduler/<action>', 'Admin')
-def scheduler_action(action):
-    if action == 'shutdown':
-        scheduler.shutdown(wait=False)
-    else:
-        scheduler.start()
-    return True

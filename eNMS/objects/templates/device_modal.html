@@ -10,13 +10,13 @@
       <div class="modal-body">
         <div role="tabpanel" data-example-id="togglable-tabs">
           <ul class="nav nav-tabs bar_tabs" role="tablist">
-            <li role="netmiko-config" class="active"><a href="#netmiko-config" role="tab" data-toggle="tab" aria-expanded="true">Node properties</a>
+            <li role="node-properties" class="active"><a href="#node-properties" role="tab" data-toggle="tab" aria-expanded="true">Node properties</a>
             </li>
-            <li role="napalm-config" class=""><a href="#napalm-config" role="tab" data-toggle="tab" aria-expanded="false">Logs</a>
+            <li role="node-logs" class=""><a href="#node-logs" role="tab" data-toggle="tab" aria-expanded="false">Logs</a>
             </li>
           </ul>
           <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="netmiko-config">
+            <div role="tabpanel" class="tab-pane fade active in" id="node-properties">
               <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
                 <div class="modal-body">
                   <div class="form-group">
@@ -38,7 +38,7 @@
                 </div>
               </form>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="napalm-config">
+            <div role="tabpanel" class="tab-pane fade" id="node-logs">
               <pre id="logs"></pre>
             </div>
           </div>

@@ -171,9 +171,8 @@ def run_job(job_id):
     job.status, job.state = 'Running', {}
     info(f'{job.name}: starting.')
     db.session.commit()
-    now = datetime.now()
     scheduler.add_job(
-        id=str(now),
+        id=str(datetime.now()),
         func=scheduler_job,
         run_date=datetime.now(),
         args=[job_id],

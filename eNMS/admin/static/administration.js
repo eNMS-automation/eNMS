@@ -16,16 +16,6 @@ function saveParameters() { // eslint-disable-line no-unused-vars
   );
 }
 
-/**
- * Start or shutdown the scheduler.
- */
-function scheduler(action) { // eslint-disable-line no-unused-vars
-  call(`/admin/scheduler/${action}`, function() {
-      alertify.notify('Done.', 'success', 5);
-    }
-  );
-}
-
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
   $('#default_view').val(parameters.default_view);

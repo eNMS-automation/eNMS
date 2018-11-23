@@ -45,6 +45,16 @@ function addTask(mode, properties) {
 }
 
 /**
+ * Start or shutdown the scheduler.
+ */
+function scheduler(action) { // eslint-disable-line no-unused-vars
+  call(`/scheduling/scheduler/${action}`, function() {
+      alertify.notify('Done.', 'success', 5);
+    }
+  );
+}
+
+/**
  * Schedule a task.
  */
 function scheduleTask() { // eslint-disable-line no-unused-vars

@@ -372,7 +372,9 @@ property_types = {
 }
 
 relationships = {
-    'Device': {},
+    'Device': {
+        'job': 'Job'
+    },
     'Link': {
         'source': 'Device',
         'destination': 'Device'
@@ -474,6 +476,7 @@ export_properties = {
 # Properties to not migrate
 
 dont_migrate = {
+    'Device': ['jobs'],
     'Service': ['logs', 'state', 'tasks', 'workflows'],
     'Task': ['job_name'],
     'Workflow': ['logs', 'state', 'status']

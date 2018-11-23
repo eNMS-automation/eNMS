@@ -34,7 +34,8 @@ function openUrl(url) {
  * @param {id} id - Device id.
  */
 function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
-  call(`/get/device/${id}`, function(jobs) {
+  call(`/get/device/${id}`, function(device) {
+    console.log(device);
     $('#device-automation-button').unbind('click');
     $('#device-automation-button').click(partial(saveDeviceJobs, id));
     $('#jobs').multiselect('deselectAll', false);

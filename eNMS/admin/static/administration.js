@@ -17,11 +17,11 @@ function saveParameters() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Save Parameters.
+ * Start or shutdown the scheduler.
  */
-function scheduler() { // eslint-disable-line no-unused-vars
-  fCall('/admin/save_parameters', '#parameters-form', function() {
-      alertify.notify('Parameters saved.', 'success', 5);
+function scheduler(action) { // eslint-disable-line no-unused-vars
+  call(`/admin/scheduler/${action}`, function() {
+      alertify.notify('Done.', 'success', 5);
     }
   );
 }

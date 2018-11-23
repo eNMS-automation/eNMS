@@ -8,11 +8,11 @@
 
 {% block content %}
   <div class="right_col" role="main">
-    <form id="parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-      <div class="row">
-        <div class="x_panel">
-          <div class="x_content">
-            <div class="col-md-10 col-xs-10 col-md-offset-1">
+    <div class="row">
+      <div class="x_panel">
+        <div class="x_content">
+          <div class="col-md-10 col-xs-10 col-md-offset-1">
+            <form id="parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
               {{ form.boolean_fields() }}
               {% for title, properties in form.categories.items() %}
                 <div class="x_title">
@@ -26,33 +26,33 @@
                   </div><br><br><br>
                 {% endfor %}
               {% endfor %}
-            <div class="x_title">
-              <h4 class="text-center">Scheduler</h4>
-            </div><br>
-            <div class="panel-group" >
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-default btn-file" onclick="scheduler('shutdown')" style="width:100%;">
-                  Shutdown
-                </button>
-              </div>
-            </div>
-            <div class="panel-group" >
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-default btn-file" onclick="scheduler('start')" style="width:100%;">
-                  Shutdown
-                </button>
-              </div>
-            </div>
             </div>
             <div class="form-group">
               <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
                 <button type="button" class="btn btn-success" onclick="saveParameters()">Save Parameters</button>
               </div>
             </div>
+          </form>
+          <div class="x_title">
+            <h4 class="text-center">Scheduler</h4>
+          </div><br>
+          <div class="panel-group" >
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('shutdown')" style="width:100%;">
+                Shutdown
+              </button>
+            </div>
+          </div>
+          <div class="panel-group" >
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('start')" style="width:100%;">
+                Start
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 {% endblock content %}
 

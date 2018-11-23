@@ -15,6 +15,7 @@ pathlib
 psycopg2
 pynetbox
 pyyaml
+slackclient
 simplekml
 tacacs_plus
 wtforms

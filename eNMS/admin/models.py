@@ -68,6 +68,8 @@ class Parameters(Base):
     )
     mattermost_channel = Column(String)
     mattermost_verify_certificate = Column(Boolean, default=True)
+    slack_token = Column(String)
+    slack_channel = Column(String)
     pool_id = Column(Integer, ForeignKey('Pool.id'))
     pool = relationship('Pool')
 

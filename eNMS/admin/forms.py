@@ -52,6 +52,8 @@ class AdministrationForm(FlaskForm):
     mattermost_url = StringField('Mattermost URL')
     mattermost_channel = StringField()
     mattermost_verify_certificate = BooleanField()
+    slack_token = StringField()
+    slack_channel = StringField()
     pool = ObjectField('Pool')
     categories = {
         'TACACS+ Client': (

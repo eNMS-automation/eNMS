@@ -12,6 +12,7 @@ class SlackNotificationService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     channel = Column(String)
+    token = Column(String)
     body = Column(String)
     body_textarea = True
 
@@ -23,7 +24,7 @@ class SlackNotificationService(Service):
         parameters = get_one('Parameters')
         slack_client = SlackClient(self.token or parameters.slack_token)
         result = slack_client.api_call(
-            "chat.postMessage",
+            'chat.postMessage',
             channel=self.channel or parameters.slack_channel,
             text=self.body
         )

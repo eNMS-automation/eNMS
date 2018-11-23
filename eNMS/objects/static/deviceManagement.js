@@ -15,7 +15,7 @@ const table = $('#table').DataTable(); // eslint-disable-line
 function tableActions(values, device) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-info btn-xs"
-    onclick="automationModal('${device.id}')">Automation</button>`,
+    onclick="deviceAutomationModal('${device.id}')">Automation</button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="connectionParametersModal('${device.id}')">Connect</button>`,
     `<button type="button" class="btn btn-primary btn-xs"

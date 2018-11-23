@@ -33,7 +33,7 @@ function openUrl(url) {
  * Display the device automation modal.
  * @param {id} id - Device id.
  */
-function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
+function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
   $('#device-automation-button').unbind('click');
   $('#device-automation-button').click(partial(updateDeviceAutomation, id));
   $('#device-automation').modal('show');
@@ -56,7 +56,7 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
  * Start an SSH session to the device.
  * @param {id} id - Device id.
  */
-function sshConnection(id) {
+function updateDeviceAutomation(id) {
   console.log(id);
 }
 

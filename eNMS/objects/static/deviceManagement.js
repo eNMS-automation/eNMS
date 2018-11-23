@@ -30,6 +30,7 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
+  convertSelect('#jobs');
   for (let i = 0; i < devices.length; i++) {
     addInstance('create', 'device', devices[i]);
   }

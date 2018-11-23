@@ -34,9 +34,27 @@ function openUrl(url) {
  * @param {id} id - Device id.
  */
 function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
+  call(`/get/device/${id}`, function(pool) {
+    $('#devices,#links').multiselect('deselectAll', false);
+    $('#devices').multiselect('select', pool.devices.map((n) => n.id));
+    $('#links').multiselect('select', pool.links.map((l) => l.id));
+    poolId = id;
+    $('#edit-pool-objects').modal('show');
+  });
   $('#device-automation-button').unbind('click');
   $('#device-automation-button').click(partial(updateDeviceAutomation, id));
   $('#device-automation').modal('show');
+}
+
+/**
+ * Update device jobs.
+ */
+function saveDeviceJobs() { // eslint-disable-line no-unused-vars
+  const url = `/objects/save_device_jobs/${poolId}`;
+  fCall(url, '#pool-objects-form', function() {
+    alertify.notify('Changes saved.', 'success', 5);
+    $('#edit-pool-objects').modal('hide');
+  });
 }
 
 /**
@@ -50,14 +68,6 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
   flipAuthenticationCombo();
   $('#edit-device').modal('hide');
   $('#connection-parameters').modal('show');
-}
-
-/**
- * Start an SSH session to the device.
- * @param {id} id - Device id.
- */
-function updateDeviceAutomation(id) {
-  console.log(id);
 }
 
 /**

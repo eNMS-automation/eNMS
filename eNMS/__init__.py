@@ -9,7 +9,6 @@ from importlib import import_module
 from logging import basicConfig, DEBUG, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from os import environ
-from slackclient import SlackClient
 
 auth = HTTPBasicAuth()
 db = SQLAlchemy(
@@ -38,9 +37,6 @@ scheduler = BackgroundScheduler({
 # Vault
 use_vault = int(environ.get('USE_VAULT', False))
 vault_client = VaultClient()
-
-# Slack
-slack_client = SlackClient(environ.get('SLACK_API_TOKEN'))
 
 from eNMS.base.default import (
     create_default_services,

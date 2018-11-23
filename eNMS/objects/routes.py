@@ -20,6 +20,7 @@ from eNMS.objects.forms import (
     AddLink,
     AddDevice,
     AddPoolForm,
+    DeviceAutomationForm,
     ImportExportForm,
     NetboxForm,
     OpenNmsForm,
@@ -38,7 +39,8 @@ def device_management():
     return dict(
         fields=device_public_properties,
         devices=serialize('Device'),
-        add_device_form=AddDevice(request.form)
+        add_device_form=AddDevice(request.form),
+        device_automation_form=DeviceAutomationForm(request.form)
     )
 
 

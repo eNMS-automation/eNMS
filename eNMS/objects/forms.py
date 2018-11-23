@@ -110,3 +110,7 @@ class NetboxForm(FlaskForm):
     netbox_token = StringField()
     node_type = [subtype for subtype in device_subtypes.items()]
     netbox_type = SelectField(choices=node_type)
+
+
+class DeviceAutomationForm(FlaskForm):
+    jobs = MultipleObjectField('Job')

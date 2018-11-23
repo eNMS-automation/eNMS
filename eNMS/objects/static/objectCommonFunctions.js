@@ -34,26 +34,23 @@ function openUrl(url) {
  * @param {id} id - Device id.
  */
 function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
-  call(`/get/device/${id}`, function(pool) {
-    $('#devices,#links').multiselect('deselectAll', false);
-    $('#devices').multiselect('select', pool.devices.map((n) => n.id));
-    $('#links').multiselect('select', pool.links.map((l) => l.id));
-    poolId = id;
-    $('#edit-pool-objects').modal('show');
+  call(`/get/device/${id}`, function(jobs) {
+    $('#device-automation-button').unbind('click');
+    $('#device-automation-button').click(partial(saveDeviceJobs, id));
+    $('#jobs').multiselect('deselectAll', false);
+    $('#jobs').multiselect('select', jobs.devices.map((n) => n.id));
+    $('#device-automation').modal('show');
   });
-  $('#device-automation-button').unbind('click');
-  $('#device-automation-button').click(partial(updateDeviceAutomation, id));
-  $('#device-automation').modal('show');
 }
 
 /**
  * Update device jobs.
  */
-function saveDeviceJobs() { // eslint-disable-line no-unused-vars
-  const url = `/objects/save_device_jobs/${poolId}`;
-  fCall(url, '#pool-objects-form', function() {
+function saveDeviceJobs(id) { // eslint-disable-line no-unused-vars
+  const url = `/objects/save_device_jobs/${id}`;
+  fCall(url, '#device-automation-form', function() {
     alertify.notify('Changes saved.', 'success', 5);
-    $('#edit-pool-objects').modal('hide');
+    $('#device-automation').modal('hide');
   });
 }
 

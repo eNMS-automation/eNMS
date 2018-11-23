@@ -171,11 +171,11 @@ def run_job(job_id):
     job.status, job.state = 'Running', {}
     info(f'{job.name}: starting.')
     db.session.commit()
-    now = datetime.now() + timedelta(seconds=5)
+    now = datetime.now()
     scheduler.add_job(
         id=str(now),
         func=scheduler_job,
-        run_date=now,
+        run_date=datetime.now(),
         args=[job_id],
         trigger='date'
     )

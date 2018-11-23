@@ -1,5 +1,3 @@
-from json import dumps
-from requests import post
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS import slack_client
@@ -8,9 +6,9 @@ from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
 
-class MattermostNotificationService(Service):
+class SlackNotificationService(Service):
 
-    __tablename__ = 'MattermostNotificationService'
+    __tablename__ = 'SlackNotificationService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     channel = Column(String)
@@ -18,7 +16,7 @@ class MattermostNotificationService(Service):
     body_textarea = True
 
     __mapper_args__ = {
-        'polymorphic_identity': 'MattermostNotificationService',
+        'polymorphic_identity': 'SlackNotificationService',
     }
 
     def job(self, _):
@@ -31,4 +29,4 @@ class MattermostNotificationService(Service):
         return {'success': True, 'result': str(result)}
 
 
-service_classes['MattermostNotificationService'] = MattermostNotificationService
+service_classes['SlackNotificationService'] = SlackNotificationService

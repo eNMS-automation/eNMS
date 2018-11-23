@@ -35,11 +35,10 @@ function openUrl(url) {
  */
 function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
   call(`/get/device/${id}`, function(device) {
-    console.log(device);
     $('#device-automation-button').unbind('click');
     $('#device-automation-button').click(partial(saveDeviceJobs, id));
     $('#jobs').multiselect('deselectAll', false);
-    $('#jobs').multiselect('select', jobs.devices.map((n) => n.id));
+    $('#jobs').multiselect('select', device.jobs.map((d) => d.id));
     $('#device-automation').modal('show');
   });
 }

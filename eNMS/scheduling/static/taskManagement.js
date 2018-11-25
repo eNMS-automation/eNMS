@@ -46,6 +46,7 @@ function addTask(mode, properties) {
 
 /**
  * Start or shutdown the scheduler.
+ * @param {action} action - Pause or resume.
  */
 function scheduler(action) { // eslint-disable-line no-unused-vars
   call(`/scheduling/scheduler/${action}`, function() {

@@ -1,6 +1,7 @@
 /*
 global
 addInstance: false
+convertSelect: false
 devices: false
 doc: false
 */

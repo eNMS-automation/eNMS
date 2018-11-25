@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+call: false
 fCall: false
 partial: false
 */
@@ -45,6 +46,7 @@ function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
 
 /**
  * Update device jobs.
+ * @param {id} id - Device id.
  */
 function saveDeviceJobs(id) { // eslint-disable-line no-unused-vars
   const url = `/objects/save_device_jobs/${id}`;

@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
 from json import dumps

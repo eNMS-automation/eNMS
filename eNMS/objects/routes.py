@@ -106,7 +106,7 @@ def connection(id):
 
 
 @post(bp, '/save_device_jobs/<id>', 'Edit')
-def save_device_jobs(id): 
+def save_device_jobs(id):
     fetch('Device', id=id).jobs = objectify('Job', request.form['jobs'])
     db.session.commit()
     return True

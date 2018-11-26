@@ -23,7 +23,7 @@ workflowBuilder: false;
   });
 })();
 
-function openWizard(){
+function openWizard() {
   $('#wizard').smartWizard({
     onFinish: editService,
     enableFinishButton: true,

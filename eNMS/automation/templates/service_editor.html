@@ -7,37 +7,86 @@
         </button>
         <h4 class="modal-title" id="title-service"></h4>
       </div>
-      <form id="edit-service-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
-        <div class="modal-body">
-          <label>Type of Service</label>
-          <div class='form-group'>
-            <select class="form-control" id="service-type"></select>
-          </div>
-          {% for field in service_form %}
-            {% if field.widget.input_type == 'hidden' %}
-              {{ field(id='service-' + field.name) }}
-            {% elif field.name in ('multiprocessing', 'send_notification') %}
-              <fieldset>
-                <div class="item">
-                  <input id="service-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
-                  <label>{{ field.name }}</label>
-                </div>
-              </fieldset>
-            {% else %}
-              <label>{{ field.label }}</label>
-              <div class='form-group'>
-                {{ field(id='service-' + field.name, class="form-control") }}
+      <div id="wizard" class="form_wizard wizard_horizontal">
+        <ul class="wizard_steps">
+        <li>
+            <a href="#step-1">
+            <span class="step_no">1</span>
+            <span class="step_descr">
+                                Step 1<br />
+                                <small>Step 1 description</small>
+                            </span>
+            </a>
+        </li>
+        <li>
+            <a href="#step-2">
+            <span class="step_no">2</span>
+            <span class="step_descr">
+                                Step 2<br />
+                                <small>Step 2 description</small>
+                            </span>
+            </a>
+        </li>
+        </ul>
+        <div id="step-1">
+          <form class="form-horizontal form-label-left">
+
+              <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
               </div>
-            {% endif %}
-          {% endfor %}
-          <div id="html-form"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" onclick="saveService(run=true)">Save & Run</button>
-          <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
-        </div>
-      </form>
+              </div>
+              <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+              </div>
+              <div class="form-group">
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+              </div>
+              </div>
+              <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div id="gender" class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                      <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                  </label>
+                  <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                      <input type="radio" name="gender" value="female"> Female
+                  </label>
+                  </div>
+              </div>
+              </div>
+              <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+              </div>
+              </div>
+
+          </form>
+
+          </div>
+          <div id="step-2">
+          <h2 class="StepTitle">Step 2 Content</h2>
+          <p>
+              do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          </div>
+      </div>
     </div>
   </div>
 </div>

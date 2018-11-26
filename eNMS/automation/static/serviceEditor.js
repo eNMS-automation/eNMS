@@ -13,6 +13,7 @@ workflowBuilder: false;
 */
 
 (function() {
+  $('#wizard').smartWizard();
   convertSelect('#service-devices', '#service-pools');
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];

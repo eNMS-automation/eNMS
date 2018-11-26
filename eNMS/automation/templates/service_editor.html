@@ -22,7 +22,7 @@
               <a href="#step-2">
                 <span class="step_no">2</span>
                 <span class="step_descr">Step 2<br>
-                  <small>Targets</small>
+                  <small>Advanced</small>
                 </span>
               </a>
             </li>
@@ -30,6 +30,14 @@
               <a href="#step-3">
                 <span class="step_no">3</span>
                 <span class="step_descr">Step 3<br>
+                  <small>Targets</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-4">
+                <span class="step_no">4</span>
+                <span class="step_descr">Step 4<br>
                   <small>Service Parameters</small>
                 </span>
               </a>
@@ -54,9 +62,24 @@
             <div class='form-group'>
               {{ service_form.description(id='service-description', class="form-control") }}
             </div>
-            <label><label for="waiting_time">Waiting time (in seconds)</label></label>
+            <label><label for="vendor">Vendor</label></label>
             <div class='form-group'>
-              {{ service_form.waiting_time(id='service-waiting_time', class="form-control") }}
+              {{ service_form.vendor(id='service-vendor', class="form-control") }}
+            </div>
+            <label><label for="operating_system">Operating System</label></label>
+            <div class='form-group'>
+              {{ service_form.operating_system(id='service-operating_system', class="form-control") }}
+            </div>
+          </div>
+          <div id="step-2">
+            <h2 class="StepTitle">Advanced</h2>
+            <label><label for="number_of_retries">Number of retries</label></label>
+            <div class='form-group'>
+              {{ service_form.number_of_retries(id='service-number_of_retries', class="form-control") }}
+            </div>
+            <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
+            <div class='form-group'>
+              {{ service_form.time_between_retries(id='service-time_between_retries', class="form-control") }}
             </div>
             <fieldset>
               <div class="item">
@@ -68,24 +91,12 @@
             <div class='form-group'>
               {{ service_form.send_notification_method(id='service-send_notification_method', class="form-control") }}
             </div>
-            <label><label for="number_of_retries">Number of retries</label></label>
+            <label><label for="waiting_time">Waiting time (in seconds)</label></label>
             <div class='form-group'>
-              {{ service_form.number_of_retries(id='service-number_of_retries', class="form-control") }}
-            </div>
-            <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
-            <div class='form-group'>
-              {{ service_form.time_between_retries(id='service-time_between_retries', class="form-control") }}
-            </div>
-            <label><label for="vendor">Vendor</label></label>
-            <div class='form-group'>
-              {{ service_form.vendor(id='service-vendor', class="form-control") }}
-            </div>
-            <label><label for="operating_system">Operating System</label></label>
-            <div class='form-group'>
-              {{ service_form.operating_system(id='service-operating_system', class="form-control") }}
+              {{ service_form.waiting_time(id='service-waiting_time', class="form-control") }}
             </div>
           </div>
-          <div id="step-2">
+          <div id="step-3">
             <h2 class="StepTitle">Targets</h2>
             <label><label for="devices">Devices</label></label>
             <div class='form-group'>
@@ -106,7 +117,7 @@
               {{ service_form.max_processes(id='service-max_processes', class="form-control") }}
             </div>
           </div>
-          <div id="step-3">
+          <div id="step-4">
             <h2 class="StepTitle">Service Parameters</h2>
             <div id="html-form" style="min-height: 300px;"></div>
           </div>

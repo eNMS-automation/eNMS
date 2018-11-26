@@ -7,52 +7,59 @@
         </button>
         <h4 class="modal-title" id="title-service"></h4>
       </div>
-      <div id="wizard" class="form_wizard wizard_horizontal">
-        <ul class="wizard_steps">
-          <li>
-            <a href="#step-1">
-              <span class="step_no">1</span>
-              <span class="step_descr">Step 1<br>
-                <small>Step 1 description</small>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="#step-2">
-              <span class="step_no">2</span>
-              <span class="step_descr">Step 2<br>
-                <small>Step 2 description</small>
-              </span>
-            </a>
-          </li>
-        </ul>
-        <div id="step-1">
-          <h2 class="StepTitle">Step 1 Content</h2>
-          <label>Type of Service</label>
-          <div class='form-group'>
-            <select class="form-control" id="service-type"></select>
-          </div>
-          {% for field in service_form %}
-            {% if field.widget.input_type == 'hidden' %}
-              {{ field(id='service-' + field.name) }}
-            {% elif field.name in ('multiprocessing', 'send_notification') %}
-              <fieldset>
-                <div class="item">
-                  <input id="service-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
-                  <label>{{ field.name }}</label>
+      <div class="modal-body">
+        <div id="wizard" class="form_wizard wizard_horizontal">
+          <ul class="wizard_steps">
+            <li>
+              <a href="#step-1">
+                <span class="step_no">1</span>
+                <span class="step_descr">Step 1<br>
+                  <small>Step 1 description</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-2">
+                <span class="step_no">2</span>
+                <span class="step_descr">Step 2<br>
+                  <small>Step 2 description</small>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <div id="step-1">
+            <h2 class="StepTitle">Step 1 Content</h2>
+            <label>Type of Service</label>
+            <div class='form-group'>
+              <select class="form-control" id="service-type"></select>
+            </div>
+            {% for field in service_form %}
+              {% if field.widget.input_type == 'hidden' %}
+                {{ field(id='service-' + field.name) }}
+              {% elif field.name in ('multiprocessing', 'send_notification') %}
+                <fieldset>
+                  <div class="item">
+                    <input id="service-{{ field.name }}" name="{{ field.name }}" type="checkbox" value="y">
+                    <label>{{ field.name }}</label>
+                  </div>
+                </fieldset>
+              {% else %}
+                <label>{{ field.label }}</label>
+                <div class='form-group'>
+                  {{ field(id='service-' + field.name, class="form-control") }}
                 </div>
-              </fieldset>
-            {% else %}
-              <label>{{ field.label }}</label>
-              <div class='form-group'>
-                {{ field(id='service-' + field.name, class="form-control") }}
-              </div>
-            {% endif %}
-          {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div id="step-2">
+            <h2 class="StepTitle">Step 2 Content</h2>
+            <div id="html-form" style="min-height: 300px;"></div>
+          </div>
         </div>
-        <div id="step-2">
-          <h2 class="StepTitle">Step 2 Content</h2>
-          <div id="html-form"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" onclick="saveService(run=true)">Save & Run</button>
+          <button type="button" class="btn btn-success" onclick="saveService()">Save</button>
         </div>
       </div>
     </div>

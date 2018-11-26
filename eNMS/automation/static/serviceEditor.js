@@ -24,13 +24,10 @@ workflowBuilder: false;
 })();
 
 function openWizard() {
-  $('#wizard').smartWizard({
-    onFinish: editService,
-    enableFinishButton: true,
-  });
+  $('#wizard').smartWizard({});
   $('.buttonNext').addClass('btn btn-success');
   $('.buttonPrevious').addClass('btn btn-primary');
-  $('.buttonFinish').addClass('btn btn-default');
+  $('.buttonFinish').hide();
 }
 
 /**

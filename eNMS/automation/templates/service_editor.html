@@ -50,78 +50,61 @@
             <div class='form-group'>
               {{ service_form.name(id='service-name', class="form-control") }}
             </div>
-
             <label><label for="description">Description</label></label>
             <div class='form-group'>
               {{ service_form.description(id='service-description', class="form-control") }}
             </div>
-
-            <label><label for="devices">Devices</label></label>
-            <div class='form-group'>
-              {{ service_form.devices(id='service-devices', class="form-control") }}
-            </div>
-
-            <fieldset>
-              <div class="item">
-                <input id="service-multiprocessing" name="multiprocessing" type="checkbox" value="y">
-                <label>multiprocessing</label>
-              </div>
-            </fieldset>
-
-            <label><label for="max_processes">Maximum number of processes</label></label>
-            <div class='form-group'>
-              <input class="form-control" id="service-max_processes" name="max_processes" type="text" value="50">
-            </div>
-
-            <label><label for="pools">Pools</label></label>
-            <div class='form-group'>
-              <select class="form-control" id="service-pools" multiple name="pools"></select>
-            </div>
-
             <label><label for="waiting_time">Waiting time (in seconds)</label></label>
             <div class='form-group'>
-              <input class="form-control" id="service-waiting_time" name="waiting_time" type="text" value="0">
+              {{ service_form.waiting_time(id='service-waiting_time', class="form-control") }}
             </div>
-
             <fieldset>
               <div class="item">
                 <input id="service-send_notification" name="send_notification" type="checkbox" value="y">
                 <label>send_notification</label>
               </div>
             </fieldset>
-
             <label><label for="send_notification_method">Send Notification Method</label></label>
             <div class='form-group'>
-              <select class="form-control" id="service-send_notification_method" name="send_notification_method">
-                <option value="mail_feedback_notification">Mail</option>
-                <option value="slack_feedback_notification">Slack</option>
-                <option value="mattermost_feedback_notification">Mattermost</option>
-              </select>
+              {{ service_form.send_notification_method(id='service-send_notification_method', class="form-control") }}
             </div>
-
             <label><label for="number_of_retries">Number of retries</label></label>
             <div class='form-group'>
-              <input class="form-control" id="service-number_of_retries" name="number_of_retries" type="text" value="0">
+              {{ service_form.number_of_retries(id='service-number_of_retries', class="form-control") }}
             </div>
-
             <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
             <div class='form-group'>
-              <input class="form-control" id="service-time_between_retries" name="time_between_retries" type="text" value="10">
+              {{ service_form.time_between_retries(id='service-time_between_retries', class="form-control") }}
             </div>
-
             <label><label for="vendor">Vendor</label></label>
             <div class='form-group'>
-              <input class="form-control" id="service-vendor" name="vendor" type="text" value="">
+              {{ service_form.vendor(id='service-vendor', class="form-control") }}
             </div>
-
             <label><label for="operating_system">Operating System</label></label>
             <div class='form-group'>
-              <input class="form-control" id="service-operating_system" name="operating_system" type="text" value="">
+              {{ service_form.operating_system(id='service-operating_system', class="form-control") }}
             </div>
           </div>
           <div id="step-2">
             <h2 class="StepTitle">Targets</h2>
-            <div id="html-form" style="min-height: 300px;"></div>
+            <label><label for="devices">Devices</label></label>
+            <div class='form-group'>
+              {{ service_form.devices(id='service-devices', class="form-control") }}
+            </div>
+            <label><label for="pools">Pools</label></label>
+            <div class='form-group'>
+              {{ service_form.pools(id='service-pools', class="form-control") }}
+            </div>
+            <fieldset>
+              <div class="item">
+                <input id="service-multiprocessing" name="multiprocessing" type="checkbox" value="y">
+                <label>multiprocessing</label>
+              </div>
+            </fieldset>
+            <label><label for="max_processes">Maximum number of processes</label></label>
+            <div class='form-group'>
+              {{ service_form.max_processes(id='service-max_processes', class="form-control") }}
+            </div>
           </div>
           <div id="step-3">
             <h2 class="StepTitle">Service Parameters</h2>

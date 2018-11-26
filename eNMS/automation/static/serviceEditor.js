@@ -13,7 +13,6 @@ workflowBuilder: false;
 */
 
 (function() {
-  $('#wizard').smartWizard();
   convertSelect('#service-devices', '#service-pools');
   for (let i = 0; i < servicesClasses.length; i++) {
     const cls = servicesClasses[i];
@@ -23,6 +22,16 @@ workflowBuilder: false;
     editService();
   });
 })();
+
+function openWizard(){
+  $('#wizard').smartWizard({
+    onFinish: editService,
+    enableFinishButton: true,
+  });
+  $('.buttonNext').addClass('btn btn-success');
+  $('.buttonPrevious').addClass('btn btn-primary');
+  $('.buttonFinish').addClass('btn btn-default');
+}
 
 /**
  * Edit a service.

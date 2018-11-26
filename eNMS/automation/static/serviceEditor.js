@@ -27,7 +27,9 @@ workflowBuilder: false;
  * Open smart wizard.
  */
 function openWizard() { // eslint-disable-line no-unused-vars
-  $('#wizard').smartWizard({});
+  $('#wizard').smartWizard({
+    enableAllSteps: true,
+  });
   $('.buttonNext').addClass('btn btn-success');
   $('.buttonPrevious').addClass('btn btn-primary');
   $('.buttonFinish').hide();

@@ -23,7 +23,10 @@ workflowBuilder: false;
   });
 })();
 
-function openWizard() {
+/**
+ * Open smart wizard.
+ */
+function openWizard() { // eslint-disable-line no-unused-vars
   $('#wizard').smartWizard({});
   $('.buttonNext').addClass('btn btn-success');
   $('.buttonPrevious').addClass('btn btn-primary');

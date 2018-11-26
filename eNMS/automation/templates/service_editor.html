@@ -33,6 +33,90 @@
             <div class='form-group'>
               <select class="form-control" id="service-type"></select>
             </div>
+                <label><label for="name">Name</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-name" name="name" type="text" value="">
+                </div>
+
+                <label><label for="description">Description</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-description" name="description" type="text" value="">
+                </div>
+
+                <label><label for="devices">Devices</label></label>
+                <div class='form-group'>
+                  <select class="form-control" id="service-devices" multiple name="devices"></select>
+                </div>
+
+                <fieldset>
+                  <div class="item">
+                    <input id="service-multiprocessing" name="multiprocessing" type="checkbox" value="y">
+                    <label>multiprocessing</label>
+                  </div>
+                </fieldset>
+
+                <label><label for="max_processes">Maximum number of processes</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-max_processes" name="max_processes" type="text" value="50">
+                </div>
+              
+            
+              
+                <label><label for="pools">Pools</label></label>
+                <div class='form-group'>
+                  <select class="form-control" id="service-pools" multiple name="pools"><option value="1">All objects</option><option value="2">Devices only</option><option value="3">Links only</option></select>
+                </div>
+              
+            
+              
+                <label><label for="waiting_time">Waiting time (in seconds)</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-waiting_time" name="waiting_time" type="text" value="0">
+                </div>
+              
+            
+              
+                <fieldset>
+                  <div class="item">
+                    <input id="service-send_notification" name="send_notification" type="checkbox" value="y">
+                    <label>send_notification</label>
+                  </div>
+                </fieldset>
+              
+            
+              
+                <label><label for="send_notification_method">Send Notification Method</label></label>
+                <div class='form-group'>
+                  <select class="form-control" id="service-send_notification_method" name="send_notification_method"><option value="mail_feedback_notification">Mail</option><option value="slack_feedback_notification">Slack</option><option value="mattermost_feedback_notification">Mattermost</option></select>
+                </div>
+              
+            
+              
+                <label><label for="number_of_retries">Number of retries</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-number_of_retries" name="number_of_retries" type="text" value="0">
+                </div>
+              
+            
+              
+                <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-time_between_retries" name="time_between_retries" type="text" value="10">
+                </div>
+              
+            
+              
+                <label><label for="vendor">Vendor</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-vendor" name="vendor" type="text" value="">
+                </div>
+              
+            
+              
+                <label><label for="operating_system">Operating System</label></label>
+                <div class='form-group'>
+                  <input class="form-control" id="service-operating_system" name="operating_system" type="text" value="">
+                </div>
             {% for field in service_form %}
               {% if field.widget.input_type == 'hidden' %}
                 {{ field(id='service-' + field.name) }}

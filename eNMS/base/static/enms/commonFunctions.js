@@ -152,7 +152,6 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
 function showCreateModal(type) { // eslint-disable-line no-unused-vars
   $(`#edit-${type}-form`).trigger('reset');
   $(`#${type}-id`).val('');
-  console.log('test');
   selects.forEach((id) => $(id).selectpicker('render'));
   $(`#title-${type}`).text(`Create a New ${type}`);
   $(`#edit-${type}`).modal('show');

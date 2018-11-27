@@ -17,12 +17,21 @@ NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
 NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
+def get_credentials(service, device):
+    return (
+        service.user.name, service.user.password
+        if service.credentials == 'user'
+        else device.username, device.password
+    )
+
+
 def netmiko_connection(service, device):
+    username, password = get_credentials(service, device)
     return ConnectHandler(
         device_type=service.driver,
         ip=device.ip_address,
-        username=device.username,
-        password=device.password,
+        username=username,
+        password=password,
         secret=device.enable_password,
         fast_cli=service.fast_cli,
         timeout=service.timeout,
@@ -31,6 +40,7 @@ def netmiko_connection(service, device):
 
 
 def napalm_connection(service, device):
+    username, password = get_credentials(service, device)
     optional_args = service.optional_args
     if not optional_args:
         optional_args = {}
@@ -39,8 +49,8 @@ def napalm_connection(service, device):
     driver = get_network_driver(service.driver)
     return driver(
         hostname=device.ip_address,
-        username=device.username,
-        password=device.password,
+        username=username,
+        password=password,
         optional_args=optional_args
     )
 

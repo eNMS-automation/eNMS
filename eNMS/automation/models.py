@@ -41,6 +41,8 @@ class Job(Base):
     vendor = Column(String)
     operating_system = Column(String)
     waiting_time = Column(Integer, default=0)
+    user_id = Column(Integer, ForeignKey('User.id'))
+    user = relationship('User', back_populates='jobs')
     workflows = relationship(
         'Workflow',
         secondary=job_workflow_table,

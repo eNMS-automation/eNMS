@@ -114,7 +114,7 @@ def get_service(id_or_cls):
         return f'''
             <label>{property}</label>
             <div class="form-group">
-              <select class="form-control"
+              <select class="form-control" liveSearch="true"
                 id="service-{property}" name="{property}"
                 {'multiple size="7"'
                 if property_types[property] == 'list'

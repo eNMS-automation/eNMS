@@ -44,6 +44,7 @@ function convertSelect(...ids) { // eslint-disable-line no-unused-vars
     $(id).selectpicker({
       liveSearch: true,
       actionsBox: true,
+      windowPadding: 200,
     });
   });
 }

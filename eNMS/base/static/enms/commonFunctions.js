@@ -7,7 +7,7 @@ table: false
 tableActions: false
 */
 
-let multiSelects = [];
+let selects = [];
 
 /**
  * Update link to the docs.
@@ -40,6 +40,7 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
  */
 function convertSelect(...ids) { // eslint-disable-line no-unused-vars
   ids.forEach((id) => {
+    selects.push(id);
     $(id).selectpicker({
       liveSearch: true,
       actionsBox: true,
@@ -151,7 +152,8 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
 function showCreateModal(type) { // eslint-disable-line no-unused-vars
   $(`#edit-${type}-form`).trigger('reset');
   $(`#${type}-id`).val('');
-  multiSelects.forEach((id) => $(id).select('refresh'));
+  console.log('test');
+  selects.forEach((id) => $(id).selectpicker('render'));
   $(`#title-${type}`).text(`Create a New ${type}`);
   $(`#edit-${type}`).modal('show');
 }
@@ -178,7 +180,7 @@ function processInstance(type, instance, dup) {
         'val',
         propertyType === 'object-list' ? value.map((p) => p.id) : value
       );
-      $(`#${type}-${property}`).selectpicker('refresh');
+      $(`#${type}-${property}`).selectpicker('render');
     } else if (propertyType == 'object') {
       $(`#${type}-${property}`).val(value.id);
     } else {

@@ -374,8 +374,6 @@ $(window).bind('beforeunload', function() {
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  $('#add_jobs').selectpicker({
-    liveSearch: true,
-  });
+  convertSelect('#add_jobs');
   getWorkflowState();
 })();

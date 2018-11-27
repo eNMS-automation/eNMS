@@ -36,6 +36,7 @@ class Job(Base):
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     status = Column(String, default='Idle')
     state = Column(MutableDict.as_mutable(PickleType), default={})
+    credentials = Column(String, default='device')
     tasks = relationship('Task', back_populates='job', cascade='all,delete')
     vendor = Column(String)
     operating_system = Column(String)

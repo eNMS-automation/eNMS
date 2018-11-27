@@ -3,6 +3,12 @@ global
 call: false
 */
 
+(function() {
+  $('#job').selectpicker({
+    liveSearch: true,
+  });
+})();
+
 /**
  * Show the task modal for task.
  * @param {id} id - Task id.

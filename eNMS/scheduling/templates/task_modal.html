@@ -19,14 +19,14 @@
             <div class='form-group'>
               {{ scheduling_form.description(class="form-control") }}
             </div>
-            <div>
-              <label>Service or Workflow</label>
-              <div class="form-group">
-                {{ scheduling_form.job(class="form-control") }}
-              </div>
+            <label>Type of Service</label>
+            <div class='form-group'>
+              <select class="form-control" id="service-type"></select>
             </div>
-          </div>
-          <div class="form-group" style="min-height: 350px">
+            <label>Service or Workflow</label>
+            <div class="form-group">
+              {{ scheduling_form.job(class="form-control") }}
+            </div>
             <label>Start date</label>
             <div class='form-group'>
               {{ scheduling_form.start_date(class="form-control", required=true) }}

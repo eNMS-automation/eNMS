@@ -98,6 +98,7 @@ def integrity_rollback(function):
 def process_request(function):
     def wrapper(*a, **kw):
         data = {**request.form.to_dict(), **{'user': current_user}}
+        print(data)
         for property in data.get('list_fields', '').split(','):
             if property in request.form:
                 data[property] = request.form.getlist(property)

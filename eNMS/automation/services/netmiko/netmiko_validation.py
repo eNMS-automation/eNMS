@@ -24,7 +24,7 @@ class NetmikoValidationService(Service):
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=1.)
+    timeout = Column(Integer, default=10.)
     global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {

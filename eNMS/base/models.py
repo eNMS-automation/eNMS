@@ -60,6 +60,9 @@ class Base(db.Model):
             elif property_type == 'dict':
                 value = loads(value) if value else {}
             elif property_type in ['float', 'int']:
+                default_value = getattr(self.__table__.c, property).default
+                if default_value and not value:
+                    value = default_value.arg
                 value = {'float': float, 'int': int}[property_type](value or 0)
             setattr(self, property, value)
 

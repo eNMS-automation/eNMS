@@ -1,7 +1,6 @@
 /*
 global
 alertify: false
-buildSelect: false
 call: false
 convertSelect: false
 doc: false
@@ -81,8 +80,7 @@ function displayWorkflow(wf) {
     }
   });
   $(`#add_jobs option[value='${wf.id}']`).remove();
-  $(`#add_jobs`).multiselect('destroy');
-  buildSelect('#add_jobs');
+  $('#add_jobs').select('refresh');
   getWorkflowState();
   return graph;
 }
@@ -376,6 +374,8 @@ $(window).bind('beforeunload', function() {
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  convertSelect('#add_jobs');
+  $('#add_jobs').selectpicker({
+    liveSearch: true,
+  });
   getWorkflowState();
 })();

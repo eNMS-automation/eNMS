@@ -134,6 +134,7 @@ job_public_properties = [
     'operating_system',
     'type',
     'description',
+    'credentials',
     'status',
     'state',
     'positions',

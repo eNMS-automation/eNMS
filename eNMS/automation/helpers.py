@@ -19,13 +19,14 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 def get_credentials(service, device):
     return (
-        service.user.name, service.user.password
+        (service.user.name, service.user.password)
         if service.credentials == 'user'
-        else device.username, device.password
+        else (device.username, device.password)
     )
 
 
 def netmiko_connection(service, device):
+    print(get_credentials(service, device))
     username, password = get_credentials(service, device)
     return ConnectHandler(
         device_type=service.driver,

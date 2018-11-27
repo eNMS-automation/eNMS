@@ -38,9 +38,9 @@ function tableActions(values, pool) { // eslint-disable-line no-unused-vars
  */
 function showPoolObjects(id) { // eslint-disable-line no-unused-vars
   call(`/get/pool/${id}`, function(pool) {
-    $('#devices,#links').multiselect('deselectAll', false);
-    $('#devices').multiselect('select', pool.devices.map((n) => n.id));
-    $('#links').multiselect('select', pool.links.map((l) => l.id));
+    $('#devices,#links').selectpicker('deselectAll');
+    $('#devices').selectpicker('val', pool.devices.map((n) => n.id));
+    $('#links').selectpicker('val', pool.links.map((l) => l.id));
     poolId = id;
     $('#edit-pool-objects').modal('show');
   });

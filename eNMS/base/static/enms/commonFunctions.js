@@ -175,7 +175,7 @@ function processInstance(type, instance, dup) {
     } else if (propertyType.includes('list')) {
       $(`#${type}-${property}`).selectpicker('deselectAll');
       $(`#${type}-${property}`).selectpicker(
-        'select',
+        'val',
         propertyType === 'object-list' ? value.map((p) => p.id) : value
       );
       $(`#${type}-${property}`).selectpicker('refresh');

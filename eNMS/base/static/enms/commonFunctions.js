@@ -42,6 +42,7 @@ function convertSelect(...ids) { // eslint-disable-line no-unused-vars
   ids.forEach((id) => {
     $(id).selectpicker({
       liveSearch: true,
+      actionsBox: true,
     });
   });
 }
@@ -150,7 +151,7 @@ function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
 function showCreateModal(type) { // eslint-disable-line no-unused-vars
   $(`#edit-${type}-form`).trigger('reset');
   $(`#${type}-id`).val('');
-  multiSelects.forEach((id) => $(id).multiselect('refresh'));
+  multiSelects.forEach((id) => $(id).select('refresh'));
   $(`#title-${type}`).text(`Create a New ${type}`);
   $(`#edit-${type}`).modal('show');
 }
@@ -172,11 +173,12 @@ function processInstance(type, instance, dup) {
     } else if (propertyType.includes('dict')) {
       $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
     } else if (propertyType.includes('list')) {
-      $(`#${type}-${property}`).multiselect('deselectAll', false);
-      $(`#${type}-${property}`).multiselect(
+      $(`#${type}-${property}`).selectpicker('deselectAll');
+      $(`#${type}-${property}`).selectpicker(
         'select',
         propertyType === 'object-list' ? value.map((p) => p.id) : value
       );
+      $(`#${type}-${property}`).selectpicker('refresh');
     } else if (propertyType == 'object') {
       $(`#${type}-${property}`).val(value.id);
     } else {

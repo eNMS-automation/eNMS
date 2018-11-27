@@ -4,9 +4,7 @@ call: false
 */
 
 (function() {
-  $('#job').selectpicker({
-    liveSearch: true,
-  });
+  convertSelect('#job');
 })();
 
 /**

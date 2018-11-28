@@ -21,6 +21,9 @@ workflowBuilder: false;
   $('#service-type').change(function() {
     editService();
   });
+  $('#edit-service').on('hidden.bs.modal', function() {
+    $('#service-type').prop('disabled', false);
+  })
 })();
 
 /**
@@ -42,6 +45,7 @@ function openWizard() { // eslint-disable-line no-unused-vars
  */
 function editService(id, duplicate) {
   const url = `/automation/get_service/${id || $('#service-type').val()}`;
+  $('#service-type').prop('disabled', true);
   call(url, function(r) {
     for (const type of ['boolean', 'list']) {
       const fields = $(`#service-${type}_fields`);

@@ -26,7 +26,6 @@ def get_credentials(service, device):
 
 
 def netmiko_connection(service, device):
-    print(get_credentials(service, device))
     username, password = get_credentials(service, device)
     return ConnectHandler(
         device_type=service.driver,

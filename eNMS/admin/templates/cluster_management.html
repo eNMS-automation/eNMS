@@ -1,0 +1,89 @@
+{% extends "base_site.html" %}
+
+{% block title %} User Management {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  {% include 'confirm_deletion_modal.html' %}
+  <div id="edit-user" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="title-user"></h4>
+        </div>
+        <form id="edit-user-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+          <div class="modal-body">
+            <div class="form-group">
+              {% for field in form %}
+                {% if field.widget.input_type == 'hidden' %}
+                  {{ field(id="user-" + field.name) }}
+                {% else %}
+                  <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
+                  <div class="col-md-10 col-sm-10 col-xs-12">
+                    {{ field(id="user-" + field.name, class="form-control", size='15') }}
+                  </div><br><br>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="reset">Reset</button>
+            <button type="button" class="btn btn-success" onclick="processData('user')">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div style="height:80vh;" class="x_content">
+            <div class="panel-group" >
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-default btn-file" onclick="showCreateModal('user')" style="width:100%;">
+                  Create a New User
+                </button>
+              </div>
+            </div>
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Existing Users</h3>
+              </div>
+            </div>
+            <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  {% for field in fields %}
+                    <th>{{ names[field] }}</th>
+                  {% endfor %}
+                  <th style="width: 5%">Edit</th>
+                  <th style="width: 5%">Duplicate</th>
+                  <th style="width: 5%">Delete</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
+    var fields = {{ fields|tojson|safe }}
+    var users = {{ users|tojson|safe }}
+  </script>
+  <script src="{{ url_for('admin_blueprint.static', filename='userManagement.js') }}"></script>
+{% endblock javascripts %}

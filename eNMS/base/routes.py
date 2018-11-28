@@ -1,5 +1,7 @@
 from collections import Counter
+from logging import info
 from flask import redirect, request, url_for
+from flask_login import current_user
 
 from eNMS.base import bp
 from eNMS.base.classes import classes
@@ -43,21 +45,28 @@ def get_counters(property, type):
 
 @post(bp, '/get/<cls>/<id>', 'View')
 def get_instance(cls, id):
-    return fetch(cls, id=id).serialized
+    instance = fetch(cls, id=id)
+    info(f'{current_user.name}: GET {cls} {instance.name} ({id})')
+    return instance.serialized 
 
 
 @post(bp, '/update/<cls>', 'Edit')
 def update_instance(cls):
-    return factory(cls, **request.form).serialized
+    instance = factory(cls, **request.form)
+    info(f'{current_user.name}: UPDATE {cls} {instance.name} ({instance.id})')
+    return instance.serialized
 
 
 @post(bp, '/delete/<cls>/<id>', 'Edit')
 def delete_instance(cls, id):
-    return delete(cls, id=id)
+    instance = delete(cls, id=id)
+    info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
+    return instance
 
 
 @post(bp, '/shutdown', 'Admin')
 def shutdown():
+    info(f'{current_user.name}: SHUTDOWN eNMS')
     func = request.environ.get('werkzeug.server.shutdown')
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')

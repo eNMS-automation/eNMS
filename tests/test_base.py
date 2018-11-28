@@ -10,7 +10,8 @@ urls = {
         '/user_management',
         '/login',
         '/administration',
-        '/database'
+        '/database',
+        '/cluster_management'
     ),
     '/objects': (
         '/device_management',

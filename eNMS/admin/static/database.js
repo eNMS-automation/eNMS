@@ -39,9 +39,9 @@ function clearLogs() { // eslint-disable-line no-unused-vars
 /**
  * Reset Status.
  */
-function clearLogs() { // eslint-disable-line no-unused-vars
-  fCall('/admin/clear_logs', '#logs-form', function(result) {
-    alertify.notify('Logs cleared.', 'success', 5);
+function resetStatus() { // eslint-disable-line no-unused-vars
+  call('/admin/reset_status', function(result) {
+    alertify.notify('Reset successful.', 'success', 5);
   });
 }
 

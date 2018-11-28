@@ -124,6 +124,14 @@ def clear_logs():
     return True
 
 
+@post(bp, '/reset_status', 'Admin')
+def reset_status():
+    for job in fetch_all('Job'):
+        job.status = 'Idle'
+    db.session.commit()
+    return True
+
+
 @post(bp, '/migration_<direction>', 'Admin')
 def migration(direction):
     return {

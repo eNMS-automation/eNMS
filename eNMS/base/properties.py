@@ -185,6 +185,12 @@ user_serialized_properties = [
     'permissions'
 ]
 
+cluster_public_properties = [
+    'name',
+    'ip_address',
+    'weight'
+]
+
 user_permissions = [
     'Admin',
     'Connect to device',
@@ -238,6 +244,7 @@ task_serialized_properties = [
 ]
 
 cls_to_properties = {
+    'Cluster': cluster_public_properties,
     'Device': device_public_properties,
     'Link': link_public_properties,
     'Pool': pool_public_properties,

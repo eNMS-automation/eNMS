@@ -25,15 +25,21 @@ class User(Base, UserMixin):
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     password = Column(String)
 
-    def update(self, **kwargs):
-        super().update(**kwargs)
-
     @property
     def is_admin(self):
         return 'Admin' in self.permissions
 
     def allowed(self, permission):
         return self.is_admin or permission in self.permissions
+
+
+class Cluster(Base):
+
+    __tablename__ = type = 'Cluster'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)
+    ip_address = Column(String)
+    weight = Column(Integer, default=1)
 
 
 class Parameters(Base):

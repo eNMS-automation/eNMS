@@ -9,8 +9,8 @@ bp = Blueprint(
 )
 
 from eNMS.base.helpers import add_classes
-from eNMS.admin.models import Cluster, User, Parameters
+from eNMS.admin.models import Instance, User, Parameters
 
-add_classes(Cluster, User, Parameters)
+add_classes(Instance, User, Parameters)
 
 import eNMS.admin.routes  # noqa: F401

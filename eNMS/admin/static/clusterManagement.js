@@ -3,7 +3,7 @@ global
 addInstance: false
 convertSelect: false
 doc: false
-clusters: false
+instances: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line
@@ -11,23 +11,23 @@ const table = $('#table').DataTable(); // eslint-disable-line
 /**
  * Edit a service.
  * @param {values} values - Instance properties.
- * @param {cluster} cluster - Instance.
+ * @param {instance} instance - Instance.
  */
-function tableActions(values, cluster) { // eslint-disable-line no-unused-vars
+function tableActions(values, instance) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('cluster', '${cluster.id}')">Edit</button>`,
+    onclick="showTypeModal('instance', '${instance.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('cluster', '${cluster.id}', true)">Duplicate</button>`,
+    onclick="showTypeModal('instance', '${instance.id}', true)">Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
-    onclick="confirmDeletion('cluster', '${cluster.id}')">Delete</button>`
+    onclick="confirmDeletion('instance', '${instance.id}')">Delete</button>`
   );
 }
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
-  convertSelect('#cluster-permissions');
-  for (let i = 0; i < clusters.length; i++) {
-    addInstance('create', 'cluster', clusters[i]);
+  convertSelect('#instance-permissions');
+  for (let i = 0; i < instances.length; i++) {
+    addInstance('create', 'instance', instances[i]);
   }
 })();

@@ -15,6 +15,7 @@ from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII as FLAG
 from eNMS import db
 from eNMS.admin import bp
 from eNMS.admin.forms import (
+    AddCluster,
     AddUser,
     AdministrationForm,
     LogsForm,
@@ -69,7 +70,7 @@ def cluster_management():
     return dict(
         fields=cluster_public_properties,
         clusters=serialize('Cluster'),
-        form=AddUser(request.form)
+        form=AddCluster(request.form)
     )
 
 

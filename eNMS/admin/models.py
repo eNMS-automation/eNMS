@@ -33,9 +33,9 @@ class User(Base, UserMixin):
         return self.is_admin or permission in self.permissions
 
 
-class Cluster(Base):
+class Instance(Base):
 
-    __tablename__ = type = 'Cluster'
+    __tablename__ = type = 'Instance'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     ip_address = Column(String)

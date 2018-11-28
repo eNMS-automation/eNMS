@@ -33,7 +33,7 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import (
-    cluster_public_properties,
+    instance_public_properties,
     user_public_properties
 )
 from eNMS.objects.helpers import database_filtering
@@ -65,11 +65,11 @@ def database():
     )
 
 
-@get(bp, '/cluster_management', 'View')
-def cluster_management():
+@get(bp, '/instance_management', 'View')
+def instance_management():
     return dict(
-        fields=cluster_public_properties,
-        clusters=serialize('Cluster'),
+        fields=instance_public_properties,
+        instances=serialize('Instance'),
         form=AddInstance(request.form)
     )
 

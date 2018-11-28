@@ -11,7 +11,7 @@ urls = {
         '/login',
         '/administration',
         '/database',
-        '/cluster_management'
+        '/instance_management'
     ),
     '/objects': (
         '/device_management',

@@ -185,7 +185,7 @@ user_serialized_properties = [
     'permissions'
 ]
 
-cluster_public_properties = [
+instance_public_properties = [
     'name',
     'ip_address',
     'weight'
@@ -244,7 +244,7 @@ task_serialized_properties = [
 ]
 
 cls_to_properties = {
-    'Cluster': cluster_public_properties,
+    'Instance': instance_public_properties,
     'Device': device_public_properties,
     'Link': link_public_properties,
     'Pool': pool_public_properties,

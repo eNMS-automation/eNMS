@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Cluster Management {% endblock title %}
+{% block title %} Instance Management {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -8,25 +8,25 @@
 
 {% block content %}
   {% include 'confirm_deletion_modal.html' %}
-  <div id="edit-cluster" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+  <div id="edit-instance" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="title-cluster"></h4>
+          <h4 class="modal-title" id="title-instance"></h4>
         </div>
-        <form id="edit-cluster-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+        <form id="edit-instance-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
           <div class="modal-body">
             <div class="form-group">
               {% for field in form %}
                 {% if field.widget.input_type == 'hidden' %}
-                  {{ field(id="cluster-" + field.name) }}
+                  {{ field(id="instance-" + field.name) }}
                 {% else %}
                   <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
                   <div class="col-md-10 col-sm-10 col-xs-12">
-                    {{ field(id="cluster-" + field.name, class="form-control", size='15') }}
+                    {{ field(id="instance-" + field.name, class="form-control", size='15') }}
                   </div><br><br>
                 {% endif %}
               {% endfor %}
@@ -35,7 +35,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button class="btn btn-primary" type="reset">Reset</button>
-            <button type="button" class="btn btn-success" onclick="processData('cluster')">Save</button>
+            <button type="button" class="btn btn-success" onclick="processData('instance')">Save</button>
           </div>
         </form>
       </div>
@@ -48,7 +48,7 @@
           <div style="height:80vh;" class="x_content">
             <div class="panel-group" >
               <div style="padding-bottom:5px;">
-                <button class="btn btn-default btn-file" onclick="showCreateModal('cluster')" style="width:100%;">
+                <button class="btn btn-default btn-file" onclick="showCreateModal('instance')" style="width:100%;">
                   Create a New Instance
                 </button>
               </div>
@@ -83,7 +83,7 @@
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
     var fields = {{ fields|tojson|safe }}
-    var clusters = {{ clusters|tojson|safe }}
+    var instances = {{ instances|tojson|safe }}
   </script>
-  <script src="{{ url_for('admin_blueprint.static', filename='clusterManagement.js') }}"></script>
+  <script src="{{ url_for('admin_blueprint.static', filename='instanceManagement.js') }}"></script>
 {% endblock javascripts %}

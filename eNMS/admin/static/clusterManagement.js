@@ -10,8 +10,8 @@ const table = $('#table').DataTable(); // eslint-disable-line
 
 /**
  * Edit a service.
- * @param {values} values - Cluster properties.
- * @param {cluster} cluster - Cluster.
+ * @param {values} values - Instance properties.
+ * @param {cluster} cluster - Instance.
  */
 function tableActions(values, cluster) { // eslint-disable-line no-unused-vars
   values.push(

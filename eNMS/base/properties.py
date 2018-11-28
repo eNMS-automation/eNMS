@@ -356,7 +356,8 @@ pretty_names = {
     'update_dictionnary': 'Update dictionnary',
     'username': 'Username',
     'vendor': 'Vendor',
-    'waiting_time': 'Waiting time'
+    'waiting_time': 'Waiting time',
+    'weight': 'Weight'
 }
 
 # Import properties

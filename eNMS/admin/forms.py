@@ -99,3 +99,10 @@ class MigrationsForm(FlaskForm):
 
 class LogsForm(FlaskForm):
     clear_logs_date = StringField()
+
+
+class AddInstance(FlaskForm):
+    id = HiddenField()
+    name = StringField()
+    ip_address = StringField()
+    weight = IntegerField()

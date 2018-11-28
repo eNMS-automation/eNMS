@@ -31,7 +31,10 @@ from eNMS.base.helpers import (
     fetch,
     serialize
 )
-from eNMS.base.properties import user_public_properties
+from eNMS.base.properties import (
+    cluster_public_properties,
+    user_public_properties
+)
 from eNMS.objects.helpers import database_filtering
 
 
@@ -58,6 +61,15 @@ def database():
         logs_form=LogsForm(request.form),
         migrations_form=MigrationsForm(request.form),
         folders=listdir(app.path / 'migrations')
+    )
+
+
+@get(bp, '/cluster_management', 'View')
+def cluster_management():
+    return dict(
+        fields=cluster_public_properties,
+        clusters=serialize('Cluster'),
+        form=AddUser(request.form)
     )
 
 

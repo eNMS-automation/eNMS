@@ -16,6 +16,11 @@ class Config(object):
     # Vault
     USE_VAULT = int(environ.get('USE_VAULT', False))
 
+    # TACACS+
+    USE_TACACS = int(environ.get('USE_TACACS', False))
+    TACACS_ADDR = environ.get('VAULT_ADDR')
+    TACACS_PASSWORD = environ.get('VAULT_PASSWORD')
+
     # Examples
     CREATE_EXAMPLES = int(environ.get('CREATE_EXAMPLES', True))
 

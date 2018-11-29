@@ -9,6 +9,7 @@ from importlib import import_module
 from logging import basicConfig, DEBUG, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from os import environ
+from tacacs_plus.client import TACACSClient
 
 auth = HTTPBasicAuth()
 db = SQLAlchemy(
@@ -36,6 +37,7 @@ scheduler = BackgroundScheduler({
 
 # Vault
 use_vault = int(environ.get('USE_VAULT', False))
+use_tacacs = int(environ.get('USE_TACACS', False))
 vault_client = VaultClient()
 
 from eNMS.base.default import (
@@ -89,6 +91,14 @@ def configure_vault_client(app):
     if vault_client.sys.is_sealed() and app.config['UNSEAL_VAULT']:
         keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
         vault_client.sys.submit_unseal_keys(filter(None, keys))
+
+
+def configure_tacacs_client(app):
+    tacacs_client = TACACSClient(
+        app.config['TACACS_ADDR'],
+        49,
+        app.config['TACACS_PASSWORD'],
+    )
 
 
 def configure_database(app):
@@ -151,5 +161,7 @@ def create_app(path, config):
     configure_errors(app)
     if use_vault:
         configure_vault_client(app)
+    if use_tacacs:
+        app.tacacs_client = configure_tacacs_client(app)
     info('eNMS starting')
     return app

@@ -9,8 +9,6 @@ from flask import (
 )
 from flask_login import current_user, login_user, logout_user
 from os import listdir
-from tacacs_plus.client import TACACSClient
-from tacacs_plus.flags import TAC_PLUS_AUTHEN_TYPE_ASCII as FLAG
 
 from eNMS import db
 from eNMS.admin import bp
@@ -110,13 +108,7 @@ def logout():
 
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
-    parameters = get_one('Parameters')
-    parameters.update(**request.form)
-    app.tacacs_client = TACACSClient(
-        parameters.tacacs_ip_address,
-        parameters.tacacs_port,
-        parameters.tacacs_password
-    )
+    get_one('Parameters').update(**request.form)
     database_filtering(fetch('Pool', id=request.form['pool']))
     db.session.commit()
     return True

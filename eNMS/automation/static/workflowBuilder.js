@@ -332,10 +332,19 @@ function colorJob(id, color) {
 /**
  * Get Job State.
  */
-function getJobState() {
-  if (wf.status == 'Running' || wf.jobs.some((j) => j.status == 'Running')) {
-    setTimeout(getWorkflowState, 1500);
-  }
+function getJobState(id) {
+  call(`/get/service/${id}`, function(service) {
+    if (service.status == 'Running') {
+      colorJob(id, '#89CFF0');
+      $('#status').text('Status: Running.');
+      $('#current-job').text(`Current job: ${service.name}.`);
+      setTimeout(partial(getJobState, id), 1500);
+    } else {
+      $('#status').text('Status: Idle.');
+      $('#current-job').empty();
+      colorJob(id, '#D2E5FF');
+    }
+  });
 }
 
 /**
@@ -344,7 +353,6 @@ function getJobState() {
 function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
-      console.log(wf);
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {

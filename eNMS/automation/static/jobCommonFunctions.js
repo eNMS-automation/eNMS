@@ -129,7 +129,7 @@ function runJob(id) { // eslint-disable-line no-unused-vars
       if (job.type == 'Workflow') {
         getWorkflowState();
       } else {
-        getJobState();
+        getJobState(id);
       }
     }
   });

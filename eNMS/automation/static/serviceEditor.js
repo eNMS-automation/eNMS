@@ -27,18 +27,6 @@ workflowBuilder: false;
 })();
 
 /**
- * Open smart wizard.
- */
-function openWizard() { // eslint-disable-line no-unused-vars
-  $('#wizard').smartWizard({
-    enableAllSteps: true,
-  });
-  $('.buttonNext').addClass('btn btn-success');
-  $('.buttonPrevious').addClass('btn btn-primary');
-  $('.buttonFinish').hide();
-}
-
-/**
  * Edit a service.
  * @param {id} id - Service Id.
  * @param {duplicate} duplicate - Duplicate.

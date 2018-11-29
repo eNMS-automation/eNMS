@@ -17,6 +17,18 @@ $('#logs-modal').on('hidden.bs.modal', function() {
 });
 
 /**
+ * Open smart wizard.
+ */
+function openWizard(type) { // eslint-disable-line no-unused-vars
+  $(`#${type}-wizard`).smartWizard({
+    enableAllSteps: true,
+  });
+  $('.buttonNext').addClass('btn btn-success');
+  $('.buttonPrevious').addClass('btn btn-primary');
+  $('.buttonFinish').hide();
+}
+
+/**
  * Display logs.
  */
 function displayLogs() { // eslint-disable-line no-unused-vars

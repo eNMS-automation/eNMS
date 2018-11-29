@@ -22,6 +22,7 @@ from eNMS.objects.forms import (
     AddPoolForm,
     DeviceAutomationForm,
     ImportExportForm,
+    LibreNmsForm,
     NetboxForm,
     OpenNmsForm,
     PoolObjectsForm
@@ -67,6 +68,7 @@ def pool_management():
 def import_export():
     return dict(
         import_export_form=ImportExportForm(request.form),
+        librenms_form=LibreNmsForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
         parameters=get_one('Parameters'),

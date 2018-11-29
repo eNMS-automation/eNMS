@@ -13,7 +13,7 @@ document.getElementById('file').onchange = function() {
  * Query openNMS server.
  */
 function queryOpenNMS() { // eslint-disable-line no-unused-vars
-  fCall('/admin/query_opennms', '#opennms_form', function() {
+  fCall('/objects/query_opennms', '#opennms_form', function() {
     alertify.notify('Topology imported from OpenNMS.', 'success', 5);
   });
 }
@@ -22,8 +22,17 @@ function queryOpenNMS() { // eslint-disable-line no-unused-vars
  * Query Netbox server.
  */
 function queryNetbox() { // eslint-disable-line no-unused-vars
-  fCall('/admin/query_netbox', '#netbox_form', function() {
+  fCall('/objects/query_netbox', '#netbox_form', function() {
     alertify.notify('Topology imported from Netbox.', 'success', 5);
+  });
+}
+
+/**
+ * Query libreNMS server.
+ */
+function queryLibreNMS() { // eslint-disable-line no-unused-vars
+  fCall('/objects/query_librenms', '#librenms_form', function() {
+    alertify.notify('Topology imported from LibreNMS.', 'success', 5);
   });
 }
 

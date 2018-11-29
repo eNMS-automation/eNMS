@@ -31,10 +31,6 @@ class AddUser(FlaskForm):
 
 class AdministrationForm(FlaskForm):
     boolean_fields = HiddenField(default='mattermost_verify_certificate')
-    tacacs_ip_address = StringField('IP address')
-    tacacs_password = PasswordField()
-    tacacs_port = IntegerField(default=49)
-    tacacs_timeout = IntegerField(default=10)
     syslog_ip_address = StringField('IP address', default='0.0.0.0')
     syslog_port = IntegerField(default=514)
     default_longitude = FloatField()

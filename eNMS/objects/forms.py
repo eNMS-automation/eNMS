@@ -118,7 +118,7 @@ class LibreNmsForm(FlaskForm):
     )
     node_type = [subtype for subtype in device_subtypes.items()]
     librenms_type = SelectField(choices=node_type)
-    token = PasswordField()
+    librenms_token = PasswordField()
 
 
 class DeviceAutomationForm(FlaskForm):

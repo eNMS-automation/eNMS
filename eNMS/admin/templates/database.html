@@ -18,8 +18,8 @@
               <div>
                 <label>Empty Database before Import</label>
                 {{ migrations_form.empty_database_before_import() }}<br><br>
-                <label>Merge mechanism in case of conflict (same ID)</label><br>
-                {{ migrations_form.conflict(class="form-control") }}<br><br>
+                <label>Merge mechanism</label><br>
+                {{ migrations_form.merge_mechanism(class="form-control") }}<br><br>
                 <label>
                   Directory pathname to use in eNMS_HOME/migrations/import_export :<br>
                   Example: "10312018_backup"

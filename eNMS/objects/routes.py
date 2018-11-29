@@ -151,7 +151,7 @@ def export_topology():
 def query_opennms():
     parameters = get_one('Parameters')
     login, password = parameters.opennms_login, request.form['password']
-    parameters.update(**request.form.to_dict())
+    parameters.update(**request.form)
     db.session.commit()
     json_devices = http_get(
         parameters.opennms_devices,

@@ -107,9 +107,18 @@ class OpenNmsForm(FlaskForm):
 
 class NetboxForm(FlaskForm):
     netbox_address = StringField(default='http://0.0.0.0:8000')
-    netbox_token = StringField()
+    netbox_token = PasswordField()
     node_type = [subtype for subtype in device_subtypes.items()]
     netbox_type = SelectField(choices=node_type)
+
+
+class LibreNmsForm(FlaskForm):
+    librenms_rest_api = StringField(
+        default='http://librenms.example.com'
+    )
+    node_type = [subtype for subtype in device_subtypes.items()]
+    librenms_type = SelectField(choices=node_type)
+    token = PasswordField()
 
 
 class DeviceAutomationForm(FlaskForm):

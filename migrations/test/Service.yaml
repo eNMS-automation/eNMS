@@ -1,0 +1,90 @@
+- credentials: device
+  description: Start point of a workflow
+  devices: []
+  has_targets: null
+  id: 1
+  multiprocessing: false
+  name: Start
+  number_of_retries: 0
+  operating_system: null
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  status: Idle
+  time_between_retries: 10
+  type: SwissArmyKnifeService
+  vendor: null
+  waiting_time: 0
+- credentials: device
+  description: End point of a workflow
+  devices: []
+  has_targets: null
+  id: 2
+  multiprocessing: false
+  name: End
+  number_of_retries: 0
+  operating_system: null
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  status: Idle
+  time_between_retries: 10
+  type: SwissArmyKnifeService
+  vendor: null
+  waiting_time: 0
+- credentials: device
+  description: Mail notification (service logs)
+  devices: []
+  has_targets: null
+  id: 3
+  multiprocessing: false
+  name: mail_feedback_notification
+  number_of_retries: 0
+  operating_system: null
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  status: Idle
+  time_between_retries: 10
+  type: SwissArmyKnifeService
+  vendor: null
+  waiting_time: 0
+- credentials: device
+  description: Slack notification (service logs)
+  devices: []
+  has_targets: null
+  id: 4
+  multiprocessing: false
+  name: slack_feedback_notification
+  number_of_retries: 0
+  operating_system: null
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  status: Idle
+  time_between_retries: 10
+  type: SwissArmyKnifeService
+  vendor: null
+  waiting_time: 0
+- credentials: device
+  description: Mattermost notification (service logs)
+  devices: []
+  has_targets: null
+  id: 5
+  multiprocessing: false
+  name: mattermost_feedback_notification
+  number_of_retries: 0
+  operating_system: null
+  pools: []
+  positions: !!python/object:sqlalchemy.ext.mutable.MutableDict {}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  status: Idle
+  time_between_retries: 10
+  type: SwissArmyKnifeService
+  vendor: null
+  waiting_time: 0

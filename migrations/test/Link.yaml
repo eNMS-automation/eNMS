@@ -1,0 +1,539 @@
+- description: optical fiber 10G
+  destination: 28
+  destination_name: router32
+  id: 34
+  location: spain
+  model: null
+  name: link4
+  source: 26
+  source_name: router30
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 27
+  destination_name: router31
+  id: 35
+  location: spain
+  model: null
+  name: link5
+  source: 28
+  source_name: router32
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 29
+  destination_name: router33
+  id: 36
+  location: spain
+  model: null
+  name: link6
+  source: 27
+  source_name: router31
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 31
+  destination_name: router35
+  id: 37
+  location: spain
+  model: null
+  name: link7
+  source: 29
+  source_name: router33
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 32
+  destination_name: router36
+  id: 38
+  location: spain
+  model: null
+  name: link8
+  source: 31
+  source_name: router35
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 27
+  destination_name: router31
+  id: 39
+  location: spain
+  model: null
+  name: link9
+  source: 32
+  source_name: router36
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 24
+  destination_name: router28
+  id: 40
+  location: spain
+  model: null
+  name: link10
+  source: 27
+  source_name: router31
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 25
+  destination_name: router29
+  id: 41
+  location: spain
+  model: null
+  name: link11
+  source: 24
+  source_name: router28
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 32
+  destination_name: router36
+  id: 42
+  location: spain
+  model: null
+  name: link12
+  source: 25
+  source_name: router29
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 26
+  destination_name: router30
+  id: 43
+  location: spain
+  model: null
+  name: link13
+  source: 24
+  source_name: router28
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 23
+  destination_name: router27
+  id: 44
+  location: spain
+  model: null
+  name: link14
+  source: 32
+  source_name: router36
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 13
+  destination_name: router17
+  id: 45
+  location: spain
+  model: null
+  name: link15
+  source: 31
+  source_name: router35
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 13
+  destination_name: router17
+  id: 46
+  location: france
+  model: null
+  name: link16
+  source: 23
+  source_name: router27
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 10G
+  destination: 12
+  destination_name: router16
+  id: 47
+  location: france
+  model: null
+  name: link17
+  source: 13
+  source_name: router17
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 30
+  destination_name: router34
+  id: 48
+  location: eastern europe
+  model: null
+  name: link18
+  source: 12
+  source_name: router16
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 8
+  destination_name: router12
+  id: 49
+  location: eastern europe
+  model: null
+  name: link19
+  source: 30
+  source_name: router34
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 18
+  destination_name: router22
+  id: 50
+  location: eastern europe
+  model: null
+  name: link20
+  source: 8
+  source_name: router12
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 19
+  destination_name: router23
+  id: 51
+  location: eastern europe
+  model: null
+  name: link21
+  source: 18
+  source_name: router22
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 20
+  destination_name: router24
+  id: 52
+  location: eastern europe
+  model: null
+  name: link22
+  source: 19
+  source_name: router23
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 20
+  destination_name: router24
+  id: 53
+  location: eastern europe
+  model: null
+  name: link23
+  source: 11
+  source_name: router15
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 8
+  destination_name: router12
+  id: 54
+  location: eastern europe
+  model: null
+  name: link24
+  source: 11
+  source_name: router15
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 14
+  destination_name: router18
+  id: 55
+  location: eastern europe
+  model: null
+  name: link25
+  source: 11
+  source_name: router15
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 15
+  destination_name: router19
+  id: 56
+  location: eastern europe
+  model: null
+  name: link26
+  source: 14
+  source_name: router18
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 17
+  destination_name: router21
+  id: 57
+  location: eastern europe
+  model: null
+  name: link27
+  source: 15
+  source_name: router19
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 20
+  destination_name: router24
+  id: 58
+  location: eastern europe
+  model: null
+  name: link28
+  source: 17
+  source_name: router21
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 16
+  destination_name: router20
+  id: 59
+  location: eastern europe
+  model: null
+  name: link29
+  source: 15
+  source_name: router19
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 14
+  destination_name: router18
+  id: 60
+  location: eastern europe
+  model: null
+  name: link30
+  source: 16
+  source_name: router20
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 4
+  destination_name: router8
+  id: 61
+  location: eastern europe
+  model: null
+  name: link31
+  source: 16
+  source_name: router20
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 4
+  destination_name: router8
+  id: 62
+  location: eastern europe
+  model: null
+  name: link32
+  source: 10
+  source_name: router14
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 8
+  destination_name: router12
+  id: 63
+  location: eastern europe
+  model: null
+  name: link33
+  source: 10
+  source_name: router14
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 9
+  destination_name: router13
+  id: 64
+  location: eastern europe
+  model: null
+  name: link34
+  source: 8
+  source_name: router12
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 7
+  destination_name: router11
+  id: 65
+  location: france
+  model: null
+  name: link35
+  source: 9
+  source_name: router13
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 6
+  destination_name: router10
+  id: 66
+  location: france
+  model: null
+  name: link36
+  source: 7
+  source_name: router11
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 12
+  destination_name: router16
+  id: 67
+  location: france
+  model: null
+  name: link37
+  source: 6
+  source_name: router10
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 3
+  destination_name: router7
+  id: 68
+  location: france
+  model: null
+  name: link38
+  source: 6
+  source_name: router10
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 2
+  destination_name: router6
+  id: 69
+  location: france
+  model: null
+  name: link39
+  source: 9
+  source_name: router13
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 4
+  destination_name: router8
+  id: 70
+  location: eastern europe
+  model: null
+  name: link40
+  source: 3
+  source_name: router7
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 17
+  destination_name: router21
+  id: 71
+  location: eastern europe
+  model: null
+  name: link41
+  source: 10
+  source_name: router14
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 21
+  destination_name: router25
+  id: 72
+  location: france
+  model: null
+  name: link42
+  source: 2
+  source_name: router6
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 1
+  destination_name: router5
+  id: 73
+  location: france
+  model: null
+  name: link43
+  source: 21
+  source_name: router25
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 22
+  destination_name: router26
+  id: 74
+  location: france
+  model: null
+  name: link44
+  source: 1
+  source_name: router5
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 5
+  destination_name: router9
+  id: 75
+  location: france
+  model: null
+  name: link45
+  source: 1
+  source_name: router5
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 22
+  destination_name: router26
+  id: 76
+  location: france
+  model: null
+  name: link46
+  source: 22
+  source_name: router26
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 13
+  destination_name: router17
+  id: 77
+  location: france
+  model: null
+  name: link47
+  source: 5
+  source_name: router9
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 6
+  destination_name: router10
+  id: 78
+  location: france
+  model: null
+  name: link48
+  source: 5
+  source_name: router9
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 7
+  destination_name: router11
+  id: 79
+  location: france
+  model: null
+  name: link49
+  source: 12
+  source_name: router16
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 33
+  destination_name: router37
+  id: 80
+  location: spain
+  model: null
+  name: link50
+  source: 28
+  source_name: router32
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 29
+  destination_name: router33
+  id: 81
+  location: spain
+  model: null
+  name: link51
+  source: 33
+  source_name: router37
+  subtype: optical_link
+  vendor: Ciena
+- description: optical fiber 100G
+  destination: 21
+  destination_name: router25
+  id: 82
+  location: france
+  model: null
+  name: link52
+  source: 22
+  source_name: router26
+  subtype: optical_link
+  vendor: Ciena

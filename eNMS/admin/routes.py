@@ -10,7 +10,7 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 from os import listdir
 
-from eNMS import db
+from eNMS import db, use_tacacs, tacacs_client
 from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddInstance,
@@ -75,20 +75,17 @@ def instance_management():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name, input_password = request.form['name'], request.form['password']
+        name, password = request.form['name'], request.form['password']
         user = fetch('User', name=name)
         if user:
-            if input_password == user.password:
+            if password == user.password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
-        elif app.tacacs_client:
-            if app.tacacs_client.authenticate(name, input_password).valid:
-                user = factory(
-                    'User',
-                    **{'name': name, 'password': input_password}
-                )
+        elif use_tacacs:
+            if tacacs_client.authenticate(name, password).valid:
+                user = factory('User', **{'name': name, 'password': password})
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:

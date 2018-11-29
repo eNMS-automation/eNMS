@@ -86,7 +86,7 @@ def login():
             else:
                 abort(403)
         elif app.tacacs_client:
-            if app.tacacs_client.authenticate(name, input_password, FLAG).valid:
+            if app.tacacs_client.authenticate(name, input_password).valid:
                 user = factory(
                     'User',
                     **{'name': name, 'password': input_password}

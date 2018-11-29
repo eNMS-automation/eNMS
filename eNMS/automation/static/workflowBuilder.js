@@ -331,8 +331,9 @@ function colorJob(id, color) {
 
 /**
  * Get Job State.
+ * @param {id} id - Job Id.
  */
-function getJobState(id) {
+function getJobState(id) { // eslint-disable-line no-unused-vars
   call(`/get/service/${id}`, function(service) {
     if (service.status == 'Running') {
       colorJob(id, '#89CFF0');

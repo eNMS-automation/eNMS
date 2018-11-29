@@ -210,14 +210,16 @@ def query_netbox():
 @post(bp, '/query_librenms', 'Edit')
 def query_librenms():
     devices = http_get(
-        f'{request.form["netbox_address"]}/api/v0/devices',
+        f'{request.form["librenms_address"]}/api/v0/devices',
         headers={'X-Auth-Token': request.form['librenms_token']}
     ).json()['devices']
     for device in devices:
         factory('Device', **{
-            'name': device['name'],
-            'ip_address': device['ip'] or device['name'],
-            'subtype': request.form['librenms_type']
+            'name': device['hostname'],
+            'ip_address': device['ip'] or device['hostname'],
+            'subtype': request.form['librenms_type'],
+            'longitude': 0.,
+            'latitude': 0.
         })
     db.session.commit()
     return True

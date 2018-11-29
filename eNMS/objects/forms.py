@@ -113,7 +113,7 @@ class NetboxForm(FlaskForm):
 
 
 class LibreNmsForm(FlaskForm):
-    librenms_rest_api = StringField(
+    librenms_address = StringField(
         default='http://librenms.example.com'
     )
     node_type = [subtype for subtype in device_subtypes.items()]

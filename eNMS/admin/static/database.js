@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+call: false
 convertSelect: false
 doc: false
 fCall: false

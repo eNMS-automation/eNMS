@@ -47,7 +47,7 @@ def test_manual_object_creation(user_client):
             for destination in devices[:3]:
                 obj_dict = define_link(subtype, source.name, destination.name)
                 user_client.post('/update/link', data=obj_dict)
-    assert len(fetch_all('Device')) == 43
+    assert len(fetch_all('Device')) == 44
     assert len(fetch_all('Link')) == 82
 
 

@@ -23,7 +23,7 @@ workflowBuilder: false;
   });
   $('#edit-service').on('hidden.bs.modal', function() {
     $('#service-type').prop('disabled', false);
-  })
+  });
 })();
 
 /**

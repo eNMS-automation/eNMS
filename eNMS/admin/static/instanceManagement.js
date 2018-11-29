@@ -18,7 +18,8 @@ function tableActions(values, instance) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('instance', '${instance.id}')">Edit</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('instance', '${instance.id}', true)">Duplicate</button>`,
+    onclick="showTypeModal('instance', '${instance.id}', true)">
+    Duplicate</button>`,
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="confirmDeletion('instance', '${instance.id}')">Delete</button>`
   );

@@ -3,6 +3,7 @@ global
 alertify: false
 call: false
 diffview: false
+getJobState: false
 getWorkflowState: false
 partial
 table: false
@@ -125,7 +126,11 @@ function runJob(id) { // eslint-disable-line no-unused-vars
   call(`/automation/run_job/${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, 'success', 5);
     if (typeof workflowBuilder !== 'undefined') {
-      getWorkflowState();
+      if (job.type == 'Workflow') {
+        getWorkflowState();
+      } else {
+        getJobState();
+      }
     }
   });
 }

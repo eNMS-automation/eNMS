@@ -330,11 +330,21 @@ function colorJob(id, color) {
 }
 
 /**
+ * Get Job State.
+ */
+function getJobState() {
+  if (wf.status == 'Running' || wf.jobs.some((j) => j.status == 'Running')) {
+    setTimeout(getWorkflowState, 1500);
+  }
+}
+
+/**
  * Get Workflow State.
  */
 function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
+      console.log(wf);
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
@@ -361,7 +371,7 @@ function getWorkflowState() {
           wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
         if (wf.status == 'Running') {
-          setTimeout(getWorkflowState, 3000);
+          setTimeout(getWorkflowState, 1500);
         }
       }
     });

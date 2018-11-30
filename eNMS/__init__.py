@@ -38,13 +38,19 @@ scheduler = BackgroundScheduler({
 
 # Vault
 use_vault = int(environ.get('USE_VAULT', False))
-use_tacacs = int(environ.get('USE_TACACS', False))
 vault_client = VaultClient()
+
+# Tacacs+
+use_tacacs = int(environ.get('USE_TACACS', False))
 tacacs_client = TACACSClient(
     environ.get('TACACS_ADDR'),
     49,
     environ.get('TACACS_PASSWORD'),
 ) if use_tacacs else None
+
+# Syslog
+use_syslog = int(environ.get('USE_SYSLOG', False))
+
 
 from eNMS.base.default import (
     create_default_services,
@@ -55,6 +61,7 @@ from eNMS.base.default import (
 )
 from eNMS.base.helpers import fetch
 from eNMS.base.rest import configure_rest_api
+from eNMS.logs.models import SyslogServer
 
 
 def register_extensions(app):
@@ -97,6 +104,14 @@ def configure_vault_client(app):
     if vault_client.sys.is_sealed() and app.config['UNSEAL_VAULT']:
         keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
         vault_client.sys.submit_unseal_keys(filter(None, keys))
+
+
+def configure_syslog_server(app):
+    server = SyslogServer(
+        app.config['SYSLOG_ADDR'],
+        app.config['SYSLOG_PORT']
+    )
+    server.start()
 
 
 def configure_database(app):
@@ -159,5 +174,7 @@ def create_app(path, config):
     configure_errors(app)
     if use_vault:
         configure_vault_client(app)
+    if use_syslog:
+        configure_syslog_server(app)
     info('eNMS starting')
     return app

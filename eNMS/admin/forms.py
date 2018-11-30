@@ -31,8 +31,6 @@ class AddUser(FlaskForm):
 
 class AdministrationForm(FlaskForm):
     boolean_fields = HiddenField(default='mattermost_verify_certificate')
-    syslog_ip_address = StringField('IP address', default='0.0.0.0')
-    syslog_port = IntegerField(default=514)
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
@@ -52,10 +50,6 @@ class AdministrationForm(FlaskForm):
     slack_channel = StringField()
     pool = ObjectField('Pool')
     categories = {
-        'Syslog Server': (
-            'syslog_ip_address',
-            'syslog_port',
-        ),
         'Geographical Parameters': (
             'default_longitude',
             'default_latitude',

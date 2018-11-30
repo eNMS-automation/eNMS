@@ -9,40 +9,6 @@ from eNMS.base.associations import job_log_rule_table
 from eNMS.base.models import Base
 
 
-class SyslogUDPHandler(BaseRequestHandler):
-
-    def handle(self):
-        with scheduler.app.app_context():
-            data = bytes.decode(self.request[0].strip())
-            source, _ = self.client_address
-            log = Log(source, str(data))
-            db.session.add(log)
-            db.session.commit()
-
-
-class SyslogServer(Base):
-
-    __tablename__ = type = 'SyslogServer'
-    id = Column(Integer, primary_key=True)
-    ip_address = Column(String)
-    port = Column(Integer)
-
-    def __init__(self, **kwargs):
-        self.ip_address = kwargs['ip_address']
-        self.port = int(kwargs['port'])
-        self.start()
-
-    def __repr__(self):
-        return self.ip_address
-
-    def start(self):
-        UDPServer.allow_reuse_address = True
-        self.server = UDPServer((self.ip_address, self.port), SyslogUDPHandler)
-        th = Thread(target=self.server.serve_forever)
-        th.daemon = True
-        th.start()
-
-
 class Log(Base):
 
     __tablename__ = type = 'Log'
@@ -82,3 +48,36 @@ class LogRule(Base):
         secondary=job_log_rule_table,
         back_populates='log_rules'
     )
+
+
+class SyslogUDPHandler(BaseRequestHandler):
+
+    def handle(self):
+        print(self.request[0])
+        with scheduler.app.app_context():
+            data = bytes.decode(self.request[0].strip())
+            source, _ = self.client_address
+            log = Log(source, str(data))
+            db.session.add(log)
+            db.session.commit()
+
+
+class SyslogServer(Base):
+
+    __tablename__ = type = 'SyslogServer'
+    id = Column(Integer, primary_key=True)
+    ip_address = Column(String)
+    port = Column(Integer)
+
+    def __init__(self, ip_address, port):
+        self.ip_address = ip_address
+        self.port = port
+        self.start()
+
+    def __repr__(self):
+        return self.ip_address
+
+    def start(self):
+        UDPServer.allow_reuse_address = True
+        self.server = UDPServer((self.ip_address, self.port), SyslogUDPHandler)
+        self.server.serve_forever()

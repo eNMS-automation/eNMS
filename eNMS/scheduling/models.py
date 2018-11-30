@@ -16,17 +16,22 @@ class Task(Base):
     description = Column(String)
     creation_time = Column(String)
     status = Column(String)
-    frequency = Column(String)
+    periodic = Column(Boolean)
+    frequency = Column(Integer)
     start_date = Column(String)
     end_date = Column(String)
     job_id = Column(Integer, ForeignKey('Job.id'))
     job = relationship('Job', back_populates='tasks')
 
     def __init__(self, **kwargs):
-        self.update(**kwargs)
+        super().update(**kwargs)
         self.status = 'Active'
         self.creation_time = str(datetime.now())
-        self.schedule('add')
+        self.schedule()
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        self.reschedule()
 
     @property
     def job_name(self):
@@ -57,13 +62,45 @@ class Task(Base):
             pass
         db.session.commit()
 
-    def schedule(self, mode):
-        function = getattr(scheduler, mode)
+    def kwargs(self):
         if self.frequency:
-            function(
+            return {
+                'trigger': 'interval',
+                'start_date': self.aps_date('start_date'),
+                'end_date': self.aps_date('end_date'),
+                'seconds': self.frequency
+            }
+        else:
+            return {
+                'trigger': 'date',
+                'run_date': self.aps_date('start_date')
+            }
+
+    def schedule(self):
+        if self.frequency:
+            scheduler.add_job(
                 id=self.creation_time,
                 func=scheduler_job,
-                args=[self.job.id],
+                args=[self.job.id, self.creation_time],
+                replace_existing=True
+                
+            )
+        else:
+            scheduler.add_job(
+                id=self.creation_time,
+                func=scheduler_job,
+                run_date=self.aps_date('start_date'),
+                args=[self.job.id, self.creation_time],
+                trigger='date',
+                replace_existing=True
+            )
+
+    def reschedule(self):
+        if self.frequency:
+            scheduler.add_job(
+                id=self.creation_time,
+                func=scheduler_job,
+                args=[self.job.id, self.creation_time],
                 trigger='interval',
                 start_date=self.aps_date('start_date'),
                 end_date=self.aps_date('end_date'),
@@ -71,11 +108,11 @@ class Task(Base):
                 replace_existing=True
             )
         else:
-            function(
+            scheduler.add_job(
                 id=self.creation_time,
                 func=scheduler_job,
                 run_date=self.aps_date('start_date'),
-                args=[self.job.id],
+                args=[self.job.id, self.creation_time],
                 trigger='date',
                 replace_existing=True
             )

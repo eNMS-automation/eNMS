@@ -85,7 +85,7 @@ def get_results_summary(job, results, now):
     return '\n\n'.join(summary)
 
 
-def scheduler_job(job_id):
+def scheduler_job(job_id, aps_job_id):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)
         results, now = job.try_run()
@@ -99,4 +99,5 @@ def scheduler_job(job_id):
                 'runtime': now,
                 'result': get_results_summary(job, results, now)
             })
+        print(aps_job_id, [job.__dict__ for job in scheduler.get_jobs()])
         db.session.commit()

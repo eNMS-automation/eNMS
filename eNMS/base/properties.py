@@ -225,11 +225,7 @@ parameters_public_properties = [
     'opennms_rest_api',
     'opennms_devices',
     'opennms_login',
-    'pool',
-    'tacacs_ip_address',
-    'tacacs_password',
-    'tacacs_port',
-    'tacacs_timeout',
+    'pool'
 ]
 
 task_serialized_properties = [

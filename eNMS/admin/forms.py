@@ -52,12 +52,6 @@ class AdministrationForm(FlaskForm):
     slack_channel = StringField()
     pool = ObjectField('Pool')
     categories = {
-        'TACACS+ Client': (
-            'tacacs_ip_address',
-            'tacacs_password',
-            'tacacs_port',
-            'tacacs_timeout'
-        ),
         'Syslog Server': (
             'syslog_ip_address',
             'syslog_port',

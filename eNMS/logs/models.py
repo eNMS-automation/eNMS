@@ -80,4 +80,6 @@ class SyslogServer(Base):
     def start(self):
         UDPServer.allow_reuse_address = True
         self.server = UDPServer((self.ip_address, self.port), SyslogUDPHandler)
-        self.server.serve_forever()
+        th = Thread(target=self.server.serve_forever)
+        th.daemon = True
+        th.start()

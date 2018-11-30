@@ -34,7 +34,7 @@ class LogRule(Base):
 
     __tablename__ = type = 'LogRule'
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String, unique=True)
     source = Column(String)
     source_regex = Column(Boolean)
     content = Column(String)

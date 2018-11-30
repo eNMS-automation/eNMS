@@ -16,6 +16,13 @@ job_pool_table = Table(
     Column('job_id', Integer, ForeignKey('Job.id'))
 )
 
+log_rule_log_table = Table(
+    'log_rule_log_association',
+    Base.metadata,
+    Column('log_id', Integer, ForeignKey('Log.id')),
+    Column('log_rule_id', Integer, ForeignKey('LogRule.id'))
+)
+
 job_log_rule_table = Table(
     'job_log_rule_association',
     Base.metadata,

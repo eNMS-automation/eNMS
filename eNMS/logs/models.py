@@ -5,7 +5,7 @@ from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 
 from eNMS import db, scheduler
-from eNMS.base.associations import job_log_rule_table
+from eNMS.base.associations import job_log_rule_table, log_rule_log_table
 from eNMS.base.models import Base
 
 
@@ -15,14 +15,16 @@ class Log(Base):
     id = Column(Integer, primary_key=True)
     source = Column(String)
     content = Column(String)
-    log_rule_id = Column(Integer, ForeignKey('User.id'))
-    user = relationship('User', back_populates='jobs')
-    
+    log_rules = relationship(
+        'LogRule',
+        secondary=log_rule_log_table,
+        back_populates='logs'
+    )
 
-    def __init__(self, source, content):
+    def __init__(self, source, content, log_rules):
         self.source = source
         self.content = content
-
+        self.log_rules = log_rules
 
     def __repr__(self):
         return self.content
@@ -37,6 +39,11 @@ class LogRule(Base):
     sourceregex = Column(Boolean)
     content = Column(String)
     contentregex = Column(Boolean)
+    logs = relationship(
+        'Log',
+        secondary=log_rule_log_table,
+        back_populates='log_rules'
+    )
     jobs = relationship(
         'Job',
         secondary=job_log_rule_table,

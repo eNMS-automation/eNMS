@@ -15,20 +15,14 @@ class Log(Base):
     id = Column(Integer, primary_key=True)
     source = Column(String)
     content = Column(String)
+    log_rule_id = Column(Integer, ForeignKey('User.id'))
+    user = relationship('User', back_populates='jobs')
+    
 
     def __init__(self, source, content):
         self.source = source
         self.content = content
-        for log_rule in LogRule.query.all():
-            trigger_jobs = all(
-                getattr(log_rule, prop) in getattr(self, prop)
-                if not getattr(log_rule, prop + 'regex')
-                else search(getattr(log_rule, prop), getattr(self, prop))
-                for prop in ('source', 'content') if getattr(log_rule, prop)
-            )
-            if trigger_jobs:
-                for job in log_rule.jobs:
-                    job.run()
+
 
     def __repr__(self):
         return self.content
@@ -55,9 +49,23 @@ class SyslogUDPHandler(BaseRequestHandler):
     def handle(self):
         print(self.request[0])
         with scheduler.app.app_context():
-            data = bytes.decode(self.request[0].strip())
+            data = str(bytes.decode(self.request[0].strip()))
             source, _ = self.client_address
-            log = Log(source, str(data))
+            log_rules = []
+            for log_rule in LogRule.query.all():
+                source_match = (
+                    search(log_rule.source, source) if log_rule.source_regex
+                    else log_rule.source in source
+                )
+                content_match = (
+                    search(log_rule.content, data) if log_rule.content_regex
+                    else log_rule.content in data
+                )
+                if source_match and content_match:
+                    log_rules.append(log_rule)
+                    for job in log_rule.jobs:
+                        job.try_run()
+            log = Log(source, data, log_rules)
             db.session.add(log)
             db.session.commit()
 

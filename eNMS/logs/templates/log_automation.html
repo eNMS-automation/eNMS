@@ -102,6 +102,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
     var fields = {{ fields|tojson|safe }};
     var logRules = {{ log_rules|tojson|safe }};
   </script>

@@ -21,7 +21,7 @@ function tableActions(values, logrule) { // eslint-disable-line no-unused-vars
 }
 
 (function() {
-  convertSelect('#jobs');
+  convertSelect('#logrule-jobs');
   for (let i = 0; i < logRules.length; i++) {
     addInstance('create', 'logrule', logRules[i]);
   }

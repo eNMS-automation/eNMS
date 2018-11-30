@@ -99,5 +99,5 @@ def scheduler_job(job_id, aps_job_id):
                 'runtime': now,
                 'result': get_results_summary(job, results, now)
             })
-        print(aps_job_id, [job.__dict__ for job in scheduler.get_jobs()])
+        print(aps_job_id, [job.id for job in scheduler.get_jobs()])
         db.session.commit()

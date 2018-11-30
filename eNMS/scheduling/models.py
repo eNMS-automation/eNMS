@@ -1,6 +1,6 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from eNMS import db, scheduler
@@ -63,56 +63,33 @@ class Task(Base):
         db.session.commit()
 
     def kwargs(self):
+        default = {
+            'id': self.creation_time,
+            'func': scheduler_job,
+            'replace_existing': True,
+            'args': [self.job.id, self.creation_time]
+        }
         if self.frequency:
-            return {
+            trigger = {
                 'trigger': 'interval',
                 'start_date': self.aps_date('start_date'),
                 'end_date': self.aps_date('end_date'),
                 'seconds': self.frequency
             }
         else:
-            return {
+            trigger = {
                 'trigger': 'date',
                 'run_date': self.aps_date('start_date')
             }
+        return default, trigger
 
     def schedule(self):
-        if self.frequency:
-            scheduler.add_job(
-                id=self.creation_time,
-                func=scheduler_job,
-                args=[self.job.id, self.creation_time],
-                replace_existing=True
-                
-            )
-        else:
-            scheduler.add_job(
-                id=self.creation_time,
-                func=scheduler_job,
-                run_date=self.aps_date('start_date'),
-                args=[self.job.id, self.creation_time],
-                trigger='date',
-                replace_existing=True
-            )
+        default, trigger = self.kwargs()
+        scheduler.add_job(**{**default, **trigger})
 
     def reschedule(self):
-        if self.frequency:
-            scheduler.add_job(
-                id=self.creation_time,
-                func=scheduler_job,
-                args=[self.job.id, self.creation_time],
-                trigger='interval',
-                start_date=self.aps_date('start_date'),
-                end_date=self.aps_date('end_date'),
-                seconds=int(self.frequency),
-                replace_existing=True
-            )
-        else:
-            scheduler.add_job(
-                id=self.creation_time,
-                func=scheduler_job,
-                run_date=self.aps_date('start_date'),
-                args=[self.job.id, self.creation_time],
-                trigger='date',
-                replace_existing=True
-            )
+        print(self.creation_time not in [job.id for job in scheduler.get_jobs()])
+        if self.creation_time not in [job.id for job in scheduler.get_jobs()]:
+            self.schedule()
+        default, trigger = self.kwargs()
+        scheduler.reschedule_job(default.pop('id'), **trigger)

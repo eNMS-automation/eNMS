@@ -31,8 +31,9 @@ scheduler = BackgroundScheduler({
         'class': 'apscheduler.executors.pool:ThreadPoolExecutor',
         'max_workers': '50'
     },
-    'apscheduler.job_defaults.coalesce': 'false',
-    'apscheduler.job_defaults.max_instances': '3',
+    'apscheduler.job_defaults.misfire_grace_time': '5',
+    'apscheduler.job_defaults.coalesce': 'true',
+    'apscheduler.job_defaults.max_instances': '3'
 })
 
 # Vault

@@ -26,8 +26,11 @@ class Task(Base):
         self.update(**kwargs)
         self.status = 'Active'
         self.creation_time = str(datetime.now())
-        self.is_active = True
-        self.schedule()
+        self.schedule('add')
+
+    @property
+    def job_name(self):
+        return self.job.name
 
     def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
@@ -54,9 +57,10 @@ class Task(Base):
             pass
         db.session.commit()
 
-    def schedule(self):
+    def schedule(self, mode):
+        function = getattr(scheduler, mode)
         if self.frequency:
-            scheduler.add_job(
+            function(
                 id=self.creation_time,
                 func=scheduler_job,
                 args=[self.job.id],
@@ -67,7 +71,7 @@ class Task(Base):
                 replace_existing=True
             )
         else:
-            scheduler.add_job(
+            function(
                 id=self.creation_time,
                 func=scheduler_job,
                 run_date=self.aps_date('start_date'),
@@ -75,7 +79,3 @@ class Task(Base):
                 trigger='date',
                 replace_existing=True
             )
-
-    @property
-    def job_name(self):
-        return self.job.name

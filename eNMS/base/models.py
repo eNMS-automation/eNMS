@@ -121,7 +121,6 @@ class Base(db.Model):
 
     @classmethod
     def serialize(cls):
-        print(cls.query.all())
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
 

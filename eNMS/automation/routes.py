@@ -35,8 +35,6 @@ from eNMS.automation.helpers import scheduler_job
 
 @get(bp, '/service_management', 'View')
 def service_management():
-    a = serialize('Service')
-    print(a)
     return dict(
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,

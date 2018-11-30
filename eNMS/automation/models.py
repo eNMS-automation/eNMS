@@ -159,11 +159,8 @@ class Service(Job):
         )
         return success if not self.negative_logic else not success
 
-    def transfer_file(self, ssh_client, source=None, destination=None):
-        files = (
-            source or self.source_file,
-            destination or self.destination_file
-        )
+    def transfer_file(self, ssh_client, source, destination):
+        files = (source, destination)
         if self.protocol == 'sftp':
             sftp = ssh_client.open_sftp()
             getattr(sftp, self.direction)(*files)

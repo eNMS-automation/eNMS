@@ -23,7 +23,7 @@ function addTask(mode, properties) {
       values.push(`${properties[fields[i]]}`);
     }
   }
-  const status = properties.status == 'active' ? 'pause' : 'resume';
+  const status = properties.status == 'Active' ? 'pause' : 'resume';
   values.push(
     `<button id="pause-resume-${properties.id}" type="button"
     class="btn btn-success btn-xs" onclick="${status}Task('${properties.id}')">
@@ -35,7 +35,6 @@ function addTask(mode, properties) {
     `<button type="button" class="btn btn-danger btn-xs"
     onclick="confirmDeletion('task', '${properties.id}')">Delete</button>`
   );
-
   if (mode == 'edit') {
     table.row($(`#${properties.id}`)).data(values);
   } else {

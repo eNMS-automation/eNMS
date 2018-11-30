@@ -47,7 +47,7 @@ class Task(Base):
 
     def pause_task(self):
         scheduler.pause_job(self.creation_time)
-        self.status = 'Suspended'
+        self.status = 'Pause'
         db.session.commit()
 
     def resume_task(self):
@@ -57,7 +57,7 @@ class Task(Base):
 
     def delete_task(self):
         try:
-            scheduler.delete_job(self.creation_time)
+            scheduler.remove_job(self.creation_time)
         except JobLookupError:
             pass
         db.session.commit()
@@ -88,7 +88,6 @@ class Task(Base):
         scheduler.add_job(**{**default, **trigger})
 
     def reschedule(self):
-        print(self.creation_time not in [job.id for job in scheduler.get_jobs()])
         if self.creation_time not in [job.id for job in scheduler.get_jobs()]:
             self.schedule()
         default, trigger = self.kwargs()

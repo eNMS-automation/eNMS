@@ -99,7 +99,7 @@ def scheduler_job(job_id, aps_job_id):
                 'runtime': now,
                 'result': get_results_summary(job, results, now)
             })
-        task = fetch('Task', id=aps_job_id)
+        task = fetch('Task', creation_time=aps_job_id)
         if not task.frequency:
             task.status = 'Completed'
         db.session.commit()

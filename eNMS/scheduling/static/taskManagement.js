@@ -96,6 +96,21 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
   });
 }
 
+/**
+ * Get Task Status.
+ */
+function getStatus() {
+  call(`/scheduling/get_status`, function(status) {
+    console.log(status);
+    for (let i = 0; i < status.length; i++) {
+      const col = table.column('#status');
+      table.cell(i, col).data(status[i]).draw(false);
+    }
+    setTimeout(getStatus, 5000);
+  });
+}
+
+
 (function() {
   if (typeof tasks !== 'undefined') {
     for (let i = 0; i < tasks.length; i++) {
@@ -118,4 +133,5 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
     }
   }
   doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
+  getStatus();
 })();

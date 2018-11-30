@@ -81,6 +81,7 @@ class Task(Base):
                 'trigger': 'date',
                 'run_date': self.aps_date('start_date')
             }
+        print(default)
         return default, trigger
 
     def schedule(self):

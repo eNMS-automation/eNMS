@@ -1,7 +1,7 @@
 from flask import request
 from re import search, sub
 
-from eNMS import scheduler
+from eNMS import db, scheduler
 from eNMS.base.helpers import (
     fetch,
     fetch_all,
@@ -65,3 +65,8 @@ def pause_task(task_id):
 def resume_task(task_id):
     fetch('Task', id=task_id).resume_task()
     return True
+
+
+@post(bp, '/get_status', 'View')
+def get_status():
+    return [task.status for task in fetch_all('Task')]

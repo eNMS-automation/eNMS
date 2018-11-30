@@ -70,6 +70,7 @@ class Task(Base):
             'args': [self.job.id, self.creation_time]
         }
         if self.frequency:
+            self.periodic = True
             trigger = {
                 'trigger': 'interval',
                 'start_date': self.aps_date('start_date'),
@@ -77,11 +78,11 @@ class Task(Base):
                 'seconds': self.frequency
             }
         else:
+            self.periodic = False
             trigger = {
                 'trigger': 'date',
                 'run_date': self.aps_date('start_date')
             }
-        print(default)
         return default, trigger
 
     def schedule(self):

@@ -36,9 +36,9 @@ class LogRule(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     source = Column(String)
-    sourceregex = Column(Boolean)
+    source_regex = Column(Boolean)
     content = Column(String)
-    contentregex = Column(Boolean)
+    content_regex = Column(Boolean)
     logs = relationship(
         'Log',
         secondary=log_rule_log_table,
@@ -72,9 +72,11 @@ class SyslogUDPHandler(BaseRequestHandler):
                     log_rules.append(log_rule)
                     for job in log_rule.jobs:
                         job.try_run()
-            log = Log(source, data, log_rules)
-            db.session.add(log)
-            db.session.commit()
+            print(log_rules)
+            if log_rules:
+                log = Log(source, data, log_rules)
+                db.session.add(log)
+                db.session.commit()
 
 
 class SyslogServer(Base):

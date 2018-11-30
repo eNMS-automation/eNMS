@@ -205,8 +205,8 @@ log_public_properties = [
 
 log_rule_public_properties = log_public_properties + [
     'name',
-    'sourceregex',
-    'contentregex',
+    'source_regex',
+    'content_regex',
     'jobs'
 ]
 
@@ -410,6 +410,10 @@ relationships = {
     },
     'Parameters': {
         'pool': 'Pool'
+    },
+    'LogRule': {
+        'job': 'Job',
+        'log': 'Log'
     }
 }
 

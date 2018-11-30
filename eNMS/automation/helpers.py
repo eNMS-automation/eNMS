@@ -85,7 +85,7 @@ def get_results_summary(job, results, now):
     return '\n\n'.join(summary)
 
 
-def scheduler_job(job_id, aps_job_id):
+def scheduler_job(job_id, aps_job_id=None):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)
         results, now = job.try_run()
@@ -100,6 +100,6 @@ def scheduler_job(job_id, aps_job_id):
                 'result': get_results_summary(job, results, now)
             })
         task = fetch('Task', creation_time=aps_job_id)
-        if not task.frequency:
+        if task and not task.frequency:
             task.status = 'Completed'
         db.session.commit()

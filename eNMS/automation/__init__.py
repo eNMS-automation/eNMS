@@ -27,15 +27,18 @@ add_classes(Job, Service, Workflow, WorkflowEdge)
 
 
 def create_service_classes():
-    path_services = Path.cwd() / 'eNMS' / 'automation' / 'services'
+    path_services = [Path.cwd() / 'eNMS' / 'automation' / 'services']
+    if environ.get('CUSTOM_SERVICES_PATH'):
+        path_services.append(Path(environ.get('CUSTOM_SERVICES_PATH')))
     dont_create_examples = not int(environ.get('CREATE_EXAMPLES', True))
-    for file in path_services.glob('**/*.py'):
-        if 'init' in str(file):
-            continue
-        if dont_create_examples and 'examples' in str(file):
-            continue
-        spec = spec_from_file_location(str(file), str(file))
-        spec.loader.exec_module(module_from_spec(spec))
+    for path in path_services:
+        for file in path.glob('**/*.py'):
+            if 'init' in str(file):
+                continue
+            if dont_create_examples and 'examples' in str(file):
+                continue
+            spec = spec_from_file_location(str(file), str(file))
+            spec.loader.exec_module(module_from_spec(spec))
     for cls_name, cls in service_classes.items():
         cls_to_properties[cls_name] = list(cls_to_properties['Service'])
         for col in cls.__table__.columns:

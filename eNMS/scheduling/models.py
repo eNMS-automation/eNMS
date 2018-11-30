@@ -45,12 +45,12 @@ class Task(Base):
         date = getattr(self, datetype)
         return self.aps_conversion(date) if date else None
 
-    def pause_task(self):
+    def pause(self):
         scheduler.pause_job(self.creation_time)
         self.status = 'Pause'
         db.session.commit()
 
-    def resume_task(self):
+    def resume(self):
         scheduler.resume_job(self.creation_time)
         self.status = 'Active'
         db.session.commit()
@@ -75,7 +75,7 @@ class Task(Base):
                 'trigger': 'interval',
                 'start_date': self.aps_date('start_date'),
                 'end_date': self.aps_date('end_date'),
-                'seconds': self.frequency
+                'seconds': int(self.frequency)
             }
         else:
             self.periodic = False

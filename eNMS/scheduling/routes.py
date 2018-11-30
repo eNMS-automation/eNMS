@@ -1,3 +1,4 @@
+from apscheduler.jobstores.base import JobLookupError
 from flask import request
 from re import search, sub
 
@@ -55,15 +56,12 @@ def scheduler_action(action):
     return True
 
 
-@post(bp, '/pause_task/<task_id>', 'Edit')
-def pause_task(task_id):
-    fetch('Task', id=task_id).pause_task()
-    return True
-
-
-@post(bp, '/resume_task/<task_id>', 'Edit')
-def resume_task(task_id):
-    fetch('Task', id=task_id).resume_task()
+@post(bp, '/<action>_task/<task_id>', 'Edit')
+def task_action(action, task_id):
+    try:
+        getattr(fetch('Task', id=task_id), action)()
+    except JobLookupError:
+        return {'error': 'This task is not scheduled.'}
     return True
 
 

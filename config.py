@@ -24,6 +24,9 @@ class Config(object):
     # Examples
     CREATE_EXAMPLES = int(environ.get('CREATE_EXAMPLES', True))
 
+    # Custom Services
+    CUSTOM_SERVICES_PATH = environ.get('CUSTOM_SERVICES_PATH')
+
     # Notifications
     # - via Mail
     MAIL_SERVER = environ.get('MAIL_SERVER', 'smtp.googlemail.com')

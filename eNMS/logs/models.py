@@ -54,7 +54,6 @@ class LogRule(Base):
 class SyslogUDPHandler(BaseRequestHandler):
 
     def handle(self):
-        print(self.request[0])
         with scheduler.app.app_context():
             data = str(bytes.decode(self.request[0].strip()))
             source, _ = self.client_address
@@ -72,7 +71,6 @@ class SyslogUDPHandler(BaseRequestHandler):
                     log_rules.append(log_rule)
                     for job in log_rule.jobs:
                         job.try_run()
-            print(log_rules)
             if log_rules:
                 log = Log(source, data, log_rules)
                 db.session.add(log)

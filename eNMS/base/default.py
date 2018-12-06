@@ -62,33 +62,39 @@ def create_default_network_topology(app):
 
 @integrity_rollback
 def create_default_services():
+    admin = fetch('User', name='admin').id
     for service in (
         {
             'type': 'SwissArmyKnifeService',
             'name': 'Start',
             'description': 'Start point of a workflow',
+            'creator': admin,
             'hidden': True
         },
         {
             'type': 'SwissArmyKnifeService',
             'name': 'End',
             'description': 'End point of a workflow',
+            'creator': admin,
             'hidden': True
         },
         {
             'type': 'SwissArmyKnifeService',
             'name': 'mail_feedback_notification',
-            'description': 'Mail notification (service logs)'
+            'description': 'Mail notification (service logs)',
+            'creator': admin
         },
         {
             'type': 'SwissArmyKnifeService',
             'name': 'slack_feedback_notification',
-            'description': 'Slack notification (service logs)'
+            'description': 'Slack notification (service logs)',
+            'creator': admin
         },
         {
             'type': 'SwissArmyKnifeService',
             'name': 'mattermost_feedback_notification',
-            'description': 'Mattermost notification (service logs)'
+            'description': 'Mattermost notification (service logs)',
+            'creator': admin
         }
     ):
         factory(service.pop('type'), **service)
@@ -96,14 +102,14 @@ def create_default_services():
 
 @integrity_rollback
 def create_example_services():
-    admin = fetch('User', name='admin')
+    admin = fetch('User', name='admin').id
     for service in (
         {
             'type': 'ConfigureBgpService',
             'name': 'napalm_configure_bgp_1',
             'description': 'Configure BGP Peering with Napalm',
             'devices': [fetch('Device', name='Washington').id],
-            'user': admin,
+            'creator': admin,
             'local_as': 100,
             'loopback': 'Lo100',
             'loopback_ip': '100.1.1.1',
@@ -117,7 +123,7 @@ def create_example_services():
             'name': 'test_file_transfer_service',
             'description': 'Test the file transfer service',
             'devices': [fetch('Device', name='Aserver').id],
-            'user': admin,
+            'creator': admin,
             'direction': 'get',
             'protocol': 'scp',
             'source_file': '/media/sf_VM/eNMS/tests/file_transfer/a.bin',
@@ -129,7 +135,7 @@ def create_example_services():
             'name': 'test_log_backup_service',
             'description': 'Test the log backup service',
             'devices': [fetch('Device', name='Aserver').id],
-            'user': admin,
+            'creator': admin,
             'protocol': 'scp',
             'destination_ip_address': '127.0.0.1',
             'destination_path': '/media/sf_VM/eNMS/tests/file_transfer',
@@ -141,7 +147,7 @@ def create_example_services():
             'name': 'test_database_backup_service',
             'description': 'Test the log backup service',
             'devices': [fetch('Device', name='Aserver').id],
-            'user': admin,
+            'creator': admin,
             'protocol': 'scp',
             'destination_ip_address': '127.0.0.1',
             'destination_path': '/media/sf_VM/eNMS/tests/file_transfer',
@@ -154,7 +160,7 @@ def create_example_services():
 
 @integrity_rollback
 def create_netmiko_workflow():
-    services, admin = [], fetch('User', name='admin')
+    services, admin = [], fetch('User', name='admin').id
     for service in (
         {
             'type': 'NetmikoConfigurationService',
@@ -162,7 +168,7 @@ def create_netmiko_workflow():
             'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
             'devices': [fetch('Device', name='Washington').id],
-            'user': admin,
+            'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -178,7 +184,7 @@ def create_netmiko_workflow():
             'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
             'devices': [fetch('Device', name='Washington').id],
-            'user': admin,
+            'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -193,7 +199,7 @@ def create_netmiko_workflow():
             'description': 'Delete VRF "test"',
             'waiting_time': 1,
             'devices': [fetch('Device', name='Washington').id],
-            'user': admin,
+            'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -209,7 +215,7 @@ def create_netmiko_workflow():
             'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
             'devices': [fetch('Device', name='Washington').id],
-            'user': admin,
+            'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
             'driver': 'arista_eos',
@@ -227,6 +233,7 @@ def create_netmiko_workflow():
     workflow = factory('Workflow', **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
+        'creator': admin,
         'vendor': 'Arista',
         'operating_system': 'eos'
     })
@@ -247,7 +254,7 @@ def create_netmiko_workflow():
 
 @integrity_rollback
 def create_napalm_workflow():
-    services, admin = [], fetch('User', name='admin')
+    services, admin = [], fetch('User', name='admin').id
     for service in (
         {
             'type': 'NapalmConfigurationService',
@@ -255,7 +262,7 @@ def create_napalm_workflow():
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
             'devices': [fetch('Device', name='Washington').id],
-            'user': admin,
+            'creator': admin,
             'driver': 'eos',
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -269,7 +276,7 @@ def create_napalm_workflow():
             'driver': 'eos',
             'description': 'Rollback a configuration with Napalm eos',
             'devices': [fetch('Device', name='Washington').id],
-            'user': admin,
+            'creator': admin,
             'waiting_time': 0
         }
     ):
@@ -280,6 +287,7 @@ def create_napalm_workflow():
     workflow = factory('Workflow', **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
+        'creator': admin,
         'vendor': 'Arista',
         'operating_system': 'eos'
     })
@@ -299,7 +307,7 @@ def create_napalm_workflow():
 
 
 def create_payload_transfer_workflow():
-    services, admin = [], fetch('User', name='admin')
+    services, admin = [], fetch('User', name='admin').id
     for service in [{
         'name': 'GET_device',
         'type': 'RestCallService',
@@ -308,7 +316,7 @@ def create_payload_transfer_workflow():
         'password': 'admin',
         'waiting_time': 0,
         'devices': [fetch('Device', name='Washington').id],
-        'user': admin,
+        'creator': admin,
         'content_match': '',
         'call_type': 'GET',
         'url': 'http://127.0.0.1:5000/rest/object/device/{{device.name}}',
@@ -320,7 +328,7 @@ def create_payload_transfer_workflow():
         'description': f'Getter: {getter}',
         'waiting_time': 0,
         'devices': [fetch('Device', name='Washington').id],
-        'user': admin,
+        'creator': admin,
         'driver': 'eos',
         'content_match': '',
         'getters': [getter]
@@ -335,13 +343,14 @@ def create_payload_transfer_workflow():
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
         'devices': [fetch('Device', name='Washington').id],
-        'user': admin
+        'creator': admin
     }]:
         instance = factory(service.pop('type'), **service)
         services.append(instance)
     workflow = factory('Workflow', **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
+        'creator': admin,
         'vendor': 'Arista',
         'operating_system': 'eos'
     })

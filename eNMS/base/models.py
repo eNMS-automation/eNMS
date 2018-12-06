@@ -51,6 +51,7 @@ class Base(db.Model):
             property_type = property_types.get(property, None)
             if property in serial:
                 value = fetch(serial[property], id=value)
+                print(self, property, value)
             elif property[:-1] in serial:
                 value = objectify(serial[property[:-1]], value)
             elif property in boolean_properties:

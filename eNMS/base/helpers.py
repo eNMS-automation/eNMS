@@ -97,7 +97,7 @@ def integrity_rollback(function):
 
 def process_request(function):
     def wrapper(*a, **kw):
-        data = {**request.form.to_dict(), **{'creator': current_user}}
+        data = {**request.form.to_dict(), **{'creator': current_user.id}}
         for property in data.get('list_fields', '').split(','):
             if property in request.form:
                 data[property] = request.form.getlist(property)
@@ -160,13 +160,13 @@ def post(blueprint, url, permission=None):
         @wraps(func)
         @process_request
         def inner(*args, **kwargs):
-            # try:
+            try:
                 return jsonify(func(*args, **kwargs))
-            # except Exception as e:
-            #     error = str(e)
-            #     if error == 'Expecting value: line 1 column 1 (char 0)':
-            #         error = 'Invalid syntax for dictionnary input.'
-            #     return jsonify({'error': error})
+            except Exception as e:
+                error = str(e)
+                if error == 'Expecting value: line 1 column 1 (char 0)':
+                    error = 'Invalid syntax for dictionnary input.'
+                return jsonify({'error': error})
         return inner
     return outer
 

@@ -133,8 +133,8 @@ job_public_properties = [
     'vendor',
     'operating_system',
     'type',
-    'creator',
     'description',
+    'creator_name',
     'credentials',
     'status',
     'state',
@@ -153,7 +153,7 @@ service_table_properties = [
     'name',
     'type',
     'description',
-    'creator',
+    'creator_name',
     'number_of_retries',
     'time_between_retries',
     'status'
@@ -162,7 +162,7 @@ service_table_properties = [
 workflow_table_properties = [
     'name',
     'description',
-    'creator',
+    'creator_name',
     'vendor',
     'operating_system',
     'number_of_retries',
@@ -393,6 +393,7 @@ relationships = {
         'link': 'Link'
     },
     'Service': {
+        'creator': 'User',
         'device': 'Device',
         'pool': 'Pool',
         'workflow': 'Workflow',
@@ -402,6 +403,7 @@ relationships = {
         'job': 'Job'
     },
     'Workflow': {
+        'creator': 'User',
         'edge': 'WorkflowEdge',
         'job': 'Job',
         'device': 'Device',

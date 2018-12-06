@@ -70,6 +70,10 @@ class Job(Base):
     )
     mail_recipient = Column(String)
 
+    @property
+    def creator_name(self):
+        return self.creator.name
+
     def compute_targets(self):
         targets = set(self.devices)
         for pool in self.pools:

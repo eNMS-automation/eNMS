@@ -492,7 +492,7 @@ export_properties = {
 
 dont_migrate = {
     'Device': ['jobs'],
-    'Service': ['logs', 'state', 'tasks', 'workflows'],
+    'Service': ['logs', 'state', 'tasks', 'workflows', 'creator_name'],
     'Task': ['job_name'],
-    'Workflow': ['logs', 'state', 'status']
+    'Workflow': ['logs', 'state', 'status', 'creator_name']
 }

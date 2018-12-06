@@ -43,7 +43,8 @@ class Base(db.Model):
                     f'secret/data/{self.__tablename__}/{self.name}/{property}',
                     data={property: value}
                 )
-        super().__setattr__(property, value)
+        else:
+            super().__setattr__(property, value)
 
     def update(self, **kwargs):
         serial = rel.get(self.__tablename__, rel['Service'])

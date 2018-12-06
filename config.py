@@ -23,8 +23,8 @@ class Config(object):
 
     # Syslog
     USE_SYSLOG = int(environ.get('USE_SYSLOG', False))
-    SYSLOG_ADDR = environ.get('VAULT_ADDR', '0.0.0.0')
-    SYSLOG_PORT = int(environ.get('VAULT_ADDR', 514))
+    SYSLOG_ADDR = environ.get('SYSLOG_ADDR', '0.0.0.0')
+    SYSLOG_PORT = int(environ.get('SYSLOG_PORT', 514))
 
     # Examples
     CREATE_EXAMPLES = int(environ.get('CREATE_EXAMPLES', True))

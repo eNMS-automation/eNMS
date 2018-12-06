@@ -1,9 +1,0 @@
----
-- name: change hostname
-  hosts: all
-  connection: local
-    
-  tasks:
-  - name: Print debug message
-    debug:
-      msg: '{{ description }}'

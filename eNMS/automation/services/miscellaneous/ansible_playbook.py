@@ -34,7 +34,9 @@ class AnsiblePlaybookService(Service):
         arguments = substitute(self.arguments, locals()).split()
         command = ['ansible-playbook']
         if self.pass_device_properties:
-            command.extend(['-e', dumps(device.get_properties())])
+            properties = device.get_properties()
+            properties['password'] = device.password
+            command.extend(['-e', dumps(properties)])
         if self.inventory_from_selection:
             command.extend(['-i', device.ip_address + ','])
         command.append(substitute(self.playbook_path, locals()))

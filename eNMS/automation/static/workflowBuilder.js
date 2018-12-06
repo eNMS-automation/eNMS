@@ -80,7 +80,7 @@ function displayWorkflow(wf) {
     }
   });
   $(`#add_jobs option[value='${wf.id}']`).remove();
-  $('#add_jobs').select('refresh');
+  $('#add_jobs').selectpicker('refresh');;
   getWorkflowState();
   return graph;
 }

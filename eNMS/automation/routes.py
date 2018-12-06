@@ -19,6 +19,7 @@ from eNMS.base.helpers import (
 )
 from eNMS.base.properties import (
     cls_to_properties,
+    private_properties,
     property_types,
     service_table_properties,
     workflow_table_properties
@@ -94,7 +95,8 @@ def get_service(id_or_cls):
             <label>{property}</label>
             <div class="form-group">
               <input class="form-control" id="service-{property}"
-              name="{property}" type="text">
+              name="{property}" type="{'password'
+              if property in private_properties else 'text'}">
             </div>'''
 
     def build_textarea_box(property):

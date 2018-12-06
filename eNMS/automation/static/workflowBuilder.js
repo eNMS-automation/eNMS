@@ -15,6 +15,12 @@ vis: false
 workflow: true
 */
 
+(function() {
+  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
+  convertSelect('#add_jobs');
+  getWorkflowState();
+})();
+
 const workflowBuilder = true; // eslint-disable-line no-unused-vars
 const container = document.getElementById('network');
 const dsoptions = {
@@ -390,9 +396,3 @@ function getWorkflowState() {
 $(window).bind('beforeunload', function() {
   savePositions();
 });
-
-(function() {
-  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  convertSelect('#add_jobs');
-  getWorkflowState();
-})();

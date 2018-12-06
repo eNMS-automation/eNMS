@@ -1,4 +1,5 @@
 from collections import Counter
+from json.decoder import JSONDecodeError
 from logging import info
 from flask import redirect, request, url_for
 from flask_login import current_user
@@ -52,9 +53,12 @@ def get_instance(cls, id):
 
 @post(bp, '/update/<cls>', 'Edit')
 def update_instance(cls):
-    instance = factory(cls, **request.form)
-    info(f'{current_user.name}: UPDATE {cls} {instance.name} ({instance.id})')
-    return instance.serialized
+    try:
+        instance = factory(cls, **request.form)
+        info(f'{current_user.name}: UPDATE {cls} {instance.name} ({instance.id})')
+        return instance.serialized
+    except JSONDecodeError:
+        return {'error': 'Invalid JSON syntax (JSON field)'}
 
 
 @post(bp, '/delete/<cls>/<id>', 'Edit')

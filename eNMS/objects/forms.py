@@ -67,7 +67,7 @@ class AddDevice(AddObjectForm):
     latitude = FloatField(default=0.)
     username = StringField()
     password = PasswordField()
-    secret_password = PasswordField()
+    enable_password = PasswordField()
 
 
 class AddLink(AddObjectForm):

@@ -62,6 +62,7 @@ let edgeType;
  * @return {graph}
  */
 function displayWorkflow(wf) {
+  console.log(wf.jobs);
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   graph = new vis.Network(container, {nodes: nodes, edges: edges}, dsoptions);

@@ -220,7 +220,8 @@ class Workflow(Job):
         default = [fetch('Service', name='Start'), end]
         self.jobs.extend(default)
         super().__init__(**kwargs)
-        end.positions[self.name] = (500, 0)
+        if self.name not in end.positions:
+            end.positions[self.name] = (500, 0)
 
     def job(self, *args):
         device, payload = args if len(args) == 2 else (None, args)

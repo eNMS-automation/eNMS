@@ -133,6 +133,7 @@ job_public_properties = [
     'vendor',
     'operating_system',
     'type',
+    'creator',
     'description',
     'credentials',
     'status',
@@ -152,6 +153,7 @@ service_table_properties = [
     'name',
     'type',
     'description',
+    'creator',
     'number_of_retries',
     'time_between_retries',
     'status'
@@ -160,6 +162,7 @@ service_table_properties = [
 workflow_table_properties = [
     'name',
     'description',
+    'creator',
     'vendor',
     'operating_system',
     'number_of_retries',
@@ -313,6 +316,7 @@ pretty_names = {
     'command': 'Command',
     'content': 'Content',
     'content_type': 'Content type',
+    'creator': 'Creator',
     'description': 'Description',
     'destination': 'Destination',
     'destination_name': 'Destination',

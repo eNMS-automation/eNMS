@@ -19,7 +19,7 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 def get_credentials(service, device):
     return (
-        (service.user.name, service.user.password)
+        (service.creator.name, service.creator.password)
         if service.credentials == 'user'
         else (device.username, device.password)
     )

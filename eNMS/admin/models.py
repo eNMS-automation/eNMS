@@ -20,7 +20,7 @@ class User(Base, UserMixin):
     __tablename__ = type = 'User'
     id = Column(Integer, primary_key=True)
     email = Column(String)
-    jobs = relationship('Job', back_populates='user')
+    jobs = relationship('Job', back_populates='creator')
     name = Column(String, unique=True)
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     password = Column(String)

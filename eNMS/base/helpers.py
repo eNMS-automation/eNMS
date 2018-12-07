@@ -1,6 +1,7 @@
 from flask import abort, jsonify, request, render_template
 from flask_login import current_user, login_required
 from functools import wraps
+from logging import info
 from sqlalchemy import exc
 from string import punctuation
 
@@ -147,6 +148,10 @@ def get(blueprint, url, permission=None, method=['GET']):
         @permission_required(permission)
         @wraps(func)
         def inner(*args, **kwargs):
+            info(
+                f"User '{current_user.name}' ({request.remote_addr})"
+                f"calling the endpoint {url} (GET)"
+            )
             return func(*args, **kwargs)
         return inner
     return outer
@@ -160,6 +165,10 @@ def post(blueprint, url, permission=None):
         @wraps(func)
         @process_request
         def inner(*args, **kwargs):
+            info(
+                f"User '{current_user.name}' ({request.remote_addr})"
+                f" calling the endpoint {request.url} (POST)"
+            )
             try:
                 return jsonify(func(*args, **kwargs))
             except Exception as e:

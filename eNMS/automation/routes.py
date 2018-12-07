@@ -207,11 +207,11 @@ def add_jobs_to_workflow(workflow_id):
     for job in jobs:
         job.workflows.append(workflow)
     log_jobs = ', '.join(map(str, jobs))
+    db.session.commit()
     info(
         f"User '{current_user.name}' ({request.remote_addr}) added the jobs"
-        f" {', '.join(map(str, jobs))} to the workflow '{workflow.name}'"
+        f" {', '.join(map(str, jobs))} to the workflow {workflow.name}"
     )
-    db.session.commit()
     return [job.serialized for job in jobs]
 
 

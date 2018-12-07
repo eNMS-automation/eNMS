@@ -1,5 +1,6 @@
 from logging import info
-from json import dumps
+from json import dumps, loads
+from json.decoder import JSONDecodeError
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
@@ -46,6 +47,10 @@ class AnsiblePlaybookService(Service):
         try:
             result = result.decode('utf-8')
         except AttributeError:
+            pass
+        try:
+            result = loads(result)
+        except JSONDecodeError:
             pass
         match = substitute(self.content_match, locals())
         return {

@@ -58,7 +58,7 @@ class Base(db.Model):
                 value = kwargs[property] not in (None, False)
             elif 'regex' in property:
                 value = property in kwargs
-            elif property_type == 'dict':
+            elif property_type == 'dict' and type(value) == str:
                 value = loads(value) if value else {}
             elif property_type in ['float', 'int']:
                 default_value = getattr(self.__table__.c, property).default

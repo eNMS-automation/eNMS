@@ -10,7 +10,7 @@ def test_user_management(user_client):
             'name': user,
             'email': f'{user}@test.com',
             'permissions': ['Admin'],
-            'password': user,
+            'password': user
         }
         user_client.post('/update/user', data=dict_user)
     assert len(fetch_all('User')) == 4

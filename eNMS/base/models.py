@@ -35,14 +35,13 @@ class Base(db.Model):
             return super().__getattribute__(property)
 
     def __setattr__(self, property, value):
-        if property in private_properties:
+        if property in private_properties and use_vault:
             if not value:
                 return
-            if use_vault:
-                vault_client.write(
-                    f'secret/data/{self.__tablename__}/{self.name}/{property}',
-                    data={property: value}
-                )
+            vault_client.write(
+                f'secret/data/{self.__tablename__}/{self.name}/{property}',
+                data={property: value}
+            )
         else:
             super().__setattr__(property, value)
 

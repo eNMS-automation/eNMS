@@ -76,6 +76,7 @@ def test_authentication(base_client):
 def test_urls(user_client):
     for blueprint, pages in urls.items():
         for page in pages:
+            print(page)
             page_url = blueprint + page
             r = user_client.get(page_url, follow_redirects=True)
             assert r.status_code == 200

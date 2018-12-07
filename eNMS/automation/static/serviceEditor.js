@@ -33,7 +33,7 @@ workflowBuilder: false;
  */
 function editService(id, duplicate) {
   const url = `/automation/get_service/${id || $('#service-type').val()}`;
-  $('#service-type').prop('disabled', true);
+  if (id) $('#service-type').prop('disabled', true);
   call(url, function(r) {
     for (const type of ['boolean', 'list']) {
       const fields = $(`#service-${type}_fields`);

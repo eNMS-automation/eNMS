@@ -18,6 +18,7 @@ $('#logs-modal').on('hidden.bs.modal', function() {
 
 /**
  * Open smart wizard.
+ * @param {type} type - Service or Workflow.
  */
 function openWizard(type) { // eslint-disable-line no-unused-vars
   $(`#${type}-wizard`).smartWizard({

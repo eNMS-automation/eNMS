@@ -1,6 +1,7 @@
 /*
 global
 addInstance: false
+convertSelect: false
 logRules: false
 */
 

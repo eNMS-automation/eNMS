@@ -55,7 +55,10 @@ def get_instance(cls, id):
 def update_instance(cls):
     try:
         instance = factory(cls, **request.form)
-        info(f'{current_user.name}: UPDATE {cls} {instance.name} ({instance.id})')
+        info(
+            f'{current_user.name}: UPDATE {cls} '
+            f'{instance.name} ({instance.id})'
+        )
         return instance.serialized
     except JSONDecodeError:
         return {'error': 'Invalid JSON syntax (JSON field)'}

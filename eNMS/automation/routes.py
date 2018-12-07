@@ -1,7 +1,6 @@
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
-from flask_login import current_user
 from json import dumps
 from logging import info
 
@@ -206,12 +205,7 @@ def add_jobs_to_workflow(workflow_id):
     jobs = objectify('Job', request.form['add_jobs'])
     for job in jobs:
         job.workflows.append(workflow)
-    log_jobs = ', '.join(map(str, jobs))
     db.session.commit()
-    info(
-        f"User '{current_user.name}' ({request.remote_addr}) added the jobs"
-        f" {', '.join(map(str, jobs))} to the workflow {workflow.name}"
-    )
     return [job.serialized for job in jobs]
 
 

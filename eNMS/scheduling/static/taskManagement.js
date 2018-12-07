@@ -101,7 +101,6 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
  */
 function getStatus() {
   call(`/scheduling/get_status`, function(status) {
-    console.log(status);
     for (let i = 0; i < status.length; i++) {
       const col = table.column('#status');
       table.cell(i, col).data(status[i]).draw(false);

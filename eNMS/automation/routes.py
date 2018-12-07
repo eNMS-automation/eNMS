@@ -1,6 +1,7 @@
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
+from flask_login import current_user
 from json import dumps
 from logging import info
 
@@ -205,6 +206,11 @@ def add_jobs_to_workflow(workflow_id):
     jobs = objectify('Job', request.form['add_jobs'])
     for job in jobs:
         job.workflows.append(workflow)
+    log_jobs = ', '.join(map(str, jobs))
+    info(
+        f"User '{current_user.name}' ({request.remote_addr}) added the jobs"
+        f" {', '.join(map(str, jobs))} to the workflow '{workflow.name}'"
+    )
     db.session.commit()
     return [job.serialized for job in jobs]
 
@@ -234,14 +240,6 @@ def reset_workflow_logs(workflow_id):
     fetch('Workflow', id=workflow_id).state = {}
     db.session.commit()
     return True
-
-
-@post(bp, '/add_node/<workflow_id>/<job_id>', 'Edit')
-def add_node(workflow_id, job_id):
-    workflow, job = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
-    workflow.jobs.append(job)
-    db.session.commit()
-    return job.serialized
 
 
 @post(bp, '/delete_node/<workflow_id>/<job_id>', 'Edit')

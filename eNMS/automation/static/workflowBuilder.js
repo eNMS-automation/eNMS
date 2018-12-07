@@ -121,7 +121,6 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
         $('#add-job').modal('hide');
         if (graph.findNode(job.id).length == 0) {
           nodes.add(jobToNode(job));
-          saveNode(job);
         } else {
           alertify.notify(
             `Job '${job.name}' already in workflow.`, 'error', 5
@@ -130,16 +129,6 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
       });
     });
   }
-}
-
-/**
- * Add job to the workflow object (back-end).
- * @param {job} job - job to add to the workflow.
- */
-function saveNode(job) {
-  call(`/automation/add_node/${workflow.id}/${job.id}`, function(job) {
-    alertify.notify(`'${job.name}' added to the workflow.`, 'success', 5);
-  });
 }
 
 /**

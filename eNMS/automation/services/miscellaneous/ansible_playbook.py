@@ -41,7 +41,7 @@ class AnsiblePlaybookService(Service):
         if self.inventory_from_selection:
             command.extend(['-i', device.ip_address + ','])
         command.append(substitute(self.playbook_path, locals()))
-        info(' '.join(command + arguments))
+        info(f"Sending Ansible playbook: {' '.join(command + arguments)}")
         result = check_output(command + arguments)
         info(result)
         try:
@@ -57,7 +57,7 @@ class AnsiblePlaybookService(Service):
             'expected': match,
             'negative_logic': self.negative_logic,
             'result': result,
-            'success': self.match_content(result, match)
+            'success': self.match_content(str(result), match)
         }
 
 

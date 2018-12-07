@@ -72,7 +72,7 @@ class Job(Base):
 
     @property
     def creator_name(self):
-        return self.creator.name
+        return self.creator.name if self.creator else 'None'
 
     def compute_targets(self):
         targets = set(self.devices)

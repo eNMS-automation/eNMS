@@ -61,13 +61,13 @@ class NapalmGettersService(Service):
                 result[getter] = getattr(napalm_driver, getter)()
             except Exception as e:
                 result[getter] = f'{getter} failed because of {e}'
-        output, match = str(result), substitute(self.content_match, locals())
+        match = substitute(self.content_match, locals())
         napalm_driver.close()
         return {
             'expected': match,
             'negative_logic': self.negative_logic,
             'result': result,
-            'success': self.match_content(output, match)
+            'success': self.match_content(str(result), match)
         }
 
 

@@ -20,15 +20,12 @@ def migrate_import(path_app, request):
     status = 'Import successful.'
     if request.get('empty_database_before_import', False):
         delete_all(*request['import_export_types'])
-    merge_mechanism = request.get('merge_mechanism', 'update')
     for cls in request['import_export_types']:
         path = path_app / 'migrations' / request['name'] / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             for obj in load(migration_file):
                 obj_cls = obj.pop('type') if cls == 'Service' else cls
                 try:
-                    if merge_mechanism == 'create':
-                        obj.pop('id')
                     factory(obj_cls, **obj)
                 except Exception as e:
                     info(f'{str(obj)} could not be imported ({str(e)})')

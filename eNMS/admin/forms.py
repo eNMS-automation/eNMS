@@ -79,11 +79,6 @@ class MigrationsForm(FlaskForm):
     empty_database_before_import = BooleanField()
     export_choices = [(p, p) for p in import_properties]
     import_export_types = SelectMultipleField(choices=export_choices)
-    merge_choices = (
-        ('update', 'Update existing objects'),
-        ('create', 'Create new objects')
-    )
-    merge_mechanism = SelectField(choices=merge_choices)
 
 
 class LogsForm(FlaskForm):

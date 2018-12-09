@@ -1,17 +1,16 @@
 /*
 global
+addTask: false
+alertify: false
 call: false
 convertSelect: false
+doc: false
+fCall: false
+taskManagement: false
 */
 
 (function() {
   convertSelect('#job');
-  if (taskManagement) {
-    for (let i = 0; i < tasks.length; i++) {
-      addTask('create', tasks[i]);
-    }
-    getStatus();
-  }
   const dates = ['start_date', 'end_date'];
   const today = new Date();
   for (let i = 0; i < dates.length; i++) {
@@ -29,6 +28,20 @@ convertSelect: false
   }
   doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
 })();
+
+/**
+ * Schedule a task.
+ */
+function scheduleTask() { // eslint-disable-line no-unused-vars
+  fCall('/update/task', '#task-modal-form', function(task) {
+    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
+    if (taskManagement) addTask(mode, task);
+    const message = `Task '${task.name}'
+    ${mode == 'edit' ? 'edited' : 'created'}.`;
+    alertify.notify(message, 'success', 5);
+    $('#task-modal').modal('hide');
+  });
+}
 
 /**
  * Show the task modal for task.

@@ -3,7 +3,6 @@ global
 alertify: false
 call: false
 doc: false
-fCall: false
 fields: false
 tasks: false
 */
@@ -96,5 +95,9 @@ function getStatus() {
 }
 
 (function() {
+  for (let i = 0; i < tasks.length; i++) {
+    addTask('create', tasks[i]);
+  }
   doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
+  getStatus();
 })();

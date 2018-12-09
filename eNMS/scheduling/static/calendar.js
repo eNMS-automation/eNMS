@@ -5,6 +5,8 @@ showTaskModal: false
 tasks: false
 */
 
+const taskManagement = false; // eslint-disable-line no-unused-vars
+
 $(function() {
   if (typeof ($.fn.fullCalendar) === 'undefined') {
     return;

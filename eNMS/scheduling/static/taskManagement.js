@@ -55,20 +55,6 @@ function scheduler(action) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Schedule a task.
- */
-function scheduleTask() { // eslint-disable-line no-unused-vars
-  fCall('/update/task', '#task-modal-form', function(task) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-    addTask(mode, task);
-    const message = `Task '${task.name}'
-    ${mode == 'edit' ? 'edited' : 'created'}.`;
-    alertify.notify(message, 'success', 5);
-    $('#task-modal').modal('hide');
-  });
-}
-
-/**
  * Pause a task.
  * @param {id} id - Task id.
  */
@@ -109,28 +95,6 @@ function getStatus() {
   });
 }
 
-
 (function() {
-  if (typeof tasks !== 'undefined') {
-    for (let i = 0; i < tasks.length; i++) {
-      addTask('create', tasks[i]);
-    }
-  }
-  const dates = ['start_date', 'end_date'];
-  const today = new Date();
-  for (let i = 0; i < dates.length; i++) {
-    $('#' + dates[i]).datetimepicker({
-      format: 'DD/MM/YYYY HH:mm:ss',
-      widgetPositioning: {
-        horizontal: 'left',
-        vertical: 'bottom',
-      },
-      useCurrent: false,
-    });
-    if ($('#' + dates[i]).length) {
-      $('#' + dates[i]).data('DateTimePicker').minDate(today);
-    }
-  }
   doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
-  getStatus();
 })();

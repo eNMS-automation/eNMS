@@ -6,6 +6,28 @@ convertSelect: false
 
 (function() {
   convertSelect('#job');
+  if (taskManagement) {
+    for (let i = 0; i < tasks.length; i++) {
+      addTask('create', tasks[i]);
+    }
+    getStatus();
+  }
+  const dates = ['start_date', 'end_date'];
+  const today = new Date();
+  for (let i = 0; i < dates.length; i++) {
+    $('#' + dates[i]).datetimepicker({
+      format: 'DD/MM/YYYY HH:mm:ss',
+      widgetPositioning: {
+        horizontal: 'left',
+        vertical: 'bottom',
+      },
+      useCurrent: false,
+    });
+    if ($('#' + dates[i]).length) {
+      $('#' + dates[i]).data('DateTimePicker').minDate(today);
+    }
+  }
+  doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
 })();
 
 /**

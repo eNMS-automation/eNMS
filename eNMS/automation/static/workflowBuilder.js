@@ -371,7 +371,7 @@ function getWorkflowState() {
             });
           }
         } else {
-          $('#current-job').empty();
+          $('#current-device,#current-job').empty();
           wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
         if (wf.status == 'Running') {

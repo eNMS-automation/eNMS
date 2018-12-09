@@ -1,4 +1,5 @@
 from datetime import datetime
+from logging import info
 from multiprocessing.pool import ThreadPool
 from re import search
 from scp import SCPClient
@@ -97,6 +98,7 @@ class Job(Base):
     def try_run(self, payload=None, remaining_targets=None, dont_commit=False):
         failed_attempts, now = {}, str(datetime.now()).replace(' ', '-')
         for i in range(self.number_of_retries + 1):
+            info(f'Running job {self.name}, attempt {i}')
             results, remaining_targets = self.run(payload, remaining_targets)
             if results['success']:
                 break
@@ -121,7 +123,7 @@ class Job(Base):
         if targets:
             results = {'result': {'devices': {}}}
             if self.multiprocessing:
-                processes = min(min(len(targets), 1), self.max_processes)
+                processes = min(max(len(targets), 1), self.max_processes)
                 pool = ThreadPool(processes=processes)
                 pool.map(
                     self.device_run,
@@ -242,6 +244,10 @@ class Workflow(Job):
             if not self.multiprocessing:
                 self.state['current_job'] = job.get_properties()
                 db.session.commit()
+            log = f'Workflow {self.name}: job {job.name}'
+            if device:
+                log += f' on {device.name}'
+            info(log)
             job_results, _ = job.try_run(
                 results,
                 {device} if device else None,

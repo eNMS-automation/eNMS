@@ -1,9 +1,5 @@
 from pathlib import Path
 from pytest import fixture
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from threading import Thread
-from time import sleep
 
 from config import config_dict
 from eNMS import create_app, db

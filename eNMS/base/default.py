@@ -161,13 +161,17 @@ def create_example_services():
 @integrity_rollback
 def create_netmiko_workflow():
     services, admin = [], fetch('User', name='admin').id
+    devices = [
+        fetch('Device', name='Washington').id,
+        fetch('Device', name='Austin').id
+    ]
     for service in (
         {
             'type': 'NetmikoConfigurationService',
             'name': 'netmiko_create_vrf_test',
             'description': 'Create a VRF "test" with Netmiko',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington').id],
+            'devices': devices,
             'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -183,7 +187,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_vrf_test',
             'description': 'Check that the vrf "test" is configured',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington').id],
+            'devices': devices,
             'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -198,7 +202,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_delete_vrf_test',
             'description': 'Delete VRF "test"',
             'waiting_time': 1,
-            'devices': [fetch('Device', name='Washington').id],
+            'devices': devices,
             'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -214,7 +218,7 @@ def create_netmiko_workflow():
             'name': 'netmiko_check_no_vrf_test',
             'description': 'Check that the vrf "test" is NOT configured',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington').id],
+            'devices': devices,
             'creator': admin,
             'vendor': 'Arista',
             'operating_system': 'eos',
@@ -255,13 +259,17 @@ def create_netmiko_workflow():
 @integrity_rollback
 def create_napalm_workflow():
     services, admin = [], fetch('User', name='admin').id
+    devices = [
+        fetch('Device', name='Washington').id,
+        fetch('Device', name='Austin').id
+    ]
     for service in (
         {
             'type': 'NapalmConfigurationService',
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
-            'devices': [fetch('Device', name='Washington').id],
+            'devices': devices,
             'creator': admin,
             'driver': 'eos',
             'vendor': 'Arista',
@@ -275,7 +283,7 @@ def create_napalm_workflow():
             'name': 'Napalm eos Rollback',
             'driver': 'eos',
             'description': 'Rollback a configuration with Napalm eos',
-            'devices': [fetch('Device', name='Washington').id],
+            'devices': devices,
             'creator': admin,
             'waiting_time': 0
         }
@@ -308,6 +316,10 @@ def create_napalm_workflow():
 
 def create_payload_transfer_workflow():
     services, admin = [], fetch('User', name='admin').id
+    devices = [
+        fetch('Device', name='Washington').id,
+        fetch('Device', name='Austin').id
+    ]
     for service in [{
         'name': 'GET_device',
         'type': 'RestCallService',
@@ -315,7 +327,7 @@ def create_payload_transfer_workflow():
         'username': 'admin',
         'password': 'admin',
         'waiting_time': 0,
-        'devices': [fetch('Device', name='Washington').id],
+        'devices': devices,
         'creator': admin,
         'content_match': '',
         'call_type': 'GET',
@@ -327,7 +339,7 @@ def create_payload_transfer_workflow():
         'type': 'NapalmGettersService',
         'description': f'Getter: {getter}',
         'waiting_time': 0,
-        'devices': [fetch('Device', name='Washington').id],
+        'devices': devices,
         'creator': admin,
         'driver': 'eos',
         'content_match': '',
@@ -342,7 +354,7 @@ def create_payload_transfer_workflow():
         'type': 'SwissArmyKnifeService',
         'description': 'Process Payload in example workflow',
         'waiting_time': 0,
-        'devices': [fetch('Device', name='Washington').id],
+        'devices': devices,
         'creator': admin
     }]:
         instance = factory(service.pop('type'), **service)

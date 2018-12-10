@@ -214,6 +214,7 @@ log_rule_public_properties = log_public_properties + [
 ]
 
 parameters_public_properties = [
+    'cluster_subnet',
     'default_longitude',
     'default_latitude',
     'default_zoom_level',

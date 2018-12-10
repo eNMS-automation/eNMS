@@ -31,6 +31,7 @@ class AddUser(FlaskForm):
 
 class AdministrationForm(FlaskForm):
     boolean_fields = HiddenField(default='mattermost_verify_certificate')
+    cluster_subnet = StringField()
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
@@ -69,6 +70,9 @@ class AdministrationForm(FlaskForm):
         ),
         'Horizontal Scaling': (
             'pool',
+        ),
+        'Cluster Management': (
+            'cluster_subnet',
         )
     }
 

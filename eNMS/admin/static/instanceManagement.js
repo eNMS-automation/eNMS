@@ -25,6 +25,20 @@ function tableActions(values, instance) { // eslint-disable-line no-unused-vars
   );
 }
 
+/**
+ * Get Service Status.
+ * @param {type} type - Service or Workflow.
+ */
+function getStatus(type) { // eslint-disable-line no-unused-vars
+  call('/admin/get_cluster_status', function(status) {
+    for (let i = 0; i < status.length; i++) {
+      const col = table.column('#status');
+      table.cell(i, col).data(status[i]).draw(false);
+    }
+    setTimeout(partial(getStatus, type), 5000);
+  });
+}
+
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
   convertSelect('#instance-permissions');

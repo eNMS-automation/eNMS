@@ -7,4 +7,3 @@ General
 
    introduction
    installation
-   migrations

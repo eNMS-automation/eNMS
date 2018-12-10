@@ -11,3 +11,5 @@ Please note that the exported backup files do not contain the secure credentials
 .. image:: /_static/objects/objects/migrations.png
    :alt: Migrations
    :align: center
+
+.. note:: If you are migrating data on an existing instance of eNMS, you can choose tick the option ``Empty Database before Import`` to empty the database before starting the migrations.

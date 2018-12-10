@@ -47,6 +47,7 @@ class Parameters(Base):
 
     __tablename__ = type = 'Parameters'
     id = Column(Integer, primary_key=True)
+    instance_id = Column(String)
     name = Column(String, default='default', unique=True)
     cluster_scan_subnet = Column(String, default='192.168.105.0/24')
     cluster_scan_protocol = Column(String, default='http')

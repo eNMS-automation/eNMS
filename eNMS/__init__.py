@@ -1,4 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime
 from flask import Flask, render_template
 from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
@@ -59,7 +60,7 @@ from eNMS.base.default import (
     create_default_users,
     create_default_examples
 )
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, get_one
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 
@@ -160,6 +161,12 @@ def configure_logs(app):
     )
 
 
+def configure_instance_id():
+    parameters = get_one('Parameters')
+    if not parameters.instance_id:
+        parameters.instance_id = str(datetime.now()) 
+
+
 def create_app(path, config):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config)
@@ -176,5 +183,6 @@ def create_app(path, config):
         configure_vault_client(app)
     if use_syslog:
         configure_syslog_server(app)
+    configure_instance_id()
     info('eNMS starting')
     return app

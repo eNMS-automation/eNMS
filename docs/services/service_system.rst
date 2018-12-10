@@ -157,12 +157,11 @@ Once a service has been customized with parameters, devices selected, etc, we re
 From the :guilabel:`automation/service_management` page, you can:
 
   - Start a Service Instance (``Run`` button).
-  - View the logs of the Service Instance.
+  - View and compare the logs of the Service Instance.
   - Edit the Service Instance properties.
-  - Compare the logs of the Service Instance.
   - Delete the Service Instance.
 
-Clicking on the ``Compare`` button generates a line-by-line diff of the service logs between any two runs.
+You can compare two versions of the logs from the ``Logs`` window (a line-by-line diff is generated).
 Here's a comparison of a ``Napalm get_facts`` service:
 
 .. image:: /_static/services/service_system/service_compare_logs.png

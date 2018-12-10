@@ -64,14 +64,14 @@ Another use-case is to run a command that takes some time to be executed. For ex
 
 If a script is configured to "retry" in case it is not successful, eNMS will also wait "time between retries" between each try. The execution of the service in a workflow, in terms of waiting times, would be the following:
 
-..
+::
 
   First try
-  "time between retries" pause
+  time between retries pause
   Retry 1
-  "time between retries" pause 
+  time between retries pause
   Retry 2
-  "Waiting time" pause
+  Waiting time pause
 
 Workflow devices
 ----------------
@@ -82,13 +82,13 @@ It is important to note that if you don't select any device at workflow level, t
 However, if you select devices at workflow level, the workflow will run for each device independently of the others (the workflow may suceed for one device, and stop at the very first task for another).
 
 A workflow has a property ``Multiprocessing``:
-- If that property is disabled, and devices have been selected at workflow level, the workflow will run on all devices sequentially (device after device).
-- If that property is activated, the workflow will run in parallel on all devices.
+  - If that property is disabled, and devices have been selected at workflow level, the workflow will run on all devices sequentially (device after device). Devices configured at service level are ignored.
+  - If that property is activated, the workflow will run in parallel on all devices. Devices configured at service level are also ignored.
 
 In other words:
-- Service Instance tasks (and Subworkflow tasks) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
-- If multiple inventory devices are selected within the workflow definition, these will run independently from each other (in parallel if the ``multiprocessing`` property is activated, sequentially otherwise, while following the sequential rules of the workflow.
-- If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel, but each service instance step is required to be completed by all devices before moving to the next step in the workflow.
+  - Service Instance tasks (and Subworkflow tasks) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
+  - If multiple inventory devices are selected within the workflow definition, these will run independently from each other (in parallel if the ``multiprocessing`` property is activated, sequentially otherwise, while following the sequential rules of the workflow.
+  - If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel, but each service instance step is required to be completed by all devices before moving to the next step in the workflow.
 
 The status of a workflow will be updated in real-time in the Workflow Builder.
 

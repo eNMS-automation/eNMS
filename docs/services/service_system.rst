@@ -145,6 +145,12 @@ Inside the ``eNMS/eNMS/automation/services`` folder, you are free to create subf
 
 eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm``, ``nornir`` and ``ansible``.
 
+Custom Services Path
+--------------------
+
+By default, eNMS will scan the ``eNMS/eNMS/automation/services`` folder to instantiate all services you created in that folder.
+If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory, so that you can pull safely pull the latest code from Github), you can set the ``CUSTOM_SERVICES_PATH`` environment variable to the path of the folder that contains your custom services.
+
 Service Management
 ------------------
 

@@ -1,9 +1,10 @@
 from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
+from psutil import cpu_percent, virtual_memory
 
 from eNMS import auth
 from eNMS.admin.helpers import migrate_export, migrate_import
-from eNMS.base.helpers import delete, factory, fetch
+from eNMS.base.helpers import delete, factory, fetch, get_one
 from eNMS.objects.helpers import object_export, object_import
 
 
@@ -20,7 +21,12 @@ def unauthorized():
 class Heartbeat(Resource):
 
     def get(self):
-        return True
+        parameters = get_one('Parameters')
+        return {
+            'id': parameters.instance_id,
+            'cpu': cpu_percent(),
+            'memory': virtual_memory()
+        }
 
 
 class RestAutomation(Resource):

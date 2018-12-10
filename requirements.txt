@@ -13,6 +13,7 @@ jinja2
 napalm
 netmiko
 pathlib
+psutil
 psycopg2
 pynetbox
 pyyaml

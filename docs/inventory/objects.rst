@@ -12,7 +12,7 @@ There are different types of devices and links available in eNMS.
 
 Each type of device (resp. link) has a specific icon (resp. color) when displayed graphically:
     
-.. image:: /_static/objects/objects/object_types.png
+.. image:: /_static/inventory/objects/object_types.png
    :alt: Different types of objects
    :align: center
 
@@ -33,7 +33,7 @@ Clicking on the ``Add a new device`` or ``Add a new link`` buttons will open a f
 
 Fill the form and click on the ``Submit`` button.
 
-.. image:: /_static/objects/objects/object_creation.png
+.. image:: /_static/inventory/objects/object_creation.png
    :alt: Device and link creation forms
    :align: center
 
@@ -43,13 +43,13 @@ Creation via import
 Objects can be created all at once by importing an Excel file. Devices must be defined in a spreadsheet called "Device" and links in a spreadsheet called "Link".
 The first line of a spreadsheet contains the properties, the following lines define the objects, as demonstrated in the example below.
 
-.. image:: /_static/objects/objects/import.png
+.. image:: /_static/inventory/objects/import.png
    :alt: Example of excel spreadsheet for import
    :align: center
 
 If you want to export the existing data out, you can export an Excel spreadsheet with all the object data filled out by clicking: ``Export network Topology``.
 
-.. image:: /_static/objects/objects/export.png
+.. image:: /_static/inventory/objects/export.png
    :alt: Export topology
    :align: center
 
@@ -64,10 +64,10 @@ Another way to create your network is to query an external API like OpenNMS or N
 In :guilabel:`admin/administration`, you can find a form to query the OpenNMS API :
  
 .. image:: /_static/inventory/objects/opennms_api.png
-   :alt: Export topology
+   :alt: OpenNMS API
    :align: center
 
-The form lets you configure the following properties
+You can configure the following properties for OpenNMS:
  * ReST API: URL of the ReST API
  * Devices: URL of the devices that you want to import (this could be a subset of all available devices in the API, like ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``)
  * Type: Resulting eNMS type of the imported devices.

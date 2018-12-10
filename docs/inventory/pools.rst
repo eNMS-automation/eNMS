@@ -66,13 +66,13 @@ You can switch between pools with the drop-down list in the top-right corner of 
    :alt: Apply a filter to the view
    :align: center
 
-Use a pool as target of an automation task
-------------------------------------------
+Use a pool as target of a Service or a Workflow
+-----------------------------------------------
 
-Pools can also be used as targets of an automation. The second step of the scheduling process of a service is to select the targets. You can select multiple devices, as well as multiple pools as targets.
+You can select multiple devices, as well as multiple pools as targets.
 
 .. image:: /_static/objects/pools/target_pool.png
-   :alt: Use a pool as target of a task
+   :alt: Use a pool as a target
    :align: center
 
 Use a pool to restrict all of eNMS to a subset of objects

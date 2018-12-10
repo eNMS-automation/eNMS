@@ -1,9 +1,18 @@
+from datetime import datetime
 from logging import info
 from os import makedirs
 from os.path import exists
 from yaml import dump, load
 
-from eNMS.base.helpers import delete_all, export, factory
+from eNMS.base.helpers import delete_all, export, factory, get_one
+
+
+def configure_instance_id():
+    parameters = get_one('Parameters')
+    if not parameters.instance_id:
+        now = str(datetime.now())
+        parameters.instance_id = now
+        factory('Instance', {'name': now, 'ip_address': '0.0.0.0'})
 
 
 def migrate_export(path_app, request):

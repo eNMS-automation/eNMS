@@ -5,7 +5,7 @@ What is eNMS
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
 .. image:: /_static/base/enms.png
-   :alt: Compare logs
+   :alt: eNMS Introduction
    :align: center
 
 It encompasses the following aspects of network automation:
@@ -17,10 +17,15 @@ It encompasses the following aspects of network automation:
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
   - **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
 
+.. image:: /_static/base/workflow.gif
+   :alt: eNMS workflow system
+   :align: center
+
 Main features
 -------------
     
-1. Creation of the network
+Creation of the network
+***********************
 
 Devices and links can be created either one by one, or all at once by importing an Excel spreadsheet.
 Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
@@ -34,7 +39,8 @@ A dashboard provides a graphical overview of all objects with dynamic charts.
    :alt: Dashboard
    :align: center
 
-#. Network visualization
+Network visualization
+*********************
 
 Once created, eNMS can display your network:
   - geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
@@ -51,7 +57,8 @@ Once created, eNMS can display your network:
 
 You can click on a device to display its properties or start a Web SSH terminal session.
 
-#. Service creation
+Service creation
+****************
 
 eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, absolutely any python script can be turned into a "service".
 If your python script takes input parameters, eNMS will automatically generate a form in the web UI.
@@ -72,7 +79,8 @@ Once created, you can have as many instances of your service as you need. Servic
   :alt: Service Management
   :align: center
 
-#. Workflows
+Workflows
+*********
 
 Services (and other Workflows) can be combined into a single workflow.
 Within a workflow, services can be connected with two edge types: `Success` edge and `Failure` edge. The `Success` edge (versus `Failure` edge) indicates which path to follow in the graph if the source service is successfully executed (versus failed).
@@ -83,7 +91,8 @@ When a workflow is executed, its status will be updated in real-time on the web 
   :alt: Workflow Builder
   :align: center
 
-#. Scheduling
+Scheduling
+**********
 
 While services and workflows can be run directly and immediately from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
 
@@ -91,7 +100,8 @@ While services and workflows can be run directly and immediately from the web UI
   :alt: Calendar
   :align: center
 
-#. Event-driven automation
+Event-driven automation
+***********************
 
 Event-driven automation in eNMS has two aspects:
   - eNMS has a ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a workflow with a GET request to the appropriate URL. 

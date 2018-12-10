@@ -43,13 +43,13 @@ Creation via import
 Objects can be created all at once by importing an Excel file. Devices must be defined in a spreadsheet called "Device" and links in a spreadsheet called "Link".
 The first line of a spreadsheet contains the properties, the following lines define the objects, as demonstrated in the example below.
 
-.. image:: /_static/inventory/objects/import.png
+.. image:: /_static/inventory/import_export/import.png
    :alt: Example of excel spreadsheet for import
    :align: center
 
 If you want to export the existing data out, you can export an Excel spreadsheet with all the object data filled out by clicking: ``Export network Topology``.
 
-.. image:: /_static/inventory/objects/export.png
+.. image:: /_static/inventory/import_export/export.png
    :alt: Export topology
    :align: center
 
@@ -59,11 +59,13 @@ If you want to export the existing data out, you can export an Excel spreadsheet
 Creation via external API
 *************************
 
-Another way to create your network is to query an external API like OpenNMS or Netbox.
+Another way to create your network is to query an external API: OpenNMS, Netbox, or LibreNMS.
+This can be done from the :guilabel:`admin/administration` page.
 
-In :guilabel:`admin/administration`, you can find a form to query the OpenNMS API :
+OpenNMS
+-------
  
-.. image:: /_static/inventory/objects/opennms_api.png
+.. image:: /_static/inventory/import_export/opennms_api.png
    :alt: OpenNMS API
    :align: center
 
@@ -72,6 +74,12 @@ You can configure the following properties for OpenNMS:
  * Devices: URL of the devices that you want to import (this could be a subset of all available devices in the API, like ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``)
  * Type: Resulting eNMS type of the imported devices.
  * Login & Password: credentials of the ReST API.
+
+Netbox
+------
+
+LibreNMS
+--------
 
 Properties
 ----------

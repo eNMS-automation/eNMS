@@ -35,7 +35,7 @@ function resetShowModal(name) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Convert to Bootstrap Multiselect.
+ * Convert to Bootstrap Select.
  * @param {ids} ids - Ids.
  */
 function convertSelect(...ids) { // eslint-disable-line no-unused-vars

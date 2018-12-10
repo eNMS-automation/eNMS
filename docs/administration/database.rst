@@ -2,8 +2,8 @@
 Database
 ========
 
-Backup/Restore and Migration
-****************************
+Backup & Restore and Migration
+******************************
 
 From the ``Admin / Database``, eNMS also supports backup and restore, as well as migration from one eNMS version to another, utilizing an Import and Export feature.
 
@@ -15,4 +15,10 @@ Please note that the exported backup files do not contain the secure credentials
    :alt: Migrations
    :align: center
 
-.. note:: If you are migrating data on an existing instance of eNMS, you can choose tick the option ``Empty Database before Import`` to empty the database before starting the migrations.
+.. note:: If you are migrating data on an existing instance of eNMS, you can choose tick the option ``Empty Database before Import`` to empty the database before starting the migration.
+
+Logs
+****
+
+Services and Workflows logs usually take up a lot of space in the database.
+From the ``Admin / Database`` page, you can clear all logs older than a given date.

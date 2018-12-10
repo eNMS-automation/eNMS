@@ -19,7 +19,7 @@ Device credentials
 
 The credentials of a device are a property of the device itself within the inventory.
     
-.. image:: /_static/security/credentials.png
+.. image:: /_static/administration/credentials.png
    :alt: Set password
    :align: center
 

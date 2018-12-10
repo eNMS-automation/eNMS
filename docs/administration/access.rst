@@ -4,7 +4,7 @@ Role-based access
 
 When you create a new user from the :guilabel:`admin / User Management` page, you get to specify what the user can and cannot do.
 
-.. image:: /_static/security/user_creation_modal.png
+.. image:: /_static/administration/user_creation_modal.png
    :alt: User creation
    :align: center
 

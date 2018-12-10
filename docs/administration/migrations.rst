@@ -8,7 +8,7 @@ By providing the directory name inside (eNMS_HOME)/migrations/import_export/ and
 
 Please note that the exported backup files do not contain the secure credentials for each of the inventory devices in plain text, as credentials are considered to be stored in a Vault in production mode.
 
-.. image:: /_static/objects/objects/migrations.png
+.. image:: /_static/administration/migrations.png
    :alt: Migrations
    :align: center
 

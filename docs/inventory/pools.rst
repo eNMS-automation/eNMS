@@ -10,14 +10,14 @@ If the properties of an inventory object matches **all** pool properties, the ob
 Pools can be created in :guilabel:`inventory/pool_management`.
 
 .. image:: /_static/objects/pools/pool_creation.png
-   :alt: test
+   :alt: Pool Creation
    :align: center
 
 A first example
 ---------------
 
 .. image:: /_static/objects/pools/device_filtering.png
-   :alt: test
+   :alt: Device Filtering
    :align: center
 
 This pool enforces the following conditions:
@@ -33,7 +33,7 @@ A pool of links
 ---------------
 
 .. image:: /_static/objects/pools/link_filtering.png
-   :alt: test
+   :alt: Link filtering
    :align: center
 
 This pool enforces the following conditions:

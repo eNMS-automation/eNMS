@@ -6,12 +6,18 @@ Pools allow the user to create groups of objects. They can be used to filter the
 A pool is defined as a combination of values (or regular expressions) for the properties of an object (in the inventory). 
 
 If the properties of an inventory object matches **all** pool properties, the object will belong to the pool.
- 
-Pools can be created in :guilabel:`inventory/pool_management`.
+
+Pool Management
+---------------
+
+Pools can be created, duplicated and deleted in :guilabel:`inventory/pool_management`.
 
 .. image:: /_static/objects/pools/pool_creation.png
-   :alt: Pool Creation
+   :alt: Pool Management
    :align: center
+
+.. note:: When you add a new device A which properties are matched by a pool B, A is not automatically added to B (it didn't exist when B was last updated). To manually update the pools with all new objects, you can click on the ``Update pool`` button.
+.. note:: By default, the devices and links within a pool are determined based on the pool properties. However, the ``Edit objects`` button lets you define the pool devices and links by selecting them directly.
 
 A first example
 ---------------

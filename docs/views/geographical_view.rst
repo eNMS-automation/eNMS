@@ -74,12 +74,8 @@ NASA tiles
    :alt: NASA
    :align: center
 
-Default view
-------------
+Switch between views
+--------------------
 
-The default view depends on the number of devices:
-- less than 50 devices: 3D
-- less than 2000: leaflet (classic 2D view)
-- more than 2000: clusterized 2D
-
+The default view can be configured from the :guilabel:`Admin / Administration Panel` page.
 You can switch to any view from the right-click menu.

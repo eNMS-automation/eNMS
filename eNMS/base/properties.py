@@ -191,7 +191,8 @@ user_serialized_properties = [
 instance_public_properties = [
     'name',
     'ip_address',
-    'weight'
+    'weight',
+    'status'
 ]
 
 user_permissions = [
@@ -214,7 +215,9 @@ log_rule_public_properties = log_public_properties + [
 ]
 
 parameters_public_properties = [
-    'cluster_subnet',
+    'cluster_scan_subnet',
+    'cluster_scan_protocol',
+    'cluster_scan_timeout',
     'default_longitude',
     'default_latitude',
     'default_zoom_level',

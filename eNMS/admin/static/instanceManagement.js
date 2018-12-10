@@ -39,6 +39,12 @@ function getStatus(type) { // eslint-disable-line no-unused-vars
   });
 }
 
+function scanCluster() { // eslint-disable-line no-unused-vars
+  call('/admin/scan_cluster', function(cluster) {
+    console.log(cluster);
+  });
+}
+
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
   convertSelect('#instance-permissions');

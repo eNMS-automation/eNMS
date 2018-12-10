@@ -8,7 +8,9 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
+from ipaddress import IPv4Network
 from os import listdir
+from requests import get as rest_get
 
 from eNMS import db, use_tacacs, tacacs_client
 from eNMS.admin import bp
@@ -107,6 +109,24 @@ def logout():
 def save_parameters():
     get_one('Parameters').update(**request.form)
     database_filtering(fetch('Pool', id=request.form['pool']))
+    db.session.commit()
+    return True
+
+
+@post(bp, '/scan_cluster', 'Admin')
+def scan_cluster():
+    parameters = get_one('Parameters')
+    protocol = parameters.cluster_scan_protocol
+    for ip_address in IPv4Network(parameters.cluster_scan_subnet):
+        try:
+            result = rest_get(
+                f'{protocol}://{ip_address}/rest/is_alive',
+                timeout=parameters.cluster_scan_timeout
+            )
+            print(result.json())
+            # factory(
+        except:
+            continue
     db.session.commit()
     return True
 

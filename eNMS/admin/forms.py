@@ -31,7 +31,12 @@ class AddUser(FlaskForm):
 
 class AdministrationForm(FlaskForm):
     boolean_fields = HiddenField(default='mattermost_verify_certificate')
-    cluster_subnet = StringField()
+    cluster_scan_protocol = SelectField(choices=(
+        ('http', 'HTTP'),
+        ('https', 'HTTPS')
+    ))
+    cluster_scan_subnet = StringField()
+    cluster_scan_timeout = FloatField()
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
@@ -72,7 +77,9 @@ class AdministrationForm(FlaskForm):
             'pool',
         ),
         'Cluster Management': (
-            'cluster_subnet',
+            'cluster_scan_subnet',
+            'cluster_scan_protocol',
+            'cluster_scan_timeout'
         )
     }
 
@@ -94,3 +101,4 @@ class AddInstance(FlaskForm):
     name = StringField()
     ip_address = StringField('IP address')
     weight = IntegerField()
+    status = StringField()

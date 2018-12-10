@@ -40,6 +40,7 @@ class Instance(Base):
     name = Column(String, unique=True)
     ip_address = Column(String)
     weight = Column(Integer, default=1)
+    status = Column(String, default='down')
 
 
 class Parameters(Base):
@@ -47,7 +48,9 @@ class Parameters(Base):
     __tablename__ = type = 'Parameters'
     id = Column(Integer, primary_key=True)
     name = Column(String, default='default', unique=True)
-    cluster_subnet = Column(String, default='192.168.105.0/24')
+    cluster_scan_subnet = Column(String, default='192.168.105.0/24')
+    cluster_scan_protocol = Column(String, default='http')
+    cluster_scan_timeout = Column(Float, default=0.01)
     default_longitude = Column(Float, default=-96.)
     default_latitude = Column(Float, default=33.)
     default_zoom_level = Column(Integer, default=5)

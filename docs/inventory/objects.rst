@@ -60,16 +60,18 @@ Creation via external API
 *************************
 
 Another way to create your network is to query an external API like OpenNMS or Netbox.
+
 In :guilabel:`admin/administration`, you can find a form to query the OpenNMS API :
  
-.. image:: /_static/objects/objects/opennms_api.png
+.. image:: /_static/inventory/objects/opennms_api.png
    :alt: Export topology
    :align: center
 
-  - ReST API: URL of the ReST API
-  - Devices: URL of the devices that you want to import (this could be a subset of all available devices in the API, like ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``)
-  - Type: Resulting eNMS type of the imported devices.
-  - Login & Password: credentials of the ReST API.
+The form lets you configure the following properties
+ * ReST API: URL of the ReST API
+ * Devices: URL of the devices that you want to import (this could be a subset of all available devices in the API, like ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``)
+ * Type: Resulting eNMS type of the imported devices.
+ * Login & Password: credentials of the ReST API.
 
 Properties
 ----------

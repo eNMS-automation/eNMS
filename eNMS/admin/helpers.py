@@ -14,8 +14,10 @@ def configure_instance_id():
         parameters.instance_id = now
         factory('Instance', **{
             'name': now,
+            'description': 'Localhost',
             'ip_address': '0.0.0.0',
-            'status': 'Up'
+            'status': 'Up',
+            'cpu_load': 0.
         })
 
 

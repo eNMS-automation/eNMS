@@ -1,6 +1,6 @@
 from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
-from psutil import cpu_percent, virtual_memory
+from psutil import cpu_percent
 
 from eNMS import auth
 from eNMS.admin.helpers import migrate_export, migrate_import
@@ -24,8 +24,7 @@ class Heartbeat(Resource):
         parameters = get_one('Parameters')
         return {
             'id': parameters.instance_id,
-            'cpu': cpu_percent(),
-            'memory': virtual_memory()
+            'cpu_load': cpu_percent()
         }
 
 

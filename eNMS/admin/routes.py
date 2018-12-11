@@ -119,12 +119,13 @@ def scan_cluster():
     protocol = parameters.cluster_scan_protocol
     for ip_address in IPv4Network(parameters.cluster_scan_subnet):
         try:
-            result = rest_get(
-                f'{protocol}://{ip_address}/rest/is_alive',
-                timeout=parameters.cluster_scan_timeout
-            ).json()
-            print('tttt', result)
-            # factory(
+            factory('Instance', **{
+                **rest_get(
+                    f'{protocol}://{ip_address}/rest/is_alive',
+                    timeout=parameters.cluster_scan_timeout
+                ).json(),
+                **{'ip_address': ip_address}
+            })
         except:
             continue
     db.session.commit()

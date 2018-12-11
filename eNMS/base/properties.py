@@ -190,9 +190,11 @@ user_serialized_properties = [
 
 instance_public_properties = [
     'name',
+    'description',
     'ip_address',
     'weight',
-    'status'
+    'status',
+    'cpu_load'
 ]
 
 user_permissions = [

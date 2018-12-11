@@ -99,6 +99,7 @@ class LogsForm(FlaskForm):
 class AddInstance(FlaskForm):
     id = HiddenField()
     name = StringField()
+    description = StringField()
     ip_address = StringField('IP address')
     weight = IntegerField()
     status = StringField()

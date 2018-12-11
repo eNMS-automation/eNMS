@@ -38,9 +38,11 @@ class Instance(Base):
     __tablename__ = type = 'Instance'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
+    description = Column(String)
     ip_address = Column(String)
     weight = Column(Integer, default=1)
     status = Column(String, default='down')
+    cpu_load = Column(Float)
 
 
 class Parameters(Base):

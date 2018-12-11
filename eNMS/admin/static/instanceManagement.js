@@ -29,12 +29,15 @@ function tableActions(values, instance) { // eslint-disable-line no-unused-vars
  * Get Cluster Status.
  */
 function getClusterStatus() { // eslint-disable-line no-unused-vars
-  call('/admin/get_cluster_status', function(status) {
-    for (let i = 0; i < status.length; i++) {
-      const col = table.column('#cpu-load');
-      table.cell(i, col).data(status[i]).draw(false);
+  call('/admin/get_cluster_status', function(cluster) {
+    for (const [property, value] of Object.entries(cluster)) {
+      console.log(property, value)
+      for (let i = 0; i < value.length; i++) {
+        const col = table.column(`#${property}`);
+        table.cell(i, col).data(value[i]).draw(false);
+      }
     }
-    setTimeout(getClusterStatus, 5000);
+    setTimeout(getClusterStatus, 15000);
   });
 }
 

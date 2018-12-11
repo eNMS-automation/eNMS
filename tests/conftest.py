@@ -27,3 +27,13 @@ def user_client():
     with app.app_context():
         client.post('/admin/login', data=login)
         yield client
+
+
+@fixture
+def api_client():
+    app = create_app(Path.cwd(), config_dict['Debug'])
+    app_context = app.app_context()
+    app_context.push()
+    db.session.close()
+    db.drop_all()
+    yield app

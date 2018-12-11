@@ -11,6 +11,7 @@ from eNMS.base.models import Base
 class Task(Base):
 
     __tablename__ = 'Task'
+    type = 'Task'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)

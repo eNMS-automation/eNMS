@@ -88,13 +88,11 @@ def get_results_summary(job, results, now):
 def scheduler_job(job_id, aps_job_id=None, targets=None):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)
-        print('a', targets)
         if targets:
             targets = [
                 fetch('Device', id=device_id)
                 for device_id in targets
             ]
-        print('b', targets)
         results, now = job.try_run(targets=targets)
         info(f'{job.name}: finished.')
         job.status, job.state = 'Idle', {}

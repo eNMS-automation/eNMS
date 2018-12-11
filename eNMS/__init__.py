@@ -61,7 +61,7 @@ from eNMS.base.default import (
     create_default_users,
     create_default_examples
 )
-from eNMS.base.helpers import fetch, get_one
+from eNMS.base.helpers import fetch
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 

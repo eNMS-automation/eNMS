@@ -3,7 +3,6 @@ from difflib import SequenceMatcher
 from flask import current_app, request, session
 from flask_login import current_user
 from json import dumps
-from logging import info
 from requests import post as rest_post
 from requests.auth import HTTPBasicAuth
 

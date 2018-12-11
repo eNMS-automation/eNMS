@@ -1,6 +1,8 @@
 /*
 global
 addInstance: false
+alertify: false
+call: false
 convertSelect: false
 doc: false
 instances: false
@@ -31,7 +33,6 @@ function tableActions(values, instance) { // eslint-disable-line no-unused-vars
 function getClusterStatus() { // eslint-disable-line no-unused-vars
   call('/admin/get_cluster_status', function(cluster) {
     for (const [property, value] of Object.entries(cluster)) {
-      console.log(property, value)
       for (let i = 0; i < value.length; i++) {
         const col = table.column(`#${property}`);
         table.cell(i, col).data(value[i]).draw(false);
@@ -41,9 +42,12 @@ function getClusterStatus() { // eslint-disable-line no-unused-vars
   });
 }
 
+/**
+ * Scan Cluster subnet for new Instances.
+ */
 function scanCluster() { // eslint-disable-line no-unused-vars
   call('/admin/scan_cluster', function(cluster) {
-    console.log(cluster);
+    alertify.notify('Scan completed.', 'success', 5);
   });
 }
 

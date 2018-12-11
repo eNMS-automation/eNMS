@@ -11,6 +11,7 @@ from flask_login import current_user, login_user, logout_user
 from ipaddress import IPv4Network
 from os import listdir
 from requests import get as rest_get
+from requests.exceptions import ConnectionError
 
 from eNMS import db, use_tacacs, tacacs_client
 from eNMS.admin import bp
@@ -124,9 +125,9 @@ def scan_cluster():
                     f'{protocol}://{ip_address}/rest/is_alive',
                     timeout=parameters.cluster_scan_timeout
                 ).json(),
-                **{'ip_address': ip_address}
+                **{'ip_address': str(ip_address)}
             })
-        except:
+        except ConnectionError:
             continue
     db.session.commit()
     return True

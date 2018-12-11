@@ -23,7 +23,7 @@ class Heartbeat(Resource):
     def get(self):
         parameters = get_one('Parameters')
         return {
-            'id': parameters.instance_id,
+            'name': parameters.instance_id,
             'cpu_load': cpu_percent()
         }
 

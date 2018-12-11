@@ -1,14 +1,14 @@
 from flask_mail import Message
 from json import dumps
 from os import remove
-from requests import post
+from requests import post, get
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 
 from eNMS import mail
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import fetch_all, get_one, str_dict
+from eNMS.base.helpers import factory, fetch_all, get_one, str_dict
 
 
 class SwissArmyKnifeService(Service):
@@ -76,9 +76,14 @@ class SwissArmyKnifeService(Service):
         return {'success': True}
 
     def cluster_monitoring(self, _):
+        parameters = get_one('Parameters')
+        protocol = parameters.cluster_scan_protocol
         for instance in fetch_all('Instance'):
-            print(instance)
-        return {'success': True, 'result': 'ok'}
+            factory('Instance', **get(
+                f'{protocol}://{instance.ip_address}/rest/is_alive',
+                timeout=parameters.cluster_scan_timeout
+            ).json())
+        return {'success': True}
 
     def process_payload1(self, device, payload):
         get_facts = payload['get_facts']

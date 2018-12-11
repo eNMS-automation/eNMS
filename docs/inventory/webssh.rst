@@ -18,7 +18,7 @@ By default, eNMS will use the range of ports [9000, 9099]. eNMS uses a rotation 
 
 You can change this range directly from the web UI, in :guilabel:`admin/parameters` :
  
-.. image:: /_static/objects/webssh/port_allocation.png
+.. image:: /_static/inventory/webssh/port_allocation.png
    :alt: GoTTY default range of ports
    :align: center
 
@@ -86,13 +86,13 @@ From the device management table
 
 You can connect to a device by clicking on the ``Connect`` button in :guilabel:`objects/device_management`.
 
-.. image:: /_static/objects/webssh/connect_from_device_management.png
+.. image:: /_static/inventory/webssh/connect_from_device_management.png
    :alt: Connect buttons
    :align: center
 
 The following window will pop up:
 
-.. image:: /_static/objects/webssh/connection_parameters.png
+.. image:: /_static/inventory/webssh/connection_parameters.png
    :alt: Connection window
    :align: center
 
@@ -107,6 +107,6 @@ From the views
 
 You can also connect to a device from the geographical or logical view. Double-clicking on a device opens the property panel of that device. This window contains the same ``Connect`` button as in the :guilabel:`objects/device_management` page.
 
-.. image:: /_static/objects/webssh/connect_from_view.png
+.. image:: /_static/inventory/webssh/connect_from_view.png
    :alt: Connection window
    :align: center

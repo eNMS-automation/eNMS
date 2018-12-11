@@ -409,6 +409,35 @@ def create_payload_transfer_workflow():
         })
 
 
+@integrity_rollback
+def create_workflow_of_workflows():
+    admin = fetch('User', name='admin').id
+    workflow = factory('Workflow', **{
+        'name': 'Workflow_of_workflows',
+        'description': 'Test the inner workflow system',
+        'creator': admin,
+        'vendor': 'Arista',
+        'operating_system': 'eos'
+    })
+    workflow.jobs.extend([
+        fetch('Job', name=f'payload_transfer_workflow'),
+        fetch('Job', name=f'netmiko_check_no_vrf_test'),
+        fetch('Job', name=f'Napalm_VRF_workflow')
+    ])
+    edges = [(0, 2), (2, 3), (3, 4), (4, 1)]
+    for x, y in edges:
+        factory('WorkflowEdge', **{
+            'name': f'{workflow.name} {x} -> {y}',
+            'workflow': workflow.id,
+            'subtype': True,
+            'source': workflow.jobs[x].id,
+            'destination': workflow.jobs[y].id
+        })
+    positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
+    for index, (x, y) in enumerate(positions):
+        workflow.jobs[index].positions['Napalm_VRF_workflow'] = x * 10, y * 10
+
+
 def create_default_examples(app):
     create_default_network_topology(app),
     create_example_services()

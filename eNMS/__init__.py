@@ -131,7 +131,8 @@ def configure_database(app):
         if app.config['CREATE_EXAMPLES']:
             create_default_examples(app)
         create_default_pools()
-        create_default_tasks()
+        if app.config['CLUSTER']:
+            create_default_tasks()
 
 
 def configure_errors(app):

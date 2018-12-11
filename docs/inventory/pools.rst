@@ -12,7 +12,7 @@ Pool Management
 
 Pools can be created, duplicated and deleted in :guilabel:`inventory/pool_management`.
 
-.. image:: /_static/objects/pools/pool_creation.png
+.. image:: /_static/inventory/pools/pool_creation.png
    :alt: Pool Management
    :align: center
 
@@ -22,7 +22,7 @@ Pools can be created, duplicated and deleted in :guilabel:`inventory/pool_manage
 A first example
 ---------------
 
-.. image:: /_static/objects/pools/device_filtering.png
+.. image:: /_static/inventory/pools/device_filtering.png
    :alt: Device Filtering
    :align: center
 
@@ -38,7 +38,7 @@ In summary, all Cisco routers or switches which name starts with ``node`` will m
 A pool of links
 ---------------
 
-.. image:: /_static/objects/pools/link_filtering.png
+.. image:: /_static/inventory/pools/link_filtering.png
    :alt: Link filtering
    :align: center
 
@@ -62,7 +62,7 @@ Filter the view with a pool
 Pools can be used as filters for the geographical and logical views.
 You can switch between pools with the drop-down list in the top-right corner of the screen (framed in red below).
 
-.. image:: /_static/objects/pools/view_filter.png
+.. image:: /_static/inventory/pools/view_filter.png
    :alt: Apply a filter to the view
    :align: center
 
@@ -71,7 +71,7 @@ Use a pool as target of a Service or a Workflow
 
 You can select multiple devices, as well as multiple pools as targets.
 
-.. image:: /_static/objects/pools/target_pool.png
+.. image:: /_static/inventory/pools/target_pool.png
    :alt: Use a pool as a target
    :align: center
 

@@ -107,6 +107,17 @@ def create_default_services():
 
 
 @integrity_rollback
+def create_default_tasks():
+    admin = fetch('User', name='admin').id
+    factory('Task', **{
+        'name': 'cluster_monitoring',
+        'description': 'Monitor eNMS cluster',
+        'job': fetch('Service', name='cluster_monitoring').id,
+        'frequency': 5,
+    })
+
+
+@integrity_rollback
 def create_example_services():
     admin = fetch('User', name='admin').id
     for service in (

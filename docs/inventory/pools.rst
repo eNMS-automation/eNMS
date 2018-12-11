@@ -12,7 +12,7 @@ Pool Management
 
 Pools can be created, duplicated and deleted in :guilabel:`inventory/pool_management`.
 
-.. image:: /_static/inventory/pools/pool_creation.png
+.. image:: /_static/inventory/pools/pool_management.png
    :alt: Pool Management
    :align: center
 

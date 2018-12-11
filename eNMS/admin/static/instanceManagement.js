@@ -26,16 +26,15 @@ function tableActions(values, instance) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Get Service Status.
- * @param {type} type - Service or Workflow.
+ * Get Cluster Status.
  */
-function getStatus(type) { // eslint-disable-line no-unused-vars
+function getClusterStatus() { // eslint-disable-line no-unused-vars
   call('/admin/get_cluster_status', function(status) {
     for (let i = 0; i < status.length; i++) {
-      const col = table.column('#status');
+      const col = table.column('#cpu-load');
       table.cell(i, col).data(status[i]).draw(false);
     }
-    setTimeout(partial(getStatus, type), 5000);
+    setTimeout(getClusterStatus, 5000);
   });
 }
 
@@ -51,4 +50,5 @@ function scanCluster() { // eslint-disable-line no-unused-vars
   for (let i = 0; i < instances.length; i++) {
     addInstance('create', 'instance', instances[i]);
   }
+  getClusterStatus();
 })();

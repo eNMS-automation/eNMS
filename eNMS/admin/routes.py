@@ -132,6 +132,15 @@ def scan_cluster():
     return True
 
 
+@post(bp, '/get_cluster_status', 'View')
+def get_cluster_status():
+    instances = fetch_all('Instance')
+    return {
+        attr: [getattr(instance, attr) for instance in instances]
+        for attr in ('status', 'cpu_load')
+    }
+
+
 @post(bp, '/clear_logs', 'Admin')
 def clear_logs():
     clear_date = datetime.strptime(

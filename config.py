@@ -40,6 +40,9 @@ class Config(object):
     MAIL_USERNAME = environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
+    # Cluster
+    DEPLOY_AS_CLUSTER = int(environ.get('DEPLOY_AS_CLUSTER', False))
+
 
 class DebugConfig(Config):
     DEBUG = True

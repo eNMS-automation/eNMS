@@ -1,10 +1,12 @@
-from datetime import datetime
 from difflib import SequenceMatcher
-from flask import request, session
+from flask import current_app, request, session
+from flask_login import current_user
 from json import dumps
 from logging import info
+from requests import post as rest_post
+from requests.auth import HTTPBasicAuth
 
-from eNMS import db, scheduler
+from eNMS import db
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import (
     delete,
@@ -31,7 +33,6 @@ from eNMS.automation.forms import (
     JobForm,
     WorkflowBuilderForm
 )
-from eNMS.automation.helpers import scheduler_job
 
 
 @get(bp, '/service_management', 'View')
@@ -170,7 +171,20 @@ def run_job(job_id):
             return {'error': 'Set devices or pools as targets first.'}
         if not job.has_targets and targets:
             return {'error': 'This service should not have targets configured.'}
-    #TODO request to REST API
+    if current_app.config['CLUSTER']:
+        rest_post(
+            'http://0.0.0.0/rest/run_job',
+            json={'name': job.name},
+            auth=HTTPBasicAuth(current_user.name, current_user.password),
+        )
+    else:
+        scheduler.add_job(
+            id=str(datetime.now()),
+            func=scheduler_job,
+            run_date=datetime.now(),
+            args=[job.id],
+            trigger='date'
+        )
     return job.serialized
 
 

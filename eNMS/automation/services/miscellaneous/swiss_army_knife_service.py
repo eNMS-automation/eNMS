@@ -8,7 +8,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from eNMS import mail
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import get_one, str_dict
+from eNMS.base.helpers import fetch_all, get_one, str_dict
 
 
 class SwissArmyKnifeService(Service):
@@ -74,6 +74,11 @@ class SwissArmyKnifeService(Service):
             'text': payload['result']
         }))
         return {'success': True}
+
+    def cluster_monitoring(self, _):
+        for instance in fetch_all('Instance'):
+            print(instance)
+        return {'success': True, 'result': 'ok'}
 
     def process_payload1(self, device, payload):
         get_facts = payload['get_facts']

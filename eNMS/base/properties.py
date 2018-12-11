@@ -322,6 +322,7 @@ pretty_names = {
     'command': 'Command',
     'content': 'Content',
     'content_type': 'Content type',
+    'cpu_load': 'CPU load',
     'creator': 'Creator',
     'description': 'Description',
     'destination': 'Destination',

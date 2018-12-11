@@ -95,6 +95,12 @@ def create_default_services():
             'name': 'mattermost_feedback_notification',
             'description': 'Mattermost notification (service logs)',
             'creator': admin
+        },
+        {
+            'type': 'SwissArmyKnifeService',
+            'name': 'cluster_monitoring',
+            'description': 'Monitor eNMS cluster',
+            'creator': admin
         }
     ):
         factory(service.pop('type'), **service)

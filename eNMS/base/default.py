@@ -113,7 +113,7 @@ def create_default_tasks():
         'name': 'cluster_monitoring',
         'description': 'Monitor eNMS cluster',
         'job': fetch('Service', name='cluster_monitoring').id,
-        'frequency': 5,
+        'frequency': 15,
     })
 
 

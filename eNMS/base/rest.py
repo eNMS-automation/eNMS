@@ -1,9 +1,12 @@
+from datetime import datetime
 from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
+from logging import info
 from psutil import cpu_percent
 
-from eNMS import auth
+from eNMS import auth, db, scheduler
 from eNMS.admin.helpers import migrate_export, migrate_import
+from eNMS.automation.helpers import scheduler_job
 from eNMS.base.helpers import delete, factory, fetch, get_one
 from eNMS.objects.helpers import object_export, object_import
 
@@ -34,13 +37,23 @@ class RestAutomation(Resource):
     def post(self):
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
+        job.status, job.state = 'Running', {}
+        info(f'{job.name}: starting.')
+        db.session.commit()
         targets = {
-            fetch('Device', name=device_name)
+            fetch('Device', name=device_name).id
             for device_name in request.get_json().get('devices', '')
         }
         for pool_name in request.get_json().get('pools', ''):
-            targets |= set(fetch('Pool', name=pool_name).devices)
-        return job.try_run(remaining_targets=targets)
+            targets |= {d.id for d in fetch('Pool', name=pool_name).devices}
+        scheduler.add_job(
+            id=str(datetime.now()),
+            func=scheduler_job,
+            run_date=datetime.now(),
+            args=[job.id],
+            trigger='date'
+        )
+        return job.serialized
 
 
 class GetInstance(Resource):

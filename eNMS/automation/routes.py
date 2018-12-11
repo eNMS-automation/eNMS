@@ -170,16 +170,7 @@ def run_job(job_id):
             return {'error': 'Set devices or pools as targets first.'}
         if not job.has_targets and targets:
             return {'error': 'This service should not have targets configured.'}
-    job.status, job.state = 'Running', {}
-    info(f'{job.name}: starting.')
-    db.session.commit()
-    scheduler.add_job(
-        id=str(datetime.now()),
-        func=scheduler_job,
-        run_date=datetime.now(),
-        args=[job_id],
-        trigger='date'
-    )
+    #TODO request to REST API
     return job.serialized
 
 

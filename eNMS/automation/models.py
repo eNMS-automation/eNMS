@@ -95,11 +95,11 @@ class Job(Base):
             and x.workflow == workflow
         ]
 
-    def try_run(self, payload=None, remaining_targets=None, dont_commit=False):
+    def try_run(self, payload=None, targets=None, dont_commit=False):
         failed_attempts, now = {}, str(datetime.now()).replace(' ', '-')
         for i in range(self.number_of_retries + 1):
             info(f'Running job {self.name}, attempt {i}')
-            results, remaining_targets = self.run(payload, remaining_targets)
+            results, targets = self.run(payload, targets)
             if results['success']:
                 break
             if i != self.number_of_retries:

@@ -85,10 +85,15 @@ def get_results_summary(job, results, now):
     return '\n\n'.join(summary)
 
 
-def scheduler_job(job_id, aps_job_id=None):
+def scheduler_job(job_id, targets=None, aps_job_id=None):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)
-        results, now = job.try_run()
+        if targets:
+            targets = [
+                fetch('Device', id=device_id)
+                for device_id in targets
+            ]
+        results, now = job.try_run(targets=targets)
         info(f'{job.name}: finished.')
         job.status, job.state = 'Idle', {}
         db.session.commit()

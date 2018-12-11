@@ -10,7 +10,7 @@ from eNMS.base.models import Base
 
 class Task(Base):
 
-    __tablename__ = type = 'Task'
+    __tablename__ = 'Task'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)

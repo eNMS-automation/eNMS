@@ -35,7 +35,6 @@ class RestAutomation(Resource):
     decorators = [auth.login_required]
 
     def post(self):
-        print(request, request.get_json())
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
         job.status, job.state = 'Running', {}

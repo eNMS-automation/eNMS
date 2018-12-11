@@ -41,7 +41,7 @@ class Config(object):
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
     # Cluster
-    DEPLOY_AS_CLUSTER = int(environ.get('DEPLOY_AS_CLUSTER', False))
+    CLUSTER = int(environ.get('CLUSTER', False))
 
 
 class DebugConfig(Config):

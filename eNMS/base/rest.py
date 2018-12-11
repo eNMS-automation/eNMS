@@ -37,23 +37,27 @@ class RestAutomation(Resource):
     def post(self):
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
+        async = payload.get('async', True)
         job.status, job.state = 'Running', {}
         info(f'{job.name}: starting.')
         db.session.commit()
         targets = {
             fetch('Device', name=device_name).id
-            for device_name in request.get_json().get('devices', '')
+            for device_name in payload.get('devices', '')
         }
-        for pool_name in request.get_json().get('pools', ''):
+        for pool_name in payload.get('pools', ''):
             targets |= {d.id for d in fetch('Pool', name=pool_name).devices}
-        scheduler.add_job(
-            id=str(datetime.now()),
-            func=scheduler_job,
-            run_date=datetime.now(),
-            args=[job.id],
-            trigger='date'
-        )
-        return job.serialized
+        if async:
+            scheduler.add_job(
+                id=str(datetime.now()),
+                func=scheduler_job,
+                run_date=datetime.now(),
+                args=[job.id],
+                trigger='date'
+            )
+            return job.serialized
+        else:
+            return job.try_run(targets=targets)[0]
 
 
 class GetInstance(Resource):

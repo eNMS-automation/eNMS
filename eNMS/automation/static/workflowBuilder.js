@@ -350,7 +350,6 @@ function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
       $('#status').text(`Status: ${wf.status}.`);
-      console.log(wf.id, workflow.id, wf.state);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_device) {
@@ -375,7 +374,6 @@ function getWorkflowState() {
           $('#current-device,#current-job').empty();
           wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
-        console.log(wf.status);
         if (wf.status == 'Running') {
           setTimeout(getWorkflowState, 1500);
         }

@@ -12,7 +12,11 @@ def configure_instance_id():
     if not parameters.instance_id:
         now = str(datetime.now())
         parameters.instance_id = now
-        factory('Instance', {'name': now, 'ip_address': '0.0.0.0'})
+        factory('Instance', **{
+            'name': now,
+            'ip_address': '0.0.0.0',
+            'status': 'Up'
+        })
 
 
 def migrate_export(path_app, request):

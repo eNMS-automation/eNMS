@@ -122,8 +122,8 @@ def scan_cluster():
             result = rest_get(
                 f'{protocol}://{ip_address}/rest/is_alive',
                 timeout=parameters.cluster_scan_timeout
-            )
-            print(result.json())
+            ).json()
+            print('tttt', result)
             # factory(
         except:
             continue

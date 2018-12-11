@@ -52,6 +52,7 @@ tacacs_client = TACACSClient(
 use_syslog = int(environ.get('USE_SYSLOG', False))
 
 
+from eNMS.admin.helpers import configure_instance_id
 from eNMS.base.default import (
     create_default_services,
     create_default_parameters,
@@ -122,9 +123,9 @@ def configure_database(app):
     @app.before_first_request
     def create_default():
         db.create_all()
-        configure_instance_id()
         create_default_users()
         create_default_parameters()
+        configure_instance_id()
         create_default_services()
         if app.config['CREATE_EXAMPLES']:
             create_default_examples(app)

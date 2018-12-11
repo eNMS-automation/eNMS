@@ -8,6 +8,7 @@ from requests import post as rest_post
 from requests.auth import HTTPBasicAuth
 
 from eNMS import db, scheduler
+from eNMS.automation.helpers import scheduler_job
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import (
     delete,

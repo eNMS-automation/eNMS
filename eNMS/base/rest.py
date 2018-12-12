@@ -37,7 +37,7 @@ class RestAutomation(Resource):
     def post(self):
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
-        async = payload.get('async', True)
+        handle_asynchronously = payload.get('async', True)
         job.status, job.state = 'Running', {}
         info(f'{job.name}: starting.')
         db.session.commit()
@@ -47,7 +47,7 @@ class RestAutomation(Resource):
         }
         for pool_name in payload.get('pools', ''):
             targets |= {d.id for d in fetch('Pool', name=pool_name).devices}
-        if async:
+        if handle_asynchronously:
             scheduler.add_job(
                 id=str(datetime.now()),
                 func=scheduler_job,

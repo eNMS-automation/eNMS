@@ -2,6 +2,7 @@
 global
 alertify: false
 call: false
+capitalize: false
 convertSelect: false
 doc: false
 editService: false
@@ -200,12 +201,12 @@ function edgeToEdge(edge) {
       roundness:
         edge.subtype == 'success' ? 0.1 :
         edge.subtype == 'failure' ? -0.1 :
-        0
+        0,
     },
     color: {
       color: edge.subtype == 'success' ? 'green'
       : edge.subtype == 'failure' ? 'red'
-      : 'blue'
+      : 'blue',
     },
     arrows: {to: {enabled: true}},
   };

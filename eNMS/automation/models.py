@@ -258,7 +258,8 @@ class Workflow(Job):
             if not self.multiprocessing:
                 self.state['jobs'][job.id] = success
                 db.session.commit()
-            for successor in job.job_successors(self, success):
+            edge_type_to_follow = 'success' if success else 'failure'
+            for successor in job.job_successors(self, edge_type_to_follow):
                 if successor not in visited:
                     jobs.append(successor)
                 if successor == self.jobs[1]:

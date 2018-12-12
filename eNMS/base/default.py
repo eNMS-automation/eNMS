@@ -407,6 +407,15 @@ def create_payload_transfer_workflow():
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })
+    prerequisite_edges = [(4, 7), (3, 7)]
+    for x, y in prerequisite_edges:
+        factory('WorkflowEdge', **{
+            'name': f'{workflow.name} {x} -> {y}',
+            'workflow': workflow.id,
+            'subtype': 'prerequisite',
+            'source': workflow.jobs[x].id,
+            'destination': workflow.jobs[y].id
+        })
 
 
 @integrity_rollback

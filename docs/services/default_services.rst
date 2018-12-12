@@ -17,30 +17,30 @@ A **driver** must be selected among all available netmiko drivers. The list of d
    :align: center
 
 Configuration parameters for creating a service instance:
-  - ``General``
-    - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
-    - ``Description`` Freeform description of what the service instance does
-    - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
-    - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
-  - ``Advanced``
-    - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
-    - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-    - ``send_notification`` Enable sending results notification checkbox
-    - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
-    - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
-  - ``Targets``
-    - ``Devices`` Multi-selection list of devices from the inventory
-    - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-    - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
-    - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
-    - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
-  - ``Specific``
-    - ``content`` Paste a configuration block of text here for applying to the target device(s)
-    - ``driver`` Which Netmiko driver to use when connecting to the device
-    - ``enable_mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block
-    - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-    - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-    - ``global_delay_factor`` Netmiko multiplier used for internal delays (defaults to 1). Increase this for devices that have trouble buffering and responding quickly.
+  #. ``General``
+     #. ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+     #. ``Description`` Freeform description of what the service instance does
+     #. ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+     #. ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  #. ``Advanced``
+     #. ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+     #. ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+     #. ``send_notification`` Enable sending results notification checkbox
+     #. ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+     #. ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+  #. ``Targets``
+     #. ``Devices`` Multi-selection list of devices from the inventory
+     #. ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+     #. ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+     #. ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+     #. ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  #. ``Specific``
+     #. ``content`` Paste a configuration block of text here for applying to the target device(s)
+     #. ``driver`` Which Netmiko driver to use when connecting to the device
+     #. ``enable_mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block
+     #. ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
+     #. ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
+     #. ``global_delay_factor`` Netmiko multiplier used for internal delays (defaults to 1). Increase this for devices that have trouble buffering and responding quickly.
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 

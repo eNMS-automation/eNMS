@@ -163,7 +163,7 @@ Configuration parameters for creating a service instance:
           - ``load replace``: replace the configuration of the target with the service configuration
       - ``content`` Paste a configuration block of text here for applying to the target device(s)
       - ``driver`` Which Netmiko driver to use when connecting to the device
-      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: <a class="reference external" href="https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments">https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments</a>
+      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -196,7 +196,7 @@ Configuration parameters for creating a service instance:
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device
   - ``Specific``
       - ``driver`` Which Netmiko driver to use when connecting to the device
-      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: <a class="reference external" href="https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments">https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments</a>
+      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
 Napalm getters service
 ----------------------
@@ -231,8 +231,8 @@ Configuration parameters for creating a service instance:
       - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
       - ``delete_spaces_before_matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
       - ``driver`` Which Netmiko file transfer driver to use when connecting to the device
-      - ``getters`` Napalm getters (standard retrieval APIs) are documented here: <a class="reference external" href="https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix">https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix</a>
-      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: <a class="reference external" href="https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments">https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments</a>
+      - ``getters`` Napalm getters (standard retrieval APIs) are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
+      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content_match` input field of its configuration form.
 
@@ -267,7 +267,7 @@ Configuration parameters for creating a service instance:
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
       - ``playbook_path`` path and filename to the Ansible Playbook. For example, if the playbooks subdirectory is located inside the eNMS project directory:  playbooks/juniper_get_facts.yml
-      - ``arguments`` ansible-playbook command line options, which are documented here: <a class="reference external" href="https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html">https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html</a>
+      - ``arguments`` ansible-playbook command line options, which are documented here: (https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
       - ``content_match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
       - ``content_match_regex`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
       - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
@@ -324,7 +324,7 @@ Configuration parameters for creating a service instance:
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
 Update Inventory Service
----------------------
+------------------------
 
 Update the properties of one or several devices in eNMS inventory.
 This service takes a dictionary as input: all key/value pairs of that dictionary are used to update properties in the inventory.
@@ -356,7 +356,7 @@ Configuration parameters for creating a service instance:
       - ``update_dictionary`` Dictionary of properties to be updated. For example, the dictionary to update the "Model" and operating_system property of all target devices: ``{"model":"ao", "operating_system":"13.4.2"}``.
 
 Generic File Transfer Service
----------------------
+-----------------------------
 
 Transfer a single file to/from the eNMS server to the device using either SFTP or SCP.
 

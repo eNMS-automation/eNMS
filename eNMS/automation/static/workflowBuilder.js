@@ -43,7 +43,7 @@ const dsoptions = {
     },
     addEdge: function(data, callback) {
       if (data.from != data.to) {
-        data.subtype = edgeType == 'success' ? true : false;
+        data.subtype = edgeType;
         saveEdge(data);
       }
     },
@@ -191,11 +191,15 @@ function jobToNode(job) {
 function edgeToEdge(edge) {
   return {
     id: edge.id,
-    label: edge.subtype ? 'Success' : 'Failure',
+    label: capitalize(edge.subtype),
     type: edge.subtype,
     from: edge.source_id,
     to: edge.destination_id,
-    color: {color: edge.subtype == 'success' ? 'green' : 'red'},
+    color: {
+      color: edge.subtype == 'success' ? 'green'
+      : edge.subtype == 'failure' ? 'red'
+      : 'blue'
+    },
     arrows: {to: {enabled: true}},
   };
 }
@@ -221,7 +225,7 @@ function deleteSelection() {
  * @param {mode} mode - Mode to switch to.
  */
 function switchMode(mode) {
-  if (mode == 'success' || mode == 'failure') {
+  if (['success', 'failure', 'prerequisite'].includes(mode)) {
     edgeType = mode;
     graph.addEdgeMode();
     alertify.notify(`Mode: creation of ${mode} edge.`, 'success', 5);
@@ -287,6 +291,7 @@ const action = {
   'Delete': deleteSelection,
   'Create "Success" edge': partial(switchMode, 'success'),
   'Create "Failure" edge': partial(switchMode, 'failure'),
+  'Create "Prerequisite" edge': partial(switchMode, 'prerequisite'),
   'Move Nodes': partial(switchMode, 'node'),
   'Refresh View': getWorkflowState,
 };

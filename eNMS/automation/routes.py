@@ -256,10 +256,11 @@ def delete_node(workflow_id, job_id):
 
 @post(bp, '/add_edge/<wf_id>/<subtype>/<source>/<dest>', 'Edit')
 def add_edge(wf_id, subtype, source, dest):
+    print(subtype)
     workflow_edge = factory('WorkflowEdge', **{
         'name': f'{wf_id}-{subtype}:{source}->{dest}',
         'workflow': wf_id,
-        'subtype': 'success' if subtype == 'true' else 'failure',
+        'subtype': subtype,
         'source': source,
         'destination': dest
     })

@@ -236,9 +236,10 @@ class Workflow(Job):
         results = {'success': False}
         while jobs:
             job = jobs.pop()
-            # We check that all predecessors of the job have been visited
-            # to ensure that the job will receive the full payload.
-            if any(node not in visited for node in job.job_sources(self)):
+            if any(
+                node not in visited
+                for node in job.job_sources(self, 'prerequisite')
+            ):
                 continue
             visited.add(job)
             if not self.multiprocessing:

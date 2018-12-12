@@ -195,6 +195,13 @@ function edgeToEdge(edge) {
     type: edge.subtype,
     from: edge.source_id,
     to: edge.destination_id,
+    smooth: {
+      type: 'curvedCW',
+      roundness:
+        edge.subtype == 'success' ? 0.1 :
+        edge.subtype == 'failure' ? -0.1 :
+        0
+    },
     color: {
       color: edge.subtype == 'success' ? 'green'
       : edge.subtype == 'failure' ? 'red'

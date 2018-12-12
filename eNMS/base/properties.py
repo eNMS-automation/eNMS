@@ -483,9 +483,9 @@ import_properties = {
     'Link': link_import_properties,
     'Pool': pool_import_properties,
     'Service': service_import_properties,
-    'WorkflowEdge': workflow_edge_import_properties,
     'Workflow': workflow_import_properties,
-    'Task': task_import_properties,
+    'WorkflowEdge': workflow_edge_import_properties,
+    'Task': task_import_properties
 }
 
 # Export topology properties

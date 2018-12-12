@@ -87,10 +87,30 @@ function displayWorkflow(wf) {
       $('.global').show();
     }
   });
+  graph.on('doubleClick', function(properties) {
+    properties.event.preventDefault();
+    const node = this.getNodeAt(properties.pointer.DOM);
+    if (node) {
+      job = workflow.jobs.find(w => w.id === node);
+      if (job.type == 'Workflow') {
+        switchToWorkflow(node);
+      } else {
+        editService(node);
+      }
+    }
+  });
   $(`#add_jobs option[value='${wf.id}']`).remove();
   $('#add_jobs').selectpicker('refresh');
   lastModified = wf.last_modified;
   return graph;
+}
+
+function switchToWorkflow(workflowId) {
+  call(`/get/workflow/${workflowId}`, function(result) {
+    workflow = result;
+    graph = displayWorkflow(result);
+    alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
+  });
 }
 
 if (workflow) {
@@ -99,10 +119,7 @@ if (workflow) {
 } else {
   workflow = $('#current-workflow').val();
   if (workflow) {
-    call(`/get/workflow/${workflow}`, function(result) {
-      workflow = result;
-      graph = displayWorkflow(result);
-    });
+    switchToWorkflow(workflow);
   } else {
     alertify.notify(`You must create a workflow in the
     'Workflow management' page first.`, 'error', 5);
@@ -250,11 +267,7 @@ $('#current-workflow').on('change', function() {
   $('#add_jobs').append(
     `<option value='${workflow.id}'>${workflow.name}</option>`
   );
-  call(`/get/workflow/${this.value}`, function(result) {
-    workflow = result;
-    graph = displayWorkflow(result);
-    alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
-  });
+  switchToWorkflow(this.value);
 });
 
 /**
@@ -293,7 +306,7 @@ const action = {
   'Run Workflow': runWorkflow,
   'Edit': editService,
   'Run': runJob,
-  'Service Logs': showLogs,
+  'Logs': showLogs,
   'Edit Workflow': editWorkflow,
   'Workflow Logs': showWorkflowLogs,
   'Add Service or Workflow': partial(showModal, 'add-job'),

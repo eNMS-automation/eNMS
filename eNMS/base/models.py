@@ -113,7 +113,10 @@ class Base(db.Model):
 
     @classmethod
     def export(cls):
-        return [obj.to_dict(export=True) for obj in cls.query.all()]
+        return [
+            obj.to_dict(export=True)
+            for obj in cls.query.all() if obj.visible
+        ]
 
     @classmethod
     def choices(cls):

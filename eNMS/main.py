@@ -17,7 +17,7 @@ db = SQLAlchemy(
     }
 )
 login_manager = LoginManager()
-mail = Mail()
+mail_client = Mail()
 scheduler = BackgroundScheduler({
     'apscheduler.jobstores.default': {
         'type': 'sqlalchemy',

@@ -5,7 +5,15 @@ from importlib import import_module
 from logging import basicConfig, DEBUG, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 
-from eNMS.main import login_manager
+from eNMS.main import (
+    db,
+    login_manager,
+    mail_client,
+    scheduler,
+    USE_SYSLOG,
+    USE_VAULT,
+    vault_client
+)
 from eNMS.admin.helpers import configure_instance_id
 from eNMS.base.default import (
     create_default_services,
@@ -23,7 +31,7 @@ from eNMS.logs.models import SyslogServer
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
-    mail.init_app(app)
+    mail_client.init_app(app)
     scheduler.app = app
     if not scheduler.running:
         scheduler.start()

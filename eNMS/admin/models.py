@@ -11,7 +11,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 
-from eNMS import db
+from eNMS.main import db
 from eNMS.base.models import Base
 
 

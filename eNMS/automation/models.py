@@ -8,7 +8,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 
-from eNMS import db
+from eNMS.main import db
 from eNMS.automation.helpers import space_deleter
 from eNMS.base.associations import (
     job_device_table,

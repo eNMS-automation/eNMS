@@ -6,7 +6,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from os import environ
 from re import compile
 
-from eNMS import db, scheduler
+from eNMS.main import db, scheduler
 from eNMS.base.helpers import fetch
 
 NETMIKO_DRIVERS = sorted(

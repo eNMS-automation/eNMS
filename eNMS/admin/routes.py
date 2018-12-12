@@ -13,7 +13,7 @@ from os import listdir
 from requests import get as rest_get
 from requests.exceptions import ConnectionError
 
-from eNMS import db, use_tacacs, tacacs_client
+from eNMS.main import db, tacacs_client, USE_TACACS
 from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddInstance,
@@ -86,7 +86,7 @@ def login():
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
-        elif use_tacacs:
+        elif USE_TACACS:
             if tacacs_client.authenticate(name, password).valid:
                 user = factory('User', **{'name': name, 'password': password})
                 login_user(user)

@@ -95,7 +95,19 @@ class Job(Base):
             and x.workflow == workflow
         ]
 
-    def try_run(self, payload=None, targets=None, dont_commit=False):
+    def notify(results, time):
+        fetch('Job', name=self.send_notification_method).try_run({
+            'job': self.serialized,
+            'logs': self.logs,
+            'runtime': time,
+            'result': get_results_summary(job, results, time)
+        })
+
+    def try_run(self, payload=None, targets=None, from_workflow=True):
+        self.status, self.state = 'Running', {}
+        info(f'{self.name}: starting.')
+        if not from_workflow:
+            db.session.commit()
         failed_attempts, now = {}, str(datetime.now()).replace(' ', '-')
         for i in range(self.number_of_retries + 1):
             info(f'Running job {self.name}, attempt {i}')
@@ -107,8 +119,12 @@ class Job(Base):
                 sleep(self.time_between_retries)
         results['failed_attempts'] = failed_attempts
         self.logs[now] = results
-        if not dont_commit:
+        info(f'{self.name}: finished.')
+        self.status, self.state = 'Idle', {}
+        if not from_workflow:
             db.session.commit()
+            if self.send_notification:
+                self.notify(results, now)
         return results, now
 
     def get_results(self, payload, device=None):
@@ -252,7 +268,7 @@ class Workflow(Job):
             job_results, _ = job.try_run(
                 results,
                 {device} if device else None,
-                dont_commit=self.multiprocessing
+                from_workflow=True
             )
             success = job_results['success']
             if not self.multiprocessing:

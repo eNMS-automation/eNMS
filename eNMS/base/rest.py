@@ -38,9 +38,6 @@ class RestAutomation(Resource):
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
         handle_asynchronously = payload.get('async', True)
-        job.status, job.state = 'Running', {}
-        info(f'{job.name}: starting.')
-        db.session.commit()
         targets = {
             fetch('Device', name=device_name).id
             for device_name in payload.get('devices', '')

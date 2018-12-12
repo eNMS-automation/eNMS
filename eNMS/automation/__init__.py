@@ -4,13 +4,6 @@ from os import environ
 from pathlib import Path
 from sqlalchemy import Boolean, Float, Integer, PickleType
 
-from eNMS.base.properties import (
-    cls_to_properties,
-    property_types,
-    boolean_properties,
-    service_import_properties
-)
-
 bp = Blueprint(
     'automation_blueprint',
     __name__,
@@ -21,6 +14,12 @@ bp = Blueprint(
 
 from eNMS.base.classes import classes, service_classes
 from eNMS.base.helpers import add_classes
+from eNMS.base.properties import (
+    cls_to_properties,
+    property_types,
+    boolean_properties,
+    service_import_properties
+)
 from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
 
 add_classes(Job, Service, Workflow, WorkflowEdge)

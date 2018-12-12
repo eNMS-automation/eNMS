@@ -173,9 +173,6 @@ def run_job(job_id):
             return {'error': 'Set devices or pools as targets first.'}
         if not job.has_targets and targets:
             return {'error': 'This service should not have targets configured.'}
-    job.status, job.state = 'Running', {}
-    info(f'{job.name}: starting.')
-    db.session.commit()
     if current_app.config['CLUSTER']:
         rest_post(
             'http://0.0.0.0/rest/run_job',

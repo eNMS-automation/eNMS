@@ -1,4 +1,3 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, render_template
 from importlib import import_module
 from logging import basicConfig, DEBUG, info, StreamHandler

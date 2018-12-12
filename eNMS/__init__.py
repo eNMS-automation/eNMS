@@ -1,17 +1,9 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, render_template
 from flask_httpauth import HTTPBasicAuth
-from flask_mail import Mail
-from flask_sqlalchemy import SQLAlchemy
-from hvac import Client as VaultClient
 from importlib import import_module
 from logging import basicConfig, DEBUG, info, StreamHandler
 from logging.handlers import RotatingFileHandler
-from os import environ
-from tacacs_plus.client import TACACSClient
-
-
-
 
 from eNMS.main import login_manager
 from eNMS.admin.helpers import configure_instance_id

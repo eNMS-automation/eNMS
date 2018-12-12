@@ -5,9 +5,9 @@ from hvac import Client as VaultClient
 from os import environ
 from tacacs_plus.client import TACACSClient
 
-use_vault = int(environ.get('USE_VAULT', False))
-
-login_manager = LoginManager()
+USE_SYSLOG = int(environ.get('USE_SYSLOG', False))
+USE_TACACS = int(environ.get('USE_TACACS', False))
+USE_VAULT = int(environ.get('USE_VAULT', False))
 
 auth = HTTPBasicAuth()
 db = SQLAlchemy(
@@ -16,10 +16,8 @@ db = SQLAlchemy(
         'autoflush': False
     }
 )
-
+login_manager = LoginManager()
 mail = Mail()
-
-# Scheduler
 scheduler = BackgroundScheduler({
     'apscheduler.jobstores.default': {
         'type': 'sqlalchemy',
@@ -33,18 +31,9 @@ scheduler = BackgroundScheduler({
     'apscheduler.job_defaults.coalesce': 'true',
     'apscheduler.job_defaults.max_instances': '3'
 })
-
-# Vault
-
-vault_client = VaultClient()
-
-# Tacacs+
-use_tacacs = int(environ.get('USE_TACACS', False))
 tacacs_client = TACACSClient(
     environ.get('TACACS_ADDR'),
     49,
     environ.get('TACACS_PASSWORD'),
-) if use_tacacs else None
-
-# Syslog
-use_syslog = int(environ.get('USE_SYSLOG', False))
+) if USE_TACACS else None
+vault_client = VaultClient()

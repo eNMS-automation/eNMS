@@ -5,7 +5,7 @@ from logging import info
 from sqlalchemy import exc
 from string import punctuation
 
-from eNMS import db
+from eNMS.main import db
 from eNMS.base.classes import classes
 from eNMS.base.properties import pretty_names, property_types
 

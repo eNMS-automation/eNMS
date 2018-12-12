@@ -1,3 +1,4 @@
+from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy

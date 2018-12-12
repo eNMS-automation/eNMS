@@ -2,7 +2,7 @@ from apscheduler.jobstores.base import JobLookupError
 from flask import request
 from re import search, sub
 
-from eNMS import scheduler
+from eNMS.main import scheduler
 from eNMS.base.helpers import (
     fetch,
     fetch_all,

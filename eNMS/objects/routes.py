@@ -4,7 +4,7 @@ from pynetbox import api as netbox_api
 from requests import get as http_get
 from subprocess import Popen
 
-from eNMS import db
+from eNMS.main import db
 from eNMS.base.helpers import (
     factory,
     fetch,

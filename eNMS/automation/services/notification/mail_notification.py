@@ -1,7 +1,7 @@
 from flask_mail import Message
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS import mail
+from eNMS.main import mail
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import get_one

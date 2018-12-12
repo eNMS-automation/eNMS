@@ -1,7 +1,7 @@
 from wtforms import SelectField, SelectMultipleField
 from json import dumps, loads
 
-from eNMS import db, use_vault, vault_client
+from eNMS.main import db, USE_VAULT, vault_client
 from eNMS.base.helpers import fetch, objectify, choices
 from eNMS.base.properties import (
     cls_to_properties,
@@ -27,7 +27,7 @@ class Base(db.Model):
         return self.name
 
     def __getattribute__(self, property):
-        if property in private_properties and use_vault:
+        if property in private_properties and USE_VAULT:
             path = f'secret/data/{self.__tablename__}/{self.name}/{property}'
             data = vault_client.read(path)
             return data['data']['data'][property] if data else ''
@@ -35,7 +35,7 @@ class Base(db.Model):
             return super().__getattribute__(property)
 
     def __setattr__(self, property, value):
-        if property in private_properties and use_vault:
+        if property in private_properties and USE_VAULT:
             if not value:
                 return
             vault_client.write(

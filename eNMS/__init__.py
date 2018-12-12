@@ -1,6 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, render_template
-from flask_httpauth import HTTPBasicAuth
 from importlib import import_module
 from logging import basicConfig, DEBUG, info, StreamHandler
 from logging.handlers import RotatingFileHandler
@@ -139,9 +138,9 @@ def create_app(path, config):
     configure_rest_api(app)
     configure_logs(app)
     configure_errors(app)
-    if use_vault:
+    if USE_VAULT:
         configure_vault_client(app)
-    if use_syslog:
+    if USE_SYSLOG:
         configure_syslog_server(app)
     info('eNMS starting')
     return app

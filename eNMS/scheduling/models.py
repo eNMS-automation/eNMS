@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from eNMS import db, scheduler
+from eNMS.main import db, scheduler
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.models import Base
 

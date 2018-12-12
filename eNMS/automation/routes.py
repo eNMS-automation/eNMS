@@ -212,6 +212,7 @@ def add_jobs_to_workflow(workflow_id):
     jobs = objectify('Job', request.form['add_jobs'])
     for job in jobs:
         job.workflows.append(workflow)
+    workflow.last_modified = str(datetime.now())
     db.session.commit()
     return [job.serialized for job in jobs]
 
@@ -247,24 +248,29 @@ def reset_workflow_logs(workflow_id):
 def delete_node(workflow_id, job_id):
     workflow, job = fetch('Workflow', id=workflow_id), fetch('Job', id=job_id)
     workflow.jobs.remove(job)
+    workflow.last_modified = str(datetime.now())
     db.session.commit()
     return job.serialized
 
 
-@post(bp, '/add_edge/<wf_id>/<subtype>/<source>/<dest>', 'Edit')
-def add_edge(wf_id, subtype, source, dest):
+@post(bp, '/add_edge/<workflow_id>/<subtype>/<source>/<dest>', 'Edit')
+def add_edge(workflow_id, subtype, source, dest):
     workflow_edge = factory('WorkflowEdge', **{
-        'name': f'{wf_id}-{subtype}:{source}->{dest}',
-        'workflow': wf_id,
+        'name': f'{workflow_id}-{subtype}:{source}->{dest}',
+        'workflow': workflow_id,
         'subtype': subtype,
         'source': source,
         'destination': dest
     })
+    fetch('Workflow', id=workflow_id).last_modified = str(datetime.now())
+    db.session.commit()
     return workflow_edge.serialized
 
 
 @post(bp, '/delete_edge/<workflow_id>/<edge_id>', 'Edit')
 def delete_edge(workflow_id, edge_id):
+    fetch('Workflow', id=workflow_id).last_modified = str(datetime.now())
+    db.session.commit()
     return delete('WorkflowEdge', id=edge_id)
 
 

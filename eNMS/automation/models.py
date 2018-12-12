@@ -226,6 +226,7 @@ class Workflow(Job):
     __tablename__ = 'Workflow'
     __mapper_args__ = {'polymorphic_identity': 'Workflow'}
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
+    last_modified = Column(String)
     jobs = relationship(
         'Job',
         secondary=job_workflow_table,

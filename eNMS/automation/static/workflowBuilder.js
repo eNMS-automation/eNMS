@@ -56,6 +56,7 @@ let edges;
 let graph;
 let selectedNode;
 let edgeType;
+let lastModified;
 
 /**
  * Display a workflow.
@@ -88,7 +89,7 @@ function displayWorkflow(wf) {
   });
   $(`#add_jobs option[value='${wf.id}']`).remove();
   $('#add_jobs').selectpicker('refresh');
-  getWorkflowState();
+  lastModified = wf.last_modified;
   return graph;
 }
 
@@ -300,8 +301,7 @@ const action = {
   'Create "Success" edge': partial(switchMode, 'success'),
   'Create "Failure" edge': partial(switchMode, 'failure'),
   'Create "Prerequisite" edge': partial(switchMode, 'prerequisite'),
-  'Move Nodes': partial(switchMode, 'node'),
-  'Refresh View': getWorkflowState,
+  'Move Nodes': partial(switchMode, 'node')
 };
 
 $('.dropdown-submenu a.menu-submenu').on('click', function(e) {
@@ -387,9 +387,7 @@ function getWorkflowState() {
           $('#current-device,#current-job').empty();
           wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
-        if (wf.status == 'Running') {
-          setTimeout(getWorkflowState, 1500);
-        }
+        setTimeout(getWorkflowState, wf.status == 'Running' ? 700 : 15000);
       }
     });
   }

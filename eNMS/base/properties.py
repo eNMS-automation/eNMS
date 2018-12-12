@@ -147,7 +147,9 @@ job_public_properties = [
 ]
 
 service_public_properties = job_public_properties
-workflow_public_properties = job_public_properties
+workflow_public_properties = job_public_properties + [
+    'last_modified'
+]
 
 service_table_properties = [
     'name',
@@ -501,5 +503,5 @@ dont_migrate = {
     'Device': ['jobs'],
     'Service': ['logs', 'state', 'tasks', 'workflows', 'creator_name'],
     'Task': ['job_name'],
-    'Workflow': ['logs', 'state', 'status', 'creator_name']
+    'Workflow': ['last_modified', 'logs', 'state', 'status', 'creator_name']
 }

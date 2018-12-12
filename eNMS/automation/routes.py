@@ -23,6 +23,7 @@ from eNMS.base.helpers import (
 )
 from eNMS.base.properties import (
     cls_to_properties,
+    pretty_names,
     private_properties,
     property_types,
     service_table_properties,
@@ -93,31 +94,31 @@ def get_service(id_or_cls):
     service = fetch('Service', id=id_or_cls)
     cls = service_classes[service.type if service else id_or_cls]
 
-    def build_text_box(property):
+    def build_text_box(property, name):
         return f'''
-            <label>{property}</label>
+            <label>{name}</label>
             <div class="form-group">
               <input class="form-control" id="service-{property}"
               name="{property}" type="{'password'
               if property in private_properties else 'text'}">
             </div>'''
 
-    def build_textarea_box(property):
+    def build_textarea_box(property, name):
         return f'''
-            <label>{property}</label>
+            <label>{name}</label>
             <div class="form-group">
               <textarea style="height: 150px;" rows="30"
               class="form-control" id="service-{property}"
               name="{property}"></textarea>
             </div>'''
 
-    def build_select_box(property):
+    def build_select_box(property, name):
         options = ''.join(
             f'<option value="{k}">{v}</option>'
             for k, v in getattr(cls, f'{property}_values')
         )
         return f'''
-            <label>{property}</label>
+            <label>{name}</label>
             <div class="form-group">
               <select class="form-control"
                 id="service-{property}" name="{property}"
@@ -127,28 +128,29 @@ def get_service(id_or_cls):
               </select>
             </div>'''
 
-    def build_boolean_box(property):
+    def build_boolean_box(property, name):
         return '<fieldset>' + f'''
             <div class="item">
                 <input id="service-{property}" name="{property}"
-                type="checkbox"><label>{property}</label>
+                type="checkbox"><label>{name}</label>
             </div>''' + '</fieldset>'
 
     form, list_properties, boolean_properties = '', [], []
     for property in cls_to_properties[cls.__tablename__]:
+        name = pretty_names.get(property, property)
         if property in cls_to_properties['Service']:
             continue
         if property_types.get(property, None) == 'bool':
-            form += build_boolean_box(property)
+            form += build_boolean_box(property, name)
             boolean_properties.append(property)
         elif hasattr(cls, f'{property}_values'):
-            form += build_select_box(property)
+            form += build_select_box(property, name)
             if property_types[property] == 'list':
                 list_properties.append(property)
         elif hasattr(cls, f'{property}_textarea'):
-            form += build_textarea_box(property)
+            form += build_textarea_box(property, name)
         else:
-            form += build_text_box(property)
+            form += build_text_box(property, name)
     return {
         'boolean_properties': ','.join(boolean_properties),
         'form': form,

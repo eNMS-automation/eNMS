@@ -195,7 +195,7 @@ function edgeToEdge(edge) {
     type: edge.subtype,
     from: edge.source_id,
     to: edge.destination_id,
-    color: {color: edge.subtype ? 'green' : 'red'},
+    color: {color: edge.subtype == 'success' ? 'green' : 'red'},
     arrows: {to: {enabled: true}},
   };
 }

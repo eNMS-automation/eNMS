@@ -182,7 +182,7 @@ class WorkflowEdge(Base):
     __tablename__ = type = 'WorkflowEdge'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    subtype = Column(Boolean)
+    subtype = Column(String)
     source_id = Column(Integer, ForeignKey('Job.id'))
     source = relationship(
         'Job',

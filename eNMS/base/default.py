@@ -263,7 +263,7 @@ def create_netmiko_workflow():
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow.id,
-            'subtype': True,
+            'subtype': 'success',
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })
@@ -321,7 +321,7 @@ def create_napalm_workflow():
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow.id,
-            'subtype': True,
+            'subtype': 'success',
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })
@@ -403,7 +403,7 @@ def create_payload_transfer_workflow():
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow.id,
-            'subtype': True,
+            'subtype': 'success',
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })
@@ -431,7 +431,7 @@ def create_workflow_of_workflows():
         factory('WorkflowEdge', **{
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow.id,
-            'subtype': True,
+            'subtype': 'success',
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })

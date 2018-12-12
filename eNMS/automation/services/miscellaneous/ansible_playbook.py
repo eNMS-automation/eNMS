@@ -15,7 +15,7 @@ class AnsiblePlaybookService(Service):
     __tablename__ = 'AnsiblePlaybookService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = True
+    has_targets = Column(Boolean)
     playbook_path = Column(String)
     arguments = Column(String)
     content_match = Column(String)
@@ -25,7 +25,6 @@ class AnsiblePlaybookService(Service):
     delete_spaces_before_matching = Column(Boolean)
     options = Column(MutableDict.as_mutable(PickleType), default={})
     pass_device_properties = Column(Boolean)
-    inventory_from_selection = Column(Boolean)
 
     __mapper_args__ = {
         'polymorphic_identity': 'AnsiblePlaybookService',
@@ -33,12 +32,15 @@ class AnsiblePlaybookService(Service):
 
     def job(self, device, _):
         arguments = substitute(self.arguments, locals()).split()
-        command = ['ansible-playbook']
+        command, extra_args = ['ansible-playbook'], {}
         if self.pass_device_properties:
-            properties = device.get_properties()
-            properties['password'] = device.password
-            command.extend(['-e', dumps(properties)])
-        if self.inventory_from_selection:
+            extra_args = device.get_properties()
+            extra_args['password'] = device.password
+        if self.options:
+            extra_args.update(self.options)
+        if extra_args:
+            command.extend(['-e', dumps(extra_args)])
+        if self.has_targets:
             command.extend(['-i', device.ip_address + ','])
         command.append(substitute(self.playbook_path, locals()))
         info(f"Sending Ansible playbook: {' '.join(command + arguments)}")

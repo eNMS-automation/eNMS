@@ -362,7 +362,6 @@ function getJobState(id) { // eslint-disable-line no-unused-vars
 function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
-      console.log(wf.last_modified, lastModified, wf.last_modified !== lastModified);
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf)
       }

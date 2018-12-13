@@ -5,10 +5,10 @@ from eNMS.base.models import MultipleObjectField
 
 
 def configure_form(cls):
-    cls.properties = ('source', 'content')
-    for property in ('source', 'content'):
+    cls.properties = ('source_ip_address', 'content')
+    for property in ('source_ip_address', 'content'):
         setattr(cls, property, StringField(property))
-        setattr(cls, property + 'regex', BooleanField('Regex'))
+        setattr(cls, property + '_regex', BooleanField('Regex'))
     return cls
 
 

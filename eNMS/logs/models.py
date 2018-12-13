@@ -13,7 +13,7 @@ class Log(Base):
 
     __tablename__ = type = 'Log'
     id = Column(Integer, primary_key=True)
-    source = Column(String)
+    source_ip_address = Column(String)
     content = Column(String)
     log_rules = relationship(
         'LogRule',
@@ -22,7 +22,7 @@ class Log(Base):
     )
 
     def __init__(self, source, content, log_rules):
-        self.source = source
+        self.source_ip_address = source_ip_address
         self.content = content
         self.log_rules = log_rules
 
@@ -35,8 +35,8 @@ class LogRule(Base):
     __tablename__ = type = 'LogRule'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
-    source = Column(String)
-    source_regex = Column(Boolean)
+    source_ip_address = Column(String)
+    source_ip_address_regex = Column(Boolean)
     content = Column(String)
     content_regex = Column(Boolean)
     logs = relationship(

@@ -23,7 +23,7 @@
               {{ log_automation_form.list_fields() }}
               <label>Name</label>
               <div class='form-group'>
-                {{ log_automation_form.name(class="form-control required") }}
+                {{ log_automation_form.name(id='logrule-name', class="form-control required") }}
               </div>
               <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
@@ -39,7 +39,7 @@
                     <tr>
                       <td>{{ names[property] }}</td>
                       <td>{{ log_automation_form[property](id='logrule-' + property, class="form-control") }}</td>
-                      <td>{{ log_automation_form[property + 'regex'](id='logrule-' + property + 'regex', class="form-control") }}</td>
+                      <td>{{ log_automation_form[property + '_regex'](id='logrule-' + property + '_regex', class="form-control") }}</td>
                     </tr>
                   {% endfor %}
                 </tbody>
@@ -83,7 +83,7 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Source</th>
+                  <th>Source IP address</th>
                   <th>Content</th>
                   <th>Edit</th>
                   <th>Delete</th>

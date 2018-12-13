@@ -18,10 +18,7 @@ def log_management():
 @get(bp, '/log_automation', 'View')
 def log_automation():
     return dict(
-        log_automation_form=LogAutomationForm(
-            request.form,
-            prefix='logrule-'
-        ),
+        log_automation_form=LogAutomationForm(request.form),
         fields=('name', 'source', 'content'),
         log_rules=serialize('LogRule')
     )

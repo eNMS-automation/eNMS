@@ -24,7 +24,7 @@ Inventory can be created from the :guilabel:`inventory/device_management` and :g
 * Manually, by entering the value of each property in a form (one by one).
 * By importing an Excel file (.xls, .xlsx).
 
-.. note:: Note the workbook/tab names and column names in the Excel file should exactly match the examples provided with eNMS.
+.. note:: Note: the workbook/tab names and column names in the Excel file should exactly match the examples provided with eNMS.
 
 Manual creation
 ***************
@@ -40,14 +40,14 @@ Fill the form and click on the ``Submit`` button.
 Creation via import
 *******************
 
-Objects can be created all at once by importing an Excel file. Devices must be defined in a spreadsheet called "Device" and links in a spreadsheet called "Link".
+Objects can be created all at once by importing an Excel file. Devices must be defined in a spreadsheet in a Tab called "Device", and links must be defined in a Tab called "Link".
 The first line of a spreadsheet contains the properties, the following lines define the objects, as demonstrated in the example below.
 
 .. image:: /_static/inventory/import_export/import.png
    :alt: Example of excel spreadsheet for import
    :align: center
 
-If you want to export the existing data out, you can export an Excel spreadsheet with all the object data filled out by clicking: ``Export network Topology``.
+If you want to export the existing data, you can export an Excel spreadsheet containing all the object data by clicking: ``Export Network Topology``.
 
 .. image:: /_static/inventory/import_export/export.png
    :alt: Export topology

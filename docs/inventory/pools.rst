@@ -10,13 +10,13 @@ If the properties of an inventory object matches **all** pool properties, the ob
 Pool Management
 ---------------
 
-Pools can be created, duplicated and deleted in :guilabel:`inventory/pool_management`.
+Pools can be created, duplicated and deleted in :guilabel:`Inventory/Pool Management`.
 
 .. image:: /_static/inventory/pools/pool_management.png
    :alt: Pool Management
    :align: center
 
-.. note:: When you add a new device A which properties are matched by a pool B, A is not automatically added to B (it didn't exist when B was last updated). To manually update the pools with all new objects, you can click on the ``Update pool`` button.
+.. note:: When you add a new device A whose properties are matched by pool B, A is not automatically added to B (it didn't exist when B was last updated). To manually update the pools with all new objects, you can click on the ``Update pool`` button.
 .. note:: By default, the devices and links within a pool are determined based on the pool properties. However, the ``Edit objects`` button lets you define the pool devices and links by selecting them directly.
 
 A first example
@@ -31,7 +31,7 @@ This pool enforces the following conditions:
  * type: ``Router|Switch`` --- matches routers and switches (devices which type is either ``Router``, or ``Switch``.
  * vendor: ``Cisco`` --- for this property, the regular expression box is not ticked. This means the value must be exactly ``Cisco``.
 
-In summary, all Cisco routers or switches which name starts with ``node`` will match these conditions, and they will be a member of the pool.
+In summary, all Cisco routers or switches whose name begins with ``node`` will match these conditions, and they will be a member of the pool.
 
 .. note:: All properties left with empty fields are simply ignored.
 
@@ -81,5 +81,5 @@ Use a pool to restrict all of eNMS to a subset of objects
 From the :guilabel:`admin/administration` panel, you can select a pool used as a database filtering mechanism.
 All mechanisms and all pages in eNMS will be restricted to the objects of that pool.
 
-In a production environment, for scalability purposes, multiples instances of eNMS can be deployed (per region, per type of device) to limit the amount of objects that a single instance must handle.
+In a production environment, for scalability purposes, multiple instances of eNMS can be deployed (per region, per type of device) to limit the amount of objects that a single instance must handle.
 It is recommended to not have more than 5000 devices per instance of eNMS.

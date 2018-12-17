@@ -3,7 +3,7 @@ Installation
 ============
 
 Requirements: python 3.6+
-Earlier versions of python not supported.
+(Earlier versions of python not supported.)
 
 Run eNMS in test mode
 ---------------------

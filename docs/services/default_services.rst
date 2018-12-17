@@ -16,7 +16,7 @@ A **driver** must be selected among all available netmiko drivers. The list of d
    :alt: Netmiko Configuration service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -55,7 +55,7 @@ A **driver** must be selected among all available netmiko file transfer drivers.
    :alt: Netmiko File Transfer service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -85,7 +85,7 @@ Configuration parameters for creating a service instance:
       - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
       - ``global_delay_factor`` Netmiko multiplier used for internal delays (defaults to 1). Increase this for devices that have trouble buffering and responding quickly.
-  
+
 Netmiko Validation Service
 --------------------------
 
@@ -98,7 +98,7 @@ There is a ``command`` field and a ``pattern`` field. eNMS will check if the exp
    :alt: Netmiko validation service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -139,7 +139,7 @@ The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.c
    :alt: Napalm configuration service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -176,7 +176,7 @@ Use Napalm to rollback a configuration.
    :alt: Napalm Rollback service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -207,7 +207,7 @@ Uses Napalm to retrieve a list of getters whose output is displayed in the logs.
    :alt: Napalm Getters service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -247,7 +247,7 @@ An option allows inventory devices to be selected, such that the Ansible Playboo
    :alt: Ansible Playbook service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -288,7 +288,7 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
    :alt: ReST Call service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -334,7 +334,7 @@ Example: if you create a workflow to perform the upgrade of a device, you might 
    :alt: Update Inventory service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does
@@ -364,7 +364,7 @@ Transfer a single file to/from the eNMS server to the device using either SFTP o
    :alt: Generic File Transfer service
    :align: center
 
-Configuration parameters for creating a service instance:
+Configuration parameters for creating this service instance:
   - ``General``
       - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
       - ``Description`` Freeform description of what the service instance does

@@ -5,9 +5,9 @@ Workflow Payload
 Job dependency
 --------------
 
-One of the property of workflows in eNMS is that a job will not start unless all of its "predecessors" jobs have been executed.
+One of the properties of workflows in eNMS is that a job will not start unless all of its "predecessor" jobs have been executed.
 
-In the example below, the job ``process_payload1`` has two "predecessors" jobs:
+In the example below, the job ``process_payload1`` has two "predecessor" jobs:
   - ``get_interfaces``
   - ``get_config``
 
@@ -112,7 +112,7 @@ Consequently, the ``payload`` variable received by ``process_payload1`` will loo
     etc...
   }
 
-If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the the ``job`` function of ``process_payload1`` could look like:
+If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the ``job`` function of ``process_payload1`` could look like:
 
 ::
 

@@ -1,4 +1,3 @@
-from logging import info
 from napalm import get_network_driver
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
@@ -65,24 +64,6 @@ def substitute(data, variables):
 
 def space_deleter(input):
     return ''.join(input.split())
-
-
-def get_results_summary(job, results, now):
-    summary = [
-        f'Job: {job.name} ({job.type})',
-        f'Runtime: {now}',
-        f'Status: {"PASS" if results["success"] else "FAILED"}'
-    ]
-    if 'devices' in results.get('result', '') and not results["success"]:
-        device_status = [
-            f'{device}: {"PASS" if device_results["success"] else "FAILED"}'
-            for device, device_results in results['result']['devices'].items()
-        ]
-        summary.append(f'Per-device Status: {", ".join(device_status)}')
-    server_url = environ.get('ENMS_SERVER_ADDR', 'http://SERVER_IP')
-    logs_url = f'{server_url}/automation/logs/{job.id}/{now}'
-    summary.append(f'Logs: {logs_url}')
-    return '\n\n'.join(summary)
 
 
 def scheduler_job(job_id, aps_job_id=None, targets=None):

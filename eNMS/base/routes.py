@@ -53,7 +53,6 @@ def get_instance(cls, id):
 
 @post(bp, '/update/<cls>', 'Edit')
 def update_instance(cls):
-    print(request.form)
     try:
         instance = factory(cls, **request.form)
         info(

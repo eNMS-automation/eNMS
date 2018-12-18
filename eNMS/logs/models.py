@@ -21,7 +21,7 @@ class Log(Base):
         back_populates='logs'
     )
 
-    def __init__(self, source, content, log_rules):
+    def __init__(self, source_ip_address, content, log_rules):
         self.source_ip_address = source_ip_address
         self.content = content
         self.log_rules = log_rules

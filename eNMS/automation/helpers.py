@@ -2,7 +2,6 @@ from napalm import get_network_driver
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko import ConnectHandler
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
-from os import environ
 from re import compile
 
 from eNMS.main import db, scheduler

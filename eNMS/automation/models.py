@@ -1,6 +1,7 @@
 from datetime import datetime
 from logging import info
 from multiprocessing.pool import ThreadPool
+from os import environ
 from re import search
 from scp import SCPClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
@@ -9,7 +10,7 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 
 from eNMS.main import db
-from eNMS.automation.helpers import get_results_summary, space_deleter
+from eNMS.automation.helpers import space_deleter
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,
@@ -95,20 +96,20 @@ class Job(Base):
             and x.workflow == workflow
         ]
 
-    def get_results_summary(job, results, now):
+    def get_results_summary(self, results, now):
         summary = [
-            f'Job: {job.name} ({job.type})',
+            f'Job: {self.name} ({self.type})',
             f'Runtime: {now}',
             f'Status: {"PASS" if results["success"] else "FAILED"}'
         ]
         if 'devices' in results.get('result', '') and not results["success"]:
             device_status = [
-                f'{device}: {"PASS" if device_results["success"] else "FAILED"}'
-                for device, device_results in results['result']['devices'].items()
+                f'{device}: {"PASS" if logs["success"] else "FAILED"}'
+                for device, logs in results['result']['devices'].items()
             ]
             summary.append(f'Per-device Status: {", ".join(device_status)}')
         server_url = environ.get('ENMS_SERVER_ADDR', 'http://SERVER_IP')
-        logs_url = f'{server_url}/automation/logs/{job.id}/{now}'
+        logs_url = f'{server_url}/automation/logs/{self.id}/{now}'
         summary.append(f'Logs: {logs_url}')
         return '\n\n'.join(summary)
 
@@ -117,7 +118,7 @@ class Job(Base):
             'job': self.serialized,
             'logs': self.logs,
             'runtime': time,
-            'result': get_results_summary(self, results, time)
+            'result': self.get_results_summary(results, time)
         })
 
     def try_run(self, payload=None, targets=None, from_workflow=True):

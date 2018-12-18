@@ -1,10 +1,9 @@
 from datetime import datetime
 from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
-from logging import info
 from psutil import cpu_percent
 
-from eNMS.main import auth, db, scheduler
+from eNMS.main import auth, scheduler
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.helpers import delete, factory, fetch, get_one

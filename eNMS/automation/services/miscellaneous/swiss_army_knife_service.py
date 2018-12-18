@@ -54,7 +54,7 @@ class SwissArmyKnifeService(Service):
         with open(filename, 'r') as file:
             message.attach(filename, 'text/plain', file.read())
         remove(filename)
-        mail.send(message)
+        mail_client.send(message)
         return {'success': True}
 
     def slack_feedback_notification(self, payload):

@@ -34,7 +34,7 @@ class MailNotificationService(Service):
             recipients=recipients,
             body=self.body
         )
-        mail.send(message)
+        mail_client.send(message)
         return {'success': True, 'result': str(message)}
 
 

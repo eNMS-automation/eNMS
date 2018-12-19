@@ -16,6 +16,7 @@ pathlib
 psutil
 psycopg2
 pynetbox
+python-ldap
 pyyaml
 slackclient
 simplekml

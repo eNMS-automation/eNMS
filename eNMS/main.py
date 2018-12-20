@@ -4,22 +4,31 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
+from ldap import initialize as LDAPClient, OPT_REFERRALS
 from os import environ
 from tacacs_plus.client import TACACSClient
 
 USE_SYSLOG = int(environ.get('USE_SYSLOG', False))
 USE_TACACS = int(environ.get('USE_TACACS', False))
+USE_LDAP = int(environ.get('USE_LDAP', False))
 USE_VAULT = int(environ.get('USE_VAULT', False))
 
 auth = HTTPBasicAuth()
+
 db = SQLAlchemy(
     session_options={
         'expire_on_commit': False,
         'autoflush': False
     }
 )
+
+ldap_client = LDAPClient(environ.get('LDAP_ADDR')) if USE_LDAP else None
+ldap_client.set_option(OPT_REFERRALS,0)
+
 login_manager = LoginManager()
+
 mail_client = Mail()
+
 scheduler = BackgroundScheduler({
     'apscheduler.jobstores.default': {
         'type': 'sqlalchemy',
@@ -33,9 +42,11 @@ scheduler = BackgroundScheduler({
     'apscheduler.job_defaults.coalesce': 'true',
     'apscheduler.job_defaults.max_instances': '3'
 })
+
 tacacs_client = TACACSClient(
     environ.get('TACACS_ADDR'),
     49,
     environ.get('TACACS_PASSWORD'),
 ) if USE_TACACS else None
+
 vault_client = VaultClient()

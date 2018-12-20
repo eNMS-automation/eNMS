@@ -96,7 +96,8 @@ class Job(Base):
             and x.workflow == workflow
         ]
 
-    def get_results_summary(self, results, now):
+    def build_notification(self, results, now):
+        print('tttt'*1000)
         summary = [
             f'Job: {self.name} ({self.type})',
             f'Runtime: {now}',
@@ -118,10 +119,10 @@ class Job(Base):
             'job': self.serialized,
             'logs': self.logs,
             'runtime': time,
-            'result': self.get_results_summary(results, time)
+            'result': self.build_notification(results, time)
         })
 
-    def try_run(self, payload=None, targets=None, from_workflow=True):
+    def try_run(self, payload=None, targets=None, from_workflow=False):
         self.status, self.state = 'Running', {}
         info(f'{self.name}: starting.')
         if not from_workflow:

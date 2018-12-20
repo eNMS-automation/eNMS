@@ -6,5 +6,6 @@ property1:
 property2:
   pretty_name: Property 2
   type: string
-  default: "a"
+  default: "10.145.14.1"
   add_to_dashboard: True
+  is_address: True

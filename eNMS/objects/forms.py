@@ -50,7 +50,11 @@ class GottyConnectionForm(FlaskForm):
     address_choices = [ 
         ('ip_address', 'IP address'),
         ('name', 'Name')
-    ] + [(p, v['pretty_name']) for p, v in custom_properties.items()]
+    ] + [
+        (property, values['pretty_name'])
+        for property, values in custom_properties.items()
+        if values.get('is_address', False)
+    ]
     address = SelectField(choices=address_choices)
 
 

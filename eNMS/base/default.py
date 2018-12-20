@@ -275,14 +275,12 @@ def create_netmiko_workflow():
 
 @integrity_rollback
 def create_napalm_workflow():
-    , admin = [], fetch('User', name='admin').id
+    admin = fetch('User', name='admin').id
     devices = [
         fetch('Device', name='Washington').id,
         fetch('Device', name='Austin').id
     ]
-
-    services = [factory(service.pop('type'), **{
-            'type': 'NapalmConfigurationService',
+    services = [factory('NapalmConfigurationService', **{
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
             'waiting_time': 0,
@@ -295,9 +293,11 @@ def create_napalm_workflow():
             'action': 'load_merge_candidate',
             'content': 'vrf definition test\n'
     })]
-    services.append(instance)
-    services.insert(1, fetch('Job', name='netmiko_check_vrf_test'))
-    services.append(fetch('Job', name=f'netmiko_check_no_vrf_test'))
+    services.extend([
+        fetch('Job', name='netmiko_check_vrf_test'),
+        fetch('Job', name=f'netmiko_delete_vrf_test'),
+        fetch('Job', name=f'netmiko_check_no_vrf_test')
+    ])
     workflow = factory('Workflow', **{
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',

@@ -9,11 +9,12 @@ from flask import (
 )
 from flask_login import current_user, login_user, logout_user
 from ipaddress import IPv4Network
+from ldap import INVALID_CREDENTIALS, SCOPE_SUBTREE, SERVER_DOWN
 from os import listdir
 from requests import get as rest_get
 from requests.exceptions import ConnectionError
 
-from eNMS.main import db, tacacs_client, USE_TACACS
+from eNMS.main import db, ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddInstance,
@@ -86,6 +87,21 @@ def login():
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
+        elif USE_LDAP:
+            try:
+                ldap_name = f'{name}@{app.config["LDAP_ADDR"]'
+                ldap_client.simple_bind_s(ldap_name, password)
+                results = ldap_client.search_s(
+                    app.config['LDAP_BASEDN'],
+                    SCOPE_SUBTREE,
+                    f'(&(objectClass=person)(samaccountname={user}))',
+                    ['cn','memberOf']
+                )
+            except INVALID_CREDENTIALS:
+                ldap_client.unbind()
+                abort(403)
+            except SERVER_DOWN:
+                return {'error': 'LDAP Server down'}
         elif USE_TACACS:
             if tacacs_client.authenticate(name, password).valid:
                 user = factory('User', **{'name': name, 'password': password})

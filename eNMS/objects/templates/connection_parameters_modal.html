@@ -19,6 +19,9 @@
             <input id="authentication" name="authentication" type="checkbox" checked="">
             <label>Automatically authenticate</label>
           </div>
+          <div class="x_title">
+            <h4 class="text-center">Credentials</h4>
+          </div>
           <div class="radio">
             <label>
               <input type="radio" checked="" value="user" id="user-credentials" name="credentials">
@@ -29,6 +32,21 @@
             <label>
               <input type="radio" value="device" id="device-credentials" name="credentials">
               Authentication with device credentials
+            </label>
+          </div>
+          <div class="x_title">
+            <h4 class="text-center">Protocol</h4>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" checked="" value="ssh" id="ssh" name="ssh">
+              SSH
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" value="telnet" id="telnet" name="telnet">
+              Telnet
             </label>
           </div>
         </form>

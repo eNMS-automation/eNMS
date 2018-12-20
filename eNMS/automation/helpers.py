@@ -7,10 +7,7 @@ from re import compile
 from eNMS.main import db, scheduler
 from eNMS.base.helpers import fetch
 
-NETMIKO_DRIVERS = sorted(
-    (driver, driver) for driver in CLASS_MAPPER
-    if 'telnet' not in driver and 'ssh' not in driver
-)
+NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
 NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
 NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 

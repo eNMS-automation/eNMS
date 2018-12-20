@@ -46,6 +46,14 @@ def configure_pool_form(cls):
     return cls
 
 
+class GottyConnectionForm(FlaskForm):
+    address_choices = [ 
+        ('name', 'name'),
+        ('ip_address', 'ip_address')
+    ]
+    address = SelectField(choices=address_choices)
+
+
 class AddObjectForm(FlaskForm):
     id = HiddenField()
     name = StringField()

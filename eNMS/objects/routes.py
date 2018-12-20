@@ -102,7 +102,8 @@ def connection(id):
         cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{address}'.split())
     else:
         cmd.extend(f'ssh {options} {address}'.split())
-    cmd.extend(f'-p {device.port}'.split())
+    if protocol != 'telnet':
+        cmd.extend(f'-p {device.port}'.split())
     Popen(cmd)
     return {
         'device': device.name,

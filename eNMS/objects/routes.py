@@ -21,6 +21,7 @@ from eNMS.objects.forms import (
     AddDevice,
     AddPoolForm,
     DeviceAutomationForm,
+    GottyConnectionForm,
     ImportExportForm,
     LibreNmsForm,
     NetboxForm,
@@ -41,7 +42,8 @@ def device_management():
         fields=device_public_properties,
         devices=serialize('Device'),
         add_device_form=AddDevice(request.form),
-        device_automation_form=DeviceAutomationForm(request.form)
+        device_automation_form=DeviceAutomationForm(request.form),
+        gotty_connection_form = GottyConnectionForm(request.form)
     )
 
 

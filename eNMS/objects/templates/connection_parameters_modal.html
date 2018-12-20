@@ -7,6 +7,8 @@
       </div>
       <div class="modal-body">
         <form id="connection-parameters-form" class="form-horizontal form-label-left" method="post">
+          <label>Property used for the connection:</label>
+          {{ gotty_connection_form.address(class="form-control") }}<br>
           <div class="item">
             <input id="accept-once" name="accept-once" type="checkbox" checked="">
             <label>Accept only one client</label>

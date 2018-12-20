@@ -181,7 +181,6 @@ class Job(Base):
 
     def device_run(self, args):
         device, results, payload = args
-        print('tttt'*1000, device.name)
         device_result = self.get_results(payload, device)
         results['result']['devices'][device.name] = device_result
 

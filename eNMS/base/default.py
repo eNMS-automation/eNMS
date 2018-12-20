@@ -275,13 +275,13 @@ def create_netmiko_workflow():
 
 @integrity_rollback
 def create_napalm_workflow():
-    services, admin = [], fetch('User', name='admin').id
+    , admin = [], fetch('User', name='admin').id
     devices = [
         fetch('Device', name='Washington').id,
         fetch('Device', name='Austin').id
     ]
-    for service in (
-        {
+
+    services = [factory(service.pop('type'), **{
             'type': 'NapalmConfigurationService',
             'name': 'napalm_create_vrf_test',
             'description': 'Create a VRF "test" with Napalm',
@@ -294,19 +294,8 @@ def create_napalm_workflow():
             'content_type': 'simple',
             'action': 'load_merge_candidate',
             'content': 'vrf definition test\n'
-        },
-        {
-            'type': 'NapalmRollbackService',
-            'name': 'Napalm eos Rollback',
-            'driver': 'eos',
-            'description': 'Rollback a configuration with Napalm eos',
-            'devices': devices,
-            'creator': admin,
-            'waiting_time': 0
-        }
-    ):
-        instance = factory(service.pop('type'), **service)
-        services.append(instance)
+    })]
+    services.append(instance)
     services.insert(1, fetch('Job', name='netmiko_check_vrf_test'))
     services.append(fetch('Job', name=f'netmiko_check_no_vrf_test'))
     workflow = factory('Workflow', **{

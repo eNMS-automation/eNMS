@@ -254,6 +254,7 @@ def create_netmiko_workflow():
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
         'creator': admin,
+        'devices': devices,
         'vendor': 'Arista',
         'operating_system': 'eos'
     })
@@ -312,6 +313,7 @@ def create_napalm_workflow():
         'name': 'Napalm_VRF_workflow',
         'description': 'Create and delete a VRF with Napalm',
         'creator': admin,
+        'devices': devices,
         'vendor': 'Arista',
         'operating_system': 'eos'
     })
@@ -379,6 +381,7 @@ def create_payload_transfer_workflow():
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
         'creator': admin,
+        'devices': devices,
         'vendor': 'Arista',
         'operating_system': 'eos'
     })
@@ -441,6 +444,7 @@ def create_workflow_of_workflows():
             'name': f'{workflow.name} {x} -> {y}',
             'workflow': workflow.id,
             'subtype': 'success',
+            'devices': devices,
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })

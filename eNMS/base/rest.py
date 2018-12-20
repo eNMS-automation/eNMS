@@ -73,7 +73,7 @@ class UpdateInstance(Resource):
         return factory(cls, **request.get_json()).name
 
     def put(self, cls):
-        return self.post(cls)
+        return factory(cls, **request.get_json()).name
 
 
 class Migrate(Resource):

@@ -97,4 +97,4 @@ def test_napalm_workflow(user_client):
         json={'name': 'Napalm_VRF_workflow', 'async': 0},
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert not result['success'] and len(result) == 7
+    assert result['success'] and len(result) == 8

@@ -81,7 +81,8 @@ def import_export():
 def connection(id):
     parameters, device = get_one('Parameters'), fetch('Device', id=id)
     cmd = [str(app.path / 'applications' / 'gotty'), '-w']
-    port, ip = parameters.get_gotty_port(), device.ip_address
+    port, protocol = parameters.get_gotty_port(), request.form['protocol']
+    address = getattr(device, request.form['address'])
     cmd.extend(['-p', str(port)])
     if 'accept-once' in request.form:
         cmd.append('--once')
@@ -91,14 +92,16 @@ def connection(id):
         options = '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
     else:
         options = ''
-    if 'authentication' in request.form:
+    if protocol == 'telnet':
+        cmd.extend(f'telnet {address}'.split())
+    elif 'authentication' in request.form:
         if request.form['credentials'] == 'device':
             login, pwd = device.username, device.password
         else:
             login, pwd = current_user.name, current_user.password
-        cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{ip}'.split())
+        cmd.extend(f'sshpass -p {pwd} ssh {options} {login}@{address}'.split())
     else:
-        cmd.extend(f'ssh {options} {ip}'.split())
+        cmd.extend(f'ssh {options} {address}'.split())
     cmd.extend(f'-p {device.port}'.split())
     Popen(cmd)
     return {

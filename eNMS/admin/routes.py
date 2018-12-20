@@ -89,7 +89,7 @@ def login():
                 abort(403)
         elif USE_LDAP:
             try:
-                ldap_name = f'{name}@{app.config["LDAP_ADDR"]'
+                ldap_name = f'{name}@{app.config["LDAP_ADDR"]}'
                 ldap_client.simple_bind_s(ldap_name, password)
                 results = ldap_client.search_s(
                     app.config['LDAP_BASEDN'],

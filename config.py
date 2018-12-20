@@ -17,8 +17,8 @@ class Config(object):
     USE_VAULT = int(environ.get('USE_VAULT', False))
 
     # LDAP
-    LDAP_ADDR = int(environ.get('LDAP_ADDR'))
-    LDAP_BASEDN = int(environ.get('LDAP_BASEDN'))
+    LDAP_ADDR = environ.get('LDAP_ADDR')
+    LDAP_BASEDN = environ.get('LDAP_BASEDN')
 
     # TACACS+
     USE_TACACS = int(environ.get('USE_TACACS', False))

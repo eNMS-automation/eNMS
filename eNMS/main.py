@@ -23,9 +23,10 @@ db = SQLAlchemy(
 )
 
 ldap_client = LDAPClient(
-    f'ldap://{environ.get("LDAP_ADDR")'
+    f'ldap://{environ.get("LDAP_ADDR")}'
 ) if USE_LDAP else None
-ldap_client.set_option(OPT_REFERRALS, 0)
+if ldap_client:
+    ldap_client.set_option(OPT_REFERRALS, 0)
 
 login_manager = LoginManager()
 

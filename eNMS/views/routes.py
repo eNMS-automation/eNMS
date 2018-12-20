@@ -10,7 +10,7 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
-from eNMS.objects.forms import AddDevice, AddLink
+from eNMS.objects.forms import AddDevice, AddLink, GottyConnectionForm
 from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
@@ -27,6 +27,7 @@ def view(view_type):
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),
         device_subtypes=device_subtypes,
+        gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
         name_to_id={d.name: id for id, d in enumerate(devices)},
         devices=serialize('Device'),

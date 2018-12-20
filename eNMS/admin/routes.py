@@ -9,7 +9,10 @@ from flask import (
 )
 from flask_login import current_user, login_user, logout_user
 from ipaddress import IPv4Network
-from ldap import INVALID_CREDENTIALS, SCOPE_SUBTREE, SERVER_DOWN
+try:
+    from ldap import INVALID_CREDENTIALS, SCOPE_SUBTREE, SERVER_DOWN
+except ModuleNotFoundError:
+    pass
 from os import listdir
 from requests import get as rest_get
 from requests.exceptions import ConnectionError

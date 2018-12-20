@@ -4,7 +4,10 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
-from ldap import initialize as initialize_ldap, OPT_REFERRALS
+try:
+    from ldap import initialize as initialize_ldap, OPT_REFERRALS
+except ModuleNotFoundError:
+    pass
 from os import environ
 from tacacs_plus.client import TACACSClient
 

@@ -43,7 +43,7 @@ def device_management():
         devices=serialize('Device'),
         add_device_form=AddDevice(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
-        gotty_connection_form = GottyConnectionForm(request.form)
+        gotty_connection_form=GottyConnectionForm(request.form)
     )
 
 

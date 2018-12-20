@@ -97,7 +97,6 @@ class Job(Base):
         ]
 
     def build_notification(self, results, now):
-        print('tttt'*1000)
         summary = [
             f'Job: {self.name} ({self.type})',
             f'Runtime: {now}',

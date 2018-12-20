@@ -91,7 +91,7 @@ function displayWorkflow(wf) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     if (node) {
-      job = workflow.jobs.find(w => w.id === node);
+      const job = workflow.jobs.find((w) => w.id === node);
       if (job.type == 'Workflow') {
         switchToWorkflow(node);
       } else {
@@ -105,6 +105,11 @@ function displayWorkflow(wf) {
   return graph;
 }
 
+/**
+ * Display a workflow.
+ * @param {workflowId} workflowId - Workflow ID.
+
+ */
 function switchToWorkflow(workflowId) {
   call(`/get/workflow/${workflowId}`, function(result) {
     workflow = result;
@@ -314,7 +319,7 @@ const action = {
   'Create "Success" edge': partial(switchMode, 'success'),
   'Create "Failure" edge': partial(switchMode, 'failure'),
   'Create "Prerequisite" edge': partial(switchMode, 'prerequisite'),
-  'Move Nodes': partial(switchMode, 'node')
+  'Move Nodes': partial(switchMode, 'node'),
 };
 
 $('.dropdown-submenu a.menu-submenu').on('click', function(e) {
@@ -376,7 +381,7 @@ function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
       if (wf.last_modified !== lastModified) {
-        displayWorkflow(wf)
+        displayWorkflow(wf);
       }
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {

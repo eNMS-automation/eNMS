@@ -47,7 +47,7 @@ def configure_pool_form(cls):
 
 
 class GottyConnectionForm(FlaskForm):
-    address_choices = [ 
+    address_choices = [
         ('ip_address', 'IP address'),
         ('name', 'Name')
     ] + [

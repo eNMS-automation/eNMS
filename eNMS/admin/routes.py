@@ -89,14 +89,22 @@ def login():
                 abort(403)
         elif USE_LDAP:
             try:
-                ldap_name = f'{name}@{app.config["LDAP_ADDR"]}'
+                ldap_name = f'{name}@{app.config["LDAP_USERDN"]}'
                 ldap_client.simple_bind_s(ldap_name, password)
                 results = ldap_client.search_s(
                     app.config['LDAP_BASEDN'],
                     SCOPE_SUBTREE,
                     f'(&(objectClass=person)(samaccountname={user}))',
-                    ['cn','memberOf']
+                    ['cn', 'memberOf']
                 )
+                if app.config['LDAP_ADMIN_GROUP'] in results[0][1]['memberOf']:
+                    user = factory(
+                        'User',
+                        **{'name': name, 'password': password}
+                    )
+                    login_user(user)
+                    ldap_client.unbind()
+                    return redirect(url_for('base_blueprint.dashboard'))
             except INVALID_CREDENTIALS:
                 ldap_client.unbind()
                 abort(403)

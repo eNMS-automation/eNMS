@@ -4,7 +4,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
-from ldap import initialize as LDAPClient, OPT_REFERRALS
+from ldap import initialize as initialize_ldap, OPT_REFERRALS
 from os import environ
 from tacacs_plus.client import TACACSClient
 
@@ -22,8 +22,8 @@ db = SQLAlchemy(
     }
 )
 
-ldap_client = LDAPClient(
-    f'ldap://{environ.get("LDAP_ADDR")}'
+ldap_client = initialize_ldap(
+    environ.get('LDAP_SERVER')
 ) if USE_LDAP else None
 if ldap_client:
     ldap_client.set_option(OPT_REFERRALS, 0)

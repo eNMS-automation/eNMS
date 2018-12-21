@@ -1,7 +1,7 @@
 from flask import Blueprint
 
 bp = Blueprint(
-    'objects_blueprint',
+    'inventory_blueprint',
     __name__,
     url_prefix='/objects',
     template_folder='templates',

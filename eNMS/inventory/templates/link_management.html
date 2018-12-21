@@ -57,6 +57,6 @@
     var fields = {{ fields|tojson|safe }};
     var links = {{ links|tojson|safe }};
   </script>
-  <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
-  <script src="{{ url_for('objects_blueprint.static', filename='linkManagement.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='linkManagement.js') }}"></script>
 {% endblock javascripts %}

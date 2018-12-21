@@ -61,6 +61,6 @@
     var fields = {{ fields|tojson|safe }};
     var devices = {{ devices|tojson|safe }};
   </script>
-  <script src="{{ url_for('objects_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
-  <script src="{{ url_for('objects_blueprint.static', filename='deviceManagement.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='deviceManagement.js') }}"></script>
 {% endblock javascripts %}

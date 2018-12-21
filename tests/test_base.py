@@ -13,7 +13,7 @@ urls = {
         '/database',
         '/instance_management'
     ),
-    '/objects': (
+    '/inventory': (
         '/device_management',
         '/link_management',
         '/pool_management',

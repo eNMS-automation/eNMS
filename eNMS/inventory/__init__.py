@@ -3,7 +3,7 @@ from flask import Blueprint
 bp = Blueprint(
     'inventory_blueprint',
     __name__,
-    url_prefix='/objects',
+    url_prefix='/inventory',
     template_folder='templates',
     static_folder='static'
 )

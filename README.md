@@ -110,7 +110,7 @@ Docs: _[ReST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.ht
 
 ## Notification system
 
-After a service or a workflow is executed, you can configure eNMS to send a notification.
+After a service or a workflow is executed, you can configure eNMS to send a notification with the results.
 Three types of notification are available:
 - via mail (a brief summary and the full logs attached as a textfile)
 - via Slack

@@ -2,11 +2,12 @@ from datetime import datetime
 from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
 from psutil import cpu_percent
+from uuid import getnode
 
 from eNMS.main import auth, scheduler
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.automation.helpers import scheduler_job
-from eNMS.base.helpers import delete, factory, fetch, get_one
+from eNMS.base.helpers import delete, factory, fetch
 from eNMS.inventory.helpers import object_export, object_import
 
 
@@ -23,9 +24,8 @@ def unauthorized():
 class Heartbeat(Resource):
 
     def get(self):
-        parameters = get_one('Parameters')
         return {
-            'name': parameters.instance_id,
+            'name': getnode(),
             'cpu_load': cpu_percent()
         }
 

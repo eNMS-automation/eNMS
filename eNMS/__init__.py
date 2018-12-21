@@ -41,7 +41,7 @@ def register_blueprints(app):
         'automation',
         'base',
         'logs',
-        'objects',
+        'inventory',
         'scheduling',
         'views'
     )

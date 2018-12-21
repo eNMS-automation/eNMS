@@ -51,15 +51,14 @@ def test_rest_api_basic(user_client):
         json={'name': 'new_service', 'vendor': 'Cisco'},
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['vendor'] == 'Cisco'
-    assert len(fetch_all('Service')) == 22
-    assert len(fetch_all('Service')) == 4
-    post(
-        'http://192.168.105.2:5000/rest/instance/service',
-        json={'name': 'new_service', 'model': 'Cisco'},
+    assert result['vendor'] == 'Cisco' and len(fetch_all('Service')) == 22
+    assert len(fetch_all('Workflow')) == 4
+    result = post(
+        'http://192.168.105.2:5000/rest/instance/workflow',
+        json={'name': 'new_workflow', 'description': 'NewNew'},
         auth=HTTPBasicAuth('admin', 'admin')
-    )
-    assert len(fetch_all('Service')) == 5
+    ).json()
+    assert result['description'] == 'NewNew' and len(fetch_all('Service')) == 5
 
 
 # @check_blueprints('/automation')

@@ -54,17 +54,17 @@ def test_manual_object_creation(user_client):
 def create_from_file(client, file):
     with open(client.application.path / 'projects' / file, 'rb') as f:
         data = {'file': f, 'replace': True, 'update_pools': True}
-        client.post('/objects/import_topology', data=data)
+        client.post('/inventory/import_topology', data=data)
 
 
-@check_blueprints('', '/objects', '/views')
+@check_blueprints('', '/inventory', '/views')
 def test_object_creation_europe(user_client):
     create_from_file(user_client, 'europe.xls')
     assert len(fetch_all('Device')) == 33
     assert len(fetch_all('Link')) == 49
 
 
-@check_blueprints('', '/objects', '/views')
+@check_blueprints('', '/inventory', '/views')
 def test_object_creation_type(user_client):
     create_from_file(user_client, 'device_counters.xls')
     assert len(fetch_all('Device')) == 27
@@ -75,7 +75,7 @@ routers = ['router' + str(i) for i in range(5, 20)]
 links = ['link' + str(i) for i in range(4, 15)]
 
 
-@check_blueprints('', '/objects', '/views')
+@check_blueprints('', '/inventory', '/views')
 def test_device_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for device_name in routers:
@@ -85,7 +85,7 @@ def test_device_deletion(user_client):
     assert len(fetch_all('Link')) == 18
 
 
-@check_blueprints('', '/objects', '/views')
+@check_blueprints('', '/inventory', '/views')
 def test_link_deletion(user_client):
     create_from_file(user_client, 'europe.xls')
     for link_name in links:
@@ -111,7 +111,7 @@ pool2 = ImmutableMultiDict([
 ])
 
 
-@check_blueprints('', '/objects', '/views')
+@check_blueprints('', '/inventory', '/views')
 def test_pool_management(user_client):
     create_from_file(user_client, 'europe.xls')
     user_client.post('/update/pool', data=pool1)

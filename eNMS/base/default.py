@@ -281,17 +281,17 @@ def create_napalm_workflow():
         fetch('Device', name='Austin').id
     ]
     services = [factory('NapalmConfigurationService', **{
-            'name': 'napalm_create_vrf_test',
-            'description': 'Create a VRF "test" with Napalm',
-            'waiting_time': 0,
-            'devices': devices,
-            'creator': admin,
-            'driver': 'eos',
-            'vendor': 'Arista',
-            'operating_system': 'eos',
-            'content_type': 'simple',
-            'action': 'load_merge_candidate',
-            'content': 'vrf definition test\n'
+        'name': 'napalm_create_vrf_test',
+        'description': 'Create a VRF "test" with Napalm',
+        'waiting_time': 0,
+        'devices': devices,
+        'creator': admin,
+        'driver': 'eos',
+        'vendor': 'Arista',
+        'operating_system': 'eos',
+        'content_type': 'simple',
+        'action': 'load_merge_candidate',
+        'content': 'vrf definition test\n'
     })]
     services.extend([
         fetch('Job', name='netmiko_check_vrf_test'),

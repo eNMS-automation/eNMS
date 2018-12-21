@@ -10,7 +10,7 @@ from eNMS.base.helpers import (
     serialize
 )
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
-from eNMS.objects.forms import AddDevice, AddLink, GottyConnectionForm
+from eNMS.inventory.forms import AddDevice, AddLink, GottyConnectionForm
 from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 

@@ -16,7 +16,7 @@ from eNMS.base.properties import (
     device_public_properties,
     sql_types
 )
-from eNMS.objects.helpers import database_filtering
+from eNMS.inventory.helpers import database_filtering
 
 
 class Object(Base):

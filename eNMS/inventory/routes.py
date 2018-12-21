@@ -15,8 +15,8 @@ from eNMS.base.helpers import (
     post,
     serialize
 )
-from eNMS.objects import bp
-from eNMS.objects.forms import (
+from eNMS.inventory import bp
+from eNMS.inventory.forms import (
     AddLink,
     AddDevice,
     AddPoolForm,
@@ -28,7 +28,7 @@ from eNMS.objects.forms import (
     OpenNmsForm,
     PoolObjectsForm
 )
-from eNMS.objects.helpers import object_export, object_import
+from eNMS.inventory.helpers import object_export, object_import
 from eNMS.base.properties import (
     device_public_properties,
     link_table_properties,

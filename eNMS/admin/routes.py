@@ -41,7 +41,7 @@ from eNMS.base.properties import (
     instance_public_properties,
     user_public_properties
 )
-from eNMS.objects.helpers import database_filtering
+from eNMS.inventory.helpers import database_filtering
 
 
 @get(bp, '/user_management', 'View')

@@ -7,7 +7,7 @@ from eNMS.main import auth, scheduler
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.helpers import delete, factory, fetch, get_one
-from eNMS.objects.helpers import object_export, object_import
+from eNMS.inventory.helpers import object_export, object_import
 
 
 @auth.get_password

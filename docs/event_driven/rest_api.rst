@@ -2,41 +2,41 @@
 ReST API
 ========
 
-In this section, ``object`` refers to any device, link, service, workflow, or task in eNMS database.
+In this section, ``instance`` refers to any device, link, service, workflow, or task in eNMS database.
 
 eNMS has a ReST API allowing to:
 
-- retrieve an object.
-- delete an object
-- create an object
-- update an object
+- retrieve an instance.
+- delete an instance
+- create an instance
+- update an instance
 - run a Service instance or a Workflow.
 - make sure eNMS is alive.
 
 This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
-Retrieve or delete an object
+Retrieve or delete an instance
 ****************************
 
 ::
 
  # via a GET or DELETE call to the following URL
- http://IP_address/rest/object/<object_type>/<object_name>
+ http://IP_address/rest/instance/<instance_type>/<instance_name>
 
-``<object_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``.
-``<object_name>`` is to be replaced by the name of the object.
+``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``.
+``<instance_name>`` is to be replaced by the name of the instance.
 
 .. image:: /_static/automation/rest/get_object.png
    :alt: GET call to retrieve a device
    :align: center
 
-Create or update an object
+Create or update an instance
 **************************
 
 ::
 
  # via a POST or PUT call to the following URL
- http://IP_address/rest/object/object_type
+ http://IP_address/rest/instance/instance_type
 
 Run a service, or a workflow)
 *****************************
@@ -82,7 +82,7 @@ The migration system can be triggered from the ReST API:
  # Import: via a POST call to the following URL
  http://IP_address/rest/migrate/import
 
-The payload must contain the name of the project, the types of object to import/export, and an boolean parameter called ``empty_database_before_import`` that tells eNMS whether or not to empty the database before importing.
+The payload must contain the name of the project, the types of instance to import/export, and an boolean parameter called ``empty_database_before_import`` that tells eNMS whether or not to empty the database before importing.
 
 Example of payload:
 

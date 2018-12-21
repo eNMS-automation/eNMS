@@ -108,6 +108,14 @@ Event-driven automation in eNMS has two aspects:
 
 Docs: _[ReST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.html)_
 
+## Notification system
+
+After a service or a workflow is executed, you can configure eNMS to send a notification.
+Three types of notification are available:
+- via mail (a brief summary and the full logs attached as a textfile)
+- via Slack
+- via Mattermost (Open-Source and private alternative to Slack)
+
 ___
 
 # Advanced features
@@ -157,7 +165,6 @@ ___
 
 # Coming up next
 
-- A notification system (send the results of an automation task via mail or Slack)
 - Gitlab support (e.g push the logs of an automation task to gitlab)
 - RADIUS + Active Directory authentication
 

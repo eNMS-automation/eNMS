@@ -22,7 +22,7 @@ For an incoming Syslog message to match the rule, both the "Source IP" and "Cont
 All log rules are listed in a table in :guilabel:`logs/log_automation`:
 
 .. image:: /_static/automation/log_rule_table.png
-   :alt: Creation of a log rule
+   :alt: Log Rule table
    :align: center
 
 Whenever a log triggers a log rule, it is saved by eNMS in a separate table in :guilabel:`logs/log_management`.

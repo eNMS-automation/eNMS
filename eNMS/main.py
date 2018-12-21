@@ -32,6 +32,7 @@ if ldap_client:
     ldap_client.set_option(OPT_REFERRALS, 0)
 
 login_manager = LoginManager()
+login_manager.session_protection = 'strong'
 
 mail_client = Mail()
 

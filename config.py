@@ -102,6 +102,12 @@ class ProductionConfig(Config):
     UNSEAL_VAULT_KEY4 = environ.get('UNSEAL_VAULT_KEY4')
     UNSEAL_VAULT_KEY5 = environ.get('UNSEAL_VAULT_KEY5')
 
+    # Security
+    SESSION_COOKIE_SECURE = True
+    REMEMBER_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True
+
 
 class SeleniumConfig(Config):
     DEBUG = True

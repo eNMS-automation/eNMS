@@ -13,7 +13,7 @@ class Log(Base):
 
     __tablename__ = type = 'Log'
     id = Column(Integer, primary_key=True)
-    source_ip_address = Column(String)
+    source_ip = Column(String)
     content = Column(String)
     log_rules = relationship(
         'LogRule',
@@ -21,8 +21,8 @@ class Log(Base):
         back_populates='logs'
     )
 
-    def __init__(self, source_ip_address, content, log_rules):
-        self.source_ip_address = source_ip_address
+    def __init__(self, source_ip, content, log_rules):
+        self.source_ip = source_ip
         self.content = content
         self.log_rules = log_rules
 
@@ -56,13 +56,12 @@ class SyslogUDPHandler(BaseRequestHandler):
     def handle(self):
         with scheduler.app.app_context():
             data = str(bytes.decode(self.request[0].strip()))
-            print(data)
             source, _ = self.client_address
             log_rules = []
             for log_rule in LogRule.query.all():
                 source_match = (
                     search(log_rule.source_ip, source)
-                    if log_rule.source__ip_regex
+                    if log_rule.source_ip_regex
                     else log_rule.source_ip in source
                 )
                 content_match = (

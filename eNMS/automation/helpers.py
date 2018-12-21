@@ -62,6 +62,15 @@ def space_deleter(input):
     return ''.join(input.split())
 
 
+def is_subdict(source, sub):
+    for k, v in source.items():
+        if isinstance(v, dict):
+            is_subdict(v, sub)
+        elif k in sub and sub[k] == v:
+            sub.pop(k)
+    return not sub
+
+
 def scheduler_job(job_id, aps_job_id=None, targets=None):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)

@@ -8,43 +8,43 @@ from tests.test_base import check_blueprints
 
 @check_blueprints('/inventory')
 def test_rest_api_basic(user_client):
-    # assert len(fetch_all('Device')) == 28
-    # post(
-    #     'http://192.168.105.2:5000/rest/instance/device',
-    #     json={'name': 'new_router', 'model': 'Cisco'},
-    #     auth=HTTPBasicAuth('admin', 'admin')
-    # )
-    # assert len(fetch_all('Device')) == 29
-    # result = get(
-    #     'http://192.168.105.2:5000/rest/instance/device/Washington',
-    #     auth=HTTPBasicAuth('admin', 'admin')
-    # ).json()
-    # assert result['model'] == 'Arista' and len(result) == 14
-    # post(
-    #     'http://192.168.105.2:5000/rest/instance/device',
-    #     json={'name': 'Washington', 'model': 'Cisco'},
-    #     auth=HTTPBasicAuth('admin', 'admin')
-    # )
-    # result = get(
-    #     'http://192.168.105.2:5000/rest/instance/device/Washington',
-    #     auth=HTTPBasicAuth('admin', 'admin')
-    # ).json()
-    # assert result['model'] == 'Cisco' and len(result) == 14
-    # result = get(
-    #     'http://192.168.105.2:5000/rest/instance/service/get_facts',
-    #     auth=HTTPBasicAuth('admin', 'admin')
-    # ).json()
-    # assert result['description'] == 'Getter: get_facts' and len(result) == 24
-    # put(
-    #     'http://192.168.105.2:5000/rest/instance/service',
-    #     json={'name': 'get_facts', 'description': 'Get facts'},
-    #     auth=HTTPBasicAuth('admin', 'admin')
-    # )
-    # result = get(
-    #     'http://192.168.105.2:5000/rest/instance/service/get_facts',
-    #     auth=HTTPBasicAuth('admin', 'admin')
-    # ).json()
-    # assert result['description'] == 'Get facts' and len(result) == 24
+    assert len(fetch_all('Device')) == 28
+    post(
+        'http://192.168.105.2:5000/rest/instance/device',
+        json={'name': 'new_router', 'model': 'Cisco'},
+        auth=HTTPBasicAuth('admin', 'admin')
+    )
+    assert len(fetch_all('Device')) == 29
+    result = get(
+        'http://192.168.105.2:5000/rest/instance/device/Washington',
+        auth=HTTPBasicAuth('admin', 'admin')
+    ).json()
+    assert result['model'] == 'Arista' and len(result) == 14
+    post(
+        'http://192.168.105.2:5000/rest/instance/device',
+        json={'name': 'Washington', 'model': 'Cisco'},
+        auth=HTTPBasicAuth('admin', 'admin')
+    )
+    result = get(
+        'http://192.168.105.2:5000/rest/instance/device/Washington',
+        auth=HTTPBasicAuth('admin', 'admin')
+    ).json()
+    assert result['model'] == 'Cisco' and len(result) == 14
+    result = get(
+        'http://192.168.105.2:5000/rest/instance/service/get_facts',
+        auth=HTTPBasicAuth('admin', 'admin')
+    ).json()
+    assert result['description'] == 'Getter: get_facts' and len(result) == 24
+    put(
+        'http://192.168.105.2:5000/rest/instance/service',
+        json={'name': 'get_facts', 'description': 'Get facts'},
+        auth=HTTPBasicAuth('admin', 'admin')
+    )
+    result = get(
+        'http://192.168.105.2:5000/rest/instance/service/get_facts',
+        auth=HTTPBasicAuth('admin', 'admin')
+    ).json()
+    assert result['description'] == 'Get facts' and len(result) == 24
     assert len(fetch_all('Service')) == 21
     result = post(
         'http://192.168.105.2:5000/rest/instance/service',
@@ -55,10 +55,10 @@ def test_rest_api_basic(user_client):
     assert len(fetch_all('Workflow')) == 4
     result = post(
         'http://192.168.105.2:5000/rest/instance/workflow',
-        json={'name': 'new_workflow', 'description': 'NewNew'},
+        json={'name': 'new_workflow', 'description': 'New'},
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['description'] == 'NewNew' and len(fetch_all('Service')) == 5
+    assert result['description'] == 'New' and len(fetch_all('Workflow')) == 5
 
 
 # @check_blueprints('/automation')

@@ -207,13 +207,13 @@ user_permissions = [
 ]
 
 log_public_properties = [
-    'source_ip_address',
+    'source_ip',
     'content'
 ]
 
 log_rule_public_properties = log_public_properties + [
     'name',
-    'source_ip_address_regex',
+    'source_ip_regex',
     'content_regex',
     'jobs'
 ]
@@ -377,7 +377,7 @@ pretty_names = {
     'source': 'Source',
     'source_name': 'Source',
     'source_file': 'Source file',
-    'source_ip_address': 'Source IP address',
+    'source_ip': 'Source IP address',
     'status': 'Status',
     'subtype': 'Subtype',
     'text file': 'File',

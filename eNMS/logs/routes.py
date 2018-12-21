@@ -9,7 +9,7 @@ from eNMS.logs.forms import LogAutomationForm
 @get(bp, '/log_management', 'View')
 def log_management():
     return dict(
-        fields=('source_ip_address', 'content'),
+        fields=('source_ip', 'content'),
         logs=serialize('Log')
     )
 
@@ -18,7 +18,7 @@ def log_management():
 def log_automation():
     return dict(
         log_automation_form=LogAutomationForm(request.form),
-        fields=('name', 'source_ip_address', 'content'),
+        fields=('name', 'source_ip', 'content'),
         log_rules=serialize('LogRule')
     )
 

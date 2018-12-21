@@ -51,7 +51,7 @@ def test_rest_api_basic(user_client):
         json={'name': 'new_service', 'vendor': 'Cisco'},
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['vendor'] = 'Cisco'
+    assert result['vendor'] == 'Cisco'
     assert len(fetch_all('Service')) == 22
     assert len(fetch_all('Service')) == 4
     post(

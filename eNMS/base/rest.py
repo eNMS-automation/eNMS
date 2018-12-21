@@ -70,10 +70,10 @@ class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
     def post(self, cls):
-        return factory(cls, **request.get_json()).name
+        return factory(cls, **request.get_json()).serialized
 
     def put(self, cls):
-        return factory(cls, **request.get_json()).name
+        return factory(cls, **request.get_json()).serialized
 
 
 class Migrate(Resource):

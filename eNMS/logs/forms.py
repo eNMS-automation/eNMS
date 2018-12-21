@@ -13,11 +13,7 @@ def configure_form(cls):
 
 
 @configure_form
-class LogFilteringForm(FlaskForm):
-    pass
-
-
-class LogAutomationForm(LogFilteringForm):
+class LogAutomationForm(FlaskForm):
     id = HiddenField()
     list_fields = HiddenField(default='jobs')
     name = StringField()

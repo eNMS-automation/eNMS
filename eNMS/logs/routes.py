@@ -3,13 +3,12 @@ from re import search
 
 from eNMS.base.helpers import get, post, serialize
 from eNMS.logs import bp
-from eNMS.logs.forms import LogAutomationForm, LogFilteringForm
+from eNMS.logs.forms import LogAutomationForm
 
 
 @get(bp, '/log_management', 'View')
 def log_management():
     return dict(
-        log_filtering_form=LogFilteringForm(request.form),
         fields=('source_ip_address', 'content'),
         logs=serialize('Log')
     )

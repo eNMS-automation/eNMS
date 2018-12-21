@@ -26,7 +26,7 @@ Retrieve or delete an instance
 ``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``.
 ``<instance_name>`` is to be replaced by the name of the instance.
 
-.. image:: /_static/automation/rest/get_object.png
+.. image:: /_static/automation/rest/get_instance.png
    :alt: GET call to retrieve a device
    :align: center
 

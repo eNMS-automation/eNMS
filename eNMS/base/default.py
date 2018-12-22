@@ -106,6 +106,7 @@ def create_default_services():
             'type': 'ConfigurationBackupService',
             'name': 'configuration_backup',
             'description': 'Back up device configurations',
+            'multiprocessing': True,
             'creator': admin
         }
     ):
@@ -113,7 +114,14 @@ def create_default_services():
 
 
 @integrity_rollback
-def create_default_tasks():
+def create_default_tasks(app):
+    tasks = [{
+        'name': 'configuration_backup',
+        'description': 'Back up device configurations',
+        'job': fetch('Service', name='configuration_backup').id,
+        'frequency': 3600,
+    }]
+    
     for task in (
         {
         'name': 'cluster_monitoring',
@@ -121,13 +129,15 @@ def create_default_tasks():
         'job': fetch('Service', name='cluster_monitoring').id,
         'frequency': 15,
         },
-        {
-        'name': 'configuration_backup',
-        'description': 'Back up device configurations',
-        'job': fetch('Service', name='cluster_monitoring').id,
-        'frequency': 15,
-        },
-    factory('Task', **)
+    if app.config['CLUSTER']:
+        tasks.append({
+            'name': 'configuration_backup',
+            'description': 'Back up device configurations',
+            'job': fetch('Service', name='configuration_backup').id,
+            'frequency': 3600,
+        })
+    ):
+        factory('Task', **task)
 
 
 @integrity_rollback

@@ -86,8 +86,6 @@ class Device(CustomDevice):
         back_populates='devices'
     )
 
-    class_type = 'device'
-
 
 class Link(Object):
 
@@ -134,8 +132,6 @@ class Link(Object):
     @property
     def destination_name(self):
         return self.destination.name
-
-    class_type = 'link'
 
 
 AbstractPool = type('AbstractPool', (Base,), {
@@ -198,19 +194,11 @@ class Pool(AbstractPool):
 
     def object_match(self, obj):
         return all(
-            # if the device-regex property is not in the request, the
-            # regex box is unticked and we only check that the values
-            # are equal.
             str(value) == getattr(self, f'{obj.class_type}_{prop}')
             if not getattr(self, f'{obj.class_type}_{prop}_regex')
-            # if it is ticked, we use re.search to check that the value
-            # of the device property matches the regular expression.
             else search(getattr(self, f'{obj.class_type}_{prop}'), str(value))
             for prop, value in obj.__dict__.items()
-            # we consider only the properties in the form
             if f'{obj.class_type}_{prop}' in self.__dict__
-            # providing that the property field in the form is not empty
-            # (empty field <==> property ignored)
             and getattr(self, f'{obj.class_type}_{prop}')
         )
 

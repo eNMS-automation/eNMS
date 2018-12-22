@@ -1,5 +1,13 @@
 from re import search
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
+from sqlalchemy import (
+    Boolean,
+    Column,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String,
+    Float
+)
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 
@@ -66,7 +74,7 @@ class Device(CustomDevice):
     netmiko_driver = Column(String)
     napalm_driver = Column(String)
     configuration_command = Column(String)
-    configurations = 
+    configurations = Column(MutableDict.as_mutable(PickleType), default={})
     jobs = relationship(
         'Job',
         secondary=job_device_table,

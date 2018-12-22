@@ -50,7 +50,7 @@ def device_management():
 
 
 @get(bp, '/configuration_management', 'View')
-def device_management():
+def configuration_management():
     return dict(
         fields=device_configuration_properties,
         devices=serialize('Device'),

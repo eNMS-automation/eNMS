@@ -16,13 +16,6 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="min-height: 90vh">
           <div style="min-height:90vh;" class="x_content">
-            <div class="panel-group">
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-default btn-file" onclick="showCreateModal('device')" style="width:100%;">
-                  Create a New Device
-                </button>
-              </div>
-            </div>
             <div class="page-title">
               <div class="title_left">
                 <h3>Existing Devices</h3>
@@ -34,11 +27,8 @@
                   {% for field in fields %}
                     <th>{{ names[field] }}</th>
                   {% endfor %}
-                  <th style="width: 5%">Automation</th>
                   <th style="width: 5%">Connect</th>
                   <th style="width: 5%">Edit</th>
-                  <th style="width: 5%">Duplicate</th>
-                  <th style="width: 5%">Delete</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -60,5 +50,5 @@
     var devices = {{ devices|tojson|safe }};
   </script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
-  <script src="{{ url_for('inventory_blueprint.static', filename='deviceManagement.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='configurationManagement.js') }}"></script>
 {% endblock javascripts %}

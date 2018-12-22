@@ -121,22 +121,14 @@ def create_default_tasks(app):
         'job': fetch('Service', name='configuration_backup').id,
         'frequency': 3600,
     }]
-    
-    for task in (
-        {
-        'name': 'cluster_monitoring',
-        'description': 'Monitor eNMS cluster',
-        'job': fetch('Service', name='cluster_monitoring').id,
-        'frequency': 15,
-        },
     if app.config['CLUSTER']:
         tasks.append({
-            'name': 'configuration_backup',
-            'description': 'Back up device configurations',
-            'job': fetch('Service', name='configuration_backup').id,
-            'frequency': 3600,
+            'name': 'cluster_monitoring',
+            'description': 'Monitor eNMS cluster',
+            'job': fetch('Service', name='cluster_monitoring').id,
+            'frequency': 15,
         })
-    ):
+    for task in tasks:
         factory('Task', **task)
 
 

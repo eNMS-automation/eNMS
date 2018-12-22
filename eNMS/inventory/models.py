@@ -61,6 +61,7 @@ class Device(CustomDevice):
 
     __tablename__ = 'Device'
     __mapper_args__ = {'polymorphic_identity': 'Device'}
+    class_type = 'device'
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
@@ -91,6 +92,7 @@ class Link(Object):
 
     __tablename__ = 'Link'
     __mapper_args__ = {'polymorphic_identity': 'Link'}
+    class_type = 'link'
     id = Column(Integer, ForeignKey('Object.id'), primary_key=True)
     source_id = Column(Integer, ForeignKey('Device.id'))
     destination_id = Column(Integer, ForeignKey('Device.id'))

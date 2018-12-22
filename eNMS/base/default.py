@@ -101,6 +101,12 @@ def create_default_services():
             'name': 'cluster_monitoring',
             'description': 'Monitor eNMS cluster',
             'creator': admin
+        },
+        {
+            'type': 'ConfigurationBackupService',
+            'name': 'configuration_backup',
+            'description': 'Back up device configurations',
+            'creator': admin
         }
     ):
         factory(service.pop('type'), **service)
@@ -108,12 +114,20 @@ def create_default_services():
 
 @integrity_rollback
 def create_default_tasks():
-    factory('Task', **{
+    for task in (
+        {
         'name': 'cluster_monitoring',
         'description': 'Monitor eNMS cluster',
         'job': fetch('Service', name='cluster_monitoring').id,
         'frequency': 15,
-    })
+        },
+        {
+        'name': 'configuration_backup',
+        'description': 'Back up device configurations',
+        'job': fetch('Service', name='cluster_monitoring').id,
+        'frequency': 15,
+        },
+    factory('Task', **)
 
 
 @integrity_rollback

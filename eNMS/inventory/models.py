@@ -1,5 +1,6 @@
 from re import search
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
+from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 
 from eNMS.base.associations import (
@@ -62,6 +63,10 @@ class Device(CustomDevice):
     username = Column(String)
     password = Column(String)
     enable_password = Column(String)
+    netmiko_driver = Column(String)
+    napalm_driver = Column(String)
+    configuration_command = Column(String)
+    configurations = 
     jobs = relationship(
         'Job',
         secondary=job_device_table,

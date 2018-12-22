@@ -76,22 +76,24 @@ link_subtype_to_color = {
     'pseudowire': '#902bec'
 }
 
-device_public_properties = object_common_properties[1:] + [
+device_table_properties = object_common_properties[1:] + [
     'operating_system',
     'os_version',
+    'netmiko_driver',
+    'napalm_driver',
     'ip_address',
+    'port'
+] + list(custom_properties)
+
+device_public_properties = device_table_properties + [
     'longitude',
     'latitude',
-    'port',
     'username'
-] + list(custom_properties)
+]
 
 device_configuration_properties = [
     'name',
-    'vendor',
-    'operating_system',
-    'netmiko_driver',
-    'napalm_driver'
+    'configuration_command'
 ]
 
 task_properties = base_properties + [
@@ -369,6 +371,8 @@ pretty_names = {
     'model': 'Model',
     'name': 'Name',
     'negative_logic': 'Negative Logic',
+    'netmiko_driver': 'Netmiko driver',
+    'napalm_driver': 'Napalm driver',
     'operating_system': 'Operating System',
     'optional_args': 'Optional arguments',
     'os_version': 'OS version',

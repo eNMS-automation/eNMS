@@ -20,6 +20,7 @@ from eNMS.inventory.forms import (
     AddLink,
     AddDevice,
     AddPoolForm,
+    ConfigurationManagementForm,
     DeviceAutomationForm,
     GottyConnectionForm,
     ImportExportForm,
@@ -30,6 +31,7 @@ from eNMS.inventory.forms import (
 )
 from eNMS.inventory.helpers import object_export, object_import
 from eNMS.base.properties import (
+    device_configuration_properties,
     device_public_properties,
     link_table_properties,
     pool_table_properties
@@ -43,6 +45,16 @@ def device_management():
         devices=serialize('Device'),
         add_device_form=AddDevice(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
+        gotty_connection_form=GottyConnectionForm(request.form)
+    )
+
+
+@get(bp, '/configuration_management', 'View')
+def device_management():
+    return dict(
+        fields=device_configuration_properties,
+        devices=serialize('Device'),
+        add_device_form=ConfigurationManagementForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form)
     )
 

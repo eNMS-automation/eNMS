@@ -82,6 +82,10 @@ class AddDevice(AddObjectForm):
     enable_password = PasswordField()
 
 
+class ConfigurationManagementForm(FlaskForm):
+    pass
+
+
 class AddLink(AddObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)

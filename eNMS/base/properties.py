@@ -86,6 +86,14 @@ device_public_properties = object_common_properties[1:] + [
     'username'
 ] + list(custom_properties)
 
+device_configuration_properties = [
+    'name',
+    'vendor',
+    'operating_system',
+    'netmiko_driver',
+    'napalm_driver'
+]
+
 task_properties = base_properties + [
     'job_name',
     'start_date',

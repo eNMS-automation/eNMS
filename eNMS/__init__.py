@@ -31,8 +31,6 @@ def register_extensions(app):
     login_manager.init_app(app)
     mail_client.init_app(app)
     scheduler.app = app
-    if not scheduler.running:
-        scheduler.start()
 
 
 def register_blueprints(app):
@@ -87,11 +85,13 @@ def configure_database(app):
         create_default_users()
         create_default_parameters()
         configure_instance_id()
+        create_default_pools()
         create_default_services()
         if app.config['CREATE_EXAMPLES']:
             create_default_examples(app)
-        create_default_pools()
         create_default_tasks(app)
+        if not scheduler.running:
+            scheduler.start()
 
 
 def configure_errors(app):

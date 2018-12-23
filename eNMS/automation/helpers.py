@@ -72,8 +72,10 @@ def is_subdict(source, sub):
 
 
 def scheduler_job(job_id, aps_job_id=None, targets=None):
+    print(job_id)
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)
+        print(job)
         if targets:
             targets = [
                 fetch('Device', id=device_id)

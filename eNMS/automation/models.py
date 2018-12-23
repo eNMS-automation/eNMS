@@ -156,8 +156,8 @@ class Job(Base):
             targets = self.compute_targets()
         if targets:
             results = {'result': {'devices': {}}}
-            if self.multiprocessing:
-                processes = min(max(len(targets), 1), self.max_processes)
+            if self.multiprocessing and targets:
+                processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
                 pool.map(
                     self.device_run,

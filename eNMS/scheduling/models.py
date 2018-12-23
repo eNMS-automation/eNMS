@@ -13,6 +13,7 @@ class Task(Base):
     __tablename__ = 'Task'
     type = 'Task'
     id = Column(Integer, primary_key=True)
+    aps_job_id = Column(Integer)
     name = Column(String, unique=True)
     description = Column(String)
     creation_time = Column(String)
@@ -28,6 +29,7 @@ class Task(Base):
         super().update(**kwargs)
         self.status = 'Active'
         self.creation_time = str(datetime.now())
+        self.aps_job_id = kwargs.get('aps_job_id', self.creation_time)
         self.schedule()
 
     def update(self, **kwargs):
@@ -65,7 +67,7 @@ class Task(Base):
 
     def kwargs(self):
         default = {
-            'id': self.creation_time,
+            'id': self.aps_job_id,
             'func': scheduler_job,
             'replace_existing': True,
             'args': [self.job.id, self.creation_time]

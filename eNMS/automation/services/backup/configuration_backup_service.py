@@ -18,7 +18,7 @@ class ConfigurationBackupService(Service):
         'polymorphic_identity': 'ConfigurationBackupService',
     }
 
-    def job(self, device, _):
+    def job(self, device):
         netmiko_handler = netmiko_connection(self, device)
         config = netmiko_handler.send_command(device.configuration_command)
         device.configurations[datetime.now()] = config
@@ -26,7 +26,7 @@ class ConfigurationBackupService(Service):
             device.configurations.pop(min(device.configurations))
         return {
             'success': True,
-            'result': config
+            'result': f'Command: {device.configuration_command}'
         }
 
 

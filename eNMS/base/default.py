@@ -116,13 +116,15 @@ def create_default_services():
 @integrity_rollback
 def create_default_tasks(app):
     tasks = [{
+        'aps_job_id': 'configuration_backup',
         'name': 'configuration_backup',
         'description': 'Back up device configurations',
         'job': fetch('Service', name='configuration_backup').id,
-        'frequency': 3600,
+        'frequency': 15,
     }]
     if app.config['CLUSTER']:
         tasks.append({
+            'aps_job_id': 'cluster_monitoring',
             'name': 'cluster_monitoring',
             'description': 'Monitor eNMS cluster',
             'job': fetch('Service', name='cluster_monitoring').id,

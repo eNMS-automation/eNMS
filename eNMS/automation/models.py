@@ -221,6 +221,7 @@ class WorkflowEdge(Base):
 
     __tablename__ = type = 'WorkflowEdge'
     id = Column(Integer, primary_key=True)
+    has_targets = Column(Boolean)
     name = Column(String)
     subtype = Column(String)
     source_id = Column(Integer, ForeignKey('Job.id'))

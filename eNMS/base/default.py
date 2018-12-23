@@ -271,6 +271,7 @@ def create_netmiko_workflow():
     workflow = factory('Workflow', **{
         'name': 'Netmiko_VRF_workflow',
         'description': 'Create and delete a VRF with Netmiko',
+        'has_targets': True,
         'creator': admin,
         'devices': devices,
         'vendor': 'Arista',
@@ -301,6 +302,7 @@ def create_napalm_workflow():
     services = [factory('NapalmConfigurationService', **{
         'name': 'napalm_create_vrf_test',
         'description': 'Create a VRF "test" with Napalm',
+        'has_targets': True,
         'waiting_time': 0,
         'devices': devices,
         'creator': admin,
@@ -387,6 +389,7 @@ def create_payload_transfer_workflow():
     workflow = factory('Workflow', **{
         'name': 'payload_transfer_workflow',
         'description': 'ReST call, Napalm getters, etc',
+        'has_targets': True,
         'creator': admin,
         'devices': devices,
         'vendor': 'Arista',
@@ -435,6 +438,7 @@ def create_workflow_of_workflows():
     workflow = factory('Workflow', **{
         'name': 'Workflow_of_workflows',
         'description': 'Test the inner workflow system',
+        'has_targets': True,
         'devices': devices,
         'creator': admin,
         'vendor': 'Arista',

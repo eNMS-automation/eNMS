@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer
 
 from eNMS.automation.helpers import netmiko_connection
 from eNMS.automation.models import Service
@@ -13,6 +13,12 @@ class ConfigurationBackupService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
+    driver = Column(String)
+    driver_values = NETMIKO_DRIVERS
+    use_driver_from_device = Column(Boolean)
+    fast_cli = Column(Boolean, default=False)
+    timeout = Column(Integer, default=10.)
+    global_delay_factor = Column(Float, default=1.)
 
     __mapper_args__ = {
         'polymorphic_identity': 'ConfigurationBackupService',

@@ -1,4 +1,11 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import (
+    Boolean,
+    Column,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String
+)
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.automation.helpers import (

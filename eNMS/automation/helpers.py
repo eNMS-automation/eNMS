@@ -42,7 +42,9 @@ def napalm_connection(service, device):
         optional_args = {}
     if 'secret' not in optional_args:
         optional_args['secret'] = device.enable_password
-    driver = get_network_driver(service.driver)
+    driver = get_network_driver(
+        device.napalm_driver if use_device_driver else service.driver
+    )
     return driver(
         hostname=device.ip_address,
         username=username,

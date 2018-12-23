@@ -22,9 +22,13 @@ def get_credentials(service, device):
 
 def netmiko_connection(service, device):
     username, password = get_credentials(service, device)
-    driver = device.netmiko_driver if use_device_driver else service.driver
+    driver = device.netmiko_driver if self.use_device_driver 
     return ConnectHandler(
-        device_type=service.driver,
+        device_type=(
+            device.netmiko_driver
+            if self.use_device_driver
+            else service.driver
+        ),
         ip=device.ip_address,
         username=username,
         password=password,
@@ -43,7 +47,9 @@ def napalm_connection(service, device):
     if 'secret' not in optional_args:
         optional_args['secret'] = device.enable_password
     driver = get_network_driver(
-        device.napalm_driver if use_device_driver else service.driver
+        device.napalm_driver
+        if self.use_device_driver
+        else service.driver
     )
     return driver(
         hostname=device.ip_address,

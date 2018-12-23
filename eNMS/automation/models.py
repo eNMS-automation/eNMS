@@ -146,7 +146,6 @@ class Job(Base):
         return results, now
 
     def get_results(self, payload, device=None):
-        print(payload, device)
         try:
             return self.job(device, payload) if device else self.job(payload)
         except Exception as e:
@@ -155,11 +154,6 @@ class Job(Base):
     def run(self, payload=None, targets=None):
         if not targets:
             targets = self.compute_targets()
-        if self.has_targets ^ bool(targets):
-            return {
-                'success': False,
-                'result': 'Targets improperly configured.'
-            }, None
         if targets:
             results = {'result': {'devices': {}}}
             if self.multiprocessing:
@@ -221,7 +215,6 @@ class WorkflowEdge(Base):
 
     __tablename__ = type = 'WorkflowEdge'
     id = Column(Integer, primary_key=True)
-    has_targets = Column(Boolean)
     name = Column(String)
     subtype = Column(String)
     source_id = Column(Integer, ForeignKey('Job.id'))
@@ -251,6 +244,7 @@ class Workflow(Job):
     __tablename__ = 'Workflow'
     __mapper_args__ = {'polymorphic_identity': 'Workflow'}
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
+    use_workflow_targets = Column(Boolean, default=True)
     last_modified = Column(String)
     jobs = relationship(
         'Job',

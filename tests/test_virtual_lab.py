@@ -82,7 +82,7 @@ def test_payload_transfer_workflow(user_client):
     assert result['success'] and len(result) == 3
     post(
         'http://192.168.105.2:5000/rest/instance/Workflow',
-        json={'name': 'payload_transfer_workflow', 'has_targets': False},
+        json={'name': 'payload_transfer_workflow', 'use_workflow_targets': False},
         auth=HTTPBasicAuth('admin', 'admin')
     )
     result = post(
@@ -114,7 +114,7 @@ def test_netmiko_workflow(user_client):
     assert result['success'] and len(result) == 3
     post(
         'http://192.168.105.2:5000/rest/instance/Workflow',
-        json={'name': 'Netmiko_VRF_workflow', 'has_targets': False},
+        json={'name': 'Netmiko_VRF_workflow', 'use_workflow_targets': False},
         auth=HTTPBasicAuth('admin', 'admin')
     )
     result = post(
@@ -146,7 +146,7 @@ def test_napalm_workflow(user_client):
     assert result['success'] and len(result) == 3
     post(
         'http://192.168.105.2:5000/rest/instance/Workflow',
-        json={'name': 'Napalm_VRF_workflow', 'has_targets': False},
+        json={'name': 'Napalm_VRF_workflow', 'use_workflow_targets': False},
         auth=HTTPBasicAuth('admin', 'admin')
     )
     result = post(

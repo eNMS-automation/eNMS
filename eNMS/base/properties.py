@@ -160,7 +160,8 @@ job_public_properties = [
 
 service_public_properties = job_public_properties
 workflow_public_properties = job_public_properties + [
-    'last_modified'
+    'last_modified',
+    'has_targets'
 ]
 
 service_table_properties = [

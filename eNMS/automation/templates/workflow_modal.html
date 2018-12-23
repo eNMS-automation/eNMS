@@ -83,6 +83,12 @@
               </div>
             </div>
             <div id="step-3" style="min-height: 60vh; overflow-x: hidden;">
+              <fieldset>
+                <div class="item">
+                  <input id="workflow-has_targets" name="has_targets" type="checkbox" value="y">
+                  <label>Has targets</label>
+                </div>
+              </fieldset>
               <label><label for="devices">Devices</label></label>
               <div class='form-group'>
                 {{ workflow_creation_form.devices(id='workflow-devices', class="form-control") }}
@@ -94,7 +100,7 @@
               <fieldset>
                 <div class="item">
                   <input id="workflow-multiprocessing" name="multiprocessing" type="checkbox" value="y">
-                  <label>multiprocessing</label>
+                  <label>Multiprocessing</label>
                 </div>
               </fieldset>
               <label><label for="max_processes">Maximum number of processes</label></label>

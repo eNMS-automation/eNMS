@@ -23,6 +23,7 @@ class NapalmGettersService(Service):
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
+    use_driver_from_device = Column(Boolean, default=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
     getters_values = (
         ('get_arp_table', 'ARP table'),

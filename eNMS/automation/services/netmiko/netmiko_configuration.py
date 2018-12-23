@@ -19,6 +19,7 @@ class NetmikoConfigurationService(Service):
     content_textarea = True
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
+    use_driver_from_device = Column(Boolean, default=True)
     enable_mode = Column(Boolean)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=1.)

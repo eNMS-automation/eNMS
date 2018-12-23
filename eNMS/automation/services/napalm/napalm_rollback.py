@@ -14,6 +14,7 @@ class NapalmRollbackService(Service):
     has_targets = True
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
+    use_driver_from_device = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {

@@ -1,7 +1,7 @@
 from datetime import datetime
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import netmiko_connection
+from eNMS.automation.helpers import netmiko_connection, NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -15,7 +15,7 @@ class ConfigurationBackupService(Service):
     number_of_configuration = Column(Integer, default=10)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
-    use_driver_from_device = Column(Boolean)
+    use_driver_from_device = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.)
     global_delay_factor = Column(Float, default=1.)

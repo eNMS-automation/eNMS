@@ -12,13 +12,13 @@ class ConfigurationBackupService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
-    number_of_configuration = Column(Integer)
+    number_of_configuration = Column(Integer, default=10)
 
     __mapper_args__ = {
         'polymorphic_identity': 'ConfigurationBackupService',
     }
 
-    def job(self, device):
+    def job(self, device, _):
         netmiko_handler = netmiko_connection(self, device)
         config = netmiko_handler.send_command(device.configuration_command)
         device.configurations[datetime.now()] = config

@@ -70,7 +70,7 @@ class Task(Base):
             'id': self.aps_job_id,
             'func': scheduler_job,
             'replace_existing': True,
-            'args': [self.job.id, self.creation_time]
+            'args': [self.job.id, self.aps_job_id]
         }
         if self.frequency:
             self.periodic = True

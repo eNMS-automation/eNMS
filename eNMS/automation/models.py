@@ -146,6 +146,7 @@ class Job(Base):
         return results, now
 
     def get_results(self, payload, device=None):
+        print(payload, device)
         try:
             return self.job(device, payload) if device else self.job(payload)
         except Exception as e:
@@ -154,9 +155,14 @@ class Job(Base):
     def run(self, payload=None, targets=None):
         if not targets:
             targets = self.compute_targets()
+        if self.has_targets ^ bool(targets):
+            return {
+                'success': False,
+                'result': 'Targets improperly configured.'
+            }, None
         if targets:
             results = {'result': {'devices': {}}}
-            if self.multiprocessing and targets:
+            if self.multiprocessing:
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
                 pool.map(

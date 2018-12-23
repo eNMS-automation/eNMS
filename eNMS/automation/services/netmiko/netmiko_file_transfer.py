@@ -18,7 +18,7 @@ class NetmikoFileTransferService(Service):
     disable_md5 = Column(Boolean)
     driver = Column(String)
     driver_values = NETMIKO_SCP_DRIVERS
-    use_driver_from_device = Column(Boolean, default=True)
+    use_device_driver = Column(Boolean, default=True)
     file_system = Column(String)
     inline_transfer = Column(Boolean)
     overwrite_file = Column(Boolean)

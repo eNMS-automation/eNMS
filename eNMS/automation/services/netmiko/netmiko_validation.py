@@ -23,7 +23,7 @@ class NetmikoValidationService(Service):
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
-    use_driver_from_device = Column(Boolean, default=True)
+    use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.)
     global_delay_factor = Column(Float, default=1.)

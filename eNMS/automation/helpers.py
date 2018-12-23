@@ -22,6 +22,7 @@ def get_credentials(service, device):
 
 def netmiko_connection(service, device):
     username, password = get_credentials(service, device)
+    driver = device.netmiko_driver if use_device_driver else service.driver
     return ConnectHandler(
         device_type=service.driver,
         ip=device.ip_address,

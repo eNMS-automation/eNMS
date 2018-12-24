@@ -115,21 +115,24 @@ def create_default_services():
 
 @integrity_rollback
 def create_default_tasks(app):
-    tasks = [{
+    tasks = [
+        {
         'aps_job_id': 'configuration_backup',
         'name': 'configuration_backup',
         'description': 'Back up device configurations',
         'job': fetch('Service', name='configuration_backup').id,
         'frequency': 15,
-    }]
-    if app.config['CLUSTER']:
-        tasks.append({
-            'aps_job_id': 'cluster_monitoring',
-            'name': 'cluster_monitoring',
-            'description': 'Monitor eNMS cluster',
-            'job': fetch('Service', name='cluster_monitoring').id,
-            'frequency': 15,
-        })
+        'schedule': False
+        },
+        {
+        'aps_job_id': 'cluster_monitoring',
+        'name': 'cluster_monitoring',
+        'description': 'Monitor eNMS cluster',
+        'job': fetch('Service', name='cluster_monitoring').id,
+        'frequency': 15,
+        'schedule': app.config['CLUSTER']
+        }
+    ]
     for task in tasks:
         factory('Task', **task)
 

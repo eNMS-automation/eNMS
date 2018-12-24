@@ -27,10 +27,13 @@ class Task(Base):
 
     def __init__(self, **kwargs):
         super().update(**kwargs)
-        self.status = 'Active'
         self.creation_time = str(datetime.now())
         self.aps_job_id = kwargs.get('aps_job_id', self.creation_time)
-        self.schedule()
+        if kwargs.get('schedule', True):
+            self.status = 'Active'
+            self.schedule()
+        else:
+            self.status = 'Pause'
 
     def update(self, **kwargs):
         super().update(**kwargs)
@@ -49,18 +52,18 @@ class Task(Base):
         return self.aps_conversion(date) if date else None
 
     def pause(self):
-        scheduler.pause_job(self.creation_time)
+        scheduler.pause_job(self.aps_job_id)
         self.status = 'Pause'
         db.session.commit()
 
     def resume(self):
-        scheduler.resume_job(self.creation_time)
+        scheduler.resume_job(self.aps_job_id)
         self.status = 'Active'
         db.session.commit()
 
     def delete_task(self):
         try:
-            scheduler.remove_job(self.creation_time)
+            scheduler.remove_job(self.aps_job_id)
         except JobLookupError:
             pass
         db.session.commit()
@@ -93,7 +96,7 @@ class Task(Base):
         scheduler.add_job(**{**default, **trigger})
 
     def reschedule(self):
-        if self.creation_time not in [job.id for job in scheduler.get_jobs()]:
+        if self.aps_job_id not in [job.id for job in scheduler.get_jobs()]:
             self.schedule()
         default, trigger = self.kwargs()
         scheduler.reschedule_job(default.pop('id'), **trigger)

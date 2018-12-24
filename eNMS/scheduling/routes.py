@@ -58,10 +58,12 @@ def scheduler_action(action):
 
 @post(bp, '/<action>_task/<task_id>', 'Edit')
 def task_action(action, task_id):
+    task = fetch('Task', id=task_id)
     try:
-        getattr(fetch('Task', id=task_id), action)()
+        getattr(task, action)()
     except JobLookupError:
-        return {'error': 'This task is not scheduled.'}
+        task.reschedule()
+        getattr(task, action)()
     return True
 
 

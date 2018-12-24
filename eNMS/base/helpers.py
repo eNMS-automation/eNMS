@@ -1,4 +1,4 @@
-from flask import abort, jsonify, request, render_template
+from flask import abort, jsonify, request, render_template, Response
 from flask_login import current_user, login_required
 from functools import wraps
 from logging import info
@@ -170,7 +170,11 @@ def post(blueprint, url, permission=None):
                 f" calling the endpoint {request.url} (POST)"
             )
             try:
-                return jsonify(func(*args, **kwargs))
+                result = func(*args, **kwargs)
+                if isinstance(result, Response):
+                    return result
+                else:
+                    return jsonify(result)
             except Exception as e:
                 return jsonify({'error': str(e)})
         return inner

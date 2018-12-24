@@ -1,6 +1,6 @@
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import current_app as app, request, send_file
+from flask import current_app as app, request
 from flask_login import current_user
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -277,11 +277,4 @@ def download_configurations(device_id):
         return {'error': 'No configuration has been saved.'}
     filename = f'{device.name}_{strip_all(str(datetime.now()))}.txt'
     filepath = app.path / 'files' / 'configurations' / filename
-    with open(filepath, 'w') as file:
-        file.write(device.configurations[max(device.configurations)])
-        send_file(
-            str(filepath),
-            attachment_filename=filename,
-            as_attachment=True
-        )
-    return True
+

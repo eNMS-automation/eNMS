@@ -191,6 +191,51 @@ class Service(Job):
     id = Column(Integer, ForeignKey('Job.id'), primary_key=True)
     __mapper_args__ = {'polymorphic_identity': 'Service'}
 
+    def get_credentials(service, device):
+        return (
+            (service.creator.name, service.creator.password)
+            if service.credentials == 'user'
+            else (device.username, device.password)
+        )
+    
+    
+    def netmiko_connection(service, device):
+        username, password = get_credentials(service, device)
+        return ConnectHandler(
+            device_type=(
+                device.netmiko_driver
+                if service.use_device_driver
+                else service.driver
+            ),
+            ip=device.ip_address,
+            username=username,
+            password=password,
+            secret=device.enable_password,
+            fast_cli=service.fast_cli,
+            timeout=service.timeout,
+            global_delay_factor=service.global_delay_factor
+        )
+    
+    
+    def napalm_connection(service, device):
+        username, password = get_credentials(service, device)
+        optional_args = service.optional_args
+        if not optional_args:
+            optional_args = {}
+        if 'secret' not in optional_args:
+            optional_args['secret'] = device.enable_password
+        driver = get_network_driver(
+            device.napalm_driver
+            if service.use_device_driver
+            else service.driver
+        )
+        return driver(
+            hostname=device.ip_address,
+            username=username,
+            password=password,
+            optional_args=optional_args
+        )
+
     def match_content(self, result, match):
         if self.delete_spaces_before_matching:
             match, result = space_deleter(match), space_deleter(result)

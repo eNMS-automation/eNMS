@@ -1,4 +1,13 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String
+)
+from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
@@ -12,9 +21,16 @@ class NetmikoValidationService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
     command = Column(String)
+    validation_method = Column(String)
+    validation_method_values = (
+        ('text', 'Validation by text match'),
+        ('dict_equal', 'Validation by dictionnary equality'),
+        ('dict_included', 'Validation by dictionnary inclusion')
+    )
     content_match = Column(String)
     content_match_textarea = True
     content_match_regex = Column(Boolean)
+    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)

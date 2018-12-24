@@ -84,7 +84,7 @@ $('#compare_with').on('change', function() {
   $('#configurations').empty();
   const v1 = $('#display').val();
   const v2 = $('#compare_with').val();
-  call(`/automation/get_diff/${deviceId}/${v1}/${v2}`, function(data) {
+  call(`/inventory/get_diff/${deviceId}/${v1}/${v2}`, function(data) {
     $('#configurations').append(diffview.buildView({
       baseTextLines: data.first,
       newTextLines: data.second,

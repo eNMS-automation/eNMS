@@ -10,18 +10,6 @@ NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
 NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
-def substitute(data, variables):
-    r = compile('{{(.*?)}}')
-
-    def replace_with_locals(match):
-        return str(eval(match.group()[2:-2], variables))
-    return r.sub(replace_with_locals, data)
-
-
-def space_deleter(input):
-    return ''.join(input.split())
-
-
 def scheduler_job(job_id, aps_job_id=None, targets=None):
     with scheduler.app.app_context():
         job = fetch('Job', id=job_id)

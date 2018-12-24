@@ -237,6 +237,16 @@ class Service(Job):
             optional_args=optional_args
         )
 
+    def sub(self, data, variables):
+        r = compile('{{(.*?)}}')
+
+        def replace_with_locals(match):
+            return str(eval(match.group()[2:-2], variables))
+        return r.sub(replace_with_locals, data)
+
+    def space_deleter(self, input):
+        return ''.join(input.split())
+
     def match_content(self, result, match):
         if self.delete_spaces_before_matching:
             match, result = space_deleter(match), space_deleter(result)

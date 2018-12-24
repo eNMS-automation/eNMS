@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import netmiko_connection, NETMIKO_DRIVERS
+from eNMS.automation.helpers import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -29,7 +29,7 @@ class NetmikoValidationService(Service):
     }
 
     def job(self, device, _):
-        netmiko_handler = netmiko_connection(self, device)
+        netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
         result = netmiko_handler.send_command(command)
         match = self.sub(self.content_match, locals())

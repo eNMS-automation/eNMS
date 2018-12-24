@@ -1,6 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import napalm_connection
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -24,7 +23,7 @@ class ConfigureBgpService(Service):
     }
 
     def job(self, device, _):
-        napalm_driver = napalm_connection(self, device)
+        napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         config = f'''
             ip vrf {self.vrf_name}

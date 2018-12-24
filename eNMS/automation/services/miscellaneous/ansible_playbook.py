@@ -5,7 +5,6 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 
-from eNMS.automation.helpers import substitute
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -31,7 +30,7 @@ class AnsiblePlaybookService(Service):
     }
 
     def job(self, device, _):
-        arguments = substitute(self.arguments, locals()).split()
+        arguments = self.sub(self.arguments, locals()).split()
         command, extra_args = ['ansible-playbook'], {}
         if self.pass_device_properties:
             extra_args = device.get_properties()
@@ -42,7 +41,7 @@ class AnsiblePlaybookService(Service):
             command.extend(['-e', dumps(extra_args)])
         if self.has_targets:
             command.extend(['-i', device.ip_address + ','])
-        command.append(substitute(self.playbook_path, locals()))
+        command.append(self.sub(self.playbook_path, locals()))
         info(f"Sending Ansible playbook: {' '.join(command + arguments)}")
         result = check_output(command + arguments)
         info(result)
@@ -54,7 +53,7 @@ class AnsiblePlaybookService(Service):
             result = loads(result)
         except JSONDecodeError:
             pass
-        match = substitute(self.content_match, locals())
+        match = self.sub(self.content_match, locals())
         return {
             'expected': match,
             'negative_logic': self.negative_logic,

@@ -8,7 +8,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
+from eNMS.automation.helpers import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -36,7 +36,7 @@ class NapalmConfigurationService(Service):
     }
 
     def job(self, device, _):
-        napalm_driver = napalm_connection(self, device)
+        napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         config = '\n'.join(self.sub(self.content, locals()).splitlines())
         getattr(napalm_driver, self.action)(config=config)

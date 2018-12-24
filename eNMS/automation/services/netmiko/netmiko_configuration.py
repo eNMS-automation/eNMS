@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import netmiko_connection, NETMIKO_DRIVERS
+from eNMS.automation.helpers import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -26,7 +26,7 @@ class NetmikoConfigurationService(Service):
     }
 
     def job(self, device, _):
-        netmiko_handler = netmiko_connection(self, device)
+        netmiko_handler = self.netmiko_connection(device)
         if self.enable_mode:
             netmiko_handler.enable()
         config = self.sub(self.content, locals())

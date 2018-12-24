@@ -276,10 +276,11 @@ def download_configurations(device_id):
     if not device.configurations:
         return {'error': 'No configuration has been saved.'}
     filename = f'{device.name}_{strip_all(str(datetime.now()))}.txt'
-    with open(filename, 'w') as file:
+    filepath = app.path / 'files' / 'configurations' / filename
+    with open(filepath, 'w') as file:
         file.write(device.configurations[max(device.configurations)])
         send_file(
-            file,
+            str(filepath),
             attachment_filename=filename,
             as_attachment=True
         )

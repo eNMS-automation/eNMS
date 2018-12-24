@@ -271,7 +271,11 @@ def clear_configurations(device_id):
 
 @post(bp, '/download_configuration/<device_id>', 'Edit')
 def download_configurations(device_id):
-    with open(f'{device.name}_{datetime.now()}', 'w') as configuration_file:
-        configuration = device.configurations[max(device.configurations)]
-        configuration_file.write(configuration)
+    device = fetch('Device', id=device_id)
+    if not device.configurations:
+        return {'error': 'No configuration has been saved.'}
+    now = str(datetime.now()).replace('.', '-')
+    with open(f'{device.name}_{now}.txt', 'w') as file:
+        file.write(device.configurations[max(device.configurations)])
+        send_file(file)
     return True

@@ -16,8 +16,6 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  {% include 'confirm_deletion_modal.html' %}
-  {% include 'connection_parameters_modal.html' %}
   <div id="configurations-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -65,12 +63,12 @@
               <thead>
                 <tr>
                   <th style="width: 10%">Name</th>
-                  <th style="width: 60%">Command to show the configuration</th>
+                  <th style="width: 50%">Command to display the configuration</th>
+                  <th style="width: 20%">Last failure</th>
+                  <th style="width: 10%">Last runtime</th>
                   <th style="width: 20%">Last update</th>
                   <th style="width: 10%">Last status</th>
                   <th style="width: 5%">Configuration</th>
-                  <th style="width: 5%">Connect</th>
-                  <th style="width: 5%">Edit</th>
                 </tr>
               </thead>
               <tbody></tbody>

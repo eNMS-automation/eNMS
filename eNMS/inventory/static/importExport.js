@@ -13,7 +13,7 @@ document.getElementById('file').onchange = function() {
  * Query openNMS server.
  */
 function queryOpenNMS() { // eslint-disable-line no-unused-vars
-  fCall('/objects/query_opennms', '#opennms_form', function() {
+  fCall('/inventory/query_opennms', '#opennms_form', function() {
     alertify.notify('Topology imported from OpenNMS.', 'success', 5);
   });
 }
@@ -22,7 +22,7 @@ function queryOpenNMS() { // eslint-disable-line no-unused-vars
  * Query Netbox server.
  */
 function queryNetbox() { // eslint-disable-line no-unused-vars
-  fCall('/objects/query_netbox', '#netbox_form', function() {
+  fCall('/inventory/query_netbox', '#netbox_form', function() {
     alertify.notify('Topology imported from Netbox.', 'success', 5);
   });
 }
@@ -31,7 +31,7 @@ function queryNetbox() { // eslint-disable-line no-unused-vars
  * Query libreNMS server.
  */
 function queryLibreNMS() { // eslint-disable-line no-unused-vars
-  fCall('/objects/query_librenms', '#librenms_form', function() {
+  fCall('/inventory/query_librenms', '#librenms_form', function() {
     alertify.notify('Topology imported from LibreNMS.', 'success', 5);
   });
 }
@@ -40,7 +40,7 @@ function queryLibreNMS() { // eslint-disable-line no-unused-vars
  * Export topology.
  */
 function exportTopology() { // eslint-disable-line no-unused-vars
-  fCall('/objects/export_topology', '#import-form', function() {
+  fCall('/inventory/export_topology', '#import-form', function() {
     alertify.notify('Topology successfully exported.', 'success', 5);
   });
 }
@@ -54,7 +54,7 @@ function importTopology() { // eslint-disable-line no-unused-vars
     const formData = new FormData($('#import-form')[0]);
     $.ajax({
       type: 'POST',
-      url: '/objects/import_topology',
+      url: '/inventory/import_topology',
       dataType: 'json',
       data: formData,
       contentType: false,

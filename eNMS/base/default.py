@@ -106,6 +106,7 @@ def create_default_services():
             'type': 'ConfigurationBackupService',
             'name': 'configuration_backup',
             'description': 'Back up device configurations',
+            'pools': [fetch('Pool', name='Devices only').id],
             'multiprocessing': True,
             'creator': admin
         }
@@ -122,7 +123,7 @@ def create_default_tasks(app):
         'description': 'Back up device configurations',
         'job': fetch('Service', name='configuration_backup').id,
         'frequency': 15,
-        'schedule': False
+        'schedule_now': False
         },
         {
         'aps_job_id': 'cluster_monitoring',
@@ -130,7 +131,7 @@ def create_default_tasks(app):
         'description': 'Monitor eNMS cluster',
         'job': fetch('Service', name='cluster_monitoring').id,
         'frequency': 15,
-        'schedule': app.config['CLUSTER']
+        'schedule_now': app.config['CLUSTER']
         }
     ]
     for task in tasks:

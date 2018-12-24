@@ -49,7 +49,7 @@ function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Device id.
  */
 function saveDeviceJobs(id) { // eslint-disable-line no-unused-vars
-  const url = `/objects/save_device_jobs/${id}`;
+  const url = `/inventory/save_device_jobs/${id}`;
   fCall(url, '#device-automation-form', function(device) {
     alertify.notify('Changes saved.', 'success', 5);
     $('#device-automation').modal('hide');
@@ -74,7 +74,7 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
  * @param {id} id - Device id.
  */
 function sshConnection(id) {
-  const url = `/objects/connection/${id}`;
+  const url = `/inventory/connection/${id}`;
   fCall(url, '#connection-parameters-form', function(result) {
     let url = result.server_addr;
     if (!url) {

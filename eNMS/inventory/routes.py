@@ -245,22 +245,22 @@ def query_librenms():
     return True
 
 
-@post(bp, '/get_logs/<id>', 'View')
-def get_logs(id):
-    return fetch('Job', id=id).logs
+@post(bp, '/get_configurations/<id>', 'View')
+def get_configurations(id):
+    return fetch('Device', id=id).configurations
 
 
 @post(bp, '/get_diff/<job_id>/<v1>/<v2>', 'View')
 def get_diff(job_id, v1, v2, n1=None, n2=None):
-    job = fetch('Job', id=job_id)
-    first = str_dict(job.logs[v1]).splitlines()
-    second = str_dict(job.logs[v2]).splitlines()
+    job = fetch('Device', id=job_id)
+    first = str_dict(job.configurations[v1]).splitlines()
+    second = str_dict(job.configurations[v2]).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
     return {'first': first, 'second': second, 'opcodes': opcodes}
 
 
-@post(bp, '/clear_logs/<job_id>', 'Edit')
-def clear_logs(job_id):
-    fetch('Job', id=job_id).logs = {}
+@post(bp, '/clear_configurations/<job_id>', 'Edit')
+def clear_configurations(job_id):
+    fetch('Device', id=job_id).configurations = {}
     db.session.commit()
     return True

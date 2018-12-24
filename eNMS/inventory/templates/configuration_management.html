@@ -9,14 +9,14 @@
 {% block content %}
   {% include 'confirm_deletion_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
-  <div id="configuration-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div id="configurations-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title">Compare results</h4>
+          <h4 class="modal-title">Configuration</h4>
         </div>
         <div class="modal-body">
           <button class="btn btn-default btn-file" onclick="clearConfigurations()" style="width:100%;">

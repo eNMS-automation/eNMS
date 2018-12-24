@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import current_app as app, request
 from flask_login import current_user
 from pynetbox import api as netbox_api
@@ -247,20 +248,21 @@ def query_librenms():
 
 @post(bp, '/get_configurations/<id>', 'View')
 def get_configurations(id):
-    return fetch('Device', id=id).configurations
+    return {str(k): v for k, v in fetch('Device', id=id).configurations.items()}
 
 
-@post(bp, '/get_diff/<job_id>/<v1>/<v2>', 'View')
-def get_diff(job_id, v1, v2, n1=None, n2=None):
-    job = fetch('Device', id=job_id)
-    first = str_dict(job.configurations[v1]).splitlines()
-    second = str_dict(job.configurations[v2]).splitlines()
+@post(bp, '/get_diff/<device_id>/<v1>/<v2>', 'View')
+def get_diff(device_id, v1, v2, n1=None, n2=None):
+    device = fetch('Device', id=device_id)
+    v1, v2 = [datetime.strptime(d, '%Y-%m-%d %H:%M:%S.%f') for d in (v1, v2)]
+    first = device.configurations[v1].splitlines()
+    second = device.configurations[v2].splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
     return {'first': first, 'second': second, 'opcodes': opcodes}
 
 
-@post(bp, '/clear_configurations/<job_id>', 'Edit')
-def clear_configurations(job_id):
-    fetch('Device', id=job_id).configurations = {}
+@post(bp, '/clear_configurations/<device_id>', 'Edit')
+def clear_configurations(device_id):
+    fetch('Device', id=device_id).configurations = {}
     db.session.commit()
     return True

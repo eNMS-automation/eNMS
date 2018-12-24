@@ -4,6 +4,15 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <link href="{{ url_for('automation_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+  <style>
+    #main { height:90vh; }
+    @media (min-width: 1000px) {
+      .modal-lg {
+        width: 1200px;
+      }
+    }
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -82,6 +91,8 @@
     var fields = {{ fields|tojson|safe }};
     var devices = {{ devices|tojson|safe }};
   </script>
+  <!-- Difflib -->
+  <script src="{{ url_for('automation_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='configurationManagement.js') }}"></script>
 {% endblock javascripts %}

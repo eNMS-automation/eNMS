@@ -169,7 +169,6 @@ def run_job(job_id):
     if job.status == 'Running':
         return {'error': 'Job is already running.'}
     targets = job.compute_targets()
-    print(targets)
     if hasattr(job, 'has_targets'):
         if job.has_targets and not targets:
             return {'error': 'Set devices or pools as targets first.'}

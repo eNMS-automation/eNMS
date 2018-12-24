@@ -89,12 +89,15 @@ device_public_properties = device_table_properties + [
     'longitude',
     'latitude',
     'username',
-    'configuration_command'
+    'configuration_command',
+    'last_status'
 ]
 
 device_configuration_properties = [
     'name',
-    'configuration_command'
+    'configuration_command',
+    'last_update',
+    'last_status'
 ]
 
 task_properties = base_properties + [

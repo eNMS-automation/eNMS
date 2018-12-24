@@ -25,14 +25,15 @@ class ConfigurationBackupService(Service):
     }
 
     def job(self, device, _):
+        now = datetime.now()
         try:
             netmiko_handler = self.netmiko_connection(device)
             config = netmiko_handler.send_command(device.configuration_command)
-            device.last_status = 'Success'
+            device.last_status, device.last_update = 'Success', now
         except Exception as e:
-            device.last_status = 'Failure'
+            device.last_status, device.last_update = 'Failure', now
             return {'success': False, 'result': str(e)}
-        device.configurations[datetime.now()] = config
+        device.configurations[now] = config
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         return {

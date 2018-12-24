@@ -77,6 +77,7 @@ class Device(CustomDevice):
     configuration_command = Column(String)
     configurations = Column(MutableDict.as_mutable(PickleType), default={})
     last_status = Column(String, default='None')
+    last_update = Column(String, default='None')
     jobs = relationship(
         'Job',
         secondary=job_device_table,

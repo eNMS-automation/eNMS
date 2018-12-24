@@ -28,7 +28,10 @@ class ConfigurationBackupService(Service):
         now = datetime.now()
         try:
             netmiko_handler = self.netmiko_connection(device)
-            netmiko_handler.enable()
+            try:
+                netmiko_handler.enable()
+            except Exception:
+                pass
             config = netmiko_handler.send_command(device.configuration_command)
             device.last_status, device.last_update = 'Success', now
         except Exception as e:

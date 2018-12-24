@@ -1,6 +1,9 @@
 /*
 global
 addInstance: false
+alertify: false
+call: false
+diffview: false
 devices: false
 doc: false
 */

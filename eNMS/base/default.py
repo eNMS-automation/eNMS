@@ -3,7 +3,7 @@ from xlrd.biffh import XLRDError
 
 from eNMS.main import db
 from eNMS.base.classes import classes
-from eNMS.base.helpers import factory, integrity_rollback, fetch
+from eNMS.base.helpers import factory, integrity_rollback, fetch, fetch_all
 
 
 def create_default_users():
@@ -471,3 +471,5 @@ def create_default_examples(app):
     create_napalm_workflow()
     create_payload_transfer_workflow()
     create_workflow_of_workflows()
+    for pool in fetch_all('Pool'):
+        pool.compute_pool()

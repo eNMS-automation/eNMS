@@ -84,8 +84,8 @@ def configure_database(app):
         db.create_all()
         create_default_users()
         create_default_parameters()
-        configure_instance_id()
         create_default_pools()
+        configure_instance_id()
         create_default_services()
         if app.config['CREATE_EXAMPLES']:
             create_default_examples(app)

@@ -120,20 +120,20 @@ def create_default_services():
 def create_default_tasks(app):
     tasks = [
         {
-        'aps_job_id': 'configuration_backup',
-        'name': 'configuration_backup',
-        'description': 'Back up device configurations',
-        'job': fetch('Service', name='configuration_backup').id,
-        'frequency': 15,
-        'schedule_job': False
+            'aps_job_id': 'configuration_backup',
+            'name': 'configuration_backup',
+            'description': 'Back up device configurations',
+            'job': fetch('Service', name='configuration_backup').id,
+            'frequency': 15,
+            'schedule_job': False
         },
         {
-        'aps_job_id': 'cluster_monitoring',
-        'name': 'cluster_monitoring',
-        'description': 'Monitor eNMS cluster',
-        'job': fetch('Service', name='cluster_monitoring').id,
-        'frequency': 15,
-        'schedule_job': app.config['CLUSTER']
+            'aps_job_id': 'cluster_monitoring',
+            'name': 'cluster_monitoring',
+            'description': 'Monitor eNMS cluster',
+            'job': fetch('Service', name='cluster_monitoring').id,
+            'frequency': 15,
+            'schedule_job': app.config['CLUSTER']
         }
     ]
     for task in tasks:

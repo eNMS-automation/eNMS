@@ -15,7 +15,8 @@ from eNMS.base.helpers import (
     get_one,
     objectify,
     post,
-    serialize
+    serialize,
+    strip_all
 )
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
@@ -274,8 +275,12 @@ def download_configurations(device_id):
     device = fetch('Device', id=device_id)
     if not device.configurations:
         return {'error': 'No configuration has been saved.'}
-    now = str(datetime.now()).replace('.', '-')
-    with open(f'{device.name}_{now}.txt', 'w') as file:
+    filename = f'{device.name}_{strip_all(str(datetime.now()))}.txt'
+    with open(filename, 'w') as file:
         file.write(device.configurations[max(device.configurations)])
-        send_file(file)
+        send_file(
+            file,
+            attachment_filename=filename,
+            as_attachment=True
+        )
     return True

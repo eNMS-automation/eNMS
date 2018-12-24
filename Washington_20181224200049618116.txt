@@ -1,0 +1,25 @@
+! Command: show running-config
+! device: localhost (vEOS, EOS-4.21.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+transceiver qsfp default-mode 4x10G
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+username admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60
+!
+vrf definition test
+!
+interface Management1
+   ip address 192.168.105.5/24
+!
+no ip routing
+no ip routing vrf test
+!
+management api http-commands
+   no shutdown
+!
+end

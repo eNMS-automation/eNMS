@@ -19,7 +19,9 @@ let deviceId;
 function tableActions(values, device) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showConfigurations('${device.id}')">Configuration</button>`
+    onclick="showConfigurations('${device.id}')">Configuration</button>`,
+    `<button type="button" class="btn btn-primary btn-xs"
+    onclick="downloadConfiguration('${device.id}')">Download</button>`
   );
 }
 
@@ -95,6 +97,16 @@ $('#compare_with').on('change', function() {
     }));
   });
 });
+
+/**
+ * Download configuration locally as text file.
+ * @param {deviceId} deviceId - Device ID.
+ */
+function downloadConfiguration(deviceId) { // eslint-disable-line no-unused-vars
+  call(`/inventory/download_configuration/${deviceId}`, () => {
+    alertify.notify('Configuration downloaded.', 'success', 5);
+  });
+}
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');

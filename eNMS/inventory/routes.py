@@ -1,6 +1,6 @@
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import current_app as app, request
+from flask import current_app as app, request, send_file
 from flask_login import current_user
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -266,4 +266,12 @@ def get_diff(device_id, v1, v2, n1=None, n2=None):
 def clear_configurations(device_id):
     fetch('Device', id=device_id).configurations = {}
     db.session.commit()
+    return True
+
+
+@post(bp, '/download_configuration/<device_id>', 'Edit')
+def download_configurations(device_id):
+    with open(f'{device.name}_{datetime.now()}', 'w') as configuration_file:
+        configuration = device.configurations[max(device.configurations)]
+        configuration_file.write(configuration)
     return True

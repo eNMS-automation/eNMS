@@ -103,7 +103,11 @@ $('#compare_with').on('change', function() {
  * @param {deviceId} deviceId - Device ID.
  */
 function downloadConfiguration(deviceId) { // eslint-disable-line no-unused-vars
-  call(`/inventory/download_configuration/${deviceId}`, () => {});
+  window.open(
+    `/inventory/get_configuration/${deviceId}`,
+    'Configuration',
+    'height=800,width=600'
+  ).focus();
 }
 
 (function() {

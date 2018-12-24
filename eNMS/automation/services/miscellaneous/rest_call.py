@@ -33,9 +33,16 @@ class RestCallService(Service):
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     timeout = Column(Float, default=15.)
+    validation_method = Column(String)
+    validation_method_values = (
+        ('text', 'Validation by text match'),
+        ('dict_equal', 'Validation by dictionnary equality'),
+        ('dict_included', 'Validation by dictionnary inclusion')
+    )
     content_match = Column(String)
     content_match_textarea = True
     content_match_regex = Column(Boolean)
+    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
     username = Column(String)

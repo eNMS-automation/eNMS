@@ -249,7 +249,7 @@ class Service(Job):
 
     def match_content(self, result, match):
         if self.delete_spaces_before_matching:
-            match, result = space_deleter(match), space_deleter(result)
+            match, result = map(self.space_deleter((match, result)))
         success = (
             self.content_match_regex and bool(search(match, result))
             or match in result and not self.content_match_regex

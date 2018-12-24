@@ -90,6 +90,8 @@ device_public_properties = device_table_properties + [
     'latitude',
     'username',
     'configuration_command',
+    'last_failure',
+    'last_runtime',
     'last_status',
     'last_update'
 ]
@@ -97,6 +99,8 @@ device_public_properties = device_table_properties + [
 device_configuration_properties = [
     'name',
     'configuration_command',
+    'last_failure',
+    'last_runtime',
     'last_update',
     'last_status'
 ]

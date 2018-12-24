@@ -76,8 +76,10 @@ class Device(CustomDevice):
     napalm_driver = Column(String)
     configuration_command = Column(String)
     configurations = Column(MutableDict.as_mutable(PickleType), default={})
-    last_status = Column(String, default='None')
-    last_update = Column(String, default='None')
+    last_failure = Column(String, default='Never')
+    last_status = Column(String, default='Never')
+    last_update = Column(String, default='Never')
+    last_runtime = Column(Float, default=0.)
     jobs = relationship(
         'Job',
         secondary=job_device_table,

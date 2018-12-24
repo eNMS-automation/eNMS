@@ -19,7 +19,7 @@ class NapalmGettersService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
-    validation_method = Column(String)
+    validation_method = Column(String, default='text')
     validation_method_values = (
         ('text', 'Validation by text match'),
         ('dict_equal', 'Validation by dictionnary equality'),

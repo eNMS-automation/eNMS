@@ -255,11 +255,12 @@ class Service(Job):
         )
         return success if not self.negative_logic else not success
 
-    def match_dictionnary(self, result):
+    def match_dictionnary(self, result, match=None):
         if self.validation_method == 'dict_equal':
             return result == self.dict_match
         else:
-            match = deepcopy(self.dict_match)
+            if not match:
+                match = deepcopy(self.dict_match)
             for k, v in result.items():
                 if isinstance(v, dict):
                     self.match_dictionnary(v, match)

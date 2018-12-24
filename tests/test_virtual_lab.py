@@ -82,7 +82,10 @@ def test_payload_transfer_workflow(user_client):
     assert result['success'] and len(result) == 3
     post(
         'http://192.168.105.2:5000/rest/instance/Workflow',
-        json={'name': 'payload_transfer_workflow', 'use_workflow_targets': False},
+        json={
+            'name': 'payload_transfer_workflow',
+            'use_workflow_targets': False
+        },
         auth=HTTPBasicAuth('admin', 'admin')
     )
     result = post(

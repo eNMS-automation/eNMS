@@ -8,7 +8,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
+from eNMS.automation.helpers import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 

@@ -1,6 +1,5 @@
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
-from re import compile
 
 from eNMS.main import db, scheduler
 from eNMS.base.helpers import fetch

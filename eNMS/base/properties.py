@@ -82,8 +82,7 @@ device_table_properties = object_common_properties[1:] + [
     'netmiko_driver',
     'napalm_driver',
     'ip_address',
-    'port',
-    
+    'port'
 ] + list(custom_properties)
 
 device_public_properties = device_table_properties + [

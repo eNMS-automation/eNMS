@@ -4,7 +4,7 @@ from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
 from os import environ
-from re import search
+from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
@@ -12,7 +12,6 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 
 from eNMS.main import db
-from eNMS.automation.helpers import space_deleter
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,
@@ -199,9 +198,9 @@ class Service(Job):
             if self.credentials == 'user'
             else (device.username, device.password)
         )
-    
+
     def netmiko_connection(self, device):
-        username, password = get_credentials(self, device)
+        username, password = self.get_credentials(device)
         return ConnectHandler(
             device_type=(
                 device.netmiko_driver
@@ -216,10 +215,9 @@ class Service(Job):
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor
         )
-    
-    
+
     def napalm_connection(self, device):
-        username, password = get_credentials(self, device)
+        username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
             optional_args = {}
@@ -259,7 +257,7 @@ class Service(Job):
     def match_dictionnary(self, result, match):
         for k, v in result.items():
             if isinstance(v, dict):
-                is_subdict(v, match)
+                self.match_dictionnary(v, match)
             elif k in match and match[k] == v:
                 match.pop(k)
         return not match

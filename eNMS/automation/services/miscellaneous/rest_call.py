@@ -86,7 +86,7 @@ class RestCallService(Service):
                 auth=HTTPBasicAuth(self.username, self.password),
                 **kwargs
             ).content)
-        if validation_method == 'text':
+        if self.validation_method == 'text':
             success = self.match_content(
                 str(result),
                 self.sub(self.content_match, locals())
@@ -95,7 +95,6 @@ class RestCallService(Service):
             success = self.match_dictionnary(result)
         return {
             'url': rest_url,
-            'expected': match,
             'negative_logic': self.negative_logic,
             'result': result,
             'success': success

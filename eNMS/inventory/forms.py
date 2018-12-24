@@ -140,3 +140,8 @@ class LibreNmsForm(FlaskForm):
 class DeviceAutomationForm(FlaskForm):
     list_fields = HiddenField(default='jobs')
     jobs = MultipleObjectField('Job')
+
+
+class CompareConfigurationsForm(FlaskForm):
+    display = SelectField(choices=())
+    compare_with = SelectField(choices=())

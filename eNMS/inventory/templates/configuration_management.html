@@ -9,6 +9,22 @@
 {% block content %}
   {% include 'confirm_deletion_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
+  <div id="configuration-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">Compare results</h4>
+        </div>
+        <div class="modal-body">
+          {% include 'logs_system.html' %}
+
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="right_col" role="main">
     <!-- begin row -->
     <div class="row">
@@ -28,6 +44,7 @@
                   <th style="width: 60%">Command to show the configuration</th>
                   <th style="width: 20%">Last update</th>
                   <th style="width: 10%">Last status</th>
+                  <th style="width: 5%">Configuration</th>
                   <th style="width: 5%">Connect</th>
                   <th style="width: 5%">Edit</th>
                 </tr>

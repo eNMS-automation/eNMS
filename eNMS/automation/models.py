@@ -1,3 +1,4 @@
+from copy import deepcopy
 from datetime import datetime
 from logging import info
 from multiprocessing.pool import ThreadPool
@@ -254,13 +255,17 @@ class Service(Job):
         )
         return success if not self.negative_logic else not success
 
-    def match_dictionnary(self, result, match):
-        for k, v in result.items():
-            if isinstance(v, dict):
-                self.match_dictionnary(v, match)
-            elif k in match and match[k] == v:
-                match.pop(k)
-        return not match
+    def match_dictionnary(self, result):
+        if self.validation_method == 'dict_equal':
+            return result == self.dict_match
+        else:
+            match = deepcopy(self.dict_match)
+            for k, v in result.items():
+                if isinstance(v, dict):
+                    self.match_dictionnary(v, match)
+                elif k in match and match[k] == v:
+                    match.pop(k)
+            return not match
 
     def transfer_file(self, ssh_client, source, destination):
         files = (source, destination)

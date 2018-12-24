@@ -29,7 +29,7 @@ class Task(Base):
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
         self.aps_job_id = kwargs.get('aps_job_id', self.creation_time)
-        if kwargs.get('schedule_now', True):
+        if kwargs.get('schedule_job', True):
             self.status = 'Active'
             self.schedule()
         else:
@@ -37,7 +37,8 @@ class Task(Base):
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        self.reschedule()
+        if kwargs.get('schedule_job', True):
+            self.reschedule()
 
     @property
     def job_name(self):

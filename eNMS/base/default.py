@@ -24,6 +24,8 @@ def create_default_pools():
         {
             'name': 'Devices only',
             'description': 'Devices only',
+            'device_name': '.*[W|P].*',
+            'device_name_regex': 'y',
             'link_name': '^$',
             'link_name_regex': 'y'
         },
@@ -123,7 +125,7 @@ def create_default_tasks(app):
         'description': 'Back up device configurations',
         'job': fetch('Service', name='configuration_backup').id,
         'frequency': 15,
-        'schedule_now': False
+        'schedule_job': False
         },
         {
         'aps_job_id': 'cluster_monitoring',
@@ -131,7 +133,7 @@ def create_default_tasks(app):
         'description': 'Monitor eNMS cluster',
         'job': fetch('Service', name='cluster_monitoring').id,
         'frequency': 15,
-        'schedule_now': app.config['CLUSTER']
+        'schedule_job': app.config['CLUSTER']
         }
     ]
     for task in tasks:

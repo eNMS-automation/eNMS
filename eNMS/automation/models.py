@@ -156,7 +156,6 @@ class Job(Base):
     def run(self, payload=None, targets=None):
         if not targets:
             targets = self.compute_targets()
-        print('tttt'*300, targets)
         if targets:
             results = {'result': {'devices': {}}}
             if self.multiprocessing:

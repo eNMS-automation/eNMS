@@ -1,7 +1,6 @@
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import substitute
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -40,8 +39,8 @@ class GenericFileTransferService(Service):
         )
         self.transfer_file(
             ssh_client,
-            substitute(self.source_file, locals()),
-            substitute(self.destination_file, locals())
+            self.sub(self.source_file, locals()),
+            self.sub(self.destination_file, locals())
         )
         ssh_client.close()
         return {

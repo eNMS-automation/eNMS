@@ -1,10 +1,6 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import (
-    netmiko_connection,
-    NETMIKO_DRIVERS,
-    substitute
-)
+from eNMS.automation.helpers import netmiko_connection, NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -41,7 +37,7 @@ class NetmikoPromptsService(Service):
 
     def job(self, device, _):
         netmiko_handler = netmiko_connection(self, device)
-        command = substitute(self.command, locals())
+        command = self.sub(self.command, locals())
         result = netmiko_handler.send_command_timing(command, delay_factor=2)
         if self.response1 and self.confirmation1 in result:
             result = netmiko_handler.send_command_timing(
@@ -58,7 +54,7 @@ class NetmikoPromptsService(Service):
                         self.response3,
                         delay_factor=self.delay_factor
                     )
-        match = substitute(self.content_match, locals())
+        match = self.sub(self.content_match, locals())
         netmiko_handler.disconnect()
         return {
             'expected': match,

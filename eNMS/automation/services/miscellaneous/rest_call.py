@@ -17,7 +17,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.automation.helpers import substitute
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -62,7 +61,7 @@ class RestCallService(Service):
     def job(self, *args):
         if len(args) == 2:
             device, payload = args
-        rest_url = substitute(self.url, locals())
+        rest_url = self.sub(self.url, locals())
         kwargs = {
             p: getattr(self, p)
             for p in ('headers', 'params', 'timeout')
@@ -80,7 +79,7 @@ class RestCallService(Service):
                 auth=HTTPBasicAuth(self.username, self.password),
                 **kwargs
             ).content)
-        match = substitute(self.content_match, locals())
+        match = self.sub(self.content_match, locals())
         return {
             'url': rest_url,
             'expected': match,

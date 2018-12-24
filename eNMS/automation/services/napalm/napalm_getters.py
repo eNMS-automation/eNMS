@@ -8,11 +8,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.automation.helpers import (
-    napalm_connection,
-    NAPALM_DRIVERS,
-    substitute
-)
+from eNMS.automation.helpers import napalm_connection, NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
@@ -69,7 +65,7 @@ class NapalmGettersService(Service):
                 result[getter] = getattr(napalm_driver, getter)()
             except Exception as e:
                 result[getter] = f'{getter} failed because of {e}'
-        match = substitute(self.content_match, locals())
+        match = self.sub(self.content_match, locals())
         napalm_driver.close()
         return {
             'expected': match,

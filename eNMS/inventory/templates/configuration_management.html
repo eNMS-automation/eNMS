@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('automation_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='difflib/diffview.css') }}" rel="stylesheet">
   <style>
     #main { height:90vh; }
     @media (min-width: 1000px) {
@@ -92,7 +92,7 @@
     var devices = {{ devices|tojson|safe }};
   </script>
   <!-- Difflib -->
-  <script src="{{ url_for('automation_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='configurationManagement.js') }}"></script>
 {% endblock javascripts %}

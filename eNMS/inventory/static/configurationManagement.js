@@ -6,6 +6,7 @@ doc: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line
+let deviceId;
 
 /**
  * Table Actions.
@@ -15,7 +16,7 @@ const table = $('#table').DataTable(); // eslint-disable-line
 function tableActions(values, device) { // eslint-disable-line no-unused-vars
   values.push(
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="configurationModal('${device.id}')">Configuration</button>`,
+    onclick="showConfigurations('${device.id}')">Configuration</button>`,
     `<button type="button" class="btn btn-success btn-xs"
     onclick="connectionParametersModal('${device.id}')">Connect</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
@@ -24,22 +25,22 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Display logs.
+ * Display configurations.
  */
-function displayLogs() { // eslint-disable-line no-unused-vars
-  call(`/automation/get_logs/${jobId}`, (logs) => {
+function displayConfigurations() { // eslint-disable-line no-unused-vars
+  call(`/inventory/get_configurations/${deviceId}`, (configurations) => {
     $('#display,#compare_with').empty();
-    const times = Object.keys(logs);
+    const times = Object.keys(configurations);
     times.forEach((option) => {
       $('#display,#compare_with').append(
         $('<option></option>').attr('value', option).text(option)
       );
     });
     $('#display,#compare_with').val(times[times.length - 1]);
-    const firstLogs = logs[$('#display').val()];
-    if (firstLogs) {
-      $('#logs').text(
-        JSON.stringify(firstLogs, null, 2).replace(
+    const firstConfigurations = configurations[$('#display').val()];
+    if (firstConfigurations) {
+      $('#configurations').text(
+        JSON.stringify(firstConfigurations, null, 2).replace(
           /(?:\\[rn]|[\r\n]+)+/g, '\n'
         )
       );
@@ -48,43 +49,43 @@ function displayLogs() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Show the logs modal for a job.
+ * Show the configurations modal for a job.
  * @param {id} id - Job id.
  */
-function showLogs(id) { // eslint-disable-line no-unused-vars
-  jobId = id;
-  $('#logs').empty();
-  displayLogs();
-  $('#logs-modal').modal('show');
+function showConfigurations(id) { // eslint-disable-line no-unused-vars
+  deviceId = id;
+  $('#configurations').empty();
+  displayConfigurations();
+  $('#configurations-modal').modal('show');
 }
 
 /**
- * Clear the logs
+ * Clear the configurations
  * @param {id} id - Job id.
  */
-function clearLogs() { // eslint-disable-line no-unused-vars
-  call(`/automation/clear_logs/${jobId}`, () => {
-    $('#logs').empty();
-    alertify.notify('Logs cleared.', 'success', 5);
-    $('#logs-modal').modal('hide');
+function clearConfigurations() { // eslint-disable-line no-unused-vars
+  call(`/inventory/clear_configurations/${deviceId}`, () => {
+    $('#configurations').empty();
+    alertify.notify('Configurations cleared.', 'success', 5);
+    $('#configurations-modal').modal('hide');
   });
 }
 
 $('#display').on('change', function() {
-  call(`/automation/get_logs/${jobId}`, (logs) => {
-    const log = logs[$('#display').val()];
-    $('#logs').text(
+  call(`/inventory/get_configurations/${deviceId}`, (configurations) => {
+    const log = configurations[$('#display').val()];
+    $('#configurations').text(
       JSON.stringify(log, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
     );
   });
 });
 
 $('#compare_with').on('change', function() {
-  $('#logs').empty();
+  $('#configurations').empty();
   const v1 = $('#display').val();
   const v2 = $('#compare_with').val();
-  call(`/automation/get_diff/${jobId}/${v1}/${v2}`, function(data) {
-    $('#logs').append(diffview.buildView({
+  call(`/automation/get_diff/${deviceId}/${v1}/${v2}`, function(data) {
+    $('#configurations').append(diffview.buildView({
       baseTextLines: data.first,
       newTextLines: data.second,
       opcodes: data.opcodes,

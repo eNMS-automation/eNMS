@@ -435,6 +435,7 @@ property_types = {
     'import_export_types': 'list',
     'send_notification': 'bool',
     'multiprocessing': 'bool',
+    'use_workflow_targets': 'bool',
     'mattermost_verify_certificate': 'bool'
 }
 

@@ -47,6 +47,7 @@ def get_counters(property, type):
 @post(bp, '/get/<cls>/<id>', 'View')
 def get_instance(cls, id):
     instance = fetch(cls, id=id)
+    print(instance.serialized)
     info(f'{current_user.name}: GET {cls} {instance.name} ({id})')
     return instance.serialized
 

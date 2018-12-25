@@ -61,7 +61,7 @@ function openPollerModal() { // eslint-disable-line no-unused-vars
  * Configure poller.
  */
 function configurePoller() { // eslint-disable-line no-unused-vars
-  fCall('inventory/configure_poller', '#configure-poller-form', function() {
+  fCall('/inventory/configure_poller', '#configure-poller-form', function() {
     alertify.notify('Poller started.', 'success', 5);
     $('#poller-modal').modal('hide');
   });

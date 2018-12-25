@@ -153,7 +153,6 @@ class ConfigurationParametersForm(FlaskForm):
 
 
 class PollerForm(FlaskForm):
-    number_of_configurations = StringField()
     devices = MultipleObjectField('Device')
     pools = MultipleObjectField('Pool')
     polling_frequency = IntegerField(default=3600)

@@ -24,8 +24,6 @@ def create_default_pools():
         {
             'name': 'Devices only',
             'description': 'Devices only',
-            'device_name': '.*[W|P].*',
-            'device_name_regex': 'y',
             'link_name': '^$',
             'link_name_regex': 'y'
         },

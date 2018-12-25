@@ -256,8 +256,8 @@ def query_librenms():
 def configure_poller():
     service = fetch('Service', name='configuration_backup')
     task = fetch('Task', name='configuration_backup')
-    service.devices = objectify(request.form['devices'])
-    service.pools = objectify(request.form['pools'])
+    service.devices = objectify('Device', request.form.get('devices', ''))
+    service.pools = objectify('Pool', request.form.get('pools', ''))
     task.frequency = request.form['polling_frequency']
     db.session.commit()
     task.reschedule()

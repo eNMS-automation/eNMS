@@ -270,9 +270,11 @@ def clear_configurations(device_id):
     return True
 
 
-@get(bp, '/get_configuration/<device_id>', 'Edit')
+@get(bp, '/get_configuration/<device_id>/<version>', 'Edit')
 def get_configuration(device_id):
     device = fetch('Device', id=device_id)
-    if not device.configurations:
-        return 'a'
-    return f'<pre>{device.configurations[max(device.configurations)]}</pre>'
+    configurations = {
+        str(k): v
+        for k, v in device.configurations.items()
+    }
+    return f'<pre>{configurations[version]}</pre>'

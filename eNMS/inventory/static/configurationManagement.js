@@ -21,7 +21,7 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showConfigurations('${device.id}')">Configuration</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="downloadConfiguration('${device.id}')">Download</button>`
+    onclick="downloadConfiguration('${device.id}')">Raw</button>`
   );
 }
 
@@ -102,9 +102,9 @@ $('#compare_with').on('change', function() {
  * Download configuration locally as text file.
  * @param {deviceId} deviceId - Device ID.
  */
-function downloadConfiguration(deviceId) { // eslint-disable-line no-unused-vars
+function showRawLogs() { // eslint-disable-line no-unused-vars
   window.open(
-    `/inventory/get_configuration/${deviceId}`,
+    `/inventory/get_raw_logs/${deviceId}/${$('#display').val()}`,
     'Configuration',
     'height=800,width=600'
   ).focus();

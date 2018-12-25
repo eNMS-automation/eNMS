@@ -4,9 +4,10 @@ addInstance: false
 alertify: false
 call: false
 convertSelect: false
-diffview: false
 devices: false
+diffview: false
 doc: false
+fCall: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line
@@ -22,7 +23,7 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showConfigurations('${device.id}')">Configuration</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('device', '${device.id}')">Parameters</button>`,
+    onclick="showTypeModal('device', '${device.id}')">Parameters</button>`
   );
 }
 
@@ -65,7 +66,6 @@ function configurePoller() { // eslint-disable-line no-unused-vars
     alertify.notify('Poller started.', 'success', 5);
     $('#poller-modal').modal('hide');
   });
-  
 }
 
 

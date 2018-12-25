@@ -35,6 +35,7 @@ class ConfigurationBackupService(Service):
             config = netmiko_handler.send_command(device.configuration_command)
             device.last_status, device.last_update = 'Success', now
             device.last_runtime = (datetime.now() - now).total_seconds()
+            netmiko_handler.disconnect()
         except Exception as e:
             device.last_status, device.last_update = 'Failure', now
             device.last_failure = now

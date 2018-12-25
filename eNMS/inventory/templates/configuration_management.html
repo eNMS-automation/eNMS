@@ -26,9 +26,6 @@
           <h4 class="modal-title">Configuration</h4>
         </div>
         <div class="modal-body">
-          <button class="btn btn-default btn-file" onclick="clearConfigurations()" style="width:100%;">
-            Clear
-          </button>
           <label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
           <div class="col-md-10 col-sm-10 col-xs-12">
             {{ compare_configurations_form.display(class="form-control") }}
@@ -45,6 +42,9 @@
           </div>
           <button class="btn btn-default btn-file" onclick="showRawLogs()" style="width:100%;">
             Raw logs
+          </button>
+          <button class="btn btn-default btn-file" onclick="clearConfigurations()" style="width:100%;">
+            Clear
           </button>
         </div>
       </div>
@@ -72,7 +72,6 @@
                   <th style="width: 10%">Last update</th>
                   <th style="width: 10%">Last status</th>
                   <th style="width: 5%">Configuration</th>
-                  <th style="width: 5%">Download</th>
                 </tr>
               </thead>
               <tbody></tbody>

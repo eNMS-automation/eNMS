@@ -270,11 +270,11 @@ def clear_configurations(device_id):
     return True
 
 
-@get(bp, '/get_configuration/<device_id>/<version>', 'Edit')
-def get_configuration(device_id):
+@get(bp, '/get_raw_logs/<device_id>/<version>', 'Edit')
+def get_raw_logs(device_id, version):
     device = fetch('Device', id=device_id)
     configurations = {
         str(k): v
         for k, v in device.configurations.items()
     }
-    return f'<pre>{configurations[version]}</pre>'
+    return f'<pre>{configurations.get(version, "")}</pre>'

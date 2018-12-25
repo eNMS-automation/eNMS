@@ -148,4 +148,5 @@ class CompareConfigurationsForm(FlaskForm):
 
 
 class ConfigurationParametersForm(FlaskForm):
+    id = HiddenField()
     configuration_command = StringField()

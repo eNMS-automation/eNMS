@@ -21,7 +21,7 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showConfigurations('${device.id}')">Configuration</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
-    onclick="editConfigurationParameters('${device.id}')">Parameters</button>`,
+    onclick="showTypeModal('device', '${device.id}')">Parameters</button>`,
   );
 }
 
@@ -70,15 +70,6 @@ function clearConfigurations() { // eslint-disable-line no-unused-vars
     alertify.notify('Configurations cleared.', 'success', 5);
     $('#configurations-modal').modal('hide');
   });
-}
-
-/**
- * Edit configuration parameter.
- * @param {id} id - ID.
- */
-function editConfigurationParameters(id) { // eslint-disable-line no-unused-vars
-  deviceId = id;
-  $('#configuration-parameters-modal').modal('show');
 }
 
 $('#display').on('change', function() {

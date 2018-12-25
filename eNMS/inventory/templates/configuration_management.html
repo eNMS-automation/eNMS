@@ -60,34 +60,26 @@
           <h4 class="modal-title" id="title-device"></h4>
         </div>
         <div class="modal-body">
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane fade active in" id="node-properties">
-                <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-                  <div class="modal-body">
-                    <div class="form-group">
-                      {% for field in configuration_parameters_form %}
-                        {% if field.widget.input_type == 'hidden' %}
-                          {{ field(id='device-' + field.name) }}
-                        {% else %}
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            {{ field(id='device-' + field.name, class="form-control") }}
-                          </div><br><br>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" onclick="processData('device')">Save</button>
-                  </div>
-                </form>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="node-logs">
-                <pre id="logs"></pre>
+          <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+            <div class="modal-body">
+              <div class="form-group">
+                {% for field in configuration_parameters_form %}
+                  {% if field.widget.input_type == 'hidden' %}
+                    {{ field(id='device-' + field.name) }}
+                  {% else %}
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                      {{ field(id='device-' + field.name, class="form-control") }}
+                    </div><br><br>
+                  {% endif %}
+                {% endfor %}
               </div>
             </div>
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" onclick="processData('device')">Save</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

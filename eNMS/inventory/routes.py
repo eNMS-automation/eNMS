@@ -25,6 +25,7 @@ from eNMS.inventory.forms import (
     AddPoolForm,
     CompareConfigurationsForm,
     ConfigurationManagementForm,
+    ConfigurationParametersForm,
     DeviceAutomationForm,
     GottyConnectionForm,
     ImportExportForm,
@@ -59,6 +60,7 @@ def configuration_management():
         fields=device_configuration_properties,
         devices=serialize('Device'),
         compare_configurations_form=CompareConfigurationsForm(request.form),
+        configuration_parameters_form=ConfigurationParametersForm(request.form),
         add_device_form=ConfigurationManagementForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form)
     )

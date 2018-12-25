@@ -78,7 +78,7 @@ function clearConfigurations() { // eslint-disable-line no-unused-vars
  */
 function editConfigurationParameters(id) { // eslint-disable-line no-unused-vars
   deviceId = id;
-  $('#configurations-parameters-modal').modal('show');
+  $('#configuration-parameters-modal').modal('show');
 }
 
 $('#display').on('change', function() {

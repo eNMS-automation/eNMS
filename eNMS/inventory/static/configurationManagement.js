@@ -50,6 +50,13 @@ function displayConfigurations() { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Configure poller.
+ */
+function configurePoller() { // eslint-disable-line no-unused-vars
+  $('#poller-modal').modal('show');
+}
+
+/**
  * Show the configurations modal for a job.
  * @param {id} id - Job id.
  */

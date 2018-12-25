@@ -25,28 +25,26 @@
           </button>
           <h4 class="modal-title">Configuration</h4>
         </div>
-        <div class="modal-body">
-          <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-            <div class="modal-body">
-              <div class="form-group">
-                {% for field in poller_form %}
-                  {% if field.widget.input_type == 'hidden' %}
-                    {{ field() }}
-                  {% else %}
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                      {{ field(class="form-control") }}
-                    </div><br><br>
-                  {% endif %}
-                {% endfor %}
-              </div>
+        <form id="edit-device-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+          <div class="modal-body">
+            <div class="form-group">
+              {% for field in poller_form %}
+                {% if field.widget.input_type == 'hidden' %}
+                  {{ field() }}
+                {% else %}
+                  <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
+                  <div class="col-md-10 col-sm-10 col-xs-12">
+                    {{ field(class="form-control") }}
+                  </div><br><br>
+                {% endif %}
+              {% endfor %}
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-success" onclick="processData('device')">Save</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" onclick="processData('device')">Save</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -127,7 +125,7 @@
           <div style="min-height:90vh;" class="x_content">
             <div class="panel-group">
               <div style="padding-bottom:5px;">
-                <button class="btn btn-default btn-file" onclick="startPoller()" style="width:100%;">
+                <button class="btn btn-default btn-file" onclick="configurePoller()" style="width:100%;">
                   Start Pooler
                 </button>
               </div>

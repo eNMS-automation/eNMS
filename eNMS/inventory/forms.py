@@ -150,3 +150,10 @@ class CompareConfigurationsForm(FlaskForm):
 class ConfigurationParametersForm(FlaskForm):
     id = HiddenField()
     configuration_command = StringField()
+
+
+class PollerForm(FlaskForm):
+    number_of_configurations = StringField()
+    devices = MultipleObjectField('Device')
+    pools = MultipleObjectField('Pool')
+    polling_frequency = IntegerField(default=3600)

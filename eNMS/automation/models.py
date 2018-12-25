@@ -330,7 +330,7 @@ class Workflow(Job):
             end.positions[self.name] = (500, 0)
 
     def job(self, *args):
-        device, payload = args if self.use_workflow_targets else (None, args)
+        device, payload = args if len(args) == 2 else (None, args)
         if not self.multiprocessing:
             self.state = {'jobs': {}}
             if device:

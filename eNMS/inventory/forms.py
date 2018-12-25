@@ -145,3 +145,7 @@ class DeviceAutomationForm(FlaskForm):
 class CompareConfigurationsForm(FlaskForm):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
+
+
+class ConfigurationParametersForm(FlaskForm):
+    configuration_command = StringField()

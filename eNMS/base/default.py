@@ -124,7 +124,7 @@ def create_default_tasks(app):
             'name': 'configuration_backup',
             'description': 'Back up device configurations',
             'job': fetch('Service', name='configuration_backup').id,
-            'frequency': 15,
+            'frequency': 10,
             'schedule_job': False
         },
         {

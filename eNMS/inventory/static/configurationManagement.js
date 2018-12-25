@@ -3,6 +3,7 @@ global
 addInstance: false
 alertify: false
 call: false
+convertSelect: false
 diffview: false
 devices: false
 doc: false
@@ -50,11 +51,23 @@ function displayConfigurations() { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Open Poller modal.
+ */
+function openPollerModal() { // eslint-disable-line no-unused-vars
+  $('#poller-modal').modal('show');
+}
+
+/**
  * Configure poller.
  */
 function configurePoller() { // eslint-disable-line no-unused-vars
-  $('#poller-modal').modal('show');
+  fCall('inventory/configure_poller', '#configure-poller-form', function() {
+    alertify.notify('Poller started.', 'success', 5);
+    $('#poller-modal').modal('hide');
+  });
+  
 }
+
 
 /**
  * Show the configurations modal for a job.
@@ -119,6 +132,7 @@ function showRawLogs() { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
+  convertSelect('#pools', '#devices');
   for (let i = 0; i < devices.length; i++) {
     addInstance('create', 'device', devices[i]);
   }

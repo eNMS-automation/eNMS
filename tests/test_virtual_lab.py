@@ -29,7 +29,7 @@ def test_rest_api_basic(user_client):
         'http://192.168.105.2:5000/rest/instance/device/Washington',
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['model'] == 'Cisco' and len(result) == 14
+    assert result['model'] == 'Cisco' and len(result) == 21
     result = get(
         'http://192.168.105.2:5000/rest/instance/service/get_facts',
         auth=HTTPBasicAuth('admin', 'admin')

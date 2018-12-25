@@ -12,7 +12,9 @@ from eNMS.base.models import MultipleObjectField, ObjectField
 
 class JobForm(FlaskForm):
     id = HiddenField()
-    boolean_fields = HiddenField(default='send_notification,multiprocessing')
+    boolean_fields = HiddenField(
+        default='send_notification,multiprocessing,use_workflow_targets'
+    )
     list_fields = HiddenField(default='devices,pools')
     name = StringField()
     description = StringField()

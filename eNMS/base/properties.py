@@ -22,7 +22,8 @@ custom_properties = get_custom_properties()
 boolean_properties = [
     'mattermost_verify_certificate',
     'multiprocessing',
-    'send_notification'
+    'send_notification',
+    'use_workflow_targets'
 ]
 list_properties = [
     'devices',

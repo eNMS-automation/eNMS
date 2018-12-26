@@ -287,6 +287,11 @@ def clear_configurations(device_id):
     return True
 
 
+@post(bp, '/search_configurations', 'View')
+def search_configurations():
+    return True
+
+
 @get(bp, '/get_raw_logs/<device_id>/<version>', 'Edit')
 def get_raw_logs(device_id, version):
     device = fetch('Device', id=device_id)

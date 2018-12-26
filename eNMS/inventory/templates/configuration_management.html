@@ -48,8 +48,8 @@
       </div>
     </div>
   </div>
-  <div id="search-configurations-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+  <div id="search-configurations-modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
@@ -58,23 +58,24 @@
           <h4 class="modal-title">Search in Configurations</h4>
         </div>
         <form id="search-configurations-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-          {{ search_configurations_form.search_text(class="form-control") }}<br>
-          <div class="item">
-            {{ search_configurations_form.regular_expression(class="form-control") }}
-            <label>Automatically authenticate</label>
-          </div>
           <div class="modal-body">
             <div class="form-group">
+              <label>Search Text:</label>
+              {{ search_configurations_form.search_text(class="form-control required") }}<br>
+              <div class="item">
+                {{ search_configurations_form.regular_expression() }}
+                <label>Regular expression</label>
+              </div>
               <div class="radio">
                 <label>
-                  <input type="radio" checked="" value="user" id="user-credentials" name="credentials">
-                  Authentication with user credentials
+                  <input type="radio" checked="" value="current" name="config-to-search">
+                  Search only current configuration
                 </label>
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" value="device" id="device-credentials" name="credentials">
-                  Authentication with device credentials
+                  <input type="radio" value="all" name="config-to-search">
+                  Search in all configurations
                 </label>
               </div>
             </div>

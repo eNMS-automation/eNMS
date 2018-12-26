@@ -1,9 +1,11 @@
 from datetime import datetime
+from pathlib import Path
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.helpers import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.base.helpers import get_one
 
 
 class ConfigurationBackupService(Service):
@@ -25,7 +27,7 @@ class ConfigurationBackupService(Service):
     }
 
     def job(self, device, _):
-        now = datetime.now()
+        now, parameters = datetime.now(), get_one('Parameters')
         try:
             netmiko_handler = self.netmiko_connection(device)
             try:
@@ -33,6 +35,9 @@ class ConfigurationBackupService(Service):
             except Exception:
                 pass
             config = netmiko_handler.send_command(device.configuration_command)
+            path_device = Path.cwd() / 'git' / 'configurations'
+            if not exists(path_device):
+                makedirs(path_device)
             device.last_status = 'Success'
             device.last_runtime = (datetime.now() - now).total_seconds()
             netmiko_handler.disconnect()

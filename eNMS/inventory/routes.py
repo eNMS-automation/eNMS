@@ -289,7 +289,20 @@ def clear_configurations(device_id):
 
 @post(bp, '/search_configurations', 'View')
 def search_configurations():
-    return True
+    text = request.form['search_text']
+    regex = 'regular_expression' in request.form
+    devices = []
+    for device in fetch_all('Device'):
+        if request.form['config-to-search'] == 'current':
+            config = device.configurations[max(device.configurations)]
+            if search(text, config) if regex else text in config:
+                devices.append(device.serialized)
+        elif any(
+            search(text, config) if regex else text in config
+            for config in device.configurations.values()
+        ):
+            devices.append(device.serialized)
+    return devices
 
 
 @get(bp, '/get_raw_logs/<device_id>/<version>', 'Edit')

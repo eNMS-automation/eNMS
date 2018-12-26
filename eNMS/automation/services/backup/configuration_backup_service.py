@@ -36,11 +36,15 @@ class ConfigurationBackupService(Service):
             device.last_status, device.last_update = 'Success', now
             device.last_runtime = (datetime.now() - now).total_seconds()
             netmiko_handler.disconnect()
+            if device.configurations:
+                last_config = device.configurations[max(device.configurations)]
+                if config == last_config:
+                    return {'success': True, 'result': 'no change'}
+            device.configurations[now] = config
         except Exception as e:
             device.last_status, device.last_update = 'Failure', now
             device.last_failure = now
             return {'success': False, 'result': str(e)}
-        device.configurations[now] = config
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         return {

@@ -140,6 +140,7 @@ def save_parameters():
     for git_type in ('configurations', 'services'):
         property = f'git_repository_{git_type}'
         remote_git = request.form[property]
+        print(getattr(parameters, property), remote_git)
         if getattr(parameters, property) != remote_git:
             Repo.clone_from(remote_git, app.path / 'git' / git_type)
     parameters.update(**request.form)

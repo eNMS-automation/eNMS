@@ -52,13 +52,6 @@ function displayConfigurations() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Open Poller modal.
- */
-function openPollerModal() { // eslint-disable-line no-unused-vars
-  $('#poller-modal').modal('show');
-}
-
-/**
  * Configure poller.
  */
 function configurePoller() { // eslint-disable-line no-unused-vars

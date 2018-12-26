@@ -19,8 +19,8 @@ from eNMS.base.helpers import (
 )
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
-    AddLink,
     AddDevice,
+    AddLink,
     AddPoolForm,
     CompareConfigurationsForm,
     ConfigurationManagementForm,
@@ -32,7 +32,8 @@ from eNMS.inventory.forms import (
     NetboxForm,
     OpenNmsForm,
     PollerForm,
-    PoolObjectsForm
+    PoolObjectsForm,
+    SearchConfigurationForm
 )
 from eNMS.inventory.helpers import object_export, object_import
 from eNMS.base.properties import (
@@ -63,7 +64,8 @@ def configuration_management():
         configuration_parameters_form=ConfigurationParametersForm(request.form),
         add_device_form=ConfigurationManagementForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form),
-        poller_form=PollerForm(request.form)
+        poller_form=PollerForm(request.form),
+        search_configurations_form=SearchConfigurationForm(request.form)
     )
 
 

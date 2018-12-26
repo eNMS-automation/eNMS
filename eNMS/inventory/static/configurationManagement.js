@@ -62,14 +62,14 @@ function configurePoller() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Configure poller.
+ * Search in all Configurations.
  */
 function searchConfigurations() { // eslint-disable-line no-unused-vars
   fCall(
     '/inventory/search_configurations',
     '#search-configurations-form',
     function() {
-      alertify.notify('Configurations filterd.', 'success', 5);
+      alertify.notify('Configurations filtered.', 'success', 5);
       $('#search-configurations-modal').modal('hide');
     }
   );
@@ -125,7 +125,7 @@ $('#compare_with').on('change', function() {
 });
 
 /**
- * Download configuration locally as text file.
+ * Show Raw Logs.
  * @param {deviceId} deviceId - Device ID.
  */
 function showRawLogs() { // eslint-disable-line no-unused-vars

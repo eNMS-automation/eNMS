@@ -152,6 +152,11 @@ class ConfigurationParametersForm(FlaskForm):
     configuration_command = StringField()
 
 
+class SearchConfigurationForm(FlaskForm):
+    search_text = StringField()
+    regular_expression = BooleanField()
+
+
 class PollerForm(FlaskForm):
     devices = MultipleObjectField('Device')
     pools = MultipleObjectField('Pool')

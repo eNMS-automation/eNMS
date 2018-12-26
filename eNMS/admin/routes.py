@@ -8,6 +8,7 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
+from git import Repo
 from ipaddress import IPv4Network
 try:
     from ldap import INVALID_CREDENTIALS, SCOPE_SUBTREE, SERVER_DOWN
@@ -135,8 +136,13 @@ def logout():
 
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
-    get_one('Parameters').update(**request.form)
+    parameters = get_one('Parameters')
+    parameters.update(**request.form)
     database_filtering(fetch('Pool', id=request.form['pool']))
+    for git_type in ('configurations', 'services'):
+        property = f'git_repository_{git_type}'
+        if getattr(parameters, property) != request.form[property]:
+            Repo.clone_from(request.form[property], app.path / 'git')
     db.session.commit()
     return True
 

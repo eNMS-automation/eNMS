@@ -57,7 +57,7 @@ class Parameters(Base):
     default_latitude = Column(Float, default=33.)
     default_zoom_level = Column(Integer, default=5)
     default_view = Column(String, default='2D')
-    git_repository_configuration = Column(String)
+    git_repository_configurations = Column(String)
     git_repository_services = Column(String)
     gotty_start_port = Column(Integer, default=9000)
     gotty_end_port = Column(Integer, default=9100)

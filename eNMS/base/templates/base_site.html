@@ -27,7 +27,7 @@
         <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
         <!-- eNMS -->
-        <link href="{{ url_for('static', filename='enms/enms.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='enms/base.min.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
     {% endblock head %}
   </head>
@@ -76,10 +76,9 @@
         <script src="{{ url_for('static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
         <!-- Bootstrap Datetimepicker -->
         <script src="{{ url_for('static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
+        <!-- eNMS -->
+        <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
       {% endblock %}
-      <!-- eNMS -->
-      <script src="{{ url_for('static', filename='enms/enms.js') }}"></script>
     {% endblock body %}
   </body>
 </html>

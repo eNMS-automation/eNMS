@@ -61,6 +61,19 @@ function configurePoller() { // eslint-disable-line no-unused-vars
   });
 }
 
+/**
+ * Configure poller.
+ */
+function searchConfigurations() { // eslint-disable-line no-unused-vars
+  fCall(
+    '/inventory/search_configurations',
+    '#search-configurations-form',
+    function() {
+      alertify.notify('Configurations filterd.', 'success', 5);
+      $('#search-configurations-modal').modal('hide');
+    }
+  );
+}
 
 /**
  * Show the configurations modal for a job.

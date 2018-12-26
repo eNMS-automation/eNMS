@@ -80,6 +80,16 @@ function searchConfigurations() { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Remove the filter.
+ */
+function undoFilter() { // eslint-disable-line no-unused-vars
+  table.clear().draw();
+  for (let i = 0; i < devices.length; i++) {
+    addInstance('create', 'device', devices[i]);
+  }
+}
+
+/**
  * Show the configurations modal for a job.
  * @param {id} id - Job id.
  */

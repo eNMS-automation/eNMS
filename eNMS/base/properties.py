@@ -247,6 +247,8 @@ parameters_public_properties = [
     'default_latitude',
     'default_zoom_level',
     'default_view',
+    'git_repository_configuration',
+    'git_repository_services',
     'gotty_start_port',
     'gotty_end_port',
     'mail_sender',

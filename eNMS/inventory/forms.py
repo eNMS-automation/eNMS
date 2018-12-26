@@ -161,3 +161,4 @@ class PollerForm(FlaskForm):
     devices = MultipleObjectField('Device')
     pools = MultipleObjectField('Pool')
     polling_frequency = IntegerField(default=3600)
+    remote_git_repository = StringField()

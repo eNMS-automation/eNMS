@@ -66,6 +66,14 @@ class GetInstance(Resource):
         return delete(fetch(cls, name=name))
 
 
+class GetConfiguration(Resource):
+    decorators = [auth.login_required]
+
+    def get(self, name):
+        device = fetch('Device', name=name)
+        return device.configurations[max(device.configurations)]
+
+
 class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
@@ -105,5 +113,6 @@ def configure_rest_api(app):
     api.add_resource(RestAutomation, '/rest/run_job')
     api.add_resource(UpdateInstance, '/rest/instance/<string:cls>')
     api.add_resource(GetInstance, '/rest/instance/<string:cls>/<string:name>')
+    api.add_resource(GetConfiguration, '/rest/configuration/<string:name>')
     api.add_resource(Migrate, '/rest/migrate/<string:direction>')
     api.add_resource(Topology, '/rest/topology/<string:direction>')

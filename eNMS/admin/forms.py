@@ -45,7 +45,7 @@ class AdministrationForm(FlaskForm):
         ('2DC', '2D Clusterized View'),
         ('3D', '3D View'),
     ))
-    git_repository_configuration = StringField()
+    git_repository_configurations = StringField()
     git_repository_services = StringField()
     gotty_start_port = FloatField('Start port')
     gotty_end_port = FloatField('End port')

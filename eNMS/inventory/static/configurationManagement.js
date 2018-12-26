@@ -68,7 +68,11 @@ function searchConfigurations() { // eslint-disable-line no-unused-vars
   fCall(
     '/inventory/search_configurations',
     '#search-configurations-form',
-    function() {
+    function(devices) {
+      table.clear().draw();
+      for (let i = 0; i < devices.length; i++) {
+        addInstance('create', 'device', devices[i]);
+      }
       alertify.notify('Configurations filtered.', 'success', 5);
       $('#search-configurations-modal').modal('hide');
     }

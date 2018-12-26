@@ -3,6 +3,7 @@ from difflib import SequenceMatcher
 from flask import current_app as app, request
 from flask_login import current_user
 from pynetbox import api as netbox_api
+from re import search
 from requests import get as http_get
 from subprocess import Popen
 
@@ -293,6 +294,8 @@ def search_configurations():
     regex = 'regular_expression' in request.form
     devices = []
     for device in fetch_all('Device'):
+        if not device.configurations:
+            continue
         if request.form['config-to-search'] == 'current':
             config = device.configurations[max(device.configurations)]
             if search(text, config) if regex else text in config:

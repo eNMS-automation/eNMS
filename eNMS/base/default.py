@@ -126,6 +126,7 @@ def create_default_workflows():
     workflow = factory('Workflow', **{
         'name': name,
         'description': 'Poll configuration and push to gitlab',
+        'use_workflow_targets': False,
         'creator': fetch('User', name='admin').id
     })
     workflow.jobs.extend([
@@ -141,7 +142,7 @@ def create_default_workflows():
             'source': workflow.jobs[x].id,
             'destination': workflow.jobs[y].id
         })
-    positions = [(-20, 0), (20, 0), (0, -30), (0, 30)]
+    positions = [(-30, 0), (20, 0), (0, -20), (0, 30)]
     for index, (x, y) in enumerate(positions):
         workflow.jobs[index].positions[name] = x * 10, y * 10
 

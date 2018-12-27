@@ -261,6 +261,7 @@ def configure_poller():
     remote_git = request.form['remote_git_repository']
     if parameters.git_repository_configurations != remote_git:
         Repo.clone_from(remote_git, app.path / 'git' / 'configurations')
+        parameters.git_repository_configurations = remote_git
     service = fetch('Service', name='configuration_backup')
     task = fetch('Task', name='configuration_backup')
     service.devices = objectify('Device', request.form.get('devices', ''))

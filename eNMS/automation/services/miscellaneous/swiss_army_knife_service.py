@@ -1,6 +1,9 @@
 from flask_mail import Message
+from git import Repo
+from git.exc import GitCommandError
 from json import dumps
 from os import remove
+from pathlib import Path
 from requests import post, get
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
@@ -88,7 +91,13 @@ class SwissArmyKnifeService(Service):
     def git_push_configurations(self, _):
         parameters = get_one('Parameters')
         if parameters.git_repository_configurations:
-            pass
+            repo = Repo(Path.cwd() / 'git' / 'configurations')
+            try:
+                repo.git.add(A=True)
+                repo.git.commit(m='commit all')
+            except GitCommandError:
+                pass
+            repo.remotes.origin.push()
         return {'success': True}
 
     def process_payload1(self, device, payload):

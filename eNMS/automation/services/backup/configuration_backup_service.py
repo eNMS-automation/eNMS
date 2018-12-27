@@ -43,8 +43,8 @@ class ConfigurationBackupService(Service):
                 if config == last_config:
                     return {'success': True, 'result': 'no change'}
             device.configurations[now] = config
-            with open(path_configurations / device.name, 'w') as f:
-                f.write(config)
+            with open(path_configurations / device.name, 'w') as file:
+                file.write(config)
             device.last_update = now
         except Exception as e:
             device.last_status, device.last_update = 'Failure', now

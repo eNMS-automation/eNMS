@@ -85,6 +85,12 @@ class SwissArmyKnifeService(Service):
             ).json())
         return {'success': True}
 
+    def git_push_configurations(self, _):
+        parameters = get_one('Parameters')
+        if parameters.git_repository_configurations:
+            pass
+        return {'success': True}
+
     def process_payload1(self, device, payload):
         get_facts = payload['get_facts']
         # we use the name of the device to get the result for that particular

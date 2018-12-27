@@ -103,6 +103,12 @@ def create_default_services():
             'creator': admin
         },
         {
+            'type': 'SwissArmyKnifeService',
+            'name': 'git_push_configurations',
+            'description': 'Push configurations to Gitlab',
+            'creator': admin
+        },
+        {
             'type': 'ConfigurationBackupService',
             'name': 'configuration_backup',
             'description': 'Back up device configurations',

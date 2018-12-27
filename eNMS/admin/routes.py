@@ -137,12 +137,9 @@ def logout():
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
     parameters = get_one('Parameters')
-    for git_type in ('configurations', 'services'):
-        property = f'git_repository_{git_type}'
-        remote_git = request.form[property]
-        print(getattr(parameters, property), remote_git)
-        if getattr(parameters, property) != remote_git:
-            Repo.clone_from(remote_git, app.path / 'git' / git_type)
+    remote_git = request.form['git_repository_services']
+    if parameters.git_repository_services != remote_git:
+        Repo.clone_from(remote_git, app.path / 'git' / 'services')
     parameters.update(**request.form)
     database_filtering(fetch('Pool', id=request.form['pool']))
     db.session.commit()

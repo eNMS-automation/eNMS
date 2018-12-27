@@ -2,6 +2,7 @@ from datetime import datetime
 from difflib import SequenceMatcher
 from flask import current_app as app, request
 from flask_login import current_user
+from git import Repo
 from pynetbox import api as netbox_api
 from re import search
 from requests import get as http_get
@@ -256,6 +257,10 @@ def query_librenms():
 
 @post(bp, '/configure_poller', 'Edit')
 def configure_poller():
+    parameters = get_one('Parameters')
+    remote_git = request.form['remote_git_repository']
+    if parameters.git_repository_configurations != remote_git:
+        Repo.clone_from(remote_git, app.path / 'git' / 'configurations')
     service = fetch('Service', name='configuration_backup')
     task = fetch('Task', name='configuration_backup')
     service.devices = objectify('Device', request.form.get('devices', ''))

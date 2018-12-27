@@ -121,6 +121,32 @@ def create_default_services():
 
 
 @integrity_rollback
+def create_default_workflows():
+    name = 'Configuration Management Workflow'
+    workflow = factory('Workflow', **{
+        'name': name,
+        'description': 'Poll configuration and push to gitlab',
+        'creator': fetch('User', name='admin').id
+    })
+    workflow.jobs.extend([
+        fetch('Service', name='configuration_backup'),
+        fetch('Service', name='git_push_configurations')
+    ])
+    edges = [(0, 2, True), (2, 3, True), (2, 3, False), (3, 1, True)]
+    for x, y, edge_type in edges:
+        factory('WorkflowEdge', **{
+            'name': f'{workflow.name} {x} -> {y} ({edge_type})',
+            'workflow': workflow.id,
+            'subtype': 'success' if edge_type else 'failure',
+            'source': workflow.jobs[x].id,
+            'destination': workflow.jobs[y].id
+        })
+    positions = [(-20, 0), (20, 0), (0, -30), (0, 30)]
+    for index, (x, y) in enumerate(positions):
+        workflow.jobs[index].positions[name] = x * 10, y * 10
+
+
+@integrity_rollback
 def create_default_tasks(app):
     tasks = [
         {

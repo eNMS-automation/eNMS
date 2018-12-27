@@ -19,7 +19,8 @@ from eNMS.base.default import (
     create_default_pools,
     create_default_tasks,
     create_default_users,
-    create_default_examples
+    create_default_examples,
+    create_default_workflows
 )
 from eNMS.base.helpers import fetch
 from eNMS.base.rest import configure_rest_api
@@ -87,6 +88,7 @@ def configure_database(app):
         create_default_pools()
         configure_instance_id()
         create_default_services()
+        create_default_workflows()
         if app.config['CREATE_EXAMPLES']:
             create_default_examples(app)
         create_default_tasks(app)

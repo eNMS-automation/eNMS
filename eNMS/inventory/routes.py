@@ -1,6 +1,6 @@
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import current_app as app, request
+from flask import current_app as app, request, send_file
 from flask_login import current_user
 from git import Repo
 from pynetbox import api as netbox_api
@@ -99,6 +99,16 @@ def import_export():
         opennms_form=OpenNmsForm(request.form),
         parameters=get_one('Parameters'),
     )
+
+
+@get(bp, '/download_configuration/<name>', 'View')
+def download_configuration(name):
+    sfd = send_file(
+        filename_or_fp=str(app.path / 'git' / 'configurations' / name),
+        as_attachment=True,
+        attachment_filename=f'configuration_{name}.txt'
+    )
+    return sfd
 
 
 @post(bp, '/connection/<id>', 'Connect to device')

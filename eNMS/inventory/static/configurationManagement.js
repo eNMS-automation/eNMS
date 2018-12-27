@@ -24,8 +24,9 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
     onclick="showConfigurations('${device.id}')">Configuration</button>`,
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('device', '${device.id}')">Parameters</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="downloadConfiguration('${device.id}')">Download</button>`
+    `<label class="btn btn-default btn-xs btn-file" style="width:100%;">
+    <a href="download_configuration" style="color: black;">Download</a>
+    </label>`
   );
 }
 
@@ -104,7 +105,6 @@ function showConfigurations(id) { // eslint-disable-line no-unused-vars
 
 /**
  * Clear the configurations
- * @param {id} id - Job id.
  */
 function clearConfigurations() { // eslint-disable-line no-unused-vars
   call(`/inventory/clear_configurations/${deviceId}`, () => {

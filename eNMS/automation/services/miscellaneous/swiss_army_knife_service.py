@@ -94,7 +94,7 @@ class SwissArmyKnifeService(Service):
             repo = Repo(Path.cwd() / 'git' / 'configurations')
             try:
                 repo.git.add(A=True)
-                repo.git.commit(m='commit all')
+                repo.git.commit(m='Automatic commit (configurations)')
             except GitCommandError:
                 pass
             repo.remotes.origin.push()

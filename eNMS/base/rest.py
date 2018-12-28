@@ -80,9 +80,6 @@ class UpdateInstance(Resource):
     def post(self, cls):
         return factory(cls, **request.get_json()).serialized
 
-    def put(self, cls):
-        return factory(cls, **request.get_json()).serialized
-
 
 class Migrate(Resource):
     decorators = [auth.login_required]

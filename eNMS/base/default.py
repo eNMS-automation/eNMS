@@ -154,7 +154,10 @@ def create_default_tasks(app):
             'aps_job_id': 'configuration_backup',
             'name': 'configuration_backup',
             'description': 'Back up device configurations',
-            'job': fetch('Service', name='configuration_backup').id,
+            'job': fetch(
+                'Workflow',
+                name='Configuration Management Workflow'
+            ).id,
             'frequency': 10,
             'schedule_job': False
         },

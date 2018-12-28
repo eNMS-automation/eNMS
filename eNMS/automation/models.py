@@ -47,6 +47,7 @@ class Job(Base):
     waiting_time = Column(Integer, default=0)
     creator_id = Column(Integer, ForeignKey('User.id'))
     creator = relationship('User', back_populates='jobs')
+    push_to_gitlab = Column(Boolean, default=False)
     workflows = relationship(
         'Workflow',
         secondary=job_workflow_table,

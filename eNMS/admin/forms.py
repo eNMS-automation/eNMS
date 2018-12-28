@@ -46,7 +46,7 @@ class AdministrationForm(FlaskForm):
         ('3D', '3D View'),
     ))
     git_repository_configurations = StringField()
-    git_repository_services = StringField()
+    git_repository_automation = StringField()
     gotty_start_port = FloatField('Start port')
     gotty_end_port = FloatField('End port')
     mail_sender = StringField()
@@ -76,7 +76,7 @@ class AdministrationForm(FlaskForm):
             'mattermost_verify_certificate'
         ),
         'Gitlab Parameters': (
-            'git_repository_services'
+            'git_repository_automation'
         ),
         'Horizontal Scaling': (
             'pool',

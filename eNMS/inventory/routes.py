@@ -103,12 +103,11 @@ def import_export():
 
 @get(bp, '/download_configuration/<name>', 'View')
 def download_configuration(name):
-    sfd = send_file(
+    send_file(
         filename_or_fp=str(app.path / 'git' / 'configurations' / name),
         as_attachment=True,
         attachment_filename=f'configuration_{name}.txt'
     )
-    return sfd
 
 
 @post(bp, '/connection/<id>', 'Connect to device')

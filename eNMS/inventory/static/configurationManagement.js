@@ -25,7 +25,7 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
     `<button type="button" class="btn btn-primary btn-xs"
     onclick="showTypeModal('device', '${device.id}')">Parameters</button>`,
     `<label class="btn btn-default btn-xs btn-file" style="width:100%;">
-    <a href="download_configuration/${device.name}" style="color: black;">Download</a>
+    <a href="download_configuration/${device.name}">Download</a>
     </label>`
   );
 }

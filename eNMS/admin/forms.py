@@ -76,7 +76,7 @@ class AdministrationForm(FlaskForm):
             'mattermost_verify_certificate'
         ),
         'Gitlab Parameters': (
-            'git_repository_automation'
+            'git_repository_automation',
         ),
         'Horizontal Scaling': (
             'pool',

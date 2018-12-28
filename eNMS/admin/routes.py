@@ -139,7 +139,7 @@ def save_parameters():
     parameters = get_one('Parameters')
     remote_git = request.form['git_repository_automation']
     if parameters.git_repository_automation != remote_git:
-        Repo.clone_from(remote_git, app.path / 'git' / 'services')
+        Repo.clone_from(remote_git, app.path / 'git' / 'automation')
     parameters.update(**request.form)
     database_filtering(fetch('Pool', id=request.form['pool']))
     db.session.commit()

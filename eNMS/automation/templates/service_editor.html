@@ -83,7 +83,7 @@
               <fieldset>
                 <div class="item">
                   <input id="service-send_notification" name="send_notification" type="checkbox" value="y">
-                  <label>send_notification</label>
+                  <label>Send Notification</label>
                 </div>
               </fieldset>
               <label><label for="send_notification_method">Send Notification Method</label></label>
@@ -94,6 +94,12 @@
               <div class='form-group'>
                 {{ service_form.waiting_time(id='service-waiting_time', class="form-control") }}
               </div>
+              <fieldset>
+                <div class="item">
+                  <input id="service-push_to_git" name="push_to_git" type="checkbox" value="y">
+                  <label>Push to git</label>
+                </div>
+              </fieldset>
             </div>
             <div id="step-3" style="min-height: 60vh; overflow-x: hidden;">
               <label><label for="devices">Devices</label></label>
@@ -107,7 +113,7 @@
               <fieldset>
                 <div class="item">
                   <input id="service-multiprocessing" name="multiprocessing" type="checkbox" value="y">
-                  <label>multiprocessing</label>
+                  <label>Multiprocessing</label>
                 </div>
               </fieldset>
               <label><label for="max_processes">Maximum number of processes</label></label>

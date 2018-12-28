@@ -23,7 +23,8 @@ boolean_properties = [
     'mattermost_verify_certificate',
     'multiprocessing',
     'send_notification',
-    'use_workflow_targets'
+    'use_workflow_targets',
+    'push_to_git'
 ]
 list_properties = [
     'devices',
@@ -159,6 +160,7 @@ job_public_properties = [
     'status',
     'state',
     'positions',
+    'push_to_git',
     'waiting_time',
     'number_of_retries',
     'time_between_retries',
@@ -438,7 +440,8 @@ property_types = {
     'send_notification': 'bool',
     'multiprocessing': 'bool',
     'use_workflow_targets': 'bool',
-    'mattermost_verify_certificate': 'bool'
+    'mattermost_verify_certificate': 'bool',
+    'push_to_git': 'bool'
 }
 
 relationships = {

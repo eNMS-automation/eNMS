@@ -25,7 +25,7 @@ def scheduler_job(job_id, aps_job_id=None, targets=None):
         if task and not task.frequency:
             task.status = 'Completed'
         parameters = get_one('Parameters')
-        if job.push_to_gitlab and parameters.git_repository_automation:
+        if job.push_to_git and parameters.git_repository_automation:
             path_git_folder = Path.cwd() / 'git' / 'automation'
             with open(path_git_folder / job.name, 'w') as file:
                 file.write(str_dict(results))

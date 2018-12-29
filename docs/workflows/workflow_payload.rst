@@ -5,13 +5,9 @@ Workflow Payload
 Job dependency
 --------------
 
-One of the property of workflows in eNMS is that a job will not start unless all of its "predecessors" jobs have been executed.
+If a job ``A`` must be executed before a job ``B`` in the workflow, eNMS must be made aware of that dependency by creating a  ``Prerequisite`` edge.
 
-In the example below, the job ``process_payload1`` has two "predecessors" jobs:
-  - ``get_interfaces``
-  - ``get_config``
-
-It will not run until ``get_interfaces`` and ``get_config`` have been executed.
+In the example below, the job ``process_payload1`` uses the results from ``get_facts`` and ``get_interfaces``. By creating two prerequisite edges (from ``get_facts`` to ``process_payload1`` and from ``get_interfaces`` to ``process_payload1``), we ensure that eNMS will not run ``process_payload1`` until both ``get_interfaces`` and ``get_config`` have been executed.
 
 .. image:: /_static/workflows/other_workflows/payload_transfer_workflow.png
    :alt: Payload Transfer Workflow

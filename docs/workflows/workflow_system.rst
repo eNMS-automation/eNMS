@@ -103,3 +103,12 @@ Position saving
 Note that position data in the Workflow Builder graph is saved to the database only when the user navigates away from the graph.
   - Upon leaving the Workflow Builder page.
   - When switching to another workflow.
+
+Automatic refresh
+-----------------
+
+A workflow displayed in the Workflow Builder page is automatically updated:
+  - Every 0.7 second if the workflow is currently running
+  - Every 15 seconds otherwise
+
+This allows multiple users to work concurrently on a single Workflow in the Workflow Builder.

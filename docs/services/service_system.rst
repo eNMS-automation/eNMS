@@ -10,7 +10,7 @@ This file contains the following code :
 ::
 
   # This class serves as a template example for the user to understand
-  # how to implement their own custom services to eNMS.
+  # how to implement their own custom services in eNMS.
   # It can be removed if you are deploying eNMS in production.
   
   # Each new service must inherit from the "Service" class.
@@ -18,7 +18,7 @@ This file contains the following code :
   # SQL parameters of the class.
   # By default, a property (String, Float, Integer) will be displayed in the GUI
   # with a text area for the input.
-  # If the property in a Boolean, it will be displayed as a tick box instead.
+  # If the property is a Boolean, it will be displayed as a tick box instead.
   # If the class contains a "property_name_values" property with a list of
   # values, it will be displayed:
   # - as a multiple selection list if the property is an SQL "MutableList".
@@ -59,7 +59,7 @@ This file contains the following code :
       # the "a_list" property will be displayed as a multiple selection list
       # list, with the values contained in "a_list_values".
       a_list = Column(MutableList.as_mutable(PickleType))
-      # Text area where a python dictionnary is expected
+      # Text area where a python dictionary is expected
       a_dict = Column(MutableDict.as_mutable(PickleType))
       # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
       boolean1 = Column(Boolean)
@@ -91,7 +91,7 @@ This file contains the following code :
           # self.boolean1, etc)
           # You can look at how default services (netmiko, napalm, etc.) are
           # implemented in the /services subfolders (/netmiko, /napalm, etc).
-          # "results" is a dictionnary that will be displayed in the logs.
+          # "results" is a dictionary that will be displayed in the logs.
           # It must contain at least a key "success" that indicates whether
           # the execution of the service was a success or a failure.
           # In a workflow, the "success" value will determine whether to move
@@ -139,7 +139,7 @@ The rules for the auto-generation of service forms are the following:
   - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property whose name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
   - A Boolean property is displayed as a checkbox.
   - A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
-  - A MutableDict property is displayed as a text area. You can write a dictionnary in that text area: it will be converted to an actual python dictionnary.
+  - A MutableDict property is displayed as a text area. You can write a dictionary in that text area: it will be converted to an actual python dictionary.
 
 Inside the ``eNMS/eNMS/automation/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
 
@@ -149,7 +149,7 @@ Custom Services Path
 --------------------
 
 By default, eNMS will scan the ``eNMS/eNMS/automation/services`` folder to instantiate all services you created in that folder.
-If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory, so that you can pull safely pull the latest code from Github), you can set the ``CUSTOM_SERVICES_PATH`` environment variable to the path of the folder that contains your custom services.
+If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory, so that you can safely pull the latest code from Github), you can set the ``CUSTOM_SERVICES_PATH`` environment variable to the path of the folder that contains your custom services.
 
 Service Management
 ------------------

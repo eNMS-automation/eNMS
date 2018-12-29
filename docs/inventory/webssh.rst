@@ -35,7 +35,7 @@ eNMS automatically redirects you to the address and port GoTTY is listening to, 
 Port redirection
 ----------------
 
-In a production environment, only one port should be allowed (to be exposed) by the HTTP web server. In that case, the reverse proxy must be configured to redirect the requests to ``terminal<port_number>`` to ``localhost:<port_number>``.
+In a production environment, only one port should be allowed (to be exposed) by the HTTP web server. In that case, the reverse proxy must be configured to redirect the requests sent to ``terminal<port_number>`` to ``localhost:<port_number>``.
 
 With Nginx, this can be accomplished with the following `location` :
 

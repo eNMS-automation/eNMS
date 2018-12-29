@@ -108,7 +108,7 @@ Consequently, the ``payload`` variable received by ``process_payload1`` will loo
     etc...
   }
 
-If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the the ``job`` function of ``process_payload1`` could look like:
+If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the ``job`` function of ``process_payload1`` could look like:
 
 ::
 

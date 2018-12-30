@@ -38,6 +38,7 @@ Configuration parameters for creating this service instance:
   - ``Specific``
       - ``content`` Paste a configuration block of text here for applying to the target device(s)
       - ``driver`` Which Netmiko driver to use when connecting to the device
+      - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
       - ``enable_mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block
       - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
@@ -76,6 +77,7 @@ Configuration parameters for creating this service instance:
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
+      - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
       - ``dest_file`` Destination file; absolute path and filename to send the file to
       - ``direction`` Upload or Download from the perspective of running on the device
       - ``disable_md5`` Disable checksum validation following the transfer
@@ -126,6 +128,7 @@ Configuration parameters for creating this service instance:
       - ``content_match_regex`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
       - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
       - ``delete_spaces_before_matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+      - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
       - ``driver`` Which Netmiko file transfer driver to use when connecting to the device
       - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
@@ -168,6 +171,7 @@ Configuration parameters for creating this service instance:
           - ``load merge``: add the service configuration to the existing configuration of the target
           - ``load replace``: replace the configuration of the target with the service configuration
       - ``content`` Paste a configuration block of text here for applying to the target device(s)
+      - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
       - ``driver`` Which Netmiko driver to use when connecting to the device
       - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
@@ -204,6 +208,7 @@ Configuration parameters for creating this service instance:
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device
   - ``Specific``
+      - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
       - ``driver`` Which Netmiko driver to use when connecting to the device
       - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
@@ -243,6 +248,7 @@ Configuration parameters for creating this service instance:
       - ``content_match_regex`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
       - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
       - ``delete_spaces_before_matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+      - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
       - ``driver`` Which Netmiko file transfer driver to use when connecting to the device
       - ``getters`` Napalm getters (standard retrieval APIs) are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
       - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)

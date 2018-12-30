@@ -32,3 +32,26 @@ The following form will pop up:
 .. image:: /_static/inventory/configuration_management/poller_configuration.png.png
    :alt: Poller Configuration.
    :align: center
+
+The devices and pools property defines which devices the configuration management system will run on.
+The frequency to which the poller runs is set to 3600 seconds by default.
+You can also enter the address of a remote Git repository: if such a repository is configured, eNMS will push all device configurations to this repository after the polling process has completed.
+
+.. note:: Note: For the Git push mechanism to work, you must ensure that git does not ask for credentials upon pushing to the remote Git repository. This is usually done by creating a SSH key and creating the public Git on the remote Git interface (Gitlab or Github).
+
+Display the configuration
+-------------------------
+
+By clicking on the ``Configuration`` button, you can display and compare the device configurations.
+
+.. image:: /_static/inventory/configuration_management/display_configuration_1.png.png
+   :alt: Display Configuration.
+   :align: center
+
+All runs are stored in the ``Display`` and ``Compare With`` pull-down lists:
+  - Selecting a run from ``Display`` will display the associated configuration.
+  - Selecting a run from ``Compare With`` will compare the configuration with the one selected in ``Display``.
+
+Additionnally, you can click on ``Raw logs`` to open a pop up that contains nothing but the configuration (useful for copy/pasting), and click on ``Clear`` to remove all previously stored configurations from the database.
+
+

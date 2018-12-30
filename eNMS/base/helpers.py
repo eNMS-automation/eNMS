@@ -171,10 +171,7 @@ def post(blueprint, url, permission=None):
             )
             try:
                 result = func(*args, **kwargs)
-                if isinstance(result, Response):
-                    return result
-                else:
-                    return jsonify(result)
+                return jsonify(result)
             except Exception as e:
                 return jsonify({'error': str(e)})
         return inner

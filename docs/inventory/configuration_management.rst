@@ -63,9 +63,17 @@ Comparing two configurations will display a git-like line-by-line diff like the 
 Search System
 -------------
 
+You can filter the list of devices in :guilabel:`inventory/configuration_management` based on the device configurations.
+The filtering system uses the following parameters:
+  - ``Search text``: the text (word or sentence) to search for in the configuration.
+  - ``Regular expression``: whether we're looking for a regular expression match or not.
+  - ``Search only current configuration`` and ``Search in all configurations``: eNMS doesn't just store the most recent configurations, but the 10 most recent configurations by default. You can choose whether to search for the text in the last retrieved configurations, or in all configurations stored in the database.
+
 .. image:: /_static/inventory/configuration_management/search_configuration.png
    :alt: Search Configuration.
    :align: center
+
+Only the devices matched by the search will be displayed in the table. You can click on the ``Undo filter`` to display all devices again.
 
 Advanced
 --------

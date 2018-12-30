@@ -390,6 +390,7 @@ pretty_names = {
     'negative_logic': 'Negative Logic',
     'netmiko_driver': 'Netmiko driver',
     'napalm_driver': 'Napalm driver',
+    'number_of_configuration': 'Number of configurations stored',
     'operating_system': 'Operating System',
     'optional_args': 'Optional arguments',
     'os_version': 'OS version',

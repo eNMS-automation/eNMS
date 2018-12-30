@@ -63,5 +63,5 @@ Comparing two configurations will display a git-like line-by-line diff like the 
 Advanced
 --------
 
-Number of stored configurations
-use_device_driver
+- Number of configurations stored in the database: by default, eNMS stores the 10 most recent configurations in the database. The polling process is controlled by the ``configuration_backup`` service. You can change the number of stored configuration by changing the ``Number of configurations stored`` property.
+- Configurations are retrieved with netmiko. By default, eNMS uses the driver defined at device level to run the command. You can use a driver configured at service level instead, by unticking the ``Use driver from device`` check box.

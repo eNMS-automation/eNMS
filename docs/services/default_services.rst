@@ -9,8 +9,9 @@ Netmiko Configuration Service
 -----------------------------
 
 Uses Netmiko to send a list of commands to be configured on the devices.
-
-A **driver** must be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
+The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
 .. image:: /_static/services/default_services/netmiko_configuration.png
    :alt: Netmiko Configuration service
@@ -48,8 +49,9 @@ Netmiko File Transfer Service
 -----------------------------
 
 Uses Netmiko to send a file to a device, or retrieve a file from a device.
-
-A **driver** must be selected among all available netmiko file transfer drivers.The list of drivers is built upon netmiko ``FILE_TRANSFER_MAP`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L141).
+The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``FILE_TRANSFER_MAP`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L141).
 
 .. image:: /_static/services/default_services/netmiko_file_transfer.png
    :alt: Netmiko File Transfer service
@@ -90,7 +92,9 @@ Netmiko Validation Service
 --------------------------
 
 Uses Netmiko to send commands to a device and validates the output to determine the state of that device. See the ``Workflow`` section for examples of how it is used in a workflow.
-The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
+The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
 There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
 
@@ -133,7 +137,9 @@ Napalm Configuration service
 ----------------------------
 
 Uses Napalm to configure a device.
-The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
+The napalm driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 .. image:: /_static/services/default_services/napalm_configuration.png
    :alt: Napalm configuration service
@@ -171,6 +177,9 @@ Napalm Rollback Service
 -----------------------
 
 Use Napalm to rollback a configuration.
+The napalm driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 .. image:: /_static/services/default_services/napalm_rollback.png
    :alt: Napalm Rollback service
@@ -202,6 +211,10 @@ Napalm getters service
 ----------------------
 
 Uses Napalm to retrieve a list of getters whose output is displayed in the logs. The output can be validated with a command / pattern mechanism like the ``Netmiko Validation Service``.
+Uses Napalm to configure a device.
+The napalm driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 .. image:: /_static/services/default_services/napalm_getters.png
    :alt: Napalm Getters service

@@ -11,11 +11,14 @@ eNMS can work as a network device configuration backup tool, and replace Oxidize
   - Use the ReST API support to return a specified device's configuration
   - Export all device configurations to a remote Git repository (e.g Gitlab)
 
-Configuration
-*************
+Device configuration
+********************
 
+All devices are listed in the :guilabel:`inventory/configuration_management` page. Configurations are retrieved with netmiko with a command defined by the user in the column ``Command to display the configuration``.
+You can edit the value of this column:
+  - by clicking on the ``Parameters`` button in the table.
+  - by importing a spreadsheet with a column ``configuration_command`` for each device (see the documentation on importing a network with an Excel spreadsheet).
 
-
-.. image:: /_static/inventory/objects/object_types.png
-   :alt: Different types of objects
+.. image:: /_static/inventory/configuration_management/device_configuration.png
+   :alt: Configuration Management table.
    :align: center

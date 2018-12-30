@@ -44,7 +44,7 @@ Display the configuration
 
 By clicking on the ``Configuration`` button, you can display and compare the device configurations.
 
-.. image:: /_static/inventory/configuration_management/display_configuration_1.png.png
+.. image:: /_static/inventory/configuration_management/display_configuration.png
    :alt: Display Configuration.
    :align: center
 
@@ -54,4 +54,14 @@ All runs are stored in the ``Display`` and ``Compare With`` pull-down lists:
 
 Additionnally, you can click on ``Raw logs`` to open a pop up that contains nothing but the configuration (useful for copy/pasting), and click on ``Clear`` to remove all previously stored configurations from the database.
 
+Comparing two configurations will display a git-like line-by-line diff like the one below:
 
+.. image:: /_static/inventory/configuration_management/compare_configurations.png
+   :alt: Compare Configurations.
+   :align: center
+
+Advanced
+--------
+
+Number of stored configurations
+use_device_driver

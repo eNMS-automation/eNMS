@@ -60,6 +60,13 @@ Comparing two configurations will display a git-like line-by-line diff like the 
    :alt: Compare Configurations.
    :align: center
 
+Search System
+-------------
+
+.. image:: /_static/inventory/configuration_management/search_configuration.png
+   :alt: Search Configuration.
+   :align: center
+
 Advanced
 --------
 

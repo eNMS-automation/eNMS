@@ -12,7 +12,7 @@ eNMS can work as a network device configuration backup tool, and replace Oxidize
   - Export all device configurations to a remote Git repository (e.g Gitlab)
 
 Device configuration
-********************
+--------------------
 
 All devices are listed in the :guilabel:`inventory/configuration_management` page. Configurations are retrieved with netmiko with a command defined by the user in the column ``Command to display the configuration``.
 You can edit the value of this column:
@@ -21,4 +21,14 @@ You can edit the value of this column:
 
 .. image:: /_static/inventory/configuration_management/device_configuration.png
    :alt: Configuration Management table.
+   :align: center
+
+Configure the poller
+--------------------
+
+Once all commands have been set, you can activate the polling process by cliking on the ``Configure and Start Poller`` button.
+The following form will pop up:
+
+.. image:: /_static/inventory/configuration_management/poller_configuration.png.png
+   :alt: Poller Configuration.
    :align: center

@@ -9,6 +9,7 @@ from wtforms import (
     StringField
 )
 
+from eNMS.automation.helpers import NAPALM_DRIVERS, NETMIKO_DRIVERS
 from eNMS.base.models import MultipleObjectField, ObjectField
 from eNMS.base.properties import (
     custom_properties,
@@ -80,8 +81,8 @@ class AddDevice(AddObjectForm):
     username = StringField()
     password = PasswordField()
     enable_password = PasswordField()
-    napalm_driver = StringField()
-    netmiko_driver = StringField()
+    napalm_driver = SelectField(choices=NAPALM_DRIVERS)
+    netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
 
 
 class ConfigurationManagementForm(FlaskForm):

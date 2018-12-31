@@ -74,7 +74,7 @@ class Device(CustomDevice):
     enable_password = Column(String)
     netmiko_driver = Column(String)
     napalm_driver = Column(String)
-    configuration_command = Column(String)
+    configuration_command = Column(String, default='')
     configurations = Column(MutableDict.as_mutable(PickleType), default={})
     last_failure = Column(String, default='Never')
     last_status = Column(String, default='Never')

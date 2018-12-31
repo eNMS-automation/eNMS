@@ -29,6 +29,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -70,6 +71,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -116,6 +118,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -160,6 +163,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -201,6 +205,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -237,6 +242,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -278,6 +284,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -319,6 +326,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -365,6 +373,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
@@ -395,6 +404,7 @@ Configuration parameters for creating this service instance:
       - ``send_notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.

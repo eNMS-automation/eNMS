@@ -269,3 +269,9 @@ From the :guilabel:`admin/administration` panel, you must configure the sender a
    :align: center
 
 The ``Mail Recipients`` parameter must be set for the mail system to work. If the ``Mattermost Channel`` is not set, the default ``Town Square`` will be used.
+
+Gitlab Export
+-------------
+
+In the :guilabel:`admin/administration` page, you can configure a remote Git repository with the property ``Git Repository Automation``. Each service has a ``Push to Git`` option to push the results of the service to this remote repository.
+This allows comparing the results of a service between any two runs.

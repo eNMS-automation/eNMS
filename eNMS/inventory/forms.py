@@ -80,6 +80,8 @@ class AddDevice(AddObjectForm):
     username = StringField()
     password = PasswordField()
     enable_password = PasswordField()
+    napalm_driver = StringField()
+    netmiko_driver = StringField()
 
 
 class ConfigurationManagementForm(FlaskForm):

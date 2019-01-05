@@ -8,4 +8,4 @@ Inventory
    objects
    configuration_management
    pools
-   webssh
+   web_connection

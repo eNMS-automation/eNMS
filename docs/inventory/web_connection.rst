@@ -3,7 +3,7 @@ Web SSH / Telnet (Unix only)
 ============================
 
 eNMS uses GoTTY to automatically start an SSH or Telnet session to any device.
-GoTTY is a terminal sharing solution that can be found on github: https://github.com/yudai/gotty
+GoTTY is a terminal sharing web solution that can be found on github: https://github.com/yudai/gotty
 
 Installation
 ------------
@@ -18,7 +18,7 @@ By default, eNMS will use the range of ports [9000, 9099]. eNMS uses a rotation 
 
 You can change this range directly from the web UI, in :guilabel:`admin/parameters` :
  
-.. image:: /_static/inventory/webssh/port_allocation.png
+.. image:: /_static/inventory/web_connection/port_allocation.png
    :alt: GoTTY default range of ports
    :align: center
 
@@ -86,27 +86,29 @@ From the device management table
 
 You can connect to a device by clicking on the ``Connect`` button in :guilabel:`objects/device_management`.
 
-.. image:: /_static/inventory/webssh/connect_from_device_management.png
+.. image:: /_static/inventory/web_connection/connect_from_device_management.png
    :alt: Connect buttons
    :align: center
 
 The following window will pop up:
 
-.. image:: /_static/inventory/webssh/connection_parameters.png
+.. image:: /_static/inventory/web_connection/connection_parameters.png
    :alt: Connection window
    :align: center
 
 You can configure the following parameters :
 
+- Property used for the connection: by default, eNMS uses the IP address but you can also tell him to use the name, or any custom property.
 - Accept only one client: the first client will be allowed, all others will be rejected when trying to access the terminal URL.
-- Share session with all clients: a single process will be shared across all clients with tmux (terminal multiplexing), such that all clients will share the same SSH session (same screen).
-- Automatically authenticate: eNMS will use the credentials stored in the Vault (production mode) or the database (test mode) to automatically authenticate to the network device. eNMS uses ``sshpass`` for the authentication: it must be installed if you activate the automatic authentication (``sudo apt-get install sshpass``). By default, eNMS uses the user credentials for the authentication (the ones you use to log in to eNMS). However, it can be configured to use the device credentials instead (the credentials that you can specify when creating a new device).
+- Share session with all clients: a single process will be shared across all clients with tmux (terminal multiplexing), such that all clients will share the same session (same screen).
+- Automatically authenticate (SSH only): eNMS will use the credentials stored in the Vault (production mode) or the database (test mode) to automatically authenticate to the network device. eNMS uses ``sshpass`` for the authentication: it must be installed if you activate the automatic authentication (``sudo apt-get install sshpass``). By default, eNMS uses the user credentials for the authentication (the ones you use to log in to eNMS). However, it can be configured to use the device credentials instead (the credentials that you can specify when creating a new device).
+- Protocol: SSH or Telnet.
 
 From the views
 **************
 
 You can also connect to a device from the geographical or logical view. Double-clicking on a device opens the property panel of that device. This window contains the same ``Connect`` button as in the :guilabel:`objects/device_management` page.
 
-.. image:: /_static/inventory/webssh/connect_from_view.png
+.. image:: /_static/inventory/web_connection/connect_from_view.png
    :alt: Connection window
    :align: center

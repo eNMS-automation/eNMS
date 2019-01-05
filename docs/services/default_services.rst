@@ -338,6 +338,8 @@ Configuration parameters for creating this service instance:
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
+      - ``Validation Method``: ``Text match``, ``Dictionnary Equality`` or ``Dictionnary Inclusion``. Text match means that the results is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. Dictionnary Equality / Inclusion means that eNMS will check the results against a dictionnary specified by the user (via ``Dictionnary match`` property).
+      - ``Dictionnary Match``: dictionnary against which the results must be checked (in case ``Validation Method`` is set to either ``Dictionnary Equality`` or ``Dictionnary Inclusion``.
       - ``has_targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
       - ``call_type`` ReST type operation to be performed: GET, POST, PUT, DELETE
       - ``url`` URL to make the ReST connection to
@@ -416,6 +418,8 @@ Configuration parameters for creating this service instance:
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
+      - ``Validation Method``: ``Text match``, ``Dictionnary Equality`` or ``Dictionnary Inclusion``. Text match means that the results is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. Dictionnary Equality / Inclusion means that eNMS will check the results against a dictionnary specified by the user (via ``Dictionnary match`` property).
+      - ``Dictionnary Match``: dictionnary against which the results must be checked (in case ``Validation Method`` is set to either ``Dictionnary Equality`` or ``Dictionnary Inclusion``.
       - ``direction`` Get or Put the file from/to the target device's filesystem
       - ``protocol`` Use SCP or SFTP to perform the transfer
       - ``source_file`` For Get, source file is the path-plus-filename on the device to retrieve to the eNMS server. For Put, source file is the path-plus-filename on the eNMS server to send to the device.

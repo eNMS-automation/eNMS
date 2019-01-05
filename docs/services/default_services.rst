@@ -250,6 +250,8 @@ Configuration parameters for creating this service instance:
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
+      - ``Validation Method``: ``Text match``, ``Dictionnary Equality`` or ``Dictionnary Inclusion``. Text match means that the results is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. Dictionnary Equality / Inclusion means that eNMS will check the results against a dictionnary specified by the user (via ``Dictionnary match`` property).
+      - ``Dictionnary Match``: dictionnary against which the results must be checked (in case ``Validation Method`` is set to either ``Dictionnary Equality`` or ``Dictionnary Inclusion``.
       - ``content_match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
       - ``content_match_regex`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
       - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
@@ -292,6 +294,8 @@ Configuration parameters for creating this service instance:
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
+      - ``Validation Method``: ``Text match``, ``Dictionnary Equality`` or ``Dictionnary Inclusion``. Text match means that the results is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. Dictionnary Equality / Inclusion means that eNMS will check the results against a dictionnary specified by the user (via ``Dictionnary match`` property).
+      - ``Dictionnary Match``: dictionnary against which the results must be checked (in case ``Validation Method`` is set to either ``Dictionnary Equality`` or ``Dictionnary Inclusion``.
       - ``playbook_path`` path and filename to the Ansible Playbook. For example, if the playbooks subdirectory is located inside the eNMS project directory:  playbooks/juniper_get_facts.yml
       - ``arguments`` ansible-playbook command line options, which are documented here: (https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
       - ``content_match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.

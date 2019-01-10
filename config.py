@@ -21,7 +21,7 @@ class Config(object):
     GIT_PASSWORD = environ.get('GIT_PASSWORD')
 
     # LDAP
-    LDAP_ADDR = environ.get('LDAP_SERVER')
+    LDAP_SERVER = environ.get('LDAP_SERVER')
     LDAP_USERDN = environ.get('LDAP_USERDN')
     LDAP_BASEDN = environ.get('LDAP_BASEDN')
     LDAP_GROUP = environ.get('LDAP_ADMIN_GROUP')

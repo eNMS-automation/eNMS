@@ -4,10 +4,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
-try:
-    from ldap import initialize as initialize_ldap, OPT_REFERRALS
-except ModuleNotFoundError:
-    pass
+from ldap3 import Server
 from os import environ
 from tacacs_plus.client import TACACSClient
 
@@ -25,11 +22,7 @@ db = SQLAlchemy(
     }
 )
 
-ldap_client = initialize_ldap(
-    environ.get('LDAP_SERVER')
-) if USE_LDAP else None
-if ldap_client:
-    ldap_client.set_option(OPT_REFERRALS, 0)
+ldap_client = Server(environ.get('LDAP_SERVER'))
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'

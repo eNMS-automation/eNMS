@@ -500,7 +500,16 @@ def create_workflow_of_workflows():
         workflow.jobs[index].positions['Workflow_of_workflows'] = x * 10, y * 10
 
 
-def create_default_examples(app):
+def create_defaults(app):
+    create_default_users()
+    create_default_parameters()
+    create_default_pools()
+    create_default_services()
+    create_default_workflows()
+    create_default_tasks(app)
+
+
+def create_examples(app):
     create_default_network_topology(app),
     create_example_services()
     create_netmiko_workflow()

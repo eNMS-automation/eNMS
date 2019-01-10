@@ -13,15 +13,7 @@ from eNMS.main import (
     vault_client
 )
 from eNMS.admin.helpers import configure_instance_id
-from eNMS.base.default import (
-    create_default_services,
-    create_default_parameters,
-    create_default_pools,
-    create_default_tasks,
-    create_default_users,
-    create_default_examples,
-    create_default_workflows
-)
+from eNMS.base.default import create_defaults, create_examples
 from eNMS.base.helpers import fetch
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
@@ -83,15 +75,10 @@ def configure_database(app):
     @app.before_first_request
     def create_default():
         db.create_all()
-        create_default_users()
-        create_default_parameters()
-        create_default_pools()
         configure_instance_id()
-        create_default_services()
-        create_default_workflows()
+        create_defaults()
         if app.config['CREATE_EXAMPLES']:
-            create_default_examples(app)
-        create_default_tasks(app)
+            create_examples(app)
         if not scheduler.running:
             scheduler.start()
 

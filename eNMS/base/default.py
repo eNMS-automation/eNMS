@@ -45,7 +45,7 @@ def create_default_parameters():
 
 
 @integrity_rollback
-def create_default_network_topology(app):
+def create_network_topology(app):
     with open(app.path / 'projects' / 'usa.xls', 'rb') as f:
         book = open_workbook(file_contents=f.read())
         for object_type in ('Device', 'Link'):
@@ -500,7 +500,7 @@ def create_workflow_of_workflows():
         workflow.jobs[index].positions['Workflow_of_workflows'] = x * 10, y * 10
 
 
-def create_defaults(app):
+def create_default(app):
     create_default_users()
     create_default_parameters()
     create_default_pools()
@@ -510,7 +510,7 @@ def create_defaults(app):
 
 
 def create_examples(app):
-    create_default_network_topology(app),
+    create_network_topology(app),
     create_example_services()
     create_netmiko_workflow()
     create_napalm_workflow()

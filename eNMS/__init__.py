@@ -73,10 +73,10 @@ def configure_database(app):
         db.session.remove()
 
     @app.before_first_request
-    def create_default():
+    def initialize_database():
         db.create_all()
         configure_instance_id()
-        create_defaults()
+        create_default(app)
         if app.config['CREATE_EXAMPLES']:
             create_examples(app)
         if not scheduler.running:

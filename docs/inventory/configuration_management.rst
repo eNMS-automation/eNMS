@@ -2,14 +2,14 @@
 Configuration Management
 ========================
 
-eNMS can work as a network device configuration backup tool, and replace Oxidized/Rancid.
-  - Poll network elements and download configuration when it changes
-  - Ability to easily view current configuration of a device in the inventory
-  - Search feature for any text in any configuration
-  - For a given inventory device, view differences between different versions of configurations (perhaps this would rely on the proposed git archival service for git diff?)
-  - Download configuration for a device to a local text file
+eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
+  - Poll network elements download configurations when they change
+  - Easily view current configuration of a device in the inventory
+  - Search for any text in any configuration
+  - View differences between various revisions of a configuration
+  - Download device configuration to a local text file
   - Use the ReST API support to return a specified device's configuration
-  - Export all device configurations to a remote Git repository (e.g Gitlab)
+  - Export all device configurations to a remote Git repository (e.g. Gitlab)
 
 Device configuration
 --------------------
@@ -23,10 +23,10 @@ You can edit the value of this column:
    :alt: Configuration Management table.
    :align: center
 
-Configure the poller
---------------------
+Configure polling
+-----------------
 
-Once all commands have been set, you can activate the polling process by cliking on the ``Configure and Start Poller`` button.
+Once all commands have been set, you can activate the polling process by clicking on the ``Configure and Start Poller`` button.
 The following form will pop up:
 
 .. image:: /_static/inventory/configuration_management/poller_configuration.png.png
@@ -52,9 +52,9 @@ All runs are stored in the ``Display`` and ``Compare With`` pull-down lists:
   - Selecting a run from ``Display`` will display the associated configuration.
   - Selecting a run from ``Compare With`` will compare the configuration with the one selected in ``Display``.
 
-Additionnally, you can click on ``Raw logs`` to open a pop up that contains nothing but the configuration (useful for copy/pasting), and click on ``Clear`` to remove all previously stored configurations from the database.
+Additionally, you can click on ``Raw logs`` to open a pop up that contains nothing but the configuration (useful for copy/pasting), and click on ``Clear`` to remove all previously stored configurations from the database.
 
-Comparing two configurations will display a git-like line-by-line diff like the one below:
+Comparing two configurations will display a git-like line-by-line diff similar to the one below:
 
 .. image:: /_static/inventory/configuration_management/compare_configurations.png
    :alt: Compare Configurations.
@@ -67,7 +67,7 @@ You can filter the list of devices in :guilabel:`inventory/configuration_managem
 The filtering system uses the following parameters:
   - ``Search text``: the text (word or sentence) to search for in the configuration.
   - ``Regular expression``: whether we're looking for a regular expression match or not.
-  - ``Search only current configuration`` and ``Search in all configurations``: eNMS doesn't just store the most recent configurations, but the 10 most recent configurations by default. You can choose whether to search for the text in the last retrieved configurations, or in all configurations stored in the database.
+  - ``Search only current configuration`` and ``Search in all configurations``: eNMS doesn't just store the most recent configuration, but instead, it stores the 10 most recent configurations by default. You can choose whether to search for the text in the last retrieved configuration, or in all configurations stored in the database.
 
 .. image:: /_static/inventory/configuration_management/search_configuration.png
    :alt: Search Configuration.

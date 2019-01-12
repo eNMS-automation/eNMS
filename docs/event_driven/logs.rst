@@ -5,7 +5,7 @@ Log-based automation
 eNMS can be configured to act as a Syslog server, allowing for event-driven automation.
 From the :guilabel:`logs/log_automation` page, you can define "log rules":
 
-.. image:: /_static/automation/log_rule_creation.png
+.. image:: /_static/automation/logs/log_rule_creation.png
    :alt: Creation of a log rule
    :align: center
 
@@ -21,7 +21,7 @@ For an incoming Syslog message to match the rule, both the "Source IP" and "Cont
 
 All log rules are listed in a table in :guilabel:`logs/log_automation`:
 
-.. image:: /_static/automation/log_rule_table.png
+.. image:: /_static/automation/logs/log_rule_table.png
    :alt: Log Rule table
    :align: center
 

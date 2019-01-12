@@ -9,7 +9,7 @@ eNMS is a vendor-agnostic NMS designed for building workflow-based network autom
    :align: center
 
 It encompasses the following aspects of network automation:
-  - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmio.
+  - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmiko.
   - **Ansible Service**: Sending and managing Ansible playbooks.
   - **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
   - **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.

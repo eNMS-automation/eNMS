@@ -92,7 +92,7 @@ def login():
             else:
                 abort(403)
         elif USE_LDAP:
-
+            pass
         elif USE_TACACS:
             if tacacs_client.authenticate(name, password).valid:
                 user = factory('User', **{'name': name, 'password': password})

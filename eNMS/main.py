@@ -22,8 +22,7 @@ db = SQLAlchemy(
     }
 )
 
-if USE_LDAP:
-    ldap_client = Server(environ.get('LDAP_SERVER'))
+ldap_client = Server(environ.get('LDAP_SERVER')) if USE_LDAP else None
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'

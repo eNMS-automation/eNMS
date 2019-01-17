@@ -93,7 +93,7 @@ def login():
             try:
                 with Connection(
                     ldap_client,
-                    user=f'{app.config["LDAP_USERDN"]}{user}',
+                    user=f'{app.config["LDAP_USERDN"]}\\{user}',
                     password=password,
                     auto_bind=True,
                     authentication=NTLM

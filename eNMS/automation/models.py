@@ -155,7 +155,7 @@ class Job(Base):
             return {'success': False, 'result': str(e)}
 
     def run(self, payload=None, targets=None):
-        if not targets:
+        if not targets and getattr(self, 'use_workflow_targets', True):
             targets = self.compute_targets()
         if targets:
             results = {'result': {'devices': {}}}
@@ -332,8 +332,6 @@ class Workflow(Job):
 
     def job(self, *args):
         device, payload = args if len(args) == 2 else (None, args)
-        if not self.use_workflow_targets:
-            device = None
         if not self.multiprocessing:
             self.state = {'jobs': {}}
             if device:

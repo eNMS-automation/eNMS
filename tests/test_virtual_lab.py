@@ -34,7 +34,7 @@ def test_rest_api_basic(user_client):
         'http://192.168.105.2:5000/rest/instance/service/get_facts',
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['description'] == 'Getter: get_facts' and len(result) == 24
+    assert result['description'] == 'Getter: get_facts' and len(result) == 28
     put(
         'http://192.168.105.2:5000/rest/instance/service',
         json={'name': 'get_facts', 'description': 'Get facts'},

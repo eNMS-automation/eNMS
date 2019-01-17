@@ -10,10 +10,8 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 from git import Repo
 from ipaddress import IPv4Network
-try:
-    from ldap import INVALID_CREDENTIALS, SCOPE_SUBTREE, SERVER_DOWN
-except ModuleNotFoundError:
-    pass
+from ldap3 import Connection, NTLM, SUBTREE
+from ldap3.core.exceptions import LDAPBindError
 from os import listdir
 from requests import get as rest_get
 from requests.exceptions import ConnectionError
@@ -92,22 +90,20 @@ def login():
             else:
                 abort(403)
         elif USE_LDAP:
-            search_filter='(&(objectClass=person)(samaccountname=' + sys.argv[1] + '))'
-            attributes=['cn','memberOf']
             try:
                 with Connection(
                     ldap_client,
-                    user=user,
+                    user=f'{app.config["LDAP_USERDN"]}{user}',
                     password=password,
                     auto_bind=True,
                     authentication=NTLM
                 ) as connection:
                     connection.search(
-                        base_dn,
-                        search_filter,
+                        app.config['LDAP_BASEDN'],
+                        f'(&(objectClass=person)(samaccountname={name}))',
                         search_scope=SUBTREE,
                         get_operational_attributes=True,
-                        attributes=attributes
+                        attributes=['cn', 'memberOf']
                     )
             except LDAPBindError:
                 abort(403)

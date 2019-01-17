@@ -44,21 +44,21 @@ def test_rest_api_basic(user_client):
         'http://192.168.105.2:5000/rest/instance/service/get_facts',
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['description'] == 'Get facts' and len(result) == 24
-    assert len(fetch_all('Service')) == 21
+    assert result['description'] == 'Getter: get_facts' and len(result) == 28
+    assert len(fetch_all('Service')) == 23
     result = post(
         'http://192.168.105.2:5000/rest/instance/service',
         json={'name': 'new_service', 'vendor': 'Cisco'},
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['vendor'] == 'Cisco' and len(fetch_all('Service')) == 22
-    assert len(fetch_all('Workflow')) == 4
+    assert result['vendor'] == 'Cisco' and len(fetch_all('Service')) == 24
+    assert len(fetch_all('Workflow')) == 5
     result = post(
         'http://192.168.105.2:5000/rest/instance/workflow',
         json={'name': 'new_workflow', 'description': 'New'},
         auth=HTTPBasicAuth('admin', 'admin')
     ).json()
-    assert result['description'] == 'New' and len(fetch_all('Workflow')) == 5
+    assert result['description'] == 'New' and len(fetch_all('Workflow')) == 6
 
 
 @check_blueprints('/automation')

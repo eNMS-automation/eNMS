@@ -332,6 +332,8 @@ class Workflow(Job):
 
     def job(self, *args):
         device, payload = args if len(args) == 2 else (None, args)
+        if not self.use_workflow_targets:
+            device = None
         if not self.multiprocessing:
             self.state = {'jobs': {}}
             if device:

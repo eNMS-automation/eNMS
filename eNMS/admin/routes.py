@@ -92,7 +92,25 @@ def login():
             else:
                 abort(403)
         elif USE_LDAP:
-            pass
+            search_filter='(&(objectClass=person)(samaccountname=' + sys.argv[1] + '))'
+            attributes=['cn','memberOf']
+            try:
+                with Connection(
+                    ldap_client,
+                    user=user,
+                    password=password,
+                    auto_bind=True,
+                    authentication=NTLM
+                ) as connection:
+                    connection.search(
+                        base_dn,
+                        search_filter,
+                        search_scope=SUBTREE,
+                        get_operational_attributes=True,
+                        attributes=attributes
+                    )
+            except LDAPBindError:
+                abort(403)
         elif USE_TACACS:
             if tacacs_client.authenticate(name, password).valid:
                 user = factory('User', **{'name': name, 'password': password})

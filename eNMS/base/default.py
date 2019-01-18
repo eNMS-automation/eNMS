@@ -107,6 +107,12 @@ def create_default_services():
             'name': 'git_push_configurations',
             'description': 'Push configurations to Gitlab',
             'creator': admin
+        },
+        {
+            'type': 'PollerService',
+            'name': 'poller_service',
+            'description': 'Configuration Management Poller',
+            'creator': admin
         }
     ):
         factory(service.pop('type'), **service)
@@ -122,7 +128,7 @@ def create_default_workflows():
         'creator': fetch('User', name='admin').id
     })
     workflow.jobs.extend([
-        fetch('Service', name='configuration_backup'),
+        fetch('Service', name='poller_service'),
         fetch('Service', name='git_push_configurations')
     ])
     edges = [(0, 2, True), (2, 3, True), (2, 3, False), (3, 1, True)]
@@ -143,8 +149,8 @@ def create_default_workflows():
 def create_default_tasks(app):
     tasks = [
         {
-            'aps_job_id': 'configuration_backup',
-            'name': 'configuration_backup',
+            'aps_job_id': 'poller_task',
+            'name': 'poller_task',
             'description': 'Back up device configurations',
             'job': fetch(
                 'Workflow',

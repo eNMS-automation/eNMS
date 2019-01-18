@@ -32,6 +32,7 @@ def create_service_classes():
     dont_create_examples = not int(environ.get('CREATE_EXAMPLES', True))
     for path in path_services:
         for file in path.glob('**/*.py'):
+            print(file)
             if 'init' in str(file):
                 continue
             if dont_create_examples and 'examples' in str(file):

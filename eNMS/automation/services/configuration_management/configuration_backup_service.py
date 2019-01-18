@@ -49,7 +49,8 @@ class ConfigurationBackupService(Service):
                 file.write(config)
             device.last_update = now
         except Exception as e:
-            device.last_status, device.last_update = 'Failure', now
+            netmiko_handler.disconnect()
+            device.last_status = 'Failure'
             device.last_failure = now
             return {'success': False, 'result': str(e)}
         if len(device.configurations) > self.number_of_configuration:

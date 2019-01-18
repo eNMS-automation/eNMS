@@ -150,11 +150,6 @@ class CompareConfigurationsForm(FlaskForm):
     compare_with = SelectField(choices=())
 
 
-class ConfigurationParametersForm(FlaskForm):
-    id = HiddenField()
-    configuration_command = StringField()
-
-
 class SearchConfigurationForm(FlaskForm):
     search_text = StringField()
     regular_expression = BooleanField()

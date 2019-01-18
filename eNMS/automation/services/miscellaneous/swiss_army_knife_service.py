@@ -90,8 +90,9 @@ class SwissArmyKnifeService(Service):
 
     def poller_service(self, _):
         for service in fetch_all('Service'):
-            if service.configuration_backup_service:
+            if getattr(service, 'configuration_backup_service', False):
                 service.try_run()
+        return {'success': True}
 
     def git_push_configurations(self, _):
         parameters = get_one('Parameters')

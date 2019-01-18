@@ -223,7 +223,7 @@ def create_example_services():
         {
             'type': 'ConfigurationBackupService',
             'name': 'configuration_backup',
-            'description': 'Back up device configurations',
+            'description': 'Test Configuration Management',
             'pools': [fetch('Pool', name='Devices only').id],
             'configuration_command': 'show running-config',
             'multiprocessing': True,

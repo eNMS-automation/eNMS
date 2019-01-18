@@ -89,7 +89,9 @@ class SwissArmyKnifeService(Service):
         return {'success': True}
 
     def poller_service(self, _):
-        
+        for service in fetch_all('Service'):
+            if service.configuration_backup_service:
+                service.try_run()
 
     def git_push_configurations(self, _):
         parameters = get_one('Parameters')

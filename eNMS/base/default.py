@@ -109,10 +109,11 @@ def create_default_services():
             'creator': admin
         },
         {
-            'type': 'PollerService',
+            'type': 'SwissArmyKnifeService',
             'name': 'poller_service',
             'description': 'Configuration Management Poller',
-            'creator': admin
+            'creator': admin,
+            'hidden': True
         }
     ):
         factory(service.pop('type'), **service)

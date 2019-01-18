@@ -271,10 +271,7 @@ def configure_poller():
     if parameters.git_repository_configurations != remote_git:
         Repo.clone_from(remote_git, app.path / 'git' / 'configurations')
         parameters.git_repository_configurations = remote_git
-    service = fetch('Service', name='configuration_backup')
     task = fetch('Task', name='poller_task')
-    service.devices = objectify('Device', request.form.get('devices', ''))
-    service.pools = objectify('Pool', request.form.get('pools', ''))
     task.frequency = request.form['polling_frequency']
     db.session.commit()
     task.reschedule()

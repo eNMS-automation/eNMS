@@ -88,6 +88,9 @@ class SwissArmyKnifeService(Service):
             ).json())
         return {'success': True}
 
+    def poller_service(self, _):
+        
+
     def git_push_configurations(self, _):
         parameters = get_one('Parameters')
         if parameters.git_repository_configurations:

@@ -12,6 +12,7 @@ class ConfigurationBackupService(Service):
     __tablename__ = 'ConfigurationBackupService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
     configuration_command = Column(String)

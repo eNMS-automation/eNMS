@@ -107,14 +107,6 @@ def create_default_services():
             'name': 'git_push_configurations',
             'description': 'Push configurations to Gitlab',
             'creator': admin
-        },
-        {
-            'type': 'ConfigurationBackupService',
-            'name': 'configuration_backup',
-            'description': 'Back up device configurations',
-            'pools': [fetch('Pool', name='Devices only').id],
-            'multiprocessing': True,
-            'creator': admin
         }
     ):
         factory(service.pop('type'), **service)
@@ -227,6 +219,15 @@ def create_example_services():
             'destination_path': '/media/sf_VM/eNMS/tests/file_transfer',
             'delete_archive': True,
             'delete_folder': True
+        },
+        {
+            'type': 'ConfigurationBackupService',
+            'name': 'configuration_backup',
+            'description': 'Back up device configurations',
+            'pools': [fetch('Pool', name='Devices only').id],
+            'configuration_command': 'show running-config',
+            'multiprocessing': True,
+            'creator': admin
         }
     ):
         factory(service.pop('type'), **service)

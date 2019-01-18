@@ -14,6 +14,7 @@ class ConfigurationBackupService(Service):
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
+    configuration_command = Column(String)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
@@ -34,7 +35,7 @@ class ConfigurationBackupService(Service):
                 netmiko_handler.enable()
             except Exception:
                 pass
-            config = netmiko_handler.send_command(device.configuration_command)
+            config = netmiko_handler.send_command(self.configuration_command)
             device.last_status = 'Success'
             device.last_runtime = (datetime.now() - now).total_seconds()
             netmiko_handler.disconnect()
@@ -54,7 +55,7 @@ class ConfigurationBackupService(Service):
             device.configurations.pop(min(device.configurations))
         return {
             'success': True,
-            'result': f'Command: {device.configuration_command}'
+            'result': f'Command: {self.configuration_command}'
         }
 
 

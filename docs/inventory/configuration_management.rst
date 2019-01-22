@@ -23,7 +23,8 @@ All devices are listed in the :guilabel:`inventory/configuration_management` pag
    :alt: Configuration Management table.
    :align: center
 
-For some device, the configuration cannot be retrieved only with a netmiko command. You can create your own configuration backup services if need be.
+For some device, the configuration cannot be retrieved only with a netmiko command. You can create your own configuration backup services if need be. Targets are defined at service, like any other services.
+The task ``poller_task`` will periodically run all services that are located in the ``àutomation/services/configuration_management`` directory.
 
 Configure polling
 -----------------
@@ -38,7 +39,7 @@ The following form will pop up:
 The frequency to which the poller runs is set to 3600 seconds by default.
 You can also enter the address of a remote Git repository: if such a repository is configured, eNMS will push all device configurations to this repository after the polling process has completed.
 
-.. note:: Note: For the Git push mechanism to work, you must ensure that git does not ask for credentials upon pushing to the remote Git repository. This is usually done by creating a SSH key and creating the public Git on the remote Git interface (Gitlab or Github).
+.. note:: Note: For the Git push mechanism to work, you must ensure that git does not ask for credentials upon pushing to the remote Git repository. This is usually done by creating an SSH key and creating the public key on the remote Git interface (Gitlab or Github).
 
 Display the configuration
 -------------------------

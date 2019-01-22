@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from importlib import import_module
-from logging import basicConfig, DEBUG, info, StreamHandler
+from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 
 from eNMS.main import (
@@ -99,7 +99,7 @@ def configure_errors(app):
 
 def configure_logs(app):
     basicConfig(
-        level=DEBUG,
+        level=getattr(import_module('logging'), app.config['ENMS_LOG_LEVEL']),
         format='%(asctime)s %(levelname)-8s %(message)s',
         datefmt='%m-%d-%Y %H:%M:%S',
         handlers=[

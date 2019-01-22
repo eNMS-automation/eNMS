@@ -122,9 +122,6 @@ def login():
                     ):
                         user['permissions'] = ['Admin']
                     factory('User', **user)
-                    else:
-                        user = factory(
-                            'User', **)
                     login_user(user)
                     return redirect(url_for('base_blueprint.dashboard'))
             except LDAPBindError:

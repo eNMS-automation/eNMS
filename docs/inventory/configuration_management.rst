@@ -14,14 +14,16 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
 Device configuration
 --------------------
 
-All devices are listed in the :guilabel:`inventory/configuration_management` page. Configurations are retrieved with netmiko with a command defined by the user in the column ``Command to display the configuration``.
-You can edit the value of this column:
-  - by clicking on the ``Parameters`` button in the table.
-  - by importing a spreadsheet with a column ``configuration_command`` for each device (see the documentation on importing a network with an Excel spreadsheet).
+All devices are listed in the :guilabel:`inventory/configuration_management` page. By default, configurations are retrieved by a service called ``Configuration Backup Service``, which
+  - Uses Netmiko to fetch the configuration
+  - Update the device ``configuration`` property (a python dictionnary that contains the most recent configurations)
+  - Write the configuration to a local text file (located in eNMS/git/configurations)
 
 .. image:: /_static/inventory/configuration_management/device_configuration.png
    :alt: Configuration Management table.
    :align: center
+
+For some device, the configuration cannot be retrieved only with a netmiko command. You can create your own configuration backup services if need be.
 
 Configure polling
 -----------------
@@ -33,7 +35,6 @@ The following form will pop up:
    :alt: Poller Configuration.
    :align: center
 
-The devices and pools property defines which devices the configuration management system will run on.
 The frequency to which the poller runs is set to 3600 seconds by default.
 You can also enter the address of a remote Git repository: if such a repository is configured, eNMS will push all device configurations to this repository after the polling process has completed.
 

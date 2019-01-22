@@ -99,7 +99,7 @@ def configure_errors(app):
 
 def configure_logs(app):
     basicConfig(
-        level=getattr(import_module('logging'),app.config['ENMS_LOG_LEVEL']),
+        level=getattr(import_module('logging'), app.config['ENMS_LOG_LEVEL']),
         format='%(asctime)s %(levelname)-8s %(message)s',
         datefmt='%m-%d-%Y %H:%M:%S',
         handlers=[

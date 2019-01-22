@@ -10,6 +10,7 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 from git import Repo
 from ipaddress import IPv4Network
+from json import loads
 from ldap3 import Connection, NTLM, SUBTREE
 from ldap3.core.exceptions import LDAPBindError
 from os import listdir
@@ -93,7 +94,7 @@ def login():
             try:
                 with Connection(
                     ldap_client,
-                    user=f'{app.config["LDAP_USERDN"]}\\{user}',
+                    user=f'{app.config["LDAP_USERDN"]}\\{name}',
                     password=password,
                     auto_bind=True,
                     authentication=NTLM
@@ -103,8 +104,25 @@ def login():
                         f'(&(objectClass=person)(samaccountname={name}))',
                         search_scope=SUBTREE,
                         get_operational_attributes=True,
-                        attributes=['cn', 'memberOf']
+                        attributes=['cn', 'memberOf', 'mail']
                     )
+                    json_response = loads(
+                        connection.response_to_json()
+                    )['entries'][0]
+                        if json_response:
+                            email = json_response['attributes']['mail']
+                            if not email:
+                                email = ""
+                            if any(app.config['LDAP_ADMIN_GROUP'] in s for s in
+                                    json_response['attributes']['memberOf']):
+                                user = factory('User', **{'name': name, 'password': password, 'email': email,
+                                                        'permissions': ['Admin']})
+                            else:
+                                user = factory('User', **{'name': name, 'password': password, 'email': email})
+                            login_user(user)
+                            return redirect(url_for('base_blueprint.dashboard'))
+                        else:
+                            abort(403)
             except LDAPBindError:
                 abort(403)
         elif USE_TACACS:

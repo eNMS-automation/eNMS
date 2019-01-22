@@ -10,7 +10,7 @@ from eNMS.base.helpers import delete_all, export, factory
 
 def configure_instance_id():
     factory('Instance', **{
-        'name': getnode(),
+        'name': str(getnode()),
         'description': 'Localhost',
         'ip_address': '0.0.0.0',
         'status': 'Up'

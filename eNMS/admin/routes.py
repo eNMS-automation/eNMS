@@ -109,20 +109,24 @@ def login():
                     json_response = loads(
                         connection.response_to_json()
                     )['entries'][0]
-                        if json_response:
-                            email = json_response['attributes']['mail']
-                            if not email:
-                                email = ""
-                            if any(app.config['LDAP_ADMIN_GROUP'] in s for s in
-                                    json_response['attributes']['memberOf']):
-                                user = factory('User', **{'name': name, 'password': password, 'email': email,
-                                                        'permissions': ['Admin']})
-                            else:
-                                user = factory('User', **{'name': name, 'password': password, 'email': email})
-                            login_user(user)
-                            return redirect(url_for('base_blueprint.dashboard'))
-                        else:
-                            abort(403)
+                    if not json_response:
+                        abort(403)
+                    user = {
+                        'name': name,
+                        'password': password,
+                        'email': json_response['attributes'].get('mail', '')
+                    }
+                    if any(
+                        app.config['LDAP_ADMIN_GROUP'] in s
+                        for s in json_response['attributes']['memberOf']
+                    ):
+                        user['permissions'] = ['Admin']
+                    factory('User', **user)
+                    else:
+                        user = factory(
+                            'User', **)
+                    login_user(user)
+                    return redirect(url_for('base_blueprint.dashboard'))
             except LDAPBindError:
                 abort(403)
         elif USE_TACACS:

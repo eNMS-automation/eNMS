@@ -50,6 +50,9 @@ class Config(object):
     MAIL_USERNAME = environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
+    # Logging
+    ENMS_LOG_LEVEL = environ.get('ENMS_LOG_LEVEL', 'DEBUG').upper()
+
     # Cluster
     # In production, for scalability and high-availability purposes, it is
     # recommended to deploy not one, but multiple instances of eNMS.

@@ -13,7 +13,7 @@ class Task(Base):
     __tablename__ = 'Task'
     type = 'Task'
     id = Column(Integer, primary_key=True)
-    aps_job_id = Column(Integer)
+    aps_job_id = Column(String)
     name = Column(String, unique=True)
     description = Column(String)
     creation_time = Column(String)

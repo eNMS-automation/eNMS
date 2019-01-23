@@ -93,8 +93,8 @@ Once this is done, you must tell eNMS how to connect to the vault:
 
 eNMS can also unseal the Vault automatically at start time.
 This mechanism is disabled by default. To activate it, you need to:
- - set the ``UNSEAL_VAULT`` environement variable to ``1``
- - set the UNSEAL_VAULT_KEYx (``x`` in [1, 5]) environment variables :
+- set the ``UNSEAL_VAULT`` environement variable to ``1``
+- set the UNSEAL_VAULT_KEYx (``x`` in [1, 5]) environment variables :
 
 ::
 
@@ -200,6 +200,26 @@ You need to export each variable with its value:
  export POSTGRES_USER=your-username
  export POSTGRES_PASSWORD=your-password
  etc...
+
+LDAP/Active Directory Integration
+*********************************
+
+The following environment variables (with example values) control how eNMS integrates with LDAP/Active Directory for user authentication. eNMS first checks to see if the user exists locally inside eNMS. If not and if LDAP/Active Directory is enabled, eNMS tries to authenticate against LDAP/AD using the pure python ldap3 library, and if successful, that user gets added to eNMS locally.
+
+::
+
+  Set to 1 to enable LDAP authentication; otherwise 0:
+    export USE_LDAP=1
+  The LDAP Server URL (also called LDAP Provider URL):
+    export LDAP_SERVER=ldap://domain.ad.company.com
+  The LDAP distinguished name (DN) for the user. This gets combined inside eNMS as "domain.ad.company.com\\username" before being sent to the server.
+    export LDAP_USERDN=domain.ad.company.com
+  The base distinguished name (DN) subtree that is used when searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF) syntax for the entries.
+    export LDAP_BASEDN=DC=domain,DC=ad,DC=company,DC=com
+  The string to match against 'memberOf' attributes of the matched user to determine if the user is granted Admin Privileges inside eNMS.
+    export LDAP_ADMIN_GROUP=company.AdminUsers
+
+.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in eNMS user account creation with minimum privileges. An admin user can afterwards alter that user's privileges from :guilabel:'Admin/User Management'
 
 Default Examples
 ----------------

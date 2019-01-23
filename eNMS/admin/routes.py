@@ -121,8 +121,8 @@ def login():
                         for s in json_response['attributes']['memberOf']
                     ):
                         user['permissions'] = ['Admin']
-                    factory('User', **user)
-                    login_user(user)
+                    new_user = factory('User', **user)
+                    login_user(new_user)
                     return redirect(url_for('base_blueprint.dashboard'))
             except LDAPBindError:
                 abort(403)

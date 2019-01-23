@@ -232,3 +232,14 @@ To deactivate, set the ``CREATE_EXAMPLES`` environment variable to ``0``.
 ::
 
  export CREATE_EXAMPLES=0
+
+Logging
+-------
+
+You can configure eNMS as well as Gunicorn log level with the following environment variables
+
+::
+
+  export ENMS_LOG_LEVEL='CRITICAL'
+  export GUNICORN_LOG_LEVEL='critical'
+  export GUNICORN_ACCESS_LOG='None'

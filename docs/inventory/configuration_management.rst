@@ -24,7 +24,7 @@ All devices are listed in the :guilabel:`inventory/configuration_management` pag
    :align: center
 
 For some device, the configuration cannot be retrieved only with a netmiko command. You can create your own configuration backup services if need be. Targets are defined at service, like any other services.
-The task ``poller_task`` will periodically run all services that are located in the ``àutomation/services/configuration_management`` directory.
+The task ``poller_task`` will periodically run all services whose ``configuration_backup_service`` parameter is set to ``True``, like for the default configuration backup service here: https://github.com/afourmy/eNMS/blob/master/eNMS/automation/services/configuration_management/configuration_backup_service.py#L15 
 
 Configure polling
 -----------------

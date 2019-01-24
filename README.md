@@ -180,7 +180,9 @@ ___
 
 # Coming up next
 
-- RADIUS + Active Directory authentication
+- RADIUS authentication
+- Database clustering architecture
+- Training Videos
 
 # Other projects you might be interested in
 

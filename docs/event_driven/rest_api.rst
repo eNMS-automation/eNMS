@@ -38,8 +38,8 @@ Create or update an instance
  # via a POST or PUT call to the following URL
  http://IP_address/rest/instance/instance_type
 
-Run a service, or a workflow)
-*****************************
+Run a service, or a workflow
+****************************
 
 ::
 

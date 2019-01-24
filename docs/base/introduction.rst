@@ -100,6 +100,23 @@ While services and workflows can be run directly and immediately from the web UI
   :alt: Calendar
   :align: center
 
+Configuration Management
+************************
+
+eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
+  - Poll network elements download configurations when they change
+  - Easily view current configuration of a device in the inventory
+  - Search for any text in any configuration
+  - View differences between various revisions of a configuration
+  - Download device configuration to a local text file
+  - Use the ReST API support to return a specified device’s configuration
+  - Export all device configurations to a remote Git repository (e.g. Gitlab)
+
+.. image:: /_static/inventory/configuration_management/configuration_management.png
+  :alt: Calendar
+  :align: center
+
+
 Event-driven automation
 ***********************
 

@@ -100,6 +100,19 @@ While services and workflows can be run directly and immediately from the web UI
 - Online Demo: _[Calendar](http://afourmy.pythonanywhere.com/scheduling/calendar)_
 - Docs: _[Scheduling](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)_
 
+## 6. Configuration Management
+
+eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
+- Poll network elements download configurations when they change
+- Easily view current configuration of a device in the inventory
+- Search for any text in any configuration
+- View differences between various revisions of a configuration
+- Download device configuration to a local text file
+- Use the ReST API support to return a specified device’s configuration
+- Export all device configurations to a remote Git repository (e.g. Gitlab)
+
+[![Configuration Management](docs/_static/inventory/configuration_management/configuration_management.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
+
 ## 6. Event-driven automation
 
 Event-driven automation in eNMS has two aspects:
@@ -115,6 +128,8 @@ Three types of notification are available:
 - via mail (a brief summary and the full logs attached as a textfile)
 - via Slack
 - via Mattermost (Open-Source and private alternative to Slack)
+
+Additionally, eNMS can be configured to push the results to a remote Git repository.
 
 ___
 
@@ -165,7 +180,6 @@ ___
 
 # Coming up next
 
-- Gitlab support (e.g push the logs of an automation task to gitlab)
 - RADIUS + Active Directory authentication
 
 # Other projects you might be interested in

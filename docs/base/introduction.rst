@@ -113,9 +113,8 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
   - Export all device configurations to a remote Git repository (e.g. Gitlab)
 
 .. image:: /_static/inventory/configuration_management/configuration_management.png
-  :alt: Calendar
+  :alt: Configuration Management
   :align: center
-
 
 Event-driven automation
 ***********************

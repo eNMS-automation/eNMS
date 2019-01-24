@@ -62,6 +62,7 @@ def create_network_topology(app):
 
 @integrity_rollback
 def create_default_services():
+    print(fetch_all('Device'))
     admin = fetch('User', name='admin').id
     for service in (
         {

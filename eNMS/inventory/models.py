@@ -65,7 +65,7 @@ class Device(CustomDevice):
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
     operating_system = Column(String)
     os_version = Column(String)
-    ip_address = Column(String)
+    ip_address = Column(String, unique=True)
     longitude = Column(Float)
     latitude = Column(Float)
     port = Column(Integer, default=22)

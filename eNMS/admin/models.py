@@ -77,7 +77,7 @@ class Parameters(Base):
         String,
         default='http://192.168.105.2:8065/hooks/dnuajekqp78jjbbajo8ewuw4ih'
     )
-    mattermost_channel = Column(String)
+    mattermost_channel = Column(String, default='')
     mattermost_verify_certificate = Column(Boolean, default=True)
     slack_token = Column(String)
     slack_channel = Column(String)

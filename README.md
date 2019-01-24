@@ -137,8 +137,8 @@ ___
 
 ## 1. Authentication
 
-- eNMS supports TACACS+ authentication: upon logging in, a request will be sent to your TACACS+ server to validate the credentials and log in the user.
-- Authentication with RADIUS and Active Directory are currently under development.
+- eNMS supports TACACS+ and LDAP/Active Directory authentication: upon logging in, a request will be sent to your TACACS+/LDAP server to validate the credentials and log in the user.
+- Authentication with RADIUS is currently under development.
 
 ## 2. Network creation with external Network Source of Truth
 

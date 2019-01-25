@@ -221,6 +221,40 @@ The following environment variables (with example values) control how eNMS integ
 
 .. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in eNMS user account creation with minimum privileges. An admin user can afterwards alter that user's privileges from :guilabel:'Admin/User Management'
 
+GIT Integration
+***************
+
+To enable sending device configs captured by configuration management, as well as service and workflow job logs, to GIT for revision control you will need to configure the following:
+
+First, create two separate git projects in your repository. Assign a single GIT userid to have write access to both.
+
+Additionally, the following commands need to be run to properly configure GIT in the eNMS environment. These commands populate ~/.gitconfig:
+
+::
+
+  git config --global user.name "git_username"
+  git config --global user.email "git_username_email@company.com"
+  git config --global push.default simple
+
+Similarly, if your environment already has an SSH key created for other purposes, you will need to create a new SSH key to register with the GIT server:
+
+::
+
+  ssh-keygen -t rsa -f ~/.ssh/id_rsa.git
+
+And to instruct SSH to use the new key when connecting with the GIT server, create an entry in ~/.ssh/config:
+
+::
+
+  Host git-server
+    Hostname git-server.company.com
+    IdentityFile ~/.ssh/id_rsa.git
+    IdentitiesOnly yes
+
+Additionally, the URL of the GIT server needs to be populated:
+  - from the Admin Panel of the UI to store the results of services and workflows in git.
+  - from the Configuration Management page to store device configurations in git.
+
 Default Examples
 ----------------
 

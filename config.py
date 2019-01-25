@@ -16,10 +16,6 @@ class Config(object):
     # Vault
     USE_VAULT = int(environ.get('USE_VAULT', False))
 
-    # Gitlab
-    GIT_USERNAME = environ.get('GIT_USERNAME')
-    GIT_PASSWORD = environ.get('GIT_PASSWORD')
-
     # LDAP
     LDAP_SERVER = environ.get('LDAP_SERVER')
     LDAP_USERDN = environ.get('LDAP_USERDN')

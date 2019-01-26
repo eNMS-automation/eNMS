@@ -136,7 +136,11 @@ def login():
         else:
             abort(403)
     if not current_user.is_authenticated:
-        return render_template('login.html', login_form=LoginForm(request.form))
+        login_form=LoginForm(request.form)
+        login_form.authentication_method.choices = (
+            ('Database', 'Database'),
+        )
+        return render_template('login.html', login_form=login_form)
     return redirect(url_for('base_blueprint.dashboard'))
 
 

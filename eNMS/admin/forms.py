@@ -15,6 +15,7 @@ from eNMS.base.properties import import_properties, user_permissions
 
 
 class LoginForm(FlaskForm):
+    authentication_method = SelectField(choices=())
     name = StringField()
     password = PasswordField()
 

@@ -14,7 +14,7 @@ def define_device(subtype, description):
         ('location', 'paris'),
         ('vendor', 'Cisco'),
         ('type', subtype),
-        ('ip_address', '192.168.1.88'),
+        ('ip_address', subtype + description),
         ('operating_system', 'IOS'),
         ('os_version', '1.4.4.2'),
         ('longitude', '12'),

@@ -164,11 +164,14 @@ def scan_cluster():
     protocol = parameters.cluster_scan_protocol
     for ip_address in IPv4Network(parameters.cluster_scan_subnet):
         try:
+            instance = rest_get(
+                f'{protocol}://{ip_address}/rest/is_alive',
+                timeout=parameters.cluster_scan_timeout
+            ).json()
+            if app.config['CLUSTER_ID'] != instance.pop('cluster_id'):
+                continue
             factory('Instance', **{
-                **rest_get(
-                    f'{protocol}://{ip_address}/rest/is_alive',
-                    timeout=parameters.cluster_scan_timeout
-                ).json(),
+                **instance,
                 **{'ip_address': str(ip_address)}
             })
         except ConnectionError:

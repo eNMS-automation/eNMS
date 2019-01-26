@@ -52,15 +52,9 @@ class Config(object):
     # Cluster
     # In production, for scalability and high-availability purposes, it is
     # recommended to deploy not one, but multiple instances of eNMS.
-    # When a cluster of eNMS is deployed and the "CLUSTER" environment variable
-    # is set to "1":
-    # - Each request to start an automation job (service or workflow) will be
-    # redirected to the least busy eNMS instance (load-balancing). This applies
-    # to the requests from the REST API, as well as the requests from the GUI.
-    # - When a job is scheduled to run at a later time, it will be replicated
-    # to all instances of eNMS so that even if an instance is down, the job
-    # will be executed anyway.
-    CLUSTER = int(environ.get('CLUSTER', False))
+    # There can be multiple clusters of eNMS instances: an instance will only
+    # communicate with instances in the same cluster ID.
+    CLUSTER_ID = int(environ.get('CLUSTER', False))
 
 
 class DebugConfig(Config):

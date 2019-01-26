@@ -41,6 +41,9 @@ class RestAutomation(Resource):
         targets = {
             fetch('Device', name=device_name).id
             for device_name in payload.get('devices', '')
+        } | {
+            fetch('Device', ip_address=ip_address).id
+            for ip_address in payload.get('ip_addresses', '')
         }
         for pool_name in payload.get('pools', ''):
             targets |= {d.id for d in fetch('Pool', name=pool_name).devices}
@@ -49,7 +52,7 @@ class RestAutomation(Resource):
                 id=str(datetime.now()),
                 func=scheduler_job,
                 run_date=datetime.now(),
-                args=[job.id],
+                args=[job.id, None, targets],
                 trigger='date'
             )
             return job.serialized

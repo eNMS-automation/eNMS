@@ -83,14 +83,14 @@ def instance_management():
 def login():
     if request.method == 'POST':
         name, password = request.form['name'], request.form['password']
-        user = fetch('User', name=name)
-        if user:
+        if request.form['authentication_method'] == 'Database':
+            user = fetch('User', name=name)
             if password == user.password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:
                 abort(403)
-        elif USE_LDAP:
+        elif request.form['authentication_method'] == 'LDAP':
             try:
                 with Connection(
                     ldap_client,
@@ -126,7 +126,7 @@ def login():
                     return redirect(url_for('base_blueprint.dashboard'))
             except LDAPBindError:
                 abort(403)
-        elif USE_TACACS:
+        elif request.form['authentication_method'] == 'TACACS':
             if tacacs_client.authenticate(name, password).valid:
                 user = factory('User', **{'name': name, 'password': password})
                 login_user(user)
@@ -137,9 +137,12 @@ def login():
             abort(403)
     if not current_user.is_authenticated:
         login_form=LoginForm(request.form)
-        login_form.authentication_method.choices = (
-            ('Database', 'Database'),
-        )
+        authentication_methods = [('Database',) * 2]
+        if USE_LDAP:
+            authentication_methods.append(('LDAP',) * 2)
+        if USE_TACACS:
+            authentication_methods.append(('TACACS',) * 2)
+        login_form.authentication_method.choices = authentication_methods
         return render_template('login.html', login_form=login_form)
     return redirect(url_for('base_blueprint.dashboard'))
 

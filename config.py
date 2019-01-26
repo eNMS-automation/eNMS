@@ -50,7 +50,6 @@ class Config(object):
     ENMS_LOG_LEVEL = environ.get('ENMS_LOG_LEVEL', 'DEBUG').upper()
 
     # Cluster
-    
     # In production, for scalability and high-availability purposes, it is
     # recommended to deploy not one, but multiple instances of eNMS.
     CLUSTER = int(environ.get('CLUSTER', False))

@@ -1,10 +1,7 @@
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import current_app, request, session
-from flask_login import current_user
+from flask import request, session
 from json import dumps
-from requests import post as rest_post
-from requests.auth import HTTPBasicAuth
 
 from eNMS.main import db, scheduler
 from eNMS.automation.helpers import scheduler_job

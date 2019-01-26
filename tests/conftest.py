@@ -23,7 +23,11 @@ def user_client():
     db.session.close()
     db.drop_all()
     client = app.test_client()
-    login = {'name': 'admin', 'password': 'admin'}
+    login = {
+        'name': 'admin',
+        'password': 'admin',
+        'authentication_method': 'Database'
+    }
     with app.app_context():
         client.post('/admin/login', data=login)
         yield client

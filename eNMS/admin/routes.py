@@ -81,6 +81,7 @@ def instance_management():
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    print(request.form)
     if request.method == 'POST':
         name, password = request.form['name'], request.form['password']
         if request.form['authentication_method'] == 'Database':
@@ -136,7 +137,7 @@ def login():
         else:
             abort(403)
     if not current_user.is_authenticated:
-        login_form=LoginForm(request.form)
+        login_form = LoginForm(request.form)
         authentication_methods = [('Database',) * 2]
         if USE_LDAP:
             authentication_methods.append(('LDAP',) * 2)

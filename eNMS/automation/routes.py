@@ -174,20 +174,13 @@ def run_job(job_id):
             return {'error': 'Set devices or pools as targets first.'}
         if not job.has_targets and targets:
             return {'error': 'This service should not have targets configured.'}
-    if current_app.config['CLUSTER']:
-        rest_post(
-            'http://0.0.0.0/rest/run_job',
-            json={'name': job.name},
-            auth=HTTPBasicAuth(current_user.name, current_user.password),
-        )
-    else:
-        scheduler.add_job(
-            id=str(datetime.now()),
-            func=scheduler_job,
-            run_date=datetime.now(),
-            args=[job.id],
-            trigger='date'
-        )
+    scheduler.add_job(
+        id=str(datetime.now()),
+        func=scheduler_job,
+        run_date=datetime.now(),
+        args=[job.id],
+        trigger='date'
+    )
     return job.serialized
 
 

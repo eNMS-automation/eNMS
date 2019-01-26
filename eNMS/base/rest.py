@@ -26,6 +26,7 @@ class Heartbeat(Resource):
     def get(self):
         return {
             'name': getnode(),
+            'cluster_id': current_app.config['CLUSTER_ID'],
             'cpu_load': cpu_percent()
         }
 

@@ -50,11 +50,11 @@ class Config(object):
     ENMS_LOG_LEVEL = environ.get('ENMS_LOG_LEVEL', 'DEBUG').upper()
 
     # Cluster
+    
     # In production, for scalability and high-availability purposes, it is
     # recommended to deploy not one, but multiple instances of eNMS.
-    # There can be multiple clusters of eNMS instances: an instance will only
-    # communicate with instances in the same cluster ID.
-    CLUSTER_ID = int(environ.get('CLUSTER', False))
+    CLUSTER = int(environ.get('CLUSTER', False))
+    CLUSTER_ID = int(environ.get('CLUSTER_ID', 1))
 
 
 class DebugConfig(Config):

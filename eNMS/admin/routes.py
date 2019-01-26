@@ -81,7 +81,6 @@ def instance_management():
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-    print(request.form)
     if request.method == 'POST':
         name, password = request.form['name'], request.form['password']
         if request.form['authentication_method'] == 'Database':

@@ -15,7 +15,8 @@ for index, header in enumerate((
     'name',
     'longitude',
     'latitude',
-    'subtype'
+    'subtype',
+    'ip_address'
 )):
     ws.write(0, index, header)
 
@@ -24,6 +25,6 @@ for i in range(1, 1000):
     ws.write(i, 1, uniform(-40., 40.))
     ws.write(i, 2, uniform(-40., 40.))
     ws.write(i, 3, 'router')
-    ws.write(i, 4, 'router')
+    ws.write(i, 4, i)
 
 wb.save(Path.cwd() / 'test.xls')

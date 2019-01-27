@@ -32,18 +32,24 @@ def site_root():
 @bp.route('/server_side_processing')
 @login_required
 def server_side_processing():
+    print(request.args)
     start = int(request.args['start'])
     end = start + int(request.args['length'])
     model = classes['Device']
+    number = len(model.query.all())
     data = []
-    for device in db.session.query(model).filter(model.id.between(start, end)).all():
+    print(start, end)
+    for device in model.query.all():
+        print(device.id)
+    for device in db.session.query(model).limit(end - start).offset(start).all():
+        print(data)
         device = device.serialized
         device_data = [device[p] for p in device_table_properties] + ["a"]*5
         data.append(device_data)
     return jsonify({
         'draw': int(request.args['draw']),
-        'recordsTotal': 30,
-        'recordsFiltered': 30,
+        'recordsTotal': number,
+        'recordsFiltered': number,
         'data': data
     })
 

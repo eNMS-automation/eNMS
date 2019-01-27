@@ -288,6 +288,11 @@ cls_to_properties = {
     'Task': task_serialized_properties
 }
 
+table_properties = {
+    'device': device_table_properties,
+    'link': link_table_properties[:-2]
+}
+
 cls_to_properties = {k: ['id'] + v for k, v in cls_to_properties.items()}
 
 default_diagrams_properties = {

@@ -26,7 +26,7 @@ const table = $('#table').DataTable({
   fixedHeader: true,
   processing: true,
   serverSide: true,
-  ajax: '/server_side_processing',
+  ajax: '/server_side_processing/device',
 }); // eslint-disable-line
 
 (function() {

@@ -19,7 +19,7 @@ from eNMS.base.helpers import (
 )
 from eNMS.base.properties import (
     default_diagrams_properties,
-    device_table_properties,
+    table_properties,
     reverse_pretty_names,
     type_to_diagram_properties
 )
@@ -30,28 +30,30 @@ def site_root():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@bp.route('/server_side_processing')
+@bp.route('/server_side_processing/<table>')
 @login_required
-def server_side_processing():
-    print(request.args)
+def server_side_processing(table):
     start = int(request.args['start'])
     end = start + int(request.args['length'])
-    model = classes['Device']
-    filters = dict(zip(device_table_properties, [
-        request.args[f'columns[{i}][search][value]']
-        for i in range(len(device_table_properties))
-    ]))
+    model, properties = classes[table], table_properties[table]
+    filters = {
+        property: request.args[f'columns[{i}][search][value]']
+        for property, i in enumerate(properties)
+        if request.args[f'columns[{i}][search][value]']
+    }
+    print(filters)
+    print(model.query.all())
     filtered = db.session.query(model).filter(and_(*[
         getattr(model, property).contains(value)
         for property, value in filters.items()
     ]))
-    print(filtered)
+    print(filtered.all())
     number = len(filtered.all())
     print(number)
     data = []
     for device in filtered.limit(end - start).offset(start).all():
         device = device.serialized
-        device_data = [device[p] for p in device_table_properties] + ['a'
+        device_data = [device[p] for p in properties] + ['a'
         # f'''<button type="button" class="btn btn-info btn-xs"
         # onclick="deviceAutomationModal('{device["id"]}')">
         # Automation</button>''',
@@ -66,7 +68,7 @@ def server_side_processing():
         # f'''<button type="button" class="btn btn-danger btn-xs"
         # onclick="confirmDeletion('device', '{device["id"]}')">
         # Delete</button>'''
-    ]*5
+    ]*3
         data.append(device_data)
     return jsonify({
         'draw': int(request.args['draw']),

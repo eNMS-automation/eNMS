@@ -52,7 +52,6 @@ def server_side_processing():
     for device in filtered.limit(end - start).offset(start).all():
         device = device.serialized
         device_data = [device[p] for p in device_table_properties] + ['a'
-        
         # f'''<button type="button" class="btn btn-info btn-xs"
         # onclick="deviceAutomationModal('{device["id"]}')">
         # Automation</button>''',

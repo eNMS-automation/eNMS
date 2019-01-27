@@ -22,7 +22,7 @@ $('#table thead tr:eq(1) th').each(function(i) {
 });
 
 const table = $('#table').DataTable({
-  orderCellsTop: true,
+  ordering: false,
   fixedHeader: true,
   processing: true,
   serverSide: true,

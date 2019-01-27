@@ -6,9 +6,17 @@ devices: false
 doc: false
 */
 
-$('#table tfoot th').each(function() {
+$('#table thead tr').clone(true).appendTo('#table thead');
+$('#table thead tr:eq(1) th').each(function(i) {
   var title = $(this).text();
-  $(this).html('<input type="text" placeholder="Search '+title+'" />');
+  if (!['Edit', 'Duplicate', 'Delete'].includes(title)) {
+    $(this).html('<input type="text" style="width: 100%;"/>');
+    $('input', this).on('keyup change', function() {
+      if (table.column(i).search() !== this.value) {
+        table.column(i).search(this.value).draw();
+      }
+    });
+  }
 });
 
 const table = $('#table').DataTable({

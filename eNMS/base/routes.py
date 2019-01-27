@@ -31,10 +31,8 @@ def site_root():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@bp.route('/server_side_processing/<table>')
-@login_required
+@get(bp, '/server_side_processing/<table>')
 def server_side_processing(table):
-    start, length = int(request.args['start']), int(request.args['length']) 
     model, properties = classes[table], table_properties[table]
     filtered = db.session.query(model).filter(and_(*[
         getattr(model, property).contains(value)
@@ -51,7 +49,9 @@ def server_side_processing(table):
         'data': [
             [getattr(device, property) for property in properties]
             + table_static_entries(table, device)
-            for device in filtered.limit(length).offset(start).all()
+            for device in filtered.limit(
+                int(request.args['length'])
+            ).offset(int(request.args['start'])).all()
         ]
     })
 

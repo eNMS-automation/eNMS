@@ -6,7 +6,11 @@ devices: false
 doc: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line
+const table = $('#table').DataTable({
+  'processing': true,
+  'serverSide': true,
+  'ajax': '/server_side_processing'
+}); // eslint-disable-line
 
 /**
  * Table Actions.
@@ -32,7 +36,4 @@ function tableActions(values, device) { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
   convertSelect('#jobs');
-  for (let i = 0; i < devices.length; i++) {
-    addInstance('create', 'device', devices[i]);
-  }
 })();

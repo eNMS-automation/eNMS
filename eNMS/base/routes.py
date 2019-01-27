@@ -1,9 +1,10 @@
 from collections import Counter
 from json.decoder import JSONDecodeError
 from logging import info
-from flask import redirect, request, url_for
-from flask_login import current_user
+from flask import jsonify, redirect, request, url_for
+from flask_login import current_user, login_required
 
+from eNMS import db
 from eNMS.base import bp
 from eNMS.base.classes import classes
 from eNMS.base.helpers import (
@@ -17,6 +18,7 @@ from eNMS.base.helpers import (
 )
 from eNMS.base.properties import (
     default_diagrams_properties,
+    device_table_properties,
     reverse_pretty_names,
     type_to_diagram_properties
 )
@@ -25,6 +27,25 @@ from eNMS.base.properties import (
 @bp.route('/')
 def site_root():
     return redirect(url_for('admin_blueprint.login'))
+
+
+@bp.route('/server_side_processing')
+@login_required
+def server_side_processing():
+    start = int(request.args['start'])
+    end = start + int(request.args['length'])
+    model = classes['Device']
+    data = []
+    for device in db.session.query(model).filter(model.id.between(start, end)).all():
+        device = device.serialized
+        device_data = [device[p] for p in device_table_properties] + ["a"]*5
+        data.append(device_data)
+    return jsonify({
+        'draw': int(request.args['draw']),
+        'recordsTotal': 30,
+        'recordsFiltered': 30,
+        'data': data
+    })
 
 
 @get(bp, '/dashboard')

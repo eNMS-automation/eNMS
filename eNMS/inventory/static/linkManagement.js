@@ -19,6 +19,7 @@ $('#table thead tr:eq(1) th').each(function(i) {
 });
 
 const table = $('#table').DataTable({
+  sDom: '',
   orderCellsTop: true,
   fixedHeader: true
 }); // eslint-disable-line

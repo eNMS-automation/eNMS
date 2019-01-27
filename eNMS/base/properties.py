@@ -295,6 +295,27 @@ table_properties = {
     'link': link_table_properties[:-2]
 }
 
+def table_static_entries(type, obj):
+    return {
+        'device': [
+            f'''<button type="button" class="btn btn-info btn-xs"
+            onclick="deviceAutomationModal('{obj.id}')">
+            Automation</button>''',
+            f'''<button type="button" class="btn btn-success btn-xs"
+            onclick="connectionParametersModal('{obj.id}')">
+            Connect</button>''',
+            f'''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('device', '{obj.id}')">Edit</button>''',
+            f'''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('device', '{obj.id}', true)">
+            Duplicate</button>''',
+            f'''<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('device', '{obj.id}')">
+            Delete</button>'''
+        ]
+    }[type]
+    
+
 cls_to_properties = {k: ['id'] + v for k, v in cls_to_properties.items()}
 
 default_diagrams_properties = {

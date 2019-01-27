@@ -21,6 +21,7 @@ from eNMS.base.properties import (
     default_diagrams_properties,
     table_properties,
     reverse_pretty_names,
+    table_static_entries,
     type_to_diagram_properties
 )
 
@@ -35,40 +36,23 @@ def site_root():
 def server_side_processing(table):
     start, length = int(request.args['start']), int(request.args['length']) 
     model, properties = classes[table], table_properties[table]
-    filters = {
-        property: request.args[f'columns[{i}][search][value]']
-        for i, property in enumerate(properties)
-        if request.args[f'columns[{i}][search][value]']
-    }
     filtered = db.session.query(model).filter(and_(*[
         getattr(model, property).contains(value)
-        for property, value in filters.items()
+        for property, value in {
+            property: request.args[f'columns[{i}][search][value]']
+            for i, property in enumerate(properties)
+            if request.args[f'columns[{i}][search][value]']
+        }.items()
     ]))
-    data = []
-    for device in filtered.limit(length).offset(start).all():
-        device = device.serialized
-        device_data = [device[p] for p in properties] + ['a'
-        # f'''<button type="button" class="btn btn-info btn-xs"
-        # onclick="deviceAutomationModal('{device["id"]}')">
-        # Automation</button>''',
-        # f'''<button type="button" class="btn btn-success btn-xs"
-        # onclick="connectionParametersModal('{device["id"]}')">
-        # Connect</button>''',
-        # f'''<button type="button" class="btn btn-primary btn-xs"
-        # onclick="showTypeModal('device', '{device["id"]}')">Edit</button>''',
-        # f'''<button type="button" class="btn btn-primary btn-xs"
-        # onclick="showTypeModal('device', '{device["id"]}', true)">
-        # Duplicate</button>''',
-        # f'''<button type="button" class="btn btn-danger btn-xs"
-        # onclick="confirmDeletion('device', '{device["id"]}')">
-        # Delete</button>'''
-    ]*3
-        data.append(device_data)
     return jsonify({
         'draw': int(request.args['draw']),
-        'recordsTotal': len(model.all()),
+        'recordsTotal': len(model.query.all()),
         'recordsFiltered': len(filtered.all()),
-        'data': data
+        'data': [
+            [getattr(device, property) for property in properties]
+            + table_static_entries(table, device)
+            for device in filtered.limit(length).offset(start).all()
+        ]
     })
 
 

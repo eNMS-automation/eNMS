@@ -132,14 +132,6 @@ class Link(Object):
                 'destination': destination.id
             })
 
-    @property
-    def source_name(self):
-        return self.source.name
-
-    @property
-    def destination_name(self):
-        return self.destination.name
-
 
 AbstractPool = type('AbstractPool', (Base,), {
     '__tablename__': 'AbstractPool',

@@ -44,7 +44,6 @@ def server_side_processing(table):
         getattr(model, property).contains(value)
         for property, value in filters.items()
     ]))
-    number = 
     data = []
     for device in filtered.limit(length).offset(start).all():
         device = device.serialized

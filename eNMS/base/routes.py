@@ -3,6 +3,7 @@ from json.decoder import JSONDecodeError
 from logging import info
 from flask import jsonify, redirect, request, url_for
 from flask_login import current_user, login_required
+from sqlalchemy import and_
 
 from eNMS import db
 from eNMS.base import bp
@@ -36,9 +37,19 @@ def server_side_processing():
     start = int(request.args['start'])
     end = start + int(request.args['length'])
     model = classes['Device']
-    number = len(model.query.all())
+    filters = dict(zip(device_table_properties, [
+        request.args[f'columns[{i}][search][value]']
+        for i in range(len(device_table_properties))
+    ]))
+    filtered = db.session.query(model).filter(and_(*[
+        getattr(model, property).contains(value)
+        for property, value in filters.items()
+    ]))
+    print(filtered)
+    number = len(filtered.all())
+    print(number)
     data = []
-    for device in db.session.query(model).limit(end - start).offset(start).all():
+    for device in filtered.limit(end - start).offset(start).all():
         device = device.serialized
         device_data = [device[p] for p in device_table_properties] + ['a'
         

@@ -38,13 +38,24 @@ def server_side_processing():
     model = classes['Device']
     number = len(model.query.all())
     data = []
-    print(start, end)
-    for device in model.query.all():
-        print(device.id)
     for device in db.session.query(model).limit(end - start).offset(start).all():
-        print(data)
         device = device.serialized
-        device_data = [device[p] for p in device_table_properties] + ["a"]*5
+        device_data = [device[p] for p in device_table_properties] + [
+        f'''<button type="button" class="btn btn-info btn-xs"
+        onclick="deviceAutomationModal('{device["id"]}')">
+        Automation</button>''',
+        f'''<button type="button" class="btn btn-success btn-xs"
+        onclick="connectionParametersModal('{device["id"]}')">
+        Connect</button>''',
+        f'''<button type="button" class="btn btn-primary btn-xs"
+        onclick="showTypeModal('device', '{device["id"]}')">Edit</button>''',
+        f'''<button type="button" class="btn btn-primary btn-xs"
+        onclick="showTypeModal('device', '{device["id"]}', true)">
+        Duplicate</button>''',
+        f'''<button type="button" class="btn btn-danger btn-xs"
+        onclick="confirmDeletion('device', '{device["id"]}')">
+        Delete</button>'''
+    ]
         data.append(device_data)
     return jsonify({
         'draw': int(request.args['draw']),

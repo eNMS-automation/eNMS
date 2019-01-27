@@ -33,25 +33,20 @@ def site_root():
 @bp.route('/server_side_processing/<table>')
 @login_required
 def server_side_processing(table):
-    start = int(request.args['start'])
-    end = start + int(request.args['length'])
+    start, length = int(request.args['start']), int(request.args['length']) 
     model, properties = classes[table], table_properties[table]
     filters = {
         property: request.args[f'columns[{i}][search][value]']
-        for property, i in enumerate(properties)
+        for i, property in enumerate(properties)
         if request.args[f'columns[{i}][search][value]']
     }
-    print(filters)
-    print(model.query.all())
     filtered = db.session.query(model).filter(and_(*[
         getattr(model, property).contains(value)
         for property, value in filters.items()
     ]))
-    print(filtered.all())
-    number = len(filtered.all())
-    print(number)
+    number = 
     data = []
-    for device in filtered.limit(end - start).offset(start).all():
+    for device in filtered.limit(length).offset(start).all():
         device = device.serialized
         device_data = [device[p] for p in properties] + ['a'
         # f'''<button type="button" class="btn btn-info btn-xs"
@@ -72,8 +67,8 @@ def server_side_processing(table):
         data.append(device_data)
     return jsonify({
         'draw': int(request.args['draw']),
-        'recordsTotal': number,
-        'recordsFiltered': number,
+        'recordsTotal': len(model.all()),
+        'recordsFiltered': len(filtered.all()),
         'data': data
     })
 

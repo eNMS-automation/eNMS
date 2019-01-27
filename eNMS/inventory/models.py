@@ -104,11 +104,13 @@ class Link(Object):
         primaryjoin=source_id == Device.id,
         backref=backref('source', cascade='all, delete-orphan')
     )
+    source_name = Column(String)
     destination = relationship(
         Device,
         primaryjoin=destination_id == Device.id,
         backref=backref('destination', cascade='all, delete-orphan')
     )
+    destination_name = Column(String)
     pools = relationship(
         'Pool',
         secondary=pool_link_table,
@@ -119,16 +121,16 @@ class Link(Object):
         self.update(**kwargs)
 
     def update(self, **kwargs):
+        super().update(**kwargs)
         if 'source_name' in kwargs:
-            source = fetch('Device', name=kwargs.pop('source_name'))
-            destination = fetch('Device', name=kwargs.pop('destination_name'))
+            source = fetch('Device', name=self.source_name)
+            destination = fetch('Device', name=self.destination_name)
             kwargs.update({
                 'source_id': source.id,
                 'destination_id': destination.id,
                 'source': source.id,
                 'destination': destination.id
             })
-        super().update(**kwargs)
 
     @property
     def source_name(self):

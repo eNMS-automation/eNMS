@@ -118,6 +118,8 @@ task_public_properties = task_properties[1:]
 link_properties = object_common_properties + [
     'source',
     'destination',
+    'source_name',
+    'destination_name'
 ]
 
 link_public_properties = link_properties[1:] + [

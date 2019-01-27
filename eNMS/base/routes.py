@@ -40,22 +40,23 @@ def server_side_processing():
     data = []
     for device in db.session.query(model).limit(end - start).offset(start).all():
         device = device.serialized
-        device_data = [device[p] for p in device_table_properties] + [
-        f'''<button type="button" class="btn btn-info btn-xs"
-        onclick="deviceAutomationModal('{device["id"]}')">
-        Automation</button>''',
-        f'''<button type="button" class="btn btn-success btn-xs"
-        onclick="connectionParametersModal('{device["id"]}')">
-        Connect</button>''',
-        f'''<button type="button" class="btn btn-primary btn-xs"
-        onclick="showTypeModal('device', '{device["id"]}')">Edit</button>''',
-        f'''<button type="button" class="btn btn-primary btn-xs"
-        onclick="showTypeModal('device', '{device["id"]}', true)">
-        Duplicate</button>''',
-        f'''<button type="button" class="btn btn-danger btn-xs"
-        onclick="confirmDeletion('device', '{device["id"]}')">
-        Delete</button>'''
-    ]
+        device_data = [device[p] for p in device_table_properties] + ['a'
+        
+        # f'''<button type="button" class="btn btn-info btn-xs"
+        # onclick="deviceAutomationModal('{device["id"]}')">
+        # Automation</button>''',
+        # f'''<button type="button" class="btn btn-success btn-xs"
+        # onclick="connectionParametersModal('{device["id"]}')">
+        # Connect</button>''',
+        # f'''<button type="button" class="btn btn-primary btn-xs"
+        # onclick="showTypeModal('device', '{device["id"]}')">Edit</button>''',
+        # f'''<button type="button" class="btn btn-primary btn-xs"
+        # onclick="showTypeModal('device', '{device["id"]}', true)">
+        # Duplicate</button>''',
+        # f'''<button type="button" class="btn btn-danger btn-xs"
+        # onclick="confirmDeletion('device', '{device["id"]}')">
+        # Delete</button>'''
+    ]*5
         data.append(device_data)
     return jsonify({
         'draw': int(request.args['draw']),

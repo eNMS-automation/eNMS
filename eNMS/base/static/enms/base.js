@@ -244,6 +244,7 @@ function addInstance(mode, type, instance) {
   for (let i = 0; i < fields.length; i++) {
     values.push(`${instance[fields[i]]}`);
   }
+  /*
   tableActions(values, instance);
   if (mode == 'edit') {
     table.row($(`#${instance.id}`)).data(values);
@@ -251,6 +252,8 @@ function addInstance(mode, type, instance) {
     const rowNode = table.row.add(values).draw(false).node();
     $(rowNode).attr('id', `${instance.id}`);
   }
+  */
+  table.ajax.reload();
 }
 
 /**

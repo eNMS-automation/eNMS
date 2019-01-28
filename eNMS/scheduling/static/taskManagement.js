@@ -3,11 +3,10 @@ global
 alertify: false
 call: false
 doc: false
-fields: false
-tasks: false
+initTable: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line new-cap
+let table = initTable('task', 'task', ['Edit', 'Duplicate', 'Delete']);
 const taskManagement = true; // eslint-disable-line no-unused-vars
 
 /**
@@ -50,9 +49,6 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
 }
 
 (function() {
-  for (let i = 0; i < tasks.length; i++) {
-    addTask('create', tasks[i]);
-  }
   doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
-  getStatus();
+  refreshTable(5000);
 })();

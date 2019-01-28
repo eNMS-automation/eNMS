@@ -53,6 +53,8 @@ class Config(object):
 
     # - via Mattermost
     MATTERMOST_URL = environ.get('MATTERMOST_URL', '')
+    MATTERMOST_CHANNEL = environ.get('MATTERMOST_CHANNEL', '')
+    MATTERMOST_CERTIFICATE = bool(environ.get('MATTERMOST_CERTIFICATE', True))
 
     # Logging
     ENMS_LOG_LEVEL = environ.get('ENMS_LOG_LEVEL', 'DEBUG').upper()
@@ -62,12 +64,22 @@ class Config(object):
     # recommended to deploy not one, but multiple instances of eNMS.
     CLUSTER = int(environ.get('CLUSTER', False))
     CLUSTER_ID = int(environ.get('CLUSTER_ID', 1))
+    CLUSTER_SCAN_SUBNET = environ.get('CLUSTER_SCAN_SUBNET', '192.168.105.0/24')
+    CLUSTER_SCAN_PROTOCOL = environ.get('CLUSTER_SCAN_PROTOCOL', 'http')
+    CLUSTER_SCAN_TIMEOUT = float(environ.get('CLUSTER_SCAN_TIMEOUT', 0.05))
 
     # Geographical Parameters
     DEFAULT_LONGITUDE = float(environ.get('DEFAULT_LONGITUDE', -96.))
     DEFAULT_LATITUDE = float(environ.get('DEFAULT_LATITUDE', 33.))
     DEFAULT_ZOOM_LEVEL = int(environ.get('DEFAULT_ZOOM_LEVEL', 5))
     DEFAULT_VIEW = environ.get('DEFAULT_VIEW', '2D')
+
+    # Git Parameters
+    GIT_AUTOMATION_REPOSITORY = environ.get('GIT_AUTOMATION_REPOSITORY')
+    GIT_CONFIGURATION_REPOSITORY = environ.get('GIT_CONFIGURATION_REPOSITORY')
+
+    # Pool Filter Parameter
+    POOL_FILTER_PARAMETER = environ.get('POOL_FILTER_PARAMETER', 'All objects')
 
 
 class DebugConfig(Config):

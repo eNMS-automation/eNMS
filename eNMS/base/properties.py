@@ -334,12 +334,12 @@ def table_static_entries(type, obj):
             Delete</button>'''
         ],
         'instance': [
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('instance', '{obj.id}')">Edit</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('instance', '{obj.id}', true)">
             Duplicate</button>''',
-            '''<button type="button" class="btn btn-danger btn-xs"
+            f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('instance', '{obj.id}')">Delete</button>'''
         ],
         'link': [
@@ -352,15 +352,15 @@ def table_static_entries(type, obj):
             onclick="confirmDeletion('link', '{obj.id}')">Delete</button>'''
         ],
         'log': [
-            '''<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('Log', '${properties.id}')">Delete</button>'''
+            f'''<button type="button" class="btn btn-danger btn-xs"
+            onclick="deleteInstance('Log', '{obj.id}')">Delete</button>'''
         ],
         'logrule': [
-            '''<button type="button" class="btn btn-info btn-xs"
-            onclick="showTypeModal('logrule', '${logrule.id}')">
+            f'''<button type="button" class="btn btn-info btn-xs"
+            onclick="showTypeModal('logrule', '{obj.id}')">
             Edit</button>''',
-            '''<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('logrule', '${logrule.id}')">
+            f'''<button type="button" class="btn btn-danger btn-xs"
+            onclick="deleteInstance('logrule', '{obj.id}')">
             Delete</button>'''
         ],
         'pool': [

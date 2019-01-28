@@ -2,17 +2,9 @@
 global
 alertify: false
 fCall: false
-fields: false
-logs: false
 */
 
 const table = $('#table').DataTable(); // eslint-disable-line new-cap
-
-(function() {
-  for (let i = 0; i < logs.length; i++) {
-    addLog(logs[i]);
-  }
-})();
 
 /**
  * Filter logs.
@@ -26,3 +18,8 @@ function filterLogs() { // eslint-disable-line no-unused-vars
     alertify.notify(`Logs successfully filtered.`, 'success', 5);
   });
 }
+
+(function() {
+
+})();
+

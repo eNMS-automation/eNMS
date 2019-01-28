@@ -8,9 +8,10 @@ devices: false
 diffview: false
 doc: false
 fCall: false
-perColumnSearch: false
+initTable: false
 */
 
+let table = initTable('device', 'configuration', ['Configuration', 'Download']);
 let deviceId;
 
 /**
@@ -55,24 +56,10 @@ function searchConfigurations() { // eslint-disable-line no-unused-vars
     '/inventory/search_configurations',
     '#search-configurations-form',
     function(devices) {
-      table.clear().draw();
-      for (let i = 0; i < devices.length; i++) {
-        addInstance('create', 'device', devices[i]);
-      }
       alertify.notify('Configurations filtered.', 'success', 5);
       $('#search-configurations-modal').modal('hide');
     }
   );
-}
-
-/**
- * Remove the filter.
- */
-function undoFilter() { // eslint-disable-line no-unused-vars
-  table.clear().draw();
-  for (let i = 0; i < devices.length; i++) {
-    addInstance('create', 'device', devices[i]);
-  }
 }
 
 /**
@@ -138,5 +125,4 @@ function showRawLogs() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
   convertSelect('#pools', '#devices');
-  perColumnSearch('device', 'configuration', ['Configuration', 'Download']);
 })();

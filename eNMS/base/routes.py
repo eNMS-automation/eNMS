@@ -31,9 +31,9 @@ def site_root():
     return redirect(url_for('admin_blueprint.login'))
 
 
-@get(bp, '/server_side_processing/<table>')
-def server_side_processing(table):
-    model, properties = classes[table], table_properties[table]
+@get(bp, '/server_side_processing/<cls>/<table>')
+def server_side_processing(cls, table):
+    model, properties = classes[cls], table_properties[table]
     filtered = db.session.query(model).filter(and_(*[
         getattr(model, property).contains(value)
         for property, value in {

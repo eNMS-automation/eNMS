@@ -301,7 +301,7 @@ def table_static_entries(type, obj):
     return {
         'configuration': [
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showConfigurations('${obj.id}')">Configuration</button>''',
+            onclick="showConfigurations('{obj.id}')">Configuration</button>''',
             '''<label class="btn btn-default btn-xs btn-file" style="width:100%;">
             <a href="download_configuration/{obj.name}">Download</a>
             </label>'''

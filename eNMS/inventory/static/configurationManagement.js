@@ -15,7 +15,7 @@ const table = $('#table').DataTable({
   fixedHeader: true,
   processing: true,
   serverSide: true,
-  ajax: '/server_side_processing/configuration',
+  ajax: '/server_side_processing/device/configuration',
 }); // eslint-disable-line
 
 let deviceId;
@@ -145,7 +145,4 @@ function showRawLogs() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
   convertSelect('#pools', '#devices');
-  for (let i = 0; i < devices.length; i++) {
-    addInstance('create', 'device', devices[i]);
-  }
 })();

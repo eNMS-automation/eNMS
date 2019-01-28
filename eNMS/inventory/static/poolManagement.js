@@ -9,13 +9,13 @@ fCall: false
 pools: false
 */
 
-const table = $('#table').DataTable({ // eslint-disable-line
-  ordering: false,
-  fixedHeader: true,
-  processing: true,
-  serverSide: true,
-  ajax: '/server_side_processing/pool/pool',
-});
+perColumnSearch('pool', 'pool', [
+  'Edit properties',
+  'Update',
+  'Duplicate',
+  'Edit objects',
+  'Delete'
+]);
 let poolId = null;
 
 /**

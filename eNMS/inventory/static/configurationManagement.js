@@ -11,19 +11,7 @@ fCall: false
 perColumnSearch: false
 */
 
-perColumnSearch([
-  'Configuration',
-  'Download',
-]);
-
-const table = $('#table').DataTable({ // eslint-disable-line
-  ordering: false,
-  fixedHeader: true,
-  processing: true,
-  serverSide: true,
-  ajax: '/server_side_processing/device/configuration',
-});
-
+perColumnSearch('device', 'configuration', ['Configuration', 'Download']);
 let deviceId;
 
 /**

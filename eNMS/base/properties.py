@@ -387,7 +387,7 @@ def table_static_entries(type, obj):
             f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('task', '${obj.id}')">
             Delete</button>'''
-        ]
+        ],
         'user': [
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{obj.id}')">Edit</button>''',

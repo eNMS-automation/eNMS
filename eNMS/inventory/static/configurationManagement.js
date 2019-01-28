@@ -8,20 +8,21 @@ devices: false
 diffview: false
 doc: false
 fCall: false
+perColumnSearch: false
 */
 
 perColumnSearch([
   'Configuration',
-  'Download'
+  'Download',
 ]);
 
-const table = $('#table').DataTable({
+const table = $('#table').DataTable({ // eslint-disable-line
   ordering: false,
   fixedHeader: true,
   processing: true,
   serverSide: true,
   ajax: '/server_side_processing/device/configuration',
-}); // eslint-disable-line
+});
 
 let deviceId;
 

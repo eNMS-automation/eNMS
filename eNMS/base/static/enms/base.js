@@ -1,11 +1,9 @@
 /*
 global
 alertify: false
-fields: false
 NProgress: false
 propertyTypes: false
 table: false
-tableActions: false
 */
 
 const currentUrl = window.location.href.split('#')[0].split('?')[0];
@@ -119,10 +117,14 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
   }
 }
 
-function perColumnSearch(toExclude) {
+/**
+ * Datatable per-column search.
+ * @param {toExclude} toExclude - List of parameters to exclude for search.
+ */
+function perColumnSearch(toExclude) { // eslint-disable-line no-unused-vars
   $('#table thead tr').clone(true).appendTo('#table thead');
   $('#table thead tr:eq(1) th').each(function(i) {
-    var title = $(this).text();
+    const title = $(this).text();
     if (!toExclude.includes(title)) {
       $(this).html('<input type="text" style="width: 100%;"/>');
       $('input', this).on('keyup change', function() {
@@ -223,7 +225,6 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
  * @param {type} type - Type.
  * @param {instance} instance - Object instance.
  * @param {hideModal} hideModal - Hide edit modal after saving.
- * @return {mode}
  */
 function saveInstance(type, instance, hideModal=true) {
   const title = $(`#title-${type}`).text().startsWith('Edit');
@@ -234,7 +235,6 @@ function saveInstance(type, instance, hideModal=true) {
   if (hideModal) {
     $(`#edit-${type}`).modal('hide');
   }
-  return mode;
 }
 
 /**
@@ -243,7 +243,7 @@ function saveInstance(type, instance, hideModal=true) {
  */
 function processData(type) { // eslint-disable-line no-unused-vars
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
-    const mode = saveInstance(type, instance);
+    saveInstance(type, instance);
     table.ajax.reload();
   });
 }

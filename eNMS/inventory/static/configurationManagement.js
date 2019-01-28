@@ -11,7 +11,6 @@ fCall: false
 perColumnSearch: false
 */
 
-perColumnSearch('device', 'configuration', ['Configuration', 'Download']);
 let deviceId;
 
 /**
@@ -139,4 +138,5 @@ function showRawLogs() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
   convertSelect('#pools', '#devices');
+  perColumnSearch('device', 'configuration', ['Configuration', 'Download']);
 })();

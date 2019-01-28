@@ -8,12 +8,6 @@ doc: false
 instances: false
 */
 
-perColumnSearch('instance', 'instance', [
-  'Edit',
-  'Duplicate',
-  'Delete',
-]);
-
 /**
  * Get Cluster Status.
  */
@@ -41,5 +35,6 @@ function scanCluster() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
   convertSelect('#instance-permissions');
+  perColumnSearch('instance', 'instance', ['Edit', 'Duplicate', 'Delete']);
   getClusterStatus();
 })();

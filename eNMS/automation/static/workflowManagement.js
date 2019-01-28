@@ -8,6 +8,9 @@ getStatus: false
 showTypeModal: false
 */
 
+const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete'];
+let table = initTable('workflow', 'workflow', toExclude);
+
 /**
  * Display instance modal for editing.
  * @param {id} id - Instance ID.
@@ -27,7 +30,7 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
     `/automation/duplicate_workflow/${id}`,
     '#edit-workflow-form',
     (workflow) => {
-      addInstance('create', 'workflow', workflow);
+      table.ajax.reload();
       alertify.notify('Workflow successfully duplicated', 'success', 5);
     }
   );
@@ -35,8 +38,6 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete'];
-  table = initTable('workflow', 'workflow', toExclude);
   convertSelect('#workflow-devices', '#workflow-pools');
   $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');

@@ -4,14 +4,10 @@ doc: false
 getStatus: false
 */
 
+const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete']
+let table = initTable('service', 'service', toExclude);
+
 (function() {
   doc('https://enms.readthedocs.io/en/latest/services/index.html');
-  table = initTable('service', 'service', [
-    'Logs',
-    'Run',
-    'Edit',
-    'Duplicate',
-    'Delete'
-  ]);
   getStatus();
 })();

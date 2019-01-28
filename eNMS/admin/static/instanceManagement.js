@@ -30,6 +30,10 @@ function scanCluster() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
   convertSelect('#instance-permissions');
-  table = perColumnSearch('instance', 'instance', ['Edit', 'Duplicate', 'Delete']);
+  table = perColumnSearch('instance', 'instance', [
+    'Edit',
+    'Duplicate',
+    'Delete'
+  ]);
   getClusterStatus();
 })();

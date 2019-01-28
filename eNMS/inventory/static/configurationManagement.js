@@ -10,7 +10,14 @@ doc: false
 fCall: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line
+const table = $('#table').DataTable({
+  ordering: false,
+  fixedHeader: true,
+  processing: true,
+  serverSide: true,
+  ajax: '/server_side_processing/configuration',
+}); // eslint-disable-line
+
 let deviceId;
 
 /**

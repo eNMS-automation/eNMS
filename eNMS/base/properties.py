@@ -291,12 +291,21 @@ cls_to_properties = {
 }
 
 table_properties = {
+    'configuration': device_configuration_properties,
     'device': device_table_properties,
     'link': link_table_properties
+    
 }
 
 def table_static_entries(type, obj):
     return {
+        'configuration': [
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showConfigurations('${obj.id}')">Configuration</button>''',
+            '''<label class="btn btn-default btn-xs btn-file" style="width:100%;">
+            <a href="download_configuration/{obj.name}">Download</a>
+            </label>'''
+        ],
         'device': [
             f'''<button type="button" class="btn btn-info btn-xs"
             onclick="deviceAutomationModal('{obj.id}')">
@@ -315,12 +324,12 @@ def table_static_entries(type, obj):
         ],
         'link': [
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '${obj.id}')">Edit</button>''',
+            onclick="showTypeModal('link', '{obj.id}')">Edit</button>''',
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '${obj.id}', true)">
+            onclick="showTypeModal('link', '{obj.id}', true)">
             Duplicate</button>''',
             '''<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('link', '${obj.id}')">Delete</button>'''
+            onclick="confirmDeletion('link', '{obj.id}')">Delete</button>'''
         ]
     }[type]
     

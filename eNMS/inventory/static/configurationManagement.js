@@ -14,21 +14,6 @@ const table = $('#table').DataTable(); // eslint-disable-line
 let deviceId;
 
 /**
- * Table Actions.
- * @param {values} values - values array.
- * @param {device} device - Device properties.
- */
-function tableActions(values, device) { // eslint-disable-line no-unused-vars
-  values.push(
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showConfigurations('${device.id}')">Configuration</button>`,
-    `<label class="btn btn-default btn-xs btn-file" style="width:100%;">
-    <a href="download_configuration/${device.name}">Download</a>
-    </label>`
-  );
-}
-
-/**
  * Display configurations.
  */
 function displayConfigurations() { // eslint-disable-line no-unused-vars

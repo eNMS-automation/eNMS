@@ -306,6 +306,8 @@ table_properties = {
 
 
 def table_static_entries(type, obj):
+    if type == 'task':
+        status = 'Pause' if obj.status == 'Active' else 'Resume'
     return {
         'configuration': [
             f'''<button type="button" class="btn btn-primary btn-xs"
@@ -375,17 +377,16 @@ def table_static_entries(type, obj):
             Delete</button>'''
         ],
         'task': [
-            f'''<button id="pause-resume-${obj.id}" type="button"
-            class="btn btn-success btn-xs" onclick="${status}Task
-            ('${obj.id}')">${status.charAt(0).toUpperCase() 
-            + status.substr(1)}</button>''',
+            f'''<button id="pause-resume-{obj.id}" type="button"
+            class="btn btn-success btn-xs" onclick="{status.lower()}Task
+            ('{obj.id}')">{status}</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTaskModal('${obj.id}')">Edit</button>''',
+            onclick="showTaskModal('{obj.id}')">Edit</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTaskModal('${obj.id}', true)">
+            onclick="showTaskModal('{obj.id}', true)">
             Duplicate</button>''',
             f'''<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('task', '${obj.id}')">
+            onclick="confirmDeletion('task', '{obj.id}')">
             Delete</button>'''
         ],
         'user': [

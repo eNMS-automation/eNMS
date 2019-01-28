@@ -6,20 +6,13 @@ devices: false
 doc: false
 */
 
-const toExclude = ['Edit', 'Duplicate', 'Delete', 'Automation', 'Connect'];
-
-$('#table thead tr').clone(true).appendTo('#table thead');
-$('#table thead tr:eq(1) th').each(function(i) {
-  var title = $(this).text();
-  if (!toExclude.includes(title)) {
-    $(this).html('<input type="text" style="width: 100%;"/>');
-    $('input', this).on('keyup change', function() {
-      if (table.column(i).search() !== this.value) {
-        table.column(i).search(this.value).draw();
-      }
-    });
-  }
-});
+perColumnSearch([
+  'Edit',
+  'Duplicate',
+  'Delete',
+  'Automation',
+  'Connect'
+]);
 
 const table = $('#table').DataTable({
   ordering: false,

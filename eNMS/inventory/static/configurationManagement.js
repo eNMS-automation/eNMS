@@ -10,6 +10,11 @@ doc: false
 fCall: false
 */
 
+perColumnSearch([
+  'Configuration',
+  'Download'
+]);
+
 const table = $('#table').DataTable({
   ordering: false,
   fixedHeader: true,

@@ -1,9 +1,13 @@
 /*
 global
 convertSelect: false
+initTable: false
+refreshTable: false
 */
 
-let table = initTable('logrule', 'logrule', ['Edit', 'Delete']);
+let table = initTable( // eslint-disable-line no-unused-vars
+  'logrule', 'logrule', ['Edit', 'Delete']
+);
 
 (function() {
   convertSelect('#logrule-jobs');

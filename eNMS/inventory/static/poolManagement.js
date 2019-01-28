@@ -6,7 +6,6 @@ convertSelect: false
 doc: false
 fCall: false
 initTable: false
-pools: false
 */
 
 let poolId = null;
@@ -16,7 +15,7 @@ let table = initTable( // eslint-disable-line no-unused-vars
   'Update',
   'Duplicate',
   'Edit objects',
-  'Delete'
+  'Delete',
 ]);
 
 /**

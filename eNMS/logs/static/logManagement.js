@@ -1,10 +1,12 @@
 /*
 global
-alertify: false
-fCall: false
+initTable: false
+refreshTable: false
 */
 
-let table = initTable('log', 'log', ['Delete']);
+let table = initTable( // eslint-disable-line no-unused-vars
+  'log', 'log', ['Delete']
+);
 
 (function() {
   refreshTable(5000);

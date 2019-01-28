@@ -2,6 +2,7 @@ from os import environ
 
 
 class Config(object):
+
     # SQL Alchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
@@ -12,6 +13,8 @@ class Config(object):
     # WebSSH (GoTTY)
     GOTTY_PORT_REDIRECTION = int(environ.get('GOTTY_PORT_REDIRECTION', False))
     GOTTY_BYPASS_KEY_PROMPT = environ.get('GOTTY_BYPASS_KEY_PROMPT')
+    GOTTY_START_PORT = int(environ.get('GOTTY_START_PORT', 9000))
+    GOTTY_END_PORT = int(environ.get('GOTTY_END_PORT', 9100))
 
     # Vault
     USE_VAULT = int(environ.get('USE_VAULT', False))
@@ -45,6 +48,11 @@ class Config(object):
     MAIL_USE_TLS = int(environ.get('MAIL_USE_TLS', True))
     MAIL_USERNAME = environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
+    MAIL_SENDER = environ.get('MAIL_SENDER', 'enms@enms.fr')
+    MAIL_RECIPIENTS = environ.get('MAIL_SENDER', '')
+
+    # - via Mattermost
+    MATTERMOST_URL = environ.get('MATTERMOST_URL', '')
 
     # Logging
     ENMS_LOG_LEVEL = environ.get('ENMS_LOG_LEVEL', 'DEBUG').upper()
@@ -54,6 +62,12 @@ class Config(object):
     # recommended to deploy not one, but multiple instances of eNMS.
     CLUSTER = int(environ.get('CLUSTER', False))
     CLUSTER_ID = int(environ.get('CLUSTER_ID', 1))
+
+    # Geographical Parameters
+    DEFAULT_LONGITUDE = float(environ.get('DEFAULT_LONGITUDE', -96.))
+    DEFAULT_LATITUDE = float(environ.get('DEFAULT_LATITUDE', 33.))
+    DEFAULT_ZOOM_LEVEL = int(environ.get('DEFAULT_ZOOM_LEVEL', 5))
+    DEFAULT_VIEW = environ.get('DEFAULT_VIEW', '2D')
 
 
 class DebugConfig(Config):

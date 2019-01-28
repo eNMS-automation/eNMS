@@ -1,7 +1,6 @@
 from flask import request
-from re import search
 
-from eNMS.base.helpers import get, post, serialize
+from eNMS.base.helpers import get, serialize
 from eNMS.base.properties import (
     log_public_properties,
     log_rule_table_properties

@@ -310,16 +310,17 @@ table_properties = {
 
 
 def table_static_entries(type, obj):
-    if type == 'task':
-        status = 'Pause' if obj.status == 'Active' else 'Resume'
-    else:
-        status = ''
+    status = (
+        '' if type != 'task'
+        else 'Pause' if obj.status == 'Active'
+        else 'Resume'
+    )
     return {
         'configuration': [
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showConfigurations('{obj.id}')">
             Configuration</button>''',
-            f'''<label class="btn btn-default btn-xs btn-file" 
+            f'''<label class="btn btn-default btn-xs btn-file"
             style="width:100%;"><a href="download_configuration/{obj.name}">
             Download</a></label>'''
         ],

@@ -1,12 +1,14 @@
 /*
 global
 doc: false
-getStatus: false
 initTable: false
+refreshTable: false
 */
 
-const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete']
-let table = initTable('service', 'service', toExclude);
+const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete'];
+let table = initTable( // eslint-disable-line no-unused-vars
+  'service', 'service', toExclude
+);
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/services/index.html');

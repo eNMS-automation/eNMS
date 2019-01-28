@@ -5,8 +5,9 @@ doc: false
 initTable: false
 */
 
-const toExclude = ['Edit', 'Duplicate', 'Delete', 'Automation', 'Connect'];
-let table = initTable('device', 'device', toExclude);
+let table = initTable(
+  'device', 'device', ['Edit', 'Duplicate', 'Delete', 'Automation', 'Connect']
+);
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');

@@ -4,13 +4,15 @@ alertify: false
 convertSelect: false
 doc: false
 fCall: false
-getStatus: false
 initTable: false
+refreshTable: false
 showTypeModal: false
 */
 
 const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete'];
-let table = initTable('workflow', 'workflow', toExclude);
+let table = initTable( // eslint-disable-line no-unused-vars
+  'workflow', 'workflow', toExclude
+);
 
 /**
  * Display instance modal for editing.

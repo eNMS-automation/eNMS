@@ -119,7 +119,10 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
 
 /**
  * Datatable per-column search.
+ * @param {cls} cls - Object class.
+ * @param {type} type - Table type.
  * @param {toExclude} toExclude - List of parameters to exclude for search.
+ * @return {table}
  */
 function initTable(cls, type, toExclude) { // eslint-disable-line
   $('#table thead tr').clone(true).appendTo('#table thead');

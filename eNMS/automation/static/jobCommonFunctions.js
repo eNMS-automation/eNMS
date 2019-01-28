@@ -5,8 +5,6 @@ call: false
 diffview: false
 getJobState: false
 getWorkflowState: false
-partial
-table: false
 */
 
 let jobId;

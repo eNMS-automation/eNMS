@@ -11,7 +11,9 @@ fCall: false
 initTable: false
 */
 
-let table = initTable('device', 'configuration', ['Configuration', 'Download']);
+let table = initTable(
+  'device', 'configuration', ['Configuration', 'Download']
+);
 let deviceId;
 
 /**

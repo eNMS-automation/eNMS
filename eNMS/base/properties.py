@@ -358,6 +358,19 @@ def table_static_entries(type, obj):
             f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('pool', '{obj.id}')">Delete</button>'''
         ],
+        'service': [
+            '''<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogs('${service.id}')"></i>Logs</a></button>''',
+            '''<button type="button" class="btn btn-success btn-xs"
+            onclick="runJob('${service.id}')">Run</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="editService('${service.id}')">Edit</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="editService('${service.id}', true)">Duplicate</button>''',
+            '''<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('service', '${service.id}')">
+            Delete</button>'''
+        ],
         'user': [
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{obj.id}')">Edit</button>''',

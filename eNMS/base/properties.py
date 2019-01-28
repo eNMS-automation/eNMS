@@ -310,16 +310,14 @@ table_properties = {
 
 
 def table_static_entries(type, obj):
-    if type == 'task':
-        status = 'Pause' if obj.status == 'Active' else 'Resume'
     return {
         'configuration': [
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showConfigurations('{obj.id}')">
             Configuration</button>''',
-            f'''<label class="btn btn-default btn-xs btn-file" style="width:100%;">
-            <a href="download_configuration/{obj.name}">Download</a>
-            </label>'''
+            f'''<label class="btn btn-default btn-xs btn-file" 
+            style="width:100%;"><a href="download_configuration/{obj.name}">
+            Download</a></label>'''
         ],
         'device': [
             f'''<button type="button" class="btn btn-info btn-xs"
@@ -344,14 +342,15 @@ def table_static_entries(type, obj):
             onclick="showTypeModal('instance', '{obj.id}', true)">
             Duplicate</button>''',
             f'''<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('instance', '{obj.id}')">Delete</button>'''
+            onclick="confirmDeletion('instance', '{obj.id}')">
+            Delete</button>'''
         ],
         'link': [
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('link', '{obj.id}')">Edit</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '{obj.id}', true)">
-            Duplicate</button>''',
+            onclick="showTypeModal('link', '{obj.id}', true)">Duplicate
+            </button>''',
             f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('link', '{obj.id}')">Delete</button>'''
         ],
@@ -369,11 +368,13 @@ def table_static_entries(type, obj):
         ],
         'pool': [
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('pool', '{obj.id}')">Edit properties</button>''',
+            onclick="showTypeModal('pool', '{obj.id}')">
+            Edit properties</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="updatePool('{obj.id}')">Update</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('pool', '{obj.id}', true)">Duplicate</button>''',
+            onclick="showTypeModal('pool', '{obj.id}', true)">
+            Duplicate</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showPoolObjects('{obj.id}')">Edit objects</button>''',
             f'''<button type="button" class="btn btn-danger btn-xs"
@@ -394,8 +395,10 @@ def table_static_entries(type, obj):
         ],
         'task': [
             f'''<button id="pause-resume-{obj.id}" type="button"
-            class="btn btn-success btn-xs" onclick="{status.lower()}Task
-            ('{obj.id}')">{status}</button>''',
+            class="btn btn-success btn-xs" onclick=
+            "{'pause' if obj.status == 'Active' else 'resume'}Task
+            ('{obj.id}')">{'Pause' if obj.status == 'Active' else 'Resume'}
+            </button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTaskModal('{obj.id}')">Edit</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
@@ -409,7 +412,8 @@ def table_static_entries(type, obj):
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{obj.id}')">Edit</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('user', '{obj.id}', true)">Duplicate</button>''',
+            onclick="showTypeModal('user', '{obj.id}', true)">
+            Duplicate</button>''',
             f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('user', '{obj.id}')">Delete</button>'''
         ],

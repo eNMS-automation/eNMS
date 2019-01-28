@@ -6,7 +6,8 @@ doc: false
 initTable: false
 */
 
-let table = initTable('task', 'task', ['Edit', 'Duplicate', 'Delete']);
+const toExclude = ['Action', 'Edit', 'Duplicate', 'Delete'];
+let table = initTable('task', 'task', toExclude);
 const taskManagement = true; // eslint-disable-line no-unused-vars
 
 /**

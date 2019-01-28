@@ -9,7 +9,15 @@ fCall: false
 pools: false
 */
 
+const toExclude = [
+  'Edit properties',
+  'Update',
+  'Duplicate',
+  'Edit objects',
+  'Delete'
+];
 let poolId = null;
+let table = initTable('pool', 'pool', toExclude);
 
 /**
  * Display pool objects for editing.
@@ -49,11 +57,4 @@ function updatePool(pool) { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/pools.html');
   convertSelect('#links', '#devices');
-  perColumnSearch('pool', 'pool', [
-    'Edit properties',
-    'Update',
-    'Duplicate',
-    'Edit objects',
-    'Delete'
-  ]);
 })();

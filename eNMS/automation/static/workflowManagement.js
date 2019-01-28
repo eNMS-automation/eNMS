@@ -30,7 +30,7 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
     `/automation/duplicate_workflow/${id}`,
     '#edit-workflow-form',
     (workflow) => {
-      table.ajax.reload();
+      table.ajax.reload(null, false);
       alertify.notify('Workflow successfully duplicated', 'success', 5);
     }
   );

@@ -292,7 +292,7 @@ cls_to_properties = {
 
 table_properties = {
     'device': device_table_properties,
-    'link': link_table_properties[:-2]
+    'link': link_table_properties
 }
 
 def table_static_entries(type, obj):

@@ -3,8 +3,9 @@ global
 convertSelect: false
 */
 
-const table = $('#table').DataTable(); // eslint-disable-line
+let table = initTable('logrule', 'logrule', []);
 
 (function() {
   convertSelect('#logrule-jobs');
+  refreshTable(15000);
 })();

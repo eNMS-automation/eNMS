@@ -35,13 +35,8 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  table = perColumnSearch('workflow', 'workflow', [
-    'Logs',
-    'Run',
-    'Edit',
-    'Duplicate',
-    'Delete'
-  ]);
+  const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete'];
+  table = initTable('workflow', 'workflow', toExclude);
   convertSelect('#workflow-devices', '#workflow-pools');
   $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');

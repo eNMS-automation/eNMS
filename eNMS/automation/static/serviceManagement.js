@@ -6,7 +6,7 @@ getStatus: false
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/services/index.html');
-  table = perColumnSearch('service', 'service', [
+  table = initTable('service', 'service', [
     'Logs',
     'Run',
     'Edit',

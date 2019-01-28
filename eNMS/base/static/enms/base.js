@@ -121,7 +121,7 @@ function fCall(url, form, callback) { // eslint-disable-line no-unused-vars
  * Datatable per-column search.
  * @param {toExclude} toExclude - List of parameters to exclude for search.
  */
-function perColumnSearch(cls, table, toExclude) { // eslint-disable-line
+function initTable(cls, type, toExclude) { // eslint-disable-line
   $('#table thead tr').clone(true).appendTo('#table thead');
   $('#table thead tr:eq(1) th').each(function(i) {
     const title = $(this).text();
@@ -134,13 +134,14 @@ function perColumnSearch(cls, table, toExclude) { // eslint-disable-line
       });
     }
   });
-  return $('#table').DataTable({ // eslint-disable-line
+  const table = $('#table').DataTable({ // eslint-disable-line
     ordering: false,
     fixedHeader: true,
     processing: true,
     serverSide: true,
-    ajax: `/server_side_processing/${cls}/${table}`,
+    ajax: `/server_side_processing/${cls}/${type}`,
   });
+  return table;
 }
 
 /**

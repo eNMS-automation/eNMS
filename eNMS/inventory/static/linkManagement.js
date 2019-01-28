@@ -1,8 +1,7 @@
 /*
 global
-addInstance: false
 doc: false
-links: false
+perColumnSearch: false
 */
 
 perColumnSearch([
@@ -10,16 +9,16 @@ perColumnSearch([
   'Duplicate',
   'Delete',
   'Source',
-  'Destination'
+  'Destination',
 ]);
 
-const table = $('#table').DataTable({
+const table = $('#table').DataTable({ // eslint-disable-line
   ordering: false,
   fixedHeader: true,
   processing: true,
   serverSide: true,
   ajax: '/server_side_processing/link/link',
-}); // eslint-disable-line
+});
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');

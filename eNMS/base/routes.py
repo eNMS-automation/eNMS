@@ -2,7 +2,7 @@ from collections import Counter
 from json.decoder import JSONDecodeError
 from logging import info
 from flask import jsonify, redirect, request, url_for
-from flask_login import current_user, login_required
+from flask_login import current_user
 from sqlalchemy import and_
 
 from eNMS import db

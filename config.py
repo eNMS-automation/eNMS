@@ -24,8 +24,8 @@ class Config(object):
 
     # TACACS+
     USE_TACACS = int(environ.get('USE_TACACS', False))
-    TACACS_ADDR = environ.get('VAULT_ADDR')
-    TACACS_PASSWORD = environ.get('VAULT_PASSWORD')
+    TACACS_ADDR = environ.get('TACACS_ADDR')
+    TACACS_PASSWORD = environ.get('TACACS_PASSWORD')
 
     # Syslog
     USE_SYSLOG = int(environ.get('USE_SYSLOG', False))

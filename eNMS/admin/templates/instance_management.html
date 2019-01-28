@@ -90,8 +90,6 @@
   {{ super() }}
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
-    var fields = {{ fields|tojson|safe }}
-    var instances = {{ instances|tojson|safe }}
   </script>
   <script src="{{ url_for('admin_blueprint.static', filename='instanceManagement.js') }}"></script>
 {% endblock javascripts %}

@@ -66,8 +66,6 @@
 {% block javascripts %}
   {{ super() }}
   <script>
-    var fields = {{ fields|tojson|safe }};
-    var services = {{ services|tojson|safe }};
     const servicesClasses = {{ services_classes|tojson|safe }};
     const propertyTypes = {{ property_types|tojson|safe }};
   </script>

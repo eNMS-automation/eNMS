@@ -10,5 +10,5 @@ let table = initTable('service', 'service', toExclude);
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/services/index.html');
-  getStatus();
+  refreshTable(5000);
 })();

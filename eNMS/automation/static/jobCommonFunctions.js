@@ -147,11 +147,3 @@ function runJob(id) { // eslint-disable-line no-unused-vars
     }
   });
 }
-
-/**
- * Get Status.
- */
-function getStatus() { // eslint-disable-line no-unused-vars
-  table.ajax.reload(null, false);
-  setTimeout(getStatus, 5000);
-}

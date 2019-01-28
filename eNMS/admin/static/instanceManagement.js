@@ -1,12 +1,13 @@
 /*
 global
-addInstance: false
 alertify: false
 call: false
 convertSelect: false
 doc: false
-instances: false
+initTable: false
 */
+
+let table = initTable('instance', 'instance', ['Edit', 'Duplicate', 'Delete']);
 
 /**
  * Get Cluster Status.
@@ -30,10 +31,5 @@ function scanCluster() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
   convertSelect('#instance-permissions');
-  table = perColumnSearch('instance', 'instance', [
-    'Edit',
-    'Duplicate',
-    'Delete'
-  ]);
   getClusterStatus();
 })();

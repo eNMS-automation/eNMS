@@ -145,6 +145,15 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
 }
 
 /**
+ * Datatable periodic refresh.
+ * @param {interval} interval - Refresh interval.
+ */
+function refreshTable(interval) { // eslint-disable-line
+  table.ajax.reload(null, false);
+  setTimeout(partial(refreshTable, interval), 5000);
+}
+
+/**
  * Delete object.
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.

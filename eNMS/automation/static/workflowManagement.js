@@ -43,5 +43,5 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
   $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');
   });
-  getStatus();
+  refreshTable(5000);
 })();

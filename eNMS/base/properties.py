@@ -26,6 +26,7 @@ boolean_properties = [
     'use_workflow_targets',
     'push_to_git'
 ]
+
 list_properties = [
     'devices',
     'pools',
@@ -34,6 +35,7 @@ list_properties = [
     'getters',
     'import_export_types'
 ]
+
 private_properties = ['password', 'enable_password']
 
 base_properties = [
@@ -297,6 +299,7 @@ table_properties = {
     'link': link_table_properties,
     'pool': pool_table_properties,
     'service': service_table_properties,
+    'task': task_public_properties,
     'user': user_public_properties,
     'workflow': workflow_table_properties
 }
@@ -371,6 +374,20 @@ def table_static_entries(type, obj):
             onclick="confirmDeletion('service', '{obj.id}')">
             Delete</button>'''
         ],
+        'task': [
+            f'''<button id="pause-resume-${obj.id}" type="button"
+            class="btn btn-success btn-xs" onclick="${status}Task
+            ('${obj.id}')">${status.charAt(0).toUpperCase() 
+            + status.substr(1)}</button>''',
+            f'''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTaskModal('${obj.id}')">Edit</button>''',
+            f'''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTaskModal('${obj.id}', true)">
+            Duplicate</button>''',
+            f'''<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('task', '${obj.id}')">
+            Delete</button>'''
+        ]
         'user': [
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{obj.id}')">Edit</button>''',

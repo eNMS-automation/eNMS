@@ -125,4 +125,5 @@ function showRawLogs() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
   convertSelect('#pools', '#devices');
+  refreshTable(5000);
 })();

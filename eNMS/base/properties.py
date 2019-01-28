@@ -293,7 +293,9 @@ cls_to_properties = {
 table_properties = {
     'configuration': device_configuration_properties,
     'device': device_table_properties,
-    'link': link_table_properties
+    'link': link_table_properties,
+    'pool': pool_table_properties,
+    'user': user_public_properties
 }
 
 
@@ -343,7 +345,15 @@ def table_static_entries(type, obj):
             onclick="showPoolObjects('{obj.id}')">Edit objects</button>''',
             '''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('pool', '{obj.id}')">Delete</button>'''
-        ]
+        ],
+        'user': [
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('user', '{obj.id}')">Edit</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('user', '{obj.id}', true)">Duplicate</button>''',
+            '''<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('user', '{obj.id}')">Delete</button>'''
+        ],
     }[type]
 
 

@@ -9,28 +9,14 @@ fCall: false
 pools: false
 */
 
+const table = $('#table').DataTable({ // eslint-disable-line
+  ordering: false,
+  fixedHeader: true,
+  processing: true,
+  serverSide: true,
+  ajax: '/server_side_processing/pool/pool',
+});
 let poolId = null;
-const table = $('#table').DataTable(); // eslint-disable-line
-
-/**
- * Table Actions.
- * @param {values} values - values array.
- * @param {pool} pool - Pool.
- */
-function tableActions(values, pool) { // eslint-disable-line no-unused-vars
-  values.push(
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('pool', '${pool.id}')">Edit properties</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="updatePool('${pool.id}')">Update</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('pool', '${pool.id}', true)">Duplicate</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showPoolObjects('${pool.id}')">Edit objects</button>`,
-    `<button type="button" class="btn btn-danger btn-xs"
-    onclick="confirmDeletion('pool', '${pool.id}')">Delete</button>`
-  );
-}
 
 /**
  * Display pool objects for editing.

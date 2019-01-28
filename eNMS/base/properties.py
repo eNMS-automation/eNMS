@@ -331,6 +331,18 @@ def table_static_entries(type, obj):
             Duplicate</button>''',
             '''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('link', '{obj.id}')">Delete</button>'''
+        ],
+        'pool': [
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('pool', '{obj.id}')">Edit properties</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="updatePool('{obj.id}')">Update</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('pool', '{obj.id}', true)">Duplicate</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showPoolObjects('{obj.id}')">Edit objects</button>''',
+            '''<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('pool', '{obj.id}')">Delete</button>'''
         ]
     }[type]
 

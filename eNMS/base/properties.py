@@ -243,6 +243,8 @@ log_rule_public_properties = log_public_properties + [
     'jobs'
 ]
 
+log_rule_table_properties = ['name'] + log_public_properties
+
 parameters_public_properties = [
     'cluster_scan_subnet',
     'cluster_scan_protocol',
@@ -297,6 +299,8 @@ table_properties = {
     'device': device_table_properties,
     'instance': instance_public_properties,
     'link': link_table_properties,
+    'log': log_public_properties,
+    'logrule': log_rule_table_properties,
     'pool': pool_table_properties,
     'service': service_table_properties,
     'task': task_public_properties,

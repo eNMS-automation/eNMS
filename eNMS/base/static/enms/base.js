@@ -134,8 +134,7 @@ function perColumnSearch(cls, type, toExclude) { // eslint-disable-line
       });
     }
   });
-
-  const table = $('#table').DataTable({ // eslint-disable-line
+  return $('#table').DataTable({ // eslint-disable-line
     ordering: false,
     fixedHeader: true,
     processing: true,

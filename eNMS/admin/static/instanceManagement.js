@@ -13,12 +13,7 @@ instances: false
  */
 function getClusterStatus() { // eslint-disable-line no-unused-vars
   call('/admin/get_cluster_status', function(cluster) {
-    for (const [property, value] of Object.entries(cluster)) {
-      for (let i = 0; i < value.length; i++) {
-        const col = table.column(`#${property}`);
-        table.cell(i, col).data(value[i]).draw(false);
-      }
-    }
+    table.ajax.reload(null, false);
     setTimeout(getClusterStatus, 15000);
   });
 }
@@ -35,6 +30,6 @@ function scanCluster() { // eslint-disable-line no-unused-vars
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
   convertSelect('#instance-permissions');
-  perColumnSearch('instance', 'instance', ['Edit', 'Duplicate', 'Delete']);
+  table = perColumnSearch('instance', 'instance', ['Edit', 'Duplicate', 'Delete']);
   getClusterStatus();
 })();

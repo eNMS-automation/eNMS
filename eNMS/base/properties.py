@@ -296,7 +296,9 @@ table_properties = {
     'instance': instance_public_properties,
     'link': link_table_properties,
     'pool': pool_table_properties,
-    'user': user_public_properties
+    'service': service_table_properties,
+    'user': user_public_properties,
+    'workflow': workflow_table_properties
 }
 
 
@@ -364,6 +366,21 @@ def table_static_entries(type, obj):
             f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('user', '{obj.id}')">Delete</button>'''
         ],
+        'workflow': [
+            '''<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogs('${workflow.id}')"></i>Logs</a></button>''',
+            '''<button type="button" class="btn btn-success btn-xs"
+            onclick="runJob('${workflow.id}')">Run</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('workflow', '${workflow.id}')">
+            Edit</button>''',
+            '''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showWorkflowModalDuplicate('${workflow.id}')">
+            Duplicate</button>''',
+            '''<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('workflow', '${workflow.id}')">
+            Delete</button>'''
+        ]
     }[type]
 
 

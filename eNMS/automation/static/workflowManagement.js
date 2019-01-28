@@ -45,26 +45,6 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
   );
 }
 
-/**
- * Table Actions.
- * @param {values} values - values array.
- * @param {workflow} workflow - workflow.
- */
-function tableActions(values, workflow) { // eslint-disable-line no-unused-vars
-  values.push(
-    `<button type="button" class="btn btn-info btn-xs"
-    onclick="showLogs('${workflow.id}')"></i>Logs</a></button>`,
-    `<button type="button" class="btn btn-success btn-xs"
-    onclick="runJob('${workflow.id}')">Run</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showTypeModal('workflow', '${workflow.id}')">Edit</button>`,
-    `<button type="button" class="btn btn-primary btn-xs"
-    onclick="showWorkflowModalDuplicate('${workflow.id}')">Duplicate</button>`,
-    `<button type="button" class="btn btn-danger btn-xs"
-    onclick="confirmDeletion('workflow', '${workflow.id}')">Delete</button>`
-  );
-}
-
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
   for (let i = 0; i < workflows.length; i++) {

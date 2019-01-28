@@ -351,6 +351,18 @@ def table_static_entries(type, obj):
             f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('link', '{obj.id}')">Delete</button>'''
         ],
+        'log': [
+            '''<button type="button" class="btn btn-danger btn-xs"
+            onclick="deleteInstance('Log', '${properties.id}')">Delete</button>'''
+        ],
+        'logrule': [
+            '''<button type="button" class="btn btn-info btn-xs"
+            onclick="showTypeModal('logrule', '${logrule.id}')">
+            Edit</button>''',
+            '''<button type="button" class="btn btn-danger btn-xs"
+            onclick="deleteInstance('logrule', '${logrule.id}')">
+            Delete</button>'''
+        ],
         'pool': [
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('pool', '{obj.id}')">Edit properties</button>''',

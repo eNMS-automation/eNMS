@@ -310,6 +310,10 @@ table_properties = {
 
 
 def table_static_entries(type, obj):
+    if type == 'task':
+        status = 'Pause' if obj.status == 'Active' else 'Resume'
+    else:
+        status = ''
     return {
         'configuration': [
             f'''<button type="button" class="btn btn-primary btn-xs"
@@ -396,9 +400,7 @@ def table_static_entries(type, obj):
         'task': [
             f'''<button id="pause-resume-{obj.id}" type="button"
             class="btn btn-success btn-xs" onclick=
-            "{'pause' if obj.status == 'Active' else 'resume'}Task
-            ('{obj.id}')">{'Pause' if obj.status == 'Active' else 'Resume'}
-            </button>''',
+            "{status.lower()}Task('{obj.id}')">{status}</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTaskModal('{obj.id}')">Edit</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"

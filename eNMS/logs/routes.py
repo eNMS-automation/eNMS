@@ -21,13 +21,3 @@ def log_automation():
         fields=('name', 'source_ip', 'content'),
         log_rules=serialize('LogRule')
     )
-
-
-@post(bp, '/filter_logs', 'Edit')
-def filter_logs():
-    logs = [log for log in serialize('Log') if all(
-        request.form[prop] in str(val) if not prop + 'regex' in request.form
-        else search(request.form[prop], str(val)) for prop, val in log.items()
-        if prop in request.form and request.form[prop]
-    )]
-    return logs

@@ -1,17 +1,16 @@
 /*
 global
-addInstance: false
 alertify: false
 call: false
 convertSelect: false
-devices: false
 diffview: false
 doc: false
 fCall: false
 initTable: false
+refreshTable: false
 */
 
-let table = initTable(
+let table = initTable( // eslint-disable-line no-unused-vars
   'device', 'configuration', ['Configuration', 'Download']
 );
 let deviceId;

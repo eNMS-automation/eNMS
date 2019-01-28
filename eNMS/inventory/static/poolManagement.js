@@ -9,15 +9,15 @@ initTable: false
 pools: false
 */
 
-const toExclude = [
+let poolId = null;
+let table = initTable( // eslint-disable-line no-unused-vars
+  'pool', 'pool', [
   'Edit properties',
   'Update',
   'Duplicate',
   'Edit objects',
   'Delete'
-];
-let poolId = null;
-let table = initTable('pool', 'pool', toExclude);
+]);
 
 /**
  * Display pool objects for editing.

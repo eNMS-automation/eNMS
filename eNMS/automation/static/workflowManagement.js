@@ -1,25 +1,11 @@
 /*
 global
 alertify: false
-addInstance: false
 convertSelect: false
 doc: false
 fCall: false
 getStatus: false
 showTypeModal: false
-workflows: false
-*/
-
-/*
-let pageScrollPos;
-const table = $('#table').DataTable({ // eslint-disable-line
-  'preDrawCallback': function(settings) {
-    pageScrollPos = $(window).scrollTop();
-  },
-  'drawCallback': function(settings) {
-    $(window).scrollTop(pageScrollPos);
-  },
-});
 */
 
 /**
@@ -60,5 +46,5 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
   $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');
   });
-  getStatus('workflow');
+  getStatus();
 })();

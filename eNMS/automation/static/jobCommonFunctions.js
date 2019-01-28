@@ -149,12 +149,9 @@ function runJob(id) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Get Service Status.
- * @param {type} type - Service or Workflow.
+ * Get Status.
  */
-function getStatus(type) { // eslint-disable-line no-unused-vars
-  call(`/automation/get_status/${type}`, function(status) {
-    table.ajax.reload(null, false);
-    setTimeout(partial(getStatus, type), 5000);
-  });
+function getStatus() { // eslint-disable-line no-unused-vars
+  table.ajax.reload(null, false);
+  setTimeout(getStatus, 5000);
 }

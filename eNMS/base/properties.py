@@ -359,15 +359,15 @@ def table_static_entries(type, obj):
             onclick="confirmDeletion('pool', '{obj.id}')">Delete</button>'''
         ],
         'service': [
-            '''<button type="button" class="btn btn-info btn-xs"
+            f'''<button type="button" class="btn btn-info btn-xs"
             onclick="showLogs('{obj.id}')"></i>Logs</a></button>''',
-            '''<button type="button" class="btn btn-success btn-xs"
+            f'''<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{obj.id}')">Run</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="editService('{obj.id}')">Edit</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="editService('{obj.id}', true)">Duplicate</button>''',
-            '''<button type="button" class="btn btn-danger btn-xs"
+            f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('service', '{obj.id}')">
             Delete</button>'''
         ],
@@ -380,17 +380,17 @@ def table_static_entries(type, obj):
             onclick="confirmDeletion('user', '{obj.id}')">Delete</button>'''
         ],
         'workflow': [
-            '''<button type="button" class="btn btn-info btn-xs"
+            f'''<button type="button" class="btn btn-info btn-xs"
             onclick="showLogs('{obj.id}')"></i>Logs</a></button>''',
-            '''<button type="button" class="btn btn-success btn-xs"
+            f'''<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{obj.id}')">Run</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('workflow', '{obj.id}')">
             Edit</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showWorkflowModalDuplicate('{obj.id}')">
             Duplicate</button>''',
-            '''<button type="button" class="btn btn-danger btn-xs"
+            f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('workflow', '{obj.id}')">
             Delete</button>'''
         ]

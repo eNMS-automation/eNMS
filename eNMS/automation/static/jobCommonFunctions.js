@@ -154,10 +154,7 @@ function runJob(id) { // eslint-disable-line no-unused-vars
  */
 function getStatus(type) { // eslint-disable-line no-unused-vars
   call(`/automation/get_status/${type}`, function(status) {
-    for (let i = 0; i < status.length; i++) {
-      const col = table.column('#status');
-      table.cell(i, col).data(status[i]).draw(false);
-    }
+    table.ajax.reload(null, false);
     setTimeout(partial(getStatus, type), 5000);
   });
 }

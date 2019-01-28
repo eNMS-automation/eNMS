@@ -10,6 +10,7 @@ showTypeModal: false
 workflows: false
 */
 
+/*
 let pageScrollPos;
 const table = $('#table').DataTable({ // eslint-disable-line
   'preDrawCallback': function(settings) {
@@ -19,6 +20,7 @@ const table = $('#table').DataTable({ // eslint-disable-line
     $(window).scrollTop(pageScrollPos);
   },
 });
+*/
 
 /**
  * Display instance modal for editing.
@@ -47,9 +49,13 @@ function duplicateWorkflow(id) { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  for (let i = 0; i < workflows.length; i++) {
-    addInstance('create', 'workflow', workflows[i]);
-  }
+  table = perColumnSearch('workflow', 'workflow', [
+    'Logs',
+    'Run',
+    'Edit',
+    'Duplicate',
+    'Delete'
+  ]);
   convertSelect('#workflow-devices', '#workflow-pools');
   $('#edit-workflow').on('hidden.bs.modal', function() {
     $('#workflow-button').attr('onclick', 'processData("workflow")');

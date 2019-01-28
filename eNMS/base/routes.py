@@ -47,9 +47,9 @@ def server_side_processing(table):
         'recordsTotal': len(model.query.all()),
         'recordsFiltered': len(filtered.all()),
         'data': [
-            [getattr(device, property) for property in properties]
-            + table_static_entries(table, device)
-            for device in filtered.limit(
+            [getattr(obj, property) for property in properties]
+            + table_static_entries(table, obj)
+            for obj in filtered.limit(
                 int(request.args['length'])
             ).offset(int(request.args['start'])).all()
         ]

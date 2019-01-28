@@ -2,7 +2,7 @@
 global
 convertSelect: false
 doc: false
-perColumnSearch: false
+initTable: false
 */
 
 const toExclude = ['Edit', 'Duplicate', 'Delete', 'Automation', 'Connect'];

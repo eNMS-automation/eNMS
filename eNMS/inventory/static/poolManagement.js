@@ -1,11 +1,11 @@
 /*
 global
-addInstance: false
 alertify: false
 call: false
 convertSelect: false
 doc: false
 fCall: false
+initTable: false
 pools: false
 */
 

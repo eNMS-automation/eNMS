@@ -2,6 +2,7 @@
 global
 doc: false
 getStatus: false
+initTable: false
 */
 
 const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete']

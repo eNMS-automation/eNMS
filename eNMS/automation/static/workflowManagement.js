@@ -5,6 +5,7 @@ convertSelect: false
 doc: false
 fCall: false
 getStatus: false
+initTable: false
 showTypeModal: false
 */
 

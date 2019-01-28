@@ -293,6 +293,7 @@ cls_to_properties = {
 table_properties = {
     'configuration': device_configuration_properties,
     'device': device_table_properties,
+    'instance': instance_public_properties,
     'link': link_table_properties,
     'pool': pool_table_properties,
     'user': user_public_properties
@@ -302,10 +303,10 @@ table_properties = {
 def table_static_entries(type, obj):
     return {
         'configuration': [
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showConfigurations('{obj.id}')">
             Configuration</button>''',
-            '''<label class="btn btn-default btn-xs btn-file" style="width:100%;">
+            f'''<label class="btn btn-default btn-xs btn-file" style="width:100%;">
             <a href="download_configuration/{obj.name}">Download</a>
             </label>'''
         ],
@@ -325,33 +326,42 @@ def table_static_entries(type, obj):
             onclick="confirmDeletion('device', '{obj.id}')">
             Delete</button>'''
         ],
-        'link': [
+        'instance': [
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '{obj.id}')">Edit</button>''',
+            onclick="showTypeModal('instance', '{obj.id}')">Edit</button>''',
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '{obj.id}', true)">
+            onclick="showTypeModal('instance', '{obj.id}', true)">
             Duplicate</button>''',
             '''<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('instance', '{obj.id}')">Delete</button>'''
+        ],
+        'link': [
+            f'''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('link', '{obj.id}')">Edit</button>''',
+            f'''<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('link', '{obj.id}', true)">
+            Duplicate</button>''',
+            f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('link', '{obj.id}')">Delete</button>'''
         ],
         'pool': [
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('pool', '{obj.id}')">Edit properties</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="updatePool('{obj.id}')">Update</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('pool', '{obj.id}', true)">Duplicate</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showPoolObjects('{obj.id}')">Edit objects</button>''',
-            '''<button type="button" class="btn btn-danger btn-xs"
+            f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('pool', '{obj.id}')">Delete</button>'''
         ],
         'user': [
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{obj.id}')">Edit</button>''',
-            '''<button type="button" class="btn btn-primary btn-xs"
+            f'''<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{obj.id}', true)">Duplicate</button>''',
-            '''<button type="button" class="btn btn-danger btn-xs"
+            f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('user', '{obj.id}')">Delete</button>'''
         ],
     }[type]

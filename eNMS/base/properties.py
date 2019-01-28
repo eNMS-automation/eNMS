@@ -360,15 +360,15 @@ def table_static_entries(type, obj):
         ],
         'service': [
             '''<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('${service.id}')"></i>Logs</a></button>''',
+            onclick="showLogs('{obj.id}')"></i>Logs</a></button>''',
             '''<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('${service.id}')">Run</button>''',
+            onclick="runJob('{obj.id}')">Run</button>''',
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="editService('${service.id}')">Edit</button>''',
+            onclick="editService('{obj.id}')">Edit</button>''',
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="editService('${service.id}', true)">Duplicate</button>''',
+            onclick="editService('{obj.id}', true)">Duplicate</button>''',
             '''<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('service', '${service.id}')">
+            onclick="confirmDeletion('service', '{obj.id}')">
             Delete</button>'''
         ],
         'user': [
@@ -381,17 +381,17 @@ def table_static_entries(type, obj):
         ],
         'workflow': [
             '''<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('${workflow.id}')"></i>Logs</a></button>''',
+            onclick="showLogs('{obj.id}')"></i>Logs</a></button>''',
             '''<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('${workflow.id}')">Run</button>''',
+            onclick="runJob('{obj.id}')">Run</button>''',
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('workflow', '${workflow.id}')">
+            onclick="showTypeModal('workflow', '{obj.id}')">
             Edit</button>''',
             '''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showWorkflowModalDuplicate('${workflow.id}')">
+            onclick="showWorkflowModalDuplicate('{obj.id}')">
             Duplicate</button>''',
             '''<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('workflow', '${workflow.id}')">
+            onclick="confirmDeletion('workflow', '{obj.id}')">
             Delete</button>'''
         ]
     }[type]

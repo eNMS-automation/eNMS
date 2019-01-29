@@ -12,7 +12,7 @@ from eNMS.main import (
     USE_VAULT,
     vault_client
 )
-from eNMS.admin.helpers import configure_instance_id, update_parameters
+from eNMS.admin.helpers import configure_instance_id
 from eNMS.base.default import create_default, create_examples
 from eNMS.base.helpers import fetch
 from eNMS.base.rest import configure_rest_api

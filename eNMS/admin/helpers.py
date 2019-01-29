@@ -5,7 +5,7 @@ from os.path import exists
 from uuid import getnode
 from yaml import dump, load
 
-from eNMS.base.helpers import delete_all, export, factory, get_one
+from eNMS.base.helpers import delete_all, export, factory
 
 
 def configure_instance_id():

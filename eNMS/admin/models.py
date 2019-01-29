@@ -78,8 +78,7 @@ class Parameters(Base):
     mattermost_verify_certificate = Column(Boolean)
     slack_token = Column(String)
     slack_channel = Column(String)
-    pool_filter_id = Column(Integer, ForeignKey('Pool.id'))
-    pool_filter = relationship('Pool')
+    pool_filter = Column(String)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1
@@ -93,8 +92,8 @@ class Parameters(Base):
                     Repo.clone_from(repo, app.path / 'git' / repository_type)
             except Exception as e:
                 info(f'Cannot clone {repository_type} git repo ({str(e)})')
-        if self.pool:
-            database_filtering(self.pool_filter)
+        if self.pool_filter:
+            database_filtering(fetch('Pool', name=self.pool_filter))
 
     @property
     def gotty_range(self):

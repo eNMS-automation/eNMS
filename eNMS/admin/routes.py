@@ -27,11 +27,7 @@ from eNMS.admin.forms import (
     LoginForm,
     MigrationsForm
 )
-from eNMS.admin.helpers import (
-    migrate_export,
-    migrate_import,
-    update_parameters
-)
+from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.base.helpers import (
     fetch_all,
     get,
@@ -160,7 +156,9 @@ def logout():
 
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
-    update_parameters(**request.form)
+    parameters = get_one('Parameters')
+    parameters.update(**request.form)
+    parameters.trigger_active_parameters()
     return True
 
 

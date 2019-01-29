@@ -82,9 +82,6 @@ class Config(object):
     GIT_REPOSITORY_AUTOMATION = environ.get('GIT_REPOSITORY_AUTOMATION')
     GIT_REPOSITORY_CONFIGURATIONS = environ.get('GIT_REPOSITORY_CONFIGURATIONS')
 
-    # Pool Filter Parameter
-    POOL_FILTER = environ.get('POOL_FILTER', 'All objects')
-
 
 class DebugConfig(Config):
     DEBUG = True

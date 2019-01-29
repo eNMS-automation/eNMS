@@ -38,7 +38,7 @@ def create_default_pools():
 
 
 @integrity_rollback
-def create_default_parameters():
+def create_default_parameters(app):
     parameters = classes['Parameters']()
     db.session.add(parameters)
     db.session.commit()
@@ -510,7 +510,7 @@ def create_workflow_of_workflows():
 
 def create_default(app):
     create_default_users()
-    create_default_parameters()
+    create_default_parameters(app)
     create_default_pools()
     create_default_services()
     create_default_workflows()

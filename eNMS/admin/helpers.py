@@ -76,6 +76,6 @@ def update_parameters(**parameters):
             Repo.clone_from(remote_git, app.path / 'git' / 'automation')
         except Exception as e:
             info(f'Cannot clone {repository_type} git repo ({str(e)})')
-    parameters.update(**request.form)
-    database_filtering(fetch('Pool', id=parameters.pop('pool_filter'))
+    parameters.update(**parameters)
+    database_filtering(fetch('Pool', id=parameters.pop('pool_filter')))
     db.session.commit()

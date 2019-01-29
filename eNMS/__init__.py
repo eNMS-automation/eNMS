@@ -120,7 +120,6 @@ def configure_parameters(app):
         for property in parameters_public_properties
         if property in app.config
     })
-            
 
 
 def create_app(path, config):
@@ -135,7 +134,7 @@ def create_app(path, config):
     configure_rest_api(app)
     configure_logs(app)
     configure_errors(app)
-    configure_parameters()
+    configure_parameters(app)
     if USE_VAULT:
         configure_vault_client(app)
     if USE_SYSLOG:

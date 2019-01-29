@@ -81,7 +81,7 @@ def instance_management():
 def login():
     if request.method == 'POST':
         name, password = request.form['name'], request.form['password']
-        if request.form['authentication_method'] == 'Local user':
+        if request.form['authentication_method'] == 'Local User':
             user = fetch('User', name=name)
             if not user or password != user.password:
                 abort(403)
@@ -135,7 +135,7 @@ def login():
             abort(403)
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)
-        authentication_methods = [('Local user',) * 2]
+        authentication_methods = [('Local User',) * 2]
         if USE_LDAP:
             authentication_methods.append(('LDAP',) * 2)
         if USE_TACACS:

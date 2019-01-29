@@ -49,7 +49,6 @@ from eNMS.base.properties import (
 def device_management():
     return dict(
         fields=device_table_properties,
-        devices=serialize('Device'),
         add_device_form=AddDevice(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form)
@@ -60,7 +59,6 @@ def device_management():
 def configuration_management():
     return dict(
         fields=device_configuration_properties,
-        devices=serialize('Device'),
         compare_configurations_form=CompareConfigurationsForm(request.form),
         add_device_form=ConfigurationManagementForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form),
@@ -73,7 +71,6 @@ def configuration_management():
 def link_management():
     return dict(
         fields=link_table_properties,
-        links=serialize('Link'),
         add_link_form=AddLink(request.form)
     )
 
@@ -84,7 +81,6 @@ def pool_management():
         form=AddPoolForm(request.form),
         pool_object_form=PoolObjectsForm(request.form),
         fields=pool_table_properties,
-        pools=serialize('Pool')
     )
 
 

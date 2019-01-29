@@ -265,10 +265,6 @@ def query_librenms():
 @post(bp, '/configure_poller', 'Edit')
 def configure_poller():
     parameters = get_one('Parameters')
-    remote_git = request.form['remote_git_repository']
-    if parameters.git_repository_configurations != remote_git:
-        Repo.clone_from(remote_git, app.path / 'git' / 'configurations')
-        parameters.git_repository_configurations = remote_git
     task = fetch('Task', name='poller_task')
     task.frequency = request.form['polling_frequency']
     db.session.commit()

@@ -157,4 +157,3 @@ class SearchConfigurationForm(FlaskForm):
 
 class PollerForm(FlaskForm):
     polling_frequency = IntegerField(default=3600)
-    remote_git_repository = StringField()

@@ -2,6 +2,7 @@ from flask_mail import Message
 from git import Repo
 from git.exc import GitCommandError
 from json import dumps
+from logging import info
 from os import remove
 from pathlib import Path
 from requests import post, get
@@ -96,13 +97,13 @@ class SwissArmyKnifeService(Service):
 
     def git_push_configurations(self, _):
         parameters = get_one('Parameters')
-        if parameters.git_repository_configurations:
+        if parameters.git_configurations:
             repo = Repo(Path.cwd() / 'git' / 'configurations')
             try:
                 repo.git.add(A=True)
                 repo.git.commit(m='Automatic commit (configurations)')
-            except GitCommandError:
-                pass
+            except GitCommandError as e:
+                info(f'Git commit failed ({str(e)}')
             repo.remotes.origin.push()
         return {'success': True}
 

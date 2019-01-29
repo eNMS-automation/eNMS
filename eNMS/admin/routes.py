@@ -59,6 +59,7 @@ def user_management():
 
 @get(bp, '/administration', 'View')
 def administration():
+    print(get_one('Parameters').serialized)
     return dict(
         form=AdministrationForm(request.form),
         parameters=get_one('Parameters').serialized

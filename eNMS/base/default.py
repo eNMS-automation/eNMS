@@ -3,7 +3,8 @@ from xlrd.biffh import XLRDError
 
 from eNMS.main import db
 from eNMS.base.classes import classes
-from eNMS.base.helpers import factory, integrity_rollback, fetch, fetch_all
+from eNMS.base.helpers import factory, integrity_rollback, fetch, fetch_all, get_one
+from eNMS.base.properties import parameters_public_properties
 
 
 def create_default_users():
@@ -40,6 +41,11 @@ def create_default_pools():
 @integrity_rollback
 def create_default_parameters(app):
     parameters = classes['Parameters']()
+    parameters.update(**{
+        property: app.config[property.upper()]
+        for property in parameters_public_properties
+        if property.upper() in app.config
+    })
     db.session.add(parameters)
     db.session.commit()
 

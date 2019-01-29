@@ -26,7 +26,7 @@ def user_client():
     login = {
         'name': 'admin',
         'password': 'admin',
-        'authentication_method': 'Database'
+        'authentication_method': 'Local User'
     }
     with app.app_context():
         client.post('/admin/login', data=login)

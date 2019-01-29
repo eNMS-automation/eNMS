@@ -85,7 +85,7 @@ def login():
         name, password = request.form['name'], request.form['password']
         if request.form['authentication_method'] == 'Database':
             user = fetch('User', name=name)
-            if password == user.password:
+            if user and password == user.password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
             else:

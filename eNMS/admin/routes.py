@@ -8,7 +8,6 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
-from git import Repo
 from ipaddress import IPv4Network
 from json import loads
 from ldap3 import Connection, NTLM, SUBTREE
@@ -41,7 +40,6 @@ from eNMS.base.properties import (
     instance_public_properties,
     user_public_properties
 )
-from eNMS.inventory.helpers import database_filtering
 
 
 @get(bp, '/user_management', 'View')
@@ -55,7 +53,6 @@ def user_management():
 
 @get(bp, '/administration', 'View')
 def administration():
-    print(get_one('Parameters').serialized)
     return dict(
         form=AdministrationForm(request.form),
         parameters=get_one('Parameters').serialized
@@ -158,7 +155,7 @@ def logout():
 def save_parameters():
     parameters = get_one('Parameters')
     parameters.update(**request.form)
-    parameters.trigger_active_parameters()
+    parameters.trigger_active_parameters(app)
     return True
 
 

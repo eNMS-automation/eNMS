@@ -3,7 +3,13 @@ from xlrd.biffh import XLRDError
 
 from eNMS.main import db
 from eNMS.base.classes import classes
-from eNMS.base.helpers import factory, integrity_rollback, fetch, fetch_all, get_one
+from eNMS.base.helpers import (
+    factory,
+    integrity_rollback,
+    fetch,
+    fetch_all,
+    get_one
+)
 from eNMS.base.properties import parameters_public_properties
 
 

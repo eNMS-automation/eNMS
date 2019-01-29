@@ -1,9 +1,10 @@
 from flask_login import UserMixin
+from git import Repo
+from logging import info
 from sqlalchemy import (
     Boolean,
     Column,
     Float,
-    ForeignKey,
     Integer,
     PickleType,
     String
@@ -12,7 +13,9 @@ from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 
 from eNMS.main import db
+from eNMS.base.helpers import fetch
 from eNMS.base.models import Base
+from eNMS.inventory.helpers import database_filtering
 
 
 class User(Base, UserMixin):

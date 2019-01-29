@@ -12,9 +12,10 @@ from eNMS.main import (
     USE_VAULT,
     vault_client
 )
-from eNMS.admin.helpers import configure_instance_id
+from eNMS.admin.helpers import configure_instance_id, update_parameters
 from eNMS.base.default import create_default, create_examples
 from eNMS.base.helpers import fetch, get_one
+from eNMS.base.properties import parameters_public_properties
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 
@@ -113,8 +114,13 @@ def configure_logs(app):
     )
 
 
-def configure_parameters():
-    get_one('Parameters')
+def configure_parameters(app):
+    update_parameters(**{
+        property: app.config[property.upper()]
+        for property in parameters_public_properties
+        if property in app.config
+    })
+            
 
 
 def create_app(path, config):

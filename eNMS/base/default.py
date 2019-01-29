@@ -48,6 +48,7 @@ def create_default_parameters(app):
     })
     db.session.add(parameters)
     db.session.commit()
+    return parameters
 
 
 @integrity_rollback
@@ -516,11 +517,12 @@ def create_workflow_of_workflows():
 
 def create_default(app):
     create_default_users()
-    create_default_parameters(app)
     create_default_pools()
+    parameters = create_default_parameters(app)
     create_default_services()
     create_default_workflows()
     create_default_tasks(app)
+    parameters.trigger_active_parameters(app)
 
 
 def create_examples(app):

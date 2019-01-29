@@ -85,6 +85,17 @@ class Parameters(Base):
         self.gotty_port_index = -1
         super().update(**kwargs)
 
+    def trigger_active_parameters(self, app):
+        for repository_type in ('configurations', 'automation'):
+            try:
+                repo = getattr(self, f'git_repository_{repository_type}')
+                if repo:
+                    Repo.clone_from(repo, app.path / 'git' / repository_type)
+            except Exception as e:
+                info(f'Cannot clone {repository_type} git repo ({str(e)})')
+        if self.pool:
+            database_filtering(self.pool_filter)
+
     @property
     def gotty_range(self):
         return self.gotty_end_port - self.gotty_start_port

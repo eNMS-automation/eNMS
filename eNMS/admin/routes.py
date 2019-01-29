@@ -27,7 +27,11 @@ from eNMS.admin.forms import (
     LoginForm,
     MigrationsForm
 )
-from eNMS.admin.helpers import migrate_export, migrate_import
+from eNMS.admin.helpers import (
+    migrate_export,
+    migrate_import,
+    update_parameters
+)
 from eNMS.base.helpers import (
     fetch_all,
     get,
@@ -155,13 +159,7 @@ def logout():
 
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
-    parameters = get_one('Parameters')
-    remote_git = request.form['git_repository_automation']
-    if parameters.git_repository_automation != remote_git:
-        Repo.clone_from(remote_git, app.path / 'git' / 'automation')
-    parameters.update(**request.form)
-    database_filtering(fetch('Pool', id=request.form['pool']))
-    db.session.commit()
+    update_parameters(**request.form)
     return True
 
 

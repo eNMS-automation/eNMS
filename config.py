@@ -56,6 +56,10 @@ class Config(object):
     MATTERMOST_CHANNEL = environ.get('MATTERMOST_CHANNEL', '')
     MATTERMOST_CERTIFICATE = bool(environ.get('MATTERMOST_CERTIFICATE', True))
 
+    # - Via Slack
+    SLACK_TOKEN = environ.get('SLACK_TOKEN', '')
+    SLACK_CHANNEL = environ.get('SLACK_CHANNEL', '')
+
     # Logging
     ENMS_LOG_LEVEL = environ.get('ENMS_LOG_LEVEL', 'DEBUG').upper()
 
@@ -79,7 +83,7 @@ class Config(object):
     GIT_REPOSITORY_CONFIGURATIONS = environ.get('GIT_REPOSITORY_CONFIGURATIONS')
 
     # Pool Filter Parameter
-    POOL_FILTER_PARAMETER = environ.get('POOL_FILTER_PARAMETER', 'All objects')
+    POOL_FILTER = environ.get('POOL_FILTER', 'All objects')
 
 
 class DebugConfig(Config):

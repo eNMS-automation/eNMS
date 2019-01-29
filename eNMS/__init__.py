@@ -14,7 +14,7 @@ from eNMS.main import (
 )
 from eNMS.admin.helpers import configure_instance_id
 from eNMS.base.default import create_default, create_examples
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, get_one
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 
@@ -113,6 +113,10 @@ def configure_logs(app):
     )
 
 
+def configure_parameters():
+    get_one('Parameters')
+
+
 def create_app(path, config):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config)
@@ -125,6 +129,7 @@ def create_app(path, config):
     configure_rest_api(app)
     configure_logs(app)
     configure_errors(app)
+    configure_parameters()
     if USE_VAULT:
         configure_vault_client(app)
     if USE_SYSLOG:

@@ -5,7 +5,7 @@ from os.path import exists
 from uuid import getnode
 from yaml import dump, load
 
-from eNMS.base.helpers import delete_all, export, factory
+from eNMS.base.helpers import delete_all, export, factory, get_one
 
 
 def configure_instance_id():
@@ -66,3 +66,16 @@ def migrate_import(path_app, request):
     for edge in edges:
         factory('WorkflowEdge', **edge)
     return status
+
+
+def update_parameters(**parameters):
+    parameters = get_one('Parameters')
+    for repository_type in ('configurations', 'automation'):
+        try:
+            remote_git = parameters.pop(f'git_repository_{repository_type}')
+            Repo.clone_from(remote_git, app.path / 'git' / 'automation')
+        except Exception as e:
+            info(f'Cannot clone {repository_type} git repo ({str(e)})')
+    parameters.update(**request.form)
+    database_filtering(fetch('Pool', id=parameters.pop('pool_filter'))
+    db.session.commit()

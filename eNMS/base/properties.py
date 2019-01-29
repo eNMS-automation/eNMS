@@ -259,7 +259,9 @@ parameters_public_properties = [
     'opennms_rest_api',
     'opennms_devices',
     'opennms_login',
-    'pool'
+    'pool_filter',
+    'slack_channel',
+    'slack_token'
 ]
 
 task_serialized_properties = [

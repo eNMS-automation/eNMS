@@ -78,8 +78,8 @@ class Parameters(Base):
     mattermost_verify_certificate = Column(Boolean)
     slack_token = Column(String)
     slack_channel = Column(String)
-    pool_id = Column(Integer, ForeignKey('Pool.id'))
-    pool = relationship('Pool')
+    pool_filter_id = Column(Integer, ForeignKey('Pool.id'))
+    pool_filter = relationship('Pool')
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

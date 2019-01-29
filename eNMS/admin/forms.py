@@ -57,7 +57,7 @@ class AdministrationForm(FlaskForm):
     mattermost_verify_certificate = BooleanField()
     slack_token = StringField()
     slack_channel = StringField()
-    pool = ObjectField('Pool')
+    pool_filter = ObjectField('Pool')
     categories = {
         'Geographical Parameters': (
             'default_longitude',
@@ -74,13 +74,15 @@ class AdministrationForm(FlaskForm):
             'mail_recipients',
             'mattermost_url',
             'mattermost_channel',
-            'mattermost_verify_certificate'
+            'mattermost_verify_certificate',
+            'slack_token',
+            'slack_channel'
         ),
         'Gitlab Parameters': (
             'git_repository_automation',
         ),
         'Horizontal Scaling': (
-            'pool',
+            'pool_filter',
         ),
         'Cluster Management': (
             'cluster_scan_subnet',

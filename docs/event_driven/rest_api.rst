@@ -16,7 +16,7 @@ eNMS has a ReST API allowing to:
 This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
 Retrieve or delete an instance
-****************************
+******************************
 
 ::
 
@@ -31,7 +31,7 @@ Retrieve or delete an instance
    :align: center
 
 Create or update an instance
-**************************
+****************************
 
 ::
 
@@ -44,17 +44,20 @@ Run a service, or a workflow
 ::
 
  # via a POST call to the following URL
- http://IP_address/rest/run_job/job_name
+ http://IP_address/rest/run_job
 
-The payload must contain a ``devices`` key with the list of target devices.
+The payload must contain the name of the job (service or workflow), a ``devices`` key with the list of target devices.
 If that list is empty, the service / workflow will run on the targets configured from the web UI.
-You can also add a ``pools`` key if you want the job to target a specific list of pools.
+You can also add:
+  - a ``pools`` key if you want the job to target a specific list of pools.
+  - an ``ip_addresses`` key if you prefer to target devices based on the IP address.
 
 Example of payload:
 
 ::
  
  {
+   "name": "service_test",
    "devices": ["Washington"],
    "pools": ["Pool1", "Pool2"]
  }

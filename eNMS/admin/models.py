@@ -60,8 +60,8 @@ class Parameters(Base):
     default_latitude = Column(Float)
     default_zoom_level = Column(Integer)
     default_view = Column(String)
-    git_repository_configurations = Column(String)
-    git_repository_automation = Column(String)
+    git_configurations = Column(String)
+    git_automation = Column(String)
     gotty_start_port = Column(Integer)
     gotty_end_port = Column(Integer)
     gotty_port_index = Column(Integer, default=-1)
@@ -95,8 +95,9 @@ class Parameters(Base):
                     Repo.clone_from(repo, app.path / 'git' / repository_type)
             except Exception as e:
                 info(f'Cannot clone {repository_type} git repo ({str(e)})')
-        if self.pool_filter:
-            database_filtering(fetch('Pool', name=self.pool_filter))
+        pool = fetch('Pool', name=self.pool_filter)
+        if pool:
+            database_filtering(pool)
 
     @property
     def gotty_range(self):

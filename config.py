@@ -79,8 +79,8 @@ class Config(object):
     DEFAULT_VIEW = environ.get('DEFAULT_VIEW', '2D')
 
     # Git Parameters
-    GIT_REPOSITORY_AUTOMATION = environ.get('GIT_REPOSITORY_AUTOMATION')
-    GIT_REPOSITORY_CONFIGURATIONS = environ.get('GIT_REPOSITORY_CONFIGURATIONS')
+    GIT_AUTOMATION = environ.get('GIT_AUTOMATION', '')
+    GIT_CONFIGURATIONS = environ.get('GIT_CONFIGURATIONS', '')
 
     # Pool Filter Parameter
     POOL_FILTER = environ.get('POOL_FILTER', 'All objects')

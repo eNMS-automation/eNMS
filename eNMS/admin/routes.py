@@ -156,6 +156,7 @@ def save_parameters():
     parameters = get_one('Parameters')
     parameters.update(**request.form)
     parameters.trigger_active_parameters(app)
+    db.session.commit()
     return True
 
 

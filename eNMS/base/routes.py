@@ -42,6 +42,7 @@ def server_side_processing(cls, table):
             if request.args[f'columns[{i}][search][value]']
         }.items()
     ]))
+    print(request.args)
     return jsonify({
         'draw': int(request.args['draw']),
         'recordsTotal': len(model.query.all()),

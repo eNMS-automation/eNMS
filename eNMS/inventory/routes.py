@@ -102,38 +102,6 @@ def download_configuration(name):
     )
 
 
-@get(bp, '/search_configurations')
-def search_configurations():
-    text = request.form['search_text']
-    regex = 'regular_expression' in request.form
-    devices, match = fetch_all('Device'), []
-    start, length = int(request.args['start']), int(request.args['length'])
-    for device in devices:
-        if not device.configurations:
-            continue
-        if request.form['config-to-search'] == 'current':
-            config = device.configurations[max(device.configurations)]
-            if search(text, config) if regex else text in config:
-                match.append(device.serialized)
-        elif any(
-            search(text, config) if regex else text in config
-            for config in device.configurations.values()
-        ):
-            match.append(device.serialized)
-    return jsonify({
-        'draw': int(request.args['draw']),
-        'recordsTotal': len(devices),
-        'recordsFiltered': len(match),
-        'data': [
-            [
-                getattr(device, property)
-                for property in device_configuration_properties
-            ] + table_static_entries('configuration', device)
-            for obj in match[start, start + length]
-        ]
-    })
-
-
 @post(bp, '/connection/<id>', 'Connect to device')
 def connection(id):
     parameters, device = get_one('Parameters'), fetch('Device', id=id)

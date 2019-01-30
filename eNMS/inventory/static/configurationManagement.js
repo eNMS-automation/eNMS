@@ -11,7 +11,7 @@ refreshTable: false
 */
 
 let table = initTable( // eslint-disable-line no-unused-vars
-  'device', 'configuration', ['Configuration', 'Download']
+  'device', 'configuration', ['Download']
 );
 let deviceId;
 

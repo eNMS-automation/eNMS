@@ -48,46 +48,6 @@
       </div>
     </div>
   </div>
-  <div id="search-configurations-modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title">Search in Configurations</h4>
-        </div>
-        <form id="search-configurations-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Search Text:</label>
-              {{ search_configurations_form.search_text(class="form-control required") }}<br>
-              <div class="item">
-                {{ search_configurations_form.regular_expression() }}
-                <label>Regular expression</label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" checked="" value="current" name="config-to-search">
-                  Search only current configuration
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" value="all" name="config-to-search">
-                  Search in all configurations
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" onclick="searchConfigurations()">Save</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
   <div id="configurations-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">

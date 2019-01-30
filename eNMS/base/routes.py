@@ -45,7 +45,9 @@ def server_side_processing(cls, table):
     if table == 'configuration':
         search_text = request.args['columns[5][search][value]']
         if search_text:
-            filtered.filter(model.current_configuration.contains(search_text))
+            filtered = filtered.filter(
+                model.current_configuration.contains(search_text)
+            )
     return jsonify({
         'draw': int(request.args['draw']),
         'recordsTotal': len(model.query.all()),

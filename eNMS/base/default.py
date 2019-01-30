@@ -244,7 +244,7 @@ def create_example_services():
             'type': 'ConfigurationBackupService',
             'name': 'configuration_backup',
             'description': 'Test Configuration Management',
-            'pools': [fetch('Pool', name='Devices only').id],
+            'devices': [fetch('Device', name='Washington').id],
             'configuration_command': 'show running-config',
             'multiprocessing': True,
             'creator': admin

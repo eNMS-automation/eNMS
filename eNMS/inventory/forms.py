@@ -110,7 +110,7 @@ class PoolObjectsForm(FlaskForm):
 
 class ImportExportForm(FlaskForm):
     boolean_fields = HiddenField(default='update_pools,replace')
-    name = StringField()
+    export_filename = StringField()
     update_pools = BooleanField()
     replace = BooleanField()
 
@@ -157,4 +157,3 @@ class SearchConfigurationForm(FlaskForm):
 
 class PollerForm(FlaskForm):
     polling_frequency = IntegerField(default=3600)
-    remote_git_repository = StringField()

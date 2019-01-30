@@ -188,7 +188,7 @@ class Pool(AbstractPool):
             })
             if self.object_match(link):
                 self.links.append(link)
-        if get_one('Parameters').pool == self:
+        if get_one('Parameters').pool_filter == self:
             database_filtering(self)
 
     def object_match(self, obj):

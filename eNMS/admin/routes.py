@@ -8,7 +8,6 @@ from flask import (
     url_for
 )
 from flask_login import current_user, login_user, logout_user
-from git import Repo
 from ipaddress import IPv4Network
 from json import loads
 from ldap3 import Connection, NTLM, SUBTREE
@@ -41,7 +40,6 @@ from eNMS.base.properties import (
     instance_public_properties,
     user_public_properties
 )
-from eNMS.inventory.helpers import database_filtering
 
 
 @get(bp, '/user_management', 'View')
@@ -83,13 +81,11 @@ def instance_management():
 def login():
     if request.method == 'POST':
         name, password = request.form['name'], request.form['password']
-        if request.form['authentication_method'] == 'Database':
+        if request.form['authentication_method'] == 'Local User':
             user = fetch('User', name=name)
-            if password == user.password:
+            if user and password == user.password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
-            else:
-                abort(403)
         elif request.form['authentication_method'] == 'LDAP':
             try:
                 with Connection(
@@ -137,7 +133,7 @@ def login():
             abort(403)
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)
-        authentication_methods = [('Database',) * 2]
+        authentication_methods = [('Local User',) * 2]
         if USE_LDAP:
             authentication_methods.append(('LDAP',) * 2)
         if USE_TACACS:
@@ -156,11 +152,8 @@ def logout():
 @post(bp, '/save_parameters', 'Admin')
 def save_parameters():
     parameters = get_one('Parameters')
-    remote_git = request.form['git_repository_automation']
-    if parameters.git_repository_automation != remote_git:
-        Repo.clone_from(remote_git, app.path / 'git' / 'automation')
     parameters.update(**request.form)
-    database_filtering(fetch('Pool', id=request.form['pool']))
+    parameters.trigger_active_parameters(app)
     db.session.commit()
     return True
 
@@ -224,4 +217,4 @@ def migration(direction):
     return {
         'import': migrate_import,
         'export': migrate_export
-    }[direction](app.path, request.form)
+    }[direction](app, request.form)

@@ -253,8 +253,8 @@ parameters_public_properties = [
     'default_latitude',
     'default_zoom_level',
     'default_view',
-    'git_repository_configurations',
-    'git_repository_automation',
+    'git_configurations',
+    'git_automation',
     'gotty_start_port',
     'gotty_end_port',
     'mail_sender',
@@ -265,7 +265,9 @@ parameters_public_properties = [
     'opennms_rest_api',
     'opennms_devices',
     'opennms_login',
-    'pool'
+    'pool_filter',
+    'slack_channel',
+    'slack_token'
 ]
 
 task_serialized_properties = [

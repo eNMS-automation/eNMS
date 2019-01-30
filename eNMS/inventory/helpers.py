@@ -58,5 +58,5 @@ def object_export(request, path_app):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(serialize(obj_type), 1):
                 sheet.write(obj_index, index, obj[property])
-    workbook.save(path_app / 'projects' / f'{request["name"]}.xls')
+    workbook.save(path_app / 'projects' / f'{request["export_filename"]}.xls')
     return True

@@ -1,9 +1,10 @@
 from flask_login import UserMixin
+from git import Repo
+from logging import info
 from sqlalchemy import (
     Boolean,
     Column,
     Float,
-    ForeignKey,
     Integer,
     PickleType,
     String
@@ -12,7 +13,9 @@ from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 
 from eNMS.main import db
+from eNMS.base.helpers import fetch
 from eNMS.base.models import Base
+from eNMS.inventory.helpers import database_filtering
 
 
 class User(Base, UserMixin):
@@ -50,17 +53,17 @@ class Parameters(Base):
     __tablename__ = type = 'Parameters'
     id = Column(Integer, primary_key=True)
     name = Column(String, default='default', unique=True)
-    cluster_scan_subnet = Column(String, default='192.168.105.0/24')
-    cluster_scan_protocol = Column(String, default='http')
-    cluster_scan_timeout = Column(Float, default=0.05)
-    default_longitude = Column(Float, default=-96.)
-    default_latitude = Column(Float, default=33.)
-    default_zoom_level = Column(Integer, default=5)
-    default_view = Column(String, default='2D')
-    git_repository_configurations = Column(String, default='')
-    git_repository_automation = Column(String, default='')
-    gotty_start_port = Column(Integer, default=9000)
-    gotty_end_port = Column(Integer, default=9100)
+    cluster_scan_subnet = Column(String)
+    cluster_scan_protocol = Column(String)
+    cluster_scan_timeout = Column(Float)
+    default_longitude = Column(Float)
+    default_latitude = Column(Float)
+    default_zoom_level = Column(Integer)
+    default_view = Column(String)
+    git_configurations = Column(String)
+    git_automation = Column(String)
+    gotty_start_port = Column(Integer)
+    gotty_end_port = Column(Integer)
     gotty_port_index = Column(Integer, default=-1)
     opennms_rest_api = Column(
         String,
@@ -71,22 +74,30 @@ class Parameters(Base):
         default='https://demo.opennms.org/opennms/rest/nodes'
     )
     opennms_login = Column(String, default='demo')
-    mail_sender = Column(String, default='enms@enms.fr')
-    mail_recipients = Column(String, default='antoinefourmy@gmail.com')
-    mattermost_url = Column(
-        String,
-        default='http://192.168.105.2:8065/hooks/dnuajekqp78jjbbajo8ewuw4ih'
-    )
-    mattermost_channel = Column(String, default='')
-    mattermost_verify_certificate = Column(Boolean, default=True)
+    mail_sender = Column(String)
+    mail_recipients = Column(String)
+    mattermost_url = Column(String)
+    mattermost_channel = Column(String)
+    mattermost_verify_certificate = Column(Boolean)
     slack_token = Column(String)
     slack_channel = Column(String)
-    pool_id = Column(Integer, ForeignKey('Pool.id'))
-    pool = relationship('Pool')
+    pool_filter = Column(String)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1
         super().update(**kwargs)
+
+    def trigger_active_parameters(self, app):
+        for repository_type in ('configurations', 'automation'):
+            try:
+                repo = getattr(self, f'git_{repository_type}')
+                if repo:
+                    Repo.clone_from(repo, app.path / 'git' / repository_type)
+            except Exception as e:
+                info(f'Cannot clone {repository_type} git repo ({str(e)})')
+        pool = fetch('Pool', name=self.pool_filter)
+        if pool:
+            database_filtering(pool)
 
     @property
     def gotty_range(self):

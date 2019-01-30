@@ -2,6 +2,7 @@ from os import environ
 
 
 class Config(object):
+
     # SQL Alchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
@@ -12,6 +13,8 @@ class Config(object):
     # WebSSH (GoTTY)
     GOTTY_PORT_REDIRECTION = int(environ.get('GOTTY_PORT_REDIRECTION', False))
     GOTTY_BYPASS_KEY_PROMPT = environ.get('GOTTY_BYPASS_KEY_PROMPT')
+    GOTTY_START_PORT = int(environ.get('GOTTY_START_PORT', 9000))
+    GOTTY_END_PORT = int(environ.get('GOTTY_END_PORT', 9100))
 
     # Vault
     USE_VAULT = int(environ.get('USE_VAULT', False))
@@ -24,8 +27,8 @@ class Config(object):
 
     # TACACS+
     USE_TACACS = int(environ.get('USE_TACACS', False))
-    TACACS_ADDR = environ.get('VAULT_ADDR')
-    TACACS_PASSWORD = environ.get('VAULT_PASSWORD')
+    TACACS_ADDR = environ.get('TACACS_ADDR')
+    TACACS_PASSWORD = environ.get('TACACS_PASSWORD')
 
     # Syslog
     USE_SYSLOG = int(environ.get('USE_SYSLOG', False))
@@ -45,6 +48,17 @@ class Config(object):
     MAIL_USE_TLS = int(environ.get('MAIL_USE_TLS', True))
     MAIL_USERNAME = environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
+    MAIL_SENDER = environ.get('MAIL_SENDER', 'enms@enms.fr')
+    MAIL_RECIPIENTS = environ.get('MAIL_SENDER', '')
+
+    # - via Mattermost
+    MATTERMOST_URL = environ.get('MATTERMOST_URL', '')
+    MATTERMOST_CHANNEL = environ.get('MATTERMOST_CHANNEL', '')
+    MATTERMOST_CERTIFICATE = bool(environ.get('MATTERMOST_CERTIFICATE', True))
+
+    # - Via Slack
+    SLACK_TOKEN = environ.get('SLACK_TOKEN', '')
+    SLACK_CHANNEL = environ.get('SLACK_CHANNEL', '')
 
     # Logging
     ENMS_LOG_LEVEL = environ.get('ENMS_LOG_LEVEL', 'DEBUG').upper()
@@ -54,6 +68,22 @@ class Config(object):
     # recommended to deploy not one, but multiple instances of eNMS.
     CLUSTER = int(environ.get('CLUSTER', False))
     CLUSTER_ID = int(environ.get('CLUSTER_ID', 1))
+    CLUSTER_SCAN_SUBNET = environ.get('CLUSTER_SCAN_SUBNET', '192.168.105.0/24')
+    CLUSTER_SCAN_PROTOCOL = environ.get('CLUSTER_SCAN_PROTOCOL', 'http')
+    CLUSTER_SCAN_TIMEOUT = float(environ.get('CLUSTER_SCAN_TIMEOUT', 0.05))
+
+    # Geographical Parameters
+    DEFAULT_LONGITUDE = float(environ.get('DEFAULT_LONGITUDE', -96.))
+    DEFAULT_LATITUDE = float(environ.get('DEFAULT_LATITUDE', 33.))
+    DEFAULT_ZOOM_LEVEL = int(environ.get('DEFAULT_ZOOM_LEVEL', 5))
+    DEFAULT_VIEW = environ.get('DEFAULT_VIEW', '2D')
+
+    # Git Parameters
+    GIT_AUTOMATION = environ.get('GIT_AUTOMATION', '')
+    GIT_CONFIGURATIONS = environ.get('GIT_CONFIGURATIONS', '')
+
+    # Pool Filter Parameter
+    POOL_FILTER = environ.get('POOL_FILTER', 'All objects')
 
 
 class DebugConfig(Config):

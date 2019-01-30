@@ -72,11 +72,11 @@ class AdministrationForm(FlaskForm):
         'Notification Parameters': (
             'mail_sender',
             'mail_recipients',
+            'slack_token',
+            'slack_channel',
             'mattermost_url',
             'mattermost_channel',
-            'mattermost_verify_certificate',
-            'slack_token',
-            'slack_channel'
+            'mattermost_verify_certificate'
         ),
         'Gitlab Parameters': (
             'git_automation',

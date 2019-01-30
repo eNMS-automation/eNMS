@@ -16,23 +16,22 @@
           </div>
           <div class="x_content">
             <form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
-              {% for field in import_export_form %}
-                {% if field.widget.input_type == 'hidden' %}
-                  {{ field() }}
-                {% elif field.name in ('replace', 'update_pools') %}
-                  <fieldset>
-                    <div class="item">
-                      {{ field() }}
-                      <label>{{ field.name }}</label>
-                    </div>
-                  </fieldset>
-                {% else %}
-                  <label>{{ field.label }}</label>
-                  <div class='form-group'>
-                    {{ field(class="form-control") }}
-                  </div>
-                {% endif %}
-              {% endfor %}
+              <div class='form-group'>
+                <label>Export Filename</label>
+                {{ import_export_form.export_filename(class="form-control") }}
+              </div>
+              <fieldset>
+                <div class="item">
+                  {{ import_export_form.replace() }}
+                  <label>Replace on import</label>
+                </div>
+              </fieldset>
+              <fieldset>
+                <div class="item">
+                  {{ import_export_form.update_pools() }}
+                  <label>Update pools on import</label>
+                </div>
+              </fieldset>
               <label class="btn btn-default btn-file" style="width:100%;">Import Network Topology
                 <input id="file" name="file" style="visibility:hidden; display:none" type="file">
               </label>

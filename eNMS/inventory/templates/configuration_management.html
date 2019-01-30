@@ -28,16 +28,10 @@
         <form id="configure-poller-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
           <div class="modal-body">
             <div class="form-group">
-              {% for field in poller_form %}
-                {% if field.widget.input_type == 'hidden' %}
-                  {{ field() }}
-                {% else %}
-                  <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
-                  <div class="col-md-10 col-sm-10 col-xs-12">
-                    {{ field(class="form-control") }}
-                  </div><br><br><br>
-                {% endif %}
-              {% endfor %}
+              <label class="control-label col-md-2 col-sm-2 col-xs-12">Polling Frequency</label>
+              <div class="col-md-10 col-sm-10 col-xs-12">
+                <input class="form-control" id="polling_frequency" name="polling_frequency" type="text" value="3600">
+              </div>
             </div>
           </div>
           <div class="modal-footer">

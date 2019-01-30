@@ -6,6 +6,7 @@ from sqlalchemy import (
     Integer,
     PickleType,
     String,
+    Text,
     Float
 )
 from sqlalchemy.ext.mutable import MutableDict
@@ -75,6 +76,7 @@ class Device(CustomDevice):
     netmiko_driver = Column(String)
     napalm_driver = Column(String)
     configurations = Column(MutableDict.as_mutable(PickleType), default={})
+    current_configuration = Column(Text)
     last_failure = Column(String, default='Never')
     last_status = Column(String, default='Never')
     last_update = Column(String, default='Never')

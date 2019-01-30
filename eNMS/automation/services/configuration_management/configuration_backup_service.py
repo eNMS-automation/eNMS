@@ -44,7 +44,7 @@ class ConfigurationBackupService(Service):
                 last_config = device.configurations[max(device.configurations)]
                 if config == last_config:
                     return {'success': True, 'result': 'no change'}
-            device.configurations[now] = config
+            device.configurations[now] = device.current_configuration = config
             with open(path_configurations / device.name, 'w') as file:
                 file.write(config)
             device.last_update = now

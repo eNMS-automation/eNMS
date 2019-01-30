@@ -15,8 +15,7 @@ from eNMS.base.helpers import (
     get,
     get_one,
     objectify,
-    post,
-    serialize
+    post
 )
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (

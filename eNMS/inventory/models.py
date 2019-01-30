@@ -122,9 +122,8 @@ class Link(Object):
 
     def update(self, **kwargs):
         if 'source_name' in kwargs:
-            source = fetch('Device', name=self.source_name)
-            destination = fetch('Device', name=self.destination_name)
-            print(source, destination)
+            source = fetch('Device', name=kwargs['source_name'])
+            destination = fetch('Device', name=kwargs['destination_name'])
             kwargs.update({
                 'source_id': source.id,
                 'destination_id': destination.id,

@@ -217,4 +217,4 @@ def migration(direction):
     return {
         'import': migrate_import,
         'export': migrate_export
-    }[direction](app.path, request.form)
+    }[direction](app, request.form)

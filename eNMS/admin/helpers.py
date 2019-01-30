@@ -5,6 +5,7 @@ from os.path import exists
 from uuid import getnode
 from yaml import dump, load
 
+from eNMS.base.default import create_default
 from eNMS.base.helpers import delete_all, export, factory
 
 
@@ -17,9 +18,9 @@ def configure_instance_id():
     })
 
 
-def migrate_export(path_app, request):
+def migrate_export(app, request):
     for cls_name in request['import_export_types']:
-        path = path_app / 'migrations' / request['name']
+        path = app.path / 'migrations' / request['name']
         if not exists(path):
             makedirs(path)
         with open(path / f'{cls_name}.yaml', 'w') as migration_file:
@@ -27,12 +28,12 @@ def migrate_export(path_app, request):
     return True
 
 
-def migrate_import(path_app, request):
+def migrate_import(app, request):
     status = 'Import successful.'
     if request.get('empty_database_before_import', False):
         delete_all(*request['import_export_types'])
     for cls in request['import_export_types'][:-1]:
-        path = path_app / 'migrations' / request['name'] / f'{cls}.yaml'
+        path = app.path / 'migrations' / request['name'] / f'{cls}.yaml'
         with open(path, 'r') as migration_file:
             objects = load(migration_file)
             if cls == 'Workflow':
@@ -65,4 +66,6 @@ def migrate_import(path_app, request):
         factory('Workflow', **workflow)
     for edge in edges:
         factory('WorkflowEdge', **edge)
+    if request.get('empty_database_before_import', False):
+        create_default(app)
     return status

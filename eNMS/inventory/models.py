@@ -121,16 +121,17 @@ class Link(Object):
         self.update(**kwargs)
 
     def update(self, **kwargs):
-        super().update(**kwargs)
         if 'source_name' in kwargs:
             source = fetch('Device', name=self.source_name)
             destination = fetch('Device', name=self.destination_name)
+            print(source, destination)
             kwargs.update({
                 'source_id': source.id,
                 'destination_id': destination.id,
                 'source': source.id,
                 'destination': destination.id
             })
+        super().update(**kwargs)
 
 
 AbstractPool = type('AbstractPool', (Base,), {

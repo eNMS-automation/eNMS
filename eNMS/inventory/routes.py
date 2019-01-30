@@ -107,6 +107,7 @@ def search_configurations():
     text = request.form['search_text']
     regex = 'regular_expression' in request.form
     devices, match = fetch_all('Device'), []
+    start, length = int(request.args['start']), int(request.args['length'])
     for device in devices:
         if not device.configurations:
             continue
@@ -124,11 +125,11 @@ def search_configurations():
         'recordsTotal': len(devices),
         'recordsFiltered': len(match),
         'data': [
-            [getattr(obj, property) for property in properties]
-            + table_static_entries(table, obj)
-            for obj in filtered.limit(
-                int(request.args['length'])
-            ).offset(int(request.args['start'])).all()
+            [
+                getattr(device, property)
+                for property in device_configuration_properties
+            ] + table_static_entries('configuration', device)
+            for obj in match[start, start + length]
         ]
     })
 

@@ -3,7 +3,6 @@ from difflib import SequenceMatcher
 from flask import current_app as app, request, send_file
 from flask_login import current_user
 from pynetbox import api as netbox_api
-from re import search
 from requests import get as http_get
 from subprocess import Popen
 
@@ -31,8 +30,7 @@ from eNMS.inventory.forms import (
     NetboxForm,
     OpenNmsForm,
     PollerForm,
-    PoolObjectsForm,
-    SearchConfigurationForm
+    PoolObjectsForm
 )
 from eNMS.inventory.helpers import object_export, object_import
 from eNMS.base.properties import (
@@ -58,10 +56,7 @@ def configuration_management():
     return dict(
         fields=device_configuration_properties,
         compare_configurations_form=CompareConfigurationsForm(request.form),
-        add_device_form=ConfigurationManagementForm(request.form),
-        gotty_connection_form=GottyConnectionForm(request.form),
         poller_form=PollerForm(request.form),
-        search_configurations_form=SearchConfigurationForm(request.form)
     )
 
 

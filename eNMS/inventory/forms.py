@@ -85,10 +85,6 @@ class AddDevice(AddObjectForm):
     netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
 
 
-class ConfigurationManagementForm(FlaskForm):
-    pass
-
-
 class AddLink(AddObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)
@@ -148,11 +144,6 @@ class DeviceAutomationForm(FlaskForm):
 class CompareConfigurationsForm(FlaskForm):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
-
-
-class SearchConfigurationForm(FlaskForm):
-    search_text = StringField()
-    regular_expression = BooleanField()
 
 
 class PollerForm(FlaskForm):

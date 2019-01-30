@@ -22,7 +22,6 @@ from eNMS.inventory.forms import (
     AddLink,
     AddPoolForm,
     CompareConfigurationsForm,
-    ConfigurationManagementForm,
     DeviceAutomationForm,
     GottyConnectionForm,
     ImportExportForm,

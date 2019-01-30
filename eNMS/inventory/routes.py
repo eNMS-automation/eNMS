@@ -102,6 +102,37 @@ def download_configuration(name):
     )
 
 
+@get(bp, '/search_configurations')
+def search_configurations():
+    text = request.form['search_text']
+    regex = 'regular_expression' in request.form
+    devices, match = fetch_all('Device'), []
+    for device in devices:
+        if not device.configurations:
+            continue
+        if request.form['config-to-search'] == 'current':
+            config = device.configurations[max(device.configurations)]
+            if search(text, config) if regex else text in config:
+                match.append(device.serialized)
+        elif any(
+            search(text, config) if regex else text in config
+            for config in device.configurations.values()
+        ):
+            match.append(device.serialized)
+    return jsonify({
+        'draw': int(request.args['draw']),
+        'recordsTotal': len(devices),
+        'recordsFiltered': len(match),
+        'data': [
+            [getattr(obj, property) for property in properties]
+            + table_static_entries(table, obj)
+            for obj in filtered.limit(
+                int(request.args['length'])
+            ).offset(int(request.args['start'])).all()
+        ]
+    })
+
+
 @post(bp, '/connection/<id>', 'Connect to device')
 def connection(id):
     parameters, device = get_one('Parameters'), fetch('Device', id=id)
@@ -285,26 +316,6 @@ def clear_configurations(device_id):
     fetch('Device', id=device_id).configurations = {}
     db.session.commit()
     return True
-
-
-@post(bp, '/search_configurations', 'View')
-def search_configurations():
-    text = request.form['search_text']
-    regex = 'regular_expression' in request.form
-    devices = []
-    for device in fetch_all('Device'):
-        if not device.configurations:
-            continue
-        if request.form['config-to-search'] == 'current':
-            config = device.configurations[max(device.configurations)]
-            if search(text, config) if regex else text in config:
-                devices.append(device.serialized)
-        elif any(
-            search(text, config) if regex else text in config
-            for config in device.configurations.values()
-        ):
-            devices.append(device.serialized)
-    return devices
 
 
 @get(bp, '/get_raw_logs/<device_id>/<version>', 'Edit')

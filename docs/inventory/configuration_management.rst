@@ -29,12 +29,14 @@ The task ``poller_task`` will periodically run all services whose ``configuratio
 Configure polling
 -----------------
 
-The polling process is controlled by the ``Poller`` task.
+The polling process is controlled by the ``Poller`` task. The ``Poller`` task is configured to run the ``Configuration Management Workflow``.
 
-The frequency to which the poller runs is set to 3600 seconds by default.
-You can also enter the address of a remote Git repository: if such a repository is configured, eNMS will push all device configurations to this repository after the polling process has completed.
+.. image:: /_static/inventory/configuration_management/configuration_management_workflow.png
+   :alt: Configuration Management Workflow.
+   :align: center
 
-.. note:: Note: For the Git push mechanism to work, you must ensure that git does not ask for credentials upon pushing to the remote Git repository. This is usually done by creating an SSH key and creating the public key on the remote Git interface (Gitlab or Github).
+To start the configuration polling mechanism, you need to go to the :guilabel:`scheduling/task_management` page and start (``Resume`` button) the ``Poller`` task.
+By default, the ``Poller`` task will run every hour (3600 seconds), but you can change the frequency from the ``Edit`` form.
 
 Display the configuration
 -------------------------

@@ -86,6 +86,8 @@ def login():
             if user and password == user.password:
                 login_user(user)
                 return redirect(url_for('base_blueprint.dashboard'))
+            else:
+                abort(403)
         elif request.form['authentication_method'] == 'LDAP':
             try:
                 with Connection(

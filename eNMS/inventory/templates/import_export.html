@@ -16,6 +16,7 @@
           </div>
           <div class="x_content">
             <form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
+              {{ import_export_form.boolean_fields() }}
               <div class='form-group'>
                 <label>Export Filename</label>
                 {{ import_export_form.export_filename(class="form-control") }}

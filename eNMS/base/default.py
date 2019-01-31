@@ -174,8 +174,8 @@ def create_default_tasks(app):
             'schedule_job': False
         },
         {
-            'aps_job_id': 'cluster_monitoring',
-            'name': 'cluster_monitoring',
+            'aps_job_id': 'Cluster Monitoring',
+            'name': 'Cluster Monitoring',
             'description': 'Monitor eNMS cluster',
             'job': fetch('Service', name='cluster_monitoring').id,
             'frequency': 15,

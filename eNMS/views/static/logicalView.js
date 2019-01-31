@@ -154,7 +154,7 @@ force.on('tick', function() {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  call(`/objects/pool_objects/${this.value}`, function(objects) {
+  call(`/inventory/pool_objects/${this.value}`, function(objects) {
     let devicesId = objects.devices.map((n) => n.id);
     let linksId = objects.links.map((l) => l.id);
     node.style('visibility', function(d) {

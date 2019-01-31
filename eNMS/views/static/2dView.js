@@ -172,7 +172,7 @@ map.on('click', function(e) {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  call(`/objects/pool_objects/${this.value}`, function(objects) {
+  call(`/inventory/pool_objects/${this.value}`, function(objects) {
     hiddenMarkers = [];
     const devicesId = objects.devices.map((n) => n.id);
     const linksId = objects.links.map((l) => l.id);

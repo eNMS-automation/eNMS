@@ -86,7 +86,7 @@ for (let i = 0; i < links.length; i++) {
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
-  call(`/objects/pool_objects/${this.value}`, function(objects) {
+  call(`/inventory/pool_objects/${this.value}`, function(objects) {
     const devicesId = objects.devices.map((n) => n.id);
     for (let i = 0; i < markersArray.length; i++) {
       if (devicesId.includes(markersArray[i].device_id)) {

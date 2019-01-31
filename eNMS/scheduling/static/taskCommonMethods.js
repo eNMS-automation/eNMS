@@ -1,12 +1,8 @@
 /*
 global
-addTask: false
-alertify: false
 call: false
 convertSelect: false
 doc: false
-fCall: false
-taskManagement: false
 */
 
 (function() {

@@ -96,6 +96,8 @@ class DebugConfig(Config):
         'sqlite:///database.db?check_same_thread=False'
     )
 
+    # Mail
+    MAIL_DEBUG = 1
 
 class ProductionConfig(Config):
     DEBUG = False

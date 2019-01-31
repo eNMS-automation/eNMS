@@ -49,7 +49,7 @@ class Config(object):
     MAIL_USERNAME = environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
     MAIL_SENDER = environ.get('MAIL_SENDER', 'enms@enms.fr')
-    MAIL_RECIPIENTS = environ.get('MAIL_SENDER', '')
+    MAIL_RECIPIENTS = environ.get('MAIL_RECIPIENTS', '')
 
     # - via Mattermost
     MATTERMOST_URL = environ.get('MATTERMOST_URL', '')

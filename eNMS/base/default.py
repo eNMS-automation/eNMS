@@ -164,7 +164,7 @@ def create_default_tasks(app):
     tasks = [
         {
             'aps_job_id': 'Poller',
-            'name': 'poller_task',
+            'name': 'Poller',
             'description': 'Back-up device configurations',
             'job': fetch(
                 'Workflow',

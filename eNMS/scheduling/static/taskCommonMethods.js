@@ -36,12 +36,12 @@ taskManagement: false
  */
 function showTaskModal(id, duplicate) { // eslint-disable-line no-unused-vars
   if (!id) {
-    $('#title').text('Create a New Task');
+    $('#title-task').text('Create a New Task');
     $('#edit-task-form').trigger('reset');
-    $('#task-modal').modal('show');
+    $('#edit-task').modal('show');
   } else {
     call(`/get/task/${id}`, function(task) {
-      $('#title').text(
+      $('#title-task').text(
         `${duplicate ? 'Duplicate' : 'Edit'} Task '${task.name}'`
       );
       if (duplicate) {
@@ -53,5 +53,5 @@ function showTaskModal(id, duplicate) { // eslint-disable-line no-unused-vars
       $('#job').val(task.job.id);
     });
   }
-  $('#task-modal').modal('show');
+  $('#edit-task').modal('show');
 }

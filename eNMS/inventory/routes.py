@@ -248,15 +248,6 @@ def query_librenms():
     return True
 
 
-@post(bp, '/configure_poller', 'Edit')
-def configure_poller():
-    task = fetch('Task', name='poller_task')
-    task.frequency = request.form['polling_frequency']
-    db.session.commit()
-    task.reschedule()
-    return True
-
-
 @post(bp, '/get_configurations/<id>', 'View')
 def get_configurations(id):
     return {str(k): v for k, v in fetch('Device', id=id).configurations.items()}

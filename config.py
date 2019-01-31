@@ -99,6 +99,7 @@ class DebugConfig(Config):
     # Mail
     MAIL_DEBUG = 1
 
+
 class ProductionConfig(Config):
     DEBUG = False
     # In production, the secret MUST be provided as an environment variable.

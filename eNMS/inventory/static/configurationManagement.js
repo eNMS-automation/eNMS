@@ -5,7 +5,6 @@ call: false
 convertSelect: false
 diffview: false
 doc: false
-fCall: false
 initTable: false
 refreshTable: false
 */

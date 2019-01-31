@@ -7,3 +7,4 @@ capture_output = True
 enable_stdio_inheritance = True
 timeout = 1000
 graceful_timeout = 1000
+limit_request_line = 0

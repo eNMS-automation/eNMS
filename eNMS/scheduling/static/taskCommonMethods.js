@@ -30,20 +30,6 @@ taskManagement: false
 })();
 
 /**
- * Schedule a task.
- */
-function scheduleTask() { // eslint-disable-line no-unused-vars
-  fCall('/update/task', '#task-modal-form', function(task) {
-    const mode = $('#title').text().startsWith('Edit') ? 'edit' : 'add';
-    if (taskManagement) addTask(mode, task);
-    const message = `Task '${task.name}'
-    ${mode == 'edit' ? 'edited' : 'created'}.`;
-    alertify.notify(message, 'success', 5);
-    $('#task-modal').modal('hide');
-  });
-}
-
-/**
  * Show the task modal for task.
  * @param {id} id - Task id.
  * @param {duplicate} duplicate - Duplicate.
@@ -51,7 +37,7 @@ function scheduleTask() { // eslint-disable-line no-unused-vars
 function showTaskModal(id, duplicate) { // eslint-disable-line no-unused-vars
   if (!id) {
     $('#title').text('Create a New Task');
-    $('#task-modal-form').trigger('reset');
+    $('#edit-task-form').trigger('reset');
     $('#task-modal').modal('show');
   } else {
     call(`/get/task/${id}`, function(task) {

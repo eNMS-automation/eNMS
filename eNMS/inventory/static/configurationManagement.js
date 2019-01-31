@@ -40,30 +40,6 @@ function displayConfigurations() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Configure poller.
- */
-function configurePoller() { // eslint-disable-line no-unused-vars
-  fCall('/inventory/configure_poller', '#configure-poller-form', function() {
-    alertify.notify('Poller started.', 'success', 5);
-    $('#poller-modal').modal('hide');
-  });
-}
-
-/**
- * Search in all Configurations.
- */
-function searchConfigurations() { // eslint-disable-line no-unused-vars
-  fCall(
-    '/inventory/search_configurations',
-    '#search-configurations-form',
-    function(devices) {
-      alertify.notify('Configurations filtered.', 'success', 5);
-      $('#search-configurations-modal').modal('hide');
-    }
-  );
-}
-
-/**
  * Show the configurations modal for a job.
  * @param {id} id - Job id.
  */

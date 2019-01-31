@@ -38,8 +38,10 @@ The polling process is controlled by the ``Poller`` task. The ``Poller`` task is
 To start the configuration polling mechanism, you need to go to the :guilabel:`scheduling/task_management` page and start (``Resume`` button) the ``Poller`` task.
 By default, the ``Poller`` task will run every hour (3600 seconds), but you can change the frequency from the ``Edit`` form.
 
-Display the configuration
--------------------------
+Search and display the configuration
+------------------------------------
+
+You can search for a specific word in the current configuration of all devices with the input field on top of the ``Configuration`` column. eNMS will filter the list of devices based on whether the current configuration of the device contains this word.
 
 By clicking on the ``Configuration`` button, you can display and compare the device configurations.
 
@@ -58,21 +60,6 @@ Comparing two configurations will display a git-like line-by-line diff similar t
 .. image:: /_static/inventory/configuration_management/compare_configurations.png
    :alt: Compare Configurations.
    :align: center
-
-Search System
--------------
-
-You can filter the list of devices in :guilabel:`inventory/configuration_management` based on the device configurations.
-The filtering system uses the following parameters:
-  - ``Search text``: the text (word or sentence) to search for in the configuration.
-  - ``Regular expression``: whether we're looking for a regular expression match or not.
-  - ``Search only current configuration`` and ``Search in all configurations``: eNMS doesn't just store the most recent configuration, but instead, it stores the 10 most recent configurations by default. You can choose whether to search for the text in the last retrieved configuration, or in all configurations stored in the database.
-
-.. image:: /_static/inventory/configuration_management/search_configuration.png
-   :alt: Search Configuration.
-   :align: center
-
-Only the devices matched by the search will be displayed in the table. You can click on the ``Undo filter`` to display all devices again.
 
 Advanced
 --------

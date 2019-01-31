@@ -29,12 +29,7 @@ The task ``poller_task`` will periodically run all services whose ``configuratio
 Configure polling
 -----------------
 
-Once all commands have been set, you can activate the polling process by clicking on the ``Configure and Start Poller`` button.
-The following form will pop up:
-
-.. image:: /_static/inventory/configuration_management/poller_configuration.png.png
-   :alt: Poller Configuration.
-   :align: center
+The polling process is controlled by the ``Poller`` task.
 
 The frequency to which the poller runs is set to 3600 seconds by default.
 You can also enter the address of a remote Git repository: if such a repository is configured, eNMS will push all device configurations to this repository after the polling process has completed.

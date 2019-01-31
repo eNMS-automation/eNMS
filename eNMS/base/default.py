@@ -163,14 +163,14 @@ def create_default_workflows():
 def create_default_tasks(app):
     tasks = [
         {
-            'aps_job_id': 'poller_task',
+            'aps_job_id': 'Poller',
             'name': 'poller_task',
             'description': 'Back-up device configurations',
             'job': fetch(
                 'Workflow',
                 name='Configuration Management Workflow'
             ).id,
-            'frequency': 10,
+            'frequency': 3600,
             'schedule_job': False
         },
         {

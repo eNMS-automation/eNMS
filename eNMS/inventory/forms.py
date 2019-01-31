@@ -144,7 +144,3 @@ class DeviceAutomationForm(FlaskForm):
 class CompareConfigurationsForm(FlaskForm):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
-
-
-class PollerForm(FlaskForm):
-    polling_frequency = IntegerField(default=3600)

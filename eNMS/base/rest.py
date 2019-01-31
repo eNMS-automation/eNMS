@@ -92,7 +92,7 @@ class Migrate(Resource):
         return {
             'import': migrate_import,
             'export': migrate_export
-        }[direction](current_app.path, request.get_json())
+        }[direction](current_app, request.get_json())
 
 
 class Topology(Resource):

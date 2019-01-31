@@ -28,7 +28,6 @@ from eNMS.inventory.forms import (
     LibreNmsForm,
     NetboxForm,
     OpenNmsForm,
-    PollerForm,
     PoolObjectsForm
 )
 from eNMS.inventory.helpers import object_export, object_import
@@ -54,8 +53,7 @@ def device_management():
 def configuration_management():
     return dict(
         fields=device_configuration_properties,
-        compare_configurations_form=CompareConfigurationsForm(request.form),
-        poller_form=PollerForm(request.form),
+        compare_configurations_form=CompareConfigurationsForm(request.form)
     )
 
 

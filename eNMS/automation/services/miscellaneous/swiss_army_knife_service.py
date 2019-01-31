@@ -73,10 +73,14 @@ class SwissArmyKnifeService(Service):
 
     def mattermost_feedback_notification(self, payload):
         parameters = get_one('Parameters')
-        post(parameters.mattermost_url, data=dumps({
-            'channel': parameters.mattermost_channel,
-            'text': payload['result']
-        }))
+        post(
+            parameters.mattermost_url,
+            verify=parameters.mattermost_verify_certificate,
+            data=dumps({
+                'channel': parameters.mattermost_channel,
+                'text': payload['result']
+            })
+        )
         return {'success': True}
 
     def cluster_monitoring(self, _):

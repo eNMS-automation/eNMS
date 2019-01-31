@@ -248,7 +248,7 @@ function showTypeModal(type, id, dup) { // eslint-disable-line no-unused-vars
 function saveInstance(type, instance, hideModal=true) {
   const title = $(`#title-${type}`).text().startsWith('Edit');
   const mode = title ? 'edit' : 'create';
-  const message = `${type} '${instance.name}'
+  const message = `${capitalize(type)} '${instance.name}'
   ${mode == 'edit' ? 'edited' : 'created'}.`;
   alertify.notify(message, 'success', 5);
   if (hideModal) {

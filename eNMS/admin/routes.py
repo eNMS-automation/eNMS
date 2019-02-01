@@ -11,7 +11,7 @@ from flask_login import current_user, login_user, logout_user
 from ipaddress import IPv4Network
 from json import loads
 from ldap3 import Connection, NTLM, SUBTREE
-from ldap3.core.exceptions import LDAPBindError
+from logging import info
 from os import listdir
 from requests import get as rest_get
 from requests.exceptions import ConnectionError

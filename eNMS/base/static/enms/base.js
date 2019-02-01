@@ -129,7 +129,10 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
   $('#table thead tr:eq(1) th').each(function(i) {
     const title = $(this).text();
     if (!toExclude.includes(title)) {
-      $(this).html('<input type="text" placeholder="&#xF002;" style="font-family:Arial, FontAwesome; width: 100%;"/>');
+      $(this).html(
+        '<input type="text" placeholder="&#xF002;"\
+        style="font-family:Arial, FontAwesome; width: 100%;"/>'
+      );
       $('input', this).on('keyup change', function() {
         if (table.column(i).search() !== this.value) {
           table.column(i).search(this.value).draw();

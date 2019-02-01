@@ -54,7 +54,9 @@ class Config(object):
     # - via Mattermost
     MATTERMOST_URL = environ.get('MATTERMOST_URL', '')
     MATTERMOST_CHANNEL = environ.get('MATTERMOST_CHANNEL', '')
-    MATTERMOST_CERTIFICATE = int(environ.get('MATTERMOST_CERTIFICATE', True))
+    MATTERMOST_VERIFY_CERTIFICATE = int(
+        environ.get('MATTERMOST_VERIFY_CERTIFICATE', True)
+    )
 
     # - Via Slack
     SLACK_TOKEN = environ.get('SLACK_TOKEN', '')

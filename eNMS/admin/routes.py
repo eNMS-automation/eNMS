@@ -87,8 +87,6 @@ def login():
                 if user and password == user.password:
                     login_user(user)
                     return redirect(url_for('base_blueprint.dashboard'))
-                else:
-                    abort(403)
             elif request.form['authentication_method'] == 'LDAP':
                 with Connection(
                     ldap_client,
@@ -107,21 +105,20 @@ def login():
                     json_response = loads(
                         connection.response_to_json()
                     )['entries'][0]
-                    if not json_response:
-                        abort(403)
-                    user = {
-                        'name': name,
-                        'password': password,
-                        'email': json_response['attributes'].get('mail', '')
-                    }
-                    if any(
-                        app.config['LDAP_ADMIN_GROUP'] in s
-                        for s in json_response['attributes']['memberOf']
-                    ):
-                        user['permissions'] = ['Admin']
-                    new_user = factory('User', **user)
-                    login_user(new_user)
-                    return redirect(url_for('base_blueprint.dashboard'))
+                    if json_response:
+                        user = {
+                            'name': name,
+                            'password': password,
+                            'email': json_response['attributes'].get('mail', '')
+                        }
+                        if any(
+                            app.config['LDAP_ADMIN_GROUP'] in s
+                            for s in json_response['attributes']['memberOf']
+                        ):
+                            user['permissions'] = ['Admin']
+                        new_user = factory('User', **user)
+                        login_user(new_user)
+                        return redirect(url_for('base_blueprint.dashboard'))
             elif request.form['authentication_method'] == 'TACACS':
                 if tacacs_client.authenticate(name, password).valid:
                     user = factory('User', **{
@@ -130,12 +127,10 @@ def login():
                     })
                     login_user(user)
                     return redirect(url_for('base_blueprint.dashboard'))
-                else:
-                    abort(403)
-            else:
-                abort(403)
+            abort(403)
         except Exception as e:
             info(f'Authentication failed ({str(e)})')
+            abort(403)
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)
         authentication_methods = [('Local User',) * 2]

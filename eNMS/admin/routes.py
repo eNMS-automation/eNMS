@@ -81,15 +81,15 @@ def instance_management():
 def login():
     if request.method == 'POST':
         name, password = request.form['name'], request.form['password']
-        if request.form['authentication_method'] == 'Local User':
-            user = fetch('User', name=name)
-            if user and password == user.password:
-                login_user(user)
-                return redirect(url_for('base_blueprint.dashboard'))
-            else:
-                abort(403)
-        elif request.form['authentication_method'] == 'LDAP':
-            try:
+        try:
+            if request.form['authentication_method'] == 'Local User':
+                user = fetch('User', name=name)
+                if user and password == user.password:
+                    login_user(user)
+                    return redirect(url_for('base_blueprint.dashboard'))
+                else:
+                    abort(403)
+            elif request.form['authentication_method'] == 'LDAP':
                 with Connection(
                     ldap_client,
                     user=f'{app.config["LDAP_USERDN"]}\\{name}',
@@ -122,17 +122,20 @@ def login():
                     new_user = factory('User', **user)
                     login_user(new_user)
                     return redirect(url_for('base_blueprint.dashboard'))
-            except LDAPBindError:
-                abort(403)
-        elif request.form['authentication_method'] == 'TACACS':
-            if tacacs_client.authenticate(name, password).valid:
-                user = factory('User', **{'name': name, 'password': password})
-                login_user(user)
-                return redirect(url_for('base_blueprint.dashboard'))
+            elif request.form['authentication_method'] == 'TACACS':
+                if tacacs_client.authenticate(name, password).valid:
+                    user = factory('User', **{
+                        'name': name,
+                        'password': password
+                    })
+                    login_user(user)
+                    return redirect(url_for('base_blueprint.dashboard'))
+                else:
+                    abort(403)
             else:
                 abort(403)
-        else:
-            abort(403)
+        except Exception as e:
+            info(f'Authentication failed ({str(e)})')
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)
         authentication_methods = [('Local User',) * 2]

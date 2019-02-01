@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
+from logging import info
 from psutil import cpu_percent
 from uuid import getnode
 
@@ -38,15 +39,19 @@ class RestAutomation(Resource):
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
         handle_asynchronously = payload.get('async', True)
-        targets = {
-            fetch('Device', name=device_name).id
-            for device_name in payload.get('devices', '')
-        } | {
-            fetch('Device', ip_address=ip_address).id
-            for ip_address in payload.get('ip_addresses', '')
-        }
-        for pool_name in payload.get('pools', ''):
-            targets |= {d.id for d in fetch('Pool', name=pool_name).devices}
+        try:
+            targets = {
+                fetch('Device', name=device_name).id
+                for device_name in payload.get('devices', '')
+            } | {
+                fetch('Device', ip_address=ip_address).id
+                for ip_address in payload.get('ip_addresses', '')
+            }
+            for pool_name in payload.get('pools', ''):
+                targets |= {d.id for d in fetch('Pool', name=pool_name).devices}
+        except Exception as e:
+            info(f'REST API run_job endpoint failed ({str(e)})')
+            return str(e)
         if handle_asynchronously:
             scheduler.add_job(
                 id=str(datetime.now()),

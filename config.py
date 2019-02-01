@@ -141,15 +141,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
 
-class SeleniumConfig(Config):
-    DEBUG = True
-    SECRET_KEY = 'key'
-    TESTING = True
-    LOGIN_DISABLED = True
-
-
 config_dict = {
     'Production': ProductionConfig,
-    'Debug': DebugConfig,
-    'Selenium': SeleniumConfig
+    'Debug': DebugConfig
 }

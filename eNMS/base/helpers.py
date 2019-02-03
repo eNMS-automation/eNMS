@@ -58,8 +58,8 @@ def serialize(model):
     return classes[model].serialize()
 
 
-def choices(model, property):
-    return classes[model].choices()
+def choices(model, property='id'):
+    return classes[model].choices(property)
 
 
 def export(model):

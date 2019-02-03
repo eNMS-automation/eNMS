@@ -52,7 +52,7 @@ class RestAutomation(Resource):
         except Exception as e:
             info(f'REST API run_job endpoint failed ({str(e)})')
             return str(e)
-        if handle_asynchronously: 
+        if handle_asynchronously:
             scheduler.add_job(
                 id=str(datetime.now()),
                 func=scheduler_job,

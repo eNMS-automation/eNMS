@@ -116,9 +116,9 @@ class Base(db.Model):
         return [obj.to_dict(export=True) for obj in cls.query.all()]
 
     @classmethod
-    def choices(cls, property):
-        return [(
-            getattr(obj, property), obj.name)
+    def choices(cls, property='id'):
+        return [
+            (getattr(obj, property), obj.name)
             for obj in cls.query.all()
             if obj.visible
         ]

@@ -130,7 +130,7 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
     const title = $(this).text();
     if (!toExclude.includes(title)) {
       $(this).html(`
-        <input type="text" placeholder="&#xF002;"
+        <input type="text" class="form-control" placeholder="&#xF002;"
         style="font-family:Arial, FontAwesome; width: 100%;"/>
       `);
       $('input', this).on('keyup change', function() {

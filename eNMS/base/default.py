@@ -14,12 +14,13 @@ from eNMS.base.properties import parameters_public_properties
 
 
 def create_default_users():
-    factory('User', **{
-        'name': 'admin',
-        'email': 'admin@admin.com',
-        'password': 'admin',
-        'permissions': ['Admin']
-    })
+    if not fetch('User', name='admin'):
+        factory('User', **{
+            'name': 'admin',
+            'email': 'admin@admin.com',
+            'password': 'admin',
+            'permissions': ['Admin']
+        })
 
 
 def create_default_pools():

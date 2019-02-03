@@ -87,7 +87,7 @@ def login():
                 if user and password == user.password:
                     login_user(user)
                     return redirect(url_for('base_blueprint.dashboard'))
-            elif request.form['authentication_method'] == 'LDAP':
+            elif request.form['authentication_method'] == 'LDAP Domain':
                 with Connection(
                     ldap_client,
                     user=f'{app.config["LDAP_USERDN"]}\\{name}',
@@ -135,7 +135,7 @@ def login():
         login_form = LoginForm(request.form)
         authentication_methods = [('Local User',) * 2]
         if USE_LDAP:
-            authentication_methods.append(('LDAP',) * 2)
+            authentication_methods.append(('LDAP Domain',) * 2)
         if USE_TACACS:
             authentication_methods.append(('TACACS',) * 2)
         login_form.authentication_method.choices = authentication_methods

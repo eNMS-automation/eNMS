@@ -116,12 +116,8 @@ class Base(db.Model):
         return [obj.to_dict(export=True) for obj in cls.query.all()]
 
     @classmethod
-    def choices(cls, property):
-        return [
-            (getattr(obj, property), obj.name)
-            for obj in cls.query.all()
-            if obj.visible
-        ]
+    def choices(cls):
+        return [(obj.id, obj.name) for obj in cls.query.all() if obj.visible]
 
     @classmethod
     def serialize(cls):
@@ -130,9 +126,9 @@ class Base(db.Model):
 
 class ObjectField(SelectField):
 
-    def __init__(self, model, property='id'):
+    def __init__(self, model, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.choices = choices(model, property)
+        self.choices = choices(model)
 
 
 class MultipleObjectField(SelectMultipleField):

@@ -41,23 +41,23 @@ class RestAutomation(Resource):
         handle_asynchronously = payload.get('async', True)
         try:
             targets = {
-                fetch('Device', name=device_name).id
+                fetch('Device', name=device_name)
                 for device_name in payload.get('devices', '')
             } | {
-                fetch('Device', ip_address=ip_address).id
+                fetch('Device', ip_address=ip_address)
                 for ip_address in payload.get('ip_addresses', '')
             }
             for pool_name in payload.get('pools', ''):
-                targets |= {d.id for d in fetch('Pool', name=pool_name).devices}
+                targets |= {d for d in fetch('Pool', name=pool_name).devices}
         except Exception as e:
             info(f'REST API run_job endpoint failed ({str(e)})')
             return str(e)
-        if handle_asynchronously:
+        if handle_asynchronously: 
             scheduler.add_job(
                 id=str(datetime.now()),
                 func=scheduler_job,
                 run_date=datetime.now(),
-                args=[job.id, None, targets],
+                args=[job.id, None, [d.id for d in targets]],
                 trigger='date'
             )
             return job.serialized

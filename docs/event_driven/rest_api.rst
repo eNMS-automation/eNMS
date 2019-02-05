@@ -2,7 +2,7 @@
 ReST API
 ========
 
-In this section, ``instance`` refers to any device, link, service, workflow, or task in eNMS database.
+In this section, instance refers to any device, link, service, workflow, or task in eNMS database.
 
 eNMS has a ReST API allowing to:
 
@@ -15,57 +15,55 @@ eNMS has a ReST API allowing to:
 
 This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
-Retrieve or delete an instance
-******************************
+Expected ReST API Headers:
 
-::
+- Accept:"application/json"
+- Content-Type:"application/json"
+- Authorization:"Basic <xxx>"
 
- # via a GET or DELETE call to the following URL
- http://IP_address/rest/instance/<instance_type>/<instance_name>
 
-``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``.
-``<instance_name>`` is to be replaced by the name of the instance.
 
-.. image:: /_static/automation/rest/get_instance.png
-   :alt: GET call to retrieve a device
-   :align: center
-
-Create or update an instance
-****************************
-
-::
-
- # via a POST or PUT call to the following URL
- http://IP_address/rest/instance/instance_type
 
 Run a service, or a workflow
 ****************************
 
 ::
 
- # via a POST call to the following URL
- http://IP_address/rest/run_job
+ # via a POST method to the following URL
+ https://<IP_address>/rest/run_job
 
-The payload must contain the name of the job (service or workflow), a ``devices`` key with the list of target devices.
-If that list is empty, the service / workflow will run on the targets configured from the web UI.
-You can also add:
-  - a ``pools`` key if you want the job to target a specific list of pools.
-  - an ``ip_addresses`` key if you prefer to target devices based on the IP address.
+The body must contain the follwoing:
+
+- A key titled ``name`` which is assocated to a value indicating the job you want run.
+- A key titled ``devices`` which is associated to a value list of target devices. If the ``device`` value list is empty, the job will run on the devices configured from the web UI.
+
+The body may contain the follwoing:
+
+- A key titled ``pools`` which is associated to a value list of the specific pools you want to run.
+- A key titled ``ip_addresses`` which is associated to a value list of the IPs you want to run.
 
 The job can be run asynchronously or not with the ``async`` key:
-  - not asynchronously, you send a request to the REST API, eNMS runs the job and it responds to your request when the job is done running. The response will contain the result of the job, but the connection might time out if the job takes too much time to run.
-  - asynchronously, you run the job, eNMS starts it in a different thread and immediately respond with the job ID, so that you can fetch the result later on.
+  - ``async`` False, you send a request to the REST API, eNMS runs the job and it responds to your request when the job is done running. The response will contain the result of the job, but the connection might time out if the job takes too much time to run.
+  - ``async`` True, you run the job, eNMS starts it in a different thread and immediately respond with the job ID, so that you can fetch the result later on.
+  - Default is "async": True.
 
-Example of payload:
+Example of body:
 
 ::
- 
+
  {
-   "name": "service_test",
+   "name": "my_service_or_workflow",
    "devices": ["Washington"],
    "pools": ["Pool1", "Pool2"],
+   "ip_addresses": ["127.0.0.1"],
    "async": True
  }
+
+Note:
+
+- If you do not providea value for ``devices`` you will get the defualut devices built into the web UI, even if you provide a value in ``pools`` or ``ip_address``.
+- For Postman use the type "raw" for entering key/value pairs into the body. Body must also be formatted as application/JSON.
+
 
 Heartbeat
 *********
@@ -73,9 +71,34 @@ Heartbeat
 ::
 
  # Test that eNMS is still alive (used for high availability mechanisms)
- http://IP_address/rest/is_alive
+ https://<IP_address>/rest/is_alive
 
-eNMS returns ``True`` if it is still alive.
+eNMS returns either "True" or the ``name`` and ``cpu_load`` if the application is alive.
+
+
+Retrieve or delete an instance
+******************************
+
+::
+
+ # via a GET or DELETE method to the following URL
+ https://<IP_address>/rest/instance/<instance_type>/<instance_name>
+
+``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``.
+``<instance_name>`` is to be replaced by the name of the instance.
+
+.. image:: /_static/automation/rest/get_instance.png
+   :alt: GET method to retrieve a device
+   :align: center
+
+Create or update an instance
+****************************
+
+::
+
+ # via a POST or PUT method to the following URL
+ https://<IP_address>/rest/instance/<instance_type>
+
 
 Migrations
 **********
@@ -84,15 +107,15 @@ The migration system can be triggered from the ReST API:
 
 ::
 
- # Export: via a POST call to the following URL
- http://IP_address/rest/migrate/export
+ # Export: via a POST method to the following URL
+ https://<IP_address>/rest/migrate/export
 
- # Import: via a POST call to the following URL
- http://IP_address/rest/migrate/import
+ # Import: via a POST method to the following URL
+ https://<IP_address>/rest/migrate/import
 
-The payload must contain the name of the project, the types of instance to import/export, and an boolean parameter called ``empty_database_before_import`` that tells eNMS whether or not to empty the database before importing.
+The body must contain the name of the project, the types of instance to import/export, and an boolean parameter called ``empty_database_before_import`` that tells eNMS whether or not to empty the database before importing.
 
-Example of payload:
+Example of body:
 
 ::
 
@@ -128,11 +151,11 @@ The import and export of topology can be triggered from the ReST API, with a POS
 
 ::
 
- # Export: via a POST call to the following URL
- http://IP_address/rest/topology/export
+ # Export: via a POST method to the following URL
+ https://<IP_address>/rest/topology/export
 
- # Import: via a POST call to the following URL
- http://IP_address/rest/topology/import
+ # Import: via a POST method to the following URL
+ https://<IP_address>/rest/topology/import
 
 For the import, you need to attach the file as part of the request (of type "form-data" and not JSON) and set the two following ``key`` / ``value`` pairs:
  - update_pools: Whether or not pools must be updated after the topology import to take into consideration the newly imported objects.
@@ -146,10 +169,10 @@ Example of python script to import programmatically:
  from pathlib import Path
  from requests import post
  from requests.auth import HTTPBasicAuth
- 
+
  with open(Path.cwd() / 'project_name.xls', 'rb') as f:
      post(
-         'http://IP/rest/topology/import',
+         'https://IP/rest/topology/import',
          data={'replace': True, 'update_pools': False},
          files={'file': f},
          auth=HTTPBasicAuth('admin', 'admin')

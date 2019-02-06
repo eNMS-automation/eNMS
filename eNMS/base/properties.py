@@ -136,7 +136,7 @@ link_table_properties = object_common_properties[1:] + [
 
 pool_table_properties = base_properties[1:]
 
-pool_public_properties = base_properties[1:]
+pool_public_properties = base_properties
 
 for obj_type, properties in (
     ('device', device_public_properties),
@@ -647,7 +647,6 @@ link_import_properties = link_properties + [
 ]
 
 pool_import_properties = pool_public_properties + [
-    'id',
     'devices'
 ]
 

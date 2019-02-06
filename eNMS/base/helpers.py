@@ -71,6 +71,7 @@ def get_one(model):
 
 
 def factory(cls_name, **kwargs):
+    print(kwargs)
     if 'id' in kwargs:
         if kwargs['id']:
             instance = fetch(cls_name, id=kwargs['id'])

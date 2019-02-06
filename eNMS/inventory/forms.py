@@ -94,6 +94,7 @@ class AddLink(AddObjectForm):
 
 @configure_pool_form
 class AddPoolForm(FlaskForm):
+    id = HiddenField()
     name = StringField()
     description = StringField()
 

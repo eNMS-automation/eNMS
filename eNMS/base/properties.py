@@ -152,6 +152,7 @@ for obj_type, properties in (
 
 job_public_properties = [
     'name',
+    'max_processes',
     'multiprocessing',
     'vendor',
     'operating_system',

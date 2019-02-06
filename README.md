@@ -103,8 +103,8 @@ While services and workflows can be run directly and immediately from the web UI
 ## 6. Configuration Management
 
 eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
-- Poll network elements download configurations when they change
-- Easily view current configuration of a device in the inventory
+- Poll network elements; download configurations when they change
+- Easily view the current configuration of a device in the inventory
 - Search for any text in any configuration
 - View differences between various revisions of a configuration
 - Download device configuration to a local text file

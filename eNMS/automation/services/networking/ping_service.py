@@ -1,5 +1,5 @@
-import subprocess
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from subprocess import check_output
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
@@ -21,23 +21,29 @@ class ICMPPingService(Service):
     }
 
     def job(self, device, _):
-        cmd = "ping -c {} -W {} -t {} -s {} {}".format(self.count, self.timeout, self.ttl, self.packetsize, device.ip_address).split(' ')
+        cmd = 'ping -c {} -W {} -t {} -s {} {}'.format(
+            self.count,
+            self.timeout,
+            self.ttl,
+            self.packetsize,
+            device.ip_address
+        ).split(' ')
         try:
-            output = subprocess.check_output(cmd).decode().strip()
-            lines = output.split("\n")
+            output = check_output(cmd).decode().strip()
+            lines = output.split('\n')
             total = lines[-2].split(',')[3].split()[1]
             loss = lines[-2].split(',')[2].split()[0]
             timing = lines[-1].split()[3].split('/')
             return {
                 'success': True,
                 'result': {
-                     'probes_sent': self.count,
-                     'packet_loss': loss,
-                     'rtt_min': timing[0],
-                     'rtt_max': timing[2],
-                     'rtt_avg': timing[1],
-                     'rtt_stddev': timing[3],
-                     'total rtt': total
+                    'probes_sent': self.count,
+                    'packet_loss': loss,
+                    'rtt_min': timing[0],
+                    'rtt_max': timing[2],
+                    'rtt_avg': timing[1],
+                    'rtt_stddev': timing[3],
+                    'total rtt': total
                 }
             }
         except Exception as e:
@@ -45,5 +51,6 @@ class ICMPPingService(Service):
                 'success': False,
                 'result': str(e)
             }
+
 
 service_classes['ICMPPingService'] = ICMPPingService

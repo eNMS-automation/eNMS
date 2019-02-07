@@ -3,6 +3,8 @@ from difflib import SequenceMatcher
 from flask import request, session
 from json import dumps
 
+from sqlalchemy.exc import DataError
+
 from eNMS.main import db, scheduler
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.classes import service_classes
@@ -87,7 +89,11 @@ def get_logs(id):
 
 @post(bp, '/get_service/<id_or_cls>', 'View')
 def get_service(id_or_cls):
-    service = fetch('Service', id=id_or_cls)
+    service = None
+    try:
+        service = fetch('Service', id=id_or_cls)
+    except DataError:
+        pass
     cls = service_classes[service.type if service else id_or_cls]
 
     def build_text_box(property, name):

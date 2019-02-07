@@ -39,7 +39,7 @@ class NapalmPingService(Service):
         napalm_driver.open()
         ping = napalm_driver.ping(
             device.ip_address,
-            source=self.source,
+            source=self.source_ip,
             vrf=self.vrf,
             ttl=self.ttl or 255,
             timeout=self.timeout or 2,

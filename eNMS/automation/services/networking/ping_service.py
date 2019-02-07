@@ -29,11 +29,10 @@ class ICMPPingService(Service):
             device.ip_address
         ).split(' ')
         try:
-            output = check_output(cmd).decode().strip()
-            lines = output.split('\n')
-            total = lines[-2].split(',')[3].split()[1]
-            loss = lines[-2].split(',')[2].split()[0]
-            timing = lines[-1].split()[3].split('/')
+            output = check_output(cmd).decode().strip().splitlines()
+            total = output[-2].split(',')[3].split()[1]
+            loss = output[-2].split(',')[2].split()[0]
+            timing = output[-1].split()[3].split('/')
             return {
                 'success': True,
                 'result': {

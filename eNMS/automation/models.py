@@ -124,7 +124,6 @@ class Job(Base):
         fetch('Job', name=self.send_notification_method).try_run({
             'job': self.serialized,
             'logs': self.logs,
-            'recipients': self.mail_recipient,
             'runtime': time,
             'result': self.build_notification(results, time)
         })

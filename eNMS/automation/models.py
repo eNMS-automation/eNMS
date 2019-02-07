@@ -114,7 +114,7 @@ class Job(Base):
                 device for device, logs in results['result']['devices'].items()
                 if not logs["success"]
             )
-            summary.append(f'PASS:\n{passed}\n\nFAILED\n{failed}')
+            summary.append(f'FAILED\n{failed}\n\nPASS:\n{passed}')
         server_url = environ.get('ENMS_SERVER_ADDR', 'http://SERVER_IP')
         logs_url = f'{server_url}/automation/logs/{self.id}/{now}'
         summary.append(f'Logs: {logs_url}')

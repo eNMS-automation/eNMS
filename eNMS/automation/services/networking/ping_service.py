@@ -21,7 +21,7 @@ class ICMPPingService(Service):
     }
 
     def job(self, device, _):
-        cmd = 'ping -c {} -W {} -t {} -s {} {}'.format(
+        command = 'ping -c {} -W {} -t {} -s {} {}'.format(
             self.count,
             self.timeout,
             self.ttl,
@@ -29,7 +29,7 @@ class ICMPPingService(Service):
             device.ip_address
         ).split(' ')
         try:
-            output = check_output(cmd).decode().strip().splitlines()
+            output = check_output(command).decode().strip().splitlines()
             total = output[-2].split(',')[3].split()[1]
             loss = output[-2].split(',')[2].split()[0]
             timing = output[-1].split()[3].split('/')

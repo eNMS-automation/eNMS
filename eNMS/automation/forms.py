@@ -38,6 +38,7 @@ class JobForm(FlaskForm):
         ('slack_feedback_notification', 'Slack'),
         ('mattermost_feedback_notification', 'Mattermost'),
     ))
+    mail_recipient = StringField()
     number_of_retries = IntegerField('Number of retries', default=0)
     time_between_retries = IntegerField(
         'Time between retries (in seconds)',

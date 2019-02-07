@@ -90,6 +90,10 @@
               <div class='form-group'>
                 {{ service_form.send_notification_method(id='service-send_notification_method', class="form-control") }}
               </div>
+              <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
+              <div class='form-group'>
+                {{ service_form.mail_recipient(id='service-mail_recipient', class="form-control") }}
+              </div>
               <label><label for="waiting_time">Waiting time (in seconds)</label></label>
               <div class='form-group'>
                 {{ service_form.waiting_time(id='service-waiting_time', class="form-control") }}

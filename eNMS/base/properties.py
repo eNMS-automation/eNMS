@@ -152,6 +152,7 @@ for obj_type, properties in (
 
 job_public_properties = [
     'name',
+    'mail_recipient',
     'max_processes',
     'multiprocessing',
     'vendor',

@@ -14,20 +14,24 @@ class PingService(Service):
     count = Column(String)
     timeout = Column(String)
     ttl = Column(String)
-    packetsize = Column(String)
+    packet_size = Column(String)
 
     __mapper_args__ = {
         'polymorphic_identity': 'PingService',
     }
 
     def job(self, device, _):
-        command = 'ping -c {} -W {} -t {} -s {} {}'.format(
-            self.count,
-            self.timeout,
-            self.ttl,
-            self.packetsize,
-            device.ip_address
-        ).split(' ')
+        command = ['ping']
+        for x, property in (
+            'c', 'count',
+            'W', 'timeout',
+            't', 'ttl',
+            's', 'packet_size'
+        ):
+            value = getattr(self, property)
+            if value:
+                command.extend(f'-{x} {value}'.split())
+        command.append(device.ip_address)
         try:
             output = check_output(command).decode().strip().splitlines()
             total = output[-2].split(',')[3].split()[1]

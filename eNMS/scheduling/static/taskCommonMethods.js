@@ -24,30 +24,3 @@ doc: false
   }
   doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
 })();
-
-/**
- * Show the task modal for task.
- * @param {id} id - Task id.
- * @param {duplicate} duplicate - Duplicate.
- */
-function showTaskModal(id, duplicate) { // eslint-disable-line no-unused-vars
-  if (!id) {
-    $('#title-task').text('Create a New Task');
-    $('#edit-task-form').trigger('reset');
-    $('#edit-task').modal('show');
-  } else {
-    call(`/get/task/${id}`, function(task) {
-      $('#title-task').text(
-        `${duplicate ? 'Duplicate' : 'Edit'} Task '${task.name}'`
-      );
-      if (duplicate) {
-        task.id = task.name = '';
-      }
-      for (const [property, value] of Object.entries(task)) {
-        $(`#${property}`).val(value);
-      }
-      $('#job').val(task.job.id);
-    });
-  }
-  $('#edit-task').modal('show');
-}

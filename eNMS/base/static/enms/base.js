@@ -218,10 +218,8 @@ function processInstance(type, instance, dup) {
       $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
     } else if (propertyType.includes('list')) {
       $(`#${type}-${property}`).selectpicker('deselectAll');
-      $(`#${type}-${property}`).selectpicker(
-        'val',
-        propertyType === 'object-list' ? value.map((p) => p.id) : value
-      );
+      val = propertyType === 'object-list' ? value.map((p) => p.id) : value;
+      $(`#${type}-${property}`).selectpicker('val', val);
       $(`#${type}-${property}`).selectpicker('render');
     } else if (propertyType == 'object') {
       $(`#${type}-${property}`).val(value.id);

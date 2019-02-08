@@ -1,5 +1,5 @@
 from subprocess import check_output
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
@@ -11,10 +11,10 @@ class PingService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
-    count = Column(String)
-    timeout = Column(String)
-    ttl = Column(String)
-    packet_size = Column(String)
+    count = Column(Integer, default=5)
+    timeout = Column(Integer)
+    ttl = Column(Integer)
+    packet_size = Column(Integer)
 
     __mapper_args__ = {
         'polymorphic_identity': 'PingService',
@@ -23,10 +23,10 @@ class PingService(Service):
     def job(self, device, _):
         command = ['ping']
         for x, property in (
-            'c', 'count',
-            'W', 'timeout',
-            't', 'ttl',
-            's', 'packet_size'
+            ('c', 'count'),
+            ('W', 'timeout'),
+            ('t', 'ttl'),
+            ('s', 'packet_size')
         ):
             value = getattr(self, property)
             if value:
@@ -34,6 +34,7 @@ class PingService(Service):
         command.append(device.ip_address)
         try:
             output = check_output(command).decode().strip().splitlines()
+            print(output)
             total = output[-2].split(',')[3].split()[1]
             loss = output[-2].split(',')[2].split()[0]
             timing = output[-1].split()[3].split('/')

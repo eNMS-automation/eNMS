@@ -19,7 +19,6 @@ from eNMS.scheduling.forms import SchedulingForm
 def task_management():
     return dict(
         fields=task_public_properties,
-        tasks=serialize('Task'),
         scheduling_form=SchedulingForm(request.form)
     )
 

@@ -10,30 +10,30 @@
       <form id="edit-task-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body" style="min-height:70vh;">
           <div class="form-group">
-            {{ scheduling_form.id() }}
+            {{ scheduling_form.id(id='task-id') }}
             <label>Name</label>
             <div class='form-group'>
-              {{ scheduling_form.name(class="form-control", required=true) }}
+              {{ scheduling_form.name(id='task-name', class="form-control", required=true) }}
             </div>
             <label>Description</label>
             <div class='form-group'>
-              {{ scheduling_form.description(class="form-control") }}
+              {{ scheduling_form.description(id='task-description', class="form-control") }}
             </div>
             <label>Service or Workflow</label>
             <div class="form-group">
-              {{ scheduling_form.job(class="form-control") }}
+              {{ scheduling_form.job(id='task-job', class="form-control") }}
             </div>
             <label>Start date</label>
             <div class='form-group'>
-              {{ scheduling_form.start_date(class="form-control") }}
+              {{ scheduling_form.start_date(id='task-start_date', class="form-control") }}
             </div>
             <label>End date</label>
             <div class='form-group'>
-              {{ scheduling_form.end_date(class="form-control") }}
+              {{ scheduling_form.end_date(id='task-end_date', class="form-control") }}
             </div>
             <label>Frequency (seconds)</label>
             <div class='form-group'>
-              {{ scheduling_form.frequency(class="form-control", autocomplete="off") }}
+              {{ scheduling_form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
             </div>
           </div>
         </div>

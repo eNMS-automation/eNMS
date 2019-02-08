@@ -5,9 +5,9 @@ from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 
 
-class ICMPPingService(Service):
+class PingService(Service):
 
-    __tablename__ = 'ICMPPingService'
+    __tablename__ = 'PingService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
@@ -17,7 +17,7 @@ class ICMPPingService(Service):
     packetsize = Column(String)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'ICMPPingService',
+        'polymorphic_identity': 'PingService',
     }
 
     def job(self, device, _):
@@ -52,4 +52,4 @@ class ICMPPingService(Service):
             }
 
 
-service_classes['ICMPPingService'] = ICMPPingService
+service_classes['PingService'] = PingService

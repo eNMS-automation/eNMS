@@ -1,6 +1,7 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 
 from eNMS.main import db, scheduler
@@ -40,7 +41,7 @@ class Task(Base):
         if kwargs.get('schedule_job', True):
             self.reschedule()
 
-    @property
+    @hybrid_property
     def job_name(self):
         return self.job.name
 

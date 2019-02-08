@@ -1,5 +1,6 @@
 /*
 global
+convertSelect: false
 doc: false
 initTable: false
 */
@@ -9,5 +10,6 @@ let table = initTable( // eslint-disable-line no-unused-vars
 );
 
 (function() {
+  convertSelect('#link-source_name', '#link-destination_name');
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
 })();

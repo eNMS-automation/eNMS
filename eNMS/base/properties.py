@@ -407,9 +407,9 @@ def table_static_entries(type, obj):
             class="btn btn-success btn-xs" onclick=
             "{status.lower()}Task('{obj.id}')">{status}</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTaskModal('{obj.id}')">Edit</button>''',
+            onclick="showTypeModal('task', '{obj.id}')">Edit</button>''',
             f'''<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTaskModal('{obj.id}', true)">
+            onclick="showTypeModal('task', '{obj.id}', true)">
             Duplicate</button>''',
             f'''<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('task', '{obj.id}')">

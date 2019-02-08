@@ -6,7 +6,7 @@ doc: false
 */
 
 (function() {
-  convertSelect('#job');
+  convertSelect('#task-job');
   const dates = ['start_date', 'end_date'];
   const today = new Date();
   for (let i = 0; i < dates.length; i++) {

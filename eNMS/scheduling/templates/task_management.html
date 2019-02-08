@@ -62,6 +62,9 @@
 
 {% block javascripts %}
   {{ super() }}
+  <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
+  </script>
   <!-- Task management -->
   <script src="{{ url_for('scheduling_blueprint.static', filename='taskCommonMethods.js') }}"></script>
   <script src="{{ url_for('scheduling_blueprint.static', filename='taskManagement.js') }}"></script>

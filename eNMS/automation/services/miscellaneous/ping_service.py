@@ -60,17 +60,17 @@ class PingService(Service):
             except Exception as e:
                 return {'success': False, 'result': str(e)}
         else:
-        result = {}
-        for port in map(int, self.ports.split(',')):
-            s = socket()
-            s.settimeout(self.timeout)
-            try:
-                connection = not s.connect_ex((device.ip_address, port))
-            except (socket.gaierror, socket.timeout, socket.error):
-                connection = False
-            finally:
-                s.close()
-            result[port] = connection
+            result = {}
+            for port in map(int, self.ports.split(',')):
+                s = socket()
+                s.settimeout(self.timeout)
+                try:
+                    connection = not s.connect_ex((device.ip_address, port))
+                except (gaierror, timeout, error):
+                    connection = False
+                finally:
+                    s.close()
+                result[port] = connection
 
 
 service_classes['PingService'] = PingService

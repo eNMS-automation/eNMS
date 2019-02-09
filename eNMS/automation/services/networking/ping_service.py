@@ -50,10 +50,7 @@ class PingService(Service):
                 }
             }
         except Exception as e:
-            return {
-                'success': False,
-                'result': str(e)
-            }
+            return {'success': False, 'result': str(e)}
 
 
 service_classes['PingService'] = PingService

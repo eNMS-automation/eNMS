@@ -1,6 +1,6 @@
 from socket import error, gaierror, socket, timeout 
 from subprocess import check_output
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
@@ -68,6 +68,6 @@ class PingService(Service):
                 finally:
                     s.close()
                 result[port] = connection
-            return {'success': False, 'result': result}
+            return {'success': all(result.values()), 'result': result}
 
 service_classes['PingService'] = PingService

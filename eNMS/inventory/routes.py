@@ -1,6 +1,6 @@
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import current_app as app, request, send_file
+from flask import current_app as app, jsonify, request, send_file
 from flask_login import current_user
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -85,13 +85,16 @@ def import_export():
     )
 
 
-@get(bp, '/download_configuration/<name>', 'View')
+@bp.route('/download_configuration/<name>')
 def download_configuration(name):
-    send_file(
-        filename_or_fp=str(app.path / 'git' / 'configurations' / name),
-        as_attachment=True,
-        attachment_filename=f'configuration_{name}.txt'
-    )
+    try:
+        send_file(
+            filename_or_fp=str(app.path / 'git' / 'configurations' / name),
+            as_attachment=True,
+            attachment_filename=f'configuration_{name}.txt'
+        )
+    except:
+        return jsonify({})
 
 
 @post(bp, '/connection/<id>', 'Connect to device')

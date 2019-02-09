@@ -216,13 +216,20 @@ function processInstance(type, instance, dup) {
       $(`#${type}-${property}`).prop('checked', value);
     } else if (propertyType.includes('dict')) {
       $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
-    } else if (propertyType.includes('list')) {
+    } else if (propertyType.includes('list') || propertyType.includes('obj')) {
       $(`#${type}-${property}`).selectpicker('deselectAll');
-      val = propertyType === 'object-list' ? value.map((p) => p.id) : value;
-      $(`#${type}-${property}`).selectpicker('val', val);
+      $(`#${type}-${property}`).selectpicker('val', 
+        propertyType === 'object'
+        ? value.id
+        : propertyType === 'list'
+        ? value
+        : value.map((p) => p.id)
+      );
       $(`#${type}-${property}`).selectpicker('render');
     } else if (propertyType == 'object') {
-      $(`#${type}-${property}`).val(value.id);
+      $(`#${type}-${property}`).selectpicker('deselectAll');
+      $(`#${type}-${property}`).selectpicker('val', value.id);
+      $(`#${type}-${property}`).selectpicker('render');
     } else {
       $(`#${type}-${property}`).val(value);
     }

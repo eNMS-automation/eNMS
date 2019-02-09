@@ -27,6 +27,8 @@ class Task(Base):
     job = relationship('Job', back_populates='tasks')
 
     def __init__(self, **kwargs):
+        if 'job_name' in kwargs:
+            kwargs['job'] = kwargs.pop('job_name')
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
         self.aps_job_id = kwargs.get('aps_job_id', self.creation_time)
@@ -37,6 +39,8 @@ class Task(Base):
             self.status = 'Pause'
 
     def update(self, **kwargs):
+        if 'job_name' in kwargs:
+            kwargs['job'] = kwargs.pop('job_name')
         super().update(**kwargs)
         if kwargs.get('schedule_job', True):
             self.reschedule()

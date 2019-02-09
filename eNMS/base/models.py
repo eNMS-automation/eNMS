@@ -82,6 +82,7 @@ class Base(db.Model):
         properties = self.get_properties(export)
         no_migrate = dont_migrate.get(self.type, dont_migrate['Service'])
         for property in rel.get(self.type, rel['Service']):
+            print(property)
             if export and property in no_migrate:
                 continue
             if hasattr(self, property):

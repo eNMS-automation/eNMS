@@ -108,6 +108,7 @@ device_configuration_properties = [
 ]
 
 task_properties = base_properties + [
+    'job',
     'job_name',
     'start_date',
     'end_date',
@@ -280,8 +281,11 @@ task_serialized_properties = [
     'status',
     'start_date',
     'end_date',
-    'frequency'
+    'frequency',
+    'job'
 ]
+
+task_table_properties = task_serialized_properties[:-1]
 
 cls_to_properties = {
     'Instance': instance_public_properties,
@@ -307,7 +311,7 @@ table_properties = {
     'logrule': log_rule_table_properties,
     'pool': pool_table_properties,
     'service': service_table_properties,
-    'task': task_public_properties,
+    'task': task_table_properties,
     'user': user_public_properties,
     'workflow': workflow_table_properties
 }
@@ -590,7 +594,7 @@ property_types = {
     'jobs': 'object-list',
     'edges': 'object-list',
     'permissions': 'list',
-    'job_name': 'list',
+    'job': 'object',
     'source_name': 'list',
     'destination_name': 'list',
     'import_export_types': 'list',

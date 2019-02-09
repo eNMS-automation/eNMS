@@ -3,13 +3,7 @@ from flask import request
 from re import search, sub
 
 from eNMS.main import scheduler
-from eNMS.base.helpers import (
-    fetch,
-    fetch_all,
-    get,
-    post,
-    serialize
-)
+from eNMS.base.helpers import fetch, fetch_all, get, post
 from eNMS.base.properties import task_public_properties
 from eNMS.scheduling import bp
 from eNMS.scheduling.forms import SchedulingForm

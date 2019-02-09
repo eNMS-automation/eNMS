@@ -11,4 +11,4 @@ class SchedulingForm(FlaskForm):
     name = StringField()
     description = StringField()
     frequency = IntegerField()
-    job_name = ObjectField('Job', property='name')
+    job = ObjectField('Job')

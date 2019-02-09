@@ -85,7 +85,7 @@ def import_export():
     )
 
 
-@bp.route('/download_configuration/<name>')
+@get(bp, '/download_configuration/<name>', 'View')
 def download_configuration(name):
     try:
         return send_file(
@@ -93,8 +93,8 @@ def download_configuration(name):
             as_attachment=True,
             attachment_filename=f'configuration_{name}.txt'
         )
-    except:
-        return jsonify({})
+    except FileNotFoundError:
+        return jsonify('No configuration stored')
 
 
 @post(bp, '/connection/<id>', 'Connect to device')

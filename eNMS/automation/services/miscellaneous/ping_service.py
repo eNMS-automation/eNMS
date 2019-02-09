@@ -40,25 +40,22 @@ class PingService(Service):
                 if value:
                     command.extend(f'-{x} {value}'.split())
             command.append(device.ip_address)
-            try:
-                output = check_output(command).decode().strip().splitlines()
-                total = output[-2].split(',')[3].split()[1]
-                loss = output[-2].split(',')[2].split()[0]
-                timing = output[-1].split()[3].split('/')
-                return {
-                    'success': True,
-                    'result': {
-                        'probes_sent': self.count,
-                        'packet_loss': loss,
-                        'rtt_min': timing[0],
-                        'rtt_max': timing[2],
-                        'rtt_avg': timing[1],
-                        'rtt_stddev': timing[3],
-                        'total rtt': total
-                    }
+            output = check_output(command).decode().strip().splitlines()
+            total = output[-2].split(',')[3].split()[1]
+            loss = output[-2].split(',')[2].split()[0]
+            timing = output[-1].split()[3].split('/')
+            return {
+                'success': True,
+                'result': {
+                    'probes_sent': self.count,
+                    'packet_loss': loss,
+                    'rtt_min': timing[0],
+                    'rtt_max': timing[2],
+                    'rtt_avg': timing[1],
+                    'rtt_stddev': timing[3],
+                    'total rtt': total
                 }
-            except Exception as e:
-                return {'success': False, 'result': str(e)}
+            }
         else:
             result = {}
             for port in map(int, self.ports.split(',')):
@@ -71,6 +68,6 @@ class PingService(Service):
                 finally:
                     s.close()
                 result[port] = connection
-
+            return {'success': False, 'result': result}
 
 service_classes['PingService'] = PingService

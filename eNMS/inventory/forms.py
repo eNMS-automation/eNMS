@@ -88,8 +88,8 @@ class AddDevice(AddObjectForm):
 class AddLink(AddObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)
-    source_name = ObjectField('Device', property='name')
-    destination_name = ObjectField('Device', property='name')
+    source_name = ObjectField('Device')
+    destination_name = ObjectField('Device')
 
 
 @configure_pool_form

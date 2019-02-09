@@ -11,6 +11,11 @@ class PingService(Service):
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
     has_targets = True
+    protocol = Column(String)
+    protocol_values = (
+        ('ICMP', 'ICMP Ping'),
+        ('TCP', 'TCP Ping')
+    )
     count = Column(Integer, default=5)
     timeout = Column(Integer)
     ttl = Column(Integer)
@@ -21,36 +26,39 @@ class PingService(Service):
     }
 
     def job(self, device, _):
-        command = ['ping']
-        for x, property in (
-            ('c', 'count'),
-            ('W', 'timeout'),
-            ('t', 'ttl'),
-            ('s', 'packet_size')
-        ):
-            value = getattr(self, property)
-            if value:
-                command.extend(f'-{x} {value}'.split())
-        command.append(device.ip_address)
-        try:
-            output = check_output(command).decode().strip().splitlines()
-            total = output[-2].split(',')[3].split()[1]
-            loss = output[-2].split(',')[2].split()[0]
-            timing = output[-1].split()[3].split('/')
-            return {
-                'success': True,
-                'result': {
-                    'probes_sent': self.count,
-                    'packet_loss': loss,
-                    'rtt_min': timing[0],
-                    'rtt_max': timing[2],
-                    'rtt_avg': timing[1],
-                    'rtt_stddev': timing[3],
-                    'total rtt': total
+        if self.protocol == 'ICMP':
+            command = ['ping']
+            for x, property in (
+                ('c', 'count'),
+                ('W', 'timeout'),
+                ('t', 'ttl'),
+                ('s', 'packet_size')
+            ):
+                value = getattr(self, property)
+                if value:
+                    command.extend(f'-{x} {value}'.split())
+            command.append(device.ip_address)
+            try:
+                output = check_output(command).decode().strip().splitlines()
+                total = output[-2].split(',')[3].split()[1]
+                loss = output[-2].split(',')[2].split()[0]
+                timing = output[-1].split()[3].split('/')
+                return {
+                    'success': True,
+                    'result': {
+                        'probes_sent': self.count,
+                        'packet_loss': loss,
+                        'rtt_min': timing[0],
+                        'rtt_max': timing[2],
+                        'rtt_avg': timing[1],
+                        'rtt_stddev': timing[3],
+                        'total rtt': total
+                    }
                 }
-            }
-        except Exception as e:
-            return {'success': False, 'result': str(e)}
+            except Exception as e:
+                return {'success': False, 'result': str(e)}
+        else:
+            pass
 
 
 service_classes['PingService'] = PingService

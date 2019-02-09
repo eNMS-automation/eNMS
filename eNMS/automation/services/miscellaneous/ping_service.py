@@ -1,3 +1,4 @@
+from socket import error, gaierror, socket, timeout 
 from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer
 
@@ -16,8 +17,9 @@ class PingService(Service):
         ('ICMP', 'ICMP Ping'),
         ('TCP', 'TCP Ping')
     )
+    ports = Column(String)
     count = Column(Integer, default=5)
-    timeout = Column(Integer)
+    timeout = Column(Integer, default=2)
     ttl = Column(Integer)
     packet_size = Column(Integer)
 
@@ -58,7 +60,17 @@ class PingService(Service):
             except Exception as e:
                 return {'success': False, 'result': str(e)}
         else:
-            pass
+        result = {}
+        for port in map(int, self.ports.split(',')):
+            s = socket()
+            s.settimeout(self.timeout)
+            try:
+                connection = not s.connect_ex((device.ip_address, port))
+            except (socket.gaierror, socket.timeout, socket.error):
+                connection = False
+            finally:
+                s.close()
+            result[port] = connection
 
 
 service_classes['PingService'] = PingService

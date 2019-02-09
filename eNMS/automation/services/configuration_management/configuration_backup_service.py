@@ -30,12 +30,12 @@ class ConfigurationBackupService(Service):
     def job(self, device, _):
         now = datetime.now()
         path_configurations = Path.cwd() / 'git' / 'configurations'
+        netmiko_handler = self.netmiko_connection(device)
         try:
-            netmiko_handler = self.netmiko_connection(device)
-            try:
-                netmiko_handler.enable()
-            except Exception:
-                pass
+            netmiko_handler.enable()
+        except Exception:
+            pass
+        try:
             config = netmiko_handler.send_command(self.configuration_command)
             device.last_status = 'Success'
             device.last_runtime = (datetime.now() - now).total_seconds()

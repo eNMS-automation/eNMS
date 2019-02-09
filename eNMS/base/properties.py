@@ -285,7 +285,7 @@ task_serialized_properties = [
     'job'
 ]
 
-task_table_properties = task_serialized_properties[:-1]
+task_table_properties = task_serialized_properties[1:-1]
 
 cls_to_properties = {
     'Instance': instance_public_properties,

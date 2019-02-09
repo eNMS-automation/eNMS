@@ -4,7 +4,7 @@ from re import search, sub
 
 from eNMS.main import scheduler
 from eNMS.base.helpers import fetch, fetch_all, get, post
-from eNMS.base.properties import task_public_properties
+from eNMS.base.properties import task_table_properties
 from eNMS.scheduling import bp
 from eNMS.scheduling.forms import SchedulingForm
 
@@ -12,7 +12,7 @@ from eNMS.scheduling.forms import SchedulingForm
 @get(bp, '/task_management', 'View')
 def task_management():
     return dict(
-        fields=task_public_properties,
+        fields=task_table_properties,
         scheduling_form=SchedulingForm(request.form)
     )
 

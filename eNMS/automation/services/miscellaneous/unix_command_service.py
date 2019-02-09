@@ -10,7 +10,6 @@ class UnixCommandService(Service):
     __tablename__ = 'UnixCommandService'
 
     id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-    has_targets = True
     command = Column(String)
 
     __mapper_args__ = {
@@ -21,8 +20,11 @@ class UnixCommandService(Service):
         if len(args) == 2:
             device, payload = args
         try:
-            command = self.sub(self.command, locals()
-            return check_output(command).split()).decode()
+            command = self.sub(self.command, locals())
+            return {
+                'success': True,
+                'result': check_output(command.split()).decode()
+            }
         except Exception as e:
             return {'success': False, 'result': str(e)}
 

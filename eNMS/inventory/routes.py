@@ -88,7 +88,7 @@ def import_export():
 @bp.route('/download_configuration/<name>')
 def download_configuration(name):
     try:
-        send_file(
+        return send_file(
             filename_or_fp=str(app.path / 'git' / 'configurations' / name),
             as_attachment=True,
             attachment_filename=f'configuration_{name}.txt'

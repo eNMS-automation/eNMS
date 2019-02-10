@@ -15,7 +15,6 @@ from eNMS.base.helpers import (
     fetch_all,
     fetch_all_visible,
     get,
-    get_one,
     post
 )
 from eNMS.base.properties import (
@@ -69,7 +68,6 @@ def dashboard():
         properties=type_to_diagram_properties,
         default_properties=default_diagrams_properties,
         counters={cls: len(fetch_all_visible(cls)) for cls in classes},
-        parameters=get_one('Parameters').serialized
     )
 
 

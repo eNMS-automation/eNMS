@@ -265,7 +265,6 @@ parameters_public_properties = [
     'mattermost_url',
     'mattermost_channel',
     'mattermost_verify_certificate',
-    'on_going_jobs',
     'opennms_rest_api',
     'opennms_devices',
     'opennms_login',

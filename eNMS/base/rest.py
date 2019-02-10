@@ -38,7 +38,7 @@ class RestAutomation(Resource):
     def post(self):
         payload = request.get_json()
         job = fetch('Job', name=payload['name'])
-        handle_asynchronously = payload.get('async', True)
+        handle_asynchronously = payload.get('async', False)
         try:
             targets = {
                 fetch('Device', name=device_name)

@@ -174,12 +174,15 @@ class Pool(AbstractPool):
         secondary=job_pool_table,
         back_populates='pools'
     )
+    never_update = Column(Boolean, default=True)
 
     def update(self, **kwargs):
         super().update(**kwargs)
         self.compute_pool()
 
     def compute_pool(self):
+        if self.never_update:
+            return
         self.devices = list(filter(self.object_match, Device.query.all()))
         self.links = []
         for link in Link.query.all():

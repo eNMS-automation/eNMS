@@ -29,7 +29,7 @@ def configure_device_form(cls):
 def configure_pool_form(cls):
     cls.device_properties = device_public_properties
     cls.link_properties = link_public_properties
-    boolean_fields = []
+    boolean_fields = ['never_update']
     for cls_name, properties in (
         ('device', device_public_properties),
         ('link', link_public_properties)
@@ -97,6 +97,7 @@ class AddPoolForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()
+    never_update = BooleanField('Never update (for manually selected pools)')
 
 
 class PoolObjectsForm(FlaskForm):

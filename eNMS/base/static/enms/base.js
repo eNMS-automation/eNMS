@@ -218,7 +218,7 @@ function processInstance(type, instance, dup) {
       $(`#${type}-${property}`).val(value ? JSON.stringify(value): '{}');
     } else if (propertyType.includes('list') || propertyType.includes('obj')) {
       $(`#${type}-${property}`).selectpicker('deselectAll');
-      $(`#${type}-${property}`).selectpicker('val', 
+      $(`#${type}-${property}`).selectpicker('val',
         propertyType === 'object'
         ? value.id
         : propertyType === 'list'

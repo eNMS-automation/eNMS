@@ -1,6 +1,5 @@
 /*
 global
-call: false
 convertSelect: false
 doc: false
 */

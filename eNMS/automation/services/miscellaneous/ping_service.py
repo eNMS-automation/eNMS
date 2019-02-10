@@ -1,4 +1,4 @@
-from socket import error, gaierror, socket, timeout 
+from socket import error, gaierror, socket, timeout
 from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer, String
 
@@ -69,5 +69,6 @@ class PingService(Service):
                     s.close()
                 result[port] = connection
             return {'success': all(result.values()), 'result': result}
+
 
 service_classes['PingService'] = PingService

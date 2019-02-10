@@ -24,7 +24,8 @@ boolean_properties = [
     'multiprocessing',
     'send_notification',
     'use_workflow_targets',
-    'push_to_git'
+    'push_to_git',
+    'never_update'
 ]
 
 list_properties = [
@@ -602,6 +603,7 @@ property_types = {
     'send_notification': 'bool',
     'multiprocessing': 'bool',
     'use_workflow_targets': 'bool',
+    'never_update': 'bool',
     'mattermost_verify_certificate': 'bool',
     'push_to_git': 'bool'
 }

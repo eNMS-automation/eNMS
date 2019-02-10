@@ -130,8 +130,10 @@ class Job(Base):
 
     def try_run(self, payload=None, targets=None, from_workflow=False):
         self.status, self.state = 'Running', {}
+        parameters = get_one('Parameters')
         info(f'{self.name}: starting.')
         if not from_workflow:
+            parameters.on_going_jobs += 1
             db.session.commit()
         failed_attempts, now = {}, str(datetime.now()).replace(' ', '-')
         for i in range(self.number_of_retries + 1):
@@ -147,6 +149,7 @@ class Job(Base):
         info(f'{self.name}: finished.')
         self.status, self.state = 'Idle', {}
         if not from_workflow:
+            parameters.on_going_jobs -= 1
             db.session.commit()
             if self.send_notification:
                 self.notify(results, now)

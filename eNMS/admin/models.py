@@ -79,6 +79,7 @@ class Parameters(Base):
     mattermost_url = Column(String)
     mattermost_channel = Column(String)
     mattermost_verify_certificate = Column(Boolean)
+    on_going_jobs = Column(Integer)
     slack_token = Column(String)
     slack_channel = Column(String)
     pool_filter = Column(String)

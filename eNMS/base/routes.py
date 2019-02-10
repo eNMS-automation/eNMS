@@ -64,10 +64,27 @@ def server_side_processing(cls, table):
 
 @get(bp, '/dashboard')
 def dashboard():
+    on_going = {
+        'Running services': len(
+            service for service in fetch_all('Service')
+            if service.status == 'Running'
+        ),
+        'Running workflows': len(
+            workflow for workflow in fetch_all('Workflow')
+            if workflow.status == 'Running'
+        ),
+        'Scheduled tasks': len(
+            task for task in fetch_all('Task')
+            if task.status == 'Active'
+        )
+    }
     return dict(
         properties=type_to_diagram_properties,
         default_properties=default_diagrams_properties,
-        counters={cls: len(fetch_all_visible(cls)) for cls in classes},
+        counters={
+            **{cls: len(fetch_all_visible(cls)) for cls in classes},
+            **on_going
+        }
     )
 
 

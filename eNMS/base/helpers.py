@@ -169,11 +169,11 @@ def post(blueprint, url, permission=None):
                 f"User '{current_user.name}' ({request.remote_addr})"
                 f" calling the endpoint {request.url} (POST)"
             )
-            # try:
-            result = func(*args, **kwargs)
-            return jsonify(result)
-            # except Exception as e:
-            #     return jsonify({'error': str(e)})
+            try:
+                result = func(*args, **kwargs)
+                return jsonify(result)
+            except Exception as e:
+                return jsonify({'error': str(e)})
         return inner
     return outer
 

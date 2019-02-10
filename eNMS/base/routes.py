@@ -4,6 +4,7 @@ from logging import info
 from flask import jsonify, redirect, request, url_for
 from flask_login import current_user
 from sqlalchemy import and_
+from sqlalchemy.exc import IntegrityError
 
 from eNMS import db
 from eNMS.base import bp
@@ -114,6 +115,8 @@ def update_instance(cls):
         return instance.serialized
     except JSONDecodeError:
         return {'error': 'Invalid JSON syntax (JSON field)'}
+    except IntegrityError:
+        return {'error': 'An object with the same name already exists'}
 
 
 @post(bp, '/delete/<cls>/<id>', 'Edit')

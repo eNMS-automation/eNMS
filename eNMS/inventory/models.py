@@ -9,7 +9,7 @@ from sqlalchemy import (
     Text,
     Float
 )
-from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 
@@ -107,11 +107,13 @@ class Link(Object):
         primaryjoin=source_id == Device.id,
         backref=backref('source', cascade='all, delete-orphan')
     )
+    source_name = association_proxy('source', 'name')
     destination = relationship(
         Device,
         primaryjoin=destination_id == Device.id,
         backref=backref('destination', cascade='all, delete-orphan')
     )
+    destination_name = association_proxy('destination', 'name')
     pools = relationship(
         'Pool',
         secondary=pool_link_table,
@@ -121,23 +123,17 @@ class Link(Object):
     def __init__(self, **kwargs):
         self.update(**kwargs)
 
-    @hybrid_property
-    def source_name(self):
-        print('ttt'*100, self.source, type(self.source))
-        return self.source.name
-
-    @hybrid_property
-    def destination_name(self):
-        return self.destination.name
-
     def update(self, **kwargs):
-        source = fetch('Device', name=kwargs.pop('source_name')).id
-        destination = fetch('Device', name=kwargs.pop('destination_name')).id
+        if 'source_name' in kwargs:
+            kwargs['source'] = fetch(
+                'Device', name=kwargs.pop('source_name')
+            ).id
+            kwargs['destination'] = fetch(
+                'Device', name=kwargs.pop('destination_name')
+            ).id
         kwargs.update({
             'source_id': source,
-            'destination_id': destination,
-            'source': source,
-            'destination': destination
+            'destination_id': destination
         })
         super().update(**kwargs)
 

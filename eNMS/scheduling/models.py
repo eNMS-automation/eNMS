@@ -1,7 +1,7 @@
 from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime
-from sqlalchemy import Boolean, Column, ForeignKey, func, Integer, String
-from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 
 from eNMS.main import db, scheduler
@@ -25,6 +25,7 @@ class Task(Base):
     end_date = Column(String)
     job_id = Column(Integer, ForeignKey('Job.id'))
     job = relationship('Job', back_populates='tasks')
+    job_name = association_proxy('job', 'name')
 
     def __init__(self, **kwargs):
         super().update(**kwargs)
@@ -40,14 +41,6 @@ class Task(Base):
         super().update(**kwargs)
         if kwargs.get('schedule_job', True):
             self.reschedule()
-
-    @hybrid_property
-    def job_name(self):
-        return self.job.name
-
-    @job_name.expression
-    def job_name(cls):
-        return cls.job.name
 
     def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')

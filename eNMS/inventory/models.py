@@ -132,8 +132,8 @@ class Link(Object):
                 'Device', name=kwargs.pop('destination_name')
             ).id
         kwargs.update({
-            'source_id': source,
-            'destination_id': destination
+            'source_id': kwargs['source'],
+            'destination_id': kwargs['destination']
         })
         super().update(**kwargs)
 
@@ -178,7 +178,7 @@ class Pool(AbstractPool):
         secondary=job_pool_table,
         back_populates='pools'
     )
-    never_update = Column(Boolean, default=True)
+    never_update = Column(Boolean, default=False)
 
     def update(self, **kwargs):
         super().update(**kwargs)

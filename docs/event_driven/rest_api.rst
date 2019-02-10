@@ -45,7 +45,7 @@ The body may contain the follwoing:
 The job can be run asynchronously or not with the ``async`` key:
   - ``async`` False, you send a request to the REST API, eNMS runs the job and it responds to your request when the job is done running. The response will contain the result of the job, but the connection might time out if the job takes too much time to run.
   - ``async`` True, you run the job, eNMS starts it in a different thread and immediately respond with the job ID, so that you can fetch the result later on.
-  - Default is "async": True.
+  - Async will default to ``False`` if not in the payload.
 
 Example of body:
 

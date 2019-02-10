@@ -25,6 +25,12 @@
               <div class="form-group">
                 {{ form['name'](id="pool-name", class="form-control required", placeholder="Name") }}<br>
                 {{ form['description'](id="pool-description", class="form-control", placeholder="Description") }}<br>
+              <fieldset>
+                <div class="item">
+                  {{ form['never_update'](id="pool-never_update") }}
+                  <label>Never update (for manually selected pools)</label>
+                </div>
+              </fieldset><br>
                 <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                   <thead>
                   <tr>
@@ -145,8 +151,9 @@
             <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Description</th>
+                  {% for field in fields %}
+                    <th>{{ names[field] }}</th>
+                  {% endfor %}
                   <th style="width: 5%">Edit properties</th>
                   <th style="width: 5%">Update</th>
                   <th style="width: 5%">Duplicate</th>

@@ -135,9 +135,9 @@ link_table_properties = object_common_properties[1:] + [
     'destination_name'
 ]
 
-pool_table_properties = base_properties[1:]
+pool_public_properties = base_properties + ['never_update']
 
-pool_public_properties = base_properties
+pool_table_properties = pool_public_properties[1:]
 
 for obj_type, properties in (
     ('device', device_public_properties),
@@ -546,9 +546,10 @@ pretty_names = {
     'missing_host_key_policy': 'Missing Host Key Policy',
     'model': 'Model',
     'name': 'Name',
+    'napalm_driver': 'Napalm driver',
     'negative_logic': 'Negative Logic',
     'netmiko_driver': 'Netmiko driver',
-    'napalm_driver': 'Napalm driver',
+    'never_update': 'Never update',
     'number_of_configuration': 'Number of configurations stored',
     'operating_system': 'Operating System',
     'optional_args': 'Optional arguments',

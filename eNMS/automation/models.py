@@ -19,7 +19,7 @@ from eNMS.base.associations import (
     job_pool_table,
     job_workflow_table
 )
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, get_one
 from eNMS.base.models import Base
 
 

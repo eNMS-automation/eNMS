@@ -35,8 +35,16 @@
         <div class="count">{{ counters['User'] }}</div>
       </div>
       <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> On-going jobs (services or workflows)</span>
+        <span class="count_top"><i class="fa fa-user"></i> Running services</span>
         <div class="count">{{ counters['Running services'] }}</div>
+      </div>
+      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
+        <span class="count_top"><i class="fa fa-user"></i> Running workflows</span>
+        <div class="count">{{ counters['Running workflows'] }}</div>
+      </div>
+      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
+        <span class="count_top"><i class="fa fa-user"></i> Scheduled tasks</span>
+        <div class="count">{{ counters['Scheduled tasks'] }}</div>
       </div>
     </div>
     <!-- /top tiles -->

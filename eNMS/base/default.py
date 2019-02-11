@@ -172,7 +172,7 @@ def create_default_tasks(app):
                 name='Configuration Management Workflow'
             ).id,
             'frequency': 3600,
-            'schedule_job': False
+            'status': 'Pause'
         },
         {
             'aps_job_id': 'Cluster Monitoring',
@@ -180,7 +180,7 @@ def create_default_tasks(app):
             'description': 'Monitor eNMS cluster',
             'job': fetch('Service', name='cluster_monitoring').id,
             'frequency': 15,
-            'schedule_job': app.config['CLUSTER']
+            'status': 'Active' if app.config['CLUSTER'] else 'Pause'
         }
     ]
     for task in tasks:

@@ -31,16 +31,13 @@ class Task(Base):
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
         self.aps_job_id = kwargs.get('aps_job_id', self.creation_time)
-        if kwargs.get('schedule_job', True):
-            self.status = 'Active'
+        if self.status == 'Active':
             self.schedule()
-        else:
-            self.status = 'Pause'
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if kwargs.get('schedule_job', True):
-            self.reschedule()
+        if self.status == 'Active':
+            self.schedule()
 
     def aps_conversion(self, date):
         dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')

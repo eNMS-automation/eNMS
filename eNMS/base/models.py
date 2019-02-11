@@ -1,5 +1,6 @@
 from wtforms import SelectField, SelectMultipleField
 from json import dumps, loads
+from typing import Any
 
 from eNMS.main import db, USE_VAULT, vault_client
 from eNMS.base.helpers import fetch, objectify, choices
@@ -26,7 +27,7 @@ class Base(db.Model):
     def __repr__(self):
         return self.name
 
-    def __getattribute__(self, property):
+    def __getattribute__(self, property: str) -> Any:
         if property in private_properties and USE_VAULT:
             path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
             data = vault_client.read(path)

@@ -11,6 +11,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
+from typing import Any, Dict
 
 from eNMS.main import db
 from eNMS.base.associations import (
@@ -70,21 +71,21 @@ class Job(Base):
             targets |= set(pool.devices)
         return targets
 
-    def job_sources(self, workflow, subtype="all"):
+    def job_sources(self, workflow: "Workflow", subtype: str = "all"):
         return [
             x.source
             for x in self.sources
             if (subtype == "all" or x.subtype == subtype) and x.workflow == workflow
         ]
 
-    def job_successors(self, workflow, subtype="all"):
+    def job_successors(self, workflow: "Workflow", subtype: str = "all"):
         return [
             x.destination
             for x in self.destinations
             if (subtype == "all" or x.subtype == subtype) and x.workflow == workflow
         ]
 
-    def build_notification(self, results, now):
+    def build_notification(self, results: dict, now: str):
         summary = [
             f"Job: {self.name} ({self.type})",
             f"Runtime: {now}",
@@ -107,7 +108,7 @@ class Job(Base):
         summary.append(f"Logs: {logs_url}")
         return "\n\n".join(summary)
 
-    def notify(self, results, time):
+    def notify(self, results: dict, time: str):
         fetch("Job", name=self.send_notification_method).try_run(
             {
                 "job": self.serialized,

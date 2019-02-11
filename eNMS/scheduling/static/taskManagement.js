@@ -53,5 +53,5 @@ function resumeTask(id) { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
-  refreshTable(5000);
+  refreshTable(10000);
 })();

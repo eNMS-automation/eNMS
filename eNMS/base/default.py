@@ -523,14 +523,14 @@ def create_workflow_of_workflows():
 
 
 def create_default(app):
-    create_default_users()
-    create_default_parameters(app)
-    parameters = get_one('Parameters')
-    create_default_pools()
-    create_default_services()
-    create_default_workflows()
-    create_default_tasks(app)
-    parameters.trigger_active_parameters(app)
+    parameters = create_default_parameters(app)
+    if parameters.first_initialization:
+        create_default_users()
+        create_default_pools()
+        create_default_services()
+        create_default_workflows()
+        create_default_tasks(app)
+        parameters.trigger_active_parameters(app)
 
 
 def create_examples(app):

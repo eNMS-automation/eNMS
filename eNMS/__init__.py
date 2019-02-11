@@ -79,8 +79,6 @@ def configure_database(app):
         create_default(app)
         if app.config['CREATE_EXAMPLES']:
             create_examples(app)
-        if not scheduler.running:
-            scheduler.start()
 
 
 def configure_errors(app):
@@ -129,5 +127,7 @@ def create_app(path, config):
         configure_vault_client(app)
     if USE_SYSLOG:
         configure_syslog_server(app)
+    if not scheduler.running:
+        scheduler.start()
     info('eNMS starting')
     return app

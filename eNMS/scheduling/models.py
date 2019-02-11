@@ -53,6 +53,7 @@ class Task(Base):
         db.session.commit()
 
     def resume(self):
+        self.schedule()
         scheduler.resume_job(self.aps_job_id)
         self.status = 'Active'
         db.session.commit()

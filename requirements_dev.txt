@@ -5,5 +5,5 @@ pytest
 flake8
 flake8-print
 pep8-naming
-pip install pre-commit
+pre-commit
 -r requirements.txt

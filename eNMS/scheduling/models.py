@@ -28,6 +28,7 @@ class Task(Base):
     job_name = association_proxy('job', 'name')
 
     def __init__(self, **kwargs):
+        self.status = kwargs.pop('status', 'Active')
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
         self.aps_job_id = kwargs.get('aps_job_id', self.creation_time)

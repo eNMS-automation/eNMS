@@ -552,10 +552,10 @@ def create_workflow_of_workflows():
         workflow.jobs[index].positions["Workflow_of_workflows"] = x * 10, y * 10
 
 
-def create_default(app):
+def create_default(app, create_default=False):
     create_default_parameters(app)
     parameters = get_one("Parameters")
-    if parameters.first_initialization:
+    if parameters.first_initialization or create_default:
         create_default_users()
         create_default_pools()
         create_default_services()

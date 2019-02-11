@@ -55,7 +55,6 @@ def create_default_parameters(app):
     })
     db.session.add(parameters)
     db.session.commit()
-    return parameters
 
 
 @integrity_rollback
@@ -523,7 +522,8 @@ def create_workflow_of_workflows():
 
 
 def create_default(app):
-    parameters = create_default_parameters(app)
+    create_default_parameters(app)
+    parameters = get_one('Parameters')
     if parameters.first_initialization:
         create_default_users()
         create_default_pools()
@@ -534,11 +534,13 @@ def create_default(app):
 
 
 def create_examples(app):
-    create_network_topology(app),
-    create_example_services()
-    create_netmiko_workflow()
-    create_napalm_workflow()
-    create_payload_transfer_workflow()
-    create_workflow_of_workflows()
-    for pool in fetch_all('Pool'):
-        pool.compute_pool()
+    parameters = get_one('Parameters')
+    if parameters.first_initialization:
+        create_network_topology(app),
+        create_example_services()
+        create_netmiko_workflow()
+        create_napalm_workflow()
+        create_payload_transfer_workflow()
+        create_workflow_of_workflows()
+        for pool in fetch_all('Pool'):
+            pool.compute_pool()

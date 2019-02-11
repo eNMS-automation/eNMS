@@ -87,15 +87,6 @@ def factory(cls_name, **kwargs):
     return instance
 
 
-def integrity_rollback(function):
-    def wrapper(*a, **kw):
-        try:
-            function(*a, **kw)
-        except (exc.IntegrityError, exc.InvalidRequestError):
-            db.session.rollback()
-    return wrapper
-
-
 def process_request(function):
     def wrapper(*a, **kw):
         data = {**request.form.to_dict(), **{'creator': current_user.id}}

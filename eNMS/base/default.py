@@ -3,13 +3,7 @@ from xlrd.biffh import XLRDError
 
 from eNMS.main import db
 from eNMS.base.classes import classes
-from eNMS.base.helpers import (
-    factory,
-    integrity_rollback,
-    fetch,
-    fetch_all,
-    get_one
-)
+from eNMS.base.helpers import factory, fetch, fetch_all, get_one
 from eNMS.base.properties import parameters_public_properties
 
 
@@ -45,7 +39,6 @@ def create_default_pools():
         factory('Pool', **pool)
 
 
-@integrity_rollback
 def create_default_parameters(app):
     parameters = classes['Parameters']()
     parameters.update(**{
@@ -57,7 +50,6 @@ def create_default_parameters(app):
     db.session.commit()
 
 
-@integrity_rollback
 def create_network_topology(app):
     with open(app.path / 'projects' / 'usa.xls', 'rb') as f:
         book = open_workbook(file_contents=f.read())
@@ -73,7 +65,6 @@ def create_network_topology(app):
             db.session.commit()
 
 
-@integrity_rollback
 def create_default_services():
     admin = fetch('User', name='admin').id
     for service in (
@@ -132,7 +123,6 @@ def create_default_services():
         factory(service.pop('type'), **service)
 
 
-@integrity_rollback
 def create_default_workflows():
     name = 'Configuration Management Workflow'
     workflow = factory('Workflow', **{
@@ -159,7 +149,6 @@ def create_default_workflows():
         workflow.jobs[index].positions[name] = x * 10, y * 10
 
 
-@integrity_rollback
 def create_default_tasks(app):
     tasks = [
         {
@@ -186,7 +175,6 @@ def create_default_tasks(app):
         factory('Task', **task)
 
 
-@integrity_rollback
 def create_example_services():
     admin = fetch('User', name='admin').id
     for service in (
@@ -253,7 +241,6 @@ def create_example_services():
         factory(service.pop('type'), **service)
 
 
-@integrity_rollback
 def create_netmiko_workflow():
     services, admin = [], fetch('User', name='admin').id
     devices = [
@@ -352,7 +339,6 @@ def create_netmiko_workflow():
         workflow.jobs[index].positions['Netmiko_VRF_workflow'] = x * 10, y * 10
 
 
-@integrity_rollback
 def create_napalm_workflow():
     admin = fetch('User', name='admin').id
     devices = [
@@ -489,7 +475,6 @@ def create_payload_transfer_workflow():
         })
 
 
-@integrity_rollback
 def create_workflow_of_workflows():
     admin = fetch('User', name='admin').id
     devices = [fetch('Device', name='Washington').id]

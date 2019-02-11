@@ -523,16 +523,16 @@ def create_default(app):
         create_default_workflows()
         create_default_tasks(app)
         parameters.trigger_active_parameters(app)
+        parameters.first_initialization = False
+        db.session.commit()
 
 
 def create_examples(app):
-    parameters = get_one('Parameters')
-    if parameters.first_initialization:
-        create_network_topology(app),
-        create_example_services()
-        create_netmiko_workflow()
-        create_napalm_workflow()
-        create_payload_transfer_workflow()
-        create_workflow_of_workflows()
-        for pool in fetch_all('Pool'):
-            pool.compute_pool()
+    create_network_topology(app),
+    create_example_services()
+    create_netmiko_workflow()
+    create_napalm_workflow()
+    create_payload_transfer_workflow()
+    create_workflow_of_workflows()
+    for pool in fetch_all('Pool'):
+        pool.compute_pool()

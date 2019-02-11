@@ -117,7 +117,6 @@ class Base(db.Model):
 
     @classmethod
     def choices(cls):
-        print(list(cls.query.all()), list(map(lambda o: o.visible, cls.query.all())))
         return [(obj.id, obj.name) for obj in cls.query.all() if obj.visible]
 
     @classmethod

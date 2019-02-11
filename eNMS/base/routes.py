@@ -62,8 +62,8 @@ def server_side_processing(cls, table):
                 [getattr(obj, property) for property in properties]
                 + table_static_entries(table, obj)
                 for obj in filtered.limit(int(request.args["length"]))
-                .offset(int(request.args["start"])).all()
-
+                .offset(int(request.args["start"]))
+                .all()
             ],
         }
     )

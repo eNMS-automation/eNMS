@@ -12,6 +12,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
+from typing import Any
 
 from eNMS.base.associations import (
     pool_device_table,
@@ -61,7 +62,7 @@ CustomDevice = (
     )
     if custom_properties
     else Object
-)
+)  # type: Any
 
 
 class Device(CustomDevice):
@@ -149,7 +150,7 @@ AbstractPool = type(
             **{f"link_{p}_regex": Column(Boolean) for p in link_public_properties},
         },
     },
-)
+)  # type: Any
 
 
 class Pool(AbstractPool):

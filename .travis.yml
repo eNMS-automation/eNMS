@@ -12,7 +12,9 @@ matrix:
       install:
         - pip install -r requirements_dev.txt
       script:
+        - black --check --verbose .
         - flake8
+        - mypy --ignore-missing-imports .
         - coverage run --source=./eNMS -m pytest
       after_success:
         - coveralls

@@ -17,118 +17,116 @@ from eNMS.base.helpers import factory, fetch_all, get_one, str_dict
 
 class SwissArmyKnifeService(Service):
 
-    __tablename__ = 'SwissArmyKnifeService'
+    __tablename__ = "SwissArmyKnifeService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'SwissArmyKnifeService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}
 
     def job(self, *args):
         return getattr(self, self.name)(*args)
 
     def job1(self, device, payload):
-        return {'success': True, 'result': ''}
+        return {"success": True, "result": ""}
 
     def job2(self, payload):
-        return {'success': True, 'result': ''}
+        return {"success": True, "result": ""}
 
     def Start(self, *a, **kw):  # noqa: N802
         # Start of a workflow
-        return {'success': True}
+        return {"success": True}
 
     def End(self, *a, **kw):  # noqa: N802
         # End of a workflow
-        return {'success': True}
+        return {"success": True}
 
     def mail_feedback_notification(self, payload):
-        parameters = get_one('Parameters')
-        name, recipients = payload['job']['name'], (
-            payload['job']['mail_recipient'].split(',')
-            or parameters.mail_recipients.split(',')
+        parameters = get_one("Parameters")
+        name, recipients = (
+            payload["job"]["name"],
+            (
+                payload["job"]["mail_recipient"].split(",")
+                or parameters.mail_recipients.split(",")
+            ),
         )
         message = Message(
             name,
             sender=parameters.mail_sender,
             recipients=recipients,
-            body=payload['result']
+            body=payload["result"],
         )
-        runtime = payload["runtime"].replace('.', '').replace(':', '')
-        filename = f'logs-{name}-{runtime}.txt'
-        with open(filename, 'w') as file:
+        runtime = payload["runtime"].replace(".", "").replace(":", "")
+        filename = f"logs-{name}-{runtime}.txt"
+        with open(filename, "w") as file:
             file.write(str_dict(payload["logs"][payload["runtime"]]))
-        with open(filename, 'r') as file:
-            message.attach(filename, 'text/plain', file.read())
+        with open(filename, "r") as file:
+            message.attach(filename, "text/plain", file.read())
         remove(filename)
         mail_client.send(message)
-        return {'success': True}
+        return {"success": True}
 
     def slack_feedback_notification(self, payload):
-        parameters = get_one('Parameters')
+        parameters = get_one("Parameters")
         slack_client = SlackClient(parameters.slack_token)
         result = slack_client.api_call(
-            'chat.postMessage',
+            "chat.postMessage",
             channel=parameters.slack_channel,
-            text=str_dict(payload['result'])
+            text=str_dict(payload["result"]),
         )
-        return {'success': True, 'result': str(result)}
+        return {"success": True, "result": str(result)}
 
     def mattermost_feedback_notification(self, payload):
-        parameters = get_one('Parameters')
+        parameters = get_one("Parameters")
         post(
             parameters.mattermost_url,
             verify=parameters.mattermost_verify_certificate,
-            data=dumps({
-                'channel': parameters.mattermost_channel,
-                'text': payload['result']
-            })
+            data=dumps(
+                {"channel": parameters.mattermost_channel, "text": payload["result"]}
+            ),
         )
-        return {'success': True}
+        return {"success": True}
 
     def cluster_monitoring(self, _):
-        parameters = get_one('Parameters')
+        parameters = get_one("Parameters")
         protocol = parameters.cluster_scan_protocol
-        for instance in fetch_all('Instance'):
-            factory('Instance', **get(
-                f'{protocol}://{instance.ip_address}/rest/is_alive',
-                timeout=parameters.cluster_scan_timeout
-            ).json())
-        return {'success': True}
+        for instance in fetch_all("Instance"):
+            factory(
+                "Instance",
+                **get(
+                    f"{protocol}://{instance.ip_address}/rest/is_alive",
+                    timeout=parameters.cluster_scan_timeout,
+                ).json(),
+            )
+        return {"success": True}
 
     def poller_service(self, _):
-        for service in fetch_all('Service'):
-            if getattr(service, 'configuration_backup_service', False):
+        for service in fetch_all("Service"):
+            if getattr(service, "configuration_backup_service", False):
                 service.try_run()
-        return {'success': True}
+        return {"success": True}
 
     def git_push_configurations(self, _):
-        parameters = get_one('Parameters')
+        parameters = get_one("Parameters")
         if parameters.git_configurations:
-            repo = Repo(Path.cwd() / 'git' / 'configurations')
+            repo = Repo(Path.cwd() / "git" / "configurations")
             try:
                 repo.git.add(A=True)
-                repo.git.commit(m='Automatic commit (configurations)')
+                repo.git.commit(m="Automatic commit (configurations)")
             except GitCommandError as e:
-                info(f'Git commit failed ({str(e)}')
+                info(f"Git commit failed ({str(e)}")
             repo.remotes.origin.push()
-        return {'success': True}
+        return {"success": True}
 
     def process_payload1(self, device, payload):
-        get_facts = payload['get_facts']
+        get_facts = payload["get_facts"]
         # we use the name of the device to get the result for that particular
         # device.
         # all of the other inventory properties of the device are available
         # to use, including custom properties.
-        results = get_facts['result']['devices'][device.name]['result']
-        uptime_less_than_50000 = results['get_facts']['uptime'] < 50000
-        return {
-            'success': True,
-            'result': {
-                'uptime_less_5000': uptime_less_than_50000
-            }
-        }
+        results = get_facts["result"]["devices"][device.name]["result"]
+        uptime_less_than_50000 = results["get_facts"]["uptime"] < 50000
+        return {"success": True, "result": {"uptime_less_5000": uptime_less_than_50000}}
 
 
-service_classes['SwissArmyKnifeService'] = SwissArmyKnifeService
+service_classes["SwissArmyKnifeService"] = SwissArmyKnifeService

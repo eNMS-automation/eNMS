@@ -10,7 +10,7 @@ from eNMS.main import (
     scheduler,
     USE_SYSLOG,
     USE_VAULT,
-    vault_client
+    vault_client,
 )
 from eNMS.admin.helpers import configure_instance_id
 from eNMS.base.default import create_default, create_examples
@@ -28,42 +28,39 @@ def register_extensions(app):
 
 def register_blueprints(app):
     blueprints = (
-        'admin',
-        'automation',
-        'base',
-        'logs',
-        'inventory',
-        'scheduling',
-        'views'
+        "admin",
+        "automation",
+        "base",
+        "logs",
+        "inventory",
+        "scheduling",
+        "views",
     )
     for blueprint in blueprints:
-        module = import_module(f'eNMS.{blueprint}')
+        module = import_module(f"eNMS.{blueprint}")
         app.register_blueprint(module.bp)
 
 
 def configure_login_manager(app):
     @login_manager.user_loader
     def user_loader(id):
-        return fetch('User', id=id)
+        return fetch("User", id=id)
 
     @login_manager.request_loader
     def request_loader(request):
-        return fetch('User', name=request.form.get('name'))
+        return fetch("User", name=request.form.get("name"))
 
 
 def configure_vault_client(app):
-    vault_client.url = app.config['VAULT_ADDR']
-    vault_client.token = app.config['VAULT_TOKEN']
-    if vault_client.sys.is_sealed() and app.config['UNSEAL_VAULT']:
-        keys = [app.config[f'UNSEAL_VAULT_KEY{i}'] for i in range(1, 6)]
+    vault_client.url = app.config["VAULT_ADDR"]
+    vault_client.token = app.config["VAULT_TOKEN"]
+    if vault_client.sys.is_sealed() and app.config["UNSEAL_VAULT"]:
+        keys = [app.config[f"UNSEAL_VAULT_KEY{i}"] for i in range(1, 6)]
         vault_client.sys.submit_unseal_keys(filter(None, keys))
 
 
 def configure_syslog_server(app):
-    server = SyslogServer(
-        app.config['SYSLOG_ADDR'],
-        app.config['SYSLOG_PORT']
-    )
+    server = SyslogServer(app.config["SYSLOG_ADDR"], app.config["SYSLOG_PORT"])
     server.start()
 
 
@@ -77,44 +74,44 @@ def configure_database(app):
         db.create_all()
         configure_instance_id()
         create_default(app)
-        if app.config['CREATE_EXAMPLES']:
+        if app.config["CREATE_EXAMPLES"]:
             create_examples(app)
 
 
 def configure_errors(app):
     @login_manager.unauthorized_handler
     def unauthorized_handler():
-        return render_template('errors/page_403.html'), 403
+        return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(403)
     def authorization_required(error):
-        return render_template('errors/page_403.html'), 403
+        return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(404)
     def not_found_error(error):
-        return render_template('errors/page_404.html'), 404
+        return render_template("errors/page_404.html"), 404
 
 
 def configure_logs(app):
     basicConfig(
-        level=getattr(import_module('logging'), app.config['ENMS_LOG_LEVEL']),
-        format='%(asctime)s %(levelname)-8s %(message)s',
-        datefmt='%m-%d-%Y %H:%M:%S',
+        level=getattr(import_module("logging"), app.config["ENMS_LOG_LEVEL"]),
+        format="%(asctime)s %(levelname)-8s %(message)s",
+        datefmt="%m-%d-%Y %H:%M:%S",
         handlers=[
             RotatingFileHandler(
-                app.path / 'logs' / 'app_logs' / 'enms.log',
-                maxBytes=20000000,
-                backupCount=10
+                app.path / "logs" / "app_logs" / "enms.log",
+                maxBytes=20_000_000,
+                backupCount=10,
             ),
-            StreamHandler()
-        ]
+            StreamHandler(),
+        ],
     )
 
 
 def create_app(path, config):
-    app = Flask(__name__, static_folder='base/static')
+    app = Flask(__name__, static_folder="base/static")
     app.config.from_object(config)
-    app.production = not app.config['DEBUG']
+    app.production = not app.config["DEBUG"]
     app.path = path
     register_extensions(app)
     register_blueprints(app)
@@ -129,5 +126,5 @@ def create_app(path, config):
         configure_syslog_server(app)
     if not scheduler.running:
         scheduler.start()
-    info('eNMS starting')
+    info("eNMS starting")
     return app

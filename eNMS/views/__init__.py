@@ -2,19 +2,15 @@ from flask import Blueprint
 from pathlib import Path
 from simplekml import Color, Style
 
-from eNMS.base.properties import (
-    device_subtypes,
-    link_subtypes,
-    link_subtype_to_color
-)
+from eNMS.base.properties import device_subtypes, link_subtypes, link_subtype_to_color
 
 
 bp = Blueprint(
-    'views_blueprint',
+    "views_blueprint",
     __name__,
-    url_prefix='/views',
-    template_folder='templates',
-    static_folder='static'
+    url_prefix="/views",
+    template_folder="templates",
+    static_folder="static",
 )
 
 
@@ -23,7 +19,7 @@ styles, path_bp = {}, Path(bp.root_path)
 for subtype in device_subtypes:
     point_style = Style()
     point_style.labelstyle.color = Color.blue
-    icon = path_bp / 'static' / 'images' / 'default' / f'{subtype}.gif'
+    icon = path_bp / "static" / "images" / "default" / f"{subtype}.gif"
     point_style.iconstyle.icon.href = icon
     styles[subtype] = point_style
 

@@ -1,11 +1,11 @@
 from flask import Blueprint
 
 bp = Blueprint(
-    'admin_blueprint',
+    "admin_blueprint",
     __name__,
-    url_prefix='/admin',
-    template_folder='templates',
-    static_folder='static'
+    url_prefix="/admin",
+    template_folder="templates",
+    static_folder="static",
 )
 
 from eNMS.base.helpers import add_classes

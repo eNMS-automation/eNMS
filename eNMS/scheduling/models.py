@@ -11,8 +11,8 @@ from eNMS.base.models import Base
 
 class Task(Base):
 
-    __tablename__ = 'Task'
-    type = 'Task'
+    __tablename__ = "Task"
+    type = "Task"
     id = Column(Integer, primary_key=True)
     aps_job_id = Column(String)
     name = Column(String, unique=True)
@@ -23,26 +23,26 @@ class Task(Base):
     frequency = Column(Integer)
     start_date = Column(String)
     end_date = Column(String)
-    job_id = Column(Integer, ForeignKey('Job.id'))
-    job = relationship('Job', back_populates='tasks')
-    job_name = association_proxy('job', 'name')
+    job_id = Column(Integer, ForeignKey("Job.id"))
+    job = relationship("Job", back_populates="tasks")
+    job_name = association_proxy("job", "name")
 
     def __init__(self, **kwargs):
-        self.status = kwargs.pop('status', 'Active')
+        self.status = kwargs.pop("status", "Active")
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
-        self.aps_job_id = kwargs.get('aps_job_id', self.creation_time)
-        if self.status == 'Active':
+        self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
+        if self.status == "Active":
             self.schedule()
 
     def update(self, **kwargs):
         super().update(**kwargs)
-        if self.status == 'Active':
+        if self.status == "Active":
             self.schedule()
 
     def aps_conversion(self, date):
-        dt = datetime.strptime(date, '%d/%m/%Y %H:%M:%S')
-        return datetime.strftime(dt, '%Y-%m-%d %H:%M:%S')
+        dt = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
+        return datetime.strftime(dt, "%Y-%m-%d %H:%M:%S")
 
     def aps_date(self, datetype):
         date = getattr(self, datetype)
@@ -50,13 +50,13 @@ class Task(Base):
 
     def pause(self):
         scheduler.pause_job(self.aps_job_id)
-        self.status = 'Pause'
+        self.status = "Pause"
         db.session.commit()
 
     def resume(self):
         self.schedule()
         scheduler.resume_job(self.aps_job_id)
-        self.status = 'Active'
+        self.status = "Active"
         db.session.commit()
 
     def delete_task(self):
@@ -68,25 +68,22 @@ class Task(Base):
 
     def kwargs(self):
         default = {
-            'id': self.aps_job_id,
-            'func': scheduler_job,
-            'replace_existing': True,
-            'args': [self.job.id, self.aps_job_id]
+            "id": self.aps_job_id,
+            "func": scheduler_job,
+            "replace_existing": True,
+            "args": [self.job.id, self.aps_job_id],
         }
         if self.frequency:
             self.periodic = True
             trigger = {
-                'trigger': 'interval',
-                'start_date': self.aps_date('start_date'),
-                'end_date': self.aps_date('end_date'),
-                'seconds': int(self.frequency)
+                "trigger": "interval",
+                "start_date": self.aps_date("start_date"),
+                "end_date": self.aps_date("end_date"),
+                "seconds": int(self.frequency),
             }
         else:
             self.periodic = False
-            trigger = {
-                'trigger': 'date',
-                'run_date': self.aps_date('start_date')
-            }
+            trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
         return default, trigger
 
     def schedule(self):
@@ -97,4 +94,4 @@ class Task(Base):
         if self.aps_job_id not in [job.id for job in scheduler.get_jobs()]:
             self.schedule()
         default, trigger = self.kwargs()
-        scheduler.reschedule_job(default.pop('id'), **trigger)
+        scheduler.reschedule_job(default.pop("id"), **trigger)

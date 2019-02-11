@@ -14,21 +14,20 @@ from eNMS.inventory.helpers import object_export, object_import
 
 @auth.get_password
 def get_password(username):
-    return fetch('User', name=username).password
+    return fetch("User", name=username).password
 
 
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'message': 'Unauthorized access'}), 403)
+    return make_response(jsonify({"message": "Unauthorized access"}), 403)
 
 
 class Heartbeat(Resource):
-
     def get(self):
         return {
-            'name': getnode(),
-            'cluster_id': current_app.config['CLUSTER_ID'],
-            'cpu_load': cpu_percent()
+            "name": getnode(),
+            "cluster_id": current_app.config["CLUSTER_ID"],
+            "cpu_load": cpu_percent(),
         }
 
 
@@ -37,20 +36,20 @@ class RestAutomation(Resource):
 
     def post(self):
         payload = request.get_json()
-        job = fetch('Job', name=payload['name'])
-        handle_asynchronously = payload.get('async', False)
+        job = fetch("Job", name=payload["name"])
+        handle_asynchronously = payload.get("async", False)
         try:
             targets = {
-                fetch('Device', name=device_name)
-                for device_name in payload.get('devices', '')
+                fetch("Device", name=device_name)
+                for device_name in payload.get("devices", "")
             } | {
-                fetch('Device', ip_address=ip_address)
-                for ip_address in payload.get('ip_addresses', '')
+                fetch("Device", ip_address=ip_address)
+                for ip_address in payload.get("ip_addresses", "")
             }
-            for pool_name in payload.get('pools', ''):
-                targets |= {d for d in fetch('Pool', name=pool_name).devices}
+            for pool_name in payload.get("pools", ""):
+                targets |= {d for d in fetch("Pool", name=pool_name).devices}
         except Exception as e:
-            info(f'REST API run_job endpoint failed ({str(e)})')
+            info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
         if handle_asynchronously:
             scheduler.add_job(
@@ -58,7 +57,7 @@ class RestAutomation(Resource):
                 func=scheduler_job,
                 run_date=datetime.now(),
                 args=[job.id, None, [d.id for d in targets]],
-                trigger='date'
+                trigger="date",
             )
             return job.serialized
         else:
@@ -79,7 +78,7 @@ class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
     def get(self, name):
-        device = fetch('Device', name=name)
+        device = fetch("Device", name=name)
         return device.configurations[max(device.configurations)]
 
 
@@ -94,31 +93,30 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction):
-        return {
-            'import': migrate_import,
-            'export': migrate_export
-        }[direction](current_app, request.get_json())
+        return {"import": migrate_import, "export": migrate_export}[direction](
+            current_app, request.get_json()
+        )
 
 
 class Topology(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction):
-        if direction == 'import':
+        if direction == "import":
             data = request.form.to_dict()
-            for property in ('replace', 'update_pools'):
-                data[property] = True if data[property] == 'True' else False
-            return object_import(data, request.files['file'])
-        elif direction == 'export':
+            for property in ("replace", "update_pools"):
+                data[property] = True if data[property] == "True" else False
+            return object_import(data, request.files["file"])
+        elif direction == "export":
             return object_export(request.get_json(), current_app.path)
 
 
 def configure_rest_api(app):
     api = Api(app)
-    api.add_resource(Heartbeat, '/rest/is_alive')
-    api.add_resource(RestAutomation, '/rest/run_job')
-    api.add_resource(UpdateInstance, '/rest/instance/<string:cls>')
-    api.add_resource(GetInstance, '/rest/instance/<string:cls>/<string:name>')
-    api.add_resource(GetConfiguration, '/rest/configuration/<string:name>')
-    api.add_resource(Migrate, '/rest/migrate/<string:direction>')
-    api.add_resource(Topology, '/rest/topology/<string:direction>')
+    api.add_resource(Heartbeat, "/rest/is_alive")
+    api.add_resource(RestAutomation, "/rest/run_job")
+    api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
+    api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
+    api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
+    api.add_resource(Migrate, "/rest/migrate/<string:direction>")
+    api.add_resource(Topology, "/rest/topology/<string:direction>")

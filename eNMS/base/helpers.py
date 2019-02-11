@@ -12,10 +12,7 @@ from eNMS.base.properties import pretty_names, property_types
 
 def add_classes(*models):
     for model in models:
-        classes.update({
-            model.__tablename__: model,
-            model.__tablename__.lower(): model
-        })
+        classes.update({model.__tablename__: model, model.__tablename__.lower(): model})
 
 
 def fetch(model, **kwargs):
@@ -27,10 +24,7 @@ def fetch_all(model):
 
 
 def fetch_all_visible(model):
-    return [
-        instance for instance in classes[model].query.all()
-        if instance.visible
-    ]
+    return [instance for instance in classes[model].query.all() if instance.visible]
 
 
 def objectify(model, object_list):
@@ -39,7 +33,7 @@ def objectify(model, object_list):
 
 def delete(model, **kwargs):
     instance = db.session.query(classes[model]).filter_by(**kwargs).first()
-    if hasattr(instance, 'type') and instance.type == 'Task':
+    if hasattr(instance, "type") and instance.type == "Task":
         instance.delete_task()
     result = instance.serialized
     db.session.delete(instance)
@@ -71,13 +65,13 @@ def get_one(model):
 
 
 def factory(cls_name, **kwargs):
-    if 'id' in kwargs:
-        if kwargs['id']:
-            instance = fetch(cls_name, id=kwargs['id'])
+    if "id" in kwargs:
+        if kwargs["id"]:
+            instance = fetch(cls_name, id=kwargs["id"])
         else:
-            instance = kwargs.pop('id')
+            instance = kwargs.pop("id")
     else:
-        instance = fetch(cls_name, name=kwargs['name'])
+        instance = fetch(cls_name, name=kwargs["name"])
     if instance:
         instance.update(**kwargs)
     else:
@@ -93,21 +87,23 @@ def integrity_rollback(function):
             function(*a, **kw)
         except (exc.IntegrityError, exc.InvalidRequestError):
             db.session.rollback()
+
     return wrapper
 
 
 def process_request(function):
     def wrapper(*a, **kw):
-        data = {**request.form.to_dict(), **{'creator': current_user.id}}
-        for property in data.get('list_fields', '').split(','):
+        data = {**request.form.to_dict(), **{"creator": current_user.id}}
+        for property in data.get("list_fields", "").split(","):
             if property in request.form:
                 data[property] = request.form.getlist(property)
             else:
                 data[property] = []
-        for property in data.get('boolean_fields', '').split(','):
+        for property in data.get("boolean_fields", "").split(","):
             data[property] = property in request.form
         request.form = data
         return function(*a, **kw)
+
     return wrapper
 
 
@@ -121,7 +117,9 @@ def permission_required(permission, redirect=True):
                 else:
                     return jsonify(False)
             return f(*args, **kwargs)
+
         return decorated_function
+
     return decorator
 
 
@@ -131,16 +129,19 @@ def templated(function):
         ctx = function(*args, **kwargs) or {}
         if not isinstance(ctx, dict):
             return ctx
-        ctx.update({
-            'names': pretty_names,
-            'property_types': {k: str(v) for k, v in property_types.items()}
-        })
-        endpoint = request.endpoint.split('.')[-1]
-        return render_template(ctx.pop('template', f'{endpoint}.html'), **ctx)
+        ctx.update(
+            {
+                "names": pretty_names,
+                "property_types": {k: str(v) for k, v in property_types.items()},
+            }
+        )
+        endpoint = request.endpoint.split(".")[-1]
+        return render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)
+
     return decorated_function
 
 
-def get(blueprint, url, permission=None, method=['GET']):
+def get(blueprint, url, permission=None, method=["GET"]):
     def outer(func):
         @blueprint.route(url, methods=method)
         @templated
@@ -153,13 +154,15 @@ def get(blueprint, url, permission=None, method=['GET']):
                 f"calling the endpoint {url} (GET)"
             )
             return func(*args, **kwargs)
+
         return inner
+
     return outer
 
 
 def post(blueprint, url, permission=None):
     def outer(func):
-        @blueprint.route(url, methods=['POST'])
+        @blueprint.route(url, methods=["POST"])
         @login_required
         @permission_required(permission, redirect=False)
         @wraps(func)
@@ -173,26 +176,28 @@ def post(blueprint, url, permission=None):
                 result = func(*args, **kwargs)
                 return jsonify(result)
             except Exception as e:
-                return jsonify({'error': str(e)})
+                return jsonify({"error": str(e)})
+
         return inner
+
     return outer
 
 
 def str_dict(input, depth=0):
-    tab = '\t' * depth
+    tab = "\t" * depth
     if isinstance(input, list):
-        result = '\n'
+        result = "\n"
         for element in input:
-            result += f'{tab}- {str_dict(element, depth + 1)}\n'
+            result += f"{tab}- {str_dict(element, depth + 1)}\n"
         return result
     elif isinstance(input, dict):
-        result = ''
+        result = ""
         for key, value in input.items():
-            result += f'\n{tab}{key}: {str_dict(value, depth + 1)}'
+            result += f"\n{tab}{key}: {str_dict(value, depth + 1)}"
         return result
     else:
         return str(input)
 
 
 def strip_all(input):
-    return input.translate(str.maketrans('', '', f'{punctuation} '))
+    return input.translate(str.maketrans("", "", f"{punctuation} "))

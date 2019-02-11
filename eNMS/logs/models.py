@@ -11,14 +11,12 @@ from eNMS.base.models import Base
 
 class Log(Base):
 
-    __tablename__ = type = 'Log'
+    __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
     source_ip = Column(String)
     content = Column(String)
     log_rules = relationship(
-        'LogRule',
-        secondary=log_rule_log_table,
-        back_populates='logs'
+        "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
 
     def __init__(self, source_ip, content, log_rules):
@@ -32,27 +30,18 @@ class Log(Base):
 
 class LogRule(Base):
 
-    __tablename__ = type = 'LogRule'
+    __tablename__ = type = "LogRule"
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     source_ip = Column(String)
     source_ip_regex = Column(Boolean)
     content = Column(String)
     content_regex = Column(Boolean)
-    logs = relationship(
-        'Log',
-        secondary=log_rule_log_table,
-        back_populates='log_rules'
-    )
-    jobs = relationship(
-        'Job',
-        secondary=job_log_rule_table,
-        back_populates='log_rules'
-    )
+    logs = relationship("Log", secondary=log_rule_log_table, back_populates="log_rules")
+    jobs = relationship("Job", secondary=job_log_rule_table, back_populates="log_rules")
 
 
 class SyslogUDPHandler(BaseRequestHandler):
-
     def handle(self):
         with scheduler.app.app_context():
             data = str(bytes.decode(self.request[0].strip()))
@@ -65,7 +54,8 @@ class SyslogUDPHandler(BaseRequestHandler):
                     else log_rule.source_ip in source
                 )
                 content_match = (
-                    search(log_rule.content, data) if log_rule.content_regex
+                    search(log_rule.content, data)
+                    if log_rule.content_regex
                     else log_rule.content in data
                 )
                 if source_match and content_match:
@@ -80,7 +70,7 @@ class SyslogUDPHandler(BaseRequestHandler):
 
 class SyslogServer(Base):
 
-    __tablename__ = type = 'SyslogServer'
+    __tablename__ = type = "SyslogServer"
     id = Column(Integer, primary_key=True)
     ip_address = Column(String)
     port = Column(Integer)

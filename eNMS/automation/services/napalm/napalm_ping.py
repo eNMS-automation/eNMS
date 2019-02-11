@@ -1,11 +1,4 @@
-from sqlalchemy import (
-    Boolean,
-    Column,
-    ForeignKey,
-    Integer,
-    PickleType,
-    String
-)
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import NAPALM_DRIVERS
@@ -15,9 +8,9 @@ from eNMS.base.classes import service_classes
 
 class NapalmPingService(Service):
 
-    __tablename__ = 'NapalmPingService'
+    __tablename__ = "NapalmPingService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     count = Column(Integer)
     driver = Column(String)
@@ -30,9 +23,7 @@ class NapalmPingService(Service):
     ttl = Column(Integer)
     vrf = Column(String)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'NapalmPingService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "NapalmPingService"}
 
     def job(self, device, _):
         napalm_driver = self.napalm_connection(device)
@@ -44,10 +35,10 @@ class NapalmPingService(Service):
             ttl=self.ttl or 255,
             timeout=self.timeout or 2,
             size=self.size or 100,
-            count=self.count or 5
+            count=self.count or 5,
         )
         napalm_driver.close()
-        return {'success': 'success' in ping, 'result': ping}
+        return {"success": "success" in ping, "result": ping}
 
 
-service_classes['NapalmPingService'] = NapalmPingService
+service_classes["NapalmPingService"] = NapalmPingService

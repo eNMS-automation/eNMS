@@ -8,13 +8,13 @@ from eNMS.base.classes import service_classes
 
 class NetmikoFileTransferService(Service):
 
-    __tablename__ = 'NetmikoFileTransferService'
+    __tablename__ = "NetmikoFileTransferService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     dest_file = Column(String)
     direction = Column(String)
-    direction_values = (('put', 'Upload'), ('get', 'Download'))
+    direction_values = (("put", "Upload"), ("get", "Download"))
     disable_md5 = Column(Boolean)
     driver = Column(String)
     driver_values = NETMIKO_SCP_DRIVERS
@@ -24,12 +24,10 @@ class NetmikoFileTransferService(Service):
     overwrite_file = Column(Boolean)
     source_file = Column(String)
     fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=1.)
-    global_delay_factor = Column(Float, default=1.)
+    timeout = Column(Integer, default=1.0)
+    global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'NetmikoFileTransferService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "NetmikoFileTransferService"}
 
     def job(self, device, _):
         netmiko_handler = self.netmiko_connection(device)
@@ -41,10 +39,10 @@ class NetmikoFileTransferService(Service):
             direction=self.direction,
             overwrite_file=self.overwrite_file,
             disable_md5=self.disable_md5,
-            inline_transfer=self.inline_transfer
+            inline_transfer=self.inline_transfer,
         )
         netmiko_handler.disconnect()
-        return {'success': True, 'result': transfer_dict}
+        return {"success": True, "result": transfer_dict}
 
 
-service_classes['NetmikoFileTransferService'] = NetmikoFileTransferService
+service_classes["NetmikoFileTransferService"] = NetmikoFileTransferService

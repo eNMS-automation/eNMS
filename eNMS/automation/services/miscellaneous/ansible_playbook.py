@@ -11,17 +11,17 @@ from eNMS.base.classes import service_classes
 
 class AnsiblePlaybookService(Service):
 
-    __tablename__ = 'AnsiblePlaybookService'
+    __tablename__ = "AnsiblePlaybookService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean)
     playbook_path = Column(String)
     arguments = Column(String)
     validation_method = Column(String)
     validation_method_values = (
-        ('text', 'Validation by text match'),
-        ('dict_equal', 'Validation by dictionnary equality'),
-        ('dict_included', 'Validation by dictionnary inclusion')
+        ("text", "Validation by text match"),
+        ("dict_equal", "Validation by dictionnary equality"),
+        ("dict_included", "Validation by dictionnary inclusion"),
     )
     content_match = Column(String)
     content_match_textarea = True
@@ -32,46 +32,43 @@ class AnsiblePlaybookService(Service):
     options = Column(MutableDict.as_mutable(PickleType), default={})
     pass_device_properties = Column(Boolean)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'AnsiblePlaybookService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
 
     def job(self, device, _):
         arguments = self.sub(self.arguments, locals()).split()
-        command, extra_args = ['ansible-playbook'], {}
+        command, extra_args = ["ansible-playbook"], {}
         if self.pass_device_properties:
             extra_args = device.get_properties()
-            extra_args['password'] = device.password
+            extra_args["password"] = device.password
         if self.options:
             extra_args.update(self.options)
         if extra_args:
-            command.extend(['-e', dumps(extra_args)])
+            command.extend(["-e", dumps(extra_args)])
         if self.has_targets:
-            command.extend(['-i', device.ip_address + ','])
+            command.extend(["-i", device.ip_address + ","])
         command.append(self.sub(self.playbook_path, locals()))
         info(f"Sending Ansible playbook: {' '.join(command + arguments)}")
         result = check_output(command + arguments)
         info(result)
         try:
-            result = result.decode('utf-8')
+            result = result.decode("utf-8")
         except AttributeError:
             pass
         try:
             result = loads(result)
         except JSONDecodeError:
             pass
-        if self.validation_method == 'text':
+        if self.validation_method == "text":
             success = self.match_content(
-                str(result),
-                self.sub(self.content_match, locals())
+                str(result), self.sub(self.content_match, locals())
             )
         else:
             success = self.match_dictionnary(result)
         return {
-            'negative_logic': self.negative_logic,
-            'result': result,
-            'success': success
+            "negative_logic": self.negative_logic,
+            "result": result,
+            "success": success,
         }
 
 
-service_classes['AnsiblePlaybookService'] = AnsiblePlaybookService
+service_classes["AnsiblePlaybookService"] = AnsiblePlaybookService

@@ -7,9 +7,9 @@ from eNMS.base.classes import service_classes
 
 class NetmikoConfigurationService(Service):
 
-    __tablename__ = 'NetmikoConfigurationService'
+    __tablename__ = "NetmikoConfigurationService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     content = Column(String)
     content_textarea = True
@@ -18,12 +18,10 @@ class NetmikoConfigurationService(Service):
     use_device_driver = Column(Boolean, default=True)
     enable_mode = Column(Boolean)
     fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=1.)
-    global_delay_factor = Column(Float, default=1.)
+    timeout = Column(Integer, default=1.0)
+    global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'NetmikoConfigurationService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
 
     def job(self, device, _):
         netmiko_handler = self.netmiko_connection(device)
@@ -32,7 +30,7 @@ class NetmikoConfigurationService(Service):
         config = self.sub(self.content, locals())
         netmiko_handler.send_config_set(config.splitlines())
         netmiko_handler.disconnect()
-        return {'success': True, 'result': f'configuration OK {config}'}
+        return {"success": True, "result": f"configuration OK {config}"}
 
 
-service_classes['NetmikoConfigurationService'] = NetmikoConfigurationService
+service_classes["NetmikoConfigurationService"] = NetmikoConfigurationService

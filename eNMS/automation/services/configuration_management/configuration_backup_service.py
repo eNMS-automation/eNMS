@@ -9,9 +9,9 @@ from eNMS.base.classes import service_classes
 
 class ConfigurationBackupService(Service):
 
-    __tablename__ = 'ConfigurationBackupService'
+    __tablename__ = "ConfigurationBackupService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
@@ -20,16 +20,14 @@ class ConfigurationBackupService(Service):
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=10.)
-    global_delay_factor = Column(Float, default=1.)
+    timeout = Column(Integer, default=10.0)
+    global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'ConfigurationBackupService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "ConfigurationBackupService"}
 
     def job(self, device, _):
         now = datetime.now()
-        path_configurations = Path.cwd() / 'git' / 'configurations'
+        path_configurations = Path.cwd() / "git" / "configurations"
         netmiko_handler = self.netmiko_connection(device)
         try:
             netmiko_handler.enable()
@@ -37,28 +35,25 @@ class ConfigurationBackupService(Service):
             pass
         try:
             config = netmiko_handler.send_command(self.configuration_command)
-            device.last_status = 'Success'
+            device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
             netmiko_handler.disconnect()
             if device.configurations:
                 last_config = device.configurations[max(device.configurations)]
                 if config == last_config:
-                    return {'success': True, 'result': 'no change'}
+                    return {"success": True, "result": "no change"}
             device.configurations[now] = device.current_configuration = config
-            with open(path_configurations / device.name, 'w') as file:
+            with open(path_configurations / device.name, "w") as file:
                 file.write(config)
             device.last_update = now
         except Exception as e:
             netmiko_handler.disconnect()
-            device.last_status = 'Failure'
+            device.last_status = "Failure"
             device.last_failure = now
-            return {'success': False, 'result': str(e)}
+            return {"success": False, "result": str(e)}
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
-        return {
-            'success': True,
-            'result': f'Command: {self.configuration_command}'
-        }
+        return {"success": True, "result": f"Command: {self.configuration_command}"}
 
 
-service_classes['ConfigurationBackupService'] = ConfigurationBackupService
+service_classes["ConfigurationBackupService"] = ConfigurationBackupService

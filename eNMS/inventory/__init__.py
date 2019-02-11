@@ -1,11 +1,11 @@
 from flask import Blueprint
 
 bp = Blueprint(
-    'inventory_blueprint',
+    "inventory_blueprint",
     __name__,
-    url_prefix='/inventory',
-    template_folder='templates',
-    static_folder='static'
+    url_prefix="/inventory",
+    template_folder="templates",
+    static_folder="static",
 )
 
 from eNMS.base.helpers import add_classes

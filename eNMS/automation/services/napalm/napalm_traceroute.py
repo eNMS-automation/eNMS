@@ -1,11 +1,4 @@
-from sqlalchemy import (
-    Boolean,
-    Column,
-    ForeignKey,
-    Integer,
-    PickleType,
-    String
-)
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.helpers import NAPALM_DRIVERS
@@ -15,9 +8,9 @@ from eNMS.base.classes import service_classes
 
 class NapalmTracerouteService(Service):
 
-    __tablename__ = 'NapalmTracerouteService'
+    __tablename__ = "NapalmTracerouteService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     driver = Column(String)
     driver_values = NAPALM_DRIVERS
@@ -28,9 +21,7 @@ class NapalmTracerouteService(Service):
     ttl = Column(Integer)
     vrf = Column(String)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'NapalmTracerouteService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "NapalmTracerouteService"}
 
     def job(self, device, _):
         napalm_driver = self.napalm_connection(device)
@@ -40,10 +31,10 @@ class NapalmTracerouteService(Service):
             source=self.source,
             vrf=self.vrf,
             ttl=self.ttl or 255,
-            timeout=self.timeout or 2
+            timeout=self.timeout or 2,
         )
         napalm_driver.close()
-        return {'success': 'success' in traceroute, 'result': traceroute}
+        return {"success": "success" in traceroute, "result": traceroute}
 
 
-service_classes['NapalmTracerouteService'] = NapalmTracerouteService
+service_classes["NapalmTracerouteService"] = NapalmTracerouteService

@@ -7,26 +7,21 @@ from eNMS.base.classes import service_classes
 
 class UnixCommandService(Service):
 
-    __tablename__ = 'UnixCommandService'
+    __tablename__ = "UnixCommandService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     command = Column(String)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'UnixCommandService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "UnixCommandService"}
 
     def job(self, *args):
         if len(args) == 2:
             device, payload = args
         try:
             command = self.sub(self.command, locals())
-            return {
-                'success': True,
-                'result': check_output(command.split()).decode()
-            }
+            return {"success": True, "result": check_output(command.split()).decode()}
         except Exception as e:
-            return {'success': False, 'result': str(e)}
+            return {"success": False, "result": str(e)}
 
 
-service_classes['UnixCommandService'] = UnixCommandService
+service_classes["UnixCommandService"] = UnixCommandService

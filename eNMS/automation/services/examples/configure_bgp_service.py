@@ -6,9 +6,9 @@ from eNMS.base.classes import service_classes
 
 class ConfigureBgpService(Service):
 
-    __tablename__ = 'ConfigureBgpService'
+    __tablename__ = "ConfigureBgpService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     local_as = Column(Integer)
     loopback = Column(String)
@@ -16,16 +16,14 @@ class ConfigureBgpService(Service):
     neighbor_ip = Column(String)
     remote_as = Column(Integer)
     vrf_name = Column(String)
-    driver = 'ios'
+    driver = "ios"
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'ConfigureBgpService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}
 
     def job(self, device, _):
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
-        config = f'''
+        config = f"""
             ip vrf {self.vrf_name}
             rd {self.local_as}:235
             route-target import {self.local_as}:410
@@ -42,12 +40,12 @@ class ConfigureBgpService(Service):
             neighbor {self.neighbor_ip} send-community both
             neighbor {self.neighbor_ip} as-override
             exit-address-family
-        '''
-        config = '\n'.join(config.splitlines())
-        getattr(napalm_driver, 'load_merge_candidate')(config=config)
+        """
+        config = "\n".join(config.splitlines())
+        getattr(napalm_driver, "load_merge_candidate")(config=config)
         napalm_driver.commit_config()
         napalm_driver.close()
-        return {'success': True, 'result': f'Config push ({config})'}
+        return {"success": True, "result": f"Config push ({config})"}
 
 
-service_classes['ConfigureBgpService'] = ConfigureBgpService
+service_classes["ConfigureBgpService"] = ConfigureBgpService

@@ -17,15 +17,7 @@
 
 # Importing SQL Alchemy column types to handle all of the types of
 # form additions that the user could have.
-from sqlalchemy import (
-    Boolean,
-    Column,
-    Float,
-    ForeignKey,
-    Integer,
-    PickleType,
-    String
-)
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.automation.models import Service
@@ -34,9 +26,9 @@ from eNMS.base.classes import service_classes
 
 class ExampleService(Service):
 
-    __tablename__ = 'ExampleService'
+    __tablename__ = "ExampleService"
 
-    id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
+    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     # the "string1" property will be displayed as a drop-down list, because
     # there is an associated "string1_values" property in the class.
     string1 = Column(String)
@@ -57,23 +49,17 @@ class ExampleService(Service):
 
     # these values will be displayed in a single selection drop-down list,
     # for the property "a_list".
-    string1_values = [
-        ('cisco', 'Cisco'),
-        ('juniper', 'Juniper'),
-        ('arista', 'Arista')
-    ]
+    string1_values = [("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
 
     # these values will be displayed in a multiple selection list,
     # for the property "a_list".
     a_list_values = [
-        ('value1', 'Value 1'),
-        ('value2', 'Value 2'),
-        ('value3', 'Value 3')
+        ("value1", "Value 1"),
+        ("value2", "Value 2"),
+        ("value3", "Value 3"),
     ]
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'ExampleService',
-    }
+    __mapper_args__ = {"polymorphic_identity": "ExampleService"}
 
     # Some services will take action or interrogate a device. The job method
     # can also take device as a parameter for these types of services.
@@ -89,7 +75,7 @@ class ExampleService(Service):
         # the execution of the service was a success or a failure.
         # In a workflow, the "success" value will determine whether to move
         # forward with a "Success" edge or a "Failure" edge.
-        return {'success': True, 'result': 'example'}
+        return {"success": True, "result": "example"}
 
 
-service_classes['ExampleService'] = ExampleService
+service_classes["ExampleService"] = ExampleService

@@ -14,25 +14,22 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 def scheduler_job(job_id, aps_job_id=None, targets=None):
     with scheduler.app.app_context():
-        job = fetch('Job', id=job_id)
+        job = fetch("Job", id=job_id)
         if targets:
-            targets = [
-                fetch('Device', id=device_id)
-                for device_id in targets
-            ]
+            targets = [fetch("Device", id=device_id) for device_id in targets]
         results, now = job.try_run(targets=targets)
-        task = fetch('Task', creation_time=aps_job_id)
+        task = fetch("Task", creation_time=aps_job_id)
         if task and not task.frequency:
-            task.status = 'Completed'
-        parameters = get_one('Parameters')
+            task.status = "Completed"
+        parameters = get_one("Parameters")
         if job.push_to_git and parameters.git_automation:
-            path_git_folder = Path.cwd() / 'git' / 'automation'
-            with open(path_git_folder / job.name, 'w') as file:
+            path_git_folder = Path.cwd() / "git" / "automation"
+            with open(path_git_folder / job.name, "w") as file:
                 file.write(str_dict(results))
             repo = Repo(str(path_git_folder))
             try:
                 repo.git.add(A=True)
-                repo.git.commit(m=f'Automatic commit ({job.name})')
+                repo.git.commit(m=f"Automatic commit ({job.name})")
             except GitCommandError:
                 pass
             repo.remotes.origin.push()

@@ -14,7 +14,8 @@ bp = Blueprint(
 )
 
 
-styles, path_bp = {}, Path(bp.root_path)
+styles = {}
+path_bp = Path(bp.root_path)
 
 for subtype in device_subtypes:
     point_style = Style()

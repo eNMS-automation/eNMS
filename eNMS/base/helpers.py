@@ -108,7 +108,7 @@ def process_request(function):
     return wrapper
 
 
-def permission_required(permission, redirect=True):
+def permission_required(permission: str, redirect: bool = True) -> Callable:
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
@@ -124,7 +124,7 @@ def permission_required(permission, redirect=True):
     return decorator
 
 
-def templated(function):
+def templated(function: Callable) -> Callable:
     @wraps(function)
     def decorated_function(*args, **kwargs):
         ctx = function(*args, **kwargs) or {}

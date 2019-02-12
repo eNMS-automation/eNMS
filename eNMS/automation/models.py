@@ -11,7 +11,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from typing import Any, Dict
+from typing import Any, Dict, Set, Tuple
 
 from eNMS.main import db
 from eNMS.base.associations import (
@@ -22,6 +22,7 @@ from eNMS.base.associations import (
 )
 from eNMS.base.helpers import fetch
 from eNMS.base.models import Base
+from eNMS.inventory.models import Device
 
 
 class Job(Base):
@@ -65,7 +66,7 @@ class Job(Base):
     def creator_name(self):
         return self.creator.name if self.creator else "None"
 
-    def compute_targets(self):
+    def compute_targets(self) -> Set[Device]:
         targets = set(self.devices)
         for pool in self.pools:
             targets |= set(pool.devices)
@@ -118,7 +119,7 @@ class Job(Base):
             }
         )
 
-    def try_run(self, payload=None, targets=None, from_workflow=False):
+    def try_run(self, payload=None, targets=None, from_workflow: bool = False):
         self.status, self.state = "Running", {}
         info(f"{self.name}: starting.")
         if not from_workflow:
@@ -142,17 +143,19 @@ class Job(Base):
                 self.notify(results, now)
         return results, now
 
-    def get_results(self, payload, device=None):
+    def get_results(self, payload: dict, device: dict = None):
         try:
             return self.job(device, payload) if device else self.job(payload)
         except Exception as e:
             return {"success": False, "result": str(e)}
 
-    def run(self, payload=None, targets=None):
+    def run(
+        self, payload: dict = None, targets: Set[Device] = None
+    ) -> Tuple[dict, Set[Device]]:
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         if targets:
-            results = {"result": {"devices": {}}}
+            results: dict = {"result": {"devices": {}}}
             if self.multiprocessing:
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)

@@ -205,18 +205,18 @@ workflow_table_properties: List[str] = [
 
 workflow_edge_properties: List[str] = ["name", "subtype", "source_id", "destination_id"]
 
-user_public_properties: List[str] = ["name", "email"]
+user_public_properties: List[str] = ["id", "name", "email", "permissions"]
 
-user_serialized_properties: List[str] = ["name", "email", "permissions"]
+user_table_properties: List[str] = user_public_properties[1:-1]
 
-instance_public_properties: List[str] = [
-    "name",
-    "description",
+instance_public_properties: List[str] = base_properties + [
     "ip_address",
     "weight",
     "status",
     "cpu_load",
 ]
+
+instance_table_properties = instance_public_properties[1:]
 
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
@@ -288,14 +288,14 @@ cls_to_properties: Dict[str, List[str]] = {
 table_properties: Dict[str, List[str]] = {
     "configuration": device_configuration_properties,
     "device": device_table_properties,
-    "instance": instance_public_properties,
+    "instance": instance_table_properties,
     "link": link_table_properties,
     "log": log_public_properties,
     "logrule": log_rule_table_properties,
     "pool": pool_table_properties,
     "service": service_table_properties,
     "task": task_table_properties,
-    "user": user_public_properties,
+    "user": user_table_properties,
     "workflow": workflow_table_properties,
 }
 
@@ -424,10 +424,6 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
         ],
     }[type]
 
-
-cls_to_properties: Dict[str, List[str]] = {
-    k: ["id"] + v for k, v in cls_to_properties.items()
-}
 
 default_diagrams_properties: Dict[str, str] = {
     "Device": "model",

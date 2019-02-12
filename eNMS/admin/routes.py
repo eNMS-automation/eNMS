@@ -23,13 +23,13 @@ from eNMS.admin.forms import (
 )
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.base.helpers import fetch_all, get, get_one, post, factory, fetch, serialize
-from eNMS.base.properties import instance_public_properties, user_public_properties
+from eNMS.base.properties import instance_table_properties, user_table_properties
 
 
 @get(bp, "/user_management", "View")
 def user_management() -> dict:
     return dict(
-        fields=user_public_properties,
+        fields=user_table_properties,
         users=serialize("User"),
         form=AddUser(request.form),
     )
@@ -55,7 +55,7 @@ def database() -> dict:
 @get(bp, "/instance_management", "View")
 def instance_management() -> dict:
     return dict(
-        fields=instance_public_properties,
+        fields=instance_table_properties,
         instances=serialize("Instance"),
         form=AddInstance(request.form),
     )

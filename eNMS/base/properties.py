@@ -454,7 +454,7 @@ service_diagram_properties: List[str] = ["type", "device_multiprocessing"]
 
 task_diagram_properties: List[str] = ["type", "status", "frequency"]
 
-type_to_diagram_properties = {
+type_to_diagram_properties: Dict[str, List[str]] = {
     "Device": device_diagram_properties,
     "Link": object_diagram_properties,
     "User": user_diagram_properties,
@@ -463,7 +463,7 @@ type_to_diagram_properties = {
     "Task": task_diagram_properties,
 }
 
-pretty_names = {
+pretty_names: Dict[str, str] = {
     "access_rights": "Access rights",
     "action": "Action",
     "call_type": "Type of call",
@@ -550,9 +550,9 @@ pretty_names = {
 # Import properties
 
 pretty_names.update({k: v["pretty_name"] for k, v in custom_properties.items()})
-reverse_pretty_names = {v: k for k, v in pretty_names.items()}
+reverse_pretty_names: Dict[str, str] = {v: k for k, v in pretty_names.items()}
 
-property_types = {
+property_types: Dict[str, str] = {
     "devices": "object-list",
     "links": "object-list",
     "pools": "object-list",
@@ -571,7 +571,7 @@ property_types = {
     "push_to_git": "bool",
 }
 
-relationships = {
+relationships: Dict[str, Dict[str, str]] = {
     "Device": {"job": "Job"},
     "Link": {"source": "Device", "destination": "Device"},
     "Pool": {"device": "Device", "link": "Link"},
@@ -595,20 +595,20 @@ relationships = {
     "LogRule": {"job": "Job", "log": "Log"},
 }
 
-device_import_properties = device_public_properties + ["id"]
+device_import_properties: List[str] = device_public_properties + ["id"]
 
-link_import_properties = link_properties + ["id"]
+link_import_properties: List[str] = link_properties + ["id"]
 
-pool_import_properties = pool_public_properties + ["devices"]
+pool_import_properties: List[str] = pool_public_properties + ["devices"]
 
-service_import_properties = service_public_properties + [
+service_import_properties: List[str] = service_public_properties + [
     "id",
     "type",
     "devices",
     "pools",
 ]
 
-task_import_properties = base_properties + [
+task_import_properties: List[str] = base_properties + [
     "start_date",
     "end_date",
     "frequency",
@@ -616,11 +616,15 @@ task_import_properties = base_properties + [
     "job",
 ]
 
-user_import_properties = user_serialized_properties + ["id"]
+user_import_properties: List[str] = user_serialized_properties + ["id"]
 
-workflow_import_properties = workflow_public_properties + ["id", "jobs", "edges"]
+workflow_import_properties: List[str] = workflow_public_properties + [
+    "id",
+    "jobs",
+    "edges",
+]
 
-workflow_edge_import_properties = [
+workflow_edge_import_properties: List[str] = [
     "id",
     "name",
     "subtype",
@@ -629,7 +633,7 @@ workflow_edge_import_properties = [
     "workflow",
 ]
 
-import_properties = {
+import_properties: Dict[str, List[str]] = {
     "User": user_import_properties,
     "Device": device_import_properties,
     "Link": link_import_properties,
@@ -642,11 +646,14 @@ import_properties = {
 
 # Export topology properties
 
-export_properties = {"Device": device_public_properties, "Link": link_table_properties}
+export_properties: Dict[str, List[str]] = {
+    "Device": device_public_properties,
+    "Link": link_table_properties,
+}
 
 # Properties to not migrate
 
-dont_migrate = {
+dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs"],
     "Service": ["logs", "state", "tasks", "workflows", "creator_name"],
     "Task": ["job_name"],

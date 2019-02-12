@@ -4,6 +4,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from eNMS.automation.helpers import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class NapalmRollbackService(Service):
@@ -19,7 +20,7 @@ class NapalmRollbackService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmRollbackService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         napalm_driver.rollback()

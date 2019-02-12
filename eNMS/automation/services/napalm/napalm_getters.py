@@ -4,6 +4,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS.automation.helpers import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class NapalmGettersService(Service):
@@ -55,7 +56,7 @@ class NapalmGettersService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         napalm_driver, result = self.napalm_connection(device), {}
         napalm_driver.open()
         for getter in self.getters:

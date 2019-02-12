@@ -11,7 +11,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from typing import Any, Dict, Set, Tuple
+from typing import Any, Dict, List, Set, Tuple
 
 from eNMS.main import db
 from eNMS.base.associations import (
@@ -178,7 +178,7 @@ class Job(Base):
         else:
             return self.get_results(payload), None
 
-    def device_run(self, args):
+    def device_run(self, args: Tuple[Device, dict, dict]):
         device, results, payload = args
         device_result = self.get_results(payload, device)
         results["result"]["devices"][device.name] = device_result
@@ -190,14 +190,14 @@ class Service(Job):
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     __mapper_args__ = {"polymorphic_identity": "Service"}
 
-    def get_credentials(self, device):
+    def get_credentials(self, device: Device):
         return (
             (self.creator.name, self.creator.password)
             if self.credentials == "user"
             else (device.username, device.password)
         )
 
-    def netmiko_connection(self, device):
+    def netmiko_connection(self, device: Device) -> ConnectHandler:
         username, password = self.get_credentials(device)
         return ConnectHandler(
             device_type=(
@@ -212,7 +212,7 @@ class Service(Job):
             global_delay_factor=self.global_delay_factor,
         )
 
-    def napalm_connection(self, device):
+    def napalm_connection(self, device: Device):
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
@@ -229,7 +229,7 @@ class Service(Job):
             optional_args=optional_args,
         )
 
-    def sub(self, data, variables):
+    def sub(self, data: str, variables: dict) -> str:
         r = compile("{{(.*?)}}")
 
         def replace_with_locals(match):
@@ -237,10 +237,10 @@ class Service(Job):
 
         return r.sub(replace_with_locals, data)
 
-    def space_deleter(self, input):
+    def space_deleter(self, input: str) -> str:
         return "".join(input.split())
 
-    def match_content(self, result, match):
+    def match_content(self, result: str, match: str) -> bool:
         if self.delete_spaces_before_matching:
             match, result = map(self.space_deleter((match, result)))
         success = (

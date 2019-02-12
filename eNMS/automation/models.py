@@ -13,7 +13,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from typing import Any, Dict, List, Optional, overload, Set, Tuple
+from typing import Any, List, Optional, overload, Set, Tuple
 
 from eNMS.main import db
 from eNMS.base.associations import (
@@ -334,11 +334,11 @@ class Workflow(Job):
     def job(self, payload: dict) -> dict:
         ...
 
-    @overload
+    @overload  # noqa: F811
     def job(self, device: Device, payload: dict) -> dict:
         ...
 
-    def job(self, *args):
+    def job(self, *args):  # noqa: F811
         device, payload = args if len(args) == 2 else (None, args)
         if not self.multiprocessing:
             self.state = {"jobs": {}}

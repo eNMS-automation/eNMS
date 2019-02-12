@@ -12,7 +12,6 @@ from eNMS.base.helpers import (
     delete,
     factory,
     fetch,
-    fetch_all_visible,
     get,
     objectify,
     post,

@@ -20,11 +20,11 @@ class UnixCommandService(Service):
     def job(self, payload: dict) -> dict:
         ...
 
-    @overload
+    @overload  # noqa: F811
     def job(self, device: Device, payload: dict) -> dict:
         ...
 
-    def job(self, *args):
+    def job(self, *args):  # noqa: F811
         if len(args) == 2:
             device, payload = args
         try:

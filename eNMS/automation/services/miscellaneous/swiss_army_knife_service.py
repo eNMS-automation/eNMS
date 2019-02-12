@@ -30,11 +30,11 @@ class SwissArmyKnifeService(Service):
     def job(self, payload: dict) -> dict:
         ...
 
-    @overload
+    @overload  # noqa: F811
     def job(self, device: Device, payload: dict) -> dict:
         ...
 
-    def job(self, *args):
+    def job(self, *args):  # noqa: F811
         return getattr(self, self.name)(*args)
 
     def Start(self, _) -> dict:  # noqa: N802

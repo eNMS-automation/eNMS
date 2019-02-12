@@ -137,10 +137,6 @@ def templated(function: Callable) -> Callable:
             }
         )
         endpoint = request.endpoint.split(".")[-1]
-        print(
-            render_template(ctx.pop("template", f"{endpoint}.html"), **ctx),
-            type(render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)),
-        )
         return render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)
 
     return decorated_function

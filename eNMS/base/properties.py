@@ -279,7 +279,7 @@ cls_to_properties: Dict[str, List[str]] = {
     "Parameters": parameters_public_properties,
     "Workflow": workflow_public_properties,
     "WorkflowEdge": workflow_edge_properties,
-    "User": user_serialized_properties,
+    "User": user_public_properties,
     "Log": log_public_properties,
     "LogRule": log_rule_public_properties,
     "Task": task_serialized_properties,
@@ -612,8 +612,6 @@ task_import_properties: List[str] = base_properties + [
     "job",
 ]
 
-user_import_properties: List[str] = user_serialized_properties + ["id"]
-
 workflow_import_properties: List[str] = workflow_public_properties + [
     "id",
     "jobs",
@@ -630,7 +628,7 @@ workflow_edge_import_properties: List[str] = [
 ]
 
 import_properties: Dict[str, List[str]] = {
-    "User": user_import_properties,
+    "User": user_public_properties,
     "Device": device_import_properties,
     "Link": link_import_properties,
     "Pool": pool_import_properties,

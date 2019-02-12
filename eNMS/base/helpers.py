@@ -11,24 +11,24 @@ from eNMS.base.classes import classes
 from eNMS.base.properties import pretty_names, property_types
 
 
-def add_classes(*models):
+def add_classes(*models: db.Model) -> None:
     for model in models:
         classes.update({model.__tablename__: model, model.__tablename__.lower(): model})
 
 
-def fetch(model, **kwargs):
+def fetch(model: str, **kwargs: Any) -> db.Model:
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 
-def fetch_all(model):
+def fetch_all(model: str) -> List[db.Model]:
     return classes[model].query.all()
 
 
-def fetch_all_visible(model):
+def fetch_all_visible(model: str) -> List[db.Model]:
     return [instance for instance in classes[model].query.all() if instance.visible]
 
 
-def objectify(model, object_list):
+def objectify(model: str, object_list: List[int]) -> List[db.Model]:
     return [fetch(model, id=object_id) for object_id in object_list]
 
 
@@ -137,6 +137,10 @@ def templated(function: Callable) -> Callable:
             }
         )
         endpoint = request.endpoint.split(".")[-1]
+        print(
+            render_template(ctx.pop("template", f"{endpoint}.html"), **ctx),
+            type(render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)),
+        )
         return render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)
 
     return decorated_function
@@ -191,7 +195,7 @@ def post(
     return outer
 
 
-def str_dict(input, depth=0):
+def str_dict(input: str, depth: int = 0) -> str:
     tab = "\t" * depth
     if isinstance(input, list):
         result = "\n"
@@ -207,5 +211,5 @@ def str_dict(input, depth=0):
         return str(input)
 
 
-def strip_all(input):
+def strip_all(input: str) -> str:
     return input.translate(str.maketrans("", "", f"{punctuation} "))

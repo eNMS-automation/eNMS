@@ -8,6 +8,8 @@ from logging import info
 from os import listdir
 from requests import get as rest_get
 from requests.exceptions import ConnectionError
+from typing import Union
+from werkzeug.wrappers import Response
 
 from eNMS.main import db, ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 from eNMS.admin import bp
@@ -60,7 +62,7 @@ def instance_management() -> dict:
 
 
 @bp.route("/login", methods=["GET", "POST"])
-def login():
+def login() -> Union[Response, str]:
     if request.method == "POST":
         name, password = request.form["name"], request.form["password"]
         try:
@@ -121,7 +123,7 @@ def login():
 
 
 @get(bp, "/logout")
-def logout():
+def logout() -> Response:
     logout_user()
     return redirect(url_for("admin_blueprint.login"))
 

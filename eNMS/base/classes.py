@@ -1,2 +1,2 @@
-classes = {}  # type: ignore
-service_classes = {}  # type: ignore
+classes: dict = {}
+service_classes: dict = {}

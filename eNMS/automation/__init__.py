@@ -1,4 +1,5 @@
 from flask import Blueprint
+from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
 from os import environ
 from pathlib import Path
@@ -38,6 +39,7 @@ def create_service_classes() -> None:
             if dont_create_examples and "examples" in str(file):
                 continue
             spec = spec_from_file_location(str(file), str(file))
+            assert isinstance(spec.loader, Loader)
             spec.loader.exec_module(module_from_spec(spec))  # type: ignore
     for cls_name, cls in service_classes.items():
         cls_to_properties[cls_name] = list(cls_to_properties["Service"])

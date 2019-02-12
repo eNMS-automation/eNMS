@@ -122,9 +122,14 @@ class Job(Base):
         )
 
     def try_run(
-        self, payload=None, targets=None, from_workflow: bool = False
+        self,
+        payload: dict = None,
+        targets: Optional[Set[Device]] = None,
+        from_workflow: bool = False,
     ) -> Tuple[dict, str]:
         self.status, self.state = "Running", {}
+        if not payload:
+            payload = {}
         info(f"{self.name}: starting.")
         if not from_workflow:
             db.session.commit()
@@ -154,7 +159,7 @@ class Job(Base):
             return {"success": False, "result": str(e)}
 
     def run(
-        self, payload: dict, targets: Set[Device] = None
+        self, payload: dict, targets: Optional[Set[Device]] = None
     ) -> Tuple[dict, Optional[Set[Device]]]:
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()

@@ -254,18 +254,16 @@ def delete_node(workflow_id: int, job_id: int) -> dict:
     return job.serialized
 
 
-@post(
-    bp, "/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:destination>", "Edit"
-)
-def add_edge(workflow_id: int, subtype: str, source: int, destination: int) -> dict:
+@post(bp, "/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:dest>", "Edit")
+def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
     workflow_edge = factory(
         "WorkflowEdge",
         **{
-            "name": f"{workflow_id}-{subtype}:{source}->{destination}",
+            "name": f"{workflow_id}-{subtype}:{source}->{dest}",
             "workflow": workflow_id,
             "subtype": subtype,
             "source": source,
-            "destination": destination,
+            "destination": dest,
         },
     )
     fetch("Workflow", id=workflow_id).last_modified = str(datetime.now())

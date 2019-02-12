@@ -3,6 +3,7 @@ from difflib import SequenceMatcher
 from flask import request, session
 from json import dumps
 from sqlalchemy.exc import DataError
+from typing import List
 
 from eNMS.main import db, scheduler
 from eNMS.automation.helpers import scheduler_job
@@ -87,7 +88,7 @@ def get_logs(id: int) -> dict:
 
 
 @post(bp, "/get_service/<id_or_cls>", "View")
-def get_service(id_or_cls):
+def get_service(id_or_cls: str) -> dict:
     service = None
     try:
         service = fetch("Service", id=id_or_cls)
@@ -95,7 +96,7 @@ def get_service(id_or_cls):
         pass
     cls = service_classes[service.type if service else id_or_cls]
 
-    def build_text_box(property, name):
+    def build_text_box(property: str, name: str) -> str:
         return f"""
             <label>{name}</label>
             <div class="form-group">
@@ -104,7 +105,7 @@ def get_service(id_or_cls):
               if property in private_properties else 'text'}">
             </div>"""
 
-    def build_textarea_box(property, name):
+    def build_textarea_box(property: str, name: str) -> str:
         return f"""
             <label>{name}</label>
             <div class="form-group">
@@ -113,7 +114,7 @@ def get_service(id_or_cls):
               name="{property}"></textarea>
             </div>"""
 
-    def build_select_box(property, name):
+    def build_select_box(property: str, name: str) -> str:
         options = "".join(
             f'<option value="{k}">{v}</option>'
             for k, v in getattr(cls, f"{property}_values")
@@ -129,7 +130,7 @@ def get_service(id_or_cls):
               </select>
             </div>"""
 
-    def build_boolean_box(property, name):
+    def build_boolean_box(property: str, name: str) -> str:
         return (
             "<fieldset>"
             + f"""
@@ -165,12 +166,12 @@ def get_service(id_or_cls):
 
 
 @post(bp, "/get_status/<cls>", "View")
-def get_status(cls):
+def get_status(cls: str) -> List[str]:
     return [instance.status for instance in fetch_all_visible(cls)]
 
 
-@post(bp, "/run_job/<job_id>", "Edit")
-def run_job(job_id):
+@post(bp, "/run_job/<int:job_id>", "Edit")
+def run_job(job_id: int) -> dict:
     job = fetch("Job", id=job_id)
     if job.status == "Running":
         return {"error": "Job is already running."}
@@ -190,8 +191,8 @@ def run_job(job_id):
     return job.serialized
 
 
-@post(bp, "/get_diff/<job_id>/<v1>/<v2>", "View")
-def get_diff(job_id, v1, v2, n1=None, n2=None):
+@post(bp, "/get_diff/<int:job_id>/<v1>/<v2>", "View")
+def get_diff(job_id: int, v1: str, v2: str) -> dict:
     job = fetch("Job", id=job_id)
     first = str_dict(job.logs[v1]).splitlines()
     second = str_dict(job.logs[v2]).splitlines()
@@ -199,8 +200,8 @@ def get_diff(job_id, v1, v2, n1=None, n2=None):
     return {"first": first, "second": second, "opcodes": opcodes}
 
 
-@post(bp, "/clear_logs/<job_id>", "Edit")
-def clear_logs(job_id):
+@post(bp, "/clear_logs/<int: job_id>", "Edit")
+def clear_logs(job_id: int) -> bool:
     fetch("Job", id=job_id).logs = {}
     db.session.commit()
     return True

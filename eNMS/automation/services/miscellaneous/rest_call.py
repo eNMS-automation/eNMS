@@ -8,6 +8,7 @@ from requests import (
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
+from typing import overload
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
@@ -55,6 +56,14 @@ class RestCallService(Service):
     }
 
     __mapper_args__ = {"polymorphic_identity": "RestCallService"}
+
+    @overload
+    def job(self, payload: dict) -> dict:
+        ...
+
+    @overload
+    def job(self, device: Device, payload: dict) -> dict:
+        ...
 
     def job(self, *args):
         if len(args) == 2:

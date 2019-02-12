@@ -8,6 +8,7 @@ from pathlib import Path
 from requests import post, get
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from typing import overload
 
 from eNMS.main import mail_client
 from eNMS.automation.models import Service
@@ -25,24 +26,26 @@ class SwissArmyKnifeService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}
 
+    @overload
+    def job(self, payload: dict) -> dict:
+        ...
+
+    @overload
+    def job(self, device: Device, payload: dict) -> dict:
+        ...
+
     def job(self, *args):
         return getattr(self, self.name)(*args)
 
-    def job1(self, device, payload):
-        return {"success": True, "result": ""}
-
-    def job2(self, payload):
-        return {"success": True, "result": ""}
-
-    def Start(self, *a, **kw):  # noqa: N802
+    def Start(self, _) -> dict:  # noqa: N802
         # Start of a workflow
         return {"success": True}
 
-    def End(self, *a, **kw):  # noqa: N802
+    def End(self, _) -> dict:  # noqa: N802
         # End of a workflow
         return {"success": True}
 
-    def mail_feedback_notification(self, payload):
+    def mail_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
         name, recipients = (
             payload["job"]["name"],
@@ -67,7 +70,7 @@ class SwissArmyKnifeService(Service):
         mail_client.send(message)
         return {"success": True}
 
-    def slack_feedback_notification(self, payload):
+    def slack_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
         slack_client = SlackClient(parameters.slack_token)
         result = slack_client.api_call(
@@ -77,7 +80,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True, "result": str(result)}
 
-    def mattermost_feedback_notification(self, payload):
+    def mattermost_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
         post(
             parameters.mattermost_url,
@@ -88,7 +91,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True}
 
-    def cluster_monitoring(self, _):
+    def cluster_monitoring(self, _) -> dict:
         parameters = get_one("Parameters")
         protocol = parameters.cluster_scan_protocol
         for instance in fetch_all("Instance"):
@@ -101,13 +104,13 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def poller_service(self, _):
+    def poller_service(self, _) -> dict:
         for service in fetch_all("Service"):
             if getattr(service, "configuration_backup_service", False):
                 service.try_run()
         return {"success": True}
 
-    def git_push_configurations(self, _):
+    def git_push_configurations(self, _) -> dict:
         parameters = get_one("Parameters")
         if parameters.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")
@@ -119,7 +122,7 @@ class SwissArmyKnifeService(Service):
             repo.remotes.origin.push()
         return {"success": True}
 
-    def process_payload1(self, device, payload):
+    def process_payload1(self, device: Device, payload: dict) -> dict:
         get_facts = payload["get_facts"]
         # we use the name of the device to get the result for that particular
         # device.

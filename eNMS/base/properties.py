@@ -1,9 +1,10 @@
 from os import environ
 from sqlalchemy import Boolean, Integer, String, Float
 from yaml import load
+from typing import Dict, List
 
 
-def get_custom_properties():
+def get_custom_properties() -> dict:
     filepath = environ.get("PATH_CUSTOM_PROPERTIES")
     if not filepath:
         return {}
@@ -11,10 +12,15 @@ def get_custom_properties():
         return load(properties)
 
 
-sql_types = {"boolean": Boolean, "float": Float, "integer": Integer, "string": String}
+sql_types: dict = {
+    "boolean": Boolean,
+    "float": Float,
+    "integer": Integer,
+    "string": String,
+}
 
-custom_properties = get_custom_properties()
-boolean_properties = [
+custom_properties: dict = get_custom_properties()
+boolean_properties: List[str] = [
     "mattermost_verify_certificate",
     "multiprocessing",
     "send_notification",
@@ -23,7 +29,7 @@ boolean_properties = [
     "never_update",
 ]
 
-list_properties = [
+list_properties: List[str] = [
     "devices",
     "pools",
     "links",
@@ -32,13 +38,18 @@ list_properties = [
     "import_export_types",
 ]
 
-private_properties = ["password", "enable_password"]
+private_properties: List[str] = ["password", "enable_password"]
 
-base_properties = ["id", "name", "description"]
+base_properties: List[str] = ["id", "name", "description"]
 
-object_common_properties = base_properties + ["subtype", "model", "location", "vendor"]
+object_common_properties: List[str] = base_properties + [
+    "subtype",
+    "model",
+    "location",
+    "vendor",
+]
 
-device_subtypes = {
+device_subtypes: Dict[str, str] = {
     "antenna": "Antenna",
     "firewall": "Firewall",
     "host": "Host",

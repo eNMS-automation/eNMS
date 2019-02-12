@@ -5,6 +5,7 @@ from flask import jsonify, redirect, request, url_for
 from flask_login import current_user
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
+from werkzeug.wrappers import Response
 
 from eNMS import db
 from eNMS.base import bp
@@ -28,12 +29,12 @@ from eNMS.base.properties import (
 
 
 @bp.route("/")
-def site_root():
+def site_root() -> Response:
     return redirect(url_for("admin_blueprint.login"))
 
 
 @get(bp, "/server_side_processing/<cls>/<table>")
-def server_side_processing(cls, table):
+def server_side_processing(cls: str, table: str) -> Response:
     model, properties = classes[cls], table_properties[table]
     filtered = db.session.query(model).filter(
         and_(
@@ -70,7 +71,7 @@ def server_side_processing(cls, table):
 
 
 @get(bp, "/dashboard")
-def dashboard():
+def dashboard() -> dict:
     on_going = {
         "Running services": len(
             [service for service in fetch_all("Service") if service.status == "Running"]
@@ -94,7 +95,7 @@ def dashboard():
 
 
 @post(bp, "/counters/<property>/<type>")
-def get_counters(property, type):
+def get_counters(property: str, type: str) -> Counter:
     objects = fetch_all(type)
     if property in reverse_pretty_names:
         property = reverse_pretty_names[property]
@@ -102,14 +103,14 @@ def get_counters(property, type):
 
 
 @post(bp, "/get/<cls>/<id>", "View")
-def get_instance(cls, id):
+def get_instance(cls: str, id: str) -> dict:
     instance = fetch(cls, id=id)
     info(f"{current_user.name}: GET {cls} {instance.name} ({id})")
     return instance.serialized
 
 
 @post(bp, "/update/<cls>", "Edit")
-def update_instance(cls):
+def update_instance(cls: str) -> dict:
     try:
         instance = factory(cls, **request.form)
         info(f"{current_user.name}: UPDATE {cls} " f"{instance.name} ({instance.id})")
@@ -121,14 +122,14 @@ def update_instance(cls):
 
 
 @post(bp, "/delete/<cls>/<id>", "Edit")
-def delete_instance(cls, id):
+def delete_instance(cls: str, id: str) -> dict:
     instance = delete(cls, id=id)
     info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
     return instance
 
 
 @post(bp, "/shutdown", "Admin")
-def shutdown():
+def shutdown() -> str:
     info(f"{current_user.name}: SHUTDOWN eNMS")
     func = request.environ.get("werkzeug.server.shutdown")
     if func is None:

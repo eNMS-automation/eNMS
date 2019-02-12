@@ -35,7 +35,7 @@ class Base(db.Model):
         else:
             return super().__getattribute__(property)
 
-    def __setattr__(self, property, value):
+    def __setattr__(self, property: str, value: Any) -> None:
         if property in private_properties and USE_VAULT:
             if not value:
                 return
@@ -46,7 +46,7 @@ class Base(db.Model):
         else:
             super().__setattr__(property, value)
 
-    def update(self, **kwargs):
+    def update(self, **kwargs: Any) -> None:
         serial = rel.get(self.__tablename__, rel["Service"])
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
@@ -67,7 +67,7 @@ class Base(db.Model):
                 value = {"float": float, "int": int}[property_type](value or 0)
             setattr(self, property, value)
 
-    def get_properties(self, export=False):
+    def get_properties(self, export: bool = False) -> dict:
         result = {}
         for property in cls_to_properties[self.type]:
             if property in private_properties:
@@ -79,7 +79,7 @@ class Base(db.Model):
                 result[property] = str(getattr(self, property))
         return result
 
-    def to_dict(self, export=False):
+    def to_dict(self, export: bool = False) -> dict:
         properties = self.get_properties(export)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property in rel.get(self.type, rel["Service"]):

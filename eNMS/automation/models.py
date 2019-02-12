@@ -3,8 +3,10 @@ from datetime import datetime
 from logging import info
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
+from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
 from os import environ
+from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
@@ -180,7 +182,7 @@ class Job(Base):
         else:
             return self.get_results(payload), None
 
-    def device_run(self, args: Tuple[Device, dict, dict]):
+    def device_run(self, args: Tuple[Device, dict, dict]) -> None:
         device, results, payload = args
         device_result = self.get_results(payload, device)
         results["result"]["devices"][device.name] = device_result
@@ -192,7 +194,7 @@ class Service(Job):
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     __mapper_args__ = {"polymorphic_identity": "Service"}
 
-    def get_credentials(self, device: Device):
+    def get_credentials(self, device: Device) -> Tuple[str, str]:
         return (
             (self.creator.name, self.creator.password)
             if self.credentials == "user"
@@ -214,7 +216,7 @@ class Service(Job):
             global_delay_factor=self.global_delay_factor,
         )
 
-    def napalm_connection(self, device: Device):
+    def napalm_connection(self, device: Device) -> object:
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
@@ -266,7 +268,9 @@ class Service(Job):
                     match.pop(k)
             return not match
 
-    def transfer_file(self, ssh_client, source, destination):
+    def transfer_file(
+        self, ssh_client: SSHClient, source: Device, destination: Device
+    ) -> None:
         files = (source, destination)
         if self.protocol == "sftp":
             sftp = ssh_client.open_sftp()

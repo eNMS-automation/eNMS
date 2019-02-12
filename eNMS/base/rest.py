@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import current_app, jsonify, make_response, request
 from flask_restful import Api, Resource
+from flask.wrappers import Response
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
@@ -13,17 +14,17 @@ from eNMS.inventory.helpers import object_export, object_import
 
 
 @auth.get_password
-def get_password(username):
+def get_password(username: str) -> str:
     return fetch("User", name=username).password
 
 
 @auth.error_handler
-def unauthorized():
+def unauthorized() -> Response:
     return make_response(jsonify({"message": "Unauthorized access"}), 403)
 
 
 class Heartbeat(Resource):
-    def get(self):
+    def get(self) -> dict:
         return {
             "name": getnode(),
             "cluster_id": current_app.config["CLUSTER_ID"],
@@ -34,7 +35,7 @@ class Heartbeat(Resource):
 class RestAutomation(Resource):
     decorators = [auth.login_required]
 
-    def post(self):
+    def post(self) -> dict:
         payload = request.get_json()
         job = fetch("Job", name=payload["name"])
         handle_asynchronously = payload.get("async", False)
@@ -67,17 +68,17 @@ class RestAutomation(Resource):
 class GetInstance(Resource):
     decorators = [auth.login_required]
 
-    def get(self, cls, name):
+    def get(self, cls: str, name: str) -> dict:
         return fetch(cls, name=name).get_properties()
 
-    def delete(self, cls, name):
+    def delete(self, cls: str, name: str) -> dict:
         return delete(fetch(cls, name=name))
 
 
 class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
-    def get(self, name):
+    def get(self, name: str) -> str:
         device = fetch("Device", name=name)
         return device.configurations[max(device.configurations)]
 
@@ -85,14 +86,14 @@ class GetConfiguration(Resource):
 class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
-    def post(self, cls):
+    def post(self, cls: str) -> dict:
         return factory(cls, **request.get_json()).serialized
 
 
 class Migrate(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction):
+    def post(self, direction: str) -> dict:
         return {"import": migrate_import, "export": migrate_export}[direction](
             current_app, request.get_json()
         )

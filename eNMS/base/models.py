@@ -1,6 +1,6 @@
 from wtforms import SelectField, SelectMultipleField
 from json import dumps, loads
-from typing import Any
+from typing import Any, List, Tuple
 
 from eNMS.main import db, USE_VAULT, vault_client
 from eNMS.base.helpers import fetch, objectify, choices
@@ -18,13 +18,13 @@ class Base(db.Model):
 
     __abstract__ = True
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.update(**kwargs)
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return True
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.name
 
     def __getattribute__(self, property: str) -> Any:
@@ -106,33 +106,33 @@ class Base(db.Model):
         return properties
 
     @property
-    def serialized(self):
+    def serialized(self) -> dict:
         return self.to_dict()
 
     @property
-    def visible(self):
+    def visible(self) -> bool:
         return not (hasattr(self, "hidden") and self.hidden)
 
     @classmethod
-    def export(cls):
+    def export(cls) -> List[dict]:
         return [obj.to_dict(export=True) for obj in cls.query.all()]
 
     @classmethod
-    def choices(cls):
+    def choices(cls) -> List[Tuple[int, str]]:
         return [(obj.id, obj.name) for obj in cls.query.all() if obj.visible]
 
     @classmethod
-    def serialize(cls):
+    def serialize(cls) -> List[dict]:
         return [obj.serialized for obj in cls.query.all() if obj.visible]
 
 
 class ObjectField(SelectField):
-    def __init__(self, model, *args, **kwargs):
+    def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.choices = choices(model)
 
 
 class MultipleObjectField(SelectMultipleField):
-    def __init__(self, model, *args, **kwargs):
+    def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.choices = choices(model)

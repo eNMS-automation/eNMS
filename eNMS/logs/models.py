@@ -19,11 +19,6 @@ class Log(Base):
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
 
-    def __init__(self, source_ip, content, log_rules):
-        self.source_ip = source_ip
-        self.content = content
-        self.log_rules = log_rules
-
     def __repr__(self):
         return self.content
 

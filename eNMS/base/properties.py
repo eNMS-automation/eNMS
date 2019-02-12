@@ -3,6 +3,8 @@ from sqlalchemy import Boolean, Integer, String, Float
 from yaml import load
 from typing import Dict, List
 
+from eNMS import db
+
 
 def get_custom_properties() -> dict:
     filepath = environ.get("PATH_CUSTOM_PROPERTIES")
@@ -216,20 +218,20 @@ instance_public_properties: List[str] = [
     "cpu_load",
 ]
 
-user_permissions = ["Admin", "Connect to device", "View", "Edit"]
+user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
-log_public_properties = ["source_ip", "content"]
+log_public_properties: List[str] = ["source_ip", "content"]
 
-log_rule_public_properties = log_public_properties + [
+log_rule_public_properties: List[str] = log_public_properties + [
     "name",
     "source_ip_regex",
     "content_regex",
     "jobs",
 ]
 
-log_rule_table_properties = ["name"] + log_public_properties
+log_rule_table_properties: List[str] = ["name"] + log_public_properties
 
-parameters_public_properties = [
+parameters_public_properties: List[str] = [
     "cluster_scan_subnet",
     "cluster_scan_protocol",
     "cluster_scan_timeout",
@@ -254,7 +256,7 @@ parameters_public_properties = [
     "slack_token",
 ]
 
-task_serialized_properties = [
+task_serialized_properties: List[str] = [
     "id",
     "name",
     "description",
@@ -266,9 +268,9 @@ task_serialized_properties = [
     "job",
 ]
 
-task_table_properties = task_serialized_properties[1:-1]
+task_table_properties: List[str] = task_serialized_properties[1:-1]
 
-cls_to_properties = {
+cls_to_properties: Dict[str, List[str]] = {
     "Instance": instance_public_properties,
     "Device": device_public_properties,
     "Link": link_public_properties,
@@ -283,7 +285,7 @@ cls_to_properties = {
     "Task": task_serialized_properties,
 }
 
-table_properties = {
+table_properties: Dict[str, List[str]] = {
     "configuration": device_configuration_properties,
     "device": device_table_properties,
     "instance": instance_public_properties,
@@ -298,7 +300,7 @@ table_properties = {
 }
 
 
-def table_static_entries(type, obj):
+def table_static_entries(type: str, obj: db.Model) -> List[str]:
     status = "" if type != "task" else "Pause" if obj.status == "Active" else "Resume"
     return {
         "configuration": [
@@ -423,9 +425,11 @@ def table_static_entries(type, obj):
     }[type]
 
 
-cls_to_properties = {k: ["id"] + v for k, v in cls_to_properties.items()}
+cls_to_properties: Dict[str, List[str]] = {
+    k: ["id"] + v for k, v in cls_to_properties.items()
+}
 
-default_diagrams_properties = {
+default_diagrams_properties: Dict[str, str] = {
     "Device": "model",
     "Link": "model",
     "User": "name",
@@ -434,21 +438,21 @@ default_diagrams_properties = {
     "Task": "type",
 }
 
-object_diagram_properties = ["model", "vendor", "subtype", "location"]
+object_diagram_properties: List[str] = ["model", "vendor", "subtype", "location"]
 
-device_diagram_properties = (
+device_diagram_properties: List[str] = (
     object_diagram_properties
     + ["operating_system", "os_version"]
     + list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
 )
 
-user_diagram_properties = ["name"]
+user_diagram_properties: List[str] = ["name"]
 
-workflow_diagram_properties = ["type", "vendor", "operating_system"]
+workflow_diagram_properties: List[str] = ["type", "vendor", "operating_system"]
 
-service_diagram_properties = ["type", "device_multiprocessing"]
+service_diagram_properties: List[str] = ["type", "device_multiprocessing"]
 
-task_diagram_properties = ["type", "status", "frequency"]
+task_diagram_properties: List[str] = ["type", "status", "frequency"]
 
 type_to_diagram_properties = {
     "Device": device_diagram_properties,

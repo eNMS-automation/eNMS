@@ -54,8 +54,3 @@ def task_action(action, task_id):
         task.reschedule()
         getattr(task, action)()
     return True
-
-
-@post(bp, "/get_status", "View")
-def get_status():
-    return [task.status for task in fetch_all("Task")]

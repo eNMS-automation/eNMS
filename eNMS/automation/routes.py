@@ -165,11 +165,6 @@ def get_service(id_or_cls: str) -> dict:
     }
 
 
-@post(bp, "/get_status/<cls>", "View")
-def get_status(cls: str) -> List[str]:
-    return [instance.status for instance in fetch_all_visible(cls)]
-
-
 @post(bp, "/run_job/<int:job_id>", "Edit")
 def run_job(job_id: int) -> dict:
     job = fetch("Job", id=job_id)
@@ -207,8 +202,8 @@ def clear_logs(job_id: int) -> bool:
     return True
 
 
-@post(bp, "/add_jobs_to_workflow/<workflow_id>", "Edit")
-def add_jobs_to_workflow(workflow_id):
+@post(bp, "/add_jobs_to_workflow/<int:workflow_id>", "Edit")
+def add_jobs_to_workflow(workflow_id: int) -> List[dict]:
     workflow = fetch("Workflow", id=workflow_id)
     jobs = objectify("Job", request.form["add_jobs"])
     for job in jobs:

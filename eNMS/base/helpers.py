@@ -4,7 +4,7 @@ from functools import wraps
 from logging import info
 from sqlalchemy import exc
 from string import punctuation
-from typing import Callable, List, Optional
+from typing import Any, Callable, List, Optional, Tuple
 
 from eNMS.main import db
 from eNMS.base.classes import classes
@@ -32,7 +32,7 @@ def objectify(model, object_list):
     return [fetch(model, id=object_id) for object_id in object_list]
 
 
-def delete(model, **kwargs):
+def delete(model: str, **kwargs: Any) -> dict:
     instance = db.session.query(classes[model]).filter_by(**kwargs).first()
     if hasattr(instance, "type") and instance.type == "Task":
         instance.delete_task()
@@ -42,30 +42,30 @@ def delete(model, **kwargs):
     return result
 
 
-def delete_all(*models):
+def delete_all(*models: str) -> None:
     for model in models:
         for instance in fetch_all(model):
             delete(model, id=instance.id)
     db.session.commit()
 
 
-def serialize(model):
+def serialize(model: str) -> List[dict]:
     return classes[model].serialize()
 
 
-def choices(model):
+def choices(model: str) -> List[Tuple[int, str]]:
     return classes[model].choices()
 
 
-def export(model):
+def export(model: str) -> List[dict]:
     return classes[model].export()
 
 
-def get_one(model):
+def get_one(model: str) -> db.Model:
     return classes[model].query.one()
 
 
-def factory(cls_name, **kwargs):
+def factory(cls_name: str, **kwargs: Any) -> db.Model:
     if "id" in kwargs:
         if kwargs["id"]:
             instance = fetch(cls_name, id=kwargs["id"])
@@ -82,7 +82,7 @@ def factory(cls_name, **kwargs):
     return instance
 
 
-def integrity_rollback(function):
+def integrity_rollback(function: Callable) -> Callable:
     def wrapper(*a, **kw):
         try:
             function(*a, **kw)
@@ -92,7 +92,7 @@ def integrity_rollback(function):
     return wrapper
 
 
-def process_request(function):
+def process_request(function: Callable) -> Callable:
     def wrapper(*a, **kw):
         data = {**request.form.to_dict(), **{"creator": current_user.id}}
         for property in data.get("list_fields", "").split(","):

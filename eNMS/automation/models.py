@@ -86,7 +86,7 @@ class Job(Base):
             if (subtype == "all" or x.subtype == subtype) and x.workflow == workflow
         ]
 
-    def build_notification(self, results: dict, now: str):
+    def build_notification(self, results: dict, now: str) -> str:
         summary = [
             f"Job: {self.name} ({self.type})",
             f"Runtime: {now}",
@@ -119,7 +119,9 @@ class Job(Base):
             }
         )
 
-    def try_run(self, payload=None, targets=None, from_workflow: bool = False):
+    def try_run(
+        self, payload=None, targets=None, from_workflow: bool = False
+    ) -> Tuple[dict, str]:
         self.status, self.state = "Running", {}
         info(f"{self.name}: starting.")
         if not from_workflow:
@@ -242,7 +244,7 @@ class Service(Job):
 
     def match_content(self, result: str, match: str) -> bool:
         if self.delete_spaces_before_matching:
-            match, result = map(self.space_deleter((match, result)))
+            match, result = map(self.space_deleter, (match, result))
         success = (
             self.content_match_regex
             and bool(search(match, result))
@@ -251,7 +253,7 @@ class Service(Job):
         )
         return success if not self.negative_logic else not success
 
-    def match_dictionnary(self, result, match=None):
+    def match_dictionnary(self, result: dict, match: dict = None) -> bool:
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:

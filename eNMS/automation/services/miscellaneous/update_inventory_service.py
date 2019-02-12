@@ -3,6 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class UpdateInventoryService(Service):
@@ -15,7 +16,7 @@ class UpdateInventoryService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UpdateInventoryService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         for property, value in self.update_dictionnary.items():
             setattr(device, property, value)
         return {"success": True, "result": "properties updated"}

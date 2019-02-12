@@ -10,6 +10,7 @@ from tarfile import open as open_tar
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import fetch_all, strip_all
+from eNMS.inventory.models import Device
 
 
 class LogBackupService(Service):
@@ -27,7 +28,7 @@ class LogBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "LogBackupService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         path_backup = Path.cwd() / "logs" / "job_logs"
         now = strip_all(str(datetime.now()))
         path_dir = path_backup / f"logs_{now}"

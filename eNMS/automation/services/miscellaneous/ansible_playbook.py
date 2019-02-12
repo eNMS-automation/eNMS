@@ -7,6 +7,7 @@ from subprocess import check_output
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class AnsiblePlaybookService(Service):
@@ -34,7 +35,7 @@ class AnsiblePlaybookService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         arguments = self.sub(self.arguments, locals()).split()
         command, extra_args = ["ansible-playbook"], {}
         if self.pass_device_properties:

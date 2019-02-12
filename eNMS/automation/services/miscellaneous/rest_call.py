@@ -11,6 +11,7 @@ from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class RestCallService(Service):

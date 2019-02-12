@@ -4,6 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class PingService(Service):
@@ -22,7 +23,7 @@ class PingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PingService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         if self.protocol == "ICMP":
             command = ["ping"]
             for x, property in (

@@ -5,6 +5,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from eNMS.automation.helpers import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class ConfigurationBackupService(Service):
@@ -25,7 +26,7 @@ class ConfigurationBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ConfigurationBackupService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         now = datetime.now()
         path_configurations = Path.cwd() / "git" / "configurations"
         netmiko_handler = self.netmiko_connection(device)

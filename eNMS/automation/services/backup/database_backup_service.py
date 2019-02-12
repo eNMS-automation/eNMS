@@ -11,6 +11,7 @@ from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import strip_all
 from eNMS.base.properties import import_properties
+from eNMS.inventory.models import Device
 
 
 class DatabaseBackupService(Service):
@@ -28,7 +29,7 @@ class DatabaseBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         now = strip_all(str(datetime.now()))
         source = Path.cwd() / "migrations" / f"backup_{now}.tgz"
         migrate_export(

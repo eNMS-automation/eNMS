@@ -3,6 +3,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class GenericFileTransferService(Service):
@@ -23,7 +24,7 @@ class GenericFileTransferService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "GenericFileTransferService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         ssh_client = SSHClient()
         if self.missing_host_key_policy:
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())

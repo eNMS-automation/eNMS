@@ -1,9 +1,11 @@
+from flask import Flask
 from flask_login import UserMixin
 from git import Repo
 from logging import info
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
+from typing import Any
 
 from eNMS.main import db
 from eNMS.base.helpers import fetch
@@ -22,10 +24,10 @@ class User(Base, UserMixin):
     password = Column(String)
 
     @property
-    def is_admin(self):
+    def is_admin(self) -> bool:
         return "Admin" in self.permissions
 
-    def allowed(self, permission):
+    def allowed(self, permission: str) -> bool:
         return self.is_admin or permission in self.permissions
 
 
@@ -73,11 +75,11 @@ class Parameters(Base):
     slack_channel = Column(String)
     pool_filter = Column(String)
 
-    def update(self, **kwargs):
+    def update(self, **kwargs: Any) -> None:
         self.gotty_port_index = -1
         super().update(**kwargs)
 
-    def trigger_active_parameters(self, app):
+    def trigger_active_parameters(self, app: Flask) -> None:
         for repository_type in ("configurations", "automation"):
             try:
                 repo = getattr(self, f"git_{repository_type}")
@@ -90,10 +92,10 @@ class Parameters(Base):
             database_filtering(pool)
 
     @property
-    def gotty_range(self):
+    def gotty_range(self) -> int:
         return self.gotty_end_port - self.gotty_start_port
 
-    def get_gotty_port(self):
+    def get_gotty_port(self) -> int:
         self.gotty_port_index += 1
         db.session.commit()
         return self.gotty_start_port + self.gotty_port_index % self.gotty_range

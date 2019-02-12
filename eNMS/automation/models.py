@@ -63,7 +63,7 @@ class Job(Base):
     mail_recipient = Column(String, default="")
 
     @property
-    def creator_name(self):
+    def creator_name(self) -> str:
         return self.creator.name if self.creator else "None"
 
     def compute_targets(self) -> Set[Device]:
@@ -72,14 +72,14 @@ class Job(Base):
             targets |= set(pool.devices)
         return targets
 
-    def job_sources(self, workflow: "Workflow", subtype: str = "all"):
+    def job_sources(self, workflow: "Workflow", subtype: str = "all") -> List[Job]:
         return [
             x.source
             for x in self.sources
             if (subtype == "all" or x.subtype == subtype) and x.workflow == workflow
         ]
 
-    def job_successors(self, workflow: "Workflow", subtype: str = "all"):
+    def job_successors(self, workflow: "Workflow", subtype: str = "all") -> List[Job]:
         return [
             x.destination
             for x in self.destinations
@@ -109,7 +109,7 @@ class Job(Base):
         summary.append(f"Logs: {logs_url}")
         return "\n\n".join(summary)
 
-    def notify(self, results: dict, time: str):
+    def notify(self, results: dict, time: str) -> None:
         fetch("Job", name=self.send_notification_method).try_run(
             {
                 "job": self.serialized,

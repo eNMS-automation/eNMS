@@ -25,10 +25,11 @@ from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
 add_classes(Job, Service, Workflow, WorkflowEdge)
 
 
-def create_service_classes():
+def create_service_classes() -> None:
     path_services = [Path.cwd() / "eNMS" / "automation" / "services"]
-    if environ.get("CUSTOM_SERVICES_PATH"):
-        path_services.append(Path(environ.get("CUSTOM_SERVICES_PATH")))
+    custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
+    if custom_services_path:
+        path_services.append(Path(custom_services_path))
     dont_create_examples = not int(environ.get("CREATE_EXAMPLES", True))
     for path in path_services:
         for file in path.glob("**/*.py"):
@@ -37,7 +38,7 @@ def create_service_classes():
             if dont_create_examples and "examples" in str(file):
                 continue
             spec = spec_from_file_location(str(file), str(file))
-            spec.loader.exec_module(module_from_spec(spec))
+            spec.loader.exec_module(module_from_spec(spec))  # type: ignore
     for cls_name, cls in service_classes.items():
         cls_to_properties[cls_name] = list(cls_to_properties["Service"])
         for col in cls.__table__.columns:

@@ -60,7 +60,7 @@ device_subtypes: Dict[str, str] = {
     "switch": "Switch",
 }
 
-link_subtypes = {
+link_subtypes: Dict[str, str] = {
     "bgp_peering": "BGP peering",
     "etherchannel": "Etherchannel",
     "ethernet_link": "Ethernet link",
@@ -69,7 +69,7 @@ link_subtypes = {
     "pseudowire": "Pseudowire",
 }
 
-link_subtype_to_color = {
+link_subtype_to_color: Dict[str, str] = {
     "bgp_peering": "#77ebca",
     "etherchannel": "#cf228a",
     "ethernet_link": "#0000ff",
@@ -78,7 +78,7 @@ link_subtype_to_color = {
     "pseudowire": "#902bec",
 }
 
-device_table_properties = (
+device_table_properties: List[str] = (
     object_common_properties[1:]
     + [
         "operating_system",
@@ -91,7 +91,7 @@ device_table_properties = (
     + list(custom_properties)
 )
 
-device_public_properties = device_table_properties + [
+device_public_properties: List[str] = device_table_properties + [
     "longitude",
     "latitude",
     "username",
@@ -101,7 +101,7 @@ device_public_properties = device_table_properties + [
     "last_update",
 ]
 
-device_configuration_properties = [
+device_configuration_properties: List[str] = [
     "name",
     "last_failure",
     "last_runtime",
@@ -109,7 +109,7 @@ device_configuration_properties = [
     "last_status",
 ]
 
-task_properties = base_properties + [
+task_properties: List[str] = base_properties + [
     "job",
     "job_name",
     "start_date",
@@ -118,25 +118,28 @@ task_properties = base_properties + [
     "status",
 ]
 
-task_public_properties = task_properties[1:]
+task_public_properties: List[str] = task_properties[1:]
 
-link_properties = object_common_properties + [
+link_properties: List[str] = object_common_properties + [
     "source",
     "destination",
     "source_name",
     "destination_name",
 ]
 
-link_public_properties = link_properties[1:] + ["source_name", "destination_name"]
-
-link_table_properties = object_common_properties[1:] + [
+link_public_properties: List[str] = link_properties[1:] + [
     "source_name",
     "destination_name",
 ]
 
-pool_public_properties = base_properties + ["never_update"]
+link_table_properties: List[str] = object_common_properties[1:] + [
+    "source_name",
+    "destination_name",
+]
 
-pool_table_properties = pool_public_properties[1:]
+pool_public_properties: List[str] = base_properties + ["never_update"]
+
+pool_table_properties: List[str] = pool_public_properties[1:]
 
 for obj_type, properties in (
     ("device", device_public_properties),
@@ -149,7 +152,7 @@ for obj_type, properties in (
         boolean_properties.append(f"{obj_type}_{prop}_regex")
 
 
-job_public_properties = [
+job_public_properties: List[str] = [
     "name",
     "mail_recipient",
     "max_processes",
@@ -171,13 +174,13 @@ job_public_properties = [
     "send_notification_method",
 ]
 
-service_public_properties = job_public_properties
-workflow_public_properties = job_public_properties + [
+service_public_properties: List[str] = job_public_properties
+workflow_public_properties: List[str] = job_public_properties + [
     "last_modified",
     "use_workflow_targets",
 ]
 
-service_table_properties = [
+service_table_properties: List[str] = [
     "name",
     "type",
     "description",
@@ -187,7 +190,7 @@ service_table_properties = [
     "status",
 ]
 
-workflow_table_properties = [
+workflow_table_properties: List[str] = [
     "name",
     "description",
     "creator_name",
@@ -198,13 +201,13 @@ workflow_table_properties = [
     "status",
 ]
 
-workflow_edge_properties = ["name", "subtype", "source_id", "destination_id"]
+workflow_edge_properties: List[str] = ["name", "subtype", "source_id", "destination_id"]
 
-user_public_properties = ["name", "email"]
+user_public_properties: List[str] = ["name", "email"]
 
-user_serialized_properties = ["name", "email", "permissions"]
+user_serialized_properties: List[str] = ["name", "email", "permissions"]
 
-instance_public_properties = [
+instance_public_properties: List[str] = [
     "name",
     "description",
     "ip_address",

@@ -1,9 +1,10 @@
-from flask import abort, jsonify, request, render_template
+from flask import abort, Blueprint, jsonify, request, render_template
 from flask_login import current_user, login_required
 from functools import wraps
 from logging import info
 from sqlalchemy import exc
 from string import punctuation
+from typing import Callable, List, Optional
 
 from eNMS.main import db
 from eNMS.base.classes import classes
@@ -141,7 +142,12 @@ def templated(function):
     return decorated_function
 
 
-def get(blueprint, url, permission=None, method=["GET"]):
+def get(
+    blueprint: Blueprint,
+    url: str,
+    permission: Optional[str] = None,
+    method: List[str] = ["GET"],
+) -> Callable[[Callable], Callable]:
     def outer(func):
         @blueprint.route(url, methods=method)
         @templated
@@ -160,7 +166,9 @@ def get(blueprint, url, permission=None, method=["GET"]):
     return outer
 
 
-def post(blueprint, url, permission=None):
+def post(
+    blueprint: Blueprint, url: str, permission: Optional[str] = None
+) -> Callable[[Callable], Callable]:
     def outer(func):
         @blueprint.route(url, methods=["POST"])
         @login_required

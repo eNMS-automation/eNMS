@@ -25,7 +25,7 @@ from eNMS.base.properties import instance_public_properties, user_public_propert
 
 
 @get(bp, "/user_management", "View")
-def user_management():
+def user_management() -> dict:
     return dict(
         fields=user_public_properties,
         users=serialize("User"),
@@ -34,7 +34,7 @@ def user_management():
 
 
 @get(bp, "/administration", "View")
-def administration():
+def administration() -> dict:
     return dict(
         form=AdministrationForm(request.form),
         parameters=get_one("Parameters").serialized,
@@ -42,7 +42,7 @@ def administration():
 
 
 @get(bp, "/database", "View")
-def database():
+def database() -> dict:
     return dict(
         logs_form=LogsForm(request.form),
         migrations_form=MigrationsForm(request.form),
@@ -51,7 +51,7 @@ def database():
 
 
 @get(bp, "/instance_management", "View")
-def instance_management():
+def instance_management() -> dict:
     return dict(
         fields=instance_public_properties,
         instances=serialize("Instance"),
@@ -127,7 +127,7 @@ def logout():
 
 
 @post(bp, "/save_parameters", "Admin")
-def save_parameters():
+def save_parameters() -> bool:
     parameters = get_one("Parameters")
     parameters.update(**request.form)
     parameters.trigger_active_parameters(app)
@@ -136,7 +136,7 @@ def save_parameters():
 
 
 @post(bp, "/scan_cluster", "Admin")
-def scan_cluster():
+def scan_cluster() -> bool:
     parameters = get_one("Parameters")
     protocol = parameters.cluster_scan_protocol
     for ip_address in IPv4Network(parameters.cluster_scan_subnet):
@@ -155,7 +155,7 @@ def scan_cluster():
 
 
 @post(bp, "/get_cluster_status", "View")
-def get_cluster_status():
+def get_cluster_status() -> dict:
     instances = fetch_all("Instance")
     return {
         attr: [getattr(instance, attr) for instance in instances]
@@ -164,7 +164,7 @@ def get_cluster_status():
 
 
 @post(bp, "/clear_logs", "Admin")
-def clear_logs():
+def clear_logs() -> bool:
     clear_date = datetime.strptime(request.form["clear_logs_date"], "%d/%m/%Y %H:%M:%S")
     for job in fetch_all("Job"):
         job.logs = {
@@ -177,7 +177,7 @@ def clear_logs():
 
 
 @post(bp, "/reset_status", "Admin")
-def reset_status():
+def reset_status() -> bool:
     for job in fetch_all("Job"):
         job.status = "Idle"
     db.session.commit()

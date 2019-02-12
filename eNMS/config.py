@@ -1,4 +1,5 @@
 from os import environ
+from typing import Dict, Type
 
 
 class Config(object):
@@ -138,4 +139,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
 
-config_dict = {"Production": ProductionConfig, "Debug": DebugConfig}
+config_dict: Dict[str, Type[Config]] = {
+    "Production": ProductionConfig,
+    "Debug": DebugConfig,
+}

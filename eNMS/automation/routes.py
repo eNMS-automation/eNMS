@@ -36,7 +36,7 @@ from eNMS.automation.forms import (
 
 
 @get(bp, "/service_management", "View")
-def service_management():
+def service_management() -> dict:
     return dict(
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,
@@ -47,7 +47,7 @@ def service_management():
 
 
 @get(bp, "/workflow_management", "View")
-def workflow_management():
+def workflow_management() -> dict:
     return dict(
         compare_logs_form=CompareLogsForm(request.form),
         fields=workflow_table_properties,
@@ -57,7 +57,7 @@ def workflow_management():
 
 
 @get(bp, "/workflow_builder", "View")
-def workflow_builder():
+def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
     return dict(
         workflow=workflow.serialized if workflow else None,
@@ -70,19 +70,19 @@ def workflow_builder():
     )
 
 
-@get(bp, "/detach_logs/<id>", "View")
-def detached_logs(id):
+@get(bp, "/detach_logs/<int:id>", "View")
+def detached_logs(id: int) -> dict:
     return {"job": id, "compare_logs_form": CompareLogsForm(request.form)}
 
 
-@get(bp, "/logs/<id>/<runtime>", "View")
-def logs(id, runtime):
+@get(bp, "/logs/<int:id>/<runtime>", "View")
+def logs(id: int, runtime: str) -> str:
     message = fetch("Job", id=id).logs.get(runtime, "Logs have been removed")
     return f"<pre>{dumps(message, indent=4)}</pre>"
 
 
-@post(bp, "/get_logs/<id>", "View")
-def get_logs(id):
+@post(bp, "/get_logs/<int:id>", "View")
+def get_logs(id: int) -> dict:
     return fetch("Job", id=id).logs
 
 

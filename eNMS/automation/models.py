@@ -74,14 +74,14 @@ class Job(Base):
             targets |= set(pool.devices)
         return targets
 
-    def job_sources(self, workflow: "Workflow", subtype: str = "all") -> List[Job]:
+    def job_sources(self, workflow: "Workflow", subtype: str = "all") -> List["Job"]:
         return [
             x.source
             for x in self.sources
             if (subtype == "all" or x.subtype == subtype) and x.workflow == workflow
         ]
 
-    def job_successors(self, workflow: "Workflow", subtype: str = "all") -> List[Job]:
+    def job_successors(self, workflow: "Workflow", subtype: str = "all") -> List["Job"]:
         return [
             x.destination
             for x in self.destinations

@@ -195,7 +195,7 @@ def get_diff(job_id: int, v1: str, v2: str) -> dict:
     return {"first": first, "second": second, "opcodes": opcodes}
 
 
-@post(bp, "/clear_logs/<int: job_id>", "Edit")
+@post(bp, "/clear_logs/<int:job_id>", "Edit")
 def clear_logs(job_id: int) -> bool:
     fetch("Job", id=job_id).logs = {}
     db.session.commit()
@@ -213,8 +213,8 @@ def add_jobs_to_workflow(workflow_id: int) -> List[dict]:
     return [job.serialized for job in jobs]
 
 
-@post(bp, "/duplicate_workflow/<workflow_id>", "Edit")
-def duplicate_workflow(workflow_id):
+@post(bp, "/duplicate_workflow/<int:workflow_id>", "Edit")
+def duplicate_workflow(workflow_id: int) -> dict:
     parent_workflow = fetch("Workflow", id=workflow_id)
     new_workflow = factory("Workflow", **request.form)
     for job in parent_workflow.jobs:
@@ -238,15 +238,15 @@ def duplicate_workflow(workflow_id):
     return new_workflow.serialized
 
 
-@post(bp, "/reset_workflow_logs/<workflow_id>", "Edit")
-def reset_workflow_logs(workflow_id):
+@post(bp, "/reset_workflow_logs/<int:workflow_id>", "Edit")
+def reset_workflow_logs(workflow_id: int) -> bool:
     fetch("Workflow", id=workflow_id).state = {}
     db.session.commit()
     return True
 
 
-@post(bp, "/delete_node/<workflow_id>/<job_id>", "Edit")
-def delete_node(workflow_id, job_id):
+@post(bp, "/delete_node/<int:workflow_id>/<int:job_id>", "Edit")
+def delete_node(workflow_id: int, job_id: int) -> dict:
     workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
     workflow.jobs.remove(job)
     workflow.last_modified = str(datetime.now())
@@ -255,7 +255,8 @@ def delete_node(workflow_id, job_id):
 
 
 @post(bp, "/add_edge/<workflow_id>/<subtype>/<source>/<dest>", "Edit")
-def add_edge(workflow_id, subtype, source, dest):
+def add_edge(workflow_id: int, subtype: str, source, dest):
+    print(source, dest)
     workflow_edge = factory(
         "WorkflowEdge",
         **{

@@ -4,6 +4,7 @@ from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
+from config import Config
 from eNMS.main import (
     db,
     login_manager,
@@ -109,7 +110,7 @@ def configure_logs(app: Flask):
     )
 
 
-def create_app(path, config_class):
+def create_app(path: Path, config_class: Config) -> Flask:
     app = Flask(__name__, static_folder="base/static")
     app.config.from_object(config_class)
     app.production = not app.config["DEBUG"]

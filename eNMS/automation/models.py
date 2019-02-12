@@ -11,7 +11,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from eNMS.main import db
 from eNMS.base.associations import (
@@ -145,15 +145,15 @@ class Job(Base):
                 self.notify(results, now)
         return results, now
 
-    def get_results(self, payload: dict, device: dict = None):
+    def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
         try:
             return self.job(device, payload) if device else self.job(payload)
         except Exception as e:
             return {"success": False, "result": str(e)}
 
     def run(
-        self, payload: dict = None, targets: Set[Device] = None
-    ) -> Tuple[dict, Set[Device]]:
+        self, payload: dict, targets: Set[Device] = None
+    ) -> Tuple[dict, Optional[Set[Device]]]:
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         if targets:
@@ -257,7 +257,7 @@ class Service(Job):
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
-            if not match:
+            if match is None:
                 match = deepcopy(self.dict_match)
             for k, v in result.items():
                 if isinstance(v, dict):

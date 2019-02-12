@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from importlib import import_module
 from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 from eNMS.main import (
     db,
@@ -19,14 +20,14 @@ from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 
 
-def register_extensions(app):
+def register_extensions(app: Flask):
     db.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
     scheduler.app = app
 
 
-def register_blueprints(app):
+def register_blueprints(app: Flask):
     blueprints = (
         "admin",
         "automation",
@@ -38,10 +39,10 @@ def register_blueprints(app):
     )
     for blueprint in blueprints:
         module = import_module(f"eNMS.{blueprint}")
-        app.register_blueprint(module.bp)
+        app.register_blueprint(module.bp)  # type: ignore
 
 
-def configure_login_manager(app):
+def configure_login_manager(app: Flask):
     @login_manager.user_loader
     def user_loader(id):
         return fetch("User", id=id)
@@ -51,7 +52,7 @@ def configure_login_manager(app):
         return fetch("User", name=request.form.get("name"))
 
 
-def configure_vault_client(app):
+def configure_vault_client(app: Flask):
     vault_client.url = app.config["VAULT_ADDR"]
     vault_client.token = app.config["VAULT_TOKEN"]
     if vault_client.sys.is_sealed() and app.config["UNSEAL_VAULT"]:
@@ -59,12 +60,12 @@ def configure_vault_client(app):
         vault_client.sys.submit_unseal_keys(filter(None, keys))
 
 
-def configure_syslog_server(app):
+def configure_syslog_server(app: Flask):
     server = SyslogServer(app.config["SYSLOG_ADDR"], app.config["SYSLOG_PORT"])
     server.start()
 
 
-def configure_database(app):
+def configure_database(app: Flask):
     @app.teardown_request
     def shutdown_session(exception=None):
         db.session.remove()
@@ -78,7 +79,7 @@ def configure_database(app):
             create_examples(app)
 
 
-def configure_errors(app):
+def configure_errors(app: Flask):
     @login_manager.unauthorized_handler
     def unauthorized_handler():
         return render_template("errors/page_403.html"), 403
@@ -92,7 +93,7 @@ def configure_errors(app):
         return render_template("errors/page_404.html"), 404
 
 
-def configure_logs(app):
+def configure_logs(app: Flask):
     basicConfig(
         level=getattr(import_module("logging"), app.config["ENMS_LOG_LEVEL"]),
         format="%(asctime)s %(levelname)-8s %(message)s",
@@ -108,9 +109,9 @@ def configure_logs(app):
     )
 
 
-def create_app(path, config):
+def create_app(path, config_class):
     app = Flask(__name__, static_folder="base/static")
-    app.config.from_object(config)
+    app.config.from_object(config_class)
     app.production = not app.config["DEBUG"]
     app.path = path
     register_extensions(app)

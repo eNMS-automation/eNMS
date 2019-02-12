@@ -221,16 +221,16 @@ def duplicate_workflow(workflow_id: int) -> dict:
         new_workflow.jobs.append(job)
         job.positions[new_workflow.name] = job.positions[parent_workflow.name]
     for edge in parent_workflow.edges:
-        subtype, src, dest = edge.subtype, edge.source, edge.destination
+        subtype, src, destination = edge.subtype, edge.source, edge.destination
         new_workflow.edges.append(
             factory(
                 "WorkflowEdge",
                 **{
-                    "name": f"{new_workflow.id}-{subtype}:{src.id}->{dest.id}",
+                    "name": f"{new_workflow.id}-{subtype}:{src.id}->{destination.id}",
                     "workflow": new_workflow.id,
                     "subtype": subtype,
                     "source": src.id,
-                    "destination": dest.id,
+                    "destination": destination.id,
                 },
             )
         )
@@ -254,17 +254,18 @@ def delete_node(workflow_id: int, job_id: int) -> dict:
     return job.serialized
 
 
-@post(bp, "/add_edge/<workflow_id>/<subtype>/<source>/<dest>", "Edit")
-def add_edge(workflow_id: int, subtype: str, source, dest):
-    print(source, dest)
+@post(
+    bp, "/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:destination>", "Edit"
+)
+def add_edge(workflow_id: int, subtype: str, source: int, destination: int) -> dict:
     workflow_edge = factory(
         "WorkflowEdge",
         **{
-            "name": f"{workflow_id}-{subtype}:{source}->{dest}",
+            "name": f"{workflow_id}-{subtype}:{source}->{destination}",
             "workflow": workflow_id,
             "subtype": subtype,
             "source": source,
-            "destination": dest,
+            "destination": destination,
         },
     )
     fetch("Workflow", id=workflow_id).last_modified = str(datetime.now())
@@ -272,15 +273,15 @@ def add_edge(workflow_id: int, subtype: str, source, dest):
     return workflow_edge.serialized
 
 
-@post(bp, "/delete_edge/<workflow_id>/<edge_id>", "Edit")
-def delete_edge(workflow_id, edge_id):
+@post(bp, "/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
+def delete_edge(workflow_id: int, edge_id: int) -> dict:
     fetch("Workflow", id=workflow_id).last_modified = str(datetime.now())
     db.session.commit()
     return delete("WorkflowEdge", id=edge_id)
 
 
-@post(bp, "/save_positions/<workflow_id>", "Edit")
-def save_positions(workflow_id):
+@post(bp, "/save_positions/<int:workflow_id>", "Edit")
+def save_positions(workflow_id: int) -> bool:
     workflow = fetch("Workflow", id=workflow_id)
     session["workflow"] = workflow.id
     for job_id, position in request.json.items():

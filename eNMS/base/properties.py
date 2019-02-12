@@ -80,20 +80,18 @@ link_subtype_to_color: Dict[str, str] = {
     "pseudowire": "#902bec",
 }
 
-device_table_properties: List[str] = (
-    object_common_properties[1:]
-    + [
-        "operating_system",
-        "os_version",
-        "netmiko_driver",
-        "napalm_driver",
-        "ip_address",
-        "port",
-    ]
-    + list(custom_properties)
-)
+device_properties = [
+    "operating_system",
+    "os_version",
+    "netmiko_driver",
+    "napalm_driver",
+    "ip_address",
+    "port",
+] + list(custom_properties)
 
-device_public_properties: List[str] = device_table_properties + [
+device_table_properties: List[str] = object_common_properties[1:] + device_properties
+
+device_public_properties: List[str] = object_common_properties + device_properties + [
     "longitude",
     "latitude",
     "username",
@@ -129,7 +127,7 @@ link_properties: List[str] = object_common_properties + [
     "destination_name",
 ]
 
-link_public_properties: List[str] = link_properties[1:] + [
+link_public_properties: List[str] = link_properties + [
     "source_name",
     "destination_name",
 ]
@@ -154,15 +152,13 @@ for obj_type, properties in (
         boolean_properties.append(f"{obj_type}_{prop}_regex")
 
 
-job_public_properties: List[str] = [
-    "name",
+job_public_properties: List[str] = base_properties + [
     "mail_recipient",
     "max_processes",
     "multiprocessing",
     "vendor",
     "operating_system",
     "type",
-    "description",
     "creator_name",
     "credentials",
     "status",
@@ -203,7 +199,13 @@ workflow_table_properties: List[str] = [
     "status",
 ]
 
-workflow_edge_properties: List[str] = ["name", "subtype", "source_id", "destination_id"]
+workflow_edge_properties: List[str] = [
+    "id",
+    "name",
+    "subtype",
+    "source_id",
+    "destination_id",
+]
 
 user_public_properties: List[str] = ["id", "name", "email", "permissions"]
 
@@ -220,7 +222,7 @@ instance_table_properties = instance_public_properties[1:]
 
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
-log_public_properties: List[str] = ["source_ip", "content"]
+log_public_properties: List[str] = ["id", "source_ip", "content"]
 
 log_rule_public_properties: List[str] = log_public_properties + [
     "name",

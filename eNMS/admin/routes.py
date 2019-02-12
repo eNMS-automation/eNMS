@@ -187,7 +187,6 @@ def reset_status() -> bool:
 
 
 @post(bp, "/migration_<direction>", "Admin")
-def migration(direction):
-    return {"import": migrate_import, "export": migrate_export}[direction](
-        app, request.form
-    )
+def migration(direction: str) -> Union[bool, str]:
+    args = (app, request.form)
+    return migrate_import(*args) if direction == "import" else migrate_export(*args)

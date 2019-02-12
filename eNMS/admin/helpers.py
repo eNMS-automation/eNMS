@@ -1,4 +1,5 @@
 from copy import deepcopy
+from flask import Flask
 from logging import info
 from os import makedirs
 from os.path import exists
@@ -9,7 +10,7 @@ from eNMS.base.default import create_default
 from eNMS.base.helpers import delete_all, export, factory
 
 
-def configure_instance_id():
+def configure_instance_id() -> None:
     factory(
         "Instance",
         **{
@@ -21,7 +22,7 @@ def configure_instance_id():
     )
 
 
-def migrate_export(app, request):
+def migrate_export(app: Flask, request: dict) -> bool:
     for cls_name in request["import_export_types"]:
         path = app.path / "migrations" / request["name"]
         if not exists(path):
@@ -31,7 +32,7 @@ def migrate_export(app, request):
     return True
 
 
-def migrate_import(app, request):
+def migrate_import(app: Flask, request: dict) -> str:
     status = "Import successful."
     if request.get("empty_database_before_import", False):
         delete_all(*request["import_export_types"])

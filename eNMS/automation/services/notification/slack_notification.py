@@ -18,7 +18,7 @@ class SlackNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}
 
-    def job(self, _):
+    def job(self, _) -> dict:
         parameters = get_one("Parameters")
         slack_client = SlackClient(self.token or parameters.slack_token)
         result = slack_client.api_call(

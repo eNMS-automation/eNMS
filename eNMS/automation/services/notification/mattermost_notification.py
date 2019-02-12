@@ -18,7 +18,7 @@ class MattermostNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
-    def job(self, _):
+    def job(self, _) -> dict:
         parameters = get_one("Parameters")
         result = post(
             parameters.mattermost_url,

@@ -20,7 +20,7 @@ class MailNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 
-    def job(self, _):
+    def job(self, _) -> dict:
         parameters = get_one("Parameters")
         if self.recipients:
             recipients = self.recipients.split(",")

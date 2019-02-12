@@ -3,6 +3,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from eNMS.automation.helpers import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.inventory.models import Device
 
 
 class NetmikoConfigurationService(Service):
@@ -23,7 +24,7 @@ class NetmikoConfigurationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
 
-    def job(self, device, _):
+    def job(self, device: Device, _) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         if self.enable_mode:
             netmiko_handler.enable()

@@ -13,7 +13,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, overload, Set, Tuple
 
 from eNMS.main import db
 from eNMS.base.associations import (
@@ -216,7 +216,7 @@ class Service(Job):
             global_delay_factor=self.global_delay_factor,
         )
 
-    def napalm_connection(self, device: Device) -> object:
+    def napalm_connection(self, device: Device) -> NetworkDriver:
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
@@ -317,13 +317,21 @@ class Workflow(Job):
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship("WorkflowEdge", back_populates="workflow")
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         end = fetch("Service", name="End")
         default = [fetch("Service", name="Start"), end]
         self.jobs.extend(default)
         super().__init__(**kwargs)
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
+
+    @overload
+    def job(self, payload: dict) -> dict:
+        ...
+
+    @overload
+    def job(self, device: Device, payload: dict) -> dict:
+        ...
 
     def job(self, *args):
         device, payload = args if len(args) == 2 else (None, args)

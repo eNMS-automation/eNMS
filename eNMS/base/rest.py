@@ -1,10 +1,11 @@
 from datetime import datetime
-from flask import current_app, jsonify, make_response, request
+from flask import current_app, Flask, jsonify, make_response, request
 from flask_restful import Api, Resource
 from flask.wrappers import Response
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
+from typing import Union
 
 from eNMS.main import auth, scheduler
 from eNMS.admin.helpers import migrate_export, migrate_import
@@ -35,7 +36,7 @@ class Heartbeat(Resource):
 class RestAutomation(Resource):
     decorators = [auth.login_required]
 
-    def post(self) -> dict:
+    def post(self) -> Union[str, dict]:
         payload = request.get_json()
         job = fetch("Job", name=payload["name"])
         handle_asynchronously = payload.get("async", False)
@@ -93,26 +94,25 @@ class UpdateInstance(Resource):
 class Migrate(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction: str) -> dict:
-        return {"import": migrate_import, "export": migrate_export}[direction](
-            current_app, request.get_json()
-        )
+    def post(self, direction: str) -> Union[bool, str]:
+        args = (current_app, request.get_json())
+        return migrate_import(*args) if direction == "import" else migrate_export(*args)
 
 
 class Topology(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction):
+    def post(self, direction: str) -> Union[bool, str]:
         if direction == "import":
             data = request.form.to_dict()
             for property in ("replace", "update_pools"):
                 data[property] = True if data[property] == "True" else False
             return object_import(data, request.files["file"])
-        elif direction == "export":
+        else:
             return object_export(request.get_json(), current_app.path)
 
 
-def configure_rest_api(app):
+def configure_rest_api(app: Flask) -> None:
     api = Api(app)
     api.add_resource(Heartbeat, "/rest/is_alive")
     api.add_resource(RestAutomation, "/rest/run_job")

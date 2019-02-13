@@ -1,9 +1,12 @@
+from flask.testing import FlaskClient
+
 from eNMS.base.helpers import fetch, fetch_all
+
 from tests.test_base import check_blueprints
 
 
 @check_blueprints("", "/admin")
-def test_user_management(user_client):
+def test_user_management(user_client: FlaskClient) -> None:
     for user in ("user1", "user2", "user3"):
         dict_user = {
             "list_fields": "permissions",

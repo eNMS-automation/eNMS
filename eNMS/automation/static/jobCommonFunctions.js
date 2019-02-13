@@ -21,6 +21,7 @@ $('#logs-modal').on('hidden.bs.modal', function() {
 function openWizard(type) { // eslint-disable-line no-unused-vars
   $(`#${type}-wizard`).smartWizard({
     enableAllSteps: true,
+    keyNavigation: false,
   });
   $('.buttonNext').addClass('btn btn-success');
   $('.buttonPrevious').addClass('btn btn-primary');

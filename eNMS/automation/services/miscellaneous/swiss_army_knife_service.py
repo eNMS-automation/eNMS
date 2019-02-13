@@ -29,12 +29,10 @@ class SwissArmyKnifeService(Service):
     def job(self, *args):
         return getattr(self, self.name)(*args)
 
-    def Start(self, _) -> dict:  # noqa: N802
-        # Start of a workflow
+    def Start(self, payload: dict) -> dict:  # noqa: N802
         return {"success": True}
 
-    def End(self, _) -> dict:  # noqa: N802
-        # End of a workflow
+    def End(self, payload: dict) -> dict:  # noqa: N802
         return {"success": True}
 
     def mail_feedback_notification(self, payload: dict) -> dict:
@@ -83,7 +81,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True}
 
-    def cluster_monitoring(self, _) -> dict:
+    def cluster_monitoring(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
         protocol = parameters.cluster_scan_protocol
         for instance in fetch_all("Instance"):
@@ -96,13 +94,13 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def poller_service(self, _) -> dict:
+    def poller_service(self, payload: dict) -> dict:
         for service in fetch_all("Service"):
             if getattr(service, "configuration_backup_service", False):
                 service.try_run()
         return {"success": True}
 
-    def git_push_configurations(self, _) -> dict:
+    def git_push_configurations(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
         if parameters.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")
@@ -114,7 +112,7 @@ class SwissArmyKnifeService(Service):
             repo.remotes.origin.push()
         return {"success": True}
 
-    def process_payload1(self, device: Device, payload: dict) -> dict:
+    def process_payload1(self, payload: dict, device: Device) -> dict:
         get_facts = payload["get_facts"]
         # we use the name of the device to get the result for that particular
         # device.

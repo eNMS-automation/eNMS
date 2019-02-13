@@ -35,7 +35,7 @@ class AnsiblePlaybookService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         arguments = self.sub(self.arguments, locals()).split()
         command, extra_args = ["ansible-playbook"], {}
         if self.pass_device_properties:

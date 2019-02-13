@@ -57,17 +57,7 @@ class RestCallService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "RestCallService"}
 
-    @overload
-    def job(self, payload: dict) -> dict:
-        ...
-
-    @overload  # noqa: F811
-    def job(self, device: Device, payload: dict) -> dict:
-        ...
-
-    def job(self, *args):  # noqa: F811
-        if len(args) == 2:
-            device, payload = args
+    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         rest_url = self.sub(self.url, locals())
         kwargs = {p: getattr(self, p) for p in ("headers", "params", "timeout")}
         if self.call_type in ("GET", "DELETE"):

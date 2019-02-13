@@ -23,7 +23,7 @@ class PingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PingService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         if self.protocol == "ICMP":
             command = ["ping"]
             for x, property in (

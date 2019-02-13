@@ -13,7 +13,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from typing import Any, List, Optional, overload, Set, Tuple
+from typing import Any, List, Optional, Set, Tuple
 
 from eNMS.main import db
 from eNMS.base.associations import (
@@ -154,7 +154,7 @@ class Job(Base):
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
         try:
-            return self.job(payload, device)
+            return self.job(payload, device) if device else self.job(payload)
         except Exception as e:
             return {"success": False, "result": str(e)}
 
@@ -330,23 +330,15 @@ class Workflow(Job):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    @overload
-    def job(self, payload: dict) -> dict:
-        ...
-
-    @overload  # noqa: F811
-    def job(self, device: Device, payload: dict) -> dict:
-        ...
-
-    def job(self, *args):  # type: ignore
-        device, payload = args if len(args) == 2 else (None, args)
+    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         if not self.multiprocessing:
             self.state = {"jobs": {}}
             if device:
                 self.state["current_device"] = device.name
             db.session.commit()
-        jobs, visited = [self.jobs[0]], set()
-        results = {"success": False}
+        jobs: List[Job] = [self.jobs[0]]
+        visited: Set = set()
+        results: dict = {"success": False}
         while jobs:
             job = jobs.pop()
             if any(

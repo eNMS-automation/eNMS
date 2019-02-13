@@ -27,7 +27,7 @@ class NapalmConfigurationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmConfigurationService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, device: Device, _: dict) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         config = "\n".join(self.sub(self.content, locals()).splitlines())

@@ -26,7 +26,7 @@ class NapalmPingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmPingService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, device: Device, _: dict) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         ping = napalm_driver.ping(

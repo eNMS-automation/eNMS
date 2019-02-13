@@ -30,7 +30,7 @@ class NetmikoFileTransferService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoFileTransferService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, device: Device, _: dict) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         transfer_dict = file_transfer(
             netmiko_handler,

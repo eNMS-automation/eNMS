@@ -27,7 +27,7 @@ class NetmikoValidationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, device: Device, _: dict) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
         result = netmiko_handler.send_command(command)

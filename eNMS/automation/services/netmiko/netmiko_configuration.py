@@ -24,7 +24,7 @@ class NetmikoConfigurationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
 
-    def job(self, device: Device, _: dict) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         if self.enable_mode:
             netmiko_handler.enable()

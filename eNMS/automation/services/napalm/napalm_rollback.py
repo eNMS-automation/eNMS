@@ -20,7 +20,7 @@ class NapalmRollbackService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmRollbackService"}
 
-    def job(self, device: Device, _: dict) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         napalm_driver.rollback()

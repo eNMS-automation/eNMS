@@ -141,17 +141,17 @@ def save_pool_objects(device_id: int) -> dict:
 
 
 @post(bp, "/pool_objects/<int:pool_id>", "View")
-def filter_pool_objects(pool_id: int) -> dict[str, List[dict]]:
+def filter_pool_objects(pool_id: int) -> Dict[str, List[dict]]:
     return fetch("Pool", id=pool_id).filter_objects()
 
 
-@post(bp, "/update_pool/<pool>", "Edit")
-def update_pools(pool: str) -> bool:
-    if pool == "all":
+@post(bp, "/update_pool/<pool_id>", "Edit")
+def update_pools(pool_id: str) -> bool:
+    if pool_id == "all":
         for pool in fetch_all("Pool"):
             pool.compute_pool()
     else:
-        fetch("Pool", id=int(pool)).compute_pool()
+        fetch("Pool", id=int(pool_id)).compute_pool()
     db.session.commit()
     return True
 
@@ -253,9 +253,9 @@ def get_configurations(device_id: int) -> dict:
 @post(bp, "/get_diff/<int:device_id>/<v1>/<v2>", "View")
 def get_diff(device_id: int, v1: str, v2: str) -> dict:
     device = fetch("Device", id=device_id)
-    v1, v2 = [datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%f") for d in (v1, v2)]
-    first = device.configurations[v1].splitlines()
-    second = device.configurations[v2].splitlines()
+    d1, d2 = [datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%f") for d in (v1, v2)]
+    first = device.configurations[d1].splitlines()
+    second = device.configurations[d2].splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
     return {"first": first, "second": second, "opcodes": opcodes}
 

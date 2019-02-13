@@ -1,4 +1,7 @@
 from logging import info
+from pathlib import PosixPath
+from typing import Set
+from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -6,10 +9,11 @@ from xlwt import Workbook
 
 from eNMS.main import db
 from eNMS.base.helpers import delete_all, factory, fetch_all, serialize
+from eNMS.base.inventory import Pool
 from eNMS.base.properties import export_properties
 
 
-def database_filtering(pool):
+def database_filtering(pool: Pool) -> None:
     pool_objects = {"Device": pool.devices, "Link": pool.links}
     for obj_type in ("Device", "Link"):
         for obj in fetch_all(obj_type):
@@ -17,13 +21,14 @@ def database_filtering(pool):
     db.session.commit()
 
 
-def allowed_file(name, allowed_extensions):
+def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
     allowed_syntax = "." in name
     allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_extensions
     return allowed_syntax and allowed_extension
 
 
-def object_import(request, file):
+def object_import(request: dict, file: FileStorage) -> str:
+    print(type(request), type(file))
     if request["replace"]:
         delete_all("Device")
     result = "Topology successfully imported."
@@ -50,7 +55,7 @@ def object_import(request, file):
     return result
 
 
-def object_export(request, path_app):
+def object_export(request: dict, path_app: PosixPath) -> bool:
     workbook = Workbook()
     for obj_type in ("Device", "Link"):
         sheet = workbook.add_sheet(obj_type)

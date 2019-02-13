@@ -20,13 +20,13 @@ from eNMS.base.properties import (
 )
 
 
-def configure_device_form(cls):
+def configure_device_form(cls: FlaskForm) -> FlaskForm:
     for property in custom_properties:
         setattr(cls, property, StringField())
     return cls
 
 
-def configure_pool_form(cls):
+def configure_pool_form(cls: FlaskForm) -> FlaskForm:
     cls.device_properties = device_public_properties
     cls.link_properties = link_public_properties
     boolean_fields = ["never_update"]

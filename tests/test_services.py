@@ -1,3 +1,4 @@
+from flask.testing import FlaskClient
 from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -40,7 +41,7 @@ file_transfer_service = ImmutableMultiDict(
 
 
 @check_blueprints("/automation")
-def test_base_services(user_client):
+def test_base_services(user_client: FlaskClient) -> None:
     user_client.post("/update/NetmikoConfigurationService", data=netmiko_ping)
     assert len(fetch_all("NetmikoConfigurationService")) == 3
     assert len(fetch_all("Service")) == 25
@@ -63,7 +64,7 @@ getters_dict = ImmutableMultiDict(
 
 
 @check_blueprints("/automation")
-def test_getters_service(user_client):
+def test_getters_service(user_client: FlaskClient) -> None:
     user_client.post("/update/NapalmGettersService", data=getters_dict)
     assert len(fetch_all("NapalmGettersService")) == 5
 
@@ -84,7 +85,7 @@ ansible_service = ImmutableMultiDict(
 
 
 @check_blueprints("/automation")
-def test_ansible_services(user_client):
+def test_ansible_services(user_client: FlaskClient) -> None:
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == 1
     assert len(fetch_all("Service")) == 25

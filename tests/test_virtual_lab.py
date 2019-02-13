@@ -1,3 +1,4 @@
+from flask.testing import FlaskClient
 from requests import get, post, put
 from requests.auth import HTTPBasicAuth
 
@@ -7,7 +8,7 @@ from tests.test_base import check_blueprints
 
 
 @check_blueprints("/inventory")
-def test_rest_api_basic(user_client):
+def test_rest_api_basic(user_client: FlaskClient) -> None:
     assert len(fetch_all("Device")) == 28
     post(
         "http://192.168.105.2:5000/rest/instance/device",
@@ -62,7 +63,7 @@ def test_rest_api_basic(user_client):
 
 
 @check_blueprints("/automation")
-def test_payload_transfer_workflow(user_client):
+def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
     result = post(
         "http://192.168.105.2:5000/rest/run_job",
         json={"name": "payload_transfer_workflow"},
@@ -94,7 +95,7 @@ def test_payload_transfer_workflow(user_client):
 
 
 @check_blueprints("/automation")
-def test_netmiko_workflow(user_client):
+def test_netmiko_workflow(user_client: FlaskClient) -> None:
     result = post(
         "http://192.168.105.2:5000/rest/run_job",
         json={"name": "Netmiko_VRF_workflow"},
@@ -126,7 +127,7 @@ def test_netmiko_workflow(user_client):
 
 
 @check_blueprints("/automation")
-def test_napalm_workflow(user_client):
+def test_napalm_workflow(user_client: FlaskClient) -> None:
     result = post(
         "http://192.168.105.2:5000/rest/run_job",
         json={"name": "Napalm_VRF_workflow"},

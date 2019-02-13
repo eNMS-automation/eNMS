@@ -1,3 +1,4 @@
+from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.base.helpers import fetch_all
@@ -22,7 +23,7 @@ scheduled_task = ImmutableMultiDict(
 
 
 @check_blueprints("/scheduling")
-def test_netmiko_napalm_config(user_client):
+def test_netmiko_napalm_config(user_client: FlaskClient) -> None:
     create_from_file(user_client, "europe.xls")
     user_client.post("/update/task", data=instant_task)
     assert len(fetch_all("Task")) == 3

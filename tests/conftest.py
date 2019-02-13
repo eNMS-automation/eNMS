@@ -25,7 +25,6 @@ def user_client() -> Iterator[FlaskClient]:
     db.session.close()
     db.drop_all()
     client = app.test_client()
-    print(type(client))
     login = {
         "name": "admin",
         "password": "admin",

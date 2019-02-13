@@ -29,10 +29,10 @@ class SwissArmyKnifeService(Service):
     def job(self, *args):
         return getattr(self, self.name)(*args)
 
-    def Start(self, payload: dict) -> dict:  # noqa: N802
+    def Start(self, _: dict, device: Optional[Device] = None) -> dict:  # noqa: N802
         return {"success": True}
 
-    def End(self, payload: dict) -> dict:  # noqa: N802
+    def End(self, _: dict, device: Optional[Device] = None) -> dict:  # noqa: N802
         return {"success": True}
 
     def mail_feedback_notification(self, payload: dict) -> dict:

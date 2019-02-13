@@ -142,8 +142,8 @@ pool_public_properties: List[str] = base_properties + ["never_update"]
 pool_table_properties: List[str] = pool_public_properties[1:]
 
 for obj_type, properties in (
-    ("device", device_public_properties),
-    ("link", link_public_properties),
+    ("device", device_public_properties[1:]),
+    ("link", link_public_properties[1:]),
 ):
     for prop in properties:
         pool_public_properties.extend(

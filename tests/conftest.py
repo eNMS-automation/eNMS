@@ -1,8 +1,8 @@
 from pathlib import Path
 from pytest import fixture
 
-from config import config_dict
 from eNMS import create_app, db
+from eNMS.config import config_dict
 
 
 @fixture

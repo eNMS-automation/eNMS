@@ -18,7 +18,8 @@ log2 = (
 @check_blueprints("", "/logs")
 def test_create_logs(user_client):
     for log in (log1, log2):
-        log_object = Log("192.168.1.88", log, [])
+        kwargs = {"ip_address": "192.168.1.88", "content": log, "log_rules": []}
+        log_object = Log(**kwargs)
         db.session.add(log_object)
         db.session.commit()
     assert len(fetch_all("Log")) == 2

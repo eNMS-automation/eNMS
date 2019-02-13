@@ -9,11 +9,10 @@ from xlwt import Workbook
 
 from eNMS.main import db
 from eNMS.base.helpers import delete_all, factory, fetch_all, serialize
-from eNMS.base.inventory import Pool
 from eNMS.base.properties import export_properties
 
 
-def database_filtering(pool: Pool) -> None:
+def database_filtering(pool: db.Model) -> None:
     pool_objects = {"Device": pool.devices, "Link": pool.links}
     for obj_type in ("Device", "Link"):
         for obj in fetch_all(obj_type):
@@ -28,7 +27,6 @@ def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
 
 
 def object_import(request: dict, file: FileStorage) -> str:
-    print(type(request), type(file))
     if request["replace"]:
         delete_all("Device")
     result = "Topology successfully imported."

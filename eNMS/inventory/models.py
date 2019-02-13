@@ -12,7 +12,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
-from typing import Any
+from typing import Any, Dict, List, Union
 
 from eNMS.base.associations import (
     pool_device_table,
@@ -46,7 +46,7 @@ class Object(Base):
     vendor = Column(String)
 
 
-CustomDevice = (
+CustomDevice: Any = (
     type(
         "CustomDevice",
         (Object,),
@@ -62,7 +62,7 @@ CustomDevice = (
     )
     if custom_properties
     else Object
-)  # type: Any
+)
 
 
 class Device(CustomDevice):
@@ -114,10 +114,10 @@ class Link(Object):
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=pool_link_table, back_populates="links")
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.update(**kwargs)
 
-    def update(self, **kwargs):
+    def update(self, **kwargs: Any) -> None:
         if "source_name" in kwargs:
             kwargs["source"] = fetch("Device", name=kwargs.pop("source_name")).id
             kwargs["destination"] = fetch(
@@ -129,7 +129,7 @@ class Link(Object):
         super().update(**kwargs)
 
 
-AbstractPool = type(
+AbstractPool: Any = type(
     "AbstractPool",
     (Base,),
     {
@@ -150,7 +150,7 @@ AbstractPool = type(
             **{f"link_{p}_regex": Column(Boolean) for p in link_public_properties},
         },
     },
-)  # type: Any
+)
 
 
 class Pool(AbstractPool):
@@ -166,11 +166,11 @@ class Pool(AbstractPool):
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
     never_update = Column(Boolean, default=False)
 
-    def update(self, **kwargs):
+    def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
         self.compute_pool()
 
-    def compute_pool(self):
+    def compute_pool(self) -> None:
         if self.never_update:
             return
         self.devices = list(filter(self.object_match, Device.query.all()))
@@ -184,7 +184,7 @@ class Pool(AbstractPool):
         if get_one("Parameters").pool_filter == self:
             database_filtering(self)
 
-    def object_match(self, obj):
+    def object_match(self, obj: Union[Device, Link]) -> bool:
         return all(
             str(value) == getattr(self, f"{obj.class_type}_{prop}")
             if not getattr(self, f"{obj.class_type}_{prop}_regex")
@@ -194,7 +194,7 @@ class Pool(AbstractPool):
             and getattr(self, f"{obj.class_type}_{prop}")
         )
 
-    def filter_objects(self):
+    def filter_objects(self) -> Dict[str, List[dict]]:
         return {
             "devices": [device.serialized for device in self.devices],
             "links": [link.serialized for link in self.links],

@@ -1,5 +1,6 @@
 from flask import current_app as app, request
 from simplekml import Kml
+from typing import Union
 
 from eNMS.base.helpers import fetch, fetch_all, get, get_one, post, serialize
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
@@ -9,7 +10,7 @@ from eNMS.views.forms import GoogleEarthForm
 
 
 @get(bp, "/<view_type>_view", "View", ["GET", "POST"])
-def view(view_type):
+def view(view_type: str) -> dict:
     devices, parameters = fetch_all("Device"), get_one("Parameters").serialized
     return dict(
         template=f"{view_type}_view.html",
@@ -29,7 +30,7 @@ def view(view_type):
 
 
 @get(bp, "/export_to_google_earth", "View")
-def export_to_google_earth():
+def export_to_google_earth() -> bool:
     kml_file = Kml()
     for device in fetch_all("Device"):
         point = kml_file.newpoint(name=device.name)
@@ -49,8 +50,8 @@ def export_to_google_earth():
     return True
 
 
-@post(bp, "/get_logs/<device_id>", "View")
-def get_logs(device_id):
+@post(bp, "/get_logs/<int:device_id>", "View")
+def get_logs(device_id: int) -> Union[str, bool]:
     device_logs = [
         log.content
         for log in fetch_all("Log")

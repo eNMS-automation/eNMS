@@ -58,7 +58,7 @@ class SyslogUDPHandler(BaseRequestHandler):
                     for job in log_rule.jobs:
                         job.try_run()
             if log_rules:
-                log = Log(source, data, log_rules)
+                log = Log(**{"source": source, "date": data, "log_rules": log_rules})
                 db.session.add(log)
                 db.session.commit()
 

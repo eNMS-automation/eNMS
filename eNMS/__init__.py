@@ -3,7 +3,7 @@ from importlib import import_module
 from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-from typing import Type
+from typing import Tuple, Type
 
 from eNMS.config import Config
 from eNMS.main import (
@@ -22,14 +22,14 @@ from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 
 
-def register_extensions(app: Flask):
+def register_extensions(app: Flask) -> None:
     db.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
     scheduler.app = app
 
 
-def register_blueprints(app: Flask):
+def register_blueprints(app: Flask) -> None:
     blueprints = (
         "admin",
         "automation",
@@ -44,7 +44,7 @@ def register_blueprints(app: Flask):
         app.register_blueprint(module.bp)  # type: ignore
 
 
-def configure_login_manager(app: Flask):
+def configure_login_manager(app: Flask) -> None:
     @login_manager.user_loader
     def user_loader(id):
         return fetch("User", id=id)
@@ -54,7 +54,7 @@ def configure_login_manager(app: Flask):
         return fetch("User", name=request.form.get("name"))
 
 
-def configure_vault_client(app: Flask):
+def configure_vault_client(app: Flask) -> None:
     vault_client.url = app.config["VAULT_ADDR"]
     vault_client.token = app.config["VAULT_TOKEN"]
     if vault_client.sys.is_sealed() and app.config["UNSEAL_VAULT"]:
@@ -62,18 +62,18 @@ def configure_vault_client(app: Flask):
         vault_client.sys.submit_unseal_keys(filter(None, keys))
 
 
-def configure_syslog_server(app: Flask):
+def configure_syslog_server(app: Flask) -> None:
     server = SyslogServer(app.config["SYSLOG_ADDR"], app.config["SYSLOG_PORT"])
     server.start()
 
 
-def configure_database(app: Flask):
+def configure_database(app: Flask) -> None:
     @app.teardown_request
-    def shutdown_session(exception=None):
+    def shutdown_session(exception=None) -> None:
         db.session.remove()
 
     @app.before_first_request
-    def initialize_database():
+    def initialize_database() -> None:
         db.create_all()
         configure_instance_id()
         create_default(app)
@@ -81,21 +81,21 @@ def configure_database(app: Flask):
             create_examples(app)
 
 
-def configure_errors(app: Flask):
+def configure_errors(app: Flask) -> None:
     @login_manager.unauthorized_handler
-    def unauthorized_handler():
+    def unauthorized_handler() -> Tuple[str, int]:
         return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(403)
-    def authorization_required(error):
+    def authorization_required(error) -> Tuple[str, int]:
         return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(404)
-    def not_found_error(error):
+    def not_found_error(error) -> Tuple[str, int]:
         return render_template("errors/page_404.html"), 404
 
 
-def configure_logs(app: Flask):
+def configure_logs(app: Flask) -> None:
     basicConfig(
         level=getattr(import_module("logging"), app.config["ENMS_LOG_LEVEL"]),
         format="%(asctime)s %(levelname)-8s %(message)s",

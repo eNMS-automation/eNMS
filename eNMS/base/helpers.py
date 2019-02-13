@@ -36,10 +36,9 @@ def delete(model: str, **kwargs: Any) -> dict:
     instance = db.session.query(classes[model]).filter_by(**kwargs).first()
     if hasattr(instance, "type") and instance.type == "Task":
         instance.delete_task()
-    result = instance.serialized
     db.session.delete(instance)
     db.session.commit()
-    return result
+    return instance.serialized
 
 
 def delete_all(*models: str) -> None:
@@ -191,7 +190,7 @@ def post(
     return outer
 
 
-def str_dict(input: str, depth: int = 0) -> str:
+def str_dict(input: Any, depth: int = 0) -> str:
     tab = "\t" * depth
     if isinstance(input, list):
         result = "\n"

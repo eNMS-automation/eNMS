@@ -123,7 +123,7 @@ class Job(Base):
 
     def try_run(
         self,
-        payload: dict = None,
+        payload: Optional[dict] = None,
         targets: Optional[Set[Device]] = None,
         from_workflow: bool = False,
     ) -> Tuple[dict, str]:
@@ -260,7 +260,7 @@ class Service(Job):
         )
         return success if not self.negative_logic else not success
 
-    def match_dictionnary(self, result: dict, match: dict = None) -> bool:
+    def match_dictionnary(self, result: dict, match: Optional[dict] = None) -> bool:
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:

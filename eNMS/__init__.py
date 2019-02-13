@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask.wrappers import Request
 from importlib import import_module
 from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
@@ -16,6 +17,7 @@ from eNMS.main import (
     vault_client,
 )
 from eNMS.admin.helpers import configure_instance_id
+from eNMS.admin.models import User
 from eNMS.base.default import create_default, create_examples
 from eNMS.base.helpers import fetch
 from eNMS.base.rest import configure_rest_api
@@ -46,11 +48,11 @@ def register_blueprints(app: Flask) -> None:
 
 def configure_login_manager(app: Flask) -> None:
     @login_manager.user_loader
-    def user_loader(id):
+    def user_loader(id: int) -> User:
         return fetch("User", id=id)
 
     @login_manager.request_loader
-    def request_loader(request):
+    def request_loader(request: Request) -> User:
         return fetch("User", name=request.form.get("name"))
 
 

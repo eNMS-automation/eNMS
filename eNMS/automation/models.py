@@ -241,7 +241,7 @@ class Service(Job):
     def sub(self, data: str, variables: dict) -> str:
         r = compile("{{(.*?)}}")
 
-        def replace_with_locals(match):
+        def replace_with_locals(match: Any) -> str:
             return str(eval(match.group()[2:-2], variables))
 
         return r.sub(replace_with_locals, data)

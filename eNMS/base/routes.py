@@ -72,6 +72,7 @@ def server_side_processing(cls: str, table: str) -> Response:
 
 @get(bp, "/dashboard")
 def dashboard() -> dict:
+    print(type(request))
     on_going = {
         "Running services": len(
             [service for service in fetch_all("Service") if service.status == "Running"]

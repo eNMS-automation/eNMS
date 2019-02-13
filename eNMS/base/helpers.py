@@ -1,4 +1,5 @@
 from flask import abort, Blueprint, jsonify, request, render_template
+from flask.wrappers import Response
 from flask_login import current_user, login_required
 from functools import wraps
 from logging import info
@@ -82,7 +83,7 @@ def factory(cls_name: str, **kwargs: Any) -> db.Model:
 
 
 def integrity_rollback(function: Callable) -> Callable:
-    def wrapper(*a, **kw):
+    def wrapper(*a: Any, **kw: Any) -> None:
         try:
             function(*a, **kw)
         except (exc.IntegrityError, exc.InvalidRequestError):
@@ -92,7 +93,7 @@ def integrity_rollback(function: Callable) -> Callable:
 
 
 def process_request(function: Callable) -> Callable:
-    def wrapper(*a, **kw):
+    def wrapper(*a: Any, **kw: Any) -> Response:
         data = {**request.form.to_dict(), **{"creator": current_user.id}}
         for property in data.get("list_fields", "").split(","):
             if property in request.form:
@@ -101,16 +102,16 @@ def process_request(function: Callable) -> Callable:
                 data[property] = []
         for property in data.get("boolean_fields", "").split(","):
             data[property] = property in request.form
-        request.form = data
+        request.form = data  # type: ignore
         return function(*a, **kw)
 
     return wrapper
 
 
-def permission_required(permission: str, redirect: bool = True) -> Callable:
-    def decorator(f):
+def permission_required(permission: Optional[str], redirect: bool = True) -> Callable:
+    def decorator(f: Callable) -> Callable:
         @wraps(f)
-        def decorated_function(*args, **kwargs):
+        def decorated_function(*args: Any, **kwargs: Any) -> Response:
             if permission and not current_user.allowed(permission):
                 if redirect:
                     abort(403)
@@ -125,7 +126,7 @@ def permission_required(permission: str, redirect: bool = True) -> Callable:
 
 def templated(function: Callable) -> Callable:
     @wraps(function)
-    def decorated_function(*args, **kwargs):
+    def decorated_function(*args: Any, **kwargs: Any) -> Any:
         ctx = function(*args, **kwargs) or {}
         if not isinstance(ctx, dict):
             return ctx
@@ -135,7 +136,8 @@ def templated(function: Callable) -> Callable:
                 "property_types": {k: str(v) for k, v in property_types.items()},
             }
         )
-        endpoint = request.endpoint.split(".")[-1]
+        if request.endpoint is not None:
+            endpoint = request.endpoint.split(".")[-1]
         return render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)
 
     return decorated_function
@@ -147,13 +149,13 @@ def get(
     permission: Optional[str] = None,
     method: List[str] = ["GET"],
 ) -> Callable[[Callable], Callable]:
-    def outer(func):
+    def outer(func: Callable) -> Callable:
         @blueprint.route(url, methods=method)
         @templated
         @login_required
         @permission_required(permission)
         @wraps(func)
-        def inner(*args, **kwargs):
+        def inner(*args: Any, **kwargs: Any) -> Response:
             info(
                 f"User '{current_user.name}' ({request.remote_addr})"
                 f"calling the endpoint {url} (GET)"
@@ -168,13 +170,13 @@ def get(
 def post(
     blueprint: Blueprint, url: str, permission: Optional[str] = None
 ) -> Callable[[Callable], Callable]:
-    def outer(func):
+    def outer(func: Callable) -> Callable:
         @blueprint.route(url, methods=["POST"])
         @login_required
         @permission_required(permission, redirect=False)
         @wraps(func)
         @process_request
-        def inner(*args, **kwargs):
+        def inner(*args: Any, **kwargs: Any) -> Response:
             info(
                 f"User '{current_user.name}' ({request.remote_addr})"
                 f" calling the endpoint {request.url} (POST)"

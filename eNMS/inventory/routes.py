@@ -1,6 +1,7 @@
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import current_app as app, jsonify, request, send_file
+from flask.wrappers import Response
 from flask_login import current_user
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -32,7 +33,7 @@ from eNMS.base.properties import (
 
 
 @get(bp, "/device_management", "View")
-def device_management():
+def device_management() -> dict:
     return dict(
         fields=device_table_properties,
         add_device_form=AddDevice(request.form),
@@ -42,7 +43,7 @@ def device_management():
 
 
 @get(bp, "/configuration_management", "View")
-def configuration_management():
+def configuration_management() -> dict:
     return dict(
         fields=device_configuration_properties,
         compare_configurations_form=CompareConfigurationsForm(request.form),
@@ -50,12 +51,12 @@ def configuration_management():
 
 
 @get(bp, "/link_management", "View")
-def link_management():
+def link_management() -> dict:
     return dict(fields=link_table_properties, add_link_form=AddLink(request.form))
 
 
 @get(bp, "/pool_management", "View")
-def pool_management():
+def pool_management() -> dict:
     return dict(
         form=AddPoolForm(request.form),
         pool_object_form=PoolObjectsForm(request.form),
@@ -64,7 +65,7 @@ def pool_management():
 
 
 @get(bp, "/import_export", "View")
-def import_export():
+def import_export() -> dict:
     return dict(
         import_export_form=ImportExportForm(request.form),
         librenms_form=LibreNmsForm(request.form),
@@ -75,7 +76,7 @@ def import_export():
 
 
 @get(bp, "/download_configuration/<name>", "View")
-def download_configuration(name):
+def download_configuration(name: str) -> Response:
     try:
         return send_file(
             filename_or_fp=str(app.path / "git" / "configurations" / name),
@@ -86,9 +87,9 @@ def download_configuration(name):
         return jsonify("No configuration stored")
 
 
-@post(bp, "/connection/<id>", "Connect to device")
-def connection(id):
-    parameters, device = get_one("Parameters"), fetch("Device", id=id)
+@post(bp, "/connection/<int:device_id>", "Connect to device")
+def connection(device_id: int) -> dict:
+    parameters, device = get_one("Parameters"), fetch("Device", id=device_id)
     cmd = [str(app.path / "applications" / "gotty"), "-w"]
     port, protocol = parameters.get_gotty_port(), request.form["protocol"]
     address = getattr(device, request.form["address"])
@@ -122,9 +123,9 @@ def connection(id):
     }
 
 
-@post(bp, "/save_device_jobs/<id>", "Edit")
-def save_device_jobs(id):
-    fetch("Device", id=id).jobs = objectify("Job", request.form["jobs"])
+@post(bp, "/save_device_jobs/<device_id>", "Edit")
+def save_device_jobs(device_id: int) -> bool:
+    fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
     db.session.commit()
     return True
 

@@ -19,7 +19,7 @@ class Log(Base):
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.content
 
 
@@ -37,7 +37,7 @@ class LogRule(Base):
 
 
 class SyslogUDPHandler(BaseRequestHandler):
-    def handle(self):
+    def handle(self) -> None:
         with scheduler.app.app_context():
             data = str(bytes.decode(self.request[0].strip()))
             source, _ = self.client_address
@@ -70,15 +70,15 @@ class SyslogServer(Base):
     ip_address = Column(String)
     port = Column(Integer)
 
-    def __init__(self, ip_address, port):
+    def __init__(self, ip_address: str, port: int) -> None:
         self.ip_address = ip_address
         self.port = port
         self.start()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.ip_address
 
-    def start(self):
+    def start(self) -> None:
         UDPServer.allow_reuse_address = True
         self.server = UDPServer((self.ip_address, self.port), SyslogUDPHandler)
         th = Thread(target=self.server.serve_forever)

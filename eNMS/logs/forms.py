@@ -4,7 +4,7 @@ from wtforms import BooleanField, HiddenField, StringField
 from eNMS.base.models import MultipleObjectField
 
 
-def configure_form(cls):
+def configure_form(cls: FlaskForm) -> FlaskForm:
     cls.properties = ("source_ip", "content")
     for property in ("source_ip", "content"):
         setattr(cls, property, StringField(property))

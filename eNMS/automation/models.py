@@ -154,9 +154,14 @@ class Job(Base):
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
         try:
-            return self.job(device, payload) if device else self.job(payload)
+            return self.job(payload, device)
         except Exception as e:
             return {"success": False, "result": str(e)}
+
+    def device_run(self, args: Tuple[Device, dict, dict]) -> None:
+        device, results, payload = args
+        device_result = self.get_results(payload, device)
+        results["result"]["devices"][device.name] = device_result
 
     def run(
         self, payload: dict, targets: Optional[Set[Device]] = None
@@ -186,11 +191,6 @@ class Job(Base):
             return results, remaining_targets
         else:
             return self.get_results(payload), None
-
-    def device_run(self, args: Tuple[Device, dict, dict]) -> None:
-        device, results, payload = args
-        device_result = self.get_results(payload, device)
-        results["result"]["devices"][device.name] = device_result
 
 
 class Service(Job):
@@ -338,7 +338,7 @@ class Workflow(Job):
     def job(self, device: Device, payload: dict) -> dict:
         ...
 
-    def job(self, *args):  # noqa: F811
+    def job(self, *args):  # type: ignore
         device, payload = args if len(args) == 2 else (None, args)
         if not self.multiprocessing:
             self.state = {"jobs": {}}

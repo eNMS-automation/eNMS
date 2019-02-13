@@ -1,10 +1,10 @@
 from flask import Flask, render_template
-from flask.wrappers import Request
+from flask.wrappers import Request, Response
 from importlib import import_module
 from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-from typing import Tuple, Type
+from typing import Any, Optional, Tuple, Type, Union
 
 from eNMS.config import Config
 from eNMS.main import (
@@ -71,7 +71,9 @@ def configure_syslog_server(app: Flask) -> None:
 
 def configure_database(app: Flask) -> None:
     @app.teardown_request
-    def shutdown_session(exception=None) -> None:
+    def shutdown_session(
+        exception: Optional[Union[Response, Exception]] = None
+    ) -> None:
         db.session.remove()
 
     @app.before_first_request
@@ -89,11 +91,11 @@ def configure_errors(app: Flask) -> None:
         return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(403)
-    def authorization_required(error) -> Tuple[str, int]:
+    def authorization_required(error: Any) -> Tuple[str, int]:
         return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(404)
-    def not_found_error(error) -> Tuple[str, int]:
+    def not_found_error(error: Any) -> Tuple[str, int]:
         return render_template("errors/page_404.html"), 404
 
 

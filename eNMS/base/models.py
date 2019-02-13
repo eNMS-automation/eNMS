@@ -21,7 +21,7 @@ class Base(db.Model):
     def __init__(self, **kwargs: Any) -> None:
         self.update(**kwargs)
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: db.Model) -> bool:
         return True
 
     def __repr__(self) -> str:

@@ -1,6 +1,6 @@
 from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer, String
-from typing import overload
+from typing import Optional
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
@@ -16,17 +16,7 @@ class UnixCommandService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UnixCommandService"}
 
-    @overload
-    def job(self, payload: dict) -> dict:
-        ...
-
-    @overload  # noqa: F811
-    def job(self, device: Device, payload: dict) -> dict:
-        ...
-
-    def job(self, *args):  # noqa: F811
-        if len(args) == 2:
-            device, payload = args
+    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         try:
             command = self.sub(self.command, locals())
             return {"success": True, "result": check_output(command.split()).decode()}

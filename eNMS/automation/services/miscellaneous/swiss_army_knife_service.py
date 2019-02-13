@@ -8,7 +8,7 @@ from pathlib import Path
 from requests import post, get
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
-from typing import overload
+from typing import Optional
 
 from eNMS.main import mail_client
 from eNMS.automation.models import Service
@@ -26,15 +26,7 @@ class SwissArmyKnifeService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}
 
-    @overload
-    def job(self, payload: dict) -> dict:
-        ...
-
-    @overload  # noqa: F811
-    def job(self, device: Device, payload: dict) -> dict:
-        ...
-
-    def job(self, *args):  # noqa: F811
+    def job(self, *args):
         return getattr(self, self.name)(*args)
 
     def Start(self, _) -> dict:  # noqa: N802

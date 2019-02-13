@@ -21,7 +21,7 @@ class ConfigureBgpService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         config = f"""

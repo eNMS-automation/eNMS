@@ -26,7 +26,7 @@ class ConfigurationBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ConfigurationBackupService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         now = datetime.now()
         path_configurations = Path.cwd() / "git" / "configurations"
         netmiko_handler = self.netmiko_connection(device)

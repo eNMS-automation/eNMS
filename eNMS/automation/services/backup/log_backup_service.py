@@ -28,7 +28,7 @@ class LogBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "LogBackupService"}
 
-    def job(self, device: Device, _) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         path_backup = Path.cwd() / "logs" / "job_logs"
         now = strip_all(str(datetime.now()))
         path_dir = path_backup / f"logs_{now}"

@@ -25,7 +25,8 @@ def calendar() -> dict:
         # the calendar
         if not task.start_date:
             continue
-        python_month = search(r".*-(\d{2})-.*", task.aps_date("start_date")).group(1)
+        date = task.aps_date("start_date")
+        python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
         month = "{:02}".format((int(python_month) - 1) % 12)
         js_date = [
             int(i)
@@ -46,7 +47,7 @@ def scheduler_action(action: str) -> bool:
 
 
 @post(bp, "/<action>_task/<int:task_id>", "Edit")
-def task_action(action: str, task_id: int) -> Bool:
+def task_action(action: str, task_id: int) -> bool:
     task = fetch("Task", id=task_id)
     try:
         getattr(task, action)()

@@ -3,6 +3,7 @@ from datetime import datetime
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
+from typing import Any, Optional, Tuple
 
 from eNMS.main import db, scheduler
 from eNMS.automation.helpers import scheduler_job
@@ -27,7 +28,7 @@ class Task(Base):
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.status = kwargs.pop("status", "Active")
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
@@ -35,38 +36,38 @@ class Task(Base):
         if self.status == "Active":
             self.schedule()
 
-    def update(self, **kwargs):
+    def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
         if self.status == "Active":
             self.schedule()
 
-    def aps_conversion(self, date):
-        dt = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
+    def aps_conversion(self, date: str) -> str:
+        dt: datetime = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
         return datetime.strftime(dt, "%Y-%m-%d %H:%M:%S")
 
-    def aps_date(self, datetype):
+    def aps_date(self, datetype: str) -> Optional[str]:
         date = getattr(self, datetype)
         return self.aps_conversion(date) if date else None
 
-    def pause(self):
+    def pause(self) -> None:
         scheduler.pause_job(self.aps_job_id)
         self.status = "Pause"
         db.session.commit()
 
-    def resume(self):
+    def resume(self) -> None:
         self.schedule()
         scheduler.resume_job(self.aps_job_id)
         self.status = "Active"
         db.session.commit()
 
-    def delete_task(self):
+    def delete_task(self) -> None:
         try:
             scheduler.remove_job(self.aps_job_id)
         except JobLookupError:
             pass
         db.session.commit()
 
-    def kwargs(self):
+    def kwargs(self) -> Tuple[dict, dict]:
         default = {
             "id": self.aps_job_id,
             "func": scheduler_job,
@@ -86,11 +87,11 @@ class Task(Base):
             trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
         return default, trigger
 
-    def schedule(self):
+    def schedule(self) -> None:
         default, trigger = self.kwargs()
         scheduler.add_job(**{**default, **trigger})
 
-    def reschedule(self):
+    def reschedule(self) -> None:
         if self.aps_job_id not in [job.id for job in scheduler.get_jobs()]:
             self.schedule()
         default, trigger = self.kwargs()

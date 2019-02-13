@@ -10,14 +10,14 @@ from eNMS.scheduling.forms import SchedulingForm
 
 
 @get(bp, "/task_management", "View")
-def task_management():
+def task_management() -> dict:
     return dict(
         fields=task_table_properties, scheduling_form=SchedulingForm(request.form)
     )
 
 
 @get(bp, "/calendar", "View")
-def calendar():
+def calendar() -> dict:
     tasks = {}
     for task in fetch_all("Task"):
         # javascript dates range from 0 to 11, we must account for that by
@@ -40,13 +40,13 @@ def calendar():
 
 
 @post(bp, "/scheduler/<action>", "Admin")
-def scheduler_action(action):
+def scheduler_action(action: str) -> bool:
     getattr(scheduler, action)()
     return True
 
 
-@post(bp, "/<action>_task/<task_id>", "Edit")
-def task_action(action, task_id):
+@post(bp, "/<action>_task/<int:task_id>", "Edit")
+def task_action(action: str, task_id: int) -> Bool:
     task = fetch("Task", id=task_id)
     try:
         getattr(task, action)()

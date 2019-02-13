@@ -1,9 +1,10 @@
 from logging import CRITICAL, disable
 from flask.testing import FlaskClient
+from typing import Callable, Dict
 
 disable(CRITICAL)
 
-urls = {
+urls: Dict[str, tuple] = {
     "": ("/", "/dashboard"),
     "/admin": (
         "/user_management",
@@ -27,9 +28,9 @@ urls = {
 free_access = {"/", "/admin/login", "/admin/create_account"}
 
 
-def check_pages(*pages):
-    def decorator(function):
-        def wrapper(user_client):
+def check_pages(*pages: str) -> Callable:
+    def decorator(function: Callable) -> Callable:
+        def wrapper(user_client: FlaskClient) -> None:
             function(user_client)
             for page in pages:
                 r = user_client.get(page, follow_redirects=True)
@@ -40,9 +41,9 @@ def check_pages(*pages):
     return decorator
 
 
-def check_blueprints(*blueprints):
-    def decorator(function):
-        def wrapper(user_client):
+def check_blueprints(*blueprints: str) -> Callable:
+    def decorator(function: Callable) -> Callable:
+        def wrapper(user_client: FlaskClient) -> None:
             function(user_client)
             for blueprint in blueprints:
                 for page in urls[blueprint]:
@@ -54,7 +55,7 @@ def check_blueprints(*blueprints):
     return decorator
 
 
-def test_authentication(base_client):
+def test_authentication(base_client: FlaskClient) -> None:
     for blueprint, pages in urls.items():
         for page in pages:
             page_url = blueprint + page
@@ -63,7 +64,7 @@ def test_authentication(base_client):
             assert r.status_code == expected_code
 
 
-def test_urls(user_client):
+def test_urls(user_client: FlaskClient) -> None:
     for blueprint, pages in urls.items():
         for page in pages:
             page_url = blueprint + page

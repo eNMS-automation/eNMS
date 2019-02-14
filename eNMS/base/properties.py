@@ -92,9 +92,9 @@ device_properties = list(custom_properties) + [
     "username",
 ]
 
-device_table_properties: List[str] = object_common_properties[1:] + device_properties[
-    :-3
-]
+device_table_properties: List[str] = (
+    object_common_properties[1:] + device_properties[:-3]
+)
 
 pool_device_properties = (
     object_common_properties[1:] + device_properties[:-1] + ["configuration"]

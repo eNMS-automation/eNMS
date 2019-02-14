@@ -49,9 +49,5 @@ def scheduler_action(action: str) -> bool:
 @post(bp, "/<action>_task/<int:task_id>", "Edit")
 def task_action(action: str, task_id: int) -> bool:
     task = fetch("Task", id=task_id)
-    try:
-        getattr(task, action)()
-    except JobLookupError:
-        task.reschedule()
-        getattr(task, action)()
+    getattr(task, action)()
     return True

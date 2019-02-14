@@ -89,10 +89,7 @@ class Task(Base):
 
     def schedule(self) -> None:
         default, trigger = self.kwargs()
-        scheduler.add_job(**{**default, **trigger})
-
-    def reschedule(self) -> None:
         if self.aps_job_id not in [job.id for job in scheduler.get_jobs()]:
-            self.schedule()
-        default, trigger = self.kwargs()
-        scheduler.reschedule_job(default.pop("id"), **trigger)
+            scheduler.add_job(**{**default, **trigger})
+        else:
+            scheduler.reschedule_job(default.pop("id"), **trigger)

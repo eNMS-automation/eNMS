@@ -80,21 +80,27 @@ link_subtype_to_color: Dict[str, str] = {
     "pseudowire": "#902bec",
 }
 
-device_properties = [
+device_properties = list(custom_properties) + [
     "operating_system",
     "os_version",
     "netmiko_driver",
     "napalm_driver",
     "ip_address",
     "port",
-] + list(custom_properties)
-
-device_table_properties: List[str] = object_common_properties[1:] + device_properties
-
-device_public_properties: List[str] = object_common_properties + device_properties + [
     "longitude",
     "latitude",
     "username",
+]
+
+device_table_properties: List[str] = object_common_properties[1:] + device_properties[
+    :-3
+]
+
+pool_device_properties = (
+    object_common_properties[1:] + device_properties[:-1] + ["configuration"]
+)
+
+device_public_properties: List[str] = object_common_properties + device_properties + [
     "last_failure",
     "last_runtime",
     "last_status",
@@ -122,16 +128,13 @@ task_properties: List[str] = base_properties + [
 task_public_properties: List[str] = task_properties[1:]
 
 link_properties: List[str] = object_common_properties + [
+    "source_name",
+    "destination_name",
     "source",
     "destination",
-    "source_name",
-    "destination_name",
 ]
 
-link_public_properties: List[str] = link_properties + [
-    "source_name",
-    "destination_name",
-]
+pool_link_properties = link_properties[:-2]
 
 link_table_properties: List[str] = object_common_properties[1:] + [
     "source_name",

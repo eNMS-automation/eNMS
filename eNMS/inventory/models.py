@@ -24,8 +24,8 @@ from eNMS.base.helpers import fetch, get_one
 from eNMS.base.models import Base
 from eNMS.base.properties import (
     custom_properties,
-    link_public_properties,
-    device_public_properties,
+    pool_link_properties,
+    pool_device_properties,
     sql_types,
 )
 from eNMS.inventory.helpers import database_filtering
@@ -140,14 +140,14 @@ AbstractPool: Any = type(
         **{
             **{
                 f"device_{p}": Column(String)
-                for p in device_public_properties[1:] + list(custom_properties)
+                for p in pool_device_properties[1:] + list(custom_properties)
             },
             **{
                 f"device_{p}_regex": Column(Boolean)
-                for p in device_public_properties[1:] + list(custom_properties)
+                for p in pool_device_properties[1:] + list(custom_properties)
             },
-            **{f"link_{p}": Column(String) for p in link_public_properties},
-            **{f"link_{p}_regex": Column(Boolean) for p in link_public_properties},
+            **{f"link_{p}": Column(String) for p in pool_link_properties},
+            **{f"link_{p}_regex": Column(Boolean) for p in pool_link_properties},
         },
     },
 )

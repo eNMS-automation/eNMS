@@ -13,9 +13,9 @@ from eNMS.automation.helpers import NAPALM_DRIVERS, NETMIKO_DRIVERS
 from eNMS.base.models import MultipleObjectField, ObjectField
 from eNMS.base.properties import (
     custom_properties,
-    link_public_properties,
+    link_properties,
     link_subtypes,
-    device_public_properties,
+    pool_device_properties,
     device_subtypes,
 )
 
@@ -27,12 +27,12 @@ def configure_device_form(cls: FlaskForm) -> FlaskForm:
 
 
 def configure_pool_form(cls: FlaskForm) -> FlaskForm:
-    cls.device_properties = device_public_properties
-    cls.link_properties = link_public_properties
+    cls.device_properties = pool_device_properties
+    cls.pool_link_properties = pool_link_properties
     boolean_fields = ["never_update"]
     for cls_name, properties in (
-        ("device", device_public_properties),
-        ("link", link_public_properties),
+        ("device", pool_device_properties),
+        ("link", pool_link_properties),
     ):
         for property in properties:
             boolean_field = f"{cls_name}_{property}_regex"

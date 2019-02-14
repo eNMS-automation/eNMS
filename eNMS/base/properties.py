@@ -112,6 +112,7 @@ device_configuration_properties: List[str] = [
 task_properties: List[str] = base_properties + [
     "job",
     "job_name",
+    "next_run_time",
     "start_date",
     "end_date",
     "frequency",
@@ -264,6 +265,7 @@ task_serialized_properties: List[str] = [
     "description",
     "job_name",
     "status",
+    "next_run_time",
     "start_date",
     "end_date",
     "frequency",
@@ -512,6 +514,7 @@ pretty_names: Dict[str, str] = {
     "negative_logic": "Negative Logic",
     "netmiko_driver": "Netmiko driver",
     "never_update": "Never update",
+    "next_run_time": "Next runtime",
     "number_of_configuration": "Number of configurations stored",
     "operating_system": "Operating System",
     "optional_args": "Optional arguments",

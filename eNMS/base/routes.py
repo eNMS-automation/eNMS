@@ -54,6 +54,20 @@ def server_side_processing(cls: str, table: str) -> Response:
             filtered = filtered.filter(
                 model.current_configuration.contains(search_text)
             )
+    print(
+        {
+            "draw": int(request.args["draw"]),
+            "recordsTotal": len(model.query.all()),
+            "recordsFiltered": len(filtered.all()),
+            "data": [
+                [getattr(obj, property) for property in properties]
+                + table_static_entries(table, obj)
+                for obj in filtered.limit(int(request.args["length"]))
+                .offset(int(request.args["start"]))
+                .all()
+            ],
+        }
+    )
     return jsonify(
         {
             "draw": int(request.args["draw"]),

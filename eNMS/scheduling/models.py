@@ -2,6 +2,7 @@ from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 from typing import Any, Optional, Tuple
 
@@ -90,7 +91,12 @@ class Task(Base):
 
     def schedule(self) -> None:
         default, trigger = self.kwargs()
-        if self.aps_job_id not in [job.id for job in scheduler.get_jobs()]:
+        if not scheduler.get_job(self.aps_job_id):
             scheduler.add_job(**{**default, **trigger})
         else:
             scheduler.reschedule_job(default.pop("id"), **trigger)
+
+    @hybrid_property
+    def next_run_time(self) -> str:
+        job = scheduler.get_job(self.aps_job_id)
+        return str(job.next_run_time) if job else ""

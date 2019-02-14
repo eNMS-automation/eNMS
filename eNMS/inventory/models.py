@@ -179,7 +179,7 @@ class Pool(AbstractPool):
             else pool_link_properties
         )
         return all(
-            str(getattr(obj, property)) == getattr(self, f"{obj.class_type}_{property}")
+            getattr(self, f"{obj.class_type}_{property}") in str(getattr(obj, property))
             if not getattr(self, f"{obj.class_type}_{property}_regex")
             else search(
                 getattr(self, f"{obj.class_type}_{property}"),

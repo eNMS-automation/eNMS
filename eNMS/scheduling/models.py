@@ -61,10 +61,8 @@ class Task(Base):
         db.session.commit()
 
     def delete_task(self) -> None:
-        try:
+        if scheduler.get_job(self.aps_job_id):
             scheduler.remove_job(self.aps_job_id)
-        except JobLookupError:
-            pass
         db.session.commit()
 
     def kwargs(self) -> Tuple[dict, dict]:

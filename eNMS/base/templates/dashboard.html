@@ -10,41 +10,29 @@
   <div class="right_col" role="main">
     <!-- top tiles -->
     <div class="row tile_count">
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-clock-o"></i> Total Devices</span>
+      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
         <div class="count">{{ counters['Device'] }}</div>
       </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-clock-o"></i> Total Links</span>
+      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-clock-o"></i> Links</span>
         <div class="count">{{ counters['Link'] }}</div>
       </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Total Services</span>
-        <div class="count">{{ counters['Service'] }}</div>
+      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-user"></i> Services (Currently running)</span>
+        <div class="count">{{ counters['Service'] }} ({{ counters['Running services'] }})</div>
       </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Total Workflows</span>
-        <div class="count">{{ counters['Workflow'] }}</div>
+      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-user"></i> Workflows (Currently running)</span>
+        <div class="count">{{ counters['Workflow'] }} ({{ counters['Running workflows'] }})</div>
       </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Total Tasks</span>
-        <div class="count">{{ counters['Task'] }}</div>
+      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-user"></i> Tasks (Currently scheduled)</span>
+        <div class="count">{{ counters['Task'] }} ({{ counters['Scheduled tasks'] }})</div>
       </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-user"></i> Users</span>
         <div class="count">{{ counters['User'] }}</div>
-      </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Running services</span>
-        <div class="count">{{ counters['Running services'] }}</div>
-      </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Running workflows</span>
-        <div class="count">{{ counters['Running workflows'] }}</div>
-      </div>
-      <div class="col-md-4 col-sm-8 col-xs-12 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Scheduled tasks</span>
-        <div class="count">{{ counters['Scheduled tasks'] }}</div>
       </div>
     </div>
     <!-- /top tiles -->

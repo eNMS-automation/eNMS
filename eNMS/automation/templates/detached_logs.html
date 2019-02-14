@@ -11,7 +11,7 @@
     <!-- Alertify -->
     <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='alertifyjs/css/custom.alertify.css') }}" rel="stylesheet">
-    <link href="{{ url_for('automation_blueprint.static', filename='difflib/diffview.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='difflib/diffview.css') }}" rel="stylesheet">
     {% include 'logs_system.html' %}
     <!-- jQuery -->
     <script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
@@ -20,9 +20,9 @@
     <!-- Alertify -->
     <script src="{{ url_for('static', filename='alertifyjs/alertify.min.js') }}"></script>
     <!-- Difflib -->
-    <script src="{{ url_for('automation_blueprint.static', filename='difflib/diffview.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
     <!-- Common functions -->
-    <script src="{{ url_for('static', filename='enms/commonFunctions.js') }}"></script>
+    <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
     <!-- Logs -->
     <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
     <script>

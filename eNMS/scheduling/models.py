@@ -97,14 +97,13 @@ class Task(Base):
     @hybrid_property
     def next_run_time(self) -> Optional[str]:
         job = scheduler.get_job(self.aps_job_id)
-        return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S") if job else None
+        if job and job.next_run_time:
+            return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
 
     @hybrid_property
     def time_before_next_run(self) -> Optional[str]:
         job = scheduler.get_job(self.aps_job_id)
-        if not job:
-            return ""
-        else:
+        if job and job.next_run_time:
             delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
             hours, remainder = divmod(delta.seconds, 3600)
             minutes, seconds = divmod(remainder, 60)

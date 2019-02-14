@@ -178,9 +178,6 @@ class Pool(AbstractPool):
             if obj.class_type == "device"
             else pool_link_properties
         )
-        for property in properties:
-            print(str(getattr(obj, property)))
-            print(getattr(self, f"{obj.class_type}_{property}"))
         return all(
             str(getattr(obj, property)) == getattr(self, f"{obj.class_type}_{property}")
             if not getattr(self, f"{obj.class_type}_{property}_regex")

@@ -576,3 +576,4 @@ def create_examples(app: Flask) -> None:
     create_workflow_of_workflows()
     for pool in fetch_all("Pool"):
         pool.compute_pool()
+    db.session.commit()

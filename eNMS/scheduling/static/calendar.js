@@ -1,7 +1,7 @@
 /*
 global
 doc: false
-showTaskModal: false
+showTypeModal: false
 tasks: false
 */
 
@@ -29,7 +29,7 @@ $(function() {
     selectable: true,
     selectHelper: true,
     eventClick: function(calEvent, jsEvent, view) {
-      showTaskModal(calEvent.id);
+      showTypeModal('task', calEvent.id);
     },
     editable: true,
     events: events,

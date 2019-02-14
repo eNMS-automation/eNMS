@@ -28,6 +28,7 @@
   <!-- FullCalendar -->
   <script src="{{ url_for('scheduling_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
   <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
     var tasks = {{ tasks|tojson|safe }};
   </script>
   <!-- Task management -->

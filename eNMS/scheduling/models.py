@@ -107,7 +107,7 @@ class Task(Base):
         if not job:
             return ""
         else:
-            delta = job.next_run_time - datetime.now()
+            delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
             hours, remainder = divmod(delta.seconds, 3600)
             minutes, seconds = divmod(remainder, 60)
-            return f"{hours}:{minutes}:{seconds}"
+            return f"{hours}h:{minutes}m:{seconds}s"

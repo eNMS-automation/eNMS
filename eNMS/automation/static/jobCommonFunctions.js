@@ -108,7 +108,7 @@ $('#display').on('change', function() {
   call(`/automation/get_logs/${jobId}`, (logs) => {
     const log = logs[$('#display').val()];
     $('#logs').text(
-      JSON.stringify(log, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, '\n')
+      JSON.stringify(log, null, 2).replace(/(?:\\[rnt])+/g, '\n')
     );
   });
 });

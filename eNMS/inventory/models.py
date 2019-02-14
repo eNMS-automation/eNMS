@@ -138,14 +138,8 @@ AbstractPool: Any = type(
         "__mapper_args__": {"polymorphic_identity": "AbstractPool"},
         "id": Column(Integer, primary_key=True),
         **{
-            **{
-                f"device_{p}": Column(String)
-                for p in pool_device_properties + list(custom_properties)
-            },
-            **{
-                f"device_{p}_regex": Column(Boolean)
-                for p in pool_device_properties + list(custom_properties)
-            },
+            **{f"device_{p}": Column(String) for p in pool_device_properties},
+            **{f"device_{p}_regex": Column(Boolean) for p in pool_device_properties},
             **{f"link_{p}": Column(String) for p in pool_link_properties},
             **{f"link_{p}_regex": Column(Boolean) for p in pool_link_properties},
         },
@@ -174,17 +168,12 @@ class Pool(AbstractPool):
         if self.never_update:
             return
         self.devices = list(filter(self.object_match, Device.query.all()))
-        self.links = []
-        for link in Link.query.all():
-            link.__dict__.update(
-                {"source": link.source, "destination": link.destination}
-            )
-            if self.object_match(link):
-                self.links.append(link)
+        self.links = list(filter(self.object_match, Link.query.all()))
         if get_one("Parameters").pool_filter == self:
             database_filtering(self)
 
     def object_match(self, obj: Union[Device, Link]) -> bool:
+        print(obj, obj.__dict__)
         return all(
             str(value) == getattr(self, f"{obj.class_type}_{prop}")
             if not getattr(self, f"{obj.class_type}_{prop}_regex")

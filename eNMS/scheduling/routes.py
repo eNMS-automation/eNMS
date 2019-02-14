@@ -23,17 +23,18 @@ def calendar() -> dict:
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar
-        if not task.start_date:
+        if not task.next_run_time:
             continue
-        date = task.aps_date("start_date")
-        python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
+        python_month = search(r".*-(\d{2})-.*", task.next_run_time).group(
+            1
+        )  # type: ignore
         month = "{:02}".format((int(python_month) - 1) % 12)
         js_date = [
             int(i)
             for i in sub(
                 r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
                 r"\1," + month + r",\3,\4,\5",
-                task.aps_date("start_date"),
+                task.next_run_time,
             ).split(",")
         ]
         tasks[task.name] = {**task.serialized, **{"date": js_date}}

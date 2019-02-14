@@ -128,7 +128,6 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
   $('#table thead tr').clone(true).appendTo('#table thead');
   $('#table thead tr:eq(1) th').each(function(i) {
     const title = $(this).text();
-    console.log(title);
     if (!toExclude.includes(title)) {
       $(this).html(`
         <input type="text" class="form-control" placeholder="&#xF002;"

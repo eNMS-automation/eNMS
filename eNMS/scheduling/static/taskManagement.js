@@ -13,7 +13,7 @@ let table = initTable( // eslint-disable-line no-unused-vars
     'Time before next run',
     'Action', 'Edit',
     'Duplicate',
-    'Delete'
+    'Delete',
   ]
 );
 const taskManagement = true; // eslint-disable-line no-unused-vars

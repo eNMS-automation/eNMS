@@ -1,4 +1,3 @@
-from apscheduler.jobstores.base import JobLookupError
 from datetime import datetime
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -25,7 +24,6 @@ class Task(Base):
     frequency = Column(Integer)
     start_date = Column(String)
     end_date = Column(String)
-    next_run_time = Column(String)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")
@@ -97,12 +95,12 @@ class Task(Base):
             scheduler.reschedule_job(default.pop("id"), **trigger)
 
     @hybrid_property
-    def next_run_time(self) -> str:
+    def next_run_time(self) -> Optional[str]:
         job = scheduler.get_job(self.aps_job_id)
-        return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S") if job else ""
+        return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S") if job else None
 
     @hybrid_property
-    def time_before_next_run(self) -> str:
+    def time_before_next_run(self) -> Optional[str]:
         job = scheduler.get_job(self.aps_job_id)
         if not job:
             return ""

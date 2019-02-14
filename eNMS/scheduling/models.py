@@ -24,6 +24,7 @@ class Task(Base):
     frequency = Column(Integer)
     start_date = Column(String)
     end_date = Column(String)
+    next_run_time = Column(String)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")

@@ -23,8 +23,13 @@ def scheduler_job(
             targets = {fetch("Device", id=device_id) for device_id in targets}
         results, now = job.try_run(targets=targets)
         task = fetch("Task", creation_time=aps_job_id)
-        if task and not task.frequency:
-            task.status = "Completed"
+        if task:
+            for job in scheduler.get_jobs():
+                print(job.__dict__)
+                print(type(job.next_run_time))
+                fetch("Job", id=job.id).next_run_time = job.next_run_time
+            if not task.frequency:
+                task.status = "Completed"
         parameters = get_one("Parameters")
         if job.push_to_git and parameters.git_automation:
             path_git_folder = Path.cwd() / "git" / "automation"

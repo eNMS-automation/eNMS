@@ -96,7 +96,7 @@ device_table_properties: List[str] = (
     object_common_properties[1:] + device_properties[:-3]
 )
 
-pool_device_properties = (
+pool_device_properties: List[str] = (
     object_common_properties[1:] + device_properties[:-1] + ["current_configuration"]
 )
 
@@ -134,7 +134,7 @@ link_properties: List[str] = object_common_properties + [
     "destination",
 ]
 
-pool_link_properties = link_properties[1:-2]
+pool_link_properties: List[str] = link_properties[1:-2]
 
 link_table_properties: List[str] = object_common_properties[1:] + [
     "source_name",

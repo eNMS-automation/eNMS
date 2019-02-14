@@ -97,6 +97,7 @@ class Task(Base):
         job = scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
+        return None
 
     @hybrid_property
     def time_before_next_run(self) -> Optional[str]:
@@ -106,3 +107,4 @@ class Task(Base):
             hours, remainder = divmod(delta.seconds, 3600)
             minutes, seconds = divmod(remainder, 60)
             return f"{hours}h:{minutes}m:{seconds}s"
+        return None

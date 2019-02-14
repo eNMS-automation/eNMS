@@ -97,7 +97,7 @@ device_table_properties: List[str] = (
 )
 
 pool_device_properties = (
-    object_common_properties[1:] + device_properties[:-1] + ["configuration"]
+    object_common_properties[1:] + device_properties[:-1] + ["current_configuration"]
 )
 
 device_public_properties: List[str] = object_common_properties + device_properties + [
@@ -472,7 +472,7 @@ pretty_names: Dict[str, str] = {
     "action": "Action",
     "call_type": "Type of call",
     "command": "Command",
-    "configuration": "Configuration",
+    "current_configuration": "Current Configuration",
     "content": "Content",
     "content_match": "Content Match",
     "content_match_regex": "Match content against Regular expression",

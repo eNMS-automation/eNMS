@@ -173,14 +173,23 @@ class Pool(AbstractPool):
             database_filtering(self)
 
     def object_match(self, obj: Union[Device, Link]) -> bool:
-        print(obj, obj.__dict__)
+        properties = (
+            pool_device_properties
+            if obj.class_type == "device"
+            else pool_link_properties
+        )
+        for property in properties:
+            print(str(getattr(obj, property)))
+            print(getattr(self, f"{obj.class_type}_{property}"))
         return all(
-            str(value) == getattr(self, f"{obj.class_type}_{prop}")
-            if not getattr(self, f"{obj.class_type}_{prop}_regex")
-            else search(getattr(self, f"{obj.class_type}_{prop}"), str(value))
-            for prop, value in obj.__dict__.items()
-            if f"{obj.class_type}_{prop}" in self.__dict__
-            and getattr(self, f"{obj.class_type}_{prop}")
+            str(getattr(obj, property)) == getattr(self, f"{obj.class_type}_{property}")
+            if not getattr(self, f"{obj.class_type}_{property}_regex")
+            else search(
+                getattr(self, f"{obj.class_type}_{property}"),
+                str(getattr(obj, property)),
+            )
+            for property in properties
+            if getattr(self, f"{obj.class_type}_{property}")
         )
 
     def filter_objects(self) -> Dict[str, List[dict]]:

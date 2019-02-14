@@ -265,10 +265,11 @@ task_serialized_properties: List[str] = [
     "description",
     "job_name",
     "status",
-    "next_run_time",
     "start_date",
     "end_date",
     "frequency",
+    "next_run_time",
+    "time_before_next_run",
     "job",
 ]
 
@@ -536,6 +537,7 @@ pretty_names: Dict[str, str] = {
     "status": "Status",
     "subtype": "Subtype",
     "text file": "File",
+    "time_before_next_run": "Time before next run",
     "timeout": "Timeout (in seconds)",
     "type": "Type",
     "update_dictionnary": "Update dictionnary",

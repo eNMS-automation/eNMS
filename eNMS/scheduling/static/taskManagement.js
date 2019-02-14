@@ -8,7 +8,7 @@ refreshTable: false
 */
 
 let table = initTable( // eslint-disable-line no-unused-vars
-  'task', 'task', ['Action', 'Edit', 'Duplicate', 'Delete']
+  'task', 'task', ['Next runtime', 'Action', 'Edit', 'Duplicate', 'Delete']
 );
 const taskManagement = true; // eslint-disable-line no-unused-vars
 

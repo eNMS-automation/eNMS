@@ -134,7 +134,7 @@ link_properties: List[str] = object_common_properties + [
     "destination",
 ]
 
-pool_link_properties = link_properties[:-2]
+pool_link_properties = link_properties[1:-2]
 
 link_table_properties: List[str] = object_common_properties[1:] + [
     "source_name",
@@ -146,8 +146,8 @@ pool_public_properties: List[str] = base_properties + ["never_update"]
 pool_table_properties: List[str] = pool_public_properties[1:]
 
 for obj_type, properties in (
-    ("device", device_public_properties[1:]),
-    ("link", link_public_properties[1:]),
+    ("device", pool_device_properties),
+    ("link", pool_link_properties),
 ):
     for prop in properties:
         pool_public_properties.extend(
@@ -281,7 +281,7 @@ task_table_properties: List[str] = task_serialized_properties[1:-1]
 cls_to_properties: Dict[str, List[str]] = {
     "Instance": instance_public_properties,
     "Device": device_public_properties,
-    "Link": link_public_properties,
+    "Link": link_properties,
     "Pool": pool_public_properties,
     "Service": service_public_properties,
     "Parameters": parameters_public_properties,
@@ -472,6 +472,7 @@ pretty_names: Dict[str, str] = {
     "action": "Action",
     "call_type": "Type of call",
     "command": "Command",
+    "configuration": "Configuration",
     "content": "Content",
     "content_match": "Content Match",
     "content_match_regex": "Match content against Regular expression",

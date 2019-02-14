@@ -140,11 +140,11 @@ AbstractPool: Any = type(
         **{
             **{
                 f"device_{p}": Column(String)
-                for p in pool_device_properties[1:] + list(custom_properties)
+                for p in pool_device_properties + list(custom_properties)
             },
             **{
                 f"device_{p}_regex": Column(Boolean)
-                for p in pool_device_properties[1:] + list(custom_properties)
+                for p in pool_device_properties + list(custom_properties)
             },
             **{f"link_{p}": Column(String) for p in pool_link_properties},
             **{f"link_{p}_regex": Column(Boolean) for p in pool_link_properties},

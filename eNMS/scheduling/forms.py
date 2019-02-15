@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, HiddenField, IntegerField, StringField
+from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.base.models import ObjectField
 

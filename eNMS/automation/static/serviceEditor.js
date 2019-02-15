@@ -1,6 +1,5 @@
 /*
 global
-addInstance: false
 call: false
 convertSelect: false
 fCall: false
@@ -55,7 +54,7 @@ function saveService(run=false) { // eslint-disable-line no-unused-vars
     `/update/${$('#service-type').val()}`,
     '#edit-service-form',
     function(service) {
-      const mode = saveInstance('service', service, !run);
+      saveInstance('service', service, !run);
       if (typeof workflowBuilder !== 'undefined') {
         nodes.update({id: service.id, label: service.name});
       }

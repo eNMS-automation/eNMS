@@ -90,6 +90,12 @@
               <div class='form-group'>
                 {{ service_form.send_notification_method(id='service-send_notification_method', class="form-control") }}
               </div>
+              <fieldset>
+                <div class="item">
+                  <input id="service-display_only_failed_nodes" name="display_only_failed_nodes" type="checkbox" value="y">
+                  <label>Display only failed nodes</label>
+                </div>
+              </fieldset>
               <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
               <div class='form-group'>
                 {{ service_form.mail_recipient(id='service-mail_recipient', class="form-control") }}

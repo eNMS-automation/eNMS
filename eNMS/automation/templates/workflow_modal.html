@@ -70,13 +70,19 @@
               <fieldset>
                 <div class="item">
                   <input id="workflow-send_notification" name="send_notification" type="checkbox" value="y">
-                  <label>send_notification</label>
+                  <label>Send notification</label>
                 </div>
               </fieldset>
               <label><label for="send_notification_method">Send Notification Method</label></label>
               <div class='form-group'>
                 {{ workflow_creation_form.send_notification_method(id='workflow-send_notification_method', class="form-control") }}
               </div>
+              <fieldset>
+                <div class="item">
+                  <input id="workflow-display_only_failed_nodes" name="display_only_failed_nodes" type="checkbox" value="y">
+                  <label>Display only failed nodes</label>
+                </div>
+              </fieldset>
               <label><label for="waiting_time">Waiting time (in seconds)</label></label>
               <div class='form-group'>
                 {{ workflow_creation_form.waiting_time(id='workflow-waiting_time', class="form-control") }}

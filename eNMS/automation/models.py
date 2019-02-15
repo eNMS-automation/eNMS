@@ -96,17 +96,19 @@ class Job(Base):
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
         if "devices" in results.get("result", "") and not results["success"]:
-            passed = "\n".join(
-                device
-                for device, logs in results["result"]["devices"].items()
-                if logs["success"]
-            )
             failed = "\n".join(
                 device
                 for device, logs in results["result"]["devices"].items()
                 if not logs["success"]
             )
-            summary.append(f"FAILED\n{failed}\n\nPASS:\n{passed}")
+            summary.append(f"FAILED\n{failed}")
+            if not display_only_failed_nodes:
+                passed = "\n".join(
+                    device
+                    for device, logs in results["result"]["devices"].items()
+                    if logs["success"]
+                )
+                summary.append(f"\n\nPASS:\n{passed}")
         server_url = environ.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
         logs_url = f"{server_url}/automation/logs/{self.id}/{now}"
         summary.append(f"Logs: {logs_url}")

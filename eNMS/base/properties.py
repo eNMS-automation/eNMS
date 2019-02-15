@@ -26,6 +26,7 @@ custom_properties: dict = get_custom_properties()
 boolean_properties: List[str] = [
     "mattermost_verify_certificate",
     "multiprocessing",
+    "is_active",
     "display_only_failed_nodes",
     "send_notification",
     "use_workflow_targets",
@@ -270,6 +271,7 @@ task_serialized_properties: List[str] = [
     "name",
     "description",
     "job_name",
+    "is_active",
     "status",
     "start_date",
     "end_date",
@@ -312,7 +314,7 @@ table_properties: Dict[str, List[str]] = {
 
 
 def table_static_entries(type: str, obj: db.Model) -> List[str]:
-    status = "" if type != "task" else "Pause" if obj.status == "Active" else "Resume"
+    status = "" if type != "task" else "Pause" if obj.is_active else "Resume"
     return {
         "configuration": [
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -510,6 +512,7 @@ pretty_names: Dict[str, str] = {
     "headers": "Headers",
     "inventory_from_selection": "Inventory from selection",
     "ip_address": "IP address",
+    "is_active": "Is active",
     "job_name": "Service / Workflow",
     "longitude": "Longitude",
     "latitude": "Latitude",
@@ -576,6 +579,7 @@ property_types: Dict[str, str] = {
     "import_export_types": "list",
     "send_notification": "bool",
     "multiprocessing": "bool",
+    "is_active": "bool",
     "display_only_failed_nodes": "bool",
     "use_workflow_targets": "bool",
     "never_update": "bool",
@@ -666,6 +670,6 @@ export_properties: Dict[str, List[str]] = {
 dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs"],
     "Service": ["logs", "state", "tasks", "workflows", "creator_name"],
-    "Task": ["job_name", "next_run_time", "status", "time_before_next_run"],
+    "Task": ["job_name", "next_run_time", "is_active", "time_before_next_run"],
     "Workflow": ["last_modified", "logs", "state", "status", "creator_name"],
 }

@@ -103,7 +103,7 @@ If this property is disabled, eNMS will use the ``driver`` property defined in t
 There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
 
 .. image:: /_static/services/default_services/netmiko_validation.png
-   :alt: Netmiko validation service
+   :alt: Netmiko Validation service
    :align: center
 
 Configuration parameters for creating this service instance:
@@ -132,7 +132,7 @@ Configuration parameters for creating this service instance:
       - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
       - ``delete_spaces_before_matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
       - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-      - ``driver`` Which Netmiko file transfer driver to use when connecting to the device
+      - ``driver`` Which Netmiko driver to use when connecting to the device
       - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
       - ``global_delay_factor`` Netmiko multiplier used for internal delays (defaults to 1). Increase this for devices that have trouble buffering and responding quickly.
@@ -148,7 +148,7 @@ By default, this property is set to ```True`` and eNMS uses the driver defined i
 If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 .. image:: /_static/services/default_services/napalm_configuration.png
-   :alt: Napalm configuration service
+   :alt: Napalm Configuration service
    :align: center
 
 Configuration parameters for creating this service instance:
@@ -176,7 +176,7 @@ Configuration parameters for creating this service instance:
           - ``load replace``: replace the configuration of the target with the service configuration
       - ``content`` Paste a configuration block of text here for applying to the target device(s)
       - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-      - ``driver`` Which Netmiko driver to use when connecting to the device
+      - ``driver`` Which Napalm driver to use when connecting to the device
       - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
@@ -214,14 +214,13 @@ Configuration parameters for creating this service instance:
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device
   - ``Specific``
       - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-      - ``driver`` Which Netmiko driver to use when connecting to the device
+      - ``driver`` Which Napalm driver to use when connecting to the device
       - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
-Napalm getters service
+Napalm Getters service
 ----------------------
 
 Uses Napalm to retrieve a list of getters whose output is displayed in the logs. The output can be validated with a command / pattern mechanism like the ``Netmiko Validation Service``.
-Uses Napalm to configure a device.
 The napalm driver used for this service depends on the value of the property ``use_device_driver``.
 By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
 If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
@@ -257,11 +256,97 @@ Configuration parameters for creating this service instance:
       - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
       - ``delete_spaces_before_matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
       - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-      - ``driver`` Which Netmiko file transfer driver to use when connecting to the device
+      - ``driver`` Which Napalm driver to use when connecting to the device
       - ``getters`` Napalm getters (standard retrieval APIs) are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
       - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content_match` input field of its configuration form.
+
+Napalm Ping service
+-------------------
+
+Uses Napalm to connect to the selected target devices and performs a ping to a designated target. The output contains ping round trip time statistics.
+The napalm driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
+Note that the iosxr driver does not support ping, but you can use the ios driver in its place by not selecting ``use_device_driver``.
+
+.. image:: /_static/services/default_services/napalm_ping.png
+   :alt: Napalm Ping service
+   :align: center
+
+Configuration parameters for creating this service instance:
+  - ``General``
+      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+      - ``Description`` Freeform description of what the service instance does
+      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  - ``Advanced``
+      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
+  - ``Targets``
+      - ``Devices`` Multi-selection list of devices from the inventory
+      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  - ``Specific``
+      - ``count``: Number of ping packets to send
+      - ``driver`` Which Napalm driver to use when connecting to the device
+      - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
+      - ``size`` Size of the ping packet payload to send in bytes
+      - ``Source IP address`` Override the source ip address of the ping packet with this provided IP
+      - ``Timeout`` Seconds to wait before declaring timeout
+      - ``ttl`` Time to Live parameter, which tells routers when to discard this packet because it has been in the network too long (too many hops)
+      - ``vrf`` Ping a specific virtual routing and forwarding interface
+
+Napalm Traceroute service
+-------------------------
+
+Uses Napalm to connect to the selected target devices and performs a traceroute to a designated target.
+The napalm driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
+Note that the iosxr driver does not support ping, but you can use the ios driver in its place by not selecting ``use_device_driver``.
+
+.. image:: /_static/services/default_services/napalm_traceroute.png
+   :alt: Napalm Traceroute service
+   :align: center
+
+Configuration parameters for creating this service instance:
+  - ``General``
+      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+      - ``Description`` Freeform description of what the service instance does
+      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  - ``Advanced``
+      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
+  - ``Targets``
+      - ``Devices`` Multi-selection list of devices from the inventory
+      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  - ``Specific``
+      - ``count``: Number of ping packets to send
+      - ``driver`` Which Napalm driver to use when connecting to the device
+      - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+      - ``optional_args`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
+      - ``size`` Size of the ping packet payload to send in bytes
+      - ``Source IP address`` Override the source ip address of the ping packet with this provided IP
+      - ``Timeout`` Seconds to wait before declaring timeout
+      - ``ttl`` Time to Live parameter, which tells routers when to discard this packet because it has been in the network too long (too many hops)
+      - ``vrf`` Ping a specific virtual routing and forwarding interface
 
 Ansible Playbook Service
 ------------------------
@@ -427,3 +512,74 @@ Configuration parameters for creating this service instance:
       - ``missing_host_key_policy`` If checked, auto-add the host key policy on the ssh connection
       - ``load_known_host_keys`` If checked, load host keys on the eNMS server before attempting the connection
       - ``look_for_keys`` Flag that is passed to the paramiko ssh connection to indicate if the library should look for host keys or ignore.
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
+
+Ping Service
+------------
+
+Implements a Ping from this automation server to the selected devices from inventory using either ICMP or TCP.
+
+.. image:: /_static/services/default_services/ping_service.png
+   :alt: Ping service
+   :align: center
+
+Configuration parameters for creating this service instance:
+  - ``General``
+      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+      - ``Description`` Freeform description of what the service instance does
+      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  - ``Advanced``
+      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
+  - ``Targets``
+      - ``Devices`` Multi-selection list of devices from the inventory
+      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  - ``Specific``
+      - ``Protocol``: Use either ICMP or TCP packets to ping the devices
+      - ``Port`` Which ports to ping (should be formatted as a list of ports separated by a comma, for example "22,23,49").
+      - ``count``: Number of ping packets to send
+      - ``packet_size`` Size of the ping packet payload to send in bytes
+      - ``Timeout`` Seconds to wait before declaring timeout
+      - ``ttl`` Time to Live parameter, which tells routers when to discard this packet because it has been in the network too long (too many hops)
+
+UNIX Command Service
+--------------------
+
+Implements a UNIX command to the target device.
+
+.. image:: /_static/services/default_services/unix_command_service.png
+   :alt: UNIX Command service
+   :align: center
+
+Configuration parameters for creating this service instance:
+  - ``General``
+      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+      - ``Description`` Freeform description of what the service instance does
+      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  - ``Advanced``
+      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
+  - ``Targets``
+      - ``Devices`` Multi-selection list of devices from the inventory
+      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  - ``Specific``
+      - ``Command``: UNIX command to run on the device
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.

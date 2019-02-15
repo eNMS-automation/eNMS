@@ -62,7 +62,7 @@ class Job(Base):
     )
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(String, default="mail_feedback_notification")
-    display_only_failed_nodes = Column(Boolean)
+    display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String, default="")
 
     @property
@@ -102,7 +102,7 @@ class Job(Base):
                 if not logs["success"]
             )
             summary.append(f"FAILED\n{failed}")
-            if not display_only_failed_nodes:
+            if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
                     for device, logs in results["result"]["devices"].items()

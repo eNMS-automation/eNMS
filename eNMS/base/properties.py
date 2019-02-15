@@ -22,6 +22,7 @@ sql_types: dict = {
 }
 
 custom_properties: dict = get_custom_properties()
+
 boolean_properties: List[str] = [
     "mattermost_verify_certificate",
     "multiprocessing",

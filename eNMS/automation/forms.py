@@ -8,6 +8,7 @@ class JobForm(FlaskForm):
     id = HiddenField()
     boolean_fields = HiddenField(
         default=(
+            "display_only_failed_nodes,"
             "send_notification,"
             "multiprocessing,"
             "use_workflow_targets,"

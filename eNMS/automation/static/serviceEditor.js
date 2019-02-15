@@ -56,9 +56,7 @@ function saveService(run=false) { // eslint-disable-line no-unused-vars
     '#edit-service-form',
     function(service) {
       const mode = saveInstance('service', service, !run);
-      if (typeof workflowBuilder === 'undefined') {
-        addInstance(mode, 'service', service);
-      } else {
+      if (typeof workflowBuilder !== 'undefined') {
         nodes.update({id: service.id, label: service.name});
       }
       if (run) {

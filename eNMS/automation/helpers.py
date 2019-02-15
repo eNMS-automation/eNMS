@@ -18,13 +18,11 @@ def scheduler_job(
     job_id: int, aps_job_id: Optional[str] = None, targets: Optional[Set[Device]] = None
 ) -> None:
     with scheduler.app.app_context():
+        task = fetch("Task", creation_time=aps_job_id)
         job = fetch("Job", id=job_id)
         if targets:
             targets = {fetch("Device", id=device_id) for device_id in targets}
         results, now = job.try_run(targets=targets)
-        task = fetch("Task", creation_time=aps_job_id)
-        if task and not task.frequency:
-            task.is_active = False
         parameters = get_one("Parameters")
         if job.push_to_git and parameters.git_automation:
             path_git_folder = Path.cwd() / "git" / "automation"
@@ -37,4 +35,6 @@ def scheduler_job(
             except GitCommandError:
                 pass
             repo.remotes.origin.push()
+        if task and not task.frequency:
+            task.is_active = False
         db.session.commit()

@@ -140,7 +140,7 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
 - Use the ReST API support to return a specified device’s configuration
 - Export all device configurations to a remote Git repository (e.g. Gitlab)
 
-[![Configuration Management](docs/_static/inventory/configuration_management/configuration_management.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
+[![Configuration Management](docs/_static/base/configuration_management.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
 
 ## 6. Event-driven automation
 

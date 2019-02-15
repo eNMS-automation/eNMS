@@ -176,7 +176,7 @@ def create_default_tasks(app: Flask) -> None:
             "description": "Monitor eNMS cluster",
             "job": fetch("Service", name="cluster_monitoring").id,
             "frequency": 15,
-            "status": "Active" if app.config["CLUSTER"] else "Pause",
+            "is_active": app.config["CLUSTER"],
         },
     ]
     for task in tasks:

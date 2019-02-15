@@ -125,7 +125,7 @@ task_properties: List[str] = base_properties + [
     "start_date",
     "end_date",
     "frequency",
-    "status",
+    "is_active",
 ]
 
 task_public_properties: List[str] = task_properties[1:]
@@ -271,17 +271,17 @@ task_serialized_properties: List[str] = [
     "name",
     "description",
     "job_name",
-    "is_active",
     "status",
     "start_date",
     "end_date",
     "frequency",
     "next_run_time",
     "time_before_next_run",
+    "is_active",
     "job",
 ]
 
-task_table_properties: List[str] = task_serialized_properties[1:-1]
+task_table_properties: List[str] = task_serialized_properties[1:-2]
 
 cls_to_properties: Dict[str, List[str]] = {
     "Instance": instance_public_properties,

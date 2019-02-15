@@ -19,18 +19,17 @@ class Task(Base):
     name = Column(String, unique=True)
     description = Column(String)
     creation_time = Column(String)
-    status = Column(String)
     periodic = Column(Boolean)
     frequency = Column(Integer)
     start_date = Column(String)
     end_date = Column(String)
-    is_active = Column(Boolean)
+    is_active = Column(Boolean, default=False)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")
 
     def __init__(self, **kwargs: Any) -> None:
-        self.status = kwargs.pop("is_active", False)
+        print(kwargs)
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
@@ -95,7 +94,7 @@ class Task(Base):
 
     @hybrid_property
     def status(self) -> str:
-        return "Active" if self.is_active else "Pause"
+        return "Active" if self.is_active else "Inactive"
 
     @hybrid_property
     def next_run_time(self) -> Optional[str]:

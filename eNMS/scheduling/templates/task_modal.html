@@ -11,6 +11,13 @@
         <div class="modal-body" style="min-height:70vh;">
           <div class="form-group">
             {{ scheduling_form.id(id='task-id') }}
+            {{ scheduling_form.boolean_fields() }}
+            <fieldset>
+              <div class="item">
+                <input id="task-is_active" name="is_active" type="checkbox" value="y">
+                <label>Schedule task</label>
+              </div>
+            </fieldset>
             <label>Name</label>
             <div class='form-group'>
               {{ scheduling_form.name(id='task-name', class="form-control", required=true) }}

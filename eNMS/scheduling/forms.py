@@ -6,7 +6,7 @@ from eNMS.base.models import ObjectField
 
 class SchedulingForm(FlaskForm):
     id = HiddenField()
-    boolean_fields = HiddenField("is_active")
+    boolean_fields = HiddenField(default="is_active")
     is_active = BooleanField()
     start_date = StringField()
     end_date = StringField()

@@ -24,7 +24,7 @@ def scheduler_job(
         results, now = job.try_run(targets=targets)
         task = fetch("Task", creation_time=aps_job_id)
         if task and not task.frequency:
-            task.status = "Completed"
+            task.is_active = False
         parameters = get_one("Parameters")
         if job.push_to_git and parameters.git_automation:
             path_git_folder = Path.cwd() / "git" / "automation"

@@ -24,21 +24,22 @@ class Task(Base):
     frequency = Column(Integer)
     start_date = Column(String)
     end_date = Column(String)
+    is_active = Column(Boolean)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")
 
     def __init__(self, **kwargs: Any) -> None:
-        self.status = kwargs.pop("status", "Pause")
+        self.status = kwargs.pop("is_active", False)
         super().update(**kwargs)
         self.creation_time = str(datetime.now())
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
-        if self.status == "Active":
+        if self.is_active:
             self.schedule()
 
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
-        if self.status == "Active":
+        if self.is_active:
             self.schedule()
 
     def aps_conversion(self, date: str) -> str:
@@ -51,13 +52,13 @@ class Task(Base):
 
     def pause(self) -> None:
         scheduler.pause_job(self.aps_job_id)
-        self.status = "Pause"
+        self.is_active = False
         db.session.commit()
 
     def resume(self) -> None:
         self.schedule()
         scheduler.resume_job(self.aps_job_id)
-        self.status = "Active"
+        self.is_active = True
         db.session.commit()
 
     def delete_task(self) -> None:
@@ -91,6 +92,10 @@ class Task(Base):
             scheduler.add_job(**{**default, **trigger})
         else:
             scheduler.reschedule_job(default.pop("id"), **trigger)
+
+    @hybrid_property
+    def status(self) -> str:
+        return "Active" if self.is_active else "Pause"
 
     @hybrid_property
     def next_run_time(self) -> Optional[str]:

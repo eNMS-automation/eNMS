@@ -25,6 +25,7 @@ custom_properties: dict = get_custom_properties()
 boolean_properties: List[str] = [
     "mattermost_verify_certificate",
     "multiprocessing",
+    "display_only_failed_nodes",
     "send_notification",
     "use_workflow_targets",
     "push_to_git",
@@ -174,6 +175,7 @@ job_public_properties: List[str] = base_properties + [
     "time_between_retries",
     "send_notification",
     "send_notification_method",
+    "display_only_failed_nodes",
 ]
 
 service_public_properties: List[str] = job_public_properties
@@ -491,6 +493,7 @@ pretty_names: Dict[str, str] = {
     "device_multiprocessing": "Device multiprocessing",
     "dict_match": "Dictionnary match",
     "direction": "Direction",
+    "display_only_failed_nodes": "Display only failed nodes",
     "driver": "Driver",
     "email": "Email",
     "enable_mode": 'Enter "Enable" mode',
@@ -572,6 +575,7 @@ property_types: Dict[str, str] = {
     "import_export_types": "list",
     "send_notification": "bool",
     "multiprocessing": "bool",
+    "display_only_failed_nodes": "bool",
     "use_workflow_targets": "bool",
     "never_update": "bool",
     "mattermost_verify_certificate": "bool",

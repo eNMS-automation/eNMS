@@ -33,6 +33,7 @@ class JobForm(FlaskForm):
             ("mattermost_feedback_notification", "Mattermost"),
         )
     )
+    display_only_failed_nodes = BooleanField()
     mail_recipient = StringField()
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)

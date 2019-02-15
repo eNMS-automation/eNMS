@@ -62,6 +62,7 @@ class Job(Base):
     )
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(String, default="mail_feedback_notification")
+    display_only_failed_nodes = Column(Boolean)
     mail_recipient = Column(String, default="")
 
     @property

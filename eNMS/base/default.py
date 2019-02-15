@@ -169,7 +169,6 @@ def create_default_tasks(app: Flask) -> None:
             "description": "Back-up device configurations",
             "job": fetch("Workflow", name="Configuration Management Workflow").id,
             "frequency": 3600,
-            "status": "Pause",
         },
         {
             "aps_job_id": "Cluster Monitoring",

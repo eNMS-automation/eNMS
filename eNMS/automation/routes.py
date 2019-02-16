@@ -77,7 +77,11 @@ def detached_logs(id: int) -> dict:
 
 @get(bp, "/logs/<int:id>/<runtime>", "View")
 def logs(id: int, runtime: str) -> str:
-    message = fetch("Job", id=id).logs.get(runtime, "Logs have been removed")
+    job = fetch("Job", id=id)
+    if not job:
+        message = "The associated job has been deleted."
+    else:
+        message = job.logs.get(runtime, "Logs have been removed")
     return f"<pre>{dumps(message, indent=4)}</pre>"
 
 

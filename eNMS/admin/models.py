@@ -85,7 +85,7 @@ class Parameters(Base):
             try:
                 repo = getattr(self, f"git_{repository_type}")
                 local_path = app.path / "git" / repository_type
-                for file in scandir():
+                for file in scandir(local_path):
                     if file.name == ".gitkeep":
                         remove(file)
                 if repo:

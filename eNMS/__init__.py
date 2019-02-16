@@ -115,10 +115,9 @@ def configure_logs(app: Flask) -> None:
     )
 
 
-def create_app(path: Path, config_class: Type[Config]) -> Flask:
+def create_app(path: Path, config_class: Type[Config], test: bool = False) -> Flask:
     app = Flask(__name__, static_folder="base/static")
     app.config.from_object(config_class)  # type: ignore
-    app.production = not app.config["DEBUG"]
     app.path = path
     register_extensions(app)
     register_blueprints(app)
@@ -131,6 +130,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
         configure_vault_client(app)
     if USE_SYSLOG:
         configure_syslog_server(app)
-    scheduler.start()
+    if not scheduler.running:
+        scheduler.start()
     info("eNMS starting")
     return app

@@ -97,6 +97,7 @@ class Task(Base):
 
     @hybrid_property
     def next_run_time(self) -> Optional[str]:
+        print(self.aps_job_id)
         job = scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")

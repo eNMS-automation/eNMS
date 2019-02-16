@@ -131,7 +131,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
         configure_vault_client(app)
     if USE_SYSLOG:
         configure_syslog_server(app)
-    if not scheduler.running:
-        scheduler.start()
+    # if not scheduler.running:
+    scheduler.start()
     info("eNMS starting")
     return app

@@ -115,7 +115,7 @@ def configure_logs(app: Flask) -> None:
     )
 
 
-def create_app(path: Path, config_class: Type[Config], test: bool = False) -> Flask:
+def create_app(path: Path, config_class: Type[Config]) -> Flask:
     app = Flask(__name__, static_folder="base/static")
     app.config.from_object(config_class)  # type: ignore
     app.path = path

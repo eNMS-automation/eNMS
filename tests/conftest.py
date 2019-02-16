@@ -9,7 +9,7 @@ from eNMS.config import config_dict
 
 @fixture
 def base_client() -> Iterator[FlaskClient]:
-    app = create_app(Path.cwd(), config_dict["Debug"], test=True)
+    app = create_app(Path.cwd(), config_dict["Debug"])
     app_context = app.app_context()
     app_context.push()
     db.session.close()
@@ -19,7 +19,7 @@ def base_client() -> Iterator[FlaskClient]:
 
 @fixture
 def user_client() -> Iterator[FlaskClient]:
-    app = create_app(Path.cwd(), config_dict["Debug"], test=True)
+    app = create_app(Path.cwd(), config_dict["Debug"])
     app_context = app.app_context()
     app_context.push()
     db.session.close()

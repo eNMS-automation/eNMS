@@ -2,6 +2,7 @@ from flask import Flask
 from flask_login import UserMixin
 from git import Repo
 from logging import info
+from os import scandir, remove
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
@@ -83,8 +84,12 @@ class Parameters(Base):
         for repository_type in ("configurations", "automation"):
             try:
                 repo = getattr(self, f"git_{repository_type}")
+                local_path = app.path / "git" / repository_type
+                for file in scandir():
+                    if file.name == ".gitkeep":
+                        remove(file)
                 if repo:
-                    Repo.clone_from(repo, app.path / "git" / repository_type)
+                    Repo.clone_from(repo, local_path)
             except Exception as e:
                 info(f"Cannot clone {repository_type} git repo ({str(e)})")
         pool = fetch("Pool", name=self.pool_filter)

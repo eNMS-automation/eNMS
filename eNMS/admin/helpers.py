@@ -73,5 +73,5 @@ def migrate_import(app: Flask, request: dict) -> str:
         for edge in edges:
             factory("WorkflowEdge", **edge)
     if request.get("empty_database_before_import", False):
-        create_default(app, create_default=True)
+        create_default(app)
     return status

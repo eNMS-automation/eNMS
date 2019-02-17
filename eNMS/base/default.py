@@ -552,18 +552,16 @@ def create_workflow_of_workflows() -> None:
         workflow.jobs[index].positions["Workflow_of_workflows"] = x * 10, y * 10
 
 
-def create_default(app: Flask, create_default: bool = False) -> None:
+def create_default(app: Flask) -> None:
     create_default_parameters(app)
     parameters = get_one("Parameters")
-    if parameters.first_initialization or create_default:
-        create_default_users()
-        create_default_pools()
-        create_default_services()
-        create_default_workflows()
-        create_default_tasks(app)
-        parameters.trigger_active_parameters(app)
-        parameters.first_initialization = False
-        db.session.commit()
+    create_default_users()
+    create_default_pools()
+    create_default_services()
+    create_default_workflows()
+    create_default_tasks(app)
+    parameters.trigger_active_parameters(app)
+    db.session.commit()
 
 
 def create_examples(app: Flask) -> None:

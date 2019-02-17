@@ -48,7 +48,6 @@ class Parameters(Base):
 
     __tablename__ = type = "Parameters"
     id = Column(Integer, primary_key=True)
-    first_initialization = Column(Boolean, default=True)
     name = Column(String, default="default", unique=True)
     cluster_scan_subnet = Column(String)
     cluster_scan_protocol = Column(String)

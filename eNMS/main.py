@@ -39,6 +39,7 @@ scheduler = BackgroundScheduler(
         "apscheduler.job_defaults.max_instances": "3",
     }
 )
+scheduler.start()
 
 tacacs_client = (
     TACACSClient(environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD"))

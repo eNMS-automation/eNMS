@@ -91,16 +91,14 @@ for (let i = 0; i < devices.length; i++) {
   marker.setIcon(marker.icon);
   markersArray.push(marker);
   marker.on('click', function(e) {
-    showTypeModal('device', this.device_id);
+    e.target.setIcon(e.target.redIcon);
+    selection.push(this.device_id);
+    $('#devices').val(selection);
   });
   marker.on('contextmenu', function(e) {
     $('.global-menu').hide();
     $('.device-menu').show();
-    e.originalEvent.stopPropagation();
     selectedDevice = this.device_id;
-    e.target.setIcon(e.target.redIcon);
-    selection.push(selectedDevice);
-    $('#devices').val(selection);
   });
 
   marker.bindTooltip(device['name'], {
@@ -205,13 +203,19 @@ const action = {
   'Open Street Map': partial(switchLayer, 'osm'),
   'Google Maps': partial(switchLayer, 'gm'),
   'NASA': partial(switchLayer, 'nasa'),
-  'Properties': partial(showTypeModal, 'device', selectedDevice),
+  'Properties': (d) => showTypeModal('device', d),
+  'Connect': connectionParametersModal,
 };
 
 $('body').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
-    action[row]();
+    action[row](selectedDevice);
   },
+});
+
+map.on('contextmenu',function(){
+  $('.global-menu').show();
+  $('.device-menu').hide();
 });

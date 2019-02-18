@@ -198,6 +198,10 @@ $('#select-filters').on('change', function() {
   });
 });
 
+function deleteDevice(nodeId) {
+  confirmDeletion('device', nodeId);
+}
+
 const action = {
   'Export to Google Earth': partial(showModal, 'google-earth'),
   'Open Street Map': partial(switchLayer, 'osm'),
@@ -205,6 +209,7 @@ const action = {
   'NASA': partial(switchLayer, 'nasa'),
   'Properties': (d) => showTypeModal('device', d),
   'Connect': connectionParametersModal,
+  'Delete': deleteDevice,
 };
 
 $('body').contextMenu({

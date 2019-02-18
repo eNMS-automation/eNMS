@@ -5,7 +5,7 @@
 {% block stylesheets %}
   {{ super() }}
   <!-- Vis CSS -->
-  <link href="{{ url_for('automation_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   <style>
     #logical_view { height:600px; }
   .link {
@@ -64,7 +64,7 @@
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <!-- Vis JS -->
-  <script src="{{ url_for('automation_blueprint.static', filename='vis/vis.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
     let devices = {{ devices|tojson|safe }};

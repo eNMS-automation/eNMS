@@ -5,7 +5,7 @@
 {% block stylesheets %}
   {{ super() }}
  <!-- Vis CSS -->
-  <link href="{{ url_for('automation_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   <!-- Context Menu -->
   <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
   <!-- Difflib CSS -->
@@ -106,7 +106,7 @@
   <script src="{{ url_for('automation_blueprint.static', filename='serviceEditor.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <!-- Vis JS -->
-  <script src="{{ url_for('automation_blueprint.static', filename='vis/vis.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='workflowBuilder.js') }}"></script>
   <!-- Difflib -->
   <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>

@@ -23,6 +23,7 @@ let markers;
 // pool filter. We keep track of them so that they are not selected by the
 // boxzoomend when they are hidden.
 let hiddenMarkers;
+let selectedDevice;
 
 const map = L.map('mapid').setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -93,8 +94,12 @@ for (let i = 0; i < devices.length; i++) {
     showTypeModal('device', this.device_id);
   });
   marker.on('contextmenu', function(e) {
+    $('.global-menu').hide();
+    $('.device-menu').show();
+    e.originalEvent.stopPropagation();
+    selectedDevice = this.device_id;
     e.target.setIcon(e.target.redIcon);
-    selection.push(this.device_id);
+    selection.push(selectedDevice);
     $('#devices').val(selection);
   });
 
@@ -200,6 +205,7 @@ const action = {
   'Open Street Map': partial(switchLayer, 'osm'),
   'Google Maps': partial(switchLayer, 'gm'),
   'NASA': partial(switchLayer, 'nasa'),
+  'Properties': partial(showTypeModal, 'device', selectedDevice),
 };
 
 $('body').contextMenu({

@@ -22,7 +22,16 @@ function deviceToNode(device) {
   };
 }
 
-var nodes = new vis.DataSet(map(deviceToNode, devices));
+function linkToEdge(link) {
+  return {
+    from: link.source.id,
+    to: link.destination.id,
+  };
+}
+
+console.log(devices.map(deviceToNode))
+var nodes = new vis.DataSet(devices.map(deviceToNode));
+var edges = new vis.DataSet(links.map(linkToEdge));
 
 /*
 // create an array with edges
@@ -38,31 +47,13 @@ var edges = new vis.DataSet([
 ]);
 /*
 // create a network
-var container = document.getElementById('mynetwork');
+var container = document.getElementById('logical_view');
 var data = {
   nodes: nodes,
-  //edges: edges
+  edges: []
 };
 var options = {};
 var network = new vis.Network(container, data, options);
-
-/**
- * Show device property modal.
- * @param {d} d - selected device.
- */
-/*
-function showNodeProperties(d) {
-  showTypeModal('device', d.real_id);
-}
-*/
-
-/**
- * Show link property modal.
- * @param {d} d - selected link.
- */
-function showLinkProperties(d) {
-  showTypeModal('link', d.real_id);
-}
 
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {

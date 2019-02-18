@@ -12,6 +12,40 @@ const width = 1200;
 const height = 600;
 let selectedDevices = [];
 
+var nodes = new vis.DataSet([
+{% for node, properties in node_table.items() %}  
+    {
+    id: {{ node.id }}, 
+    label: '{{ node[labels['node']] }}', 
+    image: 'static/images/default/{{ node.subtype }}.gif', 
+    shape: 'image', 
+    title: "{% for property in properties %}\
+    <b>{{names[property]}}</b>: {{ node[property] }}<br>{% endfor %}"
+    },
+{% endfor %}
+]);
+
+// create an array with edges
+var edges = new vis.DataSet([
+{% for link, properties in link_table.items() %}  
+    { 
+    from: {{ link['source']['id'] }}, 
+    to: {{ link['destination']['id'] }}, 
+    label: '{{ link[labels['link']] }}',
+    color: {color: '{{ link.color }}'},
+    },
+{% endfor %}
+]);
+
+// create a network
+var container = document.getElementById('mynetwork');
+var data = {
+  nodes: nodes,
+  edges: edges
+};
+var options = {};
+var network = new vis.Network(container, data, options);
+
 /**
  * Show device property modal.
  * @param {d} d - selected device.

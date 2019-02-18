@@ -29,7 +29,6 @@ function linkToEdge(link) {
   };
 }
 
-console.log(devices.map(deviceToNode))
 var nodes = new vis.DataSet(devices.map(deviceToNode));
 var edges = new vis.DataSet(links.map(linkToEdge));
 

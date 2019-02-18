@@ -4,6 +4,8 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <!-- Vis CSS -->
+  <link href="{{ url_for('automation_blueprint.static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   <style>
     #logical_view { height:600px; }
   .link {
@@ -61,38 +63,11 @@
   {{ super()}}
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
-  <!-- D3.js -->
-  <script src="{{ url_for('views_blueprint.static', filename='d3/d3.v3.min.js') }}"></script>
+  <!-- Vis JS -->
+  <script src="{{ url_for('automation_blueprint.static', filename='vis/vis.min.js') }}"></script>
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
-    var graph = {  
-      "nodes":[
-        {% for device in devices %}  
-          {  
-            "x": {{ device.id }},
-            "y": {{ device.id }},
-            "description": "{{ device.description }}",
-            "vendor": "{{ device.vendor }}",
-            "ip_address": "{{ device.ip_address }}",
-            "id": {{ name_to_id[device.name] }},
-            "real_id": {{ device.id }},
-            "name": "{{ device.name }}",
-            "img":  "{{ url_for('views_blueprint.static', filename='images/default/' + device.subtype + '.gif') }}",
-            "selected_img": "{{ url_for('views_blueprint.static', filename='images/selected/' + device.subtype + '.gif') }}"
-          },
-        {% endfor %}
-      ],
-      "links":[  
-        {% for link in links %}  
-          {
-            "real_id": {{ link.id }},
-            "name": "{{ link.name }}",
-            "source": {{ name_to_id[link["source_name"]] }},
-            "target": {{ name_to_id[link["destination_name"]] }}
-          },
-        {% endfor %}
-      ]
-    };
+    let devices = {{ devices|tojson|safe }};
   </script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>

@@ -34,6 +34,7 @@ def migrate_export(app: Flask, request: dict) -> bool:
 
 def migrate_import(app: Flask, request: dict) -> str:
     status, types = "Import successful.", request["import_export_types"]
+    workflows, edges = [], []
     if request.get("empty_database_before_import", False):
         delete_all(*types)
     for cls in types:
@@ -65,13 +66,11 @@ def migrate_import(app: Flask, request: dict) -> str:
                 except Exception as e:
                     info(f"{str(obj)} could not be imported ({str(e)})")
                     status = "Partial import (see logs)."
-    if "Workflow" in types:
-        for workflow in workflows:
-            workflow["edges"] = []
+    for workflow in workflows:
+        workflow["edges"] = []
         factory("Workflow", **workflow)
-    if "WorkflowEdge" in types:
-        for edge in edges:
-            factory("WorkflowEdge", **edge)
+    for edge in edges:
+        factory("WorkflowEdge", **edge)
     if request.get("empty_database_before_import", False):
         create_default(app)
     return status

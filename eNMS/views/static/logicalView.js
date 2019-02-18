@@ -33,24 +33,10 @@ console.log(devices.map(deviceToNode))
 var nodes = new vis.DataSet(devices.map(deviceToNode));
 var edges = new vis.DataSet(links.map(linkToEdge));
 
-/*
-// create an array with edges
-var edges = new vis.DataSet([
-{% for link, properties in link_table.items() %}  
-    { 
-    from: {{ link['source']['id'] }}, 
-    to: {{ link['destination']['id'] }}, 
-    label: '{{ link[labels['link']] }}',
-    color: {color: '{{ link.color }}'},
-    },
-{% endfor %}
-]);
-/*
-// create a network
 var container = document.getElementById('logical_view');
 var data = {
   nodes: nodes,
-  edges: []
+  edges: edges,
 };
 var options = {};
 var network = new vis.Network(container, data, options);

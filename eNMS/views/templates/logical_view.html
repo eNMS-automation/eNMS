@@ -68,6 +68,7 @@
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
     let devices = {{ devices|tojson|safe }};
+    let links = {{ links|tojson|safe }};
   </script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>

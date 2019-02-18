@@ -2,15 +2,9 @@
 global
 alertify: false
 call: false
-d3: false
 doc: false
-graph: false
-showTypeModal: false
 */
 
-const width = 1200;
-const height = 600;
-let visDevices = [];
 let selectedDevices = [];
 
 function deviceToNode(device) {
@@ -40,7 +34,6 @@ var data = {
 var options = {};
 var network = new vis.Network(container, data, options);
 
-// when a filter is selected, apply it
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     alertify.notify(`Filter applied.`, 'success', 5);

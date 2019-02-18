@@ -90,12 +90,12 @@ for (let i = 0; i < devices.length; i++) {
   marker.setIcon(marker.icon);
   markersArray.push(marker);
   marker.on('click', function(e) {
-    /*
-      e.target.setIcon(e.target.redIcon);
-      selection.push(this.device_id);
-      $('#devices').val(selection);
-    */
     showTypeModal('device', this.device_id);
+  });
+  marker.on('contextmenu', function(e) {
+    e.target.setIcon(e.target.redIcon);
+    selection.push(this.device_id);
+    $('#devices').val(selection);
   });
 
   marker.bindTooltip(device['name'], {

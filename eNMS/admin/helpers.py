@@ -34,7 +34,8 @@ def migrate_export(app: Flask, request: dict) -> bool:
 
 def migrate_import(app: Flask, request: dict) -> str:
     status, types = "Import successful.", request["import_export_types"]
-    workflows, edges = [], []
+    workflows: list = []
+    edges: list = []
     if request.get("empty_database_before_import", False):
         delete_all(*types)
     for cls in types:

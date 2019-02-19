@@ -69,9 +69,17 @@ def migrate_import(app: Flask, request: dict) -> str:
                     status = "Partial import (see logs)."
     for workflow in workflows:
         workflow["edges"] = []
-        factory("Workflow", **workflow)
+        try:
+            factory("Workflow", **workflow)
+        except Exception as e:
+            info(f"{str(workflow)} could not be imported ({str(e)})")
+            status = "Partial import (see logs)."
     for edge in edges:
-        factory("WorkflowEdge", **edge)
+        try:
+            factory("WorkflowEdge", **edge)
+        except Exception as e:
+            info(f"{str(edge)} could not be imported ({str(e)})")
+            status = "Partial import (see logs)."
     if request.get("empty_database_before_import", False):
         create_default(app)
     return status

@@ -180,7 +180,8 @@ def create_default_tasks(app: Flask) -> None:
         },
     ]
     for task in tasks:
-        factory("Task", **task)
+        if not fetch("Task", name=task["name"]):
+            factory("Task", **task)
 
 
 def create_example_services() -> None:

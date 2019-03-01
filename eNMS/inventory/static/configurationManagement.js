@@ -6,7 +6,6 @@ convertSelect: false
 diffview: false
 doc: false
 initTable: false
-refreshTable: false
 */
 
 let table = initTable( // eslint-disable-line no-unused-vars

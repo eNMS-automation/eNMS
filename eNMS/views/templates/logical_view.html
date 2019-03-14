@@ -38,30 +38,6 @@
   {% include 'link_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
   <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li class="dropdown-submenu global-menu">
-      <a class="menu-submenu menu-view" tabindex="-1" href="#">View type<span class="caret-right"></span></a>
-      <ul class="dropdown-menu">
-        {% if view == '2D' %}
-          <li onclick="$('#view-type').val('2DC'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
-          <li onclick="$('#view-type').val('3D'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
-        {% elif view == '2DC' %}
-          <li onclick="$('#view-type').val('2D'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
-          <li onclick="$('#view-type').val('3D'); $('#view-form').submit();"><a tabindex="-1" href="#">3D view</a></li>
-        {% elif view == '3D' %}
-          <li onclick="$('#view-type').val('2D'); $('#view-form').submit();"><a tabindex="-1" href="#">2D view</a></li>
-          <li onclick="$('#view-type').val('2DC'); $('#view-form').submit();"><a tabindex="-1" href="#">Clusterized view</a></li>
-        {% endif %}
-      </li>
-    </ul>
-    <li class="global-menu"><a tabindex="-1" href="#">Export to Google Earth</a></li>
-    <li class="dropdown-submenu global-menu">
-      <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
-      <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Open Street Map</a></li>
-        <li><a tabindex="-1" href="#">Google Maps</a></li>
-        <li><a tabindex="-1" href="#">NASA</a></li>
-      </ul>
-    </li>
     <li class="device-menu"><a tabindex="-1" href="#">Properties</a></li>
     <li class="device-menu"><a tabindex="-1" href="#">Connect</a></li>
     <li class="device-menu"><a tabindex="-1" href="#">Automation</a></li>

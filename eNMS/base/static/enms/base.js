@@ -181,7 +181,9 @@ function confirmDeletion(type, id) { // eslint-disable-line no-unused-vars
 function deleteInstance(type, id) { // eslint-disable-line no-unused-vars
   call(`/delete/${type}/${id}`, function(result) {
     $('#confirm-delete').modal('hide');
-    table.row($(`#${id}`)).remove().draw(false);
+    if (typeof table !== 'undefined') {
+      table.row($(`#${id}`)).remove().draw(false);
+    }
     alertify.notify(
       `${capitalize(type)} '${result.name}' deleted.`, 'error', 5
     );

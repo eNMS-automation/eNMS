@@ -4,7 +4,12 @@ from typing import Union
 
 from eNMS.base.helpers import fetch, fetch_all, get, get_one, post, serialize
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
-from eNMS.inventory.forms import AddDevice, AddLink, GottyConnectionForm
+from eNMS.inventory.forms import (
+    AddDevice,
+    AddLink,
+    DeviceAutomationForm,
+    GottyConnectionForm,
+)
 from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
@@ -20,6 +25,7 @@ def view(view_type: str) -> dict:
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),
+        device_automation_form=DeviceAutomationForm(request.form),
         device_subtypes=device_subtypes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,

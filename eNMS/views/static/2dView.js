@@ -209,6 +209,7 @@ const action = {
   'NASA': partial(switchLayer, 'nasa'),
   'Properties': (d) => showTypeModal('device', d),
   'Connect': connectionParametersModal,
+  'Automation': deviceAutomationModal,
   'Delete': deleteDevice,
 };
 

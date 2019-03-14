@@ -34,6 +34,13 @@ var data = {
 var options = {};
 var network = new vis.Network(container, data, options);
 
+const action = {
+  'Properties': (d) => showTypeModal('device', d),
+  'Connect': connectionParametersModal,
+  'Automation': deviceAutomationModal,
+  'Delete': (d) => confirmDeletion('device', d),
+};
+
 $('#logical_view').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {

@@ -23,12 +23,13 @@ let markers;
 // pool filter. We keep track of them so that they are not selected by the
 // boxzoomend when they are hidden.
 let hiddenMarkers;
-let selectedDevice;
+let selectedObject;
 
 const map = L.map('mapid').setView(
   [parameters.default_latitude, parameters.default_longitude],
   parameters.default_zoom_level
 );
+
 const osmLayer = L.tileLayer(layers['osm']);
 map.addLayer(osmLayer);
 let currentLayer = osmLayer;
@@ -96,9 +97,9 @@ for (let i = 0; i < devices.length; i++) {
     $('#devices').val(selection);
   });
   marker.on('contextmenu', function(e) {
-    $('.global-menu').hide();
+    $('.global-menu,.link-menu').hide();
     $('.device-menu').show();
-    selectedDevice = this.device_id;
+    selectedObject = this.device_id;
   });
 
   marker.bindTooltip(device['name'], {
@@ -135,6 +136,11 @@ for (let i = 0; i < links.length; i++) {
   polyline.link_id = link.id;
   polyline.on('click', function(e) {
     showTypeModal('link', this.link_id);
+  });
+  polyline.on('contextmenu', function(e) {
+    $('.global-menu,.device-menu').hide();
+    $('.link-menu').show();
+    selectedObject = this.link_id;
   });
   polyline.bindTooltip(link['name'], {
     permanent: false,
@@ -203,7 +209,8 @@ const action = {
   'Open Street Map': partial(switchLayer, 'osm'),
   'Google Maps': partial(switchLayer, 'gm'),
   'NASA': partial(switchLayer, 'nasa'),
-  'Properties': (d) => showTypeModal('device', d),
+  'Device properties': (d) => showTypeModal('device', d),
+  'Link properties': (l) => showTypeModal('link', l),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
 };
@@ -212,11 +219,14 @@ $('body').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
-    action[row](selectedDevice);
+    action[row](selectedObject);
+    selectedObject = null;
   },
 });
 
-map.on('contextmenu',function(){
-  $('.global-menu').show();
-  $('.device-menu').hide();
+map.on('contextmenu',function() {
+  if (!selectedObject) {
+    $('.device-menu,.link-menu').hide();
+    $('.global-menu').show();
+  }
 });

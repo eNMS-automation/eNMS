@@ -5,7 +5,7 @@ call: false
 doc: false
 */
 
-let selectedNode = [];
+let selected;
 
 function deviceToNode(device) {
   return {
@@ -18,6 +18,7 @@ function deviceToNode(device) {
 
 function linkToEdge(link) {
   return {
+    id: link.id,
     from: link.source.id,
     to: link.destination.id,
   };
@@ -33,22 +34,29 @@ var data = {
 };
 var options = {};
 var network = new vis.Network(container, data, options);
+
 network.on('oncontext', function(properties) {
   properties.event.preventDefault();
   const node = this.getNodeAt(properties.pointer.DOM);
   const edge = this.getEdgeAt(properties.pointer.DOM);
   if (typeof node !== 'undefined') {
-    $('.global-menu').hide();
+    $('.global-menu,.link-menu').hide();
     $('.device-menu').show();
-    selectedNode = node;
+    selected = node;
+  }
+  else if (typeof edge !== 'undefined') {
+    selected = edge;
+    $('.global-menu,.device-menu').hide();
+    $('.link-menu').show();
   } else {
-    $('.device-menu').hide();
+    $('.link-menu,.device-menu').hide();
     $('.global-menu').show();
   }
 });
 
 const action = {
-  'Properties': (d) => showTypeModal('device', d),
+  'Device properties': (d) => showTypeModal('device', d),
+  'Link properties': (l) => showTypeModal('link', l),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
   'Not implemented yet': () => alertify.notify('Later.'),
@@ -58,7 +66,7 @@ $('#logical_view').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
-    action[row](selectedNode);
+    action[row](selected);
   },
 });
 

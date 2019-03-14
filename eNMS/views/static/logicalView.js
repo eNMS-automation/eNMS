@@ -5,7 +5,7 @@ call: false
 doc: false
 */
 
-let selectedDevices = [];
+let selectedNode = [];
 
 function deviceToNode(device) {
   return {
@@ -38,7 +38,12 @@ network.on('oncontext', function(properties) {
   const node = this.getNodeAt(properties.pointer.DOM);
   const edge = this.getEdgeAt(properties.pointer.DOM);
   if (typeof node !== 'undefined') {
+    $('.global-menu').hide();
+    $('.device-menu').show();
     selectedNode = node;
+  } else {
+    $('.device-menu').hide();
+    $('.global-menu').show();
   }
 });
 
@@ -47,6 +52,7 @@ const action = {
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
   'Delete': (d) => confirmDeletion('device', d),
+  'Not implemented yet': () => alertify.notify('Later.'),
 };
 
 $('#logical_view').contextMenu({

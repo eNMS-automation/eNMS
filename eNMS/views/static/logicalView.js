@@ -51,7 +51,6 @@ const action = {
   'Properties': (d) => showTypeModal('device', d),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
-  'Delete': (d) => confirmDeletion('device', d),
   'Not implemented yet': () => alertify.notify('Later.'),
 };
 

@@ -33,6 +33,14 @@ var data = {
 };
 var options = {};
 var network = new vis.Network(container, data, options);
+network.on('oncontext', function(properties) {
+  properties.event.preventDefault();
+  const node = this.getNodeAt(properties.pointer.DOM);
+  const edge = this.getEdgeAt(properties.pointer.DOM);
+  if (typeof node !== 'undefined') {
+    selectedNode = node;
+  }
+});
 
 const action = {
   'Properties': (d) => showTypeModal('device', d),

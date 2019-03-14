@@ -16,7 +16,10 @@ from eNMS.inventory.helpers import object_export, object_import
 
 @auth.get_password
 def get_password(username: str) -> str:
-    return fetch("User", name=username).password
+    try:
+        return fetch("User", name=username).password
+    except AttributeError:
+        return {"error": f"User ${username} does not exist (authentication failure)"}
 
 
 @auth.error_handler

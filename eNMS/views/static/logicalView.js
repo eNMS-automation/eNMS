@@ -34,6 +34,14 @@ var data = {
 var options = {};
 var network = new vis.Network(container, data, options);
 
+$('#logical_view').contextMenu({
+  menuSelector: '#contextMenu',
+  menuSelected: function(invokedOn, selectedMenu) {
+    const row = selectedMenu.text();
+    action[row](selectedNode);
+  },
+});
+
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     alertify.notify(`Filter applied.`, 'success', 5);

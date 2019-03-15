@@ -70,7 +70,6 @@ def try_commit():
     try:
         db.session.commit()
     except RuntimeError:
-        print("test")
         pass
 
 

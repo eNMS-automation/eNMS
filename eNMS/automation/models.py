@@ -148,8 +148,7 @@ class Job(Base):
             payload = {}
         info(f"{self.name}: starting.")
         self.completed = self.failed = 0
-        if not from_workflow:
-            db.session.commit()
+        try_commit()
         failed_attempts, now = {}, str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             info(f"Running job {self.name}, attempt {i}")
@@ -164,8 +163,8 @@ class Job(Base):
         info(f"{self.name}: finished.")
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
+        try_commit()
         if not from_workflow:
-            db.session.commit()
             if self.send_notification:
                 self.notify(results, now)
         return results, now
@@ -353,11 +352,10 @@ class Workflow(Job):
             end.positions[self.name] = (500, 0)
 
     def job(self, payload: dict, device: Optional[Device] = None) -> dict:
-        if not self.multiprocessing:
-            self.state = {"jobs": {}}
-            if device:
-                self.state["current_device"] = device.name
-            db.session.commit()
+        self.state = {"jobs": {}}
+        if device:
+            self.state["current_device"] = device.name
+        try_commit()
         jobs: List[Job] = [self.jobs[0]]
         visited: Set = set()
         results: dict = {"success": False}
@@ -368,9 +366,8 @@ class Workflow(Job):
             ):
                 continue
             visited.add(job)
-            if not self.multiprocessing:
-                self.state["current_job"] = job.get_properties()
-                db.session.commit()
+            self.state["current_job"] = job.get_properties()
+            try_commit()
             log = f"Workflow {self.name}: job {job.name}"
             if device:
                 log += f" on {device.name}"
@@ -379,9 +376,8 @@ class Workflow(Job):
                 results, {device} if device else None, from_workflow=True
             )
             success = job_results["success"]
-            if not self.multiprocessing:
-                self.state["jobs"][job.id] = success
-                db.session.commit()
+            self.state["jobs"][job.id] = success
+            try_commit()
             edge_type_to_follow = "success" if success else "failure"
             for successor in job.job_successors(self, edge_type_to_follow):
                 if successor not in visited:

@@ -52,7 +52,12 @@ class SwissArmyKnifeService(Service):
         with open(filename, "w") as file:
             file.write(str_dict(payload["logs"][payload["runtime"]]))
         with open(filename, "r") as file:
-            message.attach(filename, "text/plain", file.read())
+            message.attach(
+                filename,
+                "text/plain",
+                file.read(),
+                disposition=f"attachment; filename={filename}",
+            )
         remove(filename)
         mail_client.send(message)
         return {"success": True}

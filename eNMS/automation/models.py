@@ -106,17 +106,17 @@ class Job(Base):
             f"Runtime: {now}",
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
-        if "devices" in results.get("result", "") and not results["success"]:
+        if "devices" in results and not results["success"]:
             failed = "\n".join(
                 device
-                for device, logs in results["result"]["devices"].items()
+                for device, logs in results["devices"].items()
                 if not logs["success"]
             )
             summary.append(f"FAILED\n{failed}")
             if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
-                    for device, logs in results["result"]["devices"].items()
+                    for device, logs in results["devices"].items()
                     if logs["success"]
                 )
                 summary.append(f"\n\nPASS:\n{passed}")
@@ -142,22 +142,28 @@ class Job(Base):
         targets: Optional[Set[Device]] = None,
         from_workflow: bool = False,
     ) -> Tuple[dict, str]:
-        self.is_running, self.state = True, {}
+        self.is_running, self.state, results = True, {}, {"success": False}
         if not payload:
             payload = {}
         info(f"{self.name}: starting.")
-        self.completed = self.failed = 0
-        try_commit()
         failed_attempts, now = {}, str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
+            self.completed = self.failed = 0
+            try_commit()
             info(f"Running job {self.name}, attempt {i}")
-            results, targets = self.run(payload, targets)
-            if results["success"]:
+            print(targets)
+            attempt_results = self.run(payload, targets)
+            print(targets, set(targets))
+            for device in set(targets):
+                if not attempt_results["devices"][device.name]["success"]:
+                    continue
+                results["devices"][device.name] = attempt_results["devices"][device]
+                targets.remove(device)
+            if attempt_results["success"]:
                 break
             if i != self.number_of_retries:
-                failed_attempts[f"Attempts {i + 1}"] = results
+                results[f"Attempts {i + 1}"] = attempt_results
                 sleep(self.time_between_retries)
-        results["failed_attempts"] = failed_attempts
         self.logs[now] = results
         info(f"{self.name}: finished.")
         self.is_running, self.state = False, {}
@@ -181,7 +187,7 @@ class Job(Base):
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
         device, results, payload = args
         device_result = self.get_results(payload, device)
-        results["result"]["devices"][device.name] = device_result
+        results["devices"][device.name] = device_result
 
     def run(
         self, payload: dict, targets: Optional[Set[Device]] = None
@@ -189,7 +195,7 @@ class Job(Base):
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         if targets:
-            results: dict = {"result": {"devices": {}}}
+            results: dict = {"devices": {}}
             if self.multiprocessing:
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
@@ -199,18 +205,12 @@ class Job(Base):
                 pool.close()
                 pool.join()
             else:
-                results["result"]["devices"] = {
+                results["devices"] = {
                     device.name: self.get_results(payload, device) for device in targets
                 }
-            remaining_targets = {
-                device
-                for device in targets
-                if not results["result"]["devices"][device.name]["success"]
-            }
-            results["success"] = not bool(remaining_targets)
-            return results, remaining_targets
+            return results
         else:
-            return self.get_results(payload), None
+            return self.get_results(payload)
 
 
 class Service(Job):

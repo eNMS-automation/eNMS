@@ -15,7 +15,6 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 from typing import Any, List, Optional, Set, Tuple
 
-from eNMS.main import db
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,

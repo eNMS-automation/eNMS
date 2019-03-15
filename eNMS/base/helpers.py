@@ -7,7 +7,7 @@ from sqlalchemy import exc
 from string import punctuation
 from typing import Any, Callable, List, Optional, Tuple
 
-from eNMS.main import db, scheduler
+from eNMS.main import db
 from eNMS.base.classes import classes
 from eNMS.base.properties import pretty_names, property_types
 

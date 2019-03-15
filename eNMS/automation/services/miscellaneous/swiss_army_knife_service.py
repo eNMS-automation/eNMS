@@ -65,7 +65,7 @@ class SwissArmyKnifeService(Service):
             channel=parameters.slack_channel,
             text=str_dict(payload["content"]),
         )
-        return {"success": True, "result": str(content)}
+        return {"success": True, "result": str(result)}
 
     def mattermost_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")

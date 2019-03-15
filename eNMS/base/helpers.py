@@ -18,7 +18,6 @@ def add_classes(*models: db.Model) -> None:
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:
-    print(kwargs)
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 

@@ -120,7 +120,8 @@ class Job(Base):
                 "job": self.serialized,
                 "logs": self.logs,
                 "runtime": time,
-                "result": self.build_notification(results, time),
+                "result": results["success"],
+                "content": self.build_notification(results, time),
             }
         )
 
@@ -159,8 +160,6 @@ class Job(Base):
         try:
             return self.job(payload, device) if device else self.job(payload)
         except Exception as e:
-            self.job.status = "Idle"
-            db.session.commit()
             return {"success": False, "result": str(e)}
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:

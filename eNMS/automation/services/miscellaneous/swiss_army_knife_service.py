@@ -37,18 +37,15 @@ class SwissArmyKnifeService(Service):
 
     def mail_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
-        name, recipients = (
-            payload["job"]["name"],
-            (
-                payload["job"]["mail_recipient"].split(",")
-                or parameters.mail_recipients.split(",")
-            ),
-        )
+        name = f"{payload['job']['name']}"
+        recipients = payload["job"]["mail_recipient"].split(
+            ","
+        ) or parameters.mail_recipients.split(",")
         message = Message(
-            name,
+            f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
             sender=parameters.mail_sender,
             recipients=recipients,
-            body=payload["result"],
+            body=payload["content"],
         )
         runtime = payload["runtime"].replace(".", "").replace(":", "")
         filename = f"logs-{name}-{runtime}.txt"
@@ -66,9 +63,9 @@ class SwissArmyKnifeService(Service):
         result = slack_client.api_call(
             "chat.postMessage",
             channel=parameters.slack_channel,
-            text=str_dict(payload["result"]),
+            text=str_dict(payload["content"]),
         )
-        return {"success": True, "result": str(result)}
+        return {"success": True, "result": str(content)}
 
     def mattermost_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
@@ -76,7 +73,7 @@ class SwissArmyKnifeService(Service):
             parameters.mattermost_url,
             verify=parameters.mattermost_verify_certificate,
             data=dumps(
-                {"channel": parameters.mattermost_channel, "text": payload["result"]}
+                {"channel": parameters.mattermost_channel, "text": payload["content"]}
             ),
         )
         return {"success": True}

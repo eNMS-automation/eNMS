@@ -187,6 +187,13 @@ def reset_status() -> bool:
     return True
 
 
+@post(bp, "/git_action/<action>", "Admin")
+def git_action(action: str) -> bool:
+    print(action)
+    parameters = get_one("Parameters")
+    return True
+
+
 @post(bp, "/migration_<direction>", "Admin")
 def migration(direction: str) -> Union[bool, str]:
     args = (app, request.form)

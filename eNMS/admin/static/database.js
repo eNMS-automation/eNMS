@@ -46,6 +46,16 @@ function resetStatus() { // eslint-disable-line no-unused-vars
   });
 }
 
+/**
+ * Git Action.
+ * @param {action} - action - Clone or Pull.
+ */
+function gitAction(action) { // eslint-disable-line no-unused-vars
+  call(`/admin/git_action/${action}`, function(result) {
+    alertify.notify('Action successful.', 'success', 5);
+  });
+}
+
 (function() {
   convertSelect('#import_export_types');
   $('#clear_logs_date').datetimepicker({

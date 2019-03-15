@@ -96,7 +96,7 @@ class Parameters(Base):
                     info(f"Cannot {action} {repository_type} git repository ({str(e)})")
 
     def trigger_active_parameters(self, app: Flask) -> None:
-        self.retrieve_git_content(app)
+        self.get_git_content(app)
         pool = fetch("Pool", name=self.pool_filter)
         if pool:
             database_filtering(pool)

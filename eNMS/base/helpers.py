@@ -7,7 +7,7 @@ from sqlalchemy import exc
 from string import punctuation
 from typing import Any, Callable, List, Optional, Tuple
 
-from eNMS.main import db
+from eNMS.main import db, scheduler
 from eNMS.base.classes import classes
 from eNMS.base.properties import pretty_names, property_types
 
@@ -64,6 +64,14 @@ def export(model: str) -> List[dict]:
 
 def get_one(model: str) -> db.Model:
     return classes[model].query.one()
+
+
+def try_commit():
+    try:
+        db.session.commit()
+    except RuntimeError:
+        print("test")
+        pass
 
 
 def factory(cls_name: str, **kwargs: Any) -> db.Model:

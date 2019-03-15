@@ -22,7 +22,7 @@ from eNMS.base.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, try_commit
 from eNMS.base.models import Base
 from eNMS.inventory.models import Device
 
@@ -175,10 +175,9 @@ class Job(Base):
             results = self.job(payload, device) if device else self.job(payload)
         except Exception as e:
             results = {"success": False, "result": str(e)}
-        if not self.multiprocessing:
-            self.completed += 1
-            self.failed += 1 - results["success"]
-            db.session.commit()
+        self.completed += 1
+        self.failed += 1 - results["success"]
+        try_commit()
         return results
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:

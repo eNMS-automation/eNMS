@@ -24,7 +24,7 @@ class Config(object):
     LDAP_SERVER = environ.get("LDAP_SERVER")
     LDAP_USERDN = environ.get("LDAP_USERDN")
     LDAP_BASEDN = environ.get("LDAP_BASEDN")
-    LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP")
+    LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP").split(",")
 
     # TACACS+
     USE_TACACS = int(environ.get("USE_TACACS", False))

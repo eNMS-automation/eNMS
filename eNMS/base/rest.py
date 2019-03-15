@@ -16,10 +16,7 @@ from eNMS.inventory.helpers import object_export, object_import
 
 @auth.get_password
 def get_password(username: str) -> str:
-    try:
-        return fetch("User", name=username).password
-    except AttributeError:
-        return {"error": f"User ${username} does not exist (authentication failure)"}
+    return getattr(fetch("User", name=username), "password", False)
 
 
 @auth.error_handler
@@ -73,7 +70,7 @@ class GetInstance(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls: str, name: str) -> dict:
-        return fetch(cls, name=name).get_properties()
+        return fetch(cls, name=name).serialized
 
     def delete(self, cls: str, name: str) -> dict:
         return delete(fetch(cls, name=name))

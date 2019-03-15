@@ -94,7 +94,8 @@ def login() -> Union[Response, str]:
                             "email": json_response["attributes"].get("mail", ""),
                         }
                         if any(
-                            app.config["LDAP_ADMIN_GROUP"] in s
+                            group in s
+                            for group in app.config["LDAP_ADMIN_GROUP"]
                             for s in json_response["attributes"]["memberOf"]
                         ):
                             user["permissions"] = ["Admin"]

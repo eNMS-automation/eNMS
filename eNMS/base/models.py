@@ -119,7 +119,7 @@ class Base(db.Model):
 
     @classmethod
     def choices(cls) -> List[Tuple[int, str]]:
-        return [(obj.id, obj.name) for obj in cls.query.all() if obj.visible]
+        return [(obj.id, str(obj)) for obj in cls.query.all() if obj.visible]
 
     @classmethod
     def serialize(cls) -> List[dict]:

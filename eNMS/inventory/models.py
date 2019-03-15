@@ -91,6 +91,9 @@ class Device(CustomDevice):
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
+    def __repr__(self) -> str:
+        return f"{self.name} ({self.model})"
+
 
 class Link(Object):
 

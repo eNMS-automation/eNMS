@@ -79,18 +79,21 @@ class Parameters(Base):
         self.gotty_port_index = -1
         super().update(**kwargs)
 
-    def trigger_active_parameters(self, app: Flask) -> None:
+    def retrieve_git_content(self, app: Flask) -> None:
         for repository_type in ("configurations", "automation"):
-            try:
-                repo = getattr(self, f"git_{repository_type}")
-                local_path = app.path / "git" / repository_type
-                for file in scandir(local_path):
-                    if file.name == ".gitkeep":
-                        remove(file)
-                if repo:
+            repo = getattr(self, f"git_{repository_type}")
+            local_path = app.path / "git" / repository_type
+            for file in scandir(local_path):
+                if file.name == ".gitkeep":
+                    remove(file)
+            if repo:
+                try:
                     Repo.clone_from(repo, local_path)
-            except Exception as e:
-                info(f"Cannot clone {repository_type} git repo ({str(e)})")
+                except Exception as e:
+                    info(f"Cannot clone {repository_type} git repo ({str(e)})")
+
+    def trigger_active_parameters(self, app: Flask) -> None:
+        self.retrieve_git_content(app)
         pool = fetch("Pool", name=self.pool_filter)
         if pool:
             database_filtering(pool)

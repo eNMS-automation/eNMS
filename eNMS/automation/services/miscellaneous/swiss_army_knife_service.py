@@ -102,6 +102,7 @@ class SwissArmyKnifeService(Service):
         if parameters.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")
             try:
+                repo.remotes.origin.pull()
                 repo.git.add(A=True)
                 repo.git.commit(m="Automatic commit (configurations)")
             except GitCommandError as e:

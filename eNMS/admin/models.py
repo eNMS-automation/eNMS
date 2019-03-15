@@ -79,7 +79,7 @@ class Parameters(Base):
         self.gotty_port_index = -1
         super().update(**kwargs)
 
-    def retrieve_git_content(self, app: Flask) -> None:
+    def get_git_content(self, app: Flask, action: str = "clone") -> None:
         for repository_type in ("configurations", "automation"):
             repo = getattr(self, f"git_{repository_type}")
             local_path = app.path / "git" / repository_type
@@ -88,9 +88,12 @@ class Parameters(Base):
                     remove(file)
             if repo:
                 try:
-                    Repo.clone_from(repo, local_path)
+                    if action == "clone":
+                        Repo.clone_from(repo, local_path)
+                    else:
+                        Repo(local_path).remotes.origin.pull()
                 except Exception as e:
-                    info(f"Cannot clone {repository_type} git repo ({str(e)})")
+                    info(f"Cannot {action} {repository_type} git repository ({str(e)})")
 
     def trigger_active_parameters(self, app: Flask) -> None:
         self.retrieve_git_content(app)

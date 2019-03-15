@@ -159,6 +159,8 @@ class Job(Base):
         try:
             return self.job(payload, device) if device else self.job(payload)
         except Exception as e:
+            self.job.status = "Idle"
+            db.session.commit()
             return {"success": False, "result": str(e)}
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:

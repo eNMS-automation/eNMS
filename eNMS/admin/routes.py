@@ -189,8 +189,8 @@ def reset_status() -> bool:
 
 @post(bp, "/git_action/<action>", "Admin")
 def git_action(action: str) -> bool:
-    print(action)
     parameters = get_one("Parameters")
+    parameters.get_git_content(app, action)
     return True
 
 

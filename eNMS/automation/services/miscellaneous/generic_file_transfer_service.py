@@ -30,22 +30,29 @@ class GenericFileTransferService(Service):
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         if self.load_known_host_keys:
             ssh_client.load_system_host_keys()
-        ssh_client.connect(
-            device.ip_address,
-            username=device.username,
-            password=device.password,
-            look_for_keys=self.look_for_keys,
-        )
-        self.transfer_file(
-            ssh_client,
-            self.sub(self.source_file, locals()),
-            self.sub(self.destination_file, locals()),
-        )
+        source_file = self.sub(self.source_file, locals())
+        success, result = True, f"File {source_file} transferred successfully"
+        try:
+            ssh_client.connect(
+                device.ip_address,
+                username=device.username,
+                password=device.password,
+                look_for_keys=self.look_for_keys,
+            )
+        except Exception as e:
+            success = False
+            result = f"Connection to {device.ip_address} failed ({str(e)})"
+        try:
+            self.transfer_file(
+                ssh_client,
+                self.sub(self.source_file, locals()),
+                self.sub(self.destination_file, locals()),
+            )
+        except Exception as e:
+            success = False
+            result = f"Transferring the file {source_file} failed({str(e)})"
         ssh_client.close()
-        return {
-            "success": True,
-            "result": f"File {self.source_file} transferred successfully",
-        }
+        return {"success": success, "result": result}
 
 
 service_classes["GenericFileTransferService"] = GenericFileTransferService

@@ -25,3 +25,4 @@ tacacs_plus
 wtforms
 xlrd
 xlwt
+xmltodict

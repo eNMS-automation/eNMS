@@ -1,4 +1,7 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from json import load
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
+from sqlalchemy.ext.mutable import MutableDict
+from xmltodict import parse
 
 from eNMS.automation.helpers import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
@@ -16,6 +19,13 @@ class NetmikoValidationService(Service):
     content_match = Column(String)
     content_match_textarea = True
     content_match_regex = Column(Boolean)
+    conversion_method = Column(String, default="text")
+    conversion_method_values = (
+        ("text", "Text"),
+        ("json", "Json dictionary"),
+        ("xml", "XML dictionary"),
+    )
+    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
@@ -24,6 +34,12 @@ class NetmikoValidationService(Service):
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
+    validation_method = Column(String, default="text")
+    validation_method_values = (
+        ("text", "Validation by text match"),
+        ("dict_equal", "Validation by dictionnary equality"),
+        ("dict_included", "Validation by dictionnary inclusion"),
+    )
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
 
@@ -31,13 +47,22 @@ class NetmikoValidationService(Service):
         netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
         result = netmiko_handler.send_command(command)
-        match = self.sub(self.content_match, locals())
+        if self.conversion_method == "json":
+            result = load(result)
+        elif self.conversion_method == "xml":
+            result = parse(result)
+        if self.validation_method == "text":
+            success = self.match_content(
+                str(result), self.sub(self.content_match, locals())
+            )
+        else:
+            success = self.match_dictionnary(result)
         netmiko_handler.disconnect()
         return {
             "expected": match,
             "negative_logic": self.negative_logic,
             "result": result,
-            "success": self.match_content(result, match),
+            "success": success,
         }
 
 

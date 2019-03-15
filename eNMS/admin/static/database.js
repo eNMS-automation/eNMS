@@ -48,7 +48,7 @@ function resetStatus() { // eslint-disable-line no-unused-vars
 
 /**
  * Git Action.
- * @param {action} - action - Clone or Pull.
+ * @param {action} action - Clone or Pull.
  */
 function gitAction(action) { // eslint-disable-line no-unused-vars
   call(`/admin/git_action/${action}`, function(result) {

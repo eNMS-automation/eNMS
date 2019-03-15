@@ -2,20 +2,36 @@
 global
 alertify: false
 call: false
+connectionParametersModal: false
+deviceAutomationModal: false
+devices: false
 doc: false
+links: false
+showTypeModal: false
+vis: false
 */
 
 let selected;
 
+/**
+ * Convert device to Vis node.
+ * @param {device} device - Device.
+ * @return {node}
+ */
 function deviceToNode(device) {
   return {
     id: device.id,
     label: device.name,
     image: `static/images/default/${device.subtype}.gif`,
-    shape: 'image'
+    shape: 'image',
   };
 }
 
+/**
+ * Convert link to Vis edge.
+ * @param {link} link - Link.
+ * @return {edge}
+ */
 function linkToEdge(link) {
   return {
     id: link.id,
@@ -24,16 +40,16 @@ function linkToEdge(link) {
   };
 }
 
-var nodes = new vis.DataSet(devices.map(deviceToNode));
-var edges = new vis.DataSet(links.map(linkToEdge));
+let nodes = new vis.DataSet(devices.map(deviceToNode));
+let edges = new vis.DataSet(links.map(linkToEdge));
 
-var container = document.getElementById('logical_view');
-var data = {
+let container = document.getElementById('logical_view');
+let data = {
   nodes: nodes,
   edges: edges,
 };
-var options = {};
-var network = new vis.Network(container, data, options);
+let options = {};
+let network = new vis.Network(container, data, options);
 
 network.on('oncontext', function(properties) {
   properties.event.preventDefault();
@@ -43,8 +59,7 @@ network.on('oncontext', function(properties) {
     $('.global-menu,.link-menu').hide();
     $('.device-menu').show();
     selected = node;
-  }
-  else if (typeof edge !== 'undefined') {
+  } else if (typeof edge !== 'undefined') {
     selected = edge;
     $('.global-menu,.device-menu').hide();
     $('.link-menu').show();

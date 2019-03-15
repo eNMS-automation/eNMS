@@ -66,7 +66,7 @@ def get_one(model: str) -> db.Model:
     return classes[model].query.one()
 
 
-def try_commit():
+def try_commit() -> None:
     try:
         db.session.commit()
     except RuntimeError:

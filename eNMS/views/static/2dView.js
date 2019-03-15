@@ -2,6 +2,8 @@
 global
 alertify: false
 call: false
+connectionParametersModal: false
+deviceAutomationModal: false
 L: false
 layers: false
 links: false
@@ -224,7 +226,7 @@ $('body').contextMenu({
   },
 });
 
-map.on('contextmenu',function() {
+map.on('contextmenu', function() {
   if (!selectedObject) {
     $('.device-menu,.link-menu').hide();
     $('.global-menu').show();

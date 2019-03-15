@@ -11,6 +11,7 @@ initTable: false
 let poolId = null;
 let table = initTable( // eslint-disable-line no-unused-vars
   'pool', 'pool', [
+  'Number of objects',
   'Edit properties',
   'Update',
   'Duplicate',

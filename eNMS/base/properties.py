@@ -145,7 +145,7 @@ link_table_properties: List[str] = object_common_properties[1:] + [
     "destination_name",
 ]
 
-pool_public_properties: List[str] = base_properties + ["never_update"]
+pool_public_properties: List[str] = base_properties + ["never_update", "object_number"]
 
 pool_table_properties: List[str] = pool_public_properties[1:]
 
@@ -531,6 +531,7 @@ pretty_names: Dict[str, str] = {
     "never_update": "Never update",
     "next_run_time": "Next runtime",
     "number_of_configuration": "Number of configurations stored",
+    "object_number": "Number of objects",
     "operating_system": "Operating System",
     "optional_args": "Optional arguments",
     "os_version": "OS version",

@@ -167,6 +167,10 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
+    @property
+    def object_number(self) -> str:
+        return f"{len(self.devices)} devices - {len(self.links)} links"
+
     def compute_pool(self) -> None:
         if self.never_update:
             return

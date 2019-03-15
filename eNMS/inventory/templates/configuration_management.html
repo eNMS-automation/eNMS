@@ -16,6 +16,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
+  {% include 'device_modal.html' %}
   <div id="configurations-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -66,10 +67,12 @@
               <thead>
                 <tr>
                   <th style="width: 10%">Name</th>
+                  <th style="width: 10%">Model</th>
                   <th style="width: 10%">Last failure</th>
                   <th style="width: 10%">Last runtime</th>
                   <th style="width: 10%">Last update</th>
                   <th style="width: 10%">Last status</th>
+                  <th style="width: 5%">Edit</th>
                   <th style="width: 5%">Configuration</th>
                   <th style="width: 5%">Download</th>
                 </tr>

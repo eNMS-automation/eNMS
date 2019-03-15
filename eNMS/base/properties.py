@@ -112,6 +112,7 @@ device_public_properties: List[str] = object_common_properties + device_properti
 
 device_configuration_properties: List[str] = [
     "name",
+    "model",
     "last_failure",
     "last_runtime",
     "last_update",
@@ -317,6 +318,8 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
     status = "" if type != "task" else "Pause" if obj.is_active else "Resume"
     return {
         "configuration": [
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('device', '{obj.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showConfigurations('{obj.id}')">
             Configuration</button>""",

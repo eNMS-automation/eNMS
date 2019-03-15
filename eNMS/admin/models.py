@@ -86,7 +86,10 @@ class Parameters(Base):
             if device:
                 time = max(device.configurations, default=datetime.now())
                 with open(file) as f:
-                    device.configurations[time] = f.read()
+                    device.current_configurations = device.configurations[
+                        time
+                    ] = f.read()
+        db.session.commit()
 
     def get_git_content(self, app: Flask, action: str = "clone") -> None:
         for repository_type in ("configurations", "automation"):

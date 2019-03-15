@@ -169,6 +169,7 @@ job_public_properties: List[str] = base_properties + [
     "type",
     "creator_name",
     "credentials",
+    "is_running",
     "status",
     "state",
     "positions",

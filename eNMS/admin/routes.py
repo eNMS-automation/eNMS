@@ -182,7 +182,7 @@ def clear_logs() -> bool:
 @post(bp, "/reset_status", "Admin")
 def reset_status() -> bool:
     for job in fetch_all("Job"):
-        job.status = "Idle"
+        job.is_running = False
     db.session.commit()
     return True
 

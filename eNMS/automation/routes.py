@@ -171,7 +171,7 @@ def get_service(id_or_cls: str) -> dict:
 @post(bp, "/run_job/<int:job_id>", "Edit")
 def run_job(job_id: int) -> dict:
     job = fetch("Job", id=job_id)
-    if job.status == "Running":
+    if job.is_running:
         return {"error": "Job is already running."}
     targets = job.compute_targets()
     if hasattr(job, "has_targets"):

@@ -361,7 +361,7 @@ function colorJob(id, color) {
  */
 function getJobState(id) { // eslint-disable-line no-unused-vars
   call(`/get/service/${id}`, function(service) {
-    if (service.status == 'Running') {
+    if (service.is_running) {
       colorJob(id, '#89CFF0');
       $('#status').text('Status: Running.');
       $('#current-job').text(`Current job: ${service.name}.`);
@@ -408,7 +408,7 @@ function getWorkflowState() {
           $('#current-device,#current-job').empty();
           wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
         }
-        setTimeout(getWorkflowState, wf.status == 'Running' ? 700 : 15000);
+        setTimeout(getWorkflowState, wf.is_running ? 700 : 15000);
       }
     });
   }

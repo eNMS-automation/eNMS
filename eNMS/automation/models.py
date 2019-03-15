@@ -42,7 +42,9 @@ class Job(Base):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
-    status = Column(String, default="Idle")
+    is_running = Column(Boolean, default=False)
+    completed = Column(Integer, default=0)
+    failed = Column(Integer, default=0)
     state = Column(MutableDict.as_mutable(PickleType), default={})
     credentials = Column(String, default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
@@ -68,6 +70,16 @@ class Job(Base):
     @property
     def creator_name(self) -> str:
         return self.creator.name if self.creator else "None"
+
+    @property
+    def status(self) -> str:
+        if self.is_running:
+            if self.multiprocessing:
+                return "Running (in parallel)"
+            else:
+                return f"{self.completed}/{len(self.devices)} ({self.failed} failed)"
+        else:
+            return "Idle"
 
     def compute_targets(self) -> Set[Device]:
         targets = set(self.devices)
@@ -131,10 +143,11 @@ class Job(Base):
         targets: Optional[Set[Device]] = None,
         from_workflow: bool = False,
     ) -> Tuple[dict, str]:
-        self.status, self.state = "Running", {}
+        self.is_running, self.state = True, {}
         if not payload:
             payload = {}
         info(f"{self.name}: starting.")
+        self.completed = self.failed = 0
         if not from_workflow:
             db.session.commit()
         failed_attempts, now = {}, str(datetime.now()).replace(" ", "-")
@@ -149,7 +162,8 @@ class Job(Base):
         results["failed_attempts"] = failed_attempts
         self.logs[now] = results
         info(f"{self.name}: finished.")
-        self.status, self.state = "Idle", {}
+        self.is_running, self.state = False, {}
+        self.completed = self.failed = 0
         if not from_workflow:
             db.session.commit()
             if self.send_notification:
@@ -158,9 +172,14 @@ class Job(Base):
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
         try:
-            return self.job(payload, device) if device else self.job(payload)
+            results = self.job(payload, device) if device else self.job(payload)
         except Exception as e:
-            return {"success": False, "result": str(e)}
+            results = {"success": False, "result": str(e)}
+        if not self.multiprocessing:
+            self.completed += 1
+            self.failed += 1 - results["success"]
+            db.session.commit()
+        return results
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
         device, results, payload = args

@@ -46,6 +46,7 @@ def device_management() -> dict:
 @get(bp, "/configuration_management", "View")
 def configuration_management() -> dict:
     return dict(
+        add_device_form=AddDevice(request.form),
         fields=device_configuration_properties,
         compare_configurations_form=CompareConfigurationsForm(request.form),
     )

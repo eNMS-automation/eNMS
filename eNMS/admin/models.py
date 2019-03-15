@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask
 from flask_login import UserMixin
 from git import Repo
@@ -79,6 +80,14 @@ class Parameters(Base):
         self.gotty_port_index = -1
         super().update(**kwargs)
 
+    def update_database_configurations_from_git(self, app: Flask) -> None:
+        for file in scandir(app.path / "git" / "configurations"):
+            device = fetch("Device", name=file.name)
+            if device:
+                time = max(device.configurations, default=datetime.now())
+                with open(file) as f:
+                    device.configurations[time] = f.read()
+
     def get_git_content(self, app: Flask, action: str = "clone") -> None:
         for repository_type in ("configurations", "automation"):
             repo = getattr(self, f"git_{repository_type}")
@@ -92,6 +101,8 @@ class Parameters(Base):
                         Repo.clone_from(repo, local_path)
                     else:
                         Repo(local_path).remotes.origin.pull()
+                    if repository_type == "configurations":
+                        self.update_database_configurations_from_git(app)
                 except Exception as e:
                     info(f"Cannot {action} {repository_type} git repository ({str(e)})")
 

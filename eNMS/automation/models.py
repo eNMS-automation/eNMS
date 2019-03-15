@@ -145,25 +145,41 @@ class Job(Base):
         self.is_running, self.state, results = True, {}, {"success": False}
         if not payload:
             payload = {}
+        if not targets and getattr(self, "use_workflow_targets", True):
+            targets = self.compute_targets()
+            results["devices"] = {}
+        has_targets = bool(targets)
         info(f"{self.name}: starting.")
         failed_attempts, now = {}, str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             self.completed = self.failed = 0
             try_commit()
             info(f"Running job {self.name}, attempt {i}")
-            print(targets)
-            attempt_results = self.run(payload, targets)
-            print(targets, set(targets))
-            for device in set(targets):
-                if not attempt_results["devices"][device.name]["success"]:
-                    continue
-                results["devices"][device.name] = attempt_results["devices"][device]
-                targets.remove(device)
-            if attempt_results["success"]:
-                break
-            if i != self.number_of_retries:
-                results[f"Attempts {i + 1}"] = attempt_results
-                sleep(self.time_between_retries)
+            attempt = self.run(payload, targets)
+            if has_targets:
+                for device in set(targets):
+                    if not attempt["devices"][device.name]["success"]:
+                        continue
+                    results["devices"][device.name] = attempt["devices"][device.name]
+                    targets.remove(device)
+                if not targets:
+                    attempt["success"] = results["success"] = True
+                    break
+                elif i != self.number_of_retries:
+                    results[f"Attempts {i + 1}"] = attempt
+                    sleep(self.time_between_retries)
+                else:
+                    for device in targets:
+                        results["devices"][device.name] = attempt["devices"][
+                            device.name
+                        ]
+            else:
+                results[f"Attempts {i + 1}"] = attempt
+                results.update(attemp)
+                if attempt["success"] or i != self.number_of_retries:
+                    break
+                else:
+                    sleep(self.time_between_retries)
         self.logs[now] = results
         info(f"{self.name}: finished.")
         self.is_running, self.state = False, {}
@@ -192,8 +208,6 @@ class Job(Base):
     def run(
         self, payload: dict, targets: Optional[Set[Device]] = None
     ) -> Tuple[dict, Optional[Set[Device]]]:
-        if not targets and getattr(self, "use_workflow_targets", True):
-            targets = self.compute_targets()
         if targets:
             results: dict = {"devices": {}}
             if self.multiprocessing:

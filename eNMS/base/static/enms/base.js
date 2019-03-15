@@ -146,6 +146,7 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
     ordering: false,
     fixedHeader: true,
     serverSide: true,
+    sDom: '<"top"i>rt<"bottom"lp><"clear">',
     ajax: `/server_side_processing/${cls}/${type}`,
   });
   return table;

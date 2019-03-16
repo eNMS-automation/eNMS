@@ -11,5 +11,5 @@ let table = initTable( // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/security/access.html');
-  convertSelect('#user-permissions');
+  convertSelect('#user-permissions', '#user-pools');
 })();

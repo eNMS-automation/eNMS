@@ -10,7 +10,7 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.base.models import ObjectField
+from eNMS.base.models import MultipleObjectField, ObjectField
 from eNMS.base.properties import import_properties, user_permissions
 
 
@@ -28,6 +28,7 @@ class AddUser(FlaskForm):
     email = StringField()
     permission_choices = [(p, p) for p in user_permissions]
     permissions = SelectMultipleField(choices=permission_choices)
+    pools = MultipleObjectField("Pool")
 
 
 class AdministrationForm(FlaskForm):

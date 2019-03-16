@@ -27,6 +27,9 @@ class User(Base, UserMixin):
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(String)
 
+    def __init__(self, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+
     @property
     def is_admin(self) -> bool:
         return "Admin" in self.permissions

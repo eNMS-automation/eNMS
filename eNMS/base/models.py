@@ -108,8 +108,13 @@ class Base(db.Model):
 
     @classmethod
     def visible(cls) -> List:
-        if cls.__tablename__ == "Pool":
+        if cls.__tablename__ == "Pool" and user.pools:
             return user.pools
+        elif cls.__tablename__ in ("Device", "Link") and user.pools:
+            objects = set()
+            for pool in user.pools:
+                objects |= getattr(pool, f"{cls.class_type}s")
+            return list(objects)
         else:
             return cls.query.all()
 

@@ -90,6 +90,12 @@ class AddPoolForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()
+    operator = SelectField(
+        choices=(
+            ("all", "Match if all properties match"),
+            ("any", "Match if any property matches"),
+        )
+    )
     never_update = BooleanField("Never update (for manually selected pools)")
 
 

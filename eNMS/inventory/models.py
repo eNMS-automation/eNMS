@@ -156,6 +156,7 @@ class Pool(AbstractPool):
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
     name = Column(String, unique=True)
     description = Column(String)
+    operator = Column(String, default="all")
     devices = relationship(
         "Device", secondary=pool_device_table, back_populates="pools"
     )
@@ -185,7 +186,8 @@ class Pool(AbstractPool):
             if obj.class_type == "device"
             else pool_link_properties
         )
-        return all(
+        operator = all if self.operator == "all" else any
+        return operator(
             getattr(self, f"{obj.class_type}_{property}") in str(getattr(obj, property))
             if not getattr(self, f"{obj.class_type}_{property}_regex")
             else search(

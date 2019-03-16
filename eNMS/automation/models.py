@@ -147,10 +147,11 @@ class Job(Base):
             payload = {}
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
-            results["devices"] = {}
         has_targets = bool(targets)
+        if has_targets:
+            results["devices"] = {}
         info(f"{self.name}: starting.")
-        failed_attempts, now = {}, str(datetime.now()).replace(" ", "-")
+        now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             self.completed = self.failed = 0
             try_commit()
@@ -163,19 +164,20 @@ class Job(Base):
                     results["devices"][device.name] = attempt["devices"][device.name]
                     targets.remove(device)
                 if not targets:
-                    attempt["success"] = results["success"] = True
+                    results["success"] = True
                     break
                 elif i != self.number_of_retries:
                     results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
                 else:
+                    results["success"] = False
                     for device in targets:
                         results["devices"][device.name] = attempt["devices"][
                             device.name
                         ]
             else:
                 results[f"Attempts {i + 1}"] = attempt
-                results.update(attemp)
+                results.update(attempt)
                 if attempt["success"] or i != self.number_of_retries:
                     break
                 else:

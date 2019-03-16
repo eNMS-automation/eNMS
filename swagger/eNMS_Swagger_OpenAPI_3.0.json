@@ -1,0 +1,1234 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "defaultTitle",
+    "description" : "defaultDescription",
+    "version" : "0.1"
+  },
+  "servers" : [ {
+    "url" : "https://192.168.0.2"
+  } ],
+  "paths" : {
+    "/rest/instance/device" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"name\": \"TEST-DEVICE\",\n    \"description\": \"Device-Name\",\n    \"subtype\": \"router\",\n    \"model\": \"MODELNAME\",\n    \"location\": \"LAB\",\n    \"vendor\": \"CISCO\",\n    \"ems_ip\": \"1.1.1.1\",\n    \"console1\": \"1.1.1.1\",\n    \"console2\": \"1.1.1.1\",\n    \"in_sync\": \"NO\",\n    \"network\": \"NetworkA\",\n    \"operating_system\": \"iosxr\",\n    \"os_version\": \"6.1.31\",\n    \"netmiko_driver\": \"cisco_xr\",\n    \"napalm_driver\": \"iosxr\",\n    \"ip_address\": \"192.168.0.4\",\n    \"port\": 22,\n    \"longitude\": -95.992775,\n    \"latitude\": 36.15398,\n    \"username\": \"CISCO15\",\n    \"last_failure\": \"Never\",\n    \"last_runtime\": 0,\n    \"last_status\": \"Never\",\n    \"last_update\": \"Never\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 4142, \"name\": \"TEST-DEVICE\", \"description\": \"Device-Name\", \"subtype\": \"router\", \"model\": \"MODELNAME\", \"location\": \"LAB\", \"vendor\": \"CISCO\", \"ems_ip\": \"1.1.1.1\", \"console1\": \"1.1.1.1\", \"console2\": \"1.1.1.1\", \"in_sync\": \"NO\", \"network\": \"NetworkA\", \"operating_system\": \"iosxr\", \"os_version\": \"6.1.31\", \"netmiko_driver\": \"cisco_xr\", \"napalm_driver\": \"iosxr\", \"ip_address\": \"192.168.0.4\", \"port\": 22, \"longitude\": -95.992775, \"latitude\": 36.15398, \"username\": \"CISCO15\", \"last_failure\": \"Never\", \"last_runtime\": 0, \"last_status\": \"Never\", \"last_update\": \"Never\", \"jobs\": []}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/migrate/export" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_1"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n \"name\": \"Backup\",\n \"import_export_types\": [\"User\", \"Device\", \"Link\", \"Pool\", \"Service\", \"WorkflowEdge\", \"Workflow\", \"Task\"]\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : { }
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "true\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/is_alive" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"name\": 274973445821351, \"cluster_id\": 1, \"cpu_load\": 2.8}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/migrate/import" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_2"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n \"name\": \"Backup\",\n \"import_export_types\": [\"User\", \"Device\", \"Link\", \"Pool\", \"Service\", \"WorkflowEdge\", \"Workflow\", \"Task\"],\n \"empty_database_before_import\": true\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : { }
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "\"Import successful.\"\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/topology/import" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_3"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n \"replace\": true,\n \"file\": \"supplemental.xlsx\",\n \"update_pools\": true\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"message\": \"Internal Server Error\"}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/instance/link/LINKNAME" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 4141, \"name\": \"LINKNAME\", \"description\": \"optical fiber 10G\", \"subtype\": \"optical_link\", \"model\": null, \"location\": \"spain\", \"vendor\": \"Cisco\", \"source_name\": \"DEVICE-1\", \"destination_name\": \"DEVICE-2\", \"source\": \"DEVICE-1\", \"destination\": \"DEVICE-2\"}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/instance/service/SERVICEINSTANCENAME" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_3"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 10, \"name\": \"SERVICEINSTANCENAME\", \"description\": \"Service Instance Description\", \"mail_recipient\": \"\", \"max_processes\": 50, \"multiprocessing\": false, \"vendor\": \"\", \"operating_system\": \"\", \"type\": \"NetmikoValidationService\", \"creator_name\": \"None\", \"credentials\": \"device\", \"status\": \"Idle\", \"state\": {}, \"positions\": {\"WORKFLOWNAME\": [11, -93]}, \"push_to_git\": false, \"waiting_time\": 2100, \"number_of_retries\": 12, \"time_between_retries\": 60, \"send_notification\": false, \"send_notification_method\": \"mail_feedback_notification\", \"display_only_failed_nodes\": true, \"command\": \"APPLY:::T2APP::ACT;\", \"content_match\": \"T2APP COMPLD\", \"content_match_regex\": false, \"negative_logic\": false, \"delete_spaces_before_matching\": false, \"driver\": \"ios\", \"use_device_driver\": true, \"fast_cli\": false, \"timeout\": 10, \"global_delay_factor\": 1.0}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/instance/task/TASKNAME" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_4"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 1, \"name\": \"TASKNAME\", \"description\": \"Task Description\", \"job_name\": \"Configuration Management Workflow\", \"status\": \"Inactive\", \"start_date\": \"\", \"end_date\": \"\", \"frequency\": 3600, \"next_run_time\": null, \"time_before_next_run\": null, \"is_active\": false, \"job\": \"Configuration Management Workflow\"}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/topology/export" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_4"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n \"export_filename\": \"test_file.xlsx\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : { }
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "true\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/instance/device/DEVICENAME" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_5"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 3938, \"name\": \"DEVICENAME\", \"description\": \"Device-Name\", \"subtype\": \"router\", \"model\": \"MODELNAME\", \"location\": \"LAB\", \"vendor\": \"CISCO\", \"ems_ip\": \"1.1.1.1\", \"console1\": \"1.1.1.1\", \"console2\": \"1.1.1.1\", \"in_sync\": \"NO\", \"network\": \"NetworkA\", \"operating_system\": \"iosxr\", \"os_version\": \"6.1.31\", \"netmiko_driver\": \"cisco_xr\", \"napalm_driver\": \"iosxr\", \"ip_address\": \"192.168.0.4\", \"port\": 22, \"longitude\": -95.992775, \"latitude\": 36.15398, \"username\": \"CISCO15\", \"last_failure\": \"Never\", \"last_runtime\": 0.0, \"last_status\": \"Never\", \"last_update\": \"Never\"}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/instance/workflow/WORKFLOWNAME" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_6"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 22, \"name\": \"WORKFLOWNAME\", \"description\": \"Workflow Description\", \"mail_recipient\": \"\", \"max_processes\": 50, \"multiprocessing\": false, \"vendor\": \"Cisco\", \"operating_system\": \"iosxr\", \"type\": \"Workflow\", \"creator_name\": \"None\", \"credentials\": \"device\", \"status\": \"Idle\", \"state\": {}, \"positions\": {}, \"push_to_git\": false, \"waiting_time\": 0, \"number_of_retries\": 0, \"time_between_retries\": 10, \"send_notification\": false, \"send_notification_method\": \"mail_feedback_notification\", \"display_only_failed_nodes\": true, \"last_modified\": null, \"use_workflow_targets\": true}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/run_job" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_5"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{ \"name\": \"SERVICEINSTANCENAME\", \"devices\": [\"DEVICENAME\"], \"async\": \"false\" }"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_7"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 19, \"name\": \"SERVICEINSTANCENAME\", \"description\": \"Service Instance Description\", \"mail_recipient\": \"\", \"max_processes\": 50, \"multiprocessing\": false, \"vendor\": \"Cisco\", \"operating_system\": \"iosxr\", \"type\": \"NapalmGettersService\", \"creator_name\": \"admin\", \"credentials\": \"device\", \"status\": \"Idle\", \"state\": {}, \"positions\": {\"WORKFLOWNAME\": [-51, -6], \"WORKFLOWNAME\": [443, -269]}, \"push_to_git\": false, \"waiting_time\": 0, \"number_of_retries\": 0, \"time_between_retries\": 10, \"send_notification\": false, \"send_notification_method\": \"mail_feedback_notification\", \"display_only_failed_nodes\": true, \"validation_method\": \"text\", \"content_match\": \"\", \"content_match_regex\": false, \"dict_match\": {}, \"negative_logic\": false, \"delete_spaces_before_matching\": false, \"driver\": \"iosxr\", \"use_device_driver\": true, \"getters\": [\"get_environment\"], \"optional_args\": {}, \"creator\": {\"id\": 1, \"name\": \"admin\", \"email\": \"admin@admin.com\", \"permissions\": [\"Admin\", \"Admin\", \"Admin\", \"Admin\"]}, \"devices\": [{\"id\": 3938, \"name\": \"DEVICENAME\", \"description\": \"Device-Name\", \"subtype\": \"router\", \"model\": \"MODELNAME\", \"location\": \"LAB\", \"vendor\": \"CISCO\", \"ems_ip\": \"1.1.1.1\", \"console1\": \"1.1.1.1\", \"console2\": \"1.1.1.1\", \"in_sync\": \"NO\", \"network\": \"NetworkA\", \"operating_system\": \"iosxr\", \"os_version\": \"6.1.31\", \"netmiko_driver\": \"cisco_xr\", \"napalm_driver\": \"iosxr\", \"ip_address\": \"192.168.0.4\", \"port\": 22, \"longitude\": -95.992775, \"latitude\": 36.15398, \"username\": \"CISCO15\", \"last_failure\": \"Never\", \"last_runtime\": 0.0, \"last_status\": \"Never\", \"last_update\": \"Never\"}], \"pools\": [], \"workflows\": [{\"id\": 22, \"name\": \"WORKFLOWNAME\", \"description\": \"WORKFLOWNAME\", \"mail_recipient\": \"\", \"max_processes\": 50, \"multiprocessing\": false, \"vendor\": \"Cisco\", \"operating_system\": \"iosxr\", \"type\": \"Workflow\", \"creator_name\": \"None\", \"credentials\": \"device\", \"status\": \"Idle\", \"state\": {}, \"positions\": {}, \"push_to_git\": false, \"waiting_time\": 0, \"number_of_retries\": 0, \"time_between_retries\": 10, \"send_notification\": false, \"send_notification_method\": \"mail_feedback_notification\", \"display_only_failed_nodes\": true, \"last_modified\": null, \"use_workflow_targets\": true}], \"tasks\": []}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    },
+    "/rest/instance/user/USERNAME" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_7_creator"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"id\": 1, \"name\": \"admin\", \"email\": \"admin@admin.com\", \"permissions\": [\"Admin\", \"Admin\", \"Admin\", \"Admin\"]}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://192.168.0.2"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://192.168.0.2"
+      } ]
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "inline_response_200_7_positions" : {
+        "type" : "object",
+        "properties" : {
+          "WORKFLOWNAME" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "WORKFLOWNAME" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        }
+      },
+      "inline_response_200_5" : {
+        "type" : "object",
+        "properties" : {
+          "last_failure" : {
+            "type" : "string"
+          },
+          "latitude" : {
+            "type" : "number"
+          },
+          "napalm_driver" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "netmiko_driver" : {
+            "type" : "string"
+          },
+          "network" : {
+            "type" : "string"
+          },
+          "ems_ip" : {
+            "type" : "string"
+          },
+          "subtype" : {
+            "type" : "string"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "last_update" : {
+            "type" : "string"
+          },
+          "operating_system" : {
+            "type" : "string"
+          },
+          "model" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "console2" : {
+            "type" : "string"
+          },
+          "console1" : {
+            "type" : "string"
+          },
+          "longitude" : {
+            "type" : "number"
+          },
+          "os_version" : {
+            "type" : "string"
+          },
+          "last_status" : {
+            "type" : "string"
+          },
+          "ip_address" : {
+            "type" : "string"
+          },
+          "last_runtime" : {
+            "type" : "number"
+          },
+          "port" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "location" : {
+            "type" : "string"
+          },
+          "in_sync" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_6" : {
+        "type" : "object",
+        "properties" : {
+          "use_workflow_targets" : {
+            "type" : "boolean"
+          },
+          "credentials" : {
+            "type" : "string"
+          },
+          "waiting_time" : {
+            "type" : "integer"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "multiprocessing" : {
+            "type" : "boolean"
+          },
+          "positions" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "max_processes" : {
+            "type" : "integer"
+          },
+          "push_to_git" : {
+            "type" : "boolean"
+          },
+          "send_notification_method" : {
+            "type" : "string"
+          },
+          "time_between_retries" : {
+            "type" : "integer"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "operating_system" : {
+            "type" : "string"
+          },
+          "creator_name" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "state" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "send_notification" : {
+            "type" : "boolean"
+          },
+          "last_modified" : { },
+          "number_of_retries" : {
+            "type" : "integer"
+          },
+          "display_only_failed_nodes" : {
+            "type" : "boolean"
+          },
+          "mail_recipient" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_7" : {
+        "type" : "object",
+        "properties" : {
+          "credentials" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "use_device_driver" : {
+            "type" : "boolean"
+          },
+          "pools" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "multiprocessing" : {
+            "type" : "boolean"
+          },
+          "workflows" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/inline_response_200_6"
+            }
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "negative_logic" : {
+            "type" : "boolean"
+          },
+          "max_processes" : {
+            "type" : "integer"
+          },
+          "content_match_regex" : {
+            "type" : "boolean"
+          },
+          "dict_match" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "push_to_git" : {
+            "type" : "boolean"
+          },
+          "time_between_retries" : {
+            "type" : "integer"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "operating_system" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "state" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "validation_method" : {
+            "type" : "string"
+          },
+          "getters" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "send_notification" : {
+            "type" : "boolean"
+          },
+          "number_of_retries" : {
+            "type" : "integer"
+          },
+          "display_only_failed_nodes" : {
+            "type" : "boolean"
+          },
+          "tasks" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "mail_recipient" : {
+            "type" : "string"
+          },
+          "creator" : {
+            "$ref" : "#/components/schemas/inline_response_200_7_creator"
+          },
+          "content_match" : {
+            "type" : "string"
+          },
+          "delete_spaces_before_matching" : {
+            "type" : "boolean"
+          },
+          "waiting_time" : {
+            "type" : "integer"
+          },
+          "devices" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/inline_response_200_5"
+            }
+          },
+          "positions" : {
+            "$ref" : "#/components/schemas/inline_response_200_7_positions"
+          },
+          "send_notification_method" : {
+            "type" : "string"
+          },
+          "driver" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "creator_name" : {
+            "type" : "string"
+          },
+          "optional_args" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "status" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_7_creator" : {
+        "type" : "object",
+        "properties" : {
+          "permissions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "last_failure" : {
+            "type" : "string"
+          },
+          "os_version" : {
+            "type" : "string"
+          },
+          "latitude" : {
+            "type" : "number"
+          },
+          "napalm_driver" : {
+            "type" : "string"
+          },
+          "last_status" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "ip_address" : {
+            "type" : "string"
+          },
+          "netmiko_driver" : {
+            "type" : "string"
+          },
+          "network" : {
+            "type" : "string"
+          },
+          "ems_ip" : {
+            "type" : "string"
+          },
+          "last_runtime" : {
+            "type" : "integer"
+          },
+          "subtype" : {
+            "type" : "string"
+          },
+          "port" : {
+            "type" : "integer"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "last_update" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "operating_system" : {
+            "type" : "string"
+          },
+          "model" : {
+            "type" : "string"
+          },
+          "location" : {
+            "type" : "string"
+          },
+          "in_sync" : {
+            "type" : "string"
+          },
+          "console2" : {
+            "type" : "string"
+          },
+          "console1" : {
+            "type" : "string"
+          },
+          "longitude" : {
+            "type" : "number"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body_3" : {
+        "type" : "object",
+        "properties" : {
+          "file" : {
+            "type" : "string"
+          },
+          "update_pools" : {
+            "type" : "boolean"
+          },
+          "replace" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "body_4" : {
+        "type" : "object",
+        "properties" : {
+          "export_filename" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body_1" : {
+        "type" : "object",
+        "properties" : {
+          "import_export_types" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body_2" : {
+        "type" : "object",
+        "properties" : {
+          "empty_database_before_import" : {
+            "type" : "boolean"
+          },
+          "import_export_types" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_3_positions" : {
+        "type" : "object",
+        "properties" : {
+          "WORKFLOWNAME" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "cluster_id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "number"
+          },
+          "cpu_load" : {
+            "type" : "number"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "last_failure" : {
+            "type" : "string"
+          },
+          "latitude" : {
+            "type" : "number"
+          },
+          "napalm_driver" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "netmiko_driver" : {
+            "type" : "string"
+          },
+          "network" : {
+            "type" : "string"
+          },
+          "ems_ip" : {
+            "type" : "string"
+          },
+          "subtype" : {
+            "type" : "string"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "last_update" : {
+            "type" : "string"
+          },
+          "operating_system" : {
+            "type" : "string"
+          },
+          "model" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "console2" : {
+            "type" : "string"
+          },
+          "console1" : {
+            "type" : "string"
+          },
+          "longitude" : {
+            "type" : "number"
+          },
+          "os_version" : {
+            "type" : "string"
+          },
+          "jobs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "last_status" : {
+            "type" : "string"
+          },
+          "ip_address" : {
+            "type" : "string"
+          },
+          "last_runtime" : {
+            "type" : "integer"
+          },
+          "port" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "location" : {
+            "type" : "string"
+          },
+          "in_sync" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "subtype" : {
+            "type" : "string"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "destination" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "model" : { },
+          "location" : {
+            "type" : "string"
+          },
+          "destination_name" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "source" : {
+            "type" : "string"
+          },
+          "source_name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_3" : {
+        "type" : "object",
+        "properties" : {
+          "global_delay_factor" : {
+            "type" : "number"
+          },
+          "credentials" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "use_device_driver" : {
+            "type" : "boolean"
+          },
+          "multiprocessing" : {
+            "type" : "boolean"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "negative_logic" : {
+            "type" : "boolean"
+          },
+          "timeout" : {
+            "type" : "integer"
+          },
+          "max_processes" : {
+            "type" : "integer"
+          },
+          "content_match_regex" : {
+            "type" : "boolean"
+          },
+          "push_to_git" : {
+            "type" : "boolean"
+          },
+          "time_between_retries" : {
+            "type" : "integer"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "operating_system" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "state" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "send_notification" : {
+            "type" : "boolean"
+          },
+          "number_of_retries" : {
+            "type" : "integer"
+          },
+          "display_only_failed_nodes" : {
+            "type" : "boolean"
+          },
+          "mail_recipient" : {
+            "type" : "string"
+          },
+          "content_match" : {
+            "type" : "string"
+          },
+          "delete_spaces_before_matching" : {
+            "type" : "boolean"
+          },
+          "waiting_time" : {
+            "type" : "integer"
+          },
+          "positions" : {
+            "$ref" : "#/components/schemas/inline_response_200_3_positions"
+          },
+          "command" : {
+            "type" : "string"
+          },
+          "send_notification_method" : {
+            "type" : "string"
+          },
+          "driver" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "creator_name" : {
+            "type" : "string"
+          },
+          "fast_cli" : {
+            "type" : "boolean"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_4" : {
+        "type" : "object",
+        "properties" : {
+          "end_date" : {
+            "type" : "string"
+          },
+          "is_active" : {
+            "type" : "boolean"
+          },
+          "job_name" : {
+            "type" : "string"
+          },
+          "next_run_time" : { },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "time_before_next_run" : { },
+          "id" : {
+            "type" : "integer"
+          },
+          "job" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "start_date" : {
+            "type" : "string"
+          },
+          "frequency" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "inline_response_500" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body_5" : {
+        "type" : "object",
+        "properties" : {
+          "async" : {
+            "type" : "string"
+          },
+          "devices" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "basic" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}

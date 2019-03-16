@@ -29,17 +29,25 @@ def configure_device_form(cls: FlaskForm) -> FlaskForm:
 def configure_pool_form(cls: FlaskForm) -> FlaskForm:
     cls.device_properties = pool_device_properties
     cls.link_properties = pool_link_properties
-    boolean_fields = ["never_update"]
+    boolean_fields = HiddenField(default="never_update")
     for cls_name, properties in (
         ("device", pool_device_properties),
         ("link", pool_link_properties),
     ):
         for property in properties:
-            boolean_field = f"{cls_name}_{property}_regex"
+            match_field = f"{cls_name}_{property}_match"
             setattr(cls, f"{cls_name}_{property}", StringField(property))
-            setattr(cls, boolean_field, BooleanField("Regex"))
-            boolean_fields.append(boolean_field)
-    setattr(cls, "boolean_fields", HiddenField(default=",".join(boolean_fields)))
+            setattr(
+                cls,
+                match_field,
+                SelectField(
+                    choices=(
+                        ("in", "Inclusion"),
+                        ("equal", "Equality"),
+                        ("regex", "Regular Expression"),
+                    )
+                ),
+            )
     return cls
 
 

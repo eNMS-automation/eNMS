@@ -5,7 +5,7 @@ from json import dumps
 from sqlalchemy.exc import DataError
 from typing import List
 
-from eNMS.main import db, scheduler
+from eNMS.extensions import db, scheduler
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.classes import service_classes
 from eNMS.base.helpers import (

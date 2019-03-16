@@ -8,7 +8,7 @@ from requests import get as http_get
 from subprocess import Popen
 from typing import Dict, List
 
-from eNMS.main import db
+from eNMS.extensions import db
 from eNMS.base.helpers import factory, fetch, fetch_all, get, get_one, objectify, post
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (

@@ -9,7 +9,7 @@ from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 from typing import Any
 
-from eNMS.main import db
+from eNMS.extensions import db
 from eNMS.base.helpers import fetch, fetch_all
 from eNMS.base.models import Base
 from eNMS.inventory.helpers import database_filtering

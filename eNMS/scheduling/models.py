@@ -5,7 +5,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 from typing import Any, Optional, Tuple
 
-from eNMS.main import db, scheduler
+from eNMS.extensions import db, scheduler
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.models import Base
 

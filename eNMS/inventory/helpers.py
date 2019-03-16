@@ -7,7 +7,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
-from eNMS.main import db
+from eNMS.extensions import db
 from eNMS.base.helpers import delete_all, factory, fetch_all, serialize
 from eNMS.base.properties import export_properties
 

@@ -5,7 +5,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
 from typing import Optional, Set
 
-from eNMS.main import db, scheduler
+from eNMS.extensions import db, scheduler
 from eNMS.base.helpers import fetch, get_one, str_dict
 from eNMS.inventory.models import Device
 

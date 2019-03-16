@@ -2,7 +2,7 @@ from wtforms import SelectField, SelectMultipleField
 from json import dumps, loads
 from typing import Any, List, Tuple
 
-from eNMS.main import db, USE_VAULT, vault_client
+from eNMS.extensions import db, USE_VAULT, vault_client
 from eNMS.base.helpers import fetch, objectify, choices
 from eNMS.base.properties import (
     cls_to_properties,

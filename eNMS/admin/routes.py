@@ -11,7 +11,7 @@ from requests.exceptions import ConnectionError
 from typing import Union
 from werkzeug.wrappers import Response
 
-from eNMS.main import db, ldap_client, tacacs_client, USE_LDAP, USE_TACACS
+from eNMS.extensions import db, ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddInstance,

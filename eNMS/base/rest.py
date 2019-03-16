@@ -7,7 +7,7 @@ from psutil import cpu_percent
 from uuid import getnode
 from typing import Union
 
-from eNMS.main import auth, scheduler
+from eNMS.extensions import auth, scheduler
 from eNMS.admin.helpers import migrate_export, migrate_import
 from eNMS.automation.helpers import scheduler_job
 from eNMS.base.helpers import delete, factory, fetch

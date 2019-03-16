@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Optional, Tuple, Type, Union
 
 from eNMS.config import Config
-from eNMS.main import (
+from eNMS.extensions import (
     db,
     login_manager,
     mail_client,

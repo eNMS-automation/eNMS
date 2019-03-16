@@ -17,6 +17,7 @@ from typing import Any, Dict, List, Union
 from eNMS.base.associations import (
     pool_device_table,
     pool_link_table,
+    pool_user_table,
     job_device_table,
     job_pool_table,
 )
@@ -168,6 +169,7 @@ class Pool(AbstractPool):
     )
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
+    users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)
 
     def update(self, **kwargs: Any) -> None:

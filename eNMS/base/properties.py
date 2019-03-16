@@ -592,6 +592,7 @@ property_types: Dict[str, str] = {
 }
 
 relationships: Dict[str, Dict[str, str]] = {
+    "User": {"pool": "Pool"},
     "Device": {"job": "Job"},
     "Link": {"source": "Device", "destination": "Device"},
     "Pool": {"device": "Device", "link": "Link"},

@@ -9,9 +9,10 @@ from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 from typing import Any
 
-from eNMS.extensions import db
+from eNMS.base.associations import pool_user_table
 from eNMS.base.functions import fetch, fetch_all
 from eNMS.base.models import Base
+from eNMS.extensions import db
 from eNMS.inventory.functions import database_filtering
 
 
@@ -23,6 +24,7 @@ class User(Base, UserMixin):
     jobs = relationship("Job", back_populates="creator")
     name = Column(String, unique=True)
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
+    pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(String)
 
     @property

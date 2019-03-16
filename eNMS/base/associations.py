@@ -50,3 +50,10 @@ pool_link_table: Table = Table(
     Column("pool_id", Integer, ForeignKey("Pool.id")),
     Column("link_id", Integer, ForeignKey("Link.id")),
 )
+
+pool_user_table: Table = Table(
+    "pool_user_association",
+    Base.metadata,
+    Column("pool_id", Integer, ForeignKey("Pool.id")),
+    Column("user_id", Integer, ForeignKey("User.id")),
+)

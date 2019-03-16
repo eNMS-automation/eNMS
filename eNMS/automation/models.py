@@ -123,7 +123,6 @@ class Job(Base):
         server_url = environ.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
         logs_url = f"{server_url}/automation/logs/{self.id}/{now}"
         summary.append(f"Logs: {logs_url}")
-        print(summary)
         return "\n\n".join(summary)
 
     def notify(self, results: dict, time: str) -> None:

@@ -142,9 +142,9 @@ AbstractPool: Any = type(
         "id": Column(Integer, primary_key=True),
         **{
             **{f"device_{p}": Column(String) for p in pool_device_properties},
-            **{f"device_{p}_regex": Column(Boolean) for p in pool_device_properties},
+            **{f"device_{p}_match": Column(Boolean) for p in pool_device_properties},
             **{f"link_{p}": Column(String) for p in pool_link_properties},
-            **{f"link_{p}_regex": Column(Boolean) for p in pool_link_properties},
+            **{f"link_{p}_match": Column(Boolean) for p in pool_link_properties},
         },
     },
 )
@@ -172,13 +172,18 @@ class Pool(AbstractPool):
     def object_number(self) -> str:
         return f"{len(self.devices)} devices - {len(self.links)} links"
 
-    def compute_pool(self) -> None:
-        if self.never_update:
-            return
-        self.devices = list(filter(self.object_match, Device.query.all()))
-        self.links = list(filter(self.object_match, Link.query.all()))
-        if get_one("Parameters").pool_filter == self:
-            database_filtering(self)
+    def property_match(self, obj, property):
+        pool_value = getattr(self, f"{obj.class_type}_{property}")
+        object_value = str(getattr(obj, property))
+        match = getattr(self, f"{obj.class_type}_{property}_match")
+        if not pool_value:
+            return True
+        elif match == "inclusion":
+            return pool_value in object_value
+        elif match == "equal":
+            return pool_value == object_value
+        else:
+            return search(pool_value, object_value)
 
     def object_match(self, obj: Union[Device, Link]) -> bool:
         properties = (
@@ -187,16 +192,15 @@ class Pool(AbstractPool):
             else pool_link_properties
         )
         operator = all if self.operator == "all" else any
-        return operator(
-            getattr(self, f"{obj.class_type}_{property}") in str(getattr(obj, property))
-            if not getattr(self, f"{obj.class_type}_{property}_regex")
-            else search(
-                getattr(self, f"{obj.class_type}_{property}"),
-                str(getattr(obj, property)),
-            )
-            for property in properties
-            if getattr(self, f"{obj.class_type}_{property}")
-        )
+        return operator(self.property_match(obj, property) for property in properties)
+
+    def compute_pool(self) -> None:
+        if self.never_update:
+            return
+        self.devices = list(filter(self.object_match, Device.query.all()))
+        self.links = list(filter(self.object_match, Link.query.all()))
+        if get_one("Parameters").pool_filter == self:
+            database_filtering(self)
 
     def filter_objects(self) -> Dict[str, List[dict]]:
         return {

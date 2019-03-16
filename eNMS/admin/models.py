@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 from typing import Any
 
 from eNMS.main import db
-from eNMS.base.helpers import fetch
+from eNMS.base.helpers import fetch, fetch_all
 from eNMS.base.models import Base
 from eNMS.inventory.helpers import database_filtering
 
@@ -94,20 +94,24 @@ class Parameters(Base):
     def get_git_content(self, app: Flask, action: str = "clone") -> None:
         for repository_type in ("configurations", "automation"):
             repo = getattr(self, f"git_{repository_type}")
+            if not repo:
+                continue
             local_path = app.path / "git" / repository_type
             for file in scandir(local_path):
                 if file.name == ".gitkeep":
                     remove(file)
-            if repo:
-                try:
-                    if action == "clone":
-                        Repo.clone_from(repo, local_path)
-                    else:
-                        Repo(local_path).remotes.origin.pull()
-                    if repository_type == "configurations":
-                        self.update_database_configurations_from_git(app)
-                except Exception as e:
-                    info(f"Cannot {action} {repository_type} git repository ({str(e)})")
+            try:
+                if action == "clone":
+                    Repo.clone_from(repo, local_path)
+                else:
+                    Repo(local_path).remotes.origin.pull()
+                if repository_type == "configurations":
+                    self.update_database_configurations_from_git(app)
+                    for pool in fetch_all("Pool"):
+                        if pool.device_current_configuration:
+                            pool.compute_pool()
+            except Exception as e:
+                info(f"Cannot {action} {repository_type} git repository ({str(e)})")
 
     def trigger_active_parameters(self, app: Flask) -> None:
         self.get_git_content(app)

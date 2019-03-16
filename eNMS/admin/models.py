@@ -36,11 +36,13 @@ class User(Base, UserMixin):
     def allowed(self, permission: str) -> bool:
         return self.is_admin or permission in self.permissions
 
-    def visible(self, object_type: str = "devices") -> List:
-        objects = set()
-        for pool in self.pools:
-            objects |= getattr(pool, object_type)
-        return list(objects)
+    # def visible(self, cls: db.Model) -> List:
+    #     if not self.pools:
+    #         return cls.query.all()
+    #     objects = set()
+    #     for pool in self.pools:
+    #         objects |= getattr(pool, f'{cls.class_type}s')
+    #     return list(objects)
 
 
 class Instance(Base):

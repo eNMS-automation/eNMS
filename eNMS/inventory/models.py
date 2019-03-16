@@ -46,18 +46,6 @@ class Object(Base):
     location = Column(String)
     vendor = Column(String)
 
-    @classmethod
-    def export(cls) -> List[dict]:
-        return [obj.to_dict(export=True) for obj in user.visible(cls.class_type)]
-
-    @classmethod
-    def choices(cls) -> List[Tuple[int, str]]:
-        return [(obj.id, str(obj)) for obj in user.visible(cls.class_type)]
-
-    @classmethod
-    def serialize(cls) -> List[dict]:
-        return [obj.serialized for obj in user.visible(cls.class_type)]
-
 
 CustomDevice: Any = (
     type(

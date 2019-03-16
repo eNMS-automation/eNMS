@@ -1,3 +1,4 @@
+from flask_login import current_user as user
 from json import dumps, loads
 from typing import Any, List, Tuple
 from wtforms import SelectField, SelectMultipleField
@@ -105,21 +106,28 @@ class Base(db.Model):
                 properties.pop(property, None)
         return properties
 
+    @classmethod
+    def visible(cls) -> List:
+        if cls.__tablename__ == "Pool":
+            return user.pools
+        else:
+            return cls.query.all()
+
     @property
     def serialized(self) -> dict:
         return self.to_dict()
 
     @classmethod
-    def export(cls) -> List[dict]:
-        return [obj.to_dict(export=True) for obj in cls.query.all()]
+    def export(cls: db.Model) -> List[dict]:
+        return [obj.to_dict(export=True) for obj in cls.visible()]
 
     @classmethod
-    def choices(cls) -> List[Tuple[int, str]]:
-        return [(obj.id, str(obj)) for obj in cls.query.all()]
+    def choices(cls: db.Model) -> List[Tuple[int, str]]:
+        return [(obj.id, str(obj)) for obj in cls.visible()]
 
     @classmethod
-    def serialize(cls) -> List[dict]:
-        return [obj.serialized for obj in cls.query.all()]
+    def serialize(cls: db.Model) -> List[dict]:
+        return [obj.serialized for obj in cls.visible()]
 
 
 class ObjectField(SelectField):

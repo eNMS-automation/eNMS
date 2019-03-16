@@ -55,7 +55,7 @@ def server_side_processing(cls: str, table: str) -> Response:
                 model.current_configuration.contains(search_text)
             )
     if table == "device":
-        filtered = filtered.filter(model.pools.any(id=1))
+        filtered = filtered.filter(model.pools.any(classes["pool"].id.in_([1, 2])))
     return jsonify(
         {
             "draw": int(request.args["draw"]),

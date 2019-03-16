@@ -109,21 +109,17 @@ class Base(db.Model):
     def serialized(self) -> dict:
         return self.to_dict()
 
-    @property
-    def visible(self) -> bool:
-        return not (hasattr(self, "hidden") and self.hidden)
-
     @classmethod
     def export(cls) -> List[dict]:
         return [obj.to_dict(export=True) for obj in cls.query.all()]
 
     @classmethod
     def choices(cls) -> List[Tuple[int, str]]:
-        return [(obj.id, str(obj)) for obj in cls.query.all() if obj.visible]
+        return [(obj.id, str(obj)) for obj in cls.query.all()]
 
     @classmethod
     def serialize(cls) -> List[dict]:
-        return [obj.serialized for obj in cls.query.all() if obj.visible]
+        return [obj.serialized for obj in cls.query.all()]
 
 
 class ObjectField(SelectField):

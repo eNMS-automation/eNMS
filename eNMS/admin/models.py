@@ -13,7 +13,6 @@ from eNMS.base.associations import pool_user_table
 from eNMS.base.functions import fetch, fetch_all
 from eNMS.base.models import Base
 from eNMS.extensions import db
-from eNMS.inventory.functions import database_filtering
 
 
 class User(Base, UserMixin):
@@ -79,7 +78,6 @@ class Parameters(Base):
     mattermost_verify_certificate = Column(Boolean)
     slack_token = Column(String)
     slack_channel = Column(String)
-    pool_filter = Column(String)
 
     def update(self, **kwargs: Any) -> None:
         self.gotty_port_index = -1
@@ -120,9 +118,6 @@ class Parameters(Base):
 
     def trigger_active_parameters(self, app: Flask) -> None:
         self.get_git_content(app)
-        pool = fetch("Pool", name=self.pool_filter)
-        if pool:
-            database_filtering(pool)
 
     @property
     def gotty_range(self) -> int:

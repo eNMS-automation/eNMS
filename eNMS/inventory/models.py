@@ -29,7 +29,6 @@ from eNMS.base.properties import (
     pool_device_properties,
     sql_types,
 )
-from eNMS.inventory.functions import database_filtering
 
 
 class Object(Base):
@@ -207,8 +206,6 @@ class Pool(AbstractPool):
             return
         self.devices = list(filter(self.object_match, Device.query.all()))
         self.links = list(filter(self.object_match, Link.query.all()))
-        if get_one("Parameters").pool_filter == self:
-            database_filtering(self)
 
     def filter_objects(self) -> Dict[str, List[dict]]:
         return {

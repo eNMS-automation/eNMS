@@ -12,14 +12,6 @@ from eNMS.base.functions import delete_all, factory, fetch_all, serialize
 from eNMS.base.properties import export_properties
 
 
-def database_filtering(pool: db.Model) -> None:
-    pool_objects = {"Device": pool.devices, "Link": pool.links}
-    for obj_type in ("Device", "Link"):
-        for obj in fetch_all(obj_type):
-            setattr(obj, "hidden", obj not in pool_objects[obj_type])
-    db.session.commit()
-
-
 def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
     allowed_syntax = "." in name
     allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_extensions

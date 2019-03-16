@@ -113,6 +113,10 @@ class PoolObjectsForm(FlaskForm):
     links = MultipleObjectField("Link")
 
 
+class PoolRestrictionForm(FlaskForm):
+    pools = MultipleObjectField("Pool")
+
+
 class ImportExportForm(FlaskForm):
     boolean_fields = HiddenField(default="update_pools,replace")
     export_filename = StringField()

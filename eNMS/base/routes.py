@@ -36,6 +36,7 @@ def site_root() -> Response:
 @get(bp, "/server_side_processing/<cls>/<table>")
 def server_side_processing(cls: str, table: str) -> Response:
     model, properties = classes[cls], table_properties[table]
+    print(request.args)
     filtered = db.session.query(model).filter(
         and_(
             *[

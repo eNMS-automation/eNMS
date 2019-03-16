@@ -147,7 +147,12 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
     fixedHeader: true,
     serverSide: true,
     sDom: '<"top"i>rt<"bottom"lp><"clear">',
-    ajax: `/server_side_processing/${cls}/${type}`,
+    ajax: {
+      'url': `/server_side_processing/${cls}/${type}`,
+      'data': {
+        "test": $('#restrict-pool').val()
+      }
+    }
   });
   return table;
 }

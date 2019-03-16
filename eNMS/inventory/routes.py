@@ -23,6 +23,7 @@ from eNMS.inventory.forms import (
     NetboxForm,
     OpenNmsForm,
     PoolObjectsForm,
+    PoolRestrictionForm,
 )
 from eNMS.inventory.functions import object_export, object_import
 from eNMS.base.properties import (
@@ -40,6 +41,7 @@ def device_management() -> dict:
         add_device_form=AddDevice(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form),
+        pool_restriction_form=PoolRestrictionForm(request.form),
     )
 
 

@@ -7,7 +7,7 @@ from os import scandir, remove
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
-from typing import Any
+from typing import Any, List
 
 from eNMS.base.associations import pool_user_table
 from eNMS.base.functions import fetch, fetch_all
@@ -35,6 +35,12 @@ class User(Base, UserMixin):
 
     def allowed(self, permission: str) -> bool:
         return self.is_admin or permission in self.permissions
+
+    def visible(self, object_type: str = "devices") -> List:
+        objects = set()
+        for pool in self.pools:
+            objects |= getattr(pool, object_type)
+        return list(objects)
 
 
 class Instance(Base):

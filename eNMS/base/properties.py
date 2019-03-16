@@ -262,7 +262,6 @@ parameters_public_properties: List[str] = [
     "opennms_rest_api",
     "opennms_devices",
     "opennms_login",
-    "pool_filter",
     "slack_channel",
     "slack_token",
 ]

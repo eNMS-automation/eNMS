@@ -1,3 +1,4 @@
+from flask_login import current_user as user
 from re import search
 from sqlalchemy import (
     Boolean,
@@ -12,7 +13,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Tuple, Union
 
 from eNMS.base.associations import (
     pool_device_table,
@@ -44,6 +45,18 @@ class Object(Base):
     model = Column(String)
     location = Column(String)
     vendor = Column(String)
+
+    @classmethod
+    def export(cls) -> List[dict]:
+        return [obj.to_dict(export=True) for obj in user.visible(cls.class_type)]
+
+    @classmethod
+    def choices(cls) -> List[Tuple[int, str]]:
+        return [(obj.id, str(obj)) for obj in user.visible(cls.class_type)]
+
+    @classmethod
+    def serialize(cls) -> List[dict]:
+        return [obj.serialized for obj in user.visible(cls.class_type)]
 
 
 CustomDevice: Any = (

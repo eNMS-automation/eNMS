@@ -6,7 +6,6 @@ convertSelect: false
 diffview: false
 doc: false
 initTable: false
-refreshTable: false
 */
 
 let table = initTable( // eslint-disable-line no-unused-vars
@@ -105,5 +104,4 @@ function showRawLogs() { // eslint-disable-line no-unused-vars
   });
   convertSelect('#pools', '#devices', '#restrict-pool');
   $('#restrict-pool').selectpicker('selectAll');
-  refreshTable(15000);
 })();

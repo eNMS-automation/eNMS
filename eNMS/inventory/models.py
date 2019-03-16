@@ -20,7 +20,7 @@ from eNMS.base.associations import (
     job_device_table,
     job_pool_table,
 )
-from eNMS.base.helpers import fetch, get_one
+from eNMS.base.functions import fetch, get_one
 from eNMS.base.models import Base
 from eNMS.base.properties import (
     custom_properties,
@@ -28,7 +28,7 @@ from eNMS.base.properties import (
     pool_device_properties,
     sql_types,
 )
-from eNMS.inventory.helpers import database_filtering
+from eNMS.inventory.functions import database_filtering
 
 
 class Object(Base):

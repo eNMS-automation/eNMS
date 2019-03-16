@@ -2,7 +2,7 @@ from flask import current_app as app, request
 from simplekml import Kml
 from typing import Union
 
-from eNMS.base.helpers import fetch, fetch_all, get, get_one, post, serialize
+from eNMS.base.functions import fetch, fetch_all, get, get_one, post, serialize
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.inventory.forms import (
     AddDevice,

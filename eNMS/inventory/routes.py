@@ -9,7 +9,7 @@ from subprocess import Popen
 from typing import Dict, List
 
 from eNMS.extensions import db
-from eNMS.base.helpers import factory, fetch, fetch_all, get, get_one, objectify, post
+from eNMS.base.functions import factory, fetch, fetch_all, get, get_one, objectify, post
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
     AddDevice,
@@ -24,7 +24,7 @@ from eNMS.inventory.forms import (
     OpenNmsForm,
     PoolObjectsForm,
 )
-from eNMS.inventory.helpers import object_export, object_import
+from eNMS.inventory.functions import object_export, object_import
 from eNMS.base.properties import (
     device_configuration_properties,
     device_table_properties,

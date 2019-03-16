@@ -9,7 +9,7 @@ from wtforms import (
     StringField,
 )
 
-from eNMS.automation.helpers import NAPALM_DRIVERS, NETMIKO_DRIVERS
+from eNMS.automation.functions import NAPALM_DRIVERS, NETMIKO_DRIVERS
 from eNMS.base.models import MultipleObjectField, ObjectField
 from eNMS.base.properties import (
     custom_properties,

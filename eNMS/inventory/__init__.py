@@ -8,7 +8,7 @@ bp = Blueprint(
     static_folder="static",
 )
 
-from eNMS.base.helpers import add_classes
+from eNMS.base.functions import add_classes
 from eNMS.inventory.models import Device, Link, Object, Pool
 
 add_classes(Device, Link, Object, Pool)

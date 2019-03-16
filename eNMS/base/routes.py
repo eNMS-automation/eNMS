@@ -36,17 +36,26 @@ def site_root() -> Response:
 @get(bp, "/server_side_processing/<cls>/<table>")
 def server_side_processing(cls: str, table: str) -> Response:
     model, properties = classes[cls], table_properties[table]
-    filtered = db.session.query(model).filter(
-        and_(
-            *[
-                getattr(model, property).contains(value)
-                for property, value in {
-                    property: request.args[f"columns[{i}][search][value]"]
-                    for i, property in enumerate(properties)
-                    if request.args[f"columns[{i}][search][value]"]
-                }.items()
-            ]
+    try:
+        order_property = properties[int(request.args["order[0][column]"])]
+    except IndexError:
+        order_property = "name"
+    order_direction = request.args["order[0][dir]"]
+    filtered = (
+        db.session.query(model)
+        .filter(
+            and_(
+                *[
+                    getattr(model, property).contains(value)
+                    for property, value in {
+                        property: request.args[f"columns[{i}][search][value]"]
+                        for i, property in enumerate(properties)
+                        if request.args[f"columns[{i}][search][value]"]
+                    }.items()
+                ]
+            )
         )
+        .order_by(getattr(getattr(model, order_property), order_direction)())
     )
     if table == "configuration":
         search_text = request.args["columns[5][search][value]"]

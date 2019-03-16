@@ -143,9 +143,8 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
     }
   });
   const table = $('#table').DataTable({ // eslint-disable-line
-    ordering: false,
-    fixedHeader: true,
     serverSide: true,
+    orderCellsTop: true,
     sDom: '<"top"i>rt<"bottom"lp><"clear">',
     ajax: {
       'url': `/server_side_processing/${cls}/${type}`,

@@ -113,7 +113,7 @@ class Base(db.Model):
         elif cls.__tablename__ in ("Device", "Link") and user.pools:
             objects = set()
             for pool in user.pools:
-                objects |= getattr(pool, f"{cls.class_type}s")
+                objects |= set(getattr(pool, f"{cls.class_type}s"))
             return list(objects)
         else:
             return cls.query.all()

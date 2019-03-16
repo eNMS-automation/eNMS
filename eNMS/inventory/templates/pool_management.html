@@ -37,7 +37,7 @@
                   <tr>
                     <th>Property</th>
                     <th>Value</th>
-                    <th>Regex</th>
+                    <th style="width: 20%">Match</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -45,7 +45,7 @@
                     <tr>
                     <td>{{ names[property] }}</td>
                     <td>{{ form['device_' + property](id="pool-" + 'device_' + property, class="form-control") }}</td>
-                    <td>{{ form['device_' + property + '_regex'](id="pool-" +'device_' + property + '_regex', class="form-control") }}</td>
+                    <td>{{ form['device_' + property + '_match'](id="pool-" +'device_' + property + '_match', class="form-control") }}</td>
                     </tr>
                   {% endfor %}
                   </tbody>
@@ -59,7 +59,7 @@
                   <tr>
                     <th>Property</th>
                     <th>Value</th>
-                    <th>Regex</th>
+                    <th style="width: 20%">Match</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -67,7 +67,7 @@
                     <tr>
                     <td>{{ names[property] }}</td>
                     <td>{{ form['link_' + property](id="pool-" + 'link_' + property, class="form-control") }}</td>
-                    <td>{{ form['link_' + property + '_regex'](id="pool-" +'link_' + property + '_regex', class="form-control") }}</td>
+                    <td>{{ form['link_' + property + '_match'](id="pool-" +'link_' + property + '_match', class="form-control") }}</td>
                     </tr>
                   {% endfor %}
                   </tbody>

@@ -29,7 +29,6 @@ def configure_device_form(cls: FlaskForm) -> FlaskForm:
 def configure_pool_form(cls: FlaskForm) -> FlaskForm:
     cls.device_properties = pool_device_properties
     cls.link_properties = pool_link_properties
-    boolean_fields = HiddenField(default="never_update")
     for cls_name, properties in (
         ("device", pool_device_properties),
         ("link", pool_link_properties),
@@ -42,8 +41,8 @@ def configure_pool_form(cls: FlaskForm) -> FlaskForm:
                 match_field,
                 SelectField(
                     choices=(
-                        ("in", "Inclusion"),
-                        ("equal", "Equality"),
+                        ("inclusion", "Inclusion"),
+                        ("equality", "Equality"),
                         ("regex", "Regular Expression"),
                     )
                 ),
@@ -96,6 +95,7 @@ class AddLink(AddObjectForm):
 @configure_pool_form
 class AddPoolForm(FlaskForm):
     id = HiddenField()
+    boolean_fields = HiddenField(default="never_update")
     name = StringField()
     description = StringField()
     operator = SelectField(

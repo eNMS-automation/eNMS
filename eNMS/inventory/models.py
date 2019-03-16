@@ -142,9 +142,15 @@ AbstractPool: Any = type(
         "id": Column(Integer, primary_key=True),
         **{
             **{f"device_{p}": Column(String) for p in pool_device_properties},
-            **{f"device_{p}_match": Column(Boolean) for p in pool_device_properties},
+            **{
+                f"device_{p}_match": Column(String, default="inclusion")
+                for p in pool_device_properties
+            },
             **{f"link_{p}": Column(String) for p in pool_link_properties},
-            **{f"link_{p}_match": Column(Boolean) for p in pool_link_properties},
+            **{
+                f"link_{p}_match": Column(String, default="inclusion")
+                for p in pool_link_properties
+            },
         },
     },
 )
@@ -180,7 +186,7 @@ class Pool(AbstractPool):
             return True
         elif match == "inclusion":
             return pool_value in object_value
-        elif match == "equal":
+        elif match == "equality":
             return pool_value == object_value
         else:
             return search(pool_value, object_value)

@@ -155,9 +155,8 @@ for obj_type, properties in (
 ):
     for prop in properties:
         pool_public_properties.extend(
-            [f"{obj_type}_{prop}", f"{obj_type}_{prop}_regex"]
+            [f"{obj_type}_{prop}", f"{obj_type}_{prop}_match"]
         )
-        boolean_properties.append(f"{obj_type}_{prop}_regex")
 
 
 job_public_properties: List[str] = base_properties + [

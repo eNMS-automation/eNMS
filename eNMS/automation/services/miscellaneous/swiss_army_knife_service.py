@@ -100,6 +100,9 @@ class SwissArmyKnifeService(Service):
         for service in fetch_all("Service"):
             if getattr(service, "configuration_backup_service", False):
                 service.try_run()
+        for pool in fetch_all("Pool"):
+            if pool.device_current_configuration:
+                pool.compute_pool()
         return {"success": True}
 
     def git_push_configurations(self, payload: dict) -> dict:

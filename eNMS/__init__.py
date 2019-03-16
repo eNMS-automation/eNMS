@@ -16,10 +16,10 @@ from eNMS.extensions import (
     USE_VAULT,
     vault_client,
 )
-from eNMS.admin.helpers import configure_instance_id
+from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
 from eNMS.base.default import create_default, create_examples
-from eNMS.base.helpers import fetch
+from eNMS.base.functions import fetch
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 

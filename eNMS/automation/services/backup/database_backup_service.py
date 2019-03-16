@@ -6,10 +6,10 @@ from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
-from eNMS.admin.helpers import migrate_export
+from eNMS.admin.functions import migrate_export
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import strip_all
+from eNMS.base.functions import strip_all
 from eNMS.base.properties import import_properties
 from eNMS.inventory.models import Device
 

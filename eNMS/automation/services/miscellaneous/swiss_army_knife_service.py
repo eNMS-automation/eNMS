@@ -10,10 +10,10 @@ from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 
-from eNMS.main import mail_client
+from eNMS.extensions import mail_client
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import factory, fetch_all, get_one, str_dict
+from eNMS.base.functions import factory, fetch_all, get_one, str_dict
 from eNMS.inventory.models import Device
 
 

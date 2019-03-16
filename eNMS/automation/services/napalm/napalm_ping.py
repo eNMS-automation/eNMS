@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.automation.helpers import NAPALM_DRIVERS
+from eNMS.automation.functions import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.inventory.models import Device

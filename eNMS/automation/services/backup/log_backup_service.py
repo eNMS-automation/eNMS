@@ -9,7 +9,7 @@ from tarfile import open as open_tar
 
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import fetch_all, strip_all
+from eNMS.base.functions import fetch_all, strip_all
 from eNMS.inventory.models import Device
 
 

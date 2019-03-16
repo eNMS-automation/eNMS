@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.automation.helpers import NETMIKO_DRIVERS
+from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.inventory.models import Device

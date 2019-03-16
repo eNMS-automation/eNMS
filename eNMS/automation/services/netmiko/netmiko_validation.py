@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, 
 from sqlalchemy.ext.mutable import MutableDict
 from xmltodict import parse
 
-from eNMS.automation.helpers import NETMIKO_DRIVERS
+from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.inventory.models import Device

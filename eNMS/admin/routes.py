@@ -21,8 +21,8 @@ from eNMS.admin.forms import (
     LoginForm,
     MigrationsForm,
 )
-from eNMS.admin.helpers import migrate_export, migrate_import
-from eNMS.base.helpers import fetch_all, get, get_one, post, factory, fetch, serialize
+from eNMS.admin.functions import migrate_export, migrate_import
+from eNMS.base.functions import fetch_all, get, get_one, post, factory, fetch, serialize
 from eNMS.base.properties import instance_table_properties, user_table_properties
 
 

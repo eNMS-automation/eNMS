@@ -10,7 +10,7 @@ from werkzeug.wrappers import Response
 from eNMS import db
 from eNMS.base import bp
 from eNMS.base.classes import classes
-from eNMS.base.helpers import (
+from eNMS.base.functions import (
     delete,
     factory,
     fetch,

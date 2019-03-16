@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Optional, Set
 
 from eNMS.extensions import db, scheduler
-from eNMS.base.helpers import fetch, get_one, str_dict
+from eNMS.base.functions import fetch, get_one, str_dict
 from eNMS.inventory.models import Device
 
 NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)

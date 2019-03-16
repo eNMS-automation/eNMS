@@ -10,9 +10,9 @@ from sqlalchemy.orm import relationship
 from typing import Any
 
 from eNMS.extensions import db
-from eNMS.base.helpers import fetch, fetch_all
+from eNMS.base.functions import fetch, fetch_all
 from eNMS.base.models import Base
-from eNMS.inventory.helpers import database_filtering
+from eNMS.inventory.functions import database_filtering
 
 
 class User(Base, UserMixin):

@@ -21,7 +21,7 @@ from eNMS.base.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.base.helpers import fetch, try_commit
+from eNMS.base.functions import fetch, try_commit
 from eNMS.base.models import Base
 from eNMS.inventory.models import Device
 

@@ -6,9 +6,9 @@ from sqlalchemy.exc import DataError
 from typing import List
 
 from eNMS.extensions import db, scheduler
-from eNMS.automation.helpers import scheduler_job
+from eNMS.automation.functions import scheduler_job
 from eNMS.base.classes import service_classes
-from eNMS.base.helpers import (
+from eNMS.base.functions import (
     delete,
     factory,
     fetch,

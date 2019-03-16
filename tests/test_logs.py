@@ -1,7 +1,7 @@
 from flask.testing import FlaskClient
 
 from eNMS import db
-from eNMS.base.helpers import fetch_all
+from eNMS.base.functions import fetch_all
 from eNMS.logs.models import Log
 
 from tests.test_base import check_blueprints

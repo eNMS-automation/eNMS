@@ -8,7 +8,7 @@ bp = Blueprint(
     static_folder="static",
 )
 
-from eNMS.base.helpers import add_classes
+from eNMS.base.functions import add_classes
 from eNMS.admin.models import Instance, User, Parameters
 
 add_classes(Instance, User, Parameters)

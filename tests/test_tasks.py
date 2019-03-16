@@ -1,7 +1,7 @@
 from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.helpers import fetch_all
+from eNMS.base.functions import fetch_all
 
 from tests.test_base import check_blueprints
 from tests.test_objects import create_from_file

@@ -14,7 +14,7 @@ bp = Blueprint(
 )
 
 from eNMS.base.classes import classes, service_classes
-from eNMS.base.helpers import add_classes
+from eNMS.base.functions import add_classes
 from eNMS.base.properties import (
     cls_to_properties,
     property_types,

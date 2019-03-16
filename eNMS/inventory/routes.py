@@ -51,12 +51,17 @@ def configuration_management() -> dict:
         add_device_form=AddDevice(request.form),
         fields=device_configuration_properties,
         compare_configurations_form=CompareConfigurationsForm(request.form),
+        pool_restriction_form=PoolRestrictionForm(request.form),
     )
 
 
 @get(bp, "/link_management", "View")
 def link_management() -> dict:
-    return dict(fields=link_table_properties, add_link_form=AddLink(request.form))
+    return dict(
+        fields=link_table_properties,
+        add_link_form=AddLink(request.form),
+        pool_restriction_form=PoolRestrictionForm(request.form),
+    )
 
 
 @get(bp, "/pool_management", "View")

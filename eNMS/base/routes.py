@@ -36,7 +36,6 @@ def site_root() -> Response:
 @get(bp, "/server_side_processing/<cls>/<table>")
 def server_side_processing(cls: str, table: str) -> Response:
     model, properties = classes[cls], table_properties[table]
-    print(request.args)
     filtered = db.session.query(model).filter(
         and_(
             *[
@@ -55,8 +54,18 @@ def server_side_processing(cls: str, table: str) -> Response:
             filtered = filtered.filter(
                 model.current_configuration.contains(search_text)
             )
-    if table == "device":
-        filtered = filtered.filter(model.pools.any(classes["pool"].id.in_([1, 2])))
+    if table in ("device", "link", "configuration"):
+        filtered = filtered.filter(
+            model.pools.any(
+                classes["pool"].id.in_(
+                    [
+                        int(pool_id)
+                        for pool_id in request.args.getlist("pools[]")
+                        if pool_id
+                    ]
+                )
+            )
+        )
     return jsonify(
         {
             "draw": int(request.args["draw"]),

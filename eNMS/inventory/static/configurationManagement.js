@@ -100,6 +100,10 @@ function showRawLogs() { // eslint-disable-line no-unused-vars
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
-  convertSelect('#pools', '#devices');
+  $('#restrict-pool').on('change', function() {
+    table.ajax.reload(null, false);
+  });
+  convertSelect('#pools', '#devices', '#restrict-pool');
+  $('#restrict-pool').selectpicker('selectAll');
   refreshTable(15000);
 })();

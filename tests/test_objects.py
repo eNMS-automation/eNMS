@@ -22,7 +22,7 @@ def define_device(subtype: str, description: str) -> ImmutableMultiDict:
             ("os_version", "1.4.4.2"),
             ("longitude", "12"),
             ("latitude", "14"),
-            ("secret_password", "secret_password"),
+            ("enable_password", "enable_password"),
         ]
     )
 

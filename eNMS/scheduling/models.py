@@ -116,5 +116,6 @@ class Task(Base):
             delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
             hours, remainder = divmod(delta.seconds, 3600)
             minutes, seconds = divmod(remainder, 60)
-            return f"{hours}h:{minutes}m:{seconds}s"
+            days = f"{delta.days} days, " if delta.days else ""
+            return f"{days}{hours}h:{minutes}m:{seconds}s"
         return None

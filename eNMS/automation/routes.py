@@ -104,6 +104,7 @@ def get_service(id_or_cls: str) -> dict:
             <label>{name}</label>
             <div class="form-group">
               <input class="form-control" id="service-{property}"
+              maxlength="{getattr(cls, f'{property}_length', 524288)}"
               name="{property}" type="{'password'
               if property in private_properties else 'text'}">
             </div>"""
@@ -113,6 +114,7 @@ def get_service(id_or_cls: str) -> dict:
             <label>{name}</label>
             <div class="form-group">
               <textarea style="height: 150px;" rows="30"
+              maxlength="{getattr(cls, f'{property}_length', 524288)}"
               class="form-control" id="service-{property}"
               name="{property}"></textarea>
             </div>"""

@@ -34,6 +34,7 @@ class ExampleService(Service):
     string1 = Column(String)
     # the "string2" property will be displayed as a text area.
     string2 = Column(String)
+    string2_length = 5
     # Text area
     an_integer = Column(Integer)
     # Text area

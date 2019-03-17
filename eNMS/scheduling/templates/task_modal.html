@@ -38,10 +38,14 @@
             <div class='form-group'>
               {{ scheduling_form.end_date(id='task-end_date', class="form-control") }}
             </div>
-            <label>Frequency (seconds)</label>
+            <label>Frequency</label>
             <div class='form-group'>
-              {{ scheduling_form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
-              {{ scheduling_form.frequency_unit(id='task-frequency_unit', class="form-control") }}
+              <div class="col-md-9">
+                {{ scheduling_form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
+              </div>
+              <div class="col-md-3">
+                {{ scheduling_form.frequency_unit(id='task-frequency_unit', class="form-control") }}
+              </div>
             </div>
           </div>
         </div>

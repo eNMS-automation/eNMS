@@ -126,6 +126,7 @@ task_properties: List[str] = base_properties + [
     "start_date",
     "end_date",
     "frequency",
+    "frequency_unit",
     "is_active",
 ]
 
@@ -275,6 +276,7 @@ task_serialized_properties: List[str] = [
     "start_date",
     "end_date",
     "frequency",
+    "frequency_unit",
     "next_run_time",
     "time_before_next_run",
     "is_active",
@@ -508,6 +510,7 @@ pretty_names: Dict[str, str] = {
     "file": "File",
     "file_system": "File system",
     "frequency": "Frequency",
+    "frequency_unit": "Frequency Unit",
     "getters": "Getters",
     "global_delay_factor": "Global delay factor",
     "has_targets": "Has targets",

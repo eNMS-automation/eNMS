@@ -21,7 +21,7 @@ class Task(Base):
     creation_time = Column(String)
     periodic = Column(Boolean)
     frequency = Column(Integer)
-    frequency_unit = Column(String)
+    frequency_unit = Column(String, default="seconds")
     start_date = Column(String)
     end_date = Column(String)
     is_active = Column(Boolean, default=False)
@@ -74,11 +74,17 @@ class Task(Base):
         }
         if self.frequency:
             self.periodic = True
+            frequency_in_seconds = (
+                int(self.frequency)
+                * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
+                    self.frequency_unit
+                ]
+            )
             trigger = {
                 "trigger": "interval",
                 "start_date": self.aps_date("start_date"),
                 "end_date": self.aps_date("end_date"),
-                "seconds": int(self.frequency),
+                "seconds": frequency_in_seconds,
             }
         else:
             self.periodic = False

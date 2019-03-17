@@ -30,12 +30,12 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
         "http://192.168.105.2:5000/rest/instance/device/Washington",
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["model"] == "Cisco" and len(result) == 20
+    assert result["model"] == "Cisco" and len(result) == 21
     result = get(
         "http://192.168.105.2:5000/rest/instance/service/get_facts",
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["description"] == "Getter: get_facts" and len(result) == 30
+    assert result["description"] == "Getter: get_facts" and len(result) == 37
     put(
         "http://192.168.105.2:5000/rest/instance/service",
         json={"name": "get_facts", "description": "Get facts"},
@@ -45,7 +45,7 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
         "http://192.168.105.2:5000/rest/instance/service/get_facts",
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["description"] == "Getter: get_facts" and len(result) == 30
+    assert result["description"] == "Getter: get_facts" and len(result) == 37
     assert len(fetch_all("Service")) == 24
     result = post(
         "http://192.168.105.2:5000/rest/instance/service",
@@ -69,7 +69,7 @@ def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
         json={"name": "payload_transfer_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 2
+    assert result["success"] and len(result) == 10
     post(
         "http://192.168.105.2:5000/rest/instance/Workflow",
         json={"name": "payload_transfer_workflow", "multiprocessing": True},
@@ -80,7 +80,7 @@ def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
         json={"name": "payload_transfer_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 2
+    assert result["success"] and len(result) == 10
 
 
 @check_blueprints("/automation")

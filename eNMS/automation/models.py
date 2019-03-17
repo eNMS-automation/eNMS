@@ -159,7 +159,8 @@ class Job(Base):
             try_commit()
             info(f"Running job {self.name}, attempt {i}")
             attempt = self.run(payload, job_from_workflow_targets, targets)
-            if has_targets:
+
+            if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
                     if not attempt["devices"][device.name]["success"]:

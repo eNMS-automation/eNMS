@@ -1,6 +1,6 @@
-=========
-Reference
-=========
+=====================
+Environment Variables
+=====================
 
 Below is a reference list of environment variables used to configure eNMS. Many of these are described in the Installation section. Some are described within the document in relevant sections. Configurations in the Administration Panel also exist as environment variables for first time startup; if these are desired changed after initial startup and database creation, they must be changed via the Administration Panel UI.
 

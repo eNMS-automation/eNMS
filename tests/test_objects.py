@@ -42,81 +42,85 @@ def define_link(subtype: str, source: str, destination: str) -> ImmutableMultiDi
     )
 
 
-def test_manual_object_creation(user_client: FlaskClient) -> None:
-    for subtype in device_subtypes:
-        for description in ("desc1", "desc2"):
-            obj_dict = define_device(subtype, description)
-            user_client.post("/update/device", data=obj_dict)
-    for subtype in link_subtypes:
-        devices = fetch_all("Device")
-        for source in devices[:3]:
-            for destination in devices[:3]:
-                obj_dict = define_link(subtype, source.name, destination.name)
-                user_client.post("/update/link", data=obj_dict)
-    assert len(fetch_all("Device")) == 44
-    assert len(fetch_all("Link")) == 82
-
-
+# def test_manual_object_creation(user_client: FlaskClient) -> None:
+#     for subtype in device_subtypes:
+#         for description in ("desc1", "desc2"):
+#             obj_dict = define_device(subtype, description)
+#             user_client.post("/update/device", data=obj_dict)
+#     for subtype in link_subtypes:
+#         devices = fetch_all("Device")
+#         for source in devices[:3]:
+#             for destination in devices[:3]:
+#                 obj_dict = define_link(subtype, source.name, destination.name)
+#                 user_client.post("/update/link", data=obj_dict)
+#     assert len(fetch_all("Device")) == 44
+#     assert len(fetch_all("Link")) == 82
+#
+#
 def create_from_file(client: FlaskClient, file: str) -> None:
     with open(client.application.path / "projects" / file, "rb") as f:
         data = {"file": f, "replace": True, "update_pools": True}
         client.post("/inventory/import_topology", data=data)
 
 
-@check_blueprints("", "/inventory", "/views")
-def test_object_creation_europe(user_client: FlaskClient) -> None:
-    create_from_file(user_client, "europe.xls")
-    assert len(fetch_all("Device")) == 33
-    assert len(fetch_all("Link")) == 49
-
-
-@check_blueprints("", "/inventory", "/views")
-def test_object_creation_type(user_client: FlaskClient) -> None:
-    create_from_file(user_client, "device_counters.xls")
-    assert len(fetch_all("Device")) == 27
-    assert len(fetch_all("Link")) == 0
-
-
-routers: List[str] = ["router" + str(i) for i in range(5, 20)]
-links: List[str] = ["link" + str(i) for i in range(4, 15)]
-
-
-@check_blueprints("", "/inventory", "/views")
-def test_device_deletion(user_client: FlaskClient) -> None:
-    create_from_file(user_client, "europe.xls")
-    for device_name in routers:
-        device = fetch("Device", name=device_name)
-        user_client.post(f"/delete/device/{device.id}")
-    assert len(fetch_all("Device")) == 18
-    assert len(fetch_all("Link")) == 18
-
-
-@check_blueprints("", "/inventory", "/views")
-def test_link_deletion(user_client: FlaskClient) -> None:
-    create_from_file(user_client, "europe.xls")
-    for link_name in links:
-        link = fetch("Link", name=link_name)
-        user_client.post(f"/delete/link/{link.id}")
-    assert len(fetch_all("Device")) == 33
-    assert len(fetch_all("Link")) == 38
+#
+#
+# @check_blueprints("", "/inventory", "/views")
+# def test_object_creation_europe(user_client: FlaskClient) -> None:
+#     create_from_file(user_client, "europe.xls")
+#     assert len(fetch_all("Device")) == 33
+#     assert len(fetch_all("Link")) == 49
+#
+#
+# @check_blueprints("", "/inventory", "/views")
+# def test_object_creation_type(user_client: FlaskClient) -> None:
+#     create_from_file(user_client, "device_counters.xls")
+#     assert len(fetch_all("Device")) == 27
+#     assert len(fetch_all("Link")) == 0
+#
+#
+# routers: List[str] = ["router" + str(i) for i in range(5, 20)]
+# links: List[str] = ["link" + str(i) for i in range(4, 15)]
+#
+#
+# @check_blueprints("", "/inventory", "/views")
+# def test_device_deletion(user_client: FlaskClient) -> None:
+#     create_from_file(user_client, "europe.xls")
+#     for device_name in routers:
+#         device = fetch("Device", name=device_name)
+#         user_client.post(f"/delete/device/{device.id}")
+#     assert len(fetch_all("Device")) == 18
+#     assert len(fetch_all("Link")) == 18
+#
+#
+# @check_blueprints("", "/inventory", "/views")
+# def test_link_deletion(user_client: FlaskClient) -> None:
+#     create_from_file(user_client, "europe.xls")
+#     for link_name in links:
+#         link = fetch("Link", name=link_name)
+#         user_client.post(f"/delete/link/{link.id}")
+#     assert len(fetch_all("Device")) == 33
+#     assert len(fetch_all("Link")) == 38
 
 
 pool1 = ImmutableMultiDict(
     [
         ("name", "pool1"),
+        ("operator", "all"),
         ("device_location", "france|spain"),
-        ("device_location_regex", "y"),
+        ("device_location_match", "regex"),
         ("link_name", "link[1|2]."),
-        ("link_name_regex", "y"),
+        ("link_name_match", "regex"),
     ]
 )
 
 pool2 = ImmutableMultiDict(
     [
         ("name", "pool2"),
+        ("operator", "all"),
         ("device_location", "france"),
         ("link_name", "l.*k\\S3"),
-        ("link_name_regex", "y"),
+        ("link_name_match", "regex"),
     ]
 )
 

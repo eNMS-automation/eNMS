@@ -142,7 +142,8 @@ class Job(Base):
         targets: Optional[Set[Device]] = None,
         from_workflow: bool = False,
     ) -> Tuple[dict, str]:
-        self.is_running, self.state, results = True, {}, {"success": False}
+        self.is_running, self.state = True, {}
+        results: dict = {"success": False}
         if not payload:
             payload = {}
         if not targets and getattr(self, "use_workflow_targets", True):
@@ -158,6 +159,7 @@ class Job(Base):
             info(f"Running job {self.name}, attempt {i}")
             attempt = self.run(payload, targets)
             if has_targets:
+                assert targets is not None
                 for device in set(targets):
                     if not attempt["devices"][device.name]["success"]:
                         continue
@@ -207,9 +209,7 @@ class Job(Base):
         device_result = self.get_results(payload, device)
         results["devices"][device.name] = device_result
 
-    def run(
-        self, payload: dict, targets: Optional[Set[Device]] = None
-    ) -> Tuple[dict, Optional[Set[Device]]]:
+    def run(self, payload: dict, targets: Optional[Set[Device]] = None) -> dict:
         if targets:
             results: dict = {"devices": {}}
             if self.multiprocessing:

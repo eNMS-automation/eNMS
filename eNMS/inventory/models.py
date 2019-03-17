@@ -179,7 +179,7 @@ class Pool(AbstractPool):
     def object_number(self) -> str:
         return f"{len(self.devices)} devices - {len(self.links)} links"
 
-    def property_match(self, obj, property):
+    def property_match(self, obj: Union[Device, Link], property: str) -> bool:
         pool_value = getattr(self, f"{obj.class_type}_{property}")
         object_value = str(getattr(obj, property))
         match = getattr(self, f"{obj.class_type}_{property}_match")
@@ -190,7 +190,7 @@ class Pool(AbstractPool):
         elif match == "equality":
             return pool_value == object_value
         else:
-            return search(pool_value, object_value)
+            return bool(search(pool_value, object_value))
 
     def object_match(self, obj: Union[Device, Link]) -> bool:
         properties = (

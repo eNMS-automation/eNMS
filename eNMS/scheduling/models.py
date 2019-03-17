@@ -21,6 +21,7 @@ class Task(Base):
     creation_time = Column(String)
     periodic = Column(Boolean)
     frequency = Column(Integer)
+    frequency_unit = Column(String)
     start_date = Column(String)
     end_date = Column(String)
     is_active = Column(Boolean, default=False)

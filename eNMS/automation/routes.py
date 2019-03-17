@@ -103,20 +103,28 @@ def get_service(id_or_cls: str) -> dict:
         return f"""
             <label>{name}</label>
             <div class="form-group">
-              <input class="form-control" id="service-{property}"
-              maxlength="{getattr(cls, f'{property}_length', 524288)}"
-              name="{property}" type="{'password'
-              if property in private_properties else 'text'}">
+              <
+                input
+                class="form-control"
+                id="service-{property}"
+                maxlength="{getattr(cls, f'{property}_length', 524288)}"
+                name="{property}"
+                type="{'password' if property in private_properties else 'text'}"
+              >
             </div>"""
 
     def build_textarea_box(property: str, name: str) -> str:
         return f"""
             <label>{name}</label>
             <div class="form-group">
-              <textarea style="height: 150px;" rows="30"
-              maxlength="{getattr(cls, f'{property}_length', 524288)}"
-              class="form-control" id="service-{property}"
-              name="{property}"></textarea>
+              <
+                textarea
+                style="height: 150px;" rows="30"
+                maxlength="{getattr(cls, f'{property}_length', 524288)}"
+                class="form-control"
+                id="service-{property}"
+                name="{property}"
+              ></textarea>
             </div>"""
 
     def build_select_box(property: str, name: str) -> str:
@@ -127,11 +135,14 @@ def get_service(id_or_cls: str) -> dict:
         return f"""
             <label>{name}</label>
             <div class="form-group">
-              <select class="form-control"
-                id="service-{property}" name="{property}"
-                {'multiple size="7"'
-                if property_types[property] == 'list'
-                else ''}>{options}
+              <
+                select
+                class="form-control"
+                id="service-{property}"
+                name="{property}"
+                {'multiple size="7"' if property_types[property] == 'list' else ''}
+              >
+              {options}
               </select>
             </div>"""
 
@@ -140,8 +151,13 @@ def get_service(id_or_cls: str) -> dict:
             "<fieldset>"
             + f"""
             <div class="item">
-                <input id="service-{property}" name="{property}"
-                type="checkbox"><label>{name}</label>
+              <
+                input
+                id="service-{property}"
+                name="{property}"
+                type="checkbox"
+              >
+              <label>{name}</label>
             </div>"""
             + "</fieldset>"
         )

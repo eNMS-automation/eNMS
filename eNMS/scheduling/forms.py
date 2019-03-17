@@ -17,8 +17,8 @@ class SchedulingForm(FlaskForm):
         choices=(
             ("seconds", "Seconds"),
             ("minutes", "Minutes"),
+            ("hours", "Hours"),
             ("days", "Days"),
-            ("weeks", "Weeks"),
         )
     )
     job = ObjectField("Job")

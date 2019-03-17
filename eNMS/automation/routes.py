@@ -103,8 +103,7 @@ def get_service(id_or_cls: str) -> dict:
         return f"""
             <label>{name}</label>
             <div class="form-group">
-              <
-                input
+              <input
                 class="form-control"
                 id="service-{property}"
                 maxlength="{getattr(cls, f'{property}_length', 524288)}"
@@ -117,8 +116,7 @@ def get_service(id_or_cls: str) -> dict:
         return f"""
             <label>{name}</label>
             <div class="form-group">
-              <
-                textarea
+              <textarea
                 style="height: 150px;" rows="30"
                 maxlength="{getattr(cls, f'{property}_length', 524288)}"
                 class="form-control"
@@ -135,8 +133,7 @@ def get_service(id_or_cls: str) -> dict:
         return f"""
             <label>{name}</label>
             <div class="form-group">
-              <
-                select
+              <select
                 class="form-control"
                 id="service-{property}"
                 name="{property}"
@@ -151,8 +148,7 @@ def get_service(id_or_cls: str) -> dict:
             "<fieldset>"
             + f"""
             <div class="item">
-              <
-                input
+              <input
                 id="service-{property}"
                 name="{property}"
                 type="checkbox"

@@ -218,6 +218,7 @@ class Job(Base):
         targets: Optional[Set[Device]] = None,
     ) -> dict:
         if job_from_workflow_targets:
+            assert targets is not None
             device, = targets
             return self.get_results(payload, device)
         elif targets:

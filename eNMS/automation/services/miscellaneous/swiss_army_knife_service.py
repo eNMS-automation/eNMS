@@ -119,7 +119,7 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def process_payload1(self, payload: dict, device: Device) -> dict:
-        get_facts = payload["get_facts"]["devices"][device.name]
+        get_facts = payload["get_facts"]["results"]["devices"][device.name]
         # we use the name of the device to get the result for that particular
         # device.
         # all of the other inventory properties of the device are available

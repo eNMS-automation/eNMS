@@ -181,11 +181,11 @@ class Job(Base):
                             device.name
                         ]
             else:
-                results[f"Attempts {i + 1}"] = attempt
                 if attempt["success"] or i == self.number_of_retries:
-                    results = attempt
+                    results["results"] = attempt
                     break
                 else:
+                    results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
         self.logs[now] = results
         info(f"{self.name}: finished.")
@@ -400,10 +400,7 @@ class Workflow(Job):
             job_results, _ = job.try_run(
                 results, {device} if device else None, from_workflow=True
             )
-            if "success" in job_results:
-                success = job_results["success"]
-            else:
-                success = job_results["results"]["success"]
+            success = job_results["results"]["success"]
             self.state["jobs"][job.id] = success
             try_commit()
             edge_type_to_follow = "success" if success else "failure"

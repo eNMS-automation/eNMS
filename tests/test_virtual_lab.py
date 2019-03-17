@@ -69,7 +69,7 @@ def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
         json={"name": "payload_transfer_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 10
+    assert result["results"]["success"] and len(result) == 1
     post(
         "http://192.168.105.2:5000/rest/instance/Workflow",
         json={"name": "payload_transfer_workflow", "multiprocessing": True},
@@ -80,7 +80,7 @@ def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
         json={"name": "payload_transfer_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 10
+    assert result["results"]["success"] and len(result) == 1
 
 
 @check_blueprints("/automation")
@@ -90,7 +90,7 @@ def test_netmiko_workflow(user_client: FlaskClient) -> None:
         json={"name": "Netmiko_VRF_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 2
+    assert result["results"]["success"] and len(result) == 1
     post(
         "http://192.168.105.2:5000/rest/instance/Workflow",
         json={"name": "Netmiko_VRF_workflow", "multiprocessing": True},
@@ -101,7 +101,7 @@ def test_netmiko_workflow(user_client: FlaskClient) -> None:
         json={"name": "Netmiko_VRF_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 2
+    assert result["results"]["success"] and len(result) == 1
     post(
         "http://192.168.105.2:5000/rest/instance/Workflow",
         json={"name": "Netmiko_VRF_workflow", "use_workflow_targets": False},
@@ -112,7 +112,7 @@ def test_netmiko_workflow(user_client: FlaskClient) -> None:
         json={"name": "Netmiko_VRF_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 8
+    assert result["results"]["success"] and len(result) == 1
 
 
 @check_blueprints("/automation")
@@ -122,7 +122,7 @@ def test_napalm_workflow(user_client: FlaskClient) -> None:
         json={"name": "Napalm_VRF_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 2
+    assert result["results"]["success"] and len(result) == 1
     post(
         "http://192.168.105.2:5000/rest/instance/Workflow",
         json={"name": "Napalm_VRF_workflow", "multiprocessing": True},
@@ -133,7 +133,7 @@ def test_napalm_workflow(user_client: FlaskClient) -> None:
         json={"name": "Napalm_VRF_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 2
+    assert result["results"]["success"] and len(result) == 1
     post(
         "http://192.168.105.2:5000/rest/instance/Workflow",
         json={"name": "Napalm_VRF_workflow", "use_workflow_targets": False},
@@ -144,4 +144,4 @@ def test_napalm_workflow(user_client: FlaskClient) -> None:
         json={"name": "Napalm_VRF_workflow"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["success"] and len(result) == 8
+    assert result["results"]["success"] and len(result) == 1

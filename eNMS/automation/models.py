@@ -146,6 +146,7 @@ class Job(Base):
         results: dict = {"success": False}
         if not payload:
             payload = {}
+        prune_inner_devices = from_workflow and bool(targets)
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         has_targets = bool(targets)
@@ -180,7 +181,7 @@ class Job(Base):
             else:
                 results[f"Attempts {i + 1}"] = attempt
                 results.update(attempt)
-                if attempt["success"] or i != self.number_of_retries:
+                if attempt["success"]:
                     break
                 else:
                     sleep(self.time_between_retries)
@@ -189,9 +190,8 @@ class Job(Base):
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         try_commit()
-        if not from_workflow:
-            if self.send_notification:
-                self.notify(results, now)
+        if not from_workflow and self.send_notification:
+            self.notify(results, now)
         return results, now
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:

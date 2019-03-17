@@ -466,6 +466,7 @@ def create_payload_transfer_workflow() -> None:
         **{
             "name": "payload_transfer_workflow",
             "description": "ReST call, Napalm getters, etc",
+            "use_workflow_targets": False,
             "creator": admin,
             "devices": devices,
             "vendor": "Arista",

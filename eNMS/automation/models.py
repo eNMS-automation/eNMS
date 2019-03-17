@@ -146,7 +146,7 @@ class Job(Base):
         results: dict = {"success": False}
         if not payload:
             payload = {}
-        prune_inner_devices = from_workflow and bool(targets)
+        job_from_workflow_targets = from_workflow and bool(targets)
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         has_targets = bool(targets)
@@ -158,7 +158,7 @@ class Job(Base):
             self.completed = self.failed = 0
             try_commit()
             info(f"Running job {self.name}, attempt {i}")
-            attempt = self.run(payload, targets)
+            attempt = self.run(payload, job_from_workflow_targets, targets)
             if has_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -209,8 +209,16 @@ class Job(Base):
         device_result = self.get_results(payload, device)
         results["devices"][device.name] = device_result
 
-    def run(self, payload: dict, targets: Optional[Set[Device]] = None) -> dict:
-        if targets:
+    def run(
+        self,
+        payload: dict,
+        job_from_workflow_targets: bool,
+        targets: Optional[Set[Device]] = None,
+    ) -> dict:
+        if job_from_workflow_targets:
+            device, = targets
+            return self.get_results(payload, device)
+        elif targets:
             results: dict = {"devices": {}}
             if self.multiprocessing:
                 processes = min(len(targets), self.max_processes)

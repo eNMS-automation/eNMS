@@ -532,7 +532,7 @@ pretty_names: Dict[str, str] = {
     "netmiko_driver": "Netmiko driver",
     "never_update": "Never update",
     "next_run_time": "Next runtime",
-    "number_of_configuration": "Number of configurations stored",
+    "number_of_configuration": "Maximum number of configurations stored in database",
     "object_number": "Number of objects",
     "operating_system": "Operating System",
     "optional_args": "Optional arguments",

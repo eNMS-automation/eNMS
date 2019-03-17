@@ -149,9 +149,9 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
     ajax: {
       'url': `/server_side_processing/${cls}/${type}`,
       'data': (d) => {
-        d.pools = $('#restrict-pool').val()
-      }
-    }
+        d.pools = $('#restrict-pool').val();
+      },
+    },
   });
   return table;
 }

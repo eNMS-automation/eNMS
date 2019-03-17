@@ -10,7 +10,7 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.base.models import MultipleObjectField, ObjectField
+from eNMS.base.models import MultipleObjectField
 from eNMS.base.properties import import_properties, user_permissions
 
 

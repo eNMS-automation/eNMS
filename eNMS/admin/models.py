@@ -7,7 +7,7 @@ from os import scandir, remove
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
-from typing import Any, List
+from typing import Any
 
 from eNMS.base.associations import pool_user_table
 from eNMS.base.functions import fetch, fetch_all

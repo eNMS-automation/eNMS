@@ -1,4 +1,3 @@
-from flask_login import current_user as user
 from re import search
 from sqlalchemy import (
     Boolean,
@@ -13,7 +12,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List, Union
 
 from eNMS.base.associations import (
     pool_device_table,
@@ -22,7 +21,7 @@ from eNMS.base.associations import (
     job_device_table,
     job_pool_table,
 )
-from eNMS.base.functions import fetch, get_one
+from eNMS.base.functions import fetch
 from eNMS.base.models import Base
 from eNMS.base.properties import (
     custom_properties,

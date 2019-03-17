@@ -143,15 +143,15 @@ class Job(Base):
         from_workflow: bool = False,
     ) -> Tuple[dict, str]:
         self.is_running, self.state = True, {}
-        results: dict = {"success": False}
+        results: dict = {"results": {}}
         if not payload:
             payload = {}
         job_from_workflow_targets = from_workflow and bool(targets)
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         has_targets = bool(targets)
-        if has_targets:
-            results["devices"] = {}
+        if has_targets and not job_from_workflow_targets:
+            results["results"]["devices"] = {}
         info(f"{self.name}: starting.")
         now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
@@ -159,30 +159,31 @@ class Job(Base):
             try_commit()
             info(f"Running job {self.name}, attempt {i}")
             attempt = self.run(payload, job_from_workflow_targets, targets)
-
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
                     if not attempt["devices"][device.name]["success"]:
                         continue
-                    results["devices"][device.name] = attempt["devices"][device.name]
+                    results["results"]["devices"][device.name] = attempt["devices"][
+                        device.name
+                    ]
                     targets.remove(device)
                 if not targets:
-                    results["success"] = True
+                    results["results"]["success"] = True
                     break
                 elif i != self.number_of_retries:
                     results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
                 else:
-                    results["success"] = False
+                    results["results"]["success"] = False
                     for device in targets:
-                        results["devices"][device.name] = attempt["devices"][
+                        results["results"]["devices"][device.name] = attempt["devices"][
                             device.name
                         ]
             else:
                 results[f"Attempts {i + 1}"] = attempt
-                results.update(attempt)
-                if attempt["success"]:
+                if attempt["success"] or i == self.number_of_retries:
+                    results = attempt
                     break
                 else:
                     sleep(self.time_between_retries)
@@ -399,7 +400,10 @@ class Workflow(Job):
             job_results, _ = job.try_run(
                 results, {device} if device else None, from_workflow=True
             )
-            success = job_results["success"]
+            if "success" in job_results:
+                success = job_results["success"]
+            else:
+                success = job_results["results"]["success"]
             self.state["jobs"][job.id] = success
             try_commit()
             edge_type_to_follow = "success" if success else "failure"

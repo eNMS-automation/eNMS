@@ -13,6 +13,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
+from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 
 from eNMS.base.associations import (
@@ -200,7 +201,10 @@ class Job(Base):
         try:
             results = self.job(payload, device) if device else self.job(payload)
         except Exception as e:
-            results = {"success": False, "result": str(e)}
+            results = {
+                "success": False,
+                "result": chr(10).join(format_exc().splitlines()),
+            }
         self.completed += 1
         self.failed += 1 - results["success"]
         try_commit()

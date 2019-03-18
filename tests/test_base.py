@@ -10,7 +10,7 @@ urls: Dict[str, tuple] = {
         "/user_management",
         "/login",
         "/administration",
-        "/database",
+        "/advanced",
         "/instance_management",
     ),
     "/inventory": (

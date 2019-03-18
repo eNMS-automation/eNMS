@@ -43,8 +43,8 @@ def administration() -> dict:
     )
 
 
-@get(bp, "/database", "View")
-def database() -> dict:
+@get(bp, "/advanced", "View")
+def advanced() -> dict:
     return dict(
         logs_form=LogsForm(request.form),
         migrations_form=MigrationsForm(request.form),

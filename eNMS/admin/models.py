@@ -106,8 +106,8 @@ class Parameters(Base):
             try:
                 Repo.clone_from(repo, local_path)
             except Exception as e:
+                info(f"Cannot clone {repository_type} git repository ({str(e)})")
                 try:
-                    info(f"Cannot clone {repository_type} git repository ({str(e)})")
                     Repo(local_path).remotes.origin.pull()
                     if repository_type == "configurations":
                         self.update_database_configurations_from_git(app)

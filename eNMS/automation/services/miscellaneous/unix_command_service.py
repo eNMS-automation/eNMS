@@ -1,5 +1,5 @@
 from subprocess import check_output
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
 
 from eNMS.automation.models import Service
@@ -13,15 +13,19 @@ class UnixCommandService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     command = Column(String)
+    content_match = Column(String)
+    content_match_textarea = True
+    content_match_regex = Column(Boolean)
+    negative_logic = Column(Boolean)
+    delete_spaces_before_matching = Column(Boolean)
 
     __mapper_args__ = {"polymorphic_identity": "UnixCommandService"}
 
     def job(self, payload: dict, device: Optional[Device] = None) -> dict:
-        try:
-            command = self.sub(self.command, locals())
-            return {"success": True, "result": check_output(command.split()).decode()}
-        except Exception as e:
-            return {"success": False, "result": str(e)}
+        command = self.sub(self.command, locals())
+        match = self.sub(self.content_match, locals())
+        result = check_output(command.split()).decode()
+        return {"success": self.match_content(result, match), "result": result}
 
 
 service_classes["UnixCommandService"] = UnixCommandService

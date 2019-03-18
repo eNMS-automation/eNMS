@@ -16,15 +16,21 @@ class NetmikoValidationService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     command = Column(String)
-    content_match = Column(String)
-    content_match_textarea = True
-    content_match_regex = Column(Boolean)
     conversion_method = Column(String, default="text")
     conversion_method_values = (
         ("text", "Text"),
         ("json", "Json dictionary"),
         ("xml", "XML dictionary"),
     )
+    validation_method = Column(String, default="text")
+    validation_method_values = (
+        ("text", "Validation by text match"),
+        ("dict_equal", "Validation by dictionnary equality"),
+        ("dict_included", "Validation by dictionnary inclusion"),
+    )
+    content_match = Column(String)
+    content_match_textarea = True
+    content_match_regex = Column(Boolean)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
@@ -33,20 +39,15 @@ class NetmikoValidationService(Service):
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
+    delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
-    validation_method = Column(String, default="text")
-    validation_method_values = (
-        ("text", "Validation by text match"),
-        ("dict_equal", "Validation by dictionnary equality"),
-        ("dict_included", "Validation by dictionnary inclusion"),
-    )
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
 
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
-        result = netmiko_handler.send_command(command)
+        result = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
         if self.conversion_method == "json":
             result = load(result)
         elif self.conversion_method == "xml":

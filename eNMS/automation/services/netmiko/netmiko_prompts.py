@@ -22,7 +22,8 @@ class NetmikoPromptsService(Service):
     content_match = Column(String)
     content_match_textarea = True
     content_match_regex = Column(Boolean)
-    delay_factor = Column(Float, default=2.0)
+    delay_factor = Column(Float, default=1.0)
+    global_delay_factor = Column(Float, default=1.0)
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
@@ -30,14 +31,15 @@ class NetmikoPromptsService(Service):
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
-    global_delay_factor = Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoPromptsService"}
 
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
-        result = netmiko_handler.send_command_timing(command, delay_factor=2)
+        result = netmiko_handler.send_command_timing(
+            command, delay_factor=self.delay_factor
+        )
         if self.response1 and self.confirmation1 in result:
             result = netmiko_handler.send_command_timing(
                 self.response1, delay_factor=self.delay_factor

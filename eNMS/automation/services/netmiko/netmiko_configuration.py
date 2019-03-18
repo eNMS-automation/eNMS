@@ -20,6 +20,7 @@ class NetmikoConfigurationService(Service):
     enable_mode = Column(Boolean)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=1.0)
+    delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
@@ -29,7 +30,9 @@ class NetmikoConfigurationService(Service):
         if self.enable_mode:
             netmiko_handler.enable()
         config = self.sub(self.content, locals())
-        netmiko_handler.send_config_set(config.splitlines())
+        netmiko_handler.send_config_set(
+            config.splitlines(), delay_factor=self.delay_factor
+        )
         netmiko_handler.disconnect()
         return {"success": True, "result": f"configuration OK {config}"}
 

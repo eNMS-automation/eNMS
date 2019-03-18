@@ -200,7 +200,7 @@ class Job(Base):
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
         try:
             results = self.job(payload, device) if device else self.job(payload)
-        except Exception as e:
+        except Exception:
             results = {
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),

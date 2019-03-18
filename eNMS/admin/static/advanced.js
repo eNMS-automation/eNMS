@@ -55,6 +55,17 @@ function getGitContent() { // eslint-disable-line no-unused-vars
   });
 }
 
+/**
+ * Start or shutdown the scheduler.
+ * @param {action} action - Pause or resume.
+ */
+function scheduler(action) { // eslint-disable-line no-unused-vars
+  call(`/scheduling/scheduler/${action}`, function() {
+      alertify.notify(`Scheduler ${action}d.`, 'success', 5);
+    }
+  );
+}
+
 (function() {
   convertSelect('#import_export_types', '#deletion_types');
   $('#clear_logs_date').datetimepicker({

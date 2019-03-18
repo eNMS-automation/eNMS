@@ -19,6 +19,18 @@ class NetmikoPromptsService(Service):
     response2 = Column(String)
     confirmation3 = Column(String)
     response3 = Column(String)
+    conversion_method = Column(String, default="text")
+    conversion_method_values = (
+        ("text", "Text"),
+        ("json", "Json dictionary"),
+        ("xml", "XML dictionary"),
+    )
+    validation_method = Column(String, default="text")
+    validation_method_values = (
+        ("text", "Validation by text match"),
+        ("dict_equal", "Validation by dictionnary equality"),
+        ("dict_included", "Validation by dictionnary inclusion"),
+    )
     content_match = Column(String)
     content_match_textarea = True
     content_match_regex = Column(Boolean)
@@ -52,13 +64,21 @@ class NetmikoPromptsService(Service):
                     result = netmiko_handler.send_command_timing(
                         self.response3, delay_factor=self.delay_factor
                     )
+        if self.conversion_method == "json":
+            result = load(result)
+        elif self.conversion_method == "xml":
+            result = parse(result)
         match = self.sub(self.content_match, locals())
+        if self.validation_method == "text":
+            success = self.match_content(str(result), match)
+        else:
+            success = self.match_dictionnary(result)
         netmiko_handler.disconnect()
         return {
-            "expected": match,
+            "expected": match if self.validation_method == "text" else self.dict_match,
             "negative_logic": self.negative_logic,
             "result": result,
-            "success": self.match_content(result, match),
+            "success": success,
         }
 
 

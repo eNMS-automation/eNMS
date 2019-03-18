@@ -9,50 +9,43 @@
 {% block content %}
   <div class="right_col" role="main">
     <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="x_panel">
+      <div class="x_panel">
+        <div class="col-md-10 col-xs-10 col-md-offset-1">
           <div class="x_title">
             <h4 class="text-center">Database Migration</h4>
           </div>
-          <div class="x_content" style="min-height: 450px">
-            <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-              {{ migrations_form.list_fields() }}
-              {{ migrations_form.boolean_fields() }}
-              <div>
-                <label>Empty Database before Import</label>
-                {{ migrations_form.empty_database_before_import() }}<br><br>
-                <label>
-                  Directory pathname to use in eNMS_HOME/migrations :<br>
-                  Example: "10312018_backup"
-                </label>
-                <div class="form-group">
-                  <input class="form-control required" list="versions" id="name" name="name" />
-                  <datalist id="versions"></datalist>
-                </div>
-              </div>
-              <div>
-                <label>eNMS object types to include in Import / Export :</label>
-                <div class="form-group">
-                  {{ migrations_form.import_export_types(class="form-control required", size="10") }}
-                </div>
-              </div>
-            </form>
-            <div class="ln_solid"></div>
-            <div class="form-group">
-              <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-                <button type="button" class="btn btn-success" onclick="migrationsImport()">Import</button>
-                <button type="button" class="btn btn-success" onclick="migrationsExport()">Export</button>
+          <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+            {{ migrations_form.list_fields() }}
+            {{ migrations_form.boolean_fields() }}
+            <div>
+              <label>Empty Database before Import</label>
+              {{ migrations_form.empty_database_before_import() }}<br><br>
+              <label>
+                Directory pathname to use in eNMS_HOME/migrations :<br>
+                Example: "10312018_backup"
+              </label>
+              <div class="form-group">
+                <input class="form-control required" list="versions" id="name" name="name" />
+                <datalist id="versions"></datalist>
               </div>
             </div>
+            <div>
+              <label>eNMS object types to include in Import / Export :</label>
+              <div class="form-group">
+                {{ migrations_form.import_export_types(class="form-control required", size="10") }}
+              </div>
+            </div>
+          </form>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+              <button type="button" class="btn btn-success" onclick="migrationsImport()">Import</button>
+              <button type="button" class="btn btn-success" onclick="migrationsExport()">Export</button>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="x_panel">
           <div class="x_title">
             <h4 class="text-center">Database Helpers</h4>
           </div>
-          <div class="x_content" style="min-height: 450px">
             <form id="database-helpers-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
               <div>
                 <label>Clear Logs older than:</label>
@@ -72,20 +65,14 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="x_panel">
           <div class="x_title">
             <h4 class="text-center">Miscellaneous</h4>
           </div>
-          <div class="x_content" style="min-height: 450px">
-            <div class="panel-group">
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-default btn-file" onclick="getGitContent()" style="width:100%;">
-                  Fetch Git Configurations and Update devices
-                </button>
-              </div>
+          <div class="panel-group">
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="getGitContent()" style="width:100%;">
+                Fetch Git Configurations and Update devices
+              </button>
             </div>
           </div>
         </div>

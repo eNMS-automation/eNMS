@@ -30,6 +30,13 @@
             <div class="form-group">
               {{ scheduling_form.job(id='task-job', class="form-control") }}
             </div>
+            <label>Scheduling Mode</label>
+            <div class="form-group">
+              {{ scheduling_form.scheduling_mode(id='task-scheduling_mode', class="form-control") }}
+            </div>
+            <div class="x_title">
+              <h4 class="text-center">Standard Scheduling</h4>
+            </div>
             <label>Start date</label>
             <div class='form-group'>
               {{ scheduling_form.start_date(id='task-start_date', class="form-control") }}
@@ -46,6 +53,13 @@
               <div class="col-md-3">
                 {{ scheduling_form.frequency_unit(id='task-frequency_unit', class="form-control") }}
               </div>
+            </div>
+            <div class="x_title">
+              <h4 class="text-center">Crontab Scheduling</h4>
+            </div>
+            <label>Crontab Expression</label>
+            <div class='form-group'>
+              {{ scheduling_form.crontab_expression(id='task-crontab_expression', class="form-control") }}
             </div>
           </div>
         </div>

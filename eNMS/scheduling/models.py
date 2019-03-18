@@ -1,3 +1,4 @@
+from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -19,11 +20,13 @@ class Task(Base):
     name = Column(String, unique=True)
     description = Column(String)
     creation_time = Column(String)
+    scheduling_mode = Column(String, default="standard")
     periodic = Column(Boolean)
     frequency = Column(Integer)
     frequency_unit = Column(String, default="seconds")
     start_date = Column(String)
     end_date = Column(String)
+    crontab_expression = Column(String)
     is_active = Column(Boolean, default=False)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")
@@ -72,7 +75,10 @@ class Task(Base):
             "replace_existing": True,
             "args": [self.job.id, self.aps_job_id],
         }
-        if self.frequency:
+        if self.scheduling_mode == "cron":
+            self.periodic = True
+            trigger = {"trigger": CronTrigger.from_crontab(self.crontab_expression)}
+        elif self.frequency:
             self.periodic = True
             frequency_in_seconds = (
                 int(self.frequency)

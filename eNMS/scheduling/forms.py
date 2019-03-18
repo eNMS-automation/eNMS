@@ -8,6 +8,9 @@ class SchedulingForm(FlaskForm):
     id = HiddenField()
     boolean_fields = HiddenField(default="is_active")
     is_active = BooleanField()
+    scheduling_mode = SelectField(
+        choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling"))
+    )
     start_date = StringField()
     end_date = StringField()
     name = StringField()
@@ -21,4 +24,5 @@ class SchedulingForm(FlaskForm):
             ("days", "Days"),
         )
     )
+    crontab_expression = StringField()
     job = ObjectField("Job")

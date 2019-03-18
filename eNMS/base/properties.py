@@ -676,7 +676,7 @@ export_properties: Dict[str, List[str]] = {
 
 dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs"],
-    "Service": ["logs", "state", "tasks", "workflows", "creator_name"],
+    "Service": ["logs", "state", "tasks", "is_running", "workflows", "creator_name"],
     "Task": [
         "job_name",
         "next_run_time",
@@ -684,5 +684,5 @@ dont_migrate: Dict[str, List[str]] = {
         "time_before_next_run",
         "status",
     ],
-    "Workflow": ["last_modified", "logs", "state", "status", "creator_name"],
+    "Workflow": ["last_modified", "logs", "state", "is_running", "creator_name"],
 }

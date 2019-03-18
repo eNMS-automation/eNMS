@@ -65,7 +65,6 @@ Object.keys(device_subtypes).forEach(function(subtype) {
   });
 });
 
-// Create a new vector type with getLatLng and setLatLng methods.
 L.PolylineClusterable = L.Polyline.extend({
   _originalInitialize: L.Polyline.prototype.initialize,
   initialize: function(bounds, options) {

@@ -44,57 +44,28 @@ let nodes;
 let edges;
 let container = document.getElementById('logical_view');
 
-function displayWorkflow(wf) {
-  nodes = new vis.DataSet(devices.map(deviceToNode));
-  edges = new vis.DataSet(links.map(linkToEdge));
-  graph = new vis.Network(container, {nodes: nodes, edges: edges}, dsoptions);
-  graph.setOptions({physics: false});
-  graph.on('oncontext', function(properties) {
+function displayWorkflow(nodes, edges) {
+  nodes = new vis.DataSet(nodes.map(deviceToNode));
+  edges = new vis.DataSet(edges.map(linkToEdge));
+  network = new vis.Network(container, {nodes: nodes, edges: edges}, {});
+  network.on('oncontext', function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
-    if (typeof node !== 'undefined' && node != 1 && node != 2) {
-      graph.selectNodes([node]);
-      $('.global,.edge-selection').hide();
-      $('.node-selection').show();
-      selectedNode = node;
-    } else if (typeof edge !== 'undefined' && node != 1 && node != 2) {
-      graph.selectEdges([edge]);
-      $('.global,.node-selection').hide();
-      $('.edge-selection').show();
-      selectedNode = node;
+    if (typeof node !== 'undefined') {
+      $('.global-menu,.link-menu').hide();
+      $('.device-menu').show();
+      selected = node;
+    } else if (typeof edge !== 'undefined') {
+      selected = edge;
+      $('.global-menu,.device-menu').hide();
+      $('.link-menu').show();
     } else {
-      $('.node-selection').hide();
-      $('.global').show();
+      $('.link-menu,.device-menu').hide();
+      $('.global-menu').show();
     }
   });
-
-
-let data = {
-  nodes: nodes,
-  edges: edges,
-};
-
-let options = {};
-let network = new vis.Network(container, data, options);
-
-network.on('oncontext', function(properties) {
-  properties.event.preventDefault();
-  const node = this.getNodeAt(properties.pointer.DOM);
-  const edge = this.getEdgeAt(properties.pointer.DOM);
-  if (typeof node !== 'undefined') {
-    $('.global-menu,.link-menu').hide();
-    $('.device-menu').show();
-    selected = node;
-  } else if (typeof edge !== 'undefined') {
-    selected = edge;
-    $('.global-menu,.device-menu').hide();
-    $('.link-menu').show();
-  } else {
-    $('.link-menu,.device-menu').hide();
-    $('.global-menu').show();
-  }
-});
+}
 
 const action = {
   'Device properties': (d) => showTypeModal('device', d),
@@ -114,6 +85,7 @@ $('#logical_view').contextMenu({
 
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
+    displayWorkflow(objects.devices, objects.links);
     alertify.notify(`Filter applied.`, 'success', 5);
   });
 });

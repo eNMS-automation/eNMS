@@ -87,8 +87,11 @@ class MigrationsForm(FlaskForm):
     import_export_types = SelectMultipleField(choices=export_choices)
 
 
-class LogsForm(FlaskForm):
+class DatabaseHelpersForm(FlaskForm):
+    list_fields = HiddenField(default="deletion_types")
     clear_logs_date = StringField()
+    deletion_choices = [(p, p) for p in import_properties]
+    deletion_types = SelectMultipleField(choices=deletion_choices)
 
 
 class AddInstance(FlaskForm):

@@ -25,7 +25,12 @@ class UnixCommandService(Service):
         command = self.sub(self.command, locals())
         match = self.sub(self.content_match, locals())
         result = check_output(command.split()).decode()
-        return {"success": self.match_content(result, match), "result": result}
+        return {
+            "success": self.match_content(result, match),
+            "match": match,
+            "negative_logic": self.negative_logic,
+            "result": result,
+        }
 
 
 service_classes["UnixCommandService"] = UnixCommandService

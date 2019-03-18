@@ -94,7 +94,7 @@ class Parameters(Base):
                     ] = f.read()
         db.session.commit()
 
-    def get_git_content(self, app: Flask, action: str = "clone") -> None:
+    def get_git_content(self, app: Flask) -> None:
         for repository_type in ("configurations", "automation"):
             repo = getattr(self, f"git_{repository_type}")
             if not repo:
@@ -104,17 +104,18 @@ class Parameters(Base):
                 if file.name == ".gitkeep":
                     remove(file)
             try:
-                if action == "clone":
-                    Repo.clone_from(repo, local_path)
-                else:
-                    Repo(local_path).remotes.origin.pull()
-                if repository_type == "configurations":
-                    self.update_database_configurations_from_git(app)
-                    for pool in fetch_all("Pool"):
-                        if pool.device_current_configuration:
-                            pool.compute_pool()
+                Repo.clone_from(repo, local_path)
             except Exception as e:
-                info(f"Cannot {action} {repository_type} git repository ({str(e)})")
+                try:
+                    info(f"Cannot clone {repository_type} git repository ({str(e)})")
+                    Repo(local_path).remotes.origin.pull()
+                    if repository_type == "configurations":
+                        self.update_database_configurations_from_git(app)
+                        for pool in fetch_all("Pool"):
+                            if pool.device_current_configuration:
+                                pool.compute_pool()
+                except Exception as e:
+                    info(f"Cannot pull {repository_type} git repository ({str(e)})")
 
     def trigger_active_parameters(self, app: Flask) -> None:
         self.get_git_content(app)

@@ -40,14 +40,41 @@ function linkToEdge(link) {
   };
 }
 
-let nodes = new vis.DataSet(devices.map(deviceToNode));
-let edges = new vis.DataSet(links.map(linkToEdge));
-
+let nodes;
+let edges;
 let container = document.getElementById('logical_view');
+
+function displayWorkflow(wf) {
+  nodes = new vis.DataSet(devices.map(deviceToNode));
+  edges = new vis.DataSet(links.map(linkToEdge));
+  graph = new vis.Network(container, {nodes: nodes, edges: edges}, dsoptions);
+  graph.setOptions({physics: false});
+  graph.on('oncontext', function(properties) {
+    properties.event.preventDefault();
+    const node = this.getNodeAt(properties.pointer.DOM);
+    const edge = this.getEdgeAt(properties.pointer.DOM);
+    if (typeof node !== 'undefined' && node != 1 && node != 2) {
+      graph.selectNodes([node]);
+      $('.global,.edge-selection').hide();
+      $('.node-selection').show();
+      selectedNode = node;
+    } else if (typeof edge !== 'undefined' && node != 1 && node != 2) {
+      graph.selectEdges([edge]);
+      $('.global,.node-selection').hide();
+      $('.edge-selection').show();
+      selectedNode = node;
+    } else {
+      $('.node-selection').hide();
+      $('.global').show();
+    }
+  });
+
+
 let data = {
   nodes: nodes,
   edges: edges,
 };
+
 let options = {};
 let network = new vis.Network(container, data, options);
 

@@ -302,7 +302,7 @@ class Service(Job):
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())
 
-    def match_content(self, result: str, match: str) -> bool:
+    def match_content(self, result: Any, match: str) -> bool:
         if getattr(self, "conversion_method"):
             if self.conversion_method == "json":
                 result = load(result)

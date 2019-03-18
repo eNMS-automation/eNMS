@@ -30,7 +30,7 @@ class NetmikoValidationService(Service):
     content_match_textarea = True
     content_match_regex = Column(Boolean)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
-    negative_logic = Column(Boolean)
+    negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS

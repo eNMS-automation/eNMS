@@ -47,14 +47,15 @@
             <h4 class="text-center">Database Helpers</h4>
           </div>
           <form id="database-helpers-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+            {{ database_helpers_form.list_fields() }}
             <div>
               <label>Clear Logs older than:</label>
               <div class="form-group">
-                {{ database_helpers_form.clear_logs_date(class="form-control required") }}
+                {{ database_helpers_form.clear_logs_date(class="form-control") }}
               </div>
               <label>Mass Deletion</label>
               <div class="form-group">
-                {{ database_helpers_form.deletion_types(class="form-control required", size="10") }}
+                {{ database_helpers_form.deletion_types(class="form-control", size="10") }}
               </div>
             </div>
           </form><br>

@@ -32,7 +32,7 @@ function migrationsImport() { // eslint-disable-line no-unused-vars
  * Database Helpers.
  */
 function databaseHelpers() { // eslint-disable-line no-unused-vars
-  fCall('/admin/database_helpers', '#logs-form', function(result) {
+  fCall('/admin/database_helpers', '#database-helpers-form', function(result) {
     alertify.notify('Done.', 'success', 5);
   });
 }

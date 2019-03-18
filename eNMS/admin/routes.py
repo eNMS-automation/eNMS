@@ -184,7 +184,8 @@ def get_cluster_status() -> dict:
 
 @post(bp, "/database_helpers", "Admin")
 def database_helpers() -> bool:
-    delete_all(*request["deletion_types"])
+    print(request.form["deletion_types"])
+    delete_all(*request.form["deletion_types"])
     clear_logs_date = request.form["clear_logs_date"]
     if clear_logs_date:
         clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
@@ -207,7 +208,7 @@ def reset_status() -> bool:
 
 
 @post(bp, "/get_git_content", "Admin")
-def git_action(action: str) -> bool:
+def git_action() -> bool:
     parameters = get_one("Parameters")
     parameters.get_git_content(app)
     return True

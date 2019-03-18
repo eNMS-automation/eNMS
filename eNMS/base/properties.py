@@ -41,6 +41,7 @@ list_properties: List[str] = [
     "permissions",
     "getters",
     "import_export_types",
+    "deletion_types",
 ]
 
 private_properties: List[str] = ["password", "enable_password"]
@@ -589,6 +590,7 @@ property_types: Dict[str, str] = {
     "source": "object",
     "destination": "object",
     "import_export_types": "list",
+    "deletion_types": "list",
     "send_notification": "bool",
     "multiprocessing": "bool",
     "is_active": "bool",

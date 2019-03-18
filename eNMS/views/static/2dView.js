@@ -21,10 +21,6 @@ view: false
 */
 
 let markers;
-// hiddenMarkers contains all markers that were undisplayed because of a
-// pool filter. We keep track of them so that they are not selected by the
-// boxzoomend when they are hidden.
-let hiddenMarkers;
 let selectedObject;
 
 const map = L.map('mapid').setView(
@@ -153,37 +149,9 @@ for (let i = 0; i < links.length; i++) {
   }
 }
 
-/**
- * Unselect all devices.
- */
-function unselectAll() {
-  for (let i = 0; i < markersArray.length; i++) {
-    markersArray[i].setIcon(markersArray[i].icon);
-  }
-  selection = [];
-  $('#devices').val(selection);
-}
-
-map.on('boxzoomend', function(e) {
-  unselectAll();
-  for (let i = 0; i < markersArray.length; i++) {
-    if (e.boxZoomBounds.contains(markersArray[i].getLatLng())
-      && !hiddenMarkers.includes(markersArray[i])) {
-      markersArray[i].setIcon(markersArray[i].redIcon);
-      selection.push(markersArray[i].device_id);
-    }
-  }
-  $('#devices').val(selection);
-});
-
-map.on('click', function(e) {
-  unselectAll();
-});
-
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    hiddenMarkers = [];
     const devicesId = objects.devices.map((n) => n.id);
     const linksId = objects.links.map((l) => l.id);
     for (let i = 0; i < markersArray.length; i++) {
@@ -191,7 +159,6 @@ $('#select-filters').on('change', function() {
         markersArray[i].addTo(map);
       } else {
         markersArray[i].removeFrom(map);
-        hiddenMarkers.push(markersArray[i]);
       }
     }
     for (let i = 0; i < polylinesArray.length; i++) {

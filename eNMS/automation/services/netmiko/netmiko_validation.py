@@ -1,7 +1,5 @@
-from json import load
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
-from xmltodict import parse
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service

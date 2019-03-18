@@ -1,5 +1,6 @@
 from copy import deepcopy
 from datetime import datetime
+from json import load
 from logging import info
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
@@ -15,6 +16,7 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
+from xmltodict import parse
 
 from eNMS.base.associations import (
     job_device_table,
@@ -306,7 +308,7 @@ class Service(Job):
                 result = load(result)
             elif self.conversion_method == "xml":
                 result = parse(result)
-        if getattr(self, validation_method, "text") == "text":
+        if getattr(self, "validation_method", "text") == "text":
             result = str(result)
             if self.delete_spaces_before_matching:
                 match, result = map(self.space_deleter, (match, result))

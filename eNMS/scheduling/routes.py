@@ -1,7 +1,6 @@
 from flask import request
 from re import search, sub
 
-from eNMS.extensions import scheduler
 from eNMS.base.functions import fetch, fetch_all, get, post
 from eNMS.base.properties import task_table_properties
 from eNMS.scheduling import bp

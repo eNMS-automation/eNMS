@@ -11,7 +11,14 @@ from requests.exceptions import ConnectionError
 from typing import Union
 from werkzeug.wrappers import Response
 
-from eNMS.extensions import db, ldap_client, tacacs_client, USE_LDAP, USE_TACACS
+from eNMS.extensions import (
+    db,
+    ldap_client,
+    scheduler,
+    tacacs_client,
+    USE_LDAP,
+    USE_TACACS,
+)
 from eNMS.admin import bp
 from eNMS.admin.forms import (
     AddInstance,
@@ -22,7 +29,16 @@ from eNMS.admin.forms import (
     MigrationsForm,
 )
 from eNMS.admin.functions import migrate_export, migrate_import
-from eNMS.base.functions import fetch_all, get, get_one, post, factory, fetch, serialize
+from eNMS.base.functions import (
+    delete_all,
+    fetch_all,
+    get,
+    get_one,
+    post,
+    factory,
+    fetch,
+    serialize,
+)
 from eNMS.base.properties import instance_table_properties, user_table_properties
 
 

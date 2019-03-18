@@ -197,6 +197,12 @@ def git_action(action: str) -> bool:
     return True
 
 
+@post(bp, "/scheduler/<action>", "Admin")
+def scheduler_action(action: str) -> bool:
+    getattr(scheduler, action)()
+    return True
+
+
 @post(bp, "/migration_<direction>", "Admin")
 def migration(direction: str) -> Union[bool, str]:
     args = (app, request.form)

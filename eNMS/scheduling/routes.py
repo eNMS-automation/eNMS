@@ -37,12 +37,6 @@ def calendar() -> dict:
     return dict(tasks=tasks, scheduling_form=SchedulingForm(request.form))
 
 
-@post(bp, "/scheduler/<action>", "Admin")
-def scheduler_action(action: str) -> bool:
-    getattr(scheduler, action)()
-    return True
-
-
 @post(bp, "/<action>_task/<int:task_id>", "Edit")
 def task_action(action: str, task_id: int) -> bool:
     task = fetch("Task", id=task_id)

@@ -60,7 +60,7 @@ function getGitContent() { // eslint-disable-line no-unused-vars
  * @param {action} action - Pause or resume.
  */
 function scheduler(action) { // eslint-disable-line no-unused-vars
-  call(`/scheduling/scheduler/${action}`, function() {
+  call(`/admin/scheduler/${action}`, function() {
       alertify.notify(`Scheduler ${action}d.`, 'success', 5);
     }
   );

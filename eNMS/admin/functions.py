@@ -36,7 +36,7 @@ def migrate_import(app: Flask, request: dict) -> str:
     status, types = "Import successful.", request["import_export_types"]
     workflows: list = []
     edges: list = []
-    if request.get("empty_database_before_import", False):
+    if request.get("empty_database_before_import"):
         delete_all(*types)
     for cls in types:
         path = app.path / "migrations" / request["name"] / f"{cls}.yaml"

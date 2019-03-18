@@ -301,14 +301,22 @@ class Service(Job):
         return "".join(input.split())
 
     def match_content(self, result: str, match: str) -> bool:
-        if self.delete_spaces_before_matching:
-            match, result = map(self.space_deleter, (match, result))
-        success = (
-            self.content_match_regex
-            and bool(search(match, result))
-            or match in result
-            and not self.content_match_regex
-        )
+        if getattr(self, "conversion_method"):
+            if self.conversion_method == "json":
+                result = load(result)
+            elif self.conversion_method == "xml":
+                result = parse(result)
+        if self.validation_method == "text":
+            if self.delete_spaces_before_matching:
+                match, result = map(self.space_deleter, (match, result))
+            success = (
+                self.content_match_regex
+                and bool(search(match, result))
+                or match in result
+                and not self.content_match_regex
+            )
+        else:
+            success = self.match_dictionnary(result)
         return success if not self.negative_logic else not success
 
     def match_dictionnary(self, result: dict, match: Optional[dict] = None) -> bool:

@@ -64,21 +64,13 @@ class NetmikoPromptsService(Service):
                     result = netmiko_handler.send_command_timing(
                         self.response3, delay_factor=self.delay_factor
                     )
-        if self.conversion_method == "json":
-            result = load(result)
-        elif self.conversion_method == "xml":
-            result = parse(result)
         match = self.sub(self.content_match, locals())
-        if self.validation_method == "text":
-            success = self.match_content(str(result), match)
-        else:
-            success = self.match_dictionnary(result)
         netmiko_handler.disconnect()
         return {
             "expected": match if self.validation_method == "text" else self.dict_match,
             "negative_logic": self.negative_logic,
             "result": result,
-            "success": success,
+            "success": self.match_content(result, match),
         }
 
 

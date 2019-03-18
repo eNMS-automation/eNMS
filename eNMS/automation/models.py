@@ -306,7 +306,8 @@ class Service(Job):
                 result = load(result)
             elif self.conversion_method == "xml":
                 result = parse(result)
-        if self.validation_method == "text":
+        if getattr(self, validation_method, "text") == "text":
+            result = str(result)
             if self.delete_spaces_before_matching:
                 match, result = map(self.space_deleter, (match, result))
             success = (

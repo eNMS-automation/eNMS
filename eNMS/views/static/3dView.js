@@ -3,9 +3,7 @@ global
 alertify: false
 call: false
 layers: false
-links: false
 markersArray: true
-devices: false
 partial: false
 polylinesArray: true
 selection: true
@@ -30,8 +28,11 @@ function switchLayer(layer) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-for (let i = 0; i < devices.length; i++) {
-  const device = devices[i];
+/**
+ * Create a device.
+ * @param {device} device - Device.
+ */
+function createDevice(device) {
   const marker = WE.marker(
   [device.latitude, device.longitude],
   'static/images/3D/default/router.gif',
@@ -39,14 +40,6 @@ for (let i = 0; i < devices.length; i++) {
   ).addTo(map);
   marker.device_id = device.id;
   marker.on('click', function(e) {
-    /*
-      $(e.target.element.children[0]).css(
-      'background-image',
-      'url("static/images/3D/selection/router.gif")'
-      );
-      selection.push(devices[i].id);
-      $('#devices').val(selection);
-    */
     showTypeModal('device', devices[i].id);
   });
   marker.on('mouseover', function(e) {
@@ -59,8 +52,11 @@ for (let i = 0; i < devices.length; i++) {
   markersArray.push(marker);
 }
 
-for (let i = 0; i < links.length; i++) {
-  const link = links[i];
+/**
+ * Create a link.
+ * @param {link} link - Link.
+ */
+function createLink(link) {
   const sourceLatitude = link.source.latitude;
   const sourceLongitude = link.source.longitude;
   const destinationLatitude = link.destination.latitude;
@@ -131,25 +127,6 @@ $('#select-filters').on('change', function() {
     alertify.notify('Filter applied.', 'success', 5);
   });
 });
-
-/**
- * Unselect all devices.
- */
-function unselectAll() {
-  for (let i = 0; i < markersArray.length; i++) {
-    $(markersArray[i].element.children[0]).css(
-      'background-image',
-      'url("static/images/3D/default/router.gif")'
-    );
-  }
-  selection = [];
-  $('#devices').val(selection);
-}
-
-map.on('click', function(e) {
-  unselectAll();
-});
-
 
 const action = {
   'Parameters': partial(showModal, 'filters'),

@@ -38,14 +38,17 @@ function linkToEdge(link) {
   };
 }
 
-let nodes;
-let edges;
 let container = document.getElementById('logical_view');
 
-function displayWorkflow(nodes, edges) {
+/**
+ * Display a pool.
+ * @param {nodes} nodes - Array of nodes to display.
+  * @param {edges} edges - Array of edges to display.
+ */
+function displayNetwork(nodes, edges) {
   nodes = new vis.DataSet(nodes.map(deviceToNode));
   edges = new vis.DataSet(edges.map(linkToEdge));
-  network = new vis.Network(container, {nodes: nodes, edges: edges}, {});
+  const network = new vis.Network(container, {nodes: nodes, edges: edges}, {});
   network.on('oncontext', function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
@@ -83,7 +86,7 @@ $('#logical_view').contextMenu({
 
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    displayWorkflow(objects.devices, objects.links);
+    displayNetwork(objects.devices, objects.links);
   });
 });
 

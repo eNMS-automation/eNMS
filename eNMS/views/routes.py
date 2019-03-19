@@ -16,7 +16,7 @@ from eNMS.views.forms import GoogleEarthForm
 
 @get(bp, "/<view_type>_view", "View", ["GET", "POST"])
 def view(view_type: str) -> dict:
-    devices, parameters = fetch_all("Device"), get_one("Parameters").serialized
+    parameters = get_one("Parameters").serialized
     return dict(
         template=f"{view_type}_view.html",
         pools=fetch_all("Pool"),
@@ -29,7 +29,6 @@ def view(view_type: str) -> dict:
         device_subtypes=device_subtypes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
-        name_to_id={d.name: id for id, d in enumerate(devices)},
     )
 
 

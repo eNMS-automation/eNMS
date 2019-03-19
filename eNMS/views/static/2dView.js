@@ -1,15 +1,12 @@
 /*
 global
-alertify: false
 call: false
 connectionParametersModal: false
 deviceAutomationModal: false
 L: false
 layers: false
-links: false
 link_colors: false
 markersArray: true
-devices: false
 parameters: false
 partial: false
 polylinesArray: true
@@ -75,6 +72,10 @@ L.PolylineClusterable = L.Polyline.extend({
 
 const routerIcon = window['icon_router'];
 
+/**
+ * Create a device.
+ * @param {device} device - Device.
+ */
 function createDevice(device) {
   const marker = L.marker([
     device.latitude,
@@ -102,6 +103,10 @@ function createDevice(device) {
   }
 }
 
+/**
+ * Create a link.
+ * @param {link} link - Link.
+ */
 function createLink(link) {
   let pointA = new L.LatLng(
     link.source.latitude,
@@ -114,7 +119,7 @@ function createLink(link) {
 
   const pointList = [pointA, pointB];
   const polyline = new L.PolylineClusterable(pointList, {
-    color: link_colors[links[i].subtype],
+    color: link_colors[link.subtype],
     weight: 3,
     opacity: 1,
     smoothFactor: 1,
@@ -139,6 +144,9 @@ function createLink(link) {
   }
 }
 
+/**
+ * Delete all devices and links on the map.
+ */
 function deleteAll() {
   for (let i = 0; i < markersArray.length; i++) {
     markersArray[i].removeFrom(map);
@@ -157,7 +165,7 @@ map.on('click', function(e) {
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    deleteAll()
+    deleteAll();
     objects.devices.map(createDevice);
     objects.links.map(createLink);
   });
@@ -189,3 +197,7 @@ map.on('contextmenu', function() {
     $('.global-menu').show();
   }
 });
+
+(function() {
+  $('#select-filters').change();
+})();

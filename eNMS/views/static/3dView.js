@@ -80,51 +80,26 @@ function createLink(link) {
   polylinesArray.push(polygonSD, polygonDS);
 }
 
+function deleteAll() {
+  for (let i = 0; i < markersArray.length; i++) {
+    markersArray[i].removeFrom(map);
+  }
+  for (let i = 0; i < polylinesArray.length; i++) {
+    try {
+      polylinesArray[i].destroy();
+    } catch (err) {
+    }
+  }
+  markersArray = [];
+  polylinesArray = [];
+}
+
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    const devicesId = objects.devices.map((n) => n.id);
-    for (let i = 0; i < markersArray.length; i++) {
-      if (devicesId.includes(markersArray[i].device_id)) {
-        markersArray[i].addTo(map);
-      } else {
-        markersArray[i].removeFrom(map);
-      }
-    }
-    for (let i = 0; i < polylinesArray.length; i++) {
-      try {
-        polylinesArray[i].destroy();
-      } catch (err) {
-        // ignore
-      }
-    }
-    polylinesArray = [];
-    for (let i = 0; i < objects.links.length; i++) {
-      const link = objects.links[i];
-      const sourceLatitude = link.source.latitude;
-      const sourceLongitude = link.source.longitude;
-      const destinationLatitude = link.destination.latitude;
-      const destinationLongitude = link.destination.longitude;
-      const color = link.color;
-      const objId = link.id;
-      const polygonSD = WE.polygon(
-      [
-        [sourceLatitude, sourceLongitude],
-        [destinationLatitude, destinationLongitude],
-        [sourceLatitude, sourceLongitude],
-      ], {color: color, opacity: 20}
-      ).addTo(map);
-      const polygonDS = WE.polygon(
-      [
-        [destinationLatitude, destinationLongitude],
-        [sourceLatitude, sourceLongitude],
-        [destinationLatitude, destinationLongitude],
-      ], {color: color, opacity: 20}
-      ).addTo(map);
-      polygonSD.link_id = polygonDS.link_id = objId;
-      polylinesArray.push(polygonSD, polygonDS);
-    }
-    alertify.notify('Filter applied.', 'success', 5);
+    deleteAll();
+    objects.devices.map(createDevice);
+    objects.links.map(createLink);
   });
 });
 
@@ -144,3 +119,7 @@ $('body').contextMenu({
     action[row]();
   },
 });
+
+(function() {
+  $('#select-filters').change();
+})();

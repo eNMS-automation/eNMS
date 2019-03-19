@@ -79,7 +79,6 @@ class Config(object):
     DEFAULT_LONGITUDE = float(environ.get("DEFAULT_LONGITUDE", -96.0))
     DEFAULT_LATITUDE = float(environ.get("DEFAULT_LATITUDE", 33.0))
     DEFAULT_ZOOM_LEVEL = int(environ.get("DEFAULT_ZOOM_LEVEL", 5))
-    DEFAULT_VIEW = environ.get("DEFAULT_VIEW", "2D")
 
     # Git Parameters
     GIT_AUTOMATION = environ.get("GIT_AUTOMATION", "")

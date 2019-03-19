@@ -39,9 +39,6 @@ class AdministrationForm(FlaskForm):
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
-    default_view = SelectField(
-        choices=(("2D", "2D View"), ("2DC", "2D Clusterized View"), ("3D", "3D View"))
-    )
     git_configurations = StringField()
     git_automation = StringField()
     gotty_start_port = FloatField("Start port")
@@ -58,7 +55,6 @@ class AdministrationForm(FlaskForm):
             "default_longitude",
             "default_latitude",
             "default_zoom_level",
-            "default_view",
         ),
         "SSH Terminal Parameters": ("gotty_start_port", "gotty_end_port"),
         "Notification Parameters": (

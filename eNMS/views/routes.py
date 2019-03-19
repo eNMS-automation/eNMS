@@ -14,14 +14,14 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
 
-@get(bp, "/<view_type>_view", "View", ["GET", "POST"])
+@get(bp, "/<view_type>/<view>", "View", ["GET", "POST"])
 def view(view_type: str) -> dict:
     parameters = get_one("Parameters").serialized
     return dict(
         template=f"{view_type}_view.html",
         pools=fetch_all("Pool"),
         parameters=parameters,
-        view=request.form.get("view", parameters["default_view"]),
+        view=view,
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),

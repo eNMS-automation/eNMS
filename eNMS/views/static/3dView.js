@@ -40,10 +40,10 @@ function createDevice(device) {
   ).addTo(map);
   marker.device_id = device.id;
   marker.on('click', function(e) {
-    showTypeModal('device', devices[i].id);
+    showTypeModal('device', device.id);
   });
   marker.on('mouseover', function(e) {
-    $('#name-box').text(devices[i].name);
+    $('#name-box').text(device.name);
     $('#name-box').show();
   });
   marker.on('mouseout', function(e) {

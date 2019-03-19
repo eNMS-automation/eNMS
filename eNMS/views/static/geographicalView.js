@@ -33,4 +33,5 @@ $('.dropdown-submenu a.menu-submenu').on('click', function(e) {
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
+  $('#select-filters').change();
 })();

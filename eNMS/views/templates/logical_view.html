@@ -74,11 +74,6 @@
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <!-- Vis JS -->
   <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
-  <script>
-    const propertyTypes = {{ property_types|tojson|safe }};
-    let devices = {{ devices|tojson|safe }};
-    let links = {{ links|tojson|safe }};
-  </script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

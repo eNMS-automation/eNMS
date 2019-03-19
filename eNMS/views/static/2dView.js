@@ -15,7 +15,6 @@ partial: false
 polylinesArray: true
 showModal: false
 showTypeModal: false
-selection: true
 device_subtypes: false
 view: false
 */
@@ -96,11 +95,7 @@ for (let i = 0; i < devices.length; i++) {
     $('.device-menu').show();
     selectedObject = this.device_id;
   });
-
-  marker.bindTooltip(device['name'], {
-    permanent: false,
-  });
-
+  marker.bindTooltip(device['name'], {permanent: false});
   if (view == '2D') {
     marker.addTo(map);
   } else {

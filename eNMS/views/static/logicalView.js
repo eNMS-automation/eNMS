@@ -4,9 +4,7 @@ alertify: false
 call: false
 connectionParametersModal: false
 deviceAutomationModal: false
-devices: false
 doc: false
-links: false
 showTypeModal: false
 vis: false
 */
@@ -86,10 +84,10 @@ $('#logical_view').contextMenu({
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     displayWorkflow(objects.devices, objects.links);
-    alertify.notify(`Filter applied.`, 'success', 5);
   });
 });
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/logical_view.html');
+  $('#select-filters').change();
 })();

@@ -13,7 +13,6 @@ const layers = { // eslint-disable-line no-unused-vars
 
 let markersArray = []; // eslint-disable-line no-unused-vars
 let polylinesArray = []; // eslint-disable-line no-unused-vars
-let selection = []; // eslint-disable-line no-unused-vars
 
 /**
  * Export project to Google Earth (creation of a .kmz file).

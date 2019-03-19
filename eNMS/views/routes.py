@@ -30,8 +30,6 @@ def view(view_type: str) -> dict:
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
         name_to_id={d.name: id for id, d in enumerate(devices)},
-        devices=serialize("Device"),
-        links=serialize("Link"),
     )
 
 

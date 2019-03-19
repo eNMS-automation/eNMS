@@ -70,14 +70,12 @@ L.PolylineClusterable = L.Polyline.extend({
     return this._latlng;
   },
   setLatLng: function() {
-    // setter
   },
 });
 
 const routerIcon = window['icon_router'];
 
-for (let i = 0; i < devices.length; i++) {
-  const device = devices[i];
+function createDevice(device) {
   const marker = L.marker([
     device.latitude,
     device.longitude,
@@ -104,8 +102,7 @@ for (let i = 0; i < devices.length; i++) {
   }
 }
 
-for (let i = 0; i < links.length; i++) {
-  const link = links[i];
+function createLink(link) {
   let pointA = new L.LatLng(
     link.source.latitude,
     link.source.longitude
@@ -142,6 +139,17 @@ for (let i = 0; i < links.length; i++) {
   }
 }
 
+function deleteAll() {
+  for (let i = 0; i < markersArray.length; i++) {
+    markersArray[i].removeFrom(map);
+  }
+  for (let i = 0; i < polylinesArray.length; i++) {
+    polylinesArray[i].removeFrom(map);
+  }
+  markersArray = [];
+  polylinesArray = [];
+}
+
 map.on('click', function(e) {
   selectedObject = null;
 });
@@ -149,23 +157,9 @@ map.on('click', function(e) {
 // when a filter is selected, apply it
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    const devicesId = objects.devices.map((n) => n.id);
-    const linksId = objects.links.map((l) => l.id);
-    for (let i = 0; i < markersArray.length; i++) {
-      if (devicesId.includes(markersArray[i].device_id)) {
-        markersArray[i].addTo(map);
-      } else {
-        markersArray[i].removeFrom(map);
-      }
-    }
-    for (let i = 0; i < polylinesArray.length; i++) {
-      if (linksId.includes(polylinesArray[i].link_id)) {
-        polylinesArray[i].addTo(map);
-      } else {
-        polylinesArray[i].removeFrom(map);
-      }
-    }
-    alertify.notify('Filter applied.', 'success', 5);
+    deleteAll()
+    objects.devices.map(createDevice);
+    objects.links.map(createLink);
   });
 });
 

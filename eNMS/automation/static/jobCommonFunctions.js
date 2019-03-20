@@ -110,6 +110,7 @@ $('#display').on('change', function() {
     $('#logs').text(
       JSON.stringify(log, null, 2).replace(/(?:\\[rnt])+/g, '\n')
     );
+    $('#compare_with').val($('#display').val());
   });
 });
 

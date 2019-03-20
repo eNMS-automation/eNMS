@@ -40,6 +40,12 @@ function createDevice(device) {
   marker.on('click', function(e) {
     showTypeModal('device', device.id);
   });
+  marker.on('contextmenu', function(e) {
+    $('.global-menu,.link-menu').hide();
+    $('.device-menu').show();
+    console.log(this);
+    selectedObject = device.id;
+  });
   marker.on('mouseover', function(e) {
     $('#name-box').text(device.name);
     $('#name-box').show();
@@ -106,19 +112,22 @@ $('#select-filters').on('change', function() {
 });
 
 const action = {
-  'Parameters': partial(showModal, 'filters'),
   'Export to Google Earth': partial(showModal, 'google-earth'),
-  'Add new task': partial(showModal, 'scheduling'),
   'Open Street Map': partial(switchLayer, 'osm'),
   'Google Maps': partial(switchLayer, 'gm'),
   'NASA': partial(switchLayer, 'nasa'),
+  'Device properties': (d) => showTypeModal('device', d),
+  'Link properties': (l) => showTypeModal('link', l),
+  'Connect': connectionParametersModal,
+  'Automation': deviceAutomationModal,
 };
 
 $('body').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
-    action[row]();
+    action[row](selectedObject);
+    selectedObject = null;
   },
 });
 

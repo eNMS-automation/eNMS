@@ -26,14 +26,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -43,7 +45,8 @@ Configuration parameters for creating this service instance:
       - ``enable_mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block
       - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-      - ``global_delay_factor`` Netmiko multiplier used for internal delays (defaults to 1). Increase this for devices that have trouble buffering and responding quickly.
+      - ``delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``global_delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -68,14 +71,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -90,7 +95,8 @@ Configuration parameters for creating this service instance:
       - ``source_file`` Source absolute path and filename of the file to send
       - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-      - ``global_delay_factor`` Netmiko multiplier used for internal delays (defaults to 1). Increase this for devices that have trouble buffering and responding quickly.
+      - ``delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``global_delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
 
 Netmiko Validation Service
 --------------------------
@@ -115,27 +121,90 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
-      - ``command`` CLI command to send to the device
+      - ``Command`` CLI command to send to the device
       - ``content_match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
       - ``content_match_regex`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-      - ``negative_logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-      - ``delete_spaces_before_matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+      - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
+      - ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
+      - ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
+      - ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
+      - ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
+      - ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
+      - ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+      - ``Driver`` Which Netmiko driver to use when connecting to the device
       - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-      - ``driver`` Which Netmiko driver to use when connecting to the device
-      - ``fast_cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-      - ``timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-      - ``global_delay_factor`` Netmiko multiplier used for internal delays (defaults to 1). Increase this for devices that have trouble buffering and responding quickly.
+      - ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
+      - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
+      - ``delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
+
+Netmiko Prompts Service
+-----------------------
+
+Similar to Netmiko Validation Service, but expects up to 3 interactive prompts for your remote command, such as 'Are you sure? Y/N'.
+This service allows the user to specify the expected prompt and response to send for it.
+
+.. image:: /_static/services/default_services/netmiko_prompts.png
+   :alt: Netmiko Prompts service
+   :align: center
+
+Configuration parameters for creating this service instance:
+  - ``General``
+      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+      - ``Description`` Freeform description of what the service instance does
+      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  - ``Advanced``
+      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+      - ``Send Notification`` Enable sending results notification checkbox
+      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
+      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
+  - ``Targets``
+      - ``Devices`` Multi-selection list of devices from the inventory
+      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  - ``Specific``
+      - ``Command`` CLI command to send to the device
+      - ``confirmation1`` first expected confirmation question prompted by the device
+      - ``response1`` response to first confirmation question prompted by the device
+      - ``confirmation2`` second expected confirmation question prompted by the device
+      - ``response2`` response to second confirmation question prompted by the device
+      - ``confirmation3`` third expected confirmation question prompted by the device
+      - ``response3`` response to third confirmation question prompted by the device
+      - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
+      - ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
+      - ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
+      - ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
+      - ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
+      - ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
+      - ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+      - ``Driver`` Which Netmiko driver to use when connecting to the device
+      - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+      - ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
+      - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
+      - ``delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
@@ -160,14 +229,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device
   - ``Specific``
@@ -202,14 +273,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device
   - ``Specific``
@@ -238,14 +311,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -284,14 +359,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -327,14 +404,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -368,14 +447,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -412,14 +493,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send_Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -461,14 +544,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -492,14 +577,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -533,14 +620,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``
@@ -569,14 +658,16 @@ Configuration parameters for creating this service instance:
   - ``Advanced``
       - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
       - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``send_notification`` Enable sending results notification checkbox
+      - ``Send Notification`` Enable sending results notification checkbox
       - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
       - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
       - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
   - ``Targets``
       - ``Devices`` Multi-selection list of devices from the inventory
       - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
       - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
       - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
   - ``Specific``

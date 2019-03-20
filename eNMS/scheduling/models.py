@@ -44,6 +44,32 @@ class Task(Base):
         if self.is_active:
             self.schedule()
 
+    @hybrid_property
+    def status(self) -> str:
+        return "Active" if self.is_active else "Inactive"
+
+    @status.expression
+    def status(cls) -> str:
+        return case([(cls.is_active, "Active")], else_="Inactive")
+
+    @property
+    def next_run_time(self) -> Optional[str]:
+        job = scheduler.get_job(self.aps_job_id)
+        if job and job.next_run_time:
+            return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
+        return None
+
+    @property
+    def time_before_next_run(self) -> Optional[str]:
+        job = scheduler.get_job(self.aps_job_id)
+        if job and job.next_run_time:
+            delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
+            hours, remainder = divmod(delta.seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            days = f"{delta.days} days, " if delta.days else ""
+            return f"{days}{hours}h:{minutes}m:{seconds}s"
+        return None
+
     def aps_conversion(self, date: str) -> str:
         dt: datetime = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
         return datetime.strftime(dt, "%Y-%m-%d %H:%M:%S")
@@ -103,29 +129,3 @@ class Task(Base):
             scheduler.add_job(**{**default, **trigger})
         else:
             scheduler.reschedule_job(default.pop("id"), **trigger)
-
-    @hybrid_property
-    def status(self) -> str:
-        return "Active" if self.is_active else "Inactive"
-
-    @status.expression
-    def status(cls) -> str:
-        return case([(cls.is_active, "Active")], else_="Inactive")
-
-    @property
-    def next_run_time(self) -> Optional[str]:
-        job = scheduler.get_job(self.aps_job_id)
-        if job and job.next_run_time:
-            return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
-        return None
-
-    @property
-    def time_before_next_run(self) -> Optional[str]:
-        job = scheduler.get_job(self.aps_job_id)
-        if job and job.next_run_time:
-            delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
-            hours, remainder = divmod(delta.seconds, 3600)
-            minutes, seconds = divmod(remainder, 60)
-            days = f"{delta.days} days, " if delta.days else ""
-            return f"{days}{hours}h:{minutes}m:{seconds}s"
-        return None

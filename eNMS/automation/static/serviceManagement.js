@@ -5,7 +5,7 @@ initTable: false
 refreshTable: false
 */
 
-const toExclude = ['Logs', 'Run', 'Edit', 'Duplicate', 'Delete'];
+const toExclude = ['Progress', 'Logs', 'Run', 'Edit', 'Duplicate', 'Delete'];
 let table = initTable( // eslint-disable-line no-unused-vars
   'service', 'service', toExclude
 );

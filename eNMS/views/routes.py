@@ -14,9 +14,13 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
 
-@get(bp, "/<view_type>/<view>", "View")
+@get(bp, "/<view_type>", "View")
 def view(view_type: str, view: str = None) -> dict:
     parameters = get_one("Parameters").serialized
+    if view_type == "logical":
+        view = None
+    else:
+        view_type, view = view_type.split("_")
     return dict(
         template=f"{view_type}_view.html",
         pools=fetch_all("Pool"),

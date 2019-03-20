@@ -14,8 +14,8 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm
 
 
-@get(bp, "/<view_type>/<view>", "View", ["GET", "POST"])
-def view(view_type: str) -> dict:
+@get(bp, "/<view_type>/<view>", "View")
+def view(view_type: str, view: str = None) -> dict:
     parameters = get_one("Parameters").serialized
     return dict(
         template=f"{view_type}_view.html",

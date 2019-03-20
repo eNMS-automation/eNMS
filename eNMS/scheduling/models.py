@@ -1,6 +1,6 @@
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
@@ -108,14 +108,18 @@ class Task(Base):
     def status(self) -> str:
         return "Active" if self.is_active else "Inactive"
 
-    @hybrid_property
+    @status.expression
+    def status(cls) -> str:
+        return case([(cls.is_active, "Active")], else_="Inactive")
+
+    @property
     def next_run_time(self) -> Optional[str]:
         job = scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
         return None
 
-    @hybrid_property
+    @property
     def time_before_next_run(self) -> Optional[str]:
         job = scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:

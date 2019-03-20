@@ -5,6 +5,7 @@ from flask import jsonify, redirect, request, url_for
 from flask_login import current_user
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.attributes import InstrumentedAttribute
 from werkzeug.wrappers import Response
 
 from eNMS import db
@@ -47,6 +48,8 @@ def server_side_processing(cls: str, table: str) -> Response:
             and_(
                 *[
                     getattr(model, property).contains(value)
+                    if isinstance(getattr(model, property), InstrumentedAttribute)
+                    else getattr(model, property) == value
                     for property, value in {
                         property: request.args[f"columns[{i}][search][value]"]
                         for i, property in enumerate(properties)

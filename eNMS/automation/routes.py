@@ -160,7 +160,7 @@ def get_service(id_or_cls: str) -> dict:
 
     form, list_properties, boolean_properties = "", [], []
     for property in cls_to_properties[cls.__tablename__]:
-        name = pretty_names.get(property, property)
+        name = getattr(cls, f"{property}_name", pretty_names.get(property, property))
         if property in cls_to_properties["Service"]:
             continue
         if property_types.get(property, None) == "bool":

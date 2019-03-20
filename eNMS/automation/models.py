@@ -89,7 +89,9 @@ class Job(Base):
             if self.multiprocessing:
                 return "Unknown"
             else:
-                return f"{self.completed}/{len(self.number_of_targets)} ({self.failed} failed)"
+                return (
+                    f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"
+                )
         else:
             return f"0/{len(self.devices)}"
 

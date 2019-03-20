@@ -317,7 +317,7 @@ class Service(Job):
         return "".join(input.split())
 
     def match_content(self, result: Any, match: str) -> bool:
-        if getattr(self, "conversion_method"):
+        if getattr(self, "conversion_method", False):
             if self.conversion_method == "json":
                 result = load(result)
             elif self.conversion_method == "xml":

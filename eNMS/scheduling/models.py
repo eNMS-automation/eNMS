@@ -48,7 +48,7 @@ class Task(Base):
     def status(self) -> str:
         return "Active" if self.is_active else "Inactive"
 
-    @status.expression
+    @status.expression  # type: ignore
     def status(cls) -> str:  # noqa: N805
         return case([(cls.is_active, "Active")], else_="Inactive")
 

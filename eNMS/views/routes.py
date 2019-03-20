@@ -15,7 +15,7 @@ from eNMS.views.forms import GoogleEarthForm
 
 
 @get(bp, "/<view_type>", "View")
-def view(view_type: str, view: str = None) -> dict:
+def view(view_type: str) -> dict:
     parameters = get_one("Parameters").serialized
     if view_type == "logical":
         view = None

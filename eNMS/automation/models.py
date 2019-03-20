@@ -77,7 +77,7 @@ class Job(Base):
     def status(self) -> str:
         return "Running" if self.is_running else "Idle"
 
-    @status.expression
+    @status.expression  # type: ignore
     def status(cls) -> str:  # noqa: N805
         return case([(cls.is_running, "Running")], else_="Idle")
 

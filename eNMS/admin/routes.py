@@ -184,7 +184,6 @@ def get_cluster_status() -> dict:
 
 @post(bp, "/database_helpers", "Admin")
 def database_helpers() -> bool:
-    print(request.form["deletion_types"])
     delete_all(*request.form["deletion_types"])
     clear_logs_date = request.form["clear_logs_date"]
     if clear_logs_date:

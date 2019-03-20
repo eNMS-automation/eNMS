@@ -1,12 +1,10 @@
 /*
 global
-alertify: false
 call: false
 layers: false
 markersArray: true
 partial: false
 polylinesArray: true
-selection: true
 showModal: false
 showTypeModal: false
 WE: false
@@ -80,6 +78,9 @@ function createLink(link) {
   polylinesArray.push(polygonSD, polygonDS);
 }
 
+/**
+ * Delete all objects.
+ */
 function deleteAll() {
   for (let i = 0; i < markersArray.length; i++) {
     markersArray[i].removeFrom(map);
@@ -88,6 +89,7 @@ function deleteAll() {
     try {
       polylinesArray[i].destroy();
     } catch (err) {
+      // catch
     }
   }
   markersArray = [];

@@ -49,7 +49,7 @@ class Task(Base):
         return "Active" if self.is_active else "Inactive"
 
     @status.expression
-    def status(cls) -> str:
+    def status(cls) -> str:  # noqa: N805
         return case([(cls.is_active, "Active")], else_="Inactive")
 
     @property

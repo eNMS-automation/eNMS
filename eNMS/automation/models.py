@@ -78,7 +78,7 @@ class Job(Base):
         return "Running" if self.is_running else "Idle"
 
     @status.expression
-    def status(cls) -> str:
+    def status(cls) -> str:  # noqa: N805
         return case([(cls.is_running, "Running")], else_="Idle")
 
     @property

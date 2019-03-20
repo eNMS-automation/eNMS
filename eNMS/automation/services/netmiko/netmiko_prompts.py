@@ -34,8 +34,7 @@ class NetmikoPromptsService(Service):
     content_match = Column(String)
     content_match_textarea = True
     content_match_regex = Column(Boolean)
-    delay_factor = Column(Float, default=1.0)
-    global_delay_factor = Column(Float, default=1.0)
+    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String)
@@ -43,6 +42,8 @@ class NetmikoPromptsService(Service):
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
+    delay_factor = Column(Float, default=1.0)
+    global_delay_factor = Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoPromptsService"}
 

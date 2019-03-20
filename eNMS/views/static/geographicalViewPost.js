@@ -1,3 +1,12 @@
+// when a filter is selected, apply it
+$('#select-filters').on('change', function() {
+  call(`/inventory/pool_objects/${this.value}`, function(objects) {
+    deleteAll();
+    objects.devices.map(createDevice);
+    objects.links.map(createLink);
+  });
+});
+
 const action = {
   'Export to Google Earth': partial(showModal, 'google-earth'),
   'Open Street Map': partial(switchLayer, 'osm'),
@@ -9,15 +18,6 @@ const action = {
   'Automation': deviceAutomationModal,
 };
 
-$('body').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selectedObject);
-    selectedObject = null;
-  },
-});
-
 map.on('click', function(e) {
   selectedObject = null;
 });
@@ -28,3 +28,8 @@ map.on('contextmenu', function() {
     $('.global-menu').show();
   }
 });
+
+(function() {
+  console.log('test');
+  $('#select-filters').change();
+})();

@@ -101,12 +101,6 @@ function deleteAll() {
   polylinesArray = [];
 }
 
-// when a filter is selected, apply it
-$('#select-filters').on('change', function() {
-  call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    deleteAll();
-    objects.devices.map(createDevice);
-    objects.links.map(createLink);
-  });
-});
-
+(function() {
+  $('#select-filters').change();
+})();

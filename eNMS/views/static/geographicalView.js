@@ -32,7 +32,11 @@ $('.dropdown-submenu a.menu-submenu').on('click', function(e) {
   e.preventDefault();
 });
 
-(function() {
-  doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  $('#select-filters').change();
-})();
+$('body').contextMenu({
+  menuSelector: '#contextMenu',
+  menuSelected: function(invokedOn, selectedMenu) {
+    const row = selectedMenu.text();
+    action[row](selectedObject);
+    selectedObject = null;
+  },
+});

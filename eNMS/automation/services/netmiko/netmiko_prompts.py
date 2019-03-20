@@ -1,4 +1,5 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
+from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service

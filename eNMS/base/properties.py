@@ -495,6 +495,7 @@ pretty_names: Dict[str, str] = {
     "crontab_expression": "Crontab expression",
     "cpu_load": "CPU load",
     "creator": "Creator",
+    "delay_factor": "Delay factor",
     "delete_archive": "Delete archive",
     "delete_folder": "Delete folder",
     "delete_spaces_before_matching": "Delete spaces before matching",

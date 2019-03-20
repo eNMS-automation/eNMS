@@ -10,7 +10,9 @@ from os import environ
 from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
@@ -55,6 +57,7 @@ class Job(Base):
     waiting_time = Column(Integer, default=0)
     creator_id = Column(Integer, ForeignKey("User.id"))
     creator = relationship("User", back_populates="jobs")
+    creator_name = association_proxy("creator", "name")
     push_to_git = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
@@ -69,19 +72,23 @@ class Job(Base):
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String, default="")
 
-    @property
-    def creator_name(self) -> str:
-        return self.creator.name if self.creator else "None"
+    @hybrid_property
+    def status(self) -> str:
+        return "Running" if self.is_running else "Idle"
+
+    @status.expression
+    def status(cls) -> str:
+        return case([(cls.is_running, "Running")], else_="Idle")
 
     @property
-    def status(self) -> str:
+    def progress(self) -> str:
         if self.is_running:
             if self.multiprocessing:
-                return "Running (in parallel)"
+                return "Unknown"
             else:
                 return f"{self.completed}/{len(self.devices)} ({self.failed} failed)"
         else:
-            return "Idle"
+            return "0/{len(self.devices)}"
 
     def compute_targets(self) -> Set[Device]:
         targets = set(self.devices)

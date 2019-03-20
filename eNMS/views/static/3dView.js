@@ -10,6 +10,7 @@ showTypeModal: false
 WE: false
 */
 
+let selectedObject;
 const options = {sky: true, atmosphere: true};
 const map = WE.map('earth_div', options);
 let currentLayer = WE.tileLayer(layers['gm']);
@@ -129,6 +130,17 @@ $('body').contextMenu({
     action[row](selectedObject);
     selectedObject = null;
   },
+});
+
+map.on('click', function(e) {
+  selectedObject = null;
+});
+
+map.on('contextmenu', function() {
+  if (!selectedObject) {
+    $('.device-menu,.link-menu').hide();
+    $('.global-menu').show();
+  }
 });
 
 (function() {

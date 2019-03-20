@@ -165,7 +165,3 @@ $('#select-filters').on('change', function() {
     objects.links.map(createLink);
   });
 });
-
-(function() {
-  $('#select-filters').change();
-})();

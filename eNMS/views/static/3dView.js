@@ -10,7 +10,6 @@ showTypeModal: false
 WE: false
 */
 
-let selectedObject;
 const options = {sky: true, atmosphere: true};
 const map = WE.map('earth_div', options);
 let currentLayer = WE.tileLayer(layers['gm']);
@@ -44,7 +43,6 @@ function createDevice(device) {
   marker.on('contextmenu', function(e) {
     $('.global-menu,.link-menu').hide();
     $('.device-menu').show();
-    console.log(this);
     selectedObject = device.id;
   });
   marker.on('mouseover', function(e) {
@@ -112,6 +110,3 @@ $('#select-filters').on('change', function() {
   });
 });
 
-(function() {
-  $('#select-filters').change();
-})();

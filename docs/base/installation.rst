@@ -217,9 +217,11 @@ The following environment variables (with example values) control how eNMS integ
   The base distinguished name (DN) subtree that is used when searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF) syntax for the entries.
     export LDAP_BASEDN=DC=domain,DC=ad,DC=company,DC=com
   The string to match against 'memberOf' attributes of the matched user to determine if the user is granted Admin Privileges inside eNMS.
-    export LDAP_ADMIN_GROUP=company.AdminUsers
+    export LDAP_ADMIN_GROUP=company.AdminUsers[,group2,group3]
 
 .. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in eNMS user account creation with minimum privileges. An admin user can afterwards alter that user's privileges from :guilabel:`Admin/User Management`
+.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage. In the event that jobs are already scheduled with User Credentials, these might fail if the credentials are not updated in eNMS.
+
 
 GIT Integration
 ***************
@@ -251,9 +253,12 @@ And to instruct SSH to use the new key when connecting with the GIT server, crea
     IdentityFile ~/.ssh/id_rsa.git
     IdentitiesOnly yes
 
-Additionally, the URL of the GIT server needs to be populated:
-  - from the Admin Panel of the UI to store the results of services and workflows in git.
-  - from the Configuration Management page to store device configurations in git.
+Additionally, the URLs of each of the GIT server repositories needs to be populated in the Administration Panel of the UI:
+  - for the Automation repository to be able tp store the results of services and workflows in git.
+  - for the Configurations repository to be able to store device configurations in git.
+
+.. note:: When setting up new groups/projects in GitLab, know that the Master branch by default is protected, and unfortunately in the current version of GitLab, it will not show you that it is protected until a file is added to the repository first. A trick is to press the 'Add README' convenience button in the GitLab UI; this will add a file. Then go to repository, protected branches, and set access rights for Masters and Developers and click 'Unprotect'.
+
 
 Default Examples
 ----------------

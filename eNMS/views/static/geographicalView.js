@@ -11,6 +11,7 @@ const layers = { // eslint-disable-line no-unused-vars
   'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg',
 };
 
+let selectedObject;
 let markersArray = []; // eslint-disable-line no-unused-vars
 let polylinesArray = []; // eslint-disable-line no-unused-vars
 

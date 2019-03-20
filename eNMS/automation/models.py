@@ -47,6 +47,7 @@ class Job(Base):
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableDict.as_mutable(PickleType), default={})
     is_running = Column(Boolean, default=False)
+    number_of_targets = Column(Integer, default=0)
     completed = Column(Integer, default=0)
     failed = Column(Integer, default=0)
     state = Column(MutableDict.as_mutable(PickleType), default={})
@@ -88,7 +89,7 @@ class Job(Base):
             if self.multiprocessing:
                 return "Unknown"
             else:
-                return f"{self.completed}/{len(self.devices)} ({self.failed} failed)"
+                return f"{self.completed}/{len(self.number_of_targets)} ({self.failed} failed)"
         else:
             return f"0/{len(self.devices)}"
 
@@ -96,6 +97,8 @@ class Job(Base):
         targets = set(self.devices)
         for pool in self.pools:
             targets |= set(pool.devices)
+        self.number_of_targets = len(targets)
+        try_commit()
         return targets
 
     def job_sources(self, workflow: "Workflow", subtype: str = "all") -> List["Job"]:

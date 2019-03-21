@@ -16,14 +16,6 @@ showTypeModal: false
 switchLayer: false
 */
 
-$('#select-filters').on('change', function() {
-  call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    deleteAll();
-    objects.devices.map((d) => createNode(d, nodeType='device'));
-    objects.links.map(createLink);
-  });
-});
-
 /**
  * Display pools.
  */
@@ -36,6 +28,16 @@ function displayPools() { // eslint-disable-line no-unused-vars
   });
   alertify.notify('Switch to Pool View');
 }
+
+$('#select-filters').on('change', function() {
+  call(`/inventory/pool_objects/${this.value}`, function(objects) {
+    deleteAll();
+    objects.devices.map((d) => createNode(d, nodeType='device'));
+    objects.links.map(createLink);
+  });
+});
+
+
 
 const action = {
   'Export to Google Earth': partial(showModal, 'google-earth'),
@@ -55,7 +57,7 @@ map.on('click', function(e) {
 
 map.on('contextmenu', function() {
   if (!selectedObject) {
-    $('.device-menu,.link-menu').hide();
+    $('.menu').hide();
     $('.global-menu').show();
   }
 });

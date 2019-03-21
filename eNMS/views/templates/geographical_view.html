@@ -21,6 +21,7 @@
   {% include 'confirm_deletion_modal.html' %}
   {% include 'device_automation_modal.html' %}
   {% include 'device_modal.html' %}
+  {% include 'pool_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
   <div id="google-earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -60,8 +61,8 @@
   <form id="view-form" method="post">
     <input id="view-type" name="view" type="hidden">
     <ul id="contextMenu" class="dropdown-menu" role="menu">
-      <li class="global-menu"><a tabindex="-1" href="#">Export to Google Earth</a></li>
-      <li class="dropdown-submenu global-menu">
+      <li class="menu global-menu"><a tabindex="-1" href="#">Export to Google Earth</a></li>
+      <li class="menu dropdown-submenu global-menu">
         <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
         <ul class="dropdown-menu">
           <li><a tabindex="-1" href="#">Open Street Map</a></li>
@@ -69,11 +70,12 @@
           <li><a tabindex="-1" href="#">NASA</a></li>
         </ul>
       </li>
-      <li class="global-menu"><a tabindex="-1" href="#">Display pools</a></li>
-      <li class="device-menu"><a tabindex="-1" href="#">Device properties</a></li>
-      <li class="device-menu"><a tabindex="-1" href="#">Connect</a></li>
-      <li class="device-menu"><a tabindex="-1" href="#">Automation</a></li>
-      <li class="link-menu"><a tabindex="-1" href="#">Link properties</a></li>
+      <li class="menu global-menu"><a tabindex="-1" href="#">Display pools</a></li>
+      <li class="menu global-site-menu"><a tabindex="-1" href="#">Display network</a></li>
+      <li class="menu device-menu"><a tabindex="-1" href="#">Device properties</a></li>
+      <li class="menu device-menu"><a tabindex="-1" href="#">Connect</a></li>
+      <li class="menu device-menu"><a tabindex="-1" href="#">Automation</a></li>
+      <li class="menu link-menu"><a tabindex="-1" href="#">Link properties</a></li>
     </ul>
     <div class="right_col" role="main">
       <div class="row">

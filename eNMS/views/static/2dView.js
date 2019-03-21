@@ -80,10 +80,11 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   marker.setIcon(marker.icon);
   markersArray.push(marker);
   marker.on('click', function(e) {
+    console.log('test');
     showTypeModal(nodeType, this.node_id);
   });
   marker.on('contextmenu', function(e) {
-    $('.global-menu,.link-menu').hide();
+    $(`.menu`).hide();
     $(`.${nodeType}-menu`).show();
     selectedObject = this.node_id; // eslint-disable-line no-undef
   });
@@ -123,7 +124,7 @@ function createLink(link) { // eslint-disable-line no-unused-vars
     showTypeModal('link', this.link_id);
   });
   polyline.on('contextmenu', function(e) {
-    $('.global-menu,.device-menu').hide();
+    $('.menu').hide();
     $('.link-menu').show();
     selectedObject = this.link_id; // eslint-disable-line no-undef
   });

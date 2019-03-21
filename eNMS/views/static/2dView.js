@@ -1,16 +1,11 @@
 /*
 global
-call: false
-connectionParametersModal: false
-deviceAutomationModal: false
 L: false
 layers: false
 link_colors: false
 markersArray: true
 parameters: false
-partial: false
 polylinesArray: true
-showModal: false
 showTypeModal: false
 device_subtypes: false
 view: false
@@ -34,7 +29,7 @@ if (view == '2DC') {
  * Change the tile layer.
  * @param {layer} layer - tile layer.
  */
-function switchLayer(layer) {
+function switchLayer(layer) { // eslint-disable-line no-unused-vars
   map.removeLayer(currentLayer);
   currentLayer = L.tileLayer(layers[layer]);
   map.addLayer(currentLayer);
@@ -75,7 +70,7 @@ const routerIcon = window['icon_router'];
  * Create a device.
  * @param {device} device - Device.
  */
-function createDevice(device) {
+function createDevice(device) { // eslint-disable-line no-unused-vars
   const marker = L.marker([
     device.latitude,
     device.longitude,
@@ -106,7 +101,7 @@ function createDevice(device) {
  * Create a link.
  * @param {link} link - Link.
  */
-function createLink(link) {
+function createLink(link) { // eslint-disable-line no-unused-vars
   let pointA = new L.LatLng(
     link.source.latitude,
     link.source.longitude
@@ -146,7 +141,7 @@ function createLink(link) {
 /**
  * Delete all devices and links on the map.
  */
-function deleteAll() {
+function deleteAll() { // eslint-disable-line no-unused-vars
   for (let i = 0; i < markersArray.length; i++) {
     markersArray[i].removeFrom(map);
   }
@@ -156,12 +151,3 @@ function deleteAll() {
   markersArray = [];
   polylinesArray = [];
 }
-
-// when a filter is selected, apply it
-$('#select-filters').on('change', function() {
-  call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    deleteAll();
-    objects.devices.map(createDevice);
-    objects.links.map(createLink);
-  });
-});

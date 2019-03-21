@@ -1,11 +1,8 @@
 /*
 global
-call: false
 layers: false
 markersArray: true
-partial: false
 polylinesArray: true
-showModal: false
 showTypeModal: false
 WE: false
 */
@@ -19,7 +16,7 @@ currentLayer.addTo(map);
  * Change the tile layer.
  * @param {layer} layer - tile layer.
  */
-function switchLayer(layer) {
+function switchLayer(layer) { // eslint-disable-line no-unused-vars
   currentLayer.removeFrom(map);
   currentLayer = WE.tileLayer(layers[layer]);
   currentLayer.addTo(map);
@@ -30,7 +27,7 @@ function switchLayer(layer) {
  * Create a device.
  * @param {device} device - Device.
  */
-function createDevice(device) {
+function createDevice(device) { // eslint-disable-line no-unused-vars
   const marker = WE.marker(
   [device.latitude, device.longitude],
   'static/images/3D/default/router.gif',
@@ -59,7 +56,7 @@ function createDevice(device) {
  * Create a link.
  * @param {link} link - Link.
  */
-function createLink(link) {
+function createLink(link) { // eslint-disable-line no-unused-vars
   const sourceLatitude = link.source.latitude;
   const sourceLongitude = link.source.longitude;
   const destinationLatitude = link.destination.latitude;
@@ -86,7 +83,7 @@ function createLink(link) {
 /**
  * Delete all objects.
  */
-function deleteAll() {
+function deleteAll() { // eslint-disable-line no-unused-vars
   for (let i = 0; i < markersArray.length; i++) {
     markersArray[i].removeFrom(map);
   }

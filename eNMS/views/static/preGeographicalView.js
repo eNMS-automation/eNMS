@@ -3,6 +3,7 @@ global
 alertify: false
 doc: false
 fCall: false
+partial: false
 */
 
 const layers = { // eslint-disable-line no-unused-vars

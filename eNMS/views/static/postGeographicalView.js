@@ -1,4 +1,17 @@
-// when a filter is selected, apply it
+/*
+global
+call: false
+connectionParametersModal: false
+deviceAutomationModal: false
+createDevice: false
+createLink: false
+map: false
+partial: false
+selectedObject: false
+showTypeModal: false
+switchLayer: false
+*/
+
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     deleteAll();
@@ -30,5 +43,6 @@ map.on('contextmenu', function() {
 });
 
 (function() {
+  doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
   $('#select-filters').change();
 })();

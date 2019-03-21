@@ -686,6 +686,7 @@ export_properties: Dict[str, List[str]] = {
 
 dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs"],
+    "Pool": ["object_number"],
     "Service": ["logs", "state", "tasks", "is_running", "workflows", "creator_name"],
     "Task": [
         "job_name",

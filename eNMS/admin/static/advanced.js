@@ -32,8 +32,9 @@ function migrationsImport() { // eslint-disable-line no-unused-vars
  * Database Helpers.
  */
 function databaseHelpers() { // eslint-disable-line no-unused-vars
+  alertify.notify('Starting to delete...', 'success', 5);
   fCall('/admin/database_helpers', '#database-helpers-form', function(result) {
-    alertify.notify('Done.', 'success', 5);
+    alertify.notify('Deletion done.', 'success', 5);
   });
 }
 

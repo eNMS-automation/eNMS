@@ -682,12 +682,20 @@ export_properties: Dict[str, List[str]] = {
     "Link": link_table_properties,
 }
 
-# Properties to not migrate
+# Properties that shouldn't be in the migration files
 
 dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs"],
     "Pool": ["object_number"],
-    "Service": ["logs", "state", "tasks", "is_running", "workflows", "creator_name"],
+    "Service": [
+        "logs",
+        "state",
+        "tasks",
+        "is_running",
+        "status",
+        "workflows",
+        "creator_name",
+    ],
     "Task": [
         "job_name",
         "next_run_time",
@@ -695,5 +703,12 @@ dont_migrate: Dict[str, List[str]] = {
         "time_before_next_run",
         "status",
     ],
-    "Workflow": ["last_modified", "logs", "state", "is_running", "creator_name"],
+    "Workflow": [
+        "last_modified",
+        "logs",
+        "state",
+        "status",
+        "is_running",
+        "creator_name",
+    ],
 }

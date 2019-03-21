@@ -210,7 +210,7 @@ class Job(Base):
         self.completed = self.failed = 0
         try_commit()
         if not from_workflow and self.send_notification:
-            self.notify(results, now)
+            self.notify(results["results"], now)
         return results, now
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:

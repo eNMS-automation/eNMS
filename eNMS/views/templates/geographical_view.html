@@ -69,6 +69,7 @@
           <li><a tabindex="-1" href="#">NASA</a></li>
         </ul>
       </li>
+      <li class="global-menu"><a tabindex="-1" href="#">Display pools</a></li>
       <li class="device-menu"><a tabindex="-1" href="#">Device properties</a></li>
       <li class="device-menu"><a tabindex="-1" href="#">Connect</a></li>
       <li class="device-menu"><a tabindex="-1" href="#">Automation</a></li>
@@ -114,6 +115,7 @@
     let device_subtypes = {{ device_subtypes|tojson|safe }};
     let link_colors = {{ link_colors|tojson|safe }};
     let parameters = {{ parameters|tojson|safe }};
+    let pools = {{ pools|tojson|safe }};
     let view = '{{ view }}';
   </script>
   <!-- Base -->

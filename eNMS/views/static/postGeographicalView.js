@@ -1,5 +1,6 @@
 /*
 global
+alertify: false
 call: false
 connectionParametersModal: false
 createDevice: false
@@ -23,6 +24,14 @@ $('#select-filters').on('change', function() {
   });
 });
 
+/**
+ * Display pools.
+ */
+function displayPools() { // eslint-disable-line no-unused-vars
+  console.log(pools);
+  alertify.notify('Switch to Pool View');
+}
+
 const action = {
   'Export to Google Earth': partial(showModal, 'google-earth'),
   'Open Street Map': partial(switchLayer, 'osm'),
@@ -32,6 +41,7 @@ const action = {
   'Link properties': (l) => showTypeModal('link', l),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
+  'Display pools': displayPools,
 };
 
 map.on('click', function(e) {

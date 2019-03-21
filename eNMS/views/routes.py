@@ -2,7 +2,7 @@ from flask import current_app as app, request
 from simplekml import Kml
 from typing import Union
 
-from eNMS.base.functions import fetch, fetch_all, get, get_one, post
+from eNMS.base.functions import fetch, fetch_all, get, get_one, post, serialize
 from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.inventory.forms import (
     AddDevice,
@@ -23,7 +23,7 @@ def view(view_type: str) -> dict:
         view_type, view = view_type.split("_")
     return dict(
         template=f"{view_type}_view.html",
-        pools=fetch_all("Pool"),
+        pools=serialize("Pool"),
         parameters=parameters,
         view=view,
         google_earth_form=GoogleEarthForm(request.form),

@@ -1,0 +1,134 @@
+{% extends "base_site.html" %}
+
+{% block title %} Geographical View {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.css') }}" rel="stylesheet">
+  <!-- Context Menu -->
+  <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
+  {% if view == '2DC' %}
+    <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
+  {% endif %}
+  <style>
+    #mapid { height:90vh; }
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+  {% include 'link_modal.html' %}
+  {% include 'confirm_deletion_modal.html' %}
+  {% include 'device_automation_modal.html' %}
+  {% include 'device_modal.html' %}
+  {% include 'connection_parameters_modal.html' %}
+  <div id="google-earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">Export to Google Earth</h4>
+        </div>
+        <form id="google-earth-form" data-parsley-validate class="form-horizontal form-label-left" autocomplete="off">
+          <div class="modal-body">
+            <div class="form-group">
+                <label>Project name</label>
+                <div class='form-group'>
+                  {{ google_earth_form.name(class="form-control required") }}
+                </div>
+                <label>Label size:</label>
+                <div class='form-group'>
+                  {{ google_earth_form.label_size(class="form-control required") }}
+                </div>
+                <label>Line width:</label>
+                <div class='form-group'>
+                  {{ google_earth_form.line_width(class="form-control required") }}
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="text-center">
+              <button type="button" onclick="exportToGoogleEarth()" class="btn btn-success">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <form id="view-form" method="post">
+    <input id="view-type" name="view" type="hidden">
+    <ul id="contextMenu" class="dropdown-menu" role="menu">
+      <li class="global-menu"><a tabindex="-1" href="#">Export to Google Earth</a></li>
+      <li class="dropdown-submenu global-menu">
+        <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="#">Open Street Map</a></li>
+          <li><a tabindex="-1" href="#">Google Maps</a></li>
+          <li><a tabindex="-1" href="#">NASA</a></li>
+        </ul>
+      </li>
+      <li class="device-menu"><a tabindex="-1" href="#">Device properties</a></li>
+      <li class="device-menu"><a tabindex="-1" href="#">Connect</a></li>
+      <li class="device-menu"><a tabindex="-1" href="#">Automation</a></li>
+      <li class="link-menu"><a tabindex="-1" href="#">Link properties</a></li>
+    </ul>
+    <div class="right_col" role="main">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+              {% if view == '3D' %}
+                <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
+                  <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box">EGRHTFEFGR</p></strong>
+                </div>
+              {% endif %}
+              <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
+                <div class="form-group">
+                  <select id="select-filters" class="form-control">
+                    {% for pool in pools %}
+                      <option value={{ pool.id }}>{{ pool.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              {% if view == '3D' %}
+                <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
+              {% else %}
+                <div id="mapid"></div>
+              {% endif %}  
+              {{ buttons }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script>
+    const propertyTypes = {{ property_types|tojson|safe }};
+    let device_subtypes = {{ device_subtypes|tojson|safe }};
+    let link_colors = {{ link_colors|tojson|safe }};
+    let parameters = {{ parameters|tojson|safe }};
+    let view = '{{ view }}';
+  </script>
+  <!-- Base -->
+  <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='preGeographicalView.js') }}"></script>
+  {% if view == '3D' %}
+    <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
+    <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.js') }}"></script>
+    {% if view == '2DC' %}
+      <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+    {% endif %}
+    <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
+  {% endif %}
+  <script src="{{ url_for('views_blueprint.static', filename='postGeographicalView.js') }}"></script>
+{% endblock javascripts %}

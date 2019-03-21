@@ -1,9 +1,7 @@
 /*
 global
 alertify: false
-doc: false
 fCall: false
-partial: false
 */
 
 const layers = { // eslint-disable-line no-unused-vars
@@ -12,7 +10,7 @@ const layers = { // eslint-disable-line no-unused-vars
   'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg',
 };
 
-let selectedObject;
+let selectedObject; // eslint-disable-line no-unused-vars
 let markersArray = []; // eslint-disable-line no-unused-vars
 let polylinesArray = []; // eslint-disable-line no-unused-vars
 
@@ -26,18 +24,3 @@ function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
     $('#google-earth').modal('hide');
   });
 }
-
-$('.dropdown-submenu a.menu-submenu').on('click', function(e) {
-  $(this).next('ul').toggle();
-  e.stopPropagation();
-  e.preventDefault();
-});
-
-$('body').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selectedObject);
-    selectedObject = null;
-  },
-});

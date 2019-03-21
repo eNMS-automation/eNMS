@@ -40,7 +40,7 @@ function createDevice(device) { // eslint-disable-line no-unused-vars
   marker.on('contextmenu', function(e) {
     $('.global-menu,.link-menu').hide();
     $('.device-menu').show();
-    selectedObject = device.id;
+    selectedObject = device.id; // eslint-disable-line no-undef
   });
   marker.on('mouseover', function(e) {
     $('#name-box').text(device.name);

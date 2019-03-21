@@ -2,12 +2,15 @@
 global
 call: false
 connectionParametersModal: false
-deviceAutomationModal: false
 createDevice: false
 createLink: false
+deleteAll: false
+deviceAutomationModal: false
+doc: false
 map: false
 partial: false
-selectedObject: false
+selectedObject: true
+showModal: false
 showTypeModal: false
 switchLayer: false
 */
@@ -42,7 +45,22 @@ map.on('contextmenu', function() {
   }
 });
 
+$('.dropdown-submenu a.menu-submenu').on('click', function(e) {
+  $(this).next('ul').toggle();
+  e.stopPropagation();
+  e.preventDefault();
+});
+
+$('body').contextMenu({
+  menuSelector: '#contextMenu',
+  menuSelected: function(invokedOn, selectedMenu) {
+    const row = selectedMenu.text();
+    action[row](selectedObject);
+    selectedObject = null;
+  },
+});
+
 (function() {
-  doc('https://enms.readthedocs.io/en/latest/inventory/objects.html');
+  doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
   $('#select-filters').change();
 })();

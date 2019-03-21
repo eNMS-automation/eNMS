@@ -86,7 +86,7 @@ function createDevice(device) { // eslint-disable-line no-unused-vars
   marker.on('contextmenu', function(e) {
     $('.global-menu,.link-menu').hide();
     $('.device-menu').show();
-    selectedObject = this.device_id;
+    selectedObject = this.device_id; // eslint-disable-line no-undef
   });
   marker.bindTooltip(device['name'], {permanent: false});
   if (view == '2D') {
@@ -126,7 +126,7 @@ function createLink(link) { // eslint-disable-line no-unused-vars
   polyline.on('contextmenu', function(e) {
     $('.global-menu,.device-menu').hide();
     $('.link-menu').show();
-    selectedObject = this.link_id;
+    selectedObject = this.link_id; // eslint-disable-line no-undef
   });
   polyline.bindTooltip(link['name'], {
     permanent: false,

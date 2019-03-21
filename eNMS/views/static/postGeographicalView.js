@@ -30,6 +30,5 @@ map.on('contextmenu', function() {
 });
 
 (function() {
-  console.log('test');
   $('#select-filters').change();
 })();

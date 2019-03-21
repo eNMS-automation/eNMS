@@ -100,7 +100,3 @@ function deleteAll() {
   markersArray = [];
   polylinesArray = [];
 }
-
-(function() {
-  $('#select-filters').change();
-})();

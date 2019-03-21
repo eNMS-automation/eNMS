@@ -119,7 +119,7 @@
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
-  <script src="{{ url_for('views_blueprint.static', filename='geographicalView.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='preGeographicalView.js') }}"></script>
   {% if view == '3D' %}
     <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
     <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
@@ -130,5 +130,5 @@
     {% endif %}
     <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
   {% endif %}
-  <script src="{{ url_for('views_blueprint.static', filename='geographicalViewPost.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='postGeographicalView.js') }}"></script>
 {% endblock javascripts %}

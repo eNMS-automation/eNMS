@@ -19,7 +19,7 @@ switchLayer: false
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     deleteAll();
-    objects.devices.map(createDevice);
+    objects.devices.map(createNode);
     objects.links.map(createLink);
   });
 });
@@ -28,7 +28,7 @@ $('#select-filters').on('change', function() {
  * Display pools.
  */
 function displayPools() { // eslint-disable-line no-unused-vars
-  console.log(pools);
+  pools.map((p) => createNode(p, nodeType='pool'));
   alertify.notify('Switch to Pool View');
 }
 

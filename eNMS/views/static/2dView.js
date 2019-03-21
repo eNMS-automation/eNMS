@@ -67,28 +67,27 @@ L.PolylineClusterable = L.Polyline.extend({
 const routerIcon = window['icon_router'];
 
 /**
- * Create a device.
- * @param {device} device - Device.
+ * Create a node (device or pool).
+ * @param {node} node - Device or Pool.
  */
-function createDevice(device) { // eslint-disable-line no-unused-vars
+function createNode(node, nodeType='device') { // eslint-disable-line no-unused-vars
   const marker = L.marker([
-    device.latitude,
-    device.longitude,
+    nodeType === 'device' ? node.latitude : node.device_latitude,
+    nodeType === 'device' ? node.longitude : node.device_longitude,
   ]);
-  marker.device_id = device.id;
-  marker.icon = window[`icon_${device.subtype}`] || routerIcon;
-  marker.redIcon = window[`red_icon_${device.subtype}`] || routerIcon;
+  marker.node_id = node.id;
+  marker.icon = window[`icon_${node.subtype}`] || routerIcon;
   marker.setIcon(marker.icon);
   markersArray.push(marker);
   marker.on('click', function(e) {
-    showTypeModal('device', this.device_id);
+    showTypeModal(nodeType, this.node_id);
   });
   marker.on('contextmenu', function(e) {
     $('.global-menu,.link-menu').hide();
-    $('.device-menu').show();
-    selectedObject = this.device_id; // eslint-disable-line no-undef
+    $(`.${nodeTyp}-menu`).show();
+    selectedObject = this.node_id; // eslint-disable-line no-undef
   });
-  marker.bindTooltip(device['name'], {permanent: false});
+  marker.bindTooltip(node['name'], {permanent: false});
   if (view == '2D') {
     marker.addTo(map);
   } else {

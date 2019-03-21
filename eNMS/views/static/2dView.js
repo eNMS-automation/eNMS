@@ -70,7 +70,7 @@ const routerIcon = window['icon_router'];
  * Create a node (device or pool).
  * @param {node} node - Device or Pool.
  */
-function createNode(node, nodeType='device') { // eslint-disable-line no-unused-vars
+function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   const marker = L.marker([
     nodeType === 'device' ? node.latitude : node.device_latitude,
     nodeType === 'device' ? node.longitude : node.device_longitude,
@@ -84,7 +84,7 @@ function createNode(node, nodeType='device') { // eslint-disable-line no-unused-
   });
   marker.on('contextmenu', function(e) {
     $('.global-menu,.link-menu').hide();
-    $(`.${nodeTyp}-menu`).show();
+    $(`.${nodeType}-menu`).show();
     selectedObject = this.node_id; // eslint-disable-line no-undef
   });
   marker.bindTooltip(node['name'], {permanent: false});

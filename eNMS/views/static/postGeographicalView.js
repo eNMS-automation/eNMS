@@ -19,7 +19,7 @@ switchLayer: false
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     deleteAll();
-    objects.devices.map(createNode);
+    objects.devices.map((d) => createNode(d, nodeType='device'));
     objects.links.map(createLink);
   });
 });
@@ -28,7 +28,12 @@ $('#select-filters').on('change', function() {
  * Display pools.
  */
 function displayPools() { // eslint-disable-line no-unused-vars
-  pools.map((p) => createNode(p, nodeType='pool'));
+  deleteAll();
+  pools.map((p) => {
+    if (p.device_longitude && p.device_latitude) {
+      createNode(p, nodeType='pool')
+    }
+  });
   alertify.notify('Switch to Pool View');
 }
 

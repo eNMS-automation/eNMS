@@ -7,6 +7,7 @@ from eNMS.base.properties import device_subtypes, link_subtype_to_color
 from eNMS.inventory.forms import (
     AddDevice,
     AddLink,
+    AddPoolForm,
     DeviceAutomationForm,
     GottyConnectionForm,
 )
@@ -22,6 +23,7 @@ def view(view_type: str) -> dict:
     else:
         view_type, view = view_type.split("_")
     return dict(
+        add_pool_form=AddPoolForm(request.form),
         template=f"{view_type}_view.html",
         pools=serialize("Pool"),
         parameters=parameters,

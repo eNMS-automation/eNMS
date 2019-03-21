@@ -67,7 +67,7 @@ def link_management() -> dict:
 @get(bp, "/pool_management", "View")
 def pool_management() -> dict:
     return dict(
-        form=AddPoolForm(request.form),
+        add_pool_form=AddPoolForm(request.form),
         pool_object_form=PoolObjectsForm(request.form),
         fields=pool_table_properties,
     )

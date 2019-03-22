@@ -143,9 +143,9 @@ def save_device_jobs(device_id: int) -> bool:
     return True
 
 
-@post(bp, "/save_pool_objects/<int:device_id>", "Edit")
-def save_pool_objects(device_id: int) -> dict:
-    pool = fetch("Pool", id=device_id)
+@post(bp, "/save_pool_objects/<int:pool_id>", "Edit")
+def save_pool_objects(pool_id: int) -> dict:
+    pool = fetch("Pool", id=pool_id)
     pool.devices = objectify("Device", request.form["devices"])
     pool.links = objectify("Link", request.form["links"])
     db.session.commit()

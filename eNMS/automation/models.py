@@ -121,19 +121,19 @@ class Job(Base):
         summary = [
             f"Job: {self.name} ({self.type})",
             f"Runtime: {now}",
-            f'Status: {"PASS" if results["success"] else "FAILED"}',
+            f'Status: {"PASS" if results["results"]["success"] else "FAILED"}',
         ]
-        if "devices" in results and not results["success"]:
+        if "devices" in results["results"] and not results["results"]["success"]:
             failed = "\n".join(
                 device
-                for device, logs in results["devices"].items()
+                for device, logs in results["results"]["devices"].items()
                 if not logs["success"]
             )
             summary.append(f"FAILED\n{failed}")
             if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
-                    for device, logs in results["devices"].items()
+                    for device, logs in results["results"]["devices"].items()
                     if logs["success"]
                 )
                 summary.append(f"\n\nPASS:\n{passed}")
@@ -148,7 +148,7 @@ class Job(Base):
                 "job": self.serialized,
                 "logs": self.logs,
                 "runtime": time,
-                "result": results["success"],
+                "result": results["results"]["success"],
                 "content": self.build_notification(results, time),
             }
         )
@@ -192,6 +192,7 @@ class Job(Base):
                     results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
                 else:
+                    results[f"Attempts {i + 1}"] = attempt
                     results["results"]["success"] = False
                     for device in targets:
                         results["results"]["devices"][device.name] = attempt["devices"][
@@ -210,7 +211,7 @@ class Job(Base):
         self.completed = self.failed = 0
         try_commit()
         if not from_workflow and self.send_notification:
-            self.notify(results["results"], now)
+            self.notify(results, now)
         return results, now
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:

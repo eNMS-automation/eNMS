@@ -28,7 +28,7 @@ function showPoolObjects(id) { // eslint-disable-line no-unused-vars
     $('#devices,#links').selectpicker('deselectAll');
     $('#devices').selectpicker('val', pool.devices.map((n) => n.id));
     $('#links').selectpicker('val', pool.links.map((l) => l.id));
-    
+    poolId = id;
     $('#edit-pool-objects').modal('show');
   });
 }

@@ -167,6 +167,8 @@ class Pool(AbstractPool):
         "Device", secondary=pool_device_table, back_populates="pools"
     )
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
+    latitude = Column(Float)
+    longitude = Column(Float)
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)

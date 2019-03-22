@@ -1,9 +1,7 @@
 (function($, window) {
   $.fn.contextMenu = function(settings) {
     return this.each(function() {
-      // Open context menu
       $(this).on('contextmenu', function(e) {
-        // return native menu if pressing control
         if (e.ctrlKey) {
           return;
         }
@@ -24,7 +22,6 @@
           });
         return false;
       });
-      // make sure menu closes on any click
       $('body').click(function() {
         $(settings.menuSelector).hide();
       });

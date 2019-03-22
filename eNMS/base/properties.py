@@ -394,6 +394,9 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
             Delete</button>""",
         ],
         "pool": [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showPoolView('{obj.id}')">
+            Visualize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('pool', '{obj.id}')">
             Edit properties</button>""",

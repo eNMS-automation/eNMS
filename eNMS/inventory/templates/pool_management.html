@@ -3,6 +3,8 @@
 {% block title %} Pool Management {% endblock title %}
 
 {% block stylesheets %}
+  <!-- Vis CSS -->
+  <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   {{ super() }}
 {% endblock stylesheets %}
 
@@ -102,5 +104,8 @@
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
   </script>
+  <!-- Vis JS -->
+  <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='enms/logicalView.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='poolManagement.js') }}"></script>
 {% endblock javascripts %}

@@ -61,6 +61,7 @@ const action = {
   'NASA': partial(switchLayer, 'nasa'),
   'Device properties': (d) => showTypeModal('device', d),
   'Link properties': (l) => showTypeModal('link', l),
+  'Pool properties': (p) => showTypeModal('pool', p),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
   'Display pools': displayPools,

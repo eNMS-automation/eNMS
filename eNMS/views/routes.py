@@ -32,7 +32,7 @@ def view(view_type: str) -> dict:
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
-        subtype_sizes=device_subtype_sizes,
+        subtype_sizes=subtype_sizes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
     )

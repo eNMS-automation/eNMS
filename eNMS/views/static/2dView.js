@@ -36,20 +36,20 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-Object.keys(subtype_sizes).forEach(function(subtype) {
-  window[`icon_${subtype}`] = L.icon({
-    iconUrl: `static/images/default/${subtype}.gif`,
-    iconSize: [18, 12],
+for (const [key, value] of Object.entries(subtype_sizes)) {
+  window[`icon_${key}`] = L.icon({
+    iconUrl: `static/images/default/${key}.gif`,
+    iconSize: value,
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
     });
-  window[`red_icon_${subtype}`] = L.icon({
-    iconUrl: `static/images/selected/${subtype}.gif`,
-    iconSize: [18, 12],
+  window[`red_icon_${key}`] = L.icon({
+    iconUrl: `static/images/selected/${key}.gif`,
+    iconSize: value,
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
   });
-});
+};
 
 L.PolylineClusterable = L.Polyline.extend({
   _originalInitialize: L.Polyline.prototype.initialize,

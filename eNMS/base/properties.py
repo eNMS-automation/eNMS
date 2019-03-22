@@ -66,7 +66,7 @@ device_subtypes: Dict[str, str] = {
     "switch": "Switch",
 }
 
-device_sizes: Dict[str, List] = {
+subtype_sizes: Dict[str, List] = {
     "antenna": [18, 12],
     "firewall": [18, 12],
     "host": [18, 12],
@@ -75,7 +75,7 @@ device_sizes: Dict[str, List] = {
     "router": [18, 12],
     "server": [18, 12],
     "switch": [18, 12],
-    "site": [30, 30],
+    "site": [22, 22],
 }
 
 link_subtypes: Dict[str, str] = {

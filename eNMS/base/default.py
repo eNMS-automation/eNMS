@@ -32,7 +32,7 @@ def create_default_pools() -> None:
         {
             "name": "Devices only",
             "description": "Devices only",
-            "longitude": 74.0,
+            "longitude": -74.0,
             "latitude": 40.71,
             "link_name": "^$",
             "link_name_regex": "y",
@@ -40,7 +40,7 @@ def create_default_pools() -> None:
         {
             "name": "Links only",
             "description": "Links only",
-            "longitude": 87.62,
+            "longitude": -87.62,
             "latitude": 41.87,
             "device_name": "^$",
             "device_name_regex": "y",

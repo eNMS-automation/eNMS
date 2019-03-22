@@ -71,10 +71,7 @@ const routerIcon = window['icon_router'];
  * @param {node} node - Device or Pool.
  */
 function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
-  const marker = L.marker([
-    nodeType === 'device' ? node.latitude : node.device_latitude,
-    nodeType === 'device' ? node.longitude : node.device_longitude,
-  ]);
+  const marker = L.marker([node.latitude, node.longitude]);
   marker.node_id = node.id;
   if (nodeType === 'device') {
     marker.icon = window[`icon_${node.subtype}`] || routerIcon;
@@ -87,7 +84,7 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
     showTypeModal(nodeType, this.node_id);
   });
   marker.on('contextmenu', function(e) {
-    $(`.menu`).hide();
+    $('.menu').hide();
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = this.node_id; // eslint-disable-line no-undef
   });

@@ -24,26 +24,26 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Create a device.
- * @param {device} device - Device.
+ * Create a device or a pool.
+ * @param {node} node - Device or pool.
  */
-function createDevice(device) { // eslint-disable-line no-unused-vars
+function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   const marker = WE.marker(
-  [device.latitude, device.longitude],
-  'static/images/3D/default/router.gif',
-  15, 10
+    [node.latitude, node.longitude],
+    'static/images/3D/default/router.gif',
+    15, 10
   ).addTo(map);
-  marker.device_id = device.id;
+  marker.node_id = node.id;
   marker.on('click', function(e) {
-    showTypeModal('device', device.id);
+    showTypeModal(nodeType, node.id);
   });
   marker.on('contextmenu', function(e) {
-    $('.geo-menu,.rc-link-menu').hide();
-    $('.rc-link-menu').show();
-    selectedObject = device.id; // eslint-disable-line no-undef
+    $('.menu').hide();
+    $(`.rc-${nodeType}-menu`).show();
+    selectedObject = node.id; // eslint-disable-line no-undef
   });
   marker.on('mouseover', function(e) {
-    $('#name-box').text(device.name);
+    $('#name-box').text(node.name);
     $('#name-box').show();
   });
   marker.on('mouseout', function(e) {

@@ -38,17 +38,11 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
 
 for (const [key, value] of Object.entries(subtype_sizes)) {
   window[`icon_${key}`] = L.icon({
-    iconUrl: `static/images/default/${key}.gif`,
+    iconUrl: `static/images/2D/${key}.gif`,
     iconSize: value,
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
     });
-  window[`red_icon_${key}`] = L.icon({
-    iconUrl: `static/images/selected/${key}.gif`,
-    iconSize: value,
-    iconAnchor: [9, 6],
-    popupAnchor: [8, -5],
-  });
 };
 
 L.PolylineClusterable = L.Polyline.extend({

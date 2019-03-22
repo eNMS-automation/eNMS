@@ -39,14 +39,6 @@ function linkToEdge(link) {
   };
 }
 
-const networkAction = {
-  'Device properties': (d) => showTypeModal('device', d),
-  'Link properties': (l) => showTypeModal('link', l),
-  'Connect': connectionParametersModal,
-  'Automation': deviceAutomationModal,
-  'Not implemented yet': () => alertify.notify('Later.'),
-};
-
 /**
  * Display a pool.
  * @param {nodes} nodes - Array of nodes to display.
@@ -70,15 +62,7 @@ function displayPool(nodes, edges) {
       $('.rc-link-menu').show();
     } else {
       $('.menu').hide();
-      $('.global-menu').show();
+      $('.insite-menu').show();
     }
   });
 }
-
-$('#network').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    networkAction[row](selected);
-  },
-});

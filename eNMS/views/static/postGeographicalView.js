@@ -42,8 +42,10 @@ function displayPools() { // eslint-disable-line no-unused-vars
  */
 function displayNetwork() { // eslint-disable-line no-unused-vars
   viewMode = 'network';
+  $('.menu,#network').hide();
   $('#pool-filter').change();
   $('#pool-filter').show();
+  $('#map,.geo-menu').show();
 }
 
 /**

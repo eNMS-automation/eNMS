@@ -13,10 +13,15 @@
   {% include 'link_modal.html' %}
   {% include 'device_automation_modal.html' %}
   {% include 'device_modal.html' %}
-  {% include 'pool_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
   {% include 'pool_modal.html' %}
-  <div id="view-pool" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+  <ul id="contextMenu" class="dropdown-menu" role="menu">
+    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Device properties</a></li>
+    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
+    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Automation</a></li>
+    <li class="menu rc-link-menu"><a tabindex="-1" href="#">Link properties</a></li>
+  </ul>
+  <div id="view-pool" style="z-index:1500;" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -127,8 +132,9 @@
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
   </script>
-  <!-- Vis JS -->
+  <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='poolManagement.js') }}"></script>
 {% endblock javascripts %}

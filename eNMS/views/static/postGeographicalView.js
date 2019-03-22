@@ -23,7 +23,6 @@ let viewMode = 'network';
  */
 function displayPools() { // eslint-disable-line no-unused-vars
   viewMode = 'site';
-  
   deleteAll();
   call('/get_all/pool', function(pools) {
     for (let i = 0; i < pools.length; i++) {

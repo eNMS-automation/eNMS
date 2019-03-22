@@ -23,13 +23,15 @@ let viewMode = 'network';
  */
 function displayPools() { // eslint-disable-line no-unused-vars
   deleteAll();
-  pools.map((p) => {
-    if (p.device_longitude && p.device_latitude) {
-      createNode(p, nodeType='pool')
+  call('/get_all/pool', function(pools) {
+    for (let i = 0; i < pools.length; i++) {
+      if (pools[i].device_longitude && pools[i].device_latitude) {
+        createNode(pools[i], nodeType='pool')
+      }
     }
   });
   viewMode = 'site';
-  $('.menu,#select-filters').hide();
+  $('.menu,#pool-filter').hide();
   $('.global-site-menu,.pool-menu').show();
   alertify.notify('Switch to Pool View');
 }
@@ -39,8 +41,8 @@ function displayPools() { // eslint-disable-line no-unused-vars
  */
 function displayNetwork() { // eslint-disable-line no-unused-vars
   viewMode = 'network';
-  $('#select-filters').change();
-  $('#select-filters').show();
+  $('#pool-filter').change();
+  $('#pool-filter').show();
 }
 
 /**
@@ -52,7 +54,7 @@ function enterPool() { // eslint-disable-line no-unused-vars
   $('#network').show();
 }
 
-$('#select-filters').on('change', function() {
+$('#pool-filter').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     deleteAll();
     objects.devices.map((d) => createNode(d, nodeType='device'));
@@ -104,5 +106,5 @@ $('body').contextMenu({
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
   $('#network').hide();
-  $('#select-filters').change();
+  $('#pool-filter').change();
 })();

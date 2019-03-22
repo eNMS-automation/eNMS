@@ -133,6 +133,12 @@ def get_instance(cls: str, id: str) -> dict:
     return instance.serialized
 
 
+@post(bp, "/get_all/<cls>", "View")
+def get_all_instances(cls: str) -> dict:
+    info(f"{current_user.name}: GET ALL {cls}")
+    return [instance.get_properties() for instance in fetch_all_visible(cls)]
+
+
 @post(bp, "/update/<cls>", "Edit")
 def update_instance(cls: str) -> dict:
     try:

@@ -2,7 +2,7 @@ from flask import current_app as app, request
 from simplekml import Kml
 from typing import Union
 
-from eNMS.base.functions import fetch, fetch_all, get, get_one, post, serialize
+from eNMS.base.functions import fetch, fetch_all, get, get_one, post
 from eNMS.base.properties import subtype_sizes, link_subtype_to_color
 from eNMS.inventory.forms import (
     AddDevice,
@@ -12,7 +12,7 @@ from eNMS.inventory.forms import (
     GottyConnectionForm,
 )
 from eNMS.views import bp, styles
-from eNMS.views.forms import GoogleEarthForm
+from eNMS.views.forms import GoogleEarthForm, ViewForm
 
 
 @get(bp, "/<view_type>", "View")
@@ -25,9 +25,7 @@ def view(view_type: str) -> dict:
     return dict(
         add_pool_form=AddPoolForm(request.form),
         template=f"{view_type}_view.html",
-        pools=serialize("Pool"),
         parameters=parameters,
-        view=view,
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),
@@ -35,6 +33,8 @@ def view(view_type: str) -> dict:
         subtype_sizes=subtype_sizes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
+        view=view,
+        view_form=ViewForm(request.form),
     )
 
 

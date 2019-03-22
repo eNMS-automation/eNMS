@@ -31,11 +31,7 @@
           <div class="x_content">
             <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
               <div class="form-group">
-                <select id="select-filters" class="form-control">
-                  {% for pool in pools %}
-                    <option value={{ pool.id }}>{{ pool.name }}</option>
-                  {% endfor %}
-                </select>
+                {{ view_form.pools(id='pool-filter', class="form-control") }}
               </div>
             </div>
             <div align='center' id="network"></div>

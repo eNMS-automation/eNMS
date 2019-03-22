@@ -30,7 +30,7 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
 function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   const marker = WE.marker(
     [node.latitude, node.longitude],
-    'static/images/3D/default/router.gif',
+    `static/images/3D/default/${nodeType == 'device' ? 'router' : 'site'}.gif`,
     15, 10
   ).addTo(map);
   marker.node_id = node.id;

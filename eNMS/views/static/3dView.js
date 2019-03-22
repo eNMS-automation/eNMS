@@ -8,7 +8,7 @@ WE: false
 */
 
 const options = {sky: true, atmosphere: true};
-const map = WE.map('earth_div', options);
+const map = WE.map('map', options);
 let currentLayer = WE.tileLayer(layers['gm']);
 currentLayer.addTo(map);
 

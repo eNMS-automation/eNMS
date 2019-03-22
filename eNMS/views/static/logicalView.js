@@ -18,7 +18,7 @@ const action = {
   'Not implemented yet': () => alertify.notify('Later.'),
 };
 
-$('#logical_view').contextMenu({
+$('#network').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();

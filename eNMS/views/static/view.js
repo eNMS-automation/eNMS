@@ -31,7 +31,7 @@ function linkToEdge(link) {
   };
 }
 
-let container = document.getElementById('logical_view');
+let container = document.getElementById('network');
 
 /**
  * Display a pool.

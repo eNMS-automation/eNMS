@@ -12,8 +12,8 @@
     <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
   {% endif %}
   <style>
-    #mapid { height:90vh; }
-    #logical_view { height:90vh; }
+    #map { height:90vh; }
+    #network { height:90vh; }
   </style>
 {% endblock stylesheets %}
 
@@ -85,10 +85,10 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
-              <div align='center' id="logical_view"></div>
+              <div align='center' id="network"></div>
               {% if view == '3D' %}
                 <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
-                  <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box">EGRHTFEFGR</p></strong>
+                  <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
                 </div>
               {% endif %}
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
@@ -101,9 +101,9 @@
                 </div>
               </div>
               {% if view == '3D' %}
-                <div id="earth_div" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
+                <div id="map" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
               {% else %}
-                <div id="mapid"></div>
+                <div id="map"></div>
               {% endif %}  
               {{ buttons }}
             </div>

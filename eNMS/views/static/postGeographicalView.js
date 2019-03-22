@@ -43,6 +43,14 @@ function displayNetwork() { // eslint-disable-line no-unused-vars
   $('#select-filters').show();
 }
 
+/**
+ * Enter pool.
+ */
+function enterPool() { // eslint-disable-line no-unused-vars
+  viewMode = 'insite';
+  $('#map').hide();
+  $('#network').show();
+}
 
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
@@ -51,7 +59,6 @@ $('#select-filters').on('change', function() {
     objects.links.map(createLink);
   });
 });
-
 
 const action = {
   'Export to Google Earth': partial(showModal, 'google-earth'),
@@ -96,6 +103,6 @@ $('body').contextMenu({
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  $('#logical_view').hide();
+  $('#network').hide();
   $('#select-filters').change();
 })();

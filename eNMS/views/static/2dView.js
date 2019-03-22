@@ -13,7 +13,7 @@ view: false
 
 let markers;
 
-const map = L.map('mapid').setView(
+const map = L.map('map').setView(
   [parameters.default_latitude, parameters.default_longitude],
   parameters.default_zoom_level
 );

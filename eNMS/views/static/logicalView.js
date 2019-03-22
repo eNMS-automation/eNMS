@@ -26,13 +26,13 @@ $('#network').contextMenu({
   },
 });
 
-$('#select-filters').on('change', function() {
+$('#pool-filter').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    displayNetwork(objects.devices, objects.links);
+    displayPool(objects.devices, objects.links);
   });
 });
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/logical_view.html');
-  $('#select-filters').change();
+  $('#pool-filter').change();
 })();

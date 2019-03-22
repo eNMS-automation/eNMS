@@ -3,7 +3,6 @@ global
 vis: false
 */
 
-
 /**
  * Convert device to Vis node.
  * @param {device} device - Device.
@@ -38,7 +37,7 @@ let container = document.getElementById('network');
  * @param {nodes} nodes - Array of nodes to display.
   * @param {edges} edges - Array of edges to display.
  */
-function displayNetwork(nodes, edges) {
+function displayPool(nodes, edges) {
   nodes = new vis.DataSet(nodes.map(deviceToNode));
   edges = new vis.DataSet(edges.map(linkToEdge));
   const network = new vis.Network(container, {nodes: nodes, edges: edges}, {});

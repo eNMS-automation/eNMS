@@ -48,10 +48,14 @@ function displayNetwork() { // eslint-disable-line no-unused-vars
 /**
  * Enter pool.
  */
-function enterPool() { // eslint-disable-line no-unused-vars
+function enterPool(poolId) { // eslint-disable-line no-unused-vars
   viewMode = 'insite';
   $('#map').hide();
   $('#network').show();
+  call(`/inventory/pool_objects/${poolId}`, function(objects) {
+    console.log(objects);
+    displayPool(objects.devices, objects.links);
+  });
 }
 
 $('#pool-filter').on('change', function() {

@@ -3,7 +3,7 @@ from simplekml import Kml
 from typing import Union
 
 from eNMS.base.functions import fetch, fetch_all, get, get_one, post, serialize
-from eNMS.base.properties import device_subtypes, link_subtype_to_color
+from eNMS.base.properties import subtype_sizes, link_subtype_to_color
 from eNMS.inventory.forms import (
     AddDevice,
     AddLink,
@@ -32,7 +32,7 @@ def view(view_type: str) -> dict:
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
-        device_subtypes=device_subtypes,
+        subtype_sizes=device_subtype_sizes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
     )

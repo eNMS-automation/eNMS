@@ -7,7 +7,7 @@ markersArray: true
 parameters: false
 polylinesArray: true
 showTypeModal: false
-device_subtypes: false
+subtype_sizes: false
 view: false
 */
 
@@ -36,7 +36,7 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-Object.keys(device_subtypes).forEach(function(subtype) {
+Object.keys(subtype_sizes).forEach(function(subtype) {
   window[`icon_${subtype}`] = L.icon({
     iconUrl: `static/images/default/${subtype}.gif`,
     iconSize: [18, 12],
@@ -76,11 +76,14 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
     nodeType === 'device' ? node.longitude : node.device_longitude,
   ]);
   marker.node_id = node.id;
-  marker.icon = window[`icon_${node.subtype}`] || routerIcon;
+  if (nodeType === 'device') {
+    marker.icon = window[`icon_${node.subtype}`] || routerIcon;
+  } else {
+    marker.icon = window['icon_site']
+  }
   marker.setIcon(marker.icon);
   markersArray.push(marker);
   marker.on('click', function(e) {
-    console.log('test');
     showTypeModal(nodeType, this.node_id);
   });
   marker.on('contextmenu', function(e) {

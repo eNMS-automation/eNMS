@@ -16,6 +16,8 @@ showTypeModal: false
 switchLayer: false
 */
 
+let viewMode = 'network';
+
 /**
  * Display pools.
  */
@@ -26,8 +28,21 @@ function displayPools() { // eslint-disable-line no-unused-vars
       createNode(p, nodeType='pool')
     }
   });
+  viewMode = 'site';
+  $('.menu,#select-filters').hide();
+  $('.global-site-menu,.pool-menu').show();
   alertify.notify('Switch to Pool View');
 }
+
+/**
+ * Display network.
+ */
+function displayNetwork() { // eslint-disable-line no-unused-vars
+  viewMode = 'network';
+  $('#select-filters').change();
+  $('#select-filters').show();
+}
+
 
 $('#select-filters').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
@@ -49,6 +64,7 @@ const action = {
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
   'Display pools': displayPools,
+  'Display network': displayNetwork,
 };
 
 map.on('click', function(e) {
@@ -58,7 +74,7 @@ map.on('click', function(e) {
 map.on('contextmenu', function() {
   if (!selectedObject) {
     $('.menu').hide();
-    $('.global-menu').show();
+    $(`.global-menu,.${viewMode}-menu`).show();
   }
 });
 

@@ -23,6 +23,7 @@ map.addLayer(osmLayer);
 let currentLayer = osmLayer;
 if (view == '2DC') {
   markers = L.markerClusterGroup();
+  map.addLayer(markers);
 }
 
 /**
@@ -87,7 +88,6 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
     marker.addTo(map);
   } else {
     markers.addLayer(marker);
-    map.addLayer(markers);
   }
 }
 
@@ -137,10 +137,18 @@ function createLink(link) { // eslint-disable-line no-unused-vars
  */
 function deleteAll() { // eslint-disable-line no-unused-vars
   for (let i = 0; i < markersArray.length; i++) {
-    markersArray[i].removeFrom(map);
+    if (view == '2D') {
+      markersArray[i].removeFrom(map);
+    } else {
+      markers.removeLayer(markersArray[i]);
+    }
   }
   for (let i = 0; i < polylinesArray.length; i++) {
-    polylinesArray[i].removeFrom(map);
+    if (view == '2D') {
+      polylinesArray[i].removeFrom(map);
+    } else {
+      markers.removeLayer(polylinesArray[i]);
+    }
   }
   markersArray = [];
   polylinesArray = [];

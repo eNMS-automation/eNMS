@@ -56,7 +56,6 @@ function enterPool(poolId) { // eslint-disable-line no-unused-vars
   $('#map,.menu').hide();
   $('#network,.insite-menu,rc-device-menu,rc-link-menu').show();
   call(`/inventory/pool_objects/${poolId}`, function(objects) {
-    console.log(objects);
     displayPool(objects.devices, objects.links);
   });
 }

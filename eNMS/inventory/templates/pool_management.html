@@ -20,7 +20,7 @@
           <h4 class="modal-title">View Pool</h4>
         </div>
         <div class="modal-body">
-          <div id="network" style="height:400px; width:100%;"></div>
+          <div id="network" style="height:90vw; height:90vh;"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -98,6 +98,7 @@
                   {% for field in fields %}
                     <th>{{ names[field] }}</th>
                   {% endfor %}
+                  <th style="width: 5%">Visualize</th>
                   <th style="width: 5%">Edit properties</th>
                   <th style="width: 5%">Update</th>
                   <th style="width: 5%">Duplicate</th>

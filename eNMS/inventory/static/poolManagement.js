@@ -34,6 +34,16 @@ function showPoolObjects(id) { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Visualize pool.
+ * @param {id} id - Id of the pool.
+ */
+function showPoolView(id) { // eslint-disable-line no-unused-vars
+  call(`/get/pool/${id}`, function(pool) {
+    $('#view-pool').modal('show');
+  });
+}
+
+/**
  * Update pool objects.
  */
 function savePoolObjects() { // eslint-disable-line no-unused-vars

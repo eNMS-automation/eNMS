@@ -9,7 +9,6 @@ showTypeModal: false
 vis: false
 */
 
-
 let container = document.getElementById('network');
 let selectedObject;
 

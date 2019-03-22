@@ -23,16 +23,25 @@ def create_default_users() -> None:
 
 def create_default_pools() -> None:
     for pool in (
-        {"name": "All objects", "description": "All objects"},
+        {
+            "name": "All objects",
+            "description": "All objects",
+            "longitude": -122.43,
+            "latitude": 37.77,
+        },
         {
             "name": "Devices only",
             "description": "Devices only",
+            "longitude": 74.0,
+            "latitude": 40.71,
             "link_name": "^$",
             "link_name_regex": "y",
         },
         {
             "name": "Links only",
             "description": "Links only",
+            "longitude": 87.62,
+            "latitude": 41.87,
             "device_name": "^$",
             "device_name_regex": "y",
         },

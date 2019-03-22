@@ -98,6 +98,8 @@ class AddPoolForm(FlaskForm):
     boolean_fields = HiddenField(default="never_update")
     name = StringField()
     description = StringField()
+    longitude = FloatField(default=0.0)
+    latitude = FloatField(default=0.0)
     operator = SelectField(
         choices=(
             ("all", "Match if all properties match"),

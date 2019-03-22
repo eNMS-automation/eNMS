@@ -23,6 +23,7 @@ let viewMode = 'network';
  */
 function displayPools() { // eslint-disable-line no-unused-vars
   viewMode = 'site';
+  
   deleteAll();
   call('/get_all/pool', function(pools) {
     for (let i = 0; i < pools.length; i++) {
@@ -31,8 +32,8 @@ function displayPools() { // eslint-disable-line no-unused-vars
       }
     }
   });
-  $('.menu,#pool-filter').hide();
-  $('.geo-menu,.rc-pool-menu').show();
+  $('.menu,#pool-filter,#network').hide();
+  $('#map,.geo-menu,.rc-pool-menu').show();
   alertify.notify('Switch to Pool View');
 }
 
@@ -50,8 +51,8 @@ function displayNetwork() { // eslint-disable-line no-unused-vars
  */
 function enterPool(poolId) { // eslint-disable-line no-unused-vars
   viewMode = 'insite';
-  $('#map').hide();
-  $('#network').show();
+  $('#map,.menu').hide();
+  $('#network,.insite-menu,rc-device-menu,rc-link-menu').show();
   call(`/inventory/pool_objects/${poolId}`, function(objects) {
     console.log(objects);
     displayPool(objects.devices, objects.links);

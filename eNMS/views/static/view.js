@@ -47,10 +47,10 @@ function displayPool(nodes, edges) {
     const edge = this.getEdgeAt(properties.pointer.DOM);
     if (typeof node !== 'undefined') {
       $('.menu').hide();
-      $('.rc-link-menu').show();
-      selected = node;
+      $('.rc-device-menu').show();
+      selectedObject = node;
     } else if (typeof edge !== 'undefined') {
-      selected = edge;
+      selectedObject = edge;
       $('.menu').hide();
       $('.rc-link-menu').show();
     } else {

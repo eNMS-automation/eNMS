@@ -17,14 +17,3 @@ const networkAction = {
   'Automation': deviceAutomationModal,
   'Not implemented yet': () => alertify.notify('Later.'),
 };
-
-$('#pool-filter').on('change', function() {
-  call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    displayPool(objects.devices, objects.links);
-  });
-});
-
-(function() {
-  doc('https://enms.readthedocs.io/en/latest/views/logical_view.html');
-  $('#pool-filter').change();
-})();

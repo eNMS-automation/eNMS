@@ -10,7 +10,7 @@ vis: false
 */
 
 let container = document.getElementById('network');
-let selectedObject;
+let selected;
 
 /**
  * Convert device to Vis node.
@@ -63,9 +63,9 @@ function displayPool(nodes, edges) {
     if (typeof node !== 'undefined') {
       $('.menu').hide();
       $('.rc-device-menu').show();
-      selectedObject = node;
+      selected = node;
     } else if (typeof edge !== 'undefined') {
-      selectedObject = edge;
+      selected = edge;
       $('.menu').hide();
       $('.rc-link-menu').show();
     } else {
@@ -79,6 +79,6 @@ $('#network').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
-    networkAction[row](selectedObject);
+    networkAction[row](selected);
   },
 });

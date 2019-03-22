@@ -23,8 +23,8 @@ let viewMode = 'network';
  */
 function displayPools() { // eslint-disable-line no-unused-vars
   viewMode = 'site';
-  $('#map').css('visibility', 'visible');
   deleteAll();
+  $('#map').css('visibility', 'visible');
   call('/get_all/pool', function(pools) {
     for (let i = 0; i < pools.length; i++) {
       if (pools[i].longitude) {
@@ -34,7 +34,7 @@ function displayPools() { // eslint-disable-line no-unused-vars
   });
   $('.menu,#pool-filter,#network').hide();
   $('.geo-menu,.rc-pool-menu').show();
-  alertify.notify('Switch to Pool View');
+  alertify.notify('Pool View');
 }
 
 /**
@@ -42,11 +42,11 @@ function displayPools() { // eslint-disable-line no-unused-vars
  */
 function displayNetwork() { // eslint-disable-line no-unused-vars
   viewMode = 'network';
+  $('#pool-filter').change();
   $('#map').css('visibility', 'visible');
   $('.menu,#network').hide();
-  $('#pool-filter').change();
-  $('#pool-filter').show();
-  $('.geo-menu').show();
+  $('.geo-menu,#pool-filter').show();
+  alertify.notify('Network View');
 }
 
 /**
@@ -60,6 +60,7 @@ function enterPool(poolId) { // eslint-disable-line no-unused-vars
   call(`/inventory/pool_objects/${poolId}`, function(objects) {
     displayPool(objects.devices, objects.links);
   });
+  alertify.notify('Inner Site View');
 }
 
 $('#pool-filter').on('change', function() {

@@ -4,7 +4,10 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <!-- Leaflet -->
   <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.css') }}" rel="stylesheet">
+  <!-- Vis CSS -->
+  <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   <!-- Context Menu -->
   <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
   {% if view == '2DC' %}
@@ -62,8 +65,8 @@
   <form id="view-form" method="post">
     <input id="view-type" name="view" type="hidden">
     <ul id="contextMenu" class="dropdown-menu" role="menu">
-      <li class="menu global-menu"><a tabindex="-1" href="#">Export to Google Earth</a></li>
-      <li class="menu dropdown-submenu global-menu">
+      <li class="menu geo-menu"><a tabindex="-1" href="#">Export to Google Earth</a></li>
+      <li class="menu dropdown-submenu geo-menu">
         <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
         <ul class="dropdown-menu">
           <li><a tabindex="-1" href="#">Open Street Map</a></li>
@@ -71,14 +74,14 @@
           <li><a tabindex="-1" href="#">NASA</a></li>
         </ul>
       </li>
-      <li class="menu network-menu"><a tabindex="-1" href="#">Display pools</a></li>
-      <li class="menu site-menu"><a tabindex="-1" href="#">Display network</a></li>
-      <li class="menu pool-menu"><a tabindex="-1" href="#">Pool properties</a></li>
-      <li class="menu pool-menu"><a tabindex="-1" href="#">Enter pool</a></li>
-      <li class="menu device-menu"><a tabindex="-1" href="#">Device properties</a></li>
-      <li class="menu device-menu"><a tabindex="-1" href="#">Connect</a></li>
-      <li class="menu device-menu"><a tabindex="-1" href="#">Automation</a></li>
-      <li class="menu link-menu"><a tabindex="-1" href="#">Link properties</a></li>
+      <li class="menu network-menu insite-menu"><a tabindex="-1" href="#">Display pools</a></li>
+      <li class="menu site-menu insite-menu"><a tabindex="-1" href="#">Display network</a></li>
+      <li class="menu rc-pool-menu"><a tabindex="-1" href="#">Pool properties</a></li>
+      <li class="menu rc-pool-menu"><a tabindex="-1" href="#">Enter pool</a></li>
+      <li class="menu rc-link-menu"><a tabindex="-1" href="#">Device properties</a></li>
+      <li class="menu rc-link-menu"><a tabindex="-1" href="#">Connect</a></li>
+      <li class="menu rc-link-menu"><a tabindex="-1" href="#">Automation</a></li>
+      <li class="menu rc-link-menu"><a tabindex="-1" href="#">Link properties</a></li>
     </ul>
     <div class="right_col" role="main">
       <div class="row">
@@ -121,6 +124,8 @@
   </script>
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
+  <!-- Vis JS -->
+  <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='view.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='preGeographicalView.js') }}"></script>

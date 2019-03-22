@@ -128,7 +128,7 @@ function createLink(link) { // eslint-disable-line no-unused-vars
   });
   polyline.on('contextmenu', function(e) {
     $('.menu').hide();
-    $('.link-menu').show();
+    $('.rc-link-menu').show();
     selectedObject = this.link_id; // eslint-disable-line no-undef
   });
   polyline.bindTooltip(link['name'], {

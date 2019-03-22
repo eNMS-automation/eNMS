@@ -46,15 +46,15 @@ function displayPool(nodes, edges) {
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
     if (typeof node !== 'undefined') {
-      $('.global-menu,.link-menu').hide();
-      $('.device-menu').show();
+      $('.global-menu,.rc-link-menu').hide();
+      $('.rc-link-menu').show();
       selected = node;
     } else if (typeof edge !== 'undefined') {
       selected = edge;
-      $('.global-menu,.device-menu').hide();
-      $('.link-menu').show();
+      $('.global-menu,.rc-link-menu').hide();
+      $('.rc-link-menu').show();
     } else {
-      $('.link-menu,.device-menu').hide();
+      $('.rc-link-menu,.rc-link-menu').hide();
       $('.global-menu').show();
     }
   });

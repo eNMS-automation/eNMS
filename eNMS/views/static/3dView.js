@@ -38,8 +38,8 @@ function createDevice(device) { // eslint-disable-line no-unused-vars
     showTypeModal('device', device.id);
   });
   marker.on('contextmenu', function(e) {
-    $('.global-menu,.link-menu').hide();
-    $('.device-menu').show();
+    $('.geo-menu,.rc-link-menu').hide();
+    $('.rc-link-menu').show();
     selectedObject = device.id; // eslint-disable-line no-undef
   });
   marker.on('mouseover', function(e) {

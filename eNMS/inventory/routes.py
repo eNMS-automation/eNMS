@@ -70,6 +70,10 @@ def pool_management() -> dict:
         add_pool_form=AddPoolForm(request.form),
         pool_object_form=PoolObjectsForm(request.form),
         fields=pool_table_properties,
+        add_device_form=AddDevice(request.form),
+        add_link_form=AddLink(request.form),
+        device_automation_form=DeviceAutomationForm(request.form),
+        gotty_connection_form=GottyConnectionForm(request.form),
     )
 
 

@@ -51,6 +51,22 @@ function showPoolView(id) { // eslint-disable-line no-unused-vars
   });
 }
 
+const action = {
+  'Device properties': (d) => showTypeModal('device', d),
+  'Link properties': (l) => showTypeModal('link', l),
+  'Pool properties': (p) => showTypeModal('pool', p),
+  'Connect': connectionParametersModal,
+  'Automation': deviceAutomationModal,
+};
+
+$('#network').contextMenu({
+  menuSelector: '#contextMenu',
+  menuSelected: function(invokedOn, selectedMenu) {
+    const row = selectedMenu.text();
+    action[row](selected);
+  },
+});
+
 /**
  * Update pool objects.
  */

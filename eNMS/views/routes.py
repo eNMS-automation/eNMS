@@ -15,16 +15,12 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm, ViewForm
 
 
-@get(bp, "/<view_type>", "View")
+@get(bp, "/geographical_<view_type>", "View")
 def view(view_type: str) -> dict:
     parameters = get_one("Parameters").serialized
-    if view_type == "logical":
-        view = None
-    else:
-        view_type, view = view_type.split("_")
     return dict(
         add_pool_form=AddPoolForm(request.form),
-        template=f"{view_type}_view.html",
+        template=f"geographical_view.html",
         parameters=parameters,
         google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
@@ -33,7 +29,7 @@ def view(view_type: str) -> dict:
         subtype_sizes=subtype_sizes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
-        view=view,
+        view=view_type,
         view_form=ViewForm(request.form),
     )
 

@@ -20,7 +20,7 @@
           <h4 class="modal-title">View Pool</h4>
         </div>
         <div class="modal-body">
-          <div id="network" style="height:90vw; height:90vh;"></div>
+          <div id="network" style="height:400px; width:100%;"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -124,6 +124,6 @@
   </script>
   <!-- Vis JS -->
   <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='enms/logicalView.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='poolManagement.js') }}"></script>
 {% endblock javascripts %}

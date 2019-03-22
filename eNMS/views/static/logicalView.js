@@ -21,7 +21,7 @@ function deviceToNode(device) {
   return {
     id: device.id,
     label: device.name,
-    image: `static/images/default/${device.subtype}.gif`,
+    image: `../views/static/images/default/${device.subtype}.gif`,
     shape: 'image',
   };
 }
@@ -37,6 +37,10 @@ function linkToEdge(link) {
     from: link.source.id,
     to: link.destination.id,
   };
+}
+
+function eraseNetwork() {
+  const network = new vis.Network(container);
 }
 
 /**

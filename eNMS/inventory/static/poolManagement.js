@@ -28,18 +28,25 @@ function showPoolObjects(id) { // eslint-disable-line no-unused-vars
     $('#devices,#links').selectpicker('deselectAll');
     $('#devices').selectpicker('val', pool.devices.map((n) => n.id));
     $('#links').selectpicker('val', pool.links.map((l) => l.id));
-    poolId = id;
+    
     $('#edit-pool-objects').modal('show');
   });
 }
+
+$('#view-pool').on('shown.bs.modal', function() {
+  call(`/inventory/pool_objects/${poolId}`, function(pool) {
+    displayPool(pool.devices, pool.links);
+  });
+});
 
 /**
  * Visualize pool.
  * @param {id} id - Id of the pool.
  */
 function showPoolView(id) { // eslint-disable-line no-unused-vars
+  poolId = id;
   call(`/inventory/pool_objects/${id}`, function(pool) {
-    displayPool(pool.devices, pool.links);
+    eraseNetwork();
     $('#view-pool').modal('show');
   });
 }

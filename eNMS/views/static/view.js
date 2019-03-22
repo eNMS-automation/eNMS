@@ -3,6 +3,8 @@ global
 vis: false
 */
 
+let container = document.getElementById('network');
+
 /**
  * Convert device to Vis node.
  * @param {device} device - Device.
@@ -30,8 +32,6 @@ function linkToEdge(link) {
   };
 }
 
-let container = document.getElementById('network');
-
 /**
  * Display a pool.
  * @param {nodes} nodes - Array of nodes to display.
@@ -46,15 +46,15 @@ function displayPool(nodes, edges) {
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
     if (typeof node !== 'undefined') {
-      $('.global-menu,.rc-link-menu').hide();
+      $('.menu').hide();
       $('.rc-link-menu').show();
       selected = node;
     } else if (typeof edge !== 'undefined') {
       selected = edge;
-      $('.global-menu,.rc-link-menu').hide();
+      $('.menu').hide();
       $('.rc-link-menu').show();
     } else {
-      $('.rc-link-menu,.rc-link-menu').hide();
+      $('.menu').hide();
       $('.global-menu').show();
     }
   });
@@ -64,6 +64,6 @@ $('#network').contextMenu({
   menuSelector: '#contextMenu',
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
-    action[row](selectedObject);
+    networkAction[row](selectedObject);
   },
 });

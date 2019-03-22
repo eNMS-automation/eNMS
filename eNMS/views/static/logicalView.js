@@ -8,23 +8,15 @@ doc: false
 showTypeModal: false
 */
 
-let selected;
+let selectedObject;
 
-const action = {
+const networkAction = {
   'Device properties': (d) => showTypeModal('device', d),
   'Link properties': (l) => showTypeModal('link', l),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
   'Not implemented yet': () => alertify.notify('Later.'),
 };
-
-$('#network').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selected);
-  },
-});
 
 $('#pool-filter').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {

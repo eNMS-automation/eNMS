@@ -16,10 +16,13 @@ showTypeModal: false
 switchLayer: false
 */
 
+let viewMode = 'network';
+
 /**
  * Display pools.
  */
 function displayPools() { // eslint-disable-line no-unused-vars
+  viewMode = 'site';
   deleteAll();
   call('/get_all/pool', function(pools) {
     for (let i = 0; i < pools.length; i++) {
@@ -37,6 +40,7 @@ function displayPools() { // eslint-disable-line no-unused-vars
  * Display network.
  */
 function displayNetwork() { // eslint-disable-line no-unused-vars
+  viewMode = 'network';
   $('#pool-filter').change();
   $('#pool-filter').show();
 }
@@ -45,6 +49,7 @@ function displayNetwork() { // eslint-disable-line no-unused-vars
  * Enter pool.
  */
 function enterPool(poolId) { // eslint-disable-line no-unused-vars
+  viewMode = 'insite';
   $('#map').hide();
   $('#network').show();
   call(`/inventory/pool_objects/${poolId}`, function(objects) {

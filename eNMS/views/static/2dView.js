@@ -88,7 +88,7 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   });
   marker.on('contextmenu', function(e) {
     $(`.menu`).hide();
-    $(`.${nodeType}-menu`).show();
+    $(`.rc-${nodeType}-menu`).show();
     selectedObject = this.node_id; // eslint-disable-line no-undef
   });
   marker.bindTooltip(node['name'], {permanent: false});

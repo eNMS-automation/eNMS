@@ -66,6 +66,18 @@ device_subtypes: Dict[str, str] = {
     "switch": "Switch",
 }
 
+device_sizes: Dict[str, List] = {
+    "antenna": [18, 12],
+    "firewall": [18, 12],
+    "host": [18, 12],
+    "optical_switch": [18, 12],
+    "regenerator": [18, 12],
+    "router": [18, 12],
+    "server": [18, 12],
+    "switch": [18, 12],
+    "site": [30, 30],
+}
+
 link_subtypes: Dict[str, str] = {
     "bgp_peering": "BGP peering",
     "etherchannel": "Etherchannel",

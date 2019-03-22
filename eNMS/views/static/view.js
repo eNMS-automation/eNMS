@@ -1,3 +1,9 @@
+/*
+global
+vis: false
+*/
+
+
 /**
  * Convert device to Vis node.
  * @param {device} device - Device.

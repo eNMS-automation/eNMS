@@ -53,7 +53,6 @@ $('#select-filters').on('change', function() {
 });
 
 
-
 const action = {
   'Export to Google Earth': partial(showModal, 'google-earth'),
   'Open Street Map': partial(switchLayer, 'osm'),
@@ -66,6 +65,7 @@ const action = {
   'Automation': deviceAutomationModal,
   'Display pools': displayPools,
   'Display network': displayNetwork,
+  'Enter pool': enterPool,
 };
 
 map.on('click', function(e) {
@@ -96,5 +96,6 @@ $('body').contextMenu({
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
+  $('#logical_view').hide();
   $('#select-filters').change();
 })();

@@ -6,7 +6,6 @@ connectionParametersModal: false
 deviceAutomationModal: false
 doc: false
 showTypeModal: false
-vis: false
 */
 
 let selected;

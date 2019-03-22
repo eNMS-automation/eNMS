@@ -7,7 +7,7 @@
   <!-- Vis CSS -->
   <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   <style>
-    #logical_view { height:600px; }
+    #logical_view { height:90vh; }
   .link {
     stroke: #ccc;
   }
@@ -78,5 +78,6 @@
     const propertyTypes = {{ property_types|tojson|safe }};
   </script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='view.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

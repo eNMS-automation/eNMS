@@ -13,6 +13,7 @@
   {% endif %}
   <style>
     #mapid { height:90vh; }
+    #logical_view { height:90vh; }
   </style>
 {% endblock stylesheets %}
 
@@ -84,6 +85,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
+              <div align='center' id="logical_view"></div>
               {% if view == '3D' %}
                 <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
                   <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box">EGRHTFEFGR</p></strong>
@@ -125,6 +127,7 @@
   <!-- Base -->
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='view.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='preGeographicalView.js') }}"></script>
   {% if view == '3D' %}
     <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>

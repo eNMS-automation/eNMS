@@ -200,7 +200,6 @@ class Job(Base):
                     results["results"] = attempt
                     break
                 else:
-                    results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
         self.logs[now] = results
         info(f"{self.name}: finished.")

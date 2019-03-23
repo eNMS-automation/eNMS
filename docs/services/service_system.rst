@@ -136,10 +136,10 @@ Here is the associated auto-generated form:
    :align: center
 
 The rules for the auto-generation of service forms are the following:
-  - A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property whose name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
-  - A Boolean property is displayed as a checkbox.
-  - A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
-  - A MutableDict property is displayed as a text area. You can write a dictionary in that text area: it will be converted to an actual python dictionary.
+- A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property whose name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
+- A Boolean property is displayed as a checkbox.
+- A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
+- A MutableDict property is displayed as a text area. You can write a dictionary in that text area: it will be converted to an actual python dictionary.
 
 Inside the ``eNMS/eNMS/automation/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
 
@@ -162,10 +162,10 @@ Once a service has been customized with parameters, devices selected, etc, we re
 
 From the :guilabel:`automation/service_management` page, you can:
 
-  - Start a Service Instance (``Run`` button).
-  - View and compare the logs of the Service Instance.
-  - Edit the Service Instance properties.
-  - Delete the Service Instance.
+- Start a Service Instance (``Run`` button).
+- View and compare the logs of the Service Instance.
+- Edit the Service Instance properties.
+- Delete the Service Instance.
 
 You can compare two versions of the logs from the ``Logs`` window (a line-by-line diff is generated).
 Here's a comparison of a ``Napalm get_facts`` service:
@@ -216,12 +216,12 @@ Result Validation
 
 For some services, the success or failure of the service is decided by a "Validation" process.
 The validation consists in:
-  - Either looking for a string in the output of the service
-  - Or matching the output of the service against a regular expression
+- Either looking for a string in the output of the service
+- Or matching the output of the service against a regular expression
 
 A few options are available to the user:
-  - ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
-  - ``Delete spaces``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
+- ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
+- ``Delete spaces``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
 
 
 Run multiple services
@@ -248,9 +248,9 @@ Service notification
 When a service (or a workflow) finishes, you can choose to receive a notification that contains the logs of the service (whether it was successful or not for each device, etc).
 
 There are three types of notification:
-  - Mail notification: eNMS sends a mail to an address of your choice.
-  - Slack notification: eNMS sends a message to a channel of your choice.
-  - Mattermost notification: same as Slack, with Mattermost.
+- Mail notification: eNMS sends a mail to an address of your choice.
+- Slack notification: eNMS sends a message to a channel of your choice.
+- Mattermost notification: same as Slack, with Mattermost.
 
 To set up the mail system, you must export the following environment variables before starting eNMS:
 

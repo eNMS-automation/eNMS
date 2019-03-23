@@ -3,7 +3,7 @@ Workflow Examples
 =================
 
 Configure and decommission a VRF with Netmiko
---------------------------------------------
+---------------------------------------------
 
 This workflow is made of 4 services:
   - netmiko_create_vrf_TEST: uses Netmiko to configure ``ip vrf TEST`` on an IOS router.

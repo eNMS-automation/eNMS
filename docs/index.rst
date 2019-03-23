@@ -6,6 +6,14 @@ General
 
    base/index
 
+Administration
+==============
+
+.. toctree::
+   :maxdepth: 2
+
+   administration/index
+
 Inventory 
 =========
 

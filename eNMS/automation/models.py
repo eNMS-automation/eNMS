@@ -83,9 +83,7 @@ class Job(Base):
 
     @property
     def progress(self) -> str:
-        if not self.number_of_targets:
-            return "N/A"
-        elif self.is_running:
+        if self.is_running:
             if self.multiprocessing:
                 return "Unknown"
             else:
@@ -93,7 +91,7 @@ class Job(Base):
                     f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"
                 )
         else:
-            return f"0/{self.number_of_targets}"
+            return "N/A"
 
     def compute_targets(self) -> Set[Device]:
         targets = set(self.devices)

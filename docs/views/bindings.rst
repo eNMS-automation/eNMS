@@ -4,8 +4,9 @@ Keyboard and Mouse Bindings
 
 For both the geographical and the logical views, bindings are the following :
 
-* :guilabel:`Left-click (background)`: unselect all.
+* :guilabel:`Left-click (background)`: deselect all.
 * :guilabel:`Left-click on a device`: open the property panel.
+
 The property panel displays all properties of the object, and any property can be modified.
 
 .. image:: /_static/views/bindings/property_panel_properties.png

@@ -6,6 +6,7 @@ from flask_login import current_user
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.attributes import InstrumentedAttribute
+from typing import List
 from werkzeug.wrappers import Response
 
 from eNMS import db
@@ -134,7 +135,7 @@ def get_instance(cls: str, id: str) -> dict:
 
 
 @post(bp, "/get_all/<cls>", "View")
-def get_all_instances(cls: str) -> dict:
+def get_all_instances(cls: str) -> List[dict]:
     info(f"{current_user.name}: GET ALL {cls}")
     return [instance.get_properties() for instance in fetch_all_visible(cls)]
 

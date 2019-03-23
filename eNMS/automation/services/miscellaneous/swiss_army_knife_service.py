@@ -37,7 +37,7 @@ class SwissArmyKnifeService(Service):
 
     def mail_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
-        name = f"{strip_all(payload['job']['name'])}"
+        name = f"{payload['job']['name']}"
         recipients = payload["job"]["mail_recipient"].split(
             ","
         ) or parameters.mail_recipients.split(",")
@@ -48,7 +48,7 @@ class SwissArmyKnifeService(Service):
             body=payload["content"],
         )
         runtime = payload["runtime"].replace(".", "").replace(":", "")
-        filename = f"logs-{name}-{runtime}.txt"
+        filename = f"logs-{strip_all(name)}-{runtime}.txt"
         with open(filename, "w") as file:
             file.write(str_dict(payload["logs"][payload["runtime"]]))
         with open(filename, "r") as file:

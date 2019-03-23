@@ -3,13 +3,15 @@ global
 alertify: false
 call: false
 connectionParametersModal: false
-createDevice: false
+createNode: false
 createLink: false
 deleteAll: false
 deviceAutomationModal: false
+displayPool: false
 doc: false
 map: false
 partial: false
+selected: false
 selectedObject: true
 showModal: false
 showTypeModal: false
@@ -28,7 +30,7 @@ function displayPools() { // eslint-disable-line no-unused-vars
   call('/get_all/pool', function(pools) {
     for (let i = 0; i < pools.length; i++) {
       if (pools[i].longitude) {
-        createNode(pools[i], nodeType='pool')
+        createNode(pools[i], 'pool');
       }
     }
   });
@@ -51,6 +53,7 @@ function displayNetwork() { // eslint-disable-line no-unused-vars
 
 /**
  * Enter pool.
+ * @param {poolId} poolId - Pool ID.
  */
 function enterPool(poolId) { // eslint-disable-line no-unused-vars
   viewMode = 'insite';
@@ -66,7 +69,7 @@ function enterPool(poolId) { // eslint-disable-line no-unused-vars
 $('#pool-filter').on('change', function() {
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     deleteAll();
-    objects.devices.map((d) => createNode(d, nodeType='device'));
+    objects.devices.map((d) => createNode(d, 'device'));
     objects.links.map(createLink);
   });
 });

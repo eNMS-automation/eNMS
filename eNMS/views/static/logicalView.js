@@ -1,16 +1,11 @@
 /*
 global
-alertify: false
-call: false
-connectionParametersModal: false
-deviceAutomationModal: false
-doc: false
-showTypeModal: false
 vis: false
 */
 
 let container = document.getElementById('network');
-let selected;
+let selected; // eslint-disable-line no-unused-vars
+let network; // eslint-disable-line no-unused-vars
 
 /**
  * Convert device to Vis node.
@@ -39,8 +34,11 @@ function linkToEdge(link) {
   };
 }
 
-function eraseNetwork() {
-  const network = new vis.Network(container);
+/**
+ * Erase the network.
+ */
+function eraseNetwork() { // eslint-disable-line no-unused-vars
+  network = new vis.Network(container);
 }
 
 /**
@@ -48,7 +46,7 @@ function eraseNetwork() {
  * @param {nodes} nodes - Array of nodes to display.
   * @param {edges} edges - Array of edges to display.
  */
-function displayPool(nodes, edges) {
+function displayPool(nodes, edges) { // eslint-disable-line no-unused-vars
   nodes = new vis.DataSet(nodes.map(deviceToNode));
   edges = new vis.DataSet(edges.map(linkToEdge));
   const network = new vis.Network(container, {nodes: nodes, edges: edges}, {});

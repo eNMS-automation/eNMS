@@ -174,6 +174,7 @@ class Job(Base):
             try_commit()
             info(f"Running job {self.name}, attempt {i}")
             attempt = self.run(payload, job_from_workflow_targets, targets)
+            results[f"Attempts {i + 1}"] = attempt
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -187,10 +188,8 @@ class Job(Base):
                     results["results"]["success"] = True
                     break
                 elif i != self.number_of_retries:
-                    results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
                 else:
-                    results[f"Attempts {i + 1}"] = attempt
                     results["results"]["success"] = False
                     for device in targets:
                         results["results"]["devices"][device.name] = attempt["devices"][

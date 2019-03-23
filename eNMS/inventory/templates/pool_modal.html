@@ -13,11 +13,22 @@
             {{ add_pool_form.id(id='pool-id') }}
             {{ add_pool_form.boolean_fields() }}
             <div class="form-group">
-              {{ add_pool_form['name'](id="pool-name", class="form-control required", placeholder="Name") }}<br>
-              {{ add_pool_form['description'](id="pool-description", class="form-control", placeholder="Description") }}<br>
-              {{ add_pool_form['longitude'](id="pool-longitude", class="form-control required", placeholder="Longitude") }}<br>
-              {{ add_pool_form['latitude'](id="pool-latitude", class="form-control required", placeholder="Latitude") }}<br>
-              {{ add_pool_form['operator'](id="pool-description", class="form-control") }}<br>
+              <label>Name</label>
+              <div class="form-group">
+                {{ add_pool_form.name(id="pool-name", class="form-control required", placeholder="Name") }}
+              </div>
+              <label>Description</label>
+              <div class="form-group">
+                {{ add_pool_form.description(id="pool-description", class="form-control", placeholder="Description") }}
+              </div>
+              <label>Longitude</label>
+              <div class="form-group">
+                {{ add_pool_form.longitude(id="pool-longitude", class="form-control required", placeholder="Longitude") }}
+              </div>
+              <label>Latitude</label>
+              <div class="form-group">
+                {{ add_pool_form.latitude(id="pool-latitude", class="form-control required", placeholder="Latitude") }}
+              </div>
             <fieldset>
               <div class="item">
                 {{ add_pool_form['never_update'](id="pool-never_update") }}

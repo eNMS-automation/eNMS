@@ -13,7 +13,7 @@ from typing import Optional
 from eNMS.extensions import mail_client
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
-from eNMS.base.functions import factory, fetch_all, get_one, str_dict
+from eNMS.base.functions import factory, fetch_all, get_one, strip_all, str_dict
 from eNMS.inventory.models import Device
 
 
@@ -37,7 +37,7 @@ class SwissArmyKnifeService(Service):
 
     def mail_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
-        name = f"{payload['job']['name']}"
+        name = f"{strip_all(payload['job']['name'])}"
         recipients = payload["job"]["mail_recipient"].split(
             ","
         ) or parameters.mail_recipients.split(",")

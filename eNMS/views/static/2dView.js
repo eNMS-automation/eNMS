@@ -44,7 +44,7 @@ for (const [key, value] of Object.entries(subtype_sizes)) {
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
     });
-};
+}
 
 L.PolylineClusterable = L.Polyline.extend({
   _originalInitialize: L.Polyline.prototype.initialize,
@@ -64,6 +64,7 @@ const routerIcon = window['icon_router'];
 /**
  * Create a node (device or pool).
  * @param {node} node - Device or Pool.
+ * @param {nodeType} nodeType - Device or Pool.
  */
 function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   const marker = L.marker([node.latitude, node.longitude]);
@@ -71,7 +72,7 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   if (nodeType === 'device') {
     marker.icon = window[`icon_${node.subtype}`] || routerIcon;
   } else {
-    marker.icon = window['icon_site']
+    marker.icon = window['icon_site'];
   }
   marker.setIcon(marker.icon);
   markersArray.push(marker);

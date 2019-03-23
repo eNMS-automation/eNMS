@@ -26,6 +26,7 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
 /**
  * Create a device or a pool.
  * @param {node} node - Device or pool.
+ * @param {nodeType} nodeType - Device or Pool.
  */
 function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   const marker = WE.marker(

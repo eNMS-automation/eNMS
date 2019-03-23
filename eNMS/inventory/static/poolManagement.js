@@ -2,10 +2,16 @@
 global
 alertify: false
 call: false
+connectionParametersModal: false
 convertSelect: false
+deviceAutomationModal: false
+displayPool: false
 doc: false
+eraseNetwork: false
 fCall: false
 initTable: false
+selected: false
+showTypeModal: false
 */
 
 let poolId = null;

@@ -36,7 +36,7 @@ function displayPools() { // eslint-disable-line no-unused-vars
   });
   $('.menu,#pool-filter,#network').hide();
   $('.geo-menu,.rc-pool-menu').show();
-  alertify.notify('Pool View');
+  alertify.notify('Site view');
 }
 
 /**
@@ -48,7 +48,7 @@ function displayNetwork() { // eslint-disable-line no-unused-vars
   $('#map').css('visibility', 'visible');
   $('.menu,#network').hide();
   $('.geo-menu,#pool-filter').show();
-  alertify.notify('Network View');
+  alertify.notify('Network view.');
 }
 
 /**
@@ -61,9 +61,9 @@ function enterPool(poolId) { // eslint-disable-line no-unused-vars
   $('.menu').hide();
   $('#network,.insite-menu,rc-device-menu,rc-link-menu').show();
   call(`/inventory/pool_objects/${poolId}`, function(objects) {
+    alertify.notify('Loading the view...', 3);
     displayPool(objects.devices, objects.links);
   });
-  alertify.notify('Inner Site View');
 }
 
 $('#pool-filter').on('change', function() {

@@ -77,7 +77,11 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   marker.setIcon(marker.icon);
   markersArray.push(marker);
   marker.on('click', function(e) {
-    showTypeModal(nodeType, this.node_id);
+    if (nodeType == 'pool') {
+      enterPool(this.node_id);
+    } else {
+      showTypeModal(nodeType, this.node_id);
+    }
   });
   marker.on('contextmenu', function(e) {
     $('.menu').hide();

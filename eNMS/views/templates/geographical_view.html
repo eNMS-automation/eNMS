@@ -88,6 +88,13 @@
           <div class="x_panel">
             <div class="x_content">
               <div align='center' id="network"></div>
+              <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10vw;">
+                <div class="btn-group-horizontal btn-block" >
+                  <button type="button" class="btn btn-default" onclick="displayNetwork()">Network View</button>
+                  <button type="button" class="btn btn-default" onclick="displayPools()">Site View</button>
+            </div>
+
+        </div>
               {% if view == '3D' %}
                 <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
                   <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>

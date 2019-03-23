@@ -38,6 +38,13 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   marker.on('click', function(e) {
     showTypeModal(nodeType, node.id);
   });
+  marker.on('click', function(e) {
+    if (nodeType == 'pool') {
+      enterPool(this.node_id);
+    } else {
+      showTypeModal(nodeType, this.node_id);
+    }
+  });
   marker.on('contextmenu', function(e) {
     $('.menu').hide();
     $(`.rc-${nodeType}-menu`).show();

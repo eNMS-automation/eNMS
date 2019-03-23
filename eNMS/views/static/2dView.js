@@ -1,5 +1,6 @@
 /*
 global
+enterPool: false
 L: false
 layers: false
 link_colors: false

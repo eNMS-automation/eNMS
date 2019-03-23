@@ -15,11 +15,12 @@ urls: Dict[str, tuple] = {
     ),
     "/inventory": (
         "/device_management",
+        "/configuration_management",
         "/link_management",
         "/pool_management",
         "/import_export",
     ),
-    "/views": ("/geographical_2D", "/geographical_2DC", "geographical_3D"),
+    "/views": ("/geographical_2D", "/geographical_2DC", "/geographical_3D"),
     "/automation": ("/service_management", "/workflow_management", "/workflow_builder"),
     "/scheduling": ("/task_management", "/calendar"),
     "/logs": ("/log_management", "/log_automation"),

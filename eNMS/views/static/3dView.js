@@ -1,5 +1,6 @@
 /*
 global
+enterPool: false
 layers: false
 markersArray: true
 polylinesArray: true

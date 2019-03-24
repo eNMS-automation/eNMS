@@ -52,10 +52,12 @@ let layer3D = WE.tileLayer(layers['gm']);
 layer3D.addTo(earth);
 markers = L.markerClusterGroup();
 
-if (dimension == '2D') {
-  $('#earth').css('visibility', 'hidden');
-} else {
+console.log(view, dimension);
+
+if (view == '3D') {
   $('#map').css('visibility', 'hidden');
+} else {
+  $('#earth').css('visibility', 'hidden');
 }
 
 /**
@@ -279,9 +281,6 @@ const action = {
   'Pool properties': (p) => showTypeModal('pool', p),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
-  'Display pools': displayPools,
-  'Display network': displayNetwork,
-  'Enter pool': enterPool,
 };
 
 map.on('click', function(e) {

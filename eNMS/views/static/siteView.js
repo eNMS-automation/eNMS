@@ -43,3 +43,18 @@ function enterPool(poolId) { // eslint-disable-line no-unused-vars
     displayPool(objects.devices, objects.links);
   });
 }
+
+const action = {
+  'Export to Google Earth': partial(showModal, 'google-earth'),
+  'Open Street Map': partial(switchLayer, 'osm'),
+  'Google Maps': partial(switchLayer, 'gm'),
+  'NASA': partial(switchLayer, 'nasa'),
+  'Device properties': (d) => showTypeModal('device', d),
+  'Link properties': (l) => showTypeModal('link', l),
+  'Pool properties': (p) => showTypeModal('pool', p),
+  'Connect': connectionParametersModal,
+  'Automation': deviceAutomationModal,
+  'Display pools': displayPools,
+  'Display network': displayNetwork,
+  'Enter pool': enterPool,
+};

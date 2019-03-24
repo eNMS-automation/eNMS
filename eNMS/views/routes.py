@@ -15,7 +15,7 @@ from eNMS.views import bp, styles
 from eNMS.views.forms import GoogleEarthForm, ViewForm
 
 
-@get(bp, "/geographical_<view_type>", "View")
+@get(bp, "/<view_type>_view", "View")
 def view(view_type: str) -> dict:
     parameters = get_one("Parameters").serialized
     return dict(
@@ -29,7 +29,7 @@ def view(view_type: str) -> dict:
         subtype_sizes=subtype_sizes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
-        view=view_type,
+        view="2D",
         view_form=ViewForm(request.form),
     )
 

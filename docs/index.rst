@@ -14,21 +14,13 @@ Administration
 
    administration/index
 
-Inventory 
+Inventory
 =========
 
 .. toctree::
    :maxdepth: 2
 
    inventory/index
-
-Security
-========
-
-.. toctree::
-   :maxdepth: 2
-
-   security/index
 
 Views
 =====

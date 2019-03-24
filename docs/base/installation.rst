@@ -288,20 +288,20 @@ Migration, Backup, and Restore
 
 The eNMS migration system handles exporting the complete database content into JSON files based on eNMS object types.
 These migration files are used for migrating from one version of eNMS to the next version. They are also used for Backup and Restore of eNMS.
-The migration system is accessed from :guilabel:`Admin/Database` or from the ReST API.
+The migration system is accessed from :guilabel:`Admin/Advanced` or from the ReST API.
 Device inventory data is included in the exported migration files, and new devices can be added by importing the Topology Spreadsheet, so these
 mechanisms can work together to manage your data:
 
 When creating a new instance of eNMS (backup instance, new version of eNMS):
   - Install eNMS; note that eNMS has an empty database when installed the first time
-  - Run the :guilabel:`Admin/Database/Migration/Import` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
+  - Run the :guilabel:`Admin/Advanced/Migration/Import` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
     the location of the file to import, and select all object types to be imported: "User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"
   - Next, run the :guilabel:`Inventory/Import & Export/Import and Export Topology` and specify the Excel Spreadsheet to overlay
     new Device and topology data. Make sure not to select 'replace on import' to prevent overwriting the device data from the migration import.
     Select 'update pools on import' to dynamically have pool selection criteria re-applied to the entire inventory contents
   - Multiple topology spreadsheets can be added as overlays if desired. Selection of 'update pools on import' can be deferred to run only after the last import.
 
-When backing up eNMS, it is only necessary to perform :guilabel:`Admin/Database/Migration/Export` either from the UI or from the ReST API.
+When backing up eNMS, it is only necessary to perform :guilabel:`Admin/Advanced/Migration/Export` either from the UI or from the ReST API.
   - Select a directory name for storing the migration files into, and select all object types to Export
   - the Topology Export of device and link data from :guilabel:`Inventory/Import & Export/Import and Export Topology` is not needed for Backup.
     It is intended for sharing of device and link data.

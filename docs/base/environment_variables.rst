@@ -40,7 +40,7 @@ Complete List of Environment Variables
   - export LDAP_SERVER=ldap://domain.ad.company.com
   - export LDAP_USERDN=domain.ad.company.com
   - export LDAP_BASEDN=DC=domain,DC=ad,DC=company,DC=com
-  - export LDAP_ADMIN_GROUP=eNMS.Users
+  - export LDAP_ADMIN_GROUP=eNMS.Users,network.Admins
   - export USE_TACACS=1
   - export TACACS_ADDR=122.10.10.10
   - export TACACS_PASSWORD=tacacs_password

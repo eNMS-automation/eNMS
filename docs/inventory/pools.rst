@@ -56,6 +56,22 @@ Three pools are created by default in eNMS:
   - "Devices only": matches all devices, no link.
   - "Links only": matches all links, no device.
 
+Never Update pools
+------------------
+
+Pools with manually selected objects (by selecting them using the Edit Objects button) need to have the 'Never Update' checkbox
+selected. This prevents manually selected pools from being re-calculated based on pool criteria.  If the user wants to run against
+a pool that has some criteria specified as well as some manually specified devices, it is advised to have 2 pools-one with the criteria
+specified and another with the manually selected devices.  When running a job, multiple pools and multiple devices can be specified, and
+the job will run against all specified objects.
+
+Pools based on Configuration
+----------------------------
+
+Pools can be created by searching the configurations data collected from all of the devices, rather than just the Inventory parameters
+for each device. Of course, configuration collection must be configured and allowed to run at least once before the configurations can
+be searched for the pool.
+
 Filter the view with a pool
 ---------------------------
 
@@ -75,11 +91,9 @@ You can select multiple devices, as well as multiple pools as targets.
    :alt: Use a pool as a target
    :align: center
 
-Use a pool to restrict all of eNMS to a subset of objects
----------------------------------------------------------
+Use a pool to restrict an eNMS user to a subset of objects
+----------------------------------------------------------
 
-From the :guilabel:`admin/administration` panel, you can select a pool used as a database filtering mechanism.
-All mechanisms and all pages in eNMS will be restricted to the objects of that pool.
-
-In a production environment, for scalability purposes, multiple instances of eNMS can be deployed (per region, per type of device) to limit the amount of objects that a single instance must handle.
-It is recommended to not have more than 5000 devices per instance of eNMS.
+From the :guilabel:`Admin/User Management` panel, you can select a pool used as a database filtering mechanism for a particular user.
+All mechanisms and all pages in eNMS will be restricted to the objects of that pool for that particular user. The exception is Service and Workflows
+that have been already configured to run against particular set of devices and links. If those devices and links are outside of the pool that the user is restricted to, the user will still be able to see them.

@@ -26,6 +26,8 @@ Inventory can be created from the :guilabel:`inventory/device_management` and :g
 
 .. note:: Note: the workbook/tab names and column names in the Excel file should exactly match the examples provided with eNMS.
 
+.. note:: eNMS currently has no way to check the spreadsheet import for valid data, nor duplicates. It is important to pass good data to eNMS.
+
 Manual creation
 ***************
 

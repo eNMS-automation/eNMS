@@ -102,39 +102,56 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
  * @param {link} link - Link.
  */
 function createLink(link) { // eslint-disable-line no-unused-vars
-  let pointA = new L.LatLng(
-    link.source.latitude,
-    link.source.longitude
-  );
-  let pointB = new L.LatLng(
-    link.destination.latitude,
-    link.destination.longitude
-  );
-
-  const pointList = [pointA, pointB];
-  const polyline = new L.PolylineClusterable(pointList, {
-    color: link_colors[link.subtype],
-    weight: 3,
-    opacity: 1,
-    smoothFactor: 1,
-  });
-  polylinesArray.push(polyline);
-  polyline.link_id = link.id;
-  polyline.on('click', function(e) {
-    showTypeModal('link', this.link_id);
-  });
-  polyline.on('contextmenu', function(e) {
-    $('.menu').hide();
-    $('.rc-link-menu').show();
-    selectedObject = this.link_id; // eslint-disable-line no-undef
-  });
-  polyline.bindTooltip(link['name'], {
-    permanent: false,
-  });
-  if (view == '2D') {
-    polyline.addTo(map);
+  const sourceLatitude = link.source.latitude;
+  const sourceLongitude = link.source.longitude;
+  const destinationLatitude = link.destination.latitude;
+  const destinationLongitude = link.destination.longitude;
+  if (view == '2D' || view == '2DC') {
+    let pointA = new L.LatLng(sourceLatitude, sourceLongitude);
+    let pointB = new L.LatLng(destinationLatitude, destinationLongitude);
+    const pointList = [pointA, pointB];
+    const polyline = new L.PolylineClusterable(pointList, {
+      color: link_colors[link.subtype],
+      weight: 3,
+      opacity: 1,
+      smoothFactor: 1,
+    });
+    polylinesArray.push(polyline);
+    polyline.link_id = link.id;
+    polyline.on('click', function(e) {
+      showTypeModal('link', this.link_id);
+    });
+    polyline.on('contextmenu', function(e) {
+      $('.menu').hide();
+      $('.rc-link-menu').show();
+      selectedObject = this.link_id; // eslint-disable-line no-undef
+    });
+    polyline.bindTooltip(link['name'], {
+      permanent: false,
+    });
+    if (view == '2D') {
+      polyline.addTo(map);
+    } else {
+      markers.addLayer(polyline);
+    }
   } else {
-    markers.addLayer(polyline);
+    const color = link.color;
+    const polygonSD = WE.polygon(
+    [
+      [sourceLatitude, sourceLongitude],
+      [destinationLatitude, destinationLongitude],
+      [sourceLatitude, sourceLongitude],
+    ], {color: color, opacity: 20}
+    ).addTo(map);
+    const polygonDS = WE.polygon(
+    [
+      [destinationLatitude, destinationLongitude],
+      [sourceLatitude, sourceLongitude],
+      [destinationLatitude, destinationLongitude],
+    ], {color: color, opacity: 20}
+    ).addTo(map);
+    polygonSD.link_id = polygonDS.link_id = link.id;
+    polylinesArray.push(polygonSD, polygonDS);
   }
 }
 

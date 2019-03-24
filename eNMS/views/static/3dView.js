@@ -60,31 +60,3 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   });
   markersArray.push(marker);
 }
-
-/**
- * Create a link.
- * @param {link} link - Link.
- */
-function createLink(link) { // eslint-disable-line no-unused-vars
-  const sourceLatitude = link.source.latitude;
-  const sourceLongitude = link.source.longitude;
-  const destinationLatitude = link.destination.latitude;
-  const destinationLongitude = link.destination.longitude;
-  const color = link.color;
-  const polygonSD = WE.polygon(
-  [
-    [sourceLatitude, sourceLongitude],
-    [destinationLatitude, destinationLongitude],
-    [sourceLatitude, sourceLongitude],
-  ], {color: color, opacity: 20}
-  ).addTo(map);
-  const polygonDS = WE.polygon(
-  [
-    [destinationLatitude, destinationLongitude],
-    [sourceLatitude, sourceLongitude],
-    [destinationLatitude, destinationLongitude],
-  ], {color: color, opacity: 20}
-  ).addTo(map);
-  polygonSD.link_id = polygonDS.link_id = link.id;
-  polylinesArray.push(polygonSD, polygonDS);
-}

@@ -35,8 +35,8 @@ function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
 }
 
 let markers;
-let dimension = '2D';
 let viewMode = 'network';
+let dimension = view.substring(0, 2);
 
 const map = L.map('map').setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -50,12 +50,9 @@ map.addLayer(osmLayer);
 let layer2D = osmLayer;
 let layer3D = WE.tileLayer(layers['gm']);
 layer3D.addTo(earth);
-if (view == '2DC') {
-  markers = L.markerClusterGroup();
-  map.addLayer(markers);
-}
+markers = L.markerClusterGroup();
 
-if (view == '2D') {
+if (dimension == '2D') {
   $('#earth').css('visibility', 'hidden');
 } else {
   $('#map').css('visibility', 'hidden');
@@ -65,16 +62,24 @@ if (view == '2D') {
  * Switch dimension.
  * @param {dimension} dimension - Dimension.
  */
-function switchDimension(dimension) {
+function switchView(newView) {
   $('#map,#earth').css('visibility', 'visible');
-  $('.flip-container').toggleClass('hover');
-  setTimeout(function() {
-    if (dimension == '3D') {
-      $('#map').css('visibility', 'hidden');
-    } else {
-      $('#earth').css('visibility', 'hidden');
-    }
-  }, 1600);
+  deleteAll();
+  view = newView;
+  newDimension = newView.substring(0, 2);
+  console.log(dimension != newDimension);
+  if (dimension != newDimension) {
+    $('.flip-container').toggleClass('hover');
+    setTimeout(function() {
+      if (newDimension == '3D') {
+        $('#map').css('visibility', 'hidden');
+      } else {
+        $('#earth').css('visibility', 'hidden');
+      }
+    }, 1600);
+  }
+  dimension = newDimension;
+  $('#pool-filter').change();
 }
 
 /**

@@ -55,7 +55,11 @@ if (view == '2DC') {
   map.addLayer(markers);
 }
 
-$('#earth').css('visibility', 'hidden');
+if (view == '2D') {
+  $('#earth').css('visibility', 'hidden');
+} else {
+  $('#map').css('visibility', 'hidden');
+}
 
 /**
  * Switch dimension.
@@ -357,6 +361,5 @@ $('#network').contextMenu({
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  switchDimension();
   $('#pool-filter').change();
 })();

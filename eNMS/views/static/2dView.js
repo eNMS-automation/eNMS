@@ -22,6 +22,8 @@ const map = L.map('map').setView(
 const osmLayer = L.tileLayer(layers['osm']);
 map.addLayer(osmLayer);
 let layer2D = osmLayer;
+let layer3D = WE.tileLayer(layers['gm']);
+layer3D.addTo(earth);
 if (view == '2DC') {
   markers = L.markerClusterGroup();
   map.addLayer(markers);
@@ -32,9 +34,15 @@ if (view == '2DC') {
  * @param {layer} layer - tile layer.
  */
 function switchLayer(layer) { // eslint-disable-line no-unused-vars
-  map.removeLayer(layer2D);
-  layer2D = L.tileLayer(layers[layer]);
-  map.addLayer(layer2D);
+  if (view == '2D' || view == '2DC') {
+    map.removeLayer(layer2D);
+    layer2D = L.tileLayer(layers[layer]);
+    map.addLayer(layer2D);
+  } else {
+    layer3D.removeFrom(earth);
+    layer3D = WE.tileLayer(layers[layer]);
+    layer3D.addTo(earth);
+  }
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 

@@ -35,6 +35,7 @@ function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
 }
 
 let markers;
+let viewMode = 'network';
 
 const map = L.map('map').setView(
   [parameters.default_latitude, parameters.default_longitude],

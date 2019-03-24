@@ -35,6 +35,7 @@ function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
 }
 
 let markers;
+let dimension = '2D';
 let viewMode = 'network';
 
 const map = L.map('map').setView(
@@ -52,6 +53,24 @@ layer3D.addTo(earth);
 if (view == '2DC') {
   markers = L.markerClusterGroup();
   map.addLayer(markers);
+}
+
+$('#earth').css('visibility', 'hidden');
+
+/**
+ * Switch dimension.
+ * @param {dimension} dimension - Dimension.
+ */
+function switchDimension(dimension) {
+  $('#map,#earth').css('visibility', 'visible');
+  $('.flip-container').toggleClass('hover');
+  setTimeout(function() {
+    if (dimension == '3D') {
+      $('#map').css('visibility', 'hidden');
+    } else {
+      $('#earth').css('visibility', 'hidden');
+    }
+  }, 1600);
 }
 
 /**
@@ -338,6 +357,6 @@ $('#network').contextMenu({
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  $('#network').hide();
+  switchDimension();
   $('#pool-filter').change();
 })();

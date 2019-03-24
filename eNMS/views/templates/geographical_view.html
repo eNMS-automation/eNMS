@@ -4,16 +4,12 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <!-- Leaflet -->
   <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.css') }}" rel="stylesheet">
-  <!-- Vis CSS -->
   <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
-  <!-- Context Menu -->
   <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
-  {% if view == '2DC' %}
-    <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.css') }}" rel="stylesheet">
-    <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
-  {% endif %}
+  <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.css') }}" rel="stylesheet">
+  <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
+  <link href="{{ url_for('views_blueprint.static', filename='view.css') }}" rel="stylesheet">
   <style>
     #map { height:90vh; }
     #network { height:90vh; }
@@ -87,7 +83,12 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
-              <div align='center' id="network"></div>
+              <div class="flip-container">
+                <div class="flipper">
+                  <div class="front" id="earth"></div>
+                  <div class="back" id="map"></div>
+                </div>
+              </div>
               <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10vw;">
                 <div class="btn-group-horizontal btn-block" >
                   <button type="button" class="btn btn-default" onclick="switchDimension('2D')">2D</button>
@@ -101,12 +102,6 @@
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
                 <div class="form-group">
                   {{ view_form.pools(id='pool-filter', class="form-control") }}
-                </div>
-              </div>
-              <div class="flip-container">
-                <div class="flipper">
-                  <div class="front" id="earth"></div>
-                  <div class="back" id="map"></div>
                 </div>
               </div>
               {{ buttons }}

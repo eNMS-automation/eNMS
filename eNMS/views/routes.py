@@ -29,7 +29,7 @@ def view(view_type: str) -> dict:
         subtype_sizes=subtype_sizes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
-        view="2D",
+        view="2DC",
         view_form=ViewForm(request.form),
     )
 

@@ -2,31 +2,28 @@
 global
 enterPool: false
 L: false
-layers: false
 link_colors: false
-markersArray: true
 parameters: false
-polylinesArray: true
 showTypeModal: false
 subtype_sizes: false
 view: false
 WE: false
 */
 
-const layers = { // eslint-disable-line no-unused-vars
+const layers = {
   'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
   'gm': 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga',
   'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg',
 };
 
-let selectedObject; // eslint-disable-line no-unused-vars
-let markersArray = []; // eslint-disable-line no-unused-vars
-let polylinesArray = []; // eslint-disable-line no-unused-vars
+let selectedObject;
+let markersArray = [];
+let polylinesArray = [];
 
 /**
  * Export project to Google Earth (creation of a .kmz file).
  */
-function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
+function exportToGoogleEarth() {
   const url = '/views/export_to_google_earth';
   fCall(url, '#google-earth-form', function(result) {
     alertify.notify(`Project exported to Google Earth.`, 'success', 5);
@@ -34,7 +31,6 @@ function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
   });
 }
 
-let markers;
 let viewMode = 'network';
 let dimension = view.substring(0, 2);
 
@@ -50,9 +46,10 @@ map.addLayer(osmLayer);
 let layer2D = osmLayer;
 let layer3D = WE.tileLayer(layers['gm']);
 layer3D.addTo(earth);
-markers = L.markerClusterGroup();
-
-console.log(view, dimension);
+let markers = L.markerClusterGroup();
+if (view == '2DC') {
+  map.addLayer(markers);
+}
 
 if (view == '3D') {
   $('#map').css('visibility', 'hidden');
@@ -88,7 +85,7 @@ function switchView(newView) {
  * Change the tile layer.
  * @param {layer} layer - tile layer.
  */
-function switchLayer(layer) { // eslint-disable-line no-unused-vars
+function switchLayer(layer) {
   if (view == '2D' || view == '2DC') {
     map.removeLayer(layer2D);
     layer2D = L.tileLayer(layers[layer]);
@@ -130,7 +127,7 @@ const routerIcon = window['icon_router'];
  * @param {node} node - Device or Pool.
  * @param {nodeType} nodeType - Device or Pool.
  */
-function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
+function createNode(node, nodeType) {
   if (view == '2D' || view == '2DC') {
     marker = L.marker([node.latitude, node.longitude]);
     if (nodeType === 'device') {
@@ -179,7 +176,7 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
  * Create a link.
  * @param {link} link - Link.
  */
-function createLink(link) { // eslint-disable-line no-unused-vars
+function createLink(link) {
   const sourceLatitude = link.source.latitude;
   const sourceLongitude = link.source.longitude;
   const destinationLatitude = link.destination.latitude;
@@ -236,7 +233,7 @@ function createLink(link) { // eslint-disable-line no-unused-vars
 /**
  * Delete all devices and links on the map.
  */
-function deleteAll() { // eslint-disable-line no-unused-vars
+function deleteAll() {
   for (let i = 0; i < markersArray.length; i++) {
     if (view == '2D') {
       markersArray[i].removeFrom(map);

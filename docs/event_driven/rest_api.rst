@@ -84,12 +84,24 @@ Retrieve or delete an instance
  # via a GET or DELETE method to the following URL
  https://<IP_address>/rest/instance/<instance_type>/<instance_name>
 
-``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``.
+``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``, ``pool``.
 ``<instance_name>`` is to be replaced by the name of the instance.
 
 .. image:: /_static/automation/rest/get_instance.png
    :alt: GET method to retrieve a device
    :align: center
+
+
+Retrieve the current configuration for a device
+***************************************
+
+::
+
+ # via a GET method to thet following URL
+ https://<IP_address>/rest/configuration/<device_name>
+
+will retrieve the latest/current configuration for that device.
+
 
 Create or update an instance
 ****************************
@@ -185,3 +197,9 @@ For the export, you must set the name of the exported file in the JSON payload:
  {
      "name": "rest"
  }
+
+Swagger / OpenAPI Interface
+***************************
+
+The eNMS ReST API is documented with Swagger / OpenAPI3.0. JSON and Yaml definitions for the interface, as well as the HTML API
+document can be found in the 'swagger' directory of the eNMS project.

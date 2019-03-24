@@ -306,14 +306,6 @@ $('body').contextMenu({
   },
 });
 
-$('#network').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selected);
-  },
-});
-
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
   $('#pool-filter').change();

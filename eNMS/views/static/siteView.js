@@ -58,3 +58,11 @@ const action = {
   'Display network': displayNetwork,
   'Enter pool': enterPool,
 };
+
+$('#network').contextMenu({
+  menuSelector: '#contextMenu',
+  menuSelected: function(invokedOn, selectedMenu) {
+    const row = selectedMenu.text();
+    action[row](selected);
+  },
+});

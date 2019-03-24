@@ -88,21 +88,3 @@ function createLink(link) { // eslint-disable-line no-unused-vars
   polygonSD.link_id = polygonDS.link_id = link.id;
   polylinesArray.push(polygonSD, polygonDS);
 }
-
-/**
- * Delete all objects.
- */
-function deleteAll() { // eslint-disable-line no-unused-vars
-  for (let i = 0; i < markersArray.length; i++) {
-    markersArray[i].removeFrom(map);
-  }
-  for (let i = 0; i < polylinesArray.length; i++) {
-    try {
-      polylinesArray[i].destroy();
-    } catch (err) {
-      // catch
-    }
-  }
-  markersArray = [];
-  polylinesArray = [];
-}

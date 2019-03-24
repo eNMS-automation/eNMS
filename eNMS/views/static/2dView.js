@@ -143,7 +143,7 @@ function createLink(link) { // eslint-disable-line no-unused-vars
  */
 function deleteAll() { // eslint-disable-line no-unused-vars
   for (let i = 0; i < markersArray.length; i++) {
-    if (view == '2D') {
+    if (view == '2D' || view == '3D') {
       markersArray[i].removeFrom(map);
     } else {
       markers.removeLayer(markersArray[i]);
@@ -152,8 +152,14 @@ function deleteAll() { // eslint-disable-line no-unused-vars
   for (let i = 0; i < polylinesArray.length; i++) {
     if (view == '2D') {
       polylinesArray[i].removeFrom(map);
-    } else {
+    } else if (view == '2DC') {
       markers.removeLayer(polylinesArray[i]);
+    } else {
+      try {
+        polylinesArray[i].destroy();
+      } catch (err) {
+        // catch
+      }
     }
   }
   markersArray = [];

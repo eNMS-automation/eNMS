@@ -10,6 +10,7 @@ polylinesArray: true
 showTypeModal: false
 subtype_sizes: false
 view: false
+WE: false
 */
 
 let markers;
@@ -18,6 +19,8 @@ const map = L.map('map').setView(
   [parameters.default_latitude, parameters.default_longitude],
   parameters.default_zoom_level
 );
+const options = {sky: true, atmosphere: true};
+const earth = WE.map('earth', options);
 
 const osmLayer = L.tileLayer(layers['osm']);
 map.addLayer(osmLayer);

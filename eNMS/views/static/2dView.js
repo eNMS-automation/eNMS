@@ -68,18 +68,17 @@ const routerIcon = window['icon_router'];
  * @param {nodeType} nodeType - Device or Pool.
  */
 function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
-  if (view == '2D' || view == '3D') {
-    
-    const marker = L.marker([node.latitude, node.longitude]);
-    
+  if (view == '2D' || view == '2DC') {
+    marker = L.marker([node.latitude, node.longitude]);
     if (nodeType === 'device') {
       marker.icon = window[`icon_${node.subtype}`] || routerIcon;
     } else {
       marker.icon = window['icon_site'];
     }
     marker.setIcon(marker.icon);
+    marker.bindTooltip(node['name'], {permanent: false});
   } else {
-    const marker = WE.marker(
+    marker = WE.marker(
       [node.latitude, node.longitude],
       `static/images/3D/${nodeType == 'device' ? 'router' : 'site'}.gif`,
       15, 10
@@ -106,10 +105,9 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node.id; // eslint-disable-line no-undef
   });
-  marker.bindTooltip(node['name'], {permanent: false});
   if (view == '2D') {
     marker.addTo(map);
-  } else {
+  } else if (view == '2DC') {
     markers.addLayer(marker);
   }
 }

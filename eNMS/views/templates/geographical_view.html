@@ -93,24 +93,18 @@
                   <button type="button" class="btn btn-default" onclick="switchDimension('2D')">2D</button>
                   <button type="button" class="btn btn-default" onclick="switchDimension('2DC')">Clustered 2D</button>
                   <button type="button" class="btn btn-default" onclick="switchDimension('3D')">3D</button>
-            </div>
-
-        </div>
-              {% if view == '3D' %}
-                <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
-                  <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
                 </div>
-              {% endif %}
+              </div>
+              <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
+                <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
+              </div>
               <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
                 <div class="form-group">
                   {{ view_form.pools(id='pool-filter', class="form-control") }}
                 </div>
               </div>
-              {% if view == '3D' %}
-                <div id="map" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
-              {% else %}
-                <div id="map"></div>
-              {% endif %}  
+              <div id="earth" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;"></div>
+              <div id="map"></div>
               {{ buttons }}
             </div>
           </div>

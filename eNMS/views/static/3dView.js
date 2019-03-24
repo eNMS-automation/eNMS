@@ -9,18 +9,18 @@ WE: false
 */
 
 const options = {sky: true, atmosphere: true};
-const map = WE.map('map', options);
+const earth = WE.map('map', options);
 let currentLayer = WE.tileLayer(layers['gm']);
-currentLayer.addTo(map);
+currentLayer.addTo(earth);
 
 /**
  * Change the tile layer.
  * @param {layer} layer - tile layer.
  */
 function switchLayer(layer) { // eslint-disable-line no-unused-vars
-  currentLayer.removeFrom(map);
+  currentLayer.removeFrom(earth);
   currentLayer = WE.tileLayer(layers[layer]);
-  currentLayer.addTo(map);
+  currentLayer.addTo(earth);
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
@@ -34,7 +34,7 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
     [node.latitude, node.longitude],
     `static/images/3D/${nodeType == 'device' ? 'router' : 'site'}.gif`,
     15, 10
-  ).addTo(map);
+  ).addTo(earth);
   marker.node_id = node.id;
   marker.on('click', function(e) {
     showTypeModal(nodeType, node.id);

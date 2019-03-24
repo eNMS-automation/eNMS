@@ -134,15 +134,11 @@
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='preGeographicalView.js') }}"></script>
-  {% if view == '3D' %}
-    <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
-    <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
-  {% else %}
-    <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.js') }}"></script>
-    {% if view == '2DC' %}
-      <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
-    {% endif %}
-    <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
-  {% endif %}
+  <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
+  
+  <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='2dView.js') }}"></script>
+  <script src="{{ url_for('views_blueprint.static', filename='3dView.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='postGeographicalView.js') }}"></script>
 {% endblock javascripts %}

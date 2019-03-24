@@ -21,7 +21,7 @@ const map = L.map('map').setView(
 
 const osmLayer = L.tileLayer(layers['osm']);
 map.addLayer(osmLayer);
-let currentLayer = osmLayer;
+let layer2D = osmLayer;
 if (view == '2DC') {
   markers = L.markerClusterGroup();
   map.addLayer(markers);
@@ -32,9 +32,9 @@ if (view == '2DC') {
  * @param {layer} layer - tile layer.
  */
 function switchLayer(layer) { // eslint-disable-line no-unused-vars
-  map.removeLayer(currentLayer);
-  currentLayer = L.tileLayer(layers[layer]);
-  map.addLayer(currentLayer);
+  map.removeLayer(layer2D);
+  layer2D = L.tileLayer(layers[layer]);
+  map.addLayer(layer2D);
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
@@ -142,14 +142,14 @@ function createLink(link) { // eslint-disable-line no-unused-vars
       [destinationLatitude, destinationLongitude],
       [sourceLatitude, sourceLongitude],
     ], {color: color, opacity: 20}
-    ).addTo(map);
+    ).addTo(earth);
     const polygonDS = WE.polygon(
     [
       [destinationLatitude, destinationLongitude],
       [sourceLatitude, sourceLongitude],
       [destinationLatitude, destinationLongitude],
     ], {color: color, opacity: 20}
-    ).addTo(map);
+    ).addTo(earth);
     polygonSD.link_id = polygonDS.link_id = link.id;
     polylinesArray.push(polygonSD, polygonDS);
   }
@@ -160,8 +160,10 @@ function createLink(link) { // eslint-disable-line no-unused-vars
  */
 function deleteAll() { // eslint-disable-line no-unused-vars
   for (let i = 0; i < markersArray.length; i++) {
-    if (view == '2D' || view == '3D') {
+    if (view == '2D') {
       markersArray[i].removeFrom(map);
+    } else if (view == '3D') {
+      markersArray[i].removeFrom(earth);
     } else {
       markers.removeLayer(markersArray[i]);
     }

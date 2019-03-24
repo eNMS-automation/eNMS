@@ -68,14 +68,31 @@ const routerIcon = window['icon_router'];
  * @param {nodeType} nodeType - Device or Pool.
  */
 function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
-  const marker = L.marker([node.latitude, node.longitude]);
-  marker.node_id = node.id;
-  if (nodeType === 'device') {
-    marker.icon = window[`icon_${node.subtype}`] || routerIcon;
+  if (view == '2D' || view == '3D') {
+    
+    const marker = L.marker([node.latitude, node.longitude]);
+    
+    if (nodeType === 'device') {
+      marker.icon = window[`icon_${node.subtype}`] || routerIcon;
+    } else {
+      marker.icon = window['icon_site'];
+    }
+    marker.setIcon(marker.icon);
   } else {
-    marker.icon = window['icon_site'];
+    const marker = WE.marker(
+      [node.latitude, node.longitude],
+      `static/images/3D/${nodeType == 'device' ? 'router' : 'site'}.gif`,
+      15, 10
+    ).addTo(earth);
+    marker.on('mouseover', function(e) {
+      $('#name-box').text(node.name);
+      $('#name-box').show();
+    });
+    marker.on('mouseout', function(e) {
+      $('#name-box').hide();
+    });
   }
-  marker.setIcon(marker.icon);
+  marker.node_id = node.id;
   markersArray.push(marker);
   marker.on('click', function(e) {
     if (nodeType == 'pool') {
@@ -87,7 +104,7 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
   marker.on('contextmenu', function(e) {
     $('.menu').hide();
     $(`.rc-${nodeType}-menu`).show();
-    selectedObject = this.node_id; // eslint-disable-line no-undef
+    selectedObject = node.id; // eslint-disable-line no-undef
   });
   marker.bindTooltip(node['name'], {permanent: false});
   if (view == '2D') {

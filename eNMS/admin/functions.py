@@ -4,7 +4,7 @@ from logging import info
 from os import makedirs
 from os.path import exists
 from uuid import getnode
-from yaml import dump, load
+from yaml import dump, load, SafeLoader
 
 from eNMS.base.default import create_default
 from eNMS.base.functions import delete_all, export, factory
@@ -41,7 +41,7 @@ def migrate_import(app: Flask, request: dict) -> str:
     for cls in types:
         path = app.path / "migrations" / request["name"] / f"{cls}.yaml"
         with open(path, "r") as migration_file:
-            objects = load(migration_file)
+            objects = load(migration_file, Loader=yaml.SafeLoader)
             if cls == "Workflow":
                 workflows = deepcopy(objects)
             if cls == "WorkflowEdge":

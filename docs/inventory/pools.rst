@@ -10,7 +10,9 @@ If the properties of an inventory object matches **all** pool properties, the ob
 Pool Management
 ---------------
 
-Pools can be created, duplicated and deleted in :guilabel:`Inventory/Pool Management`.
+Pools can be created, updated, duplicated and deleted in :guilabel:`Inventory/Pool Management`, and they can be
+edited to manually select Objects instead of using criteria based on properties to select them. Additionally, a logical
+view force diagram of a pool is available using the ``Visualize`` button.
 
 .. image:: /_static/inventory/pools/pool_management.png
    :alt: Pool Management
@@ -52,9 +54,10 @@ Default pools
 -------------
 
 Three pools are created by default in eNMS:
-  - "All objects": a pool that matches all devices and links.
-  - "Devices only": matches all devices, no link.
-  - "Links only": matches all links, no device.
+
+- "All objects": a pool that matches all devices and links.
+- "Devices only": matches all devices, no link.
+- "Links only": matches all links, no device.
 
 Never Update pools
 ------------------
@@ -64,6 +67,32 @@ selected. This prevents manually selected pools from being re-calculated based o
 a pool that has some criteria specified as well as some manually specified devices, it is advised to have 2 pools-one with the criteria
 specified and another with the manually selected devices.  When running a job, multiple pools and multiple devices can be specified, and
 the job will run against all specified objects.
+
+How Pools get Updated
+---------------------
+
+A pool is automatically updated by eNMS:
+
+- after being created (as long as its 'never update' flag is not set)
+
+All pools are updated (as long as their 'never update' flag is not set):
+
+- after inventory import, if update_pools is set to True
+- when eNMS starts, or restarts
+- after pulling or cloning the content from the git configuration repository
+- when the `poller service` runs (service responsible for fetching all device configurations), all pools for which "device_current_configuration" is not empty are updated (and only those).
+
+
+Pools are manually updated:
+
+- when you click on the update button of a pool in pool management
+- when you click on the "update all pools" in pool management
+
+Pools need to be manually updated:
+
+- when a device is manually added to the inventory
+- in the event that a user or service makes a change to the device properties that affect's a pool's criteria
+- when you fetch the topology from an external source of truth (netbox, librenms, or opennms currently)
 
 Pools based on Configuration
 ----------------------------
@@ -75,8 +104,8 @@ be searched for the pool.
 Filter the view with a pool
 ---------------------------
 
-Pools can be used as filters for the geographical and logical views.
-You can switch between pools with the drop-down list in the top-right corner of the screen (framed in red below).
+Pools can be used as filters for the geographical views.  You can switch between pools with the drop-down list in the
+top-right corner of the screen (framed in red below).
 
 .. image:: /_static/inventory/pools/view_filter.png
    :alt: Apply a filter to the view

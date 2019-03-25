@@ -2,8 +2,8 @@
  * Display sites (pools with non-empty coordinates).
  */
 function displaySites() { // eslint-disable-line no-unused-vars
+  $('.menu,#network').hide();
   deleteAll();
-  $('#map').css('visibility', 'visible');
   call('/get_all/pool', function(pools) {
     for (let i = 0; i < pools.length; i++) {
       if (pools[i].longitude) {
@@ -11,7 +11,6 @@ function displaySites() { // eslint-disable-line no-unused-vars
       }
     }
   });
-  $('.menu,#pool-filter,#network').hide();
   $('.geo-menu,.rc-pool-menu').show();
   alertify.notify('Site view');
 }
@@ -58,5 +57,5 @@ $('#network').contextMenu({
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  switchView('2D');
+  displaySites()
 })();

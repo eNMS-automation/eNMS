@@ -62,17 +62,30 @@ for (const [key, value] of Object.entries(subtype_sizes)) {
     });
 }
 
+L.PolylineClusterable = L.Polyline.extend({
+  _originalInitialize: L.Polyline.prototype.initialize,
+  initialize: function(bounds, options) {
+    this._originalInitialize(bounds, options);
+    this._latlng = this.getBounds().getCenter();
+  },
+  getLatLng: function() {
+    return this._latlng;
+  },
+  setLatLng: function() {
+  },
+});
+
 /**
  * Switch dimension.
  * @param {dimension} dimension - Dimension.
  */
-function switchView(newView) {
-  $('#map,#earth').css('visibility', 'visible');
+function switchView(newView) {  
   deleteAll();
-  view = newView;
   newDimension = newView.substring(0, 2);
-  console.log(dimension != newDimension);
+  view = newView;
   if (dimension != newDimension) {
+    console.log(dimension);
+    $('#map,#earth').css('visibility', 'visible');
     $('.flip-container').toggleClass('hover');
     setTimeout(function() {
       if (newDimension == '3D') {
@@ -99,7 +112,7 @@ function switchView(newView) {
  * @param {layer} layer - tile layer.
  */
 function switchLayer(layer) {
-  if (view == '2D' || view == '2DC') {
+  if (view !== '3D') {
     map.removeLayer(layer2D);
     layer2D = L.tileLayer(layers[layer]);
     map.addLayer(layer2D);

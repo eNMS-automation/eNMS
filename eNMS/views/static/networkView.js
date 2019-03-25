@@ -50,19 +50,6 @@ function switchLayer(layer) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-L.PolylineClusterable = L.Polyline.extend({
-  _originalInitialize: L.Polyline.prototype.initialize,
-  initialize: function(bounds, options) {
-    this._originalInitialize(bounds, options);
-    this._latlng = this.getBounds().getCenter();
-  },
-  getLatLng: function() {
-    return this._latlng;
-  },
-  setLatLng: function() {
-  },
-});
-
 const routerIcon = window['icon_router'];
 
 function updateView() {
@@ -94,5 +81,6 @@ const action = {
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
+  $('#network').hide();
   updateView();
 })();

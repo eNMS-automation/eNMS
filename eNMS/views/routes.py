@@ -21,7 +21,6 @@ def view(view_type: str) -> dict:
         add_pool_form=AddPoolForm(request.form),
         template=f"geographical_view.html",
         parameters=parameters,
-        google_earth_form=GoogleEarthForm(request.form),
         add_device_form=AddDevice(request.form),
         add_link_form=AddLink(request.form),
         device_automation_form=DeviceAutomationForm(request.form),

@@ -18,6 +18,7 @@ from eNMS.inventory.forms import (
     AddPoolForm,
     CompareConfigurationsForm,
     DeviceAutomationForm,
+    GoogleEarthForm,
     GottyConnectionForm,
     ImportExportForm,
     LibreNmsForm,
@@ -85,6 +86,7 @@ def import_export() -> dict:
         librenms_form=LibreNmsForm(request.form),
         netbox_form=NetboxForm(request.form),
         opennms_form=OpenNmsForm(request.form),
+        google_earth_form=GoogleEarthForm(request.form),
         parameters=get_one("Parameters"),
     )
 

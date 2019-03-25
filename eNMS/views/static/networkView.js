@@ -42,5 +42,5 @@ const action = {
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
   $('#network').hide();
-  updateView();
+  switchView(view);
 })();

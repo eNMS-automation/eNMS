@@ -84,7 +84,6 @@ function switchView(newView) {
   newDimension = newView.substring(0, 2);
   view = newView;
   if (dimension != newDimension) {
-    console.log(dimension);
     $('#map,#earth').css('visibility', 'visible');
     $('.flip-container').toggleClass('hover');
     setTimeout(function() {
@@ -269,7 +268,7 @@ map.on('click', function(e) {
 map.on('contextmenu', function() {
   if (!selectedObject) {
     $('.menu').hide();
-    $(`.global-menu,.${viewMode}-menu`).show();
+    $('.geo-menu').show();
   }
 });
 
@@ -287,8 +286,3 @@ $('body').contextMenu({
     selectedObject = null;
   },
 });
-
-(function() {
-  doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  $('#pool-filter').change();
-})();

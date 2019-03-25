@@ -11,6 +11,7 @@ bp = Blueprint(
 )
 
 from eNMS.base.functions import add_classes
+from eNMS.base.properties import device_subtypes, link_subtypes, link_subtype_to_color
 from eNMS.inventory.models import Device, Link, Object, Pool
 
 add_classes(Device, Link, Object, Pool)

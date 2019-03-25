@@ -11,7 +11,7 @@ def get_custom_properties() -> dict:
     if not filepath:
         return {}
     with open(filepath, "r") as properties:
-        return load(properties, Loader=yaml.SafeLoader)
+        return load(properties, Loader=SafeLoader)
 
 
 sql_types: dict = {

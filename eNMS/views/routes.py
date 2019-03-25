@@ -1,4 +1,4 @@
-from flask import current_app as app, request
+from flask import request
 from typing import Union
 
 from eNMS.base.functions import fetch, fetch_all, get, get_one, post
@@ -10,7 +10,7 @@ from eNMS.inventory.forms import (
     DeviceAutomationForm,
     GottyConnectionForm,
 )
-from eNMS.views import bp, styles
+from eNMS.views import bp
 from eNMS.views.forms import ViewForm
 
 

@@ -41,7 +41,7 @@ def migrate_import(app: Flask, request: dict) -> str:
     for cls in types:
         path = app.path / "migrations" / request["name"] / f"{cls}.yaml"
         with open(path, "r") as migration_file:
-            objects = load(migration_file, Loader=yaml.SafeLoader)
+            objects = load(migration_file, Loader=SafeLoader)
             if cls == "Workflow":
                 workflows = deepcopy(objects)
             if cls == "WorkflowEdge":

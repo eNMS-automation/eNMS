@@ -11,7 +11,7 @@ from typing import Dict, List
 
 from eNMS.extensions import db
 from eNMS.base.functions import factory, fetch, fetch_all, get, get_one, objectify, post
-from eNMS.inventory import bp
+from eNMS.inventory import bp, styles
 from eNMS.inventory.forms import (
     AddDevice,
     AddLink,

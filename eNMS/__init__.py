@@ -126,18 +126,9 @@ def configure_google_earth(path: Path) -> None:
     for subtype in device_subtypes:
         point_style = Style()
         point_style.labelstyle.color = Color.blue
-        icon = (
-            path
-            / "eNMS"
-            / "views "
-            / "static"
-            / "images"
-            / "default"
-            / f"{subtype}.gif"
-        )
-        point_style.iconstyle.icon.href = icon
+        icon = path / "eNMS" / "views " / "static" / "images" / "2D" / f"{subtype}.gif"
+        point_style.iconstyle.icon.href = str(icon)
         google_earth_styles[subtype] = point_style
-
     for subtype in link_subtypes:
         line_style = Style()
         # we convert the RGB color to a KML color,

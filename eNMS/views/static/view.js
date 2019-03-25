@@ -125,7 +125,6 @@ const routerIcon = window['icon_router'];
  * @param {nodeType} nodeType - Device or Pool.
  */
 function createNode(node, nodeType) {
-  console.log(view);
   if (view == '2D' || view == '2DC') {
     marker = L.marker([node.latitude, node.longitude]);
     if (nodeType === 'device') {
@@ -153,9 +152,9 @@ function createNode(node, nodeType) {
   markersArray.push(marker);
   marker.on('click', function(e) {
     if (nodeType == 'pool') {
-      enterPool(this.node_id);
+      enterPool(node.id);
     } else {
-      showTypeModal(nodeType, this.node_id);
+      showTypeModal(nodeType, node.id);
     }
   });
   marker.on('contextmenu', function(e) {

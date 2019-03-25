@@ -95,30 +95,6 @@ function switchLayer(layer) {
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
 }
 
-for (const [key, value] of Object.entries(subtype_sizes)) {
-  window[`icon_${key}`] = L.icon({
-    iconUrl: `static/images/2D/${key}.gif`,
-    iconSize: value,
-    iconAnchor: [9, 6],
-    popupAnchor: [8, -5],
-    });
-}
-
-L.PolylineClusterable = L.Polyline.extend({
-  _originalInitialize: L.Polyline.prototype.initialize,
-  initialize: function(bounds, options) {
-    this._originalInitialize(bounds, options);
-    this._latlng = this.getBounds().getCenter();
-  },
-  getLatLng: function() {
-    return this._latlng;
-  },
-  setLatLng: function() {
-  },
-});
-
-const routerIcon = window['icon_router'];
-
 /**
  * Create a node (device or pool).
  * @param {node} node - Device or Pool.

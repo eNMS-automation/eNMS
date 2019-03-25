@@ -10,38 +10,6 @@ view: false
 WE: false
 */
 
-const layers = {
-  'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-  'gm': 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga',
-  'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg',
-};
-
-let selectedObject;
-let markersArray = [];
-let polylinesArray = [];
-let viewMode = 'network';
-let dimension = view.substring(0, 2);
-
-const map = L.map('map').setView(
-  [parameters.default_latitude, parameters.default_longitude],
-  parameters.default_zoom_level
-);
-const options = {sky: true, atmosphere: true};
-const earth = WE.map('earth', options);
-
-const osmLayer = L.tileLayer(layers['osm']);
-map.addLayer(osmLayer);
-let layer2D = osmLayer;
-let layer3D = WE.tileLayer(layers['gm']);
-layer3D.addTo(earth);
-let markers = L.markerClusterGroup();
-
-if (view == '3D') {
-  $('#map').css('visibility', 'hidden');
-} else {
-  $('#earth').css('visibility', 'hidden');
-}
-
 /**
  * Switch dimension.
  * @param {dimension} dimension - Dimension.

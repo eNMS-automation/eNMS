@@ -24,45 +24,9 @@
   {% include 'device_modal.html' %}
   {% include 'pool_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
-  <div id="google-earth" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title">Export to Google Earth</h4>
-        </div>
-        <form id="google-earth-form" data-parsley-validate class="form-horizontal form-label-left" autocomplete="off">
-          <div class="modal-body">
-            <div class="form-group">
-                <label>Project name</label>
-                <div class='form-group'>
-                  {{ google_earth_form.name(class="form-control required") }}
-                </div>
-                <label>Label size:</label>
-                <div class='form-group'>
-                  {{ google_earth_form.label_size(class="form-control required") }}
-                </div>
-                <label>Line width:</label>
-                <div class='form-group'>
-                  {{ google_earth_form.line_width(class="form-control required") }}
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="text-center">
-              <button type="button" onclick="exportToGoogleEarth()" class="btn btn-success">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
   <form id="view-form" method="post">
     <input id="view-type" name="view" type="hidden">
     <ul id="contextMenu" class="dropdown-menu" role="menu">
-      <li class="menu geo-menu"><a tabindex="-1" href="#">Export to Google Earth</a></li>
       <li class="menu dropdown-submenu geo-menu">
         <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
         <ul class="dropdown-menu">

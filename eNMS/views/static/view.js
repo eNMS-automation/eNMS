@@ -47,9 +47,6 @@ let layer2D = osmLayer;
 let layer3D = WE.tileLayer(layers['gm']);
 layer3D.addTo(earth);
 let markers = L.markerClusterGroup();
-if (view == '2DC') {
-  map.addLayer(markers);
-}
 
 if (view == '3D') {
   $('#map').css('visibility', 'hidden');
@@ -128,6 +125,7 @@ const routerIcon = window['icon_router'];
  * @param {nodeType} nodeType - Device or Pool.
  */
 function createNode(node, nodeType) {
+  console.log(view);
   if (view == '2D' || view == '2DC') {
     marker = L.marker([node.latitude, node.longitude]);
     if (nodeType === 'device') {
@@ -261,10 +259,21 @@ function deleteAll() {
 }
 
 $('#pool-filter').on('change', function() {
+  $(`#btn-${view}`).hide();
+  if (view == '2D') {
+    $('#btn-2DC,#btn-3D').show();
+  } else if (view == '2DC') {
+    $('#btn-2D,#btn-3D').show();
+  } else {
+    $('#btn-2D,#btn-2DC').show();
+  }
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     deleteAll();
     objects.devices.map((d) => createNode(d, 'device'));
     objects.links.map(createLink);
+    if (view == '2DC') {
+      map.addLayer(markers);
+    }
   });
 });
 

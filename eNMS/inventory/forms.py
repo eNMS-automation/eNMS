@@ -149,6 +149,12 @@ class LibreNmsForm(FlaskForm):
     librenms_token = PasswordField()
 
 
+class GoogleEarthForm(FlaskForm):
+    name = StringField()
+    label_size = IntegerField(default=1)
+    line_width = IntegerField(default=2)
+
+
 class DeviceAutomationForm(FlaskForm):
     list_fields = HiddenField(default="jobs")
     jobs = MultipleObjectField("Job")

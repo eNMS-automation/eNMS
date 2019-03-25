@@ -1,8 +1,7 @@
 /**
- * Display pools.
+ * Display sites (pools with non-empty coordinates).
  */
-function displayPools() { // eslint-disable-line no-unused-vars
-  viewMode = 'site';
+function displaySites() { // eslint-disable-line no-unused-vars
   deleteAll();
   $('#map').css('visibility', 'visible');
   call('/get_all/pool', function(pools) {
@@ -18,30 +17,21 @@ function displayPools() { // eslint-disable-line no-unused-vars
 }
 
 /**
- * Display network.
- */
-function displayNetwork() { // eslint-disable-line no-unused-vars
-  viewMode = 'network';
-  $('#pool-filter').change();
-  $('#map').css('visibility', 'visible');
-  $('.menu,#network').hide();
-  $('.geo-menu,#pool-filter').show();
-  alertify.notify('Network view.');
-}
-
-/**
  * Enter pool.
  * @param {poolId} poolId - Pool ID.
  */
 function enterPool(poolId) { // eslint-disable-line no-unused-vars
-  viewMode = 'insite';
-  $('#map').css('visibility', 'hidden');
+  $('#map,#earth').css('visibility', 'hidden');
   $('.menu').hide();
   $('#network,.insite-menu,rc-device-menu,rc-link-menu').show();
   call(`/inventory/pool_objects/${poolId}`, function(objects) {
     alertify.notify('Loading the view...', 3);
     displayPool(objects.devices, objects.links);
   });
+}
+
+function updateView() {
+  displaySites();
 }
 
 const action = {
@@ -54,8 +44,7 @@ const action = {
   'Pool properties': (p) => showTypeModal('pool', p),
   'Connect': connectionParametersModal,
   'Automation': deviceAutomationModal,
-  'Display pools': displayPools,
-  'Display network': displayNetwork,
+  'Display pools': displaySites,
   'Enter pool': enterPool,
 };
 
@@ -66,3 +55,8 @@ $('#network').contextMenu({
     action[row](selected);
   },
 });
+
+(function() {
+  doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
+  switchView('2D');
+})();

@@ -31,7 +31,6 @@ function exportToGoogleEarth() {
   });
 }
 
-let viewMode = 'network';
 let dimension = view.substring(0, 2);
 
 const map = L.map('map').setView(
@@ -52,6 +51,15 @@ if (view == '3D') {
   $('#map').css('visibility', 'hidden');
 } else {
   $('#earth').css('visibility', 'hidden');
+}
+
+for (const [key, value] of Object.entries(subtype_sizes)) {
+  window[`icon_${key}`] = L.icon({
+    iconUrl: `static/images/2D/${key}.gif`,
+    iconSize: value,
+    iconAnchor: [9, 6],
+    popupAnchor: [8, -5],
+    });
 }
 
 /**

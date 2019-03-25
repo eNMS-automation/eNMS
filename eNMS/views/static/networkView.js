@@ -19,7 +19,6 @@ function switchView(newView) {
   deleteAll();
   view = newView;
   newDimension = newView.substring(0, 2);
-  console.log(dimension != newDimension);
   if (dimension != newDimension) {
     $('.flip-container').toggleClass('hover');
     setTimeout(function() {
@@ -49,15 +48,6 @@ function switchLayer(layer) {
     layer3D.addTo(earth);
   }
   $('.dropdown-submenu a.menu-layer').next('ul').toggle();
-}
-
-for (const [key, value] of Object.entries(subtype_sizes)) {
-  window[`icon_${key}`] = L.icon({
-    iconUrl: `static/images/2D/${key}.gif`,
-    iconSize: value,
-    iconAnchor: [9, 6],
-    popupAnchor: [8, -5],
-    });
 }
 
 L.PolylineClusterable = L.Polyline.extend({

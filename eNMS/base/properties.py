@@ -21,6 +21,8 @@ sql_types: dict = {
     "string": String,
 }
 
+google_earth_styles = {}
+
 custom_properties: dict = get_custom_properties()
 
 boolean_properties: List[str] = [

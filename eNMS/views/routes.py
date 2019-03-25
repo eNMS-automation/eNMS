@@ -1,5 +1,4 @@
 from flask import current_app as app, request
-from simplekml import Kml
 from typing import Union
 
 from eNMS.base.functions import fetch, fetch_all, get, get_one, post
@@ -12,7 +11,7 @@ from eNMS.inventory.forms import (
     GottyConnectionForm,
 )
 from eNMS.views import bp, styles
-from eNMS.views.forms import GoogleEarthForm, ViewForm
+from eNMS.views.forms import ViewForm
 
 
 @get(bp, "/<view_type>_view", "View")
@@ -33,27 +32,6 @@ def view(view_type: str) -> dict:
         view_type=view_type,
         view_form=ViewForm(request.form),
     )
-
-
-@get(bp, "/export_to_google_earth", "View")
-def export_to_google_earth() -> bool:
-    kml_file = Kml()
-    for device in fetch_all("Device"):
-        point = kml_file.newpoint(name=device.name)
-        point.coords = [(device.longitude, device.latitude)]
-        point.style = styles[device.subtype]
-        point.style.labelstyle.scale = request.form["label_size"]
-    for link in fetch_all("Link"):
-        line = kml_file.newlinestring(name=link.name)
-        line.coords = [
-            (link.source.longitude, link.source.latitude),
-            (link.destination.longitude, link.destination.latitude),
-        ]
-        line.style = styles[link.type]
-        line.style.linestyle.width = request.form["line_width"]
-    filepath = app.path / "google_earth" / f'{request.form["name"]}.kmz'
-    kml_file.save(filepath)
-    return True
 
 
 @post(bp, "/get_logs/<int:device_id>", "View")

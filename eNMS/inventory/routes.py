@@ -5,6 +5,7 @@ from flask.wrappers import Response
 from flask_login import current_user
 from pynetbox import api as netbox_api
 from requests import get as http_get
+from simplekml import Kml
 from subprocess import Popen
 from typing import Dict, List
 
@@ -254,6 +255,27 @@ def query_librenms() -> bool:
             },
         )
     db.session.commit()
+    return True
+
+
+@get(bp, "/export_to_google_earth", "View")
+def export_to_google_earth() -> bool:
+    kml_file = Kml()
+    for device in fetch_all("Device"):
+        point = kml_file.newpoint(name=device.name)
+        point.coords = [(device.longitude, device.latitude)]
+        point.style = styles[device.subtype]
+        point.style.labelstyle.scale = request.form["label_size"]
+    for link in fetch_all("Link"):
+        line = kml_file.newlinestring(name=link.name)
+        line.coords = [
+            (link.source.longitude, link.source.latitude),
+            (link.destination.longitude, link.destination.latitude),
+        ]
+        line.style = styles[link.type]
+        line.style.linestyle.width = request.form["line_width"]
+    filepath = app.path / "google_earth" / f'{request.form["name"]}.kmz'
+    kml_file.save(filepath)
     return True
 
 

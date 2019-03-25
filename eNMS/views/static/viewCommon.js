@@ -19,6 +19,18 @@ const layers = {
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
+
+/**
+ * Export project to Google Earth (creation of a .kmz file).
+ */
+function exportToGoogleEarth() {
+  const url = '/views/export_to_google_earth';
+  fCall(url, '#google-earth-form', function(result) {
+    alertify.notify(`Project exported to Google Earth.`, 'success', 5);
+    $('#google-earth').modal('hide');
+  });
+}
+
 let viewMode = 'network';
 let dimension = view.substring(0, 2);
 
@@ -63,7 +75,7 @@ function switchView(newView) {
     }, 1600);
   }
   dimension = newDimension;
-  $('#pool-filter').change();
+  updateView();
 }
 
 /**
@@ -215,8 +227,34 @@ function createLink(link) {
   }
 }
 
-function updateView() {
-  $('#pool-filter').change();
+/**
+ * Delete all devices and links on the map.
+ */
+function deleteAll() {
+  for (let i = 0; i < markersArray.length; i++) {
+    if (view == '2D') {
+      markersArray[i].removeFrom(map);
+    } else if (view == '3D') {
+      markersArray[i].removeFrom(earth);
+    } else {
+      markers.removeLayer(markersArray[i]);
+    }
+  }
+  for (let i = 0; i < polylinesArray.length; i++) {
+    if (view == '2D') {
+      polylinesArray[i].removeFrom(map);
+    } else if (view == '2DC') {
+      markers.removeLayer(polylinesArray[i]);
+    } else {
+      try {
+        polylinesArray[i].destroy();
+      } catch (err) {
+        // catch
+      }
+    }
+  }
+  markersArray = [];
+  polylinesArray = [];
 }
 
 $('#pool-filter').on('change', function() {

@@ -37,6 +37,15 @@ function queryLibreNMS() { // eslint-disable-line no-unused-vars
 }
 
 /**
+ * Export project to Google Earth (creation of a .kmz file).
+ */
+function exportToGoogleEarth() {
+  fCall('/views/export_to_google_earth', '#google-earth-form', function() {
+    alertify.notify('Project exported to Google Earth.', 'success', 5);
+  });
+}
+
+/**
  * Export topology.
  */
 function exportTopology() { // eslint-disable-line no-unused-vars

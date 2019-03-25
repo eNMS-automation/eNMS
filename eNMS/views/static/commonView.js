@@ -19,18 +19,6 @@ const layers = {
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
-
-/**
- * Export project to Google Earth (creation of a .kmz file).
- */
-function exportToGoogleEarth() {
-  const url = '/views/export_to_google_earth';
-  fCall(url, '#google-earth-form', function(result) {
-    alertify.notify(`Project exported to Google Earth.`, 'success', 5);
-    $('#google-earth').modal('hide');
-  });
-}
-
 let dimension = view.substring(0, 2);
 
 const map = L.map('map').setView(

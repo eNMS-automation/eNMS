@@ -38,32 +38,6 @@ def register_extensions(app: Flask) -> None:
     scheduler.app = app
 
 
-def configure_google_earth(path: Path) -> None:
-    for subtype in device_subtypes:
-        point_style = Style()
-        point_style.labelstyle.color = Color.blue
-        icon = (
-            path
-            / "eNMS"
-            / "views "
-            / "static"
-            / "images"
-            / "default"
-            / f"{subtype}.gif"
-        )
-        point_style.iconstyle.icon.href = icon
-        google_earth_styles[subtype] = point_style
-
-    for subtype in link_subtypes:
-        line_style = Style()
-        # we convert the RGB color to a KML color,
-        # i.e #RRGGBB to #AABBGGRR
-        color = link_subtype_to_color[subtype]
-        kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
-        line_style.linestyle.color = kml_color
-        google_earth_styles[subtype] = line_style
-
-
 def register_blueprints(app: Flask) -> None:
     blueprints = (
         "admin",
@@ -146,6 +120,32 @@ def configure_logs(app: Flask) -> None:
             StreamHandler(),
         ],
     )
+
+
+def configure_google_earth(path: Path) -> None:
+    for subtype in device_subtypes:
+        point_style = Style()
+        point_style.labelstyle.color = Color.blue
+        icon = (
+            path
+            / "eNMS"
+            / "views "
+            / "static"
+            / "images"
+            / "default"
+            / f"{subtype}.gif"
+        )
+        point_style.iconstyle.icon.href = icon
+        google_earth_styles[subtype] = point_style
+
+    for subtype in link_subtypes:
+        line_style = Style()
+        # we convert the RGB color to a KML color,
+        # i.e #RRGGBB to #AABBGGRR
+        color = link_subtype_to_color[subtype]
+        kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
+        line_style.linestyle.color = kml_color
+        google_earth_styles[subtype] = line_style
 
 
 def create_app(path: Path, config_class: Type[Config]) -> Flask:

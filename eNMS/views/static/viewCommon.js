@@ -75,6 +75,14 @@ function switchView(newView) {
     }, 1600);
   }
   dimension = newDimension;
+  $(`#btn-${view}`).hide();
+  if (view == '2D') {
+    $('#btn-2DC,#btn-3D').show();
+  } else if (view == '2DC') {
+    $('#btn-2D,#btn-3D').show();
+  } else {
+    $('#btn-2D,#btn-2DC').show();
+  }
   updateView();
 }
 
@@ -232,37 +240,6 @@ function deleteAll() {
   markersArray = [];
   polylinesArray = [];
 }
-
-$('#pool-filter').on('change', function() {
-  $(`#btn-${view}`).hide();
-  if (view == '2D') {
-    $('#btn-2DC,#btn-3D').show();
-  } else if (view == '2DC') {
-    $('#btn-2D,#btn-3D').show();
-  } else {
-    $('#btn-2D,#btn-2DC').show();
-  }
-  call(`/inventory/pool_objects/${this.value}`, function(objects) {
-    deleteAll();
-    objects.devices.map((d) => createNode(d, 'device'));
-    objects.links.map(createLink);
-    if (view == '2DC') {
-      map.addLayer(markers);
-    }
-  });
-});
-
-const action = {
-  'Export to Google Earth': partial(showModal, 'google-earth'),
-  'Open Street Map': partial(switchLayer, 'osm'),
-  'Google Maps': partial(switchLayer, 'gm'),
-  'NASA': partial(switchLayer, 'nasa'),
-  'Device properties': (d) => showTypeModal('device', d),
-  'Link properties': (l) => showTypeModal('link', l),
-  'Pool properties': (p) => showTypeModal('pool', p),
-  'Connect': connectionParametersModal,
-  'Automation': deviceAutomationModal,
-};
 
 map.on('click', function(e) {
   selectedObject = null;

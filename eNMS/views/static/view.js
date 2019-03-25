@@ -112,14 +112,6 @@ function updateView() {
 }
 
 $('#pool-filter').on('change', function() {
-  $(`#btn-${view}`).hide();
-  if (view == '2D') {
-    $('#btn-2DC,#btn-3D').show();
-  } else if (view == '2DC') {
-    $('#btn-2D,#btn-3D').show();
-  } else {
-    $('#btn-2D,#btn-2DC').show();
-  }
   call(`/inventory/pool_objects/${this.value}`, function(objects) {
     deleteAll();
     objects.devices.map((d) => createNode(d, 'device'));
@@ -142,33 +134,7 @@ const action = {
   'Automation': deviceAutomationModal,
 };
 
-map.on('click', function(e) {
-  selectedObject = null;
-});
-
-map.on('contextmenu', function() {
-  if (!selectedObject) {
-    $('.menu').hide();
-    $(`.global-menu,.${viewMode}-menu`).show();
-  }
-});
-
-$('.dropdown-submenu a.menu-submenu').on('click', function(e) {
-  $(this).next('ul').toggle();
-  e.stopPropagation();
-  e.preventDefault();
-});
-
-$('body').contextMenu({
-  menuSelector: '#contextMenu',
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selectedObject);
-    selectedObject = null;
-  },
-});
-
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  $('#pool-filter').change();
+  updateView();
 })();

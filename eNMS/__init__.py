@@ -1,11 +1,13 @@
 from flask import Flask, render_template
 from flask.wrappers import Request, Response
+from flask_cli import FlaskCLI
 from importlib import import_module
 from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from simplekml import Color, Style
 from typing import Any, Optional, Tuple, Type, Union
+import click
 
 from eNMS.config import Config
 from eNMS.extensions import (
@@ -29,12 +31,14 @@ from eNMS.base.properties import (
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
+from eNMS.cli import configure_cli
 
 
 def register_extensions(app: Flask) -> None:
     db.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
+    FlaskCLI(app)
     scheduler.app = app
 
 
@@ -149,6 +153,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_logs(app)
     configure_errors(app)
     configure_google_earth(path)
+    configure_cli(app)
     if USE_VAULT:
         configure_vault_client(app)
     if USE_SYSLOG:

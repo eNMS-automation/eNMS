@@ -1,18 +1,26 @@
 /*
 global
-enterPool: false
-L: false
-link_colors: false
-parameters: false
+call: false
+connectionParametersModal: false
+createNode: false
+createLink: false
+deviceAutomationModal: false
+deleteAll: false
+doc: false
+map: false
+markers: true
+partial: false
+showModal: false
 showTypeModal: false
-subtype_sizes: false
-view: false
-WE: false
+switchLayer: false
+switchView: false
+currentView: false
 */
 
-const routerIcon = window['icon_router'];
-
-function updateView() {
+/**
+ * Update current view.
+ */
+function updateView() { // eslint-disable-line no-unused-vars
   $('#pool-filter').change();
 }
 
@@ -21,13 +29,13 @@ $('#pool-filter').on('change', function() {
     deleteAll();
     objects.devices.map((d) => createNode(d, 'device'));
     objects.links.map(createLink);
-    if (view == '2DC') {
+    if (currentView == '2DC') {
       map.addLayer(markers);
     }
   });
 });
 
-const action = {
+const action = { // eslint-disable-line no-unused-vars
   'Export to Google Earth': partial(showModal, 'google-earth'),
   'Open Street Map': partial(switchLayer, 'osm'),
   'Google Maps': partial(switchLayer, 'gm'),
@@ -42,5 +50,5 @@ const action = {
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
   $('#network').hide();
-  switchView(view);
+  switchView(currentView);
 })();

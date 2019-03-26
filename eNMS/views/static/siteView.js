@@ -1,3 +1,20 @@
+/*
+global
+alertify: false
+call: false
+connectionParametersModal: false
+createNode: false
+deleteAll: false
+deviceAutomationModal: false
+displayPool: false
+doc: false
+partial: false
+selected: false
+showModal: false
+showTypeModal: false
+switchLayer: false
+*/
+
 /**
  * Display sites (pools with non-empty coordinates).
  */
@@ -29,11 +46,14 @@ function enterPool(poolId) { // eslint-disable-line no-unused-vars
   });
 }
 
-function updateView() {
+/**
+ * Update view.
+ */
+function updateView() { // eslint-disable-line no-unused-vars
   displaySites();
 }
 
-const action = {
+const action = { // eslint-disable-line no-unused-vars
   'Export to Google Earth': partial(showModal, 'google-earth'),
   'Open Street Map': partial(switchLayer, 'osm'),
   'Google Maps': partial(switchLayer, 'gm'),
@@ -57,5 +77,5 @@ $('#network').contextMenu({
 
 (function() {
   doc('https://enms.readthedocs.io/en/latest/views/geographical_view.html');
-  displaySites()
+  displaySites();
 })();

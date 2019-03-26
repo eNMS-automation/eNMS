@@ -7,7 +7,6 @@ link_colors: false
 parameters: false
 showTypeModal: false
 subtype_sizes: false
-routerIcon: false
 updateView: false
 view: false
 WE: false
@@ -39,7 +38,7 @@ let layer3D = WE.tileLayer(layers['gm']);
 layer3D.addTo(earth);
 let markers = L.markerClusterGroup();
 
-if (view == '3D') {
+if (currentView == '3D') {
   $('#map').css('visibility', 'hidden');
 } else {
   $('#earth').css('visibility', 'hidden');
@@ -53,6 +52,8 @@ for (const [key, value] of Object.entries(subtype_sizes)) {
     popupAnchor: [8, -5],
     });
 }
+
+const routerIcon = window['icon_router'];
 
 L.PolylineClusterable = L.Polyline.extend({
   _originalInitialize: L.Polyline.prototype.initialize,

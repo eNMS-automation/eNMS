@@ -38,10 +38,6 @@ def object_import(request: dict, file: FileStorage) -> str:
                     info(f"{str(prop)} could not be imported ({str(e)})")
                     result = "Partial import (see logs)."
             db.session.commit()
-    if request["update_pools"]:
-        for pool in fetch_all("Pool"):
-            pool.compute_pool()
-        db.session.commit()
     return result
 
 

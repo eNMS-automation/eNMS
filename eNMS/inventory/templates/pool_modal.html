@@ -29,6 +29,14 @@
               <div class="form-group">
                 {{ add_pool_form.latitude(id="pool-latitude", class="form-control required", placeholder="Latitude") }}
               </div>
+              <label>Latitude</label>
+              <div class="form-group">
+                {{ add_pool_form.latitude(id="pool-latitude", class="form-control required", placeholder="Latitude") }}
+              </div>
+              <label>Match condition</label>
+              <div class="form-group">
+                {{ add_pool_form.operator(id="pool-operator", class="form-control required", placeholder="Operator") }}
+              </div>
             <fieldset>
               <div class="item">
                 {{ add_pool_form['never_update'](id="pool-never_update") }}

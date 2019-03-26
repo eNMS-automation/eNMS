@@ -93,9 +93,13 @@ class Device(CustomDevice):
 
     def update(self, **kwargs: Any) -> None:
         for pool in fetch_all("Pool"):
-            if not pool.never_update and pool.object_match(self):
+            if not pool.never_update:
+                continue
+            if pool.object_match(self):
                 pool.devices.append(self)
-        super.update(**kwargs)
+            else:
+                pool.devices.remove(self)
+        super().update(**kwargs)
 
     def __repr__(self) -> str:
         return f"{self.name} ({self.model})"

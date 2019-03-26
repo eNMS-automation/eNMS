@@ -582,6 +582,4 @@ def create_examples(app: Flask) -> None:
     create_napalm_workflow()
     create_payload_transfer_workflow()
     create_workflow_of_workflows()
-    for pool in fetch_all("Pool"):
-        pool.compute_pool()
     db.session.commit()

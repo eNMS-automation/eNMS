@@ -153,12 +153,6 @@ function initTable(cls, type, toExclude) { // eslint-disable-line
       },
     },
   });
-  $('a.toggle-vis').on( 'click', function (e) {
-    e.preventDefault();
-    let column = table.column( $(this).attr('data-column') );
-    // Toggle the visibility
-    column.visible( ! column.visible() );
-  });
   return table;
 }
 

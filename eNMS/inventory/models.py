@@ -92,14 +92,14 @@ class Device(CustomDevice):
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
     def update(self, **kwargs: Any) -> None:
+        super().update(**kwargs)
         for pool in fetch_all("Pool"):
-            if not pool.never_update:
+            if pool.never_update:
                 continue
             if pool.object_match(self):
                 pool.devices.append(self)
-            else:
+            elif self in pool.devices:
                 pool.devices.remove(self)
-        super().update(**kwargs)
 
     def __repr__(self) -> str:
         return f"{self.name} ({self.model})"
@@ -139,10 +139,14 @@ class Link(Object):
         kwargs.update(
             {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
         )
-        for pool in fetch_all("Pool"):
-            if not pool.never_update and pool.object_match(self):
-                pool.links.append(self)
         super().update(**kwargs)
+        for pool in fetch_all("Pool"):
+            if pool.never_update:
+                continue
+            if pool.object_match(self):
+                pool.links.append(self)
+            elif self in pool.links:
+                pool.links.remove(self)
 
 
 AbstractPool: Any = type(

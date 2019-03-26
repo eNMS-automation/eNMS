@@ -33,6 +33,11 @@
                 <h3>Pool filtering</h3> {{ pool_restriction_form.pools(id='restrict-pool', class="form-control") }}
               </div>
             </div>
+            <div>Toggle column:
+              {% for field in fields %}
+                <a class="toggle-vis" data-column="{{ loop.index0 }}">{{ names[field] }}</a>
+              {% endfor %}
+            </div>
             <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>

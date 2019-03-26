@@ -16,12 +16,6 @@ vis: false
 workflow: true
 */
 
-(function() {
-  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  convertSelect('#add_jobs', '#workflow-devices', '#workflow-pools');
-  getWorkflowState();
-})();
-
 const workflowBuilder = true; // eslint-disable-line no-unused-vars
 const container = document.getElementById('network');
 const dsoptions = {
@@ -56,7 +50,7 @@ let edges;
 let graph;
 let selectedNode;
 let edgeType;
-let lastModified;
+let lastModified; // eslint-disable-line no-unused-vars
 
 /**
  * Display a workflow.
@@ -380,9 +374,6 @@ function getJobState(id) { // eslint-disable-line no-unused-vars
 function getWorkflowState() {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
-      if (wf.last_modified !== lastModified) {
-        displayWorkflow(wf);
-      }
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
@@ -417,3 +408,9 @@ function getWorkflowState() {
 $(window).bind('beforeunload', function() {
   savePositions();
 });
+
+(function() {
+  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
+  convertSelect('#add_jobs', '#workflow-devices', '#workflow-pools');
+  getWorkflowState();
+})();

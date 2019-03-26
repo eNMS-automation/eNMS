@@ -62,86 +62,87 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
     assert result["description"] == "New" and len(fetch_all("Workflow")) == 6
 
 
-@check_blueprints("/automation")
-def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "payload_transfer_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "payload_transfer_workflow", "multiprocessing": True},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "payload_transfer_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
-
-
-@check_blueprints("/automation")
-def test_netmiko_workflow(user_client: FlaskClient) -> None:
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Netmiko_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Netmiko_VRF_workflow", "multiprocessing": True},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Netmiko_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Netmiko_VRF_workflow", "use_workflow_targets": False},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Netmiko_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
-
-
-@check_blueprints("/automation")
-def test_napalm_workflow(user_client: FlaskClient) -> None:
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Napalm_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Napalm_VRF_workflow", "multiprocessing": True},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Napalm_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Napalm_VRF_workflow", "use_workflow_targets": False},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Napalm_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 1
+#
+# @check_blueprints("/automation")
+# def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "payload_transfer_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2
+#     post(
+#         "http://192.168.105.2:5000/rest/instance/Workflow",
+#         json={"name": "payload_transfer_workflow", "multiprocessing": True},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     )
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "payload_transfer_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2
+#
+#
+# @check_blueprints("/automation")
+# def test_netmiko_workflow(user_client: FlaskClient) -> None:
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "Netmiko_VRF_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2
+#     post(
+#         "http://192.168.105.2:5000/rest/instance/Workflow",
+#         json={"name": "Netmiko_VRF_workflow", "multiprocessing": True},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     )
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "Netmiko_VRF_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2
+#     post(
+#         "http://192.168.105.2:5000/rest/instance/Workflow",
+#         json={"name": "Netmiko_VRF_workflow", "use_workflow_targets": False},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     )
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "Netmiko_VRF_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2
+#
+#
+# @check_blueprints("/automation")
+# def test_napalm_workflow(user_client: FlaskClient) -> None:
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "Napalm_VRF_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2
+#     post(
+#         "http://192.168.105.2:5000/rest/instance/Workflow",
+#         json={"name": "Napalm_VRF_workflow", "multiprocessing": True},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     )
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "Napalm_VRF_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2
+#     post(
+#         "http://192.168.105.2:5000/rest/instance/Workflow",
+#         json={"name": "Napalm_VRF_workflow", "use_workflow_targets": False},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     )
+#     result = post(
+#         "http://192.168.105.2:5000/rest/run_job",
+#         json={"name": "Napalm_VRF_workflow"},
+#         auth=HTTPBasicAuth("admin", "admin"),
+#     ).json()
+#     assert result["results"]["success"] and len(result) == 2

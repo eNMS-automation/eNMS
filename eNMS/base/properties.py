@@ -21,7 +21,7 @@ sql_types: dict = {
     "string": String,
 }
 
-google_earth_styles = {}
+google_earth_styles: dict = {}
 
 custom_properties: dict = get_custom_properties()
 

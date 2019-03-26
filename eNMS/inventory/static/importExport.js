@@ -39,7 +39,7 @@ function queryLibreNMS() { // eslint-disable-line no-unused-vars
 /**
  * Export project to Google Earth (creation of a .kmz file).
  */
-function exportToGoogleEarth() {
+function exportToGoogleEarth() { // eslint-disable-line no-unused-vars
   fCall('/inventory/export_to_google_earth', '#google-earth-form', function() {
     alertify.notify('Project exported to Google Earth.', 'success', 5);
   });

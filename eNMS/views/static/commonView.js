@@ -1,11 +1,14 @@
 /*
 global
+action: false
 enterPool: false
 L: false
 link_colors: false
 parameters: false
 showTypeModal: false
 subtype_sizes: false
+routerIcon: false
+updateView: false
 view: false
 WE: false
 */
@@ -20,6 +23,7 @@ let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
 let dimension = view.substring(0, 2);
+let currentView = view;
 
 const map = L.map('map').setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -64,13 +68,13 @@ L.PolylineClusterable = L.Polyline.extend({
 });
 
 /**
- * Switch dimension.
- * @param {dimension} dimension - Dimension.
+ * Switch currentView.
+ * @param {newView} newView - 2D, 2DC (clustered) or 3D.
  */
-function switchView(newView) {  
+function switchView(newView) { // eslint-disable-line no-unused-vars
   deleteAll();
-  newDimension = newView.substring(0, 2);
-  view = newView;
+  const newDimension = newView.substring(0, 2);
+  currentView = newView;
   if (dimension != newDimension) {
     $('#map,#earth').css('visibility', 'visible');
     $('.flip-container').toggleClass('hover');
@@ -83,10 +87,10 @@ function switchView(newView) {
     }, 1600);
   }
   dimension = newDimension;
-  $(`#btn-${view}`).hide();
-  if (view == '2D') {
+  $(`#btn-${currentView}`).hide();
+  if (currentView == '2D') {
     $('#btn-2DC,#btn-3D').show();
-  } else if (view == '2DC') {
+  } else if (currentView == '2DC') {
     $('#btn-2D,#btn-3D').show();
   } else {
     $('#btn-2D,#btn-2DC').show();
@@ -98,8 +102,8 @@ function switchView(newView) {
  * Change the tile layer.
  * @param {layer} layer - tile layer.
  */
-function switchLayer(layer) {
-  if (view !== '3D') {
+function switchLayer(layer) { // eslint-disable-line no-unused-vars
+  if (currentView !== '3D') {
     map.removeLayer(layer2D);
     layer2D = L.tileLayer(layers[layer]);
     map.addLayer(layer2D);
@@ -116,8 +120,9 @@ function switchLayer(layer) {
  * @param {node} node - Device or Pool.
  * @param {nodeType} nodeType - Device or Pool.
  */
-function createNode(node, nodeType) {
-  if (view == '2D' || view == '2DC') {
+function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
+  let marker = null;
+  if (currentView == '2D' || currentView == '2DC') {
     marker = L.marker([node.latitude, node.longitude]);
     if (nodeType === 'device') {
       marker.icon = window[`icon_${node.subtype}`] || routerIcon;
@@ -154,9 +159,9 @@ function createNode(node, nodeType) {
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node.id; // eslint-disable-line no-undef
   });
-  if (view == '2D') {
+  if (currentView == '2D') {
     marker.addTo(map);
-  } else if (view == '2DC') {
+  } else if (currentView == '2DC') {
     markers.addLayer(marker);
   }
 }
@@ -165,12 +170,12 @@ function createNode(node, nodeType) {
  * Create a link.
  * @param {link} link - Link.
  */
-function createLink(link) {
+function createLink(link) { // eslint-disable-line no-unused-vars
   const sourceLatitude = link.source.latitude;
   const sourceLongitude = link.source.longitude;
   const destinationLatitude = link.destination.latitude;
   const destinationLongitude = link.destination.longitude;
-  if (view == '2D' || view == '2DC') {
+  if (currentView == '2D' || currentView == '2DC') {
     let pointA = new L.LatLng(sourceLatitude, sourceLongitude);
     let pointB = new L.LatLng(destinationLatitude, destinationLongitude);
     const pointList = [pointA, pointB];
@@ -193,7 +198,7 @@ function createLink(link) {
     polyline.bindTooltip(link['name'], {
       permanent: false,
     });
-    if (view == '2D') {
+    if (currentView == '2D') {
       polyline.addTo(map);
     } else {
       markers.addLayer(polyline);
@@ -224,18 +229,18 @@ function createLink(link) {
  */
 function deleteAll() {
   for (let i = 0; i < markersArray.length; i++) {
-    if (view == '2D') {
+    if (currentView == '2D') {
       markersArray[i].removeFrom(map);
-    } else if (view == '3D') {
+    } else if (currentView == '3D') {
       markersArray[i].removeFrom(earth);
     } else {
       markers.removeLayer(markersArray[i]);
     }
   }
   for (let i = 0; i < polylinesArray.length; i++) {
-    if (view == '2D') {
+    if (currentView == '2D') {
       polylinesArray[i].removeFrom(map);
-    } else if (view == '2DC') {
+    } else if (currentView == '2DC') {
       markers.removeLayer(polylinesArray[i]);
     } else {
       try {

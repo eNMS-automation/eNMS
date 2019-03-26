@@ -36,15 +36,13 @@ def configure_cli(app: Flask) -> None:
     def start(name, devices, payload):
         print(devices, payload)
         # example: flask start service_name
-        # example 2: flask start service_name device1,device2,device3
+        # example 2: flask start get_facts --devices Washington,Denver
+        # example 3: flask start a_service --payload '{"a": "b"}'
         if devices:
             devices = {fetch("Device", name=name) for name in devices.split(",")}
         else:
             devices = set()
         if payload:
-            payload = loads(properties)
-        echo(
-            str_dict(fetch("Job", name=name).try_run(targets=targets, payload=payload))[
-                0
-            ]
-        )
+            payload = loads(payload)
+        job = fetch("Job", name=name)
+        echo(str_dict(job.try_run(targets=devices, payload=payload)[0]))

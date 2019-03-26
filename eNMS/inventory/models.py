@@ -21,7 +21,7 @@ from eNMS.base.associations import (
     job_device_table,
     job_pool_table,
 )
-from eNMS.base.functions import fetch
+from eNMS.base.functions import fetch, fetch_all
 from eNMS.base.models import Base
 from eNMS.base.properties import (
     custom_properties,
@@ -91,6 +91,12 @@ class Device(CustomDevice):
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
+    def update(self, **kwargs: Any) -> None:
+        for pool in fetch_all("Pool"):
+            if not pool.never_update and pool.object_match(self):
+                pool.devices.append(self)
+        super.update(**kwargs)
+
     def __repr__(self) -> str:
         return f"{self.name} ({self.model})"
 
@@ -129,6 +135,9 @@ class Link(Object):
         kwargs.update(
             {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
         )
+        for pool in fetch_all("Pool"):
+            if not pool.never_update and pool.object_match(self):
+                pool.links.append(self)
         super().update(**kwargs)
 
 

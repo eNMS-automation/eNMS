@@ -13,21 +13,21 @@ from scp import SCPClient
 from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
-from eNMS import scheduler
+from eNMS import db, scheduler
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.base.functions import fetch, try_commit
+from eNMS.base.functions import fetch
 from eNMS.base.models import Base
 from eNMS.inventory.models import Device
 
@@ -73,6 +73,7 @@ class Job(Base):
     send_notification_method = Column(String, default="mail_feedback_notification")
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String, default="")
+    real_time_logs = Column(MutableList.as_mutable(PickleType), default=[])
 
     @hybrid_property
     def status(self) -> str:
@@ -94,7 +95,7 @@ class Job(Base):
         for pool in self.pools:
             targets |= set(pool.devices)
         self.number_of_targets = len(targets)
-        try_commit()
+        db.session.commit()
         return targets
 
     def job_sources(self, workflow: "Workflow", subtype: str = "all") -> List["Job"]:
@@ -167,7 +168,7 @@ class Job(Base):
         now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             self.completed = self.failed = 0
-            try_commit()
+            db.session.commit()
             info(f"Running job {self.name}, attempt {i}")
             attempt = self.run(payload, job_from_workflow_targets, targets)
             results[f"Attempts {i + 1}"] = attempt
@@ -201,14 +202,20 @@ class Job(Base):
         info(f"{self.name}: finished.")
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
-        try_commit()
+        db.session.commit()
         if not from_workflow and self.send_notification:
             self.notify(results, now)
         return results, now
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
+        session = db.create_scoped_session()
         try:
+
+            self.real_time_logs.append(f"Running service on {device.name}")
+            session.commit()
             results = self.job(payload, device) if device else self.job(payload)
+            self.real_time_logs.append(f"{device.name} done.")
+            session.commit()
         except Exception:
             results = {
                 "success": False,
@@ -216,7 +223,7 @@ class Job(Base):
             }
         self.completed += 1
         self.failed += 1 - results["success"]
-        try_commit()
+        session.commit()
         return results
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
@@ -404,7 +411,7 @@ class Workflow(Job):
         self.state = {"jobs": {}}
         if device:
             self.state["current_device"] = device.name
-        try_commit()
+        db.session.commit()
         jobs: List[Job] = [self.jobs[0]]
         visited: Set = set()
         results: dict = {"success": False}
@@ -416,7 +423,7 @@ class Workflow(Job):
                 continue
             visited.add(job)
             self.state["current_job"] = job.get_properties()
-            try_commit()
+            db.session.commit()
             log = f"Workflow {self.name}: job {job.name}"
             if device:
                 log += f" on {device.name}"
@@ -426,7 +433,7 @@ class Workflow(Job):
             )
             success = job_results["results"]["success"]
             self.state["jobs"][job.id] = success
-            try_commit()
+            db.session.commit()
             edge_type_to_follow = "success" if success else "failure"
             for successor in job.job_successors(self, edge_type_to_follow):
                 if successor not in visited:

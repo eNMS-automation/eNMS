@@ -1,9 +1,11 @@
+from contextlib import contextmanager
 from flask import abort, Blueprint, jsonify, request, render_template
 from flask.wrappers import Response
 from flask_login import current_user, login_required
 from functools import wraps
 from logging import info
 from sqlalchemy import exc
+from sqlalchemy.orm import scoped_session, sessionmaker
 from string import punctuation
 from typing import Any, Callable, List, Optional, Tuple
 
@@ -64,13 +66,6 @@ def export(model: str) -> List[dict]:
 
 def get_one(model: str) -> db.Model:
     return classes[model].query.one()
-
-
-def try_commit() -> None:
-    # try:
-    db.session.commit()
-    # except RuntimeError:
-    # pass
 
 
 def factory(cls_name: str, **kwargs: Any) -> db.Model:
@@ -198,6 +193,20 @@ def post(
         return inner
 
     return outer
+
+
+# @contextmanager
+# def thread_local_session_scope():
+#     Session = db.create_scoped_session()
+#     threaded_session = Session()
+#     try:
+#         yield threaded_session
+#         threaded_session.commit()
+#     except:
+#         threaded_session.rollback()
+#         raise
+#     finally:
+#         Session.remove()
 
 
 def str_dict(input: Any, depth: int = 0) -> str:

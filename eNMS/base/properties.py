@@ -194,6 +194,7 @@ job_public_properties: List[str] = base_properties + [
     "is_running",
     "status",
     "state",
+    "real_time_logs",
     "positions",
     "push_to_git",
     "waiting_time",

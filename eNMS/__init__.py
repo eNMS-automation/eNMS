@@ -6,8 +6,8 @@ from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from simplekml import Color, Style
+from sqlalchemy.orm import scoped_session, sessionmaker
 from typing import Any, Optional, Tuple, Type, Union
-import click
 
 from eNMS.config import Config
 from eNMS.extensions import (

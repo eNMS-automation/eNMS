@@ -22,7 +22,7 @@ from eNMS.extensions import (
 from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
 from eNMS.base.default import create_default, create_examples
-from eNMS.base.functions import fetch
+from eNMS.base.functions import add_classes, fetch
 from eNMS.base.properties import (
     device_subtypes,
     link_subtypes,
@@ -140,6 +140,10 @@ def configure_google_earth(path: Path) -> None:
         kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
         line_style.linestyle.color = kml_color
         google_earth_styles[subtype] = line_style
+
+
+def configure_services():
+    pass
 
 
 def create_app(path: Path, config_class: Type[Config]) -> Flask:

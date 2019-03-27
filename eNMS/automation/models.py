@@ -220,6 +220,7 @@ class Job(Base):
                 }
             self.completed += 1
             self.failed += 1 - results["success"]
+            session.merge(self)
             return results
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:

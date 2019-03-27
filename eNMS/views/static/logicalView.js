@@ -1,5 +1,6 @@
 /*
 global
+alertify: false
 vis: false
 */
 
@@ -67,4 +68,5 @@ function displayPool(nodes, edges) { // eslint-disable-line no-unused-vars
       $('.insite-menu').show();
     }
   });
+  alertify.notify('Scroll to zoom in/out. Right-click on a node to display the menu.');
 }

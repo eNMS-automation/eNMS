@@ -1,9 +1,14 @@
 from click import argument, echo, option
+from importlib import reload
 from flask import Flask
-from flask.cli import with_appcontext
+from flask.cli import DispatchingApp, pass_script_info
 from json import loads
+from os import environ
+from werkzeug.serving import run_simple
 
-
+from eNMS import db
+from eNMS.base.classes import service_classes
+from eNMS.automation import create_service_classes
 from eNMS.base.functions import delete, factory, fetch, str_dict
 
 
@@ -34,7 +39,6 @@ def configure_cli(app: Flask) -> None:
     @option("--devices")
     @option("--payload")
     def start(name, devices, payload):
-        print(devices, payload)
         # example: flask start service_name
         # example 2: flask start get_facts --devices Washington,Denver
         # example 3: flask start a_service --payload '{"a": "b"}'
@@ -46,3 +50,23 @@ def configure_cli(app: Flask) -> None:
             payload = loads(payload)
         job = fetch("Job", name=name)
         echo(str_dict(job.try_run(targets=devices, payload=payload)[0]))
+
+    @app.cli.command()
+    @pass_script_info
+    def develop(info, *args):
+        # example: flask fetch device Washington
+        app = DispatchingApp(info.load_app)
+        path_services = [app._app.path / "eNMS" / "automation" / "services"]
+        custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
+        if custom_services_path:
+            path_services.append(Path(custom_services_path))
+        extra_files = [file for path in path_services for file in path.glob("**/*.py")]
+        print(extra_files)
+        run_simple(
+            "0.0.0.0",
+            5000,
+            app,
+            use_reloader=True,
+            use_debugger=True,
+            extra_files=extra_files,
+        )

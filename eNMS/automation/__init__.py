@@ -1,4 +1,5 @@
 from flask import Blueprint
+from importlib import reload
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
 from os import environ
@@ -24,9 +25,10 @@ from eNMS.base.properties import (
 from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
 
 add_classes(Job, Service, Workflow, WorkflowEdge)
+modules = []
 
 
-def create_service_classes() -> None:
+def create_service_classes(reload_module=False) -> None:
     path_services = [Path.cwd() / "eNMS" / "automation" / "services"]
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     if custom_services_path:
@@ -38,9 +40,12 @@ def create_service_classes() -> None:
                 continue
             if dont_create_examples and "examples" in str(file):
                 continue
-            spec = spec_from_file_location(str(file), str(file))
+            name = str(file).split("/")[-1][:-3]
+            spec = spec_from_file_location(name, str(file))
             assert isinstance(spec.loader, Loader)
-            spec.loader.exec_module(module_from_spec(spec))  # type: ignore
+            module = module_from_spec(spec)
+            modules.append(module)
+            spec.loader.exec_module(module)  # type: ignore
     for cls_name, cls in service_classes.items():
         cls_to_properties[cls_name] = list(cls_to_properties["Service"])
         for col in cls.__table__.columns:

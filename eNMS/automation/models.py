@@ -27,7 +27,7 @@ from eNMS.base.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.base.functions import fetch
+from eNMS.base.functions import fetch, session_scope
 from eNMS.base.models import Base
 from eNMS.inventory.models import Device
 
@@ -208,23 +208,19 @@ class Job(Base):
         return results, now
 
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
-        session = db.create_scoped_session()
-        try:
-
-            self.real_time_logs.append(f"Running service on {device.name}")
-            session.commit()
-            results = self.job(payload, device) if device else self.job(payload)
-            self.real_time_logs.append(f"{device.name} done.")
-            session.commit()
-        except Exception:
-            results = {
-                "success": False,
-                "result": chr(10).join(format_exc().splitlines()),
-            }
-        self.completed += 1
-        self.failed += 1 - results["success"]
-        session.commit()
-        return results
+        with session_scope() as session:
+            try:
+                # self.real_time_logs.append(f"Running service on {device.name}")
+                results = self.job(payload, device) if device else self.job(payload)
+                # self.real_time_logs.append(f"{device.name} done.")
+            except Exception:
+                results = {
+                    "success": False,
+                    "result": chr(10).join(format_exc().splitlines()),
+                }
+            self.completed += 1
+            self.failed += 1 - results["success"]
+            return results
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
         with scheduler.app.app_context():

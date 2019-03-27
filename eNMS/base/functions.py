@@ -9,7 +9,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from string import punctuation
 from typing import Any, Callable, List, Optional, Tuple
 
-from eNMS.extensions import db
+from eNMS.extensions import db, scheduler
 from eNMS.base.classes import classes
 from eNMS.base.properties import pretty_names, property_types
 
@@ -195,18 +195,17 @@ def post(
     return outer
 
 
-# @contextmanager
-# def thread_local_session_scope():
-#     Session = db.create_scoped_session()
-#     threaded_session = Session()
-#     try:
-#         yield threaded_session
-#         threaded_session.commit()
-#     except:
-#         threaded_session.rollback()
-#         raise
-#     finally:
-#         Session.remove()
+@contextmanager
+def session_scope():
+    session = scheduler.session()
+    try:
+        yield session
+        session.commit()
+    except:
+        session.rollback()
+        raise
+    finally:
+        scheduler.session.remove()
 
 
 def str_dict(input: Any, depth: int = 0) -> str:

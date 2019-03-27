@@ -40,6 +40,7 @@ def register_extensions(app: Flask) -> None:
     mail_client.init_app(app)
     FlaskCLI(app)
     scheduler.app = app
+    scheduler.session = db.create_scoped_session()
 
 
 def register_blueprints(app: Flask) -> None:

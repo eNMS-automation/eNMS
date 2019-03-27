@@ -379,7 +379,6 @@ function getWorkflowState() {
       }
       $('#status').text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
-        console.log(wf);
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_device) {
             $('#current-device').text(

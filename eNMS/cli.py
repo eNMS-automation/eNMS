@@ -1,6 +1,6 @@
 from click import argument, echo, option
 from flask import Flask
-from flask.cli import DispatchingApp, pass_script_info
+from flask.cli import DispatchingApp, pass_script_info, ScriptInfo
 from json import loads
 from os import environ
 from pathlib import Path
@@ -13,21 +13,21 @@ def configure_cli(app: Flask) -> None:
     @app.cli.command(name="fetch")
     @argument("table")
     @argument("name")
-    def cli_fetch(table, name):
+    def cli_fetch(table: str, name: str) -> None:
         # example: flask fetch device Washington
         echo(str_dict(fetch(table, name=name).get_properties()))
 
     @app.cli.command()
     @argument("table")
     @argument("properties")
-    def update(table, properties):
+    def update(table: str, properties: str) -> None:
         # example: flask update device '{"name": "Aserver", "description": "test"}'
         echo(str_dict(factory(table, **loads(properties)).get_properties()))
 
     @app.cli.command(name="delete")
     @argument("table")
     @argument("name")
-    def cli_delete(table, name):
+    def cli_delete(table: str, name: str) -> None:
         # example: flask delete device Washington
         echo(str_dict(delete(table, name=name)))
 
@@ -35,25 +35,25 @@ def configure_cli(app: Flask) -> None:
     @argument("name")
     @option("--devices")
     @option("--payload")
-    def start(name, devices, payload):
+    def start(name: str, devices: str, payload: str) -> None:
         # example: flask start service_name
         # example 2: flask start get_facts --devices Washington,Denver
         # example 3: flask start a_service --payload '{"a": "b"}'
         if devices:
-            devices = {fetch("Device", name=name) for name in devices.split(",")}
+            targets = {fetch("Device", name=name) for name in devices.split(",")}
         else:
-            devices = set()
+            targets = set()
         if payload:
             payload = loads(payload)
         job = fetch("Job", name=name)
-        echo(str_dict(job.try_run(targets=devices, payload=payload)[0]))
+        echo(str_dict(job.try_run(targets=targets, payload=payload)[0]))
 
     @app.cli.command()
     @pass_script_info
-    def develop(info, *args):
+    def develop(info: ScriptInfo) -> None:
         # example: flask develop
         app = DispatchingApp(info.load_app)
-        path_services = [app._app.path / "eNMS" / "automation" / "services"]
+        path_services = [Path.cwd() / "eNMS" / "automation" / "services"]
         custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
         if custom_services_path:
             path_services.append(Path(custom_services_path))

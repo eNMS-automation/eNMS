@@ -150,7 +150,7 @@ def configure_google_earth(path: Path) -> None:
         google_earth_styles[subtype] = line_style
 
 
-def configure_services(path: Path):
+def configure_services(path: Path) -> None:
     path_services = [path / "eNMS" / "automation" / "services"]
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     if custom_services_path:

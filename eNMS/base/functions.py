@@ -6,7 +6,7 @@ from functools import wraps
 from logging import info
 from sqlalchemy import exc
 from string import punctuation
-from typing import Any, Callable, List, Optional, Tuple
+from typing import Any, Callable, Generator, List, Optional, Tuple
 
 from eNMS.extensions import db, scheduler
 from eNMS.base.classes import classes
@@ -195,7 +195,7 @@ def post(
 
 
 @contextmanager
-def session_scope():
+def session_scope() -> Generator:
     session = scheduler.session()
     try:
         yield session

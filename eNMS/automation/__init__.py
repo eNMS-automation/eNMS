@@ -1,10 +1,4 @@
 from flask import Blueprint
-from importlib import reload
-from importlib.abc import Loader
-from importlib.util import spec_from_file_location, module_from_spec
-from os import environ
-from pathlib import Path
-from sqlalchemy import Boolean, Float, Integer, PickleType
 
 bp = Blueprint(
     "automation_blueprint",

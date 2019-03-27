@@ -2,10 +2,14 @@ from flask import Flask, render_template
 from flask.wrappers import Request, Response
 from flask_cli import FlaskCLI
 from importlib import import_module
+from importlib.abc import Loader
+from importlib.util import spec_from_file_location, module_from_spec
 from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
+from os import environ
 from pathlib import Path
 from simplekml import Color, Style
+from sqlalchemy import Boolean, Float, Integer, PickleType
 from sqlalchemy.orm import scoped_session, sessionmaker
 from typing import Any, Optional, Tuple, Type, Union
 
@@ -195,6 +199,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_logs(app)
     configure_errors(app)
     configure_google_earth(path)
+    configure_services(path)
     configure_cli(app)
     if USE_VAULT:
         configure_vault_client(app)

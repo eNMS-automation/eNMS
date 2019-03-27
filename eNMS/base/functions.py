@@ -67,10 +67,10 @@ def get_one(model: str) -> db.Model:
 
 
 def try_commit() -> None:
-    try:
-        db.session.commit()
-    except RuntimeError:
-        pass
+    # try:
+    db.session.commit()
+    # except RuntimeError:
+    # pass
 
 
 def factory(cls_name: str, **kwargs: Any) -> db.Model:

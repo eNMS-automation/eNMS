@@ -20,6 +20,7 @@ from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
+from eNMS import scheduler
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,
@@ -84,12 +85,7 @@ class Job(Base):
     @property
     def progress(self) -> str:
         if self.is_running:
-            if self.multiprocessing:
-                return "Unknown"
-            else:
-                return (
-                    f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"
-                )
+            return f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"
         else:
             return "N/A"
 
@@ -224,9 +220,10 @@ class Job(Base):
         return results
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
-        device, results, payload = args
-        device_result = self.get_results(payload, device)
-        results["devices"][device.name] = device_result
+        with scheduler.app.app_context():
+            device, results, payload = args
+            device_result = self.get_results(payload, device)
+            results["devices"][device.name] = device_result
 
     def run(
         self,

@@ -54,14 +54,13 @@ def configure_cli(app: Flask) -> None:
     @app.cli.command()
     @pass_script_info
     def develop(info, *args):
-        # example: flask fetch device Washington
+        # example: flask develop
         app = DispatchingApp(info.load_app)
         path_services = [app._app.path / "eNMS" / "automation" / "services"]
         custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
         if custom_services_path:
             path_services.append(Path(custom_services_path))
         extra_files = [file for path in path_services for file in path.glob("**/*.py")]
-        print(extra_files)
         run_simple(
             "0.0.0.0",
             5000,

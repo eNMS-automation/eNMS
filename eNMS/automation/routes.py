@@ -41,7 +41,7 @@ def service_management() -> dict:
         compare_logs_form=CompareLogsForm(request.form),
         fields=service_table_properties,
         service_form=JobForm(request.form),
-        services_classes=list(service_classes),
+        services_classes=sorted(service_classes),
         services=serialize("Service"),
     )
 
@@ -66,7 +66,7 @@ def workflow_builder() -> dict:
         workflow_creation_form=JobForm(request.form),
         compare_logs_form=CompareLogsForm(request.form),
         service_form=JobForm(request.form),
-        services_classes=list(service_classes),
+        services_classes=sorted(service_classes),
     )
 
 

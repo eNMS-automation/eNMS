@@ -7,8 +7,6 @@ from os import environ
 from werkzeug.serving import run_simple
 
 from eNMS import db
-from eNMS.base.classes import service_classes
-from eNMS.automation import create_service_classes
 from eNMS.base.functions import delete, factory, fetch, str_dict
 
 

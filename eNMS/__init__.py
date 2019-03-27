@@ -21,13 +21,18 @@ from eNMS.extensions import (
 )
 from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
+from eNMS.base.classes import classes, service_classes
 from eNMS.base.default import create_default, create_examples
-from eNMS.base.functions import add_classes, fetch
+from eNMS.base.functions import fetch
 from eNMS.base.properties import (
+    boolean_properties,
+    cls_to_properties,
     device_subtypes,
+    google_earth_styles,
     link_subtypes,
     link_subtype_to_color,
-    google_earth_styles,
+    property_types,
+    service_import_properties,
 )
 from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
@@ -142,8 +147,40 @@ def configure_google_earth(path: Path) -> None:
         google_earth_styles[subtype] = line_style
 
 
-def configure_services():
-    pass
+def configure_services(path: Path):
+    path_services = [path / "eNMS" / "automation" / "services"]
+    custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
+    if custom_services_path:
+        path_services.append(Path(custom_services_path))
+    dont_create_examples = not int(environ.get("CREATE_EXAMPLES", True))
+    for path in path_services:
+        for file in path.glob("**/*.py"):
+            if "init" in str(file):
+                continue
+            if dont_create_examples and "examples" in str(file):
+                continue
+            name = str(file).split("/")[-1][:-3]
+            spec = spec_from_file_location(name, str(file))
+            assert isinstance(spec.loader, Loader)
+            module = module_from_spec(spec)
+            spec.loader.exec_module(module)  # type: ignore
+    for cls_name, cls in service_classes.items():
+        cls_to_properties[cls_name] = list(cls_to_properties["Service"])
+        for col in cls.__table__.columns:
+            cls_to_properties[cls_name].append(col.key)
+            service_import_properties.append(col.key)
+            if type(col.type) == Boolean:
+                boolean_properties.append(col.key)
+            if type(col.type) == PickleType and hasattr(cls, f"{col.key}_values"):
+                property_types[col.key] = "list"
+            else:
+                property_types[col.key] = {
+                    Boolean: "bool",
+                    Integer: "int",
+                    Float: "float",
+                    PickleType: "dict",
+                }.get(type(col.type), "str")
+    classes.update(service_classes)
 
 
 def create_app(path: Path, config_class: Type[Config]) -> Flask:

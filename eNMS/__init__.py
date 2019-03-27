@@ -22,6 +22,7 @@ from eNMS.extensions import (
     USE_VAULT,
     vault_client,
 )
+from eNMS.rest import configure_rest_api
 from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
 from eNMS.base.classes import classes, service_classes
@@ -37,7 +38,6 @@ from eNMS.base.properties import (
     property_types,
     service_import_properties,
 )
-from eNMS.base.rest import configure_rest_api
 from eNMS.logs.models import SyslogServer
 from eNMS.cli import configure_cli
 

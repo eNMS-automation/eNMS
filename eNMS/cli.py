@@ -1,12 +1,11 @@
 from click import argument, echo, option
-from importlib import reload
 from flask import Flask
 from flask.cli import DispatchingApp, pass_script_info
 from json import loads
 from os import environ
+from pathlib import Path
 from werkzeug.serving import run_simple
 
-from eNMS import db
 from eNMS.base.functions import delete, factory, fetch, str_dict
 
 

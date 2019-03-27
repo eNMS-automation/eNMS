@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
 from ldap3 import ALL, Server
 from os import environ
-from sqlalchemy import create_engine
 from tacacs_plus.client import TACACSClient
 
 USE_SYSLOG = int(environ.get("USE_SYSLOG", False))

@@ -5,7 +5,6 @@ from flask_login import current_user, login_required
 from functools import wraps
 from logging import info
 from sqlalchemy import exc
-from sqlalchemy.orm import scoped_session, sessionmaker
 from string import punctuation
 from typing import Any, Callable, List, Optional, Tuple
 
@@ -201,9 +200,10 @@ def session_scope():
     try:
         yield session
         session.commit()
-    except:
+    except Exception as e:
+        info(str(e))
         session.rollback()
-        raise
+        raise e
     finally:
         scheduler.session.remove()
 

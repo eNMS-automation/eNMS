@@ -10,7 +10,6 @@ from os import environ
 from pathlib import Path
 from simplekml import Color, Style
 from sqlalchemy import Boolean, Float, Integer, PickleType
-from sqlalchemy.orm import scoped_session, sessionmaker
 from typing import Any, Optional, Tuple, Type, Union
 
 from eNMS.config import Config

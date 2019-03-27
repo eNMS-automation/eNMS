@@ -38,7 +38,6 @@ class Base(db.Model):
 
     def __setattr__(self, property: str, value: Any) -> None:
         if property in private_properties and USE_VAULT:
-            print(property)
             if not value:
                 return
             vault_client.write(

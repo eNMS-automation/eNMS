@@ -11,7 +11,7 @@ folders: false
 /**
  * Export all for migration.
  */
-function migrationsExport() { // eslint-disable-line no-unused-vars
+export function migrationsExport() {
   alertify.notify('Export initiated.', 'success', 5);
   fCall('/admin/migration_export', '#import-export-form', function() {
     alertify.notify('Export successful.', 'success', 5);
@@ -21,7 +21,7 @@ function migrationsExport() { // eslint-disable-line no-unused-vars
 /**
  * Import all for migration.
  */
-function migrationsImport() { // eslint-disable-line no-unused-vars
+export function migrationsImport() {
   alertify.notify('Import initiated.', 'success', 5);
   fCall('/admin/migration_import', '#import-export-form', function(result) {
     alertify.notify(result, 'success', 5);
@@ -31,7 +31,7 @@ function migrationsImport() { // eslint-disable-line no-unused-vars
 /**
  * Database Helpers.
  */
-function databaseHelpers() { // eslint-disable-line no-unused-vars
+export function databaseHelpers() {
   alertify.notify('Starting to delete...', 'success', 5);
   fCall('/admin/database_helpers', '#database-helpers-form', function(result) {
     alertify.notify('Deletion done.', 'success', 5);
@@ -41,7 +41,7 @@ function databaseHelpers() { // eslint-disable-line no-unused-vars
 /**
  * Reset Status.
  */
-function resetStatus() { // eslint-disable-line no-unused-vars
+export function resetStatus() {
   call('/admin/reset_status', function(result) {
     alertify.notify('Reset successful.', 'success', 5);
   });
@@ -50,7 +50,7 @@ function resetStatus() { // eslint-disable-line no-unused-vars
 /**
  * Git Action.
  */
-function getGitContent() { // eslint-disable-line no-unused-vars
+export function getGitContent() {
   call('/admin/get_git_content', function(result) {
     alertify.notify('Action successful.', 'success', 5);
   });
@@ -60,7 +60,7 @@ function getGitContent() { // eslint-disable-line no-unused-vars
  * Start or shutdown the scheduler.
  * @param {action} action - Pause or resume.
  */
-function scheduler(action) { // eslint-disable-line no-unused-vars
+export function scheduler(action) {
   call(`/admin/scheduler/${action}`, function() {
       alertify.notify(`Scheduler ${action}d.`, 'success', 5);
     }

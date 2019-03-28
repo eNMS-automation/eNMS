@@ -264,6 +264,21 @@ class Service(Job):
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     __mapper_args__ = {"polymorphic_identity": "Service"}
 
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
+            f"""<button type="button" class="btn btn-success btn-xs"
+            onclick="runJob('{self.id}')">Run</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="editService('{self.id}')">Edit</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="editService('{self.id}', true)">Duplicate</button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('service', '{self.id}')">
+            Delete</button>""",
+        ]
+
     def get_credentials(self, device: Device) -> Tuple[str, str]:
         return (
             (self.creator.name, self.creator.password)
@@ -403,6 +418,23 @@ class Workflow(Job):
         super().__init__(**kwargs)
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
+
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogs('{obj.id}')"></i>Logs</a></button>""",
+            f"""<button type="button" class="btn btn-success btn-xs"
+            onclick="runJob('{obj.id}')">Run</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('workflow', '{obj.id}')">
+            Edit</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showWorkflowModalDuplicate('{obj.id}')">
+            Duplicate</button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('workflow', '{obj.id}')">
+            Delete</button>""",
+        ]
 
     def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         self.state = {"jobs": {}}

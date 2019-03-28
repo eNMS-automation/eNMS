@@ -366,19 +366,6 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
             onclick="deleteInstance('logrule', '{obj.id}')">
             Delete</button>""",
         ],
-        "service": [
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('{obj.id}')"></i>Logs</a></button>""",
-            f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{obj.id}')">Run</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="editService('{obj.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="editService('{obj.id}', true)">Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('service', '{obj.id}')">
-            Delete</button>""",
-        ],
         "task": [
             f"""<button id="pause-resume-{obj.id}" type="button"
             class="btn btn-success btn-xs" onclick=
@@ -390,30 +377,6 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('task', '{obj.id}')">
-            Delete</button>""",
-        ],
-        "user": [
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('user', '{obj.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('user', '{obj.id}', true)">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('user', '{obj.id}')">Delete</button>""",
-        ],
-        "workflow": [
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('{obj.id}')"></i>Logs</a></button>""",
-            f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{obj.id}')">Run</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('workflow', '{obj.id}')">
-            Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showWorkflowModalDuplicate('{obj.id}')">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('workflow', '{obj.id}')">
             Delete</button>""",
         ],
     }[type]

@@ -5,8 +5,7 @@ doc: false
 initTable: false
 */
 
-export const table = initTable(
-  // eslint-disable-line no-unused-vars
+let table = initTable(
   "user",
   "user",
   ["Edit", "Duplicate", "Delete"]

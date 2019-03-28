@@ -278,6 +278,7 @@ function saveInstance(type, instance, hideModal=true) {
 function processData(type) { // eslint-disable-line no-unused-vars
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
     saveInstance(type, instance);
+    console.log(table);
     if (table) {
       table.ajax.reload(null, false);
     }

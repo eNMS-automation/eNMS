@@ -91,5 +91,5 @@
   <script>
     const propertyTypes = {{ property_types|tojson|safe }};
   </script>
-  <script src="{{ url_for('admin_blueprint.static', filename='instanceManagement.js') }}"></script>
+  <script type="module" src="{{ url_for('admin_blueprint.static', filename='instanceManagement.js') }}"></script>
 {% endblock javascripts %}

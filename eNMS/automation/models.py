@@ -210,9 +210,9 @@ class Job(Base):
     def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
         with session_scope() as session:
             try:
-                # self.real_time_logs.append(f"Running service on {device.name}")
+                self.real_time_logs.append(f"Running service on {device.name}")
                 results = self.job(payload, device) if device else self.job(payload)
-                # self.real_time_logs.append(f"{device.name} done.")
+                self.real_time_logs.append(f"{device.name} done.")
             except Exception:
                 results = {
                     "success": False,

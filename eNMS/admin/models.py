@@ -7,7 +7,7 @@ from os import scandir, remove
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
-from typing import Any
+from typing import Any, List
 
 from eNMS.base.associations import pool_user_table
 from eNMS.base.functions import fetch, fetch_all
@@ -28,6 +28,17 @@ class User(Base, UserMixin):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
+
+    def generate_row(self) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('user', '{self.id}')">Edit</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('user', '{self.id}', true)">
+            Duplicate</button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('user', '{self.id}')">Delete</button>""",
+        ]
 
     @property
     def is_admin(self) -> bool:

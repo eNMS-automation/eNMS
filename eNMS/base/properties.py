@@ -340,24 +340,6 @@ table_properties: Dict[str, List[str]] = {
     "workflow": workflow_table_properties,
 }
 
-
-def table_static_entries(type: str, obj: db.Model) -> List[str]:
-    return {
-        "log": [
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('Log', '{obj.id}')">Delete</button>"""
-        ],
-        "logrule": [
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showTypeModal('logrule', '{obj.id}')">
-            Edit</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('logrule', '{obj.id}')">
-            Delete</button>""",
-        ],
-    }[type]
-
-
 default_diagrams_properties: Dict[str, str] = {
     "Device": "model",
     "Link": "model",

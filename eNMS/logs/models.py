@@ -19,6 +19,12 @@ class Log(Base):
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
 
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="deleteInstance('Log', '{self.id}')">Delete</button>"""
+        ]
+
     def __repr__(self) -> str:
         return self.content
 
@@ -34,6 +40,16 @@ class LogRule(Base):
     content_regex = Column(Boolean)
     logs = relationship("Log", secondary=log_rule_log_table, back_populates="log_rules")
     jobs = relationship("Job", secondary=job_log_rule_table, back_populates="log_rules")
+
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showTypeModal('logrule', '{self.id}')">
+            Edit</button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="deleteInstance('logrule', '{self.id}')">
+            Delete</button>""",
+        ]
 
 
 class SyslogUDPHandler(BaseRequestHandler):

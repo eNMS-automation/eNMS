@@ -25,7 +25,6 @@ from eNMS.base.properties import (
     default_diagrams_properties,
     table_properties,
     reverse_pretty_names,
-    table_static_entries,
     type_to_diagram_properties,
 )
 

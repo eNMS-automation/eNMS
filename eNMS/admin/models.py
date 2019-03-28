@@ -29,7 +29,7 @@ class User(Base, UserMixin):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
-    def generate_row(self) -> List[str]:
+    def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{self.id}')">Edit</button>""",

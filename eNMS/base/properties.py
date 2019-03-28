@@ -344,32 +344,6 @@ table_properties: Dict[str, List[str]] = {
 def table_static_entries(type: str, obj: db.Model) -> List[str]:
     status = "" if type != "task" else "Pause" if obj.is_active else "Resume"
     return {
-        "configuration": [
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('device', '{obj.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showConfigurations('{obj.id}')">
-            Configuration</button>""",
-            f"""<label class="btn btn-default btn-xs btn-file"
-            style="width:100%;"><a href="download_configuration/{obj.name}">
-            Download</a></label>""",
-        ],
-        "device": [
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="deviceAutomationModal('{obj.id}')">
-            Automation</button>""",
-            f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="connectionParametersModal('{obj.id}')">
-            Connect</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('device', '{obj.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('device', '{obj.id}', true)">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('device', '{obj.id}')">
-            Delete</button>""",
-        ],
         "instance": [
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('instance', '{obj.id}')">Edit</button>""",
@@ -379,15 +353,6 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('instance', '{obj.id}')">
             Delete</button>""",
-        ],
-        "link": [
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '{obj.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '{obj.id}', true)">Duplicate
-            </button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('link', '{obj.id}')">Delete</button>""",
         ],
         "log": [
             f"""<button type="button" class="btn btn-danger btn-xs"
@@ -400,23 +365,6 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="deleteInstance('logrule', '{obj.id}')">
             Delete</button>""",
-        ],
-        "pool": [
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showPoolView('{obj.id}')">
-            Visualize</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('pool', '{obj.id}')">
-            Edit properties</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="updatePool('{obj.id}')">Update</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('pool', '{obj.id}', true)">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showPoolObjects('{obj.id}')">Edit objects</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('pool', '{obj.id}')">Delete</button>""",
         ],
         "service": [
             f"""<button type="button" class="btn btn-info btn-xs"

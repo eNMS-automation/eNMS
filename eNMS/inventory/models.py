@@ -101,6 +101,36 @@ class Device(CustomDevice):
             elif self in pool.devices:
                 pool.devices.remove(self)
 
+    def generate_row(self, table: str) -> List[str]:
+        if table == "device":
+            return [
+                f"""<button type="button" class="btn btn-info btn-xs"
+                onclick="deviceAutomationModal('{self.id}')">
+                Automation</button>""",
+                f"""<button type="button" class="btn btn-success btn-xs"
+                onclick="connectionParametersModal('{self.id}')">
+                Connect</button>""",
+                f"""<button type="button" class="btn btn-primary btn-xs"
+                onclick="showTypeModal('device', '{self.id}')">Edit</button>""",
+                f"""<button type="button" class="btn btn-primary btn-xs"
+                onclick="showTypeModal('device', '{self.id}', true)">
+                Duplicate</button>""",
+                f"""<button type="button" class="btn btn-danger btn-xs"
+                onclick="confirmDeletion('device', '{self.id}')">
+                Delete</button>""",
+            ]
+        else:
+            return [
+                f"""<button type="button" class="btn btn-primary btn-xs"
+                onclick="showTypeModal('device', '{self.id}')">Edit</button>""",
+                f"""<button type="button" class="btn btn-primary btn-xs"
+                onclick="showConfigurations('{self.id}')">
+                Configuration</button>""",
+                f"""<label class="btn btn-default btn-xs btn-file"
+                style="width:100%;"><a href="download_configuration/{self.name}">
+                Download</a></label>""",
+            ]
+
     def __repr__(self) -> str:
         return f"{self.name} ({self.model})"
 
@@ -148,6 +178,17 @@ class Link(Object):
             elif self in pool.links:
                 pool.links.remove(self)
 
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('link', '{self.id}')">Edit</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('link', '{self.id}', true)">Duplicate
+            </button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('link', '{self.id}')">Delete</button>""",
+        ]
+
 
 AbstractPool: Any = type(
     "AbstractPool",
@@ -193,6 +234,25 @@ class Pool(AbstractPool):
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
         self.compute_pool()
+
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showPoolView('{self.id}')">
+            Visualize</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('pool', '{self.id}')">
+            Edit properties</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="updatePool('{self.id}')">Update</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('pool', '{self.id}', true)">
+            Duplicate</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showPoolObjects('{self.id}')">Edit objects</button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('pool', '{self.id}')">Delete</button>""",
+        ]
 
     @property
     def object_number(self) -> str:

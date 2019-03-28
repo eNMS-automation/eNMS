@@ -342,18 +342,7 @@ table_properties: Dict[str, List[str]] = {
 
 
 def table_static_entries(type: str, obj: db.Model) -> List[str]:
-    status = "" if type != "task" else "Pause" if obj.is_active else "Resume"
     return {
-        "instance": [
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('instance', '{obj.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('instance', '{obj.id}', true)">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('instance', '{obj.id}')">
-            Delete</button>""",
-        ],
         "log": [
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="deleteInstance('Log', '{obj.id}')">Delete</button>"""
@@ -364,19 +353,6 @@ def table_static_entries(type: str, obj: db.Model) -> List[str]:
             Edit</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="deleteInstance('logrule', '{obj.id}')">
-            Delete</button>""",
-        ],
-        "task": [
-            f"""<button id="pause-resume-{obj.id}" type="button"
-            class="btn btn-success btn-xs" onclick=
-            "{status.lower()}Task('{obj.id}')">{status}</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('task', '{obj.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('task', '{obj.id}', true)">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('task', '{obj.id}')">
             Delete</button>""",
         ],
     }[type]

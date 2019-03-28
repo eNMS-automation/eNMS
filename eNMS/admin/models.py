@@ -59,6 +59,18 @@ class Instance(Base):
     status = Column(String, default="down")
     cpu_load = Column(Float)
 
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('instance', '{self.id}')">Edit</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('instance', '{self.id}', true)">
+            Duplicate</button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('instance', '{self.id}')">
+            Delete</button>""",
+        ]
+
 
 class Parameters(Base):
 

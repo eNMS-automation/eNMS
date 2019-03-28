@@ -3,6 +3,7 @@ from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
+from typing import List
 
 from eNMS.extensions import db, scheduler
 from eNMS.base.associations import job_log_rule_table, log_rule_log_table

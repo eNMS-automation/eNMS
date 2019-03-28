@@ -45,11 +45,11 @@ class Task(Base):
             self.schedule()
 
     def generate_row(self, table: str) -> List[str]:
-        status = "pause" if self.is_active else "resume"
+        status = "Pause" if self.is_active else "Resume"
         return [
             f"""<button id="pause-resume-{self.id}" type="button"
             class="btn btn-success btn-xs" onclick=
-            "{status}Task('{self.id}')">{status}</button>""",
+            "{status.lower()}Task('{self.id}')">{status}</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('task', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

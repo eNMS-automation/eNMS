@@ -3,8 +3,6 @@ from sqlalchemy import Boolean, Integer, String, Float
 from yaml import load, SafeLoader
 from typing import Dict, List
 
-from eNMS import db
-
 
 def get_custom_properties() -> dict:
     filepath = environ.get("PATH_CUSTOM_PROPERTIES")

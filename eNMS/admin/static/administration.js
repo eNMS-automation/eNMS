@@ -9,7 +9,7 @@ parameters: false
 /**
  * Save Parameters.
  */
-function saveParameters() { // eslint-disable-line no-unused-vars
+export function saveParameters() {
   fCall("/admin/save_parameters", "#parameters-form", function() {
     alertify.notify("Parameters saved.", "success", 5);
   });

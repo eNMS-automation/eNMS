@@ -1,39 +1,39 @@
 (function($, window) {
   $.fn.contextMenu = function(settings) {
     return this.each(function() {
-      $(this).on('contextmenu', function(e) {
+      $(this).on("contextmenu", function(e) {
         if (e.ctrlKey) {
           return;
         }
         const $menu = $(settings.menuSelector)
-          .data('invokedOn', $(e.target))
+          .data("invokedOn", $(e.target))
           .show()
           .css({
-            position: 'absolute',
-            left: getMenuPosition(e.clientX, 'width', 'scrollLeft'),
-            top: getMenuPosition(e.clientY, 'height', 'scrollTop'),
+            position: "absolute",
+            left: getMenuPosition(e.clientX, "width", "scrollLeft"),
+            top: getMenuPosition(e.clientY, "height", "scrollTop"),
           })
-          .off('click')
-          .on('click', 'a', function(e) {
+          .off("click")
+          .on("click", "a", function(e) {
             $menu.hide();
-            const $invokedOn = $menu.data('invokedOn');
+            const $invokedOn = $menu.data("invokedOn");
             const $selectedMenu = $(e.target);
             settings.menuSelected.call(this, $invokedOn, $selectedMenu);
           });
         return false;
       });
-      $('body').click(function() {
+      $("body").click(function() {
         $(settings.menuSelector).hide();
       });
     });
 
     /**
-    * Get menu position.
-    * @param {mouse} mouse
-    * @param {direction} direction
-    * @param {scrollDir} scrollDir
-    * @return {position}
-    */
+     * Get menu position.
+     * @param {mouse} mouse
+     * @param {direction} direction
+     * @param {scrollDir} scrollDir
+     * @return {position}
+     */
     function getMenuPosition(mouse, direction, scrollDir) {
       const win = $(window)[direction]();
       const scroll = $(window)[scrollDir]();

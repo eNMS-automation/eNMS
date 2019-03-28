@@ -44,6 +44,22 @@ class Task(Base):
         if self.is_active:
             self.schedule()
 
+    def generate_row(self, table: str) -> List[str]:
+        status = "pause" if self.is_active else "resume"
+        return [
+            f"""<button id="pause-resume-{self.id}" type="button"
+            class="btn btn-success btn-xs" onclick=
+            "{status}Task('{self.id}')">{status}</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('task', '{self.id}')">Edit</button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypeModal('task', '{self.id}', true)">
+            Duplicate</button>""",
+            f"""<button type="button" class="btn btn-danger btn-xs"
+            onclick="confirmDeletion('task', '{self.id}')">
+            Delete</button>""",
+        ]
+
     @hybrid_property
     def status(self) -> str:
         return "Active" if self.is_active else "Inactive"

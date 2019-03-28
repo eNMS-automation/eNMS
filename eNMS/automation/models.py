@@ -422,17 +422,17 @@ class Workflow(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('{obj.id}')"></i>Logs</a></button>""",
+            onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{obj.id}')">Run</button>""",
+            onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('workflow', '{obj.id}')">
+            onclick="showTypeModal('workflow', '{self.id}')">
             Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showWorkflowModalDuplicate('{obj.id}')">
+            onclick="showWorkflowModalDuplicate('{self.id}')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('workflow', '{obj.id}')">
+            onclick="confirmDeletion('workflow', '{self.id}')">
             Delete</button>""",
         ]
 

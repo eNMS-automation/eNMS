@@ -12,7 +12,7 @@
   "devDependencies": {
     "eslint": "5.0.0",
     "eslint-config-google": "0.9.1",
-    "prettier": "^1.16.4",
+    "prettier": "^1.16.4"
   },
   "repository": {
     "type": "git",

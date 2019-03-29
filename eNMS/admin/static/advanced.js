@@ -1,12 +1,10 @@
 /*
 global
 alertify: false
-call: false
-convertSelect: false
-doc: false
-fCall: false
 folders: false
 */
+
+import { call, convertSelect, doc, fCall } from "../../static/enms/base.js";
 
 /**
  * Export all for migration.
@@ -50,7 +48,7 @@ export function resetStatus() {
 /**
  * Git Action.
  */
-export function getGitContent() {
+window.getGitContent = function() {
   call("/admin/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);
   });
@@ -60,7 +58,7 @@ export function getGitContent() {
  * Start or shutdown the scheduler.
  * @param {action} action - Pause or resume.
  */
-export function scheduler(action) {
+window.scheduler = function(action) {
   call(`/admin/scheduler/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });

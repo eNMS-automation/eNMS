@@ -8,25 +8,21 @@ refreshTable: false
 */
 
 // eslint-disable-next-line no-unused-vars
-let table = initTable(
-  "task",
-  "task",
-  [
-    "Next runtime",
-    "Time before next run",
-    "Action",
-    "Edit",
-    "Duplicate",
-    "Delete",
-  ]
-);
+let table = initTable("task", "task", [
+  "Next runtime",
+  "Time before next run",
+  "Action",
+  "Edit",
+  "Duplicate",
+  "Delete",
+]);
 const taskManagement = true; // eslint-disable-line no-unused-vars
 
 /**
  * Pause a task.
  * @param {id} id - Task id.
  */
-// eslint-disable-next-line 
+// eslint-disable-next-line
 function pauseTask(id) {
   // eslint-disable-line no-unused-vars
   call(`/scheduling/pause_task/${id}`, function(result) {
@@ -41,7 +37,7 @@ function pauseTask(id) {
  * Resume a task.
  * @param {id} id - Task id.
  */
-// eslint-disable-next-line 
+// eslint-disable-next-line
 function resumeTask(id) {
   // eslint-disable-line no-unused-vars
   call(`/scheduling/resume_task/${id}`, function(result) {

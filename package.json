@@ -1,7 +1,7 @@
 {
   "name": "eNMS",
   "version": "2.1.0",
-  "description": "A vendor-agnostic NMS for graphical network automation",
+  "description": "A enterprise-grade vendor-agnostic network automation platform.",
   "scripts": {
     "prettier": "prettier --check eNMS/**/*",
     "lint": "eslint ."

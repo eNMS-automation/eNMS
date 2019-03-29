@@ -4,10 +4,12 @@ from flask_login import UserMixin
 from git import Repo
 from logging import info
 from os import scandir, remove
+from pathlib import Path
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.orm import relationship
 from typing import Any, List
+from yaml import load
 
 from eNMS.base.associations import pool_user_table
 from eNMS.base.functions import fetch, fetch_all
@@ -106,15 +108,22 @@ class Parameters(Base):
         super().update(**kwargs)
 
     def update_database_configurations_from_git(self, app: Flask) -> None:
-        for file in scandir(app.path / "git" / "configurations"):
-            device = fetch("Device", name=file.name)
+        for dir in scandir(app.path / "git" / "configurations"):
+            if dir.name == ".git":
+                continue
+            device = fetch("Device", name=dir.name)
             if device:
                 time = max(device.configurations, default=datetime.now())
-                with open(file) as f:
+                with open(Path(dir.path) / dir.name) as f:
                     device.current_configurations = device.configurations[
                         time
                     ] = f.read()
+                with open(Path(dir.path) / "data.yml") as data:
+                    device.update(**load(data))
         db.session.commit()
+        for pool in fetch_all("Pool"):
+            if pool.device_current_configuration:
+                pool.compute_pool()
 
     def get_git_content(self, app: Flask) -> None:
         for repository_type in ("configurations", "automation"):
@@ -127,15 +136,14 @@ class Parameters(Base):
                     remove(file)
             try:
                 Repo.clone_from(repo, local_path)
+                if repository_type == "configurations":
+                    self.update_database_configurations_from_git(app)
             except Exception as e:
                 info(f"Cannot clone {repository_type} git repository ({str(e)})")
                 try:
                     Repo(local_path).remotes.origin.pull()
                     if repository_type == "configurations":
                         self.update_database_configurations_from_git(app)
-                        for pool in fetch_all("Pool"):
-                            if pool.device_current_configuration:
-                                pool.compute_pool()
                 except Exception as e:
                     info(f"Cannot pull {repository_type} git repository ({str(e)})")
 

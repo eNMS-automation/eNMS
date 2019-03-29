@@ -1,6 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from yaml import dump
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
@@ -26,6 +27,16 @@ class ConfigurationBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ConfigurationBackupService"}
 
+    def generate_yaml_file(self, path, device):
+        data = {
+            "last_failure": device.last_failure,
+            "last_runtime": device.last_runtime,
+            "last_update": device.last_update,
+            "last_status": device.last_status,
+        }
+        with open(path / "data.yml", "w") as file:
+            dump(data, file, default_flow_style=False)
+
     def job(self, payload: dict, device: Device) -> dict:
         now = datetime.now()
         path_configurations = Path.cwd() / "git" / "configurations"
@@ -49,10 +60,12 @@ class ConfigurationBackupService(Service):
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
             device.last_update = now
+            self.generate_yaml_file(path_device_config, device)
         except Exception as e:
             netmiko_handler.disconnect()
             device.last_status = "Failure"
             device.last_failure = now
+            self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))

@@ -1,11 +1,10 @@
 import {
-  confirmDeletion,
   convertSelect,
   doc,
   initTable,
 } from "../../static/enms/base.js";
 
-let table = initTable("user", "user", ["Edit", "Duplicate", "Delete"]);
+window.table = initTable("user", "user", ["Edit", "Duplicate", "Delete"]);
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/security/access.html");

@@ -186,7 +186,7 @@ function refreshTable(interval) {
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.
  */
-export function confirmDeletion(type, id) {
+window.confirmDeletion = function(type, id) {
   $("#confirm-delete-button").attr(
     "onclick",
     `deleteInstance('${type}', ${id})`
@@ -199,8 +199,7 @@ export function confirmDeletion(type, id) {
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.
  */
-function deleteInstance(type, id) {
-  // eslint-disable-line no-unused-vars
+window.deleteInstance = function(type, id) {
   call(`/delete/${type}/${id}`, function(result) {
     $("#confirm-delete").modal("hide");
     table
@@ -219,8 +218,7 @@ function deleteInstance(type, id) {
  * Display type modal for creation.
  * @param {type} type - Type.
  */
-function showCreateModal(type) {
-  // eslint-disable-line no-unused-vars
+window.showCreateModal = function(type) {
   $(`#edit-${type}-form`).trigger("reset");
   $(`#${type}-id`).val("");
   selects.forEach(id => $(id).selectpicker("render"));
@@ -272,8 +270,7 @@ function processInstance(type, instance, dup) {
  * @param {id} id - Instance ID.
  * @param {dup} dup - Edit versus duplicate.
  */
-function showTypeModal(type, id, dup) {
-  // eslint-disable-line no-unused-vars
+window.showTypeModal = function(type, id, dup) {
   call(`/get/${type}/${id}`, function(instance) {
     processInstance(type, instance, dup);
   });
@@ -302,8 +299,7 @@ function saveInstance(type, instance, hideModal = true) {
  * Create or edit instance.
  * @param {type} type - Type.
  */
-function processData(type) {
-  // eslint-disable-line no-unused-vars
+window.processData = function(type) {
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
     saveInstance(type, instance);
     if (table) {

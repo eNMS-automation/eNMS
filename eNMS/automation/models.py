@@ -215,7 +215,7 @@ class Job(Base):
                     results = self.job(payload, device)
                     self.real_time_logs.append(f"{device.name} done.")
                 else:
-                    self.job(payload)
+                    results = self.job(payload)
 
             except Exception:
                 results = {

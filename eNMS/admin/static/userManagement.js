@@ -5,7 +5,7 @@ doc: false
 initTable: false
 */
 
- // eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
 let table = initTable("user", "user", ["Edit", "Duplicate", "Delete"]);
 
 (function() {

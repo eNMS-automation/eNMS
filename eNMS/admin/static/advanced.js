@@ -11,7 +11,7 @@ folders: false
 /**
  * Export all for migration.
  */
- // eslint-disable-next-line
+// eslint-disable-next-line
 function migrationsExport() {
   alertify.notify("Export initiated.", "success", 5);
   fCall("/admin/migration_export", "#import-export-form", function() {
@@ -22,7 +22,7 @@ function migrationsExport() {
 /**
  * Import all for migration.
  */
- // eslint-disable-next-line
+// eslint-disable-next-line
 function migrationsImport() {
   alertify.notify("Import initiated.", "success", 5);
   fCall("/admin/migration_import", "#import-export-form", function(result) {
@@ -33,7 +33,7 @@ function migrationsImport() {
 /**
  * Database Helpers.
  */
- // eslint-disable-next-line
+// eslint-disable-next-line
 function databaseHelpers() {
   alertify.notify("Starting to delete...", "success", 5);
   fCall("/admin/database_helpers", "#database-helpers-form", function(result) {
@@ -44,7 +44,7 @@ function databaseHelpers() {
 /**
  * Reset Status.
  */
- // eslint-disable-next-line
+// eslint-disable-next-line
 function resetStatus() {
   call("/admin/reset_status", function(result) {
     alertify.notify("Reset successful.", "success", 5);
@@ -54,7 +54,7 @@ function resetStatus() {
 /**
  * Git Action.
  */
- // eslint-disable-next-line
+// eslint-disable-next-line
 function getGitContent() {
   call("/admin/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);
@@ -65,7 +65,7 @@ function getGitContent() {
  * Start or shutdown the scheduler.
  * @param {action} action - Pause or resume.
  */
- // eslint-disable-next-line
+// eslint-disable-next-line
 function scheduler(action) {
   call(`/admin/scheduler/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);

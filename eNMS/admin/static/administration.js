@@ -9,7 +9,7 @@ parameters: false
 /**
  * Save Parameters.
  */
- // eslint-disable-next-line
+// eslint-disable-next-line
 function saveParameters() {
   fCall("/admin/save_parameters", "#parameters-form", function() {
     alertify.notify("Parameters saved.", "success", 5);

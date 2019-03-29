@@ -10,7 +10,7 @@ getWorkflowState: false
 let jobId;
 let refresh;
 
-$('#logs-modal').on('hidden.bs.modal', function() {
+$("#logs-modal").on("hidden.bs.modal", function() {
   refresh = false;
 });
 
@@ -18,35 +18,38 @@ $('#logs-modal').on('hidden.bs.modal', function() {
  * Open smart wizard.
  * @param {type} type - Service or Workflow.
  */
-function openWizard(type) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function openWizard(type) {
+  // eslint-disable-line no-unused-vars
   $(`#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
   });
-  $('.buttonNext').addClass('btn btn-success');
-  $('.buttonPrevious').addClass('btn btn-primary');
-  $('.buttonFinish').hide();
+  $(".buttonNext").addClass("btn btn-success");
+  $(".buttonPrevious").addClass("btn btn-primary");
+  $(".buttonFinish").hide();
 }
 
 /**
  * Display logs.
  */
-function displayLogs() { // eslint-disable-line no-unused-vars
+function displayLogs() {
+  // eslint-disable-line no-unused-vars
   call(`/automation/get_logs/${jobId}`, (logs) => {
-    $('#display,#compare_with').empty();
+    $("#display,#compare_with").empty();
     const times = Object.keys(logs);
     times.forEach((option) => {
-      $('#display,#compare_with').append(
-        $('<option></option>').attr('value', option).text(option)
+      $("#display,#compare_with").append(
+        $("<option></option>")
+          .attr("value", option)
+          .text(option)
       );
     });
-    $('#display,#compare_with').val(times[times.length - 1]);
-    const firstLogs = logs[$('#display').val()];
+    $("#display,#compare_with").val(times[times.length - 1]);
+    const firstLogs = logs[$("#display").val()];
     if (firstLogs) {
-      $('#logs').text(
-        JSON.stringify(firstLogs, null, 2).replace(
-          /(?:\\[rn]|[\r\n]+)+/g, '\n'
-        )
+      $("#logs").text(
+        JSON.stringify(firstLogs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
       );
     }
   });
@@ -56,11 +59,13 @@ function displayLogs() { // eslint-disable-line no-unused-vars
  * Display logs.
  * @param {firstTime} firstTime - First time.
  */
-function refreshLogs(firstTime=false) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function refreshLogs(firstTime = false) {
+  // eslint-disable-line no-unused-vars
   if (firstTime) {
     refresh = !refresh;
-    $('#refresh-logs-button').text(
-      refresh ? 'Stop periodic Refresh' : 'Trigger periodic Refresh'
+    $("#refresh-logs-button").text(
+      refresh ? "Stop periodic Refresh" : "Trigger periodic Refresh"
     );
   }
   if (refresh) {
@@ -73,61 +78,67 @@ function refreshLogs(firstTime=false) { // eslint-disable-line no-unused-vars
  * Show the logs modal for a job.
  * @param {id} id - Job id.
  */
-function showLogs(id) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function showLogs(id) {
+  // eslint-disable-line no-unused-vars
   jobId = id;
-  $('#logs').empty();
+  $("#logs").empty();
   displayLogs();
-  $('#logs-modal').modal('show');
+  $("#logs-modal").modal("show");
 }
 
 /**
  * Clear the logs
  * @param {id} id - Job id.
  */
-function clearLogs() { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function clearLogs() {
+  // eslint-disable-line no-unused-vars
   call(`/automation/clear_logs/${jobId}`, () => {
-    $('#logs').empty();
-    alertify.notify('Logs cleared.', 'success', 5);
-    $('#logs-modal').modal('hide');
+    $("#logs").empty();
+    alertify.notify("Logs cleared.", "success", 5);
+    $("#logs-modal").modal("hide");
   });
 }
 
 /**
  * Detach window
  */
-function detachWindow() { // eslint-disable-line no-unused-vars
-  window.open(
-    `/automation/detach_logs/${jobId}`,
-    'Logs',
-    'height=800,width=600'
-  ).focus();
-  $('#logs-modal').modal('hide');
+// eslint-disable-next-line
+function detachWindow() {
+  // eslint-disable-line no-unused-vars
+  window
+    .open(`/automation/detach_logs/${jobId}`, "Logs", "height=800,width=600")
+    .focus();
+  $("#logs-modal").modal("hide");
 }
 
-$('#display').on('change', function() {
+$("#display").on("change", function() {
   call(`/automation/get_logs/${jobId}`, (logs) => {
-    const log = logs[$('#display').val()];
-    $('#logs').text(
-      JSON.stringify(log, null, 2).replace(/(?:\\[rnt])+/g, '\n')
+    const log = logs[$("#display").val()];
+    $("#logs").text(
+      JSON.stringify(log, null, 2).replace(/(?:\\[rnt])+/g, "\n")
     );
-    $('#compare_with').val($('#display').val());
+    $("#compare_with").val($("#display").val());
   });
 });
 
-$('#compare_with').on('change', function() {
-  $('#logs').empty();
-  const v1 = $('#display').val();
-  const v2 = $('#compare_with').val();
+$("#compare_with").on("change", function() {
+  $("#logs").empty();
+  const v1 = $("#display").val();
+  const v2 = $("#compare_with").val();
   call(`/automation/get_diff/${jobId}/${v1}/${v2}`, function(data) {
-    $('#logs').append(diffview.buildView({
-      baseTextLines: data.first,
-      newTextLines: data.second,
-      opcodes: data.opcodes,
-      baseTextName: `${v1}`,
-      newTextName: `${v2}`,
-      contextSize: null,
-      viewType: 0,
-    }));
+    $("#logs").append(
+      diffview.buildView({
+        baseTextLines: data.first,
+        newTextLines: data.second,
+        opcodes: data.opcodes,
+        baseTextName: `${v1}`,
+        newTextName: `${v2}`,
+        contextSize: null,
+        viewType: 0,
+      })
+    );
   });
 });
 
@@ -135,11 +146,13 @@ $('#compare_with').on('change', function() {
  * Run job.
  * @param {id} id - Job id.
  */
-function runJob(id) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function runJob(id) {
+  // eslint-disable-line no-unused-vars
   call(`/automation/run_job/${id}`, function(job) {
-    alertify.notify(`Job '${job.name}' started.`, 'success', 5);
-    if (typeof workflowBuilder !== 'undefined') {
-      if (job.type == 'Workflow') {
+    alertify.notify(`Job '${job.name}' started.`, "success", 5);
+    if (typeof workflowBuilder !== "undefined") {
+      if (job.type == "Workflow") {
         getWorkflowState();
       } else {
         getJobState(id);

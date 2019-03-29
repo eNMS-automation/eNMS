@@ -186,8 +186,7 @@ function refreshTable(interval) {
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.
  */
-function confirmDeletion(type, id) {
-  // eslint-disable-line no-unused-vars
+export function confirmDeletion(type, id) {
   $("#confirm-delete-button").attr(
     "onclick",
     `deleteInstance('${type}', ${id})`

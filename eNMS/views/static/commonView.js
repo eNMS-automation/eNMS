@@ -13,9 +13,9 @@ WE: false
 */
 
 const layers = {
-  'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-  'gm': 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga',
-  'nasa': 'http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg',
+  osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+  gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
+  nasa: "http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg",
 };
 
 let selectedObject;
@@ -24,24 +24,24 @@ let polylinesArray = [];
 let dimension = view.substring(0, 2);
 let currentView = view;
 
-const map = L.map('map').setView(
+const map = L.map("map").setView(
   [parameters.default_latitude, parameters.default_longitude],
   parameters.default_zoom_level
 );
-const options = {sky: true, atmosphere: true};
-const earth = WE.map('earth', options);
+const options = { sky: true, atmosphere: true };
+const earth = WE.map("earth", options);
 
-const osmLayer = L.tileLayer(layers['osm']);
+const osmLayer = L.tileLayer(layers["osm"]);
 map.addLayer(osmLayer);
 let layer2D = osmLayer;
-let layer3D = WE.tileLayer(layers['gm']);
+let layer3D = WE.tileLayer(layers["gm"]);
 layer3D.addTo(earth);
 let markers = L.markerClusterGroup();
 
-if (currentView == '3D') {
-  $('#map').css('visibility', 'hidden');
+if (currentView == "3D") {
+  $("#map").css("visibility", "hidden");
 } else {
-  $('#earth').css('visibility', 'hidden');
+  $("#earth").css("visibility", "hidden");
 }
 
 for (const [key, value] of Object.entries(subtype_sizes)) {
@@ -50,10 +50,10 @@ for (const [key, value] of Object.entries(subtype_sizes)) {
     iconSize: value,
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
-    });
+  });
 }
 
-const routerIcon = window['icon_router'];
+const routerIcon = window["icon_router"];
 
 L.PolylineClusterable = L.Polyline.extend({
   _originalInitialize: L.Polyline.prototype.initialize,
@@ -64,37 +64,37 @@ L.PolylineClusterable = L.Polyline.extend({
   getLatLng: function() {
     return this._latlng;
   },
-  setLatLng: function() {
-  },
+  setLatLng: function() {},
 });
 
 /**
  * Switch currentView.
  * @param {newView} newView - 2D, 2DC (clustered) or 3D.
  */
-function switchView(newView) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function switchView(newView) {
   deleteAll();
   const newDimension = newView.substring(0, 2);
   currentView = newView;
   if (dimension != newDimension) {
-    $('#map,#earth').css('visibility', 'visible');
-    $('.flip-container').toggleClass('hover');
+    $("#map,#earth").css("visibility", "visible");
+    $(".flip-container").toggleClass("hover");
     setTimeout(function() {
-      if (newDimension == '3D') {
-        $('#map').css('visibility', 'hidden');
+      if (newDimension == "3D") {
+        $("#map").css("visibility", "hidden");
       } else {
-        $('#earth').css('visibility', 'hidden');
+        $("#earth").css("visibility", "hidden");
       }
     }, 1600);
   }
   dimension = newDimension;
   $(`#btn-${currentView}`).hide();
-  if (currentView == '2D') {
-    $('#btn-2DC,#btn-3D').show();
-  } else if (currentView == '2DC') {
-    $('#btn-2D,#btn-3D').show();
+  if (currentView == "2D") {
+    $("#btn-2DC,#btn-3D").show();
+  } else if (currentView == "2DC") {
+    $("#btn-2D,#btn-3D").show();
   } else {
-    $('#btn-2D,#btn-2DC').show();
+    $("#btn-2D,#btn-2DC").show();
   }
   updateView();
 }
@@ -103,8 +103,9 @@ function switchView(newView) { // eslint-disable-line no-unused-vars
  * Change the tile layer.
  * @param {layer} layer - tile layer.
  */
-function switchLayer(layer) { // eslint-disable-line no-unused-vars
-  if (currentView !== '3D') {
+// eslint-disable-next-line
+function switchLayer(layer) {
+  if (currentView !== "3D") {
     map.removeLayer(layer2D);
     layer2D = L.tileLayer(layers[layer]);
     map.addLayer(layer2D);
@@ -113,7 +114,9 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
     layer3D = WE.tileLayer(layers[layer]);
     layer3D.addTo(earth);
   }
-  $('.dropdown-submenu a.menu-layer').next('ul').toggle();
+  $(".dropdown-submenu a.menu-layer")
+    .next("ul")
+    .toggle();
 }
 
 /**
@@ -121,48 +124,50 @@ function switchLayer(layer) { // eslint-disable-line no-unused-vars
  * @param {node} node - Device or Pool.
  * @param {nodeType} nodeType - Device or Pool.
  */
-function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function createNode(node, nodeType) {
   let marker = null;
-  if (currentView == '2D' || currentView == '2DC') {
+  if (currentView == "2D" || currentView == "2DC") {
     marker = L.marker([node.latitude, node.longitude]);
-    if (nodeType === 'device') {
+    if (nodeType === "device") {
       marker.icon = window[`icon_${node.subtype}`] || routerIcon;
     } else {
-      marker.icon = window['icon_site'];
+      marker.icon = window["icon_site"];
     }
     marker.setIcon(marker.icon);
-    marker.bindTooltip(node['name'], {permanent: false});
+    marker.bindTooltip(node["name"], { permanent: false });
   } else {
     marker = WE.marker(
       [node.latitude, node.longitude],
-      `static/images/3D/${nodeType == 'device' ? 'router' : 'site'}.gif`,
-      15, 10
+      `static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
+      15,
+      10
     ).addTo(earth);
-    marker.on('mouseover', function(e) {
-      $('#name-box').text(node.name);
-      $('#name-box').show();
+    marker.on("mouseover", function(e) {
+      $("#name-box").text(node.name);
+      $("#name-box").show();
     });
-    marker.on('mouseout', function(e) {
-      $('#name-box').hide();
+    marker.on("mouseout", function(e) {
+      $("#name-box").hide();
     });
   }
   marker.node_id = node.id;
   markersArray.push(marker);
-  marker.on('click', function(e) {
-    if (nodeType == 'pool') {
+  marker.on("click", function(e) {
+    if (nodeType == "pool") {
       enterPool(node.id);
     } else {
       showTypeModal(nodeType, node.id);
     }
   });
-  marker.on('contextmenu', function(e) {
-    $('.menu').hide();
+  marker.on("contextmenu", function(e) {
+    $(".menu").hide();
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node.id; // eslint-disable-line no-undef
   });
-  if (currentView == '2D') {
+  if (currentView == "2D") {
     marker.addTo(map);
-  } else if (currentView == '2DC') {
+  } else if (currentView == "2DC") {
     markers.addLayer(marker);
   }
 }
@@ -171,12 +176,13 @@ function createNode(node, nodeType) { // eslint-disable-line no-unused-vars
  * Create a link.
  * @param {link} link - Link.
  */
-function createLink(link) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function createLink(link) {
   const sourceLatitude = link.source.latitude;
   const sourceLongitude = link.source.longitude;
   const destinationLatitude = link.destination.latitude;
   const destinationLongitude = link.destination.longitude;
-  if (currentView == '2D' || currentView == '2DC') {
+  if (currentView == "2D" || currentView == "2DC") {
     let pointA = new L.LatLng(sourceLatitude, sourceLongitude);
     let pointB = new L.LatLng(destinationLatitude, destinationLongitude);
     const pointList = [pointA, pointB];
@@ -188,18 +194,18 @@ function createLink(link) { // eslint-disable-line no-unused-vars
     });
     polylinesArray.push(polyline);
     polyline.link_id = link.id;
-    polyline.on('click', function(e) {
-      showTypeModal('link', this.link_id);
+    polyline.on("click", function(e) {
+      showTypeModal("link", this.link_id);
     });
-    polyline.on('contextmenu', function(e) {
-      $('.menu').hide();
-      $('.rc-link-menu').show();
+    polyline.on("contextmenu", function(e) {
+      $(".menu").hide();
+      $(".rc-link-menu").show();
       selectedObject = this.link_id; // eslint-disable-line no-undef
     });
-    polyline.bindTooltip(link['name'], {
+    polyline.bindTooltip(link["name"], {
       permanent: false,
     });
-    if (currentView == '2D') {
+    if (currentView == "2D") {
       polyline.addTo(map);
     } else {
       markers.addLayer(polyline);
@@ -207,18 +213,20 @@ function createLink(link) { // eslint-disable-line no-unused-vars
   } else {
     const color = link.color;
     const polygonSD = WE.polygon(
-    [
-      [sourceLatitude, sourceLongitude],
-      [destinationLatitude, destinationLongitude],
-      [sourceLatitude, sourceLongitude],
-    ], {color: color, opacity: 20}
+      [
+        [sourceLatitude, sourceLongitude],
+        [destinationLatitude, destinationLongitude],
+        [sourceLatitude, sourceLongitude],
+      ],
+      { color: color, opacity: 20 }
     ).addTo(earth);
     const polygonDS = WE.polygon(
-    [
-      [destinationLatitude, destinationLongitude],
-      [sourceLatitude, sourceLongitude],
-      [destinationLatitude, destinationLongitude],
-    ], {color: color, opacity: 20}
+      [
+        [destinationLatitude, destinationLongitude],
+        [sourceLatitude, sourceLongitude],
+        [destinationLatitude, destinationLongitude],
+      ],
+      { color: color, opacity: 20 }
     ).addTo(earth);
     polygonSD.link_id = polygonDS.link_id = link.id;
     polylinesArray.push(polygonSD, polygonDS);
@@ -230,18 +238,18 @@ function createLink(link) { // eslint-disable-line no-unused-vars
  */
 function deleteAll() {
   for (let i = 0; i < markersArray.length; i++) {
-    if (currentView == '2D') {
+    if (currentView == "2D") {
       markersArray[i].removeFrom(map);
-    } else if (currentView == '3D') {
+    } else if (currentView == "3D") {
       markersArray[i].removeFrom(earth);
     } else {
       markers.removeLayer(markersArray[i]);
     }
   }
   for (let i = 0; i < polylinesArray.length; i++) {
-    if (currentView == '2D') {
+    if (currentView == "2D") {
       polylinesArray[i].removeFrom(map);
-    } else if (currentView == '2DC') {
+    } else if (currentView == "2DC") {
       markers.removeLayer(polylinesArray[i]);
     } else {
       try {
@@ -255,25 +263,27 @@ function deleteAll() {
   polylinesArray = [];
 }
 
-map.on('click', function(e) {
+map.on("click", function(e) {
   selectedObject = null;
 });
 
-map.on('contextmenu', function() {
+map.on("contextmenu", function() {
   if (!selectedObject) {
-    $('.menu').hide();
-    $('.geo-menu').show();
+    $(".menu").hide();
+    $(".geo-menu").show();
   }
 });
 
-$('.dropdown-submenu a.menu-submenu').on('click', function(e) {
-  $(this).next('ul').toggle();
+$(".dropdown-submenu a.menu-submenu").on("click", function(e) {
+  $(this)
+    .next("ul")
+    .toggle();
   e.stopPropagation();
   e.preventDefault();
 });
 
-$('body').contextMenu({
-  menuSelector: '#contextMenu',
+$("body").contextMenu({
+  menuSelector: "#contextMenu",
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
     action[row](selectedObject);

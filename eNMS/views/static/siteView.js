@@ -19,7 +19,6 @@ switchLayer: false
  * Display sites (pools with non-empty coordinates).
  */
 function displaySites() {
-  // eslint-disable-line no-unused-vars
   $(".menu,#network").hide();
   deleteAll();
   call("/get_all/pool", function(pools) {
@@ -38,7 +37,6 @@ function displaySites() {
  * @param {poolId} poolId - Pool ID.
  */
 function enterPool(poolId) {
-  // eslint-disable-line no-unused-vars
   $("#map,#earth").css("visibility", "hidden");
   $(".menu").hide();
   $("#network,.insite-menu,rc-device-menu,rc-link-menu").show();
@@ -53,7 +51,6 @@ function enterPool(poolId) {
  */
 // eslint-disable-next-line
 function updateView() {
-  // eslint-disable-line no-unused-vars
   displaySites();
 }
 

@@ -125,10 +125,14 @@ class Device(CustomDevice):
                 onclick="showTypeModal('device', '{self.id}')">Edit</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
                 onclick="showConfigurations('{self.id}')">
-                Configuration</button>""",
+                Configuration</button>"""
+                if self.configurations
+                else "",
                 f"""<label class="btn btn-default btn-xs btn-file"
                 style="width:100%;"><a href="download_configuration/{self.name}">
-                Download</a></label>""",
+                Download</a></label>"""
+                if self.configurations
+                else "",
             ]
 
     def __repr__(self) -> str:

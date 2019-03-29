@@ -34,7 +34,6 @@ function openWizard(type) {
  * Display logs.
  */
 function displayLogs() {
-  // eslint-disable-line no-unused-vars
   call(`/automation/get_logs/${jobId}`, (logs) => {
     $("#display,#compare_with").empty();
     const times = Object.keys(logs);
@@ -61,7 +60,6 @@ function displayLogs() {
  */
 // eslint-disable-next-line
 function refreshLogs(firstTime = false) {
-  // eslint-disable-line no-unused-vars
   if (firstTime) {
     refresh = !refresh;
     $("#refresh-logs-button").text(
@@ -80,7 +78,6 @@ function refreshLogs(firstTime = false) {
  */
 // eslint-disable-next-line
 function showLogs(id) {
-  // eslint-disable-line no-unused-vars
   jobId = id;
   $("#logs").empty();
   displayLogs();
@@ -93,7 +90,6 @@ function showLogs(id) {
  */
 // eslint-disable-next-line
 function clearLogs() {
-  // eslint-disable-line no-unused-vars
   call(`/automation/clear_logs/${jobId}`, () => {
     $("#logs").empty();
     alertify.notify("Logs cleared.", "success", 5);
@@ -106,7 +102,6 @@ function clearLogs() {
  */
 // eslint-disable-next-line
 function detachWindow() {
-  // eslint-disable-line no-unused-vars
   window
     .open(`/automation/detach_logs/${jobId}`, "Logs", "height=800,width=600")
     .focus();
@@ -148,7 +143,6 @@ $("#compare_with").on("change", function() {
  */
 // eslint-disable-next-line
 function runJob(id) {
-  // eslint-disable-line no-unused-vars
   call(`/automation/run_job/${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (typeof workflowBuilder !== "undefined") {

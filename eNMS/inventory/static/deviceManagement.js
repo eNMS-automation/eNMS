@@ -6,7 +6,6 @@ initTable: false
 */
 
 let table = initTable(
-  // eslint-disable-line no-unused-vars
   "device",
   "device",
   ["Edit", "Duplicate", "Delete", "Automation", "Connect"]

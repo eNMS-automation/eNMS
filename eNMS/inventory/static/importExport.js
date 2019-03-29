@@ -14,7 +14,6 @@ document.getElementById("file").onchange = function() {
  */
 // eslint-disable-next-line
 function queryOpenNMS() {
-  // eslint-disable-line no-unused-vars
   fCall("/inventory/query_opennms", "#opennms_form", function() {
     alertify.notify("Topology imported from OpenNMS.", "success", 5);
   });
@@ -25,7 +24,6 @@ function queryOpenNMS() {
  */
 // eslint-disable-next-line
 function queryNetbox() {
-  // eslint-disable-line no-unused-vars
   fCall("/inventory/query_netbox", "#netbox_form", function() {
     alertify.notify("Topology imported from Netbox.", "success", 5);
   });
@@ -36,7 +34,6 @@ function queryNetbox() {
  */
 // eslint-disable-next-line
 function queryLibreNMS() {
-  // eslint-disable-line no-unused-vars
   fCall("/inventory/query_librenms", "#librenms_form", function() {
     alertify.notify("Topology imported from LibreNMS.", "success", 5);
   });
@@ -47,7 +44,6 @@ function queryLibreNMS() {
  */
 // eslint-disable-next-line
 function exportToGoogleEarth() {
-  // eslint-disable-line no-unused-vars
   fCall("/inventory/export_to_google_earth", "#google-earth-form", function() {
     alertify.notify("Project exported to Google Earth.", "success", 5);
   });
@@ -58,7 +54,6 @@ function exportToGoogleEarth() {
  */
 // eslint-disable-next-line
 function exportTopology() {
-  // eslint-disable-line no-unused-vars
   fCall("/inventory/export_topology", "#import-form", function() {
     alertify.notify("Topology successfully exported.", "success", 5);
   });
@@ -69,7 +64,6 @@ function exportTopology() {
  */
 // eslint-disable-next-line
 function importTopology() {
-  // eslint-disable-line no-unused-vars
   alertify.notify("Topology import: starting...", "success", 5);
   if (
     $("#import-form")

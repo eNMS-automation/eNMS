@@ -37,7 +37,6 @@ function openUrl(url) {
  */
 // eslint-disable-next-line
 function deviceAutomationModal(id) {
-  // eslint-disable-line no-unused-vars
   call(`/get/device/${id}`, function(device) {
     $("#device-automation-button").unbind("click");
     $("#device-automation-button").click(partial(saveDeviceJobs, id));
@@ -52,7 +51,6 @@ function deviceAutomationModal(id) {
  * @param {id} id - Device id.
  */
 function saveDeviceJobs(id) {
-  // eslint-disable-line no-unused-vars
   const url = `/inventory/save_device_jobs/${id}`;
   fCall(url, "#device-automation-form", function(device) {
     alertify.notify("Changes saved.", "success", 5);
@@ -66,7 +64,6 @@ function saveDeviceJobs(id) {
  */
 // eslint-disable-next-line
 function connectionParametersModal(id) {
-  // eslint-disable-line no-unused-vars
   $("#connection-button").unbind("click");
   $("#connection-button").click(partial(sshConnection, id));
   $("#connection-parameters-form").trigger("reset");

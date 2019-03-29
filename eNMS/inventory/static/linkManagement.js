@@ -6,7 +6,6 @@ initTable: false
 */
 
 let table = initTable(
-  // eslint-disable-line no-unused-vars
   "link",
   "link",
   ["Edit", "Duplicate", "Delete"]

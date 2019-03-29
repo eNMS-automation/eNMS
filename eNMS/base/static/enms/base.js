@@ -13,7 +13,7 @@ let selects = [];
  * Update link to the docs.
  * @param {url} url - URL pointing to the right page of the docs.
  */
-export function doc(url) {
+function doc(url) {
   $("#doc-link").attr("href", url);
 }
 
@@ -21,7 +21,7 @@ export function doc(url) {
  * Show modal.
  * @param {name} name - Modal name.
  */
-export function showModal(name) {
+function showModal(name) {
   $(`#${name}`).modal("show");
 }
 
@@ -29,7 +29,7 @@ export function showModal(name) {
  * Reset form and show modal.
  * @param {name} name - Modal name.
  */
-export function resetShowModal(name) {
+function resetShowModal(name) {
   $(`#${name}-form`).trigger("reset");
   $(`#${name}`).modal("show");
 }
@@ -38,7 +38,7 @@ export function resetShowModal(name) {
  * Convert to Bootstrap Select.
  * @param {ids} ids - Ids.
  */
-export function convertSelect(...ids) {
+function convertSelect(...ids) {
   ids.forEach((id) => {
     selects.push(id);
     $(id).selectpicker({
@@ -88,7 +88,7 @@ function processResults(callback, results) {
  * @param {url} url - Url.
  * @param {callback} callback - Function to process results.
  */
-export function call(url, callback) {
+function call(url, callback) {
   $.ajax({
     type: "POST",
     url: url,
@@ -128,7 +128,7 @@ function fCall(url, form, callback) {
  * @param {toExclude} toExclude - List of parameters to exclude for search.
  * @return {table}
  */
-export function initTable(cls, type, toExclude) {
+function initTable(cls, type, toExclude) {
   $("#table thead tr")
     .clone(true)
     .appendTo("#table thead");
@@ -170,7 +170,7 @@ export function initTable(cls, type, toExclude) {
  * Datatable periodic refresh.
  * @param {interval} interval - Refresh interval.
  */
-export function refreshTable(interval) {
+function refreshTable(interval) {
   table.ajax.reload(null, false);
   setTimeout(partial(refreshTable, interval), 5000);
 }
@@ -180,7 +180,7 @@ export function refreshTable(interval) {
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.
  */
-window.confirmDeletion = function(type, id) {
+function confirmDeletion(type, id) {
   $("#confirm-delete-button").attr(
     "onclick",
     `deleteInstance('${type}', ${id})`
@@ -193,7 +193,7 @@ window.confirmDeletion = function(type, id) {
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.
  */
-window.deleteInstance = function(type, id) {
+function deleteInstance(type, id) {
   call(`/delete/${type}/${id}`, function(result) {
     $("#confirm-delete").modal("hide");
     table
@@ -212,7 +212,7 @@ window.deleteInstance = function(type, id) {
  * Display type modal for creation.
  * @param {type} type - Type.
  */
-window.showCreateModal = function(type) {
+function showCreateModal(type) {
   $(`#edit-${type}-form`).trigger("reset");
   $(`#${type}-id`).val("");
   selects.forEach((id) => $(id).selectpicker("render"));
@@ -264,7 +264,7 @@ function processInstance(type, instance, dup) {
  * @param {id} id - Instance ID.
  * @param {dup} dup - Edit versus duplicate.
  */
-window.showTypeModal = function(type, id, dup) {
+function showTypeModal(type, id, dup) {
   call(`/get/${type}/${id}`, function(instance) {
     processInstance(type, instance, dup);
   });
@@ -293,7 +293,7 @@ function saveInstance(type, instance, hideModal = true) {
  * Create or edit instance.
  * @param {type} type - Type.
  */
-window.processData = function(type) {
+function processData(type) {
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
     saveInstance(type, instance);
     if (table) {

@@ -1,15 +1,17 @@
 /*
 global
 alertify: false
+call: false
+convertSelect: false
+doc: false
+fCall: false
 folders: false
 */
-
-import { call, convertSelect, doc, fCall } from "../../static/enms/base.js";
 
 /**
  * Export all for migration.
  */
-export function migrationsExport() {
+function migrationsExport() {
   alertify.notify("Export initiated.", "success", 5);
   fCall("/admin/migration_export", "#import-export-form", function() {
     alertify.notify("Export successful.", "success", 5);
@@ -19,7 +21,7 @@ export function migrationsExport() {
 /**
  * Import all for migration.
  */
-export function migrationsImport() {
+function migrationsImport() {
   alertify.notify("Import initiated.", "success", 5);
   fCall("/admin/migration_import", "#import-export-form", function(result) {
     alertify.notify(result, "success", 5);
@@ -29,7 +31,7 @@ export function migrationsImport() {
 /**
  * Database Helpers.
  */
-export function databaseHelpers() {
+function databaseHelpers() {
   alertify.notify("Starting to delete...", "success", 5);
   fCall("/admin/database_helpers", "#database-helpers-form", function(result) {
     alertify.notify("Deletion done.", "success", 5);
@@ -39,7 +41,7 @@ export function databaseHelpers() {
 /**
  * Reset Status.
  */
-export function resetStatus() {
+function resetStatus() {
   call("/admin/reset_status", function(result) {
     alertify.notify("Reset successful.", "success", 5);
   });
@@ -48,7 +50,7 @@ export function resetStatus() {
 /**
  * Git Action.
  */
-window.getGitContent = function() {
+function getGitContent() {
   call("/admin/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);
   });
@@ -58,7 +60,7 @@ window.getGitContent = function() {
  * Start or shutdown the scheduler.
  * @param {action} action - Pause or resume.
  */
-window.scheduler = function(action) {
+function scheduler(action) {
   call(`/admin/scheduler/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });

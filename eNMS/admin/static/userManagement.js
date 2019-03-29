@@ -1,6 +1,12 @@
-import { convertSelect, doc, initTable } from "../../static/enms/base.js";
+/*
+global
+convertSelect: false
+doc: false
+initTable: false
+*/
 
-window.table = initTable("user", "user", ["Edit", "Duplicate", "Delete"]);
+
+let table = initTable("user", "user", ["Edit", "Duplicate", "Delete"]);
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/security/access.html");

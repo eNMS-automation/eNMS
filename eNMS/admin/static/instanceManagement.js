@@ -1,11 +1,13 @@
 /*
 global
 alertify: false
+call: false
+convertSelect: false
+doc: false
+initTable: false
 */
 
-import { call, convertSelect, doc, initTable } from "../../static/enms/base.js";
-
-window.table = initTable("instance", "instance", [
+let table = initTable("instance", "instance", [
   "Edit",
   "Duplicate",
   "Delete",
@@ -16,8 +18,7 @@ window.table = initTable("instance", "instance", [
  */
 function getClusterStatus() {
   call("/admin/get_cluster_status", function(cluster) {
-    console.log(cluster);
-    window.table.ajax.reload(null, false);
+    table.ajax.reload(null, false);
     setTimeout(getClusterStatus, 15000);
   });
 }
@@ -25,7 +26,7 @@ function getClusterStatus() {
 /**
  * Scan Cluster subnet for new Instances.
  */
-window.scanCluster = function() {
+function scanCluster() {
   alertify.notify("Scan started.", "success", 5);
   call("/admin/scan_cluster", function(cluster) {
     alertify.notify("Scan completed.", "success", 5);

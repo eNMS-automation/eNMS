@@ -40,8 +40,7 @@ function resetShowModal(name) {
  * Convert to Bootstrap Select.
  * @param {ids} ids - Ids.
  */
-function convertSelect(...ids) {
-  // eslint-disable-line no-unused-vars
+export function convertSelect(...ids) {
   ids.forEach(id => {
     selects.push(id);
     $(id).selectpicker({
@@ -134,8 +133,7 @@ function fCall(url, form, callback) {
  * @param {toExclude} toExclude - List of parameters to exclude for search.
  * @return {table}
  */
-function initTable(cls, type, toExclude) {
-  // eslint-disable-line
+export function initTable(cls, type, toExclude) {
   $("#table thead tr")
     .clone(true)
     .appendTo("#table thead");

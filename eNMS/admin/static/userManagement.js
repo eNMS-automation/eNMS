@@ -1,9 +1,4 @@
-/*
-global
-convertSelect: false
-doc: false
-initTable: false
-*/
+import { convertSelect, doc, initTable } from "../../static/enms/base.js";
 
 let table = initTable(
   "user",

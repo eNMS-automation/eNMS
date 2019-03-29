@@ -29,6 +29,7 @@ _templates
 
 # javascript
 package-lock.json
+node_modules/
 
 # google earth file
 *.kmz

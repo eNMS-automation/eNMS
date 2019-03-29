@@ -23,5 +23,5 @@ matrix:
       node_js: 
         - "node"
       script: 
-        - prettier --list-different eNMS/**/*
+        - npm run prettier
         - npm run lint

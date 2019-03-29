@@ -4,8 +4,11 @@ initTable: false
 refreshTable: false
 */
 
-let table = initTable( // eslint-disable-line no-unused-vars
-  'log', 'log', ['Delete']
+// eslint-disable-next-line no-unused-vars
+let table = initTable(
+  "log",
+  "log",
+  ["Delete"]
 );
 
 (function() {

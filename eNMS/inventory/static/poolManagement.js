@@ -17,18 +17,14 @@ showTypeModal: false
 let poolId = null;
 
 // eslint-disable-next-line no-unused-vars
-let table = initTable(
-  "pool",
-  "pool",
-  [
-    "Number of objects",
-    "Edit properties",
-    "Update",
-    "Duplicate",
-    "Edit objects",
-    "Delete",
-  ]
-);
+let table = initTable("pool", "pool", [
+  "Number of objects",
+  "Edit properties",
+  "Update",
+  "Duplicate",
+  "Edit objects",
+  "Delete",
+]);
 
 /**
  * Display pool objects for editing.

@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.css') }}" rel="stylesheet">
+  <link href="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
   <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.css') }}" rel="stylesheet">
   <link href="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">

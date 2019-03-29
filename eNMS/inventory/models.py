@@ -122,8 +122,6 @@ class Device(CustomDevice):
         else:
             return [
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypeModal('device', '{self.id}')">Edit</button>""",
-                f"""<button type="button" class="btn btn-primary btn-xs"
                 onclick="showConfigurations('{self.id}')">
                 Configuration</button>"""
                 if self.configurations
@@ -133,6 +131,8 @@ class Device(CustomDevice):
                 Download</a></label>"""
                 if self.configurations
                 else "",
+                f"""<button type="button" class="btn btn-primary btn-xs"
+                onclick="showTypeModal('device', '{self.id}')">Edit</button>""",
             ]
 
     def __repr__(self) -> str:

@@ -12,7 +12,7 @@ let table = initTable(
   // eslint-disable-line no-unused-vars
   "device",
   "configuration",
-  ["Download"]
+  ["Download", "Edit"]
 );
 let deviceId;
 

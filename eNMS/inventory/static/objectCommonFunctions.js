@@ -10,13 +10,14 @@ partial: false
  * Flip Combo box depending on whether or not authentication is selected.
  */
 function flipAuthenticationCombo() {
-  $('#user-credentials,#device-credentials').prop(
-    'disabled', !$('#authentication').prop('checked')
+  $("#user-credentials,#device-credentials").prop(
+    "disabled",
+    !$("#authentication").prop("checked")
   );
 }
 
 (function() {
-  $('#authentication').change(function() {
+  $("#authentication").change(function() {
     flipAuthenticationCombo();
   });
 })();
@@ -26,7 +27,7 @@ function flipAuthenticationCombo() {
  * @param {url} url - URL.
  */
 function openUrl(url) {
-  let win = window.open(url, '_blank');
+  let win = window.open(url, "_blank");
   win.focus();
 }
 
@@ -34,13 +35,15 @@ function openUrl(url) {
  * Display the device automation modal.
  * @param {id} id - Device id.
  */
-function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function deviceAutomationModal(id) {
+  // eslint-disable-line no-unused-vars
   call(`/get/device/${id}`, function(device) {
-    $('#device-automation-button').unbind('click');
-    $('#device-automation-button').click(partial(saveDeviceJobs, id));
-    $('#jobs').selectpicker('deselectAll');
-    $('#jobs').selectpicker('val', device.jobs.map((d) => d.id));
-    $('#device-automation').modal('show');
+    $("#device-automation-button").unbind("click");
+    $("#device-automation-button").click(partial(saveDeviceJobs, id));
+    $("#jobs").selectpicker("deselectAll");
+    $("#jobs").selectpicker("val", device.jobs.map((d) => d.id));
+    $("#device-automation").modal("show");
   });
 }
 
@@ -48,11 +51,12 @@ function deviceAutomationModal(id) { // eslint-disable-line no-unused-vars
  * Update device jobs.
  * @param {id} id - Device id.
  */
-function saveDeviceJobs(id) { // eslint-disable-line no-unused-vars
+function saveDeviceJobs(id) {
+  // eslint-disable-line no-unused-vars
   const url = `/inventory/save_device_jobs/${id}`;
-  fCall(url, '#device-automation-form', function(device) {
-    alertify.notify('Changes saved.', 'success', 5);
-    $('#device-automation').modal('hide');
+  fCall(url, "#device-automation-form", function(device) {
+    alertify.notify("Changes saved.", "success", 5);
+    $("#device-automation").modal("hide");
   });
 }
 
@@ -60,13 +64,15 @@ function saveDeviceJobs(id) { // eslint-disable-line no-unused-vars
  * Display the device connection modal.
  * @param {id} id - Device id.
  */
-function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
-  $('#connection-button').unbind('click');
-  $('#connection-button').click(partial(sshConnection, id));
-  $('#connection-parameters-form').trigger('reset');
+// eslint-disable-next-line
+function connectionParametersModal(id) {
+  // eslint-disable-line no-unused-vars
+  $("#connection-button").unbind("click");
+  $("#connection-button").click(partial(sshConnection, id));
+  $("#connection-parameters-form").trigger("reset");
   flipAuthenticationCombo();
-  $('#edit-device').modal('hide');
-  $('#connection-parameters').modal('show');
+  $("#edit-device").modal("hide");
+  $("#connection-parameters").modal("show");
 }
 
 /**
@@ -75,7 +81,7 @@ function connectionParametersModal(id) { // eslint-disable-line no-unused-vars
  */
 function sshConnection(id) {
   const url = `/inventory/connection/${id}`;
-  fCall(url, '#connection-parameters-form', function(result) {
+  fCall(url, "#connection-parameters-form", function(result) {
     let url = result.server_addr;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
@@ -88,9 +94,9 @@ function sshConnection(id) {
     }, 300);
     const messageLink = `Click here to connect to ${result.device}.`;
     const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
-    alertify.notify(link, 'success', 15);
+    alertify.notify(link, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
-    alertify.notify(warning, 'error', 20);
-    $('#connection-parameters').modal('hide');
+    alertify.notify(warning, "error", 20);
+    $("#connection-parameters").modal("hide");
   });
 }

@@ -14,7 +14,6 @@ def configure_cli(app: Flask) -> None:
     @argument("table")
     @argument("name")
     def cli_fetch(table: str, name: str) -> None:
-        # example: flask fetch device Washington
         echo(str_dict(fetch(table, name=name).get_properties()))
 
     @app.cli.command()

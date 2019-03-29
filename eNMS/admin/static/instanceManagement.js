@@ -22,7 +22,8 @@ function getClusterStatus() {
 /**
  * Scan Cluster subnet for new Instances.
  */
-export function scanCluster() {
+function scanCluster() {
+  // eslint-disable-line no-unused-vars
   call("/admin/scan_cluster", function(cluster) {
     alertify.notify("Scan completed.", "success", 5);
   });

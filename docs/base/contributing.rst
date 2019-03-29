@@ -25,6 +25,9 @@ Before opening a pull request with your changes, you should make sure that:
 
  # your code is eslint compliant (javascript)
  eslint .
+
+ # your code is mypy compliant (type hints)
+ mypy .
  
  # all the tests are passing
  pytest
@@ -42,3 +45,18 @@ If you are updating the documentation, you can build a local version of the docs
  # build a local version of the docs
  cd /docs
  make html
+
+=============
+CLI interface
+=============
+
+eNMS has a CLI interface available for developers, with the following operations:
+
+Fetching objects from the database
+----------------------------------
+
+General syntax: `flask fetch object_type object_name`
+Example: `flask fetch device Washington`
+
+
+

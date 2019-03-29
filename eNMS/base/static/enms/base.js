@@ -13,6 +13,7 @@ let selects = [];
  * Update link to the docs.
  * @param {url} url - URL pointing to the right page of the docs.
  */
+// eslint-disable-next-line
 function doc(url) {
   $("#doc-link").attr("href", url);
 }
@@ -21,6 +22,7 @@ function doc(url) {
  * Show modal.
  * @param {name} name - Modal name.
  */
+// eslint-disable-next-line
 function showModal(name) {
   $(`#${name}`).modal("show");
 }
@@ -29,6 +31,7 @@ function showModal(name) {
  * Reset form and show modal.
  * @param {name} name - Modal name.
  */
+// eslint-disable-next-line
 function resetShowModal(name) {
   $(`#${name}-form`).trigger("reset");
   $(`#${name}`).modal("show");
@@ -38,6 +41,7 @@ function resetShowModal(name) {
  * Convert to Bootstrap Select.
  * @param {ids} ids - Ids.
  */
+// eslint-disable-next-line
 function convertSelect(...ids) {
   ids.forEach((id) => {
     selects.push(id);
@@ -128,6 +132,7 @@ function fCall(url, form, callback) {
  * @param {toExclude} toExclude - List of parameters to exclude for search.
  * @return {table}
  */
+// eslint-disable-next-line
 function initTable(cls, type, toExclude) {
   $("#table thead tr")
     .clone(true)
@@ -170,6 +175,7 @@ function initTable(cls, type, toExclude) {
  * Datatable periodic refresh.
  * @param {interval} interval - Refresh interval.
  */
+// eslint-disable-next-line
 function refreshTable(interval) {
   table.ajax.reload(null, false);
   setTimeout(partial(refreshTable, interval), 5000);
@@ -180,19 +186,21 @@ function refreshTable(interval) {
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.
  */
+// eslint-disable-next-line
 function confirmDeletion(type, id) {
   $("#confirm-delete-button").attr(
     "onclick",
     `deleteInstance('${type}', ${id})`
   );
   $("#confirm-delete").modal("show");
-};
+}
 
 /**
  * Delete object.
  * @param {type} type - Node or link.
  * @param {id} id - Id of the object to delete.
  */
+// eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete/${type}/${id}`, function(result) {
     $("#confirm-delete").modal("hide");
@@ -206,19 +214,20 @@ function deleteInstance(type, id) {
       5
     );
   });
-};
+}
 
 /**
  * Display type modal for creation.
  * @param {type} type - Type.
  */
+// eslint-disable-next-line
 function showCreateModal(type) {
   $(`#edit-${type}-form`).trigger("reset");
   $(`#${type}-id`).val("");
   selects.forEach((id) => $(id).selectpicker("render"));
   $(`#title-${type}`).text(`Create a New ${type}`);
   $(`#edit-${type}`).modal("show");
-};
+}
 
 /**
  * Display instance modal for editing.
@@ -264,11 +273,12 @@ function processInstance(type, instance, dup) {
  * @param {id} id - Instance ID.
  * @param {dup} dup - Edit versus duplicate.
  */
+// eslint-disable-next-line
 function showTypeModal(type, id, dup) {
   call(`/get/${type}/${id}`, function(instance) {
     processInstance(type, instance, dup);
   });
-};
+}
 
 /**
  * Save instance.
@@ -293,6 +303,7 @@ function saveInstance(type, instance, hideModal = true) {
  * Create or edit instance.
  * @param {type} type - Type.
  */
+// eslint-disable-next-line
 function processData(type) {
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
     saveInstance(type, instance);
@@ -300,7 +311,7 @@ function processData(type) {
       table.ajax.reload(null, false);
     }
   });
-};
+}
 
 /**
  * Sidebar initialization.

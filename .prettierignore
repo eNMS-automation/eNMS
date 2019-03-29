@@ -12,5 +12,6 @@
 *.woff2
 *.db
 *.txt
+*.md
 __pycache__/
 LICENSE

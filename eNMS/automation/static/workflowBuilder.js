@@ -17,7 +17,7 @@ workflow: true
 */
 
 const workflowBuilder = true; // eslint-disable-line no-unused-vars
-const container = document.getElementById('network');
+const container = document.getElementById("network");
 const dsoptions = {
   edges: {
     font: {
@@ -25,17 +25,16 @@ const dsoptions = {
     },
   },
   nodes: {
-    shape: 'box',
+    shape: "box",
     font: {
       bold: {
-        color: '#0077aa',
+        color: "#0077aa",
       },
     },
   },
   manipulation: {
     enabled: false,
-    addNode: function(data, callback) {
-    },
+    addNode: function(data, callback) {},
     addEdge: function(data, callback) {
       if (data.from != data.to) {
         data.subtype = edgeType;
@@ -60,33 +59,33 @@ let lastModified;
 function displayWorkflow(wf) {
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
-  graph = new vis.Network(container, {nodes: nodes, edges: edges}, dsoptions);
-  graph.setOptions({physics: false});
-  graph.on('oncontext', function(properties) {
+  graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
+  graph.setOptions({ physics: false });
+  graph.on("oncontext", function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
-    if (typeof node !== 'undefined' && node != 1 && node != 2) {
+    if (typeof node !== "undefined" && node != 1 && node != 2) {
       graph.selectNodes([node]);
-      $('.global,.edge-selection').hide();
-      $('.node-selection').show();
+      $(".global,.edge-selection").hide();
+      $(".node-selection").show();
       selectedNode = node;
-    } else if (typeof edge !== 'undefined' && node != 1 && node != 2) {
+    } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);
-      $('.global,.node-selection').hide();
-      $('.edge-selection').show();
+      $(".global,.node-selection").hide();
+      $(".edge-selection").show();
       selectedNode = node;
     } else {
-      $('.node-selection').hide();
-      $('.global').show();
+      $(".node-selection").hide();
+      $(".global").show();
     }
   });
-  graph.on('doubleClick', function(properties) {
+  graph.on("doubleClick", function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     if (node) {
       const job = workflow.jobs.find((w) => w.id === node);
-      if (job.type == 'Workflow') {
+      if (job.type == "Workflow") {
         switchToWorkflow(node);
       } else {
         editService(node);
@@ -94,7 +93,7 @@ function displayWorkflow(wf) {
     }
   });
   $(`#add_jobs option[value='${wf.id}']`).remove();
-  $('#add_jobs').selectpicker('refresh');
+  $("#add_jobs").selectpicker("refresh");
   lastModified = wf.last_modified;
   return graph;
 }
@@ -108,41 +107,48 @@ function switchToWorkflow(workflowId) {
   call(`/get/workflow/${workflowId}`, function(result) {
     workflow = result;
     graph = displayWorkflow(result);
-    alertify.notify(`Workflow '${workflow.name}' displayed.`, 'success', 5);
+    alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }
 
 if (workflow) {
-  $('#current-workflow').val(workflow.id);
+  $("#current-workflow").val(workflow.id);
   displayWorkflow(workflow);
 } else {
-  workflow = $('#current-workflow').val();
+  workflow = $("#current-workflow").val();
   if (workflow) {
     switchToWorkflow(workflow);
   } else {
-    alertify.notify(`You must create a workflow in the
-    'Workflow management' page first.`, 'error', 5);
+    alertify.notify(
+      `You must create a workflow in the
+    'Workflow management' page first.`,
+      "error",
+      5
+    );
   }
 }
 
 /**
  * Add an existing job to the workflow.
  */
-function addJobToWorkflow() { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function addJobToWorkflow() {
   if (!workflow) {
-    alertify.notify(`You must create a workflow in the
-    'Workflow management' page first.`, 'error', 5);
+    alertify.notify(
+      `You must create a workflow in the
+    'Workflow management' page first.`,
+      "error",
+      5
+    );
   } else {
     const url = `/automation/add_jobs_to_workflow/${workflow.id}`;
-    fCall(url, '#add-job-form', function(jobs) {
+    fCall(url, "#add-job-form", function(jobs) {
       jobs.forEach((job) => {
-        $('#add-job').modal('hide');
+        $("#add-job").modal("hide");
         if (graph.findNode(job.id).length == 0) {
           nodes.add(jobToNode(job));
         } else {
-          alertify.notify(
-            `Job '${job.name}' already in workflow.`, 'error', 5
-          );
+          alertify.notify(`Job '${job.name}' already in workflow.`, "error", 5);
         }
       });
     });
@@ -155,7 +161,7 @@ function addJobToWorkflow() { // eslint-disable-line no-unused-vars
  */
 function deleteNode(id) {
   call(`/automation/delete_node/${workflow.id}/${id}`, function(job) {
-    alertify.notify(`'${job.name}' deleted from the workflow.`, 'success', 5);
+    alertify.notify(`'${job.name}' deleted from the workflow.`, "success", 5);
   });
 }
 
@@ -186,10 +192,10 @@ function deleteEdge(edgeId) {
  */
 function jobToNode(job) {
   let color;
-  if (job.name == 'Start' || job.name == 'End') {
-    color = 'pink';
+  if (job.name == "Start" || job.name == "End") {
+    color = "pink";
   } else {
-    color = '#D2E5FF';
+    color = "#D2E5FF";
   }
   return {
     id: job.id,
@@ -214,18 +220,19 @@ function edgeToEdge(edge) {
     from: edge.source_id,
     to: edge.destination_id,
     smooth: {
-      type: 'curvedCW',
+      type: "curvedCW",
       roundness:
-        edge.subtype == 'success' ? 0.1 :
-        edge.subtype == 'failure' ? -0.1 :
-        0,
+        edge.subtype == "success" ? 0.1 : edge.subtype == "failure" ? -0.1 : 0,
     },
     color: {
-      color: edge.subtype == 'success' ? 'green'
-      : edge.subtype == 'failure' ? 'red'
-      : 'blue',
+      color:
+        edge.subtype == "success"
+          ? "green"
+          : edge.subtype == "failure"
+          ? "red"
+          : "blue",
     },
-    arrows: {to: {enabled: true}},
+    arrows: { to: { enabled: true } },
   };
 }
 
@@ -241,7 +248,7 @@ function deleteSelection() {
     graph.getSelectedEdges().map((edge) => deleteEdge(edge));
     graph.deleteSelected();
   } else {
-    alertify.notify('Start and End cannot be deleted', 'error', 5);
+    alertify.notify("Start and End cannot be deleted", "error", 5);
   }
 }
 
@@ -250,20 +257,22 @@ function deleteSelection() {
  * @param {mode} mode - Mode to switch to.
  */
 function switchMode(mode) {
-  if (['success', 'failure', 'prerequisite'].includes(mode)) {
+  if (["success", "failure", "prerequisite"].includes(mode)) {
     edgeType = mode;
     graph.addEdgeMode();
-    alertify.notify(`Mode: creation of ${mode} edge.`, 'success', 5);
+    alertify.notify(`Mode: creation of ${mode} edge.`, "success", 5);
   } else {
     graph.addNodeMode();
-    alertify.notify('Mode: node motion.', 'success', 5);
+    alertify.notify("Mode: node motion.", "success", 5);
   }
-  $('.dropdown-submenu a.menu-layer').next('ul').toggle();
+  $(".dropdown-submenu a.menu-layer")
+    .next("ul")
+    .toggle();
 }
 
-$('#current-workflow').on('change', function() {
+$("#current-workflow").on("change", function() {
   savePositions();
-  $('#add_jobs').append(
+  $("#add_jobs").append(
     `<option value='${workflow.id}'>${workflow.name}</option>`
   );
   switchToWorkflow(this.value);
@@ -274,14 +283,14 @@ $('#current-workflow').on('change', function() {
  */
 function savePositions() {
   $.ajax({
-    type: 'POST',
+    type: "POST",
     url: `/automation/save_positions/${workflow.id}`,
-    dataType: 'json',
-    contentType: 'application/json;charset=UTF-8',
-    data: JSON.stringify(graph.getPositions(), null, '\t'),
+    dataType: "json",
+    contentType: "application/json;charset=UTF-8",
+    data: JSON.stringify(graph.getPositions(), null, "\t"),
     success: function(result) {
       if (!result) {
-        alertify.notify('HTTP Error 403 – Forbidden', 'error', 5);
+        alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
       }
     },
   });
@@ -298,32 +307,34 @@ function showWorkflowLogs() {
  * Edit Workflow
  */
 function editWorkflow() {
-  showTypeModal('workflow', workflow.id);
+  showTypeModal("workflow", workflow.id);
 }
 
 const action = {
-  'Run Workflow': runWorkflow,
-  'Edit': editService,
-  'Run': runJob,
-  'Logs': showLogs,
-  'Edit Workflow': editWorkflow,
-  'Workflow Logs': showWorkflowLogs,
-  'Add Service or Workflow': partial(showModal, 'add-job'),
-  'Delete': deleteSelection,
-  'Create "Success" edge': partial(switchMode, 'success'),
-  'Create "Failure" edge': partial(switchMode, 'failure'),
-  'Create "Prerequisite" edge': partial(switchMode, 'prerequisite'),
-  'Move Nodes': partial(switchMode, 'node'),
+  "Run Workflow": runWorkflow,
+  "Edit": editService,
+  "Run": runJob,
+  "Logs": showLogs,
+  "Edit Workflow": editWorkflow,
+  "Workflow Logs": showWorkflowLogs,
+  "Add Service or Workflow": partial(showModal, "add-job"),
+  "Delete": deleteSelection,
+  "Create 'Success' edge": partial(switchMode, "success"),
+  "Create 'Failure' edge": partial(switchMode, "failure"),
+  "Create 'Prerequisite' edge": partial(switchMode, "prerequisite"),
+  "Move Nodes": partial(switchMode, "node"),
 };
 
-$('.dropdown-submenu a.menu-submenu').on('click', function(e) {
-  $(this).next('ul').toggle();
+$(".dropdown-submenu a.menu-submenu").on("click", function(e) {
+  $(this)
+    .next("ul")
+    .toggle();
   e.stopPropagation();
   e.preventDefault();
 });
 
-$('#network').contextMenu({
-  menuSelector: '#contextMenu',
+$("#network").contextMenu({
+  menuSelector: "#contextMenu",
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
     action[row](selectedNode);
@@ -333,8 +344,9 @@ $('#network').contextMenu({
 /**
  * Start the workflow.
  */
-function runWorkflow() { // eslint-disable-line no-unused-vars
-  workflow.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
+function runWorkflow() {
+  // eslint-disable-line no-unused-vars
+  workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
   runJob(workflow.id);
 }
 
@@ -345,7 +357,7 @@ function runWorkflow() { // eslint-disable-line no-unused-vars
  */
 function colorJob(id, color) {
   if (id != 1 && id != 2) {
-    nodes.update({id: id, color: color});
+    nodes.update({ id: id, color: color });
   }
 }
 
@@ -353,17 +365,19 @@ function colorJob(id, color) {
  * Get Job State.
  * @param {id} id - Job Id.
  */
-function getJobState(id) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line
+function getJobState(id) {
+  // eslint-disable-line no-unused-vars
   call(`/get/service/${id}`, function(service) {
     if (service.is_running) {
-      colorJob(id, '#89CFF0');
-      $('#status').text('Status: Running.');
-      $('#current-job').text(`Current job: ${service.name}.`);
+      colorJob(id, "#89CFF0");
+      $("#status").text("Status: Running.");
+      $("#current-job").text(`Current job: ${service.name}.`);
       setTimeout(partial(getJobState, id), 1500);
     } else {
-      $('#status').text('Status: Idle.');
-      $('#current-job').empty();
-      colorJob(id, '#D2E5FF');
+      $("#status").text("Status: Idle.");
+      $("#current-job").empty();
+      colorJob(id, "#D2E5FF");
     }
   });
 }
@@ -377,30 +391,30 @@ function getWorkflowState() {
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf);
       }
-      $('#status').text(`Status: ${wf.status}.`);
+      $("#status").text(`Status: ${wf.status}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_device) {
-            $('#current-device').text(
+            $("#current-device").text(
               `Current device: ${wf.state.current_device}.`
             );
           }
           if (wf.state.current_job) {
-            colorJob(wf.state.current_job.id, '#89CFF0');
-            $('#current-job').text(
+            colorJob(wf.state.current_job.id, "#89CFF0");
+            $("#current-job").text(
               `Current job: ${wf.state.current_job.name}.`
             );
           } else {
-            $('#current-device,#current-job').empty();
+            $("#current-device,#current-job").empty();
           }
           if (wf.state.jobs) {
             $.each(wf.state.jobs, (id, success) => {
-              colorJob(id, success ? '#32cd32' : '#FF6666');
+              colorJob(id, success ? "#32cd32" : "#FF6666");
             });
           }
         } else {
-          $('#current-device,#current-job').empty();
-          wf.jobs.forEach((job) => colorJob(job.id, '#D2E5FF'));
+          $("#current-device,#current-job").empty();
+          wf.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
         }
         setTimeout(getWorkflowState, wf.is_running ? 700 : 15000);
       }
@@ -408,12 +422,12 @@ function getWorkflowState() {
   }
 }
 
-$(window).bind('beforeunload', function() {
+$(window).bind("beforeunload", function() {
   savePositions();
 });
 
 (function() {
-  doc('https://enms.readthedocs.io/en/latest/workflows/index.html');
-  convertSelect('#add_jobs', '#workflow-devices', '#workflow-pools');
+  doc("https://enms.readthedocs.io/en/latest/workflows/index.html");
+  convertSelect("#add_jobs", "#workflow-devices", "#workflow-pools");
   getWorkflowState();
 })();

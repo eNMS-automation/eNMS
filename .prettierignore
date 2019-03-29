@@ -1,2 +1,15 @@
 **/*.min.js
 **/*.min.css
+*.py
+*.html
+*.png
+*.gif
+*.eot
+*.svg
+*.ttf
+*.woff
+*.woff2
+*.db
+*.txt
+__pycache__/
+LICENSE

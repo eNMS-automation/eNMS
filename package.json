@@ -4,7 +4,7 @@
   "description": "A vendor-agnostic NMS for graphical network automation",
   "scripts": {
     "lint": "eslint .",
-    "prettier": "prettier --list-different eNMS/**/*"
+    "prettier": "prettier --check eNMS/**/*"
   },
   "engines": {
     "node": "8.11.3"

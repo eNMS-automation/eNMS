@@ -33,9 +33,6 @@ def configure_cli(app: Flask) -> None:
     @option("--devices")
     @option("--payload")
     def start(name: str, devices: str, payload: str) -> None:
-        # example: flask start service_name
-        # example 2: flask start get_facts --devices Washington,Denver
-        # example 3: flask start a_service --payload '{"a": "b"}'
         if devices:
             targets = {fetch("Device", name=name) for name in devices.split(",")}
         else:
@@ -48,7 +45,6 @@ def configure_cli(app: Flask) -> None:
     @app.cli.command()
     @pass_script_info
     def develop(info: ScriptInfo) -> None:
-        # example: flask develop
         app = DispatchingApp(info.load_app)
         path_services = [Path.cwd() / "eNMS" / "automation" / "services"]
         custom_services_path = environ.get("CUSTOM_SERVICES_PATH")

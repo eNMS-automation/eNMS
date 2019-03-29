@@ -69,3 +69,25 @@ Delete an object from the database
 
 General syntax: `flask delete object_type object_name`
 Example: `flask delete device Washington`
+
+Run a service
+-------------
+
+General syntax: `flask start service_name --devices list_of_devices --payload 'payload'` where:
+- list_of_devices is a list of device name separated by commas.
+- payload is a JSON dictionary.
+Both devices and payload are optional parameters.
+
+Example: `flask start get_facts`
+Example 2: `flask start get_facts --devices Washington,Denver`
+Example 3: `flask start a_service --payload '{"a": "b"}'`
+Example 4: `flask start get_facts --devices Washington,Denver --payload '{"a": "b"}'`
+
+==========================
+Start eNMS in develop mode
+==========================
+
+By default, the `flask run` command with `FLASK_DEBUG` set to 1 will automatically reload the Flask app whenever a change is detected in the code.
+However, because services are loaded programatically by eNMS, they are not being monitored by Flask and a change to a service will not trigger the application reload.
+The `flask develop` is an improvement of the `flask run` command that adds all custom services to the list of files Flask monitors, so that any change to a service triggers a reload of the application.
+It is recommended for people developing services.

@@ -11,6 +11,8 @@
         "jquery": true
     },
     "rules": {
+        "quotes": [2, "double", {allowTemplateLiterals: true}],
+        "object-curly-spacing": "off",
         "no-invalid-this": 0,
         "linebreak-style": 0
     },

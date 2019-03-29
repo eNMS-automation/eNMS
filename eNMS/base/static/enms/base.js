@@ -192,7 +192,7 @@ window.confirmDeletion = function(type, id) {
     `deleteInstance('${type}', ${id})`
   );
   $("#confirm-delete").modal("show");
-}
+};
 
 /**
  * Delete object.
@@ -212,7 +212,7 @@ window.deleteInstance = function(type, id) {
       5
     );
   });
-}
+};
 
 /**
  * Display type modal for creation.
@@ -224,7 +224,7 @@ window.showCreateModal = function(type) {
   selects.forEach(id => $(id).selectpicker("render"));
   $(`#title-${type}`).text(`Create a New ${type}`);
   $(`#edit-${type}`).modal("show");
-}
+};
 
 /**
  * Display instance modal for editing.
@@ -274,7 +274,7 @@ window.showTypeModal = function(type, id, dup) {
   call(`/get/${type}/${id}`, function(instance) {
     processInstance(type, instance, dup);
   });
-}
+};
 
 /**
  * Save instance.
@@ -306,7 +306,7 @@ window.processData = function(type) {
       table.ajax.reload(null, false);
     }
   });
-}
+};
 
 /**
  * Sidebar initialization.

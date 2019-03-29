@@ -1,8 +1,4 @@
-import {
-  convertSelect,
-  doc,
-  initTable,
-} from "../../static/enms/base.js";
+import { convertSelect, doc, initTable } from "../../static/enms/base.js";
 
 window.table = initTable("user", "user", ["Edit", "Duplicate", "Delete"]);
 

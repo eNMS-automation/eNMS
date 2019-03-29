@@ -312,13 +312,13 @@ function editWorkflow() {
 
 const action = {
   "Run Workflow": runWorkflow,
-  "Edit": editService,
-  "Run": runJob,
-  "Logs": showLogs,
+  Edit: editService,
+  Run: runJob,
+  Logs: showLogs,
   "Edit Workflow": editWorkflow,
   "Workflow Logs": showWorkflowLogs,
   "Add Service or Workflow": partial(showModal, "add-job"),
-  "Delete": deleteSelection,
+  Delete: deleteSelection,
   "Create 'Success' edge": partial(switchMode, "success"),
   "Create 'Failure' edge": partial(switchMode, "failure"),
   "Create 'Prerequisite' edge": partial(switchMode, "prerequisite"),

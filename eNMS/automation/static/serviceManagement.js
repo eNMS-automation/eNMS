@@ -7,11 +7,7 @@ refreshTable: false
 
 const toExclude = ["Progress", "Logs", "Run", "Edit", "Duplicate", "Delete"];
 // eslint-disable-next-line no-unused-vars
-let table = initTable(
-  "service",
-  "service",
-  toExclude
-);
+let table = initTable("service", "service", toExclude);
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/services/index.html");

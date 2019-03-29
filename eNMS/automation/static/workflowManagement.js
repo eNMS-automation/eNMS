@@ -11,19 +11,14 @@ showTypeModal: false
 
 const toExclude = ["Logs", "Run", "Edit", "Duplicate", "Delete"];
 // eslint-disable-next-line no-unused-vars
-let table = initTable(
-  // eslint-disable-line no-unused-vars
-  "workflow",
-  "workflow",
-  toExclude
-);
+let table = initTable("workflow", "workflow", toExclude);
 
 /**
  * Display instance modal for editing.
  * @param {id} id - Instance ID.
  */
+// eslint-disable-next-line
 function showWorkflowModalDuplicate(id) {
-  // eslint-disable-line no-unused-vars
   $("#workflow-button").attr("onclick", `duplicateWorkflow(${id})`);
   showTypeModal("workflow", id, true);
 }
@@ -32,8 +27,8 @@ function showWorkflowModalDuplicate(id) {
  * Display instance modal for editing.
  * @param {id} id - Instance ID.
  */
+// eslint-disable-next-line
 function duplicateWorkflow(id) {
-  // eslint-disable-line no-unused-vars
   $("#edit-workflow").modal("hide");
   fCall(
     `/automation/duplicate_workflow/${id}`,
@@ -49,7 +44,7 @@ function duplicateWorkflow(id) {
   doc("https://enms.readthedocs.io/en/latest/workflows/index.html");
   convertSelect("#workflow-devices", "#workflow-pools");
   $("#edit-workflow").on("hidden.bs.modal", function() {
-    $("#workflow-button").attr("onclick", 'processData("workflow")');
+    $("#workflow-button").attr("onclick", "processData('workflow')");
   });
   refreshTable(5000);
 })();

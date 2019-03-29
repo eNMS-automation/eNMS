@@ -21,8 +21,7 @@ export function doc(url) {
  * Show modal.
  * @param {name} name - Modal name.
  */
-function showModal(name) {
-  // eslint-disable-line no-unused-vars
+export function showModal(name) {
   $(`#${name}`).modal("show");
 }
 
@@ -30,8 +29,7 @@ function showModal(name) {
  * Reset form and show modal.
  * @param {name} name - Modal name.
  */
-function resetShowModal(name) {
-  // eslint-disable-line no-unused-vars
+export function resetShowModal(name) {
   $(`#${name}-form`).trigger("reset");
   $(`#${name}`).modal("show");
 }
@@ -41,7 +39,7 @@ function resetShowModal(name) {
  * @param {ids} ids - Ids.
  */
 export function convertSelect(...ids) {
-  ids.forEach(id => {
+  ids.forEach((id) => {
     selects.push(id);
     $(id).selectpicker({
       liveSearch: true,
@@ -56,7 +54,6 @@ export function convertSelect(...ids) {
  * @return {function}
  */
 function partial(func, ...args) {
-  // eslint-disable-line no-unused-vars
   return function() {
     return func.apply(this, args);
   };
@@ -68,7 +65,6 @@ function partial(func, ...args) {
  * @return {capitalizedString}
  */
 function capitalize(string) {
-  // eslint-disable-line no-unused-vars
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -109,7 +105,6 @@ export function call(url, callback) {
  * @param {callback} callback - Function to process results.
  */
 function fCall(url, form, callback) {
-  // eslint-disable-line no-unused-vars
   if (
     $(form)
       .parsley()
@@ -156,14 +151,14 @@ export function initTable(cls, type, toExclude) {
       $(this).empty();
     }
   });
+  // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
-    // eslint-disable-line
     serverSide: true,
     orderCellsTop: true,
-    sDom: '<"top"i>rt<"bottom"lp><"clear">',
+    sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
       url: `/server_side_processing/${cls}/${type}`,
-      data: d => {
+      data: (d) => {
         d.pools = $("#restrict-pool").val();
       },
     },
@@ -175,8 +170,7 @@ export function initTable(cls, type, toExclude) {
  * Datatable periodic refresh.
  * @param {interval} interval - Refresh interval.
  */
-function refreshTable(interval) {
-  // eslint-disable-line
+export function refreshTable(interval) {
   table.ajax.reload(null, false);
   setTimeout(partial(refreshTable, interval), 5000);
 }
@@ -221,7 +215,7 @@ window.deleteInstance = function(type, id) {
 window.showCreateModal = function(type) {
   $(`#edit-${type}-form`).trigger("reset");
   $(`#${type}-id`).val("");
-  selects.forEach(id => $(id).selectpicker("render"));
+  selects.forEach((id) => $(id).selectpicker("render"));
   $(`#title-${type}`).text(`Create a New ${type}`);
   $(`#edit-${type}`).modal("show");
 };
@@ -250,7 +244,7 @@ function processInstance(type, instance, dup) {
           ? value.id
           : propertyType === "list"
           ? value
-          : value.map(p => p.id)
+          : value.map((p) => p.id)
       );
       $(`#${type}-${property}`).selectpicker("render");
     } else if (propertyType == "object") {
@@ -394,7 +388,7 @@ function initSidebar() {
   });
 
   // check active menu
-  const url = 'a[href="' + currentUrl + '"]';
+  const url = "a[href='" + currentUrl + "']";
   $("#sidebar-menu")
     .find(url)
     .parent("li")

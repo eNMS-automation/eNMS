@@ -1,11 +1,11 @@
 /*
 global
-call: false
 counters: false
 defaultProperties: false
-doc: false
 echarts: false
 */
+
+import { call, doc } from "./enms/base.js";
 
 const theme = {
   color: [

@@ -77,7 +77,7 @@
         <!-- Bootstrap Datetimepicker -->
         <script src="{{ url_for('static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
         <!-- eNMS -->
-        <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
+        <script type="module" src="{{ url_for('static', filename='enms/base.js') }}"></script>
       {% endblock %}
     {% endblock body %}
   </body>

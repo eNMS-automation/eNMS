@@ -13,7 +13,7 @@ let selects = [];
  * Update link to the docs.
  * @param {url} url - URL pointing to the right page of the docs.
  */
-function doc(url) { // eslint-disable-line no-unused-vars
+export function doc(url) {
   $('#doc-link').attr('href', url);
 }
 
@@ -88,7 +88,7 @@ function processResults(callback, results) {
  * @param {url} url - Url.
  * @param {callback} callback - Function to process results.
  */
-function call(url, callback) { // eslint-disable-line no-unused-vars
+export function call(url, callback) {
   $.ajax({
     type: 'POST',
     url: url,
@@ -278,7 +278,6 @@ function saveInstance(type, instance, hideModal=true) {
 function processData(type) { // eslint-disable-line no-unused-vars
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
     saveInstance(type, instance);
-    console.log(table);
     if (table) {
       table.ajax.reload(null, false);
     }

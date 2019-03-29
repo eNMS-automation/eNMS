@@ -8,7 +8,7 @@ tasks: false
 const taskManagement = false; // eslint-disable-line no-unused-vars
 
 $(function() {
-  if (typeof ($.fn.fullCalendar) === 'undefined') {
+  if (typeof $.fn.fullCalendar === "undefined") {
     return;
   }
   let events = [];
@@ -20,19 +20,19 @@ $(function() {
       start: new Date(...properties.date),
     });
   }
-  $('#calendar').fullCalendar({
+  $("#calendar").fullCalendar({
     header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay,listMonth',
+      left: "prev,next today",
+      center: "title",
+      right: "month,agendaWeek,agendaDay,listMonth",
     },
     selectable: true,
     selectHelper: true,
     eventClick: function(calEvent, jsEvent, view) {
-      showTypeModal('task', calEvent.id);
+      showTypeModal("task", calEvent.id);
     },
     editable: true,
     events: events,
   });
-  doc('https://enms.readthedocs.io/en/latest/scheduling/task_management.html');
+  doc("https://enms.readthedocs.io/en/latest/scheduling/task_management.html");
 });

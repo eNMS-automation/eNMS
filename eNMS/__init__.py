@@ -10,6 +10,7 @@ from os import environ
 from pathlib import Path
 from simplekml import Color, Style
 from sqlalchemy import Boolean, Float, Integer, PickleType
+from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
 from eNMS.config import Config
@@ -166,7 +167,10 @@ def configure_services(path: Path) -> None:
             spec = spec_from_file_location(name, str(file))
             assert isinstance(spec.loader, Loader)
             module = module_from_spec(spec)
-            spec.loader.exec_module(module)  # type: ignore
+            try:
+                spec.loader.exec_module(module)
+            except InvalidRequestError:
+                continue
     for cls_name, cls in service_classes.items():
         cls_to_properties[cls_name] = list(cls_to_properties["Service"])
         for col in cls.__table__.columns:

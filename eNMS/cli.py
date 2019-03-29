@@ -20,14 +20,12 @@ def configure_cli(app: Flask) -> None:
     @argument("table")
     @argument("properties")
     def update(table: str, properties: str) -> None:
-        # example: flask update device '{"name": "Aserver", "description": "test"}'
         echo(str_dict(factory(table, **loads(properties)).get_properties()))
 
     @app.cli.command(name="delete")
     @argument("table")
     @argument("name")
     def cli_delete(table: str, name: str) -> None:
-        # example: flask delete device Washington
         echo(str_dict(delete(table, name=name)))
 
     @app.cli.command()

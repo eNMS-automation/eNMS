@@ -96,7 +96,7 @@ def import_export() -> dict:
 def download_configuration(name: str) -> Response:
     try:
         return send_file(
-            filename_or_fp=str(app.path / "git" / "configurations" / name),
+            filename_or_fp=str(app.path / "git" / "configurations" / name / name),
             as_attachment=True,
             attachment_filename=f"configuration_{name}.txt",
         )

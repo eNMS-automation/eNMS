@@ -113,13 +113,14 @@ class Parameters(Base):
                 continue
             device = fetch("Device", name=dir.name)
             if device:
-                time = max(device.configurations, default=datetime.now())
-                with open(Path(dir.path) / dir.name) as f:
-                    device.current_configurations = device.configurations[
-                        time
-                    ] = f.read()
                 with open(Path(dir.path) / "data.yml") as data:
-                    device.update(**load(data))
+                    parameters = load(data)
+                    device.update(**parameters)
+                    with open(Path(dir.path) / dir.name) as f:
+                        time = parameters["last_update"]
+                        device.current_configuration = device.configurations[
+                            time
+                        ] = f.read()
         db.session.commit()
         for pool in fetch_all("Pool"):
             if pool.device_current_configuration:

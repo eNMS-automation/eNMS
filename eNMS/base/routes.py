@@ -60,7 +60,6 @@ def server_side_processing(cls: str, table: str) -> Response:
         )
         .order_by(getattr(getattr(model, order_property), order_direction)())
     )
-    print(request.args)
     if table == "configuration":
         search_text = request.args["columns[6][search][value]"]
         if search_text:

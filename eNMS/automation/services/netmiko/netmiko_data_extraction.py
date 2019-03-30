@@ -1,5 +1,5 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict
+from re import findall, match
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
@@ -14,9 +14,9 @@ class NetmikoDataExtractionService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     command = Column(String)
-    variable_name = Column(String)
+    variable = Column(String)
     regular_expression = Column(String)
-    find_all_matches = Column(Boolean, default=False)
+    find_all = Column(Boolean, default=False)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
@@ -30,13 +30,24 @@ class NetmikoDataExtractionService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
-        result = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
+        output = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
+        variables = {}
+        result = (
+            findall(self.regular_expression, output)
+            if self.find_all
+            else match(self.regular_expression, output)
+        )
+        if not result:
+            return {
+                "command": command,
+                "output": output,
+                "regular_expression": self.regular_expression,
+                "success": False,
+            }
+        else:
+            value = result if self.find_all else result.group(1)
         netmiko_handler.disconnect()
-        return {
-            "negative_logic": self.negative_logic,
-            "result": result,
-            "success": True,
-        }
+        return {self.variable: value, "success": True}
 
 
 service_classes["NetmikoDataExtractionService"] = NetmikoDataExtractionService

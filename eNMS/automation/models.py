@@ -171,7 +171,6 @@ class Job(Base):
             db.session.commit()
             info(f"Running job {self.name}, attempt {i}")
             attempt = self.run(payload, job_from_workflow_targets, targets)
-            results[f"Attempts {i + 1}"] = attempt
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -184,19 +183,22 @@ class Job(Base):
                 if not targets:
                     results["results"]["success"] = True
                     break
-                elif i != self.number_of_retries:
-                    sleep(self.time_between_retries)
                 else:
-                    results["results"]["success"] = False
-                    for device in targets:
-                        results["results"]["devices"][device.name] = attempt["devices"][
-                            device.name
-                        ]
+                    results[f"Attempts {i + 1}"] = attempt
+                    if i != self.number_of_retries:
+                        sleep(self.time_between_retries)
+                    else:
+                        results["results"]["success"] = False
+                        for device in targets:
+                            results["results"]["devices"][device.name] = attempt[
+                                "devices"
+                            ][device.name]
             else:
                 if attempt["success"] or i == self.number_of_retries:
                     results["results"] = attempt
                     break
                 else:
+                    results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
         self.logs[now] = results
         info(f"{self.name}: finished.")
@@ -216,7 +218,6 @@ class Job(Base):
                     self.real_time_logs.append(f"{device.name} done.")
                 else:
                     results = self.job(payload)
-
             except Exception:
                 results = {
                     "success": False,

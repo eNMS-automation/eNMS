@@ -1,4 +1,4 @@
-from re import findall, match
+from re import findall
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
@@ -34,19 +34,24 @@ class NetmikoDataExtractionService(Service):
 
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
-        command = self.sub(self.command, locals())
-        output = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
-        variables = {}
-        result = findall(self.regular_expression, output)
-        if not result:
-            return {
+        result, success = True, {}
+        for i in range(1, 4):
+            if not command:
+                continue
+            command = self.sub(getattr(self, f"command{i}", locals()))
+            output = netmiko_handler.send_command(
+                command, delay_factor=self.delay_factor
+            )
+            match = findall(getattr(self, f"regular_expression{i}", output))
+            if not match:
+                success = False
+            result[getattr(self, f"variable{i}")] = {
                 "command": command,
                 "output": output,
-                "regular_expression": self.regular_expression,
-                "success": False,
+                "match": match,
             }
         netmiko_handler.disconnect()
-        return {self.variable: result, "success": True}
+        return {"result": result, "success": True}
 
 
 service_classes["NetmikoDataExtractionService"] = NetmikoDataExtractionService

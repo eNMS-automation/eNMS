@@ -8,7 +8,7 @@ from sqlalchemy import exc
 from string import punctuation
 from typing import Any, Callable, Generator, List, Optional, Tuple
 
-from eNMS.extensions import db, scheduler
+from eNMS.extensions import controller, db
 from eNMS.base.classes import classes
 from eNMS.base.properties import pretty_names, property_types
 
@@ -196,7 +196,7 @@ def post(
 
 @contextmanager
 def session_scope() -> Generator:
-    session = scheduler.session()
+    session = controller.session()
     try:
         yield session
         session.commit()
@@ -205,7 +205,7 @@ def session_scope() -> Generator:
         session.rollback()
         raise e
     finally:
-        scheduler.session.remove()
+        controller.session.remove()
 
 
 def str_dict(input: Any, depth: int = 0) -> str:

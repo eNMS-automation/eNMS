@@ -160,6 +160,7 @@ function initTable(cls, type, toExclude) {
   const table = $("#table").DataTable({
     serverSide: true,
     orderCellsTop: true,
+    scrollX: true,
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
       url: `/server_side_processing/${cls}/${type}`,

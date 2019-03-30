@@ -15,10 +15,10 @@ from typing import Any, Optional, Tuple, Type, Union
 
 from eNMS.config import Config
 from eNMS.extensions import (
+    controller,
     db,
     login_manager,
     mail_client,
-    scheduler,
     USE_SYSLOG,
     USE_VAULT,
     vault_client,
@@ -48,8 +48,8 @@ def register_extensions(app: Flask) -> None:
     login_manager.init_app(app)
     mail_client.init_app(app)
     FlaskCLI(app)
-    scheduler.app = app
-    scheduler.session = db.create_scoped_session()
+    controller.app = app
+    controller.session = db.create_scoped_session()
 
 
 def register_blueprints(app: Flask) -> None:

@@ -13,6 +13,8 @@ USE_TACACS = int(environ.get("USE_TACACS", False))
 USE_LDAP = int(environ.get("USE_LDAP", False))
 USE_VAULT = int(environ.get("USE_VAULT", False))
 
+controller = type("Controller", (), {})
+
 auth = HTTPBasicAuth()
 
 db = SQLAlchemy(session_options={"expire_on_commit": False, "autoflush": False})

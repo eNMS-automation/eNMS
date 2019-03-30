@@ -20,7 +20,7 @@ from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
-from eNMS import db, scheduler
+from eNMS import controller, db
 from eNMS.base.associations import (
     job_device_table,
     job_log_rule_table,
@@ -231,7 +231,7 @@ class Job(Base):
             return results
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
-        with scheduler.app.app_context():
+        with controller.app.app_context():
             device, results, payload = args
             device_result = self.get_results(payload, device)
             results["devices"][device.name] = device_result

@@ -5,7 +5,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
 from typing import Optional, Set
 
-from eNMS.extensions import db, scheduler
+from eNMS.extensions import controller, db
 from eNMS.base.functions import fetch, get_one, str_dict
 from eNMS.inventory.models import Device
 
@@ -17,7 +17,7 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 def scheduler_job(
     job_id: int, aps_job_id: Optional[str] = None, targets: Optional[Set[Device]] = None
 ) -> None:
-    with scheduler.app.app_context():
+    with controller.app.app_context():
         task = fetch("Task", creation_time=aps_job_id)
         job = fetch("Job", id=job_id)
         if targets:

@@ -5,7 +5,7 @@ from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 from typing import List
 
-from eNMS.extensions import db, scheduler
+from eNMS.extensions import controller, db
 from eNMS.base.associations import job_log_rule_table, log_rule_log_table
 from eNMS.base.models import Base
 
@@ -55,7 +55,7 @@ class LogRule(Base):
 
 class SyslogUDPHandler(BaseRequestHandler):
     def handle(self) -> None:
-        with scheduler.app.app_context():
+        with controller.app.app_context():
             data = str(bytes.decode(self.request[0].strip()))
             source, _ = self.client_address
             log_rules = []

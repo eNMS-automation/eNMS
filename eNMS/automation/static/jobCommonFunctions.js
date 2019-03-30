@@ -20,7 +20,6 @@ $("#logs-modal").on("hidden.bs.modal", function() {
  */
 // eslint-disable-next-line
 function openWizard(type) {
-  // eslint-disable-line no-unused-vars
   $(`#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -32,12 +31,21 @@ function openWizard(type) {
 
 /**
  * Display log.
+ * @param {logs} logs - Logs.
  */
 function displayLog(logs) {
   const displayLogs = logs[$("#display").val()];
   if (displayLogs) {
     $("#logs").text(
-      JSON.stringify(Object.fromEntries(Object.entries(displayLogs).sort().reverse()), null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+      JSON.stringify(
+        Object.fromEntries(
+          Object.entries(displayLogs)
+            .sort()
+            .reverse()
+        ),
+        null,
+        2
+      ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
     );
   }
 }

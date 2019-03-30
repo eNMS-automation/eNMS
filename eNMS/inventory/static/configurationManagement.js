@@ -20,7 +20,6 @@ let deviceId;
  * Display configurations.
  */
 function displayConfigurations() {
-  // eslint-disable-line no-unused-vars
   call(`/inventory/get_configurations/${deviceId}`, (configurations) => {
     $("#display,#compare_with").empty();
     const times = Object.keys(configurations);
@@ -39,7 +38,7 @@ function displayConfigurations() {
           /(?:\\[rn]|[\r\n]+)+/g,
           "\n"
         ).replace(
-          /\\t/g, '    '
+          /\\t/g, "    "
         )
       );
     }
@@ -52,7 +51,6 @@ function displayConfigurations() {
  */
 // eslint-disable-next-line
 function showConfigurations(id) {
-  // eslint-disable-line no-unused-vars
   deviceId = id;
   $("#configurations").empty();
   displayConfigurations();
@@ -64,7 +62,6 @@ function showConfigurations(id) {
  */
 // eslint-disable-next-line
 function clearConfigurations() {
-  // eslint-disable-line no-unused-vars
   call(`/inventory/clear_configurations/${deviceId}`, () => {
     $("#configurations").empty();
     alertify.notify("Configurations cleared.", "success", 5);
@@ -106,7 +103,6 @@ $("#compare_with").on("change", function() {
  */
 // eslint-disable-next-line
 function showRawLogs() {
-  // eslint-disable-line no-unused-vars
   window
     .open(
       `/inventory/get_raw_logs/${deviceId}/${$("#display").val()}`,

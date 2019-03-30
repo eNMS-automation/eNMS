@@ -6,6 +6,7 @@ from yaml import dump
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
+from eNMS.base.functions import str_dict
 from eNMS.inventory.models import Device
 
 
@@ -54,7 +55,7 @@ class ConfigurationBackupService(Service):
                 last_config = device.configurations[max(device.configurations)]
                 if config == last_config:
                     return {"success": True, "result": "no change"}
-            device.configurations[now] = device.current_configuration = config
+            device.configurations[now] = device.current_configuration = str_dict(config)
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
             with open(path_device_config / device.name, "w") as file:

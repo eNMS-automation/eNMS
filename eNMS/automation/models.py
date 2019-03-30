@@ -195,7 +195,8 @@ class Job(Base):
                                 "devices"
                             ][device.name]
             else:
-                results[f"Attempts {i + 1}"] = attempt
+                if self.number_of_retries:
+                    results[f"Attempts {i + 1}"] = attempt
                 if attempt["success"] or i == self.number_of_retries:
                     results["results"] = attempt
                     break

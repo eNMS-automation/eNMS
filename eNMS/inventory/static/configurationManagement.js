@@ -38,6 +38,8 @@ function displayConfigurations() {
         JSON.stringify(firstConfigurations, null, 2).replace(
           /(?:\\[rn]|[\r\n]+)+/g,
           "\n"
+        ).replace(
+          /\\t/g, '    '
         )
       );
     }

@@ -45,7 +45,6 @@ class NetmikoDataExtractionService(Service):
                 command, delay_factor=self.delay_factor
             )
             match = findall(regular_expression, output)
-            print(result)
             if not match:
                 success = False
             result[variable] = {

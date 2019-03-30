@@ -10,9 +10,9 @@ from eNMS.base.functions import str_dict
 from eNMS.inventory.models import Device
 
 
-class ConfigurationBackupService(Service):
+class NapalmBackupService(Service):
 
-    __tablename__ = "ConfigurationBackupService"
+    __tablename__ = "NapalmBackupService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     configuration_backup_service = True
@@ -26,7 +26,7 @@ class ConfigurationBackupService(Service):
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {"polymorphic_identity": "ConfigurationBackupService"}
+    __mapper_args__ = {"polymorphic_identity": "NapalmBackupService"}
 
     def generate_yaml_file(self, path, device):
         data = {
@@ -39,15 +39,13 @@ class ConfigurationBackupService(Service):
             dump(data, file, default_flow_style=False)
 
     def job(self, payload: dict, device: Device) -> dict:
-        now = datetime.now()
-        path_configurations = Path.cwd() / "git" / "configurations"
-        netmiko_handler = self.netmiko_connection(device)
         try:
-            netmiko_handler.enable()
-        except Exception:
-            pass
-        try:
-            config = netmiko_handler.send_command(self.configuration_command)
+            now = datetime.now()
+            path_configurations = Path.cwd() / "git" / "configurations"
+            napalm_driver = self.napalm_connection(device)
+            napalm_driver.open()
+            config = napalm_driver.get_config()
+            napalm_driver.close()
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
             netmiko_handler.disconnect()
@@ -73,4 +71,4 @@ class ConfigurationBackupService(Service):
         return {"success": True, "result": f"Command: {self.configuration_command}"}
 
 
-service_classes["ConfigurationBackupService"] = ConfigurationBackupService
+service_classes["NapalmBackupService"] = NapalmBackupService

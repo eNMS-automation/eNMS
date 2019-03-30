@@ -206,8 +206,8 @@ def run_job(job_id: int) -> dict:
 @post(bp, "/get_diff/<int:job_id>/<v1>/<v2>", "View")
 def get_diff(job_id: int, v1: str, v2: str) -> dict:
     job = fetch("Job", id=job_id)
-    first = str_dict(job.logs[v1]).splitlines()
-    second = str_dict(job.logs[v2]).splitlines()
+    first = str_dict(dict(reversed(sorted(job.logs[v1].items())))).splitlines()
+    second = str_dict(dict(reversed(sorted(job.logs[v2].items())))).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
     return {"first": first, "second": second, "opcodes": opcodes}
 

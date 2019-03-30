@@ -45,7 +45,7 @@ function displayLogs() {
       );
     });
     $("#display,#compare_with").val(times[times.length - 1]);
-    const firstLogs = logs[$("#display").val()];
+    const firstLogs = Object.fromEntries(Object.entries(logs[$("#display").val()]).sort().reverse());
     if (firstLogs) {
       $("#logs").text(
         JSON.stringify(firstLogs, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")

@@ -184,7 +184,8 @@ class Job(Base):
                     results["results"]["success"] = True
                     break
                 else:
-                    results[f"Attempts {i + 1}"] = attempt
+                    if self.number_of_retries:
+                        results[f"Attempts {i + 1}"] = attempt
                     if i != self.number_of_retries:
                         sleep(self.time_between_retries)
                     else:
@@ -194,11 +195,11 @@ class Job(Base):
                                 "devices"
                             ][device.name]
             else:
+                results[f"Attempts {i + 1}"] = attempt
                 if attempt["success"] or i == self.number_of_retries:
                     results["results"] = attempt
                     break
                 else:
-                    results[f"Attempts {i + 1}"] = attempt
                     sleep(self.time_between_retries)
         self.logs[now] = results
         info(f"{self.name}: finished.")

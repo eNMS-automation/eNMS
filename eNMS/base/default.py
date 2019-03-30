@@ -260,7 +260,6 @@ def create_example_services() -> None:
             "name": "napalm_configuration_backup",
             "description": "Test Configuration Management",
             "devices": [fetch("Device", name="Washington").id],
-            "configuration_command": "show running-config",
             "multiprocessing": True,
             "creator": admin,
         },

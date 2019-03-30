@@ -1,9 +1,10 @@
 from datetime import datetime
 from pathlib import Path
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, Pickletype, String
+from sqlalchemy.ext.mutable import MutableDict
 from yaml import dump
 
-from eNMS.automation.functions import NETMIKO_DRIVERS
+from eNMS.automation.functions import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.base.classes import service_classes
 from eNMS.base.functions import str_dict
@@ -18,13 +19,10 @@ class NapalmBackupService(Service):
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
-    configuration_command = Column(String)
     driver = Column(String)
-    driver_values = NETMIKO_DRIVERS
+    driver_values = NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
-    fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=10.0)
-    global_delay_factor = Column(Float, default=1.0)
+    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {"polymorphic_identity": "NapalmBackupService"}
 
@@ -42,6 +40,8 @@ class NapalmBackupService(Service):
         try:
             now = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"
+            path_device_config = path_configurations / device.name
+            path_device_config.mkdir(parents=True, exist_ok=True)
             napalm_driver = self.napalm_connection(device)
             napalm_driver.open()
             config = napalm_driver.get_config()
@@ -54,14 +54,11 @@ class NapalmBackupService(Service):
                 if config == last_config:
                     return {"success": True, "result": "no change"}
             device.configurations[now] = device.current_configuration = str_dict(config)
-            path_device_config = path_configurations / device.name
-            path_device_config.mkdir(parents=True, exist_ok=True)
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
             device.last_update = now
             self.generate_yaml_file(path_device_config, device)
         except Exception as e:
-            netmiko_handler.disconnect()
             device.last_status = "Failure"
             device.last_failure = now
             self.generate_yaml_file(path_device_config, device)

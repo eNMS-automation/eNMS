@@ -41,6 +41,8 @@ class NetmikoBackupService(Service):
         try:
             now = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"
+            path_device_config = path_configurations / device.name
+            path_device_config.mkdir(parents=True, exist_ok=True)
             netmiko_handler = self.netmiko_connection(device)
             try:
                 netmiko_handler.enable()
@@ -55,8 +57,6 @@ class NetmikoBackupService(Service):
                 if config == last_config:
                     return {"success": True, "result": "no change"}
             device.configurations[now] = device.current_configuration = config
-            path_device_config = path_configurations / device.name
-            path_device_config.mkdir(parents=True, exist_ok=True)
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
             device.last_update = now

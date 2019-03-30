@@ -47,11 +47,13 @@
             </div>
             <label>Frequency</label>
             <div class='form-group'>
-              <div class="col-md-9">
-                {{ scheduling_form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
-              </div>
-              <div class="col-md-3">
-                {{ scheduling_form.frequency_unit(id='task-frequency_unit', class="form-control") }}
+              <div class="row row-no-gutters">
+                <div class="col-md-9">
+                  {{ scheduling_form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
+                </div>
+                <div class="col-md-3">
+                  {{ scheduling_form.frequency_unit(id='task-frequency_unit', class="form-control") }}
+                </div>
               </div>
             </div>
             <div class="x_title">

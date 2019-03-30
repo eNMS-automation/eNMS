@@ -13,14 +13,14 @@ class NetmikoDataExtractionService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    command1 = Column(String)
     variable1 = Column(String)
+    command1 = Column(String)
     regular_expression1 = Column(String)
-    command2 = Column(String)
     variable2 = Column(String)
+    command2 = Column(String)
     regular_expression2 = Column(String)
-    command3 = Column(String)
     variable3 = Column(String)
+    command3 = Column(String)
     regular_expression3 = Column(String)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
@@ -34,21 +34,25 @@ class NetmikoDataExtractionService(Service):
 
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
-        result, success = True, {}
+        result, success = {}, True
         for i in range(1, 4):
-            if not command:
+            variable = getattr(self, f"variable{i}")
+            regular_expression = getattr(self, f"regular_expression{i}")
+            if not variable:
                 continue
-            command = self.sub(getattr(self, f"command{i}", locals()))
+            command = self.sub(getattr(self, f"command{i}"), locals())
             output = netmiko_handler.send_command(
                 command, delay_factor=self.delay_factor
             )
-            match = findall(getattr(self, f"regular_expression{i}", output))
+            match = findall(regular_expression, output)
+            print(result)
             if not match:
                 success = False
-            result[getattr(self, f"variable{i}")] = {
+            result[variable] = {
                 "command": command,
+                "regular_expression": regular_expression,
                 "output": output,
-                "match": match,
+                "value": match,
             }
         netmiko_handler.disconnect()
         return {"result": result, "success": True}

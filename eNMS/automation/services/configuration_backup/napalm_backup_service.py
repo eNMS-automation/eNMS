@@ -1,6 +1,6 @@
 from datetime import datetime
 from pathlib import Path
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, Pickletype, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from yaml import dump
 
@@ -44,16 +44,15 @@ class NapalmBackupService(Service):
             path_device_config.mkdir(parents=True, exist_ok=True)
             napalm_driver = self.napalm_connection(device)
             napalm_driver.open()
-            config = napalm_driver.get_config()
+            config = str_dict(napalm_driver.get_config())
             napalm_driver.close()
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
-            netmiko_handler.disconnect()
             if device.configurations:
                 last_config = device.configurations[max(device.configurations)]
                 if config == last_config:
                     return {"success": True, "result": "no change"}
-            device.configurations[now] = device.current_configuration = str_dict(config)
+            device.configurations[now] = device.current_configuration = config
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
             device.last_update = now
@@ -65,7 +64,7 @@ class NapalmBackupService(Service):
             return {"success": False, "result": str(e)}
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
-        return {"success": True, "result": f"Command: {self.configuration_command}"}
+        return {"success": True, "result": "Get Config via Napalm"}
 
 
 service_classes["NapalmBackupService"] = NapalmBackupService

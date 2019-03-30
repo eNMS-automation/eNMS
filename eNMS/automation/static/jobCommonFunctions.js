@@ -23,9 +23,13 @@ function openWizard(type) {
   $(`#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
-    transitionEffect: 'node',
+    transitionEffect: 'none',
   });
-  $(`#${type}-wizard`).smartWizard("goToStep", 1)
+  console.log($(`#${type}-id`).val());
+  if (!$(`#${type}-id`).val()) {
+    editService();
+    $(`#${type}-wizard`).smartWizard("goToStep", 1);
+  }
   $(".buttonNext").addClass("btn btn-success");
   $(".buttonPrevious").addClass("btn btn-primary");
   $(".buttonFinish").hide();

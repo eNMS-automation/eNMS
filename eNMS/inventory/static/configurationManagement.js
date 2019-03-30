@@ -31,17 +31,7 @@ function displayConfigurations() {
       );
     });
     $("#display,#compare_with").val(times[times.length - 1]);
-    const firstConfigurations = configurations[$("#display").val()];
-    if (firstConfigurations) {
-      $("#configurations").text(
-        JSON.stringify(firstConfigurations, null, 2).replace(
-          /(?:\\[rn]|[\r\n]+)+/g,
-          "\n"
-        ).replace(
-          /\\t/g, "    "
-        )
-      );
-    }
+    $("#configurations").text(configurations[$("#display").val()]);
   });
 }
 
@@ -71,10 +61,7 @@ function clearConfigurations() {
 
 $("#display").on("change", function() {
   call(`/inventory/get_configurations/${deviceId}`, (configurations) => {
-    const log = configurations[$("#display").val()];
-    $("#configurations").text(
-      JSON.stringify(log, null, 2).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-    );
+    $("#configurations").text(configurations[$("#display").val()]);
   });
 });
 

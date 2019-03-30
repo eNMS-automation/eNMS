@@ -51,7 +51,6 @@ function editService(id, duplicate) {
  */
 // eslint-disable-next-line
 function saveService(run = false) {
-  // eslint-disable-line no-unused-vars
   fCall(`/update/${$("#service-type").val()}`, "#edit-service-form", function(
     service
   ) {

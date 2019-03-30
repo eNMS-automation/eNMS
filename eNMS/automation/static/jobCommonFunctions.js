@@ -23,7 +23,9 @@ function openWizard(type) {
   $(`#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
+    transitionEffect: 'node',
   });
+  $(`#${type}-wizard`).smartWizard("goToStep", 1)
   $(".buttonNext").addClass("btn btn-success");
   $(".buttonPrevious").addClass("btn btn-primary");
   $(".buttonFinish").hide();

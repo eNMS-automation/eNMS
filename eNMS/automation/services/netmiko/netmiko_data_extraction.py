@@ -13,10 +13,15 @@ class NetmikoDataExtractionService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    command = Column(String)
-    variable = Column(String)
-    regular_expression = Column(String)
-    find_all = Column(Boolean, default=False)
+    command1 = Column(String)
+    variable1 = Column(String)
+    regular_expression1 = Column(String)
+    command2 = Column(String)
+    variable2 = Column(String)
+    regular_expression2 = Column(String)
+    command3 = Column(String)
+    variable3 = Column(String)
+    regular_expression3 = Column(String)
     driver = Column(String)
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
@@ -32,11 +37,7 @@ class NetmikoDataExtractionService(Service):
         command = self.sub(self.command, locals())
         output = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
         variables = {}
-        result = (
-            findall(self.regular_expression, output)
-            if self.find_all
-            else match(self.regular_expression, output)
-        )
+        result = findall(self.regular_expression, output)
         if not result:
             return {
                 "command": command,
@@ -44,10 +45,8 @@ class NetmikoDataExtractionService(Service):
                 "regular_expression": self.regular_expression,
                 "success": False,
             }
-        else:
-            value = result if self.find_all else result.group(1)
         netmiko_handler.disconnect()
-        return {self.variable: value, "success": True}
+        return {self.variable: result, "success": True}
 
 
 service_classes["NetmikoDataExtractionService"] = NetmikoDataExtractionService

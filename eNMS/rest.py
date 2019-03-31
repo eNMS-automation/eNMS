@@ -37,18 +37,19 @@ class RestAutomation(Resource):
     decorators = [auth.login_required]
 
     def post(self) -> Union[str, dict]:
-        payload = request.get_json()
-        job = fetch("Job", name=payload["name"])
-        handle_asynchronously = payload.get("async", False)
+        data = request.get_json()
+        job = fetch("Job", name=data["name"])
+        payload = data["payload"]
+        handle_asynchronously = data.get("async", False)
         try:
             targets = {
                 fetch("Device", name=device_name)
-                for device_name in payload.get("devices", "")
+                for device_name in data.get("devices", "")
             } | {
                 fetch("Device", ip_address=ip_address)
-                for ip_address in payload.get("ip_addresses", "")
+                for ip_address in data.get("ip_addresses", "")
             }
-            for pool_name in payload.get("pools", ""):
+            for pool_name in data.get("pools", ""):
                 targets |= {d for d in fetch("Pool", name=pool_name).devices}
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
@@ -58,12 +59,12 @@ class RestAutomation(Resource):
                 id=str(datetime.now()),
                 func=scheduler_job,
                 run_date=datetime.now(),
-                args=[job.id, None, [d.id for d in targets]],
+                args=[job.id, None, [d.id for d in targets], payload],
                 trigger="date",
             )
             return job.serialized
         else:
-            return job.try_run(targets=targets)[0]
+            return job.try_run(targets=targets, payload=payload)[0]
 
 
 class GetInstance(Resource):

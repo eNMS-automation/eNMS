@@ -38,28 +38,29 @@ class RestAutomation(Resource):
 
     def post(self) -> Union[str, dict]:
         try:
-            errors, targets, data = [], request.get_json(), set()
+            errors, targets, data = [], set(), request.get_json()
             job = fetch("Job", name=data["name"])
-            payload = data["payload"]
             handle_asynchronously = data.get("async", False)
             for device_name in data.get("devices", ""):
                 device = fetch("Device", name=device_name)
                 if device:
                     targets.add(device)
                 else:
-                    errors.append(f"No device with the name {device_name}")
+                    errors.append(f"No device with the name '{device_name}'")
             for device_ip in data.get("ip_addresses", ""):
-                device = fetch("Device", ip_address=device_ip_address)
+                device = fetch("Device", ip_address=device_ip)
                 if device:
                     targets.add(device)
                 else:
-                    errors.append(f"No device with the IP address {device_ip}")
+                    errors.append(f"No device with the IP address '{device_ip}'")
             for pool_name in data.get("pools", ""):
                 pool = fetch("Pool", name=pool_name)
                 if pool:
                     targets |= set(pool.devices)
                 else:
-                    errors.append(f"No pool with the name {pool_name}")
+                    errors.append(f"No pool with the name '{pool_name}'")
+            if errors and not targets:
+                return errors
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
@@ -68,13 +69,13 @@ class RestAutomation(Resource):
                 id=str(datetime.now()),
                 func=scheduler_job,
                 run_date=datetime.now(),
-                args=[job.id, None, [d.id for d in targets], payload],
+                args=[job.id, None, [d.id for d in targets], data.get("payload")],
                 trigger="date",
             )
             return {**job.serialized, "errors": errors}
         else:
             return {
-                **job.try_run(targets=targets, payload=payload)[0],
+                **job.try_run(targets=targets, payload=data.get("payload"))[0],
                 "errors": errors,
             }
 

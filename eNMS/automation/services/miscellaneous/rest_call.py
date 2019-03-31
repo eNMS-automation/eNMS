@@ -61,18 +61,23 @@ class RestCallService(Service):
         rest_url = self.sub(self.url, locals())
         kwargs = {p: getattr(self, p) for p in ("headers", "params", "timeout")}
         if self.call_type in ("GET", "DELETE"):
-            result = self.request_dict[self.call_type](
+            response = self.request_dict[self.call_type](
                 rest_url, auth=HTTPBasicAuth(self.username, self.password), **kwargs
-            ).json()
+            )
         else:
-            result = loads(
+            response = loads(
                 self.request_dict[self.call_type](
                     rest_url,
                     data=dumps(self.payload),
                     auth=HTTPBasicAuth(self.username, self.password),
                     **kwargs
-                ).content
+                )
             )
+        if response.status_code != 200:
+            return {"success": False, "response_code": response.status_code}
+        result = (
+            response.json() if self.call_type in ("GET", "DELETE") else response.content
+        )
         if self.validation_method == "text":
             success = self.match_content(
                 str(result), self.sub(self.content_match, locals())

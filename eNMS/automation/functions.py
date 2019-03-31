@@ -15,14 +15,17 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
 def scheduler_job(
-    job_id: int, aps_job_id: Optional[str] = None, targets: Optional[Set[Device]] = None
+    job_id: int,
+    aps_job_id: Optional[str] = None,
+    targets: Optional[Set[Device]] = None,
+    payload: Optional[dict] = None,
 ) -> None:
     with controller.app.app_context():
         task = fetch("Task", creation_time=aps_job_id)
         job = fetch("Job", id=job_id)
         if targets:
             targets = {fetch("Device", id=device_id) for device_id in targets}
-        results, now = job.try_run(targets=targets)
+        results, now = job.try_run(targets=targets, payload=payload)
         parameters = get_one("Parameters")
         if job.push_to_git and parameters.git_automation:
             path_git_folder = Path.cwd() / "git" / "automation"

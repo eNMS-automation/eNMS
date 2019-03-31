@@ -37,20 +37,29 @@ class RestAutomation(Resource):
     decorators = [auth.login_required]
 
     def post(self) -> Union[str, dict]:
-        data = request.get_json()
-        job = fetch("Job", name=data["name"])
-        payload = data["payload"]
-        handle_asynchronously = data.get("async", False)
         try:
-            targets = {
-                fetch("Device", name=device_name)
-                for device_name in data.get("devices", "")
-            } | {
-                fetch("Device", ip_address=ip_address)
-                for ip_address in data.get("ip_addresses", "")
-            }
+            errors, targets, data = [], request.get_json(), set()
+            job = fetch("Job", name=data["name"])
+            payload = data["payload"]
+            handle_asynchronously = data.get("async", False)
+            for device_name in data.get("devices", ""):
+                device = fetch("Device", name=device_name)
+                if device:
+                    targets.add(device)
+                else:
+                    errors.append(f"No device with the name {device_name}")
+            for device_ip in data.get("ip_addresses", ""):
+                device = fetch("Device", ip_address=device_ip_address)
+                if device:
+                    targets.add(device)
+                else:
+                    errors.append(f"No device with the IP address {device_ip}")
             for pool_name in data.get("pools", ""):
-                targets |= {d for d in fetch("Pool", name=pool_name).devices}
+                pool = fetch("Pool", name=pool_name)
+                if pool:
+                    targets |= set(pool.devices)
+                else:
+                    errors.append(f"No pool with the name {pool_name}")
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
@@ -62,9 +71,12 @@ class RestAutomation(Resource):
                 args=[job.id, None, [d.id for d in targets], payload],
                 trigger="date",
             )
-            return job.serialized
+            return {**job.serialized, "errors": errors}
         else:
-            return job.try_run(targets=targets, payload=payload)[0]
+            return {
+                **job.try_run(targets=targets, payload=payload)[0],
+                "errors": errors,
+            }
 
 
 class GetInstance(Resource):

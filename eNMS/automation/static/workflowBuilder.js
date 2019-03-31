@@ -143,8 +143,9 @@ function addJobToWorkflow() {
     );
   } else {
     const url = `/automation/add_jobs_to_workflow/${workflow.id}`;
-    fCall(url, "#add-job-form", function(jobs) {
-      jobs.forEach((job) => {
+    fCall(url, "#add-job-form", function(result) {
+      lastModified = result.update_time;
+      result.jobs.forEach((job) => {
         $("#add-job").modal("hide");
         if (graph.findNode(job.id).length == 0) {
           nodes.add(jobToNode(job));
@@ -161,8 +162,9 @@ function addJobToWorkflow() {
  * @param {id} id - Id of the job to be deleted.
  */
 function deleteNode(id) {
-  call(`/automation/delete_node/${workflow.id}/${id}`, function(job) {
-    alertify.notify(`'${job.name}' deleted from the workflow.`, "success", 5);
+  call(`/automation/delete_node/${workflow.id}/${id}`, function(result) {
+    lastModified = result.update_time;
+    alertify.notify(`'${result.job.name}' deleted from the workflow.`, "success", 5);
   });
 }
 
@@ -172,8 +174,9 @@ function deleteNode(id) {
  */
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
-  call(`/automation/add_edge/${param}`, function(edge) {
-    edges.add(edgeToEdge(edge));
+  call(`/automation/add_edge/${param}`, function(result) {
+    lastModified = result.update_time;
+    edges.add(edgeToEdge(result.edge));
     graph.addEdgeMode();
   });
 }
@@ -183,7 +186,9 @@ function saveEdge(edge) {
  * @param {edgeId} edgeId - Id of the edge to be deleted.
  */
 function deleteEdge(edgeId) {
-  call(`/automation/delete_edge/${workflow.id}/${edgeId}`, () => {});
+  call(`/automation/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
+    lastModified = updateTime;
+  });
 }
 
 /**
@@ -272,7 +277,6 @@ function switchMode(mode) {
 }
 
 $("#current-workflow").on("change", function() {
-  savePositions();
   $("#add_jobs").append(
     `<option value='${workflow.id}'>${workflow.name}</option>`
   );
@@ -289,8 +293,10 @@ function savePositions() {
     dataType: "json",
     contentType: "application/json;charset=UTF-8",
     data: JSON.stringify(graph.getPositions(), null, "\t"),
-    success: function(result) {
-      if (!result) {
+    success: function(updateTime) {
+      if (updateTime) {
+        lastModified = updateTime;
+      } else {
         alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
       }
     },
@@ -346,7 +352,6 @@ $("#network").contextMenu({
  * Start the workflow.
  */
 function runWorkflow() {
-  // eslint-disable-line no-unused-vars
   workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
   runJob(workflow.id);
 }
@@ -368,7 +373,6 @@ function colorJob(id, color) {
  */
 // eslint-disable-next-line
 function getJobState(id) {
-  // eslint-disable-line no-unused-vars
   call(`/get/service/${id}`, function(service) {
     if (service.is_running) {
       colorJob(id, "#89CFF0");
@@ -382,11 +386,6 @@ function getJobState(id) {
     }
   });
 }
-
-/**
- * Automatic refresh.
- */
-function automaticRefresh() {
 
 /**
  * Get Workflow State.
@@ -422,7 +421,7 @@ function getWorkflowState() {
           $("#current-device,#current-job").empty();
           wf.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
         }
-        setTimeout(getWorkflowState, wf.is_running ? 700 : 15000);
+        setTimeout(getWorkflowState, wf.is_running ? 700 : 3000);
       }
     });
   }

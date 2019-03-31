@@ -225,9 +225,10 @@ def add_jobs_to_workflow(workflow_id: int) -> List[dict]:
     jobs = objectify("Job", request.form["add_jobs"])
     for job in jobs:
         job.workflows.append(workflow)
-    workflow.last_modified = str(datetime.now())
+    now = str(datetime.now())
+    workflow.last_modified = now
     db.session.commit()
-    return [job.serialized for job in jobs]
+    return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
 
 @post(bp, "/duplicate_workflow/<int:workflow_id>", "Edit")
@@ -266,9 +267,10 @@ def reset_workflow_logs(workflow_id: int) -> bool:
 def delete_node(workflow_id: int, job_id: int) -> dict:
     workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
     workflow.jobs.remove(job)
-    workflow.last_modified = str(datetime.now())
+    now = str(datetime.now())
+    workflow.last_modified = now
     db.session.commit()
-    return job.serialized
+    return {"job": job.serialized, "update_time": now}
 
 
 @post(bp, "/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:dest>", "Edit")
@@ -283,25 +285,29 @@ def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
             "destination": dest,
         },
     )
-    fetch("Workflow", id=workflow_id).last_modified = str(datetime.now())
+    now = str(datetime.now())
+    fetch("Workflow", id=workflow_id).last_modified = now
     db.session.commit()
-    return workflow_edge.serialized
+    return {"edge": workflow_edge.serialized, "update_time": now}
 
 
 @post(bp, "/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
 def delete_edge(workflow_id: int, edge_id: int) -> dict:
-    fetch("Workflow", id=workflow_id).last_modified = str(datetime.now())
+    delete("WorkflowEdge", id=edge_id)
+    now = str(datetime.now())
+    fetch("Workflow", id=workflow_id).last_modified = now
     db.session.commit()
-    return delete("WorkflowEdge", id=edge_id)
+    return now
 
 
 @post(bp, "/save_positions/<int:workflow_id>", "Edit")
 def save_positions(workflow_id: int) -> bool:
+    now = str(datetime.now())
     workflow = fetch("Workflow", id=workflow_id)
-    workflow.last_modified = str(datetime.now())
+    workflow.last_modified = now
     session["workflow"] = workflow.id
     for job_id, position in request.json.items():
         job = fetch("Job", id=job_id)
         job.positions[workflow.name] = (position["x"], position["y"])
     db.session.commit()
-    return True
+    return now

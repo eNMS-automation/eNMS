@@ -3,6 +3,7 @@ global
 alertify: false
 call: false
 diffview: false
+editService: false
 getJobState: false
 getWorkflowState: false
 */
@@ -23,9 +24,8 @@ function openWizard(type) {
   $(`#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
-    transitionEffect: 'none',
+    transitionEffect: "none",
   });
-  console.log($(`#${type}-id`).val());
   if (!$(`#${type}-id`).val()) {
     editService();
     $(`#${type}-wizard`).smartWizard("goToStep", 1);

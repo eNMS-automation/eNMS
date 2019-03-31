@@ -149,6 +149,11 @@ function addJobToWorkflow() {
         $("#add-job").modal("hide");
         if (graph.findNode(job.id).length == 0) {
           nodes.add(jobToNode(job));
+          alertify.notify(
+            `Job '${job.name}' added to the workflow.`,
+            "success",
+            5
+          );
         } else {
           alertify.notify(`Job '${job.name}' already in workflow.`, "error", 5);
         }
@@ -164,7 +169,11 @@ function addJobToWorkflow() {
 function deleteNode(id) {
   call(`/automation/delete_node/${workflow.id}/${id}`, function(result) {
     lastModified = result.update_time;
-    alertify.notify(`'${result.job.name}' deleted from the workflow.`, "success", 5);
+    alertify.notify(
+      `'${result.job.name}' deleted from the workflow.`,
+      "success",
+      5
+    );
   });
 }
 
@@ -421,7 +430,7 @@ function getWorkflowState() {
           $("#current-device,#current-job").empty();
           wf.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
         }
-        setTimeout(getWorkflowState, wf.is_running ? 700 : 3000);
+        setTimeout(getWorkflowState, wf.is_running ? 700 : 15000);
       }
     });
   }

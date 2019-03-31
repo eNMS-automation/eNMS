@@ -78,17 +78,13 @@ class RestCallService(Service):
         result = (
             response.json() if self.call_type in ("GET", "DELETE") else response.content
         )
-        if self.validation_method == "text":
-            success = self.match_content(
-                str(result), self.sub(self.content_match, locals())
-            )
-        else:
-            success = self.match_dictionnary(result)
+        match = self.sub(self.content_match, locals())
         return {
             "url": rest_url,
+            "match": match if self.validation_method == "text" else self.dict_match,
             "negative_logic": self.negative_logic,
             "result": result,
-            "success": success,
+            "success": self.match_content(result, match),
         }
 
 

@@ -92,6 +92,7 @@ function displayWorkflow(wf) {
       }
     }
   });
+  graph.on("dragEnd", () => savePositions());
   $(`#add_jobs option[value='${wf.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   lastModified = wf.last_modified;
@@ -383,6 +384,11 @@ function getJobState(id) {
 }
 
 /**
+ * Automatic refresh.
+ */
+function automaticRefresh() {
+
+/**
  * Get Workflow State.
  */
 function getWorkflowState() {
@@ -421,10 +427,6 @@ function getWorkflowState() {
     });
   }
 }
-
-$(window).bind("beforeunload", function() {
-  savePositions();
-});
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/workflows/index.html");

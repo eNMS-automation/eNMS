@@ -298,6 +298,7 @@ def delete_edge(workflow_id: int, edge_id: int) -> dict:
 @post(bp, "/save_positions/<int:workflow_id>", "Edit")
 def save_positions(workflow_id: int) -> bool:
     workflow = fetch("Workflow", id=workflow_id)
+    workflow.last_modified = str(datetime.now())
     session["workflow"] = workflow.id
     for job_id, position in request.json.items():
         job = fetch("Job", id=job_id)

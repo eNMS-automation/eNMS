@@ -73,7 +73,7 @@ class Job(Base):
     send_notification_method = Column(String, default="mail_feedback_notification")
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String, default="")
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    logs = Column(MutableList.as_mutable(PickleType), default=[])
 
     @hybrid_property
     def status(self) -> str:
@@ -156,7 +156,6 @@ class Job(Base):
     ) -> Tuple[dict, str]:
         self.is_running, self.state = True, {}
         results: dict = {"results": {}}
-        logs = []
         if not payload:
             payload = {}
         job_from_workflow_targets = from_workflow and bool(targets)
@@ -165,12 +164,12 @@ class Job(Base):
         has_targets = bool(targets)
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
-        logs.append(f"{self.name}: starting.")
         now = str(datetime.now()).replace(" ", "-")
+        self.logs.append(f"{self.name}: starting.")
         for i in range(self.number_of_retries + 1):
             self.completed = self.failed = 0
             db.session.commit()
-            logs.append(f"Running job {self.name}, attempt {i}")
+            self.logs.append(f"Running job {self.name}, attempt {i}")
             attempt = self.run(payload, job_from_workflow_targets, targets)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
@@ -203,8 +202,8 @@ class Job(Base):
                     break
                 else:
                     sleep(self.time_between_retries)
-        logs.append(f"{self.name}: finished.")
-        self.results[now], self.logs[now] = results, logs
+        self.logs.append(f"{self.name}: finished.")
+        self.results[now] = {**results, "logs": self.logs}
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         db.session.commit()
@@ -216,7 +215,9 @@ class Job(Base):
         with session_scope() as session:
             try:
                 if device:
+                    self.logs.append(f"Running service on {device.name}")
                     results = self.job(payload, device)
+                    self.logs.append(f"Finished running service on {device.name}")
                 else:
                     results = self.job(payload)
             except Exception:

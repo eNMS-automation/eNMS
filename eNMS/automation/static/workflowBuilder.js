@@ -9,7 +9,7 @@ editService: false
 fCall: false
 partial: false
 runJob: false
-showLogs: false
+showResults: false
 showModal: false
 showTypeModal: false
 vis: false
@@ -315,8 +315,8 @@ function savePositions() {
 /**
  * Show workflow results
  */
-function showWorkflowLogs() {
-  showLogs(workflow.id);
+function showWorkflowResults() {
+  showResults(workflow.id);
 }
 
 /**
@@ -330,9 +330,9 @@ const action = {
   "Run Workflow": runWorkflow,
   Edit: editService,
   Run: runJob,
-  Logs: showLogs,
+  Results: showResults,
   "Edit Workflow": editWorkflow,
-  "Workflow Logs": showWorkflowLogs,
+  "Workflow Results": showWorkflowResults,
   "Add Service or Workflow": partial(showModal, "add-job"),
   Delete: deleteSelection,
   "Create 'Success' edge": partial(switchMode, "success"),

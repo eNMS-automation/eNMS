@@ -73,7 +73,7 @@ class Job(Base):
     send_notification_method = Column(String, default="mail_feedback_notification")
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String, default="")
-    logs = Column(MutableList.as_mutable(PickleType), default=[])
+    logs = Column(MutableDict.as_mutable(PickleType), default={})
 
     @hybrid_property
     def status(self) -> str:
@@ -156,7 +156,7 @@ class Job(Base):
     ) -> Tuple[dict, str]:
         self.is_running, self.state = True, {}
         results: dict = {"results": {}}
-        logs: []
+        logs = []
         if not payload:
             payload = {}
         job_from_workflow_targets = from_workflow and bool(targets)

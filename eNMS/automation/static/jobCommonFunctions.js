@@ -40,15 +40,13 @@ function openWizard(type) {
  * @param {results} results - Results.
  */
 function displayResult(results) {
-  const timestamp = $("#display").val();
-  const displayResults = $("#type").val() == "results";
-  const value =  == displayResults ? results[timestamp] : logs[timestamp];
-  if (!displayResults) return;
-  if (displayResults) {
+  const value = results[$("#display").val()];
+  if (!value) return;
+  if ($("#type").val() == "results") {
     $("#results").text(
       JSON.stringify(
         Object.fromEntries(
-          Object.entries(displayResults)
+          Object.entries(value)
             .sort()
             .reverse()
         ),
@@ -57,7 +55,7 @@ function displayResult(results) {
       ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
     );
   } else {
-    $("#results").text(value.join("<br>"));
+    $("#results").text(value.join("\n"));
   }
 }
 
@@ -138,6 +136,12 @@ $("#display").on("change", function() {
   call(`/automation/get_results/${jobId}`, (results) => {
     displayResult(results);
     $("#compare_with").val($("#display").val());
+  });
+});
+
+$("#type").on("change", function() {
+  call(`/automation/get_${this.value}/${jobId}`, (results) => {
+    displayResult(results);
   });
 });
 

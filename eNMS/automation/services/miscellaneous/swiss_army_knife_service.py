@@ -48,9 +48,9 @@ class SwissArmyKnifeService(Service):
             body=payload["content"],
         )
         runtime = payload["runtime"].replace(".", "").replace(":", "")
-        filename = f"logs-{runtime}.txt"
+        filename = f"results-{runtime}.txt"
         with open(filename, "w") as file:
-            file.write(str_dict(payload["logs"][payload["runtime"]]))
+            file.write(str_dict(payload["results"][payload["runtime"]]))
         with open(filename, "r") as file:
             message.attach(
                 filename,

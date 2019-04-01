@@ -11,7 +11,7 @@ getWorkflowState: false
 let jobId;
 let refresh;
 
-$("#logs-modal").on("hidden.bs.modal", function() {
+$("#results-modal").on("hidden.bs.modal", function() {
   refresh = false;
 });
 
@@ -36,13 +36,13 @@ function openWizard(type) {
 }
 
 /**
- * Display log.
- * @param {logs} logs - Logs.
+ * Display result.
+ * @param {results} results - Logs.
  */
-function displayLog(logs) {
-  const displayLogs = logs[$("#display").val()];
+function displayLog(results) {
+  const displayLogs = results[$("#display").val()];
   if (displayLogs) {
-    $("#logs").text(
+    $("#results").text(
       JSON.stringify(
         Object.fromEntries(
           Object.entries(displayLogs)
@@ -57,12 +57,12 @@ function displayLog(logs) {
 }
 
 /**
- * Display logs.
+ * Display results.
  */
 function displayLogs() {
-  call(`/automation/get_logs/${jobId}`, (logs) => {
+  call(`/automation/get_results/${jobId}`, (results) => {
     $("#display,#compare_with").empty();
-    const times = Object.keys(logs);
+    const times = Object.keys(results);
     times.forEach((option) => {
       $("#display,#compare_with").append(
         $("<option></option>")
@@ -71,19 +71,19 @@ function displayLogs() {
       );
     });
     $("#display,#compare_with").val(times[times.length - 1]);
-    displayLog(logs);
+    displayLog(results);
   });
 }
 
 /**
- * Display logs.
+ * Display results.
  * @param {firstTime} firstTime - First time.
  */
 // eslint-disable-next-line
 function refreshLogs(firstTime = false) {
   if (firstTime) {
     refresh = !refresh;
-    $("#refresh-logs-button").text(
+    $("#refresh-results-button").text(
       refresh ? "Stop periodic Refresh" : "Trigger periodic Refresh"
     );
   }
@@ -94,27 +94,27 @@ function refreshLogs(firstTime = false) {
 }
 
 /**
- * Show the logs modal for a job.
+ * Show the results modal for a job.
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
 function showLogs(id) {
   jobId = id;
-  $("#logs").empty();
+  $("#results").empty();
   displayLogs();
-  $("#logs-modal").modal("show");
+  $("#results-modal").modal("show");
 }
 
 /**
- * Clear the logs
+ * Clear the results
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
 function clearLogs() {
-  call(`/automation/clear_logs/${jobId}`, () => {
-    $("#logs").empty();
+  call(`/automation/clear_results/${jobId}`, () => {
+    $("#results").empty();
     alertify.notify("Logs cleared.", "success", 5);
-    $("#logs-modal").modal("hide");
+    $("#results-modal").modal("hide");
   });
 }
 
@@ -124,24 +124,24 @@ function clearLogs() {
 // eslint-disable-next-line
 function detachWindow() {
   window
-    .open(`/automation/detach_logs/${jobId}`, "Logs", "height=800,width=600")
+    .open(`/automation/detach_results/${jobId}`, "Logs", "height=800,width=600")
     .focus();
-  $("#logs-modal").modal("hide");
+  $("#results-modal").modal("hide");
 }
 
 $("#display").on("change", function() {
-  call(`/automation/get_logs/${jobId}`, (logs) => {
-    displayLog(logs);
+  call(`/automation/get_results/${jobId}`, (results) => {
+    displayLog(results);
     $("#compare_with").val($("#display").val());
   });
 });
 
 $("#compare_with").on("change", function() {
-  $("#logs").empty();
+  $("#results").empty();
   const v1 = $("#display").val();
   const v2 = $("#compare_with").val();
   call(`/automation/get_diff/${jobId}/${v1}/${v2}`, function(data) {
-    $("#logs").append(
+    $("#results").append(
       diffview.buildView({
         baseTextLines: data.first,
         newTextLines: data.second,

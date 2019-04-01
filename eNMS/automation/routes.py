@@ -38,7 +38,7 @@ from eNMS.automation.forms import (
 @get(bp, "/service_management", "View")
 def service_management() -> dict:
     return dict(
-        compare_logs_form=CompareLogsForm(request.form),
+        compare_results_form=CompareLogsForm(request.form),
         fields=service_table_properties,
         service_form=JobForm(request.form),
         services_classes=sorted(service_classes),
@@ -49,7 +49,7 @@ def service_management() -> dict:
 @get(bp, "/workflow_management", "View")
 def workflow_management() -> dict:
     return dict(
-        compare_logs_form=CompareLogsForm(request.form),
+        compare_results_form=CompareLogsForm(request.form),
         fields=workflow_table_properties,
         workflows=serialize("Workflow"),
         workflow_creation_form=JobForm(request.form),
@@ -64,30 +64,30 @@ def workflow_builder() -> dict:
         add_job_form=AddJobForm(request.form),
         workflow_builder_form=WorkflowBuilderForm(request.form),
         workflow_creation_form=JobForm(request.form),
-        compare_logs_form=CompareLogsForm(request.form),
+        compare_results_form=CompareLogsForm(request.form),
         service_form=JobForm(request.form),
         services_classes=sorted(service_classes),
     )
 
 
-@get(bp, "/detach_logs/<int:id>", "View")
-def detached_logs(id: int) -> dict:
-    return {"job": id, "compare_logs_form": CompareLogsForm(request.form)}
+@get(bp, "/detach_results/<int:id>", "View")
+def detached_results(id: int) -> dict:
+    return {"job": id, "compare_results_form": CompareLogsForm(request.form)}
 
 
-@get(bp, "/logs/<int:id>/<runtime>", "View")
-def logs(id: int, runtime: str) -> str:
+@get(bp, "/results/<int:id>/<runtime>", "View")
+def results(id: int, runtime: str) -> str:
     job = fetch("Job", id=id)
     if not job:
         message = "The associated job has been deleted."
     else:
-        message = job.logs.get(runtime, "Logs have been removed")
+        message = job.results.get(runtime, "Results have been removed")
     return f"<pre>{dumps(message, indent=4)}</pre>"
 
 
-@post(bp, "/get_logs/<int:id>", "View")
-def get_logs(id: int) -> dict:
-    return fetch("Job", id=id).logs
+@post(bp, "/get_results/<int:id>", "View")
+def get_results(id: int) -> dict:
+    return fetch("Job", id=id).results
 
 
 @post(bp, "/get_service/<id_or_cls>", "View")
@@ -206,15 +206,15 @@ def run_job(job_id: int) -> dict:
 @post(bp, "/get_diff/<int:job_id>/<v1>/<v2>", "View")
 def get_diff(job_id: int, v1: str, v2: str) -> dict:
     job = fetch("Job", id=job_id)
-    first = str_dict(dict(reversed(sorted(job.logs[v1].items())))).splitlines()
-    second = str_dict(dict(reversed(sorted(job.logs[v2].items())))).splitlines()
+    first = str_dict(dict(reversed(sorted(job.results[v1].items())))).splitlines()
+    second = str_dict(dict(reversed(sorted(job.results[v2].items())))).splitlines()
     opcodes = SequenceMatcher(None, first, second).get_opcodes()
     return {"first": first, "second": second, "opcodes": opcodes}
 
 
-@post(bp, "/clear_logs/<int:job_id>", "Edit")
-def clear_logs(job_id: int) -> bool:
-    fetch("Job", id=job_id).logs = {}
+@post(bp, "/clear_results/<int:job_id>", "Edit")
+def clear_results(job_id: int) -> bool:
+    fetch("Job", id=job_id).results = {}
     db.session.commit()
     return True
 
@@ -254,13 +254,6 @@ def duplicate_workflow(workflow_id: int) -> dict:
         )
     db.session.commit()
     return new_workflow.serialized
-
-
-@post(bp, "/reset_workflow_logs/<int:workflow_id>", "Edit")
-def reset_workflow_logs(workflow_id: int) -> bool:
-    fetch("Workflow", id=workflow_id).state = {}
-    db.session.commit()
-    return True
 
 
 @post(bp, "/delete_node/<int:workflow_id>/<int:job_id>", "Edit")

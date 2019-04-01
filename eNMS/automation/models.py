@@ -46,7 +46,7 @@ class Job(Base):
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    results = Column(MutableDict.as_mutable(PickleType), default={})
     is_running = Column(Boolean, default=False)
     number_of_targets = Column(Integer, default=0)
     completed = Column(Integer, default=0)
@@ -73,7 +73,7 @@ class Job(Base):
     send_notification_method = Column(String, default="mail_feedback_notification")
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String, default="")
-    real_time_logs = Column(MutableList.as_mutable(PickleType), default=[])
+    logs = Column(MutableList.as_mutable(PickleType), default=[])
 
     @hybrid_property
     def status(self) -> str:
@@ -121,27 +121,27 @@ class Job(Base):
         if "devices" in results["results"] and not results["results"]["success"]:
             failed = "\n".join(
                 device
-                for device, logs in results["results"]["devices"].items()
-                if not logs["success"]
+                for device, device_results in results["results"]["devices"].items()
+                if not device_results["success"]
             )
             summary.append(f"FAILED\n{failed}")
             if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
-                    for device, logs in results["results"]["devices"].items()
-                    if logs["success"]
+                    for device, device_results in results["results"]["devices"].items()
+                    if device_results["success"]
                 )
                 summary.append(f"\n\nPASS:\n{passed}")
         server_url = environ.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
-        logs_url = f"{server_url}/automation/logs/{self.id}/{now}"
-        summary.append(f"Logs: {logs_url}")
+        results_url = f"{server_url}/automation/results/{self.id}/{now}"
+        summary.append(f"Logs: {results_url}")
         return "\n\n".join(summary)
 
     def notify(self, results: dict, time: str) -> None:
         fetch("Job", name=self.send_notification_method).try_run(
             {
                 "job": self.serialized,
-                "logs": self.logs,
+                "results": self.results,
                 "runtime": time,
                 "result": results["results"]["success"],
                 "content": self.build_notification(results, time),
@@ -202,7 +202,7 @@ class Job(Base):
                     break
                 else:
                     sleep(self.time_between_retries)
-        self.logs[now] = results
+        self.results[now] = results
         info(f"{self.name}: finished.")
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
@@ -215,9 +215,9 @@ class Job(Base):
         with session_scope() as session:
             try:
                 if device:
-                    self.real_time_logs.append(f"Running service on {device.name}")
+                    self.logs.append(f"Running service on {device.name}")
                     results = self.job(payload, device)
-                    self.real_time_logs.append(f"{device.name} done.")
+                    self.logs.append(f"{device.name} done.")
                 else:
                     results = self.job(payload)
             except Exception:

@@ -37,15 +37,15 @@ function openWizard(type) {
 
 /**
  * Display result.
- * @param {results} results - Logs.
+ * @param {results} results - Results.
  */
-function displayLog(results) {
-  const displayLogs = results[$("#display").val()];
-  if (displayLogs) {
+function displayResult(results) {
+  const displayResults = results[$("#display").val()];
+  if (displayResults) {
     $("#results").text(
       JSON.stringify(
         Object.fromEntries(
-          Object.entries(displayLogs)
+          Object.entries(displayResults)
             .sort()
             .reverse()
         ),
@@ -59,7 +59,7 @@ function displayLog(results) {
 /**
  * Display results.
  */
-function displayLogs() {
+function displayResults() {
   call(`/automation/get_results/${jobId}`, (results) => {
     $("#display,#compare_with").empty();
     const times = Object.keys(results);
@@ -71,7 +71,7 @@ function displayLogs() {
       );
     });
     $("#display,#compare_with").val(times[times.length - 1]);
-    displayLog(results);
+    displayResult(results);
   });
 }
 
@@ -80,7 +80,7 @@ function displayLogs() {
  * @param {firstTime} firstTime - First time.
  */
 // eslint-disable-next-line
-function refreshLogs(firstTime = false) {
+function refreshResults(firstTime = false) {
   if (firstTime) {
     refresh = !refresh;
     $("#refresh-results-button").text(
@@ -88,8 +88,8 @@ function refreshLogs(firstTime = false) {
     );
   }
   if (refresh) {
-    displayLogs();
-    setTimeout(refreshLogs, 5000);
+    displayResults();
+    setTimeout(refreshResults, 5000);
   }
 }
 
@@ -98,10 +98,10 @@ function refreshLogs(firstTime = false) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function showLogs(id) {
+function showResults(id) {
   jobId = id;
   $("#results").empty();
-  displayLogs();
+  displayResults();
   $("#results-modal").modal("show");
 }
 
@@ -110,10 +110,10 @@ function showLogs(id) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function clearLogs() {
+function clearResults() {
   call(`/automation/clear_results/${jobId}`, () => {
     $("#results").empty();
-    alertify.notify("Logs cleared.", "success", 5);
+    alertify.notify("Results cleared.", "success", 5);
     $("#results-modal").modal("hide");
   });
 }
@@ -124,14 +124,14 @@ function clearLogs() {
 // eslint-disable-next-line
 function detachWindow() {
   window
-    .open(`/automation/detach_results/${jobId}`, "Logs", "height=800,width=600")
+    .open(`/automation/detach_results/${jobId}`, "Results", "height=800,width=600")
     .focus();
   $("#results-modal").modal("hide");
 }
 
 $("#display").on("change", function() {
   call(`/automation/get_results/${jobId}`, (results) => {
-    displayLog(results);
+    displayResult(results);
     $("#compare_with").val($("#display").val());
   });
 });

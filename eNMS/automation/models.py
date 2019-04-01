@@ -134,7 +134,7 @@ class Job(Base):
                 summary.append(f"\n\nPASS:\n{passed}")
         server_url = environ.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
         results_url = f"{server_url}/automation/results/{self.id}/{now}"
-        summary.append(f"Logs: {results_url}")
+        summary.append(f"Results: {results_url}")
         return "\n\n".join(summary)
 
     def notify(self, results: dict, time: str) -> None:
@@ -274,7 +274,7 @@ class Service(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
+            onclick="showResults('{self.id}')"></i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -429,7 +429,7 @@ class Workflow(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
+            onclick="showResults('{self.id}')"></i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

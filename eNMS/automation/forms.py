@@ -42,7 +42,7 @@ class JobForm(FlaskForm):
     operating_system = StringField()
 
 
-class CompareLogsForm(FlaskForm):
+class CompareResultsForm(FlaskForm):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
 

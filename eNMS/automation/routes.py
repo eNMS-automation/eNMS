@@ -29,7 +29,7 @@ from eNMS.properties import (
 from eNMS.automation import bp
 from eNMS.automation.forms import (
     AddJobForm,
-    CompareLogsForm,
+    CompareResultsForm,
     JobForm,
     WorkflowBuilderForm,
 )
@@ -38,7 +38,7 @@ from eNMS.automation.forms import (
 @get(bp, "/service_management", "View")
 def service_management() -> dict:
     return dict(
-        compare_results_form=CompareLogsForm(request.form),
+        compare_results_form=CompareResultsForm(request.form),
         fields=service_table_properties,
         service_form=JobForm(request.form),
         services_classes=sorted(service_classes),
@@ -49,7 +49,7 @@ def service_management() -> dict:
 @get(bp, "/workflow_management", "View")
 def workflow_management() -> dict:
     return dict(
-        compare_results_form=CompareLogsForm(request.form),
+        compare_results_form=CompareResultsForm(request.form),
         fields=workflow_table_properties,
         workflows=serialize("Workflow"),
         workflow_creation_form=JobForm(request.form),
@@ -64,7 +64,7 @@ def workflow_builder() -> dict:
         add_job_form=AddJobForm(request.form),
         workflow_builder_form=WorkflowBuilderForm(request.form),
         workflow_creation_form=JobForm(request.form),
-        compare_results_form=CompareLogsForm(request.form),
+        compare_results_form=CompareResultsForm(request.form),
         service_form=JobForm(request.form),
         services_classes=sorted(service_classes),
     )
@@ -72,7 +72,7 @@ def workflow_builder() -> dict:
 
 @get(bp, "/detach_results/<int:id>", "View")
 def detached_results(id: int) -> dict:
-    return {"job": id, "compare_results_form": CompareLogsForm(request.form)}
+    return {"job": id, "compare_results_form": CompareResultsForm(request.form)}
 
 
 @get(bp, "/results/<int:id>/<runtime>", "View")

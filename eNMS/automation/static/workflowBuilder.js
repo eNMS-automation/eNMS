@@ -313,7 +313,7 @@ function savePositions() {
 }
 
 /**
- * Show workflow logs
+ * Show workflow results
  */
 function showWorkflowLogs() {
   showLogs(workflow.id);

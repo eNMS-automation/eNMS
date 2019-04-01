@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 
-from eNMS.base.models import ObjectField
+from eNMS.models import ObjectField
 
 
 class ViewForm(FlaskForm):

@@ -9,7 +9,7 @@ bp = Blueprint(
 )
 
 from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
-from eNMS.base.functions import add_classes
+from eNMS.functions import add_classes
 
 add_classes(Job, Service, Workflow, WorkflowEdge)
 

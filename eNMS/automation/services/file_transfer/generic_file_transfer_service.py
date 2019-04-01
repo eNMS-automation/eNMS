@@ -2,7 +2,7 @@ from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
+from eNMS.classes import service_classes
 from eNMS.inventory.models import Device
 
 

@@ -9,8 +9,8 @@ from string import punctuation
 from typing import Any, Callable, Generator, List, Optional, Tuple
 
 from eNMS.extensions import controller, db
-from eNMS.base.classes import classes
-from eNMS.base.properties import pretty_names, property_types
+from eNMS.classes import classes
+from eNMS.properties import pretty_names, property_types
 
 
 def add_classes(*models: db.Model) -> None:

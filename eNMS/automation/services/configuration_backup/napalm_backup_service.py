@@ -6,8 +6,8 @@ from yaml import dump
 
 from eNMS.automation.functions import NAPALM_DRIVERS
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
-from eNMS.base.functions import str_dict
+from eNMS.classes import service_classes
+from eNMS.functions import str_dict
 from eNMS.inventory.models import Device
 
 

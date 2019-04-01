@@ -10,9 +10,9 @@ from sqlalchemy.orm import relationship
 from typing import Any, List
 from yaml import load
 
-from eNMS.base.associations import pool_user_table
-from eNMS.base.functions import fetch, fetch_all
-from eNMS.base.models import Base
+from eNMS.associations import pool_user_table
+from eNMS.functions import fetch, fetch_all
+from eNMS.models import Base
 from eNMS.extensions import db
 
 

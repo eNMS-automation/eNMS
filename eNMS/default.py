@@ -1,9 +1,9 @@
 from flask import Flask
 
 from eNMS.extensions import db
-from eNMS.base.classes import classes
-from eNMS.base.functions import factory, integrity_rollback, fetch, get_one
-from eNMS.base.properties import parameters_public_properties
+from eNMS.classes import classes
+from eNMS.functions import factory, integrity_rollback, fetch, get_one
+from eNMS.properties import parameters_public_properties
 
 
 def create_default_users() -> None:

@@ -28,9 +28,9 @@ from eNMS.examples import create_examples
 from eNMS.rest import configure_rest_api
 from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
-from eNMS.base.classes import classes, service_classes
-from eNMS.base.functions import fetch
-from eNMS.base.properties import (
+from eNMS.classes import classes, service_classes
+from eNMS.functions import fetch
+from eNMS.properties import (
     boolean_properties,
     cls_to_properties,
     device_subtypes,

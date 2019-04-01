@@ -1,9 +1,9 @@
 from slackclient import SlackClient
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.base.functions import get_one
+from eNMS.functions import get_one
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
+from eNMS.classes import service_classes
 
 
 class SlackNotificationService(Service):

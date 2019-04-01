@@ -10,8 +10,8 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.base.models import MultipleObjectField
-from eNMS.base.properties import import_properties, user_permissions
+from eNMS.models import MultipleObjectField
+from eNMS.properties import import_properties, user_permissions
 
 
 class LoginForm(FlaskForm):

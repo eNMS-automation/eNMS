@@ -21,7 +21,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, 
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
+from eNMS.classes import service_classes
 
 
 class ExampleService(Service):

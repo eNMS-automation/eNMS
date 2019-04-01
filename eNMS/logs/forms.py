@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, StringField
 
-from eNMS.base.models import MultipleObjectField
+from eNMS.models import MultipleObjectField
 
 
 def configure_form(cls: FlaskForm) -> FlaskForm:

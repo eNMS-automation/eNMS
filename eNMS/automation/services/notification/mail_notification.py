@@ -3,8 +3,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.extensions import mail_client
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
-from eNMS.base.functions import get_one
+from eNMS.classes import service_classes
+from eNMS.functions import get_one
 
 
 class MailNotificationService(Service):

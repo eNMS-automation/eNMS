@@ -29,7 +29,7 @@ from eNMS.admin.forms import (
     MigrationsForm,
 )
 from eNMS.admin.functions import migrate_export, migrate_import
-from eNMS.base.functions import (
+from eNMS.functions import (
     delete_all,
     fetch_all,
     get,
@@ -39,7 +39,7 @@ from eNMS.base.functions import (
     fetch,
     serialize,
 )
-from eNMS.base.properties import instance_table_properties, user_table_properties
+from eNMS.properties import instance_table_properties, user_table_properties
 
 
 @get(bp, "/user_management", "View")

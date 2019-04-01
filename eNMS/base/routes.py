@@ -11,8 +11,8 @@ from werkzeug.wrappers import Response
 
 from eNMS import db
 from eNMS.base import bp
-from eNMS.base.classes import classes
-from eNMS.base.functions import (
+from eNMS.classes import classes
+from eNMS.functions import (
     delete,
     factory,
     fetch,
@@ -21,7 +21,7 @@ from eNMS.base.functions import (
     get,
     post,
 )
-from eNMS.base.properties import (
+from eNMS.properties import (
     default_diagrams_properties,
     table_properties,
     reverse_pretty_names,

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
-from eNMS.base.models import ObjectField
+from eNMS.models import ObjectField
 
 
 class SchedulingForm(FlaskForm):

@@ -14,16 +14,16 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from typing import Any, Dict, List, Union
 
-from eNMS.base.associations import (
+from eNMS.associations import (
     pool_device_table,
     pool_link_table,
     pool_user_table,
     job_device_table,
     job_pool_table,
 )
-from eNMS.base.functions import fetch, fetch_all
-from eNMS.base.models import Base
-from eNMS.base.properties import (
+from eNMS.functions import fetch, fetch_all
+from eNMS.models import Base
+from eNMS.properties import (
     custom_properties,
     pool_link_properties,
     pool_device_properties,

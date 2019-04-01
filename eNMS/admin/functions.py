@@ -7,7 +7,7 @@ from uuid import getnode
 from yaml import dump, load, SafeLoader
 
 from eNMS.default import create_default
-from eNMS.base.functions import delete_all, export, factory
+from eNMS.functions import delete_all, export, factory
 
 
 def configure_instance_id() -> None:

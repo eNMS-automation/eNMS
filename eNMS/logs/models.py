@@ -6,8 +6,8 @@ from threading import Thread
 from typing import List
 
 from eNMS.extensions import controller, db
-from eNMS.base.associations import job_log_rule_table, log_rule_log_table
-from eNMS.base.models import Base
+from eNMS.associations import job_log_rule_table, log_rule_log_table
+from eNMS.models import Base
 
 
 class Log(Base):

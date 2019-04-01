@@ -1,8 +1,8 @@
 from flask import request
 from typing import Union
 
-from eNMS.base.functions import fetch, fetch_all, get, get_one, post
-from eNMS.base.properties import subtype_sizes, link_subtype_to_color
+from eNMS.functions import fetch, fetch_all, get, get_one, post
+from eNMS.properties import subtype_sizes, link_subtype_to_color
 from eNMS.inventory.forms import (
     AddDevice,
     AddLink,

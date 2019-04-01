@@ -8,8 +8,8 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.extensions import db
-from eNMS.base.functions import delete_all, factory, serialize
-from eNMS.base.properties import export_properties
+from eNMS.functions import delete_all, factory, serialize
+from eNMS.properties import export_properties
 
 
 def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, IntegerField, StringField, SelectField
 
-from eNMS.base.models import MultipleObjectField, ObjectField
+from eNMS.models import MultipleObjectField, ObjectField
 
 
 class JobForm(FlaskForm):

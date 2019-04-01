@@ -1,7 +1,7 @@
 from flask import request
 
-from eNMS.base.functions import get, serialize
-from eNMS.base.properties import log_public_properties, log_rule_table_properties
+from eNMS.functions import get, serialize
+from eNMS.properties import log_public_properties, log_rule_table_properties
 from eNMS.logs import bp
 from eNMS.logs.forms import LogAutomationForm
 

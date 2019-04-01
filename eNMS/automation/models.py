@@ -21,14 +21,14 @@ from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
 from eNMS import controller, db
-from eNMS.base.associations import (
+from eNMS.associations import (
     job_device_table,
     job_log_rule_table,
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.base.functions import fetch, session_scope
-from eNMS.base.models import Base
+from eNMS.functions import fetch, session_scope
+from eNMS.models import Base
 from eNMS.inventory.models import Device
 
 

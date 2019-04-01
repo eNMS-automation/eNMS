@@ -8,7 +8,7 @@ bp = Blueprint(
     static_folder="static",
 )
 
-from eNMS.base.functions import add_classes
+from eNMS.functions import add_classes
 from eNMS.scheduling.models import Task
 
 add_classes(Task)

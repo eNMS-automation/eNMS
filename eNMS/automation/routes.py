@@ -7,8 +7,8 @@ from typing import List
 
 from eNMS.extensions import db, scheduler
 from eNMS.automation.functions import scheduler_job
-from eNMS.base.classes import service_classes
-from eNMS.base.functions import (
+from eNMS.classes import service_classes
+from eNMS.functions import (
     delete,
     factory,
     fetch,
@@ -18,7 +18,7 @@ from eNMS.base.functions import (
     str_dict,
     serialize,
 )
-from eNMS.base.properties import (
+from eNMS.properties import (
     cls_to_properties,
     pretty_names,
     private_properties,

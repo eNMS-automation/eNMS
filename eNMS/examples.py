@@ -6,6 +6,33 @@ from eNMS.extensions import db
 from eNMS.base.functions import factory, fetch
 
 
+def create_example_pools() -> None:
+    for pool in (
+        {
+            "name": "Datacenter San Francisco",
+            "description": "Datacenter San Francisco",
+            "device_name": "e",
+            "longitude": -122.43,
+            "latitude": 37.77,
+        },
+        {
+            "name": "Datacenter Chicago",
+            "description": "Datacenter Chicago",
+            "device_name": "a",
+            "longitude": -74.0,
+            "latitude": 40.71,
+        },
+        {
+            "name": "Datacenter New York",
+            "description": "Datacenter New York",
+            "device_name": "i",
+            "longitude": -87.62,
+            "latitude": 41.87,
+        },
+    ):
+        factory("Pool", **pool)
+
+
 def create_network_topology(app: Flask) -> None:
     with open(app.path / "projects" / "usa.xls", "rb") as f:
         book = open_workbook(file_contents=f.read())
@@ -400,6 +427,7 @@ def create_workflow_of_workflows() -> None:
 
 
 def create_examples(app: Flask) -> None:
+    create_example_pools()
     create_network_topology(app)
     create_example_services()
     create_netmiko_workflow()

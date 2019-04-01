@@ -30,9 +30,6 @@ $("#pool-filter").on("change", function() {
     deleteAll();
     objects.devices.map((d) => createNode(d, "device"));
     objects.links.map(createLink);
-    if (currentView == "2DC") {
-      map.addLayer(markers);
-    }
   });
 });
 
@@ -51,6 +48,5 @@ const action = {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
-  $("#network").hide();
   switchView(currentView);
 })();

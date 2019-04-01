@@ -67,6 +67,8 @@ L.PolylineClusterable = L.Polyline.extend({
   setLatLng: function() {},
 });
 
+
+
 /**
  * Switch currentView.
  * @param {newView} newView - 2D, 2DC (clustered) or 3D.
@@ -75,7 +77,7 @@ L.PolylineClusterable = L.Polyline.extend({
 function switchView(newView) {
   deleteAll();
   const newDimension = newView.substring(0, 2);
-  currentView = newView;
+  console.log(newView, dimension);
   if (dimension != newDimension) {
     $("#map,#earth").css("visibility", "visible");
     $(".flip-container").toggleClass("hover");
@@ -86,8 +88,12 @@ function switchView(newView) {
         $("#earth").css("visibility", "hidden");
       }
     }, 1600);
+  } else {
+    $(`#${newDimension == "2D" ? "map" : "earth"}`).css("visibility", "visible");
   }
   dimension = newDimension;
+  currentView = newView;
+
   $(`#btn-${currentView}`).hide();
   if (currentView == "2D") {
     $("#btn-2DC,#btn-3D").show();
@@ -97,6 +103,9 @@ function switchView(newView) {
     $("#btn-2D,#btn-2DC").show();
   }
   updateView();
+  if (currentView == "2DC") {
+    map.addLayer(markers);
+  }
 }
 
 /**

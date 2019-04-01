@@ -29,7 +29,6 @@ function displaySites() {
     }
   });
   $(".geo-menu,.rc-pool-menu").show();
-  alertify.notify("Site view");
 }
 
 /**
@@ -65,7 +64,7 @@ const action = {
   "Pool properties": (p) => showTypeModal("pool", p),
   Connect: connectionParametersModal,
   Automation: deviceAutomationModal,
-  "Display pools": displaySites,
+  "Display pools": () => switchView(currentView),
   "Enter pool": enterPool,
 };
 
@@ -79,5 +78,5 @@ $("#network").contextMenu({
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
-  displaySites();
+  switchView(currentView);
 })();

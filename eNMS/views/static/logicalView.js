@@ -75,6 +75,7 @@ function displayPool(nodes, edges) {
     }
   });
   alertify.notify(
-    "Scroll to zoom in/out. Right-click on a node to display the menu."
+    `Loading the view...<br/>
+    Scroll to zoom in/out. Right-click on a node to display the menu.`
   );
 }

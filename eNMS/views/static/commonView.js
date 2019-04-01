@@ -77,7 +77,6 @@ L.PolylineClusterable = L.Polyline.extend({
 function switchView(newView) {
   deleteAll();
   const newDimension = newView.substring(0, 2);
-  console.log(newView, dimension);
   if (dimension != newDimension) {
     $("#map,#earth").css("visibility", "visible");
     $(".flip-container").toggleClass("hover");
@@ -129,7 +128,7 @@ function switchLayer(layer) {
 }
 
 /**
- * Create a node (device or pool).
+ * Create a node (device or site).
  * @param {node} node - Device or Pool.
  * @param {nodeType} nodeType - Device or Pool.
  */
@@ -163,7 +162,7 @@ function createNode(node, nodeType) {
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function(e) {
-    if (nodeType == "pool") {
+    if (nodeType == "site") {
       enterPool(node.id);
     } else {
       showTypeModal(nodeType, node.id);

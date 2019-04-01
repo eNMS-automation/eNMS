@@ -24,23 +24,23 @@ function displaySites() {
   call("/get_all/pool", function(pools) {
     for (let i = 0; i < pools.length; i++) {
       if (pools[i].longitude) {
-        createNode(pools[i], "pool");
+        createNode(pools[i], "site");
       }
     }
   });
-  $(".geo-menu,.rc-pool-menu").show();
+  $(".geo-menu,.rc-site-menu").show();
 }
 
 /**
- * Enter pool.
- * @param {poolId} poolId - Pool ID.
+ * Enter site.
+ * @param {siteId} siteId - Pool ID.
  */
-function enterPool(poolId) {
+function enterPool(siteId) {
   $("#map,#earth").css("visibility", "hidden");
   $(".menu").hide();
+  $(".btn-view").show();
   $("#network,.insite-menu,rc-device-menu,rc-link-menu").show();
-  call(`/inventory/pool_objects/${poolId}`, function(objects) {
-    alertify.notify("Loading the view...", 3);
+  call(`/inventory/pool_objects/${siteId}`, function(objects) {
     displayPool(objects.devices, objects.links);
   });
 }
@@ -64,8 +64,8 @@ const action = {
   "Pool properties": (p) => showTypeModal("pool", p),
   Connect: connectionParametersModal,
   Automation: deviceAutomationModal,
-  "Display pools": () => switchView(currentView),
-  "Enter pool": enterPool,
+  "Display sites": () => switchView(currentView),
+  "Enter site": enterPool,
 };
 
 $("#network").contextMenu({

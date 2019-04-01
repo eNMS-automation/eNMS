@@ -1,7 +1,7 @@
 /*
 global
 action: false
-enterPool: false
+enterSite: false
 L: false
 link_colors: false
 parameters: false
@@ -163,7 +163,7 @@ function createNode(node, nodeType) {
   markersArray.push(marker);
   marker.on("click", function(e) {
     if (nodeType == "site") {
-      enterPool(node.id);
+      enterSite(node.id);
     } else {
       showTypeModal(nodeType, node.id);
     }

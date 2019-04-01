@@ -35,7 +35,7 @@ function displaySites() {
  * Enter site.
  * @param {siteId} siteId - Pool ID.
  */
-function enterPool(siteId) {
+function enterSite(siteId) {
   $("#map,#earth").css("visibility", "hidden");
   $(".menu").hide();
   $(".btn-view").show();
@@ -65,7 +65,7 @@ const action = {
   Connect: connectionParametersModal,
   Automation: deviceAutomationModal,
   "Display sites": () => switchView(currentView),
-  "Enter site": enterPool,
+  "Enter site": enterSite,
 };
 
 $("#network").contextMenu({

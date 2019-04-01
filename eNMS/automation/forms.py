@@ -43,6 +43,7 @@ class JobForm(FlaskForm):
 
 
 class CompareResultsForm(FlaskForm):
+    type = SelectField(choices=(("results", "Results"), ("logs", "Real-time logs")))
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
 

@@ -40,7 +40,10 @@ function openWizard(type) {
  * @param {results} results - Results.
  */
 function displayResult(results) {
-  const displayResults = results[$("#display").val()];
+  const timestamp = $("#display").val();
+  const displayResults = $("#type").val() == "results";
+  const value =  == displayResults ? results[timestamp] : logs[timestamp];
+  if (!displayResults) return;
   if (displayResults) {
     $("#results").text(
       JSON.stringify(
@@ -53,6 +56,8 @@ function displayResult(results) {
         2
       ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
     );
+  } else {
+    $("#results").text(value.join("<br>"));
   }
 }
 

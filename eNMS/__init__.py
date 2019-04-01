@@ -23,11 +23,12 @@ from eNMS.extensions import (
     USE_VAULT,
     vault_client,
 )
+from eNMS.default import create_default
+from eNMS.examples import create_examples
 from eNMS.rest import configure_rest_api
 from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
 from eNMS.base.classes import classes, service_classes
-from eNMS.base.default import create_default, create_examples
 from eNMS.base.functions import fetch
 from eNMS.base.properties import (
     boolean_properties,

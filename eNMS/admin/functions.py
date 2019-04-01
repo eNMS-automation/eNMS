@@ -6,7 +6,7 @@ from os.path import exists
 from uuid import getnode
 from yaml import dump, load, SafeLoader
 
-from eNMS.base.default import create_default
+from eNMS.default import create_default
 from eNMS.base.functions import delete_all, export, factory
 
 

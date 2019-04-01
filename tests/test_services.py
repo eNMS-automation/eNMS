@@ -2,7 +2,7 @@ from flask.testing import FlaskClient
 from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.functions import fetch_all
+from eNMS.functions import fetch_all
 
 
 netmiko_ping = ImmutableMultiDict(

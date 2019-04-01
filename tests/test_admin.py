@@ -1,6 +1,6 @@
 from flask.testing import FlaskClient
 
-from eNMS.base.functions import fetch, fetch_all
+from eNMS.functions import fetch, fetch_all
 
 from tests.test_base import check_blueprints
 

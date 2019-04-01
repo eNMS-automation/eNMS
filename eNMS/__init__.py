@@ -23,6 +23,7 @@ from eNMS.extensions import (
     USE_VAULT,
     vault_client,
 )
+from eNMS.cli import configure_cli
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.rest import configure_rest_api
@@ -41,7 +42,6 @@ from eNMS.properties import (
     service_import_properties,
 )
 from eNMS.logs.models import SyslogServer
-from eNMS.cli import configure_cli
 
 
 def register_extensions(app: Flask) -> None:

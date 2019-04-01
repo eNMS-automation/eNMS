@@ -2,8 +2,8 @@ from flask.testing import FlaskClient
 from typing import List
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.base.functions import fetch, fetch_all
-from eNMS.base.properties import device_subtypes, link_subtypes
+from eNMS.functions import fetch, fetch_all
+from eNMS.properties import device_subtypes, link_subtypes
 
 from tests.test_base import check_blueprints
 

@@ -192,7 +192,8 @@ job_public_properties: List[str] = base_properties + [
     "is_running",
     "status",
     "state",
-    "real_time_logs",
+    "results",
+    "logs",
     "positions",
     "push_to_git",
     "waiting_time",
@@ -587,6 +588,7 @@ dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs"],
     "Pool": ["object_number"],
     "Service": [
+        "results",
         "logs",
         "state",
         "tasks",
@@ -604,6 +606,7 @@ dont_migrate: Dict[str, List[str]] = {
     ],
     "Workflow": [
         "last_modified",
+        "results",
         "logs",
         "state",
         "status",

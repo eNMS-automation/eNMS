@@ -99,7 +99,7 @@ function refreshResults(firstTime) {
 // eslint-disable-next-line
 function refreshLogs(firstTime) {
   if (firstTime) {
-    refresh = !refresh;
+    refresh = true;
   }
   if (refresh) {
     call(`/automation/get_logs/${jobId}`, (logs) => {

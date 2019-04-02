@@ -155,6 +155,7 @@ class Job(Base):
         workflow: Optional["Workflow"] = None,
     ) -> Tuple[dict, str]:
         self.is_running, self.state, self.logs = True, {}, []
+        db.session.commit()
         results: dict = {"results": {}}
         if not payload:
             payload = {}
@@ -166,11 +167,11 @@ class Job(Base):
             results["results"]["devices"] = {}
         now = str(datetime.now()).replace(" ", "-")
         logs = workflow.logs if workflow else self.logs
-        logs.append(f"{self.__tablename__} {self.name}: Starting.")
+        logs.append(f"{self.type} {self.name}: Starting.")
         for i in range(self.number_of_retries + 1):
             self.completed = self.failed = 0
             db.session.commit()
-            logs.append(f"Running {self.__tablename__} {self.name} (attempt n°{i + 1})")
+            logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
@@ -203,7 +204,7 @@ class Job(Base):
                     break
                 else:
                     sleep(self.time_between_retries)
-        logs.append(f"{self.__tablename__} {self.name}: Finished.")
+        logs.append(f"{self.type} {self.name}: Finished.")
         self.results[now] = {**results, "logs": logs}
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
@@ -222,7 +223,7 @@ class Job(Base):
             logs = workflow.logs if workflow else self.logs
             try:
                 if device:
-                    logs.append(f"Running {self.__tablename__} on {device.name}.")
+                    logs.append(f"Running {self.type} on {device.name}.")
                     results = self.job(payload, device)
                     success = "Success" if results["success"] else "Failure"
                     logs.append(

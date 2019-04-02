@@ -63,7 +63,7 @@ function displayResult(results) {
  * Display results.
  */
 function displayResults() {
-  call(`/automation/get_results/${jobId}`, (results) => {
+  call(`/automation/get_${$("#type").val()}/${jobId}`, (results) => {
     $("#display,#compare_with").empty();
     const times = Object.keys(results);
     times.forEach((option) => {
@@ -139,11 +139,7 @@ $("#display").on("change", function() {
   });
 });
 
-$("#type").on("change", function() {
-  call(`/automation/get_${this.value}/${jobId}`, (results) => {
-    displayResult(results);
-  });
-});
+$("#type").on("change", displayResults);
 
 $("#compare_with").on("change", function() {
   $("#results").empty();
@@ -179,6 +175,7 @@ function runJob(id) {
         getJobState(id);
       }
     }
+    jobId = id;
     showModal("results-modal");
     $("#type").val("logs");
     refreshResults(true, 1000);

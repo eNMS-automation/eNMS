@@ -156,7 +156,6 @@ class Job(Base):
     ) -> Tuple[dict, str]:
         self.is_running, self.state = True, {}
         results: dict = {"results": {}}
-        logs = []
         if not payload:
             payload = {}
         job_from_workflow_targets = from_workflow and bool(targets)
@@ -166,12 +165,12 @@ class Job(Base):
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
         now = str(datetime.now()).replace(" ", "-")
-        logs.append(f"{self.__tablename__} {self.name}: Starting.")
+        self.logs.append(f"{self.__tablename__} {self.name}: Starting.")
         for i in range(self.number_of_retries + 1):
             self.completed = self.failed = 0
             db.session.commit()
-            logs.append(f"Running {self.__tablename__} {self.name}, attempt {i}")
-            attempt = self.run(payload, logs, job_from_workflow_targets, targets)
+            self.logs.append(f"Running {self.__tablename__} {self.name}, attempt {i}")
+            attempt = self.run(payload, job_from_workflow_targets, targets)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -203,8 +202,9 @@ class Job(Base):
                     break
                 else:
                     sleep(self.time_between_retries)
-        logs.append(f"{self.__tablename__} {self.name}: Finished.")
-        self.results[now], self.logs[now] = results, logs
+        self.logs.append(f"{self.__tablename__} {self.name}: Finished.")
+        self.results[now] = {**results, "logs": logs}
+        self.logs = []
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         db.session.commit()
@@ -212,20 +212,18 @@ class Job(Base):
             self.notify(results, now)
         return results, now
 
-    def get_results(
-        self, payload: dict, logs: list, device: Optional[Device] = None
-    ) -> dict:
+    def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
         with session_scope() as session:
             try:
                 if device:
-                    logs.append(f"Running {self.__tablename__} on {device.name}.")
-                    results = self.job(payload, logs, device)
+                    self.logs.append(f"Running {self.__tablename__} on {device.name}.")
+                    results = self.job(payload, device)
                     success = "Success" if results["success"] else "Failure"
-                    logs.append(
+                    self.logs.append(
                         f"Finished running service on {device.name}. ({success})"
                     )
                 else:
-                    logs.append(f"Running {self.__tablename__} on {device.name}.")
+                    self.logs.append(f"Running {self.__tablename__} on {device.name}.")
                     results = self.job(payload)
             except Exception:
                 results = {
@@ -239,14 +237,13 @@ class Job(Base):
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
         with controller.app.app_context():
-            device, results, payload, logs = args
-            device_result = self.get_results(payload, logs, device)
+            device, results, payload = args
+            device_result = self.get_results(payload, device)
             results["devices"][device.name] = device_result
 
     def run(
         self,
         payload: dict,
-        logs: list,
         job_from_workflow_targets: bool,
         targets: Optional[Set[Device]] = None,
     ) -> dict:
@@ -260,15 +257,13 @@ class Job(Base):
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
                 pool.map(
-                    self.device_run,
-                    [(device, results, payload, logs) for device in targets],
+                    self.device_run, [(device, results, payload) for device in targets]
                 )
                 pool.close()
                 pool.join()
             else:
                 results["devices"] = {
-                    device.name: self.get_results(payload, logs, device)
-                    for device in targets
+                    device.name: self.get_results(payload, device) for device in targets
                 }
             return results
         else:

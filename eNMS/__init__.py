@@ -9,7 +9,8 @@ from logging.handlers import RotatingFileHandler
 from os import environ
 from pathlib import Path
 from simplekml import Color, Style
-from sqlalchemy import Boolean, Float, Integer, PickleType
+from sqlalchemy import Boolean, event, Float, Integer, PickleType
+from sqlalchemy.engine import Engine
 from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
@@ -100,6 +101,7 @@ def configure_database(app: Flask) -> None:
 
     @app.before_first_request
     def initialize_database() -> None:
+        db.engine.execute("PRAGMA journal_mode=WAL")
         db.create_all()
         configure_instance_id()
         create_default(app)

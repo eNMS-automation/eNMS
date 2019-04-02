@@ -41,29 +41,25 @@ function openWizard(type) {
  */
 function displayResult(results) {
   const value = results[$("#display").val()];
-  if ($("#type").val() == "results") {
-    if (!value) return;
-    $("#results").text(
-      JSON.stringify(
-        Object.fromEntries(
-          Object.entries(value)
-            .sort()
-            .reverse()
-        ),
-        null,
-        2
-      ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-    );
-  } else {
-    
-  }
+  if (!value) return;
+  $("#results").text(
+    JSON.stringify(
+      Object.fromEntries(
+        Object.entries(value)
+          .sort()
+          .reverse()
+      ),
+      null,
+      2
+    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+  );
 }
 
 /**
  * Display results.
  */
 function displayResults() {
-  call(`/automation/get_${$("#type").val()}/${jobId}`, (results) => {
+  call(`/automation/get_results/${jobId}`, (results) => {
     $("#display,#compare_with").empty();
     const times = Object.keys(results);
     times.forEach((option) => {
@@ -106,11 +102,23 @@ function refreshLogs(firstTime) {
     refresh = !refresh;
   }
   if (refresh) {
-    $("#logs").text(results.join("\n"));
+    call(`/automation/get_logs/${jobId}`, (logs) => {
+      $("#logs").text(logs.join("\n"));
+    });
     setTimeout(refreshLogs, 500);
   }
 }
 
+/**
+ * Show the results modal for a job.
+ * @param {id} id - Job id.
+ */
+// eslint-disable-next-line
+function showLogs(id) {
+  jobId = id;
+  $("#logs-modal").modal("show");
+  refreshLogs(true);
+}
 
 /**
  * Show the results modal for a job.
@@ -155,8 +163,6 @@ $("#display").on("change", function() {
   });
 });
 
-$("#type").on("change", displayResults);
-
 $("#compare_with").on("change", function() {
   $("#results").empty();
   const v1 = $("#display").val();
@@ -191,7 +197,6 @@ function runJob(id) {
         getJobState(id);
       }
     }
-    showModal("logs-modal");
-    refreshLogs(true);
+    showLogs(id);
   });
 }

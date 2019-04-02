@@ -9,7 +9,7 @@ refreshTable: false
 showTypeModal: false
 */
 
-const toExclude = ["Results", "Run", "Edit", "Duplicate", "Delete"];
+const toExclude = ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"];
 // eslint-disable-next-line no-unused-vars
 let table = initTable("workflow", "workflow", toExclude);
 

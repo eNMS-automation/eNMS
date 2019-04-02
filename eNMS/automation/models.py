@@ -287,6 +287,8 @@ class Service(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
+            f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResults('{self.id}')"></i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
@@ -441,6 +443,8 @@ class Workflow(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResults('{self.id}')"></i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"

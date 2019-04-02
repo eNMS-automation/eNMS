@@ -73,7 +73,7 @@ class Job(Base):
     send_notification_method = Column(String, default="mail_feedback_notification")
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String, default="")
-    logs = Column(MutableDict.as_mutable(PickleType), default={})
+    logs = Column(MutableList.as_mutable(PickleType), default=[])
 
     @hybrid_property
     def status(self) -> str:
@@ -152,13 +152,13 @@ class Job(Base):
         self,
         payload: Optional[dict] = None,
         targets: Optional[Set[Device]] = None,
-        from_workflow: bool = False,
+        workflow: Optional[Workflow] = None,
     ) -> Tuple[dict, str]:
         self.is_running, self.state = True, {}
         results: dict = {"results": {}}
         if not payload:
             payload = {}
-        job_from_workflow_targets = from_workflow and bool(targets)
+        job_from_workflow_targets = workflow and bool(targets)
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         has_targets = bool(targets)
@@ -170,7 +170,7 @@ class Job(Base):
             self.completed = self.failed = 0
             db.session.commit()
             self.logs.append(f"Running {self.__tablename__} {self.name}, attempt {i}")
-            attempt = self.run(payload, job_from_workflow_targets, targets)
+            attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -203,17 +203,23 @@ class Job(Base):
                 else:
                     sleep(self.time_between_retries)
         self.logs.append(f"{self.__tablename__} {self.name}: Finished.")
-        self.results[now] = {**results, "logs": logs}
+        self.results[now] = {**results, "logs": self.logs}
         self.logs = []
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         db.session.commit()
-        if not from_workflow and self.send_notification:
+        if not workflow and self.send_notification:
             self.notify(results, now)
         return results, now
 
-    def get_results(self, payload: dict, device: Optional[Device] = None) -> dict:
+    def get_results(
+        self,
+        payload: dict,
+        device: Optional[Device] = None,
+        workflow: Optional[Workflow] = None,
+    ) -> dict:
         with session_scope() as session:
+            logs = workflow.logs if workflow else self.logs
             try:
                 if device:
                     self.logs.append(f"Running {self.__tablename__} on {device.name}.")
@@ -223,13 +229,13 @@ class Job(Base):
                         f"Finished running service on {device.name}. ({success})"
                     )
                 else:
-                    self.logs.append(f"Running {self.__tablename__} on {device.name}.")
                     results = self.job(payload)
             except Exception:
                 results = {
                     "success": False,
                     "result": chr(10).join(format_exc().splitlines()),
                 }
+            self.logs.append(f"Running {self.__tablename__} on {device.name}.")
             self.completed += 1
             self.failed += 1 - results["success"]
             session.merge(self)
@@ -237,8 +243,8 @@ class Job(Base):
 
     def device_run(self, args: Tuple[Device, dict, dict]) -> None:
         with controller.app.app_context():
-            device, results, payload = args
-            device_result = self.get_results(payload, device)
+            device, results, payload, workflow = args
+            device_result = self.get_results(payload, device, workflow)
             results["devices"][device.name] = device_result
 
     def run(
@@ -246,6 +252,7 @@ class Job(Base):
         payload: dict,
         job_from_workflow_targets: bool,
         targets: Optional[Set[Device]] = None,
+        workflow: Optional[Workflow] = None,
     ) -> dict:
         if job_from_workflow_targets:
             assert targets is not None
@@ -257,13 +264,15 @@ class Job(Base):
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
                 pool.map(
-                    self.device_run, [(device, results, payload) for device in targets]
+                    self.device_run,
+                    [(device, results, payload, workflow) for device in targets],
                 )
                 pool.close()
                 pool.join()
             else:
                 results["devices"] = {
-                    device.name: self.get_results(payload, device) for device in targets
+                    device.name: self.get_results(payload, device, workflow)
+                    for device in targets
                 }
             return results
         else:
@@ -470,7 +479,7 @@ class Workflow(Job):
                 log += f" on {device.name}"
             info(log)
             job_results, _ = job.try_run(
-                results, {device} if device else None, from_workflow=True
+                results, {device} if device else None, workflow=self
             )
             success = job_results["results"]["success"]
             self.state["jobs"][job.id] = success

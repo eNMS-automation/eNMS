@@ -41,8 +41,8 @@ function openWizard(type) {
  */
 function displayResult(results) {
   const value = results[$("#display").val()];
-  if (!value) return;
   if ($("#type").val() == "results") {
+    if (!value) return;
     $("#results").text(
       JSON.stringify(
         Object.fromEntries(
@@ -55,7 +55,7 @@ function displayResult(results) {
       ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
     );
   } else {
-    $("#results").text(value.join("\n"));
+    $("#results").text(results.join("\n"));
   }
 }
 
@@ -178,6 +178,6 @@ function runJob(id) {
     jobId = id;
     showModal("results-modal");
     $("#type").val("logs");
-    refreshResults(true, 1000);
+    refreshResults(true, 500);
   });
 }

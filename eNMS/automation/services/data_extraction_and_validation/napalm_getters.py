@@ -56,11 +56,11 @@ class NapalmGettersService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}
 
-    def job(self, payload: dict, logs: list, device: Device) -> dict:
+    def job(self, payload: dict, device: Device) -> dict:
         napalm_driver, result = self.napalm_connection(device), {}
         napalm_driver.open()
         for getter in self.getters:
-            logs.append(f"Running NAPALM Getter '{getter}' on {device.name}")
+            self.logs.append(f"Running NAPALM Getter '{getter}' on {device.name}")
             try:
                 result[getter] = getattr(napalm_driver, getter)()
             except Exception as e:

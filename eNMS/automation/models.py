@@ -152,7 +152,7 @@ class Job(Base):
         self,
         payload: Optional[dict] = None,
         targets: Optional[Set[Device]] = None,
-        workflow: Optional[Workflow] = None,
+        workflow: Optional["Workflow"] = None,
     ) -> Tuple[dict, str]:
         self.is_running, self.state = True, {}
         results: dict = {"results": {}}
@@ -165,11 +165,12 @@ class Job(Base):
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
         now = str(datetime.now()).replace(" ", "-")
-        self.logs.append(f"{self.__tablename__} {self.name}: Starting.")
+        logs = workflow.logs if workflow else self.logs
+        logs.append(f"{self.__tablename__} {self.name}: Starting.")
         for i in range(self.number_of_retries + 1):
             self.completed = self.failed = 0
             db.session.commit()
-            self.logs.append(f"Running {self.__tablename__} {self.name}, attempt {i}")
+            logs.append(f"Running {self.__tablename__} {self.name}, attempt {i}")
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
@@ -202,8 +203,8 @@ class Job(Base):
                     break
                 else:
                     sleep(self.time_between_retries)
-        self.logs.append(f"{self.__tablename__} {self.name}: Finished.")
-        self.results[now] = {**results, "logs": self.logs}
+        logs.append(f"{self.__tablename__} {self.name}: Finished.")
+        self.results[now] = {**results, "logs": logs}
         self.logs = []
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
@@ -216,16 +217,16 @@ class Job(Base):
         self,
         payload: dict,
         device: Optional[Device] = None,
-        workflow: Optional[Workflow] = None,
+        workflow: Optional["Workflow"] = None,
     ) -> dict:
         with session_scope() as session:
             logs = workflow.logs if workflow else self.logs
             try:
                 if device:
-                    self.logs.append(f"Running {self.__tablename__} on {device.name}.")
+                    logs.append(f"Running {self.__tablename__} on {device.name}.")
                     results = self.job(payload, device)
                     success = "Success" if results["success"] else "Failure"
-                    self.logs.append(
+                    logs.append(
                         f"Finished running service on {device.name}. ({success})"
                     )
                 else:
@@ -235,7 +236,6 @@ class Job(Base):
                     "success": False,
                     "result": chr(10).join(format_exc().splitlines()),
                 }
-            self.logs.append(f"Running {self.__tablename__} on {device.name}.")
             self.completed += 1
             self.failed += 1 - results["success"]
             session.merge(self)
@@ -252,7 +252,7 @@ class Job(Base):
         payload: dict,
         job_from_workflow_targets: bool,
         targets: Optional[Set[Device]] = None,
-        workflow: Optional[Workflow] = None,
+        workflow: Optional["Workflow"] = None,
     ) -> dict:
         if job_from_workflow_targets:
             assert targets is not None

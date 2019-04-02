@@ -55,7 +55,7 @@ function displayResult(results) {
       ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
     );
   } else {
-    $("#results").text(results.join("\n"));
+    
   }
 }
 
@@ -79,11 +79,11 @@ function displayResults() {
 }
 
 /**
- * Display results.
+ * Refresh results.
  * @param {firstTime} firstTime - First time.
  */
 // eslint-disable-next-line
-function refreshResults(firstTime, frequency) {
+function refreshResults(firstTime) {
   if (firstTime) {
     refresh = !refresh;
     $("#refresh-results-button").text(
@@ -92,9 +92,25 @@ function refreshResults(firstTime, frequency) {
   }
   if (refresh) {
     displayResults();
-    setTimeout(refreshResults, frequency || 5000);
+    setTimeout(refreshResults, 5000);
   }
 }
+
+/**
+ * Display logs.
+ * @param {firstTime} firstTime - First time.
+ */
+// eslint-disable-next-line
+function refreshLogs(firstTime) {
+  if (firstTime) {
+    refresh = !refresh;
+  }
+  if (refresh) {
+    $("#logs").text(results.join("\n"));
+    setTimeout(refreshLogs, 500);
+  }
+}
+
 
 /**
  * Show the results modal for a job.
@@ -175,9 +191,7 @@ function runJob(id) {
         getJobState(id);
       }
     }
-    jobId = id;
-    showModal("results-modal");
-    $("#type").val("logs");
-    refreshResults(true, 500);
+    showModal("logs-modal");
+    refreshLogs(true);
   });
 }

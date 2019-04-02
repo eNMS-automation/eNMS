@@ -83,7 +83,7 @@ function displayResults() {
  * @param {firstTime} firstTime - First time.
  */
 // eslint-disable-next-line
-function refreshResults(firstTime = false) {
+function refreshResults(firstTime, frequency) {
   if (firstTime) {
     refresh = !refresh;
     $("#refresh-results-button").text(
@@ -92,7 +92,7 @@ function refreshResults(firstTime = false) {
   }
   if (refresh) {
     displayResults();
-    setTimeout(refreshResults, 5000);
+    setTimeout(refreshResults, frequency || 5000);
   }
 }
 
@@ -127,7 +127,7 @@ function clearResults() {
 // eslint-disable-next-line
 function detachWindow() {
   window
-    .open(`/automation/detach_results/${jobId}`, "Results", "height=800,width=600")
+    .open(`/automation/detach_results/${jobId}`, "Results", "height=500,width=800")
     .focus();
   $("#results-modal").modal("hide");
 }
@@ -179,5 +179,8 @@ function runJob(id) {
         getJobState(id);
       }
     }
+    showModal("results-modal");
+    $("#type").val("logs");
+    refreshResults(true, 1000);
   });
 }

@@ -164,8 +164,7 @@ def configure_services(path: Path) -> None:
                 continue
             if dont_create_examples and "examples" in str(file):
                 continue
-            name = str(file).split("/")[-1][:-3]
-            spec = spec_from_file_location(name, str(file))
+            spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             assert isinstance(spec.loader, Loader)
             module = module_from_spec(spec)
             try:

@@ -85,9 +85,15 @@ def results(id: int, runtime: str) -> str:
     return f"<pre>{dumps(message, indent=4)}</pre>"
 
 
-@post(bp, "/get_<type>/<int:id>", "View")
-def get_results_or_logs(type: str, id: int) -> dict:
-    return getattr(fetch("Job", id=id), type)
+@post(bp, "/get_results/<int:id>", "View")
+def get_results(id: int) -> dict:
+    return fetch("Job", id=id).results
+
+
+@post(bp, "/get_logs/<int:id>", "View")
+def get_logs(id: int) -> dict:
+    job = fetch("Job", id=id)
+    return {"logs": job.logs, "running": job.is_running}
 
 
 @post(bp, "/get_service/<id_or_cls>", "View")

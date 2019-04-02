@@ -11,7 +11,7 @@ getWorkflowState: false
 let jobId;
 let refresh;
 
-$("#results-modal").on("hidden.bs.modal", function() {
+$("#results-modal,#logs-modal").on("hidden.bs.modal", function() {
   refresh = false;
 });
 
@@ -102,8 +102,11 @@ function refreshLogs(firstTime) {
     refresh = true;
   }
   if (refresh) {
-    call(`/automation/get_logs/${jobId}`, (logs) => {
-      $("#logs").text(logs.join("\n"));
+    call(`/automation/get_logs/${jobId}`, (job) => {
+      $("#logs").text(job.logs.join("\n"));
+      if (!job.running) {
+        refresh = false;
+      }
     });
     setTimeout(refreshLogs, 500);
   }

@@ -101,7 +101,8 @@ def configure_database(app: Flask) -> None:
 
     @app.before_first_request
     def initialize_database() -> None:
-        db.engine.execute("PRAGMA journal_mode=WAL")
+        if app.config["SQLITE_WAL_MODE"]:
+            db.engine.execute("PRAGMA journal_mode=WAL")
         db.create_all()
         configure_instance_id()
         create_default(app)

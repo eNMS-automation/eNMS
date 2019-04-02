@@ -70,7 +70,7 @@ class Config(object):
     # In production, for scalability and high-availability purposes, it is
     # recommended to deploy not one, but multiple instances of eNMS.
     CLUSTER = int(environ.get("CLUSTER", False))
-    CLUSTER_ID = int(environ.get("CLUSTER_ID", 1))
+    CLUSTER_ID = int(environ.get("CLUSTER_ID", True))
     CLUSTER_SCAN_SUBNET = environ.get("CLUSTER_SCAN_SUBNET", "192.168.105.0/24")
     CLUSTER_SCAN_PROTOCOL = environ.get("CLUSTER_SCAN_PROTOCOL", "http")
     CLUSTER_SCAN_TIMEOUT = float(environ.get("CLUSTER_SCAN_TIMEOUT", 0.05))
@@ -86,6 +86,9 @@ class Config(object):
 
     # Pool Filter Parameter
     POOL_FILTER = environ.get("POOL_FILTER", "All objects")
+
+    # Database
+    SQLITE_WAL_MODE = int(environ.get("SQLITE_WAL_MODE", False))
 
 
 class DebugConfig(Config):

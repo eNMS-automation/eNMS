@@ -386,16 +386,17 @@ class Service(Job):
             return not match
 
     def transfer_file(
-        self, ssh_client: SSHClient, source: Device, destination: Device
+        self, ssh_client: SSHClient, files: List[Tuple[str, str]]
     ) -> None:
-        files = (source, destination)
         if self.protocol == "sftp":
             sftp = ssh_client.open_sftp()
-            getattr(sftp, self.direction)(*files)
+            for source, destination in files:
+                getattr(sftp, self.direction)(source, destination)
             sftp.close()
         else:
             with SCPClient(ssh_client.get_transport()) as scp:
-                getattr(scp, self.direction)(*files)
+                for source, destination in files:
+                    getattr(scp, self.direction)(source, destination)
 
 
 class WorkflowEdge(Base):

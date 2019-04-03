@@ -50,6 +50,59 @@ Configuration parameters for creating this service instance:
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
+Netmiko Data Extraction Service
+-------------------------------
+
+Uses Netmiko to send commands to a device and uses a regular expression for each command to capture the matching data to a user define variable name.
+The user defined variables are then used in subsequent services within a workflow and can be accessed from the UI form via: {{payload[data extraction service instance name]["result"][variable name]}}
+The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
+
+.. image:: /_static/services/default_services/netmiko_validation.png
+   :alt: Netmiko Validation service
+   :align: center
+
+Configuration parameters for creating this service instance:
+  - ``General``
+      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+      - ``Description`` Freeform description of what the service instance does
+      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  - ``Advanced``
+      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+      - ``Send Notification`` Enable sending results notification checkbox
+      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
+      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
+  - ``Targets``
+      - ``Devices`` Multi-selection list of devices from the inventory
+      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  - ``Specific``
+      - ``Variable1`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
+      - ``Command1`` CLI command to send to the device via SSH
+      - ``Regular Expression1`` Regular expression match to use in filtering the response data from the command
+      - ``Variable2`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
+      - ``Command2`` CLI command to send to the device via SSH
+      - ``Regular Expression2`` Regular expression match to use in filtering the response data from the command
+      - ``Variable3`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
+      - ``Command3`` CLI command to send to the device via SSH
+      - ``Regular Expression3`` Regular expression match to use in filtering the response data from the command
+      - ``Driver`` Which Netmiko driver to use when connecting to the device
+      - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+      - ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
+      - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
+      - ``Delay Factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
+
 Netmiko File Transfer Service
 -----------------------------
 
@@ -95,61 +148,8 @@ Configuration parameters for creating this service instance:
       - ``Source file`` Source absolute path and filename of the file to send
       - ``Fast Cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-      - ``delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
       - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
-
-Netmiko Validation Service
---------------------------
-
-Uses Netmiko to send commands to a device and validates the output to determine the state of that device. See the ``Workflow`` section for examples of how it is used in a workflow.
-The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
-
-There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
-
-.. image:: /_static/services/default_services/netmiko_validation.png
-   :alt: Netmiko Validation service
-   :align: center
-
-Configuration parameters for creating this service instance:
-  - ``General``
-      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
-      - ``Description`` Freeform description of what the service instance does
-      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
-      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
-  - ``Advanced``
-      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
-      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-      - ``Send Notification`` Enable sending results notification checkbox
-      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
-      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
-      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
-      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
-      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
-  - ``Targets``
-      - ``Devices`` Multi-selection list of devices from the inventory
-      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
-      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
-      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
-  - ``Specific``
-      - ``Command`` CLI command to send to the device
-      - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
-      - ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
-      - ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
-      - ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-      - ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
-      - ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-      - ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
-      - ``Driver`` Which Netmiko driver to use when connecting to the device
-      - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-      - ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-      - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-      - ``delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
-      - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
-
-.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
 Netmiko Prompts Service
 -----------------------
@@ -201,7 +201,60 @@ Configuration parameters for creating this service instance:
       - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
       - ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-      - ``delay_factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+      - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
+
+Netmiko Validation Service
+--------------------------
+
+Uses Netmiko to send commands to a device and validates the output to determine the state of that device. See the ``Workflow`` section for examples of how it is used in a workflow.
+The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
+By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
+If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
+
+There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
+
+.. image:: /_static/services/default_services/netmiko_validation.png
+   :alt: Netmiko Validation service
+   :align: center
+
+Configuration parameters for creating this service instance:
+  - ``General``
+      - ``Name`` Service Instance names must be unique, as they act as a key in the result payload of a workflow
+      - ``Description`` Freeform description of what the service instance does
+      - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+      - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+  - ``Advanced``
+      - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+      - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+      - ``Send Notification`` Enable sending results notification checkbox
+      - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+      - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+      - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
+      - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+      - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
+  - ``Targets``
+      - ``Devices`` Multi-selection list of devices from the inventory
+      - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+      - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+      - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+      - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+  - ``Specific``
+      - ``Command`` CLI command to send to the device
+      - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
+      - ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
+      - ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
+      - ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
+      - ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
+      - ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
+      - ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+      - ``Driver`` Which Netmiko driver to use when connecting to the device
+      - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+      - ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
+      - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
+      - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
       - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
@@ -593,6 +646,7 @@ Configuration parameters for creating this service instance:
       - ``Missing Host Key Policy`` If checked, auto-add the host key policy on the ssh connection
       - ``Load known host keys`` If checked, load host keys on the eNMS server before attempting the connection
       - ``Look for keys`` Flag that is passed to the paramiko ssh connection to indicate if the library should look for host keys or ignore.
+      - ``Source file includes glob pattern (Put Direction only)`` Flag indicates that for Put Direction transfers only, the above Source file field contains a Glob pattern match (https://en.wikipedia.org/wiki/Glob_(programming)) for selecting multiple files for transport. When Globing is used, the Destination file directory should only contain a destination directory, because the source file names will be re-used at the destination.
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 

@@ -35,7 +35,7 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
         "http://192.168.105.2:5000/rest/instance/service/get_facts",
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["description"] == "Getter: get_facts" and len(result) == 37
+    assert result["description"] == "Getter: get_facts" and len(result) == 39
     put(
         "http://192.168.105.2:5000/rest/instance/service",
         json={"name": "get_facts", "description": "Get facts"},
@@ -45,14 +45,14 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
         "http://192.168.105.2:5000/rest/instance/service/get_facts",
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["description"] == "Getter: get_facts" and len(result) == 37
-    assert len(fetch_all("Service")) == 24
+    assert result["description"] == "Getter: get_facts" and len(result) == 39
+    assert len(fetch_all("Service")) == 25
     result = post(
         "http://192.168.105.2:5000/rest/instance/service",
         json={"name": "new_service", "vendor": "Cisco"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["vendor"] == "Cisco" and len(fetch_all("Service")) == 25
+    assert result["vendor"] == "Cisco" and len(fetch_all("Service")) == 26
     assert len(fetch_all("Workflow")) == 5
     result = post(
         "http://192.168.105.2:5000/rest/instance/workflow",

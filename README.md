@@ -1,5 +1,5 @@
 <h1 align="center">eNMS</h1>
-<h2 align="center">A enterprise-grade vendor-agnostic network automation platform.</h2>
+<h2 align="center">An enterprise-grade vendor-agnostic network automation platform.</h2>
 
 ___
 

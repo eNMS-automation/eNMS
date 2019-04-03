@@ -8,8 +8,8 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
 from eNMS.automation.models import Service
-from eNMS.classes import service_classes
-from eNMS.functions import fetch_all, strip_all
+from eNMS.base.classes import service_classes
+from eNMS.base.functions import fetch_all, strip_all
 from eNMS.inventory.models import Device
 
 
@@ -48,7 +48,7 @@ class LogBackupService(Service):
             look_for_keys=False,
         )
         destination = f"{self.destination_path}/logs_{now}.tgz"
-        self.transfer_file(ssh_client, source, destination)
+        self.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         if self.delete_folder:
             rmtree(path_dir)

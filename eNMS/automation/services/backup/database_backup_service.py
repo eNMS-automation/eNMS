@@ -8,9 +8,9 @@ from tarfile import open as open_tar
 
 from eNMS.admin.functions import migrate_export
 from eNMS.automation.models import Service
-from eNMS.classes import service_classes
-from eNMS.functions import strip_all
-from eNMS.properties import import_properties
+from eNMS.base.classes import service_classes
+from eNMS.base.functions import strip_all
+from eNMS.base.properties import import_properties
 from eNMS.inventory.models import Device
 
 
@@ -47,7 +47,7 @@ class DatabaseBackupService(Service):
             look_for_keys=False,
         )
         destination = f"{self.destination_path}/backup_{now}.tgz"
-        self.transfer_file(ssh_client, source, destination)
+        self.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         if self.delete_folder:
             rmtree(Path.cwd() / "migrations" / f"backup_{now}")

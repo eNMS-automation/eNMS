@@ -134,14 +134,15 @@ function fCall(url, form, callback) {
  */
 // eslint-disable-next-line
 function initTable(cls, type, toExclude, scrollX) {
-  console.log(scrollX);
   $("#table thead tr")
     .clone(true)
     .appendTo("#table thead");
   $("#table thead tr:eq(1) th").each(function(i) {
     const title = $(this).text();
     if (!toExclude.includes(title)) {
-      $(this).html(`<input type="text" class="form-control" style="width: 100%;"/>`);
+      $(this).html(
+        `<input type="text" class="form-control" style="width: 100%;"/>`
+      );
       $("input", this).on("keyup change", function() {
         if (table.column(i).search() !== this.value) {
           table

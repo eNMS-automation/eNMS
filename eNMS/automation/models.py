@@ -225,13 +225,15 @@ class Job(Base):
                 if device:
                     logs.append(f"Running {self.type} on {device.name}.")
                     results = self.job(payload, device)
-                    success = "Success" if results["success"] else "Failure"
+                    success = "SUCCESS" if results["success"] else "FAILURE"
                     logs.append(
                         f"Finished running service on {device.name}. ({success})"
                     )
                 else:
                     results = self.job(payload)
             except Exception:
+                if device:
+                    logs.append(f"Finished running service on {device.name}. (FAILURE)")
                 results = {
                     "success": False,
                     "result": chr(10).join(format_exc().splitlines()),

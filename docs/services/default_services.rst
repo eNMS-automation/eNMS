@@ -148,7 +148,6 @@ Configuration parameters for creating this service instance:
       - ``Source file`` Source absolute path and filename of the file to send
       - ``Fast Cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
       - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-      - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
       - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
 
 Netmiko Prompts Service

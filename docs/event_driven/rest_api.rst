@@ -22,8 +22,6 @@ Expected ReST API Headers:
 - Authorization:"Basic <xxx>"
 
 
-
-
 Run a service, or a workflow
 ****************************
 
@@ -61,8 +59,9 @@ Example of body:
 
 Note:
 
-- If you do not providea value for ``devices`` you will get the defualut devices built into the web UI, even if you provide a value in ``pools`` or ``ip_address``.
+- If you do not provide a value for ``devices`` you will get the defualut devices built into the web UI, even if you provide a value in ``pools`` or ``ip_address``.
 - For Postman use the type "raw" for entering key/value pairs into the body. Body must also be formatted as application/JSON.
+- Extra form data parameters passed in the body of the POST are available to that service or workflow in payload["rest_data"][your_key_name1] and payload["rest_data"][your_key_name2], and they can be accessed within a Service Instance UI form as {{payload["rest_data"][your_key_name].
 
 
 Heartbeat
@@ -93,7 +92,7 @@ Retrieve or delete an instance
 
 
 Retrieve the current configuration for a device
-***************************************
+***********************************************
 
 ::
 

@@ -11,7 +11,7 @@ let table = initTable("device", "device", [
   "Delete",
   "Automation",
   "Connect",
-]);
+], true);
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/inventory/objects.html");

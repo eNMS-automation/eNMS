@@ -29,6 +29,7 @@ class NapalmPingService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
+        self.logs.append(f"Running ping from {self.source_ip} to {device.ip_address}")
         ping = napalm_driver.ping(
             device.ip_address,
             source=self.source_ip,

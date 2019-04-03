@@ -59,6 +59,7 @@ class RestCallService(Service):
 
     def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         rest_url = self.sub(self.url, locals())
+        self.logs.append(f"Sending REST call to {rest_url}")
         kwargs = {p: getattr(self, p) for p in ("headers", "params", "timeout")}
         if self.call_type in ("GET", "DELETE"):
             response = self.request_dict[self.call_type](
@@ -70,7 +71,7 @@ class RestCallService(Service):
                     rest_url,
                     data=dumps(self.payload),
                     auth=HTTPBasicAuth(self.username, self.password),
-                    **kwargs
+                    **kwargs,
                 )
             )
         if response.status_code != 200:

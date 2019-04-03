@@ -1,4 +1,3 @@
-from logging import info
 from json import dumps, loads
 from json.decoder import JSONDecodeError
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
@@ -48,9 +47,8 @@ class AnsiblePlaybookService(Service):
         if self.has_targets:
             command.extend(["-i", device.ip_address + ","])
         command.append(self.sub(self.playbook_path, locals()))
-        info(f"Sending Ansible playbook: {' '.join(command + arguments)}")
+        self.logs.append(f"Sending Ansible playbook: {' '.join(command + arguments)}")
         result = check_output(command + arguments)
-        info(result)
         try:
             result = result.decode("utf-8")
         except AttributeError:

@@ -27,6 +27,9 @@ class NapalmTracerouteService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
+        self.logs.append(
+            f"Running traceroute from {self.source} to {device.ip_address}"
+        )
         traceroute = napalm_driver.traceroute(
             device.ip_address,
             source=self.source,

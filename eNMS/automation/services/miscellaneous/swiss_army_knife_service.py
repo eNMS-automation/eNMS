@@ -41,6 +41,7 @@ class SwissArmyKnifeService(Service):
         recipients = payload["job"]["mail_recipient"].split(
             ","
         ) or parameters.mail_recipients.split(",")
+        self.logs.append(f"Sending mail notification for {name}")
         message = Message(
             f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
             sender=parameters.mail_sender,
@@ -65,6 +66,7 @@ class SwissArmyKnifeService(Service):
     def slack_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
         slack_client = SlackClient(parameters.slack_token)
+        self.logs.append(f"Sending Slack notification for {payload['job']['name']}")
         result = slack_client.api_call(
             "chat.postMessage",
             channel=parameters.slack_channel,
@@ -74,6 +76,9 @@ class SwissArmyKnifeService(Service):
 
     def mattermost_feedback_notification(self, payload: dict) -> dict:
         parameters = get_one("Parameters")
+        self.logs.append(
+            f"Sending Mattermost notification for {payload['job']['name']}"
+        )
         post(
             parameters.mattermost_url,
             verify=parameters.mattermost_verify_certificate,

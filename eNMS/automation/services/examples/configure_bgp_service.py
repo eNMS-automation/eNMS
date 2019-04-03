@@ -43,6 +43,7 @@ class ConfigureBgpService(Service):
             exit-address-family
         """
         config = "\n".join(config.splitlines())
+        self.logs.append(f"Pushing BGP configuration on {device.name} (Napalm)")
         getattr(napalm_driver, "load_merge_candidate")(config=config)
         napalm_driver.commit_config()
         napalm_driver.close()

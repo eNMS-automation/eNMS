@@ -23,6 +23,7 @@ class NapalmRollbackService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
+        self.logs.append(f"Configuration rollback on {device.name} (Napalm)")
         napalm_driver.rollback()
         napalm_driver.close()
         return {"success": True, "result": "Rollback successful"}

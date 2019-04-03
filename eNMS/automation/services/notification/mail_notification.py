@@ -26,11 +26,10 @@ class MailNotificationService(Service):
             recipients = self.recipients.split(",")
         else:
             recipients = parameters.mail_sender.split(",")
+        sender = self.sender or parameters.mail_sender
+        self.logs.append(f"Sending mail {self.title} to {sender}")
         message = Message(
-            self.title,
-            sender=self.sender or parameters.mail_sender,
-            recipients=recipients,
-            body=self.body,
+            self.title, sender=sender, recipients=recipients, body=self.body
         )
         mail_client.send(message)
         return {"success": True, "result": str(message)}

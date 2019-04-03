@@ -30,7 +30,7 @@ class NetmikoConfigurationService(Service):
         if self.enable_mode:
             netmiko_handler.enable()
         config = self.sub(self.content, locals())
-        self.logs.append(f"Pushing configuration:\n{config}")
+        self.logs.append(f"Pushing configuration on {device.name} (Netmiko)")
         netmiko_handler.send_config_set(
             config.splitlines(), delay_factor=self.delay_factor
         )

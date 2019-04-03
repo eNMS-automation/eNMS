@@ -30,6 +30,7 @@ class NapalmConfigurationService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
+        self.logs.append(f"Pushing configuration on {device.name} (Napalm)")
         config = "\n".join(self.sub(self.content, locals()).splitlines())
         getattr(napalm_driver, self.action)(config=config)
         napalm_driver.commit_config()

@@ -21,10 +21,10 @@ class SlackNotificationService(Service):
     def job(self, _) -> dict:
         parameters = get_one("Parameters")
         slack_client = SlackClient(self.token or parameters.slack_token)
+        channel = self.channel or parameters.slack_channel
+        self.logs.append(f"Sending Slack notification on {channel}")
         result = slack_client.api_call(
-            "chat.postMessage",
-            channel=self.channel or parameters.slack_channel,
-            text=self.body,
+            "chat.postMessage", channel=channel, text=self.body
         )
         return {"success": True, "result": str(result)}
 

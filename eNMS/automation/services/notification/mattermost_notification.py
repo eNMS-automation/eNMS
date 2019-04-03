@@ -20,15 +20,12 @@ class MattermostNotificationService(Service):
 
     def job(self, _) -> dict:
         parameters = get_one("Parameters")
+        channel = self.channel or parameters.mattermost_channel
+        self.logs.append(f"Sending Mattermost notification on {channel}")
         result = post(
             parameters.mattermost_url,
             verify=parameters.mattermost_verify_certificate,
-            data=dumps(
-                {
-                    "channel": self.channel or parameters.mattermost_channel,
-                    "text": self.body,
-                }
-            ),
+            data=dumps({"channel": channel, "text": self.body}),
         )
         return {"success": True, "result": str(result)}
 

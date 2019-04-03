@@ -44,6 +44,7 @@ class NapalmBackupService(Service):
             path_device_config.mkdir(parents=True, exist_ok=True)
             napalm_driver = self.napalm_connection(device)
             napalm_driver.open()
+            self.logs.append(f"Fetching configuration on {device.name} (Napalm)")
             config = str_dict(napalm_driver.get_config())
             napalm_driver.close()
             device.last_status = "Success"

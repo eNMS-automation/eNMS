@@ -1,21 +1,21 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
-    "env": {
-        "browser": true,
-        "jquery": true
-    },
-    "rules": {
-        "quotes": [2, "double", {allowTemplateLiterals: true}],
-        "object-curly-spacing": "off",
-        "no-invalid-this": 0,
-        "linebreak-style": 0,
-        "quote-props": [2, 'as-needed'],
-    },
-    "extends": ["eslint:recommended", "google"]
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "rules": {
+    "quotes": [2, "double", { "allowTemplateLiterals": true }],
+    "object-curly-spacing": "off",
+    "no-invalid-this": 0,
+    "linebreak-style": 0,
+    "quote-props": [2, "as-needed"]
+  },
+  "extends": ["eslint:recommended", "google"]
 }

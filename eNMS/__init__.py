@@ -9,8 +9,7 @@ from logging.handlers import RotatingFileHandler
 from os import environ
 from pathlib import Path
 from simplekml import Color, Style
-from sqlalchemy import Boolean, event, Float, Integer, PickleType
-from sqlalchemy.engine import Engine
+from sqlalchemy import Boolean, Float, Integer, PickleType
 from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 

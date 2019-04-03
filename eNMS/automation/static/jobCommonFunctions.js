@@ -154,7 +154,11 @@ function clearResults() {
 // eslint-disable-next-line
 function detachWindow() {
   window
-    .open(`/automation/detach_results/${jobId}`, "Results", "height=500,width=800")
+    .open(
+      `/automation/detach_results/${jobId}`,
+      "Results",
+      "height=500,width=800"
+    )
     .focus();
   $("#results-modal").modal("hide");
 }

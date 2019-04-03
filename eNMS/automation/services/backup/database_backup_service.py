@@ -8,9 +8,9 @@ from tarfile import open as open_tar
 
 from eNMS.admin.functions import migrate_export
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
-from eNMS.base.functions import strip_all
-from eNMS.base.properties import import_properties
+from eNMS.classes import service_classes
+from eNMS.functions import strip_all
+from eNMS.properties import import_properties
 from eNMS.inventory.models import Device
 
 

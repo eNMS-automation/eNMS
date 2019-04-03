@@ -20,8 +20,8 @@ matrix:
         - coveralls
 
     - language: node_js
-      node_js: 
+      node_js:
         - "node"
-      script: 
+      script:
         - npm run prettier
         - npm run lint

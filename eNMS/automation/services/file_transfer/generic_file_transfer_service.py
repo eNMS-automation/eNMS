@@ -2,11 +2,10 @@ from glob import glob
 from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
-from traceback import format_exc
 from logging import info
 
 from eNMS.automation.models import Service
-from eNMS.base.classes import service_classes
+from eNMS.classes import service_classes
 from eNMS.inventory.models import Device
 
 
@@ -39,6 +38,7 @@ class GenericFileTransferService(Service):
         if self.load_known_host_keys:
             ssh_client.load_system_host_keys()
         source_file = self.sub(self.source_file, locals())
+        self.logs.append("Transferring file {source_file} on {device.name}")
         success, result = True, f"File {source_file} transferred successfully"
         ssh_client.connect(
             device.ip_address,

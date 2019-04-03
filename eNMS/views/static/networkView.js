@@ -7,8 +7,6 @@ createLink: false
 deviceAutomationModal: false
 deleteAll: false
 doc: false
-map: false
-markers: true
 partial: false
 showModal: false
 showTypeModal: false

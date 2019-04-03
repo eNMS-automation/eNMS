@@ -67,8 +67,6 @@ L.PolylineClusterable = L.Polyline.extend({
   setLatLng: function() {},
 });
 
-
-
 /**
  * Switch currentView.
  * @param {newView} newView - 2D, 2DC (clustered) or 3D.
@@ -88,7 +86,10 @@ function switchView(newView) {
       }
     }, 1600);
   } else {
-    $(`#${newDimension == "2D" ? "map" : "earth"}`).css("visibility", "visible");
+    $(`#${newDimension == "2D" ? "map" : "earth"}`).css(
+      "visibility",
+      "visible"
+    );
   }
   dimension = newDimension;
   currentView = newView;

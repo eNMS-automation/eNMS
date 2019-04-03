@@ -1,9 +1,9 @@
 /*
 global
-alertify: false
 call: false
 connectionParametersModal: false
 createNode: false
+currentView: true
 deleteAll: false
 deviceAutomationModal: false
 displayPool: false
@@ -13,6 +13,7 @@ selected: false
 showModal: false
 showTypeModal: false
 switchLayer: false
+switchView: false
 */
 
 /**

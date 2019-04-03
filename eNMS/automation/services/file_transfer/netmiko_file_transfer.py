@@ -32,6 +32,7 @@ class NetmikoFileTransferService(Service):
 
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
+        self.logs.append("Transferring file {self.source_file} on {device.name}")
         transfer_dict = file_transfer(
             netmiko_handler,
             source_file=self.source_file,

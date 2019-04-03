@@ -259,7 +259,7 @@ class Job(Base):
         if job_from_workflow_targets:
             assert targets is not None
             device, = targets
-            return self.get_results(payload, device)
+            return self.get_results(payload, device, workflow)
         elif targets:
             results: dict = {"devices": {}}
             if self.multiprocessing:

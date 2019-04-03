@@ -51,6 +51,7 @@ class NetmikoPromptsService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
+        self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         result = netmiko_handler.send_command_timing(
             command, delay_factor=self.delay_factor
         )

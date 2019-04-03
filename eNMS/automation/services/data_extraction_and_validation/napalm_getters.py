@@ -59,8 +59,10 @@ class NapalmGettersService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver, result = self.napalm_connection(device), {}
         napalm_driver.open()
+        self.logs.append(
+            f"Fetching NAPALM getters ({', '.join(self.getters)}) on {device.name}"
+        )
         for getter in self.getters:
-            self.logs.append(f"Running NAPALM Getter '{getter}' on {device.name}")
             try:
                 result[getter] = getattr(napalm_driver, getter)()
             except Exception as e:

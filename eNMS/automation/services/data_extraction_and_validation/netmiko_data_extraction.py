@@ -41,6 +41,7 @@ class NetmikoDataExtractionService(Service):
             if not variable:
                 continue
             command = self.sub(getattr(self, f"command{i}"), locals())
+            self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
             output = netmiko_handler.send_command(
                 command, delay_factor=self.delay_factor
             )

@@ -3,7 +3,7 @@ from difflib import SequenceMatcher
 from flask import request, session
 from json import dumps
 from sqlalchemy.exc import DataError
-from typing import List
+from typing import Any, Dict
 
 from eNMS.extensions import db, scheduler
 from eNMS.automation.functions import scheduler_job
@@ -226,7 +226,7 @@ def clear_results(job_id: int) -> bool:
 
 
 @post(bp, "/add_jobs_to_workflow/<int:workflow_id>", "Edit")
-def add_jobs_to_workflow(workflow_id: int) -> List[dict]:
+def add_jobs_to_workflow(workflow_id: int) -> Dict[str, Any]:
     workflow = fetch("Workflow", id=workflow_id)
     jobs = objectify("Job", request.form["add_jobs"])
     for job in jobs:
@@ -291,7 +291,7 @@ def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
 
 
 @post(bp, "/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
-def delete_edge(workflow_id: int, edge_id: int) -> dict:
+def delete_edge(workflow_id: int, edge_id: int) -> str:
     delete("WorkflowEdge", id=edge_id)
     now = str(datetime.now())
     fetch("Workflow", id=workflow_id).last_modified = now
@@ -300,7 +300,7 @@ def delete_edge(workflow_id: int, edge_id: int) -> dict:
 
 
 @post(bp, "/save_positions/<int:workflow_id>", "Edit")
-def save_positions(workflow_id: int) -> bool:
+def save_positions(workflow_id: int) -> str:
     now = str(datetime.now())
     workflow = fetch("Workflow", id=workflow_id)
     workflow.last_modified = now

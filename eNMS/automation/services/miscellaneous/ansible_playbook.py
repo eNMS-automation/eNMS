@@ -20,8 +20,8 @@ class AnsiblePlaybookService(Service):
     validation_method = Column(String)
     validation_method_values = (
         ("text", "Validation by text match"),
-        ("dict_equal", "Validation by dictionnary equality"),
-        ("dict_included", "Validation by dictionnary inclusion"),
+        ("dict_equal", "Validation by dictionary equality"),
+        ("dict_included", "Validation by dictionary inclusion"),
     )
     content_match = Column(String)
     content_match_textarea = True
@@ -62,7 +62,7 @@ class AnsiblePlaybookService(Service):
                 str(result), self.sub(self.content_match, locals())
             )
         else:
-            success = self.match_dictionnary(result)
+            success = self.match_dictionary(result)
         return {
             "negative_logic": self.negative_logic,
             "result": result,

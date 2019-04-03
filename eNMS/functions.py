@@ -196,7 +196,7 @@ def post(
 
 @contextmanager
 def session_scope() -> Generator:
-    session = controller.session()
+    session = controller.session()  # type: ignore
     try:
         yield session
         session.commit()

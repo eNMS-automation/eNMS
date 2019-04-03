@@ -1,4 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from flask import Flask
 from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -6,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from hvac import Client as VaultClient
 from ldap3 import ALL, Server
 from os import environ
+from sqlalchemy.orm import Session
 from tacacs_plus.client import TACACSClient
 
 USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
@@ -13,7 +15,13 @@ USE_TACACS = int(environ.get("USE_TACACS", False))
 USE_LDAP = int(environ.get("USE_LDAP", False))
 USE_VAULT = int(environ.get("USE_VAULT", False))
 
-controller = type("Controller", (), {})
+
+class Controller:
+    app: Flask
+    session: Session
+
+
+controller = Controller()
 
 auth = HTTPBasicAuth()
 

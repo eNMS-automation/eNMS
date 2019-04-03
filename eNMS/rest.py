@@ -60,7 +60,7 @@ class RestAutomation(Resource):
                 else:
                     errors.append(f"No pool with the name '{pool_name}'")
             if errors and not targets:
-                return errors
+                return {"errors": errors}
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)

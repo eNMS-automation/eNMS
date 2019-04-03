@@ -16,8 +16,8 @@ class NapalmGettersService(Service):
     validation_method = Column(String, default="text")
     validation_method_values = (
         ("text", "Validation by text match"),
-        ("dict_equal", "Validation by dictionnary equality"),
-        ("dict_included", "Validation by dictionnary inclusion"),
+        ("dict_equal", "Validation by dictionary equality"),
+        ("dict_included", "Validation by dictionary inclusion"),
     )
     content_match = Column(String)
     content_match_textarea = True

@@ -159,7 +159,7 @@ class Job(Base):
         results: dict = {"results": {}}
         if not payload:
             payload = {}
-        job_from_workflow_targets = workflow and bool(targets)
+        job_from_workflow_targets = bool(workflow and targets)
         if not targets and getattr(self, "use_workflow_targets", True):
             targets = self.compute_targets()
         has_targets = bool(targets)
@@ -241,7 +241,7 @@ class Job(Base):
             session.merge(self)
             return results
 
-    def device_run(self, args: Tuple[Device, dict, dict]) -> None:
+    def device_run(self, args: Tuple[Device, dict, dict, Optional["Workflow"]]) -> None:
         with controller.app.app_context():
             device, results, payload, workflow = args
             device_result = self.get_results(payload, device, workflow)
@@ -369,10 +369,10 @@ class Service(Job):
                 and not self.content_match_regex
             )
         else:
-            success = self.match_dictionnary(result)
+            success = self.match_dictionary(result)
         return success if not self.negative_logic else not success
 
-    def match_dictionnary(self, result: dict, match: Optional[dict] = None) -> bool:
+    def match_dictionary(self, result: dict, match: Optional[dict] = None) -> bool:
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
@@ -380,7 +380,7 @@ class Service(Job):
                 match = deepcopy(self.dict_match)
             for k, v in result.items():
                 if isinstance(v, dict):
-                    self.match_dictionnary(v, match)
+                    self.match_dictionary(v, match)
                 elif k in match and match[k] == v:
                     match.pop(k)
             return not match

@@ -12,12 +12,12 @@ class UpdateInventoryService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    update_dictionnary = Column(MutableDict.as_mutable(PickleType), default={})
+    update_dictionary = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {"polymorphic_identity": "UpdateInventoryService"}
 
     def job(self, payload: dict, device: Device) -> dict:
-        for property, value in self.update_dictionnary.items():
+        for property, value in self.update_dictionary.items():
             setattr(device, property, value)
         return {"success": True, "result": "properties updated"}
 

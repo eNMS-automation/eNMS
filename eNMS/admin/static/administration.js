@@ -18,7 +18,7 @@ function saveParameters() {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/security/access.html");
-  $("#default_view").val(parameters.default_view);
+  $("#cluster_scan_protocol").val(parameters.cluster_scan_protocol);
   if (parameters.pool) {
     $("#pool").val(parameters.pool.id);
   }

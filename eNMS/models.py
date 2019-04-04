@@ -1,5 +1,6 @@
 from flask_login import current_user as user
 from json import dumps, loads
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List, Tuple
 from wtforms import SelectField, SelectMultipleField
 
@@ -68,7 +69,7 @@ class Base(db.Model):
                 value = {"float": float, "int": int}[property_type](value or 0)
             setattr(self, property, value)
 
-    def get_properties(self, export: bool = False) -> dict:
+    def get_properties(self) -> dict:
         result = {}
         for property in cls_to_properties[self.type]:
             if property in private_properties:
@@ -80,8 +81,25 @@ class Base(db.Model):
                 result[property] = str(getattr(self, property))
         return result
 
+    def get_export_properties(self) -> dict:
+        result = {}
+        for property in cls_to_properties[self.type]:
+            if property in private_properties:
+                continue
+            value = getattr(self, property)
+            try:
+                dumps(value)
+            except TypeError:
+                continue
+            if isinstance(value, MutableList):
+                value = list(value)
+            if isinstance(value, MutableDict):
+                value = dict(value)
+            result[property] = value
+        return result
+
     def to_dict(self, export: bool = False) -> dict:
-        properties = self.get_properties(export)
+        properties = self.get_export_properties()
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property in rel.get(self.type, rel["Service"]):
             if export and property in no_migrate:

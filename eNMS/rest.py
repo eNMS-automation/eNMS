@@ -119,8 +119,7 @@ class Topology(Resource):
     def post(self, direction: str) -> Union[bool, str]:
         if direction == "import":
             data = request.form.to_dict()
-            for property in ("replace", "update_pools"):
-                data[property] = True if data[property] == "True" else False
+            data["replace"] = True if data["replace"] == "True" else False
             return object_import(data, request.files["file"])
         else:
             return object_export(request.get_json(), current_app.path)

@@ -77,22 +77,17 @@ A pool is automatically updated by eNMS:
 
 All pools are updated (as long as their 'never update' flag is not set):
 
-- after inventory import, if update_pools is set to True
 - when eNMS starts, or restarts
+- when a device is manually added to the inventory
+- when a device is modified
 - after pulling or cloning the content from the git configuration repository
 - when the `poller service` runs (service responsible for fetching all device configurations), all pools for which "device_current_configuration" is not empty are updated (and only those).
-
 
 Pools are manually updated:
 
 - when you click on the update button of a pool in pool management
 - when you click on the "update all pools" in pool management
 
-Pools need to be manually updated:
-
-- when a device is manually added to the inventory
-- in the event that a user or service makes a change to the device properties that affect's a pool's criteria
-- when you fetch the topology from an external source of truth (netbox, librenms, or opennms currently)
 
 Pools based on Configuration
 ----------------------------

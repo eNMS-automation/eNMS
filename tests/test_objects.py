@@ -59,7 +59,7 @@ def test_manual_object_creation(user_client: FlaskClient) -> None:
 
 def create_from_file(client: FlaskClient, file: str) -> None:
     with open(client.application.path / "projects" / file, "rb") as f:
-        data = {"file": f, "replace": True, "update_pools": True}
+        data = {"file": f, "replace": True}
         client.post("/inventory/import_topology", data=data)
 
 

@@ -120,9 +120,8 @@ class PoolRestrictionForm(FlaskForm):
 
 
 class ImportExportForm(FlaskForm):
-    boolean_fields = HiddenField(default="update_pools,replace")
+    boolean_fields = HiddenField(default="replace")
     export_filename = StringField()
-    update_pools = BooleanField()
     replace = BooleanField()
 
 

@@ -352,15 +352,26 @@ object_diagram_properties: List[str] = ["model", "vendor", "subtype", "location"
 
 device_diagram_properties: List[str] = (
     object_diagram_properties
-    + ["operating_system", "os_version"]
+    + ["operating_system", "os_version", "port"]
     + list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
 )
 
 user_diagram_properties: List[str] = ["name"]
 
-workflow_diagram_properties: List[str] = ["type", "vendor", "operating_system"]
+service_diagram_properties: List[str] = [
+    "type",
+    "vendor",
+    "operating_system",
+    "creator_name",
+    "send_notification",
+    "send_notification_method",
+    "multiprocessing",
+    "max_processes",
+    "number_of_retries",
+    "time_between_retries",
+]
 
-service_diagram_properties: List[str] = ["type", "device_multiprocessing"]
+workflow_diagram_properties: List[str] = service_diagram_properties
 
 task_diagram_properties: List[str] = ["type", "status", "frequency"]
 
@@ -389,6 +400,7 @@ pretty_names: Dict[str, str] = {
     "crontab_expression": "Crontab expression",
     "cpu_load": "CPU load",
     "creator": "Creator",
+    "creator_name": "Creator",
     "delay_factor": "Delay factor",
     "delete_archive": "Delete archive",
     "delete_folder": "Delete folder",
@@ -426,8 +438,10 @@ pretty_names: Dict[str, str] = {
     "load_known_host_keys": "Load known host keys",
     "location": "Location",
     "look_for_keys": "Look for keys",
+    "max_processes": "Maximum number of processes",
     "missing_host_key_policy": "Missing Host Key Policy",
     "model": "Model",
+    "multiprocessing": "Multiprocessing",
     "name": "Name",
     "napalm_driver": "Napalm driver",
     "negative_logic": "Negative Logic",
@@ -435,6 +449,7 @@ pretty_names: Dict[str, str] = {
     "never_update": "Never update",
     "next_run_time": "Next runtime",
     "number_of_configuration": "Maximum number of configurations stored in database",
+    "number_of_retries": "Number of retries",
     "object_number": "Number of objects",
     "operating_system": "Operating System",
     "optional_args": "Optional arguments",
@@ -452,6 +467,8 @@ pretty_names: Dict[str, str] = {
     "regular_expression2": "Regular Expression 2",
     "regular_expression3": "Regular Expression 3",
     "scheduling_mode": "Scheduling Mode",
+    "send_notification": "Send a notification",
+    "send_notification_method": "Notification method",
     "source": "Source",
     "source_name": "Source",
     "source_file": "Source file",
@@ -461,6 +478,7 @@ pretty_names: Dict[str, str] = {
     "subtype": "Subtype",
     "text file": "File",
     "time_before_next_run": "Time before next run",
+    "time_between_retries": "Time between retries",
     "timeout": "Timeout (in seconds)",
     "type": "Type",
     "update_dictionary": "Update dictionary",

@@ -359,7 +359,6 @@ device_diagram_properties: List[str] = (
 user_diagram_properties: List[str] = ["name"]
 
 service_diagram_properties: List[str] = [
-    "type",
     "vendor",
     "operating_system",
     "creator_name",
@@ -373,7 +372,14 @@ service_diagram_properties: List[str] = [
 
 workflow_diagram_properties: List[str] = service_diagram_properties
 
-task_diagram_properties: List[str] = ["type", "status", "frequency"]
+task_diagram_properties: List[str] = [
+    "status",
+    "periodic",
+    "frequency",
+    "frequency_unit",
+    "crontab_expression",
+    "job_name",
+]
 
 type_to_diagram_properties: Dict[str, List[str]] = {
     "Device": device_diagram_properties,
@@ -458,6 +464,7 @@ pretty_names: Dict[str, str] = {
     "pass_device_properties": "Pass device properties to the playbook",
     "password": "Password",
     "payload": "Payload",
+    "periodic": "Periodic",
     "permission": "Permission",
     "port": "Port",
     "positions": "Positions",

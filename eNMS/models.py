@@ -84,9 +84,9 @@ class Base(db.Model):
     def get_export_properties(self) -> dict:
         result = {}
         for property in cls_to_properties[self.type]:
-            if property in private_properties:
-                continue
             value = getattr(self, property)
+            if not value or property in private_properties:
+                continue
             try:
                 dumps(value)
             except TypeError:

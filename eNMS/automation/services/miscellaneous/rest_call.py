@@ -6,7 +6,7 @@ from requests import (
     delete as rest_delete,
 )
 from requests.auth import HTTPBasicAuth
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 
@@ -26,7 +26,7 @@ class RestCallService(Service):
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
-    timeout = Column(Float, default=15.0)
+    timeout = Column(Integer, default=15.0)
     validation_method = Column(String)
     validation_method_values = (
         ("text", "Validation by text match"),

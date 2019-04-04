@@ -1,6 +1,6 @@
 from os import environ
 from sqlalchemy import Boolean, Integer, String, Float
-from yaml import load, SafeLoader
+from yaml import load, BaseLoader
 from typing import Dict, List
 
 
@@ -9,7 +9,7 @@ def get_custom_properties() -> dict:
     if not filepath:
         return {}
     with open(filepath, "r") as properties:
-        return load(properties, Loader=SafeLoader)
+        return load(properties, Loader=BaseLoader)
 
 
 sql_types: dict = {

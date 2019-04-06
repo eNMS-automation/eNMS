@@ -94,7 +94,6 @@ class Device(CustomDevice):
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
         for pool in fetch_all("Pool"):
-            print(self, pool)
             if pool.never_update:
                 continue
             if pool.object_match(self):

@@ -99,7 +99,7 @@ class Base(db.Model):
         return result
 
     def to_dict(self, export: bool = False) -> dict:
-        properties = self.get_export_properties()
+        properties = self.get_export_properties() if export else self.get_properties()
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property in rel.get(self.type, rel["Service"]):
             if export and property in no_migrate:

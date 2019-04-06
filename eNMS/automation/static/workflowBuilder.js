@@ -438,6 +438,6 @@ function getWorkflowState() {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/workflows/index.html");
-  convertSelect("#add_jobs", "#workflow-devices", "#workflow-pools");
+  convertSelect("#add-jobs", "#workflow-devices", "#workflow-pools");
   getWorkflowState();
 })();

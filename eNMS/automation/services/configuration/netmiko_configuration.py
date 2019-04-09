@@ -12,9 +12,9 @@ class NetmikoConfigurationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    content = Column(String)
+    content = Column(String(255))
     content_textarea = True
-    driver = Column(String)
+    driver = Column(String(255))
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     enable_mode = Column(Boolean)

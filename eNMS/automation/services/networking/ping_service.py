@@ -13,9 +13,9 @@ class PingService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    protocol = Column(String)
+    protocol = Column(String(255))
     protocol_values = (("ICMP", "ICMP Ping"), ("TCP", "TCP Ping"))
-    ports = Column(String)
+    ports = Column(String(255))
     count = Column(Integer, default=5)
     timeout = Column(Integer, default=2)
     ttl = Column(Integer)

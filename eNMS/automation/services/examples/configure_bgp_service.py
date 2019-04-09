@@ -12,11 +12,11 @@ class ConfigureBgpService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     local_as = Column(Integer)
-    loopback = Column(String)
-    loopback_ip = Column(String)
-    neighbor_ip = Column(String)
+    loopback = Column(String(255))
+    loopback_ip = Column(String(255))
+    neighbor_ip = Column(String(255))
     remote_as = Column(Integer)
-    vrf_name = Column(String)
+    vrf_name = Column(String(255))
     driver = "ios"
 
     __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}

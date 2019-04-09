@@ -13,14 +13,14 @@ class NapalmConfigurationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    action = Column(String)
+    action = Column(String(255))
     action_values = (
         ("load_merge_candidate", "Load merge"),
         ("load_replace_candidate", "Load replace"),
     )
-    content = Column(String)
+    content = Column(String(255))
     content_textarea = True
-    driver = Column(String)
+    driver = Column(String(255))
     driver_values = NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})

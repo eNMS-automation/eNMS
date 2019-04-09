@@ -12,10 +12,10 @@ class MailNotificationService(Service):
     __tablename__ = "MailNotificationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    title = Column(String)
-    sender = Column(String)
-    recipients = Column(String)
-    body = Column(String)
+    title = Column(String(255))
+    sender = Column(String(255))
+    recipients = Column(String(255))
+    body = Column(String(255))
     body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}

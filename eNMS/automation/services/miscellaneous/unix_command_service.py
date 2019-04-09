@@ -12,8 +12,8 @@ class UnixCommandService(Service):
     __tablename__ = "UnixCommandService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    command = Column(String)
-    content_match = Column(String)
+    command = Column(String(255))
+    content_match = Column(String(255))
     content_match_textarea = True
     content_match_regex = Column(Boolean)
     negative_logic = Column(Boolean)

@@ -20,11 +20,11 @@ class LogBackupService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     direction = "put"
-    protocol = Column(String)
+    protocol = Column(String(255))
     protocol_values = (("scp", "SCP"), ("sftp", "SFTP"))
     delete_folder = Column(Boolean)
     delete_archive = Column(Boolean)
-    destination_path = Column(String)
+    destination_path = Column(String(255))
 
     __mapper_args__ = {"polymorphic_identity": "LogBackupService"}
 

@@ -13,26 +13,26 @@ class NetmikoValidationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    command = Column(String)
-    conversion_method = Column(String, default="text")
+    command = Column(String(255))
+    conversion_method = Column(String(255), default="text")
     conversion_method_values = (
         ("text", "Text"),
         ("json", "Json dictionary"),
         ("xml", "XML dictionary"),
     )
-    validation_method = Column(String, default="text")
+    validation_method = Column(String(255), default="text")
     validation_method_values = (
         ("text", "Validation by text match"),
         ("dict_equal", "Validation by dictionary equality"),
         ("dict_included", "Validation by dictionary inclusion"),
     )
-    content_match = Column(String)
+    content_match = Column(String(255))
     content_match_textarea = True
     content_match_regex = Column(Boolean)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean)
-    driver = Column(String)
+    driver = Column(String(255))
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)

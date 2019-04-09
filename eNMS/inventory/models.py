@@ -34,16 +34,16 @@ from eNMS.properties import (
 class Object(Base):
 
     __tablename__ = "Object"
-    type = Column(String)
+    type = Column(String(255))
     __mapper_args__ = {"polymorphic_identity": "Object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
-    name = Column(String, unique=True)
-    subtype = Column(String)
-    description = Column(String)
-    model = Column(String)
-    location = Column(String)
-    vendor = Column(String)
+    name = Column(String(255), unique=True)
+    subtype = Column(String(255))
+    description = Column(String(255))
+    model = Column(String(255))
+    location = Column(String(255))
+    vendor = Column(String(255))
 
 
 CustomDevice: Any = (
@@ -71,22 +71,22 @@ class Device(CustomDevice):
     __mapper_args__ = {"polymorphic_identity": "Device"}
     class_type = "device"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
-    operating_system = Column(String)
-    os_version = Column(String)
-    ip_address = Column(String)
+    operating_system = Column(String(255))
+    os_version = Column(String(255))
+    ip_address = Column(String(255))
     longitude = Column(Float)
     latitude = Column(Float)
     port = Column(Integer, default=22)
-    username = Column(String)
-    password = Column(String)
-    enable_password = Column(String)
-    netmiko_driver = Column(String)
-    napalm_driver = Column(String)
+    username = Column(String(255))
+    password = Column(String(255))
+    enable_password = Column(String(255))
+    netmiko_driver = Column(String(255))
+    napalm_driver = Column(String(255))
     configurations = Column(MutableDict.as_mutable(PickleType), default={})
     current_configuration = Column(Text)
-    last_failure = Column(String, default="Never")
-    last_status = Column(String, default="Never")
-    last_update = Column(String, default="Never")
+    last_failure = Column(String(255), default="Never")
+    last_status = Column(String(255), default="Never")
+    last_update = Column(String(255), default="Never")
     last_runtime = Column(Float, default=0.0)
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
@@ -203,14 +203,14 @@ AbstractPool: Any = type(
         "__mapper_args__": {"polymorphic_identity": "AbstractPool"},
         "id": Column(Integer, primary_key=True),
         **{
-            **{f"device_{p}": Column(String) for p in pool_device_properties},
+            **{f"device_{p}": Column(String(255)) for p in pool_device_properties},
             **{
-                f"device_{p}_match": Column(String, default="inclusion")
+                f"device_{p}_match": Column(String(255), default="inclusion")
                 for p in pool_device_properties
             },
-            **{f"link_{p}": Column(String) for p in pool_link_properties},
+            **{f"link_{p}": Column(String(255)) for p in pool_link_properties},
             **{
-                f"link_{p}_match": Column(String, default="inclusion")
+                f"link_{p}_match": Column(String(255), default="inclusion")
                 for p in pool_link_properties
             },
         },
@@ -222,9 +222,9 @@ class Pool(AbstractPool):
 
     __tablename__ = type = "Pool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
-    name = Column(String, unique=True)
-    description = Column(String)
-    operator = Column(String, default="all")
+    name = Column(String(255), unique=True)
+    description = Column(String(255))
+    operator = Column(String(255), default="all")
     devices = relationship(
         "Device", secondary=pool_device_table, back_populates="pools"
     )

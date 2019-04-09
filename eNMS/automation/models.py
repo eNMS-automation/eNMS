@@ -35,12 +35,12 @@ from eNMS.inventory.models import Device
 class Job(Base):
 
     __tablename__ = "Job"
-    type = Column(String)
+    type = Column(String(255))
     __mapper_args__ = {"polymorphic_identity": "Job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
-    name = Column(String, unique=True)
-    description = Column(String)
+    name = Column(String(255), unique=True)
+    description = Column(String(255))
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=50)
     number_of_retries = Column(Integer, default=0)
@@ -52,10 +52,10 @@ class Job(Base):
     completed = Column(Integer, default=0)
     failed = Column(Integer, default=0)
     state = Column(MutableDict.as_mutable(PickleType), default={})
-    credentials = Column(String, default="device")
+    credentials = Column(String(255), default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
-    vendor = Column(String)
-    operating_system = Column(String)
+    vendor = Column(String(255))
+    operating_system = Column(String(255))
     waiting_time = Column(Integer, default=0)
     creator_id = Column(Integer, ForeignKey("User.id"))
     creator = relationship("User", back_populates="jobs")
@@ -70,9 +70,9 @@ class Job(Base):
         "LogRule", secondary=job_log_rule_table, back_populates="jobs"
     )
     send_notification = Column(Boolean, default=False)
-    send_notification_method = Column(String, default="mail_feedback_notification")
+    send_notification_method = Column(String(255), default="mail_feedback_notification")
     display_only_failed_nodes = Column(Boolean, default=True)
-    mail_recipient = Column(String, default="")
+    mail_recipient = Column(String(255), default="")
     logs = Column(MutableList.as_mutable(PickleType), default=[])
 
     @hybrid_property
@@ -405,8 +405,8 @@ class WorkflowEdge(Base):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    subtype = Column(String)
+    name = Column(String(255))
+    subtype = Column(String(255))
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",
@@ -433,7 +433,7 @@ class Workflow(Job):
     __mapper_args__ = {"polymorphic_identity": "Workflow"}
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
-    last_modified = Column(String)
+    last_modified = Column(String(255))
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship("WorkflowEdge", back_populates="workflow")
 

@@ -97,6 +97,8 @@ def configure_database(app: Flask) -> None:
         exception: Optional[Union[Response, Exception]] = None
     ) -> None:
         db.session.remove()
+        if exception and db.session.is_active:
+            db.session.rollback()
 
     @app.before_first_request
     def initialize_database() -> None:

@@ -173,6 +173,7 @@ class Job(Base):
             db.session.commit()
             logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
+            db.session.commit()
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -219,35 +220,33 @@ class Job(Base):
         device: Optional[Device] = None,
         workflow: Optional["Workflow"] = None,
     ) -> dict:
-        with session_scope() as session:
-            logs = workflow.logs if workflow else self.logs
-            try:
-                if device:
-                    logs.append(f"Running {self.type} on {device.name}.")
-                    results = self.job(payload, device)
-                    success = "SUCCESS" if results["success"] else "FAILURE"
-                    logs.append(
-                        f"Finished running service on {device.name}. ({success})"
-                    )
-                else:
-                    results = self.job(payload)
-            except Exception:
-                if device:
-                    logs.append(f"Finished running service on {device.name}. (FAILURE)")
-                results = {
-                    "success": False,
-                    "result": chr(10).join(format_exc().splitlines()),
-                }
-            self.completed += 1
-            self.failed += 1 - results["success"]
-            session.merge(self)
-            return results
+        logs = workflow.logs if workflow else self.logs
+        try:
+            if device:
+                logs.append(f"Running {self.type} on {device.name}.")
+                results = self.job(payload, device)
+                success = "SUCCESS" if results["success"] else "FAILURE"
+                logs.append(f"Finished running service on {device.name}. ({success})")
+            else:
+                results = self.job(payload)
+        except Exception:
+            if device:
+                logs.append(f"Finished running service on {device.name}. (FAILURE)")
+            results = {
+                "success": False,
+                "result": chr(10).join(format_exc().splitlines()),
+            }
+        self.completed += 1
+        self.failed += 1 - results["success"]
+        return results
 
     def device_run(self, args: Tuple[Device, dict, dict, Optional["Workflow"]]) -> None:
         with controller.app.app_context():
-            device, results, payload, workflow = args
-            device_result = self.get_results(payload, device, workflow)
-            results["devices"][device.name] = device_result
+            with session_scope() as session:
+                device, results, payload, workflow = args
+                device_result = self.get_results(payload, device, workflow)
+                session.merge(self)
+                results["devices"][device.name] = device_result
 
     def run(
         self,

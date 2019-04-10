@@ -245,7 +245,7 @@ class Job(Base):
             with session_scope() as session:
                 device, results, payload, workflow = args
                 device_result = self.get_results(payload, device, workflow)
-                session.merge(self)
+                session.merge(workflow or self)
                 results["devices"][device.name] = device_result
 
     def run(

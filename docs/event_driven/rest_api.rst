@@ -39,6 +39,7 @@ The body may contain the follwoing:
 
 - A key titled ``pools`` which is associated to a value list of the specific pools you want to run.
 - A key titled ``ip_addresses`` which is associated to a value list of the IPs you want to run.
+- A key titled ``payload" which contains a dictionary of the keys: values specific to the service being run.
 
 The job can be run asynchronously or not with the ``async`` key:
   - ``async`` False, you send a request to the REST API, eNMS runs the job and it responds to your request when the job is done running. The response will contain the result of the job, but the connection might time out if the job takes too much time to run.
@@ -54,7 +55,8 @@ Example of body:
    "devices": ["Washington"],
    "pools": ["Pool1", "Pool2"],
    "ip_addresses": ["127.0.0.1"],
-   "async": True
+   "async": True,
+   "payload": {"aid": "1-2-3", "user_identified_key": "user_identified_value"}
  }
 
 Note:
@@ -169,6 +171,7 @@ The import and export of topology can be triggered from the ReST API, with a POS
  https://<IP_address>/rest/topology/import
 
 For the import, you need to attach the file as part of the request (of type "form-data" and not JSON) and set the two following ``key`` / ``value`` pairs:
+ - update_pools: Whether or not pools must be updated after the topology import to take into consideration the newly imported objects.
  - replace: Whether or not the existing topology must be erased and replaced by the newly imported objects.
 
 Example of python script to import programmatically:

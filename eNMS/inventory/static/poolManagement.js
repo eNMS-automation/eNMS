@@ -96,6 +96,7 @@ function savePoolObjects() {
 // eslint-disable-next-line
 function updatePool(pool) {
   call(`/inventory/update_pool/${pool}`, function() {
+    table.ajax.reload(null, false);
     alertify.notify("Update successful.", "success", 5);
   });
 }

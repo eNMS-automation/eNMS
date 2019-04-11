@@ -159,25 +159,33 @@ def save_pool_objects(pool_id: int) -> dict:
 
 @post(bp, "/pool_objects", "View")
 def filter_pool_objects() -> Dict[str, List[dict]]:
-    model = classes["Device"]
-    filtered = (
-        db.session.query(
-            *[
-                getattr(model, property)
-                for property in ("id", "subtype", "name", "latitude", "longitude")
-            ]
-        ).filter(
-            model.pools.any(
-                classes["pool"].id.in_(
-                    [int(pool_id) for pool_id in request.form["pools"] if pool_id]
+    return {
+        "links": [
+            link.view_properties
+            for link in db.session.query(classes["Link"])
+            .filter(
+                classes["Link"].pools.any(
+                    classes["pool"].id.in_(
+                        [int(pool_id) for pool_id in request.form["pools"] if pool_id]
+                    )
                 )
             )
-        )
-    ).all()
-    print(filtered)
-    return {
-        "links": [link.view_properties for link in fetch_all("Link")],
-        "devices": filtered,
+            .all()
+        ],
+        "devices": (
+            db.session.query(
+                *[
+                    getattr(classes["Device"], property)
+                    for property in ("id", "subtype", "name", "latitude", "longitude")
+                ]
+            ).filter(
+                classes["Device"].pools.any(
+                    classes["pool"].id.in_(
+                        [int(pool_id) for pool_id in request.form["pools"] if pool_id]
+                    )
+                )
+            )
+        ).all(),
     }
 
 

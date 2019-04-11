@@ -24,7 +24,7 @@ let polylinesArray = [];
 let dimension = view.substring(0, 2);
 let currentView = view;
 
-const map = L.map("map").setView(
+const map = L.map("map", { preferCanvas: true }).setView(
   [parameters.default_latitude, parameters.default_longitude],
   parameters.default_zoom_level
 );
@@ -137,13 +137,13 @@ function switchLayer(layer) {
 function createNode(node, nodeType) {
   let marker = null;
   if (currentView == "2D" || currentView == "2DC") {
-    marker = L.marker([node.latitude, node.longitude]);
+    marker = L.circleMarker([node.latitude, node.longitude]);
     if (nodeType === "device") {
       marker.icon = window[`icon_${node.subtype}`] || routerIcon;
     } else {
       marker.icon = window["icon_site"];
     }
-    marker.setIcon(marker.icon);
+    // marker.setIcon(marker.icon);
     marker.bindTooltip(node["name"], { permanent: false });
   } else {
     marker = WE.marker(
@@ -295,8 +295,3 @@ $("body").contextMenu({
     selectedObject = null;
   },
 });
-
-(function() {
-  convertSelect("#restrict-pool");
-})();
-

@@ -46,6 +46,7 @@ const action = {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
+  convertSelect("#restrict-pool");
   $("#restrict-pool").selectpicker("selectAll");
   switchView(currentView);
 })();

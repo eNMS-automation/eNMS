@@ -160,18 +160,6 @@ def save_pool_objects(pool_id: int) -> dict:
 @post(bp, "/pool_objects", "View")
 def filter_pool_objects() -> Dict[str, List[dict]]:
     return {
-        "links": [
-            link.view_properties
-            for link in db.session.query(classes["Link"])
-            .filter(
-                classes["Link"].pools.any(
-                    classes["pool"].id.in_(
-                        [int(pool_id) for pool_id in request.form["pools"] if pool_id]
-                    )
-                )
-            )
-            .all()
-        ],
         "devices": (
             db.session.query(
                 *[
@@ -186,6 +174,18 @@ def filter_pool_objects() -> Dict[str, List[dict]]:
                 )
             )
         ).all(),
+        "links": [
+            link.view_properties
+            for link in db.session.query(classes["Link"])
+            .filter(
+                classes["Link"].pools.any(
+                    classes["pool"].id.in_(
+                        [int(pool_id) for pool_id in request.form["pools"] if pool_id]
+                    )
+                )
+            )
+            .all()
+        ],
     }
 
 

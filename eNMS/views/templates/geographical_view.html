@@ -11,6 +11,10 @@
     <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   {% endif %}
   <link href="{{ url_for('views_blueprint.static', filename='view.css') }}" rel="stylesheet">
+  <style>
+    #map { height:85vh; }
+    #network { height:85vh; }
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -19,7 +23,6 @@
   {% include 'device_modal.html' %}
   {% include 'pool_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
-  <input id="view-type" name="view" type="hidden">
   <ul id="contextMenu" class="dropdown-menu" role="menu">
     <li class="menu dropdown-submenu geo-menu">
       <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
@@ -47,8 +50,8 @@
             {% endif %}
             <div class="flip-container">
               <div class="flipper">
-                <div class="back" id="earth" style="height:100%;"></div>
-                <div class="front" id="map" style="height:100%;"></div>
+                <div class="back" id="earth"></div>
+                <div class="front" id="map"></div>
               </div>
             </div>
             <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10vw;">
@@ -61,8 +64,8 @@
             <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
               <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
             </div>
-            <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:40vw;">
-              <form id="pool-restriction-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+            <div class="btn-group-vertical" style="width: 300px; z-index:500; position: absolute; top: 10px; right:20vw;">
+              <form id="pool-restriction-form" method="post">
                 {{ pool_restriction_form.list_fields() }}
                 <div class="form-group">
                   {{ pool_restriction_form.pools(id="restrict-pool", class="form-control") }}

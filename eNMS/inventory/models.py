@@ -161,14 +161,28 @@ class Link(Object):
         backref=backref("destination", cascade="all, delete-orphan"),
     )
     destination_name = association_proxy("destination", "name")
-    source_longitude = association_proxy("source", "longitude")
-    source_latitude = association_proxy("source", "latitude")
-    destination_longitude = association_proxy("destination", "longitude")
-    destination_latitude = association_proxy("destination", "latitude")
     pools = relationship("Pool", secondary=pool_link_table, back_populates="links")
 
     def __init__(self, **kwargs: Any) -> None:
         self.update(**kwargs)
+
+    @property
+    def view_properties(self) -> None:
+        node_properties = ("id", "longitude", "latitude")
+        return {
+            **{
+                property: getattr(self, property)
+                for property in ("id", "name", "subtype")
+            }
+            ** {
+                f"source_{property}": getattr(self.source, property)
+                for property in node_properties
+            },
+            **{
+                f"destination_{property}": getattr(self.destination, property)
+                for property in node_properties
+            },
+        }
 
     def update(self, **kwargs: Any) -> None:
         if "source_name" in kwargs:
@@ -209,15 +223,21 @@ AbstractPool: Any = type(
         "__mapper_args__": {"polymorphic_identity": "AbstractPool"},
         "id": Column(Integer, primary_key=True),
         **{
-            **{f"device_{p}": Column(String(255)) for p in pool_device_properties},
             **{
-                f"device_{p}_match": Column(String(255), default="inclusion")
-                for p in pool_device_properties
+                f"device_{property}": Column(String(255))
+                for property in pool_device_properties
             },
-            **{f"link_{p}": Column(String(255)) for p in pool_link_properties},
             **{
-                f"link_{p}_match": Column(String(255), default="inclusion")
-                for p in pool_link_properties
+                f"device_{property}_match": Column(String(255), default="inclusion")
+                for property in pool_device_properties
+            },
+            **{
+                f"link_{property}": Column(String(255))
+                for property in pool_link_properties
+            },
+            **{
+                f"link_{property}_match": Column(String(255), default="inclusion")
+                for property in pool_link_properties
             },
         },
     },

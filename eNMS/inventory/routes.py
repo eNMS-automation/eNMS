@@ -169,18 +169,7 @@ def save_pool_objects(pool_id: int) -> dict:
 @post(bp, "/pool_objects/<int:pool_id>", "View")
 def filter_pool_objects(pool_id: int) -> Dict[str, List[dict]]:
     return {
-        "links": fetch_properties(
-            "Link",
-            (
-                "id",
-                "name",
-                "subtype",
-                "source_longitude",
-                "source_latitude",
-                "destination_longitude",
-                "destination_latitude",
-            ),
-        ),
+        "links": [link.view_properties for link in fetch_all("Link")],
         "devices": load_properties(
             "Device", ("id", "subtype", "name", "latitude", "longitude")
         ),

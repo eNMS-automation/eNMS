@@ -17,6 +17,7 @@ from eNMS.functions import (
     fetch_properties,
     get,
     get_one,
+    load_properties,
     objectify,
     post,
 )
@@ -169,16 +170,20 @@ def save_pool_objects(pool_id: int) -> dict:
 def filter_pool_objects(pool_id: int) -> Dict[str, List[dict]]:
     return {
         "links": fetch_properties(
-            "Device",
+            "Link",
             (
                 "id",
+                "name",
+                "subtype",
                 "source_longitude",
                 "source_latitude",
                 "destination_longitude",
                 "destination_latitude",
             ),
         ),
-        "devices": fetch_properties("Device", ("id", "name", "latitude", "longitude")),
+        "devices": load_properties(
+            "Device", ("id", "subtype", "name", "latitude", "longitude")
+        ),
     }
 
 

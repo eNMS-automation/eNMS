@@ -22,17 +22,24 @@ def fetch(model: str, **kwargs: Any) -> db.Model:
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 
-def fetch_properties(model: str, properties: List[str]) -> List[dict]:
-    properties = [getattr(classes[model], property) for property in properties]
-    return db.session.query(*properties).all()
-
-
 def fetch_all(model: str) -> Tuple[db.Model]:
     return classes[model].query.all()
 
 
+def fetch_properties(model: str, properties: List[str]) -> List[dict]:
+    return [
+        {property: getattr(instance, property) for property in properties}
+        for instance in fetch_all(model)
+    ]
+
+
 def fetch_all_visible(model: str) -> List[db.Model]:
     return [instance for instance in classes[model].query.all() if instance.visible]
+
+
+def load_properties(model: str, properties: List[str]) -> List[dict]:
+    properties = [getattr(classes[model], property) for property in properties]
+    return db.session.query(*properties).all()
 
 
 def objectify(model: str, object_list: List[int]) -> List[db.Model]:

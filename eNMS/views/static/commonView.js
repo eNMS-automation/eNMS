@@ -187,13 +187,9 @@ function createNode(node, nodeType) {
  */
 // eslint-disable-next-line
 function createLink(link) {
-  const sourceLatitude = link.source.latitude;
-  const sourceLongitude = link.source.longitude;
-  const destinationLatitude = link.destination.latitude;
-  const destinationLongitude = link.destination.longitude;
   if (currentView == "2D" || currentView == "2DC") {
-    let pointA = new L.LatLng(sourceLatitude, sourceLongitude);
-    let pointB = new L.LatLng(destinationLatitude, destinationLongitude);
+    let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
+    let pointB = new L.LatLng(link.destination_latitude, link.destination_longitude);
     const pointList = [pointA, pointB];
     const polyline = new L.PolylineClusterable(pointList, {
       color: link_colors[link.subtype],
@@ -211,7 +207,7 @@ function createLink(link) {
       $(".rc-link-menu").show();
       selectedObject = this.link_id; // eslint-disable-line no-undef
     });
-    polyline.bindTooltip(link["name"], {
+    polyline.bindTooltip(link.name, {
       permanent: false,
     });
     if (currentView == "2D") {
@@ -223,17 +219,17 @@ function createLink(link) {
     const color = link.color;
     const polygonSD = WE.polygon(
       [
-        [sourceLatitude, sourceLongitude],
-        [destinationLatitude, destinationLongitude],
-        [sourceLatitude, sourceLongitude],
+        [link.source_latitude, link.source_longitude],
+        [link.destination_latitude, link.destination_longitude],
+        [link.source_latitude, link.source_longitude],
       ],
       { color: color, opacity: 20 }
     ).addTo(earth);
     const polygonDS = WE.polygon(
       [
-        [destinationLatitude, destinationLongitude],
-        [sourceLatitude, sourceLongitude],
-        [destinationLatitude, destinationLongitude],
+        [link.destination_latitude, link.destination_longitude],
+        [link.source_latitude, link.source_longitude],
+        [link.destination_latitude, link.destination_longitude],
       ],
       { color: color, opacity: 20 }
     ).addTo(earth);

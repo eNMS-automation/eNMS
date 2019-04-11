@@ -93,6 +93,8 @@ class Device(CustomDevice):
 
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
+        if kwargs.get("dont_update_pools", False):
+            return
         for pool in fetch_all("Pool"):
             if pool.never_update:
                 continue

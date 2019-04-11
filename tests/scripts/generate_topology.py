@@ -15,7 +15,7 @@ for index, header in enumerate(
 ):
     ws.write(0, index, header)
 
-for i in range(1, 10000):
+for i in range(1, 1000):
     ws.write(i, 0, i)
     ws.write(i, 1, uniform(-40.0, 40.0))
     ws.write(i, 2, uniform(-40.0, 40.0))

@@ -54,6 +54,7 @@ function exportToGoogleEarth() {
  */
 // eslint-disable-next-line
 function exportTopology() {
+  alertify.notify("Topology export started...", "success", 5);
   fCall("/inventory/export_topology", "#import-form", function() {
     alertify.notify("Topology successfully exported.", "success", 5);
   });

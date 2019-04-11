@@ -8,7 +8,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.extensions import db
-from eNMS.functions import delete_all, factory, serialize
+from eNMS.functions import delete_all, factory, fetch_all, serialize
 from eNMS.properties import export_properties
 
 
@@ -32,22 +32,29 @@ def object_import(request: dict, file: FileStorage) -> str:
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
                 prop = dict(zip(properties, sheet.row_values(row_index)))
+                prop["dont_update_pools"] = True
                 try:
                     factory(obj_type, **prop).serialized
                 except Exception as e:
                     info(f"{str(prop)} could not be imported ({str(e)})")
                     result = "Partial import (see logs)."
             db.session.commit()
+    for pool in fetch_all("Pool"):
+        pool.compute_pool()
+    db.session.commit()
     return result
 
 
 def object_export(request: dict, path_app: PosixPath) -> bool:
     workbook = Workbook()
+    filename = request["export_filename"]
+    if "." not in filename:
+        filename += ".xls"
     for obj_type in ("Device", "Link"):
         sheet = workbook.add_sheet(obj_type)
         for index, property in enumerate(export_properties[obj_type]):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(serialize(obj_type), 1):
                 sheet.write(obj_index, index, obj[property])
-    workbook.save(path_app / "projects" / f'{request["export_filename"]}.xls')
+    workbook.save(path_app / "projects" / filename)
     return True

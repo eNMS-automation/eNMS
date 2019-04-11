@@ -161,6 +161,10 @@ class Link(Object):
         backref=backref("destination", cascade="all, delete-orphan"),
     )
     destination_name = association_proxy("destination", "name")
+    source_longitude = association_proxy("source", "longitude")
+    source_latitude = association_proxy("source", "latitude")
+    destination_longitude = association_proxy("destination", "longitude")
+    destination_latitude = association_proxy("destination", "latitude")
     pools = relationship("Pool", secondary=pool_link_table, back_populates="links")
 
     def __init__(self, **kwargs: Any) -> None:
@@ -291,9 +295,3 @@ class Pool(AbstractPool):
             return
         self.devices = list(filter(self.object_match, Device.query.all()))
         self.links = list(filter(self.object_match, Link.query.all()))
-
-    def filter_objects(self) -> Dict[str, List[dict]]:
-        return {
-            "devices": [device.serialized for device in self.devices],
-            "links": [link.serialized for link in self.links],
-        }

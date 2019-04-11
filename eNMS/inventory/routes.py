@@ -10,7 +10,16 @@ from subprocess import Popen
 from typing import Dict, List
 
 from eNMS.extensions import db
-from eNMS.functions import factory, fetch, fetch_all, get, get_one, objectify, post
+from eNMS.functions import (
+    factory,
+    fetch,
+    fetch_all,
+    fetch_properties,
+    get,
+    get_one,
+    objectify,
+    post,
+)
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
     AddDevice,
@@ -158,7 +167,19 @@ def save_pool_objects(pool_id: int) -> dict:
 
 @post(bp, "/pool_objects/<int:pool_id>", "View")
 def filter_pool_objects(pool_id: int) -> Dict[str, List[dict]]:
-    return fetch("Pool", id=pool_id).filter_objects()
+    return {
+        "links": fetch_properties(
+            "Device",
+            (
+                "id",
+                "source_longitude",
+                "source_latitude",
+                "destination_longitude",
+                "destination_latitude",
+            ),
+        ),
+        "devices": fetch_properties("Device", ("id", "name", "latitude", "longitude")),
+    }
 
 
 @post(bp, "/update_pool/<pool_id>", "Edit")

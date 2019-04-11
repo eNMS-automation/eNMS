@@ -22,12 +22,12 @@ def fetch(model: str, **kwargs: Any) -> db.Model:
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 
-def fetch_properties(model: str, **properties: Any) -> List[dict]:
+def fetch_properties(model: str, properties: List[str]) -> List[dict]:
     properties = [getattr(classes[model], property) for property in properties]
-    return db.session.query.with_entities(*properties).all()
+    return db.session.query(*properties).all()
 
 
-def fetch_all(model: str) -> List[db.Model]:
+def fetch_all(model: str) -> Tuple[db.Model]:
     return classes[model].query.all()
 
 

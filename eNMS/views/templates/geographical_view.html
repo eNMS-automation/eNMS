@@ -11,10 +11,6 @@
     <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   {% endif %}
   <link href="{{ url_for('views_blueprint.static', filename='view.css') }}" rel="stylesheet">
-  <style>
-    #map { height:90vh; }
-    #network { height:90vh; }
-  </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -52,8 +48,8 @@
               {% endif %}
               <div class="flip-container">
                 <div class="flipper">
-                  <div class="back" id="earth"></div>
-                  <div class="front" id="map"></div>
+                  <div class="back" id="earth" style="height:100%;"></div>
+                  <div class="front" id="map" style="height:100%;"></div>
                 </div>
               </div>
               <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10vw;">

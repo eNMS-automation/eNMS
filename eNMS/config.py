@@ -87,9 +87,6 @@ class Config(object):
     # Pool Filter Parameter
     POOL_FILTER = environ.get("POOL_FILTER", "All objects")
 
-    # Database
-    SQLITE_WAL_MODE = int(environ.get("SQLITE_WAL_MODE", False))
-
 
 class DebugConfig(Config):
     DEBUG = True

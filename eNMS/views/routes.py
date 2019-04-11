@@ -9,9 +9,9 @@ from eNMS.inventory.forms import (
     AddPoolForm,
     DeviceAutomationForm,
     GottyConnectionForm,
+    PoolRestrictionForm,
 )
 from eNMS.views import bp
-from eNMS.views.forms import ViewForm
 
 
 @get(bp, "/<view_type>_view", "View")
@@ -27,9 +27,9 @@ def view(view_type: str) -> dict:
         subtype_sizes=subtype_sizes,
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
+        pool_restriction_form=PoolRestrictionForm(request.form),
         view="2D",
         view_type=view_type,
-        view_form=ViewForm(request.form),
     )
 
 

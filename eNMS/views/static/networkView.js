@@ -20,11 +20,11 @@ currentView: false
  */
 // eslint-disable-next-line
 function updateView() {
-  $("#pool-filter").change();
+  $("#restrict-pool").change();
 }
 
-$("#pool-filter").on("change", function() {
-  call(`/inventory/pool_objects/${this.value}`, function(objects) {
+$("#restrict-pool").on("change", function() {
+  fCall("/inventory/pool_objects", "#pool-restriction-form", function(objects) {
     deleteAll();
     objects.devices.map((d) => createNode(d, "device"));
     objects.links.map(createLink);
@@ -46,5 +46,6 @@ const action = {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
+  $("#restrict-pool").selectpicker("selectAll");
   switchView(currentView);
 })();

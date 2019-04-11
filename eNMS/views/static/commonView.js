@@ -295,3 +295,8 @@ $("body").contextMenu({
     selectedObject = null;
   },
 });
+
+(function() {
+  convertSelect("#restrict-pool");
+})();
+

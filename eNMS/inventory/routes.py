@@ -9,18 +9,9 @@ from simplekml import Kml
 from subprocess import Popen
 from typing import Dict, List
 
+from eNMS.classes import classes
 from eNMS.extensions import db
-from eNMS.functions import (
-    factory,
-    fetch,
-    fetch_all,
-    fetch_properties,
-    get,
-    get_one,
-    load_properties,
-    objectify,
-    post,
-)
+from eNMS.functions import factory, fetch, fetch_all, get, get_one, objectify, post
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
     AddDevice,
@@ -166,13 +157,27 @@ def save_pool_objects(pool_id: int) -> dict:
     return pool.serialized
 
 
-@post(bp, "/pool_objects/<int:pool_id>", "View")
-def filter_pool_objects(pool_id: int) -> Dict[str, List[dict]]:
+@post(bp, "/pool_objects", "View")
+def filter_pool_objects() -> Dict[str, List[dict]]:
+    model = classes["Device"]
+    filtered = (
+        db.session.query(
+            *[
+                getattr(model, property)
+                for property in ("id", "subtype", "name", "latitude", "longitude")
+            ]
+        ).filter(
+            model.pools.any(
+                classes["pool"].id.in_(
+                    [int(pool_id) for pool_id in request.form["pools"] if pool_id]
+                )
+            )
+        )
+    ).all()
+    print(filtered)
     return {
         "links": [link.view_properties for link in fetch_all("Link")],
-        "devices": load_properties(
-            "Device", ("id", "subtype", "name", "latitude", "longitude")
-        ),
+        "devices": filtered,
     }
 
 

@@ -30,8 +30,8 @@ function deviceToNode(device) {
 function linkToEdge(link) {
   return {
     id: link.id,
-    from: link.source.id,
-    to: link.destination.id,
+    from: link.source_id,
+    to: link.destination_id,
   };
 }
 

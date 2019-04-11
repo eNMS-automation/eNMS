@@ -116,6 +116,7 @@ class PoolObjectsForm(FlaskForm):
 
 
 class PoolRestrictionForm(FlaskForm):
+    list_fields = HiddenField(default="pools")
     pools = MultipleObjectField("Pool")
 
 

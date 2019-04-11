@@ -19,61 +19,62 @@
   {% include 'device_modal.html' %}
   {% include 'pool_modal.html' %}
   {% include 'connection_parameters_modal.html' %}
-  <form id="view-form" method="post">
-    <input id="view-type" name="view" type="hidden">
-    <ul id="contextMenu" class="dropdown-menu" role="menu">
-      <li class="menu dropdown-submenu geo-menu">
-        <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
-        <ul class="dropdown-menu">
-          <li><a tabindex="-1" href="#">Open Street Map</a></li>
-          <li><a tabindex="-1" href="#">Google Maps</a></li>
-          <li><a tabindex="-1" href="#">NASA</a></li>
-        </ul>
-      </li>
-      <li class="menu network-menu insite-menu"><a tabindex="-1" href="#">Display sites</a></li>
-      <li class="menu rc-site-menu"><a tabindex="-1" href="#">Pool properties</a></li>
-      <li class="menu rc-site-menu"><a tabindex="-1" href="#">Enter site</a></li>
-      <li class="menu rc-device-menu"><a tabindex="-1" href="#">Device properties</a></li>
-      <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
-      <li class="menu rc-device-menu"><a tabindex="-1" href="#">Automation</a></li>
-      <li class="menu rc-link-menu"><a tabindex="-1" href="#">Link properties</a></li>
-    </ul>
-    <div class="right_col" role="main">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_content">
-              {% if view_type == 'site' %}
-                <div align='center' id="network"></div>
-              {% endif %}
-              <div class="flip-container">
-                <div class="flipper">
-                  <div class="back" id="earth" style="height:100%;"></div>
-                  <div class="front" id="map" style="height:100%;"></div>
-                </div>
+  <input id="view-type" name="view" type="hidden">
+  <ul id="contextMenu" class="dropdown-menu" role="menu">
+    <li class="menu dropdown-submenu geo-menu">
+      <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
+      <ul class="dropdown-menu">
+        <li><a tabindex="-1" href="#">Open Street Map</a></li>
+        <li><a tabindex="-1" href="#">Google Maps</a></li>
+        <li><a tabindex="-1" href="#">NASA</a></li>
+      </ul>
+    </li>
+    <li class="menu network-menu insite-menu"><a tabindex="-1" href="#">Display sites</a></li>
+    <li class="menu rc-site-menu"><a tabindex="-1" href="#">Pool properties</a></li>
+    <li class="menu rc-site-menu"><a tabindex="-1" href="#">Enter site</a></li>
+    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Device properties</a></li>
+    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
+    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Automation</a></li>
+    <li class="menu rc-link-menu"><a tabindex="-1" href="#">Link properties</a></li>
+  </ul>
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            {% if view_type == 'site' %}
+              <div align='center' id="network"></div>
+            {% endif %}
+            <div class="flip-container">
+              <div class="flipper">
+                <div class="back" id="earth" style="height:100%;"></div>
+                <div class="front" id="map" style="height:100%;"></div>
               </div>
-              <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10vw;">
-                <div class="btn-group-horizontal btn-block" >
-                  <button id="btn-2D" type="button" class="btn btn-view btn-default" onclick="switchView('2D')">2D</button>
-                  <button id="btn-2DC" type="button" class="btn btn-view btn-default" onclick="switchView('2DC')">Clustered 2D</button>
-                  <button id="btn-3D" type="button" class="btn btn-view btn-default" onclick="switchView('3D')">3D</button>
-                </div>
-              </div>
-              <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
-                <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
-              </div>
-              <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:30px;">
-                <div class="form-group">
-                  {{ view_form.pools(id='pool-filter', class="form-control") }}
-                </div>
-              </div>
-              {{ buttons }}
             </div>
+            <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10vw;">
+              <div class="btn-group-horizontal btn-block" >
+                <button id="btn-2D" type="button" class="btn btn-view btn-default" onclick="switchView('2D')">2D</button>
+                <button id="btn-2DC" type="button" class="btn btn-view btn-default" onclick="switchView('2DC')">Clustered 2D</button>
+                <button id="btn-3D" type="button" class="btn btn-view btn-default" onclick="switchView('3D')">3D</button>
+              </div>
+            </div>
+            <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
+              <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
+            </div>
+            <div class="btn-group-vertical" style="z-index:500; position: absolute; top: 10px; right:40vw;">
+              <form id="pool-restriction-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                {{ pool_restriction_form.list_fields() }}
+                <div class="form-group">
+                  {{ pool_restriction_form.pools(id="restrict-pool", class="form-control") }}
+                </div>
+              </form>
+            </div>
+            {{ buttons }}
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 {% endblock content %}
 
 {% block javascripts %}

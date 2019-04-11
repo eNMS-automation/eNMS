@@ -173,8 +173,8 @@ class Link(Object):
             **{
                 property: getattr(self, property)
                 for property in ("id", "name", "subtype")
-            }
-            ** {
+            },
+            **{
                 f"source_{property}": getattr(self.source, property)
                 for property in node_properties
             },

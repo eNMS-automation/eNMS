@@ -172,7 +172,14 @@ class Job(Base):
             self.completed = self.failed = 0
             db.session.commit()
             logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
+            try:
+                attempt = self.run(
+                    payload, job_from_workflow_targets, targets, workflow
+                )
+            except Exception:
+                stacktrace = chr(10).join(format_exc().splitlines())
+                logs.append(f"FATAL ERROR - RUN ABORTED\n{stacktrace}")
+                results = {"success": False, "result": stacktrace}
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):

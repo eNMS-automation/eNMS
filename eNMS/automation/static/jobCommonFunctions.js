@@ -98,7 +98,6 @@ function refreshResults(firstTime) {
  */
 // eslint-disable-next-line
 function refreshLogs(firstTime, id) {
-  console.log(id);
   if (refreshJob[id]) {
     call(`/automation/get_logs/${id}`, (job) => {
       $(`#logs-${id}`).text(job.logs.join("\n"));
@@ -119,6 +118,7 @@ function showLogs(id) {
   if ($(`#logs-${id}`).length == 0) {
     jsPanel.create({
       theme: "dark filled",
+      border: "medium",
       headerTitle: "Logs",
       position: "center-top 0 58",
       contentSize: "650 600",

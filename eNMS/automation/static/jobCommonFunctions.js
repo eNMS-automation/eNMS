@@ -103,7 +103,7 @@ function refreshLogs(firstTime) {
   }
   if (refresh) {
     call(`/automation/get_logs/${jobId}`, (job) => {
-      $("#logs").text(job.logs.join("\n"));
+      $(`#logs-${jobId}`).text(job.logs.join("\n"));
       if (!job.running) {
         refresh = false;
       }
@@ -119,7 +119,16 @@ function refreshLogs(firstTime) {
 // eslint-disable-next-line
 function showLogs(id) {
   jobId = id;
-  $("#logs-modal").modal("show");
+  jsPanel.create({
+    theme:       'dark',
+    headerTitle: 'my panel #1',
+    position:    'center-top 0 58',
+    contentSize: '450 250',
+    content:     `<pre id="logs-${id}"></pre>`,
+    callback: function () {
+        this.content.style.padding = '20px';
+    },
+  });
   refreshLogs(true);
 }
 

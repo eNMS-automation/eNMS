@@ -11,6 +11,7 @@ from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import exc
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -42,7 +43,7 @@ class Job(Base):
     name = Column(String(255), unique=True)
     description = Column(String(255))
     multiprocessing = Column(Boolean, default=False)
-    max_processes = Column(Integer, default=50)
+    max_processes = Column(Integer, default=5)
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
@@ -172,14 +173,7 @@ class Job(Base):
             self.completed = self.failed = 0
             db.session.commit()
             logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            try:
-                attempt = self.run(
-                    payload, job_from_workflow_targets, targets, workflow
-                )
-            except Exception:
-                stacktrace = chr(10).join(format_exc().splitlines())
-                logs.append(f"FATAL ERROR - RUN ABORTED\n{stacktrace}")
-                results = {"success": False, "result": stacktrace}
+            attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -225,6 +219,7 @@ class Job(Base):
         payload: dict,
         device: Optional[Device] = None,
         workflow: Optional["Workflow"] = None,
+        threaded: bool = False,
     ) -> dict:
         logs = workflow.logs if workflow else self.logs
         try:
@@ -244,13 +239,15 @@ class Job(Base):
             }
         self.completed += 1
         self.failed += 1 - results["success"]
+        if not threaded:
+            db.session.commit()
         return results
 
     def device_run(self, args: Tuple[Device, dict, dict, Optional["Workflow"]]) -> None:
         with controller.app.app_context():
             with session_scope() as session:
                 device, results, payload, workflow = args
-                device_result = self.get_results(payload, device, workflow)
+                device_result = self.get_results(payload, device, workflow, True)
                 session.merge(workflow or self)
                 results["devices"][device.name] = device_result
 

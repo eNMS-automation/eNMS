@@ -15,10 +15,6 @@ let jobId;
 let refresh;
 let refreshJob = {};
 
-$("#results-modal").on("hidden.bs.modal", function() {
-  refresh = false;
-});
-
 /**
  * Open smart wizard.
  * @param {type} type - Service or Workflow.
@@ -61,7 +57,7 @@ function editJob(job) {
 function displayResult(results, id) {
   const value = results[$(`#${id}-display`).val()];
   if (!value) return;
-  $("#results").text(
+  $(`#${id}-results`).text(
     JSON.stringify(
       Object.fromEntries(
         Object.entries(value)
@@ -152,7 +148,13 @@ function showResults(id) {
         panel.content.innerHTML = this.responseText;
         $("#display").prop("id", `${id}-display`);
         $("#compare_with").prop("id", `${id}-compare_with`);
+        $("#results").prop("id", `${id}-results`);
+        $("#btn-clear").prop("id", `${id}-btn-clear`);
+        $("#btn-refresh").prop("id", `${id}-btn-refresh`);
+        $(`#${id}-btn-clear`).click(() => clearResults(id));
+        $(`#${id}-btn-refresh`).click(() => displayResults(id));
         configureCallbacks(id);
+        displayResults(id);
       },
     },
     dragit: {
@@ -160,7 +162,6 @@ function showResults(id) {
       containment: [5, 5, 5, 5],
     },
   });
-  displayResults(id)
 }
 
 /**
@@ -174,16 +175,16 @@ function configureCallbacks(id) {
     console.log("test", id);
     call(`/automation/get_results/${id}`, (results) => {
       displayResult(results, id);
-      $(`#${id}-compare_with`).val($("#display").val());
+      $(`#${id}-compare_with`).val($(`#${id}-display`).val());
     });
   });
   
   $(`#${id}-compare_with`).on("change", function() {
-    $("#results").empty();
+    $(`#${id}-results`).empty();
     const v1 = $(`#${id}-display`).val();
     const v2 = $(`#${id}-compare_with`).val();
     call(`/automation/get_diff/${id}/${v1}/${v2}`, function(data) {
-      $("#results").append(
+      $(`#${id}-results`).append(
         diffview.buildView({
           baseTextLines: data.first,
           newTextLines: data.second,
@@ -203,11 +204,10 @@ function configureCallbacks(id) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function clearResults() {
-  call(`/automation/clear_results/${jobId}`, () => {
-    $("#results").empty();
+function clearResults(id) {
+  call(`/automation/clear_results/${id}`, () => {
+    $(`#${id}-results`).empty();
     alertify.notify("Results cleared.", "success", 5);
-    $("#results-modal").modal("hide");
   });
 }
 

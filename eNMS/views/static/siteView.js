@@ -67,9 +67,12 @@ const action = {
   Automation: deviceAutomationModal,
   "Display sites": () => switchView(currentView),
   "Enter site": enterSite,
-  "2D": () => switchView('2D'),
-  "Clustered 2D": () => switchView('2DC'),
-  "3D": () => switchView('3D'),
+  "2D": partial(switchView, "2D"),
+  "Clustered 2D": partial(switchView, "2DC"),
+  "3D": partial(switchView, "3D"),
+  "Image": partial(changeMarker, "Image"),
+  "Circle": partial(changeMarker, "Circle"),
+  "Circle Marker": partial(changeMarker, "Circle Marker"),
 };
 
 $("#network").contextMenu({

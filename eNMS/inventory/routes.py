@@ -158,7 +158,7 @@ def save_pool_objects(pool_id: int) -> dict:
 
 @post(bp, "/pool_objects/<int:pool_id>", "View")
 def filter_pool_objects(pool_id: int = None) -> Dict[str, List[dict]]:
-    return get_pools_devices(fetch("Pool", id=pool_id))
+    return get_pools_devices(pool_id)
 
 
 @post(bp, "/pools_objects", "View")

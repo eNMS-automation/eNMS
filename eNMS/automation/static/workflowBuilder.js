@@ -312,27 +312,14 @@ function savePositions() {
   });
 }
 
-/**
- * Show workflow results
- */
-function showWorkflowResults() {
-  showResults(workflow.id);
-}
-
-/**
- * Edit Workflow
- */
-function editWorkflow() {
-  showTypeModal("workflow", workflow.id);
-}
-
 const action = {
   "Run Workflow": runWorkflow,
   Edit: editService,
   Run: runJob,
   Results: showResults,
-  "Edit Workflow": editWorkflow,
-  "Workflow Results": showWorkflowResults,
+  "Edit Workflow": () => showTypeModal("workflow", workflow.id),
+  "Workflow Results": () => showResults(workflow.id),
+  "Workflow Logs": () => showLogs(workflow.id),
   "Add Service or Workflow": partial(showModal, "add-job"),
   Delete: deleteSelection,
   "Create 'Success' edge": partial(switchMode, "success"),

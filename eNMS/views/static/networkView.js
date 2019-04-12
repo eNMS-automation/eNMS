@@ -45,9 +45,9 @@ const action = {
   "2D": partial(switchView, "2D"),
   "Clustered 2D": partial(switchView, "2DC"),
   "3D": partial(switchView, "3D"),
-  "Image": () => changeMarker("Image"),
-  "Circle": () => changeMarker("Circle"),
-  "Circle Marker": () => changeMarker("Circle Marker"),
+  "Image": partial(changeMarker, "Image"),
+  "Circle": partial(changeMarker, "Circle"),
+  "Circle Marker": partial(changeMarker, "Circle Marker"),
 };
 
 (function() {

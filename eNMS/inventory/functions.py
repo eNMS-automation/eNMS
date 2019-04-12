@@ -18,6 +18,33 @@ def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
     return allowed_syntax and allowed_extension
 
 
+def get_pools_devices(*pools: List[int]) -> Dict[str, List[dict]]:
+    return {
+        "devices": (
+            db.session.query(
+                *[
+                    getattr(classes["Device"], property)
+                    for property in ("id", "subtype", "name", "latitude", "longitude")
+                ]
+            ).filter(
+                classes["Device"].pools.any(
+                    classes["pool"].id.in_([int(pool) for pool in pools if pool])
+                )
+            )
+        ).all(),
+        "links": [
+            link.view_properties
+            for link in db.session.query(classes["Link"])
+            .filter(
+                classes["Link"].pools.any(
+                    classes["pool"].id.in_([int(pool) for pool in pools if pool])
+                )
+            )
+            .all()
+        ],
+    }
+
+
 def object_import(request: dict, file: FileStorage) -> str:
     if request["replace"]:
         delete_all("Device")

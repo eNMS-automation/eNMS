@@ -28,7 +28,7 @@ from eNMS.inventory.forms import (
     PoolObjectsForm,
     PoolRestrictionForm,
 )
-from eNMS.inventory.functions import object_export, object_import
+from eNMS.inventory.functions import get_pools_devices, object_export, object_import
 from eNMS.properties import (
     device_configuration_properties,
     device_table_properties,
@@ -159,34 +159,7 @@ def save_pool_objects(pool_id: int) -> dict:
 
 @post(bp, "/pool_objects", "View")
 def filter_pool_objects() -> Dict[str, List[dict]]:
-    return {
-        "devices": (
-            db.session.query(
-                *[
-                    getattr(classes["Device"], property)
-                    for property in ("id", "subtype", "name", "latitude", "longitude")
-                ]
-            ).filter(
-                classes["Device"].pools.any(
-                    classes["pool"].id.in_(
-                        [int(pool_id) for pool_id in request.form["pools"] if pool_id]
-                    )
-                )
-            )
-        ).all(),
-        "links": [
-            link.view_properties
-            for link in db.session.query(classes["Link"])
-            .filter(
-                classes["Link"].pools.any(
-                    classes["pool"].id.in_(
-                        [int(pool_id) for pool_id in request.form["pools"] if pool_id]
-                    )
-                )
-            )
-            .all()
-        ],
-    }
+    return get_pools_devices(*request.form["pools"])
 
 
 @post(bp, "/update_pool/<pool_id>", "Edit")

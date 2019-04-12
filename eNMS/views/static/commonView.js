@@ -23,7 +23,7 @@ let markersArray = [];
 let polylinesArray = [];
 let dimension = view.substring(0, 2);
 let currentView = view;
-let markerType = "image";
+let markerType = "Image";
 
 const map = L.map("map", { preferCanvas: true }).setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -136,6 +136,7 @@ function switchLayer(layer) {
 // eslint-disable-next-line
 function changeMarker(type) {
   markerType = type;
+  console.log(markerType);
   switchView(currentView);
 }
 
@@ -159,16 +160,20 @@ function createNode(node, nodeType) {
       } else {
         marker.icon = window["icon_site"];
       }
+      marker.setIcon(marker.icon);
     }
-    marker.setIcon(marker.icon);
     marker.bindTooltip(node["name"], { permanent: false });
   } else {
-    marker = WE.marker(
-      [node.latitude, node.longitude],
-      `static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
-      15,
-      10
-    ).addTo(earth);
+    if (markerType == "Image") {
+      marker = WE.marker(
+        [node.latitude, node.longitude],
+        `static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
+        15,
+        10
+      ).addTo(earth);
+    } else {
+      marker = WE.marker([node.latitude, node.longitude]).addTo(earth);
+    }
     marker.on("mouseover", function(e) {
       $("#name-box").text(node.name);
       $("#name-box").show();

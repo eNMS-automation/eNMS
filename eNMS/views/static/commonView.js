@@ -23,6 +23,7 @@ let markersArray = [];
 let polylinesArray = [];
 let dimension = view.substring(0, 2);
 let currentView = view;
+let markerType = "image";
 
 const map = L.map("map", { preferCanvas: true }).setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -129,6 +130,16 @@ function switchLayer(layer) {
 }
 
 /**
+ * Change the type of marker.
+ * @param {type} type - Type of marker.
+ */
+// eslint-disable-next-line
+function changeMarker(type) {
+  markerType = type;
+  switchView(currentView);
+}
+
+/**
  * Create a node (device or site).
  * @param {node} node - Device or Pool.
  * @param {nodeType} nodeType - Device or Pool.
@@ -137,13 +148,19 @@ function switchLayer(layer) {
 function createNode(node, nodeType) {
   let marker = null;
   if (currentView == "2D" || currentView == "2DC") {
-    marker = L.circleMarker([node.latitude, node.longitude]);
-    if (nodeType === "device") {
-      marker.icon = window[`icon_${node.subtype}`] || routerIcon;
+    if (markerType == "Circle Marker") {
+      marker = L.circleMarker([node.latitude, node.longitude]);
+    } else if (markerType == "Circle") {
+      marker = L.circle([node.latitude, node.longitude]);
     } else {
-      marker.icon = window["icon_site"];
+      marker = L.marker([node.latitude, node.longitude]);
+      if (nodeType === "device") {
+        marker.icon = window[`icon_${node.subtype}`] || routerIcon;
+      } else {
+        marker.icon = window["icon_site"];
+      }
     }
-    // marker.setIcon(marker.icon);
+    marker.setIcon(marker.icon);
     marker.bindTooltip(node["name"], { permanent: false });
   } else {
     marker = WE.marker(

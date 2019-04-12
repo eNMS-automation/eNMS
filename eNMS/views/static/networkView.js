@@ -42,6 +42,12 @@ const action = {
   "Pool properties": (p) => showTypeModal("pool", p),
   Connect: connectionParametersModal,
   Automation: deviceAutomationModal,
+  "2D": partial(switchView, "2D"),
+  "Clustered 2D": partial(switchView, "2DC"),
+  "3D": partial(switchView, "3D"),
+  "Image": () => changeMarker("Image"),
+  "Circle": () => changeMarker("Circle"),
+  "Circle Marker": () => changeMarker("Circle Marker"),
 };
 
 (function() {

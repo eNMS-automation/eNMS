@@ -29,7 +29,7 @@ function displaySites() {
       }
     }
   });
-  $(".geo-menu,.rc-site-menu").show();
+  $(".geo-menu").show();
 }
 
 /**

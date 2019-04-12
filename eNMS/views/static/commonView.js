@@ -294,6 +294,11 @@ map.on("click", function(e) {
   selectedObject = null;
 });
 
+earth.on("click", function(e) {
+  $(".menu").hide();
+  $(".geo-menu").show();
+});
+
 map.on("contextmenu", function() {
   if (!selectedObject) {
     $(".menu").hide();

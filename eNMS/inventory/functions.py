@@ -1,6 +1,6 @@
 from logging import info
 from pathlib import PosixPath
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Union
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -19,7 +19,7 @@ def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
     return allowed_syntax and allowed_extension
 
 
-def get_pools_devices(*pools: List[int]) -> Dict[str, List[dict]]:
+def get_pools_devices(*pools: Union[str, int]) -> Dict[str, List[dict]]:
     return {
         "devices": (
             db.session.query(

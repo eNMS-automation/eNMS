@@ -1,6 +1,7 @@
 /*
 global
 call: false
+changeMarker: false
 connectionParametersModal: false
 createNode: false
 currentView: true
@@ -70,8 +71,8 @@ const action = {
   "2D": partial(switchView, "2D"),
   "Clustered 2D": partial(switchView, "2DC"),
   "3D": partial(switchView, "3D"),
-  "Image": partial(changeMarker, "Image"),
-  "Circle": partial(changeMarker, "Circle"),
+  Image: partial(changeMarker, "Image"),
+  Circle: partial(changeMarker, "Circle"),
   "Circle Marker": partial(changeMarker, "Circle Marker"),
 };
 

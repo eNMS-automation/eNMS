@@ -167,7 +167,7 @@ class Link(Object):
         self.update(**kwargs)
 
     @property
-    def view_properties(self) -> None:
+    def view_properties(self) -> Dict[str, Any]:
         node_properties = ("id", "longitude", "latitude")
         return {
             **{

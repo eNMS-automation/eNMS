@@ -1,12 +1,14 @@
 /*
 global
-call: false
+changeMarker: false
 connectionParametersModal: false
+convertSelect: false
 createNode: false
 createLink: false
 deviceAutomationModal: false
 deleteAll: false
 doc: false
+fCall: false
 partial: false
 showModal: false
 showTypeModal: false
@@ -24,7 +26,9 @@ function updateView() {
 }
 
 $("#restrict-pool").on("change", function() {
-  fCall("/inventory/pools_objects", "#pool-restriction-form", function(objects) {
+  fCall("/inventory/pools_objects", "#pool-restriction-form", function(
+    objects
+  ) {
     deleteAll();
     objects.devices.map((d) => createNode(d, "device"));
     objects.links.map(createLink);
@@ -45,8 +49,8 @@ const action = {
   "2D": partial(switchView, "2D"),
   "Clustered 2D": partial(switchView, "2DC"),
   "3D": partial(switchView, "3D"),
-  "Image": partial(changeMarker, "Image"),
-  "Circle": partial(changeMarker, "Circle"),
+  Image: partial(changeMarker, "Image"),
+  Circle: partial(changeMarker, "Circle"),
   "Circle Marker": partial(changeMarker, "Circle Marker"),
 };
 

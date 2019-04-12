@@ -136,7 +136,6 @@ function switchLayer(layer) {
 // eslint-disable-next-line
 function changeMarker(type) {
   markerType = type;
-  console.log(markerType);
   switchView(currentView);
 }
 
@@ -211,7 +210,10 @@ function createNode(node, nodeType) {
 function createLink(link) {
   if (currentView == "2D" || currentView == "2DC") {
     let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
-    let pointB = new L.LatLng(link.destination_latitude, link.destination_longitude);
+    let pointB = new L.LatLng(
+      link.destination_latitude,
+      link.destination_longitude
+    );
     const pointList = [pointA, pointB];
     const polyline = new L.PolylineClusterable(pointList, {
       color: link_colors[link.subtype],

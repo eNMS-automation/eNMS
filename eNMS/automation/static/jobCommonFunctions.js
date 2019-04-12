@@ -187,21 +187,6 @@ function clearResults() {
   });
 }
 
-/**
- * Detach window
- */
-// eslint-disable-next-line
-function detachWindow() {
-  window
-    .open(
-      `/automation/detach_results/${jobId}`,
-      "Results",
-      "height=500,width=800"
-    )
-    .focus();
-  $("#results-modal").modal("hide");
-}
-
 $("#display").on("change", function() {
   call(`/automation/get_results/${jobId}`, (results) => {
     displayResult(results);

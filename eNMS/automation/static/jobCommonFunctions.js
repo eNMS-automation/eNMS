@@ -9,7 +9,7 @@ getWorkflowState: false
 */
 
 let jobId;
-let refresh;
+let refreshJob = {};
 
 $("#results-modal,#logs-modal").on("hidden.bs.modal", function() {
   refresh = false;
@@ -97,18 +97,16 @@ function refreshResults(firstTime) {
  * @param {firstTime} firstTime - First time.
  */
 // eslint-disable-next-line
-function refreshLogs(firstTime) {
-  if (firstTime) {
-    refresh = true;
-  }
-  if (refresh) {
-    call(`/automation/get_logs/${jobId}`, (job) => {
-      $(`#logs-${jobId}`).text(job.logs.join("\n"));
-      if (!job.running) {
-        refresh = false;
+function refreshLogs(firstTime, id) {
+  console.log(id);
+  if (refreshJob[id]) {
+    call(`/automation/get_logs/${id}`, (job) => {
+      $(`#logs-${id}`).text(job.logs.join("\n"));
+      if (!job.running || $(`#logs-${id}`).length == 0) {
+        refreshJob[id] = false;
       }
     });
-    setTimeout(refreshLogs, 500);
+    setTimeout(partial(refreshLogs, false, id), 500);
   }
 }
 
@@ -118,7 +116,6 @@ function refreshLogs(firstTime) {
  */
 // eslint-disable-next-line
 function showLogs(id) {
-  jobId = id;
   if ($(`#logs-${id}`).length == 0) {
     jsPanel.create({
       theme: "dark filled",
@@ -132,7 +129,8 @@ function showLogs(id) {
       }
     });
   }
-  refreshLogs(true);
+  refreshJob[id] = true;
+  refreshLogs(true, id);
 }
 
 /**

@@ -27,7 +27,9 @@ function openWizard(type) {
     transitionEffect: "none",
   });
   if (!$(`#${type}-id`).val()) {
-    editService();
+    if (type == "service") {
+      editService();
+    }
     $(`#${type}-wizard`).smartWizard("goToStep", 1);
   }
   $(".buttonNext").addClass("btn btn-success");

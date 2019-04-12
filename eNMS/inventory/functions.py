@@ -70,6 +70,7 @@ def object_import(request: dict, file: FileStorage) -> str:
     for pool in fetch_all("Pool"):
         pool.compute_pool()
     db.session.commit()
+    info("Inventory import: Done.")
     return result
 
 

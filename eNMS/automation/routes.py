@@ -96,11 +96,6 @@ def get_logs(id: int) -> dict:
     return {"logs": job.logs, "running": job.is_running}
 
 
-@get(bp, "/job_results", "View")
-def job_results() -> dict:
-    return dict(compare_results_form=CompareResultsForm(request.form))
-
-
 @post(bp, "/get_service/<id_or_cls>", "View")
 def get_service(id_or_cls: str) -> dict:
     service = None

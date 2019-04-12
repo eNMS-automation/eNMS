@@ -11,8 +11,6 @@ partial: false
 showTypeModal: false
 */
 
-let jobId;
-let refresh;
 let refreshJob = {};
 
 /**

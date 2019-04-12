@@ -58,9 +58,8 @@ function editJob(job) {
  * Display result.
  * @param {results} results - Results.
  */
-function displayResult(results) {
-  const value = results[$("#display").val()];
-  console.log(value);
+function displayResult(results, id) {
+  const value = results[$(`#${id}-display`).val()];
   if (!value) return;
   $("#results").text(
     JSON.stringify(
@@ -80,17 +79,17 @@ function displayResult(results) {
  */
 function displayResults(id) {
   call(`/automation/get_results/${id}`, (results) => {
-    $("#display,#compare_with").empty();
+    $(`#${id}-display,#${id}-compare_with`).empty();
     const times = Object.keys(results);
     times.forEach((option) => {
-      $("#display,#compare_with").append(
+      $(`#${id}-display,#${id}-compare_with`).append(
         $("<option></option>")
           .attr("value", option)
           .text(option)
       );
     });
-    $("#display,#compare_with").val(times[times.length - 1]);
-    displayResult(results);
+    $(`#${id}-display,#${id}-compare_with`).val(times[times.length - 1]);
+    displayResult(results, id);
   });
 }
 
@@ -147,13 +146,56 @@ function showResults(id) {
     headerTitle: "Logs",
     position: "center-top 0 58",
     contentSize: "1100 600",
-    contentAjax: "job_results",
+    contentAjax: {
+      url: "job_results",
+      done: function (panel) {
+        panel.content.innerHTML = this.responseText;
+        $("#display").prop("id", `${id}-display`);
+        $("#compare_with").prop("id", `${id}-compare_with`);
+        configureCallbacks(id);
+      },
+    },
     dragit: {
       opacity: 0.7,
       containment: [5, 5, 5, 5],
     },
   });
   displayResults(id)
+}
+
+/**
+ * Configure display & comparison callbacks
+ * @param {id} id - Job id.
+ */
+// eslint-disable-next-line
+function configureCallbacks(id) {
+  console.log(id);
+  $(`#${id}-display`).on("change", function() {
+    console.log("test", id);
+    call(`/automation/get_results/${id}`, (results) => {
+      displayResult(results, id);
+      $(`#${id}-compare_with`).val($("#display").val());
+    });
+  });
+  
+  $(`#${id}-compare_with`).on("change", function() {
+    $("#results").empty();
+    const v1 = $(`#${id}-display`).val();
+    const v2 = $(`#${id}-compare_with`).val();
+    call(`/automation/get_diff/${id}/${v1}/${v2}`, function(data) {
+      $("#results").append(
+        diffview.buildView({
+          baseTextLines: data.first,
+          newTextLines: data.second,
+          opcodes: data.opcodes,
+          baseTextName: `${v1}`,
+          newTextName: `${v2}`,
+          contextSize: null,
+          viewType: 0,
+        })
+      );
+    });
+  });
 }
 
 /**
@@ -168,32 +210,6 @@ function clearResults() {
     $("#results-modal").modal("hide");
   });
 }
-
-$("#display").on("change", function() {
-  call(`/automation/get_results/${jobId}`, (results) => {
-    displayResult(results);
-    $("#compare_with").val($("#display").val());
-  });
-});
-
-$("#compare_with").on("change", function() {
-  $("#results").empty();
-  const v1 = $("#display").val();
-  const v2 = $("#compare_with").val();
-  call(`/automation/get_diff/${jobId}/${v1}/${v2}`, function(data) {
-    $("#results").append(
-      diffview.buildView({
-        baseTextLines: data.first,
-        newTextLines: data.second,
-        opcodes: data.opcodes,
-        baseTextName: `${v1}`,
-        newTextName: `${v2}`,
-        contextSize: null,
-        viewType: 0,
-      })
-    );
-  });
-});
 
 /**
  * Run job.

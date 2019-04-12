@@ -260,11 +260,42 @@ function processInstance(type, instance, dup) {
       $(`#${type}-${property}`).selectpicker("val", value.id);
       $(`#${type}-${property}`).selectpicker("render");
     } else {
+      console.log(`#${type}-${property}`, $(`#${type}-${property}`).length, property, value);
       $(`#${type}-${property}`).val(value);
     }
   }
   if (dup) instance.id = instance.name = "";
-  $(`#edit-${type}`).modal("show");
+  //$(`#edit-${type}`).modal("show");
+}
+
+/**
+ * Display instance modal for editing.
+ * @param {type} type - Type.
+ * @param {id} id - Instance ID.
+ * @param {dup} dup - Edit versus duplicate.
+ */
+// eslint-disable-next-line
+function showTypePanel(type, id, dup) {
+  call(`/get/${type}/${id}`, function(instance) {
+    jsPanel.create({
+      border: "medium",
+      headerTitle: "Logs",
+      position: "center-top 0 58",
+      contentSize: "650 600",
+      contentAjax: {
+        url: "user_form",
+        done: function (panel) {
+          panel.content.innerHTML = this.responseText;
+          console.log($(`#user-name`).length);
+          processInstance(type, instance, dup);
+        },
+      },
+      dragit: {
+        opacity: 0.7,
+        containment: [5, 5, 5, 5],
+      },
+    });
+  });
 }
 
 /**

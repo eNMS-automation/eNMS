@@ -33,7 +33,7 @@ class User(Base, UserMixin):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('user', '{self.id}')">Edit</button>""",
+            onclick="showTypePanel('user', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypeModal('user', '{self.id}', true)">
             Duplicate</button>""",

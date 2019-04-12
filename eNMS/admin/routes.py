@@ -77,6 +77,11 @@ def instance_management() -> dict:
     )
 
 
+@get(bp, "/user_form", "View")
+def user_form() -> dict:
+    return dict(form=AddUser(request.form))
+
+
 @bp.route("/login", methods=["GET", "POST"])
 def login() -> Union[Response, str]:
     if request.method == "POST":

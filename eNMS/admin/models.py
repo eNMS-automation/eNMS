@@ -84,6 +84,8 @@ class Parameters(Base):
     default_longitude = Column(Float)
     default_latitude = Column(Float)
     default_zoom_level = Column(Integer)
+    default_view = Column(String(255))
+    default_marker = Column(String(255))
     git_configurations = Column(String(255))
     git_automation = Column(String(255))
     gotty_start_port = Column(Integer)

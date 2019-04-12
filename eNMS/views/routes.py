@@ -28,7 +28,6 @@ def view(view_type: str) -> dict:
         gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
         pool_restriction_form=PoolRestrictionForm(request.form),
-        view="2D",
         view_type=view_type,
     )
 

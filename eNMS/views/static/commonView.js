@@ -22,8 +22,8 @@ let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
 let dimension = view.substring(0, 2);
-let currentView = view;
-let markerType = "Image";
+let currentView = parameters.default_view;
+let markerType = parameters.default_marker;
 
 const map = L.map("map", { preferCanvas: true }).setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -94,7 +94,6 @@ function switchView(newView) {
   }
   dimension = newDimension;
   currentView = newView;
-
   $(`#btn-${currentView}`).hide();
   if (currentView == "2D") {
     $("#btn-2DC,#btn-3D").show();

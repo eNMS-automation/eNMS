@@ -265,7 +265,7 @@ function processInstance(type, instance, dup) {
     }
   }
   if (dup) instance.id = instance.name = "";
-  //$(`#edit-${type}`).modal("show");
+  $(`#edit-${type}`).modal("show");
 }
 
 /**
@@ -279,7 +279,7 @@ function showTypePanel(type, id, dup) {
   call(`/get/${type}/${id}`, function(instance) {
     jsPanel.create({
       border: "medium",
-      headerTitle: "Logs",
+      headerTitle: type,
       position: "center-top 0 58",
       contentSize: "650 600",
       contentAjax: {
@@ -309,25 +309,6 @@ function showTypeModal(type, id, dup) {
   call(`/get/${type}/${id}`, function(instance) {
     processInstance(type, instance, dup);
   });
-}
-
-/**
- * Save instance.
- * @param {type} type - Type.
- * @param {instance} instance - Object instance.
- * @param {hideModal} hideModal - Hide edit modal after saving.
- */
-function saveInstance(type, instance, hideModal = true) {
-  const title = $(`#title-${type}`)
-    .text()
-    .startsWith("Edit");
-  const mode = title ? "edit" : "create";
-  const message = `${capitalize(type)} '${instance.name}'
-  ${mode == "edit" ? "edited" : "created"}.`;
-  alertify.notify(message, "success", 5);
-  if (hideModal) {
-    $(`#edit-${type}`).modal("hide");
-  }
 }
 
 /**

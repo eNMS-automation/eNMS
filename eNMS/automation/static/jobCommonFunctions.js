@@ -146,7 +146,7 @@ function showResults(id) {
     border: "medium",
     headerTitle: "Logs",
     position: "center-top 0 58",
-    contentSize: "650 600",
+    contentSize: "1100 600",
     contentAjax: "job_results",
     dragit: {
       opacity: 0.7,

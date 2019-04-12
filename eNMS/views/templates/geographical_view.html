@@ -66,8 +66,9 @@
             {% endif %}
             <div class="flip-container">
               <div class="flipper">
-                <div class="back" id="earth"></div>
-                <div class="front" id="map"></div>
+                {% set earth_front = parameters.default_view == "3D" %}
+                <div class="{{ "front" if earth_front else "back" }}" id="earth"></div>
+                <div class="{{ "back" if earth_front else "front" }}" id="map"></div>
               </div>
             </div>
             <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  

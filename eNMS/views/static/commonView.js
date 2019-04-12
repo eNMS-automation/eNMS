@@ -8,7 +8,6 @@ parameters: false
 showTypeModal: false
 subtype_sizes: false
 updateView: false
-view: false
 WE: false
 */
 
@@ -21,8 +20,8 @@ const layers = {
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
-let dimension = view.substring(0, 2);
 let currentView = parameters.default_view;
+let dimension = currentView.substring(0, 2);
 let markerType = parameters.default_marker;
 
 const map = L.map("map", { preferCanvas: true }).setView(

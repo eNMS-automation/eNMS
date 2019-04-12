@@ -206,6 +206,7 @@ function deleteEdge(edgeId) {
  * @return {visJob}.
  */
 function jobToNode(job) {
+  console.log(job.type);
   let color;
   if (job.name == "Start" || job.name == "End") {
     color = "pink";
@@ -314,7 +315,7 @@ function savePositions() {
 
 const action = {
   "Run Workflow": runWorkflow,
-  Edit: editService,
+  Edit: (jobId) => editJob(nodes.get(jobId)),
   Run: runJob,
   Results: showResults,
   "Edit Workflow": () => showTypeModal("workflow", workflow.id),

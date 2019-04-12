@@ -38,6 +38,19 @@ function openWizard(type) {
 }
 
 /**
+ * Show the editing modal for a job.
+ * @param {job} job - Job object.
+ */
+// eslint-disable-next-line
+function editJob(job) {
+  if (job.type == "Workflow") {
+    showTypeModal("workflow", job.id);
+  } else {
+    editService(job.id);
+  }
+}
+
+/**
  * Display result.
  * @param {results} results - Results.
  */

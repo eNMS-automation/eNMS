@@ -67,6 +67,9 @@ const action = {
   Automation: deviceAutomationModal,
   "Display sites": () => switchView(currentView),
   "Enter site": enterSite,
+  "2D": () => switchView('2D'),
+  "Clustered 2D": () => switchView('2DC'),
+  "3D": () => switchView('3D'),
 };
 
 $("#network").contextMenu({

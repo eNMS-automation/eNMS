@@ -25,6 +25,14 @@
   {% include 'connection_parameters_modal.html' %}
   <ul id="contextMenu" class="dropdown-menu" role="menu">
     <li class="menu dropdown-submenu geo-menu">
+      <a class="menu-submenu menu-layer" tabindex="-1" href="#">Dimension<span class="caret-right"></span></a>
+      <ul class="dropdown-menu">
+        <li><a tabindex="-1" href="#">2D</a></li>
+        <li><a tabindex="-1" href="#">Clustered 2D</a></li>
+        <li><a tabindex="-1" href="#">3D</a></li>
+      </ul>
+    </li>
+    <li class="menu dropdown-submenu geo-menu">
       <a class="menu-submenu menu-layer" tabindex="-1" href="#">Tile layer<span class="caret-right"></span></a>
       <ul class="dropdown-menu">
         <li><a tabindex="-1" href="#">Open Street Map</a></li>
@@ -52,13 +60,6 @@
               <div class="flipper">
                 <div class="back" id="earth"></div>
                 <div class="front" id="map"></div>
-              </div>
-            </div>
-            <div class="panel-group" style="z-index:500; position: absolute; top: 10px; left:10vw;">
-              <div class="btn-group-horizontal btn-block" >
-                <button id="btn-2D" type="button" class="btn btn-view btn-default" onclick="switchView('2D')">2D</button>
-                <button id="btn-2DC" type="button" class="btn btn-view btn-default" onclick="switchView('2DC')">Clustered 2D</button>
-                <button id="btn-3D" type="button" class="btn btn-view btn-default" onclick="switchView('3D')">3D</button>
               </div>
             </div>
             <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  

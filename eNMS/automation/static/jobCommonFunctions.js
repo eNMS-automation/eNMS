@@ -60,6 +60,7 @@ function editJob(job) {
  */
 function displayResult(results) {
   const value = results[$("#display").val()];
+  console.log(value);
   if (!value) return;
   $("#results").text(
     JSON.stringify(
@@ -77,8 +78,8 @@ function displayResult(results) {
 /**
  * Display results.
  */
-function displayResults() {
-  call(`/automation/get_results/${jobId}`, (results) => {
+function displayResults(id) {
+  call(`/automation/get_results/${id}`, (results) => {
     $("#display,#compare_with").empty();
     const times = Object.keys(results);
     times.forEach((option) => {
@@ -159,10 +160,18 @@ function showLogs(id) {
  */
 // eslint-disable-next-line
 function showResults(id) {
-  jobId = id;
-  $("#results").empty();
-  displayResults();
-  $("#results-modal").modal("show");
+  jsPanel.create({
+    border: "medium",
+    headerTitle: "Logs",
+    position: "center-top 0 58",
+    contentSize: "650 600",
+    contentAjax: "job_results",
+    dragit: {
+      opacity: 0.7,
+      containment: [5, 5, 5, 5],
+    },
+  });
+  displayResults(id)
 }
 
 /**

@@ -35,6 +35,11 @@ from eNMS.automation.forms import (
 )
 
 
+@get(bp, "/job_results", "View")
+def job_results() -> dict:
+    return dict(compare_results_form=CompareResultsForm(request.form))
+
+
 @get(bp, "/service_management", "View")
 def service_management() -> dict:
     return dict(

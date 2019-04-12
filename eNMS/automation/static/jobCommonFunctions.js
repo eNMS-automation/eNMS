@@ -119,16 +119,19 @@ function refreshLogs(firstTime) {
 // eslint-disable-next-line
 function showLogs(id) {
   jobId = id;
-  jsPanel.create({
-    theme:       'dark',
-    headerTitle: 'my panel #1',
-    position:    'center-top 0 58',
-    contentSize: '450 250',
-    content:     `<pre id="logs-${id}"></pre>`,
-    callback: function () {
-        this.content.style.padding = '20px';
-    },
-  });
+  if ($(`#logs-${id}`).length == 0) {
+    jsPanel.create({
+      theme: "dark filled",
+      headerTitle: "Logs",
+      position: "center-top 0 58",
+      contentSize: "650 600",
+      content: `<pre id="logs-${id}" style="border: 0; background-color: transparent;"></pre>`,
+      dragit: {
+        opacity: 0.7,
+        containment: [5, 5, 5, 5],
+      }
+    });
+  }
   refreshLogs(true);
 }
 

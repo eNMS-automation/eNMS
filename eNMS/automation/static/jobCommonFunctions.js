@@ -95,24 +95,6 @@ function displayResults(id) {
 }
 
 /**
- * Refresh results.
- * @param {firstTime} firstTime - First time.
- */
-// eslint-disable-next-line
-function refreshResults(firstTime) {
-  if (firstTime) {
-    refresh = !refresh;
-    $("#refresh-results-button").text(
-      refresh ? "Stop periodic Refresh" : "Trigger periodic Refresh"
-    );
-  }
-  if (refresh) {
-    displayResults();
-    setTimeout(refreshResults, 5000);
-  }
-}
-
-/**
  * Display logs.
  * @param {firstTime} firstTime - First time.
  */

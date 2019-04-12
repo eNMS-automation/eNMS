@@ -35,11 +35,6 @@ from eNMS.automation.forms import (
 )
 
 
-@get(bp, "/job_results", "View")
-def job_results() -> dict:
-    return dict(compare_results_form=CompareResultsForm(request.form))
-
-
 @get(bp, "/service_management", "View")
 def service_management() -> dict:
     return dict(
@@ -99,6 +94,11 @@ def get_results(id: int) -> dict:
 def get_logs(id: int) -> dict:
     job = fetch("Job", id=id)
     return {"logs": job.logs, "running": job.is_running}
+
+
+@get(bp, "/job_results", "View")
+def job_results() -> dict:
+    return dict(compare_results_form=CompareResultsForm(request.form))
 
 
 @post(bp, "/get_service/<id_or_cls>", "View")

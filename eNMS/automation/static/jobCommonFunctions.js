@@ -142,26 +142,37 @@ function showResults(id) {
     headerTitle: "Logs",
     position: "center-top 0 58",
     contentSize: "1100 600",
-    contentAjax: {
-      url: "job_results",
-      done: function (panel) {
-        panel.content.innerHTML = this.responseText;
-        $("#display").prop("id", `${id}-display`);
-        $("#compare_with").prop("id", `${id}-compare_with`);
-        $("#results").prop("id", `${id}-results`);
-        $("#btn-clear").prop("id", `${id}-btn-clear`);
-        $("#btn-refresh").prop("id", `${id}-btn-refresh`);
-        $(`#${id}-btn-clear`).click(() => clearResults(id));
-        $(`#${id}-btn-refresh`).click(() => displayResults(id));
-        configureCallbacks(id);
-        displayResults(id);
-      },
-    },
+    content: `
+      <div class="modal-body">
+        <button class="btn btn-default btn-file" onclick="clearResults(${id})" style="width:100%;">
+          Clear
+        </button>
+        <button class="btn btn-default btn-file" onclick="displayResults(${id})" style="width:100%;">
+          Refresh
+        </button><br><br>
+        <label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
+        <div class="col-md-10 col-sm-10 col-xs-12">
+          <select class="form-control" id="${id}-display" name="display"></select>
+        </div>
+        <label class="control-label col-md-2 col-sm-2 col-xs-12">Compare With :</label>
+        <div class="col-md-10 col-sm-10 col-xs-12">
+          <select class="form-control" id="${id}-compare_with" name="compare_with"></select>
+        </div>
+        <hr><hr><hr><hr>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+          <pre id="${id}-results"></pre>
+          </div>
+        </div>
+      </div>
+    `,
     dragit: {
       opacity: 0.7,
       containment: [5, 5, 5, 5],
     },
   });
+  configureCallbacks(id);
+  displayResults(id);
 }
 
 /**
@@ -170,9 +181,7 @@ function showResults(id) {
  */
 // eslint-disable-next-line
 function configureCallbacks(id) {
-  console.log(id);
   $(`#${id}-display`).on("change", function() {
-    console.log("test", id);
     call(`/automation/get_results/${id}`, (results) => {
       displayResult(results, id);
       $(`#${id}-compare_with`).val($(`#${id}-display`).val());
@@ -206,7 +215,7 @@ function configureCallbacks(id) {
 // eslint-disable-next-line
 function clearResults(id) {
   call(`/automation/clear_results/${id}`, () => {
-    $(`#${id}-results`).empty();
+    $(`#${id}-results,#${id}-compare_with,#${id}-display`).empty();
     alertify.notify("Results cleared.", "success", 5);
   });
 }

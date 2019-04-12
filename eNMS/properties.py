@@ -274,6 +274,8 @@ parameters_public_properties: List[str] = [
     "default_longitude",
     "default_latitude",
     "default_zoom_level",
+    "default_view",
+    "default_marker",
     "git_configurations",
     "git_automation",
     "gotty_start_port",

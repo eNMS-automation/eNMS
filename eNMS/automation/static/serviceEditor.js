@@ -39,6 +39,7 @@ function editService(id, duplicate) {
       const prop = type == "boolean" ? r.boolean_properties : r.list_properties;
       fields.val(`${fields.val()},${prop}`);
     }
+    console.log(r.form);
     $("#html-form").html(r.form);
     if (r.service) processInstance("service", r.service, duplicate);
   });
@@ -49,7 +50,7 @@ function editService(id, duplicate) {
  * @param {run} run - Run after saving.
  */
 // eslint-disable-next-line
-function saveService(run = false) {
+function saveService(run) {
   fCall(`/update/${$("#service-type").val()}`, "#edit-service-form", function(
     service
   ) {

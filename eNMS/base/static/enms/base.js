@@ -238,7 +238,6 @@ function showCreateModal(type) {
 function processInstance(type, instance, dup) {
   const mode = dup ? "Duplicate" : "Edit";
   $(`#title-${type}`).text(`${mode} ${type} '${instance.name}'`);
-  if (dup) instance.id = instance.name = "";
   for (const [property, value] of Object.entries(instance)) {
     const propertyType = propertyTypes[property] || "str";
     if (propertyType.includes("bool") || property.includes("regex")) {
@@ -264,6 +263,7 @@ function processInstance(type, instance, dup) {
       $(`#${type}-${property}`).val(value);
     }
   }
+  if (dup) instance.id = instance.name = "";
   $(`#edit-${type}`).modal("show");
 }
 

@@ -24,7 +24,7 @@ function updateView() {
 }
 
 $("#restrict-pool").on("change", function() {
-  fCall("/inventory/pool_objects", "#pool-restriction-form", function(objects) {
+  fCall("/inventory/pools_objects", "#pool-restriction-form", function(objects) {
     deleteAll();
     objects.devices.map((d) => createNode(d, "device"));
     objects.links.map(createLink);

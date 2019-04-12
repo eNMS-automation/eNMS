@@ -9,7 +9,6 @@ from simplekml import Kml
 from subprocess import Popen
 from typing import Dict, List
 
-from eNMS.classes import classes
 from eNMS.extensions import db
 from eNMS.functions import factory, fetch, fetch_all, get, get_one, objectify, post
 from eNMS.inventory import bp
@@ -157,8 +156,13 @@ def save_pool_objects(pool_id: int) -> dict:
     return pool.serialized
 
 
-@post(bp, "/pool_objects", "View")
-def filter_pool_objects() -> Dict[str, List[dict]]:
+@post(bp, "/pool_objects/<int:pool_id>", "View")
+def filter_pool_objects(pool_id: int = None) -> Dict[str, List[dict]]:
+    return get_pools_devices(fetch("Pool", id=pool_id))
+
+
+@post(bp, "/pools_objects", "View")
+def filter_pools_objects() -> Dict[str, List[dict]]:
     return get_pools_devices(*request.form["pools"])
 
 

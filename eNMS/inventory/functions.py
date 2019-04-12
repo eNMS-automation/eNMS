@@ -1,12 +1,13 @@
 from logging import info
 from pathlib import PosixPath
-from typing import Set
+from typing import Dict, List, Set
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
+from eNMS.classes import classes
 from eNMS.extensions import db
 from eNMS.functions import delete_all, factory, fetch_all, serialize
 from eNMS.properties import export_properties

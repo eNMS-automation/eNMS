@@ -51,6 +51,7 @@ function editJob(job) {
 /**
  * Display result.
  * @param {results} results - Results.
+ * @param {id} id - Job id.
  */
 function displayResult(results, id) {
   const value = results[$(`#${id}-display`).val()];
@@ -70,6 +71,7 @@ function displayResult(results, id) {
 
 /**
  * Display results.
+ * @param {id} id - Job id.
  */
 function displayResults(id) {
   call(`/automation/get_results/${id}`, (results) => {
@@ -142,19 +144,35 @@ function showResults(id) {
     contentSize: "1100 600",
     content: `
       <div class="modal-body">
-        <button class="btn btn-default btn-file" onclick="clearResults(${id})" style="width:100%;">
-          Clear
-        </button>
-        <button class="btn btn-default btn-file" onclick="displayResults(${id})" style="width:100%;">
-          Refresh
-        </button><br><br>
-        <label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
+        <button
+          class="btn btn-default btn-file"
+          onclick="clearResults(${id})"
+          style="width:100%;"
+        >Clear</button>
+        <button
+          class="btn btn-default btn-file"
+          onclick="displayResults(${id})"
+          style="width:100%;"
+        >Refresh</button><br><br>
+        <label class="control-label col-md-2 col-sm-2 col-xs-12">
+          Display :
+        </label>
         <div class="col-md-10 col-sm-10 col-xs-12">
-          <select class="form-control" id="${id}-display" name="display"></select>
+          <select
+            class="form-control"
+            id="${id}-display"
+            name="display"
+          ></select>
         </div>
-        <label class="control-label col-md-2 col-sm-2 col-xs-12">Compare With :</label>
+        <label class="control-label col-md-2 col-sm-2 col-xs-12">
+          Compare With :
+        </label>
         <div class="col-md-10 col-sm-10 col-xs-12">
-          <select class="form-control" id="${id}-compare_with" name="compare_with"></select>
+          <select
+            class="form-control"
+            id="${id}-compare_with"
+            name="compare_with"
+          ></select>
         </div>
         <hr><hr><hr><hr>
         <div class="row">
@@ -185,7 +203,7 @@ function configureCallbacks(id) {
       $(`#${id}-compare_with`).val($(`#${id}-display`).val());
     });
   });
-  
+
   $(`#${id}-compare_with`).on("change", function() {
     $(`#${id}-results`).empty();
     const v1 = $(`#${id}-display`).val();

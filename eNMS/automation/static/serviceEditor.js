@@ -39,7 +39,6 @@ function editService(id, duplicate) {
       const prop = type == "boolean" ? r.boolean_properties : r.list_properties;
       fields.val(`${fields.val()},${prop}`);
     }
-    console.log(r.form);
     $("#html-form").html(r.form);
     if (r.service) processInstance("service", r.service, duplicate);
   });

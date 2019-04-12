@@ -5,12 +5,14 @@ call: false
 capitalize: false
 convertSelect: false
 doc: false
+editJob: false
 editService: false
 fCall: false
 partial: false
 runJob: false
-showResults: false
+showLogs: false
 showModal: false
+showResults: false
 showTypeModal: false
 vis: false
 workflow: true
@@ -206,7 +208,6 @@ function deleteEdge(edgeId) {
  * @return {visJob}.
  */
 function jobToNode(job) {
-  console.log(job.type);
   let color;
   if (job.name == "Start" || job.name == "End") {
     color = "pink";

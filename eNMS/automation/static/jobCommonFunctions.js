@@ -6,12 +6,16 @@ diffview: false
 editService: false
 getJobState: false
 getWorkflowState: false
+jsPanel: false
+partial: false
+showTypeModal: false
 */
 
 let jobId;
+let refresh;
 let refreshJob = {};
 
-$("#results-modal,#logs-modal").on("hidden.bs.modal", function() {
+$("#results-modal").on("hidden.bs.modal", function() {
   refresh = false;
 });
 
@@ -137,11 +141,12 @@ function showLogs(id) {
       headerTitle: "Logs",
       position: "center-top 0 58",
       contentSize: "650 600",
-      content: `<pre id="logs-${id}" style="border: 0; background-color: transparent;"></pre>`,
+      content: `<pre id="logs-${id}" style="border: 0;\
+        background-color: transparent;"></pre>`,
       dragit: {
         opacity: 0.7,
         containment: [5, 5, 5, 5],
-      }
+      },
     });
   }
   refreshJob[id] = true;

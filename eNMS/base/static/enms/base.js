@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+jsPanel: false
 NProgress: false
 propertyTypes: false
 table: false
@@ -240,7 +241,9 @@ function processInstance(type, instance) {
     if (propertyType.includes("bool") || property.includes("regex")) {
       $(`#${instance.id}-${type}-${property}`).prop("checked", value);
     } else if (propertyType.includes("dict")) {
-      $(`#${instance.id}-${type}-${property}`).val(value ? JSON.stringify(value) : "{}");
+      $(`#${instance.id}-${type}-${property}`).val(
+        value ? JSON.stringify(value) : "{}"
+      );
     } else if (propertyType.includes("list") || propertyType.includes("obj")) {
       $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
       $(`#${instance.id}-${type}-${property}`).selectpicker(
@@ -271,19 +274,19 @@ function processInstance(type, instance) {
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
   if (!id) {
-    panel = jsPanel.create({
+    jsPanel.create({
       id: `panel-${type}`,
-      theme:  "none",
+      theme: "none",
       headerLogo: "../static/images/logo.png",
       headerControls: {
-        size: 'xl'
+        size: "xl",
       },
-      contentSize: '600 300',
+      contentSize: "600 300",
       headerTitle: `Create a New ${type}`,
       position: "center-top 0 58",
       contentAjax: {
         url: "user_form",
-        done: function (panel) {
+        done: function(panel) {
           panel.content.innerHTML = this.responseText;
           $(`#edit-${type}-form`).trigger("reset");
           $(`#${type}-id`).val("");
@@ -300,19 +303,21 @@ function showTypePanel(type, id, duplicate) {
       return;
     } else {
       call(`/get/${type}/${id}`, function(instance) {
-        panel = jsPanel.create({
+        jsPanel.create({
           id: `panel-${type}-${id}`,
-          theme:  "none",
+          theme: "none",
           headerLogo: "../static/images/logo.png",
           headerControls: {
-            size: 'xl'
+            size: "xl",
           },
-          contentSize: '600 300',
-          headerTitle: `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
+          contentSize: "600 300",
+          headerTitle: `${duplicate ? "Duplicate" : "Edit"} ${type} - ${
+            instance.name
+          }`,
           position: "center-top 0 58",
           contentAjax: {
             url: "user_form",
-            done: function (panel) {
+            done: function(panel) {
               panel.content.innerHTML = this.responseText;
               if (duplicate) {
                 instance.name = instance.id = "";
@@ -349,7 +354,13 @@ function processData(type, id) {
     (instance) => {
       table && table.ajax.reload(null, false);
       $(id ? `#panel-${type}-${id}` : `#panel-${type}`).remove();
-      alertify.notify(`${type.toUpperCase()} '${instance.name}' ${id ? "updated" : "created"}`, "success", 5); 
+      alertify.notify(
+        `${type.toUpperCase()} '${instance.name}' ${
+          id ? "updated" : "created"
+        }`,
+        "success",
+        5
+      );
     }
   );
 }

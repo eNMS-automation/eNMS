@@ -11,7 +11,7 @@ eraseNetwork: false
 fCall: false
 initTable: false
 selected: false
-showTypeModal: false
+showTypePanel: false
 */
 
 let poolId = null;
@@ -62,9 +62,9 @@ function showPoolView(id) {
 }
 
 const action = {
-  "Device properties": (d) => showTypeModal("device", d),
-  "Link properties": (l) => showTypeModal("link", l),
-  "Pool properties": (p) => showTypeModal("pool", p),
+  "Device properties": (d) => showTypePanel("device", d),
+  "Link properties": (l) => showTypePanel("link", l),
+  "Pool properties": (p) => showTypePanel("pool", p),
   Connect: connectionParametersModal,
   Automation: deviceAutomationModal,
 };

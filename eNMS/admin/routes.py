@@ -21,8 +21,6 @@ from eNMS.extensions import (
 )
 from eNMS.admin import bp
 from eNMS.admin.forms import (
-    AddInstance,
-    AddUser,
     AdministrationForm,
     DatabaseHelpersForm,
     LoginForm,
@@ -66,11 +64,7 @@ def advanced() -> dict:
 
 @get(bp, "/instance_management", "View")
 def instance_management() -> dict:
-    return dict(
-        fields=instance_table_properties,
-        instances=serialize("Instance"),
-        form=AddInstance(request.form),
-    )
+    return dict(fields=instance_table_properties)
 
 
 @bp.route("/login", methods=["GET", "POST"])

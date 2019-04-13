@@ -276,7 +276,7 @@ function showTypePanel(type, id, duplicate) {
       call(`/get/${type}/${id}`, function(instance) {
         createPanel(
           `panel-${type}-${id}`,
-          "600 300",
+          "600 800",
           `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
           `../${type}_form`,
           function(panel) {

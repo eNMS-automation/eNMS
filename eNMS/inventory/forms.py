@@ -69,7 +69,7 @@ class ObjectForm(FlaskForm):
 
 
 @configure_device_form
-class DeviceForm(AddObjectForm):
+class DeviceForm(ObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)
     ip_address = StringField("IP address")
@@ -85,7 +85,7 @@ class DeviceForm(AddObjectForm):
     netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
 
 
-class LinkForm(AddObjectForm):
+class LinkForm(ObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)
     source = ObjectField("Device")

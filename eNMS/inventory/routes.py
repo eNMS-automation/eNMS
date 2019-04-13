@@ -13,9 +13,6 @@ from eNMS.extensions import db
 from eNMS.functions import factory, fetch, fetch_all, get, get_one, objectify, post
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
-    AddDevice,
-    AddLink,
-    AddPoolForm,
     CompareConfigurationsForm,
     DeviceAutomationForm,
     GoogleEarthForm,
@@ -41,7 +38,6 @@ from eNMS.properties import (
 def device_management() -> dict:
     return dict(
         fields=device_table_properties,
-        add_device_form=AddDevice(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form),
         pool_restriction_form=PoolRestrictionForm(request.form),
@@ -51,7 +47,6 @@ def device_management() -> dict:
 @get(bp, "/configuration_management", "View")
 def configuration_management() -> dict:
     return dict(
-        add_device_form=AddDevice(request.form),
         fields=device_configuration_properties,
         compare_configurations_form=CompareConfigurationsForm(request.form),
         pool_restriction_form=PoolRestrictionForm(request.form),
@@ -62,7 +57,6 @@ def configuration_management() -> dict:
 def link_management() -> dict:
     return dict(
         fields=link_table_properties,
-        add_link_form=AddLink(request.form),
         pool_restriction_form=PoolRestrictionForm(request.form),
     )
 
@@ -70,11 +64,8 @@ def link_management() -> dict:
 @get(bp, "/pool_management", "View")
 def pool_management() -> dict:
     return dict(
-        add_pool_form=AddPoolForm(request.form),
         pool_object_form=PoolObjectsForm(request.form),
         fields=pool_table_properties,
-        add_device_form=AddDevice(request.form),
-        add_link_form=AddLink(request.form),
         device_automation_form=DeviceAutomationForm(request.form),
         gotty_connection_form=GottyConnectionForm(request.form),
     )

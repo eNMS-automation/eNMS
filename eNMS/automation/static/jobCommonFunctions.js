@@ -138,6 +138,7 @@ function showLogs(id) {
 // eslint-disable-next-line
 function showResults(id) {
   jsPanel.create({
+    theme: "none",
     border: "medium",
     headerTitle: "Logs",
     position: "center-top 0 58",

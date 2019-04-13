@@ -260,13 +260,19 @@ function processInstance(type, instance, dup) {
       $(`#${type}-${property}`).selectpicker("val", value.id);
       $(`#${type}-${property}`).selectpicker("render");
     } else {
-      console.log(`#${type}-${property}`, $(`#${type}-${property}`).length, property, value);
       $(`#${type}-${property}`).val(value);
     }
   }
   if (dup) instance.id = instance.name = "";
   $(`#edit-${type}`).modal("show");
 }
+
+/**
+ * Create panel
+ * @param {type} type - Type.
+ */
+// eslint-disable-next-line
+function showTypePanel(type, mode, id, dup) {
 
 /**
  * Display instance modal for editing.
@@ -276,17 +282,19 @@ function processInstance(type, instance, dup) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, dup) {
-  call(`/get/${type}/${id}`, function(instance) {
-    jsPanel.create({
-      border: "medium",
-      headerTitle: type,
+  if (!id) {
+    panel = jsPanel.create({
+      theme:  "none",
+      headerControls: {
+        size: 'xl'
+      },
+      contentSize: '600 300',
+      headerTitle: `${mode} a new ${type}`,
       position: "center-top 0 58",
-      contentSize: "650 600",
       contentAjax: {
         url: "user_form",
         done: function (panel) {
           panel.content.innerHTML = this.responseText;
-          console.log($(`#user-name`).length);
           processInstance(type, instance, dup);
         },
       },
@@ -295,7 +303,30 @@ function showTypePanel(type, id, dup) {
         containment: [5, 5, 5, 5],
       },
     });
-  });
+  } else {
+    call(`/get/${type}/${id}`, function(instance) {
+      panel = jsPanel.create({
+        theme:  "none",
+        headerControls: {
+          size: 'xl'
+        },
+        contentSize: '600 300',
+        headerTitle: `${mode} a new ${type}`,
+        position: "center-top 0 58",
+        contentAjax: {
+          url: "user_form",
+          done: function (panel) {
+            panel.content.innerHTML = this.responseText;
+            processInstance(type, instance, dup);
+          },
+        },
+        dragit: {
+          opacity: 0.7,
+          containment: [5, 5, 5, 5],
+        },
+      });
+    });
+  }
 }
 
 /**
@@ -318,7 +349,6 @@ function showTypeModal(type, id, dup) {
 // eslint-disable-next-line
 function processData(type) {
   fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
-    saveInstance(type, instance);
     if (table) {
       table.ajax.reload(null, false);
     }

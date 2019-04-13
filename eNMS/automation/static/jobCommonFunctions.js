@@ -8,7 +8,7 @@ getJobState: false
 getWorkflowState: false
 jsPanel: false
 partial: false
-showTypeModal: false
+showTypePanel: false
 */
 
 let refreshJob = {};
@@ -42,7 +42,7 @@ function openWizard(type) {
 // eslint-disable-next-line
 function editJob(job) {
   if (job.type == "Workflow") {
-    showTypeModal("workflow", job.id);
+    showTypePanel("workflow", job.id);
   } else {
     editService(job.id);
   }

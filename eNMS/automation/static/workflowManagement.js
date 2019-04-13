@@ -6,7 +6,7 @@ doc: false
 fCall: false
 initTable: false
 refreshTable: false
-showTypeModal: false
+showTypePanel: false
 */
 
 const toExclude = ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"];
@@ -20,7 +20,7 @@ let table = initTable("workflow", "workflow", toExclude);
 // eslint-disable-next-line
 function showWorkflowModalDuplicate(id) {
   $("#workflow-button").attr("onclick", `duplicateWorkflow(${id})`);
-  showTypeModal("workflow", id, true);
+  showTypePanel("workflow", id, true);
 }
 
 /**

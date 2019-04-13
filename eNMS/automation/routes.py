@@ -40,9 +40,7 @@ def service_management() -> dict:
     return dict(
         compare_results_form=CompareResultsForm(request.form),
         fields=service_table_properties,
-        service_form=JobForm(request.form),
         services_classes=sorted(service_classes),
-        services=serialize("Service"),
     )
 
 
@@ -51,8 +49,6 @@ def workflow_management() -> dict:
     return dict(
         compare_results_form=CompareResultsForm(request.form),
         fields=workflow_table_properties,
-        workflows=serialize("Workflow"),
-        workflow_creation_form=JobForm(request.form),
     )
 
 

@@ -13,7 +13,7 @@ runJob: false
 showLogs: false
 showModal: false
 showResults: false
-showTypeModal: false
+showTypePanel: false
 vis: false
 workflow: true
 */
@@ -319,7 +319,7 @@ const action = {
   Edit: (jobId) => editJob(nodes.get(jobId)),
   Run: runJob,
   Results: showResults,
-  "Edit Workflow": () => showTypeModal("workflow", workflow.id),
+  "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () => showResults(workflow.id),
   "Workflow Logs": () => showLogs(workflow.id),
   "Add Service or Workflow": partial(showModal, "add-job"),

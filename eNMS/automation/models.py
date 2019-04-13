@@ -455,7 +455,7 @@ class Workflow(Job):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('workflow', '{self.id}')">
+            onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showWorkflowModalDuplicate('{self.id}')">

@@ -1,79 +1,79 @@
-
-          <form id="edit-pool-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-            {{ add_pool_form.id(id='pool-id') }}
-            {{ add_pool_form.boolean_fields() }}
-            <div class="form-group">
-              <label>Name</label>
-              <div class="form-group">
-                {{ add_pool_form.name(id="pool-name", class="form-control required", placeholder="Name") }}
-              </div>
-              <label>Description</label>
-              <div class="form-group">
-                {{ add_pool_form.description(id="pool-description", class="form-control", placeholder="Description") }}
-              </div>
-              <label>Longitude</label>
-              <div class="form-group">
-                {{ add_pool_form.longitude(id="pool-longitude", class="form-control", placeholder="Longitude") }}
-              </div>
-              <label>Latitude</label>
-              <div class="form-group">
-                {{ add_pool_form.latitude(id="pool-latitude", class="form-control", placeholder="Latitude") }}
-              </div>
-              <label>Match condition</label>
-              <div class="form-group">
-                {{ add_pool_form.operator(id="pool-operator", class="form-control required", placeholder="Operator") }}
-              </div>
-            <fieldset>
-              <div class="item">
-                {{ add_pool_form['never_update'](id="pool-never_update") }}
-                <label>Never update (for manually selected pools)</label>
-              </div>
-            </fieldset><br>
-              <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                  <th>Property</th>
-                  <th>Value</th>
-                  <th style="width: 25%">Match</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for property in add_pool_form.device_properties %}
-                  <tr>
-                  <td>{{ names[property] }}</td>
-                  <td>{{ add_pool_form['device_' + property](id="pool-" + 'device_' + property, class="form-control") }}</td>
-                  <td>{{ add_pool_form['device_' + property + '_match'](id="pool-" +'device_' + property + '_match', class="form-control") }}</td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
-              <div class="x_title">
-                  <h3>Link pool</h3>
-                  <div class="clearfix"></div>
-              </div>
-              <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                  <th>Property</th>
-                  <th>Value</th>
-                  <th style="width: 25%">Match</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for property in add_pool_form.link_properties %}
-                  <tr>
-                  <td>{{ names[property] }}</td>
-                  <td>{{ add_pool_form['link_' + property](id="pool-" + 'link_' + property, class="form-control") }}</td>
-                  <td>{{ add_pool_form['link_' + property + '_match'](id="pool-" +'link_' + property + '_match', class="form-control") }}</td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
-              </div>
-              <div class="ln_solid"></div>
-              <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
-                <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="button" class="btn btn-success" onclick="processData('pool')">Save</button>
-              </div>
-            </div>
-          </form>
+<form id="edit-pool-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+  {{ add_pool_form.id(id='pool-id') }}
+  {{ add_pool_form.boolean_fields() }}
+  <div class="form-group">
+    <label>Name</label>
+    <div class="form-group">
+      {{ add_pool_form.name(id="pool-name", class="form-control required", placeholder="Name") }}
+    </div>
+    <label>Description</label>
+    <div class="form-group">
+      {{ add_pool_form.description(id="pool-description", class="form-control", placeholder="Description") }}
+    </div>
+    <label>Longitude</label>
+    <div class="form-group">
+      {{ add_pool_form.longitude(id="pool-longitude", class="form-control", placeholder="Longitude") }}
+    </div>
+    <label>Latitude</label>
+    <div class="form-group">
+      {{ add_pool_form.latitude(id="pool-latitude", class="form-control", placeholder="Latitude") }}
+    </div>
+    <label>Match condition</label>
+    <div class="form-group">
+      {{ add_pool_form.operator(id="pool-operator", class="form-control required", placeholder="Operator") }}
+    </div>
+  <fieldset>
+    <div class="item">
+      {{ add_pool_form['never_update'](id="pool-never_update") }}
+      <label>Never update (for manually selected pools)</label>
+    </div>
+  </fieldset><br>
+    <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Value</th>
+        <th style="width: 25%">Match</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for property in add_pool_form.device_properties %}
+        <tr>
+        <td>{{ names[property] }}</td>
+        <td>{{ add_pool_form['device_' + property](id="pool-" + 'device_' + property, class="form-control") }}</td>
+        <td>{{ add_pool_form['device_' + property + '_match'](id="pool-" +'device_' + property + '_match', class="form-control") }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <div class="x_title">
+        <h3>Link pool</h3>
+        <div class="clearfix"></div>
+    </div>
+    <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Value</th>
+        <th style="width: 25%">Match</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for property in add_pool_form.link_properties %}
+        <tr>
+        <td>{{ names[property] }}</td>
+        <td>{{ add_pool_form['link_' + property](id="pool-" + 'link_' + property, class="form-control") }}</td>
+        <td>{{ add_pool_form['link_' + property + '_match'](id="pool-" +'link_' + property + '_match', class="form-control") }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <div class="ln_solid"></div>
+    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
+      <center>
+        <button id="save" type="button" class="btn btn-success" onclick="processData('pool')">Save</button>
+      </center>
+    </div>
+  </div>
+</form>

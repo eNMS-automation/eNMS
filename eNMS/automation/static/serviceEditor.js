@@ -34,13 +34,14 @@ function editService(id, duplicate) {
   const url = `/automation/get_service/${id || $("#service-type").val()}`;
   if (id) $("#service-type").prop("disabled", true);
   call(url, function(r) {
+    if (r.service) showTypePanel("service", id, duplicate);
     for (const type of ["boolean", "list"]) {
       const fields = $(`#service-${type}_fields`);
       const prop = type == "boolean" ? r.boolean_properties : r.list_properties;
       fields.val(`${fields.val()},${prop}`);
     }
     $("#html-form").html(r.form);
-    if (r.service) processInstance("service", r.service, duplicate);
+    
   });
 }
 

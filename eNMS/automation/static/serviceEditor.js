@@ -34,6 +34,7 @@ function editService(id, duplicate) {
   const url = `/automation/get_service/${id || $("#service-type").val()}`;
   if (id) $("#service-type").prop("disabled", true);
   call(url, function(r) {
+    openWizard("service");
     if (r.service) showTypePanel("service", id, duplicate);
     for (const type of ["boolean", "list"]) {
       const fields = $(`#service-${type}_fields`);
@@ -41,7 +42,6 @@ function editService(id, duplicate) {
       fields.val(`${fields.val()},${prop}`);
     }
     $("#html-form").html(r.form);
-    
   });
 }
 

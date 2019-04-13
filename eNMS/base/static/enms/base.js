@@ -265,6 +265,27 @@ function processInstance(type, instance) {
   }
 }
 
+function createPanel(id, size, title, url, processing) {
+  return jsPanel.create({
+    id: id,
+    theme: "none",
+    headerLogo: "../static/images/logo.png",
+    headerControls: {
+      size: "xl",
+    },
+    contentSize: size,
+    headerTitle: title,
+    position: "center-top 0 58",
+    contentAjax: {
+      url: url,
+      done: processing,
+    },
+    dragit: {
+      opacity: 0.7,
+      containment: [5, 5, 5, 5],
+    },
+  });
+
 /**
  * Display instance modal for editing.
  * @param {type} type - Type.
@@ -274,30 +295,18 @@ function processInstance(type, instance) {
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
   if (!id) {
-    jsPanel.create({
-      id: `panel-${type}`,
-      theme: "none",
-      headerLogo: "../static/images/logo.png",
-      headerControls: {
-        size: "xl",
-      },
-      contentSize: "600 300",
-      headerTitle: `Create a New ${type}`,
-      position: "center-top 0 58",
-      contentAjax: {
-        url: `${type}_form`,
-        done: function(panel) {
-          panel.content.innerHTML = this.responseText;
-          $(`#edit-${type}-form`).trigger("reset");
-          $(`#${type}-id`).val("");
-          selects.forEach((id) => $(id).selectpicker("render"));
-        },
-      },
-      dragit: {
-        opacity: 0.7,
-        containment: [5, 5, 5, 5],
-      },
-    });
+    createPanel(
+      `panel-${type}`,
+      "600 300",
+      `Create a New ${type}`,
+      `${type}_form`,
+      (panel) => {
+        panel.content.innerHTML = this.responseText;
+        $(`#edit-${type}-form`).trigger("reset");
+        $(`#${type}-id`).val("");
+        selects.forEach((id) => $(id).selectpicker("render"));
+      }
+    );
   } else {
     if ($(`#${id}-edit-${type}-form`).length) {
       return;

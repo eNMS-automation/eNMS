@@ -265,7 +265,7 @@ function processInstance(type, instance) {
   }
 }
 
-function createPanel(id, size, title, url, processing) {
+function createPanel(id, contentSize, title, url, processing) {
   return jsPanel.create({
     id: id,
     theme: "none",
@@ -273,7 +273,7 @@ function createPanel(id, size, title, url, processing) {
     headerControls: {
       size: "xl",
     },
-    contentSize: size,
+    contentSize: contentSize,
     headerTitle: title,
     position: "center-top 0 58",
     contentAjax: {
@@ -285,6 +285,7 @@ function createPanel(id, size, title, url, processing) {
       containment: [5, 5, 5, 5],
     },
   });
+}
 
 /**
  * Display instance modal for editing.
@@ -300,7 +301,7 @@ function showTypePanel(type, id, duplicate) {
       "600 300",
       `Create a New ${type}`,
       `${type}_form`,
-      (panel) => {
+      function(panel) {
         panel.content.innerHTML = this.responseText;
         $(`#edit-${type}-form`).trigger("reset");
         $(`#${type}-id`).val("");
@@ -312,37 +313,23 @@ function showTypePanel(type, id, duplicate) {
       return;
     } else {
       call(`/get/${type}/${id}`, function(instance) {
-        jsPanel.create({
-          id: `panel-${type}-${id}`,
-          theme: "none",
-          headerLogo: "../static/images/logo.png",
-          headerControls: {
-            size: "xl",
+        createPanel(
+          `panel-${type}-${id}`,
+          "600 300",
+          `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
+          `${type}_form`,
+          function(panel) {
+            panel.content.innerHTML = this.responseText;
+            $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
+            $("#save").prop("id", `${id}-save`);
+            $(`#${id}-save`).attr("onclick", `processData("user", ${id})`);
+            for (let el of $(`[id^=${type}]`)) {
+              if (duplicate && ["name", "id"].includes(el.name)) continue;
+              $(el).prop("id", `${id}-${el.id}`);
+            }
+            processInstance(type, instance);
           },
-          contentSize: "600 300",
-          headerTitle: `${duplicate ? "Duplicate" : "Edit"} ${type} - ${
-            instance.name
-          }`,
-          position: "center-top 0 58",
-          contentAjax: {
-            url: `${type}_form`,
-            done: function(panel) {
-              panel.content.innerHTML = this.responseText;
-              $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
-              $("#save").prop("id", `${id}-save`);
-              $(`#${id}-save`).attr("onclick", `processData("user", ${id})`);
-              for (let el of $(`[id^=${type}]`)) {
-                if (duplicate && ["name", "id"].includes(el.name)) continue;
-                $(el).prop("id", `${id}-${el.id}`);
-              }
-              processInstance(type, instance);
-            },
-          },
-          dragit: {
-            opacity: 0.7,
-            containment: [5, 5, 5, 5],
-          },
-        });
+        );
       });
     }
   }

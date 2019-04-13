@@ -35,7 +35,7 @@ class User(Base, UserMixin):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('user', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('user', '{self.id}', true)">
+            onclick="showTypePanel('user', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('user', '{self.id}')">Delete</button>""",

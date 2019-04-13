@@ -233,7 +233,6 @@ function showCreateModal(type) {
  * Display instance modal for editing.
  * @param {type} type - Type.
  * @param {instance} instance - Object instance.
- * @param {dup} dup - Edit versus duplicate.
  */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
@@ -267,10 +266,10 @@ function processInstance(type, instance) {
  * Display instance modal for editing.
  * @param {type} type - Type.
  * @param {id} id - Instance ID.
- * @param {dup} dup - Edit versus duplicate.
+ * @param {duplicate} duplicate - Edit versus duplicate.
  */
 // eslint-disable-next-line
-function showTypePanel(type, id, dup) {
+function showTypePanel(type, id, duplicate) {
   if (!id) {
     panel = jsPanel.create({
       theme:  "none",
@@ -307,13 +306,13 @@ function showTypePanel(type, id, dup) {
             size: 'xl'
           },
           contentSize: '600 300',
-          headerTitle: `${dup ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
+          headerTitle: `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
           position: "center-top 0 58",
           contentAjax: {
             url: "user_form",
             done: function (panel) {
               panel.content.innerHTML = this.responseText;
-              if (dup) {
+              if (duplicate) {
                 instance.name = instance.id = "";
               } else {
                 $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
@@ -334,19 +333,6 @@ function showTypePanel(type, id, dup) {
       });
     }
   }
-}
-
-/**
- * Display instance modal for editing.
- * @param {type} type - Type.
- * @param {id} id - Instance ID.
- * @param {dup} dup - Edit versus duplicate.
- */
-// eslint-disable-next-line
-function showTypeModal(type, id, dup) {
-  call(`/get/${type}/${id}`, function(instance) {
-    processInstance(type, instance, dup);
-  });
 }
 
 /**

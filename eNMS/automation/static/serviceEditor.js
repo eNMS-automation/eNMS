@@ -11,28 +11,6 @@ servicesClasses: false
 workflowBuilder: false;
 */
 
-(function() {
-  convertSelect("#service-devices", "#service-pools");
-
-  $("#edit-service").on("hidden.bs.modal", function() {
-    $("#service-type").prop("disabled", false);
-  });
-})();
-
-/**
- * Edit a service.
- * @param {id} id - Service Id.
- * @param {duplicate} duplicate - Duplicate.
- */
-function editService(id, duplicate) {
-  
-  if (id) {
-    showTypePanel("service", id, duplicate);
-    $("#service-type").prop("disabled", true);
-  }
-
-}
-
 /**
  * Save a service.
  * @param {run} run - Run after saving.
@@ -51,3 +29,7 @@ function saveService(run) {
     }
   });
 }
+
+(function() {
+  convertSelect("#service-devices", "#service-pools");
+})();

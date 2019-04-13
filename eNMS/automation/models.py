@@ -297,9 +297,9 @@ class Service(Job):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="editService('{self.id}')">Edit</button>""",
+            onclick="showTypePanel('service', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="editService('{self.id}', true)">Duplicate</button>""",
+            onclick="showTypePanel('service', '{self.id}', true)">Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('service', '{self.id}')">
             Delete</button>""",

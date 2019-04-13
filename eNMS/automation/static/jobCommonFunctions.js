@@ -24,12 +24,6 @@ function openWizard(type, id) {
     keyNavigation: false,
     transitionEffect: "none",
   });
-  if (!$(`#${type}-id`).val()) {
-    if (type == "service") {
-      editService();
-    }
-    $(`#${id}-${type}-wizard`).smartWizard("goToStep", 1);
-  }
   $(".buttonNext").addClass("btn btn-success");
   $(".buttonPrevious").addClass("btn btn-primary");
   $(".buttonFinish").hide();

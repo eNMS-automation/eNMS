@@ -268,13 +268,6 @@ function processInstance(type, instance, dup) {
 }
 
 /**
- * Create panel
- * @param {type} type - Type.
- */
-// eslint-disable-next-line
-function showTypePanel(type, mode, id, dup) {
-
-/**
  * Display instance modal for editing.
  * @param {type} type - Type.
  * @param {id} id - Instance ID.
@@ -285,17 +278,20 @@ function showTypePanel(type, id, dup) {
   if (!id) {
     panel = jsPanel.create({
       theme:  "none",
+      headerLogo: "../static/images/logo.png",
       headerControls: {
         size: 'xl'
       },
       contentSize: '600 300',
-      headerTitle: `${mode} a new ${type}`,
+      headerTitle: `Create a New ${type}`,
       position: "center-top 0 58",
       contentAjax: {
         url: "user_form",
         done: function (panel) {
           panel.content.innerHTML = this.responseText;
-          processInstance(type, instance, dup);
+          $(`#edit-${type}-form`).trigger("reset");
+          $(`#${type}-id`).val("");
+          selects.forEach((id) => $(id).selectpicker("render"));
         },
       },
       dragit: {
@@ -307,11 +303,12 @@ function showTypePanel(type, id, dup) {
     call(`/get/${type}/${id}`, function(instance) {
       panel = jsPanel.create({
         theme:  "none",
+        headerLogo: "../static/images/logo.png",
         headerControls: {
           size: 'xl'
         },
         contentSize: '600 300',
-        headerTitle: `${mode} a new ${type}`,
+        headerTitle: `Edit ${type} - ${instance.name}`,
         position: "center-top 0 58",
         contentAjax: {
           url: "user_form",

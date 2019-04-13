@@ -294,19 +294,13 @@ function showTypePanel(type, id, duplicate) {
                 const cls = servicesClasses[i];
                 $(`#${id}-service-type`).append(`<option value='${cls}'>${cls}</option>`);
               }
-              $("#service-type").change(function() {
-                editService();
-              });
-              const url = `/automation/get_service/${id || $("#service-type").val()}`;
-              call(url, function(r) {
-                
-                if (r.service) 
+              call(`/automation/get_service/${id || $("#service-type").val()}`, function(customForm) {
                 for (const type of ["boolean", "list"]) {
-                  const fields = $(`#service-${type}_fields`);
-                  const prop = type == "boolean" ? r.boolean_properties : r.list_properties;
+                  const fields = $(`#${id}-service-${type}_fields`);
+                  const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
                   fields.val(`${fields.val()},${prop}`);
                 }
-                $(`#${id}-service-custom-form`).html(r.form);
+                $(`#${id}-service-custom-form`).html(customForm.form);
               });
             }
             processInstance(type, instance);
@@ -324,6 +318,7 @@ function showTypePanel(type, id, duplicate) {
  */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
+    console.log(property, value);
     const propertyType = propertyTypes[property] || "str";
     if (propertyType.includes("bool") || property.includes("regex")) {
       $(`#${instance.id}-${type}-${property}`).prop("checked", value);

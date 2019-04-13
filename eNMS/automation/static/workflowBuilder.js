@@ -316,7 +316,10 @@ function savePositions() {
 
 const action = {
   "Run Workflow": runWorkflow,
-  Edit: (jobId) => showTypePanel(nodes.get(jobId).type, jobId),
+  Edit: (jobId) => {
+    node = nodes.get(jobId);
+    showTypePanel(node.type == "workflow" ? "workflow" : "service", jobId);
+  },
   Run: runJob,
   Results: showResults,
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),

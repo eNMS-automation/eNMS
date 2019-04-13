@@ -100,6 +100,7 @@ def get_service(id_or_cls: str) -> dict:
     except DataError:
         pass
     cls = service_classes[service.type if service else id_or_cls]
+    pre_id = f"{service.id}-" if service else ""
 
     def build_text_box(property: str, name: str) -> str:
         return f"""
@@ -107,7 +108,7 @@ def get_service(id_or_cls: str) -> dict:
             <div class="form-group">
               <input
                 class="form-control"
-                id="service-{property}"
+                id="{pre_id}service-{property}"
                 maxlength="{getattr(cls, f'{property}_length', 524288)}"
                 name="{property}"
                 type="{'password' if property in private_properties else 'text'}"
@@ -122,7 +123,7 @@ def get_service(id_or_cls: str) -> dict:
                 style="height: 150px;" rows="30"
                 maxlength="{getattr(cls, f'{property}_length', 524288)}"
                 class="form-control"
-                id="service-{property}"
+                id="{pre_id}service-{property}"
                 name="{property}"
               ></textarea>
             </div>"""
@@ -137,7 +138,7 @@ def get_service(id_or_cls: str) -> dict:
             <div class="form-group">
               <select
                 class="form-control"
-                id="service-{property}"
+                id="{pre_id}service-{property}"
                 name="{property}"
                 {'multiple size="7"' if property_types[property] == 'list' else ''}
               >
@@ -151,7 +152,7 @@ def get_service(id_or_cls: str) -> dict:
             + f"""
             <div class="item">
               <input
-                id="service-{property}"
+                id="{pre_id}service-{property}"
                 name="{property}"
                 type="checkbox"
               >

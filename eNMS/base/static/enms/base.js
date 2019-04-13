@@ -235,18 +235,16 @@ function showCreateModal(type) {
  * @param {instance} instance - Object instance.
  * @param {dup} dup - Edit versus duplicate.
  */
-function processInstance(type, instance, dup) {
-  const mode = dup ? "Duplicate" : "Edit";
-  $(`#title-${type}`).text(`${mode} ${type} '${instance.name}'`);
+function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
     const propertyType = propertyTypes[property] || "str";
     if (propertyType.includes("bool") || property.includes("regex")) {
-      $(`#${type}-${property}`).prop("checked", value);
+      $(`#${instance.id}-${type}-${property}`).prop("checked", value);
     } else if (propertyType.includes("dict")) {
-      $(`#${type}-${property}`).val(value ? JSON.stringify(value) : "{}");
+      $(`#${instance.id}-${type}-${property}`).val(value ? JSON.stringify(value) : "{}");
     } else if (propertyType.includes("list") || propertyType.includes("obj")) {
-      $(`#${type}-${property}`).selectpicker("deselectAll");
-      $(`#${type}-${property}`).selectpicker(
+      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
+      $(`#${instance.id}-${type}-${property}`).selectpicker(
         "val",
         propertyType === "object"
           ? value.id
@@ -254,17 +252,15 @@ function processInstance(type, instance, dup) {
           ? value
           : value.map((p) => p.id)
       );
-      $(`#${type}-${property}`).selectpicker("render");
+      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
     } else if (propertyType == "object") {
-      $(`#${type}-${property}`).selectpicker("deselectAll");
-      $(`#${type}-${property}`).selectpicker("val", value.id);
-      $(`#${type}-${property}`).selectpicker("render");
+      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
+      $(`#${instance.id}-${type}-${property}`).selectpicker("val", value.id);
+      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
     } else {
-      $(`#${type}-${property}`).val(value);
+      $(`#${instance.id}-${type}-${property}`).val(value);
     }
   }
-  if (dup) instance.id = instance.name = "";
-  $(`#edit-${type}`).modal("show");
 }
 
 /**
@@ -308,13 +304,21 @@ function showTypePanel(type, id, dup) {
           size: 'xl'
         },
         contentSize: '600 300',
-        headerTitle: `Edit ${type} - ${instance.name}`,
+        headerTitle: `${dup ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
         position: "center-top 0 58",
         contentAjax: {
           url: "user_form",
           done: function (panel) {
             panel.content.innerHTML = this.responseText;
-            processInstance(type, instance, dup);
+            for (let el of $(`[id^=${type}]`)) {
+              $(el).prop("id", `${id}-${el.id}`);
+            }
+            processInstance(type, instance);
+            if (dup) {
+              instance.name = "";
+            } else {
+              // replace button onclick
+            }
           },
         },
         dragit: {

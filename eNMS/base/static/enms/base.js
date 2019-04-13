@@ -234,6 +234,7 @@ function createPanel(id, contentSize, title, url, processing) {
     headerControls: {
       size: "xl",
     },
+    contentOverflow: 'hidden scroll',
     contentSize: contentSize,
     headerTitle: title,
     position: "center-top 0 58",
@@ -242,8 +243,7 @@ function createPanel(id, contentSize, title, url, processing) {
       done: processing,
     },
     dragit: {
-      opacity: 0.7,
-      containment: [5, 5, 5, 5],
+      opacity: 0.6,
     },
   });
 }
@@ -259,7 +259,7 @@ function showTypePanel(type, id, duplicate) {
   if (!id) {
     createPanel(
       `panel-${type}`,
-      "600 300",
+      "700 500",
       `Create a New ${type}`,
       `../${type}_form`,
       function(panel) {
@@ -276,14 +276,14 @@ function showTypePanel(type, id, duplicate) {
       call(`/get/${type}/${id}`, function(instance) {
         createPanel(
           `panel-${type}-${id}`,
-          "600 800",
+          "700 500",
           `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
           `../${type}_form`,
           function(panel) {
             panel.content.innerHTML = this.responseText;
             $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
             $("#save").prop("id", `${id}-save`);
-            $(`#${id}-save`).attr("onclick", `processData("user", ${id})`);
+            $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
             for (let el of $(`[id^=${type}]`)) {
               if (duplicate && ["name", "id"].includes(el.name)) continue;
               $(el).prop("id", `${id}-${el.id}`);

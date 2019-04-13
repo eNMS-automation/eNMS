@@ -16,7 +16,7 @@ sql_types: dict = {
     "boolean": Boolean,
     "float": Float,
     "integer": Integer,
-    "string": String,
+    "string": String(255),
 }
 
 google_earth_styles: dict = {}

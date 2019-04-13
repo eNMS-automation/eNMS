@@ -350,7 +350,7 @@ function processData(type, id) {
       table && table.ajax.reload(null, false);
       $(id ? `#panel-${type}-${id}` : `#panel-${type}`).remove();
       alertify.notify(`${type.toUpperCase()} '${instance.name}' ${id ? "updated" : "created"}`, "success", 5); 
-    },
+    }
   );
 }
 

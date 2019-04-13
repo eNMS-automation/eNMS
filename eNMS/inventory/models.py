@@ -113,9 +113,9 @@ class Device(CustomDevice):
                 onclick="connectionParametersModal('{self.id}')">
                 Connect</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypeModal('device', '{self.id}')">Edit</button>""",
+                onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypeModal('device', '{self.id}', true)">
+                onclick="showTypePanel('device', '{self.id}', true)">
                 Duplicate</button>""",
                 f"""<button type="button" class="btn btn-danger btn-xs"
                 onclick="confirmDeletion('device', '{self.id}')">
@@ -134,7 +134,7 @@ class Device(CustomDevice):
                 if self.configurations
                 else "",
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypeModal('device', '{self.id}')">Edit</button>""",
+                onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
             ]
 
     def __repr__(self) -> str:
@@ -205,9 +205,9 @@ class Link(Object):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '{self.id}')">Edit</button>""",
+            onclick="showTypePanel('link', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('link', '{self.id}', true)">Duplicate
+            onclick="showTypePanel('link', '{self.id}', true)">Duplicate
             </button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('link', '{self.id}')">Delete</button>""",
@@ -271,12 +271,12 @@ class Pool(AbstractPool):
             onclick="showPoolView('{self.id}')">
             Visualize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('pool', '{self.id}')">
+            onclick="showTypePanel('pool', '{self.id}')">
             Edit properties</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="updatePool('{self.id}')">Update</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('pool', '{self.id}', true)">
+            onclick="showTypePanel('pool', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showPoolObjects('{self.id}')">Edit objects</button>""",

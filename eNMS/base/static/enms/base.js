@@ -296,21 +296,23 @@ function showTypePanel(type, id, dup) {
       },
     });
   } else {
-    call(`/get/${type}/${id}`, function(instance) {
-      panel = jsPanel.create({
-        theme:  "none",
-        headerLogo: "../static/images/logo.png",
-        headerControls: {
-          size: 'xl'
-        },
-        contentSize: '600 300',
-        headerTitle: `${dup ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
-        position: "center-top 0 58",
-        contentAjax: {
-          url: "user_form",
-          done: function (panel) {
-            panel.content.innerHTML = this.responseText;
-            if (!$(`#${id}-edit-${type}-form`).length) {
+    if ($(`#${id}-edit-${type}-form`).length) {
+      return;
+    } else {
+      call(`/get/${type}/${id}`, function(instance) {
+        panel = jsPanel.create({
+          theme:  "none",
+          headerLogo: "../static/images/logo.png",
+          headerControls: {
+            size: 'xl'
+          },
+          contentSize: '600 300',
+          headerTitle: `${dup ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
+          position: "center-top 0 58",
+          contentAjax: {
+            url: "user_form",
+            done: function (panel) {
+              panel.content.innerHTML = this.responseText;
               if (dup) {
                 instance.name = instance.id = "";
               } else {
@@ -321,19 +323,16 @@ function showTypePanel(type, id, dup) {
                   $(el).prop("id", `${id}-${el.id}`);
                 }
               }
-              console.log("test");
               processInstance(type, instance);
-            } else {
-              $(`#${id}-edit-${type}-form`).focus();
-            }
+            },
           },
-        },
-        dragit: {
-          opacity: 0.7,
-          containment: [5, 5, 5, 5],
-        },
+          dragit: {
+            opacity: 0.7,
+            containment: [5, 5, 5, 5],
+          },
+        });
       });
-    });
+    }
   }
 }
 

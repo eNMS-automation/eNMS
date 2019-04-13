@@ -272,6 +272,7 @@ function processInstance(type, instance) {
 function showTypePanel(type, id, duplicate) {
   if (!id) {
     panel = jsPanel.create({
+      id: `panel-${type}`,
       theme:  "none",
       headerLogo: "../static/images/logo.png",
       headerControls: {
@@ -300,6 +301,7 @@ function showTypePanel(type, id, duplicate) {
     } else {
       call(`/get/${type}/${id}`, function(instance) {
         panel = jsPanel.create({
+          id: `panel-${type}-${id}`,
           theme:  "none",
           headerLogo: "../static/images/logo.png",
           headerControls: {
@@ -341,14 +343,15 @@ function showTypePanel(type, id, duplicate) {
  */
 // eslint-disable-next-line
 function processData(type, id) {
-  console.log(id);
-  form = id ? `#${id}-edit-${type}-form` : `#edit-${type}-form`;
-  console.log(form)
-  fCall(`/update/${type}`, form, function(instance) {
-    if (table) {
-      table.ajax.reload(null, false);
-    }
-  });
+  fCall(
+    `/update/${type}`,
+    id ? `#${id}-edit-${type}-form` : `#edit-${type}-form`,
+    (instance) => {
+      table && table.ajax.reload(null, false);
+      $(id ? `#panel-${type}-${id}` : `#panel-${type}`).remove();
+      alertify.notify(`${type.toUpperCase()} '${instance.name}' ${id ? "updated" : "created"}`, "success", 5); 
+    },
+  );
 }
 
 /**

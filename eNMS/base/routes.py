@@ -94,6 +94,11 @@ def server_side_processing(cls: str, table: str) -> Response:
     )
 
 
+@get(bp, "/<form_type>_form", "View")
+def route_form(form_type: str) -> dict:
+    return dict(form=AddUser(request.form))
+
+
 @get(bp, "/dashboard")
 def dashboard() -> dict:
     on_going = {

@@ -261,7 +261,7 @@ function showTypePanel(type, id, duplicate) {
       `panel-${type}`,
       "600 300",
       `Create a New ${type}`,
-      `${type}_form`,
+      `../${type}_form`,
       function(panel) {
         panel.content.innerHTML = this.responseText;
         $(`#edit-${type}-form`).trigger("reset");
@@ -278,7 +278,7 @@ function showTypePanel(type, id, duplicate) {
           `panel-${type}-${id}`,
           "600 300",
           `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
-          `${type}_form`,
+          `../${type}_form`,
           function(panel) {
             panel.content.innerHTML = this.responseText;
             $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);

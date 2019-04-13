@@ -73,11 +73,6 @@ def instance_management() -> dict:
     )
 
 
-@get(bp, "/user_form", "View")
-def user_form() -> dict:
-    return dict(form=AddUser(request.form))
-
-
 @get(bp, "/instance_form", "View")
 def instance_form() -> dict:
     return dict(form=AddInstance(request.form))

@@ -138,8 +138,8 @@ def templated(function: Callable) -> Callable:
                 "property_types": {k: str(v) for k, v in property_types.items()},
             }
         )
-        if request.endpoint is not None:
-            endpoint = request.endpoint.split(".")[-1]
+        if request.url is not None:
+            endpoint = request.url.split("/")[-1]
         return render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)
 
     return decorated_function

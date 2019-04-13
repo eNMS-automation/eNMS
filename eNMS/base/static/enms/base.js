@@ -301,9 +301,11 @@ function showTypePanel(type, id, duplicate) {
                   fields.val(`${fields.val()},${prop}`);
                 }
                 $(`#${id}-service-custom-form`).html(customForm.form);
+                processInstance(type, instance);
               });
+            } else {
+              processInstance(type, instance);
             }
-            processInstance(type, instance);
           },
         );
       });

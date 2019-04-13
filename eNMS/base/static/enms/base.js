@@ -310,14 +310,21 @@ function showTypePanel(type, id, dup) {
           url: "user_form",
           done: function (panel) {
             panel.content.innerHTML = this.responseText;
-            for (let el of $(`[id^=${type}]`)) {
-              $(el).prop("id", `${id}-${el.id}`);
-            }
-            processInstance(type, instance);
-            if (dup) {
-              instance.name = "";
+            if (!$(`#${id}-edit-${type}-form`).length) {
+              if (dup) {
+                instance.name = instance.id = "";
+              } else {
+                $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
+                $("#save").prop("id", `${id}-save`);
+                $(`#${id}-save`).attr("onclick", `processData("user", ${id})`);
+                for (let el of $(`[id^=${type}]`)) {
+                  $(el).prop("id", `${id}-${el.id}`);
+                }
+              }
+              console.log("test");
+              processInstance(type, instance);
             } else {
-              // replace button onclick
+              $(`#${id}-edit-${type}-form`).focus();
             }
           },
         },
@@ -348,8 +355,11 @@ function showTypeModal(type, id, dup) {
  * @param {type} type - Type.
  */
 // eslint-disable-next-line
-function processData(type) {
-  fCall(`/update/${type}`, `#edit-${type}-form`, function(instance) {
+function processData(type, id) {
+  console.log(id);
+  form = id ? `#${id}-edit-${type}-form` : `#edit-${type}-form`;
+  console.log(form)
+  fCall(`/update/${type}`, form, function(instance) {
     if (table) {
       table.ajax.reload(null, false);
     }

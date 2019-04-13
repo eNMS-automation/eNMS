@@ -218,53 +218,14 @@ function deleteInstance(type, id) {
 }
 
 /**
- * Display type modal for creation.
- * @param {type} type - Type.
+ * Create a panel.
+ * @param {id} id - Instance ID.
+ * @param {contentSize} contentSize - Content size.
+ * @param {title} title - Header title.
+ * @param {url} url - URL to fetch the content from.
+ * @param {processing} processing - Function once panel is loaded.
  */
 // eslint-disable-next-line
-function showCreateModal(type) {
-  $(`#edit-${type}-form`).trigger("reset");
-  $(`#${type}-id`).val("");
-  selects.forEach((id) => $(id).selectpicker("render"));
-  $(`#title-${type}`).text(`Create a New ${type}`);
-  $(`#edit-${type}`).modal("show");
-}
-
-/**
- * Display instance modal for editing.
- * @param {type} type - Type.
- * @param {instance} instance - Object instance.
- */
-function processInstance(type, instance) {
-  for (const [property, value] of Object.entries(instance)) {
-    const propertyType = propertyTypes[property] || "str";
-    if (propertyType.includes("bool") || property.includes("regex")) {
-      $(`#${instance.id}-${type}-${property}`).prop("checked", value);
-    } else if (propertyType.includes("dict")) {
-      $(`#${instance.id}-${type}-${property}`).val(
-        value ? JSON.stringify(value) : "{}"
-      );
-    } else if (propertyType.includes("list") || propertyType.includes("obj")) {
-      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
-      $(`#${instance.id}-${type}-${property}`).selectpicker(
-        "val",
-        propertyType === "object"
-          ? value.id
-          : propertyType === "list"
-          ? value
-          : value.map((p) => p.id)
-      );
-      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
-    } else if (propertyType == "object") {
-      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
-      $(`#${instance.id}-${type}-${property}`).selectpicker("val", value.id);
-      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
-    } else {
-      $(`#${instance.id}-${type}-${property}`).val(value);
-    }
-  }
-}
-
 function createPanel(id, contentSize, title, url, processing) {
   return jsPanel.create({
     id: id,
@@ -331,6 +292,41 @@ function showTypePanel(type, id, duplicate) {
           },
         );
       });
+    }
+  }
+}
+
+/**
+ * Display instance modal for editing.
+ * @param {type} type - Type.
+ * @param {instance} instance - Object instance.
+ */
+function processInstance(type, instance) {
+  for (const [property, value] of Object.entries(instance)) {
+    const propertyType = propertyTypes[property] || "str";
+    if (propertyType.includes("bool") || property.includes("regex")) {
+      $(`#${instance.id}-${type}-${property}`).prop("checked", value);
+    } else if (propertyType.includes("dict")) {
+      $(`#${instance.id}-${type}-${property}`).val(
+        value ? JSON.stringify(value) : "{}"
+      );
+    } else if (propertyType.includes("list") || propertyType.includes("obj")) {
+      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
+      $(`#${instance.id}-${type}-${property}`).selectpicker(
+        "val",
+        propertyType === "object"
+          ? value.id
+          : propertyType === "list"
+          ? value
+          : value.map((p) => p.id)
+      );
+      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
+    } else if (propertyType == "object") {
+      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
+      $(`#${instance.id}-${type}-${property}`).selectpicker("val", value.id);
+      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
+    } else {
+      $(`#${instance.id}-${type}-${property}`).val(value);
     }
   }
 }

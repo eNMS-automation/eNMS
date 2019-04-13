@@ -319,15 +319,12 @@ function showTypePanel(type, id, duplicate) {
             url: "user_form",
             done: function(panel) {
               panel.content.innerHTML = this.responseText;
-              if (duplicate) {
-                instance.name = instance.id = "";
-              } else {
-                $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
-                $("#save").prop("id", `${id}-save`);
-                $(`#${id}-save`).attr("onclick", `processData("user", ${id})`);
-                for (let el of $(`[id^=${type}]`)) {
-                  $(el).prop("id", `${id}-${el.id}`);
-                }
+              $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
+              $("#save").prop("id", `${id}-save`);
+              $(`#${id}-save`).attr("onclick", `processData("user", ${id})`);
+              for (let el of $(`[id^=${type}]`)) {
+                if (duplicate && ["name", "id"].includes(el.name)) continue;
+                $(el).prop("id", `${id}-${el.id}`);
               }
               processInstance(type, instance);
             },

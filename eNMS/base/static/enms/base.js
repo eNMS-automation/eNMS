@@ -285,7 +285,7 @@ function showTypePanel(type, id, duplicate) {
       headerTitle: `Create a New ${type}`,
       position: "center-top 0 58",
       contentAjax: {
-        url: "user_form",
+        url: `${type}_form`,
         done: function(panel) {
           panel.content.innerHTML = this.responseText;
           $(`#edit-${type}-form`).trigger("reset");
@@ -316,7 +316,7 @@ function showTypePanel(type, id, duplicate) {
           }`,
           position: "center-top 0 58",
           contentAjax: {
-            url: "user_form",
+            url: `${type}_form`,
             done: function(panel) {
               panel.content.innerHTML = this.responseText;
               $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);

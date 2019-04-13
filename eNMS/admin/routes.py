@@ -44,11 +44,7 @@ from eNMS.properties import instance_table_properties, user_table_properties
 
 @get(bp, "/user_management", "View")
 def user_management() -> dict:
-    return dict(
-        fields=user_table_properties,
-        users=serialize("User"),
-        form=AddUser(request.form),
-    )
+    return dict(fields=user_table_properties)
 
 
 @get(bp, "/administration", "View")
@@ -80,6 +76,11 @@ def instance_management() -> dict:
 @get(bp, "/user_form", "View")
 def user_form() -> dict:
     return dict(form=AddUser(request.form))
+
+
+@get(bp, "/instance_form", "View")
+def instance_form() -> dict:
+    return dict(form=AddInstance(request.form))
 
 
 @bp.route("/login", methods=["GET", "POST"])

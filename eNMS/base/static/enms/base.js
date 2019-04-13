@@ -288,6 +288,27 @@ function showTypePanel(type, id, duplicate) {
               if (duplicate && ["name", "id"].includes(el.name)) continue;
               $(el).prop("id", `${id}-${el.id}`);
             }
+            if (type == "service") {
+              openWizard("service", id);
+              for (let i = 0; i < servicesClasses.length; i++) {
+                const cls = servicesClasses[i];
+                $(`#${id}-service-type`).append(`<option value='${cls}'>${cls}</option>`);
+              }
+              $("#service-type").change(function() {
+                editService();
+              });
+              const url = `/automation/get_service/${id || $("#service-type").val()}`;
+              call(url, function(r) {
+                
+                if (r.service) 
+                for (const type of ["boolean", "list"]) {
+                  const fields = $(`#service-${type}_fields`);
+                  const prop = type == "boolean" ? r.boolean_properties : r.list_properties;
+                  fields.val(`${fields.val()},${prop}`);
+                }
+                $(`#${id}-service-custom-form`).html(r.form);
+              });
+            }
             processInstance(type, instance);
           },
         );

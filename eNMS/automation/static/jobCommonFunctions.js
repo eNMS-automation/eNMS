@@ -18,8 +18,8 @@ let refreshJob = {};
  * @param {type} type - Service or Workflow.
  */
 // eslint-disable-next-line
-function openWizard(type) {
-  $(`#${type}-wizard`).smartWizard({
+function openWizard(type, id) {
+  $(`#${id}-${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
@@ -28,7 +28,7 @@ function openWizard(type) {
     if (type == "service") {
       editService();
     }
-    $(`#${type}-wizard`).smartWizard("goToStep", 1);
+    $(`#${id}-${type}-wizard`).smartWizard("goToStep", 1);
   }
   $(".buttonNext").addClass("btn btn-success");
   $(".buttonPrevious").addClass("btn btn-primary");

@@ -13,13 +13,7 @@ workflowBuilder: false;
 
 (function() {
   convertSelect("#service-devices", "#service-pools");
-  for (let i = 0; i < servicesClasses.length; i++) {
-    const cls = servicesClasses[i];
-    $("#service-type").append(`<option value='${cls}'>${cls}</option>`);
-  }
-  $("#service-type").change(function() {
-    editService();
-  });
+
   $("#edit-service").on("hidden.bs.modal", function() {
     $("#service-type").prop("disabled", false);
   });
@@ -31,18 +25,12 @@ workflowBuilder: false;
  * @param {duplicate} duplicate - Duplicate.
  */
 function editService(id, duplicate) {
-  const url = `/automation/get_service/${id || $("#service-type").val()}`;
-  if (id) $("#service-type").prop("disabled", true);
-  call(url, function(r) {
-    openWizard("service");
-    if (r.service) showTypePanel("service", id, duplicate);
-    for (const type of ["boolean", "list"]) {
-      const fields = $(`#service-${type}_fields`);
-      const prop = type == "boolean" ? r.boolean_properties : r.list_properties;
-      fields.val(`${fields.val()},${prop}`);
-    }
-    $("#html-form").html(r.form);
-  });
+  
+  if (id) {
+    showTypePanel("service", id, duplicate);
+    $("#service-type").prop("disabled", true);
+  }
+
 }
 
 /**

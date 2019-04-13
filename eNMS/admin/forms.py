@@ -20,7 +20,7 @@ class LoginForm(FlaskForm):
     password = PasswordField()
 
 
-class AddUser(FlaskForm):
+class UserForm(FlaskForm):
     list_fields = HiddenField(default="permissions")
     id = HiddenField()
     name = StringField()
@@ -100,7 +100,7 @@ class DatabaseHelpersForm(FlaskForm):
     deletion_types = SelectMultipleField(choices=deletion_choices)
 
 
-class AddInstance(FlaskForm):
+class InstanceForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()

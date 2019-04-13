@@ -59,7 +59,7 @@ class GottyConnectionForm(FlaskForm):
     address = SelectField(choices=address_choices)
 
 
-class AddObjectForm(FlaskForm):
+class ObjectForm(FlaskForm):
     id = HiddenField()
     name = StringField()
     description = StringField()
@@ -69,7 +69,7 @@ class AddObjectForm(FlaskForm):
 
 
 @configure_device_form
-class AddDevice(AddObjectForm):
+class DeviceForm(AddObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)
     ip_address = StringField("IP address")
@@ -85,7 +85,7 @@ class AddDevice(AddObjectForm):
     netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
 
 
-class AddLink(AddObjectForm):
+class LinkForm(AddObjectForm):
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)
     source = ObjectField("Device")
@@ -93,7 +93,7 @@ class AddLink(AddObjectForm):
 
 
 @configure_pool_form
-class AddPoolForm(FlaskForm):
+class PoolForm(FlaskForm):
     id = HiddenField()
     boolean_fields = HiddenField(default="never_update")
     name = StringField()

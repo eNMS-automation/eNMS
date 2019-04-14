@@ -4,6 +4,7 @@ from eNMS.inventory.forms import DeviceForm, LinkForm, PoolForm
 from eNMS.scheduling.forms import TaskForm
 
 form_classes = {
+    "connection": ConnectionForm,
     "device": DeviceForm,
     "instance": InstanceForm,
     "link": LinkForm,
@@ -15,6 +16,7 @@ form_classes = {
 }
 
 form_templates = {
+    "connection": "connection_form",
     "device": "base_form",
     "instance": "base_form",
     "link": "base_form",

@@ -267,6 +267,14 @@ function createPanel(id, contentSize, url, processing) {
 }
 
 /**
+ * Connect to a device.
+ */
+// eslint-disable-next-line
+function showConnectionPanel() {
+  createPanel("connection-panel", "200 500", "../${connection}_form");
+}
+
+/**
  * Display instance modal for editing.
  * @param {type} type - Type.
  * @param {id} id - Instance ID.

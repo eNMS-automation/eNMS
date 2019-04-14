@@ -16,7 +16,6 @@ from eNMS.inventory.forms import (
     CompareConfigurationsForm,
     DeviceAutomationForm,
     GoogleEarthForm,
-    GottyConnectionForm,
     ImportExportForm,
     LibreNmsForm,
     NetboxForm,
@@ -39,7 +38,6 @@ def device_management() -> dict:
     return dict(
         fields=device_table_properties,
         device_automation_form=DeviceAutomationForm(request.form),
-        gotty_connection_form=GottyConnectionForm(request.form),
         pool_restriction_form=PoolRestrictionForm(request.form),
     )
 
@@ -67,7 +65,6 @@ def pool_management() -> dict:
         pool_object_form=PoolObjectsForm(request.form),
         fields=pool_table_properties,
         device_automation_form=DeviceAutomationForm(request.form),
-        gotty_connection_form=GottyConnectionForm(request.form),
     )
 
 

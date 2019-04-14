@@ -50,7 +50,7 @@ def configure_pool_form(cls: FlaskForm) -> FlaskForm:
     return cls
 
 
-class GottyConnectionForm(FlaskForm):
+class ConnectionForm(FlaskForm):
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
         for property, values in custom_properties.items()

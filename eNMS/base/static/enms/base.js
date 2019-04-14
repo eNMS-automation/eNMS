@@ -158,7 +158,7 @@ function initTable(cls, type, toExclude, scrollX) {
 // eslint-disable-next-line
 function refreshTable(interval) {
   table.ajax.reload(null, false);
-  setTimeout(partial(refreshTable, interval), 5000);
+  setTimeout(() => refreshTable(interval), 5000);
 }
 
 /**
@@ -246,6 +246,35 @@ function createPanel(id, contentSize, url, processing) {
 }
 
 /**
+ * Configure panel.
+ * @param {id} id - Instance ID.
+ * @param {contentSize} contentSize - Content size.
+ * @param {url} url - URL to fetch the content from.
+ * @param {processing} processing - Function once panel is loaded.
+ */
+// eslint-disable-next-line
+function createPanel(id, contentSize, url, processing) {
+  return jsPanel.create({
+    id: id,
+    theme: "none",
+    headerLogo: "../static/images/logo.png",
+    headerControls: {
+      size: "xl",
+    },
+    contentOverflow: 'hidden scroll',
+    contentSize: contentSize,
+    position: "center-top 0 58",
+    contentAjax: {
+      url: url,
+      done: processing,
+    },
+    dragit: {
+      opacity: 0.6,
+    },
+  });
+}
+
+/**
  * Connect to a device.
  */
 // eslint-disable-next-line
@@ -284,6 +313,35 @@ function showAutomationPanel(id) {
 }
 
 /**
+ * Configure form.
+ */
+function configureForm(form) {
+  if (!formProperties[form]) return;
+  formProperties[form].forEach((property) => {
+    const propertyType = propertyTypes[property] || "str";
+    el = $(`#${form}-${property}`);
+    if (!el.length) return;
+    if (propertyType == "date") {
+      const today = new Date();
+      el.datetimepicker({
+        format: "DD/MM/YYYY HH:mm:ss",
+        widgetPositioning: {
+          horizontal: "left",
+          vertical: "bottom",
+        },
+        useCurrent: false,
+      });
+      el.data("DateTimePicker").minDate(today);
+    } else {
+      el.selectpicker({
+        liveSearch: true,
+        actionsBox: true,
+      });
+    }
+  });
+}
+
+/**
  * Display instance modal for editing.
  * @param {type} type - Type.
  * @param {id} id - Instance ID.
@@ -314,6 +372,7 @@ function showTypePanel(type, id, duplicate) {
           if (type !== "service") processInstance(type, instance);
         });
       } else {
+        configureForm(type);
         panel.setHeaderTitle(`Create a New ${type}`);
         $(`#edit-${type}-form`).trigger("reset");
         selects.forEach((id) => $(id).selectpicker("render"));

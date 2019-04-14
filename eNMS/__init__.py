@@ -26,6 +26,7 @@ from eNMS.extensions import (
 from eNMS.cli import configure_cli
 from eNMS.default import create_default
 from eNMS.examples import create_examples
+from eNMS.forms import form_properties
 from eNMS.rest import configure_rest_api
 from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
@@ -114,6 +115,7 @@ def configure_context_processor(app) -> None:
     @app.context_processor
     def inject_properties():
         return {
+            "form_properties": form_properties,
             "names": pretty_names,
             "property_types": {k: str(v) for k, v in property_types.items()},
         }

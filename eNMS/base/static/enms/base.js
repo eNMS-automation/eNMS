@@ -299,6 +299,18 @@ function processInstance(type, instance) {
       el.prop("checked", value);
     } else if (propertyType.includes("dict")) {
       el.val(value ? JSON.stringify(value) : "{}");
+    } else if (propertyType == "date") {
+      const today = new Date();
+      el.datetimepicker({
+        format: "DD/MM/YYYY HH:mm:ss",
+        widgetPositioning: {
+          horizontal: "left",
+          vertical: "bottom",
+        },
+        useCurrent: false,
+      });
+      if (el.length) el.data("DateTimePicker").minDate(today);
+      el.val(value);
     } else if (propertyType.includes("list") || propertyType.includes("obj")) {
       el.selectpicker("deselectAll");
       el.selectpicker(

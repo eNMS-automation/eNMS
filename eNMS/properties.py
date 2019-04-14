@@ -509,6 +509,8 @@ pretty_names.update({k: v["pretty_name"] for k, v in custom_properties.items()})
 reverse_pretty_names: Dict[str, str] = {v: k for k, v in pretty_names.items()}
 
 property_types: Dict[str, str] = {
+    "start_date": "date",
+    "end_date": "date",
     "devices": "object-list",
     "links": "object-list",
     "pools": "object-list",

@@ -18,82 +18,29 @@ let refreshJob = {};
  * @param {type} type - Service or Workflow.
  */
 // eslint-disable-next-line
-function openWizard(type, id) {
+function panelCode(type, id) {
   $(`#${id}-${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-}
-
-/**
- * Display instance modal for editing.
- * @param {type} type - Type.
- * @param {id} id - Instance ID.
- * @param {duplicate} duplicate - Edit versus duplicate.
- */
-// eslint-disable-next-line
-function showTypePanel(type, id, duplicate) {
   if (type == "service") {
-    showServicePanel(id, duplicate);
-  }
-  if (!id) {
-    createPanel(
-      `panel-${type}`,
-      "700 500",
-      `Create a New ${type}`,
-      `../${type}_form`,
-      function(panel) {
-        panel.content.innerHTML = this.responseText;
-        $(`#edit-${type}-form`).trigger("reset");
-        $(`#${type}-id`).val("");
-        selects.forEach((id) => $(id).selectpicker("render"));
-      }
-    );
-  } else {
-    if ($(`#${id}-edit-${type}-form`).length) {
-      return;
-    } else {
-      call(`/get/${type}/${id}`, function(instance) {
-        createPanel(
-          `panel-${type}-${id}`,
-          "700 500",
-          `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
-          `../${type}_form`,
-          function(panel) {
-            panel.content.innerHTML = this.responseText;
-            $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
-            $("#save").prop("id", `${id}-save`);
-            $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
-            for (let el of $(`[id^=${type}]`)) {
-              if (duplicate && ["name", "id"].includes(el.name)) continue;
-              $(el).prop("id", `${id}-${el.id}`);
-            }
-            if (type == "service") {
-              openWizard("service", id);
-              for (let i = 0; i < servicesClasses.length; i++) {
-                $(`#${id}-service-type`).append(
-                  `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
-                );
-              }
-              $(`#${id}-service-type`).prop("disabled", true);
-              call(`/automation/get_service/${id || $("#service-type").val()}`, function(customForm) {
-                for (const type of ["boolean", "list"]) {
-                  const fields = $(`#${id}-service-${type}_fields`);
-                  const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
-                  fields.val(`${fields.val()},${prop}`);
-                }
-                $(`#${id}-service-custom-form`).html(customForm.html);
-                processInstance(type, instance);
-              });
-            } else {
-              processInstance(type, instance);
-            }
-          },
-        );
-      });
+    for (let i = 0; i < servicesClasses.length; i++) {
+      $(`#${id}-service-type`).append(
+        `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
+      );
     }
+    $(`#${id}-service-type`).prop("disabled", true);
+    call(`/automation/get_service/${id || $("#service-type").val()}`, function(customForm) {
+      for (const type of ["boolean", "list"]) {
+        const fields = $(`#${id}-service-${type}_fields`);
+        const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
+        fields.val(`${fields.val()},${prop}`);
+      }
+      $(`#${id}-service-custom-form`).html(customForm.html);
+      processInstance(type, instance);
+    });
   }
 }
 

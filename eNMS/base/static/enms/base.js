@@ -255,11 +255,11 @@ function createPanel(id, contentSize, url, processing) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
-  if (type == "service") {
-    showServicePanel(id, duplicate);
-  }
   if ($(`#${id}-edit-${type}-form`).length) {
     return;
+  }
+  if (type == "service") {
+    showServicePanel(id, duplicate);
   }
   createPanel(
     id ? `panel-${type}-${id}` : `panel-${type}`,

@@ -21,7 +21,7 @@ switchView: false
  * Display sites (pools with non-empty coordinates).
  */
 function displaySites() {
-  $(".menu,#network").hide();
+  $(".menu").hide();
   deleteAll();
   call("/get_all/pool", function(pools) {
     for (let i = 0; i < pools.length; i++) {
@@ -41,9 +41,9 @@ function enterSite(siteId) {
   $("#map,#earth").css("visibility", "hidden");
   $(".menu").hide();
   $(".btn-view").show();
-  $("#network,.insite-menu,rc-device-menu,rc-link-menu").show();
+  $(".insite-menu,rc-device-menu,rc-link-menu").show();
   call(`/inventory/pool_objects/${siteId}`, function(objects) {
-    displayPool(objects.devices, objects.links);
+    displayPool(siteId, objects.devices, objects.links);
   });
 }
 
@@ -74,14 +74,6 @@ const action = {
   Circle: partial(changeMarker, "Circle"),
   "Circle Marker": partial(changeMarker, "Circle Marker"),
 };
-
-$("#network").contextMenu({
-  menuSelector: "#contextMenu",
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selected);
-  },
-});
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");

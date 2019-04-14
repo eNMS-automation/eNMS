@@ -4,9 +4,7 @@ alertify: false
 vis: false
 */
 
-let container = document.getElementById("network");
 let selected; // eslint-disable-line no-unused-vars
-let network; // eslint-disable-line no-unused-vars
 
 /**
  * Convert device to Vis node.
@@ -36,12 +34,43 @@ function linkToEdge(link) {
 }
 
 /**
- * Erase the network.
+ * Visualize pool.
+ * @param {id} id - Id of the pool.
  */
 // eslint-disable-next-line
-function eraseNetwork() {
-  network = new vis.Network(container);
+function showPoolView(poolId) {
+  panel = jsPanel.create({
+    id: `pool-view-${poolId}`,
+    theme: "none",
+    border: "medium",
+    headerTitle: "Pool view",
+    position: "center-top 0 58",
+    contentSize: "1000 600",
+    content: `<div id="network-${poolId}" style="height:100%; width:100%;"></div>`,
+    dragit: {
+      opacity: 0.7,
+      containment: [5, 5, 5, 5],
+    },
+  });
+  call(`/inventory/pool_objects/${poolId}`, function(pool) {
+    $(`#network-${poolId}`).contextMenu({
+      menuSelector: "#contextMenu",
+      menuSelected: function(invokedOn, selectedMenu) {
+        const row = selectedMenu.text();
+        action[row](selected);
+      },
+    });
+    displayPool(poolId, pool.devices, pool.links);
+  });
 }
+
+const action = {
+  "Device properties": (d) => showTypePanel("device", d),
+  "Link properties": (l) => showTypePanel("link", l),
+  "Pool properties": (p) => showTypePanel("pool", p),
+  Connect: showConnectionPanel,
+  Automation: showAutomationPanel,
+};
 
 /**
  * Display a pool.
@@ -49,7 +78,8 @@ function eraseNetwork() {
  * @param {edges} edges - Array of edges to display.
  */
 // eslint-disable-next-line
-function displayPool(nodes, edges) {
+function displayPool(poolId, nodes, edges) {
+  let container = document.getElementById(`network-${poolId}`);
   nodes = new vis.DataSet(nodes.map(deviceToNode));
   edges = new vis.DataSet(edges.map(linkToEdge));
   const network = new vis.Network(

@@ -69,11 +69,7 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-    const propertyTypes = {{ property_types|tojson|safe }};
-  </script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='workflowManagement.js') }}"></script>
-  <!-- Difflib -->
   <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
 {% endblock javascripts %}

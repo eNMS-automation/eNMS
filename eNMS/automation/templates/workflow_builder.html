@@ -96,16 +96,11 @@
   <script>
     let workflow = {{ workflow|tojson|safe }};
     const servicesClasses = {{ services_classes|tojson|safe }};
-    const propertyTypes = {{ property_types|tojson|safe }};
   </script>
-  <!-- Base -->
   <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
-  <!-- Services -->
   <script src="{{ url_for('automation_blueprint.static', filename='serviceEditor.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
-  <!-- Vis JS -->
   <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='workflowBuilder.js') }}"></script>
-  <!-- Difflib -->
   <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
 {% endblock javascripts %}

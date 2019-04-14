@@ -59,7 +59,6 @@
   {{ super() }}
   <script>
     const servicesClasses = {{ services_classes|tojson|safe }};
-    const propertyTypes = {{ property_types|tojson|safe }};
   </script>
   <!-- Difflib -->
   <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>

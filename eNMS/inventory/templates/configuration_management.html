@@ -92,10 +92,6 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-    const propertyTypes = {{ property_types|tojson|safe }};
-  </script>
-  <!-- Difflib -->
   <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='configurationManagement.js') }}"></script>

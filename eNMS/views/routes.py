@@ -3,11 +3,7 @@ from typing import Union
 
 from eNMS.functions import fetch, fetch_all, get, get_one, post
 from eNMS.properties import subtype_sizes, link_subtype_to_color
-from eNMS.inventory.forms import (
-    DeviceAutomationForm,
-    GottyConnectionForm,
-    PoolRestrictionForm,
-)
+from eNMS.inventory.forms import DeviceAutomationForm, PoolRestrictionForm
 from eNMS.views import bp
 
 
@@ -19,7 +15,6 @@ def view(view_type: str) -> dict:
         parameters=parameters,
         device_automation_form=DeviceAutomationForm(request.form),
         subtype_sizes=subtype_sizes,
-        gotty_connection_form=GottyConnectionForm(request.form),
         link_colors=link_subtype_to_color,
         pool_restriction_form=PoolRestrictionForm(request.form),
         view_type=view_type,

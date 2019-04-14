@@ -1,6 +1,6 @@
 from eNMS.admin.forms import InstanceForm, UserForm
 from eNMS.automation.forms import JobForm
-from eNMS.inventory.forms import DeviceForm, LinkForm, PoolForm
+from eNMS.inventory.forms import ConnectionForm, DeviceForm, LinkForm, PoolForm
 from eNMS.scheduling.forms import TaskForm
 
 form_classes = {

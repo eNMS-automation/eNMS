@@ -270,8 +270,20 @@ function createPanel(id, contentSize, url, processing) {
  * Connect to a device.
  */
 // eslint-disable-next-line
-function showConnectionPanel() {
-  createPanel("connection-panel", "200 500", "../${connection}_form");
+function showConnectionPanel(id) {
+  createPanel(
+    "connection-panel",
+    "400 500",
+    "../connection_form",
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Connect to device");
+      $("#connection-button").prop("id", `${id}-connection-button`);
+      $(`#${id}-connection-button`).attr("onclick", `sshConnection(${id})`);
+      $("#connection-parameters-form").trigger("reset");
+      flipAuthenticationCombo();
+    }
+  );
 }
 
 /**

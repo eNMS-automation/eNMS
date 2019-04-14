@@ -110,7 +110,7 @@ class Device(CustomDevice):
                 onclick="deviceAutomationModal('{self.id}')">
                 Automation</button>""",
                 f"""<button type="button" class="btn btn-success btn-xs"
-                onclick="connectionParametersModal('{self.id}')">
+                onclick="showConnectionPanel('{self.id}')">
                 Connect</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
                 onclick="showTypePanel('device', '{self.id}')">Edit</button>""",

@@ -59,20 +59,6 @@ function saveDeviceJobs(id) {
 }
 
 /**
- * Display the device connection modal.
- * @param {id} id - Device id.
- */
-// eslint-disable-next-line
-function connectionParametersModal(id) {
-  $("#connection-button").unbind("click");
-  $("#connection-button").click(partial(sshConnection, id));
-  $("#connection-parameters-form").trigger("reset");
-  flipAuthenticationCombo();
-  $("#edit-device").modal("hide");
-  $("#connection-parameters").modal("show");
-}
-
-/**
  * Start an SSH session to the device.
  * @param {id} id - Device id.
  */
@@ -86,14 +72,29 @@ function sshConnection(id) {
     const terminal = result.redirection
       ? `${url}/terminal${result.port}/`
       : `${url}:${result.port}`;
+    /*
     setTimeout(function() {
       openUrl(terminal);
     }, 300);
+    */
     const messageLink = `Click here to connect to ${result.device}.`;
     const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
     alertify.notify(link, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
     alertify.notify(warning, "error", 20);
-    $("#connection-parameters").modal("hide");
+    $(`#${id}-connection-panel`).remove();
+    createPanel(
+      "connection-panel",
+      "400 500",
+      "../connection_form",
+      function(panel) {
+        panel.content.innerHTML = this.responseText;
+        panel.setHeaderTitle("Connect to device");
+        $("#connection-button").prop("id", `${id}-connection-button`);
+        $(`#${id}-connection-button`).attr("onclick", `sshConnection(${id})`);
+        $("#connection-parameters-form").trigger("reset");
+        flipAuthenticationCombo();
+      }
+    );
   });
 }

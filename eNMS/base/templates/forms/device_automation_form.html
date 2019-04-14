@@ -1,7 +1,7 @@
 <form id="device-automation-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
   <div class="modal-body">
     <div class="form-group">
-      {% for field in device_automation_form %}
+      {% for field in form %}
         {% if field.widget.input_type == 'hidden' %}
           {{ field() }}
         {% else %}

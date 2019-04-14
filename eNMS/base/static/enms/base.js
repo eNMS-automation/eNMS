@@ -282,7 +282,7 @@ function showConnectionPanel(id) {
 function showAutomationPanel(id) {
   createPanel(
     `automation-panel-${id}`,
-    "400 500",
+    "400 200",
     "../device_automation_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;

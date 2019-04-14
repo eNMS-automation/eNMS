@@ -31,5 +31,6 @@ form_templates = {
     "pool": "pool_form",
     "service": "service_form",
     "task": "base_form",
+    "user": "base_form",
     "workflow": "workflow_form",
 }

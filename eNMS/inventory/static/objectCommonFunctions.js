@@ -7,31 +7,6 @@ partial: false
 */
 
 /**
- * Flip Combo box depending on whether or not authentication is selected.
- */
-function flipAuthenticationCombo() {
-  $("#user-credentials,#device-credentials").prop(
-    "disabled",
-    !$("#authentication").prop("checked")
-  );
-}
-
-(function() {
-  $("#authentication").change(function() {
-    flipAuthenticationCombo();
-  });
-})();
-
-/**
- * Open new tab at the provided URL.
- * @param {url} url - URL.
- */
-function openUrl(url) {
-  let win = window.open(url, "_blank");
-  win.focus();
-}
-
-/**
  * Display the device automation modal.
  * @param {id} id - Device id.
  */
@@ -64,7 +39,7 @@ function saveDeviceJobs(id) {
  */
 function sshConnection(id) {
   const url = `/inventory/connection/${id}`;
-  fCall(url, "#connection-parameters-form", function(result) {
+  fCall(url, `#${id}-connection-parameters-form`, function(result) {
     let url = result.server_addr;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
@@ -72,29 +47,14 @@ function sshConnection(id) {
     const terminal = result.redirection
       ? `${url}/terminal${result.port}/`
       : `${url}:${result.port}`;
-    /*
     setTimeout(function() {
       openUrl(terminal);
     }, 300);
-    */
     const messageLink = `Click here to connect to ${result.device}.`;
     const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
     alertify.notify(link, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
     alertify.notify(warning, "error", 20);
     $(`#${id}-connection-panel`).remove();
-    createPanel(
-      "connection-panel",
-      "400 500",
-      "../connection_form",
-      function(panel) {
-        panel.content.innerHTML = this.responseText;
-        panel.setHeaderTitle("Connect to device");
-        $("#connection-button").prop("id", `${id}-connection-button`);
-        $(`#${id}-connection-button`).attr("onclick", `sshConnection(${id})`);
-        $("#connection-parameters-form").trigger("reset");
-        flipAuthenticationCombo();
-      }
-    );
   });
 }

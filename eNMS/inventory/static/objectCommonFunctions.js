@@ -43,3 +43,11 @@ function sshConnection(id) {
     $(`#${id}-connection-panel`).remove();
   });
 }
+
+Object.assign(action, {
+  "Device properties": (d) => showTypePanel("device", d),
+  "Link properties": (l) => showTypePanel("link", l),
+  "Pool properties": (p) => showTypePanel("pool", p),
+  Connect: showConnectionPanel,
+  Automation: showAutomationPanel,
+});

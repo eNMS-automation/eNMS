@@ -319,7 +319,6 @@ Object.assign(action, {
   "Google Maps": partial(switchLayer, "gm"),
   NASA: partial(switchLayer, "nasa"),
   "Display sites": () => switchView(currentView),
-  "Display site": showPoolView,
   "2D": partial(switchView, "2D"),
   "Clustered 2D": partial(switchView, "2DC"),
   "3D": partial(switchView, "3D"),

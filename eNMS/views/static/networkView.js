@@ -35,24 +35,6 @@ $("#restrict-pool").on("change", function() {
   });
 });
 
-// eslint-disable-next-line no-unused-vars
-const action = {
-  "Open Street Map": partial(switchLayer, "osm"),
-  "Google Maps": partial(switchLayer, "gm"),
-  NASA: partial(switchLayer, "nasa"),
-  "Device properties": (d) => showTypePanel("device", d),
-  "Link properties": (l) => showTypePanel("link", l),
-  "Pool properties": (p) => showTypePanel("pool", p),
-  Connect: showConnectionPanel,
-  Automation: showAutomationPanel,
-  "2D": partial(switchView, "2D"),
-  "Clustered 2D": partial(switchView, "2DC"),
-  "3D": partial(switchView, "3D"),
-  Image: partial(changeMarker, "Image"),
-  Circle: partial(changeMarker, "Circle"),
-  "Circle Marker": partial(changeMarker, "Circle Marker"),
-};
-
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
   convertSelect("#restrict-pool");

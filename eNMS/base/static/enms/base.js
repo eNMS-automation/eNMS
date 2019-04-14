@@ -262,7 +262,7 @@ function createPanel(id, contentSize, url, processing) {
 // eslint-disable-next-line
 function showConnectionPanel(id) {
   createPanel(
-    `${id}-connecon-panel`,
+    `connection-panel-${id}`,
     "400 500",
     "../connection_form",
     function(panel) {
@@ -271,7 +271,6 @@ function showConnectionPanel(id) {
       $("#connection-button").prop("id", `${id}-connection-button`);
       $(`#${id}-connection-button`).attr("onclick", `sshConnection(${id})`);
       $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
-      flipAuthenticationCombo();
     }
   );
 }

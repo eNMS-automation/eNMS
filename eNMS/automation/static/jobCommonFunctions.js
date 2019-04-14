@@ -42,7 +42,6 @@ function displayCustomForm(id) {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
-  console.log($(id ? `#${id}-${type}-wizard` : `#${type}-wizard`));
   $(id ? `#${id}-${type}-wizard` : `#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,

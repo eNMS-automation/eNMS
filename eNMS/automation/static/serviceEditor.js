@@ -10,7 +10,3 @@ saveInstance: false
 servicesClasses: false
 workflowBuilder: false;
 */
-
-(function() {
-  convertSelect("#service-devices", "#service-pools");
-})();

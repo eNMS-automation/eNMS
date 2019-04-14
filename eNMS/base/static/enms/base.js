@@ -293,16 +293,15 @@ function showTypePanel(type, id, duplicate) {
  */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
+    el = $(instance ? `#${instance.id}-${type}-${property}` : `#${type}-${property}`);
     const propertyType = propertyTypes[property] || "str";
     if (propertyType.includes("bool") || property.includes("regex")) {
-      $(`#${instance.id}-${type}-${property}`).prop("checked", value);
+      el.prop("checked", value);
     } else if (propertyType.includes("dict")) {
-      $(`#${instance.id}-${type}-${property}`).val(
-        value ? JSON.stringify(value) : "{}"
-      );
+      el.val(value ? JSON.stringify(value) : "{}");
     } else if (propertyType.includes("list") || propertyType.includes("obj")) {
-      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
-      $(`#${instance.id}-${type}-${property}`).selectpicker(
+      el.selectpicker("deselectAll");
+      el.selectpicker(
         "val",
         propertyType === "object"
           ? value.id
@@ -310,13 +309,13 @@ function processInstance(type, instance) {
           ? value
           : value.map((p) => p.id)
       );
-      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
+      el.selectpicker("render");
     } else if (propertyType == "object") {
-      $(`#${instance.id}-${type}-${property}`).selectpicker("deselectAll");
-      $(`#${instance.id}-${type}-${property}`).selectpicker("val", value.id);
-      $(`#${instance.id}-${type}-${property}`).selectpicker("render");
+      el.selectpicker("deselectAll");
+      el.selectpicker("val", value.id);
+      el.selectpicker("render");
     } else {
-      $(`#${instance.id}-${type}-${property}`).val(value);
+      el.val(value);
     }
   }
 }
@@ -327,7 +326,6 @@ function processInstance(type, instance) {
  */
 // eslint-disable-next-line
 function processData(type, id) {
-  console.log(type, id);
   fCall(
     `/update/${type}`,
     id ? `#${id}-edit-${type}-form` : `#edit-${type}-form`,

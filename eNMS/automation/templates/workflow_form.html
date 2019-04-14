@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
-        <button id="workflow-button" type="button" class="btn btn-success pull-right" onclick="processData('workflow')">Save</button>
+        <button id="save" type="button" class="btn btn-success pull-right" onclick="processData('workflow')">Save</button>
         <h4 class="modal-title" id="title-workflow"></h4>
       </div>
       <form id="edit-workflow-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
@@ -36,36 +36,36 @@
               </li>
             </ul>
             <div id="step-1" style="min-height: 60vh; overflow-x: hidden;">
-              {% for field in workflow_creation_form %}
+              {% for field in form %}
                 {% if field.widget.input_type == 'hidden' %}
                   {{ field(id='workflow-' + field.name) }}
                 {% endif %}
               {% endfor %}
               <label><label for="name">Name</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.name(id='workflow-name', class="form-control required") }}
+                {{ form.name(id='workflow-name', class="form-control required") }}
               </div>
               <label><label for="description">Description</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.description(id='workflow-description', class="form-control") }}
+                {{ form.description(id='workflow-description', class="form-control") }}
               </div>
               <label><label for="vendor">Vendor</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.vendor(id='workflow-vendor', class="form-control") }}
+                {{ form.vendor(id='workflow-vendor', class="form-control") }}
               </div>
               <label><label for="operating_system">Operating System</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.operating_system(id='workflow-operating_system', class="form-control") }}
+                {{ form.operating_system(id='workflow-operating_system', class="form-control") }}
               </div>
             </div>
             <div id="step-2" style="min-height: 60vh; overflow-x: hidden;">
               <label><label for="number_of_retries">Number of retries</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
+                {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
               </div>
               <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.time_between_retries(id='workflow-time_between_retries', class="form-control") }}
+                {{ form.time_between_retries(id='workflow-time_between_retries', class="form-control") }}
               </div>
               <fieldset>
                 <div class="item">
@@ -75,7 +75,7 @@
               </fieldset>
               <label><label for="send_notification_method">Send Notification Method</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.send_notification_method(id='workflow-send_notification_method', class="form-control") }}
+                {{ form.send_notification_method(id='workflow-send_notification_method', class="form-control") }}
               </div>
               <fieldset>
                 <div class="item">
@@ -85,7 +85,7 @@
               </fieldset>
               <label><label for="waiting_time">Waiting time (in seconds)</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.waiting_time(id='workflow-waiting_time', class="form-control") }}
+                {{ form.waiting_time(id='workflow-waiting_time', class="form-control") }}
               </div>
               <fieldset>
                 <div class="item">
@@ -103,11 +103,11 @@
               </fieldset>
               <label><label for="devices">Devices</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.devices(id='workflow-devices', class="form-control") }}
+                {{ form.devices(id='workflow-devices', class="form-control") }}
               </div>
               <label><label for="pools">Pools</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.pools(id='workflow-pools', class="form-control") }}
+                {{ form.pools(id='workflow-pools', class="form-control") }}
               </div>
               <fieldset>
                 <div class="item">
@@ -117,11 +117,11 @@
               </fieldset>
               <label><label for="max_processes">Maximum number of processes</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.max_processes(id='workflow-max_processes', class="form-control") }}
+                {{ form.max_processes(id='workflow-max_processes', class="form-control") }}
               </div>
               <label><label for="credentials">Credentials</label></label>
               <div class='form-group'>
-                {{ workflow_creation_form.credentials(id='workflow-credentials', class="form-control") }}
+                {{ form.credentials(id='workflow-credentials', class="form-control") }}
               </div>
             </div>
           </div>

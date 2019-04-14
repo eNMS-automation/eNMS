@@ -1,7 +1,5 @@
 <div class="modal-header">
-  <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
-  <button type="button" class="btn btn-success pull-right" onclick="saveService(run=true)">Save & Run</button>
-  <button type="button" class="btn btn-success pull-right" onclick="saveService()">Save</button>
+  <button id="save" type="button" class="btn btn-success pull-right" onclick="processData('service')">Save</button>
   <h4 class="modal-title" id="title-service"></h4>
 </div>
 <form id="edit-service-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
@@ -136,5 +134,5 @@
         <div id="service-custom-form"></div>
       </div>
     </div>
-  </form>
-</div>
+  </div>
+</form>

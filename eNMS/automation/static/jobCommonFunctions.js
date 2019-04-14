@@ -53,6 +53,17 @@ function panelCode(type, id) {
 }
 
 /**
+ * Save a service.
+ * @param {service} service - Service instance.
+ */
+// eslint-disable-next-line
+function saveService(service) {
+  if (typeof workflowBuilder !== "undefined") {
+    nodes.update({ id: service.id, label: service.name });
+  }
+}
+
+/**
  * Display result.
  * @param {results} results - Results.
  * @param {id} id - Job id.

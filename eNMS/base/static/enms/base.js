@@ -269,6 +269,7 @@ function showTypePanel(type, id, duplicate) {
           panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
           $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
           $("#save").prop("id", `${id}-save`);
+          console.log(`processData("${type}", ${id})`);
           $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
           for (let el of $(`[id^=${type}]`)) {
             if (duplicate && ["name", "id"].includes(el.name)) continue;
@@ -328,12 +329,14 @@ function processInstance(type, instance) {
  */
 // eslint-disable-next-line
 function processData(type, id) {
+  console.log(type, id);
   fCall(
     `/update/${type}`,
     id ? `#${id}-edit-${type}-form` : `#edit-${type}-form`,
     (instance) => {
       table && table.ajax.reload(null, false);
       $(id ? `#panel-${type}-${id}` : `#panel-${type}`).remove();
+      if (type == "service") saveService(instance);
       alertify.notify(
         `${type.toUpperCase()} '${instance.name}' ${
           id ? "updated" : "created"

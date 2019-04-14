@@ -19,4 +19,5 @@ form_templates = {
     "instance": "base_form",
     "link": "base_form",
     "pool": "pool_form",
+    "task": "base_form",
 }

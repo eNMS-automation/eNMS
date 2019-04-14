@@ -191,18 +191,23 @@ function refreshTable(interval) {
 function confirmDeletion(type, id) {
   panel = jsPanel.create({
     id: "deletion-panel",
-    theme: "red filled",
+    theme: "none",
     border: "medium",
     headerTitle: "Delete",
     position: "center-top 0 58",
-    contentSize: "300 300",
+    contentSize: "300 150",
     content: `
       <div class="modal-body">
         Are you sure you want to permanently remove this item ?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" onclick="deleteInstance('${type}', ${id})">Delete</button>
+        <center>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="deleteInstance('${type}', ${id})"
+          >Delete</button>
+        </center>
       </div>`,
     dragit: {
       opacity: 0.7,
@@ -225,7 +230,7 @@ function deleteInstance(type, id) {
       .remove()
       .draw(false);
     alertify.notify(
-      `${capitalize(type)} '${result.name}' deleted.`,
+      `${type.toUpperCase()} '${result.name}' deleted.`,
       "error",
       5
     );

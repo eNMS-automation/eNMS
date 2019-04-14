@@ -15,6 +15,7 @@ def task_management() -> dict:
 def calendar() -> dict:
     tasks = {}
     for task in fetch_all("Task"):
+        print(task)
         # javascript dates range from 0 to 11, we must account for that by
         # substracting 1 to the month for the date to be properly displayed in
         # the calendar

@@ -101,8 +101,5 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-    const propertyTypes = {{ property_types|tojson|safe }};
-  </script>
   <script src="{{ url_for('logs_blueprint.static', filename='logAutomation.js') }}"></script>
 {% endblock javascripts %}

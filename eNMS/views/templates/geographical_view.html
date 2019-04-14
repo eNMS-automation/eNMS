@@ -92,7 +92,6 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    const propertyTypes = {{ property_types|tojson|safe }};
     let subtype_sizes = {{ subtype_sizes|tojson|safe }};
     let link_colors = {{ link_colors|tojson|safe }};
     let parameters = {{ parameters|tojson|safe }};

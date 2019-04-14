@@ -92,6 +92,10 @@ def configure_syslog_server(app: Flask) -> None:
 
 
 def configure_database(app: Flask) -> None:
+    @app.context_processor
+    def inject_user():
+        return {"property_types": {k: str(v) for k, v in property_types.items()}}
+
     @app.teardown_request
     def shutdown_session(
         exception: Optional[Union[Response, Exception]] = None

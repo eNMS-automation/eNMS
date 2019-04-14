@@ -189,11 +189,26 @@ function refreshTable(interval) {
  */
 // eslint-disable-next-line
 function confirmDeletion(type, id) {
-  $("#confirm-delete-button").attr(
-    "onclick",
-    `deleteInstance('${type}', ${id})`
-  );
-  $("#confirm-delete").modal("show");
+  panel = jsPanel.create({
+    id: "deletion-panel",
+    theme: "red filled",
+    border: "medium",
+    headerTitle: "Delete",
+    position: "center-top 0 58",
+    contentSize: "300 300",
+    content: `
+      <div class="modal-body">
+        Are you sure you want to permanently remove this item ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" onclick="deleteInstance('${type}', ${id})">Delete</button>
+      </div>`,
+    dragit: {
+      opacity: 0.7,
+      containment: [5, 5, 5, 5],
+    },
+  });
 }
 
 /**
@@ -204,7 +219,7 @@ function confirmDeletion(type, id) {
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete/${type}/${id}`, function(result) {
-    $("#confirm-delete").modal("hide");
+    $("#deletion-panel").remove();
     table
       .row($(`#${id}`))
       .remove()

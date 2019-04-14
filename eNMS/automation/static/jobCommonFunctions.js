@@ -14,7 +14,30 @@ showTypePanel: false
 let refreshJob = {};
 
 /**
- * Open smart wizard.
+ * Display custom form.
+ * @param {id} id - Service ID.
+ */
+// eslint-disable-next-line
+function displayCustomForm(id) {
+  for (let i = 0; i < servicesClasses.length; i++) {
+    $(id ? `#${id}-service-type` : "service-type").append(
+      `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
+    );
+  }
+  $(`#${id}-service-type`).prop("disabled", true);
+  call(`/automation/get_service/${id || $("#service-type").val()}`, function(customForm) {
+    for (const type of ["boolean", "list"]) {
+      const fields = $(`#${id}-service-${type}_fields`);
+      const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
+      fields.val(`${fields.val()},${prop}`);
+    }
+    $(`#${id}-service-custom-form`).html(customForm.html);
+    if (customForm.service) processInstance("service", customForm.service);
+  });
+}
+
+/**
+ * Custom code upon opening panel.
  * @param {type} type - Service or Workflow.
  */
 // eslint-disable-next-line
@@ -26,21 +49,7 @@ function panelCode(type, id) {
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   if (type == "service") {
-    for (let i = 0; i < servicesClasses.length; i++) {
-      $(`#${id}-service-type`).append(
-        `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
-      );
-    }
-    $(`#${id}-service-type`).prop("disabled", true);
-    call(`/automation/get_service/${id || $("#service-type").val()}`, function(customForm) {
-      for (const type of ["boolean", "list"]) {
-        const fields = $(`#${id}-service-${type}_fields`);
-        const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
-        fields.val(`${fields.val()},${prop}`);
-      }
-      $(`#${id}-service-custom-form`).html(customForm.html);
-      processInstance(type, instance);
-    });
+    displayCustomForm(id);
   }
 }
 

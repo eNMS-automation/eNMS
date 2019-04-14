@@ -4,7 +4,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 from eNMS.models import ObjectField
 
 
-class SchedulingForm(FlaskForm):
+class TaskForm(FlaskForm):
     id = HiddenField()
     boolean_fields = HiddenField(default="is_active")
     is_active = BooleanField()

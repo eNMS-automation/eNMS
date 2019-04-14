@@ -4,14 +4,11 @@ from re import search, sub
 from eNMS.functions import fetch, fetch_all, get, post
 from eNMS.properties import task_table_properties
 from eNMS.scheduling import bp
-from eNMS.scheduling.forms import SchedulingForm
 
 
 @get(bp, "/task_management", "View")
 def task_management() -> dict:
-    return dict(
-        fields=task_table_properties, scheduling_form=SchedulingForm(request.form)
-    )
+    return dict(fields=task_table_properties)
 
 
 @get(bp, "/calendar", "View")
@@ -33,7 +30,7 @@ def calendar() -> dict:
             ).split(",")
         ]
         tasks[task.name] = {**task.serialized, **{"date": js_date}}
-    return dict(tasks=tasks, scheduling_form=SchedulingForm(request.form))
+    return dict(tasks=tasks)
 
 
 @post(bp, "/<action>_task/<int:task_id>", "Edit")

@@ -57,15 +57,14 @@ function updateView() {
 
 const action = {
   // eslint-disable-line no-unused-vars
-  "Export to Google Earth": partial(showModal, "google-earth"),
   "Open Street Map": partial(switchLayer, "osm"),
   "Google Maps": partial(switchLayer, "gm"),
   NASA: partial(switchLayer, "nasa"),
   "Device properties": (d) => showTypePanel("device", d),
   "Link properties": (l) => showTypePanel("link", l),
   "Pool properties": (p) => showTypePanel("pool", p),
-  Connect: connectionParametersModal,
-  Automation: deviceAutomationModal,
+  Connect: showConnectionPanel,
+  Automation: showAutomationPanel,
   "Display sites": () => switchView(currentView),
   "Enter site": enterSite,
   "2D": partial(switchView, "2D"),

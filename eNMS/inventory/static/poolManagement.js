@@ -42,22 +42,27 @@ function showPoolObjects(id) {
   });
 }
 
-$("#view-pool").on("shown.bs.modal", function() {
-  call(`/inventory/pool_objects/${poolId}`, function(pool) {
-    displayPool(pool.devices, pool.links);
-  });
-});
-
 /**
  * Visualize pool.
  * @param {id} id - Id of the pool.
  */
 // eslint-disable-next-line
-function showPoolView(id) {
-  poolId = id;
-  call(`/inventory/pool_objects/${id}`, function(pool) {
-    eraseNetwork();
-    $("#view-pool").modal("show");
+function showPoolView(poolId) {
+  panel = jsPanel.create({
+    id: `pool-view-${poolId}`,
+    theme: "none",
+    border: "medium",
+    headerTitle: "Pool view",
+    position: "center-top 0 58",
+    contentSize: "600 600",
+    content: `<div id="network" style="height:400px; width:100%;"></div>`,
+    dragit: {
+      opacity: 0.7,
+      containment: [5, 5, 5, 5],
+    },
+  });
+  call(`/inventory/pool_objects/${poolId}`, function(pool) {
+    displayPool(pool.devices, pool.links);
   });
 }
 
@@ -65,8 +70,8 @@ const action = {
   "Device properties": (d) => showTypePanel("device", d),
   "Link properties": (l) => showTypePanel("link", l),
   "Pool properties": (p) => showTypePanel("pool", p),
-  Connect: connectionParametersModal,
-  Automation: deviceAutomationModal,
+  Connect: showConnectionPanel,
+  Automation: showAutomationPanel,
 };
 
 $("#network").contextMenu({

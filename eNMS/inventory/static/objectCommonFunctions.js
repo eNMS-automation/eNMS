@@ -14,7 +14,7 @@ function saveDeviceJobs(id) {
   const url = `/inventory/save_device_jobs/${id}`;
   fCall(url, "#device-automation-form", function(device) {
     alertify.notify("Changes saved.", "success", 5);
-    $("#device-automation").modal("hide");
+    $(`automation-panel-${id}`).remove();
   });
 }
 

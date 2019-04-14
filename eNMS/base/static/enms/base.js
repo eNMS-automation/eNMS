@@ -221,7 +221,6 @@ function deleteInstance(type, id) {
  * Create a panel.
  * @param {id} id - Instance ID.
  * @param {contentSize} contentSize - Content size.
- * @param {title} title - Header title.
  * @param {url} url - URL to fetch the content from.
  * @param {processing} processing - Function once panel is loaded.
  */
@@ -263,13 +262,13 @@ function showTypePanel(type, id, duplicate) {
     "700 500",
     `../${type}_form`,
     function(panel) {
+      console.log(this.responseText)
       panel.content.innerHTML = this.responseText;
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
           panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
           $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
           $("#save").prop("id", `${id}-save`);
-          console.log(`processData("${type}", ${id})`);
           $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
           for (let el of $(`[id^=${type}]`)) {
             if (duplicate && ["name", "id"].includes(el.name)) continue;

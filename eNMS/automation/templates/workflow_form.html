@@ -1,132 +1,125 @@
-<div id="edit-workflow" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" onmouseenter="openWizard('workflow')">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
-        <button id="save" type="button" class="btn btn-success pull-right" onclick="processData('workflow')">Save</button>
-        <h4 class="modal-title" id="title-workflow"></h4>
+
+<div class="modal-header">
+  <button id="save" type="button" class="btn btn-success pull-right" onclick="processData('workflow')">Save</button>
+</div>
+<form id="edit-workflow-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
+  <div class="modal-body">
+    <div id="workflow-wizard" class="form_wizard wizard_horizontal">
+      <ul class="wizard_steps">
+        <li>
+          <a href="#step-1">
+            <span class="step_no">1</span>
+            <span class="step_descr">Step 1<br>
+              <small>General</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#step-2">
+            <span class="step_no">2</span>
+            <span class="step_descr">Step 2<br>
+              <small>Advanced</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#step-3">
+            <span class="step_no">3</span>
+            <span class="step_descr">Step 3<br>
+              <small>Targets</small>
+            </span>
+          </a>
+        </li>
+      </ul>
+      <div id="step-1" style="min-height: 60vh; overflow-x: hidden;">
+        {% for field in form %}
+          {% if field.widget.input_type == 'hidden' %}
+            {{ field(id='workflow-' + field.name) }}
+          {% endif %}
+        {% endfor %}
+        <label><label for="name">Name</label></label>
+        <div class='form-group'>
+          {{ form.name(id='workflow-name', class="form-control required") }}
+        </div>
+        <label><label for="description">Description</label></label>
+        <div class='form-group'>
+          {{ form.description(id='workflow-description', class="form-control") }}
+        </div>
+        <label><label for="vendor">Vendor</label></label>
+        <div class='form-group'>
+          {{ form.vendor(id='workflow-vendor', class="form-control") }}
+        </div>
+        <label><label for="operating_system">Operating System</label></label>
+        <div class='form-group'>
+          {{ form.operating_system(id='workflow-operating_system', class="form-control") }}
+        </div>
       </div>
-      <form id="edit-workflow-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
-        <div class="modal-body">
-          <div id="workflow-wizard" class="form_wizard wizard_horizontal">
-            <ul class="wizard_steps">
-              <li>
-                <a href="#step-1">
-                  <span class="step_no">1</span>
-                  <span class="step_descr">Step 1<br>
-                    <small>General</small>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#step-2">
-                  <span class="step_no">2</span>
-                  <span class="step_descr">Step 2<br>
-                    <small>Advanced</small>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#step-3">
-                  <span class="step_no">3</span>
-                  <span class="step_descr">Step 3<br>
-                    <small>Targets</small>
-                  </span>
-                </a>
-              </li>
-            </ul>
-            <div id="step-1" style="min-height: 60vh; overflow-x: hidden;">
-              {% for field in form %}
-                {% if field.widget.input_type == 'hidden' %}
-                  {{ field(id='workflow-' + field.name) }}
-                {% endif %}
-              {% endfor %}
-              <label><label for="name">Name</label></label>
-              <div class='form-group'>
-                {{ form.name(id='workflow-name', class="form-control required") }}
-              </div>
-              <label><label for="description">Description</label></label>
-              <div class='form-group'>
-                {{ form.description(id='workflow-description', class="form-control") }}
-              </div>
-              <label><label for="vendor">Vendor</label></label>
-              <div class='form-group'>
-                {{ form.vendor(id='workflow-vendor', class="form-control") }}
-              </div>
-              <label><label for="operating_system">Operating System</label></label>
-              <div class='form-group'>
-                {{ form.operating_system(id='workflow-operating_system', class="form-control") }}
-              </div>
-            </div>
-            <div id="step-2" style="min-height: 60vh; overflow-x: hidden;">
-              <label><label for="number_of_retries">Number of retries</label></label>
-              <div class='form-group'>
-                {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
-              </div>
-              <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
-              <div class='form-group'>
-                {{ form.time_between_retries(id='workflow-time_between_retries', class="form-control") }}
-              </div>
-              <fieldset>
-                <div class="item">
-                  <input id="workflow-send_notification" name="send_notification" type="checkbox" value="y">
-                  <label>Send notification</label>
-                </div>
-              </fieldset>
-              <label><label for="send_notification_method">Send Notification Method</label></label>
-              <div class='form-group'>
-                {{ form.send_notification_method(id='workflow-send_notification_method', class="form-control") }}
-              </div>
-              <fieldset>
-                <div class="item">
-                  <input id="workflow-display_only_failed_nodes" name="display_only_failed_nodes" type="checkbox" value="y">
-                  <label>Display only failed nodes</label>
-                </div>
-              </fieldset>
-              <label><label for="waiting_time">Waiting time (in seconds)</label></label>
-              <div class='form-group'>
-                {{ form.waiting_time(id='workflow-waiting_time', class="form-control") }}
-              </div>
-              <fieldset>
-                <div class="item">
-                  <input id="workflow-push_to_git" name="push_to_git" type="checkbox" value="y">
-                  <label>Push to git</label>
-                </div>
-              </fieldset>
-            </div>
-            <div id="step-3" style="min-height: 60vh; overflow-x: hidden;">
-              <fieldset>
-                <div class="item">
-                  <input id="workflow-use_workflow_targets" name="use_workflow_targets" type="checkbox" value="y">
-                  <label>Use Workflow Targets</label>
-                </div>
-              </fieldset>
-              <label><label for="devices">Devices</label></label>
-              <div class='form-group'>
-                {{ form.devices(id='workflow-devices', class="form-control") }}
-              </div>
-              <label><label for="pools">Pools</label></label>
-              <div class='form-group'>
-                {{ form.pools(id='workflow-pools', class="form-control") }}
-              </div>
-              <fieldset>
-                <div class="item">
-                  <input id="workflow-multiprocessing" name="multiprocessing" type="checkbox" value="y">
-                  <label>Multiprocessing</label>
-                </div>
-              </fieldset>
-              <label><label for="max_processes">Maximum number of processes</label></label>
-              <div class='form-group'>
-                {{ form.max_processes(id='workflow-max_processes', class="form-control") }}
-              </div>
-              <label><label for="credentials">Credentials</label></label>
-              <div class='form-group'>
-                {{ form.credentials(id='workflow-credentials', class="form-control") }}
-              </div>
-            </div>
+      <div id="step-2" style="min-height: 60vh; overflow-x: hidden;">
+        <label><label for="number_of_retries">Number of retries</label></label>
+        <div class='form-group'>
+          {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
+        </div>
+        <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
+        <div class='form-group'>
+          {{ form.time_between_retries(id='workflow-time_between_retries', class="form-control") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input id="workflow-send_notification" name="send_notification" type="checkbox" value="y">
+            <label>Send notification</label>
           </div>
-        </form>
+        </fieldset>
+        <label><label for="send_notification_method">Send Notification Method</label></label>
+        <div class='form-group'>
+          {{ form.send_notification_method(id='workflow-send_notification_method', class="form-control") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input id="workflow-display_only_failed_nodes" name="display_only_failed_nodes" type="checkbox" value="y">
+            <label>Display only failed nodes</label>
+          </div>
+        </fieldset>
+        <label><label for="waiting_time">Waiting time (in seconds)</label></label>
+        <div class='form-group'>
+          {{ form.waiting_time(id='workflow-waiting_time', class="form-control") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input id="workflow-push_to_git" name="push_to_git" type="checkbox" value="y">
+            <label>Push to git</label>
+          </div>
+        </fieldset>
+      </div>
+      <div id="step-3" style="min-height: 60vh; overflow-x: hidden;">
+        <fieldset>
+          <div class="item">
+            <input id="workflow-use_workflow_targets" name="use_workflow_targets" type="checkbox" value="y">
+            <label>Use Workflow Targets</label>
+          </div>
+        </fieldset>
+        <label><label for="devices">Devices</label></label>
+        <div class='form-group'>
+          {{ form.devices(id='workflow-devices', class="form-control") }}
+        </div>
+        <label><label for="pools">Pools</label></label>
+        <div class='form-group'>
+          {{ form.pools(id='workflow-pools', class="form-control") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input id="workflow-multiprocessing" name="multiprocessing" type="checkbox" value="y">
+            <label>Multiprocessing</label>
+          </div>
+        </fieldset>
+        <label><label for="max_processes">Maximum number of processes</label></label>
+        <div class='form-group'>
+          {{ form.max_processes(id='workflow-max_processes', class="form-control") }}
+        </div>
+        <label><label for="credentials">Credentials</label></label>
+        <div class='form-group'>
+          {{ form.credentials(id='workflow-credentials', class="form-control") }}
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>

@@ -42,15 +42,14 @@ function displayCustomForm(id) {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
-  $(`#${id}-${type}-wizard`).smartWizard({
+  console.log($(id ? `#${id}-${type}-wizard` : `#${type}-wizard`));
+  $(id ? `#${id}-${type}-wizard` : `#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-  if (type == "service") {
-    displayCustomForm(id);
-  }
+  if (type == "service") displayCustomForm(id);
 }
 
 /**

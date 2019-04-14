@@ -258,9 +258,6 @@ function showTypePanel(type, id, duplicate) {
   if ($(`#${id}-edit-${type}-form`).length) {
     return;
   }
-  if (type == "service") {
-    showServicePanel(id, duplicate);
-  }
   createPanel(
     id ? `panel-${type}-${id}` : `panel-${type}`,
     "700 500",
@@ -277,12 +274,14 @@ function showTypePanel(type, id, duplicate) {
             if (duplicate && ["name", "id"].includes(el.name)) continue;
             $(el).prop("id", `${id}-${el.id}`);
           }
-          processInstance(type, instance);
+          if (["service", "workflow"].includes(type)) panelCode(type, id);
+          if (type !== "service") processInstance(type, instance);
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         $(`#edit-${type}-form`).trigger("reset");
         selects.forEach((id) => $(id).selectpicker("render"));
+        if (["service", "workflow"].includes(type)) panelCode(type);
       }
     }
   );
@@ -295,7 +294,6 @@ function showTypePanel(type, id, duplicate) {
  */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
-    console.log(property, value);
     const propertyType = propertyTypes[property] || "str";
     if (propertyType.includes("bool") || property.includes("regex")) {
       $(`#${instance.id}-${type}-${property}`).prop("checked", value);

@@ -16,10 +16,11 @@ workflowBuilder: false;
  * @param {run} run - Run after saving.
  */
 // eslint-disable-next-line
-function saveService(run) {
-  fCall(`/update/${$("#service-type").val()}`, "#edit-service-form", function(
-    service
-  ) {
+function saveService(run, id) {
+  fCall(
+    `/update/${$("#service-type").val()}`,
+    id ? "#${id}-edit-service-form" :  "#edit-service-form",
+    function(service) {
     saveInstance("service", service, !run);
     if (typeof workflowBuilder !== "undefined") {
       nodes.update({ id: service.id, label: service.name });

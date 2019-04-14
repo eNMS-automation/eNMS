@@ -64,13 +64,13 @@ function showPoolView(poolId) {
   });
 }
 
-const action = {
+Object.assign(action, {
   "Device properties": (d) => showTypePanel("device", d),
   "Link properties": (l) => showTypePanel("link", l),
   "Pool properties": (p) => showTypePanel("pool", p),
   Connect: showConnectionPanel,
   Automation: showAutomationPanel,
-};
+});
 
 /**
  * Display a pool.

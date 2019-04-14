@@ -38,7 +38,6 @@ function displaySites() {
  * @param {siteId} siteId - Pool ID.
  */
 function enterSite(siteId) {
-  $("#map,#earth").css("visibility", "hidden");
   $(".menu").hide();
   $(".btn-view").show();
   $(".insite-menu,rc-device-menu,rc-link-menu").show();
@@ -54,26 +53,6 @@ function enterSite(siteId) {
 function updateView() {
   displaySites();
 }
-
-const action = {
-  // eslint-disable-line no-unused-vars
-  "Open Street Map": partial(switchLayer, "osm"),
-  "Google Maps": partial(switchLayer, "gm"),
-  NASA: partial(switchLayer, "nasa"),
-  "Device properties": (d) => showTypePanel("device", d),
-  "Link properties": (l) => showTypePanel("link", l),
-  "Pool properties": (p) => showTypePanel("pool", p),
-  Connect: showConnectionPanel,
-  Automation: showAutomationPanel,
-  "Display sites": () => switchView(currentView),
-  "Enter site": enterSite,
-  "2D": partial(switchView, "2D"),
-  "Clustered 2D": partial(switchView, "2DC"),
-  "3D": partial(switchView, "3D"),
-  Image: partial(changeMarker, "Image"),
-  Circle: partial(changeMarker, "Circle"),
-  "Circle Marker": partial(changeMarker, "Circle Marker"),
-};
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");

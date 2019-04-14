@@ -1,75 +1,62 @@
-<div id="edit-task" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="title-task"></h4>
+<form id="edit-task-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+  <div class="modal-body" style="min-height:70vh;">
+    <div class="form-group">
+      {{ form.id(id='task-id') }}
+      {{ form.boolean_fields() }}
+      <fieldset>
+        <div class="item">
+          <input id="task-is_active" name="is_active" type="checkbox" value="y">
+          <label>Schedule task</label>
+        </div>
+      </fieldset>
+      <label>Name</label>
+      <div class='form-group'>
+        {{ form.name(id='task-name', class="form-control required") }}
       </div>
-      <form id="edit-task-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-        <div class="modal-body" style="min-height:70vh;">
-          <div class="form-group">
-            {{ form.id(id='task-id') }}
-            {{ form.boolean_fields() }}
-            <fieldset>
-              <div class="item">
-                <input id="task-is_active" name="is_active" type="checkbox" value="y">
-                <label>Schedule task</label>
-              </div>
-            </fieldset>
-            <label>Name</label>
-            <div class='form-group'>
-              {{ form.name(id='task-name', class="form-control required") }}
-            </div>
-            <label>Description</label>
-            <div class='form-group'>
-              {{ form.description(id='task-description', class="form-control") }}
-            </div>
-            <label>Service or Workflow</label>
-            <div class="form-group">
-              {{ form.job(id='task-job', class="form-control") }}
-            </div>
-            <label>Scheduling Mode</label>
-            <div class="form-group">
-              {{ form.scheduling_mode(id='task-scheduling_mode', class="form-control") }}
-            </div>
-            <div class="x_title">
-              <h4 class="text-center">Standard Scheduling</h4>
-            </div>
-            <label>Start date</label>
-            <div class='form-group'>
-              {{ form.start_date(id='task-start_date', class="form-control") }}
-            </div>
-            <label>End date</label>
-            <div class='form-group'>
-              {{ form.end_date(id='task-end_date', class="form-control") }}
-            </div>
-            <label>Frequency</label>
-            <div class='form-group'>
-              <div class="row row-no-gutters">
-                <div class="col-md-9">
-                  {{ form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
-                </div>
-                <div class="col-md-3">
-                  {{ form.frequency_unit(id='task-frequency_unit', class="form-control") }}
-                </div>
-              </div>
-            </div>
-            <div class="x_title">
-              <h4 class="text-center">Crontab Scheduling</h4>
-            </div>
-            <label>Crontab Expression</label>
-            <div class='form-group'>
-              {{ form.crontab_expression(id='task-crontab_expression', class="form-control") }}
-            </div>
+      <label>Description</label>
+      <div class='form-group'>
+        {{ form.description(id='task-description', class="form-control") }}
+      </div>
+      <label>Service or Workflow</label>
+      <div class="form-group">
+        {{ form.job(id='task-job', class="form-control") }}
+      </div>
+      <label>Scheduling Mode</label>
+      <div class="form-group">
+        {{ form.scheduling_mode(id='task-scheduling_mode', class="form-control") }}
+      </div>
+      <div class="x_title">
+        <h4 class="text-center">Standard Scheduling</h4>
+      </div>
+      <label>Start date</label>
+      <div class='form-group'>
+        {{ form.start_date(id='task-start_date', class="form-control") }}
+      </div>
+      <label>End date</label>
+      <div class='form-group'>
+        {{ form.end_date(id='task-end_date', class="form-control") }}
+      </div>
+      <label>Frequency</label>
+      <div class='form-group'>
+        <div class="row row-no-gutters">
+          <div class="col-md-9">
+            {{ form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
+          </div>
+          <div class="col-md-3">
+            {{ form.frequency_unit(id='task-frequency_unit', class="form-control") }}
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" onclick="processData('task')">Save</button>
-        </div>
-      </form>
+      </div>
+      <div class="x_title">
+        <h4 class="text-center">Crontab Scheduling</h4>
+      </div>
+      <label>Crontab Expression</label>
+      <div class='form-group'>
+        {{ form.crontab_expression(id='task-crontab_expression', class="form-control") }}
+      </div>
     </div>
   </div>
-</div>
+  <div class="modal-footer">
+    <button id="save" type="button" class="btn btn-success" onclick="processData('task')">Save</button>
+  </div>
+</form>

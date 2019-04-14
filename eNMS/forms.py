@@ -1,11 +1,18 @@
 from eNMS.admin.forms import InstanceForm, UserForm
 from eNMS.automation.forms import JobForm
-from eNMS.inventory.forms import ConnectionForm, DeviceForm, LinkForm, PoolForm
+from eNMS.inventory.forms import (
+    ConnectionForm,
+    DeviceAutomationForm,
+    DeviceForm,
+    LinkForm,
+    PoolForm,
+)
 from eNMS.scheduling.forms import TaskForm
 
 form_classes = {
     "connection": ConnectionForm,
     "device": DeviceForm,
+    "device_automation": DeviceAutomationForm,
     "instance": InstanceForm,
     "link": LinkForm,
     "pool": PoolForm,
@@ -18,6 +25,7 @@ form_classes = {
 form_templates = {
     "connection": "connection_form",
     "device": "base_form",
+    "device_automation": "device_automation_form",
     "instance": "base_form",
     "link": "base_form",
     "pool": "pool_form",

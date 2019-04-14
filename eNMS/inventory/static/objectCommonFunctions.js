@@ -7,21 +7,6 @@ partial: false
 */
 
 /**
- * Display the device automation modal.
- * @param {id} id - Device id.
- */
-// eslint-disable-next-line
-function deviceAutomationModal(id) {
-  call(`/get/device/${id}`, function(device) {
-    $("#device-automation-button").unbind("click");
-    $("#device-automation-button").click(partial(saveDeviceJobs, id));
-    $("#jobs").selectpicker("deselectAll");
-    $("#jobs").selectpicker("val", device.jobs.map((d) => d.id));
-    $("#device-automation").modal("show");
-  });
-}
-
-/**
  * Update device jobs.
  * @param {id} id - Device id.
  */

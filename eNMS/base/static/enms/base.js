@@ -269,7 +269,26 @@ function showConnectionPanel(id) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Connect to device");
       $("#connection-button").prop("id", `${id}-connection-button`);
-      $(`#${id}-connection-button`).attr("onclick", `sshConnection(${id})`);
+      $(`#${id}-connection-button`).attr("onclick", `saveDeviceJobs(${id})`);
+      $("#device-automation-form").prop("id", `${id}-device-automation-form`);
+    }
+  );
+}
+
+/**
+ * Connect to a device.
+ */
+// eslint-disable-next-line
+function showAutomationPanel(id) {
+  createPanel(
+    `automation-panel-${id}`,
+    "400 500",
+    "../device_automation_form",
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Device automation");
+      $("#device-automation-button").prop("id", `${id}-device-automation-button`);
+      $(`#${id}-device-automation-button`).attr("onclick", `sshConnection(${id})`);
       $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
     }
   );

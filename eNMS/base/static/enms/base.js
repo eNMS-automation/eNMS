@@ -44,17 +44,6 @@ function convertSelect(...ids) {
 }
 
 /**
- * Returns partial function.
- * @param {function} func - any function
- * @return {function}
- */
-function partial(func, ...args) {
-  return function() {
-    return func.apply(this, args);
-  };
-}
-
-/**
  * Capitalize.
  * @param {string} string - Word.
  * @return {capitalizedString}

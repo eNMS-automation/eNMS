@@ -60,6 +60,9 @@
         <script src="{{ url_for('static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
         <script src="{{ url_for('static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
         <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
+        <script>
+          const propertyTypes = {{ property_types|tojson|safe }};
+        </script>
       {% endblock %}
     {% endblock body %}
   </body>

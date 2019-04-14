@@ -20,22 +20,12 @@ function doc(url) {
 }
 
 /**
- * Show modal.
- * @param {name} name - Modal name.
+ * Open new tab at the provided URL.
+ * @param {url} url - URL.
  */
-// eslint-disable-next-line
-function showModal(name) {
-  $(`#${name}`).modal("show");
-}
-
-/**
- * Reset form and show modal.
- * @param {name} name - Modal name.
- */
-// eslint-disable-next-line
-function resetShowModal(name) {
-  $(`#${name}-form`).trigger("reset");
-  $(`#${name}`).modal("show");
+function openUrl(url) {
+  let win = window.open(url, "_blank");
+  win.focus();
 }
 
 /**

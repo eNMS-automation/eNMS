@@ -8,7 +8,6 @@ table: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
-let selects = [];
 
 /**
  * Update link to the docs.
@@ -26,21 +25,6 @@ function doc(url) {
 function openUrl(url) {
   let win = window.open(url, "_blank");
   win.focus();
-}
-
-/**
- * Convert to Bootstrap Select.
- * @param {ids} ids - Ids.
- */
-// eslint-disable-next-line
-function convertSelect(...ids) {
-  ids.forEach((id) => {
-    selects.push(id);
-    $(id).selectpicker({
-      liveSearch: true,
-      actionsBox: true,
-    });
-  });
 }
 
 /**
@@ -315,11 +299,11 @@ function showAutomationPanel(id) {
 /**
  * Configure form.
  */
-function configureForm(form) {
+function configureForm(form, id) {
   if (!formProperties[form]) return;
   formProperties[form].forEach((property) => {
     const propertyType = propertyTypes[property] || "str";
-    el = $(`#${form}-${property}`);
+    el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
     if (!el.length) return;
     if (propertyType == "date") {
       const today = new Date();
@@ -358,6 +342,7 @@ function showTypePanel(type, id, duplicate) {
     `../${type}_form`,
     function(panel) {
       panel.content.innerHTML = this.responseText;
+      configureForm(type, id);
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
           panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
@@ -372,10 +357,8 @@ function showTypePanel(type, id, duplicate) {
           if (type !== "service") processInstance(type, instance);
         });
       } else {
-        configureForm(type);
         panel.setHeaderTitle(`Create a New ${type}`);
         $(`#edit-${type}-form`).trigger("reset");
-        selects.forEach((id) => $(id).selectpicker("render"));
         if (["service", "workflow"].includes(type)) panelCode(type);
       }
     }
@@ -395,18 +378,6 @@ function processInstance(type, instance) {
       el.prop("checked", value);
     } else if (propertyType.includes("dict")) {
       el.val(value ? JSON.stringify(value) : "{}");
-    } else if (propertyType == "date") {
-      const today = new Date();
-      el.datetimepicker({
-        format: "DD/MM/YYYY HH:mm:ss",
-        widgetPositioning: {
-          horizontal: "left",
-          vertical: "bottom",
-        },
-        useCurrent: false,
-      });
-      if (el.length) el.data("DateTimePicker").minDate(today);
-      el.val(value);
     } else if (propertyType.includes("list") || propertyType.includes("obj")) {
       el.selectpicker("deselectAll");
       el.selectpicker(

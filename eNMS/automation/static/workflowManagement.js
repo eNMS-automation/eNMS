@@ -42,9 +42,5 @@ function duplicateWorkflow(id) {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/workflows/index.html");
-  convertSelect("#workflow-devices", "#workflow-pools");
-  $("#edit-workflow").on("hidden.bs.modal", function() {
-    $("#workflow-button").attr("onclick", "processData('workflow')");
-  });
   refreshTable(5000);
 })();

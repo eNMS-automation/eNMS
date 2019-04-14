@@ -38,4 +38,5 @@ form_templates = {
 form_properties = {
     "service": ("devices", "pools"),
     "task": ("start_date", "end_date", "job"),
+    "workflow": ("devices", "pools"),
 }

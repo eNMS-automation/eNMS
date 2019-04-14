@@ -373,7 +373,6 @@ function initSidebar() {
           setContentHeight();
         });
       } else {
-        // prevent closing menu if we are on child menu
         if (!$li.parent().is(".child_menu")) {
           $("#sidebar-menu")
             .find("li")

@@ -19,19 +19,13 @@ let refreshJob = {};
  */
 // eslint-disable-next-line
 function displayCustomForm(id) {
-  for (let i = 0; i < servicesClasses.length; i++) {
-    $(id ? `#${id}-service-type` : "service-type").append(
-      `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
-    );
-  }
-  $(`#${id}-service-type`).prop("disabled", true);
   call(`/automation/get_service/${id || $("#service-type").val()}`, function(customForm) {
     for (const type of ["boolean", "list"]) {
       const fields = $(`#${id}-service-${type}_fields`);
       const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
       fields.val(`${fields.val()},${prop}`);
     }
-    $(`#${id}-service-custom-form`).html(customForm.html);
+    $(id ? `#${id}-service-custom-form` : "#service-custom-form").html(customForm.html);
     if (customForm.service) processInstance("service", customForm.service);
   });
 }
@@ -48,7 +42,23 @@ function panelCode(type, id) {
     transitionEffect: "none",
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-  if (type == "service") displayCustomForm(id);
+  if (type == "service") {
+    for (let i = 0; i < servicesClasses.length; i++) {
+      $("#service-type").append(
+        `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
+      );
+    }
+    if (id) {
+      $(`#${id}-service-type`).prop("disabled", true);
+    } else {
+      console.log('test1');
+      $("#service-type").change(function() {
+        console.log('test2');
+        displayCustomForm();
+      });
+    }
+    displayCustomForm(id);
+  }
 }
 
 /**

@@ -5,7 +5,7 @@ enterSite: false
 L: false
 link_colors: false
 parameters: false
-showTypeModal: false
+showTypePanel: false
 subtype_sizes: false
 updateView: false
 WE: false
@@ -185,7 +185,7 @@ function createNode(node, nodeType) {
     if (nodeType == "site") {
       enterSite(node.id);
     } else {
-      showTypeModal(nodeType, node.id);
+      showTypePanel(nodeType, node.id);
     }
   });
   marker.on("contextmenu", function(e) {
@@ -222,7 +222,7 @@ function createLink(link) {
     polylinesArray.push(polyline);
     polyline.link_id = link.id;
     polyline.on("click", function(e) {
-      showTypeModal("link", this.link_id);
+      showTypePanel("link", this.link_id);
     });
     polyline.on("contextmenu", function(e) {
       $(".menu").hide();

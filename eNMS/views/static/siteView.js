@@ -12,7 +12,7 @@ doc: false
 partial: false
 selected: false
 showModal: false
-showTypeModal: false
+showTypePanel: false
 switchLayer: false
 switchView: false
 */
@@ -61,9 +61,9 @@ const action = {
   "Open Street Map": partial(switchLayer, "osm"),
   "Google Maps": partial(switchLayer, "gm"),
   NASA: partial(switchLayer, "nasa"),
-  "Device properties": (d) => showTypeModal("device", d),
-  "Link properties": (l) => showTypeModal("link", l),
-  "Pool properties": (p) => showTypeModal("pool", p),
+  "Device properties": (d) => showTypePanel("device", d),
+  "Link properties": (l) => showTypePanel("link", l),
+  "Pool properties": (p) => showTypePanel("pool", p),
   Connect: connectionParametersModal,
   Automation: deviceAutomationModal,
   "Display sites": () => switchView(currentView),

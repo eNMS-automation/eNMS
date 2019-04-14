@@ -12,7 +12,7 @@ from werkzeug.wrappers import Response
 from eNMS import db
 from eNMS.base import bp
 from eNMS.classes import classes
-from eNMS.forms import type_to_forms
+from eNMS.forms import form_classes, form_templates
 from eNMS.functions import (
     delete,
     factory,
@@ -97,7 +97,11 @@ def server_side_processing(cls: str, table: str) -> Response:
 
 @get(bp, "/<form_type>_form", "View")
 def route_form(form_type: str) -> dict:
-    return dict(form_type=form_type, form=type_to_forms[form_type](request.form))
+    return dict(
+        form=form_classes[form_type](request.form),
+        form_type=form_type,
+        template=f"forms/{form_templates[form_type]}",
+    )
 
 
 @get(bp, "/dashboard")

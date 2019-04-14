@@ -133,7 +133,7 @@ def templated(function: Callable) -> Callable:
             return ctx
         if request.url is not None:
             endpoint = request.url.split("/")[-1]
-        return render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)
+        return render_template(f"{ctx.pop('template', endpoint)}.html", **ctx)
 
     return decorated_function
 

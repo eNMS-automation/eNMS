@@ -3,7 +3,7 @@ from eNMS.automation.forms import JobForm
 from eNMS.inventory.forms import DeviceForm, LinkForm, PoolForm
 from eNMS.scheduling.forms import TaskForm
 
-type_to_forms = {
+form_classes = {
     "device": DeviceForm,
     "instance": InstanceForm,
     "link": LinkForm,
@@ -13,3 +13,5 @@ type_to_forms = {
     "task": TaskForm,
     "workflow": JobForm,
 }
+
+form_templates = {"device": "base_form", "instance": "base_form"}

@@ -282,7 +282,6 @@ function showTypePanel(type, id, duplicate) {
     "700 500",
     `../${type}_form`,
     function(panel) {
-      console.log(this.responseText);
       panel.content.innerHTML = this.responseText;
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {

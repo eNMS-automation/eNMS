@@ -10,7 +10,6 @@ from typing import Any, Callable, Generator, List, Optional, Tuple
 
 from eNMS.extensions import controller, db
 from eNMS.classes import classes
-from eNMS.properties import pretty_names, property_types
 
 
 def add_classes(*models: db.Model) -> None:
@@ -132,12 +131,6 @@ def templated(function: Callable) -> Callable:
         ctx = function(*args, **kwargs) or {}
         if not isinstance(ctx, dict):
             return ctx
-        ctx.update(
-            {
-                "names": pretty_names,
-                "property_types": {k: str(v) for k, v in property_types.items()},
-            }
-        )
         if request.url is not None:
             endpoint = request.url.split("/")[-1]
         return render_template(ctx.pop("template", f"{endpoint}.html"), **ctx)

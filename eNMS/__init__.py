@@ -38,6 +38,7 @@ from eNMS.properties import (
     google_earth_styles,
     link_subtypes,
     link_subtype_to_color,
+    pretty_names,
     property_types,
     service_import_properties,
 )
@@ -92,10 +93,6 @@ def configure_syslog_server(app: Flask) -> None:
 
 
 def configure_database(app: Flask) -> None:
-    @app.context_processor
-    def inject_user():
-        return {"property_types": {k: str(v) for k, v in property_types.items()}}
-
     @app.teardown_request
     def shutdown_session(
         exception: Optional[Union[Response, Exception]] = None
@@ -111,6 +108,15 @@ def configure_database(app: Flask) -> None:
         create_default(app)
         if app.config["CREATE_EXAMPLES"]:
             create_examples(app)
+
+
+def configure_context_processor(app) -> None:
+    @app.context_processor
+    def inject_properties():
+        return {
+            "names": pretty_names,
+            "property_types": {k: str(v) for k, v in property_types.items()},
+        }
 
 
 def configure_errors(app: Flask) -> None:
@@ -204,6 +210,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     register_blueprints(app)
     configure_login_manager(app)
     configure_database(app)
+    configure_context_processor(app)
     configure_rest_api(app)
     configure_logs(app)
     configure_errors(app)

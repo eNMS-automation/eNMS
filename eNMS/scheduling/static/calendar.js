@@ -29,7 +29,7 @@ $(function() {
     selectable: true,
     selectHelper: true,
     eventClick: function(calEvent, jsEvent, view) {
-      showTypeModal("task", calEvent.id);
+      showTypePanel("task", calEvent.id);
     },
     editable: true,
     events: events,

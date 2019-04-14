@@ -62,6 +62,7 @@
         <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
         <script>
           const propertyTypes = {{ property_types|tojson|safe }};
+          const names = {{ names|tojson|safe }};
         </script>
       {% endblock %}
     {% endblock body %}

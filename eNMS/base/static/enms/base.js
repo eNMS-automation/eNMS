@@ -226,7 +226,7 @@ function deleteInstance(type, id) {
  * @param {processing} processing - Function once panel is loaded.
  */
 // eslint-disable-next-line
-function createPanel(id, contentSize, title, url, processing) {
+function createPanel(id, contentSize, url, processing) {
   return jsPanel.create({
     id: id,
     theme: "none",
@@ -236,7 +236,6 @@ function createPanel(id, contentSize, title, url, processing) {
     },
     contentOverflow: 'hidden scroll',
     contentSize: contentSize,
-    headerTitle: title,
     position: "center-top 0 58",
     contentAjax: {
       url: url,
@@ -256,61 +255,37 @@ function createPanel(id, contentSize, title, url, processing) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
-  if (!id) {
-    createPanel(
-      `panel-${type}`,
-      "700 500",
-      `Create a New ${type}`,
-      `../${type}_form`,
-      function(panel) {
-        panel.content.innerHTML = this.responseText;
+  if (type == "service") {
+    showServicePanel(id, duplicate);
+  }
+  if ($(`#${id}-edit-${type}-form`).length) {
+    return;
+  }
+  createPanel(
+    id ? `panel-${type}-${id}` : `panel-${type}`,
+    "700 500",
+    `../${type}_form`,
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      if (id) {
+        call(`/get/${type}/${id}`, function(instance) {
+          panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
+          $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
+          $("#save").prop("id", `${id}-save`);
+          $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
+          for (let el of $(`[id^=${type}]`)) {
+            if (duplicate && ["name", "id"].includes(el.name)) continue;
+            $(el).prop("id", `${id}-${el.id}`);
+          }
+          processInstance(type, instance);
+        });
+      } else {
+        panel.setHeaderTitle(`Create a New ${type}`);
         $(`#edit-${type}-form`).trigger("reset");
-        $(`#${type}-id`).val("");
         selects.forEach((id) => $(id).selectpicker("render"));
       }
-    );
-  } else {
-    if ($(`#${id}-edit-${type}-form`).length) {
-      return;
-    } else {
-      call(`/get/${type}/${id}`, function(instance) {
-        createPanel(
-          `panel-${type}-${id}`,
-          "700 500",
-          `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`,
-          `../${type}_form`,
-          function(panel) {
-            panel.content.innerHTML = this.responseText;
-            $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
-            $("#save").prop("id", `${id}-save`);
-            $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
-            for (let el of $(`[id^=${type}]`)) {
-              if (duplicate && ["name", "id"].includes(el.name)) continue;
-              $(el).prop("id", `${id}-${el.id}`);
-            }
-            if (type == "service") {
-              openWizard("service", id);
-              for (let i = 0; i < servicesClasses.length; i++) {
-                const cls = servicesClasses[i];
-                $(`#${id}-service-type`).append(`<option value='${cls}'>${cls}</option>`);
-              }
-              call(`/automation/get_service/${id || $("#service-type").val()}`, function(customForm) {
-                for (const type of ["boolean", "list"]) {
-                  const fields = $(`#${id}-service-${type}_fields`);
-                  const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
-                  fields.val(`${fields.val()},${prop}`);
-                }
-                $(`#${id}-service-custom-form`).html(customForm.form);
-                processInstance(type, instance);
-              });
-            } else {
-              processInstance(type, instance);
-            }
-          },
-        );
-      });
     }
-  }
+  );
 }
 
 /**

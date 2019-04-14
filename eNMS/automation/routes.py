@@ -179,7 +179,7 @@ def get_service(id_or_cls: str) -> dict:
             form += build_text_box(property, name)
     return {
         "boolean_properties": ",".join(boolean_properties),
-        "form": form,
+        "html": form,
         "list_properties": ",".join(list_properties),
         "service": service.serialized if service else None,
     }

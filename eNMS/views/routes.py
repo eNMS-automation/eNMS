@@ -15,7 +15,7 @@ from eNMS.views import bp
 def view(view_type: str) -> dict:
     parameters = get_one("Parameters").serialized
     return dict(
-        template=f"geographical_view.html",
+        template="geographical_view",
         parameters=parameters,
         device_automation_form=DeviceAutomationForm(request.form),
         subtype_sizes=subtype_sizes,

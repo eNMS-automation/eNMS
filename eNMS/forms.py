@@ -14,4 +14,9 @@ form_classes = {
     "workflow": JobForm,
 }
 
-form_templates = {"device": "base_form", "instance": "base_form"}
+form_templates = {
+    "device": "base_form",
+    "instance": "base_form",
+    "link": "base_form",
+    "pool": "pool_form",
+}

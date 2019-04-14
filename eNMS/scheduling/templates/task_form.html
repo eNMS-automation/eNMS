@@ -10,8 +10,8 @@
       <form id="edit-task-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
         <div class="modal-body" style="min-height:70vh;">
           <div class="form-group">
-            {{ scheduling_form.id(id='task-id') }}
-            {{ scheduling_form.boolean_fields() }}
+            {{ form.id(id='task-id') }}
+            {{ form.boolean_fields() }}
             <fieldset>
               <div class="item">
                 <input id="task-is_active" name="is_active" type="checkbox" value="y">
@@ -20,39 +20,39 @@
             </fieldset>
             <label>Name</label>
             <div class='form-group'>
-              {{ scheduling_form.name(id='task-name', class="form-control required") }}
+              {{ form.name(id='task-name', class="form-control required") }}
             </div>
             <label>Description</label>
             <div class='form-group'>
-              {{ scheduling_form.description(id='task-description', class="form-control") }}
+              {{ form.description(id='task-description', class="form-control") }}
             </div>
             <label>Service or Workflow</label>
             <div class="form-group">
-              {{ scheduling_form.job(id='task-job', class="form-control") }}
+              {{ form.job(id='task-job', class="form-control") }}
             </div>
             <label>Scheduling Mode</label>
             <div class="form-group">
-              {{ scheduling_form.scheduling_mode(id='task-scheduling_mode', class="form-control") }}
+              {{ form.scheduling_mode(id='task-scheduling_mode', class="form-control") }}
             </div>
             <div class="x_title">
               <h4 class="text-center">Standard Scheduling</h4>
             </div>
             <label>Start date</label>
             <div class='form-group'>
-              {{ scheduling_form.start_date(id='task-start_date', class="form-control") }}
+              {{ form.start_date(id='task-start_date', class="form-control") }}
             </div>
             <label>End date</label>
             <div class='form-group'>
-              {{ scheduling_form.end_date(id='task-end_date', class="form-control") }}
+              {{ form.end_date(id='task-end_date', class="form-control") }}
             </div>
             <label>Frequency</label>
             <div class='form-group'>
               <div class="row row-no-gutters">
                 <div class="col-md-9">
-                  {{ scheduling_form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
+                  {{ form.frequency(id='task-frequency', class="form-control", autocomplete="off") }}
                 </div>
                 <div class="col-md-3">
-                  {{ scheduling_form.frequency_unit(id='task-frequency_unit', class="form-control") }}
+                  {{ form.frequency_unit(id='task-frequency_unit', class="form-control") }}
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@
             </div>
             <label>Crontab Expression</label>
             <div class='form-group'>
-              {{ scheduling_form.crontab_expression(id='task-crontab_expression', class="form-control") }}
+              {{ form.crontab_expression(id='task-crontab_expression', class="form-control") }}
             </div>
           </div>
         </div>

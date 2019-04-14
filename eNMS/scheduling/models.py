@@ -51,9 +51,9 @@ class Task(Base):
             class="btn btn-success btn-xs" onclick=
             "{status.lower()}Task('{self.id}')">{status}</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('task', '{self.id}')">Edit</button>""",
+            onclick="showTypePanel('task', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypeModal('task', '{self.id}', true)">
+            onclick="showTypePanel('task', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('task', '{self.id}')">

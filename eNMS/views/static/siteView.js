@@ -34,19 +34,6 @@ function displaySites() {
 }
 
 /**
- * Enter site.
- * @param {siteId} siteId - Pool ID.
- */
-function enterSite(siteId) {
-  $(".menu").hide();
-  $(".btn-view").show();
-  $(".insite-menu,rc-device-menu,rc-link-menu").show();
-  call(`/inventory/pool_objects/${siteId}`, function(objects) {
-    displayPool(siteId, objects.devices, objects.links);
-  });
-}
-
-/**
  * Update view.
  */
 // eslint-disable-next-line

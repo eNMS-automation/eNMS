@@ -1,7 +1,6 @@
 /*
 global
 action: false
-enterSite: false
 L: false
 link_colors: false
 parameters: false
@@ -183,7 +182,7 @@ function createNode(node, nodeType) {
   markersArray.push(marker);
   marker.on("click", function(e) {
     if (nodeType == "site") {
-      enterSite(node.id);
+      showPoolView(node.id);
     } else {
       showTypePanel(nodeType, node.id);
     }
@@ -320,7 +319,7 @@ Object.assign(action, {
   "Google Maps": partial(switchLayer, "gm"),
   NASA: partial(switchLayer, "nasa"),
   "Display sites": () => switchView(currentView),
-  "Enter site": enterSite,
+  "Display site": showPoolView,
   "2D": partial(switchView, "2D"),
   "Clustered 2D": partial(switchView, "2DC"),
   "3D": partial(switchView, "3D"),

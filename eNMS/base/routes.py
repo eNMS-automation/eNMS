@@ -105,8 +105,8 @@ def route_form(form_type: str) -> dict:
     )
 
 
-@get(bp, "/admin/<table_type>_management", "View")
-def route_table(table_type: str) -> dict:
+@get(bp, "/<blueprint>/<table_type>_management", "View")
+def route_table(blueprint: str, table_type: str) -> dict:
     return dict(
         properties=table_properties[table_type],
         fixed_columns=table_fixed_columns[table_type],

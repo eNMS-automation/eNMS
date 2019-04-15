@@ -14,14 +14,12 @@ from eNMS.functions import factory, fetch, fetch_all, get, get_one, objectify, p
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
     CompareConfigurationsForm,
-    DeviceAutomationForm,
     GoogleEarthForm,
     ImportExportForm,
     LibreNmsForm,
     NetboxForm,
     OpenNmsForm,
     PoolObjectsForm,
-    PoolRestrictionForm,
 )
 from eNMS.inventory.functions import get_pools_devices, object_export, object_import
 from eNMS.properties import (
@@ -31,15 +29,6 @@ from eNMS.properties import (
     link_table_properties,
     pool_table_properties,
 )
-
-
-@get(bp, "/device_management", "View")
-def device_management() -> dict:
-    return dict(
-        fields=device_table_properties,
-        device_automation_form=DeviceAutomationForm(request.form),
-        pool_restriction_form=PoolRestrictionForm(request.form),
-    )
 
 
 @get(bp, "/configuration_management", "View")

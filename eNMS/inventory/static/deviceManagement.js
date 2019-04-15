@@ -15,8 +15,5 @@ let table = initTable("device", "device", [
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/inventory/objects.html");
-  $("#restrict-pool").on("change", function() {
-    table.ajax.reload(null, false);
-  });
-  $("#restrict-pool").selectpicker("selectAll");
+
 })();

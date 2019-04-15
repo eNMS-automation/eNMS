@@ -44,6 +44,14 @@
         });
       }
       getClusterStatus();
+    {% elif type == "device" %}
+      <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+      <script src="{{ url_for('inventory_blueprint.static', filename='deviceManagement.js') }}"></script>
+      $("#restrict-pool").on("change", function() {
+        table.ajax.reload(null, false);
+      });
+      $("#restrict-pool").selectpicker("selectAll");
     {% endif %}
+    
   </script>
 {% endblock javascripts %}

@@ -33,5 +33,17 @@
   {{ super()}}
   <script>
     let table = initTable("{{ type }}", {{ fixed_columns|tojson|safe }});
+    {% if type == "instance" %}
+      /**
+      * Get Cluster Status.
+      */
+      function getClusterStatus() {
+        call("/admin/get_cluster_status", function(cluster) {
+          table.ajax.reload(null, false);
+          setTimeout(getClusterStatus, 15000);
+        });
+      }
+      getClusterStatus();
+    {% endif %}
   </script>
 {% endblock javascripts %}

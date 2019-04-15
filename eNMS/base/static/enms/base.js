@@ -16,6 +16,7 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
 // eslint-disable-next-line
 function doc(page) {
   let url = {
+    "instance_management": "https://enms.readthedocs.io/en/latest/security/access.html",
     "user_management": "https://enms.readthedocs.io/en/latest/security/access.html",
   }[page]
   $("#doc-link").attr("href", url);
@@ -117,7 +118,7 @@ function initTable(type, toExclude, scrollX) {
   const table = $("#table").DataTable({
     serverSide: true,
     orderCellsTop: true,
-    scrollX: scrollX || false,
+    scrollX: true,
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
       url: `/server_side_processing/${type}`,

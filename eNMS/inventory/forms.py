@@ -101,7 +101,7 @@ class FilteringForm(FlaskForm):
 
 
 class DeviceFilteringForm(DevicePublicForm, FilteringForm):
-    pass
+    configuration = StringField()
 
 
 @configure_pool_form

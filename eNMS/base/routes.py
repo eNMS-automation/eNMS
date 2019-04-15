@@ -45,26 +45,24 @@ def server_side_processing(table: str) -> Response:
     except IndexError:
         order_property = "name"
     order_direction = request.args["order[0][dir]"]
+    constraints = []
+    for property in properties:
+        value = request.args.get(f"form[{property}]")
+        if not value:
+            continue
+        else:
+            constraints.append(
+                getattr(model, property).contains(value)
+                if isinstance(getattr(model, property), InstrumentedAttribute)
+                else getattr(model, property) == value
+            )
     filtered = (
         db.session.query(model)
-        .filter(
-            and_(
-                *[
-                    getattr(model, property).contains(value)
-                    if isinstance(getattr(model, property), InstrumentedAttribute)
-                    else getattr(model, property) == value
-                    for property, value in {
-                        property: request.args[f"form[{i}][search][value]"]
-                        for i, property in enumerate(properties)
-                        if request.args[f"columns[{i}][search][value]"]
-                    }.items()
-                ]
-            )
-        )
+        .filter(and_(*constraints))
         .order_by(getattr(getattr(model, order_property), order_direction)())
     )
     if table == "configuration":
-        search_text = request.args["columns[6][search][value]"]
+        search_text = request.args["form[{configuration}]"]
         if search_text:
             filtered = filtered.filter(
                 model.current_configuration.contains(search_text)

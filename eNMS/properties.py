@@ -344,6 +344,7 @@ table_properties: Dict[str, List[str]] = {
 table_fixed_columns: Dict[str, List[str]] = {
     "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],
     "instance": ["Edit", "Duplicate", "Delete"],
+    "link": ["Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],
 }
 

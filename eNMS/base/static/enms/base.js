@@ -18,6 +18,7 @@ function doc(page) {
   let url = {
     "device_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     "instance_management": "https://enms.readthedocs.io/en/latest/security/access.html",
+    "link_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     "user_management": "https://enms.readthedocs.io/en/latest/security/access.html",
   }[page]
   $("#doc-link").attr("href", url);

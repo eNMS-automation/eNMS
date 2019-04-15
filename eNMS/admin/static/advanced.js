@@ -73,15 +73,6 @@ function scheduler(action) {
 }
 
 (function() {
-  convertSelect("#import_export_types", "#deletion_types");
-  $("#clear_logs_date").datetimepicker({
-    format: "DD/MM/YYYY HH:mm:ss",
-    widgetPositioning: {
-      horizontal: "left",
-      vertical: "bottom",
-    },
-    useCurrent: false,
-  });
   folders.forEach((f) => {
     $("#versions").append(`<option value='${f}'></option>`);
   });

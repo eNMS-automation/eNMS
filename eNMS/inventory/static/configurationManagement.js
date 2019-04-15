@@ -104,6 +104,5 @@ function showRawLogs() {
   $("#restrict-pool").on("change", function() {
     table.ajax.reload(null, false);
   });
-  convertSelect("#pools", "#devices", "#restrict-pool");
   $("#restrict-pool").selectpicker("selectAll");
 })();

@@ -7,7 +7,6 @@ editService: false
 getJobState: false
 getWorkflowState: false
 jsPanel: false
-partial: false
 showTypePanel: false
 */
 
@@ -126,7 +125,7 @@ function refreshLogs(firstTime, id) {
         refreshJob[id] = false;
       }
     });
-    setTimeout(partial(refreshLogs, false, id), 500);
+    setTimeout(() => refreshLogs(false, id), 500);
   }
 }
 

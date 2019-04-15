@@ -283,7 +283,7 @@ function showConnectionPanel(id) {
       panel.setHeaderTitle("Connect to device");
       $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
       $("#connection-button").prop("id", `${id}-connection-button`);
-      $(`#${id}-device-automation-button`).attr("onclick", `sshConnection(${id})`);
+      $(`#${id}-connection-button`).attr("onclick", `sshConnection(${id})`);
     }
   );
 }

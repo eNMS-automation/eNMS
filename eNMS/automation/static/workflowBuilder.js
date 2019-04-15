@@ -148,7 +148,7 @@ function addJobToWorkflow() {
     fCall(url, "#add-job-form", function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {
-        $("#add-job").modal("hide");
+        $("#add-job").remove();
         if (graph.findNode(job.id).length == 0) {
           nodes.add(jobToNode(job));
           alertify.notify(

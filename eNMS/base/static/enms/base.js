@@ -256,7 +256,7 @@ function createPanel(id, contentSize, url, processing) {
 function showAutomationPanel(id) {
   createPanel(
     `automation-panel-${id}`,
-    "400 500",
+    "400 200",
     "../device_automation_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;
@@ -276,7 +276,7 @@ function showAutomationPanel(id) {
 function showConnectionPanel(id) {
   createPanel(
     `connection-panel-${id}`,
-    "400 200",
+    "400 600",
     "../connection_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;
@@ -425,7 +425,7 @@ function processData(type, id) {
     `/update/${type}`,
     id ? `#${id}-edit-${type}-form` : `#edit-${type}-form`,
     (instance) => {
-      table && table.ajax.reload(null, false);
+      if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#panel-${type}-${id}` : `#panel-${type}`).remove();
       if (type == "service") saveService(instance);
       alertify.notify(

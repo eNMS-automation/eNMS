@@ -32,7 +32,7 @@ form_templates = {
     "connection": "connection_form",
     "device": "base_form",
     "device_automation": "device_automation_form",
-    "device_filtering": "base_form",
+    "device_filtering": "filtering_form",
     "instance": "base_form",
     "link": "base_form",
     "pool": "pool_form",

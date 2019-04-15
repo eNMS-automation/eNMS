@@ -38,6 +38,7 @@ def site_root() -> Response:
 
 @get(bp, "/server_side_processing/<table>")
 def server_side_processing(table: str) -> Response:
+    print(request.args.getlist("form[pools][]"))
     model, properties = classes.get(table, classes["Device"]), table_properties[table]
     try:
         order_property = properties[int(request.args["order[0][column]"])]

@@ -94,7 +94,7 @@ function fCall(url, form, callback) {
  * @return {table}
  */
 // eslint-disable-next-line
-function initTable(type, toExclude, scrollX) {
+function initTable(type, toExclude) {
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
     serverSide: true,
@@ -104,7 +104,16 @@ function initTable(type, toExclude, scrollX) {
     ajax: {
       url: `/server_side_processing/${type}`,
       data: (d) => {
-        d.form = $(`#filter-${type}-form`).serialize();
+        data = JSON.parse(JSON.stringify($("#filter-form").serializeArray()));
+        result = {"pools": []}
+        data.forEach((property) => {
+          if (property.name == "pools") {
+            result.pools.push(property.value);
+          } else {
+            result[property.name] = property.value
+          }
+        });
+        d.form = result;
       },
     },
   });

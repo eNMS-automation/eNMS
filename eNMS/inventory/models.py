@@ -279,7 +279,7 @@ class Pool(AbstractPool):
             onclick="showTypePanel('pool', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showPoolObjects('{self.id}')">Edit objects</button>""",
+            onclick="showPoolObjectsPanel('{self.id}')">Edit objects</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="confirmDeletion('pool', '{self.id}')">Delete</button>""",
         ]

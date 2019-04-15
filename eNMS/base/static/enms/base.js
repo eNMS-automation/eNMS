@@ -290,6 +290,26 @@ function showConnectionPanel(id) {
 }
 
 /**
+ * Connect to a device.
+ */
+// eslint-disable-next-line
+function showPoolObjectsPanel(id) {
+  createPanel(
+    `connection-panel-${id}`,
+    "400 200",
+    "../connection_form",
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Connect to device");
+      $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
+      $("#connection-button").prop("id", `${id}-connection-button`);
+      $(`#${id}-device-automation-button`).attr("onclick", `sshConnection(${id})`);
+      $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
+    }
+  );
+}
+
+/**
  * Configure form.
  */
 function configureForm(form, id) {

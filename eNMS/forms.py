@@ -6,6 +6,7 @@ from eNMS.inventory.forms import (
     DeviceForm,
     LinkForm,
     PoolForm,
+    PoolObjectsForm,
 )
 from eNMS.scheduling.forms import TaskForm
 
@@ -17,6 +18,7 @@ form_classes = {
     "instance": InstanceForm,
     "link": LinkForm,
     "pool": PoolForm,
+    "pool_objects": PoolObjectsForm,
     "user": UserForm,
     "service": JobForm,
     "task": TaskForm,
@@ -31,6 +33,7 @@ form_templates = {
     "instance": "base_form",
     "link": "base_form",
     "pool": "pool_form",
+    "pool_objects": "pool_objects_form",
     "service": "service_form",
     "task": "base_form",
     "user": "base_form",
@@ -45,6 +48,7 @@ form_properties = {
     "device_management": ("restrict-pool",),
     "link": ("link-source", "link-destination"),
     "link_management": ("restrict-pool",),
+    "pool_objects_form": ("devices", "links"),
     "service": ("devices", "pools"),
     "task": ("start_date", "end_date", "job"),
     "user": ("permissions", "pools"),

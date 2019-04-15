@@ -278,3 +278,30 @@ function runJob(id) {
     showLogs(id);
   });
 }
+
+/**
+ * Display instance modal for editing.
+ * @param {id} id - Instance ID.
+ */
+// eslint-disable-next-line
+function showWorkflowModalDuplicate(id) {
+  $("#workflow-button").attr("onclick", `duplicateWorkflow(${id})`);
+  showTypePanel("workflow", id, true);
+}
+
+/**
+ * Display instance modal for editing.
+ * @param {id} id - Instance ID.
+ */
+// eslint-disable-next-line
+function duplicateWorkflow(id) {
+  $("#edit-workflow").modal("hide");
+  fCall(
+    `/automation/duplicate_workflow/${id}`,
+    "#edit-workflow-form",
+    (workflow) => {
+      table.ajax.reload(null, false);
+      alertify.notify("Workflow successfully duplicated", "success", 5);
+    }
+  );
+}

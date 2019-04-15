@@ -16,6 +16,7 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
 // eslint-disable-next-line
 function doc(page) {
   let url = {
+    "configuration_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     "device_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     "instance_management": "https://enms.readthedocs.io/en/latest/security/access.html",
     "link_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
@@ -221,22 +222,6 @@ function createPanel(id, contentSize, url, processing) {
       opacity: 0.6,
     },
   });
-}
-
-/**
- * Show Filtering Panel
- */
-// eslint-disable-next-line
-function showConfigurationPanel(id) {
-  createPanel(
-    `configuration-panel-${id}`,
-    "700 700",
-    "../configuration_form",
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Device Configurations");
-    }
-  );
 }
 
 /**

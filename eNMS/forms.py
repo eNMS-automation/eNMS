@@ -1,6 +1,7 @@
 from eNMS.admin.forms import InstanceForm, UserForm
 from eNMS.automation.forms import AddJobsForm, JobForm
 from eNMS.inventory.forms import (
+    CompareConfigurationsForm,
     ConnectionForm,
     DeviceAutomationForm,
     DeviceFilteringForm,
@@ -14,7 +15,7 @@ from eNMS.scheduling.forms import TaskForm
 
 form_classes = {
     "add_jobs": AddJobsForm,
-    "configuration": DeviceFilteringForm,
+    "configuration": CompareConfigurationsForm,
     "configuration_filtering": DeviceFilteringForm,
     "connection": ConnectionForm,
     "device": DeviceForm,

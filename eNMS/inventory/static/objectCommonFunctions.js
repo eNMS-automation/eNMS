@@ -42,6 +42,89 @@ function sshConnection(id) {
   });
 }
 
+/**
+ * Show Filtering Panel
+ */
+// eslint-disable-next-line
+function showConfigurationPanel(id) {
+  createPanel(
+    `configuration-panel-${id}`,
+    "700 700",
+    "../configuration_form",
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Device Configurations");
+      $("#display").prop("id", `display-${id}`);
+      $("#compare_with").prop("id", `compare_with-${id}`);
+      $("#configurations").prop("id", `configurations-${id}`);
+      configureCallbacks(id);
+      displayConfigurations(id);
+    }
+  );
+}
+
+/**
+ * Display configurations.
+ */
+function displayConfigurations(id) {
+  call(`/inventory/get_configurations/${id}`, (configurations) => {
+    $(`#display-${id},#compare_with-${id}`).empty();
+    const times = Object.keys(configurations);
+    times.forEach((option) => {
+      $(`#display-${id},#compare_with-${id}`).append(
+        $("<option></option>")
+          .attr("value", option)
+          .text(option)
+      );
+    });
+    $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
+    $(`#configurations-${id}`).text(configurations[$(`#display-${id}`).val()]);
+  });
+}
+
+/**
+ * Clear the configurations
+ */
+// eslint-disable-next-line
+function clearConfigurations(id) {
+  call(`/inventory/clear_configurations/${id}`, () => {
+    $("#configurations").empty();
+    alertify.notify("Configurations cleared.", "success", 5);
+    $("#configurations-modal").modal("hide");
+  });
+}
+
+/**
+ * Configure callbacks.
+ */
+// eslint-disable-next-line
+function configureCallbacks(id) {
+  $(`#display-${id}`).on("change", function() {
+    call(`/inventory/get_configurations/${id}`, (configurations) => {
+      $(`#configurations-${id}`).text(configurations[$(`#display-${id}`).val()]);
+    });
+  });
+  
+  $(`#compare_with-${id}`).on("change", function() {
+    $(`#configurations-${id}`).empty();
+    const v1 = $(`#display-${id}`).val();
+    const v2 = $(`#compare_with-${id}`).val();
+    call(`/inventory/get_diff/${id}/${v1}/${v2}`, function(data) {
+      $(`#configurations-${id}`).append(
+        diffview.buildView({
+          baseTextLines: data.first,
+          newTextLines: data.second,
+          opcodes: data.opcodes,
+          baseTextName: `${v1}`,
+          newTextName: `${v2}`,
+          contextSize: null,
+          viewType: 0,
+        })
+      );
+    });
+  });
+}
+
 Object.assign(action, {
   "Device properties": (d) => showTypePanel("device", d),
   "Link properties": (l) => showTypePanel("link", l),

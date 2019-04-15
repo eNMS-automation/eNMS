@@ -1,19 +1,3 @@
-/*
-global
-alertify: false
-call: false
-convertSelect: false
-diffview: false
-doc: false
-initTable: false
-*/
-
-let table = initTable(
-  // eslint-disable-line no-unused-vars
-  "device",
-  "configuration",
-  ["Download", "Edit"]
-);
 let deviceId;
 
 /**
@@ -84,25 +68,6 @@ $("#compare_with").on("change", function() {
   });
 });
 
-/**
- * Show Raw Logs.
- * @param {deviceId} deviceId - Device ID.
- */
-// eslint-disable-next-line
-function showRawLogs() {
-  window
-    .open(
-      `/inventory/get_raw_logs/${deviceId}/${$("#display").val()}`,
-      "Configuration",
-      "height=800,width=600"
-    )
-    .focus();
-}
-
 (function() {
   doc("https://enms.readthedocs.io/en/latest/inventory/objects.html");
-  $("#restrict-pool").on("change", function() {
-    table.ajax.reload(null, false);
-  });
-  $("#restrict-pool").selectpicker("selectAll");
 })();

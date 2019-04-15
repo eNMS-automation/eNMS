@@ -14,7 +14,10 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
  * @param {url} url - URL pointing to the right page of the docs.
  */
 // eslint-disable-next-line
-function doc(url) {
+function doc(page) {
+  let url = {
+    "user_management": "https://enms.readthedocs.io/en/latest/security/access.html",
+  }[page]
   $("#doc-link").attr("href", url);
 }
 
@@ -567,4 +570,5 @@ if (typeof NProgress != "undefined") {
 $(document).ready(function() {
   initSidebar();
   configureForm(page);
+  doc(page);
 });

@@ -59,8 +59,7 @@ class ConnectionForm(FlaskForm):
     address = SelectField(choices=address_choices)
 
 
-class ObjectForm(FlaskForm):
-    id = HiddenField()
+class BaseObjectForm(FlaskForm):
     name = StringField()
     description = StringField()
     location = StringField()
@@ -68,8 +67,12 @@ class ObjectForm(FlaskForm):
     model = StringField()
 
 
+class ObjectForm(BaseObjectForm):
+    id = HiddenField()
+
+
 @configure_device_form
-class DevicePublicForm(ObjectForm):
+class DeviceForm(ObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)
     ip_address = StringField("IP address")
@@ -78,14 +81,11 @@ class DevicePublicForm(ObjectForm):
     os_version = StringField()
     longitude = FloatField(default=0.0)
     latitude = FloatField(default=0.0)
-    napalm_driver = SelectField(choices=NAPALM_DRIVERS)
-    netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
-
-
-class DeviceForm(ObjectForm):
     username = StringField()
     password = PasswordField()
     enable_password = PasswordField()
+    napalm_driver = SelectField(choices=NAPALM_DRIVERS)
+    netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
 
 
 class LinkForm(ObjectForm):
@@ -100,8 +100,17 @@ class FilteringForm(FlaskForm):
     pools = MultipleObjectField("Pool")
 
 
-class DeviceFilteringForm(DevicePublicForm, FilteringForm):
-    configuration = StringField()
+@configure_device_form
+class DeviceFilteringForm(BaseObjectForm, FilteringForm):
+    subtype = StringField()
+    ip_address = StringField()
+    port = StringField()
+    operating_system = StringField()
+    os_version = StringField()
+    longitude = StringField()
+    latitude = StringField()
+    napalm_driver = StringField()
+    netmiko_driver = StringField()
 
 
 @configure_pool_form

@@ -56,38 +56,25 @@ def server_side_processing(table: str) -> Response:
                 if isinstance(getattr(model, property), InstrumentedAttribute)
                 else getattr(model, property) == value
             )
-    filtered = (
-        db.session.query(model)
-        .filter(and_(*constraints))
-        .order_by(getattr(getattr(model, order_property), order_direction)())
-    )
+    order = getattr(getattr(model, order_property), order_direction)()
+    result = db.session.query(model).filter(and_(*constraints)).order_by(order)
     if table == "configuration":
         search_text = request.args["form[{configuration}]"]
         if search_text:
-            filtered = filtered.filter(
-                model.current_configuration.contains(search_text)
-            )
-    if table in ("device", "link", "configuration") and request.args.getlist("pools[]"):
-        filtered = filtered.filter(
-            model.pools.any(
-                classes["pool"].id.in_(
-                    [
-                        int(pool_id)
-                        for pool_id in request.args.getlist("form[pools][]")
-                        if pool_id
-                    ]
-                )
-            )
-        )
+            result = result.filter(model.current_configuration.contains(search_text))
+    if table in ("device", "link", "configuration"):
+        pools = [int(id) for id in request.args.getlist("form[pools][]")]
+        if pools:
+            result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
     return jsonify(
         {
             "draw": int(request.args["draw"]),
             "recordsTotal": len(model.query.all()),
-            "recordsFiltered": len(filtered.all()),
+            "recordsFiltered": len(result.all()),
             "data": [
                 [getattr(obj, property) for property in properties]
                 + obj.generate_row(table)
-                for obj in filtered.limit(int(request.args["length"]))
+                for obj in result.limit(int(request.args["length"]))
                 .offset(int(request.args["start"]))
                 .all()
             ],

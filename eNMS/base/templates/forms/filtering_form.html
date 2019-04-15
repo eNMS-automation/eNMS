@@ -1,20 +1,26 @@
 <form id="filter-form" class="form-horizontal form-label-left" method="post" autocomplete="off">
   <div class="modal-body">
     <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Pools</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          {{ form.pools(id="device_filtering-pools", class="form-control") }}
+        </div><br><br>
       {% for field in form %}
-        {% set id = "{}-{}".format(form_type, field.name) %}
-        {% if field.widget.input_type == 'hidden' %}
-
-        {% elif field.type == "BooleanField" %}
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
-          <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-1">
-            {{ field(id=id) }}
-          </div><br><br>
-        {% else %}
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
-          <div class="col-md-9 col-sm-9 col-xs-12">
-            {{ field(id=id, class="form-control") }}
-          </div><br><br>
+        {% if field.name != "pools" %}
+          {% set id = "{}-{}".format(form_type, field.name) %}
+          {% if field.widget.input_type == 'hidden' %}
+  
+          {% elif field.type == "BooleanField" %}
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
+            <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-1">
+              {{ field(id=id) }}
+            </div><br><br>
+          {% else %}
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              {{ field(id=id, class="form-control") }}
+            </div><br><br>
+          {% endif %}
         {% endif %}
       {% endfor %}
     </div>

@@ -36,9 +36,9 @@ def site_root() -> Response:
     return redirect(url_for("admin_blueprint.login"))
 
 
-@get(bp, "/server_side_processing/<cls>/<table>")
-def server_side_processing(cls: str, table: str) -> Response:
-    model, properties = classes[cls], table_properties[table]
+@get(bp, "/server_side_processing/<table>")
+def server_side_processing(table: str) -> Response:
+    model, properties = classes.get(table, classes["Device"]), table_properties[table]
     try:
         order_property = properties[int(request.args["order[0][column]"])]
     except IndexError:
@@ -108,7 +108,8 @@ def route_form(form_type: str) -> dict:
 @get(bp, "/admin/<table_type>_management", "View")
 def route_table(table_type: str) -> dict:
     return dict(
-        fields=table_properties[table_type] + table_fixed_columns[table_type],
+        properties=table_properties[table_type],
+        fixed_columns=table_fixed_columns[table_type],
         type=table_type,
         template="table",
     )

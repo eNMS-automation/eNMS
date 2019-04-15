@@ -91,7 +91,7 @@ function fCall(url, form, callback) {
  * @return {table}
  */
 // eslint-disable-next-line
-function initTable(cls, type, toExclude, scrollX) {
+function initTable(type, toExclude, scrollX) {
   $("#table thead tr")
     .clone(true)
     .appendTo("#table thead");
@@ -120,7 +120,7 @@ function initTable(cls, type, toExclude, scrollX) {
     scrollX: scrollX || false,
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
-      url: `/server_side_processing/${cls}/${type}`,
+      url: `/server_side_processing/${type}`,
       data: (d) => {
         d.pools = $("#restrict-pool").val();
       },
@@ -319,14 +319,12 @@ function showPoolObjectsPanel(id) {
  * Configure form.
  */
 function configureForm(form, id) {
-  console.log(id);
   if (!formProperties[form]) return;
   formProperties[form].forEach((property) => {
     const propertyType = propertyTypes[property] || "str";
     el = $(id ? `#${id}-${form}-${property}` : `#${form}-${property}`);
     if (!el.length) el = $(`#${property}`);
     if (propertyType == "date") {
-      console.log(el);
       const today = new Date();
       el.datetimepicker({
         format: "DD/MM/YYYY HH:mm:ss",

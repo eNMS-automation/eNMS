@@ -1,5 +1,5 @@
 from eNMS.admin.forms import InstanceForm, UserForm
-from eNMS.automation.forms import JobForm
+from eNMS.automation.forms import AddJobsForm, JobForm
 from eNMS.inventory.forms import (
     ConnectionForm,
     DeviceAutomationForm,
@@ -10,6 +10,7 @@ from eNMS.inventory.forms import (
 from eNMS.scheduling.forms import TaskForm
 
 form_classes = {
+    "add_jobs": AddJobsForm,
     "connection": ConnectionForm,
     "device": DeviceForm,
     "device_automation": DeviceAutomationForm,
@@ -23,6 +24,7 @@ form_classes = {
 }
 
 form_templates = {
+    "add_jobs": "add_jobs_form",
     "connection": "connection_form",
     "device": "base_form",
     "device_automation": "device_automation_form",
@@ -36,6 +38,7 @@ form_templates = {
 }
 
 form_properties = {
+    "add_jobs": ("add_jobs",),
     "service": ("devices", "pools"),
     "task": ("start_date", "end_date", "job"),
     "workflow": ("devices", "pools"),

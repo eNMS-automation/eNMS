@@ -318,14 +318,15 @@ function savePositions() {
  * Add jobs to the workflow.
  */
 // eslint-disable-next-line
-function addJobPanel(id) {
+function addJobPanel() {
   createPanel(
     "add-job",
     "400 500",
-    "../add_job_form",
+    "../add_jobs_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Add jobs to the worflow");
+      configureForm("add_jobs");
     }
   );
 }
@@ -343,7 +344,7 @@ Object.assign(action, {
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () => showResults(workflow.id),
   "Workflow Logs": () => showLogs(workflow.id),
-  "Add Service or Workflow": partial(showModal, "add-job"),
+  "Add Service or Workflow": addJobPanel,
   Delete: deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),
   "Create 'Failure' edge": () => switchMode("failure"),
@@ -448,6 +449,5 @@ function getWorkflowState() {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/workflows/index.html");
-  convertSelect("#add-jobs", "#workflow-devices", "#workflow-pools");
   getWorkflowState();
 })();

@@ -47,7 +47,7 @@ class CompareResultsForm(FlaskForm):
     compare_with = SelectField(choices=())
 
 
-class AddJobForm(FlaskForm):
+class AddJobsForm(FlaskForm):
     list_fields = HiddenField(default="add_jobs")
     add_jobs = MultipleObjectField("Job")
 

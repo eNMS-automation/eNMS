@@ -1,8 +1,8 @@
 <form id="add-job-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
-  {{ add_job_form.list_fields() }}
+  {{ form.list_fields() }}
   <div class="modal-body">
     <div class="form-group">
-      {{ add_job_form.add_jobs(id="add-jobs", class="form-control", size=15) }}
+      {{ form.add_jobs(id="add_jobs-add_jobs", class="form-control", size=15) }}
     </div>
   </div>
   <div class="modal-footer">

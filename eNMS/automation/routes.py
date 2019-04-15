@@ -27,7 +27,7 @@ from eNMS.properties import (
     workflow_table_properties,
 )
 from eNMS.automation import bp
-from eNMS.automation.forms import AddJobForm, CompareResultsForm, WorkflowBuilderForm
+from eNMS.automation.forms import CompareResultsForm, WorkflowBuilderForm
 
 
 @get(bp, "/service_management", "View")
@@ -52,7 +52,6 @@ def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
     return dict(
         workflow=workflow.serialized if workflow else None,
-        add_job_form=AddJobForm(request.form),
         workflow_builder_form=WorkflowBuilderForm(request.form),
         compare_results_form=CompareResultsForm(request.form),
         services_classes=sorted(service_classes),

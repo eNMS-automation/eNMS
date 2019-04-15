@@ -13,7 +13,6 @@ from eNMS.extensions import db
 from eNMS.functions import factory, fetch, fetch_all, get, get_one, objectify, post
 from eNMS.inventory import bp
 from eNMS.inventory.forms import (
-    CompareConfigurationsForm,
     GoogleEarthForm,
     ImportExportForm,
     LibreNmsForm,
@@ -29,23 +28,6 @@ from eNMS.properties import (
     link_table_properties,
     pool_table_properties,
 )
-
-
-@get(bp, "/configuration_management", "View")
-def configuration_management() -> dict:
-    return dict(
-        fields=device_configuration_properties,
-        compare_configurations_form=CompareConfigurationsForm(request.form),
-        pool_restriction_form=PoolRestrictionForm(request.form),
-    )
-
-
-@get(bp, "/link_management", "View")
-def link_management() -> dict:
-    return dict(
-        fields=link_table_properties,
-        pool_restriction_form=PoolRestrictionForm(request.form),
-    )
 
 
 @get(bp, "/pool_management", "View")

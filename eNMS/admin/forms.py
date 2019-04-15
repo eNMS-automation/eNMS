@@ -106,4 +106,3 @@ class InstanceForm(FlaskForm):
     description = StringField()
     ip_address = StringField("IP address")
     weight = IntegerField()
-    status = StringField()

@@ -1,0 +1,11 @@
+<form id="add-job-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+  {{ add_job_form.list_fields() }}
+  <div class="modal-body">
+    <div class="form-group">
+      {{ add_job_form.add_jobs(id="add-jobs", class="form-control", size=15) }}
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" onclick="addJobToWorkflow()">Save</button>
+  </div>
+</form>

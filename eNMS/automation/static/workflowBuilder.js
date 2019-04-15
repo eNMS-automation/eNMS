@@ -232,7 +232,7 @@ function jobToNode(job) {
 function edgeToEdge(edge) {
   return {
     id: edge.id,
-    label: capitalize(edge.subtype),
+    label: edge.subtype,
     type: edge.subtype,
     from: edge.source_id,
     to: edge.destination_id,
@@ -314,7 +314,23 @@ function savePositions() {
   });
 }
 
-const action = {
+/**
+ * Add jobs to the workflow.
+ */
+// eslint-disable-next-line
+function addJobPanel(id) {
+  createPanel(
+    "add-job",
+    "400 500",
+    "../add_job_form",
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Add jobs to the worflow");
+    }
+  );
+}
+
+Object.assign(action, {
   "Run Workflow": runWorkflow,
   Edit: (jobId) => {
     showTypePanel(
@@ -329,11 +345,11 @@ const action = {
   "Workflow Logs": () => showLogs(workflow.id),
   "Add Service or Workflow": partial(showModal, "add-job"),
   Delete: deleteSelection,
-  "Create 'Success' edge": partial(switchMode, "success"),
-  "Create 'Failure' edge": partial(switchMode, "failure"),
-  "Create 'Prerequisite' edge": partial(switchMode, "prerequisite"),
-  "Move Nodes": partial(switchMode, "node"),
-};
+  "Create 'Success' edge": () => switchMode("success"),
+  "Create 'Failure' edge": () => switchMode("failure"),
+  "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
+  "Move Nodes": () => switchMode("node"),
+});
 
 $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   $(this)

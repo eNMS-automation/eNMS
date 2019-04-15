@@ -28,15 +28,6 @@ function openUrl(url) {
 }
 
 /**
- * Capitalize.
- * @param {string} string - Word.
- * @return {capitalizedString}
- */
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-/**
  * Process results.
  * @param {callback} callback - Callback function.
  * @param {results} results - Results.

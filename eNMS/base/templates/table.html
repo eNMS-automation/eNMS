@@ -6,11 +6,13 @@
         <div class="x_panel">
           <div style="min-height:90vh;" class="x_content">
             <div class="page-title">
+              {% if type != "configuration" %}
               <div class="title_left">
                 <button class="btn btn-default btn-file" onclick="showTypePanel('{{ type }}')" style="width:100%;">
                   Create a new {{ type }}
                 </button>
               </div>
+              {% endif %}
               {% if type in ("configuration", "device", "link") %}
                 <div class="title_right">
                   <button class="btn btn-default btn-file" onclick="showFilteringPanel('{{ type }}')" style="width:100%;">

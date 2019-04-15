@@ -15,6 +15,7 @@ from eNMS.scheduling.forms import TaskForm
 form_classes = {
     "add_jobs": AddJobsForm,
     "configuration": DeviceFilteringForm,
+    "configuration_filtering": DeviceFilteringForm,
     "connection": ConnectionForm,
     "device": DeviceForm,
     "device_automation": DeviceAutomationForm,
@@ -32,6 +33,7 @@ form_classes = {
 
 form_templates = {
     "add_jobs": "add_jobs_form",
+    "configuration_filtering": "filtering_form",
     "connection": "connection_form",
     "device": "base_form",
     "device_automation": "device_automation_form",
@@ -50,13 +52,11 @@ form_templates = {
 form_properties = {
     "add_jobs": ("add_jobs",),
     "advanced": ("clear_logs_date", "deletion_types", "import_export_types"),
-    "configuration_management": ("restrict-pool",),
+    "configuration_filtering": ("pools",),
     "device_automation": ("jobs",),
     "device_filtering": ("pools",),
-    "device_management": ("restrict-pool",),
     "link": ("link-source", "link-destination"),
     "link_filtering": ("pools",),
-    "link_management": ("restrict-pool",),
     "pool_objects": ("devices", "links"),
     "service": ("devices", "pools"),
     "task": ("start_date", "end_date", "job"),

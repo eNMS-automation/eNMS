@@ -67,7 +67,6 @@
 
 {% block javascripts %}
   {{ super()}}
-  <!-- ECharts -->
   <script src="{{ url_for('static', filename='echarts/echarts.min.js') }}"></script>
   <script>
     var defaultProperties = {{default_properties|tojson|safe}};

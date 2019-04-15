@@ -256,6 +256,23 @@ function createPanel(id, contentSize, url, processing) {
 }
 
 /**
+ * Show Filtering Panel
+ */
+// eslint-disable-next-line
+function showFilteringPanel(type) {
+  createPanel(
+    "filtering-panel",
+    "700 700",
+    `../${type}_filtering_form`,
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Device automation");
+      configureForm(`${type}_filtering`);
+    }
+  );
+}
+
+/**
  * Connect to a device.
  */
 // eslint-disable-next-line

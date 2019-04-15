@@ -92,6 +92,15 @@ class LinkForm(ObjectForm):
     destination = ObjectField("Device")
 
 
+class FilteringForm(FlaskForm):
+    list_fields = HiddenField(default="pools")
+    pools = MultipleObjectField("Pool")
+
+
+class DeviceFilteringForm(DeviceForm, FilteringForm):
+    pass
+
+
 @configure_pool_form
 class PoolForm(FlaskForm):
     id = HiddenField()

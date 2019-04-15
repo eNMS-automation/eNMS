@@ -12,6 +12,16 @@
                 </button>
               </div>
             </div>
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Existing {{ type }}s</h3>
+              </div>
+              {% if type == "device" %}
+                <div class="title_right">
+                  <h3>Pool filtering</h3> {{ pool_restriction_form.pools(id='restrict-pool', class="form-control") }}
+                </div>
+              {% endif %}
+            </div>
             <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -31,7 +41,9 @@
 
 {% block javascripts %}
   {{ super()}}
+      <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script>
+
     let table = initTable("{{ type }}", {{ fixed_columns|tojson|safe }});
     {% if type == "instance" %}
       /**
@@ -45,8 +57,7 @@
       }
       getClusterStatus();
     {% elif type == "device" %}
-      <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
-      <script src="{{ url_for('inventory_blueprint.static', filename='deviceManagement.js') }}"></script>
+
       $("#restrict-pool").on("change", function() {
         table.ajax.reload(null, false);
       });

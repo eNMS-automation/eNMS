@@ -20,6 +20,7 @@ from eNMS.inventory.forms import (
     NetboxForm,
     OpenNmsForm,
     PoolObjectsForm,
+    PoolRestrictionForm,
 )
 from eNMS.inventory.functions import get_pools_devices, object_export, object_import
 from eNMS.properties import (

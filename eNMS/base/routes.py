@@ -22,6 +22,7 @@ from eNMS.functions import (
     get,
     post,
 )
+from eNMS.inventory.forms import PoolRestrictionForm
 from eNMS.properties import (
     default_diagrams_properties,
     table_fixed_columns,
@@ -110,6 +111,7 @@ def route_table(blueprint: str, table_type: str) -> dict:
     return dict(
         properties=table_properties[table_type],
         fixed_columns=table_fixed_columns[table_type],
+        pool_restriction_form=PoolRestrictionForm(request.form),
         type=table_type,
         template="table",
     )

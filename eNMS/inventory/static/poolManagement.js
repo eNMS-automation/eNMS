@@ -14,8 +14,6 @@ selected: false
 showTypePanel: false
 */
 
-let poolId = null;
-
 // eslint-disable-next-line no-unused-vars
 let table = initTable("pool", "pool", [
   "Number of objects",
@@ -32,7 +30,7 @@ let table = initTable("pool", "pool", [
  */
 // eslint-disable-next-line
 function savePoolObjects(id) {
-  fCall(`/inventory/save_pool_objects/${poolId}`, `#${id}-pool-objects-form`, function() {
+  fCall(`/inventory/save_pool_objects/${id}`, `#${id}-pool-objects-form`, function() {
     alertify.notify("Changes saved.", "success", 5);
     $(`#pool-object-panel-${id}`).remove();
   });

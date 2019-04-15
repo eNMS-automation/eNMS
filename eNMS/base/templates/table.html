@@ -25,7 +25,7 @@
               <thead>
                 <tr>
                   {% for field in properties + fixed_columns %}
-                    <th>{{ names[field] }}</th>
+                    <th>{{ names.get(field, field) }}</th>
                   {% endfor %}
                 </tr>
               </thead>
@@ -40,10 +40,11 @@
 
 {% block javascripts %}
   {{ super()}}
-      <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  {% if type in ("configuration", "device", "link") %}
+    <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  {% endif %}
   <script>
-
-    let table = initTable("{{ type }}", {{ fixed_columns|tojson|safe }});
+    let table = initTable("{{ type }}");
     {% if type == "instance" %}
       /**
       * Get Cluster Status.
@@ -56,6 +57,5 @@
       }
       getClusterStatus();
     {% endif %}
-    
   </script>
 {% endblock javascripts %}

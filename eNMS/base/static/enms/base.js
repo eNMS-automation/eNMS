@@ -91,11 +91,10 @@ function fCall(url, form, callback) {
  * Datatable per-column search.
  * @param {cls} cls - Object class.
  * @param {type} type - Table type.
- * @param {toExclude} toExclude - List of parameters to exclude for search.
  * @return {table}
  */
 // eslint-disable-next-line
-function initTable(type, toExclude) {
+function initTable(type) {
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
     serverSide: true,

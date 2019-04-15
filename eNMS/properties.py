@@ -439,6 +439,7 @@ pretty_names: Dict[str, str] = {
     "dict_match": "dictionary match",
     "direction": "Direction",
     "display_only_failed_nodes": "Display only failed nodes",
+    "download": "Download",
     "driver": "Driver",
     "email": "Email",
     "enable_mode": 'Enter "Enable" mode',

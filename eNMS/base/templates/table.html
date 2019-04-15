@@ -66,6 +66,9 @@
   {% if type in ("service", "workflow") %}
     <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   {% endif %}
+  {% if type == "task" %}
+    <script src="{{ url_for('scheduling_blueprint.static', filename='scheduling.js') }}"></script>
+  {% endif %}
   <script>
     let table = initTable("{{ type }}");
     {% if type == "instance" %}

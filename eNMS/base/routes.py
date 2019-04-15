@@ -36,6 +36,25 @@ def site_root() -> Response:
     return redirect(url_for("admin_blueprint.login"))
 
 
+@get(bp, "/<form_type>_form", "View")
+def route_form(form_type: str) -> dict:
+    return dict(
+        form=form_classes[form_type](request.form),
+        form_type=form_type,
+        template=f"forms/{form_templates[form_type]}",
+    )
+
+
+@get(bp, "/<_>/<table_type>_management", "View")
+def route_table(_: str, table_type: str) -> dict:
+    return dict(
+        properties=table_properties[table_type],
+        fixed_columns=table_fixed_columns[table_type],
+        type=table_type,
+        template="table",
+    )
+
+
 @get(bp, "/server_side_processing/<table>")
 def server_side_processing(table: str) -> Response:
     print(request.args)
@@ -51,15 +70,11 @@ def server_side_processing(table: str) -> Response:
         if not value:
             continue
         else:
-            constraints.append(
-                getattr(model, property).contains(value)
-                if isinstance(getattr(model, property), InstrumentedAttribute)
-                else getattr(model, property) == value
-            )
+            constraints.append(getattr(model, property).contains(value))
     order = getattr(getattr(model, order_property), order_direction)()
     result = db.session.query(model).filter(and_(*constraints)).order_by(order)
     if table == "configuration":
-        search_text = request.args["form[{configuration}]"]
+        search_text = request.args.get("form[{configuration}]")
         if search_text:
             result = result.filter(model.current_configuration.contains(search_text))
     if table in ("device", "link", "configuration"):
@@ -79,25 +94,6 @@ def server_side_processing(table: str) -> Response:
                 .all()
             ],
         }
-    )
-
-
-@get(bp, "/<form_type>_form", "View")
-def route_form(form_type: str) -> dict:
-    return dict(
-        form=form_classes[form_type](request.form),
-        form_type=form_type,
-        template=f"forms/{form_templates[form_type]}",
-    )
-
-
-@get(bp, "/<_>/<table_type>_management", "View")
-def route_table(_: str, table_type: str) -> dict:
-    return dict(
-        properties=table_properties[table_type],
-        fixed_columns=table_fixed_columns[table_type],
-        type=table_type,
-        template="table",
     )
 
 

@@ -346,6 +346,15 @@ table_fixed_columns: Dict[str, List[str]] = {
     "instance": ["Edit", "Duplicate", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],
+    "configuration": ["Configuration", "Download", "Edit"],
+    "pool": [
+        "Visualize",
+        "Edit properties",
+        "Update",
+        "Duplicate",
+        "Edit objects",
+        "Delete",
+    ],
 }
 
 default_diagrams_properties: Dict[str, str] = {
@@ -448,6 +457,7 @@ pretty_names: Dict[str, str] = {
     "ip_address": "IP address",
     "is_active": "Is active",
     "job_name": "Service / Workflow",
+    "last_failure": "Last failure",
     "longitude": "Longitude",
     "latitude": "Latitude",
     "load_known_host_keys": "Load known host keys",

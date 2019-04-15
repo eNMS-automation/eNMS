@@ -11,7 +11,7 @@
                   Create a new {{ type }}
                 </button>
               </div>
-              {% if type in ("device", "link") %}
+              {% if type in ("configuration", "device", "link") %}
                 <div class="title_right">
                   <button class="btn btn-default btn-file" onclick="showFilteringPanel('{{ type }}')" style="width:100%;">
                     Filter

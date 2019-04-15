@@ -113,6 +113,12 @@ class DeviceFilteringForm(BaseObjectForm, FilteringForm):
     netmiko_driver = StringField()
 
 
+class LinkFilteringForm(BaseObjectForm, FilteringForm):
+    subtype = StringField()
+    source = StringField()
+    destination = StringField()
+
+
 @configure_pool_form
 class PoolForm(FlaskForm):
     id = HiddenField()

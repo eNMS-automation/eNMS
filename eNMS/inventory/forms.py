@@ -69,7 +69,7 @@ class ObjectForm(FlaskForm):
 
 
 @configure_device_form
-class DeviceForm(ObjectForm):
+class DevicePublicForm(ObjectForm):
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)
     ip_address = StringField("IP address")
@@ -78,11 +78,14 @@ class DeviceForm(ObjectForm):
     os_version = StringField()
     longitude = FloatField(default=0.0)
     latitude = FloatField(default=0.0)
+    napalm_driver = SelectField(choices=NAPALM_DRIVERS)
+    netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
+
+
+class DeviceForm(ObjectForm):
     username = StringField()
     password = PasswordField()
     enable_password = PasswordField()
-    napalm_driver = SelectField(choices=NAPALM_DRIVERS)
-    netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
 
 
 class LinkForm(ObjectForm):
@@ -97,7 +100,7 @@ class FilteringForm(FlaskForm):
     pools = MultipleObjectField("Pool")
 
 
-class DeviceFilteringForm(DeviceForm, FilteringForm):
+class DeviceFilteringForm(DevicePublicForm, FilteringForm):
     pass
 
 

@@ -38,7 +38,7 @@ def site_root() -> Response:
 
 @get(bp, "/server_side_processing/<table>")
 def server_side_processing(table: str) -> Response:
-    print(request.args.getlist("form[pools][]"))
+    print(request.args)
     model, properties = classes.get(table, classes["Device"]), table_properties[table]
     try:
         order_property = properties[int(request.args["order[0][column]"])]
@@ -54,7 +54,7 @@ def server_side_processing(table: str) -> Response:
                     if isinstance(getattr(model, property), InstrumentedAttribute)
                     else getattr(model, property) == value
                     for property, value in {
-                        property: request.args[f"columns[{i}][search][value]"]
+                        property: request.args[f"form[{i}][search][value]"]
                         for i, property in enumerate(properties)
                         if request.args[f"columns[{i}][search][value]"]
                     }.items()
@@ -75,7 +75,7 @@ def server_side_processing(table: str) -> Response:
                 classes["pool"].id.in_(
                     [
                         int(pool_id)
-                        for pool_id in request.args.getlist("pools[]")
+                        for pool_id in request.args.getlist("form[pools][]")
                         if pool_id
                     ]
                 )

@@ -121,6 +121,15 @@ function initTable(type, toExclude) {
 }
 
 /**
+ * Server-side table filtering.
+ */
+// eslint-disable-next-line
+function filterTable() {
+  table.ajax.reload(null, false);
+  alertify.notify("Filter applied.", "success", 5);
+}
+
+/**
  * Datatable periodic refresh.
  * @param {interval} interval - Refresh interval.
  */
@@ -182,35 +191,6 @@ function deleteInstance(type, id) {
       "error",
       5
     );
-  });
-}
-
-/**
- * Create a panel.
- * @param {id} id - Instance ID.
- * @param {contentSize} contentSize - Content size.
- * @param {url} url - URL to fetch the content from.
- * @param {processing} processing - Function once panel is loaded.
- */
-// eslint-disable-next-line
-function createPanel(id, contentSize, url, processing) {
-  return jsPanel.create({
-    id: id,
-    theme: "none",
-    headerLogo: "../static/images/logo.png",
-    headerControls: {
-      size: "xl",
-    },
-    contentOverflow: 'hidden scroll',
-    contentSize: contentSize,
-    position: "center-top 0 58",
-    contentAjax: {
-      url: url,
-      done: processing,
-    },
-    dragit: {
-      opacity: 0.6,
-    },
   });
 }
 

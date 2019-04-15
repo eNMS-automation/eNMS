@@ -68,7 +68,7 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='workflowManagement.js') }}"></script>
-  <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
 {% endblock javascripts %}

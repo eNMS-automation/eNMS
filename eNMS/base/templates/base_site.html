@@ -19,7 +19,9 @@
         <link href="{{ url_for('static', filename='bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='panel/jspanel.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='difflib/diffview.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='enms/base.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
     {% endblock head %}
   </head>
@@ -59,7 +61,9 @@
         <script src="{{ url_for('static', filename='datatables/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
         <script src="{{ url_for('static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
         <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
+        <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
         <script>
           const formProperties = {{ form_properties|tojson|safe }};
           const names = {{ names|tojson|safe }};

@@ -7,20 +7,15 @@
           <div style="min-height:90vh;" class="x_content">
             <div class="panel-group" >
               <div style="padding-bottom:5px;">
-                <button class="btn btn-default btn-file" onclick="showTypePanel('{{ type }}')" style="width:100%;">
-                  Create a new {{ type }}
-                </button>
+
               </div>
             </div>
             <div class="page-title">
               <div class="title_left">
-                <h3>Existing {{ type }}s</h3>
+                <button class="btn btn-default btn-file" onclick="showTypePanel('{{ type }}')" style="width:100%;">
+                  Create a new {{ type }}
+                </button>
               </div>
-              {% if type == "device" %}
-                <div class="title_right">
-                  <h3>Pool filtering</h3> {{ pool_restriction_form.pools(id='restrict-pool', class="form-control") }}
-                </div>
-              {% endif %}
             </div>
             <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
@@ -56,12 +51,6 @@
         });
       }
       getClusterStatus();
-    {% elif type == "device" %}
-
-      $("#restrict-pool").on("change", function() {
-        table.ajax.reload(null, false);
-      });
-      $("#restrict-pool").selectpicker("selectAll");
     {% endif %}
     
   </script>

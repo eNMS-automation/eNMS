@@ -22,7 +22,6 @@ from eNMS.functions import (
     get,
     post,
 )
-from eNMS.inventory.forms import PoolRestrictionForm
 from eNMS.properties import (
     default_diagrams_properties,
     table_fixed_columns,
@@ -69,7 +68,7 @@ def server_side_processing(table: str) -> Response:
             filtered = filtered.filter(
                 model.current_configuration.contains(search_text)
             )
-    if table in ("device", "link", "configuration"):
+    if table in ("device", "link", "configuration") and request.args.getlist("pools[]"):
         filtered = filtered.filter(
             model.pools.any(
                 classes["pool"].id.in_(
@@ -106,12 +105,11 @@ def route_form(form_type: str) -> dict:
     )
 
 
-@get(bp, "/<blueprint>/<table_type>_management", "View")
-def route_table(blueprint: str, table_type: str) -> dict:
+@get(bp, "/<_>/<table_type>_management", "View")
+def route_table(_: str, table_type: str) -> dict:
     return dict(
         properties=table_properties[table_type],
         fixed_columns=table_fixed_columns[table_type],
-        pool_restriction_form=PoolRestrictionForm(request.form),
         type=table_type,
         template="table",
     )

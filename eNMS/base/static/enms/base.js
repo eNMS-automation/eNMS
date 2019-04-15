@@ -95,27 +95,6 @@ function fCall(url, form, callback) {
  */
 // eslint-disable-next-line
 function initTable(type, toExclude, scrollX) {
-  $("#table thead tr")
-    .clone(true)
-    .appendTo("#table thead");
-  $("#table thead tr:eq(1) th").each(function(i) {
-    const title = $(this).text();
-    if (!toExclude.includes(title)) {
-      $(this).html(
-        `<input type="text" class="form-control" style="width: 100%;"/>`
-      );
-      $("input", this).on("keyup change", function() {
-        if (table.column(i).search() !== this.value) {
-          table
-            .column(i)
-            .search(this.value)
-            .draw();
-        }
-      });
-    } else {
-      $(this).empty();
-    }
-  });
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
     serverSide: true,
@@ -125,7 +104,7 @@ function initTable(type, toExclude, scrollX) {
     ajax: {
       url: `/server_side_processing/${type}`,
       data: (d) => {
-        d.pools = $("#restrict-pool").val();
+        d.form = $(`#filter-${type}-form`).serialize();
       },
     },
   });

@@ -47,6 +47,7 @@ def route_form(form_type: str) -> dict:
 
 @get(bp, "/<_>/<table_type>_management", "View")
 def route_table(_: str, table_type: str) -> dict:
+    print("test" * 500)
     return dict(
         properties=table_properties[table_type],
         fixed_columns=table_fixed_columns[table_type],

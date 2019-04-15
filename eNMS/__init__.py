@@ -118,6 +118,7 @@ def configure_context_processor(app) -> None:
             "form_properties": form_properties,
             "names": pretty_names,
             "property_types": {k: str(v) for k, v in property_types.items()},
+            "services_classes": sorted(service_classes),
         }
 
 

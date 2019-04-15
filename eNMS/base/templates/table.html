@@ -80,8 +80,5 @@
       }
       getClusterStatus();
     {% endif %}
-    {% if type == "service" %}
-      const servicesClasses = {{ services_classes|tojson|safe }};
-    {% endif %}
   </script>
 {% endblock javascripts %}

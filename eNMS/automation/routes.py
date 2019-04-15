@@ -30,23 +30,6 @@ from eNMS.automation import bp
 from eNMS.automation.forms import CompareResultsForm, WorkflowBuilderForm
 
 
-@get(bp, "/service_management", "View")
-def service_management() -> dict:
-    return dict(
-        compare_results_form=CompareResultsForm(request.form),
-        fields=service_table_properties,
-        services_classes=sorted(service_classes),
-    )
-
-
-@get(bp, "/workflow_management", "View")
-def workflow_management() -> dict:
-    return dict(
-        compare_results_form=CompareResultsForm(request.form),
-        fields=workflow_table_properties,
-    )
-
-
 @get(bp, "/workflow_builder", "View")
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))

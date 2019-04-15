@@ -72,6 +72,17 @@ function scheduler(action) {
   });
 }
 
+/**
+ * Scan Cluster subnet for new Instances.
+ */
+// eslint-disable-next-line
+function scanCluster() {
+  alertify.notify("Scan started.", "success", 5);
+  call("/admin/scan_cluster", function(cluster) {
+    alertify.notify("Scan completed.", "success", 5);
+  });
+}
+
 (function() {
   folders.forEach((f) => {
     $("#versions").append(`<option value='${f}'></option>`);

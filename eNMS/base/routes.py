@@ -110,7 +110,7 @@ def route_table(table_type: str) -> dict:
     return dict(
         fields=table_properties[table_type] + table_fixed_columns[table_type],
         type=table_type,
-        template=f"{table_type}_management",
+        template="table",
     )
 
 

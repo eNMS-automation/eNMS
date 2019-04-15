@@ -1,6 +1,5 @@
 /*
 global
-convertSelect: false
 doc: false
 initTable: false
 */

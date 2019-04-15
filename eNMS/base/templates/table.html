@@ -1,0 +1,27 @@
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div style="min-height:90vh;" class="x_content">
+          <div class="panel-group" >
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="showTypePanel('{{ type }}')" style="width:100%;">
+                Create a new {{ type }}
+              </button>
+            </div>
+          </div>
+          <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                {% for field in fields %}
+                  <th>{{ names[field] }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,7 @@ from eNMS.functions import (
 )
 from eNMS.properties import (
     default_diagrams_properties,
+    table_fixed_columns,
     table_properties,
     reverse_pretty_names,
     type_to_diagram_properties,
@@ -101,6 +102,15 @@ def route_form(form_type: str) -> dict:
         form=form_classes[form_type](request.form),
         form_type=form_type,
         template=f"forms/{form_templates[form_type]}",
+    )
+
+
+@get(bp, "/admin/<table_type>_management", "View")
+def route_table(table_type: str) -> dict:
+    return dict(
+        fields=table_properties[table_type] + table_fixed_columns[table_type],
+        type=table_type,
+        template=f"{table_type}_management",
     )
 
 

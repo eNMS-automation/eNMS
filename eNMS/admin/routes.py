@@ -40,11 +40,6 @@ from eNMS.functions import (
 from eNMS.properties import instance_table_properties, user_table_properties
 
 
-@get(bp, "/user_management", "View")
-def user_management() -> dict:
-    return dict(fields=user_table_properties)
-
-
 @get(bp, "/administration", "View")
 def administration() -> dict:
     return dict(
@@ -60,11 +55,6 @@ def advanced() -> dict:
         migrations_form=MigrationsForm(request.form),
         folders=listdir(app.path / "migrations"),
     )
-
-
-@get(bp, "/instance_management", "View")
-def instance_management() -> dict:
-    return dict(fields=instance_table_properties)
 
 
 @bp.route("/login", methods=["GET", "POST"])

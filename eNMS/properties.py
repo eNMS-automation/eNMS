@@ -341,6 +341,11 @@ table_properties: Dict[str, List[str]] = {
     "workflow": workflow_table_properties,
 }
 
+table_fixed_columns: Dict[str, List[str]] = {
+    "instance": ["Edit", "Duplicate", "Delete"],
+    "user": ["Edit", "Duplicate", "Delete"],
+}
+
 default_diagrams_properties: Dict[str, str] = {
     "Device": "model",
     "Link": "model",

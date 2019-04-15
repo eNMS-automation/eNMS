@@ -1,28 +1,16 @@
 <form id="pool-objects-form"  data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-  {{ pool_object_form.list_fields() }}
-  <!-- begin column -->
-  <div class="col-md-12 col-xs-12">
-    <div class="x_panel">
-      <div class="x_content">
-        <div class="form-group">
-          <div class="form-group">
-            <label>Devices</label>
-            <div class='form-group'>
-              {{ pool_object_form.devices(class="form-control", size=10) }}
-            </div>
-            <label>Links</label>
-            <div class='form-group'>
-              {{ pool_object_form.links(class="form-control", size=10) }}
-            </div>
-          </div>
-          <div class="ln_solid"></div>
-          <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-            <button class="btn btn-primary" type="reset">Reset</button>
-            <button type="button" class="btn btn-success" onclick="savePoolObjects()">Save</button>
-          </div>
-        </div>
-      </div>
+  {{ form.list_fields() }}
+  <div class="modal-body">
+    <label>Devices</label>
+    <div class='form-group'>
+      {{ form.devices(class="form-control", size=10) }}
+    </div>
+    <label>Links</label>
+    <div class='form-group'>
+      {{ form.links(class="form-control", size=10) }}
     </div>
   </div>
-  <!-- end column -->
+  <div class="modal-footer">
+    <button id="pool-objects-button" type="button" class="btn btn-success">Save</button>
+  </div>
 </form>

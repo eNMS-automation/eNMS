@@ -48,7 +48,7 @@ form_properties = {
     "device_management": ("restrict-pool",),
     "link": ("link-source", "link-destination"),
     "link_management": ("restrict-pool",),
-    "pool_objects_form": ("devices", "links"),
+    "pool_objects": ("devices", "links"),
     "service": ("devices", "pools"),
     "task": ("start_date", "end_date", "job"),
     "user": ("permissions", "pools"),

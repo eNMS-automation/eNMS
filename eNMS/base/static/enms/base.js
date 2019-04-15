@@ -284,7 +284,6 @@ function showConnectionPanel(id) {
       $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
       $("#connection-button").prop("id", `${id}-connection-button`);
       $(`#${id}-device-automation-button`).attr("onclick", `sshConnection(${id})`);
-      $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
     }
   );
 }
@@ -295,16 +294,20 @@ function showConnectionPanel(id) {
 // eslint-disable-next-line
 function showPoolObjectsPanel(id) {
   createPanel(
-    `connection-panel-${id}`,
-    "400 200",
-    "../connection_form",
+    `pool-object-panel-${id}`,
+    "400 400",
+    "../pool_objects_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Connect to device");
-      $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
-      $("#connection-button").prop("id", `${id}-connection-button`);
-      $(`#${id}-device-automation-button`).attr("onclick", `sshConnection(${id})`);
-      $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
+      configureForm("pool_objects");
+      $("#pool-objects-form").prop("id", `${id}-pool-objects-form`);
+      $("#pool-objects-button").prop("id", `${id}-pool-objects-button`);
+      $(`#${id}-pool-objects-button`).attr("onclick", `savePoolObjects(${id})`);
+      call(`/get/pool/${id}`, function(pool) {
+        $("#devices").selectpicker("val", pool.devices.map((n) => n.id));
+        $("#links").selectpicker("val", pool.links.map((l) => l.id));
+      });
     }
   );
 }

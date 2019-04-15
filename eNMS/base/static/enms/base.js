@@ -227,6 +227,22 @@ function createPanel(id, contentSize, url, processing) {
  * Show Filtering Panel
  */
 // eslint-disable-next-line
+function showConfigurationPanel(id) {
+  createPanel(
+    `configuration-panel-${id}`,
+    "700 700",
+    "../configuration_form",
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Device Configurations");
+    }
+  );
+}
+
+/**
+ * Show Filtering Panel
+ */
+// eslint-disable-next-line
 function showFilteringPanel(type) {
   createPanel(
     "filtering-panel",

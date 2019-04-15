@@ -124,7 +124,7 @@ class Device(CustomDevice):
         else:
             return [
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showConfigurations('{self.id}')">
+                onclick="showConfigurationPanel('{self.id}')">
                 Configuration</button>"""
                 if self.configurations
                 else "",

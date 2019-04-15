@@ -33,6 +33,7 @@ form_classes = {
 
 form_templates = {
     "add_jobs": "add_jobs_form",
+    "configuration": "configuration_form",
     "configuration_filtering": "filtering_form",
     "connection": "connection_form",
     "device": "base_form",

@@ -316,12 +316,14 @@ function showPoolObjectsPanel(id) {
  * Configure form.
  */
 function configureForm(form, id) {
+  console.log(id);
   if (!formProperties[form]) return;
   formProperties[form].forEach((property) => {
     const propertyType = propertyTypes[property] || "str";
-    el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
+    el = $(id ? `#${id}-${form}-${property}` : `#${form}-${property}`);
     if (!el.length) el = $(`#${property}`);
     if (propertyType == "date") {
+      console.log(el);
       const today = new Date();
       el.datetimepicker({
         format: "DD/MM/YYYY HH:mm:ss",
@@ -331,7 +333,6 @@ function configureForm(form, id) {
         },
         useCurrent: false,
       });
-      el.data("DateTimePicker").minDate(today);
     } else {
       el.selectpicker({
         liveSearch: true,
@@ -358,7 +359,6 @@ function showTypePanel(type, id, duplicate) {
     `../${type}_form`,
     function(panel) {
       panel.content.innerHTML = this.responseText;
-      configureForm(type, id);
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
           panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
@@ -369,10 +369,12 @@ function showTypePanel(type, id, duplicate) {
             if (duplicate && ["name", "id"].includes(el.name)) continue;
             $(el).prop("id", `${id}-${el.id}`);
           }
+          configureForm(type, id);
           if (["service", "workflow"].includes(type)) panelCode(type, id);
           if (type !== "service") processInstance(type, instance);
         });
       } else {
+        configureForm(type);
         panel.setHeaderTitle(`Create a New ${type}`);
         $(`#edit-${type}-form`).trigger("reset");
         if (["service", "workflow"].includes(type)) panelCode(type);

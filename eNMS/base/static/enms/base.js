@@ -16,6 +16,7 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
 // eslint-disable-next-line
 function doc(page) {
   let url = {
+    "device_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     "instance_management": "https://enms.readthedocs.io/en/latest/security/access.html",
     "user_management": "https://enms.readthedocs.io/en/latest/security/access.html",
   }[page]

@@ -342,11 +342,12 @@ table_properties: Dict[str, List[str]] = {
 }
 
 table_fixed_columns: Dict[str, List[str]] = {
+    "configuration": ["Configuration", "Download", "Edit"],
     "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],
     "instance": ["Edit", "Duplicate", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
+    "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],
-    "configuration": ["Configuration", "Download", "Edit"],
     "pool": [
         "Visualize",
         "Edit properties",
@@ -355,6 +356,7 @@ table_fixed_columns: Dict[str, List[str]] = {
         "Edit objects",
         "Delete",
     ],
+    "workflow": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
 }
 
 default_diagrams_properties: Dict[str, str] = {

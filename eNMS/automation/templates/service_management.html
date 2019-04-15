@@ -56,7 +56,7 @@
 {% block javascripts %}
   {{ super() }}
   <script>
-    const servicesClasses = {{ services_classes|tojson|safe }};
+    
   </script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='serviceManagement.js') }}"></script>

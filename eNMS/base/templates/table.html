@@ -63,6 +63,9 @@
     <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
     <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
   {% endif %}
+  {% if type in ("service", "workflow") %}
+    <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
+  {% endif %}
   <script>
     let table = initTable("{{ type }}");
     {% if type == "instance" %}
@@ -76,6 +79,9 @@
         });
       }
       getClusterStatus();
+    {% endif %}
+    {% if type == "service" %}
+      const servicesClasses = {{ services_classes|tojson|safe }};
     {% endif %}
   </script>
 {% endblock javascripts %}

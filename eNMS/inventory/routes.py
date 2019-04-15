@@ -30,15 +30,6 @@ from eNMS.properties import (
 )
 
 
-@get(bp, "/pool_management", "View")
-def pool_management() -> dict:
-    return dict(
-        pool_object_form=PoolObjectsForm(request.form),
-        fields=pool_table_properties,
-        device_automation_form=DeviceAutomationForm(request.form),
-    )
-
-
 @get(bp, "/import_export", "View")
 def import_export() -> dict:
     return dict(

@@ -125,6 +125,30 @@ function configureCallbacks(id) {
   });
 }
 
+/**
+ * Update pool objects.
+ */
+// eslint-disable-next-line
+function savePoolObjects(id) {
+  fCall(`/inventory/save_pool_objects/${id}`, `#${id}-pool-objects-form`, function() {
+    alertify.notify("Changes saved.", "success", 5);
+    $(`#pool-object-panel-${id}`).remove();
+  });
+}
+
+/**
+ * Update one or all pools.
+ * @param {pool} pool - Id of a pool or 'all'.
+ */
+// eslint-disable-next-line
+function updatePool(pool) {
+  alertify.notify("Update starting...", "success", 5);
+  call(`/inventory/update_pool/${pool}`, function() {
+    table.ajax.reload(null, false);
+    alertify.notify("Update successful.", "success", 5);
+  });
+}
+
 Object.assign(action, {
   "Device properties": (d) => showTypePanel("device", d),
   "Link properties": (l) => showTypePanel("link", l),

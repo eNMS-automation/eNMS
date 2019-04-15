@@ -40,7 +40,7 @@
 
 {% block javascripts %}
   {{ super()}}
-  {% if type in ("configuration", "device", "link") %}
+  {% if type in ("configuration", "device", "link", "pool") %}
     <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   {% endif %}
   <script>

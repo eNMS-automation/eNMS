@@ -1,23 +1,3 @@
-/*
-global
-alertify: false
-call: false
-doc: false
-initTable: false
-refreshTable: false
-*/
-
-// eslint-disable-next-line no-unused-vars
-let table = initTable("task", "task", [
-  "Next runtime",
-  "Time before next run",
-  "Action",
-  "Edit",
-  "Duplicate",
-  "Delete",
-]);
-const taskManagement = true; // eslint-disable-line no-unused-vars
-
 /**
  * Pause a task.
  * @param {id} id - Task id.
@@ -47,8 +27,3 @@ function resumeTask(id) {
     alertify.notify("Task resumed.", "success", 5);
   });
 }
-
-(function() {
-  doc("https://enms.readthedocs.io/en/latest/scheduling/task_management.html");
-  refreshTable(10000);
-})();

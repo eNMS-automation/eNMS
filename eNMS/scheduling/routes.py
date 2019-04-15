@@ -6,11 +6,6 @@ from eNMS.properties import task_table_properties
 from eNMS.scheduling import bp
 
 
-@get(bp, "/task_management", "View")
-def task_management() -> dict:
-    return dict(fields=task_table_properties)
-
-
 @get(bp, "/calendar", "View")
 def calendar() -> dict:
     tasks = {}

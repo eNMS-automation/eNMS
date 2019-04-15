@@ -9,12 +9,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-  <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Device properties</a></li>
-    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
-    <li class="menu rc-device-menu"><a tabindex="-1" href="#">Automation</a></li>
-    <li class="menu rc-link-menu"><a tabindex="-1" href="#">Link properties</a></li>
-  </ul>
+
   <div class="right_col" role="main">
     <!-- begin row -->
     <div class="row">
@@ -66,8 +61,8 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
-  <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
+  
+  
   <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   <script src="{{ url_for('inventory_blueprint.static', filename='poolManagement.js') }}"></script>
 {% endblock javascripts %}

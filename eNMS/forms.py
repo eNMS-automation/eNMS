@@ -39,6 +39,7 @@ form_templates = {
 
 form_properties = {
     "add_jobs": ("add_jobs",),
+    "device_management": ("restrict-pool",),
     "service": ("devices", "pools"),
     "task": ("start_date", "end_date", "job"),
     "workflow": ("devices", "pools"),

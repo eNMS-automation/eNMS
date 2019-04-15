@@ -47,3 +47,12 @@
     }
   };
 })(jQuery, window);
+
+$(".dropdown-submenu a.menu-submenu").on("click", function(e) {
+  console.log($(this));
+  $(this)
+    .next("ul")
+    .toggle();
+  e.stopPropagation();
+  e.preventDefault();
+});

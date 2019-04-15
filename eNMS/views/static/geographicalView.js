@@ -305,14 +305,6 @@ map.on("contextmenu", function() {
   }
 });
 
-$(".dropdown-submenu a.menu-submenu").on("click", function(e) {
-  $(this)
-    .next("ul")
-    .toggle();
-  e.stopPropagation();
-  e.preventDefault();
-});
-
 Object.assign(action, {
   // eslint-disable-line no-unused-vars
   "Open Street Map": () => switchLayer("osm"),

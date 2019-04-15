@@ -18,6 +18,5 @@ let table = initTable("device", "device", [
   $("#restrict-pool").on("change", function() {
     table.ajax.reload(null, false);
   });
-  convertSelect("#jobs", "#restrict-pool");
   $("#restrict-pool").selectpicker("selectAll");
 })();

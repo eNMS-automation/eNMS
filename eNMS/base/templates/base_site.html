@@ -62,14 +62,15 @@
         <script src="{{ url_for('static', filename='smart-wizard/jquery.smartWizard.min.js') }}"></script>
         <script src="{{ url_for('static', filename='bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
         <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
-        <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
         <script>
+          const page = {{ endpoint|tojson|safe }};
           const formProperties = {{ form_properties|tojson|safe }};
           const names = {{ names|tojson|safe }};
           const propertyTypes = {{ property_types|tojson|safe }};
           let action = {};
         </script>
+        <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
+        <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
       {% endblock %}
     {% endblock body %}
   </body>

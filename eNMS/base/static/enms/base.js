@@ -295,7 +295,7 @@ function configureForm(form, id) {
   formProperties[form].forEach((property) => {
     const propertyType = propertyTypes[property] || "str";
     el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
-    if (!el.length) return;
+    if (!el.length) el = $(`#${property}`);
     if (propertyType == "date") {
       const today = new Date();
       el.datetimepicker({
@@ -539,4 +539,5 @@ if (typeof NProgress != "undefined") {
 
 $(document).ready(function() {
   initSidebar();
+  configureForm(page);
 });

@@ -352,14 +352,6 @@ Object.assign(action, {
   "Move Nodes": () => switchMode("node"),
 });
 
-$(".dropdown-submenu a.menu-submenu").on("click", function(e) {
-  $(this)
-    .next("ul")
-    .toggle();
-  e.stopPropagation();
-  e.preventDefault();
-});
-
 $("#network").contextMenu({
   menuSelector: "#contextMenu",
   menuSelected: function(invokedOn, selectedMenu) {

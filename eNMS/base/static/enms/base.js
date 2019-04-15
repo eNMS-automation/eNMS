@@ -253,17 +253,18 @@ function createPanel(id, contentSize, url, processing) {
  * Connect to a device.
  */
 // eslint-disable-next-line
-function showConnectionPanel(id) {
+function showAutomationPanel(id) {
   createPanel(
-    `connection-panel-${id}`,
+    `automation-panel-${id}`,
     "400 500",
-    "../connection_form",
+    "../device_automation_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Connect to device");
-      $("#connection-button").prop("id", `${id}-connection-button`);
-      $(`#${id}-connection-button`).attr("onclick", `saveDeviceJobs(${id})`);
+      panel.setHeaderTitle("Device automation");
+      configureForm("device_automation");
       $("#device-automation-form").prop("id", `${id}-device-automation-form`);
+      $("#device-automation-button").prop("id", `${id}-device-automation-button`);
+      $(`#${id}-device-automation-button`).attr("onclick", `saveDeviceJobs(${id})`);
     }
   );
 }
@@ -272,15 +273,16 @@ function showConnectionPanel(id) {
  * Connect to a device.
  */
 // eslint-disable-next-line
-function showAutomationPanel(id) {
+function showConnectionPanel(id) {
   createPanel(
-    `automation-panel-${id}`,
+    `connection-panel-${id}`,
     "400 200",
-    "../device_automation_form",
+    "../connection_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Device automation");
-      $("#device-automation-button").prop("id", `${id}-device-automation-button`);
+      panel.setHeaderTitle("Connect to device");
+      $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
+      $("#connection-button").prop("id", `${id}-connection-button`);
       $(`#${id}-device-automation-button`).attr("onclick", `sshConnection(${id})`);
       $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
     }

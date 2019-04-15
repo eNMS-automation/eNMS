@@ -11,10 +11,9 @@ partial: false
  * @param {id} id - Device id.
  */
 function saveDeviceJobs(id) {
-  const url = `/inventory/save_device_jobs/${id}`;
-  fCall(url, "#device-automation-form", function(device) {
+  fCall(`/inventory/save_device_jobs/${id}`, `#${id}-device-automation-form`, function(device) {
     alertify.notify("Changes saved.", "success", 5);
-    $(`automation-panel-${id}`).remove();
+    $(`#automation-panel-${id}`).remove();
   });
 }
 
@@ -23,8 +22,7 @@ function saveDeviceJobs(id) {
  * @param {id} id - Device id.
  */
 function sshConnection(id) {
-  const url = `/inventory/connection/${id}`;
-  fCall(url, `#${id}-connection-parameters-form`, function(result) {
+  fCall(`/inventory/connection/${id}`, `#${id}-connection-parameters-form`, function(result) {
     let url = result.server_addr;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
@@ -40,7 +38,7 @@ function sshConnection(id) {
     alertify.notify(link, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
     alertify.notify(warning, "error", 20);
-    $(`#${id}-connection-panel`).remove();
+    $(`#connection-panel-${id}`).remove();
   });
 }
 

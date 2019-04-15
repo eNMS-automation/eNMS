@@ -12,6 +12,5 @@ let table = initTable("link", "link", ["Edit", "Duplicate", "Delete"]);
   $("#restrict-pool").on("change", function() {
     table.ajax.reload(null, false);
   });
-  convertSelect("#link-source", "#link-destination", "#restrict-pool");
   $("#restrict-pool").selectpicker("selectAll");
 })();

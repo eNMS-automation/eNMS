@@ -20,18 +20,8 @@ currentView: false
  */
 // eslint-disable-next-line
 function updateView() {
-  $("#restrict-pool").change();
-}
 
-$("#restrict-pool").on("change", function() {
-  fCall("/inventory/pools_objects", "#pool-restriction-form", function(
-    objects
-  ) {
-    deleteAll();
-    objects.devices.map((d) => createNode(d, "device"));
-    objects.links.map(createLink);
-  });
-});
+}
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");

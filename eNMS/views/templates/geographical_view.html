@@ -65,17 +65,6 @@
             <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
               <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
             </div>
-            {% if view_type == 'network' %}
-              <div class="btn-group-vertical" style="width: 50vw; z-index:500; position: absolute; top: 10px; right:10vw;">
-                <form id="pool-restriction-form" method="post">
-                  {{ pool_restriction_form.list_fields() }}
-                  <div class="form-group">
-                    {{ pool_restriction_form.pools(id="restrict-pool", class="form-control") }}
-                  </div>
-                </form>
-              </div>
-            {% endif %}
-            {{ buttons }}
           </div>
         </div>
       </div>
@@ -92,7 +81,7 @@
     let view = '{{ view }}';
   </script>
   <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
-  <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('inventory_blueprint.static', filename='inventory.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='webgl-earth/api.min.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='leaflet/leaflet.min.js') }}"></script>
   <script src="{{ url_for('views_blueprint.static', filename='leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>

@@ -2,13 +2,13 @@
 
 {% block stylesheets %}
   {{ super() }}
-  {% if type == "pool") %}
+  {% if type == "pool" %}
     <link href="{{ url_for('static', filename='vis/vis-network.min.css') }}" rel="stylesheet">
   {% endif %}
 {% endblock stylesheets %}
 
 {% block content %}
-  {% if type == "pool") %}
+  {% if type == "pool" %}
     <ul id="contextMenu" class="dropdown-menu" role="menu">
       <li class="menu rc-device-menu"><a tabindex="-1" href="#">Device properties</a></li>
       <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
@@ -59,7 +59,7 @@
   {% if type in ("configuration", "device", "link", "pool") %}
     <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
   {% endif %}
-  {% if type == "pool") %}
+  {% if type == "pool" %}
     <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
     <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
   {% endif %}

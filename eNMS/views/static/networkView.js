@@ -2,14 +2,12 @@
 global
 changeMarker: false
 connectionParametersModal: false
-convertSelect: false
 createNode: false
 createLink: false
 deviceAutomationModal: false
 deleteAll: false
 doc: false
 fCall: false
-partial: false
 showModal: false
 showTypePanel: false
 switchLayer: false
@@ -37,7 +35,6 @@ $("#restrict-pool").on("change", function() {
 
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
-  convertSelect("#restrict-pool");
   $("#restrict-pool").selectpicker("selectAll");
   switchView(currentView);
 })();

@@ -9,7 +9,6 @@ deleteAll: false
 deviceAutomationModal: false
 displayPool: false
 doc: false
-partial: false
 selected: false
 showModal: false
 showTypePanel: false

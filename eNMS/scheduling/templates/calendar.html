@@ -27,7 +27,6 @@
   <script src="{{ url_for('scheduling_blueprint.static', filename='fullcalendar/fullcalendar.min.js') }}"></script>
   <script>
     var tasks = {{ tasks|tojson|safe }};
-    console.log(tasks);
   </script>
   <script src="{{ url_for('scheduling_blueprint.static', filename='calendar.js') }}"></script>
 {% endblock javascripts %}

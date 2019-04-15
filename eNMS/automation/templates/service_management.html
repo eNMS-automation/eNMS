@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('static', filename='difflib/diffview.min.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -59,8 +58,6 @@
   <script>
     const servicesClasses = {{ services_classes|tojson|safe }};
   </script>
-  <!-- Difflib -->
-  <script src="{{ url_for('static', filename='difflib/diffview.min.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='serviceManagement.js') }}"></script>
 {% endblock javascripts %}

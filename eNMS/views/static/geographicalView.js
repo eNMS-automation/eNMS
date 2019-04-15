@@ -315,16 +315,16 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
 
 Object.assign(action, {
   // eslint-disable-line no-unused-vars
-  "Open Street Map": partial(switchLayer, "osm"),
-  "Google Maps": partial(switchLayer, "gm"),
-  NASA: partial(switchLayer, "nasa"),
+  "Open Street Map": () => switchLayer("osm"),
+  "Google Maps": () => switchLayer("gm"),
+  NASA: () => switchLayer("nasa"),
   "Display sites": () => switchView(currentView),
-  "2D": partial(switchView, "2D"),
-  "Clustered 2D": partial(switchView, "2DC"),
-  "3D": partial(switchView, "3D"),
-  Image: partial(changeMarker, "Image"),
-  Circle: partial(changeMarker, "Circle"),
-  "Circle Marker": partial(changeMarker, "Circle Marker"),
+  "2D": () => switchView("2D"),
+  "Clustered 2D": () => switchView("2DC"),
+  "3D": () => switchView("3D"),
+  Image: () => changeMarker("Image"),
+  Circle: () => changeMarker("Circle"),
+  "Circle Marker": () => changeMarker("Circle Marker"),
 });
 
 $("body").contextMenu({

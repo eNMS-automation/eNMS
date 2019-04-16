@@ -28,6 +28,7 @@ from eNMS.associations import (
     job_workflow_table,
     log_rule_log_table,
 )
+from eNMS.extensions import controller
 from eNMS.functions import fetch, session_scope
 from eNMS.models import Base
 from eNMS.inventory.models import Device

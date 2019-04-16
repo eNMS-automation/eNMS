@@ -1,4 +1,3 @@
-from flask import request
 from typing import Union
 
 from eNMS.functions import fetch, fetch_all, get, get_one, post
@@ -8,10 +7,9 @@ from eNMS.views import bp
 
 @get(bp, "/<view_type>_view", "View")
 def view(view_type: str) -> dict:
-    parameters = get_one("Parameters").serialized
     return dict(
         template="geographical_view",
-        parameters=parameters,
+        parameters=get_one("Parameters").serialized,
         subtype_sizes=subtype_sizes,
         link_colors=link_subtype_to_color,
         view_type=view_type,

@@ -11,4 +11,4 @@ bp = Blueprint(
 from eNMS.functions import add_classes
 from eNMS.home.models import Log, SyslogServer
 
-add_classes(Log, LogRule, SyslogServer)
+add_classes(Log, SyslogServer)

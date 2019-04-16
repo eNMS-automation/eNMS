@@ -56,7 +56,7 @@ def login() -> Union[Response, str]:
                 user = fetch("User", name=name)
                 if user and password == user.password:
                     login_user(user)
-                    return redirect(url_for("base_blueprint.dashboard"))
+                    return redirect(url_for("home_blueprint.dashboard"))
             elif request.form["authentication_method"] == "LDAP Domain":
                 with Connection(
                     ldap_client,
@@ -87,12 +87,12 @@ def login() -> Union[Response, str]:
                             user["permissions"] = ["Admin"]
                         new_user = factory("User", **user)
                         login_user(new_user)
-                        return redirect(url_for("base_blueprint.dashboard"))
+                        return redirect(url_for("home_blueprint.dashboard"))
             elif request.form["authentication_method"] == "TACACS":
                 if tacacs_client.authenticate(name, password).valid:
                     user = factory("User", **{"name": name, "password": password})
                     login_user(user)
-                    return redirect(url_for("base_blueprint.dashboard"))
+                    return redirect(url_for("home_blueprint.dashboard"))
             abort(403)
         except Exception as e:
             info(f"Authentication failed ({str(e)})")
@@ -106,7 +106,7 @@ def login() -> Union[Response, str]:
             authentication_methods.append(("TACACS",) * 2)
         login_form.authentication_method.choices = authentication_methods
         return render_template("login.html", login_form=login_form)
-    return redirect(url_for("base_blueprint.dashboard"))
+    return redirect(url_for("home_blueprint.dashboard"))
 
 
 @get(bp, "/logout")

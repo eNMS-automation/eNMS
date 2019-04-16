@@ -1,4 +1,3 @@
-from collections import Counter
 from json.decoder import JSONDecodeError
 from logging import info
 from flask import jsonify, redirect, request, url_for
@@ -12,22 +11,8 @@ from eNMS import db
 from eNMS.base import bp
 from eNMS.classes import classes
 from eNMS.forms import form_classes, form_templates
-from eNMS.functions import (
-    delete,
-    factory,
-    fetch,
-    fetch_all,
-    fetch_all_visible,
-    get,
-    post,
-)
-from eNMS.properties import (
-    default_diagrams_properties,
-    table_fixed_columns,
-    table_properties,
-    reverse_pretty_names,
-    type_to_diagram_properties,
-)
+from eNMS.functions import delete, factory, fetch, fetch_all_visible, get, post
+from eNMS.properties import table_fixed_columns, table_properties
 
 
 @bp.route("/")
@@ -93,38 +78,6 @@ def server_side_processing(table: str) -> Response:
             ],
         }
     )
-
-
-@get(bp, "/dashboard")
-def dashboard() -> dict:
-    on_going = {
-        "Running services": len(
-            [service for service in fetch_all("Service") if service.status == "Running"]
-        ),
-        "Running workflows": len(
-            [
-                workflow
-                for workflow in fetch_all("Workflow")
-                if workflow.status == "Running"
-            ]
-        ),
-        "Scheduled tasks": len(
-            [task for task in fetch_all("Task") if task.status == "Active"]
-        ),
-    }
-    return dict(
-        properties=type_to_diagram_properties,
-        default_properties=default_diagrams_properties,
-        counters={**{cls: len(fetch_all_visible(cls)) for cls in classes}, **on_going},
-    )
-
-
-@post(bp, "/counters/<property>/<type>")
-def get_counters(property: str, type: str) -> Counter:
-    objects = fetch_all(type)
-    if property in reverse_pretty_names:
-        property = reverse_pretty_names[property]
-    return Counter(map(lambda o: str(getattr(o, property)), objects))
 
 
 @post(bp, "/get/<cls>/<id>", "View")

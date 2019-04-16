@@ -18,16 +18,9 @@ from eNMS.inventory.forms import (
     LibreNmsForm,
     NetboxForm,
     OpenNmsForm,
-    PoolObjectsForm,
 )
 from eNMS.inventory.functions import get_pools_devices, object_export, object_import
-from eNMS.properties import (
-    device_configuration_properties,
-    device_table_properties,
-    google_earth_styles,
-    link_table_properties,
-    pool_table_properties,
-)
+from eNMS.properties import google_earth_styles
 
 
 @get(bp, "/import_export", "View")

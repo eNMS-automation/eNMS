@@ -347,6 +347,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "instance": ["Edit", "Duplicate", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
     "log": ["Delete"],
+    "logrule": ["Edit", "Delete"],
     "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
     "task": ["Action", "Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],

@@ -65,6 +65,16 @@
             <div class="btn-group" style="z-index:500; position: absolute; left:35vw; top:10px;">  
               <strong><p class="btn btn-danger" style="min-width:100px; display: none;" id="name-box"></p></strong>
             </div>
+            {% if view_type == 'network' %}
+              <div class="btn-group-horizontal" style="width: 20vw; z-index:1; position: absolute; top: 10px; right:5vw;">
+                <button class="btn btn-success btn-file" onclick="showFilteringPanel('device')">
+                  Filter devices
+                </button>
+                <button class="btn btn-success btn-file" onclick="showFilteringPanel('link')">
+                  Filter links
+                </button>
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>

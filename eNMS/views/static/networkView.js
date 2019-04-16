@@ -20,7 +20,10 @@ currentView: false
  */
 // eslint-disable-next-line
 function updateView() {
-
+  call("/inventory/pool_objects/1", function(pool) {
+    pool.devices.map((d) => createNode(d, "device"));
+    pool.links.map(createLink);
+  });
 }
 
 (function() {

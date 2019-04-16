@@ -107,25 +107,20 @@ class Device(CustomDevice):
         if table == "device":
             return [
                 f"""<button type="button" class="btn btn-info btn-xs"
-                onclick="showAutomationPanel('{self.id}')">
-                Automation</button>""",
+                onclick="showAutomationPanel('{self.id}')">Automation</button>""",
                 f"""<button type="button" class="btn btn-success btn-xs"
-                onclick="showConnectionPanel('{self.id}')">
-                Connect</button>""",
+                onclick="showConnectionPanel('{self.id}')">Connect</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
                 onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypePanel('device', '{self.id}', true)">
-                Duplicate</button>""",
+                onclick="showTypePanel('device', '{self.id}', true)">Duplicate</button>""",
                 f"""<button type="button" class="btn btn-danger btn-xs"
-                onclick="confirmDeletion('device', '{self.id}')">
-                Delete</button>""",
+                onclick="showDeletionPanel('device', '{self.id}')">Delete</button>""",
             ]
         else:
             return [
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showConfigurationPanel('{self.id}')">
-                Configuration</button>"""
+                onclick="showConfigurationPanel('{self.id}')">Configuration</button>"""
                 if self.configurations
                 else "",
                 f"""<label class="btn btn-default btn-xs btn-file"

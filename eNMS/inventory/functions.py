@@ -19,7 +19,7 @@ def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
     return allowed_syntax and allowed_extension
 
 
-def get_pools_devices(*pools: Union[str, int]) -> Dict[str, List[dict]]:
+def get_pool_devices(*pools: Union[str, int]) -> Dict[str, List[dict]]:
     return {
         "devices": (
             db.session.query(

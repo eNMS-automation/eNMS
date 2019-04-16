@@ -210,7 +210,7 @@ function showFilteringPanel(type) {
  * Show Deletion Panel
  */
 // eslint-disable-next-line
-function showdeletionPanel(type) {
+function showDeletionPanel(type) {
   createPanel(
     "deletion-panel",
     "300, 300",

@@ -143,7 +143,7 @@ function changeMarker(type) {
  */
 // eslint-disable-next-line
 function createNode(node, nodeType) {
-  if (!node.latitude || !node.longitude) return;
+  if (!node.latitude && !node.longitude) return;
   let marker = null;
   if (currentView == "2D" || currentView == "2DC") {
     if (markerType == "Circle Marker") {

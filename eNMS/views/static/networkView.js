@@ -26,8 +26,11 @@ function updateView() {
   });
 }
 
+function filter() {
+  console.log($('#filter-form').serialize());
+}
+
 (function() {
   doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
-  $("#restrict-pool").selectpicker("selectAll");
   switchView(currentView);
 })();

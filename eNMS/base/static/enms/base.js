@@ -87,6 +87,19 @@ function fCall(url, form, callback) {
   }
 }
 
+function serializeForm(form) {
+  data: (d) => {
+    data = JSON.parse(JSON.stringify($("#filter-form").serializeArray()));
+    result = {"pools": []}
+    data.forEach((property) => {
+      if (property.name == "pools") {
+        result.pools.push(property.value);
+      } else {
+        result[property.name] = property.value
+      }
+    });
+}
+
 /**
  * Datatable per-column search.
  * @param {cls} cls - Object class.
@@ -118,25 +131,6 @@ function initTable(type) {
     },
   });
   return table;
-}
-
-/**
- * Server-side table filtering.
- */
-// eslint-disable-next-line
-function filterTable() {
-  table.ajax.reload(null, false);
-  alertify.notify("Filter applied.", "success", 5);
-}
-
-/**
- * Datatable periodic refresh.
- * @param {interval} interval - Refresh interval.
- */
-// eslint-disable-next-line
-function refreshTable(interval) {
-  table.ajax.reload(null, false);
-  setTimeout(() => refreshTable(interval), 5000);
 }
 
 /**

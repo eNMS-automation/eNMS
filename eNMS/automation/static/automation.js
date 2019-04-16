@@ -77,9 +77,9 @@ function saveService(service) {
  * @param {id} id - Job id.
  */
 function displayResult(results, id) {
-  const value = results[$(`#${id}-display`).val()];
+  const value = results[$(`#display-${id}`).val()];
   if (!value) return;
-  $(`#${id}-results`).text(
+  $(`#results-${id}`).text(
     JSON.stringify(
       Object.fromEntries(
         Object.entries(value)
@@ -98,16 +98,16 @@ function displayResult(results, id) {
  */
 function displayResults(id) {
   call(`/automation/get_results/${id}`, (results) => {
-    $(`#${id}-display,#${id}-compare_with`).empty();
+    $(`#display-${id},#compare_with-${id}`).empty();
     const times = Object.keys(results);
     times.forEach((option) => {
-      $(`#${id}-display,#${id}-compare_with`).append(
+      $(`#display-${id},#compare_with-${id}`).append(
         $("<option></option>")
           .attr("value", option)
           .text(option)
       );
     });
-    $(`#${id}-display,#${id}-compare_with`).val(times[times.length - 1]);
+    $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
     displayResult(results, id);
   });
 }
@@ -162,7 +162,7 @@ function showLogs(id) {
 function showResults(id) {
   createPanel(
     `results-panel-${id}`,
-    "700 700",
+    "1000 600",
     "../results_form",
     function(panel) {
       panel.content.innerHTML = this.responseText;
@@ -171,62 +171,9 @@ function showResults(id) {
       $("#compare_with").prop("id", `compare_with-${id}`);
       $("#results").prop("id", `results-${id}`);
       configureCallbacks(id);
-      displayConfigurations(id);
+      displayResults(id);
     }
   );
-  jsPanel.create({
-    theme: "none",
-    border: "medium",
-    headerTitle: "Logs",
-    position: "center-top 0 58",
-    contentSize: "1100 600",
-    content: `
-      <div class="modal-body">
-        <button
-          class="btn btn-default btn-file"
-          onclick="clearResults(${id})"
-          style="width:100%;"
-        >Clear</button>
-        <button
-          class="btn btn-default btn-file"
-          onclick="displayResults(${id})"
-          style="width:100%;"
-        >Refresh</button><br><br>
-        <label class="control-label col-md-2 col-sm-2 col-xs-12">
-          Display :
-        </label>
-        <div class="col-md-10 col-sm-10 col-xs-12">
-          <select
-            class="form-control"
-            id="${id}-display"
-            name="display"
-          ></select>
-        </div>
-        <label class="control-label col-md-2 col-sm-2 col-xs-12">
-          Compare With :
-        </label>
-        <div class="col-md-10 col-sm-10 col-xs-12">
-          <select
-            class="form-control"
-            id="${id}-compare_with"
-            name="compare_with"
-          ></select>
-        </div>
-        <hr><hr><hr><hr>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-          <pre id="${id}-results"></pre>
-          </div>
-        </div>
-      </div>
-    `,
-    dragit: {
-      opacity: 0.7,
-      containment: [5, 5, 5, 5],
-    },
-  });
-  configureCallbacks(id);
-  displayResults(id);
 }
 
 /**
@@ -235,19 +182,19 @@ function showResults(id) {
  */
 // eslint-disable-next-line
 function configureCallbacks(id) {
-  $(`#${id}-display`).on("change", function() {
+  $(`#display-${id}`).on("change", function() {
     call(`/automation/get_results/${id}`, (results) => {
       displayResult(results, id);
-      $(`#${id}-compare_with`).val($(`#${id}-display`).val());
+      $(`#compare_with-${id}`).val($(`#display-${id}`).val());
     });
   });
 
-  $(`#${id}-compare_with`).on("change", function() {
-    $(`#${id}-results`).empty();
-    const v1 = $(`#${id}-display`).val();
-    const v2 = $(`#${id}-compare_with`).val();
+  $(`#compare_with-${id}`).on("change", function() {
+    $(`#results-${id}`).empty();
+    const v1 = $(`#display-${id}`).val();
+    const v2 = $(`#compare_with-${id}`).val();
     call(`/automation/get_diff/${id}/${v1}/${v2}`, function(data) {
-      $(`#${id}-results`).append(
+      $(`#results-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,
           newTextLines: data.second,
@@ -269,7 +216,7 @@ function configureCallbacks(id) {
 // eslint-disable-next-line
 function clearResults(id) {
   call(`/automation/clear_results/${id}`, () => {
-    $(`#${id}-results,#${id}-compare_with,#${id}-display`).empty();
+    $(`#results-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Results cleared.", "success", 5);
   });
 }

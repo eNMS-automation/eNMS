@@ -1,5 +1,10 @@
 from eNMS.admin.forms import InstanceForm, UserForm
-from eNMS.automation.forms import AddJobsForm, JobForm, LogAutomationForm
+from eNMS.automation.forms import (
+    AddJobsForm,
+    CompareResultsForm,
+    JobForm,
+    LogAutomationForm,
+)
 from eNMS.inventory.forms import (
     CompareConfigurationsForm,
     ConnectionForm,
@@ -27,6 +32,7 @@ form_classes = {
     "logrule": LogAutomationForm,
     "pool": PoolForm,
     "pool_objects": PoolObjectsForm,
+    "results": CompareResultsForm,
     "user": UserForm,
     "service": JobForm,
     "task": TaskForm,
@@ -47,6 +53,7 @@ form_templates = {
     "logrule": "logrule_form",
     "pool": "pool_form",
     "pool_objects": "pool_objects_form",
+    "results": "results_form",
     "service": "service_form",
     "task": "base_form",
     "user": "base_form",

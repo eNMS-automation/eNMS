@@ -261,6 +261,43 @@ function createLink(link) {
 }
 
 /**
+ * Delete all devices.
+ */
+function deleteAll() {
+  for (let i = 0; i < markersArray.length; i++) {
+    if (currentView == "2D") {
+      markersArray[i].removeFrom(map);
+    } else if (currentView == "3D") {
+      markersArray[i].removeFrom(earth);
+    } else {
+      markers.removeLayer(markersArray[i]);
+    }
+  }
+  markersArray = [];
+}
+
+/**
+ * Delete all links.
+ */
+function deleteAll() {
+  for (let i = 0; i < polylinesArray.length; i++) {
+    if (currentView == "2D") {
+      polylinesArray[i].removeFrom(map);
+    } else if (currentView == "2DC") {
+      markers.removeLayer(polylinesArray[i]);
+    } else {
+      try {
+        polylinesArray[i].destroy();
+      } catch (err) {
+        // catch
+      }
+    }
+  }
+  markersArray = [];
+  polylinesArray = [];
+}
+
+/**
  * Delete all devices and links on the map.
  */
 function deleteAll() {

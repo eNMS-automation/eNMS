@@ -27,13 +27,8 @@ function updateView() {
 }
 
 function filter(type) {
-  $.ajax({
-    type: "POST",
-    url: `/filtering/view/${type}`,
-    data: serializeForm(`#${type}-filter-form`),
-    success: function(results) {
-      console.log(results)
-    },
+  fCall(`/views/filtering/${type}`, `#${type}-form`, (r) => {
+    console.log(r)
   });
 }
 

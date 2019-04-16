@@ -13,7 +13,7 @@ function initTable(type) {
     scrollX: true,
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
-      url: `/filtering/table/${type}`,
+      url: `/filtering/${type}`,
       data: (d) => {
         d.form = serializeForm(`#${type}_filtering-form`);
       }

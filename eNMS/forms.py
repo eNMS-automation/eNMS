@@ -62,6 +62,7 @@ form_properties = {
     "device_filtering": ("pools",),
     "link": ("link-source", "link-destination"),
     "link_filtering": ("pools",),
+    "logrule": ("jobs",),
     "pool_objects": ("devices", "links"),
     "service": ("devices", "pools"),
     "task": ("start_date", "end_date", "job"),

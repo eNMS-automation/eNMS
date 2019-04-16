@@ -1,32 +1,32 @@
 <form id="edit-logrule-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-  {{ log_automation_form.id(id='logrule-id') }}
-  {{ log_automation_form.list_fields() }}
+  {{ form.id(id='logrule-id') }}
+  {{ form.list_fields() }}
   <label>Name</label>
   <div class='form-group'>
-    {{ log_automation_form.name(id='logrule-name', class="form-control required") }}
+    {{ form.name(id='logrule-name', class="form-control required") }}
   </div>
   <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
       <tr>
-        {% for property in log_automation_form.properties %}
+        {% for property in form.properties %}
           <th>{{ names[property] }}</th>
         {% endfor %}
         <th>Regex</th>
       </tr>
     </thead>
     <tbody>
-      {% for property in log_automation_form.properties %}
+      {% for property in form.properties %}
         <tr>
           <td>{{ names[property] }}</td>
-          <td>{{ log_automation_form[property](id='logrule-' + property, class="form-control") }}</td>
-          <td>{{ log_automation_form[property + '_regex'](id='logrule-' + property + '_regex', class="form-control") }}</td>
+          <td>{{ form[property](id='logrule-' + property, class="form-control") }}</td>
+          <td>{{ form[property + '_regex'](id='logrule-' + property + '_regex', class="form-control") }}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
   <label>Services or Workflows</label>
   <div class='form-group'>
-    {{ log_automation_form.jobs(id='logrule-jobs', class="form-control required", size=20) }}
+    {{ form.jobs(id='logrule-jobs', class="form-control required", size=20) }}
   </div>
   <div class="ln_solid"></div>
   <div class="form-group">

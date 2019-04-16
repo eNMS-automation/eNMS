@@ -11,6 +11,7 @@ from eNMS.inventory.forms import (
     PoolForm,
     PoolObjectsForm,
 )
+from eNMS.logs.forms import LogAutomationForm
 from eNMS.scheduling.forms import TaskForm
 
 form_classes = {
@@ -24,6 +25,7 @@ form_classes = {
     "instance": InstanceForm,
     "link": LinkForm,
     "link_filtering": LinkFilteringForm,
+    "logrule": LogAutomationForm,
     "pool": PoolForm,
     "pool_objects": PoolObjectsForm,
     "user": UserForm,
@@ -43,6 +45,7 @@ form_templates = {
     "instance": "base_form",
     "link": "base_form",
     "link_filtering": "filtering_form",
+    "logrule": "logrule_form",
     "pool": "pool_form",
     "pool_objects": "pool_objects_form",
     "service": "service_form",

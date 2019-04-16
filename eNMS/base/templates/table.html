@@ -56,6 +56,7 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script src="{{ url_for('static', filename='enms/table.js') }}"></script>
   {% if type in ("configuration", "device", "link", "pool") %}
     <script src="{{ url_for('inventory_blueprint.static', filename='inventory.js') }}"></script>
   {% endif %}

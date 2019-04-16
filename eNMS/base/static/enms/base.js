@@ -88,49 +88,16 @@ function fCall(url, form, callback) {
 }
 
 function serializeForm(form) {
-  data: (d) => {
-    data = JSON.parse(JSON.stringify($("#filter-form").serializeArray()));
-    result = {"pools": []}
-    data.forEach((property) => {
-      if (property.name == "pools") {
-        result.pools.push(property.value);
-      } else {
-        result[property.name] = property.value
-      }
-    });
-}
-
-/**
- * Datatable per-column search.
- * @param {cls} cls - Object class.
- * @param {type} type - Table type.
- * @return {table}
- */
-// eslint-disable-next-line
-function initTable(type) {
-  // eslint-disable-next-line new-cap
-  const table = $("#table").DataTable({
-    serverSide: true,
-    orderCellsTop: true,
-    scrollX: true,
-    sDom: "<'top'i>rt<'bottom'lp><'clear'>",
-    ajax: {
-      url: `/server_side_processing/${type}`,
-      data: (d) => {
-        data = JSON.parse(JSON.stringify($("#filter-form").serializeArray()));
-        result = {"pools": []}
-        data.forEach((property) => {
-          if (property.name == "pools") {
-            result.pools.push(property.value);
-          } else {
-            result[property.name] = property.value
-          }
-        });
-        d.form = result;
-      },
-    },
+  data = JSON.parse(JSON.stringify($(form).serializeArray()));
+  result = {"pools": []}
+  data.forEach((property) => {
+    if (property.name == "pools") {
+      result.pools.push(property.value);
+    } else {
+      result[property.name] = property.value
+    }
   });
-  return table;
+  return result
 }
 
 /**

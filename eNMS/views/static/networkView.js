@@ -26,8 +26,15 @@ function updateView() {
   });
 }
 
-function filter() {
-  console.log($('#filter-form').serialize());
+function filter(type) {
+  $.ajax({
+    type: "POST",
+    url: `/filtering/view/${type}`,
+    data: serializeForm(`#${type}-filter-form`),
+    success: function(results) {
+      console.log(results)
+    },
+  });
 }
 
 (function() {

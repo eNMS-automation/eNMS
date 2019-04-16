@@ -32,6 +32,7 @@ from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
 from eNMS.classes import classes, service_classes
 from eNMS.functions import fetch
+from eNMS.home.models import SyslogServer
 from eNMS.properties import (
     boolean_properties,
     cls_to_properties,
@@ -43,7 +44,6 @@ from eNMS.properties import (
     property_types,
     service_import_properties,
 )
-from eNMS.logs.models import SyslogServer
 
 
 def register_extensions(app: Flask) -> None:

@@ -30,29 +30,6 @@ class Log(Base):
         return self.content
 
 
-class LogRule(Base):
-
-    __tablename__ = type = "LogRule"
-    id = Column(Integer, primary_key=True)
-    name = Column(String(255), unique=True)
-    source_ip = Column(String(255))
-    source_ip_regex = Column(Boolean)
-    content = Column(String(255))
-    content_regex = Column(Boolean)
-    logs = relationship("Log", secondary=log_rule_log_table, back_populates="log_rules")
-    jobs = relationship("Job", secondary=job_log_rule_table, back_populates="log_rules")
-
-    def generate_row(self, table: str) -> List[str]:
-        return [
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showTypeModal('logrule', '{self.id}')">
-            Edit</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('logrule', '{self.id}')">
-            Delete</button>""",
-        ]
-
-
 class SyslogUDPHandler(BaseRequestHandler):
     def handle(self) -> None:
         with controller.app.app_context():

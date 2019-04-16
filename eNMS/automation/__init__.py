@@ -8,9 +8,9 @@ bp = Blueprint(
     static_folder="static",
 )
 
-from eNMS.automation.models import Job, Service, Workflow, WorkflowEdge
+from eNMS.automation.models import Job, LogRule, Service, Workflow, WorkflowEdge
 from eNMS.functions import add_classes
 
-add_classes(Job, Service, Workflow, WorkflowEdge)
+add_classes(Job, LogRule, Service, Workflow, WorkflowEdge)
 
 import eNMS.automation.routes  # noqa: F401

@@ -14,7 +14,6 @@
           <ul class="nav child_menu">
             <li><a href="/home/dashboard">Dashboard</a></li>
             <li><a href="/home/log_management">Log Management</a></li>
-            <li><a href="/home/logrule_management">Log Automation</a></li>
           </ul>
         </li>
         {% if current_user.allowed('Admin Section') %}
@@ -48,6 +47,7 @@
               <li><a href="/automation/service_management">Service Management</a></li>
               <li><a href="/automation/workflow_management">Workflow Management</a></li>
               <li><a href="/automation/workflow_builder">Workflow Builder</a></li>
+              <li><a href="/automation/logrule_management">Log Automation</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-clock-o"></i>Scheduling<span class="fa fa-chevron-down"></span></a>

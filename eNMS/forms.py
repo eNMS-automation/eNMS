@@ -1,6 +1,5 @@
 from eNMS.admin.forms import InstanceForm, UserForm
-from eNMS.automation.forms import AddJobsForm, JobForm
-from eNMS.home.forms import LogAutomationForm
+from eNMS.automation.forms import AddJobsForm, JobForm, LogAutomationForm
 from eNMS.inventory.forms import (
     CompareConfigurationsForm,
     ConnectionForm,

@@ -60,7 +60,7 @@ def register_blueprints(app: Flask) -> None:
         "admin",
         "automation",
         "base",
-        "logs",
+        "home",
         "inventory",
         "scheduling",
         "views",

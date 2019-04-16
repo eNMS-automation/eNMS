@@ -40,24 +40,14 @@ form_classes = {
 }
 
 form_templates = {
-    "add_jobs": "add_jobs_form",
-    "configuration": "configuration_form",
     "configuration_filtering": "filtering_form",
-    "connection": "connection_form",
     "device": "base_form",
-    "device_automation": "device_automation_form",
     "device_filtering": "filtering_form",
     "instance": "base_form",
     "link": "base_form",
     "link_filtering": "filtering_form",
-    "logrule": "logrule_form",
-    "pool": "pool_form",
-    "pool_objects": "pool_objects_form",
-    "results": "results_form",
-    "service": "service_form",
     "task": "base_form",
     "user": "base_form",
-    "workflow": "workflow_form",
 }
 
 form_properties = {

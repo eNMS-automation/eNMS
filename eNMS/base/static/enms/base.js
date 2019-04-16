@@ -210,15 +210,14 @@ function showFilteringPanel(type) {
  * Show Deletion Panel
  */
 // eslint-disable-next-line
-function showFilteringPanel(type) {
+function showdeletionPanel(type) {
   createPanel(
-    "filtering-panel",
-    "700 700",
-    `../${type}_filtering_form`,
+    "deletion-panel",
+    "300, 300",
+    `../deletion_form`,
     function(panel) {
       panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Device automation");
-      configureForm(`${type}_filtering`);
+      panel.setHeaderTitle("Delete");
     }
   );
 }

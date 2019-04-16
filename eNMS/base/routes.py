@@ -1,3 +1,4 @@
+from flask_wtf import FlaskForm
 from json.decoder import JSONDecodeError
 from logging import info
 from flask import jsonify, redirect, request, url_for
@@ -23,9 +24,9 @@ def site_root() -> Response:
 @get(bp, "/<form_type>_form", "View")
 def route_form(form_type: str) -> dict:
     return dict(
-        form=form_classes[form_type](request.form),
+        form=form_classes.get(form_type, FlaskForm)(request.form),
         form_type=form_type,
-        template=f"forms/{form_templates[form_type]}",
+        template=f"forms/{form_templates.get(form_type, form_type + '_form')}",
     )
 
 

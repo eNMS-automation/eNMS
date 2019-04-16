@@ -69,8 +69,8 @@
   {{ super()}}
   <script src="{{ url_for('home_blueprint.static', filename='echarts/echarts.min.js') }}"></script>
   <script>
-    var defaultProperties = {{default_properties|tojson|safe}};
-    var counters = {{counters|tojson|safe}};
+    const defaultProperties = {{ default_properties|tojson|safe }};
+    const counters = {{ counters|tojson|safe }};
   </script>
   <script src="{{ url_for('home_blueprint.static', filename='dashboard.js') }}"></script>
 {% endblock javascripts %}

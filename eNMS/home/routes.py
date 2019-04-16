@@ -1,7 +1,8 @@
 from collections import Counter
 
 from eNMS.home import bp
-from eNMS.functions import fetch, fetch_all
+from eNMS.classes import classes
+from eNMS.functions import fetch_all, fetch_all_visible, get, post
 from eNMS.properties import (
     default_diagrams_properties,
     reverse_pretty_names,

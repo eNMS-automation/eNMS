@@ -13,7 +13,7 @@
         <li><a><i class="fa fa-home"></i>Home<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/home/dashboard">Dashboard</a></li>
-            <li><a href="/home/log_management">Log Management</a></li>
+            <li><a href="/home/log_management">Logs</a></li>
           </ul>
         </li>
         {% if current_user.allowed('Admin Section') %}
@@ -54,12 +54,6 @@
             <ul class="nav child_menu">
               <li><a href="/scheduling/task_management">Task Management</a></li>
               <li><a href="/scheduling/calendar">Calendar</a></li>
-            </ul>
-          </li>
-          <li><a><i class="fa fa-clock-o"></i>Logs<span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-              <li><a href="/logs/log_management">Log Management</a></li>
-              <li><a href="/logs/logrule_management">Log Automation</a></li>
             </ul>
           </li>
         {% endif %}

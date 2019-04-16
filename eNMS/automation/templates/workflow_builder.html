@@ -58,9 +58,8 @@
   {{ super()}}
   <script>
     let workflow = {{ workflow|tojson|safe }};
-    const servicesClasses = {{ services_classes|tojson|safe }};
   </script>
   <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
-  <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
+  <script src="{{ url_for('automation_blueprint.static', filename='automation.js') }}"></script>
   <script src="{{ url_for('automation_blueprint.static', filename='workflowBuilder.js') }}"></script>
 {% endblock javascripts %}

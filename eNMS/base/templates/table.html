@@ -57,14 +57,14 @@
 {% block javascripts %}
   {{ super()}}
   {% if type in ("configuration", "device", "link", "pool") %}
-    <script src="{{ url_for('inventory_blueprint.static', filename='objectCommonFunctions.js') }}"></script>
+    <script src="{{ url_for('inventory_blueprint.static', filename='inventory.js') }}"></script>
   {% endif %}
   {% if type == "pool" %}
     <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
     <script src="{{ url_for('views_blueprint.static', filename='logicalView.js') }}"></script>
   {% endif %}
   {% if type in ("service", "workflow") %}
-    <script src="{{ url_for('automation_blueprint.static', filename='jobCommonFunctions.js') }}"></script>
+    <script src="{{ url_for('automation_blueprint.static', filename='automation.js') }}"></script>
   {% endif %}
   {% if type == "task" %}
     <script src="{{ url_for('scheduling_blueprint.static', filename='scheduling.js') }}"></script>

@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from flask import abort, Blueprint, g, jsonify, request, render_template
+from flask import abort, Blueprint, jsonify, request, render_template
 from flask.wrappers import Response
 from flask_login import current_user, login_required
 from functools import wraps

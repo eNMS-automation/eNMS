@@ -8,23 +8,12 @@ from typing import Any, Dict
 from eNMS.extensions import db, scheduler
 from eNMS.automation.functions import scheduler_job
 from eNMS.classes import service_classes
-from eNMS.functions import (
-    delete,
-    factory,
-    fetch,
-    get,
-    objectify,
-    post,
-    str_dict,
-    serialize,
-)
+from eNMS.functions import delete, factory, fetch, get, objectify, post, str_dict
 from eNMS.properties import (
     cls_to_properties,
     pretty_names,
     private_properties,
     property_types,
-    service_table_properties,
-    workflow_table_properties,
 )
 from eNMS.automation import bp
 from eNMS.automation.forms import CompareResultsForm, WorkflowBuilderForm

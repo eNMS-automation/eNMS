@@ -1,12 +1,13 @@
 from re import search
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 from typing import List
 
 from eNMS.extensions import controller, db
-from eNMS.associations import job_log_rule_table, log_rule_log_table
+from eNMS.associations import log_rule_log_table
+from eNMS.automation.models import LogRule
 from eNMS.models import Base
 
 

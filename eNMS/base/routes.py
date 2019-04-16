@@ -5,7 +5,6 @@ from flask import jsonify, redirect, request, url_for
 from flask_login import current_user
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm.attributes import InstrumentedAttribute
 from typing import List
 from werkzeug.wrappers import Response
 
@@ -47,7 +46,6 @@ def route_form(form_type: str) -> dict:
 
 @get(bp, "/<_>/<table_type>_management", "View")
 def route_table(_: str, table_type: str) -> dict:
-    print("test" * 500)
     return dict(
         properties=table_properties[table_type],
         fixed_columns=table_fixed_columns[table_type],
@@ -58,7 +56,6 @@ def route_table(_: str, table_type: str) -> dict:
 
 @get(bp, "/server_side_processing/<table>")
 def server_side_processing(table: str) -> Response:
-    print(request.args)
     model, properties = classes.get(table, classes["Device"]), table_properties[table]
     try:
         order_property = properties[int(request.args["order[0][column]"])]

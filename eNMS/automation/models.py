@@ -20,6 +20,7 @@ from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
+from eNMS import db
 from eNMS.associations import (
     job_device_table,
     job_log_rule_table,

@@ -27,17 +27,7 @@ from eNMS.admin.forms import (
     MigrationsForm,
 )
 from eNMS.admin.functions import migrate_export, migrate_import
-from eNMS.functions import (
-    delete_all,
-    fetch_all,
-    get,
-    get_one,
-    post,
-    factory,
-    fetch,
-    serialize,
-)
-from eNMS.properties import instance_table_properties, user_table_properties
+from eNMS.functions import delete_all, fetch_all, get, get_one, post, factory, fetch
 
 
 @get(bp, "/administration", "View")

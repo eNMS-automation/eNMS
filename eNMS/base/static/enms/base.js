@@ -145,40 +145,6 @@ function refreshTable(interval) {
  * @param {id} id - Id of the object to delete.
  */
 // eslint-disable-next-line
-function confirmDeletion(type, id) {
-  panel = jsPanel.create({
-    id: "deletion-panel",
-    theme: "none",
-    border: "medium",
-    headerTitle: "Delete",
-    position: "center-top 0 58",
-    contentSize: "300 150",
-    content: `
-      <div class="modal-body">
-        Are you sure you want to permanently remove this item ?
-      </div>
-      <div class="modal-footer">
-        <center>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="deleteInstance('${type}', ${id})"
-          >Delete</button>
-        </center>
-      </div>`,
-    dragit: {
-      opacity: 0.7,
-      containment: [5, 5, 5, 5],
-    },
-  });
-}
-
-/**
- * Delete object.
- * @param {type} type - Node or link.
- * @param {id} id - Id of the object to delete.
- */
-// eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete/${type}/${id}`, function(result) {
     $("#deletion-panel").remove();
@@ -225,6 +191,23 @@ function createPanel(id, contentSize, url, processing) {
 
 /**
  * Show Filtering Panel
+ */
+// eslint-disable-next-line
+function showFilteringPanel(type) {
+  createPanel(
+    "filtering-panel",
+    "700 700",
+    `../${type}_filtering_form`,
+    function(panel) {
+      panel.content.innerHTML = this.responseText;
+      panel.setHeaderTitle("Device automation");
+      configureForm(`${type}_filtering`);
+    }
+  );
+}
+
+/**
+ * Show Deletion Panel
  */
 // eslint-disable-next-line
 function showFilteringPanel(type) {

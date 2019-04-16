@@ -28,7 +28,6 @@ function updateView() {
 
 function filter(type) {
   fCall(`/views/filtering/${type}`, `#${type}-form`, (r) => {
-    console.log(r);
     if (type == "device_filtering") {
       deleteAllDevices();
       r.map((d) => createNode(d, "device"));

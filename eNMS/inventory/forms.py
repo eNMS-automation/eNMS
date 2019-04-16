@@ -102,7 +102,7 @@ class FilteringForm(FlaskForm):
 
 @configure_device_form
 class DeviceFilteringForm(BaseObjectForm, FilteringForm):
-    configuration = StringField()
+    current_configuration = StringField()
     subtype = StringField()
     ip_address = StringField()
     port = StringField()

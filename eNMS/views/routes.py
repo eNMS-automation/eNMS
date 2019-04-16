@@ -24,7 +24,8 @@ def view(view_type: str) -> dict:
 def filtering(filter_type: str):
     print(request.form)
     model = filter_type.split("_")[0]
-    model, properties = classes[model], table_properties[model]
+    model = classes[model]
+    properties = table_properties[model] + ["current_configuration"]
     constraints = []
     for property in properties:
         value = request.form[property]

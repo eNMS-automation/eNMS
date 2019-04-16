@@ -42,7 +42,8 @@ def route_table(_: str, table_type: str) -> dict:
 
 @get(bp, "/filtering/<table>")
 def filtering(table: str) -> Response:
-    model, properties = classes.get(table, classes["Device"]), table_properties[table]
+    model = classes.get(table, classes["Device"])
+    properties = table_properties[table] + ["current_configuration"]
     try:
         order_property = properties[int(request.args["order[0][column]"])]
     except IndexError:
@@ -51,14 +52,9 @@ def filtering(table: str) -> Response:
     constraints = []
     for property in properties:
         value = request.args.get(f"form[{property}]")
-        if not value:
-            continue
-        else:
+        if value:
             constraints.append(getattr(model, property).contains(value))
     result = db.session.query(model).filter(and_(*constraints)).order_by(order)
-    search_text = request.args.get("form[{configuration}]")
-    if search_text:
-        result = result.filter(model.current_configuration.contains(search_text))
     if table in ("device", "link", "configuration"):
         pools = [int(id) for id in request.args.getlist("form[pools][]")]
         if pools:

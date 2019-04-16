@@ -346,6 +346,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],
     "instance": ["Edit", "Duplicate", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
+    "log": ["Delete"],
     "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
     "task": ["Action", "Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],

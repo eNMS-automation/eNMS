@@ -520,7 +520,7 @@ class LogRule(Base):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showTypeModal('logrule', '{self.id}')">
+            onclick="showTypePanel('logrule', '{self.id}')">
             Edit</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="deleteInstance('logrule', '{self.id}')">

@@ -80,7 +80,7 @@ class Config(object):
     DEFAULT_LATITUDE = float(environ.get("DEFAULT_LATITUDE", 33.0))
     DEFAULT_ZOOM_LEVEL = int(environ.get("DEFAULT_ZOOM_LEVEL", 5))
     DEFAULT_VIEW = environ.get("DEFAULT_VIEW", "2D")
-    DEFAULT_MARKER = environ.get("DEFAULT_VIEW", "Image")
+    DEFAULT_MARKER = environ.get("DEFAULT_MARKER", "Image")
 
     # Git Parameters
     GIT_AUTOMATION = environ.get("GIT_AUTOMATION", "")

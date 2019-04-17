@@ -5,19 +5,42 @@ from logging import info
 from os import scandir, remove
 from pathlib import Path
 from re import search
-from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableList
-from sqlalchemy.orm import relationship
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String,
+    Text,
+)
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.mutable import MutableList, MutableDict
+from sqlalchemy.orm import backref, relationship
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
-from typing import Any, List
+from typing import Any, Dict, List, Union
 from yaml import load
 
 from eNMS.extensions import controller, db
 from eNMS.functions import add_classes, fetch, fetch_all
-from eNMS.associations import log_rule_log_table, pool_user_table
+from eNMS.associations import (
+    log_rule_log_table,
+    pool_device_table,
+    pool_link_table,
+    pool_user_table,
+    job_device_table,
+    job_pool_table,
+)
 from eNMS.automation.models import LogRule
 from eNMS.models.base_models import Base
+from eNMS.properties import (
+    custom_properties,
+    pool_link_properties,
+    pool_device_properties,
+    sql_types,
+)
 
 
 class User(Base, UserMixin):

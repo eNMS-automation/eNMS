@@ -1,9 +1,3 @@
-from eNMS.automation.forms import (
-    AddJobsForm,
-    CompareResultsForm,
-    JobForm,
-    LogAutomationForm,
-)
 from eNMS.scheduling.forms import TaskForm
 
 
@@ -292,6 +286,74 @@ class DeviceAutomationForm(FlaskForm):
 class CompareConfigurationsForm(FlaskForm):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
+
+
+class JobForm(FlaskForm):
+    id = HiddenField()
+    boolean_fields = HiddenField(
+        default=(
+            "display_only_failed_nodes,"
+            "send_notification,"
+            "multiprocessing,"
+            "use_workflow_targets,"
+            "push_to_git"
+        )
+    )
+    list_fields = HiddenField(default="devices,pools")
+    name = StringField()
+    description = StringField()
+    devices = MultipleObjectField("Device")
+    multiprocessing = BooleanField()
+    max_processes = IntegerField("Maximum number of processes", default=50)
+    credentials = SelectField(
+        choices=(("device", "Device Credentials"), ("user", "User Credentials"))
+    )
+    pools = MultipleObjectField("Pool")
+    waiting_time = IntegerField("Waiting time (in seconds)", default=0)
+    send_notification = BooleanField()
+    send_notification_method = SelectField(
+        choices=(
+            ("mail_feedback_notification", "Mail"),
+            ("slack_feedback_notification", "Slack"),
+            ("mattermost_feedback_notification", "Mattermost"),
+        )
+    )
+    display_only_failed_nodes = BooleanField()
+    mail_recipient = StringField()
+    number_of_retries = IntegerField("Number of retries", default=0)
+    time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
+    vendor = StringField()
+    operating_system = StringField()
+
+
+class CompareResultsForm(FlaskForm):
+    display = SelectField(choices=())
+    compare_with = SelectField(choices=())
+
+
+class AddJobsForm(FlaskForm):
+    list_fields = HiddenField(default="add_jobs")
+    add_jobs = MultipleObjectField("Job")
+
+
+class WorkflowBuilderForm(FlaskForm):
+    workflow = ObjectField("Workflow")
+
+
+def configure_form(cls: FlaskForm) -> FlaskForm:
+    cls.properties = ("source_ip", "content")
+    for property in ("source_ip", "content"):
+        setattr(cls, property, StringField(property))
+        setattr(cls, property + "_regex", BooleanField("Regex"))
+    return cls
+
+
+@configure_form
+class LogAutomationForm(FlaskForm):
+    id = HiddenField()
+    list_fields = HiddenField(default="jobs")
+    name = StringField()
+    jobs = MultipleObjectField("Job")
 
 
 form_classes = {

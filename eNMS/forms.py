@@ -4,17 +4,6 @@ from eNMS.automation.forms import (
     JobForm,
     LogAutomationForm,
 )
-from eNMS.inventory.forms import (
-    CompareConfigurationsForm,
-    ConnectionForm,
-    DeviceAutomationForm,
-    DeviceFilteringForm,
-    DeviceForm,
-    LinkForm,
-    LinkFilteringForm,
-    PoolForm,
-    PoolObjectsForm,
-)
 from eNMS.scheduling.forms import TaskForm
 
 

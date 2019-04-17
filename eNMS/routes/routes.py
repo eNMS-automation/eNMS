@@ -12,7 +12,15 @@ from werkzeug.wrappers import Response
 from eNMS import db
 from eNMS.classes import classes
 from eNMS.extensions import bp
-from eNMS.forms import form_classes, form_templates
+from eNMS.forms import (
+    form_classes,
+    form_templates,
+    GoogleEarthForm,
+    ImportExportForm,
+    LibreNmsForm,
+    NetboxForm,
+    OpenNmsForm,
+)
 from eNMS.functions import (
     delete,
     factory,
@@ -60,7 +68,7 @@ def dashboard() -> dict:
     )
 
 
-@get(bp, "/import_export", "View")
+@get("/import_export", "View")
 def import_export() -> dict:
     return dict(
         import_export_form=ImportExportForm(request.form),
@@ -72,7 +80,7 @@ def import_export() -> dict:
     )
 
 
-@get(bp, "/download_configuration/<name>", "View")
+@get("/download_configuration/<name>", "View")
 def download_configuration(name: str) -> Response:
     try:
         return send_file(

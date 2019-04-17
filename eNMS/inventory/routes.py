@@ -11,14 +11,6 @@ from typing import Dict, List
 
 from eNMS.extensions import db
 from eNMS.functions import factory, fetch, fetch_all, get, get_one, objectify, post
-from eNMS.inventory import bp
-from eNMS.inventory.forms import (
-    GoogleEarthForm,
-    ImportExportForm,
-    LibreNmsForm,
-    NetboxForm,
-    OpenNmsForm,
-)
 from eNMS.inventory.functions import object_export, object_import
 from eNMS.properties import google_earth_styles
 

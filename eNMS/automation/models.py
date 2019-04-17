@@ -31,7 +31,6 @@ from eNMS.associations import (
 from eNMS.extensions import controller
 from eNMS.functions import fetch, session_scope
 from eNMS.models.base_models import Base
-from eNMS.inventory.models import Device
 
 
 class Job(Base):
@@ -92,7 +91,7 @@ class Job(Base):
         else:
             return "N/A"
 
-    def compute_targets(self) -> Set[Device]:
+    def compute_targets(self) -> Set["Device"]:
         targets = set(self.devices)
         for pool in self.pools:
             targets |= set(pool.devices)
@@ -153,7 +152,7 @@ class Job(Base):
     def try_run(
         self,
         payload: Optional[dict] = None,
-        targets: Optional[Set[Device]] = None,
+        targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
     ) -> Tuple[dict, str]:
         self.is_running, self.state, self.logs = True, {}, []
@@ -218,7 +217,7 @@ class Job(Base):
     def get_results(
         self,
         payload: dict,
-        device: Optional[Device] = None,
+        device: Optional["Device"] = None,
         workflow: Optional["Workflow"] = None,
         threaded: bool = False,
     ) -> dict:
@@ -244,7 +243,9 @@ class Job(Base):
             db.session.commit()
         return results
 
-    def device_run(self, args: Tuple[Device, dict, dict, Optional["Workflow"]]) -> None:
+    def device_run(
+        self, args: Tuple["Device", dict, dict, Optional["Workflow"]]
+    ) -> None:
         with controller.app.app_context():
             with session_scope() as session:
                 device, results, payload, workflow = args
@@ -256,7 +257,7 @@ class Job(Base):
         self,
         payload: dict,
         job_from_workflow_targets: bool,
-        targets: Optional[Set[Device]] = None,
+        targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
     ) -> dict:
         if job_from_workflow_targets:
@@ -307,14 +308,14 @@ class Service(Job):
             Delete</button>""",
         ]
 
-    def get_credentials(self, device: Device) -> Tuple[str, str]:
+    def get_credentials(self, device: "Device") -> Tuple[str, str]:
         return (
             (self.creator.name, self.creator.password)
             if self.credentials == "user"
             else (device.username, device.password)
         )
 
-    def netmiko_connection(self, device: Device) -> ConnectHandler:
+    def netmiko_connection(self, device: "Device") -> ConnectHandler:
         username, password = self.get_credentials(device)
         return ConnectHandler(
             device_type=(
@@ -329,7 +330,7 @@ class Service(Job):
             global_delay_factor=self.global_delay_factor,
         )
 
-    def napalm_connection(self, device: Device) -> NetworkDriver:
+    def napalm_connection(self, device: "Device") -> NetworkDriver:
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
@@ -467,7 +468,7 @@ class Workflow(Job):
             Delete</button>""",
         ]
 
-    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, payload: dict, device: Optional["Device"] = None) -> dict:
         self.state = {"jobs": {}}
         if device:
             self.state["current_device"] = device.name

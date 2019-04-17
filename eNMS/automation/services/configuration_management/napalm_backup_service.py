@@ -8,7 +8,7 @@ from eNMS.automation.functions import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
 from eNMS.functions import str_dict
-from eNMS.inventory.models import Device
+from eNMS.models.models import Device
 
 
 class NapalmBackupService(Service):

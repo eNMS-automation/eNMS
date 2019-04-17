@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
-from eNMS.inventory.models import Device
+from eNMS.models.models import Device
 
 
 class NetmikoConfigurationService(Service):

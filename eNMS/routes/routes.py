@@ -6,7 +6,7 @@ from flask import jsonify, redirect, request, url_for
 from flask_login import current_user
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
-from typing import List
+from typing import List, Union
 from werkzeug.wrappers import Response
 
 from eNMS import db
@@ -28,11 +28,14 @@ from eNMS.functions import (
     fetch_all,
     fetch_all_visible,
     get,
+    get_one,
     post,
 )
 from eNMS.properties import (
     default_diagrams_properties,
+    link_subtype_to_color,
     reverse_pretty_names,
+    subtype_sizes,
     table_fixed_columns,
     table_properties,
     type_to_diagram_properties,
@@ -77,6 +80,17 @@ def import_export() -> dict:
         opennms_form=OpenNmsForm(request.form),
         google_earth_form=GoogleEarthForm(request.form),
         parameters=get_one("Parameters"),
+    )
+
+
+@get(bp, "/<view_type>_view", "View")
+def view(view_type: str) -> dict:
+    return dict(
+        template="geographical_view",
+        parameters=get_one("Parameters").serialized,
+        subtype_sizes=subtype_sizes,
+        link_colors=link_subtype_to_color,
+        view_type=view_type,
     )
 
 
@@ -146,6 +160,34 @@ def filtering(table: str) -> Response:
             ],
         }
     )
+
+
+@post(bp, "/view_filtering/<filter_type>")
+def view_filtering(filter_type: str):
+    print(request.form)
+    model = filter_type.split("_")[0]
+    model = classes[model]
+    properties = table_properties[model] + ["current_configuration"]
+    constraints = []
+    for property in properties:
+        value = request.form[property]
+        if value:
+            constraints.append(getattr(model, property).contains(value))
+    result = db.session.query(model).filter(and_(*constraints))
+    pools = [int(id) for id in request.args.getlist("form[pools][]")]
+    if pools:
+        result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
+    return [d.get_properties() for d in result.all()]
+
+
+@post(bp, "/get_logs/<int:device_id>", "View")
+def get_logs(device_id: int) -> Union[str, bool]:
+    device_logs = [
+        log.content
+        for log in fetch_all("Log")
+        if log.source == fetch("Device", id=device_id).ip_address
+    ]
+    return "\n".join(device_logs) or True
 
 
 @post("/get/<cls>/<id>", "View")

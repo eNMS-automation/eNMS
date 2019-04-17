@@ -10,7 +10,7 @@ from tarfile import open as open_tar
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
 from eNMS.functions import fetch_all, strip_all
-from eNMS.inventory.models import Device
+from eNMS.models.models import Device
 
 
 class LogBackupService(Service):

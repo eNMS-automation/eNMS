@@ -7,7 +7,6 @@ from typing import Optional, Set
 
 from eNMS.extensions import controller, db
 from eNMS.functions import fetch, get_one, str_dict
-from eNMS.inventory.models import Device
 
 NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
 NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
@@ -17,7 +16,7 @@ NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 def scheduler_job(
     job_id: int,
     aps_job_id: Optional[str] = None,
-    targets: Optional[Set[Device]] = None,
+    targets: Optional[Set["Device"]] = None,
     payload: Optional[dict] = None,
 ) -> None:
     with controller.app.app_context():

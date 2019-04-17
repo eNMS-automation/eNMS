@@ -32,20 +32,21 @@ from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 from time import sleep
 from traceback import format_exc
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
 from xmltodict import parse
 from yaml import load
 
 from eNMS.extensions import controller, db
 from eNMS.functions import add_classes, fetch, fetch_all, session_scope
 from eNMS.associations import (
+    job_device_table,
+    job_log_rule_table,
+    job_pool_table,
+    job_workflow_table,
     log_rule_log_table,
     pool_device_table,
     pool_link_table,
     pool_user_table,
-    job_device_table,
-    job_pool_table,
-    job_workflow_table,
 )
 from eNMS.models.base_models import Base
 from eNMS.properties import (

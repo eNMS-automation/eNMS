@@ -1,10 +1,19 @@
+from copy import deepcopy
+from datetime import datetime
 from flask import Flask
 from flask_login import UserMixin
 from git import Repo
+from json import load
 from logging import info
-from os import scandir, remove
+from multiprocessing.pool import ThreadPool
+from napalm import get_network_driver
+from napalm.base.base import NetworkDriver
+from netmiko import ConnectHandler
+from os import environ, scandir, remove
+from paramiko import SSHClient
 from pathlib import Path
-from re import search
+from re import compile, search
+from scp import SCPClient
 from sqlalchemy import (
     Boolean,
     Column,
@@ -16,15 +25,19 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableList, MutableDict
 from sqlalchemy.orm import backref, relationship
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
-from typing import Any, Dict, List, Union
+from time import sleep
+from traceback import format_exc
+from typing import Any, Dict, List, Optional, Tuple, Union
+from xmltodict import parse
 from yaml import load
 
 from eNMS.extensions import controller, db
-from eNMS.functions import add_classes, fetch, fetch_all
+from eNMS.functions import add_classes, fetch, fetch_all, session_scope
 from eNMS.associations import (
     log_rule_log_table,
     pool_device_table,
@@ -32,6 +45,7 @@ from eNMS.associations import (
     pool_user_table,
     job_device_table,
     job_pool_table,
+    job_workflow_table,
 )
 from eNMS.automation.models import LogRule
 from eNMS.models.base_models import Base

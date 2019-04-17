@@ -1,17 +1,30 @@
 from collections import Counter
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import request, session
+from flask import (
+    abort,
+    current_app as app,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
+from flask_login import current_user, login_user, logout_user
 from flask_wtf import FlaskForm
-from json import dumps
+from json import dumps, loads
 from json.decoder import JSONDecodeError
+from ldap3 import Connection, NTLM, SUBTREE
 from logging import info
 from flask import current_app as app, jsonify, redirect, request, send_file, url_for
 from flask.wrappers import Response
 from flask_login import current_user
+from ipaddress import IPv4Network
+from os import listdir
 from pynetbox import api as netbox_api
 from re import search, sub
 from requests import get as http_get
+from requests.exceptions import ConnectionError
 from simplekml import Kml
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, DataError
@@ -22,10 +35,23 @@ from werkzeug.wrappers import Response
 from eNMS import db
 from eNMS.helpers import object_export, object_import, scheduler_job
 from eNMS.classes import classes, service_classes
-from eNMS.extensions import bp
+from eNMS.extensions import (
+    bp,
+    db,
+    ldap_client,
+    scheduler,
+    tacacs_client,
+    USE_LDAP,
+    USE_TACACS,
+)
+
 from eNMS.forms import (
     form_classes,
     form_templates,
+    AdministrationForm,
+    DatabaseHelpersForm,
+    LoginForm,
+    MigrationsForm,
     CompareResultsForm,
     GoogleEarthForm,
     ImportExportForm,
@@ -42,6 +68,8 @@ from eNMS.functions import (
     fetch_all_visible,
     get,
     get_one,
+    migrate_export,
+    migrate_import,
     objectify,
     post,
     str_dict,
@@ -840,7 +868,7 @@ def scan_cluster() -> bool:
     protocol = parameters.cluster_scan_protocol
     for ip_address in IPv4Network(parameters.cluster_scan_subnet):
         try:
-            instance = rest_get(
+            instance = http_get(
                 f"{protocol}://{ip_address}/rest/is_alive",
                 timeout=parameters.cluster_scan_timeout,
             ).json()

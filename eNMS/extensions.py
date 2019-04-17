@@ -1,5 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask
+from flask import Blueprint, Flask
 from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -20,6 +20,8 @@ class Controller:
     app: Flask
     session: Session
 
+
+main = Blueprint("main", __name__)
 
 controller = Controller()
 

@@ -8,7 +8,7 @@ from sqlalchemy import exc
 from string import punctuation
 from typing import Any, Callable, Generator, List, Optional, Tuple
 
-from eNMS.extensions import controller, db
+from eNMS.extensions import controller, db, main
 from eNMS.classes import classes
 
 
@@ -140,13 +140,10 @@ def templated(function: Callable) -> Callable:
 
 
 def get(
-    blueprint: Blueprint,
-    url: str,
-    permission: Optional[str] = None,
-    method: List[str] = ["GET"],
+    url: str, permission: Optional[str] = None, method: List[str] = ["GET"]
 ) -> Callable[[Callable], Callable]:
     def outer(func: Callable) -> Callable:
-        @blueprint.route(url, methods=method)
+        @main.route(url, methods=method)
         @templated
         @login_required
         @permission_required(permission)

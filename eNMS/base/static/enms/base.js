@@ -231,7 +231,6 @@ function preprocessForm(panel, id) {
   });
   panel.querySelectorAll('.btn-id').forEach((el) => {
     $(el).attr("onclick", `${el.value}(${id})`);
-    //console.log(el.value);
   });
 }
 

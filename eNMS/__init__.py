@@ -55,21 +55,6 @@ def register_extensions(app: Flask) -> None:
     controller.session = db.create_scoped_session()
 
 
-def register_blueprints(app: Flask) -> None:
-    blueprints = (
-        "admin",
-        "automation",
-        "base",
-        "home",
-        "inventory",
-        "scheduling",
-        "views",
-    )
-    for blueprint in blueprints:
-        module = import_module(f"eNMS.{blueprint}")
-        app.register_blueprint(module.bp)  # type: ignore
-
-
 def configure_login_manager(app: Flask) -> None:
     @login_manager.user_loader
     def user_loader(id: int) -> User:
@@ -125,15 +110,15 @@ def configure_context_processor(app) -> None:
 def configure_errors(app: Flask) -> None:
     @login_manager.unauthorized_handler
     def unauthorized_handler() -> Tuple[str, int]:
-        return render_template("errors/page_403.html"), 403
+        return render_template("templates/errors/page_403.html"), 403
 
     @app.errorhandler(403)
     def authorization_required(error: Any) -> Tuple[str, int]:
-        return render_template("errors/page_403.html"), 403
+        return render_template("templates/errors/page_403.html"), 403
 
     @app.errorhandler(404)
     def not_found_error(error: Any) -> Tuple[str, int]:
-        return render_template("errors/page_404.html"), 404
+        return render_template("templates/errors/page_404.html"), 404
 
 
 def configure_logs(app: Flask) -> None:
@@ -210,7 +195,6 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     app.config.from_object(config_class)  # type: ignore
     app.path = path
     register_extensions(app)
-    register_blueprints(app)
     configure_login_manager(app)
     configure_database(app)
     configure_context_processor(app)

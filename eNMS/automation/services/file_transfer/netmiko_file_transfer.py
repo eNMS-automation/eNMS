@@ -1,7 +1,7 @@
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.automation.functions import NETMIKO_SCP_DRIVERS
+from eNMS.helpers import NETMIKO_SCP_DRIVERS
 from eNMS.models.models import Service
 from eNMS.classes import service_classes
 from eNMS.models.models import Device

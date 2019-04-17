@@ -43,7 +43,9 @@ def route_table(_: str, table_type: str) -> dict:
 @get(bp, "/filtering/<table>")
 def filtering(table: str) -> Response:
     model = classes.get(table, classes["Device"])
-    properties = table_properties[table] + ["current_configuration"]
+    properties = table_properties[table]
+    if table in ("configuration", "device"):
+        properties.append("current_configuration")
     try:
         order_property = properties[int(request.args["order[0][column]"])]
     except IndexError:

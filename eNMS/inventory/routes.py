@@ -19,7 +19,7 @@ from eNMS.inventory.forms import (
     NetboxForm,
     OpenNmsForm,
 )
-from eNMS.inventory.functions import get_pool_devices, object_export, object_import
+from eNMS.inventory.functions import object_export, object_import
 from eNMS.properties import google_earth_styles
 
 
@@ -97,11 +97,6 @@ def save_pool_objects(pool_id: int) -> dict:
     pool.links = objectify("Link", request.form["links"])
     db.session.commit()
     return pool.serialized
-
-
-@post(bp, "/pool_objects/<int:pool_id>", "View")
-def filter_pool_objects(pool_id: int) -> Dict[str, List[dict]]:
-    return get_pool_devices(pool_id)
 
 
 @post(bp, "/update_pool/<pool_id>", "Edit")

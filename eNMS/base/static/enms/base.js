@@ -223,6 +223,15 @@ function showConnectionPanel(id) {
 }
 
 /**
+ * Preprocess form.
+ */
+function preprocessForm(panel, id) {
+  panel.querySelectorAll('.add-id').forEach((el) => {
+    $(el).prop("id", `${el.id}-${id}`);
+  });
+}
+
+/**
  * Connect to a device.
  */
 // eslint-disable-next-line
@@ -235,12 +244,11 @@ function showPoolObjectsPanel(id) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Connect to device");
       configureForm("pool_objects");
-      $("#pool-objects-form").prop("id", `${id}-pool-objects-form`);
-      $("#pool-objects-button").prop("id", `${id}-pool-objects-button`);
-      $(`#${id}-pool-objects-button`).attr("onclick", `savePoolObjects(${id})`);
+      preprocessForm(panel, id);
+      $(`#pool-objects-button-${id}`).attr("onclick", `savePoolObjects(${id})`);
       call(`/get/pool/${id}`, function(pool) {
-        $("#devices").selectpicker("val", pool.devices.map((n) => n.id));
-        $("#links").selectpicker("val", pool.links.map((l) => l.id));
+        $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
+        $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
       });
     }
   );
@@ -297,10 +305,10 @@ function showTypePanel(type, id, duplicate) {
           $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
           $("#save").prop("id", `${id}-save`);
           $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
-          for (let el of $(`[id^=${type}]`)) {
-            if (duplicate && ["name", "id"].includes(el.name)) continue;
+          document.querySelectorAll('.add-id').forEach((el) => {
+            if (duplicate && ["name", "id"].includes(el.name)) return;
             $(el).prop("id", `${id}-${el.id}`);
-          }
+          });
           configureForm(type, id);
           if (["service", "workflow"].includes(type)) panelCode(type, id);
           if (type !== "service") processInstance(type, instance);

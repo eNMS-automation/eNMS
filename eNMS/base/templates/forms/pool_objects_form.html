@@ -1,16 +1,16 @@
-<form id="pool-objects-form"  data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+<form id="pool-objects-form"  data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
   {{ form.list_fields() }}
   <div class="modal-body">
     <label>Devices</label>
     <div class='form-group'>
-      {{ form.devices(class="form-control", size=10) }}
+      {{ form.devices(class="form-control add-id", size=10) }}
     </div>
     <label>Links</label>
     <div class='form-group'>
-      {{ form.links(class="form-control", size=10) }}
+      {{ form.links(class="form-control add-id", size=10) }}
     </div>
   </div>
   <div class="modal-footer">
-    <button id="pool-objects-button" type="button" class="btn btn-success">Save</button>
+    <button id="pool-objects-button" type="button" class="btn btn-success add-id">Save</button>
   </div>
 </form>

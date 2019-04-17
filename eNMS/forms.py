@@ -356,6 +356,30 @@ class LogAutomationForm(FlaskForm):
     jobs = MultipleObjectField("Job")
 
 
+class TaskForm(FlaskForm):
+    id = HiddenField()
+    boolean_fields = HiddenField(default="is_active")
+    is_active = BooleanField()
+    name = StringField()
+    description = StringField()
+    start_date = StringField()
+    end_date = StringField()
+    frequency = IntegerField()
+    frequency_unit = SelectField(
+        choices=(
+            ("seconds", "Seconds"),
+            ("minutes", "Minutes"),
+            ("hours", "Hours"),
+            ("days", "Days"),
+        )
+    )
+    crontab_expression = StringField()
+    job = ObjectField("Job")
+    scheduling_mode = SelectField(
+        choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling"))
+    )
+
+
 form_classes = {
     "add_jobs": AddJobsForm,
     "configuration": CompareConfigurationsForm,

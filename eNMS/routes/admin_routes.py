@@ -20,7 +20,7 @@ from eNMS.extensions import (
     USE_LDAP,
     USE_TACACS,
 )
-from eNMS.admin.forms import (
+from eNMS.forms import (
     AdministrationForm,
     DatabaseHelpersForm,
     LoginForm,

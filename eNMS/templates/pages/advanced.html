@@ -106,5 +106,5 @@
   <script>
     const folders = {{ folders|tojson|safe }};
   </script>
-  <script src="{{ url_for('admin_blueprint.static', filename='advanced.js') }}"></script>
+  <script src="{{ url_for('static', filename='advanced.js') }}"></script>
 {% endblock javascripts %}

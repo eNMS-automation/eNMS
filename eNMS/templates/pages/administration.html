@@ -44,5 +44,5 @@
   <script>
     const parameters = {{ parameters|tojson|safe }};
   </script>
-  <script src="{{ url_for('admin_blueprint.static', filename='administration.js') }}"></script>
+  <script src="{{ url_for('static', filename='administration.js') }}"></script>
 {% endblock javascripts %}

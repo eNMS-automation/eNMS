@@ -19,7 +19,7 @@ from typing import Dict, List, Union
 from werkzeug.wrappers import Response
 
 from eNMS import db
-from eNMS.automation.functions import scheduler_job
+from eNMS.helpers import scheduler_job
 from eNMS.classes import classes, service_classes
 from eNMS.extensions import bp
 from eNMS.forms import (

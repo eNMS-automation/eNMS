@@ -1201,6 +1201,7 @@ add_classes(
     Parameters,
     Pool,
     Service,
+    Task,
     User,
     Workflow,
     WorkflowEdge,

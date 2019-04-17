@@ -20,14 +20,14 @@ currentView: false
  */
 // eslint-disable-next-line
 function updateView() {
-  call("/inventory/pool_objects/1", function(pool) {
+  call("/pool_objects/1", function(pool) {
     pool.devices.map((d) => createNode(d, "device"));
     pool.links.map(createLink);
   });
 }
 
 function filter(type) {
-  fCall(`/views/filtering/${type}`, `#${type}-form`, (r) => {
+  fCall(`/view_filtering/${type}`, `#${type}-form`, (r) => {
     if (type == "device_filtering") {
       deleteAllDevices();
       r.map((d) => createNode(d, "device"));

@@ -19,7 +19,7 @@ from eNMS.automation import bp
 from eNMS.automation.forms import CompareResultsForm, WorkflowBuilderForm
 
 
-@get(bp, "/workflow_builder", "View")
+@get("/workflow_builder", "View")
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
     return dict(
@@ -30,7 +30,7 @@ def workflow_builder() -> dict:
     )
 
 
-@get(bp, "/results/<int:id>/<runtime>", "View")
+@get("/results/<int:id>/<runtime>", "View")
 def results(id: int, runtime: str) -> str:
     job = fetch("Job", id=id)
     if not job:
@@ -40,18 +40,18 @@ def results(id: int, runtime: str) -> str:
     return f"<pre>{dumps(message, indent=4)}</pre>"
 
 
-@post(bp, "/get_results/<int:id>", "View")
+@post("/get_results/<int:id>", "View")
 def get_results(id: int) -> dict:
     return fetch("Job", id=id).results
 
 
-@post(bp, "/get_logs/<int:id>", "View")
+@post("/get_logs/<int:id>", "View")
 def get_logs(id: int) -> dict:
     job = fetch("Job", id=id)
     return {"logs": job.logs, "running": job.is_running}
 
 
-@post(bp, "/get_service/<id_or_cls>", "View")
+@post("/get_service/<id_or_cls>", "View")
 def get_service(id_or_cls: str) -> dict:
     service = None
     try:
@@ -144,7 +144,7 @@ def get_service(id_or_cls: str) -> dict:
     }
 
 
-@post(bp, "/run_job/<int:job_id>", "Edit")
+@post("/run_job/<int:job_id>", "Edit")
 def run_job(job_id: int) -> dict:
     job = fetch("Job", id=job_id)
     if job.is_running:
@@ -165,7 +165,7 @@ def run_job(job_id: int) -> dict:
     return job.serialized
 
 
-@post(bp, "/get_diff/<int:job_id>/<v1>/<v2>", "View")
+@post("/get_diff/<int:job_id>/<v1>/<v2>", "View")
 def get_diff(job_id: int, v1: str, v2: str) -> dict:
     job = fetch("Job", id=job_id)
     first = str_dict(dict(reversed(sorted(job.results[v1].items())))).splitlines()
@@ -174,14 +174,14 @@ def get_diff(job_id: int, v1: str, v2: str) -> dict:
     return {"first": first, "second": second, "opcodes": opcodes}
 
 
-@post(bp, "/clear_results/<int:job_id>", "Edit")
+@post("/clear_results/<int:job_id>", "Edit")
 def clear_results(job_id: int) -> bool:
     fetch("Job", id=job_id).results = {}
     db.session.commit()
     return True
 
 
-@post(bp, "/add_jobs_to_workflow/<int:workflow_id>", "Edit")
+@post("/add_jobs_to_workflow/<int:workflow_id>", "Edit")
 def add_jobs_to_workflow(workflow_id: int) -> Dict[str, Any]:
     workflow = fetch("Workflow", id=workflow_id)
     jobs = objectify("Job", request.form["add_jobs"])
@@ -193,7 +193,7 @@ def add_jobs_to_workflow(workflow_id: int) -> Dict[str, Any]:
     return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
 
-@post(bp, "/duplicate_workflow/<int:workflow_id>", "Edit")
+@post("/duplicate_workflow/<int:workflow_id>", "Edit")
 def duplicate_workflow(workflow_id: int) -> dict:
     parent_workflow = fetch("Workflow", id=workflow_id)
     new_workflow = factory("Workflow", **request.form)
@@ -218,7 +218,7 @@ def duplicate_workflow(workflow_id: int) -> dict:
     return new_workflow.serialized
 
 
-@post(bp, "/delete_node/<int:workflow_id>/<int:job_id>", "Edit")
+@post("/delete_node/<int:workflow_id>/<int:job_id>", "Edit")
 def delete_node(workflow_id: int, job_id: int) -> dict:
     workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
     workflow.jobs.remove(job)
@@ -228,7 +228,7 @@ def delete_node(workflow_id: int, job_id: int) -> dict:
     return {"job": job.serialized, "update_time": now}
 
 
-@post(bp, "/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:dest>", "Edit")
+@post("/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:dest>", "Edit")
 def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
     workflow_edge = factory(
         "WorkflowEdge",
@@ -246,7 +246,7 @@ def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
     return {"edge": workflow_edge.serialized, "update_time": now}
 
 
-@post(bp, "/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
+@post("/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
 def delete_edge(workflow_id: int, edge_id: int) -> str:
     delete("WorkflowEdge", id=edge_id)
     now = str(datetime.now())
@@ -255,7 +255,7 @@ def delete_edge(workflow_id: int, edge_id: int) -> str:
     return now
 
 
-@post(bp, "/save_positions/<int:workflow_id>", "Edit")
+@post("/save_positions/<int:workflow_id>", "Edit")
 def save_positions(workflow_id: int) -> str:
     now = str(datetime.now())
     workflow = fetch("Workflow", id=workflow_id)

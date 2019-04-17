@@ -29,11 +29,9 @@ from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
 from eNMS.rest import configure_rest_api
-from eNMS.admin.functions import configure_instance_id
-from eNMS.admin.models import User
 from eNMS.classes import classes, service_classes
-from eNMS.functions import fetch
-from eNMS.models.models import SyslogServer
+from eNMS.functions import configure_instance_id, fetch
+from eNMS.models.models import SyslogServer, User
 from eNMS.properties import (
     boolean_properties,
     cls_to_properties,

@@ -13,9 +13,8 @@ from typing import Any, Callable, Generator, List, Optional, Tuple
 from uuid import getnode
 from yaml import dump, load, BaseLoader
 
-from eNMS.default import create_default
+# from eNMS.default import create_default
 from eNMS.extensions import bp, controller, db
-from eNMS.functions import delete_all, export, factory
 from eNMS.classes import classes
 
 
@@ -294,6 +293,7 @@ def migrate_import(app: Flask, request: dict) -> str:
         except Exception as e:
             info(f"{str(edge)} could not be imported ({str(e)})")
             status = "Partial import (see logs)."
-    if request.get("empty_database_before_import", False):
-        create_default(app)
+    print("fix")
+    # if request.get("empty_database_before_import", False):
+    # create_default(app)
     return status

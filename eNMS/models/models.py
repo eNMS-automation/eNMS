@@ -238,4 +238,4 @@ class SyslogServer(Base):
         th.start()
 
 
-add_classes(Log)
+add_classes(Instance, Log, Parameters, User)

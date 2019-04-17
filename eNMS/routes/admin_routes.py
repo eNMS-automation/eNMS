@@ -26,8 +26,17 @@ from eNMS.forms import (
     LoginForm,
     MigrationsForm,
 )
-from eNMS.admin.functions import migrate_export, migrate_import
-from eNMS.functions import delete_all, fetch_all, get, get_one, post, factory, fetch
+from eNMS.functions import (
+    delete_all,
+    fetch_all,
+    get,
+    get_one,
+    migrate_export,
+    migrate_import,
+    post,
+    factory,
+    fetch,
+)
 
 
 @get("/administration", "View")

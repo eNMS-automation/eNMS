@@ -1,7 +1,9 @@
 from collections import Counter
 from datetime import datetime
 from difflib import SequenceMatcher
+from flask import request, session
 from flask_wtf import FlaskForm
+from json import dumps
 from json.decoder import JSONDecodeError
 from logging import info
 from flask import current_app as app, jsonify, redirect, request, send_file, url_for
@@ -11,22 +13,25 @@ from pynetbox import api as netbox_api
 from requests import get as http_get
 from simplekml import Kml
 from sqlalchemy import and_
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, DataError
 from subprocess import Popen
 from typing import Dict, List, Union
 from werkzeug.wrappers import Response
 
 from eNMS import db
-from eNMS.classes import classes
+from eNMS.automation.functions import scheduler_job
+from eNMS.classes import classes, service_classes
 from eNMS.extensions import bp
 from eNMS.forms import (
     form_classes,
     form_templates,
+    CompareResultsForm,
     GoogleEarthForm,
     ImportExportForm,
     LibreNmsForm,
     NetboxForm,
     OpenNmsForm,
+    WorkflowBuilderForm,
 )
 from eNMS.functions import (
     delete,
@@ -38,12 +43,17 @@ from eNMS.functions import (
     get_one,
     objectify,
     post,
+    str_dict,
 )
 from eNMS.inventory.functions import object_export, object_import
 from eNMS.properties import (
+    cls_to_properties,
     default_diagrams_properties,
     google_earth_styles,
     link_subtype_to_color,
+    pretty_names,
+    private_properties,
+    property_types,
     reverse_pretty_names,
     subtype_sizes,
     table_fixed_columns,

@@ -60,6 +60,30 @@ def dashboard() -> dict:
     )
 
 
+@get(bp, "/import_export", "View")
+def import_export() -> dict:
+    return dict(
+        import_export_form=ImportExportForm(request.form),
+        librenms_form=LibreNmsForm(request.form),
+        netbox_form=NetboxForm(request.form),
+        opennms_form=OpenNmsForm(request.form),
+        google_earth_form=GoogleEarthForm(request.form),
+        parameters=get_one("Parameters"),
+    )
+
+
+@get(bp, "/download_configuration/<name>", "View")
+def download_configuration(name: str) -> Response:
+    try:
+        return send_file(
+            filename_or_fp=str(app.path / "git" / "configurations" / name / name),
+            as_attachment=True,
+            attachment_filename=f"configuration_{name}.txt",
+        )
+    except FileNotFoundError:
+        return jsonify("No configuration stored")
+
+
 @get("/<form_type>_form", "View")
 def route_form(form_type: str) -> dict:
     return dict(
@@ -75,7 +99,7 @@ def route_table(table_type: str) -> dict:
         properties=table_properties[table_type],
         fixed_columns=table_fixed_columns[table_type],
         type=table_type,
-        template="table",
+        template="pages/table",
     )
 
 

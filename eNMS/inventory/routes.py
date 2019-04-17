@@ -23,30 +23,6 @@ from eNMS.inventory.functions import object_export, object_import
 from eNMS.properties import google_earth_styles
 
 
-@get(bp, "/import_export", "View")
-def import_export() -> dict:
-    return dict(
-        import_export_form=ImportExportForm(request.form),
-        librenms_form=LibreNmsForm(request.form),
-        netbox_form=NetboxForm(request.form),
-        opennms_form=OpenNmsForm(request.form),
-        google_earth_form=GoogleEarthForm(request.form),
-        parameters=get_one("Parameters"),
-    )
-
-
-@get(bp, "/download_configuration/<name>", "View")
-def download_configuration(name: str) -> Response:
-    try:
-        return send_file(
-            filename_or_fp=str(app.path / "git" / "configurations" / name / name),
-            as_attachment=True,
-            attachment_filename=f"configuration_{name}.txt",
-        )
-    except FileNotFoundError:
-        return jsonify("No configuration stored")
-
-
 @post(bp, "/connection/<int:device_id>", "Connect to device")
 def connection(device_id: int) -> dict:
     parameters, device = get_one("Parameters"), fetch("Device", id=device_id)

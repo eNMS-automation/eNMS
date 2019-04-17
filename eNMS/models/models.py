@@ -6,6 +6,7 @@ from threading import Thread
 from typing import List
 
 from eNMS.extensions import controller, db
+from eNMS.functions import add_classes
 from eNMS.associations import log_rule_log_table
 from eNMS.automation.models import LogRule
 from eNMS.models.base_models import Base
@@ -79,3 +80,6 @@ class SyslogServer(Base):
         th = Thread(target=self.server.serve_forever)
         th.daemon = True
         th.start()
+
+
+add_classes(Log)

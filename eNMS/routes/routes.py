@@ -15,7 +15,7 @@ from simplekml import Kml
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, DataError
 from subprocess import Popen
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 from werkzeug.wrappers import Response
 
 from eNMS import db
@@ -221,8 +221,8 @@ def view_filtering(filter_type: str):
     return [d.get_properties() for d in result.all()]
 
 
-@post("/get_logs/<int:device_id>", "View")
-def get_logs(device_id: int) -> Union[str, bool]:
+@post("/get_device_logs/<int:device_id>", "View")
+def get_device_logs(device_id: int) -> Union[str, bool]:
     device_logs = [
         log.content
         for log in fetch_all("Log")
@@ -449,8 +449,8 @@ def get_configurations(device_id: int) -> dict:
     return {str(k): v for k, v in fetch("Device", id=device_id).configurations.items()}
 
 
-@post("/get_diff/<int:device_id>/<v1>/<v2>", "View")
-def get_diff(device_id: int, v1: str, v2: str) -> dict:
+@post("/get_configuration_diff/<int:device_id>/<v1>/<v2>", "View")
+def get_configuration_diff(device_id: int, v1: str, v2: str) -> dict:
     device = fetch("Device", id=device_id)
     d1, d2 = [datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%f") for d in (v1, v2)]
     first = device.configurations[d1].splitlines()
@@ -488,8 +488,8 @@ def get_results(id: int) -> dict:
     return fetch("Job", id=id).results
 
 
-@post("/get_logs/<int:id>", "View")
-def get_logs(id: int) -> dict:
+@post("/get_job_logs/<int:id>", "View")
+def get_job_logs(id: int) -> dict:
     job = fetch("Job", id=id)
     return {"logs": job.logs, "running": job.is_running}
 
@@ -608,8 +608,8 @@ def run_job(job_id: int) -> dict:
     return job.serialized
 
 
-@post("/get_diff/<int:job_id>/<v1>/<v2>", "View")
-def get_diff(job_id: int, v1: str, v2: str) -> dict:
+@post("/get_results_diff/<int:job_id>/<v1>/<v2>", "View")
+def get_results_diff(job_id: int, v1: str, v2: str) -> dict:
     job = fetch("Job", id=job_id)
     first = str_dict(dict(reversed(sorted(job.results[v1].items())))).splitlines()
     second = str_dict(dict(reversed(sorted(job.results[v2].items())))).splitlines()

@@ -229,6 +229,10 @@ function preprocessForm(panel, id) {
   panel.querySelectorAll('.add-id').forEach((el) => {
     $(el).prop("id", `${el.id}-${id}`);
   });
+  panel.querySelectorAll('.btn-id').forEach((el) => {
+    $(el).attr("onclick", `${el.value}(${id})`);
+    //console.log(el.value);
+  });
 }
 
 /**
@@ -245,7 +249,7 @@ function showPoolObjectsPanel(id) {
       panel.setHeaderTitle("Connect to device");
       configureForm("pool_objects");
       preprocessForm(panel, id);
-      $(`#pool-objects-button-${id}`).attr("onclick", `savePoolObjects(${id})`);
+      //$(`#pool-objects-button-${id}`).attr("onclick", `savePoolObjects(${id})`);
       call(`/get/pool/${id}`, function(pool) {
         $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
         $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));

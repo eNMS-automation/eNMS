@@ -47,7 +47,8 @@ from eNMS.properties import (
 )
 
 
-import eNMS.routes
+import eNMS.routes.routes
+import eNMS.routes.admin_routes
 
 
 def register_extensions(app: Flask) -> None:

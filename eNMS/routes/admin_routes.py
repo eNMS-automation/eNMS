@@ -12,6 +12,7 @@ from typing import Union
 from werkzeug.wrappers import Response
 
 from eNMS.extensions import (
+    bp,
     db,
     ldap_client,
     scheduler,
@@ -19,7 +20,6 @@ from eNMS.extensions import (
     USE_LDAP,
     USE_TACACS,
 )
-from eNMS.admin import bp
 from eNMS.admin.forms import (
     AdministrationForm,
     DatabaseHelpersForm,
@@ -30,7 +30,7 @@ from eNMS.admin.functions import migrate_export, migrate_import
 from eNMS.functions import delete_all, fetch_all, get, get_one, post, factory, fetch
 
 
-@get(bp, "/administration", "View")
+@get("/administration", "View")
 def administration() -> dict:
     return dict(
         form=AdministrationForm(request.form),
@@ -38,7 +38,7 @@ def administration() -> dict:
     )
 
 
-@get(bp, "/advanced", "View")
+@get("/advanced", "View")
 def advanced() -> dict:
     return dict(
         database_helpers_form=DatabaseHelpersForm(request.form),
@@ -47,13 +47,75 @@ def advanced() -> dict:
     )
 
 
-@get(bp, "/logout")
+@bp.route("/login", methods=["GET", "POST"])
+def login() -> Union[Response, str]:
+    if request.method == "POST":
+        name, password = request.form["name"], request.form["password"]
+        try:
+            if request.form["authentication_method"] == "Local User":
+                user = fetch("User", name=name)
+                if user and password == user.password:
+                    login_user(user)
+                    return redirect(url_for("bp.dashboard"))
+            elif request.form["authentication_method"] == "LDAP Domain":
+                with Connection(
+                    ldap_client,
+                    user=f'{app.config["LDAP_USERDN"]}\\{name}',
+                    password=password,
+                    auto_bind=True,
+                    authentication=NTLM,
+                ) as connection:
+                    connection.search(
+                        app.config["LDAP_BASEDN"],
+                        f"(&(objectClass=person)(samaccountname={name}))",
+                        search_scope=SUBTREE,
+                        get_operational_attributes=True,
+                        attributes=["cn", "memberOf", "mail"],
+                    )
+                    json_response = loads(connection.response_to_json())["entries"][0]
+                    if json_response:
+                        user = {
+                            "name": name,
+                            "password": password,
+                            "email": json_response["attributes"].get("mail", ""),
+                        }
+                        if any(
+                            group in s
+                            for group in app.config["LDAP_ADMIN_GROUP"]
+                            for s in json_response["attributes"]["memberOf"]
+                        ):
+                            user["permissions"] = ["Admin"]
+                        new_user = factory("User", **user)
+                        login_user(new_user)
+                        return redirect(url_for("bp.dashboard"))
+            elif request.form["authentication_method"] == "TACACS":
+                if tacacs_client.authenticate(name, password).valid:
+                    user = factory("User", **{"name": name, "password": password})
+                    login_user(user)
+                    return redirect(url_for("bp.dashboard"))
+            abort(403)
+        except Exception as e:
+            info(f"Authentication failed ({str(e)})")
+            abort(403)
+    if not current_user.is_authenticated:
+        login_form = LoginForm(request.form)
+        authentication_methods = [("Local User",) * 2]
+        if USE_LDAP:
+            authentication_methods.append(("LDAP Domain",) * 2)
+        if USE_TACACS:
+            authentication_methods.append(("TACACS",) * 2)
+        login_form.authentication_method.choices = authentication_methods
+        return render_template("login.html", login_form=login_form)
+    return redirect(url_for("bp.dashboard"))
+
+
+@get("/logout")
 def logout() -> Response:
     logout_user()
     return redirect(url_for("admin_blueprint.login"))
 
 
-@post(bp, "/save_parameters", "Admin")
+@post("/save_parameters", "Admin")
 def save_parameters() -> bool:
     parameters = get_one("Parameters")
     parameters.update(**request.form)
@@ -62,7 +124,7 @@ def save_parameters() -> bool:
     return True
 
 
-@post(bp, "/scan_cluster", "Admin")
+@post("/scan_cluster", "Admin")
 def scan_cluster() -> bool:
     parameters = get_one("Parameters")
     protocol = parameters.cluster_scan_protocol
@@ -81,7 +143,7 @@ def scan_cluster() -> bool:
     return True
 
 
-@post(bp, "/get_cluster_status", "View")
+@post("/get_cluster_status", "View")
 def get_cluster_status() -> dict:
     instances = fetch_all("Instance")
     return {
@@ -90,7 +152,7 @@ def get_cluster_status() -> dict:
     }
 
 
-@post(bp, "/database_helpers", "Admin")
+@post("/database_helpers", "Admin")
 def database_helpers() -> bool:
     delete_all(*request.form["deletion_types"])
     clear_logs_date = request.form["clear_logs_date"]
@@ -106,7 +168,7 @@ def database_helpers() -> bool:
     return True
 
 
-@post(bp, "/reset_status", "Admin")
+@post("/reset_status", "Admin")
 def reset_status() -> bool:
     for job in fetch_all("Job"):
         job.is_running = False
@@ -114,20 +176,20 @@ def reset_status() -> bool:
     return True
 
 
-@post(bp, "/get_git_content", "Admin")
+@post("/get_git_content", "Admin")
 def git_action() -> bool:
     parameters = get_one("Parameters")
     parameters.get_git_content(app)
     return True
 
 
-@post(bp, "/scheduler/<action>", "Admin")
+@post("/scheduler/<action>", "Admin")
 def scheduler_action(action: str) -> bool:
     getattr(scheduler, action)()
     return True
 
 
-@post(bp, "/migration_<direction>", "Admin")
+@post("/migration_<direction>", "Admin")
 def migration(direction: str) -> Union[bool, str]:
     args = (app, request.form)
     return migrate_import(*args) if direction == "import" else migrate_export(*args)

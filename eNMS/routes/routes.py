@@ -1,3 +1,4 @@
+from collections import Counter
 from flask_wtf import FlaskForm
 from json.decoder import JSONDecodeError
 from logging import info
@@ -5,15 +6,29 @@ from flask import jsonify, redirect, request, url_for
 from flask_login import current_user
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
-from typing import List, Union
+from typing import List
 from werkzeug.wrappers import Response
 
 from eNMS import db
 from eNMS.classes import classes
 from eNMS.extensions import bp
 from eNMS.forms import form_classes, form_templates
-from eNMS.functions import delete, factory, fetch, fetch_all_visible, get, post
-from eNMS.properties import table_fixed_columns, table_properties
+from eNMS.functions import (
+    delete,
+    factory,
+    fetch,
+    fetch_all,
+    fetch_all_visible,
+    get,
+    post,
+)
+from eNMS.properties import (
+    default_diagrams_properties,
+    reverse_pretty_names,
+    table_fixed_columns,
+    table_properties,
+    type_to_diagram_properties,
+)
 
 
 @bp.route("/")
@@ -21,66 +36,28 @@ def site_root() -> Response:
     return redirect(url_for("bp.login"))
 
 
-@bp.route("/login", methods=["GET", "POST"])
-def login() -> Union[Response, str]:
-    if request.method == "POST":
-        name, password = request.form["name"], request.form["password"]
-        try:
-            if request.form["authentication_method"] == "Local User":
-                user = fetch("User", name=name)
-                if user and password == user.password:
-                    login_user(user)
-                    return redirect(url_for("home_blueprint.dashboard"))
-            elif request.form["authentication_method"] == "LDAP Domain":
-                with Connection(
-                    ldap_client,
-                    user=f'{app.config["LDAP_USERDN"]}\\{name}',
-                    password=password,
-                    auto_bind=True,
-                    authentication=NTLM,
-                ) as connection:
-                    connection.search(
-                        app.config["LDAP_BASEDN"],
-                        f"(&(objectClass=person)(samaccountname={name}))",
-                        search_scope=SUBTREE,
-                        get_operational_attributes=True,
-                        attributes=["cn", "memberOf", "mail"],
-                    )
-                    json_response = loads(connection.response_to_json())["entries"][0]
-                    if json_response:
-                        user = {
-                            "name": name,
-                            "password": password,
-                            "email": json_response["attributes"].get("mail", ""),
-                        }
-                        if any(
-                            group in s
-                            for group in app.config["LDAP_ADMIN_GROUP"]
-                            for s in json_response["attributes"]["memberOf"]
-                        ):
-                            user["permissions"] = ["Admin"]
-                        new_user = factory("User", **user)
-                        login_user(new_user)
-                        return redirect(url_for("dashboard"))
-            elif request.form["authentication_method"] == "TACACS":
-                if tacacs_client.authenticate(name, password).valid:
-                    user = factory("User", **{"name": name, "password": password})
-                    login_user(user)
-                    return redirect(url_for("dashboard"))
-            abort(403)
-        except Exception as e:
-            info(f"Authentication failed ({str(e)})")
-            abort(403)
-    if not current_user.is_authenticated:
-        login_form = LoginForm(request.form)
-        authentication_methods = [("Local User",) * 2]
-        if USE_LDAP:
-            authentication_methods.append(("LDAP Domain",) * 2)
-        if USE_TACACS:
-            authentication_methods.append(("TACACS",) * 2)
-        login_form.authentication_method.choices = authentication_methods
-        return render_template("pages/login.html", login_form=login_form)
-    return redirect(url_for("dashboard"))
+@get("/dashboard")
+def dashboard() -> dict:
+    on_going = {
+        "Running services": len(
+            [service for service in fetch_all("Service") if service.status == "Running"]
+        ),
+        "Running workflows": len(
+            [
+                workflow
+                for workflow in fetch_all("Workflow")
+                if workflow.status == "Running"
+            ]
+        ),
+        "Scheduled tasks": len(
+            [task for task in fetch_all("Task") if task.status == "Active"]
+        ),
+    }
+    return dict(
+        properties=type_to_diagram_properties,
+        default_properties=default_diagrams_properties,
+        counters={**{cls: len(fetch_all_visible(cls)) for cls in classes}, **on_going},
+    )
 
 
 @get("/<form_type>_form", "View")
@@ -169,6 +146,14 @@ def delete_instance(cls: str, id: str) -> dict:
     instance = delete(cls, id=id)
     info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
     return instance
+
+
+@post("/counters/<property>/<type>")
+def get_counters(property: str, type: str) -> Counter:
+    objects = fetch_all(type)
+    if property in reverse_pretty_names:
+        property = reverse_pretty_names[property]
+    return Counter(map(lambda o: str(getattr(o, property)), objects))
 
 
 @post("/shutdown", "Admin")

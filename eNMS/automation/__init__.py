@@ -13,4 +13,4 @@ from eNMS.functions import add_classes
 
 add_classes(Job, LogRule, Service, Workflow, WorkflowEdge)
 
-import eNMS.automation.routes  # noqa: F401
+# import eNMS.automation.routes  # noqa: F401

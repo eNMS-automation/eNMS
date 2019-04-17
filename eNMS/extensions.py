@@ -21,7 +21,7 @@ class Controller:
     session: Session
 
 
-main = Blueprint("main", __name__)
+bp = Blueprint("bp", __name__, template_folder="templates")
 
 controller = Controller()
 

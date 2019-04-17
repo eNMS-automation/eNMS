@@ -19,6 +19,7 @@ from eNMS.extensions import (
     db,
     login_manager,
     mail_client,
+    bp,
     USE_SYSLOG,
     USE_VAULT,
     vault_client,
@@ -46,7 +47,11 @@ from eNMS.properties import (
 )
 
 
+import eNMS.routes
+
+
 def register_extensions(app: Flask) -> None:
+    app.register_blueprint(bp)
     db.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
@@ -110,15 +115,15 @@ def configure_context_processor(app) -> None:
 def configure_errors(app: Flask) -> None:
     @login_manager.unauthorized_handler
     def unauthorized_handler() -> Tuple[str, int]:
-        return render_template("templates/errors/page_403.html"), 403
+        return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(403)
     def authorization_required(error: Any) -> Tuple[str, int]:
-        return render_template("templates/errors/page_403.html"), 403
+        return render_template("errors/page_403.html"), 403
 
     @app.errorhandler(404)
     def not_found_error(error: Any) -> Tuple[str, int]:
-        return render_template("templates/errors/page_404.html"), 404
+        return render_template("errors/page_404.html"), 404
 
 
 def configure_logs(app: Flask) -> None:

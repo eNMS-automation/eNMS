@@ -13,4 +13,4 @@ from eNMS.inventory.models import Device, Link, Object, Pool
 
 add_classes(Device, Link, Object, Pool)
 
-import eNMS.inventory.routes  # noqa: F401
+# import eNMS.inventory.routes  # noqa: F401

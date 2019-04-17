@@ -47,68 +47,6 @@ def advanced() -> dict:
     )
 
 
-@bp.route("/login", methods=["GET", "POST"])
-def login() -> Union[Response, str]:
-    if request.method == "POST":
-        name, password = request.form["name"], request.form["password"]
-        try:
-            if request.form["authentication_method"] == "Local User":
-                user = fetch("User", name=name)
-                if user and password == user.password:
-                    login_user(user)
-                    return redirect(url_for("home_blueprint.dashboard"))
-            elif request.form["authentication_method"] == "LDAP Domain":
-                with Connection(
-                    ldap_client,
-                    user=f'{app.config["LDAP_USERDN"]}\\{name}',
-                    password=password,
-                    auto_bind=True,
-                    authentication=NTLM,
-                ) as connection:
-                    connection.search(
-                        app.config["LDAP_BASEDN"],
-                        f"(&(objectClass=person)(samaccountname={name}))",
-                        search_scope=SUBTREE,
-                        get_operational_attributes=True,
-                        attributes=["cn", "memberOf", "mail"],
-                    )
-                    json_response = loads(connection.response_to_json())["entries"][0]
-                    if json_response:
-                        user = {
-                            "name": name,
-                            "password": password,
-                            "email": json_response["attributes"].get("mail", ""),
-                        }
-                        if any(
-                            group in s
-                            for group in app.config["LDAP_ADMIN_GROUP"]
-                            for s in json_response["attributes"]["memberOf"]
-                        ):
-                            user["permissions"] = ["Admin"]
-                        new_user = factory("User", **user)
-                        login_user(new_user)
-                        return redirect(url_for("home_blueprint.dashboard"))
-            elif request.form["authentication_method"] == "TACACS":
-                if tacacs_client.authenticate(name, password).valid:
-                    user = factory("User", **{"name": name, "password": password})
-                    login_user(user)
-                    return redirect(url_for("home_blueprint.dashboard"))
-            abort(403)
-        except Exception as e:
-            info(f"Authentication failed ({str(e)})")
-            abort(403)
-    if not current_user.is_authenticated:
-        login_form = LoginForm(request.form)
-        authentication_methods = [("Local User",) * 2]
-        if USE_LDAP:
-            authentication_methods.append(("LDAP Domain",) * 2)
-        if USE_TACACS:
-            authentication_methods.append(("TACACS",) * 2)
-        login_form.authentication_method.choices = authentication_methods
-        return render_template("login.html", login_form=login_form)
-    return redirect(url_for("home_blueprint.dashboard"))
-
-
 @get(bp, "/logout")
 def logout() -> Response:
     logout_user()

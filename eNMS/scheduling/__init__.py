@@ -13,4 +13,4 @@ from eNMS.scheduling.models import Task
 
 add_classes(Task)
 
-import eNMS.scheduling.routes  # noqa: F401
+# import eNMS.scheduling.routes  # noqa: F401

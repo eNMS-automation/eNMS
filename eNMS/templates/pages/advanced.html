@@ -1,0 +1,110 @@
+{% extends "base_site.html" %}
+
+{% block title %} Administration {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="x_panel">
+        <div class="col-md-10 col-xs-10 col-md-offset-1">
+          <div class="x_title">
+            <h4 class="text-center">Database Migration</h4>
+          </div>
+          <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+            {{ migrations_form.list_fields() }}
+            {{ migrations_form.boolean_fields() }}
+            <div>
+              <label>Empty Database before Import</label>
+              {{ migrations_form.empty_database_before_import() }}<br><br>
+              <label>
+                Directory pathname to use in eNMS_HOME/migrations :<br>
+                Example: "10312018_backup"
+              </label>
+              <div class="form-group">
+                <input class="form-control required" list="versions" id="name" name="name" />
+                <datalist id="versions"></datalist>
+              </div>
+            </div>
+            <div>
+              <label>eNMS object types to include in Import / Export :</label>
+              <div class="form-group">
+                {{ migrations_form.import_export_types(class="form-control required", size="10") }}
+              </div>
+            </div>
+          </form><br>
+          <div class="form-group">
+            <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+              <button type="button" class="btn btn-success" onclick="migrationsImport()">Import</button>
+              <button type="button" class="btn btn-success" onclick="migrationsExport()">Export</button>
+            </div>
+          </div><br>
+          <div class="ln_solid"></div>
+          <div class="x_title">
+            <h4 class="text-center">Database Helpers</h4>
+          </div>
+          <form id="database-helpers-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+            {{ database_helpers_form.list_fields() }}
+            <div>
+              <label>Clear Logs older than:</label>
+              <div class="form-group">
+                {{ database_helpers_form.clear_logs_date(class="form-control") }}
+              </div>
+              <label>Mass Deletion</label>
+              <div class="form-group">
+                {{ database_helpers_form.deletion_types(class="form-control", size="10") }}
+              </div>
+            </div>
+          </form><br>
+          <div class="form-group">
+            <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
+              <button type="button" class="btn btn-success" onclick="databaseHelpers()">Submit</button>
+            </div>
+          </div><br>
+          <div class="ln_solid"></div>
+          <div class="x_title">
+            <h4 class="text-center">Miscellaneous</h4>
+          </div>
+          <div class="panel-group">
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="getGitContent()" style="width:100%;">
+                Fetch Git Configurations and Update devices
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="resetStatus()" style="width:100%;">
+                Reset Service / Workflow statuses
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('pause')" style="width:100%;">
+                Pause Scheduler
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('resume')" style="width:100%;">
+                Resume Scheduler
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scanCluster()" style="width:100%;">
+                Scan Cluster Subnet for new Instances
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+  <script>
+    const folders = {{ folders|tojson|safe }};
+  </script>
+  <script src="{{ url_for('admin_blueprint.static', filename='advanced.js') }}"></script>
+{% endblock javascripts %}

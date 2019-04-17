@@ -13,4 +13,4 @@ from eNMS.home.models import Log, SyslogServer
 
 add_classes(Log, SyslogServer)
 
-import eNMS.home.routes  # noqa: F401
+# import eNMS.home.routes  # noqa: F401

@@ -13,4 +13,4 @@ from eNMS.admin.models import Instance, User, Parameters
 
 add_classes(Instance, User, Parameters)
 
-import eNMS.admin.routes  # noqa: F401
+# import eNMS.admin.routes  # noqa: F401

@@ -83,7 +83,7 @@ def import_export() -> dict:
     )
 
 
-@get(bp, "/<view_type>_view", "View")
+@get("/<view_type>_view", "View")
 def view(view_type: str) -> dict:
     return dict(
         template="geographical_view",
@@ -162,7 +162,7 @@ def filtering(table: str) -> Response:
     )
 
 
-@post(bp, "/view_filtering/<filter_type>")
+@post("/view_filtering/<filter_type>")
 def view_filtering(filter_type: str):
     print(request.form)
     model = filter_type.split("_")[0]
@@ -180,7 +180,7 @@ def view_filtering(filter_type: str):
     return [d.get_properties() for d in result.all()]
 
 
-@post(bp, "/get_logs/<int:device_id>", "View")
+@post("/get_logs/<int:device_id>", "View")
 def get_logs(device_id: int) -> Union[str, bool]:
     device_logs = [
         log.content

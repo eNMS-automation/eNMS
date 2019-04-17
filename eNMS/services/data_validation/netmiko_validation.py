@@ -2,9 +2,9 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, 
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.helpers import NETMIKO_DRIVERS
-from eNMS.models.models import Service
+from eNMS.models import Service
 from eNMS.classes import service_classes
-from eNMS.models.models import Device
+from eNMS.models import Device
 
 
 class NetmikoValidationService(Service):

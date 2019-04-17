@@ -20,7 +20,7 @@ from typing import Any, Dict, List, Union
 from werkzeug.wrappers import Response
 
 from eNMS import db
-from eNMS.helpers import scheduler_job
+from eNMS.helpers import object_export, object_import, scheduler_job
 from eNMS.classes import classes, service_classes
 from eNMS.extensions import bp
 from eNMS.forms import (
@@ -46,7 +46,6 @@ from eNMS.functions import (
     post,
     str_dict,
 )
-from eNMS.inventory.functions import object_export, object_import
 from eNMS.properties import (
     cls_to_properties,
     default_diagrams_properties,

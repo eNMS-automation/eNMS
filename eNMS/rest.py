@@ -9,9 +9,8 @@ from typing import Union
 
 from eNMS.extensions import auth, scheduler
 from eNMS.functions import migrate_export, migrate_import
-from eNMS.helpers import scheduler_job
+from eNMS.helpers import object_export, object_import, scheduler_job
 from eNMS.functions import delete, factory, fetch
-from eNMS.inventory.functions import object_export, object_import
 
 
 @auth.get_password

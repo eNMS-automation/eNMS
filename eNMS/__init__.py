@@ -31,7 +31,7 @@ from eNMS.forms import form_properties
 from eNMS.rest import configure_rest_api
 from eNMS.classes import classes, service_classes
 from eNMS.functions import configure_instance_id, fetch
-from eNMS.models.models import SyslogServer, User
+from eNMS.models import SyslogServer, User
 from eNMS.properties import (
     boolean_properties,
     cls_to_properties,

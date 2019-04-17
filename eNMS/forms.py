@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from typing import Any
 from wtforms import (
     BooleanField,
     FloatField,
@@ -11,7 +12,6 @@ from wtforms import (
 )
 
 from eNMS.helpers import NAPALM_DRIVERS, NETMIKO_DRIVERS
-from eNMS.models.base_models import MultipleObjectField, ObjectField
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,
@@ -21,6 +21,18 @@ from eNMS.properties import (
     import_properties,
     user_permissions,
 )
+
+
+class ObjectField(SelectField):
+    def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.choices = choices(model)
+
+
+class MultipleObjectField(SelectMultipleField):
+    def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.choices = choices(model)
 
 
 class LoginForm(FlaskForm):

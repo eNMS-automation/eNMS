@@ -10,9 +10,9 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 
-from eNMS.models.models import Service
+from eNMS.models import Service
 from eNMS.classes import service_classes
-from eNMS.models.models import Device
+from eNMS.models import Device
 
 
 class RestCallService(Service):

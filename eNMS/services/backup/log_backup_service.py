@@ -7,10 +7,10 @@ from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
-from eNMS.models.models import Service
+from eNMS.models import Service
 from eNMS.classes import service_classes
 from eNMS.functions import fetch_all, strip_all
-from eNMS.models.models import Device
+from eNMS.models import Device
 
 
 class LogBackupService(Service):

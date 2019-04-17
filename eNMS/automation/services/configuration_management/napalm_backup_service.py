@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from yaml import dump
 
 from eNMS.automation.functions import NAPALM_DRIVERS
-from eNMS.automation.models import Service
+from eNMS.models.models import Service
 from eNMS.classes import service_classes
 from eNMS.functions import str_dict
 from eNMS.models.models import Device

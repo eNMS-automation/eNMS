@@ -47,7 +47,6 @@ from eNMS.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.automation.models import LogRule
 from eNMS.models.base_models import Base
 from eNMS.properties import (
     custom_properties,

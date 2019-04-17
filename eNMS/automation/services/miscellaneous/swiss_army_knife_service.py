@@ -11,7 +11,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 
 from eNMS.extensions import mail_client
-from eNMS.automation.models import Service
+from eNMS.models.models import Service
 from eNMS.classes import service_classes
 from eNMS.functions import factory, fetch_all, get_one, str_dict
 from eNMS.models.models import Device

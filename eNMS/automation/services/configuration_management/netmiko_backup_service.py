@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from yaml import dump
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
-from eNMS.automation.models import Service
+from eNMS.models.models import Service
 from eNMS.classes import service_classes
 from eNMS.models.models import Device
 

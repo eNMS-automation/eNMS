@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.automation.models import Service
+from eNMS.models.models import Service
 from eNMS.classes import service_classes
 from eNMS.models.models import Device
 

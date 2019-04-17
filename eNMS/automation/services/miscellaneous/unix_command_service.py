@@ -2,7 +2,7 @@ from subprocess import check_output
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
 
-from eNMS.automation.models import Service
+from eNMS.models.models import Service
 from eNMS.classes import service_classes
 from eNMS.models.models import Device
 

@@ -157,7 +157,7 @@ def configure_google_earth(path: Path) -> None:
 
 
 def configure_services(path: Path) -> None:
-    path_services = [path / "eNMS" / "automation" / "services"]
+    path_services = [path / "eNMS" / "services"]
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     if custom_services_path:
         path_services.append(Path(custom_services_path))

@@ -1,6 +1,3 @@
-from eNMS.scheduling.forms import TaskForm
-
-
 from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,

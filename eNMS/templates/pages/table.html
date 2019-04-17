@@ -61,7 +61,7 @@
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>
   {% endif %}
   {% if type == "pool" %}
-    <script src="{{ url_for('static', filename='vis/vis.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='modules/vis/vis.min.js') }}"></script>
     <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
   {% endif %}
   {% if type in ("service", "workflow") %}

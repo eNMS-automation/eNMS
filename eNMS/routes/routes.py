@@ -69,8 +69,8 @@ def route_form(form_type: str) -> dict:
     )
 
 
-@get("/<_>/<table_type>_management", "View")
-def route_table(_: str, table_type: str) -> dict:
+@get("/<table_type>_management", "View")
+def route_table(table_type: str) -> dict:
     return dict(
         properties=table_properties[table_type],
         fixed_columns=table_fixed_columns[table_type],

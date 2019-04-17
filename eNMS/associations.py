@@ -1,6 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer, Table
 
-from eNMS.models import Base
+from eNMS.models.base_models import Base
 
 job_device_table: Table = Table(
     "job_device_association",

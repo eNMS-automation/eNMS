@@ -22,7 +22,7 @@ from eNMS.associations import (
     job_pool_table,
 )
 from eNMS.functions import fetch, fetch_all
-from eNMS.models import Base
+from eNMS.models.base_models import Base
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,

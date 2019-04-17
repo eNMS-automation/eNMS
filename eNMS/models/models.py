@@ -8,7 +8,7 @@ from typing import List
 from eNMS.extensions import controller, db
 from eNMS.associations import log_rule_log_table
 from eNMS.automation.models import LogRule
-from eNMS.models import Base
+from eNMS.models.base_models import Base
 
 
 class Log(Base):

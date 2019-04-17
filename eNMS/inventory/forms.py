@@ -10,7 +10,7 @@ from wtforms import (
 )
 
 from eNMS.automation.functions import NAPALM_DRIVERS, NETMIKO_DRIVERS
-from eNMS.models import MultipleObjectField, ObjectField
+from eNMS.models.base_models import MultipleObjectField, ObjectField
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,

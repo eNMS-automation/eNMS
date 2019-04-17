@@ -30,7 +30,7 @@ from eNMS.associations import (
 )
 from eNMS.extensions import controller
 from eNMS.functions import fetch, session_scope
-from eNMS.models import Base
+from eNMS.models.base_models import Base
 from eNMS.inventory.models import Device
 
 

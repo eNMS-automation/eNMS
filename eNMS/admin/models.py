@@ -12,7 +12,7 @@ from yaml import load
 
 from eNMS.associations import pool_user_table
 from eNMS.functions import fetch, fetch_all
-from eNMS.models import Base
+from eNMS.models.base_models import Base
 from eNMS.extensions import db
 
 

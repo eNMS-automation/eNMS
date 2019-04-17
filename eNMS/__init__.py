@@ -33,7 +33,7 @@ from eNMS.admin.functions import configure_instance_id
 from eNMS.admin.models import User
 from eNMS.classes import classes, service_classes
 from eNMS.functions import fetch
-from eNMS.home.models import SyslogServer
+from eNMS.models.models import SyslogServer
 from eNMS.properties import (
     boolean_properties,
     cls_to_properties,
@@ -197,7 +197,7 @@ def configure_services(path: Path) -> None:
 
 
 def create_app(path: Path, config_class: Type[Config]) -> Flask:
-    app = Flask(__name__, static_folder="base/static")
+    app = Flask(__name__, static_folder="static")
     app.config.from_object(config_class)  # type: ignore
     app.path = path
     register_extensions(app)

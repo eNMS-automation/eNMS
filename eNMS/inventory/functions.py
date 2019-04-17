@@ -21,18 +21,16 @@ def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
 
 def get_pools_devices(*pools: Union[str, int]) -> Dict[str, List[dict]]:
     return {
-        "devices": (
-            db.session.query(
-                *[
-                    getattr(classes["Device"], property)
-                    for property in ("id", "subtype", "name", "latitude", "longitude")
-                ]
-            ).filter(
+        "devices": [
+            device.view_properties
+            for device in db.session.query(classes["Device"])
+            .filter(
                 classes["Device"].pools.any(
                     classes["pool"].id.in_([int(pool) for pool in pools if pool])
                 )
             )
-        ).all(),
+            .all()
+        ],
         "links": [
             link.view_properties
             for link in db.session.query(classes["Link"])

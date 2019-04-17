@@ -144,6 +144,7 @@ function changeMarker(type) {
  */
 // eslint-disable-next-line
 function createNode(node, nodeType) {
+  console.log(node);
   let marker = null;
   if (currentView == "2D" || currentView == "2DC") {
     if (markerType == "Circle Marker") {

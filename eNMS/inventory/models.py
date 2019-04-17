@@ -91,6 +91,13 @@ class Device(CustomDevice):
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
+    @property
+    def view_properties(self) -> Dict[str, Any]:
+        return {
+            property: getattr(self, property)
+            for property in ("id", "name", "subtype", "latitude", "longitude")
+        }
+
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):

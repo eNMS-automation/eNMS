@@ -15,7 +15,7 @@ function deviceToNode(device) {
   return {
     id: device.id,
     label: device.name,
-    image: `../views/static/images/2D/${device.subtype}.gif`,
+    image: `/static/images/2D/${device.subtype}.gif`,
     shape: "image",
   };
 }

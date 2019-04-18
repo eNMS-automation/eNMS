@@ -39,15 +39,16 @@ from typing import Any, Dict, List, Optional, Set, Tuple, Union
 from xmltodict import parse
 from yaml import load
 
-from eNMS.extensions import controller, db, scheduler, USE_VAULT, vault_client
-from eNMS.framework import (
+from eNMS.main import (
     classes,
+    controller,
+    db,
+    scheduler,
     service_classes,
-    fetch,
-    fetch_all,
-    objectify,
-    session_scope,
+    USE_VAULT,
+    vault_client,
 )
+from eNMS.framework import fetch, fetch_all, objectify, session_scope
 from eNMS.helpers import scheduler_job
 from eNMS.properties import (
     cls_to_properties,

@@ -17,18 +17,20 @@ from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.default import create_default
 from eNMS.examples import create_examples
-from eNMS.extensions import (
+from eNMS.forms import form_properties
+from eNMS.framework import fetch
+from eNMS.main import (
+    bp,
+    classes,
     controller,
     db,
     login_manager,
     mail_client,
-    bp,
+    service_classes,
     USE_SYSLOG,
     USE_VAULT,
     vault_client,
 )
-from eNMS.framework import classes, fetch, service_classes
-from eNMS.forms import form_properties
 from eNMS.models import SyslogServer, User
 from eNMS.properties import (
     boolean_properties,

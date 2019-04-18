@@ -21,21 +21,16 @@ class Controller:
     session: Session
 
 
-bp = Blueprint("bp", __name__, template_folder="templates")
-
 controller = Controller()
-
+bp = Blueprint("bp", __name__, template_folder="templates")
+classes = {}
+service_classes = {}
 auth = HTTPBasicAuth()
-
 db = SQLAlchemy(session_options={"expire_on_commit": False, "autoflush": False})
-
 ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL) if USE_LDAP else None
-
 login_manager = LoginManager()
 login_manager.session_protection = "strong"
-
 mail_client = Mail()
-
 scheduler = BackgroundScheduler(
     {
         "apscheduler.jobstores.default": {
@@ -52,11 +47,9 @@ scheduler = BackgroundScheduler(
     }
 )
 scheduler.start()
-
 tacacs_client = (
     TACACSClient(environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD"))
     if USE_TACACS
     else None
 )
-
 vault_client = VaultClient()

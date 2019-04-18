@@ -31,7 +31,7 @@ from sqlalchemy.exc import IntegrityError, DataError
 from subprocess import Popen
 from typing import Any, Dict, List, Union
 
-from eNMS.extensions import (
+from eNMS.main import (
     bp,
     db,
     ldap_client,

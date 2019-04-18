@@ -10,9 +10,9 @@ from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 
-from eNMS.extensions import mail_client
-from eNMS.models import Device, register_class, Service
 from eNMS.framework import factory, fetch_all, get_one, str_dict
+from eNMS.main import mail_client
+from eNMS.models import Device, register_class, Service
 
 
 class SwissArmyKnifeService(Service, metaclass=register_class):

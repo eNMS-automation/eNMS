@@ -1,9 +1,9 @@
 from flask_mail import Message
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.extensions import mail_client
-from eNMS.models import register_class, Service
 from eNMS.framework import get_one
+from eNMS.main import mail_client
+from eNMS.models import register_class, Service
 
 
 class MailNotificationService(Service, metaclass=register_class):

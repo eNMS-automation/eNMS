@@ -13,10 +13,7 @@ from typing import Any, Callable, Generator, List, Optional, Tuple
 from yaml import dump, load, BaseLoader
 
 # from eNMS.default import create_default
-from eNMS.extensions import bp, controller, db
-
-classes = {}
-service_classes = {}
+from eNMS.main import bp, classes, controller, db
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:

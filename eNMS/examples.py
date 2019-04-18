@@ -2,7 +2,7 @@ from flask import Flask
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
-from eNMS.extensions import db
+from eNMS.main import db
 from eNMS.framework import factory, fetch
 
 

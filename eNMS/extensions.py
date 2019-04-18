@@ -23,10 +23,6 @@ class Controller:
 
 bp = Blueprint("bp", __name__, template_folder="templates")
 
-classes = {}
-
-service_classes = {}
-
 controller = Controller()
 
 auth = HTTPBasicAuth()

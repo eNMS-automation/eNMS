@@ -13,10 +13,12 @@ from typing import Any, Callable, Generator, List, Optional, Tuple
 from yaml import dump, load, BaseLoader
 
 # from eNMS.default import create_default
-from eNMS.extensions import bp, classes, controller, db
+from eNMS.cl import classes
+from eNMS.extensions import bp, controller, db
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:
+    print(classes)
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 

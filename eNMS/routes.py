@@ -34,7 +34,6 @@ from typing import Any, Dict, List, Union
 from eNMS.helpers import object_export, object_import, scheduler_job
 from eNMS.extensions import (
     bp,
-    classes,
     db,
     ldap_client,
     scheduler,

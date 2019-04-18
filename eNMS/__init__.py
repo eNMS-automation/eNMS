@@ -13,6 +13,7 @@ from sqlalchemy import Boolean, Float, Integer, PickleType
 from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
+from eNMS.cl import classes, service_classes
 from eNMS.config import Config
 from eNMS.extensions import (
     controller,
@@ -20,7 +21,6 @@ from eNMS.extensions import (
     login_manager,
     mail_client,
     bp,
-    service_classes,
     USE_SYSLOG,
     USE_VAULT,
     vault_client,
@@ -31,7 +31,7 @@ from eNMS.examples import create_examples
 from eNMS.forms import form_properties
 from eNMS.rest import configure_rest_api
 from eNMS.models import SyslogServer, User
-from eNMS.functions import configure_instance_id, fetch
+from eNMS.functions import fetch
 
 from eNMS.properties import (
     boolean_properties,
@@ -190,7 +190,7 @@ def configure_services(path: Path) -> None:
                     Float: "float",
                     PickleType: "dict",
                 }.get(type(col.type), "str")
-    # classes.update(service_classes)
+    classes.update(service_classes)
 
 
 def create_app(path: Path, config_class: Type[Config]) -> Flask:

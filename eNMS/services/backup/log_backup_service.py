@@ -56,6 +56,3 @@ class LogBackupService(Service):
             "success": True,
             "result": f"logs stored in {destination} ({device.ip_address})",
         }
-
-
-service_classes["LogBackupService"] = LogBackupService

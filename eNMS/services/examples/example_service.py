@@ -79,6 +79,3 @@ class ExampleService(Service):
         # In a workflow, the "success" value will determine whether to move
         # forward with a "Success" edge or a "Failure" edge.
         return {"success": True, "result": "example"}
-
-
-service_classes["ExampleService"] = ExampleService

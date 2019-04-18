@@ -64,6 +64,3 @@ class NapalmBackupService(Service):
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         return {"success": True, "result": "Get Config via Napalm"}
-
-
-service_classes["NapalmBackupService"] = NapalmBackupService

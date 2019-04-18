@@ -30,6 +30,3 @@ class UnixCommandService(Service):
             "negative_logic": self.negative_logic,
             "result": result,
         }
-
-
-service_classes["UnixCommandService"] = UnixCommandService

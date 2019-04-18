@@ -53,6 +53,3 @@ class NetmikoValidationService(Service):
             "result": result,
             "success": self.match_content(result, match),
         }
-
-
-service_classes["NetmikoValidationService"] = NetmikoValidationService

@@ -27,6 +27,3 @@ class MattermostNotificationService(Service):
             data=dumps({"channel": channel, "text": self.body}),
         )
         return {"success": True, "result": str(result)}
-
-
-service_classes["MattermostNotificationService"] = MattermostNotificationService

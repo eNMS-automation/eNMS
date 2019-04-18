@@ -64,6 +64,3 @@ class PingService(Service):
                     s.close()
                 result[port] = connection
             return {"success": all(result.values()), "result": result}
-
-
-service_classes["PingService"] = PingService

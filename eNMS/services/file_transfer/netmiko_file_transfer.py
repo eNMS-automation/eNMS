@@ -43,6 +43,3 @@ class NetmikoFileTransferService(Service):
         )
         netmiko_handler.disconnect()
         return {"success": True, "result": transfer_dict}
-
-
-service_classes["NetmikoFileTransferService"] = NetmikoFileTransferService

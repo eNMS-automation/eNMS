@@ -66,6 +66,3 @@ class AnsiblePlaybookService(Service):
             "result": result,
             "success": success,
         }
-
-
-service_classes["AnsiblePlaybookService"] = AnsiblePlaybookService

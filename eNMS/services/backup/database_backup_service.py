@@ -54,6 +54,3 @@ class DatabaseBackupService(Service):
             "success": True,
             "result": f"backup stored in {destination} ({device.ip_address})",
         }
-
-
-service_classes["DatabaseBackupService"] = DatabaseBackupService

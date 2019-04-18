@@ -39,6 +39,3 @@ class NapalmPingService(Service):
         )
         napalm_driver.close()
         return {"success": "success" in ping, "result": ping}
-
-
-service_classes["NapalmPingService"] = NapalmPingService

@@ -69,6 +69,3 @@ class GenericFileTransferService(Service):
             )
         ssh_client.close()
         return {"success": success, "result": result}
-
-
-service_classes["GenericFileTransferService"] = GenericFileTransferService

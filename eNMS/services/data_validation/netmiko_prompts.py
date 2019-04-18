@@ -73,6 +73,3 @@ class NetmikoPromptsService(Service):
             "result": result,
             "success": self.match_content(result, match),
         }
-
-
-service_classes["NetmikoPromptsService"] = NetmikoPromptsService

@@ -25,6 +25,3 @@ class NapalmRollbackService(Service):
         napalm_driver.rollback()
         napalm_driver.close()
         return {"success": True, "result": "Rollback successful"}
-
-
-service_classes["NapalmRollbackService"] = NapalmRollbackService

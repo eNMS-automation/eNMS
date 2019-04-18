@@ -54,6 +54,3 @@ class NetmikoDataExtractionService(Service):
             }
         netmiko_handler.disconnect()
         return {"result": result, "success": True}
-
-
-service_classes["NetmikoDataExtractionService"] = NetmikoDataExtractionService

@@ -85,6 +85,3 @@ class RestCallService(Service):
             "result": result,
             "success": self.match_content(result, match),
         }
-
-
-service_classes["RestCallService"] = RestCallService

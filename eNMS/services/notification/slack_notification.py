@@ -26,6 +26,3 @@ class SlackNotificationService(Service):
             "chat.postMessage", channel=channel, text=self.body
         )
         return {"success": True, "result": str(result)}
-
-
-service_classes["SlackNotificationService"] = SlackNotificationService

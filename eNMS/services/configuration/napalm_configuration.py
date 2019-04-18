@@ -34,6 +34,3 @@ class NapalmConfigurationService(Service):
         napalm_driver.commit_config()
         napalm_driver.close()
         return {"success": True, "result": f"Config push ({config})"}
-
-
-service_classes["NapalmConfigurationService"] = NapalmConfigurationService

@@ -32,6 +32,3 @@ class MailNotificationService(Service):
         )
         mail_client.send(message)
         return {"success": True, "result": str(message)}
-
-
-service_classes["MailNotificationService"] = MailNotificationService

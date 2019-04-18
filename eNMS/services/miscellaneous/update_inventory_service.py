@@ -18,6 +18,3 @@ class UpdateInventoryService(Service):
         for property, value in self.update_dictionary.items():
             setattr(device, property, value)
         return {"success": True, "result": "properties updated"}
-
-
-service_classes["UpdateInventoryService"] = UpdateInventoryService

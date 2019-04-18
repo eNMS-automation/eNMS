@@ -37,6 +37,3 @@ class NapalmTracerouteService(Service):
         )
         napalm_driver.close()
         return {"success": "success" in traceroute, "result": traceroute}
-
-
-service_classes["NapalmTracerouteService"] = NapalmTracerouteService

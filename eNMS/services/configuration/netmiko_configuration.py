@@ -34,6 +34,3 @@ class NetmikoConfigurationService(Service):
         )
         netmiko_handler.disconnect()
         return {"success": True, "result": f"configuration OK {config}"}
-
-
-service_classes["NetmikoConfigurationService"] = NetmikoConfigurationService

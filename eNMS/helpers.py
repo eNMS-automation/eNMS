@@ -1,8 +1,12 @@
+from copy import deepcopy
+from flask import Flask
 from git import Repo
 from git.exc import GitCommandError
 from logging import info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from os import makedirs
+from os.path import exists
 from pathlib import Path, PosixPath
 from typing import Optional, Set
 from werkzeug.datastructures import FileStorage
@@ -10,9 +14,19 @@ from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
+from yaml import dump, load, BaseLoader
 
+from eNMS.default import create_default
 from eNMS.main import controller, db
-from eNMS.framework import delete_all, factory, fetch_all, fetch, get_one, str_dict
+from eNMS.framework import (
+    delete_all,
+    export,
+    factory,
+    fetch_all,
+    fetch,
+    get_one,
+    str_dict,
+)
 from eNMS.properties import export_properties
 
 NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
@@ -128,8 +142,8 @@ def migrate_import(app: Flask, request: dict) -> str:
             info(f"{str(edge)} could not be imported ({str(e)})")
             status = "Partial import (see logs)."
     print("fix")
-    # if request.get("empty_database_before_import", False):
-    # create_default(app)
+    if request.get("empty_database_before_import", False):
+        create_default(app)
     return status
 
 
@@ -160,3 +174,23 @@ def scheduler_job(
         if task and not task.frequency:
             task.is_active = False
         db.session.commit()
+
+
+def str_dict(input: Any, depth: int = 0) -> str:
+    tab = "\t" * depth
+    if isinstance(input, list):
+        result = "\n"
+        for element in input:
+            result += f"{tab}- {str_dict(element, depth + 1)}\n"
+        return result
+    elif isinstance(input, dict):
+        result = ""
+        for key, value in input.items():
+            result += f"\n{tab}{key}: {str_dict(value, depth + 1)}"
+        return result
+    else:
+        return str(input)
+
+
+def strip_all(input: str) -> str:
+    return input.translate(str.maketrans("", "", f"{punctuation} "))

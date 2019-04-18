@@ -64,13 +64,17 @@ from eNMS.framework import (
     fetch_all_visible,
     get,
     get_one,
-    migrate_export,
-    migrate_import,
     objectify,
     post,
     str_dict,
 )
-from eNMS.helpers import object_export, object_import, scheduler_job
+from eNMS.helpers import (
+    migrate_export,
+    migrate_import,
+    object_export,
+    object_import,
+    scheduler_job,
+)
 from eNMS.models import classes, service_classes
 from eNMS.properties import (
     cls_to_properties,

@@ -1,18 +1,13 @@
 from contextlib import contextmanager
-from copy import deepcopy
-from flask import abort, Flask, jsonify, request, render_template
+from flask import abort, jsonify, request, render_template
 from flask.wrappers import Response
 from flask_login import current_user, login_required
 from functools import wraps
 from logging import info
-from os import makedirs
-from os.path import exists
 from sqlalchemy import exc
 from string import punctuation
 from typing import Any, Callable, Generator, List, Optional, Tuple
-from yaml import dump, load, BaseLoader
 
-# from eNMS.default import create_default
 from eNMS.main import bp, classes, controller, db
 
 
@@ -176,23 +171,3 @@ def session_scope() -> Generator:
         raise e
     finally:
         controller.session.remove()
-
-
-def str_dict(input: Any, depth: int = 0) -> str:
-    tab = "\t" * depth
-    if isinstance(input, list):
-        result = "\n"
-        for element in input:
-            result += f"{tab}- {str_dict(element, depth + 1)}\n"
-        return result
-    elif isinstance(input, dict):
-        result = ""
-        for key, value in input.items():
-            result += f"\n{tab}{key}: {str_dict(value, depth + 1)}"
-        return result
-    else:
-        return str(input)
-
-
-def strip_all(input: str) -> str:
-    return input.translate(str.maketrans("", "", f"{punctuation} "))

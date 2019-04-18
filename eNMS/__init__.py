@@ -29,7 +29,6 @@ from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
 from eNMS.rest import configure_rest_api
-from eNMS.classes import classes, service_classes
 from eNMS.models import SyslogServer, User
 from eNMS.functions import configure_instance_id, fetch
 
@@ -191,7 +190,7 @@ def configure_services(path: Path) -> None:
                     Float: "float",
                     PickleType: "dict",
                 }.get(type(col.type), "str")
-    classes.update(service_classes)
+    # classes.update(service_classes)
 
 
 def create_app(path: Path, config_class: Type[Config]) -> Flask:

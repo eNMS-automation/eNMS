@@ -11,13 +11,13 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 
 from eNMS.extensions import mail_client
-from eNMS.models import Service
-from eNMS.classes import service_classes
+from eNMS.models import Device, register_class, Service
+
+# from eNMS.classes import service_classes
 from eNMS.functions import factory, fetch_all, get_one, str_dict
-from eNMS.models import Device
 
 
-class SwissArmyKnifeService(Service):
+class SwissArmyKnifeService(Service, metaclass=register_class):
 
     __tablename__ = "SwissArmyKnifeService"
 
@@ -133,4 +133,4 @@ class SwissArmyKnifeService(Service):
         return {"success": True, "uptime_less_5000": uptime_less_than_50000}
 
 
-service_classes["SwissArmyKnifeService"] = SwissArmyKnifeService
+# service_classes["SwissArmyKnifeService"] = SwissArmyKnifeService

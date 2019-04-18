@@ -1,7 +1,6 @@
 from flask import Flask
 
-from eNMS.extensions import db
-from eNMS.models import classes
+from eNMS.extensions import db, classes
 from eNMS.functions import factory, integrity_rollback, fetch, get_one
 from eNMS.properties import parameters_public_properties
 
@@ -54,6 +53,7 @@ def create_default_parameters(app: Flask) -> None:
 
 def create_default_services() -> None:
     admin = fetch("User", name="admin").id
+    print(classes)
     for service in (
         {
             "type": "SwissArmyKnifeService",

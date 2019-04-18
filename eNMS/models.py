@@ -39,8 +39,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple, Union
 from xmltodict import parse
 from yaml import load
 
-from eNMS.classes import classes
-from eNMS.extensions import controller, db, scheduler, USE_VAULT, vault_client
+from eNMS.extensions import classes, controller, db, scheduler, USE_VAULT, vault_client
 from eNMS.functions import fetch, fetch_all, objectify, session_scope
 from eNMS.helpers import scheduler_job
 from eNMS.properties import (
@@ -59,7 +58,9 @@ from eNMS.properties import (
 
 def register_class(*args, **kwargs):
     cls = type(*args, **kwargs)
+    print(cls.__tablename__)
     classes.update({cls.__tablename__: cls, cls.__tablename__.lower(): cls})
+    print(classes)
     return cls
 
 

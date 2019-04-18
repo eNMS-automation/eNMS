@@ -14,8 +14,7 @@ from uuid import getnode
 from yaml import dump, load, BaseLoader
 
 # from eNMS.default import create_default
-from eNMS.extensions import bp, controller, db
-from eNMS.classes import classes
+from eNMS.extensions import bp, classes, controller, db
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:

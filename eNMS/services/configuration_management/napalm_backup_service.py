@@ -4,8 +4,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from yaml import dump
 
-from eNMS.framework import str_dict
-from eNMS.helpers import NAPALM_DRIVERS
+from eNMS.helpers import NAPALM_DRIVERS, str_dict
 from eNMS.models import Device, register_class, Service
 
 

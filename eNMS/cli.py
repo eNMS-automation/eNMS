@@ -6,7 +6,8 @@ from os import environ
 from pathlib import Path
 from werkzeug.serving import run_simple
 
-from eNMS.framework import delete, factory, fetch, str_dict
+from eNMS.framework import delete, factory, fetch
+from eNMS.helpers import str_dict
 
 
 def configure_cli(app: Flask) -> None:

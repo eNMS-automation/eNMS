@@ -66,7 +66,6 @@ from eNMS.framework import (
     get_one,
     objectify,
     post,
-    str_dict,
 )
 from eNMS.helpers import (
     migrate_export,
@@ -74,6 +73,7 @@ from eNMS.helpers import (
     object_export,
     object_import,
     scheduler_job,
+    str_dict,
 )
 from eNMS.models import classes, service_classes
 from eNMS.properties import (

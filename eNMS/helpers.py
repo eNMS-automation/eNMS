@@ -8,7 +8,8 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from os import makedirs
 from os.path import exists
 from pathlib import Path, PosixPath
-from typing import Optional, Set
+from string import punctuation
+from typing import Any, Optional, Set
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -18,15 +19,7 @@ from yaml import dump, load, BaseLoader
 
 from eNMS.default import create_default
 from eNMS.main import controller, db
-from eNMS.framework import (
-    delete_all,
-    export,
-    factory,
-    fetch_all,
-    fetch,
-    get_one,
-    str_dict,
-)
+from eNMS.framework import delete_all, export, factory, fetch_all, fetch, get_one
 from eNMS.properties import export_properties
 
 NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
@@ -78,7 +71,7 @@ def object_export(request: dict, path_app: PosixPath) -> bool:
         for index, property in enumerate(export_properties[obj_type]):
             sheet.write(0, index, property)
             for obj_index, obj in enumerate(fetch_all(obj_type), 1):
-                sheet.write(obj_index, index, obj.property)
+                sheet.write(obj_index, index, getattr(obj, property))
     workbook.save(path_app / "projects" / filename)
     return True
 

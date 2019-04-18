@@ -5,7 +5,6 @@ from flask_login import current_user, login_required
 from functools import wraps
 from logging import info
 from sqlalchemy import exc
-from string import punctuation
 from typing import Any, Callable, Generator, List, Optional, Tuple
 
 from eNMS.main import bp, classes, controller, db
@@ -42,10 +41,6 @@ def delete_all(*models: str) -> None:
         for instance in fetch_all(model):
             delete(model, id=instance.id)
     db.session.commit()
-
-
-def serialize(model: str) -> List[dict]:
-    return classes[model].serialize()
 
 
 def choices(model: str) -> List[Tuple[int, str]]:

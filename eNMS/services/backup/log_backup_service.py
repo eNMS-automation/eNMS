@@ -7,7 +7,8 @@ from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
-from eNMS.framework import fetch_all, strip_all
+from eNMS.framework import fetch_all
+from eNMS.helpers import strip_all
 from eNMS.models import Device, register_class, Service
 
 

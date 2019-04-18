@@ -1,8 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.models import Service
-from eNMS.extensions import service_classes
-from eNMS.models import Device
+from eNMS.models import Device, register_class, Service
 
 
 class ConfigureBgpService(Service):

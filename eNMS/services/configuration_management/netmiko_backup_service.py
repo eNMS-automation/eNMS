@@ -4,9 +4,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from yaml import dump
 
 from eNMS.helpers import NETMIKO_DRIVERS
-from eNMS.models import Service
-from eNMS.extensions import service_classes
-from eNMS.models import Device
+from eNMS.models import Device, register_class, Service
 
 
 class NetmikoBackupService(Service):
@@ -71,6 +69,3 @@ class NetmikoBackupService(Service):
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         return {"success": True, "result": f"Command: {self.configuration_command}"}
-
-
-service_classes["NetmikoBackupService"] = NetmikoBackupService

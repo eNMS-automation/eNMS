@@ -12,8 +12,6 @@ from typing import Optional
 
 from eNMS.extensions import mail_client
 from eNMS.models import Device, register_class, Service
-
-# from eNMS.extensions import service_classes
 from eNMS.functions import factory, fetch_all, get_one, str_dict
 
 
@@ -131,6 +129,3 @@ class SwissArmyKnifeService(Service, metaclass=register_class):
         # to use, including custom properties.
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
         return {"success": True, "uptime_less_5000": uptime_less_than_50000}
-
-
-# service_classes["SwissArmyKnifeService"] = SwissArmyKnifeService

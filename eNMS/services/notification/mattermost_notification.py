@@ -3,8 +3,7 @@ from requests import post
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.functions import get_one
-from eNMS.models import Service
-from eNMS.extensions import service_classes
+from eNMS.models import register_class, Service
 
 
 class MattermostNotificationService(Service):

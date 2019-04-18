@@ -4,9 +4,7 @@ from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from logging import info
 
-from eNMS.models import Service
-from eNMS.extensions import service_classes
-from eNMS.models import Device
+from eNMS.models import Device, register_class, Service
 
 
 class GenericFileTransferService(Service):

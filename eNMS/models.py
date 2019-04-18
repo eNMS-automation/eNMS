@@ -60,11 +60,8 @@ from eNMS.properties import (
 def register_class(*args, **kwargs):
     cls = type(*args, **kwargs)
     print(classes.get("Service"), cls.__tablename__)
-    if classes.get("Service"):
-
-        print(issubclass(classes["Service"], cls))
-        if issubclass(cls, classes["Service"]):
-            service_classes[cls.__tablename__] = cls
+    if classes.get("Service") and issubclass(cls, classes["Service"]):
+        service_classes[cls.__tablename__] = cls
     classes[cls.__tablename__] = cls
     return cls
 

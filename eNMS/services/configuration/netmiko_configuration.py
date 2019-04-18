@@ -1,9 +1,7 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.helpers import NETMIKO_DRIVERS
-from eNMS.models import Service
-from eNMS.extensions import service_classes
-from eNMS.models import Device
+from eNMS.models import Device, register_class, Service
 
 
 class NetmikoConfigurationService(Service):

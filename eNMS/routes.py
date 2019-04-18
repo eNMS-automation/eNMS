@@ -4,9 +4,11 @@ from difflib import SequenceMatcher
 from flask import (
     abort,
     current_app as app,
+    jsonify,
     redirect,
     render_template,
     request,
+    send_file,
     session,
     url_for,
 )
@@ -16,9 +18,7 @@ from json import dumps, loads
 from json.decoder import JSONDecodeError
 from ldap3 import Connection, NTLM, SUBTREE
 from logging import info
-from flask import current_app as app, jsonify, redirect, request, send_file, url_for
 from flask.wrappers import Response
-from flask_login import current_user
 from ipaddress import IPv4Network
 from os import listdir
 from pynetbox import api as netbox_api
@@ -30,9 +30,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, DataError
 from subprocess import Popen
 from typing import Any, Dict, List, Union
-from werkzeug.wrappers import Response
 
-from eNMS import db
 from eNMS.helpers import object_export, object_import, scheduler_job
 from eNMS.classes import classes, service_classes
 from eNMS.extensions import (
@@ -44,7 +42,6 @@ from eNMS.extensions import (
     USE_LDAP,
     USE_TACACS,
 )
-
 from eNMS.forms import (
     form_classes,
     form_templates,
@@ -62,6 +59,7 @@ from eNMS.forms import (
 )
 from eNMS.functions import (
     delete,
+    delete_all,
     factory,
     fetch,
     fetch_all,

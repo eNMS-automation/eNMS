@@ -30,11 +30,13 @@
   left: 0;
 }
 
+/* front pane, placed above back */
 .front {
   /* for firefox 31 */
   transform: rotateY(0deg);
 }
 
+/* back, initially hidden pane */
 .back {
   transform: rotateY(180deg);
 }

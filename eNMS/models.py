@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import Flask
 from flask_login import current_user as user, UserMixin
 from git import Repo
-from json import dumps, load
+from json import dumps, loads
 from logging import info
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
@@ -40,14 +40,7 @@ from xmltodict import parse
 from yaml import load
 
 from eNMS.extensions import controller, db, scheduler, USE_VAULT, vault_client
-from eNMS.functions import (
-    add_classes,
-    fetch,
-    fetch_all,
-    objectify,
-    choices,
-    session_scope,
-)
+from eNMS.functions import add_classes, fetch, fetch_all, objectify, session_scope
 from eNMS.helpers import scheduler_job
 from eNMS.properties import (
     cls_to_properties,
@@ -279,7 +272,7 @@ class User(Base, UserMixin):
             onclick="showTypePanel('user', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('user', '{self.id}')">Delete</button>""",
+            onclick="showDeletionPanel('user', '{self.id}')">Delete</button>""",
         ]
 
     @property
@@ -309,7 +302,7 @@ class Instance(Base):
             onclick="showTypePanel('instance', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('instance', '{self.id}')">
+            onclick="showDeletionPanel('instance', '{self.id}')">
             Delete</button>""",
         ]
 
@@ -649,7 +642,7 @@ class Link(Object):
             onclick="showTypePanel('link', '{self.id}', true)">Duplicate
             </button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('link', '{self.id}')">Delete</button>""",
+            onclick="showDeletionPanel('link', '{self.id}')">Delete</button>""",
         ]
 
 
@@ -720,7 +713,7 @@ class Pool(AbstractPool):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showPoolObjectsPanel('{self.id}')">Edit objects</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('pool', '{self.id}')">Delete</button>""",
+            onclick="showDeletionPanel('pool', '{self.id}')">Delete</button>""",
         ]
 
     @property
@@ -1027,7 +1020,7 @@ class Service(Job):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('service', '{self.id}', true)">Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('service', '{self.id}')">
+            onclick="showDeletionPanel('service', '{self.id}')">
             Delete</button>""",
         ]
 
@@ -1187,7 +1180,7 @@ class Workflow(Job):
             onclick="showWorkflowModalDuplicate('{self.id}')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('workflow', '{self.id}')">
+            onclick="showDeletionPanel('workflow', '{self.id}')">
             Delete</button>""",
         ]
 
@@ -1297,7 +1290,7 @@ class Task(Base):
             onclick="showTypePanel('task', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="confirmDeletion('task', '{self.id}')">
+            onclick="showDeletionPanel('task', '{self.id}')">
             Delete</button>""",
         ]
 

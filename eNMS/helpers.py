@@ -4,14 +4,13 @@ from logging import info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path, PosixPath
-from typing import Optional, Dict, List, Set, Union
+from typing import Optional, Set
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
-from eNMS.classes import classes
 from eNMS.extensions import controller, db
 from eNMS.functions import (
     delete_all,

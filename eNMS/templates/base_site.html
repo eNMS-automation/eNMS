@@ -20,8 +20,8 @@
         <link href="{{ url_for('static', filename='modules/alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='modules/panel/jspanel.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='modules/difflib/diffview.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='enms/base.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='enms/contextMenu.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/base.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/contextMenu.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
     {% endblock head %}
   </head>
@@ -70,8 +70,8 @@
           const servicesClasses = {{ services_classes|tojson|safe }};
           let action = {};
         </script>
-        <script src="{{ url_for('static', filename='enms/base.js') }}"></script>
-        <script src="{{ url_for('static', filename='enms/contextMenu.js') }}"></script>
+        <script src="{{ url_for('static', filename='base.js') }}"></script>
+        <script src="{{ url_for('static', filename='contextMenu.js') }}"></script>
       {% endblock %}
     {% endblock body %}
   </body>

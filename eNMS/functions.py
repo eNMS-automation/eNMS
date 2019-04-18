@@ -1,6 +1,6 @@
 from contextlib import contextmanager
 from copy import deepcopy
-from flask import abort, Blueprint, Flask, jsonify, request, render_template
+from flask import abort, Flask, jsonify, request, render_template
 from flask.wrappers import Response
 from flask_login import current_user, login_required
 from functools import wraps

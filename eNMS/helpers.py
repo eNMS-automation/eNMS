@@ -12,15 +12,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.main import controller, db
-from eNMS.framework import (
-    delete_all,
-    factory,
-    fetch_all,
-    serialize,
-    fetch,
-    get_one,
-    str_dict,
-)
+from eNMS.framework import delete_all, factory, fetch_all, fetch, get_one, str_dict
 from eNMS.properties import export_properties
 
 NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
@@ -71,10 +63,74 @@ def object_export(request: dict, path_app: PosixPath) -> bool:
         sheet = workbook.add_sheet(obj_type)
         for index, property in enumerate(export_properties[obj_type]):
             sheet.write(0, index, property)
-            for obj_index, obj in enumerate(serialize(obj_type), 1):
-                sheet.write(obj_index, index, obj[property])
+            for obj_index, obj in enumerate(fetch_all(obj_type), 1):
+                sheet.write(obj_index, index, obj.property)
     workbook.save(path_app / "projects" / filename)
     return True
+
+
+def migrate_export(app: Flask, request: dict) -> bool:
+    for cls_name in request["import_export_types"]:
+        path = app.path / "migrations" / request["name"]
+        if not exists(path):
+            makedirs(path)
+        with open(path / f"{cls_name}.yaml", "w") as migration_file:
+            dump(export(cls_name), migration_file, default_flow_style=False)
+    return True
+
+
+def migrate_import(app: Flask, request: dict) -> str:
+    status, types = "Import successful.", request["import_export_types"]
+    workflows: list = []
+    edges: list = []
+    if request.get("empty_database_before_import", False):
+        delete_all(*types)
+    for cls in types:
+        path = app.path / "migrations" / request["name"] / f"{cls}.yaml"
+        with open(path, "r") as migration_file:
+            objects = load(migration_file, Loader=BaseLoader)
+            if cls == "Workflow":
+                workflows = deepcopy(objects)
+            if cls == "WorkflowEdge":
+                edges = deepcopy(objects)
+                continue
+            for obj in objects:
+                obj_cls = obj.pop("type") if cls == "Service" else cls
+                # 1) We cannot import workflow edges before workflow, because a
+                # workflow edge is defined by the workflow it belongs to.
+                # Therefore, we import workflow before workflow edges but
+                # strip off the edges, because they do not exist at this stage.
+                # Edges will be defined later on upon importing workflow edges.
+                # 2) At this stage, we cannot import jobs, because if workflows
+                # A (ID 1) and B (ID 2) are created, and B is added to A as a
+                # subworkflow, we won't be able to create A as B is one of its
+                # jobs and does not exist yet. To work around this, we will
+                # strip off the jobs at this stage, and reimport workflows a
+                # second time at the end.
+                if cls == "Workflow":
+                    obj["edges"], obj["jobs"] = [], []
+                try:
+                    factory(obj_cls, **obj)
+                except Exception as e:
+                    info(f"{str(obj)} could not be imported ({str(e)})")
+                    status = "Partial import (see logs)."
+    for workflow in workflows:
+        workflow["edges"] = []
+        try:
+            factory("Workflow", **workflow)
+        except Exception as e:
+            info(f"{str(workflow)} could not be imported ({str(e)})")
+            status = "Partial import (see logs)."
+    for edge in edges:
+        try:
+            factory("WorkflowEdge", **edge)
+        except Exception as e:
+            info(f"{str(edge)} could not be imported ({str(e)})")
+            status = "Partial import (see logs)."
+    print("fix")
+    # if request.get("empty_database_before_import", False):
+    # create_default(app)
+    return status
 
 
 def scheduler_job(

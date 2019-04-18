@@ -108,7 +108,7 @@ function serializeForm(form) {
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete/${type}/${id}`, function(result) {
-    $("#deletion-panel").remove();
+    $(`#deletion-panel-${id}`).remove();
     table
       .row($(`#${id}`))
       .remove()
@@ -173,12 +173,13 @@ function showFilteringPanel(type) {
 // eslint-disable-next-line
 function showDeletionPanel(type, id) {
   createPanel(
-    "deletion-panel",
+    `deletion-panel-${id}`,
     "300, 300",
     `../deletion_form`,
     function(panel) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Delete");
+      preprocessForm(panel, id, type);
     }
   );
 }
@@ -225,12 +226,14 @@ function showConnectionPanel(id) {
 /**
  * Preprocess form.
  */
-function preprocessForm(panel, id) {
+function preprocessForm(panel, id, type) {
   panel.querySelectorAll('.add-id').forEach((el) => {
     $(el).prop("id", `${el.id}-${id}`);
   });
   panel.querySelectorAll('.btn-id').forEach((el) => {
-    $(el).attr("onclick", `${el.value}(${id})`);
+    value = type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`;
+    console.log(value);
+    $(el).attr("onclick", value);
   });
 }
 
@@ -248,7 +251,6 @@ function showPoolObjectsPanel(id) {
       panel.setHeaderTitle("Connect to device");
       configureForm("pool_objects");
       preprocessForm(panel, id);
-      //$(`#pool-objects-button-${id}`).attr("onclick", `savePoolObjects(${id})`);
       call(`/get/pool/${id}`, function(pool) {
         $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
         $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));

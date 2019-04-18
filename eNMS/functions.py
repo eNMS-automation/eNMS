@@ -100,17 +100,6 @@ def integrity_rollback(function: Callable) -> Callable:
 
 
 def process_request(function: Callable) -> Callable:
-    def wrapper(*a: Any, **kw: Any) -> Response:
-        data = {**request.form.to_dict(), **{"creator": current_user.id}}
-        for property in data.get("list_fields", "").split(","):
-            if property in request.form:
-                data[property] = request.form.getlist(property)
-            else:
-                data[property] = []
-        for property in data.get("boolean_fields", "").split(","):
-            data[property] = property in request.form
-        request.form = data  # type: ignore
-        return function(*a, **kw)
 
     return wrapper
 
@@ -174,8 +163,13 @@ def post(url: str, permission: Optional[str] = None) -> Callable[[Callable], Cal
         @login_required
         @permission_required(permission, redirect=False)
         @wraps(func)
-        @process_request
         def inner(*args: Any, **kwargs: Any) -> Response:
+            data = {**request.form.to_dict(), **{"creator": current_user.id}}
+            for property in data.get("list_fields", "").split(","):
+                data[property] = request.form.getlist(property)
+            for property in data.get("boolean_fields", "").split(","):
+                data[property] = property in request.form
+            request.form = data
             info(
                 f"User '{current_user.name}' ({request.remote_addr})"
                 f" calling the endpoint {request.url} (POST)"

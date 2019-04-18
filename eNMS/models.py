@@ -1391,22 +1391,3 @@ class Task(Base, metaclass=register_class):
             scheduler.add_job(**{**default, **trigger})
         else:
             scheduler.reschedule_job(default.pop("id"), **trigger)
-
-
-classes = {}
-for model in (
-    Device,
-    Instance,
-    Job,
-    Link,
-    Log,
-    LogRule,
-    Parameters,
-    Pool,
-    Service,
-    Task,
-    User,
-    Workflow,
-    WorkflowEdge,
-):
-    classes.update({model.__tablename__: model, model.__tablename__.lower(): model})

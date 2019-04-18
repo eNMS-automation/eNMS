@@ -13,7 +13,6 @@ from typing import Any, Callable, Generator, List, Optional, Tuple
 from yaml import dump, load, BaseLoader
 
 # from eNMS.default import create_default
-# from eNMS.models import classes
 from eNMS.extensions import bp, controller, db
 
 classes = {}

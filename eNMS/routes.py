@@ -56,7 +56,6 @@ from eNMS.forms import (
     WorkflowBuilderForm,
 )
 from eNMS.framework import (
-    classes,
     delete,
     delete_all,
     factory,
@@ -69,10 +68,10 @@ from eNMS.framework import (
     migrate_import,
     objectify,
     post,
-    service_classes,
     str_dict,
 )
 from eNMS.helpers import object_export, object_import, scheduler_job
+from eNMS.models import classes, service_classes
 from eNMS.properties import (
     cls_to_properties,
     default_diagrams_properties,

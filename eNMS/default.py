@@ -1,9 +1,8 @@
 from flask import Flask
 from uuid import getnode
 
-from eNMS.framework import classes
 from eNMS.extensions import db
-from eNMS.framework import factory, integrity_rollback, fetch, get_one
+from eNMS.framework import classes, factory, integrity_rollback, fetch, get_one
 from eNMS.properties import parameters_public_properties
 
 

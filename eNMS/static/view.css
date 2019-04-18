@@ -1,4 +1,3 @@
-/* entire container, keeps perspective */
 .flip-container {
   perspective: 1000px;
 }
@@ -14,7 +13,6 @@
   transform: rotateY(180deg);
 }
 
-/* flip speed goes here */
 .flipper {
   transition: 2s;
   transform-style: preserve-3d;
@@ -22,7 +20,6 @@
   position: relative;
 }
 
-/* hide back of pane during swap */
 .front,
 .back {
   position: absolute;

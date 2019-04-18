@@ -43,7 +43,7 @@ class LoginForm(FlaskForm):
 
 
 class UserForm(FlaskForm):
-    list_fields = HiddenField(default="permissions")
+    list_fields = HiddenField(default="permissions,pools")
     id = HiddenField()
     name = StringField()
     password = PasswordField()

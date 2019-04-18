@@ -44,11 +44,11 @@ def delete_all(*models: str) -> None:
 
 
 def choices(model: str) -> List[Tuple[int, str]]:
-    return classes[model].choices()
+    [(instance.id, str(instance)) for instance in classes[model].visible()]
 
 
 def export(model: str) -> List[dict]:
-    return classes[model].export()
+    return [instance.to_dict(export=True) for instance in classes[model].visible()]
 
 
 def get_one(model: str) -> db.Model:

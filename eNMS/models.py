@@ -193,18 +193,6 @@ class Base(db.Model):
     def serialized(self) -> dict:
         return self.to_dict()
 
-    @classmethod
-    def export(cls: db.Model) -> List[dict]:
-        return [obj.to_dict(export=True) for obj in cls.visible()]
-
-    @classmethod
-    def choices(cls: db.Model) -> List[Tuple[int, str]]:
-        return [(obj.id, str(obj)) for obj in cls.visible()]
-
-    @classmethod
-    def serialize(cls: db.Model) -> List[dict]:
-        return [obj.serialized for obj in cls.visible()]
-
 
 job_device_table: Table = Table(
     "job_device_association",

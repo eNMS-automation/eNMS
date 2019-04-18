@@ -39,8 +39,9 @@ from typing import Any, Dict, List, Optional, Set, Tuple, Union
 from xmltodict import parse
 from yaml import load
 
+from eNMS.classes import classes
 from eNMS.extensions import controller, db, scheduler, USE_VAULT, vault_client
-from eNMS.functions import add_classes, fetch, fetch_all, objectify, session_scope
+from eNMS.functions import fetch, fetch_all, objectify, session_scope
 from eNMS.helpers import scheduler_job
 from eNMS.properties import (
     cls_to_properties,
@@ -54,6 +55,12 @@ from eNMS.properties import (
     private_properties,
     sql_types,
 )
+
+
+def register_class(*args, **kwargs):
+    cls = type(*args, **kwargs)
+    classes.update({cls.__tablename__: cls, cls.__tablename__.lower(): cls})
+    return cls
 
 
 class Base(db.Model):
@@ -152,9 +159,6 @@ class Base(db.Model):
                         else getattr(self, property).get_properties()
                     )
             if hasattr(self, f"{property}s"):
-                # a workflow has edges: we need to know not only the edge
-                # properties, but also the properties of its source and
-                # destination: we need the serialized edge.
                 properties[f"{property}s"] = [
                     obj.id if export else obj.get_properties()
                     for obj in getattr(self, f"{property}s")
@@ -250,7 +254,7 @@ pool_user_table: Table = Table(
 )
 
 
-class User(Base, UserMixin):
+class User(Base, UserMixin, metaclass=register_class):
 
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)
@@ -283,7 +287,7 @@ class User(Base, UserMixin):
         return self.is_admin or permission in self.permissions
 
 
-class Instance(Base):
+class Instance(Base, metaclass=register_class):
 
     __tablename__ = type = "Instance"
     id = Column(Integer, primary_key=True)
@@ -307,7 +311,7 @@ class Instance(Base):
         ]
 
 
-class Parameters(Base):
+class Parameters(Base, metaclass=register_class):
 
     __tablename__ = type = "Parameters"
     id = Column(Integer, primary_key=True)
@@ -398,7 +402,7 @@ class Parameters(Base):
         return self.gotty_start_port + self.gotty_port_index % self.gotty_range
 
 
-class Log(Base):
+class Log(Base, metaclass=register_class):
 
     __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
@@ -445,7 +449,7 @@ class SyslogUDPHandler(BaseRequestHandler):
                 db.session.commit()
 
 
-class SyslogServer(Base):
+class SyslogServer(Base, metaclass=register_class):
 
     __tablename__ = type = "SyslogServer"
     id = Column(Integer, primary_key=True)
@@ -468,7 +472,7 @@ class SyslogServer(Base):
         th.start()
 
 
-class Object(Base):
+class Object(Base, metaclass=register_class):
 
     __tablename__ = "Object"
     type = Column(String(255))
@@ -502,7 +506,7 @@ CustomDevice: Any = (
 )
 
 
-class Device(CustomDevice):
+class Device(CustomDevice, metaclass=register_class):
 
     __tablename__ = "Device"
     __mapper_args__ = {"polymorphic_identity": "Device"}
@@ -573,7 +577,7 @@ class Device(CustomDevice):
         return f"{self.name} ({self.model})"
 
 
-class Link(Object):
+class Link(Object, metaclass=register_class):
 
     __tablename__ = "Link"
     __mapper_args__ = {"polymorphic_identity": "Link"}
@@ -676,7 +680,7 @@ AbstractPool: Any = type(
 )
 
 
-class Pool(AbstractPool):
+class Pool(AbstractPool, metaclass=register_class):
 
     __tablename__ = type = "Pool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
@@ -749,7 +753,7 @@ class Pool(AbstractPool):
         self.links = list(filter(self.object_match, Link.query.all()))
 
 
-class Job(Base):
+class Job(Base, metaclass=register_class):
 
     __tablename__ = "Job"
     type = Column(String(255))
@@ -1001,7 +1005,7 @@ class Job(Base):
             return self.get_results(payload)
 
 
-class Service(Job):
+class Service(Job, metaclass=register_class):
 
     __tablename__ = "Service"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
@@ -1121,7 +1125,7 @@ class Service(Job):
                     getattr(scp, self.direction)(source, destination)
 
 
-class WorkflowEdge(Base):
+class WorkflowEdge(Base, metaclass=register_class):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
@@ -1147,7 +1151,7 @@ class WorkflowEdge(Base):
     )
 
 
-class Workflow(Job):
+class Workflow(Job, metaclass=register_class):
 
     __tablename__ = "Workflow"
     __mapper_args__ = {"polymorphic_identity": "Workflow"}
@@ -1222,7 +1226,7 @@ class Workflow(Job):
         return results
 
 
-class LogRule(Base):
+class LogRule(Base, metaclass=register_class):
 
     __tablename__ = type = "LogRule"
     id = Column(Integer, primary_key=True)
@@ -1245,7 +1249,7 @@ class LogRule(Base):
         ]
 
 
-class Task(Base):
+class Task(Base, metaclass=register_class):
 
     __tablename__ = "Task"
     type = "Task"
@@ -1381,7 +1385,8 @@ class Task(Base):
             scheduler.reschedule_job(default.pop("id"), **trigger)
 
 
-add_classes(
+classes = {}
+for model in (
     Device,
     Instance,
     Job,
@@ -1395,4 +1400,5 @@ add_classes(
     User,
     Workflow,
     WorkflowEdge,
-)
+):
+    classes.update({model.__tablename__: model, model.__tablename__.lower(): model})

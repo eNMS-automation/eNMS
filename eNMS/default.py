@@ -1,7 +1,7 @@
 from flask import Flask
 
 from eNMS.extensions import db
-from eNMS.classes import classes
+from eNMS.models import classes
 from eNMS.functions import factory, integrity_rollback, fetch, get_one
 from eNMS.properties import parameters_public_properties
 

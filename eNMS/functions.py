@@ -18,11 +18,6 @@ from eNMS.extensions import bp, controller, db
 from eNMS.classes import classes
 
 
-def add_classes(*models: db.Model) -> None:
-    for model in models:
-        classes.update({model.__tablename__: model, model.__tablename__.lower(): model})
-
-
 def fetch(model: str, **kwargs: Any) -> db.Model:
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
@@ -99,11 +94,6 @@ def integrity_rollback(function: Callable) -> Callable:
     return wrapper
 
 
-def process_request(function: Callable) -> Callable:
-
-    return wrapper
-
-
 def permission_required(permission: Optional[str], redirect: bool = True) -> Callable:
     def decorator(f: Callable) -> Callable:
         @wraps(f)
@@ -120,37 +110,28 @@ def permission_required(permission: Optional[str], redirect: bool = True) -> Cal
     return decorator
 
 
-def templated(function: Callable) -> Callable:
-    @wraps(function)
-    def decorated_function(*args: Any, **kwargs: Any) -> Any:
-        ctx = function(*args, **kwargs) or {}
-        if not isinstance(ctx, dict):
-            return ctx
-        if request.url is not None:
-            endpoint = request.url.split("/")[-1]
-        ctx["endpoint"] = endpoint
-        return render_template(
-            f"{ctx.pop('template', 'pages/' + endpoint)}.html", **ctx
-        )
-
-    return decorated_function
-
-
 def get(
     url: str, permission: Optional[str] = None, method: List[str] = ["GET"]
 ) -> Callable[[Callable], Callable]:
     def outer(func: Callable) -> Callable:
         @bp.route(url, methods=method)
-        @templated
         @login_required
         @permission_required(permission)
         @wraps(func)
         def inner(*args: Any, **kwargs: Any) -> Response:
+            ctx = func(*args, **kwargs) or {}
+            if not isinstance(ctx, dict):
+                return ctx
+            if request.url is not None:
+                endpoint = request.url.split("/")[-1]
+            ctx["endpoint"] = endpoint
             info(
                 f"User '{current_user.name}' ({request.remote_addr})"
                 f"calling the endpoint {url} (GET)"
             )
-            return func(*args, **kwargs)
+            return render_template(
+                f"{ctx.pop('template', 'pages/' + endpoint)}.html", **ctx
+            )
 
         return inner
 

@@ -1,8 +1,21 @@
 from flask import Flask
+from uuid import getnode
 
 from eNMS.extensions import db, classes
 from eNMS.functions import factory, integrity_rollback, fetch, get_one
 from eNMS.properties import parameters_public_properties
+
+
+def configure_instance_id() -> None:
+    factory(
+        "Instance",
+        **{
+            "name": str(getnode()),
+            "description": "Localhost",
+            "ip_address": "0.0.0.0",
+            "status": "Up",
+        },
+    )
 
 
 def create_default_users() -> None:
@@ -168,6 +181,7 @@ def create_default_tasks(app: Flask) -> None:
 
 
 def create_default(app: Flask) -> None:
+    configure_instance_id()
     create_default_parameters(app)
     parameters = get_one("Parameters")
     create_default_users()

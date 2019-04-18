@@ -10,7 +10,6 @@ from os.path import exists
 from sqlalchemy import exc
 from string import punctuation
 from typing import Any, Callable, Generator, List, Optional, Tuple
-from uuid import getnode
 from yaml import dump, load, BaseLoader
 
 # from eNMS.default import create_default
@@ -197,18 +196,6 @@ def str_dict(input: Any, depth: int = 0) -> str:
 
 def strip_all(input: str) -> str:
     return input.translate(str.maketrans("", "", f"{punctuation} "))
-
-
-def configure_instance_id() -> None:
-    factory(
-        "Instance",
-        **{
-            "name": str(getnode()),
-            "description": "Localhost",
-            "ip_address": "0.0.0.0",
-            "status": "Up",
-        },
-    )
 
 
 def migrate_export(app: Flask, request: dict) -> bool:

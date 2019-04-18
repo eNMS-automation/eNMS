@@ -4,7 +4,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from eNMS.models import Device, register_class, Service
 
 
-class UpdateInventoryService(Service):
+class UpdateInventoryService(Service, metaclass=register_class):
 
     __tablename__ = "UpdateInventoryService"
 

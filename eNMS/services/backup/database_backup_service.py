@@ -11,7 +11,7 @@ from eNMS.functions import migrate_export, strip_all
 from eNMS.properties import import_properties
 
 
-class DatabaseBackupService(Service):
+class DatabaseBackupService(Service, metaclass=register_class):
 
     __tablename__ = "DatabaseBackupService"
 

@@ -5,7 +5,7 @@ from typing import Optional
 from eNMS.models import Device, register_class, Service
 
 
-class UnixCommandService(Service):
+class UnixCommandService(Service, metaclass=register_class):
 
     __tablename__ = "UnixCommandService"
 

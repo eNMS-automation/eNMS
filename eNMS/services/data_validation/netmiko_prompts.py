@@ -5,7 +5,7 @@ from eNMS.helpers import NETMIKO_DRIVERS
 from eNMS.models import Device, register_class, Service
 
 
-class NetmikoPromptsService(Service):
+class NetmikoPromptsService(Service, metaclass=register_class):
 
     __tablename__ = "NetmikoPromptsService"
 

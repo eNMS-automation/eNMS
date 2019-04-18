@@ -3,7 +3,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from eNMS.models import Device, register_class, Service
 
 
-class ConfigureBgpService(Service):
+class ConfigureBgpService(Service, metaclass=register_class):
 
     __tablename__ = "ConfigureBgpService"
 

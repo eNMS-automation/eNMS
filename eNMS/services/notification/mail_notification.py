@@ -6,7 +6,7 @@ from eNMS.models import register_class, Service
 from eNMS.functions import get_one
 
 
-class MailNotificationService(Service):
+class MailNotificationService(Service, metaclass=register_class):
 
     __tablename__ = "MailNotificationService"
 

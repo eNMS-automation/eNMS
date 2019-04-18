@@ -7,7 +7,7 @@ from logging import info
 from eNMS.models import Device, register_class, Service
 
 
-class GenericFileTransferService(Service):
+class GenericFileTransferService(Service, metaclass=register_class):
 
     __tablename__ = "GenericFileTransferService"
 

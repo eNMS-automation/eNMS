@@ -9,7 +9,7 @@ from eNMS.models import Device, register_class, Service
 from eNMS.functions import str_dict
 
 
-class NapalmBackupService(Service):
+class NapalmBackupService(Service, metaclass=register_class):
 
     __tablename__ = "NapalmBackupService"
 

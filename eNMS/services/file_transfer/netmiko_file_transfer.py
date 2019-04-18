@@ -5,7 +5,7 @@ from eNMS.helpers import NETMIKO_SCP_DRIVERS
 from eNMS.models import Device, register_class, Service
 
 
-class NetmikoFileTransferService(Service):
+class NetmikoFileTransferService(Service, metaclass=register_class):
 
     __tablename__ = "NetmikoFileTransferService"
 

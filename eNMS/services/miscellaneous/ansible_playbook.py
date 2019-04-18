@@ -7,7 +7,7 @@ from subprocess import check_output
 from eNMS.models import Device, register_class, Service
 
 
-class AnsiblePlaybookService(Service):
+class AnsiblePlaybookService(Service, metaclass=register_class):
 
     __tablename__ = "AnsiblePlaybookService"
 

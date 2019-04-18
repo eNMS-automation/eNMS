@@ -13,7 +13,7 @@ from typing import Optional
 from eNMS.models import Device, register_class, Service
 
 
-class RestCallService(Service):
+class RestCallService(Service, metaclass=register_class):
 
     __tablename__ = "RestCallService"
 

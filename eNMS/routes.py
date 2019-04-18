@@ -57,6 +57,7 @@ from eNMS.forms import (
     WorkflowBuilderForm,
 )
 from eNMS.functions import (
+    classes,
     delete,
     delete_all,
     factory,
@@ -69,6 +70,7 @@ from eNMS.functions import (
     migrate_import,
     objectify,
     post,
+    service_classes,
     str_dict,
 )
 from eNMS.properties import (
@@ -331,7 +333,6 @@ def filtering(table: str) -> Response:
 
 @post("/view_filtering/<filter_type>")
 def view_filtering(filter_type: str):
-    print(request.form)
     model = filter_type.split("_")[0]
     model = classes[model]
     properties = table_properties[model] + ["current_configuration"]

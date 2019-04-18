@@ -6,7 +6,7 @@ from eNMS.functions import get_one
 from eNMS.models import register_class, Service
 
 
-class MattermostNotificationService(Service):
+class MattermostNotificationService(Service, metaclass=register_class):
 
     __tablename__ = "MattermostNotificationService"
 

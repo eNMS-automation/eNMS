@@ -23,7 +23,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS.models import register_class, Service
 
 
-class ExampleService(Service):
+class ExampleService(Service, metaclass=register_class):
 
     __tablename__ = "ExampleService"
 

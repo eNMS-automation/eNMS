@@ -13,7 +13,7 @@ from sqlalchemy import Boolean, Float, Integer, PickleType
 from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
-from eNMS.cl import classes, service_classes
+from eNMS.functions import classes, service_classes
 from eNMS.config import Config
 from eNMS.extensions import (
     controller,

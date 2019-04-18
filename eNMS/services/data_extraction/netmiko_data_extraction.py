@@ -5,7 +5,7 @@ from eNMS.helpers import NETMIKO_DRIVERS
 from eNMS.models import Device, register_class, Service
 
 
-class NetmikoDataExtractionService(Service):
+class NetmikoDataExtractionService(Service, metaclass=register_class):
 
     __tablename__ = "NetmikoDataExtractionService"
 

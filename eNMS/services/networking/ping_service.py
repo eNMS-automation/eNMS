@@ -5,7 +5,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from eNMS.models import Device, register_class, Service
 
 
-class PingService(Service):
+class PingService(Service, metaclass=register_class):
 
     __tablename__ = "PingService"
 

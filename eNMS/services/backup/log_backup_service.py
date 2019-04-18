@@ -11,7 +11,7 @@ from eNMS.models import Device, register_class, Service
 from eNMS.functions import fetch_all, strip_all
 
 
-class LogBackupService(Service):
+class LogBackupService(Service, metaclass=register_class):
 
     __tablename__ = "LogBackupService"
 

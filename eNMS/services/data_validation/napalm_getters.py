@@ -5,7 +5,7 @@ from eNMS.helpers import NAPALM_DRIVERS
 from eNMS.models import Device, register_class, Service
 
 
-class NapalmGettersService(Service):
+class NapalmGettersService(Service, metaclass=register_class):
 
     __tablename__ = "NapalmGettersService"
 

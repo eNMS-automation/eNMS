@@ -1,2 +1,0 @@
-classes = {}
-service_classes = {}

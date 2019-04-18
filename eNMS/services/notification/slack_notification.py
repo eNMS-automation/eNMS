@@ -5,7 +5,7 @@ from eNMS.functions import get_one
 from eNMS.models import register_class, Service
 
 
-class SlackNotificationService(Service):
+class SlackNotificationService(Service, metaclass=register_class):
 
     __tablename__ = "SlackNotificationService"
 

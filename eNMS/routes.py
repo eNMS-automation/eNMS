@@ -31,7 +31,6 @@ from sqlalchemy.exc import IntegrityError, DataError
 from subprocess import Popen
 from typing import Any, Dict, List, Union
 
-from eNMS.helpers import object_export, object_import, scheduler_job
 from eNMS.extensions import (
     bp,
     db,
@@ -56,7 +55,7 @@ from eNMS.forms import (
     OpenNmsForm,
     WorkflowBuilderForm,
 )
-from eNMS.functions import (
+from eNMS.framework import (
     classes,
     delete,
     delete_all,
@@ -73,6 +72,7 @@ from eNMS.functions import (
     service_classes,
     str_dict,
 )
+from eNMS.helpers import object_export, object_import, scheduler_job
 from eNMS.properties import (
     cls_to_properties,
     default_diagrams_properties,

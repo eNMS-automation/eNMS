@@ -6,7 +6,7 @@ from yaml import dump
 
 from eNMS.helpers import NAPALM_DRIVERS
 from eNMS.models import Device, register_class, Service
-from eNMS.functions import str_dict
+from eNMS.framework import str_dict
 
 
 class NapalmBackupService(Service, metaclass=register_class):

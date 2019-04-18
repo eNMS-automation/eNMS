@@ -12,7 +12,7 @@ from typing import Optional
 
 from eNMS.extensions import mail_client
 from eNMS.models import Device, register_class, Service
-from eNMS.functions import factory, fetch_all, get_one, str_dict
+from eNMS.framework import factory, fetch_all, get_one, str_dict
 
 
 class SwissArmyKnifeService(Service, metaclass=register_class):

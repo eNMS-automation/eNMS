@@ -40,7 +40,7 @@ from xmltodict import parse
 from yaml import load
 
 from eNMS.extensions import controller, db, scheduler, USE_VAULT, vault_client
-from eNMS.functions import (
+from eNMS.framework import (
     classes,
     service_classes,
     fetch,

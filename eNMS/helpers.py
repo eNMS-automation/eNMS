@@ -12,7 +12,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.extensions import controller, db
-from eNMS.functions import (
+from eNMS.framework import (
     delete_all,
     factory,
     fetch_all,

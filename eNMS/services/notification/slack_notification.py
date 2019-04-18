@@ -1,7 +1,7 @@
 from slackclient import SlackClient
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.functions import get_one
+from eNMS.framework import get_one
 from eNMS.models import register_class, Service
 
 

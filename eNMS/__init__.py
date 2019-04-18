@@ -13,8 +13,10 @@ from sqlalchemy import Boolean, Float, Integer, PickleType
 from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
-from eNMS.functions import classes, service_classes
+from eNMS.cli import configure_cli
 from eNMS.config import Config
+from eNMS.default import create_default
+from eNMS.examples import create_examples
 from eNMS.extensions import (
     controller,
     db,
@@ -25,14 +27,9 @@ from eNMS.extensions import (
     USE_VAULT,
     vault_client,
 )
-from eNMS.cli import configure_cli
-from eNMS.default import create_default
-from eNMS.examples import create_examples
+from eNMS.framework import classes, fetch, service_classes
 from eNMS.forms import form_properties
-from eNMS.rest import configure_rest_api
 from eNMS.models import SyslogServer, User
-from eNMS.functions import fetch
-
 from eNMS.properties import (
     boolean_properties,
     cls_to_properties,
@@ -44,6 +41,7 @@ from eNMS.properties import (
     property_types,
     service_import_properties,
 )
+from eNMS.rest import configure_rest_api
 
 
 import eNMS.routes

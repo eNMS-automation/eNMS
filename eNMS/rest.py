@@ -8,9 +8,8 @@ from uuid import getnode
 from typing import Union
 
 from eNMS.extensions import auth, scheduler
-from eNMS.functions import migrate_export, migrate_import
+from eNMS.framework import delete, factory, fetch, migrate_export, migrate_import
 from eNMS.helpers import object_export, object_import, scheduler_job
-from eNMS.functions import delete, factory, fetch
 
 
 @auth.get_password

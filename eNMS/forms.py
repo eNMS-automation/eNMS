@@ -11,7 +11,7 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.functions import choices
+from eNMS.framework import choices
 from eNMS.helpers import NAPALM_DRIVERS, NETMIKO_DRIVERS
 from eNMS.properties import (
     custom_properties,

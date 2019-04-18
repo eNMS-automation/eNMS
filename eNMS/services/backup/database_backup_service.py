@@ -7,7 +7,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
 from eNMS.models import Device, register_class, Service
-from eNMS.functions import migrate_export, strip_all
+from eNMS.framework import migrate_export, strip_all
 from eNMS.properties import import_properties
 
 

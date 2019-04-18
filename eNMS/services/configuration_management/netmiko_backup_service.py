@@ -5,7 +5,7 @@ from yaml import dump
 
 from eNMS.helpers import NETMIKO_DRIVERS
 from eNMS.models import Service
-from eNMS.classes import service_classes
+from eNMS.extensions import service_classes
 from eNMS.models import Device
 
 

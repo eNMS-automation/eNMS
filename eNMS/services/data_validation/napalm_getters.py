@@ -3,7 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS.helpers import NAPALM_DRIVERS
 from eNMS.models import Service
-from eNMS.classes import service_classes
+from eNMS.extensions import service_classes
 from eNMS.models import Device
 
 

@@ -3,7 +3,7 @@ from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.models import Service
-from eNMS.classes import service_classes
+from eNMS.extensions import service_classes
 from eNMS.models import Device
 
 

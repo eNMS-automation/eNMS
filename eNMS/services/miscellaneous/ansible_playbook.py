@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 
 from eNMS.models import Service
-from eNMS.classes import service_classes
+from eNMS.extensions import service_classes
 from eNMS.models import Device
 
 

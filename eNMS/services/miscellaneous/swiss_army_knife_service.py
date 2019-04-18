@@ -13,7 +13,7 @@ from typing import Optional
 from eNMS.extensions import mail_client
 from eNMS.models import Device, register_class, Service
 
-# from eNMS.classes import service_classes
+# from eNMS.extensions import service_classes
 from eNMS.functions import factory, fetch_all, get_one, str_dict
 
 

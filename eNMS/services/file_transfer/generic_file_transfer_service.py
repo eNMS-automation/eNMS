@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from logging import info
 
 from eNMS.models import Service
-from eNMS.classes import service_classes
+from eNMS.extensions import service_classes
 from eNMS.models import Device
 
 

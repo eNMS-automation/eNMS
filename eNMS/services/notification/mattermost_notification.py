@@ -4,7 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.functions import get_one
 from eNMS.models import Service
-from eNMS.classes import service_classes
+from eNMS.extensions import service_classes
 
 
 class MattermostNotificationService(Service):

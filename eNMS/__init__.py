@@ -20,6 +20,7 @@ from eNMS.extensions import (
     login_manager,
     mail_client,
     bp,
+    service_classes,
     USE_SYSLOG,
     USE_VAULT,
     vault_client,
@@ -93,10 +94,6 @@ def configure_database(app: Flask) -> None:
     @app.before_first_request
     def initialize_database() -> None:
         db.create_all()
-        configure_instance_id()
-        create_default(app)
-        if app.config["CREATE_EXAMPLES"]:
-            create_examples(app)
 
 
 def configure_context_processor(app) -> None:
@@ -206,6 +203,10 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_errors(app)
     configure_google_earth(path)
     configure_services(path)
+    # configure_instance_id()
+    # create_default(app)
+    # if app.config["CREATE_EXAMPLES"]:
+    #     create_examples(app)
     configure_cli(app)
     if USE_VAULT:
         configure_vault_client(app)

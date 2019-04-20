@@ -139,79 +139,6 @@ def advanced() -> dict:
     )
 
 
-@post("/clear_configurations/<int:device_id>", "Edit")
-def clear_configurations(device_id: int) -> bool:
-    fetch("Device", id=device_id).configurations = {}
-    db.session.commit()
-    return True
-
-
-@post("/clear_results/<int:job_id>", "Edit")
-def clear_results(job_id: int) -> bool:
-    fetch("Job", id=job_id).results = {}
-    db.session.commit()
-    return True
-
-
-@get("/dashboard")
-def dashboard() -> dict:
-    on_going = {
-        "Running services": len(
-            [service for service in fetch_all("Service") if service.status == "Running"]
-        ),
-        "Running workflows": len(
-            [
-                workflow
-                for workflow in fetch_all("Workflow")
-                if workflow.status == "Running"
-            ]
-        ),
-        "Scheduled tasks": len(
-            [task for task in fetch_all("Task") if task.status == "Active"]
-        ),
-    }
-    return dict(
-        properties=type_to_diagram_properties,
-        default_properties=default_diagrams_properties,
-        counters={**{cls: len(fetch_all_visible(cls)) for cls in classes}, **on_going},
-    )
-
-
-@post("/delete_node/<int:workflow_id>/<int:job_id>", "Edit")
-def delete_node(workflow_id: int, job_id: int) -> dict:
-    workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
-    workflow.jobs.remove(job)
-    now = str(datetime.now())
-    workflow.last_modified = now
-    db.session.commit()
-    return {"job": job.serialized, "update_time": now}
-
-
-@post("/duplicate_workflow/<int:workflow_id>", "Edit")
-def duplicate_workflow(workflow_id: int) -> dict:
-    parent_workflow = fetch("Workflow", id=workflow_id)
-    new_workflow = factory("Workflow", **request.form)
-    for job in parent_workflow.jobs:
-        new_workflow.jobs.append(job)
-        job.positions[new_workflow.name] = job.positions[parent_workflow.name]
-    for edge in parent_workflow.edges:
-        subtype, src, destination = edge.subtype, edge.source, edge.destination
-        new_workflow.edges.append(
-            factory(
-                "WorkflowEdge",
-                **{
-                    "name": f"{new_workflow.id}-{subtype}:{src.id}->{destination.id}",
-                    "workflow": new_workflow.id,
-                    "subtype": subtype,
-                    "source": src.id,
-                    "destination": destination.id,
-                },
-            )
-        )
-    db.session.commit()
-    return new_workflow.serialized
-
-
 @get("/calendar", "View")
 def calendar() -> dict:
     tasks = {}
@@ -232,6 +159,20 @@ def calendar() -> dict:
         ]
         tasks[task.name] = {**task.serialized, **{"date": js_date}}
     return dict(tasks=tasks)
+
+
+@post("/clear_configurations/<int:device_id>", "Edit")
+def clear_configurations(device_id: int) -> bool:
+    fetch("Device", id=device_id).configurations = {}
+    db.session.commit()
+    return True
+
+
+@post("/clear_results/<int:job_id>", "Edit")
+def clear_results(job_id: int) -> bool:
+    fetch("Job", id=job_id).results = {}
+    db.session.commit()
+    return True
 
 
 @post("/connection/<int:device_id>", "Connect to device")
@@ -270,6 +211,30 @@ def connection(device_id: int) -> dict:
     }
 
 
+@get("/dashboard")
+def dashboard() -> dict:
+    on_going = {
+        "Running services": len(
+            [service for service in fetch_all("Service") if service.status == "Running"]
+        ),
+        "Running workflows": len(
+            [
+                workflow
+                for workflow in fetch_all("Workflow")
+                if workflow.status == "Running"
+            ]
+        ),
+        "Scheduled tasks": len(
+            [task for task in fetch_all("Task") if task.status == "Active"]
+        ),
+    }
+    return dict(
+        properties=type_to_diagram_properties,
+        default_properties=default_diagrams_properties,
+        counters={**{cls: len(fetch_all_visible(cls)) for cls in classes}, **on_going},
+    )
+
+
 @post("/database_helpers", "Admin")
 def database_helpers() -> bool:
     delete_all(*request.form["deletion_types"])
@@ -302,6 +267,16 @@ def delete_instance(cls: str, id: str) -> dict:
     return instance
 
 
+@post("/delete_node/<int:workflow_id>/<int:job_id>", "Edit")
+def delete_node(workflow_id: int, job_id: int) -> dict:
+    workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
+    workflow.jobs.remove(job)
+    now = str(datetime.now())
+    workflow.last_modified = now
+    db.session.commit()
+    return {"job": job.serialized, "update_time": now}
+
+
 @get("/download_configuration/<name>", "View")
 def download_configuration(name: str) -> Response:
     try:
@@ -312,6 +287,31 @@ def download_configuration(name: str) -> Response:
         )
     except FileNotFoundError:
         return jsonify("No configuration stored")
+
+
+@post("/duplicate_workflow/<int:workflow_id>", "Edit")
+def duplicate_workflow(workflow_id: int) -> dict:
+    parent_workflow = fetch("Workflow", id=workflow_id)
+    new_workflow = factory("Workflow", **request.form)
+    for job in parent_workflow.jobs:
+        new_workflow.jobs.append(job)
+        job.positions[new_workflow.name] = job.positions[parent_workflow.name]
+    for edge in parent_workflow.edges:
+        subtype, src, destination = edge.subtype, edge.source, edge.destination
+        new_workflow.edges.append(
+            factory(
+                "WorkflowEdge",
+                **{
+                    "name": f"{new_workflow.id}-{subtype}:{src.id}->{destination.id}",
+                    "workflow": new_workflow.id,
+                    "subtype": subtype,
+                    "source": src.id,
+                    "destination": destination.id,
+                },
+            )
+        )
+    db.session.commit()
+    return new_workflow.serialized
 
 
 @post("/export_to_google_earth", "View")
@@ -650,6 +650,45 @@ def migration(direction: str) -> Union[bool, str]:
     return migrate_import(*args) if direction == "import" else migrate_export(*args)
 
 
+@post("/query_netbox", "Edit")
+def query_netbox() -> bool:
+    nb = netbox_api(request.form["netbox_address"], token=request.form["netbox_token"])
+    for device in nb.dcim.devices.all():
+        device_ip = device.primary_ip4 or device.primary_ip6
+        factory(
+            "Device",
+            **{
+                "name": device.name,
+                "ip_address": str(device_ip).split("/")[0],
+                "subtype": request.form["netbox_type"],
+                "longitude": 0.0,
+                "latitude": 0.0,
+            },
+        )
+    return True
+
+
+@post("/query_librenms", "Edit")
+def query_librenms() -> bool:
+    devices = http_get(
+        f'{request.form["librenms_address"]}/api/v0/devices',
+        headers={"X-Auth-Token": request.form["librenms_token"]},
+    ).json()["devices"]
+    for device in devices:
+        factory(
+            "Device",
+            **{
+                "name": device["hostname"],
+                "ip_address": device["ip"] or device["hostname"],
+                "subtype": request.form["librenms_type"],
+                "longitude": 0.0,
+                "latitude": 0.0,
+            },
+        )
+    db.session.commit()
+    return True
+
+
 @post("/query_opennms", "Edit")
 def query_opennms() -> bool:
     parameters = get_one("Parameters")
@@ -686,45 +725,6 @@ def query_opennms() -> bool:
             if interface["snmpPrimary"] == "P":
                 devices[device]["ip_address"] = interface["ipAddress"]
                 factory("Device", **devices[device])
-    db.session.commit()
-    return True
-
-
-@post("/query_netbox", "Edit")
-def query_netbox() -> bool:
-    nb = netbox_api(request.form["netbox_address"], token=request.form["netbox_token"])
-    for device in nb.dcim.devices.all():
-        device_ip = device.primary_ip4 or device.primary_ip6
-        factory(
-            "Device",
-            **{
-                "name": device.name,
-                "ip_address": str(device_ip).split("/")[0],
-                "subtype": request.form["netbox_type"],
-                "longitude": 0.0,
-                "latitude": 0.0,
-            },
-        )
-    return True
-
-
-@post("/query_librenms", "Edit")
-def query_librenms() -> bool:
-    devices = http_get(
-        f'{request.form["librenms_address"]}/api/v0/devices',
-        headers={"X-Auth-Token": request.form["librenms_token"]},
-    ).json()["devices"]
-    for device in devices:
-        factory(
-            "Device",
-            **{
-                "name": device["hostname"],
-                "ip_address": device["ip"] or device["hostname"],
-                "subtype": request.form["librenms_type"],
-                "longitude": 0.0,
-                "latitude": 0.0,
-            },
-        )
     db.session.commit()
     return True
 
@@ -787,25 +787,6 @@ def run_job(job_id: int) -> dict:
     return job.serialized
 
 
-@post("/scan_cluster", "Admin")
-def scan_cluster() -> bool:
-    parameters = get_one("Parameters")
-    protocol = parameters.cluster_scan_protocol
-    for ip_address in IPv4Network(parameters.cluster_scan_subnet):
-        try:
-            instance = http_get(
-                f"{protocol}://{ip_address}/rest/is_alive",
-                timeout=parameters.cluster_scan_timeout,
-            ).json()
-            if app.config["CLUSTER_ID"] != instance.pop("cluster_id"):
-                continue
-            factory("Instance", **{**instance, **{"ip_address": str(ip_address)}})
-        except ConnectionError:
-            continue
-    db.session.commit()
-    return True
-
-
 @post("/save_device_jobs/<int:device_id>", "Edit")
 def save_device_jobs(device_id: int) -> bool:
     fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
@@ -842,6 +823,25 @@ def save_positions(workflow_id: int) -> str:
         job.positions[workflow.name] = (position["x"], position["y"])
     db.session.commit()
     return now
+
+
+@post("/scan_cluster", "Admin")
+def scan_cluster() -> bool:
+    parameters = get_one("Parameters")
+    protocol = parameters.cluster_scan_protocol
+    for ip_address in IPv4Network(parameters.cluster_scan_subnet):
+        try:
+            instance = http_get(
+                f"{protocol}://{ip_address}/rest/is_alive",
+                timeout=parameters.cluster_scan_timeout,
+            ).json()
+            if app.config["CLUSTER_ID"] != instance.pop("cluster_id"):
+                continue
+            factory("Instance", **{**instance, **{"ip_address": str(ip_address)}})
+        except ConnectionError:
+            continue
+    db.session.commit()
+    return True
 
 
 @post("/scheduler/<action>", "Admin")

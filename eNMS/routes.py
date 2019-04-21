@@ -68,14 +68,7 @@ from eNMS.framework import (
     objectify,
     post,
 )
-from eNMS.helpers import (
-    migrate_export,
-    migrate_import,
-    object_export,
-    object_import,
-    scheduler_job,
-    str_dict,
-)
+from eNMS.helpers import migrate_export, migrate_import, scheduler_job, str_dict
 from eNMS.models import classes, service_classes
 from eNMS.properties import (
     cls_to_properties,
@@ -331,7 +324,7 @@ def export_to_google_earth() -> bool:
 
 @post("/export_topology", "View")
 def export_topology() -> bool:
-    return object_export(request.form, app.path)
+    return controller.object_export(request.form, app.path)
 
 
 @get("/filtering/<table>")
@@ -528,7 +521,7 @@ def import_export() -> dict:
 
 @post("/import_topology", "Edit")
 def import_topology() -> str:
-    return object_import(request.form, request.files["file"])
+    return controller.object_import(request.form, request.files["file"])
 
 
 @bp.route("/login", methods=["GET", "POST"])

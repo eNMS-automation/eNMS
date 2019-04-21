@@ -10,11 +10,6 @@ from os.path import exists
 from pathlib import Path, PosixPath
 from string import punctuation
 from typing import Any, Optional, Set
-from werkzeug.datastructures import FileStorage
-from werkzeug.utils import secure_filename
-from xlrd import open_workbook
-from xlrd.biffh import XLRDError
-from xlwt import Workbook
 from yaml import dump, load, BaseLoader
 
 from eNMS.controller import controller
@@ -26,12 +21,6 @@ from eNMS.properties import export_properties
 NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
 NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
 NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
-
-
-def allowed_file(name: str, allowed_modules: Set[str]) -> bool:
-    allowed_syntax = "." in name
-    allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
-    return allowed_syntax and allowed_extension
 
 
 def migrate_export(app: Flask, request: dict) -> bool:

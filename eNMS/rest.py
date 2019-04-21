@@ -7,14 +7,9 @@ from psutil import cpu_percent
 from uuid import getnode
 from typing import Union
 
+from eNMS.controller import controller
 from eNMS.framework import delete, factory, fetch
-from eNMS.helpers import (
-    migrate_export,
-    migrate_import,
-    object_export,
-    object_import,
-    scheduler_job,
-)
+from eNMS.helpers import migrate_export, migrate_import, scheduler_job
 from eNMS.modules import auth, scheduler
 
 
@@ -124,9 +119,9 @@ class Topology(Resource):
         if direction == "import":
             data = request.form.to_dict()
             data["replace"] = True if data["replace"] == "True" else False
-            return object_import(data, request.files["file"])
+            return controller.object_import(data, request.files["file"])
         else:
-            return object_export(request.get_json(), current_app.path)
+            return controller.object_export(request.get_json(), current_app.path)
 
 
 def configure_rest_api(app: Flask) -> None:

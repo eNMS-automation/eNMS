@@ -4,9 +4,15 @@ from flask import Flask
 from flask.wrappers import Response
 from flask_login import current_user
 from logging import info
+from pathlib import Path, PosixPath
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
-from typing import Generator
+from typing import Generator, Set
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
+from xlrd import open_workbook
+from xlrd.biffh import XLRDError
+from xlwt import Workbook
 
 from eNMS.framework import (
     delete,
@@ -99,11 +105,16 @@ class Controller:
         self.app = app
         self.session = session
 
+    def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
+        allowed_syntax = "." in name
+        allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
+        return allowed_syntax and allowed_extension
+
     def object_import(self, request: dict, file: FileStorage) -> str:
         if request["replace"]:
             delete_all("Device")
         result = "Topology successfully imported."
-        if allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
+        if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             book = open_workbook(file_contents=file.read())
             for obj_type in ("Device", "Link"):
                 try:

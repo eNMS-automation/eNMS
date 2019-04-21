@@ -265,7 +265,7 @@ function configureForm(form, id) {
   if (!formProperties[form]) return;
   formProperties[form].forEach((property) => {
     const propertyType = propertyTypes[property] || "str";
-    el = $(id ? `#${id}-${form}-${property}` : `#${form}-${property}`);
+    el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
     if (!el.length) el = $(`#${property}`);
     if (propertyType == "date") {
       const today = new Date();
@@ -328,7 +328,7 @@ function showTypePanel(type, id, duplicate) {
  */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
-    el = $(instance ? `#${instance.id}-${type}-${property}` : `#${type}-${property}`);
+    el = $(instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`);
     const propertyType = propertyTypes[property] || "str";
     if (propertyType.includes("bool") || property.includes("regex")) {
       el.prop("checked", value);

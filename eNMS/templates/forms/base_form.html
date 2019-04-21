@@ -1,4 +1,4 @@
-<form id="edit-{{ form_type }}-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+<form id="edit-{{ form_type }}-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
   <div class="modal-body">
     <div class="form-group">
       {% for field in form %}
@@ -20,6 +20,6 @@
     </div>
   </div>
   <center>
-    <button type="button" class="btn btn-success add-id btn-id" onclick="processData('{{ form_type }}')">Save</button>
+    <button type="button" class="btn btn-success add-id btn-id" value="processData">Save</button>
   </center>
 </form>

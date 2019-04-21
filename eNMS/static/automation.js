@@ -18,10 +18,9 @@ let refreshJob = {};
  */
 // eslint-disable-next-line
 function displayCustomForm(id) {
-  console.log($(id ? `#service-custom-form-${id}` : "#service-custom-form").length);
   call(`/get_service/${id || $("#service-type").val()}`, function(customForm) {
     for (const type of ["boolean", "list"]) {
-      const fields = $(`#service-${type}_fields-${id}`);
+      const fields = $(`#service-${type}_fields`);
       const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
       fields.val(`${fields.val()},${prop}`);
     }
@@ -36,7 +35,7 @@ function displayCustomForm(id) {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
-  $(id ? `#${id}-${type}-wizard` : `#${type}-wizard`).smartWizard({
+  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",

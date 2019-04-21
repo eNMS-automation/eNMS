@@ -1,3 +1,4 @@
+from collections import Counter
 from contextlib import contextmanager
 from flask import Flask
 from flask.wrappers import Response
@@ -7,7 +8,18 @@ from sqlalchemy import and_
 from sqlalchemy.orm import Session
 from typing import Generator
 
-from eNMS.framework import delete
+from eNMS.framework import (
+    delete,
+    delete_all,
+    factory,
+    fetch,
+    fetch_all,
+    fetch_all_visible,
+    get,
+    get_one,
+    objectify,
+    post,
+)
 from eNMS.models import classes, service_classes
 from eNMS.modules import (
     bp,
@@ -78,6 +90,10 @@ class Controller:
             attr: [getattr(instance, attr) for instance in fetch_all("Instance")]
             for attr in ("status", "cpu_load")
         }
+
+    def get_counters(self, property: str, type: str) -> Counter:
+        property = reverse_pretty_names.get(property, property)
+        return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
     def init_app(self, app: Flask, session: Session):
         self.app = app

@@ -367,9 +367,7 @@ def get_configuration_diff(device_id: int, v1: str, v2: str) -> dict:
 
 @post("/counters/<property>/<type>")
 def get_counters(property: str, type: str) -> Counter:
-    if property in reverse_pretty_names:
-        property = reverse_pretty_names[property]
-    return Counter(map(lambda o: str(getattr(o, property)), fetch_all(type)))
+    return controller.get_counters(property, type)
 
 
 @post("/get_device_logs/<int:device_id>", "View")

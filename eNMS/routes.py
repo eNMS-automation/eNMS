@@ -165,14 +165,12 @@ def calendar() -> dict:
 @post("/clear_configurations/<int:device_id>", "Edit")
 def clear_configurations(device_id: int) -> bool:
     fetch("Device", id=device_id).configurations = {}
-    db.session.commit()
     return True
 
 
 @post("/clear_results/<int:job_id>", "Edit")
 def clear_results(job_id: int) -> bool:
     fetch("Job", id=job_id).results = {}
-    db.session.commit()
     return True
 
 
@@ -248,7 +246,6 @@ def database_helpers() -> bool:
                 for date, log in job.logs.items()
                 if datetime.strptime(date, "%Y-%m-%d-%H:%M:%S.%f") > clear_date
             }
-        db.session.commit()
     return True
 
 
@@ -257,7 +254,6 @@ def delete_edge(workflow_id: int, edge_id: int) -> str:
     delete("WorkflowEdge", id=edge_id)
     now = str(datetime.now())
     fetch("Workflow", id=workflow_id).last_modified = now
-    db.session.commit()
     return now
 
 
@@ -272,7 +268,6 @@ def delete_node(workflow_id: int, job_id: int) -> dict:
     workflow.jobs.remove(job)
     now = str(datetime.now())
     workflow.last_modified = now
-    db.session.commit()
     return {"job": job.serialized, "update_time": now}
 
 
@@ -341,39 +336,7 @@ def export_topology() -> bool:
 
 @get("/filtering/<table>")
 def filtering(table: str) -> Response:
-    model = classes.get(table, classes["Device"])
-    properties = table_properties[table]
-    if table in ("configuration", "device"):
-        properties.append("current_configuration")
-    try:
-        order_property = properties[int(request.args["order[0][column]"])]
-    except IndexError:
-        order_property = "name"
-    order = getattr(getattr(model, order_property), request.args["order[0][dir]"])()
-    constraints = []
-    for property in properties:
-        value = request.args.get(f"form[{property}]")
-        if value:
-            constraints.append(getattr(model, property).contains(value))
-    result = db.session.query(model).filter(and_(*constraints)).order_by(order)
-    if table in ("device", "link", "configuration"):
-        pools = [int(id) for id in request.args.getlist("form[pools][]")]
-        if pools:
-            result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
-    return jsonify(
-        {
-            "draw": int(request.args["draw"]),
-            "recordsTotal": len(model.query.all()),
-            "recordsFiltered": len(result.all()),
-            "data": [
-                [getattr(obj, property) for property in properties]
-                + obj.generate_row(table)
-                for obj in result.limit(int(request.args["length"]))
-                .offset(int(request.args["start"]))
-                .all()
-            ],
-        }
-    )
+    return jsonify(controller.filtering(table, request.args))
 
 
 @post("/get_all/<cls>", "View")
@@ -384,16 +347,12 @@ def get_all_instances(cls: str) -> List[dict]:
 
 @post("/get_cluster_status", "View")
 def get_cluster_status() -> dict:
-    instances = fetch_all("Instance")
-    return {
-        attr: [getattr(instance, attr) for instance in instances]
-        for attr in ("status", "cpu_load")
-    }
+    return controller.get_cluster_status()
 
 
 @post("/get_configurations/<int:device_id>", "View")
 def get_configurations(device_id: int) -> dict:
-    return {str(k): v for k, v in fetch("Device", id=device_id).configurations.items()}
+    return fetch("Device", id=device_id).get_configurations()
 
 
 @post("/get_configuration_diff/<int:device_id>/<v1>/<v2>", "View")
@@ -408,10 +367,9 @@ def get_configuration_diff(device_id: int, v1: str, v2: str) -> dict:
 
 @post("/counters/<property>/<type>")
 def get_counters(property: str, type: str) -> Counter:
-    objects = fetch_all(type)
     if property in reverse_pretty_names:
         property = reverse_pretty_names[property]
-    return Counter(map(lambda o: str(getattr(o, property)), objects))
+    return Counter(map(lambda o: str(getattr(o, property)), fetch_all(type)))
 
 
 @post("/get_device_logs/<int:device_id>", "View")

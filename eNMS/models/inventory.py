@@ -104,6 +104,12 @@ class Device(CustomDevice, metaclass=register_class):
             elif self in pool.devices:
                 pool.devices.remove(self)
 
+    def get_configurations(self):
+        return {
+            str(date): configuration
+            for date, configuration in self.configurations.items()
+        }
+
     def generate_row(self, table: str) -> List[str]:
         if table == "device":
             return [

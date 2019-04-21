@@ -28,7 +28,7 @@ from eNMS.models.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.framework import fetch, session_scope
+from eNMS.framework import fetch
 from eNMS.models.base import Base
 from eNMS.models.inventory import Device
 
@@ -247,7 +247,7 @@ class Job(Base, metaclass=register_class):
         self, args: Tuple["Device", dict, dict, Optional["Workflow"]]
     ) -> None:
         with controller.app.app_context():
-            with session_scope() as session:
+            with controller.session_scope() as session:
                 device, results, payload, workflow = args
                 device_result = self.get_results(payload, device, workflow, True)
                 session.merge(workflow or self)

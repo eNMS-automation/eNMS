@@ -145,6 +145,7 @@ def post(url: str, permission: Optional[str] = None) -> Callable[[Callable], Cal
             )
             try:
                 result = func(*args, **kwargs)
+                db.session.commit()
                 return jsonify(result)
             except Exception as e:
                 return jsonify({"error": str(e)})

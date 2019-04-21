@@ -15,13 +15,13 @@ from typing import Any, Optional, Tuple, Type, Union
 
 from eNMS.cli import configure_cli
 from eNMS.config import Config
+from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
 from eNMS.framework import fetch
-from eNMS.extensions import (
+from eNMS.modules import (
     bp,
-    controller,
     db,
     login_manager,
     mail_client,
@@ -50,14 +50,13 @@ import eNMS.models.scheduling
 import eNMS.routes
 
 
-def register_extensions(app: Flask) -> None:
+def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
     db.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
     FlaskCLI(app)
-    controller.app = app
-    controller.session = db.create_scoped_session()
+    controller.init_app(app, db.create_scoped_session())
 
 
 def configure_login_manager(app: Flask) -> None:
@@ -198,7 +197,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     app = Flask(__name__, static_folder="static")
     app.config.from_object(config_class)  # type: ignore
     app.path = path
-    register_extensions(app)
+    register_modules(app)
     configure_login_manager(app)
     configure_database(app)
     configure_context_processor(app)

@@ -17,8 +17,9 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 from yaml import dump, load, BaseLoader
 
+from eNMS.controller import controller
 from eNMS.default import create_default
-from eNMS.extensions import controller, db
+from eNMS.modules import db
 from eNMS.framework import delete_all, export, factory, fetch_all, fetch, get_one
 from eNMS.properties import export_properties
 
@@ -27,9 +28,9 @@ NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
 NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
-def allowed_file(name: str, allowed_extensions: Set[str]) -> bool:
+def allowed_file(name: str, allowed_modules: Set[str]) -> bool:
     allowed_syntax = "." in name
-    allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_extensions
+    allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
     return allowed_syntax and allowed_extension
 
 
@@ -46,12 +47,12 @@ def object_import(request: dict, file: FileStorage) -> str:
                 continue
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
-                prop = dict(zip(properties, sheet.row_values(row_index)))
-                prop["dont_update_pools"] = True
+                values = dict(zip(properties, sheet.row_values(row_index)))
+                values["dont_update_pools"] = True
                 try:
-                    factory(obj_type, **prop).serialized
+                    factory(obj_type, **values).serialized
                 except Exception as e:
-                    info(f"{str(prop)} could not be imported ({str(e)})")
+                    info(f"{str(values)} could not be imported ({str(e)})")
                     result = "Partial import (see logs)."
             db.session.commit()
     for pool in fetch_all("Pool"):

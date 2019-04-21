@@ -15,7 +15,7 @@ from eNMS.helpers import (
     object_import,
     scheduler_job,
 )
-from eNMS.extensions import auth, scheduler
+from eNMS.modules import auth, scheduler
 
 
 @auth.get_password

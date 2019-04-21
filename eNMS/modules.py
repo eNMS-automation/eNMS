@@ -15,15 +15,8 @@ USE_TACACS = int(environ.get("USE_TACACS", False))
 USE_LDAP = int(environ.get("USE_LDAP", False))
 USE_VAULT = int(environ.get("USE_VAULT", False))
 
-
-class Controller:
-    app: Flask
-    session: Session
-
-
-controller = Controller()
-bp = Blueprint("bp", __name__, template_folder="templates")
 auth = HTTPBasicAuth()
+bp = Blueprint("bp", __name__, template_folder="templates")
 db = SQLAlchemy(session_options={"expire_on_commit": False, "autoflush": False})
 ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL) if USE_LDAP else None
 login_manager = LoginManager()

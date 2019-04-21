@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 from typing import Any, List, Optional, Tuple
 
 from eNMS.models import register_class
-from eNMS.extensions import db, scheduler
+from eNMS.modules import db, scheduler
 from eNMS.helpers import scheduler_job
 from eNMS.models.base import Base
 

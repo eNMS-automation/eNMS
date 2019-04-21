@@ -31,7 +31,8 @@ from sqlalchemy.exc import IntegrityError, DataError
 from subprocess import Popen
 from typing import Any, Dict, List, Union
 
-from eNMS.extensions import (
+from eNMS.controller import controller
+from eNMS.modules import (
     bp,
     db,
     ldap_client,
@@ -260,11 +261,9 @@ def delete_edge(workflow_id: int, edge_id: int) -> str:
     return now
 
 
-@post("/delete/<cls>/<id>", "Edit")
-def delete_instance(cls: str, id: str) -> dict:
-    instance = delete(cls, id=id)
-    info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
-    return instance
+@post("/delete/<cls>/<int:instance_id>", "Edit")
+def delete_instance(cls: str, instance_id: int) -> dict:
+    return controller.delete_instance(cls, instance_id)
 
 
 @post("/delete_node/<int:workflow_id>/<int:job_id>", "Edit")

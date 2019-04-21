@@ -1,4 +1,3 @@
-from contextlib import contextmanager
 from flask import abort, jsonify, request, render_template
 from flask.wrappers import Response
 from flask_login import current_user, login_required
@@ -7,7 +6,7 @@ from logging import info
 from sqlalchemy import exc
 from typing import Any, Callable, Generator, List, Optional, Tuple
 
-from eNMS.extensions import bp, controller, db
+from eNMS.modules import bp, db
 from eNMS.models import classes
 
 
@@ -153,17 +152,3 @@ def post(url: str, permission: Optional[str] = None) -> Callable[[Callable], Cal
         return inner
 
     return outer
-
-
-@contextmanager
-def session_scope() -> Generator:
-    session = controller.session()  # type: ignore
-    try:
-        yield session
-        session.commit()
-    except Exception as e:
-        info(str(e))
-        session.rollback()
-        raise e
-    finally:
-        controller.session.remove()

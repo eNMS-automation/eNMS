@@ -6,7 +6,7 @@ from threading import Thread
 from typing import List
 
 
-from eNMS.extensions import controller, db
+from eNMS.modules import controller, db
 from eNMS.models import register_class
 from eNMS.models.associations import job_log_rule_table, log_rule_log_table
 from eNMS.models.base import Base

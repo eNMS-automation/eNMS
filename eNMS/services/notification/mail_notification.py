@@ -2,7 +2,7 @@ from flask_mail import Message
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 from eNMS.framework import get_one
-from eNMS.extensions import mail_client
+from eNMS.modules import mail_client
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 

@@ -14,7 +14,7 @@ from eNMS.models import register_class
 from eNMS.models.associations import pool_user_table
 from eNMS.models.base import Base
 from eNMS.framework import fetch, fetch_all
-from eNMS.extensions import db
+from eNMS.modules import db
 
 
 class Instance(Base, metaclass=register_class):

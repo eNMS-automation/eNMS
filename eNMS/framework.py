@@ -45,7 +45,7 @@ def delete_all(*models: str) -> None:
 
 
 def choices(model: str) -> List[Tuple[int, str]]:
-    [(instance.id, str(instance)) for instance in classes[model].visible()]
+    return [(instance.id, str(instance)) for instance in classes[model].visible()]
 
 
 def export(model: str) -> List[dict]:

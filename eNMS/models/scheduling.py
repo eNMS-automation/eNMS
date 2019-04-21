@@ -8,8 +8,8 @@ from typing import Any, List, Optional, Tuple
 
 from eNMS.models import register_class
 from eNMS.extensions import db, scheduler
-from eNMS.automation.framework import scheduler_job
-from eNMS.models import Base
+from eNMS.helpers import scheduler_job
+from eNMS.models.base import Base
 
 
 class Task(Base, metaclass=register_class):

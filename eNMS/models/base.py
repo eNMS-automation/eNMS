@@ -1,11 +1,10 @@
 from flask_login import current_user as user
 from json import dumps, loads
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from typing import Any, List, Tuple
-from wtforms import SelectField, SelectMultipleField
+from typing import Any, List
 
 from eNMS.extensions import db, USE_VAULT, vault_client
-from eNMS.framework import fetch, objectify, choices
+from eNMS.framework import fetch, objectify
 from eNMS.properties import (
     cls_to_properties,
     dont_migrate,

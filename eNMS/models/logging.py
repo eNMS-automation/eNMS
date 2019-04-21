@@ -1,11 +1,9 @@
 from re import search
-from sqlalchemy import Boolean, case, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 from typing import List
-from xmltodict import parse
-from yaml import load
 
 
 from eNMS.extensions import controller, db

@@ -114,7 +114,8 @@ class Device(CustomDevice, metaclass=register_class):
                 f"""<button type="button" class="btn btn-primary btn-xs"
                 onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypePanel('device', '{self.id}', true)">Duplicate</button>""",
+                onclick="showTypePanel('device', '{self.id}', true)">
+                Duplicate</button>""",
                 f"""<button type="button" class="btn btn-danger btn-xs"
                 onclick="showDeletionPanel('device', '{self.id}')">Delete</button>""",
             ]

@@ -144,7 +144,7 @@ function addJobToWorkflow() {
       5
     );
   } else {
-    const url = `/automation/add_jobs_to_workflow/${workflow.id}`;
+    const url = `/add_jobs_to_workflow/${workflow.id}`;
     fCall(url, "#add-job-form", function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {
@@ -169,7 +169,7 @@ function addJobToWorkflow() {
  * @param {id} id - Id of the job to be deleted.
  */
 function deleteNode(id) {
-  call(`/automation/delete_node/${workflow.id}/${id}`, function(result) {
+  call(`/delete_node/${workflow.id}/${id}`, function(result) {
     lastModified = result.update_time;
     alertify.notify(
       `'${result.job.name}' deleted from the workflow.`,
@@ -185,7 +185,7 @@ function deleteNode(id) {
  */
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
-  call(`/automation/add_edge/${param}`, function(result) {
+  call(`/add_edge/${param}`, function(result) {
     lastModified = result.update_time;
     edges.add(edgeToEdge(result.edge));
     graph.addEdgeMode();
@@ -197,7 +197,7 @@ function saveEdge(edge) {
  * @param {edgeId} edgeId - Id of the edge to be deleted.
  */
 function deleteEdge(edgeId) {
-  call(`/automation/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
+  call(`/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
     lastModified = updateTime;
   });
 }

@@ -14,7 +14,7 @@ folders: false
 // eslint-disable-next-line
 function migrationsExport() {
   alertify.notify("Export initiated.", "success", 5);
-  fCall("/admin/migration_export", "#import-export-form", function() {
+  fCall("/migration_export", "#import-export-form", function() {
     alertify.notify("Export successful.", "success", 5);
   });
 }
@@ -25,7 +25,7 @@ function migrationsExport() {
 // eslint-disable-next-line
 function migrationsImport() {
   alertify.notify("Import initiated.", "success", 5);
-  fCall("/admin/migration_import", "#import-export-form", function(result) {
+  fCall("/migration_import", "#import-export-form", function(result) {
     alertify.notify(result, "success", 5);
   });
 }
@@ -36,7 +36,7 @@ function migrationsImport() {
 // eslint-disable-next-line
 function databaseHelpers() {
   alertify.notify("Starting to delete...", "success", 5);
-  fCall("/admin/database_helpers", "#database-helpers-form", function(result) {
+  fCall("/database_helpers", "#database-helpers-form", function(result) {
     alertify.notify("Deletion done.", "success", 5);
   });
 }
@@ -46,7 +46,7 @@ function databaseHelpers() {
  */
 // eslint-disable-next-line
 function resetStatus() {
-  call("/admin/reset_status", function(result) {
+  call("/reset_status", function(result) {
     alertify.notify("Reset successful.", "success", 5);
   });
 }
@@ -56,7 +56,7 @@ function resetStatus() {
  */
 // eslint-disable-next-line
 function getGitContent() {
-  call("/admin/get_git_content", function(result) {
+  call("/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);
   });
 }
@@ -67,7 +67,7 @@ function getGitContent() {
  */
 // eslint-disable-next-line
 function scheduler(action) {
-  call(`/admin/scheduler/${action}`, function() {
+  call(`/scheduler/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });
 }
@@ -78,7 +78,7 @@ function scheduler(action) {
 // eslint-disable-next-line
 function scanCluster() {
   alertify.notify("Scan started.", "success", 5);
-  call("/admin/scan_cluster", function(cluster) {
+  call("/scan_cluster", function(cluster) {
     alertify.notify("Scan completed.", "success", 5);
   });
 }

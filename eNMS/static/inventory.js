@@ -11,7 +11,7 @@ partial: false
  * @param {id} id - Device id.
  */
 function saveDeviceJobs(id) {
-  fCall(`/inventory/save_device_jobs/${id}`, `#${id}-device-automation-form`, function(device) {
+  fCall(`/save_device_jobs/${id}`, `#${id}-device-automation-form`, function(device) {
     alertify.notify("Changes saved.", "success", 5);
     $(`#automation-panel-${id}`).remove();
   });
@@ -22,7 +22,7 @@ function saveDeviceJobs(id) {
  * @param {id} id - Device id.
  */
 function sshConnection(id) {
-  fCall(`/inventory/connection/${id}`, `#${id}-connection-parameters-form`, function(result) {
+  fCall(`/connection/${id}`, `#${id}-connection-parameters-form`, function(result) {
     let url = result.server_addr;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
@@ -67,7 +67,7 @@ function showConfigurationPanel(id) {
  * Display configurations.
  */
 function displayConfigurations(id) {
-  call(`/inventory/get_configurations/${id}`, (configurations) => {
+  call(`/get_configurations/${id}`, (configurations) => {
     $(`#display-${id},#compare_with-${id}`).empty();
     const times = Object.keys(configurations);
     times.forEach((option) => {
@@ -87,7 +87,7 @@ function displayConfigurations(id) {
  */
 // eslint-disable-next-line
 function clearConfigurations(id) {
-  call(`/inventory/clear_configurations/${id}`, () => {
+  call(`/clear_configurations/${id}`, () => {
     $("#configurations").empty();
     alertify.notify("Configurations cleared.", "success", 5);
     $("#configurations-modal").modal("hide");
@@ -100,7 +100,7 @@ function clearConfigurations(id) {
 // eslint-disable-next-line
 function configureCallbacks(id) {
   $(`#display-${id}`).on("change", function() {
-    call(`/inventory/get_configurations/${id}`, (configurations) => {
+    call(`/get_configurations/${id}`, (configurations) => {
       $(`#configurations-${id}`).text(configurations[$(`#display-${id}`).val()]);
     });
   });
@@ -109,7 +109,7 @@ function configureCallbacks(id) {
     $(`#configurations-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
-    call(`/inventory/get_diff/${id}/${v1}/${v2}`, function(data) {
+    call(`/get_diff/${id}/${v1}/${v2}`, function(data) {
       $(`#configurations-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,
@@ -130,7 +130,7 @@ function configureCallbacks(id) {
  */
 // eslint-disable-next-line
 function savePoolObjects(id) {
-  fCall(`/inventory/save_pool_objects/${id}`, `#pool-objects-form-${id}`, function() {
+  fCall(`/save_pool_objects/${id}`, `#pool-objects-form-${id}`, function() {
     alertify.notify("Changes saved.", "success", 5);
     $(`#pool-object-panel-${id}`).remove();
   });
@@ -143,7 +143,7 @@ function savePoolObjects(id) {
 // eslint-disable-next-line
 function updatePool(pool) {
   alertify.notify("Update starting...", "success", 5);
-  call(`/inventory/update_pool/${pool}`, function() {
+  call(`/update_pool/${pool}`, function() {
     table.ajax.reload(null, false);
     alertify.notify("Update successful.", "success", 5);
   });

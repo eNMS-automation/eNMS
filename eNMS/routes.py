@@ -342,7 +342,7 @@ def export_topology() -> bool:
 
 @get("/filtering/<table>")
 def filtering(table: str) -> Response:
-    model = classes.get(table.capitalize(), classes["Device"])
+    model = classes.get(table, classes["Device"])
     properties = table_properties[table]
     if table in ("configuration", "device"):
         properties.append("current_configuration")

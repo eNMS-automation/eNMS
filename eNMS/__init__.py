@@ -30,6 +30,7 @@ from eNMS.extensions import (
     vault_client,
 )
 from eNMS.models import classes, service_classes
+from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
 from eNMS.properties import (
     boolean_properties,

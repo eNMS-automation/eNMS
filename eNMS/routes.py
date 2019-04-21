@@ -850,16 +850,6 @@ def scheduler_action(action: str) -> bool:
     return True
 
 
-@post("/shutdown", "Admin")
-def shutdown() -> str:
-    info(f"{current_user.name}: SHUTDOWN eNMS")
-    func = request.environ.get("werkzeug.server.shutdown")
-    if func is None:
-        raise RuntimeError("Not running with the Werkzeug Server")
-    func()
-    return "Server shutting down..."
-
-
 @bp.route("/")
 def site_root() -> Response:
     return redirect(url_for("bp.login"))
@@ -867,8 +857,7 @@ def site_root() -> Response:
 
 @post("/<action>_task/<int:task_id>", "Edit")
 def task_action(action: str, task_id: int) -> bool:
-    task = fetch("Task", id=task_id)
-    getattr(task, action)()
+    getattr(fetch("Task", id=task_id), action)()
     return True
 
 

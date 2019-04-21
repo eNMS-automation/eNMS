@@ -18,7 +18,7 @@ from xlwt import Workbook
 from yaml import dump, load, BaseLoader
 
 from eNMS.default import create_default
-from eNMS.main import controller, db
+from eNMS.extensions import controller, db
 from eNMS.framework import delete_all, export, factory, fetch_all, fetch, get_one
 from eNMS.properties import export_properties
 

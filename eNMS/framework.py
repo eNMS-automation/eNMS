@@ -7,7 +7,8 @@ from logging import info
 from sqlalchemy import exc
 from typing import Any, Callable, Generator, List, Optional, Tuple
 
-from eNMS.main import bp, classes, controller, db
+from eNMS.extensions import bp, controller, db
+from eNMS.models import classes
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:

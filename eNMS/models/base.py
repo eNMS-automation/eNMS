@@ -1,3 +1,21 @@
+from flask_login import current_user as user
+from json import dumps, loads
+from sqlalchemy.ext.mutable import MutableDict, MutableList
+from typing import Any, List, Tuple
+from wtforms import SelectField, SelectMultipleField
+
+from eNMS.extensions import db, USE_VAULT, vault_client
+from eNMS.functions import fetch, objectify, choices
+from eNMS.properties import (
+    cls_to_properties,
+    dont_migrate,
+    property_types,
+    boolean_properties,
+    relationships as rel,
+    private_properties,
+)
+
+
 class Base(db.Model):
 
     __abstract__ = True

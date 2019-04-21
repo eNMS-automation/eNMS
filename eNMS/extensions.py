@@ -23,8 +23,6 @@ class Controller:
 
 controller = Controller()
 bp = Blueprint("bp", __name__, template_folder="templates")
-classes = {}
-service_classes = {}
 auth = HTTPBasicAuth()
 db = SQLAlchemy(session_options={"expire_on_commit": False, "autoflush": False})
 ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL) if USE_LDAP else None

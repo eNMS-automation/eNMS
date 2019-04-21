@@ -34,49 +34,6 @@ def allowed_file(name: str, allowed_modules: Set[str]) -> bool:
     return allowed_syntax and allowed_extension
 
 
-def object_import(request: dict, file: FileStorage) -> str:
-    if request["replace"]:
-        delete_all("Device")
-    result = "Topology successfully imported."
-    if allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
-        book = open_workbook(file_contents=file.read())
-        for obj_type in ("Device", "Link"):
-            try:
-                sheet = book.sheet_by_name(obj_type)
-            except XLRDError:
-                continue
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                values["dont_update_pools"] = True
-                try:
-                    factory(obj_type, **values).serialized
-                except Exception as e:
-                    info(f"{str(values)} could not be imported ({str(e)})")
-                    result = "Partial import (see logs)."
-            db.session.commit()
-    for pool in fetch_all("Pool"):
-        pool.compute_pool()
-    db.session.commit()
-    info("Inventory import: Done.")
-    return result
-
-
-def object_export(request: dict, path_app: PosixPath) -> bool:
-    workbook = Workbook()
-    filename = request["export_filename"]
-    if "." not in filename:
-        filename += ".xls"
-    for obj_type in ("Device", "Link"):
-        sheet = workbook.add_sheet(obj_type)
-        for index, property in enumerate(export_properties[obj_type]):
-            sheet.write(0, index, property)
-            for obj_index, obj in enumerate(fetch_all(obj_type), 1):
-                sheet.write(obj_index, index, getattr(obj, property))
-    workbook.save(path_app / "projects" / filename)
-    return True
-
-
 def migrate_export(app: Flask, request: dict) -> bool:
     for cls_name in request["import_export_types"]:
         path = app.path / "migrations" / request["name"]

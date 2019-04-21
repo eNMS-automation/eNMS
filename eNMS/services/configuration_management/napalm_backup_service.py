@@ -5,7 +5,9 @@ from sqlalchemy.ext.mutable import MutableDict
 from yaml import dump
 
 from eNMS.helpers import NAPALM_DRIVERS, str_dict
-from eNMS.models import Device, register_class, Service
+from eNMS.models import register_class
+from eNMS.models.automation import Service
+from eNMS.models.inventory import Device
 
 
 class NapalmBackupService(Service, metaclass=register_class):

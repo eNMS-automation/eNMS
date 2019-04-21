@@ -2,7 +2,9 @@ from subprocess import check_output
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
 
-from eNMS.models import Device, register_class, Service
+from eNMS.models import register_class
+from eNMS.models.automation import Service
+from eNMS.models.inventory import Device
 
 
 class UnixCommandService(Service, metaclass=register_class):

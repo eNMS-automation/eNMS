@@ -2,7 +2,9 @@ from re import findall
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
 from eNMS.helpers import NETMIKO_DRIVERS
-from eNMS.models import Device, register_class, Service
+from eNMS.models import register_class
+from eNMS.models.automation import Service
+from eNMS.models.inventory import Device
 
 
 class NetmikoDataExtractionService(Service, metaclass=register_class):

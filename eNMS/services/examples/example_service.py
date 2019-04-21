@@ -20,7 +20,8 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.models import register_class, Service
+from eNMS.models import register_class
+from eNMS.models.automation import Service
 
 
 class ExampleService(Service, metaclass=register_class):

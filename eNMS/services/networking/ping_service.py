@@ -2,7 +2,9 @@ from socket import error, gaierror, socket, timeout
 from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from eNMS.models import Device, register_class, Service
+from eNMS.models import register_class
+from eNMS.models.automation import Service
+from eNMS.models.inventory import Device
 
 
 class PingService(Service, metaclass=register_class):

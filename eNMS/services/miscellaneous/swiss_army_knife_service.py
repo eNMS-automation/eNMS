@@ -13,7 +13,9 @@ from typing import Optional
 from eNMS.framework import factory, fetch_all, get_one
 from eNMS.helpers import str_dict
 from eNMS.main import mail_client
-from eNMS.models import Device, register_class, Service
+from eNMS.models import register_class
+from eNMS.models.automation import Service
+from eNMS.models.inventory import Device
 
 
 class SwissArmyKnifeService(Service, metaclass=register_class):

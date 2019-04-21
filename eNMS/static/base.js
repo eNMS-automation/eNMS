@@ -231,9 +231,7 @@ function preprocessForm(panel, id, type) {
     $(el).prop("id", `${el.id}-${id}`);
   });
   panel.querySelectorAll('.btn-id').forEach((el) => {
-    value = type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`;
-    console.log(value);
-    $(el).attr("onclick", value);
+    $(el).attr("onclick", type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`);
   });
 }
 

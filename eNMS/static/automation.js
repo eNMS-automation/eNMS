@@ -35,6 +35,7 @@ function displayCustomForm(id) {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
+  console.log($(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).length);
   $(id ? `#${id}-${type}-wizard` : `#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -50,9 +51,7 @@ function panelCode(type, id) {
     if (id) {
       $(`#${id}-service-type`).prop("disabled", true);
     } else {
-      console.log('test1');
       $("#service-type").change(function() {
-        console.log('test2');
         displayCustomForm();
       });
     }

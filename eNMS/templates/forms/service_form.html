@@ -41,7 +41,7 @@
       <div id="step-1" style="min-height: 60vh; overflow-x: hidden;">
         <label>Type of Service</label>
         <div class='form-group'>
-          <select class="form-control" id="service-type"></select>
+          <select class="form-control add-id" id="service-type"></select>
         </div>
         {% for field in form %}
           {% if field.widget.input_type == 'hidden' %}
@@ -50,29 +50,29 @@
         {% endfor %}
         <label><label for="name">Name</label></label>
         <div class='form-group'>
-          {{ form.name(id='service-name', class="form-control required") }}
+          {{ form.name(id='service-name', class="form-control add-id required") }}
         </div>
         <label><label for="description">Description</label></label>
         <div class='form-group'>
-          {{ form.description(id='service-description', class="form-control") }}
+          {{ form.description(id='service-description', class="form-control add-id") }}
         </div>
         <label><label for="vendor">Vendor</label></label>
         <div class='form-group'>
-          {{ form.vendor(id='service-vendor', class="form-control") }}
+          {{ form.vendor(id='service-vendor', class="form-control add-id") }}
         </div>
         <label><label for="operating_system">Operating System</label></label>
         <div class='form-group'>
-          {{ form.operating_system(id='service-operating_system', class="form-control") }}
+          {{ form.operating_system(id='service-operating_system', class="form-control add-id") }}
         </div>
       </div>
       <div id="step-2" style="min-height: 60vh; overflow-x: hidden;">
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class='form-group'>
-          {{ form.number_of_retries(id='service-number_of_retries', class="form-control") }}
+          {{ form.number_of_retries(id='service-number_of_retries', class="form-control add-id") }}
         </div>
         <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.time_between_retries(id='service-time_between_retries', class="form-control") }}
+          {{ form.time_between_retries(id='service-time_between_retries', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
@@ -82,7 +82,7 @@
         </fieldset>
         <label><label for="send_notification_method">Send Notification Method</label></label>
         <div class='form-group'>
-          {{ form.send_notification_method(id='service-send_notification_method', class="form-control") }}
+          {{ form.send_notification_method(id='service-send_notification_method', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
@@ -92,11 +92,11 @@
         </fieldset>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
-          {{ form.mail_recipient(id='service-mail_recipient', class="form-control") }}
+          {{ form.mail_recipient(id='service-mail_recipient', class="form-control add-id") }}
         </div>
         <label><label for="waiting_time">Waiting time (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.waiting_time(id='service-waiting_time', class="form-control") }}
+          {{ form.waiting_time(id='service-waiting_time', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
@@ -108,11 +108,11 @@
       <div id="step-3" style="min-height: 60vh; overflow-x: hidden;">
         <label><label for="devices">Devices</label></label>
         <div class='form-group'>
-          {{ form.devices(id='service-devices', class="form-control") }}
+          {{ form.devices(id='service-devices', class="form-control add-id") }}
         </div>
         <label><label for="pools">Pools</label></label>
         <div class='form-group'>
-          {{ form.pools(id='service-pools', class="form-control") }}
+          {{ form.pools(id='service-pools', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
@@ -122,15 +122,15 @@
         </fieldset>
         <label><label for="max_processes">Maximum number of processes</label></label>
         <div class='form-group'>
-          {{ form.max_processes(id='service-max_processes', class="form-control") }}
+          {{ form.max_processes(id='service-max_processes', class="form-control add-id") }}
         </div>
         <label><label for="credentials">Credentials</label></label>
         <div class='form-group'>
-          {{ form.credentials(id='service-credentials', class="form-control") }}
+          {{ form.credentials(id='service-credentials', class="form-control add-id") }}
         </div>
       </div>
       <div id="step-4" style="min-height: 60vh; overflow-x: hidden;">
-        <div id="service-custom-form"></div>
+        <div id="service-custom-form" class="add-id"></div>
       </div>
     </div>
   </div>

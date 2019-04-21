@@ -226,9 +226,10 @@ function showConnectionPanel(id) {
 /**
  * Preprocess form.
  */
-function preprocessForm(panel, id, type) {
+function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll('.add-id').forEach((el) => {
     $(el).prop("id", `${el.id}-${id}`);
+    if (duplicate && ["name", "id"].includes(el.name)) return;
   });
   panel.querySelectorAll('.btn-id').forEach((el) => {
     $(el).attr("onclick", type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`);
@@ -305,13 +306,7 @@ function showTypePanel(type, id, duplicate) {
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
           panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
-          $(`#edit-${type}-form`).prop("id", `${id}-edit-${type}-form`);
-          $("#save").prop("id", `${id}-save`);
-          $(`#${id}-save`).attr("onclick", `processData("${type}", ${id})`);
-          document.querySelectorAll('.add-id').forEach((el) => {
-            if (duplicate && ["name", "id"].includes(el.name)) return;
-            $(el).prop("id", `${id}-${el.id}`);
-          });
+          preprocessForm(panel, id, type, duplicate)
           configureForm(type, id);
           if (["service", "workflow"].includes(type)) panelCode(type, id);
           if (type !== "service") processInstance(type, instance);

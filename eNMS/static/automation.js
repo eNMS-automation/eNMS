@@ -18,13 +18,14 @@ let refreshJob = {};
  */
 // eslint-disable-next-line
 function displayCustomForm(id) {
+  console.log($(id ? `#service-custom-form-${id}` : "#service-custom-form").length);
   call(`/get_service/${id || $("#service-type").val()}`, function(customForm) {
     for (const type of ["boolean", "list"]) {
-      const fields = $(`#${id}-service-${type}_fields`);
+      const fields = $(`#service-${type}_fields-${id}`);
       const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
       fields.val(`${fields.val()},${prop}`);
     }
-    $(id ? `#${id}-service-custom-form` : "#service-custom-form").html(customForm.html);
+    $(id ? `#service-custom-form-${id}` : "#service-custom-form").html(customForm.html);
     if (customForm.service) processInstance("service", customForm.service);
   });
 }
@@ -35,7 +36,6 @@ function displayCustomForm(id) {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
-  console.log($(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).length);
   $(id ? `#${id}-${type}-wizard` : `#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -49,7 +49,7 @@ function panelCode(type, id) {
       );
     }
     if (id) {
-      $(`#${id}-service-type`).prop("disabled", true);
+      $(`#service-type-${id}`).prop("disabled", true);
     } else {
       $("#service-type").change(function() {
         displayCustomForm();

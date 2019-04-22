@@ -5,7 +5,9 @@ from eNMS.framework import factory, fetch, objectify
 
 
 class AutomationController:
-    def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
+    def add_edge(
+        self, workflow_id: int, subtype: str, source: int, destination: int
+    ) -> dict:
         workflow_edge = factory(
             "WorkflowEdge",
             **{
@@ -13,12 +15,11 @@ class AutomationController:
                 "workflow": workflow_id,
                 "subtype": subtype,
                 "source": source,
-                "destination": dest,
+                "destination": destination,
             },
         )
         now = str(datetime.now())
         fetch("Workflow", id=workflow_id).last_modified = now
-        db.session.commit()
         return {"edge": workflow_edge.serialized, "update_time": now}
 
     def add_jobs_to_workflow(self, workflow_id: int, form: dict) -> Dict[str, Any]:

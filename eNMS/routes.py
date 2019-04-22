@@ -86,22 +86,9 @@ from eNMS.properties import (
 )
 
 
-@post("/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:dest>", "Edit")
-def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
-    workflow_edge = factory(
-        "WorkflowEdge",
-        **{
-            "name": f"{workflow_id}-{subtype}:{source}->{dest}",
-            "workflow": workflow_id,
-            "subtype": subtype,
-            "source": source,
-            "destination": dest,
-        },
-    )
-    now = str(datetime.now())
-    fetch("Workflow", id=workflow_id).last_modified = now
-    db.session.commit()
-    return {"edge": workflow_edge.serialized, "update_time": now}
+@post("/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:destination>", "Edit")
+def add_edge(workflow_id: int, subtype: str, source: int, destination: int) -> dict:
+    return controller.add_edge(workflow_id, subtype, source, destination)
 
 
 @post("/add_jobs_to_workflow/<int:workflow_id>", "Edit")

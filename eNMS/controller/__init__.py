@@ -14,6 +14,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
+from eNMS.controller.automation_controller import AutomationController
 from eNMS.controller.import_export_controller import ImportExportController
 from eNMS.framework import (
     delete,
@@ -53,7 +54,7 @@ from eNMS.properties import (
 )
 
 
-class Controller(ImportExportController):
+class Controller(AutomationController, ImportExportController):
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         instance = delete(cls, id=instance_id)
         info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')

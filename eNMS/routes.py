@@ -106,14 +106,7 @@ def add_edge(workflow_id: int, subtype: str, source: int, dest: int) -> dict:
 
 @post("/add_jobs_to_workflow/<int:workflow_id>", "Edit")
 def add_jobs_to_workflow(workflow_id: int) -> Dict[str, Any]:
-    workflow = fetch("Workflow", id=workflow_id)
-    jobs = objectify("Job", request.form["add_jobs"])
-    for job in jobs:
-        job.workflows.append(workflow)
-    now = str(datetime.now())
-    workflow.last_modified = now
-    db.session.commit()
-    return {"jobs": [job.serialized for job in jobs], "update_time": now}
+    return controller.add_jobs_to_workflow(workflow_id, request.form)
 
 
 @get("/administration", "View")

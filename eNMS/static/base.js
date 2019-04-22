@@ -228,8 +228,8 @@ function showConnectionPanel(id) {
  */
 function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll('.add-id').forEach((el) => {
-    $(el).prop("id", `${el.id}-${id}`);
     if (duplicate && ["name", "id"].includes(el.name)) return;
+    $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });
   panel.querySelectorAll('.btn-id').forEach((el) => {
     $(el).attr("onclick", type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`);
@@ -361,9 +361,10 @@ function processInstance(type, instance) {
  */
 // eslint-disable-next-line
 function processData(type, id) {
+  console.log(type, id, `#edit-${type}-form-${id}`);
   fCall(
     `/update/${type}`,
-    id ? `#${id}-edit-${type}-form` : `#edit-${type}-form`,
+    id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
       if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#panel-${type}-${id}` : `#panel-${type}`).remove();

@@ -11,7 +11,7 @@ class AutomationController:
         workflow_edge = factory(
             "WorkflowEdge",
             **{
-                "name": f"{workflow_id}-{subtype}:{source}->{dest}",
+                "name": f"{workflow_id}-{subtype}:{source}->{destination}",
                 "workflow": workflow_id,
                 "subtype": subtype,
                 "source": source,

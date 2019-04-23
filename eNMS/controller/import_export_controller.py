@@ -95,7 +95,7 @@ class ImportExportController:
         info("Inventory import: Done.")
         return result
 
-    def object_export(self, request: dict, path_app: PosixPath) -> bool:
+    def object_export(self, request: dict, path_app: PosixPath) -> None:
         workbook = Workbook()
         filename = request["export_filename"]
         if "." not in filename:
@@ -107,4 +107,73 @@ class ImportExportController:
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
         workbook.save(path_app / "projects" / filename)
-        return True
+
+    def import_from_netbox(self) -> None:
+        nb = netbox_api(
+            request.form["netbox_address"], token=request.form["netbox_token"]
+        )
+        for device in nb.dcim.devices.all():
+            device_ip = device.primary_ip4 or device.primary_ip6
+            factory(
+                "Device",
+                **{
+                    "name": device.name,
+                    "ip_address": str(device_ip).split("/")[0],
+                    "subtype": request.form["netbox_type"],
+                    "longitude": 0.0,
+                    "latitude": 0.0,
+                },
+            )
+
+    def import_from_librenms(self) -> None:
+        devices = http_get(
+            f'{request.form["librenms_address"]}/api/v0/devices',
+            headers={"X-Auth-Token": request.form["librenms_token"]},
+        ).json()["devices"]
+        for device in devices:
+            factory(
+                "Device",
+                **{
+                    "name": device["hostname"],
+                    "ip_address": device["ip"] or device["hostname"],
+                    "subtype": request.form["librenms_type"],
+                    "longitude": 0.0,
+                    "latitude": 0.0,
+                },
+            )
+
+    def import_from_opennms(self):
+        parameters = get_one("Parameters")
+        login, password = parameters.opennms_login, request.form["password"]
+        parameters.update(**request.form)
+        db.session.commit()
+        json_devices = http_get(
+            parameters.opennms_devices,
+            headers={"Accept": "application/json"},
+            auth=(login, password),
+        ).json()["node"]
+        devices = {
+            device["id"]: {
+                "name": device.get("label", device["id"]),
+                "description": device["assetRecord"].get("description", ""),
+                "location": device["assetRecord"].get("building", ""),
+                "vendor": device["assetRecord"].get("manufacturer", ""),
+                "model": device["assetRecord"].get("modelNumber", ""),
+                "operating_system": device.get("operatingSystem", ""),
+                "os_version": device["assetRecord"].get("sysDescription", ""),
+                "longitude": device["assetRecord"].get("longitude", 0.0),
+                "latitude": device["assetRecord"].get("latitude", 0.0),
+                "subtype": request.form["subtype"],
+            }
+            for device in json_devices
+        }
+        for device in list(devices):
+            link = http_get(
+                f"{parameters.opennms_rest_api}/nodes/{device}/ipinterfaces",
+                headers={"Accept": "application/json"},
+                auth=(login, password),
+            ).json()
+            for interface in link["ipInterface"]:
+                if interface["snmpPrimary"] == "P":
+                    devices[device]["ip_address"] = interface["ipAddress"]
+                    factory("Device", **devices[device])

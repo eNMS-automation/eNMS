@@ -147,38 +147,7 @@ def clear_results(job_id: int) -> bool:
 
 @post("/connection/<int:device_id>", "Connect to device")
 def connection(device_id: int) -> dict:
-    parameters, device = get_one("Parameters"), fetch("Device", id=device_id)
-    cmd = [str(app.path / "applications" / "gotty"), "-w"]
-    port, protocol = parameters.get_gotty_port(), request.form["protocol"]
-    address = getattr(device, request.form["address"])
-    cmd.extend(["-p", str(port)])
-    if "accept-once" in request.form:
-        cmd.append("--once")
-    if "multiplexing" in request.form:
-        cmd.extend(f"tmux new -A -s gotty{port}".split())
-    if app.config["GOTTY_BYPASS_KEY_PROMPT"]:
-        options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-    else:
-        options = ""
-    if protocol == "telnet":
-        cmd.extend(f"telnet {address}".split())
-    elif "authentication" in request.form:
-        if request.form["credentials"] == "device":
-            login, pwd = device.username, device.password
-        else:
-            login, pwd = current_user.name, current_user.password
-        cmd.extend(f"sshpass -p {pwd} ssh {options} {login}@{address}".split())
-    else:
-        cmd.extend(f"ssh {options} {address}".split())
-    if protocol != "telnet":
-        cmd.extend(f"-p {device.port}".split())
-    Popen(cmd)
-    return {
-        "device": device.name,
-        "port": port,
-        "redirection": app.config["GOTTY_PORT_REDIRECTION"],
-        "server_addr": app.config["ENMS_SERVER_ADDR"],
-    }
+    return controller.connection(device_id)
 
 
 @get("/dashboard")
@@ -274,7 +243,6 @@ def duplicate_workflow(workflow_id: int) -> dict:
                 },
             )
         )
-    db.session.commit()
     return new_workflow.serialized
 
 
@@ -296,7 +264,6 @@ def export_to_google_earth() -> bool:
         line.style.linestyle.width = request.form["line_width"]
     filepath = app.path / "google_earth" / f'{request.form["name"]}.kmz'
     kml_file.save(filepath)
-    return True
 
 
 @post("/export_topology", "View")
@@ -481,7 +448,6 @@ def get_service(id_or_cls: str) -> dict:
 def git_action() -> bool:
     parameters = get_one("Parameters")
     parameters.get_git_content(app)
-    return True
 
 
 @get("/import_export", "View")
@@ -577,89 +543,23 @@ def migration(direction: str) -> Union[bool, str]:
 
 @post("/query_netbox", "Edit")
 def query_netbox() -> bool:
-    nb = netbox_api(request.form["netbox_address"], token=request.form["netbox_token"])
-    for device in nb.dcim.devices.all():
-        device_ip = device.primary_ip4 or device.primary_ip6
-        factory(
-            "Device",
-            **{
-                "name": device.name,
-                "ip_address": str(device_ip).split("/")[0],
-                "subtype": request.form["netbox_type"],
-                "longitude": 0.0,
-                "latitude": 0.0,
-            },
-        )
-    return True
+    controller.import_from_netbox()
 
 
 @post("/query_librenms", "Edit")
 def query_librenms() -> bool:
-    devices = http_get(
-        f'{request.form["librenms_address"]}/api/v0/devices',
-        headers={"X-Auth-Token": request.form["librenms_token"]},
-    ).json()["devices"]
-    for device in devices:
-        factory(
-            "Device",
-            **{
-                "name": device["hostname"],
-                "ip_address": device["ip"] or device["hostname"],
-                "subtype": request.form["librenms_type"],
-                "longitude": 0.0,
-                "latitude": 0.0,
-            },
-        )
-    db.session.commit()
-    return True
+    controller.import_from_librenms()
 
 
 @post("/query_opennms", "Edit")
-def query_opennms() -> bool:
-    parameters = get_one("Parameters")
-    login, password = parameters.opennms_login, request.form["password"]
-    parameters.update(**request.form)
-    db.session.commit()
-    json_devices = http_get(
-        parameters.opennms_devices,
-        headers={"Accept": "application/json"},
-        auth=(login, password),
-    ).json()["node"]
-    devices = {
-        device["id"]: {
-            "name": device.get("label", device["id"]),
-            "description": device["assetRecord"].get("description", ""),
-            "location": device["assetRecord"].get("building", ""),
-            "vendor": device["assetRecord"].get("manufacturer", ""),
-            "model": device["assetRecord"].get("modelNumber", ""),
-            "operating_system": device.get("operatingSystem", ""),
-            "os_version": device["assetRecord"].get("sysDescription", ""),
-            "longitude": device["assetRecord"].get("longitude", 0.0),
-            "latitude": device["assetRecord"].get("latitude", 0.0),
-            "subtype": request.form["subtype"],
-        }
-        for device in json_devices
-    }
-    for device in list(devices):
-        link = http_get(
-            f"{parameters.opennms_rest_api}/nodes/{device}/ipinterfaces",
-            headers={"Accept": "application/json"},
-            auth=(login, password),
-        ).json()
-        for interface in link["ipInterface"]:
-            if interface["snmpPrimary"] == "P":
-                devices[device]["ip_address"] = interface["ipAddress"]
-                factory("Device", **devices[device])
-    db.session.commit()
-    return True
+def query_opennms() -> None:
+    controller.import_from_opennms()
 
 
 @post("/reset_status", "Admin")
 def reset_status() -> bool:
     for job in fetch_all("Job"):
         job.is_running = False
-    db.session.commit()
-    return True
 
 
 @get("/results/<int:id>/<runtime>", "View")
@@ -715,8 +615,6 @@ def run_job(job_id: int) -> dict:
 @post("/save_device_jobs/<int:device_id>", "Edit")
 def save_device_jobs(device_id: int) -> bool:
     fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
-    db.session.commit()
-    return True
 
 
 @post("/save_parameters", "Admin")
@@ -724,8 +622,6 @@ def save_parameters() -> bool:
     parameters = get_one("Parameters")
     parameters.update(**request.form)
     parameters.trigger_active_parameters(app)
-    db.session.commit()
-    return True
 
 
 @post("/save_pool_objects/<int:pool_id>", "Edit")
@@ -733,7 +629,6 @@ def save_pool_objects(pool_id: int) -> dict:
     pool = fetch("Pool", id=pool_id)
     pool.devices = objectify("Device", request.form["devices"])
     pool.links = objectify("Link", request.form["links"])
-    db.session.commit()
     return pool.serialized
 
 
@@ -746,7 +641,6 @@ def save_positions(workflow_id: int) -> str:
     for job_id, position in request.json.items():
         job = fetch("Job", id=job_id)
         job.positions[workflow.name] = (position["x"], position["y"])
-    db.session.commit()
     return now
 
 
@@ -765,14 +659,11 @@ def scan_cluster() -> bool:
             factory("Instance", **{**instance, **{"ip_address": str(ip_address)}})
         except ConnectionError:
             continue
-    db.session.commit()
-    return True
 
 
 @post("/scheduler/<action>", "Admin")
 def scheduler_action(action: str) -> bool:
     getattr(scheduler, action)()
-    return True
 
 
 @bp.route("/")
@@ -783,7 +674,6 @@ def site_root() -> Response:
 @post("/<action>_task/<int:task_id>", "Edit")
 def task_action(action: str, task_id: int) -> bool:
     getattr(fetch("Task", id=task_id), action)()
-    return True
 
 
 @post("/update/<cls>", "Edit")
@@ -805,8 +695,6 @@ def update_pools(pool_id: str) -> bool:
             pool.compute_pool()
     else:
         fetch("Pool", id=int(pool_id)).compute_pool()
-    db.session.commit()
-    return True
 
 
 @get("/<view_type>_view", "View")

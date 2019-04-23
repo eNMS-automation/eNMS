@@ -165,9 +165,7 @@ function showResults(id) {
     function(panel) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Job results");
-      $("#display").prop("id", `display-${id}`);
-      $("#compare_with").prop("id", `compare_with-${id}`);
-      $("#results").prop("id", `results-${id}`);
+      preprocessForm(panel, id);
       configureCallbacks(id);
       displayResults(id);
     }

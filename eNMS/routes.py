@@ -144,7 +144,6 @@ def clear_configurations(device_id: int) -> bool:
 @post("/clear_results/<int:job_id>", "Edit")
 def clear_results(job_id: int) -> bool:
     fetch("Job", id=job_id).results = {}
-    return True
 
 
 @post("/connection/<int:device_id>", "Connect to device")

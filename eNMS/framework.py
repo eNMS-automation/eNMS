@@ -90,7 +90,7 @@ def permission_required(permission: Optional[str], redirect: bool = True) -> Cal
                 if redirect:
                     abort(403)
                 else:
-                    return jsonify(False)
+                    return jsonify({"error": "HTTP Error 403 – Forbidden"})
             return f(*args, **kwargs)
 
         return decorated_function
@@ -146,7 +146,6 @@ def post(url: str, permission: Optional[str] = None) -> Callable[[Callable], Cal
             try:
                 result = func(*args, **kwargs)
                 db.session.commit()
-                print(result)
                 return jsonify(result)
             except Exception as e:
                 return jsonify({"error": str(e)})

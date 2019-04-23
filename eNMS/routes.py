@@ -138,7 +138,6 @@ def calendar() -> dict:
 @post("/clear_configurations/<int:device_id>", "Edit")
 def clear_configurations(device_id: int) -> bool:
     fetch("Device", id=device_id).configurations = {}
-    return True
 
 
 @post("/clear_results/<int:job_id>", "Edit")
@@ -218,7 +217,6 @@ def database_helpers() -> bool:
                 for date, log in job.logs.items()
                 if datetime.strptime(date, "%Y-%m-%d-%H:%M:%S.%f") > clear_date
             }
-    return True
 
 
 @post("/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
@@ -349,7 +347,7 @@ def get_device_logs(device_id: int) -> Union[str, bool]:
         for log in fetch_all("Log")
         if log.source == fetch("Device", id=device_id).ip_address
     ]
-    return "\n".join(device_logs) or True
+    return "\n".join(device_logs)
 
 
 @post("/get/<cls>/<id>", "View")

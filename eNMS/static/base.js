@@ -40,9 +40,7 @@ function openUrl(url) {
  * @param {results} results - Results.
  */
 function processResults(callback, results) {
-  if (!results) {
-    alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
-  } else if (results.error) {
+  if (results && results.error) {
     alertify.notify(results.error, "error", 5);
   } else {
     callback(results);

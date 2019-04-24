@@ -1,6 +1,6 @@
 from collections import Counter
 from contextlib import contextmanager
-from flask import Flask
+from flask import Flask, current_app, request
 from flask.wrappers import Response
 from flask_login import current_user
 from logging import info
@@ -50,6 +50,7 @@ from eNMS.properties import (
     table_properties,
     type_to_diagram_properties,
 )
+from eNMS.properties import export_properties
 
 
 class ImportExportController:
@@ -113,9 +114,9 @@ class ImportExportController:
         info("Inventory import: Done.")
         return result
 
-    def object_export(self, request: dict, path_app: PosixPath) -> None:
+    def export_topology(self) -> None:
         workbook = Workbook()
-        filename = request["export_filename"]
+        filename = request.form["export_filename"]
         if "." not in filename:
             filename += ".xls"
         for obj_type in ("Device", "Link"):
@@ -124,7 +125,7 @@ class ImportExportController:
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
-        workbook.save(path_app / "projects" / filename)
+        workbook.save(current_app.path / "projects" / filename)
 
     def import_from_netbox(self) -> None:
         nb = netbox_api(

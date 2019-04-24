@@ -91,7 +91,7 @@ from eNMS.properties import (
 
 @bp.route("/<endpoint>", methods=["GET"])
 @login_required
-def post_route(endpoint: str) -> Response:
+def get_route(endpoint: str) -> Response:
     ctx = getattr(controller, endpoint)() or {}
     if not isinstance(ctx, dict):
         return ctx
@@ -105,7 +105,7 @@ def post_route(endpoint: str) -> Response:
 
 @bp.route("/<endpoint>", methods=["POST"])
 @login_required
-def get_route(endpoint: str) -> Response:
+def post_route(endpoint: str) -> Response:
     data = {**request.form.to_dict(), **{"creator": current_user.id}}
     for property in data.get("list_fields", "").split(","):
         data[property] = request.form.getlist(property)
@@ -123,23 +123,6 @@ def get_route(endpoint: str) -> Response:
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)})
-
-
-@get("/download_configuration/<name>", "View")
-def download_configuration(name: str) -> Response:
-    try:
-        return send_file(
-            filename_or_fp=str(app.path / "git" / "configurations" / name / name),
-            as_attachment=True,
-            attachment_filename=f"configuration_{name}.txt",
-        )
-    except FileNotFoundError:
-        return jsonify("No configuration stored")
-
-
-@post("/export_topology", "View")
-def export_topology() -> bool:
-    return controller.object_export(request.form, app.path)
 
 
 @get("/filtering/<table>")

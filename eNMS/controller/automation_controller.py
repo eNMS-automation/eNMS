@@ -10,6 +10,7 @@ from flask import (
     session,
     url_for,
 )
+from flask.wrappers import Response
 from typing import Any, Dict
 
 from eNMS.framework import factory, fetch, fetch_all, objectify
@@ -57,6 +58,16 @@ class AutomationController:
         now = str(datetime.now())
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
+
+    def download_configuration(name: str) -> Response:
+        try:
+            return send_file(
+                filename_or_fp=str(app.path / "git" / "configurations" / name / name),
+                as_attachment=True,
+                attachment_filename=f"configuration_{name}.txt",
+            )
+        except FileNotFoundError:
+            return jsonify("No configuration stored")
 
     def duplicate_workflow(self, workflow_id: int) -> dict:
         parent_workflow = fetch("Workflow", id=workflow_id)

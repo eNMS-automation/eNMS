@@ -1,9 +1,13 @@
 from datetime import datetime
 from flask import abort, current_app as app, redirect, render_template, request, url_for
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user
 from flask.wrappers import Response
+from ipaddress import IPv4Network
+from json import loads
+from logging import info
 from ldap3 import Connection, NTLM, SUBTREE
 from os import listdir
+from requests import get as http_get
 from typing import Union
 
 from eNMS.forms import (
@@ -13,15 +17,7 @@ from eNMS.forms import (
     MigrationsForm,
 )
 from eNMS.framework import delete_all, factory, fetch, fetch_all, get_one
-from eNMS.modules import (
-    bp,
-    db,
-    ldap_client,
-    scheduler,
-    tacacs_client,
-    USE_LDAP,
-    USE_TACACS,
-)
+from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 
 
 class AdministrationController:

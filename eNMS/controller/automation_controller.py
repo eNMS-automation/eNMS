@@ -1,19 +1,22 @@
 from datetime import datetime
-from flask import (
-    abort,
-    current_app as app,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    send_file,
-    session,
-    url_for,
-)
+from difflib import SequenceMatcher
+from flask import current_app, jsonify, request, send_file, session
 from flask.wrappers import Response
+from re import search, sub
+from sqlalchemy.exc import DataError
 from typing import Any, Dict
 
-from eNMS.framework import factory, fetch, fetch_all, objectify
+from eNMS.modules import scheduler
+from eNMS.forms import CompareResultsForm, WorkflowBuilderForm
+from eNMS.framework import delete, factory, fetch, fetch_all, get_one, objectify
+from eNMS.helpers import scheduler_job, str_dict
+from eNMS.models import service_classes
+from eNMS.properties import (
+    cls_to_properties,
+    pretty_names,
+    private_properties,
+    property_types,
+)
 
 
 class AutomationController:
@@ -62,7 +65,9 @@ class AutomationController:
     def download_configuration(self, name: str) -> Response:
         try:
             return send_file(
-                filename_or_fp=str(app.path / "git" / "configurations" / name / name),
+                filename_or_fp=str(
+                    current_app.path / "git" / "configurations" / name / name
+                ),
                 as_attachment=True,
                 attachment_filename=f"configuration_{name}.txt",
             )
@@ -93,7 +98,7 @@ class AutomationController:
 
     def get_git_content(self) -> bool:
         parameters = get_one("Parameters")
-        parameters.get_git_content(app)
+        parameters.get_git_content(current_app)
 
     def get_job_logs(self, id: int) -> dict:
         job = fetch("Job", id=id)
@@ -260,10 +265,10 @@ class AutomationController:
             tasks[task.name] = {**task.serialized, **{"date": js_date}}
         return dict(tasks=tasks)
 
-    def scheduler_action(action: str) -> bool:
+    def scheduler_action(self, action: str) -> bool:
         getattr(scheduler, action)()
 
-    def task_action(action: str, task_id: int) -> bool:
+    def task_action(self, action: str, task_id: int) -> bool:
         getattr(fetch("Task", id=task_id), action)()
 
     def workflow_builder(self) -> dict:

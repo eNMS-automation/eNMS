@@ -16,6 +16,8 @@ from xlwt import Workbook
 
 from eNMS.controller.automation_controller import AutomationController
 from eNMS.controller.import_export_controller import ImportExportController
+from eNMS.controller.inventory_controller import InventoryController
+from eNMS.controller.administration_controller import AdministrationController
 from eNMS.framework import (
     delete,
     delete_all,

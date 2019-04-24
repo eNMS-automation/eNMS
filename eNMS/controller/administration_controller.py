@@ -1,11 +1,12 @@
 from datetime import datetime
+from flask import request
 from typing import Any, Dict
 
 from eNMS.framework import factory, fetch, objectify
 
 
 class AdministrationController:
-    def database_helpers(self, request) -> None:
+    def database_helpers(self) -> None:
         delete_all(*request.form["deletion_types"])
         clear_logs_date = request.form["clear_logs_date"]
         if clear_logs_date:

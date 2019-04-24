@@ -1,4 +1,15 @@
 from datetime import datetime
+from flask import (
+    abort,
+    current_app as app,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    send_file,
+    session,
+    url_for,
+)
 from typing import Any, Dict
 
 from eNMS.framework import factory, fetch, fetch_all, objectify
@@ -22,9 +33,9 @@ class AutomationController:
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id: int, form: dict) -> Dict[str, Any]:
+    def add_jobs_to_workflow(self, workflow_id: int) -> Dict[str, Any]:
         workflow = fetch("Workflow", id=workflow_id)
-        jobs = objectify("Job", form["add_jobs"])
+        jobs = objectify("Job", request.form["add_jobs"])
         for job in jobs:
             job.workflows.append(workflow)
         now = str(datetime.now())

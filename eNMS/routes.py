@@ -92,8 +92,8 @@ def add_edge(**kwargs) -> dict:
 
 
 @post("/add_jobs_to_workflow/<int:workflow_id>", "Edit")
-def add_jobs_to_workflow(workflow_id: int) -> Dict[str, Any]:
-    return controller.add_jobs_to_workflow(workflow_id, request.form)
+def add_jobs_to_workflow(**kwargs) -> Dict[str, Any]:
+    return controller.add_jobs_to_workflow(**kwargs)
 
 
 @get("/administration", "View")
@@ -113,11 +113,6 @@ def advanced() -> dict:
     )
 
 
-@get("/calendar", "View")
-def calendar() -> dict:
-    return controller.calendar()
-
-
 @post("/clear_configurations/<int:device_id>", "Edit")
 def clear_configurations(device_id: int) -> bool:
     fetch("Device", id=device_id).configurations = {}
@@ -133,14 +128,14 @@ def connection(device_id: int) -> dict:
     return controller.connection(device_id)
 
 
-@get("/dashboard")
-def dashboard() -> dict:
-    return controller.dashboard()
+@get("/<page>")
+def get_route(page: str) -> Any:
+    return getattr(controller, page)()
 
 
 @post("/database_helpers", "Admin")
 def database_helpers() -> None:
-    controller.database_helpers(request)
+    controller.database_helpers()
 
 
 @post("/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
@@ -428,7 +423,7 @@ def login() -> Union[Response, str]:
                 user = fetch("User", name=name)
                 if user and password == user.password:
                     login_user(user)
-                    return redirect(url_for("bp.dashboard"))
+                    return redirect(url_for("bp.get_route", page="dashboard"))
             elif request.form["authentication_method"] == "LDAP Domain":
                 with Connection(
                     ldap_client,
@@ -459,12 +454,12 @@ def login() -> Union[Response, str]:
                             user["permissions"] = ["Admin"]
                         new_user = factory("User", **user)
                         login_user(new_user)
-                        return redirect(url_for("bp.dashboard"))
+                        return redirect(url_for("bp.get_route", page="dashboard"))
             elif request.form["authentication_method"] == "TACACS":
                 if tacacs_client.authenticate(name, password).valid:
                     user = factory("User", **{"name": name, "password": password})
                     login_user(user)
-                    return redirect(url_for("bp.dashboard"))
+                    return redirect(url_for("bp.get_route", page="dashboard"))
             abort(403)
         except Exception as e:
             info(f"Authentication failed ({str(e)})")
@@ -478,7 +473,7 @@ def login() -> Union[Response, str]:
             authentication_methods.append(("TACACS",) * 2)
         login_form.authentication_method.choices = authentication_methods
         return render_template("login.html", login_form=login_form)
-    return redirect(url_for("bp.dashboard"))
+    return redirect(url_for("bp.get_route", page="dashboard"))
 
 
 @get("/logout")

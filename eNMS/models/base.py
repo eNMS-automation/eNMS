@@ -4,7 +4,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
 from eNMS.modules import db, USE_VAULT, vault_client
-from eNMS.framework import fetch, objectify
+from eNMS.database import fetch, objectify
 from eNMS.properties import (
     cls_to_properties,
     dont_migrate,

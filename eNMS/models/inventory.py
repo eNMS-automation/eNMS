@@ -21,7 +21,7 @@ from eNMS.models.associations import (
     job_device_table,
     job_pool_table,
 )
-from eNMS.framework import fetch, fetch_all
+from eNMS.database import fetch, fetch_all
 from eNMS.models import register_class
 from eNMS.models.base import Base
 from eNMS.properties import (

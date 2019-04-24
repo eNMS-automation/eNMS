@@ -11,7 +11,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 
 from eNMS.controller import controller
-from eNMS.framework import factory, fetch_all, get_one
+from eNMS.database import factory, fetch_all, get_one
 from eNMS.modules import mail_client
 from eNMS.models import register_class
 from eNMS.models.automation import Service

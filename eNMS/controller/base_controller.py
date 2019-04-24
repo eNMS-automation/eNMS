@@ -11,7 +11,7 @@ from string import punctuation
 from typing import Any, Generator, List
 
 from eNMS.forms import form_classes, form_templates
-from eNMS.framework import delete, factory, fetch, fetch_all, fetch_all_visible
+from eNMS.database import delete, factory, fetch, fetch_all, fetch_all_visible
 from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (

@@ -3,7 +3,7 @@ from uuid import getnode
 
 from eNMS.modules import db
 from eNMS.models import classes
-from eNMS.framework import factory, integrity_rollback, fetch, get_one
+from eNMS.database import factory, integrity_rollback, fetch, get_one
 from eNMS.properties import parameters_public_properties
 
 

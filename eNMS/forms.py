@@ -11,7 +11,7 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.framework import choices
+from eNMS.database import choices
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from eNMS.properties import (

@@ -13,7 +13,7 @@ from typing import Any, Dict, Optional, Set
 
 from eNMS.modules import db, scheduler
 from eNMS.forms import CompareResultsForm, WorkflowBuilderForm
-from eNMS.framework import delete, factory, fetch, fetch_all, get_one, objectify
+from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
 from eNMS.models import service_classes
 from eNMS.properties import (
     cls_to_properties,

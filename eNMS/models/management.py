@@ -13,7 +13,7 @@ from yaml import load
 from eNMS.models import register_class
 from eNMS.models.associations import pool_user_table
 from eNMS.models.base import Base
-from eNMS.framework import fetch, fetch_all
+from eNMS.database import fetch, fetch_all
 from eNMS.modules import db
 
 

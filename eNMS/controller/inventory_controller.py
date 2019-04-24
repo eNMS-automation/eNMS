@@ -6,7 +6,7 @@ from sqlalchemy import and_
 from subprocess import Popen
 from typing import Union
 
-from eNMS.framework import fetch, fetch_all, get_one, objectify
+from eNMS.database import fetch, fetch_all, get_one, objectify
 from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import link_subtype_to_color, subtype_sizes, table_properties

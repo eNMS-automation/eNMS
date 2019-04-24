@@ -8,7 +8,7 @@ from uuid import getnode
 from typing import Union
 
 from eNMS.controller import controller
-from eNMS.framework import delete, factory, fetch
+from eNMS.database import delete, factory, fetch
 from eNMS.modules import auth, scheduler
 
 

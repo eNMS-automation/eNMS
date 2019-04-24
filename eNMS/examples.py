@@ -3,7 +3,7 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
 from eNMS.modules import db
-from eNMS.framework import factory, fetch
+from eNMS.database import factory, fetch
 
 
 def create_example_pools() -> None:

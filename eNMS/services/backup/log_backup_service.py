@@ -8,7 +8,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
 from eNMS.controller import controller
-from eNMS.framework import fetch_all
+from eNMS.database import fetch_all
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device

@@ -19,7 +19,7 @@ from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
-from eNMS.framework import fetch
+from eNMS.database import fetch
 from eNMS.modules import (
     bp,
     db,

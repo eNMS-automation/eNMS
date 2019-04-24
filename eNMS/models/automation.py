@@ -28,7 +28,7 @@ from eNMS.models.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.framework import fetch
+from eNMS.database import fetch
 from eNMS.models.base import Base
 from eNMS.models.inventory import Device
 

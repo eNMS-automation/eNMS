@@ -23,7 +23,7 @@ from eNMS.forms import (
     NetboxForm,
     OpenNmsForm,
 )
-from eNMS.framework import delete_all, export, factory, fetch_all, get_one
+from eNMS.database import delete_all, export, factory, fetch_all, get_one
 from eNMS.modules import db
 from eNMS.properties import google_earth_styles, reverse_pretty_names
 from eNMS.properties import export_properties

@@ -16,7 +16,7 @@ from eNMS.forms import (
     LoginForm,
     MigrationsForm,
 )
-from eNMS.framework import delete_all, factory, fetch, fetch_all, get_one
+from eNMS.database import delete_all, factory, fetch, fetch_all, get_one
 from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 
 

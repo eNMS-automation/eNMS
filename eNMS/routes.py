@@ -137,12 +137,6 @@ def get_raw_logs(device_id: int, version: str) -> str:
     return f'<pre>{configurations.get(version, "")}</pre>'
 
 
-@post("/get_git_content", "Admin")
-def git_action() -> bool:
-    parameters = get_one("Parameters")
-    parameters.get_git_content(app)
-
-
 @get("/import_export", "View")
 def import_export() -> dict:
     return dict(
@@ -153,11 +147,6 @@ def import_export() -> dict:
         google_earth_form=GoogleEarthForm(request.form),
         parameters=get_one("Parameters"),
     )
-
-
-@post("/import_topology", "Edit")
-def import_topology() -> str:
-    return controller.object_import(request.form, request.files["file"])
 
 
 @bp.route("/login", methods=["GET", "POST"])
@@ -226,12 +215,6 @@ def login() -> Union[Response, str]:
 def logout() -> Response:
     logout_user()
     return redirect(url_for("admin_blueprint.login"))
-
-
-@post("/migration_<direction>", "Admin")
-def migration(direction: str) -> Union[bool, str]:
-    args = (app, request.form)
-    return migrate_import(*args) if direction == "import" else migrate_export(*args)
 
 
 @post("/reset_status", "Admin")

@@ -1,23 +1,7 @@
-from collections import Counter
-from datetime import datetime
-from difflib import SequenceMatcher
-from flask import (
-    abort,
-    current_app as app,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    send_file,
-    session,
-    url_for,
-)
-from flask_login import login_required
+from flask import jsonify, redirect, render_template, request, url_for
+from flask_login import current_user, login_required
+from flask.wrappers import Response
 from logging import info
-from re import search, sub
-from requests import get as http_get
-from requests.exceptions import ConnectionError
-from typing import Any, Dict, List, Union
 
 from eNMS.controller import controller
 from eNMS.modules import bp, db

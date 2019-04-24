@@ -6,6 +6,7 @@ from logging import info
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from string import punctuation
 from typing import Generator, List
 
 from eNMS.controller.automation_controller import AutomationController
@@ -116,6 +117,24 @@ class Controller(
     def init_app(self, app: Flask, session: Session):
         self.app = app
         self.session = session
+
+    def str_dict(self, input: Any, depth: int = 0) -> str:
+        tab = "\t" * depth
+        if isinstance(input, list):
+            result = "\n"
+            for element in input:
+                result += f"{tab}- {self.str_dict(element, depth + 1)}\n"
+            return result
+        elif isinstance(input, dict):
+            result = ""
+            for key, value in input.items():
+                result += f"\n{tab}{key}: {self.str_dict(value, depth + 1)}"
+            return result
+        else:
+            return str(input)
+
+    def strip_all(input: str) -> str:
+        return input.translate(str.maketrans("", "", f"{punctuation} "))
 
     def table(self, table_type: str) -> dict:
         return dict(

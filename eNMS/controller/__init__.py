@@ -133,6 +133,11 @@ class Controller(
         info(f"{current_user.name}: GET ALL {cls}")
         return [instance.get_properties() for instance in fetch_all_visible(cls)]
 
+    def get_instance(self, cls: str, id: str) -> dict:
+        instance = fetch(cls, id=id)
+        info(f"{current_user.name}: GET {cls} {instance.name} ({id})")
+        return instance.serialized
+
     def init_app(self, app: Flask, session: Session):
         self.app = app
         self.session = session

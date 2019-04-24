@@ -33,67 +33,18 @@ from subprocess import Popen
 from typing import Any, Dict, List, Union
 
 from eNMS.controller import controller
-from eNMS.modules import (
-    bp,
-    db,
-    ldap_client,
-    scheduler,
-    tacacs_client,
-    USE_LDAP,
-    USE_TACACS,
-)
-from eNMS.forms import (
-    form_classes,
-    form_templates,
-    AdministrationForm,
-    DatabaseHelpersForm,
-    LoginForm,
-    MigrationsForm,
-    CompareResultsForm,
-    GoogleEarthForm,
-    ImportExportForm,
-    LibreNmsForm,
-    NetboxForm,
-    OpenNmsForm,
-    WorkflowBuilderForm,
-)
-from eNMS.framework import (
-    delete,
-    delete_all,
-    factory,
-    fetch,
-    fetch_all,
-    fetch_all_visible,
-    get,
-    get_one,
-    objectify,
-    post,
-    permission_required,
-)
-from eNMS.helpers import scheduler_job, str_dict
-from eNMS.models import classes, service_classes
 from eNMS.modules import bp
-from eNMS.properties import (
-    cls_to_properties,
-    default_diagrams_properties,
-    google_earth_styles,
-    link_subtype_to_color,
-    pretty_names,
-    private_properties,
-    property_types,
-    reverse_pretty_names,
-    subtype_sizes,
-    table_fixed_columns,
-    table_properties,
-    type_to_diagram_properties,
-)
+
+
+@bp.route("/")
+def site_root() -> Response:
+    return redirect(url_for("bp.get_route"), endpoint="login")
 
 
 @bp.route("/<endpoint>", methods=["GET"])
 @login_required
 def get_route(endpoint: str) -> Response:
-    print(endpoint)
-    func, *args = endpoint.split("_")
+    func, *args = endpoint.split("-")
     ctx = getattr(controller, func)(*args) or {}
     if not isinstance(ctx, dict):
         return ctx
@@ -114,7 +65,7 @@ def post_route(endpoint: str) -> Response:
     for property in data.get("boolean_fields", "").split(","):
         data[property] = property in request.form
     request.form = data
-    func, *args = endpoint.split("@")
+    func, *args = endpoint.split("-")
     info(
         f"User '{current_user.name}' ({request.remote_addr})"
         f" calling the endpoint {request.url} (POST)"
@@ -125,25 +76,3 @@ def post_route(endpoint: str) -> Response:
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)})
-
-
-@bp.route("/filtering/<table>", methods=["GET"])
-@login_required
-def filtering(table: str) -> Response:
-    return jsonify(controller.filtering(table, request.args))
-
-
-@get("/logout")
-def logout() -> Response:
-    logout_user()
-    return redirect(url_for("admin_blueprint.login"))
-
-
-@post("/scheduler/<action>", "Admin")
-def scheduler_action(action: str) -> bool:
-    getattr(scheduler, action)()
-
-
-@bp.route("/")
-def site_root() -> Response:
-    return redirect(url_for("bp.login"))

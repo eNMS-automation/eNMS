@@ -129,7 +129,7 @@ class Controller(
             ],
         }
 
-    def form(form_type: str) -> dict:
+    def form(self, form_type: str) -> dict:
         return dict(
             form=form_classes.get(form_type, FlaskForm)(request.form),
             form_type=form_type,

@@ -260,6 +260,9 @@ class AutomationController:
             tasks[task.name] = {**task.serialized, **{"date": js_date}}
         return dict(tasks=tasks)
 
+    def scheduler_action(action: str) -> bool:
+        getattr(scheduler, action)()
+
     def task_action(action: str, task_id: int) -> bool:
         getattr(fetch("Task", id=task_id), action)()
 

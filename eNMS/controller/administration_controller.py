@@ -128,6 +128,10 @@ class AdministrationController:
             return render_template("login.html", login_form=login_form)
         return redirect(url_for("bp.get_route", page="dashboard"))
 
+    def logout() -> Response:
+        logout_user()
+        return redirect(url_for("bp.get_route"), endpoint="login")
+
     def save_parameters() -> bool:
         parameters = get_one("Parameters")
         parameters.update(**request.form)

@@ -22,7 +22,7 @@ switchView: false
 function displaySites() {
   $(".menu").hide();
   deleteAll();
-  call("/get_all/pool", function(pools) {
+  call("/get_all-pool", function(pools) {
     for (let i = 0; i < pools.length; i++) {
       if (pools[i].longitude) {
         createNode(pools[i], "site");

@@ -54,7 +54,7 @@ class ImportExportController:
             for attr in ("status", "cpu_load")
         }
 
-    def get_counters(self, property: str, type: str) -> Counter:
+    def counters(self, property: str, type: str) -> Counter:
         property = reverse_pretty_names.get(property, property)
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 

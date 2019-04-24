@@ -105,7 +105,7 @@ function serializeForm(form) {
  */
 // eslint-disable-next-line
 function deleteInstance(type, id) {
-  call(`/delete/${type}/${id}`, function(result) {
+  call(`/delete-${type}-${id}`, function(result) {
     $(`#deletion-panel-${id}`).remove();
     table
       .row($(`#${id}`))
@@ -190,7 +190,7 @@ function showAutomationPanel(id) {
   createPanel(
     `automation-panel-${id}`,
     "400 200",
-    "../device_automation_form",
+    "../form-device_automation",
     function(panel) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Device automation");
@@ -252,7 +252,7 @@ function showPoolObjectsPanel(id) {
       panel.setHeaderTitle("Connect to device");
       configureForm("pool_objects");
       preprocessForm(panel, id);
-      call(`/get/pool/${id}`, function(pool) {
+      call(`/get-pool-${id}`, function(pool) {
         $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
         $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
       });
@@ -302,13 +302,13 @@ function showTypePanel(type, id, duplicate) {
   createPanel(
     id ? `panel-${type}-${id}` : `panel-${type}`,
     "700 500",
-    `../${type}_form`,
+    `../form-${type}`,
     function(panel) {
       panel.content.innerHTML = this.responseText;
       preprocessForm(panel, id, type, duplicate)
       configureForm(type, id);
       if (id) {
-        call(`/get/${type}/${id}`, function(instance) {
+        call(`/get-${type}-${id}`, function(instance) {
           panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
           if (["service", "workflow"].includes(type)) panelCode(type, id);
           if (type !== "service") processInstance(type, instance);
@@ -365,7 +365,7 @@ function processInstance(type, instance) {
 function processData(type, id) {
   console.log(type, id, `#edit-${type}-form-${id}`);
   fCall(
-    `/update/${type}`,
+    `/update-${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
       if (typeof table != "undefined") table.ajax.reload(null, false);

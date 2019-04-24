@@ -301,14 +301,14 @@ function drawDiagrams(objects, type) {
 }
 
 $.each(defaultProperties, function(type, property) {
-  call(`/counters/${property}/${type}`, function(objects) {
+  call(`/counters-${property}-${type}`, function(objects) {
     drawDiagrams(objects, type);
   });
 });
 
 $.each(counters, function(type, _) {
   $(`#${type}-properties`).on("change", function() {
-    call(`/counters/${this.value}/${type}`, function(objects) {
+    call(`/counters-${this.value}-${type}`, function(objects) {
       drawDiagrams(objects, type);
     });
   });

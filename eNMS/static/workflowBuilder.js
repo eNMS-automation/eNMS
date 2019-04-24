@@ -107,7 +107,7 @@ function displayWorkflow(wf) {
 
  */
 function switchToWorkflow(workflowId) {
-  call(`/get/workflow/${workflowId}`, function(result) {
+  call(`/get-workflow-${workflowId}`, function(result) {
     workflow = result;
     graph = displayWorkflow(result);
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
@@ -169,7 +169,7 @@ function addJobToWorkflow() {
  * @param {id} id - Id of the job to be deleted.
  */
 function deleteNode(id) {
-  call(`/delete_node/${workflow.id}/${id}`, function(result) {
+  call(`/delete_node-${workflow.id}-${id}`, function(result) {
     lastModified = result.update_time;
     alertify.notify(
       `'${result.job.name}' deleted from the workflow.`,
@@ -184,8 +184,8 @@ function deleteNode(id) {
  * @param {edge} edge - Edge to add to the workflow.
  */
 function saveEdge(edge) {
-  const param = `${workflow.id}@${edge.subtype}@${edge.from}@${edge.to}`;
-  call(`/add_edge@${param}`, function(result) {
+  const param = `${workflow.id}-${edge.subtype}-${edge.from}-${edge.to}`;
+  call(`/add_edge-${param}`, function(result) {
     lastModified = result.update_time;
     edges.add(edgeToEdge(result.edge));
     graph.addEdgeMode();
@@ -197,7 +197,7 @@ function saveEdge(edge) {
  * @param {edgeId} edgeId - Id of the edge to be deleted.
  */
 function deleteEdge(edgeId) {
-  call(`/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
+  call(`/delete_edge-${workflow.id}-${edgeId}`, (updateTime) => {
     lastModified = updateTime;
   });
 }
@@ -385,7 +385,7 @@ function colorJob(id, color) {
  */
 // eslint-disable-next-line
 function getJobState(id) {
-  call(`/get/service/${id}`, function(service) {
+  call(`/get-service-${id}`, function(service) {
     if (service.is_running) {
       colorJob(id, "#89CFF0");
       $("#status").text("Status: Running.");
@@ -404,7 +404,7 @@ function getJobState(id) {
  */
 function getWorkflowState() {
   if (workflow && workflow.id) {
-    call(`/get/workflow/${workflow.id}`, function(wf) {
+    call(`/get-workflow-${workflow.id}`, function(wf) {
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf);
       }

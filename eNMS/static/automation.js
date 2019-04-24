@@ -18,7 +18,7 @@ let refreshJob = {};
  */
 // eslint-disable-next-line
 function displayCustomForm(id) {
-  call(`/get_service/${id || $("#service-type").val()}`, function(customForm) {
+  call(`/get_service-${id || $("#service-type").val()}`, function(customForm) {
     for (const type of ["boolean", "list"]) {
       const fields = $(`#service-${type}_fields`);
       const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
@@ -95,7 +95,7 @@ function displayResult(results, id) {
  * @param {id} id - Job id.
  */
 function displayResults(id) {
-  call(`/get_results/${id}`, (results) => {
+  call(`/get_job_results-${id}`, (results) => {
     $(`#display-${id},#compare_with-${id}`).empty();
     const times = Object.keys(results);
     times.forEach((option) => {
@@ -117,7 +117,7 @@ function displayResults(id) {
 // eslint-disable-next-line
 function refreshLogs(firstTime, id) {
   if (refreshJob[id]) {
-    call(`/get_job_logs/${id}`, (job) => {
+    call(`/get_job_logs-${id}`, (job) => {
       $(`#logs-${id}`).text(job.logs.join("\n"));
       if (!job.running || $(`#logs-${id}`).length == 0) {
         refreshJob[id] = false;
@@ -179,7 +179,7 @@ function showResults(id) {
 // eslint-disable-next-line
 function configureCallbacks(id) {
   $(`#display-${id}`).on("change", function() {
-    call(`/get_results/${id}`, (results) => {
+    call(`/get_results-${id}`, (results) => {
       displayResult(results, id);
       $(`#compare_with-${id}`).val($(`#display-${id}`).val());
     });
@@ -189,7 +189,7 @@ function configureCallbacks(id) {
     $(`#results-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_diff/${id}/${v1}/${v2}`, function(data) {
+    call(`/get_diff-${id}-${v1}-${v2}`, function(data) {
       $(`#results-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,
@@ -211,7 +211,7 @@ function configureCallbacks(id) {
  */
 // eslint-disable-next-line
 function clearResults(id) {
-  call(`/clear_results/${id}`, () => {
+  call(`/clear_results-${id}`, () => {
     $(`#results-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Results cleared.", "success", 5);
   });
@@ -223,7 +223,7 @@ function clearResults(id) {
  */
 // eslint-disable-next-line
 function runJob(id) {
-  call(`/run_job/${id}`, function(job) {
+  call(`/run_job-${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (typeof workflowBuilder !== "undefined") {
       if (job.type == "Workflow") {

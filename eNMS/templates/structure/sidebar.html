@@ -12,14 +12,14 @@
         <li><a><i class="fa fa-home"></i>Home<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/table_log">Logs</a></li>
+            <li><a href="/table-log">Logs</a></li>
           </ul>
         </li>
         {% if current_user.allowed('Admin Section') %}
           <li><a><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="/table_user">User Management</a></li>
-              <li><a href="/table_instance">Instance Management</a></li>
+              <li><a href="/table-user">User Management</a></li>
+              <li><a href="/table-instance">Instance Management</a></li>
               <li><a href="/administration">Administration Panel</a></li>
               <li><a href="/advanced">Advanced</a></li>
             </ul>
@@ -28,10 +28,10 @@
         {% if current_user.allowed('View') %}
           <li><a><i class="fa fa-sitemap"></i>Inventory<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="/table_device">Device Management</a></li>
-              <li><a href="/table_configuration">Configuration Management</a></li>
-              <li><a href="/table_link">Link Management</a></li>
-              <li><a href="/table_pool">Pool Management</a></li>
+              <li><a href="/table-device">Device Management</a></li>
+              <li><a href="/table-configuration">Configuration Management</a></li>
+              <li><a href="/table-link">Link Management</a></li>
+              <li><a href="/table-pool">Pool Management</a></li>
               <li><a href="/import_export">Import & Export</a></li>
             </ul>
           </li>
@@ -43,15 +43,15 @@
           </li>
           <li><a><i class="fa fa-clock-o"></i>Automation<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="/table_service">Service Management</a></li>
-              <li><a href="/table_workflow">Workflow Management</a></li>
+              <li><a href="/table-service">Service Management</a></li>
+              <li><a href="/table-workflow">Workflow Management</a></li>
               <li><a href="/workflow_builder">Workflow Builder</a></li>
-              <li><a href="/table_logrule">Log Automation</a></li>
+              <li><a href="/table-logrule">Log Automation</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-clock-o"></i>Scheduling<span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="/table_task">Task Management</a></li>
+              <li><a href="/table-task">Task Management</a></li>
               <li><a href="/calendar">Calendar</a></li>
             </ul>
           </li>

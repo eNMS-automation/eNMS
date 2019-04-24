@@ -139,15 +139,6 @@ def logout() -> Response:
     return redirect(url_for("admin_blueprint.login"))
 
 
-@get("/<form_type>_form", "View")
-def route_form(form_type: str) -> dict:
-    return dict(
-        form=form_classes.get(form_type, FlaskForm)(request.form),
-        form_type=form_type,
-        template=f"forms/{form_templates.get(form_type, form_type + '_form')}",
-    )
-
-
 @post("/scheduler/<action>", "Admin")
 def scheduler_action(action: str) -> bool:
     getattr(scheduler, action)()

@@ -129,6 +129,13 @@ class Controller(
             ],
         }
 
+    def form(form_type: str) -> dict:
+        return dict(
+            form=form_classes.get(form_type, FlaskForm)(request.form),
+            form_type=form_type,
+            template=f"forms/{form_templates.get(form_type, form_type + '_form')}",
+        )
+
     def get_all_instances(cls: str) -> List[dict]:
         info(f"{current_user.name}: GET ALL {cls}")
         return [instance.get_properties() for instance in fetch_all_visible(cls)]

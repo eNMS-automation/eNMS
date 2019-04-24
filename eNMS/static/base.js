@@ -173,7 +173,7 @@ function showDeletionPanel(type, id) {
   createPanel(
     `deletion-panel-${id}`,
     "300, 300",
-    `../deletion_form`,
+    `../form-deletion`,
     function(panel) {
       panel.content.innerHTML = this.responseText;
       panel.setHeaderTitle("Delete");

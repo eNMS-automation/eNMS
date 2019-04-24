@@ -87,8 +87,8 @@ from eNMS.properties import (
 
 
 @post("/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:destination>", "Edit")
-def add_edge(workflow_id: int, subtype: str, source: int, destination: int) -> dict:
-    return controller.add_edge(workflow_id, subtype, source, destination)
+def add_edge(**kwargs) -> dict:
+    return controller.add_edge(**kwargs)
 
 
 @post("/add_jobs_to_workflow/<int:workflow_id>", "Edit")
@@ -115,24 +115,7 @@ def advanced() -> dict:
 
 @get("/calendar", "View")
 def calendar() -> dict:
-    tasks = {}
-    for task in fetch_all("Task"):
-        # javascript dates range from 0 to 11, we must account for that by
-        # substracting 1 to the month for the date to be properly displayed in
-        # the calendar
-        date = task.next_run_time
-        if not date:
-            continue
-        python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
-        month = "{:02}".format((int(python_month) - 1) % 12)
-        js_date = [
-            int(i)
-            for i in sub(
-                r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*", r"\1," + month + r",\3,\4,\5", date
-            ).split(",")
-        ]
-        tasks[task.name] = {**task.serialized, **{"date": js_date}}
-    return dict(tasks=tasks)
+    return controller.calendar()
 
 
 @post("/clear_configurations/<int:device_id>", "Edit")
@@ -152,48 +135,17 @@ def connection(device_id: int) -> dict:
 
 @get("/dashboard")
 def dashboard() -> dict:
-    on_going = {
-        "Running services": len(
-            [service for service in fetch_all("Service") if service.status == "Running"]
-        ),
-        "Running workflows": len(
-            [
-                workflow
-                for workflow in fetch_all("Workflow")
-                if workflow.status == "Running"
-            ]
-        ),
-        "Scheduled tasks": len(
-            [task for task in fetch_all("Task") if task.status == "Active"]
-        ),
-    }
-    return dict(
-        properties=type_to_diagram_properties,
-        default_properties=default_diagrams_properties,
-        counters={**{cls: len(fetch_all_visible(cls)) for cls in classes}, **on_going},
-    )
+    return controller.dashboard()
 
 
 @post("/database_helpers", "Admin")
-def database_helpers() -> bool:
-    delete_all(*request.form["deletion_types"])
-    clear_logs_date = request.form["clear_logs_date"]
-    if clear_logs_date:
-        clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
-        for job in fetch_all("Job"):
-            job.logs = {
-                date: log
-                for date, log in job.logs.items()
-                if datetime.strptime(date, "%Y-%m-%d-%H:%M:%S.%f") > clear_date
-            }
+def database_helpers() -> None:
+    controller.database_helpers(request)
 
 
 @post("/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
 def delete_edge(workflow_id: int, edge_id: int) -> str:
-    delete("WorkflowEdge", id=edge_id)
-    now = str(datetime.now())
-    fetch("Workflow", id=workflow_id).last_modified = now
-    return now
+    controller.delete_edge(**kwargs)
 
 
 @post("/delete/<cls>/<int:instance_id>", "Edit")

@@ -54,7 +54,41 @@ from eNMS.properties import (
 )
 
 
-class Controller(AutomationController, ImportExportController):
+class Controller(
+    AutomationController,
+    ImportExportController,
+    InventoryController,
+    AdministrationController,
+):
+    def dashboard(self) -> dict:
+        on_going = {
+            "Running services": len(
+                [
+                    service
+                    for service in fetch_all("Service")
+                    if service.status == "Running"
+                ]
+            ),
+            "Running workflows": len(
+                [
+                    workflow
+                    for workflow in fetch_all("Workflow")
+                    if workflow.status == "Running"
+                ]
+            ),
+            "Scheduled tasks": len(
+                [task for task in fetch_all("Task") if task.status == "Active"]
+            ),
+        }
+        return dict(
+            properties=type_to_diagram_properties,
+            default_properties=default_diagrams_properties,
+            counters={
+                **{cls: len(fetch_all_visible(cls)) for cls in classes},
+                **on_going,
+            },
+        )
+
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         instance = delete(cls, id=instance_id)
         info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')

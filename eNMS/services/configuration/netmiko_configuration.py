@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.helpers import NETMIKO_DRIVERS
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -15,7 +15,7 @@ class NetmikoConfigurationService(Service, metaclass=register_class):
     content = Column(String(255))
     content_textarea = True
     driver = Column(String(255))
-    driver_values = NETMIKO_DRIVERS
+    driver_values = controller.NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     enable_mode = Column(Boolean)
     fast_cli = Column(Boolean, default=False)

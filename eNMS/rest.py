@@ -9,7 +9,6 @@ from typing import Union
 
 from eNMS.controller import controller
 from eNMS.framework import delete, factory, fetch
-from eNMS.helpers import scheduler_job
 from eNMS.modules import auth, scheduler
 
 
@@ -66,7 +65,7 @@ class RestAutomation(Resource):
         if handle_asynchronously:
             scheduler.add_job(
                 id=str(datetime.now()),
-                func=scheduler_job,
+                func=controller.scheduler_job,
                 run_date=datetime.now(),
                 args=[job.id, None, [d.id for d in targets], data.get("payload")],
                 trigger="date",

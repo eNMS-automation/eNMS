@@ -1,7 +1,7 @@
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.helpers import NETMIKO_SCP_DRIVERS
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -18,7 +18,7 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
     direction_values = (("put", "Upload"), ("get", "Download"))
     disable_md5 = Column(Boolean)
     driver = Column(String(255))
-    driver_values = NETMIKO_SCP_DRIVERS
+    driver_values = controller.NETMIKO_SCP_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     file_system = Column(String(255))
     inline_transfer = Column(Boolean)

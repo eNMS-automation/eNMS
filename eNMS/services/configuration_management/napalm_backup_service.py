@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from yaml import dump
 
-from eNMS.helpers import NAPALM_DRIVERS, str_dict
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -19,7 +19,7 @@ class NapalmBackupService(Service, metaclass=register_class):
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
     driver = Column(String(255))
-    driver_values = NAPALM_DRIVERS
+    driver_values = controller.NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 
@@ -44,7 +44,7 @@ class NapalmBackupService(Service, metaclass=register_class):
             napalm_driver = self.napalm_connection(device)
             napalm_driver.open()
             self.logs.append(f"Fetching configuration on {device.name} (Napalm)")
-            config = str_dict(napalm_driver.get_config())
+            config = controller.str_dict(napalm_driver.get_config())
             napalm_driver.close()
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()

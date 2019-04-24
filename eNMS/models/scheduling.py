@@ -6,9 +6,9 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 from typing import Any, List, Optional, Tuple
 
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.modules import db, scheduler
-from eNMS.helpers import scheduler_job
 from eNMS.models.base import Base
 
 
@@ -114,7 +114,7 @@ class Task(Base, metaclass=register_class):
     def kwargs(self) -> Tuple[dict, dict]:
         default = {
             "id": self.aps_job_id,
-            "func": scheduler_job,
+            "func": controller.scheduler_job,
             "replace_existing": True,
             "args": [self.job.id, self.aps_job_id],
         }

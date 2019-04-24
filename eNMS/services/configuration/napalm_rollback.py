@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 
-from eNMS.helpers import NAPALM_DRIVERS
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -14,7 +14,7 @@ class NapalmRollbackService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     driver = Column(String(255))
-    driver_values = NAPALM_DRIVERS
+    driver_values = controller.NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

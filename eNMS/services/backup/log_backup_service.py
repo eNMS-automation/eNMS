@@ -7,8 +7,8 @@ from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
+from eNMS.controller import controller
 from eNMS.framework import fetch_all
-from eNMS.helpers import strip_all
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -31,7 +31,7 @@ class LogBackupService(Service, metaclass=register_class):
 
     def job(self, payload: dict, device: Device) -> dict:
         path_backup = Path.cwd() / "logs" / "job_logs"
-        now = strip_all(str(datetime.now()))
+        now = controller.strip_all(str(datetime.now()))
         path_dir = path_backup / f"logs_{now}"
         source = path_backup / f"logs_{now}.tgz"
         makedirs(path_dir)

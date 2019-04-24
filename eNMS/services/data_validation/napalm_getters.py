@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.helpers import NAPALM_DRIVERS
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -26,7 +26,7 @@ class NapalmGettersService(Service, metaclass=register_class):
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
     driver = Column(String(255))
-    driver_values = NAPALM_DRIVERS
+    driver_values = controller.NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
     getters_values = (

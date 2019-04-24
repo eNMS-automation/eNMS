@@ -3,7 +3,7 @@ from pathlib import Path
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from yaml import dump
 
-from eNMS.helpers import NETMIKO_DRIVERS
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -19,7 +19,7 @@ class NetmikoBackupService(Service, metaclass=register_class):
     number_of_configuration = Column(Integer, default=10)
     configuration_command = Column(String(255))
     driver = Column(String(255))
-    driver_values = NETMIKO_DRIVERS
+    driver_values = controller.NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

@@ -6,8 +6,8 @@ from os import environ
 from pathlib import Path
 from werkzeug.serving import run_simple
 
+from eNMS.controller import controller
 from eNMS.framework import delete, factory, fetch
-from eNMS.helpers import str_dict
 
 
 def configure_cli(app: Flask) -> None:
@@ -15,19 +15,19 @@ def configure_cli(app: Flask) -> None:
     @argument("table")
     @argument("name")
     def cli_fetch(table: str, name: str) -> None:
-        echo(str_dict(fetch(table, name=name).get_properties()))
+        echo(controller.str_dict(fetch(table, name=name).get_properties()))
 
     @app.cli.command()
     @argument("table")
     @argument("properties")
     def update(table: str, properties: str) -> None:
-        echo(str_dict(factory(table, **loads(properties)).get_properties()))
+        echo(controller.str_dict(factory(table, **loads(properties)).get_properties()))
 
     @app.cli.command(name="delete")
     @argument("table")
     @argument("name")
     def cli_delete(table: str, name: str) -> None:
-        echo(str_dict(delete(table, name=name)))
+        echo(controller.str_dict(delete(table, name=name)))
 
     @app.cli.command()
     @argument("name")
@@ -41,7 +41,7 @@ def configure_cli(app: Flask) -> None:
         if payload:
             payload = loads(payload)
         job = fetch("Job", name=name)
-        echo(str_dict(job.try_run(targets=targets, payload=payload)[0]))
+        echo(controller.str_dict(job.try_run(targets=targets, payload=payload)[0]))
 
     @app.cli.command()
     @pass_script_info

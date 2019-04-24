@@ -6,14 +6,14 @@ from git import Repo
 from git.exc import GitCommandError
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from pathlib import Path
 from re import search, sub
 from sqlalchemy.exc import DataError
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Set
 
-from eNMS.modules import scheduler
+from eNMS.modules import db, scheduler
 from eNMS.forms import CompareResultsForm, WorkflowBuilderForm
 from eNMS.framework import delete, factory, fetch, fetch_all, get_one, objectify
-from eNMS.helpers import scheduler_job, str_dict
 from eNMS.models import service_classes
 from eNMS.properties import (
     cls_to_properties,
@@ -225,7 +225,7 @@ class AutomationController:
                 return {"error": "This service should not have targets configured."}
         scheduler.add_job(
             id=str(datetime.now()),
-            func=scheduler_job,
+            func=self.scheduler_job,
             run_date=datetime.now(),
             args=[job.id],
             trigger="date",
@@ -252,7 +252,7 @@ class AutomationController:
         targets: Optional[Set["Device"]] = None,
         payload: Optional[dict] = None,
     ) -> None:
-        with controller.app.app_context():
+        with self.app.app_context():
             task = fetch("Task", creation_time=aps_job_id)
             job = fetch("Job", id=job_id)
             if targets:
@@ -262,7 +262,7 @@ class AutomationController:
             if job.push_to_git and parameters.git_automation:
                 path_git_folder = Path.cwd() / "git" / "automation"
                 with open(path_git_folder / job.name, "w") as file:
-                    file.write(str_dict(results))
+                    file.write(self.str_dict(results))
                 repo = Repo(str(path_git_folder))
                 try:
                     repo.git.add(A=True)
@@ -276,8 +276,12 @@ class AutomationController:
 
     def get_results_diff(self, job_id: int, v1: str, v2: str) -> dict:
         job = fetch("Job", id=job_id)
-        first = str_dict(dict(reversed(sorted(job.results[v1].items())))).splitlines()
-        second = str_dict(dict(reversed(sorted(job.results[v2].items())))).splitlines()
+        first = self.str_dict(
+            dict(reversed(sorted(job.results[v1].items())))
+        ).splitlines()
+        second = self.str_dict(
+            dict(reversed(sorted(job.results[v2].items())))
+        ).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 

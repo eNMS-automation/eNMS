@@ -29,7 +29,7 @@ class DatabaseBackupService(Service, metaclass=register_class):
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
 
     def job(self, payload: dict, device: Device) -> dict:
-        now = strip_all(str(datetime.now()))
+        now = controller.strip_all(str(datetime.now()))
         source = Path.cwd() / "migrations" / f"backup_{now}.tgz"
         controller.migrate_export(
             Path.cwd(),

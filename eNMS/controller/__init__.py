@@ -1,13 +1,14 @@
 from contextlib import contextmanager
 from flask import Flask, request
 from flask_login import current_user
+from flask_wtf import FlaskForm
 from json.decoder import JSONDecodeError
 from logging import info
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from string import punctuation
-from typing import Generator, List
+from typing import Any, Generator, List
 
 from eNMS.controller.automation_controller import AutomationController
 from eNMS.controller.import_export_controller import ImportExportController
@@ -133,7 +134,7 @@ class Controller(
         else:
             return str(input)
 
-    def strip_all(input: str) -> str:
+    def strip_all(self, input: str) -> str:
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
     def table(self, table_type: str) -> dict:

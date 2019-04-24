@@ -10,8 +10,8 @@ from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 
+from eNMS.controller import controller
 from eNMS.framework import factory, fetch_all, get_one
-from eNMS.helpers import str_dict
 from eNMS.modules import mail_client
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -52,7 +52,7 @@ class SwissArmyKnifeService(Service, metaclass=register_class):
         runtime = payload["runtime"].replace(".", "").replace(":", "")
         filename = f"results-{runtime}.txt"
         with open(filename, "w") as file:
-            file.write(str_dict(payload["results"][payload["runtime"]]))
+            file.write(controller.str_dict(payload["results"][payload["runtime"]]))
         with open(filename, "r") as file:
             message.attach(
                 filename,
@@ -71,7 +71,7 @@ class SwissArmyKnifeService(Service, metaclass=register_class):
         result = slack_client.api_call(
             "chat.postMessage",
             channel=parameters.slack_channel,
-            text=str_dict(payload["content"]),
+            text=controller.str_dict(payload["content"]),
         )
         return {"success": True, "result": str(result)}
 

@@ -1,7 +1,7 @@
 from re import findall
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 
-from eNMS.helpers import NETMIKO_DRIVERS
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -23,7 +23,7 @@ class NetmikoDataExtractionService(Service, metaclass=register_class):
     command3 = Column(String(255))
     regular_expression3 = Column(String(255))
     driver = Column(String(255))
-    driver_values = NETMIKO_DRIVERS
+    driver_values = controller.NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

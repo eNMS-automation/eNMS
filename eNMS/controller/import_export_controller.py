@@ -241,7 +241,6 @@ class ImportExportController:
             except Exception as e:
                 info(f"{str(edge)} could not be imported ({str(e)})")
                 status = "Partial import (see logs)."
-        print("fix")
         if request.form.get("empty_database_before_import", False):
             create_default(current_app)
         return status

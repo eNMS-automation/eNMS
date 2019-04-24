@@ -66,35 +66,36 @@ class Controller(
         info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
         return instance
 
-    def filtering(self, table: str, request: dict) -> dict:
+    def filtering(self, table: str) -> dict:
         model = classes.get(table, classes["Device"])
         properties = table_properties[table]
         if table in ("configuration", "device"):
             properties.append("current_configuration")
         try:
-            order_property = properties[int(request["order[0][column]"])]
+            order_property = properties[int(request.args["order[0][column]"])]
         except IndexError:
             order_property = "name"
-        order = getattr(getattr(model, order_property), request["order[0][dir]"])()
+        order = getattr(getattr(model, order_property), request.args["order[0][dir]"])()
         constraints = []
         for property in properties:
-            value = request.get(f"form[{property}]")
+            value = request.args.get(f"form[{property}]")
             if value:
                 constraints.append(getattr(model, property).contains(value))
         result = db.session.query(model).filter(and_(*constraints)).order_by(order)
         if table in ("device", "link", "configuration"):
-            pools = [int(id) for id in request.getlist("form[pools][]")]
+            pools = [int(id) for id in request.args.getlist("form[pools][]")]
             if pools:
                 result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
         return {
-            "draw": int(request["draw"]),
+            "jsonify": True,
+            "draw": int(request.args["draw"]),
             "recordsTotal": len(model.query.all()),
             "recordsFiltered": len(result.all()),
             "data": [
                 [getattr(obj, property) for property in properties]
                 + obj.generate_row(table)
-                for obj in result.limit(int(request["length"]))
-                .offset(int(request["start"]))
+                for obj in result.limit(int(request.args["length"]))
+                .offset(int(request.args["start"]))
                 .all()
             ],
         }

@@ -24,6 +24,8 @@ def get_route(endpoint: str) -> Response:
         f"User '{current_user.name}' ({request.remote_addr})"
         f"calling the endpoint {endpoint} (GET)"
     )
+    if func == "filtering":
+        return jsonify(ctx)
     return render_template(f"{ctx.pop('template', 'pages/' + endpoint)}.html", **ctx)
 
 

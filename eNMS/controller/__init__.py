@@ -142,6 +142,14 @@ class Controller(
         self.app = app
         self.session = session
 
+    def table(self, table_type: str) -> dict:
+        return dict(
+            properties=table_properties[table_type],
+            fixed_columns=table_fixed_columns[table_type],
+            type=table_type,
+            template="pages/table",
+        )
+
     @contextmanager
     def session_scope() -> Generator:
         session = self.session()  # type: ignore

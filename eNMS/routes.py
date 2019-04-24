@@ -92,7 +92,9 @@ from eNMS.properties import (
 @bp.route("/<endpoint>", methods=["GET"])
 @login_required
 def get_route(endpoint: str) -> Response:
-    ctx = getattr(controller, endpoint)() or {}
+    print(endpoint)
+    func, *args = endpoint.split("_")
+    ctx = getattr(controller, func)(*args) or {}
     if not isinstance(ctx, dict):
         return ctx
     ctx["endpoint"] = endpoint
@@ -143,16 +145,6 @@ def route_form(form_type: str) -> dict:
         form=form_classes.get(form_type, FlaskForm)(request.form),
         form_type=form_type,
         template=f"forms/{form_templates.get(form_type, form_type + '_form')}",
-    )
-
-
-@get("/<table_type>_management", "View")
-def route_table(table_type: str) -> dict:
-    return dict(
-        properties=table_properties[table_type],
-        fixed_columns=table_fixed_columns[table_type],
-        type=table_type,
-        template="pages/table",
     )
 
 

@@ -61,9 +61,39 @@ class InventoryController:
         ]
         return "\n".join(device_logs)
 
+    def save_pool_objects(pool_id: int) -> dict:
+        pool = fetch("Pool", id=pool_id)
+        pool.devices = objectify("Device", request.form["devices"])
+        pool.links = objectify("Link", request.form["links"])
+        return pool.serialized
+
     def update_pools(self, pool_id: str) -> None:
         if pool_id == "all":
             for pool in fetch_all("Pool"):
                 pool.compute_pool()
         else:
             fetch("Pool", id=int(pool_id)).compute_pool()
+
+    def view(view_type: str) -> dict:
+        return dict(
+            template="pages/geographical_view",
+            parameters=get_one("Parameters").serialized,
+            subtype_sizes=subtype_sizes,
+            link_colors=link_subtype_to_color,
+            view_type=view_type,
+        )
+
+    def view_filtering(filter_type: str):
+        model = filter_type.split("_")[0]
+        model = classes[model]
+        properties = table_properties[model] + ["current_configuration"]
+        constraints = []
+        for property in properties:
+            value = request.form[property]
+            if value:
+                constraints.append(getattr(model, property).contains(value))
+        result = db.session.query(model).filter(and_(*constraints))
+        pools = [int(id) for id in request.args.getlist("form[pools][]")]
+        if pools:
+            result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
+        return [d.get_properties() for d in result.all()]

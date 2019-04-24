@@ -43,7 +43,7 @@ class AutomationController:
         workflow.last_modified = now
         return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
-    def clear_results(job_id: int) -> None:
+    def clear_results(self, job_id: int) -> None:
         fetch("Job", id=job_id).results = {}
 
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
@@ -52,14 +52,14 @@ class AutomationController:
         fetch("Workflow", id=workflow_id).last_modified = now
         return now
 
-    def delete_node(workflow_id: int, job_id: int) -> dict:
+    def delete_node(self, workflow_id: int, job_id: int) -> dict:
         workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
         workflow.jobs.remove(job)
         now = str(datetime.now())
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
-    def download_configuration(name: str) -> Response:
+    def download_configuration(self, name: str) -> Response:
         try:
             return send_file(
                 filename_or_fp=str(app.path / "git" / "configurations" / name / name),
@@ -91,7 +91,7 @@ class AutomationController:
             )
         return new_workflow.serialized
 
-    def get_git_content() -> bool:
+    def get_git_content(self) -> bool:
         parameters = get_one("Parameters")
         parameters.get_git_content(app)
 
@@ -102,7 +102,7 @@ class AutomationController:
     def get_job_results(self, id: int) -> dict:
         return fetch("Job", id=id).results
 
-    def get_service(id_or_cls: str) -> dict:
+    def get_service(self, id_or_cls: str) -> dict:
         service = None
         try:
             service = fetch("Service", id=id_or_cls)
@@ -195,6 +195,42 @@ class AutomationController:
             "service": service.serialized if service else None,
         }
 
+    def reset_status(self) -> None:
+        for job in fetch_all("Job"):
+            job.is_running = False
+
+    def run_job(self, job_id: int) -> dict:
+        job = fetch("Job", id=job_id)
+        if job.is_running:
+            return {"error": "Job is already running."}
+        targets = job.compute_targets()
+        if hasattr(job, "has_targets"):
+            if job.has_targets and not targets:
+                return {"error": "Set devices or pools as targets first."}
+            if not job.has_targets and targets:
+                return {"error": "This service should not have targets configured."}
+        scheduler.add_job(
+            id=str(datetime.now()),
+            func=scheduler_job,
+            run_date=datetime.now(),
+            args=[job.id],
+            trigger="date",
+        )
+        return job.serialized
+
+    def save_device_jobs(self, device_id: int) -> bool:
+        fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
+
+    def save_positions(self, workflow_id: int) -> str:
+        now = str(datetime.now())
+        workflow = fetch("Workflow", id=workflow_id)
+        workflow.last_modified = now
+        session["workflow"] = workflow.id
+        for job_id, position in request.json.items():
+            job = fetch("Job", id=job_id)
+            job.positions[workflow.name] = (position["x"], position["y"])
+        return now
+
     def get_results_diff(self, job_id: int, v1: str, v2: str) -> dict:
         job = fetch("Job", id=job_id)
         first = str_dict(dict(reversed(sorted(job.results[v1].items())))).splitlines()
@@ -223,3 +259,15 @@ class AutomationController:
             ]
             tasks[task.name] = {**task.serialized, **{"date": js_date}}
         return dict(tasks=tasks)
+
+    def task_action(action: str, task_id: int) -> bool:
+        getattr(fetch("Task", id=task_id), action)()
+
+    def workflow_builder(self) -> dict:
+        workflow = fetch("Workflow", id=session.get("workflow", None))
+        return dict(
+            workflow=workflow.serialized if workflow else None,
+            workflow_builder_form=WorkflowBuilderForm(request.form),
+            compare_results_form=CompareResultsForm(request.form),
+            services_classes=sorted(service_classes),
+        )

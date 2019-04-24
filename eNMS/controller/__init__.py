@@ -155,5 +155,17 @@ class Controller(
         finally:
             self.session.remove()
 
+    def update_instance(cls: str) -> dict:
+        try:
+            instance = factory(cls, **request.form)
+            info(
+                f"{current_user.name}: UPDATE {cls} " f"{instance.name} ({instance.id})"
+            )
+            return instance.serialized
+        except JSONDecodeError:
+            return {"error": "Invalid JSON syntax (JSON field)"}
+        except IntegrityError:
+            return {"error": "An object with the same name already exists"}
+
 
 controller = Controller()

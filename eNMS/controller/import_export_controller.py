@@ -1,10 +1,15 @@
 from collections import Counter
 from contextlib import contextmanager
+from copy import deepcopy
 from flask import Flask, current_app, request
 from flask.wrappers import Response
 from flask_login import current_user
 from logging import info
+from os import makedirs
+from os.path import exists
 from pathlib import Path, PosixPath
+from pynetbox import api as netbox_api
+from requests import get as http_get
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
 from typing import Generator, Set
@@ -13,7 +18,15 @@ from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
+from yaml import dump, load, BaseLoader
 
+from eNMS.forms import (
+    ImportExportForm,
+    LibreNmsForm,
+    NetboxForm,
+    OpenNmsForm,
+    WorkflowBuilderForm,
+)
 from eNMS.framework import (
     delete,
     delete_all,
@@ -126,6 +139,16 @@ class ImportExportController:
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
         workbook.save(current_app.path / "projects" / filename)
+
+    def import_export(self) -> dict:
+        return dict(
+            import_export_form=ImportExportForm(request.form),
+            librenms_form=LibreNmsForm(request.form),
+            netbox_form=NetboxForm(request.form),
+            opennms_form=OpenNmsForm(request.form),
+            google_earth_form=GoogleEarthForm(request.form),
+            parameters=get_one("Parameters"),
+        )
 
     def import_from_netbox(self) -> None:
         nb = netbox_api(

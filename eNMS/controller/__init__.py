@@ -1,55 +1,23 @@
-from collections import Counter
 from contextlib import contextmanager
-from flask import Flask
-from flask.wrappers import Response
+from flask import Flask, request
 from flask_login import current_user
+from json.decoder import JSONDecodeError
 from logging import info
-from pathlib import Path, PosixPath
 from sqlalchemy import and_
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from typing import Generator, List, Set
-from werkzeug.datastructures import FileStorage
-from werkzeug.utils import secure_filename
-from xlrd import open_workbook
-from xlrd.biffh import XLRDError
-from xlwt import Workbook
+from typing import Generator, List
 
 from eNMS.controller.automation_controller import AutomationController
 from eNMS.controller.import_export_controller import ImportExportController
 from eNMS.controller.inventory_controller import InventoryController
 from eNMS.controller.administration_controller import AdministrationController
-from eNMS.framework import (
-    delete,
-    delete_all,
-    factory,
-    fetch,
-    fetch_all,
-    fetch_all_visible,
-    get,
-    get_one,
-    objectify,
-    post,
-)
-from eNMS.models import classes, service_classes
-from eNMS.modules import (
-    bp,
-    db,
-    ldap_client,
-    scheduler,
-    tacacs_client,
-    USE_LDAP,
-    USE_TACACS,
-)
+from eNMS.forms import form_classes, form_templates
+from eNMS.framework import delete, factory, fetch, fetch_all, fetch_all_visible
+from eNMS.models import classes
+from eNMS.modules import db
 from eNMS.properties import (
-    cls_to_properties,
     default_diagrams_properties,
-    google_earth_styles,
-    link_subtype_to_color,
-    pretty_names,
-    private_properties,
-    property_types,
-    reverse_pretty_names,
-    subtype_sizes,
     table_fixed_columns,
     table_properties,
     type_to_diagram_properties,
@@ -136,7 +104,7 @@ class Controller(
             template=f"forms/{form_templates.get(form_type, form_type + '_form')}",
         )
 
-    def get_all_instances(cls: str) -> List[dict]:
+    def get_all_instances(self, cls: str) -> List[dict]:
         info(f"{current_user.name}: GET ALL {cls}")
         return [instance.get_properties() for instance in fetch_all_visible(cls)]
 
@@ -158,7 +126,7 @@ class Controller(
         )
 
     @contextmanager
-    def session_scope() -> Generator:
+    def session_scope(self) -> Generator:
         session = self.session()  # type: ignore
         try:
             yield session
@@ -170,7 +138,7 @@ class Controller(
         finally:
             self.session.remove()
 
-    def update_instance(cls: str) -> dict:
+    def update_instance(self, cls: str) -> dict:
         try:
             instance = factory(cls, **request.form)
             info(

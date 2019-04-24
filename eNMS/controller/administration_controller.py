@@ -1,34 +1,27 @@
 from datetime import datetime
-from flask import (
-    abort,
-    current_app as app,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    send_file,
-    session,
-    url_for,
-)
+from flask import abort, current_app as app, redirect, render_template, request, url_for
+from flask_login import current_user, login_user, logout_user, login_required
 from flask.wrappers import Response
-from typing import Any, Dict, Union
+from ldap3 import Connection, NTLM, SUBTREE
+from os import listdir
+from typing import Union
 
 from eNMS.forms import (
-    form_classes,
-    form_templates,
     AdministrationForm,
     DatabaseHelpersForm,
     LoginForm,
     MigrationsForm,
-    CompareResultsForm,
-    GoogleEarthForm,
-    ImportExportForm,
-    LibreNmsForm,
-    NetboxForm,
-    OpenNmsForm,
-    WorkflowBuilderForm,
 )
-from eNMS.framework import factory, fetch, get_one, objectify
+from eNMS.framework import delete_all, factory, fetch, fetch_all, get_one
+from eNMS.modules import (
+    bp,
+    db,
+    ldap_client,
+    scheduler,
+    tacacs_client,
+    USE_LDAP,
+    USE_TACACS,
+)
 
 
 class AdministrationController:
@@ -105,16 +98,6 @@ class AdministrationController:
         except Exception as e:
             info(f"Authentication failed ({str(e)})")
             abort(403)
-
-    def import_export(self) -> dict:
-        return dict(
-            import_export_form=ImportExportForm(request.form),
-            librenms_form=LibreNmsForm(request.form),
-            netbox_form=NetboxForm(request.form),
-            opennms_form=OpenNmsForm(request.form),
-            google_earth_form=GoogleEarthForm(request.form),
-            parameters=get_one("Parameters"),
-        )
 
     def login() -> Union[Response, str]:
         if not current_user.is_authenticated:

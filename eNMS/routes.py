@@ -12,8 +12,7 @@ from flask import (
     session,
     url_for,
 )
-from flask_login import current_user, login_user, logout_user
-from flask_login import current_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required
 from flask_wtf import FlaskForm
 from json import dumps, loads
 from json.decoder import JSONDecodeError
@@ -33,7 +32,57 @@ from subprocess import Popen
 from typing import Any, Dict, List, Union
 
 from eNMS.controller import controller
+from eNMS.modules import (
+    bp,
+    db,
+    ldap_client,
+    scheduler,
+    tacacs_client,
+    USE_LDAP,
+    USE_TACACS,
+)
+from eNMS.forms import (
+    form_classes,
+    form_templates,
+    AdministrationForm,
+    DatabaseHelpersForm,
+    LoginForm,
+    MigrationsForm,
+    CompareResultsForm,
+    GoogleEarthForm,
+    ImportExportForm,
+    LibreNmsForm,
+    NetboxForm,
+    OpenNmsForm,
+    WorkflowBuilderForm,
+)
+from eNMS.framework import (
+    delete,
+    delete_all,
+    factory,
+    fetch,
+    fetch_all,
+    fetch_all_visible,
+    get_one,
+    objectify,
+)
+from eNMS.helpers import scheduler_job, str_dict
+from eNMS.models import classes, service_classes
 from eNMS.modules import bp
+from eNMS.properties import (
+    cls_to_properties,
+    default_diagrams_properties,
+    google_earth_styles,
+    link_subtype_to_color,
+    pretty_names,
+    private_properties,
+    property_types,
+    reverse_pretty_names,
+    subtype_sizes,
+    table_fixed_columns,
+    table_properties,
+    type_to_diagram_properties,
+)
 
 
 @bp.route("/")

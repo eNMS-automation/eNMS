@@ -42,6 +42,9 @@ class AutomationController:
         workflow.last_modified = now
         return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
+    def clear_results(job_id: int) -> None:
+        fetch("Job", id=job_id).results = {}
+
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
         delete("WorkflowEdge", id=edge_id)
         now = str(datetime.now())

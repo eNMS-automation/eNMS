@@ -128,39 +128,9 @@ def advanced() -> dict:
     )
 
 
-@post("/clear_configurations/<int:device_id>", "Edit")
-def clear_configurations(device_id: int) -> bool:
-    fetch("Device", id=device_id).configurations = {}
-
-
-@post("/clear_results/<int:job_id>", "Edit")
-def clear_results(job_id: int) -> bool:
-    fetch("Job", id=job_id).results = {}
-
-
-@post("/connection/<int:device_id>", "Connect to device")
-def connection(device_id: int) -> dict:
-    return controller.connection(device_id)
-
-
 @get("/<page>")
 def get_route(page: str) -> Any:
     return getattr(controller, page)()
-
-
-@post("/database_helpers", "Admin")
-def database_helpers() -> None:
-    controller.database_helpers()
-
-
-@post("/delete_edge/<int:workflow_id>/<int:edge_id>", "Edit")
-def delete_edge(workflow_id: int, edge_id: int) -> str:
-    controller.delete_edge(**kwargs)
-
-
-@post("/delete/<cls>/<int:instance_id>", "Edit")
-def delete_instance(cls: str, instance_id: int) -> dict:
-    return controller.delete_instance(cls, instance_id)
 
 
 @post("/delete_node/<int:workflow_id>/<int:job_id>", "Edit")
@@ -208,26 +178,6 @@ def duplicate_workflow(workflow_id: int) -> dict:
     return new_workflow.serialized
 
 
-@post("/export_to_google_earth", "View")
-def export_to_google_earth() -> bool:
-    kml_file = Kml()
-    for device in fetch_all("Device"):
-        point = kml_file.newpoint(name=device.name)
-        point.coords = [(device.longitude, device.latitude)]
-        point.style = google_earth_styles[device.subtype]
-        point.style.labelstyle.scale = request.form["label_size"]
-    for link in fetch_all("Link"):
-        line = kml_file.newlinestring(name=link.name)
-        line.coords = [
-            (link.source.longitude, link.source.latitude),
-            (link.destination.longitude, link.destination.latitude),
-        ]
-        line.style = google_earth_styles[link.subtype]
-        line.style.linestyle.width = request.form["line_width"]
-    filepath = app.path / "google_earth" / f'{request.form["name"]}.kmz'
-    kml_file.save(filepath)
-
-
 @post("/export_topology", "View")
 def export_topology() -> bool:
     return controller.object_export(request.form, app.path)
@@ -242,11 +192,6 @@ def filtering(table: str) -> Response:
 def get_all_instances(cls: str) -> List[dict]:
     info(f"{current_user.name}: GET ALL {cls}")
     return [instance.get_properties() for instance in fetch_all_visible(cls)]
-
-
-@post("/get_cluster_status", "View")
-def get_cluster_status() -> dict:
-    return controller.get_cluster_status()
 
 
 @post("/get_configurations/<int:device_id>", "View")
@@ -501,21 +446,6 @@ def logout() -> Response:
 def migration(direction: str) -> Union[bool, str]:
     args = (app, request.form)
     return migrate_import(*args) if direction == "import" else migrate_export(*args)
-
-
-@post("/query_netbox", "Edit")
-def query_netbox() -> bool:
-    controller.import_from_netbox()
-
-
-@post("/query_librenms", "Edit")
-def query_librenms() -> bool:
-    controller.import_from_librenms()
-
-
-@post("/query_opennms", "Edit")
-def query_opennms() -> None:
-    controller.import_from_opennms()
 
 
 @post("/reset_status", "Admin")

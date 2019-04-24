@@ -9,7 +9,7 @@ from typing import Union
 
 from eNMS.controller import controller
 from eNMS.framework import delete, factory, fetch
-from eNMS.helpers import migrate_export, migrate_import, scheduler_job
+from eNMS.helpers import scheduler_job
 from eNMS.modules import auth, scheduler
 
 
@@ -108,8 +108,7 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction: str) -> Union[bool, str]:
-        args = (current_app, request.get_json())
-        return migrate_import(*args) if direction == "import" else migrate_export(*args)
+        return getattr(controller, f"migrate_{direction}")()
 
 
 class Topology(Resource):

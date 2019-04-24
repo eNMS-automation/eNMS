@@ -7,7 +7,7 @@ from logging import info
 from pathlib import Path, PosixPath
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
-from typing import Generator, Set
+from typing import Generator, List, Set
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook

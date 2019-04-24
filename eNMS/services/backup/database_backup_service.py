@@ -6,7 +6,7 @@ from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 
-from eNMS.helpers import migrate_export, strip_all
+from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -31,7 +31,7 @@ class DatabaseBackupService(Service, metaclass=register_class):
     def job(self, payload: dict, device: Device) -> dict:
         now = strip_all(str(datetime.now()))
         source = Path.cwd() / "migrations" / f"backup_{now}.tgz"
-        migrate_export(
+        controller.migrate_export(
             Path.cwd(),
             {"import_export_types": list(import_properties), "name": f"backup_{now}"},
         )

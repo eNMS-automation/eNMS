@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
 from eNMS.framework import factory, fetch, fetch_all, objectify
 
@@ -61,7 +61,7 @@ class InventoryController:
         ]
         return "\n".join(device_logs)
 
-    def save_pool_objects(pool_id: int) -> dict:
+    def save_pool_objects(self, pool_id: int) -> dict:
         pool = fetch("Pool", id=pool_id)
         pool.devices = objectify("Device", request.form["devices"])
         pool.links = objectify("Link", request.form["links"])
@@ -74,7 +74,7 @@ class InventoryController:
         else:
             fetch("Pool", id=int(pool_id)).compute_pool()
 
-    def view(view_type: str) -> dict:
+    def view(self, view_type: str) -> dict:
         return dict(
             template="pages/geographical_view",
             parameters=get_one("Parameters").serialized,
@@ -83,7 +83,7 @@ class InventoryController:
             view_type=view_type,
         )
 
-    def view_filtering(filter_type: str):
+    def view_filtering(self, filter_type: str):
         model = filter_type.split("_")[0]
         model = classes[model]
         properties = table_properties[model] + ["current_configuration"]

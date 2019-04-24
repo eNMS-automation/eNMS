@@ -25,7 +25,6 @@ from pynetbox import api as netbox_api
 from re import search, sub
 from requests import get as http_get
 from requests.exceptions import ConnectionError
-from simplekml import Kml
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, DataError
 from subprocess import Popen

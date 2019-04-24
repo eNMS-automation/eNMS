@@ -1,18 +1,13 @@
 from collections import Counter
-from contextlib import contextmanager
 from copy import deepcopy
-from flask import Flask, current_app, request
-from flask.wrappers import Response
-from flask_login import current_user
+from flask import current_app, request
 from logging import info
 from os import makedirs
 from os.path import exists
-from pathlib import Path, PosixPath
 from pynetbox import api as netbox_api
 from requests import get as http_get
-from sqlalchemy import and_
-from sqlalchemy.orm import Session
-from typing import Generator, Set
+from simplekml import Kml
+from typing import Set
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -20,49 +15,17 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 from yaml import dump, load, BaseLoader
 
+from eNMS.default import create_default
 from eNMS.forms import (
+    GoogleEarthForm,
     ImportExportForm,
     LibreNmsForm,
     NetboxForm,
     OpenNmsForm,
-    WorkflowBuilderForm,
 )
-from eNMS.framework import (
-    delete,
-    delete_all,
-    factory,
-    fetch,
-    fetch_all,
-    fetch_all_visible,
-    get,
-    get_one,
-    objectify,
-    post,
-)
-from eNMS.models import classes, service_classes
-from eNMS.modules import (
-    bp,
-    db,
-    ldap_client,
-    scheduler,
-    tacacs_client,
-    USE_LDAP,
-    USE_TACACS,
-)
-from eNMS.properties import (
-    cls_to_properties,
-    default_diagrams_properties,
-    google_earth_styles,
-    link_subtype_to_color,
-    pretty_names,
-    private_properties,
-    property_types,
-    reverse_pretty_names,
-    subtype_sizes,
-    table_fixed_columns,
-    table_properties,
-    type_to_diagram_properties,
-)
+from eNMS.framework import delete_all, export, factory, fetch_all, get_one
+from eNMS.modules import db
+from eNMS.properties import google_earth_styles, reverse_pretty_names
 from eNMS.properties import export_properties
 
 
@@ -82,7 +45,7 @@ class ImportExportController:
             ]
             line.style = google_earth_styles[link.subtype]
             line.style.linestyle.width = request.form["line_width"]
-        filepath = app.path / "google_earth" / f'{request.form["name"]}.kmz'
+        filepath = current_app.path / "google_earth" / f'{request.form["name"]}.kmz'
         kml_file.save(filepath)
 
     def get_cluster_status(self) -> dict:

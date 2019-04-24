@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any, Dict
 
-from eNMS.framework import factory, fetch, objectify
+from eNMS.framework import factory, fetch, fetch_all, objectify
 
 
 class InventoryController:
@@ -38,3 +38,10 @@ class InventoryController:
             "redirection": app.config["GOTTY_PORT_REDIRECTION"],
             "server_addr": app.config["ENMS_SERVER_ADDR"],
         }
+
+    def update_pools(self, pool_id: str) -> None:
+        if pool_id == "all":
+            for pool in fetch_all("Pool"):
+                pool.compute_pool()
+        else:
+            fetch("Pool", id=int(pool_id)).compute_pool()

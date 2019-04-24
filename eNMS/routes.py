@@ -13,6 +13,7 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from json import dumps, loads
 from json.decoder import JSONDecodeError
@@ -67,9 +68,11 @@ from eNMS.framework import (
     get_one,
     objectify,
     post,
+    permission_required,
 )
 from eNMS.helpers import migrate_export, migrate_import, scheduler_job, str_dict
 from eNMS.models import classes, service_classes
+from eNMS.modules import bp
 from eNMS.properties import (
     cls_to_properties,
     default_diagrams_properties,
@@ -86,14 +89,26 @@ from eNMS.properties import (
 )
 
 
-@post("/add_edge/<int:workflow_id>/<subtype>/<int:source>/<int:destination>", "Edit")
-def add_edge(**kwargs) -> dict:
-    return controller.add_edge(**kwargs)
-
-
-@post("/add_jobs_to_workflow/<int:workflow_id>", "Edit")
-def add_jobs_to_workflow(**kwargs) -> Dict[str, Any]:
-    return controller.add_jobs_to_workflow(**kwargs)
+@bp.route("/<endpoint>", methods=["POST"])
+@login_required
+def post_route(endpoint: str) -> Response:
+    data = {**request.form.to_dict(), **{"creator": current_user.id}}
+    for property in data.get("list_fields", "").split(","):
+        data[property] = request.form.getlist(property)
+    for property in data.get("boolean_fields", "").split(","):
+        data[property] = property in request.form
+    request.form = data
+    func, *args = endpoint.split("@")
+    info(
+        f"User '{current_user.name}' ({request.remote_addr})"
+        f" calling the endpoint {request.url} (POST)"
+    )
+    try:
+        result = getattr(controller, func)(*args)
+        db.session.commit()
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 
 @get("/administration", "View")
@@ -636,12 +651,8 @@ def update_instance(cls: str) -> dict:
 
 
 @post("/update_pool/<pool_id>", "Edit")
-def update_pools(pool_id: str) -> bool:
-    if pool_id == "all":
-        for pool in fetch_all("Pool"):
-            pool.compute_pool()
-    else:
-        fetch("Pool", id=int(pool_id)).compute_pool()
+def update_pools(**kwargs) -> bool:
+    controller.update_pools(**kwargs)
 
 
 @get("/<view_type>_view", "View")

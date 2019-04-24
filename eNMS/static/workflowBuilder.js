@@ -144,7 +144,7 @@ function addJobToWorkflow() {
       5
     );
   } else {
-    const url = `/add_jobs_to_workflow/${workflow.id}`;
+    const url = `/add_jobs_to_workflow@${workflow.id}`;
     fCall(url, "#add-job-form", function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {

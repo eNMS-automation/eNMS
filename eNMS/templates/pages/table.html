@@ -28,6 +28,11 @@
                     Create
                   </button>
                 {% endif %}
+                {% if type == "pool" %}
+                  <button class="btn btn-primary btn-file" onclick="updatePool('all')">
+                    Update all pools
+                  </button>
+                {% endif %}
                 <button class="btn btn-info btn-file" onclick="showFilteringPanel('{{ type }}')">
                   Filter
                 </button>

@@ -139,6 +139,7 @@ def post(url: str, permission: Optional[str] = None) -> Callable[[Callable], Cal
             for property in data.get("boolean_fields", "").split(","):
                 data[property] = property in request.form
             request.form = data
+            print(request.path)
             info(
                 f"User '{current_user.name}' ({request.remote_addr})"
                 f" calling the endpoint {request.url} (POST)"

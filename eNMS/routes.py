@@ -89,9 +89,23 @@ from eNMS.properties import (
 )
 
 
-@bp.route("/<endpoint>", methods=["POST"])
+@bp.route("/<endpoint>", methods=["GET"])
 @login_required
 def post_route(endpoint: str) -> Response:
+    ctx = getattr(controller, endpoint)() or {}
+    if not isinstance(ctx, dict):
+        return ctx
+    ctx["endpoint"] = endpoint
+    info(
+        f"User '{current_user.name}' ({request.remote_addr})"
+        f"calling the endpoint {endpoint} (GET)"
+    )
+    return render_template(f"{ctx.pop('template', 'pages/' + endpoint)}.html", **ctx)
+
+
+@bp.route("/<endpoint>", methods=["POST"])
+@login_required
+def get_route(endpoint: str) -> Response:
     data = {**request.form.to_dict(), **{"creator": current_user.id}}
     for property in data.get("list_fields", "").split(","):
         data[property] = request.form.getlist(property)
@@ -111,37 +125,6 @@ def post_route(endpoint: str) -> Response:
         return jsonify({"error": str(e)})
 
 
-@get("/administration", "View")
-def administration() -> dict:
-    return dict(
-        form=AdministrationForm(request.form),
-        parameters=get_one("Parameters").serialized,
-    )
-
-
-@get("/advanced", "View")
-def advanced() -> dict:
-    return dict(
-        database_helpers_form=DatabaseHelpersForm(request.form),
-        migrations_form=MigrationsForm(request.form),
-        folders=listdir(app.path / "migrations"),
-    )
-
-
-@get("/<page>")
-def get_route(page: str) -> Any:
-    return getattr(controller, page)()
-
-
-@post("/delete_node/<int:workflow_id>/<int:job_id>", "Edit")
-def delete_node(workflow_id: int, job_id: int) -> dict:
-    workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
-    workflow.jobs.remove(job)
-    now = str(datetime.now())
-    workflow.last_modified = now
-    return {"job": job.serialized, "update_time": now}
-
-
 @get("/download_configuration/<name>", "View")
 def download_configuration(name: str) -> Response:
     try:
@@ -152,30 +135,6 @@ def download_configuration(name: str) -> Response:
         )
     except FileNotFoundError:
         return jsonify("No configuration stored")
-
-
-@post("/duplicate_workflow/<int:workflow_id>", "Edit")
-def duplicate_workflow(workflow_id: int) -> dict:
-    parent_workflow = fetch("Workflow", id=workflow_id)
-    new_workflow = factory("Workflow", **request.form)
-    for job in parent_workflow.jobs:
-        new_workflow.jobs.append(job)
-        job.positions[new_workflow.name] = job.positions[parent_workflow.name]
-    for edge in parent_workflow.edges:
-        subtype, src, destination = edge.subtype, edge.source, edge.destination
-        new_workflow.edges.append(
-            factory(
-                "WorkflowEdge",
-                **{
-                    "name": f"{new_workflow.id}-{subtype}:{src.id}->{destination.id}",
-                    "workflow": new_workflow.id,
-                    "subtype": subtype,
-                    "source": src.id,
-                    "destination": destination.id,
-                },
-            )
-        )
-    return new_workflow.serialized
 
 
 @post("/export_topology", "View")

@@ -53,7 +53,7 @@ from eNMS.properties import (
 
 
 class ImportExportController:
-    def export_to_google_earth() -> None:
+    def export_to_google_earth(self) -> None:
         kml_file = Kml()
         for device in fetch_all("Device"):
             point = kml_file.newpoint(name=device.name)

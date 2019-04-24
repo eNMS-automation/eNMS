@@ -12,7 +12,8 @@ from wtforms import (
 )
 
 from eNMS.framework import choices
-from eNMS.helpers import NAPALM_DRIVERS, NETMIKO_DRIVERS
+from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
+from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,
@@ -22,6 +23,11 @@ from eNMS.properties import (
     import_properties,
     user_permissions,
 )
+
+
+NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
+NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
+NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
 
 class ObjectField(SelectField):

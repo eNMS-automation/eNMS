@@ -51,6 +51,35 @@ class AutomationController:
         fetch("Workflow", id=workflow_id).last_modified = now
         return now
 
+    def delete_node(workflow_id: int, job_id: int) -> dict:
+        workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
+        workflow.jobs.remove(job)
+        now = str(datetime.now())
+        workflow.last_modified = now
+        return {"job": job.serialized, "update_time": now}
+
+    def duplicate_workflow(self, workflow_id: int) -> dict:
+        parent_workflow = fetch("Workflow", id=workflow_id)
+        new_workflow = factory("Workflow", **request.form)
+        for job in parent_workflow.jobs:
+            new_workflow.jobs.append(job)
+            job.positions[new_workflow.name] = job.positions[parent_workflow.name]
+        for edge in parent_workflow.edges:
+            subtype, src, destination = edge.subtype, edge.source, edge.destination
+            new_workflow.edges.append(
+                factory(
+                    "WorkflowEdge",
+                    **{
+                        "name": f"{new_workflow.id}-{subtype}:{src.id}->{destination.id}",
+                        "workflow": new_workflow.id,
+                        "subtype": subtype,
+                        "source": src.id,
+                        "destination": destination.id,
+                    },
+                )
+            )
+        return new_workflow.serialized
+
     def calendar(self):
         tasks = {}
         for task in fetch_all("Task"):

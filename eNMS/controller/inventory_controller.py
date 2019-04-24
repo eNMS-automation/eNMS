@@ -5,10 +5,10 @@ from eNMS.framework import factory, fetch, fetch_all, objectify
 
 
 class InventoryController:
-    def clear_configurations(device_id: int) -> None:
+    def clear_configurations(self, device_id: int) -> None:
         fetch("Device", id=device_id).configurations = {}
 
-    def connection(device_id: int) -> dict:
+    def connection(self, device_id: int) -> dict:
         parameters, device = get_one("Parameters"), fetch("Device", id=device_id)
         cmd = [str(app.path / "applications" / "gotty"), "-w"]
         port, protocol = parameters.get_gotty_port(), request.form["protocol"]

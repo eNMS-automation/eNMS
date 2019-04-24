@@ -125,44 +125,16 @@ def post_route(endpoint: str) -> Response:
         return jsonify({"error": str(e)})
 
 
-@get("/filtering/<table>")
+@bp.route("/filtering/<table>", methods=["GET"])
+@login_required
 def filtering(table: str) -> Response:
     return jsonify(controller.filtering(table, request.args))
-
-
-@get("/get_raw_logs/<int:device_id>/<version>", "Edit")
-def get_raw_logs(device_id: int, version: str) -> str:
-    device = fetch("Device", id=device_id)
-    configurations = {str(k): v for k, v in device.configurations.items()}
-    return f'<pre>{configurations.get(version, "")}</pre>'
-
-
-@get("/import_export", "View")
-def import_export() -> dict:
-    return dict(
-        import_export_form=ImportExportForm(request.form),
-        librenms_form=LibreNmsForm(request.form),
-        netbox_form=NetboxForm(request.form),
-        opennms_form=OpenNmsForm(request.form),
-        google_earth_form=GoogleEarthForm(request.form),
-        parameters=get_one("Parameters"),
-    )
 
 
 @get("/logout")
 def logout() -> Response:
     logout_user()
     return redirect(url_for("admin_blueprint.login"))
-
-
-@get("/results/<int:id>/<runtime>", "View")
-def results(id: int, runtime: str) -> str:
-    job = fetch("Job", id=id)
-    if not job:
-        message = "The associated job has been deleted."
-    else:
-        message = job.results.get(runtime, "Results have been removed")
-    return f"<pre>{dumps(message, indent=4)}</pre>"
 
 
 @get("/<form_type>_form", "View")
@@ -192,20 +164,3 @@ def scheduler_action(action: str) -> bool:
 @bp.route("/")
 def site_root() -> Response:
     return redirect(url_for("bp.login"))
-
-
-@post("/<action>_task/<int:task_id>", "Edit")
-def task_action(action: str, task_id: int) -> bool:
-    getattr(fetch("Task", id=task_id), action)()
-
-
-@post("/update/<cls>", "Edit")
-def update_instance(cls: str) -> dict:
-    try:
-        instance = factory(cls, **request.form)
-        info(f"{current_user.name}: UPDATE {cls} " f"{instance.name} ({instance.id})")
-        return instance.serialized
-    except JSONDecodeError:
-        return {"error": "Invalid JSON syntax (JSON field)"}
-    except IntegrityError:
-        return {"error": "An object with the same name already exists"}

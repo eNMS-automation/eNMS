@@ -95,6 +95,16 @@ class AdministrationController:
             info(f"Authentication failed ({str(e)})")
             abort(403)
 
+    def import_export(self) -> dict:
+        return dict(
+            import_export_form=ImportExportForm(request.form),
+            librenms_form=LibreNmsForm(request.form),
+            netbox_form=NetboxForm(request.form),
+            opennms_form=OpenNmsForm(request.form),
+            google_earth_form=GoogleEarthForm(request.form),
+            parameters=get_one("Parameters"),
+        )
+
     def login() -> Union[Response, str]:
         if not current_user.is_authenticated:
             login_form = LoginForm(request.form)

@@ -42,6 +42,25 @@ class InventoryController:
             "server_addr": app.config["ENMS_SERVER_ADDR"],
         }
 
+    def get_configurations(self, device_id: int) -> dict:
+        return fetch("Device", id=device_id).get_configurations()
+
+    def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
+        device = fetch("Device", id=device_id)
+        d1, d2 = [datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%f") for d in (v1, v2)]
+        first = device.configurations[d1].splitlines()
+        second = device.configurations[d2].splitlines()
+        opcodes = SequenceMatcher(None, first, second).get_opcodes()
+        return {"first": first, "second": second, "opcodes": opcodes}
+
+    def get_device_logs(self, device_id: int) -> Union[str, bool]:
+        device_logs = [
+            log.content
+            for log in fetch_all("Log")
+            if log.source == fetch("Device", id=device_id).ip_address
+        ]
+        return "\n".join(device_logs)
+
     def update_pools(self, pool_id: str) -> None:
         if pool_id == "all":
             for pool in fetch_all("Pool"):

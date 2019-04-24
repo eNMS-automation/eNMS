@@ -129,6 +129,10 @@ class Controller(
             ],
         }
 
+    def get_all_instances(cls: str) -> List[dict]:
+        info(f"{current_user.name}: GET ALL {cls}")
+        return [instance.get_properties() for instance in fetch_all_visible(cls)]
+
     def init_app(self, app: Flask, session: Session):
         self.app = app
         self.session = session

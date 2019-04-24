@@ -130,42 +130,6 @@ def filtering(table: str) -> Response:
     return jsonify(controller.filtering(table, request.args))
 
 
-@post("/get_all/<cls>", "View")
-def get_all_instances(cls: str) -> List[dict]:
-    info(f"{current_user.name}: GET ALL {cls}")
-    return [instance.get_properties() for instance in fetch_all_visible(cls)]
-
-
-@post("/get_configurations/<int:device_id>", "View")
-def get_configurations(device_id: int) -> dict:
-    return fetch("Device", id=device_id).get_configurations()
-
-
-@post("/get_configuration_diff/<int:device_id>/<v1>/<v2>", "View")
-def get_configuration_diff(device_id: int, v1: str, v2: str) -> dict:
-    device = fetch("Device", id=device_id)
-    d1, d2 = [datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%f") for d in (v1, v2)]
-    first = device.configurations[d1].splitlines()
-    second = device.configurations[d2].splitlines()
-    opcodes = SequenceMatcher(None, first, second).get_opcodes()
-    return {"first": first, "second": second, "opcodes": opcodes}
-
-
-@post("/counters/<property>/<type>")
-def get_counters(property: str, type: str) -> Counter:
-    return controller.get_counters(property, type)
-
-
-@post("/get_device_logs/<int:device_id>", "View")
-def get_device_logs(device_id: int) -> Union[str, bool]:
-    device_logs = [
-        log.content
-        for log in fetch_all("Log")
-        if log.source == fetch("Device", id=device_id).ip_address
-    ]
-    return "\n".join(device_logs)
-
-
 @post("/get/<cls>/<id>", "View")
 def get_instance(cls: str, id: str) -> dict:
     instance = fetch(cls, id=id)

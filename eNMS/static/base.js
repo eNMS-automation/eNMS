@@ -127,9 +127,9 @@ function deleteInstance(type, id) {
  * @param {processing} processing - Function once panel is loaded.
  */
 // eslint-disable-next-line
-function createPanel(id, contentSize, url, processing) {
+function createPanel(name, title, contentSize, processing, id) {
   return jsPanel.create({
-    id: id,
+    id: id ? `${name}-${id}` : name,
     theme: "none",
     headerLogo: "../static/images/logo.png",
     headerControls: {
@@ -139,13 +139,38 @@ function createPanel(id, contentSize, url, processing) {
     contentSize: contentSize,
     position: "center-top 0 58",
     contentAjax: {
-      url: url,
-      done: processing,
+      url: `../form-${name}`,
+      done: function(panel) {
+        panel.content.innerHTML = this.responseText;
+        panel.setHeaderTitle(title);
+        configureForm(name);
+        preprocessForm(panel, id);
+        processing();
+      }
     },
     dragit: {
       opacity: 0.6,
     },
   });
+}
+
+/**
+ * Show Pool Objects.
+ */
+// eslint-disable-next-line
+function showPoolObjectsPanel(id) {
+  createPanel(
+    "pool_objects",
+    "Pool Objects",
+    "400 400",
+    function(panel) {
+      call(`/get-pool-${id}`, function(pool) {
+        $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
+        $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
+      });
+    },
+    id,
+  );
 }
 
 /**
@@ -236,28 +261,6 @@ function preprocessForm(panel, id, type, duplicate) {
       $(el).attr("onclick", type ? `${el.value}("${type}")` : `${el.value}()`);
     }
   });
-}
-
-/**
- * Connect to a device.
- */
-// eslint-disable-next-line
-function showPoolObjectsPanel(id) {
-  createPanel(
-    `pool-object-panel-${id}`,
-    "400 400",
-    "../pool_objects_form",
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Connect to device");
-      configureForm("pool_objects");
-      preprocessForm(panel, id);
-      call(`/get-pool-${id}`, function(pool) {
-        $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
-        $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
-      });
-    }
-  );
 }
 
 /**

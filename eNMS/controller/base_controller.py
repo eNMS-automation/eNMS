@@ -1,12 +1,11 @@
 from contextlib import contextmanager
-from flask import Flask, request
+from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from json.decoder import JSONDecodeError
 from logging import info
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
 from string import punctuation
 from typing import Any, Generator, List
 

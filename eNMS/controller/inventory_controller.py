@@ -91,10 +91,18 @@ class InventoryController:
             view_type=view_type,
         )
 
+    def get_view_topology(self) -> dict:
+        return {
+            "devices": [d.view_properties for d in fetch_all("Device")],
+            "links": [d.view_properties for d in fetch_all("Link")],
+        }
+
     def view_filtering(self, filter_type: str):
-        model = filter_type.split("_")[0]
-        model = classes[model]
-        properties = table_properties[model] + ["current_configuration"]
+        obj_type = filter_type.split("_")[0]
+        model = classes[obj_type]
+        properties = table_properties[obj_type]
+        if obj_type == "device":
+            properties.append("current_configuration")
         constraints = []
         for property in properties:
             value = request.form[property]
@@ -104,4 +112,4 @@ class InventoryController:
         pools = [int(id) for id in request.args.getlist("form[pools][]")]
         if pools:
             result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
-        return [d.get_properties() for d in result.all()]
+        return [d.view_properties for d in result.all()]

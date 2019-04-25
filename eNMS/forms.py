@@ -232,8 +232,8 @@ class DeviceFilteringForm(BaseObjectForm, FilteringForm):
 
 class LinkFilteringForm(BaseObjectForm, FilteringForm):
     subtype = StringField()
-    source = StringField()
-    destination = StringField()
+    source_name = StringField()
+    destination_name = StringField()
 
 
 @configure_pool_form

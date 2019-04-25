@@ -195,7 +195,6 @@ function createNode3d(node, nodeType) {
 // eslint-disable-next-line
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
-  let marker = null;
   marker = (currentView == "3D" ? createNode3d : createNode2d)(node, nodeType);
   marker.node_id = node.id;
   markersArray.push(marker);
@@ -366,14 +365,14 @@ $("body").contextMenu({
  */
 // eslint-disable-next-line
 function updateView() {
+  deleteAll();
   if (viewType == "network") {
-    call("/get-pool-1", function(pool) {
-      pool.devices.map((d) => createNode(d, "device"));
-      pool.links.map(createLink);
+    call("/get_view_topology", function(topology) {
+      topology.devices.map((d) => createNode(d, "device"));
+      topology.links.map(createLink);
     });
   } else {
     $(".menu").hide();
-    deleteAll();
     call("/get_all-pool", function(pools) {
       for (let i = 0; i < pools.length; i++) {
         if (pools[i].longitude) {
@@ -386,7 +385,7 @@ function updateView() {
 }
 
 function filter(type) {
-  fCall(`/view_filtering/${type}`, `#${type}-form`, (r) => {
+  fCall(`/view_filtering-${type}`, `#${type}-form`, (r) => {
     if (type == "device_filtering") {
       deleteAllDevices();
       r.map((d) => createNode(d, "device"));

@@ -137,6 +137,57 @@ function changeMarker(type) {
 }
 
 /**
+ * Create a node (device or site) in 2D.
+ * @param {node} node - Device or Pool.
+ * @param {nodeType} nodeType - Device or Pool.
+ */
+// eslint-disable-next-line
+function createNode2d(node, nodeType) {
+  if (markerType == "Circle Marker") {
+    marker = L.circleMarker([node.latitude, node.longitude]);
+  } else if (markerType == "Circle") {
+    marker = L.circle([node.latitude, node.longitude]);
+  } else {
+    marker = L.marker([node.latitude, node.longitude]);
+    if (nodeType === "device") {
+      marker.icon = window[`icon_${node.subtype}`] || routerIcon;
+    } else {
+      marker.icon = window["icon_site"];
+    }
+    marker.setIcon(marker.icon);
+  }
+  marker.bindTooltip(node["name"], { permanent: false });
+  return marker
+}
+
+/**
+ * Create a node (device or site) in 3D.
+ * @param {node} node - Device or Pool.
+ * @param {nodeType} nodeType - Device or Pool.
+ */
+// eslint-disable-next-line
+function createNode3d(node, nodeType) {
+  if (markerType == "Image") {
+    marker = WE.marker(
+      [node.latitude, node.longitude],
+      `static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
+      15,
+      10
+    ).addTo(earth);
+  } else {
+    marker = WE.marker([node.latitude, node.longitude]).addTo(earth);
+  }
+  marker.on("mouseover", function(e) {
+    $("#name-box").text(node.name);
+    $("#name-box").show();
+  });
+  marker.on("mouseout", function(e) {
+    $("#name-box").hide();
+  });
+  return marker
+}
+
+/**
  * Create a node (device or site).
  * @param {node} node - Device or Pool.
  * @param {nodeType} nodeType - Device or Pool.
@@ -145,40 +196,7 @@ function changeMarker(type) {
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
   let marker = null;
-  if (currentView == "2D" || currentView == "2DC") {
-    if (markerType == "Circle Marker") {
-      marker = L.circleMarker([node.latitude, node.longitude]);
-    } else if (markerType == "Circle") {
-      marker = L.circle([node.latitude, node.longitude]);
-    } else {
-      marker = L.marker([node.latitude, node.longitude]);
-      if (nodeType === "device") {
-        marker.icon = window[`icon_${node.subtype}`] || routerIcon;
-      } else {
-        marker.icon = window["icon_site"];
-      }
-      marker.setIcon(marker.icon);
-    }
-    marker.bindTooltip(node["name"], { permanent: false });
-  } else {
-    if (markerType == "Image") {
-      marker = WE.marker(
-        [node.latitude, node.longitude],
-        `static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
-        15,
-        10
-      ).addTo(earth);
-    } else {
-      marker = WE.marker([node.latitude, node.longitude]).addTo(earth);
-    }
-    marker.on("mouseover", function(e) {
-      $("#name-box").text(node.name);
-      $("#name-box").show();
-    });
-    marker.on("mouseout", function(e) {
-      $("#name-box").hide();
-    });
-  }
+  marker = (currentView == "3D" ? createNode3d : createNode2d)(node, nodeType);
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function(e) {

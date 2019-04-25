@@ -1,4 +1,4 @@
-<form id="device-automation-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+<form id="device-automation-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
   <div class="modal-body">
     <div class="form-group">
       {% for field in form %}
@@ -7,13 +7,13 @@
         {% else %}
           <label class="control-label col-md-2 col-sm-2 col-xs-12">{{ field.label }}</label>
           <div class="col-md-10 col-sm-10 col-xs-12">
-            {{ field(class='form-control') }}
+            {{ field(class='form-control add-id') }}
           </div><br><br>
         {% endif %}
       {% endfor %}
     </div>
   </div>
   <div class="modal-footer">
-    <button id="device-automation-button" type="button" class="btn btn-success">Save</button>
+    <button type="button" class="btn btn-success btn-id add-id" value="saveDeviceJobs">Save</button>
   </div>
 </form>

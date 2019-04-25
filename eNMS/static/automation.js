@@ -254,7 +254,7 @@ function showWorkflowModalDuplicate(id) {
 function duplicateWorkflow(id) {
   $("#edit-workflow").modal("hide");
   fCall(
-    `/automation/duplicate_workflow/${id}`,
+    `/duplicate_workflow-${id}`,
     "#edit-workflow-form",
     (workflow) => {
       table.ajax.reload(null, false);

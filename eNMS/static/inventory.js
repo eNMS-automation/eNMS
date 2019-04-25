@@ -130,9 +130,9 @@ function configureCallbacks(id) {
  */
 // eslint-disable-next-line
 function savePoolObjects(id) {
-  fCall(`/save_pool_objects/${id}`, `#pool-objects-form-${id}`, function() {
+  fCall(`/save_pool_objects-${id}`, `#pool-objects-form-${id}`, function() {
     alertify.notify("Changes saved.", "success", 5);
-    $(`#pool-object-panel-${id}`).remove();
+    $(`#pool_objects-${id}`).remove();
   });
 }
 

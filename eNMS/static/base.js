@@ -127,7 +127,7 @@ function deleteInstance(type, id) {
  * @param {processing} processing - Function once panel is loaded.
  */
 // eslint-disable-next-line
-function createPanel(name, title, contentSize, processing, id) {
+function createPanel(name, title, contentSize, id, processing) {
   return jsPanel.create({
     id: id ? `${name}-${id}` : name,
     theme: "none",
@@ -145,7 +145,7 @@ function createPanel(name, title, contentSize, processing, id) {
         panel.setHeaderTitle(title);
         configureForm(name);
         preprocessForm(panel, id);
-        processing();
+        if (processing) processing();
       }
     },
     dragit: {
@@ -163,13 +163,13 @@ function showPoolObjectsPanel(id) {
     "pool_objects",
     "Pool Objects",
     "400 400",
+    id,
     function(panel) {
       call(`/get-pool-${id}`, function(pool) {
         $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
         $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
       });
     },
-    id,
   );
 }
 
@@ -179,14 +179,9 @@ function showPoolObjectsPanel(id) {
 // eslint-disable-next-line
 function showFilteringPanel(type) {
   createPanel(
-    "filtering-panel",
+    `${type}_filtering`,
+    "Filter",
     "700 700",
-    `../${type}_filtering_form`,
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Device automation");
-      configureForm(`${type}_filtering`);
-    }
   );
 }
 
@@ -196,14 +191,10 @@ function showFilteringPanel(type) {
 // eslint-disable-next-line
 function showDeletionPanel(type, id) {
   createPanel(
-    `deletion-panel-${id}`,
+    "deletion",
+    "Delete",
     "300, 300",
-    `../form-deletion`,
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Delete");
-      preprocessForm(panel, id, type);
-    }
+    id,
   );
 }
 
@@ -213,17 +204,10 @@ function showDeletionPanel(type, id) {
 // eslint-disable-next-line
 function showAutomationPanel(id) {
   createPanel(
-    `automation-panel-${id}`,
+    "device_automation",
+    "Device automation"
     "400 200",
-    "../form-device_automation",
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Device automation");
-      configureForm("device_automation");
-      $("#device-automation-form").prop("id", `${id}-device-automation-form`);
-      $("#device-automation-button").prop("id", `${id}-device-automation-button`);
-      $(`#${id}-device-automation-button`).attr("onclick", `saveDeviceJobs(${id})`);
-    }
+    id,
   );
 }
 

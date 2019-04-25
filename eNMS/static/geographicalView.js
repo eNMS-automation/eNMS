@@ -342,3 +342,44 @@ $("body").contextMenu({
     selectedObject = null;
   },
 });
+
+/**
+ * Update current view.
+ */
+// eslint-disable-next-line
+function updateView() {
+  if (viewType == "network") {
+    call("/get-pool-1", function(pool) {
+      pool.devices.map((d) => createNode(d, "device"));
+      pool.links.map(createLink);
+    });
+  } else {
+    $(".menu").hide();
+    deleteAll();
+    call("/get_all-pool", function(pools) {
+      for (let i = 0; i < pools.length; i++) {
+        if (pools[i].longitude) {
+          createNode(pools[i], "site");
+        }
+      }
+    });
+    $(".geo-menu").show();
+  }
+}
+
+function filter(type) {
+  fCall(`/view_filtering/${type}`, `#${type}-form`, (r) => {
+    if (type == "device_filtering") {
+      deleteAllDevices();
+      r.map((d) => createNode(d, "device"));
+    } else {
+      deleteAllLinks();
+      r.map(createLink);
+    }
+  });
+}
+
+(function() {
+  doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
+  switchView(currentView);
+})();

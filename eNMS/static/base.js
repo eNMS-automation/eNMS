@@ -8,6 +8,7 @@ table: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
+let topZ = 1000;
 
 /**
  * Update link to the docs.
@@ -133,8 +134,13 @@ function deleteInstance(type, id) {
  */
 // eslint-disable-next-line
 function createPanel(name, title, contentSize, id, processing, type, duplicate) {
+  panelId = id ? `${name}-${id}` : name;
+  if ($(`#${panelId}`).length) {
+    $(`#${panelId}`).css("zIndex", ++topZ);
+    return;
+  }
   return jsPanel.create({
-    id: id ? `${name}-${id}` : name,
+    id: panelId,
     theme: "none",
     headerLogo: "../static/images/logo.png",
     headerControls: {
@@ -260,9 +266,6 @@ function configureForm(form, id) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
-  if ($(`#${id}-edit-${type}-form`).length) {
-    return;
-  }
   createPanel(type, "", "700 500", id, function(panel) {
     if (id) {
       call(`/get-${type}-${id}`, function(instance) {

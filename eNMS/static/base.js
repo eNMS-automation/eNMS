@@ -16,12 +16,17 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
 // eslint-disable-next-line
 function doc(page) {
   let url = {
-    "configuration_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
-    "device_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
-    "instance_management": "https://enms.readthedocs.io/en/latest/security/access.html",
-    "link_management": "https://enms.readthedocs.io/en/latest/inventory/objects.html",
-    "user_management": "https://enms.readthedocs.io/en/latest/security/access.html",
-  }[page]
+    configuration_management:
+      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+    device_management:
+      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+    instance_management:
+      "https://enms.readthedocs.io/en/latest/security/access.html",
+    link_management:
+      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+    user_management:
+      "https://enms.readthedocs.io/en/latest/security/access.html",
+  }[page];
   $("#doc-link").attr("href", url);
 }
 
@@ -87,15 +92,15 @@ function fCall(url, form, callback) {
 
 function serializeForm(form) {
   data = JSON.parse(JSON.stringify($(form).serializeArray()));
-  result = {"pools": []}
+  result = { pools: [] };
   data.forEach((property) => {
     if (property.name == "pools") {
       result.pools.push(property.value);
     } else {
-      result[property.name] = property.value
+      result[property.name] = property.value;
     }
   });
-  return result
+  return result;
 }
 
 /**
@@ -135,7 +140,7 @@ function createPanel(name, title, contentSize, id, processing) {
     headerControls: {
       size: "xl",
     },
-    contentOverflow: 'hidden scroll',
+    contentOverflow: "hidden scroll",
     contentSize: contentSize,
     position: "center-top 0 58",
     contentAjax: {
@@ -146,7 +151,7 @@ function createPanel(name, title, contentSize, id, processing) {
         configureForm(name);
         preprocessForm(panel, id);
         if (processing) processing();
-      }
+      },
     },
     dragit: {
       opacity: 0.6,
@@ -159,18 +164,12 @@ function createPanel(name, title, contentSize, id, processing) {
  */
 // eslint-disable-next-line
 function showPoolObjectsPanel(id) {
-  createPanel(
-    "pool_objects",
-    "Pool Objects",
-    "400 400",
-    id,
-    function(panel) {
-      call(`/get-pool-${id}`, function(pool) {
-        $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
-        $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
-      });
-    },
-  );
+  createPanel("pool_objects", "Pool Objects", "400 400", id, function(panel) {
+    call(`/get-pool-${id}`, function(pool) {
+      $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
+      $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
+    });
+  });
 }
 
 /**
@@ -178,11 +177,7 @@ function showPoolObjectsPanel(id) {
  */
 // eslint-disable-next-line
 function showFilteringPanel(type) {
-  createPanel(
-    `${type}_filtering`,
-    "Filter",
-    "700 700",
-  );
+  createPanel(`${type}_filtering`, "Filter", "700 700");
 }
 
 /**
@@ -190,12 +185,7 @@ function showFilteringPanel(type) {
  */
 // eslint-disable-next-line
 function showDeletionPanel(type, id) {
-  createPanel(
-    "deletion",
-    "Delete",
-    "300, 300",
-    id,
-  );
+  createPanel("deletion", "Delete", "300, 300", id);
 }
 
 /**
@@ -203,12 +193,7 @@ function showDeletionPanel(type, id) {
  */
 // eslint-disable-next-line
 function showAutomationPanel(id) {
-  createPanel(
-    "device_automation",
-    "Device automation"
-    "400 200",
-    id,
-  );
+  createPanel("device_automation", "Device automation", "400 200", id);
 }
 
 /**
@@ -216,31 +201,23 @@ function showAutomationPanel(id) {
  */
 // eslint-disable-next-line
 function showConnectionPanel(id) {
-  createPanel(
-    `connection-panel-${id}`,
-    "400 600",
-    "../connection_form",
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Connect to device");
-      $("#connection-parameters-form").prop("id", `${id}-connection-parameters-form`);
-      $("#connection-button").prop("id", `${id}-connection-button`);
-      $(`#${id}-connection-button`).attr("onclick", `sshConnection(${id})`);
-    }
-  );
+  createPanel("connection", "Connect to device", "400 600", id);
 }
 
 /**
  * Preprocess form.
  */
 function preprocessForm(panel, id, type, duplicate) {
-  panel.querySelectorAll('.add-id').forEach((el) => {
+  panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate && ["name", "id"].includes(el.name)) return;
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });
-  panel.querySelectorAll('.btn-id').forEach((el) => {
+  panel.querySelectorAll(".btn-id").forEach((el) => {
     if (id) {
-      $(el).attr("onclick", type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`);
+      $(el).attr(
+        "onclick",
+        type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`
+      );
     } else {
       $(el).attr("onclick", type ? `${el.value}("${type}")` : `${el.value}()`);
     }
@@ -292,11 +269,13 @@ function showTypePanel(type, id, duplicate) {
     `../form-${type}`,
     function(panel) {
       panel.content.innerHTML = this.responseText;
-      preprocessForm(panel, id, type, duplicate)
+      preprocessForm(panel, id, type, duplicate);
       configureForm(type, id);
       if (id) {
         call(`/get-${type}-${id}`, function(instance) {
-          panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
+          panel.setHeaderTitle(
+            `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
+          );
           if (["service", "workflow"].includes(type)) panelCode(type, id);
           if (type !== "service") processInstance(type, instance);
         });
@@ -317,7 +296,9 @@ function showTypePanel(type, id, duplicate) {
  */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
-    el = $(instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`);
+    el = $(
+      instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
+    );
     const propertyType = propertyTypes[property] || "str";
     if (propertyType.includes("bool") || property.includes("regex")) {
       el.prop("checked", value);
@@ -387,7 +368,7 @@ function initTable(type) {
       url: `/filtering-${type}`,
       data: (d) => {
         d.form = serializeForm(`#${type}_filtering-form`);
-      }
+      },
     },
   });
   return table;
@@ -584,7 +565,6 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.stopPropagation();
   e.preventDefault();
 });
-
 
 if (typeof NProgress != "undefined") {
   $(document).ready(function() {

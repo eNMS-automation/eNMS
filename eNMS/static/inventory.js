@@ -22,7 +22,7 @@ function saveDeviceJobs(id) {
  * @param {id} id - Device id.
  */
 function sshConnection(id) {
-  fCall(`/connection/${id}`, `#${id}-connection-parameters-form`, function(result) {
+  fCall(`/connection-${id}`, `#connection-parameters-form-${id}`, function(result) {
     let url = result.server_addr;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
@@ -38,7 +38,7 @@ function sshConnection(id) {
     alertify.notify(link, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
     alertify.notify(warning, "error", 20);
-    $(`#connection-panel-${id}`).remove();
+    $(`#connection-${id}`).remove();
   });
 }
 

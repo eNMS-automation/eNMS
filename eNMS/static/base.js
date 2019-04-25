@@ -322,13 +322,12 @@ function processInstance(type, instance) {
  */
 // eslint-disable-next-line
 function processData(type, id) {
-  console.log(type, id, `#edit-${type}-form-${id}`);
   fCall(
     `/update-${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
       if (typeof table != "undefined") table.ajax.reload(null, false);
-      $(id ? `#panel-${type}-${id}` : `#panel-${type}`).remove();
+      $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type == "service") saveService(instance);
       alertify.notify(
         `${type.toUpperCase()} '${instance.name}' ${

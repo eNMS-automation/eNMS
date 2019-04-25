@@ -88,18 +88,13 @@
     let link_colors = {{ link_colors|tojson|safe }};
     let parameters = {{ parameters|tojson|safe }};
     let view = '{{ view }}';
+    let viewType = "{{ view_type }}"
   </script>
   <script src="{{ url_for('static', filename='modules/vis/vis.min.js') }}"></script>
   <script src="{{ url_for('static', filename='modules/webgl-earth/api.min.js') }}"></script>
   <script src="{{ url_for('static', filename='modules/leaflet/leaflet.min.js') }}"></script>
   <script src="{{ url_for('static', filename='modules/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
   <script src="{{ url_for('static', filename='inventory.js') }}"></script>
-
   <script src="{{ url_for('static', filename='geographicalView.js') }}"></script>
-  {% if view_type == 'network' %}
-    <script src="{{ url_for('static', filename='networkView.js') }}"></script>
-  {% else %}
-    <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
-    <script src="{{ url_for('static', filename='siteView.js') }}"></script>
-  {% endif %}
+  <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

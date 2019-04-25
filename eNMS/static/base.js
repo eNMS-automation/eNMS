@@ -132,7 +132,7 @@ function deleteInstance(type, id) {
  * @param {processing} processing - Function once panel is loaded.
  */
 // eslint-disable-next-line
-function createPanel(name, title, contentSize, id, processing) {
+function createPanel(name, title, contentSize, id, processing, type, duplicate) {
   return jsPanel.create({
     id: id ? `${name}-${id}` : name,
     theme: "none",
@@ -149,8 +149,8 @@ function createPanel(name, title, contentSize, id, processing) {
         panel.content.innerHTML = this.responseText;
         panel.setHeaderTitle(title);
         configureForm(name);
-        preprocessForm(panel, id);
-        if (processing) processing();
+        preprocessForm(panel, id, type, duplicate);
+        if (processing) processing(panel);
       },
     },
     dragit: {
@@ -164,7 +164,7 @@ function createPanel(name, title, contentSize, id, processing) {
  */
 // eslint-disable-next-line
 function showPoolObjectsPanel(id) {
-  createPanel("pool_objects", "Pool Objects", "400 400", id, function(panel) {
+  createPanel("pool_objects", "Pool Objects", "400 400", id, function() {
     call(`/get-pool-${id}`, function(pool) {
       $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
       $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
@@ -263,30 +263,18 @@ function showTypePanel(type, id, duplicate) {
   if ($(`#${id}-edit-${type}-form`).length) {
     return;
   }
-  createPanel(
-    id ? `panel-${type}-${id}` : `panel-${type}`,
-    "700 500",
-    `../form-${type}`,
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      preprocessForm(panel, id, type, duplicate);
-      configureForm(type, id);
-      if (id) {
-        call(`/get-${type}-${id}`, function(instance) {
-          panel.setHeaderTitle(
-            `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
-          );
-          if (["service", "workflow"].includes(type)) panelCode(type, id);
-          if (type !== "service") processInstance(type, instance);
-        });
-      } else {
-        configureForm(type);
-        panel.setHeaderTitle(`Create a New ${type}`);
-        $(`#edit-${type}-form`).trigger("reset");
-        if (["service", "workflow"].includes(type)) panelCode(type);
-      }
+  createPanel(type, "", "700 500", id, function(panel) {
+    if (id) {
+      call(`/get-${type}-${id}`, function(instance) {
+        if (["service", "workflow"].includes(type)) panelCode(type, id);
+        panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
+        if (type !== "service") processInstance(type, instance);
+      });
+    } else {
+      panel.setHeaderTitle(`Create a New ${type}`);
+      if (["service", "workflow"].includes(type)) panelCode(type);
     }
-  );
+  }, type, duplicate);
 }
 
 /**

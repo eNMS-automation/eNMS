@@ -1,17 +1,17 @@
 <div class="modal-body">
-  <form id="connection-parameters-form" class="form-horizontal form-label-left" method="post">
+  <form id="connection-parameters-form" class="form-horizontal form-label-left add-id" method="post">
     <label>Property used for the connection:</label>
-    {{ form.address(class="form-control") }}<br>
+    {{ form.address(class="form-control add-id") }}<br>
     <div class="item">
-      <input id="accept-once" name="accept-once" type="checkbox" checked="">
+      <input id="accept-once" name="accept-once" class="add-id" type="checkbox" checked="">
       <label>Accept only one client</label>
     </div>
     <div class="item">
-      <input id="multiplexing" name="multiplexing" type="checkbox">
+      <input id="multiplexing" name="multiplexing" class="add-id" type="checkbox">
       <label>Share session with all clients</label>
     </div>
     <div class="item">
-      <input id="authentication" name="authentication" type="checkbox" checked="">
+      <input id="authentication" name="authentication" class="add-id" type="checkbox" checked="">
       <label>Automatically authenticate</label>
     </div>
     <div class="x_title">
@@ -19,13 +19,13 @@
     </div>
     <div class="radio">
       <label>
-        <input type="radio" checked="" value="user" id="user-credentials" name="credentials">
+        <input type="radio" checked="" value="user" id="user-credentials" name="credentials" class="add-id" >
         Authentication with user credentials
       </label>
     </div>
     <div class="radio">
       <label>
-        <input type="radio" value="device" id="device-credentials" name="credentials">
+        <input type="radio" value="device" id="device-credentials" name="credentials" class="add-id" >
         Authentication with device credentials
       </label>
     </div>
@@ -34,18 +34,18 @@
     </div>
     <div class="radio">
       <label>
-        <input type="radio" checked="" value="ssh" id="ssh" name="protocol">
+        <input type="radio" checked="" value="ssh" id="ssh" name="protocol" class="add-id" >
         SSH
       </label>
     </div>
     <div class="radio">
       <label>
-        <input type="radio" value="telnet" id="telnet" name="protocol">
+        <input type="radio" value="telnet" id="telnet" name="protocol" class="add-id" >
         Telnet
       </label>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" id="connection-button">Connect</button>
+  <button type="button" class="btn btn-primary btn-id add-id" value="sshConnection">Connect</button>
 </div>

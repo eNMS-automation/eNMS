@@ -145,7 +145,7 @@ class BaseController:
         finally:
             self.session.remove()
 
-    def update_instance(self, cls: str) -> dict:
+    def update(self, cls: str) -> dict:
         try:
             instance = factory(cls, **request.form)
             info(

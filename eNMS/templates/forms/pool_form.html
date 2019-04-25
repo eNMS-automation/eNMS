@@ -1,31 +1,31 @@
 <div class="modal-body">
-  <form id="edit-pool-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-    {{ form.id(id='pool-id') }}
+  <form id="edit-pool-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+    {{ form.id(id='pool-id', class="add-id") }}
     {{ form.boolean_fields() }}
     <div class="form-group">
       <label>Name</label>
       <div class="form-group">
-        {{ form.name(id="pool-name", class="form-control required", placeholder="Name") }}
+        {{ form.name(id="pool-name", class="form-control required add-id", placeholder="Name") }}
       </div>
       <label>Description</label>
       <div class="form-group">
-        {{ form.description(id="pool-description", class="form-control", placeholder="Description") }}
+        {{ form.description(id="pool-description", class="form-control add-id", placeholder="Description") }}
       </div>
       <label>Longitude</label>
       <div class="form-group">
-        {{ form.longitude(id="pool-longitude", class="form-control", placeholder="Longitude") }}
+        {{ form.longitude(id="pool-longitude", class="form-control add-id", placeholder="Longitude") }}
       </div>
       <label>Latitude</label>
       <div class="form-group">
-        {{ form.latitude(id="pool-latitude", class="form-control", placeholder="Latitude") }}
+        {{ form.latitude(id="pool-latitude", class="form-control add-id", placeholder="Latitude") }}
       </div>
       <label>Match condition</label>
       <div class="form-group">
-        {{ form.operator(id="pool-operator", class="form-control required", placeholder="Operator") }}
+        {{ form.operator(id="pool-operator", class="form-control required add-id", placeholder="Operator") }}
       </div>
     <fieldset>
       <div class="item">
-        {{ form['never_update'](id="pool-never_update") }}
+        {{ form['never_update'](id="pool-never_update", class="add-id") }}
         <label>Never update (for manually selected pools)</label>
       </div>
     </fieldset><br>
@@ -41,8 +41,8 @@
         {% for property in form.device_properties %}
           <tr>
           <td>{{ names[property] }}</td>
-          <td>{{ form['device_' + property](id="pool-" + 'device_' + property, class="form-control") }}</td>
-          <td>{{ form['device_' + property + '_match'](id="pool-" +'device_' + property + '_match', class="form-control") }}</td>
+          <td>{{ form['device_' + property](id="pool-" + 'device_' + property, class="form-control add-id") }}</td>
+          <td>{{ form['device_' + property + '_match'](id="pool-" +'device_' + property + '_match', class="form-control add-id") }}</td>
           </tr>
         {% endfor %}
         </tbody>
@@ -63,8 +63,8 @@
         {% for property in form.link_properties %}
           <tr>
           <td>{{ names[property] }}</td>
-          <td>{{ form['link_' + property](id="pool-" + 'link_' + property, class="form-control") }}</td>
-          <td>{{ form['link_' + property + '_match'](id="pool-" +'link_' + property + '_match', class="form-control") }}</td>
+          <td>{{ form['link_' + property](id="pool-" + 'link_' + property, class="form-control add-id") }}</td>
+          <td>{{ form['link_' + property + '_match'](id="pool-" +'link_' + property + '_match', class="form-control add-id") }}</td>
           </tr>
         {% endfor %}
         </tbody>
@@ -73,7 +73,7 @@
       <div class="ln_solid"></div>
       <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
         <center>
-          <button id="save" type="button" class="btn btn-success" onclick="processData('pool')">Save</button>
+          <button type="button" class="btn btn-success btn-id add-id" value="processData">Save</button>
         </center>
       </div>
     </div>

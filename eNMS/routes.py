@@ -43,9 +43,9 @@ def post_route(endpoint: str) -> Response:
         f"User '{current_user.name}' ({request.remote_addr})"
         f" calling the endpoint {request.url} (POST)"
     )
-    try:
-        result = getattr(controller, func)(*args)
-        db.session.commit()
-        return jsonify(result)
-    except Exception as e:
-        return jsonify({"error": str(e)})
+    # try:
+    result = getattr(controller, func)(*args)
+    db.session.commit()
+    return jsonify(result)
+    # except Exception as e:
+    # return jsonify({"error": str(e)})

@@ -46,7 +46,6 @@ from eNMS.properties import (
 from eNMS.rest import configure_rest_api
 
 
-import eNMS.models.scheduling
 import eNMS.routes
 
 

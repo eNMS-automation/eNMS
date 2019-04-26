@@ -256,7 +256,7 @@ instance_table_properties = instance_public_properties[1:]
 
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
-log_public_properties: List[str] = ["id", "source_ip", "content"]
+log_public_properties: List[str] = ["source_ip", "content"]
 
 log_rule_public_properties: List[str] = log_public_properties + [
     "name",

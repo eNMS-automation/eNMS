@@ -269,8 +269,8 @@ class Job(Base):
                 lock = Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
-                args = (device, results, payload, workflow, lock)
-                pool.map(self.device_run, [args for device in targets])
+                args = (results, payload, workflow, lock)
+                pool.map(self.device_run, [(device, *args) for device in targets])
                 pool.close()
                 pool.join()
             else:

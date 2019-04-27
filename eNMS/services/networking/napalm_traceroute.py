@@ -17,6 +17,7 @@ class NapalmTracerouteService(Service, metaclass=register_class):
     driver_values = controller.NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
+    destination_ip = Column(String(255))
     source_ip = Column(String(255))
     timeout = Column(Integer)
     ttl = Column(Integer)
@@ -27,11 +28,14 @@ class NapalmTracerouteService(Service, metaclass=register_class):
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
+        destination = self.sub(self.destination_ip, locals())
+        source = self.sub(self.source_ip, locals())
         self.logs.append(
-            f"Running traceroute from {self.source} to {device.ip_address}"
+            f"Running napalm traceroute from {source}"
+            f"to {destination} on {device.ip_address}"
         )
         traceroute = napalm_driver.traceroute(
-            device.ip_address,
+            destination=destination,
             source=self.source,
             vrf=self.vrf,
             ttl=self.ttl or 255,

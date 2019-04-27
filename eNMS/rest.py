@@ -38,6 +38,8 @@ class RestAutomation(Resource):
         try:
             errors, targets, data = [], set(), request.get_json()
             job = fetch("Job", name=data["name"])
+            if job.is_running:
+                return {"error": "Job is already running."}
             handle_asynchronously = data.get("async", False)
             for device_name in data.get("devices", ""):
                 device = fetch("Device", name=device_name)

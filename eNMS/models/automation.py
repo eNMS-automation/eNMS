@@ -3,6 +3,7 @@ from copy import deepcopy
 from datetime import datetime
 from json import load
 from logging import info
+from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
@@ -156,8 +157,10 @@ class Job(Base, metaclass=register_class):
         targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
     ) -> Tuple[dict, str]:
-        self.is_running, self.state, self.logs = True, {}, []
-        db.session.commit()
+        logs = workflow.logs if workflow else self.logs
+        logs.append(f"{self.type} {self.name}: Starting.")
+        with session_scope():
+            self.is_running, self.state, self.logs = True, {}, []
         results: dict = {"results": {}}
         if not payload:
             payload = {}
@@ -168,12 +171,10 @@ class Job(Base, metaclass=register_class):
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
         now = str(datetime.now()).replace(" ", "-")
-        logs = workflow.logs if workflow else self.logs
-        logs.append(f"{self.type} {self.name}: Starting.")
         for i in range(self.number_of_retries + 1):
-            self.completed = self.failed = 0
-            db.session.commit()
             logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
+            with session_scope():
+                self.completed = self.failed = 0
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
@@ -207,10 +208,10 @@ class Job(Base, metaclass=register_class):
                 else:
                     sleep(self.time_between_retries)
         logs.append(f"{self.type} {self.name}: Finished.")
-        self.results[now] = {**results, "logs": logs}
-        self.is_running, self.state = False, {}
-        self.completed = self.failed = 0
-        db.session.commit()
+        with session_scope():
+            self.results[now] = {**results, "logs": logs}
+            self.is_running, self.state = False, {}
+            self.completed = self.failed = 0
         if not workflow and self.send_notification:
             self.notify(results, now)
         return results, now
@@ -245,14 +246,15 @@ class Job(Base, metaclass=register_class):
         return results
 
     def device_run(
-        self, args: Tuple["Device", dict, dict, Optional["Workflow"]]
+        self, args: Tuple[Device, dict, dict, Optional["Workflow"], Any]
     ) -> None:
         with controller.app.app_context():
-            with controller.session_scope() as session:
-                device, results, payload, workflow = args
-                device_result = self.get_results(payload, device, workflow, True)
-                session.merge(workflow or self)
-                results["devices"][device.name] = device_result
+            device, results, payload, workflow, lock = args
+            device_result = self.get_results(payload, device, workflow, True)
+            with lock:
+                with session_scope() as session:
+                    session.merge(workflow or self)
+                    results["devices"][device.name] = device_result
 
     def run(
         self,
@@ -268,12 +270,11 @@ class Job(Base, metaclass=register_class):
         elif targets:
             results: dict = {"devices": {}}
             if self.multiprocessing:
+                lock = Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
-                pool.map(
-                    self.device_run,
-                    [(device, results, payload, workflow) for device in targets],
-                )
+                args = (results, payload, workflow, lock)
+                pool.map(self.device_run, [(device, *args) for device in targets])
                 pool.close()
                 pool.join()
             else:

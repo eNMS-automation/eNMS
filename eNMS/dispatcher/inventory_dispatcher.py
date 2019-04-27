@@ -12,7 +12,7 @@ from eNMS.modules import db
 from eNMS.properties import link_subtype_to_color, subtype_sizes, table_properties
 
 
-class InventoryController:
+class InventoryDispatcher:
     def clear_configurations(self, device_id: int) -> None:
         fetch("Device", id=device_id).configurations = {}
 

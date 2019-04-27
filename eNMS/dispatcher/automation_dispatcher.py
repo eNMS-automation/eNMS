@@ -21,7 +21,7 @@ from eNMS.properties import (
 )
 
 
-class AutomationController:
+class AutomationDispatcher:
 
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)

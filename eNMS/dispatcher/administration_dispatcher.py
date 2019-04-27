@@ -20,7 +20,7 @@ from eNMS.database import delete_all, factory, fetch, fetch_all, get_one
 from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 
 
-class AdministrationController:
+class AdministrationDispatcher:
     def administration(self) -> dict:
         return dict(
             form=AdministrationForm(request.form),

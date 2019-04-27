@@ -1,4 +1,3 @@
-from contextlib import contextmanager
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -11,6 +10,11 @@ from typing import Any, Generator, List
 
 from eNMS.forms import form_classes, form_templates
 from eNMS.database import delete, factory, fetch, fetch_all, fetch_all_visible
+from eNMS.dispatcher.administration_dispatcher import AdministrationDispatcher
+from eNMS.dispatcher.automation_dispatcher import AutomationDispatcher
+from eNMS.dispatcher.base_dispatcher import BaseDispatcher
+from eNMS.dispatcher.import_export_dispatcher import ImportExportDispatcher
+from eNMS.dispatcher.inventory_dispatcher import InventoryDispatcher
 from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
@@ -21,19 +25,11 @@ from eNMS.properties import (
 )
 
 
-from eNMS.dispatcher.administration_dispatcher import Administrationdispatcher
-from eNMS.dispatcher.automation_dispatcher import Automationdispatcher
-from eNMS.dispatcher.base_dispatcher import Basedispatcher
-from eNMS.dispatcher.import_export_dispatcher import ImportExportdispatcher
-from eNMS.dispatcher.inventory_dispatcher import Inventorydispatcher
-
-
 class dispatcher(
-    Automationdispatcher,
-    Administrationdispatcher,
-    Basedispatcher,
-    ImportExportdispatcher,
-    Inventorydispatcher,
+    AutomationDispatcher,
+    AdministrationDispatcher,
+    ImportExportDispatcher,
+    InventoryDispatcher,
 ):
     def dashboard(self) -> dict:
         on_going = {

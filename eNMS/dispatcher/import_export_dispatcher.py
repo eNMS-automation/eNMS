@@ -29,7 +29,7 @@ from eNMS.properties import google_earth_styles, reverse_pretty_names
 from eNMS.properties import export_properties
 
 
-class ImportExportController:
+class ImportExportDispatcher:
     def export_to_google_earth(self) -> None:
         kml_file = Kml()
         for device in fetch_all("Device"):

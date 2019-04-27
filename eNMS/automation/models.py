@@ -154,64 +154,67 @@ class Job(Base):
         targets: Optional[Set[Device]] = None,
         workflow: Optional["Workflow"] = None,
     ) -> Tuple[dict, str]:
-        self.is_running, self.state, self.logs = True, {}, []
-        db.session.commit()
-        results: dict = {"results": {}}
-        if not payload:
-            payload = {}
-        job_from_workflow_targets = bool(workflow and targets)
-        if not targets and getattr(self, "use_workflow_targets", True):
-            targets = self.compute_targets()
-        has_targets = bool(targets)
-        if has_targets and not job_from_workflow_targets:
-            results["results"]["devices"] = {}
-        now = str(datetime.now()).replace(" ", "-")
-        logs = workflow.logs if workflow else self.logs
-        logs.append(f"{self.type} {self.name}: Starting.")
-        for i in range(self.number_of_retries + 1):
-            self.completed = self.failed = 0
-            db.session.commit()
-            logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
+        with session_scope() as session:
+            self.is_running, self.state, self.logs = True, {}, []
+            session.commit()
+            results: dict = {"results": {}}
+            if not payload:
+                payload = {}
+            job_from_workflow_targets = bool(workflow and targets)
+            if not targets and getattr(self, "use_workflow_targets", True):
+                targets = self.compute_targets()
+            has_targets = bool(targets)
             if has_targets and not job_from_workflow_targets:
-                assert targets is not None
-                for device in set(targets):
-                    if not attempt["devices"][device.name]["success"]:
-                        continue
-                    results["results"]["devices"][device.name] = attempt["devices"][
-                        device.name
-                    ]
-                    targets.remove(device)
-                if not targets:
-                    results["results"]["success"] = True
-                    break
+                results["results"]["devices"] = {}
+            now = str(datetime.now()).replace(" ", "-")
+            logs = workflow.logs if workflow else self.logs
+            logs.append(f"{self.type} {self.name}: Starting.")
+            for i in range(self.number_of_retries + 1):
+                self.completed = self.failed = 0
+                session.commit()
+                logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
+                attempt = self.run(
+                    payload, job_from_workflow_targets, targets, workflow
+                )
+                if has_targets and not job_from_workflow_targets:
+                    assert targets is not None
+                    for device in set(targets):
+                        if not attempt["devices"][device.name]["success"]:
+                            continue
+                        results["results"]["devices"][device.name] = attempt["devices"][
+                            device.name
+                        ]
+                        targets.remove(device)
+                    if not targets:
+                        results["results"]["success"] = True
+                        break
+                    else:
+                        if self.number_of_retries:
+                            results[f"Attempts {i + 1}"] = attempt
+                        if i != self.number_of_retries:
+                            sleep(self.time_between_retries)
+                        else:
+                            results["results"]["success"] = False
+                            for device in targets:
+                                results["results"]["devices"][device.name] = attempt[
+                                    "devices"
+                                ][device.name]
                 else:
                     if self.number_of_retries:
                         results[f"Attempts {i + 1}"] = attempt
-                    if i != self.number_of_retries:
-                        sleep(self.time_between_retries)
+                    if attempt["success"] or i == self.number_of_retries:
+                        results["results"] = attempt
+                        break
                     else:
-                        results["results"]["success"] = False
-                        for device in targets:
-                            results["results"]["devices"][device.name] = attempt[
-                                "devices"
-                            ][device.name]
-            else:
-                if self.number_of_retries:
-                    results[f"Attempts {i + 1}"] = attempt
-                if attempt["success"] or i == self.number_of_retries:
-                    results["results"] = attempt
-                    break
-                else:
-                    sleep(self.time_between_retries)
-        logs.append(f"{self.type} {self.name}: Finished.")
-        self.results[now] = {**results, "logs": logs}
-        self.is_running, self.state = False, {}
-        self.completed = self.failed = 0
-        db.session.commit()
-        if not workflow and self.send_notification:
-            self.notify(results, now)
-        return results, now
+                        sleep(self.time_between_retries)
+            logs.append(f"{self.type} {self.name}: Finished.")
+            self.results[now] = {**results, "logs": logs}
+            self.is_running, self.state = False, {}
+            self.completed = self.failed = 0
+            session.commit()
+            if not workflow and self.send_notification:
+                self.notify(results, now)
+            return results, now
 
     def get_results(
         self,

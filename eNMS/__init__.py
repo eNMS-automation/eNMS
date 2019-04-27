@@ -25,6 +25,7 @@ from eNMS.modules import (
     db,
     login_manager,
     mail_client,
+    scheduler,
     USE_SYSLOG,
     USE_VAULT,
     vault_client,
@@ -52,7 +53,7 @@ import eNMS.routes
 def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
     db.init_app(app)
-    db.app = app
+    scheduler.app = app
     login_manager.init_app(app)
     mail_client.init_app(app)
     FlaskCLI(app)

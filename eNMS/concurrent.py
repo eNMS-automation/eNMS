@@ -1,9 +1,7 @@
-from git import Repo
-from git.exc import GitCommandError
+from typing import Optional, Set
 
-from eNMS.controller import controller
 from eNMS.database import fetch
-from eNMS.modules import db, scheduler
+from eNMS.modules import scheduler
 
 
 def threaded_job(
@@ -17,4 +15,4 @@ def threaded_job(
         job = fetch("Job", id=job_id)
         if targets:
             targets = {fetch("Device", id=device_id) for device_id in targets}
-        results, now = job.try_run(targets=targets, payload=payload, task=task)
+        job.try_run(targets=targets, payload=payload, task=task)

@@ -1,6 +1,8 @@
 from apscheduler.triggers.cron import CronTrigger
 from copy import deepcopy
 from datetime import datetime
+from git import Repo
+from git.exc import GitCommandError
 from json import load
 from logging import info
 from multiprocessing import Lock
@@ -9,6 +11,7 @@ from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
 from os import environ
+from pathlib import Path
 from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
@@ -31,7 +34,7 @@ from eNMS.models.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.database import fetch
+from eNMS.database import fetch, get_one
 from eNMS.models.base import Base
 from eNMS.models.inventory import Device
 
@@ -159,7 +162,7 @@ class Job(Base, metaclass=register_class):
         repo = Repo(str(path_git_folder))
         try:
             repo.git.add(A=True)
-            repo.git.commit(m=f"Automatic commit ({job.name})")
+            repo.git.commit(m=f"Automatic commit ({self.name})")
         except GitCommandError:
             pass
         repo.remotes.origin.push()

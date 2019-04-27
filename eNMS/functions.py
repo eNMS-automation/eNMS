@@ -35,12 +35,12 @@ def objectify(model: str, object_list: List[int]) -> List[db.Model]:
 
 
 def delete(model: str, **kwargs: Any) -> dict:
-    with session_scope() as session:
-        instance = db.session.query(classes[model]).filter_by(**kwargs).first()
-        if hasattr(instance, "type") and instance.type == "Task":
-            instance.delete_task()
-        serialized_instance = instance.serialized
-        session.delete(instance)
+    instance = db.session.query(classes[model]).filter_by(**kwargs).first()
+    if hasattr(instance, "type") and instance.type == "Task":
+        instance.delete_task()
+    serialized_instance = instance.serialized
+    db.session.delete(instance)
+    db.session.commit()
     return serialized_instance
 
 
@@ -48,6 +48,7 @@ def delete_all(*models: str) -> None:
     for model in models:
         for instance in fetch_all(model):
             delete(model, id=instance.id)
+    db.session.commit()
 
 
 def serialize(model: str) -> List[dict]:
@@ -74,13 +75,12 @@ def factory(cls_name: str, **kwargs: Any) -> db.Model:
             instance = kwargs.pop("id")
     else:
         instance = fetch(cls_name, name=kwargs["name"])
-    with session_scope() as session:
-        if instance:
-            instance.update(**kwargs)
-            session.merge(instance)
-        else:
-            instance = classes[cls_name](**kwargs)
-            session.add(instance)
+    if instance:
+        instance.update(**kwargs)
+    else:
+        instance = classes[cls_name](**kwargs)
+        db.session.add(instance)
+    db.session.commit()
     return instance
 
 

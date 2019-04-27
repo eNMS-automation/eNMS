@@ -2,6 +2,7 @@ from copy import deepcopy
 from datetime import datetime
 from json import load
 from logging import info
+from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
@@ -154,6 +155,8 @@ class Job(Base):
         targets: Optional[Set[Device]] = None,
         workflow: Optional["Workflow"] = None,
     ) -> Tuple[dict, str]:
+        logs = workflow.logs if workflow else self.logs
+        logs.append(f"{self.type} {self.name}: Starting.")
         with session_scope() as session:
             self.is_running, self.state, self.logs = True, {}, []
         results: dict = {"results": {}}
@@ -166,12 +169,10 @@ class Job(Base):
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
         now = str(datetime.now()).replace(" ", "-")
-        logs = workflow.logs if workflow else self.logs
-        logs.append(f"{self.type} {self.name}: Starting.")
         for i in range(self.number_of_retries + 1):
+            logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
             with session_scope() as session:
                 self.completed = self.failed = 0
-            logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
@@ -244,10 +245,12 @@ class Job(Base):
 
     def device_run(self, args: Tuple[Device, dict, dict, Optional["Workflow"]]) -> None:
         with controller.app.app_context():
-            device, results, payload, workflow = args
+            device, results, payload, workflow, lock = args
             device_result = self.get_results(payload, device, workflow, True)
-            # session.merge(workflow or self)
-            results["devices"][device.name] = device_result
+            with lock:
+                with session_scope() as session:
+                    session.merge(workflow or self)
+                    results["devices"][device.name] = device_result
 
     def run(
         self,
@@ -263,12 +266,11 @@ class Job(Base):
         elif targets:
             results: dict = {"devices": {}}
             if self.multiprocessing:
+                lock = Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = ThreadPool(processes=processes)
-                pool.map(
-                    self.device_run,
-                    [(device, results, payload, workflow) for device in targets],
-                )
+                args = (device, results, payload, workflow, lock)
+                pool.map(self.device_run, [args for device in targets])
                 pool.close()
                 pool.join()
             else:

@@ -112,7 +112,7 @@ function serializeForm(form) {
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete-${type}-${id}`, function(result) {
-    $(`#deletion-panel-${id}`).remove();
+    $(`#deletion-${id}`).remove();
     table
       .row($(`#${id}`))
       .remove()
@@ -192,7 +192,7 @@ function showFilteringPanel(type) {
  */
 // eslint-disable-next-line
 function showDeletionPanel(type, id) {
-  createPanel("deletion", "Delete", "300, 120", id);
+  createPanel("deletion", "Delete", "300, 120", id, () => {}, type);
 }
 
 /**

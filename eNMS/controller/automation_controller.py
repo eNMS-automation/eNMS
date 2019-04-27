@@ -2,16 +2,13 @@ from datetime import datetime
 from difflib import SequenceMatcher
 from flask import current_app, jsonify, request, send_file, session
 from flask.wrappers import Response
-from git import Repo
-from git.exc import GitCommandError
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
-from pathlib import Path
 from re import search, sub
 from sqlalchemy.exc import DataError
-from typing import Any, Dict, Optional, Set
+from typing import Any, Dict
 
-from eNMS.modules import db, scheduler
+from eNMS.modules import scheduler
 from eNMS.forms import CompareResultsForm, WorkflowBuilderForm
 from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
 from eNMS.models import service_classes

@@ -1,9 +1,11 @@
 from git import Repo
 from git.exc import GitCommandError
+from pathlib import Path
+from typing import Optional, Set
 
 from eNMS.controller import controller
-from eNMS.database import fetch
-from eNMS.modules import db, scheduler
+from eNMS.database import fetch, get_one
+from eNMS.modules import db
 
 
 def threaded_job(

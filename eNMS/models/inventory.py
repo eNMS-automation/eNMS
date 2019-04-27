@@ -111,11 +111,6 @@ class Device(CustomDevice, metaclass=register_class):
             elif self in pool.devices:
                 pool.devices.remove(self)
 
-    @property
-    def view_properties(self) -> Dict[str, Any]:
-        properties = ("id", "name", "longitude", "latitude")
-        return {property: getattr(self, property) for property in properties}
-
     def get_configurations(self):
         return {
             str(date): configuration

@@ -22,6 +22,7 @@ from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
+from eNMS.controller import controller
 from eNMS.modules import db, scheduler
 from eNMS.models import register_class
 from eNMS.models.associations import (
@@ -159,7 +160,7 @@ class Job(Base, metaclass=register_class):
     ) -> Tuple[dict, str]:
         logs = workflow.logs if workflow else self.logs
         logs.append(f"{self.type} {self.name}: Starting.")
-        with session_scope():
+        with controller.session_scope():
             self.is_running, self.state, self.logs = True, {}, []
         results: dict = {"results": {}}
         if not payload:
@@ -173,7 +174,7 @@ class Job(Base, metaclass=register_class):
         now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            with session_scope():
+            with controller.session_scope():
                 self.completed = self.failed = 0
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
@@ -208,7 +209,7 @@ class Job(Base, metaclass=register_class):
                 else:
                     sleep(self.time_between_retries)
         logs.append(f"{self.type} {self.name}: Finished.")
-        with session_scope():
+        with controller.session_scope():
             self.results[now] = {**results, "logs": logs}
             self.is_running, self.state = False, {}
             self.completed = self.failed = 0
@@ -252,7 +253,7 @@ class Job(Base, metaclass=register_class):
             device, results, payload, workflow, lock = args
             device_result = self.get_results(payload, device, workflow, True)
             with lock:
-                with session_scope() as session:
+                with controller.session_scope() as session:
                     session.merge(workflow or self)
                     results["devices"][device.name] = device_result
 

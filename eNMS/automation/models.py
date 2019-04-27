@@ -157,7 +157,7 @@ class Job(Base):
     ) -> Tuple[dict, str]:
         logs = workflow.logs if workflow else self.logs
         logs.append(f"{self.type} {self.name}: Starting.")
-        with session_scope() as session:
+        with session_scope():
             self.is_running, self.state, self.logs = True, {}, []
         results: dict = {"results": {}}
         if not payload:
@@ -171,7 +171,7 @@ class Job(Base):
         now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            with session_scope() as session:
+            with session_scope():
                 self.completed = self.failed = 0
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:

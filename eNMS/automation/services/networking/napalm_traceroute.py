@@ -13,25 +13,28 @@ class NapalmTracerouteService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    driver = Column(String(255))
+    driver = Column(String(5000))
     driver_values = NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
-    source_ip = Column(String(255))
+    destination_ip = Column(String(5000))
+    source_ip = Column(String(5000))
     timeout = Column(Integer)
     ttl = Column(Integer)
-    vrf = Column(String(255))
+    vrf = Column(String(5000))
 
     __mapper_args__ = {"polymorphic_identity": "NapalmTracerouteService"}
 
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
+        destination = self.sub(self.destination_ip, locals())
+        source = self.sub(self.source_ip, locals())
         self.logs.append(
-            f"Running traceroute from {self.source} to {device.ip_address}"
+            f"Running napalm traceroute from {source} to {destination} on {device.ip_address}"
         )
         traceroute = napalm_driver.traceroute(
-            device.ip_address,
+            destination=destination,
             source=self.source,
             vrf=self.vrf,
             ttl=self.ttl or 255,

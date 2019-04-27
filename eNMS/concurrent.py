@@ -2,6 +2,7 @@ from typing import Optional, Set
 
 from eNMS.controller import controller
 from eNMS.database import fetch
+from eNMS.modules import db
 
 
 def threaded_job(
@@ -16,3 +17,4 @@ def threaded_job(
         if targets:
             targets = {fetch("Device", id=device_id) for device_id in targets}
         job.try_run(targets=targets, payload=payload, task=task)
+        db.session.commit()

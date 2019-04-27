@@ -76,8 +76,9 @@ function saveService(service) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
+  console.log(value)
   if (!value) return;
-  $(`#results-${id}`).text(
+  $(`#display_results-${id}`).text(
     JSON.stringify(
       Object.fromEntries(
         Object.entries(value)
@@ -161,7 +162,7 @@ function showResults(id) {
   createPanel("results", "Results", "1000 600", id, function () {
     configureCallbacks(id);
     displayResults(id);
-  })
+  });
 }
 
 /**
@@ -178,11 +179,11 @@ function configureCallbacks(id) {
   });
 
   $(`#compare_with-${id}`).on("change", function() {
-    $(`#results-${id}`).empty();
+    $(`#display_results-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
     call(`/get_diff-${id}-${v1}-${v2}`, function(data) {
-      $(`#results-${id}`).append(
+      $(`#display_results-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,
           newTextLines: data.second,
@@ -204,7 +205,7 @@ function configureCallbacks(id) {
 // eslint-disable-next-line
 function clearResults(id) {
   call(`/clear_results-${id}`, () => {
-    $(`#results-${id},#compare_with-${id},#display-${id}`).empty();
+    $(`#display_results-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Results cleared.", "success", 5);
   });
 }

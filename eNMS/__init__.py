@@ -52,6 +52,7 @@ import eNMS.routes
 def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
     db.init_app(app)
+    db.app = app
     login_manager.init_app(app)
     mail_client.init_app(app)
     FlaskCLI(app)

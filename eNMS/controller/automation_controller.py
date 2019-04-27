@@ -8,7 +8,7 @@ from re import search, sub
 from sqlalchemy.exc import DataError
 from typing import Any, Dict
 
-from eNMS.modules import scheduler
+from eNMS.modules import db, scheduler
 from eNMS.forms import CompareResultsForm, WorkflowBuilderForm
 from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
 from eNMS.models import service_classes
@@ -222,7 +222,7 @@ class AutomationController:
                 return {"error": "This service should not have targets configured."}
         scheduler.add_job(
             id=str(datetime.now()),
-            func=self.scheduler_job,
+            func=threaded_job,
             run_date=datetime.now(),
             args=[job.id],
             trigger="date",

@@ -7,6 +7,7 @@ from psutil import cpu_percent
 from uuid import getnode
 from typing import Union
 
+from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.database import delete, factory, fetch
 from eNMS.modules import auth, scheduler
@@ -67,7 +68,7 @@ class RestAutomation(Resource):
         if handle_asynchronously:
             scheduler.add_job(
                 id=str(datetime.now()),
-                func=controller.scheduler_job,
+                func=threaded_job,
                 run_date=datetime.now(),
                 args=[job.id, None, [d.id for d in targets], data.get("payload")],
                 trigger="date",

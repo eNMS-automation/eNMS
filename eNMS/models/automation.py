@@ -152,12 +152,26 @@ class Job(Base, metaclass=register_class):
             }
         )
 
+    def git_push(self, results):
+        path_git_folder = Path.cwd() / "git" / "automation"
+        with open(path_git_folder / self.name, "w") as file:
+            file.write(controller.str_dict(results))
+        repo = Repo(str(path_git_folder))
+        try:
+            repo.git.add(A=True)
+            repo.git.commit(m=f"Automatic commit ({job.name})")
+        except GitCommandError:
+            pass
+        repo.remotes.origin.push()
+
     def try_run(
         self,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
+        task: Optional["Task"] = None,
     ) -> Tuple[dict, str]:
+        parameters = get_one("Parameters")
         logs = workflow.logs if workflow else self.logs
         logs.append(f"{self.type} {self.name}: Starting.")
         with controller.session_scope():
@@ -215,6 +229,10 @@ class Job(Base, metaclass=register_class):
             self.completed = self.failed = 0
         if not workflow and self.send_notification:
             self.notify(results, now)
+        if self.push_to_git and parameters.git_automation:
+            self.git_push(results)
+        if task and not task.frequency:
+            task.is_active = False
         return results, now
 
     def get_results(

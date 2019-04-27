@@ -206,7 +206,7 @@ class Job(Base):
                 else:
                     sleep(self.time_between_retries)
         logs.append(f"{self.type} {self.name}: Finished.")
-        with session_scope() as session:
+        with session_scope():
             self.results[now] = {**results, "logs": logs}
             self.is_running, self.state = False, {}
             self.completed = self.failed = 0

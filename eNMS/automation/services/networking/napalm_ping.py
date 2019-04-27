@@ -14,25 +14,30 @@ class NapalmPingService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     count = Column(Integer)
-    driver = Column(String(255))
+    driver = Column(String(5000))
     driver_values = NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     size = Column(Integer)
-    source_ip = Column(String(255))
+    destination_ip = Column(String(5000))
+    source_ip = Column(String(5000))
     timeout = Column(Integer)
     ttl = Column(Integer)
-    vrf = Column(String(255))
+    vrf = Column(String(5000))
 
     __mapper_args__ = {"polymorphic_identity": "NapalmPingService"}
 
     def job(self, payload: dict, device: Device) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
-        self.logs.append(f"Running ping from {self.source_ip} to {device.ip_address}")
+        destination = self.sub(self.destination_ip, locals())
+        source = self.sub(self.source_ip, locals())
+        self.logs.append(
+            f"Running napalm ping from {source} to {destination} on {device.ip_address}"
+        )
         ping = napalm_driver.ping(
-            device.ip_address,
-            source=self.source_ip,
+            destination=destination,
+            source=source,
             vrf=self.vrf,
             ttl=self.ttl or 255,
             timeout=self.timeout or 2,

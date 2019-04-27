@@ -31,7 +31,8 @@ class NapalmTracerouteService(Service):
         destination = self.sub(self.destination_ip, locals())
         source = self.sub(self.source_ip, locals())
         self.logs.append(
-            f"Running napalm traceroute from {source} to {destination} on {device.ip_address}"
+            f"Running napalm traceroute from {source}"
+            f"to {destination} on {device.ip_address}"
         )
         traceroute = napalm_driver.traceroute(
             destination=destination,

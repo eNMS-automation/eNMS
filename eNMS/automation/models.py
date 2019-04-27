@@ -243,7 +243,9 @@ class Job(Base):
             db.session.commit()
         return results
 
-    def device_run(self, args: Tuple[Device, dict, dict, Optional["Workflow"]]) -> None:
+    def device_run(
+        self, args: Tuple[Device, dict, dict, Optional["Workflow"], Any]
+    ) -> None:
         with controller.app.app_context():
             device, results, payload, workflow, lock = args
             device_result = self.get_results(payload, device, workflow, True)

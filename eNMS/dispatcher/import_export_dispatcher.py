@@ -7,7 +7,6 @@ from os.path import exists
 from pynetbox import api as netbox_api
 from requests import get as http_get
 from simplekml import Kml
-from typing import Set
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -15,6 +14,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 from yaml import dump, load, BaseLoader
 
+from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.forms import (
     GoogleEarthForm,
@@ -58,16 +58,11 @@ class ImportExportDispatcher:
         property = reverse_pretty_names.get(property, property)
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
-    def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
-        allowed_syntax = "." in name
-        allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
-        return allowed_syntax and allowed_extension
-
     def object_import(self, request: dict, file: FileStorage) -> str:
         if request["replace"]:
             delete_all("Device")
         result = "Topology successfully imported."
-        if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
+        if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             book = open_workbook(file_contents=file.read())
             for obj_type in ("Device", "Link"):
                 try:
@@ -90,7 +85,7 @@ class ImportExportDispatcher:
         info("Inventory import: Done.")
         return result
 
-    def export_topology(self) -> None:
+    def export_topology() -> None:
         workbook = Workbook()
         filename = request.form["export_filename"]
         if "." not in filename:

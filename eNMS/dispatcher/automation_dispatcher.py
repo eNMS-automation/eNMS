@@ -2,13 +2,12 @@ from datetime import datetime
 from difflib import SequenceMatcher
 from flask import current_app, jsonify, request, send_file, session
 from flask.wrappers import Response
-from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
-from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from re import search, sub
 from sqlalchemy.exc import DataError
 from typing import Any, Dict
 
 from eNMS.concurrent import threaded_job
+from eNMS.controller import controller
 from eNMS.modules import scheduler
 from eNMS.forms import CompareResultsForm, WorkflowBuilderForm
 from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
@@ -22,11 +21,6 @@ from eNMS.properties import (
 
 
 class AutomationDispatcher:
-
-    NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
-    NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
-    NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
-
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int
     ) -> dict:
@@ -245,10 +239,10 @@ class AutomationDispatcher:
 
     def get_results_diff(self, job_id: int, v1: str, v2: str) -> dict:
         job = fetch("Job", id=job_id)
-        first = self.str_dict(
+        first = controller.str_dict(
             dict(reversed(sorted(job.results[v1].items())))
         ).splitlines()
-        second = self.str_dict(
+        second = controller.str_dict(
             dict(reversed(sorted(job.results[v2].items())))
         ).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()

@@ -158,18 +158,10 @@ function showLogs(id) {
  */
 // eslint-disable-next-line
 function showResults(id) {
-  createPanel(
-    `results-panel-${id}`,
-    "1000 600",
-    "../results_form",
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Job results");
-      preprocessForm(panel, id);
-      configureCallbacks(id);
-      displayResults(id);
-    }
-  );
+  createPanel("results", "Results", "1000 600", id, function () {
+    configureCallbacks(id);
+    displayResults(id);
+  })
 }
 
 /**

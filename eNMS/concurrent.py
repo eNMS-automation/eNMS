@@ -1,7 +1,7 @@
 from typing import Optional, Set
 
+from eNMS.controller import controller
 from eNMS.database import fetch
-from eNMS.modules import scheduler
 
 
 def threaded_job(
@@ -10,7 +10,7 @@ def threaded_job(
     targets: Optional[Set["Device"]] = None,
     payload: Optional[dict] = None,
 ) -> None:
-    with scheduler.app.app_context():
+    with controller.app.app_context():
         task = fetch("Task", creation_time=aps_job_id)
         job = fetch("Job", id=job_id)
         if targets:

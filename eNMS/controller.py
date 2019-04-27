@@ -1,12 +1,27 @@
 from contextlib import contextmanager
 from flask import Flask
+from logging import info
+from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
+from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from sqlalchemy.orm import Session
+from string import punctuation
+from typing import Any, Generator, Set
 
 
 class Controller:
+
+    NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
+    NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
+    NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
+
     def init_app(self, app: Flask, session: Session):
         self.app = app
         self.session = session
+
+    def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
+        allowed_syntax = "." in name
+        allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
+        return allowed_syntax and allowed_extension
 
     @contextmanager
     def session_scope(self) -> Generator:

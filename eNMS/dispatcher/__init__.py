@@ -21,7 +21,20 @@ from eNMS.properties import (
 )
 
 
-class BaseController:
+from eNMS.dispatcher.administration_dispatcher import Administrationdispatcher
+from eNMS.dispatcher.automation_dispatcher import Automationdispatcher
+from eNMS.dispatcher.base_dispatcher import Basedispatcher
+from eNMS.dispatcher.import_export_dispatcher import ImportExportdispatcher
+from eNMS.dispatcher.inventory_dispatcher import Inventorydispatcher
+
+
+class dispatcher(
+    Automationdispatcher,
+    Administrationdispatcher,
+    Basedispatcher,
+    ImportExportdispatcher,
+    Inventorydispatcher,
+):
     def dashboard(self) -> dict:
         on_going = {
             "Running services": len(
@@ -106,24 +119,6 @@ class BaseController:
         info(f"{current_user.name}: GET {cls} {instance.name} ({id})")
         return instance.serialized
 
-    def str_dict(self, input: Any, depth: int = 0) -> str:
-        tab = "\t" * depth
-        if isinstance(input, list):
-            result = "\n"
-            for element in input:
-                result += f"{tab}- {self.str_dict(element, depth + 1)}\n"
-            return result
-        elif isinstance(input, dict):
-            result = ""
-            for key, value in input.items():
-                result += f"\n{tab}{key}: {self.str_dict(value, depth + 1)}"
-            return result
-        else:
-            return str(input)
-
-    def strip_all(self, input: str) -> str:
-        return input.translate(str.maketrans("", "", f"{punctuation} "))
-
     def table(self, table_type: str) -> dict:
         return dict(
             properties=table_properties[table_type],
@@ -131,19 +126,6 @@ class BaseController:
             type=table_type,
             template="pages/table",
         )
-
-    @contextmanager
-    def session_scope(self) -> Generator:
-        session = self.session()  # type: ignore
-        try:
-            yield session
-            session.commit()
-        except Exception as e:
-            info(str(e))
-            session.rollback()
-            raise e
-        finally:
-            self.session.remove()
 
     def update(self, cls: str) -> dict:
         try:
@@ -156,3 +138,6 @@ class BaseController:
             return {"error": "Invalid JSON syntax (JSON field)"}
         except IntegrityError:
             return {"error": "An object with the same name already exists"}
+
+
+dispatcher = Dispatcher()

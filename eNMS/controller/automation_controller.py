@@ -245,35 +245,6 @@ class AutomationController:
             job.positions[workflow.name] = (position["x"], position["y"])
         return now
 
-    def scheduler_job(
-        self,
-        job_id: int,
-        aps_job_id: Optional[str] = None,
-        targets: Optional[Set["Device"]] = None,
-        payload: Optional[dict] = None,
-    ) -> None:
-        with self.app.app_context():
-            task = fetch("Task", creation_time=aps_job_id)
-            job = fetch("Job", id=job_id)
-            if targets:
-                targets = {fetch("Device", id=device_id) for device_id in targets}
-            results, now = job.try_run(targets=targets, payload=payload)
-            parameters = get_one("Parameters")
-            if job.push_to_git and parameters.git_automation:
-                path_git_folder = Path.cwd() / "git" / "automation"
-                with open(path_git_folder / job.name, "w") as file:
-                    file.write(self.str_dict(results))
-                repo = Repo(str(path_git_folder))
-                try:
-                    repo.git.add(A=True)
-                    repo.git.commit(m=f"Automatic commit ({job.name})")
-                except GitCommandError:
-                    pass
-                repo.remotes.origin.push()
-            if task and not task.frequency:
-                task.is_active = False
-            db.session.commit()
-
     def get_results_diff(self, job_id: int, v1: str, v2: str) -> dict:
         job = fetch("Job", id=job_id)
         first = self.str_dict(

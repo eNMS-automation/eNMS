@@ -176,8 +176,8 @@ class Job(Base, metaclass=register_class):
     ) -> Tuple[dict, str]:
         parameters = get_one("Parameters")
         logs = workflow.logs if workflow else self.logs
-        logs.append(f"{self.type} {self.name}: Starting.")
         with controller.session_scope() as session:
+            logs.append(f"{self.type} {self.name}: Starting.")
             self.is_running, self.state, self.logs = True, {}, []
             session.merge(workflow or self)
         results: dict = {"results": {}}
@@ -191,8 +191,8 @@ class Job(Base, metaclass=register_class):
             results["results"]["devices"] = {}
         now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
-            logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
             with controller.session_scope() as session:
+                logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
                 self.completed = self.failed = 0
                 session.merge(workflow or self)
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)

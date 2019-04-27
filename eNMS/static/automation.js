@@ -141,7 +141,7 @@ function showLogs(id) {
       position: "center-top 0 58",
       contentSize: "650 600",
       content: `<pre id="logs-${id}" style="border: 0;\
-        background-color: transparent;"></pre>`,
+        background-color: transparent; color: white;"></pre>`,
       dragit: {
         opacity: 0.7,
         containment: [5, 5, 5, 5],

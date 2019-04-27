@@ -177,8 +177,9 @@ class Job(Base, metaclass=register_class):
         parameters = get_one("Parameters")
         logs = workflow.logs if workflow else self.logs
         logs.append(f"{self.type} {self.name}: Starting.")
-        with controller.session_scope():
+        with controller.session_scope() as session:
             self.is_running, self.state, self.logs = True, {}, []
+            session.merge(workflow or self)
         results: dict = {"results": {}}
         if not payload:
             payload = {}
@@ -191,8 +192,9 @@ class Job(Base, metaclass=register_class):
         now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            with controller.session_scope():
+            with controller.session_scope() as session:
                 self.completed = self.failed = 0
+                session.merge(workflow or self)
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
@@ -225,17 +227,18 @@ class Job(Base, metaclass=register_class):
                     break
                 else:
                     sleep(self.time_between_retries)
-        logs.append(f"{self.type} {self.name}: Finished.")
         with controller.session_scope():
+            logs.append(f"{self.type} {self.name}: Finished.")
             self.results[now] = {**results, "logs": logs}
             self.is_running, self.state = False, {}
             self.completed = self.failed = 0
+            session.merge(workflow or self)
+            if task and not task.frequency:
+                task.is_active = False
         if not workflow and self.send_notification:
             self.notify(results, now)
         if self.push_to_git and parameters.git_automation:
             self.git_push(results)
-        if task and not task.frequency:
-            task.is_active = False
         return results, now
 
     def get_results(
@@ -263,8 +266,6 @@ class Job(Base, metaclass=register_class):
             }
         self.completed += 1
         self.failed += 1 - results["success"]
-        if not threaded:
-            db.session.commit()
         return results
 
     def device_run(

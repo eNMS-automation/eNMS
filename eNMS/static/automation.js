@@ -76,7 +76,6 @@ function saveService(service) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
-  console.log(value)
   if (!value) return;
   $(`#display_results-${id}`).text(
     JSON.stringify(

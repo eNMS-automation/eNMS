@@ -16,6 +16,7 @@ const typePanelSize = {
   "pool": "800 600",
   "service": "1000 600",
   "user": "600 300",
+  "workflow": "1000 600",
 }
 
 const filteringPanelSize = {

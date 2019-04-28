@@ -1,6 +1,6 @@
 <form id="edit-workflow-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
   <div class="modal-body">
-    <div id="workflow-wizard" class="form_wizard wizard_horizontal">
+    <div id="workflow-wizard" class="form_wizard wizard_horizontal add-id">
       <ul class="wizard_steps">
         <li>
           <a href="#step-1">
@@ -28,26 +28,28 @@
         </li>
       </ul>
       <div id="step-1">
-        {% for field in form %}
-          {% if field.widget.input_type == 'hidden' %}
-            {{ field(id='workflow-' + field.name) }}
-          {% endif %}
-        {% endfor %}
-        <label><label for="name">Name</label></label>
-        <div class='form-group'>
-          {{ form.name(id='workflow-name', class="form-control required") }}
-        </div>
-        <label><label for="description">Description</label></label>
-        <div class='form-group'>
-          {{ form.description(id='workflow-description', class="form-control") }}
-        </div>
-        <label><label for="vendor">Vendor</label></label>
-        <div class='form-group'>
-          {{ form.vendor(id='workflow-vendor', class="form-control") }}
-        </div>
-        <label><label for="operating_system">Operating System</label></label>
-        <div class='form-group'>
-          {{ form.operating_system(id='workflow-operating_system', class="form-control") }}
+        <div style="width: 100%; height: 50%;">
+          {% for field in form %}
+            {% if field.widget.input_type == 'hidden' %}
+              {{ field(id='workflow-' + field.name) }}
+            {% endif %}
+          {% endfor %}
+          <label><label for="name">Name</label></label>
+          <div class='form-group'>
+            {{ form.name(id='workflow-name', class="form-control required") }}
+          </div>
+          <label><label for="description">Description</label></label>
+          <div class='form-group'>
+            {{ form.description(id='workflow-description', class="form-control") }}
+          </div>
+          <label><label for="vendor">Vendor</label></label>
+          <div class='form-group'>
+            {{ form.vendor(id='workflow-vendor', class="form-control") }}
+          </div>
+          <label><label for="operating_system">Operating System</label></label>
+          <div class='form-group'>
+            {{ form.operating_system(id='workflow-operating_system', class="form-control") }}
+          </div>
         </div>
       </div>
       <div id="step-2">

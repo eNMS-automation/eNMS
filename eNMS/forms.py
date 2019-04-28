@@ -423,6 +423,7 @@ form_classes = {
     "results": CompareResultsForm,
     "user": UserForm,
     "service": JobForm,
+    "service_filtering": JobFilteringForm,
     "task": TaskForm,
     "workflow": JobForm,
 }

@@ -8,6 +8,17 @@ table: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
+
+const typePanelSize = {
+
+}
+
+const filteringPanelSize = {
+  "device": "700 700",
+  "service": "900 500",
+  "workflow": "900 500",
+}
+
 let topZ = 1000;
 
 /**
@@ -184,7 +195,7 @@ function showPoolObjectsPanel(id) {
  */
 // eslint-disable-next-line
 function showFilteringPanel(type) {
-  createPanel(`${type}_filtering`, "Filter", "700 700");
+  createPanel(`${type}_filtering`, "Filter", filteringSize[type]);
 }
 
 /**
@@ -267,7 +278,7 @@ function configureForm(form, id) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
-  createPanel(type, "", "700 500", id, function(panel) {
+  createPanel(type, "", typePanelSize[type], id, function(panel) {
     if (id) {
       call(`/get-${type}-${id}`, function(instance) {
         if (["service", "workflow"].includes(type)) panelCode(type, id);

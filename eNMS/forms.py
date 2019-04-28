@@ -10,10 +10,10 @@ from wtforms import (
     PasswordField,
     SelectMultipleField,
 )
+from wtforms.fields.core import UnboundField
 
+from eNMS.controller import controller
 from eNMS.database import choices
-from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
-from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,
@@ -25,9 +25,17 @@ from eNMS.properties import (
 )
 
 
-NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
-NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
-NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
+form_processing = {}
+
+
+def process_form(*args, **kwargs):
+    cls = type(*args, **kwargs)
+    form_processing[cls.form_type] = {
+        field_name: field.field_class
+        for field_name, field in args[-1].items()
+        if isinstance(field, UnboundField)
+    }
+    return cls
 
 
 class ObjectField(SelectField):
@@ -48,7 +56,8 @@ class LoginForm(FlaskForm):
     password = PasswordField()
 
 
-class UserForm(FlaskForm):
+class UserForm(FlaskForm, metaclass=process_form):
+    form_type = "user"
     list_fields = HiddenField(default="permissions,pools")
     id = HiddenField()
     name = StringField()
@@ -197,8 +206,8 @@ class DeviceForm(ObjectForm):
     username = StringField()
     password = PasswordField()
     enable_password = PasswordField()
-    napalm_driver = SelectField(choices=NAPALM_DRIVERS)
-    netmiko_driver = SelectField(choices=NETMIKO_DRIVERS)
+    napalm_driver = SelectField(choices=controller.NAPALM_DRIVERS)
+    netmiko_driver = SelectField(choices=controller.NETMIKO_DRIVERS)
 
 
 class LinkForm(ObjectForm):

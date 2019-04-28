@@ -33,7 +33,9 @@ def get_route(page: str) -> Response:
 @bp.route("/<page>", methods=["POST"])
 @login_required
 def post_route(page: str) -> Response:
+
     data = {**request.form.to_dict(), **{"creator": current_user.id}}
+    print(data)
     for property in data.get("list_fields", "").split(","):
         data[property] = request.form.getlist(property)
     for property in data.get("boolean_fields", "").split(","):

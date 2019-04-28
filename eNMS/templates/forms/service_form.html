@@ -85,7 +85,7 @@
         </fieldset>
         <label><label for="send_notification_method">Send Notification Method</label></label>
         <div class='form-group'>
-          {{ form.send_notification_method(id='service-send_notification_method', class="form-control") }}
+          {{ form.send_notification_method(id='service-send_notification_method', class="form-control add-id") }}
         </div>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
@@ -101,19 +101,19 @@
       <div id="step-3">
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class='form-group'>
-          {{ form.number_of_retries(id='service-number_of_retries', class="form-control") }}
+          {{ form.number_of_retries(id='service-number_of_retries', class="form-control add-id") }}
         </div>
         <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.time_between_retries(id='service-time_between_retries', class="form-control") }}
+          {{ form.time_between_retries(id='service-time_between_retries', class="form-control add-id") }}
         </div>
         <label><label for="waiting_time">Waiting time (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.waiting_time(id='service-waiting_time', class="form-control") }}
+          {{ form.waiting_time(id='service-waiting_time', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-push_to_git" name="push_to_git" type="checkbox" value="y">
+            <input id="service-push_to_git" name="push_to_git" class="add-id" type="checkbox" value="y">
             <label>Push to git</label>
           </div>
         </fieldset>
@@ -129,7 +129,7 @@
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-multiprocessing" name="multiprocessing" type="checkbox" value="y">
+            <input id="service-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
             <label>Multiprocessing</label>
           </div>
         </fieldset>

@@ -48,32 +48,32 @@
           {% endfor %}
           <label><label for="name">Name</label></label>
           <div class='form-group'>
-            {{ form.name(id='workflow-name', class="form-control required") }}
+            {{ form.name(id='workflow-name', class="form-control add-id required") }}
           </div>
           <label><label for="description">Description</label></label>
           <div class='form-group'>
-            {{ form.description(id='workflow-description', class="form-control") }}
+            {{ form.description(id='workflow-description', class="form-control add-id") }}
           </div>
           <label><label for="vendor">Vendor</label></label>
           <div class='form-group'>
-            {{ form.vendor(id='workflow-vendor', class="form-control") }}
+            {{ form.vendor(id='workflow-vendor', class="form-control add-id") }}
           </div>
           <label><label for="operating_system">Operating System</label></label>
           <div class='form-group'>
-            {{ form.operating_system(id='workflow-operating_system', class="form-control") }}
+            {{ form.operating_system(id='workflow-operating_system', class="form-control add-id") }}
           </div>
         </div>
       </div>
       <div id="step-2">
         <fieldset>
           <div class="item">
-            <input id="workflow-send_notification" name="send_notification" type="checkbox" value="y">
+            <input id="workflow-send_notification" name="send_notification" class="add-id" type="checkbox" value="y">
             <label>Send notification</label>
           </div>
         </fieldset>
         <label><label for="send_notification_method">Send Notification Method</label></label>
         <div class='form-group'>
-          {{ form.send_notification_method(id='workflow-send_notification_method', class="form-control") }}
+          {{ form.send_notification_method(id='workflow-send_notification_method', class="form-control add-id") }}
         </div>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
@@ -81,7 +81,7 @@
         </div>
         <fieldset>
           <div class="item">
-            <input id="workflow-display_only_failed_nodes" name="display_only_failed_nodes" type="checkbox" value="y">
+            <input id="workflow-display_only_failed_nodes" name="display_only_failed_nodes" class="add-id" type="checkbox" value="y">
             <label>Display only failed nodes</label>
           </div>
         </fieldset>
@@ -89,19 +89,19 @@
       <div id="step-3">
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class='form-group'>
-          {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
+          {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control add-id") }}
         </div>
         <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.time_between_retries(id='workflow-time_between_retries', class="form-control") }}
+          {{ form.time_between_retries(id='workflow-time_between_retries', class="form-control add-id") }}
         </div>
         <label><label for="waiting_time">Waiting time (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.waiting_time(id='workflow-waiting_time', class="form-control") }}
+          {{ form.waiting_time(id='workflow-waiting_time', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="workflow-push_to_git" name="push_to_git" type="checkbox" value="y">
+            <input id="workflow-push_to_git" name="push_to_git" class="add-id" type="checkbox" value="y">
             <label>Push to git</label>
           </div>
         </fieldset>
@@ -109,31 +109,31 @@
       <div id="step-4">
         <fieldset>
           <div class="item">
-            <input id="workflow-use_workflow_targets" name="use_workflow_targets" type="checkbox" value="y">
+            <input id="workflow-use_workflow_targets" name="use_workflow_targets" class="add-id" type="checkbox" value="y">
             <label>Use Workflow Targets</label>
           </div>
         </fieldset>
         <label><label for="devices">Devices</label></label>
         <div class='form-group'>
-          {{ form.devices(id='workflow-devices', class="form-control") }}
+          {{ form.devices(id='workflow-devices', class="form-control add-id") }}
         </div>
         <label><label for="pools">Pools</label></label>
         <div class='form-group'>
-          {{ form.pools(id='workflow-pools', class="form-control") }}
+          {{ form.pools(id='workflow-pools', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="workflow-multiprocessing" name="multiprocessing" type="checkbox" value="y">
+            <input id="workflow-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
             <label>Multiprocessing</label>
           </div>
         </fieldset>
         <label><label for="max_processes">Maximum number of processes</label></label>
         <div class='form-group'>
-          {{ form.max_processes(id='workflow-max_processes', class="form-control") }}
+          {{ form.max_processes(id='workflow-max_processes', class="form-control add-id") }}
         </div>
         <label><label for="credentials">Credentials</label></label>
         <div class='form-group'>
-          {{ form.credentials(id='workflow-credentials', class="form-control") }}
+          {{ form.credentials(id='workflow-credentials', class="form-control add-id") }}
         </div>
       </div>
     </div>

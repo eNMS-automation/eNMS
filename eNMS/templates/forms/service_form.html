@@ -1,6 +1,3 @@
-<div class="modal-header">
-  <button id="save" type="button" class="btn btn-success pull-right add-id btn-id" value="processData">Save</button>
-</div>
 <form id="edit-service-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
   <div class="modal-body">
     <div id="service-wizard" class="form_wizard wizard_horizontal add-id">
@@ -38,34 +35,36 @@
           </a>
         </li>
       </ul>
-      <div id="step-1" style="min-height: 60vh; overflow-x: hidden;">
-        <label>Type of Service</label>
-        <div class='form-group'>
-          <select class="form-control add-id" id="service-type"></select>
-        </div>
-        {% for field in form %}
-          {% if field.widget.input_type == 'hidden' %}
-            {{ field(id='service-' + field.name) }}
-          {% endif %}
-        {% endfor %}
-        <label><label for="name">Name</label></label>
-        <div class='form-group'>
-          {{ form.name(id='service-name', class="form-control add-id required") }}
-        </div>
-        <label><label for="description">Description</label></label>
-        <div class='form-group'>
-          {{ form.description(id='service-description', class="form-control add-id") }}
-        </div>
-        <label><label for="vendor">Vendor</label></label>
-        <div class='form-group'>
-          {{ form.vendor(id='service-vendor', class="form-control add-id") }}
-        </div>
-        <label><label for="operating_system">Operating System</label></label>
-        <div class='form-group'>
-          {{ form.operating_system(id='service-operating_system', class="form-control add-id") }}
+      <div id="step-1">
+        <div style="width: 100%; height: 50%;">
+          <label>Type of Service</label>
+          <div class='form-group'>
+            <select class="form-control add-id" id="service-type"></select>
+          </div>
+          {% for field in form %}
+            {% if field.widget.input_type == 'hidden' %}
+              {{ field(id='service-' + field.name) }}
+            {% endif %}
+          {% endfor %}
+          <label><label for="name">Name</label></label>
+          <div class='form-group'>
+            {{ form.name(id='service-name', class="form-control add-id required") }}
+          </div>
+          <label><label for="description">Description</label></label>
+          <div class='form-group'>
+            {{ form.description(id='service-description', class="form-control add-id") }}
+          </div>
+          <label><label for="vendor">Vendor</label></label>
+          <div class='form-group'>
+            {{ form.vendor(id='service-vendor', class="form-control add-id") }}
+          </div>
+          <label><label for="operating_system">Operating System</label></label>
+          <div class='form-group'>
+            {{ form.operating_system(id='service-operating_system', class="form-control add-id") }}
+          </div>
         </div>
       </div>
-      <div id="step-2" style="min-height: 60vh; overflow-x: hidden;">
+      <div id="step-2">
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class='form-group'>
           {{ form.number_of_retries(id='service-number_of_retries', class="form-control add-id") }}
@@ -105,7 +104,7 @@
           </div>
         </fieldset>
       </div>
-      <div id="step-3" style="min-height: 60vh; overflow-x: hidden;">
+      <div id="step-3">
         <label><label for="devices">Devices</label></label>
         <div class='form-group'>
           {{ form.devices(id='service-devices', class="form-control add-id") }}
@@ -129,9 +128,14 @@
           {{ form.credentials(id='service-credentials', class="form-control add-id") }}
         </div>
       </div>
-      <div id="step-4" style="min-height: 60vh; overflow-x: hidden;">
+      <div id="step-4">
         <div id="service-custom-form" class="add-id"></div>
       </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <center>
+      <button id="save" type="button" class="btn btn-success pull-right add-id btn-id" value="processData">Save</button>
+    <center>
   </div>
 </form>

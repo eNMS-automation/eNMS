@@ -36,6 +36,7 @@ function displayCustomForm(id) {
 // eslint-disable-next-line
 function panelCode(type, id) {
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
+    autoAdjustHeight: false,
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
@@ -56,6 +57,7 @@ function panelCode(type, id) {
     }
     displayCustomForm(id);
   }
+  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
 }
 
 /**

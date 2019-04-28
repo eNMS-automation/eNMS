@@ -16,6 +16,17 @@ function saveParameters() {
   });
 }
 
+/**
+* Get Cluster Status.
+*/
+function getClusterStatus() {
+  call("/admin/get_cluster_status", function(cluster) {
+    table.ajax.reload(null, false);
+    setTimeout(getClusterStatus, 15000);
+  });
+}
+getClusterStatus();
+
 (function() {
   doc("https://enms.readthedocs.io/en/latest/security/access.html");
   $("#cluster_scan_protocol").val(parameters.cluster_scan_protocol);

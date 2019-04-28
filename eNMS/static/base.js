@@ -10,7 +10,11 @@ table: false
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const typePanelSize = {
-
+  "device": "700 600",
+  "instance": "600 250",
+  "link": "700 400",
+  "pool": "800 600",
+  "user": "600 300",
 }
 
 const filteringPanelSize = {
@@ -344,7 +348,7 @@ function processData(type, id) {
       alertify.notify(
         `${type.toUpperCase()} '${instance.name}' ${
           id ? "updated" : "created"
-        }`,
+        }.`,
         "success",
         5
       );

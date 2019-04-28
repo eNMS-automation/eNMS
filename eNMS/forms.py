@@ -175,7 +175,7 @@ class ConnectionForm(FlaskForm):
     address = SelectField(choices=address_choices)
 
 
-class BaseObjectForm(FlaskForm):
+class ObjectForm(FlaskForm):
     name = StringField()
     description = StringField()
     location = StringField()
@@ -183,12 +183,9 @@ class BaseObjectForm(FlaskForm):
     model = StringField()
 
 
-class ObjectForm(BaseObjectForm):
-    id = HiddenField()
-
-
 @configure_device_form
 class DeviceForm(ObjectForm):
+    id = HiddenField()
     device_types = [subtype for subtype in device_subtypes.items()]
     subtype = SelectField(choices=device_types)
     ip_address = StringField("IP address")
@@ -205,19 +202,20 @@ class DeviceForm(ObjectForm):
 
 
 class LinkForm(ObjectForm):
+    id = HiddenField()
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)
     source = ObjectField("Device")
     destination = ObjectField("Device")
 
 
-class FilteringForm(FlaskForm):
+class ObjectFilteringForm(FlaskForm):
     list_fields = HiddenField(default="pools")
     pools = MultipleObjectField("Pool")
 
 
 @configure_device_form
-class DeviceFilteringForm(BaseObjectForm, FilteringForm):
+class DeviceFilteringForm(ObjectForm, ObjectFilteringForm):
     current_configuration = StringField()
     subtype = StringField()
     ip_address = StringField()
@@ -230,7 +228,7 @@ class DeviceFilteringForm(BaseObjectForm, FilteringForm):
     netmiko_driver = StringField()
 
 
-class LinkFilteringForm(BaseObjectForm, FilteringForm):
+class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
     subtype = StringField()
     source_name = StringField()
     destination_name = StringField()
@@ -342,6 +340,18 @@ class JobForm(FlaskForm):
     operating_system = StringField()
 
 
+class JobFilteringForm(FlaskForm):
+    name = StringField()
+    description = StringField()
+    max_processes = StringField()
+    credentials = StringField()
+    waiting_time = StringField()
+    send_notification_method = StringField()
+    mail_recipient = StringField()
+    number_of_retries = StringField()
+    time_between_retries = StringField()
+
+
 class CompareResultsForm(FlaskForm):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
@@ -418,12 +428,13 @@ form_classes = {
 }
 
 form_templates = {
-    "configuration_filtering": "filtering_form",
+    "configuration_filtering": "object_filtering_form",
     "device": "base_form",
-    "device_filtering": "filtering_form",
+    "device_filtering": "object_filtering_form",
     "instance": "base_form",
     "link": "base_form",
-    "link_filtering": "filtering_form",
+    "link_filtering": "object_filtering_form",
+    "service_filtering": "filtering_form",
     "task": "base_form",
     "user": "base_form",
 }

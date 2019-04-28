@@ -1,7 +1,3 @@
-
-<div class="modal-header">
-  <button id="save" type="button" class="btn btn-success pull-right" onclick="processData('workflow')">Save</button>
-</div>
 <form id="edit-workflow-form" data-parsley-validate id="form" class="form-horizontal form-label-left" method="post" autocomplete="off">
   <div class="modal-body">
     <div id="workflow-wizard" class="form_wizard wizard_horizontal">
@@ -31,7 +27,7 @@
           </a>
         </li>
       </ul>
-      <div id="step-1" style="min-height: 60vh; overflow-x: hidden;">
+      <div id="step-1">
         {% for field in form %}
           {% if field.widget.input_type == 'hidden' %}
             {{ field(id='workflow-' + field.name) }}
@@ -54,7 +50,7 @@
           {{ form.operating_system(id='workflow-operating_system', class="form-control") }}
         </div>
       </div>
-      <div id="step-2" style="min-height: 60vh; overflow-x: hidden;">
+      <div id="step-2">
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class='form-group'>
           {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
@@ -90,7 +86,7 @@
           </div>
         </fieldset>
       </div>
-      <div id="step-3" style="min-height: 60vh; overflow-x: hidden;">
+      <div id="step-3">
         <fieldset>
           <div class="item">
             <input id="workflow-use_workflow_targets" name="use_workflow_targets" type="checkbox" value="y">
@@ -121,5 +117,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success pull-right add-id btn-id" onclick="processData">Save</button>
   </div>
 </form>

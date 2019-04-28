@@ -14,7 +14,7 @@
           <a href="#step-2">
             <span class="step_no">2</span>
             <span class="step_descr">Step 2<br>
-              <small>Advanced</small>
+              <small>Notification</small>
             </span>
           </a>
         </li>
@@ -22,6 +22,14 @@
           <a href="#step-3">
             <span class="step_no">3</span>
             <span class="step_descr">Step 3<br>
+              <small>Advanced</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#step-4">
+            <span class="step_no">4</span>
+            <span class="step_descr">Step 4<br>
               <small>Targets</small>
             </span>
           </a>
@@ -53,14 +61,6 @@
         </div>
       </div>
       <div id="step-2">
-        <label><label for="number_of_retries">Number of retries</label></label>
-        <div class='form-group'>
-          {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
-        </div>
-        <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
-        <div class='form-group'>
-          {{ form.time_between_retries(id='workflow-time_between_retries', class="form-control") }}
-        </div>
         <fieldset>
           <div class="item">
             <input id="workflow-send_notification" name="send_notification" type="checkbox" value="y">
@@ -71,12 +71,26 @@
         <div class='form-group'>
           {{ form.send_notification_method(id='workflow-send_notification_method', class="form-control") }}
         </div>
+        <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
+        <div class='form-group'>
+          {{ form.mail_recipient(id='service-mail_recipient', class="form-control add-id") }}
+        </div>
         <fieldset>
           <div class="item">
             <input id="workflow-display_only_failed_nodes" name="display_only_failed_nodes" type="checkbox" value="y">
             <label>Display only failed nodes</label>
           </div>
         </fieldset>
+      </div>
+      <div id="step-3">
+        <label><label for="number_of_retries">Number of retries</label></label>
+        <div class='form-group'>
+          {{ form.number_of_retries(id='workflow-number_of_retries', class="form-control") }}
+        </div>
+        <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
+        <div class='form-group'>
+          {{ form.time_between_retries(id='workflow-time_between_retries', class="form-control") }}
+        </div>
         <label><label for="waiting_time">Waiting time (in seconds)</label></label>
         <div class='form-group'>
           {{ form.waiting_time(id='workflow-waiting_time', class="form-control") }}
@@ -88,7 +102,7 @@
           </div>
         </fieldset>
       </div>
-      <div id="step-3">
+      <div id="step-4">
         <fieldset>
           <div class="item">
             <input id="workflow-use_workflow_targets" name="use_workflow_targets" type="checkbox" value="y">
@@ -121,6 +135,8 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success pull-right add-id btn-id" onclick="processData">Save</button>
+    <center>
+      <button type="button" class="btn btn-success add-id btn-id" onclick="processData">Save</button>
+    </center>
   </div>
 </form>

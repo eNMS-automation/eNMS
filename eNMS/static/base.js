@@ -337,6 +337,7 @@ function processInstance(type, instance) {
  */
 // eslint-disable-next-line
 function processData(type, id) {
+  console.log(type, id, $(`#workflow-id-1`).length);
   fCall(
     `/update-${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,

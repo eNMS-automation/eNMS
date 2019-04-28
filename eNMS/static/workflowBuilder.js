@@ -300,7 +300,7 @@ $("#current-workflow").on("change", function() {
 function savePositions() {
   $.ajax({
     type: "POST",
-    url: `/automation/save_positions/${workflow.id}`,
+    url: `/save_positions/${workflow.id}`,
     dataType: "json",
     contentType: "application/json;charset=UTF-8",
     data: JSON.stringify(graph.getPositions(), null, "\t"),

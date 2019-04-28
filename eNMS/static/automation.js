@@ -76,18 +76,20 @@ function saveService(service) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
-  if (!value) return;
-  $(`#display_results-${id}`).text(
-    JSON.stringify(
-      Object.fromEntries(
-        Object.entries(value)
-          .sort()
-          .reverse()
-      ),
-      null,
-      2
-    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-  );
+  if (value) {
+    result = JSON.stringify(
+        Object.fromEntries(
+          Object.entries(value)
+            .sort()
+            .reverse()
+        ),
+        null,
+        2
+    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+  } else {
+    result = "No results yet.";
+  }
+  $(`#display_results-${id}`).text(result);
 }
 
 /**

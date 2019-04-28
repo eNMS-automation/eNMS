@@ -92,6 +92,7 @@ function call(url, callback) {
  * @param {callback} callback - Function to process results.
  */
 function fCall(url, form, callback) {
+  console.log($(form));
   if (
     $(form)
       .parsley()
@@ -250,11 +251,10 @@ function preprocessForm(panel, id, type, duplicate) {
  */
 function configureForm(form, id) {
   if (!formProperties[form]) return;
-  formProperties[form].forEach((property) => {
-    const propertyType = propertyTypes[property] || "str";
+  for (const [property, type] of Object.entries(formProperties[form])) {
     el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
     if (!el.length) el = $(`#${property}`);
-    if (propertyType == "date") {
+    if (type == "date") {
       const today = new Date();
       el.datetimepicker({
         format: "DD/MM/YYYY HH:mm:ss",
@@ -270,7 +270,7 @@ function configureForm(form, id) {
         actionsBox: true,
       });
     }
-  });
+  }
 }
 
 /**

@@ -130,7 +130,8 @@ class Device(CustomDevice, metaclass=register_class):
                 onclick="showTypePanel('device', '{self.id}', true)">
                 Duplicate</button>""",
                 f"""<button type="button" class="btn btn-danger btn-xs"
-                onclick="showDeletionPanel('device', '{self.id}')">Delete</button>""",
+                onclick="showDeletionPanel('device', '{self.id}', '{self.name}')">
+                Delete</button>""",
             ]
         else:
             return [
@@ -220,7 +221,8 @@ class Link(Object, metaclass=register_class):
             onclick="showTypePanel('link', '{self.id}', true)">Duplicate
             </button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('link', '{self.id}')">Delete</button>""",
+            onclick="showDeletionPanel('link', '{self.id}'), '{self.name}'">
+            Delete</button>""",
         ]
 
 
@@ -291,7 +293,8 @@ class Pool(AbstractPool, metaclass=register_class):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showPoolObjectsPanel('{self.id}')">Edit objects</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('pool', '{self.id}')">Delete</button>""",
+            onclick="showDeletionPanel('pool', '{self.id}', '{self.name}')"
+            >Delete</button>""",
         ]
 
     @property

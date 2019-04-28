@@ -25,7 +25,8 @@ class Log(Base, metaclass=register_class):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('Log', '{self.id}')">Delete</button>"""
+            onclick="deleteInstance('Log', '{self.id}', '{self.name}')">
+            Delete</button>"""
         ]
 
     def __repr__(self) -> str:
@@ -50,7 +51,7 @@ class LogRule(Base, metaclass=register_class):
             onclick="showTypePanel('logrule', '{self.id}')">
             Edit</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('logrule', '{self.id}')">
+            onclick="deleteInstance('logrule', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
 

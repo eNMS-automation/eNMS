@@ -36,7 +36,7 @@ class Instance(Base, metaclass=register_class):
             onclick="showTypePanel('instance', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('instance', '{self.id}')">
+            onclick="showDeletionPanel('instance', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
 
@@ -154,7 +154,8 @@ class User(Base, UserMixin, metaclass=register_class):
             onclick="showTypePanel('user', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('user', '{self.id}')">Delete</button>""",
+            onclick="showDeletionPanel('user', '{self.id}', '{self.name}')">
+            Delete</button>""",
         ]
 
     @property

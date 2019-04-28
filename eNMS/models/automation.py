@@ -329,7 +329,7 @@ class Service(Job, metaclass=register_class):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('service', '{self.id}', true)">Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('service', '{self.id}')">
+            onclick="showDeletionPanel('service', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
 
@@ -463,7 +463,7 @@ class Workflow(Job, metaclass=register_class):
             onclick="showWorkflowModalDuplicate('{self.id}')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('workflow', '{self.id}')">
+            onclick="showDeletionPanel('workflow', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
 
@@ -576,7 +576,7 @@ class Task(Base, metaclass=register_class):
             onclick="showTypePanel('task', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('task', '{self.id}')">
+            onclick="showDeletionPanel('task', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
 

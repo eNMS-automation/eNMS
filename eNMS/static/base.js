@@ -159,9 +159,6 @@ function createPanel(name, title, contentSize, id, processing, type, duplicate) 
     border: "2px solid #2A3F52",
     theme: "light filledlight",
     headerLogo: "../static/images/logo.png",
-    headerControls: {
-      size: "xl",
-    },
     contentOverflow: "hidden scroll",
     contentSize: contentSize,
     position: "center-top 0 58",
@@ -206,8 +203,8 @@ function showFilteringPanel(type) {
  * Show Deletion Panel
  */
 // eslint-disable-next-line
-function showDeletionPanel(type, id) {
-  createPanel("deletion", "Delete", "300, 120", id, () => {}, type);
+function showDeletionPanel(type, id, name) {
+  createPanel("deletion", `Delete ${name}`, "350, 120", id, () => {}, type);
 }
 
 /**

@@ -14,7 +14,7 @@
           <a href="#step-2">
             <span class="step_no">2</span>
             <span class="step_descr">Step 2<br>
-              <small>Advanced</small>
+              <small>Notification</small>
             </span>
           </a>
         </li>
@@ -22,7 +22,7 @@
           <a href="#step-3">
             <span class="step_no">3</span>
             <span class="step_descr">Step 3<br>
-              <small>Targets</small>
+              <small>Advanced</small>
             </span>
           </a>
         </li>
@@ -30,6 +30,14 @@
           <a href="#step-4">
             <span class="step_no">4</span>
             <span class="step_descr">Step 4<br>
+              <small>Targets</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#step-5">
+            <span class="step_no">5</span>
+            <span class="step_descr">Step 5<br>
               <small>Specific</small>
             </span>
           </a>
@@ -65,23 +73,15 @@
         </div>
       </div>
       <div id="step-2">
-        <label><label for="number_of_retries">Number of retries</label></label>
-        <div class='form-group'>
-          {{ form.number_of_retries(id='service-number_of_retries', class="form-control add-id") }}
-        </div>
-        <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
-        <div class='form-group'>
-          {{ form.time_between_retries(id='service-time_between_retries', class="form-control add-id") }}
-        </div>
         <fieldset>
           <div class="item">
             <input id="service-send_notification" name="send_notification" type="checkbox" value="y">
-            <label>Send Notification</label>
+            <label>Send notification</label>
           </div>
         </fieldset>
         <label><label for="send_notification_method">Send Notification Method</label></label>
         <div class='form-group'>
-          {{ form.send_notification_method(id='service-send_notification_method', class="form-control add-id") }}
+          {{ form.send_notification_method(id='service-send_notification_method', class="form-control") }}
         </div>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
@@ -93,9 +93,19 @@
             <label>Display only failed nodes</label>
           </div>
         </fieldset>
+      </div>
+      <div id="step-3">
+        <label><label for="number_of_retries">Number of retries</label></label>
+        <div class='form-group'>
+          {{ form.number_of_retries(id='service-number_of_retries', class="form-control") }}
+        </div>
+        <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
+        <div class='form-group'>
+          {{ form.time_between_retries(id='service-time_between_retries', class="form-control") }}
+        </div>
         <label><label for="waiting_time">Waiting time (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.waiting_time(id='service-waiting_time', class="form-control add-id") }}
+          {{ form.waiting_time(id='service-waiting_time', class="form-control") }}
         </div>
         <fieldset>
           <div class="item">
@@ -104,7 +114,7 @@
           </div>
         </fieldset>
       </div>
-      <div id="step-3">
+      <div id="step-4">
         <label><label for="devices">Devices</label></label>
         <div class='form-group'>
           {{ form.devices(id='service-devices', class="form-control add-id") }}
@@ -128,7 +138,7 @@
           {{ form.credentials(id='service-credentials', class="form-control add-id") }}
         </div>
       </div>
-      <div id="step-4">
+      <div id="step-5">
         <div id="service-custom-form" class="add-id"></div>
       </div>
     </div>

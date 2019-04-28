@@ -25,10 +25,10 @@ from eNMS.properties import (
 )
 
 
-form_processing = {}
+forms_properties = {}
 
 
-def process_form(*args, **kwargs):
+def form_preprocessing(*args, **kwargs):
     cls = type(*args, **kwargs)
     form_processing[cls.form_type] = {
         field_name: field.field_class
@@ -50,15 +50,14 @@ class MultipleObjectField(SelectMultipleField):
         self.choices = choices(model)
 
 
-class LoginForm(FlaskForm):
+class LoginForm(FlaskForm, metaclass=form_preprocessing):
     authentication_method = SelectField(choices=())
     name = StringField()
     password = PasswordField()
 
 
-class UserForm(FlaskForm, metaclass=process_form):
+class UserForm(FlaskForm, metaclass=form_preprocessing):
     form_type = "user"
-    list_fields = HiddenField(default="permissions,pools")
     id = HiddenField()
     name = StringField()
     password = PasswordField()
@@ -68,7 +67,7 @@ class UserForm(FlaskForm, metaclass=process_form):
     pools = MultipleObjectField("Pool")
 
 
-class AdministrationForm(FlaskForm):
+class AdministrationForm(FlaskForm, metaclass=form_preprocessing):
     boolean_fields = HiddenField(default="mattermost_verify_certificate")
     cluster_scan_protocol = SelectField(choices=(("http", "HTTP"), ("https", "HTTPS")))
     cluster_scan_subnet = StringField()
@@ -122,7 +121,7 @@ class AdministrationForm(FlaskForm):
     }
 
 
-class MigrationsForm(FlaskForm):
+class MigrationsForm(FlaskForm, metaclass=form_preprocessing):
     boolean_fields = HiddenField(default="empty_database_before_import")
     list_fields = HiddenField(default="import_export_types")
     empty_database_before_import = BooleanField()
@@ -130,14 +129,14 @@ class MigrationsForm(FlaskForm):
     import_export_types = SelectMultipleField(choices=export_choices)
 
 
-class DatabaseHelpersForm(FlaskForm):
+class DatabaseHelpersForm(FlaskForm, metaclass=form_preprocessing):
     list_fields = HiddenField(default="deletion_types")
     clear_logs_date = StringField()
     deletion_choices = [(p, p) for p in import_properties]
     deletion_types = SelectMultipleField(choices=deletion_choices)
 
 
-class InstanceForm(FlaskForm):
+class InstanceForm(FlaskForm, metaclass=form_preprocessing):
     id = HiddenField()
     name = StringField()
     description = StringField()
@@ -175,7 +174,7 @@ def configure_pool_form(cls: FlaskForm) -> FlaskForm:
     return cls
 
 
-class ConnectionForm(FlaskForm):
+class ConnectionForm(FlaskForm, metaclass=form_preprocessing):
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
         for property, values in custom_properties.items()
@@ -184,7 +183,7 @@ class ConnectionForm(FlaskForm):
     address = SelectField(choices=address_choices)
 
 
-class ObjectForm(FlaskForm):
+class ObjectForm(FlaskForm, metaclass=form_preprocessing):
     name = StringField()
     description = StringField()
     location = StringField()
@@ -218,7 +217,7 @@ class LinkForm(ObjectForm):
     destination = ObjectField("Device")
 
 
-class ObjectFilteringForm(FlaskForm):
+class ObjectFilteringForm(FlaskForm, metaclass=form_preprocessing):
     list_fields = HiddenField(default="pools")
     pools = MultipleObjectField("Pool")
 
@@ -244,7 +243,7 @@ class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
 
 
 @configure_pool_form
-class PoolForm(FlaskForm):
+class PoolForm(FlaskForm, metaclass=form_preprocessing):
     id = HiddenField()
     boolean_fields = HiddenField(default="never_update")
     name = StringField()
@@ -260,19 +259,19 @@ class PoolForm(FlaskForm):
     never_update = BooleanField("Never update (for manually selected pools)")
 
 
-class PoolObjectsForm(FlaskForm):
+class PoolObjectsForm(FlaskForm, metaclass=form_preprocessing):
     list_fields = HiddenField(default="devices,links")
     devices = MultipleObjectField("Device")
     links = MultipleObjectField("Link")
 
 
-class ImportExportForm(FlaskForm):
+class ImportExportForm(FlaskForm, metaclass=form_preprocessing):
     boolean_fields = HiddenField(default="replace")
     export_filename = StringField()
     replace = BooleanField()
 
 
-class OpenNmsForm(FlaskForm):
+class OpenNmsForm(FlaskForm, metaclass=form_preprocessing):
     opennms_rest_api = StringField()
     opennms_devices = StringField()
     node_type = [subtype for subtype in device_subtypes.items()]
@@ -281,37 +280,37 @@ class OpenNmsForm(FlaskForm):
     password = PasswordField()
 
 
-class NetboxForm(FlaskForm):
+class NetboxForm(FlaskForm, metaclass=form_preprocessing):
     netbox_address = StringField(default="http://0.0.0.0:8000")
     netbox_token = PasswordField()
     node_type = [subtype for subtype in device_subtypes.items()]
     netbox_type = SelectField(choices=node_type)
 
 
-class LibreNmsForm(FlaskForm):
+class LibreNmsForm(FlaskForm, metaclass=form_preprocessing):
     librenms_address = StringField(default="http://librenms.example.com")
     node_type = [subtype for subtype in device_subtypes.items()]
     librenms_type = SelectField(choices=node_type)
     librenms_token = PasswordField()
 
 
-class GoogleEarthForm(FlaskForm):
+class GoogleEarthForm(FlaskForm, metaclass=form_preprocessing):
     name = StringField()
     label_size = IntegerField(default=1)
     line_width = IntegerField(default=2)
 
 
-class DeviceAutomationForm(FlaskForm):
+class DeviceAutomationForm(FlaskForm, metaclass=form_preprocessing):
     list_fields = HiddenField(default="jobs")
     jobs = MultipleObjectField("Job")
 
 
-class CompareConfigurationsForm(FlaskForm):
+class CompareConfigurationsForm(FlaskForm, metaclass=form_preprocessing):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
 
 
-class JobForm(FlaskForm):
+class JobForm(FlaskForm, metaclass=form_preprocessing):
     id = HiddenField()
     boolean_fields = HiddenField(
         default=(
@@ -349,7 +348,7 @@ class JobForm(FlaskForm):
     operating_system = StringField()
 
 
-class JobFilteringForm(FlaskForm):
+class JobFilteringForm(FlaskForm, metaclass=form_preprocessing):
     name = StringField()
     type = StringField()
     description = StringField()
@@ -363,17 +362,17 @@ class JobFilteringForm(FlaskForm):
     time_between_retries = StringField()
 
 
-class CompareResultsForm(FlaskForm):
+class CompareResultsForm(FlaskForm, metaclass=form_preprocessing):
     display = SelectField(choices=())
     compare_with = SelectField(choices=())
 
 
-class AddJobsForm(FlaskForm):
+class AddJobsForm(FlaskForm, metaclass=form_preprocessing):
     list_fields = HiddenField(default="add_jobs")
     add_jobs = MultipleObjectField("Job")
 
 
-class WorkflowBuilderForm(FlaskForm):
+class WorkflowBuilderForm(FlaskForm, metaclass=form_preprocessing):
     workflow = ObjectField("Workflow")
 
 
@@ -386,14 +385,14 @@ def configure_form(cls: FlaskForm) -> FlaskForm:
 
 
 @configure_form
-class LogAutomationForm(FlaskForm):
+class LogAutomationForm(FlaskForm, metaclass=form_preprocessing):
     id = HiddenField()
     list_fields = HiddenField(default="jobs")
     name = StringField()
     jobs = MultipleObjectField("Job")
 
 
-class TaskForm(FlaskForm):
+class TaskForm(FlaskForm, metaclass=form_preprocessing):
     id = HiddenField()
     boolean_fields = HiddenField(default="is_active")
     is_active = BooleanField()
@@ -449,20 +448,4 @@ form_templates = {
     "service_filtering": "filtering_form",
     "task": "base_form",
     "user": "base_form",
-}
-
-form_properties = {
-    "add_jobs": ("add_jobs",),
-    "advanced": ("clear_logs_date", "deletion_types", "import_export_types"),
-    "configuration_filtering": ("pools",),
-    "device_automation": ("jobs",),
-    "device_filtering": ("pools",),
-    "link": ("link-source", "link-destination"),
-    "link_filtering": ("pools",),
-    "logrule": ("jobs",),
-    "pool_objects": ("devices", "links"),
-    "service": ("devices", "pools"),
-    "task": ("start_date", "end_date", "job"),
-    "user": ("permissions", "pools"),
-    "workflow": ("devices", "pools"),
 }

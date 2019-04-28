@@ -342,7 +342,9 @@ class JobForm(FlaskForm):
 
 class JobFilteringForm(FlaskForm):
     name = StringField()
+    type = StringField()
     description = StringField()
+    creator_name = StringField()
     max_processes = StringField()
     credentials = StringField()
     waiting_time = StringField()

@@ -17,6 +17,7 @@ from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
     default_diagrams_properties,
+    filtering_properties,
     table_fixed_columns,
     table_properties,
     type_to_diagram_properties,
@@ -66,15 +67,13 @@ class Dispatcher(
     def filtering(self, table: str) -> dict:
         model = classes.get(table, classes["Device"])
         properties = table_properties[table]
-        if table in ("configuration", "device"):
-            properties.append("current_configuration")
         try:
             order_property = properties[int(request.args["order[0][column]"])]
         except IndexError:
             order_property = "name"
         order = getattr(getattr(model, order_property), request.args["order[0][dir]"])()
         constraints = []
-        for property in properties:
+        for property in filtering_properties[table]:
             value = request.args.get(f"form[{property}]")
             if value:
                 constraints.append(getattr(model, property).contains(value))

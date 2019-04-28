@@ -341,6 +341,34 @@ table_properties: Dict[str, List[str]] = {
     "workflow": workflow_table_properties,
 }
 
+job_filtering_properties = {
+    "name",
+    "type",
+    "description",
+    "creator_name",
+    "max_processes",
+    "credentials",
+    "waiting_time",
+    "send_notification_method",
+    "mail_recipient",
+    "number_of_retries",
+    "time_between_retries",
+}
+
+filtering_properties: Dict[str, List[str]] = {
+    "configuration": device_configuration_properties + ["current_configuration"],
+    "device": device_table_properties + ["current_configuration"],
+    "instance": instance_table_properties,
+    "link": link_table_properties,
+    "log": log_public_properties,
+    "logrule": log_rule_table_properties,
+    "pool": pool_table_properties,
+    "service": job_filtering_properties,
+    "task": task_table_properties,
+    "user": user_table_properties,
+    "workflow": job_filtering_properties,
+}
+
 table_fixed_columns: Dict[str, List[str]] = {
     "configuration": ["Configuration", "Download", "Edit"],
     "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],

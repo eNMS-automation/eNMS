@@ -196,7 +196,7 @@ function showPoolObjectsPanel(id) {
  */
 // eslint-disable-next-line
 function showFilteringPanel(type) {
-  createPanel(`${type}_filtering`, "Filter", filteringSize[type]);
+  createPanel(`${type}_filtering`, "Filter", filteringPanelSize[type]);
 }
 
 /**

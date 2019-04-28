@@ -44,7 +44,7 @@ function panelCode(type, id) {
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   if (type == "service") {
     for (let i = 0; i < servicesClasses.length; i++) {
-      $("#service-type").append(
+      $(id ? `#service-type-${id}` : "#service-type").append(
         `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
       );
     }

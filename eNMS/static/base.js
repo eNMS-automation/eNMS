@@ -14,6 +14,7 @@ const typePanelSize = {
   "instance": "600 250",
   "link": "700 400",
   "pool": "800 600",
+  "service": "1000 600",
   "user": "600 300",
 }
 

@@ -1,20 +1,22 @@
-<button class="btn btn-default btn-file btn-id" value="clearResults" style="width:100%;">
-  Clear
-</button>
-<button id="refresh-results-button" class="btn btn-default btn-file" onclick="refreshResults(true)" style="width:100%;">
-  Trigger periodic Refresh
-</button><br><br>
-<label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
-<div class="col-md-10 col-sm-10 col-xs-12">
-  {{ form.display(class="form-control add-id") }}
-</div>
-<label class="control-label col-md-2 col-sm-2 col-xs-12">Compare With :</label>
-<div class="col-md-10 col-sm-10 col-xs-12">
-  {{ form.compare_with(class="form-control add-id") }}
-</div>
-<hr><hr><hr><hr>
-<div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12">
-  <pre id="display_results" class="add-id"></pre>
+<div class="modal-body">
+  <button class="btn btn-default btn-file btn-id" value="clearResults" style="width:100%;">
+    Clear
+  </button>
+  <button id="refresh-results-button" class="btn btn-default btn-file" onclick="refreshResults(true)" style="width:100%;">
+    Trigger periodic Refresh
+  </button><br><br>
+  <label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
+  <div class="col-md-10 col-sm-10 col-xs-12">
+    {{ form.display(class="form-control add-id") }}
+  </div>
+  <label class="control-label col-md-2 col-sm-2 col-xs-12">Compare With :</label>
+  <div class="col-md-10 col-sm-10 col-xs-12">
+    {{ form.compare_with(class="form-control add-id") }}
+  </div>
+  <hr><hr><hr><hr>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <pre id="display_results" class="add-id"></pre>
+    </div>
   </div>
 </div>

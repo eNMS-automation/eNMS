@@ -39,7 +39,11 @@
         <div style="width: 100%; height: 50%;">
           {% for field in form %}
             {% if field.widget.input_type == 'hidden' %}
-              {{ field(id='workflow-' + field.name, class="add-id") }}
+              {% if field.name == "id" %}
+                {{ field(id='workflow-' + field.name, class="add-id") }}
+              {% else %}
+                {{ field(id='workflow-' + field.name) }}
+              {% endif %}
             {% endif %}
           {% endfor %}
           <label><label for="name">Name</label></label>
@@ -73,7 +77,7 @@
         </div>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
-          {{ form.mail_recipient(id='service-mail_recipient', class="form-control add-id") }}
+          {{ form.mail_recipient(id='workflow-mail_recipient', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">

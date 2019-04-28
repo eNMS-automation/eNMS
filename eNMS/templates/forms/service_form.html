@@ -51,7 +51,11 @@
           </div>
           {% for field in form %}
             {% if field.widget.input_type == 'hidden' %}
-              {{ field(id='service-' + field.name, class="add-id") }}
+              {% if field.name == "id" %}
+                {{ field(id='service-' + field.name, class="add-id") }}
+              {% else %}
+                {{ field(id='service-' + field.name) }}
+              {% endif %}
             {% endif %}
           {% endfor %}
           <label><label for="name">Name</label></label>

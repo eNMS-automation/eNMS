@@ -144,7 +144,7 @@ function addJobToWorkflow() {
       5
     );
   } else {
-    const url = `/add_jobs_to_workflow@${workflow.id}`;
+    const url = `/add_jobs_to_workflow-${workflow.id}`;
     fCall(url, "#add-job-form", function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {
@@ -300,7 +300,7 @@ $("#current-workflow").on("change", function() {
 function savePositions() {
   $.ajax({
     type: "POST",
-    url: `/save_positions/${workflow.id}`,
+    url: `/save_positions-${workflow.id}`,
     dataType: "json",
     contentType: "application/json;charset=UTF-8",
     data: JSON.stringify(graph.getPositions(), null, "\t"),

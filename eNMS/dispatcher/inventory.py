@@ -17,15 +17,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller import controller
-from eNMS.database import (
-    delete_all,
-    export,
-    factory,
-    fetch,
-    fetch_all,
-    get_one,
-    objectify,
-)
+from eNMS.database import delete_all, factory, fetch, fetch_all, get_one, objectify
 from eNMS.forms import (
     GoogleEarthForm,
     ImportExportForm,
@@ -36,6 +28,7 @@ from eNMS.forms import (
 from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
+    export_properties,
     google_earth_styles,
     link_subtype_to_color,
     reverse_pretty_names,

@@ -1,6 +1,6 @@
 from copy import deepcopy
 from datetime import datetime
-from flask import abort, current_app as app, redirect, render_template, request, url_for
+from flask import abort, current_app, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user
 from flask.wrappers import Response
 from ipaddress import IPv4Network
@@ -20,9 +20,8 @@ from eNMS.forms import (
     LoginForm,
     MigrationsForm,
 )
-from eNMS.database import delete_all, factory, fetch, fetch_all, get_one
+from eNMS.database import delete_all, export, factory, fetch, fetch_all, get_one
 from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
-from eNMS.properties import export_properties
 
 
 class AdministrationDispatcher:
@@ -36,7 +35,7 @@ class AdministrationDispatcher:
         return dict(
             database_helpers_form=DatabaseHelpersForm(request.form),
             migrations_form=MigrationsForm(request.form),
-            folders=listdir(app.path / "migrations"),
+            folders=listdir(current_app.path / "migrations"),
         )
 
     def database_helpers(self) -> None:
@@ -52,7 +51,6 @@ class AdministrationDispatcher:
                 }
 
     def check_credentials(self):
-        print(request.form)
         name, password = request.form["name"], request.form["password"]
         try:
             if request.form["authentication_method"] == "Local User":
@@ -63,13 +61,13 @@ class AdministrationDispatcher:
             elif request.form["authentication_method"] == "LDAP Domain":
                 with Connection(
                     ldap_client,
-                    user=f'{app.config["LDAP_USERDN"]}\\{name}',
+                    user=f'{current_app.config["LDAP_USERDN"]}\\{name}',
                     password=password,
                     auto_bind=True,
                     authentication=NTLM,
                 ) as connection:
                     connection.search(
-                        app.config["LDAP_BASEDN"],
+                        current_app.config["LDAP_BASEDN"],
                         f"(&(objectClass=person)(samaccountname={name}))",
                         search_scope=SUBTREE,
                         get_operational_attributes=True,
@@ -84,7 +82,7 @@ class AdministrationDispatcher:
                         }
                         if any(
                             group in s
-                            for group in app.config["LDAP_ADMIN_GROUP"]
+                            for group in current_app.config["LDAP_ADMIN_GROUP"]
                             for s in json_response["attributes"]["memberOf"]
                         ):
                             user["permissions"] = ["Admin"]
@@ -192,7 +190,7 @@ class AdministrationDispatcher:
     def save_parameters(self) -> bool:
         parameters = get_one("Parameters")
         parameters.update(**request.form)
-        parameters.trigger_active_parameters(app)
+        parameters.trigger_active_parameters(current_app)
 
     def scan_cluster(self) -> bool:
         parameters = get_one("Parameters")
@@ -203,7 +201,7 @@ class AdministrationDispatcher:
                     f"{protocol}://{ip_address}/rest/is_alive",
                     timeout=parameters.cluster_scan_timeout,
                 ).json()
-                if app.config["CLUSTER_ID"] != instance.pop("cluster_id"):
+                if current_app.config["CLUSTER_ID"] != instance.pop("cluster_id"):
                     continue
                 factory("Instance", **{**instance, **{"ip_address": str(ip_address)}})
             except ConnectionError:

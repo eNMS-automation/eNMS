@@ -49,15 +49,7 @@
           <div class='form-group'>
             <select class="form-control add-id" id="service-type"></select>
           </div>
-          {% for field in form %}
-            {% if field.widget.input_type == 'hidden' %}
-              {% if field.name == "id" %}
-                {{ field(id='service-' + field.name, class="add-id") }}
-              {% else %}
-                {{ field(id='service-' + field.name) }}
-              {% endif %}
-            {% endif %}
-          {% endfor %}
+          {{ form.id(id='service-id', class="add-id") }}
           <label><label for="name">Name</label></label>
           <div class='form-group'>
             {{ form.name(id='service-name', class="form-control add-id required") }}

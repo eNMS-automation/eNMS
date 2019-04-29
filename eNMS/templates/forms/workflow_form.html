@@ -37,15 +37,7 @@
       </ul>
       <div id="step-1">
         <div style="width: 100%; height: 50%;">
-          {% for field in form %}
-            {% if field.widget.input_type == 'hidden' %}
-              {% if field.name == "id" %}
-                {{ field(id='workflow-' + field.name, class="add-id") }}
-              {% else %}
-                {{ field(id='workflow-' + field.name) }}
-              {% endif %}
-            {% endif %}
-          {% endfor %}
+          {{ form.id(id='workflow-id', class="add-id") }}
           <label><label for="name">Name</label></label>
           <div class='form-group'>
             {{ form.name(id='workflow-name', class="form-control add-id required") }}

@@ -1,5 +1,6 @@
 from collections import defaultdict
 from flask_login import current_user
+from wtforms.fields.core import UnboundField
 
 form_properties = defaultdict(dict)
 

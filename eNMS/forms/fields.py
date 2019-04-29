@@ -7,6 +7,8 @@ from wtforms import (
     SelectMultipleField,
 )
 
+from eNMS.database import choices
+
 
 class DateField(StringField):
     pass

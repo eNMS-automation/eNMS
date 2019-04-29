@@ -1,3 +1,4 @@
+from copy import deepcopy
 from datetime import datetime
 from flask import abort, current_app as app, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user
@@ -6,10 +7,13 @@ from ipaddress import IPv4Network
 from json import loads
 from logging import info
 from ldap3 import Connection, NTLM, SUBTREE
-from os import listdir
+from os import listdir, makedirs
+from os.path import exists
 from requests import get as http_get
 from typing import Union
+from yaml import dump, load, BaseLoader
 
+from eNMS.default import create_default
 from eNMS.forms import (
     AdministrationForm,
     DatabaseHelpersForm,
@@ -18,6 +22,7 @@ from eNMS.forms import (
 )
 from eNMS.database import delete_all, factory, fetch, fetch_all, get_one
 from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
+from eNMS.properties import export_properties
 
 
 class AdministrationDispatcher:

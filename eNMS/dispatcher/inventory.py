@@ -1,11 +1,22 @@
+from collections import Counter
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import current_app as app, request
+from flask import current_app, request
 from flask_login import current_user
+from logging import info
+from pynetbox import api as netbox_api
+from requests import get as http_get
+from simplekml import Kml
 from sqlalchemy import and_
 from subprocess import Popen
 from typing import Union
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
+from xlrd import open_workbook
+from xlrd.biffh import XLRDError
+from xlwt import Workbook
 
+from eNMS.controller import controller
 from eNMS.database import (
     delete_all,
     export,
@@ -24,7 +35,13 @@ from eNMS.forms import (
 )
 from eNMS.models import classes
 from eNMS.modules import db
-from eNMS.properties import link_subtype_to_color, subtype_sizes, table_properties
+from eNMS.properties import (
+    google_earth_styles,
+    link_subtype_to_color,
+    reverse_pretty_names,
+    subtype_sizes,
+    table_properties,
+)
 
 
 class InventoryDispatcher:
@@ -33,7 +50,7 @@ class InventoryDispatcher:
 
     def connection(self, device_id: int) -> dict:
         parameters, device = get_one("Parameters"), fetch("Device", id=device_id)
-        cmd = [str(app.path / "applications" / "gotty"), "-w"]
+        cmd = [str(current_app.path / "applications" / "gotty"), "-w"]
         port, protocol = parameters.get_gotty_port(), request.form["protocol"]
         address = getattr(device, request.form["address"])
         cmd.extend(["-p", str(port)])
@@ -41,7 +58,7 @@ class InventoryDispatcher:
             cmd.append("--once")
         if "multiplexing" in request.form:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if app.config["GOTTY_BYPASS_KEY_PROMPT"]:
+        if current_app.config["GOTTY_BYPASS_KEY_PROMPT"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
@@ -61,8 +78,8 @@ class InventoryDispatcher:
         return {
             "device": device.name,
             "port": port,
-            "redirection": app.config["GOTTY_PORT_REDIRECTION"],
-            "server_addr": app.config["ENMS_SERVER_ADDR"],
+            "redirection": current_app.config["GOTTY_PORT_REDIRECTION"],
+            "server_addr": current_app.config["ENMS_SERVER_ADDR"],
         }
 
     def counters(self, property: str, type: str) -> Counter:

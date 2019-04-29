@@ -1,4 +1,5 @@
 <form id="edit-service-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+  {{ form.form_type(value="service") }}
   {{ form.id(id='service-id', class="add-id") }}
   <div class="modal-body">
     <div id="service-wizard" class="form_wizard wizard_horizontal add-id">

@@ -70,12 +70,16 @@ def form_preprocessing(*args, **kwargs):
 
 
 def form_postprocessing(form):
+    print(form)
     data = {**form.to_dict(), **{"creator": current_user.id}}
+    print(data)
     for property, field_type in form_properties[form["form_type"]].items():
+        print(property, field_type)
         if field_type in ("object-list", "multiselect"):
             data[property] = form.getlist(property)
         elif field_type == "boolean":
             data[property] = property in form
+    print(data)
     return data
 
 
@@ -218,6 +222,11 @@ class ConnectionForm(FlaskForm, metaclass=form_preprocessing):
     address = SelectField(choices=address_choices)
 
 
+class ObjectFilteringForm(FlaskForm, metaclass=form_preprocessing):
+    form_type = HiddenField(default="device_filtering,link_filtering")
+    pools = MultipleObjectField("Pool")
+
+
 class ObjectForm(FlaskForm):
     name = StringField()
     description = StringField()
@@ -254,15 +263,9 @@ class LinkForm(ObjectForm, metaclass=form_preprocessing):
     destination = ObjectField("Device")
 
 
-class ObjectFilteringForm(FlaskForm, metaclass=form_preprocessing):
-    form_type = HiddenField(default="device_filtering,link_filtering")
-    list_fields = HiddenField(default="pools")
-    pools = MultipleObjectField("Pool")
-
-
 @configure_device_form
 class DeviceFilteringForm(
-    ObjectForm, ObjectFilteringForm, metaclass=form_preprocessing
+    ObjectFilteringForm, ObjectForm, metaclass=form_preprocessing
 ):
     form_type = HiddenField(default="device_filtering")
     current_configuration = StringField()
@@ -505,12 +508,12 @@ form_classes = {
 }
 
 form_templates = {
-    "configuration_filtering": "object_filtering_form",
+    "configuration_filtering": "filtering_form",
     "device": "base_form",
-    "device_filtering": "object_filtering_form",
+    "device_filtering": "filtering_form",
     "instance": "base_form",
     "link": "base_form",
-    "link_filtering": "object_filtering_form",
+    "link_filtering": "filtering_form",
     "service_filtering": "filtering_form",
     "task": "base_form",
     "user": "base_form",

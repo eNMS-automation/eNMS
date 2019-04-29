@@ -1,4 +1,6 @@
 <form id="edit-workflow-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+  {{ form.form_type(value="workflow") }}
+  {{ form.id(id='workflow-id', class="add-id") }}
   <div class="modal-body">
     <div id="workflow-wizard" class="form_wizard wizard_horizontal add-id">
       <ul class="wizard_steps">
@@ -37,7 +39,6 @@
       </ul>
       <div id="step-1">
         <div style="width: 100%; height: 50%;">
-          {{ form.id(id='workflow-id', class="add-id") }}
           <label><label for="name">Name</label></label>
           <div class='form-group'>
             {{ form.name(id='workflow-name', class="form-control add-id required") }}

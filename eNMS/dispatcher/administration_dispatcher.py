@@ -47,6 +47,7 @@ class AdministrationDispatcher:
                 }
 
     def check_credentials(self):
+        print(request.form)
         name, password = request.form["name"], request.form["password"]
         try:
             if request.form["authentication_method"] == "Local User":

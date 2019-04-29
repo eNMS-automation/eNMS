@@ -1,4 +1,5 @@
 <form id="edit-service-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+  {{ form.id(id='service-id', class="add-id") }}
   <div class="modal-body">
     <div id="service-wizard" class="form_wizard wizard_horizontal add-id">
       <ul class="wizard_steps">
@@ -49,7 +50,6 @@
           <div class='form-group'>
             <select class="form-control add-id" id="service-type"></select>
           </div>
-          {{ form.id(id='service-id', class="add-id") }}
           <label><label for="name">Name</label></label>
           <div class='form-group'>
             {{ form.name(id='service-name', class="form-control add-id required") }}

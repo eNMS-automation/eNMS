@@ -4,6 +4,7 @@ from logging import info
 from werkzeug.wrappers.response import Response
 
 from eNMS.dispatcher import dispatcher
+from eNMS.forms import form_postprocessing
 from eNMS.modules import bp, db
 
 
@@ -33,14 +34,8 @@ def get_route(page: str) -> Response:
 @bp.route("/<page>", methods=["POST"])
 @login_required
 def post_route(page: str) -> Response:
-
-    data = {**request.form.to_dict(), **{"creator": current_user.id}}
-    print(data)
-    for property in data.get("list_fields", "").split(","):
-        data[property] = request.form.getlist(property)
-    for property in data.get("boolean_fields", "").split(","):
-        data[property] = property in request.form
-    request.form = data
+    if "form_type" in request.form:
+        request.form = form_postprocessing(request.form)
     func, *args = page.split("-")
     info(
         f"User '{current_user.name}' ({request.remote_addr})"

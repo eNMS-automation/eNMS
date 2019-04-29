@@ -109,6 +109,7 @@ class AutomationDispatcher:
         return fetch("Job", id=id).results
 
     def get_service(self, id_or_cls: str) -> dict:
+        print(id_or_cls)
         service = None
         try:
             service = fetch("Service", id=id_or_cls)

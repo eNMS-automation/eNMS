@@ -250,6 +250,7 @@ function preprocessForm(panel, id, type, duplicate) {
  * Configure form.
  */
 function configureForm(form, id) {
+  console.log(form, formProperties[form])
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
     el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
@@ -337,7 +338,6 @@ function processInstance(type, instance) {
  */
 // eslint-disable-next-line
 function processData(type, id) {
-  console.log(type, id, $(`#workflow-id-1`).length);
   fCall(
     `/update-${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,

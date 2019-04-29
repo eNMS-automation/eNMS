@@ -25,3 +25,42 @@ def form_postprocessing(form):
         elif field_type == "boolean":
             data[property] = property in form
     return data
+
+
+form_classes = {
+    "add_jobs": AddJobsForm,
+    "configuration": CompareConfigurationsForm,
+    "configuration_filtering": DeviceFilteringForm,
+    "connection": ConnectionForm,
+    "device": DeviceForm,
+    "device_automation": DeviceAutomationForm,
+    "device_filtering": DeviceFilteringForm,
+    "instance": InstanceForm,
+    "link": LinkForm,
+    "link_filtering": LinkFilteringForm,
+    "log_filtering": LogFilteringForm,
+    "logrule": LogAutomationForm,
+    "pool": PoolForm,
+    "pool_objects": PoolObjectsForm,
+    "results": CompareResultsForm,
+    "service": JobForm,
+    "service_filtering": JobFilteringForm,
+    "task": TaskForm,
+    "user": UserForm,
+    "user_filtering": UserFilteringForm,
+    "workflow": JobForm,
+}
+
+form_templates = {
+    "configuration_filtering": "filtering_form",
+    "device": "base_form",
+    "device_filtering": "filtering_form",
+    "instance": "base_form",
+    "link": "base_form",
+    "link_filtering": "filtering_form",
+    "log_filtering": "filtering_form",
+    "service_filtering": "filtering_form",
+    "task": "base_form",
+    "user": "base_form",
+    "user_filtering": "filtering_form",
+}

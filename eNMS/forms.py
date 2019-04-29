@@ -70,16 +70,13 @@ def metaform(*args, **kwargs):
 
 
 def form_postprocessing(form):
-    print(form)
     data = {**form.to_dict(), **{"creator": current_user.id}}
-    print(data)
     for property, field_type in form_properties[form["form_type"]].items():
         print(property, field_type)
         if field_type in ("object-list", "multiselect"):
             data[property] = form.getlist(property)
         elif field_type == "boolean":
             data[property] = property in form
-    print(data)
     return data
 
 
@@ -99,6 +96,12 @@ class UserForm(FlaskForm, metaclass=metaform):
     permission_choices = [(p, p) for p in user_permissions]
     permissions = SelectMultipleField(choices=permission_choices)
     pools = MultipleObjectField("Pool")
+
+
+class UserFilteringForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="user_filtering")
+    name = StringField()
+    email = StringField()
 
 
 class AdministrationForm(FlaskForm, metaclass=metaform):
@@ -505,10 +508,11 @@ form_classes = {
     "pool": PoolForm,
     "pool_objects": PoolObjectsForm,
     "results": CompareResultsForm,
-    "user": UserForm,
     "service": JobForm,
     "service_filtering": JobFilteringForm,
     "task": TaskForm,
+    "user": UserForm,
+    "user_filtering": UserFilteringForm,
     "workflow": JobForm,
 }
 
@@ -523,4 +527,5 @@ form_templates = {
     "service_filtering": "filtering_form",
     "task": "base_form",
     "user": "base_form",
+    "user_filtering": "filtering_form",
 }

@@ -21,6 +21,7 @@ const typePanelSize = {
 
 const filteringPanelSize = {
   "device": "700 700",
+  "log": "700 200",
   "service": "900 500",
   "workflow": "900 500",
 }

@@ -451,6 +451,12 @@ def configure_form(cls: FlaskForm) -> FlaskForm:
     return cls
 
 
+class LogFilteringForm(FlaskForm):
+    form_type = HiddenField(default="log_filtering")
+    source_ip_address = StringField()
+    content = StringField()
+
+
 @configure_form
 class LogAutomationForm(FlaskForm, metaclass=form_preprocessing):
     form_type = HiddenField(default="logrule")
@@ -496,6 +502,7 @@ form_classes = {
     "instance": InstanceForm,
     "link": LinkForm,
     "link_filtering": LinkFilteringForm,
+    "log_filtering": LogFilteringForm,
     "logrule": LogAutomationForm,
     "pool": PoolForm,
     "pool_objects": PoolObjectsForm,
@@ -514,6 +521,7 @@ form_templates = {
     "instance": "base_form",
     "link": "base_form",
     "link_filtering": "filtering_form",
+    "log_filtering": "filtering_form",
     "service_filtering": "filtering_form",
     "task": "base_form",
     "user": "base_form",

@@ -284,7 +284,7 @@ class Pool(AbstractPool, metaclass=register_class):
             Visualize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('pool', '{self.id}')">
-            Edit properties</button>""",
+            Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="updatePool('{self.id}')">Update</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

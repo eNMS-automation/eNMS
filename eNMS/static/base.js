@@ -36,6 +36,10 @@ let topZ = 1000;
 // eslint-disable-next-line
 function doc(page) {
   let url = {
+    administration:
+      "https://enms.readthedocs.io/en/latest/security/access.html",
+    advanced:
+      ""https://enms.readthedocs.io/en/latest/base/migrations.html",
     configuration_management:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     device_management:

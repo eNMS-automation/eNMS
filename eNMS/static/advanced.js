@@ -3,7 +3,6 @@ global
 alertify: false
 call: false
 convertSelect: false
-doc: false
 fCall: false
 folders: false
 */
@@ -82,10 +81,3 @@ function scanCluster() {
     alertify.notify("Scan completed.", "success", 5);
   });
 }
-
-(function() {
-  folders.forEach((f) => {
-    $("#versions").append(`<option value='${f}'></option>`);
-  });
-  doc("https://enms.readthedocs.io/en/latest/base/migrations.html");
-})();

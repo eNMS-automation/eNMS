@@ -111,6 +111,7 @@ class AdministrationDispatcher:
         return redirect(url_for("bp.get_route", page="login"))
 
     def migration_export(self) -> None:
+        print(request.form)
         for cls_name in request.form["import_export_types"]:
             path = current_app.path / "migrations" / request.form["name"]
             if not exists(path):

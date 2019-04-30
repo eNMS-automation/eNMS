@@ -15,6 +15,7 @@ function saveParameters(type) {
   fCall("/save_parameters", `#${type}-form`, function() {
     alertify.notify("Parameters saved.", "success", 5);
   });
+  $(`#${type}`).remove();
 }
 
 /**

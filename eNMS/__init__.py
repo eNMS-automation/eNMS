@@ -19,7 +19,7 @@ from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
-from eNMS.database import fetch
+from eNMS.database import fetch, get_one
 from eNMS.modules import (
     bp,
     db,
@@ -104,6 +104,7 @@ def configure_context_processor(app) -> None:
         return {
             "form_properties": form_properties,
             "names": pretty_names,
+            "parameters": get_one("Parameters").serialized,
             "property_types": {k: str(v) for k, v in property_types.items()},
             "services_classes": sorted(service_classes),
         }

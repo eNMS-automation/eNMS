@@ -211,7 +211,13 @@ function showPoolObjectsPanel(id) {
  */
 // eslint-disable-next-line
 function showParameters(type) {
-  createPanel(type, `${type} Parameters`, parametersPanelSize[type]);
+  createPanel(type, `${type} Parameters`, parametersPanelSize[type], 0, () => {
+    for (const [property, value] of Object.entries(parameters)) {
+      if ($(`#${property}`).length) {
+        $(`#${property}`).val(value);
+      }
+    }
+  });
 }
 
 /**
@@ -270,7 +276,6 @@ function preprocessForm(panel, id, type, duplicate) {
  * Configure form.
  */
 function configureForm(form, id) {
-  console.log(form, formProperties[form])
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
     el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);

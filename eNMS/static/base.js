@@ -27,6 +27,10 @@ const filteringPanelSize = {
   "workflow": "900 500",
 }
 
+const parametersPanelSize = {
+  "view": "700 300",
+}
+
 let topZ = 1000;
 
 /**

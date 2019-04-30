@@ -17,11 +17,14 @@ from eNMS.properties import import_properties, user_permissions
 
 
 class ViewParametersForm(FlaskForm, metaclass=metaform):
+    template, action = "filtering", "saveParameters"
     form_type = HiddenField(default="view")
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
-    default_view = SelectField(choices=(("2D", "2D"), ("2DC", "2DC"), ("3D", "3D")))
+    default_view = SelectField(
+        choices=(("2D", "2D"), ("2DC", "Clusterized 2D"), ("3D", "3D"))
+    )
     default_marker = SelectField(
         choices=(
             ("Image", "Image"),

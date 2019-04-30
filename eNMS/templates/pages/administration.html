@@ -22,7 +22,7 @@
           </div><br>
           <center>
             <div class="btn-group-horizontal">
-              <button type="button" class="btn btn-primary btn-file" onclick="getGitContent()" style="width:15%;">
+              <button type="button" class="btn btn-primary btn-file" onclick="showParameters('view')" style="width:15%;">
                 Geographical View
               </button>
               <button type="button" class="btn btn-primary btn-file" onclick="resetStatus()" style="width:15%;">
@@ -98,8 +98,5 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script>
-    const parameters = {{ parameters|tojson|safe }};
-  </script>
   <script src="{{ url_for('static', filename='administration.js') }}"></script>
 {% endblock javascripts %}

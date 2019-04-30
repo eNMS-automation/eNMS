@@ -4,6 +4,7 @@ from wtforms.fields.core import UnboundField
 
 from eNMS.forms.fields import field_types
 
+form_actions = {}
 form_classes = {}
 form_properties = defaultdict(dict)
 form_templates = {}
@@ -14,6 +15,7 @@ def metaform(*args, **kwargs):
     types = cls.form_type.kwargs["default"]
     form_classes[types] = cls
     form_templates[types] = getattr(cls, "template", types)
+    form_actions[types] = getattr(cls, "action", None)
     for form_type in types.split(","):
         form_properties[form_type].update(
             {

@@ -7,7 +7,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from typing import List
 
-from eNMS.forms import form_classes, form_templates
+from eNMS.forms import form_actions, form_classes, form_templates
 from eNMS.database import delete, factory, fetch, fetch_all, fetch_all_visible
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
@@ -92,6 +92,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
 
     def form(self, form_type: str) -> dict:
         return dict(
+            action=form_actions.get(form_type),
             form=form_classes.get(form_type, FlaskForm)(request.form),
             form_type=form_type,
             template=f"forms/{form_templates.get(form_type, form_type)}_form",

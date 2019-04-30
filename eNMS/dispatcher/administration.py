@@ -14,22 +14,14 @@ from typing import Union
 from yaml import dump, load, BaseLoader
 
 from eNMS.default import create_default
-from eNMS.forms.administration import (
-    AdministrationForm,
-    DatabaseHelpersForm,
-    LoginForm,
-    MigrationsForm,
-)
+from eNMS.forms.administration import DatabaseHelpersForm, LoginForm, MigrationsForm
 from eNMS.database import delete_all, export, factory, fetch, fetch_all, get_one
 from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 
 
 class AdministrationDispatcher:
     def administration(self) -> dict:
-        return dict(
-            form=AdministrationForm(request.form),
-            parameters=get_one("Parameters").serialized,
-        )
+        return {}
 
     def advanced(self) -> dict:
         return dict(

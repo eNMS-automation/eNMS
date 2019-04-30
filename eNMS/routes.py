@@ -34,8 +34,6 @@ def get_route(page: str) -> Response:
 @bp.route("/<page>", methods=["POST"])
 @login_required
 def post_route(page: str) -> Response:
-    print(request.form)
-    # if "form_type" in request.form:
     request.form = form_postprocessing(request.form)
     func, *args = page.split("-")
     info(

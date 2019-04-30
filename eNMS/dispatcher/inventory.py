@@ -253,7 +253,7 @@ class InventoryDispatcher:
 
     def view(self, view_type: str) -> dict:
         return dict(
-            template="pages/geographical_view",
+            template="pages/view",
             parameters=get_one("Parameters").serialized,
             subtype_sizes=subtype_sizes,
             link_colors=link_subtype_to_color,

@@ -14,32 +14,8 @@
           <div class="x_title">
             <h4 class="text-center">Database Migration</h4>
           </div>
-          <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-            <div>
-              <label>Empty Database before Import</label>
-              {{ migrations_form.empty_database_before_import() }}<br><br>
-              <label>
-                Directory pathname to use in eNMS_HOME/migrations :<br>
-                Example: "10312018_backup"
-              </label>
-              <div class="form-group">
-                <input class="form-control required" list="versions" id="name" name="name" />
-                <datalist id="versions"></datalist>
-              </div>
-            </div>
-            <div>
-              <label>eNMS object types to include in Import / Export :</label>
-              <div class="form-group">
-                {{ migrations_form.import_export_types(class="form-control required", size="10") }}
-              </div>
-            </div>
-          </form><br>
-          <div class="form-group">
-            <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-              <button type="button" class="btn btn-success" onclick="migrationsImport()">Import</button>
-              <button type="button" class="btn btn-success" onclick="migrationsExport()">Export</button>
-            </div>
-          </div><br>
+
+
           <div class="ln_solid"></div>
           <div class="x_title">
             <h4 class="text-center">Database Helpers</h4>

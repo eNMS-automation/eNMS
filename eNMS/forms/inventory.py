@@ -187,7 +187,7 @@ class LibreNmsForm(FlaskForm, metaclass=metaform):
 
 class ExportForm(FlaskForm, metaclass=metaform):
     action = "exportTopology"
-    form_type = HiddenField(default="export")
+    form_type = HiddenField(default="excel_export")
     export_filename = StringField()
 
 

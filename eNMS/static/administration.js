@@ -30,10 +30,10 @@ function showDatabasePanel(type) {
 }
 
 /**
- * Show Import Panel
+ * Show Admin Panel
  */
 // eslint-disable-next-line
-function showImportPanel(type) {
+function showAdminPanel(type) {
   createPanel(type, type, panelSize[type], 0, () => {
     if (type == "excel") {
       document.getElementById("file").onchange = function() {
@@ -78,7 +78,7 @@ function queryLibreNMS() {
  */
 // eslint-disable-next-line
 function exportToGoogleEarth() {
-  fCall("/export_to_google_earth", "#google-earth-form", function() {
+  fCall("/export_to_google_earth", "#google_earth_export-form", function() {
     alertify.notify("Project exported to Google Earth.", "success", 5);
   });
 }
@@ -89,7 +89,7 @@ function exportToGoogleEarth() {
 // eslint-disable-next-line
 function exportTopology() {
   alertify.notify("Topology export starting...", "success", 5);
-  fCall("/export_topology", "#import-form", function() {
+  fCall("/export_topology", "#excel_export-form", function() {
     alertify.notify("Topology successfully exported.", "success", 5);
   });
 }

@@ -11,6 +11,8 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
   "deletion": "700 300",
+  "excel_export": "400 200",
+  "google_earth_export": "700 300",
   "librenms": "700 250",
   "migration": "700 300",
   "netbox": "700 250",

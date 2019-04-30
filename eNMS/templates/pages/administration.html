@@ -11,7 +11,67 @@
     <div class="row">
       <div class="x_panel">
         <div class="x_content">
-          
+          <div class="x_title">
+            <h4 class="text-center">Parameters</h4>
+          </div><br>
+          <div class="panel-group">
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="getGitContent()" style="width:100%;">
+                View Parameters
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="resetStatus()" style="width:100%;">
+                Reset Service / Workflow statuses
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('pause')" style="width:100%;">
+                Pause Scheduler
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('resume')" style="width:100%;">
+                Git Parameters
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scanCluster()" style="width:100%;">
+                Cluster Scan Parameters
+              </button>
+            </div>
+          </div>
+          <div class="ln_solid"></div>
+          <div class="x_title">
+            <h4 class="text-center">Miscellaneous</h4>
+          </div>
+          <div class="panel-group">
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="getGitContent()" style="width:100%;">
+                Fetch Git Configurations and Update devices
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="resetStatus()" style="width:100%;">
+                Reset Service / Workflow statuses
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('pause')" style="width:100%;">
+                Pause Scheduler
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scheduler('resume')" style="width:100%;">
+                Resume Scheduler
+              </button>
+            </div>
+            <div style="padding-bottom:5px;">
+              <button class="btn btn-default btn-file" onclick="scanCluster()" style="width:100%;">
+                Scan Cluster Subnet for new Instances
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

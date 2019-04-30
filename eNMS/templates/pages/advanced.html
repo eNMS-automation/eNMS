@@ -15,8 +15,6 @@
             <h4 class="text-center">Database Migration</h4>
           </div>
           <form id="import-export-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-            {{ migrations_form.list_fields() }}
-            {{ migrations_form.boolean_fields() }}
             <div>
               <label>Empty Database before Import</label>
               {{ migrations_form.empty_database_before_import() }}<br><br>
@@ -47,7 +45,6 @@
             <h4 class="text-center">Database Helpers</h4>
           </div>
           <form id="database-helpers-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-            {{ database_helpers_form.list_fields() }}
             <div>
               <label>Clear Logs older than:</label>
               <div class="form-group">

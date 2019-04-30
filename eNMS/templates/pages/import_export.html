@@ -16,7 +16,7 @@
           </div>
           <div class="x_content">
             <form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
-              {{ import_export_form.boolean_fields() }}
+              {{ import_export_form.form_type() }}
               <div class='form-group'>
                 <label>Export Filename (the file will be saved in the "eNMS/projects" folder)</label>
                 {{ import_export_form.export_filename(class="form-control") }}

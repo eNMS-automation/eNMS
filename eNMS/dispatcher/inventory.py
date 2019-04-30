@@ -79,7 +79,7 @@ class InventoryDispatcher:
         property = reverse_pretty_names.get(property, property)
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
-    def export_topology() -> None:
+    def export_topology(self) -> None:
         workbook = Workbook()
         filename = request.form["export_filename"]
         if "." not in filename:
@@ -209,8 +209,10 @@ class InventoryDispatcher:
                     devices[device]["ip_address"] = interface["ipAddress"]
                     factory("Device", **devices[device])
 
-    def import_topology(self, request: dict, file: FileStorage) -> str:
-        if request["replace"]:
+    def import_topology(self) -> str:
+        print(request.form)
+        file = request.files["file"]
+        if request.form["replace"]:
             delete_all("Device")
         result = "Topology successfully imported."
         if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):

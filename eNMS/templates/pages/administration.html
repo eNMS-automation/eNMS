@@ -13,7 +13,7 @@
         <div class="x_content">
           <div class="col-md-10 col-xs-10 col-md-offset-1">
             <form id="parameters-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-              {{ form.boolean_fields() }}
+              {{ form.form_type() }}
               {% for title, properties in form.categories.items() %}
                 <div class="x_title">
                   <h4 class="text-center">{{ title }}</h4>

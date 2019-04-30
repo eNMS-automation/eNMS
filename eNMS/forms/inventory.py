@@ -130,7 +130,6 @@ class LinkFilteringForm(ObjectForm, ObjectFilteringForm, metaclass=metaform):
 class PoolForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="pool")
     id = HiddenField()
-    boolean_fields = HiddenField(default="never_update")
     name = StringField()
     description = StringField()
     longitude = FloatField(default=0.0)
@@ -146,14 +145,12 @@ class PoolForm(FlaskForm, metaclass=metaform):
 
 class PoolObjectsForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="pool_objects")
-    list_fields = HiddenField(default="devices,links")
     devices = MultipleObjectField("Device")
     links = MultipleObjectField("Link")
 
 
 class ImportExportForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="import_export")
-    boolean_fields = HiddenField(default="replace")
     export_filename = StringField()
     replace = BooleanField()
 

@@ -1,13 +1,8 @@
 /*
 global
 alertify: false
-doc: false
 fCall: false
 */
-
-document.getElementById("file").onchange = function() {
-  importTopology("Device");
-};
 
 /**
  * Query openNMS server.
@@ -89,5 +84,7 @@ function importTopology() {
 }
 
 (function() {
-  doc("https://enms.readthedocs.io/en/latest/inventory/objects.html");
+  document.getElementById("file").onchange = function() {
+    importTopology("Device");
+  };
 })();

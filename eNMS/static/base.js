@@ -44,6 +44,8 @@ function doc(page) {
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     device_management:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+    import_export:
+      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     instance_management:
       "https://enms.readthedocs.io/en/latest/security/access.html",
     link_management:

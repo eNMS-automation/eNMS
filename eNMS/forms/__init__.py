@@ -22,6 +22,7 @@ def metaform(*args, **kwargs):
                 if isinstance(field, UnboundField) and field.field_class in field_types
             }
         )
+    print(form_properties)
     return cls
 
 

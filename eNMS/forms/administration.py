@@ -68,6 +68,7 @@ class NotificationsParametersForm(FlaskForm, ParametersForm, metaclass=metaform)
 
 
 class DatabaseHelpersForm(FlaskForm, metaclass=metaform):
+    action = databaseHelpers
     form_type = HiddenField(default="database_helpers")
     list_fields = HiddenField(default="deletion_types")
     clear_logs_date = DateField()

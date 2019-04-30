@@ -6,12 +6,14 @@ from eNMS.forms.fields import field_types
 
 form_classes = {}
 form_properties = defaultdict(dict)
+form_templates = {}
 
 
 def metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
     types = cls.form_type.kwargs["default"]
     form_classes[types] = cls
+    form_templates[types] = getattr(cls, "template", types)
     for form_type in types.split(","):
         form_properties[form_type].update(
             {
@@ -20,7 +22,6 @@ def metaform(*args, **kwargs):
                 if isinstance(field, UnboundField) and field.field_class in field_types
             }
         )
-    print(form_classes)
     return cls
 
 
@@ -32,18 +33,3 @@ def form_postprocessing(form):
         elif field_type == "boolean":
             data[property] = property in form
     return data
-
-
-form_templates = {
-    "configuration_filtering": "filtering_form",
-    "device": "base_form",
-    "device_filtering": "filtering_form",
-    "instance": "base_form",
-    "link": "base_form",
-    "link_filtering": "filtering_form",
-    "log_filtering": "filtering_form",
-    "service_filtering": "filtering_form",
-    "task": "base_form",
-    "user": "base_form",
-    "user_filtering": "filtering_form",
-}

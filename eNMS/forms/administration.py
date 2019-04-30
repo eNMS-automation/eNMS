@@ -80,6 +80,7 @@ class DatabaseHelpersForm(FlaskForm, metaclass=metaform):
 
 
 class InstanceForm(FlaskForm, metaclass=metaform):
+    template = "base"
     form_type = HiddenField(default="instance")
     id = HiddenField()
     name = StringField()
@@ -105,6 +106,7 @@ class MigrationsForm(FlaskForm, metaclass=metaform):
 
 
 class UserForm(FlaskForm, metaclass=metaform):
+    template = "base"
     form_type = HiddenField(default="user")
     id = HiddenField()
     name = StringField()
@@ -116,12 +118,14 @@ class UserForm(FlaskForm, metaclass=metaform):
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):
+    template = "filtering"
     form_type = HiddenField(default="user_filtering")
     name = StringField()
     email = StringField()
 
 
 class LogFilteringForm(FlaskForm):
+    template = "filtering"
     form_type = HiddenField(default="log_filtering")
     source_ip_address = StringField()
     content = StringField()

@@ -59,6 +59,7 @@ class WorkflowForm(JobForm, metaclass=metaform):
 
 
 class JobFilteringForm(FlaskForm, metaclass=metaform):
+    template = "filtering"
     form_type = HiddenField(default="job_filtering")
     name = StringField()
     type = StringField()
@@ -108,6 +109,7 @@ class LogAutomationForm(FlaskForm, metaclass=metaform):
 
 
 class TaskForm(FlaskForm, metaclass=metaform):
+    template = "base"
     form_type = HiddenField(default="task")
     id = HiddenField()
     boolean_fields = HiddenField(default="is_active")

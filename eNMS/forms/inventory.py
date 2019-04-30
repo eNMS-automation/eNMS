@@ -150,10 +150,14 @@ class PoolObjectsForm(FlaskForm, metaclass=metaform):
     links = MultipleObjectField("Link")
 
 
-class ImportExportForm(FlaskForm, metaclass=metaform):
-    form_type = HiddenField(default="import_export")
-    export_filename = StringField()
+class ImportForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="import")
     replace = BooleanField()
+
+
+class ExportForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="export")
+    export_filename = StringField()
 
 
 class OpenNmsForm(FlaskForm, metaclass=metaform):

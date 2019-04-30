@@ -270,7 +270,7 @@ class AutomationDispatcher:
             tasks[task.name] = {**task.serialized, **{"date": js_date}}
         return dict(tasks=tasks)
 
-    def scheduler_action(self, action: str) -> bool:
+    def scheduler(self, action: str) -> bool:
         getattr(scheduler, action)()
 
     def task_action(self, action: str, task_id: int) -> bool:

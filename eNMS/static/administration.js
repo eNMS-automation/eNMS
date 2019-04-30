@@ -30,6 +30,14 @@ function showDatabasePanel(type) {
 }
 
 /**
+ * Show Import Panel
+ */
+// eslint-disable-next-line
+function showImportPanel(type) {
+  createPanel(type, type, panelSize[type]);
+}
+
+/**
  * Save Parameters.
  */
 // eslint-disable-next-line
@@ -110,7 +118,7 @@ function getGitContent() {
  */
 // eslint-disable-next-line
 function scheduler(action) {
-  call(`/scheduler/${action}`, function() {
+  call(`/scheduler-${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });
 }

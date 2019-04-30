@@ -49,6 +49,7 @@
           <div class="x_content">
             <br>
             <form id="opennms_form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+              {{ opennms_form.form_type() }}
               <div class="form-group">
                 {% for field in opennms_form if field.widget.input_type != 'hidden'  %}
                   <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ field.label }}</label>

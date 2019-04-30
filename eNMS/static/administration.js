@@ -48,7 +48,7 @@ function showImportPanel(type) {
  */
 // eslint-disable-next-line
 function queryOpenNMS() {
-  fCall("/query_opennms", "#opennms_form", function() {
+  fCall("/query_opennms", "#opennms-form", function() {
     alertify.notify("Topology imported from OpenNMS.", "success", 5);
   });
 }
@@ -58,7 +58,7 @@ function queryOpenNMS() {
  */
 // eslint-disable-next-line
 function queryNetbox() {
-  fCall("/query_netbox", "#netbox_form", function() {
+  fCall("/query_netbox", "#netbox-form", function() {
     alertify.notify("Topology imported from Netbox.", "success", 5);
   });
 }
@@ -68,7 +68,7 @@ function queryNetbox() {
  */
 // eslint-disable-next-line
 function queryLibreNMS() {
-  fCall("/query_librenms", "#librenms_form", function() {
+  fCall("/query_librenms", "#librenms-form", function() {
     alertify.notify("Topology imported from LibreNMS.", "success", 5);
   });
 }

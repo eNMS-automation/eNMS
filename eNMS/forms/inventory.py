@@ -157,6 +157,7 @@ class ExcelImportForm(FlaskForm, metaclass=metaform):
 
 
 class OpenNmsForm(FlaskForm, metaclass=metaform):
+    action = "queryOpenNMS"
     form_type = HiddenField(default="opennms")
     opennms_rest_api = StringField()
     opennms_devices = StringField()
@@ -167,6 +168,7 @@ class OpenNmsForm(FlaskForm, metaclass=metaform):
 
 
 class NetboxForm(FlaskForm, metaclass=metaform):
+    action = "queryNetbox"
     form_type = HiddenField(default="netbox")
     netbox_address = StringField(default="http://0.0.0.0:8000")
     netbox_token = PasswordField()
@@ -175,6 +177,7 @@ class NetboxForm(FlaskForm, metaclass=metaform):
 
 
 class LibreNmsForm(FlaskForm, metaclass=metaform):
+    action = "queryLibreNMS"
     form_type = HiddenField(default="librenms")
     librenms_address = StringField(default="http://librenms.example.com")
     node_type = [subtype for subtype in device_subtypes.items()]

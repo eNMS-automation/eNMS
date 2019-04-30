@@ -122,7 +122,7 @@ class InventoryDispatcher:
         ]
         return "\n".join(device_logs)
 
-    def import_from_netbox(self) -> None:
+    def query_netbox(self) -> None:
         nb = netbox_api(
             request.form["netbox_address"], token=request.form["netbox_token"]
         )
@@ -139,7 +139,7 @@ class InventoryDispatcher:
                 },
             )
 
-    def import_from_librenms(self) -> None:
+    def query_librenms(self) -> None:
         devices = http_get(
             f'{request.form["librenms_address"]}/api/v0/devices',
             headers={"X-Auth-Token": request.form["librenms_token"]},
@@ -156,7 +156,7 @@ class InventoryDispatcher:
                 },
             )
 
-    def import_from_opennms(self):
+    def query_opennms(self):
         parameters = get_one("Parameters")
         login, password = parameters.opennms_login, request.form["password"]
         parameters.update(**request.form)

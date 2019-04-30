@@ -4,6 +4,11 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <style>
+    .btn-group-vertical > .btn{
+      margin-bottom:20px;
+    }
+  </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -11,12 +16,12 @@
     <div class="row">
       <div class="col-md-2 col-sm-2 col-xs-12">
         <div class="x_panel">
-          <div class="x_content">
+          <div class="x_content" style="min-height:80vh;">
             <div class="x_title">
               <h4 class="text-center">Parameters</h4>
             </div><br>
             <center>
-              <div class="btn-group-vertical">
+              <div class="btn-group-vertical" style="width:100%">
                 <button type="button" class="btn btn-primary btn-file" onclick="showParameters('view')">
                   Geographical View
                 </button>
@@ -39,12 +44,12 @@
       </div>
       <div class="col-md-2 col-sm-2 col-xs-12">
         <div class="x_panel">
-          <div class="x_content">
+          <div class="x_content" style="min-height:80vh;">
             <div class="x_title">
               <h4 class="text-center">Database</h4>
-            </div>
+            </div><br>
             <center>
-              <div class="btn-group-vertical">
+              <div class="btn-group-vertical" style="width:100%">
                 <button class="btn btn-primary btn-file" onclick="database('pause')">
                   Migration
                 </button>
@@ -58,16 +63,16 @@
       </div>
       <div class="col-md-2 col-sm-2 col-xs-12">
         <div class="x_panel">
-          <div class="x_content">
+          <div class="x_content" style="min-height:80vh;">
             <div class="x_title">
               <h4 class="text-center">Scheduler</h4>
-            </div>
+            </div><br>
             <center>
-              <div class="btn-group-vertical">
-                <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:20%;">
+              <div class="btn-group-vertical" style="width:100%">
+                <button class="btn btn-primary btn-file" onclick="scheduler('pause')">
                   Pause Scheduler
                 </button>
-                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:20%;">
+                <button class="btn btn-primary btn-file" onclick="scheduler('resume')">
                   Resume Scheduler
                 </button>
               </div>
@@ -77,74 +82,69 @@
       </div>
       <div class="col-md-2 col-sm-2 col-xs-12">
         <div class="x_panel">
-          <div class="x_content">
+          <div class="x_content" style="min-height:80vh;">
             <div class="x_title">
-              <h4 class="text-center">Scheduler</h4>
-            </div>
+              <h4 class="text-center">Topology Import</h4>
+            </div><br>
             <center>
-              <div class="btn-group-vertical">
-                <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:20%;">
-                  Pause Scheduler
+              <div class="btn-group-vertical" style="width:100%">
+                <button class="btn btn-primary btn-file" onclick="showImportPanel('Excel')">
+                  Excel
                 </button>
-                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:20%;">
-                  Resume Scheduler
+                <button class="btn btn-primary btn-file" onclick="showImportPanel('opennms')">
+                  OpenNMS
+                </button>
+                <button class="btn btn-primary btn-file" onclick="showImportPanel('netbox')">
+                  Netbox
+                </button>
+                <button class="btn btn-primary btn-file" onclick="showImportPanel('librenms')">
+                  LibreNMS
                 </button>
               </div>
             </center>
           </div>
         </div>
       </div>
-
-          </center>
-          <div class="x_title">
-            <h4 class="text-center">Topology Import</h4>
+      <div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content" style="min-height:80vh;">
+            <div class="x_title">
+              <h4 class="text-center">Topology Export</h4>
+            </div><br>
+            <center>
+              <div class="btn-group-vertical" style="width:100%">
+                <button class="btn btn-primary btn-file" onclick="showExport('Excel')">
+                  Excel
+                </button>
+                <button class="btn btn-primary btn-file" onclick="showExport('google_earth')">
+                  Google Earth
+                </button>
+              </div>
+            </center>
           </div>
-          <center>
-            <div class="btn-group-vertical">
-              <button class="btn btn-primary btn-file" onclick="showImportPanel('Excel')" style="width:20%;">
-                Excel
-              </button>
-              <button class="btn btn-primary btn-file" onclick="showImportPanel('opennms')" style="width:20%;">
-                OpenNMS
-              </button>
-              <button class="btn btn-primary btn-file" onclick="showImportPanel('netbox')" style="width:20%;">
-                Netbox
-              </button>
-              <button class="btn btn-primary btn-file" onclick="showImportPanel('librenms')" style="width:20%;">
-                LibreNMS
-              </button>
-            </div>
-          </center>
-          <div class="x_title">
-            <h4 class="text-center">Topology Export</h4>
-          </div>
-          <center>
-            <div class="btn-group-vertical">
-              <button class="btn btn-primary btn-file" onclick="showExport('Excel')" style="width:30%;">
-                Excel
-              </button>
-              <button class="btn btn-primary btn-file" onclick="showExport('google_earth')" style="width:30%;">
-                Google Earth
-              </button>
-            </div>
-          </center>
         </div>
-          <div class="x_title">
-            <h4 class="text-center">Miscellaneous</h4>
+      </div>
+      <div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content" style="min-height:80vh;">
+            <div class="x_title">
+              <h4 class="text-center">Miscellaneous</h4>
+            </div><br>
+            <center>
+              <div class="btn-group-vertical" style="width:100%">
+                <button class="btn btn-primary btn-file" onclick="getGitContent()">
+                  Fetch Git Configurations
+                </button>
+                <button class="btn btn-primary btn-file" onclick="resetStatus()">
+                  Reset Job Statuses
+                </button>
+                <button class="btn btn-primary btn-file" onclick="scanCluster()">
+                  Scan Cluster Subnet
+                </button>
+              </div>
+            </center>
           </div>
-          <center>
-            <div class="btn-group-vertical">
-              <button class="btn btn-primary btn-file" onclick="getGitContent()" style="width:20%;">
-                Fetch Git Configurations
-              </button>
-              <button class="btn btn-primary btn-file" onclick="resetStatus()" style="width:20%;">
-                Reset Job Statuses
-              </button>
-              <button class="btn btn-primary btn-file" onclick="scanCluster()" style="width:20%;">
-                Scan Cluster Subnet
-              </button>
-            </div>
-          </center>
+        </div>
       </div>
     </div>
   </div>

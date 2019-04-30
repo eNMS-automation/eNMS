@@ -1,25 +1,17 @@
-<form id="edit-{{ form_type }}-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+<form id="{{ form_type }}-form" class="form-horizontal form-label-left" method="post" autocomplete="off">
   <div class="modal-body">
     <div class="form-group">
       {% for field in form %}
-        {% set id = "{}-{}".format(form_type, field.name) %}
-        {% if field.widget.input_type == 'hidden' %}
-          {{ field(id=id, class="add-id") }}
-        {% elif field.type == "BooleanField" %}
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
-          <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-1">
-            {{ field(id=id, class="add-id") }}
-          </div><br><br>
-        {% else %}
+        {% if field.widget.input_type != 'hidden' %}
           <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            {{ field(id=id, class="form-control add-id") }}
+            {{ field(class="form-control") }}
           </div><br><br>
         {% endif %}
       {% endfor %}
     </div>
   </div>
   <center>
-    <button type="button" class="btn btn-success add-id btn-id" value="processData">Save</button>
+    <button type="button" class="btn btn-success" onclick="{{ action }}('{{ form_type }}')">Save</button>
   </center>
 </form>

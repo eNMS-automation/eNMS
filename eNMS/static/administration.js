@@ -105,16 +105,7 @@ function scanCluster() {
 
 
 (function() {
-  if (page == "administration") {
-    /*
-    $("#cluster_scan_protocol").val(parameters.cluster_scan_protocol);
-    $("#default_view").val(parameters.default_view);
-    $("#default_marker").val(parameters.default_marker);
-    if (parameters.pool) {
-      $("#pool").val(parameters.pool.id);
-    }
-    */
-  } else if (page == "advanced") {
+  if (page == "advanced") {
     folders.forEach((f) => {
       $("#versions").append(`<option value='${f}'></option>`);
     });

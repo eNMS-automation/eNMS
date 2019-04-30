@@ -207,20 +207,6 @@ function showPoolObjectsPanel(id) {
 }
 
 /**
- * Show Parameters
- */
-// eslint-disable-next-line
-function showParameters(type) {
-  createPanel(type, `${type} Parameters`, parametersPanelSize[type], 0, () => {
-    for (const [property, value] of Object.entries(parameters)) {
-      if ($(`#${property}`).length) {
-        $(`#${property}`).val(value);
-      }
-    }
-  });
-}
-
-/**
  * Show Filtering Panel
  */
 // eslint-disable-next-line

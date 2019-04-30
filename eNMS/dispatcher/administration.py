@@ -21,14 +21,7 @@ from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 
 class AdministrationDispatcher:
     def administration(self) -> dict:
-        return {}
-
-    def advanced(self) -> dict:
-        return dict(
-            database_helpers_form=DatabaseHelpersForm(request.form),
-            migrations_form=MigrationsForm(request.form),
-            folders=listdir(current_app.path / "migrations"),
-        )
+        return dict(folders=listdir(current_app.path / "migrations"))
 
     def database_helpers(self) -> None:
         delete_all(*request.form["deletion_types"])

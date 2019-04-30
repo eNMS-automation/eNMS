@@ -8,6 +8,28 @@ parameters: false
 */
 
 /**
+ * Show Parameters
+ */
+// eslint-disable-next-line
+function showParameters(type) {
+  createPanel(type, `${type} Parameters`, parametersPanelSize[type], 0, () => {
+    for (const [property, value] of Object.entries(parameters)) {
+      if ($(`#${property}`).length) {
+        $(`#${property}`).val(value);
+      }
+    }
+  });
+}
+
+/**
+ * Show Database Panel
+ */
+// eslint-disable-next-line
+function showDatabasePanel(type) {
+  createPanel(type, type, parametersPanelSize[type]);
+}
+
+/**
  * Save Parameters.
  */
 // eslint-disable-next-line

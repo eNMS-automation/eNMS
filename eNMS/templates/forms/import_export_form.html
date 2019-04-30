@@ -1,23 +1,23 @@
-            <form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
-              {{ import_export_form.form_type() }}
-              <div class='form-group'>
-                <label>Export Filename (the file will be saved in the "eNMS/projects" folder)</label>
-                {{ import_export_form.export_filename(class="form-control") }}
-              </div>
-              <fieldset>
-                <div class="item">
-                  {{ import_export_form.replace() }}
-                  <label>Replace on import</label>
-                </div>
-              </fieldset>
-              <label class="btn btn-default btn-file" style="width:100%;">Import Network Topology
-                <input id="file" name="file" style="visibility:hidden; display:none" type="file">
-              </label>
-              <div class="panel-group">
-                <div style="padding-bottom:5px;">
-                  <button class="btn btn-default btn-file" onclick="exportTopology()" style="width:100%;">
-                    Export Network Topology
-                  </button>
-                </div>
-              </div>
-            </form>
+<form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
+  {{ import_export_form.form_type() }}
+  <div class='form-group'>
+    <label>Export Filename (the file will be saved in the "eNMS/projects" folder)</label>
+    {{ import_export_form.export_filename(class="form-control") }}
+  </div>
+  <fieldset>
+    <div class="item">
+      {{ import_export_form.replace() }}
+      <label>Replace on import</label>
+    </div>
+  </fieldset>
+  <label class="btn btn-default btn-file" style="width:100%;">Import Network Topology
+    <input id="file" name="file" style="visibility:hidden; display:none" type="file">
+  </label>
+  <div class="panel-group">
+    <div style="padding-bottom:5px;">
+      <button class="btn btn-default btn-file" onclick="exportTopology()" style="width:100%;">
+        Export Network Topology
+      </button>
+    </div>
+  </div>
+</form>

@@ -46,7 +46,7 @@
           <center>
             <div class="panel-group">
               <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:30%;">
+                <button class="btn btn-primary btn-file" onclick="database('pause')" style="width:30%;">
                   Migration
                 </button>
               </div>
@@ -86,6 +86,57 @@
               <div style="padding-bottom:5px;">
                 <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:30%;">
                   Resume Scheduler
+                </button>
+              </div>
+            </div>
+          </center>
+          <div class="ln_solid"></div>
+          <div class="x_title">
+            <h4 class="text-center">Topology Import</h4>
+          </div>
+          <center>
+            <div class="panel-group">
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="showImportPanel('Excel')" style="width:30%;">
+                  Fetch Git Configurations and Update devices
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="showImportPanel('opennms')" style="width:30%;">
+                  Reset Service / Workflow statuses
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="showImportPanel('netbox')" style="width:30%;">
+                  Scan Cluster Subnet for new Instances
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-danger btn-file" onclick="showImportPanel('librenms')" style="width:30%;">
+                  Pause Scheduler
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:30%;">
+                  Resume Scheduler
+                </button>
+              </div>
+            </div>
+          </center>
+          <div class="ln_solid"></div>
+          <div class="x_title">
+            <h4 class="text-center">Topology Export</h4>
+          </div>
+          <center>
+            <div class="panel-group">
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="showExport('Excel')" style="width:30%;">
+                  Fetch Git Configurations and Update devices
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="showExport('google_earth')" style="width:30%;">
+                  Reset Service / Workflow statuses
                 </button>
               </div>
             </div>

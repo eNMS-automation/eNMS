@@ -16,12 +16,8 @@ from eNMS.forms.fields import MultipleObjectField
 from eNMS.properties import import_properties, user_permissions
 
 
-class AdministrationForm(FlaskForm, metaclass=metaform):
-    form_type = HiddenField(default="administration")
-    boolean_fields = HiddenField(default="mattermost_verify_certificate")
-    cluster_scan_protocol = SelectField(choices=(("http", "HTTP"), ("https", "HTTPS")))
-    cluster_scan_subnet = StringField()
-    cluster_scan_timeout = FloatField()
+class ViewParametersForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="view")
     default_longitude = FloatField()
     default_latitude = FloatField()
     default_zoom_level = IntegerField()
@@ -33,10 +29,29 @@ class AdministrationForm(FlaskForm, metaclass=metaform):
             ("Circle Marker", "Circle Marker"),
         )
     )
+
+
+class ClusterParametersForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="cluster")
+    cluster_scan_protocol = SelectField(choices=(("http", "HTTP"), ("https", "HTTPS")))
+    cluster_scan_subnet = StringField()
+    cluster_scan_timeout = FloatField()
+
+
+class GitParametersForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="git")
     git_configurations = StringField()
     git_automation = StringField()
+
+
+class SshParametersForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="ssh")
     gotty_start_port = FloatField("Start port")
     gotty_end_port = FloatField("End port")
+
+
+class NotificationsParametersForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="notifications")
     mail_sender = StringField()
     mail_recipients = StringField()
     mattermost_url = StringField("Mattermost URL")
@@ -44,31 +59,6 @@ class AdministrationForm(FlaskForm, metaclass=metaform):
     mattermost_verify_certificate = BooleanField()
     slack_token = StringField()
     slack_channel = StringField()
-    categories = {
-        "Geographical Parameters": (
-            "default_longitude",
-            "default_latitude",
-            "default_zoom_level",
-            "default_view",
-            "default_marker",
-        ),
-        "SSH Terminal Parameters": ("gotty_start_port", "gotty_end_port"),
-        "Notification Parameters": (
-            "mail_sender",
-            "mail_recipients",
-            "slack_token",
-            "slack_channel",
-            "mattermost_url",
-            "mattermost_channel",
-            "mattermost_verify_certificate",
-        ),
-        "Gitlab Parameters": ("git_automation", "git_configurations"),
-        "Cluster Management": (
-            "cluster_scan_subnet",
-            "cluster_scan_protocol",
-            "cluster_scan_timeout",
-        ),
-    }
 
 
 class DatabaseHelpersForm(FlaskForm, metaclass=metaform):

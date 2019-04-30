@@ -203,6 +203,14 @@ function showPoolObjectsPanel(id) {
 }
 
 /**
+ * Show Parameters
+ */
+// eslint-disable-next-line
+function showParameters(type) {
+  createPanel(type, `${type} Parameters`, parametersPanelSize[type]);
+}
+
+/**
  * Show Filtering Panel
  */
 // eslint-disable-next-line

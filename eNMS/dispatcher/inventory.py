@@ -18,7 +18,7 @@ from xlwt import Workbook
 
 from eNMS.controller import controller
 from eNMS.database import delete_all, factory, fetch, fetch_all, get_one, objectify
-from eNMS.forms import (
+from eNMS.forms.inventory import (
     GoogleEarthForm,
     ImportExportForm,
     LibreNmsForm,

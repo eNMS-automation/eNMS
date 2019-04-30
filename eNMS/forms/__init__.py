@@ -2,12 +2,17 @@ from collections import defaultdict
 from flask_login import current_user
 from wtforms.fields.core import UnboundField
 
+from eNMS.forms.fields import field_types
+
+form_classes = {}
 form_properties = defaultdict(dict)
 
 
 def metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
-    for form_type in cls.form_type.kwargs["default"].split(","):
+    form_type = cls.form_type.kwargs["default"]
+    form_classes[getattr(cls, "name", form_type)] = cls
+    for form_type in form_type.split(","):
         form_properties[form_type].update(
             {
                 field_name: field_types[field.field_class]
@@ -15,6 +20,7 @@ def metaform(*args, **kwargs):
                 if isinstance(field, UnboundField) and field.field_class in field_types
             }
         )
+    print(form_classes)
     return cls
 
 
@@ -28,29 +34,29 @@ def form_postprocessing(form):
     return data
 
 
-form_classes = {
-    "add_jobs": AddJobsForm,
-    "configuration": CompareConfigurationsForm,
-    "configuration_filtering": DeviceFilteringForm,
-    "connection": ConnectionForm,
-    "device": DeviceForm,
-    "device_automation": DeviceAutomationForm,
-    "device_filtering": DeviceFilteringForm,
-    "instance": InstanceForm,
-    "link": LinkForm,
-    "link_filtering": LinkFilteringForm,
-    "log_filtering": LogFilteringForm,
-    "logrule": LogAutomationForm,
-    "pool": PoolForm,
-    "pool_objects": PoolObjectsForm,
-    "results": CompareResultsForm,
-    "service": JobForm,
-    "service_filtering": JobFilteringForm,
-    "task": TaskForm,
-    "user": UserForm,
-    "user_filtering": UserFilteringForm,
-    "workflow": JobForm,
-}
+# form_classes = {
+#     "add_jobs": AddJobsForm,
+#     "configuration": CompareConfigurationsForm,
+#     "configuration_filtering": DeviceFilteringForm,
+#     "connection": ConnectionForm,
+#     "device": DeviceForm,
+#     "device_automation": DeviceAutomationForm,
+#     "device_filtering": DeviceFilteringForm,
+#     "instance": InstanceForm,
+#     "link": LinkForm,
+#     "link_filtering": LinkFilteringForm,
+#     "log_filtering": LogFilteringForm,
+#     "logrule": LogAutomationForm,
+#     "pool": PoolForm,
+#     "pool_objects": PoolObjectsForm,
+#     "results": CompareResultsForm,
+#     "service": JobForm,
+#     "service_filtering": JobFilteringForm,
+#     "task": TaskForm,
+#     "user": UserForm,
+#     "user_filtering": UserFilteringForm,
+#     "workflow": JobForm,
+# }
 
 form_templates = {
     "configuration_filtering": "filtering_form",

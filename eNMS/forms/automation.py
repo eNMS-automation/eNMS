@@ -10,6 +10,8 @@ from wtforms import (
     SelectMultipleField,
 )
 
+from eNMS.forms import metaform
+
 
 class DeviceAutomationForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="device_automation")

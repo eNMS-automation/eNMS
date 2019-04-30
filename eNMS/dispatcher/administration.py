@@ -14,7 +14,7 @@ from typing import Union
 from yaml import dump, load, BaseLoader
 
 from eNMS.default import create_default
-from eNMS.forms import (
+from eNMS.forms.administration import (
     AdministrationForm,
     DatabaseHelpersForm,
     LoginForm,

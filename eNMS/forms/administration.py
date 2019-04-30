@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
+    DateField,
     FloatField,
     HiddenField,
     IntegerField,
@@ -9,6 +10,9 @@ from wtforms import (
     PasswordField,
     SelectMultipleField,
 )
+
+from eNMS.forms import metaform
+from eNMS.properties import import_properties
 
 
 class AdministrationForm(FlaskForm, metaclass=metaform):

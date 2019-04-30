@@ -63,12 +63,12 @@
   {% if type == "pool" %}
     <script src="{{ url_for('static', filename='modules/vis/vis.min.js') }}"></script>
     <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
-  {% endif %}
-  {% if type in ("service", "workflow") %}
+  {% elif type in ("service", "workflow") %}
     <script src="{{ url_for('static', filename='automation.js') }}"></script>
-  {% endif %}
-  {% if type == "task" %}
+  {% elif type == "task" %}
     <script src="{{ url_for('static', filename='scheduling.js') }}"></script>
+  {% elif type == "instance" %}
+    <script src="{{ url_for('static', filename='administration.js') }}"></script>
   {% endif %}
   <script>
     let table = initTable("{{ type }}");

@@ -4,6 +4,12 @@
 
 {% block stylesheets %}
   {{ super() }}
+  <style>
+.btn-group-vertical > button{
+    margin-bottom:100px;
+    border-radius:100px !important;
+}
+</style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -14,64 +20,76 @@
           <div class="x_title">
             <h4 class="text-center">Parameters</h4>
           </div><br>
-          <div class="panel-group">
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="getGitContent()" style="width:100%;">
-                View Parameters
+          <center>
+            <div class="btn-group-horizontal">
+              <button type="button" class="btn btn-primary btn-file" onclick="getGitContent()" style="width:15%;">
+                Geographical View
+              </button>
+              <button type="button" class="btn btn-primary btn-file" onclick="resetStatus()" style="width:15%;">
+                SSH Terminal
+              </button>
+              <button type="button" class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:15%;">
+                Notifications
+              </button>
+              <button type="button" class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:15%;">
+                Gitlab
+              </button>
+              <button type="button" class="btn btn-primary btn-file" onclick="scanCluster()" style="width:15%;">
+                Cluster Management
               </button>
             </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="resetStatus()" style="width:100%;">
-                Reset Service / Workflow statuses
-              </button>
-            </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="scheduler('pause')" style="width:100%;">
-                Pause Scheduler
-              </button>
-            </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="scheduler('resume')" style="width:100%;">
-                Git Parameters
-              </button>
-            </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="scanCluster()" style="width:100%;">
-                Cluster Scan Parameters
-              </button>
-            </div>
+          </center>
+          <div class="ln_solid"></div>
+          <div class="x_title">
+            <h4 class="text-center">Database</h4>
           </div>
+          <center>
+            <div class="panel-group">
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:30%;">
+                  Migration
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-danger btn-file" onclick="scheduler('resume')" style="width:30%;">
+                  Deletion
+                </button>
+              </div>
+            </div>
+          </center>
           <div class="ln_solid"></div>
           <div class="x_title">
             <h4 class="text-center">Miscellaneous</h4>
           </div>
-          <div class="panel-group">
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="getGitContent()" style="width:100%;">
-                Fetch Git Configurations and Update devices
-              </button>
+          <center>
+            <div class="panel-group">
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="getGitContent()" style="width:30%;">
+                  Fetch Git Configurations and Update devices
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="resetStatus()" style="width:30%;">
+                  Reset Service / Workflow statuses
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="scanCluster()" style="width:30%;">
+                  Scan Cluster Subnet for new Instances
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-danger btn-file" onclick="scheduler('pause')" style="width:30%;">
+                  Pause Scheduler
+                </button>
+              </div>
+              <div style="padding-bottom:5px;">
+                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:30%;">
+                  Resume Scheduler
+                </button>
+              </div>
             </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="resetStatus()" style="width:100%;">
-                Reset Service / Workflow statuses
-              </button>
-            </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="scheduler('pause')" style="width:100%;">
-                Pause Scheduler
-              </button>
-            </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="scheduler('resume')" style="width:100%;">
-                Resume Scheduler
-              </button>
-            </div>
-            <div style="padding-bottom:5px;">
-              <button class="btn btn-default btn-file" onclick="scanCluster()" style="width:100%;">
-                Scan Cluster Subnet for new Instances
-              </button>
-            </div>
-          </div>
+          </center>
         </div>
       </div>
     </div>

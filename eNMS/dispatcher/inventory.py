@@ -129,16 +129,6 @@ class InventoryDispatcher:
         ]
         return "\n".join(device_logs)
 
-    def import_export(self) -> dict:
-        return dict(
-            import_export_form=ImportExportForm(request.form),
-            librenms_form=LibreNmsForm(request.form),
-            netbox_form=NetboxForm(request.form),
-            opennms_form=OpenNmsForm(request.form),
-            google_earth_form=GoogleEarthForm(request.form),
-            parameters=get_one("Parameters"),
-        )
-
     def import_from_netbox(self) -> None:
         nb = netbox_api(
             request.form["netbox_address"], token=request.form["netbox_token"]

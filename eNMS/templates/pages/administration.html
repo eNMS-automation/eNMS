@@ -4,72 +4,103 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <style>
-    .btn-group-vertical > button{
-        margin-bottom:100px;
-        border-radius:100px !important;
-    }
-  </style>
 {% endblock stylesheets %}
 
 {% block content %}
   <div class="right_col" role="main">
     <div class="row">
-      <div class="x_panel">
-        <div class="x_content">
-          <div class="x_title">
-            <h4 class="text-center">Parameters</h4>
-          </div><br>
-          <center>
-            <div class="btn-group-horizontal">
-              <button type="button" class="btn btn-primary btn-file" onclick="showParameters('view')" style="width:15%;">
-                Geographical View
-              </button>
-              <button type="button" class="btn btn-primary btn-file" onclick="showParameters('ssh')" style="width:15%;">
-                SSH Terminal
-              </button>
-              <button type="button" class="btn btn-primary btn-file" onclick="showParameters('notifications')" style="width:15%;">
-                Notifications
-              </button>
-              <button type="button" class="btn btn-primary btn-file" onclick="showParameters('git')" style="width:15%;">
-                Gitlab
-              </button>
-              <button type="button" class="btn btn-primary btn-file" onclick="showParameters('cluster')" style="width:15%;">
-                Cluster Management
-              </button>
-            </div>
-          </center>
-          <div class="x_title">
-            <h4 class="text-center">Database</h4>
+      <div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="x_title">
+              <h4 class="text-center">Parameters</h4>
+            </div><br>
+            <center>
+              <div class="btn-group-vertical">
+                <button type="button" class="btn btn-primary btn-file" onclick="showParameters('view')">
+                  Geographical View
+                </button>
+                <button type="button" class="btn btn-primary btn-file" onclick="showParameters('ssh')">
+                  SSH Terminal
+                </button>
+                <button type="button" class="btn btn-primary btn-file" onclick="showParameters('notifications')">
+                  Notifications
+                </button>
+                <button type="button" class="btn btn-primary btn-file" onclick="showParameters('git')">
+                  Gitlab
+                </button>
+                <button type="button" class="btn btn-primary btn-file" onclick="showParameters('cluster')">
+                  Cluster Management
+                </button>
+              </div>
+            </center>
           </div>
-          <center>
-            <div class="btn-group-horizontal">
-              <button class="btn btn-primary btn-file" onclick="database('pause')" style="width:30%;">
-                Migration
-              </button>
-              <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:30%;">
-                Deletion
-              </button>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="x_title">
+              <h4 class="text-center">Database</h4>
             </div>
-          </center>
-          <div class="x_title">
-            <h4 class="text-center">Scheduler</h4>
+            <center>
+              <div class="btn-group-vertical">
+                <button class="btn btn-primary btn-file" onclick="database('pause')">
+                  Migration
+                </button>
+                <button class="btn btn-primary btn-file" onclick="scheduler('resume')">
+                  Deletion
+                </button>
+              </div>
+            </center>
           </div>
-          <center>
-            <div class="btn-group-horizontal">
-              <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:20%;">
-                Pause Scheduler
-              </button>
-              <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:20%;">
-                Resume Scheduler
-              </button>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="x_title">
+              <h4 class="text-center">Scheduler</h4>
             </div>
+            <center>
+              <div class="btn-group-vertical">
+                <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:20%;">
+                  Pause Scheduler
+                </button>
+                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:20%;">
+                  Resume Scheduler
+                </button>
+              </div>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="x_title">
+              <h4 class="text-center">Scheduler</h4>
+            </div>
+            <center>
+              <div class="btn-group-vertical">
+                <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:20%;">
+                  Pause Scheduler
+                </button>
+                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:20%;">
+                  Resume Scheduler
+                </button>
+              </div>
+            </center>
+          </div>
+        </div>
+      </div>
+
           </center>
           <div class="x_title">
             <h4 class="text-center">Topology Import</h4>
           </div>
           <center>
-            <div class="btn-group-horizontal">
+            <div class="btn-group-vertical">
               <button class="btn btn-primary btn-file" onclick="showImportPanel('Excel')" style="width:20%;">
                 Excel
               </button>
@@ -88,7 +119,7 @@
             <h4 class="text-center">Topology Export</h4>
           </div>
           <center>
-            <div class="btn-group-horizontal">
+            <div class="btn-group-vertical">
               <button class="btn btn-primary btn-file" onclick="showExport('Excel')" style="width:30%;">
                 Excel
               </button>
@@ -102,7 +133,7 @@
             <h4 class="text-center">Miscellaneous</h4>
           </div>
           <center>
-            <div class="btn-group-horizontal">
+            <div class="btn-group-vertical">
               <button class="btn btn-primary btn-file" onclick="getGitContent()" style="width:20%;">
                 Fetch Git Configurations
               </button>

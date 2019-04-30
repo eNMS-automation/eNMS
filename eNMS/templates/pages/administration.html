@@ -39,7 +39,6 @@
               </button>
             </div>
           </center>
-          <div class="ln_solid"></div>
           <div class="x_title">
             <h4 class="text-center">Database</h4>
           </div>
@@ -48,96 +47,73 @@
               <button class="btn btn-primary btn-file" onclick="database('pause')" style="width:30%;">
                 Migration
               </button>
-              <button class="btn btn-danger btn-file" onclick="scheduler('resume')" style="width:30%;">
+              <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:30%;">
                 Deletion
               </button>
             </div>
           </center>
-          <div class="ln_solid"></div>
           <div class="x_title">
-            <h4 class="text-center">Miscellaneous</h4>
+            <h4 class="text-center">Scheduler</h4>
           </div>
           <center>
             <div class="btn-group-horizontal">
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="getGitContent()" style="width:30%;">
-                  Fetch Git Configurations and Update devices
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="resetStatus()" style="width:30%;">
-                  Reset Service / Workflow statuses
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="scanCluster()" style="width:30%;">
-                  Scan Cluster Subnet for new Instances
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-danger btn-file" onclick="scheduler('pause')" style="width:30%;">
-                  Pause Scheduler
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:30%;">
-                  Resume Scheduler
-                </button>
-              </div>
+              <button class="btn btn-primary btn-file" onclick="scheduler('pause')" style="width:20%;">
+                Pause Scheduler
+              </button>
+              <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:20%;">
+                Resume Scheduler
+              </button>
             </div>
           </center>
-          <div class="ln_solid"></div>
           <div class="x_title">
             <h4 class="text-center">Topology Import</h4>
           </div>
           <center>
             <div class="btn-group-horizontal">
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="showImportPanel('Excel')" style="width:30%;">
-                  Fetch Git Configurations and Update devices
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="showImportPanel('opennms')" style="width:30%;">
-                  Reset Service / Workflow statuses
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="showImportPanel('netbox')" style="width:30%;">
-                  Scan Cluster Subnet for new Instances
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-danger btn-file" onclick="showImportPanel('librenms')" style="width:30%;">
-                  Pause Scheduler
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="scheduler('resume')" style="width:30%;">
-                  Resume Scheduler
-                </button>
-              </div>
+              <button class="btn btn-primary btn-file" onclick="showImportPanel('Excel')" style="width:20%;">
+                Excel
+              </button>
+              <button class="btn btn-primary btn-file" onclick="showImportPanel('opennms')" style="width:20%;">
+                OpenNMS
+              </button>
+              <button class="btn btn-primary btn-file" onclick="showImportPanel('netbox')" style="width:20%;">
+                Netbox
+              </button>
+              <button class="btn btn-primary btn-file" onclick="showImportPanel('librenms')" style="width:20%;">
+                LibreNMS
+              </button>
             </div>
           </center>
-          <div class="ln_solid"></div>
           <div class="x_title">
             <h4 class="text-center">Topology Export</h4>
           </div>
           <center>
             <div class="btn-group-horizontal">
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="showExport('Excel')" style="width:30%;">
-                  Fetch Git Configurations and Update devices
-                </button>
-              </div>
-              <div style="padding-bottom:5px;">
-                <button class="btn btn-primary btn-file" onclick="showExport('google_earth')" style="width:30%;">
-                  Reset Service / Workflow statuses
-                </button>
-              </div>
+              <button class="btn btn-primary btn-file" onclick="showExport('Excel')" style="width:30%;">
+                Excel
+              </button>
+              <button class="btn btn-primary btn-file" onclick="showExport('google_earth')" style="width:30%;">
+                Google Earth
+              </button>
             </div>
           </center>
         </div>
+          <div class="x_title">
+            <h4 class="text-center">Miscellaneous</h4>
+          </div>
+          <center>
+            <div class="btn-group-horizontal">
+              <button class="btn btn-primary btn-file" onclick="getGitContent()" style="width:20%;">
+                Fetch Git Configurations
+              </button>
+              <button class="btn btn-primary btn-file" onclick="resetStatus()" style="width:20%;">
+                Reset Job Statuses
+              </button>
+              <button class="btn btn-primary btn-file" onclick="scanCluster()" style="width:20%;">
+                Scan Cluster Subnet
+              </button>
+            </div>
+          </center>
       </div>
     </div>
   </div>

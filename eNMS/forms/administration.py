@@ -5,14 +5,15 @@ from wtforms import (
     FloatField,
     HiddenField,
     IntegerField,
+    PasswordField,
     SelectField,
     StringField,
-    PasswordField,
     SelectMultipleField,
 )
 
 from eNMS.forms import metaform
-from eNMS.properties import import_properties
+from eNMS.forms.fields import MultipleObjectField
+from eNMS.properties import import_properties, user_permissions
 
 
 class AdministrationForm(FlaskForm, metaclass=metaform):

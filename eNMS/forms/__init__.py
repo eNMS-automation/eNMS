@@ -10,9 +10,9 @@ form_properties = defaultdict(dict)
 
 def metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
-    form_type = cls.form_type.kwargs["default"]
-    form_classes[getattr(cls, "name", form_type)] = cls
-    for form_type in form_type.split(","):
+    types = cls.form_type.kwargs["default"]
+    form_classes[types] = cls
+    for form_type in types.split(","):
         form_properties[form_type].update(
             {
                 field_name: field_types[field.field_class]
@@ -33,30 +33,6 @@ def form_postprocessing(form):
             data[property] = property in form
     return data
 
-
-# form_classes = {
-#     "add_jobs": AddJobsForm,
-#     "configuration": CompareConfigurationsForm,
-#     "configuration_filtering": DeviceFilteringForm,
-#     "connection": ConnectionForm,
-#     "device": DeviceForm,
-#     "device_automation": DeviceAutomationForm,
-#     "device_filtering": DeviceFilteringForm,
-#     "instance": InstanceForm,
-#     "link": LinkForm,
-#     "link_filtering": LinkFilteringForm,
-#     "log_filtering": LogFilteringForm,
-#     "logrule": LogAutomationForm,
-#     "pool": PoolForm,
-#     "pool_objects": PoolObjectsForm,
-#     "results": CompareResultsForm,
-#     "service": JobForm,
-#     "service_filtering": JobFilteringForm,
-#     "task": TaskForm,
-#     "user": UserForm,
-#     "user_filtering": UserFilteringForm,
-#     "workflow": JobForm,
-# }
 
 form_templates = {
     "configuration_filtering": "filtering_form",

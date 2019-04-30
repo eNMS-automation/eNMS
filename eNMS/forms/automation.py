@@ -1,16 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-    SelectField,
-    StringField,
-    PasswordField,
-    SelectMultipleField,
-)
+from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
 from eNMS.forms import metaform
+from eNMS.forms.fields import DateField, MultipleObjectField, ObjectField
 
 
 class DeviceAutomationForm(FlaskForm, metaclass=metaform):

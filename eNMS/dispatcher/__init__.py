@@ -11,7 +11,6 @@ from eNMS.forms import form_classes, form_templates
 from eNMS.database import delete, factory, fetch, fetch_all, fetch_all_visible
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
-from eNMS.dispatcher.import_export import ImportExportDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher
 from eNMS.models import classes
 from eNMS.modules import db
@@ -24,12 +23,7 @@ from eNMS.properties import (
 )
 
 
-class Dispatcher(
-    AutomationDispatcher,
-    AdministrationDispatcher,
-    ImportExportDispatcher,
-    InventoryDispatcher,
-):
+class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispatcher):
     def dashboard(self) -> dict:
         on_going = {
             "Running services": len(

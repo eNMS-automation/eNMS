@@ -28,6 +28,7 @@ class MultipleObjectField(SelectMultipleField):
 
 
 field_types = {
+    BooleanField: "boolean",
     DateField: "date",
     FloatField: "float",
     IntegerField: "integer",

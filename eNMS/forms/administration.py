@@ -16,8 +16,11 @@ from eNMS.forms.fields import MultipleObjectField
 from eNMS.properties import import_properties, user_permissions
 
 
-class ViewParametersForm(FlaskForm, metaclass=metaform):
-    template, action = "filtering", "saveParameters"
+class ParametersForm:
+    action = "saveParameters"
+
+
+class ViewParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
     form_type = HiddenField(default="view")
     default_longitude = FloatField()
     default_latitude = FloatField()
@@ -34,26 +37,26 @@ class ViewParametersForm(FlaskForm, metaclass=metaform):
     )
 
 
-class ClusterParametersForm(FlaskForm, metaclass=metaform):
+class ClusterParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
     form_type = HiddenField(default="cluster")
     cluster_scan_protocol = SelectField(choices=(("http", "HTTP"), ("https", "HTTPS")))
     cluster_scan_subnet = StringField()
     cluster_scan_timeout = FloatField()
 
 
-class GitParametersForm(FlaskForm, metaclass=metaform):
+class GitParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
     form_type = HiddenField(default="git")
     git_configurations = StringField()
     git_automation = StringField()
 
 
-class SshParametersForm(FlaskForm, metaclass=metaform):
+class SshParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
     form_type = HiddenField(default="ssh")
     gotty_start_port = FloatField("Start port")
     gotty_end_port = FloatField("End port")
 
 
-class NotificationsParametersForm(FlaskForm, metaclass=metaform):
+class NotificationsParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
     form_type = HiddenField(default="notifications")
     mail_sender = StringField()
     mail_recipients = StringField()
@@ -111,14 +114,14 @@ class UserForm(FlaskForm, metaclass=metaform):
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):
-    template = "filtering"
+    action = "filter"
     form_type = HiddenField(default="user_filtering")
     name = StringField()
     email = StringField()
 
 
 class LogFilteringForm(FlaskForm):
-    template = "filtering"
+    action = "filter"
     form_type = HiddenField(default="log_filtering")
     source_ip_address = StringField()
     content = StringField()

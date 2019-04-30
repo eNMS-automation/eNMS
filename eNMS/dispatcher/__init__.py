@@ -95,7 +95,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
             action=form_actions.get(form_type),
             form=form_classes.get(form_type, FlaskForm)(request.form),
             form_type=form_type,
-            template=f"forms/{form_templates.get(form_type, form_type)}_form",
+            template=f"forms/{form_templates.get(form_type, 'base')}_form",
         )
 
     def get_all(self, cls: str) -> List[dict]:

@@ -12,6 +12,7 @@ class DeviceAutomationForm(FlaskForm, metaclass=metaform):
 
 
 class JobForm(FlaskForm, metaclass=metaform):
+    template = "object"
     form_type = HiddenField(default="service,workflow")
     id = HiddenField()
     boolean_fields = HiddenField(
@@ -59,7 +60,7 @@ class WorkflowForm(JobForm, metaclass=metaform):
 
 
 class JobFilteringForm(FlaskForm, metaclass=metaform):
-    template = "filtering"
+    action = "filter"
     form_type = HiddenField(default="job_filtering")
     name = StringField()
     type = StringField()

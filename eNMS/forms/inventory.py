@@ -62,13 +62,13 @@ class ConnectionForm(FlaskForm, metaclass=metaform):
 
 
 class ObjectFilteringForm(FlaskForm, metaclass=metaform):
-    template = "filtering"
+    action = "filter"
     form_type = HiddenField(default="device_filtering,link_filtering")
     pools = MultipleObjectField("Pool")
 
 
 class ObjectForm(FlaskForm):
-    template = "base"
+    template = "object"
     name = StringField()
     description = StringField()
     location = StringField()
@@ -128,6 +128,7 @@ class LinkFilteringForm(ObjectForm, ObjectFilteringForm, metaclass=metaform):
 
 @configure_pool_form
 class PoolForm(FlaskForm, metaclass=metaform):
+    template = "pool"
     form_type = HiddenField(default="pool")
     id = HiddenField()
     name = StringField()

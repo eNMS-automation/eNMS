@@ -14,7 +14,7 @@ def metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
     types = cls.form_type.kwargs["default"]
     form_classes[types] = cls
-    form_templates[types] = getattr(cls, "template", types)
+    form_templates[types] = getattr(cls, "template", "base")
     form_actions[types] = getattr(cls, "action", None)
     for form_type in types.split(","):
         form_properties[form_type].update(

@@ -86,7 +86,6 @@
   <script>
     let subtype_sizes = {{ subtype_sizes|tojson|safe }};
     let link_colors = {{ link_colors|tojson|safe }};
-    let parameters = {{ parameters|tojson|safe }};
     let view = '{{ view }}';
     let viewType = "{{ view_type }}"
   </script>
@@ -95,6 +94,6 @@
   <script src="{{ url_for('static', filename='modules/leaflet/leaflet.min.js') }}"></script>
   <script src="{{ url_for('static', filename='modules/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
   <script src="{{ url_for('static', filename='inventory.js') }}"></script>
-  <script src="{{ url_for('static', filename='geographicalView.js') }}"></script>
+  <script src="{{ url_for('static', filename='view.js') }}"></script>
   <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

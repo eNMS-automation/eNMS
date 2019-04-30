@@ -91,6 +91,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         }
 
     def form(self, form_type: str) -> dict:
+        print(form_type, form_classes)
         return dict(
             action=form_actions.get(form_type),
             form=form_classes.get(form_type, FlaskForm)(request.form),

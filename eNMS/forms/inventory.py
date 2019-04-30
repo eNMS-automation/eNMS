@@ -150,14 +150,10 @@ class PoolObjectsForm(FlaskForm, metaclass=metaform):
     links = MultipleObjectField("Link")
 
 
-class ImportForm(FlaskForm, metaclass=metaform):
-    form_type = HiddenField(default="import")
+class ExcelImportForm(FlaskForm, metaclass=metaform):
+    template = "topology_import"
+    form_type = HiddenField(default="excel")
     replace = BooleanField()
-
-
-class ExportForm(FlaskForm, metaclass=metaform):
-    form_type = HiddenField(default="export")
-    export_filename = StringField()
 
 
 class OpenNmsForm(FlaskForm, metaclass=metaform):
@@ -184,6 +180,12 @@ class LibreNmsForm(FlaskForm, metaclass=metaform):
     node_type = [subtype for subtype in device_subtypes.items()]
     librenms_type = SelectField(choices=node_type)
     librenms_token = PasswordField()
+
+
+class ExportForm(FlaskForm, metaclass=metaform):
+    action = "exportTopology"
+    form_type = HiddenField(default="export")
+    export_filename = StringField()
 
 
 class GoogleEarthForm(FlaskForm, metaclass=metaform):

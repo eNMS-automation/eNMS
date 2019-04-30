@@ -26,7 +26,7 @@ function showParameters(type) {
  */
 // eslint-disable-next-line
 function showDatabasePanel(type) {
-  createPanel(type, type, parametersPanelSize[type]);
+  createPanel(type, type, panelSize[type]);
 }
 
 /**
@@ -56,7 +56,7 @@ function getClusterStatus() {
 // eslint-disable-next-line
 function migrationsExport() {
   alertify.notify("Export initiated.", "success", 5);
-  fCall("/migration_export", "#import-export-form", function() {
+  fCall("/migration_export", "#migration-form", function() {
     alertify.notify("Export successful.", "success", 5);
   });
 }
@@ -76,10 +76,11 @@ function migrationsImport() {
  * Database Helpers.
  */
 // eslint-disable-next-line
-function databaseHelpers() {
+function databaseDeletion() {
   alertify.notify("Starting to delete...", "success", 5);
-  fCall("/database_helpers", "#database-helpers-form", function(result) {
+  fCall("/database_helpers", "#deletion-form", function(result) {
     alertify.notify("Deletion done.", "success", 5);
+    $("#deletion-form").remove();
   });
 }
 

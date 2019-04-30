@@ -9,6 +9,11 @@ table: false
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
+const panelSize = {
+  "migration": "700 300",
+  "deletion": "700 300",
+}
+
 const typePanelSize = {
   "device": "700 600",
   "instance": "600 250",

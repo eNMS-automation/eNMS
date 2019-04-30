@@ -67,17 +67,15 @@ class NotificationsParametersForm(FlaskForm, ParametersForm, metaclass=metaform)
     slack_channel = StringField()
 
 
-class DatabaseHelpersForm(FlaskForm, metaclass=metaform):
-    action = "databaseHelpers"
-    form_type = HiddenField(default="database_helpers")
-    list_fields = HiddenField(default="deletion_types")
+class DatabaseDeletionForm(FlaskForm, metaclass=metaform):
+    action = "databaseDeletion"
+    form_type = HiddenField(default="deletion")
     clear_logs_date = DateField()
     deletion_choices = [(p, p) for p in import_properties]
     deletion_types = SelectMultipleField(choices=deletion_choices)
 
 
 class InstanceForm(FlaskForm, metaclass=metaform):
-    template = "base"
     form_type = HiddenField(default="instance")
     id = HiddenField()
     name = StringField()
@@ -94,6 +92,7 @@ class LoginForm(FlaskForm, metaclass=metaform):
 
 
 class MigrationsForm(FlaskForm, metaclass=metaform):
+    template = "migration"
     form_type = HiddenField(default="migration")
     empty_database_before_import = BooleanField()
     export_choices = [(p, p) for p in import_properties]
@@ -101,7 +100,6 @@ class MigrationsForm(FlaskForm, metaclass=metaform):
 
 
 class UserForm(FlaskForm, metaclass=metaform):
-    template = "base"
     form_type = HiddenField(default="user")
     id = HiddenField()
     name = StringField()
@@ -113,14 +111,12 @@ class UserForm(FlaskForm, metaclass=metaform):
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):
-    action = "filter"
     form_type = HiddenField(default="user_filtering")
     name = StringField()
     email = StringField()
 
 
 class LogFilteringForm(FlaskForm):
-    action = "filter"
     form_type = HiddenField(default="log_filtering")
     source_ip_address = StringField()
     content = StringField()

@@ -14,7 +14,7 @@ from typing import Union
 from yaml import dump, load, BaseLoader
 
 from eNMS.default import create_default
-from eNMS.forms.administration import DatabaseHelpersForm, LoginForm, MigrationsForm
+from eNMS.forms.administration import LoginForm
 from eNMS.database import delete_all, export, factory, fetch, fetch_all, get_one
 from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
 
@@ -110,7 +110,7 @@ class AdministrationDispatcher:
         logout_user()
         return redirect(url_for("bp.get_route", page="login"))
 
-    def migrate_export(self) -> None:
+    def migration_export(self) -> None:
         for cls_name in request.form["import_export_types"]:
             path = current_app.path / "migrations" / request.form["name"]
             if not exists(path):
@@ -118,7 +118,7 @@ class AdministrationDispatcher:
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
-    def migrate_import(self) -> str:
+    def migration_import(self) -> str:
         status, types = "Import successful.", request.form["import_export_types"]
         workflows: list = []
         edges: list = []

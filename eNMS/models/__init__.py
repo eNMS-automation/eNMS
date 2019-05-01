@@ -13,21 +13,26 @@ property_types: Dict[str, str] = {}
 
 def register_class(*args, **kwargs):
     cls = type(*args, **kwargs)
+    is_service = classes.get("Service") and issubclass(cls, classes["Service"])
     for col in cls.__table__.columns:
-        cls_to_properties[cls.type].append(col.key)
-        if issubclass(cls, classes["Service"]):
+        cls_to_properties[cls.__tablename__].append(col.key)
+        if is_service:
             service_import_properties.append(col.key)
         if col.type == PickleType and col.default.arg == []:
             property_types[col.key] = "list"
         else:
-            property_types[col.key] = {
+            column_type = {
                 Boolean: "bool",
                 Integer: "int",
                 Float: "float",
                 PickleType: "dict",
-            }.get(type(col.type), "str")
+            }.get(type(col.type))
+            if column_type:
+                property_types[col.key] = column_type
+    if hasattr(cls, "parent_cls"):
+        cls_to_properties[cls.__tablename__].extend(cls_to_properties[cls.parent_cls])
     model = {cls.__tablename__: cls, cls.__tablename__.lower(): cls}
-    if classes.get("Service") and issubclass(cls, classes["Service"]):
+    if is_service:
         service_classes.update(model)
     classes.update(model)
     return cls

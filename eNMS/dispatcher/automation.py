@@ -11,13 +11,8 @@ from eNMS.controller import controller
 from eNMS.modules import scheduler
 from eNMS.forms.automation import CompareResultsForm, WorkflowBuilderForm
 from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
-from eNMS.models import service_classes
-from eNMS.properties import (
-    cls_to_properties,
-    pretty_names,
-    private_properties,
-    property_types,
-)
+from eNMS.models import cls_to_properties, property_types, service_classes
+from eNMS.properties import pretty_names, private_properties
 
 
 class AutomationDispatcher:

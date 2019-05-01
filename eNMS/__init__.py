@@ -29,18 +29,15 @@ from eNMS.modules import (
     USE_VAULT,
     vault_client,
 )
-from eNMS.models import classes, service_classes
+from eNMS.models import classes, cls_to_properties, property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
 from eNMS.properties import (
-    boolean_properties,
-    cls_to_properties,
     device_subtypes,
     google_earth_styles,
     link_subtypes,
     link_subtype_to_color,
     pretty_names,
-    property_types,
     service_import_properties,
 )
 from eNMS.rest import configure_rest_api

@@ -56,14 +56,13 @@ class Base(db.Model):
             elif property_type == "dict" and type(value) == str:
                 value = loads(value) if value else {}
             elif property_type in ["float", "int"]:
-                default_value = getattr(self.__table__.c, property).default
-                if default_value and not value:
-                    value = default_value.arg
-                value = {"float": float, "int": int}[property_type](value or 0)
+                if value:
+                    value = {"float": float, "int": int}[property_type](value)
             setattr(self, property, value)
 
     def get_properties(self) -> dict:
         result = {}
+        print(cls_to_properties)
         for property in cls_to_properties[self.type]:
             if property in private_properties:
                 continue

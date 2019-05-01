@@ -315,6 +315,7 @@ class Service(Job, metaclass=register_class):
     __tablename__ = "Service"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     __mapper_args__ = {"polymorphic_identity": "Service"}
+    parent_cls = "Job"
 
     def generate_row(self, table: str) -> List[str]:
         return [
@@ -434,6 +435,7 @@ class Workflow(Job, metaclass=register_class):
 
     __tablename__ = "Workflow"
     __mapper_args__ = {"polymorphic_identity": "Workflow"}
+    parent_cls = "Job"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
     last_modified = Column(String(255))

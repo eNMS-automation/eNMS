@@ -10,46 +10,46 @@ table: false
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
-  "cluster": "700 200",
-  "database_deletion": "700 300",
-  "excel_export": "400 200",
-  "git": "700 200",
-  "google_earth_export": "700 200",
-  "librenms": "700 250",
-  "database_migration": "700 300",
-  "notifications": "900 400",
-  "netbox": "700 250",
-  "opennms": "700 300",
-  "device_filtering": "700 700",
-  "server_filtering": "700 300",
-  "ssh": "700 200",
-  "log_filtering": "700 200",
-  "service_filtering": "900 500",
-  "user_filtering": "700 200",
-  "view": "700 300",
-  "workflow_filtering": "900 500",
+  cluster: "700 200",
+  database_deletion: "700 300",
+  excel_export: "400 200",
+  git: "700 200",
+  google_earth_export: "700 200",
+  librenms: "700 250",
+  database_migration: "700 300",
+  notifications: "900 400",
+  netbox: "700 250",
+  opennms: "700 300",
+  device_filtering: "700 700",
+  server_filtering: "700 300",
+  ssh: "700 200",
+  log_filtering: "700 200",
+  service_filtering: "900 500",
+  user_filtering: "700 200",
+  view: "700 300",
+  workflow_filtering: "900 500",
 }
 
 const panelName = {
-  "database_deletion": "Database Deletion",
-  "database_migration": "Database Migration",
-  "device_filtering": "Device Filtering",
-  "server_filtering": "Server Filtering",
-  "log_filtering": "Log Filtering",
-  "service_filtering": "Service Filtering",
-  "user_filtering": "User Filtering",
-  "workflow_filtering": "Workflow Filtering",
+  database_deletion: "Database Deletion",
+  database_migration: "Database Migration",
+  device_filtering: "Device Filtering",
+  server_filtering: "Server Filtering",
+  log_filtering: "Log Filtering",
+  service_filtering: "Service Filtering",
+  user_filtering: "User Filtering",
+  workflow_filtering: "Workflow Filtering",
 }
 
 const typePanelSize = {
-  "device": "700 600",
-  "server": "600 250",
-  "link": "700 400",
-  "pool": "800 600",
-  "service": "1000 600",
-  "task": "900 500",
-  "user": "600 300",
-  "workflow": "1000 600",
+  device: "700 600",
+  server: "600 250",
+  link: "700 400",
+  pool: "800 600",
+  service: "1000 600",
+  task: "900 500",
+  user: "600 300",
+  workflow: "1000 600",
 }
 
 let topZ = 1000;
@@ -333,27 +333,22 @@ function showTypePanel(type, id, duplicate) {
  * Update property.
  */
 function updateProperty(el, property, value) {
+  
   const propertyType = propertyTypes[property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
-    console.log("test", property, value);
     el.prop("checked", value);
   } else if (propertyType.includes("dict")) {
     el.val(value ? JSON.stringify(value) : "{}");
-  } else if (propertyType.includes("list") || propertyType.includes("obj")) {
-    console.log(property, value);
+  } else if (["list", "multiselect", "object", "object-list"].includes(propertyType)) {
     el.selectpicker("deselectAll");
     el.selectpicker(
       "val",
       propertyType === "object"
         ? value.id
-        : propertyType === "list"
-        ? value
-        : value.map((p) => p.id)
+        : propertyType === "object-list"
+        ? value.map((p) => p.id)
+        : value
     );
-    el.selectpicker("render");
-  } else if (propertyType == "object") {
-    el.selectpicker("deselectAll");
-    el.selectpicker("val", value.id);
     el.selectpicker("render");
   } else {
     el.val(value);

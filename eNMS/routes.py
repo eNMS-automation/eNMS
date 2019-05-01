@@ -15,6 +15,7 @@ def site_root() -> Response:
 
 @bp.route("/<page>")
 def get_route(page: str) -> Response:
+    print(request.method, request.form)
     if not current_user.is_authenticated and page != "login":
         return current_app.login_manager.unauthorized()
     func, *args = page.split("-")
@@ -32,14 +33,23 @@ def get_route(page: str) -> Response:
 
 
 @bp.route("/<page>", methods=["POST"])
-@login_required
 def post_route(page: str) -> Response:
-    request.form = form_postprocessing(request.form)
+    if current_user.is_authenticated:
+        info(
+            f"User '{current_user.name}' ({request.remote_addr})"
+            f" calling the endpoint {request.url} (POST)"
+        )
+        request.form = form_postprocessing(request.form)
+    else:
+        if page == "login":
+            return dispatcher.login()
+        else:
+            info(
+                f"Unauthenticated POST request ({request.remote_addr})"
+                f"calling the endpoint {request.url}"
+            )
+
     func, *args = page.split("-")
-    info(
-        f"User '{current_user.name}' ({request.remote_addr})"
-        f" calling the endpoint {request.url} (POST)"
-    )
     # try:
     result = getattr(dispatcher, func)(*args)
     db.session.commit()

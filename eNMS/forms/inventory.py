@@ -192,7 +192,7 @@ class ExportForm(FlaskForm, metaclass=metaform):
 
 
 class GoogleEarthForm(FlaskForm, metaclass=metaform):
-    form_type = HiddenField(default="google_earth")
+    form_type = HiddenField(default="google_earth_export")
     name = StringField()
     label_size = IntegerField(default=1)
     line_width = IntegerField(default=2)

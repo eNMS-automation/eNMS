@@ -15,7 +15,6 @@ from eNMS.dispatcher.inventory import InventoryDispatcher
 from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
-    default_diagrams_properties,
     filtering_properties,
     table_fixed_columns,
     table_properties,
@@ -46,7 +45,6 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         }
         return dict(
             properties=type_to_diagram_properties,
-            default_properties=default_diagrams_properties,
             counters={
                 **{cls: len(fetch_all_visible(cls)) for cls in classes},
                 **on_going,

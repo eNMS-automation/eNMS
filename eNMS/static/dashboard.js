@@ -7,6 +7,15 @@ doc: false
 echarts: false
 */
 
+const defaultProperties = {
+  Device: "model",
+  Link: "model",
+  User: "name",
+  Service: "type",
+  Workflow: "vendor",
+  Task: "type",
+}
+
 const theme = {
   color: [
     "#26B99A",

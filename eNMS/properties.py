@@ -221,8 +221,7 @@ log_rule_public_properties: List[str] = log_public_properties + [
 
 log_rule_table_properties: List[str] = ["name"] + log_public_properties
 
-task_serialized_properties: List[str] = [
-    "id",
+task_table_properties: List[str] = [
     "name",
     "description",
     "job_name",
@@ -235,11 +234,7 @@ task_serialized_properties: List[str] = [
     "crontab_expression",
     "next_run_time",
     "time_before_next_run",
-    "is_active",
-    "job",
 ]
-
-task_table_properties: List[str] = task_serialized_properties[1:-2]
 
 table_properties: Dict[str, List[str]] = {
     "configuration": device_configuration_properties,
@@ -295,15 +290,6 @@ table_fixed_columns: Dict[str, List[str]] = {
     "user": ["Edit", "Duplicate", "Delete"],
     "pool": ["Visualize", "Edit", "Update", "Duplicate", "Edit objects", "Delete"],
     "workflow": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
-}
-
-default_diagrams_properties: Dict[str, str] = {
-    "Device": "model",
-    "Link": "model",
-    "User": "name",
-    "Service": "type",
-    "Workflow": "vendor",
-    "Task": "type",
 }
 
 object_diagram_properties: List[str] = ["model", "vendor", "subtype", "location"]

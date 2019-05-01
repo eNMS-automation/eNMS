@@ -1,6 +1,6 @@
 from flask import current_app, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
-from logging import info
+from logging import info, warning
 from werkzeug.wrappers.response import Response
 
 from eNMS.dispatcher import dispatcher
@@ -15,8 +15,11 @@ def site_root() -> Response:
 
 @bp.route("/<page>")
 def get_route(page: str) -> Response:
-    print(request.method, request.form)
     if not current_user.is_authenticated and page != "login":
+        warning(
+            f"Unauthenticated GET request from {request.remote_addr} "
+            f" calling the endpoint {request.url}"
+        )
         return current_app.login_manager.unauthorized()
     func, *args = page.split("-")
     ctx = getattr(dispatcher, func)(*args) or {}
@@ -24,7 +27,7 @@ def get_route(page: str) -> Response:
         return ctx
     ctx["endpoint"] = page
     info(
-        f"User '{current_user.name}' ({request.remote_addr})"
+        f"User '{current_user.name}' from {request.remote_addr} "
         f"calling the endpoint {page} (GET)"
     )
     if func == "filtering":
@@ -36,19 +39,19 @@ def get_route(page: str) -> Response:
 def post_route(page: str) -> Response:
     if current_user.is_authenticated:
         info(
-            f"User '{current_user.name}' ({request.remote_addr})"
-            f" calling the endpoint {request.url} (POST)"
+            f"User '{current_user.name}' {request.remote_addr} "
+            f"calling the endpoint {request.url} (POST)"
         )
         request.form = form_postprocessing(request.form)
     else:
         if page == "login":
             return dispatcher.login()
         else:
-            info(
+            warning(
                 f"Unauthenticated POST request ({request.remote_addr})"
                 f"calling the endpoint {request.url}"
             )
-
+            return False
     func, *args = page.split("-")
     # try:
     result = getattr(dispatcher, func)(*args)

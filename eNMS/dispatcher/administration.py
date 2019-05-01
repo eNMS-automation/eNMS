@@ -43,7 +43,6 @@ class AdministrationDispatcher:
 
     def login(self) -> Union[Response, str]:
         if request.method == "POST":
-            print(request.form)
             name, password = request.form["name"], request.form["password"]
             try:
                 if request.form["authentication_method"] == "Local User":

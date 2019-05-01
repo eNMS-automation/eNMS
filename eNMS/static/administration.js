@@ -12,10 +12,10 @@ parameters: false
  */
 // eslint-disable-next-line
 function showParameters(type) {
-  createPanel(type, `${type} Parameters`, parametersPanelSize[type], 0, () => {
+  createPanel(type, `${type} Parameters`, panelSize[type], 0, () => {
     call("/get-parameters-1", function(parameters) {
       for (const [property, value] of Object.entries(parameters)) {
-        console.log(property, value);
+        console.log(formProperties[type]);
         if ($(`#${property}`).length) {
           $(`#${property}`).val(value);
         }

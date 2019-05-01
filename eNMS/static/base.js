@@ -10,18 +10,23 @@ table: false
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
+  "cluster": "700 200",
   "database_deletion": "700 300",
   "excel_export": "400 200",
+  "git": "700 200",
   "google_earth_export": "700 300",
   "librenms": "700 250",
   "migration": "700 300",
+  "notifications": "900 400",
   "netbox": "700 250",
   "opennms": "700 300",
   "device_filtering": "700 700",
   "server_filtering": "700 300",
+  "ssh": "700 200",
   "log_filtering": "700 200",
   "service_filtering": "900 500",
   "user_filtering": "700 200",
+  "view": "700 300",
   "workflow_filtering": "900 500",
 }
 
@@ -42,10 +47,6 @@ const typePanelSize = {
   "service": "1000 600",
   "user": "600 300",
   "workflow": "1000 600",
-}
-
-const parametersPanelSize = {
-  "view": "700 300",
 }
 
 let topZ = 1000;
@@ -326,6 +327,35 @@ function showTypePanel(type, id, duplicate) {
 }
 
 /**
+ * Update property.
+ */
+function updateProperty(property, value) {
+  const propertyType = propertyTypes[property] || "str";
+  if (propertyType.includes("bool") || property.includes("regex")) {
+    el.prop("checked", value);
+  } else if (propertyType.includes("dict")) {
+    el.val(value ? JSON.stringify(value) : "{}");
+  } else if (propertyType.includes("list") || propertyType.includes("obj")) {
+    el.selectpicker("deselectAll");
+    el.selectpicker(
+      "val",
+      propertyType === "object"
+        ? value.id
+        : propertyType === "list"
+        ? value
+        : value.map((p) => p.id)
+    );
+    el.selectpicker("render");
+  } else if (propertyType == "object") {
+    el.selectpicker("deselectAll");
+    el.selectpicker("val", value.id);
+    el.selectpicker("render");
+  } else {
+    el.val(value);
+  }
+}
+
+/**
  * Display instance modal for editing.
  * @param {type} type - Type.
  * @param {instance} instance - Object instance.
@@ -335,29 +365,7 @@ function processInstance(type, instance) {
     el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
-    const propertyType = propertyTypes[property] || "str";
-    if (propertyType.includes("bool") || property.includes("regex")) {
-      el.prop("checked", value);
-    } else if (propertyType.includes("dict")) {
-      el.val(value ? JSON.stringify(value) : "{}");
-    } else if (propertyType.includes("list") || propertyType.includes("obj")) {
-      el.selectpicker("deselectAll");
-      el.selectpicker(
-        "val",
-        propertyType === "object"
-          ? value.id
-          : propertyType === "list"
-          ? value
-          : value.map((p) => p.id)
-      );
-      el.selectpicker("render");
-    } else if (propertyType == "object") {
-      el.selectpicker("deselectAll");
-      el.selectpicker("val", value.id);
-      el.selectpicker("render");
-    } else {
-      el.val(value);
-    }
+    updateProperty(property, value);
   }
 }
 

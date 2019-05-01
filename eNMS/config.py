@@ -68,7 +68,7 @@ class Config(object):
 
     # Cluster
     # In production, for scalability and high-availability purposes, it is
-    # recommended to deploy not one, but multiple instances of eNMS.
+    # recommended to deploy not one, but multiple servers of eNMS.
     CLUSTER = int(environ.get("CLUSTER", False))
     CLUSTER_ID = int(environ.get("CLUSTER_ID", True))
     CLUSTER_SCAN_SUBNET = environ.get("CLUSTER_SCAN_SUBNET", "192.168.105.0/24")

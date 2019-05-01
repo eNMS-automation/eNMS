@@ -17,9 +17,9 @@ from eNMS.database import fetch, fetch_all
 from eNMS.modules import db
 
 
-class Instance(Base, metaclass=register_class):
+class Server(Base, metaclass=register_class):
 
-    __tablename__ = type = "Instance"
+    __tablename__ = type = "Server"
     id = Column(Integer, primary_key=True)
     name = Column(String(255), unique=True)
     description = Column(String(255))
@@ -31,12 +31,12 @@ class Instance(Base, metaclass=register_class):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('instance', '{self.id}')">Edit</button>""",
+            onclick="showTypePanel('server', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('instance', '{self.id}', true)">
+            onclick="showTypePanel('server', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('instance', '{self.id}', '{self.name}')">
+            onclick="showDeletionPanel('server', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
 

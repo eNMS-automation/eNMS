@@ -27,7 +27,7 @@ const panelSize = {
 
 const panelName = {
   "device_filtering": "Device Filtering",
-  "server_filtering": "Instance Filtering",
+  "server_filtering": "Server Filtering",
   "log_filtering": "Log Filtering",
   "service_filtering": "Service Filtering",
   "user_filtering": "User Filtering",

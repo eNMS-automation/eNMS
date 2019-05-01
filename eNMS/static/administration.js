@@ -209,7 +209,7 @@ function scheduler(action) {
 }
 
 /**
- * Scan Cluster subnet for new Instances.
+ * Scan Cluster subnet for new Servers.
  */
 // eslint-disable-next-line
 function scanCluster() {

@@ -37,7 +37,7 @@ class AdministrationDispatcher:
 
     def get_cluster_status(self) -> dict:
         return {
-            attr: [getattr(server, attr) for server in fetch_all("Instance")]
+            attr: [getattr(server, attr) for server in fetch_all("Server")]
             for attr in ("status", "cpu_load")
         }
 
@@ -186,6 +186,6 @@ class AdministrationDispatcher:
                 ).json()
                 if current_app.config["CLUSTER_ID"] != server.pop("cluster_id"):
                     continue
-                factory("Instance", **{**server, **{"ip_address": str(ip_address)}})
+                factory("Server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
                 continue

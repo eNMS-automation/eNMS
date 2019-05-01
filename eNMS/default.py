@@ -7,9 +7,9 @@ from eNMS.database import factory, integrity_rollback, fetch, get_one
 from eNMS.properties import parameters_public_properties
 
 
-def configure_instance_id() -> None:
+def configure_server_id() -> None:
     factory(
-        "Instance",
+        "Server",
         **{
             "name": str(getnode()),
             "description": "Localhost",
@@ -181,7 +181,7 @@ def create_default_tasks(app: Flask) -> None:
 
 
 def create_default(app: Flask) -> None:
-    configure_instance_id()
+    configure_server_id()
     create_default_parameters(app)
     parameters = get_one("Parameters")
     create_default_users()

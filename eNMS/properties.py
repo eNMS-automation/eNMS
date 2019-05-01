@@ -245,14 +245,14 @@ user_public_properties: List[str] = ["id", "name", "email", "permissions"]
 
 user_table_properties: List[str] = user_public_properties[1:-1]
 
-instance_public_properties: List[str] = base_properties + [
+server_public_properties: List[str] = base_properties + [
     "ip_address",
     "weight",
     "status",
     "cpu_load",
 ]
 
-instance_table_properties = instance_public_properties[1:]
+server_table_properties = server_public_properties[1:]
 
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
@@ -313,7 +313,7 @@ task_serialized_properties: List[str] = [
 task_table_properties: List[str] = task_serialized_properties[1:-2]
 
 cls_to_properties: Dict[str, List[str]] = {
-    "Instance": instance_public_properties,
+    "Server": server_public_properties,
     "Device": device_public_properties,
     "Link": link_properties,
     "Pool": pool_public_properties,
@@ -330,7 +330,7 @@ cls_to_properties: Dict[str, List[str]] = {
 table_properties: Dict[str, List[str]] = {
     "configuration": device_configuration_properties,
     "device": device_table_properties,
-    "instance": instance_table_properties,
+    "server": server_table_properties,
     "link": link_table_properties,
     "log": log_public_properties,
     "logrule": log_rule_table_properties,
@@ -358,7 +358,7 @@ job_filtering_properties = {
 filtering_properties: Dict[str, List[str]] = {
     "configuration": device_configuration_properties + ["current_configuration"],
     "device": device_table_properties + ["current_configuration"],
-    "instance": instance_table_properties,
+    "server": server_table_properties,
     "link": link_table_properties,
     "log": log_public_properties,
     "logrule": log_rule_table_properties,
@@ -372,7 +372,7 @@ filtering_properties: Dict[str, List[str]] = {
 table_fixed_columns: Dict[str, List[str]] = {
     "configuration": ["Configuration", "Download", "Edit"],
     "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],
-    "instance": ["Edit", "Duplicate", "Delete"],
+    "server": ["Edit", "Duplicate", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
     "log": ["Delete"],
     "logrule": ["Edit", "Delete"],

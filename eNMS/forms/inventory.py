@@ -145,6 +145,15 @@ class PoolForm(FlaskForm, metaclass=metaform):
     never_update = BooleanField("Never update (for manually selected pools)")
 
 
+class PoolFilteringForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="pool_filtering")
+    name = StringField()
+    description = StringField()
+    longitude = StringField()
+    latitude = StringField()
+    operator = StringField()
+
+
 class PoolObjectsForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="pool_objects")
     devices = MultipleObjectField("Device")

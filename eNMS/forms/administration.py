@@ -13,7 +13,7 @@ from wtforms import (
 
 from eNMS.forms import metaform
 from eNMS.forms.fields import MultipleObjectField
-from eNMS.properties import import_properties, user_permissions
+from eNMS.properties import import_classes, user_permissions
 
 
 class ParametersForm:
@@ -71,7 +71,7 @@ class DatabaseDeletionForm(FlaskForm, metaclass=metaform):
     action = "databaseDeletion"
     form_type = HiddenField(default="database_deletion")
     clear_logs_date = DateField()
-    deletion_choices = [(p, p) for p in import_properties]
+    deletion_choices = [(p, p) for p in import_classes]
     deletion_types = SelectMultipleField(choices=deletion_choices)
 
 
@@ -110,7 +110,7 @@ class DatabaseMigrationsForm(FlaskForm, metaclass=metaform):
     template = "database_migration"
     form_type = HiddenField(default="database_migration")
     empty_database_before_import = BooleanField()
-    export_choices = [(p, p) for p in import_properties]
+    export_choices = [(p, p) for p in import_classes]
     import_export_types = SelectMultipleField(choices=export_choices)
 
 

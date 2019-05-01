@@ -550,56 +550,20 @@ relationships: Dict[str, Dict[str, str]] = {
         "pool": "Pool",
     },
     "WorkflowEdge": {"source": "Job", "destination": "Job", "workflow": "Workflow"},
-    "Parameters": {"pool": "Pool"},
     "LogRule": {"job": "Job", "log": "Log"},
 }
 
-device_import_properties: List[str] = device_public_properties + ["id"]
 
-link_import_properties: List[str] = link_properties + ["id"]
-
-pool_import_properties: List[str] = pool_public_properties + ["devices"]
-
-service_import_properties: List[str] = service_public_properties + [
-    "id",
-    "type",
-    "devices",
-    "pools",
+import_classes = [
+    "User",
+    "Device",
+    "Link",
+    "Pool",
+    "Service",
+    "Workflow",
+    "WorkflowEdge",
+    "Task",
 ]
-
-task_import_properties: List[str] = base_properties + [
-    "start_date",
-    "end_date",
-    "frequency",
-    "status",
-    "job",
-]
-
-workflow_import_properties: List[str] = workflow_public_properties + [
-    "id",
-    "jobs",
-    "edges",
-]
-
-workflow_edge_import_properties: List[str] = [
-    "id",
-    "name",
-    "subtype",
-    "source_id",
-    "destination_id",
-    "workflow",
-]
-
-import_properties: Dict[str, List[str]] = {
-    "User": user_public_properties,
-    "Device": device_import_properties,
-    "Link": link_import_properties,
-    "Pool": pool_import_properties,
-    "Service": service_import_properties,
-    "Workflow": workflow_import_properties,
-    "WorkflowEdge": workflow_edge_import_properties,
-    "Task": task_import_properties,
-}
 
 # Export topology properties
 

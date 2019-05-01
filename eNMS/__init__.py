@@ -38,7 +38,6 @@ from eNMS.properties import (
     link_subtypes,
     link_subtype_to_color,
     pretty_names,
-    service_import_properties,
 )
 from eNMS.rest import configure_rest_api
 

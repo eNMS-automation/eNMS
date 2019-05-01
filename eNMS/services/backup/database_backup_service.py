@@ -10,7 +10,7 @@ from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
-from eNMS.properties import import_properties
+from eNMS.properties import import_classes
 
 
 class DatabaseBackupService(Service, metaclass=register_class):
@@ -32,8 +32,7 @@ class DatabaseBackupService(Service, metaclass=register_class):
         now = controller.strip_all(str(datetime.now()))
         source = Path.cwd() / "migrations" / f"backup_{now}.tgz"
         controller.migrate_export(
-            Path.cwd(),
-            {"import_export_types": list(import_properties), "name": f"backup_{now}"},
+            Path.cwd(), {"import_export_types": import_classes, "name": f"backup_{now}"}
         )
         with open_tar(source, "w:gz") as tar:
             tar.add(Path.cwd() / "migrations" / f"backup_{now}", arcname="/")

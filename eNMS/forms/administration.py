@@ -76,6 +76,7 @@ class DatabaseDeletionForm(FlaskForm, metaclass=metaform):
 
 
 class InstanceForm(FlaskForm, metaclass=metaform):
+    template = "object"
     form_type = HiddenField(default="instance")
     id = HiddenField()
     name = StringField()
@@ -109,6 +110,7 @@ class MigrationsForm(FlaskForm, metaclass=metaform):
 
 
 class UserForm(FlaskForm, metaclass=metaform):
+    template = "object"
     form_type = HiddenField(default="user")
     id = HiddenField()
     name = StringField()

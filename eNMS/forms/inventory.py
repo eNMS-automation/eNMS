@@ -146,6 +146,7 @@ class PoolForm(FlaskForm, metaclass=metaform):
 
 
 class PoolFilteringForm(FlaskForm, metaclass=metaform):
+    action = filter
     form_type = HiddenField(default="pool_filtering")
     name = StringField()
     description = StringField()

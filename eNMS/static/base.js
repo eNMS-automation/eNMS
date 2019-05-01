@@ -329,13 +329,14 @@ function showTypePanel(type, id, duplicate) {
 /**
  * Update property.
  */
-function updateProperty(property, value) {
+function updateProperty(el, property, value) {
   const propertyType = propertyTypes[property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict")) {
     el.val(value ? JSON.stringify(value) : "{}");
   } else if (propertyType.includes("list") || propertyType.includes("obj")) {
+    console.log(property, value);
     el.selectpicker("deselectAll");
     el.selectpicker(
       "val",
@@ -365,7 +366,7 @@ function processInstance(type, instance) {
     el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
-    updateProperty(property, value);
+    updateProperty(el, property, value);
   }
 }
 

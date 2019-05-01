@@ -3,6 +3,7 @@ from flask_login import current_user
 from wtforms.fields.core import UnboundField
 
 from eNMS.forms.fields import field_types
+from eNMS.properties import property_types
 
 form_actions = {}
 form_classes = {}
@@ -17,13 +18,14 @@ def metaform(*args, **kwargs):
     form_templates[types] = getattr(cls, "template", "base")
     form_actions[types] = getattr(cls, "action", None)
     for form_type in types.split(","):
-        form_properties[form_type].update(
-            {
-                field_name: field_types[field.field_class]
-                for field_name, field in args[-1].items()
-                if isinstance(field, UnboundField) and field.field_class in field_types
-            }
-        )
+        properties = {
+            field_name: field_types[field.field_class]
+            for field_name, field in args[-1].items()
+            if isinstance(field, UnboundField) and field.field_class in field_types
+        }
+        form_properties[form_type].update(properties)
+        property_types.update(properties)
+    print(property_types)
     return cls
 
 

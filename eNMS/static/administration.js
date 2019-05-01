@@ -15,10 +15,7 @@ function showParameters(type) {
   createPanel(type, `${type} Parameters`, panelSize[type], 0, () => {
     call("/get-parameters-1", function(parameters) {
       for (const [property, value] of Object.entries(parameters)) {
-        console.log(formProperties[type]);
-        if ($(`#${property}`).length) {
-          $(`#${property}`).val(value);
-        }
+        updateProperty($(`#${property}`), property, value);
       }
     });
   });

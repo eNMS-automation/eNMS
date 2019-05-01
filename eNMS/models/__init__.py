@@ -26,8 +26,8 @@ def register_class(*args, **kwargs):
                 Integer: "int",
                 Float: "float",
                 PickleType: "dict",
-            }.get(type(col.type))
-            if column_type:
+            }.get(type(col.type), "str")
+            if col.key not in property_types:
                 property_types[col.key] = column_type
     if hasattr(cls, "parent_cls"):
         cls_to_properties[cls.__tablename__].extend(cls_to_properties[cls.parent_cls])

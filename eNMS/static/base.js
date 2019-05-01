@@ -17,6 +17,11 @@ const panelSize = {
   "migration": "700 300",
   "netbox": "700 250",
   "opennms": "700 300",
+  "device filtering": "700 700",
+  "log filtering": "700 200",
+  "service filtering": "900 500",
+  "user filtering": "700 200",
+  "workflow filtering": "900 500",
 }
 
 const typePanelSize = {
@@ -30,11 +35,7 @@ const typePanelSize = {
 }
 
 const filteringPanelSize = {
-  "device": "700 700",
-  "log": "700 200",
-  "service": "900 500",
-  "user": "700 200",
-  "workflow": "900 500",
+
 }
 
 const parametersPanelSize = {
@@ -219,11 +220,11 @@ function showPoolObjectsPanel(id) {
 }
 
 /**
- * Show Filtering Panel
+ * Generic Show Panel
  */
 // eslint-disable-next-line
-function showFilteringPanel(type) {
-  createPanel(`${type}_filtering`, "Filter", filteringPanelSize[type]);
+function showPanel(type) {
+  createPanel(type, type, panelSize[type]);
 }
 
 /**

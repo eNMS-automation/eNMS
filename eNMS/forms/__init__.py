@@ -13,7 +13,6 @@ form_templates = {}
 def metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
     types = cls.form_type.kwargs["default"]
-    print(types)
     form_classes[types] = cls
     form_templates[types] = getattr(cls, "template", "base")
     form_actions[types] = getattr(cls, "action", None)
@@ -25,7 +24,6 @@ def metaform(*args, **kwargs):
                 if isinstance(field, UnboundField) and field.field_class in field_types
             }
         )
-    # print(form_properties)
     return cls
 
 

@@ -111,12 +111,12 @@ class UserForm(FlaskForm, metaclass=metaform):
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):
-    form_type = HiddenField(default="user_filtering")
+    form_type = HiddenField(default="user filtering")
     name = StringField()
     email = StringField()
 
 
-class LogFilteringForm(FlaskForm):
-    form_type = HiddenField(default="log_filtering")
+class LogFilteringForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="log filtering")
     source_ip_address = StringField()
     content = StringField()

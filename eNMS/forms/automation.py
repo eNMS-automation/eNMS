@@ -61,7 +61,7 @@ class WorkflowForm(JobForm, metaclass=metaform):
 
 class JobFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
-    form_type = HiddenField(default="job_filtering")
+    form_type = HiddenField(default="job filtering")
     name = StringField()
     type = StringField()
     description = StringField()

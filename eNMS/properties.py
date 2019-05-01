@@ -168,37 +168,6 @@ for obj_type, properties in (
             [f"{obj_type}_{prop}", f"{obj_type}_{prop}_match"]
         )
 
-
-job_public_properties: List[str] = base_properties + [
-    "mail_recipient",
-    "max_processes",
-    "multiprocessing",
-    "vendor",
-    "operating_system",
-    "type",
-    "creator_name",
-    "credentials",
-    "is_running",
-    "status",
-    "state",
-    "results",
-    "logs",
-    "positions",
-    "push_to_git",
-    "waiting_time",
-    "number_of_retries",
-    "time_between_retries",
-    "send_notification",
-    "send_notification_method",
-    "display_only_failed_nodes",
-]
-
-service_public_properties: List[str] = job_public_properties
-workflow_public_properties: List[str] = job_public_properties + [
-    "last_modified",
-    "use_workflow_targets",
-]
-
 service_table_properties: List[str] = [
     "name",
     "type",

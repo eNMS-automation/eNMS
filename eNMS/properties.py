@@ -199,18 +199,14 @@ workflow_edge_properties: List[str] = [
     "destination_id",
 ]
 
-user_public_properties: List[str] = ["id", "name", "email", "permissions"]
+user_table_properties: List[str] = ["name", "email"]
 
-user_table_properties: List[str] = user_public_properties[1:-1]
-
-server_public_properties: List[str] = base_properties + [
+server_table_properties = base_properties[1:] + [
     "ip_address",
     "weight",
     "status",
     "cpu_load",
 ]
-
-server_table_properties = server_public_properties[1:]
 
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
@@ -224,31 +220,6 @@ log_rule_public_properties: List[str] = log_public_properties + [
 ]
 
 log_rule_table_properties: List[str] = ["name"] + log_public_properties
-
-parameters_public_properties: List[str] = [
-    "cluster_scan_subnet",
-    "cluster_scan_protocol",
-    "cluster_scan_timeout",
-    "default_longitude",
-    "default_latitude",
-    "default_zoom_level",
-    "default_view",
-    "default_marker",
-    "git_configurations",
-    "git_automation",
-    "gotty_start_port",
-    "gotty_end_port",
-    "mail_sender",
-    "mail_recipients",
-    "mattermost_url",
-    "mattermost_channel",
-    "mattermost_verify_certificate",
-    "opennms_rest_api",
-    "opennms_devices",
-    "opennms_login",
-    "slack_channel",
-    "slack_token",
-]
 
 task_serialized_properties: List[str] = [
     "id",

@@ -2,9 +2,8 @@ from flask import Flask
 from uuid import getnode
 
 from eNMS.modules import db
-from eNMS.models import classes
+from eNMS.models import classes, cls_to_properties
 from eNMS.database import factory, integrity_rollback, fetch, get_one
-from eNMS.properties import parameters_public_properties
 
 
 def configure_server_id() -> None:
@@ -57,7 +56,7 @@ def create_default_parameters(app: Flask) -> None:
     parameters.update(
         **{
             property: app.config[property.upper()]
-            for property in parameters_public_properties
+            for property in cls_to_properties["Parameters"]
             if property.upper() in app.config
         }
     )

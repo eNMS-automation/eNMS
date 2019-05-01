@@ -69,7 +69,7 @@ class NotificationsParametersForm(FlaskForm, ParametersForm, metaclass=metaform)
 
 class DatabaseDeletionForm(FlaskForm, metaclass=metaform):
     action = "databaseDeletion"
-    form_type = HiddenField(default="deletion")
+    form_type = HiddenField(default="database_deletion")
     clear_logs_date = DateField()
     deletion_choices = [(p, p) for p in import_properties]
     deletion_types = SelectMultipleField(choices=deletion_choices)

@@ -37,4 +37,5 @@ def form_postprocessing(form):
     return data
 
 
+import eNMS.forms.generic
 import eNMS.forms.inventory

@@ -10,7 +10,7 @@ table: false
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
-  "deletion": "700 300",
+  "database_deletion": "700 300",
   "excel_export": "400 200",
   "google_earth_export": "700 300",
   "librenms": "700 250",
@@ -159,8 +159,8 @@ function serializeForm(form) {
  */
 // eslint-disable-next-line
 function deleteInstance(type, id) {
-  call(`/delete-${type}-${id}`, function(result) {
-    $(`#deletion-${id}`).remove();
+  call(`/delete_instance-${type}-${id}`, function(result) {
+    $(`#instance_deletion-${id}`).remove();
     table
       .row($(`#${id}`))
       .remove()
@@ -237,7 +237,7 @@ function showPanel(type) {
  */
 // eslint-disable-next-line
 function showDeletionPanel(type, id, name) {
-  createPanel("deletion", `Delete ${name}`, "350, 120", id, () => {}, type);
+  createPanel("instance_deletion", `Delete ${name}`, "350, 120", id, () => {}, type);
 }
 
 /**

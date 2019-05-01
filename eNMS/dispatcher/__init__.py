@@ -53,7 +53,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
             },
         )
 
-    def delete(self, cls: str, instance_id: int) -> dict:
+    def delete_instance(self, cls: str, instance_id: int) -> dict:
         instance = delete(cls, id=instance_id)
         info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
         return instance

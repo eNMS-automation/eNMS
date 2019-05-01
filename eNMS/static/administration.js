@@ -22,14 +22,6 @@ function showParameters(type) {
 }
 
 /**
- * Show Database Panel
- */
-// eslint-disable-next-line
-function showDatabasePanel(type) {
-  createPanel(type, type, panelSize[type]);
-}
-
-/**
  * Show Admin Panel
  */
 // eslint-disable-next-line

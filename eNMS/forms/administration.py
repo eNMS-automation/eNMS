@@ -106,9 +106,9 @@ class LoginForm(FlaskForm, metaclass=metaform):
     password = PasswordField()
 
 
-class MigrationsForm(FlaskForm, metaclass=metaform):
-    template = "migration"
-    form_type = HiddenField(default="migration")
+class DatabaseMigrationsForm(FlaskForm, metaclass=metaform):
+    template = "database_migration"
+    form_type = HiddenField(default="database_migration")
     empty_database_before_import = BooleanField()
     export_choices = [(p, p) for p in import_properties]
     import_export_types = SelectMultipleField(choices=export_choices)

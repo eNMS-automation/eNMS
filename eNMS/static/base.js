@@ -14,9 +14,9 @@ const panelSize = {
   "database_deletion": "700 300",
   "excel_export": "400 200",
   "git": "700 200",
-  "google_earth_export": "700 300",
+  "google_earth_export": "700 200",
   "librenms": "700 250",
-  "migration": "700 300",
+  "database_migration": "700 300",
   "notifications": "900 400",
   "netbox": "700 250",
   "opennms": "700 300",
@@ -31,6 +31,8 @@ const panelSize = {
 }
 
 const panelName = {
+  "database_deletion": "Database Deletion",
+  "database_migration": "Database Migration",
   "device_filtering": "Device Filtering",
   "server_filtering": "Server Filtering",
   "log_filtering": "Log Filtering",

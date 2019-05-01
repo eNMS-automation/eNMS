@@ -75,6 +75,11 @@ class DatabaseDeletionForm(FlaskForm, metaclass=metaform):
     deletion_types = SelectMultipleField(choices=deletion_choices)
 
 
+class InstanceDeletionForm(FlaskForm, metaclass=metaform):
+    template = "instance_deletion"
+    form_type = HiddenField(default="instance_deletion")
+
+
 class InstanceForm(FlaskForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="instance")

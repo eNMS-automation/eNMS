@@ -84,6 +84,15 @@ class InstanceForm(FlaskForm, metaclass=metaform):
     weight = IntegerField()
 
 
+class InstanceFilteringForm(FlaskForm, metaclass=metaform):
+    action = "filter"
+    form_type = HiddenField(default="instance filtering")
+    name = StringField()
+    description = StringField()
+    ip_address = StringField("IP address")
+    weight = StringField()
+
+
 class LoginForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="login")
     authentication_method = SelectField(choices=())
@@ -111,12 +120,14 @@ class UserForm(FlaskForm, metaclass=metaform):
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):
+    action = "filter"
     form_type = HiddenField(default="user filtering")
     name = StringField()
     email = StringField()
 
 
 class LogFilteringForm(FlaskForm, metaclass=metaform):
+    action = "filter"
     form_type = HiddenField(default="log filtering")
     source_ip_address = StringField()
     content = StringField()

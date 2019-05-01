@@ -18,6 +18,7 @@ const panelSize = {
   "netbox": "700 250",
   "opennms": "700 300",
   "device filtering": "700 700",
+  "instance filtering": "700 300",
   "log filtering": "700 200",
   "service filtering": "900 500",
   "user filtering": "700 200",

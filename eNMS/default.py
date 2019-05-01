@@ -189,5 +189,5 @@ def create_default(app: Flask) -> None:
     create_default_services()
     create_default_workflows()
     create_default_tasks(app)
-    parameters.trigger_active_parameters(app)
+    parameters.get_git_content(app)
     db.session.commit()

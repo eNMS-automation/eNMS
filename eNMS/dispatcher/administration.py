@@ -170,10 +170,11 @@ class AdministrationDispatcher:
             create_default(current_app)
         return status
 
-    def save_parameters(self) -> bool:
+    def save_parameters(self, parameter_type) -> bool:
         parameters = get_one("Parameters")
         parameters.update(**request.form)
-        parameters.trigger_active_parameters(current_app)
+        if parameter_type == "git":
+            parameters.get_git_content(current_app)
 
     def scan_cluster(self) -> bool:
         parameters = get_one("Parameters")

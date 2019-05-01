@@ -13,11 +13,14 @@ parameters: false
 // eslint-disable-next-line
 function showParameters(type) {
   createPanel(type, `${type} Parameters`, parametersPanelSize[type], 0, () => {
-    for (const [property, value] of Object.entries(parameters)) {
-      if ($(`#${property}`).length) {
-        $(`#${property}`).val(value);
+    call("/get-parameters-1", function(parameters) {
+      for (const [property, value] of Object.entries(parameters)) {
+        console.log(property, value);
+        if ($(`#${property}`).length) {
+          $(`#${property}`).val(value);
+        }
       }
-    }
+    });
   });
 }
 
@@ -127,7 +130,7 @@ function importTopology() {
  */
 // eslint-disable-next-line
 function saveParameters(type) {
-  fCall("/save_parameters", `#${type}-form`, function() {
+  fCall(`/save_parameters-${type}`, `#${type}-form`, function() {
     alertify.notify("Parameters saved.", "success", 5);
   });
   $(`#${type}`).remove();
@@ -218,7 +221,6 @@ function scanCluster() {
     alertify.notify("Scan completed.", "success", 5);
   });
 }
-
 
 (function() {
   if (page == "advanced") {

@@ -119,9 +119,6 @@ class Parameters(Base, metaclass=register_class):
                 except Exception as e:
                     info(f"Cannot pull {repository_type} git repository ({str(e)})")
 
-    def trigger_active_parameters(self, app: Flask) -> None:
-        self.get_git_content(app)
-
     @property
     def gotty_range(self) -> int:
         return self.gotty_end_port - self.gotty_start_port

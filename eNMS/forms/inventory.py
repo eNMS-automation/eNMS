@@ -63,7 +63,7 @@ class ConnectionForm(FlaskForm, metaclass=metaform):
 
 class ObjectFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
-    form_type = HiddenField(default="device filtering,link filtering")
+    form_type = HiddenField(default="device_filtering,link_filtering")
     pools = MultipleObjectField("Pool")
 
 
@@ -78,7 +78,7 @@ class ObjectForm(FlaskForm):
 
 @configure_device_form
 class DeviceFilteringForm(ObjectFilteringForm, ObjectForm, metaclass=metaform):
-    form_type = HiddenField(default="device filtering")
+    form_type = HiddenField(default="device_filtering")
     current_configuration = StringField()
     subtype = StringField()
     ip_address = StringField()
@@ -120,7 +120,7 @@ class LinkForm(ObjectForm, metaclass=metaform):
 
 
 class LinkFilteringForm(ObjectForm, ObjectFilteringForm, metaclass=metaform):
-    form_type = HiddenField(default="link filtering")
+    form_type = HiddenField(default="link_filtering")
     subtype = StringField()
     source_name = StringField()
     destination_name = StringField()

@@ -86,7 +86,7 @@ class InstanceForm(FlaskForm, metaclass=metaform):
 
 class InstanceFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
-    form_type = HiddenField(default="instance filtering")
+    form_type = HiddenField(default="instance_filtering")
     name = StringField()
     description = StringField()
     ip_address = StringField("IP address")
@@ -121,13 +121,13 @@ class UserForm(FlaskForm, metaclass=metaform):
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
-    form_type = HiddenField(default="user filtering")
+    form_type = HiddenField(default="user_filtering")
     name = StringField()
     email = StringField()
 
 
 class LogFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
-    form_type = HiddenField(default="log filtering")
+    form_type = HiddenField(default="log_filtering")
     source_ip_address = StringField()
     content = StringField()

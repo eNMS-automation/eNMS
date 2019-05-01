@@ -17,12 +17,21 @@ const panelSize = {
   "migration": "700 300",
   "netbox": "700 250",
   "opennms": "700 300",
-  "device filtering": "700 700",
-  "instance filtering": "700 300",
-  "log filtering": "700 200",
-  "service filtering": "900 500",
-  "user filtering": "700 200",
-  "workflow filtering": "900 500",
+  "device_filtering": "700 700",
+  "instance_filtering": "700 300",
+  "log_filtering": "700 200",
+  "service_filtering": "900 500",
+  "user_filtering": "700 200",
+  "workflow_filtering": "900 500",
+}
+
+const panelName = {
+  "device_filtering": "Device Filtering",
+  "instance_filtering": "Instance Filtering",
+  "log_filtering": "Log Filtering",
+  "service_filtering": "Service Filtering",
+  "user_filtering": "User Filtering",
+  "workflow_filtering": "Workflow Filtering",
 }
 
 const typePanelSize = {
@@ -33,10 +42,6 @@ const typePanelSize = {
   "service": "1000 600",
   "user": "600 300",
   "workflow": "1000 600",
-}
-
-const filteringPanelSize = {
-
 }
 
 const parametersPanelSize = {
@@ -118,7 +123,6 @@ function call(url, callback) {
  * @param {callback} callback - Function to process results.
  */
 function fCall(url, form, callback) {
-  console.log($(form));
   if (
     $(form)
       .parsley()
@@ -225,7 +229,7 @@ function showPoolObjectsPanel(id) {
  */
 // eslint-disable-next-line
 function showPanel(type) {
-  createPanel(type, type, panelSize[type]);
+  createPanel(type, panelName[type] || type, panelSize[type]);
 }
 
 /**
@@ -589,7 +593,6 @@ function initSidebar() {
 })(jQuery, window);
 
 $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
-  console.log($(this));
   $(this)
     .next("ul")
     .toggle();

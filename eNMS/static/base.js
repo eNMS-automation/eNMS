@@ -335,6 +335,7 @@ function showTypePanel(type, id, duplicate) {
 function updateProperty(el, property, value) {
   const propertyType = propertyTypes[property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
+    console.log("test", property, value);
     el.prop("checked", value);
   } else if (propertyType.includes("dict")) {
     el.val(value ? JSON.stringify(value) : "{}");

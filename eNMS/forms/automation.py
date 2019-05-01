@@ -52,10 +52,12 @@ class JobForm(FlaskForm, metaclass=metaform):
 
 
 class ServiceForm(JobForm, metaclass=metaform):
+    template = "service"
     form_type = HiddenField(default="service")
 
 
 class WorkflowForm(JobForm, metaclass=metaform):
+    template = "workflow"
     form_type = HiddenField(default="workflow")
 
 

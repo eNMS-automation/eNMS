@@ -11,9 +11,9 @@ const defaultProperties = {
   Device: "model",
   Link: "model",
   User: "name",
-  Service: "type",
+  Service: "vendor",
   Workflow: "vendor",
-  Task: "type",
+  Task: "status",
 }
 
 const theme = {

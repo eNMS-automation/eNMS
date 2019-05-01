@@ -47,6 +47,7 @@ const typePanelSize = {
   "link": "700 400",
   "pool": "800 600",
   "service": "1000 600",
+  "task": "900 500",
   "user": "600 300",
   "workflow": "1000 600",
 }

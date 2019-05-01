@@ -80,9 +80,9 @@ class InstanceDeletionForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="instance_deletion")
 
 
-class InstanceForm(FlaskForm, metaclass=metaform):
+class ServerForm(FlaskForm, metaclass=metaform):
     template = "object"
-    form_type = HiddenField(default="instance")
+    form_type = HiddenField(default="server")
     id = HiddenField()
     name = StringField()
     description = StringField()
@@ -90,9 +90,9 @@ class InstanceForm(FlaskForm, metaclass=metaform):
     weight = IntegerField()
 
 
-class InstanceFilteringForm(FlaskForm, metaclass=metaform):
+class ServerFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
-    form_type = HiddenField(default="instance_filtering")
+    form_type = HiddenField(default="server_filtering")
     name = StringField()
     description = StringField()
     ip_address = StringField("IP address")

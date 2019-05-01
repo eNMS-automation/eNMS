@@ -18,7 +18,7 @@ const panelSize = {
   "netbox": "700 250",
   "opennms": "700 300",
   "device_filtering": "700 700",
-  "instance_filtering": "700 300",
+  "server_filtering": "700 300",
   "log_filtering": "700 200",
   "service_filtering": "900 500",
   "user_filtering": "700 200",
@@ -27,7 +27,7 @@ const panelSize = {
 
 const panelName = {
   "device_filtering": "Device Filtering",
-  "instance_filtering": "Instance Filtering",
+  "server_filtering": "Instance Filtering",
   "log_filtering": "Log Filtering",
   "service_filtering": "Service Filtering",
   "user_filtering": "User Filtering",
@@ -36,7 +36,7 @@ const panelName = {
 
 const typePanelSize = {
   "device": "700 600",
-  "instance": "600 250",
+  "server": "600 250",
   "link": "700 400",
   "pool": "800 600",
   "service": "1000 600",
@@ -67,7 +67,7 @@ function doc(page) {
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     import_export:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
-    instance_management:
+    server_management:
       "https://enms.readthedocs.io/en/latest/security/access.html",
     link_management:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",

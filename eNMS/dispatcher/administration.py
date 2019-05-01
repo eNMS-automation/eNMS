@@ -37,7 +37,7 @@ class AdministrationDispatcher:
 
     def get_cluster_status(self) -> dict:
         return {
-            attr: [getattr(instance, attr) for instance in fetch_all("Instance")]
+            attr: [getattr(server, attr) for server in fetch_all("Instance")]
             for attr in ("status", "cpu_load")
         }
 
@@ -180,12 +180,12 @@ class AdministrationDispatcher:
         protocol = parameters.cluster_scan_protocol
         for ip_address in IPv4Network(parameters.cluster_scan_subnet):
             try:
-                instance = http_get(
+                server = http_get(
                     f"{protocol}://{ip_address}/rest/is_alive",
                     timeout=parameters.cluster_scan_timeout,
                 ).json()
-                if current_app.config["CLUSTER_ID"] != instance.pop("cluster_id"):
+                if current_app.config["CLUSTER_ID"] != server.pop("cluster_id"):
                     continue
-                factory("Instance", **{**instance, **{"ip_address": str(ip_address)}})
+                factory("Instance", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
                 continue

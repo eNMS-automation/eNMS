@@ -225,7 +225,7 @@ function scanCluster() {
     folders.forEach((f) => {
       $("#versions").append(`<option value='${f}'></option>`);
     });
-  } else if (page == "instance_management") {
+  } else if (page == "server_management") {
     getClusterStatus();
   }
 })();

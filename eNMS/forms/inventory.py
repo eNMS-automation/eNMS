@@ -68,7 +68,6 @@ class ObjectFilteringForm(FlaskForm, metaclass=metaform):
 
 
 class ObjectForm(FlaskForm):
-    template = "object"
     name = StringField()
     description = StringField()
     location = StringField()
@@ -93,6 +92,7 @@ class DeviceFilteringForm(ObjectFilteringForm, ObjectForm, metaclass=metaform):
 
 @configure_device_form
 class DeviceForm(ObjectForm, metaclass=metaform):
+    template = "object"
     form_type = HiddenField(default="device")
     id = HiddenField()
     device_types = [subtype for subtype in device_subtypes.items()]
@@ -111,6 +111,7 @@ class DeviceForm(ObjectForm, metaclass=metaform):
 
 
 class LinkForm(ObjectForm, metaclass=metaform):
+    template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
     link_types = [subtype for subtype in link_subtypes.items()]

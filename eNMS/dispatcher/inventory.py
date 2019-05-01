@@ -193,7 +193,6 @@ class InventoryDispatcher:
                     factory("Device", **devices[device])
 
     def import_topology(self) -> str:
-        print(request.form)
         file = request.files["file"]
         if request.form["replace"]:
             delete_all("Device")

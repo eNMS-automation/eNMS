@@ -25,7 +25,6 @@ def metaform(*args, **kwargs):
         }
         form_properties[form_type].update(properties)
         property_types.update(properties)
-    print(property_types)
     return cls
 
 

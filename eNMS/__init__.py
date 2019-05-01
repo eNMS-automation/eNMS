@@ -9,7 +9,6 @@ from logging.handlers import RotatingFileHandler
 from os import environ
 from pathlib import Path
 from simplekml import Color, Style
-from sqlalchemy import Boolean, Float, Integer, PickleType
 from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
@@ -29,7 +28,7 @@ from eNMS.modules import (
     USE_VAULT,
     vault_client,
 )
-from eNMS.models import classes, cls_to_properties, property_types, service_classes
+from eNMS.models import property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
 from eNMS.properties import (

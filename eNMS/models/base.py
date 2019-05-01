@@ -62,7 +62,6 @@ class Base(db.Model):
 
     def get_properties(self) -> dict:
         result = {}
-        print(cls_to_properties)
         for property in cls_to_properties[self.type]:
             if property in private_properties:
                 continue

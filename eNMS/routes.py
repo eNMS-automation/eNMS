@@ -1,5 +1,5 @@
 from flask import current_app, jsonify, redirect, render_template, request, url_for
-from flask_login import current_user, login_required
+from flask_login import current_user
 from logging import info, warning
 from werkzeug.wrappers.response import Response
 

@@ -3,7 +3,7 @@ from flask_login import current_user
 from wtforms.fields.core import UnboundField
 
 from eNMS.forms.fields import field_types
-from eNMS.properties import property_types
+from eNMS.models import property_types
 
 form_actions = {}
 form_classes = {}

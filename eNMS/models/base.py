@@ -3,16 +3,10 @@ from json import dumps, loads
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
+from eNMS.models import cls_to_properties, property_types
 from eNMS.modules import db, USE_VAULT, vault_client
 from eNMS.database import fetch, objectify
-from eNMS.properties import (
-    cls_to_properties,
-    dont_migrate,
-    property_types,
-    boolean_properties,
-    relationships as rel,
-    private_properties,
-)
+from eNMS.properties import dont_migrate, relationships as rel, private_properties
 
 
 class Base(db.Model):
@@ -55,7 +49,7 @@ class Base(db.Model):
                 value = fetch(serial[property], id=value)
             elif property[:-1] in serial:
                 value = objectify(serial[property[:-1]], value)
-            elif property in boolean_properties:
+            elif property_type == "bool":
                 value = kwargs[property] not in (None, False)
             elif "regex" in property:
                 value = property in kwargs

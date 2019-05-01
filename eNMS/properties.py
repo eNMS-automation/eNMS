@@ -23,17 +23,6 @@ google_earth_styles: dict = {}
 
 custom_properties: dict = get_custom_properties()
 
-boolean_properties: List[str] = [
-    "mattermost_verify_certificate",
-    "multiprocessing",
-    "is_active",
-    "display_only_failed_nodes",
-    "send_notification",
-    "use_workflow_targets",
-    "push_to_git",
-    "never_update",
-]
-
 list_properties: List[str] = [
     "devices",
     "pools",
@@ -312,21 +301,6 @@ task_serialized_properties: List[str] = [
 
 task_table_properties: List[str] = task_serialized_properties[1:-2]
 
-cls_to_properties: Dict[str, List[str]] = {
-    "Server": server_public_properties,
-    "Device": device_public_properties,
-    "Link": link_properties,
-    "Pool": pool_public_properties,
-    "Service": service_public_properties,
-    "Parameters": parameters_public_properties,
-    "Workflow": workflow_public_properties,
-    "WorkflowEdge": workflow_edge_properties,
-    "User": user_public_properties,
-    "Log": log_public_properties,
-    "LogRule": log_rule_public_properties,
-    "Task": task_serialized_properties,
-}
-
 table_properties: Dict[str, List[str]] = {
     "configuration": device_configuration_properties,
     "device": device_table_properties,
@@ -554,31 +528,6 @@ pretty_names: Dict[str, str] = {
 
 pretty_names.update({k: v["pretty_name"] for k, v in custom_properties.items()})
 reverse_pretty_names: Dict[str, str] = {v: k for k, v in pretty_names.items()}
-
-property_types: Dict[str, str] = {
-    "clear_logs_date": "date",
-    "start_date": "date",
-    "end_date": "date",
-    "devices": "object-list",
-    "links": "object-list",
-    "pools": "object-list",
-    "jobs": "object-list",
-    "edges": "object-list",
-    "permissions": "list",
-    "job": "object",
-    "source": "object",
-    "destination": "object",
-    "import_export_types": "list",
-    "deletion_types": "list",
-    "send_notification": "bool",
-    "multiprocessing": "bool",
-    "is_active": "bool",
-    "display_only_failed_nodes": "bool",
-    "use_workflow_targets": "bool",
-    "never_update": "bool",
-    "mattermost_verify_certificate": "bool",
-    "push_to_git": "bool",
-}
 
 relationships: Dict[str, Dict[str, str]] = {
     "User": {"pool": "Pool"},

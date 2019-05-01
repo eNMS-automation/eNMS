@@ -1,5 +1,6 @@
 from collections import defaultdict
 from sqlalchemy import Boolean, Float, Integer, PickleType, String
+from typing import Dict
 
 from eNMS.properties import service_import_properties
 

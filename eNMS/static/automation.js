@@ -3,10 +3,10 @@ global
 alertify: false
 call: false
 diffview: false
-editService: false
 getJobState: false
 getWorkflowState: false
 jsPanel: false
+processInstance: false
 showTypePanel: false
 */
 

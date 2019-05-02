@@ -73,8 +73,10 @@ function doc(page) {
     administration:
       "https://enms.readthedocs.io/en/latest/security/access.html",
     advanced: "https://enms.readthedocs.io/en/latest/base/migrations.html",
+    calendar: "https://enms.readthedocs.io/en/latest/scheduling/task_management.html",
     configuration_management:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+    dashboard: "https://enms.readthedocs.io/en/latest/base/introduction.html",
     device_management:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     import_export:

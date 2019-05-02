@@ -1,10 +1,13 @@
 /*
 global
 alertify: false
-doc: false
+call: false
+createPanel: false
 fCall: false
 folders: false
-parameters: false
+page: false
+table: false
+updateProperty: false
 */
 
 /**

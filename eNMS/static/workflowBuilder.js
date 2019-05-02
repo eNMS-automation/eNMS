@@ -1,17 +1,13 @@
 /*
 global
+action: false
 alertify: false
 call: false
-capitalize: false
-convertSelect: false
-doc: false
-editJob: false
 editService: false
 fCall: false
 partial: false
 runJob: false
 showLogs: false
-showModal: false
 showResultsPanel: false
 showTypePanel: false
 vis: false

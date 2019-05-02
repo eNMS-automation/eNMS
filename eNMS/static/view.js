@@ -1,12 +1,14 @@
 /*
 global
 action: false
+call: false
+fCall: false
 L: false
 link_colors: false
 parameters: false
+showPoolView: false
 showTypePanel: false
 subtype_sizes: false
-updateView: false
 WE: false
 */
 
@@ -22,6 +24,7 @@ let polylinesArray = [];
 let currentView = parameters.default_view;
 let dimension = currentView.substring(0, 2);
 let markerType = parameters.default_marker;
+let viewType;
 
 const map = L.map("map", { preferCanvas: true }).setView(
   [parameters.default_latitude, parameters.default_longitude],
@@ -165,6 +168,7 @@ function createNode2d(node, nodeType) {
  */
 // eslint-disable-next-line
 function createNode3d(node, nodeType) {
+  let marker;
   if (markerType == "Image") {
     marker = WE.marker(
       [node.latitude, node.longitude],
@@ -193,7 +197,12 @@ function createNode3d(node, nodeType) {
 // eslint-disable-next-line
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
-  marker = (currentView == "3D" ? createNode3d : createNode2d)(node, nodeType);
+  let marker;
+  if (currentView == "3D") {
+    marker = createNode3d(node, nodeType);
+  } else {
+    marker = createNode2d(node, nodeType);
+  }
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function(e) {
@@ -382,6 +391,10 @@ function updateView() {
   }
 }
 
+/**
+ * Update current view.
+ */
+// eslint-disable-next-line
 function filter(type) {
   fCall(`/view_filtering-${type}`, `#${type}-form`, (r) => {
     if (type == "device_filtering") {
@@ -395,6 +408,5 @@ function filter(type) {
 }
 
 (function() {
-  doc("https://enms.readthedocs.io/en/latest/views/geographical_view.html");
   switchView(currentView);
 })();

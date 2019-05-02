@@ -88,6 +88,8 @@ function doc(page) {
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     user_management:
       "https://enms.readthedocs.io/en/latest/security/access.html",
+    view:
+    "https://enms.readthedocs.io/en/latest/views/geographical_view.html",
     workflow_builder:
       "https://enms.readthedocs.io/en/latest/workflows/index.html",
   }[page];

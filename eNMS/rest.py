@@ -67,7 +67,7 @@ class RestAutomation(Resource):
             return str(e)
         if handle_asynchronously:
             scheduler.add_job(
-                id=str(datetime.now()),
+                id=contoller.get_time(),
                 func=threaded_job,
                 run_date=datetime.now(),
                 args=[job.id, None, [d.id for d in targets], data.get("payload")],

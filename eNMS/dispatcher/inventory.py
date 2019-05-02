@@ -108,7 +108,7 @@ class InventoryDispatcher:
 
     def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
         device = fetch("Device", id=device_id)
-        d1, d2 = [datetime.strptime(d, "%Y-%m-%d %H:%M:%S.%f") for d in (v1, v2)]
+        d1, d2 = [datetime.strptime(d, "%Y+%m+%d %H:%M:%S.%f") for d in (v1, v2)]
         first = device.configurations[d1].splitlines()
         second = device.configurations[d2].splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()

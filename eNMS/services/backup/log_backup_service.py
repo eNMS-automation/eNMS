@@ -1,4 +1,3 @@
-from datetime import datetime
 from json import dump
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
@@ -31,7 +30,7 @@ class LogBackupService(Service, metaclass=register_class):
 
     def job(self, payload: dict, device: Device) -> dict:
         path_backup = Path.cwd() / "logs" / "job_logs"
-        now = controller.strip_all(str(datetime.now()))
+        now = controller.strip_all(controller.get_time())
         path_dir = path_backup / f"logs_{now}"
         source = path_backup / f"logs_{now}.tgz"
         makedirs(path_dir)

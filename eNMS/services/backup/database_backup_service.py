@@ -1,4 +1,3 @@
-from datetime import datetime
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
 from os import remove
@@ -29,7 +28,7 @@ class DatabaseBackupService(Service, metaclass=register_class):
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
 
     def job(self, payload: dict, device: Device) -> dict:
-        now = controller.strip_all(str(datetime.now()))
+        now = controller.strip_all(controller.get_time())
         source = Path.cwd() / "migrations" / f"backup_{now}.tgz"
         controller.migrate_export(
             Path.cwd(), {"import_export_types": import_classes, "name": f"backup_{now}"}

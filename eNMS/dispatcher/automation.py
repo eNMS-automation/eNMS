@@ -29,7 +29,7 @@ class AutomationDispatcher:
                 "destination": destination,
             },
         )
-        now = str(datetime.now())
+        now = controller.get_time()
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
@@ -38,7 +38,7 @@ class AutomationDispatcher:
         jobs = objectify("Job", request.form["add_jobs"])
         for job in jobs:
             job.workflows.append(workflow)
-        now = str(datetime.now())
+        now = controller.get_time()
         workflow.last_modified = now
         return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
@@ -47,14 +47,14 @@ class AutomationDispatcher:
 
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
         delete("WorkflowEdge", id=edge_id)
-        now = str(datetime.now())
+        now = controller.get_time()
         fetch("Workflow", id=workflow_id).last_modified = now
         return now
 
     def delete_node(self, workflow_id: int, job_id: int) -> dict:
         workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
         workflow.jobs.remove(job)
-        now = str(datetime.now())
+        now = controller.get_time()
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
@@ -211,7 +211,7 @@ class AutomationDispatcher:
             if not job.has_targets and targets:
                 return {"error": "This service should not have targets configured."}
         scheduler.add_job(
-            id=str(datetime.now()),
+            id=controller.get_time(),
             func=threaded_job,
             run_date=datetime.now(),
             args=[job.id],
@@ -223,7 +223,7 @@ class AutomationDispatcher:
         fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
 
     def save_positions(self, workflow_id: int) -> str:
-        now = str(datetime.now())
+        now = controller.get_time()
         workflow = fetch("Workflow", id=workflow_id)
         workflow.last_modified = now
         session["workflow"] = workflow.id

@@ -189,7 +189,7 @@ class Job(Base, metaclass=register_class):
         has_targets = bool(targets)
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
-        now = str(datetime.now()).replace(" ", ":")
+        now = str(datetime.now()).replace(" ", "-")
         for i in range(self.number_of_retries + 1):
             with controller.session_scope() as session:
                 logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")

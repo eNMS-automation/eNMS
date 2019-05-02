@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from datetime import datetime
 from flask import Flask
 from logging import info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
@@ -22,6 +23,9 @@ class Controller:
         allowed_syntax = "." in name
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
+
+    def get_time(self):
+        return str(datetime.now()).replace(" ", "-")
 
     @contextmanager
     def session_scope(self) -> Generator:

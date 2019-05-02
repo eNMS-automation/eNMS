@@ -21,10 +21,15 @@ function displayCustomForm(id) {
   call(`/get_service-${id || $("#service-type").val()}`, function(customForm) {
     for (const type of ["boolean", "list"]) {
       const fields = $(`#service-${type}_fields`);
-      const prop = type == "boolean" ? customForm.boolean_properties : customForm.list_properties;
+      const prop =
+        type == "boolean"
+          ? customForm.boolean_properties
+          : customForm.list_properties;
       fields.val(`${fields.val()},${prop}`);
     }
-    $(id ? `#service-custom-form-${id}` : "#service-custom-form").html(customForm.html);
+    $(id ? `#service-custom-form-${id}` : "#service-custom-form").html(
+      customForm.html
+    );
     if (customForm.service) processInstance("service", customForm.service);
   });
 }
@@ -80,13 +85,13 @@ function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
   if (value) {
     result = JSON.stringify(
-        Object.fromEntries(
-          Object.entries(value)
-            .sort()
-            .reverse()
-        ),
-        null,
-        2
+      Object.fromEntries(
+        Object.entries(value)
+          .sort()
+          .reverse()
+      ),
+      null,
+      2
     ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
   } else {
     result = "No results yet.";
@@ -164,7 +169,7 @@ function showLogs(id) {
  */
 // eslint-disable-next-line
 function showResultsPanel(id, name) {
-  createPanel("results", `Results - ${name}`, id, function () {
+  createPanel("results", `Results - ${name}`, id, function() {
     configureCallbacks(id);
     displayResults(id);
   });
@@ -252,14 +257,10 @@ function showWorkflowModalDuplicate(id) {
 // eslint-disable-next-line
 function duplicateWorkflow(id) {
   $("#edit-workflow").modal("hide");
-  fCall(
-    `/duplicate_workflow-${id}`,
-    "#edit-workflow-form",
-    (workflow) => {
-      table.ajax.reload(null, false);
-      alertify.notify("Workflow successfully duplicated", "success", 5);
-    }
-  );
+  fCall(`/duplicate_workflow-${id}`, "#edit-workflow-form", (workflow) => {
+    table.ajax.reload(null, false);
+    alertify.notify("Workflow successfully duplicated", "success", 5);
+  });
 }
 
 /**

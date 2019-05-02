@@ -319,25 +319,17 @@ function savePositions() {
  */
 // eslint-disable-next-line
 function addJobPanel() {
-  createPanel(
-    "add-job",
-    "400 500",
-    "../add_jobs_form",
-    function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Add jobs to the worflow");
-      configureForm("add_jobs");
-    }
-  );
+  createPanel("add-job", "400 500", "../add_jobs_form", function(panel) {
+    panel.content.innerHTML = this.responseText;
+    panel.setHeaderTitle("Add jobs to the worflow");
+    configureForm("add_jobs");
+  });
 }
 
 Object.assign(action, {
   "Run Workflow": runWorkflow,
   Edit: (job) => {
-    showTypePanel(
-      job.type == "Workflow" ? "workflow" : "service",
-      job.id
-    );
+    showTypePanel(job.type == "Workflow" ? "workflow" : "service", job.id);
   },
   Run: (job) => runJob(job.id),
   Results: (job) => showResultsPanel(job.id, job.label),

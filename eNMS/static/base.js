@@ -73,7 +73,8 @@ function doc(page) {
     administration:
       "https://enms.readthedocs.io/en/latest/security/access.html",
     advanced: "https://enms.readthedocs.io/en/latest/base/migrations.html",
-    calendar: "https://enms.readthedocs.io/en/latest/scheduling/task_management.html",
+    calendar:
+      "https://enms.readthedocs.io/en/latest/scheduling/task_management.html",
     configuration_management:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     dashboard: "https://enms.readthedocs.io/en/latest/base/introduction.html",
@@ -203,14 +204,7 @@ function deleteInstance(type, id) {
  * @param {processing} processing - Function once panel is loaded.
  */
 // eslint-disable-next-line
-function createPanel(
-  name,
-  title,
-  id,
-  processing,
-  type,
-  duplicate
-) {
+function createPanel(name, title, id, processing, type, duplicate) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -266,13 +260,7 @@ function showPoolObjectsPanel(id) {
  */
 // eslint-disable-next-line
 function showDeletionPanel(type, id, name) {
-  createPanel(
-    "instance_deletion",
-    `Delete ${name}`,
-    id,
-    () => {},
-    type
-  );
+  createPanel("instance_deletion", `Delete ${name}`, id, () => {}, type);
 }
 
 /**

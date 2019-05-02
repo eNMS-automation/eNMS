@@ -1,6 +1,9 @@
 /*
 global
+action: false
 alertify: false
+call: false
+jsPanel: false
 vis: false
 */
 
@@ -39,14 +42,15 @@ function linkToEdge(link) {
  */
 // eslint-disable-next-line
 function showPoolView(poolId) {
-  panel = jsPanel.create({
+  jsPanel.create({
     id: `pool-view-${poolId}`,
     theme: "none",
     border: "medium",
     headerTitle: "Pool view",
     position: "center-top 0 58",
     contentSize: "1000 600",
-    content: `<div id="network-${poolId}" style="height:100%; width:100%;"></div>`,
+    content:
+      `<div id="network-${poolId}" style="height:100%; width:100%;"></div>`,
     dragit: {
       opacity: 0.7,
       containment: [5, 5, 5, 5],

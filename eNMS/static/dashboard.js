@@ -12,7 +12,7 @@ const defaultProperties = {
   Service: "vendor",
   Workflow: "vendor",
   Task: "status",
-}
+};
 
 const theme = {
   color: [

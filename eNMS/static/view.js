@@ -143,21 +143,19 @@ function changeMarker(type) {
  */
 // eslint-disable-next-line
 function createNode2d(node, nodeType) {
-  if (markerType == "Circle Marker") {
-    marker = L.circleMarker([node.latitude, node.longitude]);
-  } else if (markerType == "Circle") {
-    marker = L.circle([node.latitude, node.longitude]);
-  } else {
-    marker = L.marker([node.latitude, node.longitude]);
-    if (nodeType === "device") {
-      marker.icon = window[`icon_${node.subtype}`] || routerIcon;
-    } else {
-      marker.icon = window["icon_site"];
-    }
+  const marker = markerType == "Circle Marker"
+    ? L.circleMarker([node.latitude, node.longitude])
+    : markerType == "Circle"
+    ? L.circle([node.latitude, node.longitude])
+    : L.marker([node.latitude, node.longitude]);
+  if (markerType == "Image") {
+    marker.icon = nodeType === "device"
+      ? marker.icon = window[`icon_${node.subtype}`] || routerIcon
+      : marker.icon = window["icon_site"];
     marker.setIcon(marker.icon);
   }
   marker.bindTooltip(node["name"], { permanent: false });
-  return marker
+  return marker;
 }
 
 /**
@@ -184,7 +182,7 @@ function createNode3d(node, nodeType) {
   marker.on("mouseout", function(e) {
     $("#name-box").hide();
   });
-  return marker
+  return marker;
 }
 
 /**

@@ -129,8 +129,8 @@ function saveParameters(type) {
 }
 
 /**
-* Get Cluster Status.
-*/
+ * Get Cluster Status.
+ */
 function getClusterStatus() {
   call("/admin/get_cluster_status", function(cluster) {
     table.ajax.reload(null, false);

@@ -1,17 +1,26 @@
 /*
 global
+action: false
 alertify: false
 call: false
+createPanel: false
+diffview: false
 fCall: false
-partial: false
+openUrl: false
+showPanel: false
+showTypePanel: false
+table: false
 */
 
 /**
  * Update device jobs.
  * @param {id} id - Device id.
  */
+// eslint-disable-next-line
 function saveDeviceJobs(id) {
-  fCall(`/save_device_jobs/${id}`, `#${id}-device-automation-form`, function(device) {
+  fCall(`/save_device_jobs/${id}`, `#${id}-device-automation-form`, function(
+    device
+  ) {
     alertify.notify("Changes saved.", "success", 5);
     $(`#automation-panel-${id}`).remove();
   });
@@ -21,8 +30,11 @@ function saveDeviceJobs(id) {
  * Start an SSH session to the device.
  * @param {id} id - Device id.
  */
+// eslint-disable-next-line
 function sshConnection(id) {
-  fCall(`/connection-${id}`, `#connection-parameters-form-${id}`, function(result) {
+  fCall(`/connection-${id}`, `#connection-parameters-form-${id}`, function(
+    result
+  ) {
     let url = result.server_addr;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
@@ -47,19 +59,17 @@ function sshConnection(id) {
  */
 // eslint-disable-next-line
 function showConfigurationPanel(id, name) {
-  createPanel(
-    `configuration`,
-    `Configuration - Device ${name}`,
-    id,
-    function(panel) {
-      configureCallbacks(id);
-      displayConfigurations(id);
-    }
-  );
+  createPanel(`configuration`, `Configuration - Device ${name}`, id, function(
+    panel
+  ) {
+    configureCallbacks(id);
+    displayConfigurations(id);
+  });
 }
 
 /**
  * Display configurations.
+ * @param {int} id - Device ID.
  */
 function displayConfigurations(id) {
   call(`/get_configurations-${id}`, (configurations) => {
@@ -87,7 +97,6 @@ function clearConfigurations(id) {
     $(`#configurations-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Configurations cleared.", "success", 5);
     $(`#configuration-${id}`).remove();
-
   });
 }
 
@@ -98,10 +107,12 @@ function clearConfigurations(id) {
 function configureCallbacks(id) {
   $(`#display-${id}`).on("change", function() {
     call(`/get_configurations-${id}`, (configurations) => {
-      $(`#configurations-${id}`).text(configurations[$(`#display-${id}`).val()]);
+      $(`#configurations-${id}`).text(
+        configurations[$(`#display-${id}`).val()]
+      );
     });
   });
-  
+
   $(`#compare_with-${id}`).on("change", function() {
     $(`#configurations-${id}`).empty();
     const v1 = $(`#display-${id}`).val();

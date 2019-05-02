@@ -125,7 +125,7 @@ class Device(CustomDevice, metaclass=register_class):
                 onclick="showPanel('device_automation', '{self.id}')">
                 Automation</button>""",
                 f"""<button type="button" class="btn btn-success btn-xs"
-                onclick="showConnectionPanel('{self.id}')">Connect</button>""",
+                onclick="showPanel('connection', '{self.id}')">Connect</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
                 onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"

@@ -52,6 +52,7 @@ def configure_pool_form(cls: FlaskForm) -> FlaskForm:
 
 
 class ConnectionForm(FlaskForm, metaclass=metaform):
+    template = "connection"
     form_type = HiddenField(default="connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])

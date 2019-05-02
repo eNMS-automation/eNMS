@@ -71,12 +71,12 @@ function displayWorkflow(wf) {
       graph.selectNodes([node]);
       $(".global,.edge-selection").hide();
       $(".node-selection").show();
-      selectedNode = node;
+      selectedNode = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);
       $(".global,.node-selection").hide();
       $(".edge-selection").show();
-      selectedNode = node;
+      selectedNode = nodes.get(node);
     } else {
       $(".node-selection").hide();
       $(".global").show();
@@ -333,16 +333,16 @@ function addJobPanel() {
 
 Object.assign(action, {
   "Run Workflow": runWorkflow,
-  Edit: (jobId) => {
+  Edit: (job) => {
     showTypePanel(
-      nodes.get(jobId).type == "Workflow" ? "workflow" : "service",
-      jobId
+      job.type == "Workflow" ? "workflow" : "service",
+      job.id
     );
   },
   Run: runJob,
-  Results: showResultsPanel,
+  Results: (job) => showResultsPanel(job.id, job.label),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
-  "Workflow Results": () => showResultsPanel(workflow.id),
+  "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),
   "Workflow Logs": () => showLogs(workflow.id),
   "Add Service or Workflow": addJobPanel,
   Delete: deleteSelection,
@@ -440,6 +440,5 @@ function getWorkflowState() {
 }
 
 (function() {
-  doc("https://enms.readthedocs.io/en/latest/workflows/index.html");
   getWorkflowState();
 })();

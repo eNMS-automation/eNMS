@@ -85,6 +85,8 @@ function doc(page) {
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     user_management:
       "https://enms.readthedocs.io/en/latest/security/access.html",
+    workflow_builder:
+      "https://enms.readthedocs.io/en/latest/workflows/index.html",
   }[page];
   $("#doc-link").attr("href", url);
 }
@@ -218,7 +220,7 @@ function createPanel(
     theme: "light filledlight",
     headerLogo: "../static/images/logo.png",
     contentOverflow: "hidden scroll",
-    contentSize: panelSize[type],
+    contentSize: panelSize[name],
     position: "center-top 0 58",
     contentAjax: {
       url: `../form-${name}`,

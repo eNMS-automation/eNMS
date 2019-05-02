@@ -189,7 +189,7 @@ class Job(Base, metaclass=register_class):
         has_targets = bool(targets)
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
-        now = str(datetime.now()).replace(" ", "-")
+        now = controller.get_time()
         for i in range(self.number_of_retries + 1):
             with controller.session_scope() as session:
                 logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
@@ -556,7 +556,7 @@ class Task(Base, metaclass=register_class):
 
     def __init__(self, **kwargs: Any) -> None:
         super().update(**kwargs)
-        self.creation_time = str(datetime.now())
+        self.creation_time = controller.get_time()
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
         if self.is_active:
             self.schedule()

@@ -25,7 +25,9 @@ class Controller:
         return allowed_syntax and allowed_extension
 
     def get_time(self):
-        return str(datetime.now()).replace(" ", "-")
+        a = str(datetime.now()).replace("-", "+")
+        print(a)
+        return a
 
     @contextmanager
     def session_scope(self) -> Generator:

@@ -14,6 +14,7 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
   cluster: "700 200",
+  connection: "400 500",
   database_deletion: "700 300",
   excel_export: "400 200",
   git: "700 200",
@@ -35,6 +36,7 @@ const panelSize = {
 };
 
 const panelName = {
+  connection: "Connect to device",
   database_deletion: "Database Deletion",
   database_migration: "Database Migration",
   device_automation: "Device Automation",
@@ -234,6 +236,14 @@ function createPanel(
 }
 
 /**
+ * Generic Show Panel
+ */
+// eslint-disable-next-line
+function showPanel(type, id) {
+  createPanel(type, panelName[type] || type, panelSize[type], id);
+}
+
+/**
  * Show Pool Objects.
  */
 // eslint-disable-next-line
@@ -244,14 +254,6 @@ function showPoolObjectsPanel(id) {
       $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
     });
   });
-}
-
-/**
- * Generic Show Panel
- */
-// eslint-disable-next-line
-function showPanel(type, id) {
-  createPanel(type, panelName[type] || type, panelSize[type], id);
 }
 
 /**
@@ -267,14 +269,6 @@ function showDeletionPanel(type, id, name) {
     () => {},
     type
   );
-}
-
-/**
- * Connect to a device.
- */
-// eslint-disable-next-line
-function showConnectionPanel(id) {
-  createPanel("connection", "Connect to device", "400 600", id);
 }
 
 /**

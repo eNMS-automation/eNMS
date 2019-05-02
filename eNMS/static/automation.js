@@ -109,6 +109,7 @@ function displayResults(id) {
           .text(option)
       );
     });
+    $(`#display-${id},#compare_with-${id}`).selectpicker("refresh");
     $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
     displayResult(results, id);
   });
@@ -161,8 +162,8 @@ function showLogs(id) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function showResults(id) {
-  createPanel("results", "Results", id, function () {
+function showResultsPanel(id, name) {
+  createPanel("results", `Results - ${name}`, id, function () {
     configureCallbacks(id);
     displayResults(id);
   });
@@ -175,7 +176,7 @@ function showResults(id) {
 // eslint-disable-next-line
 function configureCallbacks(id) {
   $(`#display-${id}`).on("change", function() {
-    call(`/get_results-${id}`, (results) => {
+    call(`/get_job_results-${id}`, (results) => {
       displayResult(results, id);
       $(`#compare_with-${id}`).val($(`#display-${id}`).val());
     });
@@ -185,7 +186,7 @@ function configureCallbacks(id) {
     $(`#display_results-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_diff-${id}-${v1}-${v2}`, function(data) {
+    call(`/get_results_diff-${id}-${v1}-${v2}`, function(data) {
       $(`#display_results-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,

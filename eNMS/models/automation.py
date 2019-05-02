@@ -189,7 +189,7 @@ class Job(Base, metaclass=register_class):
         has_targets = bool(targets)
         if has_targets and not job_from_workflow_targets:
             results["results"]["devices"] = {}
-        now = str(datetime.now()).replace(" ", "-")
+        now = str(datetime.now()).replace(" ", ":")
         for i in range(self.number_of_retries + 1):
             with controller.session_scope() as session:
                 logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
@@ -322,7 +322,7 @@ class Service(Job, metaclass=register_class):
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResults('{self.id}')"></i>Results</a></button>""",
+            onclick="showResultsPanel('{self.id}', '{self.name}')"></i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -455,7 +455,7 @@ class Workflow(Job, metaclass=register_class):
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResults('{self.id}')"></i>Results</a></button>""",
+            onclick="showResultsPanel('{self.id}', '{self.name}')"></i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

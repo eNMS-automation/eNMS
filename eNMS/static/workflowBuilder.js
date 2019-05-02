@@ -12,7 +12,7 @@ partial: false
 runJob: false
 showLogs: false
 showModal: false
-showResults: false
+showResultsPanel: false
 showTypePanel: false
 vis: false
 workflow: true
@@ -340,9 +340,9 @@ Object.assign(action, {
     );
   },
   Run: runJob,
-  Results: showResults,
+  Results: showResultsPanel,
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
-  "Workflow Results": () => showResults(workflow.id),
+  "Workflow Results": () => showResultsPanel(workflow.id),
   "Workflow Logs": () => showLogs(workflow.id),
   "Add Service or Workflow": addJobPanel,
   Delete: deleteSelection,

@@ -78,6 +78,7 @@ class JobFilteringForm(FlaskForm, metaclass=metaform):
 
 
 class CompareResultsForm(FlaskForm, metaclass=metaform):
+    template = "results"
     form_type = HiddenField(default="results")
     display = SelectField(choices=())
     compare_with = SelectField(choices=())

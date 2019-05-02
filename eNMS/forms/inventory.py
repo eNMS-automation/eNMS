@@ -211,6 +211,7 @@ class GoogleEarthForm(FlaskForm, metaclass=metaform):
 
 
 class CompareConfigurationsForm(FlaskForm, metaclass=metaform):
+    template = "configuration"
     form_type = HiddenField(default="configuration")
     display = SelectField(choices=())
     compare_with = SelectField(choices=())

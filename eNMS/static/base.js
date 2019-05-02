@@ -13,8 +13,17 @@ table: false
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
+  device: "700 600",
+  server: "600 250",
+  link: "700 400",
+  pool: "800 600",
+  service: "1000 600",
+  task: "900 500",
+  user: "600 300",
+  workflow: "1000 600",
   cluster: "700 200",
   connection: "400 500",
+  configuration: "700 700",
   database_deletion: "700 300",
   excel_export: "400 200",
   git: "700 200",
@@ -22,13 +31,16 @@ const panelSize = {
   librenms: "700 250",
   database_migration: "700 300",
   device_automation: "400 200",
+  instance_deletion: "300 200",
   notifications: "900 400",
   netbox: "700 250",
   opennms: "700 300",
+  pool_objects: "400 400",
   device_filtering: "700 700",
   server_filtering: "700 300",
   ssh: "700 200",
   log_filtering: "700 200",
+  results: "1000 600",
   service_filtering: "900 500",
   user_filtering: "700 200",
   view: "700 300",
@@ -36,6 +48,7 @@ const panelSize = {
 };
 
 const panelName = {
+  configuration: "Configuration",
   connection: "Connect to device",
   database_deletion: "Database Deletion",
   database_migration: "Database Migration",
@@ -46,17 +59,6 @@ const panelName = {
   service_filtering: "Service Filtering",
   user_filtering: "User Filtering",
   workflow_filtering: "Workflow Filtering",
-};
-
-const typePanelSize = {
-  device: "700 600",
-  server: "600 250",
-  link: "700 400",
-  pool: "800 600",
-  service: "1000 600",
-  task: "900 500",
-  user: "600 300",
-  workflow: "1000 600",
 };
 
 let topZ = 1000;
@@ -200,7 +202,6 @@ function deleteInstance(type, id) {
 function createPanel(
   name,
   title,
-  contentSize,
   id,
   processing,
   type,
@@ -217,7 +218,7 @@ function createPanel(
     theme: "light filledlight",
     headerLogo: "../static/images/logo.png",
     contentOverflow: "hidden scroll",
-    contentSize: contentSize,
+    contentSize: panelSize[type],
     position: "center-top 0 58",
     contentAjax: {
       url: `../form-${name}`,
@@ -240,7 +241,7 @@ function createPanel(
  */
 // eslint-disable-next-line
 function showPanel(type, id) {
-  createPanel(type, panelName[type] || type, panelSize[type], id);
+  createPanel(type, panelName[type] || type, id);
 }
 
 /**
@@ -248,7 +249,7 @@ function showPanel(type, id) {
  */
 // eslint-disable-next-line
 function showPoolObjectsPanel(id) {
-  createPanel("pool_objects", "Pool Objects", "400 400", id, function() {
+  createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get-pool-${id}`, function(pool) {
       $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
       $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
@@ -264,7 +265,6 @@ function showDeletionPanel(type, id, name) {
   createPanel(
     "instance_deletion",
     `Delete ${name}`,
-    "350, 120",
     id,
     () => {},
     type
@@ -334,7 +334,6 @@ function showTypePanel(type, id, duplicate) {
   createPanel(
     type,
     "",
-    typePanelSize[type],
     id,
     function(panel) {
       if (id) {

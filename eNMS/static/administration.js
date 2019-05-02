@@ -12,7 +12,7 @@ parameters: false
  */
 // eslint-disable-next-line
 function showParametersPanel(type) {
-  createPanel(type, `${type} Parameters`, panelSize[type], 0, () => {
+  createPanel(type, `${type} Parameters`, 0, () => {
     call("/get-parameters-1", function(parameters) {
       for (const [property, value] of Object.entries(parameters)) {
         updateProperty($(`#${property}`), property, value);
@@ -26,7 +26,7 @@ function showParametersPanel(type) {
  */
 // eslint-disable-next-line
 function showAdminPanel(type) {
-  createPanel(type, type, panelSize[type], 0, () => {
+  createPanel(type, type, 0, () => {
     if (type == "excel") {
       document.getElementById("file").onchange = function() {
         importTopology("Device");

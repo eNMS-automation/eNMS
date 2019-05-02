@@ -46,17 +46,11 @@ function sshConnection(id) {
  * Show Filtering Panel
  */
 // eslint-disable-next-line
-function showConfigurationPanel(id) {
+function showConfigurationPanel(id, name) {
   createPanel(
-    `configuration-panel-${id}`,
-    "700 700",
-    "../configuration_form",
+    `configuration`,
+    `Configuration - Device ${name}`,
     function(panel) {
-      panel.content.innerHTML = this.responseText;
-      panel.setHeaderTitle("Device Configurations");
-      $("#display").prop("id", `display-${id}`);
-      $("#compare_with").prop("id", `compare_with-${id}`);
-      $("#configurations").prop("id", `configurations-${id}`);
       configureCallbacks(id);
       displayConfigurations(id);
     }

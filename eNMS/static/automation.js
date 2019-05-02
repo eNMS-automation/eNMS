@@ -162,7 +162,7 @@ function showLogs(id) {
  */
 // eslint-disable-next-line
 function showResults(id) {
-  createPanel("results", "Results", "1000 600", id, function () {
+  createPanel("results", "Results", id, function () {
     configureCallbacks(id);
     displayResults(id);
   });

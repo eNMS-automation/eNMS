@@ -17,6 +17,7 @@ const panelSize = {
   google_earth_export: "700 200",
   librenms: "700 250",
   database_migration: "700 300",
+  device_automation: "400 200",
   notifications: "900 400",
   netbox: "700 250",
   opennms: "700 300",
@@ -33,6 +34,7 @@ const panelSize = {
 const panelName = {
   database_deletion: "Database Deletion",
   database_migration: "Database Migration",
+  device_automation: "Device Automation",
   device_filtering: "Device Filtering",
   server_filtering: "Server Filtering",
   log_filtering: "Log Filtering",
@@ -232,8 +234,8 @@ function showPoolObjectsPanel(id) {
  * Generic Show Panel
  */
 // eslint-disable-next-line
-function showPanel(type) {
-  createPanel(type, panelName[type] || type, panelSize[type]);
+function showPanel(type, id) {
+  createPanel(type, panelName[type] || type, panelSize[type], id);
 }
 
 /**
@@ -242,14 +244,6 @@ function showPanel(type) {
 // eslint-disable-next-line
 function showDeletionPanel(type, id, name) {
   createPanel("instance_deletion", `Delete ${name}`, "350, 120", id, () => {}, type);
-}
-
-/**
- * Connect to a device.
- */
-// eslint-disable-next-line
-function showAutomationPanel(id) {
-  createPanel("device_automation", "Device automation", "400 200", id);
 }
 
 /**

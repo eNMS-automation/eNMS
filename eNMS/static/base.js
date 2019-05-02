@@ -1,9 +1,12 @@
 /*
 global
 alertify: false
+formProperties: false
 jsPanel: false
 NProgress: false
+panelCode: false
 propertyTypes: false
+saveService: false
 table: false
 */
 
@@ -29,7 +32,7 @@ const panelSize = {
   user_filtering: "700 200",
   view: "700 300",
   workflow_filtering: "900 500",
-}
+};
 
 const panelName = {
   database_deletion: "Database Deletion",
@@ -41,7 +44,7 @@ const panelName = {
   service_filtering: "Service Filtering",
   user_filtering: "User Filtering",
   workflow_filtering: "Workflow Filtering",
-}
+};
 
 const typePanelSize = {
   device: "700 600",
@@ -52,7 +55,7 @@ const typePanelSize = {
   task: "900 500",
   user: "600 300",
   workflow: "1000 600",
-}
+};
 
 let topZ = 1000;
 
@@ -65,8 +68,7 @@ function doc(page) {
   let url = {
     administration:
       "https://enms.readthedocs.io/en/latest/security/access.html",
-    advanced:
-      "https://enms.readthedocs.io/en/latest/base/migrations.html",
+    advanced: "https://enms.readthedocs.io/en/latest/base/migrations.html",
     configuration_management:
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     device_management:
@@ -87,6 +89,7 @@ function doc(page) {
  * Open new tab at the provided URL.
  * @param {url} url - URL.
  */
+// eslint-disable-next-line
 function openUrl(url) {
   let win = window.open(url, "_blank");
   win.focus();
@@ -124,9 +127,9 @@ function call(url, callback) {
 
 /**
  * jQuery Ajax Form Call.
- * @param {url} url - Url.
- * @param {form} form - Form.
- * @param {callback} callback - Function to process results.
+ * @param {string} url - Url.
+ * @param {string} form - Form ID.
+ * @param {function} callback - Function to process results.
  */
 function fCall(url, form, callback) {
   if (
@@ -145,9 +148,14 @@ function fCall(url, form, callback) {
   }
 }
 
+/**
+ * Serialize form for table filtering.
+ * @param {string} form - Form ID.
+ * @return {object} Serialized form.
+ */
 function serializeForm(form) {
-  data = JSON.parse(JSON.stringify($(form).serializeArray()));
-  result = { pools: [] };
+  const data = JSON.parse(JSON.stringify($(form).serializeArray()));
+  let result = { pools: [] };
   data.forEach((property) => {
     if (property.name == "pools") {
       result.pools.push(property.value);
@@ -187,8 +195,16 @@ function deleteInstance(type, id) {
  * @param {processing} processing - Function once panel is loaded.
  */
 // eslint-disable-next-line
-function createPanel(name, title, contentSize, id, processing, type, duplicate) {
-  panelId = id ? `${name}-${id}` : name;
+function createPanel(
+  name,
+  title,
+  contentSize,
+  id,
+  processing,
+  type,
+  duplicate
+) {
+  const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
     return;
@@ -243,7 +259,14 @@ function showPanel(type, id) {
  */
 // eslint-disable-next-line
 function showDeletionPanel(type, id, name) {
-  createPanel("instance_deletion", `Delete ${name}`, "350, 120", id, () => {}, type);
+  createPanel(
+    "instance_deletion",
+    `Delete ${name}`,
+    "350, 120",
+    id,
+    () => {},
+    type
+  );
 }
 
 /**
@@ -256,6 +279,10 @@ function showConnectionPanel(id) {
 
 /**
  * Preprocess form.
+ * @param {JsPanel} panel - JsPanel element.
+ * @param {int} id - Panel ID.
+ * @param {string} type - Instance type.
+ * @param {bool} duplicate - Duplicate instance.
  */
 function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".add-id").forEach((el) => {
@@ -276,14 +303,15 @@ function preprocessForm(panel, id, type, duplicate) {
 
 /**
  * Configure form.
+ * @param {string} form - Form name.
+ * @param {int} id - Form ID.
  */
 function configureForm(form, id) {
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
-    el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
+    let el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
     if (!el.length) el = $(`#${property}`);
     if (type == "date") {
-      const today = new Date();
       el.datetimepicker({
         format: "DD/MM/YYYY HH:mm:ss",
         widgetPositioning: {
@@ -309,31 +337,45 @@ function configureForm(form, id) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
-  createPanel(type, "", typePanelSize[type], id, function(panel) {
-    if (id) {
-      call(`/get-${type}-${id}`, function(instance) {
-        if (["service", "workflow"].includes(type)) panelCode(type, id);
-        panel.setHeaderTitle(`${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`);
-        if (type !== "service") processInstance(type, instance);
-      });
-    } else {
-      panel.setHeaderTitle(`Create a New ${type}`);
-      if (["service", "workflow"].includes(type)) panelCode(type);
-    }
-  }, type, duplicate);
+  createPanel(
+    type,
+    "",
+    typePanelSize[type],
+    id,
+    function(panel) {
+      if (id) {
+        call(`/get-${type}-${id}`, function(instance) {
+          if (["service", "workflow"].includes(type)) panelCode(type, id);
+          panel.setHeaderTitle(
+            `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
+          );
+          if (type !== "service") processInstance(type, instance);
+        });
+      } else {
+        panel.setHeaderTitle(`Create a New ${type}`);
+        if (["service", "workflow"].includes(type)) panelCode(type);
+      }
+    },
+    type,
+    duplicate
+  );
 }
 
 /**
  * Update property.
+ * @param {jQuery} el - Property in the DOM.
+ * @param {string} property - Property name.
+ * @param {string} value - Property value.
  */
 function updateProperty(el, property, value) {
-  
   const propertyType = propertyTypes[property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict")) {
     el.val(value ? JSON.stringify(value) : "{}");
-  } else if (["list", "multiselect", "object", "object-list"].includes(propertyType)) {
+  } else if (
+    ["list", "multiselect", "object", "object-list"].includes(propertyType)
+  ) {
     el.selectpicker("deselectAll");
     el.selectpicker(
       "val",
@@ -356,7 +398,7 @@ function updateProperty(el, property, value) {
  */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
-    el = $(
+    const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
     updateProperty(el, property, value);

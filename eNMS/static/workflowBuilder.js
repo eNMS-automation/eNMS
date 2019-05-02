@@ -339,7 +339,7 @@ Object.assign(action, {
       job.id
     );
   },
-  Run: runJob,
+  Run: (job) => runJob(job.id),
   Results: (job) => showResultsPanel(job.id, job.label),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),

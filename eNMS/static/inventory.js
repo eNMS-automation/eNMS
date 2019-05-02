@@ -50,6 +50,7 @@ function showConfigurationPanel(id, name) {
   createPanel(
     `configuration`,
     `Configuration - Device ${name}`,
+    id,
     function(panel) {
       configureCallbacks(id);
       displayConfigurations(id);
@@ -72,6 +73,7 @@ function displayConfigurations(id) {
       );
     });
     $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
+    $(`#display-${id},#compare_with-${id}`).selectpicker("render");
     $(`#configurations-${id}`).text(configurations[$(`#display-${id}`).val()]);
   });
 }
@@ -82,9 +84,10 @@ function displayConfigurations(id) {
 // eslint-disable-next-line
 function clearConfigurations(id) {
   call(`/clear_configurations-${id}`, () => {
-    $("#configurations").empty();
+    $(`#configurations-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Configurations cleared.", "success", 5);
-    $("#configurations-modal").modal("hide");
+    $(`#configuration-${id}`).remove();
+
   });
 }
 

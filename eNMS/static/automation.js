@@ -151,6 +151,7 @@ function showLogs(id) {
       headerTitle: "Logs",
       position: "center-top 0 58",
       contentSize: "650 600",
+      contentOverflow: "hidden scroll",
       content: `<pre id="logs-${id}" style="border: 0;\
         background-color: transparent; color: white;"></pre>`,
       dragit: {

@@ -9,6 +9,7 @@ parameters: false
 showPoolView: false
 showTypePanel: false
 subtype_sizes: false
+viewType: false
 WE: false
 */
 
@@ -24,7 +25,6 @@ let polylinesArray = [];
 let currentView = parameters.default_view;
 let dimension = currentView.substring(0, 2);
 let markerType = parameters.default_marker;
-let viewType;
 
 const map = L.map("map", { preferCanvas: true }).setView(
   [parameters.default_latitude, parameters.default_longitude],

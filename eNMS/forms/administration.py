@@ -97,6 +97,7 @@ class ServerFilteringForm(FlaskForm, metaclass=metaform):
     description = StringField()
     ip_address = StringField("IP address")
     weight = StringField()
+    status = StringField()
 
 
 class LoginForm(FlaskForm, metaclass=metaform):

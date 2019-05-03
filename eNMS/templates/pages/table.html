@@ -22,29 +22,27 @@
         <div class="x_panel">
           <div style="min-height:90vh;" class="x_content">
             <div class="page-title">
-              <div class="title_left">
-                {% if type == "service" %}
-                  <div class='form-group'>
-                      <select class="form-control add-id" id="service-type"></select>
-                  </div>
-                {% endif %}
-                {% if type not in ("configuration", "log") %}
-                  <button class="btn btn-primary btn-file" onclick="showTypePanel('{{ type }}')">
-                    Create
-                  </button>
-                {% endif %}
-                {% if type == "pool" %}
-                  <button class="btn btn-primary btn-file" onclick="updatePool('all')">
-                    Update all pools
-                  </button>
-                {% endif %}
-                <button class="btn btn-info btn-file" onclick="showPanel('{{ type }}_filtering')">
-                  Filter
+              {% if type == "service" %}
+              <button style="background:transparent; border:none; color:transparent; width: 20vw;">
+                <select class="form-control add-id" id="service-type"></select>
+              </button>
+              {% endif %}
+              {% if type not in ("configuration", "log") %}
+                <button class="btn btn-primary btn-file" onclick="showTypePanel('{{ type }}')">
+                  Create
                 </button>
-                <button class="btn btn-info btn-file" onclick="undoFilter('{{ type }}_filtering')">
-                  Undo Filter
+              {% endif %}
+              {% if type == "pool" %}
+                <button class="btn btn-primary btn-file" onclick="updatePool('all')">
+                  Update all pools
                 </button>
-              </div>
+              {% endif %}
+              <button class="btn btn-info btn-file" onclick="showPanel('{{ type }}_filtering')">
+                Filter
+              </button>
+              <button class="btn btn-info btn-file" onclick="undoFilter('{{ type }}_filtering')">
+                Undo Filter
+              </button>
             </div>
             <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>

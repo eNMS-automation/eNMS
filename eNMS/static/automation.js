@@ -280,11 +280,15 @@ function resumeTask(id) {
 }
 
 (function() {
-  if (type == "service") {
+  if (page == "table-service") {
+
     for (let i = 0; i < servicesClasses.length; i++) {
-      $(id ? `#service-type-${id}` : "#service-type").append(
+      $("#service-type").append(
         `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
       );
     }
+    $("#service-type").selectpicker({
+      liveSearch: true,
+    });
   }
 })();

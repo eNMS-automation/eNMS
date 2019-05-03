@@ -24,7 +24,7 @@ from wtforms import (
     FloatField,
     HiddenField,
     IntegerField,
-    MultipleSelectField,
+    SelectMultipleField,
     SelectField,
     StringField,
 )
@@ -86,7 +86,7 @@ class ExampleServiceForm(ServiceForm, metaclass=metaform):
     string2 = StringField("String 2 !")
     an_integer = IntegerField()
     a_float = FloatField()
-    a_list = MultipleSelectField(
+    a_list = SelectMultipleField(
         choices=[("value1", "Value 1"), ("value2", "Value 2"), ("value3", "Value 3")]
     )
     a_dict = StringField()

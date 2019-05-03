@@ -52,6 +52,20 @@ def create_example_services() -> None:
     admin = fetch("User", name="admin").id
     for service in (
         {
+            "type": "ExampleService",
+            "name": "Example1",
+            "description": "Example",
+            "devices": [fetch("Device", name="Washington").id],
+            "creator": admin,
+            "string1": "s1",
+            "string2": "s2",
+            "an_integer": 10,
+            "a_float": 5.0,
+            "a_list": ["a", "b"],
+            "boolean1": True,
+            "boolean2": False,
+        },
+        {
             "type": "ConfigureBgpService",
             "name": "napalm_configure_bgp_1",
             "description": "Configure BGP Peering with Napalm",

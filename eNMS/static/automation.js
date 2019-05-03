@@ -12,13 +12,30 @@ showTypePanel: false
 
 let refreshJob = {};
 
-/**
- * Display custom form.
- * @param {id} id - Service ID.
- */
 // eslint-disable-next-line
-function showServicePanel(service) {
-  console.log(service);
+function showServicePanel(type, id, duplicate) {
+  console.log(type)
+  createPanel(
+    type,
+    "",
+    id,
+    function(panel) {
+      console.log("test")
+      panelCode(type, id);
+      if (id) {
+        call(`/get-${type}-${id}`, function(instance) {
+          panel.setHeaderTitle(
+            `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
+          );
+          processInstance(type, instance);
+        });
+      } else {
+        panel.setHeaderTitle(`Create a New ${type}`);
+      }
+    },
+    type,
+    duplicate
+  );
 }
 
 /**
@@ -27,6 +44,7 @@ function showServicePanel(service) {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
+  console.log($(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).length);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     autoAdjustHeight: false,
     enableAllSteps: true,

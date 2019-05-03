@@ -326,9 +326,9 @@ class Service(Job, metaclass=register_class):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
+            onclick="showServicePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', true)">Duplicate</button>""",
+            onclick="showServicePanel('{self.type}', '{self.id}', true)">Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="showDeletionPanel('service', '{self.id}', '{self.name}')">
             Delete</button>""",

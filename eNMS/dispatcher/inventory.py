@@ -22,6 +22,7 @@ from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
     export_properties,
+    filtering_properties,
     google_earth_styles,
     link_subtype_to_color,
     reverse_pretty_names,
@@ -248,18 +249,18 @@ class InventoryDispatcher:
         }
 
     def view_filtering(self, filter_type: str):
+        print(request.form)
         obj_type = filter_type.split("_")[0]
         model = classes[obj_type]
         properties = table_properties[obj_type]
-        if obj_type == "device":
-            properties.append("current_configuration")
         constraints = []
-        for property in properties:
+        for property in filtering_properties[obj_type]:
             value = request.form[property]
             if value:
                 constraints.append(getattr(model, property).contains(value))
         result = db.session.query(model).filter(and_(*constraints))
-        pools = [int(id) for id in request.args.getlist("form[pools][]")]
+        print(request.args)
+        pools = [int(id) for id in request.form["pools"]]
         if pools:
             result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
         return [d.view_properties for d in result.all()]

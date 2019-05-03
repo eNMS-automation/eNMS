@@ -404,6 +404,7 @@ function filter(type) {
       deleteAllLinks();
       r.map(createLink);
     }
+    alertify.notify("Filter applied.", "success", 5);
   });
 }
 

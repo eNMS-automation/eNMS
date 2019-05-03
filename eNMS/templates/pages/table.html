@@ -23,6 +23,11 @@
           <div style="min-height:90vh;" class="x_content">
             <div class="page-title">
               <div class="title_left">
+                {% if type == "service" %}
+                  <div class='form-group'>
+                      <select class="form-control add-id" id="service-type"></select>
+                  </div>
+                {% endif %}
                 {% if type not in ("configuration", "log") %}
                   <button class="btn btn-primary btn-file" onclick="showTypePanel('{{ type }}')">
                     Create

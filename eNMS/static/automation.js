@@ -47,21 +47,6 @@ function panelCode(type, id) {
     transitionEffect: "none",
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-  if (type == "service") {
-    for (let i = 0; i < servicesClasses.length; i++) {
-      $(id ? `#service-type-${id}` : "#service-type").append(
-        `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
-      );
-    }
-    if (id) {
-      $(`#service-type-${id}`).prop("disabled", true);
-    } else {
-      $("#service-type").change(function() {
-        displayCustomForm();
-      });
-    }
-    displayCustomForm(id);
-  }
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
 }
 
@@ -293,3 +278,13 @@ function resumeTask(id) {
     alertify.notify("Task resumed.", "success", 5);
   });
 }
+
+(function() {
+  if (type == "service") {
+    for (let i = 0; i < servicesClasses.length; i++) {
+      $(id ? `#service-type-${id}` : "#service-type").append(
+        `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`
+      );
+    }
+  }
+})();

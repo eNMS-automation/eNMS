@@ -1,8 +1,8 @@
-<form id="edit-service-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+<form id="edit-{{ form_type }}-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
   {{ form.form_type(value="service") }}
   {{ form.id(id='service-id', class="add-id") }}
   <div class="modal-body">
-    <div id="service-wizard" class="form_wizard wizard_horizontal add-id">
+    <div id="{{ form_type }}-wizard" class="form_wizard wizard_horizontal add-id">
       <ul class="wizard_steps">
         <li>
           <a href="#step-1">
@@ -47,46 +47,42 @@
       </ul>
       <div id="step-1">
         <div style="width: 100%; height: 50%;">
-          <label>Type of Service</label>
-          <div class='form-group'>
-            <select class="form-control add-id" id="service-type"></select>
-          </div>
           <label><label for="name">Name</label></label>
           <div class='form-group'>
-            {{ form.name(id='service-name', class="form-control add-id required") }}
+            {{ form.name(id='{{ form_type }}-name', class="form-control add-id required") }}
           </div>
           <label><label for="description">Description</label></label>
           <div class='form-group'>
-            {{ form.description(id='service-description', class="form-control add-id") }}
+            {{ form.description(id='{{ form_type }}-description', class="form-control add-id") }}
           </div>
           <label><label for="vendor">Vendor</label></label>
           <div class='form-group'>
-            {{ form.vendor(id='service-vendor', class="form-control add-id") }}
+            {{ form.vendor(id='{{ form_type }}-vendor', class="form-control add-id") }}
           </div>
           <label><label for="operating_system">Operating System</label></label>
           <div class='form-group'>
-            {{ form.operating_system(id='service-operating_system', class="form-control add-id") }}
+            {{ form.operating_system(id='{{ form_type }}-operating_system', class="form-control add-id") }}
           </div>
         </div>
       </div>
       <div id="step-2">
         <fieldset>
           <div class="item">
-            <input id="service-send_notification" name="send_notification" type="checkbox" class="add-id" value="y">
+            <input id="{{ form_type }}-send_notification" name="send_notification" type="checkbox" class="add-id" value="y">
             <label>Send notification</label>
           </div>
         </fieldset>
         <label><label for="send_notification_method">Send Notification Method</label></label>
         <div class='form-group'>
-          {{ form.send_notification_method(id='service-send_notification_method', class="form-control add-id") }}
+          {{ form.send_notification_method(id='{{ form_type }}-send_notification_method', class="form-control add-id") }}
         </div>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
-          {{ form.mail_recipient(id='service-mail_recipient', class="form-control add-id") }}
+          {{ form.mail_recipient(id='{{ form_type }}-mail_recipient', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-display_only_failed_nodes" name="display_only_failed_nodes"  class="add-id" type="checkbox" value="y">
+            <input id="{{ form_type }}-display_only_failed_nodes" name="display_only_failed_nodes"  class="add-id" type="checkbox" value="y">
             <label>Display only failed nodes</label>
           </div>
         </fieldset>
@@ -94,19 +90,19 @@
       <div id="step-3">
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class='form-group'>
-          {{ form.number_of_retries(id='service-number_of_retries', class="form-control add-id") }}
+          {{ form.number_of_retries(id='{{ form_type }}-number_of_retries', class="form-control add-id") }}
         </div>
         <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.time_between_retries(id='service-time_between_retries', class="form-control add-id") }}
+          {{ form.time_between_retries(id='{{ form_type }}-time_between_retries', class="form-control add-id") }}
         </div>
         <label><label for="waiting_time">Waiting time (in seconds)</label></label>
         <div class='form-group'>
-          {{ form.waiting_time(id='service-waiting_time', class="form-control add-id") }}
+          {{ form.waiting_time(id='{{ form_type }}-waiting_time', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-push_to_git" name="push_to_git" class="add-id" type="checkbox" value="y">
+            <input id="{{ form_type }}-push_to_git" name="push_to_git" class="add-id" type="checkbox" value="y">
             <label>Push to git</label>
           </div>
         </fieldset>
@@ -114,32 +110,32 @@
       <div id="step-4">
         <label><label for="devices">Devices</label></label>
         <div class='form-group'>
-          {{ form.devices(id='service-devices', class="form-control add-id") }}
+          {{ form.devices(id='{{ form_type }}-devices', class="form-control add-id") }}
         </div>
         <label><label for="pools">Pools</label></label>
         <div class='form-group'>
-          {{ form.pools(id='service-pools', class="form-control add-id") }}
+          {{ form.pools(id='{{ form_type }}-pools', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
+            <input id="{{ form_type }}-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
             <label>Multiprocessing</label>
           </div>
         </fieldset>
         <label><label for="max_processes">Maximum number of processes</label></label>
         <div class='form-group'>
-          {{ form.max_processes(id='service-max_processes', class="form-control add-id") }}
+          {{ form.max_processes(id='{{ form_type }}-max_processes', class="form-control add-id") }}
         </div>
         <label><label for="credentials">Credentials</label></label>
         <div class='form-group'>
-          {{ form.credentials(id='service-credentials', class="form-control add-id") }}
+          {{ form.credentials(id='{{ form_type }}-credentials', class="form-control add-id") }}
         </div>
       </div>
       <div id="step-5">
-        {% for field_name in form.service_fields %}
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
+        {% for field_name in form.{{ form_type }}_fields %}
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">field_name</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            {{ getattr(form, field_name)(id="service-{}".format(field_name), class="form-control add-id") }}
+            {{ form[field_name](id="{}-{}".format(form_type, field_name), class="form-control add-id") }}
           </div><br><br>
         {% endfor %}
       </div>

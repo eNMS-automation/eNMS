@@ -326,6 +326,7 @@ function configureForm(form, id) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
+  console.log(type)
   createPanel(
     type,
     "",

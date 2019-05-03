@@ -1,12 +1,14 @@
 from flask.testing import FlaskClient
-from tests.test_base import check_blueprints
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.functions import fetch_all
+from eNMS.database import fetch_all
+
+from tests.test_base import check_pages
 
 
 netmiko_ping = ImmutableMultiDict(
     [
+        ("form_type", "service"),
         ("name", "netmiko_ping"),
         ("waiting_time", "0"),
         ("devices", "1"),
@@ -24,6 +26,7 @@ netmiko_ping = ImmutableMultiDict(
 
 file_transfer_service = ImmutableMultiDict(
     [
+        ("form_type", "service"),
         ("name", "test"),
         ("waiting_time", "0"),
         ("devices", "1"),
@@ -40,22 +43,22 @@ file_transfer_service = ImmutableMultiDict(
 )
 
 
-@check_blueprints("/automation")
+@check_pages("table-service")
 def test_base_services(user_client: FlaskClient) -> None:
-    user_client.post("/update/NetmikoConfigurationService", data=netmiko_ping)
+    user_client.post("/update-NetmikoConfigurationService", data=netmiko_ping)
     assert len(fetch_all("NetmikoConfigurationService")) == 3
     assert len(fetch_all("Service")) == 26
-    user_client.post("/update/NetmikoFileTransferService", data=file_transfer_service)
+    user_client.post("/update-NetmikoFileTransferService", data=file_transfer_service)
     assert len(fetch_all("NetmikoFileTransferService")) == 1
     assert len(fetch_all("Service")) == 27
 
 
 getters_dict = ImmutableMultiDict(
     [
+        ("form_type", "service"),
         ("name", "napalm_getters_service"),
         ("description", ""),
         ("driver", "ios"),
-        ("list_fields", "getters"),
         ("getters", "get_interfaces"),
         ("getters", "get_interfaces_ip"),
         ("getters", "get_lldp_neighbors"),
@@ -63,14 +66,15 @@ getters_dict = ImmutableMultiDict(
 )
 
 
-@check_blueprints("/automation")
+@check_pages("table-service")
 def test_getters_service(user_client: FlaskClient) -> None:
-    user_client.post("/update/NapalmGettersService", data=getters_dict)
+    user_client.post("/update-NapalmGettersService", data=getters_dict)
     assert len(fetch_all("NapalmGettersService")) == 5
 
 
 ansible_service = ImmutableMultiDict(
     [
+        ("form_type", "service"),
         ("name", "testttt"),
         ("waiting_time", "0"),
         ("devices", "1"),
@@ -84,8 +88,8 @@ ansible_service = ImmutableMultiDict(
 )
 
 
-@check_blueprints("/automation")
+@check_pages("table-service")
 def test_ansible_services(user_client: FlaskClient) -> None:
-    user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
+    user_client.post("/update-AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == 1
     assert len(fetch_all("Service")) == 26

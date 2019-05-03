@@ -59,14 +59,6 @@ class ExampleService(Service, metaclass=register_class):
     boolean1_name = "Boolean N°1"
     boolean2 = Column(Boolean)
 
-    # these values will be displayed in a multiple selection list,
-    # for the property "a_list".
-    a_list_values = [
-        ("value1", "Value 1"),
-        ("value2", "Value 2"),
-        ("value3", "Value 3"),
-    ]
-
     __mapper_args__ = {"polymorphic_identity": "ExampleService"}
 
     # Some services will take action or interrogate a device. The job method
@@ -94,9 +86,9 @@ class ExampleServiceForm(ServiceForm, metaclass=metaform):
     string2 = StringField("String 2 !")
     an_integer = IntegerField()
     a_float = FloatField()
-    a_list = StringField()
+    a_list = MultipleSelectField(
+        choices=[("value1", "Value 1"), ("value2", "Value 2"), ("value3", "Value 3")]
+    )
     a_dict = StringField()
-    # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
-    boolean1 = Column(Boolean)
-    boolean1_name = "Boolean N°1"
-    boolean2 = Column(Boolean)
+    boolean1 = BooleanField()
+    boolean2 = BooleanField("Boolean N°1")

@@ -35,6 +35,6 @@ def user_client() -> Iterator[FlaskClient]:
         "authentication_method": "Local User",
     }
     with app.app_context():
-        client.post("/admin/login", data=login)
+        client.post("/login", data=login)
         yield client
     remove(app.path / "eNMS" / "database.db")

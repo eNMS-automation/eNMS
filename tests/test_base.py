@@ -44,12 +44,12 @@ def check_pages(*pages: str) -> Callable:
 def test_authentication(base_client: FlaskClient) -> None:
     for page in pages:
         expected_code = 200 if page in free_access_pages else 403
-        r = base_client.get(page_url, follow_redirects=True)
+        r = base_client.get(page, follow_redirects=True)
         assert r.status_code == expected_code
 
 
 def test_urls(user_client: FlaskClient) -> None:
-    for pages in pages:
+    for page in pages:
         r = user_client.get(page, follow_redirects=True)
         assert r.status_code == 200
     r = user_client.get("/logout", follow_redirects=True)

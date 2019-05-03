@@ -16,6 +16,7 @@ const panelSize = {
   device: "700 600",
   server: "600 250",
   link: "700 400",
+  link_filtering: "700 500",
   pool: "800 600",
   service: "1000 600",
   task: "900 500",

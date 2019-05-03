@@ -7,7 +7,6 @@ from eNMS.forms.fields import DateField, MultipleObjectField, ObjectField
 
 class DeviceAutomationForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="device_automation")
-    list_fields = HiddenField(default="jobs")
     jobs = MultipleObjectField("Job")
 
 
@@ -15,16 +14,6 @@ class JobForm(FlaskForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="service,workflow")
     id = HiddenField()
-    boolean_fields = HiddenField(
-        default=(
-            "display_only_failed_nodes,"
-            "send_notification,"
-            "multiprocessing,"
-            "use_workflow_targets,"
-            "push_to_git"
-        )
-    )
-    list_fields = HiddenField(default="devices,pools")
     name = StringField()
     description = StringField()
     devices = MultipleObjectField("Device")
@@ -86,7 +75,6 @@ class CompareResultsForm(FlaskForm, metaclass=metaform):
 
 class AddJobsForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="add_jobs")
-    list_fields = HiddenField(default="add_jobs")
     add_jobs = MultipleObjectField("Job")
 
 
@@ -107,7 +95,6 @@ def configure_form(cls: FlaskForm) -> FlaskForm:
 class LogAutomationForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="logrule")
     id = HiddenField()
-    list_fields = HiddenField(default="jobs")
     name = StringField()
     jobs = MultipleObjectField("Job")
 
@@ -116,7 +103,6 @@ class TaskForm(FlaskForm, metaclass=metaform):
     template = "base"
     form_type = HiddenField(default="task")
     id = HiddenField()
-    boolean_fields = HiddenField(default="is_active")
     is_active = BooleanField()
     name = StringField()
     description = StringField()

@@ -17,21 +17,8 @@ let refreshJob = {};
  * @param {id} id - Service ID.
  */
 // eslint-disable-next-line
-function displayCustomForm(id) {
-  call(`/get_service-${id || $("#service-type").val()}`, function(customForm) {
-    for (const type of ["boolean", "list"]) {
-      const fields = $(`#service-${type}_fields`);
-      const prop =
-        type == "boolean"
-          ? customForm.boolean_properties
-          : customForm.list_properties;
-      fields.val(`${fields.val()},${prop}`);
-    }
-    $(id ? `#service-custom-form-${id}` : "#service-custom-form").html(
-      customForm.html
-    );
-    if (customForm.service) processInstance("service", customForm.service);
-  });
+function showServicePanel(service) {
+  console.log(service);
 }
 
 /**

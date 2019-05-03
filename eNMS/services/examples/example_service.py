@@ -19,7 +19,18 @@
 # form additions that the user could have.
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
+from wtforms import (
+    BooleanField,
+    FloatField,
+    HiddenField,
+    IntegerField,
+    MultipleSelectField,
+    SelectField,
+    StringField,
+)
 
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 
@@ -34,8 +45,6 @@ class ExampleService(Service, metaclass=register_class):
     string1 = Column(String(255))
     # the "string2" property will be displayed as a text area.
     string2 = Column(String(255))
-    string2_name = "String 2 !"
-    string2_length = 5
     # Text area
     an_integer = Column(Integer)
     # Text area
@@ -49,10 +58,6 @@ class ExampleService(Service, metaclass=register_class):
     boolean1 = Column(Boolean)
     boolean1_name = "Boolean N°1"
     boolean2 = Column(Boolean)
-
-    # these values will be displayed in a single selection drop-down list,
-    # for the property "a_list".
-    string1_values = [("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
 
     # these values will be displayed in a multiple selection list,
     # for the property "a_list".
@@ -80,3 +85,18 @@ class ExampleService(Service, metaclass=register_class):
         # In a workflow, the "success" value will determine whether to move
         # forward with a "Success" edge or a "Failure" edge.
         return {"success": True, "result": "example"}
+
+
+class ExampleServiceForm(ServiceForm, metaclass=metaform):
+    string1 = SelectField(
+        choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
+    )
+    string2 = StringField("String 2 !")
+    an_integer = IntegerField()
+    a_float = FloatField()
+    a_list = StringField()
+    a_dict = StringField()
+    # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
+    boolean1 = Column(Boolean)
+    boolean1_name = "Boolean N°1"
+    boolean2 = Column(Boolean)

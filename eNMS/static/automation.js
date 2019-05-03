@@ -281,7 +281,6 @@ function resumeTask(id) {
 
 (function() {
   if (page == "table-service") {
-
     for (let i = 0; i < servicesClasses.length; i++) {
       $("#service-type").append(
         `<option value='${servicesClasses[i]}'>${servicesClasses[i]}</option>`

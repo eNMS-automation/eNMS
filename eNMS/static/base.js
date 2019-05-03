@@ -331,9 +331,9 @@ function showTypePanel(type, id, duplicate) {
     "",
     id,
     function(panel) {
+      if (["service", "workflow"].includes(type)) panelCode(type, id);
       if (id) {
         call(`/get-${type}-${id}`, function(instance) {
-          if (["service", "workflow"].includes(type)) panelCode(type, id);
           panel.setHeaderTitle(
             `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
           );
@@ -341,7 +341,6 @@ function showTypePanel(type, id, duplicate) {
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
-        if (["service", "workflow"].includes(type)) panelCode(type);
       }
     },
     type,

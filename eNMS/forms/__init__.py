@@ -28,6 +28,20 @@ def metaform(*args, **kwargs):
     return cls
 
 
+def service_metaform(*args, **kwargs):
+    cls = type(*args, **kwargs)
+    form_classes[cls.service_class] = cls
+    form_templates[cls.service_class] = "service"
+
+    properties = {
+        field_name: field_types[field.field_class]
+        for field_name, field in args[-1].items()
+        if isinstance(field, UnboundField) and field.field_class in field_types
+    }
+    cls.service_fields = list(properties)
+    form_properties[cls.service_class] = {**form_properties["service"], **properties}
+
+
 def form_postprocessing(form):
     data = {**form.to_dict(), **{"creator": current_user.id}}
     for property, field_type in form_properties[form.get("form_type")].items():

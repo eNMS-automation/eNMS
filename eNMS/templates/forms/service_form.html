@@ -136,7 +136,12 @@
         </div>
       </div>
       <div id="step-5">
-        <div id="service-custom-form" class="add-id"></div>
+        {% for field_name in form.service_fields %}
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ field.label }}</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            {{ getattr(form, field_name)(id="service-{}".format(field_name), class="form-control add-id") }}
+          </div><br><br>
+        {% endfor %}
       </div>
     </div>
   </div>

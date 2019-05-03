@@ -31,7 +31,7 @@ const panelSize = {
   librenms: "700 250",
   database_migration: "700 300",
   device_automation: "400 200",
-  instance_deletion: "300 200",
+  instance_deletion: "400 130",
   notifications: "900 400",
   netbox: "700 250",
   opennms: "700 300",
@@ -447,6 +447,16 @@ function initTable(type) {
 function filter() {
   table.ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
+}
+
+/**
+ * Undo filter.
+ */
+// eslint-disable-next-line
+function undoFilter(formType) {
+  $(`#${formType}`).remove();
+  table.ajax.reload(null, false);
+  alertify.notify("Filter removed.", "success", 5);
 }
 
 /**

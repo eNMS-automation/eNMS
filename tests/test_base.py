@@ -26,7 +26,7 @@ urls: Dict[str, tuple] = {
     "/logs": ("/log_management", "/log_automation"),
 }
 
-free_access = {"/", "/admin/login", "/admin/create_account"}
+free_access = {"/", "login"}
 
 
 def check_pages(*pages: str) -> Callable:
@@ -36,20 +36,6 @@ def check_pages(*pages: str) -> Callable:
             for page in pages:
                 r = user_client.get(page, follow_redirects=True)
                 assert r.status_code == 200
-
-        return wrapper
-
-    return decorator
-
-
-def check_blueprints(*blueprints: str) -> Callable:
-    def decorator(function: Callable) -> Callable:
-        def wrapper(user_client: FlaskClient) -> None:
-            function(user_client)
-            for blueprint in blueprints:
-                for page in urls[blueprint]:
-                    r = user_client.get(blueprint + page, follow_redirects=True)
-                    assert r.status_code == 200
 
         return wrapper
 

@@ -1,10 +1,10 @@
 from flask.testing import FlaskClient
 
 from eNMS import db
-from eNMS.functions import fetch_all
-from eNMS.logs.models import Log
+from eNMS.database import fetch_all
+from eNMS.models.logging import Log
 
-from tests.test_base import check_blueprints
+from tests.test_base import check_pages
 
 
 log1 = (
@@ -17,7 +17,7 @@ log2 = (
 )
 
 
-@check_blueprints("", "/logs")
+@check_pages("table-log")
 def test_create_logs(user_client: FlaskClient) -> None:
     for log in (log1, log2):
         kwargs = {"ip_address": "192.168.1.88", "content": log, "log_rules": []}

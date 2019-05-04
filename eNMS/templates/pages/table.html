@@ -28,7 +28,8 @@
               </button>
               {% endif %}
               {% if type not in ("configuration", "log") %}
-                <button class="btn btn-primary btn-file" onclick="showTypePanel('{{ type }}')">
+                {% set func = "openServicePanel" if type == "service" else "showTypePanel" %}
+                <button class="btn btn-primary btn-file" onclick="{{ func }}('{{ type }}')">
                   Create
                 </button>
               {% endif %}

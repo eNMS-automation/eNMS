@@ -13,6 +13,15 @@ showTypePanel: false
 let refreshJob = {};
 
 /**
+ * Open service panel
+ */
+// eslint-disable-next-line
+function openServicePanel() {
+  console.log($("#service-type").val());
+  showTypePanel($("#service-type").val());
+}
+
+/**
  * Custom code upon opening panel.
  * @param {type} type - Service or Workflow.
  */

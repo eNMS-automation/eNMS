@@ -137,10 +137,19 @@
       </div>
       <div id="step-5">
         {% for field_name in form.service_fields %}
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ form[field_name].label }}</label>
-          <div class="col-md-9 col-sm-9 col-xs-12">
-            {{ form[field_name](id="{}-{}".format(form_type, field_name), class="form-control add-id") }}
-          </div><br><br>
+          {% if form[field_name].type == "BooleanField" %}
+            <fieldset>
+              <div class="item">
+                {{ form[field_name](id="{}-{}".format(form_type, field_name), class="add-id") }}
+                <label>{{ form[field_name].label }}</label>
+              </div>
+            </fieldset>
+          {% else %}
+            <label>{{ form[field_name].label }}</label>
+            <div class='form-group'>
+              {{ form[field_name](id="{}-{}".format(form_type, field_name), class="form-control add-id") }}
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>

@@ -4,6 +4,7 @@ from typing import Optional
 
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
+from eNMS.extensions import DB_STRING_LENGTH
 from eNMS.inventory.models import Device
 
 
@@ -13,7 +14,7 @@ class UnixCommandService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     command = Column(String(255), default="")
-    content_match = Column(String(255), default="")
+    content_match = Column(String(DB_STRING_LENGTH), default="")
     content_match_textarea = True
     content_match_regex = Column(Boolean, default=False)
     negative_logic = Column(Boolean, default=False)

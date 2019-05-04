@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
+from eNMS.extensions import DB_STRING_LENGTH
 from eNMS.inventory.models import Device
 
 
@@ -15,13 +16,13 @@ class NetmikoDataExtractionService(Service):
     has_targets = True
     variable1 = Column(String(255), default="")
     command1 = Column(String(255), default="")
-    regular_expression1 = Column(String(255), default="")
+    regular_expression1 = Column(String(DB_STRING_LENGTH), default="")
     variable2 = Column(String(255), default="")
     command2 = Column(String(255), default="")
-    regular_expression2 = Column(String(255), default="")
+    regular_expression2 = Column(String(DB_STRING_LENGTH), default="")
     variable3 = Column(String(255), default="")
     command3 = Column(String(255), default="")
-    regular_expression3 = Column(String(255), default="")
+    regular_expression3 = Column(String(DB_STRING_LENGTH), default="")
     driver = Column(String(255), default="")
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)

@@ -4,6 +4,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from eNMS.automation.functions import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
+from eNMS.extensions import DB_STRING_LENGTH
 from eNMS.inventory.models import Device
 
 
@@ -18,7 +19,7 @@ class NapalmConfigurationService(Service):
         ("load_merge_candidate", "Load merge"),
         ("load_replace_candidate", "Load replace"),
     )
-    content = Column(String(255), default="")
+    content = Column(String(DB_STRING_LENGTH), default="")
     content_textarea = True
     driver = Column(String(255), default="")
     driver_values = NAPALM_DRIVERS

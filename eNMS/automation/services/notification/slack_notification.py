@@ -4,6 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from eNMS.functions import get_one
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
+from eNMS.extensions import DB_STRING_LENGTH
 
 
 class SlackNotificationService(Service):
@@ -13,7 +14,7 @@ class SlackNotificationService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     channel = Column(String(255), default="")
     token = Column(String(255), default="")
-    body = Column(String(255), default="")
+    body = Column(String(DB_STRING_LENGTH), default="")
     body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}

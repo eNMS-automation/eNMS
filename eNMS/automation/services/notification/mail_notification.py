@@ -4,6 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from eNMS.extensions import mail_client
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
+from eNMS.extensions import DB_STRING_LENGTH
 from eNMS.functions import get_one
 
 
@@ -15,7 +16,7 @@ class MailNotificationService(Service):
     title = Column(String(255), default="")
     sender = Column(String(255), default="")
     recipients = Column(String(255), default="")
-    body = Column(String(255), default="")
+    body = Column(String(DB_STRING_LENGTH), default="")
     body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}

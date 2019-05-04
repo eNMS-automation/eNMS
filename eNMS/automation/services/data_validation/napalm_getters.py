@@ -4,6 +4,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from eNMS.automation.functions import NAPALM_DRIVERS
 from eNMS.automation.models import Service
 from eNMS.classes import service_classes
+from eNMS.extensions import DB_STRING_LENGTH
 from eNMS.inventory.models import Device
 
 
@@ -19,7 +20,7 @@ class NapalmGettersService(Service):
         ("dict_equal", "Validation by dictionary equality"),
         ("dict_included", "Validation by dictionary inclusion"),
     )
-    content_match = Column(String(255), default="")
+    content_match = Column(String(DB_STRING_LENGTH), default="")
     content_match_textarea = True
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})

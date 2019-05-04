@@ -5,9 +5,12 @@ from os import makedirs, remove
 from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
+from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.controller import controller
 from eNMS.database import fetch_all
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -58,3 +61,11 @@ class LogBackupService(Service, metaclass=register_class):
             "success": True,
             "result": f"logs stored in {destination} ({device.ip_address})",
         }
+
+
+class LogBackupForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="LogBackupService")
+    protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
+    delete_folder = BooleanField()
+    delete_archive = BooleanField()
+    destination_path = StringField()

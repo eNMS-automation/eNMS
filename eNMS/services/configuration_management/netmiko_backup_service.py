@@ -12,6 +12,7 @@ from wtforms import (
 from yaml import dump
 
 from eNMS.controller import controller
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -27,8 +28,8 @@ class NetmikoBackupService(Service, metaclass=register_class):
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
-    configuration_command = Column(String(255), default="")
-    driver = Column(String(255), default="")
+    configuration_command = Column(String(SMALL_STRING_LENGTH), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

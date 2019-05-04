@@ -4,7 +4,7 @@ from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
-from eNMS.database import LARGE_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -19,9 +19,9 @@ class NapalmConfigurationService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    action = Column(String(255), default="")
+    action = Column(String(SMALL_STRING_LENGTH), default="")
     content = Column(Text(LARGE_STRING_LENGTH), default="")
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

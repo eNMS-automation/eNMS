@@ -3,6 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.controller import controller
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -17,7 +18,7 @@ class NapalmRollbackService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

@@ -11,7 +11,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
-from eNMS.database import LARGE_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -27,20 +27,20 @@ class RestCallService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    call_type = Column(String(255), default="")
-    url = Column(String(255), default="")
+    call_type = Column(String(SMALL_STRING_LENGTH), default="")
+    url = Column(String(SMALL_STRING_LENGTH), default="")
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     timeout = Column(Integer, default=15)
-    validation_method = Column(String(255), default="")
+    validation_method = Column(String(SMALL_STRING_LENGTH), default="")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
-    username = Column(String(255), default="")
-    password = Column(String(255), default="")
+    username = Column(String(SMALL_STRING_LENGTH), default="")
+    password = Column(String(SMALL_STRING_LENGTH), default="")
 
     request_dict = {
         "GET": rest_get,

@@ -27,6 +27,7 @@ from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
 from eNMS.controller import controller
+from eNMS.database import fetch, get_one, SMALL_STRING_LENGTH
 from eNMS.modules import db, scheduler
 from eNMS.models import register_class
 from eNMS.models.associations import (
@@ -35,7 +36,6 @@ from eNMS.models.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.database import fetch, get_one
 from eNMS.models.base import Base
 from eNMS.models.inventory import Device
 
@@ -43,12 +43,12 @@ from eNMS.models.inventory import Device
 class Job(Base, metaclass=register_class):
 
     __tablename__ = "Job"
-    type = Column(String(255), default="")
+    type = Column(String(SMALL_STRING_LENGTH), default="")
     __mapper_args__ = {"polymorphic_identity": "Job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
-    name = Column(String(255), unique=True)
-    description = Column(String(255), default="")
+    name = Column(String(SMALL_STRING_LENGTH), unique=True)
+    description = Column(String(SMALL_STRING_LENGTH), default="")
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
     number_of_retries = Column(Integer, default=0)
@@ -60,10 +60,10 @@ class Job(Base, metaclass=register_class):
     completed = Column(Integer, default=0)
     failed = Column(Integer, default=0)
     state = Column(MutableDict.as_mutable(PickleType), default={})
-    credentials = Column(String(255), default="device")
+    credentials = Column(String(SMALL_STRING_LENGTH), default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
-    vendor = Column(String(255), default="")
-    operating_system = Column(String(255), default="")
+    vendor = Column(String(SMALL_STRING_LENGTH), default="")
+    operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     waiting_time = Column(Integer, default=0)
     creator_id = Column(Integer, ForeignKey("User.id"))
     creator = relationship("User", back_populates="jobs")
@@ -78,9 +78,11 @@ class Job(Base, metaclass=register_class):
         "LogRule", secondary=job_log_rule_table, back_populates="jobs"
     )
     send_notification = Column(Boolean, default=False)
-    send_notification_method = Column(String(255), default="mail_feedback_notification")
+    send_notification_method = Column(
+        String(SMALL_STRING_LENGTH), default="mail_feedback_notification"
+    )
     display_only_failed_nodes = Column(Boolean, default=True)
-    mail_recipient = Column(String(255), default="")
+    mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(PickleType), default=[])
 
     @hybrid_property
@@ -442,7 +444,7 @@ class Workflow(Job, metaclass=register_class):
     parent_cls = "Job"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
-    last_modified = Column(String(255), default="")
+    last_modified = Column(String(SMALL_STRING_LENGTH), default="")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship("WorkflowEdge", back_populates="workflow")
 
@@ -516,8 +518,8 @@ class WorkflowEdge(Base, metaclass=register_class):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
-    name = Column(String(255))
-    subtype = Column(String(255))
+    name = Column(String(SMALL_STRING_LENGTH))
+    subtype = Column(String(SMALL_STRING_LENGTH))
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",
@@ -543,17 +545,17 @@ class Task(Base, metaclass=register_class):
     __tablename__ = "Task"
     type = "Task"
     id = Column(Integer, primary_key=True)
-    aps_job_id = Column(String(255))
-    name = Column(String(255), unique=True)
-    description = Column(String(255))
-    creation_time = Column(String(255))
-    scheduling_mode = Column(String(255), default="standard")
+    aps_job_id = Column(String(SMALL_STRING_LENGTH))
+    name = Column(String(SMALL_STRING_LENGTH), unique=True)
+    description = Column(String(SMALL_STRING_LENGTH))
+    creation_time = Column(String(SMALL_STRING_LENGTH))
+    scheduling_mode = Column(String(SMALL_STRING_LENGTH), default="standard")
     periodic = Column(Boolean)
     frequency = Column(Integer)
-    frequency_unit = Column(String(255), default="seconds")
-    start_date = Column(String(255))
-    end_date = Column(String(255))
-    crontab_expression = Column(String(255))
+    frequency_unit = Column(String(SMALL_STRING_LENGTH), default="seconds")
+    start_date = Column(String(SMALL_STRING_LENGTH))
+    end_date = Column(String(SMALL_STRING_LENGTH))
+    crontab_expression = Column(String(SMALL_STRING_LENGTH))
     is_active = Column(Boolean, default=False)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")

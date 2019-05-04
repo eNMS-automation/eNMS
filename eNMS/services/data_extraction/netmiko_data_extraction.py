@@ -10,7 +10,7 @@ from wtforms import (
 )
 
 from eNMS.controller import controller
-from eNMS.database import LARGE_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -24,16 +24,16 @@ class NetmikoDataExtractionService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    variable1 = Column(String(255), default="")
-    command1 = Column(String(255), default="")
+    variable1 = Column(String(SMALL_STRING_LENGTH), default="")
+    command1 = Column(String(SMALL_STRING_LENGTH), default="")
     regular_expression1 = Column(Text(LARGE_STRING_LENGTH), default="")
-    variable2 = Column(String(255), default="")
-    command2 = Column(String(255), default="")
+    variable2 = Column(String(SMALL_STRING_LENGTH), default="")
+    command2 = Column(String(SMALL_STRING_LENGTH), default="")
     regular_expression2 = Column(Text(LARGE_STRING_LENGTH), default="")
-    variable3 = Column(String(255), default="")
-    command3 = Column(String(255), default="")
+    variable3 = Column(String(SMALL_STRING_LENGTH), default="")
+    command3 = Column(String(SMALL_STRING_LENGTH), default="")
     regular_expression3 = Column(Text(LARGE_STRING_LENGTH), default="")
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

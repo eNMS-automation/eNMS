@@ -10,9 +10,10 @@ from wtforms import (
 )
 from wtforms.validators import InputRequired
 
+from eNMS.controller import controller
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
-from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -24,13 +25,13 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    source_file = Column(String(255), default="")
-    dest_file = Column(String(255), default="")
-    direction = Column(String(255), default="")
+    source_file = Column(String(SMALL_STRING_LENGTH), default="")
+    dest_file = Column(String(SMALL_STRING_LENGTH), default="")
+    direction = Column(String(SMALL_STRING_LENGTH), default="")
     disable_md5 = Column(Boolean, default=False)
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
-    file_system = Column(String(255), default="")
+    file_system = Column(String(SMALL_STRING_LENGTH), default="")
     inline_transfer = Column(Boolean, default=False)
     overwrite_file = Column(Boolean, default=False)
     fast_cli = Column(Boolean, default=False)

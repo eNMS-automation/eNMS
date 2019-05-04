@@ -30,6 +30,7 @@ from wtforms import (
 )
 from wtforms.validators import Length
 
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -44,9 +45,9 @@ class ExampleService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     # the "string1" property will be displayed as a drop-down list, because
     # there is an associated "string1_values" property in the class.
-    string1 = Column(String(255), default="")
+    string1 = Column(String(SMALL_STRING_LENGTH), default="")
     # the "string2" property will be displayed as a text area.
-    string2 = Column(String(255), default="")
+    string2 = Column(String(SMALL_STRING_LENGTH), default="")
     # Text area
     an_integer = Column(Integer, default=0)
     # Text area

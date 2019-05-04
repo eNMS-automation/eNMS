@@ -6,6 +6,7 @@ from logging import info
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.validators import InputRequired
 
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -19,10 +20,10 @@ class GenericFileTransferService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    direction = Column(String(255), default="")
-    protocol = Column(String(255), default="")
-    source_file = Column(String(255), default="")
-    destination_file = Column(String(255), default="")
+    direction = Column(String(SMALL_STRING_LENGTH), default="")
+    protocol = Column(String(SMALL_STRING_LENGTH), default="")
+    source_file = Column(String(SMALL_STRING_LENGTH), default="")
+    destination_file = Column(String(SMALL_STRING_LENGTH), default="")
     missing_host_key_policy = Column(Boolean, default=False)
     load_known_host_keys = Column(Boolean, default=False)
     look_for_keys = Column(Boolean, default=False)

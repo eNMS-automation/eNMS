@@ -1,6 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from wtforms import HiddenField, IntegerField, StringField
 
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -15,11 +16,11 @@ class ConfigureBgpService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     local_as = Column(Integer, default=0)
-    loopback = Column(String(255), default="")
-    loopback_ip = Column(String(255), default="")
-    neighbor_ip = Column(String(255), default="")
+    loopback = Column(String(SMALL_STRING_LENGTH), default="")
+    loopback_ip = Column(String(SMALL_STRING_LENGTH), default="")
+    neighbor_ip = Column(String(SMALL_STRING_LENGTH), default="")
     remote_as = Column(Integer, default=0)
-    vrf_name = Column(String(255), default="")
+    vrf_name = Column(String(SMALL_STRING_LENGTH), default="")
     driver = "ios"
 
     __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}

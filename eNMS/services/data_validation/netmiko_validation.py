@@ -19,7 +19,7 @@ from wtforms import (
 )
 
 from eNMS.controller import controller
-from eNMS.database import LARGE_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
@@ -34,15 +34,15 @@ class NetmikoValidationService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    command = Column(String(255), default="")
-    conversion_method = Column(String(255), default="text")
-    validation_method = Column(String(255), default="text")
+    command = Column(String(SMALL_STRING_LENGTH), default="")
+    conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
+    validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

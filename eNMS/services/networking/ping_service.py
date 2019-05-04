@@ -3,6 +3,7 @@ from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer, String
 from wtforms import HiddenField, IntegerField, SelectField, StringField
 
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -16,8 +17,8 @@ class PingService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    protocol = Column(String(255), default="")
-    ports = Column(String(255), default="")
+    protocol = Column(String(SMALL_STRING_LENGTH), default="")
+    ports = Column(String(SMALL_STRING_LENGTH), default="")
     count = Column(Integer, default=5)
     timeout = Column(Integer, default=2)
     ttl = Column(Integer, default=0)

@@ -10,6 +10,7 @@ from wtforms import (
 )
 
 from eNMS.controller import controller
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
@@ -24,21 +25,21 @@ class NetmikoPromptsService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    command = Column(String(255), default="")
-    confirmation1 = Column(String(255), default="")
-    response1 = Column(String(255), default="")
-    confirmation2 = Column(String(255), default="")
-    response2 = Column(String(255), default="")
-    confirmation3 = Column(String(255), default="")
-    response3 = Column(String(255), default="")
-    conversion_method = Column(String(255), default="text")
-    validation_method = Column(String(255), default="text")
-    content_match = Column(String(255), default="")
+    command = Column(String(SMALL_STRING_LENGTH), default="")
+    confirmation1 = Column(String(SMALL_STRING_LENGTH), default="")
+    response1 = Column(String(SMALL_STRING_LENGTH), default="")
+    confirmation2 = Column(String(SMALL_STRING_LENGTH), default="")
+    response2 = Column(String(SMALL_STRING_LENGTH), default="")
+    confirmation3 = Column(String(SMALL_STRING_LENGTH), default="")
+    response3 = Column(String(SMALL_STRING_LENGTH), default="")
+    conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
+    validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
+    content_match = Column(String(SMALL_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

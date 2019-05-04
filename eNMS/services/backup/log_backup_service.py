@@ -8,7 +8,7 @@ from tarfile import open as open_tar
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.controller import controller
-from eNMS.database import fetch_all
+from eNMS.database import fetch_all, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -23,10 +23,10 @@ class LogBackupService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     direction = "put"
-    protocol = Column(String(255), default="")
+    protocol = Column(String(SMALL_STRING_LENGTH), default="")
     delete_folder = Column(Boolean, default=False)
     delete_archive = Column(Boolean, default=False)
-    destination_path = Column(String(255), default="")
+    destination_path = Column(String(SMALL_STRING_LENGTH), default="")
 
     __mapper_args__ = {"polymorphic_identity": "LogBackupService"}
 

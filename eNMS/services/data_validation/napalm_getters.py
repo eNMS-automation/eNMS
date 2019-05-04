@@ -3,6 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from wtforms import BooleanField, HiddenField, SelectMultipleField, SelectField
 
 from eNMS.controller import controller
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -18,13 +19,13 @@ class NapalmGettersService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    validation_method = Column(String(255), default="text")
-    content_match = Column(String(255), default="")
+    validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
+    content_match = Column(String(SMALL_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})

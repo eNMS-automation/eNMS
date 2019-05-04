@@ -3,6 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
 from eNMS.controller import controller
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -18,15 +19,15 @@ class NapalmPingService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     count = Column(Integer, default=0)
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     size = Column(Integer, default=0)
-    destination_ip = Column(String(255), default="")
-    source_ip = Column(String(255), default="")
+    destination_ip = Column(String(SMALL_STRING_LENGTH), default="")
+    source_ip = Column(String(SMALL_STRING_LENGTH), default="")
     timeout = Column(Integer, default=0)
     ttl = Column(Integer, default=0)
-    vrf = Column(String(255), default="")
+    vrf = Column(String(SMALL_STRING_LENGTH), default="")
 
     __mapper_args__ = {"polymorphic_identity": "NapalmPingService"}
 

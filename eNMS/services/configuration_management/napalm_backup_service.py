@@ -6,6 +6,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField
 from yaml import dump
 
 from eNMS.controller import controller
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -22,7 +23,7 @@ class NapalmBackupService(Service, metaclass=register_class):
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
-    driver = Column(String(255), default="")
+    driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

@@ -69,6 +69,7 @@
           const propertyTypes = {{ property_types|tojson|safe }};
           const servicesClasses = {{ services_classes|tojson|safe }};
           let action = {};
+          let csrf_token = "{{ csrf_token() }}";
         </script>
         <script src="{{ url_for('static', filename='base.js') }}"></script>
       {% endblock %}

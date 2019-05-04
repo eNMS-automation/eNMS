@@ -21,6 +21,7 @@ from eNMS.forms import form_properties
 from eNMS.database import fetch, get_one
 from eNMS.modules import (
     bp,
+    csrf,
     db,
     login_manager,
     mail_client,
@@ -49,6 +50,7 @@ def register_modules(app: Flask) -> None:
     db.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
+    csrf.init_app(app)
     FlaskCLI(app)
     controller.init_app(app, db.create_scoped_session())
 

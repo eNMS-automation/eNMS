@@ -97,6 +97,14 @@ function doc(page) {
   $("#doc-link").attr("href", url);
 }
 
+$.ajaxSetup({
+  beforeSend: function(xhr, settings) {
+      if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrf_token);  // insert custom header
+      }
+  }
+});
+
 /**
  * Open new tab at the provided URL.
  * @param {url} url - URL.
@@ -117,6 +125,8 @@ function processResults(callback, results) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
   } else if (results && results.error) {
     alertify.notify(results.error, "error", 5);
+  } else if (results && results.invalid_form) {
+    console.log(results.errors);
   } else {
     callback(results);
   }

@@ -1,4 +1,5 @@
 <form id="edit-{{ form_type }}-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+  {{ form.csrf_token() }}
   {{ form.form_type(value=form_type) }}
   {{ form.id(id=form_type + '-id', class="add-id") }}
   <div class="modal-body">

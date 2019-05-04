@@ -4,6 +4,7 @@ from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
 from hvac import Client as VaultClient
 from ldap3 import ALL, Server
 from os import environ
@@ -16,6 +17,7 @@ USE_VAULT = int(environ.get("USE_VAULT", False))
 
 auth = HTTPBasicAuth()
 bp = Blueprint("bp", __name__, template_folder="templates")
+csrf = CSRFProtect()
 db = SQLAlchemy(session_options={"expire_on_commit": False, "autoflush": False})
 ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL) if USE_LDAP else None
 login_manager = LoginManager()

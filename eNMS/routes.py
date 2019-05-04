@@ -54,7 +54,7 @@ def post_route(page: str) -> Response:
     if form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
-            return {"invalid_form": True, **form.errors}
+            return jsonify({"invalid_form": True, **{"errors": form.errors}})
         print(request.form)
         request.form = form_postprocessing(request.form)
     func, *args = page.split("-")

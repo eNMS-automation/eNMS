@@ -21,10 +21,10 @@ class GenericFileTransferService(Service):
     protocol_values = (("scp", "SCP"), ("sftp", "SFTP"))
     source_file = Column(String(255), default="")
     destination_file = Column(String(255), default="")
-    missing_host_key_policy = Column(Boolean)
-    load_known_host_keys = Column(Boolean)
-    look_for_keys = Column(Boolean)
-    source_file_includes_globbing = Column(Boolean)
+    missing_host_key_policy = Column(Boolean, default=False)
+    load_known_host_keys = Column(Boolean, default=False)
+    look_for_keys = Column(Boolean, default=False)
+    source_file_includes_globbing = Column(Boolean, default=False)
     source_file_includes_globbing_name = (
         "Source file includes glob pattern (Put Direction only)"
     )

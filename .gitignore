@@ -36,3 +36,9 @@ node_modules/
 
 # AP Scheduler
 *.sqlite
+
+# exclude everything in git subfolders, except gitkeep
+git/automation/*
+git/configurations/*
+!git/automation/.gitkeep
+!git/configurations/.gitkeep

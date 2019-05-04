@@ -1,4 +1,13 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String,
+    Text,
+)
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
@@ -27,7 +36,7 @@ class NetmikoValidationService(Service):
         ("dict_equal", "Validation by dictionary equality"),
         ("dict_included", "Validation by dictionary inclusion"),
     )
-    content_match = Column(String(DB_STRING_LENGTH), default="")
+    content_match = Column(Text(DB_STRING_LENGTH), default="")
     content_match_textarea = True
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})

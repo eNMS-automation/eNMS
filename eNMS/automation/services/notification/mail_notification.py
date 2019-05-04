@@ -1,5 +1,5 @@
 from flask_mail import Message
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Text
 
 from eNMS.extensions import mail_client
 from eNMS.automation.models import Service
@@ -16,7 +16,7 @@ class MailNotificationService(Service):
     title = Column(String(255), default="")
     sender = Column(String(255), default="")
     recipients = Column(String(255), default="")
-    body = Column(String(DB_STRING_LENGTH), default="")
+    body = Column(Text(DB_STRING_LENGTH), default="")
     body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}

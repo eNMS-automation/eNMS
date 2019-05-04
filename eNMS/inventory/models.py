@@ -232,7 +232,7 @@ AbstractPool: Any = type(
         "id": Column(Integer, primary_key=True),
         **{
             **{
-                f"device_{property}": Column(String(DB_STRING_LENGTH), default="")
+                f"device_{property}": Column(Text(DB_STRING_LENGTH), default="")
                 for property in pool_device_properties
             },
             **{
@@ -240,7 +240,7 @@ AbstractPool: Any = type(
                 for property in pool_device_properties
             },
             **{
-                f"link_{property}": Column(String(DB_STRING_LENGTH), default="")
+                f"link_{property}": Column(Text(DB_STRING_LENGTH), default="")
                 for property in pool_link_properties
             },
             **{

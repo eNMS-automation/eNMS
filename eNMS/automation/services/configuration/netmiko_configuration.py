@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
 
 from eNMS.automation.functions import NETMIKO_DRIVERS
 from eNMS.automation.models import Service
@@ -13,7 +13,7 @@ class NetmikoConfigurationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    content = Column(String(DB_STRING_LENGTH), default="")
+    content = Column(Text(DB_STRING_LENGTH), default="")
     content_textarea = True
     driver = Column(String(255), default="")
     driver_values = NETMIKO_DRIVERS

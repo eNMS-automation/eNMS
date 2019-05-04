@@ -1,5 +1,5 @@
 from subprocess import check_output
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from typing import Optional
 
 from eNMS.automation.models import Service
@@ -14,7 +14,7 @@ class UnixCommandService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     command = Column(String(255), default="")
-    content_match = Column(String(DB_STRING_LENGTH), default="")
+    content_match = Column(Text(DB_STRING_LENGTH), default="")
     content_match_textarea = True
     content_match_regex = Column(Boolean, default=False)
     negative_logic = Column(Boolean, default=False)

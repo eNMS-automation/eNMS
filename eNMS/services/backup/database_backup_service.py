@@ -4,8 +4,11 @@ from os import remove
 from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
+from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.controller import controller
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -54,3 +57,11 @@ class DatabaseBackupService(Service, metaclass=register_class):
             "success": True,
             "result": f"backup stored in {destination} ({device.ip_address})",
         }
+
+
+class DatabaseBackupForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="DatabaseBackupService")
+    protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
+    delete_folder = BooleanField()
+    delete_archive = BooleanField()
+    destination_path = StringField()

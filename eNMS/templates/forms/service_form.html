@@ -1,5 +1,5 @@
 <form id="edit-{{ form_type }}-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
-  {{ form.form_type(value="service") }}
+  {{ form.form_type(value=form_type) }}
   {{ form.id(id=form_type + '-id', class="add-id") }}
   <div class="modal-body">
     <div id="{{ form_type }}-wizard" class="form_wizard wizard_horizontal add-id">

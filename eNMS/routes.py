@@ -4,7 +4,7 @@ from logging import info, warning
 from werkzeug.wrappers.response import Response
 
 from eNMS.dispatcher import dispatcher
-from eNMS.forms import form_postprocessing
+from eNMS.forms import form_classes, form_postprocessing
 from eNMS.modules import bp, db
 
 
@@ -37,13 +37,7 @@ def get_route(page: str) -> Response:
 
 @bp.route("/<page>", methods=["POST"])
 def post_route(page: str) -> Response:
-    if current_user.is_authenticated:
-        info(
-            f"User '{current_user.name}' {request.remote_addr} "
-            f"calling the endpoint {request.url} (POST)"
-        )
-        request.form = form_postprocessing(request.form)
-    else:
+    if not current_user.is_authenticated:
         if page == "login":
             return dispatcher.login()
         else:
@@ -52,6 +46,17 @@ def post_route(page: str) -> Response:
                 f"calling the endpoint {request.url}"
             )
             return False
+    info(
+        f"User '{current_user.name}' {request.remote_addr} "
+        f"calling the endpoint {request.url} (POST)"
+    )
+    form_type = request.form.get("form_type")
+    if form_type:
+        form = form_classes[form_type](request.form)
+        if not form.validate_on_submit():
+            return {"invalid_form": True, **form.errors}
+        print(request.form)
+        request.form = form_postprocessing(request.form)
     func, *args = page.split("-")
     # try:
     result = getattr(dispatcher, func)(*args)

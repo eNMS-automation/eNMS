@@ -32,15 +32,12 @@ def service_metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
     form_classes[cls.service_class] = cls
     form_templates[cls.service_class] = "service"
-    print(args)
     properties = {
         field_name: field_types[field.field_class]
         for field_name, field in args[-1].items()
         if isinstance(field, UnboundField) and field.field_class in field_types
     }
-    print(properties)
     cls.service_fields = list(properties)
-    print(cls.service_fields)
     form_properties[cls.service_class] = {**form_properties["service"], **properties}
 
 

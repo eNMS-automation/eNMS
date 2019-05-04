@@ -10,7 +10,6 @@ from simplekml import Kml
 from sqlalchemy import and_
 from subprocess import Popen
 from typing import Union
-from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -27,7 +26,6 @@ from eNMS.properties import (
     link_subtype_to_color,
     reverse_pretty_names,
     subtype_sizes,
-    table_properties,
 )
 
 
@@ -249,17 +247,14 @@ class InventoryDispatcher:
         }
 
     def view_filtering(self, filter_type: str):
-        print(request.form)
         obj_type = filter_type.split("_")[0]
         model = classes[obj_type]
-        properties = table_properties[obj_type]
         constraints = []
         for property in filtering_properties[obj_type]:
             value = request.form[property]
             if value:
                 constraints.append(getattr(model, property).contains(value))
         result = db.session.query(model).filter(and_(*constraints))
-        print(request.args)
         pools = [int(id) for id in request.form["pools"]]
         if pools:
             result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))

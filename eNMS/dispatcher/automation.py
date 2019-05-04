@@ -82,7 +82,10 @@ class AutomationDispatcher:
                 factory(
                     "WorkflowEdge",
                     **{
-                        "name": f"{new_workflow.id}-{subtype}:{src.id}->{destination.id}",
+                        "name": (
+                            f"{new_workflow.id}-{subtype}:",
+                            f"{src.id}->{destination.id}",
+                        ),
                         "workflow": new_workflow.id,
                         "subtype": subtype,
                         "source": src.id,

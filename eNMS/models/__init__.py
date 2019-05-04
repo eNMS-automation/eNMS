@@ -1,5 +1,5 @@
 from collections import defaultdict
-from sqlalchemy import Boolean, Float, Integer, PickleType, String
+from sqlalchemy import Boolean, Float, Integer, PickleType
 from typing import Dict
 
 classes = {}

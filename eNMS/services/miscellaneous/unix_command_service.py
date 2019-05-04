@@ -1,7 +1,11 @@
 from subprocess import check_output
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
+from wtforms import BooleanField
+from wtforms.widgets import TextArea
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -32,3 +36,12 @@ class UnixCommandService(Service, metaclass=register_class):
             "negative_logic": self.negative_logic,
             "result": result,
         }
+
+
+class UnixCommandForm(ServiceForm, metaclass=service_metaform):
+    service_class = "UnixCommandService"
+    command = StringField()
+    content_match = StringField(widget=TextArea(), render_kw={"rows": 5})
+    content_match_regex = BooleanField()
+    negative_logic = BooleanField()
+    delete_spaces_before_matching = BooleanField()

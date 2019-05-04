@@ -9,7 +9,10 @@ from requests import post, get
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
+from wtforms import BooleanField
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
 from eNMS.database import factory, fetch_all, get_one
 from eNMS.modules import mail_client
@@ -132,3 +135,8 @@ class SwissArmyKnifeService(Service, metaclass=register_class):
         # to use, including custom properties.
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
         return {"success": True, "uptime_less_5000": uptime_less_than_50000}
+
+
+class SwissArmyKnifeForm(ServiceForm, metaclass=service_metaform):
+    service_class = "SwissArmyKnifeService"
+    has_targets = BooleanField()

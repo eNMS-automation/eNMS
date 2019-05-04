@@ -1,9 +1,19 @@
 from datetime import datetime
 from pathlib import Path
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from wtforms import (
+    BooleanField,
+    FloatField,
+    HiddenField,
+    IntegerField,
+    SelectField,
+    StringField,
+)
 from yaml import dump
 
 from eNMS.controller import controller
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -71,3 +81,15 @@ class NetmikoBackupService(Service, metaclass=register_class):
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         return {"success": True, "result": f"Command: {self.configuration_command}"}
+
+
+class NetmikoBackupForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="NetmikoBackupService")
+    number_of_configuration = IntegerField(default=10)
+    configuration_command = StringField()
+    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
+    use_device_driver = BooleanField(default=True)
+    fast_cli = BooleanField()
+    timeout = IntegerField()
+    delay_factor = FloatField()
+    global_delay_factor = FloatField()

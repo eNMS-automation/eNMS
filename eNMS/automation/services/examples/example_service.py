@@ -37,9 +37,9 @@ class ExampleService(Service):
     string2_name = "String 2 !"
     string2_length = 5
     # Text area
-    an_integer = Column(Integer)
+    an_integer = Column(Integer, default=0)
     # Text area
-    a_float = Column(Float)
+    a_float = Column(Float, default=0.0)
     # the "a_list" property will be displayed as a multiple selection list
     # list, with the values contained in "a_list_values".
     a_list = Column(MutableList.as_mutable(PickleType))

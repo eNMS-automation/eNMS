@@ -17,8 +17,8 @@ class NetmikoBackupService(Service):
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
-    configuration_command = Column(String(255))
-    driver = Column(String(255))
+    configuration_command = Column(String(255), default="")
+    driver = Column(String(255), default="")
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)

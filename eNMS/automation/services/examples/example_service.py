@@ -31,9 +31,9 @@ class ExampleService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     # the "string1" property will be displayed as a drop-down list, because
     # there is an associated "string1_values" property in the class.
-    string1 = Column(String(255))
+    string1 = Column(String(255), default="")
     # the "string2" property will be displayed as a text area.
-    string2 = Column(String(255))
+    string2 = Column(String(255), default="")
     string2_name = "String 2 !"
     string2_length = 5
     # Text area

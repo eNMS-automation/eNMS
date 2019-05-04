@@ -1,7 +1,10 @@
 from socket import error, gaierror, socket, timeout
 from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer, String
+from wtforms import HiddenField, IntegerField, SelectField, StringField
 
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -66,3 +69,13 @@ class PingService(Service, metaclass=register_class):
                     s.close()
                 result[port] = connection
             return {"success": all(result.values()), "result": result}
+
+
+class PingServiceForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="PingServiceService")
+    protocol = SelectField(choices=(("ICMP", "ICMP Ping"), ("TCP", "TCP Ping")))
+    ports = StringField()
+    count = IntegerField(default=5)
+    timeout = IntegerField(default=2)
+    ttl = IntegerField(default=0)
+    packet_size = IntegerField(default=0)

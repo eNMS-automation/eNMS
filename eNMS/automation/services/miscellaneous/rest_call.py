@@ -20,7 +20,7 @@ class RestCallService(Service):
     __tablename__ = "RestCallService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    has_targets = Column(Boolean)
+    has_targets = Column(Boolean, default=False)
     call_type = Column(String(255), default="")
     url = Column(String(255), default="")
     payload = Column(MutableDict.as_mutable(PickleType), default={})
@@ -35,10 +35,10 @@ class RestCallService(Service):
     )
     content_match = Column(String(255), default="")
     content_match_textarea = True
-    content_match_regex = Column(Boolean)
+    content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
-    negative_logic = Column(Boolean)
-    delete_spaces_before_matching = Column(Boolean)
+    negative_logic = Column(Boolean, default=False)
+    delete_spaces_before_matching = Column(Boolean, default=False)
     username = Column(String(255), default="")
     password = Column(String(255), default="")
     call_type_values = (

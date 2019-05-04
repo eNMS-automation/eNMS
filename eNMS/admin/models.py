@@ -102,7 +102,7 @@ class Parameters(Base):
     mail_recipients = Column(String(255), default="")
     mattermost_url = Column(String(255), default="")
     mattermost_channel = Column(String(255), default="")
-    mattermost_verify_certificate = Column(Boolean)
+    mattermost_verify_certificate = Column(Boolean, default=False)
     slack_token = Column(String(255), default="")
     slack_channel = Column(String(255), default="")
 

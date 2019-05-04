@@ -15,9 +15,9 @@ class UnixCommandService(Service):
     command = Column(String(255), default="")
     content_match = Column(String(255), default="")
     content_match_textarea = True
-    content_match_regex = Column(Boolean)
-    negative_logic = Column(Boolean)
-    delete_spaces_before_matching = Column(Boolean)
+    content_match_regex = Column(Boolean, default=False)
+    negative_logic = Column(Boolean, default=False)
+    delete_spaces_before_matching = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "UnixCommandService"}
 

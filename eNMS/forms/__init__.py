@@ -16,7 +16,6 @@ def metaform(*args, **kwargs):
     form_type = cls.form_type.kwargs["default"]
     form_classes[form_type] = cls
     form_templates[form_type] = getattr(cls, "template", "base")
-    print(form_type, getattr(cls, "template", "base"))
     form_actions[form_type] = getattr(cls, "action", None)
     properties = {
         field_name: field_types[field.field_class]

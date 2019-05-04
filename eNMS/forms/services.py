@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, IntegerField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.forms import metaform
+from eNMS.forms.fields import DictField
 
 
 class ValidationForm(FlaskForm, metaclass=metaform):

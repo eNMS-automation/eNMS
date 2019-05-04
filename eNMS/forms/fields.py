@@ -30,6 +30,9 @@ class MultipleObjectField(SelectMultipleField):
         super().__init__(*args, **kwargs)
         self.choices = choices(model)
 
+    def pre_validate(self, form):
+        pass
+
 
 field_types = {
     BooleanField: "boolean",

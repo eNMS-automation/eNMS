@@ -9,6 +9,7 @@ from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
 from os import environ
 from paramiko import SSHClient
+from random import uniform
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
@@ -248,6 +249,7 @@ class Job(Base):
     ) -> None:
         with controller.app.app_context():
             device, results, payload, workflow, lock = args
+            sleep(uniform(0.1, 1.0))
             device_result = self.get_results(payload, device, workflow, True)
             with lock:
                 with session_scope() as session:

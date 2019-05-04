@@ -115,6 +115,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         )
 
     def update(self, cls: str) -> dict:
+        print(request.form)
         try:
             instance = factory(cls, **request.form)
             info(

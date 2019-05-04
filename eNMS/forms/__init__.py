@@ -13,25 +13,31 @@ form_templates = {}
 
 def metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
-    types = cls.form_type.kwargs["default"]
-    form_classes[types] = cls
-    form_templates[types] = getattr(cls, "template", "base")
-    form_actions[types] = getattr(cls, "action", None)
-    for form_type in types.split(","):
-        properties = {
-            field_name: field_types[field.field_class]
-            for field_name, field in args[-1].items()
-            if isinstance(field, UnboundField) and field.field_class in field_types
-        }
-        form_properties[form_type].update(properties)
-        property_types.update(properties)
+    form_type = cls.form_type.kwargs["default"]
+    form_classes[form_type] = cls
+    form_templates[form_type] = getattr(cls, "template", "base")
+    form_actions[form_type] = getattr(cls, "action", None)
+    properties = {
+        field_name: field_types[field.field_class]
+        for field_name, field in args[-1].items()
+        if isinstance(field, UnboundField) and field.field_class in field_types
+    }
+    form_properties[form_type].update(properties)
+    property_types.update(properties)
+    for base in cls.__bases__:
+        if not hasattr(base, "form_type"):
+            continue
+        base_form_type = base.form_type.kwargs["default"]
+        if base_form_type == "service":
+            print(form_type)
+        form_properties[form_type].update(form_properties[base_form_type])
     return cls
 
 
 def service_metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
+
     form_classes[cls.service_class] = cls
-    form_templates[cls.service_class] = "service"
     properties = {
         field_name: field_types[field.field_class]
         for field_name, field in args[-1].items()

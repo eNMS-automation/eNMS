@@ -64,11 +64,12 @@ class ConnectionForm(FlaskForm, metaclass=metaform):
 
 class ObjectFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
-    form_type = HiddenField(default="device_filtering,link_filtering")
+    form_type = HiddenField(default="object_filtering")
     pools = MultipleObjectField("Pool")
 
 
-class ObjectForm(FlaskForm):
+class ObjectForm(FlaskForm, metaclass=metaform):
+    form_type = HiddenField(default="object")
     name = StringField()
     description = StringField()
     location = StringField()

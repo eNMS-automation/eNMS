@@ -12,7 +12,7 @@ class DeviceAutomationForm(FlaskForm, metaclass=metaform):
 
 class JobForm(FlaskForm, metaclass=metaform):
     template = "object"
-    form_type = HiddenField(default="service,workflow")
+    form_type = HiddenField(default="job")
     id = HiddenField()
     type = StringField()
     name = StringField()

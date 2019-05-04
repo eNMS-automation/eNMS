@@ -29,7 +29,7 @@ from wtforms import (
 )
 from wtforms.validators import Length
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models import register_class
@@ -79,7 +79,7 @@ class ExampleService(Service, metaclass=register_class):
         return {"success": True, "result": "example"}
 
 
-class ExampleForm(ServiceForm, metaclass=service_metaform):
+class ExampleForm(ServiceForm, metaclass=metaform):
     service_class = "ExampleService"
     string1 = SelectField(
         choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]

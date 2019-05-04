@@ -36,12 +36,12 @@ from eNMS.inventory.models import Device
 class Job(Base):
 
     __tablename__ = "Job"
-    type = Column(String(255))
+    type = Column(String(255), default="")
     __mapper_args__ = {"polymorphic_identity": "Job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String(255), unique=True)
-    description = Column(String(255))
+    description = Column(String(255), default="")
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
     number_of_retries = Column(Integer, default=0)
@@ -55,8 +55,8 @@ class Job(Base):
     state = Column(MutableDict.as_mutable(PickleType), default={})
     credentials = Column(String(255), default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
-    vendor = Column(String(255))
-    operating_system = Column(String(255))
+    vendor = Column(String(255), default="")
+    operating_system = Column(String(255), default="")
     waiting_time = Column(Integer, default=0)
     creator_id = Column(Integer, ForeignKey("User.id"))
     creator = relationship("User", back_populates="jobs")
@@ -409,8 +409,8 @@ class WorkflowEdge(Base):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
-    name = Column(String(255))
-    subtype = Column(String(255))
+    name = Column(String(255), default="")
+    subtype = Column(String(255), default="")
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",
@@ -437,7 +437,7 @@ class Workflow(Job):
     __mapper_args__ = {"polymorphic_identity": "Workflow"}
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
-    last_modified = Column(String(255))
+    last_modified = Column(String(255), default="")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship("WorkflowEdge", back_populates="workflow")
 

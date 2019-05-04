@@ -14,8 +14,8 @@ class Log(Base):
 
     __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
-    source_ip = Column(String(255))
-    content = Column(String(255))
+    source_ip = Column(String(255), default="")
+    content = Column(String(255), default="")
     log_rules = relationship(
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
@@ -35,9 +35,9 @@ class LogRule(Base):
     __tablename__ = type = "LogRule"
     id = Column(Integer, primary_key=True)
     name = Column(String(255), unique=True)
-    source_ip = Column(String(255))
+    source_ip = Column(String(255), default="")
     source_ip_regex = Column(Boolean)
-    content = Column(String(255))
+    content = Column(String(255), default="")
     content_regex = Column(Boolean)
     logs = relationship("Log", secondary=log_rule_log_table, back_populates="log_rules")
     jobs = relationship("Job", secondary=job_log_rule_table, back_populates="log_rules")
@@ -84,7 +84,7 @@ class SyslogServer(Base):
 
     __tablename__ = type = "SyslogServer"
     id = Column(Integer, primary_key=True)
-    ip_address = Column(String(255))
+    ip_address = Column(String(255), default="")
     port = Column(Integer)
 
     def __init__(self, ip_address: str, port: int) -> None:

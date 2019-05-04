@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 
 from eNMS.automation.functions import NAPALM_DRIVERS
@@ -19,7 +19,7 @@ class NapalmConfigurationService(Service):
         ("load_merge_candidate", "Load merge"),
         ("load_replace_candidate", "Load replace"),
     )
-    content = Column(String(DB_STRING_LENGTH), default="")
+    content = Column(Text(DB_STRING_LENGTH), default="")
     content_textarea = True
     driver = Column(String(255), default="")
     driver_values = NAPALM_DRIVERS

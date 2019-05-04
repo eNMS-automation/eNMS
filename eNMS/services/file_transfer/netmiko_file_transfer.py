@@ -1,6 +1,10 @@
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from wtforms import BooleanField, FloatField, IntegerField, SelectField, StringField
+from wtforms.validators import InputRequired
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -13,6 +17,7 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
+    source_file = Column(String(255), default="")
     dest_file = Column(String(255), default="")
     direction = Column(String(255), default="")
     direction_values = (("put", "Upload"), ("get", "Download"))
@@ -23,9 +28,8 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
     file_system = Column(String(255), default="")
     inline_transfer = Column(Boolean, default=False)
     overwrite_file = Column(Boolean, default=False)
-    source_file = Column(String(255), default="")
     fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=1.0)
+    timeout = Column(Integer, default=1)
     global_delay_factor = Column(Float, default=1.0)
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoFileTransferService"}
@@ -45,3 +49,19 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
         )
         netmiko_handler.disconnect()
         return {"success": True, "result": transfer_dict}
+
+
+class NetmikoFileTransferForm(ServiceForm, metaclass=service_metaform):
+    service_class = "NetmikoFileTransferService"
+    source_file = StringField(validators=[InputRequired()])
+    dest_file = StringField(validators=[InputRequired()])
+    direction = SelectField(choices=(("put", "Upload"), ("get", "Download")))
+    disable_md5 = BooleanField()
+    driver = SelectField(choices=controller.NETMIKO_SCP_DRIVERS)
+    use_device_driver = BooleanField()
+    file_system = StringField()
+    inline_transfer = BooleanField()
+    overwrite_file = BooleanField()
+    fast_cli = BooleanField()
+    timeout = IntegerField(default=1)
+    global_delay_factor = FloatField(default=1.0)

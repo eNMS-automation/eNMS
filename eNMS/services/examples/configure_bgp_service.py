@@ -53,7 +53,7 @@ class ConfigureBgpService(Service, metaclass=register_class):
         return {"success": True, "result": f"Config push ({config})"}
 
 
-class ConfigureBgpServiceForm(ServiceForm, metaclass=service_metaform):
+class ConfigureBgpForm(ServiceForm, metaclass=service_metaform):
     service_class = "ConfigureBgpService"
     local_as = IntegerField("Local AS", default=0)
     loopback = StringField("Loopback", default="Lo42")

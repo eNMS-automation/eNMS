@@ -81,7 +81,7 @@ class ExampleService(Service, metaclass=register_class):
         return {"success": True, "result": "example"}
 
 
-class ExampleServiceForm(ServiceForm, metaclass=service_metaform):
+class ExampleForm(ServiceForm, metaclass=service_metaform):
     service_class = "ExampleService"
     string1 = SelectField(
         choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]

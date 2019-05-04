@@ -1,6 +1,9 @@
 from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import DictField
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -20,3 +23,8 @@ class UpdateInventoryService(Service, metaclass=register_class):
         for property, value in self.update_dictionary.items():
             setattr(device, property, value)
         return {"success": True, "result": "properties updated"}
+
+
+class UpdateInventoryForm(ServiceForm, metaclass=service_metaform):
+    service_class = "UpdateInventoryService"
+    update_dictionary = DictField()

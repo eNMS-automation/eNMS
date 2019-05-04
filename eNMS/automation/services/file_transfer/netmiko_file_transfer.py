@@ -13,17 +13,17 @@ class NetmikoFileTransferService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    dest_file = Column(String(255))
-    direction = Column(String(255))
+    dest_file = Column(String(255), default="")
+    direction = Column(String(255), default="")
     direction_values = (("put", "Upload"), ("get", "Download"))
     disable_md5 = Column(Boolean)
-    driver = Column(String(255))
+    driver = Column(String(255), default="")
     driver_values = NETMIKO_SCP_DRIVERS
     use_device_driver = Column(Boolean, default=True)
-    file_system = Column(String(255))
+    file_system = Column(String(255), default="")
     inline_transfer = Column(Boolean)
     overwrite_file = Column(Boolean)
-    source_file = Column(String(255))
+    source_file = Column(String(255), default="")
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=1.0)
     global_delay_factor = Column(Float, default=1.0)

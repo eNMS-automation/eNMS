@@ -15,15 +15,15 @@ class AnsiblePlaybookService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean)
-    playbook_path = Column(String(255))
-    arguments = Column(String(255))
-    validation_method = Column(String(255))
+    playbook_path = Column(String(255), default="")
+    arguments = Column(String(255), default="")
+    validation_method = Column(String(255), default="")
     validation_method_values = (
         ("text", "Validation by text match"),
         ("dict_equal", "Validation by dictionary equality"),
         ("dict_included", "Validation by dictionary inclusion"),
     )
-    content_match = Column(String(255))
+    content_match = Column(String(255), default="")
     content_match_textarea = True
     content_match_regex = Column(Boolean)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})

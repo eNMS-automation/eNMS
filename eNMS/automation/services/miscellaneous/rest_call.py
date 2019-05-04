@@ -21,26 +21,26 @@ class RestCallService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean)
-    call_type = Column(String(255))
-    url = Column(String(255))
+    call_type = Column(String(255), default="")
+    url = Column(String(255), default="")
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     timeout = Column(Integer, default=15.0)
-    validation_method = Column(String(255))
+    validation_method = Column(String(255), default="")
     validation_method_values = (
         ("text", "Validation by text match"),
         ("dict_equal", "Validation by dictionary equality"),
         ("dict_included", "Validation by dictionary inclusion"),
     )
-    content_match = Column(String(255))
+    content_match = Column(String(255), default="")
     content_match_textarea = True
     content_match_regex = Column(Boolean)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
-    username = Column(String(255))
-    password = Column(String(255))
+    username = Column(String(255), default="")
+    password = Column(String(255), default="")
     call_type_values = (
         ("GET", "GET"),
         ("POST", "POST"),

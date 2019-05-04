@@ -20,12 +20,12 @@ class User(Base, UserMixin):
 
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)
-    email = Column(String(255))
+    email = Column(String(255), default="")
     jobs = relationship("Job", back_populates="creator")
     name = Column(String(255), unique=True)
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
-    password = Column(String(255))
+    password = Column(String(255), default="")
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -54,8 +54,8 @@ class Instance(Base):
     __tablename__ = type = "Instance"
     id = Column(Integer, primary_key=True)
     name = Column(String(255), unique=True)
-    description = Column(String(255))
-    ip_address = Column(String(255))
+    description = Column(String(255), default="")
+    ip_address = Column(String(255), default="")
     weight = Column(Integer, default=1)
     status = Column(String(255), default="down")
     cpu_load = Column(Float)
@@ -78,16 +78,16 @@ class Parameters(Base):
     __tablename__ = type = "Parameters"
     id = Column(Integer, primary_key=True)
     name = Column(String(255), default="default", unique=True)
-    cluster_scan_subnet = Column(String(255))
-    cluster_scan_protocol = Column(String(255))
+    cluster_scan_subnet = Column(String(255), default="")
+    cluster_scan_protocol = Column(String(255), default="")
     cluster_scan_timeout = Column(Float)
     default_longitude = Column(Float)
     default_latitude = Column(Float)
     default_zoom_level = Column(Integer)
-    default_view = Column(String(255))
-    default_marker = Column(String(255))
-    git_configurations = Column(String(255))
-    git_automation = Column(String(255))
+    default_view = Column(String(255), default="")
+    default_marker = Column(String(255), default="")
+    git_configurations = Column(String(255), default="")
+    git_automation = Column(String(255), default="")
     gotty_start_port = Column(Integer)
     gotty_end_port = Column(Integer)
     gotty_port_index = Column(Integer, default=-1)
@@ -98,13 +98,13 @@ class Parameters(Base):
         String(255), default="https://demo.opennms.org/opennms/rest/nodes"
     )
     opennms_login = Column(String(255), default="demo")
-    mail_sender = Column(String(255))
-    mail_recipients = Column(String(255))
-    mattermost_url = Column(String(255))
-    mattermost_channel = Column(String(255))
+    mail_sender = Column(String(255), default="")
+    mail_recipients = Column(String(255), default="")
+    mattermost_url = Column(String(255), default="")
+    mattermost_channel = Column(String(255), default="")
     mattermost_verify_certificate = Column(Boolean)
-    slack_token = Column(String(255))
-    slack_channel = Column(String(255))
+    slack_token = Column(String(255), default="")
+    slack_channel = Column(String(255), default="")
 
     def update(self, **kwargs: Any) -> None:
         self.gotty_port_index = -1

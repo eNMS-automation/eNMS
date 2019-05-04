@@ -22,7 +22,6 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from wtforms import (
     BooleanField,
     FloatField,
-    HiddenField,
     IntegerField,
     SelectMultipleField,
     SelectField,

@@ -3,7 +3,11 @@ from json.decoder import JSONDecodeError
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
+from wtforms import BooleanField, SelectField, StringField
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import DictField
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -68,3 +72,24 @@ class AnsiblePlaybookService(Service, metaclass=register_class):
             "result": result,
             "success": success,
         }
+
+
+class AnsiblePlaybookForm(ServiceForm, metaclass=service_metaform):
+    service_class = "ExampleService"
+    has_targets = BooleanField()
+    playbook_path = StringField()
+    arguments = StringField()
+    validation_method = SelectField(
+        choices=(
+            ("text", "Validation by text match"),
+            ("dict_equal", "Validation by dictionary equality"),
+            ("dict_included", "Validation by dictionary inclusion"),
+        )
+    )
+    content_match = StringField()
+    content_match_regex = BooleanField()
+    dict_match = DictField()
+    negative_logic = BooleanField()
+    delete_spaces_before_matching = BooleanField()
+    pass_device_properties = BooleanField()
+    options = DictField()

@@ -17,7 +17,6 @@ let refreshJob = {};
  */
 // eslint-disable-next-line
 function openServicePanel() {
-  console.log($("#service-type").val());
   showTypePanel($("#service-type").val());
 }
 
@@ -27,6 +26,8 @@ function openServicePanel() {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
+  typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
+  typeInput.val(type).prop('disabled', true);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     autoAdjustHeight: false,
     enableAllSteps: true,

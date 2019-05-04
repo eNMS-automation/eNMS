@@ -1,5 +1,8 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
+from wtforms import IntegerField, StringField
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -48,3 +51,13 @@ class ConfigureBgpService(Service, metaclass=register_class):
         napalm_driver.commit_config()
         napalm_driver.close()
         return {"success": True, "result": f"Config push ({config})"}
+
+
+class ConfigureBgpServiceForm(ServiceForm, metaclass=service_metaform):
+    service_class = "ConfigureBgpService"
+    local_as = IntegerField("Local AS")
+    loopback = StringField("Loopback")
+    loopback_ip = StringField("Loopback IP")
+    neighbor_ip = StringField("Neighbor IP")
+    remote_as = IntegerField("Remote AS")
+    vrf_name = StringField("VRF Name")

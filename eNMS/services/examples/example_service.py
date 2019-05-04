@@ -32,6 +32,7 @@ from wtforms.validators import Length
 
 from eNMS.forms import service_metaform
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import DictField
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 
@@ -91,6 +92,6 @@ class ExampleServiceForm(ServiceForm, metaclass=service_metaform):
     a_list = SelectMultipleField(
         choices=[("value1", "Value 1"), ("value2", "Value 2"), ("value3", "Value 3")]
     )
-    a_dict = StringField()
+    a_dict = DictField()
     boolean1 = BooleanField()
     boolean2 = BooleanField("Boolean N°1")

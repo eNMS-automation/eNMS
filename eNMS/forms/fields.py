@@ -15,6 +15,10 @@ class DateField(StringField):
     pass
 
 
+class DictField(StringField):
+    pass
+
+
 class ObjectField(SelectField):
     def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -30,6 +34,7 @@ class MultipleObjectField(SelectMultipleField):
 field_types = {
     BooleanField: "boolean",
     DateField: "date",
+    DictField: "dict",
     FloatField: "float",
     IntegerField: "integer",
     MultipleObjectField: "object-list",

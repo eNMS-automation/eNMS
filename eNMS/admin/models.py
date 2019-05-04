@@ -58,7 +58,7 @@ class Instance(Base):
     ip_address = Column(String(255), default="")
     weight = Column(Integer, default=1)
     status = Column(String(255), default="down")
-    cpu_load = Column(Float)
+    cpu_load = Column(Float, default=0.0)
 
     def generate_row(self, table: str) -> List[str]:
         return [
@@ -80,9 +80,9 @@ class Parameters(Base):
     name = Column(String(255), default="default", unique=True)
     cluster_scan_subnet = Column(String(255), default="")
     cluster_scan_protocol = Column(String(255), default="")
-    cluster_scan_timeout = Column(Float)
-    default_longitude = Column(Float)
-    default_latitude = Column(Float)
+    cluster_scan_timeout = Column(Float, default=0.0)
+    default_longitude = Column(Float, default=0.0)
+    default_latitude = Column(Float, default=0.0)
     default_zoom_level = Column(Integer, default=0)
     default_view = Column(String(255), default="")
     default_marker = Column(String(255), default="")

@@ -18,8 +18,8 @@ class PingService(Service):
     ports = Column(String(255), default="")
     count = Column(Integer, default=5)
     timeout = Column(Integer, default=2)
-    ttl = Column(Integer)
-    packet_size = Column(Integer)
+    ttl = Column(Integer, default=0)
+    packet_size = Column(Integer, default=0)
 
     __mapper_args__ = {"polymorphic_identity": "PingService"}
 

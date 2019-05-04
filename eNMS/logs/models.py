@@ -85,7 +85,7 @@ class SyslogServer(Base):
     __tablename__ = type = "SyslogServer"
     id = Column(Integer, primary_key=True)
     ip_address = Column(String(255), default="")
-    port = Column(Integer)
+    port = Column(Integer, default=0)
 
     def __init__(self, ip_address: str, port: int) -> None:
         self.ip_address = ip_address

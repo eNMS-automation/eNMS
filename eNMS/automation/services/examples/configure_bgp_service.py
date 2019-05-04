@@ -11,11 +11,11 @@ class ConfigureBgpService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    local_as = Column(Integer)
+    local_as = Column(Integer, default=0)
     loopback = Column(String(255), default="")
     loopback_ip = Column(String(255), default="")
     neighbor_ip = Column(String(255), default="")
-    remote_as = Column(Integer)
+    remote_as = Column(Integer, default=0)
     vrf_name = Column(String(255), default="")
     driver = "ios"
 

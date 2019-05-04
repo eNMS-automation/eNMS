@@ -19,8 +19,8 @@ class NapalmTracerouteService(Service):
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     destination_ip = Column(String(255), default="")
     source_ip = Column(String(255), default="")
-    timeout = Column(Integer)
-    ttl = Column(Integer)
+    timeout = Column(Integer, default=0)
+    ttl = Column(Integer, default=0)
     vrf = Column(String(255), default="")
 
     __mapper_args__ = {"polymorphic_identity": "NapalmTracerouteService"}

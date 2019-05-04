@@ -13,16 +13,16 @@ class NapalmPingService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    count = Column(Integer)
+    count = Column(Integer, default=0)
     driver = Column(String(255), default="")
     driver_values = NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
-    size = Column(Integer)
+    size = Column(Integer, default=0)
     destination_ip = Column(String(255), default="")
     source_ip = Column(String(255), default="")
-    timeout = Column(Integer)
-    ttl = Column(Integer)
+    timeout = Column(Integer, default=0)
+    ttl = Column(Integer, default=0)
     vrf = Column(String(255), default="")
 
     __mapper_args__ = {"polymorphic_identity": "NapalmPingService"}

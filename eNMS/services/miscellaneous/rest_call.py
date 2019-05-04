@@ -10,11 +10,11 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
-from wtforms.widgets import TextArea
 
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
+from eNMS.forms.services import ValidationForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -94,7 +94,7 @@ class RestCallService(Service, metaclass=register_class):
         }
 
 
-class RestCallForm(ServiceForm, metaclass=metaform):
+class RestCallForm(ServiceForm, ValidationForm, metaclass=metaform):
     form_type = HiddenField(default="RestCallService")
     has_targets = BooleanField()
     call_type = SelectField(
@@ -107,17 +107,5 @@ class RestCallForm(ServiceForm, metaclass=metaform):
     timeout = IntegerField(default=15)
     username = StringField()
     password = StringField()
-    validation_method = SelectField(
-        choices=(
-            ("text", "Validation by text match"),
-            ("dict_equal", "Validation by dictionary equality"),
-            ("dict_included", "Validation by dictionary inclusion"),
-        )
-    )
-    content_match = StringField(widget=TextArea(), render_kw={"rows": 5})
-    content_match_regex = BooleanField()
-    dict_match = DictField()
-    negative_logic = BooleanField()
-    delete_spaces_before_matching = BooleanField()
     pass_device_properties = BooleanField()
     options = DictField()

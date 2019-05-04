@@ -22,7 +22,7 @@ class Task(Base):
     creation_time = Column(String(255), default="")
     scheduling_mode = Column(String(255), default="standard")
     periodic = Column(Boolean, default=False)
-    frequency = Column(Integer)
+    frequency = Column(Integer, default=0)
     frequency_unit = Column(String(255), default="seconds")
     start_date = Column(String(255), default="")
     end_date = Column(String(255), default="")

@@ -83,13 +83,13 @@ class Parameters(Base):
     cluster_scan_timeout = Column(Float)
     default_longitude = Column(Float)
     default_latitude = Column(Float)
-    default_zoom_level = Column(Integer)
+    default_zoom_level = Column(Integer, default=0)
     default_view = Column(String(255), default="")
     default_marker = Column(String(255), default="")
     git_configurations = Column(String(255), default="")
     git_automation = Column(String(255), default="")
-    gotty_start_port = Column(Integer)
-    gotty_end_port = Column(Integer)
+    gotty_start_port = Column(Integer, default=0)
+    gotty_end_port = Column(Integer, default=0)
     gotty_port_index = Column(Integer, default=-1)
     opennms_rest_api = Column(
         String(255), default="https://demo.opennms.org/opennms/rest"

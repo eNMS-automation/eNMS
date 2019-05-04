@@ -28,6 +28,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+from wtforms.validators import Length
 
 from eNMS.forms import service_metaform
 from eNMS.forms.automation import ServiceForm
@@ -84,7 +85,7 @@ class ExampleServiceForm(ServiceForm, metaclass=service_metaform):
     string1 = SelectField(
         choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
     )
-    string2 = StringField("String 2 !")
+    string2 = StringField("String 2 !", [Length(min=4, max=25)])
     an_integer = IntegerField()
     a_float = FloatField()
     a_list = SelectMultipleField(

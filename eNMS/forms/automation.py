@@ -14,6 +14,7 @@ class JobForm(FlaskForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="service,workflow")
     id = HiddenField()
+    type = StringField()
     name = StringField()
     description = StringField()
     devices = MultipleObjectField("Device")

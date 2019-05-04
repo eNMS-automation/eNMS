@@ -36,4 +36,5 @@ field_types = {
     ObjectField: "object",
     SelectField: "list",
     SelectMultipleField: "multiselect",
+    StringField: "str",
 }

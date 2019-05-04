@@ -47,9 +47,9 @@
       </ul>
       <div id="step-1">
         <div style="width: 100%; height: 50%;">
-          <label>Type of Service</label>
+          <label><label for="name">Type</label></label>
           <div class='form-group'>
-            <select class="form-control add-id" id="service-type"></select>
+            {{ form.type(id=form_type + '-type', class="form-control add-id", disabled=True) }}
           </div>
           <label><label for="name">Name</label></label>
           <div class='form-group'>
@@ -137,7 +137,7 @@
       </div>
       <div id="step-5">
         {% for field_name in form.service_fields %}
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">field_name</label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ form[field_name].label }}</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
             {{ form[field_name](id="{}-{}".format(form_type, field_name), class="form-control add-id") }}
           </div><br><br>

@@ -19,13 +19,13 @@ class NapalmGettersService(Service):
         ("dict_equal", "Validation by dictionary equality"),
         ("dict_included", "Validation by dictionary inclusion"),
     )
-    content_match = Column(String(255))
+    content_match = Column(String(255), default="")
     content_match_textarea = True
     content_match_regex = Column(Boolean)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean)
     delete_spaces_before_matching = Column(Boolean)
-    driver = Column(String(255))
+    driver = Column(String(255), default="")
     driver_values = NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])

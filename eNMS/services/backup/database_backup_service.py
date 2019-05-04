@@ -23,7 +23,6 @@ class DatabaseBackupService(Service, metaclass=register_class):
     has_targets = True
     direction = "put"
     protocol = Column(String(255), default="")
-    protocol_values = (("scp", "SCP"), ("sftp", "SFTP"))
     delete_folder = Column(Boolean, default=False)
     delete_archive = Column(Boolean, default=False)
     destination_path = Column(String(255), default="")

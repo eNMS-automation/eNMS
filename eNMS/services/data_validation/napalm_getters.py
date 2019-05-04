@@ -25,32 +25,8 @@ class NapalmGettersService(Service, metaclass=register_class):
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     driver = Column(String(255), default="")
-    driver_values = controller.NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])
-    getters_values = (
-        ("get_arp_table", "ARP table"),
-        ("get_interfaces_counters", "Interfaces counters"),
-        ("get_facts", "Facts"),
-        ("get_environment", "Environment"),
-        ("get_config", "Configuration"),
-        ("get_interfaces", "Interfaces"),
-        ("get_interfaces_ip", "Interface IP"),
-        ("get_lldp_neighbors", "LLDP neighbors"),
-        ("get_lldp_neighbors_detail", "LLDP neighbors detail"),
-        ("get_mac_address_table", "MAC address"),
-        ("get_ntp_servers", "NTP servers"),
-        ("get_ntp_stats", "NTP statistics"),
-        ("get_optics", "Transceivers"),
-        ("get_snmp_information", "SNMP"),
-        ("get_users", "Users"),
-        ("get_network_instances", "Network instances (VRF)"),
-        ("get_ntp_peers", "NTP peers"),
-        ("get_bgp_config", "BGP configuration"),
-        ("get_bgp_neighbors", "BGP neighbors"),
-        ("get_ipv6_neighbors_table", "IPv6"),
-        ("is_alive", "Is alive"),
-    )
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 
     __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}

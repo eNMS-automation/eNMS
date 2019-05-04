@@ -23,7 +23,6 @@ class NapalmBackupService(Service, metaclass=register_class):
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
     driver = Column(String(255), default="")
-    driver_values = controller.NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

@@ -20,9 +20,7 @@ class GenericFileTransferService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     direction = Column(String(255), default="")
-    direction_values = (("get", "Get"), ("put", "Put"))
     protocol = Column(String(255), default="")
-    protocol_values = (("scp", "SCP"), ("sftp", "SFTP"))
     source_file = Column(String(255), default="")
     destination_file = Column(String(255), default="")
     missing_host_key_policy = Column(Boolean, default=False)

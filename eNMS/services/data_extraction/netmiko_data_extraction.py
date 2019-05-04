@@ -33,7 +33,6 @@ class NetmikoDataExtractionService(Service, metaclass=register_class):
     command3 = Column(String(255), default="")
     regular_expression3 = Column(String(255), default="")
     driver = Column(String(255), default="")
-    driver_values = controller.NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

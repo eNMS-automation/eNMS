@@ -33,25 +33,13 @@ class RestCallService(Service, metaclass=register_class):
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     timeout = Column(Integer, default=15)
     validation_method = Column(String(255), default="")
-    validation_method_values = (
-        ("text", "Validation by text match"),
-        ("dict_equal", "Validation by dictionary equality"),
-        ("dict_included", "Validation by dictionary inclusion"),
-    )
     content_match = Column(String(255), default="")
-    content_match_textarea = True
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     username = Column(String(255), default="")
     password = Column(String(255), default="")
-    call_type_values = (
-        ("GET", "GET"),
-        ("POST", "POST"),
-        ("PUT", "PUT"),
-        ("DELETE", "DELETE"),
-    )
 
     request_dict = {
         "GET": rest_get,

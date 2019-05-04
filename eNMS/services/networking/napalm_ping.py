@@ -19,7 +19,6 @@ class NapalmPingService(Service, metaclass=register_class):
     has_targets = True
     count = Column(Integer, default=0)
     driver = Column(String(255), default="")
-    driver_values = controller.NAPALM_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
     size = Column(Integer, default=0)

@@ -27,10 +27,8 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
     source_file = Column(String(255), default="")
     dest_file = Column(String(255), default="")
     direction = Column(String(255), default="")
-    direction_values = (("put", "Upload"), ("get", "Download"))
     disable_md5 = Column(Boolean, default=False)
     driver = Column(String(255), default="")
-    driver_values = controller.NETMIKO_SCP_DRIVERS
     use_device_driver = Column(Boolean, default=True)
     file_system = Column(String(255), default="")
     inline_transfer = Column(Boolean, default=False)

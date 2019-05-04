@@ -8,6 +8,7 @@ from eNMS.forms.fields import DictField
 
 class ValidationForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="service_validation")
+    abstract_service = True
     validation_method = SelectField(
         choices=(
             ("text", "Validation by text match"),

@@ -1,18 +1,12 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from wtforms import (
-    BooleanField,
-    HiddenField,
-    SelectMultipleField,
-    SelectField,
-    StringField,
-)
-from wtforms.widgets import TextArea
+from wtforms import BooleanField, HiddenField, SelectMultipleField, SelectField
 
+from eNMS.controller import controller
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.controller import controller
+from eNMS.forms.services import ValidationForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -25,13 +19,7 @@ class NapalmGettersService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     validation_method = Column(String(255), default="text")
-    validation_method_values = (
-        ("text", "Validation by text match"),
-        ("dict_equal", "Validation by dictionary equality"),
-        ("dict_included", "Validation by dictionary inclusion"),
-    )
     content_match = Column(String(255), default="")
-    content_match_textarea = True
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
@@ -88,10 +76,10 @@ class NapalmGettersService(Service, metaclass=register_class):
         }
 
 
-class NapalmGettersForm(ServiceForm, metaclass=metaform):
+class NapalmGettersForm(ServiceForm, ValidationForm, metaclass=metaform):
     form_type = HiddenField(default="NapalmGettersService")
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
-    use_device_driver = BooleanField()
+    use_device_driver = BooleanField(default=True)
     getters = SelectMultipleField(
         choices=(
             ("get_arp_table", "ARP table"),
@@ -118,15 +106,3 @@ class NapalmGettersForm(ServiceForm, metaclass=metaform):
         )
     )
     optional_args = DictField()
-    validation_method = SelectField(
-        choices=(
-            ("text", "Validation by text match"),
-            ("dict_equal", "Validation by dictionary equality"),
-            ("dict_included", "Validation by dictionary inclusion"),
-        )
-    )
-    content_match = StringField(widget=TextArea(), render_kw={"rows": 5})
-    content_match_regex = BooleanField()
-    dict_match = DictField()
-    negative_logic = BooleanField()
-    delete_spaces_before_matching = BooleanField()

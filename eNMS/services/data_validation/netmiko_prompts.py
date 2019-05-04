@@ -1,7 +1,18 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
+from wtforms import (
+    BooleanField,
+    FloatField,
+    HiddenField,
+    IntegerField,
+    SelectField,
+    StringField,
+)
 
 from eNMS.controller import controller
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.services import ValidationForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -75,3 +86,28 @@ class NetmikoPromptsService(Service, metaclass=register_class):
             "result": result,
             "success": self.match_content(result, match),
         }
+
+
+class NetmikoPromptsForm(ServiceForm, ValidationForm, metaclass=metaform):
+    form_type = HiddenField(default="NetmikoPromptsService")
+    command = StringField()
+    confirmation1 = StringField()
+    response1 = StringField()
+    confirmation2 = StringField()
+    response2 = StringField()
+    confirmation3 = StringField()
+    response3 = StringField()
+    conversion_method = SelectField(
+        choices=(
+            ("text", "Text"),
+            ("json", "Json dictionary"),
+            ("xml", "XML dictionary"),
+        )
+    )
+    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
+
+    use_device_driver = BooleanField(default=True)
+    fast_cli = BooleanField()
+    timeout = IntegerField()
+    delay_factor = FloatField()
+    global_delay_factor = FloatField()

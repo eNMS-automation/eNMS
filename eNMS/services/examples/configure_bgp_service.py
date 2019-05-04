@@ -55,8 +55,8 @@ class ConfigureBgpService(Service, metaclass=register_class):
 
 class ConfigureBgpServiceForm(ServiceForm, metaclass=service_metaform):
     service_class = "ConfigureBgpService"
-    local_as = IntegerField("Local AS")
-    loopback = StringField("Loopback")
+    local_as = IntegerField("Local AS", default=0)
+    loopback = StringField("Loopback", default="Lo42")
     loopback_ip = StringField("Loopback IP")
     neighbor_ip = StringField("Neighbor IP")
     remote_as = IntegerField("Remote AS")

@@ -24,8 +24,6 @@ from eNMS.models.associations import (
 from eNMS.database import DB_STRING_LENGTH, fetch, fetch_all
 from eNMS.models import register_class
 from eNMS.models.base import Base
-from eNMS.functions import fetch, fetch_all
-from eNMS.models import Base
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,

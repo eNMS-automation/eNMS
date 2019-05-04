@@ -3,7 +3,6 @@ from difflib import SequenceMatcher
 from flask import current_app, jsonify, request, send_file, session
 from flask.wrappers import Response
 from re import search, sub
-from sqlalchemy.exc import DataError
 from typing import Any, Dict
 
 from eNMS.concurrent import threaded_job
@@ -11,8 +10,7 @@ from eNMS.controller import controller
 from eNMS.modules import scheduler
 from eNMS.forms.automation import CompareResultsForm, WorkflowBuilderForm
 from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
-from eNMS.models import cls_to_properties, property_types, service_classes
-from eNMS.properties import pretty_names, private_properties
+from eNMS.models import service_classes
 
 
 class AutomationDispatcher:

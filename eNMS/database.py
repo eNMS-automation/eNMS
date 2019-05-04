@@ -1,10 +1,12 @@
+from os import environ
 from sqlalchemy import exc
 from typing import Any, Callable, List, Tuple
 
 from eNMS.modules import db
 from eNMS.models import classes
 
-DB_STRING_LENGTH = int(environ.get("DB_STRING_LENGTH", 2 ** 16))
+SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
+LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:

@@ -1,6 +1,10 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
+from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import DictField
 from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -47,3 +51,17 @@ class NapalmPingService(Service, metaclass=register_class):
         )
         napalm_driver.close()
         return {"success": "success" in ping, "result": ping}
+
+
+class NapalmPingForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="NapalmPingService")
+    count = IntegerField()
+    driver = SelectField(choices=controller.NAPALM_DRIVERS)
+    use_device_driver = BooleanField()
+    optional_args = DictField()
+    size = IntegerField()
+    destination_ip = StringField()
+    source_ip = StringField()
+    timeout = IntegerField()
+    ttl = IntegerField()
+    vrf = StringField()

@@ -4,7 +4,6 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 from wtforms import BooleanField, HiddenField, StringField
-from wtforms.widgets import TextArea
 
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm

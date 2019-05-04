@@ -3,7 +3,6 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
 from wtforms import HiddenField, StringField
 
-
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm

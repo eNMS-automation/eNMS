@@ -9,7 +9,7 @@ from requests import post, get
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
-from wtforms import BooleanField
+from wtforms import BooleanField, HiddenField
 
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
@@ -138,5 +138,5 @@ class SwissArmyKnifeService(Service, metaclass=register_class):
 
 
 class SwissArmyKnifeForm(ServiceForm, metaclass=metaform):
-    service_class = "SwissArmyKnifeService"
+    form_type = HiddenField(default="SwissArmyKnifeService")
     has_targets = BooleanField()

@@ -9,7 +9,7 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import BooleanField, IntegerField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.forms import metaform
@@ -95,7 +95,7 @@ class RestCallService(Service, metaclass=register_class):
 
 
 class RestCallForm(ServiceForm, metaclass=metaform):
-    service_class = "RestCallService"
+    form_type = HiddenField(default="RestCallService")
     has_targets = BooleanField()
     call_type = SelectField(
         choices=(("GET", "GET"), ("POST", "POST"), ("PUT", "PUT"), ("DELETE", "DELETE"))

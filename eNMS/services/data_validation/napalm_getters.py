@@ -1,6 +1,12 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from wtforms import BooleanField, SelectMultipleField, SelectField, StringField
+from wtforms import (
+    BooleanField,
+    HiddenField,
+    SelectMultipleField,
+    SelectField,
+    StringField,
+)
 from wtforms.widgets import TextArea
 
 from eNMS.forms import metaform
@@ -83,7 +89,7 @@ class NapalmGettersService(Service, metaclass=register_class):
 
 
 class NapalmGettersForm(ServiceForm, metaclass=metaform):
-    service_class = "NapalmGettersService"
+    form_type = HiddenField(default="NapalmGettersService")
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField()
     getters = SelectMultipleField(

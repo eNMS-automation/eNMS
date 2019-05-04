@@ -1,6 +1,13 @@
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
-from wtforms import BooleanField, FloatField, IntegerField, SelectField, StringField
+from wtforms import (
+    BooleanField,
+    FloatField,
+    HiddenField,
+    IntegerField,
+    SelectField,
+    StringField,
+)
 from wtforms.validators import InputRequired
 
 from eNMS.forms import metaform
@@ -52,7 +59,7 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
 
 
 class NetmikoFileTransferForm(ServiceForm, metaclass=metaform):
-    service_class = "NetmikoFileTransferService"
+    form_type = HiddenField(default="NetmikoFileTransferService")
     source_file = StringField(validators=[InputRequired()])
     dest_file = StringField(validators=[InputRequired()])
     file_system = StringField()

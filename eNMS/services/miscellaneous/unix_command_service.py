@@ -1,7 +1,7 @@
 from subprocess import check_output
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
-from wtforms import BooleanField, StringField
+from wtforms import BooleanField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.forms import metaform
@@ -40,7 +40,7 @@ class UnixCommandService(Service, metaclass=register_class):
 
 
 class UnixCommandForm(ServiceForm, metaclass=metaform):
-    service_class = "UnixCommandService"
+    form_type = HiddenField(default="UnixCommandService")
     command = StringField()
     content_match = StringField(widget=TextArea(), render_kw={"rows": 5})
     content_match_regex = BooleanField()

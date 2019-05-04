@@ -3,7 +3,7 @@ from json.decoder import JSONDecodeError
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
-from wtforms import BooleanField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.forms import metaform
@@ -75,7 +75,7 @@ class AnsiblePlaybookService(Service, metaclass=register_class):
 
 
 class AnsiblePlaybookForm(ServiceForm, metaclass=metaform):
-    service_class = "AnsiblePlaybookService"
+    form_type = HiddenField(default="AnsiblePlaybookService")
     has_targets = BooleanField()
     playbook_path = StringField()
     arguments = StringField()

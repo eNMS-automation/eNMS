@@ -1,5 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
+from wtforms import HiddenField
 
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
@@ -26,5 +27,5 @@ class UpdateInventoryService(Service, metaclass=register_class):
 
 
 class UpdateInventoryForm(ServiceForm, metaclass=metaform):
-    service_class = "UpdateInventoryService"
+    form_type = HiddenField(default="UpdateInventoryService")
     update_dictionary = DictField()

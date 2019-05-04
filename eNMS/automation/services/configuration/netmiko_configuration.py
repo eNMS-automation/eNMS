@@ -17,7 +17,7 @@ class NetmikoConfigurationService(Service):
     driver = Column(String(255), default="")
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)
-    enable_mode = Column(Boolean)
+    enable_mode = Column(Boolean, default=False)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=1.0)
     delay_factor = Column(Float, default=1.0)

@@ -23,8 +23,8 @@ class DatabaseBackupService(Service):
     direction = "put"
     protocol = Column(String(255), default="")
     protocol_values = (("scp", "SCP"), ("sftp", "SFTP"))
-    delete_folder = Column(Boolean)
-    delete_archive = Column(Boolean)
+    delete_folder = Column(Boolean, default=False)
+    delete_archive = Column(Boolean, default=False)
     destination_path = Column(String(255), default="")
 
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}

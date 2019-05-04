@@ -31,7 +31,7 @@ class NetmikoValidationService(Service):
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean)
+    delete_spaces_before_matching = Column(Boolean, default=False)
     driver = Column(String(255), default="")
     driver_values = NETMIKO_DRIVERS
     use_device_driver = Column(Boolean, default=True)

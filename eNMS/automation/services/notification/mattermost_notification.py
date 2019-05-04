@@ -12,8 +12,8 @@ class MattermostNotificationService(Service):
     __tablename__ = "MattermostNotificationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    channel = Column(String(255))
-    body = Column(String(255))
+    channel = Column(String(255), default="")
+    body = Column(String(255), default="")
     body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}

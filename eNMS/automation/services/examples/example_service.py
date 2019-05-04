@@ -46,9 +46,9 @@ class ExampleService(Service):
     # Text area where a python dictionnary is expected
     a_dict = Column(MutableDict.as_mutable(PickleType))
     # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
-    boolean1 = Column(Boolean)
+    boolean1 = Column(Boolean, default=False)
     boolean1_name = "Boolean N°1"
-    boolean2 = Column(Boolean)
+    boolean2 = Column(Boolean, default=False)
 
     # these values will be displayed in a single selection drop-down list,
     # for the property "a_list".

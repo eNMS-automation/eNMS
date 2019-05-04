@@ -1,5 +1,5 @@
 from os import environ
-from sqlalchemy import Boolean, Float, Integer, String, Text
+from sqlalchemy import Boolean, Float, Integer, Text
 from yaml import load, BaseLoader
 from typing import Dict, List
 

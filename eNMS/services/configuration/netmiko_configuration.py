@@ -10,7 +10,7 @@ from wtforms import (
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
-from eNMS.database import DB_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -24,7 +24,7 @@ class NetmikoConfigurationService(Service, metaclass=register_class):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    content = Column(Text(DB_STRING_LENGTH), default="")
+    content = Column(Text(LARGE_STRING_LENGTH), default="")
     enable_mode = Column(Boolean, default=False)
     driver = Column(String(255), default="")
     use_device_driver = Column(Boolean, default=True)

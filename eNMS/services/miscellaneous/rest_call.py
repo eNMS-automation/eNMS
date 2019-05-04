@@ -11,7 +11,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
-from eNMS.database import DB_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -34,7 +34,7 @@ class RestCallService(Service, metaclass=register_class):
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     timeout = Column(Integer, default=15)
     validation_method = Column(String(255), default="")
-    content_match = Column(Text(DB_STRING_LENGTH), default="")
+    content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)

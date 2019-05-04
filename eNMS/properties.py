@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Float, Integer, Text
 from yaml import load, BaseLoader
 from typing import Dict, List
 
-from eNMS.database import DB_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH
 
 
 def get_custom_properties() -> dict:
@@ -18,7 +18,7 @@ sql_types: dict = {
     "boolean": Boolean,
     "float": Float,
     "integer": Integer,
-    "string": Text(DB_STRING_LENGTH),
+    "string": Text(LARGE_STRING_LENGTH),
 }
 
 google_earth_styles: dict = {}

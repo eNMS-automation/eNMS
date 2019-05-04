@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 from wtforms import BooleanField, HiddenField, StringField
 
-from eNMS.database import DB_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
@@ -24,7 +24,7 @@ class AnsiblePlaybookService(Service, metaclass=register_class):
     playbook_path = Column(String(255), default="")
     arguments = Column(String(255), default="")
     validation_method = Column(String(255), default="")
-    content_match = Column(Text(DB_STRING_LENGTH), default="")
+    content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)

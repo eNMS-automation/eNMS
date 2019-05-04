@@ -171,7 +171,6 @@ The import and export of topology can be triggered from the ReST API, with a POS
  https://<IP_address>/rest/topology/import
 
 For the import, you need to attach the file as part of the request (of type "form-data" and not JSON) and set the two following ``key`` / ``value`` pairs:
- - update_pools: Whether or not pools must be updated after the topology import to take into consideration the newly imported objects.
  - replace: Whether or not the existing topology must be erased and replaced by the newly imported objects.
 
 Example of python script to import programmatically:
@@ -186,7 +185,7 @@ Example of python script to import programmatically:
  with open(Path.cwd() / 'project_name.xls', 'rb') as f:
      post(
          'https://IP/rest/topology/import',
-         data={'replace': True, 'update_pools': False},
+         data={'replace': True},
          files={'file': f},
          auth=HTTPBasicAuth('admin', 'admin')
      )

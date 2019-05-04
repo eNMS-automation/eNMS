@@ -3,7 +3,11 @@ from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from logging import info
+from wtforms import BooleanField, SelectField, StringField
+from wtforms.validators import InputRequired
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -71,3 +75,17 @@ class GenericFileTransferService(Service, metaclass=register_class):
             )
         ssh_client.close()
         return {"success": success, "result": result}
+
+
+class GenericFileTransferServiceForm(ServiceForm, metaclass=service_metaform):
+    service_class = "GenericFileTransferService"
+    direction = SelectField(choices=(("get", "Get"), ("put", "Put")))
+    protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
+    source_file = StringField(validators=[InputRequired()])
+    destination_file = StringField(validators=[InputRequired()])
+    missing_host_key_policy = BooleanField()
+    load_known_host_keys = BooleanField()
+    look_for_keys = BooleanField()
+    source_file_includes_globbing = BooleanField(
+        "Source file includes glob pattern (Put Direction only)"
+    )

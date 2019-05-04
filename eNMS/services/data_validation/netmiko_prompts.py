@@ -105,7 +105,6 @@ class NetmikoPromptsForm(ServiceForm, ValidationForm, metaclass=metaform):
         )
     )
     driver = SelectField(choices=controller.NETMIKO_DRIVERS)
-
     use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()
     timeout = IntegerField()

@@ -3,6 +3,8 @@ from sqlalchemy import Boolean, Integer, String, Float
 from yaml import load, BaseLoader
 from typing import Dict, List
 
+from eNMS.extensions import DB_STRING_LENGTH
+
 
 def get_custom_properties() -> dict:
     filepath = environ.get("PATH_CUSTOM_PROPERTIES")
@@ -16,7 +18,7 @@ sql_types: dict = {
     "boolean": Boolean,
     "float": Float,
     "integer": Integer,
-    "string": String,
+    "string": String(DB_STRING_LENGTH),
 }
 
 google_earth_styles: dict = {}

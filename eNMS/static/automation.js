@@ -12,39 +12,12 @@ showTypePanel: false
 
 let refreshJob = {};
 
-// eslint-disable-next-line
-function showServicePanel(type, id, duplicate) {
-  console.log(type)
-  createPanel(
-    type,
-    "",
-    id,
-    function(panel) {
-      console.log("test")
-      panelCode(type, id);
-      if (id) {
-        call(`/get-${type}-${id}`, function(instance) {
-          panel.setHeaderTitle(
-            `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
-          );
-          processInstance(type, instance);
-        });
-      } else {
-        panel.setHeaderTitle(`Create a New ${type}`);
-      }
-    },
-    type,
-    duplicate
-  );
-}
-
 /**
  * Custom code upon opening panel.
  * @param {type} type - Service or Workflow.
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
-  console.log($(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).length);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     autoAdjustHeight: false,
     enableAllSteps: true,

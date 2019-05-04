@@ -219,8 +219,8 @@ function createPanel(name, title, id, processing, type, duplicate) {
     theme: "light filledlight",
     headerLogo: "../static/images/logo.png",
     contentOverflow: "hidden scroll",
-    contentSize: panelSize[name],
-    position: "center-top 0 58",
+    contentSize: panelSize[name] || "1000 600",
+    position: "center-top 0 10",
     contentAjax: {
       url: `../form-${name}`,
       done: function(panel) {
@@ -326,19 +326,18 @@ function configureForm(form, id) {
  */
 // eslint-disable-next-line
 function showTypePanel(type, id, duplicate) {
-  console.log(type)
   createPanel(
     type,
     "",
     id,
     function(panel) {
-      if (["service", "workflow"].includes(type)) panelCode(type, id);
+      if (type == "workflow" || type.includes("Service")) panelCode(type, id);
       if (id) {
         call(`/get-${type}-${id}`, function(instance) {
           panel.setHeaderTitle(
             `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
           );
-          if (type !== "service") processInstance(type, instance);
+          processInstance(type, instance);
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

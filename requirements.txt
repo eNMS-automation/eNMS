@@ -23,6 +23,7 @@ pyyaml
 slackclient
 simplekml
 tacacs_plus
+websocket-client
 wtforms
 xlrd
 xlwt

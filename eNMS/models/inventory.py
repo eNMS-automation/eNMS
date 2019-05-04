@@ -35,16 +35,16 @@ from eNMS.properties import (
 class Object(Base, metaclass=register_class):
 
     __tablename__ = "Object"
-    type = Column(String(255))
+    type = Column(String(255), default="")
     __mapper_args__ = {"polymorphic_identity": "Object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String(255), unique=True)
-    subtype = Column(String(255))
-    description = Column(String(255))
-    model = Column(String(255))
-    location = Column(String(255))
-    vendor = Column(String(255))
+    subtype = Column(String(255), default="")
+    description = Column(String(255), default="")
+    model = Column(String(255), default="")
+    location = Column(String(255), default="")
+    vendor = Column(String(255), default="")
 
 
 CustomDevice: Any = (
@@ -73,17 +73,17 @@ class Device(CustomDevice, metaclass=register_class):
     class_type = "device"
     parent_cls = "Object"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
-    operating_system = Column(String(255))
-    os_version = Column(String(255))
-    ip_address = Column(String(255))
-    longitude = Column(Float)
-    latitude = Column(Float)
+    operating_system = Column(String(255), default="")
+    os_version = Column(String(255), default="")
+    ip_address = Column(String(255), default="")
+    longitude = Column(Float, default=0.0)
+    latitude = Column(Float, default=0.0)
     port = Column(Integer, default=22)
-    username = Column(String(255))
-    password = Column(String(255))
-    enable_password = Column(String(255))
-    netmiko_driver = Column(String(255))
-    napalm_driver = Column(String(255))
+    username = Column(String(255), default="")
+    password = Column(String(255), default="")
+    enable_password = Column(String(255), default="")
+    netmiko_driver = Column(String(255), default="")
+    napalm_driver = Column(String(255), default="")
     configurations = Column(MutableDict.as_mutable(PickleType), default={})
     current_configuration = Column(Text)
     last_failure = Column(String(255), default="Never")
@@ -239,7 +239,7 @@ AbstractPool: Any = type(
         "id": Column(Integer, primary_key=True),
         **{
             **{
-                f"device_{property}": Column(String(255))
+                f"device_{property}": Column(String(255), default="")
                 for property in pool_device_properties
             },
             **{
@@ -247,7 +247,7 @@ AbstractPool: Any = type(
                 for property in pool_device_properties
             },
             **{
-                f"link_{property}": Column(String(255))
+                f"link_{property}": Column(String(255), default="")
                 for property in pool_link_properties
             },
             **{
@@ -264,14 +264,14 @@ class Pool(AbstractPool, metaclass=register_class):
     __tablename__ = type = "Pool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
     name = Column(String(255), unique=True)
-    description = Column(String(255))
+    description = Column(String(255), default="")
     operator = Column(String(255), default="all")
     devices = relationship(
         "Device", secondary=pool_device_table, back_populates="pools"
     )
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
-    latitude = Column(Float)
-    longitude = Column(Float)
+    latitude = Column(Float, default=0.0)
+    longitude = Column(Float, default=0.0)
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)

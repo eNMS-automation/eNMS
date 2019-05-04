@@ -5,8 +5,9 @@ from typing import Dict, Type
 class Config(object):
 
     # SQL Alchemy
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
     SQLALCHEMY_RECORD_QUERIES = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # ENMS
     ENMS_SERVER_ADDR = environ.get("ENMS_SERVER_ADDR")

@@ -23,7 +23,18 @@ Complete List of Environment Variables
   - export GOTTY_BYPASS_KEY_PROMPT=1
   - export GOTTY_START_PORT=9000
   - export GOTTY_END_PORT=9100
+  # Uncomment for Postgres Mode:
+  # - export ENMS_DATABASE_URL=postgresql://enms:password@localhost:5432/enms
+  # - export POSTGRES_PASSWORD=password
+  # - export POSTGRES_USER=enms
+  # - export POSTGRES_HOST=localhost
+  # - export POSTGRES_PORT=5432
+  # - export POSTGRES_DB=enms
+  # Uncomment for MySQL Mode:
+  # - export ENMS_DATABASE_URL=mysql://root:password@localhost/enms
+  # Uncomment for SQLite Mode:
   - export ENMS_DATABASE_URL=sqlite:///database.db?check_same_thread=False
+  - export SQLITE_WAL_MODE=1     (to enable multiprocessing support in sqlite)
   - export PATH_CUSTOM_PROPERTIES=/home/user/eNMS/eNMS_properties.yml
   - export CREATE_EXAMPLES=0
   - export MAIL_SERVER=smtp.company.com
@@ -55,7 +66,8 @@ Complete List of Environment Variables
   - export DEFAULT_LONGITUDE=-96.0
   - export DEFAULT_LATITUDE=33.0
   - export DEFAULT_ZOOM_LEVEL=5
-  - export DEFAULT_VIEW=2D
+  - export DEFAULT_VIEW=2D  (or 2DC or 3D)
+  - export DEFAULT_MARKER=Circle  (or Image or "Circle Marker")
   - export GIT_AUTOMATION=git@gitlab.company.com:eNMS-group/eNMS-automation-data.git
   - export GIT_CONFIGURATIONS=git@gitlab.company.com:eNMS-group/eNMS-configurations-data.git
   - export POOL_FILTER=All objects

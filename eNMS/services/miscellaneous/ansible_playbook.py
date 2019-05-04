@@ -14,23 +14,23 @@ class AnsiblePlaybookService(Service, metaclass=register_class):
     __tablename__ = "AnsiblePlaybookService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    has_targets = Column(Boolean)
-    playbook_path = Column(String(255))
-    arguments = Column(String(255))
-    validation_method = Column(String(255))
+    has_targets = Column(Boolean, default=False)
+    playbook_path = Column(String(255), default="")
+    arguments = Column(String(255), default="")
+    validation_method = Column(String(255), default="")
     validation_method_values = (
         ("text", "Validation by text match"),
         ("dict_equal", "Validation by dictionary equality"),
         ("dict_included", "Validation by dictionary inclusion"),
     )
-    content_match = Column(String(255))
+    content_match = Column(String(255), default="")
     content_match_textarea = True
-    content_match_regex = Column(Boolean)
+    content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
-    negative_logic = Column(Boolean)
-    delete_spaces_before_matching = Column(Boolean)
+    negative_logic = Column(Boolean, default=False)
+    delete_spaces_before_matching = Column(Boolean, default=False)
     options = Column(MutableDict.as_mutable(PickleType), default={})
-    pass_device_properties = Column(Boolean)
+    pass_device_properties = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
 

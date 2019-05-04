@@ -42,22 +42,22 @@ class ExampleService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     # the "string1" property will be displayed as a drop-down list, because
     # there is an associated "string1_values" property in the class.
-    string1 = Column(String(255))
+    string1 = Column(String(255), default="")
     # the "string2" property will be displayed as a text area.
-    string2 = Column(String(255))
+    string2 = Column(String(255), default="")
     # Text area
-    an_integer = Column(Integer)
+    an_integer = Column(Integer, default=0)
     # Text area
-    a_float = Column(Float)
+    a_float = Column(Float, default=0.0)
     # the "a_list" property will be displayed as a multiple selection list
     # list, with the values contained in "a_list_values".
     a_list = Column(MutableList.as_mutable(PickleType))
     # Text area where a python dictionnary is expected
     a_dict = Column(MutableDict.as_mutable(PickleType))
     # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
-    boolean1 = Column(Boolean)
+    boolean1 = Column(Boolean, default=False)
     boolean1_name = "Boolean N°1"
-    boolean2 = Column(Boolean)
+    boolean2 = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "ExampleService"}
 

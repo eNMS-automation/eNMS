@@ -13,6 +13,7 @@ from netmiko import ConnectHandler
 from os import environ
 from pathlib import Path
 from paramiko import SSHClient
+from random import uniform
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
@@ -42,12 +43,12 @@ from eNMS.models.inventory import Device
 class Job(Base, metaclass=register_class):
 
     __tablename__ = "Job"
-    type = Column(String(255))
+    type = Column(String(255), default="")
     __mapper_args__ = {"polymorphic_identity": "Job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String(255), unique=True)
-    description = Column(String(255))
+    description = Column(String(255), default="")
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
     number_of_retries = Column(Integer, default=0)
@@ -61,8 +62,8 @@ class Job(Base, metaclass=register_class):
     state = Column(MutableDict.as_mutable(PickleType), default={})
     credentials = Column(String(255), default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
-    vendor = Column(String(255))
-    operating_system = Column(String(255))
+    vendor = Column(String(255), default="")
+    operating_system = Column(String(255), default="")
     waiting_time = Column(Integer, default=0)
     creator_id = Column(Integer, ForeignKey("User.id"))
     creator = relationship("User", back_populates="jobs")
@@ -273,6 +274,7 @@ class Job(Base, metaclass=register_class):
     ) -> None:
         with controller.app.app_context():
             device, results, payload, workflow, lock = args
+            sleep(uniform(0.1, 1.0))
             device_result = self.get_results(payload, device, workflow, True)
             with lock:
                 with controller.session_scope() as session:
@@ -438,7 +440,7 @@ class Workflow(Job, metaclass=register_class):
     parent_cls = "Job"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
-    last_modified = Column(String(255))
+    last_modified = Column(String(255), default="")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship("WorkflowEdge", back_populates="workflow")
 

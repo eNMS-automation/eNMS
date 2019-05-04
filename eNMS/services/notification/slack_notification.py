@@ -11,9 +11,9 @@ class SlackNotificationService(Service, metaclass=register_class):
     __tablename__ = "SlackNotificationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    channel = Column(String(255))
-    token = Column(String(255))
-    body = Column(String(255))
+    channel = Column(String(255), default="")
+    token = Column(String(255), default="")
+    body = Column(String(255), default="")
     body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}

@@ -16,8 +16,8 @@ class Log(Base, metaclass=register_class):
 
     __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
-    source_ip = Column(String(255))
-    content = Column(String(255))
+    source_ip = Column(String(255), default="")
+    content = Column(String(255), default="")
     log_rules = relationship(
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
@@ -38,10 +38,10 @@ class LogRule(Base, metaclass=register_class):
     __tablename__ = type = "LogRule"
     id = Column(Integer, primary_key=True)
     name = Column(String(255), unique=True)
-    source_ip = Column(String(255))
-    source_ip_regex = Column(Boolean)
-    content = Column(String(255))
-    content_regex = Column(Boolean)
+    source_ip = Column(String(255), default="")
+    source_ip_regex = Column(Boolean, default=False)
+    content = Column(String(255), default="")
+    content_regex = Column(Boolean, default=False)
     logs = relationship("Log", secondary=log_rule_log_table, back_populates="log_rules")
     jobs = relationship("Job", secondary=job_log_rule_table, back_populates="log_rules")
 

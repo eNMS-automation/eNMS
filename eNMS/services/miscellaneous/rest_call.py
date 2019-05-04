@@ -9,7 +9,12 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
+from wtforms import BooleanField, IntegerField, SelectField, StringField
+from wtforms.widgets import TextArea
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import DictField
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -26,7 +31,7 @@ class RestCallService(Service, metaclass=register_class):
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
-    timeout = Column(Integer, default=15.0)
+    timeout = Column(Integer, default=15)
     validation_method = Column(String(255), default="")
     validation_method_values = (
         ("text", "Validation by text match"),
@@ -87,3 +92,32 @@ class RestCallService(Service, metaclass=register_class):
             "result": result,
             "success": self.match_content(result, match),
         }
+
+
+class RestCallForm(ServiceForm, metaclass=service_metaform):
+    service_class = "RestCallService"
+    has_targets = BooleanField()
+    call_type = SelectField(
+        choices=(("GET", "GET"), ("POST", "POST"), ("PUT", "PUT"), ("DELETE", "DELETE"))
+    )
+    url = StringField()
+    payload = DictField()
+    params = DictField()
+    headers = DictField()
+    timeout = IntegerField(default=15)
+    username = StringField()
+    password = StringField()
+    validation_method = SelectField(
+        choices=(
+            ("text", "Validation by text match"),
+            ("dict_equal", "Validation by dictionary equality"),
+            ("dict_included", "Validation by dictionary inclusion"),
+        )
+    )
+    content_match = StringField(widget=TextArea(), render_kw={"rows": 5})
+    content_match_regex = BooleanField()
+    dict_match = DictField()
+    negative_logic = BooleanField()
+    delete_spaces_before_matching = BooleanField()
+    pass_device_properties = BooleanField()
+    options = DictField()

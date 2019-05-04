@@ -14,6 +14,7 @@ USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
 USE_TACACS = int(environ.get("USE_TACACS", False))
 USE_LDAP = int(environ.get("USE_LDAP", False))
 USE_VAULT = int(environ.get("USE_VAULT", False))
+DB_STRING_LENGTH = int(environ.get("DB_STRING_LENGTH", 2 ** 16))
 
 
 class Controller:

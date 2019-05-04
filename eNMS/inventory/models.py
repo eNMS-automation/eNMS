@@ -21,6 +21,7 @@ from eNMS.associations import (
     job_device_table,
     job_pool_table,
 )
+from eNMS.extensions import DB_STRING_LENGTH
 from eNMS.functions import fetch, fetch_all
 from eNMS.models import Base
 from eNMS.properties import (
@@ -231,7 +232,7 @@ AbstractPool: Any = type(
         "id": Column(Integer, primary_key=True),
         **{
             **{
-                f"device_{property}": Column(String(255), default="")
+                f"device_{property}": Column(String(DB_STRING_LENGTH), default="")
                 for property in pool_device_properties
             },
             **{
@@ -239,7 +240,7 @@ AbstractPool: Any = type(
                 for property in pool_device_properties
             },
             **{
-                f"link_{property}": Column(String(255), default="")
+                f"link_{property}": Column(String(DB_STRING_LENGTH), default="")
                 for property in pool_link_properties
             },
             **{

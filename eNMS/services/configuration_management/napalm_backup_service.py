@@ -2,9 +2,13 @@ from datetime import datetime
 from pathlib import Path
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
+from wtforms import BooleanField, HiddenField, IntegerField, SelectField
 from yaml import dump
 
 from eNMS.controller import controller
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import DictField
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -65,3 +69,11 @@ class NapalmBackupService(Service, metaclass=register_class):
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         return {"success": True, "result": "Get Config via Napalm"}
+
+
+class NapalmBackupForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="NapalmBackupService")
+    number_of_configuration = IntegerField(default=10)
+    driver = SelectField(choices=controller.NAPALM_DRIVERS)
+    use_device_driver = BooleanField(default=True)
+    optional_args = DictField()

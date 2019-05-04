@@ -1,7 +1,17 @@
 from re import findall
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from wtforms import (
+    BooleanField,
+    FloatField,
+    HiddenField,
+    IntegerField,
+    SelectField,
+    StringField,
+)
 
 from eNMS.controller import controller
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -56,3 +66,22 @@ class NetmikoDataExtractionService(Service, metaclass=register_class):
             }
         netmiko_handler.disconnect()
         return {"result": result, "success": True}
+
+
+class NetmikoDataExtractionForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="NetmikoDataExtractionService")
+    variable1 = StringField()
+    command1 = StringField()
+    regular_expression1 = StringField()
+    variable2 = StringField()
+    command2 = StringField()
+    regular_expression2 = StringField()
+    variable3 = StringField()
+    command3 = StringField()
+    regular_expression3 = StringField()
+    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
+    use_device_driver = BooleanField(default=True)
+    fast_cli = BooleanField()
+    timeout = IntegerField()
+    delay_factor = FloatField()
+    global_delay_factor = FloatField()

@@ -100,9 +100,9 @@ function doc(page) {
 $.ajaxSetup({
   beforeSend: function(xhr, settings) {
       if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader("X-CSRFToken", csrf_token);  // insert custom header
+          xhr.setRequestHeader("X-CSRFToken", csrf_token);
       }
-  }
+  },
 });
 
 /**
@@ -126,7 +126,9 @@ function processResults(callback, results) {
   } else if (results && results.error) {
     alertify.notify(results.error, "error", 5);
   } else if (results && results.invalid_form) {
-    console.log(results.errors);
+    for (const [field, error] of Object.entries(results.errors)) {
+      alertify.notify(`Wrong input for "${field}": ${error}`, "error", 20);
+    }
   } else {
     callback(results);
   }

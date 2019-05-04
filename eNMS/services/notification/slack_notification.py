@@ -1,9 +1,9 @@
 from slackclient import SlackClient
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Text
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.database import get_one
+from eNMS.database import DB_STRING_LENGTH, get_one
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
@@ -17,7 +17,7 @@ class SlackNotificationService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     channel = Column(String(255), default="")
     token = Column(String(255), default="")
-    body = Column(String(255), default="")
+    body = Column(Text(DB_STRING_LENGTH), default="")
 
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}
 

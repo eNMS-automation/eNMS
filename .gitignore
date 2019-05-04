@@ -12,6 +12,7 @@ __pycache__/
 *.db-journal
 *.log
 *.log.*
+/eNMS/database.*
 
 # venv
 env
@@ -19,6 +20,11 @@ venv
 
 # other
 .DS_Store
+
+# sub-repositories
+/git/*
+!git/automation/.gitkeep
+!git/configurations/.gitkeep
 
 # ansible retry files
 *.retry

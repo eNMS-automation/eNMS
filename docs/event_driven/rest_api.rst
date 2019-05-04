@@ -185,7 +185,7 @@ Example of python script to import programmatically:
  with open(Path.cwd() / 'project_name.xls', 'rb') as f:
      post(
          'https://IP/rest/topology/import',
-         data={'replace': True, 'update_pools': False},
+         data={'replace': True},
          files={'file': f},
          auth=HTTPBasicAuth('admin', 'admin')
      )

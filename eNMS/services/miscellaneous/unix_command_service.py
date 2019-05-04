@@ -1,8 +1,9 @@
 from subprocess import check_output
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from typing import Optional
 from wtforms import HiddenField, StringField
 
+from eNMS.database import DB_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
@@ -18,7 +19,7 @@ class UnixCommandService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     command = Column(String(255), default="")
-    content_match = Column(String(255), default="")
+    content_match = Column(Text(DB_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)

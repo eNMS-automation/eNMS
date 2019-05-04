@@ -308,6 +308,7 @@ function preprocessForm(panel, id, type, duplicate) {
  * @param {int} id - Form ID.
  */
 function configureForm(form, id) {
+  console.log(form, id)
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
     let el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
@@ -322,6 +323,7 @@ function configureForm(form, id) {
         useCurrent: false,
       });
     } else {
+      console.log(property, type, el.length);
       el.selectpicker({
         liveSearch: true,
         actionsBox: true,

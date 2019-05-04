@@ -73,7 +73,7 @@
       <div id="step-2">
         <fieldset>
           <div class="item">
-            <input id="service-send_notification" name="send_notification" type="checkbox" class="add-id" value="y">
+            <input id="{{ form_type }}-send_notification" name="send_notification" type="checkbox" class="add-id" value="y">
             <label>Send notification</label>
           </div>
         </fieldset>
@@ -87,7 +87,7 @@
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-display_only_failed_nodes" name="display_only_failed_nodes"  class="add-id" type="checkbox" value="y">
+            <input id="{{ form_type }}-display_only_failed_nodes" name="display_only_failed_nodes"  class="add-id" type="checkbox" value="y">
             <label>Display only failed nodes</label>
           </div>
         </fieldset>
@@ -107,7 +107,7 @@
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-push_to_git" name="push_to_git" class="add-id" type="checkbox" value="y">
+            <input id="{{ form_type }}-push_to_git" name="push_to_git" class="add-id" type="checkbox" value="y">
             <label>Push to git</label>
           </div>
         </fieldset>
@@ -115,25 +115,25 @@
       <div id="step-4">
         <label><label for="devices">Devices</label></label>
         <div class='form-group'>
-          {{ form.devices(id='service-devices', class="form-control add-id") }}
+          {{ form.devices(id=form_type + '-devices', class="form-control add-id") }}
         </div>
         <label><label for="pools">Pools</label></label>
         <div class='form-group'>
-          {{ form.pools(id='service-pools', class="form-control add-id") }}
+          {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="service-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
+            <input id="{{ form_type }}-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
             <label>Multiprocessing</label>
           </div>
         </fieldset>
         <label><label for="max_processes">Maximum number of processes</label></label>
         <div class='form-group'>
-          {{ form.max_processes(id='service-max_processes', class="form-control add-id") }}
+          {{ form.max_processes(id=form_type + '-max_processes', class="form-control add-id") }}
         </div>
         <label><label for="credentials">Credentials</label></label>
         <div class='form-group'>
-          {{ form.credentials(id='service-credentials', class="form-control add-id") }}
+          {{ form.credentials(id=form_type + '-credentials', class="form-control add-id") }}
         </div>
       </div>
       <div id="step-5">

@@ -1,7 +1,11 @@
 from flask_mail import Message
 from sqlalchemy import Column, ForeignKey, Integer, String
+from wtforms import HiddenField, StringField
+from wtforms.widgets import TextArea
 
 from eNMS.database import get_one
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.modules import mail_client
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -33,3 +37,11 @@ class MailNotificationService(Service, metaclass=register_class):
         )
         mail_client.send(message)
         return {"success": True, "result": str(message)}
+
+
+class MailNotificationForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="MailNotificationService")
+    title = StringField()
+    sender = StringField()
+    recipients = StringField()
+    body = StringField(widget=TextArea(), render_kw={"rows": 5})

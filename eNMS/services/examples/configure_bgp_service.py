@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from wtforms import IntegerField, StringField
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -53,7 +53,7 @@ class ConfigureBgpService(Service, metaclass=register_class):
         return {"success": True, "result": f"Config push ({config})"}
 
 
-class ConfigureBgpForm(ServiceForm, metaclass=service_metaform):
+class ConfigureBgpForm(ServiceForm, metaclass=metaform):
     service_class = "ConfigureBgpService"
     local_as = IntegerField("Local AS", default=0)
     loopback = StringField("Loopback", default="Lo42")

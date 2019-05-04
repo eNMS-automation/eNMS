@@ -4,7 +4,7 @@ from typing import Optional
 from wtforms import BooleanField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -39,7 +39,7 @@ class UnixCommandService(Service, metaclass=register_class):
         }
 
 
-class UnixCommandForm(ServiceForm, metaclass=service_metaform):
+class UnixCommandForm(ServiceForm, metaclass=metaform):
     service_class = "UnixCommandService"
     command = StringField()
     content_match = StringField(widget=TextArea(), render_kw={"rows": 5})

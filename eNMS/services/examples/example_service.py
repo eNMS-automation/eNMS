@@ -22,6 +22,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from wtforms import (
     BooleanField,
     FloatField,
+    HiddenField,
     IntegerField,
     SelectMultipleField,
     SelectField,
@@ -80,7 +81,7 @@ class ExampleService(Service, metaclass=register_class):
 
 
 class ExampleForm(ServiceForm, metaclass=metaform):
-    service_class = "ExampleService"
+    form_type = HiddenField(default="ExampleService")
     string1 = SelectField(
         choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
     )

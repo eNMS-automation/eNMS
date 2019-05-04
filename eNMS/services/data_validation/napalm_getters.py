@@ -3,7 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from wtforms import BooleanField, SelectMultipleField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.controller import controller
@@ -82,7 +82,7 @@ class NapalmGettersService(Service, metaclass=register_class):
         }
 
 
-class NapalmGettersForm(ServiceForm, metaclass=service_metaform):
+class NapalmGettersForm(ServiceForm, metaclass=metaform):
     service_class = "NapalmGettersService"
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField()

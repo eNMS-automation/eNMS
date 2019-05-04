@@ -11,7 +11,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 from wtforms import BooleanField
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
 from eNMS.database import factory, fetch_all, get_one
@@ -137,6 +137,6 @@ class SwissArmyKnifeService(Service, metaclass=register_class):
         return {"success": True, "uptime_less_5000": uptime_less_than_50000}
 
 
-class SwissArmyKnifeForm(ServiceForm, metaclass=service_metaform):
+class SwissArmyKnifeForm(ServiceForm, metaclass=metaform):
     service_class = "SwissArmyKnifeService"
     has_targets = BooleanField()

@@ -29,22 +29,10 @@ def metaform(*args, **kwargs):
             continue
         base_form_type = base.form_type.kwargs["default"]
         if base_form_type == "service":
-            print(form_type)
+            cls.service_fields = list(properties)
         form_properties[form_type].update(form_properties[base_form_type])
+
     return cls
-
-
-def service_metaform(*args, **kwargs):
-    cls = type(*args, **kwargs)
-
-    form_classes[cls.service_class] = cls
-    properties = {
-        field_name: field_types[field.field_class]
-        for field_name, field in args[-1].items()
-        if isinstance(field, UnboundField) and field.field_class in field_types
-    }
-    cls.service_fields = list(properties)
-    form_properties[cls.service_class] = {**form_properties["service"], **properties}
 
 
 def form_postprocessing(form):

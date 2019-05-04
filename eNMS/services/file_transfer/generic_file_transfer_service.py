@@ -3,10 +3,10 @@ from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from logging import info
-from wtforms import BooleanField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.validators import InputRequired
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -77,8 +77,8 @@ class GenericFileTransferService(Service, metaclass=register_class):
         return {"success": success, "result": result}
 
 
-class GenericFileTransferForm(ServiceForm, metaclass=service_metaform):
-    service_class = "GenericFileTransferService"
+class GenericFileTransferForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="GenericFileTransferService")
     direction = SelectField(choices=(("get", "Get"), ("put", "Put")))
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
     source_file = StringField(validators=[InputRequired()])

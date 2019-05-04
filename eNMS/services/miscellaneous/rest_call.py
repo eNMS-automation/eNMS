@@ -12,7 +12,7 @@ from typing import Optional
 from wtforms import BooleanField, IntegerField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models import register_class
@@ -94,7 +94,7 @@ class RestCallService(Service, metaclass=register_class):
         }
 
 
-class RestCallForm(ServiceForm, metaclass=service_metaform):
+class RestCallForm(ServiceForm, metaclass=metaform):
     service_class = "RestCallService"
     has_targets = BooleanField()
     call_type = SelectField(

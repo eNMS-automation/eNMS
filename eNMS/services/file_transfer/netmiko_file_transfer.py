@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from wtforms import BooleanField, FloatField, IntegerField, SelectField, StringField
 from wtforms.validators import InputRequired
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
 from eNMS.models import register_class
@@ -51,7 +51,7 @@ class NetmikoFileTransferService(Service, metaclass=register_class):
         return {"success": True, "result": transfer_dict}
 
 
-class NetmikoFileTransferForm(ServiceForm, metaclass=service_metaform):
+class NetmikoFileTransferForm(ServiceForm, metaclass=metaform):
     service_class = "NetmikoFileTransferService"
     source_file = StringField(validators=[InputRequired()])
     dest_file = StringField(validators=[InputRequired()])

@@ -6,7 +6,7 @@ from subprocess import check_output
 from wtforms import BooleanField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.forms import service_metaform
+from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models import register_class
@@ -74,7 +74,7 @@ class AnsiblePlaybookService(Service, metaclass=register_class):
         }
 
 
-class AnsiblePlaybookForm(ServiceForm, metaclass=service_metaform):
+class AnsiblePlaybookForm(ServiceForm, metaclass=metaform):
     service_class = "AnsiblePlaybookService"
     has_targets = BooleanField()
     playbook_path = StringField()

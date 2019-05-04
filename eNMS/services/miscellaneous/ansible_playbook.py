@@ -3,7 +3,7 @@ from json.decoder import JSONDecodeError
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
-from wtforms import BooleanField, SelectField, StringField
+from wtforms import BooleanField, SelectField, StringField, TextAreaField
 
 from eNMS.forms import service_metaform
 from eNMS.forms.automation import ServiceForm
@@ -28,7 +28,6 @@ class AnsiblePlaybookService(Service, metaclass=register_class):
         ("dict_included", "Validation by dictionary inclusion"),
     )
     content_match = Column(String(255), default="")
-    content_match_textarea = True
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)
@@ -75,7 +74,7 @@ class AnsiblePlaybookService(Service, metaclass=register_class):
 
 
 class AnsiblePlaybookForm(ServiceForm, metaclass=service_metaform):
-    service_class = "ExampleService"
+    service_class = "AnsiblePlaybookService"
     has_targets = BooleanField()
     playbook_path = StringField()
     arguments = StringField()
@@ -86,7 +85,7 @@ class AnsiblePlaybookForm(ServiceForm, metaclass=service_metaform):
             ("dict_included", "Validation by dictionary inclusion"),
         )
     )
-    content_match = StringField()
+    content_match = TextAreaField(render_kw={"rows": 70, "cols": 11})
     content_match_regex = BooleanField()
     dict_match = DictField()
     negative_logic = BooleanField()

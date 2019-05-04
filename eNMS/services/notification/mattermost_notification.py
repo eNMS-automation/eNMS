@@ -1,8 +1,12 @@
 from json import dumps
 from requests import post
 from sqlalchemy import Column, ForeignKey, Integer, String
+from wtforms import HiddenField, StringField
+from wtforms.widgets import TextArea
 
 from eNMS.database import get_one
+from eNMS.forms import metaform
+from eNMS.forms.automation import ServiceForm
 from eNMS.models import register_class
 from eNMS.models.automation import Service
 
@@ -14,7 +18,6 @@ class MattermostNotificationService(Service, metaclass=register_class):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     channel = Column(String(255), default="")
     body = Column(String(255), default="")
-    body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
@@ -28,3 +31,9 @@ class MattermostNotificationService(Service, metaclass=register_class):
             data=dumps({"channel": channel, "text": self.body}),
         )
         return {"success": True, "result": str(result)}
+
+
+class MattermostNotificationForm(ServiceForm, metaclass=metaform):
+    form_type = HiddenField(default="MattermostNotificationService")
+    channel = StringField()
+    body = StringField(widget=TextArea(), render_kw={"rows": 5})

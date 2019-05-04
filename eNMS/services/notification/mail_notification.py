@@ -20,7 +20,6 @@ class MailNotificationService(Service, metaclass=register_class):
     sender = Column(String(255), default="")
     recipients = Column(String(255), default="")
     body = Column(String(255), default="")
-    body_textarea = True
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 

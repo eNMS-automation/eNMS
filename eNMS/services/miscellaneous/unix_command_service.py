@@ -1,7 +1,7 @@
 from subprocess import check_output
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
-from wtforms import BooleanField
+from wtforms import BooleanField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.forms import service_metaform
@@ -16,6 +16,7 @@ class UnixCommandService(Service, metaclass=register_class):
     __tablename__ = "UnixCommandService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    has_targets = True
     command = Column(String(255), default="")
     content_match = Column(String(255), default="")
     content_match_textarea = True

@@ -1,6 +1,11 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
+from wtforms import BooleanField, SelectMultipleField, SelectField, StringField
+from wtforms.widgets import TextArea
 
+from eNMS.forms import service_metaform
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import DictField
 from eNMS.controller import controller
 from eNMS.models import register_class
 from eNMS.models.automation import Service
@@ -75,3 +80,47 @@ class NapalmGettersService(Service, metaclass=register_class):
             "result": result,
             "success": self.match_content(result, match),
         }
+
+
+class NapalmGettersForm(ServiceForm, metaclass=service_metaform):
+    service_class = "NapalmGettersService"
+    driver = SelectField(choices=controller.NAPALM_DRIVERS)
+    use_device_driver = BooleanField()
+    getters = SelectMultipleField(
+        choices=(
+            ("get_arp_table", "ARP table"),
+            ("get_interfaces_counters", "Interfaces counters"),
+            ("get_facts", "Facts"),
+            ("get_environment", "Environment"),
+            ("get_config", "Configuration"),
+            ("get_interfaces", "Interfaces"),
+            ("get_interfaces_ip", "Interface IP"),
+            ("get_lldp_neighbors", "LLDP neighbors"),
+            ("get_lldp_neighbors_detail", "LLDP neighbors detail"),
+            ("get_mac_address_table", "MAC address"),
+            ("get_ntp_servers", "NTP servers"),
+            ("get_ntp_stats", "NTP statistics"),
+            ("get_optics", "Transceivers"),
+            ("get_snmp_information", "SNMP"),
+            ("get_users", "Users"),
+            ("get_network_instances", "Network instances (VRF)"),
+            ("get_ntp_peers", "NTP peers"),
+            ("get_bgp_config", "BGP configuration"),
+            ("get_bgp_neighbors", "BGP neighbors"),
+            ("get_ipv6_neighbors_table", "IPv6"),
+            ("is_alive", "Is alive"),
+        )
+    )
+    optional_args = DictField()
+    validation_method = SelectField(
+        choices=(
+            ("text", "Validation by text match"),
+            ("dict_equal", "Validation by dictionary equality"),
+            ("dict_included", "Validation by dictionary inclusion"),
+        )
+    )
+    content_match = StringField(widget=TextArea(), render_kw={"rows": 5})
+    content_match_regex = BooleanField()
+    dict_match = DictField()
+    negative_logic = BooleanField()
+    delete_spaces_before_matching = BooleanField()

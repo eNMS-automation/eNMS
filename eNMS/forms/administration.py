@@ -128,7 +128,7 @@ class UserForm(FlaskForm, metaclass=metaform):
     email = StringField("Email")
     permission_choices = [(p, p) for p in user_permissions]
     permissions = SelectMultipleField("Permissions", choices=permission_choices)
-    pools = MultipleInstanceField("Pool", instance_type="Pool")
+    pools = MultipleInstanceField("Pools", instance_type="Pool")
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):

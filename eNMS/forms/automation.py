@@ -14,31 +14,33 @@ class JobForm(FlaskForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="job")
     id = HiddenField()
-    type = StringField()
-    name = StringField()
-    description = StringField()
+    type = StringField("Service Type")
+    name = StringField("Name")
+    description = StringField("Description")
     devices = MultipleInstanceField("Devices", instance_type="Device")
-    multiprocessing = BooleanField()
+    multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
     credentials = SelectField(
-        choices=(("device", "Device Credentials"), ("user", "User Credentials"))
+        "Credentials",
+        choices=(("device", "Device Credentials"), ("user", "User Credentials")),
     )
     pools = MultipleInstanceField("Pools", instance_type="Pool")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
-    send_notification = BooleanField()
+    send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
+        "Notification Method",
         choices=(
             ("mail_feedback_notification", "Mail"),
             ("slack_feedback_notification", "Slack"),
             ("mattermost_feedback_notification", "Mattermost"),
-        )
+        ),
     )
-    display_only_failed_nodes = BooleanField()
-    mail_recipient = StringField()
+    display_only_failed_nodes = BooleanField("Display only Failed Devices")
+    mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
-    vendor = StringField()
-    operating_system = StringField()
+    vendor = StringField("Vendor")
+    operating_system = StringField("Operating System")
 
 
 class ServiceForm(JobForm, metaclass=metaform):
@@ -54,24 +56,24 @@ class WorkflowForm(JobForm, metaclass=metaform):
 class JobFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
     form_type = HiddenField(default="job filtering")
-    name = StringField()
-    type = StringField()
-    description = StringField()
-    creator_name = StringField()
-    max_processes = StringField()
-    credentials = StringField()
-    waiting_time = StringField()
-    send_notification_method = StringField()
-    mail_recipient = StringField()
-    number_of_retries = StringField()
-    time_between_retries = StringField()
+    name = StringField("Name")
+    type = StringField("Service Type")
+    description = StringField("Description")
+    creator = StringField("Creator")
+    max_processes = StringField("Maximum number of processes")
+    credentials = StringField("Credentials")
+    waiting_time = StringField("Waiting Time")
+    send_notification_method = StringField("Notification Method")
+    mail_recipient = StringField("Mail Recipient")
+    number_of_retries = StringField("Number of retries")
+    time_between_retries = StringField("Time between retries (in seconds)")
 
 
 class CompareResultsForm(FlaskForm, metaclass=metaform):
     template = "results"
     form_type = HiddenField(default="results")
-    display = SelectField(choices=())
-    compare_with = SelectField(choices=())
+    display = SelectField("Version to display", choices=())
+    compare_with = SelectField("Compare against", choices=())
 
 
 class AddJobsForm(FlaskForm, metaclass=metaform):

@@ -5,8 +5,8 @@ from git import Repo
 from git.exc import GitCommandError
 from json import load
 from logging import info
-from multiprocessing import Lock
-from multiprocessing.pool import ThreadPool
+from multiprocessing import Lock, Manager
+from multiprocessing.pool import Pool
 from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
@@ -25,7 +25,7 @@ from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
-from eNMS.concurrent import threaded_job
+from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
 from eNMS.database import fetch, get_one, SMALL_STRING_LENGTH
 from eNMS.modules import db
@@ -269,18 +269,6 @@ class Job(Base, metaclass=metamodel):
         self.failed += 1 - results["success"]
         return results
 
-    def device_run(
-        self, args: Tuple[Device, dict, dict, Optional["Workflow"], Any]
-    ) -> None:
-        with controller.app.app_context():
-            device, results, payload, workflow, lock = args
-            sleep(uniform(0.1, 1.0))
-            device_result = self.get_results(payload, device, workflow, True)
-            with lock:
-                with controller.session_scope() as session:
-                    session.merge(workflow or self)
-                    results["devices"][device.name] = device_result
-
     def run(
         self,
         payload: dict,
@@ -293,13 +281,13 @@ class Job(Base, metaclass=metamodel):
             device, = targets
             return self.get_results(payload, device, workflow)
         elif targets:
-            results: dict = {"devices": {}}
+            results = Manager().dict({"devices": {}})
             if self.multiprocessing:
                 lock = Lock()
                 processes = min(len(targets), self.max_processes)
-                pool = ThreadPool(processes=processes)
-                args = (results, payload, workflow, lock)
-                pool.map(self.device_run, [(device, *args) for device in targets])
+                pool = Pool(processes=processes)
+                args = (self.id, results, payload, workflow.id if workflow else 0)
+                pool.map(device_process, [(device.id, *args) for device in targets])
                 pool.close()
                 pool.join()
             else:

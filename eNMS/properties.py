@@ -1,17 +1,6 @@
-from os import environ
-from yaml import load, BaseLoader
 from typing import Dict, List
 
-
-def get_custom_properties() -> dict:
-    filepath = environ.get("PATH_CUSTOM_PROPERTIES")
-    if not filepath:
-        return {}
-    with open(filepath, "r") as properties:
-        return load(properties, Loader=BaseLoader)
-
-
-custom_properties: dict = get_custom_properties()
+from eNMS import controller
 
 private_properties: List[str] = ["password", "enable_password"]
 
@@ -24,7 +13,7 @@ object_common_properties: List[str] = base_properties + [
     "vendor",
 ]
 
-device_properties = list(custom_properties) + [
+device_properties = list(controller.custom_properties) + [
     "operating_system",
     "os_version",
     "netmiko_driver",
@@ -188,7 +177,7 @@ object_diagram_properties: List[str] = ["model", "vendor", "subtype", "location"
 device_diagram_properties: List[str] = (
     object_diagram_properties
     + ["operating_system", "os_version", "port"]
-    + list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
+    + list(p for p, v in controller.custom_properties.items() if v["add_to_dashboard"])
 )
 
 user_diagram_properties: List[str] = ["name"]
@@ -226,7 +215,7 @@ type_to_diagram_properties: Dict[str, List[str]] = {
 }
 
 property_names: Dict[str, str] = {
-    k: v["property_name"] for k, v in custom_properties.items()
+    k: v["property_name"] for k, v in controller.custom_properties.items()
 }
 
 import_classes = [

@@ -12,15 +12,11 @@ from wtforms import (
 from eNMS.controller import controller
 from eNMS.forms import metaform
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
-from eNMS.properties import (
-    custom_properties,
-    pool_link_properties,
-    pool_device_properties,
-)
+from eNMS.properties import pool_link_properties, pool_device_properties
 
 
 def configure_device_form(cls: FlaskForm) -> FlaskForm:
-    for property in custom_properties:
+    for property in controller.custom_properties:
         setattr(cls, property, StringField())
     return cls
 
@@ -54,7 +50,7 @@ class ConnectionForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
-        for property, values in custom_properties.items()
+        for property, values in controller.custom_properties.items()
         if values.get("is_address", False)
     ]
     address = SelectField(choices=address_choices)

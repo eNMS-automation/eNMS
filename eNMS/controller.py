@@ -4,10 +4,12 @@ from flask import Flask
 from logging import info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from os import environ
 from sqlalchemy.orm import Session
 from simplekml import Color, Style
 from string import punctuation
 from typing import Any, Dict, Generator, Set
+from yaml import load, BaseLoader
 
 
 class Controller:
@@ -49,6 +51,7 @@ class Controller:
         self.app = app
         self.session = session
         self.create_google_earth_styles()
+        self.load_custom_properties()
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name
@@ -72,6 +75,14 @@ class Controller:
 
     def get_time(self):
         return str(datetime.now()).replace("-", "+")
+
+    def load_custom_properties(self) -> dict:
+        filepath = environ.get("PATH_CUSTOM_PROPERTIES")
+        if not filepath:
+            self.custom_properties = {}
+        else:
+            with open(filepath, "r") as properties:
+                self.custom_properties = load(properties, Loader=BaseLoader)
 
     @contextmanager
     def session_scope(self) -> Generator:

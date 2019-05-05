@@ -14,6 +14,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from typing import Any, Dict, List, Union
 
+from eNMS.controller import controller
 from eNMS.models.associations import (
     pool_device_table,
     pool_link_table,
@@ -24,11 +25,7 @@ from eNMS.models.associations import (
 from eNMS.database import LARGE_STRING_LENGTH, fetch, fetch_all, SMALL_STRING_LENGTH
 from eNMS.models import metamodel
 from eNMS.models.base import Base
-from eNMS.properties import (
-    custom_properties,
-    pool_link_properties,
-    pool_device_properties,
-)
+from eNMS.properties import pool_link_properties, pool_device_properties
 
 
 class Object(Base, metaclass=metamodel):
@@ -64,11 +61,11 @@ CustomDevice: Any = (
                     }[values["type"]],
                     default=values["default"],
                 )
-                for property, values in custom_properties.items()
+                for property, values in controller.custom_properties.items()
             },
         },
     )
-    if custom_properties
+    if controller.custom_properties
     else Object
 )
 

@@ -49,14 +49,13 @@ def create_network_topology(app: Flask) -> None:
 
 
 def create_example_services() -> None:
-    admin = fetch("User", name="admin").id
     for service in (
         {
             "type": "ExampleService",
             "name": "Example1",
             "description": "Example",
             "devices": [fetch("Device", name="Washington").id],
-            "creator": admin,
+            "creator": "admin",
             "string1": "s1",
             "string2": "s2",
             "an_integer": 10,
@@ -70,7 +69,7 @@ def create_example_services() -> None:
             "name": "napalm_configure_bgp_1",
             "description": "Configure BGP Peering with Napalm",
             "devices": [fetch("Device", name="Washington").id],
-            "creator": admin,
+            "creator": "admin",
             "local_as": 100,
             "loopback": "Lo100",
             "loopback_ip": "100.1.1.1",
@@ -84,7 +83,7 @@ def create_example_services() -> None:
             "name": "test_file_transfer_service",
             "description": "Test the file transfer service",
             "devices": [fetch("Device", name="Aserver").id],
-            "creator": admin,
+            "creator": "admin",
             "direction": "get",
             "protocol": "scp",
             "source_file": "/media/sf_VM/eNMS/tests/file_transfer/a.bin",
@@ -96,7 +95,7 @@ def create_example_services() -> None:
             "name": "test_log_backup_service",
             "description": "Test the log backup service",
             "devices": [fetch("Device", name="Aserver").id],
-            "creator": admin,
+            "creator": "admin",
             "protocol": "scp",
             "destination_ip_address": "127.0.0.1",
             "destination_path": "/media/sf_VM/eNMS/tests/file_transfer",
@@ -108,7 +107,7 @@ def create_example_services() -> None:
             "name": "test_database_backup_service",
             "description": "Test the log backup service",
             "devices": [fetch("Device", name="Aserver").id],
-            "creator": admin,
+            "creator": "admin",
             "protocol": "scp",
             "destination_ip_address": "127.0.0.1",
             "destination_path": "/media/sf_VM/eNMS/tests/file_transfer",
@@ -122,7 +121,7 @@ def create_example_services() -> None:
             "devices": [fetch("Device", name="Washington").id],
             "configuration_command": "show running-config",
             "multiprocessing": True,
-            "creator": admin,
+            "creator": "admin",
         },
         {
             "type": "NapalmBackupService",
@@ -130,14 +129,14 @@ def create_example_services() -> None:
             "description": "Test Configuration Management",
             "devices": [fetch("Device", name="Washington").id],
             "multiprocessing": True,
-            "creator": admin,
+            "creator": "admin",
         },
     ):
         factory(service.pop("type"), **service)
 
 
 def create_netmiko_workflow() -> None:
-    services, admin = [], fetch("User", name="admin").id
+    services = []
     devices = [fetch("Device", name="Washington").id, fetch("Device", name="Austin").id]
     for service in (
         {
@@ -146,7 +145,7 @@ def create_netmiko_workflow() -> None:
             "description": 'Create a VRF "test" with Netmiko',
             "waiting_time": 0,
             "devices": devices,
-            "creator": admin,
+            "creator": "admin",
             "vendor": "Arista",
             "operating_system": "eos",
             "driver": "arista_eos",
@@ -162,7 +161,7 @@ def create_netmiko_workflow() -> None:
             "description": 'Check that the vrf "test" is configured',
             "waiting_time": 0,
             "devices": devices,
-            "creator": admin,
+            "creator": "admin",
             "vendor": "Arista",
             "operating_system": "eos",
             "driver": "arista_eos",
@@ -177,7 +176,7 @@ def create_netmiko_workflow() -> None:
             "description": 'Delete VRF "test"',
             "waiting_time": 1,
             "devices": devices,
-            "creator": admin,
+            "creator": "admin",
             "vendor": "Arista",
             "operating_system": "eos",
             "driver": "arista_eos",
@@ -193,7 +192,7 @@ def create_netmiko_workflow() -> None:
             "description": 'Check that the vrf "test" is NOT configured',
             "waiting_time": 0,
             "devices": devices,
-            "creator": admin,
+            "creator": "admin",
             "vendor": "Arista",
             "operating_system": "eos",
             "driver": "arista_eos",
@@ -213,7 +212,7 @@ def create_netmiko_workflow() -> None:
         **{
             "name": "Netmiko_VRF_workflow",
             "description": "Create and delete a VRF with Netmiko",
-            "creator": admin,
+            "creator": "admin",
             "devices": devices,
             "vendor": "Arista",
             "operating_system": "eos",
@@ -238,7 +237,6 @@ def create_netmiko_workflow() -> None:
 
 
 def create_napalm_workflow() -> None:
-    admin = fetch("User", name="admin").id
     devices = [fetch("Device", name="Washington").id, fetch("Device", name="Austin").id]
     services = [
         factory(
@@ -248,7 +246,7 @@ def create_napalm_workflow() -> None:
                 "description": 'Create a VRF "test" with Napalm',
                 "waiting_time": 0,
                 "devices": devices,
-                "creator": admin,
+                "creator": "admin",
                 "driver": "eos",
                 "vendor": "Arista",
                 "operating_system": "eos",
@@ -270,7 +268,7 @@ def create_napalm_workflow() -> None:
         **{
             "name": "Napalm_VRF_workflow",
             "description": "Create and delete a VRF with Napalm",
-            "creator": admin,
+            "creator": "admin",
             "devices": devices,
             "vendor": "Arista",
             "operating_system": "eos",
@@ -295,7 +293,7 @@ def create_napalm_workflow() -> None:
 
 
 def create_payload_transfer_workflow() -> None:
-    services, admin = [], fetch("User", name="admin").id
+    services = []
     devices = [fetch("Device", name="Washington").id, fetch("Device", name="Austin").id]
     for service in (
         [
@@ -307,7 +305,7 @@ def create_payload_transfer_workflow() -> None:
                 "password": "admin",
                 "waiting_time": 0,
                 "devices": devices,
-                "creator": admin,
+                "creator": "admin",
                 "content_match": "",
                 "call_type": "GET",
                 "url": "http://127.0.0.1:5000/rest/instance/device/{{device.name}}",
@@ -322,7 +320,7 @@ def create_payload_transfer_workflow() -> None:
                 "description": f"Getter: {getter}",
                 "waiting_time": 0,
                 "devices": devices,
-                "creator": admin,
+                "creator": "admin",
                 "driver": "eos",
                 "content_match": "",
                 "getters": [getter],
@@ -341,7 +339,7 @@ def create_payload_transfer_workflow() -> None:
                 "description": "Process Payload in example workflow",
                 "waiting_time": 0,
                 "devices": devices,
-                "creator": admin,
+                "creator": "admin",
             }
         ]
     ):
@@ -353,7 +351,7 @@ def create_payload_transfer_workflow() -> None:
             "name": "payload_transfer_workflow",
             "description": "ReST call, Napalm getters, etc",
             "use_workflow_targets": False,
-            "creator": admin,
+            "creator": "admin",
             "devices": devices,
             "vendor": "Arista",
             "operating_system": "eos",
@@ -402,7 +400,6 @@ def create_payload_transfer_workflow() -> None:
 
 
 def create_workflow_of_workflows() -> None:
-    admin = fetch("User", name="admin").id
     devices = [fetch("Device", name="Washington").id]
     workflow = factory(
         "Workflow",
@@ -410,7 +407,7 @@ def create_workflow_of_workflows() -> None:
             "name": "Workflow_of_workflows",
             "description": "Test the inner workflow system",
             "devices": devices,
-            "creator": admin,
+            "creator": "admin",
             "vendor": "Arista",
             "operating_system": "eos",
         },

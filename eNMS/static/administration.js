@@ -155,7 +155,7 @@ function migrationsExport() {
 // eslint-disable-next-line
 function migrationsImport() {
   alertify.notify("Import initiated.", "success", 5);
-  fCall("/migration_import", "#import-export-form", function(result) {
+  fCall("/migration_import", "#migration-form", function(result) {
     alertify.notify(result, "success", 5);
   });
 }

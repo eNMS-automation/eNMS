@@ -68,10 +68,11 @@ class Base(db.Model):
             if property in private_properties:
                 continue
             try:
+                print(property, value)
                 dumps(value)
                 result[property] = value
             except TypeError:
-                print(property, value)
+                print("ERROR")
                 result[property] = str(value)
         return result
 
@@ -96,19 +97,16 @@ class Base(db.Model):
         properties = self.get_export_properties() if export else self.get_properties()
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property, relation in relationships[self.type].items():
+            value = getattr(self, property)
             if export and property in no_migrate:
                 continue
             if relation["list"]:
                 properties[property] = [
-                    obj.id if export else obj.get_properties()
-                    for obj in getattr(self, property)
+                    obj.id if export else obj.get_properties() for obj in value
                 ]
             else:
-                properties[property] = (
-                    getattr(self, property).id
-                    if export
-                    else getattr(self, property).get_properties()
-                )
+                print(self, property, value)
+                properties[property] = value.id if export else value.get_properties()
         if export:
             for property in no_migrate:
                 properties.pop(property, None)

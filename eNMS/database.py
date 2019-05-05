@@ -37,6 +37,7 @@ def delete(model: str, **kwargs: Any) -> dict:
 
 def delete_all(*models: str) -> None:
     for model in models:
+        print("ttttt" * 100, model)
         for instance in fetch_all(model):
             delete(model, id=instance.id)
     db.session.commit()

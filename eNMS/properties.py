@@ -5,6 +5,7 @@ from yaml import load, BaseLoader
 from typing import Dict, List
 
 from eNMS.database import LARGE_STRING_LENGTH
+from eNMS.models import property_types
 
 
 def get_custom_properties() -> dict:
@@ -22,14 +23,14 @@ sql_types: dict = {
     "string": Text(LARGE_STRING_LENGTH),
 }
 
-type_to_function = {"bool": bool, "dict": literal_eval, "float": float, "int": int}
+type_to_function = {"dict": literal_eval, "float": float, "int": int}
 
 
 def type_converter(property, value):
     property_type = property_types.get(property, None)
     if property_type == "bool":
         return value not in (False, "false")
-    elif property_type in type_to_function:
+    elif property_type in type_to_function and isinstance(value, str):
         return type_to_function[property_type](value)
     else:
         return value

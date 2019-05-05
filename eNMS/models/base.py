@@ -53,13 +53,19 @@ class Base(db.Model):
     def get_properties(self, export=False) -> dict:
         result = {}
         for property in cls_to_properties[self.type]:
+            value = getattr(self, property)
             if property in private_properties:
                 continue
-            result[property] = type_converter(property, getattr(self, property))
+            if export:
+                if isinstance(value, MutableList):
+                    value = list(value)
+                if isinstance(value, MutableDict):
+                    value = dict(value)
+            result[property] = value
         return result
 
     def to_dict(self, export: bool = False) -> dict:
-        properties = self.get_properties()
+        properties = self.get_properties(export)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property, relation in relationships[self.type].items():
             value = getattr(self, property)

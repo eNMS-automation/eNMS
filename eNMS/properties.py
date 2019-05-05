@@ -1,3 +1,4 @@
+from ast import literal_eval
 from os import environ
 from sqlalchemy import Boolean, Float, Integer, Text
 from yaml import load, BaseLoader
@@ -20,6 +21,19 @@ sql_types: dict = {
     "integer": Integer,
     "string": Text(LARGE_STRING_LENGTH),
 }
+
+type_to_function = {"bool": bool, "dict": literal_eval, "float": float, "int": int}
+
+
+def type_converter(property, value):
+    property_type = property_types.get(property, None)
+    if property_type == "bool":
+        return value not in (False, "false")
+    elif property_type in type_to_function:
+        return type_to_function[property_type](value)
+    else:
+        return value
+
 
 google_earth_styles: dict = {}
 

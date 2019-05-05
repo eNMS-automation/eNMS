@@ -135,7 +135,6 @@ class User(Base, UserMixin, metaclass=metamodel):
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)
     email = Column(String(SMALL_STRING_LENGTH))
-    jobs = relationship("Job", back_populates="creator")
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")

@@ -65,9 +65,7 @@ class Job(Base, metaclass=metamodel):
     vendor = Column(String(SMALL_STRING_LENGTH), default="")
     operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     waiting_time = Column(Integer, default=0)
-    creator_id = Column(Integer, ForeignKey("User.id"))
-    creator = relationship("User", back_populates="jobs")
-    creator_name = association_proxy("creator", "name")
+    creator = String(SMALL_STRING_LENGTH, default="admin")
     push_to_git = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"

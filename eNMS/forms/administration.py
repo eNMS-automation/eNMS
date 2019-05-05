@@ -112,32 +112,34 @@ class LoginForm(FlaskForm, metaclass=metaform):
 class DatabaseMigrationsForm(FlaskForm, metaclass=metaform):
     template = "database_migration"
     form_type = HiddenField(default="database_migration")
-    empty_database_before_import = BooleanField()
+    empty_database_before_import = BooleanField("Empty Database before Import")
     export_choices = [(p, p) for p in import_classes]
-    import_export_types = SelectMultipleField(choices=export_choices)
+    import_export_types = SelectMultipleField(
+        "Instances to migrate", choices=export_choices
+    )
 
 
 class UserForm(FlaskForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="user")
     id = HiddenField()
-    name = StringField()
-    password = PasswordField()
-    email = StringField()
+    name = StringField("Name")
+    password = PasswordField("Password")
+    email = StringField("Email")
     permission_choices = [(p, p) for p in user_permissions]
-    permissions = SelectMultipleField(choices=permission_choices)
+    permissions = SelectMultipleField("Permissions", choices=permission_choices)
     pools = MultipleInstanceField("Pool", instance_type="Pool")
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
     form_type = HiddenField(default="user_filtering")
-    name = StringField()
-    email = StringField()
+    name = StringField("Name")
+    email = StringField("Email")
 
 
 class LogFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
     form_type = HiddenField(default="log_filtering")
-    source_ip_address = StringField()
-    content = StringField()
+    source_ip_address = StringField("Source IP Address")
+    content = StringField("Content")

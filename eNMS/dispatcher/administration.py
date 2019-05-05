@@ -76,7 +76,7 @@ class AdministrationDispatcher:
                             }
                             if any(
                                 group in s
-                                for group in controllerLDAP_ADMIN_GROUP
+                                for group in controller.LDAP_ADMIN_GROUP
                                 for s in json_response["attributes"]["memberOf"]
                             ):
                                 user["permissions"] = ["Admin"]

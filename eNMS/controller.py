@@ -58,8 +58,6 @@ class Controller:
         self.USE_VAULT = int(environ.get("USE_VAULT", False))
         self.load_custom_properties()
         self.configure_scheduler()
-        if self.USE_SYSLOG:
-            self.configure_syslog_server()
         if self.USE_TACACS:
             self.configure_tacacs_server()
         if self.USE_LDAP:
@@ -96,12 +94,6 @@ class Controller:
         self.LDAP_BASEDN = environ.get("LDAP_BASEDN")
         self.LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP", "").split(",")
         self.ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL)
-
-    def configure_syslog_server(self) -> None:
-        self.syslog_server = SyslogServer(
-            environ.get("SYSLOG_ADDR", "0.0.0.0"), int(environ.get("SYSLOG_PORT", 514))
-        )
-        self.syslog_server.start()
 
     def configure_tacacs_server(self) -> None:
         self.tacacs_server = TACACSClient(

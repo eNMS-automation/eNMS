@@ -7,7 +7,6 @@ from typing import Any, Dict
 
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
-from eNMS.modules import scheduler
 from eNMS.forms.automation import CompareResultsForm, WorkflowBuilderForm
 from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
 from eNMS.models import service_classes
@@ -118,7 +117,7 @@ class AutomationDispatcher:
                 return {"error": "Set devices or pools as targets first."}
             if not job.has_targets and targets:
                 return {"error": "This service should not have targets configured."}
-        scheduler.add_job(
+        controller.scheduler.add_job(
             id=controller.get_time(),
             func=threaded_job,
             run_date=datetime.now(),
@@ -174,7 +173,7 @@ class AutomationDispatcher:
         return dict(tasks=tasks)
 
     def scheduler(self, action: str) -> bool:
-        getattr(scheduler, action)()
+        getattr(controller.scheduler, action)()
 
     def task_action(self, action: str, task_id: int) -> bool:
         getattr(fetch("Task", id=task_id), action)()

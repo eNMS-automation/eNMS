@@ -10,7 +10,7 @@ from typing import Union
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.database import delete, factory, fetch
-from eNMS.modules import auth, scheduler
+from eNMS.modules import auth
 
 
 @auth.get_password
@@ -66,7 +66,7 @@ class RestAutomation(Resource):
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
         if handle_asynchronously:
-            scheduler.add_job(
+            controller.scheduler.add_job(
                 id=controller.get_time(),
                 func=threaded_job,
                 run_date=datetime.now(),

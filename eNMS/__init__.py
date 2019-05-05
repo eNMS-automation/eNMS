@@ -130,6 +130,13 @@ def configure_services(path: Path) -> None:
                 continue
 
 
+def configure_syslog_server() -> None:
+    syslog_server = SyslogServer(
+        environ.get("SYSLOG_ADDR", "0.0.0.0"), int(environ.get("SYSLOG_PORT", 514))
+    )
+    syslog_server.start()
+
+
 def create_app(path: Path, config_class: Type[Config]) -> Flask:
     app = Flask(__name__, static_folder="static")
     app.config.from_object(config_class)  # type: ignore
@@ -143,5 +150,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_errors(app)
     configure_services(path)
     configure_cli(app)
+    if controller.USE_SYSLOG:
+        configure_syslog_server()
     info("eNMS starting")
     return app

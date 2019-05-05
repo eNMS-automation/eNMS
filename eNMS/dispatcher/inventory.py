@@ -29,8 +29,6 @@ from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
     filtering_properties,
-    google_earth_styles,
-    link_subtype_to_color,
     table_properties,
     type_to_diagram_properties,
 )
@@ -122,7 +120,7 @@ class InventoryDispatcher:
         for device in fetch_all("Device"):
             point = kml_file.newpoint(name=device.name)
             point.coords = [(device.longitude, device.latitude)]
-            point.style = google_earth_styles[device.subtype]
+            point.style = controller.google_earth_styles[device.subtype]
             point.style.labelstyle.scale = request.form["label_size"]
         for link in fetch_all("Link"):
             line = kml_file.newlinestring(name=link.name)
@@ -130,7 +128,7 @@ class InventoryDispatcher:
                 (link.source.longitude, link.source.latitude),
                 (link.destination.longitude, link.destination.latitude),
             ]
-            line.style = google_earth_styles[link.subtype]
+            line.style = controller.google_earth_styles[link.subtype]
             line.style.linestyle.width = request.form["line_width"]
         filepath = current_app.path / "google_earth" / f'{request.form["name"]}.kmz'
         kml_file.save(filepath)
@@ -268,7 +266,7 @@ class InventoryDispatcher:
     def view(self, view_type: str) -> dict:
         return dict(
             template="pages/view",
-            link_colors=link_subtype_to_color,
+            link_colors=controller.link_colors,
             view_type=view_type,
         )
 

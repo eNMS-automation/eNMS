@@ -15,8 +15,6 @@ def get_custom_properties() -> dict:
         return load(properties, Loader=BaseLoader)
 
 
-google_earth_styles: dict = {}
-
 custom_properties: dict = get_custom_properties()
 
 private_properties: List[str] = ["password", "enable_password"]
@@ -29,16 +27,6 @@ object_common_properties: List[str] = base_properties + [
     "location",
     "vendor",
 ]
-
-
-link_subtype_to_color: Dict[str, str] = {
-    "bgp_peering": "#77ebca",
-    "etherchannel": "#cf228a",
-    "ethernet_link": "#0000ff",
-    "optical_link": "#d4222a",
-    "optical_channel": "#ff8247",
-    "pseudowire": "#902bec",
-}
 
 device_properties = list(custom_properties) + [
     "operating_system",

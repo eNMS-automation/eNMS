@@ -27,11 +27,6 @@ class Config(object):
     LDAP_BASEDN = environ.get("LDAP_BASEDN")
     LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP", "").split(",")
 
-    # TACACS+
-    USE_TACACS = int(environ.get("USE_TACACS", False))
-    TACACS_ADDR = environ.get("TACACS_ADDR")
-    TACACS_PASSWORD = environ.get("TACACS_PASSWORD")
-
     # Examples
     CREATE_EXAMPLES = int(environ.get("CREATE_EXAMPLES", True))
 

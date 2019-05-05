@@ -55,6 +55,8 @@ class Controller:
         self.load_custom_properties()
         if self.USE_SYSLOG:
             self.configure_syslog_server()
+        if self.USE_TACACS:
+            self.configure_tacacs_server()
 
     def init_app(self, app: Flask, session: Session):
         self.app = app
@@ -62,10 +64,15 @@ class Controller:
         self.create_google_earth_styles()
 
     def configure_syslog_server(self) -> None:
-        self.server = SyslogServer(
+        self.syslog_server = SyslogServer(
             environ.get("SYSLOG_ADDR", "0.0.0.0"), int(environ.get("SYSLOG_PORT", 514))
         )
-        self.server.start()
+        self.syslog_server.start()
+
+    def configure_tacacs_server(self) -> None:
+        self.tacacs_server = TACACSClient(
+            environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
+        )
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name

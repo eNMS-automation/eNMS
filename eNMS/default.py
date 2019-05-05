@@ -1,6 +1,7 @@
 from flask import Flask
 from uuid import getnode
 
+from eNMS.controller import controller
 from eNMS.modules import db
 from eNMS.models import classes, cls_to_properties
 from eNMS.database import factory, integrity_rollback, fetch, get_one
@@ -55,9 +56,9 @@ def create_default_parameters(app: Flask) -> None:
     parameters = classes["Parameters"]()
     parameters.update(
         **{
-            property: app.config[property.upper()]
+            property: controller.config[property.upper()]
             for property in cls_to_properties["Parameters"]
-            if property.upper() in app.config
+            if property.upper() in controller.config
         }
     )
     db.session.add(parameters)

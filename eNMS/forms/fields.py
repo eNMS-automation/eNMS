@@ -28,6 +28,7 @@ class InstanceField(SelectField):
 
 class MultipleInstanceField(SelectMultipleField):
     def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
+        instance_type = kwargs.pop("instance_type")
         super().__init__(*args, **kwargs)
         self.choices = choices(instance_type)
 

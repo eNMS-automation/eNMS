@@ -61,7 +61,7 @@ class Base(db.Model):
                     value = {"float": float, "int": int}[property_type](value)
             setattr(self, property, value)
 
-    def get_properties(self) -> dict:
+    def get_properties(self, export=False) -> dict:
         result = {}
         for property in cls_to_properties[self.type]:
             value = getattr(self, property)
@@ -71,6 +71,7 @@ class Base(db.Model):
                 dumps(value)
                 result[property] = value
             except TypeError:
+                print(property, value)
                 result[property] = str(value)
         return result
 
@@ -94,8 +95,7 @@ class Base(db.Model):
     def to_dict(self, export: bool = False) -> dict:
         properties = self.get_export_properties() if export else self.get_properties()
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
-        for property in relationships[self.type]:
-            relation = relationships[self.type][property]
+        for property, relation in relationships[self.type].items():
             if export and property in no_migrate:
                 continue
             if relation["list"]:

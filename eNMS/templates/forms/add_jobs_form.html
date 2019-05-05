@@ -1,4 +1,6 @@
 <form id="add-job-form" data-parsley-validate class="form-horizontal form-label-left" method="post">
+  {{ form.csrf_token() }}
+  {{ form.form_type() }}
   <div class="modal-body">
     <div class="form-group">
       {{ form.add_jobs(class="form-control", size=15) }}

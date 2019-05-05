@@ -57,8 +57,8 @@ class Base(db.Model):
             elif property_type == "dict" and type(value) == str:
                 value = loads(value) if value else {}
             elif property_type in ["float", "int"]:
-                if value:
-                    value = {"float": float, "int": int}[property_type](value)
+                value = {"float": float, "int": int}[property_type](value)
+            print(property, value)
             setattr(self, property, value)
 
     def get_properties(self, export=False) -> dict:

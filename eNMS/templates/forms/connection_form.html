@@ -1,5 +1,7 @@
 <div class="modal-body">
   <form id="connection-parameters-form" class="form-horizontal form-label-left add-id" method="post">
+    {{ form.csrf_token() }}
+    {{ form.form_type() }}
     <label>Property used for the connection:</label>
     {{ form.address(class="form-control add-id") }}<br>
     <div class="item">

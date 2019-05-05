@@ -1,5 +1,7 @@
 <div class="modal-body">
   <form id="edit-pool-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
+    {{ form.csrf_token() }}
+    {{ form.form_type() }}
     {{ form.id(id='pool-id', class="add-id") }}
     <div class="form-group">
       <label>Name</label>
@@ -18,7 +20,7 @@
       <div class="form-group">
         {{ form.latitude(id="pool-latitude", class="form-control add-id", placeholder="Latitude") }}
       </div>
-      <label>Match condition</label>
+      <label>Match Condition</label>
       <div class="form-group">
         {{ form.operator(id="pool-operator", class="form-control required add-id", placeholder="Operator") }}
       </div>

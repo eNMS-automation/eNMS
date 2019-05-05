@@ -10,6 +10,7 @@ LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:
+    print(kwargs)
     return db.session.query(classes[model]).filter_by(**kwargs).first()
 
 

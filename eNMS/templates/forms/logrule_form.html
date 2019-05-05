@@ -1,4 +1,6 @@
 <form id="edit-logrule-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+  {{ form.csrf_token() }}
+  {{ form.form_type() }}
   {{ form.id(id='logrule-id', class="add-id") }}
   <label>Name</label>
   <div class='form-group'>

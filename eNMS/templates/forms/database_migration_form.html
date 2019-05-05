@@ -1,4 +1,5 @@
 <form id="migration-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
+  {{ form.csrf_token() }}
   {{ form.form_type() }}
   <div class="modal-body">
     <div>

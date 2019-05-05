@@ -82,6 +82,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
 
     def update(self, cls: str) -> dict:
         try:
+            print(request.form)
             instance = factory(cls, **request.form)
             info(
                 f"{current_user.name}: UPDATE {cls} " f"{instance.name} ({instance.id})"

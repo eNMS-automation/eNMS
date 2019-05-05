@@ -324,9 +324,7 @@ function addJobPanel() {
 
 Object.assign(action, {
   "Run Workflow": runWorkflow,
-  Edit: (job) => {
-    showTypePanel(job.type == "Workflow" ? "workflow" : "service", job.id);
-  },
+  Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => runJob(job.id),
   Results: (job) => showResultsPanel(job.id, job.label),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),

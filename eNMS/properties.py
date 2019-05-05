@@ -336,11 +336,10 @@ type_to_diagram_properties: Dict[str, List[str]] = {
     "Task": task_diagram_properties,
 }
 
-property_names: Dict[str, str] = {}
+property_names: Dict[str, str] = {
+    k: v["property_name"] for k, v in custom_properties.items()
+}
 
-# Import properties
-
-property_names.update({k: v["property_name"] for k, v in custom_properties.items()})
 reverse_property_names: Dict[str, str] = {v: k for k, v in property_names.items()}
 
 relationships: Dict[str, Dict[str, str]] = {

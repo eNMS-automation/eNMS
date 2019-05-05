@@ -41,8 +41,6 @@ def metaform(*args, **kwargs):
         if getattr(base, "abstract_service", False):
             cls.service_fields.extend(form_properties[base_form_type])
         form_properties[form_type].update(form_properties[base_form_type])
-    print(form_type)
-    print(property_names)
     return cls
 
 

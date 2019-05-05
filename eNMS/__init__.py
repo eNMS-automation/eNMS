@@ -29,7 +29,7 @@ from eNMS.modules import (
     USE_VAULT,
     vault_client,
 )
-from eNMS.models import property_types, service_classes
+from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
 from eNMS.properties import (
@@ -90,6 +90,7 @@ def configure_database(app: Flask) -> None:
     @app.before_first_request
     def initialize_database() -> None:
         db.create_all()
+        model_inspection()
         create_default(app)
         if app.config["CREATE_EXAMPLES"]:
             create_examples(app)

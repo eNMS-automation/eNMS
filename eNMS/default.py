@@ -70,51 +70,43 @@ def create_default_services() -> None:
             "type": "SwissArmyKnifeService",
             "name": "Start",
             "description": "Start point of a workflow",
-            "creator": "admin",
             "hidden": True,
         },
         {
             "type": "SwissArmyKnifeService",
             "name": "End",
             "description": "End point of a workflow",
-            "creator": "admin",
             "hidden": True,
         },
         {
             "type": "SwissArmyKnifeService",
             "name": "mail_feedback_notification",
             "description": "Mail notification (service logs)",
-            "creator": "admin",
         },
         {
             "type": "SwissArmyKnifeService",
             "name": "slack_feedback_notification",
             "description": "Slack notification (service logs)",
-            "creator": "admin",
         },
         {
             "type": "SwissArmyKnifeService",
             "name": "mattermost_feedback_notification",
             "description": "Mattermost notification (service logs)",
-            "creator": "admin",
         },
         {
             "type": "SwissArmyKnifeService",
             "name": "cluster_monitoring",
             "description": "Monitor eNMS cluster",
-            "creator": "admin",
         },
         {
             "type": "SwissArmyKnifeService",
             "name": "git_push_configurations",
             "description": "Push configurations to Gitlab",
-            "creator": "admin",
         },
         {
             "type": "SwissArmyKnifeService",
             "name": "poller_service",
             "description": "Configuration Management Poller",
-            "creator": "admin",
             "hidden": True,
         },
     ):
@@ -129,7 +121,6 @@ def create_default_workflows() -> None:
             "name": name,
             "description": "Poll configuration and push to gitlab",
             "use_workflow_targets": False,
-            "creator": "admin",
         },
     )
     workflow.jobs.extend(

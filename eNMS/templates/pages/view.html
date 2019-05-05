@@ -84,7 +84,6 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    let subtype_sizes = {{ subtype_sizes|tojson|safe }};
     let link_colors = {{ link_colors|tojson|safe }};
     let view = '{{ view }}';
     let viewType = "{{ view_type }}"

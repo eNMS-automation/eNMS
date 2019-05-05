@@ -8,7 +8,6 @@ link_colors: false
 parameters: false
 showPoolView: false
 showTypePanel: false
-subtype_sizes: false
 viewType: false
 WE: false
 */
@@ -18,6 +17,18 @@ const layers = {
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
   nasa: "http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg",
 };
+
+const subtypeSizes = {
+  antenna: [18, 12],
+  firewall: [18, 12],
+  host: [18, 12],
+  optical_switch: [18, 12],
+  regenerator: [18, 12],
+  router: [18, 12],
+  server: [18, 12],
+  switch: [18, 12],
+  site: [22, 22],
+}
 
 let selectedObject;
 let markersArray = [];
@@ -46,7 +57,7 @@ if (currentView == "3D") {
   $("#earth").css("visibility", "hidden");
 }
 
-for (const [key, value] of Object.entries(subtype_sizes)) {
+for (const [key, value] of Object.entries(subtypeSizes)) {
   window[`icon_${key}`] = L.icon({
     iconUrl: `static/images/2D/${key}.gif`,
     iconSize: value,

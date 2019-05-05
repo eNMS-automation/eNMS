@@ -30,29 +30,6 @@ object_common_properties: List[str] = base_properties + [
     "vendor",
 ]
 
-device_subtypes: Dict[str, str] = {
-    "antenna": "Antenna",
-    "firewall": "Firewall",
-    "host": "Host",
-    "optical_switch": "Optical switch",
-    "regenerator": "Regenerator",
-    "router": "Router",
-    "server": "Server",
-    "switch": "Switch",
-}
-
-subtype_sizes: Dict[str, List] = {
-    "antenna": [18, 12],
-    "firewall": [18, 12],
-    "host": [18, 12],
-    "optical_switch": [18, 12],
-    "regenerator": [18, 12],
-    "router": [18, 12],
-    "server": [18, 12],
-    "switch": [18, 12],
-    "site": [22, 22],
-}
-
 link_subtypes: Dict[str, str] = {
     "bgp_peering": "BGP peering",
     "etherchannel": "Etherchannel",

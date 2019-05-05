@@ -31,7 +31,6 @@ from eNMS.properties import (
     filtering_properties,
     google_earth_styles,
     link_subtype_to_color,
-    subtype_sizes,
     table_properties,
     type_to_diagram_properties,
 )
@@ -269,7 +268,6 @@ class InventoryDispatcher:
     def view(self, view_type: str) -> dict:
         return dict(
             template="pages/view",
-            subtype_sizes=subtype_sizes,
             link_colors=link_subtype_to_color,
             view_type=view_type,
         )

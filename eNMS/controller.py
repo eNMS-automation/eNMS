@@ -11,6 +11,17 @@ from typing import Any, Generator, Set
 
 class Controller:
 
+    device_subtypes: Dict[str, str] = {
+        "antenna": "Antenna",
+        "firewall": "Firewall",
+        "host": "Host",
+        "optical_switch": "Optical switch",
+        "regenerator": "Regenerator",
+        "router": "Router",
+        "server": "Server",
+        "switch": "Switch",
+    }
+
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])

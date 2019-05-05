@@ -37,7 +37,7 @@ class MultipleInstanceField(SelectMultipleField):
 
 
 field_types = {
-    BooleanField: "boolean",
+    BooleanField: "bool",
     DateField: "date",
     DictField: "dict",
     FloatField: "float",

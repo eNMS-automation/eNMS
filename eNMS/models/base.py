@@ -45,6 +45,7 @@ class Base(db.Model):
         relation = relationships[self.__tablename__]
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
+            print(property, value, property_type)
             if property in relation:
                 if relation[property]["list"]:
                     value = objectify(relation[property]["model"], value)
@@ -59,6 +60,10 @@ class Base(db.Model):
             elif property_type in ["float", "int"]:
                 if value:
                     value = {"float": float, "int": int}[property_type](value)
+            try:
+                print(self, property, value)
+            except:
+                print(property, value)
             setattr(self, property, value)
 
     def get_properties(self, export=False) -> dict:
@@ -90,6 +95,7 @@ class Base(db.Model):
                 value = list(value)
             if isinstance(value, MutableDict):
                 value = dict(value)
+            print(property, value)
             result[property] = value
         return result
 

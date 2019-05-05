@@ -174,7 +174,7 @@ service_table_properties: List[str] = [
     "name",
     "type",
     "description",
-    "creator_name",
+    "creator",
     "number_of_retries",
     "time_between_retries",
     "status",
@@ -184,7 +184,7 @@ service_table_properties: List[str] = [
 workflow_table_properties: List[str] = [
     "name",
     "description",
-    "creator_name",
+    "creator",
     "vendor",
     "operating_system",
     "number_of_retries",
@@ -256,7 +256,7 @@ job_filtering_properties = {
     "name",
     "type",
     "description",
-    "creator_name",
+    "creator",
     "max_processes",
     "credentials",
     "waiting_time",
@@ -307,7 +307,7 @@ user_diagram_properties: List[str] = ["name"]
 service_diagram_properties: List[str] = [
     "vendor",
     "operating_system",
-    "creator_name",
+    "creator",
     "send_notification",
     "send_notification_method",
     "multiprocessing",
@@ -363,9 +363,12 @@ export_properties: Dict[str, List[str]] = {
 # Properties that shouldn't be in the migration files
 
 dont_migrate: Dict[str, List[str]] = {
-    "Device": ["jobs"],
+    "Device": ["jobs", "source", "destination", "pools"],
+    "Link": ["pools"],
     "Pool": ["object_number"],
     "Service": [
+        "sources",
+        "destinations",
         "results",
         "logs",
         "state",
@@ -373,7 +376,7 @@ dont_migrate: Dict[str, List[str]] = {
         "is_running",
         "status",
         "workflows",
-        "creator_name",
+        "tasks",
     ],
     "Task": [
         "job_name",
@@ -383,12 +386,15 @@ dont_migrate: Dict[str, List[str]] = {
         "status",
     ],
     "Workflow": [
+        "sources",
+        "destinations",
         "last_modified",
         "results",
         "logs",
         "state",
         "status",
         "is_running",
-        "creator_name",
+        "workflows",
+        "tasks",
     ],
 }

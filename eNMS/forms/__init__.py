@@ -49,7 +49,7 @@ def form_postprocessing(form):
     for property, field_type in form_properties[form.get("form_type")].items():
         if field_type in ("object-list", "multiselect"):
             data[property] = form.getlist(property)
-        elif field_type == "boolean":
+        elif field_type == "bool":
             data[property] = property in form
     return data
 

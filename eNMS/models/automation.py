@@ -65,7 +65,7 @@ class Job(Base, metaclass=metamodel):
     vendor = Column(String(SMALL_STRING_LENGTH), default="")
     operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     waiting_time = Column(Integer, default=0)
-    creator = String(SMALL_STRING_LENGTH, default="admin")
+    creator = Column(String(SMALL_STRING_LENGTH), default="admin")
     push_to_git = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"

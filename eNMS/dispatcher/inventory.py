@@ -48,7 +48,7 @@ class InventoryDispatcher:
             cmd.append("--once")
         if "multiplexing" in request.form:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if current_app.config["GOTTY_BYPASS_KEY_PROMPT"]:
+        if controller.config["GOTTY_BYPASS_KEY_PROMPT"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
@@ -68,8 +68,8 @@ class InventoryDispatcher:
         return {
             "device": device.name,
             "port": port,
-            "redirection": current_app.config["GOTTY_PORT_REDIRECTION"],
-            "server_addr": current_app.config["ENMS_SERVER_ADDR"],
+            "redirection": controller.config["GOTTY_PORT_REDIRECTION"],
+            "server_addr": controller.config["ENMS_SERVER_ADDR"],
         }
 
     def counters(self, property: str, type: str) -> Counter:

@@ -63,7 +63,7 @@ def configure_database(app: Flask) -> None:
         db.create_all()
         model_inspection()
         create_default(app)
-        if app.config["CREATE_EXAMPLES"]:
+        if controller.config["CREATE_EXAMPLES"]:
             create_examples(app)
 
 
@@ -95,7 +95,7 @@ def configure_errors(app: Flask) -> None:
 
 def configure_logs(app: Flask) -> None:
     basicConfig(
-        level=getattr(import_module("logging"), app.config["ENMS_LOG_LEVEL"]),
+        level=getattr(import_module("logging"), controller.config["ENMS_LOG_LEVEL"]),
         format="%(asctime)s %(levelname)-8s %(message)s",
         datefmt="%m-%d-%Y %H:%M:%S",
         handlers=[
@@ -111,10 +111,10 @@ def configure_logs(app: Flask) -> None:
 
 def configure_services(path: Path) -> None:
     path_services = [path / "eNMS" / "services"]
-    custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
+    custom_services_path = controller.config["CUSTOM_SERVICES_PATH"]
     if custom_services_path:
         path_services.append(Path(custom_services_path))
-    dont_create_examples = not int(environ.get("CREATE_EXAMPLES", True))
+    dont_create_examples = not controller.config["CREATE_EXAMPLES"]
     for path in path_services:
         for file in path.glob("**/*.py"):
             if "init" in str(file):

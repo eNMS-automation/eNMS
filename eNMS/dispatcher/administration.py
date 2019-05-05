@@ -184,7 +184,7 @@ class AdministrationDispatcher:
                     f"{protocol}://{ip_address}/rest/is_alive",
                     timeout=parameters.cluster_scan_timeout,
                 ).json()
-                if current_app.config["CLUSTER_ID"] != server.pop("cluster_id"):
+                if controller.config["CLUSTER_ID"] != server.pop("cluster_id"):
                     continue
                 factory("Server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:

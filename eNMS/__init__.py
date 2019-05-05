@@ -8,7 +8,6 @@ from logging import basicConfig, info, StreamHandler
 from logging.handlers import RotatingFileHandler
 from os import environ
 from pathlib import Path
-from simplekml import Color, Style
 from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
@@ -164,7 +163,6 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_rest_api(app)
     configure_logs(app)
     configure_errors(app)
-    configure_google_earth(path)
     configure_services(path)
     configure_cli(app)
     if USE_VAULT:

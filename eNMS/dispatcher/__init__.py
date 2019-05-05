@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from typing import List
 
 from eNMS.forms import form_actions, form_classes, form_templates
-from eNMS.database import delete, factory, fetch, fetch_all, fetch_all_visible
+from eNMS.database import delete, factory, fetch, fetch_all_visible
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher

@@ -5,8 +5,9 @@ from logging import info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from sqlalchemy.orm import Session
+from simplekml import Color, Style
 from string import punctuation
-from typing import Any, Generator, Set
+from typing import Any, Dict, Generator, Set
 
 
 class Controller:
@@ -44,12 +45,10 @@ class Controller:
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
-    def __init__(self):
-        self.create_google_earth_styles()
-
     def init_app(self, app: Flask, session: Session):
         self.app = app
         self.session = session
+        self.create_google_earth_styles()
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name

@@ -31,8 +31,8 @@ from eNMS.properties import (
     filtering_properties,
     google_earth_styles,
     link_subtype_to_color,
-    reverse_property_names,
     subtype_sizes,
+    table_properties,
     type_to_diagram_properties,
 )
 
@@ -76,7 +76,6 @@ class InventoryDispatcher:
         }
 
     def counters(self, property: str, type: str) -> Counter:
-        property = reverse_property_names.get(property, property)
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
     def dashboard(self) -> dict:
@@ -113,7 +112,7 @@ class InventoryDispatcher:
             filename += ".xls"
         for obj_type in ("Device", "Link"):
             sheet = workbook.add_sheet(obj_type)
-            for index, property in enumerate(export_properties[obj_type]):
+            for index, property in enumerate(table_properties[obj_type]):
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))

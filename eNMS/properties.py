@@ -26,16 +26,6 @@ google_earth_styles: dict = {}
 
 custom_properties: dict = get_custom_properties()
 
-list_properties: List[str] = [
-    "devices",
-    "pools",
-    "links",
-    "permissions",
-    "getters",
-    "import_export_types",
-    "deletion_types",
-]
-
 private_properties: List[str] = ["password", "enable_password"]
 
 base_properties: List[str] = ["id", "name", "description"]
@@ -131,14 +121,12 @@ link_table_properties: List[str] = object_common_properties[1:] + [
     "destination_name",
 ]
 
-pool_public_properties: List[str] = base_properties + [
+pool_table_properties: List[str] = base_properties + [
     "never_update",
     "longitude",
     "latitude",
     "object_number",
 ]
-
-pool_table_properties: List[str] = pool_public_properties[1:]
 
 service_table_properties: List[str] = [
     "name",
@@ -163,14 +151,6 @@ workflow_table_properties: List[str] = [
     "progress",
 ]
 
-workflow_edge_properties: List[str] = [
-    "id",
-    "name",
-    "subtype",
-    "source_id",
-    "destination_id",
-]
-
 user_table_properties: List[str] = ["name", "email"]
 
 server_table_properties = base_properties[1:] + [
@@ -183,15 +163,6 @@ server_table_properties = base_properties[1:] + [
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
 log_public_properties: List[str] = ["source_ip", "content"]
-
-log_rule_public_properties: List[str] = log_public_properties + [
-    "name",
-    "source_ip_regex",
-    "content_regex",
-    "jobs",
-]
-
-log_rule_table_properties: List[str] = ["name"] + log_public_properties
 
 task_table_properties: List[str] = [
     "name",
@@ -309,8 +280,6 @@ type_to_diagram_properties: Dict[str, List[str]] = {
 property_names: Dict[str, str] = {
     k: v["property_name"] for k, v in custom_properties.items()
 }
-
-reverse_property_names: Dict[str, str] = {v: k for k, v in property_names.items()}
 
 import_classes = [
     "User",

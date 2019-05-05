@@ -16,7 +16,9 @@ class DateField(StringField):
 
 
 class DictField(StringField):
-    pass
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        kwargs["default"] = kwargs.get("default", "{}")
+        super().__init__(*args, **kwargs)
 
 
 class InstanceField(SelectField):

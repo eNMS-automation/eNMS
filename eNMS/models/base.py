@@ -55,24 +55,17 @@ class Base(db.Model):
             elif "regex" in property:
                 value = property in kwargs
             elif property_type == "dict" and type(value) == str:
-                value = loads(value) if value else {}
+                value = loads(value)
             elif property_type in ["float", "int"]:
                 value = {"float": float, "int": int}[property_type](value)
-            print(property, value)
             setattr(self, property, value)
 
     def get_properties(self, export=False) -> dict:
         result = {}
         for property in cls_to_properties[self.type]:
-            value = getattr(self, property)
             if property in private_properties:
                 continue
-            try:
-                dumps(value)
-                result[property] = value
-            except TypeError:
-                print("ERROR")
-                result[property] = str(value)
+            result[property] = getattr(self, property)
         return result
 
     def get_export_properties(self) -> dict:

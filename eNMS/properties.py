@@ -30,14 +30,6 @@ object_common_properties: List[str] = base_properties + [
     "vendor",
 ]
 
-link_subtypes: Dict[str, str] = {
-    "bgp_peering": "BGP peering",
-    "etherchannel": "Etherchannel",
-    "ethernet_link": "Ethernet link",
-    "optical_channel": "Optical channel",
-    "optical_link": "Optical link",
-    "pseudowire": "Pseudowire",
-}
 
 link_subtype_to_color: Dict[str, str] = {
     "bgp_peering": "#77ebca",

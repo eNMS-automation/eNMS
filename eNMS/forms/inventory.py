@@ -15,7 +15,6 @@ from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,
-    link_subtypes,
     pool_device_properties,
 )
 
@@ -114,7 +113,7 @@ class LinkForm(ObjectForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
-    subtype = SelectField("Subtype", choices=tuple(link_subtypes.items()))
+    subtype = SelectField("Subtype", choices=tuple(controller.link_subtypes.items()))
     source = InstanceField("Source", instance_type="Device")
     destination = InstanceField("Destination", instance_type="Device")
 

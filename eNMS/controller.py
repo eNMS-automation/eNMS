@@ -22,6 +22,15 @@ class Controller:
         "switch": "Switch",
     }
 
+    controller.link_subtypes: Dict[str, str] = {
+        "bgp_peering": "BGP peering",
+        "etherchannel": "Etherchannel",
+        "ethernet_link": "Ethernet link",
+        "optical_channel": "Optical channel",
+        "optical_link": "Optical link",
+        "pseudowire": "Pseudowire",
+    }
+
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])

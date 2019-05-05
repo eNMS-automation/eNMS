@@ -32,12 +32,7 @@ from eNMS.modules import (
 from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
-from eNMS.properties import (
-    google_earth_styles,
-    link_subtypes,
-    link_subtype_to_color,
-    property_names,
-)
+from eNMS.properties import google_earth_styles, link_subtype_to_color, property_names
 from eNMS.rest import configure_rest_api
 
 
@@ -144,7 +139,7 @@ def configure_google_earth(path: Path) -> None:
         path_icon = f"{path}/eNMS/views/static/images/2D/{subtype}.gif"
         point_style.iconstyle.icon.href = path_icon
         google_earth_styles[subtype] = point_style
-    for subtype in link_subtypes:
+    for subtype in controller.link_subtypes:
         line_style = Style()
         color = link_subtype_to_color[subtype]
         kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]

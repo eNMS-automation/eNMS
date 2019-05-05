@@ -5,7 +5,7 @@ from typing import Any, List
 from eNMS.models import cls_to_properties, property_types, relationships
 from eNMS.modules import db, USE_VAULT, vault_client
 from eNMS.database import fetch, objectify
-from eNMS.properties import dont_migrate, private_properties, type_converter
+from eNMS.properties import dont_migrate, private_properties
 
 
 class Base(db.Model):
@@ -43,12 +43,15 @@ class Base(db.Model):
     def update(self, **kwargs: Any) -> None:
         relation = relationships[self.__tablename__]
         for property, value in kwargs.items():
+            property_type = property_types.get(property, None)
             if property in relation:
                 if relation[property]["list"]:
                     value = objectify(relation[property]["model"], value)
                 else:
                     value = fetch(relation[property]["model"], id=value)
-            setattr(self, property, type_converter(property, value))
+            if property_type == "bool":
+                value = value not in (False, "false")
+            setattr(self, property, value)
 
     def get_properties(self, export=False) -> dict:
         result = {}

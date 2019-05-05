@@ -60,6 +60,7 @@ def create_example_services() -> None:
             "an_integer": 10,
             "a_float": 5.0,
             "a_list": ["a", "b"],
+            "a_dict": {},
             "boolean1": True,
             "boolean2": False,
         },

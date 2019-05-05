@@ -1,3 +1,4 @@
+from ast import literal_eval
 from wtforms import (
     BooleanField,
     FloatField,
@@ -19,6 +20,15 @@ class DictField(StringField):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         kwargs["default"] = kwargs.get("default", "{}")
         super().__init__(*args, **kwargs)
+
+    def _value(self):
+        return str(self.data)
+
+    def process_formdata(self, valuelist):
+        try:
+            self.data = literal_eval(valuelist[0])
+        except ValueError:
+            raise ValueError("Invalid dictionary syntax")
 
 
 class InstanceField(SelectField):

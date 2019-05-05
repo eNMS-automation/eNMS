@@ -3,8 +3,12 @@ from contextlib import contextmanager
 from datetime import datetime
 from flask import Flask
 from hvac import Client as VaultClient
+from importlib import import_module
+from importlib.abc import Loader
+from importlib.util import spec_from_file_location, module_from_spec
 from ldap3 import ALL, Server
-from logging import info
+from logging import basicConfig, info, StreamHandler
+from logging.handlers import RotatingFileHandler
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from os import environ
@@ -57,7 +61,7 @@ class Controller:
         self.USE_LDAP = int(environ.get("USE_LDAP", False))
         self.USE_VAULT = int(environ.get("USE_VAULT", False))
         self.config = self.load_config()
-        self.custom_properties = load_custom_properties()
+        self.custom_properties = self.load_custom_properties()
         self.configure_scheduler()
         if self.USE_TACACS:
             self.configure_tacacs_server()
@@ -106,6 +110,25 @@ class Controller:
             }
         )
         self.scheduler.start()
+
+    def load_services(self) -> None:
+        path_services = [self.app.path / "eNMS" / "services"]
+        custom_services_path = self.config["CUSTOM_SERVICES_PATH"]
+        if custom_services_path:
+            path_services.append(Path(custom_services_path))
+        for path in path_services:
+            for file in path.glob("**/*.py"):
+                if "init" in str(file):
+                    continue
+                if not self.config["CREATE_EXAMPLES"] and "examples" in str(file):
+                    continue
+                spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
+                assert isinstance(spec.loader, Loader)
+                module = module_from_spec(spec)
+                try:
+                    spec.loader.exec_module(module)
+                except InvalidRequestError:
+                    continue
 
     def configure_ldap_client(self) -> None:
         self.LDAP_SERVER = environ.get("LDAP_SERVER")

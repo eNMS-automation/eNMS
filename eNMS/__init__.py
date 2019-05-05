@@ -1,11 +1,7 @@
 from flask import Flask, render_template
 from flask.wrappers import Request, Response
 from flask_cli import FlaskCLI
-from importlib import import_module
-from importlib.abc import Loader
-from importlib.util import spec_from_file_location, module_from_spec
-from logging import basicConfig, info, StreamHandler
-from logging.handlers import RotatingFileHandler
+from logging import info
 from os import environ
 from pathlib import Path
 from sqlalchemy.exc import InvalidRequestError
@@ -24,7 +20,6 @@ from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
-
 
 import eNMS.routes
 
@@ -93,27 +88,6 @@ def configure_errors(app: Flask) -> None:
         return render_template("errors/page_404.html"), 404
 
 
-def configure_services(path: Path) -> None:
-    path_services = [path / "eNMS" / "services"]
-    custom_services_path = controller.config["CUSTOM_SERVICES_PATH"]
-    if custom_services_path:
-        path_services.append(Path(custom_services_path))
-    dont_create_examples = not controller.config["CREATE_EXAMPLES"]
-    for path in path_services:
-        for file in path.glob("**/*.py"):
-            if "init" in str(file):
-                continue
-            if dont_create_examples and "examples" in str(file):
-                continue
-            spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
-            assert isinstance(spec.loader, Loader)
-            module = module_from_spec(spec)
-            try:
-                spec.loader.exec_module(module)
-            except InvalidRequestError:
-                continue
-
-
 def configure_syslog_server() -> None:
     syslog_server = SyslogServer(
         environ.get("SYSLOG_ADDR", "0.0.0.0"), int(environ.get("SYSLOG_PORT", 514))
@@ -130,9 +104,8 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_database(app)
     configure_context_processor(app)
     configure_rest_api(app)
-    configure_logs(app)
     configure_errors(app)
-    configure_services(path)
+    controller.load_services()
     configure_cli(app)
     if controller.USE_SYSLOG:
         configure_syslog_server()

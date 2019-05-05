@@ -28,7 +28,6 @@ from eNMS.database import (
 from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
-    export_properties,
     filtering_properties,
     google_earth_styles,
     link_subtype_to_color,

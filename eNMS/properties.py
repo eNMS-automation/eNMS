@@ -108,13 +108,6 @@ pool_device_properties: List[str] = (
     object_common_properties[1:] + device_properties[:-1] + ["current_configuration"]
 )
 
-device_public_properties: List[str] = object_common_properties + device_properties + [
-    "last_failure",
-    "last_runtime",
-    "last_status",
-    "last_update",
-]
-
 device_configuration_properties: List[str] = [
     "name",
     "model",
@@ -123,21 +116,6 @@ device_configuration_properties: List[str] = [
     "last_update",
     "last_status",
 ]
-
-task_properties: List[str] = base_properties + [
-    "job",
-    "job_name",
-    "next_run_time",
-    "scheduling_mode",
-    "start_date",
-    "end_date",
-    "frequency",
-    "frequency_unit",
-    "crontab_expression",
-    "is_active",
-]
-
-task_public_properties: List[str] = task_properties[1:]
 
 link_properties: List[str] = object_common_properties + [
     "source_name",
@@ -161,15 +139,6 @@ pool_public_properties: List[str] = base_properties + [
 ]
 
 pool_table_properties: List[str] = pool_public_properties[1:]
-
-for obj_type, properties in (
-    ("device", pool_device_properties),
-    ("link", pool_link_properties),
-):
-    for prop in properties:
-        pool_public_properties.extend(
-            [f"{obj_type}_{prop}", f"{obj_type}_{prop}_match"]
-        )
 
 service_table_properties: List[str] = [
     "name",
@@ -353,13 +322,6 @@ import_classes = [
     "WorkflowEdge",
     "Task",
 ]
-
-# Export topology properties
-
-export_properties: Dict[str, List[str]] = {
-    "Device": device_public_properties,
-    "Link": link_table_properties,
-}
 
 # Properties that shouldn't be in the migration files
 

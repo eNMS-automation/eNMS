@@ -71,25 +71,25 @@ class ObjectFilteringForm(FlaskForm, metaclass=metaform):
 class ObjectForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="object")
     name = StringField("Name")
-    description = StringField()
-    location = StringField()
-    vendor = StringField()
-    model = StringField()
+    description = StringField("Description")
+    location = StringField("Location")
+    vendor = StringField("Vendor")
+    model = StringField("Model")
 
 
 @configure_device_form
 class DeviceFilteringForm(ObjectFilteringForm, ObjectForm, metaclass=metaform):
     form_type = HiddenField(default="device_filtering")
-    current_configuration = StringField()
-    subtype = StringField()
-    ip_address = StringField()
-    port = StringField()
-    operating_system = StringField()
-    os_version = StringField()
-    longitude = StringField()
-    latitude = StringField()
-    napalm_driver = StringField()
-    netmiko_driver = StringField()
+    current_configuration = StringField("Current Configuration")
+    subtype = StringField("Subtype")
+    ip_address = StringField("IP Address")
+    port = StringField("Port")
+    operating_system = StringField("Operating System")
+    os_version = StringField("OS Version")
+    longitude = StringField("Longitude")
+    latitude = StringField("Latitude")
+    napalm_driver = StringField("NAPALM Driver")
+    netmiko_driver = StringField("Netmiko Driver")
 
 
 @configure_device_form
@@ -97,10 +97,9 @@ class DeviceForm(ObjectForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="device")
     id = HiddenField()
-    device_types = [subtype for subtype in device_subtypes.items()]
-    subtype = SelectField(choices=device_types)
+    subtype = SelectField("Subtype", choices=tuple(device_subtypes.items()))
     ip_address = StringField("IP address")
-    port = IntegerField(default=22)
+    port = IntegerField("Port", default=22)
     operating_system = StringField()
     os_version = StringField()
     longitude = FloatField(default=0.0)
@@ -116,8 +115,7 @@ class LinkForm(ObjectForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
-    link_types = [subtype for subtype in link_subtypes.items()]
-    subtype = SelectField(choices=link_types)
+    subtype = SelectField(choices=tuple(link_subtypes.items()))
     source = InstanceField("Source", instance_type="Device")
     destination = InstanceField("Destination", instance_type="Device")
 

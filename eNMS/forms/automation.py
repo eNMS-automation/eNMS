@@ -106,22 +106,24 @@ class TaskForm(FlaskForm, metaclass=metaform):
     template = "base"
     form_type = HiddenField(default="task")
     id = HiddenField()
-    is_active = BooleanField()
-    name = StringField()
-    description = StringField()
-    start_date = DateField()
-    end_date = DateField()
-    frequency = IntegerField()
+    is_active = BooleanField("Is Active")
+    name = StringField("Name")
+    description = StringField("Description")
+    start_date = DateField("Start Date")
+    end_date = DateField("End Date")
+    frequency = IntegerField("Frequency")
     frequency_unit = SelectField(
+        "Frequency Unit",
         choices=(
             ("seconds", "Seconds"),
             ("minutes", "Minutes"),
             ("hours", "Hours"),
             ("days", "Days"),
-        )
+        ),
     )
-    crontab_expression = StringField()
+    crontab_expression = StringField("Crontab Expression")
     job = InstanceField("Job", instance_type="Job")
     scheduling_mode = SelectField(
-        choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling"))
+        "Scheduling Mode",
+        choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
     )

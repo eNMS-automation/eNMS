@@ -1,7 +1,6 @@
 /*
 global
 call: false
-counters: false
 echarts: false
 */
 

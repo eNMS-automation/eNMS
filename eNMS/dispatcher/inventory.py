@@ -16,7 +16,15 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller import controller
-from eNMS.database import delete_all, factory, fetch, fetch_all, get_one, objectify
+from eNMS.database import (
+    delete_all,
+    factory,
+    fetch,
+    fetch_all,
+    fetch_all_visible,
+    get_one,
+    objectify,
+)
 from eNMS.models import classes
 from eNMS.modules import db
 from eNMS.properties import (
@@ -26,6 +34,7 @@ from eNMS.properties import (
     link_subtype_to_color,
     reverse_property_names,
     subtype_sizes,
+    type_to_diagram_properties,
 )
 
 
@@ -70,6 +79,33 @@ class InventoryDispatcher:
     def counters(self, property: str, type: str) -> Counter:
         property = reverse_property_names.get(property, property)
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
+
+    def dashboard(self) -> dict:
+        return dict(
+            properties=type_to_diagram_properties,
+            counters={
+                **{cls: len(fetch_all_visible(cls)) for cls in classes},
+                **{
+                    "Running services": len(
+                        [
+                            service
+                            for service in fetch_all("Service")
+                            if service.status == "Running"
+                        ]
+                    ),
+                    "Running workflows": len(
+                        [
+                            workflow
+                            for workflow in fetch_all("Workflow")
+                            if workflow.status == "Running"
+                        ]
+                    ),
+                    "Scheduled tasks": len(
+                        [task for task in fetch_all("Task") if task.status == "Active"]
+                    ),
+                },
+            },
+        )
 
     def export_topology(self) -> None:
         workbook = Workbook()

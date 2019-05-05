@@ -1,3 +1,4 @@
+from ast import literal_eval
 from collections import defaultdict
 from flask_login import current_user
 from wtforms.fields.core import UnboundField
@@ -18,9 +19,6 @@ def metaform(*args, **kwargs):
     form_classes[form_type] = cls
     form_templates[form_type] = getattr(cls, "template", "base")
     form_actions[form_type] = getattr(cls, "action", None)
-    for field_name, field in args[-1].items():
-        if isinstance(field, UnboundField) and field.field_class in field_types:
-            print(field_name, getattr(field, "model", False))
     properties = {
         field_name: field_types[field.field_class]
         for field_name, field in args[-1].items()
@@ -54,6 +52,10 @@ def form_postprocessing(form):
             data[property] = form.getlist(property)
         elif field_type == "bool":
             data[property] = property in form
+        elif field_type in ("dict", "float", "int"):
+            data[property] = {"dict": literal_eval, "float": float, "int": int}[
+                field_type
+            ](form[property])
     return data
 
 

@@ -13,10 +13,11 @@ from requests import get as http_get
 from typing import Union
 from yaml import dump, load, BaseLoader
 
+from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.forms.administration import LoginForm
 from eNMS.database import delete_all, export, factory, fetch, fetch_all, get_one
-from eNMS.modules import ldap_client, tacacs_client, USE_LDAP, USE_TACACS
+from eNMS.modules import ldap_client, tacacs_client
 
 
 class AdministrationDispatcher:
@@ -95,9 +96,9 @@ class AdministrationDispatcher:
         if not current_user.is_authenticated:
             login_form = LoginForm(request.form)
             authentication_methods = [("Local User",) * 2]
-            if USE_LDAP:
+            if controller.USE_LDAP:
                 authentication_methods.append(("LDAP Domain",) * 2)
-            if USE_TACACS:
+            if controller.USE_TACACS:
                 authentication_methods.append(("TACACS",) * 2)
             login_form.authentication_method.choices = authentication_methods
             return render_template("login.html", login_form=login_form)

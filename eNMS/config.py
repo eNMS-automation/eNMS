@@ -32,11 +32,6 @@ class Config(object):
     TACACS_ADDR = environ.get("TACACS_ADDR")
     TACACS_PASSWORD = environ.get("TACACS_PASSWORD")
 
-    # Syslog
-    USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
-    SYSLOG_ADDR = environ.get("SYSLOG_ADDR", "0.0.0.0")
-    SYSLOG_PORT = int(environ.get("SYSLOG_PORT", 514))
-
     # Examples
     CREATE_EXAMPLES = int(environ.get("CREATE_EXAMPLES", True))
 

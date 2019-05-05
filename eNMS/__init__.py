@@ -24,7 +24,6 @@ from eNMS.modules import (
     db,
     login_manager,
     mail_client,
-    USE_SYSLOG,
     USE_VAULT,
     vault_client,
 )
@@ -64,11 +63,6 @@ def configure_vault_client(app: Flask) -> None:
     if vault_client.sys.is_sealed() and app.config["UNSEAL_VAULT"]:
         keys = [app.config[f"UNSEAL_VAULT_KEY{i}"] for i in range(1, 6)]
         vault_client.sys.submit_unseal_keys(filter(None, keys))
-
-
-def configure_syslog_server(app: Flask) -> None:
-    server = SyslogServer(app.config["SYSLOG_ADDR"], app.config["SYSLOG_PORT"])
-    server.start()
 
 
 def configure_database(app: Flask) -> None:
@@ -167,7 +161,5 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_cli(app)
     if USE_VAULT:
         configure_vault_client(app)
-    if USE_SYSLOG:
-        configure_syslog_server(app)
     info("eNMS starting")
     return app

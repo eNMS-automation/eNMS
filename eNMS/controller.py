@@ -47,11 +47,25 @@ class Controller:
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
+    def __init__(self):
+        self.USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
+        self.USE_TACACS = int(environ.get("USE_TACACS", False))
+        self.USE_LDAP = int(environ.get("USE_LDAP", False))
+        self.USE_VAULT = int(environ.get("USE_VAULT", False))
+        self.load_custom_properties()
+        if self.USE_SYSLOG:
+            self.configure_syslog_server()
+
     def init_app(self, app: Flask, session: Session):
         self.app = app
         self.session = session
         self.create_google_earth_styles()
-        self.load_custom_properties()
+
+    def configure_syslog_server(self) -> None:
+        self.server = SyslogServer(
+            environ.get("SYSLOG_ADDR", "0.0.0.0"), int(environ.get("SYSLOG_PORT", 514))
+        )
+        self.server.start()
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name

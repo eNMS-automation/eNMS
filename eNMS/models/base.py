@@ -59,15 +59,12 @@ class Base(db.Model):
             elif property_type in ["float", "int"]:
                 if value:
                     value = {"float": float, "int": int}[property_type](value)
-            print(property, value)
             setattr(self, property, value)
 
     def get_properties(self) -> dict:
         result = {}
-        print(self.type, cls_to_properties[self.type])
         for property in cls_to_properties[self.type]:
             value = getattr(self, property)
-            print(property, value)
             if property in private_properties:
                 continue
             try:
@@ -96,10 +93,8 @@ class Base(db.Model):
 
     def to_dict(self, export: bool = False) -> dict:
         properties = self.get_export_properties() if export else self.get_properties()
-        print(properties)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property in relationships[self.type]:
-            print(self.type, property)
             relation = relationships[self.type][property]
             if export and property in no_migrate:
                 continue
@@ -114,7 +109,6 @@ class Base(db.Model):
                     if export
                     else getattr(self, property).get_properties()
                 )
-        print(properties)
         if export:
             for property in no_migrate:
                 properties.pop(property, None)

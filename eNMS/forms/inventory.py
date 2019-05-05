@@ -17,7 +17,6 @@ from eNMS.properties import (
     pool_link_properties,
     link_subtypes,
     pool_device_properties,
-    device_subtypes,
 )
 
 
@@ -97,7 +96,7 @@ class DeviceForm(ObjectForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="device")
     id = HiddenField()
-    subtype = SelectField("Subtype", choices=tuple(device_subtypes.items()))
+    subtype = SelectField("Subtype", choices=tuple(controller.device_subtypes.items()))
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
     operating_system = StringField("Operating System")
@@ -173,7 +172,7 @@ class OpenNmsForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="opennms")
     opennms_rest_api = StringField("REST API URL")
     opennms_devices = StringField("Devices")
-    subtype = SelectField("Subtype", choices=tuple(device_subtypes.items()))
+    subtype = SelectField("Subtype", choices=tuple(controller.device_subtypes.items()))
     opennms_login = StringField("Login")
     password = PasswordField("Password")
 
@@ -183,14 +182,16 @@ class NetboxForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="netbox")
     netbox_address = StringField("URL", default="http://0.0.0.0:8000")
     netbox_token = PasswordField("Token")
-    netbox_type = SelectField(choices=tuple(device_subtypes.items()))
+    netbox_type = SelectField(choices=tuple(controller.device_subtypes.items()))
 
 
 class LibreNmsForm(FlaskForm, metaclass=metaform):
     action = "queryLibreNMS"
     form_type = HiddenField(default="librenms")
     librenms_address = StringField("URL", default="http://librenms.example.com")
-    librenms_type = SelectField("Subtype", choices=tuple(device_subtypes.items()))
+    librenms_type = SelectField(
+        "Subtype", choices=tuple(controller.device_subtypes.items())
+    )
     librenms_token = PasswordField("Token")
 
 

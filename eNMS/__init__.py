@@ -33,7 +33,6 @@ from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
 from eNMS.properties import (
-    device_subtypes,
     google_earth_styles,
     link_subtypes,
     link_subtype_to_color,
@@ -139,7 +138,7 @@ def configure_logs(app: Flask) -> None:
 
 
 def configure_google_earth(path: Path) -> None:
-    for subtype in device_subtypes:
+    for subtype in controller.device_subtypes:
         point_style = Style()
         point_style.labelstyle.color = Color.blue
         path_icon = f"{path}/eNMS/views/static/images/2D/{subtype}.gif"

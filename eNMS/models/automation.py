@@ -10,7 +10,6 @@ from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
-from os import environ
 from pathlib import Path
 from paramiko import SSHClient
 from random import uniform

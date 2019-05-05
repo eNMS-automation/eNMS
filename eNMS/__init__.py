@@ -4,7 +4,6 @@ from flask_cli import FlaskCLI
 from logging import info
 from os import environ
 from pathlib import Path
-from sqlalchemy.exc import InvalidRequestError
 from typing import Any, Optional, Tuple, Type, Union
 
 from eNMS.cli import configure_cli
@@ -17,7 +16,7 @@ from eNMS.database import fetch, get_one
 from eNMS.modules import bp, csrf, db, login_manager, mail_client
 from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer
-from eNMS.models.management import User
+from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
 

@@ -100,31 +100,31 @@ class DeviceForm(ObjectForm, metaclass=metaform):
     subtype = SelectField("Subtype", choices=tuple(device_subtypes.items()))
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
-    operating_system = StringField()
-    os_version = StringField()
-    longitude = FloatField(default=0.0)
-    latitude = FloatField(default=0.0)
-    username = StringField()
-    password = PasswordField()
-    enable_password = PasswordField()
-    napalm_driver = SelectField(choices=controller.NAPALM_DRIVERS)
-    netmiko_driver = SelectField(choices=controller.NETMIKO_DRIVERS)
+    operating_system = StringField("Operating System")
+    os_version = StringField("OS Version")
+    longitude = FloatField("Longitude", default=0.0)
+    latitude = FloatField("Latitude", default=0.0)
+    username = StringField("Username")
+    password = PasswordField("Password")
+    enable_password = PasswordField("'Enable' Password")
+    napalm_driver = SelectField("NAPALM Driver", choices=controller.NAPALM_DRIVERS)
+    netmiko_driver = SelectField("Netmiko Driver", choices=controller.NETMIKO_DRIVERS)
 
 
 class LinkForm(ObjectForm, metaclass=metaform):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
-    subtype = SelectField(choices=tuple(link_subtypes.items()))
+    subtype = SelectField("Subtype", choices=tuple(link_subtypes.items()))
     source = InstanceField("Source", instance_type="Device")
     destination = InstanceField("Destination", instance_type="Device")
 
 
 class LinkFilteringForm(ObjectForm, ObjectFilteringForm, metaclass=metaform):
     form_type = HiddenField(default="link_filtering")
-    subtype = StringField()
-    source_name = StringField()
-    destination_name = StringField()
+    subtype = StringField("Subtype")
+    source_name = StringField("Source")
+    destination_name = StringField("Destination")
 
 
 @configure_pool_form
@@ -132,15 +132,16 @@ class PoolForm(FlaskForm, metaclass=metaform):
     template = "pool"
     form_type = HiddenField(default="pool")
     id = HiddenField()
-    name = StringField()
-    description = StringField()
-    longitude = FloatField(default=0.0)
-    latitude = FloatField(default=0.0)
+    name = StringField("Name")
+    description = StringField("Description")
+    longitude = FloatField("Longitude", default=0.0)
+    latitude = FloatField("Latitude", default=0.0)
     operator = SelectField(
+        "Match Condition",
         choices=(
             ("all", "Match if all properties match"),
             ("any", "Match if any property matches"),
-        )
+        ),
     )
     never_update = BooleanField("Never update (for manually selected pools)")
 
@@ -148,11 +149,11 @@ class PoolForm(FlaskForm, metaclass=metaform):
 class PoolFilteringForm(FlaskForm, metaclass=metaform):
     action = filter
     form_type = HiddenField(default="pool_filtering")
-    name = StringField()
-    description = StringField()
-    longitude = StringField()
-    latitude = StringField()
-    operator = StringField()
+    name = StringField("Name")
+    description = StringField("Description")
+    longitude = StringField("Longitude")
+    latitude = StringField("Latitude")
+    operator = StringField("Match Condition")
 
 
 class PoolObjectsForm(FlaskForm, metaclass=metaform):
@@ -164,53 +165,50 @@ class PoolObjectsForm(FlaskForm, metaclass=metaform):
 class ExcelImportForm(FlaskForm, metaclass=metaform):
     template = "topology_import"
     form_type = HiddenField(default="excel")
-    replace = BooleanField()
+    replace = BooleanField("Replace Existing Topology")
 
 
 class OpenNmsForm(FlaskForm, metaclass=metaform):
     action = "queryOpenNMS"
     form_type = HiddenField(default="opennms")
-    opennms_rest_api = StringField()
-    opennms_devices = StringField()
-    node_type = [subtype for subtype in device_subtypes.items()]
-    subtype = SelectField(choices=node_type)
-    opennms_login = StringField()
-    password = PasswordField()
+    opennms_rest_api = StringField("REST API URL")
+    opennms_devices = StringField("Devices")
+    subtype = SelectField("Subtype", choices=tuple(device_subtypes.items()))
+    opennms_login = StringField("Login")
+    password = PasswordField("Password")
 
 
 class NetboxForm(FlaskForm, metaclass=metaform):
     action = "queryNetbox"
     form_type = HiddenField(default="netbox")
-    netbox_address = StringField(default="http://0.0.0.0:8000")
-    netbox_token = PasswordField()
-    node_type = [subtype for subtype in device_subtypes.items()]
-    netbox_type = SelectField(choices=node_type)
+    netbox_address = StringField("URL", default="http://0.0.0.0:8000")
+    netbox_token = PasswordField("Token")
+    netbox_type = SelectField(choices=tuple(device_subtypes.items()))
 
 
 class LibreNmsForm(FlaskForm, metaclass=metaform):
     action = "queryLibreNMS"
     form_type = HiddenField(default="librenms")
-    librenms_address = StringField(default="http://librenms.example.com")
-    node_type = [subtype for subtype in device_subtypes.items()]
-    librenms_type = SelectField(choices=node_type)
-    librenms_token = PasswordField()
+    librenms_address = StringField("URL", default="http://librenms.example.com")
+    librenms_type = SelectField("Subtype", choices=tuple(device_subtypes.items()))
+    librenms_token = PasswordField("Token")
 
 
 class ExportForm(FlaskForm, metaclass=metaform):
     action = "exportTopology"
     form_type = HiddenField(default="excel_export")
-    export_filename = StringField()
+    export_filename = StringField("Filename")
 
 
 class GoogleEarthForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="google_earth_export")
-    name = StringField()
-    label_size = IntegerField(default=1)
-    line_width = IntegerField(default=2)
+    name = StringField("Name")
+    label_size = IntegerField("Label Size", default=1)
+    line_width = IntegerField("Link Width", default=2)
 
 
 class CompareConfigurationsForm(FlaskForm, metaclass=metaform):
     template = "configuration"
     form_type = HiddenField(default="configuration")
-    display = SelectField(choices=())
-    compare_with = SelectField(choices=())
+    display = SelectField("Version to display", choices=())
+    compare_with = SelectField("Compare Against", choices=())

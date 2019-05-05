@@ -73,7 +73,7 @@ class CompareResultsForm(FlaskForm, metaclass=metaform):
     template = "results"
     form_type = HiddenField(default="results")
     display = SelectField("Version to display", choices=())
-    compare_with = SelectField("Compare against", choices=())
+    compare_with = SelectField("Compare Against", choices=())
 
 
 class AddJobsForm(FlaskForm, metaclass=metaform):

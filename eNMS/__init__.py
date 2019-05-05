@@ -93,22 +93,6 @@ def configure_errors(app: Flask) -> None:
         return render_template("errors/page_404.html"), 404
 
 
-def configure_logs(app: Flask) -> None:
-    basicConfig(
-        level=getattr(import_module("logging"), controller.config["ENMS_LOG_LEVEL"]),
-        format="%(asctime)s %(levelname)-8s %(message)s",
-        datefmt="%m-%d-%Y %H:%M:%S",
-        handlers=[
-            RotatingFileHandler(
-                app.path / "logs" / "app_logs" / "enms.log",
-                maxBytes=20_000_000,
-                backupCount=10,
-            ),
-            StreamHandler(),
-        ],
-    )
-
-
 def configure_services(path: Path) -> None:
     path_services = [path / "eNMS" / "services"]
     custom_services_path = controller.config["CUSTOM_SERVICES_PATH"]

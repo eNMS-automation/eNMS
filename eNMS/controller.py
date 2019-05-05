@@ -70,6 +70,24 @@ class Controller:
         self.app = app
         self.session = session
         self.create_google_earth_styles()
+        self.configure_logs()
+
+    def configure_logs(self) -> None:
+        basicConfig(
+            level=getattr(
+                import_module("logging"), controller.config["ENMS_LOG_LEVEL"]
+            ),
+            format="%(asctime)s %(levelname)-8s %(message)s",
+            datefmt="%m-%d-%Y %H:%M:%S",
+            handlers=[
+                RotatingFileHandler(
+                    self.app.path / "logs" / "app_logs" / "enms.log",
+                    maxBytes=20_000_000,
+                    backupCount=10,
+                ),
+                StreamHandler(),
+            ],
+        )
 
     def configure_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(

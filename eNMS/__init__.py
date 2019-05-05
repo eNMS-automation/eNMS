@@ -18,15 +18,7 @@ from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
 from eNMS.database import fetch, get_one
-from eNMS.modules import (
-    bp,
-    csrf,
-    db,
-    login_manager,
-    mail_client,
-    USE_VAULT,
-    vault_client,
-)
+from eNMS.modules import bp, csrf, db, login_manager, mail_client
 from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.management import User
@@ -55,14 +47,6 @@ def configure_login_manager(app: Flask) -> None:
     @login_manager.request_loader
     def request_loader(request: Request) -> User:
         return fetch("User", name=request.form.get("name"))
-
-
-def configure_vault_client(app: Flask) -> None:
-    vault_client.url = app.config["VAULT_ADDR"]
-    vault_client.token = app.config["VAULT_TOKEN"]
-    if vault_client.sys.is_sealed() and app.config["UNSEAL_VAULT"]:
-        keys = [app.config[f"UNSEAL_VAULT_KEY{i}"] for i in range(1, 6)]
-        vault_client.sys.submit_unseal_keys(filter(None, keys))
 
 
 def configure_database(app: Flask) -> None:
@@ -159,7 +143,5 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_errors(app)
     configure_services(path)
     configure_cli(app)
-    if USE_VAULT:
-        configure_vault_client(app)
     info("eNMS starting")
     return app

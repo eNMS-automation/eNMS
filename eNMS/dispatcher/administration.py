@@ -17,7 +17,6 @@ from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.forms.administration import LoginForm
 from eNMS.database import delete_all, export, factory, fetch, fetch_all, get_one
-from eNMS.modules import ldap_client, tacacs_client
 
 
 class AdministrationDispatcher:
@@ -53,7 +52,7 @@ class AdministrationDispatcher:
                         return redirect(url_for("bp.get_route", page="dashboard"))
                 elif request.form["authentication_method"] == "LDAP Domain":
                     with Connection(
-                        ldap_client,
+                        controller.ldap_client,
                         user=f"{controller.LDAP_USERDN}\\{name}",
                         password=password,
                         auto_bind=True,
@@ -85,7 +84,7 @@ class AdministrationDispatcher:
                             login_user(new_user)
                             return redirect(url_for("bp.get_route", page="dashboard"))
                 elif request.form["authentication_method"] == "TACACS":
-                    if tacacs_client.authenticate(name, password).valid:
+                    if controller.tacacs_client.authenticate(name, password).valid:
                         user = factory("User", **{"name": name, "password": password})
                         login_user(user)
                         return redirect(url_for("bp.get_route", page="dashboard"))

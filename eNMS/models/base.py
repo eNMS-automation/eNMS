@@ -4,6 +4,7 @@ from typing import Any, List
 
 from eNMS.controller import controller
 from eNMS.models import cls_to_properties, property_types, relationships
+from eNMS.modules import db
 from eNMS.database import fetch, objectify
 from eNMS.properties import dont_migrate, private_properties
 
@@ -22,7 +23,7 @@ class Base(db.Model):
         return self.name
 
     def __getattribute__(self, property: str) -> Any:
-        if property in private_properties and USE_VAULT:
+        if property in private_properties and controller.USE_VAULT:
             path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
             data = controller.vault_client.read(path)
             return data["data"]["data"][property] if data else ""
@@ -30,7 +31,7 @@ class Base(db.Model):
             return super().__getattribute__(property)
 
     def __setattr__(self, property: str, value: Any) -> None:
-        if property in private_properties and USE_VAULT:
+        if property in private_properties and controller.USE_VAULT:
             if not value:
                 return
             controller.vault_client.write(

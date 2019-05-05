@@ -1,6 +1,8 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 from contextlib import contextmanager
 from datetime import datetime
 from flask import Flask
+from hvac import Client as VaultClient
 from ldap3 import ALL, Server
 from logging import info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
@@ -55,6 +57,7 @@ class Controller:
         self.USE_LDAP = int(environ.get("USE_LDAP", False))
         self.USE_VAULT = int(environ.get("USE_VAULT", False))
         self.load_custom_properties()
+        self.configure_scheduler()
         if self.USE_SYSLOG:
             self.configure_syslog_server()
         if self.USE_TACACS:
@@ -68,6 +71,24 @@ class Controller:
         self.app = app
         self.session = session
         self.create_google_earth_styles()
+
+    def configure_scheduler(self) -> None:
+        self.scheduler = BackgroundScheduler(
+            {
+                "apscheduler.jobstores.default": {
+                    "type": "sqlalchemy",
+                    "url": "sqlite:///jobs.sqlite",
+                },
+                "apscheduler.executors.default": {
+                    "class": "apscheduler.executors.pool:ThreadPoolExecutor",
+                    "max_workers": "50",
+                },
+                "apscheduler.job_defaults.misfire_grace_time": "5",
+                "apscheduler.job_defaults.coalesce": "true",
+                "apscheduler.job_defaults.max_instances": "3",
+            }
+        )
+        self.scheduler.start()
 
     def configure_ldap_client(self) -> None:
         self.LDAP_SERVER = environ.get("LDAP_SERVER")

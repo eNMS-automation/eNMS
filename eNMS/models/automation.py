@@ -26,9 +26,10 @@ from traceback import format_exc
 from typing import Any, List, Optional, Set, Tuple
 from xmltodict import parse
 
+from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.database import fetch, get_one, SMALL_STRING_LENGTH
-from eNMS.modules import db, scheduler
+from eNMS.modules import db
 from eNMS.models import metamodel
 from eNMS.models.associations import (
     job_device_table,
@@ -597,14 +598,14 @@ class Task(Base, metaclass=metamodel):
 
     @property
     def next_run_time(self) -> Optional[str]:
-        job = scheduler.get_job(self.aps_job_id)
+        job = controller.scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
         return None
 
     @property
     def time_before_next_run(self) -> Optional[str]:
-        job = scheduler.get_job(self.aps_job_id)
+        job = controller.scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
             hours, remainder = divmod(delta.seconds, 3600)
@@ -622,25 +623,25 @@ class Task(Base, metaclass=metamodel):
         return self.aps_conversion(date) if date else None
 
     def pause(self) -> None:
-        scheduler.pause_job(self.aps_job_id)
+        controller.scheduler.pause_job(self.aps_job_id)
         self.is_active = False
         db.session.commit()
 
     def resume(self) -> None:
         self.schedule()
-        scheduler.resume_job(self.aps_job_id)
+        controller.scheduler.resume_job(self.aps_job_id)
         self.is_active = True
         db.session.commit()
 
     def delete_task(self) -> None:
-        if scheduler.get_job(self.aps_job_id):
-            scheduler.remove_job(self.aps_job_id)
+        if controller.scheduler.get_job(self.aps_job_id):
+            controller.scheduler.remove_job(self.aps_job_id)
         db.session.commit()
 
     def kwargs(self) -> Tuple[dict, dict]:
         default = {
             "id": self.aps_job_id,
-            "func": controller.scheduler_job,
+            "func": threaded_job,
             "replace_existing": True,
             "args": [self.job.id, self.aps_job_id],
         }
@@ -668,7 +669,7 @@ class Task(Base, metaclass=metamodel):
 
     def schedule(self) -> None:
         default, trigger = self.kwargs()
-        if not scheduler.get_job(self.aps_job_id):
-            scheduler.add_job(**{**default, **trigger})
+        if not controller.scheduler.get_job(self.aps_job_id):
+            controller.scheduler.add_job(**{**default, **trigger})
         else:
-            scheduler.reschedule_job(default.pop("id"), **trigger)
+            controller.scheduler.reschedule_job(default.pop("id"), **trigger)

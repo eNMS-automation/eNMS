@@ -3,10 +3,10 @@ from json import dumps, loads
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
-from eNMS.models import cls_to_properties, property_types
+from eNMS.models import cls_to_properties, property_types, relationships
 from eNMS.modules import db, USE_VAULT, vault_client
 from eNMS.database import fetch, objectify
-from eNMS.properties import dont_migrate, relationships as rel, private_properties
+from eNMS.properties import dont_migrate, private_properties
 
 
 class Base(db.Model):
@@ -42,13 +42,14 @@ class Base(db.Model):
             super().__setattr__(property, value)
 
     def update(self, **kwargs: Any) -> None:
-        serial = rel.get(self.__tablename__, rel["Service"])
+        relation = relationships[self.__tablename__]
         for property, value in kwargs.items():
             property_type = property_types.get(property, None)
-            if property in serial:
-                value = fetch(serial[property], id=value)
-            elif property[:-1] in serial:
-                value = objectify(serial[property[:-1]], value)
+            if property in relation:
+                if relation[property]["list"]:
+                    value = objectify(relation[property]["model"], value)
+                else:
+                    value = fetch(relation[property]["model"], id=value)
             elif property_type == "bool":
                 value = kwargs[property] not in (None, False)
             elif "regex" in property:
@@ -58,18 +59,22 @@ class Base(db.Model):
             elif property_type in ["float", "int"]:
                 if value:
                     value = {"float": float, "int": int}[property_type](value)
+            print(property, value)
             setattr(self, property, value)
 
     def get_properties(self) -> dict:
         result = {}
+        print(self.type, cls_to_properties[self.type])
         for property in cls_to_properties[self.type]:
+            value = getattr(self, property)
+            print(property, value)
             if property in private_properties:
                 continue
             try:
-                dumps(getattr(self, property))
-                result[property] = getattr(self, property)
+                dumps(value)
+                result[property] = value
             except TypeError:
-                result[property] = str(getattr(self, property))
+                result[property] = str(value)
         return result
 
     def get_export_properties(self) -> dict:
@@ -91,22 +96,25 @@ class Base(db.Model):
 
     def to_dict(self, export: bool = False) -> dict:
         properties = self.get_export_properties() if export else self.get_properties()
+        print(properties)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
-        for property in rel.get(self.type, rel["Service"]):
+        for property in relationships[self.type]:
+            print(self.type, property)
+            relation = relationships[self.type][property]
             if export and property in no_migrate:
                 continue
-            if hasattr(self, property):
-                if hasattr(getattr(self, property), "get_properties"):
-                    properties[property] = (
-                        getattr(self, property).id
-                        if export
-                        else getattr(self, property).get_properties()
-                    )
-            if hasattr(self, f"{property}s"):
-                properties[f"{property}s"] = [
+            if relation["list"]:
+                properties[property] = [
                     obj.id if export else obj.get_properties()
-                    for obj in getattr(self, f"{property}s")
+                    for obj in getattr(self, property)
                 ]
+            else:
+                properties[property] = (
+                    getattr(self, property).id
+                    if export
+                    else getattr(self, property).get_properties()
+                )
+        print(properties)
         if export:
             for property in no_migrate:
                 properties.pop(property, None)

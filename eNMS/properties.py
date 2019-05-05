@@ -342,31 +342,6 @@ property_names: Dict[str, str] = {
 
 reverse_property_names: Dict[str, str] = {v: k for k, v in property_names.items()}
 
-relationships: Dict[str, Dict[str, str]] = {
-    "User": {"pool": "Pool"},
-    "Device": {"job": "Job"},
-    "Link": {"source": "Device", "destination": "Device"},
-    "Pool": {"device": "Device", "link": "Link"},
-    "Service": {
-        "creator": "User",
-        "device": "Device",
-        "pool": "Pool",
-        "workflow": "Workflow",
-        "task": "Task",
-    },
-    "Task": {"job": "Job"},
-    "Workflow": {
-        "creator": "User",
-        "edge": "WorkflowEdge",
-        "job": "Job",
-        "device": "Device",
-        "pool": "Pool",
-    },
-    "WorkflowEdge": {"source": "Job", "destination": "Job", "workflow": "Workflow"},
-    "LogRule": {"job": "Job", "log": "Log"},
-}
-
-
 import_classes = [
     "User",
     "Device",

@@ -37,8 +37,6 @@ def metamodel(*args, **kwargs):
 
 def model_inspection():
     for model_name, model in classes.items():
-        if issubclass(model, classes["Service"]):
-            continue
         mapper = inspect(model)
         for relation in mapper.relationships:
             property = str(relation).split(".")[1]
@@ -46,4 +44,3 @@ def model_inspection():
                 "model": relation.mapper.class_.__tablename__,
                 "list": relation.uselist,
             }
-    print(relationships)

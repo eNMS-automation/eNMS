@@ -7,12 +7,12 @@ from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class UnixCommandService(Service, metaclass=register_class):
+class UnixCommandService(Service, metaclass=metamodel):
 
     __tablename__ = "UnixCommandService"
 

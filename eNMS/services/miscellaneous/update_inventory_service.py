@@ -5,12 +5,12 @@ from wtforms import HiddenField
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class UpdateInventoryService(Service, metaclass=register_class):
+class UpdateInventoryService(Service, metaclass=metamodel):
 
     __tablename__ = "UpdateInventoryService"
 

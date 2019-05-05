@@ -7,11 +7,11 @@ from eNMS.database import LARGE_STRING_LENGTH, get_one, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.modules import mail_client
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.automation import Service
 
 
-class MailNotificationService(Service, metaclass=register_class):
+class MailNotificationService(Service, metaclass=metamodel):
 
     __tablename__ = "MailNotificationService"
 

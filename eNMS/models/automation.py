@@ -29,7 +29,7 @@ from xmltodict import parse
 from eNMS.controller import controller
 from eNMS.database import fetch, get_one, SMALL_STRING_LENGTH
 from eNMS.modules import db, scheduler
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.associations import (
     job_device_table,
     job_log_rule_table,
@@ -40,7 +40,7 @@ from eNMS.models.base import Base
 from eNMS.models.inventory import Device
 
 
-class Job(Base, metaclass=register_class):
+class Job(Base, metaclass=metamodel):
 
     __tablename__ = "Job"
     type = Column(String(SMALL_STRING_LENGTH), default="")
@@ -314,7 +314,7 @@ class Job(Base, metaclass=register_class):
             return self.get_results(payload)
 
 
-class Service(Job, metaclass=register_class):
+class Service(Job, metaclass=metamodel):
 
     __tablename__ = "Service"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
@@ -437,7 +437,7 @@ class Service(Job, metaclass=register_class):
                     getattr(scp, self.direction)(source, destination)
 
 
-class Workflow(Job, metaclass=register_class):
+class Workflow(Job, metaclass=metamodel):
 
     __tablename__ = "Workflow"
     __mapper_args__ = {"polymorphic_identity": "Workflow"}
@@ -514,7 +514,7 @@ class Workflow(Job, metaclass=register_class):
         return results
 
 
-class WorkflowEdge(Base, metaclass=register_class):
+class WorkflowEdge(Base, metaclass=metamodel):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
@@ -540,7 +540,7 @@ class WorkflowEdge(Base, metaclass=register_class):
     )
 
 
-class Task(Base, metaclass=register_class):
+class Task(Base, metaclass=metamodel):
 
     __tablename__ = "Task"
     type = "Task"

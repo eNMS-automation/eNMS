@@ -11,13 +11,13 @@ from typing import Any, List
 from yaml import load
 
 from eNMS.database import fetch, fetch_all, SMALL_STRING_LENGTH
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.associations import pool_user_table
 from eNMS.models.base import Base
 from eNMS.modules import db
 
 
-class Server(Base, metaclass=register_class):
+class Server(Base, metaclass=metamodel):
 
     __tablename__ = type = "Server"
     id = Column(Integer, primary_key=True)
@@ -41,7 +41,7 @@ class Server(Base, metaclass=register_class):
         ]
 
 
-class Parameters(Base, metaclass=register_class):
+class Parameters(Base, metaclass=metamodel):
 
     __tablename__ = type = "Parameters"
     id = Column(Integer, primary_key=True)
@@ -130,7 +130,7 @@ class Parameters(Base, metaclass=register_class):
         return self.gotty_start_port + self.gotty_port_index % self.gotty_range
 
 
-class User(Base, UserMixin, metaclass=register_class):
+class User(Base, UserMixin, metaclass=metamodel):
 
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)

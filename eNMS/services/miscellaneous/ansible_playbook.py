@@ -10,12 +10,12 @@ from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.forms.services import ValidationForm
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class AnsiblePlaybookService(Service, metaclass=register_class):
+class AnsiblePlaybookService(Service, metaclass=metamodel):
 
     __tablename__ = "AnsiblePlaybookService"
 

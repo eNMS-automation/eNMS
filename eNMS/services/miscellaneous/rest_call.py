@@ -16,12 +16,12 @@ from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.forms.services import ValidationForm
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class RestCallService(Service, metaclass=register_class):
+class RestCallService(Service, metaclass=metamodel):
 
     __tablename__ = "RestCallService"
 

@@ -22,7 +22,7 @@ from eNMS.models.associations import (
     job_pool_table,
 )
 from eNMS.database import LARGE_STRING_LENGTH, fetch, fetch_all, SMALL_STRING_LENGTH
-from eNMS.models import register_class
+from eNMS.models import metamodel
 from eNMS.models.base import Base
 from eNMS.properties import (
     custom_properties,
@@ -32,7 +32,7 @@ from eNMS.properties import (
 )
 
 
-class Object(Base, metaclass=register_class):
+class Object(Base, metaclass=metamodel):
 
     __tablename__ = "Object"
     type = Column(String(SMALL_STRING_LENGTH), default="")
@@ -66,7 +66,7 @@ CustomDevice: Any = (
 )
 
 
-class Device(CustomDevice, metaclass=register_class):
+class Device(CustomDevice, metaclass=metamodel):
 
     __tablename__ = "Device"
     __mapper_args__ = {"polymorphic_identity": "Device"}
@@ -155,7 +155,7 @@ class Device(CustomDevice, metaclass=register_class):
         return f"{self.name} ({self.model})"
 
 
-class Link(Object, metaclass=register_class):
+class Link(Object, metaclass=metamodel):
 
     __tablename__ = "Link"
     __mapper_args__ = {"polymorphic_identity": "Link"}
@@ -264,7 +264,7 @@ AbstractPool: Any = type(
 )
 
 
-class Pool(AbstractPool, metaclass=register_class):
+class Pool(AbstractPool, metaclass=metamodel):
 
     __tablename__ = type = "Pool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)

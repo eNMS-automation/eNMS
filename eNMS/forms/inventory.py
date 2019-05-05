@@ -70,7 +70,7 @@ class ObjectFilteringForm(FlaskForm, metaclass=metaform):
 
 class ObjectForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="object")
-    name = StringField()
+    name = StringField("Name")
     description = StringField()
     location = StringField()
     vendor = StringField()

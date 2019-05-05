@@ -9,7 +9,7 @@ cls_to_properties = defaultdict(list)
 property_types: Dict[str, str] = {}
 
 
-def register_class(*args, **kwargs):
+def metamodel(*args, **kwargs):
     cls = type(*args, **kwargs)
     for col in cls.__table__.columns:
         cls_to_properties[cls.__tablename__].append(col.key)

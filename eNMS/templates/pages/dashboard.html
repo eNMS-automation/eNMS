@@ -48,7 +48,7 @@
               <div class="form-group">
                 <select id="{{ type }}-properties" class="form-control">
                   {% for property in type_properties %}
-                    <option>{{ names[property] }}</option>
+                    <option value="{{ property }}">{{ names[property] }}</option>
                   {% endfor %}
                 </select>
               </div>

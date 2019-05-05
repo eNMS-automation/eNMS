@@ -98,7 +98,7 @@ def configure_form(cls: FlaskForm) -> FlaskForm:
 class LogAutomationForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="logrule")
     id = HiddenField()
-    name = StringField()
+    name = StringField("Name")
     jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 

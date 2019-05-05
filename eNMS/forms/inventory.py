@@ -11,7 +11,7 @@ from wtforms import (
 
 from eNMS.controller import controller
 from eNMS.forms import metaform
-from eNMS.forms.fields import MultipleObjectField, ObjectField
+from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties import (
     custom_properties,
     pool_link_properties,
@@ -65,7 +65,7 @@ class ConnectionForm(FlaskForm, metaclass=metaform):
 class ObjectFilteringForm(FlaskForm, metaclass=metaform):
     action = "filter"
     form_type = HiddenField(default="object_filtering")
-    pools = MultipleObjectField("Pool")
+    pools = MultipleInstanceField("Pools", instance_type="Pool")
 
 
 class ObjectForm(FlaskForm, metaclass=metaform):
@@ -118,8 +118,8 @@ class LinkForm(ObjectForm, metaclass=metaform):
     id = HiddenField()
     link_types = [subtype for subtype in link_subtypes.items()]
     subtype = SelectField(choices=link_types)
-    source = ObjectField("Device")
-    destination = ObjectField("Device")
+    source = InstanceField("Source", instance_type="Device")
+    destination = InstanceField("Destination", instance_type="Device")
 
 
 class LinkFilteringForm(ObjectForm, ObjectFilteringForm, metaclass=metaform):
@@ -159,8 +159,8 @@ class PoolFilteringForm(FlaskForm, metaclass=metaform):
 
 class PoolObjectsForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="pool_objects")
-    devices = MultipleObjectField("Device")
-    links = MultipleObjectField("Link")
+    devices = MultipleInstanceField("Devices", instance_type="Device")
+    links = MultipleInstanceField("Links", instance_type="Link")
 
 
 class ExcelImportForm(FlaskForm, metaclass=metaform):

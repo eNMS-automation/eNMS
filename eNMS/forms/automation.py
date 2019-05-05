@@ -2,12 +2,12 @@ from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
 from eNMS.forms import metaform
-from eNMS.forms.fields import DateField, MultipleObjectField, ObjectField
+from eNMS.forms.fields import DateField, MultipleInstanceField, InstanceField
 
 
 class DeviceAutomationForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="device_automation")
-    jobs = MultipleObjectField("Job")
+    jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 
 class JobForm(FlaskForm, metaclass=metaform):
@@ -17,13 +17,13 @@ class JobForm(FlaskForm, metaclass=metaform):
     type = StringField()
     name = StringField()
     description = StringField()
-    devices = MultipleObjectField("Device")
+    devices = MultipleInstanceField("Devices", instance_type="Device")
     multiprocessing = BooleanField()
     max_processes = IntegerField("Maximum number of processes", default=50)
     credentials = SelectField(
         choices=(("device", "Device Credentials"), ("user", "User Credentials"))
     )
-    pools = MultipleObjectField("Pool")
+    pools = MultipleInstanceField("Pools", instance_type="Pool")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
     send_notification = BooleanField()
     send_notification_method = SelectField(
@@ -76,12 +76,12 @@ class CompareResultsForm(FlaskForm, metaclass=metaform):
 
 class AddJobsForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="add_jobs")
-    add_jobs = MultipleObjectField("Job")
+    add_jobs = MultipleInstanceField("Add jobs", instance_type="Job")
 
 
 class WorkflowBuilderForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="workflow_builder")
-    workflow = ObjectField("Workflow")
+    workflow = InstanceField("Workflow", instance_type="Workflow")
 
 
 def configure_form(cls: FlaskForm) -> FlaskForm:
@@ -97,7 +97,7 @@ class LogAutomationForm(FlaskForm, metaclass=metaform):
     form_type = HiddenField(default="logrule")
     id = HiddenField()
     name = StringField()
-    jobs = MultipleObjectField("Job")
+    jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 
 class TaskForm(FlaskForm, metaclass=metaform):
@@ -119,7 +119,7 @@ class TaskForm(FlaskForm, metaclass=metaform):
         )
     )
     crontab_expression = StringField()
-    job = ObjectField("Job")
+    job = InstanceField("Job", instance_type="Job")
     scheduling_mode = SelectField(
         choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling"))
     )

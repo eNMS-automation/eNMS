@@ -24,7 +24,7 @@ from eNMS.properties import (
     filtering_properties,
     google_earth_styles,
     link_subtype_to_color,
-    reverse_pretty_names,
+    reverse_property_names,
     subtype_sizes,
 )
 
@@ -68,7 +68,7 @@ class InventoryDispatcher:
         }
 
     def counters(self, property: str, type: str) -> Counter:
-        property = reverse_pretty_names.get(property, property)
+        property = reverse_property_names.get(property, property)
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
     def export_topology(self) -> None:

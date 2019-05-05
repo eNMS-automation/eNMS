@@ -19,16 +19,17 @@ class DictField(StringField):
     pass
 
 
-class ObjectField(SelectField):
+class InstanceField(SelectField):
     def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
+        instance_type = kwargs.pop("instance_type")
         super().__init__(*args, **kwargs)
-        self.choices = choices(model)
+        self.choices = choices(instance_type)
 
 
-class MultipleObjectField(SelectMultipleField):
+class MultipleInstanceField(SelectMultipleField):
     def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.choices = choices(model)
+        self.choices = choices(instance_type)
 
     def pre_validate(self, form):
         pass
@@ -40,8 +41,8 @@ field_types = {
     DictField: "dict",
     FloatField: "float",
     IntegerField: "integer",
-    MultipleObjectField: "object-list",
-    ObjectField: "object",
+    MultipleInstanceField: "object-list",
+    InstanceField: "object",
     SelectField: "list",
     SelectMultipleField: "multiselect",
     StringField: "str",

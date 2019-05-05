@@ -4,6 +4,7 @@ from wtforms.fields.core import UnboundField
 
 from eNMS.forms.fields import field_types
 from eNMS.models import property_types
+from eNMS.properties import property_names
 
 form_actions = {}
 form_classes = {}
@@ -22,6 +23,13 @@ def metaform(*args, **kwargs):
         for field_name, field in args[-1].items()
         if isinstance(field, UnboundField) and field.field_class in field_types
     }
+    property_names.update(
+        {
+            field_name: field.args[0]
+            for field_name, field in args[-1].items()
+            if isinstance(field, UnboundField) and field.args
+        }
+    )
     form_properties[form_type].update(properties)
     property_types.update(properties)
     for base in cls.__bases__:
@@ -33,6 +41,8 @@ def metaform(*args, **kwargs):
         if getattr(base, "abstract_service", False):
             cls.service_fields.extend(form_properties[base_form_type])
         form_properties[form_type].update(form_properties[base_form_type])
+    print(form_type)
+    print(property_names)
     return cls
 
 

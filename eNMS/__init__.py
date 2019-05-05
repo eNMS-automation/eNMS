@@ -37,7 +37,7 @@ from eNMS.properties import (
     google_earth_styles,
     link_subtypes,
     link_subtype_to_color,
-    pretty_names,
+    property_names,
 )
 from eNMS.rest import configure_rest_api
 
@@ -100,7 +100,7 @@ def configure_context_processor(app) -> None:
     def inject_properties():
         return {
             "form_properties": form_properties,
-            "names": pretty_names,
+            "names": property_names,
             "parameters": get_one("Parameters").serialized,
             "property_types": {k: str(v) for k, v in property_types.items()},
             "services_classes": sorted(service_classes),

@@ -12,7 +12,7 @@ from wtforms import (
 )
 
 from eNMS.forms import metaform
-from eNMS.forms.fields import MultipleObjectField
+from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import import_classes, user_permissions
 
 
@@ -124,7 +124,7 @@ class UserForm(FlaskForm, metaclass=metaform):
     email = StringField()
     permission_choices = [(p, p) for p in user_permissions]
     permissions = SelectMultipleField(choices=permission_choices)
-    pools = MultipleObjectField("Pool")
+    pools = MultipleInstanceField("Pool", instance_type="Pool")
 
 
 class UserFilteringForm(FlaskForm, metaclass=metaform):

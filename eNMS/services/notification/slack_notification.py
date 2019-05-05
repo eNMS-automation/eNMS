@@ -34,6 +34,6 @@ class SlackNotificationService(Service, metaclass=register_class):
 
 class SlackNotificationForm(ServiceForm, metaclass=metaform):
     form_type = HiddenField(default="SlackNotificationService")
-    channel = StringField()
+    channel = StringField("Channel")
     token = StringField()
     body = StringField(widget=TextArea(), render_kw={"rows": 5})

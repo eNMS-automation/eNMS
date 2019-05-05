@@ -28,7 +28,6 @@ from eNMS.properties import (
     custom_properties,
     pool_link_properties,
     pool_device_properties,
-    sql_types,
 )
 
 
@@ -56,7 +55,15 @@ CustomDevice: Any = (
             "__mapper_args__": {"polymorphic_identity": "CustomDevice"},
             "id": Column(Integer, ForeignKey("Object.id"), primary_key=True),
             **{
-                property: Column(sql_types[values["type"]], default=values["default"])
+                property: Column(
+                    {
+                        "boolean": Boolean,
+                        "float": Float,
+                        "integer": Integer,
+                        "string": Text(LARGE_STRING_LENGTH),
+                    }[values["type"]],
+                    default=values["default"],
+                )
                 for property, values in custom_properties.items()
             },
         },

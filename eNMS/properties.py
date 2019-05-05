@@ -15,13 +15,6 @@ def get_custom_properties() -> dict:
         return load(properties, Loader=BaseLoader)
 
 
-sql_types: dict = {
-    "boolean": Boolean,
-    "float": Float,
-    "integer": Integer,
-    "string": Text(LARGE_STRING_LENGTH),
-}
-
 google_earth_styles: dict = {}
 
 custom_properties: dict = get_custom_properties()

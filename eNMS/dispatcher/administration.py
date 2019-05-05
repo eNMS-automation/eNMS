@@ -54,13 +54,13 @@ class AdministrationDispatcher:
                 elif request.form["authentication_method"] == "LDAP Domain":
                     with Connection(
                         ldap_client,
-                        user=f'{current_app.config["LDAP_USERDN"]}\\{name}',
+                        user=f"{controller.LDAP_USERDN}\\{name}",
                         password=password,
                         auto_bind=True,
                         authentication=NTLM,
                     ) as connection:
                         connection.search(
-                            current_app.config["LDAP_BASEDN"],
+                            controller.LDAP_BASEDN,
                             f"(&(objectClass=person)(samaccountname={name}))",
                             search_scope=SUBTREE,
                             get_operational_attributes=True,
@@ -77,7 +77,7 @@ class AdministrationDispatcher:
                             }
                             if any(
                                 group in s
-                                for group in current_app.config["LDAP_ADMIN_GROUP"]
+                                for group in controllerLDAP_ADMIN_GROUP
                                 for s in json_response["attributes"]["memberOf"]
                             ):
                                 user["permissions"] = ["Admin"]

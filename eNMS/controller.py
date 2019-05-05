@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from datetime import datetime
 from flask import Flask
+from ldap3 import ALL, Server
 from logging import info
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
@@ -8,6 +9,7 @@ from os import environ
 from sqlalchemy.orm import Session
 from simplekml import Color, Style
 from string import punctuation
+from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, Generator, Set
 from yaml import load, BaseLoader
 
@@ -57,11 +59,22 @@ class Controller:
             self.configure_syslog_server()
         if self.USE_TACACS:
             self.configure_tacacs_server()
+        if self.USE_LDAP:
+            self.configure_ldap_client()
+        if self.USE_VAULT:
+            self.configure_vault_client()
 
     def init_app(self, app: Flask, session: Session):
         self.app = app
         self.session = session
         self.create_google_earth_styles()
+
+    def configure_ldap_client(self) -> None:
+        self.LDAP_SERVER = environ.get("LDAP_SERVER")
+        self.LDAP_USERDN = environ.get("LDAP_USERDN")
+        self.LDAP_BASEDN = environ.get("LDAP_BASEDN")
+        self.LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP", "").split(",")
+        self.ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL)
 
     def configure_syslog_server(self) -> None:
         self.syslog_server = SyslogServer(
@@ -73,6 +86,14 @@ class Controller:
         self.tacacs_server = TACACSClient(
             environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
         )
+
+    def configure_vault_client(self) -> None:
+        self.vault_client = VaultClient()
+        self.vault_client.url = environ.get("VAULT_ADDR")
+        self.vault_client.token = environ.get("VAULT_TOKEN")
+        if self.vault_client.sys.is_sealed() and environ.get("UNSEAL_VAULT"):
+            keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
+            self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name

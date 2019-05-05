@@ -2,8 +2,8 @@ from flask_login import current_user as user
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
+from eNMS.controller import controller
 from eNMS.models import cls_to_properties, property_types, relationships
-from eNMS.modules import db, USE_VAULT, vault_client
 from eNMS.database import fetch, objectify
 from eNMS.properties import dont_migrate, private_properties
 
@@ -24,7 +24,7 @@ class Base(db.Model):
     def __getattribute__(self, property: str) -> Any:
         if property in private_properties and USE_VAULT:
             path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
-            data = vault_client.read(path)
+            data = controller.vault_client.read(path)
             return data["data"]["data"][property] if data else ""
         else:
             return super().__getattribute__(property)
@@ -33,7 +33,7 @@ class Base(db.Model):
         if property in private_properties and USE_VAULT:
             if not value:
                 return
-            vault_client.write(
+            controller.vault_client.write(
                 f"secret/data/{self.__tablename__}/{self.name}/{property}",
                 data={property: value},
             )

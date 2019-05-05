@@ -21,12 +21,6 @@ class Config(object):
     # Vault
     USE_VAULT = int(environ.get("USE_VAULT", False))
 
-    # LDAP
-    LDAP_SERVER = environ.get("LDAP_SERVER")
-    LDAP_USERDN = environ.get("LDAP_USERDN")
-    LDAP_BASEDN = environ.get("LDAP_BASEDN")
-    LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP", "").split(",")
-
     # Examples
     CREATE_EXAMPLES = int(environ.get("CREATE_EXAMPLES", True))
 
@@ -110,20 +104,6 @@ class ProductionConfig(Config):
             environ.get("POSTGRES_DB", "enms"),
         ),
     )
-
-    # Vault
-    # In production, all credentials (hashes, usernames and passwords) are
-    # stored in a vault.
-    # There MUST be a Vault to use eNMS in production mode securely.
-    USE_VAULT = int(environ.get("USE_VAULT", True))
-    VAULT_ADDR = environ.get("VAULT_ADDR")
-    VAULT_TOKEN = environ.get("VAULT_TOKEN")
-    UNSEAL_VAULT = environ.get("UNSEAL_VAULT")
-    UNSEAL_VAULT_KEY1 = environ.get("UNSEAL_VAULT_KEY1")
-    UNSEAL_VAULT_KEY2 = environ.get("UNSEAL_VAULT_KEY2")
-    UNSEAL_VAULT_KEY3 = environ.get("UNSEAL_VAULT_KEY3")
-    UNSEAL_VAULT_KEY4 = environ.get("UNSEAL_VAULT_KEY4")
-    UNSEAL_VAULT_KEY5 = environ.get("UNSEAL_VAULT_KEY5")
 
     # Security
     SESSION_COOKIE_HTTPONLY = True

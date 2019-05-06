@@ -14,13 +14,13 @@ from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties import pool_link_properties, pool_device_properties
 
 
-def configure_device_form(cls: FlaskForm) -> FlaskForm:
+def configure_device_form(cls: BaseForm) -> BaseForm:
     for property in controller.custom_properties:
         setattr(cls, property, StringField())
     return cls
 
 
-def configure_pool_form(cls: FlaskForm) -> FlaskForm:
+def configure_pool_form(cls: BaseForm) -> BaseForm:
     cls.device_properties = pool_device_properties
     cls.link_properties = pool_link_properties
     for cls_name, properties in (
@@ -44,7 +44,7 @@ def configure_pool_form(cls: FlaskForm) -> FlaskForm:
     return cls
 
 
-class ConnectionForm(FlaskForm):
+class ConnectionForm(BaseForm):
     template = "connection"
     form_type = HiddenField(default="connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
@@ -55,13 +55,13 @@ class ConnectionForm(FlaskForm):
     address = SelectField(choices=address_choices)
 
 
-class ObjectFilteringForm(FlaskForm):
+class ObjectFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="object_filtering")
     pools = MultipleInstanceField("Pools", instance_type="Pool")
 
 
-class ObjectForm(FlaskForm):
+class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
     name = StringField("Name")
     description = StringField("Description")
@@ -121,7 +121,7 @@ class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
 
 
 @configure_pool_form
-class PoolForm(FlaskForm):
+class PoolForm(BaseForm):
     template = "pool"
     form_type = HiddenField(default="pool")
     id = HiddenField()
@@ -139,7 +139,7 @@ class PoolForm(FlaskForm):
     never_update = BooleanField("Never update (for manually selected pools)")
 
 
-class PoolFilteringForm(FlaskForm):
+class PoolFilteringForm(BaseForm):
     action = filter
     form_type = HiddenField(default="pool_filtering")
     name = StringField("Name")
@@ -149,19 +149,19 @@ class PoolFilteringForm(FlaskForm):
     operator = StringField("Match Condition")
 
 
-class PoolObjectsForm(FlaskForm):
+class PoolObjectsForm(BaseForm):
     form_type = HiddenField(default="pool_objects")
     devices = MultipleInstanceField("Devices", instance_type="Device")
     links = MultipleInstanceField("Links", instance_type="Link")
 
 
-class ExcelImportForm(FlaskForm):
+class ExcelImportForm(BaseForm):
     template = "topology_import"
     form_type = HiddenField(default="excel_import")
     replace = BooleanField("Replace Existing Topology")
 
 
-class OpenNmsForm(FlaskForm):
+class OpenNmsForm(BaseForm):
     action = "queryOpenNMS"
     form_type = HiddenField(default="opennms")
     opennms_rest_api = StringField("REST API URL")
@@ -171,7 +171,7 @@ class OpenNmsForm(FlaskForm):
     password = PasswordField("Password")
 
 
-class NetboxForm(FlaskForm):
+class NetboxForm(BaseForm):
     action = "queryNetbox"
     form_type = HiddenField(default="netbox")
     netbox_address = StringField("URL", default="http://0.0.0.0:8000")
@@ -179,7 +179,7 @@ class NetboxForm(FlaskForm):
     netbox_type = SelectField(choices=tuple(controller.device_subtypes.items()))
 
 
-class LibreNmsForm(FlaskForm):
+class LibreNmsForm(BaseForm):
     action = "queryLibreNMS"
     form_type = HiddenField(default="librenms")
     librenms_address = StringField("URL", default="http://librenms.example.com")
@@ -189,20 +189,20 @@ class LibreNmsForm(FlaskForm):
     librenms_token = PasswordField("Token")
 
 
-class ExportForm(FlaskForm):
+class ExportForm(BaseForm):
     action = "exportTopology"
     form_type = HiddenField(default="excel_export")
     export_filename = StringField("Filename")
 
 
-class GoogleEarthForm(FlaskForm):
+class GoogleEarthForm(BaseForm):
     form_type = HiddenField(default="google_earth_export")
     name = StringField("Name")
     label_size = IntegerField("Label Size", default=1)
     line_width = IntegerField("Link Width", default=2)
 
 
-class CompareConfigurationsForm(FlaskForm):
+class CompareConfigurationsForm(BaseForm):
     template = "configuration"
     form_type = HiddenField(default="configuration")
     display = SelectField("Version to display", choices=())

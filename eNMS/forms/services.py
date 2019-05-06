@@ -5,7 +5,7 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import DictField
 
 
-class ValidationForm(FlaskForm):
+class ValidationForm(BaseForm):
     form_type = HiddenField(default="service_validation")
     abstract_service = True
     validation_method = SelectField(

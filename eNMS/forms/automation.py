@@ -4,12 +4,12 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import DateField, MultipleInstanceField, InstanceField
 
 
-class DeviceAutomationForm(FlaskForm):
+class DeviceAutomationForm(BaseForm):
     form_type = HiddenField(default="device_automation")
     jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 
-class JobForm(FlaskForm):
+class JobForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="job")
     id = HiddenField()
@@ -52,7 +52,7 @@ class WorkflowForm(JobForm):
     form_type = HiddenField(default="workflow")
 
 
-class JobFilteringForm(FlaskForm):
+class JobFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="job filtering")
     name = StringField("Name")
@@ -76,24 +76,24 @@ class WorkflowFilteringForm(JobFilteringForm):
     form_type = HiddenField(default="workflow_filtering")
 
 
-class CompareResultsForm(FlaskForm):
+class CompareResultsForm(BaseForm):
     template = "results"
     form_type = HiddenField(default="results")
     display = SelectField("Version to display", choices=())
     compare_with = SelectField("Compare Against", choices=())
 
 
-class AddJobsForm(FlaskForm):
+class AddJobsForm(BaseForm):
     form_type = HiddenField(default="add_jobs")
     add_jobs = MultipleInstanceField("Add jobs", instance_type="Job")
 
 
-class WorkflowBuilderForm(FlaskForm):
+class WorkflowBuilderForm(BaseForm):
     form_type = HiddenField(default="workflow_builder")
     workflow = InstanceField("Workflow", instance_type="Workflow")
 
 
-def configure_form(cls: FlaskForm) -> FlaskForm:
+def configure_form(cls: BaseForm) -> BaseForm:
     cls.properties = ("source_ip", "content")
     for property in ("source_ip", "content"):
         setattr(cls, property, StringField(property))
@@ -102,14 +102,14 @@ def configure_form(cls: FlaskForm) -> FlaskForm:
 
 
 @configure_form
-class LogAutomationForm(FlaskForm):
+class LogAutomationForm(BaseForm):
     form_type = HiddenField(default="logrule")
     id = HiddenField()
     name = StringField("Name")
     jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 
-class TaskForm(FlaskForm):
+class TaskForm(BaseForm):
     template = "base"
     form_type = HiddenField(default="task")
     id = HiddenField()

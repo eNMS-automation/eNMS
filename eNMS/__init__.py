@@ -20,7 +20,7 @@ from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
 
-import eNMS.routes
+import eNMS.routes  # noqa: F401
 
 
 def register_modules(app: Flask) -> None:

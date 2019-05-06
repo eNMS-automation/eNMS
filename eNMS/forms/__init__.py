@@ -59,4 +59,4 @@ def form_postprocessing(form):
     return data
 
 
-import eNMS.forms.inventory
+import eNMS.forms.inventory  # noqa: F401

@@ -2,14 +2,19 @@
 global
 alertify: false
 call: false
+createPanel: false
 diffview: false
+fCall: false
 getJobState: false
 getWorkflowState: false
 jsPanel: false
-processInstance: false
+page: false
+servicesClasses: false
 showTypePanel: false
+table: false
 */
 
+let nodes;
 let refreshJob = {};
 
 /**
@@ -26,8 +31,8 @@ function openServicePanel() {
  */
 // eslint-disable-next-line
 function panelCode(type, id) {
-  typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
-  typeInput.val(type).prop('disabled', true);
+  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
+  typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     autoAdjustHeight: false,
     enableAllSteps: true,
@@ -56,20 +61,19 @@ function saveService(service) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
-  if (value) {
-    result = JSON.stringify(
-      Object.fromEntries(
-        Object.entries(value)
-          .sort()
-          .reverse()
-      ),
+  $(`#display_results-${id}`).text(
+    value
+    ? JSON.stringify(
+        Object.fromEntries(
+          Object.entries(value)
+            .sort()
+            .reverse()
+        ),
       null,
       2
-    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
-  } else {
-    result = "No results yet.";
-  }
-  $(`#display_results-${id}`).text(result);
+    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+    : "No results yet."
+  );
 }
 
 /**

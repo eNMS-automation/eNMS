@@ -1,8 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_sqlalchemy.model import DefaultMeta, Model
 from os import environ
 from sqlalchemy import exc
-from sqlalchemy.ext.declarative import declarative_base
 from typing import Any, Callable, List, Tuple
 
 from eNMS.models import classes, cls_to_properties, property_types, service_classes
@@ -11,37 +9,7 @@ SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
 LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
 
 
-class CustomMeta(DefaultMeta):
-    def __init__(cls, name, bases, d):
-        if hasattr(cls, "__table__"):
-            for col in cls.__table__.columns:
-                cls_to_properties[cls.__tablename__].append(col.key)
-                if col.type == PickleType and col.default.arg == []:
-                    property_types[col.key] = "list"
-                else:
-                    column_type = {
-                        Boolean: "bool",
-                        Integer: "int",
-                        Float: "float",
-                        PickleType: "dict",
-                    }.get(type(col.type), "str")
-                    if col.key not in property_types:
-                        property_types[col.key] = column_type
-            if hasattr(cls, "parent_cls"):
-                cls_to_properties[cls.__tablename__].extend(
-                    cls_to_properties[cls.parent_cls]
-                )
-            model = {cls.__tablename__: cls, cls.__tablename__.lower(): cls}
-            if classes.get("Service") and issubclass(cls, classes["Service"]):
-                service_classes[cls.__tablename__] = cls
-            classes.update(model)
-        super(CustomMeta, cls).__init__(name, bases, d)
-
-
-db = SQLAlchemy(
-    model_class=declarative_base(cls=Model, metaclass=CustomMeta, name="Model"),
-    session_options={"expire_on_commit": False, "autoflush": False},
-)
+db = SQLAlchemy(session_options={"expire_on_commit": False, "autoflush": False})
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:

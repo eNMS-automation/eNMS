@@ -5,7 +5,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.database import LARGE_STRING_LENGTH, get_one, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.modules import mail_client
+from eNMS.extensions import mail_client
 from eNMS.models.automation import Service
 
 

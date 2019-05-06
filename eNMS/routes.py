@@ -5,7 +5,7 @@ from werkzeug.wrappers.response import Response
 
 from eNMS.dispatcher import dispatcher
 from eNMS.forms import form_classes, form_postprocessing
-from eNMS.modules import bp
+from eNMS.extensions import bp
 
 
 @bp.route("/")

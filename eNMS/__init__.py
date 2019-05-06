@@ -14,7 +14,7 @@ from eNMS.database import Base, engine, fetch, get_one, Session
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
-from eNMS.modules import bp, csrf, login_manager, mail_client
+from eNMS.extensions import bp, csrf, login_manager, mail_client
 from eNMS.models import property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.administration import User

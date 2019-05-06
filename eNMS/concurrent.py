@@ -1,4 +1,4 @@
-from typing import Optional, Set
+from typing import Any, Optional, Set, Tuple
 
 from eNMS.controller import controller
 from eNMS.database import fetch
@@ -21,17 +21,19 @@ def threaded_job(
 
 
 def device_process(
-    self, args: Tuple[Device, dict, dict, Optional["Workflow"], Any]
+    args: Tuple["Device", dict, dict, Optional["Workflow"], Any]
 ) -> None:
     with controller.app.app_context():
-        device, service, results, payload, workflow = args
+        device, service, lock, results, logs, payload, workflow = args
         device = fetch("Device", id=device)
         workflow = fetch("Workflow", id=workflow)
         service = fetch("Service", id=service)
-        device_result = service.get_results(payload, device, workflow, True)
-        all_results = results["devices"]
-        all_results[device.name] = device_result
-        results["devices"] = all_results
+        device_result, log = service.get_results(payload, device, workflow, True)
         with lock:
+            logs.extend(log)
+            all_results = results["devices"]
+            all_results[device.name] = device_result
+            results["devices"] = all_results
             with controller.session_scope() as session:
+                setattr(workflow or service, "logs", list(logs))
                 session.merge(workflow or service)

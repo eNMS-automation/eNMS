@@ -197,6 +197,7 @@ class Job(Base, metaclass=metamodel):
                 self.completed = self.failed = 0
                 session.merge(workflow or self)
             attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
+            print(attempt)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -249,7 +250,7 @@ class Job(Base, metaclass=metamodel):
         workflow: Optional["Workflow"] = None,
         threaded: bool = False,
     ) -> dict:
-        logs = workflow.logs if workflow else self.logs
+        logs = []
         try:
             if device:
                 logs.append(f"Running {self.type} on {device.name}.")
@@ -267,7 +268,7 @@ class Job(Base, metaclass=metamodel):
             }
         self.completed += 1
         self.failed += 1 - results["success"]
-        return results
+        return results, logs
 
     def run(
         self,
@@ -281,12 +282,21 @@ class Job(Base, metaclass=metamodel):
             device, = targets
             return self.get_results(payload, device, workflow)
         elif targets:
-            results = Manager().dict({"devices": {}})
+            manager = Manager()
+            results = manager.dict({"devices": {}})
+            logs = manager.list()
             if self.multiprocessing:
-                lock = Lock()
+                lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = Pool(processes=processes)
-                args = (self.id, results, payload, workflow.id if workflow else 0)
+                args = (
+                    self.id,
+                    lock,
+                    results,
+                    logs,
+                    payload,
+                    workflow.id if workflow else 0,
+                )
                 pool.map(device_process, [(device.id, *args) for device in targets])
                 pool.close()
                 pool.join()

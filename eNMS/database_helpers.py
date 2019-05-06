@@ -19,9 +19,12 @@ Session = scoped_session(
 )
 
 
-def fetch(model: str, **kwargs: Any) -> Any:
-    with session_scope() as session:
+def fetch(model: str, session=None, **kwargs: Any) -> Any:
+    if session:
         return session.query(classes[model]).filter_by(**kwargs).first()
+    else:
+        with session_scope() as session:
+            return session.query(classes[model]).filter_by(**kwargs).first()
 
 
 def fetch_all(model: str, session=None) -> Tuple[Any]:

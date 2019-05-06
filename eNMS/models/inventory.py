@@ -114,14 +114,14 @@ class Device(CustomDevice, metaclass=metamodel):
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):
             return
-        with session_scope() as session:
-            for pool in fetch_all("Pool", session):
-                if pool.never_update:
-                    continue
-                if pool.object_match(self):
-                    pool.devices.append(self)
-                elif self in pool.devices:
-                    pool.devices.remove(self)
+        """
+        for pool in fetch_all("Pool", session):
+            if pool.never_update:
+                continue
+            if pool.object_match(self):
+                pool.devices.append(self)
+            elif self in pool.devices:
+                pool.devices.remove(self) """
 
     def get_configurations(self):
         return {
@@ -220,13 +220,14 @@ class Link(Object, metaclass=metamodel):
             {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
         )
         super().update(**kwargs)
+        """
         for pool in fetch_all("Pool"):
             if pool.never_update:
                 continue
             if pool.object_match(self):
                 pool.links.append(self)
             elif self in pool.links:
-                pool.links.remove(self)
+                pool.links.remove(self) """
 
     def generate_row(self, table: str) -> List[str]:
         return [

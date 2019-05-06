@@ -48,6 +48,12 @@ def model_inspection(mapper, cls):
     if classes.get("Service") and issubclass(cls, classes["Service"]):
         service_classes[cls.__tablename__] = cls
     classes.update(model)
+    for relation in mapper.relationships:
+        property = str(relation).split(".")[1]
+        relationships[model_name][property] = {
+            "model": relation.mapper.class_.__tablename__,
+            "list": relation.uselist,
+        }
 
 
 def fetch(model: str, **kwargs: Any) -> Any:

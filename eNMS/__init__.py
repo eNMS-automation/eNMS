@@ -15,7 +15,7 @@ from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
 from eNMS.modules import bp, csrf, login_manager, mail_client
-from eNMS.models import model_inspection, property_types, service_classes
+from eNMS.models import property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.administration import User
 from eNMS.properties import property_names
@@ -48,10 +48,9 @@ def configure_database(app: Flask) -> None:
     def initialize_database() -> None:
         Base.metadata.create_all(bind=engine)
         configure_mappers()
-        """ model_inspection()
         create_default(app)
         if controller.config["CREATE_EXAMPLES"]:
-            create_examples(app) """
+            create_examples(app)
 
     @app.teardown_appcontext
     def cleanup(exc):

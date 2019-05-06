@@ -4,18 +4,18 @@ from typing import Any, List
 
 from eNMS.controller import controller
 from eNMS.models import cls_to_properties, property_types, relationships
-from eNMS.database import db, fetch, objectify
+from eNMS.database import SQLBase, fetch, objectify
 from eNMS.properties import dont_migrate, private_properties
 
 
-class Base(db.Model):
+class Base(SQLBase):
 
     __abstract__ = True
 
     def __init__(self, **kwargs: Any) -> None:
         self.update(**kwargs)
 
-    def __lt__(self, other: db.Model) -> bool:
+    def __lt__(self, other: SQLBase) -> bool:
         return True
 
     def __repr__(self) -> str:

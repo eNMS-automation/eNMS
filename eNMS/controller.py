@@ -1,5 +1,4 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from contextlib import contextmanager
 from datetime import datetime
 from flask import Flask
 from hvac import Client as VaultClient
@@ -72,9 +71,8 @@ class Controller:
         if self.USE_VAULT:
             self.configure_vault_client()
 
-    def init_app(self, app: Flask, session: Session):
+    def init_app(self, app: Flask):
         self.app = app
-        self.session = session
         self.create_google_earth_styles()
         self.configure_logs()
 
@@ -215,19 +213,6 @@ class Controller:
             return {}
         with open(filepath, "r") as properties:
             return load(properties, Loader=BaseLoader)
-
-    @contextmanager
-    def session_scope(self) -> Generator:
-        session = self.session()  # type: ignore
-        try:
-            yield session
-            session.commit()
-        except Exception as e:
-            info(str(e))
-            session.rollback()
-            raise e
-        finally:
-            self.session.remove()
 
     def str_dict(self, input: Any, depth: int = 0) -> str:
         tab = "\t" * depth

@@ -12,7 +12,7 @@ from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
-from eNMS.database import db, fetch, get_one
+from eNMS.database import fetch, get_one
 from eNMS.modules import bp, csrf, login_manager, mail_client
 from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer
@@ -25,12 +25,11 @@ import eNMS.routes  # noqa: F401
 
 def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
-    db.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
     csrf.init_app(app)
     FlaskCLI(app)
-    controller.init_app(app, db.create_scoped_session())
+    controller.init_app(app)
 
 
 def configure_login_manager(app: Flask) -> None:
@@ -44,17 +43,8 @@ def configure_login_manager(app: Flask) -> None:
 
 
 def configure_database(app: Flask) -> None:
-    @app.teardown_request
-    def shutdown_session(
-        exception: Optional[Union[Response, Exception]] = None
-    ) -> None:
-        db.session.remove()
-        if exception and db.session.is_active:
-            db.session.rollback()
-
     @app.before_first_request
     def initialize_database() -> None:
-        db.create_all()
         model_inspection()
         create_default(app)
         if controller.config["CREATE_EXAMPLES"]:

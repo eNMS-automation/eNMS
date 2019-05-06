@@ -2,7 +2,7 @@ from flask import Flask
 from uuid import getnode
 
 from eNMS.controller import controller
-from eNMS.database import db, factory, integrity_rollback, fetch, get_one
+from eNMS.database import factory, integrity_rollback, fetch, get_one, session_scope
 from eNMS.models import classes, cls_to_properties
 
 
@@ -60,8 +60,9 @@ def create_default_parameters(app: Flask) -> None:
             if property.upper() in controller.config
         }
     )
-    db.session.add(parameters)
-    db.session.commit()
+    with session_scope() as session:
+        session.add(parameters)
+        session.commit()
 
 
 def create_default_services() -> None:

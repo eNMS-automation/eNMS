@@ -17,7 +17,6 @@ from xlwt import Workbook
 
 from eNMS.controller import controller
 from eNMS.database import (
-    db,
     delete_all,
     factory,
     fetch,

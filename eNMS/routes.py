@@ -3,7 +3,6 @@ from flask_login import current_user
 from logging import info, warning
 from werkzeug.wrappers.response import Response
 
-from eNMS.database import db
 from eNMS.dispatcher import dispatcher
 from eNMS.forms import form_classes, form_postprocessing
 from eNMS.modules import bp

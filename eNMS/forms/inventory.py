@@ -158,7 +158,7 @@ class PoolObjectsForm(FlaskForm, metaclass=metaform):
 
 class ExcelImportForm(FlaskForm, metaclass=metaform):
     template = "topology_import"
-    form_type = HiddenField(default="excel")
+    form_type = HiddenField(default="excel_import")
     replace = BooleanField("Replace Existing Topology")
 
 

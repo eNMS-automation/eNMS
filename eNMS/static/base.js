@@ -26,7 +26,8 @@ const panelSize = {
   connection: "400 500",
   configuration: "700 700",
   database_deletion: "700 300",
-  excel_export: "400 200",
+  excel_import: "400 150",
+  excel_export: "400 150",
   git: "700 200",
   google_earth_export: "700 200",
   librenms: "700 250",
@@ -55,6 +56,7 @@ const panelName = {
   database_migration: "Database Migration",
   device_automation: "Device Automation",
   device_filtering: "Device Filtering",
+  excel_export: "Export Topology as an Excel file",
   server_filtering: "Server Filtering",
   log_filtering: "Log Filtering",
   service_filtering: "Service Filtering",
@@ -308,7 +310,6 @@ function preprocessForm(panel, id, type, duplicate) {
  * @param {int} id - Form ID.
  */
 function configureForm(form, id) {
-  console.log(form, id)
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
     let el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
@@ -323,7 +324,6 @@ function configureForm(form, id) {
         useCurrent: false,
       });
     } else {
-      console.log(property, type, el.length);
       el.selectpicker({
         liveSearch: true,
         actionsBox: true,

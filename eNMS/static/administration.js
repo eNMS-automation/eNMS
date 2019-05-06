@@ -28,13 +28,11 @@ function showParametersPanel(type) {
  * Show Admin Panel
  */
 // eslint-disable-next-line
-function showAdminPanel(type) {
-  createPanel(type, type, 0, () => {
-    if (type == "excel") {
-      document.getElementById("file").onchange = function() {
-        importTopology("Device");
-      };
-    }
+function showImportTopologyPanel(type) {
+  createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
+    document.getElementById("file").onchange = function() {
+      importTopology("Device");
+    };
   });
 }
 

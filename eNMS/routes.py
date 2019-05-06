@@ -23,8 +23,7 @@ def get_route(page: str) -> Response:
         )
         return current_app.login_manager.unauthorized()
     func, *args = page.split("-")
-    with session_scope() as session:
-        ctx = getattr(dispatcher, func)(session, *args) or {}
+    ctx = getattr(dispatcher, func)(*args) or {}
     if not isinstance(ctx, dict):
         return ctx
     ctx["endpoint"] = page
@@ -60,8 +59,7 @@ def post_route(page: str) -> Response:
         request.form = form_postprocessing(request.form)
     func, *args = page.split("-")
     # try:
-    with session_scope() as session:
-        result = getattr(dispatcher, func)(session, *args)
+    result = getattr(dispatcher, func)(session, *args)
     return result if type(result) == Response else jsonify(result)
     # except Exception as e:
     #     return jsonify({"error": str(e)})

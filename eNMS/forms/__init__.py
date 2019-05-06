@@ -46,7 +46,7 @@ def metaform(*args, **kwargs):
 
 
 def form_postprocessing(form):
-    data = {**form.to_dict(), **{"creator": current_user.id}}
+    data = {**form.to_dict(), **{"creator": current_user.name}}
     for property, field_type in form_properties[form.get("form_type")].items():
         if field_type in ("object-list", "multiselect"):
             data[property] = form.getlist(property)

@@ -229,7 +229,8 @@ class Job(Base, metaclass=metamodel):
                     sleep(self.time_between_retries)
         with controller.session_scope():
             logs.append(f"{self.type} {self.name}: Finished.")
-            self.results[now] = {**results, "logs": logs}
+            self.results[now] = {**results, "logs": list(logs)}
+            logs = []
             self.is_running, self.state = False, {}
             self.completed = self.failed = 0
             session.merge(workflow or self)

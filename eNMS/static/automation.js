@@ -8,13 +8,13 @@ fCall: false
 getJobState: false
 getWorkflowState: false
 jsPanel: false
+nodes: true
 page: false
 servicesClasses: false
 showTypePanel: false
 table: false
 */
 
-let nodes;
 let refreshJob = {};
 
 /**

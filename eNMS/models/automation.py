@@ -247,7 +247,6 @@ class Job(Base, metaclass=metamodel):
         payload: dict,
         device: Optional["Device"] = None,
         workflow: Optional["Workflow"] = None,
-        threaded: bool = False,
     ) -> dict:
         logs = []
         try:

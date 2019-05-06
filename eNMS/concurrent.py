@@ -24,16 +24,16 @@ def device_process(
     args: Tuple["Device", dict, dict, Optional["Workflow"], Any]
 ) -> None:
     with controller.app.app_context():
-        device, service, lock, results, logs, payload, workflow = args
-        device = fetch("Device", id=device)
-        workflow = fetch("Workflow", id=workflow)
-        service = fetch("Service", id=service)
-        device_result, log = service.get_results(payload, device, workflow, True)
-        with lock:
-            logs.extend(log)
-            all_results = results["devices"]
-            all_results[device.name] = device_result
-            results["devices"] = all_results
-            with controller.session_scope() as session:
+        with controller.session_scope() as session:
+            device, service, lock, results, logs, payload, workflow = args
+            device = fetch("Device", id=device)
+            workflow = fetch("Workflow", id=workflow)
+            service = fetch("Service", id=service)
+            device_result, log = service.get_results(payload, device, workflow)
+            with lock:
+                logs.extend(log)
+                all_results = results["devices"]
+                all_results[device.name] = device_result
+                results["devices"] = all_results
                 setattr(workflow or service, "logs", list(logs))
                 session.merge(workflow or service)

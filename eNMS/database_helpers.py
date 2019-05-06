@@ -19,11 +19,11 @@ Session = scoped_session(
 )
 
 
-def fetch(model: str, session=None, **kwargs: Any) -> Any:
+def fetch(model: str, **kwargs: Any) -> Any:
     return Session.query(classes[model]).filter_by(**kwargs).first()
 
 
-def fetch_all(model: str, session=None) -> Tuple[Any]:
+def fetch_all(model: str) -> Tuple[Any]:
     return Session.query(classes[model]).all()
 
 
@@ -65,7 +65,7 @@ def get_one(model: str) -> Any:
         return session.query(classes[model]).one()
 
 
-def factory(cls_name: str, session=None, **kwargs: Any) -> Any:
+def factory(cls_name: str, **kwargs: Any) -> Any:
     if "id" in kwargs:
         if kwargs["id"]:
             instance = fetch(cls_name, id=kwargs["id"])

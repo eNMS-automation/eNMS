@@ -2,7 +2,7 @@ from flask import Flask
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
-from eNMS.database_helpers import factory, fetch, session_scope
+from eNMS.database_helpers import factory, fetch, Session
 
 
 def create_example_pools() -> None:
@@ -36,18 +36,17 @@ def create_network_topology(app: Flask) -> None:
     with open(app.path / "projects" / "usa.xls", "rb") as f:
         book = open_workbook(file_contents=f.read())
         for object_type in ("Device", "Link"):
-            with session_scope() as session:
-                try:
-                    sheet = book.sheet_by_name(object_type)
-                except XLRDError:
-                    continue
-                properties = sheet.row_values(0)
-                for row_index in range(1, sheet.nrows):
-                    values = dict(zip(properties, sheet.row_values(row_index)))
-                    factory(object_type, session, **values)
+            try:
+                sheet = book.sheet_by_name(object_type)
+            except XLRDError:
+                continue
+            properties = sheet.row_values(0)
+            for row_index in range(1, sheet.nrows):
+                values = dict(zip(properties, sheet.row_values(row_index)))
+                factory(object_type, **values)
 
 
-def create_example_services(session) -> None:
+def create_example_services() -> None:
     for service in (
         {
             "type": "ExampleService",
@@ -125,10 +124,10 @@ def create_example_services(session) -> None:
             "multiprocessing": True,
         },
     ):
-        factory(service.pop("type"), session, **service)
+        factory(service.pop("type"), **service)
 
 
-def create_netmiko_workflow(session) -> None:
+def create_netmiko_workflow() -> None:
     services = []
     devices = [fetch("Device", name="Washington").id, fetch("Device", name="Austin").id]
     for service in (
@@ -198,7 +197,6 @@ def create_netmiko_workflow(session) -> None:
         services.append(instance)
     workflow = factory(
         "Workflow",
-        session,
         **{
             "name": "Netmiko_VRF_workflow",
             "description": "Create and delete a VRF with Netmiko",
@@ -212,7 +210,6 @@ def create_netmiko_workflow(session) -> None:
     for x, y in edges:
         factory(
             "WorkflowEdge",
-            session,
             **{
                 "name": f"{workflow.name} {x} -> {y}",
                 "workflow": workflow.id,
@@ -421,11 +418,10 @@ def create_workflow_of_workflows() -> None:
 
 
 def create_examples(app: Flask) -> None:
-    with session_scope() as session:
-        create_example_pools()
-        create_network_topology(app)
-        """ create_example_services(session)
-        create_netmiko_workflow(session)
-        create_napalm_workflow()
-        create_payload_transfer_workflow()
-        create_workflow_of_workflows() """
+    create_example_pools()
+    create_network_topology(app)
+    """ create_example_services(session)
+    create_netmiko_workflow(session)
+    create_napalm_workflow()
+    create_payload_transfer_workflow()
+    create_workflow_of_workflows() """

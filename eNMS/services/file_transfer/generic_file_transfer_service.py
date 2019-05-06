@@ -14,7 +14,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class GenericFileTransferService(Service, metaclass=metamodel):
+class GenericFileTransferService(Service):
 
     __tablename__ = "GenericFileTransferService"
 

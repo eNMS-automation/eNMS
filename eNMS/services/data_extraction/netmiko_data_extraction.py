@@ -18,7 +18,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NetmikoDataExtractionService(Service, metaclass=metamodel):
+class NetmikoDataExtractionService(Service):
 
     __tablename__ = "NetmikoDataExtractionService"
 

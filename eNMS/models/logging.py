@@ -12,7 +12,7 @@ from eNMS.models.associations import job_log_rule_table, log_rule_log_table
 from eNMS.models.base import AbstractBase
 
 
-class Log(AbstractBase, metaclass=metamodel):
+class Log(AbstractBase):
 
     __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
@@ -33,7 +33,7 @@ class Log(AbstractBase, metaclass=metamodel):
         return self.content
 
 
-class LogRule(AbstractBase, metaclass=metamodel):
+class LogRule(AbstractBase):
 
     __tablename__ = type = "LogRule"
     id = Column(Integer, primary_key=True)
@@ -56,7 +56,7 @@ class LogRule(AbstractBase, metaclass=metamodel):
         ]
 
 
-class SyslogServer(AbstractBase, metaclass=metamodel):
+class SyslogServer(AbstractBase):
 
     __tablename__ = type = "SyslogServer"
     id = Column(Integer, primary_key=True)

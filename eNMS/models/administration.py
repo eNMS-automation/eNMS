@@ -16,7 +16,7 @@ from eNMS.models.associations import pool_user_table
 from eNMS.models.base import AbstractBase
 
 
-class Server(AbstractBase, metaclass=metamodel):
+class Server(AbstractBase):
 
     __tablename__ = type = "Server"
     id = Column(Integer, primary_key=True)
@@ -40,7 +40,7 @@ class Server(AbstractBase, metaclass=metamodel):
         ]
 
 
-class Parameters(AbstractBase, metaclass=metamodel):
+class Parameters(AbstractBase):
 
     __tablename__ = type = "Parameters"
     id = Column(Integer, primary_key=True)
@@ -129,7 +129,7 @@ class Parameters(AbstractBase, metaclass=metamodel):
         return self.gotty_start_port + self.gotty_port_index % self.gotty_range
 
 
-class User(AbstractBase, UserMixin, metaclass=metamodel):
+class User(AbstractBase, UserMixin):
 
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)

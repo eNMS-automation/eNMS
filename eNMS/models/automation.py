@@ -38,7 +38,7 @@ from eNMS.models.base import AbstractBase
 from eNMS.models.inventory import Device
 
 
-class Job(AbstractBase, metaclass=metamodel):
+class Job(AbstractBase):
 
     __tablename__ = "Job"
     type = Column(String(SMALL_STRING_LENGTH), default="")
@@ -306,7 +306,7 @@ class Job(AbstractBase, metaclass=metamodel):
             return self.get_results(payload)
 
 
-class Service(Job, metaclass=metamodel):
+class Service(Job):
 
     __tablename__ = "Service"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
@@ -429,7 +429,7 @@ class Service(Job, metaclass=metamodel):
                     getattr(scp, self.direction)(source, destination)
 
 
-class Workflow(Job, metaclass=metamodel):
+class Workflow(Job):
 
     __tablename__ = "Workflow"
     __mapper_args__ = {"polymorphic_identity": "Workflow"}
@@ -506,7 +506,7 @@ class Workflow(Job, metaclass=metamodel):
         return results
 
 
-class WorkflowEdge(AbstractBase, metaclass=metamodel):
+class WorkflowEdge(AbstractBase):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
@@ -532,7 +532,7 @@ class WorkflowEdge(AbstractBase, metaclass=metamodel):
     )
 
 
-class Task(AbstractBase, metaclass=metamodel):
+class Task(AbstractBase):
 
     __tablename__ = "Task"
     type = "Task"

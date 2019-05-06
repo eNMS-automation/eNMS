@@ -22,9 +22,32 @@ SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
 LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
 
 
+from sqlalchemy import Boolean, Float, Integer, PickleType
+from sqlalchemy.inspection import inspect
+from eNMS.models import cls_to_properties, classes, service_classes, property_types
+
+
 @event.listens_for(Base, "mapper_configured", propagate=True)
-def get_special_columns(mapper, cls):
-    print("ttt" * 50, cls)
+def model_inspection(mapper, cls):
+    for col in cls.__table__.columns:
+        cls_to_properties[cls.__tablename__].append(col.key)
+        if col.type == PickleType and col.default.arg == []:
+            property_types[col.key] = "list"
+        else:
+            column_type = {
+                Boolean: "bool",
+                Integer: "int",
+                Float: "float",
+                PickleType: "dict",
+            }.get(type(col.type), "str")
+            if col.key not in property_types:
+                property_types[col.key] = column_type
+    if hasattr(cls, "parent_cls"):
+        cls_to_properties[cls.__tablename__].extend(cls_to_properties[cls.parent_cls])
+    model = {cls.__tablename__: cls, cls.__tablename__.lower(): cls}
+    if classes.get("Service") and issubclass(cls, classes["Service"]):
+        service_classes[cls.__tablename__] = cls
+    classes.update(model)
 
 
 def fetch(model: str, **kwargs: Any) -> Any:

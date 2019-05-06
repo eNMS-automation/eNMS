@@ -20,7 +20,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NetmikoBackupService(Service, metaclass=metamodel):
+class NetmikoBackupService(Service):
 
     __tablename__ = "NetmikoBackupService"
 

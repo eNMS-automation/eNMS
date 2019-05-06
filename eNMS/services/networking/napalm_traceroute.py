@@ -12,7 +12,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NapalmTracerouteService(Service, metaclass=metamodel):
+class NapalmTracerouteService(Service):
 
     __tablename__ = "NapalmTracerouteService"
 

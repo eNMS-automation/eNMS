@@ -15,7 +15,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NapalmBackupService(Service, metaclass=metamodel):
+class NapalmBackupService(Service):
 
     __tablename__ = "NapalmBackupService"
 

@@ -19,7 +19,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NetmikoFileTransferService(Service, metaclass=metamodel):
+class NetmikoFileTransferService(Service):
 
     __tablename__ = "NetmikoFileTransferService"
 

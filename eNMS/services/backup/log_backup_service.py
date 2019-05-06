@@ -16,7 +16,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class LogBackupService(Service, metaclass=metamodel):
+class LogBackupService(Service):
 
     __tablename__ = "LogBackupService"
 

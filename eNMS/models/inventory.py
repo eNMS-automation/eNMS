@@ -28,7 +28,7 @@ from eNMS.models.base import AbstractBase
 from eNMS.properties import pool_link_properties, pool_device_properties
 
 
-class Object(AbstractBase, metaclass=metamodel):
+class Object(AbstractBase):
 
     __tablename__ = "Object"
     type = Column(String(SMALL_STRING_LENGTH), default="")
@@ -70,7 +70,7 @@ CustomDevice: Any = (
 )
 
 
-class Device(CustomDevice, metaclass=metamodel):
+class Device(CustomDevice):
 
     __tablename__ = "Device"
     __mapper_args__ = {"polymorphic_identity": "Device"}
@@ -160,7 +160,7 @@ class Device(CustomDevice, metaclass=metamodel):
         return f"{self.name} ({self.model})"
 
 
-class Link(Object, metaclass=metamodel):
+class Link(Object):
 
     __tablename__ = "Link"
     __mapper_args__ = {"polymorphic_identity": "Link"}
@@ -270,7 +270,7 @@ AbstractPool: Any = type(
 )
 
 
-class Pool(AbstractPool, metaclass=metamodel):
+class Pool(AbstractPool):
 
     __tablename__ = type = "Pool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)

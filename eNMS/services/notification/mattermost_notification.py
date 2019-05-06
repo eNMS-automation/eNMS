@@ -11,7 +11,7 @@ from eNMS.models import metamodel
 from eNMS.models.automation import Service
 
 
-class MattermostNotificationService(Service, metaclass=metamodel):
+class MattermostNotificationService(Service):
 
     __tablename__ = "MattermostNotificationService"
 

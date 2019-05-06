@@ -18,7 +18,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NetmikoConfigurationService(Service, metaclass=metamodel):
+class NetmikoConfigurationService(Service):
 
     __tablename__ = "NetmikoConfigurationService"
 

@@ -16,7 +16,7 @@ from eNMS.models.inventory import Device
 from eNMS.properties import import_classes
 
 
-class DatabaseBackupService(Service, metaclass=metamodel):
+class DatabaseBackupService(Service):
 
     __tablename__ = "DatabaseBackupService"
 

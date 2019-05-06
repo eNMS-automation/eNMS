@@ -10,7 +10,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class UpdateInventoryService(Service, metaclass=metamodel):
+class UpdateInventoryService(Service):
 
     __tablename__ = "UpdateInventoryService"
 

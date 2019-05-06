@@ -11,7 +11,7 @@ from eNMS.models import metamodel
 from eNMS.models.automation import Service
 
 
-class MailNotificationService(Service, metaclass=metamodel):
+class MailNotificationService(Service):
 
     __tablename__ = "MailNotificationService"
 

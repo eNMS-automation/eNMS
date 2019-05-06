@@ -12,7 +12,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class UnixCommandService(Service, metaclass=metamodel):
+class UnixCommandService(Service):
 
     __tablename__ = "UnixCommandService"
 

@@ -21,7 +21,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class RestCallService(Service, metaclass=metamodel):
+class RestCallService(Service):
 
     __tablename__ = "RestCallService"
 

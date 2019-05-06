@@ -11,7 +11,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class PingService(Service, metaclass=metamodel):
+class PingService(Service):
 
     __tablename__ = "PingService"
 

@@ -21,7 +21,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class SwissArmyKnifeService(Service, metaclass=metamodel):
+class SwissArmyKnifeService(Service):
 
     __tablename__ = "SwissArmyKnifeService"
 

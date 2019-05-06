@@ -4,6 +4,7 @@ from flask_cli import FlaskCLI
 from logging import info
 from os import environ
 from pathlib import Path
+from sqlalchemy.orm import configure_mappers
 from typing import Any, Tuple, Type
 
 from eNMS.cli import configure_cli
@@ -46,10 +47,11 @@ def configure_database(app: Flask) -> None:
     @app.before_first_request
     def initialize_database() -> None:
         Base.metadata.create_all(bind=engine)
-        model_inspection()
+        configure_mappers()
+        """ model_inspection()
         create_default(app)
         if controller.config["CREATE_EXAMPLES"]:
-            create_examples(app)
+            create_examples(app) """
 
     @app.teardown_appcontext
     def cleanup(exc):

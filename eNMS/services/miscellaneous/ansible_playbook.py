@@ -15,7 +15,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class AnsiblePlaybookService(Service, metaclass=metamodel):
+class AnsiblePlaybookService(Service):
 
     __tablename__ = "AnsiblePlaybookService"
 

@@ -9,7 +9,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class ConfigureBgpService(Service, metaclass=metamodel):
+class ConfigureBgpService(Service):
 
     __tablename__ = "ConfigureBgpService"
 

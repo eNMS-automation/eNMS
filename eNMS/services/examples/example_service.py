@@ -38,7 +38,7 @@ from eNMS.models import metamodel
 from eNMS.models.automation import Service
 
 
-class ExampleService(Service, metaclass=metamodel):
+class ExampleService(Service):
 
     __tablename__ = "ExampleService"
 

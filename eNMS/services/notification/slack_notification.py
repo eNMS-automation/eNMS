@@ -10,7 +10,7 @@ from eNMS.models import metamodel
 from eNMS.models.automation import Service
 
 
-class SlackNotificationService(Service, metaclass=metamodel):
+class SlackNotificationService(Service):
 
     __tablename__ = "SlackNotificationService"
 

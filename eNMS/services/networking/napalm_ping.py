@@ -12,7 +12,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NapalmPingService(Service, metaclass=metamodel):
+class NapalmPingService(Service):
 
     __tablename__ = "NapalmPingService"
 

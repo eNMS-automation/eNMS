@@ -12,7 +12,7 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NapalmRollbackService(Service, metaclass=metamodel):
+class NapalmRollbackService(Service):
 
     __tablename__ = "NapalmRollbackService"
 

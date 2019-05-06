@@ -1,10 +1,10 @@
 from flask import Flask, render_template
-from flask.wrappers import Request, Response
+from flask.wrappers import Request
 from flask_cli import FlaskCLI
 from logging import info
 from os import environ
 from pathlib import Path
-from typing import Any, Optional, Tuple, Type, Union
+from typing import Any, Tuple, Type
 
 from eNMS.cli import configure_cli
 from eNMS.config import Config
@@ -34,11 +34,11 @@ def register_modules(app: Flask) -> None:
 
 def configure_login_manager(app: Flask) -> None:
     @login_manager.user_loader
-    def user_loader(id: int):
+    def user_loader(id: int) -> User:
         return fetch("User", id=id)
 
     @login_manager.request_loader
-    def request_loader(request: Request):
+    def request_loader(request: Request) -> User:
         return fetch("User", name=request.form.get("name"))
 
 

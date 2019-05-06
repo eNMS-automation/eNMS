@@ -1,10 +1,10 @@
 from contextlib import contextmanager
 from logging import info
 from os import environ
-from sqlalchemy import create_engine, exc
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
-from typing import Any, Callable, Generator, List, Tuple
+from typing import Any, Generator, List, Tuple
 
 from eNMS.models import classes
 

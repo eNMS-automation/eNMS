@@ -6,18 +6,17 @@ from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
 from ldap3 import ALL, Server
-from logging import basicConfig, info, StreamHandler
+from logging import basicConfig, StreamHandler
 from logging.handlers import RotatingFileHandler
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from os import environ
 from pathlib import Path
 from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm import Session
 from simplekml import Color, Style
 from string import punctuation
 from tacacs_plus.client import TACACSClient
-from typing import Any, Dict, Generator, Set
+from typing import Any, Dict, Set
 from yaml import load, BaseLoader
 
 

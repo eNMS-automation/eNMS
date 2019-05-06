@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 from typing import Any, List
 from yaml import load
 
-from eNMS.database import fetch, fetch_all, SMALL_STRING_LENGTH
+from eNMS.database import fetch, fetch_all, Session, SMALL_STRING_LENGTH
 from eNMS.models import metamodel
 from eNMS.models.associations import pool_user_table
 from eNMS.models.base import AbstractBase
@@ -92,7 +92,7 @@ class Parameters(AbstractBase, metaclass=metamodel):
                         device.current_configuration = device.configurations[
                             time
                         ] = f.read()
-        db.session.commit()
+        Session.commit()
         for pool in fetch_all("Pool"):
             if pool.device_current_configuration:
                 pool.compute_pool()
@@ -125,7 +125,7 @@ class Parameters(AbstractBase, metaclass=metamodel):
 
     def get_gotty_port(self) -> int:
         self.gotty_port_index += 1
-        db.session.commit()
+        Session.commit()
         return self.gotty_start_port + self.gotty_port_index % self.gotty_range
 
 

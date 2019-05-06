@@ -69,6 +69,14 @@ class JobFilteringForm(FlaskForm, metaclass=metaform):
     time_between_retries = StringField("Time between retries (in seconds)")
 
 
+class ServiceFilteringForm(JobFilteringForm, metaclass=metaform):
+    form_type = HiddenField(default="service_filtering")
+
+
+class WorkflowFilteringForm(JobFilteringForm, metaclass=metaform):
+    form_type = HiddenField(default="workflow_filtering")
+
+
 class CompareResultsForm(FlaskForm, metaclass=metaform):
     template = "results"
     form_type = HiddenField(default="results")

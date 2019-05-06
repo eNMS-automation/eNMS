@@ -42,10 +42,10 @@ const panelSize = {
   ssh: "700 200",
   log_filtering: "700 200",
   results: "1000 600",
-  service_filtering: "900 500",
+  service_filtering: "1000 500",
   user_filtering: "700 200",
   view: "700 300",
-  workflow_filtering: "900 500",
+  workflow_filtering: "1000 500",
 };
 
 const panelName = {

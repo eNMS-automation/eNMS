@@ -12,7 +12,8 @@ from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
-from eNMS.database import fetch, get_one
+from eNMS.database import init_db
+from eNMS.database_helpers import fetch, get_one
 from eNMS.modules import bp, csrf, login_manager, mail_client
 from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer
@@ -34,17 +35,18 @@ def register_modules(app: Flask) -> None:
 
 def configure_login_manager(app: Flask) -> None:
     @login_manager.user_loader
-    def user_loader(id: int) -> User:
+    def user_loader(id: int):
         return fetch("User", id=id)
 
     @login_manager.request_loader
-    def request_loader(request: Request) -> User:
+    def request_loader(request: Request):
         return fetch("User", name=request.form.get("name"))
 
 
 def configure_database(app: Flask) -> None:
     @app.before_first_request
     def initialize_database() -> None:
+        init_db()
         model_inspection()
         create_default(app)
         if controller.config["CREATE_EXAMPLES"]:

@@ -22,7 +22,12 @@ from eNMS.models.associations import (
     job_device_table,
     job_pool_table,
 )
-from eNMS.database import LARGE_STRING_LENGTH, fetch, fetch_all, SMALL_STRING_LENGTH
+from eNMS.database_helpers import (
+    LARGE_STRING_LENGTH,
+    fetch,
+    fetch_all,
+    SMALL_STRING_LENGTH,
+)
 from eNMS.models import metamodel
 from eNMS.models.base import Base
 from eNMS.properties import pool_link_properties, pool_device_properties

@@ -2,7 +2,7 @@ from flask import Flask
 from uuid import getnode
 
 from eNMS.controller import controller
-from eNMS.database import factory, integrity_rollback, fetch, get_one, session_scope
+from eNMS.database_helpers import factory, fetch, get_one, session_scope
 from eNMS.models import classes, cls_to_properties
 
 
@@ -50,7 +50,6 @@ def create_default_pools() -> None:
         factory("Pool", **pool)
 
 
-@integrity_rollback
 def create_default_parameters(app: Flask) -> None:
     parameters = classes["Parameters"]()
     parameters.update(
@@ -174,10 +173,11 @@ def create_default(app: Flask) -> None:
     configure_server_id()
     create_default_parameters(app)
     parameters = get_one("Parameters")
-    create_default_users()
-    create_default_pools()
-    create_default_services()
-    create_default_workflows()
-    create_default_tasks(app)
-    parameters.get_git_content(app)
-    db.session.commit()
+    with session_scope() as session:
+        create_default_users()
+        create_default_pools()
+        create_default_services()
+        create_default_workflows()
+        create_default_tasks(app)
+        parameters.get_git_content(app)
+        session.commit()

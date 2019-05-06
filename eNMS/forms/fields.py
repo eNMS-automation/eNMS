@@ -8,7 +8,7 @@ from wtforms import (
 )
 from typing import Any
 
-from eNMS.database import choices
+from eNMS.database_helpers import choices
 
 
 class DateField(StringField):

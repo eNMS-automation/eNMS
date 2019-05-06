@@ -8,7 +8,7 @@ from typing import Any, Dict
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.forms.automation import WorkflowBuilderForm
-from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
+from eNMS.database_helpers import delete, factory, fetch, fetch_all, get_one, objectify
 
 
 class AutomationDispatcher:

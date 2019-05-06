@@ -34,11 +34,11 @@ from eNMS.models.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.models.base import Base
+from eNMS.models.base import AbstractBase
 from eNMS.models.inventory import Device
 
 
-class Job(Base, metaclass=metamodel):
+class Job(AbstractBase, metaclass=metamodel):
 
     __tablename__ = "Job"
     type = Column(String(SMALL_STRING_LENGTH), default="")
@@ -506,7 +506,7 @@ class Workflow(Job, metaclass=metamodel):
         return results
 
 
-class WorkflowEdge(Base, metaclass=metamodel):
+class WorkflowEdge(AbstractBase, metaclass=metamodel):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
@@ -532,7 +532,7 @@ class WorkflowEdge(Base, metaclass=metamodel):
     )
 
 
-class Task(Base, metaclass=metamodel):
+class Task(AbstractBase, metaclass=metamodel):
 
     __tablename__ = "Task"
     type = "Task"

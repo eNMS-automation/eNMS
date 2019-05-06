@@ -13,10 +13,10 @@ from yaml import load
 from eNMS.database_helpers import fetch, fetch_all, SMALL_STRING_LENGTH
 from eNMS.models import metamodel
 from eNMS.models.associations import pool_user_table
-from eNMS.models.base import Base
+from eNMS.models.base import AbstractBase
 
 
-class Server(Base, metaclass=metamodel):
+class Server(AbstractBase, metaclass=metamodel):
 
     __tablename__ = type = "Server"
     id = Column(Integer, primary_key=True)
@@ -40,7 +40,7 @@ class Server(Base, metaclass=metamodel):
         ]
 
 
-class Parameters(Base, metaclass=metamodel):
+class Parameters(AbstractBase, metaclass=metamodel):
 
     __tablename__ = type = "Parameters"
     id = Column(Integer, primary_key=True)
@@ -129,7 +129,7 @@ class Parameters(Base, metaclass=metamodel):
         return self.gotty_start_port + self.gotty_port_index % self.gotty_range
 
 
-class User(Base, UserMixin, metaclass=metamodel):
+class User(AbstractBase, UserMixin, metaclass=metamodel):
 
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)

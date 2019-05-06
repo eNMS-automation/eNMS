@@ -5,18 +5,18 @@ from typing import Any, List
 from eNMS.controller import controller
 from eNMS.models import cls_to_properties, property_types, relationships
 from eNMS.database_helpers import fetch, objectify
-from eNMS.database import SQLBase
+from eNMS.database import Base
 from eNMS.properties import dont_migrate, private_properties
 
 
-class Base(SQLBase):
+class AbstractBase(Base):
 
     __abstract__ = True
 
     def __init__(self, **kwargs: Any) -> None:
         self.update(**kwargs)
 
-    def __lt__(self, other: SQLBase) -> bool:
+    def __lt__(self, other: Base) -> bool:
         return True
 
     def __repr__(self) -> str:

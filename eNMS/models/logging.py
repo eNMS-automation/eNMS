@@ -9,10 +9,10 @@ from eNMS.controller import controller
 from eNMS.database_helpers import SMALL_STRING_LENGTH
 from eNMS.models import metamodel
 from eNMS.models.associations import job_log_rule_table, log_rule_log_table
-from eNMS.models.base import Base
+from eNMS.models.base import AbstractBase
 
 
-class Log(Base, metaclass=metamodel):
+class Log(AbstractBase, metaclass=metamodel):
 
     __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
@@ -33,7 +33,7 @@ class Log(Base, metaclass=metamodel):
         return self.content
 
 
-class LogRule(Base, metaclass=metamodel):
+class LogRule(AbstractBase, metaclass=metamodel):
 
     __tablename__ = type = "LogRule"
     id = Column(Integer, primary_key=True)
@@ -56,7 +56,7 @@ class LogRule(Base, metaclass=metamodel):
         ]
 
 
-class SyslogServer(Base, metaclass=metamodel):
+class SyslogServer(AbstractBase, metaclass=metamodel):
 
     __tablename__ = type = "SyslogServer"
     id = Column(Integer, primary_key=True)

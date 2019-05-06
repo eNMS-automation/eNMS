@@ -30,11 +30,11 @@ from eNMS.database_helpers import (
     SMALL_STRING_LENGTH,
 )
 from eNMS.models import metamodel
-from eNMS.models.base import Base
+from eNMS.models.base import AbstractBase
 from eNMS.properties import pool_link_properties, pool_device_properties
 
 
-class Object(Base, metaclass=metamodel):
+class Object(AbstractBase, metaclass=metamodel):
 
     __tablename__ = "Object"
     type = Column(String(SMALL_STRING_LENGTH), default="")
@@ -244,7 +244,7 @@ class Link(Object, metaclass=metamodel):
 
 AbstractPool: Any = type(
     "AbstractPool",
-    (Base,),
+    (AbstractBase,),
     {
         "__tablename__": "AbstractPool",
         "type": "AbstractPool",

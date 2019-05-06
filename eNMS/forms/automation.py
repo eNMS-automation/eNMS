@@ -88,6 +88,11 @@ class AddJobsForm(BaseForm):
     add_jobs = MultipleInstanceField("Add jobs", instance_type="Job")
 
 
+class ServiceTableForm(BaseForm):
+    form_type = HiddenField(default="service_table")
+    services = SelectField(choices=())
+
+
 class WorkflowBuilderForm(BaseForm):
     form_type = HiddenField(default="workflow_builder")
     workflow = InstanceField("Workflow", instance_type="Workflow")

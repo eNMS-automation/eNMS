@@ -7,12 +7,13 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from typing import List
 
-from eNMS.forms import form_actions, form_classes, form_templates
 from eNMS.database import delete, factory, fetch, fetch_all_visible, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher
-from eNMS.models import classes
+from eNMS.forms import form_actions, form_classes, form_templates
+from eNMS.forms.automation import ServiceTableForm
+from eNMS.models import classes, service_classes
 from eNMS.properties import filtering_properties, table_fixed_columns, table_properties
 
 
@@ -72,12 +73,19 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         return instance.serialized
 
     def table(self, table_type: str) -> dict:
-        return dict(
+        table_dict = dict(
             properties=table_properties[table_type],
             fixed_columns=table_fixed_columns[table_type],
             type=table_type,
             template="pages/table",
         )
+        if table_type == "service":
+            service_table_form = ServiceTableForm(request.form)
+            service_table_form.services.choices = [
+                (service, service) for service in service_classes
+            ]
+            table_dict["service_table_form"] = service_table_form
+        return table_dict
 
     def update(self, cls: str) -> dict:
         try:

@@ -24,7 +24,8 @@
             <div class="page-title">
               {% if type == "service" %}
               <button style="background:transparent; border:none; color:transparent; width: 20vw;">
-                <select class="form-control add-id" id="service-type"></select>
+                {{ service_table_form.form_type() }}
+                {{ service_table_form.services(class="form-control") }}
               </button>
               {% endif %}
               {% if type not in ("configuration", "log") %}

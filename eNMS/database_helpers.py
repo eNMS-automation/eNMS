@@ -24,8 +24,12 @@ def fetch(model: str, **kwargs: Any) -> Any:
         return session.query(classes[model]).filter_by(**kwargs).first()
 
 
-def fetch_all(model: str) -> Tuple[Any]:
-    return classes[model].query.all()
+def fetch_all(model: str, session=None) -> Tuple[Any]:
+    if session:
+        return session.query(classes[model]).all()
+    else:
+        with session_scope() as session:
+            return session.query(classes[model]).all()
 
 
 def fetch_all_visible(model: str) -> List[Any]:
@@ -66,21 +70,20 @@ def get_one(model: str) -> Any:
         return session.query(classes[model]).one()
 
 
-def factory(cls_name: str, **kwargs: Any) -> Any:
-    with session_scope() as session:
-        if "id" in kwargs:
-            if kwargs["id"]:
-                instance = fetch(cls_name, id=kwargs["id"])
-            else:
-                instance = kwargs.pop("id")
+def factory(cls_name: str, session=None, **kwargs: Any) -> Any:
+    if "id" in kwargs:
+        if kwargs["id"]:
+            instance = fetch(cls_name, id=kwargs["id"])
         else:
-            instance = fetch(cls_name, name=kwargs["name"])
-        if instance:
-            instance.update(**kwargs)
-        else:
-            instance = classes[cls_name](**kwargs)
-            session.add(instance)
-        session.commit()
+            instance = kwargs.pop("id")
+    else:
+        instance = fetch(cls_name, name=kwargs["name"])
+    if instance:
+        instance.update(**kwargs)
+    else:
+        instance = classes[cls_name](**kwargs)
+        session.add(instance)
+    session.commit()
     return instance
 
 

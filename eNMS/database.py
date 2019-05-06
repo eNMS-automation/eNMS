@@ -8,5 +8,6 @@ SQLBase = declarative_base()
 
 def init_db():
     from eNMS.models.administration import Server, User
+    from eNMS.models.inventory import Device, Link, Pool
 
     SQLBase.metadata.create_all(bind=engine)

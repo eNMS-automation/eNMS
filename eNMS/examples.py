@@ -5,7 +5,7 @@ from xlrd.biffh import XLRDError
 from eNMS.database_helpers import factory, fetch
 
 
-def create_example_pools() -> None:
+def create_example_pools(session) -> None:
     for pool in (
         {
             "name": "Datacenter San Francisco",
@@ -29,7 +29,7 @@ def create_example_pools() -> None:
             "latitude": 41.87,
         },
     ):
-        factory("Pool", **pool)
+        factory("Pool", session, **pool)
 
 
 def create_network_topology(app: Flask) -> None:
@@ -419,11 +419,12 @@ def create_workflow_of_workflows() -> None:
 
 
 def create_examples(app: Flask) -> None:
-    create_example_pools()
-    create_network_topology(app)
-    create_example_services()
-    create_netmiko_workflow()
-    create_napalm_workflow()
-    create_payload_transfer_workflow()
-    create_workflow_of_workflows()
-    db.session.commit()
+    with session_scope() as session:
+        create_example_pools(session)
+        create_network_topology(app)
+        create_example_services(session)
+        create_netmiko_workflow()
+        create_napalm_workflow()
+        create_payload_transfer_workflow()
+        create_workflow_of_workflows()
+        db.session.commit()

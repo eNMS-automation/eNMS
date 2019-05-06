@@ -1,7 +1,7 @@
 from contextlib import contextmanager
 from logging import info
 from os import environ
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 from typing import Any, Generator, List, Tuple
@@ -20,6 +20,11 @@ Base = declarative_base()
 
 SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
 LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
+
+
+@event.listens_for(Base, "mapper_configured", propagate=True)
+def get_special_columns(mapper, cls):
+    print("ttt" * 50, cls)
 
 
 def fetch(model: str, **kwargs: Any) -> Any:

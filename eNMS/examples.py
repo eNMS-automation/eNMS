@@ -44,6 +44,7 @@ def create_network_topology(app: Flask) -> None:
             for row_index in range(1, sheet.nrows):
                 values = dict(zip(properties, sheet.row_values(row_index)))
                 factory(object_type, **values)
+            Session.commit()
 
 
 def create_example_services() -> None:
@@ -425,3 +426,4 @@ def create_examples(app: Flask) -> None:
     create_napalm_workflow()
     create_payload_transfer_workflow()
     create_workflow_of_workflows()
+    Session.commit()

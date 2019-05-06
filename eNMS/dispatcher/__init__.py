@@ -71,7 +71,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         info(f"{current_user.name}: GET {cls} {instance.name} ({id})")
         return instance.serialized
 
-    def table(self, _, table_type: str) -> dict:
+    def table(self, table_type: str) -> dict:
         return dict(
             properties=table_properties[table_type],
             fixed_columns=table_fixed_columns[table_type],

@@ -6,7 +6,7 @@ from threading import Thread
 from typing import List
 
 from eNMS.controller import controller
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.models import metamodel
 from eNMS.models.associations import job_log_rule_table, log_rule_log_table
 from eNMS.models.base import AbstractBase
@@ -102,5 +102,5 @@ class SyslogUDPHandler(BaseRequestHandler):
                         job.try_run()
             if log_rules:
                 log = Log(**{"source": source, "date": data, "log_rules": log_rules})
-                db.session.add(log)
-                db.session.commit()
+                Session.add(log)
+                Session.commit()

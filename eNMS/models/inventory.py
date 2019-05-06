@@ -15,7 +15,7 @@ from sqlalchemy.orm import backref, relationship
 from typing import Any, Dict, List, Union
 
 from eNMS.controller import controller
-from eNMS.database import LARGE_STRING_LENGTH, fetch, SMALL_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, fetch, fetch_all, SMALL_STRING_LENGTH
 from eNMS.models.associations import (
     pool_device_table,
     pool_link_table,
@@ -107,14 +107,13 @@ class Device(CustomDevice):
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):
             return
-        """
-        for pool in fetch_all("Pool", session):
+        for pool in fetch_all("Pool"):
             if pool.never_update:
                 continue
             if pool.object_match(self):
                 pool.devices.append(self)
             elif self in pool.devices:
-                pool.devices.remove(self) """
+                pool.devices.remove(self)
 
     def get_configurations(self):
         return {
@@ -339,6 +338,5 @@ class Pool(AbstractPool):
     def compute_pool(self) -> None:
         if self.never_update:
             return
-        # with session_scope() as session:
-        # self.devices = list(filter(self.object_match, fetch_all("Device", session)))
-        # self.links = list(filter(self.object_match, fetch_all("Link", session)))
+        self.devices = list(filter(self.object_match, fetch_all("Device")))
+        self.links = list(filter(self.object_match, fetch_all("Link")))
